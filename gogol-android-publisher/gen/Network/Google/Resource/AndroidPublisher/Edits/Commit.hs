@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,7 +49,7 @@ import           Network.Google.Prelude
 type EditsCommitResource =
      Capture "packageName" Text :>
        "edits" :>
-         "{editId}:commit" :>
+         CaptureMode "editId" "commit" Text :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -69,7 +70,7 @@ data EditsCommit' = EditsCommit'
     , _ecOAuthToken  :: !(Maybe OAuthToken)
     , _ecEditId      :: !Text
     , _ecFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsCommit'' with the minimum fields required to make a request.
 --

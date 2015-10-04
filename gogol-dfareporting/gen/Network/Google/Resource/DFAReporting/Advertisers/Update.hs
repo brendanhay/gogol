@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.DFAReporting.Advertisers.Update
     , advPrettyPrint
     , advUserIP
     , advProfileId
+    , advPayload
     , advKey
-    , advAdvertiser
     , advOAuthToken
     , advFields
     ) where
@@ -66,11 +67,11 @@ data AdvertisersUpdate' = AdvertisersUpdate'
     , _advPrettyPrint :: !Bool
     , _advUserIP      :: !(Maybe Text)
     , _advProfileId   :: !Int64
+    , _advPayload     :: !Advertiser
     , _advKey         :: !(Maybe Key)
-    , _advAdvertiser  :: !Advertiser
     , _advOAuthToken  :: !(Maybe OAuthToken)
     , _advFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersUpdate'' with the minimum fields required to make a request.
 --
@@ -84,25 +85,25 @@ data AdvertisersUpdate' = AdvertisersUpdate'
 --
 -- * 'advProfileId'
 --
--- * 'advKey'
+-- * 'advPayload'
 --
--- * 'advAdvertiser'
+-- * 'advKey'
 --
 -- * 'advOAuthToken'
 --
 -- * 'advFields'
 advertisersUpdate'
     :: Int64 -- ^ 'profileId'
-    -> Advertiser -- ^ 'Advertiser'
+    -> Advertiser -- ^ 'payload'
     -> AdvertisersUpdate'
-advertisersUpdate' pAdvProfileId_ pAdvAdvertiser_ =
+advertisersUpdate' pAdvProfileId_ pAdvPayload_ =
     AdvertisersUpdate'
     { _advQuotaUser = Nothing
     , _advPrettyPrint = True
     , _advUserIP = Nothing
     , _advProfileId = pAdvProfileId_
+    , _advPayload = pAdvPayload_
     , _advKey = Nothing
-    , _advAdvertiser = pAdvAdvertiser_
     , _advOAuthToken = Nothing
     , _advFields = Nothing
     }
@@ -131,17 +132,16 @@ advProfileId :: Lens' AdvertisersUpdate' Int64
 advProfileId
   = lens _advProfileId (\ s a -> s{_advProfileId = a})
 
+-- | Multipart request metadata.
+advPayload :: Lens' AdvertisersUpdate' Advertiser
+advPayload
+  = lens _advPayload (\ s a -> s{_advPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 advKey :: Lens' AdvertisersUpdate' (Maybe Key)
 advKey = lens _advKey (\ s a -> s{_advKey = a})
-
--- | Multipart request metadata.
-advAdvertiser :: Lens' AdvertisersUpdate' Advertiser
-advAdvertiser
-  = lens _advAdvertiser
-      (\ s a -> s{_advAdvertiser = a})
 
 -- | OAuth 2.0 token for the current user.
 advOAuthToken :: Lens' AdvertisersUpdate' (Maybe OAuthToken)
@@ -169,7 +169,7 @@ instance GoogleRequest AdvertisersUpdate' where
               _advKey
               _advOAuthToken
               (Just AltJSON)
-              _advAdvertiser
+              _advPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AdvertisersUpdateResource)

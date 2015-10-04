@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Insert
     -- * Request Lenses
     , fagiQuotaUser
     , fagiPrettyPrint
-    , fagiFloodlightActivityGroup
     , fagiUserIP
     , fagiProfileId
+    , fagiPayload
     , fagiKey
     , fagiOAuthToken
     , fagiFields
@@ -63,15 +64,15 @@ type FloodlightActivityGroupsInsertResource =
 --
 -- /See:/ 'floodlightActivityGroupsInsert'' smart constructor.
 data FloodlightActivityGroupsInsert' = FloodlightActivityGroupsInsert'
-    { _fagiQuotaUser               :: !(Maybe Text)
-    , _fagiPrettyPrint             :: !Bool
-    , _fagiFloodlightActivityGroup :: !FloodlightActivityGroup
-    , _fagiUserIP                  :: !(Maybe Text)
-    , _fagiProfileId               :: !Int64
-    , _fagiKey                     :: !(Maybe Key)
-    , _fagiOAuthToken              :: !(Maybe OAuthToken)
-    , _fagiFields                  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _fagiQuotaUser   :: !(Maybe Text)
+    , _fagiPrettyPrint :: !Bool
+    , _fagiUserIP      :: !(Maybe Text)
+    , _fagiProfileId   :: !Int64
+    , _fagiPayload     :: !FloodlightActivityGroup
+    , _fagiKey         :: !(Maybe Key)
+    , _fagiOAuthToken  :: !(Maybe OAuthToken)
+    , _fagiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsInsert'' with the minimum fields required to make a request.
 --
@@ -81,11 +82,11 @@ data FloodlightActivityGroupsInsert' = FloodlightActivityGroupsInsert'
 --
 -- * 'fagiPrettyPrint'
 --
--- * 'fagiFloodlightActivityGroup'
---
 -- * 'fagiUserIP'
 --
 -- * 'fagiProfileId'
+--
+-- * 'fagiPayload'
 --
 -- * 'fagiKey'
 --
@@ -93,16 +94,16 @@ data FloodlightActivityGroupsInsert' = FloodlightActivityGroupsInsert'
 --
 -- * 'fagiFields'
 floodlightActivityGroupsInsert'
-    :: FloodlightActivityGroup -- ^ 'FloodlightActivityGroup'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> FloodlightActivityGroup -- ^ 'payload'
     -> FloodlightActivityGroupsInsert'
-floodlightActivityGroupsInsert' pFagiFloodlightActivityGroup_ pFagiProfileId_ =
+floodlightActivityGroupsInsert' pFagiProfileId_ pFagiPayload_ =
     FloodlightActivityGroupsInsert'
     { _fagiQuotaUser = Nothing
     , _fagiPrettyPrint = True
-    , _fagiFloodlightActivityGroup = pFagiFloodlightActivityGroup_
     , _fagiUserIP = Nothing
     , _fagiProfileId = pFagiProfileId_
+    , _fagiPayload = pFagiPayload_
     , _fagiKey = Nothing
     , _fagiOAuthToken = Nothing
     , _fagiFields = Nothing
@@ -122,12 +123,6 @@ fagiPrettyPrint
   = lens _fagiPrettyPrint
       (\ s a -> s{_fagiPrettyPrint = a})
 
--- | Multipart request metadata.
-fagiFloodlightActivityGroup :: Lens' FloodlightActivityGroupsInsert' FloodlightActivityGroup
-fagiFloodlightActivityGroup
-  = lens _fagiFloodlightActivityGroup
-      (\ s a -> s{_fagiFloodlightActivityGroup = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 fagiUserIP :: Lens' FloodlightActivityGroupsInsert' (Maybe Text)
@@ -139,6 +134,11 @@ fagiProfileId :: Lens' FloodlightActivityGroupsInsert' Int64
 fagiProfileId
   = lens _fagiProfileId
       (\ s a -> s{_fagiProfileId = a})
+
+-- | Multipart request metadata.
+fagiPayload :: Lens' FloodlightActivityGroupsInsert' FloodlightActivityGroup
+fagiPayload
+  = lens _fagiPayload (\ s a -> s{_fagiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -176,7 +176,7 @@ instance GoogleRequest
               _fagiKey
               _fagiOAuthToken
               (Just AltJSON)
-              _fagiFloodlightActivityGroup
+              _fagiPayload
           where go
                   = clientWithRoute
                       (Proxy ::

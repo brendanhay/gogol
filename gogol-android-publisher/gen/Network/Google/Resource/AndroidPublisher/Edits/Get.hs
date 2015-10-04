@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -71,7 +72,7 @@ data EditsGet' = EditsGet'
     , _egOAuthToken  :: !(Maybe OAuthToken)
     , _egEditId      :: !Text
     , _egFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsGet'' with the minimum fields required to make a request.
 --

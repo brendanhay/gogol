@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Macros.Create
     -- * Request Lenses
     , acmcQuotaUser
     , acmcPrettyPrint
-    , acmcMacro
     , acmcContainerId
     , acmcUserIP
+    , acmcPayload
     , acmcAccountId
     , acmcKey
     , acmcOAuthToken
@@ -67,14 +68,14 @@ type AccountsContainersMacrosCreateResource =
 data AccountsContainersMacrosCreate' = AccountsContainersMacrosCreate'
     { _acmcQuotaUser   :: !(Maybe Text)
     , _acmcPrettyPrint :: !Bool
-    , _acmcMacro       :: !Macro
     , _acmcContainerId :: !Text
     , _acmcUserIP      :: !(Maybe Text)
+    , _acmcPayload     :: !Macro
     , _acmcAccountId   :: !Text
     , _acmcKey         :: !(Maybe Key)
     , _acmcOAuthToken  :: !(Maybe OAuthToken)
     , _acmcFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersMacrosCreate'' with the minimum fields required to make a request.
 --
@@ -84,11 +85,11 @@ data AccountsContainersMacrosCreate' = AccountsContainersMacrosCreate'
 --
 -- * 'acmcPrettyPrint'
 --
--- * 'acmcMacro'
---
 -- * 'acmcContainerId'
 --
 -- * 'acmcUserIP'
+--
+-- * 'acmcPayload'
 --
 -- * 'acmcAccountId'
 --
@@ -98,17 +99,17 @@ data AccountsContainersMacrosCreate' = AccountsContainersMacrosCreate'
 --
 -- * 'acmcFields'
 accountsContainersMacrosCreate'
-    :: Macro -- ^ 'Macro'
-    -> Text -- ^ 'containerId'
+    :: Text -- ^ 'containerId'
+    -> Macro -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> AccountsContainersMacrosCreate'
-accountsContainersMacrosCreate' pAcmcMacro_ pAcmcContainerId_ pAcmcAccountId_ =
+accountsContainersMacrosCreate' pAcmcContainerId_ pAcmcPayload_ pAcmcAccountId_ =
     AccountsContainersMacrosCreate'
     { _acmcQuotaUser = Nothing
     , _acmcPrettyPrint = True
-    , _acmcMacro = pAcmcMacro_
     , _acmcContainerId = pAcmcContainerId_
     , _acmcUserIP = Nothing
+    , _acmcPayload = pAcmcPayload_
     , _acmcAccountId = pAcmcAccountId_
     , _acmcKey = Nothing
     , _acmcOAuthToken = Nothing
@@ -129,11 +130,6 @@ acmcPrettyPrint
   = lens _acmcPrettyPrint
       (\ s a -> s{_acmcPrettyPrint = a})
 
--- | Multipart request metadata.
-acmcMacro :: Lens' AccountsContainersMacrosCreate' Macro
-acmcMacro
-  = lens _acmcMacro (\ s a -> s{_acmcMacro = a})
-
 -- | The GTM Container ID.
 acmcContainerId :: Lens' AccountsContainersMacrosCreate' Text
 acmcContainerId
@@ -145,6 +141,11 @@ acmcContainerId
 acmcUserIP :: Lens' AccountsContainersMacrosCreate' (Maybe Text)
 acmcUserIP
   = lens _acmcUserIP (\ s a -> s{_acmcUserIP = a})
+
+-- | Multipart request metadata.
+acmcPayload :: Lens' AccountsContainersMacrosCreate' Macro
+acmcPayload
+  = lens _acmcPayload (\ s a -> s{_acmcPayload = a})
 
 -- | The GTM Account ID.
 acmcAccountId :: Lens' AccountsContainersMacrosCreate' Text
@@ -187,7 +188,7 @@ instance GoogleRequest
               _acmcKey
               _acmcOAuthToken
               (Just AltJSON)
-              _acmcMacro
+              _acmcPayload
           where go
                   = clientWithRoute
                       (Proxy ::

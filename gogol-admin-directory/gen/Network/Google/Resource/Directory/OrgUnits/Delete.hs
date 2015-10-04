@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,8 +49,8 @@ import           Network.Google.Prelude
 type OrgUnitsDeleteResource =
      "customer" :>
        Capture "customerId" Text :>
-         "orgunits{" :>
-           "orgUnitPath*}" :>
+         "orgunits" :>
+           Captures "orgUnitPath" Text :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -65,12 +66,12 @@ data OrgUnitsDelete' = OrgUnitsDelete'
     { _oudQuotaUser   :: !(Maybe Text)
     , _oudPrettyPrint :: !Bool
     , _oudUserIP      :: !(Maybe Text)
-    , _oudOrgUnitPath :: !Text
+    , _oudOrgUnitPath :: ![Text]
     , _oudCustomerId  :: !Text
     , _oudKey         :: !(Maybe Key)
     , _oudOAuthToken  :: !(Maybe OAuthToken)
     , _oudFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrgUnitsDelete'' with the minimum fields required to make a request.
 --
@@ -92,7 +93,7 @@ data OrgUnitsDelete' = OrgUnitsDelete'
 --
 -- * 'oudFields'
 orgUnitsDelete'
-    :: Text -- ^ 'orgUnitPath'
+    :: [Text] -- ^ 'orgUnitPath'
     -> Text -- ^ 'customerId'
     -> OrgUnitsDelete'
 orgUnitsDelete' pOudOrgUnitPath_ pOudCustomerId_ =
@@ -127,10 +128,11 @@ oudUserIP
   = lens _oudUserIP (\ s a -> s{_oudUserIP = a})
 
 -- | Full path of the organization unit or its Id
-oudOrgUnitPath :: Lens' OrgUnitsDelete' Text
+oudOrgUnitPath :: Lens' OrgUnitsDelete' [Text]
 oudOrgUnitPath
   = lens _oudOrgUnitPath
       (\ s a -> s{_oudOrgUnitPath = a})
+      . _Coerce
 
 -- | Immutable id of the Google Apps account
 oudCustomerId :: Lens' OrgUnitsDelete' Text

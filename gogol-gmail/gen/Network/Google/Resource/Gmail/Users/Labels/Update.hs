@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,11 +34,11 @@ module Network.Google.Resource.Gmail.Users.Labels.Update
     , uluQuotaUser
     , uluPrettyPrint
     , uluUserIP
+    , uluPayload
     , uluUserId
     , uluKey
     , uluId
     , uluOAuthToken
-    , uluLabel
     , uluFields
     ) where
 
@@ -66,13 +67,13 @@ data UsersLabelsUpdate' = UsersLabelsUpdate'
     { _uluQuotaUser   :: !(Maybe Text)
     , _uluPrettyPrint :: !Bool
     , _uluUserIP      :: !(Maybe Text)
+    , _uluPayload     :: !Label
     , _uluUserId      :: !Text
     , _uluKey         :: !(Maybe Key)
     , _uluId          :: !Text
     , _uluOAuthToken  :: !(Maybe OAuthToken)
-    , _uluLabel       :: !Label
     , _uluFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersLabelsUpdate'' with the minimum fields required to make a request.
 --
@@ -84,6 +85,8 @@ data UsersLabelsUpdate' = UsersLabelsUpdate'
 --
 -- * 'uluUserIP'
 --
+-- * 'uluPayload'
+--
 -- * 'uluUserId'
 --
 -- * 'uluKey'
@@ -92,24 +95,22 @@ data UsersLabelsUpdate' = UsersLabelsUpdate'
 --
 -- * 'uluOAuthToken'
 --
--- * 'uluLabel'
---
 -- * 'uluFields'
 usersLabelsUpdate'
-    :: Text -- ^ 'id'
-    -> Text -- ^ 'Label'
-    -> Label
+    :: Label -- ^ 'payload'
+    -> Text -- ^ 'id'
+    -> Text
     -> UsersLabelsUpdate'
-usersLabelsUpdate' pUluUserId_ pUluId_ pUluLabel_ =
+usersLabelsUpdate' pUluPayload_ pUluUserId_ pUluId_ =
     UsersLabelsUpdate'
     { _uluQuotaUser = Nothing
     , _uluPrettyPrint = True
     , _uluUserIP = Nothing
+    , _uluPayload = pUluPayload_
     , _uluUserId = pUluUserId_
     , _uluKey = Nothing
     , _uluId = pUluId_
     , _uluOAuthToken = Nothing
-    , _uluLabel = pUluLabel_
     , _uluFields = Nothing
     }
 
@@ -131,6 +132,11 @@ uluPrettyPrint
 uluUserIP :: Lens' UsersLabelsUpdate' (Maybe Text)
 uluUserIP
   = lens _uluUserIP (\ s a -> s{_uluUserIP = a})
+
+-- | Multipart request metadata.
+uluPayload :: Lens' UsersLabelsUpdate' Label
+uluPayload
+  = lens _uluPayload (\ s a -> s{_uluPayload = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -154,10 +160,6 @@ uluOAuthToken
   = lens _uluOAuthToken
       (\ s a -> s{_uluOAuthToken = a})
 
--- | Multipart request metadata.
-uluLabel :: Lens' UsersLabelsUpdate' Label
-uluLabel = lens _uluLabel (\ s a -> s{_uluLabel = a})
-
 -- | Selector specifying which fields to include in a partial response.
 uluFields :: Lens' UsersLabelsUpdate' (Maybe Text)
 uluFields
@@ -178,7 +180,7 @@ instance GoogleRequest UsersLabelsUpdate' where
               _uluKey
               _uluOAuthToken
               (Just AltJSON)
-              _uluLabel
+              _uluPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersLabelsUpdateResource)

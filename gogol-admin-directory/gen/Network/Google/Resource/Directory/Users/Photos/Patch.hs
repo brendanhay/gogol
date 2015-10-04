@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.Directory.Users.Photos.Patch
     , uppQuotaUser
     , uppPrettyPrint
     , uppUserIP
+    , uppPayload
     , uppKey
-    , uppUserPhoto
     , uppOAuthToken
     , uppUserKey
     , uppFields
@@ -66,12 +67,12 @@ data UsersPhotosPatch' = UsersPhotosPatch'
     { _uppQuotaUser   :: !(Maybe Text)
     , _uppPrettyPrint :: !Bool
     , _uppUserIP      :: !(Maybe Text)
+    , _uppPayload     :: !UserPhoto
     , _uppKey         :: !(Maybe Key)
-    , _uppUserPhoto   :: !UserPhoto
     , _uppOAuthToken  :: !(Maybe OAuthToken)
     , _uppUserKey     :: !Text
     , _uppFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersPhotosPatch'' with the minimum fields required to make a request.
 --
@@ -83,9 +84,9 @@ data UsersPhotosPatch' = UsersPhotosPatch'
 --
 -- * 'uppUserIP'
 --
--- * 'uppKey'
+-- * 'uppPayload'
 --
--- * 'uppUserPhoto'
+-- * 'uppKey'
 --
 -- * 'uppOAuthToken'
 --
@@ -93,16 +94,16 @@ data UsersPhotosPatch' = UsersPhotosPatch'
 --
 -- * 'uppFields'
 usersPhotosPatch'
-    :: UserPhoto -- ^ 'UserPhoto'
+    :: UserPhoto -- ^ 'payload'
     -> Text -- ^ 'userKey'
     -> UsersPhotosPatch'
-usersPhotosPatch' pUppUserPhoto_ pUppUserKey_ =
+usersPhotosPatch' pUppPayload_ pUppUserKey_ =
     UsersPhotosPatch'
     { _uppQuotaUser = Nothing
     , _uppPrettyPrint = True
     , _uppUserIP = Nothing
+    , _uppPayload = pUppPayload_
     , _uppKey = Nothing
-    , _uppUserPhoto = pUppUserPhoto_
     , _uppOAuthToken = Nothing
     , _uppUserKey = pUppUserKey_
     , _uppFields = Nothing
@@ -127,16 +128,16 @@ uppUserIP :: Lens' UsersPhotosPatch' (Maybe Text)
 uppUserIP
   = lens _uppUserIP (\ s a -> s{_uppUserIP = a})
 
+-- | Multipart request metadata.
+uppPayload :: Lens' UsersPhotosPatch' UserPhoto
+uppPayload
+  = lens _uppPayload (\ s a -> s{_uppPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 uppKey :: Lens' UsersPhotosPatch' (Maybe Key)
 uppKey = lens _uppKey (\ s a -> s{_uppKey = a})
-
--- | Multipart request metadata.
-uppUserPhoto :: Lens' UsersPhotosPatch' UserPhoto
-uppUserPhoto
-  = lens _uppUserPhoto (\ s a -> s{_uppUserPhoto = a})
 
 -- | OAuth 2.0 token for the current user.
 uppOAuthToken :: Lens' UsersPhotosPatch' (Maybe OAuthToken)
@@ -168,7 +169,7 @@ instance GoogleRequest UsersPhotosPatch' where
               _uppKey
               _uppOAuthToken
               (Just AltJSON)
-              _uppUserPhoto
+              _uppPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersPhotosPatchResource)

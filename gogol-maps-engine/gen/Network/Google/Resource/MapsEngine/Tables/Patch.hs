@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,10 +34,10 @@ module Network.Google.Resource.MapsEngine.Tables.Patch
     , tpQuotaUser
     , tpPrettyPrint
     , tpUserIP
+    , tpPayload
     , tpKey
     , tpId
     , tpOAuthToken
-    , tpTable
     , tpFields
     ) where
 
@@ -64,12 +65,12 @@ data TablesPatch' = TablesPatch'
     { _tpQuotaUser   :: !(Maybe Text)
     , _tpPrettyPrint :: !Bool
     , _tpUserIP      :: !(Maybe Text)
+    , _tpPayload     :: !Table
     , _tpKey         :: !(Maybe Key)
     , _tpId          :: !Text
     , _tpOAuthToken  :: !(Maybe OAuthToken)
-    , _tpTable       :: !Table
     , _tpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesPatch'' with the minimum fields required to make a request.
 --
@@ -81,28 +82,28 @@ data TablesPatch' = TablesPatch'
 --
 -- * 'tpUserIP'
 --
+-- * 'tpPayload'
+--
 -- * 'tpKey'
 --
 -- * 'tpId'
 --
 -- * 'tpOAuthToken'
 --
--- * 'tpTable'
---
 -- * 'tpFields'
 tablesPatch'
-    :: Text -- ^ 'id'
-    -> Table -- ^ 'Table'
+    :: Table -- ^ 'payload'
+    -> Text -- ^ 'id'
     -> TablesPatch'
-tablesPatch' pTpId_ pTpTable_ =
+tablesPatch' pTpPayload_ pTpId_ =
     TablesPatch'
     { _tpQuotaUser = Nothing
     , _tpPrettyPrint = True
     , _tpUserIP = Nothing
+    , _tpPayload = pTpPayload_
     , _tpKey = Nothing
     , _tpId = pTpId_
     , _tpOAuthToken = Nothing
-    , _tpTable = pTpTable_
     , _tpFields = Nothing
     }
 
@@ -124,6 +125,11 @@ tpPrettyPrint
 tpUserIP :: Lens' TablesPatch' (Maybe Text)
 tpUserIP = lens _tpUserIP (\ s a -> s{_tpUserIP = a})
 
+-- | Multipart request metadata.
+tpPayload :: Lens' TablesPatch' Table
+tpPayload
+  = lens _tpPayload (\ s a -> s{_tpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -138,10 +144,6 @@ tpId = lens _tpId (\ s a -> s{_tpId = a})
 tpOAuthToken :: Lens' TablesPatch' (Maybe OAuthToken)
 tpOAuthToken
   = lens _tpOAuthToken (\ s a -> s{_tpOAuthToken = a})
-
--- | Multipart request metadata.
-tpTable :: Lens' TablesPatch' Table
-tpTable = lens _tpTable (\ s a -> s{_tpTable = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tpFields :: Lens' TablesPatch' (Maybe Text)
@@ -161,7 +163,7 @@ instance GoogleRequest TablesPatch' where
               _tpKey
               _tpOAuthToken
               (Just AltJSON)
-              _tpTable
+              _tpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TablesPatchResource)

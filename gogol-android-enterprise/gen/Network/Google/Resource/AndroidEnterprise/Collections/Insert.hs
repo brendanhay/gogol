@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.AndroidEnterprise.Collections.Insert
     , ciPrettyPrint
     , ciEnterpriseId
     , ciUserIP
-    , ciCollection
+    , ciPayload
     , ciKey
     , ciOAuthToken
     , ciFields
@@ -66,11 +67,11 @@ data CollectionsInsert' = CollectionsInsert'
     , _ciPrettyPrint  :: !Bool
     , _ciEnterpriseId :: !Text
     , _ciUserIP       :: !(Maybe Text)
-    , _ciCollection   :: !Collection
+    , _ciPayload      :: !Collection
     , _ciKey          :: !(Maybe Key)
     , _ciOAuthToken   :: !(Maybe OAuthToken)
     , _ciFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CollectionsInsert'' with the minimum fields required to make a request.
 --
@@ -84,7 +85,7 @@ data CollectionsInsert' = CollectionsInsert'
 --
 -- * 'ciUserIP'
 --
--- * 'ciCollection'
+-- * 'ciPayload'
 --
 -- * 'ciKey'
 --
@@ -93,15 +94,15 @@ data CollectionsInsert' = CollectionsInsert'
 -- * 'ciFields'
 collectionsInsert'
     :: Text -- ^ 'enterpriseId'
-    -> Collection -- ^ 'Collection'
+    -> Collection -- ^ 'payload'
     -> CollectionsInsert'
-collectionsInsert' pCiEnterpriseId_ pCiCollection_ =
+collectionsInsert' pCiEnterpriseId_ pCiPayload_ =
     CollectionsInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
     , _ciEnterpriseId = pCiEnterpriseId_
     , _ciUserIP = Nothing
-    , _ciCollection = pCiCollection_
+    , _ciPayload = pCiPayload_
     , _ciKey = Nothing
     , _ciOAuthToken = Nothing
     , _ciFields = Nothing
@@ -132,9 +133,9 @@ ciUserIP :: Lens' CollectionsInsert' (Maybe Text)
 ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
 
 -- | Multipart request metadata.
-ciCollection :: Lens' CollectionsInsert' Collection
-ciCollection
-  = lens _ciCollection (\ s a -> s{_ciCollection = a})
+ciPayload :: Lens' CollectionsInsert' Collection
+ciPayload
+  = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -167,7 +168,7 @@ instance GoogleRequest CollectionsInsert' where
               _ciKey
               _ciOAuthToken
               (Just AltJSON)
-              _ciCollection
+              _ciPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CollectionsInsertResource)

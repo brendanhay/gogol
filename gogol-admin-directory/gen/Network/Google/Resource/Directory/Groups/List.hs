@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,11 +51,11 @@ import           Network.Google.Prelude
 -- 'GroupsList'' request conforms to.
 type GroupsListResource =
      "groups" :>
-       QueryParam "customer" Text :>
-         QueryParam "domain" Text :>
-           QueryParam "maxResults" Int32 :>
-             QueryParam "pageToken" Text :>
-               QueryParam "userKey" Text :>
+       QueryParam "domain" Text :>
+         QueryParam "customer" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "userKey" Text :>
+               QueryParam "maxResults" Int32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -78,7 +79,7 @@ data GroupsList' = GroupsList'
     , _glUserKey     :: !(Maybe Text)
     , _glMaxResults  :: !(Maybe Int32)
     , _glFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsList'' with the minimum fields required to make a request.
 --
@@ -191,8 +192,8 @@ instance GoogleRequest GroupsList' where
         type Rs GroupsList' = Groups
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u GroupsList'{..}
-          = go _glCustomer _glDomain _glMaxResults _glPageToken
-              _glUserKey
+          = go _glDomain _glCustomer _glPageToken _glUserKey
+              _glMaxResults
               _glQuotaUser
               (Just _glPrettyPrint)
               _glUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.Compute.TargetPools.AddHealthCheck
     , tpahcProject
     , tpahcTargetPool
     , tpahcUserIP
-    , tpahcTargetPoolsAddHealthCheckRequest
+    , tpahcPayload
     , tpahcKey
     , tpahcRegion
     , tpahcOAuthToken
@@ -68,17 +69,17 @@ type TargetPoolsAddHealthCheckResource =
 --
 -- /See:/ 'targetPoolsAddHealthCheck'' smart constructor.
 data TargetPoolsAddHealthCheck' = TargetPoolsAddHealthCheck'
-    { _tpahcQuotaUser                        :: !(Maybe Text)
-    , _tpahcPrettyPrint                      :: !Bool
-    , _tpahcProject                          :: !Text
-    , _tpahcTargetPool                       :: !Text
-    , _tpahcUserIP                           :: !(Maybe Text)
-    , _tpahcTargetPoolsAddHealthCheckRequest :: !TargetPoolsAddHealthCheckRequest
-    , _tpahcKey                              :: !(Maybe Key)
-    , _tpahcRegion                           :: !Text
-    , _tpahcOAuthToken                       :: !(Maybe OAuthToken)
-    , _tpahcFields                           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _tpahcQuotaUser   :: !(Maybe Text)
+    , _tpahcPrettyPrint :: !Bool
+    , _tpahcProject     :: !Text
+    , _tpahcTargetPool  :: !Text
+    , _tpahcUserIP      :: !(Maybe Text)
+    , _tpahcPayload     :: !TargetPoolsAddHealthCheckRequest
+    , _tpahcKey         :: !(Maybe Key)
+    , _tpahcRegion      :: !Text
+    , _tpahcOAuthToken  :: !(Maybe OAuthToken)
+    , _tpahcFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsAddHealthCheck'' with the minimum fields required to make a request.
 --
@@ -94,7 +95,7 @@ data TargetPoolsAddHealthCheck' = TargetPoolsAddHealthCheck'
 --
 -- * 'tpahcUserIP'
 --
--- * 'tpahcTargetPoolsAddHealthCheckRequest'
+-- * 'tpahcPayload'
 --
 -- * 'tpahcKey'
 --
@@ -106,17 +107,17 @@ data TargetPoolsAddHealthCheck' = TargetPoolsAddHealthCheck'
 targetPoolsAddHealthCheck'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetPool'
-    -> TargetPoolsAddHealthCheckRequest -- ^ 'TargetPoolsAddHealthCheckRequest'
+    -> TargetPoolsAddHealthCheckRequest -- ^ 'payload'
     -> Text -- ^ 'region'
     -> TargetPoolsAddHealthCheck'
-targetPoolsAddHealthCheck' pTpahcProject_ pTpahcTargetPool_ pTpahcTargetPoolsAddHealthCheckRequest_ pTpahcRegion_ =
+targetPoolsAddHealthCheck' pTpahcProject_ pTpahcTargetPool_ pTpahcPayload_ pTpahcRegion_ =
     TargetPoolsAddHealthCheck'
     { _tpahcQuotaUser = Nothing
     , _tpahcPrettyPrint = True
     , _tpahcProject = pTpahcProject_
     , _tpahcTargetPool = pTpahcTargetPool_
     , _tpahcUserIP = Nothing
-    , _tpahcTargetPoolsAddHealthCheckRequest = pTpahcTargetPoolsAddHealthCheckRequest_
+    , _tpahcPayload = pTpahcPayload_
     , _tpahcKey = Nothing
     , _tpahcRegion = pTpahcRegion_
     , _tpahcOAuthToken = Nothing
@@ -155,11 +156,9 @@ tpahcUserIP
   = lens _tpahcUserIP (\ s a -> s{_tpahcUserIP = a})
 
 -- | Multipart request metadata.
-tpahcTargetPoolsAddHealthCheckRequest :: Lens' TargetPoolsAddHealthCheck' TargetPoolsAddHealthCheckRequest
-tpahcTargetPoolsAddHealthCheckRequest
-  = lens _tpahcTargetPoolsAddHealthCheckRequest
-      (\ s a ->
-         s{_tpahcTargetPoolsAddHealthCheckRequest = a})
+tpahcPayload :: Lens' TargetPoolsAddHealthCheck' TargetPoolsAddHealthCheckRequest
+tpahcPayload
+  = lens _tpahcPayload (\ s a -> s{_tpahcPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -200,7 +199,7 @@ instance GoogleRequest TargetPoolsAddHealthCheck'
               _tpahcKey
               _tpahcOAuthToken
               (Just AltJSON)
-              _tpahcTargetPoolsAddHealthCheckRequest
+              _tpahcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetPoolsAddHealthCheckResource)

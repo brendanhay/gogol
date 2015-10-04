@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,13 +53,13 @@ import           Network.Google.YouTube.Types
 -- 'LiveStreamsList'' request conforms to.
 type LiveStreamsListResource =
      "liveStreams" :>
-       QueryParam "id" Text :>
-         QueryParam "maxResults" Word32 :>
-           QueryParam "mine" Bool :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "onBehalfOfContentOwnerChannel" Text :>
+       QueryParam "part" Text :>
+         QueryParam "mine" Bool :>
+           QueryParam "onBehalfOfContentOwner" Text :>
+             QueryParam "onBehalfOfContentOwnerChannel" Text :>
+               QueryParam "id" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "part" Text :>
+                   QueryParam "maxResults" Word32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -85,7 +86,7 @@ data LiveStreamsList' = LiveStreamsList'
     , _lslOAuthToken                    :: !(Maybe OAuthToken)
     , _lslMaxResults                    :: !Word32
     , _lslFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveStreamsList'' with the minimum fields required to make a request.
 --
@@ -249,11 +250,12 @@ instance GoogleRequest LiveStreamsList' where
         type Rs LiveStreamsList' = LiveStreamListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveStreamsList'{..}
-          = go _lslId (Just _lslMaxResults) _lslMine
+          = go (Just _lslPart) _lslMine
               _lslOnBehalfOfContentOwner
               _lslOnBehalfOfContentOwnerChannel
+              _lslId
               _lslPageToken
-              (Just _lslPart)
+              (Just _lslMaxResults)
               _lslQuotaUser
               (Just _lslPrettyPrint)
               _lslUserIP

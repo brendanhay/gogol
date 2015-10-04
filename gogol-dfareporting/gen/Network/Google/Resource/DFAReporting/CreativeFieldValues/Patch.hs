@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.Patch
     , cfvpCreativeFieldId
     , cfvpQuotaUser
     , cfvpPrettyPrint
-    , cfvpCreativeFieldValue
     , cfvpUserIP
     , cfvpProfileId
+    , cfvpPayload
     , cfvpKey
     , cfvpId
     , cfvpOAuthToken
@@ -70,17 +71,17 @@ type CreativeFieldValuesPatchResource =
 --
 -- /See:/ 'creativeFieldValuesPatch'' smart constructor.
 data CreativeFieldValuesPatch' = CreativeFieldValuesPatch'
-    { _cfvpCreativeFieldId    :: !Int64
-    , _cfvpQuotaUser          :: !(Maybe Text)
-    , _cfvpPrettyPrint        :: !Bool
-    , _cfvpCreativeFieldValue :: !CreativeFieldValue
-    , _cfvpUserIP             :: !(Maybe Text)
-    , _cfvpProfileId          :: !Int64
-    , _cfvpKey                :: !(Maybe Key)
-    , _cfvpId                 :: !Int64
-    , _cfvpOAuthToken         :: !(Maybe OAuthToken)
-    , _cfvpFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cfvpCreativeFieldId :: !Int64
+    , _cfvpQuotaUser       :: !(Maybe Text)
+    , _cfvpPrettyPrint     :: !Bool
+    , _cfvpUserIP          :: !(Maybe Text)
+    , _cfvpProfileId       :: !Int64
+    , _cfvpPayload         :: !CreativeFieldValue
+    , _cfvpKey             :: !(Maybe Key)
+    , _cfvpId              :: !Int64
+    , _cfvpOAuthToken      :: !(Maybe OAuthToken)
+    , _cfvpFields          :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesPatch'' with the minimum fields required to make a request.
 --
@@ -92,11 +93,11 @@ data CreativeFieldValuesPatch' = CreativeFieldValuesPatch'
 --
 -- * 'cfvpPrettyPrint'
 --
--- * 'cfvpCreativeFieldValue'
---
 -- * 'cfvpUserIP'
 --
 -- * 'cfvpProfileId'
+--
+-- * 'cfvpPayload'
 --
 -- * 'cfvpKey'
 --
@@ -107,18 +108,18 @@ data CreativeFieldValuesPatch' = CreativeFieldValuesPatch'
 -- * 'cfvpFields'
 creativeFieldValuesPatch'
     :: Int64 -- ^ 'creativeFieldId'
-    -> CreativeFieldValue -- ^ 'CreativeFieldValue'
     -> Int64 -- ^ 'profileId'
+    -> CreativeFieldValue -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> CreativeFieldValuesPatch'
-creativeFieldValuesPatch' pCfvpCreativeFieldId_ pCfvpCreativeFieldValue_ pCfvpProfileId_ pCfvpId_ =
+creativeFieldValuesPatch' pCfvpCreativeFieldId_ pCfvpProfileId_ pCfvpPayload_ pCfvpId_ =
     CreativeFieldValuesPatch'
     { _cfvpCreativeFieldId = pCfvpCreativeFieldId_
     , _cfvpQuotaUser = Nothing
     , _cfvpPrettyPrint = True
-    , _cfvpCreativeFieldValue = pCfvpCreativeFieldValue_
     , _cfvpUserIP = Nothing
     , _cfvpProfileId = pCfvpProfileId_
+    , _cfvpPayload = pCfvpPayload_
     , _cfvpKey = Nothing
     , _cfvpId = pCfvpId_
     , _cfvpOAuthToken = Nothing
@@ -145,12 +146,6 @@ cfvpPrettyPrint
   = lens _cfvpPrettyPrint
       (\ s a -> s{_cfvpPrettyPrint = a})
 
--- | Multipart request metadata.
-cfvpCreativeFieldValue :: Lens' CreativeFieldValuesPatch' CreativeFieldValue
-cfvpCreativeFieldValue
-  = lens _cfvpCreativeFieldValue
-      (\ s a -> s{_cfvpCreativeFieldValue = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 cfvpUserIP :: Lens' CreativeFieldValuesPatch' (Maybe Text)
@@ -162,6 +157,11 @@ cfvpProfileId :: Lens' CreativeFieldValuesPatch' Int64
 cfvpProfileId
   = lens _cfvpProfileId
       (\ s a -> s{_cfvpProfileId = a})
+
+-- | Multipart request metadata.
+cfvpPayload :: Lens' CreativeFieldValuesPatch' CreativeFieldValue
+cfvpPayload
+  = lens _cfvpPayload (\ s a -> s{_cfvpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -203,7 +203,7 @@ instance GoogleRequest CreativeFieldValuesPatch'
               _cfvpKey
               _cfvpOAuthToken
               (Just AltJSON)
-              _cfvpCreativeFieldValue
+              _cfvpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeFieldValuesPatchResource)

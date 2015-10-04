@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,11 +53,9 @@ type MyLibraryBookshelvesRemoveVolumeResource =
        "bookshelves" :>
          Capture "shelf" Text :>
            "removeVolume" :>
-             QueryParam "reason"
-               BooksMyLibraryBookshelvesRemoveVolumeReason
-               :>
-               QueryParam "source" Text :>
-                 QueryParam "volumeId" Text :>
+             QueryParam "volumeId" Text :>
+               QueryParam "reason" Reason :>
+                 QueryParam "source" Text :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -72,14 +71,14 @@ data MyLibraryBookshelvesRemoveVolume' = MyLibraryBookshelvesRemoveVolume'
     { _mlbrvQuotaUser   :: !(Maybe Text)
     , _mlbrvPrettyPrint :: !Bool
     , _mlbrvUserIP      :: !(Maybe Text)
-    , _mlbrvReason      :: !(Maybe BooksMyLibraryBookshelvesRemoveVolumeReason)
+    , _mlbrvReason      :: !(Maybe Reason)
     , _mlbrvShelf       :: !Text
     , _mlbrvKey         :: !(Maybe Key)
     , _mlbrvVolumeId    :: !Text
     , _mlbrvSource      :: !(Maybe Text)
     , _mlbrvOAuthToken  :: !(Maybe OAuthToken)
     , _mlbrvFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyLibraryBookshelvesRemoveVolume'' with the minimum fields required to make a request.
 --
@@ -143,7 +142,7 @@ mlbrvUserIP
   = lens _mlbrvUserIP (\ s a -> s{_mlbrvUserIP = a})
 
 -- | The reason for which the book is removed from the library.
-mlbrvReason :: Lens' MyLibraryBookshelvesRemoveVolume' (Maybe BooksMyLibraryBookshelvesRemoveVolumeReason)
+mlbrvReason :: Lens' MyLibraryBookshelvesRemoveVolume' (Maybe Reason)
 mlbrvReason
   = lens _mlbrvReason (\ s a -> s{_mlbrvReason = a})
 
@@ -191,8 +190,8 @@ instance GoogleRequest
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
           MyLibraryBookshelvesRemoveVolume'{..}
-          = go _mlbrvReason _mlbrvSource _mlbrvShelf
-              (Just _mlbrvVolumeId)
+          = go _mlbrvShelf (Just _mlbrvVolumeId) _mlbrvReason
+              _mlbrvSource
               _mlbrvQuotaUser
               (Just _mlbrvPrettyPrint)
               _mlbrvUserIP

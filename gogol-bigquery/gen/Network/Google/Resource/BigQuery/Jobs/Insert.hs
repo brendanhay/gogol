@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.BigQuery.Jobs.Insert
     , jiQuotaUser
     , jiPrettyPrint
     , jiUserIP
+    , jiPayload
     , jiMedia
     , jiKey
-    , jiJob
     , jiProjectId
     , jiOAuthToken
     , jiFields
@@ -66,13 +67,13 @@ data JobsInsert' = JobsInsert'
     { _jiQuotaUser   :: !(Maybe Text)
     , _jiPrettyPrint :: !Bool
     , _jiUserIP      :: !(Maybe Text)
+    , _jiPayload     :: !Job
     , _jiMedia       :: !Body
     , _jiKey         :: !(Maybe Key)
-    , _jiJob         :: !Job
     , _jiProjectId   :: !Text
     , _jiOAuthToken  :: !(Maybe OAuthToken)
     , _jiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsInsert'' with the minimum fields required to make a request.
 --
@@ -84,11 +85,11 @@ data JobsInsert' = JobsInsert'
 --
 -- * 'jiUserIP'
 --
+-- * 'jiPayload'
+--
 -- * 'jiMedia'
 --
 -- * 'jiKey'
---
--- * 'jiJob'
 --
 -- * 'jiProjectId'
 --
@@ -96,18 +97,18 @@ data JobsInsert' = JobsInsert'
 --
 -- * 'jiFields'
 jobsInsert'
-    :: Body -- ^ 'media'
-    -> Job -- ^ 'Job'
+    :: Job -- ^ 'payload'
+    -> Body -- ^ 'media'
     -> Text -- ^ 'projectId'
     -> JobsInsert'
-jobsInsert' pJiMedia_ pJiJob_ pJiProjectId_ =
+jobsInsert' pJiPayload_ pJiMedia_ pJiProjectId_ =
     JobsInsert'
     { _jiQuotaUser = Nothing
     , _jiPrettyPrint = True
     , _jiUserIP = Nothing
+    , _jiPayload = pJiPayload_
     , _jiMedia = pJiMedia_
     , _jiKey = Nothing
-    , _jiJob = pJiJob_
     , _jiProjectId = pJiProjectId_
     , _jiOAuthToken = Nothing
     , _jiFields = Nothing
@@ -131,6 +132,11 @@ jiPrettyPrint
 jiUserIP :: Lens' JobsInsert' (Maybe Text)
 jiUserIP = lens _jiUserIP (\ s a -> s{_jiUserIP = a})
 
+-- | Multipart request metadata.
+jiPayload :: Lens' JobsInsert' Job
+jiPayload
+  = lens _jiPayload (\ s a -> s{_jiPayload = a})
+
 jiMedia :: Lens' JobsInsert' Body
 jiMedia = lens _jiMedia (\ s a -> s{_jiMedia = a})
 
@@ -139,10 +145,6 @@ jiMedia = lens _jiMedia (\ s a -> s{_jiMedia = a})
 -- token.
 jiKey :: Lens' JobsInsert' (Maybe Key)
 jiKey = lens _jiKey (\ s a -> s{_jiKey = a})
-
--- | Multipart request metadata.
-jiJob :: Lens' JobsInsert' Job
-jiJob = lens _jiJob (\ s a -> s{_jiJob = a})
 
 -- | Project ID of the project that will be billed for the job
 jiProjectId :: Lens' JobsInsert' Text
@@ -166,14 +168,14 @@ instance GoogleRequest JobsInsert' where
         type Rs JobsInsert' = Job
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u JobsInsert'{..}
-          = go _jiMedia _jiProjectId _jiQuotaUser
-              (Just _jiPrettyPrint)
+          = go _jiProjectId _jiQuotaUser (Just _jiPrettyPrint)
               _jiUserIP
               _jiFields
               _jiKey
               _jiOAuthToken
               (Just AltJSON)
-              _jiJob
+              _jiPayload
+              _jiMedia
           where go
                   = clientWithRoute (Proxy :: Proxy JobsInsertResource)
                       r

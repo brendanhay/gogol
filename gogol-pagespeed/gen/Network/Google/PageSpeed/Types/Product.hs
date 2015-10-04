@@ -25,9 +25,9 @@ data PagespeedAPIImageV2 = PagespeedAPIImageV2
     , _paivData     :: !(Maybe Word8)
     , _paivMimeType :: !(Maybe Text)
     , _paivWidth    :: !(Maybe Int32)
-    , _paivPageRect :: !(Maybe PagespeedAPIImageV2Page_rect)
+    , _paivPageRect :: !(Maybe Page_rect)
     , _paivKey      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagespeedAPIImageV2' with the minimum fields required to make a request.
 --
@@ -77,7 +77,7 @@ paivWidth
 
 -- | The region of the page that is captured by this image, with dimensions
 -- measured in CSS pixels.
-paivPageRect :: Lens' PagespeedAPIImageV2 (Maybe PagespeedAPIImageV2Page_rect)
+paivPageRect :: Lens' PagespeedAPIImageV2 (Maybe Page_rect)
 paivPageRect
   = lens _paivPageRect (\ s a -> s{_paivPageRect = a})
 
@@ -107,397 +107,68 @@ instance ToJSON PagespeedAPIImageV2 where
                   ("page_rect" .=) <$> _paivPageRect,
                   ("key" .=) <$> _paivKey])
 
--- | The version of PageSpeed used to generate these results.
 --
--- /See:/ 'resultVersion' smart constructor.
-data ResultVersion = ResultVersion
-    { _rvMinor :: !(Maybe Int32)
-    , _rvMajor :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'rectsItem' smart constructor.
+data RectsItem = RectsItem
+    { _riHeight :: !(Maybe Int32)
+    , _riLeft   :: !(Maybe Int32)
+    , _riWidth  :: !(Maybe Int32)
+    , _riTop    :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ResultVersion' with the minimum fields required to make a request.
+-- | Creates a value of 'RectsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rvMinor'
+-- * 'riHeight'
 --
--- * 'rvMajor'
-resultVersion
-    :: ResultVersion
-resultVersion =
-    ResultVersion
-    { _rvMinor = Nothing
-    , _rvMajor = Nothing
-    }
-
--- | The minor version number of PageSpeed used to generate these results.
-rvMinor :: Lens' ResultVersion (Maybe Int32)
-rvMinor = lens _rvMinor (\ s a -> s{_rvMinor = a})
-
--- | The major version number of PageSpeed used to generate these results.
-rvMajor :: Lens' ResultVersion (Maybe Int32)
-rvMajor = lens _rvMajor (\ s a -> s{_rvMajor = a})
-
-instance FromJSON ResultVersion where
-        parseJSON
-          = withObject "ResultVersion"
-              (\ o ->
-                 ResultVersion <$>
-                   (o .:? "minor") <*> (o .:? "major"))
-
-instance ToJSON ResultVersion where
-        toJSON ResultVersion{..}
-          = object
-              (catMaybes
-                 [("minor" .=) <$> _rvMinor,
-                  ("major" .=) <$> _rvMajor])
-
--- | Summary statistics for the page, such as number of JavaScript bytes,
--- number of HTML bytes, etc.
+-- * 'riLeft'
 --
--- /See:/ 'resultPageStats' smart constructor.
-data ResultPageStats = ResultPageStats
-    { _rpsHTMLResponseBytes       :: !(Maybe Int64)
-    , _rpsTotalRequestBytes       :: !(Maybe Int64)
-    , _rpsNumberResources         :: !(Maybe Int32)
-    , _rpsNumberStaticResources   :: !(Maybe Int32)
-    , _rpsNumberHosts             :: !(Maybe Int32)
-    , _rpsNumberJsResources       :: !(Maybe Int32)
-    , _rpsNumberCssResources      :: !(Maybe Int32)
-    , _rpsTextResponseBytes       :: !(Maybe Int64)
-    , _rpsFlashResponseBytes      :: !(Maybe Int64)
-    , _rpsImageResponseBytes      :: !(Maybe Int64)
-    , _rpsOtherResponseBytes      :: !(Maybe Int64)
-    , _rpsJavascriptResponseBytes :: !(Maybe Int64)
-    , _rpsCssResponseBytes        :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResultPageStats' with the minimum fields required to make a request.
+-- * 'riWidth'
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rpsHTMLResponseBytes'
---
--- * 'rpsTotalRequestBytes'
---
--- * 'rpsNumberResources'
---
--- * 'rpsNumberStaticResources'
---
--- * 'rpsNumberHosts'
---
--- * 'rpsNumberJsResources'
---
--- * 'rpsNumberCssResources'
---
--- * 'rpsTextResponseBytes'
---
--- * 'rpsFlashResponseBytes'
---
--- * 'rpsImageResponseBytes'
---
--- * 'rpsOtherResponseBytes'
---
--- * 'rpsJavascriptResponseBytes'
---
--- * 'rpsCssResponseBytes'
-resultPageStats
-    :: ResultPageStats
-resultPageStats =
-    ResultPageStats
-    { _rpsHTMLResponseBytes = Nothing
-    , _rpsTotalRequestBytes = Nothing
-    , _rpsNumberResources = Nothing
-    , _rpsNumberStaticResources = Nothing
-    , _rpsNumberHosts = Nothing
-    , _rpsNumberJsResources = Nothing
-    , _rpsNumberCssResources = Nothing
-    , _rpsTextResponseBytes = Nothing
-    , _rpsFlashResponseBytes = Nothing
-    , _rpsImageResponseBytes = Nothing
-    , _rpsOtherResponseBytes = Nothing
-    , _rpsJavascriptResponseBytes = Nothing
-    , _rpsCssResponseBytes = Nothing
-    }
-
--- | Number of uncompressed response bytes for the main HTML document and all
--- iframes on the page.
-rpsHTMLResponseBytes :: Lens' ResultPageStats (Maybe Int64)
-rpsHTMLResponseBytes
-  = lens _rpsHTMLResponseBytes
-      (\ s a -> s{_rpsHTMLResponseBytes = a})
-
--- | Total size of all request bytes sent by the page.
-rpsTotalRequestBytes :: Lens' ResultPageStats (Maybe Int64)
-rpsTotalRequestBytes
-  = lens _rpsTotalRequestBytes
-      (\ s a -> s{_rpsTotalRequestBytes = a})
-
--- | Number of HTTP resources loaded by the page.
-rpsNumberResources :: Lens' ResultPageStats (Maybe Int32)
-rpsNumberResources
-  = lens _rpsNumberResources
-      (\ s a -> s{_rpsNumberResources = a})
-
--- | Number of static (i.e. cacheable) resources on the page.
-rpsNumberStaticResources :: Lens' ResultPageStats (Maybe Int32)
-rpsNumberStaticResources
-  = lens _rpsNumberStaticResources
-      (\ s a -> s{_rpsNumberStaticResources = a})
-
--- | Number of unique hosts referenced by the page.
-rpsNumberHosts :: Lens' ResultPageStats (Maybe Int32)
-rpsNumberHosts
-  = lens _rpsNumberHosts
-      (\ s a -> s{_rpsNumberHosts = a})
-
--- | Number of JavaScript resources referenced by the page.
-rpsNumberJsResources :: Lens' ResultPageStats (Maybe Int32)
-rpsNumberJsResources
-  = lens _rpsNumberJsResources
-      (\ s a -> s{_rpsNumberJsResources = a})
-
--- | Number of CSS resources referenced by the page.
-rpsNumberCssResources :: Lens' ResultPageStats (Maybe Int32)
-rpsNumberCssResources
-  = lens _rpsNumberCssResources
-      (\ s a -> s{_rpsNumberCssResources = a})
-
--- | Number of uncompressed response bytes for text resources not covered by
--- other statistics (i.e non-HTML, non-script, non-CSS resources) on the
--- page.
-rpsTextResponseBytes :: Lens' ResultPageStats (Maybe Int64)
-rpsTextResponseBytes
-  = lens _rpsTextResponseBytes
-      (\ s a -> s{_rpsTextResponseBytes = a})
-
--- | Number of response bytes for flash resources on the page.
-rpsFlashResponseBytes :: Lens' ResultPageStats (Maybe Int64)
-rpsFlashResponseBytes
-  = lens _rpsFlashResponseBytes
-      (\ s a -> s{_rpsFlashResponseBytes = a})
-
--- | Number of response bytes for image resources on the page.
-rpsImageResponseBytes :: Lens' ResultPageStats (Maybe Int64)
-rpsImageResponseBytes
-  = lens _rpsImageResponseBytes
-      (\ s a -> s{_rpsImageResponseBytes = a})
-
--- | Number of response bytes for other resources on the page.
-rpsOtherResponseBytes :: Lens' ResultPageStats (Maybe Int64)
-rpsOtherResponseBytes
-  = lens _rpsOtherResponseBytes
-      (\ s a -> s{_rpsOtherResponseBytes = a})
-
--- | Number of uncompressed response bytes for JS resources on the page.
-rpsJavascriptResponseBytes :: Lens' ResultPageStats (Maybe Int64)
-rpsJavascriptResponseBytes
-  = lens _rpsJavascriptResponseBytes
-      (\ s a -> s{_rpsJavascriptResponseBytes = a})
-
--- | Number of uncompressed response bytes for CSS resources on the page.
-rpsCssResponseBytes :: Lens' ResultPageStats (Maybe Int64)
-rpsCssResponseBytes
-  = lens _rpsCssResponseBytes
-      (\ s a -> s{_rpsCssResponseBytes = a})
-
-instance FromJSON ResultPageStats where
-        parseJSON
-          = withObject "ResultPageStats"
-              (\ o ->
-                 ResultPageStats <$>
-                   (o .:? "htmlResponseBytes") <*>
-                     (o .:? "totalRequestBytes")
-                     <*> (o .:? "numberResources")
-                     <*> (o .:? "numberStaticResources")
-                     <*> (o .:? "numberHosts")
-                     <*> (o .:? "numberJsResources")
-                     <*> (o .:? "numberCssResources")
-                     <*> (o .:? "textResponseBytes")
-                     <*> (o .:? "flashResponseBytes")
-                     <*> (o .:? "imageResponseBytes")
-                     <*> (o .:? "otherResponseBytes")
-                     <*> (o .:? "javascriptResponseBytes")
-                     <*> (o .:? "cssResponseBytes"))
-
-instance ToJSON ResultPageStats where
-        toJSON ResultPageStats{..}
-          = object
-              (catMaybes
-                 [("htmlResponseBytes" .=) <$> _rpsHTMLResponseBytes,
-                  ("totalRequestBytes" .=) <$> _rpsTotalRequestBytes,
-                  ("numberResources" .=) <$> _rpsNumberResources,
-                  ("numberStaticResources" .=) <$>
-                    _rpsNumberStaticResources,
-                  ("numberHosts" .=) <$> _rpsNumberHosts,
-                  ("numberJsResources" .=) <$> _rpsNumberJsResources,
-                  ("numberCssResources" .=) <$> _rpsNumberCssResources,
-                  ("textResponseBytes" .=) <$> _rpsTextResponseBytes,
-                  ("flashResponseBytes" .=) <$> _rpsFlashResponseBytes,
-                  ("imageResponseBytes" .=) <$> _rpsImageResponseBytes,
-                  ("otherResponseBytes" .=) <$> _rpsOtherResponseBytes,
-                  ("javascriptResponseBytes" .=) <$>
-                    _rpsJavascriptResponseBytes,
-                  ("cssResponseBytes" .=) <$> _rpsCssResponseBytes])
-
--- | The region of the page that is captured by this image, with dimensions
--- measured in CSS pixels.
---
--- /See:/ 'pagespeedAPIImageV2Page_rect' smart constructor.
-data PagespeedAPIImageV2Page_rect = PagespeedAPIImageV2Page_rect
-    { _paivpHeight :: !(Maybe Int32)
-    , _paivpLeft   :: !(Maybe Int32)
-    , _paivpWidth  :: !(Maybe Int32)
-    , _paivpTop    :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PagespeedAPIImageV2Page_rect' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'paivpHeight'
---
--- * 'paivpLeft'
---
--- * 'paivpWidth'
---
--- * 'paivpTop'
-pagespeedAPIImageV2Page_rect
-    :: PagespeedAPIImageV2Page_rect
-pagespeedAPIImageV2Page_rect =
-    PagespeedAPIImageV2Page_rect
-    { _paivpHeight = Nothing
-    , _paivpLeft = Nothing
-    , _paivpWidth = Nothing
-    , _paivpTop = Nothing
+-- * 'riTop'
+rectsItem
+    :: RectsItem
+rectsItem =
+    RectsItem
+    { _riHeight = Nothing
+    , _riLeft = Nothing
+    , _riWidth = Nothing
+    , _riTop = Nothing
     }
 
 -- | The height of the rect.
-paivpHeight :: Lens' PagespeedAPIImageV2Page_rect (Maybe Int32)
-paivpHeight
-  = lens _paivpHeight (\ s a -> s{_paivpHeight = a})
+riHeight :: Lens' RectsItem (Maybe Int32)
+riHeight = lens _riHeight (\ s a -> s{_riHeight = a})
 
 -- | The left coordinate of the rect, in page coordinates.
-paivpLeft :: Lens' PagespeedAPIImageV2Page_rect (Maybe Int32)
-paivpLeft
-  = lens _paivpLeft (\ s a -> s{_paivpLeft = a})
+riLeft :: Lens' RectsItem (Maybe Int32)
+riLeft = lens _riLeft (\ s a -> s{_riLeft = a})
 
 -- | The width of the rect.
-paivpWidth :: Lens' PagespeedAPIImageV2Page_rect (Maybe Int32)
-paivpWidth
-  = lens _paivpWidth (\ s a -> s{_paivpWidth = a})
+riWidth :: Lens' RectsItem (Maybe Int32)
+riWidth = lens _riWidth (\ s a -> s{_riWidth = a})
 
 -- | The top coordinate of the rect, in page coordinates.
-paivpTop :: Lens' PagespeedAPIImageV2Page_rect (Maybe Int32)
-paivpTop = lens _paivpTop (\ s a -> s{_paivpTop = a})
+riTop :: Lens' RectsItem (Maybe Int32)
+riTop = lens _riTop (\ s a -> s{_riTop = a})
 
-instance FromJSON PagespeedAPIImageV2Page_rect where
+instance FromJSON RectsItem where
         parseJSON
-          = withObject "PagespeedAPIImageV2PageRect"
+          = withObject "RectsItem"
               (\ o ->
-                 PagespeedAPIImageV2Page_rect <$>
+                 RectsItem <$>
                    (o .:? "height") <*> (o .:? "left") <*>
                      (o .:? "width")
                      <*> (o .:? "top"))
 
-instance ToJSON PagespeedAPIImageV2Page_rect where
-        toJSON PagespeedAPIImageV2Page_rect{..}
+instance ToJSON RectsItem where
+        toJSON RectsItem{..}
           = object
               (catMaybes
-                 [("height" .=) <$> _paivpHeight,
-                  ("left" .=) <$> _paivpLeft,
-                  ("width" .=) <$> _paivpWidth,
-                  ("top" .=) <$> _paivpTop])
-
---
--- /See:/ 'pagespeedAPIFormatStringV2Args' smart constructor.
-data PagespeedAPIFormatStringV2Args = PagespeedAPIFormatStringV2Args
-    { _pafsvaValue          :: !(Maybe Text)
-    , _pafsvaRects          :: !(Maybe [PagespeedAPIFormatStringV2ArgsRects])
-    , _pafsvaKey            :: !(Maybe Text)
-    , _pafsvaType           :: !(Maybe Text)
-    , _pafsvaSecondaryRects :: !(Maybe [PagespeedAPIFormatStringV2ArgsSecondary_rects])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PagespeedAPIFormatStringV2Args' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pafsvaValue'
---
--- * 'pafsvaRects'
---
--- * 'pafsvaKey'
---
--- * 'pafsvaType'
---
--- * 'pafsvaSecondaryRects'
-pagespeedAPIFormatStringV2Args
-    :: PagespeedAPIFormatStringV2Args
-pagespeedAPIFormatStringV2Args =
-    PagespeedAPIFormatStringV2Args
-    { _pafsvaValue = Nothing
-    , _pafsvaRects = Nothing
-    , _pafsvaKey = Nothing
-    , _pafsvaType = Nothing
-    , _pafsvaSecondaryRects = Nothing
-    }
-
--- | Argument value, as a localized string.
-pafsvaValue :: Lens' PagespeedAPIFormatStringV2Args (Maybe Text)
-pafsvaValue
-  = lens _pafsvaValue (\ s a -> s{_pafsvaValue = a})
-
--- | The screen rectangles being referred to, with dimensions measured in CSS
--- pixels. This is only ever used for SNAPSHOT_RECT arguments. If this is
--- absent for a SNAPSHOT_RECT argument, it means that that argument refers
--- to the entire snapshot.
-pafsvaRects :: Lens' PagespeedAPIFormatStringV2Args [PagespeedAPIFormatStringV2ArgsRects]
-pafsvaRects
-  = lens _pafsvaRects (\ s a -> s{_pafsvaRects = a}) .
-      _Default
-      . _Coerce
-
--- | The placeholder key for this arg, as a string.
-pafsvaKey :: Lens' PagespeedAPIFormatStringV2Args (Maybe Text)
-pafsvaKey
-  = lens _pafsvaKey (\ s a -> s{_pafsvaKey = a})
-
--- | Type of argument. One of URL, STRING_LITERAL, INT_LITERAL, BYTES,
--- DURATION, VERBATIM_STRING, PERCENTAGE, HYPERLINK, or SNAPSHOT_RECT.
-pafsvaType :: Lens' PagespeedAPIFormatStringV2Args (Maybe Text)
-pafsvaType
-  = lens _pafsvaType (\ s a -> s{_pafsvaType = a})
-
--- | Secondary screen rectangles being referred to, with dimensions measured
--- in CSS pixels. This is only ever used for SNAPSHOT_RECT arguments.
-pafsvaSecondaryRects :: Lens' PagespeedAPIFormatStringV2Args [PagespeedAPIFormatStringV2ArgsSecondary_rects]
-pafsvaSecondaryRects
-  = lens _pafsvaSecondaryRects
-      (\ s a -> s{_pafsvaSecondaryRects = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON PagespeedAPIFormatStringV2Args
-         where
-        parseJSON
-          = withObject "PagespeedAPIFormatStringV2Args"
-              (\ o ->
-                 PagespeedAPIFormatStringV2Args <$>
-                   (o .:? "value") <*> (o .:? "rects" .!= mempty) <*>
-                     (o .:? "key")
-                     <*> (o .:? "type")
-                     <*> (o .:? "secondary_rects" .!= mempty))
-
-instance ToJSON PagespeedAPIFormatStringV2Args where
-        toJSON PagespeedAPIFormatStringV2Args{..}
-          = object
-              (catMaybes
-                 [("value" .=) <$> _pafsvaValue,
-                  ("rects" .=) <$> _pafsvaRects,
-                  ("key" .=) <$> _pafsvaKey,
-                  ("type" .=) <$> _pafsvaType,
-                  ("secondary_rects" .=) <$> _pafsvaSecondaryRects])
+                 [("height" .=) <$> _riHeight,
+                  ("left" .=) <$> _riLeft, ("width" .=) <$> _riWidth,
+                  ("top" .=) <$> _riTop])
 
 --
 -- /See:/ 'result' smart constructor.
@@ -506,13 +177,13 @@ data Result = Result
     , _rKind             :: !Text
     , _rResponseCode     :: !(Maybe Int32)
     , _rInvalidRules     :: !(Maybe [Text])
-    , _rFormattedResults :: !(Maybe ResultFormattedResults)
-    , _rVersion          :: !(Maybe ResultVersion)
-    , _rRuleGroups       :: !(Maybe ResultRuleGroups)
-    , _rPageStats        :: !(Maybe ResultPageStats)
+    , _rFormattedResults :: !(Maybe FormattedResults)
+    , _rVersion          :: !(Maybe Version)
+    , _rRuleGroups       :: !(Maybe RuleGroups)
+    , _rPageStats        :: !(Maybe PageStats)
     , _rId               :: !(Maybe Text)
     , _rTitle            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Result' with the minimum fields required to make a request.
 --
@@ -580,23 +251,23 @@ rInvalidRules
 
 -- | Localized PageSpeed results. Contains a ruleResults entry for each
 -- PageSpeed rule instantiated and run by the server.
-rFormattedResults :: Lens' Result (Maybe ResultFormattedResults)
+rFormattedResults :: Lens' Result (Maybe FormattedResults)
 rFormattedResults
   = lens _rFormattedResults
       (\ s a -> s{_rFormattedResults = a})
 
 -- | The version of PageSpeed used to generate these results.
-rVersion :: Lens' Result (Maybe ResultVersion)
+rVersion :: Lens' Result (Maybe Version)
 rVersion = lens _rVersion (\ s a -> s{_rVersion = a})
 
 -- | A map with one entry for each rule group in these results.
-rRuleGroups :: Lens' Result (Maybe ResultRuleGroups)
+rRuleGroups :: Lens' Result (Maybe RuleGroups)
 rRuleGroups
   = lens _rRuleGroups (\ s a -> s{_rRuleGroups = a})
 
 -- | Summary statistics for the page, such as number of JavaScript bytes,
 -- number of HTML bytes, etc.
-rPageStats :: Lens' Result (Maybe ResultPageStats)
+rPageStats :: Lens' Result (Maybe PageStats)
 rPageStats
   = lens _rPageStats (\ s a -> s{_rPageStats = a})
 
@@ -639,227 +310,544 @@ instance ToJSON Result where
                   ("pageStats" .=) <$> _rPageStats, ("id" .=) <$> _rId,
                   ("title" .=) <$> _rTitle])
 
+-- | The region of the page that is captured by this image, with dimensions
+-- measured in CSS pixels.
 --
--- /See:/ 'pagespeedAPIFormatStringV2ArgsSecondary_rects' smart constructor.
-data PagespeedAPIFormatStringV2ArgsSecondary_rects = PagespeedAPIFormatStringV2ArgsSecondary_rects
-    { _pafsvasHeight :: !(Maybe Int32)
-    , _pafsvasLeft   :: !(Maybe Int32)
-    , _pafsvasWidth  :: !(Maybe Int32)
-    , _pafsvasTop    :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'page_rect' smart constructor.
+data Page_rect = Page_rect
+    { _pHeight :: !(Maybe Int32)
+    , _pLeft   :: !(Maybe Int32)
+    , _pWidth  :: !(Maybe Int32)
+    , _pTop    :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PagespeedAPIFormatStringV2ArgsSecondary_rects' with the minimum fields required to make a request.
+-- | Creates a value of 'Page_rect' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pafsvasHeight'
+-- * 'pHeight'
 --
--- * 'pafsvasLeft'
+-- * 'pLeft'
 --
--- * 'pafsvasWidth'
+-- * 'pWidth'
 --
--- * 'pafsvasTop'
-pagespeedAPIFormatStringV2ArgsSecondary_rects
-    :: PagespeedAPIFormatStringV2ArgsSecondary_rects
-pagespeedAPIFormatStringV2ArgsSecondary_rects =
-    PagespeedAPIFormatStringV2ArgsSecondary_rects
-    { _pafsvasHeight = Nothing
-    , _pafsvasLeft = Nothing
-    , _pafsvasWidth = Nothing
-    , _pafsvasTop = Nothing
+-- * 'pTop'
+page_rect
+    :: Page_rect
+page_rect =
+    Page_rect
+    { _pHeight = Nothing
+    , _pLeft = Nothing
+    , _pWidth = Nothing
+    , _pTop = Nothing
     }
 
 -- | The height of the rect.
-pafsvasHeight :: Lens' PagespeedAPIFormatStringV2ArgsSecondary_rects (Maybe Int32)
-pafsvasHeight
-  = lens _pafsvasHeight
-      (\ s a -> s{_pafsvasHeight = a})
+pHeight :: Lens' Page_rect (Maybe Int32)
+pHeight = lens _pHeight (\ s a -> s{_pHeight = a})
 
 -- | The left coordinate of the rect, in page coordinates.
-pafsvasLeft :: Lens' PagespeedAPIFormatStringV2ArgsSecondary_rects (Maybe Int32)
-pafsvasLeft
-  = lens _pafsvasLeft (\ s a -> s{_pafsvasLeft = a})
+pLeft :: Lens' Page_rect (Maybe Int32)
+pLeft = lens _pLeft (\ s a -> s{_pLeft = a})
 
 -- | The width of the rect.
-pafsvasWidth :: Lens' PagespeedAPIFormatStringV2ArgsSecondary_rects (Maybe Int32)
-pafsvasWidth
-  = lens _pafsvasWidth (\ s a -> s{_pafsvasWidth = a})
+pWidth :: Lens' Page_rect (Maybe Int32)
+pWidth = lens _pWidth (\ s a -> s{_pWidth = a})
 
 -- | The top coordinate of the rect, in page coordinates.
-pafsvasTop :: Lens' PagespeedAPIFormatStringV2ArgsSecondary_rects (Maybe Int32)
-pafsvasTop
-  = lens _pafsvasTop (\ s a -> s{_pafsvasTop = a})
+pTop :: Lens' Page_rect (Maybe Int32)
+pTop = lens _pTop (\ s a -> s{_pTop = a})
 
-instance FromJSON
-         PagespeedAPIFormatStringV2ArgsSecondary_rects where
+instance FromJSON Page_rect where
         parseJSON
-          = withObject
-              "PagespeedAPIFormatStringV2ArgsSecondaryRects"
+          = withObject "PageRect"
               (\ o ->
-                 PagespeedAPIFormatStringV2ArgsSecondary_rects <$>
+                 Page_rect <$>
                    (o .:? "height") <*> (o .:? "left") <*>
                      (o .:? "width")
                      <*> (o .:? "top"))
 
-instance ToJSON
-         PagespeedAPIFormatStringV2ArgsSecondary_rects where
-        toJSON
-          PagespeedAPIFormatStringV2ArgsSecondary_rects{..}
+instance ToJSON Page_rect where
+        toJSON Page_rect{..}
           = object
               (catMaybes
-                 [("height" .=) <$> _pafsvasHeight,
-                  ("left" .=) <$> _pafsvasLeft,
-                  ("width" .=) <$> _pafsvasWidth,
-                  ("top" .=) <$> _pafsvasTop])
+                 [("height" .=) <$> _pHeight, ("left" .=) <$> _pLeft,
+                  ("width" .=) <$> _pWidth, ("top" .=) <$> _pTop])
 
+-- | Dictionary of formatted rule results, with one entry for each PageSpeed
+-- rule instantiated and run by the server.
 --
--- /See:/ 'pagespeedAPIFormatStringV2ArgsRects' smart constructor.
-data PagespeedAPIFormatStringV2ArgsRects = PagespeedAPIFormatStringV2ArgsRects
-    { _pafsvarHeight :: !(Maybe Int32)
-    , _pafsvarLeft   :: !(Maybe Int32)
-    , _pafsvarWidth  :: !(Maybe Int32)
-    , _pafsvarTop    :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'ruleResults' smart constructor.
+data RuleResults =
+    RuleResults
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PagespeedAPIFormatStringV2ArgsRects' with the minimum fields required to make a request.
+-- | Creates a value of 'RuleResults' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pafsvarHeight'
---
--- * 'pafsvarLeft'
---
--- * 'pafsvarWidth'
---
--- * 'pafsvarTop'
-pagespeedAPIFormatStringV2ArgsRects
-    :: PagespeedAPIFormatStringV2ArgsRects
-pagespeedAPIFormatStringV2ArgsRects =
-    PagespeedAPIFormatStringV2ArgsRects
-    { _pafsvarHeight = Nothing
-    , _pafsvarLeft = Nothing
-    , _pafsvarWidth = Nothing
-    , _pafsvarTop = Nothing
-    }
+ruleResults
+    :: RuleResults
+ruleResults = RuleResults
 
--- | The height of the rect.
-pafsvarHeight :: Lens' PagespeedAPIFormatStringV2ArgsRects (Maybe Int32)
-pafsvarHeight
-  = lens _pafsvarHeight
-      (\ s a -> s{_pafsvarHeight = a})
-
--- | The left coordinate of the rect, in page coordinates.
-pafsvarLeft :: Lens' PagespeedAPIFormatStringV2ArgsRects (Maybe Int32)
-pafsvarLeft
-  = lens _pafsvarLeft (\ s a -> s{_pafsvarLeft = a})
-
--- | The width of the rect.
-pafsvarWidth :: Lens' PagespeedAPIFormatStringV2ArgsRects (Maybe Int32)
-pafsvarWidth
-  = lens _pafsvarWidth (\ s a -> s{_pafsvarWidth = a})
-
--- | The top coordinate of the rect, in page coordinates.
-pafsvarTop :: Lens' PagespeedAPIFormatStringV2ArgsRects (Maybe Int32)
-pafsvarTop
-  = lens _pafsvarTop (\ s a -> s{_pafsvarTop = a})
-
-instance FromJSON PagespeedAPIFormatStringV2ArgsRects
-         where
+instance FromJSON RuleResults where
         parseJSON
-          = withObject "PagespeedAPIFormatStringV2ArgsRects"
-              (\ o ->
-                 PagespeedAPIFormatStringV2ArgsRects <$>
-                   (o .:? "height") <*> (o .:? "left") <*>
-                     (o .:? "width")
-                     <*> (o .:? "top"))
+          = withObject "RuleResults" (\ o -> pure RuleResults)
 
-instance ToJSON PagespeedAPIFormatStringV2ArgsRects
-         where
-        toJSON PagespeedAPIFormatStringV2ArgsRects{..}
-          = object
-              (catMaybes
-                 [("height" .=) <$> _pafsvarHeight,
-                  ("left" .=) <$> _pafsvarLeft,
-                  ("width" .=) <$> _pafsvarWidth,
-                  ("top" .=) <$> _pafsvarTop])
+instance ToJSON RuleResults where
+        toJSON = const (Object mempty)
 
 -- | Localized PageSpeed results. Contains a ruleResults entry for each
 -- PageSpeed rule instantiated and run by the server.
 --
--- /See:/ 'resultFormattedResults' smart constructor.
-data ResultFormattedResults = ResultFormattedResults
-    { _rfrLocale      :: !(Maybe Text)
-    , _rfrRuleResults :: !(Maybe ResultFormattedResultsRuleResults)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'formattedResults' smart constructor.
+data FormattedResults = FormattedResults
+    { _frLocale      :: !(Maybe Text)
+    , _frRuleResults :: !(Maybe RuleResults)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ResultFormattedResults' with the minimum fields required to make a request.
+-- | Creates a value of 'FormattedResults' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rfrLocale'
+-- * 'frLocale'
 --
--- * 'rfrRuleResults'
-resultFormattedResults
-    :: ResultFormattedResults
-resultFormattedResults =
-    ResultFormattedResults
-    { _rfrLocale = Nothing
-    , _rfrRuleResults = Nothing
+-- * 'frRuleResults'
+formattedResults
+    :: FormattedResults
+formattedResults =
+    FormattedResults
+    { _frLocale = Nothing
+    , _frRuleResults = Nothing
     }
 
 -- | The locale of the formattedResults, e.g. \"en_US\".
-rfrLocale :: Lens' ResultFormattedResults (Maybe Text)
-rfrLocale
-  = lens _rfrLocale (\ s a -> s{_rfrLocale = a})
+frLocale :: Lens' FormattedResults (Maybe Text)
+frLocale = lens _frLocale (\ s a -> s{_frLocale = a})
 
 -- | Dictionary of formatted rule results, with one entry for each PageSpeed
 -- rule instantiated and run by the server.
-rfrRuleResults :: Lens' ResultFormattedResults (Maybe ResultFormattedResultsRuleResults)
-rfrRuleResults
-  = lens _rfrRuleResults
-      (\ s a -> s{_rfrRuleResults = a})
+frRuleResults :: Lens' FormattedResults (Maybe RuleResults)
+frRuleResults
+  = lens _frRuleResults
+      (\ s a -> s{_frRuleResults = a})
 
-instance FromJSON ResultFormattedResults where
+instance FromJSON FormattedResults where
         parseJSON
-          = withObject "ResultFormattedResults"
+          = withObject "FormattedResults"
               (\ o ->
-                 ResultFormattedResults <$>
+                 FormattedResults <$>
                    (o .:? "locale") <*> (o .:? "ruleResults"))
 
-instance ToJSON ResultFormattedResults where
-        toJSON ResultFormattedResults{..}
+instance ToJSON FormattedResults where
+        toJSON FormattedResults{..}
           = object
               (catMaybes
-                 [("locale" .=) <$> _rfrLocale,
-                  ("ruleResults" .=) <$> _rfrRuleResults])
+                 [("locale" .=) <$> _frLocale,
+                  ("ruleResults" .=) <$> _frRuleResults])
+
+-- | The version of PageSpeed used to generate these results.
+--
+-- /See:/ 'version' smart constructor.
+data Version = Version
+    { _vMinor :: !(Maybe Int32)
+    , _vMajor :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Version' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vMinor'
+--
+-- * 'vMajor'
+version
+    :: Version
+version =
+    Version
+    { _vMinor = Nothing
+    , _vMajor = Nothing
+    }
+
+-- | The minor version number of PageSpeed used to generate these results.
+vMinor :: Lens' Version (Maybe Int32)
+vMinor = lens _vMinor (\ s a -> s{_vMinor = a})
+
+-- | The major version number of PageSpeed used to generate these results.
+vMajor :: Lens' Version (Maybe Int32)
+vMajor = lens _vMajor (\ s a -> s{_vMajor = a})
+
+instance FromJSON Version where
+        parseJSON
+          = withObject "Version"
+              (\ o ->
+                 Version <$> (o .:? "minor") <*> (o .:? "major"))
+
+instance ToJSON Version where
+        toJSON Version{..}
+          = object
+              (catMaybes
+                 [("minor" .=) <$> _vMinor, ("major" .=) <$> _vMajor])
 
 -- | A map with one entry for each rule group in these results.
 --
--- /See:/ 'resultRuleGroups' smart constructor.
-data ResultRuleGroups =
-    ResultRuleGroups
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'ruleGroups' smart constructor.
+data RuleGroups =
+    RuleGroups
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ResultRuleGroups' with the minimum fields required to make a request.
+-- | Creates a value of 'RuleGroups' with the minimum fields required to make a request.
 --
-resultRuleGroups
-    :: ResultRuleGroups
-resultRuleGroups = ResultRuleGroups
+ruleGroups
+    :: RuleGroups
+ruleGroups = RuleGroups
 
-instance FromJSON ResultRuleGroups where
+instance FromJSON RuleGroups where
         parseJSON
-          = withObject "ResultRuleGroups"
-              (\ o -> pure ResultRuleGroups)
+          = withObject "RuleGroups" (\ o -> pure RuleGroups)
 
-instance ToJSON ResultRuleGroups where
+instance ToJSON RuleGroups where
         toJSON = const (Object mempty)
+
+--
+-- /See:/ 'argsItem' smart constructor.
+data ArgsItem = ArgsItem
+    { _aiValue          :: !(Maybe Text)
+    , _aiRects          :: !(Maybe [RectsItem])
+    , _aiKey            :: !(Maybe Text)
+    , _aiType           :: !(Maybe Text)
+    , _aiSecondaryRects :: !(Maybe [Secondary_rectsItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ArgsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aiValue'
+--
+-- * 'aiRects'
+--
+-- * 'aiKey'
+--
+-- * 'aiType'
+--
+-- * 'aiSecondaryRects'
+argsItem
+    :: ArgsItem
+argsItem =
+    ArgsItem
+    { _aiValue = Nothing
+    , _aiRects = Nothing
+    , _aiKey = Nothing
+    , _aiType = Nothing
+    , _aiSecondaryRects = Nothing
+    }
+
+-- | Argument value, as a localized string.
+aiValue :: Lens' ArgsItem (Maybe Text)
+aiValue = lens _aiValue (\ s a -> s{_aiValue = a})
+
+-- | The screen rectangles being referred to, with dimensions measured in CSS
+-- pixels. This is only ever used for SNAPSHOT_RECT arguments. If this is
+-- absent for a SNAPSHOT_RECT argument, it means that that argument refers
+-- to the entire snapshot.
+aiRects :: Lens' ArgsItem [RectsItem]
+aiRects
+  = lens _aiRects (\ s a -> s{_aiRects = a}) . _Default
+      . _Coerce
+
+-- | The placeholder key for this arg, as a string.
+aiKey :: Lens' ArgsItem (Maybe Text)
+aiKey = lens _aiKey (\ s a -> s{_aiKey = a})
+
+-- | Type of argument. One of URL, STRING_LITERAL, INT_LITERAL, BYTES,
+-- DURATION, VERBATIM_STRING, PERCENTAGE, HYPERLINK, or SNAPSHOT_RECT.
+aiType :: Lens' ArgsItem (Maybe Text)
+aiType = lens _aiType (\ s a -> s{_aiType = a})
+
+-- | Secondary screen rectangles being referred to, with dimensions measured
+-- in CSS pixels. This is only ever used for SNAPSHOT_RECT arguments.
+aiSecondaryRects :: Lens' ArgsItem [Secondary_rectsItem]
+aiSecondaryRects
+  = lens _aiSecondaryRects
+      (\ s a -> s{_aiSecondaryRects = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ArgsItem where
+        parseJSON
+          = withObject "ArgsItem"
+              (\ o ->
+                 ArgsItem <$>
+                   (o .:? "value") <*> (o .:? "rects" .!= mempty) <*>
+                     (o .:? "key")
+                     <*> (o .:? "type")
+                     <*> (o .:? "secondary_rects" .!= mempty))
+
+instance ToJSON ArgsItem where
+        toJSON ArgsItem{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _aiValue,
+                  ("rects" .=) <$> _aiRects, ("key" .=) <$> _aiKey,
+                  ("type" .=) <$> _aiType,
+                  ("secondary_rects" .=) <$> _aiSecondaryRects])
+
+-- | Summary statistics for the page, such as number of JavaScript bytes,
+-- number of HTML bytes, etc.
+--
+-- /See:/ 'pageStats' smart constructor.
+data PageStats = PageStats
+    { _psHTMLResponseBytes       :: !(Maybe Int64)
+    , _psTotalRequestBytes       :: !(Maybe Int64)
+    , _psNumberResources         :: !(Maybe Int32)
+    , _psNumberStaticResources   :: !(Maybe Int32)
+    , _psNumberHosts             :: !(Maybe Int32)
+    , _psNumberJsResources       :: !(Maybe Int32)
+    , _psNumberCssResources      :: !(Maybe Int32)
+    , _psTextResponseBytes       :: !(Maybe Int64)
+    , _psFlashResponseBytes      :: !(Maybe Int64)
+    , _psImageResponseBytes      :: !(Maybe Int64)
+    , _psOtherResponseBytes      :: !(Maybe Int64)
+    , _psJavascriptResponseBytes :: !(Maybe Int64)
+    , _psCssResponseBytes        :: !(Maybe Int64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PageStats' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'psHTMLResponseBytes'
+--
+-- * 'psTotalRequestBytes'
+--
+-- * 'psNumberResources'
+--
+-- * 'psNumberStaticResources'
+--
+-- * 'psNumberHosts'
+--
+-- * 'psNumberJsResources'
+--
+-- * 'psNumberCssResources'
+--
+-- * 'psTextResponseBytes'
+--
+-- * 'psFlashResponseBytes'
+--
+-- * 'psImageResponseBytes'
+--
+-- * 'psOtherResponseBytes'
+--
+-- * 'psJavascriptResponseBytes'
+--
+-- * 'psCssResponseBytes'
+pageStats
+    :: PageStats
+pageStats =
+    PageStats
+    { _psHTMLResponseBytes = Nothing
+    , _psTotalRequestBytes = Nothing
+    , _psNumberResources = Nothing
+    , _psNumberStaticResources = Nothing
+    , _psNumberHosts = Nothing
+    , _psNumberJsResources = Nothing
+    , _psNumberCssResources = Nothing
+    , _psTextResponseBytes = Nothing
+    , _psFlashResponseBytes = Nothing
+    , _psImageResponseBytes = Nothing
+    , _psOtherResponseBytes = Nothing
+    , _psJavascriptResponseBytes = Nothing
+    , _psCssResponseBytes = Nothing
+    }
+
+-- | Number of uncompressed response bytes for the main HTML document and all
+-- iframes on the page.
+psHTMLResponseBytes :: Lens' PageStats (Maybe Int64)
+psHTMLResponseBytes
+  = lens _psHTMLResponseBytes
+      (\ s a -> s{_psHTMLResponseBytes = a})
+
+-- | Total size of all request bytes sent by the page.
+psTotalRequestBytes :: Lens' PageStats (Maybe Int64)
+psTotalRequestBytes
+  = lens _psTotalRequestBytes
+      (\ s a -> s{_psTotalRequestBytes = a})
+
+-- | Number of HTTP resources loaded by the page.
+psNumberResources :: Lens' PageStats (Maybe Int32)
+psNumberResources
+  = lens _psNumberResources
+      (\ s a -> s{_psNumberResources = a})
+
+-- | Number of static (i.e. cacheable) resources on the page.
+psNumberStaticResources :: Lens' PageStats (Maybe Int32)
+psNumberStaticResources
+  = lens _psNumberStaticResources
+      (\ s a -> s{_psNumberStaticResources = a})
+
+-- | Number of unique hosts referenced by the page.
+psNumberHosts :: Lens' PageStats (Maybe Int32)
+psNumberHosts
+  = lens _psNumberHosts
+      (\ s a -> s{_psNumberHosts = a})
+
+-- | Number of JavaScript resources referenced by the page.
+psNumberJsResources :: Lens' PageStats (Maybe Int32)
+psNumberJsResources
+  = lens _psNumberJsResources
+      (\ s a -> s{_psNumberJsResources = a})
+
+-- | Number of CSS resources referenced by the page.
+psNumberCssResources :: Lens' PageStats (Maybe Int32)
+psNumberCssResources
+  = lens _psNumberCssResources
+      (\ s a -> s{_psNumberCssResources = a})
+
+-- | Number of uncompressed response bytes for text resources not covered by
+-- other statistics (i.e non-HTML, non-script, non-CSS resources) on the
+-- page.
+psTextResponseBytes :: Lens' PageStats (Maybe Int64)
+psTextResponseBytes
+  = lens _psTextResponseBytes
+      (\ s a -> s{_psTextResponseBytes = a})
+
+-- | Number of response bytes for flash resources on the page.
+psFlashResponseBytes :: Lens' PageStats (Maybe Int64)
+psFlashResponseBytes
+  = lens _psFlashResponseBytes
+      (\ s a -> s{_psFlashResponseBytes = a})
+
+-- | Number of response bytes for image resources on the page.
+psImageResponseBytes :: Lens' PageStats (Maybe Int64)
+psImageResponseBytes
+  = lens _psImageResponseBytes
+      (\ s a -> s{_psImageResponseBytes = a})
+
+-- | Number of response bytes for other resources on the page.
+psOtherResponseBytes :: Lens' PageStats (Maybe Int64)
+psOtherResponseBytes
+  = lens _psOtherResponseBytes
+      (\ s a -> s{_psOtherResponseBytes = a})
+
+-- | Number of uncompressed response bytes for JS resources on the page.
+psJavascriptResponseBytes :: Lens' PageStats (Maybe Int64)
+psJavascriptResponseBytes
+  = lens _psJavascriptResponseBytes
+      (\ s a -> s{_psJavascriptResponseBytes = a})
+
+-- | Number of uncompressed response bytes for CSS resources on the page.
+psCssResponseBytes :: Lens' PageStats (Maybe Int64)
+psCssResponseBytes
+  = lens _psCssResponseBytes
+      (\ s a -> s{_psCssResponseBytes = a})
+
+instance FromJSON PageStats where
+        parseJSON
+          = withObject "PageStats"
+              (\ o ->
+                 PageStats <$>
+                   (o .:? "htmlResponseBytes") <*>
+                     (o .:? "totalRequestBytes")
+                     <*> (o .:? "numberResources")
+                     <*> (o .:? "numberStaticResources")
+                     <*> (o .:? "numberHosts")
+                     <*> (o .:? "numberJsResources")
+                     <*> (o .:? "numberCssResources")
+                     <*> (o .:? "textResponseBytes")
+                     <*> (o .:? "flashResponseBytes")
+                     <*> (o .:? "imageResponseBytes")
+                     <*> (o .:? "otherResponseBytes")
+                     <*> (o .:? "javascriptResponseBytes")
+                     <*> (o .:? "cssResponseBytes"))
+
+instance ToJSON PageStats where
+        toJSON PageStats{..}
+          = object
+              (catMaybes
+                 [("htmlResponseBytes" .=) <$> _psHTMLResponseBytes,
+                  ("totalRequestBytes" .=) <$> _psTotalRequestBytes,
+                  ("numberResources" .=) <$> _psNumberResources,
+                  ("numberStaticResources" .=) <$>
+                    _psNumberStaticResources,
+                  ("numberHosts" .=) <$> _psNumberHosts,
+                  ("numberJsResources" .=) <$> _psNumberJsResources,
+                  ("numberCssResources" .=) <$> _psNumberCssResources,
+                  ("textResponseBytes" .=) <$> _psTextResponseBytes,
+                  ("flashResponseBytes" .=) <$> _psFlashResponseBytes,
+                  ("imageResponseBytes" .=) <$> _psImageResponseBytes,
+                  ("otherResponseBytes" .=) <$> _psOtherResponseBytes,
+                  ("javascriptResponseBytes" .=) <$>
+                    _psJavascriptResponseBytes,
+                  ("cssResponseBytes" .=) <$> _psCssResponseBytes])
+
+--
+-- /See:/ 'secondary_rectsItem' smart constructor.
+data Secondary_rectsItem = Secondary_rectsItem
+    { _siHeight :: !(Maybe Int32)
+    , _siLeft   :: !(Maybe Int32)
+    , _siWidth  :: !(Maybe Int32)
+    , _siTop    :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Secondary_rectsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'siHeight'
+--
+-- * 'siLeft'
+--
+-- * 'siWidth'
+--
+-- * 'siTop'
+secondary_rectsItem
+    :: Secondary_rectsItem
+secondary_rectsItem =
+    Secondary_rectsItem
+    { _siHeight = Nothing
+    , _siLeft = Nothing
+    , _siWidth = Nothing
+    , _siTop = Nothing
+    }
+
+-- | The height of the rect.
+siHeight :: Lens' Secondary_rectsItem (Maybe Int32)
+siHeight = lens _siHeight (\ s a -> s{_siHeight = a})
+
+-- | The left coordinate of the rect, in page coordinates.
+siLeft :: Lens' Secondary_rectsItem (Maybe Int32)
+siLeft = lens _siLeft (\ s a -> s{_siLeft = a})
+
+-- | The width of the rect.
+siWidth :: Lens' Secondary_rectsItem (Maybe Int32)
+siWidth = lens _siWidth (\ s a -> s{_siWidth = a})
+
+-- | The top coordinate of the rect, in page coordinates.
+siTop :: Lens' Secondary_rectsItem (Maybe Int32)
+siTop = lens _siTop (\ s a -> s{_siTop = a})
+
+instance FromJSON Secondary_rectsItem where
+        parseJSON
+          = withObject "SecondaryRectsItem"
+              (\ o ->
+                 Secondary_rectsItem <$>
+                   (o .:? "height") <*> (o .:? "left") <*>
+                     (o .:? "width")
+                     <*> (o .:? "top"))
+
+instance ToJSON Secondary_rectsItem where
+        toJSON Secondary_rectsItem{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _siHeight,
+                  ("left" .=) <$> _siLeft, ("width" .=) <$> _siWidth,
+                  ("top" .=) <$> _siTop])
 
 --
 -- /See:/ 'pagespeedAPIFormatStringV2' smart constructor.
 data PagespeedAPIFormatStringV2 = PagespeedAPIFormatStringV2
-    { _pafsvArgs   :: !(Maybe [PagespeedAPIFormatStringV2Args])
+    { _pafsvArgs   :: !(Maybe [ArgsItem])
     , _pafsvFormat :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagespeedAPIFormatStringV2' with the minimum fields required to make a request.
 --
@@ -877,7 +865,7 @@ pagespeedAPIFormatStringV2 =
     }
 
 -- | List of arguments for the format string.
-pafsvArgs :: Lens' PagespeedAPIFormatStringV2 [PagespeedAPIFormatStringV2Args]
+pafsvArgs :: Lens' PagespeedAPIFormatStringV2 [ArgsItem]
 pafsvArgs
   = lens _pafsvArgs (\ s a -> s{_pafsvArgs = a}) .
       _Default
@@ -904,27 +892,3 @@ instance ToJSON PagespeedAPIFormatStringV2 where
               (catMaybes
                  [("args" .=) <$> _pafsvArgs,
                   ("format" .=) <$> _pafsvFormat])
-
--- | Dictionary of formatted rule results, with one entry for each PageSpeed
--- rule instantiated and run by the server.
---
--- /See:/ 'resultFormattedResultsRuleResults' smart constructor.
-data ResultFormattedResultsRuleResults =
-    ResultFormattedResultsRuleResults
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResultFormattedResultsRuleResults' with the minimum fields required to make a request.
---
-resultFormattedResultsRuleResults
-    :: ResultFormattedResultsRuleResults
-resultFormattedResultsRuleResults = ResultFormattedResultsRuleResults
-
-instance FromJSON ResultFormattedResultsRuleResults
-         where
-        parseJSON
-          = withObject "ResultFormattedResultsRuleResults"
-              (\ o -> pure ResultFormattedResultsRuleResults)
-
-instance ToJSON ResultFormattedResultsRuleResults
-         where
-        toJSON = const (Object mempty)

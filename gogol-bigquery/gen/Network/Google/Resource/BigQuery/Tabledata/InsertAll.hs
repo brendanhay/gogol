@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.BigQuery.Tabledata.InsertAll
     , tiaQuotaUser
     , tiaPrettyPrint
     , tiaUserIP
-    , tiaTableDataInsertAllRequest
+    , tiaPayload
     , tiaKey
     , tiaDatasetId
     , tiaProjectId
@@ -71,17 +72,17 @@ type TabledataInsertAllResource =
 --
 -- /See:/ 'tabledataInsertAll'' smart constructor.
 data TabledataInsertAll' = TabledataInsertAll'
-    { _tiaQuotaUser                 :: !(Maybe Text)
-    , _tiaPrettyPrint               :: !Bool
-    , _tiaUserIP                    :: !(Maybe Text)
-    , _tiaTableDataInsertAllRequest :: !TableDataInsertAllRequest
-    , _tiaKey                       :: !(Maybe Key)
-    , _tiaDatasetId                 :: !Text
-    , _tiaProjectId                 :: !Text
-    , _tiaOAuthToken                :: !(Maybe OAuthToken)
-    , _tiaTableId                   :: !Text
-    , _tiaFields                    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _tiaQuotaUser   :: !(Maybe Text)
+    , _tiaPrettyPrint :: !Bool
+    , _tiaUserIP      :: !(Maybe Text)
+    , _tiaPayload     :: !TableDataInsertAllRequest
+    , _tiaKey         :: !(Maybe Key)
+    , _tiaDatasetId   :: !Text
+    , _tiaProjectId   :: !Text
+    , _tiaOAuthToken  :: !(Maybe OAuthToken)
+    , _tiaTableId     :: !Text
+    , _tiaFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TabledataInsertAll'' with the minimum fields required to make a request.
 --
@@ -93,7 +94,7 @@ data TabledataInsertAll' = TabledataInsertAll'
 --
 -- * 'tiaUserIP'
 --
--- * 'tiaTableDataInsertAllRequest'
+-- * 'tiaPayload'
 --
 -- * 'tiaKey'
 --
@@ -107,17 +108,17 @@ data TabledataInsertAll' = TabledataInsertAll'
 --
 -- * 'tiaFields'
 tabledataInsertAll'
-    :: TableDataInsertAllRequest -- ^ 'TableDataInsertAllRequest'
+    :: TableDataInsertAllRequest -- ^ 'payload'
     -> Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
     -> Text -- ^ 'tableId'
     -> TabledataInsertAll'
-tabledataInsertAll' pTiaTableDataInsertAllRequest_ pTiaDatasetId_ pTiaProjectId_ pTiaTableId_ =
+tabledataInsertAll' pTiaPayload_ pTiaDatasetId_ pTiaProjectId_ pTiaTableId_ =
     TabledataInsertAll'
     { _tiaQuotaUser = Nothing
     , _tiaPrettyPrint = True
     , _tiaUserIP = Nothing
-    , _tiaTableDataInsertAllRequest = pTiaTableDataInsertAllRequest_
+    , _tiaPayload = pTiaPayload_
     , _tiaKey = Nothing
     , _tiaDatasetId = pTiaDatasetId_
     , _tiaProjectId = pTiaProjectId_
@@ -146,10 +147,9 @@ tiaUserIP
   = lens _tiaUserIP (\ s a -> s{_tiaUserIP = a})
 
 -- | Multipart request metadata.
-tiaTableDataInsertAllRequest :: Lens' TabledataInsertAll' TableDataInsertAllRequest
-tiaTableDataInsertAllRequest
-  = lens _tiaTableDataInsertAllRequest
-      (\ s a -> s{_tiaTableDataInsertAllRequest = a})
+tiaPayload :: Lens' TabledataInsertAll' TableDataInsertAllRequest
+tiaPayload
+  = lens _tiaPayload (\ s a -> s{_tiaPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -200,7 +200,7 @@ instance GoogleRequest TabledataInsertAll' where
               _tiaKey
               _tiaOAuthToken
               (Just AltJSON)
-              _tiaTableDataInsertAllRequest
+              _tiaPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TabledataInsertAllResource)

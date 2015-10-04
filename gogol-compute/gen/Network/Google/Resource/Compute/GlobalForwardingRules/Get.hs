@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -71,7 +72,7 @@ data GlobalForwardingRulesGet' = GlobalForwardingRulesGet'
     , _gfrgKey            :: !(Maybe Key)
     , _gfrgOAuthToken     :: !(Maybe OAuthToken)
     , _gfrgFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalForwardingRulesGet'' with the minimum fields required to make a request.
 --

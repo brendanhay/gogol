@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.Analytics.Management.Profiles.Patch
     , mppPrettyPrint
     , mppWebPropertyId
     , mppUserIP
-    , mppProfile
     , mppProfileId
+    , mppPayload
     , mppAccountId
     , mppKey
     , mppOAuthToken
@@ -75,13 +76,13 @@ data ManagementProfilesPatch' = ManagementProfilesPatch'
     , _mppPrettyPrint   :: !Bool
     , _mppWebPropertyId :: !Text
     , _mppUserIP        :: !(Maybe Text)
-    , _mppProfile       :: !Profile
     , _mppProfileId     :: !Text
+    , _mppPayload       :: !Profile
     , _mppAccountId     :: !Text
     , _mppKey           :: !(Maybe Key)
     , _mppOAuthToken    :: !(Maybe OAuthToken)
     , _mppFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfilesPatch'' with the minimum fields required to make a request.
 --
@@ -95,9 +96,9 @@ data ManagementProfilesPatch' = ManagementProfilesPatch'
 --
 -- * 'mppUserIP'
 --
--- * 'mppProfile'
---
 -- * 'mppProfileId'
+--
+-- * 'mppPayload'
 --
 -- * 'mppAccountId'
 --
@@ -108,18 +109,18 @@ data ManagementProfilesPatch' = ManagementProfilesPatch'
 -- * 'mppFields'
 managementProfilesPatch'
     :: Text -- ^ 'webPropertyId'
-    -> Profile -- ^ 'Profile'
     -> Text -- ^ 'profileId'
+    -> Profile -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementProfilesPatch'
-managementProfilesPatch' pMppWebPropertyId_ pMppProfile_ pMppProfileId_ pMppAccountId_ =
+managementProfilesPatch' pMppWebPropertyId_ pMppProfileId_ pMppPayload_ pMppAccountId_ =
     ManagementProfilesPatch'
     { _mppQuotaUser = Nothing
     , _mppPrettyPrint = False
     , _mppWebPropertyId = pMppWebPropertyId_
     , _mppUserIP = Nothing
-    , _mppProfile = pMppProfile_
     , _mppProfileId = pMppProfileId_
+    , _mppPayload = pMppPayload_
     , _mppAccountId = pMppAccountId_
     , _mppKey = Nothing
     , _mppOAuthToken = Nothing
@@ -151,15 +152,15 @@ mppUserIP :: Lens' ManagementProfilesPatch' (Maybe Text)
 mppUserIP
   = lens _mppUserIP (\ s a -> s{_mppUserIP = a})
 
--- | Multipart request metadata.
-mppProfile :: Lens' ManagementProfilesPatch' Profile
-mppProfile
-  = lens _mppProfile (\ s a -> s{_mppProfile = a})
-
 -- | ID of the view (profile) to be updated.
 mppProfileId :: Lens' ManagementProfilesPatch' Text
 mppProfileId
   = lens _mppProfileId (\ s a -> s{_mppProfileId = a})
+
+-- | Multipart request metadata.
+mppPayload :: Lens' ManagementProfilesPatch' Profile
+mppPayload
+  = lens _mppPayload (\ s a -> s{_mppPayload = a})
 
 -- | Account ID to which the view (profile) belongs
 mppAccountId :: Lens' ManagementProfilesPatch' Text
@@ -199,7 +200,7 @@ instance GoogleRequest ManagementProfilesPatch' where
               _mppKey
               _mppOAuthToken
               (Just AltJSON)
-              _mppProfile
+              _mppPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementProfilesPatchResource)

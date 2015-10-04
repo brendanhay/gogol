@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.BigQuery.Datasets.Update
     -- * Request Lenses
     , duQuotaUser
     , duPrettyPrint
-    , duDataset
     , duUserIP
+    , duPayload
     , duKey
     , duDatasetId
     , duProjectId
@@ -70,14 +71,14 @@ type DatasetsUpdateResource =
 data DatasetsUpdate' = DatasetsUpdate'
     { _duQuotaUser   :: !(Maybe Text)
     , _duPrettyPrint :: !Bool
-    , _duDataset     :: !Dataset
     , _duUserIP      :: !(Maybe Text)
+    , _duPayload     :: !Dataset
     , _duKey         :: !(Maybe Key)
     , _duDatasetId   :: !Text
     , _duProjectId   :: !Text
     , _duOAuthToken  :: !(Maybe OAuthToken)
     , _duFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsUpdate'' with the minimum fields required to make a request.
 --
@@ -87,9 +88,9 @@ data DatasetsUpdate' = DatasetsUpdate'
 --
 -- * 'duPrettyPrint'
 --
--- * 'duDataset'
---
 -- * 'duUserIP'
+--
+-- * 'duPayload'
 --
 -- * 'duKey'
 --
@@ -101,16 +102,16 @@ data DatasetsUpdate' = DatasetsUpdate'
 --
 -- * 'duFields'
 datasetsUpdate'
-    :: Dataset -- ^ 'Dataset'
+    :: Dataset -- ^ 'payload'
     -> Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
     -> DatasetsUpdate'
-datasetsUpdate' pDuDataset_ pDuDatasetId_ pDuProjectId_ =
+datasetsUpdate' pDuPayload_ pDuDatasetId_ pDuProjectId_ =
     DatasetsUpdate'
     { _duQuotaUser = Nothing
     , _duPrettyPrint = True
-    , _duDataset = pDuDataset_
     , _duUserIP = Nothing
+    , _duPayload = pDuPayload_
     , _duKey = Nothing
     , _duDatasetId = pDuDatasetId_
     , _duProjectId = pDuProjectId_
@@ -131,15 +132,15 @@ duPrettyPrint
   = lens _duPrettyPrint
       (\ s a -> s{_duPrettyPrint = a})
 
--- | Multipart request metadata.
-duDataset :: Lens' DatasetsUpdate' Dataset
-duDataset
-  = lens _duDataset (\ s a -> s{_duDataset = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 duUserIP :: Lens' DatasetsUpdate' (Maybe Text)
 duUserIP = lens _duUserIP (\ s a -> s{_duUserIP = a})
+
+-- | Multipart request metadata.
+duPayload :: Lens' DatasetsUpdate' Dataset
+duPayload
+  = lens _duPayload (\ s a -> s{_duPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -181,7 +182,7 @@ instance GoogleRequest DatasetsUpdate' where
               _duKey
               _duOAuthToken
               (Just AltJSON)
-              _duDataset
+              _duPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsUpdateResource)

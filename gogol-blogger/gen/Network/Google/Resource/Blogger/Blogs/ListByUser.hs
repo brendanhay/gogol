@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,9 +53,9 @@ type BlogsListByUserResource =
      "users" :>
        Capture "userId" Text :>
          "blogs" :>
-           QueryParam "fetchUserInfo" Bool :>
-             QueryParams "role" BloggerBlogsListByUserRole :>
-               QueryParams "status" BloggerBlogsListByUserStatus :>
+           QueryParams "status" BloggerBlogsListByUserStatus :>
+             QueryParam "fetchUserInfo" Bool :>
+               QueryParams "role" Role :>
                  QueryParam "view" BloggerBlogsListByUserView :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
@@ -74,12 +75,12 @@ data BlogsListByUser' = BlogsListByUser'
     , _blbuUserIP        :: !(Maybe Text)
     , _blbuFetchUserInfo :: !(Maybe Bool)
     , _blbuUserId        :: !Text
-    , _blbuRole          :: !(Maybe BloggerBlogsListByUserRole)
+    , _blbuRole          :: !(Maybe Role)
     , _blbuKey           :: !(Maybe Key)
     , _blbuView          :: !(Maybe BloggerBlogsListByUserView)
     , _blbuOAuthToken    :: !(Maybe OAuthToken)
     , _blbuFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BlogsListByUser'' with the minimum fields required to make a request.
 --
@@ -166,7 +167,7 @@ blbuUserId
 -- | User access types for blogs to include in the results, e.g. AUTHOR will
 -- return blogs where the user has author level access. If no roles are
 -- specified, defaults to ADMIN and AUTHOR roles.
-blbuRole :: Lens' BlogsListByUser' (Maybe BloggerBlogsListByUserRole)
+blbuRole :: Lens' BlogsListByUser' (Maybe Role)
 blbuRole = lens _blbuRole (\ s a -> s{_blbuRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -199,9 +200,10 @@ instance GoogleRequest BlogsListByUser' where
         type Rs BlogsListByUser' = BlogList
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u BlogsListByUser'{..}
-          = go _blbuFetchUserInfo _blbuRole (Just _blbuStatus)
+          = go _blbuUserId (_blbuStatus ^. _Default)
+              _blbuFetchUserInfo
+              (_blbuRole ^. _Default)
               _blbuView
-              _blbuUserId
               _blbuQuotaUser
               (Just _blbuPrettyPrint)
               _blbuUserIP

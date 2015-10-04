@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,9 +52,9 @@ type ScoresSubmitResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
          "scores" :>
-           QueryParam "language" Text :>
+           QueryParam "score" Int64 :>
              QueryParam "scoreTag" Text :>
-               QueryParam "score" Int64 :>
+               QueryParam "language" Text :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data ScoresSubmit' = ScoresSubmit'
     , _sLanguage      :: !(Maybe Text)
     , _sOAuthToken    :: !(Maybe OAuthToken)
     , _sFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresSubmit'' with the minimum fields required to make a request.
 --
@@ -187,8 +188,8 @@ instance GoogleRequest ScoresSubmit' where
         type Rs ScoresSubmit' = PlayerScoreResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u ScoresSubmit'{..}
-          = go _sLanguage _sScoreTag _sLeaderboardId
-              (Just _sScore)
+          = go _sLeaderboardId (Just _sScore) _sScoreTag
+              _sLanguage
               _sQuotaUser
               (Just _sPrettyPrint)
               _sUserIP

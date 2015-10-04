@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -61,17 +62,17 @@ import           Network.Google.Prelude
 type CoursesListResource =
      "v1" :>
        "courses" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pageSize" Int32 :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "studentId" Text :>
-                         QueryParam "teacherId" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "upload_protocol" Text :>
+         QueryParam "studentId" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "teacherId" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "pageSize" Int32 :>
+                             QueryParam "callback" Text :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
@@ -105,7 +106,7 @@ data CoursesList' = CoursesList'
     , _clPageSize       :: !(Maybe Int32)
     , _clFields         :: !(Maybe Text)
     , _clCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesList'' with the minimum fields required to make a request.
 --
@@ -269,15 +270,15 @@ instance GoogleRequest CoursesList' where
         type Rs CoursesList' = ListCoursesResponse
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesList'{..}
-          = go _clXgafv _clAccessToken _clBearerToken
-              _clCallback
-              _clPageSize
-              _clPageToken
+          = go _clStudentId _clXgafv _clUploadProtocol
               (Just _clPp)
-              _clStudentId
-              _clTeacherId
+              _clAccessToken
               _clUploadType
-              _clUploadProtocol
+              _clTeacherId
+              _clBearerToken
+              _clPageToken
+              _clPageSize
+              _clCallback
               _clQuotaUser
               (Just _clPrettyPrint)
               _clFields

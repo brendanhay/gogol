@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,18 +56,18 @@ type ChromeosDevicesListResource =
        Capture "customerId" Text :>
          "devices" :>
            "chromeos" :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "orderBy"
-                 DirectoryChromeosDevicesListOrderBy
+             QueryParam "orderBy"
+               DirectoryChromeosDevicesListOrderBy
+               :>
+               QueryParam "sortOrder"
+                 DirectoryChromeosDevicesListSortOrder
                  :>
-                 QueryParam "pageToken" Text :>
+                 QueryParam "query" Text :>
                    QueryParam "projection"
                      DirectoryChromeosDevicesListProjection
                      :>
-                     QueryParam "query" Text :>
-                       QueryParam "sortOrder"
-                         DirectoryChromeosDevicesListSortOrder
-                         :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Int32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -93,7 +94,7 @@ data ChromeosDevicesList' = ChromeosDevicesList'
     , _cdlOAuthToken  :: !(Maybe OAuthToken)
     , _cdlMaxResults  :: !(Maybe Int32)
     , _cdlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChromeosDevicesList'' with the minimum fields required to make a request.
 --
@@ -227,11 +228,11 @@ instance GoogleRequest ChromeosDevicesList' where
         type Rs ChromeosDevicesList' = ChromeOSDevices
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u ChromeosDevicesList'{..}
-          = go _cdlMaxResults _cdlOrderBy _cdlPageToken
-              _cdlProjection
+          = go _cdlCustomerId _cdlOrderBy _cdlSortOrder
               _cdlQuery
-              _cdlSortOrder
-              _cdlCustomerId
+              _cdlProjection
+              _cdlPageToken
+              _cdlMaxResults
               _cdlQuotaUser
               (Just _cdlPrettyPrint)
               _cdlUserIP

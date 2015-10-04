@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,11 +34,11 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Insert
     , mdiQuotaUser
     , mdiPrettyPrint
     , mdiUserIP
+    , mdiPayload
     , mdiKey
     , mdiOAuthToken
     , mdiOrderId
     , mdiFields
-    , mdiAddOrderDealsRequest
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -64,15 +65,15 @@ type MarketplaceDealsInsertResource =
 --
 -- /See:/ 'marketplaceDealsInsert'' smart constructor.
 data MarketplaceDealsInsert' = MarketplaceDealsInsert'
-    { _mdiQuotaUser            :: !(Maybe Text)
-    , _mdiPrettyPrint          :: !Bool
-    , _mdiUserIP               :: !(Maybe Text)
-    , _mdiKey                  :: !(Maybe Key)
-    , _mdiOAuthToken           :: !(Maybe OAuthToken)
-    , _mdiOrderId              :: !Text
-    , _mdiFields               :: !(Maybe Text)
-    , _mdiAddOrderDealsRequest :: !AddOrderDealsRequest
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mdiQuotaUser   :: !(Maybe Text)
+    , _mdiPrettyPrint :: !Bool
+    , _mdiUserIP      :: !(Maybe Text)
+    , _mdiPayload     :: !AddOrderDealsRequest
+    , _mdiKey         :: !(Maybe Key)
+    , _mdiOAuthToken  :: !(Maybe OAuthToken)
+    , _mdiOrderId     :: !Text
+    , _mdiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceDealsInsert'' with the minimum fields required to make a request.
 --
@@ -84,6 +85,8 @@ data MarketplaceDealsInsert' = MarketplaceDealsInsert'
 --
 -- * 'mdiUserIP'
 --
+-- * 'mdiPayload'
+--
 -- * 'mdiKey'
 --
 -- * 'mdiOAuthToken'
@@ -91,22 +94,20 @@ data MarketplaceDealsInsert' = MarketplaceDealsInsert'
 -- * 'mdiOrderId'
 --
 -- * 'mdiFields'
---
--- * 'mdiAddOrderDealsRequest'
 marketplaceDealsInsert'
-    :: Text -- ^ 'orderId'
-    -> AddOrderDealsRequest -- ^ 'AddOrderDealsRequest'
+    :: AddOrderDealsRequest -- ^ 'payload'
+    -> Text -- ^ 'orderId'
     -> MarketplaceDealsInsert'
-marketplaceDealsInsert' pMdiOrderId_ pMdiAddOrderDealsRequest_ =
+marketplaceDealsInsert' pMdiPayload_ pMdiOrderId_ =
     MarketplaceDealsInsert'
     { _mdiQuotaUser = Nothing
     , _mdiPrettyPrint = True
     , _mdiUserIP = Nothing
+    , _mdiPayload = pMdiPayload_
     , _mdiKey = Nothing
     , _mdiOAuthToken = Nothing
     , _mdiOrderId = pMdiOrderId_
     , _mdiFields = Nothing
-    , _mdiAddOrderDealsRequest = pMdiAddOrderDealsRequest_
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,6 +128,11 @@ mdiPrettyPrint
 mdiUserIP :: Lens' MarketplaceDealsInsert' (Maybe Text)
 mdiUserIP
   = lens _mdiUserIP (\ s a -> s{_mdiUserIP = a})
+
+-- | Multipart request metadata.
+mdiPayload :: Lens' MarketplaceDealsInsert' AddOrderDealsRequest
+mdiPayload
+  = lens _mdiPayload (\ s a -> s{_mdiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -150,12 +156,6 @@ mdiFields :: Lens' MarketplaceDealsInsert' (Maybe Text)
 mdiFields
   = lens _mdiFields (\ s a -> s{_mdiFields = a})
 
--- | Multipart request metadata.
-mdiAddOrderDealsRequest :: Lens' MarketplaceDealsInsert' AddOrderDealsRequest
-mdiAddOrderDealsRequest
-  = lens _mdiAddOrderDealsRequest
-      (\ s a -> s{_mdiAddOrderDealsRequest = a})
-
 instance GoogleAuth MarketplaceDealsInsert' where
         authKey = mdiKey . _Just
         authToken = mdiOAuthToken . _Just
@@ -171,7 +171,7 @@ instance GoogleRequest MarketplaceDealsInsert' where
               _mdiKey
               _mdiOAuthToken
               (Just AltJSON)
-              _mdiAddOrderDealsRequest
+              _mdiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MarketplaceDealsInsertResource)

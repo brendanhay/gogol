@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,8 +52,8 @@ type ZonesListResource =
      Capture "project" Text :>
        "zones" :>
          QueryParam "filter" Text :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -75,7 +76,7 @@ data ZonesList' = ZonesList'
     , _zlOAuthToken  :: !(Maybe OAuthToken)
     , _zlMaxResults  :: !Word32
     , _zlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZonesList'' with the minimum fields required to make a request.
 --
@@ -189,8 +190,8 @@ instance GoogleRequest ZonesList' where
         type Rs ZonesList' = ZoneList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ZonesList'{..}
-          = go _zlFilter (Just _zlMaxResults) _zlPageToken
-              _zlProject
+          = go _zlProject _zlFilter _zlPageToken
+              (Just _zlMaxResults)
               _zlQuotaUser
               (Just _zlPrettyPrint)
               _zlUserIP

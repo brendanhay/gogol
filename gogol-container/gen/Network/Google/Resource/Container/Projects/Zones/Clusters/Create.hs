@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -38,10 +39,10 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Create
 
     -- * Request Lenses
     , pzccQuotaUser
-    , pzccCreateClusterRequest
     , pzccPrettyPrint
     , pzccUserIP
     , pzccZoneId
+    , pzccPayload
     , pzccKey
     , pzccProjectId
     , pzccOAuthToken
@@ -79,16 +80,16 @@ type ProjectsZonesClustersCreateResource =
 --
 -- /See:/ 'projectsZonesClustersCreate'' smart constructor.
 data ProjectsZonesClustersCreate' = ProjectsZonesClustersCreate'
-    { _pzccQuotaUser            :: !(Maybe Text)
-    , _pzccCreateClusterRequest :: !CreateClusterRequest
-    , _pzccPrettyPrint          :: !Bool
-    , _pzccUserIP               :: !(Maybe Text)
-    , _pzccZoneId               :: !Text
-    , _pzccKey                  :: !(Maybe Key)
-    , _pzccProjectId            :: !Text
-    , _pzccOAuthToken           :: !(Maybe OAuthToken)
-    , _pzccFields               :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _pzccQuotaUser   :: !(Maybe Text)
+    , _pzccPrettyPrint :: !Bool
+    , _pzccUserIP      :: !(Maybe Text)
+    , _pzccZoneId      :: !Text
+    , _pzccPayload     :: !CreateClusterRequest
+    , _pzccKey         :: !(Maybe Key)
+    , _pzccProjectId   :: !Text
+    , _pzccOAuthToken  :: !(Maybe OAuthToken)
+    , _pzccFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersCreate'' with the minimum fields required to make a request.
 --
@@ -96,13 +97,13 @@ data ProjectsZonesClustersCreate' = ProjectsZonesClustersCreate'
 --
 -- * 'pzccQuotaUser'
 --
--- * 'pzccCreateClusterRequest'
---
 -- * 'pzccPrettyPrint'
 --
 -- * 'pzccUserIP'
 --
 -- * 'pzccZoneId'
+--
+-- * 'pzccPayload'
 --
 -- * 'pzccKey'
 --
@@ -112,17 +113,17 @@ data ProjectsZonesClustersCreate' = ProjectsZonesClustersCreate'
 --
 -- * 'pzccFields'
 projectsZonesClustersCreate'
-    :: CreateClusterRequest -- ^ 'CreateClusterRequest'
-    -> Text -- ^ 'zoneId'
+    :: Text -- ^ 'zoneId'
+    -> CreateClusterRequest -- ^ 'payload'
     -> Text -- ^ 'projectId'
     -> ProjectsZonesClustersCreate'
-projectsZonesClustersCreate' pPzccCreateClusterRequest_ pPzccZoneId_ pPzccProjectId_ =
+projectsZonesClustersCreate' pPzccZoneId_ pPzccPayload_ pPzccProjectId_ =
     ProjectsZonesClustersCreate'
     { _pzccQuotaUser = Nothing
-    , _pzccCreateClusterRequest = pPzccCreateClusterRequest_
     , _pzccPrettyPrint = True
     , _pzccUserIP = Nothing
     , _pzccZoneId = pPzccZoneId_
+    , _pzccPayload = pPzccPayload_
     , _pzccKey = Nothing
     , _pzccProjectId = pPzccProjectId_
     , _pzccOAuthToken = Nothing
@@ -136,12 +137,6 @@ pzccQuotaUser :: Lens' ProjectsZonesClustersCreate' (Maybe Text)
 pzccQuotaUser
   = lens _pzccQuotaUser
       (\ s a -> s{_pzccQuotaUser = a})
-
--- | Multipart request metadata.
-pzccCreateClusterRequest :: Lens' ProjectsZonesClustersCreate' CreateClusterRequest
-pzccCreateClusterRequest
-  = lens _pzccCreateClusterRequest
-      (\ s a -> s{_pzccCreateClusterRequest = a})
 
 -- | Returns response with indentations and line breaks.
 pzccPrettyPrint :: Lens' ProjectsZonesClustersCreate' Bool
@@ -159,6 +154,11 @@ pzccUserIP
 pzccZoneId :: Lens' ProjectsZonesClustersCreate' Text
 pzccZoneId
   = lens _pzccZoneId (\ s a -> s{_pzccZoneId = a})
+
+-- | Multipart request metadata.
+pzccPayload :: Lens' ProjectsZonesClustersCreate' CreateClusterRequest
+pzccPayload
+  = lens _pzccPayload (\ s a -> s{_pzccPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -200,7 +200,7 @@ instance GoogleRequest ProjectsZonesClustersCreate'
               _pzccKey
               _pzccOAuthToken
               (Just AltJSON)
-              _pzccCreateClusterRequest
+              _pzccPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsZonesClustersCreateResource)

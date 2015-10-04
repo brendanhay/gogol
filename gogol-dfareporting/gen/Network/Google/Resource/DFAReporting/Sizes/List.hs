@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,9 +54,9 @@ type SizesListResource =
        Capture "profileId" Int64 :>
          "sizes" :>
            QueryParam "height" Int32 :>
-             QueryParam "iabStandard" Bool :>
-               QueryParams "ids" Int64 :>
-                 QueryParam "width" Int32 :>
+             QueryParams "ids" Int64 :>
+               QueryParam "width" Int32 :>
+                 QueryParam "iabStandard" Bool :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -73,14 +74,14 @@ data SizesList' = SizesList'
     , _slHeight      :: !(Maybe Int32)
     , _slPrettyPrint :: !Bool
     , _slUserIP      :: !(Maybe Text)
-    , _slIds         :: !(Maybe Int64)
+    , _slIds         :: !(Maybe [Int64])
     , _slWidth       :: !(Maybe Int32)
     , _slProfileId   :: !Int64
     , _slKey         :: !(Maybe Key)
     , _slOAuthToken  :: !(Maybe OAuthToken)
     , _slIabStandard :: !(Maybe Bool)
     , _slFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SizesList'' with the minimum fields required to make a request.
 --
@@ -148,8 +149,10 @@ slUserIP :: Lens' SizesList' (Maybe Text)
 slUserIP = lens _slUserIP (\ s a -> s{_slUserIP = a})
 
 -- | Select only sizes with these IDs.
-slIds :: Lens' SizesList' (Maybe Int64)
-slIds = lens _slIds (\ s a -> s{_slIds = a})
+slIds :: Lens' SizesList' [Int64]
+slIds
+  = lens _slIds (\ s a -> s{_slIds = a}) . _Default .
+      _Coerce
 
 -- | Select only sizes with this width.
 slWidth :: Lens' SizesList' (Maybe Int32)
@@ -189,8 +192,9 @@ instance GoogleRequest SizesList' where
         type Rs SizesList' = SizesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SizesList'{..}
-          = go _slHeight _slIabStandard _slIds _slWidth
-              _slProfileId
+          = go _slProfileId _slHeight (_slIds ^. _Default)
+              _slWidth
+              _slIabStandard
               _slQuotaUser
               (Just _slPrettyPrint)
               _slUserIP

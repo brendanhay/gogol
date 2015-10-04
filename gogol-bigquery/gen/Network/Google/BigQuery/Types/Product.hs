@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 data JobReference = JobReference
     { _jrJobId     :: !(Maybe Text)
     , _jrProjectId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobReference' with the minimum fields required to make a request.
 --
@@ -66,14 +66,85 @@ instance ToJSON JobReference where
                   ("projectId" .=) <$> _jrProjectId])
 
 --
+-- /See:/ 'datasetsItem' smart constructor.
+data DatasetsItem = DatasetsItem
+    { _diFriendlyName     :: !(Maybe Text)
+    , _diKind             :: !Text
+    , _diDatasetReference :: !(Maybe DatasetReference)
+    , _diId               :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DatasetsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'diFriendlyName'
+--
+-- * 'diKind'
+--
+-- * 'diDatasetReference'
+--
+-- * 'diId'
+datasetsItem
+    :: DatasetsItem
+datasetsItem =
+    DatasetsItem
+    { _diFriendlyName = Nothing
+    , _diKind = "bigquery#dataset"
+    , _diDatasetReference = Nothing
+    , _diId = Nothing
+    }
+
+-- | A descriptive name for the dataset, if one exists.
+diFriendlyName :: Lens' DatasetsItem (Maybe Text)
+diFriendlyName
+  = lens _diFriendlyName
+      (\ s a -> s{_diFriendlyName = a})
+
+-- | The resource type. This property always returns the value
+-- \"bigquery#dataset\".
+diKind :: Lens' DatasetsItem Text
+diKind = lens _diKind (\ s a -> s{_diKind = a})
+
+-- | The dataset reference. Use this property to access specific parts of the
+-- dataset\'s ID, such as project ID or dataset ID.
+diDatasetReference :: Lens' DatasetsItem (Maybe DatasetReference)
+diDatasetReference
+  = lens _diDatasetReference
+      (\ s a -> s{_diDatasetReference = a})
+
+-- | The fully-qualified, unique, opaque ID of the dataset.
+diId :: Lens' DatasetsItem (Maybe Text)
+diId = lens _diId (\ s a -> s{_diId = a})
+
+instance FromJSON DatasetsItem where
+        parseJSON
+          = withObject "DatasetsItem"
+              (\ o ->
+                 DatasetsItem <$>
+                   (o .:? "friendlyName") <*>
+                     (o .:? "kind" .!= "bigquery#dataset")
+                     <*> (o .:? "datasetReference")
+                     <*> (o .:? "id"))
+
+instance ToJSON DatasetsItem where
+        toJSON DatasetsItem{..}
+          = object
+              (catMaybes
+                 [("friendlyName" .=) <$> _diFriendlyName,
+                  Just ("kind" .= _diKind),
+                  ("datasetReference" .=) <$> _diDatasetReference,
+                  ("id" .=) <$> _diId])
+
+--
 -- /See:/ 'tableList' smart constructor.
 data TableList = TableList
     { _tlTotalItems    :: !(Maybe Int32)
     , _tlEtag          :: !(Maybe Text)
     , _tlNextPageToken :: !(Maybe Text)
     , _tlKind          :: !Text
-    , _tlTables        :: !(Maybe [TableListTables])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _tlTables        :: !(Maybe [TablesItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableList' with the minimum fields required to make a request.
 --
@@ -119,7 +190,7 @@ tlKind :: Lens' TableList Text
 tlKind = lens _tlKind (\ s a -> s{_tlKind = a})
 
 -- | Tables in the requested dataset.
-tlTables :: Lens' TableList [TableListTables]
+tlTables :: Lens' TableList [TablesItem]
 tlTables
   = lens _tlTables (\ s a -> s{_tlTables = a}) .
       _Default
@@ -153,7 +224,7 @@ data TableDataList = TableDataList
     , _tdlRows      :: !(Maybe [TableRow])
     , _tdlPageToken :: !(Maybe Text)
     , _tdlTotalRows :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableDataList' with the minimum fields required to make a request.
 --
@@ -233,7 +304,7 @@ data JobConfigurationTableCopy = JobConfigurationTableCopy
     , _jctcSourceTables      :: !(Maybe [TableReference])
     , _jctcCreateDisPosition :: !(Maybe Text)
     , _jctcSourceTable       :: !(Maybe TableReference)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobConfigurationTableCopy' with the minimum fields required to make a request.
 --
@@ -329,7 +400,7 @@ instance ToJSON JobConfigurationTableCopy where
 -- /See:/ 'tableSchema' smart constructor.
 newtype TableSchema = TableSchema
     { _tsFields :: Maybe [TableFieldSchema]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableSchema' with the minimum fields required to make a request.
 --
@@ -360,65 +431,14 @@ instance ToJSON TableSchema where
           = object (catMaybes [("fields" .=) <$> _tsFields])
 
 --
--- /See:/ 'tableDataInsertAllResponseInsertErrors' smart constructor.
-data TableDataInsertAllResponseInsertErrors = TableDataInsertAllResponseInsertErrors
-    { _tdiarieErrors :: !(Maybe [ErrorProto])
-    , _tdiarieIndex  :: !(Maybe Word32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TableDataInsertAllResponseInsertErrors' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tdiarieErrors'
---
--- * 'tdiarieIndex'
-tableDataInsertAllResponseInsertErrors
-    :: TableDataInsertAllResponseInsertErrors
-tableDataInsertAllResponseInsertErrors =
-    TableDataInsertAllResponseInsertErrors
-    { _tdiarieErrors = Nothing
-    , _tdiarieIndex = Nothing
-    }
-
--- | Error information for the row indicated by the index property.
-tdiarieErrors :: Lens' TableDataInsertAllResponseInsertErrors [ErrorProto]
-tdiarieErrors
-  = lens _tdiarieErrors
-      (\ s a -> s{_tdiarieErrors = a})
-      . _Default
-      . _Coerce
-
--- | The index of the row that error applies to.
-tdiarieIndex :: Lens' TableDataInsertAllResponseInsertErrors (Maybe Word32)
-tdiarieIndex
-  = lens _tdiarieIndex (\ s a -> s{_tdiarieIndex = a})
-
-instance FromJSON
-         TableDataInsertAllResponseInsertErrors where
-        parseJSON
-          = withObject "TableDataInsertAllResponseInsertErrors"
-              (\ o ->
-                 TableDataInsertAllResponseInsertErrors <$>
-                   (o .:? "errors" .!= mempty) <*> (o .:? "index"))
-
-instance ToJSON
-         TableDataInsertAllResponseInsertErrors where
-        toJSON TableDataInsertAllResponseInsertErrors{..}
-          = object
-              (catMaybes
-                 [("errors" .=) <$> _tdiarieErrors,
-                  ("index" .=) <$> _tdiarieIndex])
-
---
 -- /See:/ 'projectList' smart constructor.
 data ProjectList = ProjectList
     { _plTotalItems    :: !(Maybe Int32)
     , _plEtag          :: !(Maybe Text)
     , _plNextPageToken :: !(Maybe Text)
     , _plKind          :: !Text
-    , _plProjects      :: !(Maybe [ProjectListProjects])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _plProjects      :: !(Maybe [ProjectsItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectList' with the minimum fields required to make a request.
 --
@@ -464,7 +484,7 @@ plKind :: Lens' ProjectList Text
 plKind = lens _plKind (\ s a -> s{_plKind = a})
 
 -- | Projects to which you have at least READ access.
-plProjects :: Lens' ProjectList [ProjectListProjects]
+plProjects :: Lens' ProjectList [ProjectsItem]
 plProjects
   = lens _plProjects (\ s a -> s{_plProjects = a}) .
       _Default
@@ -500,7 +520,7 @@ data JobStatistics = JobStatistics
     , _jsEndTime             :: !(Maybe Int64)
     , _jsQuery               :: !(Maybe JobStatistics2)
     , _jsExtract             :: !(Maybe JobStatistics4)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobStatistics' with the minimum fields required to make a request.
 --
@@ -601,7 +621,7 @@ instance ToJSON JobStatistics where
 -- /See:/ 'dataset' smart constructor.
 data Dataset = Dataset
     { _dCreationTime             :: !(Maybe Int64)
-    , _dAccess                   :: !(Maybe [DatasetAccess])
+    , _dAccess                   :: !(Maybe [AccessItem])
     , _dEtag                     :: !(Maybe Text)
     , _dLocation                 :: !(Maybe Text)
     , _dFriendlyName             :: !(Maybe Text)
@@ -612,7 +632,7 @@ data Dataset = Dataset
     , _dId                       :: !(Maybe Text)
     , _dDefaultTableExpirationMs :: !(Maybe Int64)
     , _dDescription              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Dataset' with the minimum fields required to make a request.
 --
@@ -674,7 +694,7 @@ dCreationTime
 -- access.role: READER; access.specialGroup: projectWriters; access.role:
 -- WRITER; access.specialGroup: projectOwners; access.role: OWNER;
 -- access.userByEmail: [dataset creator email]; access.role: OWNER;
-dAccess :: Lens' Dataset [DatasetAccess]
+dAccess :: Lens' Dataset [AccessItem]
 dAccess
   = lens _dAccess (\ s a -> s{_dAccess = a}) . _Default
       . _Coerce
@@ -785,7 +805,7 @@ data TableReference = TableReference
     { _trDatasetId :: !(Maybe Text)
     , _trProjectId :: !(Maybe Text)
     , _trTableId   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableReference' with the minimum fields required to make a request.
 --
@@ -846,7 +866,7 @@ data TableFieldSchema = TableFieldSchema
     , _tfsType        :: !(Maybe Text)
     , _tfsDescription :: !(Maybe Text)
     , _tfsFields      :: !(Maybe [TableFieldSchema])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableFieldSchema' with the minimum fields required to make a request.
 --
@@ -931,7 +951,7 @@ data ExternalDataConfiguration = ExternalDataConfiguration
     , _edcMaxBadRecords       :: !(Maybe Int32)
     , _edcSourceURIs          :: !(Maybe [Text])
     , _edcCSVOptions          :: !(Maybe CSVOptions)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ExternalDataConfiguration' with the minimum fields required to make a request.
 --
@@ -1061,7 +1081,7 @@ data GetQueryResultsResponse = GetQueryResultsResponse
     , _gqrrErrors              :: !(Maybe [ErrorProto])
     , _gqrrJobComplete         :: !(Maybe Bool)
     , _gqrrCacheHit            :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetQueryResultsResponse' with the minimum fields required to make a request.
 --
@@ -1216,13 +1236,114 @@ instance ToJSON GetQueryResultsResponse where
                   ("cacheHit" .=) <$> _gqrrCacheHit])
 
 --
+-- /See:/ 'tablesItem' smart constructor.
+data TablesItem = TablesItem
+    { _tiTableReference :: !(Maybe TableReference)
+    , _tiFriendlyName   :: !(Maybe Text)
+    , _tiKind           :: !Text
+    , _tiId             :: !(Maybe Text)
+    , _tiType           :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TablesItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tiTableReference'
+--
+-- * 'tiFriendlyName'
+--
+-- * 'tiKind'
+--
+-- * 'tiId'
+--
+-- * 'tiType'
+tablesItem
+    :: TablesItem
+tablesItem =
+    TablesItem
+    { _tiTableReference = Nothing
+    , _tiFriendlyName = Nothing
+    , _tiKind = "bigquery#table"
+    , _tiId = Nothing
+    , _tiType = Nothing
+    }
+
+-- | A reference uniquely identifying the table.
+tiTableReference :: Lens' TablesItem (Maybe TableReference)
+tiTableReference
+  = lens _tiTableReference
+      (\ s a -> s{_tiTableReference = a})
+
+-- | The user-friendly name for this table.
+tiFriendlyName :: Lens' TablesItem (Maybe Text)
+tiFriendlyName
+  = lens _tiFriendlyName
+      (\ s a -> s{_tiFriendlyName = a})
+
+-- | The resource type.
+tiKind :: Lens' TablesItem Text
+tiKind = lens _tiKind (\ s a -> s{_tiKind = a})
+
+-- | An opaque ID of the table
+tiId :: Lens' TablesItem (Maybe Text)
+tiId = lens _tiId (\ s a -> s{_tiId = a})
+
+-- | The type of table. Possible values are: TABLE, VIEW.
+tiType :: Lens' TablesItem (Maybe Text)
+tiType = lens _tiType (\ s a -> s{_tiType = a})
+
+instance FromJSON TablesItem where
+        parseJSON
+          = withObject "TablesItem"
+              (\ o ->
+                 TablesItem <$>
+                   (o .:? "tableReference") <*> (o .:? "friendlyName")
+                     <*> (o .:? "kind" .!= "bigquery#table")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type"))
+
+instance ToJSON TablesItem where
+        toJSON TablesItem{..}
+          = object
+              (catMaybes
+                 [("tableReference" .=) <$> _tiTableReference,
+                  ("friendlyName" .=) <$> _tiFriendlyName,
+                  Just ("kind" .= _tiKind), ("id" .=) <$> _tiId,
+                  ("type" .=) <$> _tiType])
+
+-- | [Experimental] If querying an external data source outside of BigQuery,
+-- describes the data format, location and other properties of the data
+-- source. By defining these properties, the data source can then be
+-- queried as if it were a standard BigQuery table.
+--
+-- /See:/ 'tableDefinitions' smart constructor.
+data TableDefinitions =
+    TableDefinitions
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TableDefinitions' with the minimum fields required to make a request.
+--
+tableDefinitions
+    :: TableDefinitions
+tableDefinitions = TableDefinitions
+
+instance FromJSON TableDefinitions where
+        parseJSON
+          = withObject "TableDefinitions"
+              (\ o -> pure TableDefinitions)
+
+instance ToJSON TableDefinitions where
+        toJSON = const (Object mempty)
+
+--
 -- /See:/ 'datasetList' smart constructor.
 data DatasetList = DatasetList
     { _dlEtag          :: !(Maybe Text)
     , _dlNextPageToken :: !(Maybe Text)
     , _dlKind          :: !Text
-    , _dlDatasets      :: !(Maybe [DatasetListDatasets])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _dlDatasets      :: !(Maybe [DatasetsItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetList' with the minimum fields required to make a request.
 --
@@ -1266,7 +1387,7 @@ dlKind = lens _dlKind (\ s a -> s{_dlKind = a})
 -- basic information. For full information about a particular dataset
 -- resource, use the Datasets: get method. This property is omitted when
 -- there are no datasets in the project.
-dlDatasets :: Lens' DatasetList [DatasetListDatasets]
+dlDatasets :: Lens' DatasetList [DatasetsItem]
 dlDatasets
   = lens _dlDatasets (\ s a -> s{_dlDatasets = a}) .
       _Default
@@ -1291,55 +1412,6 @@ instance ToJSON DatasetList where
                   ("datasets" .=) <$> _dlDatasets])
 
 --
--- /See:/ 'tableDataInsertAllRequestRows' smart constructor.
-data TableDataInsertAllRequestRows = TableDataInsertAllRequestRows
-    { _tdiarrJSON     :: !(Maybe JSONObject)
-    , _tdiarrInsertId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TableDataInsertAllRequestRows' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tdiarrJSON'
---
--- * 'tdiarrInsertId'
-tableDataInsertAllRequestRows
-    :: TableDataInsertAllRequestRows
-tableDataInsertAllRequestRows =
-    TableDataInsertAllRequestRows
-    { _tdiarrJSON = Nothing
-    , _tdiarrInsertId = Nothing
-    }
-
--- | [Required] A JSON object that contains a row of data. The object\'s
--- properties and values must match the destination table\'s schema.
-tdiarrJSON :: Lens' TableDataInsertAllRequestRows (Maybe JSONObject)
-tdiarrJSON
-  = lens _tdiarrJSON (\ s a -> s{_tdiarrJSON = a})
-
--- | [Optional] A unique ID for each row. BigQuery uses this property to
--- detect duplicate insertion requests on a best-effort basis.
-tdiarrInsertId :: Lens' TableDataInsertAllRequestRows (Maybe Text)
-tdiarrInsertId
-  = lens _tdiarrInsertId
-      (\ s a -> s{_tdiarrInsertId = a})
-
-instance FromJSON TableDataInsertAllRequestRows where
-        parseJSON
-          = withObject "TableDataInsertAllRequestRows"
-              (\ o ->
-                 TableDataInsertAllRequestRows <$>
-                   (o .:? "json") <*> (o .:? "insertId"))
-
-instance ToJSON TableDataInsertAllRequestRows where
-        toJSON TableDataInsertAllRequestRows{..}
-          = object
-              (catMaybes
-                 [("json" .=) <$> _tdiarrJSON,
-                  ("insertId" .=) <$> _tdiarrInsertId])
-
---
 -- /See:/ 'queryRequest' smart constructor.
 data QueryRequest = QueryRequest
     { _qrUseQueryCache  :: !Bool
@@ -1350,7 +1422,7 @@ data QueryRequest = QueryRequest
     , _qrDryRun         :: !(Maybe Bool)
     , _qrMaxResults     :: !(Maybe Word32)
     , _qrDefaultDataset :: !(Maybe DatasetReference)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueryRequest' with the minimum fields required to make a request.
 --
@@ -1475,7 +1547,7 @@ instance ToJSON QueryRequest where
 -- /See:/ 'jobStatistics4' smart constructor.
 newtype JobStatistics4 = JobStatistics4
     { _jsDestinationURIFileCounts :: Maybe [Int64]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobStatistics4' with the minimum fields required to make a request.
 --
@@ -1517,7 +1589,7 @@ instance ToJSON JobStatistics4 where
 -- /See:/ 'projectReference' smart constructor.
 newtype ProjectReference = ProjectReference
     { _prProjectId :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectReference' with the minimum fields required to make a request.
 --
@@ -1548,13 +1620,184 @@ instance ToJSON ProjectReference where
               (catMaybes [("projectId" .=) <$> _prProjectId])
 
 --
+-- /See:/ 'jobsItem' smart constructor.
+data JobsItem = JobsItem
+    { _jiJobReference  :: !(Maybe JobReference)
+    , _jiStatus        :: !(Maybe JobStatus)
+    , _jiState         :: !(Maybe Text)
+    , _jiUserEmail     :: !(Maybe Text)
+    , _jiKind          :: !Text
+    , _jiErrorResult   :: !(Maybe ErrorProto)
+    , _jiId            :: !(Maybe Text)
+    , _jiStatistics    :: !(Maybe JobStatistics)
+    , _jiConfiguration :: !(Maybe JobConfiguration)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'JobsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jiJobReference'
+--
+-- * 'jiStatus'
+--
+-- * 'jiState'
+--
+-- * 'jiUserEmail'
+--
+-- * 'jiKind'
+--
+-- * 'jiErrorResult'
+--
+-- * 'jiId'
+--
+-- * 'jiStatistics'
+--
+-- * 'jiConfiguration'
+jobsItem
+    :: JobsItem
+jobsItem =
+    JobsItem
+    { _jiJobReference = Nothing
+    , _jiStatus = Nothing
+    , _jiState = Nothing
+    , _jiUserEmail = Nothing
+    , _jiKind = "bigquery#job"
+    , _jiErrorResult = Nothing
+    , _jiId = Nothing
+    , _jiStatistics = Nothing
+    , _jiConfiguration = Nothing
+    }
+
+-- | Job reference uniquely identifying the job.
+jiJobReference :: Lens' JobsItem (Maybe JobReference)
+jiJobReference
+  = lens _jiJobReference
+      (\ s a -> s{_jiJobReference = a})
+
+-- | [Full-projection-only] Describes the state of the job.
+jiStatus :: Lens' JobsItem (Maybe JobStatus)
+jiStatus = lens _jiStatus (\ s a -> s{_jiStatus = a})
+
+-- | Running state of the job. When the state is DONE, errorResult can be
+-- checked to determine whether the job succeeded or failed.
+jiState :: Lens' JobsItem (Maybe Text)
+jiState = lens _jiState (\ s a -> s{_jiState = a})
+
+-- | [Full-projection-only] Email address of the user who ran the job.
+jiUserEmail :: Lens' JobsItem (Maybe Text)
+jiUserEmail
+  = lens _jiUserEmail (\ s a -> s{_jiUserEmail = a})
+
+-- | The resource type.
+jiKind :: Lens' JobsItem Text
+jiKind = lens _jiKind (\ s a -> s{_jiKind = a})
+
+-- | A result object that will be present only if the job has failed.
+jiErrorResult :: Lens' JobsItem (Maybe ErrorProto)
+jiErrorResult
+  = lens _jiErrorResult
+      (\ s a -> s{_jiErrorResult = a})
+
+-- | Unique opaque ID of the job.
+jiId :: Lens' JobsItem (Maybe Text)
+jiId = lens _jiId (\ s a -> s{_jiId = a})
+
+-- | [Output-only] Information about the job, including starting time and
+-- ending time of the job.
+jiStatistics :: Lens' JobsItem (Maybe JobStatistics)
+jiStatistics
+  = lens _jiStatistics (\ s a -> s{_jiStatistics = a})
+
+-- | [Full-projection-only] Specifies the job configuration.
+jiConfiguration :: Lens' JobsItem (Maybe JobConfiguration)
+jiConfiguration
+  = lens _jiConfiguration
+      (\ s a -> s{_jiConfiguration = a})
+
+instance FromJSON JobsItem where
+        parseJSON
+          = withObject "JobsItem"
+              (\ o ->
+                 JobsItem <$>
+                   (o .:? "jobReference") <*> (o .:? "status") <*>
+                     (o .:? "state")
+                     <*> (o .:? "user_email")
+                     <*> (o .:? "kind" .!= "bigquery#job")
+                     <*> (o .:? "errorResult")
+                     <*> (o .:? "id")
+                     <*> (o .:? "statistics")
+                     <*> (o .:? "configuration"))
+
+instance ToJSON JobsItem where
+        toJSON JobsItem{..}
+          = object
+              (catMaybes
+                 [("jobReference" .=) <$> _jiJobReference,
+                  ("status" .=) <$> _jiStatus,
+                  ("state" .=) <$> _jiState,
+                  ("user_email" .=) <$> _jiUserEmail,
+                  Just ("kind" .= _jiKind),
+                  ("errorResult" .=) <$> _jiErrorResult,
+                  ("id" .=) <$> _jiId,
+                  ("statistics" .=) <$> _jiStatistics,
+                  ("configuration" .=) <$> _jiConfiguration])
+
+--
+-- /See:/ 'insertErrorsItem' smart constructor.
+data InsertErrorsItem = InsertErrorsItem
+    { _ieiErrors :: !(Maybe [ErrorProto])
+    , _ieiIndex  :: !(Maybe Word32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InsertErrorsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ieiErrors'
+--
+-- * 'ieiIndex'
+insertErrorsItem
+    :: InsertErrorsItem
+insertErrorsItem =
+    InsertErrorsItem
+    { _ieiErrors = Nothing
+    , _ieiIndex = Nothing
+    }
+
+-- | Error information for the row indicated by the index property.
+ieiErrors :: Lens' InsertErrorsItem [ErrorProto]
+ieiErrors
+  = lens _ieiErrors (\ s a -> s{_ieiErrors = a}) .
+      _Default
+      . _Coerce
+
+-- | The index of the row that error applies to.
+ieiIndex :: Lens' InsertErrorsItem (Maybe Word32)
+ieiIndex = lens _ieiIndex (\ s a -> s{_ieiIndex = a})
+
+instance FromJSON InsertErrorsItem where
+        parseJSON
+          = withObject "InsertErrorsItem"
+              (\ o ->
+                 InsertErrorsItem <$>
+                   (o .:? "errors" .!= mempty) <*> (o .:? "index"))
+
+instance ToJSON InsertErrorsItem where
+        toJSON InsertErrorsItem{..}
+          = object
+              (catMaybes
+                 [("errors" .=) <$> _ieiErrors,
+                  ("index" .=) <$> _ieiIndex])
+
+--
 -- /See:/ 'tableDataInsertAllRequest' smart constructor.
 data TableDataInsertAllRequest = TableDataInsertAllRequest
     { _tdiarKind                :: !Text
     , _tdiarIgnoreUnknownValues :: !(Maybe Bool)
-    , _tdiarRows                :: !(Maybe [TableDataInsertAllRequestRows])
+    , _tdiarRows                :: !(Maybe [TableDataInsertAllRequestRowsItem])
     , _tdiarSkipInvalidRows     :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableDataInsertAllRequest' with the minimum fields required to make a request.
 --
@@ -1591,7 +1834,7 @@ tdiarIgnoreUnknownValues
       (\ s a -> s{_tdiarIgnoreUnknownValues = a})
 
 -- | The rows to insert.
-tdiarRows :: Lens' TableDataInsertAllRequest [TableDataInsertAllRequestRows]
+tdiarRows :: Lens' TableDataInsertAllRequest [TableDataInsertAllRequestRowsItem]
 tdiarRows
   = lens _tdiarRows (\ s a -> s{_tdiarRows = a}) .
       _Default
@@ -1627,86 +1870,6 @@ instance ToJSON TableDataInsertAllRequest where
                   ("skipInvalidRows" .=) <$> _tdiarSkipInvalidRows])
 
 --
--- /See:/ 'projectListProjects' smart constructor.
-data ProjectListProjects = ProjectListProjects
-    { _plpFriendlyName     :: !(Maybe Text)
-    , _plpKind             :: !Text
-    , _plpProjectReference :: !(Maybe ProjectReference)
-    , _plpId               :: !(Maybe Text)
-    , _plpNumericId        :: !(Maybe Word64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ProjectListProjects' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'plpFriendlyName'
---
--- * 'plpKind'
---
--- * 'plpProjectReference'
---
--- * 'plpId'
---
--- * 'plpNumericId'
-projectListProjects
-    :: ProjectListProjects
-projectListProjects =
-    ProjectListProjects
-    { _plpFriendlyName = Nothing
-    , _plpKind = "bigquery#project"
-    , _plpProjectReference = Nothing
-    , _plpId = Nothing
-    , _plpNumericId = Nothing
-    }
-
--- | A descriptive name for this project.
-plpFriendlyName :: Lens' ProjectListProjects (Maybe Text)
-plpFriendlyName
-  = lens _plpFriendlyName
-      (\ s a -> s{_plpFriendlyName = a})
-
--- | The resource type.
-plpKind :: Lens' ProjectListProjects Text
-plpKind = lens _plpKind (\ s a -> s{_plpKind = a})
-
--- | A unique reference to this project.
-plpProjectReference :: Lens' ProjectListProjects (Maybe ProjectReference)
-plpProjectReference
-  = lens _plpProjectReference
-      (\ s a -> s{_plpProjectReference = a})
-
--- | An opaque ID of this project.
-plpId :: Lens' ProjectListProjects (Maybe Text)
-plpId = lens _plpId (\ s a -> s{_plpId = a})
-
--- | The numeric ID of this project.
-plpNumericId :: Lens' ProjectListProjects (Maybe Word64)
-plpNumericId
-  = lens _plpNumericId (\ s a -> s{_plpNumericId = a})
-
-instance FromJSON ProjectListProjects where
-        parseJSON
-          = withObject "ProjectListProjects"
-              (\ o ->
-                 ProjectListProjects <$>
-                   (o .:? "friendlyName") <*>
-                     (o .:? "kind" .!= "bigquery#project")
-                     <*> (o .:? "projectReference")
-                     <*> (o .:? "id")
-                     <*> (o .:? "numericId"))
-
-instance ToJSON ProjectListProjects where
-        toJSON ProjectListProjects{..}
-          = object
-              (catMaybes
-                 [("friendlyName" .=) <$> _plpFriendlyName,
-                  Just ("kind" .= _plpKind),
-                  ("projectReference" .=) <$> _plpProjectReference,
-                  ("id" .=) <$> _plpId,
-                  ("numericId" .=) <$> _plpNumericId])
-
---
 -- /See:/ 'jobConfigurationLoad' smart constructor.
 data JobConfigurationLoad = JobConfigurationLoad
     { _jclSkipLeadingRows     :: !(Maybe Int32)
@@ -1726,7 +1889,7 @@ data JobConfigurationLoad = JobConfigurationLoad
     , _jclSourceURIs          :: !(Maybe [Text])
     , _jclEncoding            :: !(Maybe Text)
     , _jclFieldDelimiter      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobConfigurationLoad' with the minimum fields required to make a request.
 --
@@ -1998,7 +2161,7 @@ instance ToJSON JobConfigurationLoad where
 data DatasetReference = DatasetReference
     { _drDatasetId :: !(Maybe Text)
     , _drProjectId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetReference' with the minimum fields required to make a request.
 --
@@ -2042,136 +2205,10 @@ instance ToJSON DatasetReference where
                   ("projectId" .=) <$> _drProjectId])
 
 --
--- /See:/ 'jobListJobs' smart constructor.
-data JobListJobs = JobListJobs
-    { _jljJobReference  :: !(Maybe JobReference)
-    , _jljStatus        :: !(Maybe JobStatus)
-    , _jljState         :: !(Maybe Text)
-    , _jljUserEmail     :: !(Maybe Text)
-    , _jljKind          :: !Text
-    , _jljErrorResult   :: !(Maybe ErrorProto)
-    , _jljId            :: !(Maybe Text)
-    , _jljStatistics    :: !(Maybe JobStatistics)
-    , _jljConfiguration :: !(Maybe JobConfiguration)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'JobListJobs' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'jljJobReference'
---
--- * 'jljStatus'
---
--- * 'jljState'
---
--- * 'jljUserEmail'
---
--- * 'jljKind'
---
--- * 'jljErrorResult'
---
--- * 'jljId'
---
--- * 'jljStatistics'
---
--- * 'jljConfiguration'
-jobListJobs
-    :: JobListJobs
-jobListJobs =
-    JobListJobs
-    { _jljJobReference = Nothing
-    , _jljStatus = Nothing
-    , _jljState = Nothing
-    , _jljUserEmail = Nothing
-    , _jljKind = "bigquery#job"
-    , _jljErrorResult = Nothing
-    , _jljId = Nothing
-    , _jljStatistics = Nothing
-    , _jljConfiguration = Nothing
-    }
-
--- | Job reference uniquely identifying the job.
-jljJobReference :: Lens' JobListJobs (Maybe JobReference)
-jljJobReference
-  = lens _jljJobReference
-      (\ s a -> s{_jljJobReference = a})
-
--- | [Full-projection-only] Describes the state of the job.
-jljStatus :: Lens' JobListJobs (Maybe JobStatus)
-jljStatus
-  = lens _jljStatus (\ s a -> s{_jljStatus = a})
-
--- | Running state of the job. When the state is DONE, errorResult can be
--- checked to determine whether the job succeeded or failed.
-jljState :: Lens' JobListJobs (Maybe Text)
-jljState = lens _jljState (\ s a -> s{_jljState = a})
-
--- | [Full-projection-only] Email address of the user who ran the job.
-jljUserEmail :: Lens' JobListJobs (Maybe Text)
-jljUserEmail
-  = lens _jljUserEmail (\ s a -> s{_jljUserEmail = a})
-
--- | The resource type.
-jljKind :: Lens' JobListJobs Text
-jljKind = lens _jljKind (\ s a -> s{_jljKind = a})
-
--- | A result object that will be present only if the job has failed.
-jljErrorResult :: Lens' JobListJobs (Maybe ErrorProto)
-jljErrorResult
-  = lens _jljErrorResult
-      (\ s a -> s{_jljErrorResult = a})
-
--- | Unique opaque ID of the job.
-jljId :: Lens' JobListJobs (Maybe Text)
-jljId = lens _jljId (\ s a -> s{_jljId = a})
-
--- | [Output-only] Information about the job, including starting time and
--- ending time of the job.
-jljStatistics :: Lens' JobListJobs (Maybe JobStatistics)
-jljStatistics
-  = lens _jljStatistics
-      (\ s a -> s{_jljStatistics = a})
-
--- | [Full-projection-only] Specifies the job configuration.
-jljConfiguration :: Lens' JobListJobs (Maybe JobConfiguration)
-jljConfiguration
-  = lens _jljConfiguration
-      (\ s a -> s{_jljConfiguration = a})
-
-instance FromJSON JobListJobs where
-        parseJSON
-          = withObject "JobListJobs"
-              (\ o ->
-                 JobListJobs <$>
-                   (o .:? "jobReference") <*> (o .:? "status") <*>
-                     (o .:? "state")
-                     <*> (o .:? "user_email")
-                     <*> (o .:? "kind" .!= "bigquery#job")
-                     <*> (o .:? "errorResult")
-                     <*> (o .:? "id")
-                     <*> (o .:? "statistics")
-                     <*> (o .:? "configuration"))
-
-instance ToJSON JobListJobs where
-        toJSON JobListJobs{..}
-          = object
-              (catMaybes
-                 [("jobReference" .=) <$> _jljJobReference,
-                  ("status" .=) <$> _jljStatus,
-                  ("state" .=) <$> _jljState,
-                  ("user_email" .=) <$> _jljUserEmail,
-                  Just ("kind" .= _jljKind),
-                  ("errorResult" .=) <$> _jljErrorResult,
-                  ("id" .=) <$> _jljId,
-                  ("statistics" .=) <$> _jljStatistics,
-                  ("configuration" .=) <$> _jljConfiguration])
-
---
 -- /See:/ 'tableRow' smart constructor.
 newtype TableRow = TableRow
     { _trF :: Maybe [TableCell]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableRow' with the minimum fields required to make a request.
 --
@@ -2207,7 +2244,7 @@ data Streamingbuffer = Streamingbuffer
     { _sEstimatedBytes  :: !(Maybe Word64)
     , _sOldestEntryTime :: !(Maybe Word64)
     , _sEstimatedRows   :: !(Maybe Word64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Streamingbuffer' with the minimum fields required to make a request.
 --
@@ -2278,7 +2315,7 @@ data Job = Job
     , _jId            :: !(Maybe Text)
     , _jStatistics    :: !(Maybe JobStatistics)
     , _jConfiguration :: !(Maybe JobConfiguration)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
 --
@@ -2394,7 +2431,7 @@ data JobConfigurationLink = JobConfigurationLink
     , _jWriteDisPosition  :: !(Maybe Text)
     , _jCreateDisPosition :: !(Maybe Text)
     , _jSourceURI         :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobConfigurationLink' with the minimum fields required to make a request.
 --
@@ -2483,7 +2520,7 @@ data JobConfiguration = JobConfiguration
     , _jcQuery   :: !(Maybe JobConfigurationQuery)
     , _jcExtract :: !(Maybe JobConfigurationExtract)
     , _jcDryRun  :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobConfiguration' with the minimum fields required to make a request.
 --
@@ -2564,7 +2601,7 @@ instance ToJSON JobConfiguration where
 data JobCancelResponse = JobCancelResponse
     { _jcrKind :: !Text
     , _jcrJob  :: !(Maybe Job)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobCancelResponse' with the minimum fields required to make a request.
 --
@@ -2613,7 +2650,7 @@ data JobConfigurationExtract = JobConfigurationExtract
     , _jceDestinationURIs   :: !(Maybe [Text])
     , _jceDestinationURI    :: !(Maybe Text)
     , _jceFieldDelimiter    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobConfigurationExtract' with the minimum fields required to make a request.
 --
@@ -2726,7 +2763,7 @@ instance ToJSON JobConfigurationExtract where
 -- /See:/ 'jsonObject' smart constructor.
 data JSONObject =
     JSONObject
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JSONObject' with the minimum fields required to make a request.
 --
@@ -2741,31 +2778,56 @@ instance FromJSON JSONObject where
 instance ToJSON JSONObject where
         toJSON = const (Object mempty)
 
--- | [Experimental] If querying an external data source outside of BigQuery,
--- describes the data format, location and other properties of the data
--- source. By defining these properties, the data source can then be
--- queried as if it were a standard BigQuery table.
 --
--- /See:/ 'jobConfigurationQueryTableDefinitions' smart constructor.
-data JobConfigurationQueryTableDefinitions =
-    JobConfigurationQueryTableDefinitions
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'tableDataInsertAllRequestRowsItem' smart constructor.
+data TableDataInsertAllRequestRowsItem = TableDataInsertAllRequestRowsItem
+    { _tdiarriJSON     :: !(Maybe JSONObject)
+    , _tdiarriInsertId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'JobConfigurationQueryTableDefinitions' with the minimum fields required to make a request.
+-- | Creates a value of 'TableDataInsertAllRequestRowsItem' with the minimum fields required to make a request.
 --
-jobConfigurationQueryTableDefinitions
-    :: JobConfigurationQueryTableDefinitions
-jobConfigurationQueryTableDefinitions = JobConfigurationQueryTableDefinitions
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tdiarriJSON'
+--
+-- * 'tdiarriInsertId'
+tableDataInsertAllRequestRowsItem
+    :: TableDataInsertAllRequestRowsItem
+tableDataInsertAllRequestRowsItem =
+    TableDataInsertAllRequestRowsItem
+    { _tdiarriJSON = Nothing
+    , _tdiarriInsertId = Nothing
+    }
 
-instance FromJSON
-         JobConfigurationQueryTableDefinitions where
-        parseJSON
-          = withObject "JobConfigurationQueryTableDefinitions"
-              (\ o -> pure JobConfigurationQueryTableDefinitions)
+-- | [Required] A JSON object that contains a row of data. The object\'s
+-- properties and values must match the destination table\'s schema.
+tdiarriJSON :: Lens' TableDataInsertAllRequestRowsItem (Maybe JSONObject)
+tdiarriJSON
+  = lens _tdiarriJSON (\ s a -> s{_tdiarriJSON = a})
 
-instance ToJSON JobConfigurationQueryTableDefinitions
+-- | [Optional] A unique ID for each row. BigQuery uses this property to
+-- detect duplicate insertion requests on a best-effort basis.
+tdiarriInsertId :: Lens' TableDataInsertAllRequestRowsItem (Maybe Text)
+tdiarriInsertId
+  = lens _tdiarriInsertId
+      (\ s a -> s{_tdiarriInsertId = a})
+
+instance FromJSON TableDataInsertAllRequestRowsItem
          where
-        toJSON = const (Object mempty)
+        parseJSON
+          = withObject "TableDataInsertAllRequestRowsItem"
+              (\ o ->
+                 TableDataInsertAllRequestRowsItem <$>
+                   (o .:? "json") <*> (o .:? "insertId"))
+
+instance ToJSON TableDataInsertAllRequestRowsItem
+         where
+        toJSON TableDataInsertAllRequestRowsItem{..}
+          = object
+              (catMaybes
+                 [("json" .=) <$> _tdiarriJSON,
+                  ("insertId" .=) <$> _tdiarriInsertId])
 
 --
 -- /See:/ 'jobConfigurationQuery' smart constructor.
@@ -2775,14 +2837,14 @@ data JobConfigurationQuery = JobConfigurationQuery
     , _jcqPriority                     :: !(Maybe Text)
     , _jcqUseQueryCache                :: !Bool
     , _jcqPreserveNulls                :: !(Maybe Bool)
-    , _jcqTableDefinitions             :: !(Maybe JobConfigurationQueryTableDefinitions)
+    , _jcqTableDefinitions             :: !(Maybe TableDefinitions)
     , _jcqCreateDisPosition            :: !(Maybe Text)
     , _jcqUserDefinedFunctionResources :: !(Maybe [UserDefinedFunctionResource])
     , _jcqAllowLargeResults            :: !(Maybe Bool)
     , _jcqQuery                        :: !(Maybe Text)
     , _jcqFlattenResults               :: !Bool
     , _jcqDefaultDataset               :: !(Maybe DatasetReference)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobConfigurationQuery' with the minimum fields required to make a request.
 --
@@ -2876,7 +2938,7 @@ jcqPreserveNulls
 -- describes the data format, location and other properties of the data
 -- source. By defining these properties, the data source can then be
 -- queried as if it were a standard BigQuery table.
-jcqTableDefinitions :: Lens' JobConfigurationQuery (Maybe JobConfigurationQueryTableDefinitions)
+jcqTableDefinitions :: Lens' JobConfigurationQuery (Maybe TableDefinitions)
 jcqTableDefinitions
   = lens _jcqTableDefinitions
       (\ s a -> s{_jcqTableDefinitions = a})
@@ -2969,8 +3031,8 @@ data JobList = JobList
     { _jlEtag          :: !(Maybe Text)
     , _jlNextPageToken :: !(Maybe Text)
     , _jlKind          :: !Text
-    , _jlJobs          :: !(Maybe [JobListJobs])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _jlJobs          :: !(Maybe [JobsItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobList' with the minimum fields required to make a request.
 --
@@ -3008,7 +3070,7 @@ jlKind :: Lens' JobList Text
 jlKind = lens _jlKind (\ s a -> s{_jlKind = a})
 
 -- | List of jobs that were requested.
-jlJobs :: Lens' JobList [JobListJobs]
+jlJobs :: Lens' JobList [JobsItem]
 jlJobs
   = lens _jlJobs (\ s a -> s{_jlJobs = a}) . _Default .
       _Coerce
@@ -3034,7 +3096,7 @@ instance ToJSON JobList where
 -- /See:/ 'tableCell' smart constructor.
 newtype TableCell = TableCell
     { _tcV :: Maybe JSONValue
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableCell' with the minimum fields required to make a request.
 --
@@ -3065,7 +3127,7 @@ instance ToJSON TableCell where
 data UserDefinedFunctionResource = UserDefinedFunctionResource
     { _udfrResourceURI :: !(Maybe Text)
     , _udfrInlineCode  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserDefinedFunctionResource' with the minimum fields required to make a request.
 --
@@ -3115,7 +3177,7 @@ instance ToJSON UserDefinedFunctionResource where
 -- /See:/ 'viewDefinition' smart constructor.
 newtype ViewDefinition = ViewDefinition
     { _vdQuery :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ViewDefinition' with the minimum fields required to make a request.
 --
@@ -3149,7 +3211,7 @@ data JobStatistics2 = JobStatistics2
     , _jBillingTier         :: !(Maybe Int32)
     , _jCacheHit            :: !(Maybe Bool)
     , _jTotalBytesBilled    :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobStatistics2' with the minimum fields required to make a request.
 --
@@ -3220,7 +3282,7 @@ data JobStatus = JobStatus
     { _jsState       :: !(Maybe Text)
     , _jsErrorResult :: !(Maybe ErrorProto)
     , _jsErrors      :: !(Maybe [ErrorProto])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobStatus' with the minimum fields required to make a request.
 --
@@ -3280,8 +3342,8 @@ instance ToJSON JobStatus where
 -- /See:/ 'tableDataInsertAllResponse' smart constructor.
 data TableDataInsertAllResponse = TableDataInsertAllResponse
     { _tKind         :: !Text
-    , _tInsertErrors :: !(Maybe [TableDataInsertAllResponseInsertErrors])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _tInsertErrors :: !(Maybe [InsertErrorsItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableDataInsertAllResponse' with the minimum fields required to make a request.
 --
@@ -3303,7 +3365,7 @@ tKind :: Lens' TableDataInsertAllResponse Text
 tKind = lens _tKind (\ s a -> s{_tKind = a})
 
 -- | An array of errors for rows that were not inserted.
-tInsertErrors :: Lens' TableDataInsertAllResponse [TableDataInsertAllResponseInsertErrors]
+tInsertErrors :: Lens' TableDataInsertAllResponse [InsertErrorsItem]
 tInsertErrors
   = lens _tInsertErrors
       (\ s a -> s{_tInsertErrors = a})
@@ -3327,105 +3389,84 @@ instance ToJSON TableDataInsertAllResponse where
                   ("insertErrors" .=) <$> _tInsertErrors])
 
 --
--- /See:/ 'datasetAccess' smart constructor.
-data DatasetAccess = DatasetAccess
-    { _daGroupByEmail :: !(Maybe Text)
-    , _daDomain       :: !(Maybe Text)
-    , _daSpecialGroup :: !(Maybe Text)
-    , _daRole         :: !(Maybe Text)
-    , _daView         :: !(Maybe TableReference)
-    , _daUserByEmail  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'projectsItem' smart constructor.
+data ProjectsItem = ProjectsItem
+    { _piFriendlyName     :: !(Maybe Text)
+    , _piKind             :: !Text
+    , _piProjectReference :: !(Maybe ProjectReference)
+    , _piId               :: !(Maybe Text)
+    , _piNumericId        :: !(Maybe Word64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetAccess' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'daGroupByEmail'
+-- * 'piFriendlyName'
 --
--- * 'daDomain'
+-- * 'piKind'
 --
--- * 'daSpecialGroup'
+-- * 'piProjectReference'
 --
--- * 'daRole'
+-- * 'piId'
 --
--- * 'daView'
---
--- * 'daUserByEmail'
-datasetAccess
-    :: DatasetAccess
-datasetAccess =
-    DatasetAccess
-    { _daGroupByEmail = Nothing
-    , _daDomain = Nothing
-    , _daSpecialGroup = Nothing
-    , _daRole = Nothing
-    , _daView = Nothing
-    , _daUserByEmail = Nothing
+-- * 'piNumericId'
+projectsItem
+    :: ProjectsItem
+projectsItem =
+    ProjectsItem
+    { _piFriendlyName = Nothing
+    , _piKind = "bigquery#project"
+    , _piProjectReference = Nothing
+    , _piId = Nothing
+    , _piNumericId = Nothing
     }
 
--- | [Pick one] An email address of a Google Group to grant access to.
-daGroupByEmail :: Lens' DatasetAccess (Maybe Text)
-daGroupByEmail
-  = lens _daGroupByEmail
-      (\ s a -> s{_daGroupByEmail = a})
+-- | A descriptive name for this project.
+piFriendlyName :: Lens' ProjectsItem (Maybe Text)
+piFriendlyName
+  = lens _piFriendlyName
+      (\ s a -> s{_piFriendlyName = a})
 
--- | [Pick one] A domain to grant access to. Any users signed in with the
--- domain specified will be granted the specified access. Example:
--- \"example.com\".
-daDomain :: Lens' DatasetAccess (Maybe Text)
-daDomain = lens _daDomain (\ s a -> s{_daDomain = a})
+-- | The resource type.
+piKind :: Lens' ProjectsItem Text
+piKind = lens _piKind (\ s a -> s{_piKind = a})
 
--- | [Pick one] A special group to grant access to. Possible values include:
--- projectOwners: Owners of the enclosing project. projectReaders: Readers
--- of the enclosing project. projectWriters: Writers of the enclosing
--- project. allAuthenticatedUsers: All authenticated BigQuery users.
-daSpecialGroup :: Lens' DatasetAccess (Maybe Text)
-daSpecialGroup
-  = lens _daSpecialGroup
-      (\ s a -> s{_daSpecialGroup = a})
+-- | A unique reference to this project.
+piProjectReference :: Lens' ProjectsItem (Maybe ProjectReference)
+piProjectReference
+  = lens _piProjectReference
+      (\ s a -> s{_piProjectReference = a})
 
--- | [Required] Describes the rights granted to the user specified by the
--- other member of the access object. The following string values are
--- supported: READER, WRITER, OWNER.
-daRole :: Lens' DatasetAccess (Maybe Text)
-daRole = lens _daRole (\ s a -> s{_daRole = a})
+-- | An opaque ID of this project.
+piId :: Lens' ProjectsItem (Maybe Text)
+piId = lens _piId (\ s a -> s{_piId = a})
 
--- | [Pick one] A view from a different dataset to grant access to. Queries
--- executed against that view will have read access to tables in this
--- dataset. The role field is not required when this field is set. If that
--- view is updated by any user, access to the view needs to be granted
--- again via an update operation.
-daView :: Lens' DatasetAccess (Maybe TableReference)
-daView = lens _daView (\ s a -> s{_daView = a})
+-- | The numeric ID of this project.
+piNumericId :: Lens' ProjectsItem (Maybe Word64)
+piNumericId
+  = lens _piNumericId (\ s a -> s{_piNumericId = a})
 
--- | [Pick one] An email address of a user to grant access to. For example:
--- fred\'example.com.
-daUserByEmail :: Lens' DatasetAccess (Maybe Text)
-daUserByEmail
-  = lens _daUserByEmail
-      (\ s a -> s{_daUserByEmail = a})
-
-instance FromJSON DatasetAccess where
+instance FromJSON ProjectsItem where
         parseJSON
-          = withObject "DatasetAccess"
+          = withObject "ProjectsItem"
               (\ o ->
-                 DatasetAccess <$>
-                   (o .:? "groupByEmail") <*> (o .:? "domain") <*>
-                     (o .:? "specialGroup")
-                     <*> (o .:? "role")
-                     <*> (o .:? "view")
-                     <*> (o .:? "userByEmail"))
+                 ProjectsItem <$>
+                   (o .:? "friendlyName") <*>
+                     (o .:? "kind" .!= "bigquery#project")
+                     <*> (o .:? "projectReference")
+                     <*> (o .:? "id")
+                     <*> (o .:? "numericId"))
 
-instance ToJSON DatasetAccess where
-        toJSON DatasetAccess{..}
+instance ToJSON ProjectsItem where
+        toJSON ProjectsItem{..}
           = object
               (catMaybes
-                 [("groupByEmail" .=) <$> _daGroupByEmail,
-                  ("domain" .=) <$> _daDomain,
-                  ("specialGroup" .=) <$> _daSpecialGroup,
-                  ("role" .=) <$> _daRole, ("view" .=) <$> _daView,
-                  ("userByEmail" .=) <$> _daUserByEmail])
+                 [("friendlyName" .=) <$> _piFriendlyName,
+                  Just ("kind" .= _piKind),
+                  ("projectReference" .=) <$> _piProjectReference,
+                  ("id" .=) <$> _piId,
+                  ("numericId" .=) <$> _piNumericId])
 
 --
 -- /See:/ 'table' smart constructor.
@@ -3448,7 +3489,7 @@ data Table = Table
     , _tabType                      :: !(Maybe Text)
     , _tabExpirationTime            :: !(Maybe Int64)
     , _tabDescription               :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Table' with the minimum fields required to make a request.
 --
@@ -3672,7 +3713,7 @@ data ErrorProto = ErrorProto
     , _epLocation  :: !(Maybe Text)
     , _epReason    :: !(Maybe Text)
     , _epMessage   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ErrorProto' with the minimum fields required to make a request.
 --
@@ -3742,7 +3783,7 @@ data CSVOptions = CSVOptions
     , _coQuote               :: !Text
     , _coEncoding            :: !(Maybe Text)
     , _coFieldDelimiter      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CSVOptions' with the minimum fields required to make a request.
 --
@@ -3855,7 +3896,7 @@ data JobStatistics3 = JobStatistics3
     , _jsOutputRows     :: !(Maybe Int64)
     , _jsOutputBytes    :: !(Maybe Int64)
     , _jsInputFileBytes :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobStatistics3' with the minimum fields required to make a request.
 --
@@ -3921,77 +3962,6 @@ instance ToJSON JobStatistics3 where
                   ("inputFileBytes" .=) <$> _jsInputFileBytes])
 
 --
--- /See:/ 'datasetListDatasets' smart constructor.
-data DatasetListDatasets = DatasetListDatasets
-    { _dldFriendlyName     :: !(Maybe Text)
-    , _dldKind             :: !Text
-    , _dldDatasetReference :: !(Maybe DatasetReference)
-    , _dldId               :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DatasetListDatasets' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'dldFriendlyName'
---
--- * 'dldKind'
---
--- * 'dldDatasetReference'
---
--- * 'dldId'
-datasetListDatasets
-    :: DatasetListDatasets
-datasetListDatasets =
-    DatasetListDatasets
-    { _dldFriendlyName = Nothing
-    , _dldKind = "bigquery#dataset"
-    , _dldDatasetReference = Nothing
-    , _dldId = Nothing
-    }
-
--- | A descriptive name for the dataset, if one exists.
-dldFriendlyName :: Lens' DatasetListDatasets (Maybe Text)
-dldFriendlyName
-  = lens _dldFriendlyName
-      (\ s a -> s{_dldFriendlyName = a})
-
--- | The resource type. This property always returns the value
--- \"bigquery#dataset\".
-dldKind :: Lens' DatasetListDatasets Text
-dldKind = lens _dldKind (\ s a -> s{_dldKind = a})
-
--- | The dataset reference. Use this property to access specific parts of the
--- dataset\'s ID, such as project ID or dataset ID.
-dldDatasetReference :: Lens' DatasetListDatasets (Maybe DatasetReference)
-dldDatasetReference
-  = lens _dldDatasetReference
-      (\ s a -> s{_dldDatasetReference = a})
-
--- | The fully-qualified, unique, opaque ID of the dataset.
-dldId :: Lens' DatasetListDatasets (Maybe Text)
-dldId = lens _dldId (\ s a -> s{_dldId = a})
-
-instance FromJSON DatasetListDatasets where
-        parseJSON
-          = withObject "DatasetListDatasets"
-              (\ o ->
-                 DatasetListDatasets <$>
-                   (o .:? "friendlyName") <*>
-                     (o .:? "kind" .!= "bigquery#dataset")
-                     <*> (o .:? "datasetReference")
-                     <*> (o .:? "id"))
-
-instance ToJSON DatasetListDatasets where
-        toJSON DatasetListDatasets{..}
-          = object
-              (catMaybes
-                 [("friendlyName" .=) <$> _dldFriendlyName,
-                  Just ("kind" .= _dldKind),
-                  ("datasetReference" .=) <$> _dldDatasetReference,
-                  ("id" .=) <$> _dldId])
-
---
 -- /See:/ 'queryResponse' smart constructor.
 data QueryResponse = QueryResponse
     { _qJobReference        :: !(Maybe JobReference)
@@ -4004,7 +3974,7 @@ data QueryResponse = QueryResponse
     , _qErrors              :: !(Maybe [ErrorProto])
     , _qJobComplete         :: !(Maybe Bool)
     , _qCacheHit            :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueryResponse' with the minimum fields required to make a request.
 --
@@ -4143,78 +4113,102 @@ instance ToJSON QueryResponse where
                   ("cacheHit" .=) <$> _qCacheHit])
 
 --
--- /See:/ 'tableListTables' smart constructor.
-data TableListTables = TableListTables
-    { _tltTableReference :: !(Maybe TableReference)
-    , _tltFriendlyName   :: !(Maybe Text)
-    , _tltKind           :: !Text
-    , _tltId             :: !(Maybe Text)
-    , _tltType           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'accessItem' smart constructor.
+data AccessItem = AccessItem
+    { _aiGroupByEmail :: !(Maybe Text)
+    , _aiDomain       :: !(Maybe Text)
+    , _aiSpecialGroup :: !(Maybe Text)
+    , _aiRole         :: !(Maybe Text)
+    , _aiView         :: !(Maybe TableReference)
+    , _aiUserByEmail  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TableListTables' with the minimum fields required to make a request.
+-- | Creates a value of 'AccessItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tltTableReference'
+-- * 'aiGroupByEmail'
 --
--- * 'tltFriendlyName'
+-- * 'aiDomain'
 --
--- * 'tltKind'
+-- * 'aiSpecialGroup'
 --
--- * 'tltId'
+-- * 'aiRole'
 --
--- * 'tltType'
-tableListTables
-    :: TableListTables
-tableListTables =
-    TableListTables
-    { _tltTableReference = Nothing
-    , _tltFriendlyName = Nothing
-    , _tltKind = "bigquery#table"
-    , _tltId = Nothing
-    , _tltType = Nothing
+-- * 'aiView'
+--
+-- * 'aiUserByEmail'
+accessItem
+    :: AccessItem
+accessItem =
+    AccessItem
+    { _aiGroupByEmail = Nothing
+    , _aiDomain = Nothing
+    , _aiSpecialGroup = Nothing
+    , _aiRole = Nothing
+    , _aiView = Nothing
+    , _aiUserByEmail = Nothing
     }
 
--- | A reference uniquely identifying the table.
-tltTableReference :: Lens' TableListTables (Maybe TableReference)
-tltTableReference
-  = lens _tltTableReference
-      (\ s a -> s{_tltTableReference = a})
+-- | [Pick one] An email address of a Google Group to grant access to.
+aiGroupByEmail :: Lens' AccessItem (Maybe Text)
+aiGroupByEmail
+  = lens _aiGroupByEmail
+      (\ s a -> s{_aiGroupByEmail = a})
 
--- | The user-friendly name for this table.
-tltFriendlyName :: Lens' TableListTables (Maybe Text)
-tltFriendlyName
-  = lens _tltFriendlyName
-      (\ s a -> s{_tltFriendlyName = a})
+-- | [Pick one] A domain to grant access to. Any users signed in with the
+-- domain specified will be granted the specified access. Example:
+-- \"example.com\".
+aiDomain :: Lens' AccessItem (Maybe Text)
+aiDomain = lens _aiDomain (\ s a -> s{_aiDomain = a})
 
--- | The resource type.
-tltKind :: Lens' TableListTables Text
-tltKind = lens _tltKind (\ s a -> s{_tltKind = a})
+-- | [Pick one] A special group to grant access to. Possible values include:
+-- projectOwners: Owners of the enclosing project. projectReaders: Readers
+-- of the enclosing project. projectWriters: Writers of the enclosing
+-- project. allAuthenticatedUsers: All authenticated BigQuery users.
+aiSpecialGroup :: Lens' AccessItem (Maybe Text)
+aiSpecialGroup
+  = lens _aiSpecialGroup
+      (\ s a -> s{_aiSpecialGroup = a})
 
--- | An opaque ID of the table
-tltId :: Lens' TableListTables (Maybe Text)
-tltId = lens _tltId (\ s a -> s{_tltId = a})
+-- | [Required] Describes the rights granted to the user specified by the
+-- other member of the access object. The following string values are
+-- supported: READER, WRITER, OWNER.
+aiRole :: Lens' AccessItem (Maybe Text)
+aiRole = lens _aiRole (\ s a -> s{_aiRole = a})
 
--- | The type of table. Possible values are: TABLE, VIEW.
-tltType :: Lens' TableListTables (Maybe Text)
-tltType = lens _tltType (\ s a -> s{_tltType = a})
+-- | [Pick one] A view from a different dataset to grant access to. Queries
+-- executed against that view will have read access to tables in this
+-- dataset. The role field is not required when this field is set. If that
+-- view is updated by any user, access to the view needs to be granted
+-- again via an update operation.
+aiView :: Lens' AccessItem (Maybe TableReference)
+aiView = lens _aiView (\ s a -> s{_aiView = a})
 
-instance FromJSON TableListTables where
+-- | [Pick one] An email address of a user to grant access to. For example:
+-- fred\'example.com.
+aiUserByEmail :: Lens' AccessItem (Maybe Text)
+aiUserByEmail
+  = lens _aiUserByEmail
+      (\ s a -> s{_aiUserByEmail = a})
+
+instance FromJSON AccessItem where
         parseJSON
-          = withObject "TableListTables"
+          = withObject "AccessItem"
               (\ o ->
-                 TableListTables <$>
-                   (o .:? "tableReference") <*> (o .:? "friendlyName")
-                     <*> (o .:? "kind" .!= "bigquery#table")
-                     <*> (o .:? "id")
-                     <*> (o .:? "type"))
+                 AccessItem <$>
+                   (o .:? "groupByEmail") <*> (o .:? "domain") <*>
+                     (o .:? "specialGroup")
+                     <*> (o .:? "role")
+                     <*> (o .:? "view")
+                     <*> (o .:? "userByEmail"))
 
-instance ToJSON TableListTables where
-        toJSON TableListTables{..}
+instance ToJSON AccessItem where
+        toJSON AccessItem{..}
           = object
               (catMaybes
-                 [("tableReference" .=) <$> _tltTableReference,
-                  ("friendlyName" .=) <$> _tltFriendlyName,
-                  Just ("kind" .= _tltKind), ("id" .=) <$> _tltId,
-                  ("type" .=) <$> _tltType])
+                 [("groupByEmail" .=) <$> _aiGroupByEmail,
+                  ("domain" .=) <$> _aiDomain,
+                  ("specialGroup" .=) <$> _aiSpecialGroup,
+                  ("role" .=) <$> _aiRole, ("view" .=) <$> _aiView,
+                  ("userByEmail" .=) <$> _aiUserByEmail])

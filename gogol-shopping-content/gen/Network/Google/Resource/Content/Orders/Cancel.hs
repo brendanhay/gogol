@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Content.Orders.Cancel
     , ocMerchantId
     , ocPrettyPrint
     , ocUserIP
+    , ocPayload
     , ocKey
-    , ocOrdersCancelRequest
     , ocOAuthToken
     , ocOrderId
     , ocFields
@@ -65,16 +66,16 @@ type OrdersCancelResource =
 --
 -- /See:/ 'ordersCancel'' smart constructor.
 data OrdersCancel' = OrdersCancel'
-    { _ocQuotaUser           :: !(Maybe Text)
-    , _ocMerchantId          :: !Word64
-    , _ocPrettyPrint         :: !Bool
-    , _ocUserIP              :: !(Maybe Text)
-    , _ocKey                 :: !(Maybe Key)
-    , _ocOrdersCancelRequest :: !OrdersCancelRequest
-    , _ocOAuthToken          :: !(Maybe OAuthToken)
-    , _ocOrderId             :: !Text
-    , _ocFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ocQuotaUser   :: !(Maybe Text)
+    , _ocMerchantId  :: !Word64
+    , _ocPrettyPrint :: !Bool
+    , _ocUserIP      :: !(Maybe Text)
+    , _ocPayload     :: !OrdersCancelRequest
+    , _ocKey         :: !(Maybe Key)
+    , _ocOAuthToken  :: !(Maybe OAuthToken)
+    , _ocOrderId     :: !Text
+    , _ocFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCancel'' with the minimum fields required to make a request.
 --
@@ -88,9 +89,9 @@ data OrdersCancel' = OrdersCancel'
 --
 -- * 'ocUserIP'
 --
--- * 'ocKey'
+-- * 'ocPayload'
 --
--- * 'ocOrdersCancelRequest'
+-- * 'ocKey'
 --
 -- * 'ocOAuthToken'
 --
@@ -99,17 +100,17 @@ data OrdersCancel' = OrdersCancel'
 -- * 'ocFields'
 ordersCancel'
     :: Word64 -- ^ 'merchantId'
-    -> OrdersCancelRequest -- ^ 'OrdersCancelRequest'
+    -> OrdersCancelRequest -- ^ 'payload'
     -> Text -- ^ 'orderId'
     -> OrdersCancel'
-ordersCancel' pOcMerchantId_ pOcOrdersCancelRequest_ pOcOrderId_ =
+ordersCancel' pOcMerchantId_ pOcPayload_ pOcOrderId_ =
     OrdersCancel'
     { _ocQuotaUser = Nothing
     , _ocMerchantId = pOcMerchantId_
     , _ocPrettyPrint = True
     , _ocUserIP = Nothing
+    , _ocPayload = pOcPayload_
     , _ocKey = Nothing
-    , _ocOrdersCancelRequest = pOcOrdersCancelRequest_
     , _ocOAuthToken = Nothing
     , _ocOrderId = pOcOrderId_
     , _ocFields = Nothing
@@ -138,17 +139,16 @@ ocPrettyPrint
 ocUserIP :: Lens' OrdersCancel' (Maybe Text)
 ocUserIP = lens _ocUserIP (\ s a -> s{_ocUserIP = a})
 
+-- | Multipart request metadata.
+ocPayload :: Lens' OrdersCancel' OrdersCancelRequest
+ocPayload
+  = lens _ocPayload (\ s a -> s{_ocPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 ocKey :: Lens' OrdersCancel' (Maybe Key)
 ocKey = lens _ocKey (\ s a -> s{_ocKey = a})
-
--- | Multipart request metadata.
-ocOrdersCancelRequest :: Lens' OrdersCancel' OrdersCancelRequest
-ocOrdersCancelRequest
-  = lens _ocOrdersCancelRequest
-      (\ s a -> s{_ocOrdersCancelRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 ocOAuthToken :: Lens' OrdersCancel' (Maybe OAuthToken)
@@ -179,7 +179,7 @@ instance GoogleRequest OrdersCancel' where
               _ocKey
               _ocOAuthToken
               (Just AltJSON)
-              _ocOrdersCancelRequest
+              _ocPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrdersCancelResource)

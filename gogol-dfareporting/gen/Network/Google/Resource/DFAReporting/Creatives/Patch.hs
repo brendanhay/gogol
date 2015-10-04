@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.DFAReporting.Creatives.Patch
     , cppQuotaUser
     , cppPrettyPrint
     , cppUserIP
-    , cppCreative
     , cppProfileId
+    , cppPayload
     , cppKey
     , cppId
     , cppOAuthToken
@@ -67,13 +68,13 @@ data CreativesPatch' = CreativesPatch'
     { _cppQuotaUser   :: !(Maybe Text)
     , _cppPrettyPrint :: !Bool
     , _cppUserIP      :: !(Maybe Text)
-    , _cppCreative    :: !Creative
     , _cppProfileId   :: !Int64
+    , _cppPayload     :: !Creative
     , _cppKey         :: !(Maybe Key)
     , _cppId          :: !Int64
     , _cppOAuthToken  :: !(Maybe OAuthToken)
     , _cppFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesPatch'' with the minimum fields required to make a request.
 --
@@ -85,9 +86,9 @@ data CreativesPatch' = CreativesPatch'
 --
 -- * 'cppUserIP'
 --
--- * 'cppCreative'
---
 -- * 'cppProfileId'
+--
+-- * 'cppPayload'
 --
 -- * 'cppKey'
 --
@@ -97,17 +98,17 @@ data CreativesPatch' = CreativesPatch'
 --
 -- * 'cppFields'
 creativesPatch'
-    :: Creative -- ^ 'Creative'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> Creative -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> CreativesPatch'
-creativesPatch' pCppCreative_ pCppProfileId_ pCppId_ =
+creativesPatch' pCppProfileId_ pCppPayload_ pCppId_ =
     CreativesPatch'
     { _cppQuotaUser = Nothing
     , _cppPrettyPrint = True
     , _cppUserIP = Nothing
-    , _cppCreative = pCppCreative_
     , _cppProfileId = pCppProfileId_
+    , _cppPayload = pCppPayload_
     , _cppKey = Nothing
     , _cppId = pCppId_
     , _cppOAuthToken = Nothing
@@ -133,15 +134,15 @@ cppUserIP :: Lens' CreativesPatch' (Maybe Text)
 cppUserIP
   = lens _cppUserIP (\ s a -> s{_cppUserIP = a})
 
--- | Multipart request metadata.
-cppCreative :: Lens' CreativesPatch' Creative
-cppCreative
-  = lens _cppCreative (\ s a -> s{_cppCreative = a})
-
 -- | User profile ID associated with this request.
 cppProfileId :: Lens' CreativesPatch' Int64
 cppProfileId
   = lens _cppProfileId (\ s a -> s{_cppProfileId = a})
+
+-- | Multipart request metadata.
+cppPayload :: Lens' CreativesPatch' Creative
+cppPayload
+  = lens _cppPayload (\ s a -> s{_cppPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -179,7 +180,7 @@ instance GoogleRequest CreativesPatch' where
               _cppKey
               _cppOAuthToken
               (Just AltJSON)
-              _cppCreative
+              _cppPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativesPatchResource)

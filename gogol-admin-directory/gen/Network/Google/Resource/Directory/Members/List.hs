@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,9 +52,9 @@ type MembersListResource =
      "groups" :>
        Capture "groupKey" Text :>
          "members" :>
-           QueryParam "maxResults" Int32 :>
+           QueryParam "roles" Text :>
              QueryParam "pageToken" Text :>
-               QueryParam "roles" Text :>
+               QueryParam "maxResults" Int32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -76,7 +77,7 @@ data MembersList' = MembersList'
     , _mlOAuthToken  :: !(Maybe OAuthToken)
     , _mlMaxResults  :: !(Maybe Int32)
     , _mlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MembersList'' with the minimum fields required to make a request.
 --
@@ -178,7 +179,7 @@ instance GoogleRequest MembersList' where
         type Rs MembersList' = Members
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u MembersList'{..}
-          = go _mlMaxResults _mlPageToken _mlRoles _mlGroupKey
+          = go _mlGroupKey _mlRoles _mlPageToken _mlMaxResults
               _mlQuotaUser
               (Just _mlPrettyPrint)
               _mlUserIP

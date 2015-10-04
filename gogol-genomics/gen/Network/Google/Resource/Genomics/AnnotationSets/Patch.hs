@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,8 +38,8 @@ module Network.Google.Resource.Genomics.AnnotationSets.Patch
     , aspPrettyPrint
     , aspAnnotationSetId
     , aspUserIP
+    , aspPayload
     , aspKey
-    , aspAnnotationSet
     , aspOAuthToken
     , aspFields
     ) where
@@ -72,11 +73,11 @@ data AnnotationSetsPatch' = AnnotationSetsPatch'
     , _aspPrettyPrint     :: !Bool
     , _aspAnnotationSetId :: !Text
     , _aspUserIP          :: !(Maybe Text)
+    , _aspPayload         :: !AnnotationSet
     , _aspKey             :: !(Maybe Key)
-    , _aspAnnotationSet   :: !AnnotationSet
     , _aspOAuthToken      :: !(Maybe OAuthToken)
     , _aspFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSetsPatch'' with the minimum fields required to make a request.
 --
@@ -90,25 +91,25 @@ data AnnotationSetsPatch' = AnnotationSetsPatch'
 --
 -- * 'aspUserIP'
 --
--- * 'aspKey'
+-- * 'aspPayload'
 --
--- * 'aspAnnotationSet'
+-- * 'aspKey'
 --
 -- * 'aspOAuthToken'
 --
 -- * 'aspFields'
 annotationSetsPatch'
     :: Text -- ^ 'annotationSetId'
-    -> AnnotationSet -- ^ 'AnnotationSet'
+    -> AnnotationSet -- ^ 'payload'
     -> AnnotationSetsPatch'
-annotationSetsPatch' pAspAnnotationSetId_ pAspAnnotationSet_ =
+annotationSetsPatch' pAspAnnotationSetId_ pAspPayload_ =
     AnnotationSetsPatch'
     { _aspQuotaUser = Nothing
     , _aspPrettyPrint = True
     , _aspAnnotationSetId = pAspAnnotationSetId_
     , _aspUserIP = Nothing
+    , _aspPayload = pAspPayload_
     , _aspKey = Nothing
-    , _aspAnnotationSet = pAspAnnotationSet_
     , _aspOAuthToken = Nothing
     , _aspFields = Nothing
     }
@@ -138,17 +139,16 @@ aspUserIP :: Lens' AnnotationSetsPatch' (Maybe Text)
 aspUserIP
   = lens _aspUserIP (\ s a -> s{_aspUserIP = a})
 
+-- | Multipart request metadata.
+aspPayload :: Lens' AnnotationSetsPatch' AnnotationSet
+aspPayload
+  = lens _aspPayload (\ s a -> s{_aspPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 aspKey :: Lens' AnnotationSetsPatch' (Maybe Key)
 aspKey = lens _aspKey (\ s a -> s{_aspKey = a})
-
--- | Multipart request metadata.
-aspAnnotationSet :: Lens' AnnotationSetsPatch' AnnotationSet
-aspAnnotationSet
-  = lens _aspAnnotationSet
-      (\ s a -> s{_aspAnnotationSet = a})
 
 -- | OAuth 2.0 token for the current user.
 aspOAuthToken :: Lens' AnnotationSetsPatch' (Maybe OAuthToken)
@@ -176,7 +176,7 @@ instance GoogleRequest AnnotationSetsPatch' where
               _aspKey
               _aspOAuthToken
               (Just AltJSON)
-              _aspAnnotationSet
+              _aspPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationSetsPatchResource)

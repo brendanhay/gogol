@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -72,7 +73,7 @@ data RastersFilesInsert' = RastersFilesInsert'
     , _rfiOAuthToken  :: !(Maybe OAuthToken)
     , _rfiFilename    :: !Text
     , _rfiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersFilesInsert'' with the minimum fields required to make a request.
 --
@@ -169,14 +170,14 @@ instance GoogleRequest RastersFilesInsert' where
         type Rs RastersFilesInsert' = ()
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u RastersFilesInsert'{..}
-          = go _rfiMedia _rfiId (Just _rfiFilename)
-              _rfiQuotaUser
+          = go _rfiId (Just _rfiFilename) _rfiQuotaUser
               (Just _rfiPrettyPrint)
               _rfiUserIP
               _rfiFields
               _rfiKey
               _rfiOAuthToken
               (Just AltJSON)
+              _rfiMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RastersFilesInsertResource)

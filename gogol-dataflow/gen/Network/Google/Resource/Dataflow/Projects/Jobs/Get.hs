@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -59,13 +60,13 @@ type ProjectsJobsGetResource =
            "jobs" :>
              Capture "jobId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
-                             QueryParam "view" Text :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "view" Text :>
+                             QueryParam "callback" Text :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
@@ -93,7 +94,7 @@ data ProjectsJobsGet' = ProjectsJobsGet'
     , _pjgOAuthToken     :: !(Maybe OAuthToken)
     , _pjgFields         :: !(Maybe Text)
     , _pjgCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsJobsGet'' with the minimum fields required to make a request.
 --
@@ -239,14 +240,14 @@ instance GoogleRequest ProjectsJobsGet' where
         type Rs ProjectsJobsGet' = Job
         request = requestWithRoute defReq dataflowURL
         requestWithRoute r u ProjectsJobsGet'{..}
-          = go _pjgXgafv _pjgAccessToken _pjgBearerToken
-              _pjgCallback
-              (Just _pjgPp)
-              _pjgUploadType
+          = go _pjgProjectId _pjgJobId _pjgXgafv
               _pjgUploadProtocol
+              (Just _pjgPp)
+              _pjgAccessToken
+              _pjgUploadType
+              _pjgBearerToken
               _pjgView
-              _pjgProjectId
-              _pjgJobId
+              _pjgCallback
               _pjgQuotaUser
               (Just _pjgPrettyPrint)
               _pjgFields

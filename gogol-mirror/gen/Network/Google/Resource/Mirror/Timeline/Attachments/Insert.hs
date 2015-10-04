@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -69,7 +70,7 @@ data TimelineAttachmentsInsert' = TimelineAttachmentsInsert'
     , _taiKey         :: !(Maybe Key)
     , _taiOAuthToken  :: !(Maybe OAuthToken)
     , _taiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineAttachmentsInsert'' with the minimum fields required to make a request.
 --
@@ -159,13 +160,13 @@ instance GoogleRequest TimelineAttachmentsInsert'
         type Rs TimelineAttachmentsInsert' = Attachment
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelineAttachmentsInsert'{..}
-          = go _taiMedia _taiItemId _taiQuotaUser
-              (Just _taiPrettyPrint)
+          = go _taiItemId _taiQuotaUser (Just _taiPrettyPrint)
               _taiUserIP
               _taiFields
               _taiKey
               _taiOAuthToken
               (Just AltJSON)
+              _taiMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TimelineAttachmentsInsertResource)

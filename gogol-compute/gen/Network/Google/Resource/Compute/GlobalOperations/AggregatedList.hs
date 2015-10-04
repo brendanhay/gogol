@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,8 +53,8 @@ type GlobalOperationsAggregatedListResource =
        "aggregated" :>
          "operations" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data GlobalOperationsAggregatedList' = GlobalOperationsAggregatedList'
     , _goalOAuthToken  :: !(Maybe OAuthToken)
     , _goalMaxResults  :: !Word32
     , _goalFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalOperationsAggregatedList'' with the minimum fields required to make a request.
 --
@@ -202,9 +203,8 @@ instance GoogleRequest
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
           GlobalOperationsAggregatedList'{..}
-          = go _goalFilter (Just _goalMaxResults)
-              _goalPageToken
-              _goalProject
+          = go _goalProject _goalFilter _goalPageToken
+              (Just _goalMaxResults)
               _goalQuotaUser
               (Just _goalPrettyPrint)
               _goalUserIP

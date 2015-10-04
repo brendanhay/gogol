@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,13 +54,13 @@ type URLCrawlErrorscountsQueryResource =
        Capture "siteUrl" Text :>
          "urlCrawlErrorsCounts" :>
            "query" :>
-             QueryParam "category"
-               WebmastersURLCrawlErrorscountsQueryCategory
+             QueryParam "platform"
+               WebmastersURLCrawlErrorscountsQueryPlatform
                :>
-               QueryParam "latestCountsOnly" Bool :>
-                 QueryParam "platform"
-                   WebmastersURLCrawlErrorscountsQueryPlatform
-                   :>
+               QueryParam "category"
+                 WebmastersURLCrawlErrorscountsQueryCategory
+                 :>
+                 QueryParam "latestCountsOnly" Bool :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -84,7 +85,7 @@ data URLCrawlErrorscountsQuery' = URLCrawlErrorscountsQuery'
     , _uceqLatestCountsOnly :: !Bool
     , _uceqOAuthToken       :: !(Maybe OAuthToken)
     , _uceqFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLCrawlErrorscountsQuery'' with the minimum fields required to make a request.
 --
@@ -197,9 +198,8 @@ instance GoogleRequest URLCrawlErrorscountsQuery'
              URLCrawlErrorsCountsQueryResponse
         request = requestWithRoute defReq webmasterToolsURL
         requestWithRoute r u URLCrawlErrorscountsQuery'{..}
-          = go _uceqCategory (Just _uceqLatestCountsOnly)
-              _uceqPlatform
-              _uceqSiteURL
+          = go _uceqSiteURL _uceqPlatform _uceqCategory
+              (Just _uceqLatestCountsOnly)
               _uceqQuotaUser
               (Just _uceqPrettyPrint)
               _uceqUserIP

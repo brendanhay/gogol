@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -31,11 +32,11 @@ module Network.Google.Resource.Calendar.Events.Import
     , EventsImport'
 
     -- * Request Lenses
-    , eEvent
     , eQuotaUser
     , eCalendarId
     , ePrettyPrint
     , eUserIP
+    , ePayload
     , eKey
     , eOAuthToken
     , eSupportsAttachments
@@ -67,22 +68,20 @@ type EventsImportResource =
 --
 -- /See:/ 'eventsImport'' smart constructor.
 data EventsImport' = EventsImport'
-    { _eEvent               :: !Event
-    , _eQuotaUser           :: !(Maybe Text)
+    { _eQuotaUser           :: !(Maybe Text)
     , _eCalendarId          :: !Text
     , _ePrettyPrint         :: !Bool
     , _eUserIP              :: !(Maybe Text)
+    , _ePayload             :: !Event
     , _eKey                 :: !(Maybe Key)
     , _eOAuthToken          :: !(Maybe OAuthToken)
     , _eSupportsAttachments :: !(Maybe Bool)
     , _eFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsImport'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'eEvent'
 --
 -- * 'eQuotaUser'
 --
@@ -92,6 +91,8 @@ data EventsImport' = EventsImport'
 --
 -- * 'eUserIP'
 --
+-- * 'ePayload'
+--
 -- * 'eKey'
 --
 -- * 'eOAuthToken'
@@ -100,25 +101,21 @@ data EventsImport' = EventsImport'
 --
 -- * 'eFields'
 eventsImport'
-    :: Event -- ^ 'Event'
-    -> Text -- ^ 'calendarId'
+    :: Text -- ^ 'calendarId'
+    -> Event -- ^ 'payload'
     -> EventsImport'
-eventsImport' pEEvent_ pECalendarId_ =
+eventsImport' pECalendarId_ pEPayload_ =
     EventsImport'
-    { _eEvent = pEEvent_
-    , _eQuotaUser = Nothing
+    { _eQuotaUser = Nothing
     , _eCalendarId = pECalendarId_
     , _ePrettyPrint = True
     , _eUserIP = Nothing
+    , _ePayload = pEPayload_
     , _eKey = Nothing
     , _eOAuthToken = Nothing
     , _eSupportsAttachments = Nothing
     , _eFields = Nothing
     }
-
--- | Multipart request metadata.
-eEvent :: Lens' EventsImport' Event
-eEvent = lens _eEvent (\ s a -> s{_eEvent = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -143,6 +140,10 @@ ePrettyPrint
 -- want to enforce per-user limits.
 eUserIP :: Lens' EventsImport' (Maybe Text)
 eUserIP = lens _eUserIP (\ s a -> s{_eUserIP = a})
+
+-- | Multipart request metadata.
+ePayload :: Lens' EventsImport' Event
+ePayload = lens _ePayload (\ s a -> s{_ePayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -174,14 +175,14 @@ instance GoogleRequest EventsImport' where
         type Rs EventsImport' = Event
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsImport'{..}
-          = go _eSupportsAttachments _eCalendarId _eQuotaUser
+          = go _eCalendarId _eSupportsAttachments _eQuotaUser
               (Just _ePrettyPrint)
               _eUserIP
               _eFields
               _eKey
               _eOAuthToken
               (Just AltJSON)
-              _eEvent
+              _ePayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsImportResource)

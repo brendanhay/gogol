@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.DFAReporting.Ads.Update
     -- * Request Lenses
     , aQuotaUser
     , aPrettyPrint
-    , aAd
     , aUserIP
     , aProfileId
+    , aPayload
     , aKey
     , aOAuthToken
     , aFields
@@ -64,13 +65,13 @@ type AdsUpdateResource =
 data AdsUpdate' = AdsUpdate'
     { _aQuotaUser   :: !(Maybe Text)
     , _aPrettyPrint :: !Bool
-    , _aAd          :: !Ad
     , _aUserIP      :: !(Maybe Text)
     , _aProfileId   :: !Int64
+    , _aPayload     :: !Ad
     , _aKey         :: !(Maybe Key)
     , _aOAuthToken  :: !(Maybe OAuthToken)
     , _aFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdsUpdate'' with the minimum fields required to make a request.
 --
@@ -80,11 +81,11 @@ data AdsUpdate' = AdsUpdate'
 --
 -- * 'aPrettyPrint'
 --
--- * 'aAd'
---
 -- * 'aUserIP'
 --
 -- * 'aProfileId'
+--
+-- * 'aPayload'
 --
 -- * 'aKey'
 --
@@ -92,16 +93,16 @@ data AdsUpdate' = AdsUpdate'
 --
 -- * 'aFields'
 adsUpdate'
-    :: Ad -- ^ 'Ad'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> Ad -- ^ 'payload'
     -> AdsUpdate'
-adsUpdate' pAAd_ pAProfileId_ =
+adsUpdate' pAProfileId_ pAPayload_ =
     AdsUpdate'
     { _aQuotaUser = Nothing
     , _aPrettyPrint = True
-    , _aAd = pAAd_
     , _aUserIP = Nothing
     , _aProfileId = pAProfileId_
+    , _aPayload = pAPayload_
     , _aKey = Nothing
     , _aOAuthToken = Nothing
     , _aFields = Nothing
@@ -119,10 +120,6 @@ aPrettyPrint :: Lens' AdsUpdate' Bool
 aPrettyPrint
   = lens _aPrettyPrint (\ s a -> s{_aPrettyPrint = a})
 
--- | Multipart request metadata.
-aAd :: Lens' AdsUpdate' Ad
-aAd = lens _aAd (\ s a -> s{_aAd = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 aUserIP :: Lens' AdsUpdate' (Maybe Text)
@@ -132,6 +129,10 @@ aUserIP = lens _aUserIP (\ s a -> s{_aUserIP = a})
 aProfileId :: Lens' AdsUpdate' Int64
 aProfileId
   = lens _aProfileId (\ s a -> s{_aProfileId = a})
+
+-- | Multipart request metadata.
+aPayload :: Lens' AdsUpdate' Ad
+aPayload = lens _aPayload (\ s a -> s{_aPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -162,7 +163,7 @@ instance GoogleRequest AdsUpdate' where
               _aKey
               _aOAuthToken
               (Just AltJSON)
-              _aAd
+              _aPayload
           where go
                   = clientWithRoute (Proxy :: Proxy AdsUpdateResource)
                       r

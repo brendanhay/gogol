@@ -372,8 +372,8 @@ module Network.Google.AndroidEnterprise
     -- ** EntitlementsListResponse
     , EntitlementsListResponse
     , entitlementsListResponse
-    , elrlKind
-    , elrlEntitlement
+    , entKind
+    , entEntitlement
 
     -- ** ProductPermissions
     , ProductPermissions
@@ -396,9 +396,9 @@ module Network.Google.AndroidEnterprise
     -- ** Entitlement
     , Entitlement
     , entitlement
-    , entKind
-    , entReason
-    , entProductId
+    , eeKind
+    , eeReason
+    , eeProductId
     ) where
 
 import           Network.Google.AndroidEnterprise.Types

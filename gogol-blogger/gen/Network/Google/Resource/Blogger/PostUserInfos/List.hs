@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -62,17 +63,15 @@ type PostUserInfosListResource =
          "blogs" :>
            Capture "blogId" Text :>
              "posts" :>
-               QueryParam "endDate" DateTime' :>
-                 QueryParam "fetchBodies" Bool :>
-                   QueryParam "labels" Text :>
-                     QueryParam "maxResults" Word32 :>
-                       QueryParam "orderBy" BloggerPostUserInfosListOrderBy
-                         :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "startDate" DateTime' :>
-                             QueryParams "status" BloggerPostUserInfosListStatus
-                               :>
-                               QueryParam "view" BloggerPostUserInfosListView :>
+               QueryParams "status" Status :>
+                 QueryParam "orderBy" OrderBy :>
+                   QueryParam "endDate" DateTime' :>
+                     QueryParam "startDate" DateTime' :>
+                       QueryParam "fetchBodies" Bool :>
+                         QueryParam "view" View :>
+                           QueryParam "labels" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "maxResults" Word32 :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
@@ -89,10 +88,10 @@ type PostUserInfosListResource =
 --
 -- /See:/ 'postUserInfosList'' smart constructor.
 data PostUserInfosList' = PostUserInfosList'
-    { _puilStatus      :: !(Maybe BloggerPostUserInfosListStatus)
+    { _puilStatus      :: !(Maybe Status)
     , _puilQuotaUser   :: !(Maybe Text)
     , _puilPrettyPrint :: !Bool
-    , _puilOrderBy     :: !BloggerPostUserInfosListOrderBy
+    , _puilOrderBy     :: !OrderBy
     , _puilUserIP      :: !(Maybe Text)
     , _puilEndDate     :: !(Maybe DateTime')
     , _puilBlogId      :: !Text
@@ -100,13 +99,13 @@ data PostUserInfosList' = PostUserInfosList'
     , _puilStartDate   :: !(Maybe DateTime')
     , _puilKey         :: !(Maybe Key)
     , _puilFetchBodies :: !Bool
-    , _puilView        :: !(Maybe BloggerPostUserInfosListView)
+    , _puilView        :: !(Maybe View)
     , _puilLabels      :: !(Maybe Text)
     , _puilPageToken   :: !(Maybe Text)
     , _puilOAuthToken  :: !(Maybe OAuthToken)
     , _puilMaxResults  :: !(Maybe Word32)
     , _puilFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostUserInfosList'' with the minimum fields required to make a request.
 --
@@ -154,7 +153,7 @@ postUserInfosList' pPuilBlogId_ pPuilUserId_ =
     { _puilStatus = Nothing
     , _puilQuotaUser = Nothing
     , _puilPrettyPrint = True
-    , _puilOrderBy = BPUILOBPublished
+    , _puilOrderBy = OBPublished
     , _puilUserIP = Nothing
     , _puilEndDate = Nothing
     , _puilBlogId = pPuilBlogId_
@@ -170,7 +169,7 @@ postUserInfosList' pPuilBlogId_ pPuilUserId_ =
     , _puilFields = Nothing
     }
 
-puilStatus :: Lens' PostUserInfosList' (Maybe BloggerPostUserInfosListStatus)
+puilStatus :: Lens' PostUserInfosList' (Maybe Status)
 puilStatus
   = lens _puilStatus (\ s a -> s{_puilStatus = a})
 
@@ -189,7 +188,7 @@ puilPrettyPrint
       (\ s a -> s{_puilPrettyPrint = a})
 
 -- | Sort order applied to search results. Default is published.
-puilOrderBy :: Lens' PostUserInfosList' BloggerPostUserInfosListOrderBy
+puilOrderBy :: Lens' PostUserInfosList' OrderBy
 puilOrderBy
   = lens _puilOrderBy (\ s a -> s{_puilOrderBy = a})
 
@@ -237,7 +236,7 @@ puilFetchBodies
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require elevated access.
-puilView :: Lens' PostUserInfosList' (Maybe BloggerPostUserInfosListView)
+puilView :: Lens' PostUserInfosList' (Maybe View)
 puilView = lens _puilView (\ s a -> s{_puilView = a})
 
 -- | Comma-separated list of labels to search for.
@@ -276,15 +275,16 @@ instance GoogleRequest PostUserInfosList' where
         type Rs PostUserInfosList' = PostUserInfosList
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostUserInfosList'{..}
-          = go _puilEndDate (Just _puilFetchBodies) _puilLabels
-              _puilMaxResults
+          = go _puilUserId _puilBlogId
+              (_puilStatus ^. _Default)
               (Just _puilOrderBy)
-              _puilPageToken
+              _puilEndDate
               _puilStartDate
-              _puilStatus
+              (Just _puilFetchBodies)
               _puilView
-              _puilUserId
-              _puilBlogId
+              _puilLabels
+              _puilPageToken
+              _puilMaxResults
               _puilQuotaUser
               (Just _puilPrettyPrint)
               _puilUserIP

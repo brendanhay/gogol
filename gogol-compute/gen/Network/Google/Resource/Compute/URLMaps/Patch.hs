@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.Compute.URLMaps.Patch
     , umpQuotaUser
     , umpURLMap
     , umpPrettyPrint
-    , umpURLMap
     , umpProject
     , umpUserIP
+    , umpPayload
     , umpKey
     , umpOAuthToken
     , umpFields
@@ -69,13 +70,13 @@ data URLMapsPatch' = URLMapsPatch'
     { _umpQuotaUser   :: !(Maybe Text)
     , _umpURLMap      :: !Text
     , _umpPrettyPrint :: !Bool
-    , _umpURLMap      :: !URLMap
     , _umpProject     :: !Text
     , _umpUserIP      :: !(Maybe Text)
+    , _umpPayload     :: !URLMap
     , _umpKey         :: !(Maybe Key)
     , _umpOAuthToken  :: !(Maybe OAuthToken)
     , _umpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsPatch'' with the minimum fields required to make a request.
 --
@@ -87,11 +88,11 @@ data URLMapsPatch' = URLMapsPatch'
 --
 -- * 'umpPrettyPrint'
 --
--- * 'umpURLMap'
---
 -- * 'umpProject'
 --
 -- * 'umpUserIP'
+--
+-- * 'umpPayload'
 --
 -- * 'umpKey'
 --
@@ -100,17 +101,17 @@ data URLMapsPatch' = URLMapsPatch'
 -- * 'umpFields'
 urlMapsPatch'
     :: Text -- ^ 'urlMap'
-    -> URLMap -- ^ 'URLMap'
     -> Text -- ^ 'project'
+    -> URLMap -- ^ 'payload'
     -> URLMapsPatch'
-urlMapsPatch' pUmpURLMap_ pUmpURLMap_ pUmpProject_ =
+urlMapsPatch' pUmpURLMap_ pUmpProject_ pUmpPayload_ =
     URLMapsPatch'
     { _umpQuotaUser = Nothing
     , _umpURLMap = pUmpURLMap_
     , _umpPrettyPrint = True
-    , _umpURLMap = pUmpURLMap_
     , _umpProject = pUmpProject_
     , _umpUserIP = Nothing
+    , _umpPayload = pUmpPayload_
     , _umpKey = Nothing
     , _umpOAuthToken = Nothing
     , _umpFields = Nothing
@@ -134,11 +135,6 @@ umpPrettyPrint
   = lens _umpPrettyPrint
       (\ s a -> s{_umpPrettyPrint = a})
 
--- | Multipart request metadata.
-umpURLMap :: Lens' URLMapsPatch' URLMap
-umpURLMap
-  = lens _umpURLMap (\ s a -> s{_umpURLMap = a})
-
 -- | Name of the project scoping this request.
 umpProject :: Lens' URLMapsPatch' Text
 umpProject
@@ -149,6 +145,11 @@ umpProject
 umpUserIP :: Lens' URLMapsPatch' (Maybe Text)
 umpUserIP
   = lens _umpUserIP (\ s a -> s{_umpUserIP = a})
+
+-- | Multipart request metadata.
+umpPayload :: Lens' URLMapsPatch' URLMap
+umpPayload
+  = lens _umpPayload (\ s a -> s{_umpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -182,7 +183,7 @@ instance GoogleRequest URLMapsPatch' where
               _umpKey
               _umpOAuthToken
               (Just AltJSON)
-              _umpURLMap
+              _umpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy URLMapsPatchResource)

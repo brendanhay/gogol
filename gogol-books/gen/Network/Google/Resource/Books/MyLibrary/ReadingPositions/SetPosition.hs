@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,14 +56,12 @@ type MyLibraryReadingPositionsSetPositionResource =
        "readingpositions" :>
          Capture "volumeId" Text :>
            "setPosition" :>
-             QueryParam "action"
-               BooksMyLibraryReadingPositionsSetPositionAction
-               :>
-               QueryParam "contentVersion" Text :>
+             QueryParam "timestamp" Text :>
+               QueryParam "position" Text :>
                  QueryParam "deviceCookie" Text :>
-                   QueryParam "source" Text :>
-                     QueryParam "timestamp" Text :>
-                       QueryParam "position" Text :>
+                   QueryParam "contentVersion" Text :>
+                     QueryParam "action" Action :>
+                       QueryParam "source" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -80,7 +79,7 @@ data MyLibraryReadingPositionsSetPosition' = MyLibraryReadingPositionsSetPositio
     , _mlrpspPrettyPrint    :: !Bool
     , _mlrpspUserIP         :: !(Maybe Text)
     , _mlrpspContentVersion :: !(Maybe Text)
-    , _mlrpspAction         :: !(Maybe BooksMyLibraryReadingPositionsSetPositionAction)
+    , _mlrpspAction         :: !(Maybe Action)
     , _mlrpspKey            :: !(Maybe Key)
     , _mlrpspVolumeId       :: !Text
     , _mlrpspSource         :: !(Maybe Text)
@@ -88,7 +87,7 @@ data MyLibraryReadingPositionsSetPosition' = MyLibraryReadingPositionsSetPositio
     , _mlrpspTimestamp      :: !Text
     , _mlrpspFields         :: !(Maybe Text)
     , _mlrpspPosition       :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyLibraryReadingPositionsSetPosition'' with the minimum fields required to make a request.
 --
@@ -174,7 +173,7 @@ mlrpspContentVersion
       (\ s a -> s{_mlrpspContentVersion = a})
 
 -- | Action that caused this reading position to be set.
-mlrpspAction :: Lens' MyLibraryReadingPositionsSetPosition' (Maybe BooksMyLibraryReadingPositionsSetPositionAction)
+mlrpspAction :: Lens' MyLibraryReadingPositionsSetPosition' (Maybe Action)
 mlrpspAction
   = lens _mlrpspAction (\ s a -> s{_mlrpspAction = a})
 
@@ -230,12 +229,12 @@ instance GoogleRequest
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
           MyLibraryReadingPositionsSetPosition'{..}
-          = go _mlrpspAction _mlrpspContentVersion
-              _mlrpspDeviceCookie
-              _mlrpspSource
-              _mlrpspVolumeId
-              (Just _mlrpspTimestamp)
+          = go _mlrpspVolumeId (Just _mlrpspTimestamp)
               (Just _mlrpspPosition)
+              _mlrpspDeviceCookie
+              _mlrpspContentVersion
+              _mlrpspAction
+              _mlrpspSource
               _mlrpspQuotaUser
               (Just _mlrpspPrettyPrint)
               _mlrpspUserIP

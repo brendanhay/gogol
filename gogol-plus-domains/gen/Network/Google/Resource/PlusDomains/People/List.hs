@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,9 +55,9 @@ type PeopleListResource =
          "people" :>
            Capture "collection" PlusDomainsPeopleListCollection
              :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "orderBy" PlusDomainsPeopleListOrderBy :>
-                 QueryParam "pageToken" Text :>
+             QueryParam "orderBy" OrderBy :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -72,7 +73,7 @@ type PeopleListResource =
 data PeopleList' = PeopleList'
     { _plQuotaUser   :: !(Maybe Text)
     , _plPrettyPrint :: !Bool
-    , _plOrderBy     :: !(Maybe PlusDomainsPeopleListOrderBy)
+    , _plOrderBy     :: !(Maybe OrderBy)
     , _plUserIP      :: !(Maybe Text)
     , _plCollection  :: !PlusDomainsPeopleListCollection
     , _plUserId      :: !Text
@@ -81,7 +82,7 @@ data PeopleList' = PeopleList'
     , _plOAuthToken  :: !(Maybe OAuthToken)
     , _plMaxResults  :: !Word32
     , _plFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleList'' with the minimum fields required to make a request.
 --
@@ -141,7 +142,7 @@ plPrettyPrint
       (\ s a -> s{_plPrettyPrint = a})
 
 -- | The order to return people in.
-plOrderBy :: Lens' PeopleList' (Maybe PlusDomainsPeopleListOrderBy)
+plOrderBy :: Lens' PeopleList' (Maybe OrderBy)
 plOrderBy
   = lens _plOrderBy (\ s a -> s{_plOrderBy = a})
 
@@ -197,9 +198,8 @@ instance GoogleRequest PeopleList' where
         type Rs PeopleList' = PeopleFeed
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u PeopleList'{..}
-          = go (Just _plMaxResults) _plOrderBy _plPageToken
-              _plUserId
-              _plCollection
+          = go _plUserId _plCollection _plOrderBy _plPageToken
+              (Just _plMaxResults)
               _plQuotaUser
               (Just _plPrettyPrint)
               _plUserIP

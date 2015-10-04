@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.AdExchangeBuyer.Offers.Insert
     , oiQuotaUser
     , oiPrettyPrint
     , oiUserIP
+    , oiPayload
     , oiKey
-    , oiOfferDTO
     , oiOAuthToken
     , oiFields
     ) where
@@ -62,11 +63,11 @@ data OffersInsert' = OffersInsert'
     { _oiQuotaUser   :: !(Maybe Text)
     , _oiPrettyPrint :: !Bool
     , _oiUserIP      :: !(Maybe Text)
+    , _oiPayload     :: !OfferDTO
     , _oiKey         :: !(Maybe Key)
-    , _oiOfferDTO    :: !OfferDTO
     , _oiOAuthToken  :: !(Maybe OAuthToken)
     , _oiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OffersInsert'' with the minimum fields required to make a request.
 --
@@ -78,23 +79,23 @@ data OffersInsert' = OffersInsert'
 --
 -- * 'oiUserIP'
 --
--- * 'oiKey'
+-- * 'oiPayload'
 --
--- * 'oiOfferDTO'
+-- * 'oiKey'
 --
 -- * 'oiOAuthToken'
 --
 -- * 'oiFields'
 offersInsert'
-    :: OfferDTO -- ^ 'OfferDTO'
+    :: OfferDTO -- ^ 'payload'
     -> OffersInsert'
-offersInsert' pOiOfferDTO_ =
+offersInsert' pOiPayload_ =
     OffersInsert'
     { _oiQuotaUser = Nothing
     , _oiPrettyPrint = True
     , _oiUserIP = Nothing
+    , _oiPayload = pOiPayload_
     , _oiKey = Nothing
-    , _oiOfferDTO = pOiOfferDTO_
     , _oiOAuthToken = Nothing
     , _oiFields = Nothing
     }
@@ -117,16 +118,16 @@ oiPrettyPrint
 oiUserIP :: Lens' OffersInsert' (Maybe Text)
 oiUserIP = lens _oiUserIP (\ s a -> s{_oiUserIP = a})
 
+-- | Multipart request metadata.
+oiPayload :: Lens' OffersInsert' OfferDTO
+oiPayload
+  = lens _oiPayload (\ s a -> s{_oiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 oiKey :: Lens' OffersInsert' (Maybe Key)
 oiKey = lens _oiKey (\ s a -> s{_oiKey = a})
-
--- | Multipart request metadata.
-oiOfferDTO :: Lens' OffersInsert' OfferDTO
-oiOfferDTO
-  = lens _oiOfferDTO (\ s a -> s{_oiOfferDTO = a})
 
 -- | OAuth 2.0 token for the current user.
 oiOAuthToken :: Lens' OffersInsert' (Maybe OAuthToken)
@@ -150,7 +151,7 @@ instance GoogleRequest OffersInsert' where
               _oiKey
               _oiOAuthToken
               (Just AltJSON)
-              _oiOfferDTO
+              _oiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OffersInsertResource)

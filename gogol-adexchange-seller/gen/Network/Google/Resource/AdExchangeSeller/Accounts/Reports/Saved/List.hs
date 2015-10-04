@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,8 +52,8 @@ type AccountsReportsSavedListResource =
        Capture "accountId" Text :>
          "reports" :>
            "saved" :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Int32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -75,7 +76,7 @@ data AccountsReportsSavedList' = AccountsReportsSavedList'
     , _arslOAuthToken  :: !(Maybe OAuthToken)
     , _arslMaxResults  :: !(Maybe Int32)
     , _arslFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsReportsSavedList'' with the minimum fields required to make a request.
 --
@@ -181,7 +182,7 @@ instance GoogleRequest AccountsReportsSavedList'
         type Rs AccountsReportsSavedList' = SavedReports
         request = requestWithRoute defReq adExchangeSellerURL
         requestWithRoute r u AccountsReportsSavedList'{..}
-          = go _arslMaxResults _arslPageToken _arslAccountId
+          = go _arslAccountId _arslPageToken _arslMaxResults
               _arslQuotaUser
               (Just _arslPrettyPrint)
               _arslUserIP

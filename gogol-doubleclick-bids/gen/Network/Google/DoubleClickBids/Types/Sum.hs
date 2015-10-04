@@ -17,157 +17,81 @@ module Network.Google.DoubleClickBids.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | Format of the generated report.
-data QueryMetadataFormat
-    = CSV
-      -- ^ @CSV@
-    | ExcelCSV
-      -- ^ @EXCEL_CSV@
-    | Xlsx
-      -- ^ @XLSX@
+-- | How often the query is run.
+data Frequency
+    = Daily
+      -- ^ @DAILY@
+    | Monthly
+      -- ^ @MONTHLY@
+    | OneTime
+      -- ^ @ONE_TIME@
+    | Quarterly
+      -- ^ @QUARTERLY@
+    | SemiMonthly
+      -- ^ @SEMI_MONTHLY@
+    | Weekly
+      -- ^ @WEEKLY@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable QueryMetadataFormat
+instance Hashable Frequency
 
-instance FromText QueryMetadataFormat where
+instance FromText Frequency where
     fromText = \case
-        "CSV" -> Just CSV
-        "EXCEL_CSV" -> Just ExcelCSV
-        "XLSX" -> Just Xlsx
+        "DAILY" -> Just Daily
+        "MONTHLY" -> Just Monthly
+        "ONE_TIME" -> Just OneTime
+        "QUARTERLY" -> Just Quarterly
+        "SEMI_MONTHLY" -> Just SemiMonthly
+        "WEEKLY" -> Just Weekly
         _ -> Nothing
 
-instance ToText QueryMetadataFormat where
+instance ToText Frequency where
     toText = \case
-        CSV -> "CSV"
-        ExcelCSV -> "EXCEL_CSV"
-        Xlsx -> "XLSX"
+        Daily -> "DAILY"
+        Monthly -> "MONTHLY"
+        OneTime -> "ONE_TIME"
+        Quarterly -> "QUARTERLY"
+        SemiMonthly -> "SEMI_MONTHLY"
+        Weekly -> "WEEKLY"
 
-instance FromJSON QueryMetadataFormat where
-    parseJSON = parseJSONText "QueryMetadataFormat"
+instance FromJSON Frequency where
+    parseJSON = parseJSONText "Frequency"
 
-instance ToJSON QueryMetadataFormat where
+instance ToJSON Frequency where
     toJSON = toJSONText
 
--- | Report type.
-data ParametersType
-    = TypeActiveGrp
-      -- ^ @TYPE_ACTIVE_GRP@
-    | TypeAudienceComPosition
-      -- ^ @TYPE_AUDIENCE_COMPOSITION@
-    | TypeAudiencePerformance
-      -- ^ @TYPE_AUDIENCE_PERFORMANCE@
-    | TypeClientSafe
-      -- ^ @TYPE_CLIENT_SAFE@
-    | TypeComscoreVce
-      -- ^ @TYPE_COMSCORE_VCE@
-    | TypeCrossFee
-      -- ^ @TYPE_CROSS_FEE@
-    | TypeCrossPartner
-      -- ^ @TYPE_CROSS_PARTNER@
-    | TypeCrossPartnerThirdPartyDataProvider
-      -- ^ @TYPE_CROSS_PARTNER_THIRD_PARTY_DATA_PROVIDER@
-    | TypeEstimatedConversion
-      -- ^ @TYPE_ESTIMATED_CONVERSION@
-    | TypeFee
-      -- ^ @TYPE_FEE@
-    | TypeGeneral
-      -- ^ @TYPE_GENERAL@
-    | TypeInventoryAvailability
-      -- ^ @TYPE_INVENTORY_AVAILABILITY@
-    | TypeKeyword
-      -- ^ @TYPE_KEYWORD@
-    | TypeNielsenAudienceProfile
-      -- ^ @TYPE_NIELSEN_AUDIENCE_PROFILE@
-    | TypeNielsenDailyReachBuild
-      -- ^ @TYPE_NIELSEN_DAILY_REACH_BUILD@
-    | TypeNielsenSite
-      -- ^ @TYPE_NIELSEN_SITE@
-    | TypeOrderId
-      -- ^ @TYPE_ORDER_ID@
-    | TypePageCategory
-      -- ^ @TYPE_PAGE_CATEGORY@
-    | TypePixelLoad
-      -- ^ @TYPE_PIXEL_LOAD@
-    | TypeReachAndFrequency
-      -- ^ @TYPE_REACH_AND_FREQUENCY@
-    | TypeThirdPartyDataProvider
-      -- ^ @TYPE_THIRD_PARTY_DATA_PROVIDER@
-    | TypeTrueview
-      -- ^ @TYPE_TRUEVIEW@
-    | TypeTrueviewIar
-      -- ^ @TYPE_TRUEVIEW_IAR@
-    | TypeVerification
-      -- ^ @TYPE_VERIFICATION@
-    | TypeYouTubeVertical
-      -- ^ @TYPE_YOUTUBE_VERTICAL@
+-- | The state of the report.
+data State
+    = SDone
+      -- ^ @DONE@
+    | SFailed
+      -- ^ @FAILED@
+    | SRunning
+      -- ^ @RUNNING@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ParametersType
+instance Hashable State
 
-instance FromText ParametersType where
+instance FromText State where
     fromText = \case
-        "TYPE_ACTIVE_GRP" -> Just TypeActiveGrp
-        "TYPE_AUDIENCE_COMPOSITION" -> Just TypeAudienceComPosition
-        "TYPE_AUDIENCE_PERFORMANCE" -> Just TypeAudiencePerformance
-        "TYPE_CLIENT_SAFE" -> Just TypeClientSafe
-        "TYPE_COMSCORE_VCE" -> Just TypeComscoreVce
-        "TYPE_CROSS_FEE" -> Just TypeCrossFee
-        "TYPE_CROSS_PARTNER" -> Just TypeCrossPartner
-        "TYPE_CROSS_PARTNER_THIRD_PARTY_DATA_PROVIDER" -> Just TypeCrossPartnerThirdPartyDataProvider
-        "TYPE_ESTIMATED_CONVERSION" -> Just TypeEstimatedConversion
-        "TYPE_FEE" -> Just TypeFee
-        "TYPE_GENERAL" -> Just TypeGeneral
-        "TYPE_INVENTORY_AVAILABILITY" -> Just TypeInventoryAvailability
-        "TYPE_KEYWORD" -> Just TypeKeyword
-        "TYPE_NIELSEN_AUDIENCE_PROFILE" -> Just TypeNielsenAudienceProfile
-        "TYPE_NIELSEN_DAILY_REACH_BUILD" -> Just TypeNielsenDailyReachBuild
-        "TYPE_NIELSEN_SITE" -> Just TypeNielsenSite
-        "TYPE_ORDER_ID" -> Just TypeOrderId
-        "TYPE_PAGE_CATEGORY" -> Just TypePageCategory
-        "TYPE_PIXEL_LOAD" -> Just TypePixelLoad
-        "TYPE_REACH_AND_FREQUENCY" -> Just TypeReachAndFrequency
-        "TYPE_THIRD_PARTY_DATA_PROVIDER" -> Just TypeThirdPartyDataProvider
-        "TYPE_TRUEVIEW" -> Just TypeTrueview
-        "TYPE_TRUEVIEW_IAR" -> Just TypeTrueviewIar
-        "TYPE_VERIFICATION" -> Just TypeVerification
-        "TYPE_YOUTUBE_VERTICAL" -> Just TypeYouTubeVertical
+        "DONE" -> Just SDone
+        "FAILED" -> Just SFailed
+        "RUNNING" -> Just SRunning
         _ -> Nothing
 
-instance ToText ParametersType where
+instance ToText State where
     toText = \case
-        TypeActiveGrp -> "TYPE_ACTIVE_GRP"
-        TypeAudienceComPosition -> "TYPE_AUDIENCE_COMPOSITION"
-        TypeAudiencePerformance -> "TYPE_AUDIENCE_PERFORMANCE"
-        TypeClientSafe -> "TYPE_CLIENT_SAFE"
-        TypeComscoreVce -> "TYPE_COMSCORE_VCE"
-        TypeCrossFee -> "TYPE_CROSS_FEE"
-        TypeCrossPartner -> "TYPE_CROSS_PARTNER"
-        TypeCrossPartnerThirdPartyDataProvider -> "TYPE_CROSS_PARTNER_THIRD_PARTY_DATA_PROVIDER"
-        TypeEstimatedConversion -> "TYPE_ESTIMATED_CONVERSION"
-        TypeFee -> "TYPE_FEE"
-        TypeGeneral -> "TYPE_GENERAL"
-        TypeInventoryAvailability -> "TYPE_INVENTORY_AVAILABILITY"
-        TypeKeyword -> "TYPE_KEYWORD"
-        TypeNielsenAudienceProfile -> "TYPE_NIELSEN_AUDIENCE_PROFILE"
-        TypeNielsenDailyReachBuild -> "TYPE_NIELSEN_DAILY_REACH_BUILD"
-        TypeNielsenSite -> "TYPE_NIELSEN_SITE"
-        TypeOrderId -> "TYPE_ORDER_ID"
-        TypePageCategory -> "TYPE_PAGE_CATEGORY"
-        TypePixelLoad -> "TYPE_PIXEL_LOAD"
-        TypeReachAndFrequency -> "TYPE_REACH_AND_FREQUENCY"
-        TypeThirdPartyDataProvider -> "TYPE_THIRD_PARTY_DATA_PROVIDER"
-        TypeTrueview -> "TYPE_TRUEVIEW"
-        TypeTrueviewIar -> "TYPE_TRUEVIEW_IAR"
-        TypeVerification -> "TYPE_VERIFICATION"
-        TypeYouTubeVertical -> "TYPE_YOUTUBE_VERTICAL"
+        SDone -> "DONE"
+        SFailed -> "FAILED"
+        SRunning -> "RUNNING"
 
-instance FromJSON ParametersType where
-    parseJSON = parseJSONText "ParametersType"
+instance FromJSON State where
+    parseJSON = parseJSONText "State"
 
-instance ToJSON ParametersType where
+instance ToJSON State where
     toJSON = toJSONText
 
-data ParametersGroupBys
+data GroupBysItem
     = FilterActiveViewExpectedViewability
       -- ^ @FILTER_ACTIVE_VIEW_EXPECTED_VIEWABILITY@
     | FilterActivityId
@@ -328,9 +252,9 @@ data ParametersGroupBys
       -- ^ @FILTER_ZIP_CODE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ParametersGroupBys
+instance Hashable GroupBysItem
 
-instance FromText ParametersGroupBys where
+instance FromText GroupBysItem where
     fromText = \case
         "FILTER_ACTIVE_VIEW_EXPECTED_VIEWABILITY" -> Just FilterActiveViewExpectedViewability
         "FILTER_ACTIVITY_ID" -> Just FilterActivityId
@@ -413,7 +337,7 @@ instance FromText ParametersGroupBys where
         "FILTER_ZIP_CODE" -> Just FilterZipCode
         _ -> Nothing
 
-instance ToText ParametersGroupBys where
+instance ToText GroupBysItem where
     toText = \case
         FilterActiveViewExpectedViewability -> "FILTER_ACTIVE_VIEW_EXPECTED_VIEWABILITY"
         FilterActivityId -> "FILTER_ACTIVITY_ID"
@@ -495,14 +419,133 @@ instance ToText ParametersGroupBys where
         FilterYouTubeVertical -> "FILTER_YOUTUBE_VERTICAL"
         FilterZipCode -> "FILTER_ZIP_CODE"
 
-instance FromJSON ParametersGroupBys where
-    parseJSON = parseJSONText "ParametersGroupBys"
+instance FromJSON GroupBysItem where
+    parseJSON = parseJSONText "GroupBysItem"
 
-instance ToJSON ParametersGroupBys where
+instance ToJSON GroupBysItem where
+    toJSON = toJSONText
+
+-- | Report type.
+data ParametersType
+    = TypeActiveGrp
+      -- ^ @TYPE_ACTIVE_GRP@
+    | TypeAudienceComPosition
+      -- ^ @TYPE_AUDIENCE_COMPOSITION@
+    | TypeAudiencePerformance
+      -- ^ @TYPE_AUDIENCE_PERFORMANCE@
+    | TypeClientSafe
+      -- ^ @TYPE_CLIENT_SAFE@
+    | TypeComscoreVce
+      -- ^ @TYPE_COMSCORE_VCE@
+    | TypeCrossFee
+      -- ^ @TYPE_CROSS_FEE@
+    | TypeCrossPartner
+      -- ^ @TYPE_CROSS_PARTNER@
+    | TypeCrossPartnerThirdPartyDataProvider
+      -- ^ @TYPE_CROSS_PARTNER_THIRD_PARTY_DATA_PROVIDER@
+    | TypeEstimatedConversion
+      -- ^ @TYPE_ESTIMATED_CONVERSION@
+    | TypeFee
+      -- ^ @TYPE_FEE@
+    | TypeGeneral
+      -- ^ @TYPE_GENERAL@
+    | TypeInventoryAvailability
+      -- ^ @TYPE_INVENTORY_AVAILABILITY@
+    | TypeKeyword
+      -- ^ @TYPE_KEYWORD@
+    | TypeNielsenAudienceProfile
+      -- ^ @TYPE_NIELSEN_AUDIENCE_PROFILE@
+    | TypeNielsenDailyReachBuild
+      -- ^ @TYPE_NIELSEN_DAILY_REACH_BUILD@
+    | TypeNielsenSite
+      -- ^ @TYPE_NIELSEN_SITE@
+    | TypeOrderId
+      -- ^ @TYPE_ORDER_ID@
+    | TypePageCategory
+      -- ^ @TYPE_PAGE_CATEGORY@
+    | TypePixelLoad
+      -- ^ @TYPE_PIXEL_LOAD@
+    | TypeReachAndFrequency
+      -- ^ @TYPE_REACH_AND_FREQUENCY@
+    | TypeThirdPartyDataProvider
+      -- ^ @TYPE_THIRD_PARTY_DATA_PROVIDER@
+    | TypeTrueview
+      -- ^ @TYPE_TRUEVIEW@
+    | TypeTrueviewIar
+      -- ^ @TYPE_TRUEVIEW_IAR@
+    | TypeVerification
+      -- ^ @TYPE_VERIFICATION@
+    | TypeYouTubeVertical
+      -- ^ @TYPE_YOUTUBE_VERTICAL@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ParametersType
+
+instance FromText ParametersType where
+    fromText = \case
+        "TYPE_ACTIVE_GRP" -> Just TypeActiveGrp
+        "TYPE_AUDIENCE_COMPOSITION" -> Just TypeAudienceComPosition
+        "TYPE_AUDIENCE_PERFORMANCE" -> Just TypeAudiencePerformance
+        "TYPE_CLIENT_SAFE" -> Just TypeClientSafe
+        "TYPE_COMSCORE_VCE" -> Just TypeComscoreVce
+        "TYPE_CROSS_FEE" -> Just TypeCrossFee
+        "TYPE_CROSS_PARTNER" -> Just TypeCrossPartner
+        "TYPE_CROSS_PARTNER_THIRD_PARTY_DATA_PROVIDER" -> Just TypeCrossPartnerThirdPartyDataProvider
+        "TYPE_ESTIMATED_CONVERSION" -> Just TypeEstimatedConversion
+        "TYPE_FEE" -> Just TypeFee
+        "TYPE_GENERAL" -> Just TypeGeneral
+        "TYPE_INVENTORY_AVAILABILITY" -> Just TypeInventoryAvailability
+        "TYPE_KEYWORD" -> Just TypeKeyword
+        "TYPE_NIELSEN_AUDIENCE_PROFILE" -> Just TypeNielsenAudienceProfile
+        "TYPE_NIELSEN_DAILY_REACH_BUILD" -> Just TypeNielsenDailyReachBuild
+        "TYPE_NIELSEN_SITE" -> Just TypeNielsenSite
+        "TYPE_ORDER_ID" -> Just TypeOrderId
+        "TYPE_PAGE_CATEGORY" -> Just TypePageCategory
+        "TYPE_PIXEL_LOAD" -> Just TypePixelLoad
+        "TYPE_REACH_AND_FREQUENCY" -> Just TypeReachAndFrequency
+        "TYPE_THIRD_PARTY_DATA_PROVIDER" -> Just TypeThirdPartyDataProvider
+        "TYPE_TRUEVIEW" -> Just TypeTrueview
+        "TYPE_TRUEVIEW_IAR" -> Just TypeTrueviewIar
+        "TYPE_VERIFICATION" -> Just TypeVerification
+        "TYPE_YOUTUBE_VERTICAL" -> Just TypeYouTubeVertical
+        _ -> Nothing
+
+instance ToText ParametersType where
+    toText = \case
+        TypeActiveGrp -> "TYPE_ACTIVE_GRP"
+        TypeAudienceComPosition -> "TYPE_AUDIENCE_COMPOSITION"
+        TypeAudiencePerformance -> "TYPE_AUDIENCE_PERFORMANCE"
+        TypeClientSafe -> "TYPE_CLIENT_SAFE"
+        TypeComscoreVce -> "TYPE_COMSCORE_VCE"
+        TypeCrossFee -> "TYPE_CROSS_FEE"
+        TypeCrossPartner -> "TYPE_CROSS_PARTNER"
+        TypeCrossPartnerThirdPartyDataProvider -> "TYPE_CROSS_PARTNER_THIRD_PARTY_DATA_PROVIDER"
+        TypeEstimatedConversion -> "TYPE_ESTIMATED_CONVERSION"
+        TypeFee -> "TYPE_FEE"
+        TypeGeneral -> "TYPE_GENERAL"
+        TypeInventoryAvailability -> "TYPE_INVENTORY_AVAILABILITY"
+        TypeKeyword -> "TYPE_KEYWORD"
+        TypeNielsenAudienceProfile -> "TYPE_NIELSEN_AUDIENCE_PROFILE"
+        TypeNielsenDailyReachBuild -> "TYPE_NIELSEN_DAILY_REACH_BUILD"
+        TypeNielsenSite -> "TYPE_NIELSEN_SITE"
+        TypeOrderId -> "TYPE_ORDER_ID"
+        TypePageCategory -> "TYPE_PAGE_CATEGORY"
+        TypePixelLoad -> "TYPE_PIXEL_LOAD"
+        TypeReachAndFrequency -> "TYPE_REACH_AND_FREQUENCY"
+        TypeThirdPartyDataProvider -> "TYPE_THIRD_PARTY_DATA_PROVIDER"
+        TypeTrueview -> "TYPE_TRUEVIEW"
+        TypeTrueviewIar -> "TYPE_TRUEVIEW_IAR"
+        TypeVerification -> "TYPE_VERIFICATION"
+        TypeYouTubeVertical -> "TYPE_YOUTUBE_VERTICAL"
+
+instance FromJSON ParametersType where
+    parseJSON = parseJSONText "ParametersType"
+
+instance ToJSON ParametersType where
     toJSON = toJSONText
 
 -- | Filter type used to filter line items to fetch.
-data DownloadLineItemsRequestFilterType
+data FilterType
     = AdvertiserId
       -- ^ @ADVERTISER_ID@
     | InsertionOrderId
@@ -511,29 +554,83 @@ data DownloadLineItemsRequestFilterType
       -- ^ @LINE_ITEM_ID@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DownloadLineItemsRequestFilterType
+instance Hashable FilterType
 
-instance FromText DownloadLineItemsRequestFilterType where
+instance FromText FilterType where
     fromText = \case
         "ADVERTISER_ID" -> Just AdvertiserId
         "INSERTION_ORDER_ID" -> Just InsertionOrderId
         "LINE_ITEM_ID" -> Just LineItemId
         _ -> Nothing
 
-instance ToText DownloadLineItemsRequestFilterType where
+instance ToText FilterType where
     toText = \case
         AdvertiserId -> "ADVERTISER_ID"
         InsertionOrderId -> "INSERTION_ORDER_ID"
         LineItemId -> "LINE_ITEM_ID"
 
-instance FromJSON DownloadLineItemsRequestFilterType where
-    parseJSON = parseJSONText "DownloadLineItemsRequestFilterType"
+instance FromJSON FilterType where
+    parseJSON = parseJSONText "FilterType"
 
-instance ToJSON DownloadLineItemsRequestFilterType where
+instance ToJSON FilterType where
+    toJSON = toJSONText
+
+-- | Format of the generated report.
+data Format
+    = CSV
+      -- ^ @CSV@
+    | ExcelCSV
+      -- ^ @EXCEL_CSV@
+    | Xlsx
+      -- ^ @XLSX@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Format
+
+instance FromText Format where
+    fromText = \case
+        "CSV" -> Just CSV
+        "EXCEL_CSV" -> Just ExcelCSV
+        "XLSX" -> Just Xlsx
+        _ -> Nothing
+
+instance ToText Format where
+    toText = \case
+        CSV -> "CSV"
+        ExcelCSV -> "EXCEL_CSV"
+        Xlsx -> "XLSX"
+
+instance FromJSON Format where
+    parseJSON = parseJSONText "Format"
+
+instance ToJSON Format where
+    toJSON = toJSONText
+
+-- | Format the line items are in. Default to CSV.
+data UploadLineItemsRequestFormat
+    = ULIRFCSV
+      -- ^ @CSV@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable UploadLineItemsRequestFormat
+
+instance FromText UploadLineItemsRequestFormat where
+    fromText = \case
+        "CSV" -> Just ULIRFCSV
+        _ -> Nothing
+
+instance ToText UploadLineItemsRequestFormat where
+    toText = \case
+        ULIRFCSV -> "CSV"
+
+instance FromJSON UploadLineItemsRequestFormat where
+    parseJSON = parseJSONText "UploadLineItemsRequestFormat"
+
+instance ToJSON UploadLineItemsRequestFormat where
     toJSON = toJSONText
 
 -- | Range of report data.
-data QueryMetadataDataRange
+data DataRange
     = AllTime
       -- ^ @ALL_TIME@
     | CurrentDay
@@ -572,9 +669,9 @@ data QueryMetadataDataRange
       -- ^ @YEAR_TO_DATE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable QueryMetadataDataRange
+instance Hashable DataRange
 
-instance FromText QueryMetadataDataRange where
+instance FromText DataRange where
     fromText = \case
         "ALL_TIME" -> Just AllTime
         "CURRENT_DAY" -> Just CurrentDay
@@ -596,7 +693,7 @@ instance FromText QueryMetadataDataRange where
         "YEAR_TO_DATE" -> Just YearToDate
         _ -> Nothing
 
-instance ToText QueryMetadataDataRange where
+instance ToText DataRange where
     toText = \case
         AllTime -> "ALL_TIME"
         CurrentDay -> "CURRENT_DAY"
@@ -617,536 +714,13 @@ instance ToText QueryMetadataDataRange where
         WeekToDate -> "WEEK_TO_DATE"
         YearToDate -> "YEAR_TO_DATE"
 
-instance FromJSON QueryMetadataDataRange where
-    parseJSON = parseJSONText "QueryMetadataDataRange"
+instance FromJSON DataRange where
+    parseJSON = parseJSONText "DataRange"
 
-instance ToJSON QueryMetadataDataRange where
+instance ToJSON DataRange where
     toJSON = toJSONText
 
--- | How often the query is run.
-data QueryScheduleFrequency
-    = Daily
-      -- ^ @DAILY@
-    | Monthly
-      -- ^ @MONTHLY@
-    | OneTime
-      -- ^ @ONE_TIME@
-    | Quarterly
-      -- ^ @QUARTERLY@
-    | SemiMonthly
-      -- ^ @SEMI_MONTHLY@
-    | Weekly
-      -- ^ @WEEKLY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable QueryScheduleFrequency
-
-instance FromText QueryScheduleFrequency where
-    fromText = \case
-        "DAILY" -> Just Daily
-        "MONTHLY" -> Just Monthly
-        "ONE_TIME" -> Just OneTime
-        "QUARTERLY" -> Just Quarterly
-        "SEMI_MONTHLY" -> Just SemiMonthly
-        "WEEKLY" -> Just Weekly
-        _ -> Nothing
-
-instance ToText QueryScheduleFrequency where
-    toText = \case
-        Daily -> "DAILY"
-        Monthly -> "MONTHLY"
-        OneTime -> "ONE_TIME"
-        Quarterly -> "QUARTERLY"
-        SemiMonthly -> "SEMI_MONTHLY"
-        Weekly -> "WEEKLY"
-
-instance FromJSON QueryScheduleFrequency where
-    parseJSON = parseJSONText "QueryScheduleFrequency"
-
-instance ToJSON QueryScheduleFrequency where
-    toJSON = toJSONText
-
--- | Format the line items are in. Default to CSV.
-data UploadLineItemsRequestFormat
-    = ULIRFCSV
-      -- ^ @CSV@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable UploadLineItemsRequestFormat
-
-instance FromText UploadLineItemsRequestFormat where
-    fromText = \case
-        "CSV" -> Just ULIRFCSV
-        _ -> Nothing
-
-instance ToText UploadLineItemsRequestFormat where
-    toText = \case
-        ULIRFCSV -> "CSV"
-
-instance FromJSON UploadLineItemsRequestFormat where
-    parseJSON = parseJSONText "UploadLineItemsRequestFormat"
-
-instance ToJSON UploadLineItemsRequestFormat where
-    toJSON = toJSONText
-
--- | Filter type.
-data FilterPairType
-    = FPTFilterActiveViewExpectedViewability
-      -- ^ @FILTER_ACTIVE_VIEW_EXPECTED_VIEWABILITY@
-    | FPTFilterActivityId
-      -- ^ @FILTER_ACTIVITY_ID@
-    | FPTFilterAdvertiser
-      -- ^ @FILTER_ADVERTISER@
-    | FPTFilterAdvertiserCurrency
-      -- ^ @FILTER_ADVERTISER_CURRENCY@
-    | FPTFilterAdvertiserTimezone
-      -- ^ @FILTER_ADVERTISER_TIMEZONE@
-    | FPTFilterAdPosition
-      -- ^ @FILTER_AD_POSITION@
-    | FPTFilterAge
-      -- ^ @FILTER_AGE@
-    | FPTFilterBrandsafeChannelId
-      -- ^ @FILTER_BRANDSAFE_CHANNEL_ID@
-    | FPTFilterBrowser
-      -- ^ @FILTER_BROWSER@
-    | FPTFilterCampaignDailyFrequency
-      -- ^ @FILTER_CAMPAIGN_DAILY_FREQUENCY@
-    | FPTFilterCarrier
-      -- ^ @FILTER_CARRIER@
-    | FPTFilterChannelId
-      -- ^ @FILTER_CHANNEL_ID@
-    | FPTFilterCity
-      -- ^ @FILTER_CITY@
-    | FPTFilterConversionDelay
-      -- ^ @FILTER_CONVERSION_DELAY@
-    | FPTFilterCountry
-      -- ^ @FILTER_COUNTRY@
-    | FPTFilterCreativeId
-      -- ^ @FILTER_CREATIVE_ID@
-    | FPTFilterCreativeSize
-      -- ^ @FILTER_CREATIVE_SIZE@
-    | FPTFilterCreativeType
-      -- ^ @FILTER_CREATIVE_TYPE@
-    | FPTFilterDataProvider
-      -- ^ @FILTER_DATA_PROVIDER@
-    | FPTFilterDate
-      -- ^ @FILTER_DATE@
-    | FPTFilterDayOfWeek
-      -- ^ @FILTER_DAY_OF_WEEK@
-    | FPTFilterDma
-      -- ^ @FILTER_DMA@
-    | FPTFilterExchangeId
-      -- ^ @FILTER_EXCHANGE_ID@
-    | FPTFilterFloodlightPixelId
-      -- ^ @FILTER_FLOODLIGHT_PIXEL_ID@
-    | FPTFilterGender
-      -- ^ @FILTER_GENDER@
-    | FPTFilterInsertionOrder
-      -- ^ @FILTER_INSERTION_ORDER@
-    | FPTFilterInventoryFormat
-      -- ^ @FILTER_INVENTORY_FORMAT@
-    | FPTFilterInventorySource
-      -- ^ @FILTER_INVENTORY_SOURCE@
-    | FPTFilterInventorySourceType
-      -- ^ @FILTER_INVENTORY_SOURCE_TYPE@
-    | FPTFilterKeyword
-      -- ^ @FILTER_KEYWORD@
-    | FPTFilterLineItem
-      -- ^ @FILTER_LINE_ITEM@
-    | FPTFilterLineItemDailyFrequency
-      -- ^ @FILTER_LINE_ITEM_DAILY_FREQUENCY@
-    | FPTFilterLineItemLifetimeFrequency
-      -- ^ @FILTER_LINE_ITEM_LIFETIME_FREQUENCY@
-    | FPTFilterLineItemType
-      -- ^ @FILTER_LINE_ITEM_TYPE@
-    | FPTFilterMobileDeviceMake
-      -- ^ @FILTER_MOBILE_DEVICE_MAKE@
-    | FPTFilterMobileDeviceMakeModel
-      -- ^ @FILTER_MOBILE_DEVICE_MAKE_MODEL@
-    | FPTFilterMobileDeviceType
-      -- ^ @FILTER_MOBILE_DEVICE_TYPE@
-    | FPTFilterMobileGeo
-      -- ^ @FILTER_MOBILE_GEO@
-    | FPTFilterMonth
-      -- ^ @FILTER_MONTH@
-    | FPTFilterMraidSupport
-      -- ^ @FILTER_MRAID_SUPPORT@
-    | FPTFilterNielsenAge
-      -- ^ @FILTER_NIELSEN_AGE@
-    | FPTFilterNielsenCountryCode
-      -- ^ @FILTER_NIELSEN_COUNTRY_CODE@
-    | FPTFilterNielsenDeviceId
-      -- ^ @FILTER_NIELSEN_DEVICE_ID@
-    | FPTFilterNielsenGender
-      -- ^ @FILTER_NIELSEN_GENDER@
-    | FPTFilterOrderId
-      -- ^ @FILTER_ORDER_ID@
-    | FPTFilterOS
-      -- ^ @FILTER_OS@
-    | FPTFilterPageCategory
-      -- ^ @FILTER_PAGE_CATEGORY@
-    | FPTFilterPageLayout
-      -- ^ @FILTER_PAGE_LAYOUT@
-    | FPTFilterPartner
-      -- ^ @FILTER_PARTNER@
-    | FPTFilterPartnerCurrency
-      -- ^ @FILTER_PARTNER_CURRENCY@
-    | FPTFilterPublicInventory
-      -- ^ @FILTER_PUBLIC_INVENTORY@
-    | FPTFilterQuarter
-      -- ^ @FILTER_QUARTER@
-    | FPTFilterRegion
-      -- ^ @FILTER_REGION@
-    | FPTFilterRegularChannelId
-      -- ^ @FILTER_REGULAR_CHANNEL_ID@
-    | FPTFilterSiteId
-      -- ^ @FILTER_SITE_ID@
-    | FPTFilterSiteLanguage
-      -- ^ @FILTER_SITE_LANGUAGE@
-    | FPTFilterTargetedUserList
-      -- ^ @FILTER_TARGETED_USER_LIST@
-    | FPTFilterTimeOfDay
-      -- ^ @FILTER_TIME_OF_DAY@
-    | FPTFilterTrueviewConversionType
-      -- ^ @FILTER_TRUEVIEW_CONVERSION_TYPE@
-    | FPTFilterUnknown
-      -- ^ @FILTER_UNKNOWN@
-    | FPTFilterUserList
-      -- ^ @FILTER_USER_LIST@
-    | FPTFilterUserListFirstParty
-      -- ^ @FILTER_USER_LIST_FIRST_PARTY@
-    | FPTFilterUserListThirdParty
-      -- ^ @FILTER_USER_LIST_THIRD_PARTY@
-    | FPTFilterVideoAdPositionInStream
-      -- ^ @FILTER_VIDEO_AD_POSITION_IN_STREAM@
-    | FPTFilterVideoCompanionSize
-      -- ^ @FILTER_VIDEO_COMPANION_SIZE@
-    | FPTFilterVideoCompanionType
-      -- ^ @FILTER_VIDEO_COMPANION_TYPE@
-    | FPTFilterVideoCreativeDuration
-      -- ^ @FILTER_VIDEO_CREATIVE_DURATION@
-    | FPTFilterVideoCreativeDurationSkippable
-      -- ^ @FILTER_VIDEO_CREATIVE_DURATION_SKIPPABLE@
-    | FPTFilterVideoDurationSeconds
-      -- ^ @FILTER_VIDEO_DURATION_SECONDS@
-    | FPTFilterVideoFormatSupport
-      -- ^ @FILTER_VIDEO_FORMAT_SUPPORT@
-    | FPTFilterVideoInventoryType
-      -- ^ @FILTER_VIDEO_INVENTORY_TYPE@
-    | FPTFilterVideoPlayerSize
-      -- ^ @FILTER_VIDEO_PLAYER_SIZE@
-    | FPTFilterVideoRatingTier
-      -- ^ @FILTER_VIDEO_RATING_TIER@
-    | FPTFilterVideoSkippableSupport
-      -- ^ @FILTER_VIDEO_SKIPPABLE_SUPPORT@
-    | FPTFilterVideoVpaidSupport
-      -- ^ @FILTER_VIDEO_VPAID_SUPPORT@
-    | FPTFilterWeek
-      -- ^ @FILTER_WEEK@
-    | FPTFilterYear
-      -- ^ @FILTER_YEAR@
-    | FPTFilterYouTubeVertical
-      -- ^ @FILTER_YOUTUBE_VERTICAL@
-    | FPTFilterZipCode
-      -- ^ @FILTER_ZIP_CODE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable FilterPairType
-
-instance FromText FilterPairType where
-    fromText = \case
-        "FILTER_ACTIVE_VIEW_EXPECTED_VIEWABILITY" -> Just FPTFilterActiveViewExpectedViewability
-        "FILTER_ACTIVITY_ID" -> Just FPTFilterActivityId
-        "FILTER_ADVERTISER" -> Just FPTFilterAdvertiser
-        "FILTER_ADVERTISER_CURRENCY" -> Just FPTFilterAdvertiserCurrency
-        "FILTER_ADVERTISER_TIMEZONE" -> Just FPTFilterAdvertiserTimezone
-        "FILTER_AD_POSITION" -> Just FPTFilterAdPosition
-        "FILTER_AGE" -> Just FPTFilterAge
-        "FILTER_BRANDSAFE_CHANNEL_ID" -> Just FPTFilterBrandsafeChannelId
-        "FILTER_BROWSER" -> Just FPTFilterBrowser
-        "FILTER_CAMPAIGN_DAILY_FREQUENCY" -> Just FPTFilterCampaignDailyFrequency
-        "FILTER_CARRIER" -> Just FPTFilterCarrier
-        "FILTER_CHANNEL_ID" -> Just FPTFilterChannelId
-        "FILTER_CITY" -> Just FPTFilterCity
-        "FILTER_CONVERSION_DELAY" -> Just FPTFilterConversionDelay
-        "FILTER_COUNTRY" -> Just FPTFilterCountry
-        "FILTER_CREATIVE_ID" -> Just FPTFilterCreativeId
-        "FILTER_CREATIVE_SIZE" -> Just FPTFilterCreativeSize
-        "FILTER_CREATIVE_TYPE" -> Just FPTFilterCreativeType
-        "FILTER_DATA_PROVIDER" -> Just FPTFilterDataProvider
-        "FILTER_DATE" -> Just FPTFilterDate
-        "FILTER_DAY_OF_WEEK" -> Just FPTFilterDayOfWeek
-        "FILTER_DMA" -> Just FPTFilterDma
-        "FILTER_EXCHANGE_ID" -> Just FPTFilterExchangeId
-        "FILTER_FLOODLIGHT_PIXEL_ID" -> Just FPTFilterFloodlightPixelId
-        "FILTER_GENDER" -> Just FPTFilterGender
-        "FILTER_INSERTION_ORDER" -> Just FPTFilterInsertionOrder
-        "FILTER_INVENTORY_FORMAT" -> Just FPTFilterInventoryFormat
-        "FILTER_INVENTORY_SOURCE" -> Just FPTFilterInventorySource
-        "FILTER_INVENTORY_SOURCE_TYPE" -> Just FPTFilterInventorySourceType
-        "FILTER_KEYWORD" -> Just FPTFilterKeyword
-        "FILTER_LINE_ITEM" -> Just FPTFilterLineItem
-        "FILTER_LINE_ITEM_DAILY_FREQUENCY" -> Just FPTFilterLineItemDailyFrequency
-        "FILTER_LINE_ITEM_LIFETIME_FREQUENCY" -> Just FPTFilterLineItemLifetimeFrequency
-        "FILTER_LINE_ITEM_TYPE" -> Just FPTFilterLineItemType
-        "FILTER_MOBILE_DEVICE_MAKE" -> Just FPTFilterMobileDeviceMake
-        "FILTER_MOBILE_DEVICE_MAKE_MODEL" -> Just FPTFilterMobileDeviceMakeModel
-        "FILTER_MOBILE_DEVICE_TYPE" -> Just FPTFilterMobileDeviceType
-        "FILTER_MOBILE_GEO" -> Just FPTFilterMobileGeo
-        "FILTER_MONTH" -> Just FPTFilterMonth
-        "FILTER_MRAID_SUPPORT" -> Just FPTFilterMraidSupport
-        "FILTER_NIELSEN_AGE" -> Just FPTFilterNielsenAge
-        "FILTER_NIELSEN_COUNTRY_CODE" -> Just FPTFilterNielsenCountryCode
-        "FILTER_NIELSEN_DEVICE_ID" -> Just FPTFilterNielsenDeviceId
-        "FILTER_NIELSEN_GENDER" -> Just FPTFilterNielsenGender
-        "FILTER_ORDER_ID" -> Just FPTFilterOrderId
-        "FILTER_OS" -> Just FPTFilterOS
-        "FILTER_PAGE_CATEGORY" -> Just FPTFilterPageCategory
-        "FILTER_PAGE_LAYOUT" -> Just FPTFilterPageLayout
-        "FILTER_PARTNER" -> Just FPTFilterPartner
-        "FILTER_PARTNER_CURRENCY" -> Just FPTFilterPartnerCurrency
-        "FILTER_PUBLIC_INVENTORY" -> Just FPTFilterPublicInventory
-        "FILTER_QUARTER" -> Just FPTFilterQuarter
-        "FILTER_REGION" -> Just FPTFilterRegion
-        "FILTER_REGULAR_CHANNEL_ID" -> Just FPTFilterRegularChannelId
-        "FILTER_SITE_ID" -> Just FPTFilterSiteId
-        "FILTER_SITE_LANGUAGE" -> Just FPTFilterSiteLanguage
-        "FILTER_TARGETED_USER_LIST" -> Just FPTFilterTargetedUserList
-        "FILTER_TIME_OF_DAY" -> Just FPTFilterTimeOfDay
-        "FILTER_TRUEVIEW_CONVERSION_TYPE" -> Just FPTFilterTrueviewConversionType
-        "FILTER_UNKNOWN" -> Just FPTFilterUnknown
-        "FILTER_USER_LIST" -> Just FPTFilterUserList
-        "FILTER_USER_LIST_FIRST_PARTY" -> Just FPTFilterUserListFirstParty
-        "FILTER_USER_LIST_THIRD_PARTY" -> Just FPTFilterUserListThirdParty
-        "FILTER_VIDEO_AD_POSITION_IN_STREAM" -> Just FPTFilterVideoAdPositionInStream
-        "FILTER_VIDEO_COMPANION_SIZE" -> Just FPTFilterVideoCompanionSize
-        "FILTER_VIDEO_COMPANION_TYPE" -> Just FPTFilterVideoCompanionType
-        "FILTER_VIDEO_CREATIVE_DURATION" -> Just FPTFilterVideoCreativeDuration
-        "FILTER_VIDEO_CREATIVE_DURATION_SKIPPABLE" -> Just FPTFilterVideoCreativeDurationSkippable
-        "FILTER_VIDEO_DURATION_SECONDS" -> Just FPTFilterVideoDurationSeconds
-        "FILTER_VIDEO_FORMAT_SUPPORT" -> Just FPTFilterVideoFormatSupport
-        "FILTER_VIDEO_INVENTORY_TYPE" -> Just FPTFilterVideoInventoryType
-        "FILTER_VIDEO_PLAYER_SIZE" -> Just FPTFilterVideoPlayerSize
-        "FILTER_VIDEO_RATING_TIER" -> Just FPTFilterVideoRatingTier
-        "FILTER_VIDEO_SKIPPABLE_SUPPORT" -> Just FPTFilterVideoSkippableSupport
-        "FILTER_VIDEO_VPAID_SUPPORT" -> Just FPTFilterVideoVpaidSupport
-        "FILTER_WEEK" -> Just FPTFilterWeek
-        "FILTER_YEAR" -> Just FPTFilterYear
-        "FILTER_YOUTUBE_VERTICAL" -> Just FPTFilterYouTubeVertical
-        "FILTER_ZIP_CODE" -> Just FPTFilterZipCode
-        _ -> Nothing
-
-instance ToText FilterPairType where
-    toText = \case
-        FPTFilterActiveViewExpectedViewability -> "FILTER_ACTIVE_VIEW_EXPECTED_VIEWABILITY"
-        FPTFilterActivityId -> "FILTER_ACTIVITY_ID"
-        FPTFilterAdvertiser -> "FILTER_ADVERTISER"
-        FPTFilterAdvertiserCurrency -> "FILTER_ADVERTISER_CURRENCY"
-        FPTFilterAdvertiserTimezone -> "FILTER_ADVERTISER_TIMEZONE"
-        FPTFilterAdPosition -> "FILTER_AD_POSITION"
-        FPTFilterAge -> "FILTER_AGE"
-        FPTFilterBrandsafeChannelId -> "FILTER_BRANDSAFE_CHANNEL_ID"
-        FPTFilterBrowser -> "FILTER_BROWSER"
-        FPTFilterCampaignDailyFrequency -> "FILTER_CAMPAIGN_DAILY_FREQUENCY"
-        FPTFilterCarrier -> "FILTER_CARRIER"
-        FPTFilterChannelId -> "FILTER_CHANNEL_ID"
-        FPTFilterCity -> "FILTER_CITY"
-        FPTFilterConversionDelay -> "FILTER_CONVERSION_DELAY"
-        FPTFilterCountry -> "FILTER_COUNTRY"
-        FPTFilterCreativeId -> "FILTER_CREATIVE_ID"
-        FPTFilterCreativeSize -> "FILTER_CREATIVE_SIZE"
-        FPTFilterCreativeType -> "FILTER_CREATIVE_TYPE"
-        FPTFilterDataProvider -> "FILTER_DATA_PROVIDER"
-        FPTFilterDate -> "FILTER_DATE"
-        FPTFilterDayOfWeek -> "FILTER_DAY_OF_WEEK"
-        FPTFilterDma -> "FILTER_DMA"
-        FPTFilterExchangeId -> "FILTER_EXCHANGE_ID"
-        FPTFilterFloodlightPixelId -> "FILTER_FLOODLIGHT_PIXEL_ID"
-        FPTFilterGender -> "FILTER_GENDER"
-        FPTFilterInsertionOrder -> "FILTER_INSERTION_ORDER"
-        FPTFilterInventoryFormat -> "FILTER_INVENTORY_FORMAT"
-        FPTFilterInventorySource -> "FILTER_INVENTORY_SOURCE"
-        FPTFilterInventorySourceType -> "FILTER_INVENTORY_SOURCE_TYPE"
-        FPTFilterKeyword -> "FILTER_KEYWORD"
-        FPTFilterLineItem -> "FILTER_LINE_ITEM"
-        FPTFilterLineItemDailyFrequency -> "FILTER_LINE_ITEM_DAILY_FREQUENCY"
-        FPTFilterLineItemLifetimeFrequency -> "FILTER_LINE_ITEM_LIFETIME_FREQUENCY"
-        FPTFilterLineItemType -> "FILTER_LINE_ITEM_TYPE"
-        FPTFilterMobileDeviceMake -> "FILTER_MOBILE_DEVICE_MAKE"
-        FPTFilterMobileDeviceMakeModel -> "FILTER_MOBILE_DEVICE_MAKE_MODEL"
-        FPTFilterMobileDeviceType -> "FILTER_MOBILE_DEVICE_TYPE"
-        FPTFilterMobileGeo -> "FILTER_MOBILE_GEO"
-        FPTFilterMonth -> "FILTER_MONTH"
-        FPTFilterMraidSupport -> "FILTER_MRAID_SUPPORT"
-        FPTFilterNielsenAge -> "FILTER_NIELSEN_AGE"
-        FPTFilterNielsenCountryCode -> "FILTER_NIELSEN_COUNTRY_CODE"
-        FPTFilterNielsenDeviceId -> "FILTER_NIELSEN_DEVICE_ID"
-        FPTFilterNielsenGender -> "FILTER_NIELSEN_GENDER"
-        FPTFilterOrderId -> "FILTER_ORDER_ID"
-        FPTFilterOS -> "FILTER_OS"
-        FPTFilterPageCategory -> "FILTER_PAGE_CATEGORY"
-        FPTFilterPageLayout -> "FILTER_PAGE_LAYOUT"
-        FPTFilterPartner -> "FILTER_PARTNER"
-        FPTFilterPartnerCurrency -> "FILTER_PARTNER_CURRENCY"
-        FPTFilterPublicInventory -> "FILTER_PUBLIC_INVENTORY"
-        FPTFilterQuarter -> "FILTER_QUARTER"
-        FPTFilterRegion -> "FILTER_REGION"
-        FPTFilterRegularChannelId -> "FILTER_REGULAR_CHANNEL_ID"
-        FPTFilterSiteId -> "FILTER_SITE_ID"
-        FPTFilterSiteLanguage -> "FILTER_SITE_LANGUAGE"
-        FPTFilterTargetedUserList -> "FILTER_TARGETED_USER_LIST"
-        FPTFilterTimeOfDay -> "FILTER_TIME_OF_DAY"
-        FPTFilterTrueviewConversionType -> "FILTER_TRUEVIEW_CONVERSION_TYPE"
-        FPTFilterUnknown -> "FILTER_UNKNOWN"
-        FPTFilterUserList -> "FILTER_USER_LIST"
-        FPTFilterUserListFirstParty -> "FILTER_USER_LIST_FIRST_PARTY"
-        FPTFilterUserListThirdParty -> "FILTER_USER_LIST_THIRD_PARTY"
-        FPTFilterVideoAdPositionInStream -> "FILTER_VIDEO_AD_POSITION_IN_STREAM"
-        FPTFilterVideoCompanionSize -> "FILTER_VIDEO_COMPANION_SIZE"
-        FPTFilterVideoCompanionType -> "FILTER_VIDEO_COMPANION_TYPE"
-        FPTFilterVideoCreativeDuration -> "FILTER_VIDEO_CREATIVE_DURATION"
-        FPTFilterVideoCreativeDurationSkippable -> "FILTER_VIDEO_CREATIVE_DURATION_SKIPPABLE"
-        FPTFilterVideoDurationSeconds -> "FILTER_VIDEO_DURATION_SECONDS"
-        FPTFilterVideoFormatSupport -> "FILTER_VIDEO_FORMAT_SUPPORT"
-        FPTFilterVideoInventoryType -> "FILTER_VIDEO_INVENTORY_TYPE"
-        FPTFilterVideoPlayerSize -> "FILTER_VIDEO_PLAYER_SIZE"
-        FPTFilterVideoRatingTier -> "FILTER_VIDEO_RATING_TIER"
-        FPTFilterVideoSkippableSupport -> "FILTER_VIDEO_SKIPPABLE_SUPPORT"
-        FPTFilterVideoVpaidSupport -> "FILTER_VIDEO_VPAID_SUPPORT"
-        FPTFilterWeek -> "FILTER_WEEK"
-        FPTFilterYear -> "FILTER_YEAR"
-        FPTFilterYouTubeVertical -> "FILTER_YOUTUBE_VERTICAL"
-        FPTFilterZipCode -> "FILTER_ZIP_CODE"
-
-instance FromJSON FilterPairType where
-    parseJSON = parseJSONText "FilterPairType"
-
-instance ToJSON FilterPairType where
-    toJSON = toJSONText
-
--- | Report data range used to generate the report.
-data RunQueryRequestDataRange
-    = RQRDRAllTime
-      -- ^ @ALL_TIME@
-    | RQRDRCurrentDay
-      -- ^ @CURRENT_DAY@
-    | RQRDRCustomDates
-      -- ^ @CUSTOM_DATES@
-    | RQRDRLast14Days
-      -- ^ @LAST_14_DAYS@
-    | RQRDRLast30Days
-      -- ^ @LAST_30_DAYS@
-    | RQRDRLast365Days
-      -- ^ @LAST_365_DAYS@
-    | RQRDRLast7Days
-      -- ^ @LAST_7_DAYS@
-    | RQRDRLast90Days
-      -- ^ @LAST_90_DAYS@
-    | RQRDRMonthToDate
-      -- ^ @MONTH_TO_DATE@
-    | RQRDRPreviousDay
-      -- ^ @PREVIOUS_DAY@
-    | RQRDRPreviousHalfMonth
-      -- ^ @PREVIOUS_HALF_MONTH@
-    | RQRDRPreviousMonth
-      -- ^ @PREVIOUS_MONTH@
-    | RQRDRPreviousQuarter
-      -- ^ @PREVIOUS_QUARTER@
-    | RQRDRPreviousWeek
-      -- ^ @PREVIOUS_WEEK@
-    | RQRDRPreviousYear
-      -- ^ @PREVIOUS_YEAR@
-    | RQRDRQuarterToDate
-      -- ^ @QUARTER_TO_DATE@
-    | RQRDRWeekToDate
-      -- ^ @WEEK_TO_DATE@
-    | RQRDRYearToDate
-      -- ^ @YEAR_TO_DATE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable RunQueryRequestDataRange
-
-instance FromText RunQueryRequestDataRange where
-    fromText = \case
-        "ALL_TIME" -> Just RQRDRAllTime
-        "CURRENT_DAY" -> Just RQRDRCurrentDay
-        "CUSTOM_DATES" -> Just RQRDRCustomDates
-        "LAST_14_DAYS" -> Just RQRDRLast14Days
-        "LAST_30_DAYS" -> Just RQRDRLast30Days
-        "LAST_365_DAYS" -> Just RQRDRLast365Days
-        "LAST_7_DAYS" -> Just RQRDRLast7Days
-        "LAST_90_DAYS" -> Just RQRDRLast90Days
-        "MONTH_TO_DATE" -> Just RQRDRMonthToDate
-        "PREVIOUS_DAY" -> Just RQRDRPreviousDay
-        "PREVIOUS_HALF_MONTH" -> Just RQRDRPreviousHalfMonth
-        "PREVIOUS_MONTH" -> Just RQRDRPreviousMonth
-        "PREVIOUS_QUARTER" -> Just RQRDRPreviousQuarter
-        "PREVIOUS_WEEK" -> Just RQRDRPreviousWeek
-        "PREVIOUS_YEAR" -> Just RQRDRPreviousYear
-        "QUARTER_TO_DATE" -> Just RQRDRQuarterToDate
-        "WEEK_TO_DATE" -> Just RQRDRWeekToDate
-        "YEAR_TO_DATE" -> Just RQRDRYearToDate
-        _ -> Nothing
-
-instance ToText RunQueryRequestDataRange where
-    toText = \case
-        RQRDRAllTime -> "ALL_TIME"
-        RQRDRCurrentDay -> "CURRENT_DAY"
-        RQRDRCustomDates -> "CUSTOM_DATES"
-        RQRDRLast14Days -> "LAST_14_DAYS"
-        RQRDRLast30Days -> "LAST_30_DAYS"
-        RQRDRLast365Days -> "LAST_365_DAYS"
-        RQRDRLast7Days -> "LAST_7_DAYS"
-        RQRDRLast90Days -> "LAST_90_DAYS"
-        RQRDRMonthToDate -> "MONTH_TO_DATE"
-        RQRDRPreviousDay -> "PREVIOUS_DAY"
-        RQRDRPreviousHalfMonth -> "PREVIOUS_HALF_MONTH"
-        RQRDRPreviousMonth -> "PREVIOUS_MONTH"
-        RQRDRPreviousQuarter -> "PREVIOUS_QUARTER"
-        RQRDRPreviousWeek -> "PREVIOUS_WEEK"
-        RQRDRPreviousYear -> "PREVIOUS_YEAR"
-        RQRDRQuarterToDate -> "QUARTER_TO_DATE"
-        RQRDRWeekToDate -> "WEEK_TO_DATE"
-        RQRDRYearToDate -> "YEAR_TO_DATE"
-
-instance FromJSON RunQueryRequestDataRange where
-    parseJSON = parseJSONText "RunQueryRequestDataRange"
-
-instance ToJSON RunQueryRequestDataRange where
-    toJSON = toJSONText
-
--- | The state of the report.
-data ReportStatusState
-    = Done
-      -- ^ @DONE@
-    | Failed
-      -- ^ @FAILED@
-    | Running
-      -- ^ @RUNNING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ReportStatusState
-
-instance FromText ReportStatusState where
-    fromText = \case
-        "DONE" -> Just Done
-        "FAILED" -> Just Failed
-        "RUNNING" -> Just Running
-        _ -> Nothing
-
-instance ToText ReportStatusState where
-    toText = \case
-        Done -> "DONE"
-        Failed -> "FAILED"
-        Running -> "RUNNING"
-
-instance FromJSON ReportStatusState where
-    parseJSON = parseJSONText "ReportStatusState"
-
-instance ToJSON ReportStatusState where
-    toJSON = toJSONText
-
-data ParametersMetrics
+data MetricsItem
     = MetricBidRequests
       -- ^ @METRIC_BID_REQUESTS@
     | MetricBillableCostAdvertiser
@@ -1627,9 +1201,9 @@ data ParametersMetrics
       -- ^ @METRIC_VIDEO_COMPLETION_RATE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ParametersMetrics
+instance Hashable MetricsItem
 
-instance FromText ParametersMetrics where
+instance FromText MetricsItem where
     fromText = \case
         "METRIC_BID_REQUESTS" -> Just MetricBidRequests
         "METRIC_BILLABLE_COST_ADVERTISER" -> Just MetricBillableCostAdvertiser
@@ -1872,7 +1446,7 @@ instance FromText ParametersMetrics where
         "METRIC_VIDEO_COMPLETION_RATE" -> Just MetricVideoCompletionRate
         _ -> Nothing
 
-instance ToText ParametersMetrics where
+instance ToText MetricsItem where
     toText = \case
         MetricBidRequests -> "METRIC_BID_REQUESTS"
         MetricBillableCostAdvertiser -> "METRIC_BILLABLE_COST_ADVERTISER"
@@ -2114,14 +1688,105 @@ instance ToText ParametersMetrics where
         MetricVideoCompanionImpressions -> "METRIC_VIDEO_COMPANION_IMPRESSIONS"
         MetricVideoCompletionRate -> "METRIC_VIDEO_COMPLETION_RATE"
 
-instance FromJSON ParametersMetrics where
-    parseJSON = parseJSONText "ParametersMetrics"
+instance FromJSON MetricsItem where
+    parseJSON = parseJSONText "MetricsItem"
 
-instance ToJSON ParametersMetrics where
+instance ToJSON MetricsItem where
+    toJSON = toJSONText
+
+-- | Report data range used to generate the report.
+data RunQueryRequestDataRange
+    = RQRDRAllTime
+      -- ^ @ALL_TIME@
+    | RQRDRCurrentDay
+      -- ^ @CURRENT_DAY@
+    | RQRDRCustomDates
+      -- ^ @CUSTOM_DATES@
+    | RQRDRLast14Days
+      -- ^ @LAST_14_DAYS@
+    | RQRDRLast30Days
+      -- ^ @LAST_30_DAYS@
+    | RQRDRLast365Days
+      -- ^ @LAST_365_DAYS@
+    | RQRDRLast7Days
+      -- ^ @LAST_7_DAYS@
+    | RQRDRLast90Days
+      -- ^ @LAST_90_DAYS@
+    | RQRDRMonthToDate
+      -- ^ @MONTH_TO_DATE@
+    | RQRDRPreviousDay
+      -- ^ @PREVIOUS_DAY@
+    | RQRDRPreviousHalfMonth
+      -- ^ @PREVIOUS_HALF_MONTH@
+    | RQRDRPreviousMonth
+      -- ^ @PREVIOUS_MONTH@
+    | RQRDRPreviousQuarter
+      -- ^ @PREVIOUS_QUARTER@
+    | RQRDRPreviousWeek
+      -- ^ @PREVIOUS_WEEK@
+    | RQRDRPreviousYear
+      -- ^ @PREVIOUS_YEAR@
+    | RQRDRQuarterToDate
+      -- ^ @QUARTER_TO_DATE@
+    | RQRDRWeekToDate
+      -- ^ @WEEK_TO_DATE@
+    | RQRDRYearToDate
+      -- ^ @YEAR_TO_DATE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable RunQueryRequestDataRange
+
+instance FromText RunQueryRequestDataRange where
+    fromText = \case
+        "ALL_TIME" -> Just RQRDRAllTime
+        "CURRENT_DAY" -> Just RQRDRCurrentDay
+        "CUSTOM_DATES" -> Just RQRDRCustomDates
+        "LAST_14_DAYS" -> Just RQRDRLast14Days
+        "LAST_30_DAYS" -> Just RQRDRLast30Days
+        "LAST_365_DAYS" -> Just RQRDRLast365Days
+        "LAST_7_DAYS" -> Just RQRDRLast7Days
+        "LAST_90_DAYS" -> Just RQRDRLast90Days
+        "MONTH_TO_DATE" -> Just RQRDRMonthToDate
+        "PREVIOUS_DAY" -> Just RQRDRPreviousDay
+        "PREVIOUS_HALF_MONTH" -> Just RQRDRPreviousHalfMonth
+        "PREVIOUS_MONTH" -> Just RQRDRPreviousMonth
+        "PREVIOUS_QUARTER" -> Just RQRDRPreviousQuarter
+        "PREVIOUS_WEEK" -> Just RQRDRPreviousWeek
+        "PREVIOUS_YEAR" -> Just RQRDRPreviousYear
+        "QUARTER_TO_DATE" -> Just RQRDRQuarterToDate
+        "WEEK_TO_DATE" -> Just RQRDRWeekToDate
+        "YEAR_TO_DATE" -> Just RQRDRYearToDate
+        _ -> Nothing
+
+instance ToText RunQueryRequestDataRange where
+    toText = \case
+        RQRDRAllTime -> "ALL_TIME"
+        RQRDRCurrentDay -> "CURRENT_DAY"
+        RQRDRCustomDates -> "CUSTOM_DATES"
+        RQRDRLast14Days -> "LAST_14_DAYS"
+        RQRDRLast30Days -> "LAST_30_DAYS"
+        RQRDRLast365Days -> "LAST_365_DAYS"
+        RQRDRLast7Days -> "LAST_7_DAYS"
+        RQRDRLast90Days -> "LAST_90_DAYS"
+        RQRDRMonthToDate -> "MONTH_TO_DATE"
+        RQRDRPreviousDay -> "PREVIOUS_DAY"
+        RQRDRPreviousHalfMonth -> "PREVIOUS_HALF_MONTH"
+        RQRDRPreviousMonth -> "PREVIOUS_MONTH"
+        RQRDRPreviousQuarter -> "PREVIOUS_QUARTER"
+        RQRDRPreviousWeek -> "PREVIOUS_WEEK"
+        RQRDRPreviousYear -> "PREVIOUS_YEAR"
+        RQRDRQuarterToDate -> "QUARTER_TO_DATE"
+        RQRDRWeekToDate -> "WEEK_TO_DATE"
+        RQRDRYearToDate -> "YEAR_TO_DATE"
+
+instance FromJSON RunQueryRequestDataRange where
+    parseJSON = parseJSONText "RunQueryRequestDataRange"
+
+instance ToJSON RunQueryRequestDataRange where
     toJSON = toJSONText
 
 -- | Error code that shows why the report was not created.
-data ReportFailureErrorCode
+data ErrorCode
     = AuthenticationError
       -- ^ @AUTHENTICATION_ERROR@
     | DeprecatedReportingInvalidQuery
@@ -2160,9 +1825,9 @@ data ReportFailureErrorCode
       -- ^ @VALIDATION_ERROR@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ReportFailureErrorCode
+instance Hashable ErrorCode
 
-instance FromText ReportFailureErrorCode where
+instance FromText ErrorCode where
     fromText = \case
         "AUTHENTICATION_ERROR" -> Just AuthenticationError
         "DEPRECATED_REPORTING_INVALID_QUERY" -> Just DeprecatedReportingInvalidQuery
@@ -2184,7 +1849,7 @@ instance FromText ReportFailureErrorCode where
         "VALIDATION_ERROR" -> Just ValidationError
         _ -> Nothing
 
-instance ToText ReportFailureErrorCode where
+instance ToText ErrorCode where
     toText = \case
         AuthenticationError -> "AUTHENTICATION_ERROR"
         DeprecatedReportingInvalidQuery -> "DEPRECATED_REPORTING_INVALID_QUERY"
@@ -2205,10 +1870,345 @@ instance ToText ReportFailureErrorCode where
         UnauthorizedAPIAccess -> "UNAUTHORIZED_API_ACCESS"
         ValidationError -> "VALIDATION_ERROR"
 
-instance FromJSON ReportFailureErrorCode where
-    parseJSON = parseJSONText "ReportFailureErrorCode"
+instance FromJSON ErrorCode where
+    parseJSON = parseJSONText "ErrorCode"
 
-instance ToJSON ReportFailureErrorCode where
+instance ToJSON ErrorCode where
+    toJSON = toJSONText
+
+-- | Filter type.
+data Type
+    = TFilterActiveViewExpectedViewability
+      -- ^ @FILTER_ACTIVE_VIEW_EXPECTED_VIEWABILITY@
+    | TFilterActivityId
+      -- ^ @FILTER_ACTIVITY_ID@
+    | TFilterAdvertiser
+      -- ^ @FILTER_ADVERTISER@
+    | TFilterAdvertiserCurrency
+      -- ^ @FILTER_ADVERTISER_CURRENCY@
+    | TFilterAdvertiserTimezone
+      -- ^ @FILTER_ADVERTISER_TIMEZONE@
+    | TFilterAdPosition
+      -- ^ @FILTER_AD_POSITION@
+    | TFilterAge
+      -- ^ @FILTER_AGE@
+    | TFilterBrandsafeChannelId
+      -- ^ @FILTER_BRANDSAFE_CHANNEL_ID@
+    | TFilterBrowser
+      -- ^ @FILTER_BROWSER@
+    | TFilterCampaignDailyFrequency
+      -- ^ @FILTER_CAMPAIGN_DAILY_FREQUENCY@
+    | TFilterCarrier
+      -- ^ @FILTER_CARRIER@
+    | TFilterChannelId
+      -- ^ @FILTER_CHANNEL_ID@
+    | TFilterCity
+      -- ^ @FILTER_CITY@
+    | TFilterConversionDelay
+      -- ^ @FILTER_CONVERSION_DELAY@
+    | TFilterCountry
+      -- ^ @FILTER_COUNTRY@
+    | TFilterCreativeId
+      -- ^ @FILTER_CREATIVE_ID@
+    | TFilterCreativeSize
+      -- ^ @FILTER_CREATIVE_SIZE@
+    | TFilterCreativeType
+      -- ^ @FILTER_CREATIVE_TYPE@
+    | TFilterDataProvider
+      -- ^ @FILTER_DATA_PROVIDER@
+    | TFilterDate
+      -- ^ @FILTER_DATE@
+    | TFilterDayOfWeek
+      -- ^ @FILTER_DAY_OF_WEEK@
+    | TFilterDma
+      -- ^ @FILTER_DMA@
+    | TFilterExchangeId
+      -- ^ @FILTER_EXCHANGE_ID@
+    | TFilterFloodlightPixelId
+      -- ^ @FILTER_FLOODLIGHT_PIXEL_ID@
+    | TFilterGender
+      -- ^ @FILTER_GENDER@
+    | TFilterInsertionOrder
+      -- ^ @FILTER_INSERTION_ORDER@
+    | TFilterInventoryFormat
+      -- ^ @FILTER_INVENTORY_FORMAT@
+    | TFilterInventorySource
+      -- ^ @FILTER_INVENTORY_SOURCE@
+    | TFilterInventorySourceType
+      -- ^ @FILTER_INVENTORY_SOURCE_TYPE@
+    | TFilterKeyword
+      -- ^ @FILTER_KEYWORD@
+    | TFilterLineItem
+      -- ^ @FILTER_LINE_ITEM@
+    | TFilterLineItemDailyFrequency
+      -- ^ @FILTER_LINE_ITEM_DAILY_FREQUENCY@
+    | TFilterLineItemLifetimeFrequency
+      -- ^ @FILTER_LINE_ITEM_LIFETIME_FREQUENCY@
+    | TFilterLineItemType
+      -- ^ @FILTER_LINE_ITEM_TYPE@
+    | TFilterMobileDeviceMake
+      -- ^ @FILTER_MOBILE_DEVICE_MAKE@
+    | TFilterMobileDeviceMakeModel
+      -- ^ @FILTER_MOBILE_DEVICE_MAKE_MODEL@
+    | TFilterMobileDeviceType
+      -- ^ @FILTER_MOBILE_DEVICE_TYPE@
+    | TFilterMobileGeo
+      -- ^ @FILTER_MOBILE_GEO@
+    | TFilterMonth
+      -- ^ @FILTER_MONTH@
+    | TFilterMraidSupport
+      -- ^ @FILTER_MRAID_SUPPORT@
+    | TFilterNielsenAge
+      -- ^ @FILTER_NIELSEN_AGE@
+    | TFilterNielsenCountryCode
+      -- ^ @FILTER_NIELSEN_COUNTRY_CODE@
+    | TFilterNielsenDeviceId
+      -- ^ @FILTER_NIELSEN_DEVICE_ID@
+    | TFilterNielsenGender
+      -- ^ @FILTER_NIELSEN_GENDER@
+    | TFilterOrderId
+      -- ^ @FILTER_ORDER_ID@
+    | TFilterOS
+      -- ^ @FILTER_OS@
+    | TFilterPageCategory
+      -- ^ @FILTER_PAGE_CATEGORY@
+    | TFilterPageLayout
+      -- ^ @FILTER_PAGE_LAYOUT@
+    | TFilterPartner
+      -- ^ @FILTER_PARTNER@
+    | TFilterPartnerCurrency
+      -- ^ @FILTER_PARTNER_CURRENCY@
+    | TFilterPublicInventory
+      -- ^ @FILTER_PUBLIC_INVENTORY@
+    | TFilterQuarter
+      -- ^ @FILTER_QUARTER@
+    | TFilterRegion
+      -- ^ @FILTER_REGION@
+    | TFilterRegularChannelId
+      -- ^ @FILTER_REGULAR_CHANNEL_ID@
+    | TFilterSiteId
+      -- ^ @FILTER_SITE_ID@
+    | TFilterSiteLanguage
+      -- ^ @FILTER_SITE_LANGUAGE@
+    | TFilterTargetedUserList
+      -- ^ @FILTER_TARGETED_USER_LIST@
+    | TFilterTimeOfDay
+      -- ^ @FILTER_TIME_OF_DAY@
+    | TFilterTrueviewConversionType
+      -- ^ @FILTER_TRUEVIEW_CONVERSION_TYPE@
+    | TFilterUnknown
+      -- ^ @FILTER_UNKNOWN@
+    | TFilterUserList
+      -- ^ @FILTER_USER_LIST@
+    | TFilterUserListFirstParty
+      -- ^ @FILTER_USER_LIST_FIRST_PARTY@
+    | TFilterUserListThirdParty
+      -- ^ @FILTER_USER_LIST_THIRD_PARTY@
+    | TFilterVideoAdPositionInStream
+      -- ^ @FILTER_VIDEO_AD_POSITION_IN_STREAM@
+    | TFilterVideoCompanionSize
+      -- ^ @FILTER_VIDEO_COMPANION_SIZE@
+    | TFilterVideoCompanionType
+      -- ^ @FILTER_VIDEO_COMPANION_TYPE@
+    | TFilterVideoCreativeDuration
+      -- ^ @FILTER_VIDEO_CREATIVE_DURATION@
+    | TFilterVideoCreativeDurationSkippable
+      -- ^ @FILTER_VIDEO_CREATIVE_DURATION_SKIPPABLE@
+    | TFilterVideoDurationSeconds
+      -- ^ @FILTER_VIDEO_DURATION_SECONDS@
+    | TFilterVideoFormatSupport
+      -- ^ @FILTER_VIDEO_FORMAT_SUPPORT@
+    | TFilterVideoInventoryType
+      -- ^ @FILTER_VIDEO_INVENTORY_TYPE@
+    | TFilterVideoPlayerSize
+      -- ^ @FILTER_VIDEO_PLAYER_SIZE@
+    | TFilterVideoRatingTier
+      -- ^ @FILTER_VIDEO_RATING_TIER@
+    | TFilterVideoSkippableSupport
+      -- ^ @FILTER_VIDEO_SKIPPABLE_SUPPORT@
+    | TFilterVideoVpaidSupport
+      -- ^ @FILTER_VIDEO_VPAID_SUPPORT@
+    | TFilterWeek
+      -- ^ @FILTER_WEEK@
+    | TFilterYear
+      -- ^ @FILTER_YEAR@
+    | TFilterYouTubeVertical
+      -- ^ @FILTER_YOUTUBE_VERTICAL@
+    | TFilterZipCode
+      -- ^ @FILTER_ZIP_CODE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Type
+
+instance FromText Type where
+    fromText = \case
+        "FILTER_ACTIVE_VIEW_EXPECTED_VIEWABILITY" -> Just TFilterActiveViewExpectedViewability
+        "FILTER_ACTIVITY_ID" -> Just TFilterActivityId
+        "FILTER_ADVERTISER" -> Just TFilterAdvertiser
+        "FILTER_ADVERTISER_CURRENCY" -> Just TFilterAdvertiserCurrency
+        "FILTER_ADVERTISER_TIMEZONE" -> Just TFilterAdvertiserTimezone
+        "FILTER_AD_POSITION" -> Just TFilterAdPosition
+        "FILTER_AGE" -> Just TFilterAge
+        "FILTER_BRANDSAFE_CHANNEL_ID" -> Just TFilterBrandsafeChannelId
+        "FILTER_BROWSER" -> Just TFilterBrowser
+        "FILTER_CAMPAIGN_DAILY_FREQUENCY" -> Just TFilterCampaignDailyFrequency
+        "FILTER_CARRIER" -> Just TFilterCarrier
+        "FILTER_CHANNEL_ID" -> Just TFilterChannelId
+        "FILTER_CITY" -> Just TFilterCity
+        "FILTER_CONVERSION_DELAY" -> Just TFilterConversionDelay
+        "FILTER_COUNTRY" -> Just TFilterCountry
+        "FILTER_CREATIVE_ID" -> Just TFilterCreativeId
+        "FILTER_CREATIVE_SIZE" -> Just TFilterCreativeSize
+        "FILTER_CREATIVE_TYPE" -> Just TFilterCreativeType
+        "FILTER_DATA_PROVIDER" -> Just TFilterDataProvider
+        "FILTER_DATE" -> Just TFilterDate
+        "FILTER_DAY_OF_WEEK" -> Just TFilterDayOfWeek
+        "FILTER_DMA" -> Just TFilterDma
+        "FILTER_EXCHANGE_ID" -> Just TFilterExchangeId
+        "FILTER_FLOODLIGHT_PIXEL_ID" -> Just TFilterFloodlightPixelId
+        "FILTER_GENDER" -> Just TFilterGender
+        "FILTER_INSERTION_ORDER" -> Just TFilterInsertionOrder
+        "FILTER_INVENTORY_FORMAT" -> Just TFilterInventoryFormat
+        "FILTER_INVENTORY_SOURCE" -> Just TFilterInventorySource
+        "FILTER_INVENTORY_SOURCE_TYPE" -> Just TFilterInventorySourceType
+        "FILTER_KEYWORD" -> Just TFilterKeyword
+        "FILTER_LINE_ITEM" -> Just TFilterLineItem
+        "FILTER_LINE_ITEM_DAILY_FREQUENCY" -> Just TFilterLineItemDailyFrequency
+        "FILTER_LINE_ITEM_LIFETIME_FREQUENCY" -> Just TFilterLineItemLifetimeFrequency
+        "FILTER_LINE_ITEM_TYPE" -> Just TFilterLineItemType
+        "FILTER_MOBILE_DEVICE_MAKE" -> Just TFilterMobileDeviceMake
+        "FILTER_MOBILE_DEVICE_MAKE_MODEL" -> Just TFilterMobileDeviceMakeModel
+        "FILTER_MOBILE_DEVICE_TYPE" -> Just TFilterMobileDeviceType
+        "FILTER_MOBILE_GEO" -> Just TFilterMobileGeo
+        "FILTER_MONTH" -> Just TFilterMonth
+        "FILTER_MRAID_SUPPORT" -> Just TFilterMraidSupport
+        "FILTER_NIELSEN_AGE" -> Just TFilterNielsenAge
+        "FILTER_NIELSEN_COUNTRY_CODE" -> Just TFilterNielsenCountryCode
+        "FILTER_NIELSEN_DEVICE_ID" -> Just TFilterNielsenDeviceId
+        "FILTER_NIELSEN_GENDER" -> Just TFilterNielsenGender
+        "FILTER_ORDER_ID" -> Just TFilterOrderId
+        "FILTER_OS" -> Just TFilterOS
+        "FILTER_PAGE_CATEGORY" -> Just TFilterPageCategory
+        "FILTER_PAGE_LAYOUT" -> Just TFilterPageLayout
+        "FILTER_PARTNER" -> Just TFilterPartner
+        "FILTER_PARTNER_CURRENCY" -> Just TFilterPartnerCurrency
+        "FILTER_PUBLIC_INVENTORY" -> Just TFilterPublicInventory
+        "FILTER_QUARTER" -> Just TFilterQuarter
+        "FILTER_REGION" -> Just TFilterRegion
+        "FILTER_REGULAR_CHANNEL_ID" -> Just TFilterRegularChannelId
+        "FILTER_SITE_ID" -> Just TFilterSiteId
+        "FILTER_SITE_LANGUAGE" -> Just TFilterSiteLanguage
+        "FILTER_TARGETED_USER_LIST" -> Just TFilterTargetedUserList
+        "FILTER_TIME_OF_DAY" -> Just TFilterTimeOfDay
+        "FILTER_TRUEVIEW_CONVERSION_TYPE" -> Just TFilterTrueviewConversionType
+        "FILTER_UNKNOWN" -> Just TFilterUnknown
+        "FILTER_USER_LIST" -> Just TFilterUserList
+        "FILTER_USER_LIST_FIRST_PARTY" -> Just TFilterUserListFirstParty
+        "FILTER_USER_LIST_THIRD_PARTY" -> Just TFilterUserListThirdParty
+        "FILTER_VIDEO_AD_POSITION_IN_STREAM" -> Just TFilterVideoAdPositionInStream
+        "FILTER_VIDEO_COMPANION_SIZE" -> Just TFilterVideoCompanionSize
+        "FILTER_VIDEO_COMPANION_TYPE" -> Just TFilterVideoCompanionType
+        "FILTER_VIDEO_CREATIVE_DURATION" -> Just TFilterVideoCreativeDuration
+        "FILTER_VIDEO_CREATIVE_DURATION_SKIPPABLE" -> Just TFilterVideoCreativeDurationSkippable
+        "FILTER_VIDEO_DURATION_SECONDS" -> Just TFilterVideoDurationSeconds
+        "FILTER_VIDEO_FORMAT_SUPPORT" -> Just TFilterVideoFormatSupport
+        "FILTER_VIDEO_INVENTORY_TYPE" -> Just TFilterVideoInventoryType
+        "FILTER_VIDEO_PLAYER_SIZE" -> Just TFilterVideoPlayerSize
+        "FILTER_VIDEO_RATING_TIER" -> Just TFilterVideoRatingTier
+        "FILTER_VIDEO_SKIPPABLE_SUPPORT" -> Just TFilterVideoSkippableSupport
+        "FILTER_VIDEO_VPAID_SUPPORT" -> Just TFilterVideoVpaidSupport
+        "FILTER_WEEK" -> Just TFilterWeek
+        "FILTER_YEAR" -> Just TFilterYear
+        "FILTER_YOUTUBE_VERTICAL" -> Just TFilterYouTubeVertical
+        "FILTER_ZIP_CODE" -> Just TFilterZipCode
+        _ -> Nothing
+
+instance ToText Type where
+    toText = \case
+        TFilterActiveViewExpectedViewability -> "FILTER_ACTIVE_VIEW_EXPECTED_VIEWABILITY"
+        TFilterActivityId -> "FILTER_ACTIVITY_ID"
+        TFilterAdvertiser -> "FILTER_ADVERTISER"
+        TFilterAdvertiserCurrency -> "FILTER_ADVERTISER_CURRENCY"
+        TFilterAdvertiserTimezone -> "FILTER_ADVERTISER_TIMEZONE"
+        TFilterAdPosition -> "FILTER_AD_POSITION"
+        TFilterAge -> "FILTER_AGE"
+        TFilterBrandsafeChannelId -> "FILTER_BRANDSAFE_CHANNEL_ID"
+        TFilterBrowser -> "FILTER_BROWSER"
+        TFilterCampaignDailyFrequency -> "FILTER_CAMPAIGN_DAILY_FREQUENCY"
+        TFilterCarrier -> "FILTER_CARRIER"
+        TFilterChannelId -> "FILTER_CHANNEL_ID"
+        TFilterCity -> "FILTER_CITY"
+        TFilterConversionDelay -> "FILTER_CONVERSION_DELAY"
+        TFilterCountry -> "FILTER_COUNTRY"
+        TFilterCreativeId -> "FILTER_CREATIVE_ID"
+        TFilterCreativeSize -> "FILTER_CREATIVE_SIZE"
+        TFilterCreativeType -> "FILTER_CREATIVE_TYPE"
+        TFilterDataProvider -> "FILTER_DATA_PROVIDER"
+        TFilterDate -> "FILTER_DATE"
+        TFilterDayOfWeek -> "FILTER_DAY_OF_WEEK"
+        TFilterDma -> "FILTER_DMA"
+        TFilterExchangeId -> "FILTER_EXCHANGE_ID"
+        TFilterFloodlightPixelId -> "FILTER_FLOODLIGHT_PIXEL_ID"
+        TFilterGender -> "FILTER_GENDER"
+        TFilterInsertionOrder -> "FILTER_INSERTION_ORDER"
+        TFilterInventoryFormat -> "FILTER_INVENTORY_FORMAT"
+        TFilterInventorySource -> "FILTER_INVENTORY_SOURCE"
+        TFilterInventorySourceType -> "FILTER_INVENTORY_SOURCE_TYPE"
+        TFilterKeyword -> "FILTER_KEYWORD"
+        TFilterLineItem -> "FILTER_LINE_ITEM"
+        TFilterLineItemDailyFrequency -> "FILTER_LINE_ITEM_DAILY_FREQUENCY"
+        TFilterLineItemLifetimeFrequency -> "FILTER_LINE_ITEM_LIFETIME_FREQUENCY"
+        TFilterLineItemType -> "FILTER_LINE_ITEM_TYPE"
+        TFilterMobileDeviceMake -> "FILTER_MOBILE_DEVICE_MAKE"
+        TFilterMobileDeviceMakeModel -> "FILTER_MOBILE_DEVICE_MAKE_MODEL"
+        TFilterMobileDeviceType -> "FILTER_MOBILE_DEVICE_TYPE"
+        TFilterMobileGeo -> "FILTER_MOBILE_GEO"
+        TFilterMonth -> "FILTER_MONTH"
+        TFilterMraidSupport -> "FILTER_MRAID_SUPPORT"
+        TFilterNielsenAge -> "FILTER_NIELSEN_AGE"
+        TFilterNielsenCountryCode -> "FILTER_NIELSEN_COUNTRY_CODE"
+        TFilterNielsenDeviceId -> "FILTER_NIELSEN_DEVICE_ID"
+        TFilterNielsenGender -> "FILTER_NIELSEN_GENDER"
+        TFilterOrderId -> "FILTER_ORDER_ID"
+        TFilterOS -> "FILTER_OS"
+        TFilterPageCategory -> "FILTER_PAGE_CATEGORY"
+        TFilterPageLayout -> "FILTER_PAGE_LAYOUT"
+        TFilterPartner -> "FILTER_PARTNER"
+        TFilterPartnerCurrency -> "FILTER_PARTNER_CURRENCY"
+        TFilterPublicInventory -> "FILTER_PUBLIC_INVENTORY"
+        TFilterQuarter -> "FILTER_QUARTER"
+        TFilterRegion -> "FILTER_REGION"
+        TFilterRegularChannelId -> "FILTER_REGULAR_CHANNEL_ID"
+        TFilterSiteId -> "FILTER_SITE_ID"
+        TFilterSiteLanguage -> "FILTER_SITE_LANGUAGE"
+        TFilterTargetedUserList -> "FILTER_TARGETED_USER_LIST"
+        TFilterTimeOfDay -> "FILTER_TIME_OF_DAY"
+        TFilterTrueviewConversionType -> "FILTER_TRUEVIEW_CONVERSION_TYPE"
+        TFilterUnknown -> "FILTER_UNKNOWN"
+        TFilterUserList -> "FILTER_USER_LIST"
+        TFilterUserListFirstParty -> "FILTER_USER_LIST_FIRST_PARTY"
+        TFilterUserListThirdParty -> "FILTER_USER_LIST_THIRD_PARTY"
+        TFilterVideoAdPositionInStream -> "FILTER_VIDEO_AD_POSITION_IN_STREAM"
+        TFilterVideoCompanionSize -> "FILTER_VIDEO_COMPANION_SIZE"
+        TFilterVideoCompanionType -> "FILTER_VIDEO_COMPANION_TYPE"
+        TFilterVideoCreativeDuration -> "FILTER_VIDEO_CREATIVE_DURATION"
+        TFilterVideoCreativeDurationSkippable -> "FILTER_VIDEO_CREATIVE_DURATION_SKIPPABLE"
+        TFilterVideoDurationSeconds -> "FILTER_VIDEO_DURATION_SECONDS"
+        TFilterVideoFormatSupport -> "FILTER_VIDEO_FORMAT_SUPPORT"
+        TFilterVideoInventoryType -> "FILTER_VIDEO_INVENTORY_TYPE"
+        TFilterVideoPlayerSize -> "FILTER_VIDEO_PLAYER_SIZE"
+        TFilterVideoRatingTier -> "FILTER_VIDEO_RATING_TIER"
+        TFilterVideoSkippableSupport -> "FILTER_VIDEO_SKIPPABLE_SUPPORT"
+        TFilterVideoVpaidSupport -> "FILTER_VIDEO_VPAID_SUPPORT"
+        TFilterWeek -> "FILTER_WEEK"
+        TFilterYear -> "FILTER_YEAR"
+        TFilterYouTubeVertical -> "FILTER_YOUTUBE_VERTICAL"
+        TFilterZipCode -> "FILTER_ZIP_CODE"
+
+instance FromJSON Type where
+    parseJSON = parseJSONText "Type"
+
+instance ToJSON Type where
     toJSON = toJSONText
 
 -- | Format in which the line items will be returned. Default to CSV.

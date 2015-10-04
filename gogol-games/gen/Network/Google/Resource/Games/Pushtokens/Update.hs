@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.Games.Pushtokens.Update
     -- * Request Lenses
     , puQuotaUser
     , puPrettyPrint
-    , puPushToken
     , puUserIP
+    , puPayload
     , puKey
     , puOAuthToken
     , puFields
@@ -61,12 +62,12 @@ type PushtokensUpdateResource =
 data PushtokensUpdate' = PushtokensUpdate'
     { _puQuotaUser   :: !(Maybe Text)
     , _puPrettyPrint :: !Bool
-    , _puPushToken   :: !PushToken
     , _puUserIP      :: !(Maybe Text)
+    , _puPayload     :: !PushToken
     , _puKey         :: !(Maybe Key)
     , _puOAuthToken  :: !(Maybe OAuthToken)
     , _puFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PushtokensUpdate'' with the minimum fields required to make a request.
 --
@@ -76,9 +77,9 @@ data PushtokensUpdate' = PushtokensUpdate'
 --
 -- * 'puPrettyPrint'
 --
--- * 'puPushToken'
---
 -- * 'puUserIP'
+--
+-- * 'puPayload'
 --
 -- * 'puKey'
 --
@@ -86,14 +87,14 @@ data PushtokensUpdate' = PushtokensUpdate'
 --
 -- * 'puFields'
 pushtokensUpdate'
-    :: PushToken -- ^ 'PushToken'
+    :: PushToken -- ^ 'payload'
     -> PushtokensUpdate'
-pushtokensUpdate' pPuPushToken_ =
+pushtokensUpdate' pPuPayload_ =
     PushtokensUpdate'
     { _puQuotaUser = Nothing
     , _puPrettyPrint = True
-    , _puPushToken = pPuPushToken_
     , _puUserIP = Nothing
+    , _puPayload = pPuPayload_
     , _puKey = Nothing
     , _puOAuthToken = Nothing
     , _puFields = Nothing
@@ -112,15 +113,15 @@ puPrettyPrint
   = lens _puPrettyPrint
       (\ s a -> s{_puPrettyPrint = a})
 
--- | Multipart request metadata.
-puPushToken :: Lens' PushtokensUpdate' PushToken
-puPushToken
-  = lens _puPushToken (\ s a -> s{_puPushToken = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 puUserIP :: Lens' PushtokensUpdate' (Maybe Text)
 puUserIP = lens _puUserIP (\ s a -> s{_puUserIP = a})
+
+-- | Multipart request metadata.
+puPayload :: Lens' PushtokensUpdate' PushToken
+puPayload
+  = lens _puPayload (\ s a -> s{_puPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -150,7 +151,7 @@ instance GoogleRequest PushtokensUpdate' where
               _puKey
               _puOAuthToken
               (Just AltJSON)
-              _puPushToken
+              _puPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PushtokensUpdateResource)

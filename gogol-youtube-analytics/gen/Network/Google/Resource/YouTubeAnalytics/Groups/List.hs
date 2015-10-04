@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,9 +51,9 @@ import           Network.Google.YouTubeAnalytics.Types
 -- 'GroupsList'' request conforms to.
 type GroupsListResource =
      "groups" :>
-       QueryParam "id" Text :>
-         QueryParam "mine" Bool :>
-           QueryParam "onBehalfOfContentOwner" Text :>
+       QueryParam "mine" Bool :>
+         QueryParam "onBehalfOfContentOwner" Text :>
+           QueryParam "id" Text :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data GroupsList' = GroupsList'
     , _glId                     :: !(Maybe Text)
     , _glOAuthToken             :: !(Maybe OAuthToken)
     , _glFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsList'' with the minimum fields required to make a request.
 --
@@ -182,7 +183,7 @@ instance GoogleRequest GroupsList' where
         type Rs GroupsList' = GroupListResponse
         request = requestWithRoute defReq youTubeAnalyticsURL
         requestWithRoute r u GroupsList'{..}
-          = go _glId _glMine _glOnBehalfOfContentOwner
+          = go _glMine _glOnBehalfOfContentOwner _glId
               _glQuotaUser
               (Just _glPrettyPrint)
               _glUserIP

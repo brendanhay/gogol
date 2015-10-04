@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,9 +54,9 @@ type LayersListResource =
        Capture "volumeId" Text :>
          "layersummary" :>
            QueryParam "contentVersion" Text :>
-             QueryParam "maxResults" Word32 :>
+             QueryParam "source" Text :>
                QueryParam "pageToken" Text :>
-                 QueryParam "source" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -80,7 +81,7 @@ data LayersList' = LayersList'
     , _llOAuthToken     :: !(Maybe OAuthToken)
     , _llMaxResults     :: !(Maybe Word32)
     , _llFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersList'' with the minimum fields required to make a request.
 --
@@ -191,9 +192,9 @@ instance GoogleRequest LayersList' where
         type Rs LayersList' = Layersummaries
         request = requestWithRoute defReq booksURL
         requestWithRoute r u LayersList'{..}
-          = go _llContentVersion _llMaxResults _llPageToken
-              _llSource
-              _llVolumeId
+          = go _llVolumeId _llContentVersion _llSource
+              _llPageToken
+              _llMaxResults
               _llQuotaUser
               (Just _llPrettyPrint)
               _llUserIP

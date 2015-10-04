@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type URLMapsListResource =
        "global" :>
          "urlMaps" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -78,7 +79,7 @@ data URLMapsList' = URLMapsList'
     , _umlOAuthToken  :: !(Maybe OAuthToken)
     , _umlMaxResults  :: !Word32
     , _umlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsList'' with the minimum fields required to make a request.
 --
@@ -197,8 +198,8 @@ instance GoogleRequest URLMapsList' where
         type Rs URLMapsList' = URLMapList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u URLMapsList'{..}
-          = go _umlFilter (Just _umlMaxResults) _umlPageToken
-              _umlProject
+          = go _umlProject _umlFilter _umlPageToken
+              (Just _umlMaxResults)
               _umlQuotaUser
               (Just _umlPrettyPrint)
               _umlUserIP

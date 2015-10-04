@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.Compute.HTTPHealthChecks.Update
     , httphcuPrettyPrint
     , httphcuProject
     , httphcuUserIP
+    , httphcuPayload
     , httphcuKey
-    , httphcuHTTPHealthCheck
     , httphcuHTTPHealthCheck
     , httphcuOAuthToken
     , httphcuFields
@@ -71,12 +72,12 @@ data HTTPHealthChecksUpdate' = HTTPHealthChecksUpdate'
     , _httphcuPrettyPrint     :: !Bool
     , _httphcuProject         :: !Text
     , _httphcuUserIP          :: !(Maybe Text)
+    , _httphcuPayload         :: !HTTPHealthCheck
     , _httphcuKey             :: !(Maybe Key)
-    , _httphcuHTTPHealthCheck :: !HTTPHealthCheck
     , _httphcuHTTPHealthCheck :: !Text
     , _httphcuOAuthToken      :: !(Maybe OAuthToken)
     , _httphcuFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthChecksUpdate'' with the minimum fields required to make a request.
 --
@@ -90,9 +91,9 @@ data HTTPHealthChecksUpdate' = HTTPHealthChecksUpdate'
 --
 -- * 'httphcuUserIP'
 --
--- * 'httphcuKey'
+-- * 'httphcuPayload'
 --
--- * 'httphcuHTTPHealthCheck'
+-- * 'httphcuKey'
 --
 -- * 'httphcuHTTPHealthCheck'
 --
@@ -101,17 +102,17 @@ data HTTPHealthChecksUpdate' = HTTPHealthChecksUpdate'
 -- * 'httphcuFields'
 hTTPHealthChecksUpdate'
     :: Text -- ^ 'project'
-    -> HTTPHealthCheck -- ^ 'HTTPHealthCheck'
+    -> HTTPHealthCheck -- ^ 'payload'
     -> Text -- ^ 'httpHealthCheck'
     -> HTTPHealthChecksUpdate'
-hTTPHealthChecksUpdate' pHttphcuProject_ pHttphcuHTTPHealthCheck_ pHttphcuHTTPHealthCheck_ =
+hTTPHealthChecksUpdate' pHttphcuProject_ pHttphcuPayload_ pHttphcuHTTPHealthCheck_ =
     HTTPHealthChecksUpdate'
     { _httphcuQuotaUser = Nothing
     , _httphcuPrettyPrint = True
     , _httphcuProject = pHttphcuProject_
     , _httphcuUserIP = Nothing
+    , _httphcuPayload = pHttphcuPayload_
     , _httphcuKey = Nothing
-    , _httphcuHTTPHealthCheck = pHttphcuHTTPHealthCheck_
     , _httphcuHTTPHealthCheck = pHttphcuHTTPHealthCheck_
     , _httphcuOAuthToken = Nothing
     , _httphcuFields = Nothing
@@ -144,18 +145,18 @@ httphcuUserIP
   = lens _httphcuUserIP
       (\ s a -> s{_httphcuUserIP = a})
 
+-- | Multipart request metadata.
+httphcuPayload :: Lens' HTTPHealthChecksUpdate' HTTPHealthCheck
+httphcuPayload
+  = lens _httphcuPayload
+      (\ s a -> s{_httphcuPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 httphcuKey :: Lens' HTTPHealthChecksUpdate' (Maybe Key)
 httphcuKey
   = lens _httphcuKey (\ s a -> s{_httphcuKey = a})
-
--- | Multipart request metadata.
-httphcuHTTPHealthCheck :: Lens' HTTPHealthChecksUpdate' HTTPHealthCheck
-httphcuHTTPHealthCheck
-  = lens _httphcuHTTPHealthCheck
-      (\ s a -> s{_httphcuHTTPHealthCheck = a})
 
 -- | Name of the HttpHealthCheck resource to update.
 httphcuHTTPHealthCheck :: Lens' HTTPHealthChecksUpdate' Text
@@ -191,7 +192,7 @@ instance GoogleRequest HTTPHealthChecksUpdate' where
               _httphcuKey
               _httphcuOAuthToken
               (Just AltJSON)
-              _httphcuHTTPHealthCheck
+              _httphcuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy HTTPHealthChecksUpdateResource)

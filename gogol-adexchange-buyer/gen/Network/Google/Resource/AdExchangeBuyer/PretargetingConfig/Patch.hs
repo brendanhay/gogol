@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Patch
     , pcpQuotaUser
     , pcpPrettyPrint
     , pcpUserIP
-    , pcpPretargetingConfig
+    , pcpPayload
     , pcpAccountId
     , pcpKey
     , pcpConfigId
@@ -66,16 +67,16 @@ type PretargetingConfigPatchResource =
 --
 -- /See:/ 'pretargetingConfigPatch'' smart constructor.
 data PretargetingConfigPatch' = PretargetingConfigPatch'
-    { _pcpQuotaUser          :: !(Maybe Text)
-    , _pcpPrettyPrint        :: !Bool
-    , _pcpUserIP             :: !(Maybe Text)
-    , _pcpPretargetingConfig :: !PretargetingConfig
-    , _pcpAccountId          :: !Int64
-    , _pcpKey                :: !(Maybe Key)
-    , _pcpConfigId           :: !Int64
-    , _pcpOAuthToken         :: !(Maybe OAuthToken)
-    , _pcpFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _pcpQuotaUser   :: !(Maybe Text)
+    , _pcpPrettyPrint :: !Bool
+    , _pcpUserIP      :: !(Maybe Text)
+    , _pcpPayload     :: !PretargetingConfig
+    , _pcpAccountId   :: !Int64
+    , _pcpKey         :: !(Maybe Key)
+    , _pcpConfigId    :: !Int64
+    , _pcpOAuthToken  :: !(Maybe OAuthToken)
+    , _pcpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigPatch'' with the minimum fields required to make a request.
 --
@@ -87,7 +88,7 @@ data PretargetingConfigPatch' = PretargetingConfigPatch'
 --
 -- * 'pcpUserIP'
 --
--- * 'pcpPretargetingConfig'
+-- * 'pcpPayload'
 --
 -- * 'pcpAccountId'
 --
@@ -99,16 +100,16 @@ data PretargetingConfigPatch' = PretargetingConfigPatch'
 --
 -- * 'pcpFields'
 pretargetingConfigPatch'
-    :: PretargetingConfig -- ^ 'PretargetingConfig'
+    :: PretargetingConfig -- ^ 'payload'
     -> Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'configId'
     -> PretargetingConfigPatch'
-pretargetingConfigPatch' pPcpPretargetingConfig_ pPcpAccountId_ pPcpConfigId_ =
+pretargetingConfigPatch' pPcpPayload_ pPcpAccountId_ pPcpConfigId_ =
     PretargetingConfigPatch'
     { _pcpQuotaUser = Nothing
     , _pcpPrettyPrint = True
     , _pcpUserIP = Nothing
-    , _pcpPretargetingConfig = pPcpPretargetingConfig_
+    , _pcpPayload = pPcpPayload_
     , _pcpAccountId = pPcpAccountId_
     , _pcpKey = Nothing
     , _pcpConfigId = pPcpConfigId_
@@ -136,10 +137,9 @@ pcpUserIP
   = lens _pcpUserIP (\ s a -> s{_pcpUserIP = a})
 
 -- | Multipart request metadata.
-pcpPretargetingConfig :: Lens' PretargetingConfigPatch' PretargetingConfig
-pcpPretargetingConfig
-  = lens _pcpPretargetingConfig
-      (\ s a -> s{_pcpPretargetingConfig = a})
+pcpPayload :: Lens' PretargetingConfigPatch' PretargetingConfig
+pcpPayload
+  = lens _pcpPayload (\ s a -> s{_pcpPayload = a})
 
 -- | The account id to update the pretargeting config for.
 pcpAccountId :: Lens' PretargetingConfigPatch' Int64
@@ -183,7 +183,7 @@ instance GoogleRequest PretargetingConfigPatch' where
               _pcpKey
               _pcpOAuthToken
               (Just AltJSON)
-              _pcpPretargetingConfig
+              _pcpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PretargetingConfigPatchResource)

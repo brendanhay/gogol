@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.Calendar.FreeBusy.Query
     , fbqQuotaUser
     , fbqPrettyPrint
     , fbqUserIP
+    , fbqPayload
     , fbqKey
-    , fbqFreeBusyRequest
     , fbqOAuthToken
     , fbqFields
     ) where
@@ -60,14 +61,14 @@ type FreeBusyQueryResource =
 --
 -- /See:/ 'freeBusyQuery'' smart constructor.
 data FreeBusyQuery' = FreeBusyQuery'
-    { _fbqQuotaUser       :: !(Maybe Text)
-    , _fbqPrettyPrint     :: !Bool
-    , _fbqUserIP          :: !(Maybe Text)
-    , _fbqKey             :: !(Maybe Key)
-    , _fbqFreeBusyRequest :: !FreeBusyRequest
-    , _fbqOAuthToken      :: !(Maybe OAuthToken)
-    , _fbqFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _fbqQuotaUser   :: !(Maybe Text)
+    , _fbqPrettyPrint :: !Bool
+    , _fbqUserIP      :: !(Maybe Text)
+    , _fbqPayload     :: !FreeBusyRequest
+    , _fbqKey         :: !(Maybe Key)
+    , _fbqOAuthToken  :: !(Maybe OAuthToken)
+    , _fbqFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FreeBusyQuery'' with the minimum fields required to make a request.
 --
@@ -79,23 +80,23 @@ data FreeBusyQuery' = FreeBusyQuery'
 --
 -- * 'fbqUserIP'
 --
--- * 'fbqKey'
+-- * 'fbqPayload'
 --
--- * 'fbqFreeBusyRequest'
+-- * 'fbqKey'
 --
 -- * 'fbqOAuthToken'
 --
 -- * 'fbqFields'
 freeBusyQuery'
-    :: FreeBusyRequest -- ^ 'FreeBusyRequest'
+    :: FreeBusyRequest -- ^ 'payload'
     -> FreeBusyQuery'
-freeBusyQuery' pFbqFreeBusyRequest_ =
+freeBusyQuery' pFbqPayload_ =
     FreeBusyQuery'
     { _fbqQuotaUser = Nothing
     , _fbqPrettyPrint = True
     , _fbqUserIP = Nothing
+    , _fbqPayload = pFbqPayload_
     , _fbqKey = Nothing
-    , _fbqFreeBusyRequest = pFbqFreeBusyRequest_
     , _fbqOAuthToken = Nothing
     , _fbqFields = Nothing
     }
@@ -119,17 +120,16 @@ fbqUserIP :: Lens' FreeBusyQuery' (Maybe Text)
 fbqUserIP
   = lens _fbqUserIP (\ s a -> s{_fbqUserIP = a})
 
+-- | Multipart request metadata.
+fbqPayload :: Lens' FreeBusyQuery' FreeBusyRequest
+fbqPayload
+  = lens _fbqPayload (\ s a -> s{_fbqPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 fbqKey :: Lens' FreeBusyQuery' (Maybe Key)
 fbqKey = lens _fbqKey (\ s a -> s{_fbqKey = a})
-
--- | Multipart request metadata.
-fbqFreeBusyRequest :: Lens' FreeBusyQuery' FreeBusyRequest
-fbqFreeBusyRequest
-  = lens _fbqFreeBusyRequest
-      (\ s a -> s{_fbqFreeBusyRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 fbqOAuthToken :: Lens' FreeBusyQuery' (Maybe OAuthToken)
@@ -155,7 +155,7 @@ instance GoogleRequest FreeBusyQuery' where
               _fbqKey
               _fbqOAuthToken
               (Just AltJSON)
-              _fbqFreeBusyRequest
+              _fbqPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FreeBusyQueryResource)

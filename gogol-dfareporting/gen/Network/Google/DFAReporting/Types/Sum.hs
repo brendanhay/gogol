@@ -44,118 +44,51 @@ instance FromJSON DfareportingContentCategoriesListSortOrder where
 instance ToJSON DfareportingContentCategoriesListSortOrder where
     toJSON = toJSONText
 
--- | Tag format type for the floodlight activity. If left blank, the tag
--- format will default to HTML.
-data FloodlightActivityTagFormat
-    = HTML
-      -- ^ @HTML@
-    | Xhtml
-      -- ^ @XHTML@
+-- | Counting method for conversions for this floodlight activity. This is a
+-- required field.
+data CountingMethod
+    = ItemsSoldCounting
+      -- ^ @ITEMS_SOLD_COUNTING@
+    | SessionCounting
+      -- ^ @SESSION_COUNTING@
+    | StandardCounting
+      -- ^ @STANDARD_COUNTING@
+    | TransactionsCounting
+      -- ^ @TRANSACTIONS_COUNTING@
+    | UniqueCounting
+      -- ^ @UNIQUE_COUNTING@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable FloodlightActivityTagFormat
+instance Hashable CountingMethod
 
-instance FromText FloodlightActivityTagFormat where
+instance FromText CountingMethod where
     fromText = \case
-        "HTML" -> Just HTML
-        "XHTML" -> Just Xhtml
+        "ITEMS_SOLD_COUNTING" -> Just ItemsSoldCounting
+        "SESSION_COUNTING" -> Just SessionCounting
+        "STANDARD_COUNTING" -> Just StandardCounting
+        "TRANSACTIONS_COUNTING" -> Just TransactionsCounting
+        "UNIQUE_COUNTING" -> Just UniqueCounting
         _ -> Nothing
 
-instance ToText FloodlightActivityTagFormat where
+instance ToText CountingMethod where
     toText = \case
-        HTML -> "HTML"
-        Xhtml -> "XHTML"
+        ItemsSoldCounting -> "ITEMS_SOLD_COUNTING"
+        SessionCounting -> "SESSION_COUNTING"
+        StandardCounting -> "STANDARD_COUNTING"
+        TransactionsCounting -> "TRANSACTIONS_COUNTING"
+        UniqueCounting -> "UNIQUE_COUNTING"
 
-instance FromJSON FloodlightActivityTagFormat where
-    parseJSON = parseJSONText "FloodlightActivityTagFormat"
+instance FromJSON CountingMethod where
+    parseJSON = parseJSONText "CountingMethod"
 
-instance ToJSON FloodlightActivityTagFormat where
-    toJSON = toJSONText
-
--- | The date range relative to the date of when the report is run.
-data DateRangeRelativeDateRange
-    = Last24Months
-      -- ^ @LAST_24_MONTHS@
-    | Last30Days
-      -- ^ @LAST_30_DAYS@
-    | Last365Days
-      -- ^ @LAST_365_DAYS@
-    | Last7Days
-      -- ^ @LAST_7_DAYS@
-    | Last90Days
-      -- ^ @LAST_90_DAYS@
-    | MonthToDate
-      -- ^ @MONTH_TO_DATE@
-    | PreviousMonth
-      -- ^ @PREVIOUS_MONTH@
-    | PreviousQuarter
-      -- ^ @PREVIOUS_QUARTER@
-    | PreviousWeek
-      -- ^ @PREVIOUS_WEEK@
-    | PreviousYear
-      -- ^ @PREVIOUS_YEAR@
-    | QuarterToDate
-      -- ^ @QUARTER_TO_DATE@
-    | Today
-      -- ^ @TODAY@
-    | WeekToDate
-      -- ^ @WEEK_TO_DATE@
-    | YearToDate
-      -- ^ @YEAR_TO_DATE@
-    | Yesterday
-      -- ^ @YESTERDAY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DateRangeRelativeDateRange
-
-instance FromText DateRangeRelativeDateRange where
-    fromText = \case
-        "LAST_24_MONTHS" -> Just Last24Months
-        "LAST_30_DAYS" -> Just Last30Days
-        "LAST_365_DAYS" -> Just Last365Days
-        "LAST_7_DAYS" -> Just Last7Days
-        "LAST_90_DAYS" -> Just Last90Days
-        "MONTH_TO_DATE" -> Just MonthToDate
-        "PREVIOUS_MONTH" -> Just PreviousMonth
-        "PREVIOUS_QUARTER" -> Just PreviousQuarter
-        "PREVIOUS_WEEK" -> Just PreviousWeek
-        "PREVIOUS_YEAR" -> Just PreviousYear
-        "QUARTER_TO_DATE" -> Just QuarterToDate
-        "TODAY" -> Just Today
-        "WEEK_TO_DATE" -> Just WeekToDate
-        "YEAR_TO_DATE" -> Just YearToDate
-        "YESTERDAY" -> Just Yesterday
-        _ -> Nothing
-
-instance ToText DateRangeRelativeDateRange where
-    toText = \case
-        Last24Months -> "LAST_24_MONTHS"
-        Last30Days -> "LAST_30_DAYS"
-        Last365Days -> "LAST_365_DAYS"
-        Last7Days -> "LAST_7_DAYS"
-        Last90Days -> "LAST_90_DAYS"
-        MonthToDate -> "MONTH_TO_DATE"
-        PreviousMonth -> "PREVIOUS_MONTH"
-        PreviousQuarter -> "PREVIOUS_QUARTER"
-        PreviousWeek -> "PREVIOUS_WEEK"
-        PreviousYear -> "PREVIOUS_YEAR"
-        QuarterToDate -> "QUARTER_TO_DATE"
-        Today -> "TODAY"
-        WeekToDate -> "WEEK_TO_DATE"
-        YearToDate -> "YEAR_TO_DATE"
-        Yesterday -> "YESTERDAY"
-
-instance FromJSON DateRangeRelativeDateRange where
-    parseJSON = parseJSONText "DateRangeRelativeDateRange"
-
-instance ToJSON DateRangeRelativeDateRange where
+instance ToJSON CountingMethod where
     toJSON = toJSONText
 
 -- | Field by which to sort the list.
 data DfareportingFloodlightActivitiesListSortField
-    = ID
+    = DFALSFID
       -- ^ @ID@
-    | Name
+    | DFALSFName
       -- ^ @NAME@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -163,14 +96,14 @@ instance Hashable DfareportingFloodlightActivitiesListSortField
 
 instance FromText DfareportingFloodlightActivitiesListSortField where
     fromText = \case
-        "ID" -> Just ID
-        "NAME" -> Just Name
+        "ID" -> Just DFALSFID
+        "NAME" -> Just DFALSFName
         _ -> Nothing
 
 instance ToText DfareportingFloodlightActivitiesListSortField where
     toText = \case
-        ID -> "ID"
-        Name -> "NAME"
+        DFALSFID -> "ID"
+        DFALSFName -> "NAME"
 
 instance FromJSON DfareportingFloodlightActivitiesListSortField where
     parseJSON = parseJSONText "DfareportingFloodlightActivitiesListSortField"
@@ -205,38 +138,6 @@ instance FromJSON DfareportingCreativeGroupsListSortOrder where
 instance ToJSON DfareportingCreativeGroupsListSortOrder where
     toJSON = toJSONText
 
--- | Select only placement groups belonging with this group type. A package
--- is a simple group of placements that acts as a single pricing point for
--- a group of tags. A roadblock is a group of placements that not only acts
--- as a single pricing point but also assumes that all the tags in it will
--- be served at the same time. A roadblock requires one of its assigned
--- placements to be marked as primary for reporting.
-data DfareportingPlacementGroupsListPlacementGroupType
-    = PlacementPackage
-      -- ^ @PLACEMENT_PACKAGE@
-    | PlacementRoadblock
-      -- ^ @PLACEMENT_ROADBLOCK@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DfareportingPlacementGroupsListPlacementGroupType
-
-instance FromText DfareportingPlacementGroupsListPlacementGroupType where
-    fromText = \case
-        "PLACEMENT_PACKAGE" -> Just PlacementPackage
-        "PLACEMENT_ROADBLOCK" -> Just PlacementRoadblock
-        _ -> Nothing
-
-instance ToText DfareportingPlacementGroupsListPlacementGroupType where
-    toText = \case
-        PlacementPackage -> "PLACEMENT_PACKAGE"
-        PlacementRoadblock -> "PLACEMENT_ROADBLOCK"
-
-instance FromJSON DfareportingPlacementGroupsListPlacementGroupType where
-    parseJSON = parseJSONText "DfareportingPlacementGroupsListPlacementGroupType"
-
-instance ToJSON DfareportingPlacementGroupsListPlacementGroupType where
-    toJSON = toJSONText
-
 -- | Order of sorted results, default is ASCENDING.
 data DfareportingCampaignCreativeAssociationsListSortOrder
     = DCCALSOAscending
@@ -264,974 +165,34 @@ instance FromJSON DfareportingCampaignCreativeAssociationsListSortOrder where
 instance ToJSON DfareportingCampaignCreativeAssociationsListSortOrder where
     toJSON = toJSONText
 
--- | Comparison operator of this term. This field is only relevant when type
--- is left unset or set to CUSTOM_VARIABLE_TERM or REFERRER_TERM.
-data ListPopulationTermOperator
-    = NumEquals
-      -- ^ @NUM_EQUALS@
-    | NumGreaterThan
-      -- ^ @NUM_GREATER_THAN@
-    | NumGreaterThanEqual
-      -- ^ @NUM_GREATER_THAN_EQUAL@
-    | NumLessThan
-      -- ^ @NUM_LESS_THAN@
-    | NumLessThanEqual
-      -- ^ @NUM_LESS_THAN_EQUAL@
-    | StringContains
-      -- ^ @STRING_CONTAINS@
-    | StringEquals
-      -- ^ @STRING_EQUALS@
+-- | Select only advertisers with the specified status.
+data Status
+    = SApproved
+      -- ^ @APPROVED@
+    | SOnHold
+      -- ^ @ON_HOLD@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ListPopulationTermOperator
+instance Hashable Status
 
-instance FromText ListPopulationTermOperator where
+instance FromText Status where
     fromText = \case
-        "NUM_EQUALS" -> Just NumEquals
-        "NUM_GREATER_THAN" -> Just NumGreaterThan
-        "NUM_GREATER_THAN_EQUAL" -> Just NumGreaterThanEqual
-        "NUM_LESS_THAN" -> Just NumLessThan
-        "NUM_LESS_THAN_EQUAL" -> Just NumLessThanEqual
-        "STRING_CONTAINS" -> Just StringContains
-        "STRING_EQUALS" -> Just StringEquals
+        "APPROVED" -> Just SApproved
+        "ON_HOLD" -> Just SOnHold
         _ -> Nothing
 
-instance ToText ListPopulationTermOperator where
+instance ToText Status where
     toText = \case
-        NumEquals -> "NUM_EQUALS"
-        NumGreaterThan -> "NUM_GREATER_THAN"
-        NumGreaterThanEqual -> "NUM_GREATER_THAN_EQUAL"
-        NumLessThan -> "NUM_LESS_THAN"
-        NumLessThanEqual -> "NUM_LESS_THAN_EQUAL"
-        StringContains -> "STRING_CONTAINS"
-        StringEquals -> "STRING_EQUALS"
+        SApproved -> "APPROVED"
+        SOnHold -> "ON_HOLD"
 
-instance FromJSON ListPopulationTermOperator where
-    parseJSON = parseJSONText "ListPopulationTermOperator"
+instance FromJSON Status where
+    parseJSON = parseJSONText "Status"
 
-instance ToJSON ListPopulationTermOperator where
+instance ToJSON Status where
     toJSON = toJSONText
 
--- | Offset left unit for an asset. This is a read-only field. Applicable to
--- the following creative types: all RICH_MEDIA.
-data CreativeAssetPositionLeftUnit
-    = OffsetUnitPercent
-      -- ^ @OFFSET_UNIT_PERCENT@
-    | OffsetUnitPixel
-      -- ^ @OFFSET_UNIT_PIXEL@
-    | OffsetUnitPixelFromCenter
-      -- ^ @OFFSET_UNIT_PIXEL_FROM_CENTER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CreativeAssetPositionLeftUnit
-
-instance FromText CreativeAssetPositionLeftUnit where
-    fromText = \case
-        "OFFSET_UNIT_PERCENT" -> Just OffsetUnitPercent
-        "OFFSET_UNIT_PIXEL" -> Just OffsetUnitPixel
-        "OFFSET_UNIT_PIXEL_FROM_CENTER" -> Just OffsetUnitPixelFromCenter
-        _ -> Nothing
-
-instance ToText CreativeAssetPositionLeftUnit where
-    toText = \case
-        OffsetUnitPercent -> "OFFSET_UNIT_PERCENT"
-        OffsetUnitPixel -> "OFFSET_UNIT_PIXEL"
-        OffsetUnitPixelFromCenter -> "OFFSET_UNIT_PIXEL_FROM_CENTER"
-
-instance FromJSON CreativeAssetPositionLeftUnit where
-    parseJSON = parseJSONText "CreativeAssetPositionLeftUnit"
-
-instance ToJSON CreativeAssetPositionLeftUnit where
-    toJSON = toJSONText
-
--- | The delivery type for the recipient.
-data RecipientDeliveryType
-    = Attachment
-      -- ^ @ATTACHMENT@
-    | Link
-      -- ^ @LINK@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable RecipientDeliveryType
-
-instance FromText RecipientDeliveryType where
-    fromText = \case
-        "ATTACHMENT" -> Just Attachment
-        "LINK" -> Just Link
-        _ -> Nothing
-
-instance ToText RecipientDeliveryType where
-    toText = \case
-        Attachment -> "ATTACHMENT"
-        Link -> "LINK"
-
-instance FromJSON RecipientDeliveryType where
-    parseJSON = parseJSONText "RecipientDeliveryType"
-
-instance ToJSON RecipientDeliveryType where
-    toJSON = toJSONText
-
--- | Placement compatibility. WEB and WEB_INTERSTITIAL refer to rendering
--- either on desktop or on mobile devices for regular or interstitial ads,
--- respectively. APP and APP_INTERSTITIAL are for rendering in mobile
--- apps.IN_STREAM_VIDEO refers to rendering in in-stream video ads
--- developed with the VAST standard. This field is required on insertion.
-data PlacementCompatibility
-    = App
-      -- ^ @APP@
-    | AppInterstitial
-      -- ^ @APP_INTERSTITIAL@
-    | InStreamVideo
-      -- ^ @IN_STREAM_VIDEO@
-    | Web
-      -- ^ @WEB@
-    | WebInterstitial
-      -- ^ @WEB_INTERSTITIAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable PlacementCompatibility
-
-instance FromText PlacementCompatibility where
-    fromText = \case
-        "APP" -> Just App
-        "APP_INTERSTITIAL" -> Just AppInterstitial
-        "IN_STREAM_VIDEO" -> Just InStreamVideo
-        "WEB" -> Just Web
-        "WEB_INTERSTITIAL" -> Just WebInterstitial
-        _ -> Nothing
-
-instance ToText PlacementCompatibility where
-    toText = \case
-        App -> "APP"
-        AppInterstitial -> "APP_INTERSTITIAL"
-        InStreamVideo -> "IN_STREAM_VIDEO"
-        Web -> "WEB"
-        WebInterstitial -> "WEB_INTERSTITIAL"
-
-instance FromJSON PlacementCompatibility where
-    parseJSON = parseJSONText "PlacementCompatibility"
-
-instance ToJSON PlacementCompatibility where
-    toJSON = toJSONText
-
--- | Placement cap cost option.
-data PricingScheduleCapCostOption
-    = CapCostCumulative
-      -- ^ @CAP_COST_CUMULATIVE@
-    | CapCostMonthly
-      -- ^ @CAP_COST_MONTHLY@
-    | CapCostNone
-      -- ^ @CAP_COST_NONE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable PricingScheduleCapCostOption
-
-instance FromText PricingScheduleCapCostOption where
-    fromText = \case
-        "CAP_COST_CUMULATIVE" -> Just CapCostCumulative
-        "CAP_COST_MONTHLY" -> Just CapCostMonthly
-        "CAP_COST_NONE" -> Just CapCostNone
-        _ -> Nothing
-
-instance ToText PricingScheduleCapCostOption where
-    toText = \case
-        CapCostCumulative -> "CAP_COST_CUMULATIVE"
-        CapCostMonthly -> "CAP_COST_MONTHLY"
-        CapCostNone -> "CAP_COST_NONE"
-
-instance FromJSON PricingScheduleCapCostOption where
-    parseJSON = parseJSONText "PricingScheduleCapCostOption"
-
-instance ToJSON PricingScheduleCapCostOption where
-    toJSON = toJSONText
-
--- | Levels of availability for a user role permission.
-data UserRolePermissionAvailability
-    = AccountAlways
-      -- ^ @ACCOUNT_ALWAYS@
-    | AccountByDefault
-      -- ^ @ACCOUNT_BY_DEFAULT@
-    | NotAvailableByDefault
-      -- ^ @NOT_AVAILABLE_BY_DEFAULT@
-    | SubAccountAndAccountAlways
-      -- ^ @SUBACCOUNT_AND_ACCOUNT_ALWAYS@
-    | SubAccountAndAccountByDefault
-      -- ^ @SUBACCOUNT_AND_ACCOUNT_BY_DEFAULT@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable UserRolePermissionAvailability
-
-instance FromText UserRolePermissionAvailability where
-    fromText = \case
-        "ACCOUNT_ALWAYS" -> Just AccountAlways
-        "ACCOUNT_BY_DEFAULT" -> Just AccountByDefault
-        "NOT_AVAILABLE_BY_DEFAULT" -> Just NotAvailableByDefault
-        "SUBACCOUNT_AND_ACCOUNT_ALWAYS" -> Just SubAccountAndAccountAlways
-        "SUBACCOUNT_AND_ACCOUNT_BY_DEFAULT" -> Just SubAccountAndAccountByDefault
-        _ -> Nothing
-
-instance ToText UserRolePermissionAvailability where
-    toText = \case
-        AccountAlways -> "ACCOUNT_ALWAYS"
-        AccountByDefault -> "ACCOUNT_BY_DEFAULT"
-        NotAvailableByDefault -> "NOT_AVAILABLE_BY_DEFAULT"
-        SubAccountAndAccountAlways -> "SUBACCOUNT_AND_ACCOUNT_ALWAYS"
-        SubAccountAndAccountByDefault -> "SUBACCOUNT_AND_ACCOUNT_BY_DEFAULT"
-
-instance FromJSON UserRolePermissionAvailability where
-    parseJSON = parseJSONText "UserRolePermissionAvailability"
-
-instance ToJSON UserRolePermissionAvailability where
-    toJSON = toJSONText
-
--- | Field by which to sort the list.
-data DfareportingAccountUserProfilesListSortField
-    = DAUPLSFID
-      -- ^ @ID@
-    | DAUPLSFName
-      -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DfareportingAccountUserProfilesListSortField
-
-instance FromText DfareportingAccountUserProfilesListSortField where
-    fromText = \case
-        "ID" -> Just DAUPLSFID
-        "NAME" -> Just DAUPLSFName
-        _ -> Nothing
-
-instance ToText DfareportingAccountUserProfilesListSortField where
-    toText = \case
-        DAUPLSFID -> "ID"
-        DAUPLSFName -> "NAME"
-
-instance FromJSON DfareportingAccountUserProfilesListSortField where
-    parseJSON = parseJSONText "DfareportingAccountUserProfilesListSortField"
-
-instance ToJSON DfareportingAccountUserProfilesListSortField where
-    toJSON = toJSONText
-
--- | Visibility of this directory site contact assignment. When set to PUBLIC
--- this contact assignment is visible to all account and agency users; when
--- set to PRIVATE it is visible only to the site.
-data DirectorySiteContactAssignmentVisibility
-    = Private
-      -- ^ @PRIVATE@
-    | Public
-      -- ^ @PUBLIC@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DirectorySiteContactAssignmentVisibility
-
-instance FromText DirectorySiteContactAssignmentVisibility where
-    fromText = \case
-        "PRIVATE" -> Just Private
-        "PUBLIC" -> Just Public
-        _ -> Nothing
-
-instance ToText DirectorySiteContactAssignmentVisibility where
-    toText = \case
-        Private -> "PRIVATE"
-        Public -> "PUBLIC"
-
-instance FromJSON DirectorySiteContactAssignmentVisibility where
-    parseJSON = parseJSONText "DirectorySiteContactAssignmentVisibility"
-
-instance ToJSON DirectorySiteContactAssignmentVisibility where
-    toJSON = toJSONText
-
--- | Ad slot compatibility. WEB and WEB_INTERSTITIAL refer to rendering
--- either on desktop or on mobile devices for regular or interstitial ads
--- respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps.
--- IN_STREAM_VIDEO refers to rendering in in-stream video ads developed
--- with the VAST standard.
-data AdSlotCompatibility
-    = PlanningRenderingEnvironmentTypeApp
-      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_APP@
-    | PlanningRenderingEnvironmentTypeAppInterstitial
-      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_APP_INTERSTITIAL@
-    | PlanningRenderingEnvironmentTypeInStreamVideo
-      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_IN_STREAM_VIDEO@
-    | PlanningRenderingEnvironmentTypeWeb
-      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB@
-    | PlanningRenderingEnvironmentTypeWebInterstitial
-      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB_INTERSTITIAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable AdSlotCompatibility
-
-instance FromText AdSlotCompatibility where
-    fromText = \case
-        "PLANNING_RENDERING_ENVIRONMENT_TYPE_APP" -> Just PlanningRenderingEnvironmentTypeApp
-        "PLANNING_RENDERING_ENVIRONMENT_TYPE_APP_INTERSTITIAL" -> Just PlanningRenderingEnvironmentTypeAppInterstitial
-        "PLANNING_RENDERING_ENVIRONMENT_TYPE_IN_STREAM_VIDEO" -> Just PlanningRenderingEnvironmentTypeInStreamVideo
-        "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB" -> Just PlanningRenderingEnvironmentTypeWeb
-        "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB_INTERSTITIAL" -> Just PlanningRenderingEnvironmentTypeWebInterstitial
-        _ -> Nothing
-
-instance ToText AdSlotCompatibility where
-    toText = \case
-        PlanningRenderingEnvironmentTypeApp -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_APP"
-        PlanningRenderingEnvironmentTypeAppInterstitial -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_APP_INTERSTITIAL"
-        PlanningRenderingEnvironmentTypeInStreamVideo -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_IN_STREAM_VIDEO"
-        PlanningRenderingEnvironmentTypeWeb -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB"
-        PlanningRenderingEnvironmentTypeWebInterstitial -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB_INTERSTITIAL"
-
-instance FromJSON AdSlotCompatibility where
-    parseJSON = parseJSONText "AdSlotCompatibility"
-
-instance ToJSON AdSlotCompatibility where
-    toJSON = toJSONText
-
--- | Tag formats to generate for these placements.
-data DfareportingPlacementsGeneratetagsTagFormats
-    = PlacementTagClickCommands
-      -- ^ @PLACEMENT_TAG_CLICK_COMMANDS@
-    | PlacementTagIframeIlayer
-      -- ^ @PLACEMENT_TAG_IFRAME_ILAYER@
-    | PlacementTagIframeJavascript
-      -- ^ @PLACEMENT_TAG_IFRAME_JAVASCRIPT@
-    | PlacementTagIframeJavascriptLegacy
-      -- ^ @PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY@
-    | PlacementTagInstreamVideoPrefetch
-      -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH@
-    | PlacementTagInstreamVideoPrefetchVast3
-      -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3@
-    | PlacementTagInternalRedirect
-      -- ^ @PLACEMENT_TAG_INTERNAL_REDIRECT@
-    | PlacementTagInterstitialIframeJavascript
-      -- ^ @PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT@
-    | PlacementTagInterstitialIframeJavascriptLegacy
-      -- ^ @PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY@
-    | PlacementTagInterstitialInternalRedirect
-      -- ^ @PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT@
-    | PlacementTagInterstitialJavascript
-      -- ^ @PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT@
-    | PlacementTagInterstitialJavascriptLegacy
-      -- ^ @PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY@
-    | PlacementTagJavascript
-      -- ^ @PLACEMENT_TAG_JAVASCRIPT@
-    | PlacementTagJavascriptLegacy
-      -- ^ @PLACEMENT_TAG_JAVASCRIPT_LEGACY@
-    | PlacementTagStandard
-      -- ^ @PLACEMENT_TAG_STANDARD@
-    | PlacementTagTracking
-      -- ^ @PLACEMENT_TAG_TRACKING@
-    | PlacementTagTrackingIframe
-      -- ^ @PLACEMENT_TAG_TRACKING_IFRAME@
-    | PlacementTagTrackingJavascript
-      -- ^ @PLACEMENT_TAG_TRACKING_JAVASCRIPT@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DfareportingPlacementsGeneratetagsTagFormats
-
-instance FromText DfareportingPlacementsGeneratetagsTagFormats where
-    fromText = \case
-        "PLACEMENT_TAG_CLICK_COMMANDS" -> Just PlacementTagClickCommands
-        "PLACEMENT_TAG_IFRAME_ILAYER" -> Just PlacementTagIframeIlayer
-        "PLACEMENT_TAG_IFRAME_JAVASCRIPT" -> Just PlacementTagIframeJavascript
-        "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY" -> Just PlacementTagIframeJavascriptLegacy
-        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH" -> Just PlacementTagInstreamVideoPrefetch
-        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3" -> Just PlacementTagInstreamVideoPrefetchVast3
-        "PLACEMENT_TAG_INTERNAL_REDIRECT" -> Just PlacementTagInternalRedirect
-        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT" -> Just PlacementTagInterstitialIframeJavascript
-        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY" -> Just PlacementTagInterstitialIframeJavascriptLegacy
-        "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT" -> Just PlacementTagInterstitialInternalRedirect
-        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT" -> Just PlacementTagInterstitialJavascript
-        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY" -> Just PlacementTagInterstitialJavascriptLegacy
-        "PLACEMENT_TAG_JAVASCRIPT" -> Just PlacementTagJavascript
-        "PLACEMENT_TAG_JAVASCRIPT_LEGACY" -> Just PlacementTagJavascriptLegacy
-        "PLACEMENT_TAG_STANDARD" -> Just PlacementTagStandard
-        "PLACEMENT_TAG_TRACKING" -> Just PlacementTagTracking
-        "PLACEMENT_TAG_TRACKING_IFRAME" -> Just PlacementTagTrackingIframe
-        "PLACEMENT_TAG_TRACKING_JAVASCRIPT" -> Just PlacementTagTrackingJavascript
-        _ -> Nothing
-
-instance ToText DfareportingPlacementsGeneratetagsTagFormats where
-    toText = \case
-        PlacementTagClickCommands -> "PLACEMENT_TAG_CLICK_COMMANDS"
-        PlacementTagIframeIlayer -> "PLACEMENT_TAG_IFRAME_ILAYER"
-        PlacementTagIframeJavascript -> "PLACEMENT_TAG_IFRAME_JAVASCRIPT"
-        PlacementTagIframeJavascriptLegacy -> "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY"
-        PlacementTagInstreamVideoPrefetch -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH"
-        PlacementTagInstreamVideoPrefetchVast3 -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3"
-        PlacementTagInternalRedirect -> "PLACEMENT_TAG_INTERNAL_REDIRECT"
-        PlacementTagInterstitialIframeJavascript -> "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT"
-        PlacementTagInterstitialIframeJavascriptLegacy -> "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY"
-        PlacementTagInterstitialInternalRedirect -> "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT"
-        PlacementTagInterstitialJavascript -> "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT"
-        PlacementTagInterstitialJavascriptLegacy -> "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY"
-        PlacementTagJavascript -> "PLACEMENT_TAG_JAVASCRIPT"
-        PlacementTagJavascriptLegacy -> "PLACEMENT_TAG_JAVASCRIPT_LEGACY"
-        PlacementTagStandard -> "PLACEMENT_TAG_STANDARD"
-        PlacementTagTracking -> "PLACEMENT_TAG_TRACKING"
-        PlacementTagTrackingIframe -> "PLACEMENT_TAG_TRACKING_IFRAME"
-        PlacementTagTrackingJavascript -> "PLACEMENT_TAG_TRACKING_JAVASCRIPT"
-
-instance FromJSON DfareportingPlacementsGeneratetagsTagFormats where
-    parseJSON = parseJSONText "DfareportingPlacementsGeneratetagsTagFormats"
-
-instance ToJSON DfareportingPlacementsGeneratetagsTagFormats where
-    toJSON = toJSONText
-
--- | Third-party URL type for in-stream video creatives.
-data ThirdPartyTrackingURLThirdPartyURLType
-    = ClickTracking
-      -- ^ @CLICK_TRACKING@
-    | Impression
-      -- ^ @IMPRESSION@
-    | RichMediaBackupImpression
-      -- ^ @RICH_MEDIA_BACKUP_IMPRESSION@
-    | RichMediaImpression
-      -- ^ @RICH_MEDIA_IMPRESSION@
-    | RichMediaRmImpression
-      -- ^ @RICH_MEDIA_RM_IMPRESSION@
-    | Survey
-      -- ^ @SURVEY@
-    | VideoComplete
-      -- ^ @VIDEO_COMPLETE@
-    | VideoCustom
-      -- ^ @VIDEO_CUSTOM@
-    | VideoFirstQuartile
-      -- ^ @VIDEO_FIRST_QUARTILE@
-    | VideoFullscreen
-      -- ^ @VIDEO_FULLSCREEN@
-    | VideoMidpoint
-      -- ^ @VIDEO_MIDPOINT@
-    | VideoMute
-      -- ^ @VIDEO_MUTE@
-    | VideoPause
-      -- ^ @VIDEO_PAUSE@
-    | VideoRewind
-      -- ^ @VIDEO_REWIND@
-    | VideoStart
-      -- ^ @VIDEO_START@
-    | VideoStop
-      -- ^ @VIDEO_STOP@
-    | VideoThirdQuartile
-      -- ^ @VIDEO_THIRD_QUARTILE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ThirdPartyTrackingURLThirdPartyURLType
-
-instance FromText ThirdPartyTrackingURLThirdPartyURLType where
-    fromText = \case
-        "CLICK_TRACKING" -> Just ClickTracking
-        "IMPRESSION" -> Just Impression
-        "RICH_MEDIA_BACKUP_IMPRESSION" -> Just RichMediaBackupImpression
-        "RICH_MEDIA_IMPRESSION" -> Just RichMediaImpression
-        "RICH_MEDIA_RM_IMPRESSION" -> Just RichMediaRmImpression
-        "SURVEY" -> Just Survey
-        "VIDEO_COMPLETE" -> Just VideoComplete
-        "VIDEO_CUSTOM" -> Just VideoCustom
-        "VIDEO_FIRST_QUARTILE" -> Just VideoFirstQuartile
-        "VIDEO_FULLSCREEN" -> Just VideoFullscreen
-        "VIDEO_MIDPOINT" -> Just VideoMidpoint
-        "VIDEO_MUTE" -> Just VideoMute
-        "VIDEO_PAUSE" -> Just VideoPause
-        "VIDEO_REWIND" -> Just VideoRewind
-        "VIDEO_START" -> Just VideoStart
-        "VIDEO_STOP" -> Just VideoStop
-        "VIDEO_THIRD_QUARTILE" -> Just VideoThirdQuartile
-        _ -> Nothing
-
-instance ToText ThirdPartyTrackingURLThirdPartyURLType where
-    toText = \case
-        ClickTracking -> "CLICK_TRACKING"
-        Impression -> "IMPRESSION"
-        RichMediaBackupImpression -> "RICH_MEDIA_BACKUP_IMPRESSION"
-        RichMediaImpression -> "RICH_MEDIA_IMPRESSION"
-        RichMediaRmImpression -> "RICH_MEDIA_RM_IMPRESSION"
-        Survey -> "SURVEY"
-        VideoComplete -> "VIDEO_COMPLETE"
-        VideoCustom -> "VIDEO_CUSTOM"
-        VideoFirstQuartile -> "VIDEO_FIRST_QUARTILE"
-        VideoFullscreen -> "VIDEO_FULLSCREEN"
-        VideoMidpoint -> "VIDEO_MIDPOINT"
-        VideoMute -> "VIDEO_MUTE"
-        VideoPause -> "VIDEO_PAUSE"
-        VideoRewind -> "VIDEO_REWIND"
-        VideoStart -> "VIDEO_START"
-        VideoStop -> "VIDEO_STOP"
-        VideoThirdQuartile -> "VIDEO_THIRD_QUARTILE"
-
-instance FromJSON ThirdPartyTrackingURLThirdPartyURLType where
-    parseJSON = parseJSONText "ThirdPartyTrackingURLThirdPartyURLType"
-
-instance ToJSON ThirdPartyTrackingURLThirdPartyURLType where
-    toJSON = toJSONText
-
--- | Role of the asset in relation to creative. Applicable to all but the
--- following creative types: all REDIRECT and TRACKING_TEXT. This is a
--- required field. PRIMARY applies to ENHANCED_BANNER, FLASH_INPAGE,
--- HTML5_BANNER, IMAGE, IMAGE_GALLERY, all RICH_MEDIA (which may contain
--- multiple primary assets), and all VPAID creatives. BACKUP_IMAGE applies
--- to ENHANCED_BANNER, FLASH_INPAGE, HTML5_BANNER, all RICH_MEDIA, and all
--- VPAID creatives. ADDITIONAL_IMAGE and ADDITIONAL_FLASH apply to
--- FLASH_INPAGE creatives. OTHER refers to assets from sources other than
--- DCM, such as Studio uploaded assets, applicable to all RICH_MEDIA and
--- all VPAID creatives. PARENT_VIDEO refers to videos uploaded by the user
--- in DCM and is applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
--- TRANSCODED_VIDEO refers to videos transcoded by DCM from PARENT_VIDEO
--- assets and is applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
--- ALTERNATE_VIDEO refers to the DCM representation of child asset videos
--- from Studio, and is applicable to VPAID_LINEAR creatives. These cannot
--- be added or removed within DCM. For VPAID_LINEAR creatives,
--- PARENT_VIDEO, TRANSCODED_VIDEO and ALTERNATE_VIDEO assets that are
--- marked active serve as backup in case the VPAID creative cannot be
--- served. Only PARENT_VIDEO assets can be added or removed for an
--- INSTREAM_VIDEO or VPAID_LINEAR creative.
-data CreativeAssetRole
-    = AdditionalFlash
-      -- ^ @ADDITIONAL_FLASH@
-    | AdditionalImage
-      -- ^ @ADDITIONAL_IMAGE@
-    | AlternateVideo
-      -- ^ @ALTERNATE_VIDEO@
-    | BackupImage
-      -- ^ @BACKUP_IMAGE@
-    | Other
-      -- ^ @OTHER@
-    | ParentVideo
-      -- ^ @PARENT_VIDEO@
-    | Primary
-      -- ^ @PRIMARY@
-    | TranscodedVideo
-      -- ^ @TRANSCODED_VIDEO@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CreativeAssetRole
-
-instance FromText CreativeAssetRole where
-    fromText = \case
-        "ADDITIONAL_FLASH" -> Just AdditionalFlash
-        "ADDITIONAL_IMAGE" -> Just AdditionalImage
-        "ALTERNATE_VIDEO" -> Just AlternateVideo
-        "BACKUP_IMAGE" -> Just BackupImage
-        "OTHER" -> Just Other
-        "PARENT_VIDEO" -> Just ParentVideo
-        "PRIMARY" -> Just Primary
-        "TRANSCODED_VIDEO" -> Just TranscodedVideo
-        _ -> Nothing
-
-instance ToText CreativeAssetRole where
-    toText = \case
-        AdditionalFlash -> "ADDITIONAL_FLASH"
-        AdditionalImage -> "ADDITIONAL_IMAGE"
-        AlternateVideo -> "ALTERNATE_VIDEO"
-        BackupImage -> "BACKUP_IMAGE"
-        Other -> "OTHER"
-        ParentVideo -> "PARENT_VIDEO"
-        Primary -> "PRIMARY"
-        TranscodedVideo -> "TRANSCODED_VIDEO"
-
-instance FromJSON CreativeAssetRole where
-    parseJSON = parseJSONText "CreativeAssetRole"
-
-instance ToJSON CreativeAssetRole where
-    toJSON = toJSONText
-
--- | Field by which to sort the list.
-data DfareportingCreativesListSortField
-    = DCLSFID
-      -- ^ @ID@
-    | DCLSFName
-      -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DfareportingCreativesListSortField
-
-instance FromText DfareportingCreativesListSortField where
-    fromText = \case
-        "ID" -> Just DCLSFID
-        "NAME" -> Just DCLSFName
-        _ -> Nothing
-
-instance ToText DfareportingCreativesListSortField where
-    toText = \case
-        DCLSFID -> "ID"
-        DCLSFName -> "NAME"
-
-instance FromJSON DfareportingCreativesListSortField where
-    parseJSON = parseJSONText "DfareportingCreativesListSortField"
-
-instance ToJSON DfareportingCreativesListSortField where
-    toJSON = toJSONText
-
--- | Order of sorted results, default is ASCENDING.
-data DfareportingPlacementStrategiesListSortOrder
-    = DPSLSOAscending
-      -- ^ @ASCENDING@
-    | DPSLSODescending
-      -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DfareportingPlacementStrategiesListSortOrder
-
-instance FromText DfareportingPlacementStrategiesListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just DPSLSOAscending
-        "DESCENDING" -> Just DPSLSODescending
-        _ -> Nothing
-
-instance ToText DfareportingPlacementStrategiesListSortOrder where
-    toText = \case
-        DPSLSOAscending -> "ASCENDING"
-        DPSLSODescending -> "DESCENDING"
-
-instance FromJSON DfareportingPlacementStrategiesListSortOrder where
-    parseJSON = parseJSONText "DfareportingPlacementStrategiesListSortOrder"
-
-instance ToJSON DfareportingPlacementStrategiesListSortOrder where
-    toJSON = toJSONText
-
--- | Trafficker type of this user profile.
-data AccountUserProfileTraffickerType
-    = ExternalTrafficker
-      -- ^ @EXTERNAL_TRAFFICKER@
-    | InternalNonTrafficker
-      -- ^ @INTERNAL_NON_TRAFFICKER@
-    | InternalTrafficker
-      -- ^ @INTERNAL_TRAFFICKER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable AccountUserProfileTraffickerType
-
-instance FromText AccountUserProfileTraffickerType where
-    fromText = \case
-        "EXTERNAL_TRAFFICKER" -> Just ExternalTrafficker
-        "INTERNAL_NON_TRAFFICKER" -> Just InternalNonTrafficker
-        "INTERNAL_TRAFFICKER" -> Just InternalTrafficker
-        _ -> Nothing
-
-instance ToText AccountUserProfileTraffickerType where
-    toText = \case
-        ExternalTrafficker -> "EXTERNAL_TRAFFICKER"
-        InternalNonTrafficker -> "INTERNAL_NON_TRAFFICKER"
-        InternalTrafficker -> "INTERNAL_TRAFFICKER"
-
-instance FromJSON AccountUserProfileTraffickerType where
-    parseJSON = parseJSONText "AccountUserProfileTraffickerType"
-
-instance ToJSON AccountUserProfileTraffickerType where
-    toJSON = toJSONText
-
--- | Field by which to sort the list.
-data DfareportingEventTagsListSortField
-    = DETLSFID
-      -- ^ @ID@
-    | DETLSFName
-      -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DfareportingEventTagsListSortField
-
-instance FromText DfareportingEventTagsListSortField where
-    fromText = \case
-        "ID" -> Just DETLSFID
-        "NAME" -> Just DETLSFName
-        _ -> Nothing
-
-instance ToText DfareportingEventTagsListSortField where
-    toText = \case
-        DETLSFID -> "ID"
-        DETLSFName -> "NAME"
-
-instance FromJSON DfareportingEventTagsListSortField where
-    parseJSON = parseJSONText "DfareportingEventTagsListSortField"
-
-instance ToJSON DfareportingEventTagsListSortField where
-    toJSON = toJSONText
-
-data DirectorySiteInterstitialTagFormats
-    = IframeJavascriptInterstitial
-      -- ^ @IFRAME_JAVASCRIPT_INTERSTITIAL@
-    | InternalRedirectInterstitial
-      -- ^ @INTERNAL_REDIRECT_INTERSTITIAL@
-    | JavascriptInterstitial
-      -- ^ @JAVASCRIPT_INTERSTITIAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DirectorySiteInterstitialTagFormats
-
-instance FromText DirectorySiteInterstitialTagFormats where
-    fromText = \case
-        "IFRAME_JAVASCRIPT_INTERSTITIAL" -> Just IframeJavascriptInterstitial
-        "INTERNAL_REDIRECT_INTERSTITIAL" -> Just InternalRedirectInterstitial
-        "JAVASCRIPT_INTERSTITIAL" -> Just JavascriptInterstitial
-        _ -> Nothing
-
-instance ToText DirectorySiteInterstitialTagFormats where
-    toText = \case
-        IframeJavascriptInterstitial -> "IFRAME_JAVASCRIPT_INTERSTITIAL"
-        InternalRedirectInterstitial -> "INTERNAL_REDIRECT_INTERSTITIAL"
-        JavascriptInterstitial -> "JAVASCRIPT_INTERSTITIAL"
-
-instance FromJSON DirectorySiteInterstitialTagFormats where
-    parseJSON = parseJSONText "DirectorySiteInterstitialTagFormats"
-
-instance ToJSON DirectorySiteInterstitialTagFormats where
-    toJSON = toJSONText
-
--- | The status of the report file.
-data FileStatus
-    = Cancelled
-      -- ^ @CANCELLED@
-    | Failed
-      -- ^ @FAILED@
-    | Processing
-      -- ^ @PROCESSING@
-    | ReportAvailable
-      -- ^ @REPORT_AVAILABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable FileStatus
-
-instance FromText FileStatus where
-    fromText = \case
-        "CANCELLED" -> Just Cancelled
-        "FAILED" -> Just Failed
-        "PROCESSING" -> Just Processing
-        "REPORT_AVAILABLE" -> Just ReportAvailable
-        _ -> Nothing
-
-instance ToText FileStatus where
-    toText = \case
-        Cancelled -> "CANCELLED"
-        Failed -> "FAILED"
-        Processing -> "PROCESSING"
-        ReportAvailable -> "REPORT_AVAILABLE"
-
-instance FromJSON FileStatus where
-    parseJSON = parseJSONText "FileStatus"
-
-instance ToJSON FileStatus where
-    toJSON = toJSONText
-
--- | The field by which to sort the list.
-data DfareportingFilesListSortField
-    = DFLSFID
-      -- ^ @ID@
-      -- Sort by file ID.
-    | DFLSFLastModifiedTime
-      -- ^ @LAST_MODIFIED_TIME@
-      -- Sort by \'lastmodifiedAt\' field.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DfareportingFilesListSortField
-
-instance FromText DfareportingFilesListSortField where
-    fromText = \case
-        "ID" -> Just DFLSFID
-        "LAST_MODIFIED_TIME" -> Just DFLSFLastModifiedTime
-        _ -> Nothing
-
-instance ToText DfareportingFilesListSortField where
-    toText = \case
-        DFLSFID -> "ID"
-        DFLSFLastModifiedTime -> "LAST_MODIFIED_TIME"
-
-instance FromJSON DfareportingFilesListSortField where
-    parseJSON = parseJSONText "DfareportingFilesListSortField"
-
-instance ToJSON DfareportingFilesListSortField where
-    toJSON = toJSONText
-
--- | Order of sorted results, default is ASCENDING.
-data DfareportingTargetableRemarketingListsListSortOrder
-    = DTRLLSOAscending
-      -- ^ @ASCENDING@
-    | DTRLLSODescending
-      -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DfareportingTargetableRemarketingListsListSortOrder
-
-instance FromText DfareportingTargetableRemarketingListsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just DTRLLSOAscending
-        "DESCENDING" -> Just DTRLLSODescending
-        _ -> Nothing
-
-instance ToText DfareportingTargetableRemarketingListsListSortOrder where
-    toText = \case
-        DTRLLSOAscending -> "ASCENDING"
-        DTRLLSODescending -> "DESCENDING"
-
-instance FromJSON DfareportingTargetableRemarketingListsListSortOrder where
-    parseJSON = parseJSONText "DfareportingTargetableRemarketingListsListSortOrder"
-
-instance ToJSON DfareportingTargetableRemarketingListsListSortOrder where
-    toJSON = toJSONText
-
--- | Field by which to sort the list.
-data DfareportingPlacementGroupsListSortField
-    = DPGLSFID
-      -- ^ @ID@
-    | DPGLSFName
-      -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DfareportingPlacementGroupsListSortField
-
-instance FromText DfareportingPlacementGroupsListSortField where
-    fromText = \case
-        "ID" -> Just DPGLSFID
-        "NAME" -> Just DPGLSFName
-        _ -> Nothing
-
-instance ToText DfareportingPlacementGroupsListSortField where
-    toText = \case
-        DPGLSFID -> "ID"
-        DPGLSFName -> "NAME"
-
-instance FromJSON DfareportingPlacementGroupsListSortField where
-    parseJSON = parseJSONText "DfareportingPlacementGroupsListSortField"
-
-instance ToJSON DfareportingPlacementGroupsListSortField where
-    toJSON = toJSONText
-
--- | Artwork type used by the creative.This is a read-only field.
-data CreativeCustomEventArtworkType
-    = ArtworkTypeFlash
-      -- ^ @ARTWORK_TYPE_FLASH@
-    | ArtworkTypeHTML5
-      -- ^ @ARTWORK_TYPE_HTML5@
-    | ArtworkTypeMixed
-      -- ^ @ARTWORK_TYPE_MIXED@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CreativeCustomEventArtworkType
-
-instance FromText CreativeCustomEventArtworkType where
-    fromText = \case
-        "ARTWORK_TYPE_FLASH" -> Just ArtworkTypeFlash
-        "ARTWORK_TYPE_HTML5" -> Just ArtworkTypeHTML5
-        "ARTWORK_TYPE_MIXED" -> Just ArtworkTypeMixed
-        _ -> Nothing
-
-instance ToText CreativeCustomEventArtworkType where
-    toText = \case
-        ArtworkTypeFlash -> "ARTWORK_TYPE_FLASH"
-        ArtworkTypeHTML5 -> "ARTWORK_TYPE_HTML5"
-        ArtworkTypeMixed -> "ARTWORK_TYPE_MIXED"
-
-instance FromJSON CreativeCustomEventArtworkType where
-    parseJSON = parseJSONText "CreativeCustomEventArtworkType"
-
-instance ToJSON CreativeCustomEventArtworkType where
-    toJSON = toJSONText
-
--- | Order of sorted results, default is ASCENDING.
-data DfareportingDirectorySiteContactsListSortOrder
-    = DDSCLSOAscending
-      -- ^ @ASCENDING@
-    | DDSCLSODescending
-      -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DfareportingDirectorySiteContactsListSortOrder
-
-instance FromText DfareportingDirectorySiteContactsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just DDSCLSOAscending
-        "DESCENDING" -> Just DDSCLSODescending
-        _ -> Nothing
-
-instance ToText DfareportingDirectorySiteContactsListSortOrder where
-    toText = \case
-        DDSCLSOAscending -> "ASCENDING"
-        DDSCLSODescending -> "DESCENDING"
-
-instance FromJSON DfareportingDirectorySiteContactsListSortOrder where
-    parseJSON = parseJSONText "DfareportingDirectorySiteContactsListSortOrder"
-
-instance ToJSON DfareportingDirectorySiteContactsListSortOrder where
-    toJSON = toJSONText
-
--- | Select only placements with this payment source.
-data DfareportingPlacementsListPaymentSource
-    = PlacementAgencyPaid
-      -- ^ @PLACEMENT_AGENCY_PAID@
-    | PlacementPublisherPaid
-      -- ^ @PLACEMENT_PUBLISHER_PAID@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DfareportingPlacementsListPaymentSource
-
-instance FromText DfareportingPlacementsListPaymentSource where
-    fromText = \case
-        "PLACEMENT_AGENCY_PAID" -> Just PlacementAgencyPaid
-        "PLACEMENT_PUBLISHER_PAID" -> Just PlacementPublisherPaid
-        _ -> Nothing
-
-instance ToText DfareportingPlacementsListPaymentSource where
-    toText = \case
-        PlacementAgencyPaid -> "PLACEMENT_AGENCY_PAID"
-        PlacementPublisherPaid -> "PLACEMENT_PUBLISHER_PAID"
-
-instance FromJSON DfareportingPlacementsListPaymentSource where
-    parseJSON = parseJSONText "DfareportingPlacementsListPaymentSource"
-
-instance ToJSON DfareportingPlacementsListPaymentSource where
-    toJSON = toJSONText
-
--- | Order of sorted results, default is ASCENDING.
-data DfareportingCreativeFieldValuesListSortOrder
-    = DCFVLSOAscending
-      -- ^ @ASCENDING@
-    | DCFVLSODescending
-      -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DfareportingCreativeFieldValuesListSortOrder
-
-instance FromText DfareportingCreativeFieldValuesListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just DCFVLSOAscending
-        "DESCENDING" -> Just DCFVLSODescending
-        _ -> Nothing
-
-instance ToText DfareportingCreativeFieldValuesListSortOrder where
-    toText = \case
-        DCFVLSOAscending -> "ASCENDING"
-        DCFVLSODescending -> "DESCENDING"
-
-instance FromJSON DfareportingCreativeFieldValuesListSortOrder where
-    parseJSON = parseJSONText "DfareportingCreativeFieldValuesListSortOrder"
-
-instance ToJSON DfareportingCreativeFieldValuesListSortOrder where
-    toJSON = toJSONText
-
--- | Status of this event tag. Must be ENABLED for this event tag to fire.
--- This is a required field.
-data EventTagStatus
-    = Disabled
-      -- ^ @DISABLED@
-    | Enabled
-      -- ^ @ENABLED@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable EventTagStatus
-
-instance FromText EventTagStatus where
-    fromText = \case
-        "DISABLED" -> Just Disabled
-        "ENABLED" -> Just Enabled
-        _ -> Nothing
-
-instance ToText EventTagStatus where
-    toText = \case
-        Disabled -> "DISABLED"
-        Enabled -> "ENABLED"
-
-instance FromJSON EventTagStatus where
-    parseJSON = parseJSONText "EventTagStatus"
-
-instance ToJSON EventTagStatus where
-    toJSON = toJSONText
-
-data CreativeAssetDetectedFeatures
+data DetectedFeaturesItem
     = ApplicationCache
       -- ^ @APPLICATION_CACHE@
     | Audio
@@ -1366,9 +327,9 @@ data CreativeAssetDetectedFeatures
       -- ^ @WEB_WORKERS@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CreativeAssetDetectedFeatures
+instance Hashable DetectedFeaturesItem
 
-instance FromText CreativeAssetDetectedFeatures where
+instance FromText DetectedFeaturesItem where
     fromText = \case
         "APPLICATION_CACHE" -> Just ApplicationCache
         "AUDIO" -> Just Audio
@@ -1438,7 +399,7 @@ instance FromText CreativeAssetDetectedFeatures where
         "WEB_WORKERS" -> Just WebWorkers
         _ -> Nothing
 
-instance ToText CreativeAssetDetectedFeatures where
+instance ToText DetectedFeaturesItem where
     toText = \case
         ApplicationCache -> "APPLICATION_CACHE"
         Audio -> "AUDIO"
@@ -1507,10 +468,1146 @@ instance ToText CreativeAssetDetectedFeatures where
         WebSQLDatabase -> "WEB_SQL_DATABASE"
         WebWorkers -> "WEB_WORKERS"
 
-instance FromJSON CreativeAssetDetectedFeatures where
-    parseJSON = parseJSONText "CreativeAssetDetectedFeatures"
+instance FromJSON DetectedFeaturesItem where
+    parseJSON = parseJSONText "DetectedFeaturesItem"
 
-instance ToJSON CreativeAssetDetectedFeatures where
+instance ToJSON DetectedFeaturesItem where
+    toJSON = toJSONText
+
+-- | Placement compatibility. WEB and WEB_INTERSTITIAL refer to rendering
+-- either on desktop or on mobile devices for regular or interstitial ads,
+-- respectively. APP and APP_INTERSTITIAL are for rendering in mobile
+-- apps.IN_STREAM_VIDEO refers to rendering in in-stream video ads
+-- developed with the VAST standard. This field is required on insertion.
+data PlacementCompatibility
+    = App
+      -- ^ @APP@
+    | AppInterstitial
+      -- ^ @APP_INTERSTITIAL@
+    | InStreamVideo
+      -- ^ @IN_STREAM_VIDEO@
+    | Web
+      -- ^ @WEB@
+    | WebInterstitial
+      -- ^ @WEB_INTERSTITIAL@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable PlacementCompatibility
+
+instance FromText PlacementCompatibility where
+    fromText = \case
+        "APP" -> Just App
+        "APP_INTERSTITIAL" -> Just AppInterstitial
+        "IN_STREAM_VIDEO" -> Just InStreamVideo
+        "WEB" -> Just Web
+        "WEB_INTERSTITIAL" -> Just WebInterstitial
+        _ -> Nothing
+
+instance ToText PlacementCompatibility where
+    toText = \case
+        App -> "APP"
+        AppInterstitial -> "APP_INTERSTITIAL"
+        InStreamVideo -> "IN_STREAM_VIDEO"
+        Web -> "WEB"
+        WebInterstitial -> "WEB_INTERSTITIAL"
+
+instance FromJSON PlacementCompatibility where
+    parseJSON = parseJSONText "PlacementCompatibility"
+
+instance ToJSON PlacementCompatibility where
+    toJSON = toJSONText
+
+-- | Field by which to sort the list.
+data DfareportingAccountUserProfilesListSortField
+    = DAUPLSFID
+      -- ^ @ID@
+    | DAUPLSFName
+      -- ^ @NAME@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable DfareportingAccountUserProfilesListSortField
+
+instance FromText DfareportingAccountUserProfilesListSortField where
+    fromText = \case
+        "ID" -> Just DAUPLSFID
+        "NAME" -> Just DAUPLSFName
+        _ -> Nothing
+
+instance ToText DfareportingAccountUserProfilesListSortField where
+    toText = \case
+        DAUPLSFID -> "ID"
+        DAUPLSFName -> "NAME"
+
+instance FromJSON DfareportingAccountUserProfilesListSortField where
+    parseJSON = parseJSONText "DfareportingAccountUserProfilesListSortField"
+
+instance ToJSON DfareportingAccountUserProfilesListSortField where
+    toJSON = toJSONText
+
+-- | Creative group number of the creative group assignment.
+data CreativeGroupNumber
+    = CreativeGroupOne
+      -- ^ @CREATIVE_GROUP_ONE@
+    | CreativeGroupTwo
+      -- ^ @CREATIVE_GROUP_TWO@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CreativeGroupNumber
+
+instance FromText CreativeGroupNumber where
+    fromText = \case
+        "CREATIVE_GROUP_ONE" -> Just CreativeGroupOne
+        "CREATIVE_GROUP_TWO" -> Just CreativeGroupTwo
+        _ -> Nothing
+
+instance ToText CreativeGroupNumber where
+    toText = \case
+        CreativeGroupOne -> "CREATIVE_GROUP_ONE"
+        CreativeGroupTwo -> "CREATIVE_GROUP_TWO"
+
+instance FromJSON CreativeGroupNumber where
+    parseJSON = parseJSONText "CreativeGroupNumber"
+
+instance ToJSON CreativeGroupNumber where
+    toJSON = toJSONText
+
+-- | Payment source type of this ad slot.
+data PaymentSourceType
+    = PlanningPaymentSourceTypeAgencyPaid
+      -- ^ @PLANNING_PAYMENT_SOURCE_TYPE_AGENCY_PAID@
+    | PlanningPaymentSourceTypePublisherPaid
+      -- ^ @PLANNING_PAYMENT_SOURCE_TYPE_PUBLISHER_PAID@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable PaymentSourceType
+
+instance FromText PaymentSourceType where
+    fromText = \case
+        "PLANNING_PAYMENT_SOURCE_TYPE_AGENCY_PAID" -> Just PlanningPaymentSourceTypeAgencyPaid
+        "PLANNING_PAYMENT_SOURCE_TYPE_PUBLISHER_PAID" -> Just PlanningPaymentSourceTypePublisherPaid
+        _ -> Nothing
+
+instance ToText PaymentSourceType where
+    toText = \case
+        PlanningPaymentSourceTypeAgencyPaid -> "PLANNING_PAYMENT_SOURCE_TYPE_AGENCY_PAID"
+        PlanningPaymentSourceTypePublisherPaid -> "PLANNING_PAYMENT_SOURCE_TYPE_PUBLISHER_PAID"
+
+instance FromJSON PaymentSourceType where
+    parseJSON = parseJSONText "PaymentSourceType"
+
+instance ToJSON PaymentSourceType where
+    toJSON = toJSONText
+
+-- | Ad slot compatibility. WEB and WEB_INTERSTITIAL refer to rendering
+-- either on desktop or on mobile devices for regular or interstitial ads
+-- respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps.
+-- IN_STREAM_VIDEO refers to rendering in in-stream video ads developed
+-- with the VAST standard.
+data AdSlotCompatibility
+    = PlanningRenderingEnvironmentTypeApp
+      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_APP@
+    | PlanningRenderingEnvironmentTypeAppInterstitial
+      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_APP_INTERSTITIAL@
+    | PlanningRenderingEnvironmentTypeInStreamVideo
+      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_IN_STREAM_VIDEO@
+    | PlanningRenderingEnvironmentTypeWeb
+      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB@
+    | PlanningRenderingEnvironmentTypeWebInterstitial
+      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB_INTERSTITIAL@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable AdSlotCompatibility
+
+instance FromText AdSlotCompatibility where
+    fromText = \case
+        "PLANNING_RENDERING_ENVIRONMENT_TYPE_APP" -> Just PlanningRenderingEnvironmentTypeApp
+        "PLANNING_RENDERING_ENVIRONMENT_TYPE_APP_INTERSTITIAL" -> Just PlanningRenderingEnvironmentTypeAppInterstitial
+        "PLANNING_RENDERING_ENVIRONMENT_TYPE_IN_STREAM_VIDEO" -> Just PlanningRenderingEnvironmentTypeInStreamVideo
+        "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB" -> Just PlanningRenderingEnvironmentTypeWeb
+        "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB_INTERSTITIAL" -> Just PlanningRenderingEnvironmentTypeWebInterstitial
+        _ -> Nothing
+
+instance ToText AdSlotCompatibility where
+    toText = \case
+        PlanningRenderingEnvironmentTypeApp -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_APP"
+        PlanningRenderingEnvironmentTypeAppInterstitial -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_APP_INTERSTITIAL"
+        PlanningRenderingEnvironmentTypeInStreamVideo -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_IN_STREAM_VIDEO"
+        PlanningRenderingEnvironmentTypeWeb -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB"
+        PlanningRenderingEnvironmentTypeWebInterstitial -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB_INTERSTITIAL"
+
+instance FromJSON AdSlotCompatibility where
+    parseJSON = parseJSONText "AdSlotCompatibility"
+
+instance ToJSON AdSlotCompatibility where
+    toJSON = toJSONText
+
+-- | Window mode options for flash assets. Applicable to the following
+-- creative types: FLASH_INPAGE, RICH_MEDIA_EXPANDING,
+-- RICH_MEDIA_IM_EXPAND, RICH_MEDIA_INPAGE, and RICH_MEDIA_INPAGE_FLOATING.
+data WindowMode
+    = Opaque
+      -- ^ @OPAQUE@
+    | Transparent
+      -- ^ @TRANSPARENT@
+    | Window
+      -- ^ @WINDOW@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable WindowMode
+
+instance FromText WindowMode where
+    fromText = \case
+        "OPAQUE" -> Just Opaque
+        "TRANSPARENT" -> Just Transparent
+        "WINDOW" -> Just Window
+        _ -> Nothing
+
+instance ToText WindowMode where
+    toText = \case
+        Opaque -> "OPAQUE"
+        Transparent -> "TRANSPARENT"
+        Window -> "WINDOW"
+
+instance FromJSON WindowMode where
+    parseJSON = parseJSONText "WindowMode"
+
+instance ToJSON WindowMode where
+    toJSON = toJSONText
+
+-- | Role of the asset in relation to creative. Applicable to all but the
+-- following creative types: all REDIRECT and TRACKING_TEXT. This is a
+-- required field. PRIMARY applies to ENHANCED_BANNER, FLASH_INPAGE,
+-- HTML5_BANNER, IMAGE, IMAGE_GALLERY, all RICH_MEDIA (which may contain
+-- multiple primary assets), and all VPAID creatives. BACKUP_IMAGE applies
+-- to ENHANCED_BANNER, FLASH_INPAGE, HTML5_BANNER, all RICH_MEDIA, and all
+-- VPAID creatives. ADDITIONAL_IMAGE and ADDITIONAL_FLASH apply to
+-- FLASH_INPAGE creatives. OTHER refers to assets from sources other than
+-- DCM, such as Studio uploaded assets, applicable to all RICH_MEDIA and
+-- all VPAID creatives. PARENT_VIDEO refers to videos uploaded by the user
+-- in DCM and is applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
+-- TRANSCODED_VIDEO refers to videos transcoded by DCM from PARENT_VIDEO
+-- assets and is applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
+-- ALTERNATE_VIDEO refers to the DCM representation of child asset videos
+-- from Studio, and is applicable to VPAID_LINEAR creatives. These cannot
+-- be added or removed within DCM. For VPAID_LINEAR creatives,
+-- PARENT_VIDEO, TRANSCODED_VIDEO and ALTERNATE_VIDEO assets that are
+-- marked active serve as backup in case the VPAID creative cannot be
+-- served. Only PARENT_VIDEO assets can be added or removed for an
+-- INSTREAM_VIDEO or VPAID_LINEAR creative.
+data CreativeAssetRole
+    = CARAdditionalFlash
+      -- ^ @ADDITIONAL_FLASH@
+    | CARAdditionalImage
+      -- ^ @ADDITIONAL_IMAGE@
+    | CARAlternateVideo
+      -- ^ @ALTERNATE_VIDEO@
+    | CARBackupImage
+      -- ^ @BACKUP_IMAGE@
+    | CAROther
+      -- ^ @OTHER@
+    | CARParentVideo
+      -- ^ @PARENT_VIDEO@
+    | CARPrimary
+      -- ^ @PRIMARY@
+    | CARTranscodedVideo
+      -- ^ @TRANSCODED_VIDEO@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CreativeAssetRole
+
+instance FromText CreativeAssetRole where
+    fromText = \case
+        "ADDITIONAL_FLASH" -> Just CARAdditionalFlash
+        "ADDITIONAL_IMAGE" -> Just CARAdditionalImage
+        "ALTERNATE_VIDEO" -> Just CARAlternateVideo
+        "BACKUP_IMAGE" -> Just CARBackupImage
+        "OTHER" -> Just CAROther
+        "PARENT_VIDEO" -> Just CARParentVideo
+        "PRIMARY" -> Just CARPrimary
+        "TRANSCODED_VIDEO" -> Just CARTranscodedVideo
+        _ -> Nothing
+
+instance ToText CreativeAssetRole where
+    toText = \case
+        CARAdditionalFlash -> "ADDITIONAL_FLASH"
+        CARAdditionalImage -> "ADDITIONAL_IMAGE"
+        CARAlternateVideo -> "ALTERNATE_VIDEO"
+        CARBackupImage -> "BACKUP_IMAGE"
+        CAROther -> "OTHER"
+        CARParentVideo -> "PARENT_VIDEO"
+        CARPrimary -> "PRIMARY"
+        CARTranscodedVideo -> "TRANSCODED_VIDEO"
+
+instance FromJSON CreativeAssetRole where
+    parseJSON = parseJSONText "CreativeAssetRole"
+
+instance ToJSON CreativeAssetRole where
+    toJSON = toJSONText
+
+-- | Field by which to sort the list.
+data DfareportingCreativesListSortField
+    = DCLSFID
+      -- ^ @ID@
+    | DCLSFName
+      -- ^ @NAME@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable DfareportingCreativesListSortField
+
+instance FromText DfareportingCreativesListSortField where
+    fromText = \case
+        "ID" -> Just DCLSFID
+        "NAME" -> Just DCLSFName
+        _ -> Nothing
+
+instance ToText DfareportingCreativesListSortField where
+    toText = \case
+        DCLSFID -> "ID"
+        DCLSFName -> "NAME"
+
+instance FromJSON DfareportingCreativesListSortField where
+    parseJSON = parseJSONText "DfareportingCreativesListSortField"
+
+instance ToJSON DfareportingCreativesListSortField where
+    toJSON = toJSONText
+
+-- | Order of sorted results, default is ASCENDING.
+data DfareportingPlacementStrategiesListSortOrder
+    = DPSLSOAscending
+      -- ^ @ASCENDING@
+    | DPSLSODescending
+      -- ^ @DESCENDING@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable DfareportingPlacementStrategiesListSortOrder
+
+instance FromText DfareportingPlacementStrategiesListSortOrder where
+    fromText = \case
+        "ASCENDING" -> Just DPSLSOAscending
+        "DESCENDING" -> Just DPSLSODescending
+        _ -> Nothing
+
+instance ToText DfareportingPlacementStrategiesListSortOrder where
+    toText = \case
+        DPSLSOAscending -> "ASCENDING"
+        DPSLSODescending -> "DESCENDING"
+
+instance FromJSON DfareportingPlacementStrategiesListSortOrder where
+    parseJSON = parseJSONText "DfareportingPlacementStrategiesListSortOrder"
+
+instance ToJSON DfareportingPlacementStrategiesListSortOrder where
+    toJSON = toJSONText
+
+-- | Field by which to sort the list.
+data DfareportingEventTagsListSortField
+    = DETLSFID
+      -- ^ @ID@
+    | DETLSFName
+      -- ^ @NAME@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable DfareportingEventTagsListSortField
+
+instance FromText DfareportingEventTagsListSortField where
+    fromText = \case
+        "ID" -> Just DETLSFID
+        "NAME" -> Just DETLSFName
+        _ -> Nothing
+
+instance ToText DfareportingEventTagsListSortField where
+    toText = \case
+        DETLSFID -> "ID"
+        DETLSFName -> "NAME"
+
+instance FromJSON DfareportingEventTagsListSortField where
+    parseJSON = parseJSONText "DfareportingEventTagsListSortField"
+
+instance ToJSON DfareportingEventTagsListSortField where
+    toJSON = toJSONText
+
+-- | The status of the report file.
+data FileStatus
+    = FSCancelled
+      -- ^ @CANCELLED@
+    | FSFailed
+      -- ^ @FAILED@
+    | FSProcessing
+      -- ^ @PROCESSING@
+    | FSReportAvailable
+      -- ^ @REPORT_AVAILABLE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable FileStatus
+
+instance FromText FileStatus where
+    fromText = \case
+        "CANCELLED" -> Just FSCancelled
+        "FAILED" -> Just FSFailed
+        "PROCESSING" -> Just FSProcessing
+        "REPORT_AVAILABLE" -> Just FSReportAvailable
+        _ -> Nothing
+
+instance ToText FileStatus where
+    toText = \case
+        FSCancelled -> "CANCELLED"
+        FSFailed -> "FAILED"
+        FSProcessing -> "PROCESSING"
+        FSReportAvailable -> "REPORT_AVAILABLE"
+
+instance FromJSON FileStatus where
+    parseJSON = parseJSONText "FileStatus"
+
+instance ToJSON FileStatus where
+    toJSON = toJSONText
+
+-- | Option specifying how keywords are embedded in ad tags. This setting can
+-- be used to specify whether keyword placeholders are inserted in
+-- placement tags for this site. Publishers can then add keywords to those
+-- placeholders.
+data KeywordOption
+    = GenerateSeparateTagForEachKeyword
+      -- ^ @GENERATE_SEPARATE_TAG_FOR_EACH_KEYWORD@
+    | Ignore
+      -- ^ @IGNORE@
+    | PlaceholderWithListOfKeywords
+      -- ^ @PLACEHOLDER_WITH_LIST_OF_KEYWORDS@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable KeywordOption
+
+instance FromText KeywordOption where
+    fromText = \case
+        "GENERATE_SEPARATE_TAG_FOR_EACH_KEYWORD" -> Just GenerateSeparateTagForEachKeyword
+        "IGNORE" -> Just Ignore
+        "PLACEHOLDER_WITH_LIST_OF_KEYWORDS" -> Just PlaceholderWithListOfKeywords
+        _ -> Nothing
+
+instance ToText KeywordOption where
+    toText = \case
+        GenerateSeparateTagForEachKeyword -> "GENERATE_SEPARATE_TAG_FOR_EACH_KEYWORD"
+        Ignore -> "IGNORE"
+        PlaceholderWithListOfKeywords -> "PLACEHOLDER_WITH_LIST_OF_KEYWORDS"
+
+instance FromJSON KeywordOption where
+    parseJSON = parseJSONText "KeywordOption"
+
+instance ToJSON KeywordOption where
+    toJSON = toJSONText
+
+-- | The field by which to sort the list.
+data DfareportingFilesListSortField
+    = DFLSFID
+      -- ^ @ID@
+      -- Sort by file ID.
+    | DFLSFLastModifiedTime
+      -- ^ @LAST_MODIFIED_TIME@
+      -- Sort by \'lastmodifiedAt\' field.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable DfareportingFilesListSortField
+
+instance FromText DfareportingFilesListSortField where
+    fromText = \case
+        "ID" -> Just DFLSFID
+        "LAST_MODIFIED_TIME" -> Just DFLSFLastModifiedTime
+        _ -> Nothing
+
+instance ToText DfareportingFilesListSortField where
+    toText = \case
+        DFLSFID -> "ID"
+        DFLSFLastModifiedTime -> "LAST_MODIFIED_TIME"
+
+instance FromJSON DfareportingFilesListSortField where
+    parseJSON = parseJSONText "DfareportingFilesListSortField"
+
+instance ToJSON DfareportingFilesListSortField where
+    toJSON = toJSONText
+
+-- | Order of sorted results, default is ASCENDING.
+data DfareportingTargetableRemarketingListsListSortOrder
+    = DTRLLSOAscending
+      -- ^ @ASCENDING@
+    | DTRLLSODescending
+      -- ^ @DESCENDING@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable DfareportingTargetableRemarketingListsListSortOrder
+
+instance FromText DfareportingTargetableRemarketingListsListSortOrder where
+    fromText = \case
+        "ASCENDING" -> Just DTRLLSOAscending
+        "DESCENDING" -> Just DTRLLSODescending
+        _ -> Nothing
+
+instance ToText DfareportingTargetableRemarketingListsListSortOrder where
+    toText = \case
+        DTRLLSOAscending -> "ASCENDING"
+        DTRLLSODescending -> "DESCENDING"
+
+instance FromJSON DfareportingTargetableRemarketingListsListSortOrder where
+    parseJSON = parseJSONText "DfareportingTargetableRemarketingListsListSortOrder"
+
+instance ToJSON DfareportingTargetableRemarketingListsListSortOrder where
+    toJSON = toJSONText
+
+-- | Field by which to sort the list.
+data DfareportingPlacementGroupsListSortField
+    = DPGLSFID
+      -- ^ @ID@
+    | DPGLSFName
+      -- ^ @NAME@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable DfareportingPlacementGroupsListSortField
+
+instance FromText DfareportingPlacementGroupsListSortField where
+    fromText = \case
+        "ID" -> Just DPGLSFID
+        "NAME" -> Just DPGLSFName
+        _ -> Nothing
+
+instance ToText DfareportingPlacementGroupsListSortField where
+    toText = \case
+        DPGLSFID -> "ID"
+        DPGLSFName -> "NAME"
+
+instance FromJSON DfareportingPlacementGroupsListSortField where
+    parseJSON = parseJSONText "DfareportingPlacementGroupsListSortField"
+
+instance ToJSON DfareportingPlacementGroupsListSortField where
+    toJSON = toJSONText
+
+-- | Position in the browser where the window will open.
+data PositionOption
+    = Centered
+      -- ^ @CENTERED@
+    | DistanceFromTopLeftCorner
+      -- ^ @DISTANCE_FROM_TOP_LEFT_CORNER@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable PositionOption
+
+instance FromText PositionOption where
+    fromText = \case
+        "CENTERED" -> Just Centered
+        "DISTANCE_FROM_TOP_LEFT_CORNER" -> Just DistanceFromTopLeftCorner
+        _ -> Nothing
+
+instance ToText PositionOption where
+    toText = \case
+        Centered -> "CENTERED"
+        DistanceFromTopLeftCorner -> "DISTANCE_FROM_TOP_LEFT_CORNER"
+
+instance FromJSON PositionOption where
+    parseJSON = parseJSONText "PositionOption"
+
+instance ToJSON PositionOption where
+    toJSON = toJSONText
+
+-- | Type of the event. This is a read-only field.
+data AdvertiserCustomEventType
+    = AdvertiserEventCounter
+      -- ^ @ADVERTISER_EVENT_COUNTER@
+    | AdvertiserEventExit
+      -- ^ @ADVERTISER_EVENT_EXIT@
+    | AdvertiserEventTimer
+      -- ^ @ADVERTISER_EVENT_TIMER@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable AdvertiserCustomEventType
+
+instance FromText AdvertiserCustomEventType where
+    fromText = \case
+        "ADVERTISER_EVENT_COUNTER" -> Just AdvertiserEventCounter
+        "ADVERTISER_EVENT_EXIT" -> Just AdvertiserEventExit
+        "ADVERTISER_EVENT_TIMER" -> Just AdvertiserEventTimer
+        _ -> Nothing
+
+instance ToText AdvertiserCustomEventType where
+    toText = \case
+        AdvertiserEventCounter -> "ADVERTISER_EVENT_COUNTER"
+        AdvertiserEventExit -> "ADVERTISER_EVENT_EXIT"
+        AdvertiserEventTimer -> "ADVERTISER_EVENT_TIMER"
+
+instance FromJSON AdvertiserCustomEventType where
+    parseJSON = parseJSONText "AdvertiserCustomEventType"
+
+instance ToJSON AdvertiserCustomEventType where
+    toJSON = toJSONText
+
+-- | Order of sorted results, default is ASCENDING.
+data DfareportingDirectorySiteContactsListSortOrder
+    = DDSCLSOAscending
+      -- ^ @ASCENDING@
+    | DDSCLSODescending
+      -- ^ @DESCENDING@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable DfareportingDirectorySiteContactsListSortOrder
+
+instance FromText DfareportingDirectorySiteContactsListSortOrder where
+    fromText = \case
+        "ASCENDING" -> Just DDSCLSOAscending
+        "DESCENDING" -> Just DDSCLSODescending
+        _ -> Nothing
+
+instance ToText DfareportingDirectorySiteContactsListSortOrder where
+    toText = \case
+        DDSCLSOAscending -> "ASCENDING"
+        DDSCLSODescending -> "DESCENDING"
+
+instance FromJSON DfareportingDirectorySiteContactsListSortOrder where
+    parseJSON = parseJSONText "DfareportingDirectorySiteContactsListSortOrder"
+
+instance ToJSON DfareportingDirectorySiteContactsListSortOrder where
+    toJSON = toJSONText
+
+-- | Strategy for calculating weights. Used with
+-- CREATIVE_ROTATION_TYPE_RANDOM.
+data WeightCalculationStrategy
+    = WeightStrategyCustom
+      -- ^ @WEIGHT_STRATEGY_CUSTOM@
+    | WeightStrategyEqual
+      -- ^ @WEIGHT_STRATEGY_EQUAL@
+    | WeightStrategyHighestCtr
+      -- ^ @WEIGHT_STRATEGY_HIGHEST_CTR@
+    | WeightStrategyOptimized
+      -- ^ @WEIGHT_STRATEGY_OPTIMIZED@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable WeightCalculationStrategy
+
+instance FromText WeightCalculationStrategy where
+    fromText = \case
+        "WEIGHT_STRATEGY_CUSTOM" -> Just WeightStrategyCustom
+        "WEIGHT_STRATEGY_EQUAL" -> Just WeightStrategyEqual
+        "WEIGHT_STRATEGY_HIGHEST_CTR" -> Just WeightStrategyHighestCtr
+        "WEIGHT_STRATEGY_OPTIMIZED" -> Just WeightStrategyOptimized
+        _ -> Nothing
+
+instance ToText WeightCalculationStrategy where
+    toText = \case
+        WeightStrategyCustom -> "WEIGHT_STRATEGY_CUSTOM"
+        WeightStrategyEqual -> "WEIGHT_STRATEGY_EQUAL"
+        WeightStrategyHighestCtr -> "WEIGHT_STRATEGY_HIGHEST_CTR"
+        WeightStrategyOptimized -> "WEIGHT_STRATEGY_OPTIMIZED"
+
+instance FromJSON WeightCalculationStrategy where
+    parseJSON = parseJSONText "WeightCalculationStrategy"
+
+instance ToJSON WeightCalculationStrategy where
+    toJSON = toJSONText
+
+-- | Order of sorted results, default is ASCENDING.
+data DfareportingCreativeFieldValuesListSortOrder
+    = DCFVLSOAscending
+      -- ^ @ASCENDING@
+    | DCFVLSODescending
+      -- ^ @DESCENDING@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable DfareportingCreativeFieldValuesListSortOrder
+
+instance FromText DfareportingCreativeFieldValuesListSortOrder where
+    fromText = \case
+        "ASCENDING" -> Just DCFVLSOAscending
+        "DESCENDING" -> Just DCFVLSODescending
+        _ -> Nothing
+
+instance ToText DfareportingCreativeFieldValuesListSortOrder where
+    toText = \case
+        DCFVLSOAscending -> "ASCENDING"
+        DCFVLSODescending -> "DESCENDING"
+
+instance FromJSON DfareportingCreativeFieldValuesListSortOrder where
+    parseJSON = parseJSONText "DfareportingCreativeFieldValuesListSortOrder"
+
+instance ToJSON DfareportingCreativeFieldValuesListSortOrder where
+    toJSON = toJSONText
+
+data CreativeAssetMetadataDetectedFeaturesItem
+    = CAMDFIApplicationCache
+      -- ^ @APPLICATION_CACHE@
+    | CAMDFIAudio
+      -- ^ @AUDIO@
+    | CAMDFICanvas
+      -- ^ @CANVAS@
+    | CAMDFICanvasText
+      -- ^ @CANVAS_TEXT@
+    | CAMDFICssAnimations
+      -- ^ @CSS_ANIMATIONS@
+    | CAMDFICssBackgRoundSize
+      -- ^ @CSS_BACKGROUND_SIZE@
+    | CAMDFICssBOrderImage
+      -- ^ @CSS_BORDER_IMAGE@
+    | CAMDFICssBOrderRadius
+      -- ^ @CSS_BORDER_RADIUS@
+    | CAMDFICssBoxShadow
+      -- ^ @CSS_BOX_SHADOW@
+    | CAMDFICssColumns
+      -- ^ @CSS_COLUMNS@
+    | CAMDFICssFlexBox
+      -- ^ @CSS_FLEX_BOX@
+    | CAMDFICssFontFace
+      -- ^ @CSS_FONT_FACE@
+    | CAMDFICssGeneratedContent
+      -- ^ @CSS_GENERATED_CONTENT@
+    | CAMDFICssGradients
+      -- ^ @CSS_GRADIENTS@
+    | CAMDFICssHsla
+      -- ^ @CSS_HSLA@
+    | CAMDFICssMultipleBgs
+      -- ^ @CSS_MULTIPLE_BGS@
+    | CAMDFICssOpacity
+      -- ^ @CSS_OPACITY@
+    | CAMDFICssReflections
+      -- ^ @CSS_REFLECTIONS@
+    | CAMDFICssRgba
+      -- ^ @CSS_RGBA@
+    | CAMDFICssTextShadow
+      -- ^ @CSS_TEXT_SHADOW@
+    | CAMDFICssTransforms
+      -- ^ @CSS_TRANSFORMS@
+    | CAMDFICssTRANSFORMS3D
+      -- ^ @CSS_TRANSFORMS3D@
+    | CAMDFICssTransitions
+      -- ^ @CSS_TRANSITIONS@
+    | CAMDFIDragAndDrop
+      -- ^ @DRAG_AND_DROP@
+    | CAMDFIGeoLocation
+      -- ^ @GEO_LOCATION@
+    | CAMDFIHashChange
+      -- ^ @HASH_CHANGE@
+    | CAMDFIHistory
+      -- ^ @HISTORY@
+    | CAMDFIIndexedDB
+      -- ^ @INDEXED_DB@
+    | CAMDFIInlineSvg
+      -- ^ @INLINE_SVG@
+    | CAMDFIInputAttrAutocomplete
+      -- ^ @INPUT_ATTR_AUTOCOMPLETE@
+    | CAMDFIInputAttrAutofocus
+      -- ^ @INPUT_ATTR_AUTOFOCUS@
+    | CAMDFIInputAttrList
+      -- ^ @INPUT_ATTR_LIST@
+    | CAMDFIInputAttrMax
+      -- ^ @INPUT_ATTR_MAX@
+    | CAMDFIInputAttrMin
+      -- ^ @INPUT_ATTR_MIN@
+    | CAMDFIInputAttrMultiple
+      -- ^ @INPUT_ATTR_MULTIPLE@
+    | CAMDFIInputAttrPattern
+      -- ^ @INPUT_ATTR_PATTERN@
+    | CAMDFIInputAttrPlaceholder
+      -- ^ @INPUT_ATTR_PLACEHOLDER@
+    | CAMDFIInputAttrRequired
+      -- ^ @INPUT_ATTR_REQUIRED@
+    | CAMDFIInputAttrStep
+      -- ^ @INPUT_ATTR_STEP@
+    | CAMDFIInputTypeColor
+      -- ^ @INPUT_TYPE_COLOR@
+    | CAMDFIInputTypeDate
+      -- ^ @INPUT_TYPE_DATE@
+    | CAMDFIInputTypeDatetime
+      -- ^ @INPUT_TYPE_DATETIME@
+    | CAMDFIInputTypeDatetimeLocal
+      -- ^ @INPUT_TYPE_DATETIME_LOCAL@
+    | CAMDFIInputTypeEmail
+      -- ^ @INPUT_TYPE_EMAIL@
+    | CAMDFIInputTypeMonth
+      -- ^ @INPUT_TYPE_MONTH@
+    | CAMDFIInputTypeNumber
+      -- ^ @INPUT_TYPE_NUMBER@
+    | CAMDFIInputTypeRange
+      -- ^ @INPUT_TYPE_RANGE@
+    | CAMDFIInputTypeSearch
+      -- ^ @INPUT_TYPE_SEARCH@
+    | CAMDFIInputTypeTel
+      -- ^ @INPUT_TYPE_TEL@
+    | CAMDFIInputTypeTime
+      -- ^ @INPUT_TYPE_TIME@
+    | CAMDFIInputTypeURL
+      -- ^ @INPUT_TYPE_URL@
+    | CAMDFIInputTypeWeek
+      -- ^ @INPUT_TYPE_WEEK@
+    | CAMDFILocalStorage
+      -- ^ @LOCAL_STORAGE@
+    | CAMDFIPostMessage
+      -- ^ @POST_MESSAGE@
+    | CAMDFISessionStorage
+      -- ^ @SESSION_STORAGE@
+    | CAMDFISmil
+      -- ^ @SMIL@
+    | CAMDFISvgClipPaths
+      -- ^ @SVG_CLIP_PATHS@
+    | CAMDFISvgFeImage
+      -- ^ @SVG_FE_IMAGE@
+    | CAMDFISvgFilters
+      -- ^ @SVG_FILTERS@
+    | CAMDFISvgHref
+      -- ^ @SVG_HREF@
+    | CAMDFITouch
+      -- ^ @TOUCH@
+    | CAMDFIVideo
+      -- ^ @VIDEO@
+    | CAMDFIWebgl
+      -- ^ @WEBGL@
+    | CAMDFIWebSockets
+      -- ^ @WEB_SOCKETS@
+    | CAMDFIWebSQLDatabase
+      -- ^ @WEB_SQL_DATABASE@
+    | CAMDFIWebWorkers
+      -- ^ @WEB_WORKERS@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CreativeAssetMetadataDetectedFeaturesItem
+
+instance FromText CreativeAssetMetadataDetectedFeaturesItem where
+    fromText = \case
+        "APPLICATION_CACHE" -> Just CAMDFIApplicationCache
+        "AUDIO" -> Just CAMDFIAudio
+        "CANVAS" -> Just CAMDFICanvas
+        "CANVAS_TEXT" -> Just CAMDFICanvasText
+        "CSS_ANIMATIONS" -> Just CAMDFICssAnimations
+        "CSS_BACKGROUND_SIZE" -> Just CAMDFICssBackgRoundSize
+        "CSS_BORDER_IMAGE" -> Just CAMDFICssBOrderImage
+        "CSS_BORDER_RADIUS" -> Just CAMDFICssBOrderRadius
+        "CSS_BOX_SHADOW" -> Just CAMDFICssBoxShadow
+        "CSS_COLUMNS" -> Just CAMDFICssColumns
+        "CSS_FLEX_BOX" -> Just CAMDFICssFlexBox
+        "CSS_FONT_FACE" -> Just CAMDFICssFontFace
+        "CSS_GENERATED_CONTENT" -> Just CAMDFICssGeneratedContent
+        "CSS_GRADIENTS" -> Just CAMDFICssGradients
+        "CSS_HSLA" -> Just CAMDFICssHsla
+        "CSS_MULTIPLE_BGS" -> Just CAMDFICssMultipleBgs
+        "CSS_OPACITY" -> Just CAMDFICssOpacity
+        "CSS_REFLECTIONS" -> Just CAMDFICssReflections
+        "CSS_RGBA" -> Just CAMDFICssRgba
+        "CSS_TEXT_SHADOW" -> Just CAMDFICssTextShadow
+        "CSS_TRANSFORMS" -> Just CAMDFICssTransforms
+        "CSS_TRANSFORMS3D" -> Just CAMDFICssTRANSFORMS3D
+        "CSS_TRANSITIONS" -> Just CAMDFICssTransitions
+        "DRAG_AND_DROP" -> Just CAMDFIDragAndDrop
+        "GEO_LOCATION" -> Just CAMDFIGeoLocation
+        "HASH_CHANGE" -> Just CAMDFIHashChange
+        "HISTORY" -> Just CAMDFIHistory
+        "INDEXED_DB" -> Just CAMDFIIndexedDB
+        "INLINE_SVG" -> Just CAMDFIInlineSvg
+        "INPUT_ATTR_AUTOCOMPLETE" -> Just CAMDFIInputAttrAutocomplete
+        "INPUT_ATTR_AUTOFOCUS" -> Just CAMDFIInputAttrAutofocus
+        "INPUT_ATTR_LIST" -> Just CAMDFIInputAttrList
+        "INPUT_ATTR_MAX" -> Just CAMDFIInputAttrMax
+        "INPUT_ATTR_MIN" -> Just CAMDFIInputAttrMin
+        "INPUT_ATTR_MULTIPLE" -> Just CAMDFIInputAttrMultiple
+        "INPUT_ATTR_PATTERN" -> Just CAMDFIInputAttrPattern
+        "INPUT_ATTR_PLACEHOLDER" -> Just CAMDFIInputAttrPlaceholder
+        "INPUT_ATTR_REQUIRED" -> Just CAMDFIInputAttrRequired
+        "INPUT_ATTR_STEP" -> Just CAMDFIInputAttrStep
+        "INPUT_TYPE_COLOR" -> Just CAMDFIInputTypeColor
+        "INPUT_TYPE_DATE" -> Just CAMDFIInputTypeDate
+        "INPUT_TYPE_DATETIME" -> Just CAMDFIInputTypeDatetime
+        "INPUT_TYPE_DATETIME_LOCAL" -> Just CAMDFIInputTypeDatetimeLocal
+        "INPUT_TYPE_EMAIL" -> Just CAMDFIInputTypeEmail
+        "INPUT_TYPE_MONTH" -> Just CAMDFIInputTypeMonth
+        "INPUT_TYPE_NUMBER" -> Just CAMDFIInputTypeNumber
+        "INPUT_TYPE_RANGE" -> Just CAMDFIInputTypeRange
+        "INPUT_TYPE_SEARCH" -> Just CAMDFIInputTypeSearch
+        "INPUT_TYPE_TEL" -> Just CAMDFIInputTypeTel
+        "INPUT_TYPE_TIME" -> Just CAMDFIInputTypeTime
+        "INPUT_TYPE_URL" -> Just CAMDFIInputTypeURL
+        "INPUT_TYPE_WEEK" -> Just CAMDFIInputTypeWeek
+        "LOCAL_STORAGE" -> Just CAMDFILocalStorage
+        "POST_MESSAGE" -> Just CAMDFIPostMessage
+        "SESSION_STORAGE" -> Just CAMDFISessionStorage
+        "SMIL" -> Just CAMDFISmil
+        "SVG_CLIP_PATHS" -> Just CAMDFISvgClipPaths
+        "SVG_FE_IMAGE" -> Just CAMDFISvgFeImage
+        "SVG_FILTERS" -> Just CAMDFISvgFilters
+        "SVG_HREF" -> Just CAMDFISvgHref
+        "TOUCH" -> Just CAMDFITouch
+        "VIDEO" -> Just CAMDFIVideo
+        "WEBGL" -> Just CAMDFIWebgl
+        "WEB_SOCKETS" -> Just CAMDFIWebSockets
+        "WEB_SQL_DATABASE" -> Just CAMDFIWebSQLDatabase
+        "WEB_WORKERS" -> Just CAMDFIWebWorkers
+        _ -> Nothing
+
+instance ToText CreativeAssetMetadataDetectedFeaturesItem where
+    toText = \case
+        CAMDFIApplicationCache -> "APPLICATION_CACHE"
+        CAMDFIAudio -> "AUDIO"
+        CAMDFICanvas -> "CANVAS"
+        CAMDFICanvasText -> "CANVAS_TEXT"
+        CAMDFICssAnimations -> "CSS_ANIMATIONS"
+        CAMDFICssBackgRoundSize -> "CSS_BACKGROUND_SIZE"
+        CAMDFICssBOrderImage -> "CSS_BORDER_IMAGE"
+        CAMDFICssBOrderRadius -> "CSS_BORDER_RADIUS"
+        CAMDFICssBoxShadow -> "CSS_BOX_SHADOW"
+        CAMDFICssColumns -> "CSS_COLUMNS"
+        CAMDFICssFlexBox -> "CSS_FLEX_BOX"
+        CAMDFICssFontFace -> "CSS_FONT_FACE"
+        CAMDFICssGeneratedContent -> "CSS_GENERATED_CONTENT"
+        CAMDFICssGradients -> "CSS_GRADIENTS"
+        CAMDFICssHsla -> "CSS_HSLA"
+        CAMDFICssMultipleBgs -> "CSS_MULTIPLE_BGS"
+        CAMDFICssOpacity -> "CSS_OPACITY"
+        CAMDFICssReflections -> "CSS_REFLECTIONS"
+        CAMDFICssRgba -> "CSS_RGBA"
+        CAMDFICssTextShadow -> "CSS_TEXT_SHADOW"
+        CAMDFICssTransforms -> "CSS_TRANSFORMS"
+        CAMDFICssTRANSFORMS3D -> "CSS_TRANSFORMS3D"
+        CAMDFICssTransitions -> "CSS_TRANSITIONS"
+        CAMDFIDragAndDrop -> "DRAG_AND_DROP"
+        CAMDFIGeoLocation -> "GEO_LOCATION"
+        CAMDFIHashChange -> "HASH_CHANGE"
+        CAMDFIHistory -> "HISTORY"
+        CAMDFIIndexedDB -> "INDEXED_DB"
+        CAMDFIInlineSvg -> "INLINE_SVG"
+        CAMDFIInputAttrAutocomplete -> "INPUT_ATTR_AUTOCOMPLETE"
+        CAMDFIInputAttrAutofocus -> "INPUT_ATTR_AUTOFOCUS"
+        CAMDFIInputAttrList -> "INPUT_ATTR_LIST"
+        CAMDFIInputAttrMax -> "INPUT_ATTR_MAX"
+        CAMDFIInputAttrMin -> "INPUT_ATTR_MIN"
+        CAMDFIInputAttrMultiple -> "INPUT_ATTR_MULTIPLE"
+        CAMDFIInputAttrPattern -> "INPUT_ATTR_PATTERN"
+        CAMDFIInputAttrPlaceholder -> "INPUT_ATTR_PLACEHOLDER"
+        CAMDFIInputAttrRequired -> "INPUT_ATTR_REQUIRED"
+        CAMDFIInputAttrStep -> "INPUT_ATTR_STEP"
+        CAMDFIInputTypeColor -> "INPUT_TYPE_COLOR"
+        CAMDFIInputTypeDate -> "INPUT_TYPE_DATE"
+        CAMDFIInputTypeDatetime -> "INPUT_TYPE_DATETIME"
+        CAMDFIInputTypeDatetimeLocal -> "INPUT_TYPE_DATETIME_LOCAL"
+        CAMDFIInputTypeEmail -> "INPUT_TYPE_EMAIL"
+        CAMDFIInputTypeMonth -> "INPUT_TYPE_MONTH"
+        CAMDFIInputTypeNumber -> "INPUT_TYPE_NUMBER"
+        CAMDFIInputTypeRange -> "INPUT_TYPE_RANGE"
+        CAMDFIInputTypeSearch -> "INPUT_TYPE_SEARCH"
+        CAMDFIInputTypeTel -> "INPUT_TYPE_TEL"
+        CAMDFIInputTypeTime -> "INPUT_TYPE_TIME"
+        CAMDFIInputTypeURL -> "INPUT_TYPE_URL"
+        CAMDFIInputTypeWeek -> "INPUT_TYPE_WEEK"
+        CAMDFILocalStorage -> "LOCAL_STORAGE"
+        CAMDFIPostMessage -> "POST_MESSAGE"
+        CAMDFISessionStorage -> "SESSION_STORAGE"
+        CAMDFISmil -> "SMIL"
+        CAMDFISvgClipPaths -> "SVG_CLIP_PATHS"
+        CAMDFISvgFeImage -> "SVG_FE_IMAGE"
+        CAMDFISvgFilters -> "SVG_FILTERS"
+        CAMDFISvgHref -> "SVG_HREF"
+        CAMDFITouch -> "TOUCH"
+        CAMDFIVideo -> "VIDEO"
+        CAMDFIWebgl -> "WEBGL"
+        CAMDFIWebSockets -> "WEB_SOCKETS"
+        CAMDFIWebSQLDatabase -> "WEB_SQL_DATABASE"
+        CAMDFIWebWorkers -> "WEB_WORKERS"
+
+instance FromJSON CreativeAssetMetadataDetectedFeaturesItem where
+    parseJSON = parseJSONText "CreativeAssetMetadataDetectedFeaturesItem"
+
+instance ToJSON CreativeAssetMetadataDetectedFeaturesItem where
+    toJSON = toJSONText
+
+-- | Status of this event tag. Must be ENABLED for this event tag to fire.
+-- This is a required field.
+data EventTagStatus
+    = ETSDisabled
+      -- ^ @DISABLED@
+    | ETSEnabled
+      -- ^ @ENABLED@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable EventTagStatus
+
+instance FromText EventTagStatus where
+    fromText = \case
+        "DISABLED" -> Just ETSDisabled
+        "ENABLED" -> Just ETSEnabled
+        _ -> Nothing
+
+instance ToText EventTagStatus where
+    toText = \case
+        ETSDisabled -> "DISABLED"
+        ETSEnabled -> "ENABLED"
+
+instance FromJSON EventTagStatus where
+    parseJSON = parseJSONText "EventTagStatus"
+
+instance ToJSON EventTagStatus where
+    toJSON = toJSONText
+
+-- | Serving priority of an ad, with respect to other ads. The lower the
+-- priority number, the greater the priority with which it is served.
+data Priority
+    = AdPriority01
+      -- ^ @AD_PRIORITY_01@
+    | AdPriority02
+      -- ^ @AD_PRIORITY_02@
+    | AdPriority03
+      -- ^ @AD_PRIORITY_03@
+    | AdPriority04
+      -- ^ @AD_PRIORITY_04@
+    | AdPriority05
+      -- ^ @AD_PRIORITY_05@
+    | AdPriority06
+      -- ^ @AD_PRIORITY_06@
+    | AdPriority07
+      -- ^ @AD_PRIORITY_07@
+    | AdPriority08
+      -- ^ @AD_PRIORITY_08@
+    | AdPriority09
+      -- ^ @AD_PRIORITY_09@
+    | AdPriority10
+      -- ^ @AD_PRIORITY_10@
+    | AdPriority11
+      -- ^ @AD_PRIORITY_11@
+    | AdPriority12
+      -- ^ @AD_PRIORITY_12@
+    | AdPriority13
+      -- ^ @AD_PRIORITY_13@
+    | AdPriority14
+      -- ^ @AD_PRIORITY_14@
+    | AdPriority15
+      -- ^ @AD_PRIORITY_15@
+    | AdPriority16
+      -- ^ @AD_PRIORITY_16@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Priority
+
+instance FromText Priority where
+    fromText = \case
+        "AD_PRIORITY_01" -> Just AdPriority01
+        "AD_PRIORITY_02" -> Just AdPriority02
+        "AD_PRIORITY_03" -> Just AdPriority03
+        "AD_PRIORITY_04" -> Just AdPriority04
+        "AD_PRIORITY_05" -> Just AdPriority05
+        "AD_PRIORITY_06" -> Just AdPriority06
+        "AD_PRIORITY_07" -> Just AdPriority07
+        "AD_PRIORITY_08" -> Just AdPriority08
+        "AD_PRIORITY_09" -> Just AdPriority09
+        "AD_PRIORITY_10" -> Just AdPriority10
+        "AD_PRIORITY_11" -> Just AdPriority11
+        "AD_PRIORITY_12" -> Just AdPriority12
+        "AD_PRIORITY_13" -> Just AdPriority13
+        "AD_PRIORITY_14" -> Just AdPriority14
+        "AD_PRIORITY_15" -> Just AdPriority15
+        "AD_PRIORITY_16" -> Just AdPriority16
+        _ -> Nothing
+
+instance ToText Priority where
+    toText = \case
+        AdPriority01 -> "AD_PRIORITY_01"
+        AdPriority02 -> "AD_PRIORITY_02"
+        AdPriority03 -> "AD_PRIORITY_03"
+        AdPriority04 -> "AD_PRIORITY_04"
+        AdPriority05 -> "AD_PRIORITY_05"
+        AdPriority06 -> "AD_PRIORITY_06"
+        AdPriority07 -> "AD_PRIORITY_07"
+        AdPriority08 -> "AD_PRIORITY_08"
+        AdPriority09 -> "AD_PRIORITY_09"
+        AdPriority10 -> "AD_PRIORITY_10"
+        AdPriority11 -> "AD_PRIORITY_11"
+        AdPriority12 -> "AD_PRIORITY_12"
+        AdPriority13 -> "AD_PRIORITY_13"
+        AdPriority14 -> "AD_PRIORITY_14"
+        AdPriority15 -> "AD_PRIORITY_15"
+        AdPriority16 -> "AD_PRIORITY_16"
+
+instance FromJSON Priority where
+    parseJSON = parseJSONText "Priority"
+
+instance ToJSON Priority where
+    toJSON = toJSONText
+
+-- | Tag formats to generate for these placements.
+data TagFormats
+    = PlacementTagClickCommands
+      -- ^ @PLACEMENT_TAG_CLICK_COMMANDS@
+    | PlacementTagIframeIlayer
+      -- ^ @PLACEMENT_TAG_IFRAME_ILAYER@
+    | PlacementTagIframeJavascript
+      -- ^ @PLACEMENT_TAG_IFRAME_JAVASCRIPT@
+    | PlacementTagIframeJavascriptLegacy
+      -- ^ @PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY@
+    | PlacementTagInstreamVideoPrefetch
+      -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH@
+    | PlacementTagInstreamVideoPrefetchVast3
+      -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3@
+    | PlacementTagInternalRedirect
+      -- ^ @PLACEMENT_TAG_INTERNAL_REDIRECT@
+    | PlacementTagInterstitialIframeJavascript
+      -- ^ @PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT@
+    | PlacementTagInterstitialIframeJavascriptLegacy
+      -- ^ @PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY@
+    | PlacementTagInterstitialInternalRedirect
+      -- ^ @PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT@
+    | PlacementTagInterstitialJavascript
+      -- ^ @PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT@
+    | PlacementTagInterstitialJavascriptLegacy
+      -- ^ @PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY@
+    | PlacementTagJavascript
+      -- ^ @PLACEMENT_TAG_JAVASCRIPT@
+    | PlacementTagJavascriptLegacy
+      -- ^ @PLACEMENT_TAG_JAVASCRIPT_LEGACY@
+    | PlacementTagStandard
+      -- ^ @PLACEMENT_TAG_STANDARD@
+    | PlacementTagTracking
+      -- ^ @PLACEMENT_TAG_TRACKING@
+    | PlacementTagTrackingIframe
+      -- ^ @PLACEMENT_TAG_TRACKING_IFRAME@
+    | PlacementTagTrackingJavascript
+      -- ^ @PLACEMENT_TAG_TRACKING_JAVASCRIPT@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable TagFormats
+
+instance FromText TagFormats where
+    fromText = \case
+        "PLACEMENT_TAG_CLICK_COMMANDS" -> Just PlacementTagClickCommands
+        "PLACEMENT_TAG_IFRAME_ILAYER" -> Just PlacementTagIframeIlayer
+        "PLACEMENT_TAG_IFRAME_JAVASCRIPT" -> Just PlacementTagIframeJavascript
+        "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY" -> Just PlacementTagIframeJavascriptLegacy
+        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH" -> Just PlacementTagInstreamVideoPrefetch
+        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3" -> Just PlacementTagInstreamVideoPrefetchVast3
+        "PLACEMENT_TAG_INTERNAL_REDIRECT" -> Just PlacementTagInternalRedirect
+        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT" -> Just PlacementTagInterstitialIframeJavascript
+        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY" -> Just PlacementTagInterstitialIframeJavascriptLegacy
+        "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT" -> Just PlacementTagInterstitialInternalRedirect
+        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT" -> Just PlacementTagInterstitialJavascript
+        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY" -> Just PlacementTagInterstitialJavascriptLegacy
+        "PLACEMENT_TAG_JAVASCRIPT" -> Just PlacementTagJavascript
+        "PLACEMENT_TAG_JAVASCRIPT_LEGACY" -> Just PlacementTagJavascriptLegacy
+        "PLACEMENT_TAG_STANDARD" -> Just PlacementTagStandard
+        "PLACEMENT_TAG_TRACKING" -> Just PlacementTagTracking
+        "PLACEMENT_TAG_TRACKING_IFRAME" -> Just PlacementTagTrackingIframe
+        "PLACEMENT_TAG_TRACKING_JAVASCRIPT" -> Just PlacementTagTrackingJavascript
+        _ -> Nothing
+
+instance ToText TagFormats where
+    toText = \case
+        PlacementTagClickCommands -> "PLACEMENT_TAG_CLICK_COMMANDS"
+        PlacementTagIframeIlayer -> "PLACEMENT_TAG_IFRAME_ILAYER"
+        PlacementTagIframeJavascript -> "PLACEMENT_TAG_IFRAME_JAVASCRIPT"
+        PlacementTagIframeJavascriptLegacy -> "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY"
+        PlacementTagInstreamVideoPrefetch -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH"
+        PlacementTagInstreamVideoPrefetchVast3 -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3"
+        PlacementTagInternalRedirect -> "PLACEMENT_TAG_INTERNAL_REDIRECT"
+        PlacementTagInterstitialIframeJavascript -> "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT"
+        PlacementTagInterstitialIframeJavascriptLegacy -> "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY"
+        PlacementTagInterstitialInternalRedirect -> "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT"
+        PlacementTagInterstitialJavascript -> "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT"
+        PlacementTagInterstitialJavascriptLegacy -> "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY"
+        PlacementTagJavascript -> "PLACEMENT_TAG_JAVASCRIPT"
+        PlacementTagJavascriptLegacy -> "PLACEMENT_TAG_JAVASCRIPT_LEGACY"
+        PlacementTagStandard -> "PLACEMENT_TAG_STANDARD"
+        PlacementTagTracking -> "PLACEMENT_TAG_TRACKING"
+        PlacementTagTrackingIframe -> "PLACEMENT_TAG_TRACKING_IFRAME"
+        PlacementTagTrackingJavascript -> "PLACEMENT_TAG_TRACKING_JAVASCRIPT"
+
+instance FromJSON TagFormats where
+    parseJSON = parseJSONText "TagFormats"
+
+instance ToJSON TagFormats where
     toJSON = toJSONText
 
 -- | The output format of the report. Only available once the file is
@@ -1541,45 +1638,14 @@ instance FromJSON FileFormat where
 instance ToJSON FileFormat where
     toJSON = toJSONText
 
--- | Types of attribution options for natural search conversions.
-data FloodlightConfigurationNATuralSearchConversionAttributionOption
-    = ExcludeNATuralSearchConversionAttribution
-      -- ^ @EXCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION@
-    | IncludeNATuralSearchConversionAttribution
-      -- ^ @INCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION@
-    | IncludeNATuralSearchTieredConversionAttribution
-      -- ^ @INCLUDE_NATURAL_SEARCH_TIERED_CONVERSION_ATTRIBUTION@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable FloodlightConfigurationNATuralSearchConversionAttributionOption
-
-instance FromText FloodlightConfigurationNATuralSearchConversionAttributionOption where
-    fromText = \case
-        "EXCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION" -> Just ExcludeNATuralSearchConversionAttribution
-        "INCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION" -> Just IncludeNATuralSearchConversionAttribution
-        "INCLUDE_NATURAL_SEARCH_TIERED_CONVERSION_ATTRIBUTION" -> Just IncludeNATuralSearchTieredConversionAttribution
-        _ -> Nothing
-
-instance ToText FloodlightConfigurationNATuralSearchConversionAttributionOption where
-    toText = \case
-        ExcludeNATuralSearchConversionAttribution -> "EXCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION"
-        IncludeNATuralSearchConversionAttribution -> "INCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION"
-        IncludeNATuralSearchTieredConversionAttribution -> "INCLUDE_NATURAL_SEARCH_TIERED_CONVERSION_ATTRIBUTION"
-
-instance FromJSON FloodlightConfigurationNATuralSearchConversionAttributionOption where
-    parseJSON = parseJSONText "FloodlightConfigurationNATuralSearchConversionAttributionOption"
-
-instance ToJSON FloodlightConfigurationNATuralSearchConversionAttributionOption where
-    toJSON = toJSONText
-
 -- | Artwork type of rich media creative. This is a read-only field.
 -- Applicable to the following creative types: all RICH_MEDIA.
 data CreativeAssetArtworkType
-    = CAATArtworkTypeFlash
+    = ArtworkTypeFlash
       -- ^ @ARTWORK_TYPE_FLASH@
-    | CAATArtworkTypeHTML5
+    | ArtworkTypeHTML5
       -- ^ @ARTWORK_TYPE_HTML5@
-    | CAATArtworkTypeMixed
+    | ArtworkTypeMixed
       -- ^ @ARTWORK_TYPE_MIXED@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -1587,60 +1653,21 @@ instance Hashable CreativeAssetArtworkType
 
 instance FromText CreativeAssetArtworkType where
     fromText = \case
-        "ARTWORK_TYPE_FLASH" -> Just CAATArtworkTypeFlash
-        "ARTWORK_TYPE_HTML5" -> Just CAATArtworkTypeHTML5
-        "ARTWORK_TYPE_MIXED" -> Just CAATArtworkTypeMixed
+        "ARTWORK_TYPE_FLASH" -> Just ArtworkTypeFlash
+        "ARTWORK_TYPE_HTML5" -> Just ArtworkTypeHTML5
+        "ARTWORK_TYPE_MIXED" -> Just ArtworkTypeMixed
         _ -> Nothing
 
 instance ToText CreativeAssetArtworkType where
     toText = \case
-        CAATArtworkTypeFlash -> "ARTWORK_TYPE_FLASH"
-        CAATArtworkTypeHTML5 -> "ARTWORK_TYPE_HTML5"
-        CAATArtworkTypeMixed -> "ARTWORK_TYPE_MIXED"
+        ArtworkTypeFlash -> "ARTWORK_TYPE_FLASH"
+        ArtworkTypeHTML5 -> "ARTWORK_TYPE_HTML5"
+        ArtworkTypeMixed -> "ARTWORK_TYPE_MIXED"
 
 instance FromJSON CreativeAssetArtworkType where
     parseJSON = parseJSONText "CreativeAssetArtworkType"
 
 instance ToJSON CreativeAssetArtworkType where
-    toJSON = toJSONText
-
--- | Placement pricing type. This field is required on insertion.
-data PricingSchedulePricingType
-    = PricingTypeCpa
-      -- ^ @PRICING_TYPE_CPA@
-    | PricingTypeCpc
-      -- ^ @PRICING_TYPE_CPC@
-    | PricingTypeCpm
-      -- ^ @PRICING_TYPE_CPM@
-    | PricingTypeFlatRateClicks
-      -- ^ @PRICING_TYPE_FLAT_RATE_CLICKS@
-    | PricingTypeFlatRateImpressions
-      -- ^ @PRICING_TYPE_FLAT_RATE_IMPRESSIONS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable PricingSchedulePricingType
-
-instance FromText PricingSchedulePricingType where
-    fromText = \case
-        "PRICING_TYPE_CPA" -> Just PricingTypeCpa
-        "PRICING_TYPE_CPC" -> Just PricingTypeCpc
-        "PRICING_TYPE_CPM" -> Just PricingTypeCpm
-        "PRICING_TYPE_FLAT_RATE_CLICKS" -> Just PricingTypeFlatRateClicks
-        "PRICING_TYPE_FLAT_RATE_IMPRESSIONS" -> Just PricingTypeFlatRateImpressions
-        _ -> Nothing
-
-instance ToText PricingSchedulePricingType where
-    toText = \case
-        PricingTypeCpa -> "PRICING_TYPE_CPA"
-        PricingTypeCpc -> "PRICING_TYPE_CPC"
-        PricingTypeCpm -> "PRICING_TYPE_CPM"
-        PricingTypeFlatRateClicks -> "PRICING_TYPE_FLAT_RATE_CLICKS"
-        PricingTypeFlatRateImpressions -> "PRICING_TYPE_FLAT_RATE_IMPRESSIONS"
-
-instance FromJSON PricingSchedulePricingType where
-    parseJSON = parseJSONText "PricingSchedulePricingType"
-
-instance ToJSON PricingSchedulePricingType where
     toJSON = toJSONText
 
 -- | Field by which to sort the list.
@@ -1670,86 +1697,167 @@ instance FromJSON DfareportingPlacementsListSortField where
 instance ToJSON DfareportingPlacementsListSortField where
     toJSON = toJSONText
 
--- | Target type used by the event.
-data CreativeCustomEventTargetType
-    = TargetBlank
-      -- ^ @TARGET_BLANK@
-    | TargetParent
-      -- ^ @TARGET_PARENT@
-    | TargetPopup
-      -- ^ @TARGET_POPUP@
-    | TargetSelf
-      -- ^ @TARGET_SELF@
-    | TargetTop
-      -- ^ @TARGET_TOP@
+-- | Select only change logs with the specified object type.
+data ObjectType
+    = ObjectAccount
+      -- ^ @OBJECT_ACCOUNT@
+    | ObjectAccountBillingFeature
+      -- ^ @OBJECT_ACCOUNT_BILLING_FEATURE@
+    | ObjectAd
+      -- ^ @OBJECT_AD@
+    | ObjectAdvertiser
+      -- ^ @OBJECT_ADVERTISER@
+    | ObjectAdvertiserGroup
+      -- ^ @OBJECT_ADVERTISER_GROUP@
+    | ObjectBillingAccountGroup
+      -- ^ @OBJECT_BILLING_ACCOUNT_GROUP@
+    | ObjectBillingFeature
+      -- ^ @OBJECT_BILLING_FEATURE@
+    | ObjectBillingMinimumFee
+      -- ^ @OBJECT_BILLING_MINIMUM_FEE@
+    | ObjectBillingProfile
+      -- ^ @OBJECT_BILLING_PROFILE@
+    | ObjectCampaign
+      -- ^ @OBJECT_CAMPAIGN@
+    | ObjectContentCategory
+      -- ^ @OBJECT_CONTENT_CATEGORY@
+    | ObjectCreative
+      -- ^ @OBJECT_CREATIVE@
+    | ObjectCreativeAsset
+      -- ^ @OBJECT_CREATIVE_ASSET@
+    | ObjectCreativeBundle
+      -- ^ @OBJECT_CREATIVE_BUNDLE@
+    | ObjectCreativeField
+      -- ^ @OBJECT_CREATIVE_FIELD@
+    | ObjectCreativeGroup
+      -- ^ @OBJECT_CREATIVE_GROUP@
+    | ObjectDfaSite
+      -- ^ @OBJECT_DFA_SITE@
+    | ObjectEventTag
+      -- ^ @OBJECT_EVENT_TAG@
+    | ObjectFloodlightActivityGroup
+      -- ^ @OBJECT_FLOODLIGHT_ACTIVITY_GROUP@
+    | ObjectFloodlightActvity
+      -- ^ @OBJECT_FLOODLIGHT_ACTVITY@
+    | ObjectFloodlightConfiguration
+      -- ^ @OBJECT_FLOODLIGHT_CONFIGURATION@
+    | ObjectInstreamCreative
+      -- ^ @OBJECT_INSTREAM_CREATIVE@
+    | ObjectLandingPage
+      -- ^ @OBJECT_LANDING_PAGE@
+    | ObjectMediaOrder
+      -- ^ @OBJECT_MEDIA_ORDER@
+    | ObjectPlacement
+      -- ^ @OBJECT_PLACEMENT@
+    | ObjectPlacementStrategy
+      -- ^ @OBJECT_PLACEMENT_STRATEGY@
+    | ObjectProvidedListClient
+      -- ^ @OBJECT_PROVIDED_LIST_CLIENT@
+    | ObjectRateCard
+      -- ^ @OBJECT_RATE_CARD@
+    | ObjectRemarketingList
+      -- ^ @OBJECT_REMARKETING_LIST@
+    | ObjectRichmediaCreative
+      -- ^ @OBJECT_RICHMEDIA_CREATIVE@
+    | ObjectSdSite
+      -- ^ @OBJECT_SD_SITE@
+    | ObjectSize
+      -- ^ @OBJECT_SIZE@
+    | ObjectSubAccount
+      -- ^ @OBJECT_SUBACCOUNT@
+    | ObjectUserProfile
+      -- ^ @OBJECT_USER_PROFILE@
+    | ObjectUserProfileFilter
+      -- ^ @OBJECT_USER_PROFILE_FILTER@
+    | ObjectUserRole
+      -- ^ @OBJECT_USER_ROLE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CreativeCustomEventTargetType
+instance Hashable ObjectType
 
-instance FromText CreativeCustomEventTargetType where
+instance FromText ObjectType where
     fromText = \case
-        "TARGET_BLANK" -> Just TargetBlank
-        "TARGET_PARENT" -> Just TargetParent
-        "TARGET_POPUP" -> Just TargetPopup
-        "TARGET_SELF" -> Just TargetSelf
-        "TARGET_TOP" -> Just TargetTop
+        "OBJECT_ACCOUNT" -> Just ObjectAccount
+        "OBJECT_ACCOUNT_BILLING_FEATURE" -> Just ObjectAccountBillingFeature
+        "OBJECT_AD" -> Just ObjectAd
+        "OBJECT_ADVERTISER" -> Just ObjectAdvertiser
+        "OBJECT_ADVERTISER_GROUP" -> Just ObjectAdvertiserGroup
+        "OBJECT_BILLING_ACCOUNT_GROUP" -> Just ObjectBillingAccountGroup
+        "OBJECT_BILLING_FEATURE" -> Just ObjectBillingFeature
+        "OBJECT_BILLING_MINIMUM_FEE" -> Just ObjectBillingMinimumFee
+        "OBJECT_BILLING_PROFILE" -> Just ObjectBillingProfile
+        "OBJECT_CAMPAIGN" -> Just ObjectCampaign
+        "OBJECT_CONTENT_CATEGORY" -> Just ObjectContentCategory
+        "OBJECT_CREATIVE" -> Just ObjectCreative
+        "OBJECT_CREATIVE_ASSET" -> Just ObjectCreativeAsset
+        "OBJECT_CREATIVE_BUNDLE" -> Just ObjectCreativeBundle
+        "OBJECT_CREATIVE_FIELD" -> Just ObjectCreativeField
+        "OBJECT_CREATIVE_GROUP" -> Just ObjectCreativeGroup
+        "OBJECT_DFA_SITE" -> Just ObjectDfaSite
+        "OBJECT_EVENT_TAG" -> Just ObjectEventTag
+        "OBJECT_FLOODLIGHT_ACTIVITY_GROUP" -> Just ObjectFloodlightActivityGroup
+        "OBJECT_FLOODLIGHT_ACTVITY" -> Just ObjectFloodlightActvity
+        "OBJECT_FLOODLIGHT_CONFIGURATION" -> Just ObjectFloodlightConfiguration
+        "OBJECT_INSTREAM_CREATIVE" -> Just ObjectInstreamCreative
+        "OBJECT_LANDING_PAGE" -> Just ObjectLandingPage
+        "OBJECT_MEDIA_ORDER" -> Just ObjectMediaOrder
+        "OBJECT_PLACEMENT" -> Just ObjectPlacement
+        "OBJECT_PLACEMENT_STRATEGY" -> Just ObjectPlacementStrategy
+        "OBJECT_PROVIDED_LIST_CLIENT" -> Just ObjectProvidedListClient
+        "OBJECT_RATE_CARD" -> Just ObjectRateCard
+        "OBJECT_REMARKETING_LIST" -> Just ObjectRemarketingList
+        "OBJECT_RICHMEDIA_CREATIVE" -> Just ObjectRichmediaCreative
+        "OBJECT_SD_SITE" -> Just ObjectSdSite
+        "OBJECT_SIZE" -> Just ObjectSize
+        "OBJECT_SUBACCOUNT" -> Just ObjectSubAccount
+        "OBJECT_USER_PROFILE" -> Just ObjectUserProfile
+        "OBJECT_USER_PROFILE_FILTER" -> Just ObjectUserProfileFilter
+        "OBJECT_USER_ROLE" -> Just ObjectUserRole
         _ -> Nothing
 
-instance ToText CreativeCustomEventTargetType where
+instance ToText ObjectType where
     toText = \case
-        TargetBlank -> "TARGET_BLANK"
-        TargetParent -> "TARGET_PARENT"
-        TargetPopup -> "TARGET_POPUP"
-        TargetSelf -> "TARGET_SELF"
-        TargetTop -> "TARGET_TOP"
+        ObjectAccount -> "OBJECT_ACCOUNT"
+        ObjectAccountBillingFeature -> "OBJECT_ACCOUNT_BILLING_FEATURE"
+        ObjectAd -> "OBJECT_AD"
+        ObjectAdvertiser -> "OBJECT_ADVERTISER"
+        ObjectAdvertiserGroup -> "OBJECT_ADVERTISER_GROUP"
+        ObjectBillingAccountGroup -> "OBJECT_BILLING_ACCOUNT_GROUP"
+        ObjectBillingFeature -> "OBJECT_BILLING_FEATURE"
+        ObjectBillingMinimumFee -> "OBJECT_BILLING_MINIMUM_FEE"
+        ObjectBillingProfile -> "OBJECT_BILLING_PROFILE"
+        ObjectCampaign -> "OBJECT_CAMPAIGN"
+        ObjectContentCategory -> "OBJECT_CONTENT_CATEGORY"
+        ObjectCreative -> "OBJECT_CREATIVE"
+        ObjectCreativeAsset -> "OBJECT_CREATIVE_ASSET"
+        ObjectCreativeBundle -> "OBJECT_CREATIVE_BUNDLE"
+        ObjectCreativeField -> "OBJECT_CREATIVE_FIELD"
+        ObjectCreativeGroup -> "OBJECT_CREATIVE_GROUP"
+        ObjectDfaSite -> "OBJECT_DFA_SITE"
+        ObjectEventTag -> "OBJECT_EVENT_TAG"
+        ObjectFloodlightActivityGroup -> "OBJECT_FLOODLIGHT_ACTIVITY_GROUP"
+        ObjectFloodlightActvity -> "OBJECT_FLOODLIGHT_ACTVITY"
+        ObjectFloodlightConfiguration -> "OBJECT_FLOODLIGHT_CONFIGURATION"
+        ObjectInstreamCreative -> "OBJECT_INSTREAM_CREATIVE"
+        ObjectLandingPage -> "OBJECT_LANDING_PAGE"
+        ObjectMediaOrder -> "OBJECT_MEDIA_ORDER"
+        ObjectPlacement -> "OBJECT_PLACEMENT"
+        ObjectPlacementStrategy -> "OBJECT_PLACEMENT_STRATEGY"
+        ObjectProvidedListClient -> "OBJECT_PROVIDED_LIST_CLIENT"
+        ObjectRateCard -> "OBJECT_RATE_CARD"
+        ObjectRemarketingList -> "OBJECT_REMARKETING_LIST"
+        ObjectRichmediaCreative -> "OBJECT_RICHMEDIA_CREATIVE"
+        ObjectSdSite -> "OBJECT_SD_SITE"
+        ObjectSize -> "OBJECT_SIZE"
+        ObjectSubAccount -> "OBJECT_SUBACCOUNT"
+        ObjectUserProfile -> "OBJECT_USER_PROFILE"
+        ObjectUserProfileFilter -> "OBJECT_USER_PROFILE_FILTER"
+        ObjectUserRole -> "OBJECT_USER_ROLE"
 
-instance FromJSON CreativeCustomEventTargetType where
-    parseJSON = parseJSONText "CreativeCustomEventTargetType"
+instance FromJSON ObjectType where
+    parseJSON = parseJSONText "ObjectType"
 
-instance ToJSON CreativeCustomEventTargetType where
-    toJSON = toJSONText
-
--- | Select only placements that are associated with these compatibilities.
--- WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on
--- mobile devices for regular or interstitial ads respectively. APP and
--- APP_INTERSTITIAL are for rendering in mobile apps.IN_STREAM_VIDEO refers
--- to rendering in in-stream video ads developed with the VAST standard.
-data DfareportingPlacementsListCompatibilities
-    = DPLCApp
-      -- ^ @APP@
-    | DPLCAppInterstitial
-      -- ^ @APP_INTERSTITIAL@
-    | DPLCInStreamVideo
-      -- ^ @IN_STREAM_VIDEO@
-    | DPLCWeb
-      -- ^ @WEB@
-    | DPLCWebInterstitial
-      -- ^ @WEB_INTERSTITIAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DfareportingPlacementsListCompatibilities
-
-instance FromText DfareportingPlacementsListCompatibilities where
-    fromText = \case
-        "APP" -> Just DPLCApp
-        "APP_INTERSTITIAL" -> Just DPLCAppInterstitial
-        "IN_STREAM_VIDEO" -> Just DPLCInStreamVideo
-        "WEB" -> Just DPLCWeb
-        "WEB_INTERSTITIAL" -> Just DPLCWebInterstitial
-        _ -> Nothing
-
-instance ToText DfareportingPlacementsListCompatibilities where
-    toText = \case
-        DPLCApp -> "APP"
-        DPLCAppInterstitial -> "APP_INTERSTITIAL"
-        DPLCInStreamVideo -> "IN_STREAM_VIDEO"
-        DPLCWeb -> "WEB"
-        DPLCWebInterstitial -> "WEB_INTERSTITIAL"
-
-instance FromJSON DfareportingPlacementsListCompatibilities where
-    parseJSON = parseJSONText "DfareportingPlacementsListCompatibilities"
-
-instance ToJSON DfareportingPlacementsListCompatibilities where
+instance ToJSON ObjectType where
     toJSON = toJSONText
 
 -- | Field by which to sort the list.
@@ -1777,6 +1885,68 @@ instance FromJSON DfareportingCreativeFieldsListSortField where
     parseJSON = parseJSONText "DfareportingCreativeFieldsListSortField"
 
 instance ToJSON DfareportingCreativeFieldsListSortField where
+    toJSON = toJSONText
+
+-- | Authoring tool for HTML5 banner creatives. This is a read-only field.
+-- Applicable to the following creative types: HTML5_BANNER.
+data AuthoringTool
+    = Ninja
+      -- ^ @NINJA@
+    | Swiffy
+      -- ^ @SWIFFY@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable AuthoringTool
+
+instance FromText AuthoringTool where
+    fromText = \case
+        "NINJA" -> Just Ninja
+        "SWIFFY" -> Just Swiffy
+        _ -> Nothing
+
+instance ToText AuthoringTool where
+    toText = \case
+        Ninja -> "NINJA"
+        Swiffy -> "SWIFFY"
+
+instance FromJSON AuthoringTool where
+    parseJSON = parseJSONText "AuthoringTool"
+
+instance ToJSON AuthoringTool where
+    toJSON = toJSONText
+
+-- | Select only event tags with the specified event tag types. Event tag
+-- types can be used to specify whether to use a third-party pixel, a
+-- third-party JavaScript URL, or a third-party click-through URL for
+-- either impression or click tracking.
+data EventTagTypes
+    = ClickThroughEventTag
+      -- ^ @CLICK_THROUGH_EVENT_TAG@
+    | ImpressionImageEventTag
+      -- ^ @IMPRESSION_IMAGE_EVENT_TAG@
+    | ImpressionJavascriptEventTag
+      -- ^ @IMPRESSION_JAVASCRIPT_EVENT_TAG@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable EventTagTypes
+
+instance FromText EventTagTypes where
+    fromText = \case
+        "CLICK_THROUGH_EVENT_TAG" -> Just ClickThroughEventTag
+        "IMPRESSION_IMAGE_EVENT_TAG" -> Just ImpressionImageEventTag
+        "IMPRESSION_JAVASCRIPT_EVENT_TAG" -> Just ImpressionJavascriptEventTag
+        _ -> Nothing
+
+instance ToText EventTagTypes where
+    toText = \case
+        ClickThroughEventTag -> "CLICK_THROUGH_EVENT_TAG"
+        ImpressionImageEventTag -> "IMPRESSION_IMAGE_EVENT_TAG"
+        ImpressionJavascriptEventTag -> "IMPRESSION_JAVASCRIPT_EVENT_TAG"
+
+instance FromJSON EventTagTypes where
+    parseJSON = parseJSONText "EventTagTypes"
+
+instance ToJSON EventTagTypes where
     toJSON = toJSONText
 
 -- | Product from which this targetable remarketing list was originated.
@@ -1872,52 +2042,6 @@ instance FromJSON DfareportingSubAccountsListSortOrder where
 instance ToJSON DfareportingSubAccountsListSortOrder where
     toJSON = toJSONText
 
-data ReportScheduleRepeatsOnWeekDays
-    = Friday
-      -- ^ @FRIDAY@
-    | Monday
-      -- ^ @MONDAY@
-    | Saturday
-      -- ^ @SATURDAY@
-    | Sunday
-      -- ^ @SUNDAY@
-    | Thursday
-      -- ^ @THURSDAY@
-    | Tuesday
-      -- ^ @TUESDAY@
-    | Wednesday
-      -- ^ @WEDNESDAY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ReportScheduleRepeatsOnWeekDays
-
-instance FromText ReportScheduleRepeatsOnWeekDays where
-    fromText = \case
-        "FRIDAY" -> Just Friday
-        "MONDAY" -> Just Monday
-        "SATURDAY" -> Just Saturday
-        "SUNDAY" -> Just Sunday
-        "THURSDAY" -> Just Thursday
-        "TUESDAY" -> Just Tuesday
-        "WEDNESDAY" -> Just Wednesday
-        _ -> Nothing
-
-instance ToText ReportScheduleRepeatsOnWeekDays where
-    toText = \case
-        Friday -> "FRIDAY"
-        Monday -> "MONDAY"
-        Saturday -> "SATURDAY"
-        Sunday -> "SUNDAY"
-        Thursday -> "THURSDAY"
-        Tuesday -> "TUESDAY"
-        Wednesday -> "WEDNESDAY"
-
-instance FromJSON ReportScheduleRepeatsOnWeekDays where
-    parseJSON = parseJSONText "ReportScheduleRepeatsOnWeekDays"
-
-instance ToJSON ReportScheduleRepeatsOnWeekDays where
-    toJSON = toJSONText
-
 -- | Order of sorted results, default is ASCENDING.
 data DfareportingAdsListSortOrder
     = DALSOAscending
@@ -1945,36 +2069,52 @@ instance FromJSON DfareportingAdsListSortOrder where
 instance ToJSON DfareportingAdsListSortOrder where
     toJSON = toJSONText
 
--- | Duration type for which an asset will be displayed. Applicable to the
--- following creative types: all RICH_MEDIA.
-data CreativeAssetDurationType
-    = AssetDurationTypeAuto
-      -- ^ @ASSET_DURATION_TYPE_AUTO@
-    | AssetDurationTypeCustom
-      -- ^ @ASSET_DURATION_TYPE_CUSTOM@
-    | AssetDurationTypeNone
-      -- ^ @ASSET_DURATION_TYPE_NONE@
+-- | Comparison operator of this term. This field is only relevant when type
+-- is left unset or set to CUSTOM_VARIABLE_TERM or REFERRER_TERM.
+data Operator
+    = NumEquals
+      -- ^ @NUM_EQUALS@
+    | NumGreaterThan
+      -- ^ @NUM_GREATER_THAN@
+    | NumGreaterThanEqual
+      -- ^ @NUM_GREATER_THAN_EQUAL@
+    | NumLessThan
+      -- ^ @NUM_LESS_THAN@
+    | NumLessThanEqual
+      -- ^ @NUM_LESS_THAN_EQUAL@
+    | StringContains
+      -- ^ @STRING_CONTAINS@
+    | StringEquals
+      -- ^ @STRING_EQUALS@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CreativeAssetDurationType
+instance Hashable Operator
 
-instance FromText CreativeAssetDurationType where
+instance FromText Operator where
     fromText = \case
-        "ASSET_DURATION_TYPE_AUTO" -> Just AssetDurationTypeAuto
-        "ASSET_DURATION_TYPE_CUSTOM" -> Just AssetDurationTypeCustom
-        "ASSET_DURATION_TYPE_NONE" -> Just AssetDurationTypeNone
+        "NUM_EQUALS" -> Just NumEquals
+        "NUM_GREATER_THAN" -> Just NumGreaterThan
+        "NUM_GREATER_THAN_EQUAL" -> Just NumGreaterThanEqual
+        "NUM_LESS_THAN" -> Just NumLessThan
+        "NUM_LESS_THAN_EQUAL" -> Just NumLessThanEqual
+        "STRING_CONTAINS" -> Just StringContains
+        "STRING_EQUALS" -> Just StringEquals
         _ -> Nothing
 
-instance ToText CreativeAssetDurationType where
+instance ToText Operator where
     toText = \case
-        AssetDurationTypeAuto -> "ASSET_DURATION_TYPE_AUTO"
-        AssetDurationTypeCustom -> "ASSET_DURATION_TYPE_CUSTOM"
-        AssetDurationTypeNone -> "ASSET_DURATION_TYPE_NONE"
+        NumEquals -> "NUM_EQUALS"
+        NumGreaterThan -> "NUM_GREATER_THAN"
+        NumGreaterThanEqual -> "NUM_GREATER_THAN_EQUAL"
+        NumLessThan -> "NUM_LESS_THAN"
+        NumLessThanEqual -> "NUM_LESS_THAN_EQUAL"
+        StringContains -> "STRING_CONTAINS"
+        StringEquals -> "STRING_EQUALS"
 
-instance FromJSON CreativeAssetDurationType where
-    parseJSON = parseJSONText "CreativeAssetDurationType"
+instance FromJSON Operator where
+    parseJSON = parseJSONText "Operator"
 
-instance ToJSON CreativeAssetDurationType where
+instance ToJSON Operator where
     toJSON = toJSONText
 
 -- | Field by which to sort the list.
@@ -2031,8 +2171,7 @@ instance FromJSON DfareportingFloodlightActivitiesListSortOrder where
 instance ToJSON DfareportingFloodlightActivitiesListSortOrder where
     toJSON = toJSONText
 
--- | Variable name in the tag. This is a required field.
-data UserDefinedVariableConfigurationVariableType
+data UserDefinedVariableTypesItem
     = U1
       -- ^ @U1@
     | U10
@@ -2075,9 +2214,9 @@ data UserDefinedVariableConfigurationVariableType
       -- ^ @U9@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable UserDefinedVariableConfigurationVariableType
+instance Hashable UserDefinedVariableTypesItem
 
-instance FromText UserDefinedVariableConfigurationVariableType where
+instance FromText UserDefinedVariableTypesItem where
     fromText = \case
         "U1" -> Just U1
         "U10" -> Just U10
@@ -2101,7 +2240,7 @@ instance FromText UserDefinedVariableConfigurationVariableType where
         "U9" -> Just U9
         _ -> Nothing
 
-instance ToText UserDefinedVariableConfigurationVariableType where
+instance ToText UserDefinedVariableTypesItem where
     toText = \case
         U1 -> "U1"
         U10 -> "U10"
@@ -2124,10 +2263,150 @@ instance ToText UserDefinedVariableConfigurationVariableType where
         U8 -> "U8"
         U9 -> "U9"
 
-instance FromJSON UserDefinedVariableConfigurationVariableType where
-    parseJSON = parseJSONText "UserDefinedVariableConfigurationVariableType"
+instance FromJSON UserDefinedVariableTypesItem where
+    parseJSON = parseJSONText "UserDefinedVariableTypesItem"
 
-instance ToJSON UserDefinedVariableConfigurationVariableType where
+instance ToJSON UserDefinedVariableTypesItem where
+    toJSON = toJSONText
+
+data CreativeCompatibilityItem
+    = CCIApp
+      -- ^ @APP@
+    | CCIAppInterstitial
+      -- ^ @APP_INTERSTITIAL@
+    | CCIInStreamVideo
+      -- ^ @IN_STREAM_VIDEO@
+    | CCIWeb
+      -- ^ @WEB@
+    | CCIWebInterstitial
+      -- ^ @WEB_INTERSTITIAL@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CreativeCompatibilityItem
+
+instance FromText CreativeCompatibilityItem where
+    fromText = \case
+        "APP" -> Just CCIApp
+        "APP_INTERSTITIAL" -> Just CCIAppInterstitial
+        "IN_STREAM_VIDEO" -> Just CCIInStreamVideo
+        "WEB" -> Just CCIWeb
+        "WEB_INTERSTITIAL" -> Just CCIWebInterstitial
+        _ -> Nothing
+
+instance ToText CreativeCompatibilityItem where
+    toText = \case
+        CCIApp -> "APP"
+        CCIAppInterstitial -> "APP_INTERSTITIAL"
+        CCIInStreamVideo -> "IN_STREAM_VIDEO"
+        CCIWeb -> "WEB"
+        CCIWebInterstitial -> "WEB_INTERSTITIAL"
+
+instance FromJSON CreativeCompatibilityItem where
+    parseJSON = parseJSONText "CreativeCompatibilityItem"
+
+instance ToJSON CreativeCompatibilityItem where
+    toJSON = toJSONText
+
+data WarnedValidationRulesItem
+    = ADMobReferenced
+      -- ^ @ADMOB_REFERENCED@
+    | AssetFormatUnsupportedDcm
+      -- ^ @ASSET_FORMAT_UNSUPPORTED_DCM@
+    | AssetInvalid
+      -- ^ @ASSET_INVALID@
+    | ClickTagInvalid
+      -- ^ @CLICK_TAG_INVALID@
+    | ClickTagMissing
+      -- ^ @CLICK_TAG_MISSING@
+    | ClickTagMoreThanOne
+      -- ^ @CLICK_TAG_MORE_THAN_ONE@
+    | ClickTagNonTopLevel
+      -- ^ @CLICK_TAG_NON_TOP_LEVEL@
+    | ComponentUnsupportedDcm
+      -- ^ @COMPONENT_UNSUPPORTED_DCM@
+    | EnablerUnsupportedMethodDcm
+      -- ^ @ENABLER_UNSUPPORTED_METHOD_DCM@
+    | ExternalFileReferenced
+      -- ^ @EXTERNAL_FILE_REFERENCED@
+    | FileDetailEmpty
+      -- ^ @FILE_DETAIL_EMPTY@
+    | FileTypeInvalid
+      -- ^ @FILE_TYPE_INVALID@
+    | GwdPropertiesInvalid
+      -- ^ @GWD_PROPERTIES_INVALID@
+    | HTML5FeatureUnsupported
+      -- ^ @HTML5_FEATURE_UNSUPPORTED@
+    | LinkedFileNotFound
+      -- ^ @LINKED_FILE_NOT_FOUND@
+    | MaxFlashVersion11
+      -- ^ @MAX_FLASH_VERSION_11@
+    | MraidReferenced
+      -- ^ @MRAID_REFERENCED@
+    | NotSSLCompliant
+      -- ^ @NOT_SSL_COMPLIANT@
+    | OrphanedAsset
+      -- ^ @ORPHANED_ASSET@
+    | PrimaryHTMLMissing
+      -- ^ @PRIMARY_HTML_MISSING@
+    | ZipInvalid
+      -- ^ @ZIP_INVALID@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable WarnedValidationRulesItem
+
+instance FromText WarnedValidationRulesItem where
+    fromText = \case
+        "ADMOB_REFERENCED" -> Just ADMobReferenced
+        "ASSET_FORMAT_UNSUPPORTED_DCM" -> Just AssetFormatUnsupportedDcm
+        "ASSET_INVALID" -> Just AssetInvalid
+        "CLICK_TAG_INVALID" -> Just ClickTagInvalid
+        "CLICK_TAG_MISSING" -> Just ClickTagMissing
+        "CLICK_TAG_MORE_THAN_ONE" -> Just ClickTagMoreThanOne
+        "CLICK_TAG_NON_TOP_LEVEL" -> Just ClickTagNonTopLevel
+        "COMPONENT_UNSUPPORTED_DCM" -> Just ComponentUnsupportedDcm
+        "ENABLER_UNSUPPORTED_METHOD_DCM" -> Just EnablerUnsupportedMethodDcm
+        "EXTERNAL_FILE_REFERENCED" -> Just ExternalFileReferenced
+        "FILE_DETAIL_EMPTY" -> Just FileDetailEmpty
+        "FILE_TYPE_INVALID" -> Just FileTypeInvalid
+        "GWD_PROPERTIES_INVALID" -> Just GwdPropertiesInvalid
+        "HTML5_FEATURE_UNSUPPORTED" -> Just HTML5FeatureUnsupported
+        "LINKED_FILE_NOT_FOUND" -> Just LinkedFileNotFound
+        "MAX_FLASH_VERSION_11" -> Just MaxFlashVersion11
+        "MRAID_REFERENCED" -> Just MraidReferenced
+        "NOT_SSL_COMPLIANT" -> Just NotSSLCompliant
+        "ORPHANED_ASSET" -> Just OrphanedAsset
+        "PRIMARY_HTML_MISSING" -> Just PrimaryHTMLMissing
+        "ZIP_INVALID" -> Just ZipInvalid
+        _ -> Nothing
+
+instance ToText WarnedValidationRulesItem where
+    toText = \case
+        ADMobReferenced -> "ADMOB_REFERENCED"
+        AssetFormatUnsupportedDcm -> "ASSET_FORMAT_UNSUPPORTED_DCM"
+        AssetInvalid -> "ASSET_INVALID"
+        ClickTagInvalid -> "CLICK_TAG_INVALID"
+        ClickTagMissing -> "CLICK_TAG_MISSING"
+        ClickTagMoreThanOne -> "CLICK_TAG_MORE_THAN_ONE"
+        ClickTagNonTopLevel -> "CLICK_TAG_NON_TOP_LEVEL"
+        ComponentUnsupportedDcm -> "COMPONENT_UNSUPPORTED_DCM"
+        EnablerUnsupportedMethodDcm -> "ENABLER_UNSUPPORTED_METHOD_DCM"
+        ExternalFileReferenced -> "EXTERNAL_FILE_REFERENCED"
+        FileDetailEmpty -> "FILE_DETAIL_EMPTY"
+        FileTypeInvalid -> "FILE_TYPE_INVALID"
+        GwdPropertiesInvalid -> "GWD_PROPERTIES_INVALID"
+        HTML5FeatureUnsupported -> "HTML5_FEATURE_UNSUPPORTED"
+        LinkedFileNotFound -> "LINKED_FILE_NOT_FOUND"
+        MaxFlashVersion11 -> "MAX_FLASH_VERSION_11"
+        MraidReferenced -> "MRAID_REFERENCED"
+        NotSSLCompliant -> "NOT_SSL_COMPLIANT"
+        OrphanedAsset -> "ORPHANED_ASSET"
+        PrimaryHTMLMissing -> "PRIMARY_HTML_MISSING"
+        ZipInvalid -> "ZIP_INVALID"
+
+instance FromJSON WarnedValidationRulesItem where
+    parseJSON = parseJSONText "WarnedValidationRulesItem"
+
+instance ToJSON WarnedValidationRulesItem where
     toJSON = toJSONText
 
 -- | Field by which to sort the list.
@@ -2157,262 +2436,39 @@ instance FromJSON DfareportingCreativeGroupsListSortField where
 instance ToJSON DfareportingCreativeGroupsListSortField where
     toJSON = toJSONText
 
--- | Position in the browser where the window will open.
-data FsCommandPositionOption
-    = Centered
-      -- ^ @CENTERED@
-    | DistanceFromTopLeftCorner
-      -- ^ @DISTANCE_FROM_TOP_LEFT_CORNER@
+-- | The dimension option.
+data Dimension
+    = DAdvertiser
+      -- ^ @ADVERTISER@
+    | DCampaign
+      -- ^ @CAMPAIGN@
+    | DSiteByAdvertiser
+      -- ^ @SITE_BY_ADVERTISER@
+    | DSiteByCampaign
+      -- ^ @SITE_BY_CAMPAIGN@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable FsCommandPositionOption
+instance Hashable Dimension
 
-instance FromText FsCommandPositionOption where
+instance FromText Dimension where
     fromText = \case
-        "CENTERED" -> Just Centered
-        "DISTANCE_FROM_TOP_LEFT_CORNER" -> Just DistanceFromTopLeftCorner
+        "ADVERTISER" -> Just DAdvertiser
+        "CAMPAIGN" -> Just DCampaign
+        "SITE_BY_ADVERTISER" -> Just DSiteByAdvertiser
+        "SITE_BY_CAMPAIGN" -> Just DSiteByCampaign
         _ -> Nothing
 
-instance ToText FsCommandPositionOption where
+instance ToText Dimension where
     toText = \case
-        Centered -> "CENTERED"
-        DistanceFromTopLeftCorner -> "DISTANCE_FROM_TOP_LEFT_CORNER"
+        DAdvertiser -> "ADVERTISER"
+        DCampaign -> "CAMPAIGN"
+        DSiteByAdvertiser -> "SITE_BY_ADVERTISER"
+        DSiteByCampaign -> "SITE_BY_CAMPAIGN"
 
-instance FromJSON FsCommandPositionOption where
-    parseJSON = parseJSONText "FsCommandPositionOption"
+instance FromJSON Dimension where
+    parseJSON = parseJSONText "Dimension"
 
-instance ToJSON FsCommandPositionOption where
-    toJSON = toJSONText
-
-data DayPartTargetingDaysOfWeek
-    = DPTDOWFriday
-      -- ^ @FRIDAY@
-    | DPTDOWMonday
-      -- ^ @MONDAY@
-    | DPTDOWSaturday
-      -- ^ @SATURDAY@
-    | DPTDOWSunday
-      -- ^ @SUNDAY@
-    | DPTDOWThursday
-      -- ^ @THURSDAY@
-    | DPTDOWTuesday
-      -- ^ @TUESDAY@
-    | DPTDOWWednesday
-      -- ^ @WEDNESDAY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DayPartTargetingDaysOfWeek
-
-instance FromText DayPartTargetingDaysOfWeek where
-    fromText = \case
-        "FRIDAY" -> Just DPTDOWFriday
-        "MONDAY" -> Just DPTDOWMonday
-        "SATURDAY" -> Just DPTDOWSaturday
-        "SUNDAY" -> Just DPTDOWSunday
-        "THURSDAY" -> Just DPTDOWThursday
-        "TUESDAY" -> Just DPTDOWTuesday
-        "WEDNESDAY" -> Just DPTDOWWednesday
-        _ -> Nothing
-
-instance ToText DayPartTargetingDaysOfWeek where
-    toText = \case
-        DPTDOWFriday -> "FRIDAY"
-        DPTDOWMonday -> "MONDAY"
-        DPTDOWSaturday -> "SATURDAY"
-        DPTDOWSunday -> "SUNDAY"
-        DPTDOWThursday -> "THURSDAY"
-        DPTDOWTuesday -> "TUESDAY"
-        DPTDOWWednesday -> "WEDNESDAY"
-
-instance FromJSON DayPartTargetingDaysOfWeek where
-    parseJSON = parseJSONText "DayPartTargetingDaysOfWeek"
-
-instance ToJSON DayPartTargetingDaysOfWeek where
-    toJSON = toJSONText
-
--- | Select only change logs with the specified action.
-data DfareportingChangeLogsListAction
-    = ActionAdd
-      -- ^ @ACTION_ADD@
-    | ActionAssign
-      -- ^ @ACTION_ASSIGN@
-    | ActionAssociate
-      -- ^ @ACTION_ASSOCIATE@
-    | ActionCreate
-      -- ^ @ACTION_CREATE@
-    | ActionDelete
-      -- ^ @ACTION_DELETE@
-    | ActionDisable
-      -- ^ @ACTION_DISABLE@
-    | ActionEmailTags
-      -- ^ @ACTION_EMAIL_TAGS@
-    | ActionEnable
-      -- ^ @ACTION_ENABLE@
-    | ActionLink
-      -- ^ @ACTION_LINK@
-    | ActionMarkAsDefault
-      -- ^ @ACTION_MARK_AS_DEFAULT@
-    | ActionPush
-      -- ^ @ACTION_PUSH@
-    | ActionRemove
-      -- ^ @ACTION_REMOVE@
-    | ActionSend
-      -- ^ @ACTION_SEND@
-    | ActionShare
-      -- ^ @ACTION_SHARE@
-    | ActionUnassign
-      -- ^ @ACTION_UNASSIGN@
-    | ActionUnlink
-      -- ^ @ACTION_UNLINK@
-    | ActionUpdate
-      -- ^ @ACTION_UPDATE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DfareportingChangeLogsListAction
-
-instance FromText DfareportingChangeLogsListAction where
-    fromText = \case
-        "ACTION_ADD" -> Just ActionAdd
-        "ACTION_ASSIGN" -> Just ActionAssign
-        "ACTION_ASSOCIATE" -> Just ActionAssociate
-        "ACTION_CREATE" -> Just ActionCreate
-        "ACTION_DELETE" -> Just ActionDelete
-        "ACTION_DISABLE" -> Just ActionDisable
-        "ACTION_EMAIL_TAGS" -> Just ActionEmailTags
-        "ACTION_ENABLE" -> Just ActionEnable
-        "ACTION_LINK" -> Just ActionLink
-        "ACTION_MARK_AS_DEFAULT" -> Just ActionMarkAsDefault
-        "ACTION_PUSH" -> Just ActionPush
-        "ACTION_REMOVE" -> Just ActionRemove
-        "ACTION_SEND" -> Just ActionSend
-        "ACTION_SHARE" -> Just ActionShare
-        "ACTION_UNASSIGN" -> Just ActionUnassign
-        "ACTION_UNLINK" -> Just ActionUnlink
-        "ACTION_UPDATE" -> Just ActionUpdate
-        _ -> Nothing
-
-instance ToText DfareportingChangeLogsListAction where
-    toText = \case
-        ActionAdd -> "ACTION_ADD"
-        ActionAssign -> "ACTION_ASSIGN"
-        ActionAssociate -> "ACTION_ASSOCIATE"
-        ActionCreate -> "ACTION_CREATE"
-        ActionDelete -> "ACTION_DELETE"
-        ActionDisable -> "ACTION_DISABLE"
-        ActionEmailTags -> "ACTION_EMAIL_TAGS"
-        ActionEnable -> "ACTION_ENABLE"
-        ActionLink -> "ACTION_LINK"
-        ActionMarkAsDefault -> "ACTION_MARK_AS_DEFAULT"
-        ActionPush -> "ACTION_PUSH"
-        ActionRemove -> "ACTION_REMOVE"
-        ActionSend -> "ACTION_SEND"
-        ActionShare -> "ACTION_SHARE"
-        ActionUnassign -> "ACTION_UNASSIGN"
-        ActionUnlink -> "ACTION_UNLINK"
-        ActionUpdate -> "ACTION_UPDATE"
-
-instance FromJSON DfareportingChangeLogsListAction where
-    parseJSON = parseJSONText "DfareportingChangeLogsListAction"
-
-instance ToJSON DfareportingChangeLogsListAction where
-    toJSON = toJSONText
-
-data FloodlightActivityUserDefinedVariableTypes
-    = FAUDVTU1
-      -- ^ @U1@
-    | FAUDVTU10
-      -- ^ @U10@
-    | FAUDVTU11
-      -- ^ @U11@
-    | FAUDVTU12
-      -- ^ @U12@
-    | FAUDVTU13
-      -- ^ @U13@
-    | FAUDVTU14
-      -- ^ @U14@
-    | FAUDVTU15
-      -- ^ @U15@
-    | FAUDVTU16
-      -- ^ @U16@
-    | FAUDVTU17
-      -- ^ @U17@
-    | FAUDVTU18
-      -- ^ @U18@
-    | FAUDVTU19
-      -- ^ @U19@
-    | FAUDVTU2
-      -- ^ @U2@
-    | FAUDVTU20
-      -- ^ @U20@
-    | FAUDVTU3
-      -- ^ @U3@
-    | FAUDVTU4
-      -- ^ @U4@
-    | FAUDVTU5
-      -- ^ @U5@
-    | FAUDVTU6
-      -- ^ @U6@
-    | FAUDVTU7
-      -- ^ @U7@
-    | FAUDVTU8
-      -- ^ @U8@
-    | FAUDVTU9
-      -- ^ @U9@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable FloodlightActivityUserDefinedVariableTypes
-
-instance FromText FloodlightActivityUserDefinedVariableTypes where
-    fromText = \case
-        "U1" -> Just FAUDVTU1
-        "U10" -> Just FAUDVTU10
-        "U11" -> Just FAUDVTU11
-        "U12" -> Just FAUDVTU12
-        "U13" -> Just FAUDVTU13
-        "U14" -> Just FAUDVTU14
-        "U15" -> Just FAUDVTU15
-        "U16" -> Just FAUDVTU16
-        "U17" -> Just FAUDVTU17
-        "U18" -> Just FAUDVTU18
-        "U19" -> Just FAUDVTU19
-        "U2" -> Just FAUDVTU2
-        "U20" -> Just FAUDVTU20
-        "U3" -> Just FAUDVTU3
-        "U4" -> Just FAUDVTU4
-        "U5" -> Just FAUDVTU5
-        "U6" -> Just FAUDVTU6
-        "U7" -> Just FAUDVTU7
-        "U8" -> Just FAUDVTU8
-        "U9" -> Just FAUDVTU9
-        _ -> Nothing
-
-instance ToText FloodlightActivityUserDefinedVariableTypes where
-    toText = \case
-        FAUDVTU1 -> "U1"
-        FAUDVTU10 -> "U10"
-        FAUDVTU11 -> "U11"
-        FAUDVTU12 -> "U12"
-        FAUDVTU13 -> "U13"
-        FAUDVTU14 -> "U14"
-        FAUDVTU15 -> "U15"
-        FAUDVTU16 -> "U16"
-        FAUDVTU17 -> "U17"
-        FAUDVTU18 -> "U18"
-        FAUDVTU19 -> "U19"
-        FAUDVTU2 -> "U2"
-        FAUDVTU20 -> "U20"
-        FAUDVTU3 -> "U3"
-        FAUDVTU4 -> "U4"
-        FAUDVTU5 -> "U5"
-        FAUDVTU6 -> "U6"
-        FAUDVTU7 -> "U7"
-        FAUDVTU8 -> "U8"
-        FAUDVTU9 -> "U9"
-
-instance FromJSON FloodlightActivityUserDefinedVariableTypes where
-    parseJSON = parseJSONText "FloodlightActivityUserDefinedVariableTypes"
-
-instance ToJSON FloodlightActivityUserDefinedVariableTypes where
+instance ToJSON Dimension where
     toJSON = toJSONText
 
 -- | The scope that defines which results are returned, default is \'MINE\'.
@@ -2449,58 +2505,77 @@ instance FromJSON DfareportingFilesListScope where
 instance ToJSON DfareportingFilesListScope where
     toJSON = toJSONText
 
--- | The type of delivery for the owner to receive, if enabled.
-data ReportDeliveryEmailOwnerDeliveryType
-    = RDEODTAttachment
-      -- ^ @ATTACHMENT@
-    | RDEODTLink
-      -- ^ @LINK@
+data InpageTagFormatsItem
+    = IframeJavascriptInpage
+      -- ^ @IFRAME_JAVASCRIPT_INPAGE@
+    | InternalRedirectInpage
+      -- ^ @INTERNAL_REDIRECT_INPAGE@
+    | JavascriptInpage
+      -- ^ @JAVASCRIPT_INPAGE@
+    | Standard
+      -- ^ @STANDARD@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ReportDeliveryEmailOwnerDeliveryType
+instance Hashable InpageTagFormatsItem
 
-instance FromText ReportDeliveryEmailOwnerDeliveryType where
+instance FromText InpageTagFormatsItem where
     fromText = \case
-        "ATTACHMENT" -> Just RDEODTAttachment
-        "LINK" -> Just RDEODTLink
+        "IFRAME_JAVASCRIPT_INPAGE" -> Just IframeJavascriptInpage
+        "INTERNAL_REDIRECT_INPAGE" -> Just InternalRedirectInpage
+        "JAVASCRIPT_INPAGE" -> Just JavascriptInpage
+        "STANDARD" -> Just Standard
         _ -> Nothing
 
-instance ToText ReportDeliveryEmailOwnerDeliveryType where
+instance ToText InpageTagFormatsItem where
     toText = \case
-        RDEODTAttachment -> "ATTACHMENT"
-        RDEODTLink -> "LINK"
+        IframeJavascriptInpage -> "IFRAME_JAVASCRIPT_INPAGE"
+        InternalRedirectInpage -> "INTERNAL_REDIRECT_INPAGE"
+        JavascriptInpage -> "JAVASCRIPT_INPAGE"
+        Standard -> "STANDARD"
 
-instance FromJSON ReportDeliveryEmailOwnerDeliveryType where
-    parseJSON = parseJSONText "ReportDeliveryEmailOwnerDeliveryType"
+instance FromJSON InpageTagFormatsItem where
+    parseJSON = parseJSONText "InpageTagFormatsItem"
 
-instance ToJSON ReportDeliveryEmailOwnerDeliveryType where
+instance ToJSON InpageTagFormatsItem where
     toJSON = toJSONText
 
--- | Site contact type.
-data SiteContactContactType
-    = SalesPerson
-      -- ^ @SALES_PERSON@
-    | Trafficker
-      -- ^ @TRAFFICKER@
+-- | Select only placements with these pricing types.
+data PricingTypes
+    = PricingTypeCpa
+      -- ^ @PRICING_TYPE_CPA@
+    | PricingTypeCpc
+      -- ^ @PRICING_TYPE_CPC@
+    | PricingTypeCpm
+      -- ^ @PRICING_TYPE_CPM@
+    | PricingTypeFlatRateClicks
+      -- ^ @PRICING_TYPE_FLAT_RATE_CLICKS@
+    | PricingTypeFlatRateImpressions
+      -- ^ @PRICING_TYPE_FLAT_RATE_IMPRESSIONS@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable SiteContactContactType
+instance Hashable PricingTypes
 
-instance FromText SiteContactContactType where
+instance FromText PricingTypes where
     fromText = \case
-        "SALES_PERSON" -> Just SalesPerson
-        "TRAFFICKER" -> Just Trafficker
+        "PRICING_TYPE_CPA" -> Just PricingTypeCpa
+        "PRICING_TYPE_CPC" -> Just PricingTypeCpc
+        "PRICING_TYPE_CPM" -> Just PricingTypeCpm
+        "PRICING_TYPE_FLAT_RATE_CLICKS" -> Just PricingTypeFlatRateClicks
+        "PRICING_TYPE_FLAT_RATE_IMPRESSIONS" -> Just PricingTypeFlatRateImpressions
         _ -> Nothing
 
-instance ToText SiteContactContactType where
+instance ToText PricingTypes where
     toText = \case
-        SalesPerson -> "SALES_PERSON"
-        Trafficker -> "TRAFFICKER"
+        PricingTypeCpa -> "PRICING_TYPE_CPA"
+        PricingTypeCpc -> "PRICING_TYPE_CPC"
+        PricingTypeCpm -> "PRICING_TYPE_CPM"
+        PricingTypeFlatRateClicks -> "PRICING_TYPE_FLAT_RATE_CLICKS"
+        PricingTypeFlatRateImpressions -> "PRICING_TYPE_FLAT_RATE_IMPRESSIONS"
 
-instance FromJSON SiteContactContactType where
-    parseJSON = parseJSONText "SiteContactContactType"
+instance FromJSON PricingTypes where
+    parseJSON = parseJSONText "PricingTypes"
 
-instance ToJSON SiteContactContactType where
+instance ToJSON PricingTypes where
     toJSON = toJSONText
 
 -- | Field by which to sort the list.
@@ -2557,116 +2632,134 @@ instance FromJSON DfareportingCreativesListSortOrder where
 instance ToJSON DfareportingCreativesListSortOrder where
     toJSON = toJSONText
 
--- | Day that will be counted as the first day of the week in reports. This
--- is a required field.
-data FloodlightConfigurationFirstDayOfWeek
-    = FCFDOWMonday
-      -- ^ @MONDAY@
-    | FCFDOWSunday
-      -- ^ @SUNDAY@
+-- | Determines how the \'value\' field is matched when filtering. If not
+-- specified, defaults to EXACT. If set to WILDCARD_EXPRESSION, \'*\' is
+-- allowed as a placeholder for variable length character sequences, and it
+-- can be escaped with a backslash. Note, only paid search dimensions
+-- (\'dfa:paidSearch*\') allow a matchType other than EXACT.
+data MatchType
+    = MTBeginsWith
+      -- ^ @BEGINS_WITH@
+    | MTContains
+      -- ^ @CONTAINS@
+    | MTExact
+      -- ^ @EXACT@
+    | MTWildcardExpression
+      -- ^ @WILDCARD_EXPRESSION@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable FloodlightConfigurationFirstDayOfWeek
+instance Hashable MatchType
 
-instance FromText FloodlightConfigurationFirstDayOfWeek where
+instance FromText MatchType where
     fromText = \case
-        "MONDAY" -> Just FCFDOWMonday
-        "SUNDAY" -> Just FCFDOWSunday
+        "BEGINS_WITH" -> Just MTBeginsWith
+        "CONTAINS" -> Just MTContains
+        "EXACT" -> Just MTExact
+        "WILDCARD_EXPRESSION" -> Just MTWildcardExpression
         _ -> Nothing
 
-instance ToText FloodlightConfigurationFirstDayOfWeek where
+instance ToText MatchType where
     toText = \case
-        FCFDOWMonday -> "MONDAY"
-        FCFDOWSunday -> "SUNDAY"
+        MTBeginsWith -> "BEGINS_WITH"
+        MTContains -> "CONTAINS"
+        MTExact -> "EXACT"
+        MTWildcardExpression -> "WILDCARD_EXPRESSION"
 
-instance FromJSON FloodlightConfigurationFirstDayOfWeek where
-    parseJSON = parseJSONText "FloodlightConfigurationFirstDayOfWeek"
+instance FromJSON MatchType where
+    parseJSON = parseJSONText "MatchType"
 
-instance ToJSON FloodlightConfigurationFirstDayOfWeek where
+instance ToJSON MatchType where
     toJSON = toJSONText
 
--- | Serving priority of an ad, with respect to other ads. The lower the
--- priority number, the greater the priority with which it is served.
-data DeliverySchedulePriority
-    = AdPriority01
-      -- ^ @AD_PRIORITY_01@
-    | AdPriority02
-      -- ^ @AD_PRIORITY_02@
-    | AdPriority03
-      -- ^ @AD_PRIORITY_03@
-    | AdPriority04
-      -- ^ @AD_PRIORITY_04@
-    | AdPriority05
-      -- ^ @AD_PRIORITY_05@
-    | AdPriority06
-      -- ^ @AD_PRIORITY_06@
-    | AdPriority07
-      -- ^ @AD_PRIORITY_07@
-    | AdPriority08
-      -- ^ @AD_PRIORITY_08@
-    | AdPriority09
-      -- ^ @AD_PRIORITY_09@
-    | AdPriority10
-      -- ^ @AD_PRIORITY_10@
-    | AdPriority11
-      -- ^ @AD_PRIORITY_11@
-    | AdPriority12
-      -- ^ @AD_PRIORITY_12@
-    | AdPriority13
-      -- ^ @AD_PRIORITY_13@
-    | AdPriority14
-      -- ^ @AD_PRIORITY_14@
-    | AdPriority15
-      -- ^ @AD_PRIORITY_15@
-    | AdPriority16
-      -- ^ @AD_PRIORITY_16@
+-- | TagData tag format of this tag.
+data Format
+    = FPlacementTagClickCommands
+      -- ^ @PLACEMENT_TAG_CLICK_COMMANDS@
+    | FPlacementTagIframeIlayer
+      -- ^ @PLACEMENT_TAG_IFRAME_ILAYER@
+    | FPlacementTagIframeJavascript
+      -- ^ @PLACEMENT_TAG_IFRAME_JAVASCRIPT@
+    | FPlacementTagIframeJavascriptLegacy
+      -- ^ @PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY@
+    | FPlacementTagInstreamVideoPrefetch
+      -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH@
+    | FPlacementTagInstreamVideoPrefetchVast3
+      -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3@
+    | FPlacementTagInternalRedirect
+      -- ^ @PLACEMENT_TAG_INTERNAL_REDIRECT@
+    | FPlacementTagInterstitialIframeJavascript
+      -- ^ @PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT@
+    | FPlacementTagInterstitialIframeJavascriptLegacy
+      -- ^ @PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY@
+    | FPlacementTagInterstitialInternalRedirect
+      -- ^ @PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT@
+    | FPlacementTagInterstitialJavascript
+      -- ^ @PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT@
+    | FPlacementTagInterstitialJavascriptLegacy
+      -- ^ @PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY@
+    | FPlacementTagJavascript
+      -- ^ @PLACEMENT_TAG_JAVASCRIPT@
+    | FPlacementTagJavascriptLegacy
+      -- ^ @PLACEMENT_TAG_JAVASCRIPT_LEGACY@
+    | FPlacementTagStandard
+      -- ^ @PLACEMENT_TAG_STANDARD@
+    | FPlacementTagTracking
+      -- ^ @PLACEMENT_TAG_TRACKING@
+    | FPlacementTagTrackingIframe
+      -- ^ @PLACEMENT_TAG_TRACKING_IFRAME@
+    | FPlacementTagTrackingJavascript
+      -- ^ @PLACEMENT_TAG_TRACKING_JAVASCRIPT@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DeliverySchedulePriority
+instance Hashable Format
 
-instance FromText DeliverySchedulePriority where
+instance FromText Format where
     fromText = \case
-        "AD_PRIORITY_01" -> Just AdPriority01
-        "AD_PRIORITY_02" -> Just AdPriority02
-        "AD_PRIORITY_03" -> Just AdPriority03
-        "AD_PRIORITY_04" -> Just AdPriority04
-        "AD_PRIORITY_05" -> Just AdPriority05
-        "AD_PRIORITY_06" -> Just AdPriority06
-        "AD_PRIORITY_07" -> Just AdPriority07
-        "AD_PRIORITY_08" -> Just AdPriority08
-        "AD_PRIORITY_09" -> Just AdPriority09
-        "AD_PRIORITY_10" -> Just AdPriority10
-        "AD_PRIORITY_11" -> Just AdPriority11
-        "AD_PRIORITY_12" -> Just AdPriority12
-        "AD_PRIORITY_13" -> Just AdPriority13
-        "AD_PRIORITY_14" -> Just AdPriority14
-        "AD_PRIORITY_15" -> Just AdPriority15
-        "AD_PRIORITY_16" -> Just AdPriority16
+        "PLACEMENT_TAG_CLICK_COMMANDS" -> Just FPlacementTagClickCommands
+        "PLACEMENT_TAG_IFRAME_ILAYER" -> Just FPlacementTagIframeIlayer
+        "PLACEMENT_TAG_IFRAME_JAVASCRIPT" -> Just FPlacementTagIframeJavascript
+        "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY" -> Just FPlacementTagIframeJavascriptLegacy
+        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH" -> Just FPlacementTagInstreamVideoPrefetch
+        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3" -> Just FPlacementTagInstreamVideoPrefetchVast3
+        "PLACEMENT_TAG_INTERNAL_REDIRECT" -> Just FPlacementTagInternalRedirect
+        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT" -> Just FPlacementTagInterstitialIframeJavascript
+        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY" -> Just FPlacementTagInterstitialIframeJavascriptLegacy
+        "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT" -> Just FPlacementTagInterstitialInternalRedirect
+        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT" -> Just FPlacementTagInterstitialJavascript
+        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY" -> Just FPlacementTagInterstitialJavascriptLegacy
+        "PLACEMENT_TAG_JAVASCRIPT" -> Just FPlacementTagJavascript
+        "PLACEMENT_TAG_JAVASCRIPT_LEGACY" -> Just FPlacementTagJavascriptLegacy
+        "PLACEMENT_TAG_STANDARD" -> Just FPlacementTagStandard
+        "PLACEMENT_TAG_TRACKING" -> Just FPlacementTagTracking
+        "PLACEMENT_TAG_TRACKING_IFRAME" -> Just FPlacementTagTrackingIframe
+        "PLACEMENT_TAG_TRACKING_JAVASCRIPT" -> Just FPlacementTagTrackingJavascript
         _ -> Nothing
 
-instance ToText DeliverySchedulePriority where
+instance ToText Format where
     toText = \case
-        AdPriority01 -> "AD_PRIORITY_01"
-        AdPriority02 -> "AD_PRIORITY_02"
-        AdPriority03 -> "AD_PRIORITY_03"
-        AdPriority04 -> "AD_PRIORITY_04"
-        AdPriority05 -> "AD_PRIORITY_05"
-        AdPriority06 -> "AD_PRIORITY_06"
-        AdPriority07 -> "AD_PRIORITY_07"
-        AdPriority08 -> "AD_PRIORITY_08"
-        AdPriority09 -> "AD_PRIORITY_09"
-        AdPriority10 -> "AD_PRIORITY_10"
-        AdPriority11 -> "AD_PRIORITY_11"
-        AdPriority12 -> "AD_PRIORITY_12"
-        AdPriority13 -> "AD_PRIORITY_13"
-        AdPriority14 -> "AD_PRIORITY_14"
-        AdPriority15 -> "AD_PRIORITY_15"
-        AdPriority16 -> "AD_PRIORITY_16"
+        FPlacementTagClickCommands -> "PLACEMENT_TAG_CLICK_COMMANDS"
+        FPlacementTagIframeIlayer -> "PLACEMENT_TAG_IFRAME_ILAYER"
+        FPlacementTagIframeJavascript -> "PLACEMENT_TAG_IFRAME_JAVASCRIPT"
+        FPlacementTagIframeJavascriptLegacy -> "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY"
+        FPlacementTagInstreamVideoPrefetch -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH"
+        FPlacementTagInstreamVideoPrefetchVast3 -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3"
+        FPlacementTagInternalRedirect -> "PLACEMENT_TAG_INTERNAL_REDIRECT"
+        FPlacementTagInterstitialIframeJavascript -> "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT"
+        FPlacementTagInterstitialIframeJavascriptLegacy -> "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY"
+        FPlacementTagInterstitialInternalRedirect -> "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT"
+        FPlacementTagInterstitialJavascript -> "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT"
+        FPlacementTagInterstitialJavascriptLegacy -> "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY"
+        FPlacementTagJavascript -> "PLACEMENT_TAG_JAVASCRIPT"
+        FPlacementTagJavascriptLegacy -> "PLACEMENT_TAG_JAVASCRIPT_LEGACY"
+        FPlacementTagStandard -> "PLACEMENT_TAG_STANDARD"
+        FPlacementTagTracking -> "PLACEMENT_TAG_TRACKING"
+        FPlacementTagTrackingIframe -> "PLACEMENT_TAG_TRACKING_IFRAME"
+        FPlacementTagTrackingJavascript -> "PLACEMENT_TAG_TRACKING_JAVASCRIPT"
 
-instance FromJSON DeliverySchedulePriority where
-    parseJSON = parseJSONText "DeliverySchedulePriority"
+instance FromJSON Format where
+    parseJSON = parseJSONText "Format"
 
-instance ToJSON DeliverySchedulePriority where
+instance ToJSON Format where
     toJSON = toJSONText
 
 -- | Order of sorted results, default is ASCENDING.
@@ -2694,6 +2787,121 @@ instance FromJSON DfareportingAccountUserProfilesListSortOrder where
     parseJSON = parseJSONText "DfareportingAccountUserProfilesListSortOrder"
 
 instance ToJSON DfareportingAccountUserProfilesListSortOrder where
+    toJSON = toJSONText
+
+-- | Select only creatives with these creative types.
+data Types
+    = BrandSafeDefaultInstreamVideo
+      -- ^ @BRAND_SAFE_DEFAULT_INSTREAM_VIDEO@
+    | CustomInpage
+      -- ^ @CUSTOM_INPAGE@
+    | CustomInterstitial
+      -- ^ @CUSTOM_INTERSTITIAL@
+    | EnhancedBanner
+      -- ^ @ENHANCED_BANNER@
+    | EnhancedImage
+      -- ^ @ENHANCED_IMAGE@
+    | FlashInpage
+      -- ^ @FLASH_INPAGE@
+    | HTML5Banner
+      -- ^ @HTML5_BANNER@
+    | Image
+      -- ^ @IMAGE@
+    | InstreamVideo
+      -- ^ @INSTREAM_VIDEO@
+    | InternalRedirect
+      -- ^ @INTERNAL_REDIRECT@
+    | InterstitialInternalRedirect
+      -- ^ @INTERSTITIAL_INTERNAL_REDIRECT@
+    | Redirect
+      -- ^ @REDIRECT@
+    | RichMediaExpanding
+      -- ^ @RICH_MEDIA_EXPANDING@
+    | RichMediaImExpand
+      -- ^ @RICH_MEDIA_IM_EXPAND@
+    | RichMediaInpage
+      -- ^ @RICH_MEDIA_INPAGE@
+    | RichMediaInpageFloating
+      -- ^ @RICH_MEDIA_INPAGE_FLOATING@
+    | RichMediaInterstitialFloat
+      -- ^ @RICH_MEDIA_INTERSTITIAL_FLOAT@
+    | RichMediaMobileInApp
+      -- ^ @RICH_MEDIA_MOBILE_IN_APP@
+    | RichMediaMultiFloating
+      -- ^ @RICH_MEDIA_MULTI_FLOATING@
+    | RichMediaPeelDown
+      -- ^ @RICH_MEDIA_PEEL_DOWN@
+    | TrackingText
+      -- ^ @TRACKING_TEXT@
+    | VastRedirect
+      -- ^ @VAST_REDIRECT@
+    | VpaidLinear
+      -- ^ @VPAID_LINEAR@
+    | VpaidNonLinear
+      -- ^ @VPAID_NON_LINEAR@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Types
+
+instance FromText Types where
+    fromText = \case
+        "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO" -> Just BrandSafeDefaultInstreamVideo
+        "CUSTOM_INPAGE" -> Just CustomInpage
+        "CUSTOM_INTERSTITIAL" -> Just CustomInterstitial
+        "ENHANCED_BANNER" -> Just EnhancedBanner
+        "ENHANCED_IMAGE" -> Just EnhancedImage
+        "FLASH_INPAGE" -> Just FlashInpage
+        "HTML5_BANNER" -> Just HTML5Banner
+        "IMAGE" -> Just Image
+        "INSTREAM_VIDEO" -> Just InstreamVideo
+        "INTERNAL_REDIRECT" -> Just InternalRedirect
+        "INTERSTITIAL_INTERNAL_REDIRECT" -> Just InterstitialInternalRedirect
+        "REDIRECT" -> Just Redirect
+        "RICH_MEDIA_EXPANDING" -> Just RichMediaExpanding
+        "RICH_MEDIA_IM_EXPAND" -> Just RichMediaImExpand
+        "RICH_MEDIA_INPAGE" -> Just RichMediaInpage
+        "RICH_MEDIA_INPAGE_FLOATING" -> Just RichMediaInpageFloating
+        "RICH_MEDIA_INTERSTITIAL_FLOAT" -> Just RichMediaInterstitialFloat
+        "RICH_MEDIA_MOBILE_IN_APP" -> Just RichMediaMobileInApp
+        "RICH_MEDIA_MULTI_FLOATING" -> Just RichMediaMultiFloating
+        "RICH_MEDIA_PEEL_DOWN" -> Just RichMediaPeelDown
+        "TRACKING_TEXT" -> Just TrackingText
+        "VAST_REDIRECT" -> Just VastRedirect
+        "VPAID_LINEAR" -> Just VpaidLinear
+        "VPAID_NON_LINEAR" -> Just VpaidNonLinear
+        _ -> Nothing
+
+instance ToText Types where
+    toText = \case
+        BrandSafeDefaultInstreamVideo -> "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO"
+        CustomInpage -> "CUSTOM_INPAGE"
+        CustomInterstitial -> "CUSTOM_INTERSTITIAL"
+        EnhancedBanner -> "ENHANCED_BANNER"
+        EnhancedImage -> "ENHANCED_IMAGE"
+        FlashInpage -> "FLASH_INPAGE"
+        HTML5Banner -> "HTML5_BANNER"
+        Image -> "IMAGE"
+        InstreamVideo -> "INSTREAM_VIDEO"
+        InternalRedirect -> "INTERNAL_REDIRECT"
+        InterstitialInternalRedirect -> "INTERSTITIAL_INTERNAL_REDIRECT"
+        Redirect -> "REDIRECT"
+        RichMediaExpanding -> "RICH_MEDIA_EXPANDING"
+        RichMediaImExpand -> "RICH_MEDIA_IM_EXPAND"
+        RichMediaInpage -> "RICH_MEDIA_INPAGE"
+        RichMediaInpageFloating -> "RICH_MEDIA_INPAGE_FLOATING"
+        RichMediaInterstitialFloat -> "RICH_MEDIA_INTERSTITIAL_FLOAT"
+        RichMediaMobileInApp -> "RICH_MEDIA_MOBILE_IN_APP"
+        RichMediaMultiFloating -> "RICH_MEDIA_MULTI_FLOATING"
+        RichMediaPeelDown -> "RICH_MEDIA_PEEL_DOWN"
+        TrackingText -> "TRACKING_TEXT"
+        VastRedirect -> "VAST_REDIRECT"
+        VpaidLinear -> "VPAID_LINEAR"
+        VpaidNonLinear -> "VPAID_NON_LINEAR"
+
+instance FromJSON Types where
+    parseJSON = parseJSONText "Types"
+
+instance ToJSON Types where
     toJSON = toJSONText
 
 -- | Type of this contact.
@@ -2727,65 +2935,6 @@ instance FromJSON OrderContactContactType where
 instance ToJSON OrderContactContactType where
     toJSON = toJSONText
 
--- | Initial wait time type before making the asset visible. Applicable to
--- the following creative types: all RICH_MEDIA.
-data CreativeAssetStartTimeType
-    = AssetStartTimeTypeCustom
-      -- ^ @ASSET_START_TIME_TYPE_CUSTOM@
-    | AssetStartTimeTypeNone
-      -- ^ @ASSET_START_TIME_TYPE_NONE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CreativeAssetStartTimeType
-
-instance FromText CreativeAssetStartTimeType where
-    fromText = \case
-        "ASSET_START_TIME_TYPE_CUSTOM" -> Just AssetStartTimeTypeCustom
-        "ASSET_START_TIME_TYPE_NONE" -> Just AssetStartTimeTypeNone
-        _ -> Nothing
-
-instance ToText CreativeAssetStartTimeType where
-    toText = \case
-        AssetStartTimeTypeCustom -> "ASSET_START_TIME_TYPE_CUSTOM"
-        AssetStartTimeTypeNone -> "ASSET_START_TIME_TYPE_NONE"
-
-instance FromJSON CreativeAssetStartTimeType where
-    parseJSON = parseJSONText "CreativeAssetStartTimeType"
-
-instance ToJSON CreativeAssetStartTimeType where
-    toJSON = toJSONText
-
--- | Directory site contact role.
-data DirectorySiteContactRole
-    = Admin
-      -- ^ @ADMIN@
-    | Edit
-      -- ^ @EDIT@
-    | View
-      -- ^ @VIEW@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DirectorySiteContactRole
-
-instance FromText DirectorySiteContactRole where
-    fromText = \case
-        "ADMIN" -> Just Admin
-        "EDIT" -> Just Edit
-        "VIEW" -> Just View
-        _ -> Nothing
-
-instance ToText DirectorySiteContactRole where
-    toText = \case
-        Admin -> "ADMIN"
-        Edit -> "EDIT"
-        View -> "VIEW"
-
-instance FromJSON DirectorySiteContactRole where
-    parseJSON = parseJSONText "DirectorySiteContactRole"
-
-instance ToJSON DirectorySiteContactRole where
-    toJSON = toJSONText
-
 -- | Field by which to sort the list.
 data DfareportingDirectorySitesListSortField
     = DDSLSFID
@@ -2816,9 +2965,9 @@ instance ToJSON DfareportingDirectorySitesListSortField where
 -- | Payment source for this placement. This is a required field that is
 -- read-only after insertion.
 data PlacementPaymentSource
-    = PPSPlacementAgencyPaid
+    = PlacementAgencyPaid
       -- ^ @PLACEMENT_AGENCY_PAID@
-    | PPSPlacementPublisherPaid
+    | PlacementPublisherPaid
       -- ^ @PLACEMENT_PUBLISHER_PAID@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -2826,14 +2975,14 @@ instance Hashable PlacementPaymentSource
 
 instance FromText PlacementPaymentSource where
     fromText = \case
-        "PLACEMENT_AGENCY_PAID" -> Just PPSPlacementAgencyPaid
-        "PLACEMENT_PUBLISHER_PAID" -> Just PPSPlacementPublisherPaid
+        "PLACEMENT_AGENCY_PAID" -> Just PlacementAgencyPaid
+        "PLACEMENT_PUBLISHER_PAID" -> Just PlacementPublisherPaid
         _ -> Nothing
 
 instance ToText PlacementPaymentSource where
     toText = \case
-        PPSPlacementAgencyPaid -> "PLACEMENT_AGENCY_PAID"
-        PPSPlacementPublisherPaid -> "PLACEMENT_PUBLISHER_PAID"
+        PlacementAgencyPaid -> "PLACEMENT_AGENCY_PAID"
+        PlacementPublisherPaid -> "PLACEMENT_PUBLISHER_PAID"
 
 instance FromJSON PlacementPaymentSource where
     parseJSON = parseJSONText "PlacementPaymentSource"
@@ -2868,43 +3017,36 @@ instance FromJSON DfareportingOrdersListSortOrder where
 instance ToJSON DfareportingOrdersListSortOrder where
     toJSON = toJSONText
 
--- | Product from which this remarketing list was originated.
-data RemarketingListListSource
-    = RLLSRemarketingListSourceDBm
-      -- ^ @REMARKETING_LIST_SOURCE_DBM@
-    | RLLSRemarketingListSourceDfa
-      -- ^ @REMARKETING_LIST_SOURCE_DFA@
-    | RLLSRemarketingListSourceDmp
-      -- ^ @REMARKETING_LIST_SOURCE_DMP@
-    | RLLSRemarketingListSourceGa
-      -- ^ @REMARKETING_LIST_SOURCE_GA@
-    | RLLSRemarketingListSourceOther
-      -- ^ @REMARKETING_LIST_SOURCE_OTHER@
+-- | Duration type for which an asset will be displayed. Applicable to the
+-- following creative types: all RICH_MEDIA.
+data DurationType
+    = AssetDurationTypeAuto
+      -- ^ @ASSET_DURATION_TYPE_AUTO@
+    | AssetDurationTypeCustom
+      -- ^ @ASSET_DURATION_TYPE_CUSTOM@
+    | AssetDurationTypeNone
+      -- ^ @ASSET_DURATION_TYPE_NONE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable RemarketingListListSource
+instance Hashable DurationType
 
-instance FromText RemarketingListListSource where
+instance FromText DurationType where
     fromText = \case
-        "REMARKETING_LIST_SOURCE_DBM" -> Just RLLSRemarketingListSourceDBm
-        "REMARKETING_LIST_SOURCE_DFA" -> Just RLLSRemarketingListSourceDfa
-        "REMARKETING_LIST_SOURCE_DMP" -> Just RLLSRemarketingListSourceDmp
-        "REMARKETING_LIST_SOURCE_GA" -> Just RLLSRemarketingListSourceGa
-        "REMARKETING_LIST_SOURCE_OTHER" -> Just RLLSRemarketingListSourceOther
+        "ASSET_DURATION_TYPE_AUTO" -> Just AssetDurationTypeAuto
+        "ASSET_DURATION_TYPE_CUSTOM" -> Just AssetDurationTypeCustom
+        "ASSET_DURATION_TYPE_NONE" -> Just AssetDurationTypeNone
         _ -> Nothing
 
-instance ToText RemarketingListListSource where
+instance ToText DurationType where
     toText = \case
-        RLLSRemarketingListSourceDBm -> "REMARKETING_LIST_SOURCE_DBM"
-        RLLSRemarketingListSourceDfa -> "REMARKETING_LIST_SOURCE_DFA"
-        RLLSRemarketingListSourceDmp -> "REMARKETING_LIST_SOURCE_DMP"
-        RLLSRemarketingListSourceGa -> "REMARKETING_LIST_SOURCE_GA"
-        RLLSRemarketingListSourceOther -> "REMARKETING_LIST_SOURCE_OTHER"
+        AssetDurationTypeAuto -> "ASSET_DURATION_TYPE_AUTO"
+        AssetDurationTypeCustom -> "ASSET_DURATION_TYPE_CUSTOM"
+        AssetDurationTypeNone -> "ASSET_DURATION_TYPE_NONE"
 
-instance FromJSON RemarketingListListSource where
-    parseJSON = parseJSONText "RemarketingListListSource"
+instance FromJSON DurationType where
+    parseJSON = parseJSONText "DurationType"
 
-instance ToJSON RemarketingListListSource where
+instance ToJSON DurationType where
     toJSON = toJSONText
 
 -- | Field by which to sort the list.
@@ -2962,31 +3104,68 @@ instance FromJSON DfareportingFloodlightActivityGroupsListType where
 instance ToJSON DfareportingFloodlightActivityGroupsListType where
     toJSON = toJSONText
 
--- | Popup window position either centered or at specific coordinate.
-data PopupWindowPropertiesPositionType
-    = Center
-      -- ^ @CENTER@
-    | Coordinates
-      -- ^ @COORDINATES@
+-- | Visibility of this directory site contact assignment. When set to PUBLIC
+-- this contact assignment is visible to all account and agency users; when
+-- set to PRIVATE it is visible only to the site.
+data Visibility
+    = Private
+      -- ^ @PRIVATE@
+    | Public
+      -- ^ @PUBLIC@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable PopupWindowPropertiesPositionType
+instance Hashable Visibility
 
-instance FromText PopupWindowPropertiesPositionType where
+instance FromText Visibility where
     fromText = \case
-        "CENTER" -> Just Center
-        "COORDINATES" -> Just Coordinates
+        "PRIVATE" -> Just Private
+        "PUBLIC" -> Just Public
         _ -> Nothing
 
-instance ToText PopupWindowPropertiesPositionType where
+instance ToText Visibility where
     toText = \case
-        Center -> "CENTER"
-        Coordinates -> "COORDINATES"
+        Private -> "PRIVATE"
+        Public -> "PUBLIC"
 
-instance FromJSON PopupWindowPropertiesPositionType where
-    parseJSON = parseJSONText "PopupWindowPropertiesPositionType"
+instance FromJSON Visibility where
+    parseJSON = parseJSONText "Visibility"
 
-instance ToJSON PopupWindowPropertiesPositionType where
+instance ToJSON Visibility where
+    toJSON = toJSONText
+
+-- | Optimization model for this configuration.
+data OptimizationModel
+    = Click
+      -- ^ @CLICK@
+    | PostClick
+      -- ^ @POST_CLICK@
+    | PostClickAndImpression
+      -- ^ @POST_CLICK_AND_IMPRESSION@
+    | PostImpression
+      -- ^ @POST_IMPRESSION@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable OptimizationModel
+
+instance FromText OptimizationModel where
+    fromText = \case
+        "CLICK" -> Just Click
+        "POST_CLICK" -> Just PostClick
+        "POST_CLICK_AND_IMPRESSION" -> Just PostClickAndImpression
+        "POST_IMPRESSION" -> Just PostImpression
+        _ -> Nothing
+
+instance ToText OptimizationModel where
+    toText = \case
+        Click -> "CLICK"
+        PostClick -> "POST_CLICK"
+        PostClickAndImpression -> "POST_CLICK_AND_IMPRESSION"
+        PostImpression -> "POST_IMPRESSION"
+
+instance FromJSON OptimizationModel where
+    parseJSON = parseJSONText "OptimizationModel"
+
+instance ToJSON OptimizationModel where
     toJSON = toJSONText
 
 -- | Order of sorted results, default is ASCENDING.
@@ -3016,47 +3195,15 @@ instance FromJSON DfareportingCampaignsListSortOrder where
 instance ToJSON DfareportingCampaignsListSortOrder where
     toJSON = toJSONText
 
--- | User type of the user profile. This is a read-only field that can be
--- left blank.
-data AccountUserProfileUserAccessType
-    = InternalAdministrator
-      -- ^ @INTERNAL_ADMINISTRATOR@
-    | NormalUser
-      -- ^ @NORMAL_USER@
-    | SuperUser
-      -- ^ @SUPER_USER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable AccountUserProfileUserAccessType
-
-instance FromText AccountUserProfileUserAccessType where
-    fromText = \case
-        "INTERNAL_ADMINISTRATOR" -> Just InternalAdministrator
-        "NORMAL_USER" -> Just NormalUser
-        "SUPER_USER" -> Just SuperUser
-        _ -> Nothing
-
-instance ToText AccountUserProfileUserAccessType where
-    toText = \case
-        InternalAdministrator -> "INTERNAL_ADMINISTRATOR"
-        NormalUser -> "NORMAL_USER"
-        SuperUser -> "SUPER_USER"
-
-instance FromJSON AccountUserProfileUserAccessType where
-    parseJSON = parseJSONText "AccountUserProfileUserAccessType"
-
-instance ToJSON AccountUserProfileUserAccessType where
-    toJSON = toJSONText
-
 -- | Event tag type. Can be used to specify whether to use a third-party
 -- pixel, a third-party JavaScript URL, or a third-party click-through URL
 -- for either impression or click tracking. This is a required field.
 data EventTagType
-    = ClickThroughEventTag
+    = ETTClickThroughEventTag
       -- ^ @CLICK_THROUGH_EVENT_TAG@
-    | ImpressionImageEventTag
+    | ETTImpressionImageEventTag
       -- ^ @IMPRESSION_IMAGE_EVENT_TAG@
-    | ImpressionJavascriptEventTag
+    | ETTImpressionJavascriptEventTag
       -- ^ @IMPRESSION_JAVASCRIPT_EVENT_TAG@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -3064,21 +3211,108 @@ instance Hashable EventTagType
 
 instance FromText EventTagType where
     fromText = \case
-        "CLICK_THROUGH_EVENT_TAG" -> Just ClickThroughEventTag
-        "IMPRESSION_IMAGE_EVENT_TAG" -> Just ImpressionImageEventTag
-        "IMPRESSION_JAVASCRIPT_EVENT_TAG" -> Just ImpressionJavascriptEventTag
+        "CLICK_THROUGH_EVENT_TAG" -> Just ETTClickThroughEventTag
+        "IMPRESSION_IMAGE_EVENT_TAG" -> Just ETTImpressionImageEventTag
+        "IMPRESSION_JAVASCRIPT_EVENT_TAG" -> Just ETTImpressionJavascriptEventTag
         _ -> Nothing
 
 instance ToText EventTagType where
     toText = \case
-        ClickThroughEventTag -> "CLICK_THROUGH_EVENT_TAG"
-        ImpressionImageEventTag -> "IMPRESSION_IMAGE_EVENT_TAG"
-        ImpressionJavascriptEventTag -> "IMPRESSION_JAVASCRIPT_EVENT_TAG"
+        ETTClickThroughEventTag -> "CLICK_THROUGH_EVENT_TAG"
+        ETTImpressionImageEventTag -> "IMPRESSION_IMAGE_EVENT_TAG"
+        ETTImpressionJavascriptEventTag -> "IMPRESSION_JAVASCRIPT_EVENT_TAG"
 
 instance FromJSON EventTagType where
     parseJSON = parseJSONText "EventTagType"
 
 instance ToJSON EventTagType where
+    toJSON = toJSONText
+
+-- | Select only change logs with the specified action.
+data Action
+    = ActionAdd
+      -- ^ @ACTION_ADD@
+    | ActionAssign
+      -- ^ @ACTION_ASSIGN@
+    | ActionAssociate
+      -- ^ @ACTION_ASSOCIATE@
+    | ActionCreate
+      -- ^ @ACTION_CREATE@
+    | ActionDelete
+      -- ^ @ACTION_DELETE@
+    | ActionDisable
+      -- ^ @ACTION_DISABLE@
+    | ActionEmailTags
+      -- ^ @ACTION_EMAIL_TAGS@
+    | ActionEnable
+      -- ^ @ACTION_ENABLE@
+    | ActionLink
+      -- ^ @ACTION_LINK@
+    | ActionMarkAsDefault
+      -- ^ @ACTION_MARK_AS_DEFAULT@
+    | ActionPush
+      -- ^ @ACTION_PUSH@
+    | ActionRemove
+      -- ^ @ACTION_REMOVE@
+    | ActionSend
+      -- ^ @ACTION_SEND@
+    | ActionShare
+      -- ^ @ACTION_SHARE@
+    | ActionUnassign
+      -- ^ @ACTION_UNASSIGN@
+    | ActionUnlink
+      -- ^ @ACTION_UNLINK@
+    | ActionUpdate
+      -- ^ @ACTION_UPDATE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Action
+
+instance FromText Action where
+    fromText = \case
+        "ACTION_ADD" -> Just ActionAdd
+        "ACTION_ASSIGN" -> Just ActionAssign
+        "ACTION_ASSOCIATE" -> Just ActionAssociate
+        "ACTION_CREATE" -> Just ActionCreate
+        "ACTION_DELETE" -> Just ActionDelete
+        "ACTION_DISABLE" -> Just ActionDisable
+        "ACTION_EMAIL_TAGS" -> Just ActionEmailTags
+        "ACTION_ENABLE" -> Just ActionEnable
+        "ACTION_LINK" -> Just ActionLink
+        "ACTION_MARK_AS_DEFAULT" -> Just ActionMarkAsDefault
+        "ACTION_PUSH" -> Just ActionPush
+        "ACTION_REMOVE" -> Just ActionRemove
+        "ACTION_SEND" -> Just ActionSend
+        "ACTION_SHARE" -> Just ActionShare
+        "ACTION_UNASSIGN" -> Just ActionUnassign
+        "ACTION_UNLINK" -> Just ActionUnlink
+        "ACTION_UPDATE" -> Just ActionUpdate
+        _ -> Nothing
+
+instance ToText Action where
+    toText = \case
+        ActionAdd -> "ACTION_ADD"
+        ActionAssign -> "ACTION_ASSIGN"
+        ActionAssociate -> "ACTION_ASSOCIATE"
+        ActionCreate -> "ACTION_CREATE"
+        ActionDelete -> "ACTION_DELETE"
+        ActionDisable -> "ACTION_DISABLE"
+        ActionEmailTags -> "ACTION_EMAIL_TAGS"
+        ActionEnable -> "ACTION_ENABLE"
+        ActionLink -> "ACTION_LINK"
+        ActionMarkAsDefault -> "ACTION_MARK_AS_DEFAULT"
+        ActionPush -> "ACTION_PUSH"
+        ActionRemove -> "ACTION_REMOVE"
+        ActionSend -> "ACTION_SEND"
+        ActionShare -> "ACTION_SHARE"
+        ActionUnassign -> "ACTION_UNASSIGN"
+        ActionUnlink -> "ACTION_UNLINK"
+        ActionUpdate -> "ACTION_UPDATE"
+
+instance FromJSON Action where
+    parseJSON = parseJSONText "Action"
+
+instance ToJSON Action where
     toJSON = toJSONText
 
 -- | Order of sorted results, default is \'DESCENDING\'.
@@ -3110,86 +3344,36 @@ instance FromJSON DfareportingReportsListSortOrder where
 instance ToJSON DfareportingReportsListSortOrder where
     toJSON = toJSONText
 
--- | Audience gender of this project.
-data ProjectAudienceGender
-    = PlanningAudienceGenderFemale
-      -- ^ @PLANNING_AUDIENCE_GENDER_FEMALE@
-    | PlanningAudienceGenderMale
-      -- ^ @PLANNING_AUDIENCE_GENDER_MALE@
+-- | Select only placement groups belonging with this group type. A package
+-- is a simple group of placements that acts as a single pricing point for
+-- a group of tags. A roadblock is a group of placements that not only acts
+-- as a single pricing point but also assumes that all the tags in it will
+-- be served at the same time. A roadblock requires one of its assigned
+-- placements to be marked as primary for reporting.
+data PlacementGroupType
+    = PlacementPackage
+      -- ^ @PLACEMENT_PACKAGE@
+    | PlacementRoadblock
+      -- ^ @PLACEMENT_ROADBLOCK@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ProjectAudienceGender
+instance Hashable PlacementGroupType
 
-instance FromText ProjectAudienceGender where
+instance FromText PlacementGroupType where
     fromText = \case
-        "PLANNING_AUDIENCE_GENDER_FEMALE" -> Just PlanningAudienceGenderFemale
-        "PLANNING_AUDIENCE_GENDER_MALE" -> Just PlanningAudienceGenderMale
+        "PLACEMENT_PACKAGE" -> Just PlacementPackage
+        "PLACEMENT_ROADBLOCK" -> Just PlacementRoadblock
         _ -> Nothing
 
-instance ToText ProjectAudienceGender where
+instance ToText PlacementGroupType where
     toText = \case
-        PlanningAudienceGenderFemale -> "PLANNING_AUDIENCE_GENDER_FEMALE"
-        PlanningAudienceGenderMale -> "PLANNING_AUDIENCE_GENDER_MALE"
+        PlacementPackage -> "PLACEMENT_PACKAGE"
+        PlacementRoadblock -> "PLACEMENT_ROADBLOCK"
 
-instance FromJSON ProjectAudienceGender where
-    parseJSON = parseJSONText "ProjectAudienceGender"
+instance FromJSON PlacementGroupType where
+    parseJSON = parseJSONText "PlacementGroupType"
 
-instance ToJSON ProjectAudienceGender where
-    toJSON = toJSONText
-
--- | Authoring tool for HTML5 banner creatives. This is a read-only field.
--- Applicable to the following creative types: HTML5_BANNER.
-data CreativeAuthoringTool
-    = Ninja
-      -- ^ @NINJA@
-    | Swiffy
-      -- ^ @SWIFFY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CreativeAuthoringTool
-
-instance FromText CreativeAuthoringTool where
-    fromText = \case
-        "NINJA" -> Just Ninja
-        "SWIFFY" -> Just Swiffy
-        _ -> Nothing
-
-instance ToText CreativeAuthoringTool where
-    toText = \case
-        Ninja -> "NINJA"
-        Swiffy -> "SWIFFY"
-
-instance FromJSON CreativeAuthoringTool where
-    parseJSON = parseJSONText "CreativeAuthoringTool"
-
-instance ToJSON CreativeAuthoringTool where
-    toJSON = toJSONText
-
--- | Data type for the variable. This is a required field.
-data UserDefinedVariableConfigurationDataType
-    = Number
-      -- ^ @NUMBER@
-    | String
-      -- ^ @STRING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable UserDefinedVariableConfigurationDataType
-
-instance FromText UserDefinedVariableConfigurationDataType where
-    fromText = \case
-        "NUMBER" -> Just Number
-        "STRING" -> Just String
-        _ -> Nothing
-
-instance ToText UserDefinedVariableConfigurationDataType where
-    toText = \case
-        Number -> "NUMBER"
-        String -> "STRING"
-
-instance FromJSON UserDefinedVariableConfigurationDataType where
-    parseJSON = parseJSONText "UserDefinedVariableConfigurationDataType"
-
-instance ToJSON UserDefinedVariableConfigurationDataType where
+instance ToJSON PlacementGroupType where
     toJSON = toJSONText
 
 -- | Field by which to sort the list.
@@ -3259,165 +3443,6 @@ instance FromJSON CreativeAssetIdType where
 instance ToJSON CreativeAssetIdType where
     toJSON = toJSONText
 
-data FloodlightConfigurationStandardVariableTypes
-    = Num
-      -- ^ @NUM@
-    | Ord
-      -- ^ @ORD@
-    | Tran
-      -- ^ @TRAN@
-    | U
-      -- ^ @U@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable FloodlightConfigurationStandardVariableTypes
-
-instance FromText FloodlightConfigurationStandardVariableTypes where
-    fromText = \case
-        "NUM" -> Just Num
-        "ORD" -> Just Ord
-        "TRAN" -> Just Tran
-        "U" -> Just U
-        _ -> Nothing
-
-instance ToText FloodlightConfigurationStandardVariableTypes where
-    toText = \case
-        Num -> "NUM"
-        Ord -> "ORD"
-        Tran -> "TRAN"
-        U -> "U"
-
-instance FromJSON FloodlightConfigurationStandardVariableTypes where
-    parseJSON = parseJSONText "FloodlightConfigurationStandardVariableTypes"
-
-instance ToJSON FloodlightConfigurationStandardVariableTypes where
-    toJSON = toJSONText
-
--- | Option specifying how keywords are embedded in ad tags. This setting can
--- be used to specify whether keyword placeholders are inserted in
--- placement tags for this site. Publishers can then add keywords to those
--- placeholders.
-data TagSettingKeywordOption
-    = GenerateSeparateTagForEachKeyword
-      -- ^ @GENERATE_SEPARATE_TAG_FOR_EACH_KEYWORD@
-    | Ignore
-      -- ^ @IGNORE@
-    | PlaceholderWithListOfKeywords
-      -- ^ @PLACEHOLDER_WITH_LIST_OF_KEYWORDS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable TagSettingKeywordOption
-
-instance FromText TagSettingKeywordOption where
-    fromText = \case
-        "GENERATE_SEPARATE_TAG_FOR_EACH_KEYWORD" -> Just GenerateSeparateTagForEachKeyword
-        "IGNORE" -> Just Ignore
-        "PLACEHOLDER_WITH_LIST_OF_KEYWORDS" -> Just PlaceholderWithListOfKeywords
-        _ -> Nothing
-
-instance ToText TagSettingKeywordOption where
-    toText = \case
-        GenerateSeparateTagForEachKeyword -> "GENERATE_SEPARATE_TAG_FOR_EACH_KEYWORD"
-        Ignore -> "IGNORE"
-        PlaceholderWithListOfKeywords -> "PLACEHOLDER_WITH_LIST_OF_KEYWORDS"
-
-instance FromJSON TagSettingKeywordOption where
-    parseJSON = parseJSONText "TagSettingKeywordOption"
-
-instance ToJSON TagSettingKeywordOption where
-    toJSON = toJSONText
-
--- | TagData tag format of this tag.
-data TagDataFormat
-    = TDFPlacementTagClickCommands
-      -- ^ @PLACEMENT_TAG_CLICK_COMMANDS@
-    | TDFPlacementTagIframeIlayer
-      -- ^ @PLACEMENT_TAG_IFRAME_ILAYER@
-    | TDFPlacementTagIframeJavascript
-      -- ^ @PLACEMENT_TAG_IFRAME_JAVASCRIPT@
-    | TDFPlacementTagIframeJavascriptLegacy
-      -- ^ @PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY@
-    | TDFPlacementTagInstreamVideoPrefetch
-      -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH@
-    | TDFPlacementTagInstreamVideoPrefetchVast3
-      -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3@
-    | TDFPlacementTagInternalRedirect
-      -- ^ @PLACEMENT_TAG_INTERNAL_REDIRECT@
-    | TDFPlacementTagInterstitialIframeJavascript
-      -- ^ @PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT@
-    | TDFPlacementTagInterstitialIframeJavascriptLegacy
-      -- ^ @PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY@
-    | TDFPlacementTagInterstitialInternalRedirect
-      -- ^ @PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT@
-    | TDFPlacementTagInterstitialJavascript
-      -- ^ @PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT@
-    | TDFPlacementTagInterstitialJavascriptLegacy
-      -- ^ @PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY@
-    | TDFPlacementTagJavascript
-      -- ^ @PLACEMENT_TAG_JAVASCRIPT@
-    | TDFPlacementTagJavascriptLegacy
-      -- ^ @PLACEMENT_TAG_JAVASCRIPT_LEGACY@
-    | TDFPlacementTagStandard
-      -- ^ @PLACEMENT_TAG_STANDARD@
-    | TDFPlacementTagTracking
-      -- ^ @PLACEMENT_TAG_TRACKING@
-    | TDFPlacementTagTrackingIframe
-      -- ^ @PLACEMENT_TAG_TRACKING_IFRAME@
-    | TDFPlacementTagTrackingJavascript
-      -- ^ @PLACEMENT_TAG_TRACKING_JAVASCRIPT@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable TagDataFormat
-
-instance FromText TagDataFormat where
-    fromText = \case
-        "PLACEMENT_TAG_CLICK_COMMANDS" -> Just TDFPlacementTagClickCommands
-        "PLACEMENT_TAG_IFRAME_ILAYER" -> Just TDFPlacementTagIframeIlayer
-        "PLACEMENT_TAG_IFRAME_JAVASCRIPT" -> Just TDFPlacementTagIframeJavascript
-        "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY" -> Just TDFPlacementTagIframeJavascriptLegacy
-        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH" -> Just TDFPlacementTagInstreamVideoPrefetch
-        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3" -> Just TDFPlacementTagInstreamVideoPrefetchVast3
-        "PLACEMENT_TAG_INTERNAL_REDIRECT" -> Just TDFPlacementTagInternalRedirect
-        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT" -> Just TDFPlacementTagInterstitialIframeJavascript
-        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY" -> Just TDFPlacementTagInterstitialIframeJavascriptLegacy
-        "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT" -> Just TDFPlacementTagInterstitialInternalRedirect
-        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT" -> Just TDFPlacementTagInterstitialJavascript
-        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY" -> Just TDFPlacementTagInterstitialJavascriptLegacy
-        "PLACEMENT_TAG_JAVASCRIPT" -> Just TDFPlacementTagJavascript
-        "PLACEMENT_TAG_JAVASCRIPT_LEGACY" -> Just TDFPlacementTagJavascriptLegacy
-        "PLACEMENT_TAG_STANDARD" -> Just TDFPlacementTagStandard
-        "PLACEMENT_TAG_TRACKING" -> Just TDFPlacementTagTracking
-        "PLACEMENT_TAG_TRACKING_IFRAME" -> Just TDFPlacementTagTrackingIframe
-        "PLACEMENT_TAG_TRACKING_JAVASCRIPT" -> Just TDFPlacementTagTrackingJavascript
-        _ -> Nothing
-
-instance ToText TagDataFormat where
-    toText = \case
-        TDFPlacementTagClickCommands -> "PLACEMENT_TAG_CLICK_COMMANDS"
-        TDFPlacementTagIframeIlayer -> "PLACEMENT_TAG_IFRAME_ILAYER"
-        TDFPlacementTagIframeJavascript -> "PLACEMENT_TAG_IFRAME_JAVASCRIPT"
-        TDFPlacementTagIframeJavascriptLegacy -> "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY"
-        TDFPlacementTagInstreamVideoPrefetch -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH"
-        TDFPlacementTagInstreamVideoPrefetchVast3 -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3"
-        TDFPlacementTagInternalRedirect -> "PLACEMENT_TAG_INTERNAL_REDIRECT"
-        TDFPlacementTagInterstitialIframeJavascript -> "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT"
-        TDFPlacementTagInterstitialIframeJavascriptLegacy -> "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY"
-        TDFPlacementTagInterstitialInternalRedirect -> "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT"
-        TDFPlacementTagInterstitialJavascript -> "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT"
-        TDFPlacementTagInterstitialJavascriptLegacy -> "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY"
-        TDFPlacementTagJavascript -> "PLACEMENT_TAG_JAVASCRIPT"
-        TDFPlacementTagJavascriptLegacy -> "PLACEMENT_TAG_JAVASCRIPT_LEGACY"
-        TDFPlacementTagStandard -> "PLACEMENT_TAG_STANDARD"
-        TDFPlacementTagTracking -> "PLACEMENT_TAG_TRACKING"
-        TDFPlacementTagTrackingIframe -> "PLACEMENT_TAG_TRACKING_IFRAME"
-        TDFPlacementTagTrackingJavascript -> "PLACEMENT_TAG_TRACKING_JAVASCRIPT"
-
-instance FromJSON TagDataFormat where
-    parseJSON = parseJSONText "TagDataFormat"
-
-instance ToJSON TagDataFormat where
-    toJSON = toJSONText
-
 -- | Type of this order document
 data OrderDocumentType
     = PlanningOrderTypeChangeOrder
@@ -3472,43 +3497,82 @@ instance FromJSON DfareportingCreativeFieldsListSortOrder where
 instance ToJSON DfareportingCreativeFieldsListSortOrder where
     toJSON = toJSONText
 
--- | Code type used for cache busting in the generated tag.
-data FloodlightActivityCacheBustingType
-    = ActiveServerPage
-      -- ^ @ACTIVE_SERVER_PAGE@
-    | ColdFusion
-      -- ^ @COLD_FUSION@
-    | Javascript
-      -- ^ @JAVASCRIPT@
-    | Jsp
-      -- ^ @JSP@
-    | Php
-      -- ^ @PHP@
+-- | Target type used by the event.
+data TargetType
+    = TargetBlank
+      -- ^ @TARGET_BLANK@
+    | TargetParent
+      -- ^ @TARGET_PARENT@
+    | TargetPopup
+      -- ^ @TARGET_POPUP@
+    | TargetSelf
+      -- ^ @TARGET_SELF@
+    | TargetTop
+      -- ^ @TARGET_TOP@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable FloodlightActivityCacheBustingType
+instance Hashable TargetType
 
-instance FromText FloodlightActivityCacheBustingType where
+instance FromText TargetType where
     fromText = \case
-        "ACTIVE_SERVER_PAGE" -> Just ActiveServerPage
-        "COLD_FUSION" -> Just ColdFusion
-        "JAVASCRIPT" -> Just Javascript
-        "JSP" -> Just Jsp
-        "PHP" -> Just Php
+        "TARGET_BLANK" -> Just TargetBlank
+        "TARGET_PARENT" -> Just TargetParent
+        "TARGET_POPUP" -> Just TargetPopup
+        "TARGET_SELF" -> Just TargetSelf
+        "TARGET_TOP" -> Just TargetTop
         _ -> Nothing
 
-instance ToText FloodlightActivityCacheBustingType where
+instance ToText TargetType where
     toText = \case
-        ActiveServerPage -> "ACTIVE_SERVER_PAGE"
-        ColdFusion -> "COLD_FUSION"
-        Javascript -> "JAVASCRIPT"
-        Jsp -> "JSP"
-        Php -> "PHP"
+        TargetBlank -> "TARGET_BLANK"
+        TargetParent -> "TARGET_PARENT"
+        TargetPopup -> "TARGET_POPUP"
+        TargetSelf -> "TARGET_SELF"
+        TargetTop -> "TARGET_TOP"
 
-instance FromJSON FloodlightActivityCacheBustingType where
-    parseJSON = parseJSONText "FloodlightActivityCacheBustingType"
+instance FromJSON TargetType where
+    parseJSON = parseJSONText "TargetType"
 
-instance ToJSON FloodlightActivityCacheBustingType where
+instance ToJSON TargetType where
+    toJSON = toJSONText
+
+-- | Levels of availability for a user role permission.
+data Availability
+    = AccountAlways
+      -- ^ @ACCOUNT_ALWAYS@
+    | AccountByDefault
+      -- ^ @ACCOUNT_BY_DEFAULT@
+    | NotAvailableByDefault
+      -- ^ @NOT_AVAILABLE_BY_DEFAULT@
+    | SubAccountAndAccountAlways
+      -- ^ @SUBACCOUNT_AND_ACCOUNT_ALWAYS@
+    | SubAccountAndAccountByDefault
+      -- ^ @SUBACCOUNT_AND_ACCOUNT_BY_DEFAULT@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Availability
+
+instance FromText Availability where
+    fromText = \case
+        "ACCOUNT_ALWAYS" -> Just AccountAlways
+        "ACCOUNT_BY_DEFAULT" -> Just AccountByDefault
+        "NOT_AVAILABLE_BY_DEFAULT" -> Just NotAvailableByDefault
+        "SUBACCOUNT_AND_ACCOUNT_ALWAYS" -> Just SubAccountAndAccountAlways
+        "SUBACCOUNT_AND_ACCOUNT_BY_DEFAULT" -> Just SubAccountAndAccountByDefault
+        _ -> Nothing
+
+instance ToText Availability where
+    toText = \case
+        AccountAlways -> "ACCOUNT_ALWAYS"
+        AccountByDefault -> "ACCOUNT_BY_DEFAULT"
+        NotAvailableByDefault -> "NOT_AVAILABLE_BY_DEFAULT"
+        SubAccountAndAccountAlways -> "SUBACCOUNT_AND_ACCOUNT_ALWAYS"
+        SubAccountAndAccountByDefault -> "SUBACCOUNT_AND_ACCOUNT_BY_DEFAULT"
+
+instance FromJSON Availability where
+    parseJSON = parseJSONText "Availability"
+
+instance ToJSON Availability where
     toJSON = toJSONText
 
 -- | Maximum number of active ads allowed for the account.
@@ -3550,6 +3614,64 @@ instance FromJSON AccountActiveAdSummaryActiveAdsLimitTier where
 instance ToJSON AccountActiveAdSummaryActiveAdsLimitTier where
     toJSON = toJSONText
 
+-- | Trafficker type of this user profile.
+data TraffickerType
+    = ExternalTrafficker
+      -- ^ @EXTERNAL_TRAFFICKER@
+    | InternalNonTrafficker
+      -- ^ @INTERNAL_NON_TRAFFICKER@
+    | InternalTrafficker
+      -- ^ @INTERNAL_TRAFFICKER@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable TraffickerType
+
+instance FromText TraffickerType where
+    fromText = \case
+        "EXTERNAL_TRAFFICKER" -> Just ExternalTrafficker
+        "INTERNAL_NON_TRAFFICKER" -> Just InternalNonTrafficker
+        "INTERNAL_TRAFFICKER" -> Just InternalTrafficker
+        _ -> Nothing
+
+instance ToText TraffickerType where
+    toText = \case
+        ExternalTrafficker -> "EXTERNAL_TRAFFICKER"
+        InternalNonTrafficker -> "INTERNAL_NON_TRAFFICKER"
+        InternalTrafficker -> "INTERNAL_TRAFFICKER"
+
+instance FromJSON TraffickerType where
+    parseJSON = parseJSONText "TraffickerType"
+
+instance ToJSON TraffickerType where
+    toJSON = toJSONText
+
+-- | Popup window position either centered or at specific coordinate.
+data PositionType
+    = Center
+      -- ^ @CENTER@
+    | Coordinates
+      -- ^ @COORDINATES@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable PositionType
+
+instance FromText PositionType where
+    fromText = \case
+        "CENTER" -> Just Center
+        "COORDINATES" -> Just Coordinates
+        _ -> Nothing
+
+instance ToText PositionType where
+    toText = \case
+        Center -> "CENTER"
+        Coordinates -> "COORDINATES"
+
+instance FromJSON PositionType where
+    parseJSON = parseJSONText "PositionType"
+
+instance ToJSON PositionType where
+    toJSON = toJSONText
+
 -- | Field by which to sort the list.
 data DfareportingSubAccountsListSortField
     = DSALSFID
@@ -3577,40 +3699,32 @@ instance FromJSON DfareportingSubAccountsListSortField where
 instance ToJSON DfareportingSubAccountsListSortField where
     toJSON = toJSONText
 
--- | Rich media child asset type. This is a read-only field. Applicable to
--- the following creative types: all VPAID.
-data CreativeAssetChildAssetType
-    = ChildAssetTypeData
-      -- ^ @CHILD_ASSET_TYPE_DATA@
-    | ChildAssetTypeFlash
-      -- ^ @CHILD_ASSET_TYPE_FLASH@
-    | ChildAssetTypeImage
-      -- ^ @CHILD_ASSET_TYPE_IMAGE@
-    | ChildAssetTypeVideo
-      -- ^ @CHILD_ASSET_TYPE_VIDEO@
+-- | Tag format type for the floodlight activity. If left blank, the tag
+-- format will default to HTML.
+data TagFormat
+    = HTML
+      -- ^ @HTML@
+    | Xhtml
+      -- ^ @XHTML@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CreativeAssetChildAssetType
+instance Hashable TagFormat
 
-instance FromText CreativeAssetChildAssetType where
+instance FromText TagFormat where
     fromText = \case
-        "CHILD_ASSET_TYPE_DATA" -> Just ChildAssetTypeData
-        "CHILD_ASSET_TYPE_FLASH" -> Just ChildAssetTypeFlash
-        "CHILD_ASSET_TYPE_IMAGE" -> Just ChildAssetTypeImage
-        "CHILD_ASSET_TYPE_VIDEO" -> Just ChildAssetTypeVideo
+        "HTML" -> Just HTML
+        "XHTML" -> Just Xhtml
         _ -> Nothing
 
-instance ToText CreativeAssetChildAssetType where
+instance ToText TagFormat where
     toText = \case
-        ChildAssetTypeData -> "CHILD_ASSET_TYPE_DATA"
-        ChildAssetTypeFlash -> "CHILD_ASSET_TYPE_FLASH"
-        ChildAssetTypeImage -> "CHILD_ASSET_TYPE_IMAGE"
-        ChildAssetTypeVideo -> "CHILD_ASSET_TYPE_VIDEO"
+        HTML -> "HTML"
+        Xhtml -> "XHTML"
 
-instance FromJSON CreativeAssetChildAssetType where
-    parseJSON = parseJSONText "CreativeAssetChildAssetType"
+instance FromJSON TagFormat where
+    parseJSON = parseJSONText "TagFormat"
 
-instance ToJSON CreativeAssetChildAssetType where
+instance ToJSON TagFormat where
     toJSON = toJSONText
 
 -- | Order of sorted results, default is ASCENDING.
@@ -3727,323 +3841,246 @@ instance FromJSON DfareportingAdsListSortField where
 instance ToJSON DfareportingAdsListSortField where
     toJSON = toJSONText
 
--- | Optimization model for this configuration.
-data CreativeOptimizationConfigurationOptimizationModel
-    = Click
-      -- ^ @CLICK@
-    | PostClick
-      -- ^ @POST_CLICK@
-    | PostClickAndImpression
-      -- ^ @POST_CLICK_AND_IMPRESSION@
-    | PostImpression
-      -- ^ @POST_IMPRESSION@
+-- | Order of sorted results, default is ASCENDING.
+data SortOrder
+    = SOAscending
+      -- ^ @ASCENDING@
+    | SODescending
+      -- ^ @DESCENDING@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CreativeOptimizationConfigurationOptimizationModel
+instance Hashable SortOrder
 
-instance FromText CreativeOptimizationConfigurationOptimizationModel where
+instance FromText SortOrder where
     fromText = \case
-        "CLICK" -> Just Click
-        "POST_CLICK" -> Just PostClick
-        "POST_CLICK_AND_IMPRESSION" -> Just PostClickAndImpression
-        "POST_IMPRESSION" -> Just PostImpression
+        "ASCENDING" -> Just SOAscending
+        "DESCENDING" -> Just SODescending
         _ -> Nothing
 
-instance ToText CreativeOptimizationConfigurationOptimizationModel where
+instance ToText SortOrder where
     toText = \case
-        Click -> "CLICK"
-        PostClick -> "POST_CLICK"
-        PostClickAndImpression -> "POST_CLICK_AND_IMPRESSION"
-        PostImpression -> "POST_IMPRESSION"
+        SOAscending -> "ASCENDING"
+        SODescending -> "DESCENDING"
 
-instance FromJSON CreativeOptimizationConfigurationOptimizationModel where
-    parseJSON = parseJSONText "CreativeOptimizationConfigurationOptimizationModel"
+instance FromJSON SortOrder where
+    parseJSON = parseJSONText "SortOrder"
 
-instance ToJSON CreativeOptimizationConfigurationOptimizationModel where
+instance ToJSON SortOrder where
     toJSON = toJSONText
 
--- | Administrative level required to enable this account permission.
-data AccountPermissionLevel
-    = Administrator
-      -- ^ @ADMINISTRATOR@
-    | User
-      -- ^ @USER@
+data AccountProfilesItem
+    = AccountProfileBasic
+      -- ^ @ACCOUNT_PROFILE_BASIC@
+    | AccountProfileStandard
+      -- ^ @ACCOUNT_PROFILE_STANDARD@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AccountPermissionLevel
+instance Hashable AccountProfilesItem
 
-instance FromText AccountPermissionLevel where
+instance FromText AccountProfilesItem where
     fromText = \case
-        "ADMINISTRATOR" -> Just Administrator
-        "USER" -> Just User
+        "ACCOUNT_PROFILE_BASIC" -> Just AccountProfileBasic
+        "ACCOUNT_PROFILE_STANDARD" -> Just AccountProfileStandard
         _ -> Nothing
 
-instance ToText AccountPermissionLevel where
+instance ToText AccountProfilesItem where
     toText = \case
-        Administrator -> "ADMINISTRATOR"
-        User -> "USER"
+        AccountProfileBasic -> "ACCOUNT_PROFILE_BASIC"
+        AccountProfileStandard -> "ACCOUNT_PROFILE_STANDARD"
 
-instance FromJSON AccountPermissionLevel where
-    parseJSON = parseJSONText "AccountPermissionLevel"
+instance FromJSON AccountProfilesItem where
+    parseJSON = parseJSONText "AccountProfilesItem"
 
-instance ToJSON AccountPermissionLevel where
+instance ToJSON AccountProfilesItem where
     toJSON = toJSONText
 
--- | Possible alignments for an asset. This is a read-only field. Applicable
--- to the following creative types: RICH_MEDIA_MULTI_FLOATING.
-data CreativeAssetAlignment
-    = AlignmentBottom
-      -- ^ @ALIGNMENT_BOTTOM@
-    | AlignmentLeft
-      -- ^ @ALIGNMENT_LEFT@
-    | AlignmentRight
-      -- ^ @ALIGNMENT_RIGHT@
-    | AlignmentTop
-      -- ^ @ALIGNMENT_TOP@
+-- | Directory site contact role.
+data Role
+    = Admin
+      -- ^ @ADMIN@
+    | Edit
+      -- ^ @EDIT@
+    | View
+      -- ^ @VIEW@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CreativeAssetAlignment
+instance Hashable Role
 
-instance FromText CreativeAssetAlignment where
+instance FromText Role where
     fromText = \case
-        "ALIGNMENT_BOTTOM" -> Just AlignmentBottom
-        "ALIGNMENT_LEFT" -> Just AlignmentLeft
-        "ALIGNMENT_RIGHT" -> Just AlignmentRight
-        "ALIGNMENT_TOP" -> Just AlignmentTop
+        "ADMIN" -> Just Admin
+        "EDIT" -> Just Edit
+        "VIEW" -> Just View
         _ -> Nothing
 
-instance ToText CreativeAssetAlignment where
+instance ToText Role where
     toText = \case
-        AlignmentBottom -> "ALIGNMENT_BOTTOM"
-        AlignmentLeft -> "ALIGNMENT_LEFT"
-        AlignmentRight -> "ALIGNMENT_RIGHT"
-        AlignmentTop -> "ALIGNMENT_TOP"
+        Admin -> "ADMIN"
+        Edit -> "EDIT"
+        View -> "VIEW"
 
-instance FromJSON CreativeAssetAlignment where
-    parseJSON = parseJSONText "CreativeAssetAlignment"
+instance FromJSON Role where
+    parseJSON = parseJSONText "Role"
 
-instance ToJSON CreativeAssetAlignment where
+instance ToJSON Role where
     toJSON = toJSONText
 
--- | Window mode options for flash assets. Applicable to the following
--- creative types: FLASH_INPAGE, RICH_MEDIA_EXPANDING,
--- RICH_MEDIA_IM_EXPAND, RICH_MEDIA_INPAGE, and RICH_MEDIA_INPAGE_FLOATING.
-data CreativeAssetWindowMode
-    = Opaque
-      -- ^ @OPAQUE@
-    | Transparent
-      -- ^ @TRANSPARENT@
-    | Window
-      -- ^ @WINDOW@
+-- | Offset top unit for an asset. This is a read-only field if the asset
+-- displayType is ASSET_DISPLAY_TYPE_OVERLAY. Applicable to the following
+-- creative types: all RICH_MEDIA.
+data PositionTopUnit
+    = OffsetUnitPercent
+      -- ^ @OFFSET_UNIT_PERCENT@
+    | OffsetUnitPixel
+      -- ^ @OFFSET_UNIT_PIXEL@
+    | OffsetUnitPixelFromCenter
+      -- ^ @OFFSET_UNIT_PIXEL_FROM_CENTER@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CreativeAssetWindowMode
+instance Hashable PositionTopUnit
 
-instance FromText CreativeAssetWindowMode where
+instance FromText PositionTopUnit where
     fromText = \case
-        "OPAQUE" -> Just Opaque
-        "TRANSPARENT" -> Just Transparent
-        "WINDOW" -> Just Window
+        "OFFSET_UNIT_PERCENT" -> Just OffsetUnitPercent
+        "OFFSET_UNIT_PIXEL" -> Just OffsetUnitPixel
+        "OFFSET_UNIT_PIXEL_FROM_CENTER" -> Just OffsetUnitPixelFromCenter
         _ -> Nothing
 
-instance ToText CreativeAssetWindowMode where
+instance ToText PositionTopUnit where
     toText = \case
-        Opaque -> "OPAQUE"
-        Transparent -> "TRANSPARENT"
-        Window -> "WINDOW"
+        OffsetUnitPercent -> "OFFSET_UNIT_PERCENT"
+        OffsetUnitPixel -> "OFFSET_UNIT_PIXEL"
+        OffsetUnitPixelFromCenter -> "OFFSET_UNIT_PIXEL_FROM_CENTER"
 
-instance FromJSON CreativeAssetWindowMode where
-    parseJSON = parseJSONText "CreativeAssetWindowMode"
+instance FromJSON PositionTopUnit where
+    parseJSON = parseJSONText "PositionTopUnit"
 
-instance ToJSON CreativeAssetWindowMode where
+instance ToJSON PositionTopUnit where
     toJSON = toJSONText
 
-data DirectorySiteInpageTagFormats
-    = IframeJavascriptInpage
-      -- ^ @IFRAME_JAVASCRIPT_INPAGE@
-    | InternalRedirectInpage
-      -- ^ @INTERNAL_REDIRECT_INPAGE@
-    | JavascriptInpage
-      -- ^ @JAVASCRIPT_INPAGE@
-    | Standard
-      -- ^ @STANDARD@
+-- | Code type used for cache busting in the generated tag.
+data CacheBustingType
+    = ActiveServerPage
+      -- ^ @ACTIVE_SERVER_PAGE@
+    | ColdFusion
+      -- ^ @COLD_FUSION@
+    | Javascript
+      -- ^ @JAVASCRIPT@
+    | Jsp
+      -- ^ @JSP@
+    | Php
+      -- ^ @PHP@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DirectorySiteInpageTagFormats
+instance Hashable CacheBustingType
 
-instance FromText DirectorySiteInpageTagFormats where
+instance FromText CacheBustingType where
     fromText = \case
-        "IFRAME_JAVASCRIPT_INPAGE" -> Just IframeJavascriptInpage
-        "INTERNAL_REDIRECT_INPAGE" -> Just InternalRedirectInpage
-        "JAVASCRIPT_INPAGE" -> Just JavascriptInpage
-        "STANDARD" -> Just Standard
+        "ACTIVE_SERVER_PAGE" -> Just ActiveServerPage
+        "COLD_FUSION" -> Just ColdFusion
+        "JAVASCRIPT" -> Just Javascript
+        "JSP" -> Just Jsp
+        "PHP" -> Just Php
         _ -> Nothing
 
-instance ToText DirectorySiteInpageTagFormats where
+instance ToText CacheBustingType where
     toText = \case
-        IframeJavascriptInpage -> "IFRAME_JAVASCRIPT_INPAGE"
-        InternalRedirectInpage -> "INTERNAL_REDIRECT_INPAGE"
-        JavascriptInpage -> "JAVASCRIPT_INPAGE"
-        Standard -> "STANDARD"
+        ActiveServerPage -> "ACTIVE_SERVER_PAGE"
+        ColdFusion -> "COLD_FUSION"
+        Javascript -> "JAVASCRIPT"
+        Jsp -> "JSP"
+        Php -> "PHP"
 
-instance FromJSON DirectorySiteInpageTagFormats where
-    parseJSON = parseJSONText "DirectorySiteInpageTagFormats"
+instance FromJSON CacheBustingType where
+    parseJSON = parseJSONText "CacheBustingType"
 
-instance ToJSON DirectorySiteInpageTagFormats where
+instance ToJSON CacheBustingType where
     toJSON = toJSONText
 
--- | Select only creatives with these creative types.
-data DfareportingCreativesListTypes
-    = BrandSafeDefaultInstreamVideo
-      -- ^ @BRAND_SAFE_DEFAULT_INSTREAM_VIDEO@
-    | CustomInpage
-      -- ^ @CUSTOM_INPAGE@
-    | CustomInterstitial
-      -- ^ @CUSTOM_INTERSTITIAL@
-    | EnhancedBanner
-      -- ^ @ENHANCED_BANNER@
-    | EnhancedImage
-      -- ^ @ENHANCED_IMAGE@
-    | FlashInpage
-      -- ^ @FLASH_INPAGE@
-    | HTML5Banner
-      -- ^ @HTML5_BANNER@
-    | Image
-      -- ^ @IMAGE@
-    | InstreamVideo
-      -- ^ @INSTREAM_VIDEO@
-    | InternalRedirect
-      -- ^ @INTERNAL_REDIRECT@
-    | InterstitialInternalRedirect
-      -- ^ @INTERSTITIAL_INTERNAL_REDIRECT@
-    | Redirect
-      -- ^ @REDIRECT@
-    | RichMediaExpanding
-      -- ^ @RICH_MEDIA_EXPANDING@
-    | RichMediaImExpand
-      -- ^ @RICH_MEDIA_IM_EXPAND@
-    | RichMediaInpage
-      -- ^ @RICH_MEDIA_INPAGE@
-    | RichMediaInpageFloating
-      -- ^ @RICH_MEDIA_INPAGE_FLOATING@
-    | RichMediaInterstitialFloat
-      -- ^ @RICH_MEDIA_INTERSTITIAL_FLOAT@
-    | RichMediaMobileInApp
-      -- ^ @RICH_MEDIA_MOBILE_IN_APP@
-    | RichMediaMultiFloating
-      -- ^ @RICH_MEDIA_MULTI_FLOATING@
-    | RichMediaPeelDown
-      -- ^ @RICH_MEDIA_PEEL_DOWN@
-    | TrackingText
-      -- ^ @TRACKING_TEXT@
-    | VastRedirect
-      -- ^ @VAST_REDIRECT@
-    | VpaidLinear
-      -- ^ @VPAID_LINEAR@
-    | VpaidNonLinear
-      -- ^ @VPAID_NON_LINEAR@
+-- | The delivery type for the recipient.
+data DeliveryType
+    = Attachment
+      -- ^ @ATTACHMENT@
+    | Link
+      -- ^ @LINK@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DfareportingCreativesListTypes
+instance Hashable DeliveryType
 
-instance FromText DfareportingCreativesListTypes where
+instance FromText DeliveryType where
     fromText = \case
-        "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO" -> Just BrandSafeDefaultInstreamVideo
-        "CUSTOM_INPAGE" -> Just CustomInpage
-        "CUSTOM_INTERSTITIAL" -> Just CustomInterstitial
-        "ENHANCED_BANNER" -> Just EnhancedBanner
-        "ENHANCED_IMAGE" -> Just EnhancedImage
-        "FLASH_INPAGE" -> Just FlashInpage
-        "HTML5_BANNER" -> Just HTML5Banner
-        "IMAGE" -> Just Image
-        "INSTREAM_VIDEO" -> Just InstreamVideo
-        "INTERNAL_REDIRECT" -> Just InternalRedirect
-        "INTERSTITIAL_INTERNAL_REDIRECT" -> Just InterstitialInternalRedirect
-        "REDIRECT" -> Just Redirect
-        "RICH_MEDIA_EXPANDING" -> Just RichMediaExpanding
-        "RICH_MEDIA_IM_EXPAND" -> Just RichMediaImExpand
-        "RICH_MEDIA_INPAGE" -> Just RichMediaInpage
-        "RICH_MEDIA_INPAGE_FLOATING" -> Just RichMediaInpageFloating
-        "RICH_MEDIA_INTERSTITIAL_FLOAT" -> Just RichMediaInterstitialFloat
-        "RICH_MEDIA_MOBILE_IN_APP" -> Just RichMediaMobileInApp
-        "RICH_MEDIA_MULTI_FLOATING" -> Just RichMediaMultiFloating
-        "RICH_MEDIA_PEEL_DOWN" -> Just RichMediaPeelDown
-        "TRACKING_TEXT" -> Just TrackingText
-        "VAST_REDIRECT" -> Just VastRedirect
-        "VPAID_LINEAR" -> Just VpaidLinear
-        "VPAID_NON_LINEAR" -> Just VpaidNonLinear
+        "ATTACHMENT" -> Just Attachment
+        "LINK" -> Just Link
         _ -> Nothing
 
-instance ToText DfareportingCreativesListTypes where
+instance ToText DeliveryType where
     toText = \case
-        BrandSafeDefaultInstreamVideo -> "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO"
-        CustomInpage -> "CUSTOM_INPAGE"
-        CustomInterstitial -> "CUSTOM_INTERSTITIAL"
-        EnhancedBanner -> "ENHANCED_BANNER"
-        EnhancedImage -> "ENHANCED_IMAGE"
-        FlashInpage -> "FLASH_INPAGE"
-        HTML5Banner -> "HTML5_BANNER"
-        Image -> "IMAGE"
-        InstreamVideo -> "INSTREAM_VIDEO"
-        InternalRedirect -> "INTERNAL_REDIRECT"
-        InterstitialInternalRedirect -> "INTERSTITIAL_INTERNAL_REDIRECT"
-        Redirect -> "REDIRECT"
-        RichMediaExpanding -> "RICH_MEDIA_EXPANDING"
-        RichMediaImExpand -> "RICH_MEDIA_IM_EXPAND"
-        RichMediaInpage -> "RICH_MEDIA_INPAGE"
-        RichMediaInpageFloating -> "RICH_MEDIA_INPAGE_FLOATING"
-        RichMediaInterstitialFloat -> "RICH_MEDIA_INTERSTITIAL_FLOAT"
-        RichMediaMobileInApp -> "RICH_MEDIA_MOBILE_IN_APP"
-        RichMediaMultiFloating -> "RICH_MEDIA_MULTI_FLOATING"
-        RichMediaPeelDown -> "RICH_MEDIA_PEEL_DOWN"
-        TrackingText -> "TRACKING_TEXT"
-        VastRedirect -> "VAST_REDIRECT"
-        VpaidLinear -> "VPAID_LINEAR"
-        VpaidNonLinear -> "VPAID_NON_LINEAR"
+        Attachment -> "ATTACHMENT"
+        Link -> "LINK"
 
-instance FromJSON DfareportingCreativesListTypes where
-    parseJSON = parseJSONText "DfareportingCreativesListTypes"
+instance FromJSON DeliveryType where
+    parseJSON = parseJSONText "DeliveryType"
 
-instance ToJSON DfareportingCreativesListTypes where
+instance ToJSON DeliveryType where
     toJSON = toJSONText
 
--- | Maximum number of active ads allowed for this account.
-data AccountActiveAdsLimitTier
-    = AAALTActiveAdsTier100K
-      -- ^ @ACTIVE_ADS_TIER_100K@
-    | AAALTActiveAdsTier200K
-      -- ^ @ACTIVE_ADS_TIER_200K@
-    | AAALTActiveAdsTier300K
-      -- ^ @ACTIVE_ADS_TIER_300K@
-    | AAALTActiveAdsTier40K
-      -- ^ @ACTIVE_ADS_TIER_40K@
-    | AAALTActiveAdsTier75K
-      -- ^ @ACTIVE_ADS_TIER_75K@
+-- | Offset left unit for an asset. This is a read-only field. Applicable to
+-- the following creative types: all RICH_MEDIA.
+data PositionLeftUnit
+    = PLUOffsetUnitPercent
+      -- ^ @OFFSET_UNIT_PERCENT@
+    | PLUOffsetUnitPixel
+      -- ^ @OFFSET_UNIT_PIXEL@
+    | PLUOffsetUnitPixelFromCenter
+      -- ^ @OFFSET_UNIT_PIXEL_FROM_CENTER@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AccountActiveAdsLimitTier
+instance Hashable PositionLeftUnit
 
-instance FromText AccountActiveAdsLimitTier where
+instance FromText PositionLeftUnit where
     fromText = \case
-        "ACTIVE_ADS_TIER_100K" -> Just AAALTActiveAdsTier100K
-        "ACTIVE_ADS_TIER_200K" -> Just AAALTActiveAdsTier200K
-        "ACTIVE_ADS_TIER_300K" -> Just AAALTActiveAdsTier300K
-        "ACTIVE_ADS_TIER_40K" -> Just AAALTActiveAdsTier40K
-        "ACTIVE_ADS_TIER_75K" -> Just AAALTActiveAdsTier75K
+        "OFFSET_UNIT_PERCENT" -> Just PLUOffsetUnitPercent
+        "OFFSET_UNIT_PIXEL" -> Just PLUOffsetUnitPixel
+        "OFFSET_UNIT_PIXEL_FROM_CENTER" -> Just PLUOffsetUnitPixelFromCenter
         _ -> Nothing
 
-instance ToText AccountActiveAdsLimitTier where
+instance ToText PositionLeftUnit where
     toText = \case
-        AAALTActiveAdsTier100K -> "ACTIVE_ADS_TIER_100K"
-        AAALTActiveAdsTier200K -> "ACTIVE_ADS_TIER_200K"
-        AAALTActiveAdsTier300K -> "ACTIVE_ADS_TIER_300K"
-        AAALTActiveAdsTier40K -> "ACTIVE_ADS_TIER_40K"
-        AAALTActiveAdsTier75K -> "ACTIVE_ADS_TIER_75K"
+        PLUOffsetUnitPercent -> "OFFSET_UNIT_PERCENT"
+        PLUOffsetUnitPixel -> "OFFSET_UNIT_PIXEL"
+        PLUOffsetUnitPixelFromCenter -> "OFFSET_UNIT_PIXEL_FROM_CENTER"
 
-instance FromJSON AccountActiveAdsLimitTier where
-    parseJSON = parseJSONText "AccountActiveAdsLimitTier"
+instance FromJSON PositionLeftUnit where
+    parseJSON = parseJSONText "PositionLeftUnit"
 
-instance ToJSON AccountActiveAdsLimitTier where
+instance ToJSON PositionLeftUnit where
+    toJSON = toJSONText
+
+-- | Select only placements with this payment source.
+data PaymentSource
+    = PSPlacementAgencyPaid
+      -- ^ @PLACEMENT_AGENCY_PAID@
+    | PSPlacementPublisherPaid
+      -- ^ @PLACEMENT_PUBLISHER_PAID@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable PaymentSource
+
+instance FromText PaymentSource where
+    fromText = \case
+        "PLACEMENT_AGENCY_PAID" -> Just PSPlacementAgencyPaid
+        "PLACEMENT_PUBLISHER_PAID" -> Just PSPlacementPublisherPaid
+        _ -> Nothing
+
+instance ToText PaymentSource where
+    toText = \case
+        PSPlacementAgencyPaid -> "PLACEMENT_AGENCY_PAID"
+        PSPlacementPublisherPaid -> "PLACEMENT_PUBLISHER_PAID"
+
+instance FromJSON PaymentSource where
+    parseJSON = parseJSONText "PaymentSource"
+
+instance ToJSON PaymentSource where
     toJSON = toJSONText
 
 -- | Type of creative rotation. Can be used to specify whether to use
@@ -4074,38 +4111,79 @@ instance FromJSON CreativeRotationType where
 instance ToJSON CreativeRotationType where
     toJSON = toJSONText
 
--- | Select only event tags with the specified event tag types. Event tag
--- types can be used to specify whether to use a third-party pixel, a
--- third-party JavaScript URL, or a third-party click-through URL for
--- either impression or click tracking.
-data DfareportingEventTagsListEventTagTypes
-    = DETLETTClickThroughEventTag
-      -- ^ @CLICK_THROUGH_EVENT_TAG@
-    | DETLETTImpressionImageEventTag
-      -- ^ @IMPRESSION_IMAGE_EVENT_TAG@
-    | DETLETTImpressionJavascriptEventTag
-      -- ^ @IMPRESSION_JAVASCRIPT_EVENT_TAG@
+-- | Possible alignments for an asset. This is a read-only field. Applicable
+-- to the following creative types: RICH_MEDIA_MULTI_FLOATING.
+data Alignment
+    = AlignmentBottom
+      -- ^ @ALIGNMENT_BOTTOM@
+    | AlignmentLeft
+      -- ^ @ALIGNMENT_LEFT@
+    | AlignmentRight
+      -- ^ @ALIGNMENT_RIGHT@
+    | AlignmentTop
+      -- ^ @ALIGNMENT_TOP@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DfareportingEventTagsListEventTagTypes
+instance Hashable Alignment
 
-instance FromText DfareportingEventTagsListEventTagTypes where
+instance FromText Alignment where
     fromText = \case
-        "CLICK_THROUGH_EVENT_TAG" -> Just DETLETTClickThroughEventTag
-        "IMPRESSION_IMAGE_EVENT_TAG" -> Just DETLETTImpressionImageEventTag
-        "IMPRESSION_JAVASCRIPT_EVENT_TAG" -> Just DETLETTImpressionJavascriptEventTag
+        "ALIGNMENT_BOTTOM" -> Just AlignmentBottom
+        "ALIGNMENT_LEFT" -> Just AlignmentLeft
+        "ALIGNMENT_RIGHT" -> Just AlignmentRight
+        "ALIGNMENT_TOP" -> Just AlignmentTop
         _ -> Nothing
 
-instance ToText DfareportingEventTagsListEventTagTypes where
+instance ToText Alignment where
     toText = \case
-        DETLETTClickThroughEventTag -> "CLICK_THROUGH_EVENT_TAG"
-        DETLETTImpressionImageEventTag -> "IMPRESSION_IMAGE_EVENT_TAG"
-        DETLETTImpressionJavascriptEventTag -> "IMPRESSION_JAVASCRIPT_EVENT_TAG"
+        AlignmentBottom -> "ALIGNMENT_BOTTOM"
+        AlignmentLeft -> "ALIGNMENT_LEFT"
+        AlignmentRight -> "ALIGNMENT_RIGHT"
+        AlignmentTop -> "ALIGNMENT_TOP"
 
-instance FromJSON DfareportingEventTagsListEventTagTypes where
-    parseJSON = parseJSONText "DfareportingEventTagsListEventTagTypes"
+instance FromJSON Alignment where
+    parseJSON = parseJSONText "Alignment"
 
-instance ToJSON DfareportingEventTagsListEventTagTypes where
+instance ToJSON Alignment where
+    toJSON = toJSONText
+
+-- | Product from which this remarketing list was originated.
+data ListSource
+    = LSRemarketingListSourceDBm
+      -- ^ @REMARKETING_LIST_SOURCE_DBM@
+    | LSRemarketingListSourceDfa
+      -- ^ @REMARKETING_LIST_SOURCE_DFA@
+    | LSRemarketingListSourceDmp
+      -- ^ @REMARKETING_LIST_SOURCE_DMP@
+    | LSRemarketingListSourceGa
+      -- ^ @REMARKETING_LIST_SOURCE_GA@
+    | LSRemarketingListSourceOther
+      -- ^ @REMARKETING_LIST_SOURCE_OTHER@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ListSource
+
+instance FromText ListSource where
+    fromText = \case
+        "REMARKETING_LIST_SOURCE_DBM" -> Just LSRemarketingListSourceDBm
+        "REMARKETING_LIST_SOURCE_DFA" -> Just LSRemarketingListSourceDfa
+        "REMARKETING_LIST_SOURCE_DMP" -> Just LSRemarketingListSourceDmp
+        "REMARKETING_LIST_SOURCE_GA" -> Just LSRemarketingListSourceGa
+        "REMARKETING_LIST_SOURCE_OTHER" -> Just LSRemarketingListSourceOther
+        _ -> Nothing
+
+instance ToText ListSource where
+    toText = \case
+        LSRemarketingListSourceDBm -> "REMARKETING_LIST_SOURCE_DBM"
+        LSRemarketingListSourceDfa -> "REMARKETING_LIST_SOURCE_DFA"
+        LSRemarketingListSourceDmp -> "REMARKETING_LIST_SOURCE_DMP"
+        LSRemarketingListSourceGa -> "REMARKETING_LIST_SOURCE_GA"
+        LSRemarketingListSourceOther -> "REMARKETING_LIST_SOURCE_OTHER"
+
+instance FromJSON ListSource where
+    parseJSON = parseJSONText "ListSource"
+
+instance ToJSON ListSource where
     toJSON = toJSONText
 
 -- | List population term type determines the applicable fields in this
@@ -4144,31 +4222,84 @@ instance FromJSON ListPopulationTermType where
 instance ToJSON ListPopulationTermType where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
-data DfareportingInventoryItemsListSortOrder
-    = DIILSOAscending
-      -- ^ @ASCENDING@
-    | DIILSODescending
-      -- ^ @DESCENDING@
+data DaysOfWeekItem
+    = Friday
+      -- ^ @FRIDAY@
+    | Monday
+      -- ^ @MONDAY@
+    | Saturday
+      -- ^ @SATURDAY@
+    | Sunday
+      -- ^ @SUNDAY@
+    | Thursday
+      -- ^ @THURSDAY@
+    | Tuesday
+      -- ^ @TUESDAY@
+    | Wednesday
+      -- ^ @WEDNESDAY@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DfareportingInventoryItemsListSortOrder
+instance Hashable DaysOfWeekItem
 
-instance FromText DfareportingInventoryItemsListSortOrder where
+instance FromText DaysOfWeekItem where
     fromText = \case
-        "ASCENDING" -> Just DIILSOAscending
-        "DESCENDING" -> Just DIILSODescending
+        "FRIDAY" -> Just Friday
+        "MONDAY" -> Just Monday
+        "SATURDAY" -> Just Saturday
+        "SUNDAY" -> Just Sunday
+        "THURSDAY" -> Just Thursday
+        "TUESDAY" -> Just Tuesday
+        "WEDNESDAY" -> Just Wednesday
         _ -> Nothing
 
-instance ToText DfareportingInventoryItemsListSortOrder where
+instance ToText DaysOfWeekItem where
     toText = \case
-        DIILSOAscending -> "ASCENDING"
-        DIILSODescending -> "DESCENDING"
+        Friday -> "FRIDAY"
+        Monday -> "MONDAY"
+        Saturday -> "SATURDAY"
+        Sunday -> "SUNDAY"
+        Thursday -> "THURSDAY"
+        Tuesday -> "TUESDAY"
+        Wednesday -> "WEDNESDAY"
 
-instance FromJSON DfareportingInventoryItemsListSortOrder where
-    parseJSON = parseJSONText "DfareportingInventoryItemsListSortOrder"
+instance FromJSON DaysOfWeekItem where
+    parseJSON = parseJSONText "DaysOfWeekItem"
 
-instance ToJSON DfareportingInventoryItemsListSortOrder where
+instance ToJSON DaysOfWeekItem where
+    toJSON = toJSONText
+
+-- | Group type of this inventory item if it represents a placement group. Is
+-- null otherwise. There are two type of placement groups:
+-- PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE is a simple group of inventory
+-- items that acts as a single pricing point for a group of tags.
+-- PLANNING_PLACEMENT_GROUP_TYPE_ROADBLOCK is a group of inventory items
+-- that not only acts as a single pricing point, but also assumes that all
+-- the tags in it will be served at the same time. A roadblock requires one
+-- of its assigned inventory items to be marked as primary.
+data GroupType
+    = PlanningPlacementGroupTypePackage
+      -- ^ @PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE@
+    | PlanningPlacementGroupTypeRoadblock
+      -- ^ @PLANNING_PLACEMENT_GROUP_TYPE_ROADBLOCK@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable GroupType
+
+instance FromText GroupType where
+    fromText = \case
+        "PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE" -> Just PlanningPlacementGroupTypePackage
+        "PLANNING_PLACEMENT_GROUP_TYPE_ROADBLOCK" -> Just PlanningPlacementGroupTypeRoadblock
+        _ -> Nothing
+
+instance ToText GroupType where
+    toText = \case
+        PlanningPlacementGroupTypePackage -> "PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE"
+        PlanningPlacementGroupTypeRoadblock -> "PLANNING_PLACEMENT_GROUP_TYPE_ROADBLOCK"
+
+instance FromJSON GroupType where
+    parseJSON = parseJSONText "GroupType"
+
+instance ToJSON GroupType where
     toJSON = toJSONText
 
 -- | The field by which to sort the list.
@@ -4255,50 +4386,6 @@ instance FromJSON DfareportingSitesListSortField where
 instance ToJSON DfareportingSitesListSortField where
     toJSON = toJSONText
 
--- | Select default ads with the specified compatibility. Applicable when
--- type is AD_SERVING_DEFAULT_AD. WEB and WEB_INTERSTITIAL refer to
--- rendering either on desktop or on mobile devices for regular or
--- interstitial ads, respectively. APP and APP_INTERSTITIAL are for
--- rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an
--- in-stream video ads developed with the VAST standard.
-data DfareportingAdsListCompatibility
-    = DALCApp
-      -- ^ @APP@
-    | DALCAppInterstitial
-      -- ^ @APP_INTERSTITIAL@
-    | DALCInStreamVideo
-      -- ^ @IN_STREAM_VIDEO@
-    | DALCWeb
-      -- ^ @WEB@
-    | DALCWebInterstitial
-      -- ^ @WEB_INTERSTITIAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DfareportingAdsListCompatibility
-
-instance FromText DfareportingAdsListCompatibility where
-    fromText = \case
-        "APP" -> Just DALCApp
-        "APP_INTERSTITIAL" -> Just DALCAppInterstitial
-        "IN_STREAM_VIDEO" -> Just DALCInStreamVideo
-        "WEB" -> Just DALCWeb
-        "WEB_INTERSTITIAL" -> Just DALCWebInterstitial
-        _ -> Nothing
-
-instance ToText DfareportingAdsListCompatibility where
-    toText = \case
-        DALCApp -> "APP"
-        DALCAppInterstitial -> "APP_INTERSTITIAL"
-        DALCInStreamVideo -> "IN_STREAM_VIDEO"
-        DALCWeb -> "WEB"
-        DALCWebInterstitial -> "WEB_INTERSTITIAL"
-
-instance FromJSON DfareportingAdsListCompatibility where
-    parseJSON = parseJSONText "DfareportingAdsListCompatibility"
-
-instance ToJSON DfareportingAdsListCompatibility where
-    toJSON = toJSONText
-
 -- | An optional sort order for the dimension column.
 data SortedDimensionSortOrder
     = SDSOAscending
@@ -4326,353 +4413,83 @@ instance FromJSON SortedDimensionSortOrder where
 instance ToJSON SortedDimensionSortOrder where
     toJSON = toJSONText
 
--- | Group type of this inventory item if it represents a placement group. Is
--- null otherwise. There are two type of placement groups:
--- PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE is a simple group of inventory
--- items that acts as a single pricing point for a group of tags.
--- PLANNING_PLACEMENT_GROUP_TYPE_ROADBLOCK is a group of inventory items
--- that not only acts as a single pricing point, but also assumes that all
--- the tags in it will be served at the same time. A roadblock requires one
--- of its assigned inventory items to be marked as primary.
-data PricingGroupType
-    = PlanningPlacementGroupTypePackage
-      -- ^ @PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE@
-    | PlanningPlacementGroupTypeRoadblock
-      -- ^ @PLANNING_PLACEMENT_GROUP_TYPE_ROADBLOCK@
+-- | The date range relative to the date of when the report is run.
+data RelativeDateRange
+    = Last24Months
+      -- ^ @LAST_24_MONTHS@
+    | Last30Days
+      -- ^ @LAST_30_DAYS@
+    | Last365Days
+      -- ^ @LAST_365_DAYS@
+    | Last7Days
+      -- ^ @LAST_7_DAYS@
+    | Last90Days
+      -- ^ @LAST_90_DAYS@
+    | MonthToDate
+      -- ^ @MONTH_TO_DATE@
+    | PreviousMonth
+      -- ^ @PREVIOUS_MONTH@
+    | PreviousQuarter
+      -- ^ @PREVIOUS_QUARTER@
+    | PreviousWeek
+      -- ^ @PREVIOUS_WEEK@
+    | PreviousYear
+      -- ^ @PREVIOUS_YEAR@
+    | QuarterToDate
+      -- ^ @QUARTER_TO_DATE@
+    | Today
+      -- ^ @TODAY@
+    | WeekToDate
+      -- ^ @WEEK_TO_DATE@
+    | YearToDate
+      -- ^ @YEAR_TO_DATE@
+    | Yesterday
+      -- ^ @YESTERDAY@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable PricingGroupType
+instance Hashable RelativeDateRange
 
-instance FromText PricingGroupType where
+instance FromText RelativeDateRange where
     fromText = \case
-        "PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE" -> Just PlanningPlacementGroupTypePackage
-        "PLANNING_PLACEMENT_GROUP_TYPE_ROADBLOCK" -> Just PlanningPlacementGroupTypeRoadblock
+        "LAST_24_MONTHS" -> Just Last24Months
+        "LAST_30_DAYS" -> Just Last30Days
+        "LAST_365_DAYS" -> Just Last365Days
+        "LAST_7_DAYS" -> Just Last7Days
+        "LAST_90_DAYS" -> Just Last90Days
+        "MONTH_TO_DATE" -> Just MonthToDate
+        "PREVIOUS_MONTH" -> Just PreviousMonth
+        "PREVIOUS_QUARTER" -> Just PreviousQuarter
+        "PREVIOUS_WEEK" -> Just PreviousWeek
+        "PREVIOUS_YEAR" -> Just PreviousYear
+        "QUARTER_TO_DATE" -> Just QuarterToDate
+        "TODAY" -> Just Today
+        "WEEK_TO_DATE" -> Just WeekToDate
+        "YEAR_TO_DATE" -> Just YearToDate
+        "YESTERDAY" -> Just Yesterday
         _ -> Nothing
 
-instance ToText PricingGroupType where
+instance ToText RelativeDateRange where
     toText = \case
-        PlanningPlacementGroupTypePackage -> "PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE"
-        PlanningPlacementGroupTypeRoadblock -> "PLANNING_PLACEMENT_GROUP_TYPE_ROADBLOCK"
+        Last24Months -> "LAST_24_MONTHS"
+        Last30Days -> "LAST_30_DAYS"
+        Last365Days -> "LAST_365_DAYS"
+        Last7Days -> "LAST_7_DAYS"
+        Last90Days -> "LAST_90_DAYS"
+        MonthToDate -> "MONTH_TO_DATE"
+        PreviousMonth -> "PREVIOUS_MONTH"
+        PreviousQuarter -> "PREVIOUS_QUARTER"
+        PreviousWeek -> "PREVIOUS_WEEK"
+        PreviousYear -> "PREVIOUS_YEAR"
+        QuarterToDate -> "QUARTER_TO_DATE"
+        Today -> "TODAY"
+        WeekToDate -> "WEEK_TO_DATE"
+        YearToDate -> "YEAR_TO_DATE"
+        Yesterday -> "YESTERDAY"
 
-instance FromJSON PricingGroupType where
-    parseJSON = parseJSONText "PricingGroupType"
+instance FromJSON RelativeDateRange where
+    parseJSON = parseJSONText "RelativeDateRange"
 
-instance ToJSON PricingGroupType where
-    toJSON = toJSONText
-
-data CreativeAssetMetadataDetectedFeatures
-    = CAMDFApplicationCache
-      -- ^ @APPLICATION_CACHE@
-    | CAMDFAudio
-      -- ^ @AUDIO@
-    | CAMDFCanvas
-      -- ^ @CANVAS@
-    | CAMDFCanvasText
-      -- ^ @CANVAS_TEXT@
-    | CAMDFCssAnimations
-      -- ^ @CSS_ANIMATIONS@
-    | CAMDFCssBackgRoundSize
-      -- ^ @CSS_BACKGROUND_SIZE@
-    | CAMDFCssBOrderImage
-      -- ^ @CSS_BORDER_IMAGE@
-    | CAMDFCssBOrderRadius
-      -- ^ @CSS_BORDER_RADIUS@
-    | CAMDFCssBoxShadow
-      -- ^ @CSS_BOX_SHADOW@
-    | CAMDFCssColumns
-      -- ^ @CSS_COLUMNS@
-    | CAMDFCssFlexBox
-      -- ^ @CSS_FLEX_BOX@
-    | CAMDFCssFontFace
-      -- ^ @CSS_FONT_FACE@
-    | CAMDFCssGeneratedContent
-      -- ^ @CSS_GENERATED_CONTENT@
-    | CAMDFCssGradients
-      -- ^ @CSS_GRADIENTS@
-    | CAMDFCssHsla
-      -- ^ @CSS_HSLA@
-    | CAMDFCssMultipleBgs
-      -- ^ @CSS_MULTIPLE_BGS@
-    | CAMDFCssOpacity
-      -- ^ @CSS_OPACITY@
-    | CAMDFCssReflections
-      -- ^ @CSS_REFLECTIONS@
-    | CAMDFCssRgba
-      -- ^ @CSS_RGBA@
-    | CAMDFCssTextShadow
-      -- ^ @CSS_TEXT_SHADOW@
-    | CAMDFCssTransforms
-      -- ^ @CSS_TRANSFORMS@
-    | CAMDFCssTRANSFORMS3D
-      -- ^ @CSS_TRANSFORMS3D@
-    | CAMDFCssTransitions
-      -- ^ @CSS_TRANSITIONS@
-    | CAMDFDragAndDrop
-      -- ^ @DRAG_AND_DROP@
-    | CAMDFGeoLocation
-      -- ^ @GEO_LOCATION@
-    | CAMDFHashChange
-      -- ^ @HASH_CHANGE@
-    | CAMDFHistory
-      -- ^ @HISTORY@
-    | CAMDFIndexedDB
-      -- ^ @INDEXED_DB@
-    | CAMDFInlineSvg
-      -- ^ @INLINE_SVG@
-    | CAMDFInputAttrAutocomplete
-      -- ^ @INPUT_ATTR_AUTOCOMPLETE@
-    | CAMDFInputAttrAutofocus
-      -- ^ @INPUT_ATTR_AUTOFOCUS@
-    | CAMDFInputAttrList
-      -- ^ @INPUT_ATTR_LIST@
-    | CAMDFInputAttrMax
-      -- ^ @INPUT_ATTR_MAX@
-    | CAMDFInputAttrMin
-      -- ^ @INPUT_ATTR_MIN@
-    | CAMDFInputAttrMultiple
-      -- ^ @INPUT_ATTR_MULTIPLE@
-    | CAMDFInputAttrPattern
-      -- ^ @INPUT_ATTR_PATTERN@
-    | CAMDFInputAttrPlaceholder
-      -- ^ @INPUT_ATTR_PLACEHOLDER@
-    | CAMDFInputAttrRequired
-      -- ^ @INPUT_ATTR_REQUIRED@
-    | CAMDFInputAttrStep
-      -- ^ @INPUT_ATTR_STEP@
-    | CAMDFInputTypeColor
-      -- ^ @INPUT_TYPE_COLOR@
-    | CAMDFInputTypeDate
-      -- ^ @INPUT_TYPE_DATE@
-    | CAMDFInputTypeDatetime
-      -- ^ @INPUT_TYPE_DATETIME@
-    | CAMDFInputTypeDatetimeLocal
-      -- ^ @INPUT_TYPE_DATETIME_LOCAL@
-    | CAMDFInputTypeEmail
-      -- ^ @INPUT_TYPE_EMAIL@
-    | CAMDFInputTypeMonth
-      -- ^ @INPUT_TYPE_MONTH@
-    | CAMDFInputTypeNumber
-      -- ^ @INPUT_TYPE_NUMBER@
-    | CAMDFInputTypeRange
-      -- ^ @INPUT_TYPE_RANGE@
-    | CAMDFInputTypeSearch
-      -- ^ @INPUT_TYPE_SEARCH@
-    | CAMDFInputTypeTel
-      -- ^ @INPUT_TYPE_TEL@
-    | CAMDFInputTypeTime
-      -- ^ @INPUT_TYPE_TIME@
-    | CAMDFInputTypeURL
-      -- ^ @INPUT_TYPE_URL@
-    | CAMDFInputTypeWeek
-      -- ^ @INPUT_TYPE_WEEK@
-    | CAMDFLocalStorage
-      -- ^ @LOCAL_STORAGE@
-    | CAMDFPostMessage
-      -- ^ @POST_MESSAGE@
-    | CAMDFSessionStorage
-      -- ^ @SESSION_STORAGE@
-    | CAMDFSmil
-      -- ^ @SMIL@
-    | CAMDFSvgClipPaths
-      -- ^ @SVG_CLIP_PATHS@
-    | CAMDFSvgFeImage
-      -- ^ @SVG_FE_IMAGE@
-    | CAMDFSvgFilters
-      -- ^ @SVG_FILTERS@
-    | CAMDFSvgHref
-      -- ^ @SVG_HREF@
-    | CAMDFTouch
-      -- ^ @TOUCH@
-    | CAMDFVideo
-      -- ^ @VIDEO@
-    | CAMDFWebgl
-      -- ^ @WEBGL@
-    | CAMDFWebSockets
-      -- ^ @WEB_SOCKETS@
-    | CAMDFWebSQLDatabase
-      -- ^ @WEB_SQL_DATABASE@
-    | CAMDFWebWorkers
-      -- ^ @WEB_WORKERS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CreativeAssetMetadataDetectedFeatures
-
-instance FromText CreativeAssetMetadataDetectedFeatures where
-    fromText = \case
-        "APPLICATION_CACHE" -> Just CAMDFApplicationCache
-        "AUDIO" -> Just CAMDFAudio
-        "CANVAS" -> Just CAMDFCanvas
-        "CANVAS_TEXT" -> Just CAMDFCanvasText
-        "CSS_ANIMATIONS" -> Just CAMDFCssAnimations
-        "CSS_BACKGROUND_SIZE" -> Just CAMDFCssBackgRoundSize
-        "CSS_BORDER_IMAGE" -> Just CAMDFCssBOrderImage
-        "CSS_BORDER_RADIUS" -> Just CAMDFCssBOrderRadius
-        "CSS_BOX_SHADOW" -> Just CAMDFCssBoxShadow
-        "CSS_COLUMNS" -> Just CAMDFCssColumns
-        "CSS_FLEX_BOX" -> Just CAMDFCssFlexBox
-        "CSS_FONT_FACE" -> Just CAMDFCssFontFace
-        "CSS_GENERATED_CONTENT" -> Just CAMDFCssGeneratedContent
-        "CSS_GRADIENTS" -> Just CAMDFCssGradients
-        "CSS_HSLA" -> Just CAMDFCssHsla
-        "CSS_MULTIPLE_BGS" -> Just CAMDFCssMultipleBgs
-        "CSS_OPACITY" -> Just CAMDFCssOpacity
-        "CSS_REFLECTIONS" -> Just CAMDFCssReflections
-        "CSS_RGBA" -> Just CAMDFCssRgba
-        "CSS_TEXT_SHADOW" -> Just CAMDFCssTextShadow
-        "CSS_TRANSFORMS" -> Just CAMDFCssTransforms
-        "CSS_TRANSFORMS3D" -> Just CAMDFCssTRANSFORMS3D
-        "CSS_TRANSITIONS" -> Just CAMDFCssTransitions
-        "DRAG_AND_DROP" -> Just CAMDFDragAndDrop
-        "GEO_LOCATION" -> Just CAMDFGeoLocation
-        "HASH_CHANGE" -> Just CAMDFHashChange
-        "HISTORY" -> Just CAMDFHistory
-        "INDEXED_DB" -> Just CAMDFIndexedDB
-        "INLINE_SVG" -> Just CAMDFInlineSvg
-        "INPUT_ATTR_AUTOCOMPLETE" -> Just CAMDFInputAttrAutocomplete
-        "INPUT_ATTR_AUTOFOCUS" -> Just CAMDFInputAttrAutofocus
-        "INPUT_ATTR_LIST" -> Just CAMDFInputAttrList
-        "INPUT_ATTR_MAX" -> Just CAMDFInputAttrMax
-        "INPUT_ATTR_MIN" -> Just CAMDFInputAttrMin
-        "INPUT_ATTR_MULTIPLE" -> Just CAMDFInputAttrMultiple
-        "INPUT_ATTR_PATTERN" -> Just CAMDFInputAttrPattern
-        "INPUT_ATTR_PLACEHOLDER" -> Just CAMDFInputAttrPlaceholder
-        "INPUT_ATTR_REQUIRED" -> Just CAMDFInputAttrRequired
-        "INPUT_ATTR_STEP" -> Just CAMDFInputAttrStep
-        "INPUT_TYPE_COLOR" -> Just CAMDFInputTypeColor
-        "INPUT_TYPE_DATE" -> Just CAMDFInputTypeDate
-        "INPUT_TYPE_DATETIME" -> Just CAMDFInputTypeDatetime
-        "INPUT_TYPE_DATETIME_LOCAL" -> Just CAMDFInputTypeDatetimeLocal
-        "INPUT_TYPE_EMAIL" -> Just CAMDFInputTypeEmail
-        "INPUT_TYPE_MONTH" -> Just CAMDFInputTypeMonth
-        "INPUT_TYPE_NUMBER" -> Just CAMDFInputTypeNumber
-        "INPUT_TYPE_RANGE" -> Just CAMDFInputTypeRange
-        "INPUT_TYPE_SEARCH" -> Just CAMDFInputTypeSearch
-        "INPUT_TYPE_TEL" -> Just CAMDFInputTypeTel
-        "INPUT_TYPE_TIME" -> Just CAMDFInputTypeTime
-        "INPUT_TYPE_URL" -> Just CAMDFInputTypeURL
-        "INPUT_TYPE_WEEK" -> Just CAMDFInputTypeWeek
-        "LOCAL_STORAGE" -> Just CAMDFLocalStorage
-        "POST_MESSAGE" -> Just CAMDFPostMessage
-        "SESSION_STORAGE" -> Just CAMDFSessionStorage
-        "SMIL" -> Just CAMDFSmil
-        "SVG_CLIP_PATHS" -> Just CAMDFSvgClipPaths
-        "SVG_FE_IMAGE" -> Just CAMDFSvgFeImage
-        "SVG_FILTERS" -> Just CAMDFSvgFilters
-        "SVG_HREF" -> Just CAMDFSvgHref
-        "TOUCH" -> Just CAMDFTouch
-        "VIDEO" -> Just CAMDFVideo
-        "WEBGL" -> Just CAMDFWebgl
-        "WEB_SOCKETS" -> Just CAMDFWebSockets
-        "WEB_SQL_DATABASE" -> Just CAMDFWebSQLDatabase
-        "WEB_WORKERS" -> Just CAMDFWebWorkers
-        _ -> Nothing
-
-instance ToText CreativeAssetMetadataDetectedFeatures where
-    toText = \case
-        CAMDFApplicationCache -> "APPLICATION_CACHE"
-        CAMDFAudio -> "AUDIO"
-        CAMDFCanvas -> "CANVAS"
-        CAMDFCanvasText -> "CANVAS_TEXT"
-        CAMDFCssAnimations -> "CSS_ANIMATIONS"
-        CAMDFCssBackgRoundSize -> "CSS_BACKGROUND_SIZE"
-        CAMDFCssBOrderImage -> "CSS_BORDER_IMAGE"
-        CAMDFCssBOrderRadius -> "CSS_BORDER_RADIUS"
-        CAMDFCssBoxShadow -> "CSS_BOX_SHADOW"
-        CAMDFCssColumns -> "CSS_COLUMNS"
-        CAMDFCssFlexBox -> "CSS_FLEX_BOX"
-        CAMDFCssFontFace -> "CSS_FONT_FACE"
-        CAMDFCssGeneratedContent -> "CSS_GENERATED_CONTENT"
-        CAMDFCssGradients -> "CSS_GRADIENTS"
-        CAMDFCssHsla -> "CSS_HSLA"
-        CAMDFCssMultipleBgs -> "CSS_MULTIPLE_BGS"
-        CAMDFCssOpacity -> "CSS_OPACITY"
-        CAMDFCssReflections -> "CSS_REFLECTIONS"
-        CAMDFCssRgba -> "CSS_RGBA"
-        CAMDFCssTextShadow -> "CSS_TEXT_SHADOW"
-        CAMDFCssTransforms -> "CSS_TRANSFORMS"
-        CAMDFCssTRANSFORMS3D -> "CSS_TRANSFORMS3D"
-        CAMDFCssTransitions -> "CSS_TRANSITIONS"
-        CAMDFDragAndDrop -> "DRAG_AND_DROP"
-        CAMDFGeoLocation -> "GEO_LOCATION"
-        CAMDFHashChange -> "HASH_CHANGE"
-        CAMDFHistory -> "HISTORY"
-        CAMDFIndexedDB -> "INDEXED_DB"
-        CAMDFInlineSvg -> "INLINE_SVG"
-        CAMDFInputAttrAutocomplete -> "INPUT_ATTR_AUTOCOMPLETE"
-        CAMDFInputAttrAutofocus -> "INPUT_ATTR_AUTOFOCUS"
-        CAMDFInputAttrList -> "INPUT_ATTR_LIST"
-        CAMDFInputAttrMax -> "INPUT_ATTR_MAX"
-        CAMDFInputAttrMin -> "INPUT_ATTR_MIN"
-        CAMDFInputAttrMultiple -> "INPUT_ATTR_MULTIPLE"
-        CAMDFInputAttrPattern -> "INPUT_ATTR_PATTERN"
-        CAMDFInputAttrPlaceholder -> "INPUT_ATTR_PLACEHOLDER"
-        CAMDFInputAttrRequired -> "INPUT_ATTR_REQUIRED"
-        CAMDFInputAttrStep -> "INPUT_ATTR_STEP"
-        CAMDFInputTypeColor -> "INPUT_TYPE_COLOR"
-        CAMDFInputTypeDate -> "INPUT_TYPE_DATE"
-        CAMDFInputTypeDatetime -> "INPUT_TYPE_DATETIME"
-        CAMDFInputTypeDatetimeLocal -> "INPUT_TYPE_DATETIME_LOCAL"
-        CAMDFInputTypeEmail -> "INPUT_TYPE_EMAIL"
-        CAMDFInputTypeMonth -> "INPUT_TYPE_MONTH"
-        CAMDFInputTypeNumber -> "INPUT_TYPE_NUMBER"
-        CAMDFInputTypeRange -> "INPUT_TYPE_RANGE"
-        CAMDFInputTypeSearch -> "INPUT_TYPE_SEARCH"
-        CAMDFInputTypeTel -> "INPUT_TYPE_TEL"
-        CAMDFInputTypeTime -> "INPUT_TYPE_TIME"
-        CAMDFInputTypeURL -> "INPUT_TYPE_URL"
-        CAMDFInputTypeWeek -> "INPUT_TYPE_WEEK"
-        CAMDFLocalStorage -> "LOCAL_STORAGE"
-        CAMDFPostMessage -> "POST_MESSAGE"
-        CAMDFSessionStorage -> "SESSION_STORAGE"
-        CAMDFSmil -> "SMIL"
-        CAMDFSvgClipPaths -> "SVG_CLIP_PATHS"
-        CAMDFSvgFeImage -> "SVG_FE_IMAGE"
-        CAMDFSvgFilters -> "SVG_FILTERS"
-        CAMDFSvgHref -> "SVG_HREF"
-        CAMDFTouch -> "TOUCH"
-        CAMDFVideo -> "VIDEO"
-        CAMDFWebgl -> "WEBGL"
-        CAMDFWebSockets -> "WEB_SOCKETS"
-        CAMDFWebSQLDatabase -> "WEB_SQL_DATABASE"
-        CAMDFWebWorkers -> "WEB_WORKERS"
-
-instance FromJSON CreativeAssetMetadataDetectedFeatures where
-    parseJSON = parseJSONText "CreativeAssetMetadataDetectedFeatures"
-
-instance ToJSON CreativeAssetMetadataDetectedFeatures where
-    toJSON = toJSONText
-
--- | Offset top unit for an asset. This is a read-only field if the asset
--- displayType is ASSET_DISPLAY_TYPE_OVERLAY. Applicable to the following
--- creative types: all RICH_MEDIA.
-data CreativeAssetPositionTopUnit
-    = CAPTUOffsetUnitPercent
-      -- ^ @OFFSET_UNIT_PERCENT@
-    | CAPTUOffsetUnitPixel
-      -- ^ @OFFSET_UNIT_PIXEL@
-    | CAPTUOffsetUnitPixelFromCenter
-      -- ^ @OFFSET_UNIT_PIXEL_FROM_CENTER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CreativeAssetPositionTopUnit
-
-instance FromText CreativeAssetPositionTopUnit where
-    fromText = \case
-        "OFFSET_UNIT_PERCENT" -> Just CAPTUOffsetUnitPercent
-        "OFFSET_UNIT_PIXEL" -> Just CAPTUOffsetUnitPixel
-        "OFFSET_UNIT_PIXEL_FROM_CENTER" -> Just CAPTUOffsetUnitPixelFromCenter
-        _ -> Nothing
-
-instance ToText CreativeAssetPositionTopUnit where
-    toText = \case
-        CAPTUOffsetUnitPercent -> "OFFSET_UNIT_PERCENT"
-        CAPTUOffsetUnitPixel -> "OFFSET_UNIT_PIXEL"
-        CAPTUOffsetUnitPixelFromCenter -> "OFFSET_UNIT_PIXEL_FROM_CENTER"
-
-instance FromJSON CreativeAssetPositionTopUnit where
-    parseJSON = parseJSONText "CreativeAssetPositionTopUnit"
-
-instance ToJSON CreativeAssetPositionTopUnit where
+instance ToJSON RelativeDateRange where
     toJSON = toJSONText
 
 -- | Field by which to sort the list.
@@ -4700,6 +4517,66 @@ instance FromJSON DfareportingCampaignsListSortField where
     parseJSON = parseJSONText "DfareportingCampaignsListSortField"
 
 instance ToJSON DfareportingCampaignsListSortField where
+    toJSON = toJSONText
+
+-- | Placement cap cost option.
+data CapCostOption
+    = CapCostCumulative
+      -- ^ @CAP_COST_CUMULATIVE@
+    | CapCostMonthly
+      -- ^ @CAP_COST_MONTHLY@
+    | CapCostNone
+      -- ^ @CAP_COST_NONE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CapCostOption
+
+instance FromText CapCostOption where
+    fromText = \case
+        "CAP_COST_CUMULATIVE" -> Just CapCostCumulative
+        "CAP_COST_MONTHLY" -> Just CapCostMonthly
+        "CAP_COST_NONE" -> Just CapCostNone
+        _ -> Nothing
+
+instance ToText CapCostOption where
+    toText = \case
+        CapCostCumulative -> "CAP_COST_CUMULATIVE"
+        CapCostMonthly -> "CAP_COST_MONTHLY"
+        CapCostNone -> "CAP_COST_NONE"
+
+instance FromJSON CapCostOption where
+    parseJSON = parseJSONText "CapCostOption"
+
+instance ToJSON CapCostOption where
+    toJSON = toJSONText
+
+-- | The scope that defines which results are returned, default is \'MINE\'.
+data Scope
+    = SAll
+      -- ^ @ALL@
+      -- All reports in account.
+    | SMine
+      -- ^ @MINE@
+      -- My reports.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Scope
+
+instance FromText Scope where
+    fromText = \case
+        "ALL" -> Just SAll
+        "MINE" -> Just SMine
+        _ -> Nothing
+
+instance ToText Scope where
+    toText = \case
+        SAll -> "ALL"
+        SMine -> "MINE"
+
+instance FromJSON Scope where
+    parseJSON = parseJSONText "Scope"
+
+instance ToJSON Scope where
     toJSON = toJSONText
 
 -- | The field by which to sort the list.
@@ -4736,121 +4613,6 @@ instance FromJSON DfareportingReportsListSortField where
 instance ToJSON DfareportingReportsListSortField where
     toJSON = toJSONText
 
--- | Select only ads with the specified creativeType.
-data DfareportingAdsListCreativeType
-    = DALCTBrandSafeDefaultInstreamVideo
-      -- ^ @BRAND_SAFE_DEFAULT_INSTREAM_VIDEO@
-    | DALCTCustomInpage
-      -- ^ @CUSTOM_INPAGE@
-    | DALCTCustomInterstitial
-      -- ^ @CUSTOM_INTERSTITIAL@
-    | DALCTEnhancedBanner
-      -- ^ @ENHANCED_BANNER@
-    | DALCTEnhancedImage
-      -- ^ @ENHANCED_IMAGE@
-    | DALCTFlashInpage
-      -- ^ @FLASH_INPAGE@
-    | DALCTHTML5Banner
-      -- ^ @HTML5_BANNER@
-    | DALCTImage
-      -- ^ @IMAGE@
-    | DALCTInstreamVideo
-      -- ^ @INSTREAM_VIDEO@
-    | DALCTInternalRedirect
-      -- ^ @INTERNAL_REDIRECT@
-    | DALCTInterstitialInternalRedirect
-      -- ^ @INTERSTITIAL_INTERNAL_REDIRECT@
-    | DALCTRedirect
-      -- ^ @REDIRECT@
-    | DALCTRichMediaExpanding
-      -- ^ @RICH_MEDIA_EXPANDING@
-    | DALCTRichMediaImExpand
-      -- ^ @RICH_MEDIA_IM_EXPAND@
-    | DALCTRichMediaInpage
-      -- ^ @RICH_MEDIA_INPAGE@
-    | DALCTRichMediaInpageFloating
-      -- ^ @RICH_MEDIA_INPAGE_FLOATING@
-    | DALCTRichMediaInterstitialFloat
-      -- ^ @RICH_MEDIA_INTERSTITIAL_FLOAT@
-    | DALCTRichMediaMobileInApp
-      -- ^ @RICH_MEDIA_MOBILE_IN_APP@
-    | DALCTRichMediaMultiFloating
-      -- ^ @RICH_MEDIA_MULTI_FLOATING@
-    | DALCTRichMediaPeelDown
-      -- ^ @RICH_MEDIA_PEEL_DOWN@
-    | DALCTTrackingText
-      -- ^ @TRACKING_TEXT@
-    | DALCTVastRedirect
-      -- ^ @VAST_REDIRECT@
-    | DALCTVpaidLinear
-      -- ^ @VPAID_LINEAR@
-    | DALCTVpaidNonLinear
-      -- ^ @VPAID_NON_LINEAR@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DfareportingAdsListCreativeType
-
-instance FromText DfareportingAdsListCreativeType where
-    fromText = \case
-        "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO" -> Just DALCTBrandSafeDefaultInstreamVideo
-        "CUSTOM_INPAGE" -> Just DALCTCustomInpage
-        "CUSTOM_INTERSTITIAL" -> Just DALCTCustomInterstitial
-        "ENHANCED_BANNER" -> Just DALCTEnhancedBanner
-        "ENHANCED_IMAGE" -> Just DALCTEnhancedImage
-        "FLASH_INPAGE" -> Just DALCTFlashInpage
-        "HTML5_BANNER" -> Just DALCTHTML5Banner
-        "IMAGE" -> Just DALCTImage
-        "INSTREAM_VIDEO" -> Just DALCTInstreamVideo
-        "INTERNAL_REDIRECT" -> Just DALCTInternalRedirect
-        "INTERSTITIAL_INTERNAL_REDIRECT" -> Just DALCTInterstitialInternalRedirect
-        "REDIRECT" -> Just DALCTRedirect
-        "RICH_MEDIA_EXPANDING" -> Just DALCTRichMediaExpanding
-        "RICH_MEDIA_IM_EXPAND" -> Just DALCTRichMediaImExpand
-        "RICH_MEDIA_INPAGE" -> Just DALCTRichMediaInpage
-        "RICH_MEDIA_INPAGE_FLOATING" -> Just DALCTRichMediaInpageFloating
-        "RICH_MEDIA_INTERSTITIAL_FLOAT" -> Just DALCTRichMediaInterstitialFloat
-        "RICH_MEDIA_MOBILE_IN_APP" -> Just DALCTRichMediaMobileInApp
-        "RICH_MEDIA_MULTI_FLOATING" -> Just DALCTRichMediaMultiFloating
-        "RICH_MEDIA_PEEL_DOWN" -> Just DALCTRichMediaPeelDown
-        "TRACKING_TEXT" -> Just DALCTTrackingText
-        "VAST_REDIRECT" -> Just DALCTVastRedirect
-        "VPAID_LINEAR" -> Just DALCTVpaidLinear
-        "VPAID_NON_LINEAR" -> Just DALCTVpaidNonLinear
-        _ -> Nothing
-
-instance ToText DfareportingAdsListCreativeType where
-    toText = \case
-        DALCTBrandSafeDefaultInstreamVideo -> "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO"
-        DALCTCustomInpage -> "CUSTOM_INPAGE"
-        DALCTCustomInterstitial -> "CUSTOM_INTERSTITIAL"
-        DALCTEnhancedBanner -> "ENHANCED_BANNER"
-        DALCTEnhancedImage -> "ENHANCED_IMAGE"
-        DALCTFlashInpage -> "FLASH_INPAGE"
-        DALCTHTML5Banner -> "HTML5_BANNER"
-        DALCTImage -> "IMAGE"
-        DALCTInstreamVideo -> "INSTREAM_VIDEO"
-        DALCTInternalRedirect -> "INTERNAL_REDIRECT"
-        DALCTInterstitialInternalRedirect -> "INTERSTITIAL_INTERNAL_REDIRECT"
-        DALCTRedirect -> "REDIRECT"
-        DALCTRichMediaExpanding -> "RICH_MEDIA_EXPANDING"
-        DALCTRichMediaImExpand -> "RICH_MEDIA_IM_EXPAND"
-        DALCTRichMediaInpage -> "RICH_MEDIA_INPAGE"
-        DALCTRichMediaInpageFloating -> "RICH_MEDIA_INPAGE_FLOATING"
-        DALCTRichMediaInterstitialFloat -> "RICH_MEDIA_INTERSTITIAL_FLOAT"
-        DALCTRichMediaMobileInApp -> "RICH_MEDIA_MOBILE_IN_APP"
-        DALCTRichMediaMultiFloating -> "RICH_MEDIA_MULTI_FLOATING"
-        DALCTRichMediaPeelDown -> "RICH_MEDIA_PEEL_DOWN"
-        DALCTTrackingText -> "TRACKING_TEXT"
-        DALCTVastRedirect -> "VAST_REDIRECT"
-        DALCTVpaidLinear -> "VPAID_LINEAR"
-        DALCTVpaidNonLinear -> "VPAID_NON_LINEAR"
-
-instance FromJSON DfareportingAdsListCreativeType where
-    parseJSON = parseJSONText "DfareportingAdsListCreativeType"
-
-instance ToJSON DfareportingAdsListCreativeType where
-    toJSON = toJSONText
-
 -- | Order of sorted results, default is ASCENDING.
 data DfareportingFloodlightActivityGroupsListSortOrder
     = DFAGLSOAscending
@@ -4878,8 +4640,8 @@ instance FromJSON DfareportingFloodlightActivityGroupsListSortOrder where
 instance ToJSON DfareportingFloodlightActivityGroupsListSortOrder where
     toJSON = toJSONText
 
--- | Type of the floodlight activity group. This is a required field that is
--- read-only after insertion.
+-- | Select only floodlight activities with the specified floodlight activity
+-- group type.
 data FloodlightActivityGroupType
     = FAGTCounter
       -- ^ @COUNTER@
@@ -4906,15 +4668,127 @@ instance FromJSON FloodlightActivityGroupType where
 instance ToJSON FloodlightActivityGroupType where
     toJSON = toJSONText
 
+-- | Type of the floodlight activity group. This is a required field that is
+-- read-only after insertion.
+data FloodlightActivityGroupType
+    = FCounter
+      -- ^ @COUNTER@
+    | FSale
+      -- ^ @SALE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable FloodlightActivityGroupType
+
+instance FromText FloodlightActivityGroupType where
+    fromText = \case
+        "COUNTER" -> Just FCounter
+        "SALE" -> Just FSale
+        _ -> Nothing
+
+instance ToText FloodlightActivityGroupType where
+    toText = \case
+        FCounter -> "COUNTER"
+        FSale -> "SALE"
+
+instance FromJSON FloodlightActivityGroupType where
+    parseJSON = parseJSONText "FloodlightActivityGroupType"
+
+instance ToJSON FloodlightActivityGroupType where
+    toJSON = toJSONText
+
+-- | Profile for this account. This is a read-only field that can be left
+-- blank.
+data AccountProfile
+    = APAccountProfileBasic
+      -- ^ @ACCOUNT_PROFILE_BASIC@
+    | APAccountProfileStandard
+      -- ^ @ACCOUNT_PROFILE_STANDARD@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable AccountProfile
+
+instance FromText AccountProfile where
+    fromText = \case
+        "ACCOUNT_PROFILE_BASIC" -> Just APAccountProfileBasic
+        "ACCOUNT_PROFILE_STANDARD" -> Just APAccountProfileStandard
+        _ -> Nothing
+
+instance ToText AccountProfile where
+    toText = \case
+        APAccountProfileBasic -> "ACCOUNT_PROFILE_BASIC"
+        APAccountProfileStandard -> "ACCOUNT_PROFILE_STANDARD"
+
+instance FromJSON AccountProfile where
+    parseJSON = parseJSONText "AccountProfile"
+
+instance ToJSON AccountProfile where
+    toJSON = toJSONText
+
+-- | Type of rich media asset. This is a read-only field. Applicable to the
+-- following creative types: all RICH_MEDIA.
+data DisplayType
+    = AssetDisplayTypeExpanding
+      -- ^ @ASSET_DISPLAY_TYPE_EXPANDING@
+    | AssetDisplayTypeFlashInFlash
+      -- ^ @ASSET_DISPLAY_TYPE_FLASH_IN_FLASH@
+    | AssetDisplayTypeFlashInFlashExpanding
+      -- ^ @ASSET_DISPLAY_TYPE_FLASH_IN_FLASH_EXPANDING@
+    | AssetDisplayTypeFloating
+      -- ^ @ASSET_DISPLAY_TYPE_FLOATING@
+    | AssetDisplayTypeInpage
+      -- ^ @ASSET_DISPLAY_TYPE_INPAGE@
+    | AssetDisplayTypeOverlay
+      -- ^ @ASSET_DISPLAY_TYPE_OVERLAY@
+    | AssetDisplayTypePeelDown
+      -- ^ @ASSET_DISPLAY_TYPE_PEEL_DOWN@
+    | AssetDisplayTypeVpaidLinear
+      -- ^ @ASSET_DISPLAY_TYPE_VPAID_LINEAR@
+    | AssetDisplayTypeVpaidNonLinear
+      -- ^ @ASSET_DISPLAY_TYPE_VPAID_NON_LINEAR@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable DisplayType
+
+instance FromText DisplayType where
+    fromText = \case
+        "ASSET_DISPLAY_TYPE_EXPANDING" -> Just AssetDisplayTypeExpanding
+        "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH" -> Just AssetDisplayTypeFlashInFlash
+        "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH_EXPANDING" -> Just AssetDisplayTypeFlashInFlashExpanding
+        "ASSET_DISPLAY_TYPE_FLOATING" -> Just AssetDisplayTypeFloating
+        "ASSET_DISPLAY_TYPE_INPAGE" -> Just AssetDisplayTypeInpage
+        "ASSET_DISPLAY_TYPE_OVERLAY" -> Just AssetDisplayTypeOverlay
+        "ASSET_DISPLAY_TYPE_PEEL_DOWN" -> Just AssetDisplayTypePeelDown
+        "ASSET_DISPLAY_TYPE_VPAID_LINEAR" -> Just AssetDisplayTypeVpaidLinear
+        "ASSET_DISPLAY_TYPE_VPAID_NON_LINEAR" -> Just AssetDisplayTypeVpaidNonLinear
+        _ -> Nothing
+
+instance ToText DisplayType where
+    toText = \case
+        AssetDisplayTypeExpanding -> "ASSET_DISPLAY_TYPE_EXPANDING"
+        AssetDisplayTypeFlashInFlash -> "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH"
+        AssetDisplayTypeFlashInFlashExpanding -> "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH_EXPANDING"
+        AssetDisplayTypeFloating -> "ASSET_DISPLAY_TYPE_FLOATING"
+        AssetDisplayTypeInpage -> "ASSET_DISPLAY_TYPE_INPAGE"
+        AssetDisplayTypeOverlay -> "ASSET_DISPLAY_TYPE_OVERLAY"
+        AssetDisplayTypePeelDown -> "ASSET_DISPLAY_TYPE_PEEL_DOWN"
+        AssetDisplayTypeVpaidLinear -> "ASSET_DISPLAY_TYPE_VPAID_LINEAR"
+        AssetDisplayTypeVpaidNonLinear -> "ASSET_DISPLAY_TYPE_VPAID_NON_LINEAR"
+
+instance FromJSON DisplayType where
+    parseJSON = parseJSONText "DisplayType"
+
+instance ToJSON DisplayType where
+    toJSON = toJSONText
+
 -- | Directory site contact type.
 data DirectorySiteContactType
-    = DSCTBilling
+    = Billing
       -- ^ @BILLING@
-    | DSCTOther
+    | Other
       -- ^ @OTHER@
-    | DSCTSales
+    | Sales
       -- ^ @SALES@
-    | DSCTTechnical
+    | Technical
       -- ^ @TECHNICAL@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -4922,18 +4796,18 @@ instance Hashable DirectorySiteContactType
 
 instance FromText DirectorySiteContactType where
     fromText = \case
-        "BILLING" -> Just DSCTBilling
-        "OTHER" -> Just DSCTOther
-        "SALES" -> Just DSCTSales
-        "TECHNICAL" -> Just DSCTTechnical
+        "BILLING" -> Just Billing
+        "OTHER" -> Just Other
+        "SALES" -> Just Sales
+        "TECHNICAL" -> Just Technical
         _ -> Nothing
 
 instance ToText DirectorySiteContactType where
     toText = \case
-        DSCTBilling -> "BILLING"
-        DSCTOther -> "OTHER"
-        DSCTSales -> "SALES"
-        DSCTTechnical -> "TECHNICAL"
+        Billing -> "BILLING"
+        Other -> "OTHER"
+        Sales -> "SALES"
+        Technical -> "TECHNICAL"
 
 instance FromJSON DirectorySiteContactType where
     parseJSON = parseJSONText "DirectorySiteContactType"
@@ -4993,6 +4867,42 @@ instance FromJSON DfareportingOrdersListSortField where
     parseJSON = parseJSONText "DfareportingOrdersListSortField"
 
 instance ToJSON DfareportingOrdersListSortField where
+    toJSON = toJSONText
+
+-- | Rich media child asset type. This is a read-only field. Applicable to
+-- the following creative types: all VPAID.
+data ChildAssetType
+    = ChildAssetTypeData
+      -- ^ @CHILD_ASSET_TYPE_DATA@
+    | ChildAssetTypeFlash
+      -- ^ @CHILD_ASSET_TYPE_FLASH@
+    | ChildAssetTypeImage
+      -- ^ @CHILD_ASSET_TYPE_IMAGE@
+    | ChildAssetTypeVideo
+      -- ^ @CHILD_ASSET_TYPE_VIDEO@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ChildAssetType
+
+instance FromText ChildAssetType where
+    fromText = \case
+        "CHILD_ASSET_TYPE_DATA" -> Just ChildAssetTypeData
+        "CHILD_ASSET_TYPE_FLASH" -> Just ChildAssetTypeFlash
+        "CHILD_ASSET_TYPE_IMAGE" -> Just ChildAssetTypeImage
+        "CHILD_ASSET_TYPE_VIDEO" -> Just ChildAssetTypeVideo
+        _ -> Nothing
+
+instance ToText ChildAssetType where
+    toText = \case
+        ChildAssetTypeData -> "CHILD_ASSET_TYPE_DATA"
+        ChildAssetTypeFlash -> "CHILD_ASSET_TYPE_FLASH"
+        ChildAssetTypeImage -> "CHILD_ASSET_TYPE_IMAGE"
+        ChildAssetTypeVideo -> "CHILD_ASSET_TYPE_VIDEO"
+
+instance FromJSON ChildAssetType where
+    parseJSON = parseJSONText "ChildAssetType"
+
+instance ToJSON ChildAssetType where
     toJSON = toJSONText
 
 -- | Order of sorted results, default is ASCENDING.
@@ -5065,34 +4975,6 @@ instance FromJSON PlacementStatus where
 instance ToJSON PlacementStatus where
     toJSON = toJSONText
 
--- | Site filter type for this event tag. If no type is specified then the
--- event tag will be applied to all sites.
-data EventTagSiteFilterType
-    = BlackList
-      -- ^ @BLACKLIST@
-    | WhiteList
-      -- ^ @WHITELIST@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable EventTagSiteFilterType
-
-instance FromText EventTagSiteFilterType where
-    fromText = \case
-        "BLACKLIST" -> Just BlackList
-        "WHITELIST" -> Just WhiteList
-        _ -> Nothing
-
-instance ToText EventTagSiteFilterType where
-    toText = \case
-        BlackList -> "BLACKLIST"
-        WhiteList -> "WHITELIST"
-
-instance FromJSON EventTagSiteFilterType where
-    parseJSON = parseJSONText "EventTagSiteFilterType"
-
-instance ToJSON EventTagSiteFilterType where
-    toJSON = toJSONText
-
 -- | Field by which to sort the list.
 data DfareportingAccountsListSortField
     = DFAID
@@ -5145,76 +5027,6 @@ instance FromJSON DfareportingProjectsListSortOrder where
     parseJSON = parseJSONText "DfareportingProjectsListSortOrder"
 
 instance ToJSON DfareportingProjectsListSortOrder where
-    toJSON = toJSONText
-
-data CreativeCompatibility
-    = CCApp
-      -- ^ @APP@
-    | CCAppInterstitial
-      -- ^ @APP_INTERSTITIAL@
-    | CCInStreamVideo
-      -- ^ @IN_STREAM_VIDEO@
-    | CCWeb
-      -- ^ @WEB@
-    | CCWebInterstitial
-      -- ^ @WEB_INTERSTITIAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CreativeCompatibility
-
-instance FromText CreativeCompatibility where
-    fromText = \case
-        "APP" -> Just CCApp
-        "APP_INTERSTITIAL" -> Just CCAppInterstitial
-        "IN_STREAM_VIDEO" -> Just CCInStreamVideo
-        "WEB" -> Just CCWeb
-        "WEB_INTERSTITIAL" -> Just CCWebInterstitial
-        _ -> Nothing
-
-instance ToText CreativeCompatibility where
-    toText = \case
-        CCApp -> "APP"
-        CCAppInterstitial -> "APP_INTERSTITIAL"
-        CCInStreamVideo -> "IN_STREAM_VIDEO"
-        CCWeb -> "WEB"
-        CCWebInterstitial -> "WEB_INTERSTITIAL"
-
-instance FromJSON CreativeCompatibility where
-    parseJSON = parseJSONText "CreativeCompatibility"
-
-instance ToJSON CreativeCompatibility where
-    toJSON = toJSONText
-
--- | Enum to define for \"MONTHLY\" scheduled reports whether reports should
--- be repeated on the same day of the month as \"startDate\" or the same
--- day of the week of the month. Example: If \'startDate\' is Monday, April
--- 2nd 2012 (2012-04-02), \"DAY_OF_MONTH\" would run subsequent reports on
--- the 2nd of every Month, and \"WEEK_OF_MONTH\" would run subsequent
--- reports on the first Monday of the month.
-data ReportScheduleRunsOnDayOfMonth
-    = DayOfMonth
-      -- ^ @DAY_OF_MONTH@
-    | WeekOfMonth
-      -- ^ @WEEK_OF_MONTH@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ReportScheduleRunsOnDayOfMonth
-
-instance FromText ReportScheduleRunsOnDayOfMonth where
-    fromText = \case
-        "DAY_OF_MONTH" -> Just DayOfMonth
-        "WEEK_OF_MONTH" -> Just WeekOfMonth
-        _ -> Nothing
-
-instance ToText ReportScheduleRunsOnDayOfMonth where
-    toText = \case
-        DayOfMonth -> "DAY_OF_MONTH"
-        WeekOfMonth -> "WEEK_OF_MONTH"
-
-instance FromJSON ReportScheduleRunsOnDayOfMonth where
-    parseJSON = parseJSONText "ReportScheduleRunsOnDayOfMonth"
-
-instance ToJSON ReportScheduleRunsOnDayOfMonth where
     toJSON = toJSONText
 
 -- | Order of sorted results, default is ASCENDING.
@@ -5361,396 +5173,164 @@ instance FromJSON CreativeArtworkType where
 instance ToJSON CreativeArtworkType where
     toJSON = toJSONText
 
--- | Audience age group of this project.
-data ProjectAudienceAgeGroup
-    = PlanningAudienceAge1824
-      -- ^ @PLANNING_AUDIENCE_AGE_18_24@
-    | PlanningAudienceAge2534
-      -- ^ @PLANNING_AUDIENCE_AGE_25_34@
-    | PlanningAudienceAge3544
-      -- ^ @PLANNING_AUDIENCE_AGE_35_44@
-    | PlanningAudienceAge4554
-      -- ^ @PLANNING_AUDIENCE_AGE_45_54@
-    | PlanningAudienceAge5564
-      -- ^ @PLANNING_AUDIENCE_AGE_55_64@
-    | PlanningAudienceAge65OrMore
-      -- ^ @PLANNING_AUDIENCE_AGE_65_OR_MORE@
-    | PlanningAudienceAgeUnknown
-      -- ^ @PLANNING_AUDIENCE_AGE_UNKNOWN@
+-- | Types of attribution options for natural search conversions.
+data NATuralSearchConversionAttributionOption
+    = ExcludeNATuralSearchConversionAttribution
+      -- ^ @EXCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION@
+    | IncludeNATuralSearchConversionAttribution
+      -- ^ @INCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION@
+    | IncludeNATuralSearchTieredConversionAttribution
+      -- ^ @INCLUDE_NATURAL_SEARCH_TIERED_CONVERSION_ATTRIBUTION@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ProjectAudienceAgeGroup
+instance Hashable NATuralSearchConversionAttributionOption
 
-instance FromText ProjectAudienceAgeGroup where
+instance FromText NATuralSearchConversionAttributionOption where
     fromText = \case
-        "PLANNING_AUDIENCE_AGE_18_24" -> Just PlanningAudienceAge1824
-        "PLANNING_AUDIENCE_AGE_25_34" -> Just PlanningAudienceAge2534
-        "PLANNING_AUDIENCE_AGE_35_44" -> Just PlanningAudienceAge3544
-        "PLANNING_AUDIENCE_AGE_45_54" -> Just PlanningAudienceAge4554
-        "PLANNING_AUDIENCE_AGE_55_64" -> Just PlanningAudienceAge5564
-        "PLANNING_AUDIENCE_AGE_65_OR_MORE" -> Just PlanningAudienceAge65OrMore
-        "PLANNING_AUDIENCE_AGE_UNKNOWN" -> Just PlanningAudienceAgeUnknown
+        "EXCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION" -> Just ExcludeNATuralSearchConversionAttribution
+        "INCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION" -> Just IncludeNATuralSearchConversionAttribution
+        "INCLUDE_NATURAL_SEARCH_TIERED_CONVERSION_ATTRIBUTION" -> Just IncludeNATuralSearchTieredConversionAttribution
         _ -> Nothing
 
-instance ToText ProjectAudienceAgeGroup where
+instance ToText NATuralSearchConversionAttributionOption where
     toText = \case
-        PlanningAudienceAge1824 -> "PLANNING_AUDIENCE_AGE_18_24"
-        PlanningAudienceAge2534 -> "PLANNING_AUDIENCE_AGE_25_34"
-        PlanningAudienceAge3544 -> "PLANNING_AUDIENCE_AGE_35_44"
-        PlanningAudienceAge4554 -> "PLANNING_AUDIENCE_AGE_45_54"
-        PlanningAudienceAge5564 -> "PLANNING_AUDIENCE_AGE_55_64"
-        PlanningAudienceAge65OrMore -> "PLANNING_AUDIENCE_AGE_65_OR_MORE"
-        PlanningAudienceAgeUnknown -> "PLANNING_AUDIENCE_AGE_UNKNOWN"
+        ExcludeNATuralSearchConversionAttribution -> "EXCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION"
+        IncludeNATuralSearchConversionAttribution -> "INCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION"
+        IncludeNATuralSearchTieredConversionAttribution -> "INCLUDE_NATURAL_SEARCH_TIERED_CONVERSION_ATTRIBUTION"
 
-instance FromJSON ProjectAudienceAgeGroup where
-    parseJSON = parseJSONText "ProjectAudienceAgeGroup"
+instance FromJSON NATuralSearchConversionAttributionOption where
+    parseJSON = parseJSONText "NATuralSearchConversionAttributionOption"
 
-instance ToJSON ProjectAudienceAgeGroup where
+instance ToJSON NATuralSearchConversionAttributionOption where
     toJSON = toJSONText
 
--- | Select only advertisers with the specified status.
-data DfareportingAdvertisersListStatus
-    = Approved
-      -- ^ @APPROVED@
-    | OnHold
-      -- ^ @ON_HOLD@
+data InterstitialTagFormatsItem
+    = IframeJavascriptInterstitial
+      -- ^ @IFRAME_JAVASCRIPT_INTERSTITIAL@
+    | InternalRedirectInterstitial
+      -- ^ @INTERNAL_REDIRECT_INTERSTITIAL@
+    | JavascriptInterstitial
+      -- ^ @JAVASCRIPT_INTERSTITIAL@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DfareportingAdvertisersListStatus
+instance Hashable InterstitialTagFormatsItem
 
-instance FromText DfareportingAdvertisersListStatus where
+instance FromText InterstitialTagFormatsItem where
     fromText = \case
-        "APPROVED" -> Just Approved
-        "ON_HOLD" -> Just OnHold
+        "IFRAME_JAVASCRIPT_INTERSTITIAL" -> Just IframeJavascriptInterstitial
+        "INTERNAL_REDIRECT_INTERSTITIAL" -> Just InternalRedirectInterstitial
+        "JAVASCRIPT_INTERSTITIAL" -> Just JavascriptInterstitial
         _ -> Nothing
 
-instance ToText DfareportingAdvertisersListStatus where
+instance ToText InterstitialTagFormatsItem where
     toText = \case
-        Approved -> "APPROVED"
-        OnHold -> "ON_HOLD"
+        IframeJavascriptInterstitial -> "IFRAME_JAVASCRIPT_INTERSTITIAL"
+        InternalRedirectInterstitial -> "INTERNAL_REDIRECT_INTERSTITIAL"
+        JavascriptInterstitial -> "JAVASCRIPT_INTERSTITIAL"
 
-instance FromJSON DfareportingAdvertisersListStatus where
-    parseJSON = parseJSONText "DfareportingAdvertisersListStatus"
+instance FromJSON InterstitialTagFormatsItem where
+    parseJSON = parseJSONText "InterstitialTagFormatsItem"
 
-instance ToJSON DfareportingAdvertisersListStatus where
+instance ToJSON InterstitialTagFormatsItem where
     toJSON = toJSONText
 
-data CreativeBackupImageFeatures
-    = CBIFApplicationCache
-      -- ^ @APPLICATION_CACHE@
-    | CBIFAudio
-      -- ^ @AUDIO@
-    | CBIFCanvas
-      -- ^ @CANVAS@
-    | CBIFCanvasText
-      -- ^ @CANVAS_TEXT@
-    | CBIFCssAnimations
-      -- ^ @CSS_ANIMATIONS@
-    | CBIFCssBackgRoundSize
-      -- ^ @CSS_BACKGROUND_SIZE@
-    | CBIFCssBOrderImage
-      -- ^ @CSS_BORDER_IMAGE@
-    | CBIFCssBOrderRadius
-      -- ^ @CSS_BORDER_RADIUS@
-    | CBIFCssBoxShadow
-      -- ^ @CSS_BOX_SHADOW@
-    | CBIFCssColumns
-      -- ^ @CSS_COLUMNS@
-    | CBIFCssFlexBox
-      -- ^ @CSS_FLEX_BOX@
-    | CBIFCssFontFace
-      -- ^ @CSS_FONT_FACE@
-    | CBIFCssGeneratedContent
-      -- ^ @CSS_GENERATED_CONTENT@
-    | CBIFCssGradients
-      -- ^ @CSS_GRADIENTS@
-    | CBIFCssHsla
-      -- ^ @CSS_HSLA@
-    | CBIFCssMultipleBgs
-      -- ^ @CSS_MULTIPLE_BGS@
-    | CBIFCssOpacity
-      -- ^ @CSS_OPACITY@
-    | CBIFCssReflections
-      -- ^ @CSS_REFLECTIONS@
-    | CBIFCssRgba
-      -- ^ @CSS_RGBA@
-    | CBIFCssTextShadow
-      -- ^ @CSS_TEXT_SHADOW@
-    | CBIFCssTransforms
-      -- ^ @CSS_TRANSFORMS@
-    | CBIFCssTRANSFORMS3D
-      -- ^ @CSS_TRANSFORMS3D@
-    | CBIFCssTransitions
-      -- ^ @CSS_TRANSITIONS@
-    | CBIFDragAndDrop
-      -- ^ @DRAG_AND_DROP@
-    | CBIFGeoLocation
-      -- ^ @GEO_LOCATION@
-    | CBIFHashChange
-      -- ^ @HASH_CHANGE@
-    | CBIFHistory
-      -- ^ @HISTORY@
-    | CBIFIndexedDB
-      -- ^ @INDEXED_DB@
-    | CBIFInlineSvg
-      -- ^ @INLINE_SVG@
-    | CBIFInputAttrAutocomplete
-      -- ^ @INPUT_ATTR_AUTOCOMPLETE@
-    | CBIFInputAttrAutofocus
-      -- ^ @INPUT_ATTR_AUTOFOCUS@
-    | CBIFInputAttrList
-      -- ^ @INPUT_ATTR_LIST@
-    | CBIFInputAttrMax
-      -- ^ @INPUT_ATTR_MAX@
-    | CBIFInputAttrMin
-      -- ^ @INPUT_ATTR_MIN@
-    | CBIFInputAttrMultiple
-      -- ^ @INPUT_ATTR_MULTIPLE@
-    | CBIFInputAttrPattern
-      -- ^ @INPUT_ATTR_PATTERN@
-    | CBIFInputAttrPlaceholder
-      -- ^ @INPUT_ATTR_PLACEHOLDER@
-    | CBIFInputAttrRequired
-      -- ^ @INPUT_ATTR_REQUIRED@
-    | CBIFInputAttrStep
-      -- ^ @INPUT_ATTR_STEP@
-    | CBIFInputTypeColor
-      -- ^ @INPUT_TYPE_COLOR@
-    | CBIFInputTypeDate
-      -- ^ @INPUT_TYPE_DATE@
-    | CBIFInputTypeDatetime
-      -- ^ @INPUT_TYPE_DATETIME@
-    | CBIFInputTypeDatetimeLocal
-      -- ^ @INPUT_TYPE_DATETIME_LOCAL@
-    | CBIFInputTypeEmail
-      -- ^ @INPUT_TYPE_EMAIL@
-    | CBIFInputTypeMonth
-      -- ^ @INPUT_TYPE_MONTH@
-    | CBIFInputTypeNumber
-      -- ^ @INPUT_TYPE_NUMBER@
-    | CBIFInputTypeRange
-      -- ^ @INPUT_TYPE_RANGE@
-    | CBIFInputTypeSearch
-      -- ^ @INPUT_TYPE_SEARCH@
-    | CBIFInputTypeTel
-      -- ^ @INPUT_TYPE_TEL@
-    | CBIFInputTypeTime
-      -- ^ @INPUT_TYPE_TIME@
-    | CBIFInputTypeURL
-      -- ^ @INPUT_TYPE_URL@
-    | CBIFInputTypeWeek
-      -- ^ @INPUT_TYPE_WEEK@
-    | CBIFLocalStorage
-      -- ^ @LOCAL_STORAGE@
-    | CBIFPostMessage
-      -- ^ @POST_MESSAGE@
-    | CBIFSessionStorage
-      -- ^ @SESSION_STORAGE@
-    | CBIFSmil
-      -- ^ @SMIL@
-    | CBIFSvgClipPaths
-      -- ^ @SVG_CLIP_PATHS@
-    | CBIFSvgFeImage
-      -- ^ @SVG_FE_IMAGE@
-    | CBIFSvgFilters
-      -- ^ @SVG_FILTERS@
-    | CBIFSvgHref
-      -- ^ @SVG_HREF@
-    | CBIFTouch
-      -- ^ @TOUCH@
-    | CBIFVideo
-      -- ^ @VIDEO@
-    | CBIFWebgl
-      -- ^ @WEBGL@
-    | CBIFWebSockets
-      -- ^ @WEB_SOCKETS@
-    | CBIFWebSQLDatabase
-      -- ^ @WEB_SQL_DATABASE@
-    | CBIFWebWorkers
-      -- ^ @WEB_WORKERS@
+-- | User type of the user profile. This is a read-only field that can be
+-- left blank.
+data UserAccessType
+    = InternalAdministrator
+      -- ^ @INTERNAL_ADMINISTRATOR@
+    | NormalUser
+      -- ^ @NORMAL_USER@
+    | SuperUser
+      -- ^ @SUPER_USER@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CreativeBackupImageFeatures
+instance Hashable UserAccessType
 
-instance FromText CreativeBackupImageFeatures where
+instance FromText UserAccessType where
     fromText = \case
-        "APPLICATION_CACHE" -> Just CBIFApplicationCache
-        "AUDIO" -> Just CBIFAudio
-        "CANVAS" -> Just CBIFCanvas
-        "CANVAS_TEXT" -> Just CBIFCanvasText
-        "CSS_ANIMATIONS" -> Just CBIFCssAnimations
-        "CSS_BACKGROUND_SIZE" -> Just CBIFCssBackgRoundSize
-        "CSS_BORDER_IMAGE" -> Just CBIFCssBOrderImage
-        "CSS_BORDER_RADIUS" -> Just CBIFCssBOrderRadius
-        "CSS_BOX_SHADOW" -> Just CBIFCssBoxShadow
-        "CSS_COLUMNS" -> Just CBIFCssColumns
-        "CSS_FLEX_BOX" -> Just CBIFCssFlexBox
-        "CSS_FONT_FACE" -> Just CBIFCssFontFace
-        "CSS_GENERATED_CONTENT" -> Just CBIFCssGeneratedContent
-        "CSS_GRADIENTS" -> Just CBIFCssGradients
-        "CSS_HSLA" -> Just CBIFCssHsla
-        "CSS_MULTIPLE_BGS" -> Just CBIFCssMultipleBgs
-        "CSS_OPACITY" -> Just CBIFCssOpacity
-        "CSS_REFLECTIONS" -> Just CBIFCssReflections
-        "CSS_RGBA" -> Just CBIFCssRgba
-        "CSS_TEXT_SHADOW" -> Just CBIFCssTextShadow
-        "CSS_TRANSFORMS" -> Just CBIFCssTransforms
-        "CSS_TRANSFORMS3D" -> Just CBIFCssTRANSFORMS3D
-        "CSS_TRANSITIONS" -> Just CBIFCssTransitions
-        "DRAG_AND_DROP" -> Just CBIFDragAndDrop
-        "GEO_LOCATION" -> Just CBIFGeoLocation
-        "HASH_CHANGE" -> Just CBIFHashChange
-        "HISTORY" -> Just CBIFHistory
-        "INDEXED_DB" -> Just CBIFIndexedDB
-        "INLINE_SVG" -> Just CBIFInlineSvg
-        "INPUT_ATTR_AUTOCOMPLETE" -> Just CBIFInputAttrAutocomplete
-        "INPUT_ATTR_AUTOFOCUS" -> Just CBIFInputAttrAutofocus
-        "INPUT_ATTR_LIST" -> Just CBIFInputAttrList
-        "INPUT_ATTR_MAX" -> Just CBIFInputAttrMax
-        "INPUT_ATTR_MIN" -> Just CBIFInputAttrMin
-        "INPUT_ATTR_MULTIPLE" -> Just CBIFInputAttrMultiple
-        "INPUT_ATTR_PATTERN" -> Just CBIFInputAttrPattern
-        "INPUT_ATTR_PLACEHOLDER" -> Just CBIFInputAttrPlaceholder
-        "INPUT_ATTR_REQUIRED" -> Just CBIFInputAttrRequired
-        "INPUT_ATTR_STEP" -> Just CBIFInputAttrStep
-        "INPUT_TYPE_COLOR" -> Just CBIFInputTypeColor
-        "INPUT_TYPE_DATE" -> Just CBIFInputTypeDate
-        "INPUT_TYPE_DATETIME" -> Just CBIFInputTypeDatetime
-        "INPUT_TYPE_DATETIME_LOCAL" -> Just CBIFInputTypeDatetimeLocal
-        "INPUT_TYPE_EMAIL" -> Just CBIFInputTypeEmail
-        "INPUT_TYPE_MONTH" -> Just CBIFInputTypeMonth
-        "INPUT_TYPE_NUMBER" -> Just CBIFInputTypeNumber
-        "INPUT_TYPE_RANGE" -> Just CBIFInputTypeRange
-        "INPUT_TYPE_SEARCH" -> Just CBIFInputTypeSearch
-        "INPUT_TYPE_TEL" -> Just CBIFInputTypeTel
-        "INPUT_TYPE_TIME" -> Just CBIFInputTypeTime
-        "INPUT_TYPE_URL" -> Just CBIFInputTypeURL
-        "INPUT_TYPE_WEEK" -> Just CBIFInputTypeWeek
-        "LOCAL_STORAGE" -> Just CBIFLocalStorage
-        "POST_MESSAGE" -> Just CBIFPostMessage
-        "SESSION_STORAGE" -> Just CBIFSessionStorage
-        "SMIL" -> Just CBIFSmil
-        "SVG_CLIP_PATHS" -> Just CBIFSvgClipPaths
-        "SVG_FE_IMAGE" -> Just CBIFSvgFeImage
-        "SVG_FILTERS" -> Just CBIFSvgFilters
-        "SVG_HREF" -> Just CBIFSvgHref
-        "TOUCH" -> Just CBIFTouch
-        "VIDEO" -> Just CBIFVideo
-        "WEBGL" -> Just CBIFWebgl
-        "WEB_SOCKETS" -> Just CBIFWebSockets
-        "WEB_SQL_DATABASE" -> Just CBIFWebSQLDatabase
-        "WEB_WORKERS" -> Just CBIFWebWorkers
+        "INTERNAL_ADMINISTRATOR" -> Just InternalAdministrator
+        "NORMAL_USER" -> Just NormalUser
+        "SUPER_USER" -> Just SuperUser
         _ -> Nothing
 
-instance ToText CreativeBackupImageFeatures where
+instance ToText UserAccessType where
     toText = \case
-        CBIFApplicationCache -> "APPLICATION_CACHE"
-        CBIFAudio -> "AUDIO"
-        CBIFCanvas -> "CANVAS"
-        CBIFCanvasText -> "CANVAS_TEXT"
-        CBIFCssAnimations -> "CSS_ANIMATIONS"
-        CBIFCssBackgRoundSize -> "CSS_BACKGROUND_SIZE"
-        CBIFCssBOrderImage -> "CSS_BORDER_IMAGE"
-        CBIFCssBOrderRadius -> "CSS_BORDER_RADIUS"
-        CBIFCssBoxShadow -> "CSS_BOX_SHADOW"
-        CBIFCssColumns -> "CSS_COLUMNS"
-        CBIFCssFlexBox -> "CSS_FLEX_BOX"
-        CBIFCssFontFace -> "CSS_FONT_FACE"
-        CBIFCssGeneratedContent -> "CSS_GENERATED_CONTENT"
-        CBIFCssGradients -> "CSS_GRADIENTS"
-        CBIFCssHsla -> "CSS_HSLA"
-        CBIFCssMultipleBgs -> "CSS_MULTIPLE_BGS"
-        CBIFCssOpacity -> "CSS_OPACITY"
-        CBIFCssReflections -> "CSS_REFLECTIONS"
-        CBIFCssRgba -> "CSS_RGBA"
-        CBIFCssTextShadow -> "CSS_TEXT_SHADOW"
-        CBIFCssTransforms -> "CSS_TRANSFORMS"
-        CBIFCssTRANSFORMS3D -> "CSS_TRANSFORMS3D"
-        CBIFCssTransitions -> "CSS_TRANSITIONS"
-        CBIFDragAndDrop -> "DRAG_AND_DROP"
-        CBIFGeoLocation -> "GEO_LOCATION"
-        CBIFHashChange -> "HASH_CHANGE"
-        CBIFHistory -> "HISTORY"
-        CBIFIndexedDB -> "INDEXED_DB"
-        CBIFInlineSvg -> "INLINE_SVG"
-        CBIFInputAttrAutocomplete -> "INPUT_ATTR_AUTOCOMPLETE"
-        CBIFInputAttrAutofocus -> "INPUT_ATTR_AUTOFOCUS"
-        CBIFInputAttrList -> "INPUT_ATTR_LIST"
-        CBIFInputAttrMax -> "INPUT_ATTR_MAX"
-        CBIFInputAttrMin -> "INPUT_ATTR_MIN"
-        CBIFInputAttrMultiple -> "INPUT_ATTR_MULTIPLE"
-        CBIFInputAttrPattern -> "INPUT_ATTR_PATTERN"
-        CBIFInputAttrPlaceholder -> "INPUT_ATTR_PLACEHOLDER"
-        CBIFInputAttrRequired -> "INPUT_ATTR_REQUIRED"
-        CBIFInputAttrStep -> "INPUT_ATTR_STEP"
-        CBIFInputTypeColor -> "INPUT_TYPE_COLOR"
-        CBIFInputTypeDate -> "INPUT_TYPE_DATE"
-        CBIFInputTypeDatetime -> "INPUT_TYPE_DATETIME"
-        CBIFInputTypeDatetimeLocal -> "INPUT_TYPE_DATETIME_LOCAL"
-        CBIFInputTypeEmail -> "INPUT_TYPE_EMAIL"
-        CBIFInputTypeMonth -> "INPUT_TYPE_MONTH"
-        CBIFInputTypeNumber -> "INPUT_TYPE_NUMBER"
-        CBIFInputTypeRange -> "INPUT_TYPE_RANGE"
-        CBIFInputTypeSearch -> "INPUT_TYPE_SEARCH"
-        CBIFInputTypeTel -> "INPUT_TYPE_TEL"
-        CBIFInputTypeTime -> "INPUT_TYPE_TIME"
-        CBIFInputTypeURL -> "INPUT_TYPE_URL"
-        CBIFInputTypeWeek -> "INPUT_TYPE_WEEK"
-        CBIFLocalStorage -> "LOCAL_STORAGE"
-        CBIFPostMessage -> "POST_MESSAGE"
-        CBIFSessionStorage -> "SESSION_STORAGE"
-        CBIFSmil -> "SMIL"
-        CBIFSvgClipPaths -> "SVG_CLIP_PATHS"
-        CBIFSvgFeImage -> "SVG_FE_IMAGE"
-        CBIFSvgFilters -> "SVG_FILTERS"
-        CBIFSvgHref -> "SVG_HREF"
-        CBIFTouch -> "TOUCH"
-        CBIFVideo -> "VIDEO"
-        CBIFWebgl -> "WEBGL"
-        CBIFWebSockets -> "WEB_SOCKETS"
-        CBIFWebSQLDatabase -> "WEB_SQL_DATABASE"
-        CBIFWebWorkers -> "WEB_WORKERS"
+        InternalAdministrator -> "INTERNAL_ADMINISTRATOR"
+        NormalUser -> "NORMAL_USER"
+        SuperUser -> "SUPER_USER"
 
-instance FromJSON CreativeBackupImageFeatures where
-    parseJSON = parseJSONText "CreativeBackupImageFeatures"
+instance FromJSON UserAccessType where
+    parseJSON = parseJSONText "UserAccessType"
 
-instance ToJSON CreativeBackupImageFeatures where
+instance ToJSON UserAccessType where
     toJSON = toJSONText
 
--- | Strategy for calculating weights. Used with
--- CREATIVE_ROTATION_TYPE_RANDOM.
-data CreativeRotationWeightCalculationStrategy
-    = WeightStrategyCustom
-      -- ^ @WEIGHT_STRATEGY_CUSTOM@
-    | WeightStrategyEqual
-      -- ^ @WEIGHT_STRATEGY_EQUAL@
-    | WeightStrategyHighestCtr
-      -- ^ @WEIGHT_STRATEGY_HIGHEST_CTR@
-    | WeightStrategyOptimized
-      -- ^ @WEIGHT_STRATEGY_OPTIMIZED@
+-- | Initial wait time type before making the asset visible. Applicable to
+-- the following creative types: all RICH_MEDIA.
+data StartTimeType
+    = AssetStartTimeTypeCustom
+      -- ^ @ASSET_START_TIME_TYPE_CUSTOM@
+    | AssetStartTimeTypeNone
+      -- ^ @ASSET_START_TIME_TYPE_NONE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CreativeRotationWeightCalculationStrategy
+instance Hashable StartTimeType
 
-instance FromText CreativeRotationWeightCalculationStrategy where
+instance FromText StartTimeType where
     fromText = \case
-        "WEIGHT_STRATEGY_CUSTOM" -> Just WeightStrategyCustom
-        "WEIGHT_STRATEGY_EQUAL" -> Just WeightStrategyEqual
-        "WEIGHT_STRATEGY_HIGHEST_CTR" -> Just WeightStrategyHighestCtr
-        "WEIGHT_STRATEGY_OPTIMIZED" -> Just WeightStrategyOptimized
+        "ASSET_START_TIME_TYPE_CUSTOM" -> Just AssetStartTimeTypeCustom
+        "ASSET_START_TIME_TYPE_NONE" -> Just AssetStartTimeTypeNone
         _ -> Nothing
 
-instance ToText CreativeRotationWeightCalculationStrategy where
+instance ToText StartTimeType where
     toText = \case
-        WeightStrategyCustom -> "WEIGHT_STRATEGY_CUSTOM"
-        WeightStrategyEqual -> "WEIGHT_STRATEGY_EQUAL"
-        WeightStrategyHighestCtr -> "WEIGHT_STRATEGY_HIGHEST_CTR"
-        WeightStrategyOptimized -> "WEIGHT_STRATEGY_OPTIMIZED"
+        AssetStartTimeTypeCustom -> "ASSET_START_TIME_TYPE_CUSTOM"
+        AssetStartTimeTypeNone -> "ASSET_START_TIME_TYPE_NONE"
 
-instance FromJSON CreativeRotationWeightCalculationStrategy where
-    parseJSON = parseJSONText "CreativeRotationWeightCalculationStrategy"
+instance FromJSON StartTimeType where
+    parseJSON = parseJSONText "StartTimeType"
 
-instance ToJSON CreativeRotationWeightCalculationStrategy where
+instance ToJSON StartTimeType where
+    toJSON = toJSONText
+
+-- | Maximum number of active ads allowed for this account.
+data ActiveAdsLimitTier
+    = AALTActiveAdsTier100K
+      -- ^ @ACTIVE_ADS_TIER_100K@
+    | AALTActiveAdsTier200K
+      -- ^ @ACTIVE_ADS_TIER_200K@
+    | AALTActiveAdsTier300K
+      -- ^ @ACTIVE_ADS_TIER_300K@
+    | AALTActiveAdsTier40K
+      -- ^ @ACTIVE_ADS_TIER_40K@
+    | AALTActiveAdsTier75K
+      -- ^ @ACTIVE_ADS_TIER_75K@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ActiveAdsLimitTier
+
+instance FromText ActiveAdsLimitTier where
+    fromText = \case
+        "ACTIVE_ADS_TIER_100K" -> Just AALTActiveAdsTier100K
+        "ACTIVE_ADS_TIER_200K" -> Just AALTActiveAdsTier200K
+        "ACTIVE_ADS_TIER_300K" -> Just AALTActiveAdsTier300K
+        "ACTIVE_ADS_TIER_40K" -> Just AALTActiveAdsTier40K
+        "ACTIVE_ADS_TIER_75K" -> Just AALTActiveAdsTier75K
+        _ -> Nothing
+
+instance ToText ActiveAdsLimitTier where
+    toText = \case
+        AALTActiveAdsTier100K -> "ACTIVE_ADS_TIER_100K"
+        AALTActiveAdsTier200K -> "ACTIVE_ADS_TIER_200K"
+        AALTActiveAdsTier300K -> "ACTIVE_ADS_TIER_300K"
+        AALTActiveAdsTier40K -> "ACTIVE_ADS_TIER_40K"
+        AALTActiveAdsTier75K -> "ACTIVE_ADS_TIER_75K"
+
+instance FromJSON ActiveAdsLimitTier where
+    parseJSON = parseJSONText "ActiveAdsLimitTier"
+
+instance ToJSON ActiveAdsLimitTier where
     toJSON = toJSONText
 
 -- | Type of ad. This is a required field on insertion. Note that default ads
@@ -5790,43 +5370,117 @@ instance FromJSON AdType where
 instance ToJSON AdType where
     toJSON = toJSONText
 
--- | Determines how the \'value\' field is matched when filtering. If not
--- specified, defaults to EXACT. If set to WILDCARD_EXPRESSION, \'*\' is
--- allowed as a placeholder for variable length character sequences, and it
--- can be escaped with a backslash. Note, only paid search dimensions
--- (\'dfa:paidSearch*\') allow a matchType other than EXACT.
-data DimensionValueMatchType
-    = BeginsWith
-      -- ^ @BEGINS_WITH@
-    | Contains
-      -- ^ @CONTAINS@
-    | Exact
-      -- ^ @EXACT@
-    | WildcardExpression
-      -- ^ @WILDCARD_EXPRESSION@
+-- | Placement pricing type. This field is required on insertion.
+data PricingType
+    = PTPricingTypeCpa
+      -- ^ @PRICING_TYPE_CPA@
+    | PTPricingTypeCpc
+      -- ^ @PRICING_TYPE_CPC@
+    | PTPricingTypeCpm
+      -- ^ @PRICING_TYPE_CPM@
+    | PTPricingTypeFlatRateClicks
+      -- ^ @PRICING_TYPE_FLAT_RATE_CLICKS@
+    | PTPricingTypeFlatRateImpressions
+      -- ^ @PRICING_TYPE_FLAT_RATE_IMPRESSIONS@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DimensionValueMatchType
+instance Hashable PricingType
 
-instance FromText DimensionValueMatchType where
+instance FromText PricingType where
     fromText = \case
-        "BEGINS_WITH" -> Just BeginsWith
-        "CONTAINS" -> Just Contains
-        "EXACT" -> Just Exact
-        "WILDCARD_EXPRESSION" -> Just WildcardExpression
+        "PRICING_TYPE_CPA" -> Just PTPricingTypeCpa
+        "PRICING_TYPE_CPC" -> Just PTPricingTypeCpc
+        "PRICING_TYPE_CPM" -> Just PTPricingTypeCpm
+        "PRICING_TYPE_FLAT_RATE_CLICKS" -> Just PTPricingTypeFlatRateClicks
+        "PRICING_TYPE_FLAT_RATE_IMPRESSIONS" -> Just PTPricingTypeFlatRateImpressions
         _ -> Nothing
 
-instance ToText DimensionValueMatchType where
+instance ToText PricingType where
     toText = \case
-        BeginsWith -> "BEGINS_WITH"
-        Contains -> "CONTAINS"
-        Exact -> "EXACT"
-        WildcardExpression -> "WILDCARD_EXPRESSION"
+        PTPricingTypeCpa -> "PRICING_TYPE_CPA"
+        PTPricingTypeCpc -> "PRICING_TYPE_CPC"
+        PTPricingTypeCpm -> "PRICING_TYPE_CPM"
+        PTPricingTypeFlatRateClicks -> "PRICING_TYPE_FLAT_RATE_CLICKS"
+        PTPricingTypeFlatRateImpressions -> "PRICING_TYPE_FLAT_RATE_IMPRESSIONS"
 
-instance FromJSON DimensionValueMatchType where
-    parseJSON = parseJSONText "DimensionValueMatchType"
+instance FromJSON PricingType where
+    parseJSON = parseJSONText "PricingType"
 
-instance ToJSON DimensionValueMatchType where
+instance ToJSON PricingType where
+    toJSON = toJSONText
+
+-- | Data type for the variable. This is a required field.
+data DataType
+    = Number
+      -- ^ @NUMBER@
+    | String
+      -- ^ @STRING@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable DataType
+
+instance FromText DataType where
+    fromText = \case
+        "NUMBER" -> Just Number
+        "STRING" -> Just String
+        _ -> Nothing
+
+instance ToText DataType where
+    toText = \case
+        Number -> "NUMBER"
+        String -> "STRING"
+
+instance FromJSON DataType where
+    parseJSON = parseJSONText "DataType"
+
+instance ToJSON DataType where
+    toJSON = toJSONText
+
+-- | Audience age group of this project.
+data AudienceAgeGroup
+    = PlanningAudienceAge1824
+      -- ^ @PLANNING_AUDIENCE_AGE_18_24@
+    | PlanningAudienceAge2534
+      -- ^ @PLANNING_AUDIENCE_AGE_25_34@
+    | PlanningAudienceAge3544
+      -- ^ @PLANNING_AUDIENCE_AGE_35_44@
+    | PlanningAudienceAge4554
+      -- ^ @PLANNING_AUDIENCE_AGE_45_54@
+    | PlanningAudienceAge5564
+      -- ^ @PLANNING_AUDIENCE_AGE_55_64@
+    | PlanningAudienceAge65OrMore
+      -- ^ @PLANNING_AUDIENCE_AGE_65_OR_MORE@
+    | PlanningAudienceAgeUnknown
+      -- ^ @PLANNING_AUDIENCE_AGE_UNKNOWN@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable AudienceAgeGroup
+
+instance FromText AudienceAgeGroup where
+    fromText = \case
+        "PLANNING_AUDIENCE_AGE_18_24" -> Just PlanningAudienceAge1824
+        "PLANNING_AUDIENCE_AGE_25_34" -> Just PlanningAudienceAge2534
+        "PLANNING_AUDIENCE_AGE_35_44" -> Just PlanningAudienceAge3544
+        "PLANNING_AUDIENCE_AGE_45_54" -> Just PlanningAudienceAge4554
+        "PLANNING_AUDIENCE_AGE_55_64" -> Just PlanningAudienceAge5564
+        "PLANNING_AUDIENCE_AGE_65_OR_MORE" -> Just PlanningAudienceAge65OrMore
+        "PLANNING_AUDIENCE_AGE_UNKNOWN" -> Just PlanningAudienceAgeUnknown
+        _ -> Nothing
+
+instance ToText AudienceAgeGroup where
+    toText = \case
+        PlanningAudienceAge1824 -> "PLANNING_AUDIENCE_AGE_18_24"
+        PlanningAudienceAge2534 -> "PLANNING_AUDIENCE_AGE_25_34"
+        PlanningAudienceAge3544 -> "PLANNING_AUDIENCE_AGE_35_44"
+        PlanningAudienceAge4554 -> "PLANNING_AUDIENCE_AGE_45_54"
+        PlanningAudienceAge5564 -> "PLANNING_AUDIENCE_AGE_55_64"
+        PlanningAudienceAge65OrMore -> "PLANNING_AUDIENCE_AGE_65_OR_MORE"
+        PlanningAudienceAgeUnknown -> "PLANNING_AUDIENCE_AGE_UNKNOWN"
+
+instance FromJSON AudienceAgeGroup where
+    parseJSON = parseJSONText "AudienceAgeGroup"
+
+instance ToJSON AudienceAgeGroup where
     toJSON = toJSONText
 
 -- | Type of this placement group. A package is a simple group of placements
@@ -5908,162 +5562,136 @@ instance FromJSON PricingPricingType where
 instance ToJSON PricingPricingType where
     toJSON = toJSONText
 
--- | The scope that defines which results are returned, default is \'MINE\'.
-data DfareportingReportsListScope
-    = DRLSAll
-      -- ^ @ALL@
-      -- All reports in account.
-    | DRLSMine
-      -- ^ @MINE@
-      -- My reports.
+-- | Field by which to sort the list.
+data SortField
+    = SFID
+      -- ^ @ID@
+    | SFName
+      -- ^ @NAME@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DfareportingReportsListScope
+instance Hashable SortField
 
-instance FromText DfareportingReportsListScope where
+instance FromText SortField where
     fromText = \case
-        "ALL" -> Just DRLSAll
-        "MINE" -> Just DRLSMine
+        "ID" -> Just SFID
+        "NAME" -> Just SFName
         _ -> Nothing
 
-instance ToText DfareportingReportsListScope where
+instance ToText SortField where
     toText = \case
-        DRLSAll -> "ALL"
-        DRLSMine -> "MINE"
+        SFID -> "ID"
+        SFName -> "NAME"
 
-instance FromJSON DfareportingReportsListScope where
-    parseJSON = parseJSONText "DfareportingReportsListScope"
+instance FromJSON SortField where
+    parseJSON = parseJSONText "SortField"
 
-instance ToJSON DfareportingReportsListScope where
+instance ToJSON SortField where
     toJSON = toJSONText
 
--- | Creative group number of the creative group assignment.
-data CreativeGroupAssignmentCreativeGroupNumber
-    = CreativeGroupOne
-      -- ^ @CREATIVE_GROUP_ONE@
-    | CreativeGroupTwo
-      -- ^ @CREATIVE_GROUP_TWO@
+-- | Select only ads with these types.
+data Type
+    = TAdServingClickTracker
+      -- ^ @AD_SERVING_CLICK_TRACKER@
+    | TAdServingDefaultAd
+      -- ^ @AD_SERVING_DEFAULT_AD@
+    | TAdServingStandardAd
+      -- ^ @AD_SERVING_STANDARD_AD@
+    | TAdServingTracking
+      -- ^ @AD_SERVING_TRACKING@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CreativeGroupAssignmentCreativeGroupNumber
+instance Hashable Type
 
-instance FromText CreativeGroupAssignmentCreativeGroupNumber where
+instance FromText Type where
     fromText = \case
-        "CREATIVE_GROUP_ONE" -> Just CreativeGroupOne
-        "CREATIVE_GROUP_TWO" -> Just CreativeGroupTwo
+        "AD_SERVING_CLICK_TRACKER" -> Just TAdServingClickTracker
+        "AD_SERVING_DEFAULT_AD" -> Just TAdServingDefaultAd
+        "AD_SERVING_STANDARD_AD" -> Just TAdServingStandardAd
+        "AD_SERVING_TRACKING" -> Just TAdServingTracking
         _ -> Nothing
 
-instance ToText CreativeGroupAssignmentCreativeGroupNumber where
+instance ToText Type where
     toText = \case
-        CreativeGroupOne -> "CREATIVE_GROUP_ONE"
-        CreativeGroupTwo -> "CREATIVE_GROUP_TWO"
+        TAdServingClickTracker -> "AD_SERVING_CLICK_TRACKER"
+        TAdServingDefaultAd -> "AD_SERVING_DEFAULT_AD"
+        TAdServingStandardAd -> "AD_SERVING_STANDARD_AD"
+        TAdServingTracking -> "AD_SERVING_TRACKING"
 
-instance FromJSON CreativeGroupAssignmentCreativeGroupNumber where
-    parseJSON = parseJSONText "CreativeGroupAssignmentCreativeGroupNumber"
+instance FromJSON Type where
+    parseJSON = parseJSONText "Type"
 
-instance ToJSON CreativeGroupAssignmentCreativeGroupNumber where
+instance ToJSON Type where
     toJSON = toJSONText
 
-data CreativeAssetMetadataWarnedValidationRules
-    = ADMobReferenced
-      -- ^ @ADMOB_REFERENCED@
-    | AssetFormatUnsupportedDcm
-      -- ^ @ASSET_FORMAT_UNSUPPORTED_DCM@
-    | AssetInvalid
-      -- ^ @ASSET_INVALID@
-    | ClickTagInvalid
-      -- ^ @CLICK_TAG_INVALID@
-    | ClickTagMissing
-      -- ^ @CLICK_TAG_MISSING@
-    | ClickTagMoreThanOne
-      -- ^ @CLICK_TAG_MORE_THAN_ONE@
-    | ClickTagNonTopLevel
-      -- ^ @CLICK_TAG_NON_TOP_LEVEL@
-    | ComponentUnsupportedDcm
-      -- ^ @COMPONENT_UNSUPPORTED_DCM@
-    | EnablerUnsupportedMethodDcm
-      -- ^ @ENABLER_UNSUPPORTED_METHOD_DCM@
-    | ExternalFileReferenced
-      -- ^ @EXTERNAL_FILE_REFERENCED@
-    | FileDetailEmpty
-      -- ^ @FILE_DETAIL_EMPTY@
-    | FileTypeInvalid
-      -- ^ @FILE_TYPE_INVALID@
-    | GwdPropertiesInvalid
-      -- ^ @GWD_PROPERTIES_INVALID@
-    | HTML5FeatureUnsupported
-      -- ^ @HTML5_FEATURE_UNSUPPORTED@
-    | LinkedFileNotFound
-      -- ^ @LINKED_FILE_NOT_FOUND@
-    | MaxFlashVersion11
-      -- ^ @MAX_FLASH_VERSION_11@
-    | MraidReferenced
-      -- ^ @MRAID_REFERENCED@
-    | NotSSLCompliant
-      -- ^ @NOT_SSL_COMPLIANT@
-    | OrphanedAsset
-      -- ^ @ORPHANED_ASSET@
-    | PrimaryHTMLMissing
-      -- ^ @PRIMARY_HTML_MISSING@
-    | ZipInvalid
-      -- ^ @ZIP_INVALID@
+-- | Select only placements that are associated with these compatibilities.
+-- WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on
+-- mobile devices for regular or interstitial ads respectively. APP and
+-- APP_INTERSTITIAL are for rendering in mobile apps.IN_STREAM_VIDEO refers
+-- to rendering in in-stream video ads developed with the VAST standard.
+data Compatibilities
+    = CApp
+      -- ^ @APP@
+    | CAppInterstitial
+      -- ^ @APP_INTERSTITIAL@
+    | CInStreamVideo
+      -- ^ @IN_STREAM_VIDEO@
+    | CWeb
+      -- ^ @WEB@
+    | CWebInterstitial
+      -- ^ @WEB_INTERSTITIAL@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CreativeAssetMetadataWarnedValidationRules
+instance Hashable Compatibilities
 
-instance FromText CreativeAssetMetadataWarnedValidationRules where
+instance FromText Compatibilities where
     fromText = \case
-        "ADMOB_REFERENCED" -> Just ADMobReferenced
-        "ASSET_FORMAT_UNSUPPORTED_DCM" -> Just AssetFormatUnsupportedDcm
-        "ASSET_INVALID" -> Just AssetInvalid
-        "CLICK_TAG_INVALID" -> Just ClickTagInvalid
-        "CLICK_TAG_MISSING" -> Just ClickTagMissing
-        "CLICK_TAG_MORE_THAN_ONE" -> Just ClickTagMoreThanOne
-        "CLICK_TAG_NON_TOP_LEVEL" -> Just ClickTagNonTopLevel
-        "COMPONENT_UNSUPPORTED_DCM" -> Just ComponentUnsupportedDcm
-        "ENABLER_UNSUPPORTED_METHOD_DCM" -> Just EnablerUnsupportedMethodDcm
-        "EXTERNAL_FILE_REFERENCED" -> Just ExternalFileReferenced
-        "FILE_DETAIL_EMPTY" -> Just FileDetailEmpty
-        "FILE_TYPE_INVALID" -> Just FileTypeInvalid
-        "GWD_PROPERTIES_INVALID" -> Just GwdPropertiesInvalid
-        "HTML5_FEATURE_UNSUPPORTED" -> Just HTML5FeatureUnsupported
-        "LINKED_FILE_NOT_FOUND" -> Just LinkedFileNotFound
-        "MAX_FLASH_VERSION_11" -> Just MaxFlashVersion11
-        "MRAID_REFERENCED" -> Just MraidReferenced
-        "NOT_SSL_COMPLIANT" -> Just NotSSLCompliant
-        "ORPHANED_ASSET" -> Just OrphanedAsset
-        "PRIMARY_HTML_MISSING" -> Just PrimaryHTMLMissing
-        "ZIP_INVALID" -> Just ZipInvalid
+        "APP" -> Just CApp
+        "APP_INTERSTITIAL" -> Just CAppInterstitial
+        "IN_STREAM_VIDEO" -> Just CInStreamVideo
+        "WEB" -> Just CWeb
+        "WEB_INTERSTITIAL" -> Just CWebInterstitial
         _ -> Nothing
 
-instance ToText CreativeAssetMetadataWarnedValidationRules where
+instance ToText Compatibilities where
     toText = \case
-        ADMobReferenced -> "ADMOB_REFERENCED"
-        AssetFormatUnsupportedDcm -> "ASSET_FORMAT_UNSUPPORTED_DCM"
-        AssetInvalid -> "ASSET_INVALID"
-        ClickTagInvalid -> "CLICK_TAG_INVALID"
-        ClickTagMissing -> "CLICK_TAG_MISSING"
-        ClickTagMoreThanOne -> "CLICK_TAG_MORE_THAN_ONE"
-        ClickTagNonTopLevel -> "CLICK_TAG_NON_TOP_LEVEL"
-        ComponentUnsupportedDcm -> "COMPONENT_UNSUPPORTED_DCM"
-        EnablerUnsupportedMethodDcm -> "ENABLER_UNSUPPORTED_METHOD_DCM"
-        ExternalFileReferenced -> "EXTERNAL_FILE_REFERENCED"
-        FileDetailEmpty -> "FILE_DETAIL_EMPTY"
-        FileTypeInvalid -> "FILE_TYPE_INVALID"
-        GwdPropertiesInvalid -> "GWD_PROPERTIES_INVALID"
-        HTML5FeatureUnsupported -> "HTML5_FEATURE_UNSUPPORTED"
-        LinkedFileNotFound -> "LINKED_FILE_NOT_FOUND"
-        MaxFlashVersion11 -> "MAX_FLASH_VERSION_11"
-        MraidReferenced -> "MRAID_REFERENCED"
-        NotSSLCompliant -> "NOT_SSL_COMPLIANT"
-        OrphanedAsset -> "ORPHANED_ASSET"
-        PrimaryHTMLMissing -> "PRIMARY_HTML_MISSING"
-        ZipInvalid -> "ZIP_INVALID"
+        CApp -> "APP"
+        CAppInterstitial -> "APP_INTERSTITIAL"
+        CInStreamVideo -> "IN_STREAM_VIDEO"
+        CWeb -> "WEB"
+        CWebInterstitial -> "WEB_INTERSTITIAL"
 
-instance FromJSON CreativeAssetMetadataWarnedValidationRules where
-    parseJSON = parseJSONText "CreativeAssetMetadataWarnedValidationRules"
+instance FromJSON Compatibilities where
+    parseJSON = parseJSONText "Compatibilities"
 
-instance ToJSON CreativeAssetMetadataWarnedValidationRules where
+instance ToJSON Compatibilities where
+    toJSON = toJSONText
+
+-- | Site contact type.
+data ContactType
+    = SalesPerson
+      -- ^ @SALES_PERSON@
+    | Trafficker
+      -- ^ @TRAFFICKER@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContactType
+
+instance FromText ContactType where
+    fromText = \case
+        "SALES_PERSON" -> Just SalesPerson
+        "TRAFFICKER" -> Just Trafficker
+        _ -> Nothing
+
+instance ToText ContactType where
+    toText = \case
+        SalesPerson -> "SALES_PERSON"
+        Trafficker -> "TRAFFICKER"
+
+instance FromJSON ContactType where
+    parseJSON = parseJSONText "ContactType"
+
+instance ToJSON ContactType where
     toJSON = toJSONText
 
 -- | Type of this creative.This is a required field. Applicable to all
@@ -6182,149 +5810,342 @@ instance FromJSON CreativeType where
 instance ToJSON CreativeType where
     toJSON = toJSONText
 
--- | Profile for this account. This is a read-only field that can be left
--- blank.
-data AccountAccountProfile
-    = AccountProfileBasic
-      -- ^ @ACCOUNT_PROFILE_BASIC@
-    | AccountProfileStandard
-      -- ^ @ACCOUNT_PROFILE_STANDARD@
+data BackupImageFeaturesItem
+    = BIFIApplicationCache
+      -- ^ @APPLICATION_CACHE@
+    | BIFIAudio
+      -- ^ @AUDIO@
+    | BIFICanvas
+      -- ^ @CANVAS@
+    | BIFICanvasText
+      -- ^ @CANVAS_TEXT@
+    | BIFICssAnimations
+      -- ^ @CSS_ANIMATIONS@
+    | BIFICssBackgRoundSize
+      -- ^ @CSS_BACKGROUND_SIZE@
+    | BIFICssBOrderImage
+      -- ^ @CSS_BORDER_IMAGE@
+    | BIFICssBOrderRadius
+      -- ^ @CSS_BORDER_RADIUS@
+    | BIFICssBoxShadow
+      -- ^ @CSS_BOX_SHADOW@
+    | BIFICssColumns
+      -- ^ @CSS_COLUMNS@
+    | BIFICssFlexBox
+      -- ^ @CSS_FLEX_BOX@
+    | BIFICssFontFace
+      -- ^ @CSS_FONT_FACE@
+    | BIFICssGeneratedContent
+      -- ^ @CSS_GENERATED_CONTENT@
+    | BIFICssGradients
+      -- ^ @CSS_GRADIENTS@
+    | BIFICssHsla
+      -- ^ @CSS_HSLA@
+    | BIFICssMultipleBgs
+      -- ^ @CSS_MULTIPLE_BGS@
+    | BIFICssOpacity
+      -- ^ @CSS_OPACITY@
+    | BIFICssReflections
+      -- ^ @CSS_REFLECTIONS@
+    | BIFICssRgba
+      -- ^ @CSS_RGBA@
+    | BIFICssTextShadow
+      -- ^ @CSS_TEXT_SHADOW@
+    | BIFICssTransforms
+      -- ^ @CSS_TRANSFORMS@
+    | BIFICssTRANSFORMS3D
+      -- ^ @CSS_TRANSFORMS3D@
+    | BIFICssTransitions
+      -- ^ @CSS_TRANSITIONS@
+    | BIFIDragAndDrop
+      -- ^ @DRAG_AND_DROP@
+    | BIFIGeoLocation
+      -- ^ @GEO_LOCATION@
+    | BIFIHashChange
+      -- ^ @HASH_CHANGE@
+    | BIFIHistory
+      -- ^ @HISTORY@
+    | BIFIIndexedDB
+      -- ^ @INDEXED_DB@
+    | BIFIInlineSvg
+      -- ^ @INLINE_SVG@
+    | BIFIInputAttrAutocomplete
+      -- ^ @INPUT_ATTR_AUTOCOMPLETE@
+    | BIFIInputAttrAutofocus
+      -- ^ @INPUT_ATTR_AUTOFOCUS@
+    | BIFIInputAttrList
+      -- ^ @INPUT_ATTR_LIST@
+    | BIFIInputAttrMax
+      -- ^ @INPUT_ATTR_MAX@
+    | BIFIInputAttrMin
+      -- ^ @INPUT_ATTR_MIN@
+    | BIFIInputAttrMultiple
+      -- ^ @INPUT_ATTR_MULTIPLE@
+    | BIFIInputAttrPattern
+      -- ^ @INPUT_ATTR_PATTERN@
+    | BIFIInputAttrPlaceholder
+      -- ^ @INPUT_ATTR_PLACEHOLDER@
+    | BIFIInputAttrRequired
+      -- ^ @INPUT_ATTR_REQUIRED@
+    | BIFIInputAttrStep
+      -- ^ @INPUT_ATTR_STEP@
+    | BIFIInputTypeColor
+      -- ^ @INPUT_TYPE_COLOR@
+    | BIFIInputTypeDate
+      -- ^ @INPUT_TYPE_DATE@
+    | BIFIInputTypeDatetime
+      -- ^ @INPUT_TYPE_DATETIME@
+    | BIFIInputTypeDatetimeLocal
+      -- ^ @INPUT_TYPE_DATETIME_LOCAL@
+    | BIFIInputTypeEmail
+      -- ^ @INPUT_TYPE_EMAIL@
+    | BIFIInputTypeMonth
+      -- ^ @INPUT_TYPE_MONTH@
+    | BIFIInputTypeNumber
+      -- ^ @INPUT_TYPE_NUMBER@
+    | BIFIInputTypeRange
+      -- ^ @INPUT_TYPE_RANGE@
+    | BIFIInputTypeSearch
+      -- ^ @INPUT_TYPE_SEARCH@
+    | BIFIInputTypeTel
+      -- ^ @INPUT_TYPE_TEL@
+    | BIFIInputTypeTime
+      -- ^ @INPUT_TYPE_TIME@
+    | BIFIInputTypeURL
+      -- ^ @INPUT_TYPE_URL@
+    | BIFIInputTypeWeek
+      -- ^ @INPUT_TYPE_WEEK@
+    | BIFILocalStorage
+      -- ^ @LOCAL_STORAGE@
+    | BIFIPostMessage
+      -- ^ @POST_MESSAGE@
+    | BIFISessionStorage
+      -- ^ @SESSION_STORAGE@
+    | BIFISmil
+      -- ^ @SMIL@
+    | BIFISvgClipPaths
+      -- ^ @SVG_CLIP_PATHS@
+    | BIFISvgFeImage
+      -- ^ @SVG_FE_IMAGE@
+    | BIFISvgFilters
+      -- ^ @SVG_FILTERS@
+    | BIFISvgHref
+      -- ^ @SVG_HREF@
+    | BIFITouch
+      -- ^ @TOUCH@
+    | BIFIVideo
+      -- ^ @VIDEO@
+    | BIFIWebgl
+      -- ^ @WEBGL@
+    | BIFIWebSockets
+      -- ^ @WEB_SOCKETS@
+    | BIFIWebSQLDatabase
+      -- ^ @WEB_SQL_DATABASE@
+    | BIFIWebWorkers
+      -- ^ @WEB_WORKERS@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AccountAccountProfile
+instance Hashable BackupImageFeaturesItem
 
-instance FromText AccountAccountProfile where
+instance FromText BackupImageFeaturesItem where
     fromText = \case
-        "ACCOUNT_PROFILE_BASIC" -> Just AccountProfileBasic
-        "ACCOUNT_PROFILE_STANDARD" -> Just AccountProfileStandard
+        "APPLICATION_CACHE" -> Just BIFIApplicationCache
+        "AUDIO" -> Just BIFIAudio
+        "CANVAS" -> Just BIFICanvas
+        "CANVAS_TEXT" -> Just BIFICanvasText
+        "CSS_ANIMATIONS" -> Just BIFICssAnimations
+        "CSS_BACKGROUND_SIZE" -> Just BIFICssBackgRoundSize
+        "CSS_BORDER_IMAGE" -> Just BIFICssBOrderImage
+        "CSS_BORDER_RADIUS" -> Just BIFICssBOrderRadius
+        "CSS_BOX_SHADOW" -> Just BIFICssBoxShadow
+        "CSS_COLUMNS" -> Just BIFICssColumns
+        "CSS_FLEX_BOX" -> Just BIFICssFlexBox
+        "CSS_FONT_FACE" -> Just BIFICssFontFace
+        "CSS_GENERATED_CONTENT" -> Just BIFICssGeneratedContent
+        "CSS_GRADIENTS" -> Just BIFICssGradients
+        "CSS_HSLA" -> Just BIFICssHsla
+        "CSS_MULTIPLE_BGS" -> Just BIFICssMultipleBgs
+        "CSS_OPACITY" -> Just BIFICssOpacity
+        "CSS_REFLECTIONS" -> Just BIFICssReflections
+        "CSS_RGBA" -> Just BIFICssRgba
+        "CSS_TEXT_SHADOW" -> Just BIFICssTextShadow
+        "CSS_TRANSFORMS" -> Just BIFICssTransforms
+        "CSS_TRANSFORMS3D" -> Just BIFICssTRANSFORMS3D
+        "CSS_TRANSITIONS" -> Just BIFICssTransitions
+        "DRAG_AND_DROP" -> Just BIFIDragAndDrop
+        "GEO_LOCATION" -> Just BIFIGeoLocation
+        "HASH_CHANGE" -> Just BIFIHashChange
+        "HISTORY" -> Just BIFIHistory
+        "INDEXED_DB" -> Just BIFIIndexedDB
+        "INLINE_SVG" -> Just BIFIInlineSvg
+        "INPUT_ATTR_AUTOCOMPLETE" -> Just BIFIInputAttrAutocomplete
+        "INPUT_ATTR_AUTOFOCUS" -> Just BIFIInputAttrAutofocus
+        "INPUT_ATTR_LIST" -> Just BIFIInputAttrList
+        "INPUT_ATTR_MAX" -> Just BIFIInputAttrMax
+        "INPUT_ATTR_MIN" -> Just BIFIInputAttrMin
+        "INPUT_ATTR_MULTIPLE" -> Just BIFIInputAttrMultiple
+        "INPUT_ATTR_PATTERN" -> Just BIFIInputAttrPattern
+        "INPUT_ATTR_PLACEHOLDER" -> Just BIFIInputAttrPlaceholder
+        "INPUT_ATTR_REQUIRED" -> Just BIFIInputAttrRequired
+        "INPUT_ATTR_STEP" -> Just BIFIInputAttrStep
+        "INPUT_TYPE_COLOR" -> Just BIFIInputTypeColor
+        "INPUT_TYPE_DATE" -> Just BIFIInputTypeDate
+        "INPUT_TYPE_DATETIME" -> Just BIFIInputTypeDatetime
+        "INPUT_TYPE_DATETIME_LOCAL" -> Just BIFIInputTypeDatetimeLocal
+        "INPUT_TYPE_EMAIL" -> Just BIFIInputTypeEmail
+        "INPUT_TYPE_MONTH" -> Just BIFIInputTypeMonth
+        "INPUT_TYPE_NUMBER" -> Just BIFIInputTypeNumber
+        "INPUT_TYPE_RANGE" -> Just BIFIInputTypeRange
+        "INPUT_TYPE_SEARCH" -> Just BIFIInputTypeSearch
+        "INPUT_TYPE_TEL" -> Just BIFIInputTypeTel
+        "INPUT_TYPE_TIME" -> Just BIFIInputTypeTime
+        "INPUT_TYPE_URL" -> Just BIFIInputTypeURL
+        "INPUT_TYPE_WEEK" -> Just BIFIInputTypeWeek
+        "LOCAL_STORAGE" -> Just BIFILocalStorage
+        "POST_MESSAGE" -> Just BIFIPostMessage
+        "SESSION_STORAGE" -> Just BIFISessionStorage
+        "SMIL" -> Just BIFISmil
+        "SVG_CLIP_PATHS" -> Just BIFISvgClipPaths
+        "SVG_FE_IMAGE" -> Just BIFISvgFeImage
+        "SVG_FILTERS" -> Just BIFISvgFilters
+        "SVG_HREF" -> Just BIFISvgHref
+        "TOUCH" -> Just BIFITouch
+        "VIDEO" -> Just BIFIVideo
+        "WEBGL" -> Just BIFIWebgl
+        "WEB_SOCKETS" -> Just BIFIWebSockets
+        "WEB_SQL_DATABASE" -> Just BIFIWebSQLDatabase
+        "WEB_WORKERS" -> Just BIFIWebWorkers
         _ -> Nothing
 
-instance ToText AccountAccountProfile where
+instance ToText BackupImageFeaturesItem where
     toText = \case
-        AccountProfileBasic -> "ACCOUNT_PROFILE_BASIC"
-        AccountProfileStandard -> "ACCOUNT_PROFILE_STANDARD"
+        BIFIApplicationCache -> "APPLICATION_CACHE"
+        BIFIAudio -> "AUDIO"
+        BIFICanvas -> "CANVAS"
+        BIFICanvasText -> "CANVAS_TEXT"
+        BIFICssAnimations -> "CSS_ANIMATIONS"
+        BIFICssBackgRoundSize -> "CSS_BACKGROUND_SIZE"
+        BIFICssBOrderImage -> "CSS_BORDER_IMAGE"
+        BIFICssBOrderRadius -> "CSS_BORDER_RADIUS"
+        BIFICssBoxShadow -> "CSS_BOX_SHADOW"
+        BIFICssColumns -> "CSS_COLUMNS"
+        BIFICssFlexBox -> "CSS_FLEX_BOX"
+        BIFICssFontFace -> "CSS_FONT_FACE"
+        BIFICssGeneratedContent -> "CSS_GENERATED_CONTENT"
+        BIFICssGradients -> "CSS_GRADIENTS"
+        BIFICssHsla -> "CSS_HSLA"
+        BIFICssMultipleBgs -> "CSS_MULTIPLE_BGS"
+        BIFICssOpacity -> "CSS_OPACITY"
+        BIFICssReflections -> "CSS_REFLECTIONS"
+        BIFICssRgba -> "CSS_RGBA"
+        BIFICssTextShadow -> "CSS_TEXT_SHADOW"
+        BIFICssTransforms -> "CSS_TRANSFORMS"
+        BIFICssTRANSFORMS3D -> "CSS_TRANSFORMS3D"
+        BIFICssTransitions -> "CSS_TRANSITIONS"
+        BIFIDragAndDrop -> "DRAG_AND_DROP"
+        BIFIGeoLocation -> "GEO_LOCATION"
+        BIFIHashChange -> "HASH_CHANGE"
+        BIFIHistory -> "HISTORY"
+        BIFIIndexedDB -> "INDEXED_DB"
+        BIFIInlineSvg -> "INLINE_SVG"
+        BIFIInputAttrAutocomplete -> "INPUT_ATTR_AUTOCOMPLETE"
+        BIFIInputAttrAutofocus -> "INPUT_ATTR_AUTOFOCUS"
+        BIFIInputAttrList -> "INPUT_ATTR_LIST"
+        BIFIInputAttrMax -> "INPUT_ATTR_MAX"
+        BIFIInputAttrMin -> "INPUT_ATTR_MIN"
+        BIFIInputAttrMultiple -> "INPUT_ATTR_MULTIPLE"
+        BIFIInputAttrPattern -> "INPUT_ATTR_PATTERN"
+        BIFIInputAttrPlaceholder -> "INPUT_ATTR_PLACEHOLDER"
+        BIFIInputAttrRequired -> "INPUT_ATTR_REQUIRED"
+        BIFIInputAttrStep -> "INPUT_ATTR_STEP"
+        BIFIInputTypeColor -> "INPUT_TYPE_COLOR"
+        BIFIInputTypeDate -> "INPUT_TYPE_DATE"
+        BIFIInputTypeDatetime -> "INPUT_TYPE_DATETIME"
+        BIFIInputTypeDatetimeLocal -> "INPUT_TYPE_DATETIME_LOCAL"
+        BIFIInputTypeEmail -> "INPUT_TYPE_EMAIL"
+        BIFIInputTypeMonth -> "INPUT_TYPE_MONTH"
+        BIFIInputTypeNumber -> "INPUT_TYPE_NUMBER"
+        BIFIInputTypeRange -> "INPUT_TYPE_RANGE"
+        BIFIInputTypeSearch -> "INPUT_TYPE_SEARCH"
+        BIFIInputTypeTel -> "INPUT_TYPE_TEL"
+        BIFIInputTypeTime -> "INPUT_TYPE_TIME"
+        BIFIInputTypeURL -> "INPUT_TYPE_URL"
+        BIFIInputTypeWeek -> "INPUT_TYPE_WEEK"
+        BIFILocalStorage -> "LOCAL_STORAGE"
+        BIFIPostMessage -> "POST_MESSAGE"
+        BIFISessionStorage -> "SESSION_STORAGE"
+        BIFISmil -> "SMIL"
+        BIFISvgClipPaths -> "SVG_CLIP_PATHS"
+        BIFISvgFeImage -> "SVG_FE_IMAGE"
+        BIFISvgFilters -> "SVG_FILTERS"
+        BIFISvgHref -> "SVG_HREF"
+        BIFITouch -> "TOUCH"
+        BIFIVideo -> "VIDEO"
+        BIFIWebgl -> "WEBGL"
+        BIFIWebSockets -> "WEB_SOCKETS"
+        BIFIWebSQLDatabase -> "WEB_SQL_DATABASE"
+        BIFIWebWorkers -> "WEB_WORKERS"
 
-instance FromJSON AccountAccountProfile where
-    parseJSON = parseJSONText "AccountAccountProfile"
+instance FromJSON BackupImageFeaturesItem where
+    parseJSON = parseJSONText "BackupImageFeaturesItem"
 
-instance ToJSON AccountAccountProfile where
+instance ToJSON BackupImageFeaturesItem where
     toJSON = toJSONText
 
-data PlacementTagFormats
-    = PTFPlacementTagClickCommands
-      -- ^ @PLACEMENT_TAG_CLICK_COMMANDS@
-    | PTFPlacementTagIframeIlayer
-      -- ^ @PLACEMENT_TAG_IFRAME_ILAYER@
-    | PTFPlacementTagIframeJavascript
-      -- ^ @PLACEMENT_TAG_IFRAME_JAVASCRIPT@
-    | PTFPlacementTagIframeJavascriptLegacy
-      -- ^ @PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY@
-    | PTFPlacementTagInstreamVideoPrefetch
-      -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH@
-    | PTFPlacementTagInstreamVideoPrefetchVast3
-      -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3@
-    | PTFPlacementTagInternalRedirect
-      -- ^ @PLACEMENT_TAG_INTERNAL_REDIRECT@
-    | PTFPlacementTagInterstitialIframeJavascript
-      -- ^ @PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT@
-    | PTFPlacementTagInterstitialIframeJavascriptLegacy
-      -- ^ @PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY@
-    | PTFPlacementTagInterstitialInternalRedirect
-      -- ^ @PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT@
-    | PTFPlacementTagInterstitialJavascript
-      -- ^ @PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT@
-    | PTFPlacementTagInterstitialJavascriptLegacy
-      -- ^ @PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY@
-    | PTFPlacementTagJavascript
-      -- ^ @PLACEMENT_TAG_JAVASCRIPT@
-    | PTFPlacementTagJavascriptLegacy
-      -- ^ @PLACEMENT_TAG_JAVASCRIPT_LEGACY@
-    | PTFPlacementTagStandard
-      -- ^ @PLACEMENT_TAG_STANDARD@
-    | PTFPlacementTagTracking
-      -- ^ @PLACEMENT_TAG_TRACKING@
-    | PTFPlacementTagTrackingIframe
-      -- ^ @PLACEMENT_TAG_TRACKING_IFRAME@
-    | PTFPlacementTagTrackingJavascript
-      -- ^ @PLACEMENT_TAG_TRACKING_JAVASCRIPT@
+-- | Day that will be counted as the first day of the week in reports. This
+-- is a required field.
+data FirstDayOfWeek
+    = FDOWMonday
+      -- ^ @MONDAY@
+    | FDOWSunday
+      -- ^ @SUNDAY@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable PlacementTagFormats
+instance Hashable FirstDayOfWeek
 
-instance FromText PlacementTagFormats where
+instance FromText FirstDayOfWeek where
     fromText = \case
-        "PLACEMENT_TAG_CLICK_COMMANDS" -> Just PTFPlacementTagClickCommands
-        "PLACEMENT_TAG_IFRAME_ILAYER" -> Just PTFPlacementTagIframeIlayer
-        "PLACEMENT_TAG_IFRAME_JAVASCRIPT" -> Just PTFPlacementTagIframeJavascript
-        "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY" -> Just PTFPlacementTagIframeJavascriptLegacy
-        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH" -> Just PTFPlacementTagInstreamVideoPrefetch
-        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3" -> Just PTFPlacementTagInstreamVideoPrefetchVast3
-        "PLACEMENT_TAG_INTERNAL_REDIRECT" -> Just PTFPlacementTagInternalRedirect
-        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT" -> Just PTFPlacementTagInterstitialIframeJavascript
-        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY" -> Just PTFPlacementTagInterstitialIframeJavascriptLegacy
-        "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT" -> Just PTFPlacementTagInterstitialInternalRedirect
-        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT" -> Just PTFPlacementTagInterstitialJavascript
-        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY" -> Just PTFPlacementTagInterstitialJavascriptLegacy
-        "PLACEMENT_TAG_JAVASCRIPT" -> Just PTFPlacementTagJavascript
-        "PLACEMENT_TAG_JAVASCRIPT_LEGACY" -> Just PTFPlacementTagJavascriptLegacy
-        "PLACEMENT_TAG_STANDARD" -> Just PTFPlacementTagStandard
-        "PLACEMENT_TAG_TRACKING" -> Just PTFPlacementTagTracking
-        "PLACEMENT_TAG_TRACKING_IFRAME" -> Just PTFPlacementTagTrackingIframe
-        "PLACEMENT_TAG_TRACKING_JAVASCRIPT" -> Just PTFPlacementTagTrackingJavascript
+        "MONDAY" -> Just FDOWMonday
+        "SUNDAY" -> Just FDOWSunday
         _ -> Nothing
 
-instance ToText PlacementTagFormats where
+instance ToText FirstDayOfWeek where
     toText = \case
-        PTFPlacementTagClickCommands -> "PLACEMENT_TAG_CLICK_COMMANDS"
-        PTFPlacementTagIframeIlayer -> "PLACEMENT_TAG_IFRAME_ILAYER"
-        PTFPlacementTagIframeJavascript -> "PLACEMENT_TAG_IFRAME_JAVASCRIPT"
-        PTFPlacementTagIframeJavascriptLegacy -> "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY"
-        PTFPlacementTagInstreamVideoPrefetch -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH"
-        PTFPlacementTagInstreamVideoPrefetchVast3 -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3"
-        PTFPlacementTagInternalRedirect -> "PLACEMENT_TAG_INTERNAL_REDIRECT"
-        PTFPlacementTagInterstitialIframeJavascript -> "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT"
-        PTFPlacementTagInterstitialIframeJavascriptLegacy -> "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY"
-        PTFPlacementTagInterstitialInternalRedirect -> "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT"
-        PTFPlacementTagInterstitialJavascript -> "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT"
-        PTFPlacementTagInterstitialJavascriptLegacy -> "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY"
-        PTFPlacementTagJavascript -> "PLACEMENT_TAG_JAVASCRIPT"
-        PTFPlacementTagJavascriptLegacy -> "PLACEMENT_TAG_JAVASCRIPT_LEGACY"
-        PTFPlacementTagStandard -> "PLACEMENT_TAG_STANDARD"
-        PTFPlacementTagTracking -> "PLACEMENT_TAG_TRACKING"
-        PTFPlacementTagTrackingIframe -> "PLACEMENT_TAG_TRACKING_IFRAME"
-        PTFPlacementTagTrackingJavascript -> "PLACEMENT_TAG_TRACKING_JAVASCRIPT"
+        FDOWMonday -> "MONDAY"
+        FDOWSunday -> "SUNDAY"
 
-instance FromJSON PlacementTagFormats where
-    parseJSON = parseJSONText "PlacementTagFormats"
+instance FromJSON FirstDayOfWeek where
+    parseJSON = parseJSONText "FirstDayOfWeek"
 
-instance ToJSON PlacementTagFormats where
+instance ToJSON FirstDayOfWeek where
     toJSON = toJSONText
 
--- | Field by which to sort the list.
-data DfareportingInventoryItemsListSortField
-    = DIILSFID
-      -- ^ @ID@
-    | DIILSFName
-      -- ^ @NAME@
+-- | Site filter type for this event tag. If no type is specified then the
+-- event tag will be applied to all sites.
+data SiteFilterType
+    = BlackList
+      -- ^ @BLACKLIST@
+    | WhiteList
+      -- ^ @WHITELIST@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DfareportingInventoryItemsListSortField
+instance Hashable SiteFilterType
 
-instance FromText DfareportingInventoryItemsListSortField where
+instance FromText SiteFilterType where
     fromText = \case
-        "ID" -> Just DIILSFID
-        "NAME" -> Just DIILSFName
+        "BLACKLIST" -> Just BlackList
+        "WHITELIST" -> Just WhiteList
         _ -> Nothing
 
-instance ToText DfareportingInventoryItemsListSortField where
+instance ToText SiteFilterType where
     toText = \case
-        DIILSFID -> "ID"
-        DIILSFName -> "NAME"
+        BlackList -> "BLACKLIST"
+        WhiteList -> "WHITELIST"
 
-instance FromJSON DfareportingInventoryItemsListSortField where
-    parseJSON = parseJSONText "DfareportingInventoryItemsListSortField"
+instance FromJSON SiteFilterType where
+    parseJSON = parseJSONText "SiteFilterType"
 
-instance ToJSON DfareportingInventoryItemsListSortField where
+instance ToJSON SiteFilterType where
     toJSON = toJSONText
 
 -- | Compatibility of this ad. Applicable when type is AD_SERVING_DEFAULT_AD.
@@ -6371,225 +6192,165 @@ instance FromJSON AdCompatibility where
 instance ToJSON AdCompatibility where
     toJSON = toJSONText
 
-data AccountPermissionAccountProfiles
-    = APAPAccountProfileBasic
-      -- ^ @ACCOUNT_PROFILE_BASIC@
-    | APAPAccountProfileStandard
-      -- ^ @ACCOUNT_PROFILE_STANDARD@
+data RepeatsOnWeekDaysItem
+    = ROWDIFriday
+      -- ^ @FRIDAY@
+    | ROWDIMonday
+      -- ^ @MONDAY@
+    | ROWDISaturday
+      -- ^ @SATURDAY@
+    | ROWDISunday
+      -- ^ @SUNDAY@
+    | ROWDIThursday
+      -- ^ @THURSDAY@
+    | ROWDITuesday
+      -- ^ @TUESDAY@
+    | ROWDIWednesday
+      -- ^ @WEDNESDAY@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AccountPermissionAccountProfiles
+instance Hashable RepeatsOnWeekDaysItem
 
-instance FromText AccountPermissionAccountProfiles where
+instance FromText RepeatsOnWeekDaysItem where
     fromText = \case
-        "ACCOUNT_PROFILE_BASIC" -> Just APAPAccountProfileBasic
-        "ACCOUNT_PROFILE_STANDARD" -> Just APAPAccountProfileStandard
+        "FRIDAY" -> Just ROWDIFriday
+        "MONDAY" -> Just ROWDIMonday
+        "SATURDAY" -> Just ROWDISaturday
+        "SUNDAY" -> Just ROWDISunday
+        "THURSDAY" -> Just ROWDIThursday
+        "TUESDAY" -> Just ROWDITuesday
+        "WEDNESDAY" -> Just ROWDIWednesday
         _ -> Nothing
 
-instance ToText AccountPermissionAccountProfiles where
+instance ToText RepeatsOnWeekDaysItem where
     toText = \case
-        APAPAccountProfileBasic -> "ACCOUNT_PROFILE_BASIC"
-        APAPAccountProfileStandard -> "ACCOUNT_PROFILE_STANDARD"
+        ROWDIFriday -> "FRIDAY"
+        ROWDIMonday -> "MONDAY"
+        ROWDISaturday -> "SATURDAY"
+        ROWDISunday -> "SUNDAY"
+        ROWDIThursday -> "THURSDAY"
+        ROWDITuesday -> "TUESDAY"
+        ROWDIWednesday -> "WEDNESDAY"
 
-instance FromJSON AccountPermissionAccountProfiles where
-    parseJSON = parseJSONText "AccountPermissionAccountProfiles"
+instance FromJSON RepeatsOnWeekDaysItem where
+    parseJSON = parseJSONText "RepeatsOnWeekDaysItem"
 
-instance ToJSON AccountPermissionAccountProfiles where
+instance ToJSON RepeatsOnWeekDaysItem where
     toJSON = toJSONText
 
--- | Type of browser window for which the backup image of the flash creative
--- can be displayed.
-data TargetWindowTargetWindowOption
-    = CurrentWindow
-      -- ^ @CURRENT_WINDOW@
-    | Custom
-      -- ^ @CUSTOM@
-    | NewWindow
-      -- ^ @NEW_WINDOW@
+-- | Select only ads with the specified creativeType.
+data CreativeType
+    = CBrandSafeDefaultInstreamVideo
+      -- ^ @BRAND_SAFE_DEFAULT_INSTREAM_VIDEO@
+    | CCustomInpage
+      -- ^ @CUSTOM_INPAGE@
+    | CCustomInterstitial
+      -- ^ @CUSTOM_INTERSTITIAL@
+    | CEnhancedBanner
+      -- ^ @ENHANCED_BANNER@
+    | CEnhancedImage
+      -- ^ @ENHANCED_IMAGE@
+    | CFlashInpage
+      -- ^ @FLASH_INPAGE@
+    | CHTML5Banner
+      -- ^ @HTML5_BANNER@
+    | CImage
+      -- ^ @IMAGE@
+    | CInstreamVideo
+      -- ^ @INSTREAM_VIDEO@
+    | CInternalRedirect
+      -- ^ @INTERNAL_REDIRECT@
+    | CInterstitialInternalRedirect
+      -- ^ @INTERSTITIAL_INTERNAL_REDIRECT@
+    | CRedirect
+      -- ^ @REDIRECT@
+    | CRichMediaExpanding
+      -- ^ @RICH_MEDIA_EXPANDING@
+    | CRichMediaImExpand
+      -- ^ @RICH_MEDIA_IM_EXPAND@
+    | CRichMediaInpage
+      -- ^ @RICH_MEDIA_INPAGE@
+    | CRichMediaInpageFloating
+      -- ^ @RICH_MEDIA_INPAGE_FLOATING@
+    | CRichMediaInterstitialFloat
+      -- ^ @RICH_MEDIA_INTERSTITIAL_FLOAT@
+    | CRichMediaMobileInApp
+      -- ^ @RICH_MEDIA_MOBILE_IN_APP@
+    | CRichMediaMultiFloating
+      -- ^ @RICH_MEDIA_MULTI_FLOATING@
+    | CRichMediaPeelDown
+      -- ^ @RICH_MEDIA_PEEL_DOWN@
+    | CTrackingText
+      -- ^ @TRACKING_TEXT@
+    | CVastRedirect
+      -- ^ @VAST_REDIRECT@
+    | CVpaidLinear
+      -- ^ @VPAID_LINEAR@
+    | CVpaidNonLinear
+      -- ^ @VPAID_NON_LINEAR@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable TargetWindowTargetWindowOption
+instance Hashable CreativeType
 
-instance FromText TargetWindowTargetWindowOption where
+instance FromText CreativeType where
     fromText = \case
-        "CURRENT_WINDOW" -> Just CurrentWindow
-        "CUSTOM" -> Just Custom
-        "NEW_WINDOW" -> Just NewWindow
+        "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO" -> Just CBrandSafeDefaultInstreamVideo
+        "CUSTOM_INPAGE" -> Just CCustomInpage
+        "CUSTOM_INTERSTITIAL" -> Just CCustomInterstitial
+        "ENHANCED_BANNER" -> Just CEnhancedBanner
+        "ENHANCED_IMAGE" -> Just CEnhancedImage
+        "FLASH_INPAGE" -> Just CFlashInpage
+        "HTML5_BANNER" -> Just CHTML5Banner
+        "IMAGE" -> Just CImage
+        "INSTREAM_VIDEO" -> Just CInstreamVideo
+        "INTERNAL_REDIRECT" -> Just CInternalRedirect
+        "INTERSTITIAL_INTERNAL_REDIRECT" -> Just CInterstitialInternalRedirect
+        "REDIRECT" -> Just CRedirect
+        "RICH_MEDIA_EXPANDING" -> Just CRichMediaExpanding
+        "RICH_MEDIA_IM_EXPAND" -> Just CRichMediaImExpand
+        "RICH_MEDIA_INPAGE" -> Just CRichMediaInpage
+        "RICH_MEDIA_INPAGE_FLOATING" -> Just CRichMediaInpageFloating
+        "RICH_MEDIA_INTERSTITIAL_FLOAT" -> Just CRichMediaInterstitialFloat
+        "RICH_MEDIA_MOBILE_IN_APP" -> Just CRichMediaMobileInApp
+        "RICH_MEDIA_MULTI_FLOATING" -> Just CRichMediaMultiFloating
+        "RICH_MEDIA_PEEL_DOWN" -> Just CRichMediaPeelDown
+        "TRACKING_TEXT" -> Just CTrackingText
+        "VAST_REDIRECT" -> Just CVastRedirect
+        "VPAID_LINEAR" -> Just CVpaidLinear
+        "VPAID_NON_LINEAR" -> Just CVpaidNonLinear
         _ -> Nothing
 
-instance ToText TargetWindowTargetWindowOption where
+instance ToText CreativeType where
     toText = \case
-        CurrentWindow -> "CURRENT_WINDOW"
-        Custom -> "CUSTOM"
-        NewWindow -> "NEW_WINDOW"
+        CBrandSafeDefaultInstreamVideo -> "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO"
+        CCustomInpage -> "CUSTOM_INPAGE"
+        CCustomInterstitial -> "CUSTOM_INTERSTITIAL"
+        CEnhancedBanner -> "ENHANCED_BANNER"
+        CEnhancedImage -> "ENHANCED_IMAGE"
+        CFlashInpage -> "FLASH_INPAGE"
+        CHTML5Banner -> "HTML5_BANNER"
+        CImage -> "IMAGE"
+        CInstreamVideo -> "INSTREAM_VIDEO"
+        CInternalRedirect -> "INTERNAL_REDIRECT"
+        CInterstitialInternalRedirect -> "INTERSTITIAL_INTERNAL_REDIRECT"
+        CRedirect -> "REDIRECT"
+        CRichMediaExpanding -> "RICH_MEDIA_EXPANDING"
+        CRichMediaImExpand -> "RICH_MEDIA_IM_EXPAND"
+        CRichMediaInpage -> "RICH_MEDIA_INPAGE"
+        CRichMediaInpageFloating -> "RICH_MEDIA_INPAGE_FLOATING"
+        CRichMediaInterstitialFloat -> "RICH_MEDIA_INTERSTITIAL_FLOAT"
+        CRichMediaMobileInApp -> "RICH_MEDIA_MOBILE_IN_APP"
+        CRichMediaMultiFloating -> "RICH_MEDIA_MULTI_FLOATING"
+        CRichMediaPeelDown -> "RICH_MEDIA_PEEL_DOWN"
+        CTrackingText -> "TRACKING_TEXT"
+        CVastRedirect -> "VAST_REDIRECT"
+        CVpaidLinear -> "VPAID_LINEAR"
+        CVpaidNonLinear -> "VPAID_NON_LINEAR"
 
-instance FromJSON TargetWindowTargetWindowOption where
-    parseJSON = parseJSONText "TargetWindowTargetWindowOption"
+instance FromJSON CreativeType where
+    parseJSON = parseJSONText "CreativeType"
 
-instance ToJSON TargetWindowTargetWindowOption where
-    toJSON = toJSONText
-
--- | Select only change logs with the specified object type.
-data DfareportingChangeLogsListObjectType
-    = ObjectAccount
-      -- ^ @OBJECT_ACCOUNT@
-    | ObjectAccountBillingFeature
-      -- ^ @OBJECT_ACCOUNT_BILLING_FEATURE@
-    | ObjectAd
-      -- ^ @OBJECT_AD@
-    | ObjectAdvertiser
-      -- ^ @OBJECT_ADVERTISER@
-    | ObjectAdvertiserGroup
-      -- ^ @OBJECT_ADVERTISER_GROUP@
-    | ObjectBillingAccountGroup
-      -- ^ @OBJECT_BILLING_ACCOUNT_GROUP@
-    | ObjectBillingFeature
-      -- ^ @OBJECT_BILLING_FEATURE@
-    | ObjectBillingMinimumFee
-      -- ^ @OBJECT_BILLING_MINIMUM_FEE@
-    | ObjectBillingProfile
-      -- ^ @OBJECT_BILLING_PROFILE@
-    | ObjectCampaign
-      -- ^ @OBJECT_CAMPAIGN@
-    | ObjectContentCategory
-      -- ^ @OBJECT_CONTENT_CATEGORY@
-    | ObjectCreative
-      -- ^ @OBJECT_CREATIVE@
-    | ObjectCreativeAsset
-      -- ^ @OBJECT_CREATIVE_ASSET@
-    | ObjectCreativeBundle
-      -- ^ @OBJECT_CREATIVE_BUNDLE@
-    | ObjectCreativeField
-      -- ^ @OBJECT_CREATIVE_FIELD@
-    | ObjectCreativeGroup
-      -- ^ @OBJECT_CREATIVE_GROUP@
-    | ObjectDfaSite
-      -- ^ @OBJECT_DFA_SITE@
-    | ObjectEventTag
-      -- ^ @OBJECT_EVENT_TAG@
-    | ObjectFloodlightActivityGroup
-      -- ^ @OBJECT_FLOODLIGHT_ACTIVITY_GROUP@
-    | ObjectFloodlightActvity
-      -- ^ @OBJECT_FLOODLIGHT_ACTVITY@
-    | ObjectFloodlightConfiguration
-      -- ^ @OBJECT_FLOODLIGHT_CONFIGURATION@
-    | ObjectInstreamCreative
-      -- ^ @OBJECT_INSTREAM_CREATIVE@
-    | ObjectLandingPage
-      -- ^ @OBJECT_LANDING_PAGE@
-    | ObjectMediaOrder
-      -- ^ @OBJECT_MEDIA_ORDER@
-    | ObjectPlacement
-      -- ^ @OBJECT_PLACEMENT@
-    | ObjectPlacementStrategy
-      -- ^ @OBJECT_PLACEMENT_STRATEGY@
-    | ObjectProvidedListClient
-      -- ^ @OBJECT_PROVIDED_LIST_CLIENT@
-    | ObjectRateCard
-      -- ^ @OBJECT_RATE_CARD@
-    | ObjectRemarketingList
-      -- ^ @OBJECT_REMARKETING_LIST@
-    | ObjectRichmediaCreative
-      -- ^ @OBJECT_RICHMEDIA_CREATIVE@
-    | ObjectSdSite
-      -- ^ @OBJECT_SD_SITE@
-    | ObjectSize
-      -- ^ @OBJECT_SIZE@
-    | ObjectSubAccount
-      -- ^ @OBJECT_SUBACCOUNT@
-    | ObjectUserProfile
-      -- ^ @OBJECT_USER_PROFILE@
-    | ObjectUserProfileFilter
-      -- ^ @OBJECT_USER_PROFILE_FILTER@
-    | ObjectUserRole
-      -- ^ @OBJECT_USER_ROLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DfareportingChangeLogsListObjectType
-
-instance FromText DfareportingChangeLogsListObjectType where
-    fromText = \case
-        "OBJECT_ACCOUNT" -> Just ObjectAccount
-        "OBJECT_ACCOUNT_BILLING_FEATURE" -> Just ObjectAccountBillingFeature
-        "OBJECT_AD" -> Just ObjectAd
-        "OBJECT_ADVERTISER" -> Just ObjectAdvertiser
-        "OBJECT_ADVERTISER_GROUP" -> Just ObjectAdvertiserGroup
-        "OBJECT_BILLING_ACCOUNT_GROUP" -> Just ObjectBillingAccountGroup
-        "OBJECT_BILLING_FEATURE" -> Just ObjectBillingFeature
-        "OBJECT_BILLING_MINIMUM_FEE" -> Just ObjectBillingMinimumFee
-        "OBJECT_BILLING_PROFILE" -> Just ObjectBillingProfile
-        "OBJECT_CAMPAIGN" -> Just ObjectCampaign
-        "OBJECT_CONTENT_CATEGORY" -> Just ObjectContentCategory
-        "OBJECT_CREATIVE" -> Just ObjectCreative
-        "OBJECT_CREATIVE_ASSET" -> Just ObjectCreativeAsset
-        "OBJECT_CREATIVE_BUNDLE" -> Just ObjectCreativeBundle
-        "OBJECT_CREATIVE_FIELD" -> Just ObjectCreativeField
-        "OBJECT_CREATIVE_GROUP" -> Just ObjectCreativeGroup
-        "OBJECT_DFA_SITE" -> Just ObjectDfaSite
-        "OBJECT_EVENT_TAG" -> Just ObjectEventTag
-        "OBJECT_FLOODLIGHT_ACTIVITY_GROUP" -> Just ObjectFloodlightActivityGroup
-        "OBJECT_FLOODLIGHT_ACTVITY" -> Just ObjectFloodlightActvity
-        "OBJECT_FLOODLIGHT_CONFIGURATION" -> Just ObjectFloodlightConfiguration
-        "OBJECT_INSTREAM_CREATIVE" -> Just ObjectInstreamCreative
-        "OBJECT_LANDING_PAGE" -> Just ObjectLandingPage
-        "OBJECT_MEDIA_ORDER" -> Just ObjectMediaOrder
-        "OBJECT_PLACEMENT" -> Just ObjectPlacement
-        "OBJECT_PLACEMENT_STRATEGY" -> Just ObjectPlacementStrategy
-        "OBJECT_PROVIDED_LIST_CLIENT" -> Just ObjectProvidedListClient
-        "OBJECT_RATE_CARD" -> Just ObjectRateCard
-        "OBJECT_REMARKETING_LIST" -> Just ObjectRemarketingList
-        "OBJECT_RICHMEDIA_CREATIVE" -> Just ObjectRichmediaCreative
-        "OBJECT_SD_SITE" -> Just ObjectSdSite
-        "OBJECT_SIZE" -> Just ObjectSize
-        "OBJECT_SUBACCOUNT" -> Just ObjectSubAccount
-        "OBJECT_USER_PROFILE" -> Just ObjectUserProfile
-        "OBJECT_USER_PROFILE_FILTER" -> Just ObjectUserProfileFilter
-        "OBJECT_USER_ROLE" -> Just ObjectUserRole
-        _ -> Nothing
-
-instance ToText DfareportingChangeLogsListObjectType where
-    toText = \case
-        ObjectAccount -> "OBJECT_ACCOUNT"
-        ObjectAccountBillingFeature -> "OBJECT_ACCOUNT_BILLING_FEATURE"
-        ObjectAd -> "OBJECT_AD"
-        ObjectAdvertiser -> "OBJECT_ADVERTISER"
-        ObjectAdvertiserGroup -> "OBJECT_ADVERTISER_GROUP"
-        ObjectBillingAccountGroup -> "OBJECT_BILLING_ACCOUNT_GROUP"
-        ObjectBillingFeature -> "OBJECT_BILLING_FEATURE"
-        ObjectBillingMinimumFee -> "OBJECT_BILLING_MINIMUM_FEE"
-        ObjectBillingProfile -> "OBJECT_BILLING_PROFILE"
-        ObjectCampaign -> "OBJECT_CAMPAIGN"
-        ObjectContentCategory -> "OBJECT_CONTENT_CATEGORY"
-        ObjectCreative -> "OBJECT_CREATIVE"
-        ObjectCreativeAsset -> "OBJECT_CREATIVE_ASSET"
-        ObjectCreativeBundle -> "OBJECT_CREATIVE_BUNDLE"
-        ObjectCreativeField -> "OBJECT_CREATIVE_FIELD"
-        ObjectCreativeGroup -> "OBJECT_CREATIVE_GROUP"
-        ObjectDfaSite -> "OBJECT_DFA_SITE"
-        ObjectEventTag -> "OBJECT_EVENT_TAG"
-        ObjectFloodlightActivityGroup -> "OBJECT_FLOODLIGHT_ACTIVITY_GROUP"
-        ObjectFloodlightActvity -> "OBJECT_FLOODLIGHT_ACTVITY"
-        ObjectFloodlightConfiguration -> "OBJECT_FLOODLIGHT_CONFIGURATION"
-        ObjectInstreamCreative -> "OBJECT_INSTREAM_CREATIVE"
-        ObjectLandingPage -> "OBJECT_LANDING_PAGE"
-        ObjectMediaOrder -> "OBJECT_MEDIA_ORDER"
-        ObjectPlacement -> "OBJECT_PLACEMENT"
-        ObjectPlacementStrategy -> "OBJECT_PLACEMENT_STRATEGY"
-        ObjectProvidedListClient -> "OBJECT_PROVIDED_LIST_CLIENT"
-        ObjectRateCard -> "OBJECT_RATE_CARD"
-        ObjectRemarketingList -> "OBJECT_REMARKETING_LIST"
-        ObjectRichmediaCreative -> "OBJECT_RICHMEDIA_CREATIVE"
-        ObjectSdSite -> "OBJECT_SD_SITE"
-        ObjectSize -> "OBJECT_SIZE"
-        ObjectSubAccount -> "OBJECT_SUBACCOUNT"
-        ObjectUserProfile -> "OBJECT_USER_PROFILE"
-        ObjectUserProfileFilter -> "OBJECT_USER_PROFILE_FILTER"
-        ObjectUserRole -> "OBJECT_USER_ROLE"
-
-instance FromJSON DfareportingChangeLogsListObjectType where
-    parseJSON = parseJSONText "DfareportingChangeLogsListObjectType"
-
-instance ToJSON DfareportingChangeLogsListObjectType where
+instance ToJSON CreativeType where
     toJSON = toJSONText
 
 -- | Order of sorted results, default is ASCENDING.
@@ -6619,6 +6380,40 @@ instance FromJSON DfareportingSitesListSortOrder where
 instance ToJSON DfareportingSitesListSortOrder where
     toJSON = toJSONText
 
+data StandardVariableTypesItem
+    = Num
+      -- ^ @NUM@
+    | Ord
+      -- ^ @ORD@
+    | Tran
+      -- ^ @TRAN@
+    | U
+      -- ^ @U@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable StandardVariableTypesItem
+
+instance FromText StandardVariableTypesItem where
+    fromText = \case
+        "NUM" -> Just Num
+        "ORD" -> Just Ord
+        "TRAN" -> Just Tran
+        "U" -> Just U
+        _ -> Nothing
+
+instance ToText StandardVariableTypesItem where
+    toText = \case
+        Num -> "NUM"
+        Ord -> "ORD"
+        Tran -> "TRAN"
+        U -> "U"
+
+instance FromJSON StandardVariableTypesItem where
+    parseJSON = parseJSONText "StandardVariableTypesItem"
+
+instance ToJSON StandardVariableTypesItem where
+    toJSON = toJSONText
+
 -- | Order of sorted results, default is \'DESCENDING\'.
 data DfareportingReportsFilesListSortOrder
     = DRFLSOAscending
@@ -6646,6 +6441,33 @@ instance FromJSON DfareportingReportsFilesListSortOrder where
     parseJSON = parseJSONText "DfareportingReportsFilesListSortOrder"
 
 instance ToJSON DfareportingReportsFilesListSortOrder where
+    toJSON = toJSONText
+
+-- | Audience gender of this project.
+data AudienceGender
+    = PlanningAudienceGenderFemale
+      -- ^ @PLANNING_AUDIENCE_GENDER_FEMALE@
+    | PlanningAudienceGenderMale
+      -- ^ @PLANNING_AUDIENCE_GENDER_MALE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable AudienceGender
+
+instance FromText AudienceGender where
+    fromText = \case
+        "PLANNING_AUDIENCE_GENDER_FEMALE" -> Just PlanningAudienceGenderFemale
+        "PLANNING_AUDIENCE_GENDER_MALE" -> Just PlanningAudienceGenderMale
+        _ -> Nothing
+
+instance ToText AudienceGender where
+    toText = \case
+        PlanningAudienceGenderFemale -> "PLANNING_AUDIENCE_GENDER_FEMALE"
+        PlanningAudienceGenderMale -> "PLANNING_AUDIENCE_GENDER_MALE"
+
+instance FromJSON AudienceGender where
+    parseJSON = parseJSONText "AudienceGender"
+
+instance ToJSON AudienceGender where
     toJSON = toJSONText
 
 -- | The type of the report.
@@ -6687,6 +6509,70 @@ instance FromJSON ReportType where
 instance ToJSON ReportType where
     toJSON = toJSONText
 
+-- | Enum to define for \"MONTHLY\" scheduled reports whether reports should
+-- be repeated on the same day of the month as \"startDate\" or the same
+-- day of the week of the month. Example: If \'startDate\' is Monday, April
+-- 2nd 2012 (2012-04-02), \"DAY_OF_MONTH\" would run subsequent reports on
+-- the 2nd of every Month, and \"WEEK_OF_MONTH\" would run subsequent
+-- reports on the first Monday of the month.
+data RunsOnDayOfMonth
+    = DayOfMonth
+      -- ^ @DAY_OF_MONTH@
+    | WeekOfMonth
+      -- ^ @WEEK_OF_MONTH@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable RunsOnDayOfMonth
+
+instance FromText RunsOnDayOfMonth where
+    fromText = \case
+        "DAY_OF_MONTH" -> Just DayOfMonth
+        "WEEK_OF_MONTH" -> Just WeekOfMonth
+        _ -> Nothing
+
+instance ToText RunsOnDayOfMonth where
+    toText = \case
+        DayOfMonth -> "DAY_OF_MONTH"
+        WeekOfMonth -> "WEEK_OF_MONTH"
+
+instance FromJSON RunsOnDayOfMonth where
+    parseJSON = parseJSONText "RunsOnDayOfMonth"
+
+instance ToJSON RunsOnDayOfMonth where
+    toJSON = toJSONText
+
+-- | Type of browser window for which the backup image of the flash creative
+-- can be displayed.
+data TargetWindowOption
+    = CurrentWindow
+      -- ^ @CURRENT_WINDOW@
+    | Custom
+      -- ^ @CUSTOM@
+    | NewWindow
+      -- ^ @NEW_WINDOW@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable TargetWindowOption
+
+instance FromText TargetWindowOption where
+    fromText = \case
+        "CURRENT_WINDOW" -> Just CurrentWindow
+        "CUSTOM" -> Just Custom
+        "NEW_WINDOW" -> Just NewWindow
+        _ -> Nothing
+
+instance ToText TargetWindowOption where
+    toText = \case
+        CurrentWindow -> "CURRENT_WINDOW"
+        Custom -> "CUSTOM"
+        NewWindow -> "NEW_WINDOW"
+
+instance FromJSON TargetWindowOption where
+    parseJSON = parseJSONText "TargetWindowOption"
+
+instance ToJSON TargetWindowOption where
+    toJSON = toJSONText
+
 -- | Order of sorted results, default is ASCENDING.
 data DfareportingEventTagsListSortOrder
     = DETLSOAscending
@@ -6714,109 +6600,130 @@ instance FromJSON DfareportingEventTagsListSortOrder where
 instance ToJSON DfareportingEventTagsListSortOrder where
     toJSON = toJSONText
 
--- | Type of the event. This is a read-only field.
-data CreativeCustomEventAdvertiserCustomEventType
-    = AdvertiserEventCounter
-      -- ^ @ADVERTISER_EVENT_COUNTER@
-    | AdvertiserEventExit
-      -- ^ @ADVERTISER_EVENT_EXIT@
-    | AdvertiserEventTimer
-      -- ^ @ADVERTISER_EVENT_TIMER@
+-- | Variable name in the tag. This is a required field.
+data VariableType
+    = VTU1
+      -- ^ @U1@
+    | VTU10
+      -- ^ @U10@
+    | VTU11
+      -- ^ @U11@
+    | VTU12
+      -- ^ @U12@
+    | VTU13
+      -- ^ @U13@
+    | VTU14
+      -- ^ @U14@
+    | VTU15
+      -- ^ @U15@
+    | VTU16
+      -- ^ @U16@
+    | VTU17
+      -- ^ @U17@
+    | VTU18
+      -- ^ @U18@
+    | VTU19
+      -- ^ @U19@
+    | VTU2
+      -- ^ @U2@
+    | VTU20
+      -- ^ @U20@
+    | VTU3
+      -- ^ @U3@
+    | VTU4
+      -- ^ @U4@
+    | VTU5
+      -- ^ @U5@
+    | VTU6
+      -- ^ @U6@
+    | VTU7
+      -- ^ @U7@
+    | VTU8
+      -- ^ @U8@
+    | VTU9
+      -- ^ @U9@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CreativeCustomEventAdvertiserCustomEventType
+instance Hashable VariableType
 
-instance FromText CreativeCustomEventAdvertiserCustomEventType where
+instance FromText VariableType where
     fromText = \case
-        "ADVERTISER_EVENT_COUNTER" -> Just AdvertiserEventCounter
-        "ADVERTISER_EVENT_EXIT" -> Just AdvertiserEventExit
-        "ADVERTISER_EVENT_TIMER" -> Just AdvertiserEventTimer
+        "U1" -> Just VTU1
+        "U10" -> Just VTU10
+        "U11" -> Just VTU11
+        "U12" -> Just VTU12
+        "U13" -> Just VTU13
+        "U14" -> Just VTU14
+        "U15" -> Just VTU15
+        "U16" -> Just VTU16
+        "U17" -> Just VTU17
+        "U18" -> Just VTU18
+        "U19" -> Just VTU19
+        "U2" -> Just VTU2
+        "U20" -> Just VTU20
+        "U3" -> Just VTU3
+        "U4" -> Just VTU4
+        "U5" -> Just VTU5
+        "U6" -> Just VTU6
+        "U7" -> Just VTU7
+        "U8" -> Just VTU8
+        "U9" -> Just VTU9
         _ -> Nothing
 
-instance ToText CreativeCustomEventAdvertiserCustomEventType where
+instance ToText VariableType where
     toText = \case
-        AdvertiserEventCounter -> "ADVERTISER_EVENT_COUNTER"
-        AdvertiserEventExit -> "ADVERTISER_EVENT_EXIT"
-        AdvertiserEventTimer -> "ADVERTISER_EVENT_TIMER"
+        VTU1 -> "U1"
+        VTU10 -> "U10"
+        VTU11 -> "U11"
+        VTU12 -> "U12"
+        VTU13 -> "U13"
+        VTU14 -> "U14"
+        VTU15 -> "U15"
+        VTU16 -> "U16"
+        VTU17 -> "U17"
+        VTU18 -> "U18"
+        VTU19 -> "U19"
+        VTU2 -> "U2"
+        VTU20 -> "U20"
+        VTU3 -> "U3"
+        VTU4 -> "U4"
+        VTU5 -> "U5"
+        VTU6 -> "U6"
+        VTU7 -> "U7"
+        VTU8 -> "U8"
+        VTU9 -> "U9"
 
-instance FromJSON CreativeCustomEventAdvertiserCustomEventType where
-    parseJSON = parseJSONText "CreativeCustomEventAdvertiserCustomEventType"
+instance FromJSON VariableType where
+    parseJSON = parseJSONText "VariableType"
 
-instance ToJSON CreativeCustomEventAdvertiserCustomEventType where
+instance ToJSON VariableType where
     toJSON = toJSONText
 
--- | The dimension option.
-data ReportCrossDimensionReachCriteriaDimension
-    = RCDRCDAdvertiser
-      -- ^ @ADVERTISER@
-    | RCDRCDCampaign
-      -- ^ @CAMPAIGN@
-    | RCDRCDSiteByAdvertiser
-      -- ^ @SITE_BY_ADVERTISER@
-    | RCDRCDSiteByCampaign
-      -- ^ @SITE_BY_CAMPAIGN@
+-- | Administrative level required to enable this account permission.
+data Level
+    = Administrator
+      -- ^ @ADMINISTRATOR@
+    | User
+      -- ^ @USER@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ReportCrossDimensionReachCriteriaDimension
+instance Hashable Level
 
-instance FromText ReportCrossDimensionReachCriteriaDimension where
+instance FromText Level where
     fromText = \case
-        "ADVERTISER" -> Just RCDRCDAdvertiser
-        "CAMPAIGN" -> Just RCDRCDCampaign
-        "SITE_BY_ADVERTISER" -> Just RCDRCDSiteByAdvertiser
-        "SITE_BY_CAMPAIGN" -> Just RCDRCDSiteByCampaign
+        "ADMINISTRATOR" -> Just Administrator
+        "USER" -> Just User
         _ -> Nothing
 
-instance ToText ReportCrossDimensionReachCriteriaDimension where
+instance ToText Level where
     toText = \case
-        RCDRCDAdvertiser -> "ADVERTISER"
-        RCDRCDCampaign -> "CAMPAIGN"
-        RCDRCDSiteByAdvertiser -> "SITE_BY_ADVERTISER"
-        RCDRCDSiteByCampaign -> "SITE_BY_CAMPAIGN"
+        Administrator -> "ADMINISTRATOR"
+        User -> "USER"
 
-instance FromJSON ReportCrossDimensionReachCriteriaDimension where
-    parseJSON = parseJSONText "ReportCrossDimensionReachCriteriaDimension"
+instance FromJSON Level where
+    parseJSON = parseJSONText "Level"
 
-instance ToJSON ReportCrossDimensionReachCriteriaDimension where
-    toJSON = toJSONText
-
--- | Select only placements with these pricing types.
-data DfareportingPlacementsListPricingTypes
-    = DPLPTPricingTypeCpa
-      -- ^ @PRICING_TYPE_CPA@
-    | DPLPTPricingTypeCpc
-      -- ^ @PRICING_TYPE_CPC@
-    | DPLPTPricingTypeCpm
-      -- ^ @PRICING_TYPE_CPM@
-    | DPLPTPricingTypeFlatRateClicks
-      -- ^ @PRICING_TYPE_FLAT_RATE_CLICKS@
-    | DPLPTPricingTypeFlatRateImpressions
-      -- ^ @PRICING_TYPE_FLAT_RATE_IMPRESSIONS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DfareportingPlacementsListPricingTypes
-
-instance FromText DfareportingPlacementsListPricingTypes where
-    fromText = \case
-        "PRICING_TYPE_CPA" -> Just DPLPTPricingTypeCpa
-        "PRICING_TYPE_CPC" -> Just DPLPTPricingTypeCpc
-        "PRICING_TYPE_CPM" -> Just DPLPTPricingTypeCpm
-        "PRICING_TYPE_FLAT_RATE_CLICKS" -> Just DPLPTPricingTypeFlatRateClicks
-        "PRICING_TYPE_FLAT_RATE_IMPRESSIONS" -> Just DPLPTPricingTypeFlatRateImpressions
-        _ -> Nothing
-
-instance ToText DfareportingPlacementsListPricingTypes where
-    toText = \case
-        DPLPTPricingTypeCpa -> "PRICING_TYPE_CPA"
-        DPLPTPricingTypeCpc -> "PRICING_TYPE_CPC"
-        DPLPTPricingTypeCpm -> "PRICING_TYPE_CPM"
-        DPLPTPricingTypeFlatRateClicks -> "PRICING_TYPE_FLAT_RATE_CLICKS"
-        DPLPTPricingTypeFlatRateImpressions -> "PRICING_TYPE_FLAT_RATE_IMPRESSIONS"
-
-instance FromJSON DfareportingPlacementsListPricingTypes where
-    parseJSON = parseJSONText "DfareportingPlacementsListPricingTypes"
-
-instance ToJSON DfareportingPlacementsListPricingTypes where
+instance ToJSON Level where
     toJSON = toJSONText
 
 -- | Field by which to sort the list.
@@ -6846,59 +6753,79 @@ instance FromJSON DfareportingTargetableRemarketingListsListSortField where
 instance ToJSON DfareportingTargetableRemarketingListsListSortField where
     toJSON = toJSONText
 
--- | Select only floodlight activities with the specified floodlight activity
--- group type.
-data DfareportingFloodlightActivitiesListFloodlightActivityGroupType
-    = DFALFAGTCounter
-      -- ^ @COUNTER@
-    | DFALFAGTSale
-      -- ^ @SALE@
+-- | Select default ads with the specified compatibility. Applicable when
+-- type is AD_SERVING_DEFAULT_AD. WEB and WEB_INTERSTITIAL refer to
+-- rendering either on desktop or on mobile devices for regular or
+-- interstitial ads, respectively. APP and APP_INTERSTITIAL are for
+-- rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an
+-- in-stream video ads developed with the VAST standard.
+data Compatibility
+    = COMApp
+      -- ^ @APP@
+    | COMAppInterstitial
+      -- ^ @APP_INTERSTITIAL@
+    | COMInStreamVideo
+      -- ^ @IN_STREAM_VIDEO@
+    | COMWeb
+      -- ^ @WEB@
+    | COMWebInterstitial
+      -- ^ @WEB_INTERSTITIAL@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DfareportingFloodlightActivitiesListFloodlightActivityGroupType
+instance Hashable Compatibility
 
-instance FromText DfareportingFloodlightActivitiesListFloodlightActivityGroupType where
+instance FromText Compatibility where
     fromText = \case
-        "COUNTER" -> Just DFALFAGTCounter
-        "SALE" -> Just DFALFAGTSale
+        "APP" -> Just COMApp
+        "APP_INTERSTITIAL" -> Just COMAppInterstitial
+        "IN_STREAM_VIDEO" -> Just COMInStreamVideo
+        "WEB" -> Just COMWeb
+        "WEB_INTERSTITIAL" -> Just COMWebInterstitial
         _ -> Nothing
 
-instance ToText DfareportingFloodlightActivitiesListFloodlightActivityGroupType where
+instance ToText Compatibility where
     toText = \case
-        DFALFAGTCounter -> "COUNTER"
-        DFALFAGTSale -> "SALE"
+        COMApp -> "APP"
+        COMAppInterstitial -> "APP_INTERSTITIAL"
+        COMInStreamVideo -> "IN_STREAM_VIDEO"
+        COMWeb -> "WEB"
+        COMWebInterstitial -> "WEB_INTERSTITIAL"
 
-instance FromJSON DfareportingFloodlightActivitiesListFloodlightActivityGroupType where
-    parseJSON = parseJSONText "DfareportingFloodlightActivitiesListFloodlightActivityGroupType"
+instance FromJSON Compatibility where
+    parseJSON = parseJSONText "Compatibility"
 
-instance ToJSON DfareportingFloodlightActivitiesListFloodlightActivityGroupType where
+instance ToJSON Compatibility where
     toJSON = toJSONText
 
--- | Payment source type of this ad slot.
-data AdSlotPaymentSourceType
-    = PlanningPaymentSourceTypeAgencyPaid
-      -- ^ @PLANNING_PAYMENT_SOURCE_TYPE_AGENCY_PAID@
-    | PlanningPaymentSourceTypePublisherPaid
-      -- ^ @PLANNING_PAYMENT_SOURCE_TYPE_PUBLISHER_PAID@
+-- | Artwork type used by the creative.This is a read-only field.
+data ArtworkType
+    = ATArtworkTypeFlash
+      -- ^ @ARTWORK_TYPE_FLASH@
+    | ATArtworkTypeHTML5
+      -- ^ @ARTWORK_TYPE_HTML5@
+    | ATArtworkTypeMixed
+      -- ^ @ARTWORK_TYPE_MIXED@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AdSlotPaymentSourceType
+instance Hashable ArtworkType
 
-instance FromText AdSlotPaymentSourceType where
+instance FromText ArtworkType where
     fromText = \case
-        "PLANNING_PAYMENT_SOURCE_TYPE_AGENCY_PAID" -> Just PlanningPaymentSourceTypeAgencyPaid
-        "PLANNING_PAYMENT_SOURCE_TYPE_PUBLISHER_PAID" -> Just PlanningPaymentSourceTypePublisherPaid
+        "ARTWORK_TYPE_FLASH" -> Just ATArtworkTypeFlash
+        "ARTWORK_TYPE_HTML5" -> Just ATArtworkTypeHTML5
+        "ARTWORK_TYPE_MIXED" -> Just ATArtworkTypeMixed
         _ -> Nothing
 
-instance ToText AdSlotPaymentSourceType where
+instance ToText ArtworkType where
     toText = \case
-        PlanningPaymentSourceTypeAgencyPaid -> "PLANNING_PAYMENT_SOURCE_TYPE_AGENCY_PAID"
-        PlanningPaymentSourceTypePublisherPaid -> "PLANNING_PAYMENT_SOURCE_TYPE_PUBLISHER_PAID"
+        ATArtworkTypeFlash -> "ARTWORK_TYPE_FLASH"
+        ATArtworkTypeHTML5 -> "ARTWORK_TYPE_HTML5"
+        ATArtworkTypeMixed -> "ARTWORK_TYPE_MIXED"
 
-instance FromJSON AdSlotPaymentSourceType where
-    parseJSON = parseJSONText "AdSlotPaymentSourceType"
+instance FromJSON ArtworkType where
+    parseJSON = parseJSONText "ArtworkType"
 
-instance ToJSON AdSlotPaymentSourceType where
+instance ToJSON ArtworkType where
     toJSON = toJSONText
 
 -- | Field by which to sort the list.
@@ -6984,6 +6911,183 @@ instance FromJSON DfareportingFilesListSortOrder where
 instance ToJSON DfareportingFilesListSortOrder where
     toJSON = toJSONText
 
+-- | Third-party URL type for in-stream video creatives.
+data ThirdPartyURLType
+    = ClickTracking
+      -- ^ @CLICK_TRACKING@
+    | Impression
+      -- ^ @IMPRESSION@
+    | RichMediaBackupImpression
+      -- ^ @RICH_MEDIA_BACKUP_IMPRESSION@
+    | RichMediaImpression
+      -- ^ @RICH_MEDIA_IMPRESSION@
+    | RichMediaRmImpression
+      -- ^ @RICH_MEDIA_RM_IMPRESSION@
+    | Survey
+      -- ^ @SURVEY@
+    | VideoComplete
+      -- ^ @VIDEO_COMPLETE@
+    | VideoCustom
+      -- ^ @VIDEO_CUSTOM@
+    | VideoFirstQuartile
+      -- ^ @VIDEO_FIRST_QUARTILE@
+    | VideoFullscreen
+      -- ^ @VIDEO_FULLSCREEN@
+    | VideoMidpoint
+      -- ^ @VIDEO_MIDPOINT@
+    | VideoMute
+      -- ^ @VIDEO_MUTE@
+    | VideoPause
+      -- ^ @VIDEO_PAUSE@
+    | VideoRewind
+      -- ^ @VIDEO_REWIND@
+    | VideoStart
+      -- ^ @VIDEO_START@
+    | VideoStop
+      -- ^ @VIDEO_STOP@
+    | VideoThirdQuartile
+      -- ^ @VIDEO_THIRD_QUARTILE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ThirdPartyURLType
+
+instance FromText ThirdPartyURLType where
+    fromText = \case
+        "CLICK_TRACKING" -> Just ClickTracking
+        "IMPRESSION" -> Just Impression
+        "RICH_MEDIA_BACKUP_IMPRESSION" -> Just RichMediaBackupImpression
+        "RICH_MEDIA_IMPRESSION" -> Just RichMediaImpression
+        "RICH_MEDIA_RM_IMPRESSION" -> Just RichMediaRmImpression
+        "SURVEY" -> Just Survey
+        "VIDEO_COMPLETE" -> Just VideoComplete
+        "VIDEO_CUSTOM" -> Just VideoCustom
+        "VIDEO_FIRST_QUARTILE" -> Just VideoFirstQuartile
+        "VIDEO_FULLSCREEN" -> Just VideoFullscreen
+        "VIDEO_MIDPOINT" -> Just VideoMidpoint
+        "VIDEO_MUTE" -> Just VideoMute
+        "VIDEO_PAUSE" -> Just VideoPause
+        "VIDEO_REWIND" -> Just VideoRewind
+        "VIDEO_START" -> Just VideoStart
+        "VIDEO_STOP" -> Just VideoStop
+        "VIDEO_THIRD_QUARTILE" -> Just VideoThirdQuartile
+        _ -> Nothing
+
+instance ToText ThirdPartyURLType where
+    toText = \case
+        ClickTracking -> "CLICK_TRACKING"
+        Impression -> "IMPRESSION"
+        RichMediaBackupImpression -> "RICH_MEDIA_BACKUP_IMPRESSION"
+        RichMediaImpression -> "RICH_MEDIA_IMPRESSION"
+        RichMediaRmImpression -> "RICH_MEDIA_RM_IMPRESSION"
+        Survey -> "SURVEY"
+        VideoComplete -> "VIDEO_COMPLETE"
+        VideoCustom -> "VIDEO_CUSTOM"
+        VideoFirstQuartile -> "VIDEO_FIRST_QUARTILE"
+        VideoFullscreen -> "VIDEO_FULLSCREEN"
+        VideoMidpoint -> "VIDEO_MIDPOINT"
+        VideoMute -> "VIDEO_MUTE"
+        VideoPause -> "VIDEO_PAUSE"
+        VideoRewind -> "VIDEO_REWIND"
+        VideoStart -> "VIDEO_START"
+        VideoStop -> "VIDEO_STOP"
+        VideoThirdQuartile -> "VIDEO_THIRD_QUARTILE"
+
+instance FromJSON ThirdPartyURLType where
+    parseJSON = parseJSONText "ThirdPartyURLType"
+
+instance ToJSON ThirdPartyURLType where
+    toJSON = toJSONText
+
+data PlacementTagFormatsItem
+    = PTFIPlacementTagClickCommands
+      -- ^ @PLACEMENT_TAG_CLICK_COMMANDS@
+    | PTFIPlacementTagIframeIlayer
+      -- ^ @PLACEMENT_TAG_IFRAME_ILAYER@
+    | PTFIPlacementTagIframeJavascript
+      -- ^ @PLACEMENT_TAG_IFRAME_JAVASCRIPT@
+    | PTFIPlacementTagIframeJavascriptLegacy
+      -- ^ @PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY@
+    | PTFIPlacementTagInstreamVideoPrefetch
+      -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH@
+    | PTFIPlacementTagInstreamVideoPrefetchVast3
+      -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3@
+    | PTFIPlacementTagInternalRedirect
+      -- ^ @PLACEMENT_TAG_INTERNAL_REDIRECT@
+    | PTFIPlacementTagInterstitialIframeJavascript
+      -- ^ @PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT@
+    | PTFIPlacementTagInterstitialIframeJavascriptLegacy
+      -- ^ @PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY@
+    | PTFIPlacementTagInterstitialInternalRedirect
+      -- ^ @PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT@
+    | PTFIPlacementTagInterstitialJavascript
+      -- ^ @PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT@
+    | PTFIPlacementTagInterstitialJavascriptLegacy
+      -- ^ @PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY@
+    | PTFIPlacementTagJavascript
+      -- ^ @PLACEMENT_TAG_JAVASCRIPT@
+    | PTFIPlacementTagJavascriptLegacy
+      -- ^ @PLACEMENT_TAG_JAVASCRIPT_LEGACY@
+    | PTFIPlacementTagStandard
+      -- ^ @PLACEMENT_TAG_STANDARD@
+    | PTFIPlacementTagTracking
+      -- ^ @PLACEMENT_TAG_TRACKING@
+    | PTFIPlacementTagTrackingIframe
+      -- ^ @PLACEMENT_TAG_TRACKING_IFRAME@
+    | PTFIPlacementTagTrackingJavascript
+      -- ^ @PLACEMENT_TAG_TRACKING_JAVASCRIPT@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable PlacementTagFormatsItem
+
+instance FromText PlacementTagFormatsItem where
+    fromText = \case
+        "PLACEMENT_TAG_CLICK_COMMANDS" -> Just PTFIPlacementTagClickCommands
+        "PLACEMENT_TAG_IFRAME_ILAYER" -> Just PTFIPlacementTagIframeIlayer
+        "PLACEMENT_TAG_IFRAME_JAVASCRIPT" -> Just PTFIPlacementTagIframeJavascript
+        "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY" -> Just PTFIPlacementTagIframeJavascriptLegacy
+        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH" -> Just PTFIPlacementTagInstreamVideoPrefetch
+        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3" -> Just PTFIPlacementTagInstreamVideoPrefetchVast3
+        "PLACEMENT_TAG_INTERNAL_REDIRECT" -> Just PTFIPlacementTagInternalRedirect
+        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT" -> Just PTFIPlacementTagInterstitialIframeJavascript
+        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY" -> Just PTFIPlacementTagInterstitialIframeJavascriptLegacy
+        "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT" -> Just PTFIPlacementTagInterstitialInternalRedirect
+        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT" -> Just PTFIPlacementTagInterstitialJavascript
+        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY" -> Just PTFIPlacementTagInterstitialJavascriptLegacy
+        "PLACEMENT_TAG_JAVASCRIPT" -> Just PTFIPlacementTagJavascript
+        "PLACEMENT_TAG_JAVASCRIPT_LEGACY" -> Just PTFIPlacementTagJavascriptLegacy
+        "PLACEMENT_TAG_STANDARD" -> Just PTFIPlacementTagStandard
+        "PLACEMENT_TAG_TRACKING" -> Just PTFIPlacementTagTracking
+        "PLACEMENT_TAG_TRACKING_IFRAME" -> Just PTFIPlacementTagTrackingIframe
+        "PLACEMENT_TAG_TRACKING_JAVASCRIPT" -> Just PTFIPlacementTagTrackingJavascript
+        _ -> Nothing
+
+instance ToText PlacementTagFormatsItem where
+    toText = \case
+        PTFIPlacementTagClickCommands -> "PLACEMENT_TAG_CLICK_COMMANDS"
+        PTFIPlacementTagIframeIlayer -> "PLACEMENT_TAG_IFRAME_ILAYER"
+        PTFIPlacementTagIframeJavascript -> "PLACEMENT_TAG_IFRAME_JAVASCRIPT"
+        PTFIPlacementTagIframeJavascriptLegacy -> "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY"
+        PTFIPlacementTagInstreamVideoPrefetch -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH"
+        PTFIPlacementTagInstreamVideoPrefetchVast3 -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3"
+        PTFIPlacementTagInternalRedirect -> "PLACEMENT_TAG_INTERNAL_REDIRECT"
+        PTFIPlacementTagInterstitialIframeJavascript -> "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT"
+        PTFIPlacementTagInterstitialIframeJavascriptLegacy -> "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY"
+        PTFIPlacementTagInterstitialInternalRedirect -> "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT"
+        PTFIPlacementTagInterstitialJavascript -> "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT"
+        PTFIPlacementTagInterstitialJavascriptLegacy -> "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY"
+        PTFIPlacementTagJavascript -> "PLACEMENT_TAG_JAVASCRIPT"
+        PTFIPlacementTagJavascriptLegacy -> "PLACEMENT_TAG_JAVASCRIPT_LEGACY"
+        PTFIPlacementTagStandard -> "PLACEMENT_TAG_STANDARD"
+        PTFIPlacementTagTracking -> "PLACEMENT_TAG_TRACKING"
+        PTFIPlacementTagTrackingIframe -> "PLACEMENT_TAG_TRACKING_IFRAME"
+        PTFIPlacementTagTrackingJavascript -> "PLACEMENT_TAG_TRACKING_JAVASCRIPT"
+
+instance FromJSON PlacementTagFormatsItem where
+    parseJSON = parseJSONText "PlacementTagFormatsItem"
+
+instance ToJSON PlacementTagFormatsItem where
+    toJSON = toJSONText
+
 -- | Order of sorted results, default is ASCENDING.
 data DfareportingPlacementGroupsListSortOrder
     = DPGLSOAscending
@@ -7011,8 +7115,35 @@ instance FromJSON DfareportingPlacementGroupsListSortOrder where
 instance ToJSON DfareportingPlacementGroupsListSortOrder where
     toJSON = toJSONText
 
+-- | The type of delivery for the owner to receive, if enabled.
+data EmailOwnerDeliveryType
+    = EODTAttachment
+      -- ^ @ATTACHMENT@
+    | EODTLink
+      -- ^ @LINK@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable EmailOwnerDeliveryType
+
+instance FromText EmailOwnerDeliveryType where
+    fromText = \case
+        "ATTACHMENT" -> Just EODTAttachment
+        "LINK" -> Just EODTLink
+        _ -> Nothing
+
+instance ToText EmailOwnerDeliveryType where
+    toText = \case
+        EODTAttachment -> "ATTACHMENT"
+        EODTLink -> "LINK"
+
+instance FromJSON EmailOwnerDeliveryType where
+    parseJSON = parseJSONText "EmailOwnerDeliveryType"
+
+instance ToJSON EmailOwnerDeliveryType where
+    toJSON = toJSONText
+
 -- | Cap cost type of this inventory item.
-data PricingCapCostType
+data CapCostType
     = PlanningPlacementCapCostTypeCumulative
       -- ^ @PLANNING_PLACEMENT_CAP_COST_TYPE_CUMULATIVE@
     | PlanningPlacementCapCostTypeMonthly
@@ -7021,25 +7152,25 @@ data PricingCapCostType
       -- ^ @PLANNING_PLACEMENT_CAP_COST_TYPE_NONE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable PricingCapCostType
+instance Hashable CapCostType
 
-instance FromText PricingCapCostType where
+instance FromText CapCostType where
     fromText = \case
         "PLANNING_PLACEMENT_CAP_COST_TYPE_CUMULATIVE" -> Just PlanningPlacementCapCostTypeCumulative
         "PLANNING_PLACEMENT_CAP_COST_TYPE_MONTHLY" -> Just PlanningPlacementCapCostTypeMonthly
         "PLANNING_PLACEMENT_CAP_COST_TYPE_NONE" -> Just PlanningPlacementCapCostTypeNone
         _ -> Nothing
 
-instance ToText PricingCapCostType where
+instance ToText CapCostType where
     toText = \case
         PlanningPlacementCapCostTypeCumulative -> "PLANNING_PLACEMENT_CAP_COST_TYPE_CUMULATIVE"
         PlanningPlacementCapCostTypeMonthly -> "PLANNING_PLACEMENT_CAP_COST_TYPE_MONTHLY"
         PlanningPlacementCapCostTypeNone -> "PLANNING_PLACEMENT_CAP_COST_TYPE_NONE"
 
-instance FromJSON PricingCapCostType where
-    parseJSON = parseJSONText "PricingCapCostType"
+instance FromJSON CapCostType where
+    parseJSON = parseJSONText "CapCostType"
 
-instance ToJSON PricingCapCostType where
+instance ToJSON CapCostType where
     toJSON = toJSONText
 
 -- | Field by which to sort the list.
@@ -7069,81 +7200,6 @@ instance FromJSON DfareportingAdvertisersListSortField where
 instance ToJSON DfareportingAdvertisersListSortField where
     toJSON = toJSONText
 
--- | Counting method for conversions for this floodlight activity. This is a
--- required field.
-data FloodlightActivityCountingMethod
-    = ItemsSoldCounting
-      -- ^ @ITEMS_SOLD_COUNTING@
-    | SessionCounting
-      -- ^ @SESSION_COUNTING@
-    | StandardCounting
-      -- ^ @STANDARD_COUNTING@
-    | TransactionsCounting
-      -- ^ @TRANSACTIONS_COUNTING@
-    | UniqueCounting
-      -- ^ @UNIQUE_COUNTING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable FloodlightActivityCountingMethod
-
-instance FromText FloodlightActivityCountingMethod where
-    fromText = \case
-        "ITEMS_SOLD_COUNTING" -> Just ItemsSoldCounting
-        "SESSION_COUNTING" -> Just SessionCounting
-        "STANDARD_COUNTING" -> Just StandardCounting
-        "TRANSACTIONS_COUNTING" -> Just TransactionsCounting
-        "UNIQUE_COUNTING" -> Just UniqueCounting
-        _ -> Nothing
-
-instance ToText FloodlightActivityCountingMethod where
-    toText = \case
-        ItemsSoldCounting -> "ITEMS_SOLD_COUNTING"
-        SessionCounting -> "SESSION_COUNTING"
-        StandardCounting -> "STANDARD_COUNTING"
-        TransactionsCounting -> "TRANSACTIONS_COUNTING"
-        UniqueCounting -> "UNIQUE_COUNTING"
-
-instance FromJSON FloodlightActivityCountingMethod where
-    parseJSON = parseJSONText "FloodlightActivityCountingMethod"
-
-instance ToJSON FloodlightActivityCountingMethod where
-    toJSON = toJSONText
-
--- | Select only ads with these types.
-data DfareportingAdsListType
-    = DALTAdServingClickTracker
-      -- ^ @AD_SERVING_CLICK_TRACKER@
-    | DALTAdServingDefaultAd
-      -- ^ @AD_SERVING_DEFAULT_AD@
-    | DALTAdServingStandardAd
-      -- ^ @AD_SERVING_STANDARD_AD@
-    | DALTAdServingTracking
-      -- ^ @AD_SERVING_TRACKING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DfareportingAdsListType
-
-instance FromText DfareportingAdsListType where
-    fromText = \case
-        "AD_SERVING_CLICK_TRACKER" -> Just DALTAdServingClickTracker
-        "AD_SERVING_DEFAULT_AD" -> Just DALTAdServingDefaultAd
-        "AD_SERVING_STANDARD_AD" -> Just DALTAdServingStandardAd
-        "AD_SERVING_TRACKING" -> Just DALTAdServingTracking
-        _ -> Nothing
-
-instance ToText DfareportingAdsListType where
-    toText = \case
-        DALTAdServingClickTracker -> "AD_SERVING_CLICK_TRACKER"
-        DALTAdServingDefaultAd -> "AD_SERVING_DEFAULT_AD"
-        DALTAdServingStandardAd -> "AD_SERVING_STANDARD_AD"
-        DALTAdServingTracking -> "AD_SERVING_TRACKING"
-
-instance FromJSON DfareportingAdsListType where
-    parseJSON = parseJSONText "DfareportingAdsListType"
-
-instance ToJSON DfareportingAdsListType where
-    toJSON = toJSONText
-
 -- | Order of sorted results, default is ASCENDING.
 data DfareportingAccountsListSortOrder
     = DDAscending
@@ -7169,62 +7225,6 @@ instance FromJSON DfareportingAccountsListSortOrder where
     parseJSON = parseJSONText "DfareportingAccountsListSortOrder"
 
 instance ToJSON DfareportingAccountsListSortOrder where
-    toJSON = toJSONText
-
--- | Type of rich media asset. This is a read-only field. Applicable to the
--- following creative types: all RICH_MEDIA.
-data CreativeAssetDisplayType
-    = AssetDisplayTypeExpanding
-      -- ^ @ASSET_DISPLAY_TYPE_EXPANDING@
-    | AssetDisplayTypeFlashInFlash
-      -- ^ @ASSET_DISPLAY_TYPE_FLASH_IN_FLASH@
-    | AssetDisplayTypeFlashInFlashExpanding
-      -- ^ @ASSET_DISPLAY_TYPE_FLASH_IN_FLASH_EXPANDING@
-    | AssetDisplayTypeFloating
-      -- ^ @ASSET_DISPLAY_TYPE_FLOATING@
-    | AssetDisplayTypeInpage
-      -- ^ @ASSET_DISPLAY_TYPE_INPAGE@
-    | AssetDisplayTypeOverlay
-      -- ^ @ASSET_DISPLAY_TYPE_OVERLAY@
-    | AssetDisplayTypePeelDown
-      -- ^ @ASSET_DISPLAY_TYPE_PEEL_DOWN@
-    | AssetDisplayTypeVpaidLinear
-      -- ^ @ASSET_DISPLAY_TYPE_VPAID_LINEAR@
-    | AssetDisplayTypeVpaidNonLinear
-      -- ^ @ASSET_DISPLAY_TYPE_VPAID_NON_LINEAR@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CreativeAssetDisplayType
-
-instance FromText CreativeAssetDisplayType where
-    fromText = \case
-        "ASSET_DISPLAY_TYPE_EXPANDING" -> Just AssetDisplayTypeExpanding
-        "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH" -> Just AssetDisplayTypeFlashInFlash
-        "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH_EXPANDING" -> Just AssetDisplayTypeFlashInFlashExpanding
-        "ASSET_DISPLAY_TYPE_FLOATING" -> Just AssetDisplayTypeFloating
-        "ASSET_DISPLAY_TYPE_INPAGE" -> Just AssetDisplayTypeInpage
-        "ASSET_DISPLAY_TYPE_OVERLAY" -> Just AssetDisplayTypeOverlay
-        "ASSET_DISPLAY_TYPE_PEEL_DOWN" -> Just AssetDisplayTypePeelDown
-        "ASSET_DISPLAY_TYPE_VPAID_LINEAR" -> Just AssetDisplayTypeVpaidLinear
-        "ASSET_DISPLAY_TYPE_VPAID_NON_LINEAR" -> Just AssetDisplayTypeVpaidNonLinear
-        _ -> Nothing
-
-instance ToText CreativeAssetDisplayType where
-    toText = \case
-        AssetDisplayTypeExpanding -> "ASSET_DISPLAY_TYPE_EXPANDING"
-        AssetDisplayTypeFlashInFlash -> "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH"
-        AssetDisplayTypeFlashInFlashExpanding -> "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH_EXPANDING"
-        AssetDisplayTypeFloating -> "ASSET_DISPLAY_TYPE_FLOATING"
-        AssetDisplayTypeInpage -> "ASSET_DISPLAY_TYPE_INPAGE"
-        AssetDisplayTypeOverlay -> "ASSET_DISPLAY_TYPE_OVERLAY"
-        AssetDisplayTypePeelDown -> "ASSET_DISPLAY_TYPE_PEEL_DOWN"
-        AssetDisplayTypeVpaidLinear -> "ASSET_DISPLAY_TYPE_VPAID_LINEAR"
-        AssetDisplayTypeVpaidNonLinear -> "ASSET_DISPLAY_TYPE_VPAID_NON_LINEAR"
-
-instance FromJSON CreativeAssetDisplayType where
-    parseJSON = parseJSONText "CreativeAssetDisplayType"
-
-instance ToJSON CreativeAssetDisplayType where
     toJSON = toJSONText
 
 -- | Status of this advertiser.

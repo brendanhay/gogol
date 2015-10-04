@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.GamesManagement.Quests.ResetMultipleForAllPlayers
     , qrmfapQuotaUser
     , qrmfapPrettyPrint
     , qrmfapUserIP
-    , qrmfapQuestsResetMultipleForAllRequest
+    , qrmfapPayload
     , qrmfapKey
     , qrmfapOAuthToken
     , qrmfapFields
@@ -65,14 +66,14 @@ type QuestsResetMultipleForAllPlayersResource =
 --
 -- /See:/ 'questsResetMultipleForAllPlayers'' smart constructor.
 data QuestsResetMultipleForAllPlayers' = QuestsResetMultipleForAllPlayers'
-    { _qrmfapQuotaUser                        :: !(Maybe Text)
-    , _qrmfapPrettyPrint                      :: !Bool
-    , _qrmfapUserIP                           :: !(Maybe Text)
-    , _qrmfapQuestsResetMultipleForAllRequest :: !QuestsResetMultipleForAllRequest
-    , _qrmfapKey                              :: !(Maybe Key)
-    , _qrmfapOAuthToken                       :: !(Maybe OAuthToken)
-    , _qrmfapFields                           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _qrmfapQuotaUser   :: !(Maybe Text)
+    , _qrmfapPrettyPrint :: !Bool
+    , _qrmfapUserIP      :: !(Maybe Text)
+    , _qrmfapPayload     :: !QuestsResetMultipleForAllRequest
+    , _qrmfapKey         :: !(Maybe Key)
+    , _qrmfapOAuthToken  :: !(Maybe OAuthToken)
+    , _qrmfapFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsResetMultipleForAllPlayers'' with the minimum fields required to make a request.
 --
@@ -84,7 +85,7 @@ data QuestsResetMultipleForAllPlayers' = QuestsResetMultipleForAllPlayers'
 --
 -- * 'qrmfapUserIP'
 --
--- * 'qrmfapQuestsResetMultipleForAllRequest'
+-- * 'qrmfapPayload'
 --
 -- * 'qrmfapKey'
 --
@@ -92,14 +93,14 @@ data QuestsResetMultipleForAllPlayers' = QuestsResetMultipleForAllPlayers'
 --
 -- * 'qrmfapFields'
 questsResetMultipleForAllPlayers'
-    :: QuestsResetMultipleForAllRequest -- ^ 'QuestsResetMultipleForAllRequest'
+    :: QuestsResetMultipleForAllRequest -- ^ 'payload'
     -> QuestsResetMultipleForAllPlayers'
-questsResetMultipleForAllPlayers' pQrmfapQuestsResetMultipleForAllRequest_ =
+questsResetMultipleForAllPlayers' pQrmfapPayload_ =
     QuestsResetMultipleForAllPlayers'
     { _qrmfapQuotaUser = Nothing
     , _qrmfapPrettyPrint = True
     , _qrmfapUserIP = Nothing
-    , _qrmfapQuestsResetMultipleForAllRequest = pQrmfapQuestsResetMultipleForAllRequest_
+    , _qrmfapPayload = pQrmfapPayload_
     , _qrmfapKey = Nothing
     , _qrmfapOAuthToken = Nothing
     , _qrmfapFields = Nothing
@@ -126,11 +127,10 @@ qrmfapUserIP
   = lens _qrmfapUserIP (\ s a -> s{_qrmfapUserIP = a})
 
 -- | Multipart request metadata.
-qrmfapQuestsResetMultipleForAllRequest :: Lens' QuestsResetMultipleForAllPlayers' QuestsResetMultipleForAllRequest
-qrmfapQuestsResetMultipleForAllRequest
-  = lens _qrmfapQuestsResetMultipleForAllRequest
-      (\ s a ->
-         s{_qrmfapQuestsResetMultipleForAllRequest = a})
+qrmfapPayload :: Lens' QuestsResetMultipleForAllPlayers' QuestsResetMultipleForAllRequest
+qrmfapPayload
+  = lens _qrmfapPayload
+      (\ s a -> s{_qrmfapPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -167,7 +167,7 @@ instance GoogleRequest
               _qrmfapKey
               _qrmfapOAuthToken
               (Just AltJSON)
-              _qrmfapQuestsResetMultipleForAllRequest
+              _qrmfapPayload
           where go
                   = clientWithRoute
                       (Proxy ::

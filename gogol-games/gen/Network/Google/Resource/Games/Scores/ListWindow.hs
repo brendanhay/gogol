@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,13 +59,13 @@ type ScoresListWindowResource =
          "window" :>
            Capture "collection" GamesScoresListWindowCollection
              :>
-             QueryParam "language" Text :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "pageToken" Text :>
+             QueryParam "timeSpan" GamesScoresListWindowTimeSpan
+               :>
+               QueryParam "returnTopIfAbsent" Bool :>
+                 QueryParam "language" Text :>
                    QueryParam "resultsAbove" Int32 :>
-                     QueryParam "returnTopIfAbsent" Bool :>
-                       QueryParam "timeSpan" GamesScoresListWindowTimeSpan
-                         :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Int32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -93,7 +94,7 @@ data ScoresListWindow' = ScoresListWindow'
     , _slwOAuthToken        :: !(Maybe OAuthToken)
     , _slwMaxResults        :: !(Maybe Int32)
     , _slwFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresListWindow'' with the minimum fields required to make a request.
 --
@@ -244,12 +245,13 @@ instance GoogleRequest ScoresListWindow' where
         type Rs ScoresListWindow' = LeaderboardScores
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u ScoresListWindow'{..}
-          = go _slwLanguage _slwMaxResults _slwPageToken
-              _slwResultsAbove
-              _slwReturnTopIfAbsent
-              _slwLeaderboardId
-              _slwCollection
+          = go _slwLeaderboardId _slwCollection
               (Just _slwTimeSpan)
+              _slwReturnTopIfAbsent
+              _slwLanguage
+              _slwResultsAbove
+              _slwPageToken
+              _slwMaxResults
               _slwQuotaUser
               (Just _slwPrettyPrint)
               _slwUserIP

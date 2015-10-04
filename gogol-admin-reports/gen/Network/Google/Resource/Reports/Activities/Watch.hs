@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.Reports.Activities.Watch
     , awStartTime
     , awUserIP
     , awFilters
-    , awChannel
+    , awPayload
     , awCustomerId
     , awActorIPAddress
     , awKey
@@ -61,14 +62,14 @@ type ActivitiesWatchResource =
            "applications" :>
              Capture "applicationName" Text :>
                "watch" :>
-                 QueryParam "actorIpAddress" Text :>
-                   QueryParam "customerId" Text :>
-                     QueryParam "endTime" Text :>
-                       QueryParam "eventName" Text :>
-                         QueryParam "filters" Text :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "startTime" Text :>
+                 QueryParam "startTime" Text :>
+                   QueryParam "filters" Text :>
+                     QueryParam "customerId" Text :>
+                       QueryParam "actorIpAddress" Text :>
+                         QueryParam "endTime" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "eventName" Text :>
+                               QueryParam "maxResults" Int32 :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
@@ -89,7 +90,7 @@ data ActivitiesWatch' = ActivitiesWatch'
     , _awStartTime       :: !(Maybe Text)
     , _awUserIP          :: !(Maybe Text)
     , _awFilters         :: !(Maybe Text)
-    , _awChannel         :: !Channel
+    , _awPayload         :: !Channel
     , _awCustomerId      :: !(Maybe Text)
     , _awActorIPAddress  :: !(Maybe Text)
     , _awKey             :: !(Maybe Key)
@@ -101,7 +102,7 @@ data ActivitiesWatch' = ActivitiesWatch'
     , _awUserKey         :: !Text
     , _awMaxResults      :: !(Maybe Int32)
     , _awFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesWatch'' with the minimum fields required to make a request.
 --
@@ -117,7 +118,7 @@ data ActivitiesWatch' = ActivitiesWatch'
 --
 -- * 'awFilters'
 --
--- * 'awChannel'
+-- * 'awPayload'
 --
 -- * 'awCustomerId'
 --
@@ -141,18 +142,18 @@ data ActivitiesWatch' = ActivitiesWatch'
 --
 -- * 'awFields'
 activitiesWatch'
-    :: Channel -- ^ 'Channel'
+    :: Channel -- ^ 'payload'
     -> Text -- ^ 'applicationName'
     -> Text -- ^ 'userKey'
     -> ActivitiesWatch'
-activitiesWatch' pAwChannel_ pAwApplicationName_ pAwUserKey_ =
+activitiesWatch' pAwPayload_ pAwApplicationName_ pAwUserKey_ =
     ActivitiesWatch'
     { _awQuotaUser = Nothing
     , _awPrettyPrint = True
     , _awStartTime = Nothing
     , _awUserIP = Nothing
     , _awFilters = Nothing
-    , _awChannel = pAwChannel_
+    , _awPayload = pAwPayload_
     , _awCustomerId = Nothing
     , _awActorIPAddress = Nothing
     , _awKey = Nothing
@@ -196,9 +197,9 @@ awFilters
   = lens _awFilters (\ s a -> s{_awFilters = a})
 
 -- | Multipart request metadata.
-awChannel :: Lens' ActivitiesWatch' Channel
-awChannel
-  = lens _awChannel (\ s a -> s{_awChannel = a})
+awPayload :: Lens' ActivitiesWatch' Channel
+awPayload
+  = lens _awPayload (\ s a -> s{_awPayload = a})
 
 -- | Represents the customer for which the data is to be fetched.
 awCustomerId :: Lens' ActivitiesWatch' (Maybe Text)
@@ -268,14 +269,14 @@ instance GoogleRequest ActivitiesWatch' where
         type Rs ActivitiesWatch' = Channel
         request = requestWithRoute defReq adminReportsURL
         requestWithRoute r u ActivitiesWatch'{..}
-          = go _awActorIPAddress _awCustomerId _awEndTime
-              _awEventName
+          = go _awUserKey _awApplicationName _awStartTime
               _awFilters
-              _awMaxResults
+              _awCustomerId
+              _awActorIPAddress
+              _awEndTime
               _awPageToken
-              _awStartTime
-              _awUserKey
-              _awApplicationName
+              _awEventName
+              _awMaxResults
               _awQuotaUser
               (Just _awPrettyPrint)
               _awUserIP
@@ -283,7 +284,7 @@ instance GoogleRequest ActivitiesWatch' where
               _awKey
               _awOAuthToken
               (Just AltJSON)
-              _awChannel
+              _awPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ActivitiesWatchResource)

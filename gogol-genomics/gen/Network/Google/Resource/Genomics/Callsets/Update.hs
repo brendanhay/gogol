@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.Genomics.Callsets.Update
     -- * Request Lenses
     , cuQuotaUser
     , cuPrettyPrint
-    , cuCallSet
     , cuUserIP
+    , cuPayload
     , cuKey
     , cuCallSetId
     , cuOAuthToken
@@ -63,13 +64,13 @@ type CallsetsUpdateResource =
 data CallsetsUpdate' = CallsetsUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
-    , _cuCallSet     :: !CallSet
     , _cuUserIP      :: !(Maybe Text)
+    , _cuPayload     :: !CallSet
     , _cuKey         :: !(Maybe Key)
     , _cuCallSetId   :: !Text
     , _cuOAuthToken  :: !(Maybe OAuthToken)
     , _cuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsUpdate'' with the minimum fields required to make a request.
 --
@@ -79,9 +80,9 @@ data CallsetsUpdate' = CallsetsUpdate'
 --
 -- * 'cuPrettyPrint'
 --
--- * 'cuCallSet'
---
 -- * 'cuUserIP'
+--
+-- * 'cuPayload'
 --
 -- * 'cuKey'
 --
@@ -91,15 +92,15 @@ data CallsetsUpdate' = CallsetsUpdate'
 --
 -- * 'cuFields'
 callsetsUpdate'
-    :: CallSet -- ^ 'CallSet'
+    :: CallSet -- ^ 'payload'
     -> Text -- ^ 'callSetId'
     -> CallsetsUpdate'
-callsetsUpdate' pCuCallSet_ pCuCallSetId_ =
+callsetsUpdate' pCuPayload_ pCuCallSetId_ =
     CallsetsUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
-    , _cuCallSet = pCuCallSet_
     , _cuUserIP = Nothing
+    , _cuPayload = pCuPayload_
     , _cuKey = Nothing
     , _cuCallSetId = pCuCallSetId_
     , _cuOAuthToken = Nothing
@@ -119,15 +120,15 @@ cuPrettyPrint
   = lens _cuPrettyPrint
       (\ s a -> s{_cuPrettyPrint = a})
 
--- | Multipart request metadata.
-cuCallSet :: Lens' CallsetsUpdate' CallSet
-cuCallSet
-  = lens _cuCallSet (\ s a -> s{_cuCallSet = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 cuUserIP :: Lens' CallsetsUpdate' (Maybe Text)
 cuUserIP = lens _cuUserIP (\ s a -> s{_cuUserIP = a})
+
+-- | Multipart request metadata.
+cuPayload :: Lens' CallsetsUpdate' CallSet
+cuPayload
+  = lens _cuPayload (\ s a -> s{_cuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -163,7 +164,7 @@ instance GoogleRequest CallsetsUpdate' where
               _cuKey
               _cuOAuthToken
               (Just AltJSON)
-              _cuCallSet
+              _cuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CallsetsUpdateResource)

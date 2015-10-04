@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.Genomics.Callsets.Search
     , csQuotaUser
     , csPrettyPrint
     , csUserIP
-    , csSearchCallSetsRequest
+    , csPayload
     , csKey
     , csOAuthToken
     , csFields
@@ -63,14 +64,14 @@ type CallsetsSearchResource =
 --
 -- /See:/ 'callsetsSearch'' smart constructor.
 data CallsetsSearch' = CallsetsSearch'
-    { _csQuotaUser             :: !(Maybe Text)
-    , _csPrettyPrint           :: !Bool
-    , _csUserIP                :: !(Maybe Text)
-    , _csSearchCallSetsRequest :: !SearchCallSetsRequest
-    , _csKey                   :: !(Maybe Key)
-    , _csOAuthToken            :: !(Maybe OAuthToken)
-    , _csFields                :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _csQuotaUser   :: !(Maybe Text)
+    , _csPrettyPrint :: !Bool
+    , _csUserIP      :: !(Maybe Text)
+    , _csPayload     :: !SearchCallSetsRequest
+    , _csKey         :: !(Maybe Key)
+    , _csOAuthToken  :: !(Maybe OAuthToken)
+    , _csFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsSearch'' with the minimum fields required to make a request.
 --
@@ -82,7 +83,7 @@ data CallsetsSearch' = CallsetsSearch'
 --
 -- * 'csUserIP'
 --
--- * 'csSearchCallSetsRequest'
+-- * 'csPayload'
 --
 -- * 'csKey'
 --
@@ -90,14 +91,14 @@ data CallsetsSearch' = CallsetsSearch'
 --
 -- * 'csFields'
 callsetsSearch'
-    :: SearchCallSetsRequest -- ^ 'SearchCallSetsRequest'
+    :: SearchCallSetsRequest -- ^ 'payload'
     -> CallsetsSearch'
-callsetsSearch' pCsSearchCallSetsRequest_ =
+callsetsSearch' pCsPayload_ =
     CallsetsSearch'
     { _csQuotaUser = Nothing
     , _csPrettyPrint = True
     , _csUserIP = Nothing
-    , _csSearchCallSetsRequest = pCsSearchCallSetsRequest_
+    , _csPayload = pCsPayload_
     , _csKey = Nothing
     , _csOAuthToken = Nothing
     , _csFields = Nothing
@@ -122,10 +123,9 @@ csUserIP :: Lens' CallsetsSearch' (Maybe Text)
 csUserIP = lens _csUserIP (\ s a -> s{_csUserIP = a})
 
 -- | Multipart request metadata.
-csSearchCallSetsRequest :: Lens' CallsetsSearch' SearchCallSetsRequest
-csSearchCallSetsRequest
-  = lens _csSearchCallSetsRequest
-      (\ s a -> s{_csSearchCallSetsRequest = a})
+csPayload :: Lens' CallsetsSearch' SearchCallSetsRequest
+csPayload
+  = lens _csPayload (\ s a -> s{_csPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -155,7 +155,7 @@ instance GoogleRequest CallsetsSearch' where
               _csKey
               _csOAuthToken
               (Just AltJSON)
-              _csSearchCallSetsRequest
+              _csPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CallsetsSearchResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -61,23 +62,23 @@ type DirectorySitesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "directorySites" :>
-           QueryParam "acceptsInStreamVideoPlacements" Bool :>
+           QueryParam "searchString" Text :>
              QueryParam "acceptsInterstitialPlacements" Bool :>
                QueryParam "acceptsPublisherPaidPlacements" Bool :>
-                 QueryParam "active" Bool :>
-                   QueryParam "countryId" Int64 :>
-                     QueryParam "dfp_network_code" Text :>
-                       QueryParams "ids" Int64 :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "parentId" Int64 :>
-                               QueryParam "searchString" Text :>
-                                 QueryParam "sortField"
-                                   DfareportingDirectorySitesListSortField
-                                   :>
-                                   QueryParam "sortOrder"
-                                     DfareportingDirectorySitesListSortOrder
-                                     :>
+                 QueryParams "ids" Int64 :>
+                   QueryParam "sortOrder"
+                     DfareportingDirectorySitesListSortOrder
+                     :>
+                     QueryParam "active" Bool :>
+                       QueryParam "countryId" Int64 :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "sortField"
+                             DfareportingDirectorySitesListSortField
+                             :>
+                             QueryParam "acceptsInStreamVideoPlacements" Bool :>
+                               QueryParam "maxResults" Int32 :>
+                                 QueryParam "parentId" Int64 :>
+                                   QueryParam "dfp_network_code" Text :>
                                      QueryParam "quotaUser" Text :>
                                        QueryParam "prettyPrint" Bool :>
                                          QueryParam "userIp" Text :>
@@ -100,7 +101,7 @@ data DirectorySitesList' = DirectorySitesList'
     , _dslSearchString                   :: !(Maybe Text)
     , _dslAcceptsInterstitialPlacements  :: !(Maybe Bool)
     , _dslAcceptsPublisherPaidPlacements :: !(Maybe Bool)
-    , _dslIds                            :: !(Maybe Int64)
+    , _dslIds                            :: !(Maybe [Int64])
     , _dslProfileId                      :: !Int64
     , _dslSortOrder                      :: !(Maybe DfareportingDirectorySitesListSortOrder)
     , _dslActive                         :: !(Maybe Bool)
@@ -114,7 +115,7 @@ data DirectorySitesList' = DirectorySitesList'
     , _dslParentId                       :: !(Maybe Int64)
     , _dslDfpNetworkCode                 :: !(Maybe Text)
     , _dslFields                         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySitesList'' with the minimum fields required to make a request.
 --
@@ -233,8 +234,10 @@ dslAcceptsPublisherPaidPlacements
       (\ s a -> s{_dslAcceptsPublisherPaidPlacements = a})
 
 -- | Select only directory sites with these IDs.
-dslIds :: Lens' DirectorySitesList' (Maybe Int64)
-dslIds = lens _dslIds (\ s a -> s{_dslIds = a})
+dslIds :: Lens' DirectorySitesList' [Int64]
+dslIds
+  = lens _dslIds (\ s a -> s{_dslIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 dslProfileId :: Lens' DirectorySitesList' Int64
@@ -317,20 +320,19 @@ instance GoogleRequest DirectorySitesList' where
              DirectorySitesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u DirectorySitesList'{..}
-          = go _dslAcceptsInStreamVideoPlacements
+          = go _dslProfileId _dslSearchString
               _dslAcceptsInterstitialPlacements
               _dslAcceptsPublisherPaidPlacements
+              (_dslIds ^. _Default)
+              _dslSortOrder
               _dslActive
               _dslCountryId
-              _dslDfpNetworkCode
-              _dslIds
-              _dslMaxResults
               _dslPageToken
-              _dslParentId
-              _dslSearchString
               _dslSortField
-              _dslSortOrder
-              _dslProfileId
+              _dslAcceptsInStreamVideoPlacements
+              _dslMaxResults
+              _dslParentId
+              _dslDfpNetworkCode
               _dslQuotaUser
               (Just _dslPrettyPrint)
               _dslUserIP

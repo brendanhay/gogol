@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type InstanceTemplatesListResource =
        "global" :>
          "instanceTemplates" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data InstanceTemplatesList' = InstanceTemplatesList'
     , _itlOAuthToken  :: !(Maybe OAuthToken)
     , _itlMaxResults  :: !Word32
     , _itlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceTemplatesList'' with the minimum fields required to make a request.
 --
@@ -198,8 +199,8 @@ instance GoogleRequest InstanceTemplatesList' where
         type Rs InstanceTemplatesList' = InstanceTemplateList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceTemplatesList'{..}
-          = go _itlFilter (Just _itlMaxResults) _itlPageToken
-              _itlProject
+          = go _itlProject _itlFilter _itlPageToken
+              (Just _itlMaxResults)
               _itlQuotaUser
               (Just _itlPrettyPrint)
               _itlUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.Analytics.Management.Uploads.DeleteUploadData
     , mududQuotaUser
     , mududPrettyPrint
     , mududWebPropertyId
-    , mududAnalyticsDataimportDeleteUploadDataRequest
     , mududUserIP
     , mududCustomDataSourceId
+    , mududPayload
     , mududAccountId
     , mududKey
     , mududOAuthToken
@@ -71,17 +72,17 @@ type ManagementUploadsDeleteUploadDataResource =
 --
 -- /See:/ 'managementUploadsDeleteUploadData'' smart constructor.
 data ManagementUploadsDeleteUploadData' = ManagementUploadsDeleteUploadData'
-    { _mududQuotaUser                                  :: !(Maybe Text)
-    , _mududPrettyPrint                                :: !Bool
-    , _mududWebPropertyId                              :: !Text
-    , _mududAnalyticsDataimportDeleteUploadDataRequest :: !AnalyticsDataimportDeleteUploadDataRequest
-    , _mududUserIP                                     :: !(Maybe Text)
-    , _mududCustomDataSourceId                         :: !Text
-    , _mududAccountId                                  :: !Text
-    , _mududKey                                        :: !(Maybe Key)
-    , _mududOAuthToken                                 :: !(Maybe OAuthToken)
-    , _mududFields                                     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mududQuotaUser          :: !(Maybe Text)
+    , _mududPrettyPrint        :: !Bool
+    , _mududWebPropertyId      :: !Text
+    , _mududUserIP             :: !(Maybe Text)
+    , _mududCustomDataSourceId :: !Text
+    , _mududPayload            :: !AnalyticsDataimportDeleteUploadDataRequest
+    , _mududAccountId          :: !Text
+    , _mududKey                :: !(Maybe Key)
+    , _mududOAuthToken         :: !(Maybe OAuthToken)
+    , _mududFields             :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUploadsDeleteUploadData'' with the minimum fields required to make a request.
 --
@@ -93,11 +94,11 @@ data ManagementUploadsDeleteUploadData' = ManagementUploadsDeleteUploadData'
 --
 -- * 'mududWebPropertyId'
 --
--- * 'mududAnalyticsDataimportDeleteUploadDataRequest'
---
 -- * 'mududUserIP'
 --
 -- * 'mududCustomDataSourceId'
+--
+-- * 'mududPayload'
 --
 -- * 'mududAccountId'
 --
@@ -108,18 +109,18 @@ data ManagementUploadsDeleteUploadData' = ManagementUploadsDeleteUploadData'
 -- * 'mududFields'
 managementUploadsDeleteUploadData'
     :: Text -- ^ 'webPropertyId'
-    -> AnalyticsDataimportDeleteUploadDataRequest -- ^ 'AnalyticsDataimportDeleteUploadDataRequest'
     -> Text -- ^ 'customDataSourceId'
+    -> AnalyticsDataimportDeleteUploadDataRequest -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementUploadsDeleteUploadData'
-managementUploadsDeleteUploadData' pMududWebPropertyId_ pMududAnalyticsDataimportDeleteUploadDataRequest_ pMududCustomDataSourceId_ pMududAccountId_ =
+managementUploadsDeleteUploadData' pMududWebPropertyId_ pMududCustomDataSourceId_ pMududPayload_ pMududAccountId_ =
     ManagementUploadsDeleteUploadData'
     { _mududQuotaUser = Nothing
     , _mududPrettyPrint = False
     , _mududWebPropertyId = pMududWebPropertyId_
-    , _mududAnalyticsDataimportDeleteUploadDataRequest = pMududAnalyticsDataimportDeleteUploadDataRequest_
     , _mududUserIP = Nothing
     , _mududCustomDataSourceId = pMududCustomDataSourceId_
+    , _mududPayload = pMududPayload_
     , _mududAccountId = pMududAccountId_
     , _mududKey = Nothing
     , _mududOAuthToken = Nothing
@@ -146,15 +147,6 @@ mududWebPropertyId
   = lens _mududWebPropertyId
       (\ s a -> s{_mududWebPropertyId = a})
 
--- | Multipart request metadata.
-mududAnalyticsDataimportDeleteUploadDataRequest :: Lens' ManagementUploadsDeleteUploadData' AnalyticsDataimportDeleteUploadDataRequest
-mududAnalyticsDataimportDeleteUploadDataRequest
-  = lens
-      _mududAnalyticsDataimportDeleteUploadDataRequest
-      (\ s a ->
-         s{_mududAnalyticsDataimportDeleteUploadDataRequest =
-             a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 mududUserIP :: Lens' ManagementUploadsDeleteUploadData' (Maybe Text)
@@ -166,6 +158,11 @@ mududCustomDataSourceId :: Lens' ManagementUploadsDeleteUploadData' Text
 mududCustomDataSourceId
   = lens _mududCustomDataSourceId
       (\ s a -> s{_mududCustomDataSourceId = a})
+
+-- | Multipart request metadata.
+mududPayload :: Lens' ManagementUploadsDeleteUploadData' AnalyticsDataimportDeleteUploadDataRequest
+mududPayload
+  = lens _mududPayload (\ s a -> s{_mududPayload = a})
 
 -- | Account Id for the uploads to be deleted.
 mududAccountId :: Lens' ManagementUploadsDeleteUploadData' Text
@@ -210,7 +207,7 @@ instance GoogleRequest
               _mududKey
               _mududOAuthToken
               (Just AltJSON)
-              _mududAnalyticsDataimportDeleteUploadDataRequest
+              _mududPayload
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,16 +59,16 @@ type TablesFeaturesListResource =
        Capture "id" Text :>
          "features" :>
            QueryParam "include" Text :>
-             QueryParam "intersects" Text :>
-               QueryParam "limit" Word32 :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "orderBy" Text :>
+             QueryParam "where" Text :>
+               QueryParam "orderBy" Text :>
+                 QueryParam "version"
+                   MapsEngineTablesFeaturesListVersion
+                   :>
+                   QueryParam "limit" Word32 :>
                      QueryParam "pageToken" Text :>
                        QueryParam "select" Text :>
-                         QueryParam "version"
-                           MapsEngineTablesFeaturesListVersion
-                           :>
-                           QueryParam "where" Text :>
+                         QueryParam "intersects" Text :>
+                           QueryParam "maxResults" Word32 :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
@@ -97,7 +98,7 @@ data TablesFeaturesList' = TablesFeaturesList'
     , _tflIntersects  :: !(Maybe Text)
     , _tflMaxResults  :: !(Maybe Word32)
     , _tflFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesFeaturesList'' with the minimum fields required to make a request.
 --
@@ -257,14 +258,13 @@ instance GoogleRequest TablesFeaturesList' where
         type Rs TablesFeaturesList' = FeaturesListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesFeaturesList'{..}
-          = go _tflInclude _tflIntersects _tflLimit
-              _tflMaxResults
-              _tflOrderBy
+          = go _tflId _tflInclude _tflWhere _tflOrderBy
+              _tflVersion
+              _tflLimit
               _tflPageToken
               _tflSelect
-              _tflVersion
-              _tflWhere
-              _tflId
+              _tflIntersects
+              _tflMaxResults
               _tflQuotaUser
               (Just _tflPrettyPrint)
               _tflUserIP

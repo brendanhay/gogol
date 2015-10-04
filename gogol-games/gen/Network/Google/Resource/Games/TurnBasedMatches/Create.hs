@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.Games.TurnBasedMatches.Create
     , turQuotaUser
     , turPrettyPrint
     , turUserIP
+    , turPayload
     , turKey
-    , turTurnBasedMatchCreateRequest
     , turLanguage
     , turOAuthToken
     , turFields
@@ -63,15 +64,15 @@ type TurnBasedMatchesCreateResource =
 --
 -- /See:/ 'turnBasedMatchesCreate'' smart constructor.
 data TurnBasedMatchesCreate' = TurnBasedMatchesCreate'
-    { _turQuotaUser                   :: !(Maybe Text)
-    , _turPrettyPrint                 :: !Bool
-    , _turUserIP                      :: !(Maybe Text)
-    , _turKey                         :: !(Maybe Key)
-    , _turTurnBasedMatchCreateRequest :: !TurnBasedMatchCreateRequest
-    , _turLanguage                    :: !(Maybe Text)
-    , _turOAuthToken                  :: !(Maybe OAuthToken)
-    , _turFields                      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _turQuotaUser   :: !(Maybe Text)
+    , _turPrettyPrint :: !Bool
+    , _turUserIP      :: !(Maybe Text)
+    , _turPayload     :: !TurnBasedMatchCreateRequest
+    , _turKey         :: !(Maybe Key)
+    , _turLanguage    :: !(Maybe Text)
+    , _turOAuthToken  :: !(Maybe OAuthToken)
+    , _turFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesCreate'' with the minimum fields required to make a request.
 --
@@ -83,9 +84,9 @@ data TurnBasedMatchesCreate' = TurnBasedMatchesCreate'
 --
 -- * 'turUserIP'
 --
--- * 'turKey'
+-- * 'turPayload'
 --
--- * 'turTurnBasedMatchCreateRequest'
+-- * 'turKey'
 --
 -- * 'turLanguage'
 --
@@ -93,15 +94,15 @@ data TurnBasedMatchesCreate' = TurnBasedMatchesCreate'
 --
 -- * 'turFields'
 turnBasedMatchesCreate'
-    :: TurnBasedMatchCreateRequest -- ^ 'TurnBasedMatchCreateRequest'
+    :: TurnBasedMatchCreateRequest -- ^ 'payload'
     -> TurnBasedMatchesCreate'
-turnBasedMatchesCreate' pTurTurnBasedMatchCreateRequest_ =
+turnBasedMatchesCreate' pTurPayload_ =
     TurnBasedMatchesCreate'
     { _turQuotaUser = Nothing
     , _turPrettyPrint = True
     , _turUserIP = Nothing
+    , _turPayload = pTurPayload_
     , _turKey = Nothing
-    , _turTurnBasedMatchCreateRequest = pTurTurnBasedMatchCreateRequest_
     , _turLanguage = Nothing
     , _turOAuthToken = Nothing
     , _turFields = Nothing
@@ -126,17 +127,16 @@ turUserIP :: Lens' TurnBasedMatchesCreate' (Maybe Text)
 turUserIP
   = lens _turUserIP (\ s a -> s{_turUserIP = a})
 
+-- | Multipart request metadata.
+turPayload :: Lens' TurnBasedMatchesCreate' TurnBasedMatchCreateRequest
+turPayload
+  = lens _turPayload (\ s a -> s{_turPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 turKey :: Lens' TurnBasedMatchesCreate' (Maybe Key)
 turKey = lens _turKey (\ s a -> s{_turKey = a})
-
--- | Multipart request metadata.
-turTurnBasedMatchCreateRequest :: Lens' TurnBasedMatchesCreate' TurnBasedMatchCreateRequest
-turTurnBasedMatchCreateRequest
-  = lens _turTurnBasedMatchCreateRequest
-      (\ s a -> s{_turTurnBasedMatchCreateRequest = a})
 
 -- | The preferred language to use for strings returned by this method.
 turLanguage :: Lens' TurnBasedMatchesCreate' (Maybe Text)
@@ -169,7 +169,7 @@ instance GoogleRequest TurnBasedMatchesCreate' where
               _turKey
               _turOAuthToken
               (Just AltJSON)
-              _turTurnBasedMatchCreateRequest
+              _turPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TurnBasedMatchesCreateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,16 +55,16 @@ type SubAccountsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "subaccounts" :>
-           QueryParams "ids" Int64 :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "searchString" Text :>
+           QueryParam "searchString" Text :>
+             QueryParams "ids" Int64 :>
+               QueryParam "sortOrder"
+                 DfareportingSubAccountsListSortOrder
+                 :>
+                 QueryParam "pageToken" Text :>
                    QueryParam "sortField"
                      DfareportingSubAccountsListSortField
                      :>
-                     QueryParam "sortOrder"
-                       DfareportingSubAccountsListSortOrder
-                       :>
+                     QueryParam "maxResults" Int32 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -81,7 +82,7 @@ data SubAccountsList' = SubAccountsList'
     , _salPrettyPrint  :: !Bool
     , _salUserIP       :: !(Maybe Text)
     , _salSearchString :: !(Maybe Text)
-    , _salIds          :: !(Maybe Int64)
+    , _salIds          :: !(Maybe [Int64])
     , _salProfileId    :: !Int64
     , _salSortOrder    :: !(Maybe DfareportingSubAccountsListSortOrder)
     , _salKey          :: !(Maybe Key)
@@ -90,7 +91,7 @@ data SubAccountsList' = SubAccountsList'
     , _salOAuthToken   :: !(Maybe OAuthToken)
     , _salMaxResults   :: !(Maybe Int32)
     , _salFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubAccountsList'' with the minimum fields required to make a request.
 --
@@ -173,8 +174,10 @@ salSearchString
       (\ s a -> s{_salSearchString = a})
 
 -- | Select only subaccounts with these IDs.
-salIds :: Lens' SubAccountsList' (Maybe Int64)
-salIds = lens _salIds (\ s a -> s{_salIds = a})
+salIds :: Lens' SubAccountsList' [Int64]
+salIds
+  = lens _salIds (\ s a -> s{_salIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 salProfileId :: Lens' SubAccountsList' Int64
@@ -227,11 +230,12 @@ instance GoogleRequest SubAccountsList' where
         type Rs SubAccountsList' = SubAccountsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SubAccountsList'{..}
-          = go _salIds _salMaxResults _salPageToken
-              _salSearchString
-              _salSortField
+          = go _salProfileId _salSearchString
+              (_salIds ^. _Default)
               _salSortOrder
-              _salProfileId
+              _salPageToken
+              _salSortField
+              _salMaxResults
               _salQuotaUser
               (Just _salPrettyPrint)
               _salUserIP

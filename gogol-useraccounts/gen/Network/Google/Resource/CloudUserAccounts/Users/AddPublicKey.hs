@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.CloudUserAccounts.Users.AddPublicKey
     , uapkPrettyPrint
     , uapkProject
     , uapkUserIP
-    , uapkPublicKey
+    , uapkPayload
     , uapkUser
     , uapkKey
     , uapkOAuthToken
@@ -71,12 +72,12 @@ data UsersAddPublicKey' = UsersAddPublicKey'
     , _uapkPrettyPrint :: !Bool
     , _uapkProject     :: !Text
     , _uapkUserIP      :: !(Maybe Text)
-    , _uapkPublicKey   :: !PublicKey
+    , _uapkPayload     :: !PublicKey
     , _uapkUser        :: !Text
     , _uapkKey         :: !(Maybe Key)
     , _uapkOAuthToken  :: !(Maybe OAuthToken)
     , _uapkFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersAddPublicKey'' with the minimum fields required to make a request.
 --
@@ -90,7 +91,7 @@ data UsersAddPublicKey' = UsersAddPublicKey'
 --
 -- * 'uapkUserIP'
 --
--- * 'uapkPublicKey'
+-- * 'uapkPayload'
 --
 -- * 'uapkUser'
 --
@@ -101,16 +102,16 @@ data UsersAddPublicKey' = UsersAddPublicKey'
 -- * 'uapkFields'
 usersAddPublicKey'
     :: Text -- ^ 'project'
-    -> PublicKey -- ^ 'PublicKey'
+    -> PublicKey -- ^ 'payload'
     -> Text -- ^ 'user'
     -> UsersAddPublicKey'
-usersAddPublicKey' pUapkProject_ pUapkPublicKey_ pUapkUser_ =
+usersAddPublicKey' pUapkProject_ pUapkPayload_ pUapkUser_ =
     UsersAddPublicKey'
     { _uapkQuotaUser = Nothing
     , _uapkPrettyPrint = True
     , _uapkProject = pUapkProject_
     , _uapkUserIP = Nothing
-    , _uapkPublicKey = pUapkPublicKey_
+    , _uapkPayload = pUapkPayload_
     , _uapkUser = pUapkUser_
     , _uapkKey = Nothing
     , _uapkOAuthToken = Nothing
@@ -143,10 +144,9 @@ uapkUserIP
   = lens _uapkUserIP (\ s a -> s{_uapkUserIP = a})
 
 -- | Multipart request metadata.
-uapkPublicKey :: Lens' UsersAddPublicKey' PublicKey
-uapkPublicKey
-  = lens _uapkPublicKey
-      (\ s a -> s{_uapkPublicKey = a})
+uapkPayload :: Lens' UsersAddPublicKey' PublicKey
+uapkPayload
+  = lens _uapkPayload (\ s a -> s{_uapkPayload = a})
 
 -- | Name of the user for this request.
 uapkUser :: Lens' UsersAddPublicKey' Text
@@ -184,7 +184,7 @@ instance GoogleRequest UsersAddPublicKey' where
               _uapkKey
               _uapkOAuthToken
               (Just AltJSON)
-              _uapkPublicKey
+              _uapkPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersAddPublicKeyResource)

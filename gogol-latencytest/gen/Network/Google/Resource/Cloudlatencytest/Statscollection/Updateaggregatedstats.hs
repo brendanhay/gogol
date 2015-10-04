@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.Cloudlatencytest.Statscollection.Updateaggregated
     , suQuotaUser
     , suPrettyPrint
     , suUserIP
-    , suAggregatedStats
+    , suPayload
     , suKey
     , suOAuthToken
     , suFields
@@ -60,14 +61,14 @@ type StatscollectionUpdateaggregatedstatsResource =
 --
 -- /See:/ 'statscollectionUpdateaggregatedstats'' smart constructor.
 data StatscollectionUpdateaggregatedstats' = StatscollectionUpdateaggregatedstats'
-    { _suQuotaUser       :: !(Maybe Text)
-    , _suPrettyPrint     :: !Bool
-    , _suUserIP          :: !(Maybe Text)
-    , _suAggregatedStats :: !AggregatedStats
-    , _suKey             :: !(Maybe Key)
-    , _suOAuthToken      :: !(Maybe OAuthToken)
-    , _suFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _suQuotaUser   :: !(Maybe Text)
+    , _suPrettyPrint :: !Bool
+    , _suUserIP      :: !(Maybe Text)
+    , _suPayload     :: !AggregatedStats
+    , _suKey         :: !(Maybe Key)
+    , _suOAuthToken  :: !(Maybe OAuthToken)
+    , _suFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatscollectionUpdateaggregatedstats'' with the minimum fields required to make a request.
 --
@@ -79,7 +80,7 @@ data StatscollectionUpdateaggregatedstats' = StatscollectionUpdateaggregatedstat
 --
 -- * 'suUserIP'
 --
--- * 'suAggregatedStats'
+-- * 'suPayload'
 --
 -- * 'suKey'
 --
@@ -87,14 +88,14 @@ data StatscollectionUpdateaggregatedstats' = StatscollectionUpdateaggregatedstat
 --
 -- * 'suFields'
 statscollectionUpdateaggregatedstats'
-    :: AggregatedStats -- ^ 'AggregatedStats'
+    :: AggregatedStats -- ^ 'payload'
     -> StatscollectionUpdateaggregatedstats'
-statscollectionUpdateaggregatedstats' pSuAggregatedStats_ =
+statscollectionUpdateaggregatedstats' pSuPayload_ =
     StatscollectionUpdateaggregatedstats'
     { _suQuotaUser = Nothing
     , _suPrettyPrint = True
     , _suUserIP = Nothing
-    , _suAggregatedStats = pSuAggregatedStats_
+    , _suPayload = pSuPayload_
     , _suKey = Nothing
     , _suOAuthToken = Nothing
     , _suFields = Nothing
@@ -119,10 +120,9 @@ suUserIP :: Lens' StatscollectionUpdateaggregatedstats' (Maybe Text)
 suUserIP = lens _suUserIP (\ s a -> s{_suUserIP = a})
 
 -- | Multipart request metadata.
-suAggregatedStats :: Lens' StatscollectionUpdateaggregatedstats' AggregatedStats
-suAggregatedStats
-  = lens _suAggregatedStats
-      (\ s a -> s{_suAggregatedStats = a})
+suPayload :: Lens' StatscollectionUpdateaggregatedstats' AggregatedStats
+suPayload
+  = lens _suPayload (\ s a -> s{_suPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -156,7 +156,7 @@ instance GoogleRequest
               _suKey
               _suOAuthToken
               (Just AltJSON)
-              _suAggregatedStats
+              _suPayload
           where go
                   = clientWithRoute
                       (Proxy ::

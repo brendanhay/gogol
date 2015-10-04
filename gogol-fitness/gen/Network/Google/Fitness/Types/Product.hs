@@ -27,7 +27,7 @@ data Application = Application
     , _aName        :: !(Maybe Text)
     , _aVersion     :: !(Maybe Text)
     , _aDetailsURL  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
 --
@@ -98,7 +98,7 @@ instance ToJSON Application where
 data AggregateBy = AggregateBy
     { _abDataTypeName :: !(Maybe Text)
     , _abDataSourceId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AggregateBy' with the minimum fields required to make a request.
 --
@@ -151,7 +151,7 @@ instance ToJSON AggregateBy where
 -- /See:/ 'aggregateResponse' smart constructor.
 newtype AggregateResponse = AggregateResponse
     { _arBucket :: Maybe [AggregateBucket]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AggregateResponse' with the minimum fields required to make a request.
 --
@@ -194,7 +194,7 @@ data Dataset = Dataset
     , _dPoint          :: !(Maybe [DataPoint])
     , _dMinStartTimeNs :: !(Maybe Int64)
     , _dMaxEndTimeNs   :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Dataset' with the minimum fields required to make a request.
 --
@@ -291,7 +291,7 @@ data AggregateRequest = AggregateRequest
     , _arBucketByTime            :: !(Maybe BucketByTime)
     , _arStartTimeMillis         :: !(Maybe Int64)
     , _arBucketByActivitySegment :: !(Maybe BucketByActivity)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AggregateRequest' with the minimum fields required to make a request.
 --
@@ -416,7 +416,7 @@ instance ToJSON AggregateRequest where
 data BucketByActivity = BucketByActivity
     { _bbaMinDurationMillis    :: !(Maybe Int64)
     , _bbaActivityDataSourceId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketByActivity' with the minimum fields required to make a request.
 --
@@ -481,8 +481,8 @@ data Device = Device
     , _dUid          :: !(Maybe Text)
     , _dModel        :: !(Maybe Text)
     , _dVersion      :: !(Maybe Text)
-    , _dType         :: !(Maybe DeviceType)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _dType         :: !(Maybe Type)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Device' with the minimum fields required to make a request.
 --
@@ -530,7 +530,7 @@ dVersion :: Lens' Device (Maybe Text)
 dVersion = lens _dVersion (\ s a -> s{_dVersion = a})
 
 -- | A constant representing the type of the device.
-dType :: Lens' Device (Maybe DeviceType)
+dType :: Lens' Device (Maybe Type)
 dType = lens _dType (\ s a -> s{_dType = a})
 
 instance FromJSON Device where
@@ -556,7 +556,7 @@ instance ToJSON Device where
 -- /See:/ 'bucketBySession' smart constructor.
 newtype BucketBySession = BucketBySession
     { _bbsMinDurationMillis :: Maybe Int64
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketBySession' with the minimum fields required to make a request.
 --
@@ -599,7 +599,7 @@ data Value = Value
     , _vFpVal     :: !(Maybe Double)
     , _vIntVal    :: !(Maybe Int32)
     , _vStringVal :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Value' with the minimum fields required to make a request.
 --
@@ -669,7 +669,7 @@ data ListSessionsResponse = ListSessionsResponse
     { _lsrNextPageToken  :: !(Maybe Text)
     , _lsrDeletedSession :: !(Maybe [Session])
     , _lsrSession        :: !(Maybe [Session])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListSessionsResponse' with the minimum fields required to make a request.
 --
@@ -752,7 +752,7 @@ data DataPoint = DataPoint
     , _dpEndTimeNanos          :: !(Maybe Int64)
     , _dpModifiedTimeMillis    :: !(Maybe Int64)
     , _dpStartTimeNanos        :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataPoint' with the minimum fields required to make a request.
 --
@@ -884,7 +884,7 @@ data AggregateBucket = AggregateBucket
     , _abType            :: !(Maybe AggregateBucketType)
     , _abStartTimeMillis :: !(Maybe Int64)
     , _abSession         :: !(Maybe Session)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AggregateBucket' with the minimum fields required to make a request.
 --
@@ -976,7 +976,7 @@ instance ToJSON AggregateBucket where
 -- /See:/ 'listDataSourcesResponse' smart constructor.
 newtype ListDataSourcesResponse = ListDataSourcesResponse
     { _ldsrDataSource :: Maybe [DataSource]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListDataSourcesResponse' with the minimum fields required to make a request.
 --
@@ -1017,7 +1017,7 @@ instance ToJSON ListDataSourcesResponse where
 -- /See:/ 'mapValue' smart constructor.
 newtype MapValue = MapValue
     { _mvFpVal :: Maybe Double
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapValue' with the minimum fields required to make a request.
 --
@@ -1052,10 +1052,10 @@ instance ToJSON MapValue where
 --
 -- /See:/ 'dataTypeField' smart constructor.
 data DataTypeField = DataTypeField
-    { _dtfFormat   :: !(Maybe DataTypeFieldFormat)
+    { _dtfFormat   :: !(Maybe Format)
     , _dtfName     :: !(Maybe Text)
     , _dtfOptional :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataTypeField' with the minimum fields required to make a request.
 --
@@ -1076,7 +1076,7 @@ dataTypeField =
     }
 
 -- | The different supported formats for each field in a data type.
-dtfFormat :: Lens' DataTypeField (Maybe DataTypeFieldFormat)
+dtfFormat :: Lens' DataTypeField (Maybe Format)
 dtfFormat
   = lens _dtfFormat (\ s a -> s{_dtfFormat = a})
 
@@ -1129,7 +1129,7 @@ data DataSource = DataSource
     , _dsType           :: !(Maybe DataSourceType)
     , _dsDataStreamName :: !(Maybe Text)
     , _dsDataStreamId   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataSource' with the minimum fields required to make a request.
 --
@@ -1255,7 +1255,7 @@ instance ToJSON DataSource where
 data ValueMapValEntry = ValueMapValEntry
     { _vmveValue :: !(Maybe MapValue)
     , _vmveKey   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ValueMapValEntry' with the minimum fields required to make a request.
 --
@@ -1300,7 +1300,7 @@ instance ToJSON ValueMapValEntry where
 data DataType = DataType
     { _dtField :: !(Maybe [DataTypeField])
     , _dtName  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataType' with the minimum fields required to make a request.
 --
@@ -1345,7 +1345,7 @@ instance ToJSON DataType where
 -- /See:/ 'bucketByTime' smart constructor.
 newtype BucketByTime = BucketByTime
     { _bbtDurationMillis :: Maybe Int64
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketByTime' with the minimum fields required to make a request.
 --
@@ -1392,7 +1392,7 @@ data Session = Session
     , _sId                 :: !(Maybe Text)
     , _sStartTimeMillis    :: !(Maybe Int64)
     , _sDescription        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Session' with the minimum fields required to make a request.
 --

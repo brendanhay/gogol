@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.Calendar.ACL.Patch
     , apPrettyPrint
     , apUserIP
     , apRuleId
+    , apPayload
     , apKey
-    , apACLRule
     , apOAuthToken
     , apFields
     ) where
@@ -69,11 +70,11 @@ data ACLPatch' = ACLPatch'
     , _apPrettyPrint :: !Bool
     , _apUserIP      :: !(Maybe Text)
     , _apRuleId      :: !Text
+    , _apPayload     :: !ACLRule
     , _apKey         :: !(Maybe Key)
-    , _apACLRule     :: !ACLRule
     , _apOAuthToken  :: !(Maybe OAuthToken)
     , _apFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLPatch'' with the minimum fields required to make a request.
 --
@@ -89,9 +90,9 @@ data ACLPatch' = ACLPatch'
 --
 -- * 'apRuleId'
 --
--- * 'apKey'
+-- * 'apPayload'
 --
--- * 'apACLRule'
+-- * 'apKey'
 --
 -- * 'apOAuthToken'
 --
@@ -99,17 +100,17 @@ data ACLPatch' = ACLPatch'
 aclPatch'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'ruleId'
-    -> ACLRule -- ^ 'ACLRule'
+    -> ACLRule -- ^ 'payload'
     -> ACLPatch'
-aclPatch' pApCalendarId_ pApRuleId_ pApACLRule_ =
+aclPatch' pApCalendarId_ pApRuleId_ pApPayload_ =
     ACLPatch'
     { _apQuotaUser = Nothing
     , _apCalendarId = pApCalendarId_
     , _apPrettyPrint = True
     , _apUserIP = Nothing
     , _apRuleId = pApRuleId_
+    , _apPayload = pApPayload_
     , _apKey = Nothing
-    , _apACLRule = pApACLRule_
     , _apOAuthToken = Nothing
     , _apFields = Nothing
     }
@@ -143,16 +144,16 @@ apUserIP = lens _apUserIP (\ s a -> s{_apUserIP = a})
 apRuleId :: Lens' ACLPatch' Text
 apRuleId = lens _apRuleId (\ s a -> s{_apRuleId = a})
 
+-- | Multipart request metadata.
+apPayload :: Lens' ACLPatch' ACLRule
+apPayload
+  = lens _apPayload (\ s a -> s{_apPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 apKey :: Lens' ACLPatch' (Maybe Key)
 apKey = lens _apKey (\ s a -> s{_apKey = a})
-
--- | Multipart request metadata.
-apACLRule :: Lens' ACLPatch' ACLRule
-apACLRule
-  = lens _apACLRule (\ s a -> s{_apACLRule = a})
 
 -- | OAuth 2.0 token for the current user.
 apOAuthToken :: Lens' ACLPatch' (Maybe OAuthToken)
@@ -178,7 +179,7 @@ instance GoogleRequest ACLPatch' where
               _apKey
               _apOAuthToken
               (Just AltJSON)
-              _apACLRule
+              _apPayload
           where go
                   = clientWithRoute (Proxy :: Proxy ACLPatchResource) r
                       u

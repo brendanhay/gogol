@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.Storage.BucketAccessControls.Patch
     , bacpPrettyPrint
     , bacpUserIP
     , bacpBucket
+    , bacpPayload
     , bacpKey
-    , bacpBucketAccessControl
     , bacpOAuthToken
     , bacpEntity
     , bacpFields
@@ -67,16 +68,16 @@ type BucketAccessControlsPatchResource =
 --
 -- /See:/ 'bucketAccessControlsPatch'' smart constructor.
 data BucketAccessControlsPatch' = BucketAccessControlsPatch'
-    { _bacpQuotaUser           :: !(Maybe Text)
-    , _bacpPrettyPrint         :: !Bool
-    , _bacpUserIP              :: !(Maybe Text)
-    , _bacpBucket              :: !Text
-    , _bacpKey                 :: !(Maybe Key)
-    , _bacpBucketAccessControl :: !BucketAccessControl
-    , _bacpOAuthToken          :: !(Maybe OAuthToken)
-    , _bacpEntity              :: !Text
-    , _bacpFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _bacpQuotaUser   :: !(Maybe Text)
+    , _bacpPrettyPrint :: !Bool
+    , _bacpUserIP      :: !(Maybe Text)
+    , _bacpBucket      :: !Text
+    , _bacpPayload     :: !BucketAccessControl
+    , _bacpKey         :: !(Maybe Key)
+    , _bacpOAuthToken  :: !(Maybe OAuthToken)
+    , _bacpEntity      :: !Text
+    , _bacpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControlsPatch'' with the minimum fields required to make a request.
 --
@@ -90,9 +91,9 @@ data BucketAccessControlsPatch' = BucketAccessControlsPatch'
 --
 -- * 'bacpBucket'
 --
--- * 'bacpKey'
+-- * 'bacpPayload'
 --
--- * 'bacpBucketAccessControl'
+-- * 'bacpKey'
 --
 -- * 'bacpOAuthToken'
 --
@@ -101,17 +102,17 @@ data BucketAccessControlsPatch' = BucketAccessControlsPatch'
 -- * 'bacpFields'
 bucketAccessControlsPatch'
     :: Text -- ^ 'bucket'
-    -> BucketAccessControl -- ^ 'BucketAccessControl'
+    -> BucketAccessControl -- ^ 'payload'
     -> Text -- ^ 'entity'
     -> BucketAccessControlsPatch'
-bucketAccessControlsPatch' pBacpBucket_ pBacpBucketAccessControl_ pBacpEntity_ =
+bucketAccessControlsPatch' pBacpBucket_ pBacpPayload_ pBacpEntity_ =
     BucketAccessControlsPatch'
     { _bacpQuotaUser = Nothing
     , _bacpPrettyPrint = True
     , _bacpUserIP = Nothing
     , _bacpBucket = pBacpBucket_
+    , _bacpPayload = pBacpPayload_
     , _bacpKey = Nothing
-    , _bacpBucketAccessControl = pBacpBucketAccessControl_
     , _bacpOAuthToken = Nothing
     , _bacpEntity = pBacpEntity_
     , _bacpFields = Nothing
@@ -142,17 +143,16 @@ bacpBucket :: Lens' BucketAccessControlsPatch' Text
 bacpBucket
   = lens _bacpBucket (\ s a -> s{_bacpBucket = a})
 
+-- | Multipart request metadata.
+bacpPayload :: Lens' BucketAccessControlsPatch' BucketAccessControl
+bacpPayload
+  = lens _bacpPayload (\ s a -> s{_bacpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 bacpKey :: Lens' BucketAccessControlsPatch' (Maybe Key)
 bacpKey = lens _bacpKey (\ s a -> s{_bacpKey = a})
-
--- | Multipart request metadata.
-bacpBucketAccessControl :: Lens' BucketAccessControlsPatch' BucketAccessControl
-bacpBucketAccessControl
-  = lens _bacpBucketAccessControl
-      (\ s a -> s{_bacpBucketAccessControl = a})
 
 -- | OAuth 2.0 token for the current user.
 bacpOAuthToken :: Lens' BucketAccessControlsPatch' (Maybe OAuthToken)
@@ -189,7 +189,7 @@ instance GoogleRequest BucketAccessControlsPatch'
               _bacpKey
               _bacpOAuthToken
               (Just AltJSON)
-              _bacpBucketAccessControl
+              _bacpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BucketAccessControlsPatchResource)

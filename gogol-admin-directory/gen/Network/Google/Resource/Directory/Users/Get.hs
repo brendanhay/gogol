@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,10 +51,10 @@ import           Network.Google.Prelude
 type UsersGetResource =
      "users" :>
        Capture "userKey" Text :>
-         QueryParam "customFieldMask" Text :>
-           QueryParam "projection" DirectoryUsersGetProjection
-             :>
-             QueryParam "viewType" DirectoryUsersGetViewType :>
+         QueryParam "viewType" DirectoryUsersGetViewType :>
+           QueryParam "customFieldMask" Text :>
+             QueryParam "projection" DirectoryUsersGetProjection
+               :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -76,7 +77,7 @@ data UsersGet' = UsersGet'
     , _ugOAuthToken      :: !(Maybe OAuthToken)
     , _ugUserKey         :: !Text
     , _ugFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersGet'' with the minimum fields required to make a request.
 --
@@ -181,9 +182,8 @@ instance GoogleRequest UsersGet' where
         type Rs UsersGet' = User
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersGet'{..}
-          = go _ugCustomFieldMask (Just _ugProjection)
-              (Just _ugViewType)
-              _ugUserKey
+          = go _ugUserKey (Just _ugViewType) _ugCustomFieldMask
+              (Just _ugProjection)
               _ugQuotaUser
               (Just _ugPrettyPrint)
               _ugUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,10 +35,10 @@ module Network.Google.Resource.Games.Rooms.Leave
     , rlQuotaUser
     , rlPrettyPrint
     , rlUserIP
+    , rlPayload
     , rlKey
     , rlRoomId
     , rlLanguage
-    , rlRoomLeaveRequest
     , rlOAuthToken
     , rlFields
     ) where
@@ -66,16 +67,16 @@ type RoomsLeaveResource =
 --
 -- /See:/ 'roomsLeave'' smart constructor.
 data RoomsLeave' = RoomsLeave'
-    { _rlQuotaUser        :: !(Maybe Text)
-    , _rlPrettyPrint      :: !Bool
-    , _rlUserIP           :: !(Maybe Text)
-    , _rlKey              :: !(Maybe Key)
-    , _rlRoomId           :: !Text
-    , _rlLanguage         :: !(Maybe Text)
-    , _rlRoomLeaveRequest :: !RoomLeaveRequest
-    , _rlOAuthToken       :: !(Maybe OAuthToken)
-    , _rlFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rlQuotaUser   :: !(Maybe Text)
+    , _rlPrettyPrint :: !Bool
+    , _rlUserIP      :: !(Maybe Text)
+    , _rlPayload     :: !RoomLeaveRequest
+    , _rlKey         :: !(Maybe Key)
+    , _rlRoomId      :: !Text
+    , _rlLanguage    :: !(Maybe Text)
+    , _rlOAuthToken  :: !(Maybe OAuthToken)
+    , _rlFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsLeave'' with the minimum fields required to make a request.
 --
@@ -87,30 +88,30 @@ data RoomsLeave' = RoomsLeave'
 --
 -- * 'rlUserIP'
 --
+-- * 'rlPayload'
+--
 -- * 'rlKey'
 --
 -- * 'rlRoomId'
 --
 -- * 'rlLanguage'
 --
--- * 'rlRoomLeaveRequest'
---
 -- * 'rlOAuthToken'
 --
 -- * 'rlFields'
 roomsLeave'
-    :: Text -- ^ 'roomId'
-    -> RoomLeaveRequest -- ^ 'RoomLeaveRequest'
+    :: RoomLeaveRequest -- ^ 'payload'
+    -> Text -- ^ 'roomId'
     -> RoomsLeave'
-roomsLeave' pRlRoomId_ pRlRoomLeaveRequest_ =
+roomsLeave' pRlPayload_ pRlRoomId_ =
     RoomsLeave'
     { _rlQuotaUser = Nothing
     , _rlPrettyPrint = True
     , _rlUserIP = Nothing
+    , _rlPayload = pRlPayload_
     , _rlKey = Nothing
     , _rlRoomId = pRlRoomId_
     , _rlLanguage = Nothing
-    , _rlRoomLeaveRequest = pRlRoomLeaveRequest_
     , _rlOAuthToken = Nothing
     , _rlFields = Nothing
     }
@@ -133,6 +134,11 @@ rlPrettyPrint
 rlUserIP :: Lens' RoomsLeave' (Maybe Text)
 rlUserIP = lens _rlUserIP (\ s a -> s{_rlUserIP = a})
 
+-- | Multipart request metadata.
+rlPayload :: Lens' RoomsLeave' RoomLeaveRequest
+rlPayload
+  = lens _rlPayload (\ s a -> s{_rlPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -147,12 +153,6 @@ rlRoomId = lens _rlRoomId (\ s a -> s{_rlRoomId = a})
 rlLanguage :: Lens' RoomsLeave' (Maybe Text)
 rlLanguage
   = lens _rlLanguage (\ s a -> s{_rlLanguage = a})
-
--- | Multipart request metadata.
-rlRoomLeaveRequest :: Lens' RoomsLeave' RoomLeaveRequest
-rlRoomLeaveRequest
-  = lens _rlRoomLeaveRequest
-      (\ s a -> s{_rlRoomLeaveRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 rlOAuthToken :: Lens' RoomsLeave' (Maybe OAuthToken)
@@ -171,14 +171,14 @@ instance GoogleRequest RoomsLeave' where
         type Rs RoomsLeave' = Room
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RoomsLeave'{..}
-          = go _rlLanguage _rlRoomId _rlQuotaUser
+          = go _rlRoomId _rlLanguage _rlQuotaUser
               (Just _rlPrettyPrint)
               _rlUserIP
               _rlFields
               _rlKey
               _rlOAuthToken
               (Just AltJSON)
-              _rlRoomLeaveRequest
+              _rlPayload
           where go
                   = clientWithRoute (Proxy :: Proxy RoomsLeaveResource)
                       r

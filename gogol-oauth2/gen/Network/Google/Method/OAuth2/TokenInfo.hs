@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,8 +52,8 @@ type TokenInfoMethod =
        "v2" :>
          "tokeninfo" :>
            QueryParam "access_token" Text :>
-             QueryParam "id_token" Text :>
-               QueryParam "token_handle" Text :>
+             QueryParam "token_handle" Text :>
+               QueryParam "id_token" Text :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -73,7 +74,7 @@ data TokenInfo' = TokenInfo'
     , _tTokenHandle :: !(Maybe Text)
     , _tFields      :: !(Maybe Text)
     , _tIdToken     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TokenInfo'' with the minimum fields required to make a request.
 --
@@ -162,7 +163,7 @@ instance GoogleRequest TokenInfo' where
         type Rs TokenInfo' = TokenInfo
         request = requestWithRoute defReq oAuth2URL
         requestWithRoute r u TokenInfo'{..}
-          = go _tAccessToken _tIdToken _tTokenHandle
+          = go _tAccessToken _tTokenHandle _tIdToken
               _tQuotaUser
               (Just _tPrettyPrint)
               _tUserIP

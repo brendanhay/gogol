@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 -- /See:/ 'listOperationsResponse' smart constructor.
 newtype ListOperationsResponse = ListOperationsResponse
     { _lorOperations :: Maybe [Operation]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -60,7 +60,7 @@ instance ToJSON ListOperationsResponse where
 -- /See:/ 'createClusterRequest' smart constructor.
 newtype CreateClusterRequest = CreateClusterRequest
     { _ccrCluster :: Maybe Cluster
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreateClusterRequest' with the minimum fields required to make a request.
 --
@@ -91,7 +91,7 @@ instance ToJSON CreateClusterRequest where
 --
 -- /See:/ 'cluster' smart constructor.
 data Cluster = Cluster
-    { _cStatus                :: !(Maybe ClusterStatus)
+    { _cStatus                :: !(Maybe Status)
     , _cNodeConfig            :: !(Maybe NodeConfig)
     , _cNumNodes              :: !(Maybe Int32)
     , _cClusterAPIVersion     :: !(Maybe Text)
@@ -110,7 +110,7 @@ data Cluster = Cluster
     , _cDescription           :: !(Maybe Text)
     , _cInstanceGroupURLs     :: !(Maybe [Text])
     , _cNodeRoutingPrefixSize :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Cluster' with the minimum fields required to make a request.
 --
@@ -179,7 +179,7 @@ cluster =
     }
 
 -- | [Output only] The current status of this cluster.
-cStatus :: Lens' Cluster (Maybe ClusterStatus)
+cStatus :: Lens' Cluster (Maybe Status)
 cStatus = lens _cStatus (\ s a -> s{_cStatus = a})
 
 -- | The machine type and image to use for all nodes in this cluster. See the
@@ -362,7 +362,7 @@ instance ToJSON Cluster where
 -- /See:/ 'listAggregatedOperationsResponse' smart constructor.
 newtype ListAggregatedOperationsResponse = ListAggregatedOperationsResponse
     { _laorOperations :: Maybe [Operation]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListAggregatedOperationsResponse' with the minimum fields required to make a request.
 --
@@ -404,7 +404,7 @@ data NodeConfig = NodeConfig
     { _ncServiceAccounts :: !(Maybe [ServiceAccount])
     , _ncSourceImage     :: !(Maybe Text)
     , _ncMachineType     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NodeConfig' with the minimum fields required to make a request.
 --
@@ -480,11 +480,11 @@ data Operation = Operation
     , _oZone          :: !(Maybe Text)
     , _oSelfLink      :: !(Maybe Text)
     , _oName          :: !(Maybe Text)
-    , _oOperationType :: !(Maybe OperationOperationType)
+    , _oOperationType :: !(Maybe OperationType)
     , _oErrorMessage  :: !(Maybe Text)
     , _oTargetLink    :: !(Maybe Text)
     , _oTarget        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -538,7 +538,7 @@ oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
 -- | The operation type.
-oOperationType :: Lens' Operation (Maybe OperationOperationType)
+oOperationType :: Lens' Operation (Maybe OperationType)
 oOperationType
   = lens _oOperationType
       (\ s a -> s{_oOperationType = a})
@@ -590,7 +590,7 @@ instance ToJSON Operation where
 data ServiceAccount = ServiceAccount
     { _saEmail  :: !(Maybe Text)
     , _saScopes :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
 --
@@ -643,7 +643,7 @@ data MasterAuth = MasterAuth
     , _maClientCertificate    :: !(Maybe Text)
     , _maPassword             :: !(Maybe Text)
     , _maClusterCaCertificate :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MasterAuth' with the minimum fields required to make a request.
 --
@@ -740,7 +740,7 @@ instance ToJSON MasterAuth where
 -- /See:/ 'listAggregatedClustersResponse' smart constructor.
 newtype ListAggregatedClustersResponse = ListAggregatedClustersResponse
     { _lacrClusters :: Maybe [Cluster]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListAggregatedClustersResponse' with the minimum fields required to make a request.
 --
@@ -778,7 +778,7 @@ instance ToJSON ListAggregatedClustersResponse where
 -- /See:/ 'listClustersResponse' smart constructor.
 newtype ListClustersResponse = ListClustersResponse
     { _lcrClusters :: Maybe [Cluster]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListClustersResponse' with the minimum fields required to make a request.
 --

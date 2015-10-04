@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,10 +35,10 @@ module Network.Google.Resource.CloudUserAccounts.Groups.RemoveMember
     , grmPrettyPrint
     , grmProject
     , grmUserIP
+    , grmPayload
     , grmKey
     , grmGroupName
     , grmOAuthToken
-    , grmGroupsRemoveMemberRequest
     , grmFields
     ) where
 
@@ -66,16 +67,16 @@ type GroupsRemoveMemberResource =
 --
 -- /See:/ 'groupsRemoveMember'' smart constructor.
 data GroupsRemoveMember' = GroupsRemoveMember'
-    { _grmQuotaUser                 :: !(Maybe Text)
-    , _grmPrettyPrint               :: !Bool
-    , _grmProject                   :: !Text
-    , _grmUserIP                    :: !(Maybe Text)
-    , _grmKey                       :: !(Maybe Key)
-    , _grmGroupName                 :: !Text
-    , _grmOAuthToken                :: !(Maybe OAuthToken)
-    , _grmGroupsRemoveMemberRequest :: !GroupsRemoveMemberRequest
-    , _grmFields                    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _grmQuotaUser   :: !(Maybe Text)
+    , _grmPrettyPrint :: !Bool
+    , _grmProject     :: !Text
+    , _grmUserIP      :: !(Maybe Text)
+    , _grmPayload     :: !GroupsRemoveMemberRequest
+    , _grmKey         :: !(Maybe Key)
+    , _grmGroupName   :: !Text
+    , _grmOAuthToken  :: !(Maybe OAuthToken)
+    , _grmFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsRemoveMember'' with the minimum fields required to make a request.
 --
@@ -89,30 +90,30 @@ data GroupsRemoveMember' = GroupsRemoveMember'
 --
 -- * 'grmUserIP'
 --
+-- * 'grmPayload'
+--
 -- * 'grmKey'
 --
 -- * 'grmGroupName'
 --
 -- * 'grmOAuthToken'
 --
--- * 'grmGroupsRemoveMemberRequest'
---
 -- * 'grmFields'
 groupsRemoveMember'
     :: Text -- ^ 'project'
+    -> GroupsRemoveMemberRequest -- ^ 'payload'
     -> Text -- ^ 'groupName'
-    -> GroupsRemoveMemberRequest -- ^ 'GroupsRemoveMemberRequest'
     -> GroupsRemoveMember'
-groupsRemoveMember' pGrmProject_ pGrmGroupName_ pGrmGroupsRemoveMemberRequest_ =
+groupsRemoveMember' pGrmProject_ pGrmPayload_ pGrmGroupName_ =
     GroupsRemoveMember'
     { _grmQuotaUser = Nothing
     , _grmPrettyPrint = True
     , _grmProject = pGrmProject_
     , _grmUserIP = Nothing
+    , _grmPayload = pGrmPayload_
     , _grmKey = Nothing
     , _grmGroupName = pGrmGroupName_
     , _grmOAuthToken = Nothing
-    , _grmGroupsRemoveMemberRequest = pGrmGroupsRemoveMemberRequest_
     , _grmFields = Nothing
     }
 
@@ -140,6 +141,11 @@ grmUserIP :: Lens' GroupsRemoveMember' (Maybe Text)
 grmUserIP
   = lens _grmUserIP (\ s a -> s{_grmUserIP = a})
 
+-- | Multipart request metadata.
+grmPayload :: Lens' GroupsRemoveMember' GroupsRemoveMemberRequest
+grmPayload
+  = lens _grmPayload (\ s a -> s{_grmPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -156,12 +162,6 @@ grmOAuthToken :: Lens' GroupsRemoveMember' (Maybe OAuthToken)
 grmOAuthToken
   = lens _grmOAuthToken
       (\ s a -> s{_grmOAuthToken = a})
-
--- | Multipart request metadata.
-grmGroupsRemoveMemberRequest :: Lens' GroupsRemoveMember' GroupsRemoveMemberRequest
-grmGroupsRemoveMemberRequest
-  = lens _grmGroupsRemoveMemberRequest
-      (\ s a -> s{_grmGroupsRemoveMemberRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 grmFields :: Lens' GroupsRemoveMember' (Maybe Text)
@@ -183,7 +183,7 @@ instance GoogleRequest GroupsRemoveMember' where
               _grmKey
               _grmOAuthToken
               (Just AltJSON)
-              _grmGroupsRemoveMemberRequest
+              _grmPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GroupsRemoveMemberResource)

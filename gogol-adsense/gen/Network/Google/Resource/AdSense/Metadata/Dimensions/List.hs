@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -64,7 +65,7 @@ data MetadataDimensionsList' = MetadataDimensionsList'
     , _mdlKey         :: !(Maybe Key)
     , _mdlOAuthToken  :: !(Maybe OAuthToken)
     , _mdlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetadataDimensionsList'' with the minimum fields required to make a request.
 --

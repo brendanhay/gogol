@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Update
     , aauuQuotaUser
     , aauuPrettyPrint
     , aauuUserIP
-    , aauuAdUnit
+    , aauuPayload
     , aauuAdClientId
     , aauuAccountId
     , aauuKey
@@ -68,13 +69,13 @@ data AccountsAdUnitsUpdate' = AccountsAdUnitsUpdate'
     { _aauuQuotaUser   :: !(Maybe Text)
     , _aauuPrettyPrint :: !Bool
     , _aauuUserIP      :: !(Maybe Text)
-    , _aauuAdUnit      :: !AdUnit
+    , _aauuPayload     :: !AdUnit
     , _aauuAdClientId  :: !Text
     , _aauuAccountId   :: !Text
     , _aauuKey         :: !(Maybe Key)
     , _aauuOAuthToken  :: !(Maybe OAuthToken)
     , _aauuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdUnitsUpdate'' with the minimum fields required to make a request.
 --
@@ -86,7 +87,7 @@ data AccountsAdUnitsUpdate' = AccountsAdUnitsUpdate'
 --
 -- * 'aauuUserIP'
 --
--- * 'aauuAdUnit'
+-- * 'aauuPayload'
 --
 -- * 'aauuAdClientId'
 --
@@ -98,16 +99,16 @@ data AccountsAdUnitsUpdate' = AccountsAdUnitsUpdate'
 --
 -- * 'aauuFields'
 accountsAdUnitsUpdate'
-    :: AdUnit -- ^ 'AdUnit'
+    :: AdUnit -- ^ 'payload'
     -> Text -- ^ 'adClientId'
     -> Text -- ^ 'accountId'
     -> AccountsAdUnitsUpdate'
-accountsAdUnitsUpdate' pAauuAdUnit_ pAauuAdClientId_ pAauuAccountId_ =
+accountsAdUnitsUpdate' pAauuPayload_ pAauuAdClientId_ pAauuAccountId_ =
     AccountsAdUnitsUpdate'
     { _aauuQuotaUser = Nothing
     , _aauuPrettyPrint = True
     , _aauuUserIP = Nothing
-    , _aauuAdUnit = pAauuAdUnit_
+    , _aauuPayload = pAauuPayload_
     , _aauuAdClientId = pAauuAdClientId_
     , _aauuAccountId = pAauuAccountId_
     , _aauuKey = Nothing
@@ -136,9 +137,9 @@ aauuUserIP
   = lens _aauuUserIP (\ s a -> s{_aauuUserIP = a})
 
 -- | Multipart request metadata.
-aauuAdUnit :: Lens' AccountsAdUnitsUpdate' AdUnit
-aauuAdUnit
-  = lens _aauuAdUnit (\ s a -> s{_aauuAdUnit = a})
+aauuPayload :: Lens' AccountsAdUnitsUpdate' AdUnit
+aauuPayload
+  = lens _aauuPayload (\ s a -> s{_aauuPayload = a})
 
 -- | Ad client which contains the ad unit.
 aauuAdClientId :: Lens' AccountsAdUnitsUpdate' Text
@@ -184,7 +185,7 @@ instance GoogleRequest AccountsAdUnitsUpdate' where
               _aauuKey
               _aauuOAuthToken
               (Just AltJSON)
-              _aauuAdUnit
+              _aauuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsAdUnitsUpdateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.GamesManagement.Events.ResetMultipleForAllPlayers
     , ermfapQuotaUser
     , ermfapPrettyPrint
     , ermfapUserIP
-    , ermfapEventsResetMultipleForAllRequest
+    , ermfapPayload
     , ermfapKey
     , ermfapOAuthToken
     , ermfapFields
@@ -65,14 +66,14 @@ type EventsResetMultipleForAllPlayersResource =
 --
 -- /See:/ 'eventsResetMultipleForAllPlayers'' smart constructor.
 data EventsResetMultipleForAllPlayers' = EventsResetMultipleForAllPlayers'
-    { _ermfapQuotaUser                        :: !(Maybe Text)
-    , _ermfapPrettyPrint                      :: !Bool
-    , _ermfapUserIP                           :: !(Maybe Text)
-    , _ermfapEventsResetMultipleForAllRequest :: !EventsResetMultipleForAllRequest
-    , _ermfapKey                              :: !(Maybe Key)
-    , _ermfapOAuthToken                       :: !(Maybe OAuthToken)
-    , _ermfapFields                           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ermfapQuotaUser   :: !(Maybe Text)
+    , _ermfapPrettyPrint :: !Bool
+    , _ermfapUserIP      :: !(Maybe Text)
+    , _ermfapPayload     :: !EventsResetMultipleForAllRequest
+    , _ermfapKey         :: !(Maybe Key)
+    , _ermfapOAuthToken  :: !(Maybe OAuthToken)
+    , _ermfapFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsResetMultipleForAllPlayers'' with the minimum fields required to make a request.
 --
@@ -84,7 +85,7 @@ data EventsResetMultipleForAllPlayers' = EventsResetMultipleForAllPlayers'
 --
 -- * 'ermfapUserIP'
 --
--- * 'ermfapEventsResetMultipleForAllRequest'
+-- * 'ermfapPayload'
 --
 -- * 'ermfapKey'
 --
@@ -92,14 +93,14 @@ data EventsResetMultipleForAllPlayers' = EventsResetMultipleForAllPlayers'
 --
 -- * 'ermfapFields'
 eventsResetMultipleForAllPlayers'
-    :: EventsResetMultipleForAllRequest -- ^ 'EventsResetMultipleForAllRequest'
+    :: EventsResetMultipleForAllRequest -- ^ 'payload'
     -> EventsResetMultipleForAllPlayers'
-eventsResetMultipleForAllPlayers' pErmfapEventsResetMultipleForAllRequest_ =
+eventsResetMultipleForAllPlayers' pErmfapPayload_ =
     EventsResetMultipleForAllPlayers'
     { _ermfapQuotaUser = Nothing
     , _ermfapPrettyPrint = True
     , _ermfapUserIP = Nothing
-    , _ermfapEventsResetMultipleForAllRequest = pErmfapEventsResetMultipleForAllRequest_
+    , _ermfapPayload = pErmfapPayload_
     , _ermfapKey = Nothing
     , _ermfapOAuthToken = Nothing
     , _ermfapFields = Nothing
@@ -126,11 +127,10 @@ ermfapUserIP
   = lens _ermfapUserIP (\ s a -> s{_ermfapUserIP = a})
 
 -- | Multipart request metadata.
-ermfapEventsResetMultipleForAllRequest :: Lens' EventsResetMultipleForAllPlayers' EventsResetMultipleForAllRequest
-ermfapEventsResetMultipleForAllRequest
-  = lens _ermfapEventsResetMultipleForAllRequest
-      (\ s a ->
-         s{_ermfapEventsResetMultipleForAllRequest = a})
+ermfapPayload :: Lens' EventsResetMultipleForAllPlayers' EventsResetMultipleForAllRequest
+ermfapPayload
+  = lens _ermfapPayload
+      (\ s a -> s{_ermfapPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -167,7 +167,7 @@ instance GoogleRequest
               _ermfapKey
               _ermfapOAuthToken
               (Just AltJSON)
-              _ermfapEventsResetMultipleForAllRequest
+              _ermfapPayload
           where go
                   = clientWithRoute
                       (Proxy ::

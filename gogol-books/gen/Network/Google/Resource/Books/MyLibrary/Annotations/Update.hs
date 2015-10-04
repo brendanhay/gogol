@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -31,9 +32,9 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.Update
 
     -- * Request Lenses
     , mlauQuotaUser
-    , mlauAnnotation
     , mlauPrettyPrint
     , mlauUserIP
+    , mlauPayload
     , mlauKey
     , mlauAnnotationId
     , mlauSource
@@ -65,15 +66,15 @@ type MyLibraryAnnotationsUpdateResource =
 -- /See:/ 'myLibraryAnnotationsUpdate'' smart constructor.
 data MyLibraryAnnotationsUpdate' = MyLibraryAnnotationsUpdate'
     { _mlauQuotaUser    :: !(Maybe Text)
-    , _mlauAnnotation   :: !Annotation
     , _mlauPrettyPrint  :: !Bool
     , _mlauUserIP       :: !(Maybe Text)
+    , _mlauPayload      :: !Annotation
     , _mlauKey          :: !(Maybe Key)
     , _mlauAnnotationId :: !Text
     , _mlauSource       :: !(Maybe Text)
     , _mlauOAuthToken   :: !(Maybe OAuthToken)
     , _mlauFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyLibraryAnnotationsUpdate'' with the minimum fields required to make a request.
 --
@@ -81,11 +82,11 @@ data MyLibraryAnnotationsUpdate' = MyLibraryAnnotationsUpdate'
 --
 -- * 'mlauQuotaUser'
 --
--- * 'mlauAnnotation'
---
 -- * 'mlauPrettyPrint'
 --
 -- * 'mlauUserIP'
+--
+-- * 'mlauPayload'
 --
 -- * 'mlauKey'
 --
@@ -97,15 +98,15 @@ data MyLibraryAnnotationsUpdate' = MyLibraryAnnotationsUpdate'
 --
 -- * 'mlauFields'
 myLibraryAnnotationsUpdate'
-    :: Annotation -- ^ 'Annotation'
+    :: Annotation -- ^ 'payload'
     -> Text -- ^ 'annotationId'
     -> MyLibraryAnnotationsUpdate'
-myLibraryAnnotationsUpdate' pMlauAnnotation_ pMlauAnnotationId_ =
+myLibraryAnnotationsUpdate' pMlauPayload_ pMlauAnnotationId_ =
     MyLibraryAnnotationsUpdate'
     { _mlauQuotaUser = Nothing
-    , _mlauAnnotation = pMlauAnnotation_
     , _mlauPrettyPrint = True
     , _mlauUserIP = Nothing
+    , _mlauPayload = pMlauPayload_
     , _mlauKey = Nothing
     , _mlauAnnotationId = pMlauAnnotationId_
     , _mlauSource = Nothing
@@ -121,12 +122,6 @@ mlauQuotaUser
   = lens _mlauQuotaUser
       (\ s a -> s{_mlauQuotaUser = a})
 
--- | Multipart request metadata.
-mlauAnnotation :: Lens' MyLibraryAnnotationsUpdate' Annotation
-mlauAnnotation
-  = lens _mlauAnnotation
-      (\ s a -> s{_mlauAnnotation = a})
-
 -- | Returns response with indentations and line breaks.
 mlauPrettyPrint :: Lens' MyLibraryAnnotationsUpdate' Bool
 mlauPrettyPrint
@@ -138,6 +133,11 @@ mlauPrettyPrint
 mlauUserIP :: Lens' MyLibraryAnnotationsUpdate' (Maybe Text)
 mlauUserIP
   = lens _mlauUserIP (\ s a -> s{_mlauUserIP = a})
+
+-- | Multipart request metadata.
+mlauPayload :: Lens' MyLibraryAnnotationsUpdate' Annotation
+mlauPayload
+  = lens _mlauPayload (\ s a -> s{_mlauPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -176,14 +176,14 @@ instance GoogleRequest MyLibraryAnnotationsUpdate'
         type Rs MyLibraryAnnotationsUpdate' = Annotation
         request = requestWithRoute defReq booksURL
         requestWithRoute r u MyLibraryAnnotationsUpdate'{..}
-          = go _mlauSource _mlauAnnotationId _mlauQuotaUser
+          = go _mlauAnnotationId _mlauSource _mlauQuotaUser
               (Just _mlauPrettyPrint)
               _mlauUserIP
               _mlauFields
               _mlauKey
               _mlauOAuthToken
               (Just AltJSON)
-              _mlauAnnotation
+              _mlauPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MyLibraryAnnotationsUpdateResource)

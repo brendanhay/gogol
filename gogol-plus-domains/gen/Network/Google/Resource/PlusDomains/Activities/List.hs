@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,11 +53,9 @@ type ActivitiesListResource =
      "people" :>
        Capture "userId" Text :>
          "activities" :>
-           Capture "collection"
-             PlusDomainsActivitiesListCollection
-             :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+           Capture "collection" Collection :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -74,14 +73,14 @@ data ActivitiesList' = ActivitiesList'
     { _aQuotaUser   :: !(Maybe Text)
     , _aPrettyPrint :: !Bool
     , _aUserIP      :: !(Maybe Text)
-    , _aCollection  :: !PlusDomainsActivitiesListCollection
+    , _aCollection  :: !Collection
     , _aUserId      :: !Text
     , _aKey         :: !(Maybe Key)
     , _aPageToken   :: !(Maybe Text)
     , _aOAuthToken  :: !(Maybe OAuthToken)
     , _aMaxResults  :: !Word32
     , _aFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
 --
@@ -107,7 +106,7 @@ data ActivitiesList' = ActivitiesList'
 --
 -- * 'aFields'
 activitiesList'
-    :: PlusDomainsActivitiesListCollection -- ^ 'collection'
+    :: Collection -- ^ 'collection'
     -> Text -- ^ 'userId'
     -> ActivitiesList'
 activitiesList' pACollection_ pAUserId_ =
@@ -142,7 +141,7 @@ aUserIP :: Lens' ActivitiesList' (Maybe Text)
 aUserIP = lens _aUserIP (\ s a -> s{_aUserIP = a})
 
 -- | The collection of activities to list.
-aCollection :: Lens' ActivitiesList' PlusDomainsActivitiesListCollection
+aCollection :: Lens' ActivitiesList' Collection
 aCollection
   = lens _aCollection (\ s a -> s{_aCollection = a})
 
@@ -188,8 +187,8 @@ instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = ActivityFeed
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u ActivitiesList'{..}
-          = go (Just _aMaxResults) _aPageToken _aUserId
-              _aCollection
+          = go _aUserId _aCollection _aPageToken
+              (Just _aMaxResults)
               _aQuotaUser
               (Just _aPrettyPrint)
               _aUserIP

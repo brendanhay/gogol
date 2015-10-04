@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -38,7 +39,7 @@ module Network.Google.Resource.ProximityBeacon.BeaconInfo.GetforObserved
     , bigoPp
     , bigoAccessToken
     , bigoUploadType
-    , bigoGetInfoForObservedBeaconsRequest
+    , bigoPayload
     , bigoBearerToken
     , bigoKey
     , bigoOAuthToken
@@ -55,12 +56,12 @@ type BeaconInfoGetforObservedResource =
      "v1beta1" :>
        "beaconinfo:getforobserved" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -78,20 +79,20 @@ type BeaconInfoGetforObservedResource =
 --
 -- /See:/ 'beaconInfoGetforObserved'' smart constructor.
 data BeaconInfoGetforObserved' = BeaconInfoGetforObserved'
-    { _bigoXgafv                            :: !(Maybe Text)
-    , _bigoQuotaUser                        :: !(Maybe Text)
-    , _bigoPrettyPrint                      :: !Bool
-    , _bigoUploadProtocol                   :: !(Maybe Text)
-    , _bigoPp                               :: !Bool
-    , _bigoAccessToken                      :: !(Maybe Text)
-    , _bigoUploadType                       :: !(Maybe Text)
-    , _bigoGetInfoForObservedBeaconsRequest :: !GetInfoForObservedBeaconsRequest
-    , _bigoBearerToken                      :: !(Maybe Text)
-    , _bigoKey                              :: !(Maybe Key)
-    , _bigoOAuthToken                       :: !(Maybe OAuthToken)
-    , _bigoFields                           :: !(Maybe Text)
-    , _bigoCallback                         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _bigoXgafv          :: !(Maybe Text)
+    , _bigoQuotaUser      :: !(Maybe Text)
+    , _bigoPrettyPrint    :: !Bool
+    , _bigoUploadProtocol :: !(Maybe Text)
+    , _bigoPp             :: !Bool
+    , _bigoAccessToken    :: !(Maybe Text)
+    , _bigoUploadType     :: !(Maybe Text)
+    , _bigoPayload        :: !GetInfoForObservedBeaconsRequest
+    , _bigoBearerToken    :: !(Maybe Text)
+    , _bigoKey            :: !(Maybe Key)
+    , _bigoOAuthToken     :: !(Maybe OAuthToken)
+    , _bigoFields         :: !(Maybe Text)
+    , _bigoCallback       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconInfoGetforObserved'' with the minimum fields required to make a request.
 --
@@ -111,7 +112,7 @@ data BeaconInfoGetforObserved' = BeaconInfoGetforObserved'
 --
 -- * 'bigoUploadType'
 --
--- * 'bigoGetInfoForObservedBeaconsRequest'
+-- * 'bigoPayload'
 --
 -- * 'bigoBearerToken'
 --
@@ -123,9 +124,9 @@ data BeaconInfoGetforObserved' = BeaconInfoGetforObserved'
 --
 -- * 'bigoCallback'
 beaconInfoGetforObserved'
-    :: GetInfoForObservedBeaconsRequest -- ^ 'GetInfoForObservedBeaconsRequest'
+    :: GetInfoForObservedBeaconsRequest -- ^ 'payload'
     -> BeaconInfoGetforObserved'
-beaconInfoGetforObserved' pBigoGetInfoForObservedBeaconsRequest_ =
+beaconInfoGetforObserved' pBigoPayload_ =
     BeaconInfoGetforObserved'
     { _bigoXgafv = Nothing
     , _bigoQuotaUser = Nothing
@@ -134,7 +135,7 @@ beaconInfoGetforObserved' pBigoGetInfoForObservedBeaconsRequest_ =
     , _bigoPp = True
     , _bigoAccessToken = Nothing
     , _bigoUploadType = Nothing
-    , _bigoGetInfoForObservedBeaconsRequest = pBigoGetInfoForObservedBeaconsRequest_
+    , _bigoPayload = pBigoPayload_
     , _bigoBearerToken = Nothing
     , _bigoKey = Nothing
     , _bigoOAuthToken = Nothing
@@ -184,11 +185,9 @@ bigoUploadType
       (\ s a -> s{_bigoUploadType = a})
 
 -- | Multipart request metadata.
-bigoGetInfoForObservedBeaconsRequest :: Lens' BeaconInfoGetforObserved' GetInfoForObservedBeaconsRequest
-bigoGetInfoForObservedBeaconsRequest
-  = lens _bigoGetInfoForObservedBeaconsRequest
-      (\ s a ->
-         s{_bigoGetInfoForObservedBeaconsRequest = a})
+bigoPayload :: Lens' BeaconInfoGetforObserved' GetInfoForObservedBeaconsRequest
+bigoPayload
+  = lens _bigoPayload (\ s a -> s{_bigoPayload = a})
 
 -- | OAuth bearer token.
 bigoBearerToken :: Lens' BeaconInfoGetforObserved' (Maybe Text)
@@ -228,18 +227,18 @@ instance GoogleRequest BeaconInfoGetforObserved'
              GetInfoForObservedBeaconsResponse
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u BeaconInfoGetforObserved'{..}
-          = go _bigoXgafv _bigoAccessToken _bigoBearerToken
-              _bigoCallback
-              (Just _bigoPp)
+          = go _bigoXgafv _bigoUploadProtocol (Just _bigoPp)
+              _bigoAccessToken
               _bigoUploadType
-              _bigoUploadProtocol
+              _bigoBearerToken
+              _bigoCallback
               _bigoQuotaUser
               (Just _bigoPrettyPrint)
               _bigoFields
               _bigoKey
               _bigoOAuthToken
               (Just AltJSON)
-              _bigoGetInfoForObservedBeaconsRequest
+              _bigoPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BeaconInfoGetforObservedResource)

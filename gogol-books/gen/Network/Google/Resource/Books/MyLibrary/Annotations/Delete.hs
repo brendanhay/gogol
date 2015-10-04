@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -70,7 +71,7 @@ data MyLibraryAnnotationsDelete' = MyLibraryAnnotationsDelete'
     , _mladSource       :: !(Maybe Text)
     , _mladOAuthToken   :: !(Maybe OAuthToken)
     , _mladFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyLibraryAnnotationsDelete'' with the minimum fields required to make a request.
 --
@@ -163,7 +164,7 @@ instance GoogleRequest MyLibraryAnnotationsDelete'
         type Rs MyLibraryAnnotationsDelete' = ()
         request = requestWithRoute defReq booksURL
         requestWithRoute r u MyLibraryAnnotationsDelete'{..}
-          = go _mladSource _mladAnnotationId _mladQuotaUser
+          = go _mladAnnotationId _mladSource _mladQuotaUser
               (Just _mladPrettyPrint)
               _mladUserIP
               _mladFields

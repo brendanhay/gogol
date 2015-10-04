@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.AndroidPublisher.Inappproducts.Get
     , igPackageName
     , igUserIP
     , igKey
-    , igSku
+    , igSKU
     , igOAuthToken
     , igFields
     ) where
@@ -66,10 +67,10 @@ data InappproductsGet' = InappproductsGet'
     , _igPackageName :: !Text
     , _igUserIP      :: !(Maybe Text)
     , _igKey         :: !(Maybe Key)
-    , _igSku         :: !Text
+    , _igSKU         :: !Text
     , _igOAuthToken  :: !(Maybe OAuthToken)
     , _igFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsGet'' with the minimum fields required to make a request.
 --
@@ -85,7 +86,7 @@ data InappproductsGet' = InappproductsGet'
 --
 -- * 'igKey'
 --
--- * 'igSku'
+-- * 'igSKU'
 --
 -- * 'igOAuthToken'
 --
@@ -94,14 +95,14 @@ inappproductsGet'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'sku'
     -> InappproductsGet'
-inappproductsGet' pIgPackageName_ pIgSku_ =
+inappproductsGet' pIgPackageName_ pIgSKU_ =
     InappproductsGet'
     { _igQuotaUser = Nothing
     , _igPrettyPrint = True
     , _igPackageName = pIgPackageName_
     , _igUserIP = Nothing
     , _igKey = Nothing
-    , _igSku = pIgSku_
+    , _igSKU = pIgSKU_
     , _igOAuthToken = Nothing
     , _igFields = Nothing
     }
@@ -136,8 +137,8 @@ igKey :: Lens' InappproductsGet' (Maybe Key)
 igKey = lens _igKey (\ s a -> s{_igKey = a})
 
 -- | Unique identifier for the in-app product.
-igSku :: Lens' InappproductsGet' Text
-igSku = lens _igSku (\ s a -> s{_igSku = a})
+igSKU :: Lens' InappproductsGet' Text
+igSKU = lens _igSKU (\ s a -> s{_igSKU = a})
 
 -- | OAuth 2.0 token for the current user.
 igOAuthToken :: Lens' InappproductsGet' (Maybe OAuthToken)
@@ -156,7 +157,7 @@ instance GoogleRequest InappproductsGet' where
         type Rs InappproductsGet' = InAppProduct
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u InappproductsGet'{..}
-          = go _igPackageName _igSku _igQuotaUser
+          = go _igPackageName _igSKU _igQuotaUser
               (Just _igPrettyPrint)
               _igUserIP
               _igFields

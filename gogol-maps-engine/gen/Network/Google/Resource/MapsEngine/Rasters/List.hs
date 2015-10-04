@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,21 +59,21 @@ import           Network.Google.Prelude
 -- 'RastersList'' request conforms to.
 type RastersListResource =
      "rasters" :>
-       QueryParam "bbox" Text :>
+       QueryParam "projectId" Text :>
          QueryParam "createdAfter" DateTime' :>
-           QueryParam "createdBefore" DateTime' :>
-             QueryParam "creatorEmail" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "modifiedAfter" DateTime' :>
-                   QueryParam "modifiedBefore" DateTime' :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "processingStatus"
-                         MapsEngineRastersListProcessingStatus
-                         :>
-                         QueryParam "role" MapsEngineRastersListRole :>
-                           QueryParam "search" Text :>
+           QueryParam "creatorEmail" Text :>
+             QueryParam "role" MapsEngineRastersListRole :>
+               QueryParam "bbox" Text :>
+                 QueryParam "processingStatus"
+                   MapsEngineRastersListProcessingStatus
+                   :>
+                   QueryParam "modifiedAfter" DateTime' :>
+                     QueryParam "modifiedBefore" DateTime' :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "search" Text :>
+                           QueryParam "maxResults" Word32 :>
                              QueryParam "tags" Text :>
-                               QueryParam "projectId" Text :>
+                               QueryParam "createdBefore" DateTime' :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
@@ -106,7 +107,7 @@ data RastersList' = RastersList'
     , _rlTags             :: !(Maybe Text)
     , _rlFields           :: !(Maybe Text)
     , _rlCreatedBefore    :: !(Maybe DateTime')
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersList'' with the minimum fields required to make a request.
 --
@@ -301,17 +302,18 @@ instance GoogleRequest RastersList' where
         type Rs RastersList' = RastersListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u RastersList'{..}
-          = go _rlBbox _rlCreatedAfter _rlCreatedBefore
+          = go (Just _rlProjectId) _rlCreatedAfter
               _rlCreatorEmail
-              _rlMaxResults
+              _rlRole
+              _rlBbox
+              _rlProcessingStatus
               _rlModifiedAfter
               _rlModifiedBefore
               _rlPageToken
-              _rlProcessingStatus
-              _rlRole
               _rlSearch
+              _rlMaxResults
               _rlTags
-              (Just _rlProjectId)
+              _rlCreatedBefore
               _rlQuotaUser
               (Just _rlPrettyPrint)
               _rlUserIP

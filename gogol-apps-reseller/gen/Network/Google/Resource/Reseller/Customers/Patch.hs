@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Reseller.Customers.Patch
     , cpQuotaUser
     , cpPrettyPrint
     , cpUserIP
+    , cpPayload
     , cpCustomerId
-    , cpCustomer
     , cpKey
     , cpOAuthToken
     , cpFields
@@ -66,12 +67,12 @@ data CustomersPatch' = CustomersPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
     , _cpUserIP      :: !(Maybe Text)
+    , _cpPayload     :: !Customer
     , _cpCustomerId  :: !Text
-    , _cpCustomer    :: !Customer
     , _cpKey         :: !(Maybe Key)
     , _cpOAuthToken  :: !(Maybe OAuthToken)
     , _cpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomersPatch'' with the minimum fields required to make a request.
 --
@@ -83,9 +84,9 @@ data CustomersPatch' = CustomersPatch'
 --
 -- * 'cpUserIP'
 --
--- * 'cpCustomerId'
+-- * 'cpPayload'
 --
--- * 'cpCustomer'
+-- * 'cpCustomerId'
 --
 -- * 'cpKey'
 --
@@ -93,16 +94,16 @@ data CustomersPatch' = CustomersPatch'
 --
 -- * 'cpFields'
 customersPatch'
-    :: Text -- ^ 'customerId'
-    -> Customer -- ^ 'Customer'
+    :: Customer -- ^ 'payload'
+    -> Text -- ^ 'customerId'
     -> CustomersPatch'
-customersPatch' pCpCustomerId_ pCpCustomer_ =
+customersPatch' pCpPayload_ pCpCustomerId_ =
     CustomersPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
     , _cpUserIP = Nothing
+    , _cpPayload = pCpPayload_
     , _cpCustomerId = pCpCustomerId_
-    , _cpCustomer = pCpCustomer_
     , _cpKey = Nothing
     , _cpOAuthToken = Nothing
     , _cpFields = Nothing
@@ -126,15 +127,15 @@ cpPrettyPrint
 cpUserIP :: Lens' CustomersPatch' (Maybe Text)
 cpUserIP = lens _cpUserIP (\ s a -> s{_cpUserIP = a})
 
+-- | Multipart request metadata.
+cpPayload :: Lens' CustomersPatch' Customer
+cpPayload
+  = lens _cpPayload (\ s a -> s{_cpPayload = a})
+
 -- | Id of the Customer
 cpCustomerId :: Lens' CustomersPatch' Text
 cpCustomerId
   = lens _cpCustomerId (\ s a -> s{_cpCustomerId = a})
-
--- | Multipart request metadata.
-cpCustomer :: Lens' CustomersPatch' Customer
-cpCustomer
-  = lens _cpCustomer (\ s a -> s{_cpCustomer = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -165,7 +166,7 @@ instance GoogleRequest CustomersPatch' where
               _cpKey
               _cpOAuthToken
               (Just AltJSON)
-              _cpCustomer
+              _cpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CustomersPatchResource)

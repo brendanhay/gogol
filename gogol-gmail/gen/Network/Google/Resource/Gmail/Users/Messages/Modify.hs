@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.Gmail.Users.Messages.Modify
     -- * Request Lenses
     , ummQuotaUser
     , ummPrettyPrint
-    , ummModifyMessageRequest
     , ummUserIP
+    , ummPayload
     , ummUserId
     , ummKey
     , ummId
@@ -65,16 +66,16 @@ type UsersMessagesModifyResource =
 --
 -- /See:/ 'usersMessagesModify'' smart constructor.
 data UsersMessagesModify' = UsersMessagesModify'
-    { _ummQuotaUser            :: !(Maybe Text)
-    , _ummPrettyPrint          :: !Bool
-    , _ummModifyMessageRequest :: !ModifyMessageRequest
-    , _ummUserIP               :: !(Maybe Text)
-    , _ummUserId               :: !Text
-    , _ummKey                  :: !(Maybe Key)
-    , _ummId                   :: !Text
-    , _ummOAuthToken           :: !(Maybe OAuthToken)
-    , _ummFields               :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ummQuotaUser   :: !(Maybe Text)
+    , _ummPrettyPrint :: !Bool
+    , _ummUserIP      :: !(Maybe Text)
+    , _ummPayload     :: !ModifyMessageRequest
+    , _ummUserId      :: !Text
+    , _ummKey         :: !(Maybe Key)
+    , _ummId          :: !Text
+    , _ummOAuthToken  :: !(Maybe OAuthToken)
+    , _ummFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesModify'' with the minimum fields required to make a request.
 --
@@ -84,9 +85,9 @@ data UsersMessagesModify' = UsersMessagesModify'
 --
 -- * 'ummPrettyPrint'
 --
--- * 'ummModifyMessageRequest'
---
 -- * 'ummUserIP'
+--
+-- * 'ummPayload'
 --
 -- * 'ummUserId'
 --
@@ -98,16 +99,16 @@ data UsersMessagesModify' = UsersMessagesModify'
 --
 -- * 'ummFields'
 usersMessagesModify'
-    :: ModifyMessageRequest -- ^ 'ModifyMessageRequest'
+    :: ModifyMessageRequest -- ^ 'payload'
     -> Text -- ^ 'id'
     -> Text
     -> UsersMessagesModify'
-usersMessagesModify' pUmmModifyMessageRequest_ pUmmUserId_ pUmmId_ =
+usersMessagesModify' pUmmPayload_ pUmmUserId_ pUmmId_ =
     UsersMessagesModify'
     { _ummQuotaUser = Nothing
     , _ummPrettyPrint = True
-    , _ummModifyMessageRequest = pUmmModifyMessageRequest_
     , _ummUserIP = Nothing
+    , _ummPayload = pUmmPayload_
     , _ummUserId = pUmmUserId_
     , _ummKey = Nothing
     , _ummId = pUmmId_
@@ -128,17 +129,16 @@ ummPrettyPrint
   = lens _ummPrettyPrint
       (\ s a -> s{_ummPrettyPrint = a})
 
--- | Multipart request metadata.
-ummModifyMessageRequest :: Lens' UsersMessagesModify' ModifyMessageRequest
-ummModifyMessageRequest
-  = lens _ummModifyMessageRequest
-      (\ s a -> s{_ummModifyMessageRequest = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 ummUserIP :: Lens' UsersMessagesModify' (Maybe Text)
 ummUserIP
   = lens _ummUserIP (\ s a -> s{_ummUserIP = a})
+
+-- | Multipart request metadata.
+ummPayload :: Lens' UsersMessagesModify' ModifyMessageRequest
+ummPayload
+  = lens _ummPayload (\ s a -> s{_ummPayload = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -182,7 +182,7 @@ instance GoogleRequest UsersMessagesModify' where
               _ummKey
               _ummOAuthToken
               (Just AltJSON)
-              _ummModifyMessageRequest
+              _ummPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersMessagesModifyResource)

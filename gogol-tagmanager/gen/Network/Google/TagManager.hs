@@ -301,9 +301,6 @@ module Network.Google.TagManager
     , uaContainerAccess
     , uaPermissionId
 
-    -- ** ContainerAccessPermission
-    , ContainerAccessPermission (..)
-
     -- ** TriggerType
     , TriggerType (..)
 
@@ -331,12 +328,6 @@ module Network.Google.TagManager
     , vNotes
     , vEnablingTriggerId
     , vParameter
-
-    -- ** TagTagFiringOption
-    , TagTagFiringOption (..)
-
-    -- ** AccountAccessPermission
-    , AccountAccessPermission (..)
 
     -- ** Rule
     , Rule
@@ -369,11 +360,20 @@ module Network.Google.TagManager
     , aaAccountId
     , aaName
 
+    -- ** TagFiringOption
+    , TagFiringOption (..)
+
     -- ** ListContainerVersionsResponse
     , ListContainerVersionsResponse
     , listContainerVersionsResponse
     , lcvrContainerVersionHeader
     , lcvrContainerVersion
+
+    -- ** UsageContextItem
+    , UsageContextItem (..)
+
+    -- ** EnabledBuiltInVariableItem
+    , EnabledBuiltInVariableItem (..)
 
     -- ** Container
     , Container
@@ -400,17 +400,11 @@ module Network.Google.TagManager
     , listContainersResponse
     , lcrContainers
 
-    -- ** ContainerEnabledBuiltInVariable
-    , ContainerEnabledBuiltInVariable (..)
-
     -- ** SetupTag
     , SetupTag
     , setupTag
     , stTagName
     , stStopOnSetupFailure
-
-    -- ** ContainerUsageContext
-    , ContainerUsageContext (..)
 
     -- ** ContainerVersion
     , ContainerVersion
@@ -429,6 +423,9 @@ module Network.Google.TagManager
     , cvDeleted
     , cvTrigger
     , cvNotes
+
+    -- ** ContainerAccessPermissionItem
+    , ContainerAccessPermissionItem (..)
 
     -- ** ListTagsResponse
     , ListTagsResponse
@@ -481,6 +478,9 @@ module Network.Google.TagManager
     , containerAccess
     , caContainerId
     , caPermission
+
+    -- ** PermissionItem
+    , PermissionItem (..)
 
     -- ** Parameter
     , Parameter

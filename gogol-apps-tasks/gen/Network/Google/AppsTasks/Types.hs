@@ -25,13 +25,6 @@ module Network.Google.AppsTasks.Types
     , tKind
     , tItems
 
-    -- * TaskLinks
-    , TaskLinks
-    , taskLinks
-    , tlLink
-    , tlType
-    , tlDescription
-
     -- * TaskLists
     , TaskLists
     , taskLists
@@ -68,6 +61,13 @@ module Network.Google.AppsTasks.Types
     , ttLinks
     , ttNotes
     , ttPosition
+
+    -- * LinksItem
+    , LinksItem
+    , linksItem
+    , liLink
+    , liType
+    , liDescription
     ) where
 
 import           Network.Google.AppsTasks.Types.Product

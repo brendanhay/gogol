@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -39,8 +40,8 @@ module Network.Google.Resource.Genomics.Annotations.BatchCreate
     -- * Request Lenses
     , abcQuotaUser
     , abcPrettyPrint
-    , abcBatchCreateAnnotationsRequest
     , abcUserIP
+    , abcPayload
     , abcKey
     , abcOAuthToken
     , abcFields
@@ -74,14 +75,14 @@ type AnnotationsBatchCreateResource =
 --
 -- /See:/ 'annotationsBatchCreate'' smart constructor.
 data AnnotationsBatchCreate' = AnnotationsBatchCreate'
-    { _abcQuotaUser                     :: !(Maybe Text)
-    , _abcPrettyPrint                   :: !Bool
-    , _abcBatchCreateAnnotationsRequest :: !BatchCreateAnnotationsRequest
-    , _abcUserIP                        :: !(Maybe Text)
-    , _abcKey                           :: !(Maybe Key)
-    , _abcOAuthToken                    :: !(Maybe OAuthToken)
-    , _abcFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _abcQuotaUser   :: !(Maybe Text)
+    , _abcPrettyPrint :: !Bool
+    , _abcUserIP      :: !(Maybe Text)
+    , _abcPayload     :: !BatchCreateAnnotationsRequest
+    , _abcKey         :: !(Maybe Key)
+    , _abcOAuthToken  :: !(Maybe OAuthToken)
+    , _abcFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsBatchCreate'' with the minimum fields required to make a request.
 --
@@ -91,9 +92,9 @@ data AnnotationsBatchCreate' = AnnotationsBatchCreate'
 --
 -- * 'abcPrettyPrint'
 --
--- * 'abcBatchCreateAnnotationsRequest'
---
 -- * 'abcUserIP'
+--
+-- * 'abcPayload'
 --
 -- * 'abcKey'
 --
@@ -101,14 +102,14 @@ data AnnotationsBatchCreate' = AnnotationsBatchCreate'
 --
 -- * 'abcFields'
 annotationsBatchCreate'
-    :: BatchCreateAnnotationsRequest -- ^ 'BatchCreateAnnotationsRequest'
+    :: BatchCreateAnnotationsRequest -- ^ 'payload'
     -> AnnotationsBatchCreate'
-annotationsBatchCreate' pAbcBatchCreateAnnotationsRequest_ =
+annotationsBatchCreate' pAbcPayload_ =
     AnnotationsBatchCreate'
     { _abcQuotaUser = Nothing
     , _abcPrettyPrint = True
-    , _abcBatchCreateAnnotationsRequest = pAbcBatchCreateAnnotationsRequest_
     , _abcUserIP = Nothing
+    , _abcPayload = pAbcPayload_
     , _abcKey = Nothing
     , _abcOAuthToken = Nothing
     , _abcFields = Nothing
@@ -127,17 +128,16 @@ abcPrettyPrint
   = lens _abcPrettyPrint
       (\ s a -> s{_abcPrettyPrint = a})
 
--- | Multipart request metadata.
-abcBatchCreateAnnotationsRequest :: Lens' AnnotationsBatchCreate' BatchCreateAnnotationsRequest
-abcBatchCreateAnnotationsRequest
-  = lens _abcBatchCreateAnnotationsRequest
-      (\ s a -> s{_abcBatchCreateAnnotationsRequest = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 abcUserIP :: Lens' AnnotationsBatchCreate' (Maybe Text)
 abcUserIP
   = lens _abcUserIP (\ s a -> s{_abcUserIP = a})
+
+-- | Multipart request metadata.
+abcPayload :: Lens' AnnotationsBatchCreate' BatchCreateAnnotationsRequest
+abcPayload
+  = lens _abcPayload (\ s a -> s{_abcPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -170,7 +170,7 @@ instance GoogleRequest AnnotationsBatchCreate' where
               _abcKey
               _abcOAuthToken
               (Just AltJSON)
-              _abcBatchCreateAnnotationsRequest
+              _abcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationsBatchCreateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,6 +36,7 @@ module Network.Google.Resource.Gmail.Users.Messages.Import
     , uQuotaUser
     , uPrettyPrint
     , uUserIP
+    , uPayload
     , uUserId
     , uMedia
     , uKey
@@ -42,7 +44,6 @@ module Network.Google.Resource.Gmail.Users.Messages.Import
     , uDeleted
     , uNeverMarkSpam
     , uOAuthToken
-    , uMessage
     , uInternalDateSource
     , uFields
     ) where
@@ -56,12 +57,12 @@ type UsersMessagesImportResource =
      Capture "userId" Text :>
        "messages" :>
          "import" :>
-           QueryParam "deleted" Bool :>
-             QueryParam "internalDateSource"
-               GmailUsersMessagesImportInternalDateSource
-               :>
+           QueryParam "processForCalendar" Bool :>
+             QueryParam "deleted" Bool :>
                QueryParam "neverMarkSpam" Bool :>
-                 QueryParam "processForCalendar" Bool :>
+                 QueryParam "internalDateSource"
+                   GmailUsersMessagesImportInternalDateSource
+                   :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -81,6 +82,7 @@ data UsersMessagesImport' = UsersMessagesImport'
     { _uQuotaUser          :: !(Maybe Text)
     , _uPrettyPrint        :: !Bool
     , _uUserIP             :: !(Maybe Text)
+    , _uPayload            :: !Message
     , _uUserId             :: !Text
     , _uMedia              :: !Body
     , _uKey                :: !(Maybe Key)
@@ -88,10 +90,9 @@ data UsersMessagesImport' = UsersMessagesImport'
     , _uDeleted            :: !Bool
     , _uNeverMarkSpam      :: !Bool
     , _uOAuthToken         :: !(Maybe OAuthToken)
-    , _uMessage            :: !Message
     , _uInternalDateSource :: !GmailUsersMessagesImportInternalDateSource
     , _uFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesImport'' with the minimum fields required to make a request.
 --
@@ -102,6 +103,8 @@ data UsersMessagesImport' = UsersMessagesImport'
 -- * 'uPrettyPrint'
 --
 -- * 'uUserIP'
+--
+-- * 'uPayload'
 --
 -- * 'uUserId'
 --
@@ -117,21 +120,20 @@ data UsersMessagesImport' = UsersMessagesImport'
 --
 -- * 'uOAuthToken'
 --
--- * 'uMessage'
---
 -- * 'uInternalDateSource'
 --
 -- * 'uFields'
 usersMessagesImport'
-    :: Text -- ^ 'media'
-    -> Body -- ^ 'Message'
-    -> Message
+    :: Message -- ^ 'payload'
+    -> Text -- ^ 'media'
+    -> Body
     -> UsersMessagesImport'
-usersMessagesImport' pUUserId_ pUMedia_ pUMessage_ =
+usersMessagesImport' pUPayload_ pUUserId_ pUMedia_ =
     UsersMessagesImport'
     { _uQuotaUser = Nothing
     , _uPrettyPrint = True
     , _uUserIP = Nothing
+    , _uPayload = pUPayload_
     , _uUserId = pUUserId_
     , _uMedia = pUMedia_
     , _uKey = Nothing
@@ -139,8 +141,7 @@ usersMessagesImport' pUUserId_ pUMedia_ pUMessage_ =
     , _uDeleted = False
     , _uNeverMarkSpam = False
     , _uOAuthToken = Nothing
-    , _uMessage = pUMessage_
-    , _uInternalDateSource = GUMIIDSDateHeader
+    , _uInternalDateSource = DateHeader
     , _uFields = Nothing
     }
 
@@ -160,6 +161,10 @@ uPrettyPrint
 -- want to enforce per-user limits.
 uUserIP :: Lens' UsersMessagesImport' (Maybe Text)
 uUserIP = lens _uUserIP (\ s a -> s{_uUserIP = a})
+
+-- | Multipart request metadata.
+uPayload :: Lens' UsersMessagesImport' Message
+uPayload = lens _uPayload (\ s a -> s{_uPayload = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -200,10 +205,6 @@ uOAuthToken :: Lens' UsersMessagesImport' (Maybe OAuthToken)
 uOAuthToken
   = lens _uOAuthToken (\ s a -> s{_uOAuthToken = a})
 
--- | Multipart request metadata.
-uMessage :: Lens' UsersMessagesImport' Message
-uMessage = lens _uMessage (\ s a -> s{_uMessage = a})
-
 -- | Source for Gmail\'s internal date of the message.
 uInternalDateSource :: Lens' UsersMessagesImport' GmailUsersMessagesImportInternalDateSource
 uInternalDateSource
@@ -222,11 +223,10 @@ instance GoogleRequest UsersMessagesImport' where
         type Rs UsersMessagesImport' = Message
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesImport'{..}
-          = go (Just _uDeleted) (Just _uInternalDateSource)
-              _uMedia
+          = go _uUserId (Just _uProcessForCalendar)
+              (Just _uDeleted)
               (Just _uNeverMarkSpam)
-              (Just _uProcessForCalendar)
-              _uUserId
+              (Just _uInternalDateSource)
               _uQuotaUser
               (Just _uPrettyPrint)
               _uUserIP
@@ -234,7 +234,8 @@ instance GoogleRequest UsersMessagesImport' where
               _uKey
               _uOAuthToken
               (Just AltJSON)
-              _uMessage
+              _uPayload
+              _uMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersMessagesImportResource)

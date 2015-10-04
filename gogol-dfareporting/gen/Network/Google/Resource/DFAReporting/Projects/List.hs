@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,17 +56,17 @@ type ProjectsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "projects" :>
-           QueryParams "advertiserIds" Int64 :>
+           QueryParam "searchString" Text :>
              QueryParams "ids" Int64 :>
-               QueryParam "maxResults" Int32 :>
+               QueryParam "sortOrder"
+                 DfareportingProjectsListSortOrder
+                 :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "searchString" Text :>
-                     QueryParam "sortField"
-                       DfareportingProjectsListSortField
-                       :>
-                       QueryParam "sortOrder"
-                         DfareportingProjectsListSortOrder
-                         :>
+                   QueryParam "sortField"
+                     DfareportingProjectsListSortField
+                     :>
+                     QueryParams "advertiserIds" Int64 :>
+                       QueryParam "maxResults" Int32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -83,17 +84,17 @@ data ProjectsList' = ProjectsList'
     , _plPrettyPrint   :: !Bool
     , _plUserIP        :: !(Maybe Text)
     , _plSearchString  :: !(Maybe Text)
-    , _plIds           :: !(Maybe Int64)
+    , _plIds           :: !(Maybe [Int64])
     , _plProfileId     :: !Int64
     , _plSortOrder     :: !(Maybe DfareportingProjectsListSortOrder)
     , _plKey           :: !(Maybe Key)
     , _plPageToken     :: !(Maybe Text)
     , _plSortField     :: !(Maybe DfareportingProjectsListSortField)
     , _plOAuthToken    :: !(Maybe OAuthToken)
-    , _plAdvertiserIds :: !(Maybe Int64)
+    , _plAdvertiserIds :: !(Maybe [Int64])
     , _plMaxResults    :: !(Maybe Int32)
     , _plFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsList'' with the minimum fields required to make a request.
 --
@@ -178,8 +179,10 @@ plSearchString
       (\ s a -> s{_plSearchString = a})
 
 -- | Select only projects with these IDs.
-plIds :: Lens' ProjectsList' (Maybe Int64)
-plIds = lens _plIds (\ s a -> s{_plIds = a})
+plIds :: Lens' ProjectsList' [Int64]
+plIds
+  = lens _plIds (\ s a -> s{_plIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 plProfileId :: Lens' ProjectsList' Int64
@@ -213,10 +216,12 @@ plOAuthToken
   = lens _plOAuthToken (\ s a -> s{_plOAuthToken = a})
 
 -- | Select only projects with these advertiser IDs.
-plAdvertiserIds :: Lens' ProjectsList' (Maybe Int64)
+plAdvertiserIds :: Lens' ProjectsList' [Int64]
 plAdvertiserIds
   = lens _plAdvertiserIds
       (\ s a -> s{_plAdvertiserIds = a})
+      . _Default
+      . _Coerce
 
 -- | Maximum number of results to return.
 plMaxResults :: Lens' ProjectsList' (Maybe Int32)
@@ -235,12 +240,13 @@ instance GoogleRequest ProjectsList' where
         type Rs ProjectsList' = ProjectsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ProjectsList'{..}
-          = go _plAdvertiserIds _plIds _plMaxResults
-              _plPageToken
-              _plSearchString
-              _plSortField
+          = go _plProfileId _plSearchString
+              (_plIds ^. _Default)
               _plSortOrder
-              _plProfileId
+              _plPageToken
+              _plSortField
+              (_plAdvertiserIds ^. _Default)
+              _plMaxResults
               _plQuotaUser
               (Just _plPrettyPrint)
               _plUserIP

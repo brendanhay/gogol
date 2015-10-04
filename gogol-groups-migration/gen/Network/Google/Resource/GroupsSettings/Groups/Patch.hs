@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -30,10 +31,10 @@ module Network.Google.Resource.GroupsSettings.Groups.Patch
     , GroupsPatch'
 
     -- * Request Lenses
-    , gpGroups
     , gpQuotaUser
     , gpPrettyPrint
     , gpUserIP
+    , gpPayload
     , gpKey
     , gpOAuthToken
     , gpGroupUniqueId
@@ -60,27 +61,27 @@ type GroupsPatchResource =
 --
 -- /See:/ 'groupsPatch'' smart constructor.
 data GroupsPatch' = GroupsPatch'
-    { _gpGroups        :: !Groups
-    , _gpQuotaUser     :: !(Maybe Text)
+    { _gpQuotaUser     :: !(Maybe Text)
     , _gpPrettyPrint   :: !Bool
     , _gpUserIP        :: !(Maybe Text)
+    , _gpPayload       :: !Groups
     , _gpKey           :: !(Maybe Key)
     , _gpOAuthToken    :: !(Maybe OAuthToken)
     , _gpGroupUniqueId :: !Text
     , _gpFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'gpGroups'
 --
 -- * 'gpQuotaUser'
 --
 -- * 'gpPrettyPrint'
 --
 -- * 'gpUserIP'
+--
+-- * 'gpPayload'
 --
 -- * 'gpKey'
 --
@@ -90,24 +91,20 @@ data GroupsPatch' = GroupsPatch'
 --
 -- * 'gpFields'
 groupsPatch'
-    :: Groups -- ^ 'Groups'
+    :: Groups -- ^ 'payload'
     -> Text -- ^ 'groupUniqueId'
     -> GroupsPatch'
-groupsPatch' pGpGroups_ pGpGroupUniqueId_ =
+groupsPatch' pGpPayload_ pGpGroupUniqueId_ =
     GroupsPatch'
-    { _gpGroups = pGpGroups_
-    , _gpQuotaUser = Nothing
+    { _gpQuotaUser = Nothing
     , _gpPrettyPrint = True
     , _gpUserIP = Nothing
+    , _gpPayload = pGpPayload_
     , _gpKey = Nothing
     , _gpOAuthToken = Nothing
     , _gpGroupUniqueId = pGpGroupUniqueId_
     , _gpFields = Nothing
     }
-
--- | Multipart request metadata.
-gpGroups :: Lens' GroupsPatch' Groups
-gpGroups = lens _gpGroups (\ s a -> s{_gpGroups = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -126,6 +123,11 @@ gpPrettyPrint
 -- want to enforce per-user limits.
 gpUserIP :: Lens' GroupsPatch' (Maybe Text)
 gpUserIP = lens _gpUserIP (\ s a -> s{_gpUserIP = a})
+
+-- | Multipart request metadata.
+gpPayload :: Lens' GroupsPatch' Groups
+gpPayload
+  = lens _gpPayload (\ s a -> s{_gpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -163,7 +165,7 @@ instance GoogleRequest GroupsPatch' where
               _gpKey
               _gpOAuthToken
               (Just AltATOM)
-              _gpGroups
+              _gpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GroupsPatchResource)

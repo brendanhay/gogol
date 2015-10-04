@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,10 +53,10 @@ type CitiesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "cities" :>
-           QueryParams "countryDartIds" Int64 :>
-             QueryParams "dartIds" Int64 :>
-               QueryParam "namePrefix" Text :>
-                 QueryParams "regionDartIds" Int64 :>
+           QueryParams "regionDartIds" Int64 :>
+             QueryParam "namePrefix" Text :>
+               QueryParams "countryDartIds" Int64 :>
+                 QueryParams "dartIds" Int64 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -71,16 +72,16 @@ type CitiesListResource =
 data CitiesList' = CitiesList'
     { _cQuotaUser      :: !(Maybe Text)
     , _cPrettyPrint    :: !Bool
-    , _cRegionDartIds  :: !(Maybe Int64)
+    , _cRegionDartIds  :: !(Maybe [Int64])
     , _cUserIP         :: !(Maybe Text)
     , _cProfileId      :: !Int64
     , _cNamePrefix     :: !(Maybe Text)
     , _cKey            :: !(Maybe Key)
-    , _cCountryDartIds :: !(Maybe Int64)
-    , _cDartIds        :: !(Maybe Int64)
+    , _cCountryDartIds :: !(Maybe [Int64])
+    , _cDartIds        :: !(Maybe [Int64])
     , _cOAuthToken     :: !(Maybe OAuthToken)
     , _cFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CitiesList'' with the minimum fields required to make a request.
 --
@@ -138,10 +139,12 @@ cPrettyPrint
   = lens _cPrettyPrint (\ s a -> s{_cPrettyPrint = a})
 
 -- | Select only cities from these regions.
-cRegionDartIds :: Lens' CitiesList' (Maybe Int64)
+cRegionDartIds :: Lens' CitiesList' [Int64]
 cRegionDartIds
   = lens _cRegionDartIds
       (\ s a -> s{_cRegionDartIds = a})
+      . _Default
+      . _Coerce
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
@@ -165,14 +168,19 @@ cKey :: Lens' CitiesList' (Maybe Key)
 cKey = lens _cKey (\ s a -> s{_cKey = a})
 
 -- | Select only cities from these countries.
-cCountryDartIds :: Lens' CitiesList' (Maybe Int64)
+cCountryDartIds :: Lens' CitiesList' [Int64]
 cCountryDartIds
   = lens _cCountryDartIds
       (\ s a -> s{_cCountryDartIds = a})
+      . _Default
+      . _Coerce
 
 -- | Select only cities with these DART IDs.
-cDartIds :: Lens' CitiesList' (Maybe Int64)
-cDartIds = lens _cDartIds (\ s a -> s{_cDartIds = a})
+cDartIds :: Lens' CitiesList' [Int64]
+cDartIds
+  = lens _cDartIds (\ s a -> s{_cDartIds = a}) .
+      _Default
+      . _Coerce
 
 -- | OAuth 2.0 token for the current user.
 cOAuthToken :: Lens' CitiesList' (Maybe OAuthToken)
@@ -191,9 +199,10 @@ instance GoogleRequest CitiesList' where
         type Rs CitiesList' = CitiesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CitiesList'{..}
-          = go _cCountryDartIds _cDartIds _cNamePrefix
-              _cRegionDartIds
-              _cProfileId
+          = go _cProfileId (_cRegionDartIds ^. _Default)
+              _cNamePrefix
+              (_cCountryDartIds ^. _Default)
+              (_cDartIds ^. _Default)
               _cQuotaUser
               (Just _cPrettyPrint)
               _cUserIP

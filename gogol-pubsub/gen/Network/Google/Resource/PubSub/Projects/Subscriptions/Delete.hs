@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -56,14 +57,14 @@ import           Network.Google.PubSub.Types
 -- 'ProjectsSubscriptionsDelete'' request conforms to.
 type ProjectsSubscriptionsDeleteResource =
      "v1beta2" :>
-       "{+subscription}" :>
+       Capture "subscription" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -93,7 +94,7 @@ data ProjectsSubscriptionsDelete' = ProjectsSubscriptionsDelete'
     , _psdSubscription   :: !Text
     , _psdFields         :: !(Maybe Text)
     , _psdCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsDelete'' with the minimum fields required to make a request.
 --
@@ -227,12 +228,12 @@ instance GoogleRequest ProjectsSubscriptionsDelete'
         type Rs ProjectsSubscriptionsDelete' = Empty
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsSubscriptionsDelete'{..}
-          = go _psdXgafv _psdAccessToken _psdBearerToken
-              _psdCallback
+          = go _psdSubscription _psdXgafv _psdUploadProtocol
               (Just _psdPp)
+              _psdAccessToken
               _psdUploadType
-              _psdUploadProtocol
-              _psdSubscription
+              _psdBearerToken
+              _psdCallback
               _psdQuotaUser
               (Just _psdPrettyPrint)
               _psdFields

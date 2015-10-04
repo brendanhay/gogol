@@ -18,58 +18,112 @@ module Network.Google.FreebaseSearch.Types.Product where
 import           Network.Google.FreebaseSearch.Types.Sum
 import           Network.Google.Prelude
 
--- | Server costs for reconciling.
 --
--- /See:/ 'reconcileGetCosts' smart constructor.
-data ReconcileGetCosts = ReconcileGetCosts
-    { _rgcHits :: !(Maybe Int32)
-    , _rgcMs   :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'warningItem' smart constructor.
+data WarningItem = WarningItem
+    { _wiLocation :: !(Maybe Text)
+    , _wiReason   :: !(Maybe Text)
+    , _wiMessage  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReconcileGetCosts' with the minimum fields required to make a request.
+-- | Creates a value of 'WarningItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rgcHits'
+-- * 'wiLocation'
 --
--- * 'rgcMs'
-reconcileGetCosts
-    :: ReconcileGetCosts
-reconcileGetCosts =
-    ReconcileGetCosts
-    { _rgcHits = Nothing
-    , _rgcMs = Nothing
+-- * 'wiReason'
+--
+-- * 'wiMessage'
+warningItem
+    :: WarningItem
+warningItem =
+    WarningItem
+    { _wiLocation = Nothing
+    , _wiReason = Nothing
+    , _wiMessage = Nothing
+    }
+
+-- | Location of warning in the request e.g. invalid predicate.
+wiLocation :: Lens' WarningItem (Maybe Text)
+wiLocation
+  = lens _wiLocation (\ s a -> s{_wiLocation = a})
+
+-- | Code for identifying classes of warnings.
+wiReason :: Lens' WarningItem (Maybe Text)
+wiReason = lens _wiReason (\ s a -> s{_wiReason = a})
+
+-- | Warning message to display to the user.
+wiMessage :: Lens' WarningItem (Maybe Text)
+wiMessage
+  = lens _wiMessage (\ s a -> s{_wiMessage = a})
+
+instance FromJSON WarningItem where
+        parseJSON
+          = withObject "WarningItem"
+              (\ o ->
+                 WarningItem <$>
+                   (o .:? "location") <*> (o .:? "reason") <*>
+                     (o .:? "message"))
+
+instance ToJSON WarningItem where
+        toJSON WarningItem{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _wiLocation,
+                  ("reason" .=) <$> _wiReason,
+                  ("message" .=) <$> _wiMessage])
+
+-- | Server costs for reconciling.
+--
+-- /See:/ 'costs' smart constructor.
+data Costs = Costs
+    { _cHits :: !(Maybe Int32)
+    , _cMs   :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Costs' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cHits'
+--
+-- * 'cMs'
+costs
+    :: Costs
+costs =
+    Costs
+    { _cHits = Nothing
+    , _cMs = Nothing
     }
 
 -- | Total number of hits found.
-rgcHits :: Lens' ReconcileGetCosts (Maybe Int32)
-rgcHits = lens _rgcHits (\ s a -> s{_rgcHits = a})
+cHits :: Lens' Costs (Maybe Int32)
+cHits = lens _cHits (\ s a -> s{_cHits = a})
 
 -- | Total milliseconds spent.
-rgcMs :: Lens' ReconcileGetCosts (Maybe Int32)
-rgcMs = lens _rgcMs (\ s a -> s{_rgcMs = a})
+cMs :: Lens' Costs (Maybe Int32)
+cMs = lens _cMs (\ s a -> s{_cMs = a})
 
-instance FromJSON ReconcileGetCosts where
+instance FromJSON Costs where
         parseJSON
-          = withObject "ReconcileGetCosts"
-              (\ o ->
-                 ReconcileGetCosts <$>
-                   (o .:? "hits") <*> (o .:? "ms"))
+          = withObject "Costs"
+              (\ o -> Costs <$> (o .:? "hits") <*> (o .:? "ms"))
 
-instance ToJSON ReconcileGetCosts where
-        toJSON ReconcileGetCosts{..}
+instance ToJSON Costs where
+        toJSON Costs{..}
           = object
               (catMaybes
-                 [("hits" .=) <$> _rgcHits, ("ms" .=) <$> _rgcMs])
+                 [("hits" .=) <$> _cHits, ("ms" .=) <$> _cMs])
 
 --
 -- /See:/ 'reconcileGet' smart constructor.
 data ReconcileGet = ReconcileGet
     { _rgCandidate :: !(Maybe [ReconcileCandidate])
-    , _rgCosts     :: !(Maybe ReconcileGetCosts)
-    , _rgWarning   :: !(Maybe [ReconcileGetWarning])
+    , _rgCosts     :: !(Maybe Costs)
+    , _rgWarning   :: !(Maybe [WarningItem])
     , _rgMatch     :: !(Maybe ReconcileCandidate)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReconcileGet' with the minimum fields required to make a request.
 --
@@ -102,7 +156,7 @@ rgCandidate
       . _Coerce
 
 -- | Server costs for reconciling.
-rgCosts :: Lens' ReconcileGet (Maybe ReconcileGetCosts)
+rgCosts :: Lens' ReconcileGet (Maybe Costs)
 rgCosts = lens _rgCosts (\ s a -> s{_rgCosts = a})
 
 -- | If filled, then there were recoverable problems that affected the
@@ -111,7 +165,7 @@ rgCosts = lens _rgCosts (\ s a -> s{_rgCosts = a})
 -- reconciliation. The candidates returned should be considered valid
 -- results, with the caveat that sections of the request were ignored as
 -- specified by the warning text.
-rgWarning :: Lens' ReconcileGet [ReconcileGetWarning]
+rgWarning :: Lens' ReconcileGet [WarningItem]
 rgWarning
   = lens _rgWarning (\ s a -> s{_rgWarning = a}) .
       _Default
@@ -142,104 +196,45 @@ instance ToJSON ReconcileGet where
 
 -- | Type or profession the candidate is notable for.
 --
--- /See:/ 'reconcileCandidateNotable' smart constructor.
-data ReconcileCandidateNotable = ReconcileCandidateNotable
-    { _rcnName :: !(Maybe Text)
-    , _rcnId   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'notable' smart constructor.
+data Notable = Notable
+    { _nName :: !(Maybe Text)
+    , _nId   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReconcileCandidateNotable' with the minimum fields required to make a request.
+-- | Creates a value of 'Notable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rcnName'
+-- * 'nName'
 --
--- * 'rcnId'
-reconcileCandidateNotable
-    :: ReconcileCandidateNotable
-reconcileCandidateNotable =
-    ReconcileCandidateNotable
-    { _rcnName = Nothing
-    , _rcnId = Nothing
+-- * 'nId'
+notable
+    :: Notable
+notable =
+    Notable
+    { _nName = Nothing
+    , _nId = Nothing
     }
 
 -- | Name of notable category in specified language.
-rcnName :: Lens' ReconcileCandidateNotable (Maybe Text)
-rcnName = lens _rcnName (\ s a -> s{_rcnName = a})
+nName :: Lens' Notable (Maybe Text)
+nName = lens _nName (\ s a -> s{_nName = a})
 
 -- | MID of notable category.
-rcnId :: Lens' ReconcileCandidateNotable (Maybe Text)
-rcnId = lens _rcnId (\ s a -> s{_rcnId = a})
+nId :: Lens' Notable (Maybe Text)
+nId = lens _nId (\ s a -> s{_nId = a})
 
-instance FromJSON ReconcileCandidateNotable where
+instance FromJSON Notable where
         parseJSON
-          = withObject "ReconcileCandidateNotable"
-              (\ o ->
-                 ReconcileCandidateNotable <$>
-                   (o .:? "name") <*> (o .:? "id"))
+          = withObject "Notable"
+              (\ o -> Notable <$> (o .:? "name") <*> (o .:? "id"))
 
-instance ToJSON ReconcileCandidateNotable where
-        toJSON ReconcileCandidateNotable{..}
+instance ToJSON Notable where
+        toJSON Notable{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _rcnName, ("id" .=) <$> _rcnId])
-
---
--- /See:/ 'reconcileGetWarning' smart constructor.
-data ReconcileGetWarning = ReconcileGetWarning
-    { _rgwLocation :: !(Maybe Text)
-    , _rgwReason   :: !(Maybe Text)
-    , _rgwMessage  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ReconcileGetWarning' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rgwLocation'
---
--- * 'rgwReason'
---
--- * 'rgwMessage'
-reconcileGetWarning
-    :: ReconcileGetWarning
-reconcileGetWarning =
-    ReconcileGetWarning
-    { _rgwLocation = Nothing
-    , _rgwReason = Nothing
-    , _rgwMessage = Nothing
-    }
-
--- | Location of warning in the request e.g. invalid predicate.
-rgwLocation :: Lens' ReconcileGetWarning (Maybe Text)
-rgwLocation
-  = lens _rgwLocation (\ s a -> s{_rgwLocation = a})
-
--- | Code for identifying classes of warnings.
-rgwReason :: Lens' ReconcileGetWarning (Maybe Text)
-rgwReason
-  = lens _rgwReason (\ s a -> s{_rgwReason = a})
-
--- | Warning message to display to the user.
-rgwMessage :: Lens' ReconcileGetWarning (Maybe Text)
-rgwMessage
-  = lens _rgwMessage (\ s a -> s{_rgwMessage = a})
-
-instance FromJSON ReconcileGetWarning where
-        parseJSON
-          = withObject "ReconcileGetWarning"
-              (\ o ->
-                 ReconcileGetWarning <$>
-                   (o .:? "location") <*> (o .:? "reason") <*>
-                     (o .:? "message"))
-
-instance ToJSON ReconcileGetWarning where
-        toJSON ReconcileGetWarning{..}
-          = object
-              (catMaybes
-                 [("location" .=) <$> _rgwLocation,
-                  ("reason" .=) <$> _rgwReason,
-                  ("message" .=) <$> _rgwMessage])
+                 [("name" .=) <$> _nName, ("id" .=) <$> _nId])
 
 --
 -- /See:/ 'reconcileCandidate' smart constructor.
@@ -247,9 +242,9 @@ data ReconcileCandidate = ReconcileCandidate
     { _rcLang       :: !(Maybe Text)
     , _rcConfidence :: !(Maybe Float)
     , _rcName       :: !(Maybe Text)
-    , _rcNotable    :: !(Maybe ReconcileCandidateNotable)
+    , _rcNotable    :: !(Maybe Notable)
     , _rcMid        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReconcileCandidate' with the minimum fields required to make a request.
 --
@@ -290,7 +285,7 @@ rcName :: Lens' ReconcileCandidate (Maybe Text)
 rcName = lens _rcName (\ s a -> s{_rcName = a})
 
 -- | Type or profession the candidate is notable for.
-rcNotable :: Lens' ReconcileCandidate (Maybe ReconcileCandidateNotable)
+rcNotable :: Lens' ReconcileCandidate (Maybe Notable)
 rcNotable
   = lens _rcNotable (\ s a -> s{_rcNotable = a})
 

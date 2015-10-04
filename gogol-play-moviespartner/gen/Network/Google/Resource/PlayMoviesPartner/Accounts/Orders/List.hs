@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -64,20 +65,20 @@ type AccountsOrdersListResource =
        "accounts" :>
          Capture "accountId" Text :>
            "orders" :>
-             QueryParam "$.xgafv" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "bearer_token" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParam "customId" Text :>
-                       QueryParam "name" Text :>
-                         QueryParam "pageSize" Int32 :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "pp" Bool :>
-                               QueryParams "pphNames" Text :>
-                                 QueryParams "status" Text :>
-                                   QueryParams "studioNames" Text :>
-                                     QueryParam "uploadType" Text :>
-                                       QueryParam "upload_protocol" Text :>
+             QueryParams "status" Text :>
+               QueryParams "pphNames" Text :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParams "studioNames" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "customId" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "name" Text :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "pageSize" Int32 :>
+                                       QueryParam "callback" Text :>
                                          QueryParam "quotaUser" Text :>
                                            QueryParam "prettyPrint" Bool :>
                                              QueryParam "fields" Text :>
@@ -95,10 +96,10 @@ type AccountsOrdersListResource =
 --
 -- /See:/ 'accountsOrdersList'' smart constructor.
 data AccountsOrdersList' = AccountsOrdersList'
-    { _aolStatus         :: !(Maybe Text)
-    , _aolPphNames       :: !(Maybe Text)
+    { _aolStatus         :: !(Maybe [Text])
+    , _aolPphNames       :: !(Maybe [Text])
     , _aolXgafv          :: !(Maybe Text)
-    , _aolStudioNames    :: !(Maybe Text)
+    , _aolStudioNames    :: !(Maybe [Text])
     , _aolQuotaUser      :: !(Maybe Text)
     , _aolPrettyPrint    :: !Bool
     , _aolUploadProtocol :: !(Maybe Text)
@@ -115,7 +116,7 @@ data AccountsOrdersList' = AccountsOrdersList'
     , _aolPageSize       :: !(Maybe Int32)
     , _aolFields         :: !(Maybe Text)
     , _aolCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsOrdersList'' with the minimum fields required to make a request.
 --
@@ -188,24 +189,30 @@ accountsOrdersList' pAolAccountId_ =
     }
 
 -- | Filter Orders that match one of the given status.
-aolStatus :: Lens' AccountsOrdersList' (Maybe Text)
+aolStatus :: Lens' AccountsOrdersList' [Text]
 aolStatus
-  = lens _aolStatus (\ s a -> s{_aolStatus = a})
+  = lens _aolStatus (\ s a -> s{_aolStatus = a}) .
+      _Default
+      . _Coerce
 
 -- | See _List methods rules_ for info about this field.
-aolPphNames :: Lens' AccountsOrdersList' (Maybe Text)
+aolPphNames :: Lens' AccountsOrdersList' [Text]
 aolPphNames
-  = lens _aolPphNames (\ s a -> s{_aolPphNames = a})
+  = lens _aolPphNames (\ s a -> s{_aolPphNames = a}) .
+      _Default
+      . _Coerce
 
 -- | V1 error format.
 aolXgafv :: Lens' AccountsOrdersList' (Maybe Text)
 aolXgafv = lens _aolXgafv (\ s a -> s{_aolXgafv = a})
 
 -- | See _List methods rules_ for info about this field.
-aolStudioNames :: Lens' AccountsOrdersList' (Maybe Text)
+aolStudioNames :: Lens' AccountsOrdersList' [Text]
 aolStudioNames
   = lens _aolStudioNames
       (\ s a -> s{_aolStudioNames = a})
+      . _Default
+      . _Coerce
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -304,19 +311,20 @@ instance GoogleRequest AccountsOrdersList' where
         request
           = requestWithRoute defReq playMoviesPartnerURL
         requestWithRoute r u AccountsOrdersList'{..}
-          = go _aolXgafv _aolAccessToken _aolBearerToken
-              _aolCallback
-              _aolCustomId
-              _aolName
-              _aolPageSize
-              _aolPageToken
-              (Just _aolPp)
-              _aolPphNames
-              _aolStatus
-              _aolStudioNames
-              _aolUploadType
+          = go _aolAccountId (_aolStatus ^. _Default)
+              (_aolPphNames ^. _Default)
+              _aolXgafv
+              (_aolStudioNames ^. _Default)
               _aolUploadProtocol
-              _aolAccountId
+              (Just _aolPp)
+              _aolAccessToken
+              _aolUploadType
+              _aolCustomId
+              _aolBearerToken
+              _aolName
+              _aolPageToken
+              _aolPageSize
+              _aolCallback
               _aolQuotaUser
               (Just _aolPrettyPrint)
               _aolFields

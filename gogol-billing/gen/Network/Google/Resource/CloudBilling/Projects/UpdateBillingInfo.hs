@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -61,9 +62,9 @@ module Network.Google.Resource.CloudBilling.Projects.UpdateBillingInfo
     , pubiPrettyPrint
     , pubiUploadProtocol
     , pubiPp
-    , pubiProjectBillingInfo
     , pubiAccessToken
     , pubiUploadType
+    , pubiPayload
     , pubiBearerToken
     , pubiKey
     , pubiName
@@ -79,15 +80,15 @@ import           Network.Google.Prelude
 -- 'ProjectsUpdateBillingInfo'' request conforms to.
 type ProjectsUpdateBillingInfoResource =
      "v1" :>
-       "{+name}" :>
+       Capture "name" Text :>
          "billingInfo" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
@@ -127,21 +128,21 @@ type ProjectsUpdateBillingInfoResource =
 --
 -- /See:/ 'projectsUpdateBillingInfo'' smart constructor.
 data ProjectsUpdateBillingInfo' = ProjectsUpdateBillingInfo'
-    { _pubiXgafv              :: !(Maybe Text)
-    , _pubiQuotaUser          :: !(Maybe Text)
-    , _pubiPrettyPrint        :: !Bool
-    , _pubiUploadProtocol     :: !(Maybe Text)
-    , _pubiPp                 :: !Bool
-    , _pubiProjectBillingInfo :: !ProjectBillingInfo
-    , _pubiAccessToken        :: !(Maybe Text)
-    , _pubiUploadType         :: !(Maybe Text)
-    , _pubiBearerToken        :: !(Maybe Text)
-    , _pubiKey                :: !(Maybe Key)
-    , _pubiName               :: !Text
-    , _pubiOAuthToken         :: !(Maybe OAuthToken)
-    , _pubiFields             :: !(Maybe Text)
-    , _pubiCallback           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _pubiXgafv          :: !(Maybe Text)
+    , _pubiQuotaUser      :: !(Maybe Text)
+    , _pubiPrettyPrint    :: !Bool
+    , _pubiUploadProtocol :: !(Maybe Text)
+    , _pubiPp             :: !Bool
+    , _pubiAccessToken    :: !(Maybe Text)
+    , _pubiUploadType     :: !(Maybe Text)
+    , _pubiPayload        :: !ProjectBillingInfo
+    , _pubiBearerToken    :: !(Maybe Text)
+    , _pubiKey            :: !(Maybe Key)
+    , _pubiName           :: !Text
+    , _pubiOAuthToken     :: !(Maybe OAuthToken)
+    , _pubiFields         :: !(Maybe Text)
+    , _pubiCallback       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsUpdateBillingInfo'' with the minimum fields required to make a request.
 --
@@ -157,11 +158,11 @@ data ProjectsUpdateBillingInfo' = ProjectsUpdateBillingInfo'
 --
 -- * 'pubiPp'
 --
--- * 'pubiProjectBillingInfo'
---
 -- * 'pubiAccessToken'
 --
 -- * 'pubiUploadType'
+--
+-- * 'pubiPayload'
 --
 -- * 'pubiBearerToken'
 --
@@ -175,19 +176,19 @@ data ProjectsUpdateBillingInfo' = ProjectsUpdateBillingInfo'
 --
 -- * 'pubiCallback'
 projectsUpdateBillingInfo'
-    :: ProjectBillingInfo -- ^ 'ProjectBillingInfo'
+    :: ProjectBillingInfo -- ^ 'payload'
     -> Text -- ^ 'name'
     -> ProjectsUpdateBillingInfo'
-projectsUpdateBillingInfo' pPubiProjectBillingInfo_ pPubiName_ =
+projectsUpdateBillingInfo' pPubiPayload_ pPubiName_ =
     ProjectsUpdateBillingInfo'
     { _pubiXgafv = Nothing
     , _pubiQuotaUser = Nothing
     , _pubiPrettyPrint = True
     , _pubiUploadProtocol = Nothing
     , _pubiPp = True
-    , _pubiProjectBillingInfo = pPubiProjectBillingInfo_
     , _pubiAccessToken = Nothing
     , _pubiUploadType = Nothing
+    , _pubiPayload = pPubiPayload_
     , _pubiBearerToken = Nothing
     , _pubiKey = Nothing
     , _pubiName = pPubiName_
@@ -225,12 +226,6 @@ pubiUploadProtocol
 pubiPp :: Lens' ProjectsUpdateBillingInfo' Bool
 pubiPp = lens _pubiPp (\ s a -> s{_pubiPp = a})
 
--- | Multipart request metadata.
-pubiProjectBillingInfo :: Lens' ProjectsUpdateBillingInfo' ProjectBillingInfo
-pubiProjectBillingInfo
-  = lens _pubiProjectBillingInfo
-      (\ s a -> s{_pubiProjectBillingInfo = a})
-
 -- | OAuth access token.
 pubiAccessToken :: Lens' ProjectsUpdateBillingInfo' (Maybe Text)
 pubiAccessToken
@@ -242,6 +237,11 @@ pubiUploadType :: Lens' ProjectsUpdateBillingInfo' (Maybe Text)
 pubiUploadType
   = lens _pubiUploadType
       (\ s a -> s{_pubiUploadType = a})
+
+-- | Multipart request metadata.
+pubiPayload :: Lens' ProjectsUpdateBillingInfo' ProjectBillingInfo
+pubiPayload
+  = lens _pubiPayload (\ s a -> s{_pubiPayload = a})
 
 -- | OAuth bearer token.
 pubiBearerToken :: Lens' ProjectsUpdateBillingInfo' (Maybe Text)
@@ -286,19 +286,19 @@ instance GoogleRequest ProjectsUpdateBillingInfo'
              ProjectBillingInfo
         request = requestWithRoute defReq billingURL
         requestWithRoute r u ProjectsUpdateBillingInfo'{..}
-          = go _pubiXgafv _pubiAccessToken _pubiBearerToken
-              _pubiCallback
+          = go _pubiName _pubiXgafv _pubiUploadProtocol
               (Just _pubiPp)
+              _pubiAccessToken
               _pubiUploadType
-              _pubiUploadProtocol
-              _pubiName
+              _pubiBearerToken
+              _pubiCallback
               _pubiQuotaUser
               (Just _pubiPrettyPrint)
               _pubiFields
               _pubiKey
               _pubiOAuthToken
               (Just AltJSON)
-              _pubiProjectBillingInfo
+              _pubiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsUpdateBillingInfoResource)

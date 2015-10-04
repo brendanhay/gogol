@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,10 +33,10 @@ module Network.Google.Resource.Compute.InstanceGroups.SetNamedPorts
     -- * Request Lenses
     , igsnpQuotaUser
     , igsnpPrettyPrint
-    , igsnpInstanceGroupsSetNamedPortsRequest
     , igsnpProject
     , igsnpUserIP
     , igsnpZone
+    , igsnpPayload
     , igsnpKey
     , igsnpOAuthToken
     , igsnpInstanceGroup
@@ -69,17 +70,17 @@ type InstanceGroupsSetNamedPortsResource =
 --
 -- /See:/ 'instanceGroupsSetNamedPorts'' smart constructor.
 data InstanceGroupsSetNamedPorts' = InstanceGroupsSetNamedPorts'
-    { _igsnpQuotaUser                          :: !(Maybe Text)
-    , _igsnpPrettyPrint                        :: !Bool
-    , _igsnpInstanceGroupsSetNamedPortsRequest :: !InstanceGroupsSetNamedPortsRequest
-    , _igsnpProject                            :: !Text
-    , _igsnpUserIP                             :: !(Maybe Text)
-    , _igsnpZone                               :: !Text
-    , _igsnpKey                                :: !(Maybe Key)
-    , _igsnpOAuthToken                         :: !(Maybe OAuthToken)
-    , _igsnpInstanceGroup                      :: !Text
-    , _igsnpFields                             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _igsnpQuotaUser     :: !(Maybe Text)
+    , _igsnpPrettyPrint   :: !Bool
+    , _igsnpProject       :: !Text
+    , _igsnpUserIP        :: !(Maybe Text)
+    , _igsnpZone          :: !Text
+    , _igsnpPayload       :: !InstanceGroupsSetNamedPortsRequest
+    , _igsnpKey           :: !(Maybe Key)
+    , _igsnpOAuthToken    :: !(Maybe OAuthToken)
+    , _igsnpInstanceGroup :: !Text
+    , _igsnpFields        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsSetNamedPorts'' with the minimum fields required to make a request.
 --
@@ -89,13 +90,13 @@ data InstanceGroupsSetNamedPorts' = InstanceGroupsSetNamedPorts'
 --
 -- * 'igsnpPrettyPrint'
 --
--- * 'igsnpInstanceGroupsSetNamedPortsRequest'
---
 -- * 'igsnpProject'
 --
 -- * 'igsnpUserIP'
 --
 -- * 'igsnpZone'
+--
+-- * 'igsnpPayload'
 --
 -- * 'igsnpKey'
 --
@@ -105,19 +106,19 @@ data InstanceGroupsSetNamedPorts' = InstanceGroupsSetNamedPorts'
 --
 -- * 'igsnpFields'
 instanceGroupsSetNamedPorts'
-    :: InstanceGroupsSetNamedPortsRequest -- ^ 'InstanceGroupsSetNamedPortsRequest'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
+    -> InstanceGroupsSetNamedPortsRequest -- ^ 'payload'
     -> Text -- ^ 'instanceGroup'
     -> InstanceGroupsSetNamedPorts'
-instanceGroupsSetNamedPorts' pIgsnpInstanceGroupsSetNamedPortsRequest_ pIgsnpProject_ pIgsnpZone_ pIgsnpInstanceGroup_ =
+instanceGroupsSetNamedPorts' pIgsnpProject_ pIgsnpZone_ pIgsnpPayload_ pIgsnpInstanceGroup_ =
     InstanceGroupsSetNamedPorts'
     { _igsnpQuotaUser = Nothing
     , _igsnpPrettyPrint = True
-    , _igsnpInstanceGroupsSetNamedPortsRequest = pIgsnpInstanceGroupsSetNamedPortsRequest_
     , _igsnpProject = pIgsnpProject_
     , _igsnpUserIP = Nothing
     , _igsnpZone = pIgsnpZone_
+    , _igsnpPayload = pIgsnpPayload_
     , _igsnpKey = Nothing
     , _igsnpOAuthToken = Nothing
     , _igsnpInstanceGroup = pIgsnpInstanceGroup_
@@ -138,13 +139,6 @@ igsnpPrettyPrint
   = lens _igsnpPrettyPrint
       (\ s a -> s{_igsnpPrettyPrint = a})
 
--- | Multipart request metadata.
-igsnpInstanceGroupsSetNamedPortsRequest :: Lens' InstanceGroupsSetNamedPorts' InstanceGroupsSetNamedPortsRequest
-igsnpInstanceGroupsSetNamedPortsRequest
-  = lens _igsnpInstanceGroupsSetNamedPortsRequest
-      (\ s a ->
-         s{_igsnpInstanceGroupsSetNamedPortsRequest = a})
-
 -- | The project ID for this request.
 igsnpProject :: Lens' InstanceGroupsSetNamedPorts' Text
 igsnpProject
@@ -160,6 +154,11 @@ igsnpUserIP
 igsnpZone :: Lens' InstanceGroupsSetNamedPorts' Text
 igsnpZone
   = lens _igsnpZone (\ s a -> s{_igsnpZone = a})
+
+-- | Multipart request metadata.
+igsnpPayload :: Lens' InstanceGroupsSetNamedPorts' InstanceGroupsSetNamedPortsRequest
+igsnpPayload
+  = lens _igsnpPayload (\ s a -> s{_igsnpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -202,7 +201,7 @@ instance GoogleRequest InstanceGroupsSetNamedPorts'
               _igsnpKey
               _igsnpOAuthToken
               (Just AltJSON)
-              _igsnpInstanceGroupsSetNamedPortsRequest
+              _igsnpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceGroupsSetNamedPortsResource)

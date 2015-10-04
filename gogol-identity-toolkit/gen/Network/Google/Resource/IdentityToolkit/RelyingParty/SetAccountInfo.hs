@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.SetAccountInfo
     , rpsaiQuotaUser
     , rpsaiPrettyPrint
     , rpsaiUserIP
-    , rpsaiIdentitytoolkitRelyingPartySetAccountInfoRequest
+    , rpsaiPayload
     , rpsaiKey
     , rpsaiOAuthToken
     , rpsaiFields
@@ -61,14 +62,14 @@ type RelyingPartySetAccountInfoResource =
 --
 -- /See:/ 'relyingPartySetAccountInfo'' smart constructor.
 data RelyingPartySetAccountInfo' = RelyingPartySetAccountInfo'
-    { _rpsaiQuotaUser                                        :: !(Maybe Text)
-    , _rpsaiPrettyPrint                                      :: !Bool
-    , _rpsaiUserIP                                           :: !(Maybe Text)
-    , _rpsaiIdentitytoolkitRelyingPartySetAccountInfoRequest :: !IdentitytoolkitRelyingPartySetAccountInfoRequest
-    , _rpsaiKey                                              :: !(Maybe Key)
-    , _rpsaiOAuthToken                                       :: !(Maybe OAuthToken)
-    , _rpsaiFields                                           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rpsaiQuotaUser   :: !(Maybe Text)
+    , _rpsaiPrettyPrint :: !Bool
+    , _rpsaiUserIP      :: !(Maybe Text)
+    , _rpsaiPayload     :: !IdentitytoolkitRelyingPartySetAccountInfoRequest
+    , _rpsaiKey         :: !(Maybe Key)
+    , _rpsaiOAuthToken  :: !(Maybe OAuthToken)
+    , _rpsaiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingPartySetAccountInfo'' with the minimum fields required to make a request.
 --
@@ -80,7 +81,7 @@ data RelyingPartySetAccountInfo' = RelyingPartySetAccountInfo'
 --
 -- * 'rpsaiUserIP'
 --
--- * 'rpsaiIdentitytoolkitRelyingPartySetAccountInfoRequest'
+-- * 'rpsaiPayload'
 --
 -- * 'rpsaiKey'
 --
@@ -88,14 +89,14 @@ data RelyingPartySetAccountInfo' = RelyingPartySetAccountInfo'
 --
 -- * 'rpsaiFields'
 relyingPartySetAccountInfo'
-    :: IdentitytoolkitRelyingPartySetAccountInfoRequest -- ^ 'IdentitytoolkitRelyingPartySetAccountInfoRequest'
+    :: IdentitytoolkitRelyingPartySetAccountInfoRequest -- ^ 'payload'
     -> RelyingPartySetAccountInfo'
-relyingPartySetAccountInfo' pRpsaiIdentitytoolkitRelyingPartySetAccountInfoRequest_ =
+relyingPartySetAccountInfo' pRpsaiPayload_ =
     RelyingPartySetAccountInfo'
     { _rpsaiQuotaUser = Nothing
     , _rpsaiPrettyPrint = True
     , _rpsaiUserIP = Nothing
-    , _rpsaiIdentitytoolkitRelyingPartySetAccountInfoRequest = pRpsaiIdentitytoolkitRelyingPartySetAccountInfoRequest_
+    , _rpsaiPayload = pRpsaiPayload_
     , _rpsaiKey = Nothing
     , _rpsaiOAuthToken = Nothing
     , _rpsaiFields = Nothing
@@ -122,13 +123,9 @@ rpsaiUserIP
   = lens _rpsaiUserIP (\ s a -> s{_rpsaiUserIP = a})
 
 -- | Multipart request metadata.
-rpsaiIdentitytoolkitRelyingPartySetAccountInfoRequest :: Lens' RelyingPartySetAccountInfo' IdentitytoolkitRelyingPartySetAccountInfoRequest
-rpsaiIdentitytoolkitRelyingPartySetAccountInfoRequest
-  = lens
-      _rpsaiIdentitytoolkitRelyingPartySetAccountInfoRequest
-      (\ s a ->
-         s{_rpsaiIdentitytoolkitRelyingPartySetAccountInfoRequest
-             = a})
+rpsaiPayload :: Lens' RelyingPartySetAccountInfo' IdentitytoolkitRelyingPartySetAccountInfoRequest
+rpsaiPayload
+  = lens _rpsaiPayload (\ s a -> s{_rpsaiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -163,7 +160,7 @@ instance GoogleRequest RelyingPartySetAccountInfo'
               _rpsaiKey
               _rpsaiOAuthToken
               (Just AltJSON)
-              _rpsaiIdentitytoolkitRelyingPartySetAccountInfoRequest
+              _rpsaiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RelyingPartySetAccountInfoResource)

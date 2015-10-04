@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,11 +54,11 @@ type PagesListResource =
      "blogs" :>
        Capture "blogId" Text :>
          "pages" :>
-           QueryParam "fetchBodies" Bool :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
-                 QueryParams "status" BloggerPagesListStatus :>
-                   QueryParam "view" BloggerPagesListView :>
+           QueryParams "status" BloggerPagesListStatus :>
+             QueryParam "fetchBodies" Bool :>
+               QueryParam "view" BloggerPagesListView :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Word32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -83,7 +84,7 @@ data PagesList' = PagesList'
     , _plOAuthToken  :: !(Maybe OAuthToken)
     , _plMaxResults  :: !(Maybe Word32)
     , _plFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesList'' with the minimum fields required to make a request.
 --
@@ -200,10 +201,10 @@ instance GoogleRequest PagesList' where
         type Rs PagesList' = PageList
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesList'{..}
-          = go _plFetchBodies _plMaxResults _plPageToken
-              _plStatus
+          = go _plBlogId (_plStatus ^. _Default) _plFetchBodies
               _plView
-              _plBlogId
+              _plPageToken
+              _plMaxResults
               _plQuotaUser
               (Just _plPrettyPrint)
               _plUserIP

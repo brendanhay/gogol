@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -59,12 +60,12 @@ type ProjectsLogsSinksListResource =
              Capture "logsId" Text :>
                "sinks" :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "upload_protocol" Text :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "callback" Text :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
@@ -91,7 +92,7 @@ data ProjectsLogsSinksList' = ProjectsLogsSinksList'
     , _pProjectsId     :: !Text
     , _pFields         :: !(Maybe Text)
     , _pCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogsSinksList'' with the minimum fields required to make a request.
 --
@@ -225,12 +226,12 @@ instance GoogleRequest ProjectsLogsSinksList' where
         type Rs ProjectsLogsSinksList' = ListLogSinksResponse
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u ProjectsLogsSinksList'{..}
-          = go _pXgafv _pAccessToken _pBearerToken _pCallback
+          = go _pProjectsId _pLogsId _pXgafv _pUploadProtocol
               (Just _pPp)
+              _pAccessToken
               _pUploadType
-              _pUploadProtocol
-              _pProjectsId
-              _pLogsId
+              _pBearerToken
+              _pCallback
               _pQuotaUser
               (Just _pPrettyPrint)
               _pFields

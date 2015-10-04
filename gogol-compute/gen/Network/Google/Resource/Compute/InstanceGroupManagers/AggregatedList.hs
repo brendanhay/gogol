@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type InstanceGroupManagersAggregatedListResource =
        "aggregated" :>
          "instanceGroupManagers" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data InstanceGroupManagersAggregatedList' = InstanceGroupManagersAggregatedList'
     , _igmalOAuthToken  :: !(Maybe OAuthToken)
     , _igmalMaxResults  :: !Word32
     , _igmalFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersAggregatedList'' with the minimum fields required to make a request.
 --
@@ -204,9 +205,8 @@ instance GoogleRequest
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
           InstanceGroupManagersAggregatedList'{..}
-          = go _igmalFilter (Just _igmalMaxResults)
-              _igmalPageToken
-              _igmalProject
+          = go _igmalProject _igmalFilter _igmalPageToken
+              (Just _igmalMaxResults)
               _igmalQuotaUser
               (Just _igmalPrettyPrint)
               _igmalUserIP

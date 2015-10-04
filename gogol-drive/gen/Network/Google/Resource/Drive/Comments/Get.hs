@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -73,7 +74,7 @@ data CommentsGet' = CommentsGet'
     , _cgCommentId      :: !Text
     , _cgIncludeDeleted :: !Bool
     , _cgFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsGet'' with the minimum fields required to make a request.
 --
@@ -170,7 +171,7 @@ instance GoogleRequest CommentsGet' where
         type Rs CommentsGet' = Comment
         request = requestWithRoute defReq driveURL
         requestWithRoute r u CommentsGet'{..}
-          = go (Just _cgIncludeDeleted) _cgFileId _cgCommentId
+          = go _cgFileId _cgCommentId (Just _cgIncludeDeleted)
               _cgQuotaUser
               (Just _cgPrettyPrint)
               _cgUserIP

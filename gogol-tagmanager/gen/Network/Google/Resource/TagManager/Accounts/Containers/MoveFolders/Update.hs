@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -56,9 +57,9 @@ type AccountsContainersMoveFoldersUpdateResource =
            Capture "containerId" Text :>
              "move_folders" :>
                Capture "folderId" Text :>
-                 QueryParams "tagId" Text :>
-                   QueryParams "triggerId" Text :>
-                     QueryParams "variableId" Text :>
+                 QueryParams "triggerId" Text :>
+                   QueryParams "variableId" Text :>
+                     QueryParams "tagId" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -74,16 +75,16 @@ data AccountsContainersMoveFoldersUpdate' = AccountsContainersMoveFoldersUpdate'
     { _acmfuQuotaUser   :: !(Maybe Text)
     , _acmfuPrettyPrint :: !Bool
     , _acmfuContainerId :: !Text
-    , _acmfuTriggerId   :: !(Maybe Text)
+    , _acmfuTriggerId   :: !(Maybe [Text])
     , _acmfuUserIP      :: !(Maybe Text)
-    , _acmfuVariableId  :: !(Maybe Text)
+    , _acmfuVariableId  :: !(Maybe [Text])
     , _acmfuFolderId    :: !Text
     , _acmfuAccountId   :: !Text
-    , _acmfuTagId       :: !(Maybe Text)
+    , _acmfuTagId       :: !(Maybe [Text])
     , _acmfuKey         :: !(Maybe Key)
     , _acmfuOAuthToken  :: !(Maybe OAuthToken)
     , _acmfuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersMoveFoldersUpdate'' with the minimum fields required to make a request.
 --
@@ -154,10 +155,12 @@ acmfuContainerId
       (\ s a -> s{_acmfuContainerId = a})
 
 -- | The triggers to be moved to the folder.
-acmfuTriggerId :: Lens' AccountsContainersMoveFoldersUpdate' (Maybe Text)
+acmfuTriggerId :: Lens' AccountsContainersMoveFoldersUpdate' [Text]
 acmfuTriggerId
   = lens _acmfuTriggerId
       (\ s a -> s{_acmfuTriggerId = a})
+      . _Default
+      . _Coerce
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
@@ -166,10 +169,12 @@ acmfuUserIP
   = lens _acmfuUserIP (\ s a -> s{_acmfuUserIP = a})
 
 -- | The variables to be moved to the folder.
-acmfuVariableId :: Lens' AccountsContainersMoveFoldersUpdate' (Maybe Text)
+acmfuVariableId :: Lens' AccountsContainersMoveFoldersUpdate' [Text]
 acmfuVariableId
   = lens _acmfuVariableId
       (\ s a -> s{_acmfuVariableId = a})
+      . _Default
+      . _Coerce
 
 -- | The GTM Folder ID.
 acmfuFolderId :: Lens' AccountsContainersMoveFoldersUpdate' Text
@@ -184,9 +189,11 @@ acmfuAccountId
       (\ s a -> s{_acmfuAccountId = a})
 
 -- | The tags to be moved to the folder.
-acmfuTagId :: Lens' AccountsContainersMoveFoldersUpdate' (Maybe Text)
+acmfuTagId :: Lens' AccountsContainersMoveFoldersUpdate' [Text]
 acmfuTagId
-  = lens _acmfuTagId (\ s a -> s{_acmfuTagId = a})
+  = lens _acmfuTagId (\ s a -> s{_acmfuTagId = a}) .
+      _Default
+      . _Coerce
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -216,10 +223,10 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersMoveFoldersUpdate'{..}
-          = go _acmfuTagId _acmfuTriggerId _acmfuVariableId
-              _acmfuAccountId
-              _acmfuContainerId
-              _acmfuFolderId
+          = go _acmfuAccountId _acmfuContainerId _acmfuFolderId
+              (_acmfuTriggerId ^. _Default)
+              (_acmfuVariableId ^. _Default)
+              (_acmfuTagId ^. _Default)
               _acmfuQuotaUser
               (Just _acmfuPrettyPrint)
               _acmfuUserIP

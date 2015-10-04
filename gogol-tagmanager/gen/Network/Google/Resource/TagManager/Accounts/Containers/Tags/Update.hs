@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,10 +33,10 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Update
     -- * Request Lenses
     , actucQuotaUser
     , actucPrettyPrint
-    , actucTag
     , actucContainerId
     , actucUserIP
     , actucFingerprint
+    , actucPayload
     , actucAccountId
     , actucTagId
     , actucKey
@@ -71,16 +72,16 @@ type AccountsContainersTagsUpdateResource =
 data AccountsContainersTagsUpdate' = AccountsContainersTagsUpdate'
     { _actucQuotaUser   :: !(Maybe Text)
     , _actucPrettyPrint :: !Bool
-    , _actucTag         :: !Tag
     , _actucContainerId :: !Text
     , _actucUserIP      :: !(Maybe Text)
     , _actucFingerprint :: !(Maybe Text)
+    , _actucPayload     :: !Tag
     , _actucAccountId   :: !Text
     , _actucTagId       :: !Text
     , _actucKey         :: !(Maybe Key)
     , _actucOAuthToken  :: !(Maybe OAuthToken)
     , _actucFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTagsUpdate'' with the minimum fields required to make a request.
 --
@@ -90,13 +91,13 @@ data AccountsContainersTagsUpdate' = AccountsContainersTagsUpdate'
 --
 -- * 'actucPrettyPrint'
 --
--- * 'actucTag'
---
 -- * 'actucContainerId'
 --
 -- * 'actucUserIP'
 --
 -- * 'actucFingerprint'
+--
+-- * 'actucPayload'
 --
 -- * 'actucAccountId'
 --
@@ -108,19 +109,19 @@ data AccountsContainersTagsUpdate' = AccountsContainersTagsUpdate'
 --
 -- * 'actucFields'
 accountsContainersTagsUpdate'
-    :: Tag -- ^ 'Tag'
-    -> Text -- ^ 'containerId'
+    :: Text -- ^ 'containerId'
+    -> Tag -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'tagId'
     -> AccountsContainersTagsUpdate'
-accountsContainersTagsUpdate' pActucTag_ pActucContainerId_ pActucAccountId_ pActucTagId_ =
+accountsContainersTagsUpdate' pActucContainerId_ pActucPayload_ pActucAccountId_ pActucTagId_ =
     AccountsContainersTagsUpdate'
     { _actucQuotaUser = Nothing
     , _actucPrettyPrint = True
-    , _actucTag = pActucTag_
     , _actucContainerId = pActucContainerId_
     , _actucUserIP = Nothing
     , _actucFingerprint = Nothing
+    , _actucPayload = pActucPayload_
     , _actucAccountId = pActucAccountId_
     , _actucTagId = pActucTagId_
     , _actucKey = Nothing
@@ -142,10 +143,6 @@ actucPrettyPrint
   = lens _actucPrettyPrint
       (\ s a -> s{_actucPrettyPrint = a})
 
--- | Multipart request metadata.
-actucTag :: Lens' AccountsContainersTagsUpdate' Tag
-actucTag = lens _actucTag (\ s a -> s{_actucTag = a})
-
 -- | The GTM Container ID.
 actucContainerId :: Lens' AccountsContainersTagsUpdate' Text
 actucContainerId
@@ -164,6 +161,11 @@ actucFingerprint :: Lens' AccountsContainersTagsUpdate' (Maybe Text)
 actucFingerprint
   = lens _actucFingerprint
       (\ s a -> s{_actucFingerprint = a})
+
+-- | Multipart request metadata.
+actucPayload :: Lens' AccountsContainersTagsUpdate' Tag
+actucPayload
+  = lens _actucPayload (\ s a -> s{_actucPayload = a})
 
 -- | The GTM Account ID.
 actucAccountId :: Lens' AccountsContainersTagsUpdate' Text
@@ -204,9 +206,8 @@ instance GoogleRequest AccountsContainersTagsUpdate'
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersTagsUpdate'{..}
-          = go _actucFingerprint _actucAccountId
-              _actucContainerId
-              _actucTagId
+          = go _actucAccountId _actucContainerId _actucTagId
+              _actucFingerprint
               _actucQuotaUser
               (Just _actucPrettyPrint)
               _actucUserIP
@@ -214,7 +215,7 @@ instance GoogleRequest AccountsContainersTagsUpdate'
               _actucKey
               _actucOAuthToken
               (Just AltJSON)
-              _actucTag
+              _actucPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsContainersTagsUpdateResource)

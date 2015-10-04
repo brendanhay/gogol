@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,10 +35,10 @@ module Network.Google.Resource.AndroidPublisher.Edits.Expansionfiles.Update
     -- * Request Lenses
     , eQuotaUser
     , ePrettyPrint
-    , eExpansionFile
     , ePackageName
     , eAPKVersionCode
     , eUserIP
+    , ePayload
     , eKey
     , eExpansionFileType
     , eOAuthToken
@@ -78,16 +79,16 @@ type EditsExpansionfilesUpdateResource =
 data EditsExpansionfilesUpdate' = EditsExpansionfilesUpdate'
     { _eQuotaUser         :: !(Maybe Text)
     , _ePrettyPrint       :: !Bool
-    , _eExpansionFile     :: !ExpansionFile
     , _ePackageName       :: !Text
     , _eAPKVersionCode    :: !Int32
     , _eUserIP            :: !(Maybe Text)
+    , _ePayload           :: !ExpansionFile
     , _eKey               :: !(Maybe Key)
     , _eExpansionFileType :: !AndroidPublisherEditsExpansionfilesUpdateExpansionFileType
     , _eOAuthToken        :: !(Maybe OAuthToken)
     , _eEditId            :: !Text
     , _eFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsExpansionfilesUpdate'' with the minimum fields required to make a request.
 --
@@ -97,13 +98,13 @@ data EditsExpansionfilesUpdate' = EditsExpansionfilesUpdate'
 --
 -- * 'ePrettyPrint'
 --
--- * 'eExpansionFile'
---
 -- * 'ePackageName'
 --
 -- * 'eAPKVersionCode'
 --
 -- * 'eUserIP'
+--
+-- * 'ePayload'
 --
 -- * 'eKey'
 --
@@ -115,20 +116,20 @@ data EditsExpansionfilesUpdate' = EditsExpansionfilesUpdate'
 --
 -- * 'eFields'
 editsExpansionfilesUpdate'
-    :: ExpansionFile -- ^ 'ExpansionFile'
-    -> Text -- ^ 'packageName'
+    :: Text -- ^ 'packageName'
     -> Int32 -- ^ 'apkVersionCode'
+    -> ExpansionFile -- ^ 'payload'
     -> AndroidPublisherEditsExpansionfilesUpdateExpansionFileType -- ^ 'expansionFileType'
     -> Text -- ^ 'editId'
     -> EditsExpansionfilesUpdate'
-editsExpansionfilesUpdate' pEExpansionFile_ pEPackageName_ pEAPKVersionCode_ pEExpansionFileType_ pEEditId_ =
+editsExpansionfilesUpdate' pEPackageName_ pEAPKVersionCode_ pEPayload_ pEExpansionFileType_ pEEditId_ =
     EditsExpansionfilesUpdate'
     { _eQuotaUser = Nothing
     , _ePrettyPrint = True
-    , _eExpansionFile = pEExpansionFile_
     , _ePackageName = pEPackageName_
     , _eAPKVersionCode = pEAPKVersionCode_
     , _eUserIP = Nothing
+    , _ePayload = pEPayload_
     , _eKey = Nothing
     , _eExpansionFileType = pEExpansionFileType_
     , _eOAuthToken = Nothing
@@ -148,12 +149,6 @@ ePrettyPrint :: Lens' EditsExpansionfilesUpdate' Bool
 ePrettyPrint
   = lens _ePrettyPrint (\ s a -> s{_ePrettyPrint = a})
 
--- | Multipart request metadata.
-eExpansionFile :: Lens' EditsExpansionfilesUpdate' ExpansionFile
-eExpansionFile
-  = lens _eExpansionFile
-      (\ s a -> s{_eExpansionFile = a})
-
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
 ePackageName :: Lens' EditsExpansionfilesUpdate' Text
@@ -171,6 +166,10 @@ eAPKVersionCode
 -- want to enforce per-user limits.
 eUserIP :: Lens' EditsExpansionfilesUpdate' (Maybe Text)
 eUserIP = lens _eUserIP (\ s a -> s{_eUserIP = a})
+
+-- | Multipart request metadata.
+ePayload :: Lens' EditsExpansionfilesUpdate' ExpansionFile
+ePayload = lens _ePayload (\ s a -> s{_ePayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -214,7 +213,7 @@ instance GoogleRequest EditsExpansionfilesUpdate'
               _eKey
               _eOAuthToken
               (Just AltJSON)
-              _eExpansionFile
+              _ePayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EditsExpansionfilesUpdateResource)

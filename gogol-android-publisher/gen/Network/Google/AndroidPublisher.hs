@@ -199,6 +199,9 @@ module Network.Google.AndroidPublisher
     , mdDay
     , mdMonth
 
+    -- ** Track
+    , Track (..)
+
     -- ** InappproductsBatchRequestEntry
     , InappproductsBatchRequestEntry
     , inappproductsBatchRequestEntry
@@ -206,9 +209,6 @@ module Network.Google.AndroidPublisher
     , ibreInappproductsinsertrequest
     , ibreInappproductsupdaterequest
     , ibreBatchId
-
-    -- ** AndroidPublisherEditsExpansionfilesPatchExpansionFileType
-    , AndroidPublisherEditsExpansionfilesPatchExpansionFileType (..)
 
     -- ** InAppProductListing
     , InAppProductListing
@@ -327,7 +327,7 @@ module Network.Google.AndroidPublisher
     , ppConsumptionState
     , ppKind
     , ppPurchaseTimeMillis
-    , ppDeveloperPayLoad
+    , ppDeveloperPayload
 
     -- ** SubscriptionPurchase
     , SubscriptionPurchase
@@ -369,9 +369,9 @@ module Network.Google.AndroidPublisher
     , ehapkUsesPermissions
     , ehapkCertificateBase64s
 
-    -- ** InAppProductPrices
-    , InAppProductPrices
-    , inAppProductPrices
+    -- ** Prices
+    , Prices
+    , prices
 
     -- ** ImagesUploadResponse
     , ImagesUploadResponse
@@ -382,6 +382,9 @@ module Network.Google.AndroidPublisher
     , ExpansionFilesUploadResponse
     , expansionFilesUploadResponse
     , efurExpansionFile
+
+    -- ** ImageType
+    , ImageType (..)
 
     -- ** AndroidPublisherEditsTracksGetTrack
     , AndroidPublisherEditsTracksGetTrack (..)
@@ -394,8 +397,8 @@ module Network.Google.AndroidPublisher
     , ilrKind
     , ilrInappproduct
 
-    -- ** AndroidPublisherEditsTracksPatchTrack
-    , AndroidPublisherEditsTracksPatchTrack (..)
+    -- ** ExpansionFileType
+    , ExpansionFileType (..)
 
     -- ** SubscriptionDeferralInfo
     , SubscriptionDeferralInfo
@@ -448,7 +451,7 @@ module Network.Google.AndroidPublisher
     , iapPurchaseType
     , iapSubscriptionPeriod
     , iapPrices
-    , iapSku
+    , iapSKU
     , iapDefaultPrice
     , iapListings
     , iapDefaultLanguage
@@ -498,9 +501,6 @@ module Network.Google.AndroidPublisher
     , elrTokenPagination
     , elrPageInfo
     , elrResources
-
-    -- ** AndroidPublisherEditsImagesListImageType
-    , AndroidPublisherEditsImagesListImageType (..)
 
     -- ** AndroidPublisherEditsTestersUpdateTrack
     , AndroidPublisherEditsTestersUpdateTrack (..)

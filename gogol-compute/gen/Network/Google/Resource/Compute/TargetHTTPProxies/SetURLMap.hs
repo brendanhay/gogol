@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.Compute.TargetHTTPProxies.SetURLMap
     , thttppsumPrettyPrint
     , thttppsumProject
     , thttppsumUserIP
-    , thttppsumURLMapReference
+    , thttppsumPayload
     , thttppsumKey
     , thttppsumTargetHTTPProxy
     , thttppsumOAuthToken
@@ -69,12 +70,12 @@ data TargetHTTPProxiesSetURLMap' = TargetHTTPProxiesSetURLMap'
     , _thttppsumPrettyPrint     :: !Bool
     , _thttppsumProject         :: !Text
     , _thttppsumUserIP          :: !(Maybe Text)
-    , _thttppsumURLMapReference :: !URLMapReference
+    , _thttppsumPayload         :: !URLMapReference
     , _thttppsumKey             :: !(Maybe Key)
     , _thttppsumTargetHTTPProxy :: !Text
     , _thttppsumOAuthToken      :: !(Maybe OAuthToken)
     , _thttppsumFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetHTTPProxiesSetURLMap'' with the minimum fields required to make a request.
 --
@@ -88,7 +89,7 @@ data TargetHTTPProxiesSetURLMap' = TargetHTTPProxiesSetURLMap'
 --
 -- * 'thttppsumUserIP'
 --
--- * 'thttppsumURLMapReference'
+-- * 'thttppsumPayload'
 --
 -- * 'thttppsumKey'
 --
@@ -99,16 +100,16 @@ data TargetHTTPProxiesSetURLMap' = TargetHTTPProxiesSetURLMap'
 -- * 'thttppsumFields'
 targetHTTPProxiesSetURLMap'
     :: Text -- ^ 'project'
-    -> URLMapReference -- ^ 'URLMapReference'
+    -> URLMapReference -- ^ 'payload'
     -> Text -- ^ 'targetHttpProxy'
     -> TargetHTTPProxiesSetURLMap'
-targetHTTPProxiesSetURLMap' pThttppsumProject_ pThttppsumURLMapReference_ pThttppsumTargetHTTPProxy_ =
+targetHTTPProxiesSetURLMap' pThttppsumProject_ pThttppsumPayload_ pThttppsumTargetHTTPProxy_ =
     TargetHTTPProxiesSetURLMap'
     { _thttppsumQuotaUser = Nothing
     , _thttppsumPrettyPrint = True
     , _thttppsumProject = pThttppsumProject_
     , _thttppsumUserIP = Nothing
-    , _thttppsumURLMapReference = pThttppsumURLMapReference_
+    , _thttppsumPayload = pThttppsumPayload_
     , _thttppsumKey = Nothing
     , _thttppsumTargetHTTPProxy = pThttppsumTargetHTTPProxy_
     , _thttppsumOAuthToken = Nothing
@@ -143,10 +144,10 @@ thttppsumUserIP
       (\ s a -> s{_thttppsumUserIP = a})
 
 -- | Multipart request metadata.
-thttppsumURLMapReference :: Lens' TargetHTTPProxiesSetURLMap' URLMapReference
-thttppsumURLMapReference
-  = lens _thttppsumURLMapReference
-      (\ s a -> s{_thttppsumURLMapReference = a})
+thttppsumPayload :: Lens' TargetHTTPProxiesSetURLMap' URLMapReference
+thttppsumPayload
+  = lens _thttppsumPayload
+      (\ s a -> s{_thttppsumPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -190,7 +191,7 @@ instance GoogleRequest TargetHTTPProxiesSetURLMap'
               _thttppsumKey
               _thttppsumOAuthToken
               (Just AltJSON)
-              _thttppsumURLMapReference
+              _thttppsumPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetHTTPProxiesSetURLMapResource)

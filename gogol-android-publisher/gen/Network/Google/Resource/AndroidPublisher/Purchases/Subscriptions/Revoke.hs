@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,7 +55,7 @@ type PurchasesSubscriptionsRevokeResource =
          "subscriptions" :>
            Capture "subscriptionId" Text :>
              "tokens" :>
-               "{token}:revoke" :>
+               CaptureMode "token" "revoke" Text :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -78,7 +79,7 @@ data PurchasesSubscriptionsRevoke' = PurchasesSubscriptionsRevoke'
     , _psrOAuthToken     :: !(Maybe OAuthToken)
     , _psrSubscriptionId :: !Text
     , _psrFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PurchasesSubscriptionsRevoke'' with the minimum fields required to make a request.
 --

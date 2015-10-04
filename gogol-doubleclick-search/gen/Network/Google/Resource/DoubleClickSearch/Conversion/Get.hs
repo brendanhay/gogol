@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -63,14 +64,14 @@ type ConversionGetResource =
              "engine" :>
                Capture "engineAccountId" Int64 :>
                  "conversion" :>
-                   QueryParam "adGroupId" Int64 :>
-                     QueryParam "adId" Int64 :>
-                       QueryParam "campaignId" Int64 :>
-                         QueryParam "criterionId" Int64 :>
-                           QueryParam "endDate" Int32 :>
-                             QueryParam "rowCount" Int32 :>
-                               QueryParam "startDate" Int32 :>
-                                 QueryParam "startRow" Word32 :>
+                   QueryParam "endDate" Int32 :>
+                     QueryParam "rowCount" Int32 :>
+                       QueryParam "startDate" Int32 :>
+                         QueryParam "startRow" Word32 :>
+                           QueryParam "adGroupId" Int64 :>
+                             QueryParam "campaignId" Int64 :>
+                               QueryParam "criterionId" Int64 :>
+                                 QueryParam "adId" Int64 :>
                                    QueryParam "quotaUser" Text :>
                                      QueryParam "prettyPrint" Bool :>
                                        QueryParam "userIp" Text :>
@@ -103,7 +104,7 @@ data ConversionGet' = ConversionGet'
     , _cgOAuthToken      :: !(Maybe OAuthToken)
     , _cgRowCount        :: !Int32
     , _cgFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConversionGet'' with the minimum fields required to make a request.
 --
@@ -273,15 +274,15 @@ instance GoogleRequest ConversionGet' where
         request
           = requestWithRoute defReq doubleClickSearchURL
         requestWithRoute r u ConversionGet'{..}
-          = go _cgAdGroupId _cgAdId _cgCampaignId
-              _cgCriterionId
-              _cgAgencyId
-              _cgAdvertiserId
-              _cgEngineAccountId
+          = go _cgAgencyId _cgAdvertiserId _cgEngineAccountId
               (Just _cgEndDate)
               (Just _cgRowCount)
               (Just _cgStartDate)
               (Just _cgStartRow)
+              _cgAdGroupId
+              _cgCampaignId
+              _cgCriterionId
+              _cgAdId
               _cgQuotaUser
               (Just _cgPrettyPrint)
               _cgUserIP

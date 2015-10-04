@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -40,11 +41,11 @@ module Network.Google.Resource.CloudMonitoring.Timeseries.List
     , tlProject
     , tlUserIP
     , tlCount
+    , tlPayload
     , tlAggregator
     , tlTimespan
     , tlMetric
     , tlKey
-    , tlListTimeseriesRequest
     , tlOldest
     , tlLabels
     , tlPageToken
@@ -62,16 +63,16 @@ type TimeseriesListResource =
      Capture "project" Text :>
        "timeseries" :>
          Capture "metric" Text :>
-           QueryParam "aggregator"
-             CloudMonitoringTimeseriesListAggregator
-             :>
-             QueryParam "count" Int32 :>
-               QueryParams "labels" Text :>
-                 QueryParam "oldest" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "timespan" Text :>
-                       QueryParam "window" Text :>
-                         QueryParam "youngest" Text :>
+           QueryParam "youngest" Text :>
+             QueryParam "window" Text :>
+               QueryParam "count" Int32 :>
+                 QueryParam "aggregator"
+                   CloudMonitoringTimeseriesListAggregator
+                   :>
+                   QueryParam "timespan" Text :>
+                     QueryParam "oldest" Text :>
+                       QueryParams "labels" Text :>
+                         QueryParam "pageToken" Text :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "userIp" Text :>
@@ -90,24 +91,24 @@ type TimeseriesListResource =
 --
 -- /See:/ 'timeseriesList'' smart constructor.
 data TimeseriesList' = TimeseriesList'
-    { _tlWindow                :: !(Maybe Text)
-    , _tlQuotaUser             :: !(Maybe Text)
-    , _tlPrettyPrint           :: !Bool
-    , _tlProject               :: !Text
-    , _tlUserIP                :: !(Maybe Text)
-    , _tlCount                 :: !Int32
-    , _tlAggregator            :: !(Maybe CloudMonitoringTimeseriesListAggregator)
-    , _tlTimespan              :: !(Maybe Text)
-    , _tlMetric                :: !Text
-    , _tlKey                   :: !(Maybe Key)
-    , _tlListTimeseriesRequest :: !ListTimeseriesRequest
-    , _tlOldest                :: !(Maybe Text)
-    , _tlLabels                :: !(Maybe Text)
-    , _tlPageToken             :: !(Maybe Text)
-    , _tlYoungest              :: !Text
-    , _tlOAuthToken            :: !(Maybe OAuthToken)
-    , _tlFields                :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _tlWindow      :: !(Maybe Text)
+    , _tlQuotaUser   :: !(Maybe Text)
+    , _tlPrettyPrint :: !Bool
+    , _tlProject     :: !Text
+    , _tlUserIP      :: !(Maybe Text)
+    , _tlCount       :: !Int32
+    , _tlPayload     :: !ListTimeseriesRequest
+    , _tlAggregator  :: !(Maybe CloudMonitoringTimeseriesListAggregator)
+    , _tlTimespan    :: !(Maybe Text)
+    , _tlMetric      :: !Text
+    , _tlKey         :: !(Maybe Key)
+    , _tlOldest      :: !(Maybe Text)
+    , _tlLabels      :: !(Maybe [Text])
+    , _tlPageToken   :: !(Maybe Text)
+    , _tlYoungest    :: !Text
+    , _tlOAuthToken  :: !(Maybe OAuthToken)
+    , _tlFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimeseriesList'' with the minimum fields required to make a request.
 --
@@ -125,6 +126,8 @@ data TimeseriesList' = TimeseriesList'
 --
 -- * 'tlCount'
 --
+-- * 'tlPayload'
+--
 -- * 'tlAggregator'
 --
 -- * 'tlTimespan'
@@ -132,8 +135,6 @@ data TimeseriesList' = TimeseriesList'
 -- * 'tlMetric'
 --
 -- * 'tlKey'
---
--- * 'tlListTimeseriesRequest'
 --
 -- * 'tlOldest'
 --
@@ -148,11 +149,11 @@ data TimeseriesList' = TimeseriesList'
 -- * 'tlFields'
 timeseriesList'
     :: Text -- ^ 'project'
+    -> ListTimeseriesRequest -- ^ 'payload'
     -> Text -- ^ 'metric'
-    -> ListTimeseriesRequest -- ^ 'ListTimeseriesRequest'
     -> Text -- ^ 'youngest'
     -> TimeseriesList'
-timeseriesList' pTlProject_ pTlMetric_ pTlListTimeseriesRequest_ pTlYoungest_ =
+timeseriesList' pTlProject_ pTlPayload_ pTlMetric_ pTlYoungest_ =
     TimeseriesList'
     { _tlWindow = Nothing
     , _tlQuotaUser = Nothing
@@ -160,11 +161,11 @@ timeseriesList' pTlProject_ pTlMetric_ pTlListTimeseriesRequest_ pTlYoungest_ =
     , _tlProject = pTlProject_
     , _tlUserIP = Nothing
     , _tlCount = 6000
+    , _tlPayload = pTlPayload_
     , _tlAggregator = Nothing
     , _tlTimespan = Nothing
     , _tlMetric = pTlMetric_
     , _tlKey = Nothing
-    , _tlListTimeseriesRequest = pTlListTimeseriesRequest_
     , _tlOldest = Nothing
     , _tlLabels = Nothing
     , _tlPageToken = Nothing
@@ -210,6 +211,11 @@ tlUserIP = lens _tlUserIP (\ s a -> s{_tlUserIP = a})
 tlCount :: Lens' TimeseriesList' Int32
 tlCount = lens _tlCount (\ s a -> s{_tlCount = a})
 
+-- | Multipart request metadata.
+tlPayload :: Lens' TimeseriesList' ListTimeseriesRequest
+tlPayload
+  = lens _tlPayload (\ s a -> s{_tlPayload = a})
+
 -- | The aggregation function that will reduce the data points in each window
 -- to a single point. This parameter is only valid for non-cumulative
 -- metrics with a value type of INT64 or DOUBLE.
@@ -240,12 +246,6 @@ tlMetric = lens _tlMetric (\ s a -> s{_tlMetric = a})
 tlKey :: Lens' TimeseriesList' (Maybe Key)
 tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
--- | Multipart request metadata.
-tlListTimeseriesRequest :: Lens' TimeseriesList' ListTimeseriesRequest
-tlListTimeseriesRequest
-  = lens _tlListTimeseriesRequest
-      (\ s a -> s{_tlListTimeseriesRequest = a})
-
 -- | Start of the time interval (exclusive), which is expressed as an RFC
 -- 3339 timestamp. If neither oldest nor timespan is specified, the default
 -- time interval will be (youngest - 4 hours, youngest]
@@ -258,8 +258,11 @@ tlOldest = lens _tlOldest (\ s a -> s{_tlOldest = a})
 -- key!~value: key regex does not match the value For example, to list all
 -- of the time series descriptors for the region us-central1, you could
 -- specify: label=cloud.googleapis.com%2Flocation=~us-central1.*
-tlLabels :: Lens' TimeseriesList' (Maybe Text)
-tlLabels = lens _tlLabels (\ s a -> s{_tlLabels = a})
+tlLabels :: Lens' TimeseriesList' [Text]
+tlLabels
+  = lens _tlLabels (\ s a -> s{_tlLabels = a}) .
+      _Default
+      . _Coerce
 
 -- | The pagination token, which is used to page through large result sets.
 -- Set this value to the value of the nextPageToken to retrieve the next
@@ -291,14 +294,14 @@ instance GoogleRequest TimeseriesList' where
         type Rs TimeseriesList' = ListTimeseriesResponse
         request = requestWithRoute defReq monitoringURL
         requestWithRoute r u TimeseriesList'{..}
-          = go _tlAggregator (Just _tlCount) _tlLabels
-              _tlOldest
-              _tlPageToken
-              _tlTimespan
+          = go _tlProject _tlMetric (Just _tlYoungest)
               _tlWindow
-              _tlProject
-              _tlMetric
-              (Just _tlYoungest)
+              (Just _tlCount)
+              _tlAggregator
+              _tlTimespan
+              _tlOldest
+              (_tlLabels ^. _Default)
+              _tlPageToken
               _tlQuotaUser
               (Just _tlPrettyPrint)
               _tlUserIP
@@ -306,7 +309,7 @@ instance GoogleRequest TimeseriesList' where
               _tlKey
               _tlOAuthToken
               (Just AltJSON)
-              _tlListTimeseriesRequest
+              _tlPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TimeseriesListResource)

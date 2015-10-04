@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -61,14 +62,14 @@ type CoursesStudentsListResource =
          Capture "courseId" Text :>
            "students" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "bearer_token" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParam "pageSize" Int32 :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "upload_protocol" Text :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "pageSize" Int32 :>
+                             QueryParam "callback" Text :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
@@ -99,7 +100,7 @@ data CoursesStudentsList' = CoursesStudentsList'
     , _cslPageSize       :: !(Maybe Int32)
     , _cslFields         :: !(Maybe Text)
     , _cslCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesStudentsList'' with the minimum fields required to make a request.
 --
@@ -254,14 +255,14 @@ instance GoogleRequest CoursesStudentsList' where
         type Rs CoursesStudentsList' = ListStudentsResponse
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesStudentsList'{..}
-          = go _cslXgafv _cslAccessToken _cslBearerToken
-              _cslCallback
-              _cslPageSize
-              _cslPageToken
+          = go _cslCourseId _cslXgafv _cslUploadProtocol
               (Just _cslPp)
+              _cslAccessToken
               _cslUploadType
-              _cslUploadProtocol
-              _cslCourseId
+              _cslBearerToken
+              _cslPageToken
+              _cslPageSize
+              _cslCallback
               _cslQuotaUser
               (Just _cslPrettyPrint)
               _cslFields

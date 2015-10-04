@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -76,7 +77,7 @@ data ManagementCustomMetricsGet' = ManagementCustomMetricsGet'
     , _mcmgKey            :: !(Maybe Key)
     , _mcmgOAuthToken     :: !(Maybe OAuthToken)
     , _mcmgFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsGet'' with the minimum fields required to make a request.
 --

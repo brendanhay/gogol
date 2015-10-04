@@ -27,7 +27,7 @@ data URL = URL
     , _uAnalytics :: !(Maybe AnalyticsSummary)
     , _uLongURL   :: !(Maybe Text)
     , _uId        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URL' with the minimum fields required to make a request.
 --
@@ -113,7 +113,7 @@ instance ToJSON URL where
 data StringCount = StringCount
     { _scCount :: !(Maybe Int64)
     , _scId    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StringCount' with the minimum fields required to make a request.
 --
@@ -160,7 +160,7 @@ data AnalyticsSnapshot = AnalyticsSnapshot
     , _asCountries      :: !(Maybe [StringCount])
     , _asLongURLClicks  :: !(Maybe Int64)
     , _asBrowsers       :: !(Maybe [StringCount])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyticsSnapshot' with the minimum fields required to make a request.
 --
@@ -265,7 +265,7 @@ data AnalyticsSummary = AnalyticsSummary
     , _asDay      :: !(Maybe AnalyticsSnapshot)
     , _asTwoHours :: !(Maybe AnalyticsSnapshot)
     , _asMonth    :: !(Maybe AnalyticsSnapshot)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyticsSummary' with the minimum fields required to make a request.
 --
@@ -340,7 +340,7 @@ data URLHistory = URLHistory
     , _uhItemsPerPage  :: !(Maybe Int32)
     , _uhKind          :: !Text
     , _uhItems         :: !(Maybe [URL])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLHistory' with the minimum fields required to make a request.
 --

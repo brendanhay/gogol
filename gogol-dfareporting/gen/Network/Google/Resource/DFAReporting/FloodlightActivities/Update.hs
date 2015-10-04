@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Update
     , fauPrettyPrint
     , fauUserIP
     , fauProfileId
+    , fauPayload
     , fauKey
-    , fauFloodlightActivity
     , fauOAuthToken
     , fauFields
     ) where
@@ -63,15 +64,15 @@ type FloodlightActivitiesUpdateResource =
 --
 -- /See:/ 'floodlightActivitiesUpdate'' smart constructor.
 data FloodlightActivitiesUpdate' = FloodlightActivitiesUpdate'
-    { _fauQuotaUser          :: !(Maybe Text)
-    , _fauPrettyPrint        :: !Bool
-    , _fauUserIP             :: !(Maybe Text)
-    , _fauProfileId          :: !Int64
-    , _fauKey                :: !(Maybe Key)
-    , _fauFloodlightActivity :: !FloodlightActivity
-    , _fauOAuthToken         :: !(Maybe OAuthToken)
-    , _fauFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _fauQuotaUser   :: !(Maybe Text)
+    , _fauPrettyPrint :: !Bool
+    , _fauUserIP      :: !(Maybe Text)
+    , _fauProfileId   :: !Int64
+    , _fauPayload     :: !FloodlightActivity
+    , _fauKey         :: !(Maybe Key)
+    , _fauOAuthToken  :: !(Maybe OAuthToken)
+    , _fauFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesUpdate'' with the minimum fields required to make a request.
 --
@@ -85,25 +86,25 @@ data FloodlightActivitiesUpdate' = FloodlightActivitiesUpdate'
 --
 -- * 'fauProfileId'
 --
--- * 'fauKey'
+-- * 'fauPayload'
 --
--- * 'fauFloodlightActivity'
+-- * 'fauKey'
 --
 -- * 'fauOAuthToken'
 --
 -- * 'fauFields'
 floodlightActivitiesUpdate'
     :: Int64 -- ^ 'profileId'
-    -> FloodlightActivity -- ^ 'FloodlightActivity'
+    -> FloodlightActivity -- ^ 'payload'
     -> FloodlightActivitiesUpdate'
-floodlightActivitiesUpdate' pFauProfileId_ pFauFloodlightActivity_ =
+floodlightActivitiesUpdate' pFauProfileId_ pFauPayload_ =
     FloodlightActivitiesUpdate'
     { _fauQuotaUser = Nothing
     , _fauPrettyPrint = True
     , _fauUserIP = Nothing
     , _fauProfileId = pFauProfileId_
+    , _fauPayload = pFauPayload_
     , _fauKey = Nothing
-    , _fauFloodlightActivity = pFauFloodlightActivity_
     , _fauOAuthToken = Nothing
     , _fauFields = Nothing
     }
@@ -132,17 +133,16 @@ fauProfileId :: Lens' FloodlightActivitiesUpdate' Int64
 fauProfileId
   = lens _fauProfileId (\ s a -> s{_fauProfileId = a})
 
+-- | Multipart request metadata.
+fauPayload :: Lens' FloodlightActivitiesUpdate' FloodlightActivity
+fauPayload
+  = lens _fauPayload (\ s a -> s{_fauPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 fauKey :: Lens' FloodlightActivitiesUpdate' (Maybe Key)
 fauKey = lens _fauKey (\ s a -> s{_fauKey = a})
-
--- | Multipart request metadata.
-fauFloodlightActivity :: Lens' FloodlightActivitiesUpdate' FloodlightActivity
-fauFloodlightActivity
-  = lens _fauFloodlightActivity
-      (\ s a -> s{_fauFloodlightActivity = a})
 
 -- | OAuth 2.0 token for the current user.
 fauOAuthToken :: Lens' FloodlightActivitiesUpdate' (Maybe OAuthToken)
@@ -172,7 +172,7 @@ instance GoogleRequest FloodlightActivitiesUpdate'
               _fauKey
               _fauOAuthToken
               (Just AltJSON)
-              _fauFloodlightActivity
+              _fauPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FloodlightActivitiesUpdateResource)

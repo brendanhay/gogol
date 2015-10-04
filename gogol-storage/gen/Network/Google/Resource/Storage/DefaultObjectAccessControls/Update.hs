@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,10 +35,10 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Update
     , doacuPrettyPrint
     , doacuUserIP
     , doacuBucket
+    , doacuPayload
     , doacuKey
     , doacuOAuthToken
     , doacuEntity
-    , doacuObjectAccessControl
     , doacuFields
     ) where
 
@@ -65,16 +66,16 @@ type DefaultObjectAccessControlsUpdateResource =
 --
 -- /See:/ 'defaultObjectAccessControlsUpdate'' smart constructor.
 data DefaultObjectAccessControlsUpdate' = DefaultObjectAccessControlsUpdate'
-    { _doacuQuotaUser           :: !(Maybe Text)
-    , _doacuPrettyPrint         :: !Bool
-    , _doacuUserIP              :: !(Maybe Text)
-    , _doacuBucket              :: !Text
-    , _doacuKey                 :: !(Maybe Key)
-    , _doacuOAuthToken          :: !(Maybe OAuthToken)
-    , _doacuEntity              :: !Text
-    , _doacuObjectAccessControl :: !ObjectAccessControl
-    , _doacuFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _doacuQuotaUser   :: !(Maybe Text)
+    , _doacuPrettyPrint :: !Bool
+    , _doacuUserIP      :: !(Maybe Text)
+    , _doacuBucket      :: !Text
+    , _doacuPayload     :: !ObjectAccessControl
+    , _doacuKey         :: !(Maybe Key)
+    , _doacuOAuthToken  :: !(Maybe OAuthToken)
+    , _doacuEntity      :: !Text
+    , _doacuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsUpdate'' with the minimum fields required to make a request.
 --
@@ -88,30 +89,30 @@ data DefaultObjectAccessControlsUpdate' = DefaultObjectAccessControlsUpdate'
 --
 -- * 'doacuBucket'
 --
+-- * 'doacuPayload'
+--
 -- * 'doacuKey'
 --
 -- * 'doacuOAuthToken'
 --
 -- * 'doacuEntity'
 --
--- * 'doacuObjectAccessControl'
---
 -- * 'doacuFields'
 defaultObjectAccessControlsUpdate'
     :: Text -- ^ 'bucket'
+    -> ObjectAccessControl -- ^ 'payload'
     -> Text -- ^ 'entity'
-    -> ObjectAccessControl -- ^ 'ObjectAccessControl'
     -> DefaultObjectAccessControlsUpdate'
-defaultObjectAccessControlsUpdate' pDoacuBucket_ pDoacuEntity_ pDoacuObjectAccessControl_ =
+defaultObjectAccessControlsUpdate' pDoacuBucket_ pDoacuPayload_ pDoacuEntity_ =
     DefaultObjectAccessControlsUpdate'
     { _doacuQuotaUser = Nothing
     , _doacuPrettyPrint = True
     , _doacuUserIP = Nothing
     , _doacuBucket = pDoacuBucket_
+    , _doacuPayload = pDoacuPayload_
     , _doacuKey = Nothing
     , _doacuOAuthToken = Nothing
     , _doacuEntity = pDoacuEntity_
-    , _doacuObjectAccessControl = pDoacuObjectAccessControl_
     , _doacuFields = Nothing
     }
 
@@ -140,6 +141,11 @@ doacuBucket :: Lens' DefaultObjectAccessControlsUpdate' Text
 doacuBucket
   = lens _doacuBucket (\ s a -> s{_doacuBucket = a})
 
+-- | Multipart request metadata.
+doacuPayload :: Lens' DefaultObjectAccessControlsUpdate' ObjectAccessControl
+doacuPayload
+  = lens _doacuPayload (\ s a -> s{_doacuPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -158,12 +164,6 @@ doacuOAuthToken
 doacuEntity :: Lens' DefaultObjectAccessControlsUpdate' Text
 doacuEntity
   = lens _doacuEntity (\ s a -> s{_doacuEntity = a})
-
--- | Multipart request metadata.
-doacuObjectAccessControl :: Lens' DefaultObjectAccessControlsUpdate' ObjectAccessControl
-doacuObjectAccessControl
-  = lens _doacuObjectAccessControl
-      (\ s a -> s{_doacuObjectAccessControl = a})
 
 -- | Selector specifying which fields to include in a partial response.
 doacuFields :: Lens' DefaultObjectAccessControlsUpdate' (Maybe Text)
@@ -189,7 +189,7 @@ instance GoogleRequest
               _doacuKey
               _doacuOAuthToken
               (Just AltJSON)
-              _doacuObjectAccessControl
+              _doacuPayload
           where go
                   = clientWithRoute
                       (Proxy ::

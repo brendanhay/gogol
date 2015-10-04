@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,17 +59,17 @@ type OrdersListResource =
          "projects" :>
            Capture "projectId" Int64 :>
              "orders" :>
-               QueryParams "ids" Int64 :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "searchString" Text :>
-                       QueryParams "siteId" Int64 :>
-                         QueryParam "sortField"
-                           DfareportingOrdersListSortField
-                           :>
-                           QueryParam "sortOrder"
-                             DfareportingOrdersListSortOrder
-                             :>
+               QueryParam "searchString" Text :>
+                 QueryParams "ids" Int64 :>
+                   QueryParam "sortOrder"
+                     DfareportingOrdersListSortOrder
+                     :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "sortField"
+                         DfareportingOrdersListSortField
+                         :>
+                         QueryParams "siteId" Int64 :>
+                           QueryParam "maxResults" Int32 :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
@@ -86,7 +87,7 @@ data OrdersList' = OrdersList'
     , _olPrettyPrint  :: !Bool
     , _olUserIP       :: !(Maybe Text)
     , _olSearchString :: !(Maybe Text)
-    , _olIds          :: !(Maybe Int64)
+    , _olIds          :: !(Maybe [Int64])
     , _olProfileId    :: !Int64
     , _olSortOrder    :: !(Maybe DfareportingOrdersListSortOrder)
     , _olKey          :: !(Maybe Key)
@@ -94,10 +95,10 @@ data OrdersList' = OrdersList'
     , _olProjectId    :: !Int64
     , _olSortField    :: !(Maybe DfareportingOrdersListSortField)
     , _olOAuthToken   :: !(Maybe OAuthToken)
-    , _olSiteId       :: !(Maybe Int64)
+    , _olSiteId       :: !(Maybe [Int64])
     , _olMaxResults   :: !(Maybe Int32)
     , _olFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersList'' with the minimum fields required to make a request.
 --
@@ -185,8 +186,10 @@ olSearchString
       (\ s a -> s{_olSearchString = a})
 
 -- | Select only orders with these IDs.
-olIds :: Lens' OrdersList' (Maybe Int64)
-olIds = lens _olIds (\ s a -> s{_olIds = a})
+olIds :: Lens' OrdersList' [Int64]
+olIds
+  = lens _olIds (\ s a -> s{_olIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 olProfileId :: Lens' OrdersList' Int64
@@ -225,8 +228,11 @@ olOAuthToken
   = lens _olOAuthToken (\ s a -> s{_olOAuthToken = a})
 
 -- | Select only orders that are associated with these site IDs.
-olSiteId :: Lens' OrdersList' (Maybe Int64)
-olSiteId = lens _olSiteId (\ s a -> s{_olSiteId = a})
+olSiteId :: Lens' OrdersList' [Int64]
+olSiteId
+  = lens _olSiteId (\ s a -> s{_olSiteId = a}) .
+      _Default
+      . _Coerce
 
 -- | Maximum number of results to return.
 olMaxResults :: Lens' OrdersList' (Maybe Int32)
@@ -245,13 +251,13 @@ instance GoogleRequest OrdersList' where
         type Rs OrdersList' = OrdersListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OrdersList'{..}
-          = go _olIds _olMaxResults _olPageToken
-              _olSearchString
-              _olSiteId
-              _olSortField
+          = go _olProfileId _olProjectId _olSearchString
+              (_olIds ^. _Default)
               _olSortOrder
-              _olProfileId
-              _olProjectId
+              _olPageToken
+              _olSortField
+              (_olSiteId ^. _Default)
+              _olMaxResults
               _olQuotaUser
               (Just _olPrettyPrint)
               _olUserIP

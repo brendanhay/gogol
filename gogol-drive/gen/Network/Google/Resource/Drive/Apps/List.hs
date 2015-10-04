@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,9 +49,9 @@ import           Network.Google.Prelude
 -- 'AppsList'' request conforms to.
 type AppsListResource =
      "apps" :>
-       QueryParam "appFilterExtensions" Text :>
-         QueryParam "appFilterMimeTypes" Text :>
-           QueryParam "languageCode" Text :>
+       QueryParam "languageCode" Text :>
+         QueryParam "appFilterExtensions" Text :>
+           QueryParam "appFilterMimeTypes" Text :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -72,7 +73,7 @@ data AppsList' = AppsList'
     , _alAppFilterExtensions :: !Text
     , _alAppFilterMimeTypes  :: !Text
     , _alFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsList'' with the minimum fields required to make a request.
 --
@@ -177,9 +178,8 @@ instance GoogleRequest AppsList' where
         type Rs AppsList' = AppList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u AppsList'{..}
-          = go (Just _alAppFilterExtensions)
+          = go _alLanguageCode (Just _alAppFilterExtensions)
               (Just _alAppFilterMimeTypes)
-              _alLanguageCode
               _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP

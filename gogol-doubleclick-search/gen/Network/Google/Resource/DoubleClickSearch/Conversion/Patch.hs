@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -38,10 +39,10 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.Patch
     , cpUserIP
     , cpAdvertiserId
     , cpEndDate
+    , cpPayload
     , cpStartDate
     , cpKey
     , cpStartRow
-    , cpConversionList
     , cpOAuthToken
     , cpRowCount
     , cpFields
@@ -83,14 +84,14 @@ data ConversionPatch' = ConversionPatch'
     , _cpUserIP          :: !(Maybe Text)
     , _cpAdvertiserId    :: !Int64
     , _cpEndDate         :: !Int32
+    , _cpPayload         :: !ConversionList
     , _cpStartDate       :: !Int32
     , _cpKey             :: !(Maybe Key)
     , _cpStartRow        :: !Word32
-    , _cpConversionList  :: !ConversionList
     , _cpOAuthToken      :: !(Maybe OAuthToken)
     , _cpRowCount        :: !Int32
     , _cpFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConversionPatch'' with the minimum fields required to make a request.
 --
@@ -110,13 +111,13 @@ data ConversionPatch' = ConversionPatch'
 --
 -- * 'cpEndDate'
 --
+-- * 'cpPayload'
+--
 -- * 'cpStartDate'
 --
 -- * 'cpKey'
 --
 -- * 'cpStartRow'
---
--- * 'cpConversionList'
 --
 -- * 'cpOAuthToken'
 --
@@ -128,12 +129,12 @@ conversionPatch'
     -> Int64 -- ^ 'agencyId'
     -> Int64 -- ^ 'advertiserId'
     -> Int32 -- ^ 'endDate'
+    -> ConversionList -- ^ 'payload'
     -> Int32 -- ^ 'startDate'
     -> Word32 -- ^ 'startRow'
-    -> ConversionList -- ^ 'ConversionList'
     -> Int32 -- ^ 'rowCount'
     -> ConversionPatch'
-conversionPatch' pCpEngineAccountId_ pCpAgencyId_ pCpAdvertiserId_ pCpEndDate_ pCpStartDate_ pCpStartRow_ pCpConversionList_ pCpRowCount_ =
+conversionPatch' pCpEngineAccountId_ pCpAgencyId_ pCpAdvertiserId_ pCpEndDate_ pCpPayload_ pCpStartDate_ pCpStartRow_ pCpRowCount_ =
     ConversionPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
@@ -142,10 +143,10 @@ conversionPatch' pCpEngineAccountId_ pCpAgencyId_ pCpAdvertiserId_ pCpEndDate_ p
     , _cpUserIP = Nothing
     , _cpAdvertiserId = pCpAdvertiserId_
     , _cpEndDate = pCpEndDate_
+    , _cpPayload = pCpPayload_
     , _cpStartDate = pCpStartDate_
     , _cpKey = Nothing
     , _cpStartRow = pCpStartRow_
-    , _cpConversionList = pCpConversionList_
     , _cpOAuthToken = Nothing
     , _cpRowCount = pCpRowCount_
     , _cpFields = Nothing
@@ -192,6 +193,11 @@ cpEndDate :: Lens' ConversionPatch' Int32
 cpEndDate
   = lens _cpEndDate (\ s a -> s{_cpEndDate = a})
 
+-- | Multipart request metadata.
+cpPayload :: Lens' ConversionPatch' ConversionList
+cpPayload
+  = lens _cpPayload (\ s a -> s{_cpPayload = a})
+
 -- | First date (inclusive) on which to retrieve conversions. Format is
 -- yyyymmdd.
 cpStartDate :: Lens' ConversionPatch' Int32
@@ -208,12 +214,6 @@ cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
 cpStartRow :: Lens' ConversionPatch' Word32
 cpStartRow
   = lens _cpStartRow (\ s a -> s{_cpStartRow = a})
-
--- | Multipart request metadata.
-cpConversionList :: Lens' ConversionPatch' ConversionList
-cpConversionList
-  = lens _cpConversionList
-      (\ s a -> s{_cpConversionList = a})
 
 -- | OAuth 2.0 token for the current user.
 cpOAuthToken :: Lens' ConversionPatch' (Maybe OAuthToken)
@@ -251,7 +251,7 @@ instance GoogleRequest ConversionPatch' where
               _cpKey
               _cpOAuthToken
               (Just AltJSON)
-              _cpConversionList
+              _cpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ConversionPatchResource)

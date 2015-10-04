@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,10 +55,10 @@ type ChangesListResource =
        "managedZones" :>
          Capture "managedZone" Text :>
            "changes" :>
-             QueryParam "maxResults" Int32 :>
+             QueryParam "sortOrder" Text :>
                QueryParam "pageToken" Text :>
-                 QueryParam "sortBy" DNSChangesListSortBy :>
-                   QueryParam "sortOrder" Text :>
+                 QueryParam "maxResults" Int32 :>
+                   QueryParam "sortBy" SortBy :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -82,8 +83,8 @@ data ChangesList' = ChangesList'
     , _clManagedZone :: !Text
     , _clMaxResults  :: !(Maybe Int32)
     , _clFields      :: !(Maybe Text)
-    , _clSortBy      :: !DNSChangesListSortBy
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _clSortBy      :: !SortBy
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesList'' with the minimum fields required to make a request.
 --
@@ -195,7 +196,7 @@ clFields :: Lens' ChangesList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
 -- | Sorting criterion. The only supported value is change sequence.
-clSortBy :: Lens' ChangesList' DNSChangesListSortBy
+clSortBy :: Lens' ChangesList' SortBy
 clSortBy = lens _clSortBy (\ s a -> s{_clSortBy = a})
 
 instance GoogleAuth ChangesList' where
@@ -206,10 +207,10 @@ instance GoogleRequest ChangesList' where
         type Rs ChangesList' = ChangesListResponse
         request = requestWithRoute defReq dNSURL
         requestWithRoute r u ChangesList'{..}
-          = go _clMaxResults _clPageToken (Just _clSortBy)
-              _clSortOrder
-              _clProject
-              _clManagedZone
+          = go _clProject _clManagedZone _clSortOrder
+              _clPageToken
+              _clMaxResults
+              (Just _clSortBy)
               _clQuotaUser
               (Just _clPrettyPrint)
               _clUserIP

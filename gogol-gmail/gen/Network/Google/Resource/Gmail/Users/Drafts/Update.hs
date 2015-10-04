@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,11 +34,11 @@ module Network.Google.Resource.Gmail.Users.Drafts.Update
     , uduQuotaUser
     , uduPrettyPrint
     , uduUserIP
+    , uduPayload
     , uduUserId
     , uduMedia
     , uduKey
     , uduId
-    , uduDraft
     , uduOAuthToken
     , uduFields
     ) where
@@ -68,14 +69,14 @@ data UsersDraftsUpdate' = UsersDraftsUpdate'
     { _uduQuotaUser   :: !(Maybe Text)
     , _uduPrettyPrint :: !Bool
     , _uduUserIP      :: !(Maybe Text)
+    , _uduPayload     :: !Draft
     , _uduUserId      :: !Text
     , _uduMedia       :: !Body
     , _uduKey         :: !(Maybe Key)
     , _uduId          :: !Text
-    , _uduDraft       :: !Draft
     , _uduOAuthToken  :: !(Maybe OAuthToken)
     , _uduFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsUpdate'' with the minimum fields required to make a request.
 --
@@ -87,6 +88,8 @@ data UsersDraftsUpdate' = UsersDraftsUpdate'
 --
 -- * 'uduUserIP'
 --
+-- * 'uduPayload'
+--
 -- * 'uduUserId'
 --
 -- * 'uduMedia'
@@ -95,27 +98,25 @@ data UsersDraftsUpdate' = UsersDraftsUpdate'
 --
 -- * 'uduId'
 --
--- * 'uduDraft'
---
 -- * 'uduOAuthToken'
 --
 -- * 'uduFields'
 usersDraftsUpdate'
-    :: Text -- ^ 'media'
+    :: Draft -- ^ 'payload'
+    -> Text -- ^ 'media'
     -> Body -- ^ 'id'
-    -> Text -- ^ 'Draft'
-    -> Draft
+    -> Text
     -> UsersDraftsUpdate'
-usersDraftsUpdate' pUduUserId_ pUduMedia_ pUduId_ pUduDraft_ =
+usersDraftsUpdate' pUduPayload_ pUduUserId_ pUduMedia_ pUduId_ =
     UsersDraftsUpdate'
     { _uduQuotaUser = Nothing
     , _uduPrettyPrint = True
     , _uduUserIP = Nothing
+    , _uduPayload = pUduPayload_
     , _uduUserId = pUduUserId_
     , _uduMedia = pUduMedia_
     , _uduKey = Nothing
     , _uduId = pUduId_
-    , _uduDraft = pUduDraft_
     , _uduOAuthToken = Nothing
     , _uduFields = Nothing
     }
@@ -139,6 +140,11 @@ uduUserIP :: Lens' UsersDraftsUpdate' (Maybe Text)
 uduUserIP
   = lens _uduUserIP (\ s a -> s{_uduUserIP = a})
 
+-- | Multipart request metadata.
+uduPayload :: Lens' UsersDraftsUpdate' Draft
+uduPayload
+  = lens _uduPayload (\ s a -> s{_uduPayload = a})
+
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
 uduUserId :: Lens' UsersDraftsUpdate' Text
@@ -157,10 +163,6 @@ uduKey = lens _uduKey (\ s a -> s{_uduKey = a})
 -- | The ID of the draft to update.
 uduId :: Lens' UsersDraftsUpdate' Text
 uduId = lens _uduId (\ s a -> s{_uduId = a})
-
--- | Multipart request metadata.
-uduDraft :: Lens' UsersDraftsUpdate' Draft
-uduDraft = lens _uduDraft (\ s a -> s{_uduDraft = a})
 
 -- | OAuth 2.0 token for the current user.
 uduOAuthToken :: Lens' UsersDraftsUpdate' (Maybe OAuthToken)
@@ -181,14 +183,15 @@ instance GoogleRequest UsersDraftsUpdate' where
         type Rs UsersDraftsUpdate' = Draft
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersDraftsUpdate'{..}
-          = go _uduMedia _uduUserId _uduId _uduQuotaUser
+          = go _uduUserId _uduId _uduQuotaUser
               (Just _uduPrettyPrint)
               _uduUserIP
               _uduFields
               _uduKey
               _uduOAuthToken
               (Just AltJSON)
-              _uduDraft
+              _uduPayload
+              _uduMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDraftsUpdateResource)

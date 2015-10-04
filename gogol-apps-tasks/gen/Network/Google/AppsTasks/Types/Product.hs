@@ -25,7 +25,7 @@ data Tasks = Tasks
     , _tNextPageToken :: !(Maybe Text)
     , _tKind          :: !Text
     , _tItems         :: !(Maybe [Task])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Tasks' with the minimum fields required to make a request.
 --
@@ -86,68 +86,13 @@ instance ToJSON Tasks where
                   Just ("kind" .= _tKind), ("items" .=) <$> _tItems])
 
 --
--- /See:/ 'taskLinks' smart constructor.
-data TaskLinks = TaskLinks
-    { _tlLink        :: !(Maybe Text)
-    , _tlType        :: !(Maybe Text)
-    , _tlDescription :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TaskLinks' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tlLink'
---
--- * 'tlType'
---
--- * 'tlDescription'
-taskLinks
-    :: TaskLinks
-taskLinks =
-    TaskLinks
-    { _tlLink = Nothing
-    , _tlType = Nothing
-    , _tlDescription = Nothing
-    }
-
--- | The URL.
-tlLink :: Lens' TaskLinks (Maybe Text)
-tlLink = lens _tlLink (\ s a -> s{_tlLink = a})
-
--- | Type of the link, e.g. \"email\".
-tlType :: Lens' TaskLinks (Maybe Text)
-tlType = lens _tlType (\ s a -> s{_tlType = a})
-
--- | The description. In HTML speak: Everything between and .
-tlDescription :: Lens' TaskLinks (Maybe Text)
-tlDescription
-  = lens _tlDescription
-      (\ s a -> s{_tlDescription = a})
-
-instance FromJSON TaskLinks where
-        parseJSON
-          = withObject "TaskLinks"
-              (\ o ->
-                 TaskLinks <$>
-                   (o .:? "link") <*> (o .:? "type") <*>
-                     (o .:? "description"))
-
-instance ToJSON TaskLinks where
-        toJSON TaskLinks{..}
-          = object
-              (catMaybes
-                 [("link" .=) <$> _tlLink, ("type" .=) <$> _tlType,
-                  ("description" .=) <$> _tlDescription])
-
---
 -- /See:/ 'taskLists' smart constructor.
 data TaskLists = TaskLists
     { _tlEtag          :: !(Maybe Text)
     , _tlNextPageToken :: !(Maybe Text)
     , _tlKind          :: !Text
     , _tlItems         :: !(Maybe [TaskList])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskLists' with the minimum fields required to make a request.
 --
@@ -216,7 +161,7 @@ data TaskList = TaskList
     , _tasId       :: !(Maybe Text)
     , _tasUpdated  :: !(Maybe DateTime')
     , _tasTitle    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskList' with the minimum fields required to make a request.
 --
@@ -309,10 +254,10 @@ data Task = Task
     , _ttDeleted   :: !(Maybe Bool)
     , _ttUpdated   :: !(Maybe DateTime')
     , _ttTitle     :: !(Maybe Text)
-    , _ttLinks     :: !(Maybe [TaskLinks])
+    , _ttLinks     :: !(Maybe [LinksItem])
     , _ttNotes     :: !(Maybe Text)
     , _ttPosition  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Task' with the minimum fields required to make a request.
 --
@@ -431,7 +376,7 @@ ttTitle :: Lens' Task (Maybe Text)
 ttTitle = lens _ttTitle (\ s a -> s{_ttTitle = a})
 
 -- | Collection of links. This collection is read-only.
-ttLinks :: Lens' Task [TaskLinks]
+ttLinks :: Lens' Task [LinksItem]
 ttLinks
   = lens _ttLinks (\ s a -> s{_ttLinks = a}) . _Default
       . _Coerce
@@ -485,3 +430,58 @@ instance ToJSON Task where
                   ("title" .=) <$> _ttTitle, ("links" .=) <$> _ttLinks,
                   ("notes" .=) <$> _ttNotes,
                   ("position" .=) <$> _ttPosition])
+
+--
+-- /See:/ 'linksItem' smart constructor.
+data LinksItem = LinksItem
+    { _liLink        :: !(Maybe Text)
+    , _liType        :: !(Maybe Text)
+    , _liDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LinksItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'liLink'
+--
+-- * 'liType'
+--
+-- * 'liDescription'
+linksItem
+    :: LinksItem
+linksItem =
+    LinksItem
+    { _liLink = Nothing
+    , _liType = Nothing
+    , _liDescription = Nothing
+    }
+
+-- | The URL.
+liLink :: Lens' LinksItem (Maybe Text)
+liLink = lens _liLink (\ s a -> s{_liLink = a})
+
+-- | Type of the link, e.g. \"email\".
+liType :: Lens' LinksItem (Maybe Text)
+liType = lens _liType (\ s a -> s{_liType = a})
+
+-- | The description. In HTML speak: Everything between and .
+liDescription :: Lens' LinksItem (Maybe Text)
+liDescription
+  = lens _liDescription
+      (\ s a -> s{_liDescription = a})
+
+instance FromJSON LinksItem where
+        parseJSON
+          = withObject "LinksItem"
+              (\ o ->
+                 LinksItem <$>
+                   (o .:? "link") <*> (o .:? "type") <*>
+                     (o .:? "description"))
+
+instance ToJSON LinksItem where
+        toJSON LinksItem{..}
+          = object
+              (catMaybes
+                 [("link" .=) <$> _liLink, ("type" .=) <$> _liType,
+                  ("description" .=) <$> _liDescription])

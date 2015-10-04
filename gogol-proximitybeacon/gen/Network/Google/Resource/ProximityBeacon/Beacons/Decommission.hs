@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,14 +56,14 @@ import           Network.Google.ProximityBeacon.Types
 -- 'BeaconsDecommission'' request conforms to.
 type BeaconsDecommissionResource =
      "v1beta1" :>
-       "{+beaconName}:decommission" :>
+       CaptureMode "beaconName" "decommission" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -90,7 +91,7 @@ data BeaconsDecommission' = BeaconsDecommission'
     , _bdOAuthToken     :: !(Maybe OAuthToken)
     , _bdFields         :: !(Maybe Text)
     , _bdCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsDecommission'' with the minimum fields required to make a request.
 --
@@ -218,12 +219,12 @@ instance GoogleRequest BeaconsDecommission' where
         type Rs BeaconsDecommission' = Empty
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u BeaconsDecommission'{..}
-          = go _bdXgafv _bdAccessToken _bdBearerToken
-              _bdCallback
+          = go _bdBeaconName _bdXgafv _bdUploadProtocol
               (Just _bdPp)
+              _bdAccessToken
               _bdUploadType
-              _bdUploadProtocol
-              _bdBeaconName
+              _bdBearerToken
+              _bdCallback
               _bdQuotaUser
               (Just _bdPrettyPrint)
               _bdFields

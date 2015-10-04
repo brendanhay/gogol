@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -64,7 +65,7 @@ data MetagameGetMetagameConfig' = MetagameGetMetagameConfig'
     , _mgmcKey         :: !(Maybe Key)
     , _mgmcOAuthToken  :: !(Maybe OAuthToken)
     , _mgmcFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetagameGetMetagameConfig'' with the minimum fields required to make a request.
 --

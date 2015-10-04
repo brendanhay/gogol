@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Games.Rooms.Create
     , rooQuotaUser
     , rooPrettyPrint
     , rooUserIP
+    , rooPayload
     , rooKey
-    , rooRoomCreateRequest
     , rooLanguage
     , rooOAuthToken
     , rooFields
@@ -65,15 +66,15 @@ type RoomsCreateResource =
 --
 -- /See:/ 'roomsCreate'' smart constructor.
 data RoomsCreate' = RoomsCreate'
-    { _rooQuotaUser         :: !(Maybe Text)
-    , _rooPrettyPrint       :: !Bool
-    , _rooUserIP            :: !(Maybe Text)
-    , _rooKey               :: !(Maybe Key)
-    , _rooRoomCreateRequest :: !RoomCreateRequest
-    , _rooLanguage          :: !(Maybe Text)
-    , _rooOAuthToken        :: !(Maybe OAuthToken)
-    , _rooFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rooQuotaUser   :: !(Maybe Text)
+    , _rooPrettyPrint :: !Bool
+    , _rooUserIP      :: !(Maybe Text)
+    , _rooPayload     :: !RoomCreateRequest
+    , _rooKey         :: !(Maybe Key)
+    , _rooLanguage    :: !(Maybe Text)
+    , _rooOAuthToken  :: !(Maybe OAuthToken)
+    , _rooFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsCreate'' with the minimum fields required to make a request.
 --
@@ -85,9 +86,9 @@ data RoomsCreate' = RoomsCreate'
 --
 -- * 'rooUserIP'
 --
--- * 'rooKey'
+-- * 'rooPayload'
 --
--- * 'rooRoomCreateRequest'
+-- * 'rooKey'
 --
 -- * 'rooLanguage'
 --
@@ -95,15 +96,15 @@ data RoomsCreate' = RoomsCreate'
 --
 -- * 'rooFields'
 roomsCreate'
-    :: RoomCreateRequest -- ^ 'RoomCreateRequest'
+    :: RoomCreateRequest -- ^ 'payload'
     -> RoomsCreate'
-roomsCreate' pRooRoomCreateRequest_ =
+roomsCreate' pRooPayload_ =
     RoomsCreate'
     { _rooQuotaUser = Nothing
     , _rooPrettyPrint = True
     , _rooUserIP = Nothing
+    , _rooPayload = pRooPayload_
     , _rooKey = Nothing
-    , _rooRoomCreateRequest = pRooRoomCreateRequest_
     , _rooLanguage = Nothing
     , _rooOAuthToken = Nothing
     , _rooFields = Nothing
@@ -128,17 +129,16 @@ rooUserIP :: Lens' RoomsCreate' (Maybe Text)
 rooUserIP
   = lens _rooUserIP (\ s a -> s{_rooUserIP = a})
 
+-- | Multipart request metadata.
+rooPayload :: Lens' RoomsCreate' RoomCreateRequest
+rooPayload
+  = lens _rooPayload (\ s a -> s{_rooPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 rooKey :: Lens' RoomsCreate' (Maybe Key)
 rooKey = lens _rooKey (\ s a -> s{_rooKey = a})
-
--- | Multipart request metadata.
-rooRoomCreateRequest :: Lens' RoomsCreate' RoomCreateRequest
-rooRoomCreateRequest
-  = lens _rooRoomCreateRequest
-      (\ s a -> s{_rooRoomCreateRequest = a})
 
 -- | The preferred language to use for strings returned by this method.
 rooLanguage :: Lens' RoomsCreate' (Maybe Text)
@@ -171,7 +171,7 @@ instance GoogleRequest RoomsCreate' where
               _rooKey
               _rooOAuthToken
               (Just AltJSON)
-              _rooRoomCreateRequest
+              _rooPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RoomsCreateResource)

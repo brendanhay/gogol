@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Upda
     , acuPrettyPrint
     , acuAchievementId
     , acuUserIP
+    , acuPayload
     , acuKey
-    , acuAchievementConfiguration
     , acuOAuthToken
     , acuFields
     ) where
@@ -62,15 +63,15 @@ type AchievementConfigurationsUpdateResource =
 --
 -- /See:/ 'achievementConfigurationsUpdate'' smart constructor.
 data AchievementConfigurationsUpdate' = AchievementConfigurationsUpdate'
-    { _acuQuotaUser                :: !(Maybe Text)
-    , _acuPrettyPrint              :: !Bool
-    , _acuAchievementId            :: !Text
-    , _acuUserIP                   :: !(Maybe Text)
-    , _acuKey                      :: !(Maybe Key)
-    , _acuAchievementConfiguration :: !AchievementConfiguration
-    , _acuOAuthToken               :: !(Maybe OAuthToken)
-    , _acuFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _acuQuotaUser     :: !(Maybe Text)
+    , _acuPrettyPrint   :: !Bool
+    , _acuAchievementId :: !Text
+    , _acuUserIP        :: !(Maybe Text)
+    , _acuPayload       :: !AchievementConfiguration
+    , _acuKey           :: !(Maybe Key)
+    , _acuOAuthToken    :: !(Maybe OAuthToken)
+    , _acuFields        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationsUpdate'' with the minimum fields required to make a request.
 --
@@ -84,25 +85,25 @@ data AchievementConfigurationsUpdate' = AchievementConfigurationsUpdate'
 --
 -- * 'acuUserIP'
 --
--- * 'acuKey'
+-- * 'acuPayload'
 --
--- * 'acuAchievementConfiguration'
+-- * 'acuKey'
 --
 -- * 'acuOAuthToken'
 --
 -- * 'acuFields'
 achievementConfigurationsUpdate'
     :: Text -- ^ 'achievementId'
-    -> AchievementConfiguration -- ^ 'AchievementConfiguration'
+    -> AchievementConfiguration -- ^ 'payload'
     -> AchievementConfigurationsUpdate'
-achievementConfigurationsUpdate' pAcuAchievementId_ pAcuAchievementConfiguration_ =
+achievementConfigurationsUpdate' pAcuAchievementId_ pAcuPayload_ =
     AchievementConfigurationsUpdate'
     { _acuQuotaUser = Nothing
     , _acuPrettyPrint = True
     , _acuAchievementId = pAcuAchievementId_
     , _acuUserIP = Nothing
+    , _acuPayload = pAcuPayload_
     , _acuKey = Nothing
-    , _acuAchievementConfiguration = pAcuAchievementConfiguration_
     , _acuOAuthToken = Nothing
     , _acuFields = Nothing
     }
@@ -132,17 +133,16 @@ acuUserIP :: Lens' AchievementConfigurationsUpdate' (Maybe Text)
 acuUserIP
   = lens _acuUserIP (\ s a -> s{_acuUserIP = a})
 
+-- | Multipart request metadata.
+acuPayload :: Lens' AchievementConfigurationsUpdate' AchievementConfiguration
+acuPayload
+  = lens _acuPayload (\ s a -> s{_acuPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 acuKey :: Lens' AchievementConfigurationsUpdate' (Maybe Key)
 acuKey = lens _acuKey (\ s a -> s{_acuKey = a})
-
--- | Multipart request metadata.
-acuAchievementConfiguration :: Lens' AchievementConfigurationsUpdate' AchievementConfiguration
-acuAchievementConfiguration
-  = lens _acuAchievementConfiguration
-      (\ s a -> s{_acuAchievementConfiguration = a})
 
 -- | OAuth 2.0 token for the current user.
 acuOAuthToken :: Lens' AchievementConfigurationsUpdate' (Maybe OAuthToken)
@@ -175,7 +175,7 @@ instance GoogleRequest
               _acuKey
               _acuOAuthToken
               (Just AltJSON)
-              _acuAchievementConfiguration
+              _acuPayload
           where go
                   = clientWithRoute
                       (Proxy ::

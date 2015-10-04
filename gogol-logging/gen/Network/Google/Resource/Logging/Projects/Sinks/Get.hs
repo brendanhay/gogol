@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,12 +59,12 @@ type ProjectsSinksGetResource =
            "sinks" :>
              Capture "sinksId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "callback" Text :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
@@ -90,7 +91,7 @@ data ProjectsSinksGet' = ProjectsSinksGet'
     , _psgSinksId        :: !Text
     , _psgFields         :: !(Maybe Text)
     , _psgCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSinksGet'' with the minimum fields required to make a request.
 --
@@ -231,13 +232,13 @@ instance GoogleRequest ProjectsSinksGet' where
         type Rs ProjectsSinksGet' = LogSink
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u ProjectsSinksGet'{..}
-          = go _psgXgafv _psgAccessToken _psgBearerToken
-              _psgCallback
-              (Just _psgPp)
-              _psgUploadType
+          = go _psgProjectsId _psgSinksId _psgXgafv
               _psgUploadProtocol
-              _psgProjectsId
-              _psgSinksId
+              (Just _psgPp)
+              _psgAccessToken
+              _psgUploadType
+              _psgBearerToken
+              _psgCallback
               _psgQuotaUser
               (Just _psgPrettyPrint)
               _psgFields

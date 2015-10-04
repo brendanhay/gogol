@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -56,14 +57,14 @@ type DebuggerDebuggeesListResource =
        "debugger" :>
          "debuggees" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "includeInactive" Bool :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "project" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
+             QueryParam "includeInactive" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "project" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "callback" Text :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
@@ -90,7 +91,7 @@ data DebuggerDebuggeesList' = DebuggerDebuggeesList'
     , _ddlOAuthToken      :: !(Maybe OAuthToken)
     , _ddlFields          :: !(Maybe Text)
     , _ddlCallback        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DebuggerDebuggeesList'' with the minimum fields required to make a request.
 --
@@ -232,13 +233,13 @@ instance GoogleRequest DebuggerDebuggeesList' where
              ListDebuggeesResponse
         request = requestWithRoute defReq debuggerURL
         requestWithRoute r u DebuggerDebuggeesList'{..}
-          = go _ddlXgafv _ddlAccessToken _ddlBearerToken
-              _ddlCallback
-              _ddlIncludeInactive
-              (Just _ddlPp)
+          = go _ddlXgafv _ddlIncludeInactive _ddlUploadProtocol
               _ddlProject
+              (Just _ddlPp)
+              _ddlAccessToken
               _ddlUploadType
-              _ddlUploadProtocol
+              _ddlBearerToken
+              _ddlCallback
               _ddlQuotaUser
               (Just _ddlPrettyPrint)
               _ddlFields

@@ -93,6 +93,9 @@ module Network.Google.MapsCoordinate
     , lLat
     , lLng
 
+    -- ** Progress
+    , Progress (..)
+
     -- ** Schedule
     , Schedule
     , schedule
@@ -175,9 +178,6 @@ module Network.Google.MapsCoordinate
     , tKind
     , tName
     , tId
-
-    -- ** CoordinateJobsPatchProgress
-    , CoordinateJobsPatchProgress (..)
 
     -- ** LocationRecord
     , LocationRecord

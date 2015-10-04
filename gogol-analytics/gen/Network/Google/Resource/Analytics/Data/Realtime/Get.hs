@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,12 +53,12 @@ import           Network.Google.Prelude
 type DataRealtimeGetResource =
      "data" :>
        "realtime" :>
-         QueryParam "dimensions" Text :>
-           QueryParam "filters" Text :>
-             QueryParam "max-results" Int32 :>
+         QueryParam "ids" Text :>
+           QueryParam "metrics" Text :>
+             QueryParam "filters" Text :>
                QueryParam "sort" Text :>
-                 QueryParam "ids" Text :>
-                   QueryParam "metrics" Text :>
+                 QueryParam "dimensions" Text :>
+                   QueryParam "max-results" Int32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -83,7 +84,7 @@ data DataRealtimeGet' = DataRealtimeGet'
     , _drgOAuthToken  :: !(Maybe OAuthToken)
     , _drgMaxResults  :: !(Maybe Int32)
     , _drgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataRealtimeGet'' with the minimum fields required to make a request.
 --
@@ -211,10 +212,10 @@ instance GoogleRequest DataRealtimeGet' where
         type Rs DataRealtimeGet' = RealtimeData
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u DataRealtimeGet'{..}
-          = go _drgDimensions _drgFilters _drgMaxResults
+          = go (Just _drgIds) (Just _drgMetrics) _drgFilters
               _drgSort
-              (Just _drgIds)
-              (Just _drgMetrics)
+              _drgDimensions
+              _drgMaxResults
               _drgQuotaUser
               (Just _drgPrettyPrint)
               _drgUserIP

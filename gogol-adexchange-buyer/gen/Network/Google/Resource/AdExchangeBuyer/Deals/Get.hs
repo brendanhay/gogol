@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.AdExchangeBuyer.Deals.Get
     -- * Request Lenses
     , dgQuotaUser
     , dgPrettyPrint
-    , dgGetFinalizedNegotiationByExternalDealIdRequest
     , dgUserIP
+    , dgPayload
     , dgDealId
     , dgKey
     , dgOAuthToken
@@ -63,15 +64,15 @@ type DealsGetResource =
 --
 -- /See:/ 'dealsGet'' smart constructor.
 data DealsGet' = DealsGet'
-    { _dgQuotaUser                                      :: !(Maybe Text)
-    , _dgPrettyPrint                                    :: !Bool
-    , _dgGetFinalizedNegotiationByExternalDealIdRequest :: !GetFinalizedNegotiationByExternalDealIdRequest
-    , _dgUserIP                                         :: !(Maybe Text)
-    , _dgDealId                                         :: !Int64
-    , _dgKey                                            :: !(Maybe Key)
-    , _dgOAuthToken                                     :: !(Maybe OAuthToken)
-    , _dgFields                                         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _dgQuotaUser   :: !(Maybe Text)
+    , _dgPrettyPrint :: !Bool
+    , _dgUserIP      :: !(Maybe Text)
+    , _dgPayload     :: !GetFinalizedNegotiationByExternalDealIdRequest
+    , _dgDealId      :: !Int64
+    , _dgKey         :: !(Maybe Key)
+    , _dgOAuthToken  :: !(Maybe OAuthToken)
+    , _dgFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DealsGet'' with the minimum fields required to make a request.
 --
@@ -81,9 +82,9 @@ data DealsGet' = DealsGet'
 --
 -- * 'dgPrettyPrint'
 --
--- * 'dgGetFinalizedNegotiationByExternalDealIdRequest'
---
 -- * 'dgUserIP'
+--
+-- * 'dgPayload'
 --
 -- * 'dgDealId'
 --
@@ -93,15 +94,15 @@ data DealsGet' = DealsGet'
 --
 -- * 'dgFields'
 dealsGet'
-    :: GetFinalizedNegotiationByExternalDealIdRequest -- ^ 'GetFinalizedNegotiationByExternalDealIdRequest'
+    :: GetFinalizedNegotiationByExternalDealIdRequest -- ^ 'payload'
     -> Int64 -- ^ 'dealId'
     -> DealsGet'
-dealsGet' pDgGetFinalizedNegotiationByExternalDealIdRequest_ pDgDealId_ =
+dealsGet' pDgPayload_ pDgDealId_ =
     DealsGet'
     { _dgQuotaUser = Nothing
     , _dgPrettyPrint = True
-    , _dgGetFinalizedNegotiationByExternalDealIdRequest = pDgGetFinalizedNegotiationByExternalDealIdRequest_
     , _dgUserIP = Nothing
+    , _dgPayload = pDgPayload_
     , _dgDealId = pDgDealId_
     , _dgKey = Nothing
     , _dgOAuthToken = Nothing
@@ -121,19 +122,15 @@ dgPrettyPrint
   = lens _dgPrettyPrint
       (\ s a -> s{_dgPrettyPrint = a})
 
--- | Multipart request metadata.
-dgGetFinalizedNegotiationByExternalDealIdRequest :: Lens' DealsGet' GetFinalizedNegotiationByExternalDealIdRequest
-dgGetFinalizedNegotiationByExternalDealIdRequest
-  = lens
-      _dgGetFinalizedNegotiationByExternalDealIdRequest
-      (\ s a ->
-         s{_dgGetFinalizedNegotiationByExternalDealIdRequest =
-             a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 dgUserIP :: Lens' DealsGet' (Maybe Text)
 dgUserIP = lens _dgUserIP (\ s a -> s{_dgUserIP = a})
+
+-- | Multipart request metadata.
+dgPayload :: Lens' DealsGet' GetFinalizedNegotiationByExternalDealIdRequest
+dgPayload
+  = lens _dgPayload (\ s a -> s{_dgPayload = a})
 
 dgDealId :: Lens' DealsGet' Int64
 dgDealId = lens _dgDealId (\ s a -> s{_dgDealId = a})
@@ -167,7 +164,7 @@ instance GoogleRequest DealsGet' where
               _dgKey
               _dgOAuthToken
               (Just AltJSON)
-              _dgGetFinalizedNegotiationByExternalDealIdRequest
+              _dgPayload
           where go
                   = clientWithRoute (Proxy :: Proxy DealsGetResource) r
                       u

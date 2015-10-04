@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,11 +53,11 @@ import           Network.Google.Prelude
 type UsersMessagesListResource =
      Capture "userId" Text :>
        "messages" :>
-         QueryParam "includeSpamTrash" Bool :>
-           QueryParams "labelIds" Text :>
-             QueryParam "maxResults" Word32 :>
+         QueryParam "q" Text :>
+           QueryParam "includeSpamTrash" Bool :>
+             QueryParams "labelIds" Text :>
                QueryParam "pageToken" Text :>
-                 QueryParam "q" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -77,12 +78,12 @@ data UsersMessagesList' = UsersMessagesList'
     , _umlUserId           :: !Text
     , _umlKey              :: !(Maybe Key)
     , _umlIncludeSpamTrash :: !Bool
-    , _umlLabelIds         :: !(Maybe Text)
+    , _umlLabelIds         :: !(Maybe [Text])
     , _umlPageToken        :: !(Maybe Text)
     , _umlOAuthToken       :: !(Maybe OAuthToken)
     , _umlMaxResults       :: !Word32
     , _umlFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesList'' with the minimum fields required to make a request.
 --
@@ -175,9 +176,11 @@ umlIncludeSpamTrash
 
 -- | Only return messages with labels that match all of the specified label
 -- IDs.
-umlLabelIds :: Lens' UsersMessagesList' (Maybe Text)
+umlLabelIds :: Lens' UsersMessagesList' [Text]
 umlLabelIds
-  = lens _umlLabelIds (\ s a -> s{_umlLabelIds = a})
+  = lens _umlLabelIds (\ s a -> s{_umlLabelIds = a}) .
+      _Default
+      . _Coerce
 
 -- | Page token to retrieve a specific page of results in the list.
 umlPageToken :: Lens' UsersMessagesList' (Maybe Text)
@@ -209,11 +212,10 @@ instance GoogleRequest UsersMessagesList' where
         type Rs UsersMessagesList' = ListMessagesResponse
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesList'{..}
-          = go (Just _umlIncludeSpamTrash) _umlLabelIds
-              (Just _umlMaxResults)
+          = go _umlUserId _umlQ (Just _umlIncludeSpamTrash)
+              (_umlLabelIds ^. _Default)
               _umlPageToken
-              _umlQ
-              _umlUserId
+              (Just _umlMaxResults)
               _umlQuotaUser
               (Just _umlPrettyPrint)
               _umlUserIP

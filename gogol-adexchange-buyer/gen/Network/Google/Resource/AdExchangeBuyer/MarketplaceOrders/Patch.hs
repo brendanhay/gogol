@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,11 +36,11 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Patch
     , mopPrettyPrint
     , mopUserIP
     , mopRevisionNumber
+    , mopPayload
     , mopKey
     , mopOAuthToken
     , mopOrderId
     , mopFields
-    , mopMarketplaceOrder
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -51,9 +52,7 @@ type MarketplaceOrdersPatchResource =
      "marketplaceOrders" :>
        Capture "orderId" Text :>
          Capture "revisionNumber" Int64 :>
-           Capture "updateAction"
-             AdexchangebuyerMarketplaceOrdersPatchUpdateAction
-             :>
+           Capture "updateAction" UpdateAction :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -68,17 +67,17 @@ type MarketplaceOrdersPatchResource =
 --
 -- /See:/ 'marketplaceOrdersPatch'' smart constructor.
 data MarketplaceOrdersPatch' = MarketplaceOrdersPatch'
-    { _mopQuotaUser        :: !(Maybe Text)
-    , _mopUpdateAction     :: !AdexchangebuyerMarketplaceOrdersPatchUpdateAction
-    , _mopPrettyPrint      :: !Bool
-    , _mopUserIP           :: !(Maybe Text)
-    , _mopRevisionNumber   :: !Int64
-    , _mopKey              :: !(Maybe Key)
-    , _mopOAuthToken       :: !(Maybe OAuthToken)
-    , _mopOrderId          :: !Text
-    , _mopFields           :: !(Maybe Text)
-    , _mopMarketplaceOrder :: !MarketplaceOrder
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mopQuotaUser      :: !(Maybe Text)
+    , _mopUpdateAction   :: !UpdateAction
+    , _mopPrettyPrint    :: !Bool
+    , _mopUserIP         :: !(Maybe Text)
+    , _mopRevisionNumber :: !Int64
+    , _mopPayload        :: !MarketplaceOrder
+    , _mopKey            :: !(Maybe Key)
+    , _mopOAuthToken     :: !(Maybe OAuthToken)
+    , _mopOrderId        :: !Text
+    , _mopFields         :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceOrdersPatch'' with the minimum fields required to make a request.
 --
@@ -94,6 +93,8 @@ data MarketplaceOrdersPatch' = MarketplaceOrdersPatch'
 --
 -- * 'mopRevisionNumber'
 --
+-- * 'mopPayload'
+--
 -- * 'mopKey'
 --
 -- * 'mopOAuthToken'
@@ -101,26 +102,24 @@ data MarketplaceOrdersPatch' = MarketplaceOrdersPatch'
 -- * 'mopOrderId'
 --
 -- * 'mopFields'
---
--- * 'mopMarketplaceOrder'
 marketplaceOrdersPatch'
-    :: AdexchangebuyerMarketplaceOrdersPatchUpdateAction -- ^ 'updateAction'
+    :: UpdateAction -- ^ 'updateAction'
     -> Int64 -- ^ 'revisionNumber'
+    -> MarketplaceOrder -- ^ 'payload'
     -> Text -- ^ 'orderId'
-    -> MarketplaceOrder -- ^ 'MarketplaceOrder'
     -> MarketplaceOrdersPatch'
-marketplaceOrdersPatch' pMopUpdateAction_ pMopRevisionNumber_ pMopOrderId_ pMopMarketplaceOrder_ =
+marketplaceOrdersPatch' pMopUpdateAction_ pMopRevisionNumber_ pMopPayload_ pMopOrderId_ =
     MarketplaceOrdersPatch'
     { _mopQuotaUser = Nothing
     , _mopUpdateAction = pMopUpdateAction_
     , _mopPrettyPrint = True
     , _mopUserIP = Nothing
     , _mopRevisionNumber = pMopRevisionNumber_
+    , _mopPayload = pMopPayload_
     , _mopKey = Nothing
     , _mopOAuthToken = Nothing
     , _mopOrderId = pMopOrderId_
     , _mopFields = Nothing
-    , _mopMarketplaceOrder = pMopMarketplaceOrder_
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,7 +130,7 @@ mopQuotaUser
   = lens _mopQuotaUser (\ s a -> s{_mopQuotaUser = a})
 
 -- | The proposed action to take on the order.
-mopUpdateAction :: Lens' MarketplaceOrdersPatch' AdexchangebuyerMarketplaceOrdersPatchUpdateAction
+mopUpdateAction :: Lens' MarketplaceOrdersPatch' UpdateAction
 mopUpdateAction
   = lens _mopUpdateAction
       (\ s a -> s{_mopUpdateAction = a})
@@ -157,6 +156,11 @@ mopRevisionNumber
   = lens _mopRevisionNumber
       (\ s a -> s{_mopRevisionNumber = a})
 
+-- | Multipart request metadata.
+mopPayload :: Lens' MarketplaceOrdersPatch' MarketplaceOrder
+mopPayload
+  = lens _mopPayload (\ s a -> s{_mopPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -179,12 +183,6 @@ mopFields :: Lens' MarketplaceOrdersPatch' (Maybe Text)
 mopFields
   = lens _mopFields (\ s a -> s{_mopFields = a})
 
--- | Multipart request metadata.
-mopMarketplaceOrder :: Lens' MarketplaceOrdersPatch' MarketplaceOrder
-mopMarketplaceOrder
-  = lens _mopMarketplaceOrder
-      (\ s a -> s{_mopMarketplaceOrder = a})
-
 instance GoogleAuth MarketplaceOrdersPatch' where
         authKey = mopKey . _Just
         authToken = mopOAuthToken . _Just
@@ -201,7 +199,7 @@ instance GoogleRequest MarketplaceOrdersPatch' where
               _mopKey
               _mopOAuthToken
               (Just AltJSON)
-              _mopMarketplaceOrder
+              _mopPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MarketplaceOrdersPatchResource)

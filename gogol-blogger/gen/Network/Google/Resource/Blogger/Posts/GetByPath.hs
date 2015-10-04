@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,9 +53,9 @@ type PostsGetByPathResource =
        Capture "blogId" Text :>
          "posts" :>
            "bypath" :>
-             QueryParam "maxComments" Word32 :>
-               QueryParam "view" BloggerPostsGetByPathView :>
-                 QueryParam "path" Text :>
+             QueryParam "path" Text :>
+               QueryParam "maxComments" Word32 :>
+                 QueryParam "view" BloggerPostsGetByPathView :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data PostsGetByPath' = PostsGetByPath'
     , _pgbpView        :: !(Maybe BloggerPostsGetByPathView)
     , _pgbpOAuthToken  :: !(Maybe OAuthToken)
     , _pgbpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsGetByPath'' with the minimum fields required to make a request.
 --
@@ -185,8 +186,8 @@ instance GoogleRequest PostsGetByPath' where
         type Rs PostsGetByPath' = Post
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsGetByPath'{..}
-          = go _pgbpMaxComments _pgbpView _pgbpBlogId
-              (Just _pgbpPath)
+          = go _pgbpBlogId (Just _pgbpPath) _pgbpMaxComments
+              _pgbpView
               _pgbpQuotaUser
               (Just _pgbpPrettyPrint)
               _pgbpUserIP

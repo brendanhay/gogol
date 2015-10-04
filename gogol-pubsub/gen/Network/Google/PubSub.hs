@@ -161,6 +161,10 @@ module Network.Google.PubSub
     , PubsubMessageAttributes
     , pubsubMessageAttributes
 
+    -- ** Attributes
+    , Attributes
+    , attributes
+
     -- ** TestIAMPermissionsRequest
     , TestIAMPermissionsRequest
     , testIAMPermissionsRequest
@@ -195,10 +199,6 @@ module Network.Google.PubSub
     , sTopic
     , sName
     , sAckDeadlineSeconds
-
-    -- ** PushConfigAttributes
-    , PushConfigAttributes
-    , pushConfigAttributes
 
     -- ** Binding
     , Binding

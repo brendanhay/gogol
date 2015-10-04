@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.Compute.InstanceTemplates.Insert
     , itiPrettyPrint
     , itiProject
     , itiUserIP
-    , itiInstanceTemplate
+    , itiPayload
     , itiKey
     , itiOAuthToken
     , itiFields
@@ -65,15 +66,15 @@ type InstanceTemplatesInsertResource =
 --
 -- /See:/ 'instanceTemplatesInsert'' smart constructor.
 data InstanceTemplatesInsert' = InstanceTemplatesInsert'
-    { _itiQuotaUser        :: !(Maybe Text)
-    , _itiPrettyPrint      :: !Bool
-    , _itiProject          :: !Text
-    , _itiUserIP           :: !(Maybe Text)
-    , _itiInstanceTemplate :: !InstanceTemplate
-    , _itiKey              :: !(Maybe Key)
-    , _itiOAuthToken       :: !(Maybe OAuthToken)
-    , _itiFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _itiQuotaUser   :: !(Maybe Text)
+    , _itiPrettyPrint :: !Bool
+    , _itiProject     :: !Text
+    , _itiUserIP      :: !(Maybe Text)
+    , _itiPayload     :: !InstanceTemplate
+    , _itiKey         :: !(Maybe Key)
+    , _itiOAuthToken  :: !(Maybe OAuthToken)
+    , _itiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceTemplatesInsert'' with the minimum fields required to make a request.
 --
@@ -87,7 +88,7 @@ data InstanceTemplatesInsert' = InstanceTemplatesInsert'
 --
 -- * 'itiUserIP'
 --
--- * 'itiInstanceTemplate'
+-- * 'itiPayload'
 --
 -- * 'itiKey'
 --
@@ -96,15 +97,15 @@ data InstanceTemplatesInsert' = InstanceTemplatesInsert'
 -- * 'itiFields'
 instanceTemplatesInsert'
     :: Text -- ^ 'project'
-    -> InstanceTemplate -- ^ 'InstanceTemplate'
+    -> InstanceTemplate -- ^ 'payload'
     -> InstanceTemplatesInsert'
-instanceTemplatesInsert' pItiProject_ pItiInstanceTemplate_ =
+instanceTemplatesInsert' pItiProject_ pItiPayload_ =
     InstanceTemplatesInsert'
     { _itiQuotaUser = Nothing
     , _itiPrettyPrint = True
     , _itiProject = pItiProject_
     , _itiUserIP = Nothing
-    , _itiInstanceTemplate = pItiInstanceTemplate_
+    , _itiPayload = pItiPayload_
     , _itiKey = Nothing
     , _itiOAuthToken = Nothing
     , _itiFields = Nothing
@@ -135,10 +136,9 @@ itiUserIP
   = lens _itiUserIP (\ s a -> s{_itiUserIP = a})
 
 -- | Multipart request metadata.
-itiInstanceTemplate :: Lens' InstanceTemplatesInsert' InstanceTemplate
-itiInstanceTemplate
-  = lens _itiInstanceTemplate
-      (\ s a -> s{_itiInstanceTemplate = a})
+itiPayload :: Lens' InstanceTemplatesInsert' InstanceTemplate
+itiPayload
+  = lens _itiPayload (\ s a -> s{_itiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -171,7 +171,7 @@ instance GoogleRequest InstanceTemplatesInsert' where
               _itiKey
               _itiOAuthToken
               (Just AltJSON)
-              _itiInstanceTemplate
+              _itiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceTemplatesInsertResource)

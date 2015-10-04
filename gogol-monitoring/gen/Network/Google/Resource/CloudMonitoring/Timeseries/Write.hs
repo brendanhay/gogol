@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -38,9 +39,9 @@ module Network.Google.Resource.CloudMonitoring.Timeseries.Write
     -- * Request Lenses
     , twQuotaUser
     , twPrettyPrint
-    , twWriteTimeseriesRequest
     , twProject
     , twUserIP
+    , twPayload
     , twKey
     , twOAuthToken
     , twFields
@@ -74,15 +75,15 @@ type TimeseriesWriteResource =
 --
 -- /See:/ 'timeseriesWrite'' smart constructor.
 data TimeseriesWrite' = TimeseriesWrite'
-    { _twQuotaUser              :: !(Maybe Text)
-    , _twPrettyPrint            :: !Bool
-    , _twWriteTimeseriesRequest :: !WriteTimeseriesRequest
-    , _twProject                :: !Text
-    , _twUserIP                 :: !(Maybe Text)
-    , _twKey                    :: !(Maybe Key)
-    , _twOAuthToken             :: !(Maybe OAuthToken)
-    , _twFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _twQuotaUser   :: !(Maybe Text)
+    , _twPrettyPrint :: !Bool
+    , _twProject     :: !Text
+    , _twUserIP      :: !(Maybe Text)
+    , _twPayload     :: !WriteTimeseriesRequest
+    , _twKey         :: !(Maybe Key)
+    , _twOAuthToken  :: !(Maybe OAuthToken)
+    , _twFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimeseriesWrite'' with the minimum fields required to make a request.
 --
@@ -92,11 +93,11 @@ data TimeseriesWrite' = TimeseriesWrite'
 --
 -- * 'twPrettyPrint'
 --
--- * 'twWriteTimeseriesRequest'
---
 -- * 'twProject'
 --
 -- * 'twUserIP'
+--
+-- * 'twPayload'
 --
 -- * 'twKey'
 --
@@ -104,16 +105,16 @@ data TimeseriesWrite' = TimeseriesWrite'
 --
 -- * 'twFields'
 timeseriesWrite'
-    :: WriteTimeseriesRequest -- ^ 'WriteTimeseriesRequest'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'project'
+    -> WriteTimeseriesRequest -- ^ 'payload'
     -> TimeseriesWrite'
-timeseriesWrite' pTwWriteTimeseriesRequest_ pTwProject_ =
+timeseriesWrite' pTwProject_ pTwPayload_ =
     TimeseriesWrite'
     { _twQuotaUser = Nothing
     , _twPrettyPrint = True
-    , _twWriteTimeseriesRequest = pTwWriteTimeseriesRequest_
     , _twProject = pTwProject_
     , _twUserIP = Nothing
+    , _twPayload = pTwPayload_
     , _twKey = Nothing
     , _twOAuthToken = Nothing
     , _twFields = Nothing
@@ -132,12 +133,6 @@ twPrettyPrint
   = lens _twPrettyPrint
       (\ s a -> s{_twPrettyPrint = a})
 
--- | Multipart request metadata.
-twWriteTimeseriesRequest :: Lens' TimeseriesWrite' WriteTimeseriesRequest
-twWriteTimeseriesRequest
-  = lens _twWriteTimeseriesRequest
-      (\ s a -> s{_twWriteTimeseriesRequest = a})
-
 -- | The project ID. The value can be the numeric project ID or string-based
 -- project name.
 twProject :: Lens' TimeseriesWrite' Text
@@ -148,6 +143,11 @@ twProject
 -- want to enforce per-user limits.
 twUserIP :: Lens' TimeseriesWrite' (Maybe Text)
 twUserIP = lens _twUserIP (\ s a -> s{_twUserIP = a})
+
+-- | Multipart request metadata.
+twPayload :: Lens' TimeseriesWrite' WriteTimeseriesRequest
+twPayload
+  = lens _twPayload (\ s a -> s{_twPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -178,7 +178,7 @@ instance GoogleRequest TimeseriesWrite' where
               _twKey
               _twOAuthToken
               (Just AltJSON)
-              _twWriteTimeseriesRequest
+              _twPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TimeseriesWriteResource)

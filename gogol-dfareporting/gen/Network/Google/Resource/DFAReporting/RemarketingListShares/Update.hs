@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.DFAReporting.RemarketingListShares.Update
     , rlsuPrettyPrint
     , rlsuUserIP
     , rlsuProfileId
-    , rlsuRemarketingListShare
+    , rlsuPayload
     , rlsuKey
     , rlsuOAuthToken
     , rlsuFields
@@ -63,15 +64,15 @@ type RemarketingListSharesUpdateResource =
 --
 -- /See:/ 'remarketingListSharesUpdate'' smart constructor.
 data RemarketingListSharesUpdate' = RemarketingListSharesUpdate'
-    { _rlsuQuotaUser            :: !(Maybe Text)
-    , _rlsuPrettyPrint          :: !Bool
-    , _rlsuUserIP               :: !(Maybe Text)
-    , _rlsuProfileId            :: !Int64
-    , _rlsuRemarketingListShare :: !RemarketingListShare
-    , _rlsuKey                  :: !(Maybe Key)
-    , _rlsuOAuthToken           :: !(Maybe OAuthToken)
-    , _rlsuFields               :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rlsuQuotaUser   :: !(Maybe Text)
+    , _rlsuPrettyPrint :: !Bool
+    , _rlsuUserIP      :: !(Maybe Text)
+    , _rlsuProfileId   :: !Int64
+    , _rlsuPayload     :: !RemarketingListShare
+    , _rlsuKey         :: !(Maybe Key)
+    , _rlsuOAuthToken  :: !(Maybe OAuthToken)
+    , _rlsuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListSharesUpdate'' with the minimum fields required to make a request.
 --
@@ -85,7 +86,7 @@ data RemarketingListSharesUpdate' = RemarketingListSharesUpdate'
 --
 -- * 'rlsuProfileId'
 --
--- * 'rlsuRemarketingListShare'
+-- * 'rlsuPayload'
 --
 -- * 'rlsuKey'
 --
@@ -94,15 +95,15 @@ data RemarketingListSharesUpdate' = RemarketingListSharesUpdate'
 -- * 'rlsuFields'
 remarketingListSharesUpdate'
     :: Int64 -- ^ 'profileId'
-    -> RemarketingListShare -- ^ 'RemarketingListShare'
+    -> RemarketingListShare -- ^ 'payload'
     -> RemarketingListSharesUpdate'
-remarketingListSharesUpdate' pRlsuProfileId_ pRlsuRemarketingListShare_ =
+remarketingListSharesUpdate' pRlsuProfileId_ pRlsuPayload_ =
     RemarketingListSharesUpdate'
     { _rlsuQuotaUser = Nothing
     , _rlsuPrettyPrint = True
     , _rlsuUserIP = Nothing
     , _rlsuProfileId = pRlsuProfileId_
-    , _rlsuRemarketingListShare = pRlsuRemarketingListShare_
+    , _rlsuPayload = pRlsuPayload_
     , _rlsuKey = Nothing
     , _rlsuOAuthToken = Nothing
     , _rlsuFields = Nothing
@@ -135,10 +136,9 @@ rlsuProfileId
       (\ s a -> s{_rlsuProfileId = a})
 
 -- | Multipart request metadata.
-rlsuRemarketingListShare :: Lens' RemarketingListSharesUpdate' RemarketingListShare
-rlsuRemarketingListShare
-  = lens _rlsuRemarketingListShare
-      (\ s a -> s{_rlsuRemarketingListShare = a})
+rlsuPayload :: Lens' RemarketingListSharesUpdate' RemarketingListShare
+rlsuPayload
+  = lens _rlsuPayload (\ s a -> s{_rlsuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -175,7 +175,7 @@ instance GoogleRequest RemarketingListSharesUpdate'
               _rlsuKey
               _rlsuOAuthToken
               (Just AltJSON)
-              _rlsuRemarketingListShare
+              _rlsuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RemarketingListSharesUpdateResource)

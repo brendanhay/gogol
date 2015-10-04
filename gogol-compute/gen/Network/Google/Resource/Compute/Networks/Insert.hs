@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.Compute.Networks.Insert
     , niPrettyPrint
     , niProject
     , niUserIP
-    , niNetwork
+    , niPayload
     , niKey
     , niOAuthToken
     , niFields
@@ -68,11 +69,11 @@ data NetworksInsert' = NetworksInsert'
     , _niPrettyPrint :: !Bool
     , _niProject     :: !Text
     , _niUserIP      :: !(Maybe Text)
-    , _niNetwork     :: !Network
+    , _niPayload     :: !Network
     , _niKey         :: !(Maybe Key)
     , _niOAuthToken  :: !(Maybe OAuthToken)
     , _niFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NetworksInsert'' with the minimum fields required to make a request.
 --
@@ -86,7 +87,7 @@ data NetworksInsert' = NetworksInsert'
 --
 -- * 'niUserIP'
 --
--- * 'niNetwork'
+-- * 'niPayload'
 --
 -- * 'niKey'
 --
@@ -95,15 +96,15 @@ data NetworksInsert' = NetworksInsert'
 -- * 'niFields'
 networksInsert'
     :: Text -- ^ 'project'
-    -> Network -- ^ 'Network'
+    -> Network -- ^ 'payload'
     -> NetworksInsert'
-networksInsert' pNiProject_ pNiNetwork_ =
+networksInsert' pNiProject_ pNiPayload_ =
     NetworksInsert'
     { _niQuotaUser = Nothing
     , _niPrettyPrint = True
     , _niProject = pNiProject_
     , _niUserIP = Nothing
-    , _niNetwork = pNiNetwork_
+    , _niPayload = pNiPayload_
     , _niKey = Nothing
     , _niOAuthToken = Nothing
     , _niFields = Nothing
@@ -133,9 +134,9 @@ niUserIP :: Lens' NetworksInsert' (Maybe Text)
 niUserIP = lens _niUserIP (\ s a -> s{_niUserIP = a})
 
 -- | Multipart request metadata.
-niNetwork :: Lens' NetworksInsert' Network
-niNetwork
-  = lens _niNetwork (\ s a -> s{_niNetwork = a})
+niPayload :: Lens' NetworksInsert' Network
+niPayload
+  = lens _niPayload (\ s a -> s{_niPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -166,7 +167,7 @@ instance GoogleRequest NetworksInsert' where
               _niKey
               _niOAuthToken
               (Just AltJSON)
-              _niNetwork
+              _niPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy NetworksInsertResource)

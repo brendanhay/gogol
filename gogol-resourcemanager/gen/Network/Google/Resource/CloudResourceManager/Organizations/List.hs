@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -56,15 +57,15 @@ type OrganizationsListResource =
      "v1beta1" :>
        "organizations" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageSize" Int32 :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "pageSize" Int32 :>
+                           QueryParam "callback" Text :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
@@ -92,7 +93,7 @@ data OrganizationsList' = OrganizationsList'
     , _olPageSize       :: !(Maybe Int32)
     , _olFields         :: !(Maybe Text)
     , _olCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrganizationsList'' with the minimum fields required to make a request.
 --
@@ -245,14 +246,14 @@ instance GoogleRequest OrganizationsList' where
              ListOrganizationsResponse
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u OrganizationsList'{..}
-          = go _olXgafv _olAccessToken _olBearerToken
-              _olCallback
-              _olFilter
-              _olPageSize
-              _olPageToken
-              (Just _olPp)
+          = go _olXgafv _olUploadProtocol (Just _olPp)
+              _olAccessToken
               _olUploadType
-              _olUploadProtocol
+              _olBearerToken
+              _olFilter
+              _olPageToken
+              _olPageSize
+              _olCallback
               _olQuotaUser
               (Just _olPrettyPrint)
               _olFields

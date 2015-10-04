@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,11 +34,11 @@ module Network.Google.Resource.Drive.Permissions.Insert
     , piQuotaUser
     , piPrettyPrint
     , piUserIP
+    , piPayload
     , piKey
     , piEmailMessage
     , piFileId
     , piOAuthToken
-    , piPermission
     , piSendNotificationEmails
     , piFields
     ) where
@@ -70,14 +71,14 @@ data PermissionsInsert' = PermissionsInsert'
     { _piQuotaUser              :: !(Maybe Text)
     , _piPrettyPrint            :: !Bool
     , _piUserIP                 :: !(Maybe Text)
+    , _piPayload                :: !Permission
     , _piKey                    :: !(Maybe Key)
     , _piEmailMessage           :: !(Maybe Text)
     , _piFileId                 :: !Text
     , _piOAuthToken             :: !(Maybe OAuthToken)
-    , _piPermission             :: !Permission
     , _piSendNotificationEmails :: !Bool
     , _piFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsInsert'' with the minimum fields required to make a request.
 --
@@ -89,6 +90,8 @@ data PermissionsInsert' = PermissionsInsert'
 --
 -- * 'piUserIP'
 --
+-- * 'piPayload'
+--
 -- * 'piKey'
 --
 -- * 'piEmailMessage'
@@ -97,25 +100,23 @@ data PermissionsInsert' = PermissionsInsert'
 --
 -- * 'piOAuthToken'
 --
--- * 'piPermission'
---
 -- * 'piSendNotificationEmails'
 --
 -- * 'piFields'
 permissionsInsert'
-    :: Text -- ^ 'fileId'
-    -> Permission -- ^ 'Permission'
+    :: Permission -- ^ 'payload'
+    -> Text -- ^ 'fileId'
     -> PermissionsInsert'
-permissionsInsert' pPiFileId_ pPiPermission_ =
+permissionsInsert' pPiPayload_ pPiFileId_ =
     PermissionsInsert'
     { _piQuotaUser = Nothing
     , _piPrettyPrint = True
     , _piUserIP = Nothing
+    , _piPayload = pPiPayload_
     , _piKey = Nothing
     , _piEmailMessage = Nothing
     , _piFileId = pPiFileId_
     , _piOAuthToken = Nothing
-    , _piPermission = pPiPermission_
     , _piSendNotificationEmails = True
     , _piFields = Nothing
     }
@@ -138,6 +139,11 @@ piPrettyPrint
 piUserIP :: Lens' PermissionsInsert' (Maybe Text)
 piUserIP = lens _piUserIP (\ s a -> s{_piUserIP = a})
 
+-- | Multipart request metadata.
+piPayload :: Lens' PermissionsInsert' Permission
+piPayload
+  = lens _piPayload (\ s a -> s{_piPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -159,11 +165,6 @@ piOAuthToken :: Lens' PermissionsInsert' (Maybe OAuthToken)
 piOAuthToken
   = lens _piOAuthToken (\ s a -> s{_piOAuthToken = a})
 
--- | Multipart request metadata.
-piPermission :: Lens' PermissionsInsert' Permission
-piPermission
-  = lens _piPermission (\ s a -> s{_piPermission = a})
-
 -- | Whether to send notification emails when sharing to users or groups.
 -- This parameter is ignored and an email is sent if the role is owner.
 piSendNotificationEmails :: Lens' PermissionsInsert' Bool
@@ -183,8 +184,8 @@ instance GoogleRequest PermissionsInsert' where
         type Rs PermissionsInsert' = Permission
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PermissionsInsert'{..}
-          = go _piEmailMessage (Just _piSendNotificationEmails)
-              _piFileId
+          = go _piFileId _piEmailMessage
+              (Just _piSendNotificationEmails)
               _piQuotaUser
               (Just _piPrettyPrint)
               _piUserIP
@@ -192,7 +193,7 @@ instance GoogleRequest PermissionsInsert' where
               _piKey
               _piOAuthToken
               (Just AltJSON)
-              _piPermission
+              _piPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PermissionsInsertResource)

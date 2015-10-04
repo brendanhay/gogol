@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -56,13 +57,13 @@ type ObjectsGetResource =
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
-             QueryParam "generation" Word64 :>
-               QueryParam "ifGenerationMatch" Word64 :>
-                 QueryParam "ifGenerationNotMatch" Word64 :>
-                   QueryParam "ifMetagenerationMatch" Word64 :>
-                     QueryParam "ifMetagenerationNotMatch" Word64 :>
-                       QueryParam "projection" StorageObjectsGetProjection
-                         :>
+             QueryParam "ifMetagenerationMatch" Word64 :>
+               QueryParam "ifGenerationNotMatch" Word64 :>
+                 QueryParam "ifGenerationMatch" Word64 :>
+                   QueryParam "ifMetagenerationNotMatch" Word64 :>
+                     QueryParam "projection" StorageObjectsGetProjection
+                       :>
+                       QueryParam "generation" Word64 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -76,21 +77,21 @@ type ObjectsGetResource =
          Capture "bucket" Text :>
            "o" :>
              Capture "object" Text :>
-               QueryParam "generation" Word64 :>
-                 QueryParam "ifGenerationMatch" Word64 :>
-                   QueryParam "ifGenerationNotMatch" Word64 :>
-                     QueryParam "ifMetagenerationMatch" Word64 :>
-                       QueryParam "ifMetagenerationNotMatch" Word64 :>
-                         QueryParam "projection" StorageObjectsGetProjection
-                           :>
+               QueryParam "ifMetagenerationMatch" Word64 :>
+                 QueryParam "ifGenerationNotMatch" Word64 :>
+                   QueryParam "ifGenerationMatch" Word64 :>
+                     QueryParam "ifMetagenerationNotMatch" Word64 :>
+                       QueryParam "projection" StorageObjectsGetProjection
+                         :>
+                         QueryParam "generation" Word64 :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "userIp" Text :>
                                  QueryParam "fields" Text :>
                                    QueryParam "key" Key :>
                                      QueryParam "oauth_token" OAuthToken :>
-                                       QueryParam "alt" Media :>
-                                         Get '[OctetStream] Stream
+                                       QueryParam "alt" AltMedia :>
+                                         Get '[OctetStream] Body
 
 -- | Retrieves objects or their associated metadata.
 --
@@ -110,7 +111,7 @@ data ObjectsGet' = ObjectsGet'
     , _ogOAuthToken               :: !(Maybe OAuthToken)
     , _ogGeneration               :: !(Maybe Word64)
     , _ogFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsGet'' with the minimum fields required to make a request.
 --
@@ -253,13 +254,12 @@ instance GoogleRequest ObjectsGet' where
         type Rs ObjectsGet' = Object
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsGet'{..}
-          = go _ogGeneration _ogIfGenerationMatch
+          = go _ogBucket _ogObject _ogIfMetagenerationMatch
               _ogIfGenerationNotMatch
-              _ogIfMetagenerationMatch
+              _ogIfGenerationMatch
               _ogIfMetagenerationNotMatch
               _ogProjection
-              _ogBucket
-              _ogObject
+              _ogGeneration
               _ogQuotaUser
               (Just _ogPrettyPrint)
               _ogUserIP
@@ -272,25 +272,24 @@ instance GoogleRequest ObjectsGet' where
                       r
                       u
 
-instance GoogleRequest ObjectsGet' where
-        type Rs (Download ObjectsGet') = Stream
+instance GoogleRequest (Download ObjectsGet') where
+        type Rs (Download ObjectsGet') = Body
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsGet'{..}
-          = go _ogGeneration _ogIfGenerationMatch
+        requestWithRoute r u (Download ObjectsGet'{..})
+          = go _ogBucket _ogObject _ogIfMetagenerationMatch
               _ogIfGenerationNotMatch
-              _ogIfMetagenerationMatch
+              _ogIfGenerationMatch
               _ogIfMetagenerationNotMatch
               _ogProjection
-              _ogBucket
-              _ogObject
+              _ogGeneration
               _ogQuotaUser
               (Just _ogPrettyPrint)
               _ogUserIP
               _ogFields
               _ogKey
               _ogOAuthToken
-              (Just Media)
-          where go :<|> _
+              (Just AltMedia)
+          where _ :<|> go
                   = clientWithRoute (Proxy :: Proxy ObjectsGetResource)
                       r
                       u

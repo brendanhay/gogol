@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.Gmail.Users.Watch
     , uwQuotaUser
     , uwPrettyPrint
     , uwUserIP
+    , uwPayload
     , uwUserId
     , uwKey
-    , uwWatchRequest
     , uwOAuthToken
     , uwFields
     ) where
@@ -62,15 +63,15 @@ type UsersWatchResource =
 --
 -- /See:/ 'usersWatch'' smart constructor.
 data UsersWatch' = UsersWatch'
-    { _uwQuotaUser    :: !(Maybe Text)
-    , _uwPrettyPrint  :: !Bool
-    , _uwUserIP       :: !(Maybe Text)
-    , _uwUserId       :: !Text
-    , _uwKey          :: !(Maybe Key)
-    , _uwWatchRequest :: !WatchRequest
-    , _uwOAuthToken   :: !(Maybe OAuthToken)
-    , _uwFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _uwQuotaUser   :: !(Maybe Text)
+    , _uwPrettyPrint :: !Bool
+    , _uwUserIP      :: !(Maybe Text)
+    , _uwPayload     :: !WatchRequest
+    , _uwUserId      :: !Text
+    , _uwKey         :: !(Maybe Key)
+    , _uwOAuthToken  :: !(Maybe OAuthToken)
+    , _uwFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersWatch'' with the minimum fields required to make a request.
 --
@@ -82,27 +83,27 @@ data UsersWatch' = UsersWatch'
 --
 -- * 'uwUserIP'
 --
+-- * 'uwPayload'
+--
 -- * 'uwUserId'
 --
 -- * 'uwKey'
---
--- * 'uwWatchRequest'
 --
 -- * 'uwOAuthToken'
 --
 -- * 'uwFields'
 usersWatch'
-    :: Text -- ^ 'WatchRequest'
-    -> WatchRequest
+    :: WatchRequest -- ^ 'payload'
+    -> Text
     -> UsersWatch'
-usersWatch' pUwUserId_ pUwWatchRequest_ =
+usersWatch' pUwPayload_ pUwUserId_ =
     UsersWatch'
     { _uwQuotaUser = Nothing
     , _uwPrettyPrint = True
     , _uwUserIP = Nothing
+    , _uwPayload = pUwPayload_
     , _uwUserId = pUwUserId_
     , _uwKey = Nothing
-    , _uwWatchRequest = pUwWatchRequest_
     , _uwOAuthToken = Nothing
     , _uwFields = Nothing
     }
@@ -125,6 +126,11 @@ uwPrettyPrint
 uwUserIP :: Lens' UsersWatch' (Maybe Text)
 uwUserIP = lens _uwUserIP (\ s a -> s{_uwUserIP = a})
 
+-- | Multipart request metadata.
+uwPayload :: Lens' UsersWatch' WatchRequest
+uwPayload
+  = lens _uwPayload (\ s a -> s{_uwPayload = a})
+
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
 uwUserId :: Lens' UsersWatch' Text
@@ -135,12 +141,6 @@ uwUserId = lens _uwUserId (\ s a -> s{_uwUserId = a})
 -- token.
 uwKey :: Lens' UsersWatch' (Maybe Key)
 uwKey = lens _uwKey (\ s a -> s{_uwKey = a})
-
--- | Multipart request metadata.
-uwWatchRequest :: Lens' UsersWatch' WatchRequest
-uwWatchRequest
-  = lens _uwWatchRequest
-      (\ s a -> s{_uwWatchRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 uwOAuthToken :: Lens' UsersWatch' (Maybe OAuthToken)
@@ -165,7 +165,7 @@ instance GoogleRequest UsersWatch' where
               _uwKey
               _uwOAuthToken
               (Just AltJSON)
-              _uwWatchRequest
+              _uwPayload
           where go
                   = clientWithRoute (Proxy :: Proxy UsersWatchResource)
                       r

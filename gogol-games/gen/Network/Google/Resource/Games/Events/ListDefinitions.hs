@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -49,8 +50,8 @@ import           Network.Google.Prelude
 type EventsListDefinitionsResource =
      "eventDefinitions" :>
        QueryParam "language" Text :>
-         QueryParam "maxResults" Int32 :>
-           QueryParam "pageToken" Text :>
+         QueryParam "pageToken" Text :>
+           QueryParam "maxResults" Int32 :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -73,7 +74,7 @@ data EventsListDefinitions' = EventsListDefinitions'
     , _eldOAuthToken  :: !(Maybe OAuthToken)
     , _eldMaxResults  :: !(Maybe Int32)
     , _eldFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsListDefinitions'' with the minimum fields required to make a request.
 --
@@ -174,7 +175,7 @@ instance GoogleRequest EventsListDefinitions' where
              EventDefinitionListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u EventsListDefinitions'{..}
-          = go _eldLanguage _eldMaxResults _eldPageToken
+          = go _eldLanguage _eldPageToken _eldMaxResults
               _eldQuotaUser
               (Just _eldPrettyPrint)
               _eldUserIP

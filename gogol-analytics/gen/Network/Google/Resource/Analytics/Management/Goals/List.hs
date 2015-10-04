@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,8 +58,8 @@ type ManagementGoalsListResource =
                "profiles" :>
                  Capture "profileId" Text :>
                    "goals" :>
-                     QueryParam "max-results" Int32 :>
-                       QueryParam "start-index" Int32 :>
+                     QueryParam "start-index" Int32 :>
+                       QueryParam "max-results" Int32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -83,7 +84,7 @@ data ManagementGoalsList' = ManagementGoalsList'
     , _mglStartIndex    :: !(Maybe Int32)
     , _mglMaxResults    :: !(Maybe Int32)
     , _mglFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementGoalsList'' with the minimum fields required to make a request.
 --
@@ -208,9 +209,9 @@ instance GoogleRequest ManagementGoalsList' where
         type Rs ManagementGoalsList' = Goals
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementGoalsList'{..}
-          = go _mglMaxResults _mglStartIndex _mglAccountId
-              _mglWebPropertyId
-              _mglProfileId
+          = go _mglAccountId _mglWebPropertyId _mglProfileId
+              _mglStartIndex
+              _mglMaxResults
               _mglQuotaUser
               (Just _mglPrettyPrint)
               _mglUserIP

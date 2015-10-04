@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,10 +34,10 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Insert
     -- * Request Lenses
     , igmiQuotaUser
     , igmiPrettyPrint
-    , igmiInstanceGroupManager
     , igmiProject
     , igmiUserIP
     , igmiZone
+    , igmiPayload
     , igmiKey
     , igmiOAuthToken
     , igmiFields
@@ -67,16 +68,16 @@ type InstanceGroupManagersInsertResource =
 --
 -- /See:/ 'instanceGroupManagersInsert'' smart constructor.
 data InstanceGroupManagersInsert' = InstanceGroupManagersInsert'
-    { _igmiQuotaUser            :: !(Maybe Text)
-    , _igmiPrettyPrint          :: !Bool
-    , _igmiInstanceGroupManager :: !InstanceGroupManager
-    , _igmiProject              :: !Text
-    , _igmiUserIP               :: !(Maybe Text)
-    , _igmiZone                 :: !Text
-    , _igmiKey                  :: !(Maybe Key)
-    , _igmiOAuthToken           :: !(Maybe OAuthToken)
-    , _igmiFields               :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _igmiQuotaUser   :: !(Maybe Text)
+    , _igmiPrettyPrint :: !Bool
+    , _igmiProject     :: !Text
+    , _igmiUserIP      :: !(Maybe Text)
+    , _igmiZone        :: !Text
+    , _igmiPayload     :: !InstanceGroupManager
+    , _igmiKey         :: !(Maybe Key)
+    , _igmiOAuthToken  :: !(Maybe OAuthToken)
+    , _igmiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersInsert'' with the minimum fields required to make a request.
 --
@@ -86,13 +87,13 @@ data InstanceGroupManagersInsert' = InstanceGroupManagersInsert'
 --
 -- * 'igmiPrettyPrint'
 --
--- * 'igmiInstanceGroupManager'
---
 -- * 'igmiProject'
 --
 -- * 'igmiUserIP'
 --
 -- * 'igmiZone'
+--
+-- * 'igmiPayload'
 --
 -- * 'igmiKey'
 --
@@ -100,18 +101,18 @@ data InstanceGroupManagersInsert' = InstanceGroupManagersInsert'
 --
 -- * 'igmiFields'
 instanceGroupManagersInsert'
-    :: InstanceGroupManager -- ^ 'InstanceGroupManager'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
+    -> InstanceGroupManager -- ^ 'payload'
     -> InstanceGroupManagersInsert'
-instanceGroupManagersInsert' pIgmiInstanceGroupManager_ pIgmiProject_ pIgmiZone_ =
+instanceGroupManagersInsert' pIgmiProject_ pIgmiZone_ pIgmiPayload_ =
     InstanceGroupManagersInsert'
     { _igmiQuotaUser = Nothing
     , _igmiPrettyPrint = True
-    , _igmiInstanceGroupManager = pIgmiInstanceGroupManager_
     , _igmiProject = pIgmiProject_
     , _igmiUserIP = Nothing
     , _igmiZone = pIgmiZone_
+    , _igmiPayload = pIgmiPayload_
     , _igmiKey = Nothing
     , _igmiOAuthToken = Nothing
     , _igmiFields = Nothing
@@ -131,12 +132,6 @@ igmiPrettyPrint
   = lens _igmiPrettyPrint
       (\ s a -> s{_igmiPrettyPrint = a})
 
--- | Multipart request metadata.
-igmiInstanceGroupManager :: Lens' InstanceGroupManagersInsert' InstanceGroupManager
-igmiInstanceGroupManager
-  = lens _igmiInstanceGroupManager
-      (\ s a -> s{_igmiInstanceGroupManager = a})
-
 -- | The project ID for this request.
 igmiProject :: Lens' InstanceGroupManagersInsert' Text
 igmiProject
@@ -151,6 +146,11 @@ igmiUserIP
 -- | The URL of the zone where the managed instance group is located.
 igmiZone :: Lens' InstanceGroupManagersInsert' Text
 igmiZone = lens _igmiZone (\ s a -> s{_igmiZone = a})
+
+-- | Multipart request metadata.
+igmiPayload :: Lens' InstanceGroupManagersInsert' InstanceGroupManager
+igmiPayload
+  = lens _igmiPayload (\ s a -> s{_igmiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -186,7 +186,7 @@ instance GoogleRequest InstanceGroupManagersInsert'
               _igmiKey
               _igmiOAuthToken
               (Just AltJSON)
-              _igmiInstanceGroupManager
+              _igmiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceGroupManagersInsertResource)

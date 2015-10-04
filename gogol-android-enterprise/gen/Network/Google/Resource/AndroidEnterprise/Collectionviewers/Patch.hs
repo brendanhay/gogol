@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -38,7 +39,7 @@ module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Patch
     , cpEnterpriseId
     , cpUserIP
     , cpCollectionId
-    , cpUser
+    , cpPayload
     , cpUserId
     , cpKey
     , cpOAuthToken
@@ -78,12 +79,12 @@ data CollectionviewersPatch' = CollectionviewersPatch'
     , _cpEnterpriseId :: !Text
     , _cpUserIP       :: !(Maybe Text)
     , _cpCollectionId :: !Text
-    , _cpUser         :: !User
+    , _cpPayload      :: !User
     , _cpUserId       :: !Text
     , _cpKey          :: !(Maybe Key)
     , _cpOAuthToken   :: !(Maybe OAuthToken)
     , _cpFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CollectionviewersPatch'' with the minimum fields required to make a request.
 --
@@ -99,7 +100,7 @@ data CollectionviewersPatch' = CollectionviewersPatch'
 --
 -- * 'cpCollectionId'
 --
--- * 'cpUser'
+-- * 'cpPayload'
 --
 -- * 'cpUserId'
 --
@@ -111,17 +112,17 @@ data CollectionviewersPatch' = CollectionviewersPatch'
 collectionviewersPatch'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'collectionId'
-    -> User -- ^ 'User'
+    -> User -- ^ 'payload'
     -> Text -- ^ 'userId'
     -> CollectionviewersPatch'
-collectionviewersPatch' pCpEnterpriseId_ pCpCollectionId_ pCpUser_ pCpUserId_ =
+collectionviewersPatch' pCpEnterpriseId_ pCpCollectionId_ pCpPayload_ pCpUserId_ =
     CollectionviewersPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
     , _cpEnterpriseId = pCpEnterpriseId_
     , _cpUserIP = Nothing
     , _cpCollectionId = pCpCollectionId_
-    , _cpUser = pCpUser_
+    , _cpPayload = pCpPayload_
     , _cpUserId = pCpUserId_
     , _cpKey = Nothing
     , _cpOAuthToken = Nothing
@@ -159,8 +160,9 @@ cpCollectionId
       (\ s a -> s{_cpCollectionId = a})
 
 -- | Multipart request metadata.
-cpUser :: Lens' CollectionviewersPatch' User
-cpUser = lens _cpUser (\ s a -> s{_cpUser = a})
+cpPayload :: Lens' CollectionviewersPatch' User
+cpPayload
+  = lens _cpPayload (\ s a -> s{_cpPayload = a})
 
 -- | The ID of the user.
 cpUserId :: Lens' CollectionviewersPatch' Text
@@ -198,7 +200,7 @@ instance GoogleRequest CollectionviewersPatch' where
               _cpKey
               _cpOAuthToken
               (Just AltJSON)
-              _cpUser
+              _cpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CollectionviewersPatchResource)

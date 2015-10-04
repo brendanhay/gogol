@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,10 +33,10 @@ module Network.Google.Resource.Compute.TargetPools.AddInstance
     -- * Request Lenses
     , tpaiQuotaUser
     , tpaiPrettyPrint
-    , tpaiTargetPoolsAddInstanceRequest
     , tpaiProject
     , tpaiTargetPool
     , tpaiUserIP
+    , tpaiPayload
     , tpaiKey
     , tpaiRegion
     , tpaiOAuthToken
@@ -68,17 +69,17 @@ type TargetPoolsAddInstanceResource =
 --
 -- /See:/ 'targetPoolsAddInstance'' smart constructor.
 data TargetPoolsAddInstance' = TargetPoolsAddInstance'
-    { _tpaiQuotaUser                     :: !(Maybe Text)
-    , _tpaiPrettyPrint                   :: !Bool
-    , _tpaiTargetPoolsAddInstanceRequest :: !TargetPoolsAddInstanceRequest
-    , _tpaiProject                       :: !Text
-    , _tpaiTargetPool                    :: !Text
-    , _tpaiUserIP                        :: !(Maybe Text)
-    , _tpaiKey                           :: !(Maybe Key)
-    , _tpaiRegion                        :: !Text
-    , _tpaiOAuthToken                    :: !(Maybe OAuthToken)
-    , _tpaiFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _tpaiQuotaUser   :: !(Maybe Text)
+    , _tpaiPrettyPrint :: !Bool
+    , _tpaiProject     :: !Text
+    , _tpaiTargetPool  :: !Text
+    , _tpaiUserIP      :: !(Maybe Text)
+    , _tpaiPayload     :: !TargetPoolsAddInstanceRequest
+    , _tpaiKey         :: !(Maybe Key)
+    , _tpaiRegion      :: !Text
+    , _tpaiOAuthToken  :: !(Maybe OAuthToken)
+    , _tpaiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsAddInstance'' with the minimum fields required to make a request.
 --
@@ -88,13 +89,13 @@ data TargetPoolsAddInstance' = TargetPoolsAddInstance'
 --
 -- * 'tpaiPrettyPrint'
 --
--- * 'tpaiTargetPoolsAddInstanceRequest'
---
 -- * 'tpaiProject'
 --
 -- * 'tpaiTargetPool'
 --
 -- * 'tpaiUserIP'
+--
+-- * 'tpaiPayload'
 --
 -- * 'tpaiKey'
 --
@@ -104,19 +105,19 @@ data TargetPoolsAddInstance' = TargetPoolsAddInstance'
 --
 -- * 'tpaiFields'
 targetPoolsAddInstance'
-    :: TargetPoolsAddInstanceRequest -- ^ 'TargetPoolsAddInstanceRequest'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'project'
     -> Text -- ^ 'targetPool'
+    -> TargetPoolsAddInstanceRequest -- ^ 'payload'
     -> Text -- ^ 'region'
     -> TargetPoolsAddInstance'
-targetPoolsAddInstance' pTpaiTargetPoolsAddInstanceRequest_ pTpaiProject_ pTpaiTargetPool_ pTpaiRegion_ =
+targetPoolsAddInstance' pTpaiProject_ pTpaiTargetPool_ pTpaiPayload_ pTpaiRegion_ =
     TargetPoolsAddInstance'
     { _tpaiQuotaUser = Nothing
     , _tpaiPrettyPrint = True
-    , _tpaiTargetPoolsAddInstanceRequest = pTpaiTargetPoolsAddInstanceRequest_
     , _tpaiProject = pTpaiProject_
     , _tpaiTargetPool = pTpaiTargetPool_
     , _tpaiUserIP = Nothing
+    , _tpaiPayload = pTpaiPayload_
     , _tpaiKey = Nothing
     , _tpaiRegion = pTpaiRegion_
     , _tpaiOAuthToken = Nothing
@@ -137,12 +138,6 @@ tpaiPrettyPrint
   = lens _tpaiPrettyPrint
       (\ s a -> s{_tpaiPrettyPrint = a})
 
--- | Multipart request metadata.
-tpaiTargetPoolsAddInstanceRequest :: Lens' TargetPoolsAddInstance' TargetPoolsAddInstanceRequest
-tpaiTargetPoolsAddInstanceRequest
-  = lens _tpaiTargetPoolsAddInstanceRequest
-      (\ s a -> s{_tpaiTargetPoolsAddInstanceRequest = a})
-
 tpaiProject :: Lens' TargetPoolsAddInstance' Text
 tpaiProject
   = lens _tpaiProject (\ s a -> s{_tpaiProject = a})
@@ -158,6 +153,11 @@ tpaiTargetPool
 tpaiUserIP :: Lens' TargetPoolsAddInstance' (Maybe Text)
 tpaiUserIP
   = lens _tpaiUserIP (\ s a -> s{_tpaiUserIP = a})
+
+-- | Multipart request metadata.
+tpaiPayload :: Lens' TargetPoolsAddInstance' TargetPoolsAddInstanceRequest
+tpaiPayload
+  = lens _tpaiPayload (\ s a -> s{_tpaiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -197,7 +197,7 @@ instance GoogleRequest TargetPoolsAddInstance' where
               _tpaiKey
               _tpaiOAuthToken
               (Just AltJSON)
-              _tpaiTargetPoolsAddInstanceRequest
+              _tpaiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetPoolsAddInstanceResource)

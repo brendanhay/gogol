@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -39,7 +40,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Register
     , brPp
     , brAccessToken
     , brUploadType
-    , brBeacon
+    , brPayload
     , brBearerToken
     , brKey
     , brOAuthToken
@@ -56,12 +57,12 @@ type BeaconsRegisterResource =
      "v1beta1" :>
        "beacons:register" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -83,13 +84,13 @@ data BeaconsRegister' = BeaconsRegister'
     , _brPp             :: !Bool
     , _brAccessToken    :: !(Maybe Text)
     , _brUploadType     :: !(Maybe Text)
-    , _brBeacon         :: !Beacon
+    , _brPayload        :: !Beacon
     , _brBearerToken    :: !(Maybe Text)
     , _brKey            :: !(Maybe Key)
     , _brOAuthToken     :: !(Maybe OAuthToken)
     , _brFields         :: !(Maybe Text)
     , _brCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsRegister'' with the minimum fields required to make a request.
 --
@@ -109,7 +110,7 @@ data BeaconsRegister' = BeaconsRegister'
 --
 -- * 'brUploadType'
 --
--- * 'brBeacon'
+-- * 'brPayload'
 --
 -- * 'brBearerToken'
 --
@@ -121,9 +122,9 @@ data BeaconsRegister' = BeaconsRegister'
 --
 -- * 'brCallback'
 beaconsRegister'
-    :: Beacon -- ^ 'Beacon'
+    :: Beacon -- ^ 'payload'
     -> BeaconsRegister'
-beaconsRegister' pBrBeacon_ =
+beaconsRegister' pBrPayload_ =
     BeaconsRegister'
     { _brXgafv = Nothing
     , _brQuotaUser = Nothing
@@ -132,7 +133,7 @@ beaconsRegister' pBrBeacon_ =
     , _brPp = True
     , _brAccessToken = Nothing
     , _brUploadType = Nothing
-    , _brBeacon = pBrBeacon_
+    , _brPayload = pBrPayload_
     , _brBearerToken = Nothing
     , _brKey = Nothing
     , _brOAuthToken = Nothing
@@ -179,8 +180,9 @@ brUploadType
   = lens _brUploadType (\ s a -> s{_brUploadType = a})
 
 -- | Multipart request metadata.
-brBeacon :: Lens' BeaconsRegister' Beacon
-brBeacon = lens _brBeacon (\ s a -> s{_brBeacon = a})
+brPayload :: Lens' BeaconsRegister' Beacon
+brPayload
+  = lens _brPayload (\ s a -> s{_brPayload = a})
 
 -- | OAuth bearer token.
 brBearerToken :: Lens' BeaconsRegister' (Maybe Text)
@@ -216,18 +218,18 @@ instance GoogleRequest BeaconsRegister' where
         type Rs BeaconsRegister' = Beacon
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u BeaconsRegister'{..}
-          = go _brXgafv _brAccessToken _brBearerToken
-              _brCallback
-              (Just _brPp)
+          = go _brXgafv _brUploadProtocol (Just _brPp)
+              _brAccessToken
               _brUploadType
-              _brUploadProtocol
+              _brBearerToken
+              _brCallback
               _brQuotaUser
               (Just _brPrettyPrint)
               _brFields
               _brKey
               _brOAuthToken
               (Just AltJSON)
-              _brBeacon
+              _brPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BeaconsRegisterResource)

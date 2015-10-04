@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,12 +53,12 @@ import           Network.Google.Prelude
 type PromoOfferGetResource =
      "promooffer" :>
        "get" :>
-         QueryParam "androidId" Text :>
-           QueryParam "device" Text :>
-             QueryParam "manufacturer" Text :>
+         QueryParam "manufacturer" Text :>
+           QueryParam "serial" Text :>
+             QueryParam "device" Text :>
                QueryParam "model" Text :>
                  QueryParam "product" Text :>
-                   QueryParam "serial" Text :>
+                   QueryParam "androidId" Text :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -82,7 +83,7 @@ data PromoOfferGet' = PromoOfferGet'
     , _pogOAuthToken   :: !(Maybe OAuthToken)
     , _pogAndroidId    :: !(Maybe Text)
     , _pogFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PromoOfferGet'' with the minimum fields required to make a request.
 --
@@ -203,10 +204,9 @@ instance GoogleRequest PromoOfferGet' where
         type Rs PromoOfferGet' = Offers
         request = requestWithRoute defReq booksURL
         requestWithRoute r u PromoOfferGet'{..}
-          = go _pogAndroidId _pogDevice _pogManufacturer
-              _pogModel
+          = go _pogManufacturer _pogSerial _pogDevice _pogModel
               _pogProduct
-              _pogSerial
+              _pogAndroidId
               _pogQuotaUser
               (Just _pogPrettyPrint)
               _pogUserIP

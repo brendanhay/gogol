@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,10 +33,10 @@ module Network.Google.Resource.MapsEngine.Tables.Permissions.BatchUpdate
     , TablesPermissionsBatchUpdate'
 
     -- * Request Lenses
-    , tpbuPermissionsBatchUpdateRequest
     , tpbuQuotaUser
     , tpbuPrettyPrint
     , tpbuUserIP
+    , tpbuPayload
     , tpbuKey
     , tpbuId
     , tpbuOAuthToken
@@ -68,27 +69,27 @@ type TablesPermissionsBatchUpdateResource =
 --
 -- /See:/ 'tablesPermissionsBatchUpdate'' smart constructor.
 data TablesPermissionsBatchUpdate' = TablesPermissionsBatchUpdate'
-    { _tpbuPermissionsBatchUpdateRequest :: !PermissionsBatchUpdateRequest
-    , _tpbuQuotaUser                     :: !(Maybe Text)
-    , _tpbuPrettyPrint                   :: !Bool
-    , _tpbuUserIP                        :: !(Maybe Text)
-    , _tpbuKey                           :: !(Maybe Key)
-    , _tpbuId                            :: !Text
-    , _tpbuOAuthToken                    :: !(Maybe OAuthToken)
-    , _tpbuFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _tpbuQuotaUser   :: !(Maybe Text)
+    , _tpbuPrettyPrint :: !Bool
+    , _tpbuUserIP      :: !(Maybe Text)
+    , _tpbuPayload     :: !PermissionsBatchUpdateRequest
+    , _tpbuKey         :: !(Maybe Key)
+    , _tpbuId          :: !Text
+    , _tpbuOAuthToken  :: !(Maybe OAuthToken)
+    , _tpbuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesPermissionsBatchUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'tpbuPermissionsBatchUpdateRequest'
 --
 -- * 'tpbuQuotaUser'
 --
 -- * 'tpbuPrettyPrint'
 --
 -- * 'tpbuUserIP'
+--
+-- * 'tpbuPayload'
 --
 -- * 'tpbuKey'
 --
@@ -98,26 +99,20 @@ data TablesPermissionsBatchUpdate' = TablesPermissionsBatchUpdate'
 --
 -- * 'tpbuFields'
 tablesPermissionsBatchUpdate'
-    :: PermissionsBatchUpdateRequest -- ^ 'PermissionsBatchUpdateRequest'
+    :: PermissionsBatchUpdateRequest -- ^ 'payload'
     -> Text -- ^ 'id'
     -> TablesPermissionsBatchUpdate'
-tablesPermissionsBatchUpdate' pTpbuPermissionsBatchUpdateRequest_ pTpbuId_ =
+tablesPermissionsBatchUpdate' pTpbuPayload_ pTpbuId_ =
     TablesPermissionsBatchUpdate'
-    { _tpbuPermissionsBatchUpdateRequest = pTpbuPermissionsBatchUpdateRequest_
-    , _tpbuQuotaUser = Nothing
+    { _tpbuQuotaUser = Nothing
     , _tpbuPrettyPrint = True
     , _tpbuUserIP = Nothing
+    , _tpbuPayload = pTpbuPayload_
     , _tpbuKey = Nothing
     , _tpbuId = pTpbuId_
     , _tpbuOAuthToken = Nothing
     , _tpbuFields = Nothing
     }
-
--- | Multipart request metadata.
-tpbuPermissionsBatchUpdateRequest :: Lens' TablesPermissionsBatchUpdate' PermissionsBatchUpdateRequest
-tpbuPermissionsBatchUpdateRequest
-  = lens _tpbuPermissionsBatchUpdateRequest
-      (\ s a -> s{_tpbuPermissionsBatchUpdateRequest = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -138,6 +133,11 @@ tpbuPrettyPrint
 tpbuUserIP :: Lens' TablesPermissionsBatchUpdate' (Maybe Text)
 tpbuUserIP
   = lens _tpbuUserIP (\ s a -> s{_tpbuUserIP = a})
+
+-- | Multipart request metadata.
+tpbuPayload :: Lens' TablesPermissionsBatchUpdate' PermissionsBatchUpdateRequest
+tpbuPayload
+  = lens _tpbuPayload (\ s a -> s{_tpbuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -178,7 +178,7 @@ instance GoogleRequest TablesPermissionsBatchUpdate'
               _tpbuKey
               _tpbuOAuthToken
               (Just AltJSON)
-              _tpbuPermissionsBatchUpdateRequest
+              _tpbuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TablesPermissionsBatchUpdateResource)

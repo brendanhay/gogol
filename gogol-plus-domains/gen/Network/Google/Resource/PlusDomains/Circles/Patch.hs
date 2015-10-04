@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.PlusDomains.Circles.Patch
     -- * Request Lenses
     , cpQuotaUser
     , cpPrettyPrint
-    , cpCircle
     , cpUserIP
+    , cpPayload
     , cpKey
     , cpCircleId
     , cpOAuthToken
@@ -63,13 +64,13 @@ type CirclesPatchResource =
 data CirclesPatch' = CirclesPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
-    , _cpCircle      :: !Circle
     , _cpUserIP      :: !(Maybe Text)
+    , _cpPayload     :: !Circle
     , _cpKey         :: !(Maybe Key)
     , _cpCircleId    :: !Text
     , _cpOAuthToken  :: !(Maybe OAuthToken)
     , _cpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesPatch'' with the minimum fields required to make a request.
 --
@@ -79,9 +80,9 @@ data CirclesPatch' = CirclesPatch'
 --
 -- * 'cpPrettyPrint'
 --
--- * 'cpCircle'
---
 -- * 'cpUserIP'
+--
+-- * 'cpPayload'
 --
 -- * 'cpKey'
 --
@@ -91,15 +92,15 @@ data CirclesPatch' = CirclesPatch'
 --
 -- * 'cpFields'
 circlesPatch'
-    :: Circle -- ^ 'Circle'
+    :: Circle -- ^ 'payload'
     -> Text -- ^ 'circleId'
     -> CirclesPatch'
-circlesPatch' pCpCircle_ pCpCircleId_ =
+circlesPatch' pCpPayload_ pCpCircleId_ =
     CirclesPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
-    , _cpCircle = pCpCircle_
     , _cpUserIP = Nothing
+    , _cpPayload = pCpPayload_
     , _cpKey = Nothing
     , _cpCircleId = pCpCircleId_
     , _cpOAuthToken = Nothing
@@ -119,14 +120,15 @@ cpPrettyPrint
   = lens _cpPrettyPrint
       (\ s a -> s{_cpPrettyPrint = a})
 
--- | Multipart request metadata.
-cpCircle :: Lens' CirclesPatch' Circle
-cpCircle = lens _cpCircle (\ s a -> s{_cpCircle = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 cpUserIP :: Lens' CirclesPatch' (Maybe Text)
 cpUserIP = lens _cpUserIP (\ s a -> s{_cpUserIP = a})
+
+-- | Multipart request metadata.
+cpPayload :: Lens' CirclesPatch' Circle
+cpPayload
+  = lens _cpPayload (\ s a -> s{_cpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -162,7 +164,7 @@ instance GoogleRequest CirclesPatch' where
               _cpKey
               _cpOAuthToken
               (Just AltJSON)
-              _cpCircle
+              _cpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CirclesPatchResource)

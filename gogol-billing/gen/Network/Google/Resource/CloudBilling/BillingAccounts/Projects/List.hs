@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -56,17 +57,17 @@ import           Network.Google.Prelude
 -- 'BillingAccountsProjectsList'' request conforms to.
 type BillingAccountsProjectsListResource =
      "v1" :>
-       "{+name}" :>
+       Capture "name" Text :>
          "projects" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pageSize" Int32 :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "pageSize" Int32 :>
+                           QueryParam "callback" Text :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
@@ -97,7 +98,7 @@ data BillingAccountsProjectsList' = BillingAccountsProjectsList'
     , _baplPageSize       :: !(Maybe Int32)
     , _baplFields         :: !(Maybe Text)
     , _baplCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BillingAccountsProjectsList'' with the minimum fields required to make a request.
 --
@@ -255,14 +256,14 @@ instance GoogleRequest BillingAccountsProjectsList'
              ListProjectBillingInfoResponse
         request = requestWithRoute defReq billingURL
         requestWithRoute r u BillingAccountsProjectsList'{..}
-          = go _baplXgafv _baplAccessToken _baplBearerToken
-              _baplCallback
-              _baplPageSize
-              _baplPageToken
+          = go _baplName _baplXgafv _baplUploadProtocol
               (Just _baplPp)
+              _baplAccessToken
               _baplUploadType
-              _baplUploadProtocol
-              _baplName
+              _baplBearerToken
+              _baplPageToken
+              _baplPageSize
+              _baplCallback
               _baplQuotaUser
               (Just _baplPrettyPrint)
               _baplFields

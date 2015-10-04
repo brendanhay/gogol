@@ -62,22 +62,6 @@ module Network.Google.ResourceViews
 
     -- * Types
 
-    -- ** OperationWarnings
-    , OperationWarnings
-    , operationWarnings
-    , owData
-    , owCode
-    , owMessage
-
-    -- ** ResourceviewsZoneViewsListResourcesFormat
-    , ResourceviewsZoneViewsListResourcesFormat (..)
-
-    -- ** OperationWarningsData
-    , OperationWarningsData
-    , operationWarningsData
-    , owdValue
-    , owdKey
-
     -- ** ResourceView
     , ResourceView
     , resourceView
@@ -110,6 +94,9 @@ module Network.Google.ResourceViews
     , zvlKind
     , zvlItems
     , zvlSelfLink
+
+    -- ** ListState
+    , ListState (..)
 
     -- ** Operation
     , Operation
@@ -144,6 +131,14 @@ module Network.Google.ResourceViews
     , zvlrrItems
     , zvlrrNetwork
 
+    -- ** Error'
+    , Error'
+    , error'
+    , eErrors
+
+    -- ** Format
+    , Format (..)
+
     -- ** ServiceEndpoint
     , ServiceEndpoint
     , serviceEndpoint
@@ -164,19 +159,31 @@ module Network.Google.ResourceViews
     , zoneViewsAddResourcesRequest
     , zvarrResources
 
-    -- ** ResourceviewsZoneViewsListResourcesListState
-    , ResourceviewsZoneViewsListResourcesListState (..)
+    -- ** WarningsItem
+    , WarningsItem
+    , warningsItem
+    , wiData
+    , wiCode
+    , wiMessage
 
-    -- ** OperationError
-    , OperationError
-    , operationError
-    , oeErrors
+    -- ** DataItem
+    , DataItem
+    , dataItem
+    , diValue
+    , diKey
 
     -- ** ZoneViewsGetServiceResponse
     , ZoneViewsGetServiceResponse
     , zoneViewsGetServiceResponse
     , zvgsrFingerprint
     , zvgsrEndpoints
+
+    -- ** ErrorsItem
+    , ErrorsItem
+    , errorsItem
+    , eiLocation
+    , eiCode
+    , eiMessage
 
     -- ** ListResourceResponseItem
     , ListResourceResponseItem
@@ -189,13 +196,6 @@ module Network.Google.ResourceViews
     , label
     , lValue
     , lKey
-
-    -- ** OperationErrorErrors
-    , OperationErrorErrors
-    , operationErrorErrors
-    , oeeLocation
-    , oeeCode
-    , oeeMessage
 
     -- ** ZoneViewsSetServiceRequest
     , ZoneViewsSetServiceRequest

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,7 +38,7 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.Create
     , tjcPp
     , tjcAccessToken
     , tjcUploadType
-    , tjcTransferJob
+    , tjcPayload
     , tjcBearerToken
     , tjcKey
     , tjcOAuthToken
@@ -54,12 +55,12 @@ type TransferJobsCreateResource =
      "v1" :>
        "transferJobs" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -80,13 +81,13 @@ data TransferJobsCreate' = TransferJobsCreate'
     , _tjcPp             :: !Bool
     , _tjcAccessToken    :: !(Maybe Text)
     , _tjcUploadType     :: !(Maybe Text)
-    , _tjcTransferJob    :: !TransferJob
+    , _tjcPayload        :: !TransferJob
     , _tjcBearerToken    :: !(Maybe Text)
     , _tjcKey            :: !(Maybe Key)
     , _tjcOAuthToken     :: !(Maybe OAuthToken)
     , _tjcFields         :: !(Maybe Text)
     , _tjcCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferJobsCreate'' with the minimum fields required to make a request.
 --
@@ -106,7 +107,7 @@ data TransferJobsCreate' = TransferJobsCreate'
 --
 -- * 'tjcUploadType'
 --
--- * 'tjcTransferJob'
+-- * 'tjcPayload'
 --
 -- * 'tjcBearerToken'
 --
@@ -118,9 +119,9 @@ data TransferJobsCreate' = TransferJobsCreate'
 --
 -- * 'tjcCallback'
 transferJobsCreate'
-    :: TransferJob -- ^ 'TransferJob'
+    :: TransferJob -- ^ 'payload'
     -> TransferJobsCreate'
-transferJobsCreate' pTjcTransferJob_ =
+transferJobsCreate' pTjcPayload_ =
     TransferJobsCreate'
     { _tjcXgafv = Nothing
     , _tjcQuotaUser = Nothing
@@ -129,7 +130,7 @@ transferJobsCreate' pTjcTransferJob_ =
     , _tjcPp = True
     , _tjcAccessToken = Nothing
     , _tjcUploadType = Nothing
-    , _tjcTransferJob = pTjcTransferJob_
+    , _tjcPayload = pTjcPayload_
     , _tjcBearerToken = Nothing
     , _tjcKey = Nothing
     , _tjcOAuthToken = Nothing
@@ -177,10 +178,9 @@ tjcUploadType
       (\ s a -> s{_tjcUploadType = a})
 
 -- | Multipart request metadata.
-tjcTransferJob :: Lens' TransferJobsCreate' TransferJob
-tjcTransferJob
-  = lens _tjcTransferJob
-      (\ s a -> s{_tjcTransferJob = a})
+tjcPayload :: Lens' TransferJobsCreate' TransferJob
+tjcPayload
+  = lens _tjcPayload (\ s a -> s{_tjcPayload = a})
 
 -- | OAuth bearer token.
 tjcBearerToken :: Lens' TransferJobsCreate' (Maybe Text)
@@ -218,18 +218,18 @@ instance GoogleRequest TransferJobsCreate' where
         type Rs TransferJobsCreate' = TransferJob
         request = requestWithRoute defReq storageTransferURL
         requestWithRoute r u TransferJobsCreate'{..}
-          = go _tjcXgafv _tjcAccessToken _tjcBearerToken
-              _tjcCallback
-              (Just _tjcPp)
+          = go _tjcXgafv _tjcUploadProtocol (Just _tjcPp)
+              _tjcAccessToken
               _tjcUploadType
-              _tjcUploadProtocol
+              _tjcBearerToken
+              _tjcCallback
               _tjcQuotaUser
               (Just _tjcPrettyPrint)
               _tjcFields
               _tjcKey
               _tjcOAuthToken
               (Just AltJSON)
-              _tjcTransferJob
+              _tjcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TransferJobsCreateResource)

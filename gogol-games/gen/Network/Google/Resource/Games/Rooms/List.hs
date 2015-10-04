@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -49,8 +50,8 @@ import           Network.Google.Prelude
 type RoomsListResource =
      "rooms" :>
        QueryParam "language" Text :>
-         QueryParam "maxResults" Int32 :>
-           QueryParam "pageToken" Text :>
+         QueryParam "pageToken" Text :>
+           QueryParam "maxResults" Int32 :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -72,7 +73,7 @@ data RoomsList' = RoomsList'
     , _rOAuthToken  :: !(Maybe OAuthToken)
     , _rMaxResults  :: !(Maybe Int32)
     , _rFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsList'' with the minimum fields required to make a request.
 --
@@ -167,7 +168,7 @@ instance GoogleRequest RoomsList' where
         type Rs RoomsList' = RoomList
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RoomsList'{..}
-          = go _rLanguage _rMaxResults _rPageToken _rQuotaUser
+          = go _rLanguage _rPageToken _rMaxResults _rQuotaUser
               (Just _rPrettyPrint)
               _rUserIP
               _rFields

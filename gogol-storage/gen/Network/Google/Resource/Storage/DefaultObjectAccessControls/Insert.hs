@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Insert
     , doaciPrettyPrint
     , doaciUserIP
     , doaciBucket
+    , doaciPayload
     , doaciKey
     , doaciOAuthToken
-    , doaciObjectAccessControl
     , doaciFields
     ) where
 
@@ -63,15 +64,15 @@ type DefaultObjectAccessControlsInsertResource =
 --
 -- /See:/ 'defaultObjectAccessControlsInsert'' smart constructor.
 data DefaultObjectAccessControlsInsert' = DefaultObjectAccessControlsInsert'
-    { _doaciQuotaUser           :: !(Maybe Text)
-    , _doaciPrettyPrint         :: !Bool
-    , _doaciUserIP              :: !(Maybe Text)
-    , _doaciBucket              :: !Text
-    , _doaciKey                 :: !(Maybe Key)
-    , _doaciOAuthToken          :: !(Maybe OAuthToken)
-    , _doaciObjectAccessControl :: !ObjectAccessControl
-    , _doaciFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _doaciQuotaUser   :: !(Maybe Text)
+    , _doaciPrettyPrint :: !Bool
+    , _doaciUserIP      :: !(Maybe Text)
+    , _doaciBucket      :: !Text
+    , _doaciPayload     :: !ObjectAccessControl
+    , _doaciKey         :: !(Maybe Key)
+    , _doaciOAuthToken  :: !(Maybe OAuthToken)
+    , _doaciFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsInsert'' with the minimum fields required to make a request.
 --
@@ -85,26 +86,26 @@ data DefaultObjectAccessControlsInsert' = DefaultObjectAccessControlsInsert'
 --
 -- * 'doaciBucket'
 --
+-- * 'doaciPayload'
+--
 -- * 'doaciKey'
 --
 -- * 'doaciOAuthToken'
 --
--- * 'doaciObjectAccessControl'
---
 -- * 'doaciFields'
 defaultObjectAccessControlsInsert'
     :: Text -- ^ 'bucket'
-    -> ObjectAccessControl -- ^ 'ObjectAccessControl'
+    -> ObjectAccessControl -- ^ 'payload'
     -> DefaultObjectAccessControlsInsert'
-defaultObjectAccessControlsInsert' pDoaciBucket_ pDoaciObjectAccessControl_ =
+defaultObjectAccessControlsInsert' pDoaciBucket_ pDoaciPayload_ =
     DefaultObjectAccessControlsInsert'
     { _doaciQuotaUser = Nothing
     , _doaciPrettyPrint = True
     , _doaciUserIP = Nothing
     , _doaciBucket = pDoaciBucket_
+    , _doaciPayload = pDoaciPayload_
     , _doaciKey = Nothing
     , _doaciOAuthToken = Nothing
-    , _doaciObjectAccessControl = pDoaciObjectAccessControl_
     , _doaciFields = Nothing
     }
 
@@ -133,6 +134,11 @@ doaciBucket :: Lens' DefaultObjectAccessControlsInsert' Text
 doaciBucket
   = lens _doaciBucket (\ s a -> s{_doaciBucket = a})
 
+-- | Multipart request metadata.
+doaciPayload :: Lens' DefaultObjectAccessControlsInsert' ObjectAccessControl
+doaciPayload
+  = lens _doaciPayload (\ s a -> s{_doaciPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -144,12 +150,6 @@ doaciOAuthToken :: Lens' DefaultObjectAccessControlsInsert' (Maybe OAuthToken)
 doaciOAuthToken
   = lens _doaciOAuthToken
       (\ s a -> s{_doaciOAuthToken = a})
-
--- | Multipart request metadata.
-doaciObjectAccessControl :: Lens' DefaultObjectAccessControlsInsert' ObjectAccessControl
-doaciObjectAccessControl
-  = lens _doaciObjectAccessControl
-      (\ s a -> s{_doaciObjectAccessControl = a})
 
 -- | Selector specifying which fields to include in a partial response.
 doaciFields :: Lens' DefaultObjectAccessControlsInsert' (Maybe Text)
@@ -175,7 +175,7 @@ instance GoogleRequest
               _doaciKey
               _doaciOAuthToken
               (Just AltJSON)
-              _doaciObjectAccessControl
+              _doaciPayload
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,11 +35,11 @@ module Network.Google.Resource.Gmail.Users.Messages.Send
     , umsQuotaUser
     , umsPrettyPrint
     , umsUserIP
+    , umsPayload
     , umsUserId
     , umsMedia
     , umsKey
     , umsOAuthToken
-    , umsMessage
     , umsFields
     ) where
 
@@ -69,13 +70,13 @@ data UsersMessagesSend' = UsersMessagesSend'
     { _umsQuotaUser   :: !(Maybe Text)
     , _umsPrettyPrint :: !Bool
     , _umsUserIP      :: !(Maybe Text)
+    , _umsPayload     :: !Message
     , _umsUserId      :: !Text
     , _umsMedia       :: !Body
     , _umsKey         :: !(Maybe Key)
     , _umsOAuthToken  :: !(Maybe OAuthToken)
-    , _umsMessage     :: !Message
     , _umsFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesSend'' with the minimum fields required to make a request.
 --
@@ -87,6 +88,8 @@ data UsersMessagesSend' = UsersMessagesSend'
 --
 -- * 'umsUserIP'
 --
+-- * 'umsPayload'
+--
 -- * 'umsUserId'
 --
 -- * 'umsMedia'
@@ -95,24 +98,22 @@ data UsersMessagesSend' = UsersMessagesSend'
 --
 -- * 'umsOAuthToken'
 --
--- * 'umsMessage'
---
 -- * 'umsFields'
 usersMessagesSend'
-    :: Text -- ^ 'media'
-    -> Body -- ^ 'Message'
-    -> Message
+    :: Message -- ^ 'payload'
+    -> Text -- ^ 'media'
+    -> Body
     -> UsersMessagesSend'
-usersMessagesSend' pUmsUserId_ pUmsMedia_ pUmsMessage_ =
+usersMessagesSend' pUmsPayload_ pUmsUserId_ pUmsMedia_ =
     UsersMessagesSend'
     { _umsQuotaUser = Nothing
     , _umsPrettyPrint = True
     , _umsUserIP = Nothing
+    , _umsPayload = pUmsPayload_
     , _umsUserId = pUmsUserId_
     , _umsMedia = pUmsMedia_
     , _umsKey = Nothing
     , _umsOAuthToken = Nothing
-    , _umsMessage = pUmsMessage_
     , _umsFields = Nothing
     }
 
@@ -135,6 +136,11 @@ umsUserIP :: Lens' UsersMessagesSend' (Maybe Text)
 umsUserIP
   = lens _umsUserIP (\ s a -> s{_umsUserIP = a})
 
+-- | Multipart request metadata.
+umsPayload :: Lens' UsersMessagesSend' Message
+umsPayload
+  = lens _umsPayload (\ s a -> s{_umsPayload = a})
+
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
 umsUserId :: Lens' UsersMessagesSend' Text
@@ -156,11 +162,6 @@ umsOAuthToken
   = lens _umsOAuthToken
       (\ s a -> s{_umsOAuthToken = a})
 
--- | Multipart request metadata.
-umsMessage :: Lens' UsersMessagesSend' Message
-umsMessage
-  = lens _umsMessage (\ s a -> s{_umsMessage = a})
-
 -- | Selector specifying which fields to include in a partial response.
 umsFields :: Lens' UsersMessagesSend' (Maybe Text)
 umsFields
@@ -174,14 +175,14 @@ instance GoogleRequest UsersMessagesSend' where
         type Rs UsersMessagesSend' = Message
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesSend'{..}
-          = go _umsMedia _umsUserId _umsQuotaUser
-              (Just _umsPrettyPrint)
+          = go _umsUserId _umsQuotaUser (Just _umsPrettyPrint)
               _umsUserIP
               _umsFields
               _umsKey
               _umsOAuthToken
               (Just AltJSON)
-              _umsMessage
+              _umsPayload
+              _umsMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersMessagesSendResource)

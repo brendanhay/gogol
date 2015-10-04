@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- /See:/ 'command' smart constructor.
 newtype Command = Command
     { _cType :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Command' with the minimum fields required to make a request.
 --
@@ -61,7 +61,7 @@ instance ToJSON Command where
 data LocationsListResponse = LocationsListResponse
     { _llrKind  :: !Text
     , _llrItems :: !(Maybe [Location])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocationsListResponse' with the minimum fields required to make a request.
 --
@@ -111,7 +111,7 @@ instance ToJSON LocationsListResponse where
 data NotificationConfig = NotificationConfig
     { _ncDeliveryTime :: !(Maybe DateTime')
     , _ncLevel        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NotificationConfig' with the minimum fields required to make a request.
 --
@@ -167,7 +167,7 @@ data Location = Location
     , _lAccuracy    :: !(Maybe Double)
     , _lLongitude   :: !(Maybe Double)
     , _lTimestamp   :: !(Maybe DateTime')
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -278,7 +278,7 @@ data Notification = Notification
     , _nUserActions :: !(Maybe [UserAction])
     , _nVerifyToken :: !(Maybe Text)
     , _nUserToken   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Notification' with the minimum fields required to make a request.
 --
@@ -378,7 +378,7 @@ data Contact = Contact
     , _conId              :: !(Maybe Text)
     , _conType            :: !(Maybe Text)
     , _conSpeakableName   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Contact' with the minimum fields required to make a request.
 --
@@ -555,7 +555,7 @@ instance ToJSON Contact where
 data AuthToken = AuthToken
     { _atAuthToken :: !(Maybe Text)
     , _atType      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AuthToken' with the minimum fields required to make a request.
 --
@@ -599,7 +599,7 @@ instance ToJSON AuthToken where
 data AttachmentsListResponse = AttachmentsListResponse
     { _alrKind  :: !Text
     , _alrItems :: !(Maybe [Attachment])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AttachmentsListResponse' with the minimum fields required to make a request.
 --
@@ -649,10 +649,10 @@ data MenuItem = MenuItem
     { _miValues             :: !(Maybe [MenuValue])
     , _miRemoveWhenSelected :: !(Maybe Bool)
     , _miAction             :: !(Maybe Text)
-    , _miPayLoad            :: !(Maybe Text)
+    , _miPayload            :: !(Maybe Text)
     , _miContextualCommand  :: !(Maybe Text)
     , _miId                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MenuItem' with the minimum fields required to make a request.
 --
@@ -664,7 +664,7 @@ data MenuItem = MenuItem
 --
 -- * 'miAction'
 --
--- * 'miPayLoad'
+-- * 'miPayload'
 --
 -- * 'miContextualCommand'
 --
@@ -676,7 +676,7 @@ menuItem =
     { _miValues = Nothing
     , _miRemoveWhenSelected = Nothing
     , _miAction = Nothing
-    , _miPayLoad = Nothing
+    , _miPayload = Nothing
     , _miContextualCommand = Nothing
     , _miId = Nothing
     }
@@ -733,9 +733,9 @@ miAction = lens _miAction (\ s a -> s{_miAction = a})
 -- website to view. - When the action is PLAY_VIDEO, the payload is the
 -- streaming URL of the video - When the action is GET_MEDIA_INPUT, the
 -- payload is the text transcription of a user\'s speech input
-miPayLoad :: Lens' MenuItem (Maybe Text)
-miPayLoad
-  = lens _miPayLoad (\ s a -> s{_miPayLoad = a})
+miPayload :: Lens' MenuItem (Maybe Text)
+miPayload
+  = lens _miPayload (\ s a -> s{_miPayload = a})
 
 -- | The ContextualMenus.Command associated with this MenuItem (e.g.
 -- READ_ALOUD). The voice label for this command will be displayed in the
@@ -772,7 +772,7 @@ instance ToJSON MenuItem where
                  [("values" .=) <$> _miValues,
                   ("removeWhenSelected" .=) <$> _miRemoveWhenSelected,
                   ("action" .=) <$> _miAction,
-                  ("payload" .=) <$> _miPayLoad,
+                  ("payload" .=) <$> _miPayload,
                   ("contextual_command" .=) <$> _miContextualCommand,
                   ("id" .=) <$> _miId])
 
@@ -783,7 +783,7 @@ data Setting = Setting
     { _sKind  :: !Text
     , _sValue :: !(Maybe Text)
     , _sId    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Setting' with the minimum fields required to make a request.
 --
@@ -843,7 +843,7 @@ data Account = Account
     , _aUserData   :: !(Maybe [UserData])
     , _aPassword   :: !(Maybe Text)
     , _aFeatures   :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
@@ -916,7 +916,7 @@ data Attachment = Attachment
     , _aId                  :: !(Maybe Text)
     , _aIsProcessingContent :: !(Maybe Bool)
     , _aContentType         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Attachment' with the minimum fields required to make a request.
 --
@@ -984,7 +984,7 @@ instance ToJSON Attachment where
 data UserData = UserData
     { _udValue :: !(Maybe Text)
     , _udKey   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserData' with the minimum fields required to make a request.
 --
@@ -1023,30 +1023,30 @@ instance ToJSON UserData where
 --
 -- /See:/ 'userAction' smart constructor.
 data UserAction = UserAction
-    { _uaPayLoad :: !(Maybe Text)
+    { _uaPayload :: !(Maybe Text)
     , _uaType    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserAction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uaPayLoad'
+-- * 'uaPayload'
 --
 -- * 'uaType'
 userAction
     :: UserAction
 userAction =
     UserAction
-    { _uaPayLoad = Nothing
+    { _uaPayload = Nothing
     , _uaType = Nothing
     }
 
 -- | An optional payload for the action. For actions of type CUSTOM, this is
 -- the ID of the custom menu item that was selected.
-uaPayLoad :: Lens' UserAction (Maybe Text)
-uaPayLoad
-  = lens _uaPayLoad (\ s a -> s{_uaPayLoad = a})
+uaPayload :: Lens' UserAction (Maybe Text)
+uaPayload
+  = lens _uaPayload (\ s a -> s{_uaPayload = a})
 
 -- | The type of action. The value of this can be: - SHARE - the user shared
 -- an item. - REPLY - the user replied to an item. - REPLY_ALL - the user
@@ -1069,7 +1069,7 @@ instance ToJSON UserAction where
         toJSON UserAction{..}
           = object
               (catMaybes
-                 [("payload" .=) <$> _uaPayLoad,
+                 [("payload" .=) <$> _uaPayload,
                   ("type" .=) <$> _uaType])
 
 -- | A list of Contacts representing contacts. This is the response from the
@@ -1079,7 +1079,7 @@ instance ToJSON UserAction where
 data ContactsListResponse = ContactsListResponse
     { _clrKind  :: !Text
     , _clrItems :: !(Maybe [Contact])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContactsListResponse' with the minimum fields required to make a request.
 --
@@ -1130,7 +1130,7 @@ data TimelineListResponse = TimelineListResponse
     { _tlrNextPageToken :: !(Maybe Text)
     , _tlrKind          :: !Text
     , _tlrItems         :: !(Maybe [TimelineItem])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineListResponse' with the minimum fields required to make a request.
 --
@@ -1192,7 +1192,7 @@ data MenuValue = MenuValue
     { _mvState       :: !(Maybe Text)
     , _mvDisplayName :: !(Maybe Text)
     , _mvIconURL     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MenuValue' with the minimum fields required to make a request.
 --
@@ -1262,7 +1262,7 @@ data Subscription = Subscription
     , _subUserToken    :: !(Maybe Text)
     , _subId           :: !(Maybe Text)
     , _subUpdated      :: !(Maybe DateTime')
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Subscription' with the minimum fields required to make a request.
 --
@@ -1421,7 +1421,7 @@ data TimelineItem = TimelineItem
     , _tiRecipients    :: !(Maybe [Contact])
     , _tiTitle         :: !(Maybe Text)
     , _tiInReplyTo     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineItem' with the minimum fields required to make a request.
 --
@@ -1776,7 +1776,7 @@ instance ToJSON TimelineItem where
 data SubscriptionsListResponse = SubscriptionsListResponse
     { _slrKind  :: !Text
     , _slrItems :: !(Maybe [Subscription])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsListResponse' with the minimum fields required to make a request.
 --

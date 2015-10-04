@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,10 +55,10 @@ type ScoresListResource =
        Capture "leaderboardId" Text :>
          "scores" :>
            Capture "collection" GamesScoresListCollection :>
-             QueryParam "language" Text :>
-               QueryParam "maxResults" Int32 :>
+             QueryParam "timeSpan" TimeSpan :>
+               QueryParam "language" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "timeSpan" GamesScoresListTimeSpan :>
+                   QueryParam "maxResults" Int32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -75,7 +76,7 @@ data ScoresList' = ScoresList'
     , _scoPrettyPrint   :: !Bool
     , _scoUserIP        :: !(Maybe Text)
     , _scoCollection    :: !GamesScoresListCollection
-    , _scoTimeSpan      :: !GamesScoresListTimeSpan
+    , _scoTimeSpan      :: !TimeSpan
     , _scoLeaderboardId :: !Text
     , _scoKey           :: !(Maybe Key)
     , _scoLanguage      :: !(Maybe Text)
@@ -83,7 +84,7 @@ data ScoresList' = ScoresList'
     , _scoOAuthToken    :: !(Maybe OAuthToken)
     , _scoMaxResults    :: !(Maybe Int32)
     , _scoFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresList'' with the minimum fields required to make a request.
 --
@@ -114,7 +115,7 @@ data ScoresList' = ScoresList'
 -- * 'scoFields'
 scoresList'
     :: GamesScoresListCollection -- ^ 'collection'
-    -> GamesScoresListTimeSpan -- ^ 'timeSpan'
+    -> TimeSpan -- ^ 'timeSpan'
     -> Text -- ^ 'leaderboardId'
     -> ScoresList'
 scoresList' pScoCollection_ pScoTimeSpan_ pScoLeaderboardId_ =
@@ -159,7 +160,7 @@ scoCollection
       (\ s a -> s{_scoCollection = a})
 
 -- | The time span for the scores and ranks you\'re requesting.
-scoTimeSpan :: Lens' ScoresList' GamesScoresListTimeSpan
+scoTimeSpan :: Lens' ScoresList' TimeSpan
 scoTimeSpan
   = lens _scoTimeSpan (\ s a -> s{_scoTimeSpan = a})
 
@@ -212,10 +213,11 @@ instance GoogleRequest ScoresList' where
         type Rs ScoresList' = LeaderboardScores
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u ScoresList'{..}
-          = go _scoLanguage _scoMaxResults _scoPageToken
-              _scoLeaderboardId
-              _scoCollection
+          = go _scoLeaderboardId _scoCollection
               (Just _scoTimeSpan)
+              _scoLanguage
+              _scoPageToken
+              _scoMaxResults
               _scoQuotaUser
               (Just _scoPrettyPrint)
               _scoUserIP

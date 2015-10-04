@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.UploadAccount
     , rpuaQuotaUser
     , rpuaPrettyPrint
     , rpuaUserIP
+    , rpuaPayload
     , rpuaKey
-    , rpuaIdentitytoolkitRelyingPartyUploadAccountRequest
     , rpuaOAuthToken
     , rpuaFields
     ) where
@@ -61,14 +62,14 @@ type RelyingPartyUploadAccountResource =
 --
 -- /See:/ 'relyingPartyUploadAccount'' smart constructor.
 data RelyingPartyUploadAccount' = RelyingPartyUploadAccount'
-    { _rpuaQuotaUser                                       :: !(Maybe Text)
-    , _rpuaPrettyPrint                                     :: !Bool
-    , _rpuaUserIP                                          :: !(Maybe Text)
-    , _rpuaKey                                             :: !(Maybe Key)
-    , _rpuaIdentitytoolkitRelyingPartyUploadAccountRequest :: !IdentitytoolkitRelyingPartyUploadAccountRequest
-    , _rpuaOAuthToken                                      :: !(Maybe OAuthToken)
-    , _rpuaFields                                          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rpuaQuotaUser   :: !(Maybe Text)
+    , _rpuaPrettyPrint :: !Bool
+    , _rpuaUserIP      :: !(Maybe Text)
+    , _rpuaPayload     :: !IdentitytoolkitRelyingPartyUploadAccountRequest
+    , _rpuaKey         :: !(Maybe Key)
+    , _rpuaOAuthToken  :: !(Maybe OAuthToken)
+    , _rpuaFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingPartyUploadAccount'' with the minimum fields required to make a request.
 --
@@ -80,23 +81,23 @@ data RelyingPartyUploadAccount' = RelyingPartyUploadAccount'
 --
 -- * 'rpuaUserIP'
 --
--- * 'rpuaKey'
+-- * 'rpuaPayload'
 --
--- * 'rpuaIdentitytoolkitRelyingPartyUploadAccountRequest'
+-- * 'rpuaKey'
 --
 -- * 'rpuaOAuthToken'
 --
 -- * 'rpuaFields'
 relyingPartyUploadAccount'
-    :: IdentitytoolkitRelyingPartyUploadAccountRequest -- ^ 'IdentitytoolkitRelyingPartyUploadAccountRequest'
+    :: IdentitytoolkitRelyingPartyUploadAccountRequest -- ^ 'payload'
     -> RelyingPartyUploadAccount'
-relyingPartyUploadAccount' pRpuaIdentitytoolkitRelyingPartyUploadAccountRequest_ =
+relyingPartyUploadAccount' pRpuaPayload_ =
     RelyingPartyUploadAccount'
     { _rpuaQuotaUser = Nothing
     , _rpuaPrettyPrint = True
     , _rpuaUserIP = Nothing
+    , _rpuaPayload = pRpuaPayload_
     , _rpuaKey = Nothing
-    , _rpuaIdentitytoolkitRelyingPartyUploadAccountRequest = pRpuaIdentitytoolkitRelyingPartyUploadAccountRequest_
     , _rpuaOAuthToken = Nothing
     , _rpuaFields = Nothing
     }
@@ -121,20 +122,16 @@ rpuaUserIP :: Lens' RelyingPartyUploadAccount' (Maybe Text)
 rpuaUserIP
   = lens _rpuaUserIP (\ s a -> s{_rpuaUserIP = a})
 
+-- | Multipart request metadata.
+rpuaPayload :: Lens' RelyingPartyUploadAccount' IdentitytoolkitRelyingPartyUploadAccountRequest
+rpuaPayload
+  = lens _rpuaPayload (\ s a -> s{_rpuaPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 rpuaKey :: Lens' RelyingPartyUploadAccount' (Maybe Key)
 rpuaKey = lens _rpuaKey (\ s a -> s{_rpuaKey = a})
-
--- | Multipart request metadata.
-rpuaIdentitytoolkitRelyingPartyUploadAccountRequest :: Lens' RelyingPartyUploadAccount' IdentitytoolkitRelyingPartyUploadAccountRequest
-rpuaIdentitytoolkitRelyingPartyUploadAccountRequest
-  = lens
-      _rpuaIdentitytoolkitRelyingPartyUploadAccountRequest
-      (\ s a ->
-         s{_rpuaIdentitytoolkitRelyingPartyUploadAccountRequest
-             = a})
 
 -- | OAuth 2.0 token for the current user.
 rpuaOAuthToken :: Lens' RelyingPartyUploadAccount' (Maybe OAuthToken)
@@ -163,7 +160,7 @@ instance GoogleRequest RelyingPartyUploadAccount'
               _rpuaKey
               _rpuaOAuthToken
               (Just AltJSON)
-              _rpuaIdentitytoolkitRelyingPartyUploadAccountRequest
+              _rpuaPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RelyingPartyUploadAccountResource)

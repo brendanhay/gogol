@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Create
     -- * Request Lenses
     , rccQuotaUser
     , rccPrettyPrint
-    , rccRasterCollection
     , rccUserIP
+    , rccPayload
     , rccKey
     , rccOAuthToken
     , rccFields
@@ -60,14 +61,14 @@ type RasterCollectionsCreateResource =
 --
 -- /See:/ 'rasterCollectionsCreate'' smart constructor.
 data RasterCollectionsCreate' = RasterCollectionsCreate'
-    { _rccQuotaUser        :: !(Maybe Text)
-    , _rccPrettyPrint      :: !Bool
-    , _rccRasterCollection :: !RasterCollection
-    , _rccUserIP           :: !(Maybe Text)
-    , _rccKey              :: !(Maybe Key)
-    , _rccOAuthToken       :: !(Maybe OAuthToken)
-    , _rccFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rccQuotaUser   :: !(Maybe Text)
+    , _rccPrettyPrint :: !Bool
+    , _rccUserIP      :: !(Maybe Text)
+    , _rccPayload     :: !RasterCollection
+    , _rccKey         :: !(Maybe Key)
+    , _rccOAuthToken  :: !(Maybe OAuthToken)
+    , _rccFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsCreate'' with the minimum fields required to make a request.
 --
@@ -77,9 +78,9 @@ data RasterCollectionsCreate' = RasterCollectionsCreate'
 --
 -- * 'rccPrettyPrint'
 --
--- * 'rccRasterCollection'
---
 -- * 'rccUserIP'
+--
+-- * 'rccPayload'
 --
 -- * 'rccKey'
 --
@@ -87,14 +88,14 @@ data RasterCollectionsCreate' = RasterCollectionsCreate'
 --
 -- * 'rccFields'
 rasterCollectionsCreate'
-    :: RasterCollection -- ^ 'RasterCollection'
+    :: RasterCollection -- ^ 'payload'
     -> RasterCollectionsCreate'
-rasterCollectionsCreate' pRccRasterCollection_ =
+rasterCollectionsCreate' pRccPayload_ =
     RasterCollectionsCreate'
     { _rccQuotaUser = Nothing
     , _rccPrettyPrint = True
-    , _rccRasterCollection = pRccRasterCollection_
     , _rccUserIP = Nothing
+    , _rccPayload = pRccPayload_
     , _rccKey = Nothing
     , _rccOAuthToken = Nothing
     , _rccFields = Nothing
@@ -113,17 +114,16 @@ rccPrettyPrint
   = lens _rccPrettyPrint
       (\ s a -> s{_rccPrettyPrint = a})
 
--- | Multipart request metadata.
-rccRasterCollection :: Lens' RasterCollectionsCreate' RasterCollection
-rccRasterCollection
-  = lens _rccRasterCollection
-      (\ s a -> s{_rccRasterCollection = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 rccUserIP :: Lens' RasterCollectionsCreate' (Maybe Text)
 rccUserIP
   = lens _rccUserIP (\ s a -> s{_rccUserIP = a})
+
+-- | Multipart request metadata.
+rccPayload :: Lens' RasterCollectionsCreate' RasterCollection
+rccPayload
+  = lens _rccPayload (\ s a -> s{_rccPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -155,7 +155,7 @@ instance GoogleRequest RasterCollectionsCreate' where
               _rccKey
               _rccOAuthToken
               (Just AltJSON)
-              _rccRasterCollection
+              _rccPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RasterCollectionsCreateResource)

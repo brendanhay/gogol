@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 data IntValue = IntValue
     { _ivValue :: !(Maybe Int64)
     , _ivLabel :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IntValue' with the minimum fields required to make a request.
 --
@@ -63,7 +63,7 @@ instance ToJSON IntValue where
 -- /See:/ 'aggregatedStatsReply' smart constructor.
 newtype AggregatedStatsReply = AggregatedStatsReply
     { _asrTestValue :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AggregatedStatsReply' with the minimum fields required to make a request.
 --
@@ -96,7 +96,7 @@ instance ToJSON AggregatedStatsReply where
 data DoubleValue = DoubleValue
     { _dvValue :: !(Maybe Float)
     , _dvLabel :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DoubleValue' with the minimum fields required to make a request.
 --
@@ -137,7 +137,7 @@ instance ToJSON DoubleValue where
 data StringValue = StringValue
     { _svValue :: !(Maybe Text)
     , _svLabel :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StringValue' with the minimum fields required to make a request.
 --
@@ -180,7 +180,7 @@ data Stats = Stats
     , _sDoubleValues :: !(Maybe [DoubleValue])
     , _sStringValues :: !(Maybe [StringValue])
     , _sIntValues    :: !(Maybe [IntValue])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Stats' with the minimum fields required to make a request.
 --
@@ -248,7 +248,7 @@ instance ToJSON Stats where
 -- /See:/ 'aggregatedStats' smart constructor.
 newtype AggregatedStats = AggregatedStats
     { _asStats :: Maybe [Stats]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AggregatedStats' with the minimum fields required to make a request.
 --
@@ -281,7 +281,7 @@ instance ToJSON AggregatedStats where
 -- /See:/ 'statsReply' smart constructor.
 newtype StatsReply = StatsReply
     { _srTestValue :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatsReply' with the minimum fields required to make a request.
 --

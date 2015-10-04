@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -83,7 +84,7 @@ data EditsImagesUpload' = EditsImagesUpload'
     , _eiuOAuthToken  :: !(Maybe OAuthToken)
     , _eiuEditId      :: !Text
     , _eiuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsImagesUpload'' with the minimum fields required to make a request.
 --
@@ -202,8 +203,7 @@ instance GoogleRequest EditsImagesUpload' where
         type Rs EditsImagesUpload' = ImagesUploadResponse
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsImagesUpload'{..}
-          = go _eiuMedia _eiuPackageName _eiuEditId
-              _eiuLanguage
+          = go _eiuPackageName _eiuEditId _eiuLanguage
               _eiuImageType
               _eiuQuotaUser
               (Just _eiuPrettyPrint)
@@ -212,6 +212,7 @@ instance GoogleRequest EditsImagesUpload' where
               _eiuKey
               _eiuOAuthToken
               (Just AltJSON)
+              _eiuMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EditsImagesUploadResource)

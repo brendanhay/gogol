@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Patch
     , eapklpPrettyPrint
     , eapklpPackageName
     , eapklpAPKVersionCode
-    , eapklpAPKListing
     , eapklpUserIP
+    , eapklpPayload
     , eapklpKey
     , eapklpLanguage
     , eapklpOAuthToken
@@ -76,14 +77,14 @@ data EditsAPKListingsPatch' = EditsAPKListingsPatch'
     , _eapklpPrettyPrint    :: !Bool
     , _eapklpPackageName    :: !Text
     , _eapklpAPKVersionCode :: !Int32
-    , _eapklpAPKListing     :: !APKListing
     , _eapklpUserIP         :: !(Maybe Text)
+    , _eapklpPayload        :: !APKListing
     , _eapklpKey            :: !(Maybe Key)
     , _eapklpLanguage       :: !Text
     , _eapklpOAuthToken     :: !(Maybe OAuthToken)
     , _eapklpEditId         :: !Text
     , _eapklpFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsAPKListingsPatch'' with the minimum fields required to make a request.
 --
@@ -97,9 +98,9 @@ data EditsAPKListingsPatch' = EditsAPKListingsPatch'
 --
 -- * 'eapklpAPKVersionCode'
 --
--- * 'eapklpAPKListing'
---
 -- * 'eapklpUserIP'
+--
+-- * 'eapklpPayload'
 --
 -- * 'eapklpKey'
 --
@@ -113,18 +114,18 @@ data EditsAPKListingsPatch' = EditsAPKListingsPatch'
 editsAPKListingsPatch'
     :: Text -- ^ 'packageName'
     -> Int32 -- ^ 'apkVersionCode'
-    -> APKListing -- ^ 'APKListing'
+    -> APKListing -- ^ 'payload'
     -> Text -- ^ 'language'
     -> Text -- ^ 'editId'
     -> EditsAPKListingsPatch'
-editsAPKListingsPatch' pEapklpPackageName_ pEapklpAPKVersionCode_ pEapklpAPKListing_ pEapklpLanguage_ pEapklpEditId_ =
+editsAPKListingsPatch' pEapklpPackageName_ pEapklpAPKVersionCode_ pEapklpPayload_ pEapklpLanguage_ pEapklpEditId_ =
     EditsAPKListingsPatch'
     { _eapklpQuotaUser = Nothing
     , _eapklpPrettyPrint = True
     , _eapklpPackageName = pEapklpPackageName_
     , _eapklpAPKVersionCode = pEapklpAPKVersionCode_
-    , _eapklpAPKListing = pEapklpAPKListing_
     , _eapklpUserIP = Nothing
+    , _eapklpPayload = pEapklpPayload_
     , _eapklpKey = Nothing
     , _eapklpLanguage = pEapklpLanguage_
     , _eapklpOAuthToken = Nothing
@@ -160,17 +161,17 @@ eapklpAPKVersionCode
   = lens _eapklpAPKVersionCode
       (\ s a -> s{_eapklpAPKVersionCode = a})
 
--- | Multipart request metadata.
-eapklpAPKListing :: Lens' EditsAPKListingsPatch' APKListing
-eapklpAPKListing
-  = lens _eapklpAPKListing
-      (\ s a -> s{_eapklpAPKListing = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 eapklpUserIP :: Lens' EditsAPKListingsPatch' (Maybe Text)
 eapklpUserIP
   = lens _eapklpUserIP (\ s a -> s{_eapklpUserIP = a})
+
+-- | Multipart request metadata.
+eapklpPayload :: Lens' EditsAPKListingsPatch' APKListing
+eapklpPayload
+  = lens _eapklpPayload
+      (\ s a -> s{_eapklpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -221,7 +222,7 @@ instance GoogleRequest EditsAPKListingsPatch' where
               _eapklpKey
               _eapklpOAuthToken
               (Just AltJSON)
-              _eapklpAPKListing
+              _eapklpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EditsAPKListingsPatchResource)

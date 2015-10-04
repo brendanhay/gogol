@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,17 +55,17 @@ import           Network.Google.PubSub.Types
 -- 'ProjectsTopicsList'' request conforms to.
 type ProjectsTopicsListResource =
      "v1beta2" :>
-       "{+project}" :>
+       Capture "project" Text :>
          "topics" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pageSize" Int32 :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "pageSize" Int32 :>
+                           QueryParam "callback" Text :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
@@ -92,7 +93,7 @@ data ProjectsTopicsList' = ProjectsTopicsList'
     , _ptlPageSize       :: !(Maybe Int32)
     , _ptlFields         :: !(Maybe Text)
     , _ptlCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsTopicsList'' with the minimum fields required to make a request.
 --
@@ -241,14 +242,14 @@ instance GoogleRequest ProjectsTopicsList' where
         type Rs ProjectsTopicsList' = ListTopicsResponse
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsTopicsList'{..}
-          = go _ptlXgafv _ptlAccessToken _ptlBearerToken
-              _ptlCallback
-              _ptlPageSize
-              _ptlPageToken
+          = go _ptlProject _ptlXgafv _ptlUploadProtocol
               (Just _ptlPp)
+              _ptlAccessToken
               _ptlUploadType
-              _ptlUploadProtocol
-              _ptlProject
+              _ptlBearerToken
+              _ptlPageToken
+              _ptlPageSize
+              _ptlCallback
               _ptlQuotaUser
               (Just _ptlPrettyPrint)
               _ptlFields

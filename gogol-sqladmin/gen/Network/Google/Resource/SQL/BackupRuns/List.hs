@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,8 +55,8 @@ type BackupRunsListResource =
          "instances" :>
            Capture "instance" Text :>
              "backupRuns" :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Int32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -80,7 +81,7 @@ data BackupRunsList' = BackupRunsList'
     , _brlMaxResults  :: !(Maybe Int32)
     , _brlFields      :: !(Maybe Text)
     , _brlInstance    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BackupRunsList'' with the minimum fields required to make a request.
 --
@@ -189,8 +190,8 @@ instance GoogleRequest BackupRunsList' where
         type Rs BackupRunsList' = BackupRunsListResponse
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u BackupRunsList'{..}
-          = go _brlMaxResults _brlPageToken _brlProject
-              _brlInstance
+          = go _brlProject _brlInstance _brlPageToken
+              _brlMaxResults
               _brlQuotaUser
               (Just _brlPrettyPrint)
               _brlUserIP

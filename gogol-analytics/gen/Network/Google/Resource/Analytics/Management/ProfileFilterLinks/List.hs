@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,8 +58,8 @@ type ManagementProfileFilterLinksListResource =
                "profiles" :>
                  Capture "profileId" Text :>
                    "profileFilterLinks" :>
-                     QueryParam "max-results" Int32 :>
-                       QueryParam "start-index" Int32 :>
+                     QueryParam "start-index" Int32 :>
+                       QueryParam "max-results" Int32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -83,7 +84,7 @@ data ManagementProfileFilterLinksList' = ManagementProfileFilterLinksList'
     , _mpfllStartIndex    :: !(Maybe Int32)
     , _mpfllMaxResults    :: !(Maybe Int32)
     , _mpfllFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileFilterLinksList'' with the minimum fields required to make a request.
 --
@@ -214,10 +215,10 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementProfileFilterLinksList'{..}
-          = go _mpfllMaxResults _mpfllStartIndex
-              _mpfllAccountId
-              _mpfllWebPropertyId
+          = go _mpfllAccountId _mpfllWebPropertyId
               _mpfllProfileId
+              _mpfllStartIndex
+              _mpfllMaxResults
               _mpfllQuotaUser
               (Just _mpfllPrettyPrint)
               _mpfllUserIP

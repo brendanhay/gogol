@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,12 +36,12 @@ module Network.Google.Resource.BigQuery.Tables.Update
     , tuQuotaUser
     , tuPrettyPrint
     , tuUserIP
+    , tuPayload
     , tuKey
     , tuDatasetId
     , tuProjectId
     , tuOAuthToken
     , tuTableId
-    , tuTable
     , tuFields
     ) where
 
@@ -74,14 +75,14 @@ data TablesUpdate' = TablesUpdate'
     { _tuQuotaUser   :: !(Maybe Text)
     , _tuPrettyPrint :: !Bool
     , _tuUserIP      :: !(Maybe Text)
+    , _tuPayload     :: !Table
     , _tuKey         :: !(Maybe Key)
     , _tuDatasetId   :: !Text
     , _tuProjectId   :: !Text
     , _tuOAuthToken  :: !(Maybe OAuthToken)
     , _tuTableId     :: !Text
-    , _tuTable       :: !Table
     , _tuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesUpdate'' with the minimum fields required to make a request.
 --
@@ -93,6 +94,8 @@ data TablesUpdate' = TablesUpdate'
 --
 -- * 'tuUserIP'
 --
+-- * 'tuPayload'
+--
 -- * 'tuKey'
 --
 -- * 'tuDatasetId'
@@ -103,26 +106,24 @@ data TablesUpdate' = TablesUpdate'
 --
 -- * 'tuTableId'
 --
--- * 'tuTable'
---
 -- * 'tuFields'
 tablesUpdate'
-    :: Text -- ^ 'datasetId'
+    :: Table -- ^ 'payload'
+    -> Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
     -> Text -- ^ 'tableId'
-    -> Table -- ^ 'Table'
     -> TablesUpdate'
-tablesUpdate' pTuDatasetId_ pTuProjectId_ pTuTableId_ pTuTable_ =
+tablesUpdate' pTuPayload_ pTuDatasetId_ pTuProjectId_ pTuTableId_ =
     TablesUpdate'
     { _tuQuotaUser = Nothing
     , _tuPrettyPrint = True
     , _tuUserIP = Nothing
+    , _tuPayload = pTuPayload_
     , _tuKey = Nothing
     , _tuDatasetId = pTuDatasetId_
     , _tuProjectId = pTuProjectId_
     , _tuOAuthToken = Nothing
     , _tuTableId = pTuTableId_
-    , _tuTable = pTuTable_
     , _tuFields = Nothing
     }
 
@@ -143,6 +144,11 @@ tuPrettyPrint
 -- want to enforce per-user limits.
 tuUserIP :: Lens' TablesUpdate' (Maybe Text)
 tuUserIP = lens _tuUserIP (\ s a -> s{_tuUserIP = a})
+
+-- | Multipart request metadata.
+tuPayload :: Lens' TablesUpdate' Table
+tuPayload
+  = lens _tuPayload (\ s a -> s{_tuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -170,10 +176,6 @@ tuTableId :: Lens' TablesUpdate' Text
 tuTableId
   = lens _tuTableId (\ s a -> s{_tuTableId = a})
 
--- | Multipart request metadata.
-tuTable :: Lens' TablesUpdate' Table
-tuTable = lens _tuTable (\ s a -> s{_tuTable = a})
-
 -- | Selector specifying which fields to include in a partial response.
 tuFields :: Lens' TablesUpdate' (Maybe Text)
 tuFields = lens _tuFields (\ s a -> s{_tuFields = a})
@@ -194,7 +196,7 @@ instance GoogleRequest TablesUpdate' where
               _tuKey
               _tuOAuthToken
               (Just AltJSON)
-              _tuTable
+              _tuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TablesUpdateResource)

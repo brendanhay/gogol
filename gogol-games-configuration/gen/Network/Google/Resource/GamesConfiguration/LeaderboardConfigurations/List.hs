@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ type LeaderboardConfigurationsListResource =
      "applications" :>
        Capture "applicationId" Text :>
          "leaderboards" :>
-           QueryParam "maxResults" Int32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Int32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -74,7 +75,7 @@ data LeaderboardConfigurationsList' = LeaderboardConfigurationsList'
     , _lclOAuthToken    :: !(Maybe OAuthToken)
     , _lclMaxResults    :: !(Maybe Int32)
     , _lclFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationsList'' with the minimum fields required to make a request.
 --
@@ -181,7 +182,7 @@ instance GoogleRequest LeaderboardConfigurationsList'
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
           LeaderboardConfigurationsList'{..}
-          = go _lclMaxResults _lclPageToken _lclApplicationId
+          = go _lclApplicationId _lclPageToken _lclMaxResults
               _lclQuotaUser
               (Just _lclPrettyPrint)
               _lclUserIP

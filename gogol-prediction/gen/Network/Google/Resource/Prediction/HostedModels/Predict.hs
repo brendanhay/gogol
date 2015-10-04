@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.Prediction.HostedModels.Predict
     , hmpPrettyPrint
     , hmpProject
     , hmpUserIP
-    , hmpInput
+    , hmpPayload
     , hmpKey
     , hmpOAuthToken
     , hmpFields
@@ -68,12 +69,12 @@ data HostedModelsPredict' = HostedModelsPredict'
     , _hmpPrettyPrint     :: !Bool
     , _hmpProject         :: !Text
     , _hmpUserIP          :: !(Maybe Text)
-    , _hmpInput           :: !Input
+    , _hmpPayload         :: !Input
     , _hmpKey             :: !(Maybe Key)
     , _hmpOAuthToken      :: !(Maybe OAuthToken)
     , _hmpFields          :: !(Maybe Text)
     , _hmpHostedModelName :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HostedModelsPredict'' with the minimum fields required to make a request.
 --
@@ -87,7 +88,7 @@ data HostedModelsPredict' = HostedModelsPredict'
 --
 -- * 'hmpUserIP'
 --
--- * 'hmpInput'
+-- * 'hmpPayload'
 --
 -- * 'hmpKey'
 --
@@ -98,16 +99,16 @@ data HostedModelsPredict' = HostedModelsPredict'
 -- * 'hmpHostedModelName'
 hostedModelsPredict'
     :: Text -- ^ 'project'
-    -> Input -- ^ 'Input'
+    -> Input -- ^ 'payload'
     -> Text -- ^ 'hostedModelName'
     -> HostedModelsPredict'
-hostedModelsPredict' pHmpProject_ pHmpInput_ pHmpHostedModelName_ =
+hostedModelsPredict' pHmpProject_ pHmpPayload_ pHmpHostedModelName_ =
     HostedModelsPredict'
     { _hmpQuotaUser = Nothing
     , _hmpPrettyPrint = True
     , _hmpProject = pHmpProject_
     , _hmpUserIP = Nothing
-    , _hmpInput = pHmpInput_
+    , _hmpPayload = pHmpPayload_
     , _hmpKey = Nothing
     , _hmpOAuthToken = Nothing
     , _hmpFields = Nothing
@@ -139,8 +140,9 @@ hmpUserIP
   = lens _hmpUserIP (\ s a -> s{_hmpUserIP = a})
 
 -- | Multipart request metadata.
-hmpInput :: Lens' HostedModelsPredict' Input
-hmpInput = lens _hmpInput (\ s a -> s{_hmpInput = a})
+hmpPayload :: Lens' HostedModelsPredict' Input
+hmpPayload
+  = lens _hmpPayload (\ s a -> s{_hmpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -180,7 +182,7 @@ instance GoogleRequest HostedModelsPredict' where
               _hmpKey
               _hmpOAuthToken
               (Just AltJSON)
-              _hmpInput
+              _hmpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy HostedModelsPredictResource)

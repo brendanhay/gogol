@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -38,9 +39,9 @@ module Network.Google.Resource.Storage.Objects.Patch
     , opIfGenerationMatch
     , opUserIP
     , opBucket
+    , opPayload
     , opKey
     , opIfMetagenerationNotMatch
-    , opObject
     , opObject
     , opProjection
     , opOAuthToken
@@ -58,13 +59,13 @@ type ObjectsPatchResource =
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
-             QueryParam "generation" Word64 :>
-               QueryParam "ifGenerationMatch" Word64 :>
-                 QueryParam "ifGenerationNotMatch" Word64 :>
-                   QueryParam "ifMetagenerationMatch" Word64 :>
-                     QueryParam "ifMetagenerationNotMatch" Word64 :>
-                       QueryParam "projection" StorageObjectsPatchProjection
-                         :>
+             QueryParam "ifMetagenerationMatch" Word64 :>
+               QueryParam "ifGenerationNotMatch" Word64 :>
+                 QueryParam "ifGenerationMatch" Word64 :>
+                   QueryParam "ifMetagenerationNotMatch" Word64 :>
+                     QueryParam "projection" StorageObjectsPatchProjection
+                       :>
+                       QueryParam "generation" Word64 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -87,15 +88,15 @@ data ObjectsPatch' = ObjectsPatch'
     , _opIfGenerationMatch        :: !(Maybe Word64)
     , _opUserIP                   :: !(Maybe Text)
     , _opBucket                   :: !Text
+    , _opPayload                  :: !Object
     , _opKey                      :: !(Maybe Key)
     , _opIfMetagenerationNotMatch :: !(Maybe Word64)
     , _opObject                   :: !Text
-    , _opObject                   :: !Object
     , _opProjection               :: !(Maybe StorageObjectsPatchProjection)
     , _opOAuthToken               :: !(Maybe OAuthToken)
     , _opGeneration               :: !(Maybe Word64)
     , _opFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsPatch'' with the minimum fields required to make a request.
 --
@@ -115,11 +116,11 @@ data ObjectsPatch' = ObjectsPatch'
 --
 -- * 'opBucket'
 --
+-- * 'opPayload'
+--
 -- * 'opKey'
 --
 -- * 'opIfMetagenerationNotMatch'
---
--- * 'opObject'
 --
 -- * 'opObject'
 --
@@ -132,10 +133,10 @@ data ObjectsPatch' = ObjectsPatch'
 -- * 'opFields'
 objectsPatch'
     :: Text -- ^ 'bucket'
+    -> Object -- ^ 'payload'
     -> Text -- ^ 'object'
-    -> Object -- ^ 'Object'
     -> ObjectsPatch'
-objectsPatch' pOpBucket_ pOpObject_ pOpObject_ =
+objectsPatch' pOpBucket_ pOpPayload_ pOpObject_ =
     ObjectsPatch'
     { _opQuotaUser = Nothing
     , _opIfMetagenerationMatch = Nothing
@@ -144,9 +145,9 @@ objectsPatch' pOpBucket_ pOpObject_ pOpObject_ =
     , _opIfGenerationMatch = Nothing
     , _opUserIP = Nothing
     , _opBucket = pOpBucket_
+    , _opPayload = pOpPayload_
     , _opKey = Nothing
     , _opIfMetagenerationNotMatch = Nothing
-    , _opObject = pOpObject_
     , _opObject = pOpObject_
     , _opProjection = Nothing
     , _opOAuthToken = Nothing
@@ -197,6 +198,11 @@ opUserIP = lens _opUserIP (\ s a -> s{_opUserIP = a})
 opBucket :: Lens' ObjectsPatch' Text
 opBucket = lens _opBucket (\ s a -> s{_opBucket = a})
 
+-- | Multipart request metadata.
+opPayload :: Lens' ObjectsPatch' Object
+opPayload
+  = lens _opPayload (\ s a -> s{_opPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -212,10 +218,6 @@ opIfMetagenerationNotMatch
 
 -- | Name of the object.
 opObject :: Lens' ObjectsPatch' Text
-opObject = lens _opObject (\ s a -> s{_opObject = a})
-
--- | Multipart request metadata.
-opObject :: Lens' ObjectsPatch' Object
 opObject = lens _opObject (\ s a -> s{_opObject = a})
 
 -- | Set of properties to return. Defaults to full.
@@ -246,13 +248,12 @@ instance GoogleRequest ObjectsPatch' where
         type Rs ObjectsPatch' = Object
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsPatch'{..}
-          = go _opGeneration _opIfGenerationMatch
+          = go _opBucket _opObject _opIfMetagenerationMatch
               _opIfGenerationNotMatch
-              _opIfMetagenerationMatch
+              _opIfGenerationMatch
               _opIfMetagenerationNotMatch
               _opProjection
-              _opBucket
-              _opObject
+              _opGeneration
               _opQuotaUser
               (Just _opPrettyPrint)
               _opUserIP
@@ -260,7 +261,7 @@ instance GoogleRequest ObjectsPatch' where
               _opKey
               _opOAuthToken
               (Just AltJSON)
-              _opObject
+              _opPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ObjectsPatchResource)

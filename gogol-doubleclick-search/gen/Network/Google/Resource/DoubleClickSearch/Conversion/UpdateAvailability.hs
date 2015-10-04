@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.UpdateAvailability
     , cuaQuotaUser
     , cuaPrettyPrint
     , cuaUserIP
-    , cuaUpdateAvailabilityRequest
+    , cuaPayload
     , cuaKey
     , cuaOAuthToken
     , cuaFields
@@ -63,14 +64,14 @@ type ConversionUpdateAvailabilityResource =
 --
 -- /See:/ 'conversionUpdateAvailability'' smart constructor.
 data ConversionUpdateAvailability' = ConversionUpdateAvailability'
-    { _cuaQuotaUser                 :: !(Maybe Text)
-    , _cuaPrettyPrint               :: !Bool
-    , _cuaUserIP                    :: !(Maybe Text)
-    , _cuaUpdateAvailabilityRequest :: !UpdateAvailabilityRequest
-    , _cuaKey                       :: !(Maybe Key)
-    , _cuaOAuthToken                :: !(Maybe OAuthToken)
-    , _cuaFields                    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cuaQuotaUser   :: !(Maybe Text)
+    , _cuaPrettyPrint :: !Bool
+    , _cuaUserIP      :: !(Maybe Text)
+    , _cuaPayload     :: !UpdateAvailabilityRequest
+    , _cuaKey         :: !(Maybe Key)
+    , _cuaOAuthToken  :: !(Maybe OAuthToken)
+    , _cuaFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConversionUpdateAvailability'' with the minimum fields required to make a request.
 --
@@ -82,7 +83,7 @@ data ConversionUpdateAvailability' = ConversionUpdateAvailability'
 --
 -- * 'cuaUserIP'
 --
--- * 'cuaUpdateAvailabilityRequest'
+-- * 'cuaPayload'
 --
 -- * 'cuaKey'
 --
@@ -90,14 +91,14 @@ data ConversionUpdateAvailability' = ConversionUpdateAvailability'
 --
 -- * 'cuaFields'
 conversionUpdateAvailability'
-    :: UpdateAvailabilityRequest -- ^ 'UpdateAvailabilityRequest'
+    :: UpdateAvailabilityRequest -- ^ 'payload'
     -> ConversionUpdateAvailability'
-conversionUpdateAvailability' pCuaUpdateAvailabilityRequest_ =
+conversionUpdateAvailability' pCuaPayload_ =
     ConversionUpdateAvailability'
     { _cuaQuotaUser = Nothing
     , _cuaPrettyPrint = True
     , _cuaUserIP = Nothing
-    , _cuaUpdateAvailabilityRequest = pCuaUpdateAvailabilityRequest_
+    , _cuaPayload = pCuaPayload_
     , _cuaKey = Nothing
     , _cuaOAuthToken = Nothing
     , _cuaFields = Nothing
@@ -123,10 +124,9 @@ cuaUserIP
   = lens _cuaUserIP (\ s a -> s{_cuaUserIP = a})
 
 -- | Multipart request metadata.
-cuaUpdateAvailabilityRequest :: Lens' ConversionUpdateAvailability' UpdateAvailabilityRequest
-cuaUpdateAvailabilityRequest
-  = lens _cuaUpdateAvailabilityRequest
-      (\ s a -> s{_cuaUpdateAvailabilityRequest = a})
+cuaPayload :: Lens' ConversionUpdateAvailability' UpdateAvailabilityRequest
+cuaPayload
+  = lens _cuaPayload (\ s a -> s{_cuaPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -163,7 +163,7 @@ instance GoogleRequest ConversionUpdateAvailability'
               _cuaKey
               _cuaOAuthToken
               (Just AltJSON)
-              _cuaUpdateAvailabilityRequest
+              _cuaPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ConversionUpdateAvailabilityResource)

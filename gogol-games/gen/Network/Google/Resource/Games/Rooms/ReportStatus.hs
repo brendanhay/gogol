@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.Games.Rooms.ReportStatus
     , rrsQuotaUser
     , rrsPrettyPrint
     , rrsUserIP
+    , rrsPayload
     , rrsKey
-    , rrsRoomP2PStatuses
     , rrsRoomId
     , rrsLanguage
     , rrsOAuthToken
@@ -69,16 +70,16 @@ type RoomsReportStatusResource =
 --
 -- /See:/ 'roomsReportStatus'' smart constructor.
 data RoomsReportStatus' = RoomsReportStatus'
-    { _rrsQuotaUser       :: !(Maybe Text)
-    , _rrsPrettyPrint     :: !Bool
-    , _rrsUserIP          :: !(Maybe Text)
-    , _rrsKey             :: !(Maybe Key)
-    , _rrsRoomP2PStatuses :: !RoomP2PStatuses
-    , _rrsRoomId          :: !Text
-    , _rrsLanguage        :: !(Maybe Text)
-    , _rrsOAuthToken      :: !(Maybe OAuthToken)
-    , _rrsFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rrsQuotaUser   :: !(Maybe Text)
+    , _rrsPrettyPrint :: !Bool
+    , _rrsUserIP      :: !(Maybe Text)
+    , _rrsPayload     :: !RoomP2PStatuses
+    , _rrsKey         :: !(Maybe Key)
+    , _rrsRoomId      :: !Text
+    , _rrsLanguage    :: !(Maybe Text)
+    , _rrsOAuthToken  :: !(Maybe OAuthToken)
+    , _rrsFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsReportStatus'' with the minimum fields required to make a request.
 --
@@ -90,9 +91,9 @@ data RoomsReportStatus' = RoomsReportStatus'
 --
 -- * 'rrsUserIP'
 --
--- * 'rrsKey'
+-- * 'rrsPayload'
 --
--- * 'rrsRoomP2PStatuses'
+-- * 'rrsKey'
 --
 -- * 'rrsRoomId'
 --
@@ -102,16 +103,16 @@ data RoomsReportStatus' = RoomsReportStatus'
 --
 -- * 'rrsFields'
 roomsReportStatus'
-    :: RoomP2PStatuses -- ^ 'RoomP2PStatuses'
+    :: RoomP2PStatuses -- ^ 'payload'
     -> Text -- ^ 'roomId'
     -> RoomsReportStatus'
-roomsReportStatus' pRrsRoomP2PStatuses_ pRrsRoomId_ =
+roomsReportStatus' pRrsPayload_ pRrsRoomId_ =
     RoomsReportStatus'
     { _rrsQuotaUser = Nothing
     , _rrsPrettyPrint = True
     , _rrsUserIP = Nothing
+    , _rrsPayload = pRrsPayload_
     , _rrsKey = Nothing
-    , _rrsRoomP2PStatuses = pRrsRoomP2PStatuses_
     , _rrsRoomId = pRrsRoomId_
     , _rrsLanguage = Nothing
     , _rrsOAuthToken = Nothing
@@ -137,17 +138,16 @@ rrsUserIP :: Lens' RoomsReportStatus' (Maybe Text)
 rrsUserIP
   = lens _rrsUserIP (\ s a -> s{_rrsUserIP = a})
 
+-- | Multipart request metadata.
+rrsPayload :: Lens' RoomsReportStatus' RoomP2PStatuses
+rrsPayload
+  = lens _rrsPayload (\ s a -> s{_rrsPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 rrsKey :: Lens' RoomsReportStatus' (Maybe Key)
 rrsKey = lens _rrsKey (\ s a -> s{_rrsKey = a})
-
--- | Multipart request metadata.
-rrsRoomP2PStatuses :: Lens' RoomsReportStatus' RoomP2PStatuses
-rrsRoomP2PStatuses
-  = lens _rrsRoomP2PStatuses
-      (\ s a -> s{_rrsRoomP2PStatuses = a})
 
 -- | The ID of the room.
 rrsRoomId :: Lens' RoomsReportStatus' Text
@@ -178,14 +178,14 @@ instance GoogleRequest RoomsReportStatus' where
         type Rs RoomsReportStatus' = RoomStatus
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RoomsReportStatus'{..}
-          = go _rrsLanguage _rrsRoomId _rrsQuotaUser
+          = go _rrsRoomId _rrsLanguage _rrsQuotaUser
               (Just _rrsPrettyPrint)
               _rrsUserIP
               _rrsFields
               _rrsKey
               _rrsOAuthToken
               (Just AltJSON)
-              _rrsRoomP2PStatuses
+              _rrsPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RoomsReportStatusResource)

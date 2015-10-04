@@ -24,14 +24,8 @@ module Network.Google.YouTube.Types
     , tURL
     , tWidth
 
-    -- * CaptionSnippetTrackKind
-    , CaptionSnippetTrackKind (..)
-
-    -- * ContentRatingMpaaRating
-    , ContentRatingMpaaRating (..)
-
-    -- * ContentRatingMccaaRating
-    , ContentRatingMccaaRating (..)
+    -- * VideoDefinition
+    , VideoDefinition (..)
 
     -- * IngestionInfo
     , IngestionInfo
@@ -40,8 +34,17 @@ module Network.Google.YouTube.Types
     , iiIngestionAddress
     , iiStreamName
 
-    -- * ContentRatingChfilmRating
-    , ContentRatingChfilmRating (..)
+    -- * Chart
+    , Chart (..)
+
+    -- * FailureReason
+    , FailureReason (..)
+
+    -- * Rotation
+    , Rotation (..)
+
+    -- * PefilmRating
+    , PefilmRating (..)
 
     -- * SubscriptionSubscriberSnippet
     , SubscriptionSubscriberSnippet
@@ -51,11 +54,11 @@ module Network.Google.YouTube.Types
     , sssTitle
     , sssDescription
 
-    -- * VideoSnippetLiveBroadcastContent
-    , VideoSnippetLiveBroadcastContent (..)
+    -- * CccRating
+    , CccRating (..)
 
-    -- * ChannelConversionPingContext
-    , ChannelConversionPingContext (..)
+    -- * AnatelRating
+    , AnatelRating (..)
 
     -- * ChannelAuditDetails
     , ChannelAuditDetails
@@ -65,11 +68,11 @@ module Network.Google.YouTube.Types
     , cadCopyrightStrikesGoodStanding
     , cadCommUnityGuidelinesGoodStanding
 
-    -- * ContentRatingCceRating
-    , ContentRatingCceRating (..)
+    -- * ProcessingFailureReason
+    , ProcessingFailureReason (..)
 
-    -- * LiveBroadcastStatusLifeCycleStatus
-    , LiveBroadcastStatusLifeCycleStatus (..)
+    -- * Style
+    , Style (..)
 
     -- * ChannelSectionSnippet
     , ChannelSectionSnippet
@@ -81,12 +84,6 @@ module Network.Google.YouTube.Types
     , cssType
     , cssPosition
     , cssDefaultLanguage
-
-    -- * VideoContentDetailsDefinition
-    , VideoContentDetailsDefinition (..)
-
-    -- * ContentRatingEefilmRating
-    , ContentRatingEefilmRating (..)
 
     -- * InvideoPositionType
     , InvideoPositionType (..)
@@ -102,8 +99,14 @@ module Network.Google.YouTube.Types
     , piId
     , piTiming
 
-    -- * YouTubeCommentThreadsListOrder
-    , YouTubeCommentThreadsListOrder (..)
+    -- * Rating
+    , Rating (..)
+
+    -- * VideoDuration
+    , VideoDuration (..)
+
+    -- * TrackKind
+    , TrackKind (..)
 
     -- * VideoStatusPrivacyStatus
     , VideoStatusPrivacyStatus (..)
@@ -120,9 +123,6 @@ module Network.Google.YouTube.Types
     , pllrVisitorId
     , pllrEventId
     , pllrPrevPageToken
-
-    -- * ContentRatingFskRating
-    , ContentRatingFskRating (..)
 
     -- * SearchListResponse
     , SearchListResponse
@@ -141,14 +141,11 @@ module Network.Google.YouTube.Types
     , TokenPagination
     , tokenPagination
 
-    -- * YouTubeCaptionsDownloadTfmt
-    , YouTubeCaptionsDownloadTfmt (..)
-
-    -- * ContentRatingRcnofRating
-    , ContentRatingRcnofRating (..)
-
     -- * CaptionSnippetFailureReason
     , CaptionSnippetFailureReason (..)
+
+    -- * Context
+    , Context (..)
 
     -- * ActivityContentDetailsRecommendation
     , ActivityContentDetailsRecommendation
@@ -157,8 +154,8 @@ module Network.Google.YouTube.Types
     , acdrSeedResourceId
     , acdrReason
 
-    -- * ContentRatingMekuRating
-    , ContentRatingMekuRating (..)
+    -- * VideoCaption
+    , VideoCaption (..)
 
     -- * ResourceId
     , ResourceId
@@ -167,6 +164,9 @@ module Network.Google.YouTube.Types
     , riChannelId
     , riVideoId
     , riPlayListId
+
+    -- * ProcessingWarningsItem
+    , ProcessingWarningsItem (..)
 
     -- * SearchResult
     , SearchResult
@@ -182,9 +182,6 @@ module Network.Google.YouTube.Types
     , csIsLinked
     , csLongUploadsStatus
     , csPrivacyStatus
-
-    -- * VideoProcessingDetailsProcessingFailureReason
-    , VideoProcessingDetailsProcessingFailureReason (..)
 
     -- * LiveBroadcastStatusPrivacyStatus
     , LiveBroadcastStatusPrivacyStatus (..)
@@ -203,20 +200,8 @@ module Network.Google.YouTube.Types
     , playListStatus
     , plsPrivacyStatus
 
-    -- * YouTubeSearchListChannelType
-    , YouTubeSearchListChannelType (..)
-
-    -- * CaptionSnippetAudioTrackType
-    , CaptionSnippetAudioTrackType (..)
-
-    -- * ChannelContentDetailsRelatedPlayLists
-    , ChannelContentDetailsRelatedPlayLists
-    , channelContentDetailsRelatedPlayLists
-    , ccdrplFavorites
-    , ccdrplWatchHistory
-    , ccdrplWatchLater
-    , ccdrplUploads
-    , ccdrplLikes
+    -- * MpaaRating
+    , MpaaRating (..)
 
     -- * VideoContentDetails
     , VideoContentDetails
@@ -243,6 +228,9 @@ module Network.Google.YouTube.Types
     , clrEventId
     , clrPrevPageToken
 
+    -- * CceRating
+    , CceRating (..)
+
     -- * VideoAbuseReportReasonListResponse
     , VideoAbuseReportReasonListResponse
     , videoAbuseReportReasonListResponse
@@ -265,8 +253,11 @@ module Network.Google.YouTube.Types
     , lbcdEnableClosedCaptions
     , lbcdEnableDvr
 
-    -- * ContentRatingCccRating
-    , ContentRatingCccRating (..)
+    -- * MccaaRating
+    , MccaaRating (..)
+
+    -- * ChfilmRating
+    , ChfilmRating (..)
 
     -- * ActivityContentDetailsFavorite
     , ActivityContentDetailsFavorite
@@ -279,14 +270,11 @@ module Network.Google.YouTube.Types
     , vtdTopicIds
     , vtdRelevantTopicIds
 
-    -- * ContentRatingAnatelRating
-    , ContentRatingAnatelRating (..)
+    -- * VideoLicense
+    , VideoLicense (..)
 
     -- * PromotedItemIdType
     , PromotedItemIdType (..)
-
-    -- * ContentRatingPefilmRating
-    , ContentRatingPefilmRating (..)
 
     -- * LiveStream
     , LiveStream
@@ -318,6 +306,15 @@ module Network.Google.YouTube.Types
     -- * SearchResultSnippetLiveBroadcastContent
     , SearchResultSnippetLiveBroadcastContent (..)
 
+    -- * RelatedPlayLists
+    , RelatedPlayLists
+    , relatedPlayLists
+    , rplFavorites
+    , rplWatchHistory
+    , rplWatchLater
+    , rplUploads
+    , rplLikes
+
     -- * ImageSettings
     , ImageSettings
     , imageSettings
@@ -344,23 +341,14 @@ module Network.Google.YouTube.Types
     , isBannerTabletLowImageURL
     , isBannerTabletHdImageURL
 
-    -- * ChannelStatusPrivacyStatus
-    , ChannelStatusPrivacyStatus (..)
+    -- * ActivityType
+    , ActivityType (..)
 
-    -- * ContentRatingSmsaRating
-    , ContentRatingSmsaRating (..)
+    -- * IcaaRating
+    , IcaaRating (..)
 
-    -- * YouTubeSearchListEventType
-    , YouTubeSearchListEventType (..)
-
-    -- * ContentRatingCnaRating
-    , ContentRatingCnaRating (..)
-
-    -- * ContentRatingChvrsRating
-    , ContentRatingChvrsRating (..)
-
-    -- * ContentRatingIncaaRating
-    , ContentRatingIncaaRating (..)
+    -- * FcbmRating
+    , FcbmRating (..)
 
     -- * ActivityContentDetailsUpload
     , ActivityContentDetailsUpload
@@ -396,8 +384,11 @@ module Network.Google.YouTube.Types
     , activityContentDetailsLike
     , acdlResourceId
 
-    -- * YouTubeSearchListVideoEmbeddable
-    , YouTubeSearchListVideoEmbeddable (..)
+    -- * BmukkRating
+    , BmukkRating (..)
+
+    -- * ViewerRating
+    , ViewerRating (..)
 
     -- * VideoFileDetails
     , VideoFileDetails
@@ -413,8 +404,11 @@ module Network.Google.YouTube.Types
     , vfdAudioStreams
     , vfdFileName
 
-    -- * ContentRatingCatvfrRating
-    , ContentRatingCatvfrRating (..)
+    -- * Definition
+    , Definition (..)
+
+    -- * MoctwRating
+    , MoctwRating (..)
 
     -- * LiveBroadcastStatus
     , LiveBroadcastStatus
@@ -432,9 +426,6 @@ module Network.Google.YouTube.Types
     , tsrItems
     , tsrVisitorId
     , tsrEventId
-
-    -- * VideoSuggestionsProcessingHints
-    , VideoSuggestionsProcessingHints (..)
 
     -- * ActivityContentDetailsPlayListItem
     , ActivityContentDetailsPlayListItem
@@ -455,23 +446,11 @@ module Network.Google.YouTube.Types
     , vsEmbeddable
     , vsLicense
 
-    -- * ContentRatingCbfcRating
-    , ContentRatingCbfcRating (..)
-
-    -- * ContentRatingKfcbRating
-    , ContentRatingKfcbRating (..)
-
     -- * PageInfo
     , PageInfo
     , pageInfo
     , piResultsPerPage
     , piTotalResults
-
-    -- * LiveStreamConfigurationIssueSeverity
-    , LiveStreamConfigurationIssueSeverity (..)
-
-    -- * ContentRatingLsfRating
-    , ContentRatingLsfRating (..)
 
     -- * ActivityContentDetailsChannelItem
     , ActivityContentDetailsChannelItem
@@ -491,9 +470,6 @@ module Network.Google.YouTube.Types
     , lblrEventId
     , lblrPrevPageToken
 
-    -- * ContentRatingBfvcRating
-    , ContentRatingBfvcRating (..)
-
     -- * VideoProcessingDetails
     , VideoProcessingDetails
     , videoProcessingDetails
@@ -506,14 +482,17 @@ module Network.Google.YouTube.Types
     , vpdEditorSuggestionsAvailability
     , vpdFileDetailsAvailability
 
+    -- * NfvcbRating
+    , NfvcbRating (..)
+
     -- * ChannelContentDetails
     , ChannelContentDetails
     , channelContentDetails
     , ccdRelatedPlayLists
     , ccdGooglePlusUserId
 
-    -- * YouTubeSearchListVideoType
-    , YouTubeSearchListVideoType (..)
+    -- * ModerationStatus
+    , ModerationStatus (..)
 
     -- * LiveBroadcastTopicType
     , LiveBroadcastTopicType (..)
@@ -549,8 +528,11 @@ module Network.Google.YouTube.Types
     , vstsTag
     , vstsCategoryRestricts
 
-    -- * VideoAgeGatingVideoGameRating
-    , VideoAgeGatingVideoGameRating (..)
+    -- * AgcomRating
+    , AgcomRating (..)
+
+    -- * StreamStatus
+    , StreamStatus (..)
 
     -- * CommentThreadSnippet
     , CommentThreadSnippet
@@ -585,14 +567,20 @@ module Network.Google.YouTube.Types
     , videoMonetizationDetails
     , vmdAccess
 
-    -- * ContentRatingIcaaRating
-    , ContentRatingIcaaRating (..)
+    -- * CnaRating
+    , CnaRating (..)
 
-    -- * CommentSnippetViewerRating
-    , CommentSnippetViewerRating (..)
+    -- * MyRating
+    , MyRating (..)
 
-    -- * YouTubeLiveBroadcastsTransitionBroadcastStatus
-    , YouTubeLiveBroadcastsTransitionBroadcastStatus (..)
+    -- * EditorSuggestionsItem
+    , EditorSuggestionsItem (..)
+
+    -- * CatvfrRating
+    , CatvfrRating (..)
+
+    -- * CbfcRating
+    , CbfcRating (..)
 
     -- * LiveStreamConfigurationIssue
     , LiveStreamConfigurationIssue
@@ -614,6 +602,9 @@ module Network.Google.YouTube.Types
     , varrKind
     , varrId
 
+    -- * Severity
+    , Severity (..)
+
     -- * ChannelSectionTargeting
     , ChannelSectionTargeting
     , channelSectionTargeting
@@ -621,11 +612,8 @@ module Network.Google.YouTube.Types
     , cstCountries
     , cstLanguages
 
-    -- * ContentRatingMoctwRating
-    , ContentRatingMoctwRating (..)
-
-    -- * ContentRatingBmukkRating
-    , ContentRatingBmukkRating (..)
+    -- * KfcbRating
+    , KfcbRating (..)
 
     -- * ChannelSectionListResponse
     , ChannelSectionListResponse
@@ -635,6 +623,12 @@ module Network.Google.YouTube.Types
     , cslrItems
     , cslrVisitorId
     , cslrEventId
+
+    -- * SmsaRating
+    , SmsaRating (..)
+
+    -- * LiveBroadcastPriority
+    , LiveBroadcastPriority (..)
 
     -- * PlayListSnippet
     , PlayListSnippet
@@ -667,9 +661,6 @@ module Network.Google.YouTube.Types
     , cStatistics
     , cLocalizations
 
-    -- * YouTubeSearchListVideoLicense
-    , YouTubeSearchListVideoLicense (..)
-
     -- * VideoGetRatingResponse
     , VideoGetRatingResponse
     , videoGetRatingResponse
@@ -679,8 +670,8 @@ module Network.Google.YouTube.Types
     , vgrrVisitorId
     , vgrrEventId
 
-    -- * ContentRatingFcbmRating
-    , ContentRatingFcbmRating (..)
+    -- * ChvrsRating
+    , ChvrsRating (..)
 
     -- * LiveStreamListResponse
     , LiveStreamListResponse
@@ -695,6 +686,15 @@ module Network.Google.YouTube.Types
     , lslrEventId
     , lslrPrevPageToken
 
+    -- * RejectionReason
+    , RejectionReason (..)
+
+    -- * IncaaRating
+    , IncaaRating (..)
+
+    -- * BroadcastStatus
+    , BroadcastStatus (..)
+
     -- * I18nRegion
     , I18nRegion
     , i18nRegion
@@ -705,6 +705,9 @@ module Network.Google.YouTube.Types
 
     -- * LiveStreamHealthStatusStatus
     , LiveStreamHealthStatusStatus (..)
+
+    -- * Caption
+    , Caption (..)
 
     -- * ActivityContentDetails
     , ActivityContentDetails
@@ -730,6 +733,9 @@ module Network.Google.YouTube.Types
     , csHiddenSubscriberCount
     , csViewCount
 
+    -- * LongUploadsStatus
+    , LongUploadsStatus (..)
+
     -- * ChannelId
     , ChannelId
     , channelId
@@ -741,8 +747,8 @@ module Network.Google.YouTube.Types
     , varrsSecondaryReasons
     , varrsLabel
 
-    -- * ContentRatingCzfilmRating
-    , ContentRatingCzfilmRating (..)
+    -- * ProcessingHintsItem
+    , ProcessingHintsItem (..)
 
     -- * VideoProcessingDetailsProcessingProgress
     , VideoProcessingDetailsProcessingProgress
@@ -751,6 +757,9 @@ module Network.Google.YouTube.Types
     , vpdppPartsTotal
     , vpdppPartsProcessed
 
+    -- * FileType
+    , FileType (..)
+
     -- * Caption
     , Caption
     , caption
@@ -758,6 +767,9 @@ module Network.Google.YouTube.Types
     , capSnippet
     , capKind
     , capId
+
+    -- * NfrcRating
+    , NfrcRating (..)
 
     -- * VideoContentDetailsRegionRestriction
     , VideoContentDetailsRegionRestriction
@@ -785,12 +797,6 @@ module Network.Google.YouTube.Types
     , csDescription
     , csDefaultLanguage
 
-    -- * LiveBroadcastStatusLiveBroadcastPriority
-    , LiveBroadcastStatusLiveBroadcastPriority (..)
-
-    -- * ContentRatingNbcRating
-    , ContentRatingNbcRating (..)
-
     -- * PlayListLocalizations
     , PlayListLocalizations
     , playListLocalizations
@@ -798,8 +804,14 @@ module Network.Google.YouTube.Types
     -- * YouTubeLiveBroadcastsListBroadcastStatus
     , YouTubeLiveBroadcastsListBroadcastStatus (..)
 
-    -- * VideoStatusRejectionReason
-    , VideoStatusRejectionReason (..)
+    -- * CsaRating
+    , CsaRating (..)
+
+    -- * MocRating
+    , MocRating (..)
+
+    -- * CtaType
+    , CtaType (..)
 
     -- * MonitorStreamInfo
     , MonitorStreamInfo
@@ -808,20 +820,8 @@ module Network.Google.YouTube.Types
     , msiEmbedHTML
     , msiEnableMonitorStream
 
-    -- * ContentRatingRussiaRating
-    , ContentRatingRussiaRating (..)
-
-    -- * YouTubeSearchListVideoDuration
-    , YouTubeSearchListVideoDuration (..)
-
-    -- * YouTubeSearchListSafeSearch
-    , YouTubeSearchListSafeSearch (..)
-
-    -- * ContentRatingCicfRating
-    , ContentRatingCicfRating (..)
-
-    -- * ContentRatingFmocRating
-    , ContentRatingFmocRating (..)
+    -- * EirinRating
+    , EirinRating (..)
 
     -- * InvideoTiming
     , InvideoTiming
@@ -829,6 +829,12 @@ module Network.Google.YouTube.Types
     , itDurationMs
     , itOffsetMs
     , itType
+
+    -- * CornerPosition
+    , CornerPosition (..)
+
+    -- * FskRating
+    , FskRating (..)
 
     -- * VideoCategory
     , VideoCategory
@@ -840,6 +846,12 @@ module Network.Google.YouTube.Types
 
     -- * VideoRatingRating
     , VideoRatingRating (..)
+
+    -- * EefilmRating
+    , EefilmRating (..)
+
+    -- * RecordingStatus
+    , RecordingStatus (..)
 
     -- * LiveBroadcast
     , LiveBroadcast
@@ -859,15 +871,12 @@ module Network.Google.YouTube.Types
     , cscdChannels
     , cscdPlayLists
 
-    -- * ChannelStatusLongUploadsStatus
-    , ChannelStatusLongUploadsStatus (..)
-
     -- * VideoLocalizations
     , VideoLocalizations
     , videoLocalizations
 
-    -- * InvideoPositionCornerPosition
-    , InvideoPositionCornerPosition (..)
+    -- * RcnofRating
+    , RcnofRating (..)
 
     -- * Video
     , Video
@@ -892,6 +901,9 @@ module Network.Google.YouTube.Types
     , vProcessingDetails
     , vMonetizationDetails
 
+    -- * MekuRating
+    , MekuRating (..)
+
     -- * LiveStreamContentDetails
     , LiveStreamContentDetails
     , liveStreamContentDetails
@@ -905,8 +917,14 @@ module Network.Google.YouTube.Types
     , vcsChannelId
     , vcsTitle
 
-    -- * LiveBroadcastStatusRecordingStatus
-    , LiveBroadcastStatusRecordingStatus (..)
+    -- * VideoEmbeddable
+    , VideoEmbeddable (..)
+
+    -- * IlfilmRating
+    , IlfilmRating (..)
+
+    -- * IfcoRating
+    , IfcoRating (..)
 
     -- * CommentThreadListResponse
     , CommentThreadListResponse
@@ -919,9 +937,6 @@ module Network.Google.YouTube.Types
     , ctlrItems
     , ctlrVisitorId
     , ctlrEventId
-
-    -- * ContentRatingCscfRating
-    , ContentRatingCscfRating (..)
 
     -- * PropertyValue
     , PropertyValue
@@ -937,21 +952,12 @@ module Network.Google.YouTube.Types
     , ilKind
     , ilId
 
-    -- * ContentRatingTvpgRating
-    , ContentRatingTvpgRating (..)
-
-    -- * VideoContentDetailsCaption
-    , VideoContentDetailsCaption (..)
-
     -- * WatchSettings
     , WatchSettings
     , watchSettings
     , wsFeaturedPlayListId
     , wsBackgRoundColor
     , wsTextColor
-
-    -- * ContentRatingSmaisRating
-    , ContentRatingSmaisRating (..)
 
     -- * VideoSnippet
     , VideoSnippet
@@ -975,9 +981,6 @@ module Network.Google.YouTube.Types
     , apException
     , apAllowed
 
-    -- * VideoSuggestionsProcessingWarnings
-    , VideoSuggestionsProcessingWarnings (..)
-
     -- * ActivityListResponse
     , ActivityListResponse
     , activityListResponse
@@ -998,11 +1001,14 @@ module Network.Google.YouTube.Types
     , csFormat
     , csIngestionType
 
-    -- * VideoFileDetailsVideoStreamRotation
-    , VideoFileDetailsVideoStreamRotation (..)
+    -- * EventType
+    , EventType (..)
 
-    -- * ContentRatingYtRating
-    , ContentRatingYtRating (..)
+    -- * Reason
+    , Reason (..)
+
+    -- * NbcplRating
+    , NbcplRating (..)
 
     -- * VideoStatistics
     , VideoStatistics
@@ -1013,11 +1019,11 @@ module Network.Google.YouTube.Types
     , vsDislikeCount
     , vsViewCount
 
-    -- * ContentRatingRtcRating
-    , ContentRatingRtcRating (..)
+    -- * GrfilmRating
+    , GrfilmRating (..)
 
-    -- * ContentRatingBbfcRating
-    , ContentRatingBbfcRating (..)
+    -- * RteRating
+    , RteRating (..)
 
     -- * LiveBroadcastSnippet
     , LiveBroadcastSnippet
@@ -1055,6 +1061,9 @@ module Network.Google.YouTube.Types
     , irlrVisitorId
     , irlrEventId
 
+    -- * AcbRating
+    , AcbRating (..)
+
     -- * PlayListItemStatus
     , PlayListItemStatus
     , playListItemStatus
@@ -1063,23 +1072,26 @@ module Network.Google.YouTube.Types
     -- * YouTubeSearchListOrder
     , YouTubeSearchListOrder (..)
 
-    -- * VideoProcessingDetailsProcessingStatus
-    , VideoProcessingDetailsProcessingStatus (..)
-
-    -- * ContentRatingCNCRating
-    , ContentRatingCNCRating (..)
-
-    -- * ContentRatingSkfilmRating
-    , ContentRatingSkfilmRating (..)
-
     -- * ChannelSectionSnippetType
     , ChannelSectionSnippetType (..)
 
     -- * CaptionSnippetStatus
     , CaptionSnippetStatus (..)
 
-    -- * ActivityContentDetailsPromotedItemCtaType
-    , ActivityContentDetailsPromotedItemCtaType (..)
+    -- * CatvRating
+    , CatvRating (..)
+
+    -- * ProcessingStatus
+    , ProcessingStatus (..)
+
+    -- * MdaRating
+    , MdaRating (..)
+
+    -- * DjctqRating
+    , DjctqRating (..)
+
+    -- * UploadStatus
+    , UploadStatus (..)
 
     -- * InvideoPosition
     , InvideoPosition
@@ -1100,6 +1112,12 @@ module Network.Google.YouTube.Types
     , activityContentDetailsBulletin
     , acdbResourceId
 
+    -- * SafeSearch
+    , SafeSearch (..)
+
+    -- * VideoSyndicated
+    , VideoSyndicated (..)
+
     -- * VideoAbuseReport
     , VideoAbuseReport
     , videoAbuseReport
@@ -1108,9 +1126,6 @@ module Network.Google.YouTube.Types
     , varVideoId
     , varLanguage
     , varComments
-
-    -- * YouTubeCommentThreadsListTextFormat
-    , YouTubeCommentThreadsListTextFormat (..)
 
     -- * CaptionListResponse
     , CaptionListResponse
@@ -1121,14 +1136,8 @@ module Network.Google.YouTube.Types
     , clrlVisitorId
     , clrlEventId
 
-    -- * ContentRatingKmrbRating
-    , ContentRatingKmrbRating (..)
-
-    -- * ContentRatingOflcRating
-    , ContentRatingOflcRating (..)
-
-    -- * YouTubeVideosRateRating
-    , YouTubeVideosRateRating (..)
+    -- * LifeCycleStatus
+    , LifeCycleStatus (..)
 
     -- * PromotedItemId
     , PromotedItemId
@@ -1149,23 +1158,25 @@ module Network.Google.YouTube.Types
     , srsLiveBroadcastContent
     , srsDescription
 
-    -- * ChannelSectionLocalizations
-    , ChannelSectionLocalizations
-    , channelSectionLocalizations
-
-    -- * ContentRatingNbcplRating
-    , ContentRatingNbcplRating (..)
+    -- * IngestionType
+    , IngestionType (..)
 
     -- * VideoConversionPings
     , VideoConversionPings
     , videoConversionPings
     , vcpPings
 
-    -- * ContentRatingRteRating
-    , ContentRatingRteRating (..)
+    -- * SmaisRating
+    , SmaisRating (..)
 
-    -- * ContentRatingGrfilmRating
-    , ContentRatingGrfilmRating (..)
+    -- * CscfRating
+    , CscfRating (..)
+
+    -- * TvpgRating
+    , TvpgRating (..)
+
+    -- * RtcRating
+    , RtcRating (..)
 
     -- * VideoLocalization
     , VideoLocalization
@@ -1210,14 +1221,17 @@ module Network.Google.YouTube.Types
     , videoPlayer
     , vpEmbedHTML
 
+    -- * YtRating
+    , YtRating (..)
+
     -- * LocalizedString
     , LocalizedString
     , localizedString
     , lsValue
     , lsLanguage
 
-    -- * ContentRatingIlfilmRating
-    , ContentRatingIlfilmRating (..)
+    -- * BbfcRating
+    , BbfcRating (..)
 
     -- * SubscriptionListResponse
     , SubscriptionListResponse
@@ -1232,11 +1246,8 @@ module Network.Google.YouTube.Types
     , sEventId
     , sPrevPageToken
 
-    -- * VideoStatusUploadStatus
-    , VideoStatusUploadStatus (..)
-
-    -- * ContentRatingIfcoRating
-    , ContentRatingIfcoRating (..)
+    -- * PrivacyStatus
+    , PrivacyStatus (..)
 
     -- * GuideCategory
     , GuideCategory
@@ -1255,14 +1266,8 @@ module Network.Google.YouTube.Types
     , illrVisitorId
     , illrEventId
 
-    -- * ContentRatingResorteviolenciaRating
-    , ContentRatingResorteviolenciaRating (..)
-
     -- * PlayListItemStatusPrivacyStatus
     , PlayListItemStatusPrivacyStatus (..)
-
-    -- * SubscriptionContentDetailsActivityType
-    , SubscriptionContentDetailsActivityType (..)
 
     -- * InvideoBranding
     , InvideoBranding
@@ -1281,8 +1286,11 @@ module Network.Google.YouTube.Types
     , cbsChannel
     , cbsWatch
 
-    -- * ContentRatingMibacRating
-    , ContentRatingMibacRating (..)
+    -- * KijkwijzerRating
+    , KijkwijzerRating (..)
+
+    -- * DjctqRatingReasonsItem
+    , DjctqRatingReasonsItem (..)
 
     -- * InvideoPromotion
     , InvideoPromotion
@@ -1306,14 +1314,8 @@ module Network.Google.YouTube.Types
     , ctReplies
     , ctId
 
-    -- * ContentRatingMedietilsynetRating
-    , ContentRatingMedietilsynetRating (..)
-
-    -- * YouTubeSearchListVideoDefinition
-    , YouTubeSearchListVideoDefinition (..)
-
-    -- * ContentRatingMccypRating
-    , ContentRatingMccypRating (..)
+    -- * MtrcbRating
+    , MtrcbRating (..)
 
     -- * ActivityContentDetailsSocialType
     , ActivityContentDetailsSocialType (..)
@@ -1324,9 +1326,6 @@ module Network.Google.YouTube.Types
     , pllTitle
     , pllDescription
 
-    -- * ContentRatingEgfilmRating
-    , ContentRatingEgfilmRating (..)
-
     -- * Activity
     , Activity
     , activity
@@ -1336,9 +1335,6 @@ module Network.Google.YouTube.Types
     , aContentDetails
     , aId
 
-    -- * ContentRatingNkclvRating
-    , ContentRatingNkclvRating (..)
-
     -- * ChannelBannerResource
     , ChannelBannerResource
     , channelBannerResource
@@ -1346,20 +1342,20 @@ module Network.Google.YouTube.Types
     , cbrKind
     , cbrURL
 
+    -- * ProcessingErrorsItem
+    , ProcessingErrorsItem (..)
+
     -- * LiveBroadcastTopicSnippet
     , LiveBroadcastTopicSnippet
     , liveBroadcastTopicSnippet
     , lbtsName
     , lbtsReleaseDate
 
-    -- * ContentRatingFpbRating
-    , ContentRatingFpbRating (..)
+    -- * FcoRating
+    , FcoRating (..)
 
-    -- * ContentRatingNfrcRating
-    , ContentRatingNfrcRating (..)
-
-    -- * ContentRatingEirinRating
-    , ContentRatingEirinRating (..)
+    -- * VideoGameRating
+    , VideoGameRating (..)
 
     -- * ChannelConversionPings
     , ChannelConversionPings
@@ -1380,8 +1376,8 @@ module Network.Google.YouTube.Types
     , clTitle
     , clDescription
 
-    -- * ChannelSectionSnippetStyle
-    , ChannelSectionSnippetStyle (..)
+    -- * CicfRating
+    , CicfRating (..)
 
     -- * VideoAgeGating
     , VideoAgeGating
@@ -1390,18 +1386,12 @@ module Network.Google.YouTube.Types
     , vagRestricted
     , vagVideoGameRating
 
-    -- * VideoSuggestionsEditorSuggestions
-    , VideoSuggestionsEditorSuggestions (..)
-
     -- * LocalizedProperty
     , LocalizedProperty
     , localizedProperty
     , lpDefault
     , lpLocalized
     , lpDefaultLanguage
-
-    -- * ContentRatingMocRating
-    , ContentRatingMocRating (..)
 
     -- * VideoFileDetailsVideoStream
     , VideoFileDetailsVideoStream
@@ -1415,6 +1405,12 @@ module Network.Google.YouTube.Types
     , vfdvsAspectRatio
     , vfdvsWidthPixels
 
+    -- * CzfilmRating
+    , CzfilmRating (..)
+
+    -- * NbcRating
+    , NbcRating (..)
+
     -- * SubscriptionContentDetails
     , SubscriptionContentDetails
     , subscriptionContentDetails
@@ -1425,8 +1421,12 @@ module Network.Google.YouTube.Types
     -- * PlayListStatusPrivacyStatus
     , PlayListStatusPrivacyStatus (..)
 
-    -- * YouTubeSearchListVideoDimension
-    , YouTubeSearchListVideoDimension (..)
+    -- * FmocRating
+    , FmocRating (..)
+
+    -- * Localizations
+    , Localizations
+    , localizations
 
     -- * LanguageTag
     , LanguageTag
@@ -1436,6 +1436,12 @@ module Network.Google.YouTube.Types
     -- * ActivitySnippetType
     , ActivitySnippetType (..)
 
+    -- * LiveBroadcastContent
+    , LiveBroadcastContent (..)
+
+    -- * RussiaRating
+    , RussiaRating (..)
+
     -- * LiveBroadcastTopic
     , LiveBroadcastTopic
     , liveBroadcastTopic
@@ -1443,8 +1449,14 @@ module Network.Google.YouTube.Types
     , lbtUnmatched
     , lbtType
 
-    -- * ContentRatingCsaRating
-    , ContentRatingCsaRating (..)
+    -- * EgfilmRating
+    , EgfilmRating (..)
+
+    -- * Tfmt
+    , Tfmt (..)
+
+    -- * License
+    , License (..)
 
     -- * PlayListItem
     , PlayListItem
@@ -1475,6 +1487,9 @@ module Network.Google.YouTube.Types
     , gclrEventId
     , gclrPrevPageToken
 
+    -- * ResorteviolenciaRating
+    , ResorteviolenciaRating (..)
+
     -- * Subscription
     , Subscription
     , subscription
@@ -1485,17 +1500,14 @@ module Network.Google.YouTube.Types
     , subContentDetails
     , subId
 
+    -- * MibacRating
+    , MibacRating (..)
+
     -- * I18nRegionSnippet
     , I18nRegionSnippet
     , i18nRegionSnippet
     , irsName
     , irsGl
-
-    -- * VideoFileDetailsFileType
-    , VideoFileDetailsFileType (..)
-
-    -- * ContentRatingKijkwijzerRating
-    , ContentRatingKijkwijzerRating (..)
 
     -- * CaptionSnippet
     , CaptionSnippet
@@ -1517,14 +1529,14 @@ module Network.Google.YouTube.Types
     -- * LiveStreamConfigurationIssueType
     , LiveStreamConfigurationIssueType (..)
 
-    -- * ContentRatingMtrcbRating
-    , ContentRatingMtrcbRating (..)
+    -- * ChannelType
+    , ChannelType (..)
 
-    -- * ContentRatingFcoRating
-    , ContentRatingFcoRating (..)
+    -- * MedietilsynetRating
+    , MedietilsynetRating (..)
 
-    -- * ActivityContentDetailsRecommendationReason
-    , ActivityContentDetailsRecommendationReason (..)
+    -- * MccypRating
+    , MccypRating (..)
 
     -- * Comment
     , Comment
@@ -1534,14 +1546,17 @@ module Network.Google.YouTube.Types
     , ccKind
     , ccId
 
+    -- * NkclvRating
+    , NkclvRating (..)
+
+    -- * FpbRating
+    , FpbRating (..)
+
     -- * CommentSnippetModerationStatus
     , CommentSnippetModerationStatus (..)
 
-    -- * YouTubeSearchListVideoCaption
-    , YouTubeSearchListVideoCaption (..)
-
-    -- * VideoSuggestionsProcessingErrors
-    , VideoSuggestionsProcessingErrors (..)
+    -- * LsfRating
+    , LsfRating (..)
 
     -- * PlayListItemSnippet
     , PlayListItemSnippet
@@ -1567,11 +1582,8 @@ module Network.Google.YouTube.Types
     , videoProjectDetails
     , vpdTags
 
-    -- * YouTubeVideosListMyRating
-    , YouTubeVideosListMyRating (..)
-
-    -- * YouTubeSearchListVideoSyndicated
-    , YouTubeSearchListVideoSyndicated (..)
+    -- * Order
+    , Order (..)
 
     -- * VideoSuggestions
     , VideoSuggestions
@@ -1663,11 +1675,8 @@ module Network.Google.YouTube.Types
     , crOflcRating
     , crKmrbRating
 
-    -- * CdnSettingsIngestionType
-    , CdnSettingsIngestionType (..)
-
-    -- * ContentRatingDjctqRatingReasons
-    , ContentRatingDjctqRatingReasons (..)
+    -- * TextFormat
+    , TextFormat (..)
 
     -- * CommentSnippet
     , CommentSnippet
@@ -1689,8 +1698,8 @@ module Network.Google.YouTube.Types
     , cAuthorGoogleplusProfileURL
     , cParentId
 
-    -- * ContentRatingNfvcbRating
-    , ContentRatingNfvcbRating (..)
+    -- * BfvcRating
+    , BfvcRating (..)
 
     -- * VideoRecordingDetails
     , VideoRecordingDetails
@@ -1720,12 +1729,6 @@ module Network.Google.YouTube.Types
     , cDescription
     , cDefaultLanguage
 
-    -- * VideoStatusLicense
-    , VideoStatusLicense (..)
-
-    -- * ContentRatingAgcomRating
-    , ContentRatingAgcomRating (..)
-
     -- * InvideoTimingType
     , InvideoTimingType (..)
 
@@ -1745,12 +1748,6 @@ module Network.Google.YouTube.Types
     , liveStreamStatus
     , lssStreamStatus
     , lssHealthStatus
-
-    -- * LiveStreamStatusStreamStatus
-    , LiveStreamStatusStreamStatus (..)
-
-    -- * ContentRatingCatvRating
-    , ContentRatingCatvRating (..)
 
     -- * VideoLiveStreamingDetails
     , VideoLiveStreamingDetails
@@ -1774,6 +1771,15 @@ module Network.Google.YouTube.Types
     -- * YouTubeSubscriptionsListOrder
     , YouTubeSubscriptionsListOrder (..)
 
+    -- * CNCRating
+    , CNCRating (..)
+
+    -- * AudioTrackType
+    , AudioTrackType (..)
+
+    -- * VideoType
+    , VideoType (..)
+
     -- * ActivityContentDetailsPromotedItem
     , ActivityContentDetailsPromotedItem
     , activityContentDetailsPromotedItem
@@ -1795,8 +1801,11 @@ module Network.Google.YouTube.Types
     , gpAltitude
     , gpLongitude
 
-    -- * YouTubeVideosListChart
-    , YouTubeVideosListChart (..)
+    -- * SkfilmRating
+    , SkfilmRating (..)
+
+    -- * VideoDimension
+    , VideoDimension (..)
 
     -- * I18nLanguageSnippet
     , I18nLanguageSnippet
@@ -1810,17 +1819,14 @@ module Network.Google.YouTube.Types
     , varsrId
     , varsrLabel
 
-    -- * VideoStatusFailureReason
-    , VideoStatusFailureReason (..)
-
     -- * YouTubeCommentsListTextFormat
     , YouTubeCommentsListTextFormat (..)
 
-    -- * YouTubeCommentThreadsListModerationStatus
-    , YouTubeCommentThreadsListModerationStatus (..)
+    -- * OflcRating
+    , OflcRating (..)
 
-    -- * ContentRatingDjctqRating
-    , ContentRatingDjctqRating (..)
+    -- * KmrbRating
+    , KmrbRating (..)
 
     -- * VideoConversionPing
     , VideoConversionPing
@@ -1833,12 +1839,6 @@ module Network.Google.YouTube.Types
     , channelContentOwnerDetails
     , ccodTimeLinked
     , ccodContentOwner
-
-    -- * ContentRatingMdaRating
-    , ContentRatingMdaRating (..)
-
-    -- * ContentRatingAcbRating
-    , ContentRatingAcbRating (..)
     ) where
 
 import           Network.Google.Prelude

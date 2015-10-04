@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -56,18 +57,18 @@ type UserRolesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "userRoles" :>
-           QueryParam "accountUserRoleOnly" Bool :>
+           QueryParam "searchString" Text :>
              QueryParams "ids" Int64 :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "searchString" Text :>
+               QueryParam "sortOrder"
+                 DfareportingUserRolesListSortOrder
+                 :>
+                 QueryParam "accountUserRoleOnly" Bool :>
+                   QueryParam "pageToken" Text :>
                      QueryParam "sortField"
                        DfareportingUserRolesListSortField
                        :>
-                       QueryParam "sortOrder"
-                         DfareportingUserRolesListSortOrder
-                         :>
-                         QueryParam "subaccountId" Int64 :>
+                       QueryParam "subaccountId" Int64 :>
+                         QueryParam "maxResults" Int32 :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "userIp" Text :>
@@ -85,7 +86,7 @@ data UserRolesList' = UserRolesList'
     , _urlPrettyPrint         :: !Bool
     , _urlUserIP              :: !(Maybe Text)
     , _urlSearchString        :: !(Maybe Text)
-    , _urlIds                 :: !(Maybe Int64)
+    , _urlIds                 :: !(Maybe [Int64])
     , _urlProfileId           :: !Int64
     , _urlSortOrder           :: !(Maybe DfareportingUserRolesListSortOrder)
     , _urlKey                 :: !(Maybe Key)
@@ -96,7 +97,7 @@ data UserRolesList' = UserRolesList'
     , _urlOAuthToken          :: !(Maybe OAuthToken)
     , _urlMaxResults          :: !(Maybe Int32)
     , _urlFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesList'' with the minimum fields required to make a request.
 --
@@ -185,8 +186,10 @@ urlSearchString
       (\ s a -> s{_urlSearchString = a})
 
 -- | Select only user roles with the specified IDs.
-urlIds :: Lens' UserRolesList' (Maybe Int64)
-urlIds = lens _urlIds (\ s a -> s{_urlIds = a})
+urlIds :: Lens' UserRolesList' [Int64]
+urlIds
+  = lens _urlIds (\ s a -> s{_urlIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 urlProfileId :: Lens' UserRolesList' Int64
@@ -252,13 +255,14 @@ instance GoogleRequest UserRolesList' where
         type Rs UserRolesList' = UserRolesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolesList'{..}
-          = go _urlAccountUserRoleOnly _urlIds _urlMaxResults
-              _urlPageToken
-              _urlSearchString
-              _urlSortField
+          = go _urlProfileId _urlSearchString
+              (_urlIds ^. _Default)
               _urlSortOrder
+              _urlAccountUserRoleOnly
+              _urlPageToken
+              _urlSortField
               _urlSubAccountId
-              _urlProfileId
+              _urlMaxResults
               _urlQuotaUser
               (Just _urlPrettyPrint)
               _urlUserIP

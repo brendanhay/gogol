@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -70,7 +71,7 @@ data TableCopy' = TableCopy'
     , _tcTableId          :: !Text
     , _tcCopyPresentation :: !(Maybe Bool)
     , _tcFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableCopy'' with the minimum fields required to make a request.
 --
@@ -158,7 +159,7 @@ instance GoogleRequest TableCopy' where
         type Rs TableCopy' = Table
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableCopy'{..}
-          = go _tcCopyPresentation _tcTableId _tcQuotaUser
+          = go _tcTableId _tcCopyPresentation _tcQuotaUser
               (Just _tcPrettyPrint)
               _tcUserIP
               _tcFields

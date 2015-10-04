@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,8 +37,8 @@ module Network.Google.Resource.Directory.Members.Patch
     , mpPrettyPrint
     , mpUserIP
     , mpGroupKey
+    , mpPayload
     , mpKey
-    , mpMember
     , mpOAuthToken
     , mpFields
     ) where
@@ -71,11 +72,11 @@ data MembersPatch' = MembersPatch'
     , _mpPrettyPrint :: !Bool
     , _mpUserIP      :: !(Maybe Text)
     , _mpGroupKey    :: !Text
+    , _mpPayload     :: !Member
     , _mpKey         :: !(Maybe Key)
-    , _mpMember      :: !Member
     , _mpOAuthToken  :: !(Maybe OAuthToken)
     , _mpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MembersPatch'' with the minimum fields required to make a request.
 --
@@ -91,9 +92,9 @@ data MembersPatch' = MembersPatch'
 --
 -- * 'mpGroupKey'
 --
--- * 'mpKey'
+-- * 'mpPayload'
 --
--- * 'mpMember'
+-- * 'mpKey'
 --
 -- * 'mpOAuthToken'
 --
@@ -101,17 +102,17 @@ data MembersPatch' = MembersPatch'
 membersPatch'
     :: Text -- ^ 'memberKey'
     -> Text -- ^ 'groupKey'
-    -> Member -- ^ 'Member'
+    -> Member -- ^ 'payload'
     -> MembersPatch'
-membersPatch' pMpMemberKey_ pMpGroupKey_ pMpMember_ =
+membersPatch' pMpMemberKey_ pMpGroupKey_ pMpPayload_ =
     MembersPatch'
     { _mpQuotaUser = Nothing
     , _mpMemberKey = pMpMemberKey_
     , _mpPrettyPrint = True
     , _mpUserIP = Nothing
     , _mpGroupKey = pMpGroupKey_
+    , _mpPayload = pMpPayload_
     , _mpKey = Nothing
-    , _mpMember = pMpMember_
     , _mpOAuthToken = Nothing
     , _mpFields = Nothing
     }
@@ -146,15 +147,16 @@ mpGroupKey :: Lens' MembersPatch' Text
 mpGroupKey
   = lens _mpGroupKey (\ s a -> s{_mpGroupKey = a})
 
+-- | Multipart request metadata.
+mpPayload :: Lens' MembersPatch' Member
+mpPayload
+  = lens _mpPayload (\ s a -> s{_mpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 mpKey :: Lens' MembersPatch' (Maybe Key)
 mpKey = lens _mpKey (\ s a -> s{_mpKey = a})
-
--- | Multipart request metadata.
-mpMember :: Lens' MembersPatch' Member
-mpMember = lens _mpMember (\ s a -> s{_mpMember = a})
 
 -- | OAuth 2.0 token for the current user.
 mpOAuthToken :: Lens' MembersPatch' (Maybe OAuthToken)
@@ -180,7 +182,7 @@ instance GoogleRequest MembersPatch' where
               _mpKey
               _mpOAuthToken
               (Just AltJSON)
-              _mpMember
+              _mpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MembersPatchResource)

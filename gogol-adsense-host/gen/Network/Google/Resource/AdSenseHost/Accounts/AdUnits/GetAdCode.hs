@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -77,10 +78,10 @@ data AccountsAdUnitsGetAdCode' = AccountsAdUnitsGetAdCode'
     , _aaugacAdClientId          :: !Text
     , _aaugacAccountId           :: !Text
     , _aaugacKey                 :: !(Maybe Key)
-    , _aaugacHostCustomChannelId :: !(Maybe Text)
+    , _aaugacHostCustomChannelId :: !(Maybe [Text])
     , _aaugacOAuthToken          :: !(Maybe OAuthToken)
     , _aaugacFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdUnitsGetAdCode'' with the minimum fields required to make a request.
 --
@@ -170,10 +171,12 @@ aaugacKey
   = lens _aaugacKey (\ s a -> s{_aaugacKey = a})
 
 -- | Host custom channel to attach to the ad code.
-aaugacHostCustomChannelId :: Lens' AccountsAdUnitsGetAdCode' (Maybe Text)
+aaugacHostCustomChannelId :: Lens' AccountsAdUnitsGetAdCode' [Text]
 aaugacHostCustomChannelId
   = lens _aaugacHostCustomChannelId
       (\ s a -> s{_aaugacHostCustomChannelId = a})
+      . _Default
+      . _Coerce
 
 -- | OAuth 2.0 token for the current user.
 aaugacOAuthToken :: Lens' AccountsAdUnitsGetAdCode' (Maybe OAuthToken)
@@ -195,9 +198,9 @@ instance GoogleRequest AccountsAdUnitsGetAdCode'
         type Rs AccountsAdUnitsGetAdCode' = AdCode
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u AccountsAdUnitsGetAdCode'{..}
-          = go _aaugacHostCustomChannelId _aaugacAccountId
-              _aaugacAdClientId
+          = go _aaugacAccountId _aaugacAdClientId
               _aaugacAdUnitId
+              (_aaugacHostCustomChannelId ^. _Default)
               _aaugacQuotaUser
               (Just _aaugacPrettyPrint)
               _aaugacUserIP

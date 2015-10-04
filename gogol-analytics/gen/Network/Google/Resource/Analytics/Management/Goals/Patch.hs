@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,9 +38,9 @@ module Network.Google.Resource.Analytics.Management.Goals.Patch
     , mgpGoalId
     , mgpUserIP
     , mgpProfileId
+    , mgpPayload
     , mgpAccountId
     , mgpKey
-    , mgpGoal
     , mgpOAuthToken
     , mgpFields
     ) where
@@ -79,12 +80,12 @@ data ManagementGoalsPatch' = ManagementGoalsPatch'
     , _mgpGoalId        :: !Text
     , _mgpUserIP        :: !(Maybe Text)
     , _mgpProfileId     :: !Text
+    , _mgpPayload       :: !Goal
     , _mgpAccountId     :: !Text
     , _mgpKey           :: !(Maybe Key)
-    , _mgpGoal          :: !Goal
     , _mgpOAuthToken    :: !(Maybe OAuthToken)
     , _mgpFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementGoalsPatch'' with the minimum fields required to make a request.
 --
@@ -102,11 +103,11 @@ data ManagementGoalsPatch' = ManagementGoalsPatch'
 --
 -- * 'mgpProfileId'
 --
+-- * 'mgpPayload'
+--
 -- * 'mgpAccountId'
 --
 -- * 'mgpKey'
---
--- * 'mgpGoal'
 --
 -- * 'mgpOAuthToken'
 --
@@ -115,10 +116,10 @@ managementGoalsPatch'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'goalId'
     -> Text -- ^ 'profileId'
+    -> Goal -- ^ 'payload'
     -> Text -- ^ 'accountId'
-    -> Goal -- ^ 'Goal'
     -> ManagementGoalsPatch'
-managementGoalsPatch' pMgpWebPropertyId_ pMgpGoalId_ pMgpProfileId_ pMgpAccountId_ pMgpGoal_ =
+managementGoalsPatch' pMgpWebPropertyId_ pMgpGoalId_ pMgpProfileId_ pMgpPayload_ pMgpAccountId_ =
     ManagementGoalsPatch'
     { _mgpQuotaUser = Nothing
     , _mgpPrettyPrint = False
@@ -126,9 +127,9 @@ managementGoalsPatch' pMgpWebPropertyId_ pMgpGoalId_ pMgpProfileId_ pMgpAccountI
     , _mgpGoalId = pMgpGoalId_
     , _mgpUserIP = Nothing
     , _mgpProfileId = pMgpProfileId_
+    , _mgpPayload = pMgpPayload_
     , _mgpAccountId = pMgpAccountId_
     , _mgpKey = Nothing
-    , _mgpGoal = pMgpGoal_
     , _mgpOAuthToken = Nothing
     , _mgpFields = Nothing
     }
@@ -168,6 +169,11 @@ mgpProfileId :: Lens' ManagementGoalsPatch' Text
 mgpProfileId
   = lens _mgpProfileId (\ s a -> s{_mgpProfileId = a})
 
+-- | Multipart request metadata.
+mgpPayload :: Lens' ManagementGoalsPatch' Goal
+mgpPayload
+  = lens _mgpPayload (\ s a -> s{_mgpPayload = a})
+
 -- | Account ID to update the goal.
 mgpAccountId :: Lens' ManagementGoalsPatch' Text
 mgpAccountId
@@ -178,10 +184,6 @@ mgpAccountId
 -- token.
 mgpKey :: Lens' ManagementGoalsPatch' (Maybe Key)
 mgpKey = lens _mgpKey (\ s a -> s{_mgpKey = a})
-
--- | Multipart request metadata.
-mgpGoal :: Lens' ManagementGoalsPatch' Goal
-mgpGoal = lens _mgpGoal (\ s a -> s{_mgpGoal = a})
 
 -- | OAuth 2.0 token for the current user.
 mgpOAuthToken :: Lens' ManagementGoalsPatch' (Maybe OAuthToken)
@@ -211,7 +213,7 @@ instance GoogleRequest ManagementGoalsPatch' where
               _mgpKey
               _mgpOAuthToken
               (Just AltJSON)
-              _mgpGoal
+              _mgpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementGoalsPatchResource)

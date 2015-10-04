@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.DFAReporting.Placements.Update
     , puPrettyPrint
     , puUserIP
     , puProfileId
+    , puPayload
     , puKey
     , puOAuthToken
-    , puPlacement
     , puFields
     ) where
 
@@ -66,11 +67,11 @@ data PlacementsUpdate' = PlacementsUpdate'
     , _puPrettyPrint :: !Bool
     , _puUserIP      :: !(Maybe Text)
     , _puProfileId   :: !Int64
+    , _puPayload     :: !Placement
     , _puKey         :: !(Maybe Key)
     , _puOAuthToken  :: !(Maybe OAuthToken)
-    , _puPlacement   :: !Placement
     , _puFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementsUpdate'' with the minimum fields required to make a request.
 --
@@ -84,26 +85,26 @@ data PlacementsUpdate' = PlacementsUpdate'
 --
 -- * 'puProfileId'
 --
+-- * 'puPayload'
+--
 -- * 'puKey'
 --
 -- * 'puOAuthToken'
 --
--- * 'puPlacement'
---
 -- * 'puFields'
 placementsUpdate'
     :: Int64 -- ^ 'profileId'
-    -> Placement -- ^ 'Placement'
+    -> Placement -- ^ 'payload'
     -> PlacementsUpdate'
-placementsUpdate' pPuProfileId_ pPuPlacement_ =
+placementsUpdate' pPuProfileId_ pPuPayload_ =
     PlacementsUpdate'
     { _puQuotaUser = Nothing
     , _puPrettyPrint = True
     , _puUserIP = Nothing
     , _puProfileId = pPuProfileId_
+    , _puPayload = pPuPayload_
     , _puKey = Nothing
     , _puOAuthToken = Nothing
-    , _puPlacement = pPuPlacement_
     , _puFields = Nothing
     }
 
@@ -130,6 +131,11 @@ puProfileId :: Lens' PlacementsUpdate' Int64
 puProfileId
   = lens _puProfileId (\ s a -> s{_puProfileId = a})
 
+-- | Multipart request metadata.
+puPayload :: Lens' PlacementsUpdate' Placement
+puPayload
+  = lens _puPayload (\ s a -> s{_puPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -140,11 +146,6 @@ puKey = lens _puKey (\ s a -> s{_puKey = a})
 puOAuthToken :: Lens' PlacementsUpdate' (Maybe OAuthToken)
 puOAuthToken
   = lens _puOAuthToken (\ s a -> s{_puOAuthToken = a})
-
--- | Multipart request metadata.
-puPlacement :: Lens' PlacementsUpdate' Placement
-puPlacement
-  = lens _puPlacement (\ s a -> s{_puPlacement = a})
 
 -- | Selector specifying which fields to include in a partial response.
 puFields :: Lens' PlacementsUpdate' (Maybe Text)
@@ -164,7 +165,7 @@ instance GoogleRequest PlacementsUpdate' where
               _puKey
               _puOAuthToken
               (Just AltJSON)
-              _puPlacement
+              _puPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementsUpdateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -49,8 +50,8 @@ import           Network.Google.YouTube.Types
 type ThumbnailsSetResource =
      "thumbnails" :>
        "set" :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "videoId" Text :>
+         QueryParam "videoId" Text :>
+           QueryParam "onBehalfOfContentOwner" Text :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -73,7 +74,7 @@ data ThumbnailsSet' = ThumbnailsSet'
     , _tsKey                    :: !(Maybe Key)
     , _tsOAuthToken             :: !(Maybe OAuthToken)
     , _tsFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ThumbnailsSet'' with the minimum fields required to make a request.
 --
@@ -178,8 +179,7 @@ instance GoogleRequest ThumbnailsSet' where
         type Rs ThumbnailsSet' = ThumbnailSetResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u ThumbnailsSet'{..}
-          = go _tsMedia _tsOnBehalfOfContentOwner
-              (Just _tsVideoId)
+          = go (Just _tsVideoId) _tsOnBehalfOfContentOwner
               _tsQuotaUser
               (Just _tsPrettyPrint)
               _tsUserIP
@@ -187,6 +187,7 @@ instance GoogleRequest ThumbnailsSet' where
               _tsKey
               _tsOAuthToken
               (Just AltJSON)
+              _tsMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ThumbnailsSetResource)

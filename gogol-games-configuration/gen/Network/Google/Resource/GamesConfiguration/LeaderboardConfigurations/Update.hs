@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Upda
     , lcuQuotaUser
     , lcuPrettyPrint
     , lcuUserIP
-    , lcuLeaderboardConfiguration
+    , lcuPayload
     , lcuLeaderboardId
     , lcuKey
     , lcuOAuthToken
@@ -62,15 +63,15 @@ type LeaderboardConfigurationsUpdateResource =
 --
 -- /See:/ 'leaderboardConfigurationsUpdate'' smart constructor.
 data LeaderboardConfigurationsUpdate' = LeaderboardConfigurationsUpdate'
-    { _lcuQuotaUser                :: !(Maybe Text)
-    , _lcuPrettyPrint              :: !Bool
-    , _lcuUserIP                   :: !(Maybe Text)
-    , _lcuLeaderboardConfiguration :: !LeaderboardConfiguration
-    , _lcuLeaderboardId            :: !Text
-    , _lcuKey                      :: !(Maybe Key)
-    , _lcuOAuthToken               :: !(Maybe OAuthToken)
-    , _lcuFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _lcuQuotaUser     :: !(Maybe Text)
+    , _lcuPrettyPrint   :: !Bool
+    , _lcuUserIP        :: !(Maybe Text)
+    , _lcuPayload       :: !LeaderboardConfiguration
+    , _lcuLeaderboardId :: !Text
+    , _lcuKey           :: !(Maybe Key)
+    , _lcuOAuthToken    :: !(Maybe OAuthToken)
+    , _lcuFields        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationsUpdate'' with the minimum fields required to make a request.
 --
@@ -82,7 +83,7 @@ data LeaderboardConfigurationsUpdate' = LeaderboardConfigurationsUpdate'
 --
 -- * 'lcuUserIP'
 --
--- * 'lcuLeaderboardConfiguration'
+-- * 'lcuPayload'
 --
 -- * 'lcuLeaderboardId'
 --
@@ -92,15 +93,15 @@ data LeaderboardConfigurationsUpdate' = LeaderboardConfigurationsUpdate'
 --
 -- * 'lcuFields'
 leaderboardConfigurationsUpdate'
-    :: LeaderboardConfiguration -- ^ 'LeaderboardConfiguration'
+    :: LeaderboardConfiguration -- ^ 'payload'
     -> Text -- ^ 'leaderboardId'
     -> LeaderboardConfigurationsUpdate'
-leaderboardConfigurationsUpdate' pLcuLeaderboardConfiguration_ pLcuLeaderboardId_ =
+leaderboardConfigurationsUpdate' pLcuPayload_ pLcuLeaderboardId_ =
     LeaderboardConfigurationsUpdate'
     { _lcuQuotaUser = Nothing
     , _lcuPrettyPrint = True
     , _lcuUserIP = Nothing
-    , _lcuLeaderboardConfiguration = pLcuLeaderboardConfiguration_
+    , _lcuPayload = pLcuPayload_
     , _lcuLeaderboardId = pLcuLeaderboardId_
     , _lcuKey = Nothing
     , _lcuOAuthToken = Nothing
@@ -127,10 +128,9 @@ lcuUserIP
   = lens _lcuUserIP (\ s a -> s{_lcuUserIP = a})
 
 -- | Multipart request metadata.
-lcuLeaderboardConfiguration :: Lens' LeaderboardConfigurationsUpdate' LeaderboardConfiguration
-lcuLeaderboardConfiguration
-  = lens _lcuLeaderboardConfiguration
-      (\ s a -> s{_lcuLeaderboardConfiguration = a})
+lcuPayload :: Lens' LeaderboardConfigurationsUpdate' LeaderboardConfiguration
+lcuPayload
+  = lens _lcuPayload (\ s a -> s{_lcuPayload = a})
 
 -- | The ID of the leaderboard.
 lcuLeaderboardId :: Lens' LeaderboardConfigurationsUpdate' Text
@@ -175,7 +175,7 @@ instance GoogleRequest
               _lcuKey
               _lcuOAuthToken
               (Just AltJSON)
-              _lcuLeaderboardConfiguration
+              _lcuPayload
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.Spectrum.Paws.Init
     , piQuotaUser
     , piPrettyPrint
     , piUserIP
+    , piPayload
     , piKey
     , piOAuthToken
-    , piPawsInitRequest
     , piFields
     ) where
 
@@ -62,14 +63,14 @@ type PawsInitResource =
 --
 -- /See:/ 'pawsInit'' smart constructor.
 data PawsInit' = PawsInit'
-    { _piQuotaUser       :: !(Maybe Text)
-    , _piPrettyPrint     :: !Bool
-    , _piUserIP          :: !(Maybe Text)
-    , _piKey             :: !(Maybe Key)
-    , _piOAuthToken      :: !(Maybe OAuthToken)
-    , _piPawsInitRequest :: !PawsInitRequest
-    , _piFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _piQuotaUser   :: !(Maybe Text)
+    , _piPrettyPrint :: !Bool
+    , _piUserIP      :: !(Maybe Text)
+    , _piPayload     :: !PawsInitRequest
+    , _piKey         :: !(Maybe Key)
+    , _piOAuthToken  :: !(Maybe OAuthToken)
+    , _piFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsInit'' with the minimum fields required to make a request.
 --
@@ -81,24 +82,24 @@ data PawsInit' = PawsInit'
 --
 -- * 'piUserIP'
 --
+-- * 'piPayload'
+--
 -- * 'piKey'
 --
 -- * 'piOAuthToken'
 --
--- * 'piPawsInitRequest'
---
 -- * 'piFields'
 pawsInit'
-    :: PawsInitRequest -- ^ 'PawsInitRequest'
+    :: PawsInitRequest -- ^ 'payload'
     -> PawsInit'
-pawsInit' pPiPawsInitRequest_ =
+pawsInit' pPiPayload_ =
     PawsInit'
     { _piQuotaUser = Nothing
     , _piPrettyPrint = True
     , _piUserIP = Nothing
+    , _piPayload = pPiPayload_
     , _piKey = Nothing
     , _piOAuthToken = Nothing
-    , _piPawsInitRequest = pPiPawsInitRequest_
     , _piFields = Nothing
     }
 
@@ -120,6 +121,11 @@ piPrettyPrint
 piUserIP :: Lens' PawsInit' (Maybe Text)
 piUserIP = lens _piUserIP (\ s a -> s{_piUserIP = a})
 
+-- | Multipart request metadata.
+piPayload :: Lens' PawsInit' PawsInitRequest
+piPayload
+  = lens _piPayload (\ s a -> s{_piPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -130,12 +136,6 @@ piKey = lens _piKey (\ s a -> s{_piKey = a})
 piOAuthToken :: Lens' PawsInit' (Maybe OAuthToken)
 piOAuthToken
   = lens _piOAuthToken (\ s a -> s{_piOAuthToken = a})
-
--- | Multipart request metadata.
-piPawsInitRequest :: Lens' PawsInit' PawsInitRequest
-piPawsInitRequest
-  = lens _piPawsInitRequest
-      (\ s a -> s{_piPawsInitRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 piFields :: Lens' PawsInit' (Maybe Text)
@@ -154,7 +154,7 @@ instance GoogleRequest PawsInit' where
               _piKey
               _piOAuthToken
               (Just AltJSON)
-              _piPawsInitRequest
+              _piPayload
           where go
                   = clientWithRoute (Proxy :: Proxy PawsInitResource) r
                       u

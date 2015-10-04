@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,9 +38,9 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.SetTargetPools
     , igmstpInstanceGroupManager
     , igmstpUserIP
     , igmstpZone
+    , igmstpPayload
     , igmstpKey
     , igmstpOAuthToken
-    , igmstpInstanceGroupManagersSetTargetPoolsRequest
     , igmstpFields
     ) where
 
@@ -71,17 +72,17 @@ type InstanceGroupManagersSetTargetPoolsResource =
 --
 -- /See:/ 'instanceGroupManagersSetTargetPools'' smart constructor.
 data InstanceGroupManagersSetTargetPools' = InstanceGroupManagersSetTargetPools'
-    { _igmstpQuotaUser                                  :: !(Maybe Text)
-    , _igmstpPrettyPrint                                :: !Bool
-    , _igmstpProject                                    :: !Text
-    , _igmstpInstanceGroupManager                       :: !Text
-    , _igmstpUserIP                                     :: !(Maybe Text)
-    , _igmstpZone                                       :: !Text
-    , _igmstpKey                                        :: !(Maybe Key)
-    , _igmstpOAuthToken                                 :: !(Maybe OAuthToken)
-    , _igmstpInstanceGroupManagersSetTargetPoolsRequest :: !InstanceGroupManagersSetTargetPoolsRequest
-    , _igmstpFields                                     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _igmstpQuotaUser            :: !(Maybe Text)
+    , _igmstpPrettyPrint          :: !Bool
+    , _igmstpProject              :: !Text
+    , _igmstpInstanceGroupManager :: !Text
+    , _igmstpUserIP               :: !(Maybe Text)
+    , _igmstpZone                 :: !Text
+    , _igmstpPayload              :: !InstanceGroupManagersSetTargetPoolsRequest
+    , _igmstpKey                  :: !(Maybe Key)
+    , _igmstpOAuthToken           :: !(Maybe OAuthToken)
+    , _igmstpFields               :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersSetTargetPools'' with the minimum fields required to make a request.
 --
@@ -99,20 +100,20 @@ data InstanceGroupManagersSetTargetPools' = InstanceGroupManagersSetTargetPools'
 --
 -- * 'igmstpZone'
 --
+-- * 'igmstpPayload'
+--
 -- * 'igmstpKey'
 --
 -- * 'igmstpOAuthToken'
---
--- * 'igmstpInstanceGroupManagersSetTargetPoolsRequest'
 --
 -- * 'igmstpFields'
 instanceGroupManagersSetTargetPools'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instanceGroupManager'
     -> Text -- ^ 'zone'
-    -> InstanceGroupManagersSetTargetPoolsRequest -- ^ 'InstanceGroupManagersSetTargetPoolsRequest'
+    -> InstanceGroupManagersSetTargetPoolsRequest -- ^ 'payload'
     -> InstanceGroupManagersSetTargetPools'
-instanceGroupManagersSetTargetPools' pIgmstpProject_ pIgmstpInstanceGroupManager_ pIgmstpZone_ pIgmstpInstanceGroupManagersSetTargetPoolsRequest_ =
+instanceGroupManagersSetTargetPools' pIgmstpProject_ pIgmstpInstanceGroupManager_ pIgmstpZone_ pIgmstpPayload_ =
     InstanceGroupManagersSetTargetPools'
     { _igmstpQuotaUser = Nothing
     , _igmstpPrettyPrint = True
@@ -120,9 +121,9 @@ instanceGroupManagersSetTargetPools' pIgmstpProject_ pIgmstpInstanceGroupManager
     , _igmstpInstanceGroupManager = pIgmstpInstanceGroupManager_
     , _igmstpUserIP = Nothing
     , _igmstpZone = pIgmstpZone_
+    , _igmstpPayload = pIgmstpPayload_
     , _igmstpKey = Nothing
     , _igmstpOAuthToken = Nothing
-    , _igmstpInstanceGroupManagersSetTargetPoolsRequest = pIgmstpInstanceGroupManagersSetTargetPoolsRequest_
     , _igmstpFields = Nothing
     }
 
@@ -163,6 +164,12 @@ igmstpZone :: Lens' InstanceGroupManagersSetTargetPools' Text
 igmstpZone
   = lens _igmstpZone (\ s a -> s{_igmstpZone = a})
 
+-- | Multipart request metadata.
+igmstpPayload :: Lens' InstanceGroupManagersSetTargetPools' InstanceGroupManagersSetTargetPoolsRequest
+igmstpPayload
+  = lens _igmstpPayload
+      (\ s a -> s{_igmstpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -175,15 +182,6 @@ igmstpOAuthToken :: Lens' InstanceGroupManagersSetTargetPools' (Maybe OAuthToken
 igmstpOAuthToken
   = lens _igmstpOAuthToken
       (\ s a -> s{_igmstpOAuthToken = a})
-
--- | Multipart request metadata.
-igmstpInstanceGroupManagersSetTargetPoolsRequest :: Lens' InstanceGroupManagersSetTargetPools' InstanceGroupManagersSetTargetPoolsRequest
-igmstpInstanceGroupManagersSetTargetPoolsRequest
-  = lens
-      _igmstpInstanceGroupManagersSetTargetPoolsRequest
-      (\ s a ->
-         s{_igmstpInstanceGroupManagersSetTargetPoolsRequest =
-             a})
 
 -- | Selector specifying which fields to include in a partial response.
 igmstpFields :: Lens' InstanceGroupManagersSetTargetPools' (Maybe Text)
@@ -211,7 +209,7 @@ instance GoogleRequest
               _igmstpKey
               _igmstpOAuthToken
               (Just AltJSON)
-              _igmstpInstanceGroupManagersSetTargetPoolsRequest
+              _igmstpPayload
           where go
                   = clientWithRoute
                       (Proxy ::

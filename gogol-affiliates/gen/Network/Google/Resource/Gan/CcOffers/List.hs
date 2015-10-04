@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,7 +52,7 @@ type CcOffersListResource =
        Capture "publisher" Text :>
          "ccOffers" :>
            QueryParams "advertiser" Text :>
-             QueryParam "projection" GanCcOffersListProjection :>
+             QueryParam "projection" Projection :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -68,12 +69,12 @@ data CcOffersList' = CcOffersList'
     , _colPrettyPrint :: !Bool
     , _colUserIP      :: !(Maybe Text)
     , _colKey         :: !(Maybe Key)
-    , _colAdvertiser  :: !(Maybe Text)
-    , _colProjection  :: !(Maybe GanCcOffersListProjection)
+    , _colAdvertiser  :: !(Maybe [Text])
+    , _colProjection  :: !(Maybe Projection)
     , _colOAuthToken  :: !(Maybe OAuthToken)
     , _colPublisher   :: !Text
     , _colFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CcOffersList'' with the minimum fields required to make a request.
 --
@@ -139,13 +140,15 @@ colKey = lens _colKey (\ s a -> s{_colKey = a})
 
 -- | The advertiser ID of a card issuer whose offers to include. Optional,
 -- may be repeated.
-colAdvertiser :: Lens' CcOffersList' (Maybe Text)
+colAdvertiser :: Lens' CcOffersList' [Text]
 colAdvertiser
   = lens _colAdvertiser
       (\ s a -> s{_colAdvertiser = a})
+      . _Default
+      . _Coerce
 
 -- | The set of fields to return.
-colProjection :: Lens' CcOffersList' (Maybe GanCcOffersListProjection)
+colProjection :: Lens' CcOffersList' (Maybe Projection)
 colProjection
   = lens _colProjection
       (\ s a -> s{_colProjection = a})
@@ -174,7 +177,8 @@ instance GoogleRequest CcOffersList' where
         type Rs CcOffersList' = CcOffers
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u CcOffersList'{..}
-          = go _colAdvertiser _colProjection _colPublisher
+          = go _colPublisher (_colAdvertiser ^. _Default)
+              _colProjection
               _colQuotaUser
               (Just _colPrettyPrint)
               _colUserIP

@@ -17,12 +17,6 @@ module Network.Google.SiteVerification.Types
     -- * Service URL
       siteVerificationURL
 
-    -- * SiteVerificationWebResourceGettokenRequestSite
-    , SiteVerificationWebResourceGettokenRequestSite
-    , siteVerificationWebResourceGettokenRequestSite
-    , svwrgrsIdentifier
-    , svwrgrsType
-
     -- * SiteVerificationWebResourceGettokenResponse
     , SiteVerificationWebResourceGettokenResponse
     , siteVerificationWebResourceGettokenResponse
@@ -52,6 +46,12 @@ module Network.Google.SiteVerification.Types
     , svwrrOwners
     , svwrrId
     , svwrrSite
+
+    -- * Site
+    , Site
+    , site
+    , sIdentifier
+    , sType
     ) where
 
 import           Network.Google.Prelude

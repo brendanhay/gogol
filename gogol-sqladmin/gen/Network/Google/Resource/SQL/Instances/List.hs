@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,8 +52,8 @@ type InstancesListResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -76,7 +77,7 @@ data InstancesList' = InstancesList'
     , _ilOAuthToken  :: !(Maybe OAuthToken)
     , _ilMaxResults  :: !(Maybe Word32)
     , _ilFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesList'' with the minimum fields required to make a request.
 --
@@ -172,7 +173,7 @@ instance GoogleRequest InstancesList' where
         type Rs InstancesList' = InstancesListResponse
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u InstancesList'{..}
-          = go _ilMaxResults _ilPageToken _ilProject
+          = go _ilProject _ilPageToken _ilMaxResults
               _ilQuotaUser
               (Just _ilPrettyPrint)
               _ilUserIP

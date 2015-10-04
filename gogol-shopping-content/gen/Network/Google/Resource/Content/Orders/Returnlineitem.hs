@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.Content.Orders.Returnlineitem
     , orrQuotaUser
     , orrMerchantId
     , orrPrettyPrint
-    , orrOrdersReturnLineItemRequest
     , orrUserIP
+    , orrPayload
     , orrKey
     , orrOAuthToken
     , orrOrderId
@@ -65,16 +66,16 @@ type OrdersReturnlineitemResource =
 --
 -- /See:/ 'ordersReturnlineitem'' smart constructor.
 data OrdersReturnlineitem' = OrdersReturnlineitem'
-    { _orrQuotaUser                   :: !(Maybe Text)
-    , _orrMerchantId                  :: !Word64
-    , _orrPrettyPrint                 :: !Bool
-    , _orrOrdersReturnLineItemRequest :: !OrdersReturnLineItemRequest
-    , _orrUserIP                      :: !(Maybe Text)
-    , _orrKey                         :: !(Maybe Key)
-    , _orrOAuthToken                  :: !(Maybe OAuthToken)
-    , _orrOrderId                     :: !Text
-    , _orrFields                      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _orrQuotaUser   :: !(Maybe Text)
+    , _orrMerchantId  :: !Word64
+    , _orrPrettyPrint :: !Bool
+    , _orrUserIP      :: !(Maybe Text)
+    , _orrPayload     :: !OrdersReturnLineItemRequest
+    , _orrKey         :: !(Maybe Key)
+    , _orrOAuthToken  :: !(Maybe OAuthToken)
+    , _orrOrderId     :: !Text
+    , _orrFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersReturnlineitem'' with the minimum fields required to make a request.
 --
@@ -86,9 +87,9 @@ data OrdersReturnlineitem' = OrdersReturnlineitem'
 --
 -- * 'orrPrettyPrint'
 --
--- * 'orrOrdersReturnLineItemRequest'
---
 -- * 'orrUserIP'
+--
+-- * 'orrPayload'
 --
 -- * 'orrKey'
 --
@@ -99,16 +100,16 @@ data OrdersReturnlineitem' = OrdersReturnlineitem'
 -- * 'orrFields'
 ordersReturnlineitem'
     :: Word64 -- ^ 'merchantId'
-    -> OrdersReturnLineItemRequest -- ^ 'OrdersReturnLineItemRequest'
+    -> OrdersReturnLineItemRequest -- ^ 'payload'
     -> Text -- ^ 'orderId'
     -> OrdersReturnlineitem'
-ordersReturnlineitem' pOrrMerchantId_ pOrrOrdersReturnLineItemRequest_ pOrrOrderId_ =
+ordersReturnlineitem' pOrrMerchantId_ pOrrPayload_ pOrrOrderId_ =
     OrdersReturnlineitem'
     { _orrQuotaUser = Nothing
     , _orrMerchantId = pOrrMerchantId_
     , _orrPrettyPrint = True
-    , _orrOrdersReturnLineItemRequest = pOrrOrdersReturnLineItemRequest_
     , _orrUserIP = Nothing
+    , _orrPayload = pOrrPayload_
     , _orrKey = Nothing
     , _orrOAuthToken = Nothing
     , _orrOrderId = pOrrOrderId_
@@ -134,17 +135,16 @@ orrPrettyPrint
   = lens _orrPrettyPrint
       (\ s a -> s{_orrPrettyPrint = a})
 
--- | Multipart request metadata.
-orrOrdersReturnLineItemRequest :: Lens' OrdersReturnlineitem' OrdersReturnLineItemRequest
-orrOrdersReturnLineItemRequest
-  = lens _orrOrdersReturnLineItemRequest
-      (\ s a -> s{_orrOrdersReturnLineItemRequest = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 orrUserIP :: Lens' OrdersReturnlineitem' (Maybe Text)
 orrUserIP
   = lens _orrUserIP (\ s a -> s{_orrUserIP = a})
+
+-- | Multipart request metadata.
+orrPayload :: Lens' OrdersReturnlineitem' OrdersReturnLineItemRequest
+orrPayload
+  = lens _orrPayload (\ s a -> s{_orrPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -184,7 +184,7 @@ instance GoogleRequest OrdersReturnlineitem' where
               _orrKey
               _orrOAuthToken
               (Just AltJSON)
-              _orrOrdersReturnLineItemRequest
+              _orrPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrdersReturnlineitemResource)

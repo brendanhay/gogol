@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.Storage.Buckets.Patch
     , bpPrettyPrint
     , bpUserIP
     , bpBucket
-    , bpBucket
+    , bpPayload
     , bpKey
     , bpIfMetagenerationNotMatch
     , bpProjection
@@ -72,14 +73,14 @@ data BucketsPatch' = BucketsPatch'
     , _bpIfMetagenerationMatch    :: !(Maybe Word64)
     , _bpPrettyPrint              :: !Bool
     , _bpUserIP                   :: !(Maybe Text)
-    , _bpBucket                   :: !Bucket
     , _bpBucket                   :: !Text
+    , _bpPayload                  :: !Bucket
     , _bpKey                      :: !(Maybe Key)
     , _bpIfMetagenerationNotMatch :: !(Maybe Word64)
     , _bpProjection               :: !(Maybe StorageBucketsPatchProjection)
     , _bpOAuthToken               :: !(Maybe OAuthToken)
     , _bpFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsPatch'' with the minimum fields required to make a request.
 --
@@ -95,7 +96,7 @@ data BucketsPatch' = BucketsPatch'
 --
 -- * 'bpBucket'
 --
--- * 'bpBucket'
+-- * 'bpPayload'
 --
 -- * 'bpKey'
 --
@@ -107,17 +108,17 @@ data BucketsPatch' = BucketsPatch'
 --
 -- * 'bpFields'
 bucketsPatch'
-    :: Bucket -- ^ 'Bucket'
-    -> Text -- ^ 'bucket'
+    :: Text -- ^ 'bucket'
+    -> Bucket -- ^ 'payload'
     -> BucketsPatch'
-bucketsPatch' pBpBucket_ pBpBucket_ =
+bucketsPatch' pBpBucket_ pBpPayload_ =
     BucketsPatch'
     { _bpQuotaUser = Nothing
     , _bpIfMetagenerationMatch = Nothing
     , _bpPrettyPrint = True
     , _bpUserIP = Nothing
     , _bpBucket = pBpBucket_
-    , _bpBucket = pBpBucket_
+    , _bpPayload = pBpPayload_
     , _bpKey = Nothing
     , _bpIfMetagenerationNotMatch = Nothing
     , _bpProjection = Nothing
@@ -150,13 +151,14 @@ bpPrettyPrint
 bpUserIP :: Lens' BucketsPatch' (Maybe Text)
 bpUserIP = lens _bpUserIP (\ s a -> s{_bpUserIP = a})
 
--- | Multipart request metadata.
-bpBucket :: Lens' BucketsPatch' Bucket
-bpBucket = lens _bpBucket (\ s a -> s{_bpBucket = a})
-
 -- | Name of a bucket.
 bpBucket :: Lens' BucketsPatch' Text
 bpBucket = lens _bpBucket (\ s a -> s{_bpBucket = a})
+
+-- | Multipart request metadata.
+bpPayload :: Lens' BucketsPatch' Bucket
+bpPayload
+  = lens _bpPayload (\ s a -> s{_bpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -193,10 +195,9 @@ instance GoogleRequest BucketsPatch' where
         type Rs BucketsPatch' = Bucket
         request = requestWithRoute defReq storageURL
         requestWithRoute r u BucketsPatch'{..}
-          = go _bpIfMetagenerationMatch
+          = go _bpBucket _bpIfMetagenerationMatch
               _bpIfMetagenerationNotMatch
               _bpProjection
-              _bpBucket
               _bpQuotaUser
               (Just _bpPrettyPrint)
               _bpUserIP
@@ -204,7 +205,7 @@ instance GoogleRequest BucketsPatch' where
               _bpKey
               _bpOAuthToken
               (Just AltJSON)
-              _bpBucket
+              _bpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BucketsPatchResource)

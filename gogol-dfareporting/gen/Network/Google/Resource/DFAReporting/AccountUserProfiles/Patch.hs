@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.DFAReporting.AccountUserProfiles.Patch
     , auppQuotaUser
     , auppPrettyPrint
     , auppUserIP
-    , auppAccountUserProfile
     , auppProfileId
+    , auppPayload
     , auppKey
     , auppId
     , auppOAuthToken
@@ -67,16 +68,16 @@ type AccountUserProfilesPatchResource =
 --
 -- /See:/ 'accountUserProfilesPatch'' smart constructor.
 data AccountUserProfilesPatch' = AccountUserProfilesPatch'
-    { _auppQuotaUser          :: !(Maybe Text)
-    , _auppPrettyPrint        :: !Bool
-    , _auppUserIP             :: !(Maybe Text)
-    , _auppAccountUserProfile :: !AccountUserProfile
-    , _auppProfileId          :: !Int64
-    , _auppKey                :: !(Maybe Key)
-    , _auppId                 :: !Int64
-    , _auppOAuthToken         :: !(Maybe OAuthToken)
-    , _auppFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _auppQuotaUser   :: !(Maybe Text)
+    , _auppPrettyPrint :: !Bool
+    , _auppUserIP      :: !(Maybe Text)
+    , _auppProfileId   :: !Int64
+    , _auppPayload     :: !AccountUserProfile
+    , _auppKey         :: !(Maybe Key)
+    , _auppId          :: !Int64
+    , _auppOAuthToken  :: !(Maybe OAuthToken)
+    , _auppFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProfilesPatch'' with the minimum fields required to make a request.
 --
@@ -88,9 +89,9 @@ data AccountUserProfilesPatch' = AccountUserProfilesPatch'
 --
 -- * 'auppUserIP'
 --
--- * 'auppAccountUserProfile'
---
 -- * 'auppProfileId'
+--
+-- * 'auppPayload'
 --
 -- * 'auppKey'
 --
@@ -100,17 +101,17 @@ data AccountUserProfilesPatch' = AccountUserProfilesPatch'
 --
 -- * 'auppFields'
 accountUserProfilesPatch'
-    :: AccountUserProfile -- ^ 'AccountUserProfile'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> AccountUserProfile -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> AccountUserProfilesPatch'
-accountUserProfilesPatch' pAuppAccountUserProfile_ pAuppProfileId_ pAuppId_ =
+accountUserProfilesPatch' pAuppProfileId_ pAuppPayload_ pAuppId_ =
     AccountUserProfilesPatch'
     { _auppQuotaUser = Nothing
     , _auppPrettyPrint = True
     , _auppUserIP = Nothing
-    , _auppAccountUserProfile = pAuppAccountUserProfile_
     , _auppProfileId = pAuppProfileId_
+    , _auppPayload = pAuppPayload_
     , _auppKey = Nothing
     , _auppId = pAuppId_
     , _auppOAuthToken = Nothing
@@ -137,17 +138,16 @@ auppUserIP :: Lens' AccountUserProfilesPatch' (Maybe Text)
 auppUserIP
   = lens _auppUserIP (\ s a -> s{_auppUserIP = a})
 
--- | Multipart request metadata.
-auppAccountUserProfile :: Lens' AccountUserProfilesPatch' AccountUserProfile
-auppAccountUserProfile
-  = lens _auppAccountUserProfile
-      (\ s a -> s{_auppAccountUserProfile = a})
-
 -- | User profile ID associated with this request.
 auppProfileId :: Lens' AccountUserProfilesPatch' Int64
 auppProfileId
   = lens _auppProfileId
       (\ s a -> s{_auppProfileId = a})
+
+-- | Multipart request metadata.
+auppPayload :: Lens' AccountUserProfilesPatch' AccountUserProfile
+auppPayload
+  = lens _auppPayload (\ s a -> s{_auppPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -187,7 +187,7 @@ instance GoogleRequest AccountUserProfilesPatch'
               _auppKey
               _auppOAuthToken
               (Just AltJSON)
-              _auppAccountUserProfile
+              _auppPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountUserProfilesPatchResource)

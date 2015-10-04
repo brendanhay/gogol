@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.Blogger.Posts.Patch
     , ppQuotaUser
     , ppPrettyPrint
     , ppUserIP
-    , ppPost
     , ppFetchImages
     , ppBlogId
+    , ppPayload
     , ppMaxComments
     , ppKey
     , ppRevert
@@ -59,8 +60,8 @@ type PostsPatchResource =
              QueryParam "fetchBody" Bool :>
                QueryParam "fetchImages" Bool :>
                  QueryParam "maxComments" Word32 :>
-                   QueryParam "publish" Bool :>
-                     QueryParam "revert" Bool :>
+                   QueryParam "revert" Bool :>
+                     QueryParam "publish" Bool :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -78,9 +79,9 @@ data PostsPatch' = PostsPatch'
     , _ppQuotaUser   :: !(Maybe Text)
     , _ppPrettyPrint :: !Bool
     , _ppUserIP      :: !(Maybe Text)
-    , _ppPost        :: !Post
     , _ppFetchImages :: !(Maybe Bool)
     , _ppBlogId      :: !Text
+    , _ppPayload     :: !Post
     , _ppMaxComments :: !(Maybe Word32)
     , _ppKey         :: !(Maybe Key)
     , _ppRevert      :: !(Maybe Bool)
@@ -88,7 +89,7 @@ data PostsPatch' = PostsPatch'
     , _ppOAuthToken  :: !(Maybe OAuthToken)
     , _ppPublish     :: !(Maybe Bool)
     , _ppFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsPatch'' with the minimum fields required to make a request.
 --
@@ -102,11 +103,11 @@ data PostsPatch' = PostsPatch'
 --
 -- * 'ppUserIP'
 --
--- * 'ppPost'
---
 -- * 'ppFetchImages'
 --
 -- * 'ppBlogId'
+--
+-- * 'ppPayload'
 --
 -- * 'ppMaxComments'
 --
@@ -122,19 +123,19 @@ data PostsPatch' = PostsPatch'
 --
 -- * 'ppFields'
 postsPatch'
-    :: Post -- ^ 'Post'
-    -> Text -- ^ 'blogId'
+    :: Text -- ^ 'blogId'
+    -> Post -- ^ 'payload'
     -> Text -- ^ 'postId'
     -> PostsPatch'
-postsPatch' pPpPost_ pPpBlogId_ pPpPostId_ =
+postsPatch' pPpBlogId_ pPpPayload_ pPpPostId_ =
     PostsPatch'
     { _ppFetchBody = True
     , _ppQuotaUser = Nothing
     , _ppPrettyPrint = True
     , _ppUserIP = Nothing
-    , _ppPost = pPpPost_
     , _ppFetchImages = Nothing
     , _ppBlogId = pPpBlogId_
+    , _ppPayload = pPpPayload_
     , _ppMaxComments = Nothing
     , _ppKey = Nothing
     , _ppRevert = Nothing
@@ -168,10 +169,6 @@ ppPrettyPrint
 ppUserIP :: Lens' PostsPatch' (Maybe Text)
 ppUserIP = lens _ppUserIP (\ s a -> s{_ppUserIP = a})
 
--- | Multipart request metadata.
-ppPost :: Lens' PostsPatch' Post
-ppPost = lens _ppPost (\ s a -> s{_ppPost = a})
-
 -- | Whether image URL metadata for each post is included in the returned
 -- result (default: false).
 ppFetchImages :: Lens' PostsPatch' (Maybe Bool)
@@ -182,6 +179,11 @@ ppFetchImages
 -- | The ID of the Blog.
 ppBlogId :: Lens' PostsPatch' Text
 ppBlogId = lens _ppBlogId (\ s a -> s{_ppBlogId = a})
+
+-- | Multipart request metadata.
+ppPayload :: Lens' PostsPatch' Post
+ppPayload
+  = lens _ppPayload (\ s a -> s{_ppPayload = a})
 
 -- | Maximum number of comments to retrieve with the returned post.
 ppMaxComments :: Lens' PostsPatch' (Maybe Word32)
@@ -227,12 +229,11 @@ instance GoogleRequest PostsPatch' where
         type Rs PostsPatch' = Post
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsPatch'{..}
-          = go (Just _ppFetchBody) _ppFetchImages
+          = go _ppBlogId _ppPostId (Just _ppFetchBody)
+              _ppFetchImages
               _ppMaxComments
-              _ppPublish
               _ppRevert
-              _ppBlogId
-              _ppPostId
+              _ppPublish
               _ppQuotaUser
               (Just _ppPrettyPrint)
               _ppUserIP
@@ -240,7 +241,7 @@ instance GoogleRequest PostsPatch' where
               _ppKey
               _ppOAuthToken
               (Just AltJSON)
-              _ppPost
+              _ppPayload
           where go
                   = clientWithRoute (Proxy :: Proxy PostsPatchResource)
                       r

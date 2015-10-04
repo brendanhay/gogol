@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -56,13 +57,11 @@ import           Network.Google.YouTube.Types
 type LiveBroadcastsTransitionResource =
      "liveBroadcasts" :>
        "transition" :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "onBehalfOfContentOwnerChannel" Text :>
-             QueryParam "broadcastStatus"
-               YouTubeLiveBroadcastsTransitionBroadcastStatus
-               :>
-               QueryParam "id" Text :>
-                 QueryParam "part" Text :>
+         QueryParam "broadcastStatus" BroadcastStatus :>
+           QueryParam "id" Text :>
+             QueryParam "part" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "onBehalfOfContentOwnerChannel" Text :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -85,14 +84,14 @@ data LiveBroadcastsTransition' = LiveBroadcastsTransition'
     , _lbtPart                          :: !Text
     , _lbtPrettyPrint                   :: !Bool
     , _lbtUserIP                        :: !(Maybe Text)
-    , _lbtBroadcastStatus               :: !YouTubeLiveBroadcastsTransitionBroadcastStatus
+    , _lbtBroadcastStatus               :: !BroadcastStatus
     , _lbtOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbtKey                           :: !(Maybe Key)
     , _lbtOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbtId                            :: !Text
     , _lbtOAuthToken                    :: !(Maybe OAuthToken)
     , _lbtFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsTransition'' with the minimum fields required to make a request.
 --
@@ -121,7 +120,7 @@ data LiveBroadcastsTransition' = LiveBroadcastsTransition'
 -- * 'lbtFields'
 liveBroadcastsTransition'
     :: Text -- ^ 'part'
-    -> YouTubeLiveBroadcastsTransitionBroadcastStatus -- ^ 'broadcastStatus'
+    -> BroadcastStatus -- ^ 'broadcastStatus'
     -> Text -- ^ 'id'
     -> LiveBroadcastsTransition'
 liveBroadcastsTransition' pLbtPart_ pLbtBroadcastStatus_ pLbtId_ =
@@ -169,7 +168,7 @@ lbtUserIP
 -- broadcast is changing. Note that to transition a broadcast to either the
 -- testing or live state, the status.streamStatus must be active for the
 -- stream that the broadcast is bound to.
-lbtBroadcastStatus :: Lens' LiveBroadcastsTransition' YouTubeLiveBroadcastsTransitionBroadcastStatus
+lbtBroadcastStatus :: Lens' LiveBroadcastsTransition' BroadcastStatus
 lbtBroadcastStatus
   = lens _lbtBroadcastStatus
       (\ s a -> s{_lbtBroadcastStatus = a})
@@ -241,11 +240,10 @@ instance GoogleRequest LiveBroadcastsTransition'
         type Rs LiveBroadcastsTransition' = LiveBroadcast
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveBroadcastsTransition'{..}
-          = go _lbtOnBehalfOfContentOwner
-              _lbtOnBehalfOfContentOwnerChannel
-              (Just _lbtBroadcastStatus)
-              (Just _lbtId)
+          = go (Just _lbtBroadcastStatus) (Just _lbtId)
               (Just _lbtPart)
+              _lbtOnBehalfOfContentOwner
+              _lbtOnBehalfOfContentOwnerChannel
               _lbtQuotaUser
               (Just _lbtPrettyPrint)
               _lbtUserIP

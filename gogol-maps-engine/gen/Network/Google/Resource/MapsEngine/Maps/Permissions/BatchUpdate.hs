@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,10 +33,10 @@ module Network.Google.Resource.MapsEngine.Maps.Permissions.BatchUpdate
     , MapsPermissionsBatchUpdate'
 
     -- * Request Lenses
-    , mpbuPermissionsBatchUpdateRequest
     , mpbuQuotaUser
     , mpbuPrettyPrint
     , mpbuUserIP
+    , mpbuPayload
     , mpbuKey
     , mpbuId
     , mpbuOAuthToken
@@ -68,27 +69,27 @@ type MapsPermissionsBatchUpdateResource =
 --
 -- /See:/ 'mapsPermissionsBatchUpdate'' smart constructor.
 data MapsPermissionsBatchUpdate' = MapsPermissionsBatchUpdate'
-    { _mpbuPermissionsBatchUpdateRequest :: !PermissionsBatchUpdateRequest
-    , _mpbuQuotaUser                     :: !(Maybe Text)
-    , _mpbuPrettyPrint                   :: !Bool
-    , _mpbuUserIP                        :: !(Maybe Text)
-    , _mpbuKey                           :: !(Maybe Key)
-    , _mpbuId                            :: !Text
-    , _mpbuOAuthToken                    :: !(Maybe OAuthToken)
-    , _mpbuFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mpbuQuotaUser   :: !(Maybe Text)
+    , _mpbuPrettyPrint :: !Bool
+    , _mpbuUserIP      :: !(Maybe Text)
+    , _mpbuPayload     :: !PermissionsBatchUpdateRequest
+    , _mpbuKey         :: !(Maybe Key)
+    , _mpbuId          :: !Text
+    , _mpbuOAuthToken  :: !(Maybe OAuthToken)
+    , _mpbuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsPermissionsBatchUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'mpbuPermissionsBatchUpdateRequest'
 --
 -- * 'mpbuQuotaUser'
 --
 -- * 'mpbuPrettyPrint'
 --
 -- * 'mpbuUserIP'
+--
+-- * 'mpbuPayload'
 --
 -- * 'mpbuKey'
 --
@@ -98,26 +99,20 @@ data MapsPermissionsBatchUpdate' = MapsPermissionsBatchUpdate'
 --
 -- * 'mpbuFields'
 mapsPermissionsBatchUpdate'
-    :: PermissionsBatchUpdateRequest -- ^ 'PermissionsBatchUpdateRequest'
+    :: PermissionsBatchUpdateRequest -- ^ 'payload'
     -> Text -- ^ 'id'
     -> MapsPermissionsBatchUpdate'
-mapsPermissionsBatchUpdate' pMpbuPermissionsBatchUpdateRequest_ pMpbuId_ =
+mapsPermissionsBatchUpdate' pMpbuPayload_ pMpbuId_ =
     MapsPermissionsBatchUpdate'
-    { _mpbuPermissionsBatchUpdateRequest = pMpbuPermissionsBatchUpdateRequest_
-    , _mpbuQuotaUser = Nothing
+    { _mpbuQuotaUser = Nothing
     , _mpbuPrettyPrint = True
     , _mpbuUserIP = Nothing
+    , _mpbuPayload = pMpbuPayload_
     , _mpbuKey = Nothing
     , _mpbuId = pMpbuId_
     , _mpbuOAuthToken = Nothing
     , _mpbuFields = Nothing
     }
-
--- | Multipart request metadata.
-mpbuPermissionsBatchUpdateRequest :: Lens' MapsPermissionsBatchUpdate' PermissionsBatchUpdateRequest
-mpbuPermissionsBatchUpdateRequest
-  = lens _mpbuPermissionsBatchUpdateRequest
-      (\ s a -> s{_mpbuPermissionsBatchUpdateRequest = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -138,6 +133,11 @@ mpbuPrettyPrint
 mpbuUserIP :: Lens' MapsPermissionsBatchUpdate' (Maybe Text)
 mpbuUserIP
   = lens _mpbuUserIP (\ s a -> s{_mpbuUserIP = a})
+
+-- | Multipart request metadata.
+mpbuPayload :: Lens' MapsPermissionsBatchUpdate' PermissionsBatchUpdateRequest
+mpbuPayload
+  = lens _mpbuPayload (\ s a -> s{_mpbuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -176,7 +176,7 @@ instance GoogleRequest MapsPermissionsBatchUpdate'
               _mpbuKey
               _mpbuOAuthToken
               (Just AltJSON)
-              _mpbuPermissionsBatchUpdateRequest
+              _mpbuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MapsPermissionsBatchUpdateResource)

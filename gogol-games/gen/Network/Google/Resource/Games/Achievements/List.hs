@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,10 +54,10 @@ type AchievementsListResource =
      "players" :>
        Capture "playerId" Text :>
          "achievements" :>
-           QueryParam "language" Text :>
-             QueryParam "maxResults" Int32 :>
+           QueryParam "state" State :>
+             QueryParam "language" Text :>
                QueryParam "pageToken" Text :>
-                 QueryParam "state" GamesAchievementsListState :>
+                 QueryParam "maxResults" Int32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -73,7 +74,7 @@ type AchievementsListResource =
 data AchievementsList' = AchievementsList'
     { _alQuotaUser   :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
-    , _alState       :: !(Maybe GamesAchievementsListState)
+    , _alState       :: !(Maybe State)
     , _alUserIP      :: !(Maybe Text)
     , _alKey         :: !(Maybe Key)
     , _alLanguage    :: !(Maybe Text)
@@ -82,7 +83,7 @@ data AchievementsList' = AchievementsList'
     , _alPlayerId    :: !Text
     , _alMaxResults  :: !(Maybe Int32)
     , _alFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsList'' with the minimum fields required to make a request.
 --
@@ -142,7 +143,7 @@ alPrettyPrint
 
 -- | Tells the server to return only achievements with the specified state.
 -- If this parameter isn\'t specified, all achievements are returned.
-alState :: Lens' AchievementsList' (Maybe GamesAchievementsListState)
+alState :: Lens' AchievementsList' (Maybe State)
 alState = lens _alState (\ s a -> s{_alState = a})
 
 -- | IP address of the site where the request originates. Use this if you
@@ -197,8 +198,8 @@ instance GoogleRequest AchievementsList' where
              PlayerAchievementListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u AchievementsList'{..}
-          = go _alLanguage _alMaxResults _alPageToken _alState
-              _alPlayerId
+          = go _alPlayerId _alState _alLanguage _alPageToken
+              _alMaxResults
               _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,8 +52,8 @@ type AchievementsIncrementResource =
      "achievements" :>
        Capture "achievementId" Text :>
          "increment" :>
-           QueryParam "requestId" Int64 :>
-             QueryParam "stepsToIncrement" Int32 :>
+           QueryParam "stepsToIncrement" Int32 :>
+             QueryParam "requestId" Int64 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -76,7 +77,7 @@ data AchievementsIncrement' = AchievementsIncrement'
     , _aiOAuthToken       :: !(Maybe OAuthToken)
     , _aiStepsToIncrement :: !Int32
     , _aiFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsIncrement'' with the minimum fields required to make a request.
 --
@@ -177,8 +178,8 @@ instance GoogleRequest AchievementsIncrement' where
              AchievementIncrementResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u AchievementsIncrement'{..}
-          = go _aiRequestId _aiAchievementId
-              (Just _aiStepsToIncrement)
+          = go _aiAchievementId (Just _aiStepsToIncrement)
+              _aiRequestId
               _aiQuotaUser
               (Just _aiPrettyPrint)
               _aiUserIP

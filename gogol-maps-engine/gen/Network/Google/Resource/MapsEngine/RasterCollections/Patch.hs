@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Patch
     -- * Request Lenses
     , rcpQuotaUser
     , rcpPrettyPrint
-    , rcpRasterCollection
     , rcpUserIP
+    , rcpPayload
     , rcpKey
     , rcpId
     , rcpOAuthToken
@@ -61,15 +62,15 @@ type RasterCollectionsPatchResource =
 --
 -- /See:/ 'rasterCollectionsPatch'' smart constructor.
 data RasterCollectionsPatch' = RasterCollectionsPatch'
-    { _rcpQuotaUser        :: !(Maybe Text)
-    , _rcpPrettyPrint      :: !Bool
-    , _rcpRasterCollection :: !RasterCollection
-    , _rcpUserIP           :: !(Maybe Text)
-    , _rcpKey              :: !(Maybe Key)
-    , _rcpId               :: !Text
-    , _rcpOAuthToken       :: !(Maybe OAuthToken)
-    , _rcpFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rcpQuotaUser   :: !(Maybe Text)
+    , _rcpPrettyPrint :: !Bool
+    , _rcpUserIP      :: !(Maybe Text)
+    , _rcpPayload     :: !RasterCollection
+    , _rcpKey         :: !(Maybe Key)
+    , _rcpId          :: !Text
+    , _rcpOAuthToken  :: !(Maybe OAuthToken)
+    , _rcpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsPatch'' with the minimum fields required to make a request.
 --
@@ -79,9 +80,9 @@ data RasterCollectionsPatch' = RasterCollectionsPatch'
 --
 -- * 'rcpPrettyPrint'
 --
--- * 'rcpRasterCollection'
---
 -- * 'rcpUserIP'
+--
+-- * 'rcpPayload'
 --
 -- * 'rcpKey'
 --
@@ -91,15 +92,15 @@ data RasterCollectionsPatch' = RasterCollectionsPatch'
 --
 -- * 'rcpFields'
 rasterCollectionsPatch'
-    :: RasterCollection -- ^ 'RasterCollection'
+    :: RasterCollection -- ^ 'payload'
     -> Text -- ^ 'id'
     -> RasterCollectionsPatch'
-rasterCollectionsPatch' pRcpRasterCollection_ pRcpId_ =
+rasterCollectionsPatch' pRcpPayload_ pRcpId_ =
     RasterCollectionsPatch'
     { _rcpQuotaUser = Nothing
     , _rcpPrettyPrint = True
-    , _rcpRasterCollection = pRcpRasterCollection_
     , _rcpUserIP = Nothing
+    , _rcpPayload = pRcpPayload_
     , _rcpKey = Nothing
     , _rcpId = pRcpId_
     , _rcpOAuthToken = Nothing
@@ -119,17 +120,16 @@ rcpPrettyPrint
   = lens _rcpPrettyPrint
       (\ s a -> s{_rcpPrettyPrint = a})
 
--- | Multipart request metadata.
-rcpRasterCollection :: Lens' RasterCollectionsPatch' RasterCollection
-rcpRasterCollection
-  = lens _rcpRasterCollection
-      (\ s a -> s{_rcpRasterCollection = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 rcpUserIP :: Lens' RasterCollectionsPatch' (Maybe Text)
 rcpUserIP
   = lens _rcpUserIP (\ s a -> s{_rcpUserIP = a})
+
+-- | Multipart request metadata.
+rcpPayload :: Lens' RasterCollectionsPatch' RasterCollection
+rcpPayload
+  = lens _rcpPayload (\ s a -> s{_rcpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -166,7 +166,7 @@ instance GoogleRequest RasterCollectionsPatch' where
               _rcpKey
               _rcpOAuthToken
               (Just AltJSON)
-              _rcpRasterCollection
+              _rcpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RasterCollectionsPatchResource)

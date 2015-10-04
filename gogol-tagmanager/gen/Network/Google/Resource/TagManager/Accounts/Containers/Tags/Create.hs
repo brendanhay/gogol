@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Create
     -- * Request Lenses
     , actcQuotaUser
     , actcPrettyPrint
-    , actcTag
     , actcContainerId
     , actcUserIP
+    , actcPayload
     , actcAccountId
     , actcKey
     , actcOAuthToken
@@ -67,14 +68,14 @@ type AccountsContainersTagsCreateResource =
 data AccountsContainersTagsCreate' = AccountsContainersTagsCreate'
     { _actcQuotaUser   :: !(Maybe Text)
     , _actcPrettyPrint :: !Bool
-    , _actcTag         :: !Tag
     , _actcContainerId :: !Text
     , _actcUserIP      :: !(Maybe Text)
+    , _actcPayload     :: !Tag
     , _actcAccountId   :: !Text
     , _actcKey         :: !(Maybe Key)
     , _actcOAuthToken  :: !(Maybe OAuthToken)
     , _actcFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTagsCreate'' with the minimum fields required to make a request.
 --
@@ -84,11 +85,11 @@ data AccountsContainersTagsCreate' = AccountsContainersTagsCreate'
 --
 -- * 'actcPrettyPrint'
 --
--- * 'actcTag'
---
 -- * 'actcContainerId'
 --
 -- * 'actcUserIP'
+--
+-- * 'actcPayload'
 --
 -- * 'actcAccountId'
 --
@@ -98,17 +99,17 @@ data AccountsContainersTagsCreate' = AccountsContainersTagsCreate'
 --
 -- * 'actcFields'
 accountsContainersTagsCreate'
-    :: Tag -- ^ 'Tag'
-    -> Text -- ^ 'containerId'
+    :: Text -- ^ 'containerId'
+    -> Tag -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> AccountsContainersTagsCreate'
-accountsContainersTagsCreate' pActcTag_ pActcContainerId_ pActcAccountId_ =
+accountsContainersTagsCreate' pActcContainerId_ pActcPayload_ pActcAccountId_ =
     AccountsContainersTagsCreate'
     { _actcQuotaUser = Nothing
     , _actcPrettyPrint = True
-    , _actcTag = pActcTag_
     , _actcContainerId = pActcContainerId_
     , _actcUserIP = Nothing
+    , _actcPayload = pActcPayload_
     , _actcAccountId = pActcAccountId_
     , _actcKey = Nothing
     , _actcOAuthToken = Nothing
@@ -129,10 +130,6 @@ actcPrettyPrint
   = lens _actcPrettyPrint
       (\ s a -> s{_actcPrettyPrint = a})
 
--- | Multipart request metadata.
-actcTag :: Lens' AccountsContainersTagsCreate' Tag
-actcTag = lens _actcTag (\ s a -> s{_actcTag = a})
-
 -- | The GTM Container ID.
 actcContainerId :: Lens' AccountsContainersTagsCreate' Text
 actcContainerId
@@ -144,6 +141,11 @@ actcContainerId
 actcUserIP :: Lens' AccountsContainersTagsCreate' (Maybe Text)
 actcUserIP
   = lens _actcUserIP (\ s a -> s{_actcUserIP = a})
+
+-- | Multipart request metadata.
+actcPayload :: Lens' AccountsContainersTagsCreate' Tag
+actcPayload
+  = lens _actcPayload (\ s a -> s{_actcPayload = a})
 
 -- | The GTM Account ID.
 actcAccountId :: Lens' AccountsContainersTagsCreate' Text
@@ -186,7 +188,7 @@ instance GoogleRequest AccountsContainersTagsCreate'
               _actcKey
               _actcOAuthToken
               (Just AltJSON)
-              _actcTag
+              _actcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsContainersTagsCreateResource)

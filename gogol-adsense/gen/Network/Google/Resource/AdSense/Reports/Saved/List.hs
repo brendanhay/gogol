@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,8 +49,8 @@ import           Network.Google.Prelude
 type ReportsSavedListResource =
      "reports" :>
        "saved" :>
-         QueryParam "maxResults" Int32 :>
-           QueryParam "pageToken" Text :>
+         QueryParam "pageToken" Text :>
+           QueryParam "maxResults" Int32 :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -70,7 +71,7 @@ data ReportsSavedList' = ReportsSavedList'
     , _rslOAuthToken  :: !(Maybe OAuthToken)
     , _rslMaxResults  :: !(Maybe Int32)
     , _rslFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsSavedList'' with the minimum fields required to make a request.
 --
@@ -163,7 +164,7 @@ instance GoogleRequest ReportsSavedList' where
         type Rs ReportsSavedList' = SavedReports
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u ReportsSavedList'{..}
-          = go _rslMaxResults _rslPageToken _rslQuotaUser
+          = go _rslPageToken _rslMaxResults _rslQuotaUser
               (Just _rslPrettyPrint)
               _rslUserIP
               _rslFields

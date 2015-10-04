@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -49,10 +50,10 @@ import           Network.Google.YouTube.Types
 -- 'VideoCategoriesList'' request conforms to.
 type VideoCategoriesListResource =
      "videoCategories" :>
-       QueryParam "hl" Text :>
-         QueryParam "id" Text :>
-           QueryParam "regionCode" Text :>
-             QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "regionCode" Text :>
+           QueryParam "hl" Text :>
+             QueryParam "id" Text :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -76,7 +77,7 @@ data VideoCategoriesList' = VideoCategoriesList'
     , _vclId          :: !(Maybe Text)
     , _vclOAuthToken  :: !(Maybe OAuthToken)
     , _vclFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoCategoriesList'' with the minimum fields required to make a request.
 --
@@ -186,8 +187,8 @@ instance GoogleRequest VideoCategoriesList' where
              VideoCategoryListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u VideoCategoriesList'{..}
-          = go (Just _vclHl) _vclId _vclRegionCode
-              (Just _vclPart)
+          = go (Just _vclPart) _vclRegionCode (Just _vclHl)
+              _vclId
               _vclQuotaUser
               (Just _vclPrettyPrint)
               _vclUserIP

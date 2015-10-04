@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -81,7 +82,7 @@ data LayersVolumeAnnotationsGet' = LayersVolumeAnnotationsGet'
     , _lvagOAuthToken   :: !(Maybe OAuthToken)
     , _lvagLayerId      :: !Text
     , _lvagFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersVolumeAnnotationsGet'' with the minimum fields required to make a request.
 --
@@ -202,9 +203,9 @@ instance GoogleRequest LayersVolumeAnnotationsGet'
              Volumeannotation
         request = requestWithRoute defReq booksURL
         requestWithRoute r u LayersVolumeAnnotationsGet'{..}
-          = go _lvagLocale _lvagSource _lvagVolumeId
-              _lvagLayerId
-              _lvagAnnotationId
+          = go _lvagVolumeId _lvagLayerId _lvagAnnotationId
+              _lvagLocale
+              _lvagSource
               _lvagQuotaUser
               (Just _lvagPrettyPrint)
               _lvagUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -49,8 +50,8 @@ import           Network.Google.Prelude
 type AchievementDefinitionsListResource =
      "achievements" :>
        QueryParam "language" Text :>
-         QueryParam "maxResults" Int32 :>
-           QueryParam "pageToken" Text :>
+         QueryParam "pageToken" Text :>
+           QueryParam "maxResults" Int32 :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -73,7 +74,7 @@ data AchievementDefinitionsList' = AchievementDefinitionsList'
     , _adlOAuthToken  :: !(Maybe OAuthToken)
     , _adlMaxResults  :: !(Maybe Int32)
     , _adlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementDefinitionsList'' with the minimum fields required to make a request.
 --
@@ -175,7 +176,7 @@ instance GoogleRequest AchievementDefinitionsList'
              AchievementDefinitionsListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u AchievementDefinitionsList'{..}
-          = go _adlLanguage _adlMaxResults _adlPageToken
+          = go _adlLanguage _adlPageToken _adlMaxResults
               _adlQuotaUser
               (Just _adlPrettyPrint)
               _adlUserIP

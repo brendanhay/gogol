@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,16 +55,16 @@ type PlacementStrategiesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "placementStrategies" :>
-           QueryParams "ids" Int64 :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "searchString" Text :>
+           QueryParam "searchString" Text :>
+             QueryParams "ids" Int64 :>
+               QueryParam "sortOrder"
+                 DfareportingPlacementStrategiesListSortOrder
+                 :>
+                 QueryParam "pageToken" Text :>
                    QueryParam "sortField"
                      DfareportingPlacementStrategiesListSortField
                      :>
-                     QueryParam "sortOrder"
-                       DfareportingPlacementStrategiesListSortOrder
-                       :>
+                     QueryParam "maxResults" Int32 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -81,7 +82,7 @@ data PlacementStrategiesList' = PlacementStrategiesList'
     , _pslPrettyPrint  :: !Bool
     , _pslUserIP       :: !(Maybe Text)
     , _pslSearchString :: !(Maybe Text)
-    , _pslIds          :: !(Maybe Int64)
+    , _pslIds          :: !(Maybe [Int64])
     , _pslProfileId    :: !Int64
     , _pslSortOrder    :: !(Maybe DfareportingPlacementStrategiesListSortOrder)
     , _pslKey          :: !(Maybe Key)
@@ -90,7 +91,7 @@ data PlacementStrategiesList' = PlacementStrategiesList'
     , _pslOAuthToken   :: !(Maybe OAuthToken)
     , _pslMaxResults   :: !(Maybe Int32)
     , _pslFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesList'' with the minimum fields required to make a request.
 --
@@ -174,8 +175,10 @@ pslSearchString
       (\ s a -> s{_pslSearchString = a})
 
 -- | Select only placement strategies with these IDs.
-pslIds :: Lens' PlacementStrategiesList' (Maybe Int64)
-pslIds = lens _pslIds (\ s a -> s{_pslIds = a})
+pslIds :: Lens' PlacementStrategiesList' [Int64]
+pslIds
+  = lens _pslIds (\ s a -> s{_pslIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 pslProfileId :: Lens' PlacementStrategiesList' Int64
@@ -229,11 +232,12 @@ instance GoogleRequest PlacementStrategiesList' where
              PlacementStrategiesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementStrategiesList'{..}
-          = go _pslIds _pslMaxResults _pslPageToken
-              _pslSearchString
-              _pslSortField
+          = go _pslProfileId _pslSearchString
+              (_pslIds ^. _Default)
               _pslSortOrder
-              _pslProfileId
+              _pslPageToken
+              _pslSortField
+              _pslMaxResults
               _pslQuotaUser
               (Just _pslPrettyPrint)
               _pslUserIP

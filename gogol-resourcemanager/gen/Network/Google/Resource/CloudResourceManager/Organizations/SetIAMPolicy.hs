@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -38,7 +39,7 @@ module Network.Google.Resource.CloudResourceManager.Organizations.SetIAMPolicy
     , osipPp
     , osipAccessToken
     , osipUploadType
-    , osipSetIAMPolicyRequest
+    , osipPayload
     , osipBearerToken
     , osipKey
     , osipResource
@@ -55,14 +56,14 @@ import           Network.Google.ResourceManager.Types
 type OrganizationsSetIAMPolicyResource =
      "v1beta1" :>
        "organizations" :>
-         "{resource}:setIamPolicy" :>
+         CaptureMode "resource" "setIamPolicy" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
@@ -77,21 +78,21 @@ type OrganizationsSetIAMPolicyResource =
 --
 -- /See:/ 'organizationsSetIAMPolicy'' smart constructor.
 data OrganizationsSetIAMPolicy' = OrganizationsSetIAMPolicy'
-    { _osipXgafv               :: !(Maybe Text)
-    , _osipQuotaUser           :: !(Maybe Text)
-    , _osipPrettyPrint         :: !Bool
-    , _osipUploadProtocol      :: !(Maybe Text)
-    , _osipPp                  :: !Bool
-    , _osipAccessToken         :: !(Maybe Text)
-    , _osipUploadType          :: !(Maybe Text)
-    , _osipSetIAMPolicyRequest :: !SetIAMPolicyRequest
-    , _osipBearerToken         :: !(Maybe Text)
-    , _osipKey                 :: !(Maybe Key)
-    , _osipResource            :: !Text
-    , _osipOAuthToken          :: !(Maybe OAuthToken)
-    , _osipFields              :: !(Maybe Text)
-    , _osipCallback            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _osipXgafv          :: !(Maybe Text)
+    , _osipQuotaUser      :: !(Maybe Text)
+    , _osipPrettyPrint    :: !Bool
+    , _osipUploadProtocol :: !(Maybe Text)
+    , _osipPp             :: !Bool
+    , _osipAccessToken    :: !(Maybe Text)
+    , _osipUploadType     :: !(Maybe Text)
+    , _osipPayload        :: !SetIAMPolicyRequest
+    , _osipBearerToken    :: !(Maybe Text)
+    , _osipKey            :: !(Maybe Key)
+    , _osipResource       :: !Text
+    , _osipOAuthToken     :: !(Maybe OAuthToken)
+    , _osipFields         :: !(Maybe Text)
+    , _osipCallback       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrganizationsSetIAMPolicy'' with the minimum fields required to make a request.
 --
@@ -111,7 +112,7 @@ data OrganizationsSetIAMPolicy' = OrganizationsSetIAMPolicy'
 --
 -- * 'osipUploadType'
 --
--- * 'osipSetIAMPolicyRequest'
+-- * 'osipPayload'
 --
 -- * 'osipBearerToken'
 --
@@ -125,10 +126,10 @@ data OrganizationsSetIAMPolicy' = OrganizationsSetIAMPolicy'
 --
 -- * 'osipCallback'
 organizationsSetIAMPolicy'
-    :: SetIAMPolicyRequest -- ^ 'SetIAMPolicyRequest'
+    :: SetIAMPolicyRequest -- ^ 'payload'
     -> Text -- ^ 'resource'
     -> OrganizationsSetIAMPolicy'
-organizationsSetIAMPolicy' pOsipSetIAMPolicyRequest_ pOsipResource_ =
+organizationsSetIAMPolicy' pOsipPayload_ pOsipResource_ =
     OrganizationsSetIAMPolicy'
     { _osipXgafv = Nothing
     , _osipQuotaUser = Nothing
@@ -137,7 +138,7 @@ organizationsSetIAMPolicy' pOsipSetIAMPolicyRequest_ pOsipResource_ =
     , _osipPp = True
     , _osipAccessToken = Nothing
     , _osipUploadType = Nothing
-    , _osipSetIAMPolicyRequest = pOsipSetIAMPolicyRequest_
+    , _osipPayload = pOsipPayload_
     , _osipBearerToken = Nothing
     , _osipKey = Nothing
     , _osipResource = pOsipResource_
@@ -188,10 +189,9 @@ osipUploadType
       (\ s a -> s{_osipUploadType = a})
 
 -- | Multipart request metadata.
-osipSetIAMPolicyRequest :: Lens' OrganizationsSetIAMPolicy' SetIAMPolicyRequest
-osipSetIAMPolicyRequest
-  = lens _osipSetIAMPolicyRequest
-      (\ s a -> s{_osipSetIAMPolicyRequest = a})
+osipPayload :: Lens' OrganizationsSetIAMPolicy' SetIAMPolicyRequest
+osipPayload
+  = lens _osipPayload (\ s a -> s{_osipPayload = a})
 
 -- | OAuth bearer token.
 osipBearerToken :: Lens' OrganizationsSetIAMPolicy' (Maybe Text)
@@ -237,19 +237,19 @@ instance GoogleRequest OrganizationsSetIAMPolicy'
         type Rs OrganizationsSetIAMPolicy' = Policy
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u OrganizationsSetIAMPolicy'{..}
-          = go _osipXgafv _osipAccessToken _osipBearerToken
-              _osipCallback
+          = go _osipResource _osipXgafv _osipUploadProtocol
               (Just _osipPp)
+              _osipAccessToken
               _osipUploadType
-              _osipUploadProtocol
-              _osipResource
+              _osipBearerToken
+              _osipCallback
               _osipQuotaUser
               (Just _osipPrettyPrint)
               _osipFields
               _osipKey
               _osipOAuthToken
               (Just AltJSON)
-              _osipSetIAMPolicyRequest
+              _osipPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrganizationsSetIAMPolicyResource)

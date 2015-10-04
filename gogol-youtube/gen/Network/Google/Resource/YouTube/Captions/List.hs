@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,11 +54,11 @@ import           Network.Google.YouTube.Types
 -- 'CaptionsList'' request conforms to.
 type CaptionsListResource =
      "captions" :>
-       QueryParam "id" Text :>
-         QueryParam "onBehalfOf" Text :>
-           QueryParam "onBehalfOfContentOwner" Text :>
-             QueryParam "part" Text :>
-               QueryParam "videoId" Text :>
+       QueryParam "part" Text :>
+         QueryParam "videoId" Text :>
+           QueryParam "onBehalfOf" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "id" Text :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -85,7 +86,7 @@ data CaptionsList' = CaptionsList'
     , _cllId                     :: !(Maybe Text)
     , _cllOAuthToken             :: !(Maybe OAuthToken)
     , _cllFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CaptionsList'' with the minimum fields required to make a request.
 --
@@ -214,9 +215,10 @@ instance GoogleRequest CaptionsList' where
         type Rs CaptionsList' = CaptionListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CaptionsList'{..}
-          = go _cllId _cllOnBehalfOf _cllOnBehalfOfContentOwner
-              (Just _cllPart)
-              (Just _cllVideoId)
+          = go (Just _cllPart) (Just _cllVideoId)
+              _cllOnBehalfOf
+              _cllOnBehalfOfContentOwner
+              _cllId
               _cllQuotaUser
               (Just _cllPrettyPrint)
               _cllUserIP

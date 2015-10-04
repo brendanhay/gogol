@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.Analytics.Management.WebProperties.Patch
     , mwppPrettyPrint
     , mwppWebPropertyId
     , mwppUserIP
+    , mwppPayload
     , mwppAccountId
     , mwppKey
-    , mwppWebProperty
     , mwppOAuthToken
     , mwppFields
     ) where
@@ -70,12 +71,12 @@ data ManagementWebPropertiesPatch' = ManagementWebPropertiesPatch'
     , _mwppPrettyPrint   :: !Bool
     , _mwppWebPropertyId :: !Text
     , _mwppUserIP        :: !(Maybe Text)
+    , _mwppPayload       :: !WebProperty
     , _mwppAccountId     :: !Text
     , _mwppKey           :: !(Maybe Key)
-    , _mwppWebProperty   :: !WebProperty
     , _mwppOAuthToken    :: !(Maybe OAuthToken)
     , _mwppFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertiesPatch'' with the minimum fields required to make a request.
 --
@@ -89,29 +90,29 @@ data ManagementWebPropertiesPatch' = ManagementWebPropertiesPatch'
 --
 -- * 'mwppUserIP'
 --
+-- * 'mwppPayload'
+--
 -- * 'mwppAccountId'
 --
 -- * 'mwppKey'
---
--- * 'mwppWebProperty'
 --
 -- * 'mwppOAuthToken'
 --
 -- * 'mwppFields'
 managementWebPropertiesPatch'
     :: Text -- ^ 'webPropertyId'
+    -> WebProperty -- ^ 'payload'
     -> Text -- ^ 'accountId'
-    -> WebProperty -- ^ 'WebProperty'
     -> ManagementWebPropertiesPatch'
-managementWebPropertiesPatch' pMwppWebPropertyId_ pMwppAccountId_ pMwppWebProperty_ =
+managementWebPropertiesPatch' pMwppWebPropertyId_ pMwppPayload_ pMwppAccountId_ =
     ManagementWebPropertiesPatch'
     { _mwppQuotaUser = Nothing
     , _mwppPrettyPrint = False
     , _mwppWebPropertyId = pMwppWebPropertyId_
     , _mwppUserIP = Nothing
+    , _mwppPayload = pMwppPayload_
     , _mwppAccountId = pMwppAccountId_
     , _mwppKey = Nothing
-    , _mwppWebProperty = pMwppWebProperty_
     , _mwppOAuthToken = Nothing
     , _mwppFields = Nothing
     }
@@ -142,6 +143,11 @@ mwppUserIP :: Lens' ManagementWebPropertiesPatch' (Maybe Text)
 mwppUserIP
   = lens _mwppUserIP (\ s a -> s{_mwppUserIP = a})
 
+-- | Multipart request metadata.
+mwppPayload :: Lens' ManagementWebPropertiesPatch' WebProperty
+mwppPayload
+  = lens _mwppPayload (\ s a -> s{_mwppPayload = a})
+
 -- | Account ID to which the web property belongs
 mwppAccountId :: Lens' ManagementWebPropertiesPatch' Text
 mwppAccountId
@@ -153,12 +159,6 @@ mwppAccountId
 -- token.
 mwppKey :: Lens' ManagementWebPropertiesPatch' (Maybe Key)
 mwppKey = lens _mwppKey (\ s a -> s{_mwppKey = a})
-
--- | Multipart request metadata.
-mwppWebProperty :: Lens' ManagementWebPropertiesPatch' WebProperty
-mwppWebProperty
-  = lens _mwppWebProperty
-      (\ s a -> s{_mwppWebProperty = a})
 
 -- | OAuth 2.0 token for the current user.
 mwppOAuthToken :: Lens' ManagementWebPropertiesPatch' (Maybe OAuthToken)
@@ -189,7 +189,7 @@ instance GoogleRequest ManagementWebPropertiesPatch'
               _mwppKey
               _mwppOAuthToken
               (Just AltJSON)
-              _mwppWebProperty
+              _mwppPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementWebPropertiesPatchResource)

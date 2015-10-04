@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.AdExchangeBuyer.Accounts.Patch
     , apQuotaUser
     , apPrettyPrint
     , apUserIP
-    , apAccount
+    , apPayload
     , apKey
     , apId
     , apOAuthToken
@@ -64,12 +65,12 @@ data AccountsPatch' = AccountsPatch'
     { _apQuotaUser   :: !(Maybe Text)
     , _apPrettyPrint :: !Bool
     , _apUserIP      :: !(Maybe Text)
-    , _apAccount     :: !Account
+    , _apPayload     :: !Account
     , _apKey         :: !(Maybe Key)
     , _apId          :: !Int32
     , _apOAuthToken  :: !(Maybe OAuthToken)
     , _apFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPatch'' with the minimum fields required to make a request.
 --
@@ -81,7 +82,7 @@ data AccountsPatch' = AccountsPatch'
 --
 -- * 'apUserIP'
 --
--- * 'apAccount'
+-- * 'apPayload'
 --
 -- * 'apKey'
 --
@@ -91,15 +92,15 @@ data AccountsPatch' = AccountsPatch'
 --
 -- * 'apFields'
 accountsPatch'
-    :: Account -- ^ 'Account'
+    :: Account -- ^ 'payload'
     -> Int32 -- ^ 'id'
     -> AccountsPatch'
-accountsPatch' pApAccount_ pApId_ =
+accountsPatch' pApPayload_ pApId_ =
     AccountsPatch'
     { _apQuotaUser = Nothing
     , _apPrettyPrint = True
     , _apUserIP = Nothing
-    , _apAccount = pApAccount_
+    , _apPayload = pApPayload_
     , _apKey = Nothing
     , _apId = pApId_
     , _apOAuthToken = Nothing
@@ -125,9 +126,9 @@ apUserIP :: Lens' AccountsPatch' (Maybe Text)
 apUserIP = lens _apUserIP (\ s a -> s{_apUserIP = a})
 
 -- | Multipart request metadata.
-apAccount :: Lens' AccountsPatch' Account
-apAccount
-  = lens _apAccount (\ s a -> s{_apAccount = a})
+apPayload :: Lens' AccountsPatch' Account
+apPayload
+  = lens _apPayload (\ s a -> s{_apPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -162,7 +163,7 @@ instance GoogleRequest AccountsPatch' where
               _apKey
               _apOAuthToken
               (Just AltJSON)
-              _apAccount
+              _apPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsPatchResource)

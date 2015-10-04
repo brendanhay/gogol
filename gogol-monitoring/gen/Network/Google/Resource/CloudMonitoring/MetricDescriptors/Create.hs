@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.CloudMonitoring.MetricDescriptors.Create
     -- * Request Lenses
     , mdcQuotaUser
     , mdcPrettyPrint
-    , mdcMetricDescriptor
     , mdcProject
     , mdcUserIP
+    , mdcPayload
     , mdcKey
     , mdcOAuthToken
     , mdcFields
@@ -62,15 +63,15 @@ type MetricDescriptorsCreateResource =
 --
 -- /See:/ 'metricDescriptorsCreate'' smart constructor.
 data MetricDescriptorsCreate' = MetricDescriptorsCreate'
-    { _mdcQuotaUser        :: !(Maybe Text)
-    , _mdcPrettyPrint      :: !Bool
-    , _mdcMetricDescriptor :: !MetricDescriptor
-    , _mdcProject          :: !Text
-    , _mdcUserIP           :: !(Maybe Text)
-    , _mdcKey              :: !(Maybe Key)
-    , _mdcOAuthToken       :: !(Maybe OAuthToken)
-    , _mdcFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mdcQuotaUser   :: !(Maybe Text)
+    , _mdcPrettyPrint :: !Bool
+    , _mdcProject     :: !Text
+    , _mdcUserIP      :: !(Maybe Text)
+    , _mdcPayload     :: !MetricDescriptor
+    , _mdcKey         :: !(Maybe Key)
+    , _mdcOAuthToken  :: !(Maybe OAuthToken)
+    , _mdcFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetricDescriptorsCreate'' with the minimum fields required to make a request.
 --
@@ -80,11 +81,11 @@ data MetricDescriptorsCreate' = MetricDescriptorsCreate'
 --
 -- * 'mdcPrettyPrint'
 --
--- * 'mdcMetricDescriptor'
---
 -- * 'mdcProject'
 --
 -- * 'mdcUserIP'
+--
+-- * 'mdcPayload'
 --
 -- * 'mdcKey'
 --
@@ -92,16 +93,16 @@ data MetricDescriptorsCreate' = MetricDescriptorsCreate'
 --
 -- * 'mdcFields'
 metricDescriptorsCreate'
-    :: MetricDescriptor -- ^ 'MetricDescriptor'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'project'
+    -> MetricDescriptor -- ^ 'payload'
     -> MetricDescriptorsCreate'
-metricDescriptorsCreate' pMdcMetricDescriptor_ pMdcProject_ =
+metricDescriptorsCreate' pMdcProject_ pMdcPayload_ =
     MetricDescriptorsCreate'
     { _mdcQuotaUser = Nothing
     , _mdcPrettyPrint = True
-    , _mdcMetricDescriptor = pMdcMetricDescriptor_
     , _mdcProject = pMdcProject_
     , _mdcUserIP = Nothing
+    , _mdcPayload = pMdcPayload_
     , _mdcKey = Nothing
     , _mdcOAuthToken = Nothing
     , _mdcFields = Nothing
@@ -120,12 +121,6 @@ mdcPrettyPrint
   = lens _mdcPrettyPrint
       (\ s a -> s{_mdcPrettyPrint = a})
 
--- | Multipart request metadata.
-mdcMetricDescriptor :: Lens' MetricDescriptorsCreate' MetricDescriptor
-mdcMetricDescriptor
-  = lens _mdcMetricDescriptor
-      (\ s a -> s{_mdcMetricDescriptor = a})
-
 -- | The project id. The value can be the numeric project ID or string-based
 -- project name.
 mdcProject :: Lens' MetricDescriptorsCreate' Text
@@ -137,6 +132,11 @@ mdcProject
 mdcUserIP :: Lens' MetricDescriptorsCreate' (Maybe Text)
 mdcUserIP
   = lens _mdcUserIP (\ s a -> s{_mdcUserIP = a})
+
+-- | Multipart request metadata.
+mdcPayload :: Lens' MetricDescriptorsCreate' MetricDescriptor
+mdcPayload
+  = lens _mdcPayload (\ s a -> s{_mdcPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -169,7 +169,7 @@ instance GoogleRequest MetricDescriptorsCreate' where
               _mdcKey
               _mdcOAuthToken
               (Just AltJSON)
-              _mdcMetricDescriptor
+              _mdcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MetricDescriptorsCreateResource)

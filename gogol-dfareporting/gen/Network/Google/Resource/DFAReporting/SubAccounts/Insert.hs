@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.DFAReporting.SubAccounts.Insert
     -- * Request Lenses
     , saiQuotaUser
     , saiPrettyPrint
-    , saiSubAccount
     , saiUserIP
     , saiProfileId
+    , saiPayload
     , saiKey
     , saiOAuthToken
     , saiFields
@@ -64,13 +65,13 @@ type SubAccountsInsertResource =
 data SubAccountsInsert' = SubAccountsInsert'
     { _saiQuotaUser   :: !(Maybe Text)
     , _saiPrettyPrint :: !Bool
-    , _saiSubAccount  :: !SubAccount
     , _saiUserIP      :: !(Maybe Text)
     , _saiProfileId   :: !Int64
+    , _saiPayload     :: !SubAccount
     , _saiKey         :: !(Maybe Key)
     , _saiOAuthToken  :: !(Maybe OAuthToken)
     , _saiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubAccountsInsert'' with the minimum fields required to make a request.
 --
@@ -80,11 +81,11 @@ data SubAccountsInsert' = SubAccountsInsert'
 --
 -- * 'saiPrettyPrint'
 --
--- * 'saiSubAccount'
---
 -- * 'saiUserIP'
 --
 -- * 'saiProfileId'
+--
+-- * 'saiPayload'
 --
 -- * 'saiKey'
 --
@@ -92,16 +93,16 @@ data SubAccountsInsert' = SubAccountsInsert'
 --
 -- * 'saiFields'
 subAccountsInsert'
-    :: SubAccount -- ^ 'SubAccount'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> SubAccount -- ^ 'payload'
     -> SubAccountsInsert'
-subAccountsInsert' pSaiSubAccount_ pSaiProfileId_ =
+subAccountsInsert' pSaiProfileId_ pSaiPayload_ =
     SubAccountsInsert'
     { _saiQuotaUser = Nothing
     , _saiPrettyPrint = True
-    , _saiSubAccount = pSaiSubAccount_
     , _saiUserIP = Nothing
     , _saiProfileId = pSaiProfileId_
+    , _saiPayload = pSaiPayload_
     , _saiKey = Nothing
     , _saiOAuthToken = Nothing
     , _saiFields = Nothing
@@ -120,12 +121,6 @@ saiPrettyPrint
   = lens _saiPrettyPrint
       (\ s a -> s{_saiPrettyPrint = a})
 
--- | Multipart request metadata.
-saiSubAccount :: Lens' SubAccountsInsert' SubAccount
-saiSubAccount
-  = lens _saiSubAccount
-      (\ s a -> s{_saiSubAccount = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 saiUserIP :: Lens' SubAccountsInsert' (Maybe Text)
@@ -136,6 +131,11 @@ saiUserIP
 saiProfileId :: Lens' SubAccountsInsert' Int64
 saiProfileId
   = lens _saiProfileId (\ s a -> s{_saiProfileId = a})
+
+-- | Multipart request metadata.
+saiPayload :: Lens' SubAccountsInsert' SubAccount
+saiPayload
+  = lens _saiPayload (\ s a -> s{_saiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -169,7 +169,7 @@ instance GoogleRequest SubAccountsInsert' where
               _saiKey
               _saiOAuthToken
               (Just AltJSON)
-              _saiSubAccount
+              _saiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SubAccountsInsertResource)

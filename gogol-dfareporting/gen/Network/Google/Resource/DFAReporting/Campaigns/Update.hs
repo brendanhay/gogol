@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.DFAReporting.Campaigns.Update
     , cuPrettyPrint
     , cuUserIP
     , cuProfileId
-    , cuCampaign
+    , cuPayload
     , cuKey
     , cuOAuthToken
     , cuFields
@@ -66,11 +67,11 @@ data CampaignsUpdate' = CampaignsUpdate'
     , _cuPrettyPrint :: !Bool
     , _cuUserIP      :: !(Maybe Text)
     , _cuProfileId   :: !Int64
-    , _cuCampaign    :: !Campaign
+    , _cuPayload     :: !Campaign
     , _cuKey         :: !(Maybe Key)
     , _cuOAuthToken  :: !(Maybe OAuthToken)
     , _cuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsUpdate'' with the minimum fields required to make a request.
 --
@@ -84,7 +85,7 @@ data CampaignsUpdate' = CampaignsUpdate'
 --
 -- * 'cuProfileId'
 --
--- * 'cuCampaign'
+-- * 'cuPayload'
 --
 -- * 'cuKey'
 --
@@ -93,15 +94,15 @@ data CampaignsUpdate' = CampaignsUpdate'
 -- * 'cuFields'
 campaignsUpdate'
     :: Int64 -- ^ 'profileId'
-    -> Campaign -- ^ 'Campaign'
+    -> Campaign -- ^ 'payload'
     -> CampaignsUpdate'
-campaignsUpdate' pCuProfileId_ pCuCampaign_ =
+campaignsUpdate' pCuProfileId_ pCuPayload_ =
     CampaignsUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
     , _cuUserIP = Nothing
     , _cuProfileId = pCuProfileId_
-    , _cuCampaign = pCuCampaign_
+    , _cuPayload = pCuPayload_
     , _cuKey = Nothing
     , _cuOAuthToken = Nothing
     , _cuFields = Nothing
@@ -131,9 +132,9 @@ cuProfileId
   = lens _cuProfileId (\ s a -> s{_cuProfileId = a})
 
 -- | Multipart request metadata.
-cuCampaign :: Lens' CampaignsUpdate' Campaign
-cuCampaign
-  = lens _cuCampaign (\ s a -> s{_cuCampaign = a})
+cuPayload :: Lens' CampaignsUpdate' Campaign
+cuPayload
+  = lens _cuPayload (\ s a -> s{_cuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -164,7 +165,7 @@ instance GoogleRequest CampaignsUpdate' where
               _cuKey
               _cuOAuthToken
               (Just AltJSON)
-              _cuCampaign
+              _cuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CampaignsUpdateResource)

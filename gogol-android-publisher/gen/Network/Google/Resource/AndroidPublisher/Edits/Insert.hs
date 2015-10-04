@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.Insert
     , eiQuotaUser
     , eiPrettyPrint
     , eiPackageName
-    , eiAppEdit
     , eiUserIP
+    , eiPayload
     , eiKey
     , eiOAuthToken
     , eiFields
@@ -64,12 +65,12 @@ data EditsInsert' = EditsInsert'
     { _eiQuotaUser   :: !(Maybe Text)
     , _eiPrettyPrint :: !Bool
     , _eiPackageName :: !Text
-    , _eiAppEdit     :: !AppEdit
     , _eiUserIP      :: !(Maybe Text)
+    , _eiPayload     :: !AppEdit
     , _eiKey         :: !(Maybe Key)
     , _eiOAuthToken  :: !(Maybe OAuthToken)
     , _eiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsInsert'' with the minimum fields required to make a request.
 --
@@ -81,9 +82,9 @@ data EditsInsert' = EditsInsert'
 --
 -- * 'eiPackageName'
 --
--- * 'eiAppEdit'
---
 -- * 'eiUserIP'
+--
+-- * 'eiPayload'
 --
 -- * 'eiKey'
 --
@@ -92,15 +93,15 @@ data EditsInsert' = EditsInsert'
 -- * 'eiFields'
 editsInsert'
     :: Text -- ^ 'packageName'
-    -> AppEdit -- ^ 'AppEdit'
+    -> AppEdit -- ^ 'payload'
     -> EditsInsert'
-editsInsert' pEiPackageName_ pEiAppEdit_ =
+editsInsert' pEiPackageName_ pEiPayload_ =
     EditsInsert'
     { _eiQuotaUser = Nothing
     , _eiPrettyPrint = True
     , _eiPackageName = pEiPackageName_
-    , _eiAppEdit = pEiAppEdit_
     , _eiUserIP = Nothing
+    , _eiPayload = pEiPayload_
     , _eiKey = Nothing
     , _eiOAuthToken = Nothing
     , _eiFields = Nothing
@@ -126,15 +127,15 @@ eiPackageName
   = lens _eiPackageName
       (\ s a -> s{_eiPackageName = a})
 
--- | Multipart request metadata.
-eiAppEdit :: Lens' EditsInsert' AppEdit
-eiAppEdit
-  = lens _eiAppEdit (\ s a -> s{_eiAppEdit = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 eiUserIP :: Lens' EditsInsert' (Maybe Text)
 eiUserIP = lens _eiUserIP (\ s a -> s{_eiUserIP = a})
+
+-- | Multipart request metadata.
+eiPayload :: Lens' EditsInsert' AppEdit
+eiPayload
+  = lens _eiPayload (\ s a -> s{_eiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -166,7 +167,7 @@ instance GoogleRequest EditsInsert' where
               _eiKey
               _eiOAuthToken
               (Just AltJSON)
-              _eiAppEdit
+              _eiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EditsInsertResource)

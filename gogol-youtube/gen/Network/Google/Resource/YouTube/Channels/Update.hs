@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,7 +37,7 @@ module Network.Google.Resource.YouTube.Channels.Update
     , chaPart
     , chaPrettyPrint
     , chaUserIP
-    , chaChannel
+    , chaPayload
     , chaOnBehalfOfContentOwner
     , chaKey
     , chaOAuthToken
@@ -50,8 +51,8 @@ import           Network.Google.YouTube.Types
 -- 'ChannelsUpdate'' request conforms to.
 type ChannelsUpdateResource =
      "channels" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -71,12 +72,12 @@ data ChannelsUpdate' = ChannelsUpdate'
     , _chaPart                   :: !Text
     , _chaPrettyPrint            :: !Bool
     , _chaUserIP                 :: !(Maybe Text)
-    , _chaChannel                :: !Channel
+    , _chaPayload                :: !Channel
     , _chaOnBehalfOfContentOwner :: !(Maybe Text)
     , _chaKey                    :: !(Maybe Key)
     , _chaOAuthToken             :: !(Maybe OAuthToken)
     , _chaFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelsUpdate'' with the minimum fields required to make a request.
 --
@@ -90,7 +91,7 @@ data ChannelsUpdate' = ChannelsUpdate'
 --
 -- * 'chaUserIP'
 --
--- * 'chaChannel'
+-- * 'chaPayload'
 --
 -- * 'chaOnBehalfOfContentOwner'
 --
@@ -101,15 +102,15 @@ data ChannelsUpdate' = ChannelsUpdate'
 -- * 'chaFields'
 channelsUpdate'
     :: Text -- ^ 'part'
-    -> Channel -- ^ 'Channel'
+    -> Channel -- ^ 'payload'
     -> ChannelsUpdate'
-channelsUpdate' pChaPart_ pChaChannel_ =
+channelsUpdate' pChaPart_ pChaPayload_ =
     ChannelsUpdate'
     { _chaQuotaUser = Nothing
     , _chaPart = pChaPart_
     , _chaPrettyPrint = True
     , _chaUserIP = Nothing
-    , _chaChannel = pChaChannel_
+    , _chaPayload = pChaPayload_
     , _chaOnBehalfOfContentOwner = Nothing
     , _chaKey = Nothing
     , _chaOAuthToken = Nothing
@@ -147,9 +148,9 @@ chaUserIP
   = lens _chaUserIP (\ s a -> s{_chaUserIP = a})
 
 -- | Multipart request metadata.
-chaChannel :: Lens' ChannelsUpdate' Channel
-chaChannel
-  = lens _chaChannel (\ s a -> s{_chaChannel = a})
+chaPayload :: Lens' ChannelsUpdate' Channel
+chaPayload
+  = lens _chaPayload (\ s a -> s{_chaPayload = a})
 
 -- | The onBehalfOfContentOwner parameter indicates that the authenticated
 -- user is acting on behalf of the content owner specified in the parameter
@@ -189,7 +190,7 @@ instance GoogleRequest ChannelsUpdate' where
         type Rs ChannelsUpdate' = Channel
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u ChannelsUpdate'{..}
-          = go _chaOnBehalfOfContentOwner (Just _chaPart)
+          = go (Just _chaPart) _chaOnBehalfOfContentOwner
               _chaQuotaUser
               (Just _chaPrettyPrint)
               _chaUserIP
@@ -197,7 +198,7 @@ instance GoogleRequest ChannelsUpdate' where
               _chaKey
               _chaOAuthToken
               (Just AltJSON)
-              _chaChannel
+              _chaPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChannelsUpdateResource)

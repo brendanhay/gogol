@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,13 +53,13 @@ import           Network.Google.Prelude
 -- 'TimelineList'' request conforms to.
 type TimelineListResource =
      "timeline" :>
-       QueryParam "bundleId" Text :>
-         QueryParam "includeDeleted" Bool :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "orderBy" MirrorTimelineListOrderBy :>
+       QueryParam "pinnedOnly" Bool :>
+         QueryParam "orderBy" OrderBy :>
+           QueryParam "bundleId" Text :>
+             QueryParam "sourceItemId" Text :>
                QueryParam "pageToken" Text :>
-                 QueryParam "pinnedOnly" Bool :>
-                   QueryParam "sourceItemId" Text :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "includeDeleted" Bool :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -75,7 +76,7 @@ data TimelineList' = TimelineList'
     { _tlPinnedOnly     :: !(Maybe Bool)
     , _tlQuotaUser      :: !(Maybe Text)
     , _tlPrettyPrint    :: !Bool
-    , _tlOrderBy        :: !(Maybe MirrorTimelineListOrderBy)
+    , _tlOrderBy        :: !(Maybe OrderBy)
     , _tlUserIP         :: !(Maybe Text)
     , _tlBundleId       :: !(Maybe Text)
     , _tlKey            :: !(Maybe Key)
@@ -85,7 +86,7 @@ data TimelineList' = TimelineList'
     , _tlMaxResults     :: !(Maybe Word32)
     , _tlIncludeDeleted :: !(Maybe Bool)
     , _tlFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineList'' with the minimum fields required to make a request.
 --
@@ -154,7 +155,7 @@ tlPrettyPrint
       (\ s a -> s{_tlPrettyPrint = a})
 
 -- | Controls the order in which timeline items are returned.
-tlOrderBy :: Lens' TimelineList' (Maybe MirrorTimelineListOrderBy)
+tlOrderBy :: Lens' TimelineList' (Maybe OrderBy)
 tlOrderBy
   = lens _tlOrderBy (\ s a -> s{_tlOrderBy = a})
 
@@ -213,11 +214,11 @@ instance GoogleRequest TimelineList' where
         type Rs TimelineList' = TimelineListResponse
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelineList'{..}
-          = go _tlBundleId _tlIncludeDeleted _tlMaxResults
-              _tlOrderBy
-              _tlPageToken
-              _tlPinnedOnly
+          = go _tlPinnedOnly _tlOrderBy _tlBundleId
               _tlSourceItemId
+              _tlPageToken
+              _tlMaxResults
+              _tlIncludeDeleted
               _tlQuotaUser
               (Just _tlPrettyPrint)
               _tlUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Calendar.Calendars.Update
     , cuCalendarId
     , cuPrettyPrint
     , cuUserIP
+    , cuPayload
     , cuKey
-    , cuCalendar
     , cuOAuthToken
     , cuFields
     ) where
@@ -65,11 +66,11 @@ data CalendarsUpdate' = CalendarsUpdate'
     , _cuCalendarId  :: !Text
     , _cuPrettyPrint :: !Bool
     , _cuUserIP      :: !(Maybe Text)
+    , _cuPayload     :: !Calendar
     , _cuKey         :: !(Maybe Key)
-    , _cuCalendar    :: !Calendar
     , _cuOAuthToken  :: !(Maybe OAuthToken)
     , _cuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarsUpdate'' with the minimum fields required to make a request.
 --
@@ -83,25 +84,25 @@ data CalendarsUpdate' = CalendarsUpdate'
 --
 -- * 'cuUserIP'
 --
--- * 'cuKey'
+-- * 'cuPayload'
 --
--- * 'cuCalendar'
+-- * 'cuKey'
 --
 -- * 'cuOAuthToken'
 --
 -- * 'cuFields'
 calendarsUpdate'
     :: Text -- ^ 'calendarId'
-    -> Calendar -- ^ 'Calendar'
+    -> Calendar -- ^ 'payload'
     -> CalendarsUpdate'
-calendarsUpdate' pCuCalendarId_ pCuCalendar_ =
+calendarsUpdate' pCuCalendarId_ pCuPayload_ =
     CalendarsUpdate'
     { _cuQuotaUser = Nothing
     , _cuCalendarId = pCuCalendarId_
     , _cuPrettyPrint = True
     , _cuUserIP = Nothing
+    , _cuPayload = pCuPayload_
     , _cuKey = Nothing
-    , _cuCalendar = pCuCalendar_
     , _cuOAuthToken = Nothing
     , _cuFields = Nothing
     }
@@ -131,16 +132,16 @@ cuPrettyPrint
 cuUserIP :: Lens' CalendarsUpdate' (Maybe Text)
 cuUserIP = lens _cuUserIP (\ s a -> s{_cuUserIP = a})
 
+-- | Multipart request metadata.
+cuPayload :: Lens' CalendarsUpdate' Calendar
+cuPayload
+  = lens _cuPayload (\ s a -> s{_cuPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 cuKey :: Lens' CalendarsUpdate' (Maybe Key)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
-
--- | Multipart request metadata.
-cuCalendar :: Lens' CalendarsUpdate' Calendar
-cuCalendar
-  = lens _cuCalendar (\ s a -> s{_cuCalendar = a})
 
 -- | OAuth 2.0 token for the current user.
 cuOAuthToken :: Lens' CalendarsUpdate' (Maybe OAuthToken)
@@ -165,7 +166,7 @@ instance GoogleRequest CalendarsUpdate' where
               _cuKey
               _cuOAuthToken
               (Just AltJSON)
-              _cuCalendar
+              _cuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CalendarsUpdateResource)

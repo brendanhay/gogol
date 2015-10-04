@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -47,8 +48,8 @@ import           Network.Google.Prelude
 -- 'SavedadstylesList'' request conforms to.
 type SavedadstylesListResource =
      "savedadstyles" :>
-       QueryParam "maxResults" Int32 :>
-         QueryParam "pageToken" Text :>
+       QueryParam "pageToken" Text :>
+         QueryParam "maxResults" Int32 :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -69,7 +70,7 @@ data SavedadstylesList' = SavedadstylesList'
     , _slOAuthToken  :: !(Maybe OAuthToken)
     , _slMaxResults  :: !(Maybe Int32)
     , _slFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SavedadstylesList'' with the minimum fields required to make a request.
 --
@@ -158,7 +159,7 @@ instance GoogleRequest SavedadstylesList' where
         type Rs SavedadstylesList' = SavedAdStyles
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u SavedadstylesList'{..}
-          = go _slMaxResults _slPageToken _slQuotaUser
+          = go _slPageToken _slMaxResults _slQuotaUser
               (Just _slPrettyPrint)
               _slUserIP
               _slFields

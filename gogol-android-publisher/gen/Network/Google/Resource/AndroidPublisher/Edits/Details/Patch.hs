@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Details.Patch
     , edpPrettyPrint
     , edpPackageName
     , edpUserIP
-    , edpAppDetails
+    , edpPayload
     , edpKey
     , edpOAuthToken
     , edpEditId
@@ -69,12 +70,12 @@ data EditsDetailsPatch' = EditsDetailsPatch'
     , _edpPrettyPrint :: !Bool
     , _edpPackageName :: !Text
     , _edpUserIP      :: !(Maybe Text)
-    , _edpAppDetails  :: !AppDetails
+    , _edpPayload     :: !AppDetails
     , _edpKey         :: !(Maybe Key)
     , _edpOAuthToken  :: !(Maybe OAuthToken)
     , _edpEditId      :: !Text
     , _edpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsDetailsPatch'' with the minimum fields required to make a request.
 --
@@ -88,7 +89,7 @@ data EditsDetailsPatch' = EditsDetailsPatch'
 --
 -- * 'edpUserIP'
 --
--- * 'edpAppDetails'
+-- * 'edpPayload'
 --
 -- * 'edpKey'
 --
@@ -99,16 +100,16 @@ data EditsDetailsPatch' = EditsDetailsPatch'
 -- * 'edpFields'
 editsDetailsPatch'
     :: Text -- ^ 'packageName'
-    -> AppDetails -- ^ 'AppDetails'
+    -> AppDetails -- ^ 'payload'
     -> Text -- ^ 'editId'
     -> EditsDetailsPatch'
-editsDetailsPatch' pEdpPackageName_ pEdpAppDetails_ pEdpEditId_ =
+editsDetailsPatch' pEdpPackageName_ pEdpPayload_ pEdpEditId_ =
     EditsDetailsPatch'
     { _edpQuotaUser = Nothing
     , _edpPrettyPrint = True
     , _edpPackageName = pEdpPackageName_
     , _edpUserIP = Nothing
-    , _edpAppDetails = pEdpAppDetails_
+    , _edpPayload = pEdpPayload_
     , _edpKey = Nothing
     , _edpOAuthToken = Nothing
     , _edpEditId = pEdpEditId_
@@ -142,10 +143,9 @@ edpUserIP
   = lens _edpUserIP (\ s a -> s{_edpUserIP = a})
 
 -- | Multipart request metadata.
-edpAppDetails :: Lens' EditsDetailsPatch' AppDetails
-edpAppDetails
-  = lens _edpAppDetails
-      (\ s a -> s{_edpAppDetails = a})
+edpPayload :: Lens' EditsDetailsPatch' AppDetails
+edpPayload
+  = lens _edpPayload (\ s a -> s{_edpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -184,7 +184,7 @@ instance GoogleRequest EditsDetailsPatch' where
               _edpKey
               _edpOAuthToken
               (Just AltJSON)
-              _edpAppDetails
+              _edpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EditsDetailsPatchResource)

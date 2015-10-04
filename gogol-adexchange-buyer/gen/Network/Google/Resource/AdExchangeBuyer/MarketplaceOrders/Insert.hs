@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Insert
     , moiQuotaUser
     , moiPrettyPrint
     , moiUserIP
-    , moiCreateOrdersRequest
+    , moiPayload
     , moiKey
     , moiOAuthToken
     , moiFields
@@ -61,14 +62,14 @@ type MarketplaceOrdersInsertResource =
 --
 -- /See:/ 'marketplaceOrdersInsert'' smart constructor.
 data MarketplaceOrdersInsert' = MarketplaceOrdersInsert'
-    { _moiQuotaUser           :: !(Maybe Text)
-    , _moiPrettyPrint         :: !Bool
-    , _moiUserIP              :: !(Maybe Text)
-    , _moiCreateOrdersRequest :: !CreateOrdersRequest
-    , _moiKey                 :: !(Maybe Key)
-    , _moiOAuthToken          :: !(Maybe OAuthToken)
-    , _moiFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _moiQuotaUser   :: !(Maybe Text)
+    , _moiPrettyPrint :: !Bool
+    , _moiUserIP      :: !(Maybe Text)
+    , _moiPayload     :: !CreateOrdersRequest
+    , _moiKey         :: !(Maybe Key)
+    , _moiOAuthToken  :: !(Maybe OAuthToken)
+    , _moiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceOrdersInsert'' with the minimum fields required to make a request.
 --
@@ -80,7 +81,7 @@ data MarketplaceOrdersInsert' = MarketplaceOrdersInsert'
 --
 -- * 'moiUserIP'
 --
--- * 'moiCreateOrdersRequest'
+-- * 'moiPayload'
 --
 -- * 'moiKey'
 --
@@ -88,14 +89,14 @@ data MarketplaceOrdersInsert' = MarketplaceOrdersInsert'
 --
 -- * 'moiFields'
 marketplaceOrdersInsert'
-    :: CreateOrdersRequest -- ^ 'CreateOrdersRequest'
+    :: CreateOrdersRequest -- ^ 'payload'
     -> MarketplaceOrdersInsert'
-marketplaceOrdersInsert' pMoiCreateOrdersRequest_ =
+marketplaceOrdersInsert' pMoiPayload_ =
     MarketplaceOrdersInsert'
     { _moiQuotaUser = Nothing
     , _moiPrettyPrint = True
     , _moiUserIP = Nothing
-    , _moiCreateOrdersRequest = pMoiCreateOrdersRequest_
+    , _moiPayload = pMoiPayload_
     , _moiKey = Nothing
     , _moiOAuthToken = Nothing
     , _moiFields = Nothing
@@ -121,10 +122,9 @@ moiUserIP
   = lens _moiUserIP (\ s a -> s{_moiUserIP = a})
 
 -- | Multipart request metadata.
-moiCreateOrdersRequest :: Lens' MarketplaceOrdersInsert' CreateOrdersRequest
-moiCreateOrdersRequest
-  = lens _moiCreateOrdersRequest
-      (\ s a -> s{_moiCreateOrdersRequest = a})
+moiPayload :: Lens' MarketplaceOrdersInsert' CreateOrdersRequest
+moiPayload
+  = lens _moiPayload (\ s a -> s{_moiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -157,7 +157,7 @@ instance GoogleRequest MarketplaceOrdersInsert' where
               _moiKey
               _moiOAuthToken
               (Just AltJSON)
-              _moiCreateOrdersRequest
+              _moiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MarketplaceOrdersInsertResource)

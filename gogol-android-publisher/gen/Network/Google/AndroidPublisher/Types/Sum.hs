@@ -17,60 +17,8 @@ module Network.Google.AndroidPublisher.Types.Sum where
 
 import           Network.Google.Prelude
 
-data AndroidPublisherEditsExpansionfilesPatchExpansionFileType
-    = Main
-      -- ^ @main@
-    | Patch
-      -- ^ @patch@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable AndroidPublisherEditsExpansionfilesPatchExpansionFileType
-
-instance FromText AndroidPublisherEditsExpansionfilesPatchExpansionFileType where
-    fromText = \case
-        "main" -> Just Main
-        "patch" -> Just Patch
-        _ -> Nothing
-
-instance ToText AndroidPublisherEditsExpansionfilesPatchExpansionFileType where
-    toText = \case
-        Main -> "main"
-        Patch -> "patch"
-
-instance FromJSON AndroidPublisherEditsExpansionfilesPatchExpansionFileType where
-    parseJSON = parseJSONText "AndroidPublisherEditsExpansionfilesPatchExpansionFileType"
-
-instance ToJSON AndroidPublisherEditsExpansionfilesPatchExpansionFileType where
-    toJSON = toJSONText
-
-data AndroidPublisherEditsExpansionfilesGetExpansionFileType
-    = APEEGEFTMain
-      -- ^ @main@
-    | APEEGEFTPatch
-      -- ^ @patch@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable AndroidPublisherEditsExpansionfilesGetExpansionFileType
-
-instance FromText AndroidPublisherEditsExpansionfilesGetExpansionFileType where
-    fromText = \case
-        "main" -> Just APEEGEFTMain
-        "patch" -> Just APEEGEFTPatch
-        _ -> Nothing
-
-instance ToText AndroidPublisherEditsExpansionfilesGetExpansionFileType where
-    toText = \case
-        APEEGEFTMain -> "main"
-        APEEGEFTPatch -> "patch"
-
-instance FromJSON AndroidPublisherEditsExpansionfilesGetExpansionFileType where
-    parseJSON = parseJSONText "AndroidPublisherEditsExpansionfilesGetExpansionFileType"
-
-instance ToJSON AndroidPublisherEditsExpansionfilesGetExpansionFileType where
-    toJSON = toJSONText
-
 -- | The track type to read or modify.
-data AndroidPublisherEditsTracksUpdateTrack
+data Track
     = Alpha
       -- ^ @alpha@
     | Beta
@@ -81,9 +29,9 @@ data AndroidPublisherEditsTracksUpdateTrack
       -- ^ @rollout@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AndroidPublisherEditsTracksUpdateTrack
+instance Hashable Track
 
-instance FromText AndroidPublisherEditsTracksUpdateTrack where
+instance FromText Track where
     fromText = \case
         "alpha" -> Just Alpha
         "beta" -> Just Beta
@@ -91,17 +39,132 @@ instance FromText AndroidPublisherEditsTracksUpdateTrack where
         "rollout" -> Just Rollout
         _ -> Nothing
 
-instance ToText AndroidPublisherEditsTracksUpdateTrack where
+instance ToText Track where
     toText = \case
         Alpha -> "alpha"
         Beta -> "beta"
         Production -> "production"
         Rollout -> "rollout"
 
+instance FromJSON Track where
+    parseJSON = parseJSONText "Track"
+
+instance ToJSON Track where
+    toJSON = toJSONText
+
+data AndroidPublisherEditsExpansionfilesGetExpansionFileType
+    = Main
+      -- ^ @main@
+    | Patch
+      -- ^ @patch@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable AndroidPublisherEditsExpansionfilesGetExpansionFileType
+
+instance FromText AndroidPublisherEditsExpansionfilesGetExpansionFileType where
+    fromText = \case
+        "main" -> Just Main
+        "patch" -> Just Patch
+        _ -> Nothing
+
+instance ToText AndroidPublisherEditsExpansionfilesGetExpansionFileType where
+    toText = \case
+        Main -> "main"
+        Patch -> "patch"
+
+instance FromJSON AndroidPublisherEditsExpansionfilesGetExpansionFileType where
+    parseJSON = parseJSONText "AndroidPublisherEditsExpansionfilesGetExpansionFileType"
+
+instance ToJSON AndroidPublisherEditsExpansionfilesGetExpansionFileType where
+    toJSON = toJSONText
+
+-- | The track type to read or modify.
+data AndroidPublisherEditsTracksUpdateTrack
+    = APETUTAlpha
+      -- ^ @alpha@
+    | APETUTBeta
+      -- ^ @beta@
+    | APETUTProduction
+      -- ^ @production@
+    | APETUTRollout
+      -- ^ @rollout@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable AndroidPublisherEditsTracksUpdateTrack
+
+instance FromText AndroidPublisherEditsTracksUpdateTrack where
+    fromText = \case
+        "alpha" -> Just APETUTAlpha
+        "beta" -> Just APETUTBeta
+        "production" -> Just APETUTProduction
+        "rollout" -> Just APETUTRollout
+        _ -> Nothing
+
+instance ToText AndroidPublisherEditsTracksUpdateTrack where
+    toText = \case
+        APETUTAlpha -> "alpha"
+        APETUTBeta -> "beta"
+        APETUTProduction -> "production"
+        APETUTRollout -> "rollout"
+
 instance FromJSON AndroidPublisherEditsTracksUpdateTrack where
     parseJSON = parseJSONText "AndroidPublisherEditsTracksUpdateTrack"
 
 instance ToJSON AndroidPublisherEditsTracksUpdateTrack where
+    toJSON = toJSONText
+
+data ImageType
+    = FeatureGraphic
+      -- ^ @featureGraphic@
+    | Icon
+      -- ^ @icon@
+    | PhoneScreenshots
+      -- ^ @phoneScreenshots@
+    | PromoGraphic
+      -- ^ @promoGraphic@
+    | SevenInchScreenshots
+      -- ^ @sevenInchScreenshots@
+    | TenInchScreenshots
+      -- ^ @tenInchScreenshots@
+    | TvBanner
+      -- ^ @tvBanner@
+    | TvScreenshots
+      -- ^ @tvScreenshots@
+    | WearScreenshots
+      -- ^ @wearScreenshots@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ImageType
+
+instance FromText ImageType where
+    fromText = \case
+        "featureGraphic" -> Just FeatureGraphic
+        "icon" -> Just Icon
+        "phoneScreenshots" -> Just PhoneScreenshots
+        "promoGraphic" -> Just PromoGraphic
+        "sevenInchScreenshots" -> Just SevenInchScreenshots
+        "tenInchScreenshots" -> Just TenInchScreenshots
+        "tvBanner" -> Just TvBanner
+        "tvScreenshots" -> Just TvScreenshots
+        "wearScreenshots" -> Just WearScreenshots
+        _ -> Nothing
+
+instance ToText ImageType where
+    toText = \case
+        FeatureGraphic -> "featureGraphic"
+        Icon -> "icon"
+        PhoneScreenshots -> "phoneScreenshots"
+        PromoGraphic -> "promoGraphic"
+        SevenInchScreenshots -> "sevenInchScreenshots"
+        TenInchScreenshots -> "tenInchScreenshots"
+        TvBanner -> "tvBanner"
+        TvScreenshots -> "tvScreenshots"
+        WearScreenshots -> "wearScreenshots"
+
+instance FromJSON ImageType where
+    parseJSON = parseJSONText "ImageType"
+
+instance ToJSON ImageType where
     toJSON = toJSONText
 
 -- | The track type to read or modify.
@@ -139,39 +202,30 @@ instance FromJSON AndroidPublisherEditsTracksGetTrack where
 instance ToJSON AndroidPublisherEditsTracksGetTrack where
     toJSON = toJSONText
 
--- | The track type to read or modify.
-data AndroidPublisherEditsTracksPatchTrack
-    = APETPTAlpha
-      -- ^ @alpha@
-    | APETPTBeta
-      -- ^ @beta@
-    | APETPTProduction
-      -- ^ @production@
-    | APETPTRollout
-      -- ^ @rollout@
+data ExpansionFileType
+    = EFTMain
+      -- ^ @main@
+    | EFTPatch
+      -- ^ @patch@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AndroidPublisherEditsTracksPatchTrack
+instance Hashable ExpansionFileType
 
-instance FromText AndroidPublisherEditsTracksPatchTrack where
+instance FromText ExpansionFileType where
     fromText = \case
-        "alpha" -> Just APETPTAlpha
-        "beta" -> Just APETPTBeta
-        "production" -> Just APETPTProduction
-        "rollout" -> Just APETPTRollout
+        "main" -> Just EFTMain
+        "patch" -> Just EFTPatch
         _ -> Nothing
 
-instance ToText AndroidPublisherEditsTracksPatchTrack where
+instance ToText ExpansionFileType where
     toText = \case
-        APETPTAlpha -> "alpha"
-        APETPTBeta -> "beta"
-        APETPTProduction -> "production"
-        APETPTRollout -> "rollout"
+        EFTMain -> "main"
+        EFTPatch -> "patch"
 
-instance FromJSON AndroidPublisherEditsTracksPatchTrack where
-    parseJSON = parseJSONText "AndroidPublisherEditsTracksPatchTrack"
+instance FromJSON ExpansionFileType where
+    parseJSON = parseJSONText "ExpansionFileType"
 
-instance ToJSON AndroidPublisherEditsTracksPatchTrack where
+instance ToJSON ExpansionFileType where
     toJSON = toJSONText
 
 data AndroidPublisherEditsExpansionfilesUploadExpansionFileType
@@ -201,23 +255,23 @@ instance ToJSON AndroidPublisherEditsExpansionfilesUploadExpansionFileType where
     toJSON = toJSONText
 
 data AndroidPublisherEditsImagesUploadImageType
-    = FeatureGraphic
+    = APEIUITFeatureGraphic
       -- ^ @featureGraphic@
-    | Icon
+    | APEIUITIcon
       -- ^ @icon@
-    | PhoneScreenshots
+    | APEIUITPhoneScreenshots
       -- ^ @phoneScreenshots@
-    | PromoGraphic
+    | APEIUITPromoGraphic
       -- ^ @promoGraphic@
-    | SevenInchScreenshots
+    | APEIUITSevenInchScreenshots
       -- ^ @sevenInchScreenshots@
-    | TenInchScreenshots
+    | APEIUITTenInchScreenshots
       -- ^ @tenInchScreenshots@
-    | TvBanner
+    | APEIUITTvBanner
       -- ^ @tvBanner@
-    | TvScreenshots
+    | APEIUITTvScreenshots
       -- ^ @tvScreenshots@
-    | WearScreenshots
+    | APEIUITWearScreenshots
       -- ^ @wearScreenshots@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -225,28 +279,28 @@ instance Hashable AndroidPublisherEditsImagesUploadImageType
 
 instance FromText AndroidPublisherEditsImagesUploadImageType where
     fromText = \case
-        "featureGraphic" -> Just FeatureGraphic
-        "icon" -> Just Icon
-        "phoneScreenshots" -> Just PhoneScreenshots
-        "promoGraphic" -> Just PromoGraphic
-        "sevenInchScreenshots" -> Just SevenInchScreenshots
-        "tenInchScreenshots" -> Just TenInchScreenshots
-        "tvBanner" -> Just TvBanner
-        "tvScreenshots" -> Just TvScreenshots
-        "wearScreenshots" -> Just WearScreenshots
+        "featureGraphic" -> Just APEIUITFeatureGraphic
+        "icon" -> Just APEIUITIcon
+        "phoneScreenshots" -> Just APEIUITPhoneScreenshots
+        "promoGraphic" -> Just APEIUITPromoGraphic
+        "sevenInchScreenshots" -> Just APEIUITSevenInchScreenshots
+        "tenInchScreenshots" -> Just APEIUITTenInchScreenshots
+        "tvBanner" -> Just APEIUITTvBanner
+        "tvScreenshots" -> Just APEIUITTvScreenshots
+        "wearScreenshots" -> Just APEIUITWearScreenshots
         _ -> Nothing
 
 instance ToText AndroidPublisherEditsImagesUploadImageType where
     toText = \case
-        FeatureGraphic -> "featureGraphic"
-        Icon -> "icon"
-        PhoneScreenshots -> "phoneScreenshots"
-        PromoGraphic -> "promoGraphic"
-        SevenInchScreenshots -> "sevenInchScreenshots"
-        TenInchScreenshots -> "tenInchScreenshots"
-        TvBanner -> "tvBanner"
-        TvScreenshots -> "tvScreenshots"
-        WearScreenshots -> "wearScreenshots"
+        APEIUITFeatureGraphic -> "featureGraphic"
+        APEIUITIcon -> "icon"
+        APEIUITPhoneScreenshots -> "phoneScreenshots"
+        APEIUITPromoGraphic -> "promoGraphic"
+        APEIUITSevenInchScreenshots -> "sevenInchScreenshots"
+        APEIUITTenInchScreenshots -> "tenInchScreenshots"
+        APEIUITTvBanner -> "tvBanner"
+        APEIUITTvScreenshots -> "tvScreenshots"
+        APEIUITWearScreenshots -> "wearScreenshots"
 
 instance FromJSON AndroidPublisherEditsImagesUploadImageType where
     parseJSON = parseJSONText "AndroidPublisherEditsImagesUploadImageType"
@@ -334,68 +388,14 @@ instance FromJSON AndroidPublisherEditsExpansionfilesUpdateExpansionFileType whe
 instance ToJSON AndroidPublisherEditsExpansionfilesUpdateExpansionFileType where
     toJSON = toJSONText
 
-data AndroidPublisherEditsImagesListImageType
-    = APEILITFeatureGraphic
-      -- ^ @featureGraphic@
-    | APEILITIcon
-      -- ^ @icon@
-    | APEILITPhoneScreenshots
-      -- ^ @phoneScreenshots@
-    | APEILITPromoGraphic
-      -- ^ @promoGraphic@
-    | APEILITSevenInchScreenshots
-      -- ^ @sevenInchScreenshots@
-    | APEILITTenInchScreenshots
-      -- ^ @tenInchScreenshots@
-    | APEILITTvBanner
-      -- ^ @tvBanner@
-    | APEILITTvScreenshots
-      -- ^ @tvScreenshots@
-    | APEILITWearScreenshots
-      -- ^ @wearScreenshots@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable AndroidPublisherEditsImagesListImageType
-
-instance FromText AndroidPublisherEditsImagesListImageType where
-    fromText = \case
-        "featureGraphic" -> Just APEILITFeatureGraphic
-        "icon" -> Just APEILITIcon
-        "phoneScreenshots" -> Just APEILITPhoneScreenshots
-        "promoGraphic" -> Just APEILITPromoGraphic
-        "sevenInchScreenshots" -> Just APEILITSevenInchScreenshots
-        "tenInchScreenshots" -> Just APEILITTenInchScreenshots
-        "tvBanner" -> Just APEILITTvBanner
-        "tvScreenshots" -> Just APEILITTvScreenshots
-        "wearScreenshots" -> Just APEILITWearScreenshots
-        _ -> Nothing
-
-instance ToText AndroidPublisherEditsImagesListImageType where
-    toText = \case
-        APEILITFeatureGraphic -> "featureGraphic"
-        APEILITIcon -> "icon"
-        APEILITPhoneScreenshots -> "phoneScreenshots"
-        APEILITPromoGraphic -> "promoGraphic"
-        APEILITSevenInchScreenshots -> "sevenInchScreenshots"
-        APEILITTenInchScreenshots -> "tenInchScreenshots"
-        APEILITTvBanner -> "tvBanner"
-        APEILITTvScreenshots -> "tvScreenshots"
-        APEILITWearScreenshots -> "wearScreenshots"
-
-instance FromJSON AndroidPublisherEditsImagesListImageType where
-    parseJSON = parseJSONText "AndroidPublisherEditsImagesListImageType"
-
-instance ToJSON AndroidPublisherEditsImagesListImageType where
-    toJSON = toJSONText
-
 data AndroidPublisherEditsTestersUpdateTrack
-    = APETUTAlpha
+    = AAlpha
       -- ^ @alpha@
-    | APETUTBeta
+    | ABeta
       -- ^ @beta@
-    | APETUTProduction
+    | AProduction
       -- ^ @production@
-    | APETUTRollout
+    | ARollout
       -- ^ @rollout@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -403,18 +403,18 @@ instance Hashable AndroidPublisherEditsTestersUpdateTrack
 
 instance FromText AndroidPublisherEditsTestersUpdateTrack where
     fromText = \case
-        "alpha" -> Just APETUTAlpha
-        "beta" -> Just APETUTBeta
-        "production" -> Just APETUTProduction
-        "rollout" -> Just APETUTRollout
+        "alpha" -> Just AAlpha
+        "beta" -> Just ABeta
+        "production" -> Just AProduction
+        "rollout" -> Just ARollout
         _ -> Nothing
 
 instance ToText AndroidPublisherEditsTestersUpdateTrack where
     toText = \case
-        APETUTAlpha -> "alpha"
-        APETUTBeta -> "beta"
-        APETUTProduction -> "production"
-        APETUTRollout -> "rollout"
+        AAlpha -> "alpha"
+        ABeta -> "beta"
+        AProduction -> "production"
+        ARollout -> "rollout"
 
 instance FromJSON AndroidPublisherEditsTestersUpdateTrack where
     parseJSON = parseJSONText "AndroidPublisherEditsTestersUpdateTrack"
@@ -477,40 +477,6 @@ instance ToJSON AndroidPublisherEditsImagesDeleteallImageType where
     toJSON = toJSONText
 
 data AndroidPublisherEditsTestersGetTrack
-    = AAlpha
-      -- ^ @alpha@
-    | ABeta
-      -- ^ @beta@
-    | AProduction
-      -- ^ @production@
-    | ARollout
-      -- ^ @rollout@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable AndroidPublisherEditsTestersGetTrack
-
-instance FromText AndroidPublisherEditsTestersGetTrack where
-    fromText = \case
-        "alpha" -> Just AAlpha
-        "beta" -> Just ABeta
-        "production" -> Just AProduction
-        "rollout" -> Just ARollout
-        _ -> Nothing
-
-instance ToText AndroidPublisherEditsTestersGetTrack where
-    toText = \case
-        AAlpha -> "alpha"
-        ABeta -> "beta"
-        AProduction -> "production"
-        ARollout -> "rollout"
-
-instance FromJSON AndroidPublisherEditsTestersGetTrack where
-    parseJSON = parseJSONText "AndroidPublisherEditsTestersGetTrack"
-
-instance ToJSON AndroidPublisherEditsTestersGetTrack where
-    toJSON = toJSONText
-
-data AndroidPublisherEditsTestersPatchTrack
     = ANDAlpha
       -- ^ @alpha@
     | ANDBeta
@@ -521,9 +487,9 @@ data AndroidPublisherEditsTestersPatchTrack
       -- ^ @rollout@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AndroidPublisherEditsTestersPatchTrack
+instance Hashable AndroidPublisherEditsTestersGetTrack
 
-instance FromText AndroidPublisherEditsTestersPatchTrack where
+instance FromText AndroidPublisherEditsTestersGetTrack where
     fromText = \case
         "alpha" -> Just ANDAlpha
         "beta" -> Just ANDBeta
@@ -531,12 +497,46 @@ instance FromText AndroidPublisherEditsTestersPatchTrack where
         "rollout" -> Just ANDRollout
         _ -> Nothing
 
-instance ToText AndroidPublisherEditsTestersPatchTrack where
+instance ToText AndroidPublisherEditsTestersGetTrack where
     toText = \case
         ANDAlpha -> "alpha"
         ANDBeta -> "beta"
         ANDProduction -> "production"
         ANDRollout -> "rollout"
+
+instance FromJSON AndroidPublisherEditsTestersGetTrack where
+    parseJSON = parseJSONText "AndroidPublisherEditsTestersGetTrack"
+
+instance ToJSON AndroidPublisherEditsTestersGetTrack where
+    toJSON = toJSONText
+
+data AndroidPublisherEditsTestersPatchTrack
+    = APETPTAlpha
+      -- ^ @alpha@
+    | APETPTBeta
+      -- ^ @beta@
+    | APETPTProduction
+      -- ^ @production@
+    | APETPTRollout
+      -- ^ @rollout@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable AndroidPublisherEditsTestersPatchTrack
+
+instance FromText AndroidPublisherEditsTestersPatchTrack where
+    fromText = \case
+        "alpha" -> Just APETPTAlpha
+        "beta" -> Just APETPTBeta
+        "production" -> Just APETPTProduction
+        "rollout" -> Just APETPTRollout
+        _ -> Nothing
+
+instance ToText AndroidPublisherEditsTestersPatchTrack where
+    toText = \case
+        APETPTAlpha -> "alpha"
+        APETPTBeta -> "beta"
+        APETPTProduction -> "production"
+        APETPTRollout -> "rollout"
 
 instance FromJSON AndroidPublisherEditsTestersPatchTrack where
     parseJSON = parseJSONText "AndroidPublisherEditsTestersPatchTrack"

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,9 +53,9 @@ type OperationsListResource =
      "projects" :>
        Capture "project" Text :>
          "operations" :>
-           QueryParam "maxResults" Word32 :>
+           QueryParam "instance" Text :>
              QueryParam "pageToken" Text :>
-               QueryParam "instance" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data OperationsList' = OperationsList'
     , _olMaxResults  :: !(Maybe Word32)
     , _olFields      :: !(Maybe Text)
     , _olInstance    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationsList'' with the minimum fields required to make a request.
 --
@@ -184,8 +185,8 @@ instance GoogleRequest OperationsList' where
         type Rs OperationsList' = OperationsListResponse
         request = requestWithRoute defReq sQLAdminURL
         requestWithRoute r u OperationsList'{..}
-          = go _olMaxResults _olPageToken _olProject
-              (Just _olInstance)
+          = go _olProject (Just _olInstance) _olPageToken
+              _olMaxResults
               _olQuotaUser
               (Just _olPrettyPrint)
               _olUserIP

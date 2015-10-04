@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,8 +38,8 @@ module Network.Google.Resource.PlusDomains.Media.Insert
     , miPrettyPrint
     , miUserIP
     , miCollection
+    , miPayload
     , miUserId
-    , miMedia
     , miMedia
     , miKey
     , miOAuthToken
@@ -77,13 +78,13 @@ data MediaInsert' = MediaInsert'
     , _miPrettyPrint :: !Bool
     , _miUserIP      :: !(Maybe Text)
     , _miCollection  :: !PlusDomainsMediaInsertCollection
+    , _miPayload     :: !Media
     , _miUserId      :: !Text
     , _miMedia       :: !Body
-    , _miMedia       :: !Media
     , _miKey         :: !(Maybe Key)
     , _miOAuthToken  :: !(Maybe OAuthToken)
     , _miFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MediaInsert'' with the minimum fields required to make a request.
 --
@@ -97,9 +98,9 @@ data MediaInsert' = MediaInsert'
 --
 -- * 'miCollection'
 --
--- * 'miUserId'
+-- * 'miPayload'
 --
--- * 'miMedia'
+-- * 'miUserId'
 --
 -- * 'miMedia'
 --
@@ -110,18 +111,18 @@ data MediaInsert' = MediaInsert'
 -- * 'miFields'
 mediaInsert'
     :: PlusDomainsMediaInsertCollection -- ^ 'collection'
+    -> Media -- ^ 'payload'
     -> Text -- ^ 'userId'
     -> Body -- ^ 'media'
-    -> Media -- ^ 'Media'
     -> MediaInsert'
-mediaInsert' pMiCollection_ pMiUserId_ pMiMedia_ pMiMedia_ =
+mediaInsert' pMiCollection_ pMiPayload_ pMiUserId_ pMiMedia_ =
     MediaInsert'
     { _miQuotaUser = Nothing
     , _miPrettyPrint = True
     , _miUserIP = Nothing
     , _miCollection = pMiCollection_
+    , _miPayload = pMiPayload_
     , _miUserId = pMiUserId_
-    , _miMedia = pMiMedia_
     , _miMedia = pMiMedia_
     , _miKey = Nothing
     , _miOAuthToken = Nothing
@@ -150,15 +151,16 @@ miCollection :: Lens' MediaInsert' PlusDomainsMediaInsertCollection
 miCollection
   = lens _miCollection (\ s a -> s{_miCollection = a})
 
+-- | Multipart request metadata.
+miPayload :: Lens' MediaInsert' Media
+miPayload
+  = lens _miPayload (\ s a -> s{_miPayload = a})
+
 -- | The ID of the user to create the activity on behalf of.
 miUserId :: Lens' MediaInsert' Text
 miUserId = lens _miUserId (\ s a -> s{_miUserId = a})
 
 miMedia :: Lens' MediaInsert' Body
-miMedia = lens _miMedia (\ s a -> s{_miMedia = a})
-
--- | Multipart request metadata.
-miMedia :: Lens' MediaInsert' Media
 miMedia = lens _miMedia (\ s a -> s{_miMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -184,13 +186,14 @@ instance GoogleRequest MediaInsert' where
         type Rs MediaInsert' = Media
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u MediaInsert'{..}
-          = go _miMedia _miUserId _miCollection _miQuotaUser
+          = go _miUserId _miCollection _miQuotaUser
               (Just _miPrettyPrint)
               _miUserIP
               _miFields
               _miKey
               _miOAuthToken
               (Just AltJSON)
+              _miPayload
               _miMedia
           where go
                   = clientWithRoute

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.Directory.Users.Undelete
     , uQuotaUser
     , uPrettyPrint
     , uUserIP
-    , uUserUndelete
+    , uPayload
     , uKey
     , uOAuthToken
     , uUserKey
@@ -62,15 +63,15 @@ type UsersUndeleteResource =
 --
 -- /See:/ 'usersUndelete'' smart constructor.
 data UsersUndelete' = UsersUndelete'
-    { _uQuotaUser    :: !(Maybe Text)
-    , _uPrettyPrint  :: !Bool
-    , _uUserIP       :: !(Maybe Text)
-    , _uUserUndelete :: !UserUndelete
-    , _uKey          :: !(Maybe Key)
-    , _uOAuthToken   :: !(Maybe OAuthToken)
-    , _uUserKey      :: !Text
-    , _uFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _uQuotaUser   :: !(Maybe Text)
+    , _uPrettyPrint :: !Bool
+    , _uUserIP      :: !(Maybe Text)
+    , _uPayload     :: !UserUndelete
+    , _uKey         :: !(Maybe Key)
+    , _uOAuthToken  :: !(Maybe OAuthToken)
+    , _uUserKey     :: !Text
+    , _uFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersUndelete'' with the minimum fields required to make a request.
 --
@@ -82,7 +83,7 @@ data UsersUndelete' = UsersUndelete'
 --
 -- * 'uUserIP'
 --
--- * 'uUserUndelete'
+-- * 'uPayload'
 --
 -- * 'uKey'
 --
@@ -92,15 +93,15 @@ data UsersUndelete' = UsersUndelete'
 --
 -- * 'uFields'
 usersUndelete'
-    :: UserUndelete -- ^ 'UserUndelete'
+    :: UserUndelete -- ^ 'payload'
     -> Text -- ^ 'userKey'
     -> UsersUndelete'
-usersUndelete' pUUserUndelete_ pUUserKey_ =
+usersUndelete' pUPayload_ pUUserKey_ =
     UsersUndelete'
     { _uQuotaUser = Nothing
     , _uPrettyPrint = True
     , _uUserIP = Nothing
-    , _uUserUndelete = pUUserUndelete_
+    , _uPayload = pUPayload_
     , _uKey = Nothing
     , _uOAuthToken = Nothing
     , _uUserKey = pUUserKey_
@@ -125,10 +126,8 @@ uUserIP :: Lens' UsersUndelete' (Maybe Text)
 uUserIP = lens _uUserIP (\ s a -> s{_uUserIP = a})
 
 -- | Multipart request metadata.
-uUserUndelete :: Lens' UsersUndelete' UserUndelete
-uUserUndelete
-  = lens _uUserUndelete
-      (\ s a -> s{_uUserUndelete = a})
+uPayload :: Lens' UsersUndelete' UserUndelete
+uPayload = lens _uPayload (\ s a -> s{_uPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -163,7 +162,7 @@ instance GoogleRequest UsersUndelete' where
               _uKey
               _uOAuthToken
               (Just AltJSON)
-              _uUserUndelete
+              _uPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersUndeleteResource)

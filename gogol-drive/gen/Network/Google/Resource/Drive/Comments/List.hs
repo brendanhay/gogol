@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,10 +53,10 @@ type CommentsListResource =
      "files" :>
        Capture "fileId" Text :>
          "comments" :>
-           QueryParam "includeDeleted" Bool :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "updatedMin" Text :>
+           QueryParam "updatedMin" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "includeDeleted" Bool :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -80,7 +81,7 @@ data CommentsList' = CommentsList'
     , _comMaxResults     :: !Int32
     , _comIncludeDeleted :: !Bool
     , _comFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsList'' with the minimum fields required to make a request.
 --
@@ -202,10 +203,9 @@ instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u CommentsList'{..}
-          = go (Just _comIncludeDeleted) (Just _comMaxResults)
-              _comPageToken
-              _comUpdatedMin
-              _comFileId
+          = go _comFileId _comUpdatedMin _comPageToken
+              (Just _comMaxResults)
+              (Just _comIncludeDeleted)
               _comQuotaUser
               (Just _comPrettyPrint)
               _comUserIP

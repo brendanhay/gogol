@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ type AchievementConfigurationsListResource =
      "applications" :>
        Capture "applicationId" Text :>
          "achievements" :>
-           QueryParam "maxResults" Int32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Int32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -74,7 +75,7 @@ data AchievementConfigurationsList' = AchievementConfigurationsList'
     , _aclOAuthToken    :: !(Maybe OAuthToken)
     , _aclMaxResults    :: !(Maybe Int32)
     , _aclFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationsList'' with the minimum fields required to make a request.
 --
@@ -181,7 +182,7 @@ instance GoogleRequest AchievementConfigurationsList'
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
           AchievementConfigurationsList'{..}
-          = go _aclMaxResults _aclPageToken _aclApplicationId
+          = go _aclApplicationId _aclPageToken _aclMaxResults
               _aclQuotaUser
               (Just _aclPrettyPrint)
               _aclUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,15 +59,15 @@ import           Network.Google.YouTube.Types
 -- 'ActivitiesList'' request conforms to.
 type ActivitiesListResource =
      "activities" :>
-       QueryParam "channelId" Text :>
-         QueryParam "home" Bool :>
-           QueryParam "maxResults" Word32 :>
+       QueryParam "part" Text :>
+         QueryParam "publishedAfter" DateTime' :>
+           QueryParam "home" Bool :>
              QueryParam "mine" Bool :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "publishedAfter" DateTime' :>
-                   QueryParam "publishedBefore" DateTime' :>
-                     QueryParam "regionCode" Text :>
-                       QueryParam "part" Text :>
+               QueryParam "regionCode" Text :>
+                 QueryParam "channelId" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "publishedBefore" DateTime' :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -99,7 +100,7 @@ data ActivitiesList' = ActivitiesList'
     , _alMaxResults      :: !Word32
     , _alPublishedBefore :: !(Maybe DateTime')
     , _alFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
 --
@@ -270,13 +271,12 @@ instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = ActivityListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u ActivitiesList'{..}
-          = go _alChannelId _alHome (Just _alMaxResults)
-              _alMine
-              _alPageToken
-              _alPublishedAfter
-              _alPublishedBefore
+          = go (Just _alPart) _alPublishedAfter _alHome _alMine
               _alRegionCode
-              (Just _alPart)
+              _alChannelId
+              _alPageToken
+              (Just _alMaxResults)
+              _alPublishedBefore
               _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -31,9 +32,9 @@ module Network.Google.Resource.Genomics.Variants.Create
 
     -- * Request Lenses
     , varQuotaUser
-    , varVariant
     , varPrettyPrint
     , varUserIP
+    , varPayload
     , varKey
     , varOAuthToken
     , varFields
@@ -60,13 +61,13 @@ type VariantsCreateResource =
 -- /See:/ 'variantsCreate'' smart constructor.
 data VariantsCreate' = VariantsCreate'
     { _varQuotaUser   :: !(Maybe Text)
-    , _varVariant     :: !Variant
     , _varPrettyPrint :: !Bool
     , _varUserIP      :: !(Maybe Text)
+    , _varPayload     :: !Variant
     , _varKey         :: !(Maybe Key)
     , _varOAuthToken  :: !(Maybe OAuthToken)
     , _varFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsCreate'' with the minimum fields required to make a request.
 --
@@ -74,11 +75,11 @@ data VariantsCreate' = VariantsCreate'
 --
 -- * 'varQuotaUser'
 --
--- * 'varVariant'
---
 -- * 'varPrettyPrint'
 --
 -- * 'varUserIP'
+--
+-- * 'varPayload'
 --
 -- * 'varKey'
 --
@@ -86,14 +87,14 @@ data VariantsCreate' = VariantsCreate'
 --
 -- * 'varFields'
 variantsCreate'
-    :: Variant -- ^ 'Variant'
+    :: Variant -- ^ 'payload'
     -> VariantsCreate'
-variantsCreate' pVarVariant_ =
+variantsCreate' pVarPayload_ =
     VariantsCreate'
     { _varQuotaUser = Nothing
-    , _varVariant = pVarVariant_
     , _varPrettyPrint = True
     , _varUserIP = Nothing
+    , _varPayload = pVarPayload_
     , _varKey = Nothing
     , _varOAuthToken = Nothing
     , _varFields = Nothing
@@ -106,11 +107,6 @@ varQuotaUser :: Lens' VariantsCreate' (Maybe Text)
 varQuotaUser
   = lens _varQuotaUser (\ s a -> s{_varQuotaUser = a})
 
--- | Multipart request metadata.
-varVariant :: Lens' VariantsCreate' Variant
-varVariant
-  = lens _varVariant (\ s a -> s{_varVariant = a})
-
 -- | Returns response with indentations and line breaks.
 varPrettyPrint :: Lens' VariantsCreate' Bool
 varPrettyPrint
@@ -122,6 +118,11 @@ varPrettyPrint
 varUserIP :: Lens' VariantsCreate' (Maybe Text)
 varUserIP
   = lens _varUserIP (\ s a -> s{_varUserIP = a})
+
+-- | Multipart request metadata.
+varPayload :: Lens' VariantsCreate' Variant
+varPayload
+  = lens _varPayload (\ s a -> s{_varPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -153,7 +154,7 @@ instance GoogleRequest VariantsCreate' where
               _varKey
               _varOAuthToken
               (Just AltJSON)
-              _varVariant
+              _varPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsCreateResource)

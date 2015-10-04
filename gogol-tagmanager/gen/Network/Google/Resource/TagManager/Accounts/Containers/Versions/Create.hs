@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Create
     -- * Request Lenses
     , acvcQuotaUser
     , acvcPrettyPrint
-    , acvcCreateContainerVersionRequestVersionOptions
     , acvcContainerId
     , acvcUserIP
+    , acvcPayload
     , acvcAccountId
     , acvcKey
     , acvcOAuthToken
@@ -67,16 +68,16 @@ type AccountsContainersVersionsCreateResource =
 --
 -- /See:/ 'accountsContainersVersionsCreate'' smart constructor.
 data AccountsContainersVersionsCreate' = AccountsContainersVersionsCreate'
-    { _acvcQuotaUser                                   :: !(Maybe Text)
-    , _acvcPrettyPrint                                 :: !Bool
-    , _acvcCreateContainerVersionRequestVersionOptions :: !CreateContainerVersionRequestVersionOptions
-    , _acvcContainerId                                 :: !Text
-    , _acvcUserIP                                      :: !(Maybe Text)
-    , _acvcAccountId                                   :: !Text
-    , _acvcKey                                         :: !(Maybe Key)
-    , _acvcOAuthToken                                  :: !(Maybe OAuthToken)
-    , _acvcFields                                      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _acvcQuotaUser   :: !(Maybe Text)
+    , _acvcPrettyPrint :: !Bool
+    , _acvcContainerId :: !Text
+    , _acvcUserIP      :: !(Maybe Text)
+    , _acvcPayload     :: !CreateContainerVersionRequestVersionOptions
+    , _acvcAccountId   :: !Text
+    , _acvcKey         :: !(Maybe Key)
+    , _acvcOAuthToken  :: !(Maybe OAuthToken)
+    , _acvcFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsCreate'' with the minimum fields required to make a request.
 --
@@ -86,11 +87,11 @@ data AccountsContainersVersionsCreate' = AccountsContainersVersionsCreate'
 --
 -- * 'acvcPrettyPrint'
 --
--- * 'acvcCreateContainerVersionRequestVersionOptions'
---
 -- * 'acvcContainerId'
 --
 -- * 'acvcUserIP'
+--
+-- * 'acvcPayload'
 --
 -- * 'acvcAccountId'
 --
@@ -100,17 +101,17 @@ data AccountsContainersVersionsCreate' = AccountsContainersVersionsCreate'
 --
 -- * 'acvcFields'
 accountsContainersVersionsCreate'
-    :: CreateContainerVersionRequestVersionOptions -- ^ 'CreateContainerVersionRequestVersionOptions'
-    -> Text -- ^ 'containerId'
+    :: Text -- ^ 'containerId'
+    -> CreateContainerVersionRequestVersionOptions -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> AccountsContainersVersionsCreate'
-accountsContainersVersionsCreate' pAcvcCreateContainerVersionRequestVersionOptions_ pAcvcContainerId_ pAcvcAccountId_ =
+accountsContainersVersionsCreate' pAcvcContainerId_ pAcvcPayload_ pAcvcAccountId_ =
     AccountsContainersVersionsCreate'
     { _acvcQuotaUser = Nothing
     , _acvcPrettyPrint = True
-    , _acvcCreateContainerVersionRequestVersionOptions = pAcvcCreateContainerVersionRequestVersionOptions_
     , _acvcContainerId = pAcvcContainerId_
     , _acvcUserIP = Nothing
+    , _acvcPayload = pAcvcPayload_
     , _acvcAccountId = pAcvcAccountId_
     , _acvcKey = Nothing
     , _acvcOAuthToken = Nothing
@@ -131,15 +132,6 @@ acvcPrettyPrint
   = lens _acvcPrettyPrint
       (\ s a -> s{_acvcPrettyPrint = a})
 
--- | Multipart request metadata.
-acvcCreateContainerVersionRequestVersionOptions :: Lens' AccountsContainersVersionsCreate' CreateContainerVersionRequestVersionOptions
-acvcCreateContainerVersionRequestVersionOptions
-  = lens
-      _acvcCreateContainerVersionRequestVersionOptions
-      (\ s a ->
-         s{_acvcCreateContainerVersionRequestVersionOptions =
-             a})
-
 -- | The GTM Container ID.
 acvcContainerId :: Lens' AccountsContainersVersionsCreate' Text
 acvcContainerId
@@ -151,6 +143,11 @@ acvcContainerId
 acvcUserIP :: Lens' AccountsContainersVersionsCreate' (Maybe Text)
 acvcUserIP
   = lens _acvcUserIP (\ s a -> s{_acvcUserIP = a})
+
+-- | Multipart request metadata.
+acvcPayload :: Lens' AccountsContainersVersionsCreate' CreateContainerVersionRequestVersionOptions
+acvcPayload
+  = lens _acvcPayload (\ s a -> s{_acvcPayload = a})
 
 -- | The GTM Account ID.
 acvcAccountId :: Lens' AccountsContainersVersionsCreate' Text
@@ -194,7 +191,7 @@ instance GoogleRequest
               _acvcKey
               _acvcOAuthToken
               (Just AltJSON)
-              _acvcCreateContainerVersionRequestVersionOptions
+              _acvcPayload
           where go
                   = clientWithRoute
                       (Proxy ::

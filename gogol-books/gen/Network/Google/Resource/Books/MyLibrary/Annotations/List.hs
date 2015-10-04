@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,15 +58,15 @@ type MyLibraryAnnotationsListResource =
      "mylibrary" :>
        "annotations" :>
          QueryParam "contentVersion" Text :>
-           QueryParam "layerId" Text :>
-             QueryParams "layerIds" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "showDeleted" Bool :>
+           QueryParam "showDeleted" Bool :>
+             QueryParam "updatedMax" Text :>
+               QueryParam "updatedMin" Text :>
+                 QueryParams "layerIds" Text :>
+                   QueryParam "volumeId" Text :>
                      QueryParam "source" Text :>
-                       QueryParam "updatedMax" Text :>
-                         QueryParam "updatedMin" Text :>
-                           QueryParam "volumeId" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "layerId" Text :>
+                           QueryParam "maxResults" Word32 :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
@@ -87,7 +88,7 @@ data MyLibraryAnnotationsList' = MyLibraryAnnotationsList'
     , _mlalUpdatedMax     :: !(Maybe Text)
     , _mlalKey            :: !(Maybe Key)
     , _mlalUpdatedMin     :: !(Maybe Text)
-    , _mlalLayerIds       :: !(Maybe Text)
+    , _mlalLayerIds       :: !(Maybe [Text])
     , _mlalVolumeId       :: !(Maybe Text)
     , _mlalSource         :: !(Maybe Text)
     , _mlalPageToken      :: !(Maybe Text)
@@ -95,7 +96,7 @@ data MyLibraryAnnotationsList' = MyLibraryAnnotationsList'
     , _mlalLayerId        :: !(Maybe Text)
     , _mlalMaxResults     :: !(Maybe Word32)
     , _mlalFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyLibraryAnnotationsList'' with the minimum fields required to make a request.
 --
@@ -208,9 +209,11 @@ mlalUpdatedMin
       (\ s a -> s{_mlalUpdatedMin = a})
 
 -- | The layer ID(s) to limit annotation by.
-mlalLayerIds :: Lens' MyLibraryAnnotationsList' (Maybe Text)
+mlalLayerIds :: Lens' MyLibraryAnnotationsList' [Text]
 mlalLayerIds
   = lens _mlalLayerIds (\ s a -> s{_mlalLayerIds = a})
+      . _Default
+      . _Coerce
 
 -- | The volume to restrict annotations to.
 mlalVolumeId :: Lens' MyLibraryAnnotationsList' (Maybe Text)
@@ -259,14 +262,15 @@ instance GoogleRequest MyLibraryAnnotationsList'
         type Rs MyLibraryAnnotationsList' = Annotations
         request = requestWithRoute defReq booksURL
         requestWithRoute r u MyLibraryAnnotationsList'{..}
-          = go _mlalContentVersion _mlalLayerId _mlalLayerIds
-              _mlalMaxResults
-              _mlalPageToken
-              _mlalShowDeleted
-              _mlalSource
+          = go _mlalContentVersion _mlalShowDeleted
               _mlalUpdatedMax
               _mlalUpdatedMin
+              (_mlalLayerIds ^. _Default)
               _mlalVolumeId
+              _mlalSource
+              _mlalPageToken
+              _mlalLayerId
+              _mlalMaxResults
               _mlalQuotaUser
               (Just _mlalPrettyPrint)
               _mlalUserIP

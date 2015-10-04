@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,10 +52,10 @@ import           Network.Google.Prelude
 type EntitlementsListResource =
      Capture "packageName" Text :>
        "entitlements" :>
-         QueryParam "maxResults" Word32 :>
-           QueryParam "productId" Text :>
-             QueryParam "startIndex" Word32 :>
-               QueryParam "token" Text :>
+         QueryParam "token" Text :>
+           QueryParam "startIndex" Word32 :>
+             QueryParam "productId" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data EntitlementsList' = EntitlementsList'
     , _elProductId   :: !(Maybe Text)
     , _elMaxResults  :: !(Maybe Word32)
     , _elFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EntitlementsList'' with the minimum fields required to make a request.
 --
@@ -189,9 +190,9 @@ instance GoogleRequest EntitlementsList' where
         type Rs EntitlementsList' = EntitlementsListResponse
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EntitlementsList'{..}
-          = go _elMaxResults _elProductId _elStartIndex
-              _elToken
-              _elPackageName
+          = go _elPackageName _elToken _elStartIndex
+              _elProductId
+              _elMaxResults
               _elQuotaUser
               (Just _elPrettyPrint)
               _elUserIP

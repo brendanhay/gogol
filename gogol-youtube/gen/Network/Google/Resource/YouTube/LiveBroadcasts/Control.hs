@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,13 +55,13 @@ import           Network.Google.YouTube.Types
 type LiveBroadcastsControlResource =
      "liveBroadcasts" :>
        "control" :>
-         QueryParam "displaySlate" Bool :>
-           QueryParam "offsetTimeMs" Word64 :>
+         QueryParam "id" Text :>
+           QueryParam "part" Text :>
              QueryParam "onBehalfOfContentOwner" Text :>
                QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                 QueryParam "walltime" DateTime' :>
-                   QueryParam "id" Text :>
-                     QueryParam "part" Text :>
+                 QueryParam "displaySlate" Bool :>
+                   QueryParam "walltime" DateTime' :>
+                     QueryParam "offsetTimeMs" Word64 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -88,7 +89,7 @@ data LiveBroadcastsControl' = LiveBroadcastsControl'
     , _lbcWalltime                      :: !(Maybe DateTime')
     , _lbcOffsetTimeMs                  :: !(Maybe Word64)
     , _lbcFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsControl'' with the minimum fields required to make a request.
 --
@@ -262,12 +263,12 @@ instance GoogleRequest LiveBroadcastsControl' where
         type Rs LiveBroadcastsControl' = LiveBroadcast
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveBroadcastsControl'{..}
-          = go _lbcDisplaySlate _lbcOffsetTimeMs
+          = go (Just _lbcId) (Just _lbcPart)
               _lbcOnBehalfOfContentOwner
               _lbcOnBehalfOfContentOwnerChannel
+              _lbcDisplaySlate
               _lbcWalltime
-              (Just _lbcId)
-              (Just _lbcPart)
+              _lbcOffsetTimeMs
               _lbcQuotaUser
               (Just _lbcPrettyPrint)
               _lbcUserIP

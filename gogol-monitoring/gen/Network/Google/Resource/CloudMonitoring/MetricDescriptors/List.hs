@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -39,8 +40,8 @@ module Network.Google.Resource.CloudMonitoring.MetricDescriptors.List
     , mdlProject
     , mdlUserIP
     , mdlCount
+    , mdlPayload
     , mdlKey
-    , mdlListMetricDescriptorsRequest
     , mdlQuery
     , mdlPageToken
     , mdlOAuthToken
@@ -56,8 +57,8 @@ type MetricDescriptorsListResource =
      Capture "project" Text :>
        "metricDescriptors" :>
          QueryParam "count" Int32 :>
-           QueryParam "pageToken" Text :>
-             QueryParam "query" Text :>
+           QueryParam "query" Text :>
+             QueryParam "pageToken" Text :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -76,18 +77,18 @@ type MetricDescriptorsListResource =
 --
 -- /See:/ 'metricDescriptorsList'' smart constructor.
 data MetricDescriptorsList' = MetricDescriptorsList'
-    { _mdlQuotaUser                    :: !(Maybe Text)
-    , _mdlPrettyPrint                  :: !Bool
-    , _mdlProject                      :: !Text
-    , _mdlUserIP                       :: !(Maybe Text)
-    , _mdlCount                        :: !Int32
-    , _mdlKey                          :: !(Maybe Key)
-    , _mdlListMetricDescriptorsRequest :: !ListMetricDescriptorsRequest
-    , _mdlQuery                        :: !(Maybe Text)
-    , _mdlPageToken                    :: !(Maybe Text)
-    , _mdlOAuthToken                   :: !(Maybe OAuthToken)
-    , _mdlFields                       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mdlQuotaUser   :: !(Maybe Text)
+    , _mdlPrettyPrint :: !Bool
+    , _mdlProject     :: !Text
+    , _mdlUserIP      :: !(Maybe Text)
+    , _mdlCount       :: !Int32
+    , _mdlPayload     :: !ListMetricDescriptorsRequest
+    , _mdlKey         :: !(Maybe Key)
+    , _mdlQuery       :: !(Maybe Text)
+    , _mdlPageToken   :: !(Maybe Text)
+    , _mdlOAuthToken  :: !(Maybe OAuthToken)
+    , _mdlFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetricDescriptorsList'' with the minimum fields required to make a request.
 --
@@ -103,9 +104,9 @@ data MetricDescriptorsList' = MetricDescriptorsList'
 --
 -- * 'mdlCount'
 --
--- * 'mdlKey'
+-- * 'mdlPayload'
 --
--- * 'mdlListMetricDescriptorsRequest'
+-- * 'mdlKey'
 --
 -- * 'mdlQuery'
 --
@@ -116,17 +117,17 @@ data MetricDescriptorsList' = MetricDescriptorsList'
 -- * 'mdlFields'
 metricDescriptorsList'
     :: Text -- ^ 'project'
-    -> ListMetricDescriptorsRequest -- ^ 'ListMetricDescriptorsRequest'
+    -> ListMetricDescriptorsRequest -- ^ 'payload'
     -> MetricDescriptorsList'
-metricDescriptorsList' pMdlProject_ pMdlListMetricDescriptorsRequest_ =
+metricDescriptorsList' pMdlProject_ pMdlPayload_ =
     MetricDescriptorsList'
     { _mdlQuotaUser = Nothing
     , _mdlPrettyPrint = True
     , _mdlProject = pMdlProject_
     , _mdlUserIP = Nothing
     , _mdlCount = 100
+    , _mdlPayload = pMdlPayload_
     , _mdlKey = Nothing
-    , _mdlListMetricDescriptorsRequest = pMdlListMetricDescriptorsRequest_
     , _mdlQuery = Nothing
     , _mdlPageToken = Nothing
     , _mdlOAuthToken = Nothing
@@ -163,17 +164,16 @@ mdlUserIP
 mdlCount :: Lens' MetricDescriptorsList' Int32
 mdlCount = lens _mdlCount (\ s a -> s{_mdlCount = a})
 
+-- | Multipart request metadata.
+mdlPayload :: Lens' MetricDescriptorsList' ListMetricDescriptorsRequest
+mdlPayload
+  = lens _mdlPayload (\ s a -> s{_mdlPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 mdlKey :: Lens' MetricDescriptorsList' (Maybe Key)
 mdlKey = lens _mdlKey (\ s a -> s{_mdlKey = a})
-
--- | Multipart request metadata.
-mdlListMetricDescriptorsRequest :: Lens' MetricDescriptorsList' ListMetricDescriptorsRequest
-mdlListMetricDescriptorsRequest
-  = lens _mdlListMetricDescriptorsRequest
-      (\ s a -> s{_mdlListMetricDescriptorsRequest = a})
 
 -- | The query used to search against existing metrics. Separate keywords
 -- with a space; the service joins all keywords with AND, meaning that all
@@ -210,8 +210,8 @@ instance GoogleRequest MetricDescriptorsList' where
              ListMetricDescriptorsResponse
         request = requestWithRoute defReq monitoringURL
         requestWithRoute r u MetricDescriptorsList'{..}
-          = go (Just _mdlCount) _mdlPageToken _mdlQuery
-              _mdlProject
+          = go _mdlProject (Just _mdlCount) _mdlQuery
+              _mdlPageToken
               _mdlQuotaUser
               (Just _mdlPrettyPrint)
               _mdlUserIP
@@ -219,7 +219,7 @@ instance GoogleRequest MetricDescriptorsList' where
               _mdlKey
               _mdlOAuthToken
               (Just AltJSON)
-              _mdlListMetricDescriptorsRequest
+              _mdlPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MetricDescriptorsListResource)

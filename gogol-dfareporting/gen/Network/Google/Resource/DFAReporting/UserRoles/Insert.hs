@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.DFAReporting.UserRoles.Insert
     , uriPrettyPrint
     , uriUserIP
     , uriProfileId
+    , uriPayload
     , uriKey
-    , uriUserRole
     , uriOAuthToken
     , uriFields
     ) where
@@ -66,11 +67,11 @@ data UserRolesInsert' = UserRolesInsert'
     , _uriPrettyPrint :: !Bool
     , _uriUserIP      :: !(Maybe Text)
     , _uriProfileId   :: !Int64
+    , _uriPayload     :: !UserRole
     , _uriKey         :: !(Maybe Key)
-    , _uriUserRole    :: !UserRole
     , _uriOAuthToken  :: !(Maybe OAuthToken)
     , _uriFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesInsert'' with the minimum fields required to make a request.
 --
@@ -84,25 +85,25 @@ data UserRolesInsert' = UserRolesInsert'
 --
 -- * 'uriProfileId'
 --
--- * 'uriKey'
+-- * 'uriPayload'
 --
--- * 'uriUserRole'
+-- * 'uriKey'
 --
 -- * 'uriOAuthToken'
 --
 -- * 'uriFields'
 userRolesInsert'
     :: Int64 -- ^ 'profileId'
-    -> UserRole -- ^ 'UserRole'
+    -> UserRole -- ^ 'payload'
     -> UserRolesInsert'
-userRolesInsert' pUriProfileId_ pUriUserRole_ =
+userRolesInsert' pUriProfileId_ pUriPayload_ =
     UserRolesInsert'
     { _uriQuotaUser = Nothing
     , _uriPrettyPrint = True
     , _uriUserIP = Nothing
     , _uriProfileId = pUriProfileId_
+    , _uriPayload = pUriPayload_
     , _uriKey = Nothing
-    , _uriUserRole = pUriUserRole_
     , _uriOAuthToken = Nothing
     , _uriFields = Nothing
     }
@@ -131,16 +132,16 @@ uriProfileId :: Lens' UserRolesInsert' Int64
 uriProfileId
   = lens _uriProfileId (\ s a -> s{_uriProfileId = a})
 
+-- | Multipart request metadata.
+uriPayload :: Lens' UserRolesInsert' UserRole
+uriPayload
+  = lens _uriPayload (\ s a -> s{_uriPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 uriKey :: Lens' UserRolesInsert' (Maybe Key)
 uriKey = lens _uriKey (\ s a -> s{_uriKey = a})
-
--- | Multipart request metadata.
-uriUserRole :: Lens' UserRolesInsert' UserRole
-uriUserRole
-  = lens _uriUserRole (\ s a -> s{_uriUserRole = a})
 
 -- | OAuth 2.0 token for the current user.
 uriOAuthToken :: Lens' UserRolesInsert' (Maybe OAuthToken)
@@ -168,7 +169,7 @@ instance GoogleRequest UserRolesInsert' where
               _uriKey
               _uriOAuthToken
               (Just AltJSON)
-              _uriUserRole
+              _uriPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UserRolesInsertResource)

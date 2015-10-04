@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -49,8 +50,8 @@ import           Network.Google.Prelude
 type ApplicationsListResource =
      "applications" :>
        QueryParam "customerId" Text :>
-         QueryParam "maxResults" Word32 :>
-           QueryParam "pageToken" Text :>
+         QueryParam "pageToken" Text :>
+           QueryParam "maxResults" Word32 :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -73,7 +74,7 @@ data ApplicationsList' = ApplicationsList'
     , _alOAuthToken  :: !(Maybe OAuthToken)
     , _alMaxResults  :: !(Maybe Word32)
     , _alFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsList'' with the minimum fields required to make a request.
 --
@@ -168,7 +169,7 @@ instance GoogleRequest ApplicationsList' where
         request
           = requestWithRoute defReq adminDataTransferURL
         requestWithRoute r u ApplicationsList'{..}
-          = go _alCustomerId _alMaxResults _alPageToken
+          = go _alCustomerId _alPageToken _alMaxResults
               _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP

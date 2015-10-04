@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,9 +38,9 @@ module Network.Google.Resource.Genomics.Variantsets.MergeVariants
     -- * Request Lenses
     , vmvQuotaUser
     , vmvPrettyPrint
-    , vmvMergeVariantsRequest
     , vmvVariantSetId
     , vmvUserIP
+    , vmvPayload
     , vmvKey
     , vmvOAuthToken
     , vmvFields
@@ -73,15 +74,15 @@ type VariantsetsMergeVariantsResource =
 --
 -- /See:/ 'variantsetsMergeVariants'' smart constructor.
 data VariantsetsMergeVariants' = VariantsetsMergeVariants'
-    { _vmvQuotaUser            :: !(Maybe Text)
-    , _vmvPrettyPrint          :: !Bool
-    , _vmvMergeVariantsRequest :: !MergeVariantsRequest
-    , _vmvVariantSetId         :: !Text
-    , _vmvUserIP               :: !(Maybe Text)
-    , _vmvKey                  :: !(Maybe Key)
-    , _vmvOAuthToken           :: !(Maybe OAuthToken)
-    , _vmvFields               :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _vmvQuotaUser    :: !(Maybe Text)
+    , _vmvPrettyPrint  :: !Bool
+    , _vmvVariantSetId :: !Text
+    , _vmvUserIP       :: !(Maybe Text)
+    , _vmvPayload      :: !MergeVariantsRequest
+    , _vmvKey          :: !(Maybe Key)
+    , _vmvOAuthToken   :: !(Maybe OAuthToken)
+    , _vmvFields       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsMergeVariants'' with the minimum fields required to make a request.
 --
@@ -91,11 +92,11 @@ data VariantsetsMergeVariants' = VariantsetsMergeVariants'
 --
 -- * 'vmvPrettyPrint'
 --
--- * 'vmvMergeVariantsRequest'
---
 -- * 'vmvVariantSetId'
 --
 -- * 'vmvUserIP'
+--
+-- * 'vmvPayload'
 --
 -- * 'vmvKey'
 --
@@ -103,16 +104,16 @@ data VariantsetsMergeVariants' = VariantsetsMergeVariants'
 --
 -- * 'vmvFields'
 variantsetsMergeVariants'
-    :: MergeVariantsRequest -- ^ 'MergeVariantsRequest'
-    -> Text -- ^ 'variantSetId'
+    :: Text -- ^ 'variantSetId'
+    -> MergeVariantsRequest -- ^ 'payload'
     -> VariantsetsMergeVariants'
-variantsetsMergeVariants' pVmvMergeVariantsRequest_ pVmvVariantSetId_ =
+variantsetsMergeVariants' pVmvVariantSetId_ pVmvPayload_ =
     VariantsetsMergeVariants'
     { _vmvQuotaUser = Nothing
     , _vmvPrettyPrint = True
-    , _vmvMergeVariantsRequest = pVmvMergeVariantsRequest_
     , _vmvVariantSetId = pVmvVariantSetId_
     , _vmvUserIP = Nothing
+    , _vmvPayload = pVmvPayload_
     , _vmvKey = Nothing
     , _vmvOAuthToken = Nothing
     , _vmvFields = Nothing
@@ -131,12 +132,6 @@ vmvPrettyPrint
   = lens _vmvPrettyPrint
       (\ s a -> s{_vmvPrettyPrint = a})
 
--- | Multipart request metadata.
-vmvMergeVariantsRequest :: Lens' VariantsetsMergeVariants' MergeVariantsRequest
-vmvMergeVariantsRequest
-  = lens _vmvMergeVariantsRequest
-      (\ s a -> s{_vmvMergeVariantsRequest = a})
-
 -- | The destination variant set.
 vmvVariantSetId :: Lens' VariantsetsMergeVariants' Text
 vmvVariantSetId
@@ -148,6 +143,11 @@ vmvVariantSetId
 vmvUserIP :: Lens' VariantsetsMergeVariants' (Maybe Text)
 vmvUserIP
   = lens _vmvUserIP (\ s a -> s{_vmvUserIP = a})
+
+-- | Multipart request metadata.
+vmvPayload :: Lens' VariantsetsMergeVariants' MergeVariantsRequest
+vmvPayload
+  = lens _vmvPayload (\ s a -> s{_vmvPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -182,7 +182,7 @@ instance GoogleRequest VariantsetsMergeVariants'
               _vmvKey
               _vmvOAuthToken
               (Just AltJSON)
-              _vmvMergeVariantsRequest
+              _vmvPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsetsMergeVariantsResource)

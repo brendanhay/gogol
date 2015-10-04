@@ -18,7 +18,7 @@ module Network.Google.Fonts.Types.Sum where
 import           Network.Google.Prelude
 
 -- | Enables sorting of the list
-data WebfontsWebfontsListSort
+data Sort
     = Alpha
       -- ^ @alpha@
       -- Sort alphabetically
@@ -36,9 +36,9 @@ data WebfontsWebfontsListSort
       -- Sort by trending
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable WebfontsWebfontsListSort
+instance Hashable Sort
 
-instance FromText WebfontsWebfontsListSort where
+instance FromText Sort where
     fromText = \case
         "alpha" -> Just Alpha
         "date" -> Just Date
@@ -47,7 +47,7 @@ instance FromText WebfontsWebfontsListSort where
         "trending" -> Just Trending
         _ -> Nothing
 
-instance ToText WebfontsWebfontsListSort where
+instance ToText Sort where
     toText = \case
         Alpha -> "alpha"
         Date -> "date"
@@ -55,8 +55,8 @@ instance ToText WebfontsWebfontsListSort where
         Style -> "style"
         Trending -> "trending"
 
-instance FromJSON WebfontsWebfontsListSort where
-    parseJSON = parseJSONText "WebfontsWebfontsListSort"
+instance FromJSON Sort where
+    parseJSON = parseJSONText "Sort"
 
-instance ToJSON WebfontsWebfontsListSort where
+instance ToJSON Sort where
     toJSON = toJSONText

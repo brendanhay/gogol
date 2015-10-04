@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,10 +35,10 @@ module Network.Google.Resource.DFAReporting.EventTags.Patch
     , etpPrettyPrint
     , etpUserIP
     , etpProfileId
+    , etpPayload
     , etpKey
     , etpId
     , etpOAuthToken
-    , etpEventTag
     , etpFields
     ) where
 
@@ -68,12 +69,12 @@ data EventTagsPatch' = EventTagsPatch'
     , _etpPrettyPrint :: !Bool
     , _etpUserIP      :: !(Maybe Text)
     , _etpProfileId   :: !Int64
+    , _etpPayload     :: !EventTag
     , _etpKey         :: !(Maybe Key)
     , _etpId          :: !Int64
     , _etpOAuthToken  :: !(Maybe OAuthToken)
-    , _etpEventTag    :: !EventTag
     , _etpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsPatch'' with the minimum fields required to make a request.
 --
@@ -87,30 +88,30 @@ data EventTagsPatch' = EventTagsPatch'
 --
 -- * 'etpProfileId'
 --
+-- * 'etpPayload'
+--
 -- * 'etpKey'
 --
 -- * 'etpId'
 --
 -- * 'etpOAuthToken'
 --
--- * 'etpEventTag'
---
 -- * 'etpFields'
 eventTagsPatch'
     :: Int64 -- ^ 'profileId'
+    -> EventTag -- ^ 'payload'
     -> Int64 -- ^ 'id'
-    -> EventTag -- ^ 'EventTag'
     -> EventTagsPatch'
-eventTagsPatch' pEtpProfileId_ pEtpId_ pEtpEventTag_ =
+eventTagsPatch' pEtpProfileId_ pEtpPayload_ pEtpId_ =
     EventTagsPatch'
     { _etpQuotaUser = Nothing
     , _etpPrettyPrint = True
     , _etpUserIP = Nothing
     , _etpProfileId = pEtpProfileId_
+    , _etpPayload = pEtpPayload_
     , _etpKey = Nothing
     , _etpId = pEtpId_
     , _etpOAuthToken = Nothing
-    , _etpEventTag = pEtpEventTag_
     , _etpFields = Nothing
     }
 
@@ -138,6 +139,11 @@ etpProfileId :: Lens' EventTagsPatch' Int64
 etpProfileId
   = lens _etpProfileId (\ s a -> s{_etpProfileId = a})
 
+-- | Multipart request metadata.
+etpPayload :: Lens' EventTagsPatch' EventTag
+etpPayload
+  = lens _etpPayload (\ s a -> s{_etpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -153,11 +159,6 @@ etpOAuthToken :: Lens' EventTagsPatch' (Maybe OAuthToken)
 etpOAuthToken
   = lens _etpOAuthToken
       (\ s a -> s{_etpOAuthToken = a})
-
--- | Multipart request metadata.
-etpEventTag :: Lens' EventTagsPatch' EventTag
-etpEventTag
-  = lens _etpEventTag (\ s a -> s{_etpEventTag = a})
 
 -- | Selector specifying which fields to include in a partial response.
 etpFields :: Lens' EventTagsPatch' (Maybe Text)
@@ -179,7 +180,7 @@ instance GoogleRequest EventTagsPatch' where
               _etpKey
               _etpOAuthToken
               (Just AltJSON)
-              _etpEventTag
+              _etpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventTagsPatchResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.YouTube.LiveStreams.Update
     , lsuQuotaUser
     , lsuPart
     , lsuPrettyPrint
-    , lsuLiveStream
     , lsuUserIP
+    , lsuPayload
     , lsuOnBehalfOfContentOwner
     , lsuKey
     , lsuOnBehalfOfContentOwnerChannel
@@ -51,9 +52,9 @@ import           Network.Google.YouTube.Types
 -- 'LiveStreamsUpdate'' request conforms to.
 type LiveStreamsUpdateResource =
      "liveStreams" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "onBehalfOfContentOwnerChannel" Text :>
-           QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
+           QueryParam "onBehalfOfContentOwnerChannel" Text :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -72,14 +73,14 @@ data LiveStreamsUpdate' = LiveStreamsUpdate'
     { _lsuQuotaUser                     :: !(Maybe Text)
     , _lsuPart                          :: !Text
     , _lsuPrettyPrint                   :: !Bool
-    , _lsuLiveStream                    :: !LiveStream
     , _lsuUserIP                        :: !(Maybe Text)
+    , _lsuPayload                       :: !LiveStream
     , _lsuOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lsuKey                           :: !(Maybe Key)
     , _lsuOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lsuOAuthToken                    :: !(Maybe OAuthToken)
     , _lsuFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveStreamsUpdate'' with the minimum fields required to make a request.
 --
@@ -91,9 +92,9 @@ data LiveStreamsUpdate' = LiveStreamsUpdate'
 --
 -- * 'lsuPrettyPrint'
 --
--- * 'lsuLiveStream'
---
 -- * 'lsuUserIP'
+--
+-- * 'lsuPayload'
 --
 -- * 'lsuOnBehalfOfContentOwner'
 --
@@ -106,15 +107,15 @@ data LiveStreamsUpdate' = LiveStreamsUpdate'
 -- * 'lsuFields'
 liveStreamsUpdate'
     :: Text -- ^ 'part'
-    -> LiveStream -- ^ 'LiveStream'
+    -> LiveStream -- ^ 'payload'
     -> LiveStreamsUpdate'
-liveStreamsUpdate' pLsuPart_ pLsuLiveStream_ =
+liveStreamsUpdate' pLsuPart_ pLsuPayload_ =
     LiveStreamsUpdate'
     { _lsuQuotaUser = Nothing
     , _lsuPart = pLsuPart_
     , _lsuPrettyPrint = True
-    , _lsuLiveStream = pLsuLiveStream_
     , _lsuUserIP = Nothing
+    , _lsuPayload = pLsuPayload_
     , _lsuOnBehalfOfContentOwner = Nothing
     , _lsuKey = Nothing
     , _lsuOnBehalfOfContentOwnerChannel = Nothing
@@ -146,17 +147,16 @@ lsuPrettyPrint
   = lens _lsuPrettyPrint
       (\ s a -> s{_lsuPrettyPrint = a})
 
--- | Multipart request metadata.
-lsuLiveStream :: Lens' LiveStreamsUpdate' LiveStream
-lsuLiveStream
-  = lens _lsuLiveStream
-      (\ s a -> s{_lsuLiveStream = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 lsuUserIP :: Lens' LiveStreamsUpdate' (Maybe Text)
 lsuUserIP
   = lens _lsuUserIP (\ s a -> s{_lsuUserIP = a})
+
+-- | Multipart request metadata.
+lsuPayload :: Lens' LiveStreamsUpdate' LiveStream
+lsuPayload
+  = lens _lsuPayload (\ s a -> s{_lsuPayload = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -219,9 +219,8 @@ instance GoogleRequest LiveStreamsUpdate' where
         type Rs LiveStreamsUpdate' = LiveStream
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveStreamsUpdate'{..}
-          = go _lsuOnBehalfOfContentOwner
+          = go (Just _lsuPart) _lsuOnBehalfOfContentOwner
               _lsuOnBehalfOfContentOwnerChannel
-              (Just _lsuPart)
               _lsuQuotaUser
               (Just _lsuPrettyPrint)
               _lsuUserIP
@@ -229,7 +228,7 @@ instance GoogleRequest LiveStreamsUpdate' where
               _lsuKey
               _lsuOAuthToken
               (Just AltJSON)
-              _lsuLiveStream
+              _lsuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LiveStreamsUpdateResource)

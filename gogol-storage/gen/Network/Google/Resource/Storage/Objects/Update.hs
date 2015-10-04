@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,9 +38,9 @@ module Network.Google.Resource.Storage.Objects.Update
     , ouIfGenerationMatch
     , ouUserIP
     , ouBucket
+    , ouPayload
     , ouKey
     , ouIfMetagenerationNotMatch
-    , ouObject
     , ouObject
     , ouProjection
     , ouOAuthToken
@@ -57,14 +58,14 @@ type ObjectsUpdateResource =
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
-             QueryParam "generation" Word64 :>
-               QueryParam "ifGenerationMatch" Word64 :>
-                 QueryParam "ifGenerationNotMatch" Word64 :>
-                   QueryParam "ifMetagenerationMatch" Word64 :>
-                     QueryParam "ifMetagenerationNotMatch" Word64 :>
-                       QueryParam "projection"
-                         StorageObjectsUpdateProjection
-                         :>
+             QueryParam "ifMetagenerationMatch" Word64 :>
+               QueryParam "ifGenerationNotMatch" Word64 :>
+                 QueryParam "ifGenerationMatch" Word64 :>
+                   QueryParam "ifMetagenerationNotMatch" Word64 :>
+                     QueryParam "projection"
+                       StorageObjectsUpdateProjection
+                       :>
+                       QueryParam "generation" Word64 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -79,23 +80,23 @@ type ObjectsUpdateResource =
          Capture "bucket" Text :>
            "o" :>
              Capture "object" Text :>
-               QueryParam "generation" Word64 :>
-                 QueryParam "ifGenerationMatch" Word64 :>
-                   QueryParam "ifGenerationNotMatch" Word64 :>
-                     QueryParam "ifMetagenerationMatch" Word64 :>
-                       QueryParam "ifMetagenerationNotMatch" Word64 :>
-                         QueryParam "projection"
-                           StorageObjectsUpdateProjection
-                           :>
+               QueryParam "ifMetagenerationMatch" Word64 :>
+                 QueryParam "ifGenerationNotMatch" Word64 :>
+                   QueryParam "ifGenerationMatch" Word64 :>
+                     QueryParam "ifMetagenerationNotMatch" Word64 :>
+                       QueryParam "projection"
+                         StorageObjectsUpdateProjection
+                         :>
+                         QueryParam "generation" Word64 :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "userIp" Text :>
                                  QueryParam "fields" Text :>
                                    QueryParam "key" Key :>
                                      QueryParam "oauth_token" OAuthToken :>
-                                       QueryParam "alt" Media :>
+                                       QueryParam "alt" AltMedia :>
                                          ReqBody '[JSON] Object :>
-                                           Put '[OctetStream] Stream
+                                           Put '[OctetStream] Body
 
 -- | Updates a data blob\'s associated metadata.
 --
@@ -108,15 +109,15 @@ data ObjectsUpdate' = ObjectsUpdate'
     , _ouIfGenerationMatch        :: !(Maybe Word64)
     , _ouUserIP                   :: !(Maybe Text)
     , _ouBucket                   :: !Text
+    , _ouPayload                  :: !Object
     , _ouKey                      :: !(Maybe Key)
     , _ouIfMetagenerationNotMatch :: !(Maybe Word64)
     , _ouObject                   :: !Text
-    , _ouObject                   :: !Object
     , _ouProjection               :: !(Maybe StorageObjectsUpdateProjection)
     , _ouOAuthToken               :: !(Maybe OAuthToken)
     , _ouGeneration               :: !(Maybe Word64)
     , _ouFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsUpdate'' with the minimum fields required to make a request.
 --
@@ -136,11 +137,11 @@ data ObjectsUpdate' = ObjectsUpdate'
 --
 -- * 'ouBucket'
 --
+-- * 'ouPayload'
+--
 -- * 'ouKey'
 --
 -- * 'ouIfMetagenerationNotMatch'
---
--- * 'ouObject'
 --
 -- * 'ouObject'
 --
@@ -153,10 +154,10 @@ data ObjectsUpdate' = ObjectsUpdate'
 -- * 'ouFields'
 objectsUpdate'
     :: Text -- ^ 'bucket'
+    -> Object -- ^ 'payload'
     -> Text -- ^ 'object'
-    -> Object -- ^ 'Object'
     -> ObjectsUpdate'
-objectsUpdate' pOuBucket_ pOuObject_ pOuObject_ =
+objectsUpdate' pOuBucket_ pOuPayload_ pOuObject_ =
     ObjectsUpdate'
     { _ouQuotaUser = Nothing
     , _ouIfMetagenerationMatch = Nothing
@@ -165,9 +166,9 @@ objectsUpdate' pOuBucket_ pOuObject_ pOuObject_ =
     , _ouIfGenerationMatch = Nothing
     , _ouUserIP = Nothing
     , _ouBucket = pOuBucket_
+    , _ouPayload = pOuPayload_
     , _ouKey = Nothing
     , _ouIfMetagenerationNotMatch = Nothing
-    , _ouObject = pOuObject_
     , _ouObject = pOuObject_
     , _ouProjection = Nothing
     , _ouOAuthToken = Nothing
@@ -218,6 +219,11 @@ ouUserIP = lens _ouUserIP (\ s a -> s{_ouUserIP = a})
 ouBucket :: Lens' ObjectsUpdate' Text
 ouBucket = lens _ouBucket (\ s a -> s{_ouBucket = a})
 
+-- | Multipart request metadata.
+ouPayload :: Lens' ObjectsUpdate' Object
+ouPayload
+  = lens _ouPayload (\ s a -> s{_ouPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -233,10 +239,6 @@ ouIfMetagenerationNotMatch
 
 -- | Name of the object.
 ouObject :: Lens' ObjectsUpdate' Text
-ouObject = lens _ouObject (\ s a -> s{_ouObject = a})
-
--- | Multipart request metadata.
-ouObject :: Lens' ObjectsUpdate' Object
 ouObject = lens _ouObject (\ s a -> s{_ouObject = a})
 
 -- | Set of properties to return. Defaults to full.
@@ -267,13 +269,12 @@ instance GoogleRequest ObjectsUpdate' where
         type Rs ObjectsUpdate' = Object
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsUpdate'{..}
-          = go _ouGeneration _ouIfGenerationMatch
+          = go _ouBucket _ouObject _ouIfMetagenerationMatch
               _ouIfGenerationNotMatch
-              _ouIfMetagenerationMatch
+              _ouIfGenerationMatch
               _ouIfMetagenerationNotMatch
               _ouProjection
-              _ouBucket
-              _ouObject
+              _ouGeneration
               _ouQuotaUser
               (Just _ouPrettyPrint)
               _ouUserIP
@@ -281,33 +282,33 @@ instance GoogleRequest ObjectsUpdate' where
               _ouKey
               _ouOAuthToken
               (Just AltJSON)
-              _ouObject
+              _ouPayload
           where go :<|> _
                   = clientWithRoute
                       (Proxy :: Proxy ObjectsUpdateResource)
                       r
                       u
 
-instance GoogleRequest ObjectsUpdate' where
-        type Rs (Download ObjectsUpdate') = Stream
+instance GoogleRequest (Download ObjectsUpdate')
+         where
+        type Rs (Download ObjectsUpdate') = Body
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsUpdate'{..}
-          = go _ouGeneration _ouIfGenerationMatch
+        requestWithRoute r u (Download ObjectsUpdate'{..})
+          = go _ouBucket _ouObject _ouIfMetagenerationMatch
               _ouIfGenerationNotMatch
-              _ouIfMetagenerationMatch
+              _ouIfGenerationMatch
               _ouIfMetagenerationNotMatch
               _ouProjection
-              _ouBucket
-              _ouObject
+              _ouGeneration
               _ouQuotaUser
               (Just _ouPrettyPrint)
               _ouUserIP
               _ouFields
               _ouKey
               _ouOAuthToken
-              (Just Media)
-              _ouObject
-          where go :<|> _
+              (Just AltMedia)
+              _ouPayload
+          where _ :<|> go
                   = clientWithRoute
                       (Proxy :: Proxy ObjectsUpdateResource)
                       r

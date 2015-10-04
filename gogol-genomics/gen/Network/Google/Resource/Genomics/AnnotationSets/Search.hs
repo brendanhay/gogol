@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.Genomics.AnnotationSets.Search
     , assQuotaUser
     , assPrettyPrint
     , assUserIP
-    , assSearchAnnotationSetsRequest
+    , assPayload
     , assKey
     , assOAuthToken
     , assFields
@@ -65,14 +66,14 @@ type AnnotationSetsSearchResource =
 --
 -- /See:/ 'annotationSetsSearch'' smart constructor.
 data AnnotationSetsSearch' = AnnotationSetsSearch'
-    { _assQuotaUser                   :: !(Maybe Text)
-    , _assPrettyPrint                 :: !Bool
-    , _assUserIP                      :: !(Maybe Text)
-    , _assSearchAnnotationSetsRequest :: !SearchAnnotationSetsRequest
-    , _assKey                         :: !(Maybe Key)
-    , _assOAuthToken                  :: !(Maybe OAuthToken)
-    , _assFields                      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _assQuotaUser   :: !(Maybe Text)
+    , _assPrettyPrint :: !Bool
+    , _assUserIP      :: !(Maybe Text)
+    , _assPayload     :: !SearchAnnotationSetsRequest
+    , _assKey         :: !(Maybe Key)
+    , _assOAuthToken  :: !(Maybe OAuthToken)
+    , _assFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSetsSearch'' with the minimum fields required to make a request.
 --
@@ -84,7 +85,7 @@ data AnnotationSetsSearch' = AnnotationSetsSearch'
 --
 -- * 'assUserIP'
 --
--- * 'assSearchAnnotationSetsRequest'
+-- * 'assPayload'
 --
 -- * 'assKey'
 --
@@ -92,14 +93,14 @@ data AnnotationSetsSearch' = AnnotationSetsSearch'
 --
 -- * 'assFields'
 annotationSetsSearch'
-    :: SearchAnnotationSetsRequest -- ^ 'SearchAnnotationSetsRequest'
+    :: SearchAnnotationSetsRequest -- ^ 'payload'
     -> AnnotationSetsSearch'
-annotationSetsSearch' pAssSearchAnnotationSetsRequest_ =
+annotationSetsSearch' pAssPayload_ =
     AnnotationSetsSearch'
     { _assQuotaUser = Nothing
     , _assPrettyPrint = True
     , _assUserIP = Nothing
-    , _assSearchAnnotationSetsRequest = pAssSearchAnnotationSetsRequest_
+    , _assPayload = pAssPayload_
     , _assKey = Nothing
     , _assOAuthToken = Nothing
     , _assFields = Nothing
@@ -125,10 +126,9 @@ assUserIP
   = lens _assUserIP (\ s a -> s{_assUserIP = a})
 
 -- | Multipart request metadata.
-assSearchAnnotationSetsRequest :: Lens' AnnotationSetsSearch' SearchAnnotationSetsRequest
-assSearchAnnotationSetsRequest
-  = lens _assSearchAnnotationSetsRequest
-      (\ s a -> s{_assSearchAnnotationSetsRequest = a})
+assPayload :: Lens' AnnotationSetsSearch' SearchAnnotationSetsRequest
+assPayload
+  = lens _assPayload (\ s a -> s{_assPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +161,7 @@ instance GoogleRequest AnnotationSetsSearch' where
               _assKey
               _assOAuthToken
               (Just AltJSON)
-              _assSearchAnnotationSetsRequest
+              _assPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationSetsSearchResource)

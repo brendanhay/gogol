@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -59,19 +60,19 @@ type RasterCollectionsRastersListResource =
      "rasterCollections" :>
        Capture "id" Text :>
          "rasters" :>
-           QueryParam "bbox" Text :>
-             QueryParam "createdAfter" DateTime' :>
-               QueryParam "createdBefore" DateTime' :>
-                 QueryParam "creatorEmail" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "modifiedAfter" DateTime' :>
-                       QueryParam "modifiedBefore" DateTime' :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "role"
-                             MapsEngineRasterCollectionsRastersListRole
-                             :>
-                             QueryParam "search" Text :>
-                               QueryParam "tags" Text :>
+           QueryParam "createdAfter" DateTime' :>
+             QueryParam "creatorEmail" Text :>
+               QueryParam "role"
+                 MapsEngineRasterCollectionsRastersListRole
+                 :>
+                 QueryParam "bbox" Text :>
+                   QueryParam "modifiedAfter" DateTime' :>
+                     QueryParam "modifiedBefore" DateTime' :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "search" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "tags" Text :>
+                               QueryParam "createdBefore" DateTime' :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
@@ -105,7 +106,7 @@ data RasterCollectionsRastersList' = RasterCollectionsRastersList'
     , _rcrlTags           :: !(Maybe Text)
     , _rcrlFields         :: !(Maybe Text)
     , _rcrlCreatedBefore  :: !(Maybe DateTime')
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsRastersList'' with the minimum fields required to make a request.
 --
@@ -299,16 +300,16 @@ instance GoogleRequest RasterCollectionsRastersList'
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u
           RasterCollectionsRastersList'{..}
-          = go _rcrlBbox _rcrlCreatedAfter _rcrlCreatedBefore
-              _rcrlCreatorEmail
-              _rcrlMaxResults
+          = go _rcrlId _rcrlCreatedAfter _rcrlCreatorEmail
+              _rcrlRole
+              _rcrlBbox
               _rcrlModifiedAfter
               _rcrlModifiedBefore
               _rcrlPageToken
-              _rcrlRole
               _rcrlSearch
+              _rcrlMaxResults
               _rcrlTags
-              _rcrlId
+              _rcrlCreatedBefore
               _rcrlQuotaUser
               (Just _rcrlPrettyPrint)
               _rcrlUserIP

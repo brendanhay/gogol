@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Update
     , lbuPart
     , lbuPrettyPrint
     , lbuUserIP
-    , lbuLiveBroadcast
+    , lbuPayload
     , lbuOnBehalfOfContentOwner
     , lbuKey
     , lbuOnBehalfOfContentOwnerChannel
@@ -50,9 +51,9 @@ import           Network.Google.YouTube.Types
 -- 'LiveBroadcastsUpdate'' request conforms to.
 type LiveBroadcastsUpdateResource =
      "liveBroadcasts" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "onBehalfOfContentOwnerChannel" Text :>
-           QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
+           QueryParam "onBehalfOfContentOwnerChannel" Text :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -72,13 +73,13 @@ data LiveBroadcastsUpdate' = LiveBroadcastsUpdate'
     , _lbuPart                          :: !Text
     , _lbuPrettyPrint                   :: !Bool
     , _lbuUserIP                        :: !(Maybe Text)
-    , _lbuLiveBroadcast                 :: !LiveBroadcast
+    , _lbuPayload                       :: !LiveBroadcast
     , _lbuOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbuKey                           :: !(Maybe Key)
     , _lbuOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbuOAuthToken                    :: !(Maybe OAuthToken)
     , _lbuFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsUpdate'' with the minimum fields required to make a request.
 --
@@ -92,7 +93,7 @@ data LiveBroadcastsUpdate' = LiveBroadcastsUpdate'
 --
 -- * 'lbuUserIP'
 --
--- * 'lbuLiveBroadcast'
+-- * 'lbuPayload'
 --
 -- * 'lbuOnBehalfOfContentOwner'
 --
@@ -105,15 +106,15 @@ data LiveBroadcastsUpdate' = LiveBroadcastsUpdate'
 -- * 'lbuFields'
 liveBroadcastsUpdate'
     :: Text -- ^ 'part'
-    -> LiveBroadcast -- ^ 'LiveBroadcast'
+    -> LiveBroadcast -- ^ 'payload'
     -> LiveBroadcastsUpdate'
-liveBroadcastsUpdate' pLbuPart_ pLbuLiveBroadcast_ =
+liveBroadcastsUpdate' pLbuPart_ pLbuPayload_ =
     LiveBroadcastsUpdate'
     { _lbuQuotaUser = Nothing
     , _lbuPart = pLbuPart_
     , _lbuPrettyPrint = True
     , _lbuUserIP = Nothing
-    , _lbuLiveBroadcast = pLbuLiveBroadcast_
+    , _lbuPayload = pLbuPayload_
     , _lbuOnBehalfOfContentOwner = Nothing
     , _lbuKey = Nothing
     , _lbuOnBehalfOfContentOwnerChannel = Nothing
@@ -157,10 +158,9 @@ lbuUserIP
   = lens _lbuUserIP (\ s a -> s{_lbuUserIP = a})
 
 -- | Multipart request metadata.
-lbuLiveBroadcast :: Lens' LiveBroadcastsUpdate' LiveBroadcast
-lbuLiveBroadcast
-  = lens _lbuLiveBroadcast
-      (\ s a -> s{_lbuLiveBroadcast = a})
+lbuPayload :: Lens' LiveBroadcastsUpdate' LiveBroadcast
+lbuPayload
+  = lens _lbuPayload (\ s a -> s{_lbuPayload = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -223,9 +223,8 @@ instance GoogleRequest LiveBroadcastsUpdate' where
         type Rs LiveBroadcastsUpdate' = LiveBroadcast
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveBroadcastsUpdate'{..}
-          = go _lbuOnBehalfOfContentOwner
+          = go (Just _lbuPart) _lbuOnBehalfOfContentOwner
               _lbuOnBehalfOfContentOwnerChannel
-              (Just _lbuPart)
               _lbuQuotaUser
               (Just _lbuPrettyPrint)
               _lbuUserIP
@@ -233,7 +232,7 @@ instance GoogleRequest LiveBroadcastsUpdate' where
               _lbuKey
               _lbuOAuthToken
               (Just AltJSON)
-              _lbuLiveBroadcast
+              _lbuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LiveBroadcastsUpdateResource)

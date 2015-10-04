@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,8 +53,8 @@ type AddressesAggregatedListResource =
        "aggregated" :>
          "addresses" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data AddressesAggregatedList' = AddressesAggregatedList'
     , _aalOAuthToken  :: !(Maybe OAuthToken)
     , _aalMaxResults  :: !Word32
     , _aalFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddressesAggregatedList'' with the minimum fields required to make a request.
 --
@@ -197,8 +198,8 @@ instance GoogleRequest AddressesAggregatedList' where
              AddressAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u AddressesAggregatedList'{..}
-          = go _aalFilter (Just _aalMaxResults) _aalPageToken
-              _aalProject
+          = go _aalProject _aalFilter _aalPageToken
+              (Just _aalMaxResults)
               _aalQuotaUser
               (Just _aalPrettyPrint)
               _aalUserIP

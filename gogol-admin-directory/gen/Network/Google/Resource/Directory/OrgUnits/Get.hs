@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,8 +49,8 @@ import           Network.Google.Prelude
 type OrgUnitsGetResource =
      "customer" :>
        Capture "customerId" Text :>
-         "orgunits{" :>
-           "orgUnitPath*}" :>
+         "orgunits" :>
+           Captures "orgUnitPath" Text :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -65,12 +66,12 @@ data OrgUnitsGet' = OrgUnitsGet'
     { _ougQuotaUser   :: !(Maybe Text)
     , _ougPrettyPrint :: !Bool
     , _ougUserIP      :: !(Maybe Text)
-    , _ougOrgUnitPath :: !Text
+    , _ougOrgUnitPath :: ![Text]
     , _ougCustomerId  :: !Text
     , _ougKey         :: !(Maybe Key)
     , _ougOAuthToken  :: !(Maybe OAuthToken)
     , _ougFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrgUnitsGet'' with the minimum fields required to make a request.
 --
@@ -92,7 +93,7 @@ data OrgUnitsGet' = OrgUnitsGet'
 --
 -- * 'ougFields'
 orgUnitsGet'
-    :: Text -- ^ 'orgUnitPath'
+    :: [Text] -- ^ 'orgUnitPath'
     -> Text -- ^ 'customerId'
     -> OrgUnitsGet'
 orgUnitsGet' pOugOrgUnitPath_ pOugCustomerId_ =
@@ -127,10 +128,11 @@ ougUserIP
   = lens _ougUserIP (\ s a -> s{_ougUserIP = a})
 
 -- | Full path of the organization unit or its Id
-ougOrgUnitPath :: Lens' OrgUnitsGet' Text
+ougOrgUnitPath :: Lens' OrgUnitsGet' [Text]
 ougOrgUnitPath
   = lens _ougOrgUnitPath
       (\ s a -> s{_ougOrgUnitPath = a})
+      . _Coerce
 
 -- | Immutable id of the Google Apps account
 ougCustomerId :: Lens' OrgUnitsGet' Text

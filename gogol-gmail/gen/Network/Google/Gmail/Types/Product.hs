@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 data ModifyThreadRequest = ModifyThreadRequest
     { _mtrRemoveLabelIds :: !(Maybe [Text])
     , _mtrAddLabelIds    :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ModifyThreadRequest' with the minimum fields required to make a request.
 --
@@ -82,7 +82,7 @@ data History = History
     , _hLabelsAdded     :: !(Maybe [HistoryLabelAdded])
     , _hId              :: !(Maybe Word64)
     , _hMessages        :: !(Maybe [Message])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'History' with the minimum fields required to make a request.
 --
@@ -183,7 +183,7 @@ instance ToJSON History where
 data ModifyMessageRequest = ModifyMessageRequest
     { _mmrRemoveLabelIds :: !(Maybe [Text])
     , _mmrAddLabelIds    :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ModifyMessageRequest' with the minimum fields required to make a request.
 --
@@ -237,7 +237,7 @@ data ListHistoryResponse = ListHistoryResponse
     { _lhrNextPageToken :: !(Maybe Text)
     , _lhrHistory       :: !(Maybe [History])
     , _lhrHistoryId     :: !(Maybe Word64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListHistoryResponse' with the minimum fields required to make a request.
 --
@@ -298,7 +298,7 @@ instance ToJSON ListHistoryResponse where
 data MessagePartHeader = MessagePartHeader
     { _mphValue :: !(Maybe Text)
     , _mphName  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MessagePartHeader' with the minimum fields required to make a request.
 --
@@ -346,7 +346,7 @@ data Profile = Profile
     , _pThreadsTotal  :: !(Maybe Int32)
     , _pHistoryId     :: !(Maybe Word64)
     , _pEmailAddress  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Profile' with the minimum fields required to make a request.
 --
@@ -414,7 +414,7 @@ instance ToJSON Profile where
 -- /See:/ 'historyMessageDeleted' smart constructor.
 newtype HistoryMessageDeleted = HistoryMessageDeleted
     { _hmdMessage :: Maybe Message
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HistoryMessageDeleted' with the minimum fields required to make a request.
 --
@@ -447,7 +447,7 @@ data ListThreadsResponse = ListThreadsResponse
     { _ltrNextPageToken      :: !(Maybe Text)
     , _ltrResultSizeEstimate :: !(Maybe Word32)
     , _ltrThreads            :: !(Maybe [Thread])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListThreadsResponse' with the minimum fields required to make a request.
 --
@@ -508,7 +508,7 @@ instance ToJSON ListThreadsResponse where
 data HistoryLabelAdded = HistoryLabelAdded
     { _hlaLabelIds :: !(Maybe [Text])
     , _hlaMessage  :: !(Maybe Message)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HistoryLabelAdded' with the minimum fields required to make a request.
 --
@@ -554,7 +554,7 @@ instance ToJSON HistoryLabelAdded where
 -- /See:/ 'listLabelsResponse' smart constructor.
 newtype ListLabelsResponse = ListLabelsResponse
     { _llrLabels :: Maybe [Label]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListLabelsResponse' with the minimum fields required to make a request.
 --
@@ -595,7 +595,7 @@ data MessagePart = MessagePart
     , _mpHeaders  :: !(Maybe [MessagePartHeader])
     , _mpPartId   :: !(Maybe Text)
     , _mpFilename :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MessagePart' with the minimum fields required to make a request.
 --
@@ -690,7 +690,7 @@ data MessagePartBody = MessagePartBody
     { _mpbSize         :: !(Maybe Int32)
     , _mpbData         :: !(Maybe Word8)
     , _mpbAttachmentId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MessagePartBody' with the minimum fields required to make a request.
 --
@@ -751,7 +751,7 @@ data ListDraftsResponse = ListDraftsResponse
     { _ldrNextPageToken      :: !(Maybe Text)
     , _ldrResultSizeEstimate :: !(Maybe Word32)
     , _ldrDrafts             :: !(Maybe [Draft])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListDraftsResponse' with the minimum fields required to make a request.
 --
@@ -813,7 +813,7 @@ instance ToJSON ListDraftsResponse where
 data WatchResponse = WatchResponse
     { _wrExpiration :: !(Maybe Int64)
     , _wrHistoryId  :: !(Maybe Word64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WatchResponse' with the minimum fields required to make a request.
 --
@@ -861,7 +861,7 @@ instance ToJSON WatchResponse where
 data Draft = Draft
     { _dId      :: !(Maybe Text)
     , _dMessage :: !(Maybe Message)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Draft' with the minimum fields required to make a request.
 --
@@ -901,10 +901,10 @@ instance ToJSON Draft where
 --
 -- /See:/ 'watchRequest' smart constructor.
 data WatchRequest = WatchRequest
-    { _wrLabelFilterAction :: !(Maybe WatchRequestLabelFilterAction)
+    { _wrLabelFilterAction :: !(Maybe LabelFilterAction)
     , _wrTopicName         :: !(Maybe Text)
     , _wrLabelIds          :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WatchRequest' with the minimum fields required to make a request.
 --
@@ -925,7 +925,7 @@ watchRequest =
     }
 
 -- | Filtering behavior of labelIds list specified.
-wrLabelFilterAction :: Lens' WatchRequest (Maybe WatchRequestLabelFilterAction)
+wrLabelFilterAction :: Lens' WatchRequest (Maybe LabelFilterAction)
 wrLabelFilterAction
   = lens _wrLabelFilterAction
       (\ s a -> s{_wrLabelFilterAction = a})
@@ -973,13 +973,13 @@ data Message = Message
     { _mRaw          :: !(Maybe Word8)
     , _mSnippet      :: !(Maybe Text)
     , _mSizeEstimate :: !(Maybe Int32)
-    , _mPayLoad      :: !(Maybe MessagePart)
+    , _mPayload      :: !(Maybe MessagePart)
     , _mHistoryId    :: !(Maybe Word64)
     , _mId           :: !(Maybe Text)
     , _mLabelIds     :: !(Maybe [Text])
     , _mThreadId     :: !(Maybe Text)
     , _mInternalDate :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Message' with the minimum fields required to make a request.
 --
@@ -991,7 +991,7 @@ data Message = Message
 --
 -- * 'mSizeEstimate'
 --
--- * 'mPayLoad'
+-- * 'mPayload'
 --
 -- * 'mHistoryId'
 --
@@ -1009,7 +1009,7 @@ message =
     { _mRaw = Nothing
     , _mSnippet = Nothing
     , _mSizeEstimate = Nothing
-    , _mPayLoad = Nothing
+    , _mPayload = Nothing
     , _mHistoryId = Nothing
     , _mId = Nothing
     , _mLabelIds = Nothing
@@ -1034,8 +1034,8 @@ mSizeEstimate
       (\ s a -> s{_mSizeEstimate = a})
 
 -- | The parsed email structure in the message parts.
-mPayLoad :: Lens' Message (Maybe MessagePart)
-mPayLoad = lens _mPayLoad (\ s a -> s{_mPayLoad = a})
+mPayload :: Lens' Message (Maybe MessagePart)
+mPayload = lens _mPayload (\ s a -> s{_mPayload = a})
 
 -- | The ID of the last history record that modified this message.
 mHistoryId :: Lens' Message (Maybe Word64)
@@ -1093,7 +1093,7 @@ instance ToJSON Message where
               (catMaybes
                  [("raw" .=) <$> _mRaw, ("snippet" .=) <$> _mSnippet,
                   ("sizeEstimate" .=) <$> _mSizeEstimate,
-                  ("payload" .=) <$> _mPayLoad,
+                  ("payload" .=) <$> _mPayload,
                   ("historyId" .=) <$> _mHistoryId, ("id" .=) <$> _mId,
                   ("labelIds" .=) <$> _mLabelIds,
                   ("threadId" .=) <$> _mThreadId,
@@ -1107,7 +1107,7 @@ data Thread = Thread
     , _tHistoryId :: !(Maybe Word64)
     , _tId        :: !(Maybe Text)
     , _tMessages  :: !(Maybe [Message])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Thread' with the minimum fields required to make a request.
 --
@@ -1173,15 +1173,15 @@ instance ToJSON Thread where
 -- /See:/ 'label' smart constructor.
 data Label = Label
     { _lThreadsUnread         :: !(Maybe Int32)
-    , _lMessageListVisibility :: !(Maybe LabelMessageListVisibility)
+    , _lMessageListVisibility :: !(Maybe MessageListVisibility)
     , _lMessagesTotal         :: !(Maybe Int32)
     , _lMessagesUnread        :: !(Maybe Int32)
     , _lName                  :: !(Maybe Text)
     , _lThreadsTotal          :: !(Maybe Int32)
-    , _lLabelListVisibility   :: !(Maybe LabelLabelListVisibility)
+    , _lLabelListVisibility   :: !(Maybe LabelListVisibility)
     , _lId                    :: !(Maybe Text)
-    , _lType                  :: !(Maybe LabelType)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _lType                  :: !(Maybe Type)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Label' with the minimum fields required to make a request.
 --
@@ -1227,7 +1227,7 @@ lThreadsUnread
 
 -- | The visibility of the label in the message list in the Gmail web
 -- interface.
-lMessageListVisibility :: Lens' Label (Maybe LabelMessageListVisibility)
+lMessageListVisibility :: Lens' Label (Maybe MessageListVisibility)
 lMessageListVisibility
   = lens _lMessageListVisibility
       (\ s a -> s{_lMessageListVisibility = a})
@@ -1256,7 +1256,7 @@ lThreadsTotal
 
 -- | The visibility of the label in the label list in the Gmail web
 -- interface.
-lLabelListVisibility :: Lens' Label (Maybe LabelLabelListVisibility)
+lLabelListVisibility :: Lens' Label (Maybe LabelListVisibility)
 lLabelListVisibility
   = lens _lLabelListVisibility
       (\ s a -> s{_lLabelListVisibility = a})
@@ -1273,7 +1273,7 @@ lId = lens _lId (\ s a -> s{_lId = a})
 -- is not guaranteed. For example, users can apply and remove the INBOX and
 -- UNREAD labels from messages and threads, but cannot apply or remove the
 -- DRAFTS or SENT labels from messages or threads.
-lType :: Lens' Label (Maybe LabelType)
+lType :: Lens' Label (Maybe Type)
 lType = lens _lType (\ s a -> s{_lType = a})
 
 instance FromJSON Label where
@@ -1310,7 +1310,7 @@ instance ToJSON Label where
 data HistoryLabelRemoved = HistoryLabelRemoved
     { _hlrLabelIds :: !(Maybe [Text])
     , _hlrMessage  :: !(Maybe Message)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HistoryLabelRemoved' with the minimum fields required to make a request.
 --
@@ -1356,7 +1356,7 @@ instance ToJSON HistoryLabelRemoved where
 -- /See:/ 'historyMessageAdded' smart constructor.
 newtype HistoryMessageAdded = HistoryMessageAdded
     { _hmaMessage :: Maybe Message
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HistoryMessageAdded' with the minimum fields required to make a request.
 --
@@ -1389,7 +1389,7 @@ data ListMessagesResponse = ListMessagesResponse
     { _lmrNextPageToken      :: !(Maybe Text)
     , _lmrResultSizeEstimate :: !(Maybe Word32)
     , _lmrMessages           :: !(Maybe [Message])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListMessagesResponse' with the minimum fields required to make a request.
 --

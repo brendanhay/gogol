@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,14 +59,14 @@ type AppsModulesListResource =
          Capture "appsId" Text :>
            "modules" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "bearer_token" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParam "pageSize" Int32 :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "upload_protocol" Text :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "pageSize" Int32 :>
+                             QueryParam "callback" Text :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
@@ -93,7 +94,7 @@ data AppsModulesList' = AppsModulesList'
     , _amlPageSize       :: !(Maybe Int32)
     , _amlFields         :: !(Maybe Text)
     , _amlCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsModulesList'' with the minimum fields required to make a request.
 --
@@ -241,14 +242,14 @@ instance GoogleRequest AppsModulesList' where
         type Rs AppsModulesList' = ListModulesResponse
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsModulesList'{..}
-          = go _amlXgafv _amlAccessToken _amlBearerToken
-              _amlCallback
-              _amlPageSize
-              _amlPageToken
+          = go _amlAppsId _amlXgafv _amlUploadProtocol
               (Just _amlPp)
+              _amlAccessToken
               _amlUploadType
-              _amlUploadProtocol
-              _amlAppsId
+              _amlBearerToken
+              _amlPageToken
+              _amlPageSize
+              _amlCallback
               _amlQuotaUser
               (Just _amlPrettyPrint)
               _amlFields

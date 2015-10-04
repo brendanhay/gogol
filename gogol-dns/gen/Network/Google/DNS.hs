@@ -81,9 +81,6 @@ module Network.Google.DNS
     , cDeletions
     , cId
 
-    -- ** DNSChangesListSortBy
-    , DNSChangesListSortBy (..)
-
     -- ** ResourceRecordSetsListResponse
     , ResourceRecordSetsListResponse
     , resourceRecordSetsListResponse
@@ -129,6 +126,9 @@ module Network.Google.DNS
     , mzlrNextPageToken
     , mzlrKind
     , mzlrManagedZones
+
+    -- ** SortBy
+    , SortBy (..)
     ) where
 
 import           Network.Google.DNS.Types

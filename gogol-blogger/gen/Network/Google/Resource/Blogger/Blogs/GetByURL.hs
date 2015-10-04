@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,8 +49,8 @@ import           Network.Google.Prelude
 type BlogsGetByURLResource =
      "blogs" :>
        "byurl" :>
-         QueryParam "view" BloggerBlogsGetByURLView :>
-           QueryParam "url" Text :>
+         QueryParam "url" Text :>
+           QueryParam "view" BloggerBlogsGetByURLView :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -70,7 +71,7 @@ data BlogsGetByURL' = BlogsGetByURL'
     , _bgbuView        :: !(Maybe BloggerBlogsGetByURLView)
     , _bgbuOAuthToken  :: !(Maybe OAuthToken)
     , _bgbuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BlogsGetByURL'' with the minimum fields required to make a request.
 --
@@ -160,7 +161,7 @@ instance GoogleRequest BlogsGetByURL' where
         type Rs BlogsGetByURL' = Blog
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u BlogsGetByURL'{..}
-          = go _bgbuView (Just _bgbuURL) _bgbuQuotaUser
+          = go (Just _bgbuURL) _bgbuView _bgbuQuotaUser
               (Just _bgbuPrettyPrint)
               _bgbuUserIP
               _bgbuFields

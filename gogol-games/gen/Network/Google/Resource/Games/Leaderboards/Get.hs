@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -69,7 +70,7 @@ data LeaderboardsGet' = LeaderboardsGet'
     , _lgLanguage      :: !(Maybe Text)
     , _lgOAuthToken    :: !(Maybe OAuthToken)
     , _lgFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardsGet'' with the minimum fields required to make a request.
 --
@@ -157,7 +158,7 @@ instance GoogleRequest LeaderboardsGet' where
         type Rs LeaderboardsGet' = Leaderboard
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u LeaderboardsGet'{..}
-          = go _lgLanguage _lgLeaderboardId _lgQuotaUser
+          = go _lgLeaderboardId _lgLanguage _lgQuotaUser
               (Just _lgPrettyPrint)
               _lgUserIP
               _lgFields

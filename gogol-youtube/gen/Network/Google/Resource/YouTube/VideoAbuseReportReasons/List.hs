@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,8 +49,8 @@ import           Network.Google.YouTube.Types
 -- 'VideoAbuseReportReasonsList'' request conforms to.
 type VideoAbuseReportReasonsListResource =
      "videoAbuseReportReasons" :>
-       QueryParam "hl" Text :>
-         QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "hl" Text :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -72,7 +73,7 @@ data VideoAbuseReportReasonsList' = VideoAbuseReportReasonsList'
     , _varrlKey         :: !(Maybe Key)
     , _varrlOAuthToken  :: !(Maybe OAuthToken)
     , _varrlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoAbuseReportReasonsList'' with the minimum fields required to make a request.
 --
@@ -167,7 +168,7 @@ instance GoogleRequest VideoAbuseReportReasonsList'
              VideoAbuseReportReasonListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u VideoAbuseReportReasonsList'{..}
-          = go (Just _varrlHl) (Just _varrlPart)
+          = go (Just _varrlPart) (Just _varrlHl)
               _varrlQuotaUser
               (Just _varrlPrettyPrint)
               _varrlUserIP

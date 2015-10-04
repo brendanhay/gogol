@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,10 +51,10 @@ import           Network.Google.Prelude
 type MyConfigReleaseDownloadAccessResource =
      "myconfig" :>
        "releaseDownloadAccess" :>
-         QueryParam "locale" Text :>
-           QueryParam "source" Text :>
-             QueryParams "volumeIds" Text :>
-               QueryParam "cpksver" Text :>
+         QueryParams "volumeIds" Text :>
+           QueryParam "cpksver" Text :>
+             QueryParam "locale" Text :>
+               QueryParam "source" Text :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -72,12 +73,12 @@ data MyConfigReleaseDownloadAccess' = MyConfigReleaseDownloadAccess'
     , _mcrdaCpksver     :: !Text
     , _mcrdaUserIP      :: !(Maybe Text)
     , _mcrdaLocale      :: !(Maybe Text)
-    , _mcrdaVolumeIds   :: !Text
+    , _mcrdaVolumeIds   :: ![Text]
     , _mcrdaKey         :: !(Maybe Key)
     , _mcrdaSource      :: !(Maybe Text)
     , _mcrdaOAuthToken  :: !(Maybe OAuthToken)
     , _mcrdaFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyConfigReleaseDownloadAccess'' with the minimum fields required to make a request.
 --
@@ -104,7 +105,7 @@ data MyConfigReleaseDownloadAccess' = MyConfigReleaseDownloadAccess'
 -- * 'mcrdaFields'
 myConfigReleaseDownloadAccess'
     :: Text -- ^ 'cpksver'
-    -> Text -- ^ 'volumeIds'
+    -> [Text] -- ^ 'volumeIds'
     -> MyConfigReleaseDownloadAccess'
 myConfigReleaseDownloadAccess' pMcrdaCpksver_ pMcrdaVolumeIds_ =
     MyConfigReleaseDownloadAccess'
@@ -151,10 +152,11 @@ mcrdaLocale
   = lens _mcrdaLocale (\ s a -> s{_mcrdaLocale = a})
 
 -- | The volume(s) to release restrictions for.
-mcrdaVolumeIds :: Lens' MyConfigReleaseDownloadAccess' Text
+mcrdaVolumeIds :: Lens' MyConfigReleaseDownloadAccess' [Text]
 mcrdaVolumeIds
   = lens _mcrdaVolumeIds
       (\ s a -> s{_mcrdaVolumeIds = a})
+      . _Coerce
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -190,8 +192,10 @@ instance GoogleRequest MyConfigReleaseDownloadAccess'
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
           MyConfigReleaseDownloadAccess'{..}
-          = go _mcrdaLocale _mcrdaSource (Just _mcrdaVolumeIds)
+          = go (_mcrdaVolumeIds ^. _Default)
               (Just _mcrdaCpksver)
+              _mcrdaLocale
+              _mcrdaSource
               _mcrdaQuotaUser
               (Just _mcrdaPrettyPrint)
               _mcrdaUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,14 +56,14 @@ type ReportsFilesListResource =
          "reports" :>
            Capture "reportId" Int64 :>
              "files" :>
-               QueryParam "maxResults" Int32 :>
+               QueryParam "sortOrder"
+                 DfareportingReportsFilesListSortOrder
+                 :>
                  QueryParam "pageToken" Text :>
                    QueryParam "sortField"
                      DfareportingReportsFilesListSortField
                      :>
-                     QueryParam "sortOrder"
-                       DfareportingReportsFilesListSortOrder
-                       :>
+                     QueryParam "maxResults" Int32 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -88,7 +89,7 @@ data ReportsFilesList' = ReportsFilesList'
     , _rflOAuthToken  :: !(Maybe OAuthToken)
     , _rflMaxResults  :: !(Maybe Int32)
     , _rflFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsFilesList'' with the minimum fields required to make a request.
 --
@@ -212,11 +213,10 @@ instance GoogleRequest ReportsFilesList' where
         type Rs ReportsFilesList' = FileList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsFilesList'{..}
-          = go _rflMaxResults _rflPageToken
+          = go _rflProfileId _rflReportId (Just _rflSortOrder)
+              _rflPageToken
               (Just _rflSortField)
-              (Just _rflSortOrder)
-              _rflProfileId
-              _rflReportId
+              _rflMaxResults
               _rflQuotaUser
               (Just _rflPrettyPrint)
               _rflUserIP

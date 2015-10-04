@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,10 +36,10 @@ module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Patch
     -- * Request Lenses
     , etpQuotaUser
     , etpTrack
-    , etpTrack
     , etpPrettyPrint
     , etpPackageName
     , etpUserIP
+    , etpPayload
     , etpKey
     , etpOAuthToken
     , etpEditId
@@ -55,8 +56,7 @@ type EditsTracksPatchResource =
        "edits" :>
          Capture "editId" Text :>
            "tracks" :>
-             Capture "track" AndroidPublisherEditsTracksPatchTrack
-               :>
+             Capture "track" Track :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -74,16 +74,16 @@ type EditsTracksPatchResource =
 -- /See:/ 'editsTracksPatch'' smart constructor.
 data EditsTracksPatch' = EditsTracksPatch'
     { _etpQuotaUser   :: !(Maybe Text)
-    , _etpTrack       :: !AndroidPublisherEditsTracksPatchTrack
     , _etpTrack       :: !Track
     , _etpPrettyPrint :: !Bool
     , _etpPackageName :: !Text
     , _etpUserIP      :: !(Maybe Text)
+    , _etpPayload     :: !Track
     , _etpKey         :: !(Maybe Key)
     , _etpOAuthToken  :: !(Maybe OAuthToken)
     , _etpEditId      :: !Text
     , _etpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsTracksPatch'' with the minimum fields required to make a request.
 --
@@ -93,13 +93,13 @@ data EditsTracksPatch' = EditsTracksPatch'
 --
 -- * 'etpTrack'
 --
--- * 'etpTrack'
---
 -- * 'etpPrettyPrint'
 --
 -- * 'etpPackageName'
 --
 -- * 'etpUserIP'
+--
+-- * 'etpPayload'
 --
 -- * 'etpKey'
 --
@@ -109,19 +109,19 @@ data EditsTracksPatch' = EditsTracksPatch'
 --
 -- * 'etpFields'
 editsTracksPatch'
-    :: AndroidPublisherEditsTracksPatchTrack -- ^ 'track'
-    -> Track -- ^ 'Track'
+    :: Track -- ^ 'track'
     -> Text -- ^ 'packageName'
+    -> Track -- ^ 'payload'
     -> Text -- ^ 'editId'
     -> EditsTracksPatch'
-editsTracksPatch' pEtpTrack_ pEtpTrack_ pEtpPackageName_ pEtpEditId_ =
+editsTracksPatch' pEtpTrack_ pEtpPackageName_ pEtpPayload_ pEtpEditId_ =
     EditsTracksPatch'
     { _etpQuotaUser = Nothing
-    , _etpTrack = pEtpTrack_
     , _etpTrack = pEtpTrack_
     , _etpPrettyPrint = True
     , _etpPackageName = pEtpPackageName_
     , _etpUserIP = Nothing
+    , _etpPayload = pEtpPayload_
     , _etpKey = Nothing
     , _etpOAuthToken = Nothing
     , _etpEditId = pEtpEditId_
@@ -136,10 +136,6 @@ etpQuotaUser
   = lens _etpQuotaUser (\ s a -> s{_etpQuotaUser = a})
 
 -- | The track type to read or modify.
-etpTrack :: Lens' EditsTracksPatch' AndroidPublisherEditsTracksPatchTrack
-etpTrack = lens _etpTrack (\ s a -> s{_etpTrack = a})
-
--- | Multipart request metadata.
 etpTrack :: Lens' EditsTracksPatch' Track
 etpTrack = lens _etpTrack (\ s a -> s{_etpTrack = a})
 
@@ -161,6 +157,11 @@ etpPackageName
 etpUserIP :: Lens' EditsTracksPatch' (Maybe Text)
 etpUserIP
   = lens _etpUserIP (\ s a -> s{_etpUserIP = a})
+
+-- | Multipart request metadata.
+etpPayload :: Lens' EditsTracksPatch' Track
+etpPayload
+  = lens _etpPayload (\ s a -> s{_etpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -200,7 +201,7 @@ instance GoogleRequest EditsTracksPatch' where
               _etpKey
               _etpOAuthToken
               (Just AltJSON)
-              _etpTrack
+              _etpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EditsTracksPatchResource)

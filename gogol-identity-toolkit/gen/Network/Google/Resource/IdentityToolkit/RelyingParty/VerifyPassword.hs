@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyPassword
     -- * Request Lenses
     , rpvpQuotaUser
     , rpvpPrettyPrint
-    , rpvpIdentitytoolkitRelyingPartyVerifyPasswordRequest
     , rpvpUserIP
+    , rpvpPayload
     , rpvpKey
     , rpvpOAuthToken
     , rpvpFields
@@ -61,14 +62,14 @@ type RelyingPartyVerifyPasswordResource =
 --
 -- /See:/ 'relyingPartyVerifyPassword'' smart constructor.
 data RelyingPartyVerifyPassword' = RelyingPartyVerifyPassword'
-    { _rpvpQuotaUser                                        :: !(Maybe Text)
-    , _rpvpPrettyPrint                                      :: !Bool
-    , _rpvpIdentitytoolkitRelyingPartyVerifyPasswordRequest :: !IdentitytoolkitRelyingPartyVerifyPasswordRequest
-    , _rpvpUserIP                                           :: !(Maybe Text)
-    , _rpvpKey                                              :: !(Maybe Key)
-    , _rpvpOAuthToken                                       :: !(Maybe OAuthToken)
-    , _rpvpFields                                           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rpvpQuotaUser   :: !(Maybe Text)
+    , _rpvpPrettyPrint :: !Bool
+    , _rpvpUserIP      :: !(Maybe Text)
+    , _rpvpPayload     :: !IdentitytoolkitRelyingPartyVerifyPasswordRequest
+    , _rpvpKey         :: !(Maybe Key)
+    , _rpvpOAuthToken  :: !(Maybe OAuthToken)
+    , _rpvpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingPartyVerifyPassword'' with the minimum fields required to make a request.
 --
@@ -78,9 +79,9 @@ data RelyingPartyVerifyPassword' = RelyingPartyVerifyPassword'
 --
 -- * 'rpvpPrettyPrint'
 --
--- * 'rpvpIdentitytoolkitRelyingPartyVerifyPasswordRequest'
---
 -- * 'rpvpUserIP'
+--
+-- * 'rpvpPayload'
 --
 -- * 'rpvpKey'
 --
@@ -88,14 +89,14 @@ data RelyingPartyVerifyPassword' = RelyingPartyVerifyPassword'
 --
 -- * 'rpvpFields'
 relyingPartyVerifyPassword'
-    :: IdentitytoolkitRelyingPartyVerifyPasswordRequest -- ^ 'IdentitytoolkitRelyingPartyVerifyPasswordRequest'
+    :: IdentitytoolkitRelyingPartyVerifyPasswordRequest -- ^ 'payload'
     -> RelyingPartyVerifyPassword'
-relyingPartyVerifyPassword' pRpvpIdentitytoolkitRelyingPartyVerifyPasswordRequest_ =
+relyingPartyVerifyPassword' pRpvpPayload_ =
     RelyingPartyVerifyPassword'
     { _rpvpQuotaUser = Nothing
     , _rpvpPrettyPrint = True
-    , _rpvpIdentitytoolkitRelyingPartyVerifyPasswordRequest = pRpvpIdentitytoolkitRelyingPartyVerifyPasswordRequest_
     , _rpvpUserIP = Nothing
+    , _rpvpPayload = pRpvpPayload_
     , _rpvpKey = Nothing
     , _rpvpOAuthToken = Nothing
     , _rpvpFields = Nothing
@@ -115,20 +116,16 @@ rpvpPrettyPrint
   = lens _rpvpPrettyPrint
       (\ s a -> s{_rpvpPrettyPrint = a})
 
--- | Multipart request metadata.
-rpvpIdentitytoolkitRelyingPartyVerifyPasswordRequest :: Lens' RelyingPartyVerifyPassword' IdentitytoolkitRelyingPartyVerifyPasswordRequest
-rpvpIdentitytoolkitRelyingPartyVerifyPasswordRequest
-  = lens
-      _rpvpIdentitytoolkitRelyingPartyVerifyPasswordRequest
-      (\ s a ->
-         s{_rpvpIdentitytoolkitRelyingPartyVerifyPasswordRequest
-             = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 rpvpUserIP :: Lens' RelyingPartyVerifyPassword' (Maybe Text)
 rpvpUserIP
   = lens _rpvpUserIP (\ s a -> s{_rpvpUserIP = a})
+
+-- | Multipart request metadata.
+rpvpPayload :: Lens' RelyingPartyVerifyPassword' IdentitytoolkitRelyingPartyVerifyPasswordRequest
+rpvpPayload
+  = lens _rpvpPayload (\ s a -> s{_rpvpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -163,7 +160,7 @@ instance GoogleRequest RelyingPartyVerifyPassword'
               _rpvpKey
               _rpvpOAuthToken
               (Just AltJSON)
-              _rpvpIdentitytoolkitRelyingPartyVerifyPasswordRequest
+              _rpvpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RelyingPartyVerifyPasswordResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.AndroidEnterprise.Users.SetAvailableProductSet
     , usapsPrettyPrint
     , usapsEnterpriseId
     , usapsUserIP
-    , usapsProductSet
+    , usapsPayload
     , usapsUserId
     , usapsKey
     , usapsOAuthToken
@@ -70,12 +71,12 @@ data UsersSetAvailableProductSet' = UsersSetAvailableProductSet'
     , _usapsPrettyPrint  :: !Bool
     , _usapsEnterpriseId :: !Text
     , _usapsUserIP       :: !(Maybe Text)
-    , _usapsProductSet   :: !ProductSet
+    , _usapsPayload      :: !ProductSet
     , _usapsUserId       :: !Text
     , _usapsKey          :: !(Maybe Key)
     , _usapsOAuthToken   :: !(Maybe OAuthToken)
     , _usapsFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersSetAvailableProductSet'' with the minimum fields required to make a request.
 --
@@ -89,7 +90,7 @@ data UsersSetAvailableProductSet' = UsersSetAvailableProductSet'
 --
 -- * 'usapsUserIP'
 --
--- * 'usapsProductSet'
+-- * 'usapsPayload'
 --
 -- * 'usapsUserId'
 --
@@ -100,16 +101,16 @@ data UsersSetAvailableProductSet' = UsersSetAvailableProductSet'
 -- * 'usapsFields'
 usersSetAvailableProductSet'
     :: Text -- ^ 'enterpriseId'
-    -> ProductSet -- ^ 'ProductSet'
+    -> ProductSet -- ^ 'payload'
     -> Text -- ^ 'userId'
     -> UsersSetAvailableProductSet'
-usersSetAvailableProductSet' pUsapsEnterpriseId_ pUsapsProductSet_ pUsapsUserId_ =
+usersSetAvailableProductSet' pUsapsEnterpriseId_ pUsapsPayload_ pUsapsUserId_ =
     UsersSetAvailableProductSet'
     { _usapsQuotaUser = Nothing
     , _usapsPrettyPrint = True
     , _usapsEnterpriseId = pUsapsEnterpriseId_
     , _usapsUserIP = Nothing
-    , _usapsProductSet = pUsapsProductSet_
+    , _usapsPayload = pUsapsPayload_
     , _usapsUserId = pUsapsUserId_
     , _usapsKey = Nothing
     , _usapsOAuthToken = Nothing
@@ -143,10 +144,9 @@ usapsUserIP
   = lens _usapsUserIP (\ s a -> s{_usapsUserIP = a})
 
 -- | Multipart request metadata.
-usapsProductSet :: Lens' UsersSetAvailableProductSet' ProductSet
-usapsProductSet
-  = lens _usapsProductSet
-      (\ s a -> s{_usapsProductSet = a})
+usapsPayload :: Lens' UsersSetAvailableProductSet' ProductSet
+usapsPayload
+  = lens _usapsPayload (\ s a -> s{_usapsPayload = a})
 
 -- | The ID of the user.
 usapsUserId :: Lens' UsersSetAvailableProductSet' Text
@@ -188,7 +188,7 @@ instance GoogleRequest UsersSetAvailableProductSet'
               _usapsKey
               _usapsOAuthToken
               (Just AltJSON)
-              _usapsProductSet
+              _usapsPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersSetAvailableProductSetResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ type AudiencesListResource =
      "people" :>
        Capture "userId" Text :>
          "audiences" :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -73,7 +74,7 @@ data AudiencesList' = AudiencesList'
     , _alOAuthToken  :: !(Maybe OAuthToken)
     , _alMaxResults  :: !Word32
     , _alFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AudiencesList'' with the minimum fields required to make a request.
 --
@@ -172,7 +173,7 @@ instance GoogleRequest AudiencesList' where
         type Rs AudiencesList' = AudiencesFeed
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u AudiencesList'{..}
-          = go (Just _alMaxResults) _alPageToken _alUserId
+          = go _alUserId _alPageToken (Just _alMaxResults)
               _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP

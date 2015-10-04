@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.Analytics.Management.ProfileUserLinks.Insert
     , mpuliWebPropertyId
     , mpuliUserIP
     , mpuliProfileId
+    , mpuliPayload
     , mpuliAccountId
     , mpuliKey
-    , mpuliEntityUserLink
     , mpuliOAuthToken
     , mpuliFields
     ) where
@@ -70,17 +71,17 @@ type ManagementProfileUserLinksInsertResource =
 --
 -- /See:/ 'managementProfileUserLinksInsert'' smart constructor.
 data ManagementProfileUserLinksInsert' = ManagementProfileUserLinksInsert'
-    { _mpuliQuotaUser      :: !(Maybe Text)
-    , _mpuliPrettyPrint    :: !Bool
-    , _mpuliWebPropertyId  :: !Text
-    , _mpuliUserIP         :: !(Maybe Text)
-    , _mpuliProfileId      :: !Text
-    , _mpuliAccountId      :: !Text
-    , _mpuliKey            :: !(Maybe Key)
-    , _mpuliEntityUserLink :: !EntityUserLink
-    , _mpuliOAuthToken     :: !(Maybe OAuthToken)
-    , _mpuliFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mpuliQuotaUser     :: !(Maybe Text)
+    , _mpuliPrettyPrint   :: !Bool
+    , _mpuliWebPropertyId :: !Text
+    , _mpuliUserIP        :: !(Maybe Text)
+    , _mpuliProfileId     :: !Text
+    , _mpuliPayload       :: !EntityUserLink
+    , _mpuliAccountId     :: !Text
+    , _mpuliKey           :: !(Maybe Key)
+    , _mpuliOAuthToken    :: !(Maybe OAuthToken)
+    , _mpuliFields        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileUserLinksInsert'' with the minimum fields required to make a request.
 --
@@ -96,11 +97,11 @@ data ManagementProfileUserLinksInsert' = ManagementProfileUserLinksInsert'
 --
 -- * 'mpuliProfileId'
 --
+-- * 'mpuliPayload'
+--
 -- * 'mpuliAccountId'
 --
 -- * 'mpuliKey'
---
--- * 'mpuliEntityUserLink'
 --
 -- * 'mpuliOAuthToken'
 --
@@ -108,19 +109,19 @@ data ManagementProfileUserLinksInsert' = ManagementProfileUserLinksInsert'
 managementProfileUserLinksInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
+    -> EntityUserLink -- ^ 'payload'
     -> Text -- ^ 'accountId'
-    -> EntityUserLink -- ^ 'EntityUserLink'
     -> ManagementProfileUserLinksInsert'
-managementProfileUserLinksInsert' pMpuliWebPropertyId_ pMpuliProfileId_ pMpuliAccountId_ pMpuliEntityUserLink_ =
+managementProfileUserLinksInsert' pMpuliWebPropertyId_ pMpuliProfileId_ pMpuliPayload_ pMpuliAccountId_ =
     ManagementProfileUserLinksInsert'
     { _mpuliQuotaUser = Nothing
     , _mpuliPrettyPrint = False
     , _mpuliWebPropertyId = pMpuliWebPropertyId_
     , _mpuliUserIP = Nothing
     , _mpuliProfileId = pMpuliProfileId_
+    , _mpuliPayload = pMpuliPayload_
     , _mpuliAccountId = pMpuliAccountId_
     , _mpuliKey = Nothing
-    , _mpuliEntityUserLink = pMpuliEntityUserLink_
     , _mpuliOAuthToken = Nothing
     , _mpuliFields = Nothing
     }
@@ -157,6 +158,11 @@ mpuliProfileId
   = lens _mpuliProfileId
       (\ s a -> s{_mpuliProfileId = a})
 
+-- | Multipart request metadata.
+mpuliPayload :: Lens' ManagementProfileUserLinksInsert' EntityUserLink
+mpuliPayload
+  = lens _mpuliPayload (\ s a -> s{_mpuliPayload = a})
+
 -- | Account ID to create the user link for.
 mpuliAccountId :: Lens' ManagementProfileUserLinksInsert' Text
 mpuliAccountId
@@ -168,12 +174,6 @@ mpuliAccountId
 -- token.
 mpuliKey :: Lens' ManagementProfileUserLinksInsert' (Maybe Key)
 mpuliKey = lens _mpuliKey (\ s a -> s{_mpuliKey = a})
-
--- | Multipart request metadata.
-mpuliEntityUserLink :: Lens' ManagementProfileUserLinksInsert' EntityUserLink
-mpuliEntityUserLink
-  = lens _mpuliEntityUserLink
-      (\ s a -> s{_mpuliEntityUserLink = a})
 
 -- | OAuth 2.0 token for the current user.
 mpuliOAuthToken :: Lens' ManagementProfileUserLinksInsert' (Maybe OAuthToken)
@@ -207,7 +207,7 @@ instance GoogleRequest
               _mpuliKey
               _mpuliOAuthToken
               (Just AltJSON)
-              _mpuliEntityUserLink
+              _mpuliPayload
           where go
                   = clientWithRoute
                       (Proxy ::

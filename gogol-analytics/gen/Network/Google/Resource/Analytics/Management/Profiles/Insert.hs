@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.Analytics.Management.Profiles.Insert
     , mpiPrettyPrint
     , mpiWebPropertyId
     , mpiUserIP
-    , mpiProfile
+    , mpiPayload
     , mpiAccountId
     , mpiKey
     , mpiOAuthToken
@@ -70,12 +71,12 @@ data ManagementProfilesInsert' = ManagementProfilesInsert'
     , _mpiPrettyPrint   :: !Bool
     , _mpiWebPropertyId :: !Text
     , _mpiUserIP        :: !(Maybe Text)
-    , _mpiProfile       :: !Profile
+    , _mpiPayload       :: !Profile
     , _mpiAccountId     :: !Text
     , _mpiKey           :: !(Maybe Key)
     , _mpiOAuthToken    :: !(Maybe OAuthToken)
     , _mpiFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfilesInsert'' with the minimum fields required to make a request.
 --
@@ -89,7 +90,7 @@ data ManagementProfilesInsert' = ManagementProfilesInsert'
 --
 -- * 'mpiUserIP'
 --
--- * 'mpiProfile'
+-- * 'mpiPayload'
 --
 -- * 'mpiAccountId'
 --
@@ -100,16 +101,16 @@ data ManagementProfilesInsert' = ManagementProfilesInsert'
 -- * 'mpiFields'
 managementProfilesInsert'
     :: Text -- ^ 'webPropertyId'
-    -> Profile -- ^ 'Profile'
+    -> Profile -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementProfilesInsert'
-managementProfilesInsert' pMpiWebPropertyId_ pMpiProfile_ pMpiAccountId_ =
+managementProfilesInsert' pMpiWebPropertyId_ pMpiPayload_ pMpiAccountId_ =
     ManagementProfilesInsert'
     { _mpiQuotaUser = Nothing
     , _mpiPrettyPrint = False
     , _mpiWebPropertyId = pMpiWebPropertyId_
     , _mpiUserIP = Nothing
-    , _mpiProfile = pMpiProfile_
+    , _mpiPayload = pMpiPayload_
     , _mpiAccountId = pMpiAccountId_
     , _mpiKey = Nothing
     , _mpiOAuthToken = Nothing
@@ -142,9 +143,9 @@ mpiUserIP
   = lens _mpiUserIP (\ s a -> s{_mpiUserIP = a})
 
 -- | Multipart request metadata.
-mpiProfile :: Lens' ManagementProfilesInsert' Profile
-mpiProfile
-  = lens _mpiProfile (\ s a -> s{_mpiProfile = a})
+mpiPayload :: Lens' ManagementProfilesInsert' Profile
+mpiPayload
+  = lens _mpiPayload (\ s a -> s{_mpiPayload = a})
 
 -- | Account ID to create the view (profile) for.
 mpiAccountId :: Lens' ManagementProfilesInsert' Text
@@ -184,7 +185,7 @@ instance GoogleRequest ManagementProfilesInsert'
               _mpiKey
               _mpiOAuthToken
               (Just AltJSON)
-              _mpiProfile
+              _mpiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementProfilesInsertResource)

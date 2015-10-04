@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,10 +53,10 @@ type ChildrenListResource =
      "files" :>
        Capture "folderId" Text :>
          "children" :>
-           QueryParam "maxResults" Int32 :>
-             QueryParam "orderBy" Text :>
+           QueryParam "orderBy" Text :>
+             QueryParam "q" Text :>
                QueryParam "pageToken" Text :>
-                 QueryParam "q" Text :>
+                 QueryParam "maxResults" Int32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data ChildrenList' = ChildrenList'
     , _clOAuthToken  :: !(Maybe OAuthToken)
     , _clMaxResults  :: !Int32
     , _clFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChildrenList'' with the minimum fields required to make a request.
 --
@@ -196,9 +197,8 @@ instance GoogleRequest ChildrenList' where
         type Rs ChildrenList' = ChildList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ChildrenList'{..}
-          = go (Just _clMaxResults) _clOrderBy _clPageToken
-              _clQ
-              _clFolderId
+          = go _clFolderId _clOrderBy _clQ _clPageToken
+              (Just _clMaxResults)
               _clQuotaUser
               (Just _clPrettyPrint)
               _clUserIP

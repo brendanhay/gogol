@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Insert
     , psiPrettyPrint
     , psiUserIP
     , psiProfileId
+    , psiPayload
     , psiKey
-    , psiPlacementStrategy
     , psiOAuthToken
     , psiFields
     ) where
@@ -63,15 +64,15 @@ type PlacementStrategiesInsertResource =
 --
 -- /See:/ 'placementStrategiesInsert'' smart constructor.
 data PlacementStrategiesInsert' = PlacementStrategiesInsert'
-    { _psiQuotaUser         :: !(Maybe Text)
-    , _psiPrettyPrint       :: !Bool
-    , _psiUserIP            :: !(Maybe Text)
-    , _psiProfileId         :: !Int64
-    , _psiKey               :: !(Maybe Key)
-    , _psiPlacementStrategy :: !PlacementStrategy
-    , _psiOAuthToken        :: !(Maybe OAuthToken)
-    , _psiFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _psiQuotaUser   :: !(Maybe Text)
+    , _psiPrettyPrint :: !Bool
+    , _psiUserIP      :: !(Maybe Text)
+    , _psiProfileId   :: !Int64
+    , _psiPayload     :: !PlacementStrategy
+    , _psiKey         :: !(Maybe Key)
+    , _psiOAuthToken  :: !(Maybe OAuthToken)
+    , _psiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesInsert'' with the minimum fields required to make a request.
 --
@@ -85,25 +86,25 @@ data PlacementStrategiesInsert' = PlacementStrategiesInsert'
 --
 -- * 'psiProfileId'
 --
--- * 'psiKey'
+-- * 'psiPayload'
 --
--- * 'psiPlacementStrategy'
+-- * 'psiKey'
 --
 -- * 'psiOAuthToken'
 --
 -- * 'psiFields'
 placementStrategiesInsert'
     :: Int64 -- ^ 'profileId'
-    -> PlacementStrategy -- ^ 'PlacementStrategy'
+    -> PlacementStrategy -- ^ 'payload'
     -> PlacementStrategiesInsert'
-placementStrategiesInsert' pPsiProfileId_ pPsiPlacementStrategy_ =
+placementStrategiesInsert' pPsiProfileId_ pPsiPayload_ =
     PlacementStrategiesInsert'
     { _psiQuotaUser = Nothing
     , _psiPrettyPrint = True
     , _psiUserIP = Nothing
     , _psiProfileId = pPsiProfileId_
+    , _psiPayload = pPsiPayload_
     , _psiKey = Nothing
-    , _psiPlacementStrategy = pPsiPlacementStrategy_
     , _psiOAuthToken = Nothing
     , _psiFields = Nothing
     }
@@ -132,17 +133,16 @@ psiProfileId :: Lens' PlacementStrategiesInsert' Int64
 psiProfileId
   = lens _psiProfileId (\ s a -> s{_psiProfileId = a})
 
+-- | Multipart request metadata.
+psiPayload :: Lens' PlacementStrategiesInsert' PlacementStrategy
+psiPayload
+  = lens _psiPayload (\ s a -> s{_psiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 psiKey :: Lens' PlacementStrategiesInsert' (Maybe Key)
 psiKey = lens _psiKey (\ s a -> s{_psiKey = a})
-
--- | Multipart request metadata.
-psiPlacementStrategy :: Lens' PlacementStrategiesInsert' PlacementStrategy
-psiPlacementStrategy
-  = lens _psiPlacementStrategy
-      (\ s a -> s{_psiPlacementStrategy = a})
 
 -- | OAuth 2.0 token for the current user.
 psiOAuthToken :: Lens' PlacementStrategiesInsert' (Maybe OAuthToken)
@@ -172,7 +172,7 @@ instance GoogleRequest PlacementStrategiesInsert'
               _psiKey
               _psiOAuthToken
               (Just AltJSON)
-              _psiPlacementStrategy
+              _psiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementStrategiesInsertResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.DFAReporting.Ads.Insert
     -- * Request Lenses
     , aiQuotaUser
     , aiPrettyPrint
-    , aiAd
     , aiUserIP
     , aiProfileId
+    , aiPayload
     , aiKey
     , aiOAuthToken
     , aiFields
@@ -64,13 +65,13 @@ type AdsInsertResource =
 data AdsInsert' = AdsInsert'
     { _aiQuotaUser   :: !(Maybe Text)
     , _aiPrettyPrint :: !Bool
-    , _aiAd          :: !Ad
     , _aiUserIP      :: !(Maybe Text)
     , _aiProfileId   :: !Int64
+    , _aiPayload     :: !Ad
     , _aiKey         :: !(Maybe Key)
     , _aiOAuthToken  :: !(Maybe OAuthToken)
     , _aiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdsInsert'' with the minimum fields required to make a request.
 --
@@ -80,11 +81,11 @@ data AdsInsert' = AdsInsert'
 --
 -- * 'aiPrettyPrint'
 --
--- * 'aiAd'
---
 -- * 'aiUserIP'
 --
 -- * 'aiProfileId'
+--
+-- * 'aiPayload'
 --
 -- * 'aiKey'
 --
@@ -92,16 +93,16 @@ data AdsInsert' = AdsInsert'
 --
 -- * 'aiFields'
 adsInsert'
-    :: Ad -- ^ 'Ad'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> Ad -- ^ 'payload'
     -> AdsInsert'
-adsInsert' pAiAd_ pAiProfileId_ =
+adsInsert' pAiProfileId_ pAiPayload_ =
     AdsInsert'
     { _aiQuotaUser = Nothing
     , _aiPrettyPrint = True
-    , _aiAd = pAiAd_
     , _aiUserIP = Nothing
     , _aiProfileId = pAiProfileId_
+    , _aiPayload = pAiPayload_
     , _aiKey = Nothing
     , _aiOAuthToken = Nothing
     , _aiFields = Nothing
@@ -120,10 +121,6 @@ aiPrettyPrint
   = lens _aiPrettyPrint
       (\ s a -> s{_aiPrettyPrint = a})
 
--- | Multipart request metadata.
-aiAd :: Lens' AdsInsert' Ad
-aiAd = lens _aiAd (\ s a -> s{_aiAd = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 aiUserIP :: Lens' AdsInsert' (Maybe Text)
@@ -133,6 +130,11 @@ aiUserIP = lens _aiUserIP (\ s a -> s{_aiUserIP = a})
 aiProfileId :: Lens' AdsInsert' Int64
 aiProfileId
   = lens _aiProfileId (\ s a -> s{_aiProfileId = a})
+
+-- | Multipart request metadata.
+aiPayload :: Lens' AdsInsert' Ad
+aiPayload
+  = lens _aiPayload (\ s a -> s{_aiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -163,7 +165,7 @@ instance GoogleRequest AdsInsert' where
               _aiKey
               _aiOAuthToken
               (Just AltJSON)
-              _aiAd
+              _aiPayload
           where go
                   = clientWithRoute (Proxy :: Proxy AdsInsertResource)
                       r

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,13 +55,13 @@ import           Network.Google.ShoppingContent.Types
 type OrdersListResource =
      Capture "merchantId" Word64 :>
        "orders" :>
-         QueryParam "acknowledged" Bool :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "orderBy" ContentOrdersListOrderBy :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "placedDateEnd" Text :>
+         QueryParam "placedDateEnd" Text :>
+           QueryParam "orderBy" OrderBy :>
+             QueryParam "acknowledged" Bool :>
+               QueryParams "statuses" Statuses :>
+                 QueryParam "pageToken" Text :>
                    QueryParam "placedDateStart" Text :>
-                     QueryParams "statuses" ContentOrdersListStatuses :>
+                     QueryParam "maxResults" Word32 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -78,17 +79,17 @@ data OrdersList' = OrdersList'
     , _olQuotaUser       :: !(Maybe Text)
     , _olMerchantId      :: !Word64
     , _olPrettyPrint     :: !Bool
-    , _olOrderBy         :: !(Maybe ContentOrdersListOrderBy)
+    , _olOrderBy         :: !(Maybe OrderBy)
     , _olUserIP          :: !(Maybe Text)
     , _olAcknowledged    :: !(Maybe Bool)
     , _olKey             :: !(Maybe Key)
-    , _olStatuses        :: !(Maybe ContentOrdersListStatuses)
+    , _olStatuses        :: !(Maybe Statuses)
     , _olPageToken       :: !(Maybe Text)
     , _olOAuthToken      :: !(Maybe OAuthToken)
     , _olPlacedDateStart :: !(Maybe Text)
     , _olMaxResults      :: !(Maybe Word32)
     , _olFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersList'' with the minimum fields required to make a request.
 --
@@ -173,7 +174,7 @@ olPrettyPrint
 -- placement date, from oldest to most recent. \"placedDate asc\" stands
 -- for listing orders by placement date, from most recent to oldest. In
 -- future releases we\'ll support other sorting criteria.
-olOrderBy :: Lens' OrdersList' (Maybe ContentOrdersListOrderBy)
+olOrderBy :: Lens' OrdersList' (Maybe OrderBy)
 olOrderBy
   = lens _olOrderBy (\ s a -> s{_olOrderBy = a})
 
@@ -203,7 +204,7 @@ olKey = lens _olKey (\ s a -> s{_olKey = a})
 -- active is a shortcut for pendingShipment and partiallyShipped, and
 -- completed is a shortcut for shipped , partiallyDelivered, delivered,
 -- partiallyReturned, returned, and canceled.
-olStatuses :: Lens' OrdersList' (Maybe ContentOrdersListStatuses)
+olStatuses :: Lens' OrdersList' (Maybe Statuses)
 olStatuses
   = lens _olStatuses (\ s a -> s{_olStatuses = a})
 
@@ -243,12 +244,12 @@ instance GoogleRequest OrdersList' where
         type Rs OrdersList' = OrdersListResponse
         request = requestWithRoute defReq shoppingContentURL
         requestWithRoute r u OrdersList'{..}
-          = go _olAcknowledged _olMaxResults _olOrderBy
+          = go _olMerchantId _olPlacedDateEnd _olOrderBy
+              _olAcknowledged
+              (_olStatuses ^. _Default)
               _olPageToken
-              _olPlacedDateEnd
               _olPlacedDateStart
-              _olStatuses
-              _olMerchantId
+              _olMaxResults
               _olQuotaUser
               (Just _olPrettyPrint)
               _olUserIP

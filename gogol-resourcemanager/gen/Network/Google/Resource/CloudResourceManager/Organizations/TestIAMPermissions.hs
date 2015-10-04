@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,10 +38,10 @@ module Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermiss
     , otipPp
     , otipAccessToken
     , otipUploadType
+    , otipPayload
     , otipBearerToken
     , otipKey
     , otipResource
-    , otipTestIAMPermissionsRequest
     , otipOAuthToken
     , otipFields
     , otipCallback
@@ -54,14 +55,14 @@ import           Network.Google.ResourceManager.Types
 type OrganizationsTestIAMPermissionsResource =
      "v1beta1" :>
        "organizations" :>
-         "{resource}:testIamPermissions" :>
+         CaptureMode "resource" "testIamPermissions" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
@@ -76,21 +77,21 @@ type OrganizationsTestIAMPermissionsResource =
 --
 -- /See:/ 'organizationsTestIAMPermissions'' smart constructor.
 data OrganizationsTestIAMPermissions' = OrganizationsTestIAMPermissions'
-    { _otipXgafv                     :: !(Maybe Text)
-    , _otipQuotaUser                 :: !(Maybe Text)
-    , _otipPrettyPrint               :: !Bool
-    , _otipUploadProtocol            :: !(Maybe Text)
-    , _otipPp                        :: !Bool
-    , _otipAccessToken               :: !(Maybe Text)
-    , _otipUploadType                :: !(Maybe Text)
-    , _otipBearerToken               :: !(Maybe Text)
-    , _otipKey                       :: !(Maybe Key)
-    , _otipResource                  :: !Text
-    , _otipTestIAMPermissionsRequest :: !TestIAMPermissionsRequest
-    , _otipOAuthToken                :: !(Maybe OAuthToken)
-    , _otipFields                    :: !(Maybe Text)
-    , _otipCallback                  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _otipXgafv          :: !(Maybe Text)
+    , _otipQuotaUser      :: !(Maybe Text)
+    , _otipPrettyPrint    :: !Bool
+    , _otipUploadProtocol :: !(Maybe Text)
+    , _otipPp             :: !Bool
+    , _otipAccessToken    :: !(Maybe Text)
+    , _otipUploadType     :: !(Maybe Text)
+    , _otipPayload        :: !TestIAMPermissionsRequest
+    , _otipBearerToken    :: !(Maybe Text)
+    , _otipKey            :: !(Maybe Key)
+    , _otipResource       :: !Text
+    , _otipOAuthToken     :: !(Maybe OAuthToken)
+    , _otipFields         :: !(Maybe Text)
+    , _otipCallback       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrganizationsTestIAMPermissions'' with the minimum fields required to make a request.
 --
@@ -110,13 +111,13 @@ data OrganizationsTestIAMPermissions' = OrganizationsTestIAMPermissions'
 --
 -- * 'otipUploadType'
 --
+-- * 'otipPayload'
+--
 -- * 'otipBearerToken'
 --
 -- * 'otipKey'
 --
 -- * 'otipResource'
---
--- * 'otipTestIAMPermissionsRequest'
 --
 -- * 'otipOAuthToken'
 --
@@ -124,10 +125,10 @@ data OrganizationsTestIAMPermissions' = OrganizationsTestIAMPermissions'
 --
 -- * 'otipCallback'
 organizationsTestIAMPermissions'
-    :: Text -- ^ 'resource'
-    -> TestIAMPermissionsRequest -- ^ 'TestIAMPermissionsRequest'
+    :: TestIAMPermissionsRequest -- ^ 'payload'
+    -> Text -- ^ 'resource'
     -> OrganizationsTestIAMPermissions'
-organizationsTestIAMPermissions' pOtipResource_ pOtipTestIAMPermissionsRequest_ =
+organizationsTestIAMPermissions' pOtipPayload_ pOtipResource_ =
     OrganizationsTestIAMPermissions'
     { _otipXgafv = Nothing
     , _otipQuotaUser = Nothing
@@ -136,10 +137,10 @@ organizationsTestIAMPermissions' pOtipResource_ pOtipTestIAMPermissionsRequest_ 
     , _otipPp = True
     , _otipAccessToken = Nothing
     , _otipUploadType = Nothing
+    , _otipPayload = pOtipPayload_
     , _otipBearerToken = Nothing
     , _otipKey = Nothing
     , _otipResource = pOtipResource_
-    , _otipTestIAMPermissionsRequest = pOtipTestIAMPermissionsRequest_
     , _otipOAuthToken = Nothing
     , _otipFields = Nothing
     , _otipCallback = Nothing
@@ -186,6 +187,11 @@ otipUploadType
   = lens _otipUploadType
       (\ s a -> s{_otipUploadType = a})
 
+-- | Multipart request metadata.
+otipPayload :: Lens' OrganizationsTestIAMPermissions' TestIAMPermissionsRequest
+otipPayload
+  = lens _otipPayload (\ s a -> s{_otipPayload = a})
+
 -- | OAuth bearer token.
 otipBearerToken :: Lens' OrganizationsTestIAMPermissions' (Maybe Text)
 otipBearerToken
@@ -204,12 +210,6 @@ otipKey = lens _otipKey (\ s a -> s{_otipKey = a})
 otipResource :: Lens' OrganizationsTestIAMPermissions' Text
 otipResource
   = lens _otipResource (\ s a -> s{_otipResource = a})
-
--- | Multipart request metadata.
-otipTestIAMPermissionsRequest :: Lens' OrganizationsTestIAMPermissions' TestIAMPermissionsRequest
-otipTestIAMPermissionsRequest
-  = lens _otipTestIAMPermissionsRequest
-      (\ s a -> s{_otipTestIAMPermissionsRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 otipOAuthToken :: Lens' OrganizationsTestIAMPermissions' (Maybe OAuthToken)
@@ -239,19 +239,19 @@ instance GoogleRequest
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u
           OrganizationsTestIAMPermissions'{..}
-          = go _otipXgafv _otipAccessToken _otipBearerToken
-              _otipCallback
+          = go _otipResource _otipXgafv _otipUploadProtocol
               (Just _otipPp)
+              _otipAccessToken
               _otipUploadType
-              _otipUploadProtocol
-              _otipResource
+              _otipBearerToken
+              _otipCallback
               _otipQuotaUser
               (Just _otipPrettyPrint)
               _otipFields
               _otipKey
               _otipOAuthToken
               (Just AltJSON)
-              _otipTestIAMPermissionsRequest
+              _otipPayload
           where go
                   = clientWithRoute
                       (Proxy ::

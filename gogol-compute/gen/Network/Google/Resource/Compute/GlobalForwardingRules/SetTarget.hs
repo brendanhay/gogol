@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,10 +33,10 @@ module Network.Google.Resource.Compute.GlobalForwardingRules.SetTarget
     -- * Request Lenses
     , gfrstQuotaUser
     , gfrstPrettyPrint
-    , gfrstTargetReference
     , gfrstProject
     , gfrstForwardingRule
     , gfrstUserIP
+    , gfrstPayload
     , gfrstKey
     , gfrstOAuthToken
     , gfrstFields
@@ -66,16 +67,16 @@ type GlobalForwardingRulesSetTargetResource =
 --
 -- /See:/ 'globalForwardingRulesSetTarget'' smart constructor.
 data GlobalForwardingRulesSetTarget' = GlobalForwardingRulesSetTarget'
-    { _gfrstQuotaUser       :: !(Maybe Text)
-    , _gfrstPrettyPrint     :: !Bool
-    , _gfrstTargetReference :: !TargetReference
-    , _gfrstProject         :: !Text
-    , _gfrstForwardingRule  :: !Text
-    , _gfrstUserIP          :: !(Maybe Text)
-    , _gfrstKey             :: !(Maybe Key)
-    , _gfrstOAuthToken      :: !(Maybe OAuthToken)
-    , _gfrstFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _gfrstQuotaUser      :: !(Maybe Text)
+    , _gfrstPrettyPrint    :: !Bool
+    , _gfrstProject        :: !Text
+    , _gfrstForwardingRule :: !Text
+    , _gfrstUserIP         :: !(Maybe Text)
+    , _gfrstPayload        :: !TargetReference
+    , _gfrstKey            :: !(Maybe Key)
+    , _gfrstOAuthToken     :: !(Maybe OAuthToken)
+    , _gfrstFields         :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalForwardingRulesSetTarget'' with the minimum fields required to make a request.
 --
@@ -85,13 +86,13 @@ data GlobalForwardingRulesSetTarget' = GlobalForwardingRulesSetTarget'
 --
 -- * 'gfrstPrettyPrint'
 --
--- * 'gfrstTargetReference'
---
 -- * 'gfrstProject'
 --
 -- * 'gfrstForwardingRule'
 --
 -- * 'gfrstUserIP'
+--
+-- * 'gfrstPayload'
 --
 -- * 'gfrstKey'
 --
@@ -99,18 +100,18 @@ data GlobalForwardingRulesSetTarget' = GlobalForwardingRulesSetTarget'
 --
 -- * 'gfrstFields'
 globalForwardingRulesSetTarget'
-    :: TargetReference -- ^ 'TargetReference'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'project'
     -> Text -- ^ 'forwardingRule'
+    -> TargetReference -- ^ 'payload'
     -> GlobalForwardingRulesSetTarget'
-globalForwardingRulesSetTarget' pGfrstTargetReference_ pGfrstProject_ pGfrstForwardingRule_ =
+globalForwardingRulesSetTarget' pGfrstProject_ pGfrstForwardingRule_ pGfrstPayload_ =
     GlobalForwardingRulesSetTarget'
     { _gfrstQuotaUser = Nothing
     , _gfrstPrettyPrint = True
-    , _gfrstTargetReference = pGfrstTargetReference_
     , _gfrstProject = pGfrstProject_
     , _gfrstForwardingRule = pGfrstForwardingRule_
     , _gfrstUserIP = Nothing
+    , _gfrstPayload = pGfrstPayload_
     , _gfrstKey = Nothing
     , _gfrstOAuthToken = Nothing
     , _gfrstFields = Nothing
@@ -130,12 +131,6 @@ gfrstPrettyPrint
   = lens _gfrstPrettyPrint
       (\ s a -> s{_gfrstPrettyPrint = a})
 
--- | Multipart request metadata.
-gfrstTargetReference :: Lens' GlobalForwardingRulesSetTarget' TargetReference
-gfrstTargetReference
-  = lens _gfrstTargetReference
-      (\ s a -> s{_gfrstTargetReference = a})
-
 -- | Name of the project scoping this request.
 gfrstProject :: Lens' GlobalForwardingRulesSetTarget' Text
 gfrstProject
@@ -152,6 +147,11 @@ gfrstForwardingRule
 gfrstUserIP :: Lens' GlobalForwardingRulesSetTarget' (Maybe Text)
 gfrstUserIP
   = lens _gfrstUserIP (\ s a -> s{_gfrstUserIP = a})
+
+-- | Multipart request metadata.
+gfrstPayload :: Lens' GlobalForwardingRulesSetTarget' TargetReference
+gfrstPayload
+  = lens _gfrstPayload (\ s a -> s{_gfrstPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -189,7 +189,7 @@ instance GoogleRequest
               _gfrstKey
               _gfrstOAuthToken
               (Just AltJSON)
-              _gfrstTargetReference
+              _gfrstPayload
           where go
                   = clientWithRoute
                       (Proxy ::

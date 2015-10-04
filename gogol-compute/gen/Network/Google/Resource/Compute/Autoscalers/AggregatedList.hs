@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,8 +53,8 @@ type AutoscalersAggregatedListResource =
        "aggregated" :>
          "autoscalers" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data AutoscalersAggregatedList' = AutoscalersAggregatedList'
     , _aalaOAuthToken  :: !(Maybe OAuthToken)
     , _aalaMaxResults  :: !Word32
     , _aalaFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersAggregatedList'' with the minimum fields required to make a request.
 --
@@ -200,9 +201,8 @@ instance GoogleRequest AutoscalersAggregatedList'
              AutoscalerAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u AutoscalersAggregatedList'{..}
-          = go _aalaFilter (Just _aalaMaxResults)
-              _aalaPageToken
-              _aalaProject
+          = go _aalaProject _aalaFilter _aalaPageToken
+              (Just _aalaMaxResults)
               _aalaQuotaUser
               (Just _aalaPrettyPrint)
               _aalaUserIP

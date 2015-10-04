@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.Blogger.Pages.Patch
     , pagaQuotaUser
     , pagaPrettyPrint
     , pagaUserIP
-    , pagaPage
     , pagaBlogId
     , pagaPageId
+    , pagaPayload
     , pagaKey
     , pagaRevert
     , pagaOAuthToken
@@ -53,8 +54,8 @@ type PagesPatchResource =
        Capture "blogId" Text :>
          "pages" :>
            Capture "pageId" Text :>
-             QueryParam "publish" Bool :>
-               QueryParam "revert" Bool :>
+             QueryParam "revert" Bool :>
+               QueryParam "publish" Bool :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -71,15 +72,15 @@ data PagesPatch' = PagesPatch'
     { _pagaQuotaUser   :: !(Maybe Text)
     , _pagaPrettyPrint :: !Bool
     , _pagaUserIP      :: !(Maybe Text)
-    , _pagaPage        :: !Page
     , _pagaBlogId      :: !Text
     , _pagaPageId      :: !Text
+    , _pagaPayload     :: !Page
     , _pagaKey         :: !(Maybe Key)
     , _pagaRevert      :: !(Maybe Bool)
     , _pagaOAuthToken  :: !(Maybe OAuthToken)
     , _pagaPublish     :: !(Maybe Bool)
     , _pagaFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesPatch'' with the minimum fields required to make a request.
 --
@@ -91,11 +92,11 @@ data PagesPatch' = PagesPatch'
 --
 -- * 'pagaUserIP'
 --
--- * 'pagaPage'
---
 -- * 'pagaBlogId'
 --
 -- * 'pagaPageId'
+--
+-- * 'pagaPayload'
 --
 -- * 'pagaKey'
 --
@@ -107,18 +108,18 @@ data PagesPatch' = PagesPatch'
 --
 -- * 'pagaFields'
 pagesPatch'
-    :: Page -- ^ 'Page'
-    -> Text -- ^ 'blogId'
+    :: Text -- ^ 'blogId'
     -> Text -- ^ 'pageId'
+    -> Page -- ^ 'payload'
     -> PagesPatch'
-pagesPatch' pPagaPage_ pPagaBlogId_ pPagaPageId_ =
+pagesPatch' pPagaBlogId_ pPagaPageId_ pPagaPayload_ =
     PagesPatch'
     { _pagaQuotaUser = Nothing
     , _pagaPrettyPrint = True
     , _pagaUserIP = Nothing
-    , _pagaPage = pPagaPage_
     , _pagaBlogId = pPagaBlogId_
     , _pagaPageId = pPagaPageId_
+    , _pagaPayload = pPagaPayload_
     , _pagaKey = Nothing
     , _pagaRevert = Nothing
     , _pagaOAuthToken = Nothing
@@ -146,10 +147,6 @@ pagaUserIP :: Lens' PagesPatch' (Maybe Text)
 pagaUserIP
   = lens _pagaUserIP (\ s a -> s{_pagaUserIP = a})
 
--- | Multipart request metadata.
-pagaPage :: Lens' PagesPatch' Page
-pagaPage = lens _pagaPage (\ s a -> s{_pagaPage = a})
-
 -- | The ID of the Blog.
 pagaBlogId :: Lens' PagesPatch' Text
 pagaBlogId
@@ -159,6 +156,11 @@ pagaBlogId
 pagaPageId :: Lens' PagesPatch' Text
 pagaPageId
   = lens _pagaPageId (\ s a -> s{_pagaPageId = a})
+
+-- | Multipart request metadata.
+pagaPayload :: Lens' PagesPatch' Page
+pagaPayload
+  = lens _pagaPayload (\ s a -> s{_pagaPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -197,7 +199,7 @@ instance GoogleRequest PagesPatch' where
         type Rs PagesPatch' = Page
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesPatch'{..}
-          = go _pagaPublish _pagaRevert _pagaBlogId _pagaPageId
+          = go _pagaBlogId _pagaPageId _pagaRevert _pagaPublish
               _pagaQuotaUser
               (Just _pagaPrettyPrint)
               _pagaUserIP
@@ -205,7 +207,7 @@ instance GoogleRequest PagesPatch' where
               _pagaKey
               _pagaOAuthToken
               (Just AltJSON)
-              _pagaPage
+              _pagaPayload
           where go
                   = clientWithRoute (Proxy :: Proxy PagesPatchResource)
                       r

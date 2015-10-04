@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.DFAReporting.Creatives.Update
     , cuuQuotaUser
     , cuuPrettyPrint
     , cuuUserIP
-    , cuuCreative
     , cuuProfileId
+    , cuuPayload
     , cuuKey
     , cuuOAuthToken
     , cuuFields
@@ -65,12 +66,12 @@ data CreativesUpdate' = CreativesUpdate'
     { _cuuQuotaUser   :: !(Maybe Text)
     , _cuuPrettyPrint :: !Bool
     , _cuuUserIP      :: !(Maybe Text)
-    , _cuuCreative    :: !Creative
     , _cuuProfileId   :: !Int64
+    , _cuuPayload     :: !Creative
     , _cuuKey         :: !(Maybe Key)
     , _cuuOAuthToken  :: !(Maybe OAuthToken)
     , _cuuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesUpdate'' with the minimum fields required to make a request.
 --
@@ -82,9 +83,9 @@ data CreativesUpdate' = CreativesUpdate'
 --
 -- * 'cuuUserIP'
 --
--- * 'cuuCreative'
---
 -- * 'cuuProfileId'
+--
+-- * 'cuuPayload'
 --
 -- * 'cuuKey'
 --
@@ -92,16 +93,16 @@ data CreativesUpdate' = CreativesUpdate'
 --
 -- * 'cuuFields'
 creativesUpdate'
-    :: Creative -- ^ 'Creative'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> Creative -- ^ 'payload'
     -> CreativesUpdate'
-creativesUpdate' pCuuCreative_ pCuuProfileId_ =
+creativesUpdate' pCuuProfileId_ pCuuPayload_ =
     CreativesUpdate'
     { _cuuQuotaUser = Nothing
     , _cuuPrettyPrint = True
     , _cuuUserIP = Nothing
-    , _cuuCreative = pCuuCreative_
     , _cuuProfileId = pCuuProfileId_
+    , _cuuPayload = pCuuPayload_
     , _cuuKey = Nothing
     , _cuuOAuthToken = Nothing
     , _cuuFields = Nothing
@@ -126,15 +127,15 @@ cuuUserIP :: Lens' CreativesUpdate' (Maybe Text)
 cuuUserIP
   = lens _cuuUserIP (\ s a -> s{_cuuUserIP = a})
 
--- | Multipart request metadata.
-cuuCreative :: Lens' CreativesUpdate' Creative
-cuuCreative
-  = lens _cuuCreative (\ s a -> s{_cuuCreative = a})
-
 -- | User profile ID associated with this request.
 cuuProfileId :: Lens' CreativesUpdate' Int64
 cuuProfileId
   = lens _cuuProfileId (\ s a -> s{_cuuProfileId = a})
+
+-- | Multipart request metadata.
+cuuPayload :: Lens' CreativesUpdate' Creative
+cuuPayload
+  = lens _cuuPayload (\ s a -> s{_cuuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -168,7 +169,7 @@ instance GoogleRequest CreativesUpdate' where
               _cuuKey
               _cuuOAuthToken
               (Just AltJSON)
-              _cuuCreative
+              _cuuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativesUpdateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.MapsEngine.Maps.Create
     , mcQuotaUser
     , mcPrettyPrint
     , mcUserIP
-    , mcMap
+    , mcPayload
     , mcKey
     , mcOAuthToken
     , mcFields
@@ -62,11 +63,11 @@ data MapsCreate' = MapsCreate'
     { _mcQuotaUser   :: !(Maybe Text)
     , _mcPrettyPrint :: !Bool
     , _mcUserIP      :: !(Maybe Text)
-    , _mcMap         :: !Map
+    , _mcPayload     :: !Map
     , _mcKey         :: !(Maybe Key)
     , _mcOAuthToken  :: !(Maybe OAuthToken)
     , _mcFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsCreate'' with the minimum fields required to make a request.
 --
@@ -78,7 +79,7 @@ data MapsCreate' = MapsCreate'
 --
 -- * 'mcUserIP'
 --
--- * 'mcMap'
+-- * 'mcPayload'
 --
 -- * 'mcKey'
 --
@@ -86,14 +87,14 @@ data MapsCreate' = MapsCreate'
 --
 -- * 'mcFields'
 mapsCreate'
-    :: Map -- ^ 'Map'
+    :: Map -- ^ 'payload'
     -> MapsCreate'
-mapsCreate' pMcMap_ =
+mapsCreate' pMcPayload_ =
     MapsCreate'
     { _mcQuotaUser = Nothing
     , _mcPrettyPrint = True
     , _mcUserIP = Nothing
-    , _mcMap = pMcMap_
+    , _mcPayload = pMcPayload_
     , _mcKey = Nothing
     , _mcOAuthToken = Nothing
     , _mcFields = Nothing
@@ -118,8 +119,9 @@ mcUserIP :: Lens' MapsCreate' (Maybe Text)
 mcUserIP = lens _mcUserIP (\ s a -> s{_mcUserIP = a})
 
 -- | Multipart request metadata.
-mcMap :: Lens' MapsCreate' Map
-mcMap = lens _mcMap (\ s a -> s{_mcMap = a})
+mcPayload :: Lens' MapsCreate' Map
+mcPayload
+  = lens _mcPayload (\ s a -> s{_mcPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -149,7 +151,7 @@ instance GoogleRequest MapsCreate' where
               _mcKey
               _mcOAuthToken
               (Just AltJSON)
-              _mcMap
+              _mcPayload
           where go
                   = clientWithRoute (Proxy :: Proxy MapsCreateResource)
                       r

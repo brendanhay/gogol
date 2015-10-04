@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.Directory.Users.Update
     , uuQuotaUser
     , uuPrettyPrint
     , uuUserIP
-    , uuUser
+    , uuPayload
     , uuKey
     , uuOAuthToken
     , uuUserKey
@@ -64,12 +65,12 @@ data UsersUpdate' = UsersUpdate'
     { _uuQuotaUser   :: !(Maybe Text)
     , _uuPrettyPrint :: !Bool
     , _uuUserIP      :: !(Maybe Text)
-    , _uuUser        :: !User
+    , _uuPayload     :: !User
     , _uuKey         :: !(Maybe Key)
     , _uuOAuthToken  :: !(Maybe OAuthToken)
     , _uuUserKey     :: !Text
     , _uuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersUpdate'' with the minimum fields required to make a request.
 --
@@ -81,7 +82,7 @@ data UsersUpdate' = UsersUpdate'
 --
 -- * 'uuUserIP'
 --
--- * 'uuUser'
+-- * 'uuPayload'
 --
 -- * 'uuKey'
 --
@@ -91,15 +92,15 @@ data UsersUpdate' = UsersUpdate'
 --
 -- * 'uuFields'
 usersUpdate'
-    :: User -- ^ 'User'
+    :: User -- ^ 'payload'
     -> Text -- ^ 'userKey'
     -> UsersUpdate'
-usersUpdate' pUuUser_ pUuUserKey_ =
+usersUpdate' pUuPayload_ pUuUserKey_ =
     UsersUpdate'
     { _uuQuotaUser = Nothing
     , _uuPrettyPrint = True
     , _uuUserIP = Nothing
-    , _uuUser = pUuUser_
+    , _uuPayload = pUuPayload_
     , _uuKey = Nothing
     , _uuOAuthToken = Nothing
     , _uuUserKey = pUuUserKey_
@@ -125,8 +126,9 @@ uuUserIP :: Lens' UsersUpdate' (Maybe Text)
 uuUserIP = lens _uuUserIP (\ s a -> s{_uuUserIP = a})
 
 -- | Multipart request metadata.
-uuUser :: Lens' UsersUpdate' User
-uuUser = lens _uuUser (\ s a -> s{_uuUser = a})
+uuPayload :: Lens' UsersUpdate' User
+uuPayload
+  = lens _uuPayload (\ s a -> s{_uuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -163,7 +165,7 @@ instance GoogleRequest UsersUpdate' where
               _uuKey
               _uuOAuthToken
               (Just AltJSON)
-              _uuUser
+              _uuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersUpdateResource)

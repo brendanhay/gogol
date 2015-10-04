@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type InstanceGroupsListResource =
          Capture "zone" Text :>
            "instanceGroups" :>
              QueryParam "filter" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,7 +83,7 @@ data InstanceGroupsList' = InstanceGroupsList'
     , _iglOAuthToken  :: !(Maybe OAuthToken)
     , _iglMaxResults  :: !Word32
     , _iglFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsList'' with the minimum fields required to make a request.
 --
@@ -209,9 +210,8 @@ instance GoogleRequest InstanceGroupsList' where
         type Rs InstanceGroupsList' = InstanceGroupList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceGroupsList'{..}
-          = go _iglFilter (Just _iglMaxResults) _iglPageToken
-              _iglProject
-              _iglZone
+          = go _iglProject _iglZone _iglFilter _iglPageToken
+              (Just _iglMaxResults)
               _iglQuotaUser
               (Just _iglPrettyPrint)
               _iglUserIP

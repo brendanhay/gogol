@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ import           Network.Google.Prelude
 type AboutGetResource =
      "about" :>
        QueryParam "includeSubscribed" Bool :>
-         QueryParam "maxChangeIdCount" Int64 :>
-           QueryParam "startChangeId" Int64 :>
+         QueryParam "startChangeId" Int64 :>
+           QueryParam "maxChangeIdCount" Int64 :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -74,7 +75,7 @@ data AboutGet' = AboutGet'
     , _agKey               :: !(Maybe Key)
     , _agOAuthToken        :: !(Maybe OAuthToken)
     , _agFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AboutGet'' with the minimum fields required to make a request.
 --
@@ -175,9 +176,8 @@ instance GoogleRequest AboutGet' where
         type Rs AboutGet' = About
         request = requestWithRoute defReq driveURL
         requestWithRoute r u AboutGet'{..}
-          = go (Just _agIncludeSubscribed)
+          = go (Just _agIncludeSubscribed) _agStartChangeId
               (Just _agMaxChangeIdCount)
-              _agStartChangeId
               _agQuotaUser
               (Just _agPrettyPrint)
               _agUserIP

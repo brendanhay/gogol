@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,16 +59,16 @@ type PostsListResource =
      "blogs" :>
        Capture "blogId" Text :>
          "posts" :>
-           QueryParam "endDate" DateTime' :>
-             QueryParam "fetchBodies" Bool :>
+           QueryParams "status" BloggerPostsListStatus :>
+             QueryParam "orderBy" BloggerPostsListOrderBy :>
                QueryParam "fetchImages" Bool :>
-                 QueryParam "labels" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "orderBy" BloggerPostsListOrderBy :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "startDate" DateTime' :>
-                           QueryParams "status" BloggerPostsListStatus :>
-                             QueryParam "view" BloggerPostsListView :>
+                 QueryParam "endDate" DateTime' :>
+                   QueryParam "startDate" DateTime' :>
+                     QueryParam "fetchBodies" Bool :>
+                       QueryParam "view" BloggerPostsListView :>
+                         QueryParam "labels" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "maxResults" Word32 :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "userIp" Text :>
@@ -98,7 +99,7 @@ data PostsList' = PostsList'
     , _pllOAuthToken  :: !(Maybe OAuthToken)
     , _pllMaxResults  :: !(Maybe Word32)
     , _pllFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsList'' with the minimum fields required to make a request.
 --
@@ -145,7 +146,7 @@ postsList' pPllBlogId_ =
     { _pllStatus = Nothing
     , _pllQuotaUser = Nothing
     , _pllPrettyPrint = True
-    , _pllOrderBy = Published
+    , _pllOrderBy = BPLOBPublished
     , _pllUserIP = Nothing
     , _pllFetchImages = Nothing
     , _pllEndDate = Nothing
@@ -267,16 +268,16 @@ instance GoogleRequest PostsList' where
         type Rs PostsList' = PostList
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsList'{..}
-          = go _pllEndDate (Just _pllFetchBodies)
-              _pllFetchImages
-              _pllLabels
-              _pllMaxResults
+          = go _pllBlogId (_pllStatus ^. _Default)
               (Just _pllOrderBy)
-              _pllPageToken
+              _pllFetchImages
+              _pllEndDate
               _pllStartDate
-              _pllStatus
+              (Just _pllFetchBodies)
               _pllView
-              _pllBlogId
+              _pllLabels
+              _pllPageToken
+              _pllMaxResults
               _pllQuotaUser
               (Just _pllPrettyPrint)
               _pllUserIP

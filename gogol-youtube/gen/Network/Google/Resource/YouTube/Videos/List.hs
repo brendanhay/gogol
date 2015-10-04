@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -56,17 +57,17 @@ import           Network.Google.YouTube.Types
 -- 'VideosList'' request conforms to.
 type VideosListResource =
      "videos" :>
-       QueryParam "chart" YouTubeVideosListChart :>
-         QueryParam "hl" Text :>
-           QueryParam "id" Text :>
+       QueryParam "part" Text :>
+         QueryParam "chart" Chart :>
+           QueryParam "regionCode" Text :>
              QueryParam "locale" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "myRating" YouTubeVideosListMyRating :>
+               QueryParam "myRating" MyRating :>
+                 QueryParam "hl" Text :>
                    QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "regionCode" Text :>
-                         QueryParam "videoCategoryId" Text :>
-                           QueryParam "part" Text :>
+                     QueryParam "videoCategoryId" Text :>
+                       QueryParam "id" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" Word32 :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
@@ -80,14 +81,14 @@ type VideosListResource =
 --
 -- /See:/ 'videosList'' smart constructor.
 data VideosList' = VideosList'
-    { _vlChart                  :: !(Maybe YouTubeVideosListChart)
+    { _vlChart                  :: !(Maybe Chart)
     , _vlQuotaUser              :: !(Maybe Text)
     , _vlPart                   :: !Text
     , _vlPrettyPrint            :: !Bool
     , _vlRegionCode             :: !(Maybe Text)
     , _vlUserIP                 :: !(Maybe Text)
     , _vlLocale                 :: !(Maybe Text)
-    , _vlMyRating               :: !(Maybe YouTubeVideosListMyRating)
+    , _vlMyRating               :: !(Maybe MyRating)
     , _vlHl                     :: !(Maybe Text)
     , _vlOnBehalfOfContentOwner :: !(Maybe Text)
     , _vlVideoCategoryId        :: !Text
@@ -97,7 +98,7 @@ data VideosList' = VideosList'
     , _vlOAuthToken             :: !(Maybe OAuthToken)
     , _vlMaxResults             :: !Word32
     , _vlFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosList'' with the minimum fields required to make a request.
 --
@@ -161,7 +162,7 @@ videosList' pVlPart_ =
     }
 
 -- | The chart parameter identifies the chart that you want to retrieve.
-vlChart :: Lens' VideosList' (Maybe YouTubeVideosListChart)
+vlChart :: Lens' VideosList' (Maybe Chart)
 vlChart = lens _vlChart (\ s a -> s{_vlChart = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -206,7 +207,7 @@ vlLocale = lens _vlLocale (\ s a -> s{_vlLocale = a})
 
 -- | Set this parameter\'s value to like or dislike to instruct the API to
 -- only return videos liked or disliked by the authenticated user.
-vlMyRating :: Lens' VideosList' (Maybe YouTubeVideosListMyRating)
+vlMyRating :: Lens' VideosList' (Maybe MyRating)
 vlMyRating
   = lens _vlMyRating (\ s a -> s{_vlMyRating = a})
 
@@ -292,14 +293,14 @@ instance GoogleRequest VideosList' where
         type Rs VideosList' = VideoListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u VideosList'{..}
-          = go _vlChart _vlHl _vlId _vlLocale
-              (Just _vlMaxResults)
+          = go (Just _vlPart) _vlChart _vlRegionCode _vlLocale
               _vlMyRating
+              _vlHl
               _vlOnBehalfOfContentOwner
-              _vlPageToken
-              _vlRegionCode
               (Just _vlVideoCategoryId)
-              (Just _vlPart)
+              _vlId
+              _vlPageToken
+              (Just _vlMaxResults)
               _vlQuotaUser
               (Just _vlPrettyPrint)
               _vlUserIP

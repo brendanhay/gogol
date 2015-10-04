@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -40,10 +41,10 @@ module Network.Google.Resource.Coordinate.Jobs.Update
     , juCustomerPhoneNumber
     , juCustomerName
     , juAddress
+    , juPayload
     , juAssignee
     , juLat
     , juKey
-    , juJob
     , juLng
     , juTitle
     , juOAuthToken
@@ -61,17 +62,16 @@ type JobsUpdateResource =
        Capture "teamId" Text :>
          "jobs" :>
            Capture "jobId" Word64 :>
-             QueryParam "address" Text :>
-               QueryParam "assignee" Text :>
-                 QueryParams "customField" Text :>
+             QueryParam "progress" CoordinateJobsUpdateProgress :>
+               QueryParam "note" Text :>
+                 QueryParam "customerPhoneNumber" Text :>
                    QueryParam "customerName" Text :>
-                     QueryParam "customerPhoneNumber" Text :>
-                       QueryParam "lat" Double :>
-                         QueryParam "lng" Double :>
-                           QueryParam "note" Text :>
-                             QueryParam "progress" CoordinateJobsUpdateProgress
-                               :>
-                               QueryParam "title" Text :>
+                     QueryParam "address" Text :>
+                       QueryParam "assignee" Text :>
+                         QueryParam "lat" Double :>
+                           QueryParam "lng" Double :>
+                             QueryParam "title" Text :>
+                               QueryParams "customField" Text :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
@@ -97,16 +97,16 @@ data JobsUpdate' = JobsUpdate'
     , _juCustomerPhoneNumber :: !(Maybe Text)
     , _juCustomerName        :: !(Maybe Text)
     , _juAddress             :: !(Maybe Text)
+    , _juPayload             :: !Job
     , _juAssignee            :: !(Maybe Text)
     , _juLat                 :: !(Maybe Double)
     , _juKey                 :: !(Maybe Key)
-    , _juJob                 :: !Job
     , _juLng                 :: !(Maybe Double)
     , _juTitle               :: !(Maybe Text)
     , _juOAuthToken          :: !(Maybe OAuthToken)
     , _juFields              :: !(Maybe Text)
-    , _juCustomField         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _juCustomField         :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsUpdate'' with the minimum fields required to make a request.
 --
@@ -132,13 +132,13 @@ data JobsUpdate' = JobsUpdate'
 --
 -- * 'juAddress'
 --
+-- * 'juPayload'
+--
 -- * 'juAssignee'
 --
 -- * 'juLat'
 --
 -- * 'juKey'
---
--- * 'juJob'
 --
 -- * 'juLng'
 --
@@ -152,9 +152,9 @@ data JobsUpdate' = JobsUpdate'
 jobsUpdate'
     :: Word64 -- ^ 'jobId'
     -> Text -- ^ 'teamId'
-    -> Job -- ^ 'Job'
+    -> Job -- ^ 'payload'
     -> JobsUpdate'
-jobsUpdate' pJuJobId_ pJuTeamId_ pJuJob_ =
+jobsUpdate' pJuJobId_ pJuTeamId_ pJuPayload_ =
     JobsUpdate'
     { _juQuotaUser = Nothing
     , _juPrettyPrint = True
@@ -166,10 +166,10 @@ jobsUpdate' pJuJobId_ pJuTeamId_ pJuJob_ =
     , _juCustomerPhoneNumber = Nothing
     , _juCustomerName = Nothing
     , _juAddress = Nothing
+    , _juPayload = pJuPayload_
     , _juAssignee = Nothing
     , _juLat = Nothing
     , _juKey = Nothing
-    , _juJob = pJuJob_
     , _juLng = Nothing
     , _juTitle = Nothing
     , _juOAuthToken = Nothing
@@ -229,6 +229,11 @@ juAddress :: Lens' JobsUpdate' (Maybe Text)
 juAddress
   = lens _juAddress (\ s a -> s{_juAddress = a})
 
+-- | Multipart request metadata.
+juPayload :: Lens' JobsUpdate' Job
+juPayload
+  = lens _juPayload (\ s a -> s{_juPayload = a})
+
 -- | Assignee email address, or empty string to unassign.
 juAssignee :: Lens' JobsUpdate' (Maybe Text)
 juAssignee
@@ -243,10 +248,6 @@ juLat = lens _juLat (\ s a -> s{_juLat = a})
 -- token.
 juKey :: Lens' JobsUpdate' (Maybe Key)
 juKey = lens _juKey (\ s a -> s{_juKey = a})
-
--- | Multipart request metadata.
-juJob :: Lens' JobsUpdate' Job
-juJob = lens _juJob (\ s a -> s{_juJob = a})
 
 -- | The longitude coordinate of this job\'s location.
 juLng :: Lens' JobsUpdate' (Maybe Double)
@@ -271,10 +272,12 @@ juFields = lens _juFields (\ s a -> s{_juFields = a})
 -- customField=12%3DAlice. Repeat the parameter for each custom field. Note
 -- that \'=\' cannot appear in the parameter value. Specifying an invalid,
 -- or inactive enum field will result in an error 500.
-juCustomField :: Lens' JobsUpdate' (Maybe Text)
+juCustomField :: Lens' JobsUpdate' [Text]
 juCustomField
   = lens _juCustomField
       (\ s a -> s{_juCustomField = a})
+      . _Default
+      . _Coerce
 
 instance GoogleAuth JobsUpdate' where
         authKey = juKey . _Just
@@ -284,16 +287,15 @@ instance GoogleRequest JobsUpdate' where
         type Rs JobsUpdate' = Job
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u JobsUpdate'{..}
-          = go _juAddress _juAssignee _juCustomField
-              _juCustomerName
+          = go _juTeamId _juJobId _juProgress _juNote
               _juCustomerPhoneNumber
+              _juCustomerName
+              _juAddress
+              _juAssignee
               _juLat
               _juLng
-              _juNote
-              _juProgress
               _juTitle
-              _juTeamId
-              _juJobId
+              (_juCustomField ^. _Default)
               _juQuotaUser
               (Just _juPrettyPrint)
               _juUserIP
@@ -301,7 +303,7 @@ instance GoogleRequest JobsUpdate' where
               _juKey
               _juOAuthToken
               (Just AltJSON)
-              _juJob
+              _juPayload
           where go
                   = clientWithRoute (Proxy :: Proxy JobsUpdateResource)
                       r

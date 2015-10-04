@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type ResourcesListResource =
            Capture "deployment" Text :>
              "resources" :>
                QueryParam "filter" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "pageToken" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Word32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -81,7 +82,7 @@ data ResourcesList' = ResourcesList'
     , _rlMaxResults  :: !Word32
     , _rlFields      :: !(Maybe Text)
     , _rlDeployment  :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResourcesList'' with the minimum fields required to make a request.
 --
@@ -205,9 +206,8 @@ instance GoogleRequest ResourcesList' where
         request
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u ResourcesList'{..}
-          = go _rlFilter (Just _rlMaxResults) _rlPageToken
-              _rlProject
-              _rlDeployment
+          = go _rlProject _rlDeployment _rlFilter _rlPageToken
+              (Just _rlMaxResults)
               _rlQuotaUser
               (Just _rlPrettyPrint)
               _rlUserIP

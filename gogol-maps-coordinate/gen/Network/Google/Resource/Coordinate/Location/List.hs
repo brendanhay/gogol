@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,9 +55,9 @@ type LocationListResource =
          "workers" :>
            Capture "workerEmail" Text :>
              "locations" :>
-               QueryParam "maxResults" Word32 :>
+               QueryParam "startTimestampMs" Word64 :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "startTimestampMs" Word64 :>
+                   QueryParam "maxResults" Word32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -81,7 +82,7 @@ data LocationList' = LocationList'
     , _llOAuthToken       :: !(Maybe OAuthToken)
     , _llMaxResults       :: !(Maybe Word32)
     , _llFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocationList'' with the minimum fields required to make a request.
 --
@@ -195,9 +196,10 @@ instance GoogleRequest LocationList' where
         type Rs LocationList' = LocationListResponse
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u LocationList'{..}
-          = go _llMaxResults _llPageToken _llTeamId
-              _llWorkerEmail
+          = go _llTeamId _llWorkerEmail
               (Just _llStartTimestampMs)
+              _llPageToken
+              _llMaxResults
               _llQuotaUser
               (Just _llPrettyPrint)
               _llUserIP

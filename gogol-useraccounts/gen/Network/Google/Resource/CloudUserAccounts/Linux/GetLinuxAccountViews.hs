@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -56,11 +57,11 @@ type LinuxGetLinuxAccountViewsResource =
        "zones" :>
          Capture "zone" Text :>
            "linuxAccountViews" :>
-             QueryParam "filter" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "orderBy" Text :>
+             QueryParam "instance" Text :>
+               QueryParam "orderBy" Text :>
+                 QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "instance" Text :>
+                     QueryParam "maxResults" Word32 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -89,7 +90,7 @@ data LinuxGetLinuxAccountViews' = LinuxGetLinuxAccountViews'
     , _lglavMaxResults  :: !Word32
     , _lglavFields      :: !(Maybe Text)
     , _lglavInstance    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinuxGetLinuxAccountViews'' with the minimum fields required to make a request.
 --
@@ -246,12 +247,11 @@ instance GoogleRequest LinuxGetLinuxAccountViews'
              LinuxGetLinuxAccountViewsResponse
         request = requestWithRoute defReq userAccountsURL
         requestWithRoute r u LinuxGetLinuxAccountViews'{..}
-          = go _lglavFilter (Just _lglavMaxResults)
+          = go _lglavProject _lglavZone (Just _lglavInstance)
               _lglavOrderBy
+              _lglavFilter
               _lglavPageToken
-              _lglavProject
-              _lglavZone
-              (Just _lglavInstance)
+              (Just _lglavMaxResults)
               _lglavQuotaUser
               (Just _lglavPrettyPrint)
               _lglavUserIP

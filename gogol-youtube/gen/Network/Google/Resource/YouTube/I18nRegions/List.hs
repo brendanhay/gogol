@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -47,8 +48,8 @@ import           Network.Google.YouTube.Types
 -- 'I18nRegionsList'' request conforms to.
 type I18nRegionsListResource =
      "i18nRegions" :>
-       QueryParam "hl" Text :>
-         QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "hl" Text :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -70,7 +71,7 @@ data I18nRegionsList' = I18nRegionsList'
     , _irlKey         :: !(Maybe Key)
     , _irlOAuthToken  :: !(Maybe OAuthToken)
     , _irlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'I18nRegionsList'' with the minimum fields required to make a request.
 --
@@ -160,7 +161,7 @@ instance GoogleRequest I18nRegionsList' where
         type Rs I18nRegionsList' = I18nRegionListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u I18nRegionsList'{..}
-          = go (Just _irlHl) (Just _irlPart) _irlQuotaUser
+          = go (Just _irlPart) (Just _irlHl) _irlQuotaUser
               (Just _irlPrettyPrint)
               _irlUserIP
               _irlFields

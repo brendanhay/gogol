@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -49,7 +50,7 @@ import           Network.Google.Prelude
 type EditsValidateResource =
      Capture "packageName" Text :>
        "edits" :>
-         "{editId}:validate" :>
+         CaptureMode "editId" "validate" Text :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -71,7 +72,7 @@ data EditsValidate' = EditsValidate'
     , _evOAuthToken  :: !(Maybe OAuthToken)
     , _evEditId      :: !Text
     , _evFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsValidate'' with the minimum fields required to make a request.
 --

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -61,14 +62,14 @@ import           Network.Google.ResourceManager.Types
 type ProjectsUndeleteResource =
      "v1beta1" :>
        "projects" :>
-         "{projectId}:undelete" :>
+         CaptureMode "projectId" "undelete" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
@@ -102,7 +103,7 @@ data ProjectsUndelete' = ProjectsUndelete'
     , _proOAuthToken     :: !(Maybe OAuthToken)
     , _proFields         :: !(Maybe Text)
     , _proCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsUndelete'' with the minimum fields required to make a request.
 --
@@ -233,12 +234,12 @@ instance GoogleRequest ProjectsUndelete' where
         type Rs ProjectsUndelete' = Empty
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u ProjectsUndelete'{..}
-          = go _proXgafv _proAccessToken _proBearerToken
-              _proCallback
+          = go _proProjectId _proXgafv _proUploadProtocol
               (Just _proPp)
+              _proAccessToken
               _proUploadType
-              _proUploadProtocol
-              _proProjectId
+              _proBearerToken
+              _proCallback
               _proQuotaUser
               (Just _proPrettyPrint)
               _proFields

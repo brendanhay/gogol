@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -43,10 +44,10 @@ module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Register
     , cdrPp
     , cdrAccessToken
     , cdrUploadType
+    , cdrPayload
     , cdrBearerToken
     , cdrKey
     , cdrOAuthToken
-    , cdrRegisterDebuggeeRequest
     , cdrFields
     , cdrCallback
     ) where
@@ -62,12 +63,12 @@ type ControllerDebuggeesRegisterResource =
          "debuggees" :>
            "register" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "bearer_token" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "upload_protocol" Text :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "callback" Text :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "fields" Text :>
@@ -88,20 +89,20 @@ type ControllerDebuggeesRegisterResource =
 --
 -- /See:/ 'controllerDebuggeesRegister'' smart constructor.
 data ControllerDebuggeesRegister' = ControllerDebuggeesRegister'
-    { _cdrXgafv                   :: !(Maybe Text)
-    , _cdrQuotaUser               :: !(Maybe Text)
-    , _cdrPrettyPrint             :: !Bool
-    , _cdrUploadProtocol          :: !(Maybe Text)
-    , _cdrPp                      :: !Bool
-    , _cdrAccessToken             :: !(Maybe Text)
-    , _cdrUploadType              :: !(Maybe Text)
-    , _cdrBearerToken             :: !(Maybe Text)
-    , _cdrKey                     :: !(Maybe Key)
-    , _cdrOAuthToken              :: !(Maybe OAuthToken)
-    , _cdrRegisterDebuggeeRequest :: !RegisterDebuggeeRequest
-    , _cdrFields                  :: !(Maybe Text)
-    , _cdrCallback                :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cdrXgafv          :: !(Maybe Text)
+    , _cdrQuotaUser      :: !(Maybe Text)
+    , _cdrPrettyPrint    :: !Bool
+    , _cdrUploadProtocol :: !(Maybe Text)
+    , _cdrPp             :: !Bool
+    , _cdrAccessToken    :: !(Maybe Text)
+    , _cdrUploadType     :: !(Maybe Text)
+    , _cdrPayload        :: !RegisterDebuggeeRequest
+    , _cdrBearerToken    :: !(Maybe Text)
+    , _cdrKey            :: !(Maybe Key)
+    , _cdrOAuthToken     :: !(Maybe OAuthToken)
+    , _cdrFields         :: !(Maybe Text)
+    , _cdrCallback       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ControllerDebuggeesRegister'' with the minimum fields required to make a request.
 --
@@ -121,21 +122,21 @@ data ControllerDebuggeesRegister' = ControllerDebuggeesRegister'
 --
 -- * 'cdrUploadType'
 --
+-- * 'cdrPayload'
+--
 -- * 'cdrBearerToken'
 --
 -- * 'cdrKey'
 --
 -- * 'cdrOAuthToken'
 --
--- * 'cdrRegisterDebuggeeRequest'
---
 -- * 'cdrFields'
 --
 -- * 'cdrCallback'
 controllerDebuggeesRegister'
-    :: RegisterDebuggeeRequest -- ^ 'RegisterDebuggeeRequest'
+    :: RegisterDebuggeeRequest -- ^ 'payload'
     -> ControllerDebuggeesRegister'
-controllerDebuggeesRegister' pCdrRegisterDebuggeeRequest_ =
+controllerDebuggeesRegister' pCdrPayload_ =
     ControllerDebuggeesRegister'
     { _cdrXgafv = Nothing
     , _cdrQuotaUser = Nothing
@@ -144,10 +145,10 @@ controllerDebuggeesRegister' pCdrRegisterDebuggeeRequest_ =
     , _cdrPp = True
     , _cdrAccessToken = Nothing
     , _cdrUploadType = Nothing
+    , _cdrPayload = pCdrPayload_
     , _cdrBearerToken = Nothing
     , _cdrKey = Nothing
     , _cdrOAuthToken = Nothing
-    , _cdrRegisterDebuggeeRequest = pCdrRegisterDebuggeeRequest_
     , _cdrFields = Nothing
     , _cdrCallback = Nothing
     }
@@ -191,6 +192,11 @@ cdrUploadType
   = lens _cdrUploadType
       (\ s a -> s{_cdrUploadType = a})
 
+-- | Multipart request metadata.
+cdrPayload :: Lens' ControllerDebuggeesRegister' RegisterDebuggeeRequest
+cdrPayload
+  = lens _cdrPayload (\ s a -> s{_cdrPayload = a})
+
 -- | OAuth bearer token.
 cdrBearerToken :: Lens' ControllerDebuggeesRegister' (Maybe Text)
 cdrBearerToken
@@ -208,12 +214,6 @@ cdrOAuthToken :: Lens' ControllerDebuggeesRegister' (Maybe OAuthToken)
 cdrOAuthToken
   = lens _cdrOAuthToken
       (\ s a -> s{_cdrOAuthToken = a})
-
--- | Multipart request metadata.
-cdrRegisterDebuggeeRequest :: Lens' ControllerDebuggeesRegister' RegisterDebuggeeRequest
-cdrRegisterDebuggeeRequest
-  = lens _cdrRegisterDebuggeeRequest
-      (\ s a -> s{_cdrRegisterDebuggeeRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cdrFields :: Lens' ControllerDebuggeesRegister' (Maybe Text)
@@ -236,18 +236,18 @@ instance GoogleRequest ControllerDebuggeesRegister'
              RegisterDebuggeeResponse
         request = requestWithRoute defReq debuggerURL
         requestWithRoute r u ControllerDebuggeesRegister'{..}
-          = go _cdrXgafv _cdrAccessToken _cdrBearerToken
-              _cdrCallback
-              (Just _cdrPp)
+          = go _cdrXgafv _cdrUploadProtocol (Just _cdrPp)
+              _cdrAccessToken
               _cdrUploadType
-              _cdrUploadProtocol
+              _cdrBearerToken
+              _cdrCallback
               _cdrQuotaUser
               (Just _cdrPrettyPrint)
               _cdrFields
               _cdrKey
               _cdrOAuthToken
               (Just AltJSON)
-              _cdrRegisterDebuggeeRequest
+              _cdrPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ControllerDebuggeesRegisterResource)

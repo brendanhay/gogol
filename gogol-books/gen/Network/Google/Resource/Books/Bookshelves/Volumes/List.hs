@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,10 +56,10 @@ type BookshelvesVolumesListResource =
          "bookshelves" :>
            Capture "shelf" Text :>
              "volumes" :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "showPreorders" Bool :>
-                   QueryParam "source" Text :>
-                     QueryParam "startIndex" Word32 :>
+               QueryParam "source" Text :>
+                 QueryParam "startIndex" Word32 :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "showPreorders" Bool :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -84,7 +85,7 @@ data BookshelvesVolumesList' = BookshelvesVolumesList'
     , _bvlMaxResults    :: !(Maybe Word32)
     , _bvlShowPreOrders :: !(Maybe Bool)
     , _bvlFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BookshelvesVolumesList'' with the minimum fields required to make a request.
 --
@@ -209,10 +210,9 @@ instance GoogleRequest BookshelvesVolumesList' where
         type Rs BookshelvesVolumesList' = Volumes
         request = requestWithRoute defReq booksURL
         requestWithRoute r u BookshelvesVolumesList'{..}
-          = go _bvlMaxResults _bvlShowPreOrders _bvlSource
-              _bvlStartIndex
-              _bvlUserId
-              _bvlShelf
+          = go _bvlUserId _bvlShelf _bvlSource _bvlStartIndex
+              _bvlMaxResults
+              _bvlShowPreOrders
               _bvlQuotaUser
               (Just _bvlPrettyPrint)
               _bvlUserIP

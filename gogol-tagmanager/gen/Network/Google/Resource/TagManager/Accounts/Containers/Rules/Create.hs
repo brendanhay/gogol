@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Create
     , acrcPrettyPrint
     , acrcContainerId
     , acrcUserIP
-    , acrcRule
+    , acrcPayload
     , acrcAccountId
     , acrcKey
     , acrcOAuthToken
@@ -69,12 +70,12 @@ data AccountsContainersRulesCreate' = AccountsContainersRulesCreate'
     , _acrcPrettyPrint :: !Bool
     , _acrcContainerId :: !Text
     , _acrcUserIP      :: !(Maybe Text)
-    , _acrcRule        :: !Rule
+    , _acrcPayload     :: !Rule
     , _acrcAccountId   :: !Text
     , _acrcKey         :: !(Maybe Key)
     , _acrcOAuthToken  :: !(Maybe OAuthToken)
     , _acrcFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersRulesCreate'' with the minimum fields required to make a request.
 --
@@ -88,7 +89,7 @@ data AccountsContainersRulesCreate' = AccountsContainersRulesCreate'
 --
 -- * 'acrcUserIP'
 --
--- * 'acrcRule'
+-- * 'acrcPayload'
 --
 -- * 'acrcAccountId'
 --
@@ -99,16 +100,16 @@ data AccountsContainersRulesCreate' = AccountsContainersRulesCreate'
 -- * 'acrcFields'
 accountsContainersRulesCreate'
     :: Text -- ^ 'containerId'
-    -> Rule -- ^ 'Rule'
+    -> Rule -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> AccountsContainersRulesCreate'
-accountsContainersRulesCreate' pAcrcContainerId_ pAcrcRule_ pAcrcAccountId_ =
+accountsContainersRulesCreate' pAcrcContainerId_ pAcrcPayload_ pAcrcAccountId_ =
     AccountsContainersRulesCreate'
     { _acrcQuotaUser = Nothing
     , _acrcPrettyPrint = True
     , _acrcContainerId = pAcrcContainerId_
     , _acrcUserIP = Nothing
-    , _acrcRule = pAcrcRule_
+    , _acrcPayload = pAcrcPayload_
     , _acrcAccountId = pAcrcAccountId_
     , _acrcKey = Nothing
     , _acrcOAuthToken = Nothing
@@ -142,8 +143,9 @@ acrcUserIP
   = lens _acrcUserIP (\ s a -> s{_acrcUserIP = a})
 
 -- | Multipart request metadata.
-acrcRule :: Lens' AccountsContainersRulesCreate' Rule
-acrcRule = lens _acrcRule (\ s a -> s{_acrcRule = a})
+acrcPayload :: Lens' AccountsContainersRulesCreate' Rule
+acrcPayload
+  = lens _acrcPayload (\ s a -> s{_acrcPayload = a})
 
 -- | The GTM Account ID.
 acrcAccountId :: Lens' AccountsContainersRulesCreate' Text
@@ -186,7 +188,7 @@ instance GoogleRequest AccountsContainersRulesCreate'
               _acrcKey
               _acrcOAuthToken
               (Just AltJSON)
-              _acrcRule
+              _acrcPayload
           where go
                   = clientWithRoute
                       (Proxy ::

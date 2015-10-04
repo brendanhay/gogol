@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,10 +34,10 @@ module Network.Google.Resource.PlusDomains.Activities.Insert
     , aiQuotaUser
     , aiPrettyPrint
     , aiUserIP
+    , aiPayload
     , aiUserId
     , aiKey
     , aiPreview
-    , aiActivity
     , aiOAuthToken
     , aiFields
     ) where
@@ -67,13 +68,13 @@ data ActivitiesInsert' = ActivitiesInsert'
     { _aiQuotaUser   :: !(Maybe Text)
     , _aiPrettyPrint :: !Bool
     , _aiUserIP      :: !(Maybe Text)
+    , _aiPayload     :: !Activity
     , _aiUserId      :: !Text
     , _aiKey         :: !(Maybe Key)
     , _aiPreview     :: !(Maybe Bool)
-    , _aiActivity    :: !Activity
     , _aiOAuthToken  :: !(Maybe OAuthToken)
     , _aiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesInsert'' with the minimum fields required to make a request.
 --
@@ -85,30 +86,30 @@ data ActivitiesInsert' = ActivitiesInsert'
 --
 -- * 'aiUserIP'
 --
+-- * 'aiPayload'
+--
 -- * 'aiUserId'
 --
 -- * 'aiKey'
 --
 -- * 'aiPreview'
 --
--- * 'aiActivity'
---
 -- * 'aiOAuthToken'
 --
 -- * 'aiFields'
 activitiesInsert'
-    :: Text -- ^ 'userId'
-    -> Activity -- ^ 'Activity'
+    :: Activity -- ^ 'payload'
+    -> Text -- ^ 'userId'
     -> ActivitiesInsert'
-activitiesInsert' pAiUserId_ pAiActivity_ =
+activitiesInsert' pAiPayload_ pAiUserId_ =
     ActivitiesInsert'
     { _aiQuotaUser = Nothing
     , _aiPrettyPrint = True
     , _aiUserIP = Nothing
+    , _aiPayload = pAiPayload_
     , _aiUserId = pAiUserId_
     , _aiKey = Nothing
     , _aiPreview = Nothing
-    , _aiActivity = pAiActivity_
     , _aiOAuthToken = Nothing
     , _aiFields = Nothing
     }
@@ -131,6 +132,11 @@ aiPrettyPrint
 aiUserIP :: Lens' ActivitiesInsert' (Maybe Text)
 aiUserIP = lens _aiUserIP (\ s a -> s{_aiUserIP = a})
 
+-- | Multipart request metadata.
+aiPayload :: Lens' ActivitiesInsert' Activity
+aiPayload
+  = lens _aiPayload (\ s a -> s{_aiPayload = a})
+
 -- | The ID of the user to create the activity on behalf of. Its value should
 -- be \"me\", to indicate the authenticated user.
 aiUserId :: Lens' ActivitiesInsert' Text
@@ -149,11 +155,6 @@ aiPreview :: Lens' ActivitiesInsert' (Maybe Bool)
 aiPreview
   = lens _aiPreview (\ s a -> s{_aiPreview = a})
 
--- | Multipart request metadata.
-aiActivity :: Lens' ActivitiesInsert' Activity
-aiActivity
-  = lens _aiActivity (\ s a -> s{_aiActivity = a})
-
 -- | OAuth 2.0 token for the current user.
 aiOAuthToken :: Lens' ActivitiesInsert' (Maybe OAuthToken)
 aiOAuthToken
@@ -171,14 +172,14 @@ instance GoogleRequest ActivitiesInsert' where
         type Rs ActivitiesInsert' = Activity
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u ActivitiesInsert'{..}
-          = go _aiPreview _aiUserId _aiQuotaUser
+          = go _aiUserId _aiPreview _aiQuotaUser
               (Just _aiPrettyPrint)
               _aiUserIP
               _aiFields
               _aiKey
               _aiOAuthToken
               (Just AltJSON)
-              _aiActivity
+              _aiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ActivitiesInsertResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -78,7 +79,7 @@ data AdvertisersGet' = AdvertisersGet'
     , _agKey          :: !(Maybe Key)
     , _agOAuthToken   :: !(Maybe OAuthToken)
     , _agFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersGet'' with the minimum fields required to make a request.
 --
@@ -174,7 +175,7 @@ instance GoogleRequest AdvertisersGet' where
         type Rs AdvertisersGet' = Advertiser
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u AdvertisersGet'{..}
-          = go _agAdvertiserId _agRole _agRoleId _agQuotaUser
+          = go _agRole _agRoleId _agAdvertiserId _agQuotaUser
               (Just _agPrettyPrint)
               _agUserIP
               _agFields

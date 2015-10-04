@@ -19,7 +19,7 @@ import           Network.Google.Prelude
 
 -- | [Output Only] Status of the operation. Can be one of the following:
 -- PENDING, RUNNING, or DONE.
-data OperationStatus
+data Status
     = Done
       -- ^ @DONE@
     | Pending
@@ -28,29 +28,29 @@ data OperationStatus
       -- ^ @RUNNING@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable OperationStatus
+instance Hashable Status
 
-instance FromText OperationStatus where
+instance FromText Status where
     fromText = \case
         "DONE" -> Just Done
         "PENDING" -> Just Pending
         "RUNNING" -> Just Running
         _ -> Nothing
 
-instance ToText OperationStatus where
+instance ToText Status where
     toText = \case
         Done -> "DONE"
         Pending -> "PENDING"
         Running -> "RUNNING"
 
-instance FromJSON OperationStatus where
-    parseJSON = parseJSONText "OperationStatus"
+instance FromJSON Status where
+    parseJSON = parseJSONText "Status"
 
-instance ToJSON OperationStatus where
+instance ToJSON Status where
     toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
-data OperationWarningsCode
+data WarningsItemCode
     = DeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | DiskSizeLargerThanImageSize
@@ -81,9 +81,9 @@ data OperationWarningsCode
       -- ^ @UNREACHABLE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable OperationWarningsCode
+instance Hashable WarningsItemCode
 
-instance FromText OperationWarningsCode where
+instance FromText WarningsItemCode where
     fromText = \case
         "DEPRECATED_RESOURCE_USED" -> Just DeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just DiskSizeLargerThanImageSize
@@ -101,7 +101,7 @@ instance FromText OperationWarningsCode where
         "UNREACHABLE" -> Just Unreachable
         _ -> Nothing
 
-instance ToText OperationWarningsCode where
+instance ToText WarningsItemCode where
     toText = \case
         DeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         DiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -118,8 +118,8 @@ instance ToText OperationWarningsCode where
         SingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         Unreachable -> "UNREACHABLE"
 
-instance FromJSON OperationWarningsCode where
-    parseJSON = parseJSONText "OperationWarningsCode"
+instance FromJSON WarningsItemCode where
+    parseJSON = parseJSONText "WarningsItemCode"
 
-instance ToJSON OperationWarningsCode where
+instance ToJSON WarningsItemCode where
     toJSON = toJSONText

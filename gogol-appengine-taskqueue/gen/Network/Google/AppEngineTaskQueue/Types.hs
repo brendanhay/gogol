@@ -32,26 +32,19 @@ module Network.Google.AppEngineTaskQueue.Types
     , tKind
     , tItems
 
-    -- * TaskQueueACL
-    , TaskQueueACL
-    , taskQueueACL
-    , tqaProducerEmails
-    , tqaAdminEmails
-    , tqaConsumerEmails
-
-    -- * TaskQueueStats
-    , TaskQueueStats
-    , taskQueueStats
-    , tqsTotalTasks
-    , tqsOldestTask
-    , tqsLeasedLastHour
-    , tqsLeasedLastMinute
-
     -- * Tasks
     , Tasks
     , tasks
     , tasKind
     , tasItems
+
+    -- * Stats
+    , Stats
+    , stats
+    , sTotalTasks
+    , sOldestTask
+    , sLeasedLastHour
+    , sLeasedLastMinute
 
     -- * Task
     , Task
@@ -61,9 +54,16 @@ module Network.Google.AppEngineTaskQueue.Types
     , ttTag
     , ttKind
     , ttQueueName
-    , ttPayLoadBase64
+    , ttPayloadBase64
     , ttId
     , ttLeaseTimestamp
+
+    -- * ACL
+    , ACL
+    , acl
+    , aProducerEmails
+    , aAdminEmails
+    , aConsumerEmails
     ) where
 
 import           Network.Google.AppEngineTaskQueue.Types.Product

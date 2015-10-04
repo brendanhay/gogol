@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.Datastore.Datasets.Lookup
     , dlQuotaUser
     , dlPrettyPrint
     , dlUserIP
-    , dlLookupRequest
+    , dlPayload
     , dlKey
     , dlDatasetId
     , dlOAuthToken
@@ -62,15 +63,15 @@ type DatasetsLookupResource =
 --
 -- /See:/ 'datasetsLookup'' smart constructor.
 data DatasetsLookup' = DatasetsLookup'
-    { _dlQuotaUser     :: !(Maybe Text)
-    , _dlPrettyPrint   :: !Bool
-    , _dlUserIP        :: !(Maybe Text)
-    , _dlLookupRequest :: !LookupRequest
-    , _dlKey           :: !(Maybe Key)
-    , _dlDatasetId     :: !Text
-    , _dlOAuthToken    :: !(Maybe OAuthToken)
-    , _dlFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _dlQuotaUser   :: !(Maybe Text)
+    , _dlPrettyPrint :: !Bool
+    , _dlUserIP      :: !(Maybe Text)
+    , _dlPayload     :: !LookupRequest
+    , _dlKey         :: !(Maybe Key)
+    , _dlDatasetId   :: !Text
+    , _dlOAuthToken  :: !(Maybe OAuthToken)
+    , _dlFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsLookup'' with the minimum fields required to make a request.
 --
@@ -82,7 +83,7 @@ data DatasetsLookup' = DatasetsLookup'
 --
 -- * 'dlUserIP'
 --
--- * 'dlLookupRequest'
+-- * 'dlPayload'
 --
 -- * 'dlKey'
 --
@@ -92,15 +93,15 @@ data DatasetsLookup' = DatasetsLookup'
 --
 -- * 'dlFields'
 datasetsLookup'
-    :: LookupRequest -- ^ 'LookupRequest'
+    :: LookupRequest -- ^ 'payload'
     -> Text -- ^ 'datasetId'
     -> DatasetsLookup'
-datasetsLookup' pDlLookupRequest_ pDlDatasetId_ =
+datasetsLookup' pDlPayload_ pDlDatasetId_ =
     DatasetsLookup'
     { _dlQuotaUser = Nothing
     , _dlPrettyPrint = True
     , _dlUserIP = Nothing
-    , _dlLookupRequest = pDlLookupRequest_
+    , _dlPayload = pDlPayload_
     , _dlKey = Nothing
     , _dlDatasetId = pDlDatasetId_
     , _dlOAuthToken = Nothing
@@ -126,10 +127,9 @@ dlUserIP :: Lens' DatasetsLookup' (Maybe Text)
 dlUserIP = lens _dlUserIP (\ s a -> s{_dlUserIP = a})
 
 -- | Multipart request metadata.
-dlLookupRequest :: Lens' DatasetsLookup' LookupRequest
-dlLookupRequest
-  = lens _dlLookupRequest
-      (\ s a -> s{_dlLookupRequest = a})
+dlPayload :: Lens' DatasetsLookup' LookupRequest
+dlPayload
+  = lens _dlPayload (\ s a -> s{_dlPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -165,7 +165,7 @@ instance GoogleRequest DatasetsLookup' where
               _dlKey
               _dlOAuthToken
               (Just AltPROTO)
-              _dlLookupRequest
+              _dlPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsLookupResource)

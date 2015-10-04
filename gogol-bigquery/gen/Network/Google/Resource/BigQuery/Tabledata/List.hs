@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,9 +59,9 @@ type TabledataListResource =
              "tables" :>
                Capture "tableId" Text :>
                  "data" :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "startIndex" Word64 :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "startIndex" Word64 :>
+                       QueryParam "maxResults" Word32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -87,7 +88,7 @@ data TabledataList' = TabledataList'
     , _tStartIndex  :: !(Maybe Word64)
     , _tMaxResults  :: !(Maybe Word32)
     , _tFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TabledataList'' with the minimum fields required to make a request.
 --
@@ -206,10 +207,9 @@ instance GoogleRequest TabledataList' where
         type Rs TabledataList' = TableDataList
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u TabledataList'{..}
-          = go _tMaxResults _tPageToken _tStartIndex
-              _tProjectId
-              _tDatasetId
-              _tTableId
+          = go _tProjectId _tDatasetId _tTableId _tPageToken
+              _tStartIndex
+              _tMaxResults
               _tQuotaUser
               (Just _tPrettyPrint)
               _tUserIP

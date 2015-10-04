@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.Insert
     , ciQuotaUser
     , ciPrettyPrint
     , ciUserIP
+    , ciPayload
     , ciKey
-    , ciConversionList
     , ciOAuthToken
     , ciFields
     ) where
@@ -60,14 +61,14 @@ type ConversionInsertResource =
 --
 -- /See:/ 'conversionInsert'' smart constructor.
 data ConversionInsert' = ConversionInsert'
-    { _ciQuotaUser      :: !(Maybe Text)
-    , _ciPrettyPrint    :: !Bool
-    , _ciUserIP         :: !(Maybe Text)
-    , _ciKey            :: !(Maybe Key)
-    , _ciConversionList :: !ConversionList
-    , _ciOAuthToken     :: !(Maybe OAuthToken)
-    , _ciFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ciQuotaUser   :: !(Maybe Text)
+    , _ciPrettyPrint :: !Bool
+    , _ciUserIP      :: !(Maybe Text)
+    , _ciPayload     :: !ConversionList
+    , _ciKey         :: !(Maybe Key)
+    , _ciOAuthToken  :: !(Maybe OAuthToken)
+    , _ciFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConversionInsert'' with the minimum fields required to make a request.
 --
@@ -79,23 +80,23 @@ data ConversionInsert' = ConversionInsert'
 --
 -- * 'ciUserIP'
 --
--- * 'ciKey'
+-- * 'ciPayload'
 --
--- * 'ciConversionList'
+-- * 'ciKey'
 --
 -- * 'ciOAuthToken'
 --
 -- * 'ciFields'
 conversionInsert'
-    :: ConversionList -- ^ 'ConversionList'
+    :: ConversionList -- ^ 'payload'
     -> ConversionInsert'
-conversionInsert' pCiConversionList_ =
+conversionInsert' pCiPayload_ =
     ConversionInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
     , _ciUserIP = Nothing
+    , _ciPayload = pCiPayload_
     , _ciKey = Nothing
-    , _ciConversionList = pCiConversionList_
     , _ciOAuthToken = Nothing
     , _ciFields = Nothing
     }
@@ -118,17 +119,16 @@ ciPrettyPrint
 ciUserIP :: Lens' ConversionInsert' (Maybe Text)
 ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
 
+-- | Multipart request metadata.
+ciPayload :: Lens' ConversionInsert' ConversionList
+ciPayload
+  = lens _ciPayload (\ s a -> s{_ciPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 ciKey :: Lens' ConversionInsert' (Maybe Key)
 ciKey = lens _ciKey (\ s a -> s{_ciKey = a})
-
--- | Multipart request metadata.
-ciConversionList :: Lens' ConversionInsert' ConversionList
-ciConversionList
-  = lens _ciConversionList
-      (\ s a -> s{_ciConversionList = a})
 
 -- | OAuth 2.0 token for the current user.
 ciOAuthToken :: Lens' ConversionInsert' (Maybe OAuthToken)
@@ -153,7 +153,7 @@ instance GoogleRequest ConversionInsert' where
               _ciKey
               _ciOAuthToken
               (Just AltJSON)
-              _ciConversionList
+              _ciPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ConversionInsertResource)

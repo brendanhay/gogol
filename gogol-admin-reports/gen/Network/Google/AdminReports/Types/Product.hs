@@ -19,61 +19,272 @@ import           Network.Google.AdminReports.Types.Sum
 import           Network.Google.Prelude
 
 --
--- /See:/ 'activityEvents' smart constructor.
-data ActivityEvents = ActivityEvents
-    { _aeName       :: !(Maybe Text)
-    , _aeParameters :: !(Maybe [ActivityEventsParameters])
-    , _aeType       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'usageReportParametersItem' smart constructor.
+data UsageReportParametersItem = UsageReportParametersItem
+    { _urpiDatetimeValue :: !(Maybe DateTime')
+    , _urpiBoolValue     :: !(Maybe Bool)
+    , _urpiIntValue      :: !(Maybe Int64)
+    , _urpiStringValue   :: !(Maybe Text)
+    , _urpiName          :: !(Maybe Text)
+    , _urpiMsgValue      :: !(Maybe [MsgValueItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ActivityEvents' with the minimum fields required to make a request.
+-- | Creates a value of 'UsageReportParametersItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aeName'
+-- * 'urpiDatetimeValue'
 --
--- * 'aeParameters'
+-- * 'urpiBoolValue'
 --
--- * 'aeType'
-activityEvents
-    :: ActivityEvents
-activityEvents =
-    ActivityEvents
-    { _aeName = Nothing
-    , _aeParameters = Nothing
-    , _aeType = Nothing
+-- * 'urpiIntValue'
+--
+-- * 'urpiStringValue'
+--
+-- * 'urpiName'
+--
+-- * 'urpiMsgValue'
+usageReportParametersItem
+    :: UsageReportParametersItem
+usageReportParametersItem =
+    UsageReportParametersItem
+    { _urpiDatetimeValue = Nothing
+    , _urpiBoolValue = Nothing
+    , _urpiIntValue = Nothing
+    , _urpiStringValue = Nothing
+    , _urpiName = Nothing
+    , _urpiMsgValue = Nothing
+    }
+
+-- | RFC 3339 formatted value of the parameter.
+urpiDatetimeValue :: Lens' UsageReportParametersItem (Maybe UTCTime)
+urpiDatetimeValue
+  = lens _urpiDatetimeValue
+      (\ s a -> s{_urpiDatetimeValue = a})
+      . mapping _DateTime
+
+-- | Boolean value of the parameter.
+urpiBoolValue :: Lens' UsageReportParametersItem (Maybe Bool)
+urpiBoolValue
+  = lens _urpiBoolValue
+      (\ s a -> s{_urpiBoolValue = a})
+
+-- | Integral value of the parameter.
+urpiIntValue :: Lens' UsageReportParametersItem (Maybe Int64)
+urpiIntValue
+  = lens _urpiIntValue (\ s a -> s{_urpiIntValue = a})
+
+-- | String value of the parameter.
+urpiStringValue :: Lens' UsageReportParametersItem (Maybe Text)
+urpiStringValue
+  = lens _urpiStringValue
+      (\ s a -> s{_urpiStringValue = a})
+
+-- | The name of the parameter.
+urpiName :: Lens' UsageReportParametersItem (Maybe Text)
+urpiName = lens _urpiName (\ s a -> s{_urpiName = a})
+
+-- | Nested message value of the parameter.
+urpiMsgValue :: Lens' UsageReportParametersItem [MsgValueItem]
+urpiMsgValue
+  = lens _urpiMsgValue (\ s a -> s{_urpiMsgValue = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON UsageReportParametersItem where
+        parseJSON
+          = withObject "UsageReportParametersItem"
+              (\ o ->
+                 UsageReportParametersItem <$>
+                   (o .:? "datetimeValue") <*> (o .:? "boolValue") <*>
+                     (o .:? "intValue")
+                     <*> (o .:? "stringValue")
+                     <*> (o .:? "name")
+                     <*> (o .:? "msgValue" .!= mempty))
+
+instance ToJSON UsageReportParametersItem where
+        toJSON UsageReportParametersItem{..}
+          = object
+              (catMaybes
+                 [("datetimeValue" .=) <$> _urpiDatetimeValue,
+                  ("boolValue" .=) <$> _urpiBoolValue,
+                  ("intValue" .=) <$> _urpiIntValue,
+                  ("stringValue" .=) <$> _urpiStringValue,
+                  ("name" .=) <$> _urpiName,
+                  ("msgValue" .=) <$> _urpiMsgValue])
+
+--
+-- /See:/ 'msgValueItem' smart constructor.
+data MsgValueItem =
+    MsgValueItem
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MsgValueItem' with the minimum fields required to make a request.
+--
+msgValueItem
+    :: MsgValueItem
+msgValueItem = MsgValueItem
+
+instance FromJSON MsgValueItem where
+        parseJSON
+          = withObject "MsgValueItem"
+              (\ o -> pure MsgValueItem)
+
+instance ToJSON MsgValueItem where
+        toJSON = const (Object mempty)
+
+--
+-- /See:/ 'eventsItem' smart constructor.
+data EventsItem = EventsItem
+    { _eiName       :: !(Maybe Text)
+    , _eiParameters :: !(Maybe [EventsItemParametersItem])
+    , _eiType       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EventsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eiName'
+--
+-- * 'eiParameters'
+--
+-- * 'eiType'
+eventsItem
+    :: EventsItem
+eventsItem =
+    EventsItem
+    { _eiName = Nothing
+    , _eiParameters = Nothing
+    , _eiType = Nothing
     }
 
 -- | Name of event.
-aeName :: Lens' ActivityEvents (Maybe Text)
-aeName = lens _aeName (\ s a -> s{_aeName = a})
+eiName :: Lens' EventsItem (Maybe Text)
+eiName = lens _eiName (\ s a -> s{_eiName = a})
 
 -- | Parameter value pairs for various applications.
-aeParameters :: Lens' ActivityEvents [ActivityEventsParameters]
-aeParameters
-  = lens _aeParameters (\ s a -> s{_aeParameters = a})
+eiParameters :: Lens' EventsItem [EventsItemParametersItem]
+eiParameters
+  = lens _eiParameters (\ s a -> s{_eiParameters = a})
       . _Default
       . _Coerce
 
 -- | Type of event.
-aeType :: Lens' ActivityEvents (Maybe Text)
-aeType = lens _aeType (\ s a -> s{_aeType = a})
+eiType :: Lens' EventsItem (Maybe Text)
+eiType = lens _eiType (\ s a -> s{_eiType = a})
 
-instance FromJSON ActivityEvents where
+instance FromJSON EventsItem where
         parseJSON
-          = withObject "ActivityEvents"
+          = withObject "EventsItem"
               (\ o ->
-                 ActivityEvents <$>
+                 EventsItem <$>
                    (o .:? "name") <*> (o .:? "parameters" .!= mempty)
                      <*> (o .:? "type"))
 
-instance ToJSON ActivityEvents where
-        toJSON ActivityEvents{..}
+instance ToJSON EventsItem where
+        toJSON EventsItem{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _aeName,
-                  ("parameters" .=) <$> _aeParameters,
-                  ("type" .=) <$> _aeType])
+                 [("name" .=) <$> _eiName,
+                  ("parameters" .=) <$> _eiParameters,
+                  ("type" .=) <$> _eiType])
+
+--
+-- /See:/ 'eventsItemParametersItem' smart constructor.
+data EventsItemParametersItem = EventsItemParametersItem
+    { _eipiBoolValue     :: !(Maybe Bool)
+    , _eipiIntValue      :: !(Maybe Int64)
+    , _eipiValue         :: !(Maybe Text)
+    , _eipiMultiIntValue :: !(Maybe [Int64])
+    , _eipiName          :: !(Maybe Text)
+    , _eipiMultiValue    :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EventsItemParametersItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eipiBoolValue'
+--
+-- * 'eipiIntValue'
+--
+-- * 'eipiValue'
+--
+-- * 'eipiMultiIntValue'
+--
+-- * 'eipiName'
+--
+-- * 'eipiMultiValue'
+eventsItemParametersItem
+    :: EventsItemParametersItem
+eventsItemParametersItem =
+    EventsItemParametersItem
+    { _eipiBoolValue = Nothing
+    , _eipiIntValue = Nothing
+    , _eipiValue = Nothing
+    , _eipiMultiIntValue = Nothing
+    , _eipiName = Nothing
+    , _eipiMultiValue = Nothing
+    }
+
+-- | Boolean value of the parameter.
+eipiBoolValue :: Lens' EventsItemParametersItem (Maybe Bool)
+eipiBoolValue
+  = lens _eipiBoolValue
+      (\ s a -> s{_eipiBoolValue = a})
+
+-- | Integral value of the parameter.
+eipiIntValue :: Lens' EventsItemParametersItem (Maybe Int64)
+eipiIntValue
+  = lens _eipiIntValue (\ s a -> s{_eipiIntValue = a})
+
+-- | String value of the parameter.
+eipiValue :: Lens' EventsItemParametersItem (Maybe Text)
+eipiValue
+  = lens _eipiValue (\ s a -> s{_eipiValue = a})
+
+-- | Multi-int value of the parameter.
+eipiMultiIntValue :: Lens' EventsItemParametersItem [Int64]
+eipiMultiIntValue
+  = lens _eipiMultiIntValue
+      (\ s a -> s{_eipiMultiIntValue = a})
+      . _Default
+      . _Coerce
+
+-- | The name of the parameter.
+eipiName :: Lens' EventsItemParametersItem (Maybe Text)
+eipiName = lens _eipiName (\ s a -> s{_eipiName = a})
+
+-- | Multi-string value of the parameter.
+eipiMultiValue :: Lens' EventsItemParametersItem [Text]
+eipiMultiValue
+  = lens _eipiMultiValue
+      (\ s a -> s{_eipiMultiValue = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON EventsItemParametersItem where
+        parseJSON
+          = withObject "EventsItemParametersItem"
+              (\ o ->
+                 EventsItemParametersItem <$>
+                   (o .:? "boolValue") <*> (o .:? "intValue") <*>
+                     (o .:? "value")
+                     <*> (o .:? "multiIntValue" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "multiValue" .!= mempty))
+
+instance ToJSON EventsItemParametersItem where
+        toJSON EventsItemParametersItem{..}
+          = object
+              (catMaybes
+                 [("boolValue" .=) <$> _eipiBoolValue,
+                  ("intValue" .=) <$> _eipiIntValue,
+                  ("value" .=) <$> _eipiValue,
+                  ("multiIntValue" .=) <$> _eipiMultiIntValue,
+                  ("name" .=) <$> _eipiName,
+                  ("multiValue" .=) <$> _eipiMultiValue])
 
 -- | JSON template for a collection of usage reports.
 --
@@ -83,8 +294,8 @@ data UsageReports = UsageReports
     , _urNextPageToken :: !(Maybe Text)
     , _urUsageReports  :: !(Maybe [UsageReport])
     , _urKind          :: !Text
-    , _urWarnings      :: !(Maybe [UsageReportsWarnings])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _urWarnings      :: !(Maybe [WarningsItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsageReports' with the minimum fields required to make a request.
 --
@@ -133,7 +344,7 @@ urKind :: Lens' UsageReports Text
 urKind = lens _urKind (\ s a -> s{_urKind = a})
 
 -- | Warnings if any.
-urWarnings :: Lens' UsageReports [UsageReportsWarnings]
+urWarnings :: Lens' UsageReports [WarningsItem]
 urWarnings
   = lens _urWarnings (\ s a -> s{_urWarnings = a}) .
       _Default
@@ -167,7 +378,7 @@ data ActivityId = ActivityId
     , _aiUniqueQualifier :: !(Maybe Int64)
     , _aiCustomerId      :: !(Maybe Text)
     , _aiApplicationName :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivityId' with the minimum fields required to make a request.
 --
@@ -239,7 +450,7 @@ data Activities = Activities
     , _aNextPageToken :: !(Maybe Text)
     , _aKind          :: !Text
     , _aItems         :: !(Maybe [Activity])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Activities' with the minimum fields required to make a request.
 --
@@ -306,9 +517,9 @@ data UsageReport = UsageReport
     { _uEtag       :: !(Maybe Text)
     , _uKind       :: !Text
     , _uDate       :: !(Maybe Text)
-    , _uParameters :: !(Maybe [UsageReportParameters])
-    , _uEntity     :: !(Maybe UsageReportEntity)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _uParameters :: !(Maybe [UsageReportParametersItem])
+    , _uEntity     :: !(Maybe Entity)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsageReport' with the minimum fields required to make a request.
 --
@@ -347,14 +558,14 @@ uDate :: Lens' UsageReport (Maybe Text)
 uDate = lens _uDate (\ s a -> s{_uDate = a})
 
 -- | Parameter value pairs for various applications.
-uParameters :: Lens' UsageReport [UsageReportParameters]
+uParameters :: Lens' UsageReport [UsageReportParametersItem]
 uParameters
   = lens _uParameters (\ s a -> s{_uParameters = a}) .
       _Default
       . _Coerce
 
 -- | Information about the type of the item.
-uEntity :: Lens' UsageReport (Maybe UsageReportEntity)
+uEntity :: Lens' UsageReport (Maybe Entity)
 uEntity = lens _uEntity (\ s a -> s{_uEntity = a})
 
 instance FromJSON UsageReport where
@@ -377,26 +588,6 @@ instance ToJSON UsageReport where
                   ("parameters" .=) <$> _uParameters,
                   ("entity" .=) <$> _uEntity])
 
---
--- /See:/ 'usageReportParametersMsgValue' smart constructor.
-data UsageReportParametersMsgValue =
-    UsageReportParametersMsgValue
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'UsageReportParametersMsgValue' with the minimum fields required to make a request.
---
-usageReportParametersMsgValue
-    :: UsageReportParametersMsgValue
-usageReportParametersMsgValue = UsageReportParametersMsgValue
-
-instance FromJSON UsageReportParametersMsgValue where
-        parseJSON
-          = withObject "UsageReportParametersMsgValue"
-              (\ o -> pure UsageReportParametersMsgValue)
-
-instance ToJSON UsageReportParametersMsgValue where
-        toJSON = const (Object mempty)
-
 -- | An notification channel used to watch for resource changes.
 --
 -- /See:/ 'channel' smart constructor.
@@ -407,11 +598,11 @@ data Channel = Channel
     , _cExpiration  :: !(Maybe Int64)
     , _cToken       :: !(Maybe Text)
     , _cAddress     :: !(Maybe Text)
-    , _cPayLoad     :: !(Maybe Bool)
-    , _cParams      :: !(Maybe ChannelParams)
+    , _cPayload     :: !(Maybe Bool)
+    , _cParams      :: !(Maybe Params)
     , _cId          :: !(Maybe Text)
     , _cType        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Channel' with the minimum fields required to make a request.
 --
@@ -429,7 +620,7 @@ data Channel = Channel
 --
 -- * 'cAddress'
 --
--- * 'cPayLoad'
+-- * 'cPayload'
 --
 -- * 'cParams'
 --
@@ -446,7 +637,7 @@ channel =
     , _cExpiration = Nothing
     , _cToken = Nothing
     , _cAddress = Nothing
-    , _cPayLoad = Nothing
+    , _cPayload = Nothing
     , _cParams = Nothing
     , _cId = Nothing
     , _cType = Nothing
@@ -484,11 +675,11 @@ cAddress :: Lens' Channel (Maybe Text)
 cAddress = lens _cAddress (\ s a -> s{_cAddress = a})
 
 -- | A Boolean value to indicate whether payload is wanted. Optional.
-cPayLoad :: Lens' Channel (Maybe Bool)
-cPayLoad = lens _cPayLoad (\ s a -> s{_cPayLoad = a})
+cPayload :: Lens' Channel (Maybe Bool)
+cPayload = lens _cPayload (\ s a -> s{_cPayload = a})
 
 -- | Additional parameters controlling delivery channel behavior. Optional.
-cParams :: Lens' Channel (Maybe ChannelParams)
+cParams :: Lens' Channel (Maybe Params)
 cParams = lens _cParams (\ s a -> s{_cParams = a})
 
 -- | A UUID or similar unique string that identifies this channel.
@@ -524,133 +715,195 @@ instance ToJSON Channel where
                   ("expiration" .=) <$> _cExpiration,
                   ("token" .=) <$> _cToken,
                   ("address" .=) <$> _cAddress,
-                  ("payload" .=) <$> _cPayLoad,
+                  ("payload" .=) <$> _cPayload,
                   ("params" .=) <$> _cParams, ("id" .=) <$> _cId,
                   ("type" .=) <$> _cType])
 
+-- | User doing the action.
 --
--- /See:/ 'usageReportsWarningsData' smart constructor.
-data UsageReportsWarningsData = UsageReportsWarningsData
-    { _urwdValue :: !(Maybe Text)
-    , _urwdKey   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'actor' smart constructor.
+data Actor = Actor
+    { _aEmail      :: !(Maybe Text)
+    , _aCallerType :: !(Maybe Text)
+    , _aProfileId  :: !(Maybe Text)
+    , _aKey        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsageReportsWarningsData' with the minimum fields required to make a request.
+-- | Creates a value of 'Actor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'urwdValue'
+-- * 'aEmail'
 --
--- * 'urwdKey'
-usageReportsWarningsData
-    :: UsageReportsWarningsData
-usageReportsWarningsData =
-    UsageReportsWarningsData
-    { _urwdValue = Nothing
-    , _urwdKey = Nothing
+-- * 'aCallerType'
+--
+-- * 'aProfileId'
+--
+-- * 'aKey'
+actor
+    :: Actor
+actor =
+    Actor
+    { _aEmail = Nothing
+    , _aCallerType = Nothing
+    , _aProfileId = Nothing
+    , _aKey = Nothing
+    }
+
+-- | Email address of the user.
+aEmail :: Lens' Actor (Maybe Text)
+aEmail = lens _aEmail (\ s a -> s{_aEmail = a})
+
+-- | User or OAuth 2LO request.
+aCallerType :: Lens' Actor (Maybe Text)
+aCallerType
+  = lens _aCallerType (\ s a -> s{_aCallerType = a})
+
+-- | Obfuscated user id of the user.
+aProfileId :: Lens' Actor (Maybe Text)
+aProfileId
+  = lens _aProfileId (\ s a -> s{_aProfileId = a})
+
+-- | For OAuth 2LO API requests, consumer_key of the requestor.
+aKey :: Lens' Actor (Maybe Text)
+aKey = lens _aKey (\ s a -> s{_aKey = a})
+
+instance FromJSON Actor where
+        parseJSON
+          = withObject "Actor"
+              (\ o ->
+                 Actor <$>
+                   (o .:? "email") <*> (o .:? "callerType") <*>
+                     (o .:? "profileId")
+                     <*> (o .:? "key"))
+
+instance ToJSON Actor where
+        toJSON Actor{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _aEmail,
+                  ("callerType" .=) <$> _aCallerType,
+                  ("profileId" .=) <$> _aProfileId,
+                  ("key" .=) <$> _aKey])
+
+-- | Additional parameters controlling delivery channel behavior. Optional.
+--
+-- /See:/ 'params' smart constructor.
+data Params =
+    Params
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Params' with the minimum fields required to make a request.
+--
+params
+    :: Params
+params = Params
+
+instance FromJSON Params where
+        parseJSON = withObject "Params" (\ o -> pure Params)
+
+instance ToJSON Params where
+        toJSON = const (Object mempty)
+
+--
+-- /See:/ 'warningsItem' smart constructor.
+data WarningsItem = WarningsItem
+    { _wiData    :: !(Maybe [DataItem])
+    , _wiCode    :: !(Maybe Text)
+    , _wiMessage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WarningsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wiData'
+--
+-- * 'wiCode'
+--
+-- * 'wiMessage'
+warningsItem
+    :: WarningsItem
+warningsItem =
+    WarningsItem
+    { _wiData = Nothing
+    , _wiCode = Nothing
+    , _wiMessage = Nothing
+    }
+
+-- | Key-Value pairs to give detailed information on the warning.
+wiData :: Lens' WarningsItem [DataItem]
+wiData
+  = lens _wiData (\ s a -> s{_wiData = a}) . _Default .
+      _Coerce
+
+-- | Machine readable code \/ warning type.
+wiCode :: Lens' WarningsItem (Maybe Text)
+wiCode = lens _wiCode (\ s a -> s{_wiCode = a})
+
+-- | Human readable message for the warning.
+wiMessage :: Lens' WarningsItem (Maybe Text)
+wiMessage
+  = lens _wiMessage (\ s a -> s{_wiMessage = a})
+
+instance FromJSON WarningsItem where
+        parseJSON
+          = withObject "WarningsItem"
+              (\ o ->
+                 WarningsItem <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON WarningsItem where
+        toJSON WarningsItem{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _wiData, ("code" .=) <$> _wiCode,
+                  ("message" .=) <$> _wiMessage])
+
+--
+-- /See:/ 'dataItem' smart constructor.
+data DataItem = DataItem
+    { _diValue :: !(Maybe Text)
+    , _diKey   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DataItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'diValue'
+--
+-- * 'diKey'
+dataItem
+    :: DataItem
+dataItem =
+    DataItem
+    { _diValue = Nothing
+    , _diKey = Nothing
     }
 
 -- | Value associated with a key-value pair to give detailed information on
 -- the warning.
-urwdValue :: Lens' UsageReportsWarningsData (Maybe Text)
-urwdValue
-  = lens _urwdValue (\ s a -> s{_urwdValue = a})
+diValue :: Lens' DataItem (Maybe Text)
+diValue = lens _diValue (\ s a -> s{_diValue = a})
 
 -- | Key associated with a key-value pair to give detailed information on the
 -- warning.
-urwdKey :: Lens' UsageReportsWarningsData (Maybe Text)
-urwdKey = lens _urwdKey (\ s a -> s{_urwdKey = a})
+diKey :: Lens' DataItem (Maybe Text)
+diKey = lens _diKey (\ s a -> s{_diKey = a})
 
-instance FromJSON UsageReportsWarningsData where
+instance FromJSON DataItem where
         parseJSON
-          = withObject "UsageReportsWarningsData"
+          = withObject "DataItem"
               (\ o ->
-                 UsageReportsWarningsData <$>
-                   (o .:? "value") <*> (o .:? "key"))
+                 DataItem <$> (o .:? "value") <*> (o .:? "key"))
 
-instance ToJSON UsageReportsWarningsData where
-        toJSON UsageReportsWarningsData{..}
+instance ToJSON DataItem where
+        toJSON DataItem{..}
           = object
               (catMaybes
-                 [("value" .=) <$> _urwdValue,
-                  ("key" .=) <$> _urwdKey])
-
---
--- /See:/ 'usageReportsWarnings' smart constructor.
-data UsageReportsWarnings = UsageReportsWarnings
-    { _urwData    :: !(Maybe [UsageReportsWarningsData])
-    , _urwCode    :: !(Maybe Text)
-    , _urwMessage :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'UsageReportsWarnings' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'urwData'
---
--- * 'urwCode'
---
--- * 'urwMessage'
-usageReportsWarnings
-    :: UsageReportsWarnings
-usageReportsWarnings =
-    UsageReportsWarnings
-    { _urwData = Nothing
-    , _urwCode = Nothing
-    , _urwMessage = Nothing
-    }
-
--- | Key-Value pairs to give detailed information on the warning.
-urwData :: Lens' UsageReportsWarnings [UsageReportsWarningsData]
-urwData
-  = lens _urwData (\ s a -> s{_urwData = a}) . _Default
-      . _Coerce
-
--- | Machine readable code \/ warning type.
-urwCode :: Lens' UsageReportsWarnings (Maybe Text)
-urwCode = lens _urwCode (\ s a -> s{_urwCode = a})
-
--- | Human readable message for the warning.
-urwMessage :: Lens' UsageReportsWarnings (Maybe Text)
-urwMessage
-  = lens _urwMessage (\ s a -> s{_urwMessage = a})
-
-instance FromJSON UsageReportsWarnings where
-        parseJSON
-          = withObject "UsageReportsWarnings"
-              (\ o ->
-                 UsageReportsWarnings <$>
-                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
-                     (o .:? "message"))
-
-instance ToJSON UsageReportsWarnings where
-        toJSON UsageReportsWarnings{..}
-          = object
-              (catMaybes
-                 [("data" .=) <$> _urwData, ("code" .=) <$> _urwCode,
-                  ("message" .=) <$> _urwMessage])
-
--- | Additional parameters controlling delivery channel behavior. Optional.
---
--- /See:/ 'channelParams' smart constructor.
-data ChannelParams =
-    ChannelParams
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
---
-channelParams
-    :: ChannelParams
-channelParams = ChannelParams
-
-instance FromJSON ChannelParams where
-        parseJSON
-          = withObject "ChannelParams"
-              (\ o -> pure ChannelParams)
-
-instance ToJSON ChannelParams where
-        toJSON = const (Object mempty)
+                 [("value" .=) <$> _diValue, ("key" .=) <$> _diKey])
 
 -- | JSON template for the activity resource.
 --
@@ -659,11 +912,11 @@ data Activity = Activity
     { _actEtag        :: !(Maybe Text)
     , _actIPAddress   :: !(Maybe Text)
     , _actKind        :: !Text
-    , _actActor       :: !(Maybe ActivityActor)
+    , _actActor       :: !(Maybe Actor)
     , _actOwnerDomain :: !(Maybe Text)
-    , _actEvents      :: !(Maybe [ActivityEvents])
+    , _actEvents      :: !(Maybe [EventsItem])
     , _actId          :: !(Maybe ActivityId)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Activity' with the minimum fields required to make a request.
 --
@@ -709,7 +962,7 @@ actKind :: Lens' Activity Text
 actKind = lens _actKind (\ s a -> s{_actKind = a})
 
 -- | User doing the action.
-actActor :: Lens' Activity (Maybe ActivityActor)
+actActor :: Lens' Activity (Maybe Actor)
 actActor = lens _actActor (\ s a -> s{_actActor = a})
 
 -- | Domain of source customer.
@@ -719,7 +972,7 @@ actOwnerDomain
       (\ s a -> s{_actOwnerDomain = a})
 
 -- | Activity events.
-actEvents :: Lens' Activity [ActivityEvents]
+actEvents :: Lens' Activity [EventsItem]
 actEvents
   = lens _actEvents (\ s a -> s{_actEvents = a}) .
       _Default
@@ -752,326 +1005,70 @@ instance ToJSON Activity where
                   ("ownerDomain" .=) <$> _actOwnerDomain,
                   ("events" .=) <$> _actEvents, ("id" .=) <$> _actId])
 
---
--- /See:/ 'activityEventsParameters' smart constructor.
-data ActivityEventsParameters = ActivityEventsParameters
-    { _aepBoolValue     :: !(Maybe Bool)
-    , _aepIntValue      :: !(Maybe Int64)
-    , _aepValue         :: !(Maybe Text)
-    , _aepMultiIntValue :: !(Maybe [Int64])
-    , _aepName          :: !(Maybe Text)
-    , _aepMultiValue    :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityEventsParameters' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aepBoolValue'
---
--- * 'aepIntValue'
---
--- * 'aepValue'
---
--- * 'aepMultiIntValue'
---
--- * 'aepName'
---
--- * 'aepMultiValue'
-activityEventsParameters
-    :: ActivityEventsParameters
-activityEventsParameters =
-    ActivityEventsParameters
-    { _aepBoolValue = Nothing
-    , _aepIntValue = Nothing
-    , _aepValue = Nothing
-    , _aepMultiIntValue = Nothing
-    , _aepName = Nothing
-    , _aepMultiValue = Nothing
-    }
-
--- | Boolean value of the parameter.
-aepBoolValue :: Lens' ActivityEventsParameters (Maybe Bool)
-aepBoolValue
-  = lens _aepBoolValue (\ s a -> s{_aepBoolValue = a})
-
--- | Integral value of the parameter.
-aepIntValue :: Lens' ActivityEventsParameters (Maybe Int64)
-aepIntValue
-  = lens _aepIntValue (\ s a -> s{_aepIntValue = a})
-
--- | String value of the parameter.
-aepValue :: Lens' ActivityEventsParameters (Maybe Text)
-aepValue = lens _aepValue (\ s a -> s{_aepValue = a})
-
--- | Multi-int value of the parameter.
-aepMultiIntValue :: Lens' ActivityEventsParameters [Int64]
-aepMultiIntValue
-  = lens _aepMultiIntValue
-      (\ s a -> s{_aepMultiIntValue = a})
-      . _Default
-      . _Coerce
-
--- | The name of the parameter.
-aepName :: Lens' ActivityEventsParameters (Maybe Text)
-aepName = lens _aepName (\ s a -> s{_aepName = a})
-
--- | Multi-string value of the parameter.
-aepMultiValue :: Lens' ActivityEventsParameters [Text]
-aepMultiValue
-  = lens _aepMultiValue
-      (\ s a -> s{_aepMultiValue = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ActivityEventsParameters where
-        parseJSON
-          = withObject "ActivityEventsParameters"
-              (\ o ->
-                 ActivityEventsParameters <$>
-                   (o .:? "boolValue") <*> (o .:? "intValue") <*>
-                     (o .:? "value")
-                     <*> (o .:? "multiIntValue" .!= mempty)
-                     <*> (o .:? "name")
-                     <*> (o .:? "multiValue" .!= mempty))
-
-instance ToJSON ActivityEventsParameters where
-        toJSON ActivityEventsParameters{..}
-          = object
-              (catMaybes
-                 [("boolValue" .=) <$> _aepBoolValue,
-                  ("intValue" .=) <$> _aepIntValue,
-                  ("value" .=) <$> _aepValue,
-                  ("multiIntValue" .=) <$> _aepMultiIntValue,
-                  ("name" .=) <$> _aepName,
-                  ("multiValue" .=) <$> _aepMultiValue])
-
 -- | Information about the type of the item.
 --
--- /See:/ 'usageReportEntity' smart constructor.
-data UsageReportEntity = UsageReportEntity
-    { _ureProfileId  :: !(Maybe Text)
-    , _ureCustomerId :: !(Maybe Text)
-    , _ureUserEmail  :: !(Maybe Text)
-    , _ureType       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'entity' smart constructor.
+data Entity = Entity
+    { _eProfileId  :: !(Maybe Text)
+    , _eCustomerId :: !(Maybe Text)
+    , _eUserEmail  :: !(Maybe Text)
+    , _eType       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsageReportEntity' with the minimum fields required to make a request.
+-- | Creates a value of 'Entity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ureProfileId'
+-- * 'eProfileId'
 --
--- * 'ureCustomerId'
+-- * 'eCustomerId'
 --
--- * 'ureUserEmail'
+-- * 'eUserEmail'
 --
--- * 'ureType'
-usageReportEntity
-    :: UsageReportEntity
-usageReportEntity =
-    UsageReportEntity
-    { _ureProfileId = Nothing
-    , _ureCustomerId = Nothing
-    , _ureUserEmail = Nothing
-    , _ureType = Nothing
+-- * 'eType'
+entity
+    :: Entity
+entity =
+    Entity
+    { _eProfileId = Nothing
+    , _eCustomerId = Nothing
+    , _eUserEmail = Nothing
+    , _eType = Nothing
     }
 
 -- | Obfuscated user id for the record.
-ureProfileId :: Lens' UsageReportEntity (Maybe Text)
-ureProfileId
-  = lens _ureProfileId (\ s a -> s{_ureProfileId = a})
+eProfileId :: Lens' Entity (Maybe Text)
+eProfileId
+  = lens _eProfileId (\ s a -> s{_eProfileId = a})
 
 -- | Obfuscated customer id for the record.
-ureCustomerId :: Lens' UsageReportEntity (Maybe Text)
-ureCustomerId
-  = lens _ureCustomerId
-      (\ s a -> s{_ureCustomerId = a})
+eCustomerId :: Lens' Entity (Maybe Text)
+eCustomerId
+  = lens _eCustomerId (\ s a -> s{_eCustomerId = a})
 
 -- | user\'s email.
-ureUserEmail :: Lens' UsageReportEntity (Maybe Text)
-ureUserEmail
-  = lens _ureUserEmail (\ s a -> s{_ureUserEmail = a})
+eUserEmail :: Lens' Entity (Maybe Text)
+eUserEmail
+  = lens _eUserEmail (\ s a -> s{_eUserEmail = a})
 
 -- | The type of item, can be a customer or user.
-ureType :: Lens' UsageReportEntity (Maybe Text)
-ureType = lens _ureType (\ s a -> s{_ureType = a})
+eType :: Lens' Entity (Maybe Text)
+eType = lens _eType (\ s a -> s{_eType = a})
 
-instance FromJSON UsageReportEntity where
+instance FromJSON Entity where
         parseJSON
-          = withObject "UsageReportEntity"
+          = withObject "Entity"
               (\ o ->
-                 UsageReportEntity <$>
+                 Entity <$>
                    (o .:? "profileId") <*> (o .:? "customerId") <*>
                      (o .:? "userEmail")
                      <*> (o .:? "type"))
 
-instance ToJSON UsageReportEntity where
-        toJSON UsageReportEntity{..}
+instance ToJSON Entity where
+        toJSON Entity{..}
           = object
               (catMaybes
-                 [("profileId" .=) <$> _ureProfileId,
-                  ("customerId" .=) <$> _ureCustomerId,
-                  ("userEmail" .=) <$> _ureUserEmail,
-                  ("type" .=) <$> _ureType])
-
--- | User doing the action.
---
--- /See:/ 'activityActor' smart constructor.
-data ActivityActor = ActivityActor
-    { _aaEmail      :: !(Maybe Text)
-    , _aaCallerType :: !(Maybe Text)
-    , _aaProfileId  :: !(Maybe Text)
-    , _aaKey        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityActor' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aaEmail'
---
--- * 'aaCallerType'
---
--- * 'aaProfileId'
---
--- * 'aaKey'
-activityActor
-    :: ActivityActor
-activityActor =
-    ActivityActor
-    { _aaEmail = Nothing
-    , _aaCallerType = Nothing
-    , _aaProfileId = Nothing
-    , _aaKey = Nothing
-    }
-
--- | Email address of the user.
-aaEmail :: Lens' ActivityActor (Maybe Text)
-aaEmail = lens _aaEmail (\ s a -> s{_aaEmail = a})
-
--- | User or OAuth 2LO request.
-aaCallerType :: Lens' ActivityActor (Maybe Text)
-aaCallerType
-  = lens _aaCallerType (\ s a -> s{_aaCallerType = a})
-
--- | Obfuscated user id of the user.
-aaProfileId :: Lens' ActivityActor (Maybe Text)
-aaProfileId
-  = lens _aaProfileId (\ s a -> s{_aaProfileId = a})
-
--- | For OAuth 2LO API requests, consumer_key of the requestor.
-aaKey :: Lens' ActivityActor (Maybe Text)
-aaKey = lens _aaKey (\ s a -> s{_aaKey = a})
-
-instance FromJSON ActivityActor where
-        parseJSON
-          = withObject "ActivityActor"
-              (\ o ->
-                 ActivityActor <$>
-                   (o .:? "email") <*> (o .:? "callerType") <*>
-                     (o .:? "profileId")
-                     <*> (o .:? "key"))
-
-instance ToJSON ActivityActor where
-        toJSON ActivityActor{..}
-          = object
-              (catMaybes
-                 [("email" .=) <$> _aaEmail,
-                  ("callerType" .=) <$> _aaCallerType,
-                  ("profileId" .=) <$> _aaProfileId,
-                  ("key" .=) <$> _aaKey])
-
---
--- /See:/ 'usageReportParameters' smart constructor.
-data UsageReportParameters = UsageReportParameters
-    { _urpDatetimeValue :: !(Maybe DateTime')
-    , _urpBoolValue     :: !(Maybe Bool)
-    , _urpIntValue      :: !(Maybe Int64)
-    , _urpStringValue   :: !(Maybe Text)
-    , _urpName          :: !(Maybe Text)
-    , _urpMsgValue      :: !(Maybe [UsageReportParametersMsgValue])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'UsageReportParameters' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'urpDatetimeValue'
---
--- * 'urpBoolValue'
---
--- * 'urpIntValue'
---
--- * 'urpStringValue'
---
--- * 'urpName'
---
--- * 'urpMsgValue'
-usageReportParameters
-    :: UsageReportParameters
-usageReportParameters =
-    UsageReportParameters
-    { _urpDatetimeValue = Nothing
-    , _urpBoolValue = Nothing
-    , _urpIntValue = Nothing
-    , _urpStringValue = Nothing
-    , _urpName = Nothing
-    , _urpMsgValue = Nothing
-    }
-
--- | RFC 3339 formatted value of the parameter.
-urpDatetimeValue :: Lens' UsageReportParameters (Maybe UTCTime)
-urpDatetimeValue
-  = lens _urpDatetimeValue
-      (\ s a -> s{_urpDatetimeValue = a})
-      . mapping _DateTime
-
--- | Boolean value of the parameter.
-urpBoolValue :: Lens' UsageReportParameters (Maybe Bool)
-urpBoolValue
-  = lens _urpBoolValue (\ s a -> s{_urpBoolValue = a})
-
--- | Integral value of the parameter.
-urpIntValue :: Lens' UsageReportParameters (Maybe Int64)
-urpIntValue
-  = lens _urpIntValue (\ s a -> s{_urpIntValue = a})
-
--- | String value of the parameter.
-urpStringValue :: Lens' UsageReportParameters (Maybe Text)
-urpStringValue
-  = lens _urpStringValue
-      (\ s a -> s{_urpStringValue = a})
-
--- | The name of the parameter.
-urpName :: Lens' UsageReportParameters (Maybe Text)
-urpName = lens _urpName (\ s a -> s{_urpName = a})
-
--- | Nested message value of the parameter.
-urpMsgValue :: Lens' UsageReportParameters [UsageReportParametersMsgValue]
-urpMsgValue
-  = lens _urpMsgValue (\ s a -> s{_urpMsgValue = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON UsageReportParameters where
-        parseJSON
-          = withObject "UsageReportParameters"
-              (\ o ->
-                 UsageReportParameters <$>
-                   (o .:? "datetimeValue") <*> (o .:? "boolValue") <*>
-                     (o .:? "intValue")
-                     <*> (o .:? "stringValue")
-                     <*> (o .:? "name")
-                     <*> (o .:? "msgValue" .!= mempty))
-
-instance ToJSON UsageReportParameters where
-        toJSON UsageReportParameters{..}
-          = object
-              (catMaybes
-                 [("datetimeValue" .=) <$> _urpDatetimeValue,
-                  ("boolValue" .=) <$> _urpBoolValue,
-                  ("intValue" .=) <$> _urpIntValue,
-                  ("stringValue" .=) <$> _urpStringValue,
-                  ("name" .=) <$> _urpName,
-                  ("msgValue" .=) <$> _urpMsgValue])
+                 [("profileId" .=) <$> _eProfileId,
+                  ("customerId" .=) <$> _eCustomerId,
+                  ("userEmail" .=) <$> _eUserEmail,
+                  ("type" .=) <$> _eType])

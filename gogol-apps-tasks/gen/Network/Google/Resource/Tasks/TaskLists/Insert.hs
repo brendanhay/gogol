@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Tasks.TaskLists.Insert
     , tliQuotaUser
     , tliPrettyPrint
     , tliUserIP
+    , tliPayload
     , tliKey
-    , tliTaskList
     , tliOAuthToken
     , tliFields
     ) where
@@ -66,11 +67,11 @@ data TaskListsInsert' = TaskListsInsert'
     { _tliQuotaUser   :: !(Maybe Text)
     , _tliPrettyPrint :: !Bool
     , _tliUserIP      :: !(Maybe Text)
+    , _tliPayload     :: !TaskList
     , _tliKey         :: !(Maybe Key)
-    , _tliTaskList    :: !TaskList
     , _tliOAuthToken  :: !(Maybe OAuthToken)
     , _tliFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskListsInsert'' with the minimum fields required to make a request.
 --
@@ -82,23 +83,23 @@ data TaskListsInsert' = TaskListsInsert'
 --
 -- * 'tliUserIP'
 --
--- * 'tliKey'
+-- * 'tliPayload'
 --
--- * 'tliTaskList'
+-- * 'tliKey'
 --
 -- * 'tliOAuthToken'
 --
 -- * 'tliFields'
 taskListsInsert'
-    :: TaskList -- ^ 'TaskList'
+    :: TaskList -- ^ 'payload'
     -> TaskListsInsert'
-taskListsInsert' pTliTaskList_ =
+taskListsInsert' pTliPayload_ =
     TaskListsInsert'
     { _tliQuotaUser = Nothing
     , _tliPrettyPrint = True
     , _tliUserIP = Nothing
+    , _tliPayload = pTliPayload_
     , _tliKey = Nothing
-    , _tliTaskList = pTliTaskList_
     , _tliOAuthToken = Nothing
     , _tliFields = Nothing
     }
@@ -122,16 +123,16 @@ tliUserIP :: Lens' TaskListsInsert' (Maybe Text)
 tliUserIP
   = lens _tliUserIP (\ s a -> s{_tliUserIP = a})
 
+-- | Multipart request metadata.
+tliPayload :: Lens' TaskListsInsert' TaskList
+tliPayload
+  = lens _tliPayload (\ s a -> s{_tliPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 tliKey :: Lens' TaskListsInsert' (Maybe Key)
 tliKey = lens _tliKey (\ s a -> s{_tliKey = a})
-
--- | Multipart request metadata.
-tliTaskList :: Lens' TaskListsInsert' TaskList
-tliTaskList
-  = lens _tliTaskList (\ s a -> s{_tliTaskList = a})
 
 -- | OAuth 2.0 token for the current user.
 tliOAuthToken :: Lens' TaskListsInsert' (Maybe OAuthToken)
@@ -157,7 +158,7 @@ instance GoogleRequest TaskListsInsert' where
               _tliKey
               _tliOAuthToken
               (Just AltJSON)
-              _tliTaskList
+              _tliPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TaskListsInsertResource)

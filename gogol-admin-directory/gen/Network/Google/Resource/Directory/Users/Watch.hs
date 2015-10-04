@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -38,8 +39,8 @@ module Network.Google.Resource.Directory.Users.Watch
     , uwCustomFieldMask
     , uwUserIP
     , uwDomain
-    , uwChannel
     , uwShowDeleted
+    , uwPayload
     , uwSortOrder
     , uwCustomer
     , uwKey
@@ -59,21 +60,20 @@ import           Network.Google.Prelude
 type UsersWatchResource =
      "users" :>
        "watch" :>
-         QueryParam "customFieldMask" Text :>
-           QueryParam "customer" Text :>
-             QueryParam "domain" Text :>
-               QueryParam "event" DirectoryUsersWatchEvent :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "orderBy" DirectoryUsersWatchOrderBy :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "projection" DirectoryUsersWatchProjection
-                         :>
+         QueryParam "event" DirectoryUsersWatchEvent :>
+           QueryParam "orderBy" DirectoryUsersWatchOrderBy :>
+             QueryParam "viewType" DirectoryUsersWatchViewType :>
+               QueryParam "customFieldMask" Text :>
+                 QueryParam "domain" Text :>
+                   QueryParam "showDeleted" Text :>
+                     QueryParam "sortOrder" DirectoryUsersWatchSortOrder
+                       :>
+                       QueryParam "customer" Text :>
                          QueryParam "query" Text :>
-                           QueryParam "showDeleted" Text :>
-                             QueryParam "sortOrder" DirectoryUsersWatchSortOrder
-                               :>
-                               QueryParam "viewType" DirectoryUsersWatchViewType
-                                 :>
+                           QueryParam "projection" DirectoryUsersWatchProjection
+                             :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "maxResults" Int32 :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
@@ -97,8 +97,8 @@ data UsersWatch' = UsersWatch'
     , _uwCustomFieldMask :: !(Maybe Text)
     , _uwUserIP          :: !(Maybe Text)
     , _uwDomain          :: !(Maybe Text)
-    , _uwChannel         :: !Channel
     , _uwShowDeleted     :: !(Maybe Text)
+    , _uwPayload         :: !Channel
     , _uwSortOrder       :: !(Maybe DirectoryUsersWatchSortOrder)
     , _uwCustomer        :: !(Maybe Text)
     , _uwKey             :: !(Maybe Key)
@@ -108,7 +108,7 @@ data UsersWatch' = UsersWatch'
     , _uwOAuthToken      :: !(Maybe OAuthToken)
     , _uwMaxResults      :: !(Maybe Int32)
     , _uwFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersWatch'' with the minimum fields required to make a request.
 --
@@ -130,9 +130,9 @@ data UsersWatch' = UsersWatch'
 --
 -- * 'uwDomain'
 --
--- * 'uwChannel'
---
 -- * 'uwShowDeleted'
+--
+-- * 'uwPayload'
 --
 -- * 'uwSortOrder'
 --
@@ -152,20 +152,20 @@ data UsersWatch' = UsersWatch'
 --
 -- * 'uwFields'
 usersWatch'
-    :: Channel -- ^ 'Channel'
+    :: Channel -- ^ 'payload'
     -> UsersWatch'
-usersWatch' pUwChannel_ =
+usersWatch' pUwPayload_ =
     UsersWatch'
     { _uwEvent = Nothing
     , _uwQuotaUser = Nothing
     , _uwPrettyPrint = True
     , _uwOrderBy = Nothing
-    , _uwViewType = DUWVTAdminView
+    , _uwViewType = AdminView
     , _uwCustomFieldMask = Nothing
     , _uwUserIP = Nothing
     , _uwDomain = Nothing
-    , _uwChannel = pUwChannel_
     , _uwShowDeleted = Nothing
+    , _uwPayload = pUwPayload_
     , _uwSortOrder = Nothing
     , _uwCustomer = Nothing
     , _uwKey = Nothing
@@ -221,16 +221,16 @@ uwUserIP = lens _uwUserIP (\ s a -> s{_uwUserIP = a})
 uwDomain :: Lens' UsersWatch' (Maybe Text)
 uwDomain = lens _uwDomain (\ s a -> s{_uwDomain = a})
 
--- | Multipart request metadata.
-uwChannel :: Lens' UsersWatch' Channel
-uwChannel
-  = lens _uwChannel (\ s a -> s{_uwChannel = a})
-
 -- | If set to true retrieves the list of deleted users. Default is false
 uwShowDeleted :: Lens' UsersWatch' (Maybe Text)
 uwShowDeleted
   = lens _uwShowDeleted
       (\ s a -> s{_uwShowDeleted = a})
+
+-- | Multipart request metadata.
+uwPayload :: Lens' UsersWatch' Channel
+uwPayload
+  = lens _uwPayload (\ s a -> s{_uwPayload = a})
 
 -- | Whether to return results in ascending or descending order.
 uwSortOrder :: Lens' UsersWatch' (Maybe DirectoryUsersWatchSortOrder)
@@ -287,16 +287,16 @@ instance GoogleRequest UsersWatch' where
         type Rs UsersWatch' = Channel
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersWatch'{..}
-          = go _uwCustomFieldMask _uwCustomer _uwDomain
-              _uwEvent
-              _uwMaxResults
-              _uwOrderBy
-              _uwPageToken
-              (Just _uwProjection)
-              _uwQuery
+          = go _uwEvent _uwOrderBy (Just _uwViewType)
+              _uwCustomFieldMask
+              _uwDomain
               _uwShowDeleted
               _uwSortOrder
-              (Just _uwViewType)
+              _uwCustomer
+              _uwQuery
+              (Just _uwProjection)
+              _uwPageToken
+              _uwMaxResults
               _uwQuotaUser
               (Just _uwPrettyPrint)
               _uwUserIP
@@ -304,7 +304,7 @@ instance GoogleRequest UsersWatch' where
               _uwKey
               _uwOAuthToken
               (Just AltJSON)
-              _uwChannel
+              _uwPayload
           where go
                   = clientWithRoute (Proxy :: Proxy UsersWatchResource)
                       r

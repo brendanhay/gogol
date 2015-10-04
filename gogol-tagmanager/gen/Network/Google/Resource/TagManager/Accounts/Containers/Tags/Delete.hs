@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -74,7 +75,7 @@ data AccountsContainersTagsDelete' = AccountsContainersTagsDelete'
     , _actdcKey         :: !(Maybe Key)
     , _actdcOAuthToken  :: !(Maybe OAuthToken)
     , _actdcFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTagsDelete'' with the minimum fields required to make a request.
 --

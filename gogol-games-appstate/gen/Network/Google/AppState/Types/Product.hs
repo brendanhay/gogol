@@ -25,7 +25,7 @@ data WriteResult = WriteResult
     { _wrCurrentStateVersion :: !(Maybe Text)
     , _wrKind                :: !Text
     , _wrStateKey            :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WriteResult' with the minimum fields required to make a request.
 --
@@ -86,7 +86,7 @@ data ListResponse = ListResponse
     { _lrMaximumKeyCount :: !(Maybe Int32)
     , _lrKind            :: !Text
     , _lrItems           :: !(Maybe [GetResponse])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListResponse' with the minimum fields required to make a request.
 --
@@ -147,7 +147,7 @@ data GetResponse = GetResponse
     , _grKind                :: !Text
     , _grData                :: !(Maybe Text)
     , _grStateKey            :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetResponse' with the minimum fields required to make a request.
 --
@@ -215,7 +215,7 @@ instance ToJSON GetResponse where
 data UpdateRequest = UpdateRequest
     { _urKind :: !Text
     , _urData :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UpdateRequest' with the minimum fields required to make a request.
 --

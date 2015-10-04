@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.FusionTables.Style.Insert
     , siQuotaUser
     , siPrettyPrint
     , siUserIP
-    , siStyleSetting
+    , siPayload
     , siKey
     , siOAuthToken
     , siTableId
@@ -63,15 +64,15 @@ type StyleInsertResource =
 --
 -- /See:/ 'styleInsert'' smart constructor.
 data StyleInsert' = StyleInsert'
-    { _siQuotaUser    :: !(Maybe Text)
-    , _siPrettyPrint  :: !Bool
-    , _siUserIP       :: !(Maybe Text)
-    , _siStyleSetting :: !StyleSetting
-    , _siKey          :: !(Maybe Key)
-    , _siOAuthToken   :: !(Maybe OAuthToken)
-    , _siTableId      :: !Text
-    , _siFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _siQuotaUser   :: !(Maybe Text)
+    , _siPrettyPrint :: !Bool
+    , _siUserIP      :: !(Maybe Text)
+    , _siPayload     :: !StyleSetting
+    , _siKey         :: !(Maybe Key)
+    , _siOAuthToken  :: !(Maybe OAuthToken)
+    , _siTableId     :: !Text
+    , _siFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleInsert'' with the minimum fields required to make a request.
 --
@@ -83,7 +84,7 @@ data StyleInsert' = StyleInsert'
 --
 -- * 'siUserIP'
 --
--- * 'siStyleSetting'
+-- * 'siPayload'
 --
 -- * 'siKey'
 --
@@ -93,15 +94,15 @@ data StyleInsert' = StyleInsert'
 --
 -- * 'siFields'
 styleInsert'
-    :: StyleSetting -- ^ 'StyleSetting'
+    :: StyleSetting -- ^ 'payload'
     -> Text -- ^ 'tableId'
     -> StyleInsert'
-styleInsert' pSiStyleSetting_ pSiTableId_ =
+styleInsert' pSiPayload_ pSiTableId_ =
     StyleInsert'
     { _siQuotaUser = Nothing
     , _siPrettyPrint = True
     , _siUserIP = Nothing
-    , _siStyleSetting = pSiStyleSetting_
+    , _siPayload = pSiPayload_
     , _siKey = Nothing
     , _siOAuthToken = Nothing
     , _siTableId = pSiTableId_
@@ -127,10 +128,9 @@ siUserIP :: Lens' StyleInsert' (Maybe Text)
 siUserIP = lens _siUserIP (\ s a -> s{_siUserIP = a})
 
 -- | Multipart request metadata.
-siStyleSetting :: Lens' StyleInsert' StyleSetting
-siStyleSetting
-  = lens _siStyleSetting
-      (\ s a -> s{_siStyleSetting = a})
+siPayload :: Lens' StyleInsert' StyleSetting
+siPayload
+  = lens _siPayload (\ s a -> s{_siPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -166,7 +166,7 @@ instance GoogleRequest StyleInsert' where
               _siKey
               _siOAuthToken
               (Just AltJSON)
-              _siStyleSetting
+              _siPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy StyleInsertResource)

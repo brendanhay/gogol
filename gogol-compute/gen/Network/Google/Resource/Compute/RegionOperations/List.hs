@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type RegionOperationsListResource =
          Capture "region" Text :>
            "operations" :>
              QueryParam "filter" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,7 +83,7 @@ data RegionOperationsList' = RegionOperationsList'
     , _rolOAuthToken  :: !(Maybe OAuthToken)
     , _rolMaxResults  :: !Word32
     , _rolFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionOperationsList'' with the minimum fields required to make a request.
 --
@@ -210,9 +211,8 @@ instance GoogleRequest RegionOperationsList' where
         type Rs RegionOperationsList' = OperationList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u RegionOperationsList'{..}
-          = go _rolFilter (Just _rolMaxResults) _rolPageToken
-              _rolProject
-              _rolRegion
+          = go _rolProject _rolRegion _rolFilter _rolPageToken
+              (Just _rolMaxResults)
               _rolQuotaUser
               (Just _rolPrettyPrint)
               _rolUserIP

@@ -24,9 +24,6 @@ module Network.Google.AppsActivity.Types
     , pId
     , pTitle
 
-    -- * EventPrimaryEventType
-    , EventPrimaryEventType (..)
-
     -- * Photo
     , Photo
     , photo
@@ -45,20 +42,11 @@ module Network.Google.AppsActivity.Types
     , eTarget
     , eMove
 
-    -- * PermissionRole
-    , PermissionRole (..)
-
     -- * ListActivitiesResponse
     , ListActivitiesResponse
     , listActivitiesResponse
     , larNextPageToken
     , larActivities
-
-    -- * EventAdditionalEventTypes
-    , EventAdditionalEventTypes (..)
-
-    -- * AppsactivityActivitiesListGroupingStrategy
-    , AppsactivityActivitiesListGroupingStrategy (..)
 
     -- * PermissionChange
     , PermissionChange
@@ -66,8 +54,8 @@ module Network.Google.AppsActivity.Types
     , pcAddedPermissions
     , pcRemovedPermissions
 
-    -- * PermissionType
-    , PermissionType (..)
+    -- * PrimaryEventType
+    , PrimaryEventType (..)
 
     -- * User
     , User
@@ -75,17 +63,29 @@ module Network.Google.AppsActivity.Types
     , uPhoto
     , uName
 
+    -- * GroupingStrategy
+    , GroupingStrategy (..)
+
+    -- * Role
+    , Role (..)
+
     -- * Activity
     , Activity
     , activity
     , aSingleEvents
     , aCombinedEvent
 
+    -- * Type
+    , Type (..)
+
     -- * Rename
     , Rename
     , rename
     , rNewTitle
     , rOldTitle
+
+    -- * AdditionalEventTypesItem
+    , AdditionalEventTypesItem (..)
 
     -- * Permission
     , Permission

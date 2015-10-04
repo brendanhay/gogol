@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.Spectrum.Paws.VerifyDevice
     , pvdQuotaUser
     , pvdPrettyPrint
     , pvdUserIP
+    , pvdPayload
     , pvdKey
     , pvdOAuthToken
-    , pvdPawsVerifyDeviceRequest
     , pvdFields
     ) where
 
@@ -64,14 +65,14 @@ type PawsVerifyDeviceResource =
 --
 -- /See:/ 'pawsVerifyDevice'' smart constructor.
 data PawsVerifyDevice' = PawsVerifyDevice'
-    { _pvdQuotaUser               :: !(Maybe Text)
-    , _pvdPrettyPrint             :: !Bool
-    , _pvdUserIP                  :: !(Maybe Text)
-    , _pvdKey                     :: !(Maybe Key)
-    , _pvdOAuthToken              :: !(Maybe OAuthToken)
-    , _pvdPawsVerifyDeviceRequest :: !PawsVerifyDeviceRequest
-    , _pvdFields                  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _pvdQuotaUser   :: !(Maybe Text)
+    , _pvdPrettyPrint :: !Bool
+    , _pvdUserIP      :: !(Maybe Text)
+    , _pvdPayload     :: !PawsVerifyDeviceRequest
+    , _pvdKey         :: !(Maybe Key)
+    , _pvdOAuthToken  :: !(Maybe OAuthToken)
+    , _pvdFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsVerifyDevice'' with the minimum fields required to make a request.
 --
@@ -83,24 +84,24 @@ data PawsVerifyDevice' = PawsVerifyDevice'
 --
 -- * 'pvdUserIP'
 --
+-- * 'pvdPayload'
+--
 -- * 'pvdKey'
 --
 -- * 'pvdOAuthToken'
 --
--- * 'pvdPawsVerifyDeviceRequest'
---
 -- * 'pvdFields'
 pawsVerifyDevice'
-    :: PawsVerifyDeviceRequest -- ^ 'PawsVerifyDeviceRequest'
+    :: PawsVerifyDeviceRequest -- ^ 'payload'
     -> PawsVerifyDevice'
-pawsVerifyDevice' pPvdPawsVerifyDeviceRequest_ =
+pawsVerifyDevice' pPvdPayload_ =
     PawsVerifyDevice'
     { _pvdQuotaUser = Nothing
     , _pvdPrettyPrint = True
     , _pvdUserIP = Nothing
+    , _pvdPayload = pPvdPayload_
     , _pvdKey = Nothing
     , _pvdOAuthToken = Nothing
-    , _pvdPawsVerifyDeviceRequest = pPvdPawsVerifyDeviceRequest_
     , _pvdFields = Nothing
     }
 
@@ -123,6 +124,11 @@ pvdUserIP :: Lens' PawsVerifyDevice' (Maybe Text)
 pvdUserIP
   = lens _pvdUserIP (\ s a -> s{_pvdUserIP = a})
 
+-- | Multipart request metadata.
+pvdPayload :: Lens' PawsVerifyDevice' PawsVerifyDeviceRequest
+pvdPayload
+  = lens _pvdPayload (\ s a -> s{_pvdPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -134,12 +140,6 @@ pvdOAuthToken :: Lens' PawsVerifyDevice' (Maybe OAuthToken)
 pvdOAuthToken
   = lens _pvdOAuthToken
       (\ s a -> s{_pvdOAuthToken = a})
-
--- | Multipart request metadata.
-pvdPawsVerifyDeviceRequest :: Lens' PawsVerifyDevice' PawsVerifyDeviceRequest
-pvdPawsVerifyDeviceRequest
-  = lens _pvdPawsVerifyDeviceRequest
-      (\ s a -> s{_pvdPawsVerifyDeviceRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pvdFields :: Lens' PawsVerifyDevice' (Maybe Text)
@@ -159,7 +159,7 @@ instance GoogleRequest PawsVerifyDevice' where
               _pvdKey
               _pvdOAuthToken
               (Just AltJSON)
-              _pvdPawsVerifyDeviceRequest
+              _pvdPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PawsVerifyDeviceResource)

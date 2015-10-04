@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Genomics.References.Search
     , refQuotaUser
     , refPrettyPrint
     , refUserIP
+    , refPayload
     , refKey
-    , refSearchReferencesRequest
     , refOAuthToken
     , refFields
     ) where
@@ -63,14 +64,14 @@ type ReferencesSearchResource =
 --
 -- /See:/ 'referencesSearch'' smart constructor.
 data ReferencesSearch' = ReferencesSearch'
-    { _refQuotaUser               :: !(Maybe Text)
-    , _refPrettyPrint             :: !Bool
-    , _refUserIP                  :: !(Maybe Text)
-    , _refKey                     :: !(Maybe Key)
-    , _refSearchReferencesRequest :: !SearchReferencesRequest
-    , _refOAuthToken              :: !(Maybe OAuthToken)
-    , _refFields                  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _refQuotaUser   :: !(Maybe Text)
+    , _refPrettyPrint :: !Bool
+    , _refUserIP      :: !(Maybe Text)
+    , _refPayload     :: !SearchReferencesRequest
+    , _refKey         :: !(Maybe Key)
+    , _refOAuthToken  :: !(Maybe OAuthToken)
+    , _refFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesSearch'' with the minimum fields required to make a request.
 --
@@ -82,23 +83,23 @@ data ReferencesSearch' = ReferencesSearch'
 --
 -- * 'refUserIP'
 --
--- * 'refKey'
+-- * 'refPayload'
 --
--- * 'refSearchReferencesRequest'
+-- * 'refKey'
 --
 -- * 'refOAuthToken'
 --
 -- * 'refFields'
 referencesSearch'
-    :: SearchReferencesRequest -- ^ 'SearchReferencesRequest'
+    :: SearchReferencesRequest -- ^ 'payload'
     -> ReferencesSearch'
-referencesSearch' pRefSearchReferencesRequest_ =
+referencesSearch' pRefPayload_ =
     ReferencesSearch'
     { _refQuotaUser = Nothing
     , _refPrettyPrint = True
     , _refUserIP = Nothing
+    , _refPayload = pRefPayload_
     , _refKey = Nothing
-    , _refSearchReferencesRequest = pRefSearchReferencesRequest_
     , _refOAuthToken = Nothing
     , _refFields = Nothing
     }
@@ -122,17 +123,16 @@ refUserIP :: Lens' ReferencesSearch' (Maybe Text)
 refUserIP
   = lens _refUserIP (\ s a -> s{_refUserIP = a})
 
+-- | Multipart request metadata.
+refPayload :: Lens' ReferencesSearch' SearchReferencesRequest
+refPayload
+  = lens _refPayload (\ s a -> s{_refPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 refKey :: Lens' ReferencesSearch' (Maybe Key)
 refKey = lens _refKey (\ s a -> s{_refKey = a})
-
--- | Multipart request metadata.
-refSearchReferencesRequest :: Lens' ReferencesSearch' SearchReferencesRequest
-refSearchReferencesRequest
-  = lens _refSearchReferencesRequest
-      (\ s a -> s{_refSearchReferencesRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 refOAuthToken :: Lens' ReferencesSearch' (Maybe OAuthToken)
@@ -158,7 +158,7 @@ instance GoogleRequest ReferencesSearch' where
               _refKey
               _refOAuthToken
               (Just AltJSON)
-              _refSearchReferencesRequest
+              _refPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReferencesSearchResource)

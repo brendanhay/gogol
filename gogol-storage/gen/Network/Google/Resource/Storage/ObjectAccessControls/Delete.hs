@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -79,7 +80,7 @@ data ObjectAccessControlsDelete' = ObjectAccessControlsDelete'
     , _oacdEntity      :: !Text
     , _oacdGeneration  :: !(Maybe Word64)
     , _oacdFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsDelete'' with the minimum fields required to make a request.
 --
@@ -193,8 +194,8 @@ instance GoogleRequest ObjectAccessControlsDelete'
         type Rs ObjectAccessControlsDelete' = ()
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectAccessControlsDelete'{..}
-          = go _oacdGeneration _oacdBucket _oacdObject
-              _oacdEntity
+          = go _oacdBucket _oacdObject _oacdEntity
+              _oacdGeneration
               _oacdQuotaUser
               (Just _oacdPrettyPrint)
               _oacdUserIP

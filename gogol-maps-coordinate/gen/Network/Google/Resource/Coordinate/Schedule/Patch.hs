@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,9 +37,9 @@ module Network.Google.Resource.Coordinate.Schedule.Patch
     , spJobId
     , spAllDay
     , spStartTime
-    , spSchedule
     , spUserIP
     , spTeamId
+    , spPayload
     , spKey
     , spEndTime
     , spOAuthToken
@@ -58,9 +59,9 @@ type SchedulePatchResource =
            Capture "jobId" Word64 :>
              "schedule" :>
                QueryParam "allDay" Bool :>
-                 QueryParam "duration" Word64 :>
+                 QueryParam "startTime" Word64 :>
                    QueryParam "endTime" Word64 :>
-                     QueryParam "startTime" Word64 :>
+                     QueryParam "duration" Word64 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -81,15 +82,15 @@ data SchedulePatch' = SchedulePatch'
     , _spJobId       :: !Word64
     , _spAllDay      :: !(Maybe Bool)
     , _spStartTime   :: !(Maybe Word64)
-    , _spSchedule    :: !Schedule
     , _spUserIP      :: !(Maybe Text)
     , _spTeamId      :: !Text
+    , _spPayload     :: !Schedule
     , _spKey         :: !(Maybe Key)
     , _spEndTime     :: !(Maybe Word64)
     , _spOAuthToken  :: !(Maybe OAuthToken)
     , _spDuration    :: !(Maybe Word64)
     , _spFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchedulePatch'' with the minimum fields required to make a request.
 --
@@ -105,11 +106,11 @@ data SchedulePatch' = SchedulePatch'
 --
 -- * 'spStartTime'
 --
--- * 'spSchedule'
---
 -- * 'spUserIP'
 --
 -- * 'spTeamId'
+--
+-- * 'spPayload'
 --
 -- * 'spKey'
 --
@@ -122,19 +123,19 @@ data SchedulePatch' = SchedulePatch'
 -- * 'spFields'
 schedulePatch'
     :: Word64 -- ^ 'jobId'
-    -> Schedule -- ^ 'Schedule'
     -> Text -- ^ 'teamId'
+    -> Schedule -- ^ 'payload'
     -> SchedulePatch'
-schedulePatch' pSpJobId_ pSpSchedule_ pSpTeamId_ =
+schedulePatch' pSpJobId_ pSpTeamId_ pSpPayload_ =
     SchedulePatch'
     { _spQuotaUser = Nothing
     , _spPrettyPrint = True
     , _spJobId = pSpJobId_
     , _spAllDay = Nothing
     , _spStartTime = Nothing
-    , _spSchedule = pSpSchedule_
     , _spUserIP = Nothing
     , _spTeamId = pSpTeamId_
+    , _spPayload = pSpPayload_
     , _spKey = Nothing
     , _spEndTime = Nothing
     , _spOAuthToken = Nothing
@@ -169,11 +170,6 @@ spStartTime :: Lens' SchedulePatch' (Maybe Word64)
 spStartTime
   = lens _spStartTime (\ s a -> s{_spStartTime = a})
 
--- | Multipart request metadata.
-spSchedule :: Lens' SchedulePatch' Schedule
-spSchedule
-  = lens _spSchedule (\ s a -> s{_spSchedule = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 spUserIP :: Lens' SchedulePatch' (Maybe Text)
@@ -182,6 +178,11 @@ spUserIP = lens _spUserIP (\ s a -> s{_spUserIP = a})
 -- | Team ID
 spTeamId :: Lens' SchedulePatch' Text
 spTeamId = lens _spTeamId (\ s a -> s{_spTeamId = a})
+
+-- | Multipart request metadata.
+spPayload :: Lens' SchedulePatch' Schedule
+spPayload
+  = lens _spPayload (\ s a -> s{_spPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -216,9 +217,9 @@ instance GoogleRequest SchedulePatch' where
         type Rs SchedulePatch' = Schedule
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u SchedulePatch'{..}
-          = go _spAllDay _spDuration _spEndTime _spStartTime
-              _spTeamId
-              _spJobId
+          = go _spTeamId _spJobId _spAllDay _spStartTime
+              _spEndTime
+              _spDuration
               _spQuotaUser
               (Just _spPrettyPrint)
               _spUserIP
@@ -226,7 +227,7 @@ instance GoogleRequest SchedulePatch' where
               _spKey
               _spOAuthToken
               (Just AltJSON)
-              _spSchedule
+              _spPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SchedulePatchResource)

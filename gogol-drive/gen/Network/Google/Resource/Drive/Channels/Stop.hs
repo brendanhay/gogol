@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.Drive.Channels.Stop
     , csQuotaUser
     , csPrettyPrint
     , csUserIP
-    , csChannel
+    , csPayload
     , csKey
     , csOAuthToken
     , csFields
@@ -63,11 +64,11 @@ data ChannelsStop' = ChannelsStop'
     { _csQuotaUser   :: !(Maybe Text)
     , _csPrettyPrint :: !Bool
     , _csUserIP      :: !(Maybe Text)
-    , _csChannel     :: !Channel
+    , _csPayload     :: !Channel
     , _csKey         :: !(Maybe Key)
     , _csOAuthToken  :: !(Maybe OAuthToken)
     , _csFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelsStop'' with the minimum fields required to make a request.
 --
@@ -79,7 +80,7 @@ data ChannelsStop' = ChannelsStop'
 --
 -- * 'csUserIP'
 --
--- * 'csChannel'
+-- * 'csPayload'
 --
 -- * 'csKey'
 --
@@ -87,14 +88,14 @@ data ChannelsStop' = ChannelsStop'
 --
 -- * 'csFields'
 channelsStop'
-    :: Channel -- ^ 'Channel'
+    :: Channel -- ^ 'payload'
     -> ChannelsStop'
-channelsStop' pCsChannel_ =
+channelsStop' pCsPayload_ =
     ChannelsStop'
     { _csQuotaUser = Nothing
     , _csPrettyPrint = True
     , _csUserIP = Nothing
-    , _csChannel = pCsChannel_
+    , _csPayload = pCsPayload_
     , _csKey = Nothing
     , _csOAuthToken = Nothing
     , _csFields = Nothing
@@ -119,9 +120,9 @@ csUserIP :: Lens' ChannelsStop' (Maybe Text)
 csUserIP = lens _csUserIP (\ s a -> s{_csUserIP = a})
 
 -- | Multipart request metadata.
-csChannel :: Lens' ChannelsStop' Channel
-csChannel
-  = lens _csChannel (\ s a -> s{_csChannel = a})
+csPayload :: Lens' ChannelsStop' Channel
+csPayload
+  = lens _csPayload (\ s a -> s{_csPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -151,7 +152,7 @@ instance GoogleRequest ChannelsStop' where
               _csKey
               _csOAuthToken
               (Just AltJSON)
-              _csChannel
+              _csPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChannelsStopResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.Mirror.Contacts.Insert
     -- * Request Lenses
     , ciQuotaUser
     , ciPrettyPrint
-    , ciContact
     , ciUserIP
+    , ciPayload
     , ciKey
     , ciOAuthToken
     , ciFields
@@ -61,12 +62,12 @@ type ContactsInsertResource =
 data ContactsInsert' = ContactsInsert'
     { _ciQuotaUser   :: !(Maybe Text)
     , _ciPrettyPrint :: !Bool
-    , _ciContact     :: !Contact
     , _ciUserIP      :: !(Maybe Text)
+    , _ciPayload     :: !Contact
     , _ciKey         :: !(Maybe Key)
     , _ciOAuthToken  :: !(Maybe OAuthToken)
     , _ciFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContactsInsert'' with the minimum fields required to make a request.
 --
@@ -76,9 +77,9 @@ data ContactsInsert' = ContactsInsert'
 --
 -- * 'ciPrettyPrint'
 --
--- * 'ciContact'
---
 -- * 'ciUserIP'
+--
+-- * 'ciPayload'
 --
 -- * 'ciKey'
 --
@@ -86,14 +87,14 @@ data ContactsInsert' = ContactsInsert'
 --
 -- * 'ciFields'
 contactsInsert'
-    :: Contact -- ^ 'Contact'
+    :: Contact -- ^ 'payload'
     -> ContactsInsert'
-contactsInsert' pCiContact_ =
+contactsInsert' pCiPayload_ =
     ContactsInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
-    , _ciContact = pCiContact_
     , _ciUserIP = Nothing
+    , _ciPayload = pCiPayload_
     , _ciKey = Nothing
     , _ciOAuthToken = Nothing
     , _ciFields = Nothing
@@ -112,15 +113,15 @@ ciPrettyPrint
   = lens _ciPrettyPrint
       (\ s a -> s{_ciPrettyPrint = a})
 
--- | Multipart request metadata.
-ciContact :: Lens' ContactsInsert' Contact
-ciContact
-  = lens _ciContact (\ s a -> s{_ciContact = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 ciUserIP :: Lens' ContactsInsert' (Maybe Text)
 ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
+
+-- | Multipart request metadata.
+ciPayload :: Lens' ContactsInsert' Contact
+ciPayload
+  = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -150,7 +151,7 @@ instance GoogleRequest ContactsInsert' where
               _ciKey
               _ciOAuthToken
               (Just AltJSON)
-              _ciContact
+              _ciPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ContactsInsertResource)

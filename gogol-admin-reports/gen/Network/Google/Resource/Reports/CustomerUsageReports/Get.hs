@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type CustomerUsageReportsGetResource =
        "dates" :>
          Capture "date" Text :>
            QueryParam "customerId" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "parameters" Text :>
+             QueryParam "parameters" Text :>
+               QueryParam "pageToken" Text :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data CustomerUsageReportsGet' = CustomerUsageReportsGet'
     , _curgPageToken   :: !(Maybe Text)
     , _curgOAuthToken  :: !(Maybe OAuthToken)
     , _curgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomerUsageReportsGet'' with the minimum fields required to make a request.
 --
@@ -190,8 +191,8 @@ instance GoogleRequest CustomerUsageReportsGet' where
         type Rs CustomerUsageReportsGet' = UsageReports
         request = requestWithRoute defReq adminReportsURL
         requestWithRoute r u CustomerUsageReportsGet'{..}
-          = go _curgCustomerId _curgPageToken _curgParameters
-              _curgDate
+          = go _curgDate _curgCustomerId _curgParameters
+              _curgPageToken
               _curgQuotaUser
               (Just _curgPrettyPrint)
               _curgUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -60,16 +61,16 @@ type ProjectsLogsListResource =
          Capture "projectsId" Text :>
            "logs" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "bearer_token" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParam "pageSize" Int32 :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "serviceIndexPrefix" Text :>
-                             QueryParam "serviceName" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "upload_protocol" Text :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "serviceName" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "serviceIndexPrefix" Text :>
+                               QueryParam "pageSize" Int32 :>
+                                 QueryParam "callback" Text :>
                                    QueryParam "quotaUser" Text :>
                                      QueryParam "prettyPrint" Bool :>
                                        QueryParam "fields" Text :>
@@ -100,7 +101,7 @@ data ProjectsLogsList' = ProjectsLogsList'
     , _pllPageSize           :: !(Maybe Int32)
     , _pllFields             :: !(Maybe Text)
     , _pllCallback           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogsList'' with the minimum fields required to make a request.
 --
@@ -280,16 +281,16 @@ instance GoogleRequest ProjectsLogsList' where
         type Rs ProjectsLogsList' = ListLogsResponse
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u ProjectsLogsList'{..}
-          = go _pllXgafv _pllAccessToken _pllBearerToken
-              _pllCallback
-              _pllPageSize
-              _pllPageToken
+          = go _pllProjectsId _pllXgafv _pllUploadProtocol
               (Just _pllPp)
-              _pllServiceIndexPrefix
-              _pllServiceName
+              _pllAccessToken
               _pllUploadType
-              _pllUploadProtocol
-              _pllProjectsId
+              _pllBearerToken
+              _pllServiceName
+              _pllPageToken
+              _pllServiceIndexPrefix
+              _pllPageSize
+              _pllCallback
               _pllQuotaUser
               (Just _pllPrettyPrint)
               _pllFields

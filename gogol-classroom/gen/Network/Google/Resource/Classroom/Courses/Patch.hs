@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -43,9 +44,9 @@ module Network.Google.Resource.Classroom.Courses.Patch
     , cpPp
     , cpAccessToken
     , cpUploadType
+    , cpPayload
     , cpBearerToken
     , cpKey
-    , cpCourse
     , cpId
     , cpOAuthToken
     , cpFields
@@ -62,13 +63,13 @@ type CoursesPatchResource =
        "courses" :>
          Capture "id" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "updateMask" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "updateMask" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "callback" Text :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "fields" Text :>
@@ -95,14 +96,14 @@ data CoursesPatch' = CoursesPatch'
     , _cpPp             :: !Bool
     , _cpAccessToken    :: !(Maybe Text)
     , _cpUploadType     :: !(Maybe Text)
+    , _cpPayload        :: !Course
     , _cpBearerToken    :: !(Maybe Text)
     , _cpKey            :: !(Maybe Key)
-    , _cpCourse         :: !Course
     , _cpId             :: !Text
     , _cpOAuthToken     :: !(Maybe OAuthToken)
     , _cpFields         :: !(Maybe Text)
     , _cpCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesPatch'' with the minimum fields required to make a request.
 --
@@ -124,11 +125,11 @@ data CoursesPatch' = CoursesPatch'
 --
 -- * 'cpUploadType'
 --
+-- * 'cpPayload'
+--
 -- * 'cpBearerToken'
 --
 -- * 'cpKey'
---
--- * 'cpCourse'
 --
 -- * 'cpId'
 --
@@ -138,10 +139,10 @@ data CoursesPatch' = CoursesPatch'
 --
 -- * 'cpCallback'
 coursesPatch'
-    :: Course -- ^ 'Course'
+    :: Course -- ^ 'payload'
     -> Text -- ^ 'id'
     -> CoursesPatch'
-coursesPatch' pCpCourse_ pCpId_ =
+coursesPatch' pCpPayload_ pCpId_ =
     CoursesPatch'
     { _cpXgafv = Nothing
     , _cpQuotaUser = Nothing
@@ -151,9 +152,9 @@ coursesPatch' pCpCourse_ pCpId_ =
     , _cpPp = True
     , _cpAccessToken = Nothing
     , _cpUploadType = Nothing
+    , _cpPayload = pCpPayload_
     , _cpBearerToken = Nothing
     , _cpKey = Nothing
-    , _cpCourse = pCpCourse_
     , _cpId = pCpId_
     , _cpOAuthToken = Nothing
     , _cpFields = Nothing
@@ -208,6 +209,11 @@ cpUploadType :: Lens' CoursesPatch' (Maybe Text)
 cpUploadType
   = lens _cpUploadType (\ s a -> s{_cpUploadType = a})
 
+-- | Multipart request metadata.
+cpPayload :: Lens' CoursesPatch' Course
+cpPayload
+  = lens _cpPayload (\ s a -> s{_cpPayload = a})
+
 -- | OAuth bearer token.
 cpBearerToken :: Lens' CoursesPatch' (Maybe Text)
 cpBearerToken
@@ -219,10 +225,6 @@ cpBearerToken
 -- token.
 cpKey :: Lens' CoursesPatch' (Maybe Key)
 cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
-
--- | Multipart request metadata.
-cpCourse :: Lens' CoursesPatch' Course
-cpCourse = lens _cpCourse (\ s a -> s{_cpCourse = a})
 
 -- | Identifier of the course to update. This identifier can be either the
 -- Classroom-assigned identifier or an
@@ -252,20 +254,19 @@ instance GoogleRequest CoursesPatch' where
         type Rs CoursesPatch' = Course
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesPatch'{..}
-          = go _cpXgafv _cpAccessToken _cpBearerToken
-              _cpCallback
+          = go _cpId _cpXgafv _cpUploadProtocol _cpUpdateMask
               (Just _cpPp)
-              _cpUpdateMask
+              _cpAccessToken
               _cpUploadType
-              _cpUploadProtocol
-              _cpId
+              _cpBearerToken
+              _cpCallback
               _cpQuotaUser
               (Just _cpPrettyPrint)
               _cpFields
               _cpKey
               _cpOAuthToken
               (Just AltJSON)
-              _cpCourse
+              _cpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesPatchResource)

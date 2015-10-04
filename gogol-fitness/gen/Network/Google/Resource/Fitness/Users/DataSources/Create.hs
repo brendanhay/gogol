@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -40,9 +41,9 @@ module Network.Google.Resource.Fitness.Users.DataSources.Create
     , udscQuotaUser
     , udscPrettyPrint
     , udscUserIP
+    , udscPayload
     , udscUserId
     , udscKey
-    , udscDataSource
     , udscOAuthToken
     , udscFields
     ) where
@@ -78,12 +79,12 @@ data UsersDataSourcesCreate' = UsersDataSourcesCreate'
     { _udscQuotaUser   :: !(Maybe Text)
     , _udscPrettyPrint :: !Bool
     , _udscUserIP      :: !(Maybe Text)
+    , _udscPayload     :: !DataSource
     , _udscUserId      :: !Text
     , _udscKey         :: !(Maybe Key)
-    , _udscDataSource  :: !DataSource
     , _udscOAuthToken  :: !(Maybe OAuthToken)
     , _udscFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesCreate'' with the minimum fields required to make a request.
 --
@@ -95,27 +96,27 @@ data UsersDataSourcesCreate' = UsersDataSourcesCreate'
 --
 -- * 'udscUserIP'
 --
+-- * 'udscPayload'
+--
 -- * 'udscUserId'
 --
 -- * 'udscKey'
---
--- * 'udscDataSource'
 --
 -- * 'udscOAuthToken'
 --
 -- * 'udscFields'
 usersDataSourcesCreate'
-    :: Text -- ^ 'userId'
-    -> DataSource -- ^ 'DataSource'
+    :: DataSource -- ^ 'payload'
+    -> Text -- ^ 'userId'
     -> UsersDataSourcesCreate'
-usersDataSourcesCreate' pUdscUserId_ pUdscDataSource_ =
+usersDataSourcesCreate' pUdscPayload_ pUdscUserId_ =
     UsersDataSourcesCreate'
     { _udscQuotaUser = Nothing
     , _udscPrettyPrint = True
     , _udscUserIP = Nothing
+    , _udscPayload = pUdscPayload_
     , _udscUserId = pUdscUserId_
     , _udscKey = Nothing
-    , _udscDataSource = pUdscDataSource_
     , _udscOAuthToken = Nothing
     , _udscFields = Nothing
     }
@@ -140,6 +141,11 @@ udscUserIP :: Lens' UsersDataSourcesCreate' (Maybe Text)
 udscUserIP
   = lens _udscUserIP (\ s a -> s{_udscUserIP = a})
 
+-- | Multipart request metadata.
+udscPayload :: Lens' UsersDataSourcesCreate' DataSource
+udscPayload
+  = lens _udscPayload (\ s a -> s{_udscPayload = a})
+
 -- | Create the data source for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
 udscUserId :: Lens' UsersDataSourcesCreate' Text
@@ -151,12 +157,6 @@ udscUserId
 -- token.
 udscKey :: Lens' UsersDataSourcesCreate' (Maybe Key)
 udscKey = lens _udscKey (\ s a -> s{_udscKey = a})
-
--- | Multipart request metadata.
-udscDataSource :: Lens' UsersDataSourcesCreate' DataSource
-udscDataSource
-  = lens _udscDataSource
-      (\ s a -> s{_udscDataSource = a})
 
 -- | OAuth 2.0 token for the current user.
 udscOAuthToken :: Lens' UsersDataSourcesCreate' (Maybe OAuthToken)
@@ -184,7 +184,7 @@ instance GoogleRequest UsersDataSourcesCreate' where
               _udscKey
               _udscOAuthToken
               (Just AltJSON)
-              _udscDataSource
+              _udscPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDataSourcesCreateResource)

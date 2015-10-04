@@ -18,7 +18,7 @@ module Network.Google.Plus.Types.Sum where
 import           Network.Google.Prelude
 
 -- | Specifies how to order search results.
-data PlusActivitiesSearchOrderBy
+data OrderBy
     = Best
       -- ^ @best@
       -- Sort activities by relevance to the user, most relevant first.
@@ -27,47 +27,23 @@ data PlusActivitiesSearchOrderBy
       -- Sort activities by published date, most recent first.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable PlusActivitiesSearchOrderBy
+instance Hashable OrderBy
 
-instance FromText PlusActivitiesSearchOrderBy where
+instance FromText OrderBy where
     fromText = \case
         "best" -> Just Best
         "recent" -> Just Recent
         _ -> Nothing
 
-instance ToText PlusActivitiesSearchOrderBy where
+instance ToText OrderBy where
     toText = \case
         Best -> "best"
         Recent -> "recent"
 
-instance FromJSON PlusActivitiesSearchOrderBy where
-    parseJSON = parseJSONText "PlusActivitiesSearchOrderBy"
+instance FromJSON OrderBy where
+    parseJSON = parseJSONText "OrderBy"
 
-instance ToJSON PlusActivitiesSearchOrderBy where
-    toJSON = toJSONText
-
--- | The collection of activities to list.
-data PlusActivitiesListCollection
-    = Public
-      -- ^ @public@
-      -- All public activities created by the specified user.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable PlusActivitiesListCollection
-
-instance FromText PlusActivitiesListCollection where
-    fromText = \case
-        "public" -> Just Public
-        _ -> Nothing
-
-instance ToText PlusActivitiesListCollection where
-    toText = \case
-        Public -> "public"
-
-instance FromJSON PlusActivitiesListCollection where
-    parseJSON = parseJSONText "PlusActivitiesListCollection"
-
-instance ToJSON PlusActivitiesListCollection where
+instance ToJSON OrderBy where
     toJSON = toJSONText
 
 -- | The collection of people to list.
@@ -102,8 +78,32 @@ instance FromJSON PlusPeopleListCollection where
 instance ToJSON PlusPeopleListCollection where
     toJSON = toJSONText
 
+-- | The collection of activities to list.
+data Collection
+    = Public
+      -- ^ @public@
+      -- All public activities created by the specified user.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Collection
+
+instance FromText Collection where
+    fromText = \case
+        "public" -> Just Public
+        _ -> Nothing
+
+instance ToText Collection where
+    toText = \case
+        Public -> "public"
+
+instance FromJSON Collection where
+    parseJSON = parseJSONText "Collection"
+
+instance ToJSON Collection where
+    toJSON = toJSONText
+
 -- | The order in which to sort the list of comments.
-data PlusCommentsListSortOrder
+data SortOrder
     = Ascending
       -- ^ @ascending@
       -- Sort oldest comments first.
@@ -112,23 +112,23 @@ data PlusCommentsListSortOrder
       -- Sort newest comments first.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable PlusCommentsListSortOrder
+instance Hashable SortOrder
 
-instance FromText PlusCommentsListSortOrder where
+instance FromText SortOrder where
     fromText = \case
         "ascending" -> Just Ascending
         "descending" -> Just Descending
         _ -> Nothing
 
-instance ToText PlusCommentsListSortOrder where
+instance ToText SortOrder where
     toText = \case
         Ascending -> "ascending"
         Descending -> "descending"
 
-instance FromJSON PlusCommentsListSortOrder where
-    parseJSON = parseJSONText "PlusCommentsListSortOrder"
+instance FromJSON SortOrder where
+    parseJSON = parseJSONText "SortOrder"
 
-instance ToJSON PlusCommentsListSortOrder where
+instance ToJSON SortOrder where
     toJSON = toJSONText
 
 -- | The collection of moments to list.
@@ -182,10 +182,10 @@ instance ToJSON PlusMomentsInsertCollection where
 
 -- | The collection of people to list.
 data PlusPeopleListByActivityCollection
-    = Plusoners
+    = PPLBACPlusoners
       -- ^ @plusoners@
       -- List all people who have +1\'d this activity.
-    | Resharers
+    | PPLBACResharers
       -- ^ @resharers@
       -- List all people who have reshared this activity.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -194,14 +194,14 @@ instance Hashable PlusPeopleListByActivityCollection
 
 instance FromText PlusPeopleListByActivityCollection where
     fromText = \case
-        "plusoners" -> Just Plusoners
-        "resharers" -> Just Resharers
+        "plusoners" -> Just PPLBACPlusoners
+        "resharers" -> Just PPLBACResharers
         _ -> Nothing
 
 instance ToText PlusPeopleListByActivityCollection where
     toText = \case
-        Plusoners -> "plusoners"
-        Resharers -> "resharers"
+        PPLBACPlusoners -> "plusoners"
+        PPLBACResharers -> "resharers"
 
 instance FromJSON PlusPeopleListByActivityCollection where
     parseJSON = parseJSONText "PlusPeopleListByActivityCollection"

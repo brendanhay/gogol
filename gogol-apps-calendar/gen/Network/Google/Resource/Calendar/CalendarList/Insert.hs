@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -30,10 +31,10 @@ module Network.Google.Resource.Calendar.CalendarList.Insert
     , CalendarListInsert'
 
     -- * Request Lenses
-    , cliCalendarListEntry
     , cliQuotaUser
     , cliPrettyPrint
     , cliUserIP
+    , cliPayload
     , cliColorRgbFormat
     , cliKey
     , cliOAuthToken
@@ -64,27 +65,27 @@ type CalendarListInsertResource =
 --
 -- /See:/ 'calendarListInsert'' smart constructor.
 data CalendarListInsert' = CalendarListInsert'
-    { _cliCalendarListEntry :: !CalendarListEntry
-    , _cliQuotaUser         :: !(Maybe Text)
-    , _cliPrettyPrint       :: !Bool
-    , _cliUserIP            :: !(Maybe Text)
-    , _cliColorRgbFormat    :: !(Maybe Bool)
-    , _cliKey               :: !(Maybe Key)
-    , _cliOAuthToken        :: !(Maybe OAuthToken)
-    , _cliFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cliQuotaUser      :: !(Maybe Text)
+    , _cliPrettyPrint    :: !Bool
+    , _cliUserIP         :: !(Maybe Text)
+    , _cliPayload        :: !CalendarListEntry
+    , _cliColorRgbFormat :: !(Maybe Bool)
+    , _cliKey            :: !(Maybe Key)
+    , _cliOAuthToken     :: !(Maybe OAuthToken)
+    , _cliFields         :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'cliCalendarListEntry'
 --
 -- * 'cliQuotaUser'
 --
 -- * 'cliPrettyPrint'
 --
 -- * 'cliUserIP'
+--
+-- * 'cliPayload'
 --
 -- * 'cliColorRgbFormat'
 --
@@ -94,25 +95,19 @@ data CalendarListInsert' = CalendarListInsert'
 --
 -- * 'cliFields'
 calendarListInsert'
-    :: CalendarListEntry -- ^ 'CalendarListEntry'
+    :: CalendarListEntry -- ^ 'payload'
     -> CalendarListInsert'
-calendarListInsert' pCliCalendarListEntry_ =
+calendarListInsert' pCliPayload_ =
     CalendarListInsert'
-    { _cliCalendarListEntry = pCliCalendarListEntry_
-    , _cliQuotaUser = Nothing
+    { _cliQuotaUser = Nothing
     , _cliPrettyPrint = True
     , _cliUserIP = Nothing
+    , _cliPayload = pCliPayload_
     , _cliColorRgbFormat = Nothing
     , _cliKey = Nothing
     , _cliOAuthToken = Nothing
     , _cliFields = Nothing
     }
-
--- | Multipart request metadata.
-cliCalendarListEntry :: Lens' CalendarListInsert' CalendarListEntry
-cliCalendarListEntry
-  = lens _cliCalendarListEntry
-      (\ s a -> s{_cliCalendarListEntry = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -132,6 +127,11 @@ cliPrettyPrint
 cliUserIP :: Lens' CalendarListInsert' (Maybe Text)
 cliUserIP
   = lens _cliUserIP (\ s a -> s{_cliUserIP = a})
+
+-- | Multipart request metadata.
+cliPayload :: Lens' CalendarListInsert' CalendarListEntry
+cliPayload
+  = lens _cliPayload (\ s a -> s{_cliPayload = a})
 
 -- | Whether to use the foregroundColor and backgroundColor fields to write
 -- the calendar colors (RGB). If this feature is used, the index-based
@@ -174,7 +174,7 @@ instance GoogleRequest CalendarListInsert' where
               _cliKey
               _cliOAuthToken
               (Just AltJSON)
-              _cliCalendarListEntry
+              _cliPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CalendarListInsertResource)

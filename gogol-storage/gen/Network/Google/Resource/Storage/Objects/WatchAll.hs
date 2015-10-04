@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Storage.Objects.WatchAll
     , owaPrettyPrint
     , owaPrefix
     , owaUserIP
-    , owaChannel
     , owaBucket
+    , owaPayload
     , owaVersions
     , owaKey
     , owaProjection
@@ -56,14 +57,14 @@ type ObjectsWatchAllResource =
        Capture "bucket" Text :>
          "o" :>
            "watch" :>
-             QueryParam "delimiter" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "prefix" Text :>
-                     QueryParam "projection"
-                       StorageObjectsWatchAllProjection
-                       :>
-                       QueryParam "versions" Bool :>
+             QueryParam "prefix" Text :>
+               QueryParam "versions" Bool :>
+                 QueryParam "projection"
+                   StorageObjectsWatchAllProjection
+                   :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "delimiter" Text :>
+                       QueryParam "maxResults" Word32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -82,8 +83,8 @@ data ObjectsWatchAll' = ObjectsWatchAll'
     , _owaPrettyPrint :: !Bool
     , _owaPrefix      :: !(Maybe Text)
     , _owaUserIP      :: !(Maybe Text)
-    , _owaChannel     :: !Channel
     , _owaBucket      :: !Text
+    , _owaPayload     :: !Channel
     , _owaVersions    :: !(Maybe Bool)
     , _owaKey         :: !(Maybe Key)
     , _owaProjection  :: !(Maybe StorageObjectsWatchAllProjection)
@@ -92,7 +93,7 @@ data ObjectsWatchAll' = ObjectsWatchAll'
     , _owaDelimiter   :: !(Maybe Text)
     , _owaMaxResults  :: !(Maybe Word32)
     , _owaFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsWatchAll'' with the minimum fields required to make a request.
 --
@@ -106,9 +107,9 @@ data ObjectsWatchAll' = ObjectsWatchAll'
 --
 -- * 'owaUserIP'
 --
--- * 'owaChannel'
---
 -- * 'owaBucket'
+--
+-- * 'owaPayload'
 --
 -- * 'owaVersions'
 --
@@ -126,17 +127,17 @@ data ObjectsWatchAll' = ObjectsWatchAll'
 --
 -- * 'owaFields'
 objectsWatchAll'
-    :: Channel -- ^ 'Channel'
-    -> Text -- ^ 'bucket'
+    :: Text -- ^ 'bucket'
+    -> Channel -- ^ 'payload'
     -> ObjectsWatchAll'
-objectsWatchAll' pOwaChannel_ pOwaBucket_ =
+objectsWatchAll' pOwaBucket_ pOwaPayload_ =
     ObjectsWatchAll'
     { _owaQuotaUser = Nothing
     , _owaPrettyPrint = True
     , _owaPrefix = Nothing
     , _owaUserIP = Nothing
-    , _owaChannel = pOwaChannel_
     , _owaBucket = pOwaBucket_
+    , _owaPayload = pOwaPayload_
     , _owaVersions = Nothing
     , _owaKey = Nothing
     , _owaProjection = Nothing
@@ -171,15 +172,15 @@ owaUserIP :: Lens' ObjectsWatchAll' (Maybe Text)
 owaUserIP
   = lens _owaUserIP (\ s a -> s{_owaUserIP = a})
 
--- | Multipart request metadata.
-owaChannel :: Lens' ObjectsWatchAll' Channel
-owaChannel
-  = lens _owaChannel (\ s a -> s{_owaChannel = a})
-
 -- | Name of the bucket in which to look for objects.
 owaBucket :: Lens' ObjectsWatchAll' Text
 owaBucket
   = lens _owaBucket (\ s a -> s{_owaBucket = a})
+
+-- | Multipart request metadata.
+owaPayload :: Lens' ObjectsWatchAll' Channel
+owaPayload
+  = lens _owaPayload (\ s a -> s{_owaPayload = a})
 
 -- | If true, lists all versions of a file as distinct results.
 owaVersions :: Lens' ObjectsWatchAll' (Maybe Bool)
@@ -239,11 +240,11 @@ instance GoogleRequest ObjectsWatchAll' where
         type Rs ObjectsWatchAll' = Channel
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsWatchAll'{..}
-          = go _owaDelimiter _owaMaxResults _owaPageToken
-              _owaPrefix
+          = go _owaBucket _owaPrefix _owaVersions
               _owaProjection
-              _owaVersions
-              _owaBucket
+              _owaPageToken
+              _owaDelimiter
+              _owaMaxResults
               _owaQuotaUser
               (Just _owaPrettyPrint)
               _owaUserIP
@@ -251,7 +252,7 @@ instance GoogleRequest ObjectsWatchAll' where
               _owaKey
               _owaOAuthToken
               (Just AltJSON)
-              _owaChannel
+              _owaPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ObjectsWatchAllResource)

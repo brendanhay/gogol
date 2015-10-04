@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.DFAReporting.SubAccounts.Patch
     -- * Request Lenses
     , sapQuotaUser
     , sapPrettyPrint
-    , sapSubAccount
     , sapUserIP
     , sapProfileId
+    , sapPayload
     , sapKey
     , sapId
     , sapOAuthToken
@@ -67,14 +68,14 @@ type SubAccountsPatchResource =
 data SubAccountsPatch' = SubAccountsPatch'
     { _sapQuotaUser   :: !(Maybe Text)
     , _sapPrettyPrint :: !Bool
-    , _sapSubAccount  :: !SubAccount
     , _sapUserIP      :: !(Maybe Text)
     , _sapProfileId   :: !Int64
+    , _sapPayload     :: !SubAccount
     , _sapKey         :: !(Maybe Key)
     , _sapId          :: !Int64
     , _sapOAuthToken  :: !(Maybe OAuthToken)
     , _sapFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubAccountsPatch'' with the minimum fields required to make a request.
 --
@@ -84,11 +85,11 @@ data SubAccountsPatch' = SubAccountsPatch'
 --
 -- * 'sapPrettyPrint'
 --
--- * 'sapSubAccount'
---
 -- * 'sapUserIP'
 --
 -- * 'sapProfileId'
+--
+-- * 'sapPayload'
 --
 -- * 'sapKey'
 --
@@ -98,17 +99,17 @@ data SubAccountsPatch' = SubAccountsPatch'
 --
 -- * 'sapFields'
 subAccountsPatch'
-    :: SubAccount -- ^ 'SubAccount'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> SubAccount -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> SubAccountsPatch'
-subAccountsPatch' pSapSubAccount_ pSapProfileId_ pSapId_ =
+subAccountsPatch' pSapProfileId_ pSapPayload_ pSapId_ =
     SubAccountsPatch'
     { _sapQuotaUser = Nothing
     , _sapPrettyPrint = True
-    , _sapSubAccount = pSapSubAccount_
     , _sapUserIP = Nothing
     , _sapProfileId = pSapProfileId_
+    , _sapPayload = pSapPayload_
     , _sapKey = Nothing
     , _sapId = pSapId_
     , _sapOAuthToken = Nothing
@@ -128,12 +129,6 @@ sapPrettyPrint
   = lens _sapPrettyPrint
       (\ s a -> s{_sapPrettyPrint = a})
 
--- | Multipart request metadata.
-sapSubAccount :: Lens' SubAccountsPatch' SubAccount
-sapSubAccount
-  = lens _sapSubAccount
-      (\ s a -> s{_sapSubAccount = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 sapUserIP :: Lens' SubAccountsPatch' (Maybe Text)
@@ -144,6 +139,11 @@ sapUserIP
 sapProfileId :: Lens' SubAccountsPatch' Int64
 sapProfileId
   = lens _sapProfileId (\ s a -> s{_sapProfileId = a})
+
+-- | Multipart request metadata.
+sapPayload :: Lens' SubAccountsPatch' SubAccount
+sapPayload
+  = lens _sapPayload (\ s a -> s{_sapPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -181,7 +181,7 @@ instance GoogleRequest SubAccountsPatch' where
               _sapKey
               _sapOAuthToken
               (Just AltJSON)
-              _sapSubAccount
+              _sapPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SubAccountsPatchResource)

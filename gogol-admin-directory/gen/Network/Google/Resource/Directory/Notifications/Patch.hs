@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.Directory.Notifications.Patch
     -- * Request Lenses
     , npQuotaUser
     , npPrettyPrint
-    , npNotification
     , npUserIP
+    , npPayload
     , npCustomer
     , npKey
     , npNotificationId
@@ -67,14 +68,14 @@ type NotificationsPatchResource =
 data NotificationsPatch' = NotificationsPatch'
     { _npQuotaUser      :: !(Maybe Text)
     , _npPrettyPrint    :: !Bool
-    , _npNotification   :: !Notification
     , _npUserIP         :: !(Maybe Text)
+    , _npPayload        :: !Notification
     , _npCustomer       :: !Text
     , _npKey            :: !(Maybe Key)
     , _npNotificationId :: !Text
     , _npOAuthToken     :: !(Maybe OAuthToken)
     , _npFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NotificationsPatch'' with the minimum fields required to make a request.
 --
@@ -84,9 +85,9 @@ data NotificationsPatch' = NotificationsPatch'
 --
 -- * 'npPrettyPrint'
 --
--- * 'npNotification'
---
 -- * 'npUserIP'
+--
+-- * 'npPayload'
 --
 -- * 'npCustomer'
 --
@@ -98,16 +99,16 @@ data NotificationsPatch' = NotificationsPatch'
 --
 -- * 'npFields'
 notificationsPatch'
-    :: Notification -- ^ 'Notification'
+    :: Notification -- ^ 'payload'
     -> Text -- ^ 'customer'
     -> Text -- ^ 'notificationId'
     -> NotificationsPatch'
-notificationsPatch' pNpNotification_ pNpCustomer_ pNpNotificationId_ =
+notificationsPatch' pNpPayload_ pNpCustomer_ pNpNotificationId_ =
     NotificationsPatch'
     { _npQuotaUser = Nothing
     , _npPrettyPrint = True
-    , _npNotification = pNpNotification_
     , _npUserIP = Nothing
+    , _npPayload = pNpPayload_
     , _npCustomer = pNpCustomer_
     , _npKey = Nothing
     , _npNotificationId = pNpNotificationId_
@@ -128,16 +129,15 @@ npPrettyPrint
   = lens _npPrettyPrint
       (\ s a -> s{_npPrettyPrint = a})
 
--- | Multipart request metadata.
-npNotification :: Lens' NotificationsPatch' Notification
-npNotification
-  = lens _npNotification
-      (\ s a -> s{_npNotification = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 npUserIP :: Lens' NotificationsPatch' (Maybe Text)
 npUserIP = lens _npUserIP (\ s a -> s{_npUserIP = a})
+
+-- | Multipart request metadata.
+npPayload :: Lens' NotificationsPatch' Notification
+npPayload
+  = lens _npPayload (\ s a -> s{_npPayload = a})
 
 -- | The unique ID for the customer\'s Google account.
 npCustomer :: Lens' NotificationsPatch' Text
@@ -180,7 +180,7 @@ instance GoogleRequest NotificationsPatch' where
               _npKey
               _npOAuthToken
               (Just AltJSON)
-              _npNotification
+              _npPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy NotificationsPatchResource)

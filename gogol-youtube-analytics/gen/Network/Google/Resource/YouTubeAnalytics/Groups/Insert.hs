@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -31,9 +32,9 @@ module Network.Google.Resource.YouTubeAnalytics.Groups.Insert
 
     -- * Request Lenses
     , giQuotaUser
-    , giGroup
     , giPrettyPrint
     , giUserIP
+    , giPayload
     , giOnBehalfOfContentOwner
     , giKey
     , giOAuthToken
@@ -62,14 +63,14 @@ type GroupsInsertResource =
 -- /See:/ 'groupsInsert'' smart constructor.
 data GroupsInsert' = GroupsInsert'
     { _giQuotaUser              :: !(Maybe Text)
-    , _giGroup                  :: !Group
     , _giPrettyPrint            :: !Bool
     , _giUserIP                 :: !(Maybe Text)
+    , _giPayload                :: !Group
     , _giOnBehalfOfContentOwner :: !(Maybe Text)
     , _giKey                    :: !(Maybe Key)
     , _giOAuthToken             :: !(Maybe OAuthToken)
     , _giFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsInsert'' with the minimum fields required to make a request.
 --
@@ -77,11 +78,11 @@ data GroupsInsert' = GroupsInsert'
 --
 -- * 'giQuotaUser'
 --
--- * 'giGroup'
---
 -- * 'giPrettyPrint'
 --
 -- * 'giUserIP'
+--
+-- * 'giPayload'
 --
 -- * 'giOnBehalfOfContentOwner'
 --
@@ -91,14 +92,14 @@ data GroupsInsert' = GroupsInsert'
 --
 -- * 'giFields'
 groupsInsert'
-    :: Group -- ^ 'Group'
+    :: Group -- ^ 'payload'
     -> GroupsInsert'
-groupsInsert' pGiGroup_ =
+groupsInsert' pGiPayload_ =
     GroupsInsert'
     { _giQuotaUser = Nothing
-    , _giGroup = pGiGroup_
     , _giPrettyPrint = True
     , _giUserIP = Nothing
+    , _giPayload = pGiPayload_
     , _giOnBehalfOfContentOwner = Nothing
     , _giKey = Nothing
     , _giOAuthToken = Nothing
@@ -112,10 +113,6 @@ giQuotaUser :: Lens' GroupsInsert' (Maybe Text)
 giQuotaUser
   = lens _giQuotaUser (\ s a -> s{_giQuotaUser = a})
 
--- | Multipart request metadata.
-giGroup :: Lens' GroupsInsert' Group
-giGroup = lens _giGroup (\ s a -> s{_giGroup = a})
-
 -- | Returns response with indentations and line breaks.
 giPrettyPrint :: Lens' GroupsInsert' Bool
 giPrettyPrint
@@ -126,6 +123,11 @@ giPrettyPrint
 -- want to enforce per-user limits.
 giUserIP :: Lens' GroupsInsert' (Maybe Text)
 giUserIP = lens _giUserIP (\ s a -> s{_giUserIP = a})
+
+-- | Multipart request metadata.
+giPayload :: Lens' GroupsInsert' Group
+giPayload
+  = lens _giPayload (\ s a -> s{_giPayload = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -172,7 +174,7 @@ instance GoogleRequest GroupsInsert' where
               _giKey
               _giOAuthToken
               (Just AltJSON)
-              _giGroup
+              _giPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GroupsInsertResource)

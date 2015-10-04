@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,9 +37,9 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Update
     , acvucUserIP
     , acvucFingerprint
     , acvucContainerVersionId
+    , acvucPayload
     , acvucAccountId
     , acvucKey
-    , acvucContainerVersion
     , acvucOAuthToken
     , acvucFields
     ) where
@@ -76,12 +77,12 @@ data AccountsContainersVersionsUpdate' = AccountsContainersVersionsUpdate'
     , _acvucUserIP             :: !(Maybe Text)
     , _acvucFingerprint        :: !(Maybe Text)
     , _acvucContainerVersionId :: !Text
+    , _acvucPayload            :: !ContainerVersion
     , _acvucAccountId          :: !Text
     , _acvucKey                :: !(Maybe Key)
-    , _acvucContainerVersion   :: !ContainerVersion
     , _acvucOAuthToken         :: !(Maybe OAuthToken)
     , _acvucFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsUpdate'' with the minimum fields required to make a request.
 --
@@ -99,11 +100,11 @@ data AccountsContainersVersionsUpdate' = AccountsContainersVersionsUpdate'
 --
 -- * 'acvucContainerVersionId'
 --
+-- * 'acvucPayload'
+--
 -- * 'acvucAccountId'
 --
 -- * 'acvucKey'
---
--- * 'acvucContainerVersion'
 --
 -- * 'acvucOAuthToken'
 --
@@ -111,10 +112,10 @@ data AccountsContainersVersionsUpdate' = AccountsContainersVersionsUpdate'
 accountsContainersVersionsUpdate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'containerVersionId'
+    -> ContainerVersion -- ^ 'payload'
     -> Text -- ^ 'accountId'
-    -> ContainerVersion -- ^ 'ContainerVersion'
     -> AccountsContainersVersionsUpdate'
-accountsContainersVersionsUpdate' pAcvucContainerId_ pAcvucContainerVersionId_ pAcvucAccountId_ pAcvucContainerVersion_ =
+accountsContainersVersionsUpdate' pAcvucContainerId_ pAcvucContainerVersionId_ pAcvucPayload_ pAcvucAccountId_ =
     AccountsContainersVersionsUpdate'
     { _acvucQuotaUser = Nothing
     , _acvucPrettyPrint = True
@@ -122,9 +123,9 @@ accountsContainersVersionsUpdate' pAcvucContainerId_ pAcvucContainerVersionId_ p
     , _acvucUserIP = Nothing
     , _acvucFingerprint = Nothing
     , _acvucContainerVersionId = pAcvucContainerVersionId_
+    , _acvucPayload = pAcvucPayload_
     , _acvucAccountId = pAcvucAccountId_
     , _acvucKey = Nothing
-    , _acvucContainerVersion = pAcvucContainerVersion_
     , _acvucOAuthToken = Nothing
     , _acvucFields = Nothing
     }
@@ -168,6 +169,11 @@ acvucContainerVersionId
   = lens _acvucContainerVersionId
       (\ s a -> s{_acvucContainerVersionId = a})
 
+-- | Multipart request metadata.
+acvucPayload :: Lens' AccountsContainersVersionsUpdate' ContainerVersion
+acvucPayload
+  = lens _acvucPayload (\ s a -> s{_acvucPayload = a})
+
 -- | The GTM Account ID.
 acvucAccountId :: Lens' AccountsContainersVersionsUpdate' Text
 acvucAccountId
@@ -179,12 +185,6 @@ acvucAccountId
 -- token.
 acvucKey :: Lens' AccountsContainersVersionsUpdate' (Maybe Key)
 acvucKey = lens _acvucKey (\ s a -> s{_acvucKey = a})
-
--- | Multipart request metadata.
-acvucContainerVersion :: Lens' AccountsContainersVersionsUpdate' ContainerVersion
-acvucContainerVersion
-  = lens _acvucContainerVersion
-      (\ s a -> s{_acvucContainerVersion = a})
 
 -- | OAuth 2.0 token for the current user.
 acvucOAuthToken :: Lens' AccountsContainersVersionsUpdate' (Maybe OAuthToken)
@@ -209,9 +209,9 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersVersionsUpdate'{..}
-          = go _acvucFingerprint _acvucAccountId
-              _acvucContainerId
+          = go _acvucAccountId _acvucContainerId
               _acvucContainerVersionId
+              _acvucFingerprint
               _acvucQuotaUser
               (Just _acvucPrettyPrint)
               _acvucUserIP
@@ -219,7 +219,7 @@ instance GoogleRequest
               _acvucKey
               _acvucOAuthToken
               (Just AltJSON)
-              _acvucContainerVersion
+              _acvucPayload
           where go
                   = clientWithRoute
                       (Proxy ::

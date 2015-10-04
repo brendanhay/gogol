@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,14 +55,14 @@ import           Network.Google.Prelude
 type PromoOfferAcceptResource =
      "promooffer" :>
        "accept" :>
-         QueryParam "androidId" Text :>
-           QueryParam "device" Text :>
-             QueryParam "manufacturer" Text :>
+         QueryParam "manufacturer" Text :>
+           QueryParam "serial" Text :>
+             QueryParam "device" Text :>
                QueryParam "model" Text :>
-                 QueryParam "offerId" Text :>
-                   QueryParam "product" Text :>
-                     QueryParam "serial" Text :>
-                       QueryParam "volumeId" Text :>
+                 QueryParam "volumeId" Text :>
+                   QueryParam "offerId" Text :>
+                     QueryParam "product" Text :>
+                       QueryParam "androidId" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -88,7 +89,7 @@ data PromoOfferAccept' = PromoOfferAccept'
     , _poaOAuthToken   :: !(Maybe OAuthToken)
     , _poaAndroidId    :: !(Maybe Text)
     , _poaFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PromoOfferAccept'' with the minimum fields required to make a request.
 --
@@ -224,12 +225,11 @@ instance GoogleRequest PromoOfferAccept' where
         type Rs PromoOfferAccept' = ()
         request = requestWithRoute defReq booksURL
         requestWithRoute r u PromoOfferAccept'{..}
-          = go _poaAndroidId _poaDevice _poaManufacturer
-              _poaModel
+          = go _poaManufacturer _poaSerial _poaDevice _poaModel
+              _poaVolumeId
               _poaOfferId
               _poaProduct
-              _poaSerial
-              _poaVolumeId
+              _poaAndroidId
               _poaQuotaUser
               (Just _poaPrettyPrint)
               _poaUserIP

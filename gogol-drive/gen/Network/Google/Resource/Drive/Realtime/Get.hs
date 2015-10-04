@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -69,7 +70,7 @@ type RealtimeGetResource =
                      QueryParam "fields" Text :>
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "alt" Media :> Get '[OctetStream] Stream
+                           QueryParam "alt" AltMedia :> Get '[OctetStream] Body
 
 -- | Exports the contents of the Realtime API data model associated with this
 -- file as JSON.
@@ -84,7 +85,7 @@ data RealtimeGet' = RealtimeGet'
     , _reaOAuthToken  :: !(Maybe OAuthToken)
     , _reaRevision    :: !(Maybe Int32)
     , _reaFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RealtimeGet'' with the minimum fields required to make a request.
 --
@@ -177,7 +178,7 @@ instance GoogleRequest RealtimeGet' where
         type Rs RealtimeGet' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RealtimeGet'{..}
-          = go _reaRevision _reaFileId _reaQuotaUser
+          = go _reaFileId _reaRevision _reaQuotaUser
               (Just _reaPrettyPrint)
               _reaUserIP
               _reaFields
@@ -190,18 +191,18 @@ instance GoogleRequest RealtimeGet' where
                       r
                       u
 
-instance GoogleRequest RealtimeGet' where
-        type Rs (Download RealtimeGet') = Stream
+instance GoogleRequest (Download RealtimeGet') where
+        type Rs (Download RealtimeGet') = Body
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u RealtimeGet'{..}
-          = go _reaRevision _reaFileId _reaQuotaUser
+        requestWithRoute r u (Download RealtimeGet'{..})
+          = go _reaFileId _reaRevision _reaQuotaUser
               (Just _reaPrettyPrint)
               _reaUserIP
               _reaFields
               _reaKey
               _reaOAuthToken
-              (Just Media)
-          where go :<|> _
+              (Just AltMedia)
+          where _ :<|> go
                   = clientWithRoute
                       (Proxy :: Proxy RealtimeGetResource)
                       r

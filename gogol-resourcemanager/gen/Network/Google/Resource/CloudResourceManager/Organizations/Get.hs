@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,12 +56,12 @@ type OrganizationsGetResource =
        "organizations" :>
          Capture "organizationId" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
@@ -86,7 +87,7 @@ data OrganizationsGet' = OrganizationsGet'
     , _ogOrganizationId :: !Text
     , _ogFields         :: !(Maybe Text)
     , _ogCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrganizationsGet'' with the minimum fields required to make a request.
 --
@@ -215,12 +216,12 @@ instance GoogleRequest OrganizationsGet' where
         type Rs OrganizationsGet' = Organization
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u OrganizationsGet'{..}
-          = go _ogXgafv _ogAccessToken _ogBearerToken
-              _ogCallback
+          = go _ogOrganizationId _ogXgafv _ogUploadProtocol
               (Just _ogPp)
+              _ogAccessToken
               _ogUploadType
-              _ogUploadProtocol
-              _ogOrganizationId
+              _ogBearerToken
+              _ogCallback
               _ogQuotaUser
               (Just _ogPrettyPrint)
               _ogFields

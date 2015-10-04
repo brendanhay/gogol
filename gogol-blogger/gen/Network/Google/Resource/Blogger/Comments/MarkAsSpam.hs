@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -75,7 +76,7 @@ data CommentsMarkAsSpam' = CommentsMarkAsSpam'
     , _cmasOAuthToken  :: !(Maybe OAuthToken)
     , _cmasCommentId   :: !Text
     , _cmasFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsMarkAsSpam'' with the minimum fields required to make a request.
 --

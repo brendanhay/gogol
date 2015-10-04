@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,10 +35,10 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.Insert
     , mcdiPrettyPrint
     , mcdiWebPropertyId
     , mcdiUserIP
+    , mcdiPayload
     , mcdiAccountId
     , mcdiKey
     , mcdiOAuthToken
-    , mcdiCustomDimension
     , mcdiFields
     ) where
 
@@ -67,16 +68,16 @@ type ManagementCustomDimensionsInsertResource =
 --
 -- /See:/ 'managementCustomDimensionsInsert'' smart constructor.
 data ManagementCustomDimensionsInsert' = ManagementCustomDimensionsInsert'
-    { _mcdiQuotaUser       :: !(Maybe Text)
-    , _mcdiPrettyPrint     :: !Bool
-    , _mcdiWebPropertyId   :: !Text
-    , _mcdiUserIP          :: !(Maybe Text)
-    , _mcdiAccountId       :: !Text
-    , _mcdiKey             :: !(Maybe Key)
-    , _mcdiOAuthToken      :: !(Maybe OAuthToken)
-    , _mcdiCustomDimension :: !CustomDimension
-    , _mcdiFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mcdiQuotaUser     :: !(Maybe Text)
+    , _mcdiPrettyPrint   :: !Bool
+    , _mcdiWebPropertyId :: !Text
+    , _mcdiUserIP        :: !(Maybe Text)
+    , _mcdiPayload       :: !CustomDimension
+    , _mcdiAccountId     :: !Text
+    , _mcdiKey           :: !(Maybe Key)
+    , _mcdiOAuthToken    :: !(Maybe OAuthToken)
+    , _mcdiFields        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDimensionsInsert'' with the minimum fields required to make a request.
 --
@@ -90,30 +91,30 @@ data ManagementCustomDimensionsInsert' = ManagementCustomDimensionsInsert'
 --
 -- * 'mcdiUserIP'
 --
+-- * 'mcdiPayload'
+--
 -- * 'mcdiAccountId'
 --
 -- * 'mcdiKey'
 --
 -- * 'mcdiOAuthToken'
 --
--- * 'mcdiCustomDimension'
---
 -- * 'mcdiFields'
 managementCustomDimensionsInsert'
     :: Text -- ^ 'webPropertyId'
+    -> CustomDimension -- ^ 'payload'
     -> Text -- ^ 'accountId'
-    -> CustomDimension -- ^ 'CustomDimension'
     -> ManagementCustomDimensionsInsert'
-managementCustomDimensionsInsert' pMcdiWebPropertyId_ pMcdiAccountId_ pMcdiCustomDimension_ =
+managementCustomDimensionsInsert' pMcdiWebPropertyId_ pMcdiPayload_ pMcdiAccountId_ =
     ManagementCustomDimensionsInsert'
     { _mcdiQuotaUser = Nothing
     , _mcdiPrettyPrint = False
     , _mcdiWebPropertyId = pMcdiWebPropertyId_
     , _mcdiUserIP = Nothing
+    , _mcdiPayload = pMcdiPayload_
     , _mcdiAccountId = pMcdiAccountId_
     , _mcdiKey = Nothing
     , _mcdiOAuthToken = Nothing
-    , _mcdiCustomDimension = pMcdiCustomDimension_
     , _mcdiFields = Nothing
     }
 
@@ -143,6 +144,11 @@ mcdiUserIP :: Lens' ManagementCustomDimensionsInsert' (Maybe Text)
 mcdiUserIP
   = lens _mcdiUserIP (\ s a -> s{_mcdiUserIP = a})
 
+-- | Multipart request metadata.
+mcdiPayload :: Lens' ManagementCustomDimensionsInsert' CustomDimension
+mcdiPayload
+  = lens _mcdiPayload (\ s a -> s{_mcdiPayload = a})
+
 -- | Account ID for the custom dimension to create.
 mcdiAccountId :: Lens' ManagementCustomDimensionsInsert' Text
 mcdiAccountId
@@ -160,12 +166,6 @@ mcdiOAuthToken :: Lens' ManagementCustomDimensionsInsert' (Maybe OAuthToken)
 mcdiOAuthToken
   = lens _mcdiOAuthToken
       (\ s a -> s{_mcdiOAuthToken = a})
-
--- | Multipart request metadata.
-mcdiCustomDimension :: Lens' ManagementCustomDimensionsInsert' CustomDimension
-mcdiCustomDimension
-  = lens _mcdiCustomDimension
-      (\ s a -> s{_mcdiCustomDimension = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mcdiFields :: Lens' ManagementCustomDimensionsInsert' (Maybe Text)
@@ -191,7 +191,7 @@ instance GoogleRequest
               _mcdiKey
               _mcdiOAuthToken
               (Just AltJSON)
-              _mcdiCustomDimension
+              _mcdiPayload
           where go
                   = clientWithRoute
                       (Proxy ::

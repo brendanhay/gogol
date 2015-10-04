@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -82,7 +83,7 @@ data EditsExpansionfilesUpload' = EditsExpansionfilesUpload'
     , _eeuOAuthToken        :: !(Maybe OAuthToken)
     , _eeuEditId            :: !Text
     , _eeuFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsExpansionfilesUpload'' with the minimum fields required to make a request.
 --
@@ -204,8 +205,7 @@ instance GoogleRequest EditsExpansionfilesUpload'
              ExpansionFilesUploadResponse
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsExpansionfilesUpload'{..}
-          = go _eeuMedia _eeuPackageName _eeuEditId
-              _eeuAPKVersionCode
+          = go _eeuPackageName _eeuEditId _eeuAPKVersionCode
               _eeuExpansionFileType
               _eeuQuotaUser
               (Just _eeuPrettyPrint)
@@ -214,6 +214,7 @@ instance GoogleRequest EditsExpansionfilesUpload'
               _eeuKey
               _eeuOAuthToken
               (Just AltJSON)
+              _eeuMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EditsExpansionfilesUploadResource)

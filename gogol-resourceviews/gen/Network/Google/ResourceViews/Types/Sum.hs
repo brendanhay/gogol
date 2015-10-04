@@ -17,10 +17,37 @@ module Network.Google.ResourceViews.Types.Sum where
 
 import           Network.Google.Prelude
 
+-- | The state of the instance to list. By default, it lists all instances.
+data ListState
+    = All
+      -- ^ @ALL@
+    | Running
+      -- ^ @RUNNING@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ListState
+
+instance FromText ListState where
+    fromText = \case
+        "ALL" -> Just All
+        "RUNNING" -> Just Running
+        _ -> Nothing
+
+instance ToText ListState where
+    toText = \case
+        All -> "ALL"
+        Running -> "RUNNING"
+
+instance FromJSON ListState where
+    parseJSON = parseJSONText "ListState"
+
+instance ToJSON ListState where
+    toJSON = toJSONText
+
 -- | The requested format of the return value. It can be URL or URL_PORT. A
 -- JSON object will be included in the response based on the format. The
 -- default format is NONE, which results in no JSON in the response.
-data ResourceviewsZoneViewsListResourcesFormat
+data Format
     = None
       -- ^ @NONE@
     | URL
@@ -29,50 +56,23 @@ data ResourceviewsZoneViewsListResourcesFormat
       -- ^ @URL_PORT@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ResourceviewsZoneViewsListResourcesFormat
+instance Hashable Format
 
-instance FromText ResourceviewsZoneViewsListResourcesFormat where
+instance FromText Format where
     fromText = \case
         "NONE" -> Just None
         "URL" -> Just URL
         "URL_PORT" -> Just URLPort
         _ -> Nothing
 
-instance ToText ResourceviewsZoneViewsListResourcesFormat where
+instance ToText Format where
     toText = \case
         None -> "NONE"
         URL -> "URL"
         URLPort -> "URL_PORT"
 
-instance FromJSON ResourceviewsZoneViewsListResourcesFormat where
-    parseJSON = parseJSONText "ResourceviewsZoneViewsListResourcesFormat"
+instance FromJSON Format where
+    parseJSON = parseJSONText "Format"
 
-instance ToJSON ResourceviewsZoneViewsListResourcesFormat where
-    toJSON = toJSONText
-
--- | The state of the instance to list. By default, it lists all instances.
-data ResourceviewsZoneViewsListResourcesListState
-    = All
-      -- ^ @ALL@
-    | Running
-      -- ^ @RUNNING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ResourceviewsZoneViewsListResourcesListState
-
-instance FromText ResourceviewsZoneViewsListResourcesListState where
-    fromText = \case
-        "ALL" -> Just All
-        "RUNNING" -> Just Running
-        _ -> Nothing
-
-instance ToText ResourceviewsZoneViewsListResourcesListState where
-    toText = \case
-        All -> "ALL"
-        Running -> "RUNNING"
-
-instance FromJSON ResourceviewsZoneViewsListResourcesListState where
-    parseJSON = parseJSONText "ResourceviewsZoneViewsListResourcesListState"
-
-instance ToJSON ResourceviewsZoneViewsListResourcesListState where
+instance ToJSON Format where
     toJSON = toJSONText

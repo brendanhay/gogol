@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,14 +53,14 @@ import           Network.Google.PubSub.Types
 -- 'ProjectsTopicsGet'' request conforms to.
 type ProjectsTopicsGetResource =
      "v1beta2" :>
-       "{+topic}" :>
+       Capture "topic" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -84,7 +85,7 @@ data ProjectsTopicsGet' = ProjectsTopicsGet'
     , _ptgOAuthToken     :: !(Maybe OAuthToken)
     , _ptgFields         :: !(Maybe Text)
     , _ptgCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsTopicsGet'' with the minimum fields required to make a request.
 --
@@ -214,12 +215,12 @@ instance GoogleRequest ProjectsTopicsGet' where
         type Rs ProjectsTopicsGet' = Topic
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsTopicsGet'{..}
-          = go _ptgXgafv _ptgAccessToken _ptgBearerToken
-              _ptgCallback
+          = go _ptgTopic _ptgXgafv _ptgUploadProtocol
               (Just _ptgPp)
+              _ptgAccessToken
               _ptgUploadType
-              _ptgUploadProtocol
-              _ptgTopic
+              _ptgBearerToken
+              _ptgCallback
               _ptgQuotaUser
               (Just _ptgPrettyPrint)
               _ptgFields

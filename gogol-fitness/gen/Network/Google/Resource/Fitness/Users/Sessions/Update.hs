@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,12 +34,12 @@ module Network.Google.Resource.Fitness.Users.Sessions.Update
     , usuQuotaUser
     , usuPrettyPrint
     , usuUserIP
+    , usuPayload
     , usuUserId
     , usuKey
     , usuCurrentTimeMillis
     , usuOAuthToken
     , usuSessionId
-    , usuSession
     , usuFields
     ) where
 
@@ -68,14 +69,14 @@ data UsersSessionsUpdate' = UsersSessionsUpdate'
     { _usuQuotaUser         :: !(Maybe Text)
     , _usuPrettyPrint       :: !Bool
     , _usuUserIP            :: !(Maybe Text)
+    , _usuPayload           :: !Session
     , _usuUserId            :: !Text
     , _usuKey               :: !(Maybe Key)
     , _usuCurrentTimeMillis :: !(Maybe Int64)
     , _usuOAuthToken        :: !(Maybe OAuthToken)
     , _usuSessionId         :: !Text
-    , _usuSession           :: !Session
     , _usuFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersSessionsUpdate'' with the minimum fields required to make a request.
 --
@@ -87,6 +88,8 @@ data UsersSessionsUpdate' = UsersSessionsUpdate'
 --
 -- * 'usuUserIP'
 --
+-- * 'usuPayload'
+--
 -- * 'usuUserId'
 --
 -- * 'usuKey'
@@ -97,25 +100,23 @@ data UsersSessionsUpdate' = UsersSessionsUpdate'
 --
 -- * 'usuSessionId'
 --
--- * 'usuSession'
---
 -- * 'usuFields'
 usersSessionsUpdate'
-    :: Text -- ^ 'userId'
+    :: Session -- ^ 'payload'
+    -> Text -- ^ 'userId'
     -> Text -- ^ 'sessionId'
-    -> Session -- ^ 'Session'
     -> UsersSessionsUpdate'
-usersSessionsUpdate' pUsuUserId_ pUsuSessionId_ pUsuSession_ =
+usersSessionsUpdate' pUsuPayload_ pUsuUserId_ pUsuSessionId_ =
     UsersSessionsUpdate'
     { _usuQuotaUser = Nothing
     , _usuPrettyPrint = True
     , _usuUserIP = Nothing
+    , _usuPayload = pUsuPayload_
     , _usuUserId = pUsuUserId_
     , _usuKey = Nothing
     , _usuCurrentTimeMillis = Nothing
     , _usuOAuthToken = Nothing
     , _usuSessionId = pUsuSessionId_
-    , _usuSession = pUsuSession_
     , _usuFields = Nothing
     }
 
@@ -137,6 +138,11 @@ usuPrettyPrint
 usuUserIP :: Lens' UsersSessionsUpdate' (Maybe Text)
 usuUserIP
   = lens _usuUserIP (\ s a -> s{_usuUserIP = a})
+
+-- | Multipart request metadata.
+usuPayload :: Lens' UsersSessionsUpdate' Session
+usuPayload
+  = lens _usuPayload (\ s a -> s{_usuPayload = a})
 
 -- | Create sessions for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
@@ -167,11 +173,6 @@ usuSessionId :: Lens' UsersSessionsUpdate' Text
 usuSessionId
   = lens _usuSessionId (\ s a -> s{_usuSessionId = a})
 
--- | Multipart request metadata.
-usuSession :: Lens' UsersSessionsUpdate' Session
-usuSession
-  = lens _usuSession (\ s a -> s{_usuSession = a})
-
 -- | Selector specifying which fields to include in a partial response.
 usuFields :: Lens' UsersSessionsUpdate' (Maybe Text)
 usuFields
@@ -185,7 +186,7 @@ instance GoogleRequest UsersSessionsUpdate' where
         type Rs UsersSessionsUpdate' = Session
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersSessionsUpdate'{..}
-          = go _usuCurrentTimeMillis _usuUserId _usuSessionId
+          = go _usuUserId _usuSessionId _usuCurrentTimeMillis
               _usuQuotaUser
               (Just _usuPrettyPrint)
               _usuUserIP
@@ -193,7 +194,7 @@ instance GoogleRequest UsersSessionsUpdate' where
               _usuKey
               _usuOAuthToken
               (Just AltJSON)
-              _usuSession
+              _usuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersSessionsUpdateResource)

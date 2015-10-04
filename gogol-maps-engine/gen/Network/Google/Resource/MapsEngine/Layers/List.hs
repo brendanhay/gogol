@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,21 +59,21 @@ import           Network.Google.Prelude
 -- 'LayersList'' request conforms to.
 type LayersListResource =
      "layers" :>
-       QueryParam "bbox" Text :>
-         QueryParam "createdAfter" DateTime' :>
-           QueryParam "createdBefore" DateTime' :>
-             QueryParam "creatorEmail" Text :>
-               QueryParam "maxResults" Word32 :>
+       QueryParam "createdAfter" DateTime' :>
+         QueryParam "creatorEmail" Text :>
+           QueryParam "role" MapsEngineLayersListRole :>
+             QueryParam "bbox" Text :>
+               QueryParam "processingStatus"
+                 MapsEngineLayersListProcessingStatus
+                 :>
                  QueryParam "modifiedAfter" DateTime' :>
                    QueryParam "modifiedBefore" DateTime' :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "processingStatus"
-                         MapsEngineLayersListProcessingStatus
-                         :>
-                         QueryParam "projectId" Text :>
-                           QueryParam "role" MapsEngineLayersListRole :>
-                             QueryParam "search" Text :>
-                               QueryParam "tags" Text :>
+                       QueryParam "projectId" Text :>
+                         QueryParam "search" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "tags" Text :>
+                               QueryParam "createdBefore" DateTime' :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
@@ -106,7 +107,7 @@ data LayersList' = LayersList'
     , _llTags             :: !(Maybe Text)
     , _llFields           :: !(Maybe Text)
     , _llCreatedBefore    :: !(Maybe DateTime')
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersList'' with the minimum fields required to make a request.
 --
@@ -300,17 +301,16 @@ instance GoogleRequest LayersList' where
         type Rs LayersList' = LayersListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u LayersList'{..}
-          = go _llBbox _llCreatedAfter _llCreatedBefore
-              _llCreatorEmail
-              _llMaxResults
+          = go _llCreatedAfter _llCreatorEmail _llRole _llBbox
+              _llProcessingStatus
               _llModifiedAfter
               _llModifiedBefore
               _llPageToken
-              _llProcessingStatus
               _llProjectId
-              _llRole
               _llSearch
+              _llMaxResults
               _llTags
+              _llCreatedBefore
               _llQuotaUser
               (Just _llPrettyPrint)
               _llUserIP

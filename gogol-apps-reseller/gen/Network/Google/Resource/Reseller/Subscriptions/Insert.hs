@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,11 +34,11 @@ module Network.Google.Resource.Reseller.Subscriptions.Insert
     , siQuotaUser
     , siPrettyPrint
     , siUserIP
+    , siPayload
     , siCustomerId
     , siKey
     , siCustomerAuthToken
     , siOAuthToken
-    , siSubscription
     , siFields
     ) where
 
@@ -68,13 +69,13 @@ data SubscriptionsInsert' = SubscriptionsInsert'
     { _siQuotaUser         :: !(Maybe Text)
     , _siPrettyPrint       :: !Bool
     , _siUserIP            :: !(Maybe Text)
+    , _siPayload           :: !Subscription
     , _siCustomerId        :: !Text
     , _siKey               :: !(Maybe Key)
     , _siCustomerAuthToken :: !(Maybe Text)
     , _siOAuthToken        :: !(Maybe OAuthToken)
-    , _siSubscription      :: !Subscription
     , _siFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsInsert'' with the minimum fields required to make a request.
 --
@@ -86,6 +87,8 @@ data SubscriptionsInsert' = SubscriptionsInsert'
 --
 -- * 'siUserIP'
 --
+-- * 'siPayload'
+--
 -- * 'siCustomerId'
 --
 -- * 'siKey'
@@ -94,23 +97,21 @@ data SubscriptionsInsert' = SubscriptionsInsert'
 --
 -- * 'siOAuthToken'
 --
--- * 'siSubscription'
---
 -- * 'siFields'
 subscriptionsInsert'
-    :: Text -- ^ 'customerId'
-    -> Subscription -- ^ 'Subscription'
+    :: Subscription -- ^ 'payload'
+    -> Text -- ^ 'customerId'
     -> SubscriptionsInsert'
-subscriptionsInsert' pSiCustomerId_ pSiSubscription_ =
+subscriptionsInsert' pSiPayload_ pSiCustomerId_ =
     SubscriptionsInsert'
     { _siQuotaUser = Nothing
     , _siPrettyPrint = True
     , _siUserIP = Nothing
+    , _siPayload = pSiPayload_
     , _siCustomerId = pSiCustomerId_
     , _siKey = Nothing
     , _siCustomerAuthToken = Nothing
     , _siOAuthToken = Nothing
-    , _siSubscription = pSiSubscription_
     , _siFields = Nothing
     }
 
@@ -131,6 +132,11 @@ siPrettyPrint
 -- want to enforce per-user limits.
 siUserIP :: Lens' SubscriptionsInsert' (Maybe Text)
 siUserIP = lens _siUserIP (\ s a -> s{_siUserIP = a})
+
+-- | Multipart request metadata.
+siPayload :: Lens' SubscriptionsInsert' Subscription
+siPayload
+  = lens _siPayload (\ s a -> s{_siPayload = a})
 
 -- | Id of the Customer
 siCustomerId :: Lens' SubscriptionsInsert' Text
@@ -156,12 +162,6 @@ siOAuthToken :: Lens' SubscriptionsInsert' (Maybe OAuthToken)
 siOAuthToken
   = lens _siOAuthToken (\ s a -> s{_siOAuthToken = a})
 
--- | Multipart request metadata.
-siSubscription :: Lens' SubscriptionsInsert' Subscription
-siSubscription
-  = lens _siSubscription
-      (\ s a -> s{_siSubscription = a})
-
 -- | Selector specifying which fields to include in a partial response.
 siFields :: Lens' SubscriptionsInsert' (Maybe Text)
 siFields = lens _siFields (\ s a -> s{_siFields = a})
@@ -174,14 +174,14 @@ instance GoogleRequest SubscriptionsInsert' where
         type Rs SubscriptionsInsert' = Subscription
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u SubscriptionsInsert'{..}
-          = go _siCustomerAuthToken _siCustomerId _siQuotaUser
+          = go _siCustomerId _siCustomerAuthToken _siQuotaUser
               (Just _siPrettyPrint)
               _siUserIP
               _siFields
               _siKey
               _siOAuthToken
               (Just AltJSON)
-              _siSubscription
+              _siPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SubscriptionsInsertResource)

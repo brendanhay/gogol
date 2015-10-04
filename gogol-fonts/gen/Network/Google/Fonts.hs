@@ -49,12 +49,12 @@ module Network.Google.Fonts
     , wlKind
     , wlItems
 
-    -- ** WebfontsWebfontsListSort
-    , WebfontsWebfontsListSort (..)
+    -- ** Sort
+    , Sort (..)
 
-    -- ** WebfontFiles
-    , WebfontFiles
-    , webfontFiles
+    -- ** Files
+    , Files
+    , files
     ) where
 
 import           Network.Google.Fonts.Types

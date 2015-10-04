@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type AdUnitsCustomChannelsListResource =
          "adunits" :>
            Capture "adUnitId" Text :>
              "customchannels" :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Int32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -78,7 +79,7 @@ data AdUnitsCustomChannelsList' = AdUnitsCustomChannelsList'
     , _aucclOAuthToken  :: !(Maybe OAuthToken)
     , _aucclMaxResults  :: !(Maybe Int32)
     , _aucclFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdUnitsCustomChannelsList'' with the minimum fields required to make a request.
 --
@@ -194,9 +195,8 @@ instance GoogleRequest AdUnitsCustomChannelsList'
         type Rs AdUnitsCustomChannelsList' = CustomChannels
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AdUnitsCustomChannelsList'{..}
-          = go _aucclMaxResults _aucclPageToken
-              _aucclAdClientId
-              _aucclAdUnitId
+          = go _aucclAdClientId _aucclAdUnitId _aucclPageToken
+              _aucclMaxResults
               _aucclQuotaUser
               (Just _aucclPrettyPrint)
               _aucclUserIP

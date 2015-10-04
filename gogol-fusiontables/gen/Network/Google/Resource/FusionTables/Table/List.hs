@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -47,8 +48,8 @@ import           Network.Google.Prelude
 -- 'TableList'' request conforms to.
 type TableListResource =
      "tables" :>
-       QueryParam "maxResults" Word32 :>
-         QueryParam "pageToken" Text :>
+       QueryParam "pageToken" Text :>
+         QueryParam "maxResults" Word32 :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -69,7 +70,7 @@ data TableList' = TableList'
     , _tabOAuthToken  :: !(Maybe OAuthToken)
     , _tabMaxResults  :: !(Maybe Word32)
     , _tabFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableList'' with the minimum fields required to make a request.
 --
@@ -159,7 +160,7 @@ instance GoogleRequest TableList' where
         type Rs TableList' = TableList
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableList'{..}
-          = go _tabMaxResults _tabPageToken _tabQuotaUser
+          = go _tabPageToken _tabMaxResults _tabQuotaUser
               (Just _tabPrettyPrint)
               _tabUserIP
               _tabFields

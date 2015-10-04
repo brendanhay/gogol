@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,11 +35,11 @@ module Network.Google.Resource.CloudResourceManager.Organizations.GetIAMPolicy
     , ogipXgafv
     , ogipQuotaUser
     , ogipPrettyPrint
-    , ogipGetIAMPolicyRequest
     , ogipUploadProtocol
     , ogipPp
     , ogipAccessToken
     , ogipUploadType
+    , ogipPayload
     , ogipBearerToken
     , ogipKey
     , ogipResource
@@ -55,14 +56,14 @@ import           Network.Google.ResourceManager.Types
 type OrganizationsGetIAMPolicyResource =
      "v1beta1" :>
        "organizations" :>
-         "{resource}:getIamPolicy" :>
+         CaptureMode "resource" "getIamPolicy" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
@@ -77,21 +78,21 @@ type OrganizationsGetIAMPolicyResource =
 --
 -- /See:/ 'organizationsGetIAMPolicy'' smart constructor.
 data OrganizationsGetIAMPolicy' = OrganizationsGetIAMPolicy'
-    { _ogipXgafv               :: !(Maybe Text)
-    , _ogipQuotaUser           :: !(Maybe Text)
-    , _ogipPrettyPrint         :: !Bool
-    , _ogipGetIAMPolicyRequest :: !GetIAMPolicyRequest
-    , _ogipUploadProtocol      :: !(Maybe Text)
-    , _ogipPp                  :: !Bool
-    , _ogipAccessToken         :: !(Maybe Text)
-    , _ogipUploadType          :: !(Maybe Text)
-    , _ogipBearerToken         :: !(Maybe Text)
-    , _ogipKey                 :: !(Maybe Key)
-    , _ogipResource            :: !Text
-    , _ogipOAuthToken          :: !(Maybe OAuthToken)
-    , _ogipFields              :: !(Maybe Text)
-    , _ogipCallback            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ogipXgafv          :: !(Maybe Text)
+    , _ogipQuotaUser      :: !(Maybe Text)
+    , _ogipPrettyPrint    :: !Bool
+    , _ogipUploadProtocol :: !(Maybe Text)
+    , _ogipPp             :: !Bool
+    , _ogipAccessToken    :: !(Maybe Text)
+    , _ogipUploadType     :: !(Maybe Text)
+    , _ogipPayload        :: !GetIAMPolicyRequest
+    , _ogipBearerToken    :: !(Maybe Text)
+    , _ogipKey            :: !(Maybe Key)
+    , _ogipResource       :: !Text
+    , _ogipOAuthToken     :: !(Maybe OAuthToken)
+    , _ogipFields         :: !(Maybe Text)
+    , _ogipCallback       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrganizationsGetIAMPolicy'' with the minimum fields required to make a request.
 --
@@ -103,8 +104,6 @@ data OrganizationsGetIAMPolicy' = OrganizationsGetIAMPolicy'
 --
 -- * 'ogipPrettyPrint'
 --
--- * 'ogipGetIAMPolicyRequest'
---
 -- * 'ogipUploadProtocol'
 --
 -- * 'ogipPp'
@@ -112,6 +111,8 @@ data OrganizationsGetIAMPolicy' = OrganizationsGetIAMPolicy'
 -- * 'ogipAccessToken'
 --
 -- * 'ogipUploadType'
+--
+-- * 'ogipPayload'
 --
 -- * 'ogipBearerToken'
 --
@@ -125,19 +126,19 @@ data OrganizationsGetIAMPolicy' = OrganizationsGetIAMPolicy'
 --
 -- * 'ogipCallback'
 organizationsGetIAMPolicy'
-    :: GetIAMPolicyRequest -- ^ 'GetIAMPolicyRequest'
+    :: GetIAMPolicyRequest -- ^ 'payload'
     -> Text -- ^ 'resource'
     -> OrganizationsGetIAMPolicy'
-organizationsGetIAMPolicy' pOgipGetIAMPolicyRequest_ pOgipResource_ =
+organizationsGetIAMPolicy' pOgipPayload_ pOgipResource_ =
     OrganizationsGetIAMPolicy'
     { _ogipXgafv = Nothing
     , _ogipQuotaUser = Nothing
     , _ogipPrettyPrint = True
-    , _ogipGetIAMPolicyRequest = pOgipGetIAMPolicyRequest_
     , _ogipUploadProtocol = Nothing
     , _ogipPp = True
     , _ogipAccessToken = Nothing
     , _ogipUploadType = Nothing
+    , _ogipPayload = pOgipPayload_
     , _ogipBearerToken = Nothing
     , _ogipKey = Nothing
     , _ogipResource = pOgipResource_
@@ -165,12 +166,6 @@ ogipPrettyPrint
   = lens _ogipPrettyPrint
       (\ s a -> s{_ogipPrettyPrint = a})
 
--- | Multipart request metadata.
-ogipGetIAMPolicyRequest :: Lens' OrganizationsGetIAMPolicy' GetIAMPolicyRequest
-ogipGetIAMPolicyRequest
-  = lens _ogipGetIAMPolicyRequest
-      (\ s a -> s{_ogipGetIAMPolicyRequest = a})
-
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 ogipUploadProtocol :: Lens' OrganizationsGetIAMPolicy' (Maybe Text)
 ogipUploadProtocol
@@ -192,6 +187,11 @@ ogipUploadType :: Lens' OrganizationsGetIAMPolicy' (Maybe Text)
 ogipUploadType
   = lens _ogipUploadType
       (\ s a -> s{_ogipUploadType = a})
+
+-- | Multipart request metadata.
+ogipPayload :: Lens' OrganizationsGetIAMPolicy' GetIAMPolicyRequest
+ogipPayload
+  = lens _ogipPayload (\ s a -> s{_ogipPayload = a})
 
 -- | OAuth bearer token.
 ogipBearerToken :: Lens' OrganizationsGetIAMPolicy' (Maybe Text)
@@ -236,19 +236,19 @@ instance GoogleRequest OrganizationsGetIAMPolicy'
         type Rs OrganizationsGetIAMPolicy' = Policy
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u OrganizationsGetIAMPolicy'{..}
-          = go _ogipXgafv _ogipAccessToken _ogipBearerToken
-              _ogipCallback
+          = go _ogipResource _ogipXgafv _ogipUploadProtocol
               (Just _ogipPp)
+              _ogipAccessToken
               _ogipUploadType
-              _ogipUploadProtocol
-              _ogipResource
+              _ogipBearerToken
+              _ogipCallback
               _ogipQuotaUser
               (Just _ogipPrettyPrint)
               _ogipFields
               _ogipKey
               _ogipOAuthToken
               (Just AltJSON)
-              _ogipGetIAMPolicyRequest
+              _ogipPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrganizationsGetIAMPolicyResource)

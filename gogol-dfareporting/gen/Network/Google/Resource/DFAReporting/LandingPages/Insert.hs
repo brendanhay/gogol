@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.DFAReporting.LandingPages.Insert
     , lpiUserIP
     , lpiCampaignId
     , lpiProfileId
-    , lpiLandingPage
+    , lpiPayload
     , lpiKey
     , lpiOAuthToken
     , lpiFields
@@ -71,11 +72,11 @@ data LandingPagesInsert' = LandingPagesInsert'
     , _lpiUserIP      :: !(Maybe Text)
     , _lpiCampaignId  :: !Int64
     , _lpiProfileId   :: !Int64
-    , _lpiLandingPage :: !LandingPage
+    , _lpiPayload     :: !LandingPage
     , _lpiKey         :: !(Maybe Key)
     , _lpiOAuthToken  :: !(Maybe OAuthToken)
     , _lpiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesInsert'' with the minimum fields required to make a request.
 --
@@ -91,7 +92,7 @@ data LandingPagesInsert' = LandingPagesInsert'
 --
 -- * 'lpiProfileId'
 --
--- * 'lpiLandingPage'
+-- * 'lpiPayload'
 --
 -- * 'lpiKey'
 --
@@ -101,16 +102,16 @@ data LandingPagesInsert' = LandingPagesInsert'
 landingPagesInsert'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
-    -> LandingPage -- ^ 'LandingPage'
+    -> LandingPage -- ^ 'payload'
     -> LandingPagesInsert'
-landingPagesInsert' pLpiCampaignId_ pLpiProfileId_ pLpiLandingPage_ =
+landingPagesInsert' pLpiCampaignId_ pLpiProfileId_ pLpiPayload_ =
     LandingPagesInsert'
     { _lpiQuotaUser = Nothing
     , _lpiPrettyPrint = True
     , _lpiUserIP = Nothing
     , _lpiCampaignId = pLpiCampaignId_
     , _lpiProfileId = pLpiProfileId_
-    , _lpiLandingPage = pLpiLandingPage_
+    , _lpiPayload = pLpiPayload_
     , _lpiKey = Nothing
     , _lpiOAuthToken = Nothing
     , _lpiFields = Nothing
@@ -147,10 +148,9 @@ lpiProfileId
   = lens _lpiProfileId (\ s a -> s{_lpiProfileId = a})
 
 -- | Multipart request metadata.
-lpiLandingPage :: Lens' LandingPagesInsert' LandingPage
-lpiLandingPage
-  = lens _lpiLandingPage
-      (\ s a -> s{_lpiLandingPage = a})
+lpiPayload :: Lens' LandingPagesInsert' LandingPage
+lpiPayload
+  = lens _lpiPayload (\ s a -> s{_lpiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -184,7 +184,7 @@ instance GoogleRequest LandingPagesInsert' where
               _lpiKey
               _lpiOAuthToken
               (Just AltJSON)
-              _lpiLandingPage
+              _lpiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LandingPagesInsertResource)

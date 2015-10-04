@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 data ListCourseAliasesResponse = ListCourseAliasesResponse
     { _lcarNextPageToken :: !(Maybe Text)
     , _lcarAliases       :: !(Maybe [CourseAlias])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListCourseAliasesResponse' with the minimum fields required to make a request.
 --
@@ -79,7 +79,7 @@ instance ToJSON ListCourseAliasesResponse where
 -- /See:/ 'empty' smart constructor.
 data Empty =
     Empty
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -98,7 +98,7 @@ instance ToJSON Empty where
 -- /See:/ 'globalPermission' smart constructor.
 newtype GlobalPermission = GlobalPermission
     { _gpPermission :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalPermission' with the minimum fields required to make a request.
 --
@@ -133,7 +133,7 @@ instance ToJSON GlobalPermission where
 data ListInvitationsResponse = ListInvitationsResponse
     { _lirNextPageToken :: !(Maybe Text)
     , _lirInvitations   :: !(Maybe [Invitation])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListInvitationsResponse' with the minimum fields required to make a request.
 --
@@ -188,7 +188,7 @@ data Invitation = Invitation
     , _iUserId   :: !(Maybe Text)
     , _iRole     :: !(Maybe Text)
     , _iId       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Invitation' with the minimum fields required to make a request.
 --
@@ -256,7 +256,7 @@ data Teacher = Teacher
     { _tCourseId :: !(Maybe Text)
     , _tProfile  :: !(Maybe UserProfile)
     , _tUserId   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Teacher' with the minimum fields required to make a request.
 --
@@ -314,7 +314,7 @@ instance ToJSON Teacher where
 data ListCoursesResponse = ListCoursesResponse
     { _lcrNextPageToken :: !(Maybe Text)
     , _lcrCourses       :: !(Maybe [Course])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListCoursesResponse' with the minimum fields required to make a request.
 --
@@ -367,7 +367,7 @@ data Name = Name
     { _nGivenName  :: !(Maybe Text)
     , _nFullName   :: !(Maybe Text)
     , _nFamilyName :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Name' with the minimum fields required to make a request.
 --
@@ -428,7 +428,7 @@ data UserProfile = UserProfile
     , _upEmailAddress :: !(Maybe Text)
     , _upId           :: !(Maybe Text)
     , _upPermissions  :: !(Maybe [GlobalPermission])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserProfile' with the minimum fields required to make a request.
 --
@@ -517,7 +517,7 @@ data Course = Course
     , _cDescription        :: !(Maybe Text)
     , _cDescriptionHeading :: !(Maybe Text)
     , _cSection            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Course' with the minimum fields required to make a request.
 --
@@ -687,7 +687,7 @@ instance ToJSON Course where
 data ListStudentsResponse = ListStudentsResponse
     { _lsrNextPageToken :: !(Maybe Text)
     , _lsrStudents      :: !(Maybe [Student])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListStudentsResponse' with the minimum fields required to make a request.
 --
@@ -749,7 +749,7 @@ instance ToJSON ListStudentsResponse where
 -- /See:/ 'courseAlias' smart constructor.
 newtype CourseAlias = CourseAlias
     { _caAlias :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CourseAlias' with the minimum fields required to make a request.
 --
@@ -785,7 +785,7 @@ instance ToJSON CourseAlias where
 data ListTeachersResponse = ListTeachersResponse
     { _ltrNextPageToken :: !(Maybe Text)
     , _ltrTeachers      :: !(Maybe [Teacher])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListTeachersResponse' with the minimum fields required to make a request.
 --
@@ -838,7 +838,7 @@ data Student = Student
     { _sCourseId :: !(Maybe Text)
     , _sProfile  :: !(Maybe UserProfile)
     , _sUserId   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Student' with the minimum fields required to make a request.
 --

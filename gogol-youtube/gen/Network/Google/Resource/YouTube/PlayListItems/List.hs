@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,13 +55,13 @@ import           Network.Google.YouTube.Types
 -- 'PlayListItemsList'' request conforms to.
 type PlayListItemsListResource =
      "playlistItems" :>
-       QueryParam "id" Text :>
-         QueryParam "maxResults" Word32 :>
-           QueryParam "onBehalfOfContentOwner" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "playlistId" Text :>
-                 QueryParam "videoId" Text :>
-                   QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
+           QueryParam "videoId" Text :>
+             QueryParam "id" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "playlistId" Text :>
+                   QueryParam "maxResults" Word32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -89,7 +90,7 @@ data PlayListItemsList' = PlayListItemsList'
     , _plilPlayListId             :: !(Maybe Text)
     , _plilMaxResults             :: !Word32
     , _plilFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayListItemsList'' with the minimum fields required to make a request.
 --
@@ -246,12 +247,12 @@ instance GoogleRequest PlayListItemsList' where
         type Rs PlayListItemsList' = PlayListItemListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u PlayListItemsList'{..}
-          = go _plilId (Just _plilMaxResults)
-              _plilOnBehalfOfContentOwner
+          = go (Just _plilPart) _plilOnBehalfOfContentOwner
+              _plilVideoId
+              _plilId
               _plilPageToken
               _plilPlayListId
-              _plilVideoId
-              (Just _plilPart)
+              (Just _plilMaxResults)
               _plilQuotaUser
               (Just _plilPrettyPrint)
               _plilUserIP

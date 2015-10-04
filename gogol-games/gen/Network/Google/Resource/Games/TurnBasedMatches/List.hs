@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,11 +51,11 @@ import           Network.Google.Prelude
 -- 'TurnBasedMatchesList'' request conforms to.
 type TurnBasedMatchesListResource =
      "turnbasedmatches" :>
-       QueryParam "includeMatchData" Bool :>
-         QueryParam "language" Text :>
-           QueryParam "maxCompletedMatches" Int32 :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "pageToken" Text :>
+       QueryParam "maxCompletedMatches" Int32 :>
+         QueryParam "includeMatchData" Bool :>
+           QueryParam "language" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Int32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data TurnBasedMatchesList' = TurnBasedMatchesList'
     , _tbmlOAuthToken          :: !(Maybe OAuthToken)
     , _tbmlMaxResults          :: !(Maybe Int32)
     , _tbmlFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesList'' with the minimum fields required to make a request.
 --
@@ -205,10 +206,10 @@ instance GoogleRequest TurnBasedMatchesList' where
         type Rs TurnBasedMatchesList' = TurnBasedMatchList
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesList'{..}
-          = go _tbmlIncludeMatchData _tbmlLanguage
-              _tbmlMaxCompletedMatches
-              _tbmlMaxResults
+          = go _tbmlMaxCompletedMatches _tbmlIncludeMatchData
+              _tbmlLanguage
               _tbmlPageToken
+              _tbmlMaxResults
               _tbmlQuotaUser
               (Just _tbmlPrettyPrint)
               _tbmlUserIP

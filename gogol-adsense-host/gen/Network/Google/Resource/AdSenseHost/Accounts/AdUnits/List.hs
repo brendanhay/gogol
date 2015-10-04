@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type AccountsAdUnitsListResource =
            Capture "adClientId" Text :>
              "adunits" :>
                QueryParam "includeInactive" Bool :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "pageToken" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Word32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -80,7 +81,7 @@ data AccountsAdUnitsList' = AccountsAdUnitsList'
     , _aaulOAuthToken      :: !(Maybe OAuthToken)
     , _aaulMaxResults      :: !(Maybe Word32)
     , _aaulFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdUnitsList'' with the minimum fields required to make a request.
 --
@@ -204,10 +205,10 @@ instance GoogleRequest AccountsAdUnitsList' where
         type Rs AccountsAdUnitsList' = AdUnits
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u AccountsAdUnitsList'{..}
-          = go _aaulIncludeInactive _aaulMaxResults
+          = go _aaulAccountId _aaulAdClientId
+              _aaulIncludeInactive
               _aaulPageToken
-              _aaulAccountId
-              _aaulAdClientId
+              _aaulMaxResults
               _aaulQuotaUser
               (Just _aaulPrettyPrint)
               _aaulUserIP

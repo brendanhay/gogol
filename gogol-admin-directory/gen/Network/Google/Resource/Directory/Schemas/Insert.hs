@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.Directory.Schemas.Insert
     , siQuotaUser
     , siPrettyPrint
     , siUserIP
+    , siPayload
     , siCustomerId
-    , siSchema
     , siKey
     , siOAuthToken
     , siFields
@@ -65,12 +66,12 @@ data SchemasInsert' = SchemasInsert'
     { _siQuotaUser   :: !(Maybe Text)
     , _siPrettyPrint :: !Bool
     , _siUserIP      :: !(Maybe Text)
+    , _siPayload     :: !Schema
     , _siCustomerId  :: !Text
-    , _siSchema      :: !Schema
     , _siKey         :: !(Maybe Key)
     , _siOAuthToken  :: !(Maybe OAuthToken)
     , _siFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchemasInsert'' with the minimum fields required to make a request.
 --
@@ -82,9 +83,9 @@ data SchemasInsert' = SchemasInsert'
 --
 -- * 'siUserIP'
 --
--- * 'siCustomerId'
+-- * 'siPayload'
 --
--- * 'siSchema'
+-- * 'siCustomerId'
 --
 -- * 'siKey'
 --
@@ -92,16 +93,16 @@ data SchemasInsert' = SchemasInsert'
 --
 -- * 'siFields'
 schemasInsert'
-    :: Text -- ^ 'customerId'
-    -> Schema -- ^ 'Schema'
+    :: Schema -- ^ 'payload'
+    -> Text -- ^ 'customerId'
     -> SchemasInsert'
-schemasInsert' pSiCustomerId_ pSiSchema_ =
+schemasInsert' pSiPayload_ pSiCustomerId_ =
     SchemasInsert'
     { _siQuotaUser = Nothing
     , _siPrettyPrint = True
     , _siUserIP = Nothing
+    , _siPayload = pSiPayload_
     , _siCustomerId = pSiCustomerId_
-    , _siSchema = pSiSchema_
     , _siKey = Nothing
     , _siOAuthToken = Nothing
     , _siFields = Nothing
@@ -125,14 +126,15 @@ siPrettyPrint
 siUserIP :: Lens' SchemasInsert' (Maybe Text)
 siUserIP = lens _siUserIP (\ s a -> s{_siUserIP = a})
 
+-- | Multipart request metadata.
+siPayload :: Lens' SchemasInsert' Schema
+siPayload
+  = lens _siPayload (\ s a -> s{_siPayload = a})
+
 -- | Immutable id of the Google Apps account
 siCustomerId :: Lens' SchemasInsert' Text
 siCustomerId
   = lens _siCustomerId (\ s a -> s{_siCustomerId = a})
-
--- | Multipart request metadata.
-siSchema :: Lens' SchemasInsert' Schema
-siSchema = lens _siSchema (\ s a -> s{_siSchema = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -163,7 +165,7 @@ instance GoogleRequest SchemasInsert' where
               _siKey
               _siOAuthToken
               (Just AltJSON)
-              _siSchema
+              _siPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SchemasInsertResource)

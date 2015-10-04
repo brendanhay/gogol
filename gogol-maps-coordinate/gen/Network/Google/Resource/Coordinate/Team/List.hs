@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,8 +49,8 @@ import           Network.Google.Prelude
 -- 'TeamList'' request conforms to.
 type TeamListResource =
      "teams" :>
-       QueryParam "admin" Bool :>
-         QueryParam "dispatcher" Bool :>
+       QueryParam "dispatcher" Bool :>
+         QueryParam "admin" Bool :>
            QueryParam "worker" Bool :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
@@ -73,7 +74,7 @@ data TeamList' = TeamList'
     , _tlOAuthToken  :: !(Maybe OAuthToken)
     , _tlWorker      :: !(Maybe Bool)
     , _tlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TeamList'' with the minimum fields required to make a request.
 --
@@ -165,7 +166,7 @@ instance GoogleRequest TeamList' where
         type Rs TeamList' = TeamListResponse
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u TeamList'{..}
-          = go _tlAdmin _tlDispatcher _tlWorker _tlQuotaUser
+          = go _tlDispatcher _tlAdmin _tlWorker _tlQuotaUser
               (Just _tlPrettyPrint)
               _tlUserIP
               _tlFields

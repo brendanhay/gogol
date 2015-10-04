@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,7 +37,7 @@ module Network.Google.Resource.SQL.Instances.Update
     , iuPrettyPrint
     , iuProject
     , iuUserIP
-    , iuDatabaseInstance
+    , iuPayload
     , iuKey
     , iuOAuthToken
     , iuFields
@@ -69,16 +70,16 @@ type InstancesUpdateResource =
 --
 -- /See:/ 'instancesUpdate'' smart constructor.
 data InstancesUpdate' = InstancesUpdate'
-    { _iuQuotaUser        :: !(Maybe Text)
-    , _iuPrettyPrint      :: !Bool
-    , _iuProject          :: !Text
-    , _iuUserIP           :: !(Maybe Text)
-    , _iuDatabaseInstance :: !DatabaseInstance
-    , _iuKey              :: !(Maybe Key)
-    , _iuOAuthToken       :: !(Maybe OAuthToken)
-    , _iuFields           :: !(Maybe Text)
-    , _iuInstance         :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _iuQuotaUser   :: !(Maybe Text)
+    , _iuPrettyPrint :: !Bool
+    , _iuProject     :: !Text
+    , _iuUserIP      :: !(Maybe Text)
+    , _iuPayload     :: !DatabaseInstance
+    , _iuKey         :: !(Maybe Key)
+    , _iuOAuthToken  :: !(Maybe OAuthToken)
+    , _iuFields      :: !(Maybe Text)
+    , _iuInstance    :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesUpdate'' with the minimum fields required to make a request.
 --
@@ -92,7 +93,7 @@ data InstancesUpdate' = InstancesUpdate'
 --
 -- * 'iuUserIP'
 --
--- * 'iuDatabaseInstance'
+-- * 'iuPayload'
 --
 -- * 'iuKey'
 --
@@ -103,16 +104,16 @@ data InstancesUpdate' = InstancesUpdate'
 -- * 'iuInstance'
 instancesUpdate'
     :: Text -- ^ 'project'
-    -> DatabaseInstance -- ^ 'DatabaseInstance'
+    -> DatabaseInstance -- ^ 'payload'
     -> Text -- ^ 'instance'
     -> InstancesUpdate'
-instancesUpdate' pIuProject_ pIuDatabaseInstance_ pIuInstance_ =
+instancesUpdate' pIuProject_ pIuPayload_ pIuInstance_ =
     InstancesUpdate'
     { _iuQuotaUser = Nothing
     , _iuPrettyPrint = True
     , _iuProject = pIuProject_
     , _iuUserIP = Nothing
-    , _iuDatabaseInstance = pIuDatabaseInstance_
+    , _iuPayload = pIuPayload_
     , _iuKey = Nothing
     , _iuOAuthToken = Nothing
     , _iuFields = Nothing
@@ -143,10 +144,9 @@ iuUserIP :: Lens' InstancesUpdate' (Maybe Text)
 iuUserIP = lens _iuUserIP (\ s a -> s{_iuUserIP = a})
 
 -- | Multipart request metadata.
-iuDatabaseInstance :: Lens' InstancesUpdate' DatabaseInstance
-iuDatabaseInstance
-  = lens _iuDatabaseInstance
-      (\ s a -> s{_iuDatabaseInstance = a})
+iuPayload :: Lens' InstancesUpdate' DatabaseInstance
+iuPayload
+  = lens _iuPayload (\ s a -> s{_iuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -183,7 +183,7 @@ instance GoogleRequest InstancesUpdate' where
               _iuKey
               _iuOAuthToken
               (Just AltJSON)
-              _iuDatabaseInstance
+              _iuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesUpdateResource)

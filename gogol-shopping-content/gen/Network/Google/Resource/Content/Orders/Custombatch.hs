@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.Content.Orders.Custombatch
     , ordQuotaUser
     , ordPrettyPrint
     , ordUserIP
-    , ordOrdersCustomBatchRequest
+    , ordPayload
     , ordKey
     , ordOAuthToken
     , ordFields
@@ -61,14 +62,14 @@ type OrdersCustombatchResource =
 --
 -- /See:/ 'ordersCustombatch'' smart constructor.
 data OrdersCustombatch' = OrdersCustombatch'
-    { _ordQuotaUser                :: !(Maybe Text)
-    , _ordPrettyPrint              :: !Bool
-    , _ordUserIP                   :: !(Maybe Text)
-    , _ordOrdersCustomBatchRequest :: !OrdersCustomBatchRequest
-    , _ordKey                      :: !(Maybe Key)
-    , _ordOAuthToken               :: !(Maybe OAuthToken)
-    , _ordFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ordQuotaUser   :: !(Maybe Text)
+    , _ordPrettyPrint :: !Bool
+    , _ordUserIP      :: !(Maybe Text)
+    , _ordPayload     :: !OrdersCustomBatchRequest
+    , _ordKey         :: !(Maybe Key)
+    , _ordOAuthToken  :: !(Maybe OAuthToken)
+    , _ordFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustombatch'' with the minimum fields required to make a request.
 --
@@ -80,7 +81,7 @@ data OrdersCustombatch' = OrdersCustombatch'
 --
 -- * 'ordUserIP'
 --
--- * 'ordOrdersCustomBatchRequest'
+-- * 'ordPayload'
 --
 -- * 'ordKey'
 --
@@ -88,14 +89,14 @@ data OrdersCustombatch' = OrdersCustombatch'
 --
 -- * 'ordFields'
 ordersCustombatch'
-    :: OrdersCustomBatchRequest -- ^ 'OrdersCustomBatchRequest'
+    :: OrdersCustomBatchRequest -- ^ 'payload'
     -> OrdersCustombatch'
-ordersCustombatch' pOrdOrdersCustomBatchRequest_ =
+ordersCustombatch' pOrdPayload_ =
     OrdersCustombatch'
     { _ordQuotaUser = Nothing
     , _ordPrettyPrint = True
     , _ordUserIP = Nothing
-    , _ordOrdersCustomBatchRequest = pOrdOrdersCustomBatchRequest_
+    , _ordPayload = pOrdPayload_
     , _ordKey = Nothing
     , _ordOAuthToken = Nothing
     , _ordFields = Nothing
@@ -121,10 +122,9 @@ ordUserIP
   = lens _ordUserIP (\ s a -> s{_ordUserIP = a})
 
 -- | Multipart request metadata.
-ordOrdersCustomBatchRequest :: Lens' OrdersCustombatch' OrdersCustomBatchRequest
-ordOrdersCustomBatchRequest
-  = lens _ordOrdersCustomBatchRequest
-      (\ s a -> s{_ordOrdersCustomBatchRequest = a})
+ordPayload :: Lens' OrdersCustombatch' OrdersCustomBatchRequest
+ordPayload
+  = lens _ordPayload (\ s a -> s{_ordPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -157,7 +157,7 @@ instance GoogleRequest OrdersCustombatch' where
               _ordKey
               _ordOAuthToken
               (Just AltJSON)
-              _ordOrdersCustomBatchRequest
+              _ordPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrdersCustombatchResource)

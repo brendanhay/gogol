@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -56,17 +57,17 @@ import           Network.Google.YouTube.Types
 -- 'SubscriptionsList'' request conforms to.
 type SubscriptionsListResource =
      "subscriptions" :>
-       QueryParam "channelId" Text :>
-         QueryParam "forChannelId" Text :>
-           QueryParam "id" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "mine" Bool :>
-                 QueryParam "mySubscribers" Bool :>
-                   QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                       QueryParam "order" YouTubeSubscriptionsListOrder :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "mine" Bool :>
+           QueryParam "channelId" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                 QueryParam "id" Text :>
+                   QueryParam "mySubscribers" Bool :>
+                     QueryParam "forChannelId" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "order" YouTubeSubscriptionsListOrder :>
+                           QueryParam "maxResults" Word32 :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
@@ -97,7 +98,7 @@ data SubscriptionsList' = SubscriptionsList'
     , _sOrder                         :: !YouTubeSubscriptionsListOrder
     , _sMaxResults                    :: !Word32
     , _sFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsList'' with the minimum fields required to make a request.
 --
@@ -297,15 +298,15 @@ instance GoogleRequest SubscriptionsList' where
         type Rs SubscriptionsList' = SubscriptionListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u SubscriptionsList'{..}
-          = go _sChannelId _sForChannelId _sId
-              (Just _sMaxResults)
-              _sMine
-              _sMySubscribers
+          = go (Just _sPart) _sMine _sChannelId
               _sOnBehalfOfContentOwner
               _sOnBehalfOfContentOwnerChannel
-              (Just _sOrder)
+              _sId
+              _sMySubscribers
+              _sForChannelId
               _sPageToken
-              (Just _sPart)
+              (Just _sOrder)
+              (Just _sMaxResults)
               _sQuotaUser
               (Just _sPrettyPrint)
               _sUserIP

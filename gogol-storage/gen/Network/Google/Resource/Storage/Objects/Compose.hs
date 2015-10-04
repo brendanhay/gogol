@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,7 +37,7 @@ module Network.Google.Resource.Storage.Objects.Compose
     , oPrettyPrint
     , oIfGenerationMatch
     , oUserIP
-    , oComposeRequest
+    , oPayload
     , oKey
     , oDestinationBucket
     , oOAuthToken
@@ -55,8 +56,8 @@ type ObjectsComposeResource =
          "o" :>
            Capture "destinationObject" Text :>
              "compose" :>
-               QueryParam "ifGenerationMatch" Word64 :>
-                 QueryParam "ifMetagenerationMatch" Word64 :>
+               QueryParam "ifMetagenerationMatch" Word64 :>
+                 QueryParam "ifGenerationMatch" Word64 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -72,17 +73,17 @@ type ObjectsComposeResource =
            "o" :>
              Capture "destinationObject" Text :>
                "compose" :>
-                 QueryParam "ifGenerationMatch" Word64 :>
-                   QueryParam "ifMetagenerationMatch" Word64 :>
+                 QueryParam "ifMetagenerationMatch" Word64 :>
+                   QueryParam "ifGenerationMatch" Word64 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "alt" Media :>
+                                 QueryParam "alt" AltMedia :>
                                    ReqBody '[JSON] ComposeRequest :>
-                                     Post '[OctetStream] Stream
+                                     Post '[OctetStream] Body
 
 -- | Concatenates a list of existing objects into a new object in the same
 -- bucket.
@@ -94,13 +95,13 @@ data ObjectsCompose' = ObjectsCompose'
     , _oPrettyPrint           :: !Bool
     , _oIfGenerationMatch     :: !(Maybe Word64)
     , _oUserIP                :: !(Maybe Text)
-    , _oComposeRequest        :: !ComposeRequest
+    , _oPayload               :: !ComposeRequest
     , _oKey                   :: !(Maybe Key)
     , _oDestinationBucket     :: !Text
     , _oOAuthToken            :: !(Maybe OAuthToken)
     , _oFields                :: !(Maybe Text)
     , _oDestinationObject     :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsCompose'' with the minimum fields required to make a request.
 --
@@ -116,7 +117,7 @@ data ObjectsCompose' = ObjectsCompose'
 --
 -- * 'oUserIP'
 --
--- * 'oComposeRequest'
+-- * 'oPayload'
 --
 -- * 'oKey'
 --
@@ -128,18 +129,18 @@ data ObjectsCompose' = ObjectsCompose'
 --
 -- * 'oDestinationObject'
 objectsCompose'
-    :: ComposeRequest -- ^ 'ComposeRequest'
+    :: ComposeRequest -- ^ 'payload'
     -> Text -- ^ 'destinationBucket'
     -> Text -- ^ 'destinationObject'
     -> ObjectsCompose'
-objectsCompose' pOComposeRequest_ pODestinationBucket_ pODestinationObject_ =
+objectsCompose' pOPayload_ pODestinationBucket_ pODestinationObject_ =
     ObjectsCompose'
     { _oQuotaUser = Nothing
     , _oIfMetagenerationMatch = Nothing
     , _oPrettyPrint = True
     , _oIfGenerationMatch = Nothing
     , _oUserIP = Nothing
-    , _oComposeRequest = pOComposeRequest_
+    , _oPayload = pOPayload_
     , _oKey = Nothing
     , _oDestinationBucket = pODestinationBucket_
     , _oOAuthToken = Nothing
@@ -179,10 +180,8 @@ oUserIP :: Lens' ObjectsCompose' (Maybe Text)
 oUserIP = lens _oUserIP (\ s a -> s{_oUserIP = a})
 
 -- | Multipart request metadata.
-oComposeRequest :: Lens' ObjectsCompose' ComposeRequest
-oComposeRequest
-  = lens _oComposeRequest
-      (\ s a -> s{_oComposeRequest = a})
+oPayload :: Lens' ObjectsCompose' ComposeRequest
+oPayload = lens _oPayload (\ s a -> s{_oPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -219,9 +218,9 @@ instance GoogleRequest ObjectsCompose' where
         type Rs ObjectsCompose' = Object
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsCompose'{..}
-          = go _oIfGenerationMatch _oIfMetagenerationMatch
-              _oDestinationBucket
-              _oDestinationObject
+          = go _oDestinationBucket _oDestinationObject
+              _oIfMetagenerationMatch
+              _oIfGenerationMatch
               _oQuotaUser
               (Just _oPrettyPrint)
               _oUserIP
@@ -229,29 +228,30 @@ instance GoogleRequest ObjectsCompose' where
               _oKey
               _oOAuthToken
               (Just AltJSON)
-              _oComposeRequest
+              _oPayload
           where go :<|> _
                   = clientWithRoute
                       (Proxy :: Proxy ObjectsComposeResource)
                       r
                       u
 
-instance GoogleRequest ObjectsCompose' where
-        type Rs (Download ObjectsCompose') = Stream
+instance GoogleRequest (Download ObjectsCompose')
+         where
+        type Rs (Download ObjectsCompose') = Body
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsCompose'{..}
-          = go _oIfGenerationMatch _oIfMetagenerationMatch
-              _oDestinationBucket
-              _oDestinationObject
+        requestWithRoute r u (Download ObjectsCompose'{..})
+          = go _oDestinationBucket _oDestinationObject
+              _oIfMetagenerationMatch
+              _oIfGenerationMatch
               _oQuotaUser
               (Just _oPrettyPrint)
               _oUserIP
               _oFields
               _oKey
               _oOAuthToken
-              (Just Media)
-              _oComposeRequest
-          where go :<|> _
+              (Just AltMedia)
+              _oPayload
+          where _ :<|> go
                   = clientWithRoute
                       (Proxy :: Proxy ObjectsComposeResource)
                       r

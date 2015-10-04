@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.Genomics.Annotations.Update
 
     -- * Request Lenses
     , auQuotaUser
-    , auAnnotation
     , auPrettyPrint
     , auUserIP
+    , auPayload
     , auKey
     , auAnnotationId
     , auOAuthToken
@@ -66,14 +67,14 @@ type AnnotationsUpdateResource =
 -- /See:/ 'annotationsUpdate'' smart constructor.
 data AnnotationsUpdate' = AnnotationsUpdate'
     { _auQuotaUser    :: !(Maybe Text)
-    , _auAnnotation   :: !Annotation
     , _auPrettyPrint  :: !Bool
     , _auUserIP       :: !(Maybe Text)
+    , _auPayload      :: !Annotation
     , _auKey          :: !(Maybe Key)
     , _auAnnotationId :: !Text
     , _auOAuthToken   :: !(Maybe OAuthToken)
     , _auFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsUpdate'' with the minimum fields required to make a request.
 --
@@ -81,11 +82,11 @@ data AnnotationsUpdate' = AnnotationsUpdate'
 --
 -- * 'auQuotaUser'
 --
--- * 'auAnnotation'
---
 -- * 'auPrettyPrint'
 --
 -- * 'auUserIP'
+--
+-- * 'auPayload'
 --
 -- * 'auKey'
 --
@@ -95,15 +96,15 @@ data AnnotationsUpdate' = AnnotationsUpdate'
 --
 -- * 'auFields'
 annotationsUpdate'
-    :: Annotation -- ^ 'Annotation'
+    :: Annotation -- ^ 'payload'
     -> Text -- ^ 'annotationId'
     -> AnnotationsUpdate'
-annotationsUpdate' pAuAnnotation_ pAuAnnotationId_ =
+annotationsUpdate' pAuPayload_ pAuAnnotationId_ =
     AnnotationsUpdate'
     { _auQuotaUser = Nothing
-    , _auAnnotation = pAuAnnotation_
     , _auPrettyPrint = True
     , _auUserIP = Nothing
+    , _auPayload = pAuPayload_
     , _auKey = Nothing
     , _auAnnotationId = pAuAnnotationId_
     , _auOAuthToken = Nothing
@@ -117,11 +118,6 @@ auQuotaUser :: Lens' AnnotationsUpdate' (Maybe Text)
 auQuotaUser
   = lens _auQuotaUser (\ s a -> s{_auQuotaUser = a})
 
--- | Multipart request metadata.
-auAnnotation :: Lens' AnnotationsUpdate' Annotation
-auAnnotation
-  = lens _auAnnotation (\ s a -> s{_auAnnotation = a})
-
 -- | Returns response with indentations and line breaks.
 auPrettyPrint :: Lens' AnnotationsUpdate' Bool
 auPrettyPrint
@@ -132,6 +128,11 @@ auPrettyPrint
 -- want to enforce per-user limits.
 auUserIP :: Lens' AnnotationsUpdate' (Maybe Text)
 auUserIP = lens _auUserIP (\ s a -> s{_auUserIP = a})
+
+-- | Multipart request metadata.
+auPayload :: Lens' AnnotationsUpdate' Annotation
+auPayload
+  = lens _auPayload (\ s a -> s{_auPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -169,7 +170,7 @@ instance GoogleRequest AnnotationsUpdate' where
               _auKey
               _auOAuthToken
               (Just AltJSON)
-              _auAnnotation
+              _auPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationsUpdateResource)

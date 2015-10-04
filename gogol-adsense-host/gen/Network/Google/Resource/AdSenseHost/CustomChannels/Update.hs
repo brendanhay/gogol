@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.AdSenseHost.CustomChannels.Update
     , ccuQuotaUser
     , ccuPrettyPrint
     , ccuUserIP
+    , ccuPayload
     , ccuAdClientId
     , ccuKey
-    , ccuCustomChannel
     , ccuOAuthToken
     , ccuFields
     ) where
@@ -63,15 +64,15 @@ type CustomChannelsUpdateResource =
 --
 -- /See:/ 'customChannelsUpdate'' smart constructor.
 data CustomChannelsUpdate' = CustomChannelsUpdate'
-    { _ccuQuotaUser     :: !(Maybe Text)
-    , _ccuPrettyPrint   :: !Bool
-    , _ccuUserIP        :: !(Maybe Text)
-    , _ccuAdClientId    :: !Text
-    , _ccuKey           :: !(Maybe Key)
-    , _ccuCustomChannel :: !CustomChannel
-    , _ccuOAuthToken    :: !(Maybe OAuthToken)
-    , _ccuFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ccuQuotaUser   :: !(Maybe Text)
+    , _ccuPrettyPrint :: !Bool
+    , _ccuUserIP      :: !(Maybe Text)
+    , _ccuPayload     :: !CustomChannel
+    , _ccuAdClientId  :: !Text
+    , _ccuKey         :: !(Maybe Key)
+    , _ccuOAuthToken  :: !(Maybe OAuthToken)
+    , _ccuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomChannelsUpdate'' with the minimum fields required to make a request.
 --
@@ -83,27 +84,27 @@ data CustomChannelsUpdate' = CustomChannelsUpdate'
 --
 -- * 'ccuUserIP'
 --
+-- * 'ccuPayload'
+--
 -- * 'ccuAdClientId'
 --
 -- * 'ccuKey'
---
--- * 'ccuCustomChannel'
 --
 -- * 'ccuOAuthToken'
 --
 -- * 'ccuFields'
 customChannelsUpdate'
-    :: Text -- ^ 'adClientId'
-    -> CustomChannel -- ^ 'CustomChannel'
+    :: CustomChannel -- ^ 'payload'
+    -> Text -- ^ 'adClientId'
     -> CustomChannelsUpdate'
-customChannelsUpdate' pCcuAdClientId_ pCcuCustomChannel_ =
+customChannelsUpdate' pCcuPayload_ pCcuAdClientId_ =
     CustomChannelsUpdate'
     { _ccuQuotaUser = Nothing
     , _ccuPrettyPrint = True
     , _ccuUserIP = Nothing
+    , _ccuPayload = pCcuPayload_
     , _ccuAdClientId = pCcuAdClientId_
     , _ccuKey = Nothing
-    , _ccuCustomChannel = pCcuCustomChannel_
     , _ccuOAuthToken = Nothing
     , _ccuFields = Nothing
     }
@@ -127,6 +128,11 @@ ccuUserIP :: Lens' CustomChannelsUpdate' (Maybe Text)
 ccuUserIP
   = lens _ccuUserIP (\ s a -> s{_ccuUserIP = a})
 
+-- | Multipart request metadata.
+ccuPayload :: Lens' CustomChannelsUpdate' CustomChannel
+ccuPayload
+  = lens _ccuPayload (\ s a -> s{_ccuPayload = a})
+
 -- | Ad client in which the custom channel will be updated.
 ccuAdClientId :: Lens' CustomChannelsUpdate' Text
 ccuAdClientId
@@ -138,12 +144,6 @@ ccuAdClientId
 -- token.
 ccuKey :: Lens' CustomChannelsUpdate' (Maybe Key)
 ccuKey = lens _ccuKey (\ s a -> s{_ccuKey = a})
-
--- | Multipart request metadata.
-ccuCustomChannel :: Lens' CustomChannelsUpdate' CustomChannel
-ccuCustomChannel
-  = lens _ccuCustomChannel
-      (\ s a -> s{_ccuCustomChannel = a})
 
 -- | OAuth 2.0 token for the current user.
 ccuOAuthToken :: Lens' CustomChannelsUpdate' (Maybe OAuthToken)
@@ -171,7 +171,7 @@ instance GoogleRequest CustomChannelsUpdate' where
               _ccuKey
               _ccuOAuthToken
               (Just AltJSON)
-              _ccuCustomChannel
+              _ccuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CustomChannelsUpdateResource)

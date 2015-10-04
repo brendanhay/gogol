@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -73,7 +74,7 @@ data BlogUserInfosGet' = BlogUserInfosGet'
     , _buigMaxPosts    :: !(Maybe Word32)
     , _buigOAuthToken  :: !(Maybe OAuthToken)
     , _buigFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BlogUserInfosGet'' with the minimum fields required to make a request.
 --
@@ -174,7 +175,7 @@ instance GoogleRequest BlogUserInfosGet' where
         type Rs BlogUserInfosGet' = BlogUserInfo
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u BlogUserInfosGet'{..}
-          = go _buigMaxPosts _buigUserId _buigBlogId
+          = go _buigUserId _buigBlogId _buigMaxPosts
               _buigQuotaUser
               (Just _buigPrettyPrint)
               _buigUserIP

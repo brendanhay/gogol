@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.FusionTables.Table.Insert
     , tiiQuotaUser
     , tiiPrettyPrint
     , tiiUserIP
+    , tiiPayload
     , tiiKey
     , tiiOAuthToken
-    , tiiTable
     , tiiFields
     ) where
 
@@ -62,11 +63,11 @@ data TableInsert' = TableInsert'
     { _tiiQuotaUser   :: !(Maybe Text)
     , _tiiPrettyPrint :: !Bool
     , _tiiUserIP      :: !(Maybe Text)
+    , _tiiPayload     :: !Table
     , _tiiKey         :: !(Maybe Key)
     , _tiiOAuthToken  :: !(Maybe OAuthToken)
-    , _tiiTable       :: !Table
     , _tiiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableInsert'' with the minimum fields required to make a request.
 --
@@ -78,24 +79,24 @@ data TableInsert' = TableInsert'
 --
 -- * 'tiiUserIP'
 --
+-- * 'tiiPayload'
+--
 -- * 'tiiKey'
 --
 -- * 'tiiOAuthToken'
 --
--- * 'tiiTable'
---
 -- * 'tiiFields'
 tableInsert'
-    :: Table -- ^ 'Table'
+    :: Table -- ^ 'payload'
     -> TableInsert'
-tableInsert' pTiiTable_ =
+tableInsert' pTiiPayload_ =
     TableInsert'
     { _tiiQuotaUser = Nothing
     , _tiiPrettyPrint = True
     , _tiiUserIP = Nothing
+    , _tiiPayload = pTiiPayload_
     , _tiiKey = Nothing
     , _tiiOAuthToken = Nothing
-    , _tiiTable = pTiiTable_
     , _tiiFields = Nothing
     }
 
@@ -118,6 +119,11 @@ tiiUserIP :: Lens' TableInsert' (Maybe Text)
 tiiUserIP
   = lens _tiiUserIP (\ s a -> s{_tiiUserIP = a})
 
+-- | Multipart request metadata.
+tiiPayload :: Lens' TableInsert' Table
+tiiPayload
+  = lens _tiiPayload (\ s a -> s{_tiiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -129,10 +135,6 @@ tiiOAuthToken :: Lens' TableInsert' (Maybe OAuthToken)
 tiiOAuthToken
   = lens _tiiOAuthToken
       (\ s a -> s{_tiiOAuthToken = a})
-
--- | Multipart request metadata.
-tiiTable :: Lens' TableInsert' Table
-tiiTable = lens _tiiTable (\ s a -> s{_tiiTable = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tiiFields :: Lens' TableInsert' (Maybe Text)
@@ -152,7 +154,7 @@ instance GoogleRequest TableInsert' where
               _tiiKey
               _tiiOAuthToken
               (Just AltJSON)
-              _tiiTable
+              _tiiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TableInsertResource)

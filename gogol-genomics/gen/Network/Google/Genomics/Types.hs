@@ -79,8 +79,8 @@ module Network.Google.Genomics.Types
     , bareStatus
     , bareAnnotation
 
-    -- * VariantAnnotationEffect
-    , VariantAnnotationEffect (..)
+    -- * Effect
+    , Effect (..)
 
     -- * Variant
     , Variant
@@ -99,9 +99,6 @@ module Network.Google.Genomics.Types
     , vInfo
     , vCalls
 
-    -- * SearchJobsRequestStatus
-    , SearchJobsRequestStatus (..)
-
     -- * CallReadGroupSetsRequest
     , CallReadGroupSetsRequest
     , callReadGroupSetsRequest
@@ -109,9 +106,9 @@ module Network.Google.Genomics.Types
     , crgsrDatasetId
     , crgsrSourceURIs
 
-    -- * Read
-    , Read
-    , read
+    -- * Read'
+    , Read'
+    , read'
     , rFragmentLength
     , rDuplicateFragment
     , rReadGroupSetId
@@ -184,6 +181,9 @@ module Network.Google.Genomics.Types
     , srrNextPageToken
     , srrReferences
 
+    -- * Operation
+    , Operation (..)
+
     -- * AnnotationSetType
     , AnnotationSetType (..)
 
@@ -236,8 +236,8 @@ module Network.Google.Genomics.Types
     , vaType
     , vaTranscriptIds
 
-    -- * VariantAnnotationClinicalSignificance
-    , VariantAnnotationClinicalSignificance (..)
+    -- * ClinicalSignificance
+    , ClinicalSignificance (..)
 
     -- * BatchAnnotationsResponseEntryStatus
     , BatchAnnotationsResponseEntryStatus
@@ -249,6 +249,9 @@ module Network.Google.Genomics.Types
     , BatchAnnotationsResponse
     , batchAnnotationsResponse
     , barEntries
+
+    -- * Format
+    , Format (..)
 
     -- * ReadGroupInfo
     , ReadGroupInfo
@@ -282,6 +285,9 @@ module Network.Google.Genomics.Types
     , sjrPageToken
     , sjrPageSize
     , sjrCreatedBefore
+
+    -- * TypesItem
+    , TypesItem (..)
 
     -- * SearchReadsRequest
     , SearchReadsRequest
@@ -326,10 +332,6 @@ module Network.Google.Genomics.Types
     , rgpId
     , rgpCommandLine
 
-    -- * AnnotationInfo
-    , AnnotationInfo
-    , annotationInfo
-
     -- * SearchAnnotationsResponse
     , SearchAnnotationsResponse
     , searchAnnotationsResponse
@@ -346,9 +348,6 @@ module Network.Google.Genomics.Types
     -- * VariantInfo
     , VariantInfo
     , variantInfo
-
-    -- * ImportReadGroupSetsRequestPartitionStrategy
-    , ImportReadGroupSetsRequestPartitionStrategy (..)
 
     -- * SearchAnnotationSetsRequest
     , SearchAnnotationSetsRequest
@@ -418,9 +417,6 @@ module Network.Google.Genomics.Types
     , jErrors
     , jRequest
 
-    -- * AnnotationType
-    , AnnotationType (..)
-
     -- * SearchReferenceSetsResponse
     , SearchReferenceSetsResponse
     , searchReferenceSetsResponse
@@ -481,8 +477,8 @@ module Network.Google.Genomics.Types
     , alignReadGroupSetsResponse
     , argsrJobId
 
-    -- * SearchAnnotationSetsRequestTypes
-    , SearchAnnotationSetsRequestTypes (..)
+    -- * SearchJobsRequestStatusItem
+    , SearchJobsRequestStatusItem (..)
 
     -- * ListCoverageBucketsResponse
     , ListCoverageBucketsResponse
@@ -490,9 +486,6 @@ module Network.Google.Genomics.Types
     , lcbrNextPageToken
     , lcbrBucketWidth
     , lcbrCoverageBuckets
-
-    -- * CigarUnitOperation
-    , CigarUnitOperation (..)
 
     -- * CallReadGroupSetsResponse
     , CallReadGroupSetsResponse
@@ -567,6 +560,9 @@ module Network.Google.Genomics.Types
     , eiSourceName
     , eiId
 
+    -- * Type
+    , Type (..)
+
     -- * ImportReadGroupSetsRequest
     , ImportReadGroupSetsRequest
     , importReadGroupSetsRequest
@@ -598,9 +594,6 @@ module Network.Google.Genomics.Types
     -- * AnnotationSetInfo
     , AnnotationSetInfo
     , annotationSetInfo
-
-    -- * ExportVariantSetRequestFormat
-    , ExportVariantSetRequestFormat (..)
 
     -- * SearchVariantSetsResponse
     , SearchVariantSetsResponse
@@ -670,6 +663,10 @@ module Network.Google.Genomics.Types
     , tCodingSequence
     , tExons
 
+    -- * Info
+    , Info
+    , info
+
     -- * SearchReadGroupSetsResponse
     , SearchReadGroupSetsResponse
     , searchReadGroupSetsResponse
@@ -704,6 +701,9 @@ module Network.Google.Genomics.Types
     -- * ReadGroupSetInfo
     , ReadGroupSetInfo
     , readGroupSetInfo
+
+    -- * PartitionStrategy
+    , PartitionStrategy (..)
 
     -- * ReferenceSet
     , ReferenceSet

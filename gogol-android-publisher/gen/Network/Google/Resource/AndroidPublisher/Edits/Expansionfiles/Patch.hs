@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,10 +35,10 @@ module Network.Google.Resource.AndroidPublisher.Edits.Expansionfiles.Patch
     -- * Request Lenses
     , eepQuotaUser
     , eepPrettyPrint
-    , eepExpansionFile
     , eepPackageName
     , eepAPKVersionCode
     , eepUserIP
+    , eepPayload
     , eepKey
     , eepExpansionFileType
     , eepOAuthToken
@@ -57,9 +58,7 @@ type EditsExpansionfilesPatchResource =
            "apks" :>
              Capture "apkVersionCode" Int32 :>
                "expansionFiles" :>
-                 Capture "expansionFileType"
-                   AndroidPublisherEditsExpansionfilesPatchExpansionFileType
-                   :>
+                 Capture "expansionFileType" ExpansionFileType :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -78,16 +77,16 @@ type EditsExpansionfilesPatchResource =
 data EditsExpansionfilesPatch' = EditsExpansionfilesPatch'
     { _eepQuotaUser         :: !(Maybe Text)
     , _eepPrettyPrint       :: !Bool
-    , _eepExpansionFile     :: !ExpansionFile
     , _eepPackageName       :: !Text
     , _eepAPKVersionCode    :: !Int32
     , _eepUserIP            :: !(Maybe Text)
+    , _eepPayload           :: !ExpansionFile
     , _eepKey               :: !(Maybe Key)
-    , _eepExpansionFileType :: !AndroidPublisherEditsExpansionfilesPatchExpansionFileType
+    , _eepExpansionFileType :: !ExpansionFileType
     , _eepOAuthToken        :: !(Maybe OAuthToken)
     , _eepEditId            :: !Text
     , _eepFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsExpansionfilesPatch'' with the minimum fields required to make a request.
 --
@@ -97,13 +96,13 @@ data EditsExpansionfilesPatch' = EditsExpansionfilesPatch'
 --
 -- * 'eepPrettyPrint'
 --
--- * 'eepExpansionFile'
---
 -- * 'eepPackageName'
 --
 -- * 'eepAPKVersionCode'
 --
 -- * 'eepUserIP'
+--
+-- * 'eepPayload'
 --
 -- * 'eepKey'
 --
@@ -115,20 +114,20 @@ data EditsExpansionfilesPatch' = EditsExpansionfilesPatch'
 --
 -- * 'eepFields'
 editsExpansionfilesPatch'
-    :: ExpansionFile -- ^ 'ExpansionFile'
-    -> Text -- ^ 'packageName'
+    :: Text -- ^ 'packageName'
     -> Int32 -- ^ 'apkVersionCode'
-    -> AndroidPublisherEditsExpansionfilesPatchExpansionFileType -- ^ 'expansionFileType'
+    -> ExpansionFile -- ^ 'payload'
+    -> ExpansionFileType -- ^ 'expansionFileType'
     -> Text -- ^ 'editId'
     -> EditsExpansionfilesPatch'
-editsExpansionfilesPatch' pEepExpansionFile_ pEepPackageName_ pEepAPKVersionCode_ pEepExpansionFileType_ pEepEditId_ =
+editsExpansionfilesPatch' pEepPackageName_ pEepAPKVersionCode_ pEepPayload_ pEepExpansionFileType_ pEepEditId_ =
     EditsExpansionfilesPatch'
     { _eepQuotaUser = Nothing
     , _eepPrettyPrint = True
-    , _eepExpansionFile = pEepExpansionFile_
     , _eepPackageName = pEepPackageName_
     , _eepAPKVersionCode = pEepAPKVersionCode_
     , _eepUserIP = Nothing
+    , _eepPayload = pEepPayload_
     , _eepKey = Nothing
     , _eepExpansionFileType = pEepExpansionFileType_
     , _eepOAuthToken = Nothing
@@ -148,12 +147,6 @@ eepPrettyPrint :: Lens' EditsExpansionfilesPatch' Bool
 eepPrettyPrint
   = lens _eepPrettyPrint
       (\ s a -> s{_eepPrettyPrint = a})
-
--- | Multipart request metadata.
-eepExpansionFile :: Lens' EditsExpansionfilesPatch' ExpansionFile
-eepExpansionFile
-  = lens _eepExpansionFile
-      (\ s a -> s{_eepExpansionFile = a})
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
@@ -175,13 +168,18 @@ eepUserIP :: Lens' EditsExpansionfilesPatch' (Maybe Text)
 eepUserIP
   = lens _eepUserIP (\ s a -> s{_eepUserIP = a})
 
+-- | Multipart request metadata.
+eepPayload :: Lens' EditsExpansionfilesPatch' ExpansionFile
+eepPayload
+  = lens _eepPayload (\ s a -> s{_eepPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 eepKey :: Lens' EditsExpansionfilesPatch' (Maybe Key)
 eepKey = lens _eepKey (\ s a -> s{_eepKey = a})
 
-eepExpansionFileType :: Lens' EditsExpansionfilesPatch' AndroidPublisherEditsExpansionfilesPatchExpansionFileType
+eepExpansionFileType :: Lens' EditsExpansionfilesPatch' ExpansionFileType
 eepExpansionFileType
   = lens _eepExpansionFileType
       (\ s a -> s{_eepExpansionFileType = a})
@@ -220,7 +218,7 @@ instance GoogleRequest EditsExpansionfilesPatch'
               _eepKey
               _eepOAuthToken
               (Just AltJSON)
-              _eepExpansionFile
+              _eepPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EditsExpansionfilesPatchResource)

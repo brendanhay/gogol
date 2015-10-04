@@ -25,7 +25,7 @@ data WmxSitemapContent = WmxSitemapContent
     { _wscIndexed   :: !(Maybe Int64)
     , _wscType      :: !(Maybe Text)
     , _wscSubmitted :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WmxSitemapContent' with the minimum fields required to make a request.
 --
@@ -84,7 +84,7 @@ data URLCrawlErrorCountsPerType = URLCrawlErrorCountsPerType
     { _ucecptPlatform :: !(Maybe Text)
     , _ucecptEntries  :: !(Maybe [URLCrawlErrorCount])
     , _ucecptCategory :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLCrawlErrorCountsPerType' with the minimum fields required to make a request.
 --
@@ -146,7 +146,7 @@ instance ToJSON URLCrawlErrorCountsPerType where
 data APIdimensionFilterGroup = APIdimensionFilterGroup
     { _afgFilters   :: !(Maybe [APIdimensionFilter])
     , _afgGroupType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APIdimensionFilterGroup' with the minimum fields required to make a request.
 --
@@ -193,7 +193,7 @@ instance ToJSON APIdimensionFilterGroup where
 data URLSampleDetails = URLSampleDetails
     { _usdLinkedFromURLs     :: !(Maybe [Text])
     , _usdContainingSitemaps :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLSampleDetails' with the minimum fields required to make a request.
 --
@@ -250,7 +250,7 @@ data APIdataRow = APIdataRow
     , _arCtr         :: !(Maybe Double)
     , _arClicks      :: !(Maybe Double)
     , _arPosition    :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APIdataRow' with the minimum fields required to make a request.
 --
@@ -321,7 +321,7 @@ data APIdimensionFilter = APIdimensionFilter
     { _afOperator   :: !(Maybe Text)
     , _afDimension  :: !(Maybe Text)
     , _afExpression :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APIdimensionFilter' with the minimum fields required to make a request.
 --
@@ -375,7 +375,7 @@ instance ToJSON APIdimensionFilter where
 data URLCrawlErrorCount = URLCrawlErrorCount
     { _ucecCount     :: !(Maybe Int64)
     , _ucecTimestamp :: !(Maybe DateTime')
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLCrawlErrorCount' with the minimum fields required to make a request.
 --
@@ -426,7 +426,7 @@ instance ToJSON URLCrawlErrorCount where
 data SearchAnalyticsQueryResponse = SearchAnalyticsQueryResponse
     { _saqrRows                    :: !(Maybe [APIdataRow])
     , _saqrResponseAggregationType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchAnalyticsQueryResponse' with the minimum fields required to make a request.
 --
@@ -478,7 +478,7 @@ instance ToJSON SearchAnalyticsQueryResponse where
 -- /See:/ 'urlCrawlErrorsSamplesListResponse' smart constructor.
 newtype URLCrawlErrorsSamplesListResponse = URLCrawlErrorsSamplesListResponse
     { _uceslrURLCrawlErrorSample :: Maybe [URLCrawlErrorsSample]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLCrawlErrorsSamplesListResponse' with the minimum fields required to make a request.
 --
@@ -522,7 +522,7 @@ instance ToJSON URLCrawlErrorsSamplesListResponse
 -- /See:/ 'urlCrawlErrorsCountsQueryResponse' smart constructor.
 newtype URLCrawlErrorsCountsQueryResponse = URLCrawlErrorsCountsQueryResponse
     { _ucecqrCountPerTypes :: Maybe [URLCrawlErrorCountsPerType]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLCrawlErrorsCountsQueryResponse' with the minimum fields required to make a request.
 --
@@ -569,7 +569,7 @@ data URLCrawlErrorsSample = URLCrawlErrorsSample
     , _ucesLastCrawled   :: !(Maybe DateTime')
     , _ucesPageURL       :: !(Maybe Text)
     , _ucesFirstDetected :: !(Maybe DateTime')
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLCrawlErrorsSample' with the minimum fields required to make a request.
 --
@@ -651,7 +651,7 @@ instance ToJSON URLCrawlErrorsSample where
 -- /See:/ 'sitemapsListResponse' smart constructor.
 newtype SitemapsListResponse = SitemapsListResponse
     { _slrSitemap :: Maybe [WmxSitemap]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitemapsListResponse' with the minimum fields required to make a request.
 --
@@ -698,7 +698,7 @@ data WmxSitemap = WmxSitemap
     , _wsIsPending       :: !(Maybe Bool)
     , _wsType            :: !(Maybe Text)
     , _wsErrors          :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WmxSitemap' with the minimum fields required to make a request.
 --
@@ -827,7 +827,7 @@ data SearchAnalyticsQueryRequest = SearchAnalyticsQueryRequest
     , _saqrDimensionFilterGroups :: !(Maybe [APIdimensionFilterGroup])
     , _saqrStartDate             :: !(Maybe Text)
     , _saqrDimensions            :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchAnalyticsQueryRequest' with the minimum fields required to make a request.
 --
@@ -954,7 +954,7 @@ instance ToJSON SearchAnalyticsQueryRequest where
 -- /See:/ 'sitesListResponse' smart constructor.
 newtype SitesListResponse = SitesListResponse
     { _slrSiteEntry :: Maybe [WmxSite]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesListResponse' with the minimum fields required to make a request.
 --
@@ -994,7 +994,7 @@ instance ToJSON SitesListResponse where
 data WmxSite = WmxSite
     { _wsPermissionLevel :: !(Maybe Text)
     , _wsSiteURL         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WmxSite' with the minimum fields required to make a request.
 --

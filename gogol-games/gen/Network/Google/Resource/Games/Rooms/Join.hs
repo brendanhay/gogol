@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -31,10 +32,10 @@ module Network.Google.Resource.Games.Rooms.Join
     , RoomsJoin'
 
     -- * Request Lenses
-    , rjRoomJoinRequest
     , rjQuotaUser
     , rjPrettyPrint
     , rjUserIP
+    , rjPayload
     , rjKey
     , rjRoomId
     , rjLanguage
@@ -66,28 +67,28 @@ type RoomsJoinResource =
 --
 -- /See:/ 'roomsJoin'' smart constructor.
 data RoomsJoin' = RoomsJoin'
-    { _rjRoomJoinRequest :: !RoomJoinRequest
-    , _rjQuotaUser       :: !(Maybe Text)
-    , _rjPrettyPrint     :: !Bool
-    , _rjUserIP          :: !(Maybe Text)
-    , _rjKey             :: !(Maybe Key)
-    , _rjRoomId          :: !Text
-    , _rjLanguage        :: !(Maybe Text)
-    , _rjOAuthToken      :: !(Maybe OAuthToken)
-    , _rjFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rjQuotaUser   :: !(Maybe Text)
+    , _rjPrettyPrint :: !Bool
+    , _rjUserIP      :: !(Maybe Text)
+    , _rjPayload     :: !RoomJoinRequest
+    , _rjKey         :: !(Maybe Key)
+    , _rjRoomId      :: !Text
+    , _rjLanguage    :: !(Maybe Text)
+    , _rjOAuthToken  :: !(Maybe OAuthToken)
+    , _rjFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsJoin'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'rjRoomJoinRequest'
 --
 -- * 'rjQuotaUser'
 --
 -- * 'rjPrettyPrint'
 --
 -- * 'rjUserIP'
+--
+-- * 'rjPayload'
 --
 -- * 'rjKey'
 --
@@ -99,27 +100,21 @@ data RoomsJoin' = RoomsJoin'
 --
 -- * 'rjFields'
 roomsJoin'
-    :: RoomJoinRequest -- ^ 'RoomJoinRequest'
+    :: RoomJoinRequest -- ^ 'payload'
     -> Text -- ^ 'roomId'
     -> RoomsJoin'
-roomsJoin' pRjRoomJoinRequest_ pRjRoomId_ =
+roomsJoin' pRjPayload_ pRjRoomId_ =
     RoomsJoin'
-    { _rjRoomJoinRequest = pRjRoomJoinRequest_
-    , _rjQuotaUser = Nothing
+    { _rjQuotaUser = Nothing
     , _rjPrettyPrint = True
     , _rjUserIP = Nothing
+    , _rjPayload = pRjPayload_
     , _rjKey = Nothing
     , _rjRoomId = pRjRoomId_
     , _rjLanguage = Nothing
     , _rjOAuthToken = Nothing
     , _rjFields = Nothing
     }
-
--- | Multipart request metadata.
-rjRoomJoinRequest :: Lens' RoomsJoin' RoomJoinRequest
-rjRoomJoinRequest
-  = lens _rjRoomJoinRequest
-      (\ s a -> s{_rjRoomJoinRequest = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -138,6 +133,11 @@ rjPrettyPrint
 -- want to enforce per-user limits.
 rjUserIP :: Lens' RoomsJoin' (Maybe Text)
 rjUserIP = lens _rjUserIP (\ s a -> s{_rjUserIP = a})
+
+-- | Multipart request metadata.
+rjPayload :: Lens' RoomsJoin' RoomJoinRequest
+rjPayload
+  = lens _rjPayload (\ s a -> s{_rjPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -171,14 +171,14 @@ instance GoogleRequest RoomsJoin' where
         type Rs RoomsJoin' = Room
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RoomsJoin'{..}
-          = go _rjLanguage _rjRoomId _rjQuotaUser
+          = go _rjRoomId _rjLanguage _rjQuotaUser
               (Just _rjPrettyPrint)
               _rjUserIP
               _rjFields
               _rjKey
               _rjOAuthToken
               (Just AltJSON)
-              _rjRoomJoinRequest
+              _rjPayload
           where go
                   = clientWithRoute (Proxy :: Proxy RoomsJoinResource)
                       r

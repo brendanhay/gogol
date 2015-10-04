@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.Tasks.Tasks.Insert
     , tiQuotaUser
     , tiPrettyPrint
     , tiUserIP
+    , tiPayload
     , tiKey
     , tiTaskList
-    , tiTask
     , tiOAuthToken
     , tiFields
     , tiPrevious
@@ -70,13 +71,13 @@ data TasksInsert' = TasksInsert'
     , _tiQuotaUser   :: !(Maybe Text)
     , _tiPrettyPrint :: !Bool
     , _tiUserIP      :: !(Maybe Text)
+    , _tiPayload     :: !Task
     , _tiKey         :: !(Maybe Key)
     , _tiTaskList    :: !Text
-    , _tiTask        :: !Task
     , _tiOAuthToken  :: !(Maybe OAuthToken)
     , _tiFields      :: !(Maybe Text)
     , _tiPrevious    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksInsert'' with the minimum fields required to make a request.
 --
@@ -90,11 +91,11 @@ data TasksInsert' = TasksInsert'
 --
 -- * 'tiUserIP'
 --
+-- * 'tiPayload'
+--
 -- * 'tiKey'
 --
 -- * 'tiTaskList'
---
--- * 'tiTask'
 --
 -- * 'tiOAuthToken'
 --
@@ -102,18 +103,18 @@ data TasksInsert' = TasksInsert'
 --
 -- * 'tiPrevious'
 tasksInsert'
-    :: Text -- ^ 'tasklist'
-    -> Task -- ^ 'Task'
+    :: Task -- ^ 'payload'
+    -> Text -- ^ 'tasklist'
     -> TasksInsert'
-tasksInsert' pTiTaskList_ pTiTask_ =
+tasksInsert' pTiPayload_ pTiTaskList_ =
     TasksInsert'
     { _tiParent = Nothing
     , _tiQuotaUser = Nothing
     , _tiPrettyPrint = True
     , _tiUserIP = Nothing
+    , _tiPayload = pTiPayload_
     , _tiKey = Nothing
     , _tiTaskList = pTiTaskList_
-    , _tiTask = pTiTask_
     , _tiOAuthToken = Nothing
     , _tiFields = Nothing
     , _tiPrevious = Nothing
@@ -142,6 +143,11 @@ tiPrettyPrint
 tiUserIP :: Lens' TasksInsert' (Maybe Text)
 tiUserIP = lens _tiUserIP (\ s a -> s{_tiUserIP = a})
 
+-- | Multipart request metadata.
+tiPayload :: Lens' TasksInsert' Task
+tiPayload
+  = lens _tiPayload (\ s a -> s{_tiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -152,10 +158,6 @@ tiKey = lens _tiKey (\ s a -> s{_tiKey = a})
 tiTaskList :: Lens' TasksInsert' Text
 tiTaskList
   = lens _tiTaskList (\ s a -> s{_tiTaskList = a})
-
--- | Multipart request metadata.
-tiTask :: Lens' TasksInsert' Task
-tiTask = lens _tiTask (\ s a -> s{_tiTask = a})
 
 -- | OAuth 2.0 token for the current user.
 tiOAuthToken :: Lens' TasksInsert' (Maybe OAuthToken)
@@ -180,14 +182,14 @@ instance GoogleRequest TasksInsert' where
         type Rs TasksInsert' = Task
         request = requestWithRoute defReq appsTasksURL
         requestWithRoute r u TasksInsert'{..}
-          = go _tiParent _tiPrevious _tiTaskList _tiQuotaUser
+          = go _tiTaskList _tiParent _tiPrevious _tiQuotaUser
               (Just _tiPrettyPrint)
               _tiUserIP
               _tiFields
               _tiKey
               _tiOAuthToken
               (Just AltJSON)
-              _tiTask
+              _tiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TasksInsertResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,21 +58,21 @@ type FloodlightActivityGroupsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightActivityGroups" :>
-           QueryParam "advertiserId" Int64 :>
-             QueryParam "floodlightConfigurationId" Int64 :>
-               QueryParams "ids" Int64 :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "searchString" Text :>
+           QueryParam "floodlightConfigurationId" Int64 :>
+             QueryParam "advertiserId" Int64 :>
+               QueryParam "searchString" Text :>
+                 QueryParams "ids" Int64 :>
+                   QueryParam "sortOrder"
+                     DfareportingFloodlightActivityGroupsListSortOrder
+                     :>
+                     QueryParam "pageToken" Text :>
                        QueryParam "sortField"
                          DfareportingFloodlightActivityGroupsListSortField
                          :>
-                         QueryParam "sortOrder"
-                           DfareportingFloodlightActivityGroupsListSortOrder
+                         QueryParam "type"
+                           DfareportingFloodlightActivityGroupsListType
                            :>
-                           QueryParam "type"
-                             DfareportingFloodlightActivityGroupsListType
-                             :>
+                           QueryParam "maxResults" Int32 :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
@@ -92,7 +93,7 @@ data FloodlightActivityGroupsList' = FloodlightActivityGroupsList'
     , _faglUserIP                    :: !(Maybe Text)
     , _faglAdvertiserId              :: !(Maybe Int64)
     , _faglSearchString              :: !(Maybe Text)
-    , _faglIds                       :: !(Maybe Int64)
+    , _faglIds                       :: !(Maybe [Int64])
     , _faglProfileId                 :: !Int64
     , _faglSortOrder                 :: !(Maybe DfareportingFloodlightActivityGroupsListSortOrder)
     , _faglKey                       :: !(Maybe Key)
@@ -102,7 +103,7 @@ data FloodlightActivityGroupsList' = FloodlightActivityGroupsList'
     , _faglOAuthToken                :: !(Maybe OAuthToken)
     , _faglMaxResults                :: !(Maybe Int32)
     , _faglFields                    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsList'' with the minimum fields required to make a request.
 --
@@ -215,8 +216,10 @@ faglSearchString
 -- | Select only floodlight activity groups with the specified IDs. Must
 -- specify either advertiserId or floodlightConfigurationId for a non-empty
 -- result.
-faglIds :: Lens' FloodlightActivityGroupsList' (Maybe Int64)
-faglIds = lens _faglIds (\ s a -> s{_faglIds = a})
+faglIds :: Lens' FloodlightActivityGroupsList' [Int64]
+faglIds
+  = lens _faglIds (\ s a -> s{_faglIds = a}) . _Default
+      . _Coerce
 
 -- | User profile ID associated with this request.
 faglProfileId :: Lens' FloodlightActivityGroupsList' Int64
@@ -282,15 +285,15 @@ instance GoogleRequest FloodlightActivityGroupsList'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightActivityGroupsList'{..}
-          = go _faglAdvertiserId _faglFloodlightConfigurationId
-              _faglIds
-              _faglMaxResults
-              _faglPageToken
+          = go _faglProfileId _faglFloodlightConfigurationId
+              _faglAdvertiserId
               _faglSearchString
-              _faglSortField
+              (_faglIds ^. _Default)
               _faglSortOrder
+              _faglPageToken
+              _faglSortField
               _faglType
-              _faglProfileId
+              _faglMaxResults
               _faglQuotaUser
               (Just _faglPrettyPrint)
               _faglUserIP

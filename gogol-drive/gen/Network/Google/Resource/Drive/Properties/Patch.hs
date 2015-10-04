@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,10 +33,10 @@ module Network.Google.Resource.Drive.Properties.Patch
     -- * Request Lenses
     , ppQuotaUser
     , ppPrettyPrint
-    , ppProperty
     , ppPropertyKey
     , ppUserIP
     , ppVisibility
+    , ppPayload
     , ppKey
     , ppFileId
     , ppOAuthToken
@@ -68,15 +69,15 @@ type PropertiesPatchResource =
 data PropertiesPatch' = PropertiesPatch'
     { _ppQuotaUser   :: !(Maybe Text)
     , _ppPrettyPrint :: !Bool
-    , _ppProperty    :: !Property
     , _ppPropertyKey :: !Text
     , _ppUserIP      :: !(Maybe Text)
     , _ppVisibility  :: !Text
+    , _ppPayload     :: !Property
     , _ppKey         :: !(Maybe Key)
     , _ppFileId      :: !Text
     , _ppOAuthToken  :: !(Maybe OAuthToken)
     , _ppFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertiesPatch'' with the minimum fields required to make a request.
 --
@@ -86,13 +87,13 @@ data PropertiesPatch' = PropertiesPatch'
 --
 -- * 'ppPrettyPrint'
 --
--- * 'ppProperty'
---
 -- * 'ppPropertyKey'
 --
 -- * 'ppUserIP'
 --
 -- * 'ppVisibility'
+--
+-- * 'ppPayload'
 --
 -- * 'ppKey'
 --
@@ -102,18 +103,18 @@ data PropertiesPatch' = PropertiesPatch'
 --
 -- * 'ppFields'
 propertiesPatch'
-    :: Property -- ^ 'Property'
-    -> Text -- ^ 'propertyKey'
+    :: Text -- ^ 'propertyKey'
+    -> Property -- ^ 'payload'
     -> Text -- ^ 'fileId'
     -> PropertiesPatch'
-propertiesPatch' pPpProperty_ pPpPropertyKey_ pPpFileId_ =
+propertiesPatch' pPpPropertyKey_ pPpPayload_ pPpFileId_ =
     PropertiesPatch'
     { _ppQuotaUser = Nothing
     , _ppPrettyPrint = True
-    , _ppProperty = pPpProperty_
     , _ppPropertyKey = pPpPropertyKey_
     , _ppUserIP = Nothing
     , _ppVisibility = "private"
+    , _ppPayload = pPpPayload_
     , _ppKey = Nothing
     , _ppFileId = pPpFileId_
     , _ppOAuthToken = Nothing
@@ -133,11 +134,6 @@ ppPrettyPrint
   = lens _ppPrettyPrint
       (\ s a -> s{_ppPrettyPrint = a})
 
--- | Multipart request metadata.
-ppProperty :: Lens' PropertiesPatch' Property
-ppProperty
-  = lens _ppProperty (\ s a -> s{_ppProperty = a})
-
 -- | The key of the property.
 ppPropertyKey :: Lens' PropertiesPatch' Text
 ppPropertyKey
@@ -153,6 +149,11 @@ ppUserIP = lens _ppUserIP (\ s a -> s{_ppUserIP = a})
 ppVisibility :: Lens' PropertiesPatch' Text
 ppVisibility
   = lens _ppVisibility (\ s a -> s{_ppVisibility = a})
+
+-- | Multipart request metadata.
+ppPayload :: Lens' PropertiesPatch' Property
+ppPayload
+  = lens _ppPayload (\ s a -> s{_ppPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -181,7 +182,7 @@ instance GoogleRequest PropertiesPatch' where
         type Rs PropertiesPatch' = Property
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PropertiesPatch'{..}
-          = go (Just _ppVisibility) _ppFileId _ppPropertyKey
+          = go _ppFileId _ppPropertyKey (Just _ppVisibility)
               _ppQuotaUser
               (Just _ppPrettyPrint)
               _ppUserIP
@@ -189,7 +190,7 @@ instance GoogleRequest PropertiesPatch' where
               _ppKey
               _ppOAuthToken
               (Just AltJSON)
-              _ppProperty
+              _ppPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PropertiesPatchResource)

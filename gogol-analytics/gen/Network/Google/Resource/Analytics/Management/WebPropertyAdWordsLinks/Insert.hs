@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Inse
     , mwpawliPrettyPrint
     , mwpawliWebPropertyId
     , mwpawliUserIP
-    , mwpawliEntityAdWordsLink
+    , mwpawliPayload
     , mwpawliAccountId
     , mwpawliKey
     , mwpawliOAuthToken
@@ -68,16 +69,16 @@ type ManagementWebPropertyAdWordsLinksInsertResource
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksInsert'' smart constructor.
 data ManagementWebPropertyAdWordsLinksInsert' = ManagementWebPropertyAdWordsLinksInsert'
-    { _mwpawliQuotaUser         :: !(Maybe Text)
-    , _mwpawliPrettyPrint       :: !Bool
-    , _mwpawliWebPropertyId     :: !Text
-    , _mwpawliUserIP            :: !(Maybe Text)
-    , _mwpawliEntityAdWordsLink :: !EntityAdWordsLink
-    , _mwpawliAccountId         :: !Text
-    , _mwpawliKey               :: !(Maybe Key)
-    , _mwpawliOAuthToken        :: !(Maybe OAuthToken)
-    , _mwpawliFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mwpawliQuotaUser     :: !(Maybe Text)
+    , _mwpawliPrettyPrint   :: !Bool
+    , _mwpawliWebPropertyId :: !Text
+    , _mwpawliUserIP        :: !(Maybe Text)
+    , _mwpawliPayload       :: !EntityAdWordsLink
+    , _mwpawliAccountId     :: !Text
+    , _mwpawliKey           :: !(Maybe Key)
+    , _mwpawliOAuthToken    :: !(Maybe OAuthToken)
+    , _mwpawliFields        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksInsert'' with the minimum fields required to make a request.
 --
@@ -91,7 +92,7 @@ data ManagementWebPropertyAdWordsLinksInsert' = ManagementWebPropertyAdWordsLink
 --
 -- * 'mwpawliUserIP'
 --
--- * 'mwpawliEntityAdWordsLink'
+-- * 'mwpawliPayload'
 --
 -- * 'mwpawliAccountId'
 --
@@ -102,16 +103,16 @@ data ManagementWebPropertyAdWordsLinksInsert' = ManagementWebPropertyAdWordsLink
 -- * 'mwpawliFields'
 managementWebPropertyAdWordsLinksInsert'
     :: Text -- ^ 'webPropertyId'
-    -> EntityAdWordsLink -- ^ 'EntityAdWordsLink'
+    -> EntityAdWordsLink -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementWebPropertyAdWordsLinksInsert'
-managementWebPropertyAdWordsLinksInsert' pMwpawliWebPropertyId_ pMwpawliEntityAdWordsLink_ pMwpawliAccountId_ =
+managementWebPropertyAdWordsLinksInsert' pMwpawliWebPropertyId_ pMwpawliPayload_ pMwpawliAccountId_ =
     ManagementWebPropertyAdWordsLinksInsert'
     { _mwpawliQuotaUser = Nothing
     , _mwpawliPrettyPrint = False
     , _mwpawliWebPropertyId = pMwpawliWebPropertyId_
     , _mwpawliUserIP = Nothing
-    , _mwpawliEntityAdWordsLink = pMwpawliEntityAdWordsLink_
+    , _mwpawliPayload = pMwpawliPayload_
     , _mwpawliAccountId = pMwpawliAccountId_
     , _mwpawliKey = Nothing
     , _mwpawliOAuthToken = Nothing
@@ -146,10 +147,10 @@ mwpawliUserIP
       (\ s a -> s{_mwpawliUserIP = a})
 
 -- | Multipart request metadata.
-mwpawliEntityAdWordsLink :: Lens' ManagementWebPropertyAdWordsLinksInsert' EntityAdWordsLink
-mwpawliEntityAdWordsLink
-  = lens _mwpawliEntityAdWordsLink
-      (\ s a -> s{_mwpawliEntityAdWordsLink = a})
+mwpawliPayload :: Lens' ManagementWebPropertyAdWordsLinksInsert' EntityAdWordsLink
+mwpawliPayload
+  = lens _mwpawliPayload
+      (\ s a -> s{_mwpawliPayload = a})
 
 -- | ID of the Google Analytics account to create the link for.
 mwpawliAccountId :: Lens' ManagementWebPropertyAdWordsLinksInsert' Text
@@ -196,7 +197,7 @@ instance GoogleRequest
               _mwpawliKey
               _mwpawliOAuthToken
               (Just AltJSON)
-              _mwpawliEntityAdWordsLink
+              _mwpawliPayload
           where go
                   = clientWithRoute
                       (Proxy ::

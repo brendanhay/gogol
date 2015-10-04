@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,10 +35,10 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Insert
     , caiPrettyPrint
     , caiUserIP
     , caiSponsorAccountId
+    , caiPayload
     , caiKey
     , caiClientAccountId
     , caiOAuthToken
-    , caiClientAccessCapabilities
     , caiFields
     ) where
 
@@ -48,8 +49,8 @@ import           Network.Google.Prelude
 -- 'ClientAccessInsert'' request conforms to.
 type ClientAccessInsertResource =
      "clientAccess" :>
-       QueryParam "clientAccountId" Int64 :>
-         QueryParam "sponsorAccountId" Int32 :>
+       QueryParam "sponsorAccountId" Int32 :>
+         QueryParam "clientAccountId" Int64 :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -63,16 +64,16 @@ type ClientAccessInsertResource =
 --
 -- /See:/ 'clientAccessInsert'' smart constructor.
 data ClientAccessInsert' = ClientAccessInsert'
-    { _caiQuotaUser                :: !(Maybe Text)
-    , _caiPrettyPrint              :: !Bool
-    , _caiUserIP                   :: !(Maybe Text)
-    , _caiSponsorAccountId         :: !(Maybe Int32)
-    , _caiKey                      :: !(Maybe Key)
-    , _caiClientAccountId          :: !(Maybe Int64)
-    , _caiOAuthToken               :: !(Maybe OAuthToken)
-    , _caiClientAccessCapabilities :: !ClientAccessCapabilities
-    , _caiFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _caiQuotaUser        :: !(Maybe Text)
+    , _caiPrettyPrint      :: !Bool
+    , _caiUserIP           :: !(Maybe Text)
+    , _caiSponsorAccountId :: !(Maybe Int32)
+    , _caiPayload          :: !ClientAccessCapabilities
+    , _caiKey              :: !(Maybe Key)
+    , _caiClientAccountId  :: !(Maybe Int64)
+    , _caiOAuthToken       :: !(Maybe OAuthToken)
+    , _caiFields           :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessInsert'' with the minimum fields required to make a request.
 --
@@ -86,28 +87,28 @@ data ClientAccessInsert' = ClientAccessInsert'
 --
 -- * 'caiSponsorAccountId'
 --
+-- * 'caiPayload'
+--
 -- * 'caiKey'
 --
 -- * 'caiClientAccountId'
 --
 -- * 'caiOAuthToken'
 --
--- * 'caiClientAccessCapabilities'
---
 -- * 'caiFields'
 clientAccessInsert'
-    :: ClientAccessCapabilities -- ^ 'ClientAccessCapabilities'
+    :: ClientAccessCapabilities -- ^ 'payload'
     -> ClientAccessInsert'
-clientAccessInsert' pCaiClientAccessCapabilities_ =
+clientAccessInsert' pCaiPayload_ =
     ClientAccessInsert'
     { _caiQuotaUser = Nothing
     , _caiPrettyPrint = True
     , _caiUserIP = Nothing
     , _caiSponsorAccountId = Nothing
+    , _caiPayload = pCaiPayload_
     , _caiKey = Nothing
     , _caiClientAccountId = Nothing
     , _caiOAuthToken = Nothing
-    , _caiClientAccessCapabilities = pCaiClientAccessCapabilities_
     , _caiFields = Nothing
     }
 
@@ -135,6 +136,11 @@ caiSponsorAccountId
   = lens _caiSponsorAccountId
       (\ s a -> s{_caiSponsorAccountId = a})
 
+-- | Multipart request metadata.
+caiPayload :: Lens' ClientAccessInsert' ClientAccessCapabilities
+caiPayload
+  = lens _caiPayload (\ s a -> s{_caiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -152,12 +158,6 @@ caiOAuthToken
   = lens _caiOAuthToken
       (\ s a -> s{_caiOAuthToken = a})
 
--- | Multipart request metadata.
-caiClientAccessCapabilities :: Lens' ClientAccessInsert' ClientAccessCapabilities
-caiClientAccessCapabilities
-  = lens _caiClientAccessCapabilities
-      (\ s a -> s{_caiClientAccessCapabilities = a})
-
 -- | Selector specifying which fields to include in a partial response.
 caiFields :: Lens' ClientAccessInsert' (Maybe Text)
 caiFields
@@ -172,7 +172,7 @@ instance GoogleRequest ClientAccessInsert' where
              ClientAccessCapabilities
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u ClientAccessInsert'{..}
-          = go _caiClientAccountId _caiSponsorAccountId
+          = go _caiSponsorAccountId _caiClientAccountId
               _caiQuotaUser
               (Just _caiPrettyPrint)
               _caiUserIP
@@ -180,7 +180,7 @@ instance GoogleRequest ClientAccessInsert' where
               _caiKey
               _caiOAuthToken
               (Just AltJSON)
-              _caiClientAccessCapabilities
+              _caiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ClientAccessInsertResource)

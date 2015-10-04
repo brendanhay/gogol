@@ -17,9 +17,8 @@ module Network.Google.CivicInfo.Types
     -- * Service URL
       civicInfoURL
 
-    -- * RepresentativeInfoResponseDivisions
-    , RepresentativeInfoResponseDivisions
-    , representativeInfoResponseDivisions
+    -- * Roles
+    , Roles (..)
 
     -- * VoterInfoResponse
     , VoterInfoResponse
@@ -56,9 +55,6 @@ module Network.Google.CivicInfo.Types
     , gdOfficeIndices
     , gdAlsoKnownAs
 
-    -- * CivicInfoRepresentativesRepresentativeInfoByDivisionLevels
-    , CivicInfoRepresentativesRepresentativeInfoByDivisionLevels (..)
-
     -- * CivicInfoRepresentativesRepresentativeInfoByAddressLevels
     , CivicInfoRepresentativesRepresentativeInfoByAddressLevels (..)
 
@@ -83,9 +79,6 @@ module Network.Google.CivicInfo.Types
     , oSources
     , oName
     , oLevels
-
-    -- * CivicInfoRepresentativesRepresentativeInfoByDivisionRoles
-    , CivicInfoRepresentativesRepresentativeInfoByDivisionRoles (..)
 
     -- * Election
     , Election
@@ -175,6 +168,10 @@ module Network.Google.CivicInfo.Types
     -- * CivicInfoRepresentativesRepresentativeInfoByAddressRoles
     , CivicInfoRepresentativesRepresentativeInfoByAddressRoles (..)
 
+    -- * Divisions
+    , Divisions
+    , divisions
+
     -- * ElectionOfficial
     , ElectionOfficial
     , electionOfficial
@@ -196,6 +193,9 @@ module Network.Google.CivicInfo.Types
     , source
     , sName
     , sOfficial
+
+    -- * Levels
+    , Levels (..)
 
     -- * ElectoralDistrict
     , ElectoralDistrict

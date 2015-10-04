@@ -17,9 +17,79 @@ module Network.Google.CustomSearch.Types.Sum where
 
 import           Network.Google.Prelude
 
+-- | Returns images of a specific dominant color: yellow, green, teal, blue,
+-- purple, pink, white, gray, black and brown.
+data ImgDominantColor
+    = Black
+      -- ^ @black@
+      -- black
+    | Blue
+      -- ^ @blue@
+      -- blue
+    | Brown
+      -- ^ @brown@
+      -- brown
+    | Gray
+      -- ^ @gray@
+      -- gray
+    | Green
+      -- ^ @green@
+      -- green
+    | Pink
+      -- ^ @pink@
+      -- pink
+    | Purple
+      -- ^ @purple@
+      -- purple
+    | Teal
+      -- ^ @teal@
+      -- teal
+    | White
+      -- ^ @white@
+      -- white
+    | Yellow
+      -- ^ @yellow@
+      -- yellow
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ImgDominantColor
+
+instance FromText ImgDominantColor where
+    fromText = \case
+        "black" -> Just Black
+        "blue" -> Just Blue
+        "brown" -> Just Brown
+        "gray" -> Just Gray
+        "green" -> Just Green
+        "pink" -> Just Pink
+        "purple" -> Just Purple
+        "teal" -> Just Teal
+        "white" -> Just White
+        "yellow" -> Just Yellow
+        _ -> Nothing
+
+instance ToText ImgDominantColor where
+    toText = \case
+        Black -> "black"
+        Blue -> "blue"
+        Brown -> "brown"
+        Gray -> "gray"
+        Green -> "green"
+        Pink -> "pink"
+        Purple -> "purple"
+        Teal -> "teal"
+        White -> "white"
+        Yellow -> "yellow"
+
+instance FromJSON ImgDominantColor where
+    parseJSON = parseJSONText "ImgDominantColor"
+
+instance ToJSON ImgDominantColor where
+    toJSON = toJSONText
+
 -- | Controls whether to include or exclude results from the site named in
 -- the as_sitesearch parameter
-data SearchCseListSiteSearchFilter
+data SiteSearchFilter
     = E
       -- ^ @e@
       -- exclude
@@ -28,201 +98,51 @@ data SearchCseListSiteSearchFilter
       -- include
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable SearchCseListSiteSearchFilter
+instance Hashable SiteSearchFilter
 
-instance FromText SearchCseListSiteSearchFilter where
+instance FromText SiteSearchFilter where
     fromText = \case
         "e" -> Just E
         "i" -> Just I
         _ -> Nothing
 
-instance ToText SearchCseListSiteSearchFilter where
+instance ToText SiteSearchFilter where
     toText = \case
         E -> "e"
         I -> "i"
 
-instance FromJSON SearchCseListSiteSearchFilter where
-    parseJSON = parseJSONText "SearchCseListSiteSearchFilter"
+instance FromJSON SiteSearchFilter where
+    parseJSON = parseJSONText "SiteSearchFilter"
 
-instance ToJSON SearchCseListSiteSearchFilter where
-    toJSON = toJSONText
-
--- | Returns black and white, grayscale, or color images: mono, gray, and
--- color.
-data SearchCseListImgColorType
-    = Color
-      -- ^ @color@
-      -- color
-    | Gray
-      -- ^ @gray@
-      -- gray
-    | Mono
-      -- ^ @mono@
-      -- mono
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable SearchCseListImgColorType
-
-instance FromText SearchCseListImgColorType where
-    fromText = \case
-        "color" -> Just Color
-        "gray" -> Just Gray
-        "mono" -> Just Mono
-        _ -> Nothing
-
-instance ToText SearchCseListImgColorType where
-    toText = \case
-        Color -> "color"
-        Gray -> "gray"
-        Mono -> "mono"
-
-instance FromJSON SearchCseListImgColorType where
-    parseJSON = parseJSONText "SearchCseListImgColorType"
-
-instance ToJSON SearchCseListImgColorType where
-    toJSON = toJSONText
-
--- | Returns images of a type, which can be one of: clipart, face, lineart,
--- news, and photo.
-data SearchCseListImgType
-    = CliPart
-      -- ^ @clipart@
-      -- clipart
-    | Face
-      -- ^ @face@
-      -- face
-    | Lineart
-      -- ^ @lineart@
-      -- lineart
-    | News
-      -- ^ @news@
-      -- news
-    | Photo
-      -- ^ @photo@
-      -- photo
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable SearchCseListImgType
-
-instance FromText SearchCseListImgType where
-    fromText = \case
-        "clipart" -> Just CliPart
-        "face" -> Just Face
-        "lineart" -> Just Lineart
-        "news" -> Just News
-        "photo" -> Just Photo
-        _ -> Nothing
-
-instance ToText SearchCseListImgType where
-    toText = \case
-        CliPart -> "clipart"
-        Face -> "face"
-        Lineart -> "lineart"
-        News -> "news"
-        Photo -> "photo"
-
-instance FromJSON SearchCseListImgType where
-    parseJSON = parseJSONText "SearchCseListImgType"
-
-instance ToJSON SearchCseListImgType where
-    toJSON = toJSONText
-
--- | Returns images of a specific dominant color: yellow, green, teal, blue,
--- purple, pink, white, gray, black and brown.
-data SearchCseListImgDominantColor
-    = SCLIDCBlack
-      -- ^ @black@
-      -- black
-    | SCLIDCBlue
-      -- ^ @blue@
-      -- blue
-    | SCLIDCBrown
-      -- ^ @brown@
-      -- brown
-    | SCLIDCGray
-      -- ^ @gray@
-      -- gray
-    | SCLIDCGreen
-      -- ^ @green@
-      -- green
-    | SCLIDCPink
-      -- ^ @pink@
-      -- pink
-    | SCLIDCPurple
-      -- ^ @purple@
-      -- purple
-    | SCLIDCTeal
-      -- ^ @teal@
-      -- teal
-    | SCLIDCWhite
-      -- ^ @white@
-      -- white
-    | SCLIDCYellow
-      -- ^ @yellow@
-      -- yellow
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable SearchCseListImgDominantColor
-
-instance FromText SearchCseListImgDominantColor where
-    fromText = \case
-        "black" -> Just SCLIDCBlack
-        "blue" -> Just SCLIDCBlue
-        "brown" -> Just SCLIDCBrown
-        "gray" -> Just SCLIDCGray
-        "green" -> Just SCLIDCGreen
-        "pink" -> Just SCLIDCPink
-        "purple" -> Just SCLIDCPurple
-        "teal" -> Just SCLIDCTeal
-        "white" -> Just SCLIDCWhite
-        "yellow" -> Just SCLIDCYellow
-        _ -> Nothing
-
-instance ToText SearchCseListImgDominantColor where
-    toText = \case
-        SCLIDCBlack -> "black"
-        SCLIDCBlue -> "blue"
-        SCLIDCBrown -> "brown"
-        SCLIDCGray -> "gray"
-        SCLIDCGreen -> "green"
-        SCLIDCPink -> "pink"
-        SCLIDCPurple -> "purple"
-        SCLIDCTeal -> "teal"
-        SCLIDCWhite -> "white"
-        SCLIDCYellow -> "yellow"
-
-instance FromJSON SearchCseListImgDominantColor where
-    parseJSON = parseJSONText "SearchCseListImgDominantColor"
-
-instance ToJSON SearchCseListImgDominantColor where
+instance ToJSON SiteSearchFilter where
     toJSON = toJSONText
 
 -- | Specifies the search type: image.
-data SearchCseListSearchType
-    = Image
+data SearchType
+    = STImage
       -- ^ @image@
       -- custom image search
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable SearchCseListSearchType
+instance Hashable SearchType
 
-instance FromText SearchCseListSearchType where
+instance FromText SearchType where
     fromText = \case
-        "image" -> Just Image
+        "image" -> Just STImage
         _ -> Nothing
 
-instance ToText SearchCseListSearchType where
+instance ToText SearchType where
     toText = \case
-        Image -> "image"
+        STImage -> "image"
 
-instance FromJSON SearchCseListSearchType where
-    parseJSON = parseJSONText "SearchCseListSearchType"
+instance FromJSON SearchType where
+    parseJSON = parseJSONText "SearchType"
 
-instance ToJSON SearchCseListSearchType where
+instance ToJSON SearchType where
     toJSON = toJSONText
 
 -- | The language restriction for the search results
-data SearchCseListLr
+data Lr
     = LangAr
       -- ^ @lang_ar@
       -- Arabic
@@ -330,9 +250,9 @@ data SearchCseListLr
       -- Chinese (Traditional)
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable SearchCseListLr
+instance Hashable Lr
 
-instance FromText SearchCseListLr where
+instance FromText Lr where
     fromText = \case
         "lang_ar" -> Just LangAr
         "lang_bg" -> Just LangBg
@@ -371,7 +291,7 @@ instance FromText SearchCseListLr where
         "lang_zh-TW" -> Just LangZhTw
         _ -> Nothing
 
-instance ToText SearchCseListLr where
+instance ToText Lr where
     toText = \case
         LangAr -> "lang_ar"
         LangBg -> "lang_bg"
@@ -409,15 +329,124 @@ instance ToText SearchCseListLr where
         LangZhCn -> "lang_zh-CN"
         LangZhTw -> "lang_zh-TW"
 
-instance FromJSON SearchCseListLr where
-    parseJSON = parseJSONText "SearchCseListLr"
+instance FromJSON Lr where
+    parseJSON = parseJSONText "Lr"
 
-instance ToJSON SearchCseListLr where
+instance ToJSON Lr where
+    toJSON = toJSONText
+
+-- | Controls turning on or off the duplicate content filter.
+data Filter
+    = F0
+      -- ^ @0@
+      -- Turns off duplicate content filter.
+    | F1
+      -- ^ @1@
+      -- Turns on duplicate content filter.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Filter
+
+instance FromText Filter where
+    fromText = \case
+        "0" -> Just F0
+        "1" -> Just F1
+        _ -> Nothing
+
+instance ToText Filter where
+    toText = \case
+        F0 -> "0"
+        F1 -> "1"
+
+instance FromJSON Filter where
+    parseJSON = parseJSONText "Filter"
+
+instance ToJSON Filter where
+    toJSON = toJSONText
+
+-- | Returns images of a type, which can be one of: clipart, face, lineart,
+-- news, and photo.
+data ImgType
+    = CliPart
+      -- ^ @clipart@
+      -- clipart
+    | Face
+      -- ^ @face@
+      -- face
+    | Lineart
+      -- ^ @lineart@
+      -- lineart
+    | News
+      -- ^ @news@
+      -- news
+    | Photo
+      -- ^ @photo@
+      -- photo
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ImgType
+
+instance FromText ImgType where
+    fromText = \case
+        "clipart" -> Just CliPart
+        "face" -> Just Face
+        "lineart" -> Just Lineart
+        "news" -> Just News
+        "photo" -> Just Photo
+        _ -> Nothing
+
+instance ToText ImgType where
+    toText = \case
+        CliPart -> "clipart"
+        Face -> "face"
+        Lineart -> "lineart"
+        News -> "news"
+        Photo -> "photo"
+
+instance FromJSON ImgType where
+    parseJSON = parseJSONText "ImgType"
+
+instance ToJSON ImgType where
+    toJSON = toJSONText
+
+-- | Returns black and white, grayscale, or color images: mono, gray, and
+-- color.
+data ImgColorType
+    = ICTColor
+      -- ^ @color@
+      -- color
+    | ICTGray
+      -- ^ @gray@
+      -- gray
+    | ICTMono
+      -- ^ @mono@
+      -- mono
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ImgColorType
+
+instance FromText ImgColorType where
+    fromText = \case
+        "color" -> Just ICTColor
+        "gray" -> Just ICTGray
+        "mono" -> Just ICTMono
+        _ -> Nothing
+
+instance ToText ImgColorType where
+    toText = \case
+        ICTColor -> "color"
+        ICTGray -> "gray"
+        ICTMono -> "mono"
+
+instance FromJSON ImgColorType where
+    parseJSON = parseJSONText "ImgColorType"
+
+instance ToJSON ImgColorType where
     toJSON = toJSONText
 
 -- | Returns images of a specified size, where size can be one of: icon,
 -- small, medium, large, xlarge, xxlarge, and huge.
-data SearchCseListImgSize
+data ImgSize
     = Huge
       -- ^ @huge@
       -- huge
@@ -441,9 +470,9 @@ data SearchCseListImgSize
       -- xxlarge
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable SearchCseListImgSize
+instance Hashable ImgSize
 
-instance FromText SearchCseListImgSize where
+instance FromText ImgSize where
     fromText = \case
         "huge" -> Just Huge
         "icon" -> Just Icon
@@ -454,7 +483,7 @@ instance FromText SearchCseListImgSize where
         "xxlarge" -> Just Xxlarge
         _ -> Nothing
 
-instance ToText SearchCseListImgSize where
+instance ToText ImgSize where
     toText = \case
         Huge -> "huge"
         Icon -> "icon"
@@ -464,71 +493,42 @@ instance ToText SearchCseListImgSize where
         Xlarge -> "xlarge"
         Xxlarge -> "xxlarge"
 
-instance FromJSON SearchCseListImgSize where
-    parseJSON = parseJSONText "SearchCseListImgSize"
+instance FromJSON ImgSize where
+    parseJSON = parseJSONText "ImgSize"
 
-instance ToJSON SearchCseListImgSize where
+instance ToJSON ImgSize where
     toJSON = toJSONText
 
 -- | Search safety level
-data SearchCseListSafe
-    = SCLSHigh
+data Safe
+    = SHigh
       -- ^ @high@
       -- Enables highest level of safe search filtering.
-    | SCLSMedium
+    | SMedium
       -- ^ @medium@
       -- Enables moderate safe search filtering.
-    | SCLSOff
+    | SOff
       -- ^ @off@
       -- Disables safe search filtering.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable SearchCseListSafe
+instance Hashable Safe
 
-instance FromText SearchCseListSafe where
+instance FromText Safe where
     fromText = \case
-        "high" -> Just SCLSHigh
-        "medium" -> Just SCLSMedium
-        "off" -> Just SCLSOff
+        "high" -> Just SHigh
+        "medium" -> Just SMedium
+        "off" -> Just SOff
         _ -> Nothing
 
-instance ToText SearchCseListSafe where
+instance ToText Safe where
     toText = \case
-        SCLSHigh -> "high"
-        SCLSMedium -> "medium"
-        SCLSOff -> "off"
+        SHigh -> "high"
+        SMedium -> "medium"
+        SOff -> "off"
 
-instance FromJSON SearchCseListSafe where
-    parseJSON = parseJSONText "SearchCseListSafe"
+instance FromJSON Safe where
+    parseJSON = parseJSONText "Safe"
 
-instance ToJSON SearchCseListSafe where
-    toJSON = toJSONText
-
--- | Controls turning on or off the duplicate content filter.
-data SearchCseListFilter
-    = SCLF0
-      -- ^ @0@
-      -- Turns off duplicate content filter.
-    | SCLF1
-      -- ^ @1@
-      -- Turns on duplicate content filter.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable SearchCseListFilter
-
-instance FromText SearchCseListFilter where
-    fromText = \case
-        "0" -> Just SCLF0
-        "1" -> Just SCLF1
-        _ -> Nothing
-
-instance ToText SearchCseListFilter where
-    toText = \case
-        SCLF0 -> "0"
-        SCLF1 -> "1"
-
-instance FromJSON SearchCseListFilter where
-    parseJSON = parseJSONText "SearchCseListFilter"
-
-instance ToJSON SearchCseListFilter where
+instance ToJSON Safe where
     toJSON = toJSONText

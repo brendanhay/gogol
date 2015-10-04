@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -38,10 +39,10 @@ module Network.Google.Resource.Coordinate.Jobs.Insert
     , jiCustomerPhoneNumber
     , jiCustomerName
     , jiAddress
+    , jiPayload
     , jiAssignee
     , jiLat
     , jiKey
-    , jiJob
     , jiLng
     , jiTitle
     , jiOAuthToken
@@ -58,15 +59,15 @@ type JobsInsertResource =
      "teams" :>
        Capture "teamId" Text :>
          "jobs" :>
-           QueryParam "assignee" Text :>
-             QueryParams "customField" Text :>
-               QueryParam "customerName" Text :>
-                 QueryParam "customerPhoneNumber" Text :>
+           QueryParam "address" Text :>
+             QueryParam "lat" Double :>
+               QueryParam "lng" Double :>
+                 QueryParam "title" Text :>
                    QueryParam "note" Text :>
-                     QueryParam "address" Text :>
-                       QueryParam "lat" Double :>
-                         QueryParam "lng" Double :>
-                           QueryParam "title" Text :>
+                     QueryParam "customerPhoneNumber" Text :>
+                       QueryParam "customerName" Text :>
+                         QueryParam "assignee" Text :>
+                           QueryParams "customField" Text :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
@@ -89,16 +90,16 @@ data JobsInsert' = JobsInsert'
     , _jiCustomerPhoneNumber :: !(Maybe Text)
     , _jiCustomerName        :: !(Maybe Text)
     , _jiAddress             :: !Text
+    , _jiPayload             :: !Job
     , _jiAssignee            :: !(Maybe Text)
     , _jiLat                 :: !Double
     , _jiKey                 :: !(Maybe Key)
-    , _jiJob                 :: !Job
     , _jiLng                 :: !Double
     , _jiTitle               :: !Text
     , _jiOAuthToken          :: !(Maybe OAuthToken)
     , _jiFields              :: !(Maybe Text)
-    , _jiCustomField         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _jiCustomField         :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsInsert'' with the minimum fields required to make a request.
 --
@@ -120,13 +121,13 @@ data JobsInsert' = JobsInsert'
 --
 -- * 'jiAddress'
 --
+-- * 'jiPayload'
+--
 -- * 'jiAssignee'
 --
 -- * 'jiLat'
 --
 -- * 'jiKey'
---
--- * 'jiJob'
 --
 -- * 'jiLng'
 --
@@ -140,12 +141,12 @@ data JobsInsert' = JobsInsert'
 jobsInsert'
     :: Text -- ^ 'teamId'
     -> Text -- ^ 'address'
+    -> Job -- ^ 'payload'
     -> Double -- ^ 'lat'
-    -> Job -- ^ 'Job'
     -> Double -- ^ 'lng'
     -> Text -- ^ 'title'
     -> JobsInsert'
-jobsInsert' pJiTeamId_ pJiAddress_ pJiLat_ pJiJob_ pJiLng_ pJiTitle_ =
+jobsInsert' pJiTeamId_ pJiAddress_ pJiPayload_ pJiLat_ pJiLng_ pJiTitle_ =
     JobsInsert'
     { _jiQuotaUser = Nothing
     , _jiPrettyPrint = True
@@ -155,10 +156,10 @@ jobsInsert' pJiTeamId_ pJiAddress_ pJiLat_ pJiJob_ pJiLng_ pJiTitle_ =
     , _jiCustomerPhoneNumber = Nothing
     , _jiCustomerName = Nothing
     , _jiAddress = pJiAddress_
+    , _jiPayload = pJiPayload_
     , _jiAssignee = Nothing
     , _jiLat = pJiLat_
     , _jiKey = Nothing
-    , _jiJob = pJiJob_
     , _jiLng = pJiLng_
     , _jiTitle = pJiTitle_
     , _jiOAuthToken = Nothing
@@ -209,6 +210,11 @@ jiAddress :: Lens' JobsInsert' Text
 jiAddress
   = lens _jiAddress (\ s a -> s{_jiAddress = a})
 
+-- | Multipart request metadata.
+jiPayload :: Lens' JobsInsert' Job
+jiPayload
+  = lens _jiPayload (\ s a -> s{_jiPayload = a})
+
 -- | Assignee email address, or empty string to unassign.
 jiAssignee :: Lens' JobsInsert' (Maybe Text)
 jiAssignee
@@ -223,10 +229,6 @@ jiLat = lens _jiLat (\ s a -> s{_jiLat = a})
 -- token.
 jiKey :: Lens' JobsInsert' (Maybe Key)
 jiKey = lens _jiKey (\ s a -> s{_jiKey = a})
-
--- | Multipart request metadata.
-jiJob :: Lens' JobsInsert' Job
-jiJob = lens _jiJob (\ s a -> s{_jiJob = a})
 
 -- | The longitude coordinate of this job\'s location.
 jiLng :: Lens' JobsInsert' Double
@@ -251,10 +253,12 @@ jiFields = lens _jiFields (\ s a -> s{_jiFields = a})
 -- customField=12%3DAlice. Repeat the parameter for each custom field. Note
 -- that \'=\' cannot appear in the parameter value. Specifying an invalid,
 -- or inactive enum field will result in an error 500.
-jiCustomField :: Lens' JobsInsert' (Maybe Text)
+jiCustomField :: Lens' JobsInsert' [Text]
 jiCustomField
   = lens _jiCustomField
       (\ s a -> s{_jiCustomField = a})
+      . _Default
+      . _Coerce
 
 instance GoogleAuth JobsInsert' where
         authKey = jiKey . _Just
@@ -264,14 +268,14 @@ instance GoogleRequest JobsInsert' where
         type Rs JobsInsert' = Job
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u JobsInsert'{..}
-          = go _jiAssignee _jiCustomField _jiCustomerName
-              _jiCustomerPhoneNumber
-              _jiNote
-              _jiTeamId
-              (Just _jiAddress)
-              (Just _jiLat)
+          = go _jiTeamId (Just _jiAddress) (Just _jiLat)
               (Just _jiLng)
               (Just _jiTitle)
+              _jiNote
+              _jiCustomerPhoneNumber
+              _jiCustomerName
+              _jiAssignee
+              (_jiCustomField ^. _Default)
               _jiQuotaUser
               (Just _jiPrettyPrint)
               _jiUserIP
@@ -279,7 +283,7 @@ instance GoogleRequest JobsInsert' where
               _jiKey
               _jiOAuthToken
               (Just AltJSON)
-              _jiJob
+              _jiPayload
           where go
                   = clientWithRoute (Proxy :: Proxy JobsInsertResource)
                       r

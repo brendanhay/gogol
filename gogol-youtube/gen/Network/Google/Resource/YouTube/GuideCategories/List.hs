@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,10 +51,10 @@ import           Network.Google.YouTube.Types
 -- 'GuideCategoriesList'' request conforms to.
 type GuideCategoriesListResource =
      "guideCategories" :>
-       QueryParam "hl" Text :>
-         QueryParam "id" Text :>
-           QueryParam "regionCode" Text :>
-             QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "regionCode" Text :>
+           QueryParam "hl" Text :>
+             QueryParam "id" Text :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -78,7 +79,7 @@ data GuideCategoriesList' = GuideCategoriesList'
     , _gclId          :: !(Maybe Text)
     , _gclOAuthToken  :: !(Maybe OAuthToken)
     , _gclFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GuideCategoriesList'' with the minimum fields required to make a request.
 --
@@ -190,8 +191,8 @@ instance GoogleRequest GuideCategoriesList' where
              GuideCategoryListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u GuideCategoriesList'{..}
-          = go (Just _gclHl) _gclId _gclRegionCode
-              (Just _gclPart)
+          = go (Just _gclPart) _gclRegionCode (Just _gclHl)
+              _gclId
               _gclQuotaUser
               (Just _gclPrettyPrint)
               _gclUserIP

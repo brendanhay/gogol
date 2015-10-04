@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,12 +56,12 @@ type NamespacesListResource =
      "v1beta1" :>
        "namespaces" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -87,7 +88,7 @@ data NamespacesList' = NamespacesList'
     , _nlOAuthToken     :: !(Maybe OAuthToken)
     , _nlFields         :: !(Maybe Text)
     , _nlCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NamespacesList'' with the minimum fields required to make a request.
 --
@@ -206,11 +207,11 @@ instance GoogleRequest NamespacesList' where
         type Rs NamespacesList' = ListNamespacesResponse
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u NamespacesList'{..}
-          = go _nlXgafv _nlAccessToken _nlBearerToken
-              _nlCallback
-              (Just _nlPp)
+          = go _nlXgafv _nlUploadProtocol (Just _nlPp)
+              _nlAccessToken
               _nlUploadType
-              _nlUploadProtocol
+              _nlBearerToken
+              _nlCallback
               _nlQuotaUser
               (Just _nlPrettyPrint)
               _nlFields

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.Datastore.Datasets.Commit
     , dcQuotaUser
     , dcPrettyPrint
     , dcUserIP
+    , dcPayload
     , dcKey
     , dcDatasetId
-    , dcCommitRequest
     , dcOAuthToken
     , dcFields
     ) where
@@ -64,15 +65,15 @@ type DatasetsCommitResource =
 --
 -- /See:/ 'datasetsCommit'' smart constructor.
 data DatasetsCommit' = DatasetsCommit'
-    { _dcQuotaUser     :: !(Maybe Text)
-    , _dcPrettyPrint   :: !Bool
-    , _dcUserIP        :: !(Maybe Text)
-    , _dcKey           :: !(Maybe Key)
-    , _dcDatasetId     :: !Text
-    , _dcCommitRequest :: !CommitRequest
-    , _dcOAuthToken    :: !(Maybe OAuthToken)
-    , _dcFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _dcQuotaUser   :: !(Maybe Text)
+    , _dcPrettyPrint :: !Bool
+    , _dcUserIP      :: !(Maybe Text)
+    , _dcPayload     :: !CommitRequest
+    , _dcKey         :: !(Maybe Key)
+    , _dcDatasetId   :: !Text
+    , _dcOAuthToken  :: !(Maybe OAuthToken)
+    , _dcFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsCommit'' with the minimum fields required to make a request.
 --
@@ -84,27 +85,27 @@ data DatasetsCommit' = DatasetsCommit'
 --
 -- * 'dcUserIP'
 --
+-- * 'dcPayload'
+--
 -- * 'dcKey'
 --
 -- * 'dcDatasetId'
---
--- * 'dcCommitRequest'
 --
 -- * 'dcOAuthToken'
 --
 -- * 'dcFields'
 datasetsCommit'
-    :: Text -- ^ 'datasetId'
-    -> CommitRequest -- ^ 'CommitRequest'
+    :: CommitRequest -- ^ 'payload'
+    -> Text -- ^ 'datasetId'
     -> DatasetsCommit'
-datasetsCommit' pDcDatasetId_ pDcCommitRequest_ =
+datasetsCommit' pDcPayload_ pDcDatasetId_ =
     DatasetsCommit'
     { _dcQuotaUser = Nothing
     , _dcPrettyPrint = True
     , _dcUserIP = Nothing
+    , _dcPayload = pDcPayload_
     , _dcKey = Nothing
     , _dcDatasetId = pDcDatasetId_
-    , _dcCommitRequest = pDcCommitRequest_
     , _dcOAuthToken = Nothing
     , _dcFields = Nothing
     }
@@ -127,6 +128,11 @@ dcPrettyPrint
 dcUserIP :: Lens' DatasetsCommit' (Maybe Text)
 dcUserIP = lens _dcUserIP (\ s a -> s{_dcUserIP = a})
 
+-- | Multipart request metadata.
+dcPayload :: Lens' DatasetsCommit' CommitRequest
+dcPayload
+  = lens _dcPayload (\ s a -> s{_dcPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -137,12 +143,6 @@ dcKey = lens _dcKey (\ s a -> s{_dcKey = a})
 dcDatasetId :: Lens' DatasetsCommit' Text
 dcDatasetId
   = lens _dcDatasetId (\ s a -> s{_dcDatasetId = a})
-
--- | Multipart request metadata.
-dcCommitRequest :: Lens' DatasetsCommit' CommitRequest
-dcCommitRequest
-  = lens _dcCommitRequest
-      (\ s a -> s{_dcCommitRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 dcOAuthToken :: Lens' DatasetsCommit' (Maybe OAuthToken)
@@ -167,7 +167,7 @@ instance GoogleRequest DatasetsCommit' where
               _dcKey
               _dcOAuthToken
               (Just AltPROTO)
-              _dcCommitRequest
+              _dcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsCommitResource)

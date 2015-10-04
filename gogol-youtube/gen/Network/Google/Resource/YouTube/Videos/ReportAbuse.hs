@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.YouTube.Videos.ReportAbuse
     , vraQuotaUser
     , vraPrettyPrint
     , vraUserIP
+    , vraPayload
     , vraOnBehalfOfContentOwner
     , vraKey
-    , vraVideoAbuseReport
     , vraOAuthToken
     , vraFields
     ) where
@@ -65,12 +66,12 @@ data VideosReportAbuse' = VideosReportAbuse'
     { _vraQuotaUser              :: !(Maybe Text)
     , _vraPrettyPrint            :: !Bool
     , _vraUserIP                 :: !(Maybe Text)
+    , _vraPayload                :: !VideoAbuseReport
     , _vraOnBehalfOfContentOwner :: !(Maybe Text)
     , _vraKey                    :: !(Maybe Key)
-    , _vraVideoAbuseReport       :: !VideoAbuseReport
     , _vraOAuthToken             :: !(Maybe OAuthToken)
     , _vraFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosReportAbuse'' with the minimum fields required to make a request.
 --
@@ -82,26 +83,26 @@ data VideosReportAbuse' = VideosReportAbuse'
 --
 -- * 'vraUserIP'
 --
+-- * 'vraPayload'
+--
 -- * 'vraOnBehalfOfContentOwner'
 --
 -- * 'vraKey'
---
--- * 'vraVideoAbuseReport'
 --
 -- * 'vraOAuthToken'
 --
 -- * 'vraFields'
 videosReportAbuse'
-    :: VideoAbuseReport -- ^ 'VideoAbuseReport'
+    :: VideoAbuseReport -- ^ 'payload'
     -> VideosReportAbuse'
-videosReportAbuse' pVraVideoAbuseReport_ =
+videosReportAbuse' pVraPayload_ =
     VideosReportAbuse'
     { _vraQuotaUser = Nothing
     , _vraPrettyPrint = True
     , _vraUserIP = Nothing
+    , _vraPayload = pVraPayload_
     , _vraOnBehalfOfContentOwner = Nothing
     , _vraKey = Nothing
-    , _vraVideoAbuseReport = pVraVideoAbuseReport_
     , _vraOAuthToken = Nothing
     , _vraFields = Nothing
     }
@@ -125,6 +126,11 @@ vraUserIP :: Lens' VideosReportAbuse' (Maybe Text)
 vraUserIP
   = lens _vraUserIP (\ s a -> s{_vraUserIP = a})
 
+-- | Multipart request metadata.
+vraPayload :: Lens' VideosReportAbuse' VideoAbuseReport
+vraPayload
+  = lens _vraPayload (\ s a -> s{_vraPayload = a})
+
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
 -- request\'s authorization credentials identify a YouTube CMS user who is
@@ -145,12 +151,6 @@ vraOnBehalfOfContentOwner
 -- token.
 vraKey :: Lens' VideosReportAbuse' (Maybe Key)
 vraKey = lens _vraKey (\ s a -> s{_vraKey = a})
-
--- | Multipart request metadata.
-vraVideoAbuseReport :: Lens' VideosReportAbuse' VideoAbuseReport
-vraVideoAbuseReport
-  = lens _vraVideoAbuseReport
-      (\ s a -> s{_vraVideoAbuseReport = a})
 
 -- | OAuth 2.0 token for the current user.
 vraOAuthToken :: Lens' VideosReportAbuse' (Maybe OAuthToken)
@@ -178,7 +178,7 @@ instance GoogleRequest VideosReportAbuse' where
               _vraKey
               _vraOAuthToken
               (Just AltJSON)
-              _vraVideoAbuseReport
+              _vraPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VideosReportAbuseResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,7 +49,7 @@ import           Network.Google.Prelude
 type MapsGetResource =
      "maps" :>
        Capture "id" Text :>
-         QueryParam "version" MapsEngineMapsGetVersion :>
+         QueryParam "version" Version :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -65,11 +66,11 @@ data MapsGet' = MapsGet'
     , _mgPrettyPrint :: !Bool
     , _mgUserIP      :: !(Maybe Text)
     , _mgKey         :: !(Maybe Key)
-    , _mgVersion     :: !(Maybe MapsEngineMapsGetVersion)
+    , _mgVersion     :: !(Maybe Version)
     , _mgId          :: !Text
     , _mgOAuthToken  :: !(Maybe OAuthToken)
     , _mgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsGet'' with the minimum fields required to make a request.
 --
@@ -133,7 +134,7 @@ mgKey = lens _mgKey (\ s a -> s{_mgKey = a})
 -- should be returned. When version is set to published, the published
 -- version of the map will be returned. Please use the maps.getPublished
 -- endpoint instead.
-mgVersion :: Lens' MapsGet' (Maybe MapsEngineMapsGetVersion)
+mgVersion :: Lens' MapsGet' (Maybe Version)
 mgVersion
   = lens _mgVersion (\ s a -> s{_mgVersion = a})
 
@@ -158,7 +159,7 @@ instance GoogleRequest MapsGet' where
         type Rs MapsGet' = Map
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u MapsGet'{..}
-          = go _mgVersion _mgId _mgQuotaUser
+          = go _mgId _mgVersion _mgQuotaUser
               (Just _mgPrettyPrint)
               _mgUserIP
               _mgFields

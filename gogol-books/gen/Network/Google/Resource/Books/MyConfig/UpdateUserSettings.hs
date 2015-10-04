@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,10 +33,10 @@ module Network.Google.Resource.Books.MyConfig.UpdateUserSettings
     , MyConfigUpdateUserSettings'
 
     -- * Request Lenses
-    , mcuusUsersettings
     , mcuusQuotaUser
     , mcuusPrettyPrint
     , mcuusUserIP
+    , mcuusPayload
     , mcuusKey
     , mcuusOAuthToken
     , mcuusFields
@@ -65,20 +66,18 @@ type MyConfigUpdateUserSettingsResource =
 --
 -- /See:/ 'myConfigUpdateUserSettings'' smart constructor.
 data MyConfigUpdateUserSettings' = MyConfigUpdateUserSettings'
-    { _mcuusUsersettings :: !Usersettings
-    , _mcuusQuotaUser    :: !(Maybe Text)
-    , _mcuusPrettyPrint  :: !Bool
-    , _mcuusUserIP       :: !(Maybe Text)
-    , _mcuusKey          :: !(Maybe Key)
-    , _mcuusOAuthToken   :: !(Maybe OAuthToken)
-    , _mcuusFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mcuusQuotaUser   :: !(Maybe Text)
+    , _mcuusPrettyPrint :: !Bool
+    , _mcuusUserIP      :: !(Maybe Text)
+    , _mcuusPayload     :: !Usersettings
+    , _mcuusKey         :: !(Maybe Key)
+    , _mcuusOAuthToken  :: !(Maybe OAuthToken)
+    , _mcuusFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyConfigUpdateUserSettings'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'mcuusUsersettings'
 --
 -- * 'mcuusQuotaUser'
 --
@@ -86,30 +85,26 @@ data MyConfigUpdateUserSettings' = MyConfigUpdateUserSettings'
 --
 -- * 'mcuusUserIP'
 --
+-- * 'mcuusPayload'
+--
 -- * 'mcuusKey'
 --
 -- * 'mcuusOAuthToken'
 --
 -- * 'mcuusFields'
 myConfigUpdateUserSettings'
-    :: Usersettings -- ^ 'Usersettings'
+    :: Usersettings -- ^ 'payload'
     -> MyConfigUpdateUserSettings'
-myConfigUpdateUserSettings' pMcuusUsersettings_ =
+myConfigUpdateUserSettings' pMcuusPayload_ =
     MyConfigUpdateUserSettings'
-    { _mcuusUsersettings = pMcuusUsersettings_
-    , _mcuusQuotaUser = Nothing
+    { _mcuusQuotaUser = Nothing
     , _mcuusPrettyPrint = True
     , _mcuusUserIP = Nothing
+    , _mcuusPayload = pMcuusPayload_
     , _mcuusKey = Nothing
     , _mcuusOAuthToken = Nothing
     , _mcuusFields = Nothing
     }
-
--- | Multipart request metadata.
-mcuusUsersettings :: Lens' MyConfigUpdateUserSettings' Usersettings
-mcuusUsersettings
-  = lens _mcuusUsersettings
-      (\ s a -> s{_mcuusUsersettings = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -130,6 +125,11 @@ mcuusPrettyPrint
 mcuusUserIP :: Lens' MyConfigUpdateUserSettings' (Maybe Text)
 mcuusUserIP
   = lens _mcuusUserIP (\ s a -> s{_mcuusUserIP = a})
+
+-- | Multipart request metadata.
+mcuusPayload :: Lens' MyConfigUpdateUserSettings' Usersettings
+mcuusPayload
+  = lens _mcuusPayload (\ s a -> s{_mcuusPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -163,7 +163,7 @@ instance GoogleRequest MyConfigUpdateUserSettings'
               _mcuusKey
               _mcuusOAuthToken
               (Just AltJSON)
-              _mcuusUsersettings
+              _mcuusPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MyConfigUpdateUserSettingsResource)

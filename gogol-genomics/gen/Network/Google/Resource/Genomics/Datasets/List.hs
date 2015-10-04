@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,9 +49,9 @@ import           Network.Google.Prelude
 -- 'DatasetsList'' request conforms to.
 type DatasetsListResource =
      "datasets" :>
-       QueryParam "pageSize" Int32 :>
+       QueryParam "projectNumber" Int64 :>
          QueryParam "pageToken" Text :>
-           QueryParam "projectNumber" Int64 :>
+           QueryParam "pageSize" Int32 :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -73,7 +74,7 @@ data DatasetsList' = DatasetsList'
     , _dlOAuthToken    :: !(Maybe OAuthToken)
     , _dlPageSize      :: !(Maybe Int32)
     , _dlFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsList'' with the minimum fields required to make a request.
 --
@@ -171,7 +172,7 @@ instance GoogleRequest DatasetsList' where
         type Rs DatasetsList' = ListDatasetsResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u DatasetsList'{..}
-          = go _dlPageSize _dlPageToken _dlProjectNumber
+          = go _dlProjectNumber _dlPageToken _dlPageSize
               _dlQuotaUser
               (Just _dlPrettyPrint)
               _dlUserIP

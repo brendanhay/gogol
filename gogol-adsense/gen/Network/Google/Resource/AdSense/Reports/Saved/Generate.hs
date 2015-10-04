@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,8 +53,8 @@ type ReportsSavedGenerateResource =
      "reports" :>
        Capture "savedReportId" Text :>
          QueryParam "locale" Text :>
-           QueryParam "maxResults" Int32 :>
-             QueryParam "startIndex" Int32 :>
+           QueryParam "startIndex" Int32 :>
+             QueryParam "maxResults" Int32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -78,7 +79,7 @@ data ReportsSavedGenerate' = ReportsSavedGenerate'
     , _rsgStartIndex    :: !(Maybe Int32)
     , _rsgMaxResults    :: !(Maybe Int32)
     , _rsgFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsSavedGenerate'' with the minimum fields required to make a request.
 --
@@ -189,8 +190,8 @@ instance GoogleRequest ReportsSavedGenerate' where
              AdsenseReportsGenerateResponse
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u ReportsSavedGenerate'{..}
-          = go _rsgLocale _rsgMaxResults _rsgStartIndex
-              _rsgSavedReportId
+          = go _rsgSavedReportId _rsgLocale _rsgStartIndex
+              _rsgMaxResults
               _rsgQuotaUser
               (Just _rsgPrettyPrint)
               _rsgUserIP

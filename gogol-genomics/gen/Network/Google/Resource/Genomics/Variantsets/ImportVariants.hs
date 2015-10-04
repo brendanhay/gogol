@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -42,8 +43,8 @@ module Network.Google.Resource.Genomics.Variantsets.ImportVariants
     , vivPrettyPrint
     , vivVariantSetId
     , vivUserIP
+    , vivPayload
     , vivKey
-    , vivImportVariantsRequest
     , vivOAuthToken
     , vivFields
     ) where
@@ -79,15 +80,15 @@ type VariantsetsImportVariantsResource =
 --
 -- /See:/ 'variantsetsImportVariants'' smart constructor.
 data VariantsetsImportVariants' = VariantsetsImportVariants'
-    { _vivQuotaUser             :: !(Maybe Text)
-    , _vivPrettyPrint           :: !Bool
-    , _vivVariantSetId          :: !Text
-    , _vivUserIP                :: !(Maybe Text)
-    , _vivKey                   :: !(Maybe Key)
-    , _vivImportVariantsRequest :: !ImportVariantsRequest
-    , _vivOAuthToken            :: !(Maybe OAuthToken)
-    , _vivFields                :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _vivQuotaUser    :: !(Maybe Text)
+    , _vivPrettyPrint  :: !Bool
+    , _vivVariantSetId :: !Text
+    , _vivUserIP       :: !(Maybe Text)
+    , _vivPayload      :: !ImportVariantsRequest
+    , _vivKey          :: !(Maybe Key)
+    , _vivOAuthToken   :: !(Maybe OAuthToken)
+    , _vivFields       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsImportVariants'' with the minimum fields required to make a request.
 --
@@ -101,25 +102,25 @@ data VariantsetsImportVariants' = VariantsetsImportVariants'
 --
 -- * 'vivUserIP'
 --
--- * 'vivKey'
+-- * 'vivPayload'
 --
--- * 'vivImportVariantsRequest'
+-- * 'vivKey'
 --
 -- * 'vivOAuthToken'
 --
 -- * 'vivFields'
 variantsetsImportVariants'
     :: Text -- ^ 'variantSetId'
-    -> ImportVariantsRequest -- ^ 'ImportVariantsRequest'
+    -> ImportVariantsRequest -- ^ 'payload'
     -> VariantsetsImportVariants'
-variantsetsImportVariants' pVivVariantSetId_ pVivImportVariantsRequest_ =
+variantsetsImportVariants' pVivVariantSetId_ pVivPayload_ =
     VariantsetsImportVariants'
     { _vivQuotaUser = Nothing
     , _vivPrettyPrint = True
     , _vivVariantSetId = pVivVariantSetId_
     , _vivUserIP = Nothing
+    , _vivPayload = pVivPayload_
     , _vivKey = Nothing
-    , _vivImportVariantsRequest = pVivImportVariantsRequest_
     , _vivOAuthToken = Nothing
     , _vivFields = Nothing
     }
@@ -149,17 +150,16 @@ vivUserIP :: Lens' VariantsetsImportVariants' (Maybe Text)
 vivUserIP
   = lens _vivUserIP (\ s a -> s{_vivUserIP = a})
 
+-- | Multipart request metadata.
+vivPayload :: Lens' VariantsetsImportVariants' ImportVariantsRequest
+vivPayload
+  = lens _vivPayload (\ s a -> s{_vivPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 vivKey :: Lens' VariantsetsImportVariants' (Maybe Key)
 vivKey = lens _vivKey (\ s a -> s{_vivKey = a})
-
--- | Multipart request metadata.
-vivImportVariantsRequest :: Lens' VariantsetsImportVariants' ImportVariantsRequest
-vivImportVariantsRequest
-  = lens _vivImportVariantsRequest
-      (\ s a -> s{_vivImportVariantsRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 vivOAuthToken :: Lens' VariantsetsImportVariants' (Maybe OAuthToken)
@@ -189,7 +189,7 @@ instance GoogleRequest VariantsetsImportVariants'
               _vivKey
               _vivOAuthToken
               (Just AltJSON)
-              _vivImportVariantsRequest
+              _vivPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsetsImportVariantsResource)

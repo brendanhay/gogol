@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Patch
     -- * Request Lenses
     , agpQuotaUser
     , agpPrettyPrint
-    , agpAdvertiserGroup
     , agpUserIP
     , agpProfileId
+    , agpPayload
     , agpKey
     , agpId
     , agpOAuthToken
@@ -67,16 +68,16 @@ type AdvertiserGroupsPatchResource =
 --
 -- /See:/ 'advertiserGroupsPatch'' smart constructor.
 data AdvertiserGroupsPatch' = AdvertiserGroupsPatch'
-    { _agpQuotaUser       :: !(Maybe Text)
-    , _agpPrettyPrint     :: !Bool
-    , _agpAdvertiserGroup :: !AdvertiserGroup
-    , _agpUserIP          :: !(Maybe Text)
-    , _agpProfileId       :: !Int64
-    , _agpKey             :: !(Maybe Key)
-    , _agpId              :: !Int64
-    , _agpOAuthToken      :: !(Maybe OAuthToken)
-    , _agpFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _agpQuotaUser   :: !(Maybe Text)
+    , _agpPrettyPrint :: !Bool
+    , _agpUserIP      :: !(Maybe Text)
+    , _agpProfileId   :: !Int64
+    , _agpPayload     :: !AdvertiserGroup
+    , _agpKey         :: !(Maybe Key)
+    , _agpId          :: !Int64
+    , _agpOAuthToken  :: !(Maybe OAuthToken)
+    , _agpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsPatch'' with the minimum fields required to make a request.
 --
@@ -86,11 +87,11 @@ data AdvertiserGroupsPatch' = AdvertiserGroupsPatch'
 --
 -- * 'agpPrettyPrint'
 --
--- * 'agpAdvertiserGroup'
---
 -- * 'agpUserIP'
 --
 -- * 'agpProfileId'
+--
+-- * 'agpPayload'
 --
 -- * 'agpKey'
 --
@@ -100,17 +101,17 @@ data AdvertiserGroupsPatch' = AdvertiserGroupsPatch'
 --
 -- * 'agpFields'
 advertiserGroupsPatch'
-    :: AdvertiserGroup -- ^ 'AdvertiserGroup'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> AdvertiserGroup -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> AdvertiserGroupsPatch'
-advertiserGroupsPatch' pAgpAdvertiserGroup_ pAgpProfileId_ pAgpId_ =
+advertiserGroupsPatch' pAgpProfileId_ pAgpPayload_ pAgpId_ =
     AdvertiserGroupsPatch'
     { _agpQuotaUser = Nothing
     , _agpPrettyPrint = True
-    , _agpAdvertiserGroup = pAgpAdvertiserGroup_
     , _agpUserIP = Nothing
     , _agpProfileId = pAgpProfileId_
+    , _agpPayload = pAgpPayload_
     , _agpKey = Nothing
     , _agpId = pAgpId_
     , _agpOAuthToken = Nothing
@@ -130,12 +131,6 @@ agpPrettyPrint
   = lens _agpPrettyPrint
       (\ s a -> s{_agpPrettyPrint = a})
 
--- | Multipart request metadata.
-agpAdvertiserGroup :: Lens' AdvertiserGroupsPatch' AdvertiserGroup
-agpAdvertiserGroup
-  = lens _agpAdvertiserGroup
-      (\ s a -> s{_agpAdvertiserGroup = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 agpUserIP :: Lens' AdvertiserGroupsPatch' (Maybe Text)
@@ -146,6 +141,11 @@ agpUserIP
 agpProfileId :: Lens' AdvertiserGroupsPatch' Int64
 agpProfileId
   = lens _agpProfileId (\ s a -> s{_agpProfileId = a})
+
+-- | Multipart request metadata.
+agpPayload :: Lens' AdvertiserGroupsPatch' AdvertiserGroup
+agpPayload
+  = lens _agpPayload (\ s a -> s{_agpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -183,7 +183,7 @@ instance GoogleRequest AdvertiserGroupsPatch' where
               _agpKey
               _agpOAuthToken
               (Just AltJSON)
-              _agpAdvertiserGroup
+              _agpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AdvertiserGroupsPatchResource)

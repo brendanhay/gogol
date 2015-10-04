@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.MapsEngine.Maps.Patch
     , mpQuotaUser
     , mpPrettyPrint
     , mpUserIP
-    , mpMap
+    , mpPayload
     , mpKey
     , mpId
     , mpOAuthToken
@@ -64,12 +65,12 @@ data MapsPatch' = MapsPatch'
     { _mpQuotaUser   :: !(Maybe Text)
     , _mpPrettyPrint :: !Bool
     , _mpUserIP      :: !(Maybe Text)
-    , _mpMap         :: !Map
+    , _mpPayload     :: !Map
     , _mpKey         :: !(Maybe Key)
     , _mpId          :: !Text
     , _mpOAuthToken  :: !(Maybe OAuthToken)
     , _mpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsPatch'' with the minimum fields required to make a request.
 --
@@ -81,7 +82,7 @@ data MapsPatch' = MapsPatch'
 --
 -- * 'mpUserIP'
 --
--- * 'mpMap'
+-- * 'mpPayload'
 --
 -- * 'mpKey'
 --
@@ -91,15 +92,15 @@ data MapsPatch' = MapsPatch'
 --
 -- * 'mpFields'
 mapsPatch'
-    :: Map -- ^ 'Map'
+    :: Map -- ^ 'payload'
     -> Text -- ^ 'id'
     -> MapsPatch'
-mapsPatch' pMpMap_ pMpId_ =
+mapsPatch' pMpPayload_ pMpId_ =
     MapsPatch'
     { _mpQuotaUser = Nothing
     , _mpPrettyPrint = True
     , _mpUserIP = Nothing
-    , _mpMap = pMpMap_
+    , _mpPayload = pMpPayload_
     , _mpKey = Nothing
     , _mpId = pMpId_
     , _mpOAuthToken = Nothing
@@ -125,8 +126,9 @@ mpUserIP :: Lens' MapsPatch' (Maybe Text)
 mpUserIP = lens _mpUserIP (\ s a -> s{_mpUserIP = a})
 
 -- | Multipart request metadata.
-mpMap :: Lens' MapsPatch' Map
-mpMap = lens _mpMap (\ s a -> s{_mpMap = a})
+mpPayload :: Lens' MapsPatch' Map
+mpPayload
+  = lens _mpPayload (\ s a -> s{_mpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -161,7 +163,7 @@ instance GoogleRequest MapsPatch' where
               _mpKey
               _mpOAuthToken
               (Just AltJSON)
-              _mpMap
+              _mpPayload
           where go
                   = clientWithRoute (Proxy :: Proxy MapsPatchResource)
                       r

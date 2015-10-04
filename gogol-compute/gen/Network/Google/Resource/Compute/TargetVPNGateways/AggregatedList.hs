@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,8 +53,8 @@ type TargetVPNGatewaysAggregatedListResource =
        "aggregated" :>
          "targetVpnGateways" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data TargetVPNGatewaysAggregatedList' = TargetVPNGatewaysAggregatedList'
     , _tvgalOAuthToken  :: !(Maybe OAuthToken)
     , _tvgalMaxResults  :: !Word32
     , _tvgalFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetVPNGatewaysAggregatedList'' with the minimum fields required to make a request.
 --
@@ -202,9 +203,8 @@ instance GoogleRequest
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
           TargetVPNGatewaysAggregatedList'{..}
-          = go _tvgalFilter (Just _tvgalMaxResults)
-              _tvgalPageToken
-              _tvgalProject
+          = go _tvgalProject _tvgalFilter _tvgalPageToken
+              (Just _tvgalMaxResults)
               _tvgalQuotaUser
               (Just _tvgalPrettyPrint)
               _tvgalUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Insert
     , lbiPart
     , lbiPrettyPrint
     , lbiUserIP
-    , lbiLiveBroadcast
+    , lbiPayload
     , lbiOnBehalfOfContentOwner
     , lbiKey
     , lbiOnBehalfOfContentOwnerChannel
@@ -49,9 +50,9 @@ import           Network.Google.YouTube.Types
 -- 'LiveBroadcastsInsert'' request conforms to.
 type LiveBroadcastsInsertResource =
      "liveBroadcasts" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "onBehalfOfContentOwnerChannel" Text :>
-           QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
+           QueryParam "onBehalfOfContentOwnerChannel" Text :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -70,13 +71,13 @@ data LiveBroadcastsInsert' = LiveBroadcastsInsert'
     , _lbiPart                          :: !Text
     , _lbiPrettyPrint                   :: !Bool
     , _lbiUserIP                        :: !(Maybe Text)
-    , _lbiLiveBroadcast                 :: !LiveBroadcast
+    , _lbiPayload                       :: !LiveBroadcast
     , _lbiOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbiKey                           :: !(Maybe Key)
     , _lbiOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbiOAuthToken                    :: !(Maybe OAuthToken)
     , _lbiFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsInsert'' with the minimum fields required to make a request.
 --
@@ -90,7 +91,7 @@ data LiveBroadcastsInsert' = LiveBroadcastsInsert'
 --
 -- * 'lbiUserIP'
 --
--- * 'lbiLiveBroadcast'
+-- * 'lbiPayload'
 --
 -- * 'lbiOnBehalfOfContentOwner'
 --
@@ -103,15 +104,15 @@ data LiveBroadcastsInsert' = LiveBroadcastsInsert'
 -- * 'lbiFields'
 liveBroadcastsInsert'
     :: Text -- ^ 'part'
-    -> LiveBroadcast -- ^ 'LiveBroadcast'
+    -> LiveBroadcast -- ^ 'payload'
     -> LiveBroadcastsInsert'
-liveBroadcastsInsert' pLbiPart_ pLbiLiveBroadcast_ =
+liveBroadcastsInsert' pLbiPart_ pLbiPayload_ =
     LiveBroadcastsInsert'
     { _lbiQuotaUser = Nothing
     , _lbiPart = pLbiPart_
     , _lbiPrettyPrint = True
     , _lbiUserIP = Nothing
-    , _lbiLiveBroadcast = pLbiLiveBroadcast_
+    , _lbiPayload = pLbiPayload_
     , _lbiOnBehalfOfContentOwner = Nothing
     , _lbiKey = Nothing
     , _lbiOnBehalfOfContentOwnerChannel = Nothing
@@ -147,10 +148,9 @@ lbiUserIP
   = lens _lbiUserIP (\ s a -> s{_lbiUserIP = a})
 
 -- | Multipart request metadata.
-lbiLiveBroadcast :: Lens' LiveBroadcastsInsert' LiveBroadcast
-lbiLiveBroadcast
-  = lens _lbiLiveBroadcast
-      (\ s a -> s{_lbiLiveBroadcast = a})
+lbiPayload :: Lens' LiveBroadcastsInsert' LiveBroadcast
+lbiPayload
+  = lens _lbiPayload (\ s a -> s{_lbiPayload = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -213,9 +213,8 @@ instance GoogleRequest LiveBroadcastsInsert' where
         type Rs LiveBroadcastsInsert' = LiveBroadcast
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveBroadcastsInsert'{..}
-          = go _lbiOnBehalfOfContentOwner
+          = go (Just _lbiPart) _lbiOnBehalfOfContentOwner
               _lbiOnBehalfOfContentOwnerChannel
-              (Just _lbiPart)
               _lbiQuotaUser
               (Just _lbiPrettyPrint)
               _lbiUserIP
@@ -223,7 +222,7 @@ instance GoogleRequest LiveBroadcastsInsert' where
               _lbiKey
               _lbiOAuthToken
               (Just AltJSON)
-              _lbiLiveBroadcast
+              _lbiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LiveBroadcastsInsertResource)

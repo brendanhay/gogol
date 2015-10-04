@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Patc
     , lcpQuotaUser
     , lcpPrettyPrint
     , lcpUserIP
-    , lcpLeaderboardConfiguration
+    , lcpPayload
     , lcpLeaderboardId
     , lcpKey
     , lcpOAuthToken
@@ -64,15 +65,15 @@ type LeaderboardConfigurationsPatchResource =
 --
 -- /See:/ 'leaderboardConfigurationsPatch'' smart constructor.
 data LeaderboardConfigurationsPatch' = LeaderboardConfigurationsPatch'
-    { _lcpQuotaUser                :: !(Maybe Text)
-    , _lcpPrettyPrint              :: !Bool
-    , _lcpUserIP                   :: !(Maybe Text)
-    , _lcpLeaderboardConfiguration :: !LeaderboardConfiguration
-    , _lcpLeaderboardId            :: !Text
-    , _lcpKey                      :: !(Maybe Key)
-    , _lcpOAuthToken               :: !(Maybe OAuthToken)
-    , _lcpFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _lcpQuotaUser     :: !(Maybe Text)
+    , _lcpPrettyPrint   :: !Bool
+    , _lcpUserIP        :: !(Maybe Text)
+    , _lcpPayload       :: !LeaderboardConfiguration
+    , _lcpLeaderboardId :: !Text
+    , _lcpKey           :: !(Maybe Key)
+    , _lcpOAuthToken    :: !(Maybe OAuthToken)
+    , _lcpFields        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationsPatch'' with the minimum fields required to make a request.
 --
@@ -84,7 +85,7 @@ data LeaderboardConfigurationsPatch' = LeaderboardConfigurationsPatch'
 --
 -- * 'lcpUserIP'
 --
--- * 'lcpLeaderboardConfiguration'
+-- * 'lcpPayload'
 --
 -- * 'lcpLeaderboardId'
 --
@@ -94,15 +95,15 @@ data LeaderboardConfigurationsPatch' = LeaderboardConfigurationsPatch'
 --
 -- * 'lcpFields'
 leaderboardConfigurationsPatch'
-    :: LeaderboardConfiguration -- ^ 'LeaderboardConfiguration'
+    :: LeaderboardConfiguration -- ^ 'payload'
     -> Text -- ^ 'leaderboardId'
     -> LeaderboardConfigurationsPatch'
-leaderboardConfigurationsPatch' pLcpLeaderboardConfiguration_ pLcpLeaderboardId_ =
+leaderboardConfigurationsPatch' pLcpPayload_ pLcpLeaderboardId_ =
     LeaderboardConfigurationsPatch'
     { _lcpQuotaUser = Nothing
     , _lcpPrettyPrint = True
     , _lcpUserIP = Nothing
-    , _lcpLeaderboardConfiguration = pLcpLeaderboardConfiguration_
+    , _lcpPayload = pLcpPayload_
     , _lcpLeaderboardId = pLcpLeaderboardId_
     , _lcpKey = Nothing
     , _lcpOAuthToken = Nothing
@@ -129,10 +130,9 @@ lcpUserIP
   = lens _lcpUserIP (\ s a -> s{_lcpUserIP = a})
 
 -- | Multipart request metadata.
-lcpLeaderboardConfiguration :: Lens' LeaderboardConfigurationsPatch' LeaderboardConfiguration
-lcpLeaderboardConfiguration
-  = lens _lcpLeaderboardConfiguration
-      (\ s a -> s{_lcpLeaderboardConfiguration = a})
+lcpPayload :: Lens' LeaderboardConfigurationsPatch' LeaderboardConfiguration
+lcpPayload
+  = lens _lcpPayload (\ s a -> s{_lcpPayload = a})
 
 -- | The ID of the leaderboard.
 lcpLeaderboardId :: Lens' LeaderboardConfigurationsPatch' Text
@@ -177,7 +177,7 @@ instance GoogleRequest
               _lcpKey
               _lcpOAuthToken
               (Just AltJSON)
-              _lcpLeaderboardConfiguration
+              _lcpPayload
           where go
                   = clientWithRoute
                       (Proxy ::

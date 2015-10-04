@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Update
     , fcuPrettyPrint
     , fcuUserIP
     , fcuProfileId
+    , fcuPayload
     , fcuKey
-    , fcuFloodlightConfiguration
     , fcuOAuthToken
     , fcuFields
     ) where
@@ -63,15 +64,15 @@ type FloodlightConfigurationsUpdateResource =
 --
 -- /See:/ 'floodlightConfigurationsUpdate'' smart constructor.
 data FloodlightConfigurationsUpdate' = FloodlightConfigurationsUpdate'
-    { _fcuQuotaUser               :: !(Maybe Text)
-    , _fcuPrettyPrint             :: !Bool
-    , _fcuUserIP                  :: !(Maybe Text)
-    , _fcuProfileId               :: !Int64
-    , _fcuKey                     :: !(Maybe Key)
-    , _fcuFloodlightConfiguration :: !FloodlightConfiguration
-    , _fcuOAuthToken              :: !(Maybe OAuthToken)
-    , _fcuFields                  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _fcuQuotaUser   :: !(Maybe Text)
+    , _fcuPrettyPrint :: !Bool
+    , _fcuUserIP      :: !(Maybe Text)
+    , _fcuProfileId   :: !Int64
+    , _fcuPayload     :: !FloodlightConfiguration
+    , _fcuKey         :: !(Maybe Key)
+    , _fcuOAuthToken  :: !(Maybe OAuthToken)
+    , _fcuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightConfigurationsUpdate'' with the minimum fields required to make a request.
 --
@@ -85,25 +86,25 @@ data FloodlightConfigurationsUpdate' = FloodlightConfigurationsUpdate'
 --
 -- * 'fcuProfileId'
 --
--- * 'fcuKey'
+-- * 'fcuPayload'
 --
--- * 'fcuFloodlightConfiguration'
+-- * 'fcuKey'
 --
 -- * 'fcuOAuthToken'
 --
 -- * 'fcuFields'
 floodlightConfigurationsUpdate'
     :: Int64 -- ^ 'profileId'
-    -> FloodlightConfiguration -- ^ 'FloodlightConfiguration'
+    -> FloodlightConfiguration -- ^ 'payload'
     -> FloodlightConfigurationsUpdate'
-floodlightConfigurationsUpdate' pFcuProfileId_ pFcuFloodlightConfiguration_ =
+floodlightConfigurationsUpdate' pFcuProfileId_ pFcuPayload_ =
     FloodlightConfigurationsUpdate'
     { _fcuQuotaUser = Nothing
     , _fcuPrettyPrint = True
     , _fcuUserIP = Nothing
     , _fcuProfileId = pFcuProfileId_
+    , _fcuPayload = pFcuPayload_
     , _fcuKey = Nothing
-    , _fcuFloodlightConfiguration = pFcuFloodlightConfiguration_
     , _fcuOAuthToken = Nothing
     , _fcuFields = Nothing
     }
@@ -132,17 +133,16 @@ fcuProfileId :: Lens' FloodlightConfigurationsUpdate' Int64
 fcuProfileId
   = lens _fcuProfileId (\ s a -> s{_fcuProfileId = a})
 
+-- | Multipart request metadata.
+fcuPayload :: Lens' FloodlightConfigurationsUpdate' FloodlightConfiguration
+fcuPayload
+  = lens _fcuPayload (\ s a -> s{_fcuPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 fcuKey :: Lens' FloodlightConfigurationsUpdate' (Maybe Key)
 fcuKey = lens _fcuKey (\ s a -> s{_fcuKey = a})
-
--- | Multipart request metadata.
-fcuFloodlightConfiguration :: Lens' FloodlightConfigurationsUpdate' FloodlightConfiguration
-fcuFloodlightConfiguration
-  = lens _fcuFloodlightConfiguration
-      (\ s a -> s{_fcuFloodlightConfiguration = a})
 
 -- | OAuth 2.0 token for the current user.
 fcuOAuthToken :: Lens' FloodlightConfigurationsUpdate' (Maybe OAuthToken)
@@ -174,7 +174,7 @@ instance GoogleRequest
               _fcuKey
               _fcuOAuthToken
               (Just AltJSON)
-              _fcuFloodlightConfiguration
+              _fcuPayload
           where go
                   = clientWithRoute
                       (Proxy ::

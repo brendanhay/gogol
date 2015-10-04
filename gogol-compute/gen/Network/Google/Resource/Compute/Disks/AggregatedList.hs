@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,8 +53,8 @@ type DisksAggregatedListResource =
        "aggregated" :>
          "disks" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data DisksAggregatedList' = DisksAggregatedList'
     , _dalOAuthToken  :: !(Maybe OAuthToken)
     , _dalMaxResults  :: !Word32
     , _dalFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksAggregatedList'' with the minimum fields required to make a request.
 --
@@ -196,8 +197,8 @@ instance GoogleRequest DisksAggregatedList' where
         type Rs DisksAggregatedList' = DiskAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u DisksAggregatedList'{..}
-          = go _dalFilter (Just _dalMaxResults) _dalPageToken
-              _dalProject
+          = go _dalProject _dalFilter _dalPageToken
+              (Just _dalMaxResults)
               _dalQuotaUser
               (Just _dalPrettyPrint)
               _dalUserIP

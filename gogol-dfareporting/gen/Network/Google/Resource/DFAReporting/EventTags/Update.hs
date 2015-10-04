@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.DFAReporting.EventTags.Update
     , etuPrettyPrint
     , etuUserIP
     , etuProfileId
+    , etuPayload
     , etuKey
     , etuOAuthToken
-    , etuEventTag
     , etuFields
     ) where
 
@@ -66,11 +67,11 @@ data EventTagsUpdate' = EventTagsUpdate'
     , _etuPrettyPrint :: !Bool
     , _etuUserIP      :: !(Maybe Text)
     , _etuProfileId   :: !Int64
+    , _etuPayload     :: !EventTag
     , _etuKey         :: !(Maybe Key)
     , _etuOAuthToken  :: !(Maybe OAuthToken)
-    , _etuEventTag    :: !EventTag
     , _etuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsUpdate'' with the minimum fields required to make a request.
 --
@@ -84,26 +85,26 @@ data EventTagsUpdate' = EventTagsUpdate'
 --
 -- * 'etuProfileId'
 --
+-- * 'etuPayload'
+--
 -- * 'etuKey'
 --
 -- * 'etuOAuthToken'
 --
--- * 'etuEventTag'
---
 -- * 'etuFields'
 eventTagsUpdate'
     :: Int64 -- ^ 'profileId'
-    -> EventTag -- ^ 'EventTag'
+    -> EventTag -- ^ 'payload'
     -> EventTagsUpdate'
-eventTagsUpdate' pEtuProfileId_ pEtuEventTag_ =
+eventTagsUpdate' pEtuProfileId_ pEtuPayload_ =
     EventTagsUpdate'
     { _etuQuotaUser = Nothing
     , _etuPrettyPrint = True
     , _etuUserIP = Nothing
     , _etuProfileId = pEtuProfileId_
+    , _etuPayload = pEtuPayload_
     , _etuKey = Nothing
     , _etuOAuthToken = Nothing
-    , _etuEventTag = pEtuEventTag_
     , _etuFields = Nothing
     }
 
@@ -131,6 +132,11 @@ etuProfileId :: Lens' EventTagsUpdate' Int64
 etuProfileId
   = lens _etuProfileId (\ s a -> s{_etuProfileId = a})
 
+-- | Multipart request metadata.
+etuPayload :: Lens' EventTagsUpdate' EventTag
+etuPayload
+  = lens _etuPayload (\ s a -> s{_etuPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -142,11 +148,6 @@ etuOAuthToken :: Lens' EventTagsUpdate' (Maybe OAuthToken)
 etuOAuthToken
   = lens _etuOAuthToken
       (\ s a -> s{_etuOAuthToken = a})
-
--- | Multipart request metadata.
-etuEventTag :: Lens' EventTagsUpdate' EventTag
-etuEventTag
-  = lens _etuEventTag (\ s a -> s{_etuEventTag = a})
 
 -- | Selector specifying which fields to include in a partial response.
 etuFields :: Lens' EventTagsUpdate' (Maybe Text)
@@ -168,7 +169,7 @@ instance GoogleRequest EventTagsUpdate' where
               _etuKey
               _etuOAuthToken
               (Just AltJSON)
-              _etuEventTag
+              _etuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventTagsUpdateResource)

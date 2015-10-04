@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.DFAReporting.DirectorySites.Insert
     -- * Request Lenses
     , dsiQuotaUser
     , dsiPrettyPrint
-    , dsiDirectorySite
     , dsiUserIP
     , dsiProfileId
+    , dsiPayload
     , dsiKey
     , dsiOAuthToken
     , dsiFields
@@ -63,15 +64,15 @@ type DirectorySitesInsertResource =
 --
 -- /See:/ 'directorySitesInsert'' smart constructor.
 data DirectorySitesInsert' = DirectorySitesInsert'
-    { _dsiQuotaUser     :: !(Maybe Text)
-    , _dsiPrettyPrint   :: !Bool
-    , _dsiDirectorySite :: !DirectorySite
-    , _dsiUserIP        :: !(Maybe Text)
-    , _dsiProfileId     :: !Int64
-    , _dsiKey           :: !(Maybe Key)
-    , _dsiOAuthToken    :: !(Maybe OAuthToken)
-    , _dsiFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _dsiQuotaUser   :: !(Maybe Text)
+    , _dsiPrettyPrint :: !Bool
+    , _dsiUserIP      :: !(Maybe Text)
+    , _dsiProfileId   :: !Int64
+    , _dsiPayload     :: !DirectorySite
+    , _dsiKey         :: !(Maybe Key)
+    , _dsiOAuthToken  :: !(Maybe OAuthToken)
+    , _dsiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySitesInsert'' with the minimum fields required to make a request.
 --
@@ -81,11 +82,11 @@ data DirectorySitesInsert' = DirectorySitesInsert'
 --
 -- * 'dsiPrettyPrint'
 --
--- * 'dsiDirectorySite'
---
 -- * 'dsiUserIP'
 --
 -- * 'dsiProfileId'
+--
+-- * 'dsiPayload'
 --
 -- * 'dsiKey'
 --
@@ -93,16 +94,16 @@ data DirectorySitesInsert' = DirectorySitesInsert'
 --
 -- * 'dsiFields'
 directorySitesInsert'
-    :: DirectorySite -- ^ 'DirectorySite'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> DirectorySite -- ^ 'payload'
     -> DirectorySitesInsert'
-directorySitesInsert' pDsiDirectorySite_ pDsiProfileId_ =
+directorySitesInsert' pDsiProfileId_ pDsiPayload_ =
     DirectorySitesInsert'
     { _dsiQuotaUser = Nothing
     , _dsiPrettyPrint = True
-    , _dsiDirectorySite = pDsiDirectorySite_
     , _dsiUserIP = Nothing
     , _dsiProfileId = pDsiProfileId_
+    , _dsiPayload = pDsiPayload_
     , _dsiKey = Nothing
     , _dsiOAuthToken = Nothing
     , _dsiFields = Nothing
@@ -121,12 +122,6 @@ dsiPrettyPrint
   = lens _dsiPrettyPrint
       (\ s a -> s{_dsiPrettyPrint = a})
 
--- | Multipart request metadata.
-dsiDirectorySite :: Lens' DirectorySitesInsert' DirectorySite
-dsiDirectorySite
-  = lens _dsiDirectorySite
-      (\ s a -> s{_dsiDirectorySite = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 dsiUserIP :: Lens' DirectorySitesInsert' (Maybe Text)
@@ -137,6 +132,11 @@ dsiUserIP
 dsiProfileId :: Lens' DirectorySitesInsert' Int64
 dsiProfileId
   = lens _dsiProfileId (\ s a -> s{_dsiProfileId = a})
+
+-- | Multipart request metadata.
+dsiPayload :: Lens' DirectorySitesInsert' DirectorySite
+dsiPayload
+  = lens _dsiPayload (\ s a -> s{_dsiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -170,7 +170,7 @@ instance GoogleRequest DirectorySitesInsert' where
               _dsiKey
               _dsiOAuthToken
               (Just AltJSON)
-              _dsiDirectorySite
+              _dsiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DirectorySitesInsertResource)

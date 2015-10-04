@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -72,7 +73,7 @@ data TaskqueuesGet' = TaskqueuesGet'
     , _tasGetStats    :: !(Maybe Bool)
     , _tasOAuthToken  :: !(Maybe OAuthToken)
     , _tasFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskqueuesGet'' with the minimum fields required to make a request.
 --
@@ -172,7 +173,7 @@ instance GoogleRequest TaskqueuesGet' where
         request
           = requestWithRoute defReq appEngineTaskQueueURL
         requestWithRoute r u TaskqueuesGet'{..}
-          = go _tasGetStats _tasProject _tasTaskqueue
+          = go _tasProject _tasTaskqueue _tasGetStats
               _tasQuotaUser
               (Just _tasPrettyPrint)
               _tasUserIP

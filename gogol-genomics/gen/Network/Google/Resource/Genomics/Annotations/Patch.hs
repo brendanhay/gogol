@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.Genomics.Annotations.Patch
 
     -- * Request Lenses
     , apQuotaUser
-    , apAnnotation
     , apPrettyPrint
     , apUserIP
+    , apPayload
     , apKey
     , apAnnotationId
     , apOAuthToken
@@ -69,14 +70,14 @@ type AnnotationsPatchResource =
 -- /See:/ 'annotationsPatch'' smart constructor.
 data AnnotationsPatch' = AnnotationsPatch'
     { _apQuotaUser    :: !(Maybe Text)
-    , _apAnnotation   :: !Annotation
     , _apPrettyPrint  :: !Bool
     , _apUserIP       :: !(Maybe Text)
+    , _apPayload      :: !Annotation
     , _apKey          :: !(Maybe Key)
     , _apAnnotationId :: !Text
     , _apOAuthToken   :: !(Maybe OAuthToken)
     , _apFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsPatch'' with the minimum fields required to make a request.
 --
@@ -84,11 +85,11 @@ data AnnotationsPatch' = AnnotationsPatch'
 --
 -- * 'apQuotaUser'
 --
--- * 'apAnnotation'
---
 -- * 'apPrettyPrint'
 --
 -- * 'apUserIP'
+--
+-- * 'apPayload'
 --
 -- * 'apKey'
 --
@@ -98,15 +99,15 @@ data AnnotationsPatch' = AnnotationsPatch'
 --
 -- * 'apFields'
 annotationsPatch'
-    :: Annotation -- ^ 'Annotation'
+    :: Annotation -- ^ 'payload'
     -> Text -- ^ 'annotationId'
     -> AnnotationsPatch'
-annotationsPatch' pApAnnotation_ pApAnnotationId_ =
+annotationsPatch' pApPayload_ pApAnnotationId_ =
     AnnotationsPatch'
     { _apQuotaUser = Nothing
-    , _apAnnotation = pApAnnotation_
     , _apPrettyPrint = True
     , _apUserIP = Nothing
+    , _apPayload = pApPayload_
     , _apKey = Nothing
     , _apAnnotationId = pApAnnotationId_
     , _apOAuthToken = Nothing
@@ -120,11 +121,6 @@ apQuotaUser :: Lens' AnnotationsPatch' (Maybe Text)
 apQuotaUser
   = lens _apQuotaUser (\ s a -> s{_apQuotaUser = a})
 
--- | Multipart request metadata.
-apAnnotation :: Lens' AnnotationsPatch' Annotation
-apAnnotation
-  = lens _apAnnotation (\ s a -> s{_apAnnotation = a})
-
 -- | Returns response with indentations and line breaks.
 apPrettyPrint :: Lens' AnnotationsPatch' Bool
 apPrettyPrint
@@ -135,6 +131,11 @@ apPrettyPrint
 -- want to enforce per-user limits.
 apUserIP :: Lens' AnnotationsPatch' (Maybe Text)
 apUserIP = lens _apUserIP (\ s a -> s{_apUserIP = a})
+
+-- | Multipart request metadata.
+apPayload :: Lens' AnnotationsPatch' Annotation
+apPayload
+  = lens _apPayload (\ s a -> s{_apPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -172,7 +173,7 @@ instance GoogleRequest AnnotationsPatch' where
               _apKey
               _apOAuthToken
               (Just AltJSON)
-              _apAnnotation
+              _apPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationsPatchResource)

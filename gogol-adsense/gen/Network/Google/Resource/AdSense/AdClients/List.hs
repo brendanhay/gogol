@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -47,8 +48,8 @@ import           Network.Google.Prelude
 -- 'AdClientsList'' request conforms to.
 type AdClientsListResource =
      "adclients" :>
-       QueryParam "maxResults" Int32 :>
-         QueryParam "pageToken" Text :>
+       QueryParam "pageToken" Text :>
+         QueryParam "maxResults" Int32 :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -69,7 +70,7 @@ data AdClientsList' = AdClientsList'
     , _aclOAuthToken  :: !(Maybe OAuthToken)
     , _aclMaxResults  :: !(Maybe Int32)
     , _aclFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdClientsList'' with the minimum fields required to make a request.
 --
@@ -162,7 +163,7 @@ instance GoogleRequest AdClientsList' where
         type Rs AdClientsList' = AdClients
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AdClientsList'{..}
-          = go _aclMaxResults _aclPageToken _aclQuotaUser
+          = go _aclPageToken _aclMaxResults _aclQuotaUser
               (Just _aclPrettyPrint)
               _aclUserIP
               _aclFields

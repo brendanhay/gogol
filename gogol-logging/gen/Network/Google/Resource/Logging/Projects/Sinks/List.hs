@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -56,12 +57,12 @@ type ProjectsSinksListResource =
          Capture "projectsId" Text :>
            "sinks" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "bearer_token" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "upload_protocol" Text :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "callback" Text :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "fields" Text :>
@@ -87,7 +88,7 @@ data ProjectsSinksList' = ProjectsSinksList'
     , _pslProjectsId     :: !Text
     , _pslFields         :: !(Maybe Text)
     , _pslCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSinksList'' with the minimum fields required to make a request.
 --
@@ -219,12 +220,12 @@ instance GoogleRequest ProjectsSinksList' where
         type Rs ProjectsSinksList' = ListSinksResponse
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u ProjectsSinksList'{..}
-          = go _pslXgafv _pslAccessToken _pslBearerToken
-              _pslCallback
+          = go _pslProjectsId _pslXgafv _pslUploadProtocol
               (Just _pslPp)
+              _pslAccessToken
               _pslUploadType
-              _pslUploadProtocol
-              _pslProjectsId
+              _pslBearerToken
+              _pslCallback
               _pslQuotaUser
               (Just _pslPrettyPrint)
               _pslFields

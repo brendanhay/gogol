@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -61,12 +62,12 @@ type ProjectsLogsSinksGetResource =
                "sinks" :>
                  Capture "sinksId" Text :>
                    QueryParam "$.xgafv" Text :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "upload_protocol" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "callback" Text :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "fields" Text :>
@@ -94,7 +95,7 @@ data ProjectsLogsSinksGet' = ProjectsLogsSinksGet'
     , _plsgSinksId        :: !Text
     , _plsgFields         :: !(Maybe Text)
     , _plsgCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogsSinksGet'' with the minimum fields required to make a request.
 --
@@ -246,14 +247,14 @@ instance GoogleRequest ProjectsLogsSinksGet' where
         type Rs ProjectsLogsSinksGet' = LogSink
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u ProjectsLogsSinksGet'{..}
-          = go _plsgXgafv _plsgAccessToken _plsgBearerToken
-              _plsgCallback
-              (Just _plsgPp)
-              _plsgUploadType
+          = go _plsgProjectsId _plsgLogsId _plsgSinksId
+              _plsgXgafv
               _plsgUploadProtocol
-              _plsgProjectsId
-              _plsgLogsId
-              _plsgSinksId
+              (Just _plsgPp)
+              _plsgAccessToken
+              _plsgUploadType
+              _plsgBearerToken
+              _plsgCallback
               _plsgQuotaUser
               (Just _plsgPrettyPrint)
               _plsgFields

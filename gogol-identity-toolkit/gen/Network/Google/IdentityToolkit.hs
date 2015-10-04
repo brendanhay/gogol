@@ -80,6 +80,13 @@ module Network.Google.IdentityToolkit
     , uiPasswordHash
     , uiLocalId
 
+    -- ** SetAccountInfoResponseProviderUserInfoItem
+    , SetAccountInfoResponseProviderUserInfoItem
+    , setAccountInfoResponseProviderUserInfoItem
+    , sairpuiiProviderId
+    , sairpuiiPhotoURL
+    , sairpuiiDisplayName
+
     -- ** IdentitytoolkitRelyingPartyVerifyPasswordRequest
     , IdentitytoolkitRelyingPartyVerifyPasswordRequest
     , identitytoolkitRelyingPartyVerifyPasswordRequest
@@ -118,6 +125,14 @@ module Network.Google.IdentityToolkit
     , DeleteAccountResponse
     , deleteAccountResponse
     , darKind
+
+    -- ** ProviderUserInfoItem
+    , ProviderUserInfoItem
+    , providerUserInfoItem
+    , puiiProviderId
+    , puiiPhotoURL
+    , puiiFederatedId
+    , puiiDisplayName
 
     -- ** DownloadAccountResponse
     , DownloadAccountResponse
@@ -215,17 +230,16 @@ module Network.Google.IdentityToolkit
     , goobccrKind
     , goobccrOOBCode
 
+    -- ** ErrorItem
+    , ErrorItem
+    , errorItem
+    , eiMessage
+    , eiIndex
+
     -- ** IdentitytoolkitRelyingPartyDeleteAccountRequest
     , IdentitytoolkitRelyingPartyDeleteAccountRequest
     , identitytoolkitRelyingPartyDeleteAccountRequest
     , irpdarLocalId
-
-    -- ** SetAccountInfoResponseProviderUserInfo
-    , SetAccountInfoResponseProviderUserInfo
-    , setAccountInfoResponseProviderUserInfo
-    , sairpuiProviderId
-    , sairpuiPhotoURL
-    , sairpuiDisplayName
 
     -- ** IdentitytoolkitRelyingPartyDownloadAccountRequest
     , IdentitytoolkitRelyingPartyDownloadAccountRequest
@@ -297,20 +311,6 @@ module Network.Google.IdentityToolkit
     , grprRecaptchaSiteKey
     , grprKind
     , grprRecaptchaStoken
-
-    -- ** UploadAccountResponseError
-    , UploadAccountResponseError
-    , uploadAccountResponseError
-    , uareMessage
-    , uareIndex
-
-    -- ** UserInfoProviderUserInfo
-    , UserInfoProviderUserInfo
-    , userInfoProviderUserInfo
-    , uipuiProviderId
-    , uipuiPhotoURL
-    , uipuiFederatedId
-    , uipuiDisplayName
     ) where
 
 import           Network.Google.IdentityToolkit.Types

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,11 +52,11 @@ import           Network.Google.YouTube.Types
 type CommentsSetModerationStatusResource =
      "comments" :>
        "setModerationStatus" :>
-         QueryParam "banAuthor" Bool :>
-           QueryParam "id" Text :>
-             QueryParam "moderationStatus"
-               YouTubeCommentsSetModerationStatusModerationStatus
-               :>
+         QueryParam "id" Text :>
+           QueryParam "moderationStatus"
+             YouTubeCommentsSetModerationStatusModerationStatus
+             :>
+             QueryParam "banAuthor" Bool :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data CommentsSetModerationStatus' = CommentsSetModerationStatus'
     , _csmsId               :: !Text
     , _csmsOAuthToken       :: !(Maybe OAuthToken)
     , _csmsFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsSetModerationStatus'' with the minimum fields required to make a request.
 --
@@ -186,8 +187,8 @@ instance GoogleRequest CommentsSetModerationStatus'
         type Rs CommentsSetModerationStatus' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CommentsSetModerationStatus'{..}
-          = go (Just _csmsBanAuthor) (Just _csmsId)
-              (Just _csmsModerationStatus)
+          = go (Just _csmsId) (Just _csmsModerationStatus)
+              (Just _csmsBanAuthor)
               _csmsQuotaUser
               (Just _csmsPrettyPrint)
               _csmsUserIP

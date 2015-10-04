@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,7 +37,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Update
     , aUserIP
     , aFingerprint
     , aVariableId
-    , aVariable
+    , aPayload
     , aAccountId
     , aKey
     , aOAuthToken
@@ -76,12 +77,12 @@ data AccountsContainersVariablesUpdate' = AccountsContainersVariablesUpdate'
     , _aUserIP      :: !(Maybe Text)
     , _aFingerprint :: !(Maybe Text)
     , _aVariableId  :: !Text
-    , _aVariable    :: !Variable
+    , _aPayload     :: !Variable
     , _aAccountId   :: !Text
     , _aKey         :: !(Maybe Key)
     , _aOAuthToken  :: !(Maybe OAuthToken)
     , _aFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVariablesUpdate'' with the minimum fields required to make a request.
 --
@@ -99,7 +100,7 @@ data AccountsContainersVariablesUpdate' = AccountsContainersVariablesUpdate'
 --
 -- * 'aVariableId'
 --
--- * 'aVariable'
+-- * 'aPayload'
 --
 -- * 'aAccountId'
 --
@@ -111,10 +112,10 @@ data AccountsContainersVariablesUpdate' = AccountsContainersVariablesUpdate'
 accountsContainersVariablesUpdate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'variableId'
-    -> Variable -- ^ 'Variable'
+    -> Variable -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> AccountsContainersVariablesUpdate'
-accountsContainersVariablesUpdate' pAContainerId_ pAVariableId_ pAVariable_ pAAccountId_ =
+accountsContainersVariablesUpdate' pAContainerId_ pAVariableId_ pAPayload_ pAAccountId_ =
     AccountsContainersVariablesUpdate'
     { _aQuotaUser = Nothing
     , _aPrettyPrint = True
@@ -122,7 +123,7 @@ accountsContainersVariablesUpdate' pAContainerId_ pAVariableId_ pAVariable_ pAAc
     , _aUserIP = Nothing
     , _aFingerprint = Nothing
     , _aVariableId = pAVariableId_
-    , _aVariable = pAVariable_
+    , _aPayload = pAPayload_
     , _aAccountId = pAAccountId_
     , _aKey = Nothing
     , _aOAuthToken = Nothing
@@ -163,9 +164,8 @@ aVariableId
   = lens _aVariableId (\ s a -> s{_aVariableId = a})
 
 -- | Multipart request metadata.
-aVariable :: Lens' AccountsContainersVariablesUpdate' Variable
-aVariable
-  = lens _aVariable (\ s a -> s{_aVariable = a})
+aPayload :: Lens' AccountsContainersVariablesUpdate' Variable
+aPayload = lens _aPayload (\ s a -> s{_aPayload = a})
 
 -- | The GTM Account ID.
 aAccountId :: Lens' AccountsContainersVariablesUpdate' Text
@@ -198,8 +198,8 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersVariablesUpdate'{..}
-          = go _aFingerprint _aAccountId _aContainerId
-              _aVariableId
+          = go _aAccountId _aContainerId _aVariableId
+              _aFingerprint
               _aQuotaUser
               (Just _aPrettyPrint)
               _aUserIP
@@ -207,7 +207,7 @@ instance GoogleRequest
               _aKey
               _aOAuthToken
               (Just AltJSON)
-              _aVariable
+              _aPayload
           where go
                   = clientWithRoute
                       (Proxy ::

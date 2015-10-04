@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type ImagesListResource =
        "global" :>
          "images" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -78,7 +79,7 @@ data ImagesList' = ImagesList'
     , _ilOAuthToken  :: !(Maybe OAuthToken)
     , _ilMaxResults  :: !Word32
     , _ilFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImagesList'' with the minimum fields required to make a request.
 --
@@ -192,8 +193,8 @@ instance GoogleRequest ImagesList' where
         type Rs ImagesList' = ImageList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ImagesList'{..}
-          = go _ilFilter (Just _ilMaxResults) _ilPageToken
-              _ilProject
+          = go _ilProject _ilFilter _ilPageToken
+              (Just _ilMaxResults)
               _ilQuotaUser
               (Just _ilPrettyPrint)
               _ilUserIP

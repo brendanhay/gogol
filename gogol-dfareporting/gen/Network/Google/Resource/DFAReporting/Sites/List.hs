@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -63,25 +64,26 @@ type SitesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "sites" :>
-           QueryParam "acceptsInStreamVideoPlacements" Bool :>
-             QueryParam "acceptsInterstitialPlacements" Bool :>
-               QueryParam "acceptsPublisherPaidPlacements" Bool :>
-                 QueryParam "adWordsSite" Bool :>
-                   QueryParam "approved" Bool :>
-                     QueryParams "campaignIds" Int64 :>
+           QueryParam "unmappedSite" Bool :>
+             QueryParams "campaignIds" Int64 :>
+               QueryParam "searchString" Text :>
+                 QueryParam "acceptsInterstitialPlacements" Bool :>
+                   QueryParam "acceptsPublisherPaidPlacements" Bool :>
+                     QueryParams "ids" Int64 :>
                        QueryParams "directorySiteIds" Int64 :>
-                         QueryParams "ids" Int64 :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "searchString" Text :>
-                                 QueryParam "sortField"
-                                   DfareportingSitesListSortField
+                         QueryParam "sortOrder" DfareportingSitesListSortOrder
+                           :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "sortField"
+                               DfareportingSitesListSortField
+                               :>
+                               QueryParam "subaccountId" Int64 :>
+                                 QueryParam "acceptsInStreamVideoPlacements"
+                                   Bool
                                    :>
-                                   QueryParam "sortOrder"
-                                     DfareportingSitesListSortOrder
-                                     :>
-                                     QueryParam "subaccountId" Int64 :>
-                                       QueryParam "unmappedSite" Bool :>
+                                   QueryParam "approved" Bool :>
+                                     QueryParam "adWordsSite" Bool :>
+                                       QueryParam "maxResults" Int32 :>
                                          QueryParam "quotaUser" Text :>
                                            QueryParam "prettyPrint" Bool :>
                                              QueryParam "userIp" Text :>
@@ -102,13 +104,13 @@ data SitesList' = SitesList'
     , _sitPrettyPrint                    :: !Bool
     , _sitUnmappedSite                   :: !(Maybe Bool)
     , _sitUserIP                         :: !(Maybe Text)
-    , _sitCampaignIds                    :: !(Maybe Int64)
+    , _sitCampaignIds                    :: !(Maybe [Int64])
     , _sitSearchString                   :: !(Maybe Text)
     , _sitAcceptsInterstitialPlacements  :: !(Maybe Bool)
     , _sitAcceptsPublisherPaidPlacements :: !(Maybe Bool)
-    , _sitIds                            :: !(Maybe Int64)
+    , _sitIds                            :: !(Maybe [Int64])
     , _sitProfileId                      :: !Int64
-    , _sitDirectorySiteIds               :: !(Maybe Int64)
+    , _sitDirectorySiteIds               :: !(Maybe [Int64])
     , _sitSortOrder                      :: !(Maybe DfareportingSitesListSortOrder)
     , _sitKey                            :: !(Maybe Key)
     , _sitPageToken                      :: !(Maybe Text)
@@ -120,7 +122,7 @@ data SitesList' = SitesList'
     , _sitAdWordsSite                    :: !(Maybe Bool)
     , _sitMaxResults                     :: !(Maybe Int32)
     , _sitFields                         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesList'' with the minimum fields required to make a request.
 --
@@ -224,10 +226,12 @@ sitUserIP
   = lens _sitUserIP (\ s a -> s{_sitUserIP = a})
 
 -- | Select only sites with these campaign IDs.
-sitCampaignIds :: Lens' SitesList' (Maybe Int64)
+sitCampaignIds :: Lens' SitesList' [Int64]
 sitCampaignIds
   = lens _sitCampaignIds
       (\ s a -> s{_sitCampaignIds = a})
+      . _Default
+      . _Coerce
 
 -- | Allows searching for objects by name, ID or keyName. Wildcards (*) are
 -- allowed. For example, \"site*2015\" will return objects with names like
@@ -254,8 +258,10 @@ sitAcceptsPublisherPaidPlacements
       (\ s a -> s{_sitAcceptsPublisherPaidPlacements = a})
 
 -- | Select only sites with these IDs.
-sitIds :: Lens' SitesList' (Maybe Int64)
-sitIds = lens _sitIds (\ s a -> s{_sitIds = a})
+sitIds :: Lens' SitesList' [Int64]
+sitIds
+  = lens _sitIds (\ s a -> s{_sitIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 sitProfileId :: Lens' SitesList' Int64
@@ -263,10 +269,12 @@ sitProfileId
   = lens _sitProfileId (\ s a -> s{_sitProfileId = a})
 
 -- | Select only sites with these directory site IDs.
-sitDirectorySiteIds :: Lens' SitesList' (Maybe Int64)
+sitDirectorySiteIds :: Lens' SitesList' [Int64]
 sitDirectorySiteIds
   = lens _sitDirectorySiteIds
       (\ s a -> s{_sitDirectorySiteIds = a})
+      . _Default
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 sitSortOrder :: Lens' SitesList' (Maybe DfareportingSitesListSortOrder)
@@ -338,22 +346,21 @@ instance GoogleRequest SitesList' where
         type Rs SitesList' = SitesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SitesList'{..}
-          = go _sitAcceptsInStreamVideoPlacements
+          = go _sitProfileId _sitUnmappedSite
+              (_sitCampaignIds ^. _Default)
+              _sitSearchString
               _sitAcceptsInterstitialPlacements
               _sitAcceptsPublisherPaidPlacements
-              _sitAdWordsSite
-              _sitApproved
-              _sitCampaignIds
-              _sitDirectorySiteIds
-              _sitIds
-              _sitMaxResults
-              _sitPageToken
-              _sitSearchString
-              _sitSortField
+              (_sitIds ^. _Default)
+              (_sitDirectorySiteIds ^. _Default)
               _sitSortOrder
+              _sitPageToken
+              _sitSortField
               _sitSubAccountId
-              _sitUnmappedSite
-              _sitProfileId
+              _sitAcceptsInStreamVideoPlacements
+              _sitApproved
+              _sitAdWordsSite
+              _sitMaxResults
               _sitQuotaUser
               (Just _sitPrettyPrint)
               _sitUserIP

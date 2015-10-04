@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.Genomics.Referencesets.Search
     -- * Request Lenses
     , rssQuotaUser
     , rssPrettyPrint
-    , rssSearchReferenceSetsRequest
     , rssUserIP
+    , rssPayload
     , rssKey
     , rssOAuthToken
     , rssFields
@@ -63,14 +64,14 @@ type ReferencesetsSearchResource =
 --
 -- /See:/ 'referencesetsSearch'' smart constructor.
 data ReferencesetsSearch' = ReferencesetsSearch'
-    { _rssQuotaUser                  :: !(Maybe Text)
-    , _rssPrettyPrint                :: !Bool
-    , _rssSearchReferenceSetsRequest :: !SearchReferenceSetsRequest
-    , _rssUserIP                     :: !(Maybe Text)
-    , _rssKey                        :: !(Maybe Key)
-    , _rssOAuthToken                 :: !(Maybe OAuthToken)
-    , _rssFields                     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rssQuotaUser   :: !(Maybe Text)
+    , _rssPrettyPrint :: !Bool
+    , _rssUserIP      :: !(Maybe Text)
+    , _rssPayload     :: !SearchReferenceSetsRequest
+    , _rssKey         :: !(Maybe Key)
+    , _rssOAuthToken  :: !(Maybe OAuthToken)
+    , _rssFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesetsSearch'' with the minimum fields required to make a request.
 --
@@ -80,9 +81,9 @@ data ReferencesetsSearch' = ReferencesetsSearch'
 --
 -- * 'rssPrettyPrint'
 --
--- * 'rssSearchReferenceSetsRequest'
---
 -- * 'rssUserIP'
+--
+-- * 'rssPayload'
 --
 -- * 'rssKey'
 --
@@ -90,14 +91,14 @@ data ReferencesetsSearch' = ReferencesetsSearch'
 --
 -- * 'rssFields'
 referencesetsSearch'
-    :: SearchReferenceSetsRequest -- ^ 'SearchReferenceSetsRequest'
+    :: SearchReferenceSetsRequest -- ^ 'payload'
     -> ReferencesetsSearch'
-referencesetsSearch' pRssSearchReferenceSetsRequest_ =
+referencesetsSearch' pRssPayload_ =
     ReferencesetsSearch'
     { _rssQuotaUser = Nothing
     , _rssPrettyPrint = True
-    , _rssSearchReferenceSetsRequest = pRssSearchReferenceSetsRequest_
     , _rssUserIP = Nothing
+    , _rssPayload = pRssPayload_
     , _rssKey = Nothing
     , _rssOAuthToken = Nothing
     , _rssFields = Nothing
@@ -116,17 +117,16 @@ rssPrettyPrint
   = lens _rssPrettyPrint
       (\ s a -> s{_rssPrettyPrint = a})
 
--- | Multipart request metadata.
-rssSearchReferenceSetsRequest :: Lens' ReferencesetsSearch' SearchReferenceSetsRequest
-rssSearchReferenceSetsRequest
-  = lens _rssSearchReferenceSetsRequest
-      (\ s a -> s{_rssSearchReferenceSetsRequest = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 rssUserIP :: Lens' ReferencesetsSearch' (Maybe Text)
 rssUserIP
   = lens _rssUserIP (\ s a -> s{_rssUserIP = a})
+
+-- | Multipart request metadata.
+rssPayload :: Lens' ReferencesetsSearch' SearchReferenceSetsRequest
+rssPayload
+  = lens _rssPayload (\ s a -> s{_rssPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -159,7 +159,7 @@ instance GoogleRequest ReferencesetsSearch' where
               _rssKey
               _rssOAuthToken
               (Just AltJSON)
-              _rssSearchReferenceSetsRequest
+              _rssPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReferencesetsSearchResource)

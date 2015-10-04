@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type GlobalForwardingRulesListResource =
        "global" :>
          "forwardingRules" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data GlobalForwardingRulesList' = GlobalForwardingRulesList'
     , _gfrlOAuthToken  :: !(Maybe OAuthToken)
     , _gfrlMaxResults  :: !Word32
     , _gfrlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalForwardingRulesList'' with the minimum fields required to make a request.
 --
@@ -202,9 +203,8 @@ instance GoogleRequest GlobalForwardingRulesList'
              ForwardingRuleList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u GlobalForwardingRulesList'{..}
-          = go _gfrlFilter (Just _gfrlMaxResults)
-              _gfrlPageToken
-              _gfrlProject
+          = go _gfrlProject _gfrlFilter _gfrlPageToken
+              (Just _gfrlMaxResults)
               _gfrlQuotaUser
               (Just _gfrlPrettyPrint)
               _gfrlUserIP

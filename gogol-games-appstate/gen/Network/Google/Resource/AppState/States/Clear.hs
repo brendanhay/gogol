@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -74,7 +75,7 @@ data StatesClear' = StatesClear'
     , _scKey                :: !(Maybe Key)
     , _scOAuthToken         :: !(Maybe OAuthToken)
     , _scFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatesClear'' with the minimum fields required to make a request.
 --
@@ -163,7 +164,7 @@ instance GoogleRequest StatesClear' where
         type Rs StatesClear' = WriteResult
         request = requestWithRoute defReq appStateURL
         requestWithRoute r u StatesClear'{..}
-          = go _scCurrentDataVersion _scStateKey _scQuotaUser
+          = go _scStateKey _scCurrentDataVersion _scQuotaUser
               (Just _scPrettyPrint)
               _scUserIP
               _scFields

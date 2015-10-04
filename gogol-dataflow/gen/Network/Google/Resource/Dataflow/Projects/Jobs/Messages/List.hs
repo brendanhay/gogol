@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -64,17 +65,17 @@ type ProjectsJobsMessagesListResource =
              Capture "jobId" Text :>
                "messages" :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "endTime" Text :>
-                           QueryParam "minimumImportance" Text :>
-                             QueryParam "pageSize" Int32 :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "pp" Bool :>
-                                   QueryParam "startTime" Text :>
-                                     QueryParam "uploadType" Text :>
-                                       QueryParam "upload_protocol" Text :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "startTime" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "endTime" Text :>
+                                 QueryParam "minimumImportance" Text :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "pageSize" Int32 :>
+                                       QueryParam "callback" Text :>
                                          QueryParam "quotaUser" Text :>
                                            QueryParam "prettyPrint" Bool :>
                                              QueryParam "fields" Text :>
@@ -109,7 +110,7 @@ data ProjectsJobsMessagesList' = ProjectsJobsMessagesList'
     , _pjmlPageSize          :: !(Maybe Int32)
     , _pjmlFields            :: !(Maybe Text)
     , _pjmlCallback          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsJobsMessagesList'' with the minimum fields required to make a request.
 --
@@ -302,18 +303,18 @@ instance GoogleRequest ProjectsJobsMessagesList'
              ListJobMessagesResponse
         request = requestWithRoute defReq dataflowURL
         requestWithRoute r u ProjectsJobsMessagesList'{..}
-          = go _pjmlXgafv _pjmlAccessToken _pjmlBearerToken
-              _pjmlCallback
+          = go _pjmlProjectId _pjmlJobId _pjmlXgafv
+              _pjmlUploadProtocol
+              _pjmlStartTime
+              (Just _pjmlPp)
+              _pjmlAccessToken
+              _pjmlUploadType
+              _pjmlBearerToken
               _pjmlEndTime
               _pjmlMinimumImportance
-              _pjmlPageSize
               _pjmlPageToken
-              (Just _pjmlPp)
-              _pjmlStartTime
-              _pjmlUploadType
-              _pjmlUploadProtocol
-              _pjmlProjectId
-              _pjmlJobId
+              _pjmlPageSize
+              _pjmlCallback
               _pjmlQuotaUser
               (Just _pjmlPrettyPrint)
               _pjmlFields

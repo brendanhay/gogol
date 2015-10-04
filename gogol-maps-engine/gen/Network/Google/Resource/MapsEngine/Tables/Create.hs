@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.MapsEngine.Tables.Create
     , tcQuotaUser
     , tcPrettyPrint
     , tcUserIP
+    , tcPayload
     , tcKey
     , tcOAuthToken
-    , tcTable
     , tcFields
     ) where
 
@@ -62,11 +63,11 @@ data TablesCreate' = TablesCreate'
     { _tcQuotaUser   :: !(Maybe Text)
     , _tcPrettyPrint :: !Bool
     , _tcUserIP      :: !(Maybe Text)
+    , _tcPayload     :: !Table
     , _tcKey         :: !(Maybe Key)
     , _tcOAuthToken  :: !(Maybe OAuthToken)
-    , _tcTable       :: !Table
     , _tcFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesCreate'' with the minimum fields required to make a request.
 --
@@ -78,24 +79,24 @@ data TablesCreate' = TablesCreate'
 --
 -- * 'tcUserIP'
 --
+-- * 'tcPayload'
+--
 -- * 'tcKey'
 --
 -- * 'tcOAuthToken'
 --
--- * 'tcTable'
---
 -- * 'tcFields'
 tablesCreate'
-    :: Table -- ^ 'Table'
+    :: Table -- ^ 'payload'
     -> TablesCreate'
-tablesCreate' pTcTable_ =
+tablesCreate' pTcPayload_ =
     TablesCreate'
     { _tcQuotaUser = Nothing
     , _tcPrettyPrint = True
     , _tcUserIP = Nothing
+    , _tcPayload = pTcPayload_
     , _tcKey = Nothing
     , _tcOAuthToken = Nothing
-    , _tcTable = pTcTable_
     , _tcFields = Nothing
     }
 
@@ -117,6 +118,11 @@ tcPrettyPrint
 tcUserIP :: Lens' TablesCreate' (Maybe Text)
 tcUserIP = lens _tcUserIP (\ s a -> s{_tcUserIP = a})
 
+-- | Multipart request metadata.
+tcPayload :: Lens' TablesCreate' Table
+tcPayload
+  = lens _tcPayload (\ s a -> s{_tcPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -127,10 +133,6 @@ tcKey = lens _tcKey (\ s a -> s{_tcKey = a})
 tcOAuthToken :: Lens' TablesCreate' (Maybe OAuthToken)
 tcOAuthToken
   = lens _tcOAuthToken (\ s a -> s{_tcOAuthToken = a})
-
--- | Multipart request metadata.
-tcTable :: Lens' TablesCreate' Table
-tcTable = lens _tcTable (\ s a -> s{_tcTable = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tcFields :: Lens' TablesCreate' (Maybe Text)
@@ -149,7 +151,7 @@ instance GoogleRequest TablesCreate' where
               _tcKey
               _tcOAuthToken
               (Just AltJSON)
-              _tcTable
+              _tcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TablesCreateResource)

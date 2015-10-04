@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -46,7 +47,7 @@ module Network.Google.Resource.Classroom.Invitations.Create
     , icPp
     , icAccessToken
     , icUploadType
-    , icInvitation
+    , icPayload
     , icBearerToken
     , icKey
     , icOAuthToken
@@ -63,12 +64,12 @@ type InvitationsCreateResource =
      "v1" :>
        "invitations" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -98,13 +99,13 @@ data InvitationsCreate' = InvitationsCreate'
     , _icPp             :: !Bool
     , _icAccessToken    :: !(Maybe Text)
     , _icUploadType     :: !(Maybe Text)
-    , _icInvitation     :: !Invitation
+    , _icPayload        :: !Invitation
     , _icBearerToken    :: !(Maybe Text)
     , _icKey            :: !(Maybe Key)
     , _icOAuthToken     :: !(Maybe OAuthToken)
     , _icFields         :: !(Maybe Text)
     , _icCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InvitationsCreate'' with the minimum fields required to make a request.
 --
@@ -124,7 +125,7 @@ data InvitationsCreate' = InvitationsCreate'
 --
 -- * 'icUploadType'
 --
--- * 'icInvitation'
+-- * 'icPayload'
 --
 -- * 'icBearerToken'
 --
@@ -136,9 +137,9 @@ data InvitationsCreate' = InvitationsCreate'
 --
 -- * 'icCallback'
 invitationsCreate'
-    :: Invitation -- ^ 'Invitation'
+    :: Invitation -- ^ 'payload'
     -> InvitationsCreate'
-invitationsCreate' pIcInvitation_ =
+invitationsCreate' pIcPayload_ =
     InvitationsCreate'
     { _icXgafv = Nothing
     , _icQuotaUser = Nothing
@@ -147,7 +148,7 @@ invitationsCreate' pIcInvitation_ =
     , _icPp = True
     , _icAccessToken = Nothing
     , _icUploadType = Nothing
-    , _icInvitation = pIcInvitation_
+    , _icPayload = pIcPayload_
     , _icBearerToken = Nothing
     , _icKey = Nothing
     , _icOAuthToken = Nothing
@@ -194,9 +195,9 @@ icUploadType
   = lens _icUploadType (\ s a -> s{_icUploadType = a})
 
 -- | Multipart request metadata.
-icInvitation :: Lens' InvitationsCreate' Invitation
-icInvitation
-  = lens _icInvitation (\ s a -> s{_icInvitation = a})
+icPayload :: Lens' InvitationsCreate' Invitation
+icPayload
+  = lens _icPayload (\ s a -> s{_icPayload = a})
 
 -- | OAuth bearer token.
 icBearerToken :: Lens' InvitationsCreate' (Maybe Text)
@@ -232,18 +233,18 @@ instance GoogleRequest InvitationsCreate' where
         type Rs InvitationsCreate' = Invitation
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u InvitationsCreate'{..}
-          = go _icXgafv _icAccessToken _icBearerToken
-              _icCallback
-              (Just _icPp)
+          = go _icXgafv _icUploadProtocol (Just _icPp)
+              _icAccessToken
               _icUploadType
-              _icUploadProtocol
+              _icBearerToken
+              _icCallback
               _icQuotaUser
               (Just _icPrettyPrint)
               _icFields
               _icKey
               _icOAuthToken
               (Just AltJSON)
-              _icInvitation
+              _icPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InvitationsCreateResource)

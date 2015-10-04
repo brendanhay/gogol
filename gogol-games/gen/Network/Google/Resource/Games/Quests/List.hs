@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type QuestsListResource =
        Capture "playerId" Text :>
          "quests" :>
            QueryParam "language" Text :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Int32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data QuestsList' = QuestsList'
     , _qlPlayerId    :: !Text
     , _qlMaxResults  :: !(Maybe Int32)
     , _qlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsList'' with the minimum fields required to make a request.
 --
@@ -186,8 +187,8 @@ instance GoogleRequest QuestsList' where
         type Rs QuestsList' = QuestListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u QuestsList'{..}
-          = go _qlLanguage _qlMaxResults _qlPageToken
-              _qlPlayerId
+          = go _qlPlayerId _qlLanguage _qlPageToken
+              _qlMaxResults
               _qlQuotaUser
               (Just _qlPrettyPrint)
               _qlUserIP

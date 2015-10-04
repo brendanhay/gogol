@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.AndroidEnterprise.Products.UpdatePermissions
     , pupPrettyPrint
     , pupEnterpriseId
     , pupUserIP
+    , pupPayload
     , pupKey
     , pupOAuthToken
-    , pupProductPermissions
     , pupProductId
     , pupFields
     ) where
@@ -68,16 +69,16 @@ type ProductsUpdatePermissionsResource =
 --
 -- /See:/ 'productsUpdatePermissions'' smart constructor.
 data ProductsUpdatePermissions' = ProductsUpdatePermissions'
-    { _pupQuotaUser          :: !(Maybe Text)
-    , _pupPrettyPrint        :: !Bool
-    , _pupEnterpriseId       :: !Text
-    , _pupUserIP             :: !(Maybe Text)
-    , _pupKey                :: !(Maybe Key)
-    , _pupOAuthToken         :: !(Maybe OAuthToken)
-    , _pupProductPermissions :: !ProductPermissions
-    , _pupProductId          :: !Text
-    , _pupFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _pupQuotaUser    :: !(Maybe Text)
+    , _pupPrettyPrint  :: !Bool
+    , _pupEnterpriseId :: !Text
+    , _pupUserIP       :: !(Maybe Text)
+    , _pupPayload      :: !ProductPermissions
+    , _pupKey          :: !(Maybe Key)
+    , _pupOAuthToken   :: !(Maybe OAuthToken)
+    , _pupProductId    :: !Text
+    , _pupFields       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsUpdatePermissions'' with the minimum fields required to make a request.
 --
@@ -91,29 +92,29 @@ data ProductsUpdatePermissions' = ProductsUpdatePermissions'
 --
 -- * 'pupUserIP'
 --
+-- * 'pupPayload'
+--
 -- * 'pupKey'
 --
 -- * 'pupOAuthToken'
---
--- * 'pupProductPermissions'
 --
 -- * 'pupProductId'
 --
 -- * 'pupFields'
 productsUpdatePermissions'
     :: Text -- ^ 'enterpriseId'
-    -> ProductPermissions -- ^ 'ProductPermissions'
+    -> ProductPermissions -- ^ 'payload'
     -> Text -- ^ 'productId'
     -> ProductsUpdatePermissions'
-productsUpdatePermissions' pPupEnterpriseId_ pPupProductPermissions_ pPupProductId_ =
+productsUpdatePermissions' pPupEnterpriseId_ pPupPayload_ pPupProductId_ =
     ProductsUpdatePermissions'
     { _pupQuotaUser = Nothing
     , _pupPrettyPrint = True
     , _pupEnterpriseId = pPupEnterpriseId_
     , _pupUserIP = Nothing
+    , _pupPayload = pPupPayload_
     , _pupKey = Nothing
     , _pupOAuthToken = Nothing
-    , _pupProductPermissions = pPupProductPermissions_
     , _pupProductId = pPupProductId_
     , _pupFields = Nothing
     }
@@ -143,6 +144,11 @@ pupUserIP :: Lens' ProductsUpdatePermissions' (Maybe Text)
 pupUserIP
   = lens _pupUserIP (\ s a -> s{_pupUserIP = a})
 
+-- | Multipart request metadata.
+pupPayload :: Lens' ProductsUpdatePermissions' ProductPermissions
+pupPayload
+  = lens _pupPayload (\ s a -> s{_pupPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -154,12 +160,6 @@ pupOAuthToken :: Lens' ProductsUpdatePermissions' (Maybe OAuthToken)
 pupOAuthToken
   = lens _pupOAuthToken
       (\ s a -> s{_pupOAuthToken = a})
-
--- | Multipart request metadata.
-pupProductPermissions :: Lens' ProductsUpdatePermissions' ProductPermissions
-pupProductPermissions
-  = lens _pupProductPermissions
-      (\ s a -> s{_pupProductPermissions = a})
 
 -- | The ID of the product.
 pupProductId :: Lens' ProductsUpdatePermissions' Text
@@ -189,7 +189,7 @@ instance GoogleRequest ProductsUpdatePermissions'
               _pupKey
               _pupOAuthToken
               (Just AltJSON)
-              _pupProductPermissions
+              _pupPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProductsUpdatePermissionsResource)

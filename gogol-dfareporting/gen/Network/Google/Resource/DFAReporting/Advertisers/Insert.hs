@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.DFAReporting.Advertisers.Insert
     , aiiPrettyPrint
     , aiiUserIP
     , aiiProfileId
+    , aiiPayload
     , aiiKey
-    , aiiAdvertiser
     , aiiOAuthToken
     , aiiFields
     ) where
@@ -66,11 +67,11 @@ data AdvertisersInsert' = AdvertisersInsert'
     , _aiiPrettyPrint :: !Bool
     , _aiiUserIP      :: !(Maybe Text)
     , _aiiProfileId   :: !Int64
+    , _aiiPayload     :: !Advertiser
     , _aiiKey         :: !(Maybe Key)
-    , _aiiAdvertiser  :: !Advertiser
     , _aiiOAuthToken  :: !(Maybe OAuthToken)
     , _aiiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersInsert'' with the minimum fields required to make a request.
 --
@@ -84,25 +85,25 @@ data AdvertisersInsert' = AdvertisersInsert'
 --
 -- * 'aiiProfileId'
 --
--- * 'aiiKey'
+-- * 'aiiPayload'
 --
--- * 'aiiAdvertiser'
+-- * 'aiiKey'
 --
 -- * 'aiiOAuthToken'
 --
 -- * 'aiiFields'
 advertisersInsert'
     :: Int64 -- ^ 'profileId'
-    -> Advertiser -- ^ 'Advertiser'
+    -> Advertiser -- ^ 'payload'
     -> AdvertisersInsert'
-advertisersInsert' pAiiProfileId_ pAiiAdvertiser_ =
+advertisersInsert' pAiiProfileId_ pAiiPayload_ =
     AdvertisersInsert'
     { _aiiQuotaUser = Nothing
     , _aiiPrettyPrint = True
     , _aiiUserIP = Nothing
     , _aiiProfileId = pAiiProfileId_
+    , _aiiPayload = pAiiPayload_
     , _aiiKey = Nothing
-    , _aiiAdvertiser = pAiiAdvertiser_
     , _aiiOAuthToken = Nothing
     , _aiiFields = Nothing
     }
@@ -131,17 +132,16 @@ aiiProfileId :: Lens' AdvertisersInsert' Int64
 aiiProfileId
   = lens _aiiProfileId (\ s a -> s{_aiiProfileId = a})
 
+-- | Multipart request metadata.
+aiiPayload :: Lens' AdvertisersInsert' Advertiser
+aiiPayload
+  = lens _aiiPayload (\ s a -> s{_aiiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 aiiKey :: Lens' AdvertisersInsert' (Maybe Key)
 aiiKey = lens _aiiKey (\ s a -> s{_aiiKey = a})
-
--- | Multipart request metadata.
-aiiAdvertiser :: Lens' AdvertisersInsert' Advertiser
-aiiAdvertiser
-  = lens _aiiAdvertiser
-      (\ s a -> s{_aiiAdvertiser = a})
 
 -- | OAuth 2.0 token for the current user.
 aiiOAuthToken :: Lens' AdvertisersInsert' (Maybe OAuthToken)
@@ -169,7 +169,7 @@ instance GoogleRequest AdvertisersInsert' where
               _aiiKey
               _aiiOAuthToken
               (Just AltJSON)
-              _aiiAdvertiser
+              _aiiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AdvertisersInsertResource)

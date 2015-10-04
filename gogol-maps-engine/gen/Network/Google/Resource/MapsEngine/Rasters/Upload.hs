@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.MapsEngine.Rasters.Upload
     , ruQuotaUser
     , ruPrettyPrint
     , ruUserIP
+    , ruPayload
     , ruKey
-    , ruRaster
     , ruOAuthToken
     , ruFields
     ) where
@@ -63,11 +64,11 @@ data RastersUpload' = RastersUpload'
     { _ruQuotaUser   :: !(Maybe Text)
     , _ruPrettyPrint :: !Bool
     , _ruUserIP      :: !(Maybe Text)
+    , _ruPayload     :: !Raster
     , _ruKey         :: !(Maybe Key)
-    , _ruRaster      :: !Raster
     , _ruOAuthToken  :: !(Maybe OAuthToken)
     , _ruFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersUpload'' with the minimum fields required to make a request.
 --
@@ -79,23 +80,23 @@ data RastersUpload' = RastersUpload'
 --
 -- * 'ruUserIP'
 --
--- * 'ruKey'
+-- * 'ruPayload'
 --
--- * 'ruRaster'
+-- * 'ruKey'
 --
 -- * 'ruOAuthToken'
 --
 -- * 'ruFields'
 rastersUpload'
-    :: Raster -- ^ 'Raster'
+    :: Raster -- ^ 'payload'
     -> RastersUpload'
-rastersUpload' pRuRaster_ =
+rastersUpload' pRuPayload_ =
     RastersUpload'
     { _ruQuotaUser = Nothing
     , _ruPrettyPrint = True
     , _ruUserIP = Nothing
+    , _ruPayload = pRuPayload_
     , _ruKey = Nothing
-    , _ruRaster = pRuRaster_
     , _ruOAuthToken = Nothing
     , _ruFields = Nothing
     }
@@ -118,15 +119,16 @@ ruPrettyPrint
 ruUserIP :: Lens' RastersUpload' (Maybe Text)
 ruUserIP = lens _ruUserIP (\ s a -> s{_ruUserIP = a})
 
+-- | Multipart request metadata.
+ruPayload :: Lens' RastersUpload' Raster
+ruPayload
+  = lens _ruPayload (\ s a -> s{_ruPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 ruKey :: Lens' RastersUpload' (Maybe Key)
 ruKey = lens _ruKey (\ s a -> s{_ruKey = a})
-
--- | Multipart request metadata.
-ruRaster :: Lens' RastersUpload' Raster
-ruRaster = lens _ruRaster (\ s a -> s{_ruRaster = a})
 
 -- | OAuth 2.0 token for the current user.
 ruOAuthToken :: Lens' RastersUpload' (Maybe OAuthToken)
@@ -150,7 +152,7 @@ instance GoogleRequest RastersUpload' where
               _ruKey
               _ruOAuthToken
               (Just AltJSON)
-              _ruRaster
+              _ruPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RastersUploadResource)

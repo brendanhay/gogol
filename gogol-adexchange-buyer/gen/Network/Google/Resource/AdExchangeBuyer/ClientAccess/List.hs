@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.List
     , calQuotaUser
     , calPrettyPrint
     , calUserIP
+    , calPayload
     , calKey
-    , calListClientAccessCapabilitiesRequest
     , calOAuthToken
     , calFields
     ) where
@@ -59,14 +60,14 @@ type ClientAccessListResource =
 --
 -- /See:/ 'clientAccessList'' smart constructor.
 data ClientAccessList' = ClientAccessList'
-    { _calQuotaUser                           :: !(Maybe Text)
-    , _calPrettyPrint                         :: !Bool
-    , _calUserIP                              :: !(Maybe Text)
-    , _calKey                                 :: !(Maybe Key)
-    , _calListClientAccessCapabilitiesRequest :: !ListClientAccessCapabilitiesRequest
-    , _calOAuthToken                          :: !(Maybe OAuthToken)
-    , _calFields                              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _calQuotaUser   :: !(Maybe Text)
+    , _calPrettyPrint :: !Bool
+    , _calUserIP      :: !(Maybe Text)
+    , _calPayload     :: !ListClientAccessCapabilitiesRequest
+    , _calKey         :: !(Maybe Key)
+    , _calOAuthToken  :: !(Maybe OAuthToken)
+    , _calFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessList'' with the minimum fields required to make a request.
 --
@@ -78,23 +79,23 @@ data ClientAccessList' = ClientAccessList'
 --
 -- * 'calUserIP'
 --
--- * 'calKey'
+-- * 'calPayload'
 --
--- * 'calListClientAccessCapabilitiesRequest'
+-- * 'calKey'
 --
 -- * 'calOAuthToken'
 --
 -- * 'calFields'
 clientAccessList'
-    :: ListClientAccessCapabilitiesRequest -- ^ 'ListClientAccessCapabilitiesRequest'
+    :: ListClientAccessCapabilitiesRequest -- ^ 'payload'
     -> ClientAccessList'
-clientAccessList' pCalListClientAccessCapabilitiesRequest_ =
+clientAccessList' pCalPayload_ =
     ClientAccessList'
     { _calQuotaUser = Nothing
     , _calPrettyPrint = True
     , _calUserIP = Nothing
+    , _calPayload = pCalPayload_
     , _calKey = Nothing
-    , _calListClientAccessCapabilitiesRequest = pCalListClientAccessCapabilitiesRequest_
     , _calOAuthToken = Nothing
     , _calFields = Nothing
     }
@@ -118,18 +119,16 @@ calUserIP :: Lens' ClientAccessList' (Maybe Text)
 calUserIP
   = lens _calUserIP (\ s a -> s{_calUserIP = a})
 
+-- | Multipart request metadata.
+calPayload :: Lens' ClientAccessList' ListClientAccessCapabilitiesRequest
+calPayload
+  = lens _calPayload (\ s a -> s{_calPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 calKey :: Lens' ClientAccessList' (Maybe Key)
 calKey = lens _calKey (\ s a -> s{_calKey = a})
-
--- | Multipart request metadata.
-calListClientAccessCapabilitiesRequest :: Lens' ClientAccessList' ListClientAccessCapabilitiesRequest
-calListClientAccessCapabilitiesRequest
-  = lens _calListClientAccessCapabilitiesRequest
-      (\ s a ->
-         s{_calListClientAccessCapabilitiesRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 calOAuthToken :: Lens' ClientAccessList' (Maybe OAuthToken)
@@ -156,7 +155,7 @@ instance GoogleRequest ClientAccessList' where
               _calKey
               _calOAuthToken
               (Just AltJSON)
-              _calListClientAccessCapabilitiesRequest
+              _calPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ClientAccessListResource)

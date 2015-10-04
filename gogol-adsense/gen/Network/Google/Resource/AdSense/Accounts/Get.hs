@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -69,7 +70,7 @@ data AccountsGet' = AccountsGet'
     , _agKey         :: !(Maybe Key)
     , _agOAuthToken  :: !(Maybe OAuthToken)
     , _agFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsGet'' with the minimum fields required to make a request.
 --
@@ -155,7 +156,7 @@ instance GoogleRequest AccountsGet' where
         type Rs AccountsGet' = Account
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AccountsGet'{..}
-          = go _agTree _agAccountId _agQuotaUser
+          = go _agAccountId _agTree _agQuotaUser
               (Just _agPrettyPrint)
               _agUserIP
               _agFields

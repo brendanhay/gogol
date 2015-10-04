@@ -17,33 +17,33 @@ module Network.Google.AdminDirectory.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
-data DirectoryUsersListViewType
-    = AdminView
-      -- ^ @admin_view@
-      -- Fetches the ADMIN_VIEW of the user.
-    | DomainPublic
-      -- ^ @domain_public@
-      -- Fetches the DOMAIN_PUBLIC view of the user.
+-- | Event on which subscription is intended (if subscribing)
+data Event
+    = Add
+      -- ^ @add@
+      -- Alias Created Event
+    | Delete
+      -- ^ @delete@
+      -- Alias Deleted Event
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DirectoryUsersListViewType
+instance Hashable Event
 
-instance FromText DirectoryUsersListViewType where
+instance FromText Event where
     fromText = \case
-        "admin_view" -> Just AdminView
-        "domain_public" -> Just DomainPublic
+        "add" -> Just Add
+        "delete" -> Just Delete
         _ -> Nothing
 
-instance ToText DirectoryUsersListViewType where
+instance ToText Event where
     toText = \case
-        AdminView -> "admin_view"
-        DomainPublic -> "domain_public"
+        Add -> "add"
+        Delete -> "delete"
 
-instance FromJSON DirectoryUsersListViewType where
-    parseJSON = parseJSONText "DirectoryUsersListViewType"
+instance FromJSON Event where
+    parseJSON = parseJSONText "Event"
 
-instance ToJSON DirectoryUsersListViewType where
+instance ToJSON Event where
     toJSON = toJSONText
 
 -- | Restrict information returned to a set of selected fields.
@@ -78,13 +78,13 @@ instance ToJSON DirectoryChromeosDevicesListProjection where
 
 -- | Column to use for sorting results
 data DirectoryUsersWatchOrderBy
-    = Email
+    = DUWOBEmail
       -- ^ @email@
       -- Primary email of the user.
-    | FamilyName
+    | DUWOBFamilyName
       -- ^ @familyName@
       -- User\'s family name.
-    | GivenName
+    | DUWOBGivenName
       -- ^ @givenName@
       -- User\'s given name.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -93,16 +93,16 @@ instance Hashable DirectoryUsersWatchOrderBy
 
 instance FromText DirectoryUsersWatchOrderBy where
     fromText = \case
-        "email" -> Just Email
-        "familyName" -> Just FamilyName
-        "givenName" -> Just GivenName
+        "email" -> Just DUWOBEmail
+        "familyName" -> Just DUWOBFamilyName
+        "givenName" -> Just DUWOBGivenName
         _ -> Nothing
 
 instance ToText DirectoryUsersWatchOrderBy where
     toText = \case
-        Email -> "email"
-        FamilyName -> "familyName"
-        GivenName -> "givenName"
+        DUWOBEmail -> "email"
+        DUWOBFamilyName -> "familyName"
+        DUWOBGivenName -> "givenName"
 
 instance FromJSON DirectoryUsersWatchOrderBy where
     parseJSON = parseJSONText "DirectoryUsersWatchOrderBy"
@@ -112,10 +112,10 @@ instance ToJSON DirectoryUsersWatchOrderBy where
 
 -- | Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
 data DirectoryUsersWatchViewType
-    = DUWVTAdminView
+    = AdminView
       -- ^ @admin_view@
       -- Fetches the ADMIN_VIEW of the user.
-    | DUWVTDomainPublic
+    | DomainPublic
       -- ^ @domain_public@
       -- Fetches the DOMAIN_PUBLIC view of the user.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -124,19 +124,53 @@ instance Hashable DirectoryUsersWatchViewType
 
 instance FromText DirectoryUsersWatchViewType where
     fromText = \case
-        "admin_view" -> Just DUWVTAdminView
-        "domain_public" -> Just DUWVTDomainPublic
+        "admin_view" -> Just AdminView
+        "domain_public" -> Just DomainPublic
         _ -> Nothing
 
 instance ToText DirectoryUsersWatchViewType where
     toText = \case
-        DUWVTAdminView -> "admin_view"
-        DUWVTDomainPublic -> "domain_public"
+        AdminView -> "admin_view"
+        DomainPublic -> "domain_public"
 
 instance FromJSON DirectoryUsersWatchViewType where
     parseJSON = parseJSONText "DirectoryUsersWatchViewType"
 
 instance ToJSON DirectoryUsersWatchViewType where
+    toJSON = toJSONText
+
+-- | Column to use for sorting results
+data OrderBy
+    = OBEmail
+      -- ^ @email@
+      -- Primary email of the user.
+    | OBFamilyName
+      -- ^ @familyName@
+      -- User\'s family name.
+    | OBGivenName
+      -- ^ @givenName@
+      -- User\'s given name.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable OrderBy
+
+instance FromText OrderBy where
+    fromText = \case
+        "email" -> Just OBEmail
+        "familyName" -> Just OBFamilyName
+        "givenName" -> Just OBGivenName
+        _ -> Nothing
+
+instance ToText OrderBy where
+    toText = \case
+        OBEmail -> "email"
+        OBFamilyName -> "familyName"
+        OBGivenName -> "givenName"
+
+instance FromJSON OrderBy where
+    parseJSON = parseJSONText "OrderBy"
+
+instance ToJSON OrderBy where
     toJSON = toJSONText
 
 -- | Column to use for sorting results
@@ -198,62 +232,33 @@ instance FromJSON DirectoryMobileDevicesListOrderBy where
 instance ToJSON DirectoryMobileDevicesListOrderBy where
     toJSON = toJSONText
 
--- | Whether to return results in ascending or descending order.
-data DirectoryUsersListSortOrder
-    = Ascending
-      -- ^ @ASCENDING@
-      -- Ascending order.
-    | Descending
-      -- ^ @DESCENDING@
-      -- Descending order.
+-- | Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
+data ViewType
+    = VTAdminView
+      -- ^ @admin_view@
+      -- Fetches the ADMIN_VIEW of the user.
+    | VTDomainPublic
+      -- ^ @domain_public@
+      -- Fetches the DOMAIN_PUBLIC view of the user.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DirectoryUsersListSortOrder
+instance Hashable ViewType
 
-instance FromText DirectoryUsersListSortOrder where
+instance FromText ViewType where
     fromText = \case
-        "ASCENDING" -> Just Ascending
-        "DESCENDING" -> Just Descending
+        "admin_view" -> Just VTAdminView
+        "domain_public" -> Just VTDomainPublic
         _ -> Nothing
 
-instance ToText DirectoryUsersListSortOrder where
+instance ToText ViewType where
     toText = \case
-        Ascending -> "ASCENDING"
-        Descending -> "DESCENDING"
+        VTAdminView -> "admin_view"
+        VTDomainPublic -> "domain_public"
 
-instance FromJSON DirectoryUsersListSortOrder where
-    parseJSON = parseJSONText "DirectoryUsersListSortOrder"
+instance FromJSON ViewType where
+    parseJSON = parseJSONText "ViewType"
 
-instance ToJSON DirectoryUsersListSortOrder where
-    toJSON = toJSONText
-
--- | Event on which subscription is intended (if subscribing)
-data DirectoryUsersAliasesListEvent
-    = Add
-      -- ^ @add@
-      -- Alias Created Event
-    | Delete
-      -- ^ @delete@
-      -- Alias Deleted Event
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DirectoryUsersAliasesListEvent
-
-instance FromText DirectoryUsersAliasesListEvent where
-    fromText = \case
-        "add" -> Just Add
-        "delete" -> Just Delete
-        _ -> Nothing
-
-instance ToText DirectoryUsersAliasesListEvent where
-    toText = \case
-        Add -> "add"
-        Delete -> "delete"
-
-instance FromJSON DirectoryUsersAliasesListEvent where
-    parseJSON = parseJSONText "DirectoryUsersAliasesListEvent"
-
-instance ToJSON DirectoryUsersAliasesListEvent where
+instance ToJSON ViewType where
     toJSON = toJSONText
 
 -- | Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
@@ -316,10 +321,10 @@ instance ToJSON DirectoryUsersAliasesWatchEvent where
 
 -- | Whether to return results in ascending or descending order.
 data DirectoryUsersWatchSortOrder
-    = DUWSOAscending
+    = Ascending
       -- ^ @ASCENDING@
       -- Ascending order.
-    | DUWSODescending
+    | Descending
       -- ^ @DESCENDING@
       -- Descending order.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -328,14 +333,14 @@ instance Hashable DirectoryUsersWatchSortOrder
 
 instance FromText DirectoryUsersWatchSortOrder where
     fromText = \case
-        "ASCENDING" -> Just DUWSOAscending
-        "DESCENDING" -> Just DUWSODescending
+        "ASCENDING" -> Just Ascending
+        "DESCENDING" -> Just Descending
         _ -> Nothing
 
 instance ToText DirectoryUsersWatchSortOrder where
     toText = \case
-        DUWSOAscending -> "ASCENDING"
-        DUWSODescending -> "DESCENDING"
+        Ascending -> "ASCENDING"
+        Descending -> "DESCENDING"
 
 instance FromJSON DirectoryUsersWatchSortOrder where
     parseJSON = parseJSONText "DirectoryUsersWatchSortOrder"
@@ -373,6 +378,35 @@ instance FromJSON DirectoryMobileDevicesGetProjection where
 instance ToJSON DirectoryMobileDevicesGetProjection where
     toJSON = toJSONText
 
+-- | Whether to return results in ascending or descending order.
+data SortOrder
+    = SOAscending
+      -- ^ @ASCENDING@
+      -- Ascending order.
+    | SODescending
+      -- ^ @DESCENDING@
+      -- Descending order.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable SortOrder
+
+instance FromText SortOrder where
+    fromText = \case
+        "ASCENDING" -> Just SOAscending
+        "DESCENDING" -> Just SODescending
+        _ -> Nothing
+
+instance ToText SortOrder where
+    toText = \case
+        SOAscending -> "ASCENDING"
+        SODescending -> "DESCENDING"
+
+instance FromJSON SortOrder where
+    parseJSON = parseJSONText "SortOrder"
+
+instance ToJSON SortOrder where
+    toJSON = toJSONText
+
 -- | Whether to return results in ascending or descending order. Only of use
 -- when orderBy is also used
 data DirectoryMobileDevicesListSortOrder
@@ -401,103 +435,6 @@ instance FromJSON DirectoryMobileDevicesListSortOrder where
     parseJSON = parseJSONText "DirectoryMobileDevicesListSortOrder"
 
 instance ToJSON DirectoryMobileDevicesListSortOrder where
-    toJSON = toJSONText
-
--- | Column to use for sorting results
-data DirectoryUsersListOrderBy
-    = DULOBEmail
-      -- ^ @email@
-      -- Primary email of the user.
-    | DULOBFamilyName
-      -- ^ @familyName@
-      -- User\'s family name.
-    | DULOBGivenName
-      -- ^ @givenName@
-      -- User\'s given name.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DirectoryUsersListOrderBy
-
-instance FromText DirectoryUsersListOrderBy where
-    fromText = \case
-        "email" -> Just DULOBEmail
-        "familyName" -> Just DULOBFamilyName
-        "givenName" -> Just DULOBGivenName
-        _ -> Nothing
-
-instance ToText DirectoryUsersListOrderBy where
-    toText = \case
-        DULOBEmail -> "email"
-        DULOBFamilyName -> "familyName"
-        DULOBGivenName -> "givenName"
-
-instance FromJSON DirectoryUsersListOrderBy where
-    parseJSON = parseJSONText "DirectoryUsersListOrderBy"
-
-instance ToJSON DirectoryUsersListOrderBy where
-    toJSON = toJSONText
-
--- | Whether to return all sub-organizations or just immediate children
-data DirectoryOrgUnitsListType
-    = All
-      -- ^ @all@
-      -- All sub-organization units.
-    | Children
-      -- ^ @children@
-      -- Immediate children only (default).
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DirectoryOrgUnitsListType
-
-instance FromText DirectoryOrgUnitsListType where
-    fromText = \case
-        "all" -> Just All
-        "children" -> Just Children
-        _ -> Nothing
-
-instance ToText DirectoryOrgUnitsListType where
-    toText = \case
-        All -> "all"
-        Children -> "children"
-
-instance FromJSON DirectoryOrgUnitsListType where
-    parseJSON = parseJSONText "DirectoryOrgUnitsListType"
-
-instance ToJSON DirectoryOrgUnitsListType where
-    toJSON = toJSONText
-
--- | What subset of fields to fetch for this user.
-data DirectoryUsersListProjection
-    = DULPBasic
-      -- ^ @basic@
-      -- Do not include any custom fields for the user.
-    | DULPCustom
-      -- ^ @custom@
-      -- Include custom fields from schemas mentioned in customFieldMask.
-    | DULPFull
-      -- ^ @full@
-      -- Include all fields associated with this user.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DirectoryUsersListProjection
-
-instance FromText DirectoryUsersListProjection where
-    fromText = \case
-        "basic" -> Just DULPBasic
-        "custom" -> Just DULPCustom
-        "full" -> Just DULPFull
-        _ -> Nothing
-
-instance ToText DirectoryUsersListProjection where
-    toText = \case
-        DULPBasic -> "basic"
-        DULPCustom -> "custom"
-        DULPFull -> "full"
-
-instance FromJSON DirectoryUsersListProjection where
-    parseJSON = parseJSONText "DirectoryUsersListProjection"
-
-instance ToJSON DirectoryUsersListProjection where
     toJSON = toJSONText
 
 -- | Restrict information returned to a set of selected fields.
@@ -566,25 +503,25 @@ instance ToJSON DirectoryUsersWatchProjection where
 
 -- | Column to use for sorting results
 data DirectoryChromeosDevicesListOrderBy
-    = AnnotatedLocation
+    = DCDLOBAnnotatedLocation
       -- ^ @annotatedLocation@
       -- Chromebook location as annotated by the administrator.
-    | AnnotatedUser
+    | DCDLOBAnnotatedUser
       -- ^ @annotatedUser@
       -- Chromebook user as annotated by administrator.
-    | LastSync
+    | DCDLOBLastSync
       -- ^ @lastSync@
       -- Chromebook last sync.
-    | Notes
+    | DCDLOBNotes
       -- ^ @notes@
       -- Chromebook notes as annotated by the administrator.
-    | SerialNumber
+    | DCDLOBSerialNumber
       -- ^ @serialNumber@
       -- Chromebook Serial Number.
-    | Status
+    | DCDLOBStatus
       -- ^ @status@
       -- Chromebook status.
-    | SupportEndDate
+    | DCDLOBSupportEndDate
       -- ^ @supportEndDate@
       -- Chromebook support end date.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -593,24 +530,24 @@ instance Hashable DirectoryChromeosDevicesListOrderBy
 
 instance FromText DirectoryChromeosDevicesListOrderBy where
     fromText = \case
-        "annotatedLocation" -> Just AnnotatedLocation
-        "annotatedUser" -> Just AnnotatedUser
-        "lastSync" -> Just LastSync
-        "notes" -> Just Notes
-        "serialNumber" -> Just SerialNumber
-        "status" -> Just Status
-        "supportEndDate" -> Just SupportEndDate
+        "annotatedLocation" -> Just DCDLOBAnnotatedLocation
+        "annotatedUser" -> Just DCDLOBAnnotatedUser
+        "lastSync" -> Just DCDLOBLastSync
+        "notes" -> Just DCDLOBNotes
+        "serialNumber" -> Just DCDLOBSerialNumber
+        "status" -> Just DCDLOBStatus
+        "supportEndDate" -> Just DCDLOBSupportEndDate
         _ -> Nothing
 
 instance ToText DirectoryChromeosDevicesListOrderBy where
     toText = \case
-        AnnotatedLocation -> "annotatedLocation"
-        AnnotatedUser -> "annotatedUser"
-        LastSync -> "lastSync"
-        Notes -> "notes"
-        SerialNumber -> "serialNumber"
-        Status -> "status"
-        SupportEndDate -> "supportEndDate"
+        DCDLOBAnnotatedLocation -> "annotatedLocation"
+        DCDLOBAnnotatedUser -> "annotatedUser"
+        DCDLOBLastSync -> "lastSync"
+        DCDLOBNotes -> "notes"
+        DCDLOBSerialNumber -> "serialNumber"
+        DCDLOBStatus -> "status"
+        DCDLOBSupportEndDate -> "supportEndDate"
 
 instance FromJSON DirectoryChromeosDevicesListOrderBy where
     parseJSON = parseJSONText "DirectoryChromeosDevicesListOrderBy"
@@ -693,6 +630,40 @@ instance ToJSON DirectoryMobileDevicesListProjection where
     toJSON = toJSONText
 
 -- | What subset of fields to fetch for this user.
+data Projection
+    = PBasic
+      -- ^ @basic@
+      -- Do not include any custom fields for the user.
+    | PCustom
+      -- ^ @custom@
+      -- Include custom fields from schemas mentioned in customFieldMask.
+    | PFull
+      -- ^ @full@
+      -- Include all fields associated with this user.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Projection
+
+instance FromText Projection where
+    fromText = \case
+        "basic" -> Just PBasic
+        "custom" -> Just PCustom
+        "full" -> Just PFull
+        _ -> Nothing
+
+instance ToText Projection where
+    toText = \case
+        PBasic -> "basic"
+        PCustom -> "custom"
+        PFull -> "full"
+
+instance FromJSON Projection where
+    parseJSON = parseJSONText "Projection"
+
+instance ToJSON Projection where
+    toJSON = toJSONText
+
+-- | What subset of fields to fetch for this user.
 data DirectoryUsersGetProjection
     = DUGPBasic
       -- ^ @basic@
@@ -724,6 +695,35 @@ instance FromJSON DirectoryUsersGetProjection where
     parseJSON = parseJSONText "DirectoryUsersGetProjection"
 
 instance ToJSON DirectoryUsersGetProjection where
+    toJSON = toJSONText
+
+-- | Whether to return all sub-organizations or just immediate children
+data Type
+    = All
+      -- ^ @all@
+      -- All sub-organization units.
+    | Children
+      -- ^ @children@
+      -- Immediate children only (default).
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Type
+
+instance FromText Type where
+    fromText = \case
+        "all" -> Just All
+        "children" -> Just Children
+        _ -> Nothing
+
+instance ToText Type where
+    toText = \case
+        All -> "all"
+        Children -> "children"
+
+instance FromJSON Type where
+    parseJSON = parseJSONText "Type"
+
+instance ToJSON Type where
     toJSON = toJSONText
 
 -- | Restrict information returned to a set of selected fields.

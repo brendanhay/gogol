@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,9 +37,9 @@ module Network.Google.Resource.ResourceViews.ZoneViews.SetService
     , zvssProject
     , zvssUserIP
     , zvssZone
+    , zvssPayload
     , zvssKey
     , zvssOAuthToken
-    , zvssZoneViewsSetServiceRequest
     , zvssFields
     ) where
 
@@ -68,17 +69,17 @@ type ZoneViewsSetServiceResource =
 --
 -- /See:/ 'zoneViewsSetService'' smart constructor.
 data ZoneViewsSetService' = ZoneViewsSetService'
-    { _zvssQuotaUser                  :: !(Maybe Text)
-    , _zvssPrettyPrint                :: !Bool
-    , _zvssResourceView               :: !Text
-    , _zvssProject                    :: !Text
-    , _zvssUserIP                     :: !(Maybe Text)
-    , _zvssZone                       :: !Text
-    , _zvssKey                        :: !(Maybe Key)
-    , _zvssOAuthToken                 :: !(Maybe OAuthToken)
-    , _zvssZoneViewsSetServiceRequest :: !ZoneViewsSetServiceRequest
-    , _zvssFields                     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _zvssQuotaUser    :: !(Maybe Text)
+    , _zvssPrettyPrint  :: !Bool
+    , _zvssResourceView :: !Text
+    , _zvssProject      :: !Text
+    , _zvssUserIP       :: !(Maybe Text)
+    , _zvssZone         :: !Text
+    , _zvssPayload      :: !ZoneViewsSetServiceRequest
+    , _zvssKey          :: !(Maybe Key)
+    , _zvssOAuthToken   :: !(Maybe OAuthToken)
+    , _zvssFields       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsSetService'' with the minimum fields required to make a request.
 --
@@ -96,20 +97,20 @@ data ZoneViewsSetService' = ZoneViewsSetService'
 --
 -- * 'zvssZone'
 --
+-- * 'zvssPayload'
+--
 -- * 'zvssKey'
 --
 -- * 'zvssOAuthToken'
---
--- * 'zvssZoneViewsSetServiceRequest'
 --
 -- * 'zvssFields'
 zoneViewsSetService'
     :: Text -- ^ 'resourceView'
     -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> ZoneViewsSetServiceRequest -- ^ 'ZoneViewsSetServiceRequest'
+    -> ZoneViewsSetServiceRequest -- ^ 'payload'
     -> ZoneViewsSetService'
-zoneViewsSetService' pZvssResourceView_ pZvssProject_ pZvssZone_ pZvssZoneViewsSetServiceRequest_ =
+zoneViewsSetService' pZvssResourceView_ pZvssProject_ pZvssZone_ pZvssPayload_ =
     ZoneViewsSetService'
     { _zvssQuotaUser = Nothing
     , _zvssPrettyPrint = True
@@ -117,9 +118,9 @@ zoneViewsSetService' pZvssResourceView_ pZvssProject_ pZvssZone_ pZvssZoneViewsS
     , _zvssProject = pZvssProject_
     , _zvssUserIP = Nothing
     , _zvssZone = pZvssZone_
+    , _zvssPayload = pZvssPayload_
     , _zvssKey = Nothing
     , _zvssOAuthToken = Nothing
-    , _zvssZoneViewsSetServiceRequest = pZvssZoneViewsSetServiceRequest_
     , _zvssFields = Nothing
     }
 
@@ -158,6 +159,11 @@ zvssUserIP
 zvssZone :: Lens' ZoneViewsSetService' Text
 zvssZone = lens _zvssZone (\ s a -> s{_zvssZone = a})
 
+-- | Multipart request metadata.
+zvssPayload :: Lens' ZoneViewsSetService' ZoneViewsSetServiceRequest
+zvssPayload
+  = lens _zvssPayload (\ s a -> s{_zvssPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -169,12 +175,6 @@ zvssOAuthToken :: Lens' ZoneViewsSetService' (Maybe OAuthToken)
 zvssOAuthToken
   = lens _zvssOAuthToken
       (\ s a -> s{_zvssOAuthToken = a})
-
--- | Multipart request metadata.
-zvssZoneViewsSetServiceRequest :: Lens' ZoneViewsSetService' ZoneViewsSetServiceRequest
-zvssZoneViewsSetServiceRequest
-  = lens _zvssZoneViewsSetServiceRequest
-      (\ s a -> s{_zvssZoneViewsSetServiceRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 zvssFields :: Lens' ZoneViewsSetService' (Maybe Text)
@@ -197,7 +197,7 @@ instance GoogleRequest ZoneViewsSetService' where
               _zvssKey
               _zvssOAuthToken
               (Just AltJSON)
-              _zvssZoneViewsSetServiceRequest
+              _zvssPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ZoneViewsSetServiceResource)

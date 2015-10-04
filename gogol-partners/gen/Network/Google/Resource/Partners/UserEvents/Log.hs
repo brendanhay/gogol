@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,9 +38,9 @@ module Network.Google.Resource.Partners.UserEvents.Log
     , uelPp
     , uelAccessToken
     , uelUploadType
+    , uelPayload
     , uelBearerToken
     , uelKey
-    , uelLogUserEventRequest
     , uelOAuthToken
     , uelFields
     , uelCallback
@@ -54,12 +55,12 @@ type UserEventsLogResource =
      "v2" :>
        "userEvents:log" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -73,20 +74,20 @@ type UserEventsLogResource =
 --
 -- /See:/ 'userEventsLog'' smart constructor.
 data UserEventsLog' = UserEventsLog'
-    { _uelXgafv               :: !(Maybe Text)
-    , _uelQuotaUser           :: !(Maybe Text)
-    , _uelPrettyPrint         :: !Bool
-    , _uelUploadProtocol      :: !(Maybe Text)
-    , _uelPp                  :: !Bool
-    , _uelAccessToken         :: !(Maybe Text)
-    , _uelUploadType          :: !(Maybe Text)
-    , _uelBearerToken         :: !(Maybe Text)
-    , _uelKey                 :: !(Maybe Key)
-    , _uelLogUserEventRequest :: !LogUserEventRequest
-    , _uelOAuthToken          :: !(Maybe OAuthToken)
-    , _uelFields              :: !(Maybe Text)
-    , _uelCallback            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _uelXgafv          :: !(Maybe Text)
+    , _uelQuotaUser      :: !(Maybe Text)
+    , _uelPrettyPrint    :: !Bool
+    , _uelUploadProtocol :: !(Maybe Text)
+    , _uelPp             :: !Bool
+    , _uelAccessToken    :: !(Maybe Text)
+    , _uelUploadType     :: !(Maybe Text)
+    , _uelPayload        :: !LogUserEventRequest
+    , _uelBearerToken    :: !(Maybe Text)
+    , _uelKey            :: !(Maybe Key)
+    , _uelOAuthToken     :: !(Maybe OAuthToken)
+    , _uelFields         :: !(Maybe Text)
+    , _uelCallback       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserEventsLog'' with the minimum fields required to make a request.
 --
@@ -106,11 +107,11 @@ data UserEventsLog' = UserEventsLog'
 --
 -- * 'uelUploadType'
 --
+-- * 'uelPayload'
+--
 -- * 'uelBearerToken'
 --
 -- * 'uelKey'
---
--- * 'uelLogUserEventRequest'
 --
 -- * 'uelOAuthToken'
 --
@@ -118,9 +119,9 @@ data UserEventsLog' = UserEventsLog'
 --
 -- * 'uelCallback'
 userEventsLog'
-    :: LogUserEventRequest -- ^ 'LogUserEventRequest'
+    :: LogUserEventRequest -- ^ 'payload'
     -> UserEventsLog'
-userEventsLog' pUelLogUserEventRequest_ =
+userEventsLog' pUelPayload_ =
     UserEventsLog'
     { _uelXgafv = Nothing
     , _uelQuotaUser = Nothing
@@ -129,9 +130,9 @@ userEventsLog' pUelLogUserEventRequest_ =
     , _uelPp = True
     , _uelAccessToken = Nothing
     , _uelUploadType = Nothing
+    , _uelPayload = pUelPayload_
     , _uelBearerToken = Nothing
     , _uelKey = Nothing
-    , _uelLogUserEventRequest = pUelLogUserEventRequest_
     , _uelOAuthToken = Nothing
     , _uelFields = Nothing
     , _uelCallback = Nothing
@@ -176,6 +177,11 @@ uelUploadType
   = lens _uelUploadType
       (\ s a -> s{_uelUploadType = a})
 
+-- | Multipart request metadata.
+uelPayload :: Lens' UserEventsLog' LogUserEventRequest
+uelPayload
+  = lens _uelPayload (\ s a -> s{_uelPayload = a})
+
 -- | OAuth bearer token.
 uelBearerToken :: Lens' UserEventsLog' (Maybe Text)
 uelBearerToken
@@ -187,12 +193,6 @@ uelBearerToken
 -- token.
 uelKey :: Lens' UserEventsLog' (Maybe Key)
 uelKey = lens _uelKey (\ s a -> s{_uelKey = a})
-
--- | Multipart request metadata.
-uelLogUserEventRequest :: Lens' UserEventsLog' LogUserEventRequest
-uelLogUserEventRequest
-  = lens _uelLogUserEventRequest
-      (\ s a -> s{_uelLogUserEventRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 uelOAuthToken :: Lens' UserEventsLog' (Maybe OAuthToken)
@@ -218,18 +218,18 @@ instance GoogleRequest UserEventsLog' where
         type Rs UserEventsLog' = LogUserEventResponse
         request = requestWithRoute defReq partnersURL
         requestWithRoute r u UserEventsLog'{..}
-          = go _uelXgafv _uelAccessToken _uelBearerToken
-              _uelCallback
-              (Just _uelPp)
+          = go _uelXgafv _uelUploadProtocol (Just _uelPp)
+              _uelAccessToken
               _uelUploadType
-              _uelUploadProtocol
+              _uelBearerToken
+              _uelCallback
               _uelQuotaUser
               (Just _uelPrettyPrint)
               _uelFields
               _uelKey
               _uelOAuthToken
               (Just AltJSON)
-              _uelLogUserEventRequest
+              _uelPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UserEventsLogResource)

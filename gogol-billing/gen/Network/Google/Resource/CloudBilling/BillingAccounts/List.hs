@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -56,14 +57,14 @@ type BillingAccountsListResource =
      "v1" :>
        "billingAccounts" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pageSize" Int32 :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" Int32 :>
+                         QueryParam "callback" Text :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "fields" Text :>
@@ -91,7 +92,7 @@ data BillingAccountsList' = BillingAccountsList'
     , _balPageSize       :: !(Maybe Int32)
     , _balFields         :: !(Maybe Text)
     , _balCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BillingAccountsList'' with the minimum fields required to make a request.
 --
@@ -234,13 +235,13 @@ instance GoogleRequest BillingAccountsList' where
              ListBillingAccountsResponse
         request = requestWithRoute defReq billingURL
         requestWithRoute r u BillingAccountsList'{..}
-          = go _balXgafv _balAccessToken _balBearerToken
-              _balCallback
-              _balPageSize
-              _balPageToken
-              (Just _balPp)
+          = go _balXgafv _balUploadProtocol (Just _balPp)
+              _balAccessToken
               _balUploadType
-              _balUploadProtocol
+              _balBearerToken
+              _balPageToken
+              _balPageSize
+              _balCallback
               _balQuotaUser
               (Just _balPrettyPrint)
               _balFields

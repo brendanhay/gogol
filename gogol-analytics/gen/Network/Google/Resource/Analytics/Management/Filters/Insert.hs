@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.Analytics.Management.Filters.Insert
     , mfiQuotaUser
     , mfiPrettyPrint
     , mfiUserIP
+    , mfiPayload
     , mfiAccountId
     , mfiKey
-    , mfiFilter
     , mfiOAuthToken
     , mfiFields
     ) where
@@ -66,12 +67,12 @@ data ManagementFiltersInsert' = ManagementFiltersInsert'
     { _mfiQuotaUser   :: !(Maybe Text)
     , _mfiPrettyPrint :: !Bool
     , _mfiUserIP      :: !(Maybe Text)
+    , _mfiPayload     :: !Filter
     , _mfiAccountId   :: !Text
     , _mfiKey         :: !(Maybe Key)
-    , _mfiFilter      :: !Filter
     , _mfiOAuthToken  :: !(Maybe OAuthToken)
     , _mfiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersInsert'' with the minimum fields required to make a request.
 --
@@ -83,27 +84,27 @@ data ManagementFiltersInsert' = ManagementFiltersInsert'
 --
 -- * 'mfiUserIP'
 --
+-- * 'mfiPayload'
+--
 -- * 'mfiAccountId'
 --
 -- * 'mfiKey'
---
--- * 'mfiFilter'
 --
 -- * 'mfiOAuthToken'
 --
 -- * 'mfiFields'
 managementFiltersInsert'
-    :: Text -- ^ 'accountId'
-    -> Filter -- ^ 'Filter'
+    :: Filter -- ^ 'payload'
+    -> Text -- ^ 'accountId'
     -> ManagementFiltersInsert'
-managementFiltersInsert' pMfiAccountId_ pMfiFilter_ =
+managementFiltersInsert' pMfiPayload_ pMfiAccountId_ =
     ManagementFiltersInsert'
     { _mfiQuotaUser = Nothing
     , _mfiPrettyPrint = False
     , _mfiUserIP = Nothing
+    , _mfiPayload = pMfiPayload_
     , _mfiAccountId = pMfiAccountId_
     , _mfiKey = Nothing
-    , _mfiFilter = pMfiFilter_
     , _mfiOAuthToken = Nothing
     , _mfiFields = Nothing
     }
@@ -127,6 +128,11 @@ mfiUserIP :: Lens' ManagementFiltersInsert' (Maybe Text)
 mfiUserIP
   = lens _mfiUserIP (\ s a -> s{_mfiUserIP = a})
 
+-- | Multipart request metadata.
+mfiPayload :: Lens' ManagementFiltersInsert' Filter
+mfiPayload
+  = lens _mfiPayload (\ s a -> s{_mfiPayload = a})
+
 -- | Account ID to create filter for.
 mfiAccountId :: Lens' ManagementFiltersInsert' Text
 mfiAccountId
@@ -137,11 +143,6 @@ mfiAccountId
 -- token.
 mfiKey :: Lens' ManagementFiltersInsert' (Maybe Key)
 mfiKey = lens _mfiKey (\ s a -> s{_mfiKey = a})
-
--- | Multipart request metadata.
-mfiFilter :: Lens' ManagementFiltersInsert' Filter
-mfiFilter
-  = lens _mfiFilter (\ s a -> s{_mfiFilter = a})
 
 -- | OAuth 2.0 token for the current user.
 mfiOAuthToken :: Lens' ManagementFiltersInsert' (Maybe OAuthToken)
@@ -169,7 +170,7 @@ instance GoogleRequest ManagementFiltersInsert' where
               _mfiKey
               _mfiOAuthToken
               (Just AltJSON)
-              _mfiFilter
+              _mfiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementFiltersInsertResource)

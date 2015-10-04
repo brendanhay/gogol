@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,10 +56,10 @@ type TasksLeaseResource =
          Capture "taskqueue" Text :>
            "tasks" :>
              "lease" :>
-               QueryParam "groupByTag" Bool :>
-                 QueryParam "tag" Text :>
-                   QueryParam "numTasks" Int32 :>
-                     QueryParam "leaseSecs" Int32 :>
+               QueryParam "numTasks" Int32 :>
+                 QueryParam "leaseSecs" Int32 :>
+                   QueryParam "tag" Text :>
+                     QueryParam "groupByTag" Bool :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -84,7 +85,7 @@ data TasksLease' = TasksLease'
     , _tlOAuthToken  :: !(Maybe OAuthToken)
     , _tlGroupByTag  :: !(Maybe Bool)
     , _tlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksLease'' with the minimum fields required to make a request.
 --
@@ -209,9 +210,10 @@ instance GoogleRequest TasksLease' where
         request
           = requestWithRoute defReq appEngineTaskQueueURL
         requestWithRoute r u TasksLease'{..}
-          = go _tlGroupByTag _tlTag _tlProject _tlTaskqueue
-              (Just _tlNumTasks)
+          = go _tlProject _tlTaskqueue (Just _tlNumTasks)
               (Just _tlLeaseSecs)
+              _tlTag
+              _tlGroupByTag
               _tlQuotaUser
               (Just _tlPrettyPrint)
               _tlUserIP

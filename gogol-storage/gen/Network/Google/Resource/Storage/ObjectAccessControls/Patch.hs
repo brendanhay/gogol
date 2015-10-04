@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,11 +36,11 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Patch
     , oacpPrettyPrint
     , oacpUserIP
     , oacpBucket
+    , oacpPayload
     , oacpKey
     , oacpObject
     , oacpOAuthToken
     , oacpEntity
-    , oacpObjectAccessControl
     , oacpGeneration
     , oacpFields
     ) where
@@ -72,18 +73,18 @@ type ObjectAccessControlsPatchResource =
 --
 -- /See:/ 'objectAccessControlsPatch'' smart constructor.
 data ObjectAccessControlsPatch' = ObjectAccessControlsPatch'
-    { _oacpQuotaUser           :: !(Maybe Text)
-    , _oacpPrettyPrint         :: !Bool
-    , _oacpUserIP              :: !(Maybe Text)
-    , _oacpBucket              :: !Text
-    , _oacpKey                 :: !(Maybe Key)
-    , _oacpObject              :: !Text
-    , _oacpOAuthToken          :: !(Maybe OAuthToken)
-    , _oacpEntity              :: !Text
-    , _oacpObjectAccessControl :: !ObjectAccessControl
-    , _oacpGeneration          :: !(Maybe Word64)
-    , _oacpFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _oacpQuotaUser   :: !(Maybe Text)
+    , _oacpPrettyPrint :: !Bool
+    , _oacpUserIP      :: !(Maybe Text)
+    , _oacpBucket      :: !Text
+    , _oacpPayload     :: !ObjectAccessControl
+    , _oacpKey         :: !(Maybe Key)
+    , _oacpObject      :: !Text
+    , _oacpOAuthToken  :: !(Maybe OAuthToken)
+    , _oacpEntity      :: !Text
+    , _oacpGeneration  :: !(Maybe Word64)
+    , _oacpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsPatch'' with the minimum fields required to make a request.
 --
@@ -97,6 +98,8 @@ data ObjectAccessControlsPatch' = ObjectAccessControlsPatch'
 --
 -- * 'oacpBucket'
 --
+-- * 'oacpPayload'
+--
 -- * 'oacpKey'
 --
 -- * 'oacpObject'
@@ -105,28 +108,26 @@ data ObjectAccessControlsPatch' = ObjectAccessControlsPatch'
 --
 -- * 'oacpEntity'
 --
--- * 'oacpObjectAccessControl'
---
 -- * 'oacpGeneration'
 --
 -- * 'oacpFields'
 objectAccessControlsPatch'
     :: Text -- ^ 'bucket'
+    -> ObjectAccessControl -- ^ 'payload'
     -> Text -- ^ 'object'
     -> Text -- ^ 'entity'
-    -> ObjectAccessControl -- ^ 'ObjectAccessControl'
     -> ObjectAccessControlsPatch'
-objectAccessControlsPatch' pOacpBucket_ pOacpObject_ pOacpEntity_ pOacpObjectAccessControl_ =
+objectAccessControlsPatch' pOacpBucket_ pOacpPayload_ pOacpObject_ pOacpEntity_ =
     ObjectAccessControlsPatch'
     { _oacpQuotaUser = Nothing
     , _oacpPrettyPrint = True
     , _oacpUserIP = Nothing
     , _oacpBucket = pOacpBucket_
+    , _oacpPayload = pOacpPayload_
     , _oacpKey = Nothing
     , _oacpObject = pOacpObject_
     , _oacpOAuthToken = Nothing
     , _oacpEntity = pOacpEntity_
-    , _oacpObjectAccessControl = pOacpObjectAccessControl_
     , _oacpGeneration = Nothing
     , _oacpFields = Nothing
     }
@@ -156,6 +157,11 @@ oacpBucket :: Lens' ObjectAccessControlsPatch' Text
 oacpBucket
   = lens _oacpBucket (\ s a -> s{_oacpBucket = a})
 
+-- | Multipart request metadata.
+oacpPayload :: Lens' ObjectAccessControlsPatch' ObjectAccessControl
+oacpPayload
+  = lens _oacpPayload (\ s a -> s{_oacpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -180,12 +186,6 @@ oacpEntity :: Lens' ObjectAccessControlsPatch' Text
 oacpEntity
   = lens _oacpEntity (\ s a -> s{_oacpEntity = a})
 
--- | Multipart request metadata.
-oacpObjectAccessControl :: Lens' ObjectAccessControlsPatch' ObjectAccessControl
-oacpObjectAccessControl
-  = lens _oacpObjectAccessControl
-      (\ s a -> s{_oacpObjectAccessControl = a})
-
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
 oacpGeneration :: Lens' ObjectAccessControlsPatch' (Maybe Word64)
@@ -208,8 +208,8 @@ instance GoogleRequest ObjectAccessControlsPatch'
              ObjectAccessControl
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectAccessControlsPatch'{..}
-          = go _oacpGeneration _oacpBucket _oacpObject
-              _oacpEntity
+          = go _oacpBucket _oacpObject _oacpEntity
+              _oacpGeneration
               _oacpQuotaUser
               (Just _oacpPrettyPrint)
               _oacpUserIP
@@ -217,7 +217,7 @@ instance GoogleRequest ObjectAccessControlsPatch'
               _oacpKey
               _oacpOAuthToken
               (Just AltJSON)
-              _oacpObjectAccessControl
+              _oacpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ObjectAccessControlsPatchResource)

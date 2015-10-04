@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.AdSenseHost.CustomChannels.Patch
     , ccpPrettyPrint
     , ccpCustomChannelId
     , ccpUserIP
+    , ccpPayload
     , ccpAdClientId
     , ccpKey
-    , ccpCustomChannel
     , ccpOAuthToken
     , ccpFields
     ) where
@@ -71,12 +72,12 @@ data CustomChannelsPatch' = CustomChannelsPatch'
     , _ccpPrettyPrint     :: !Bool
     , _ccpCustomChannelId :: !Text
     , _ccpUserIP          :: !(Maybe Text)
+    , _ccpPayload         :: !CustomChannel
     , _ccpAdClientId      :: !Text
     , _ccpKey             :: !(Maybe Key)
-    , _ccpCustomChannel   :: !CustomChannel
     , _ccpOAuthToken      :: !(Maybe OAuthToken)
     , _ccpFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomChannelsPatch'' with the minimum fields required to make a request.
 --
@@ -90,29 +91,29 @@ data CustomChannelsPatch' = CustomChannelsPatch'
 --
 -- * 'ccpUserIP'
 --
+-- * 'ccpPayload'
+--
 -- * 'ccpAdClientId'
 --
 -- * 'ccpKey'
---
--- * 'ccpCustomChannel'
 --
 -- * 'ccpOAuthToken'
 --
 -- * 'ccpFields'
 customChannelsPatch'
     :: Text -- ^ 'customChannelId'
+    -> CustomChannel -- ^ 'payload'
     -> Text -- ^ 'adClientId'
-    -> CustomChannel -- ^ 'CustomChannel'
     -> CustomChannelsPatch'
-customChannelsPatch' pCcpCustomChannelId_ pCcpAdClientId_ pCcpCustomChannel_ =
+customChannelsPatch' pCcpCustomChannelId_ pCcpPayload_ pCcpAdClientId_ =
     CustomChannelsPatch'
     { _ccpQuotaUser = Nothing
     , _ccpPrettyPrint = True
     , _ccpCustomChannelId = pCcpCustomChannelId_
     , _ccpUserIP = Nothing
+    , _ccpPayload = pCcpPayload_
     , _ccpAdClientId = pCcpAdClientId_
     , _ccpKey = Nothing
-    , _ccpCustomChannel = pCcpCustomChannel_
     , _ccpOAuthToken = Nothing
     , _ccpFields = Nothing
     }
@@ -142,6 +143,11 @@ ccpUserIP :: Lens' CustomChannelsPatch' (Maybe Text)
 ccpUserIP
   = lens _ccpUserIP (\ s a -> s{_ccpUserIP = a})
 
+-- | Multipart request metadata.
+ccpPayload :: Lens' CustomChannelsPatch' CustomChannel
+ccpPayload
+  = lens _ccpPayload (\ s a -> s{_ccpPayload = a})
+
 -- | Ad client in which the custom channel will be updated.
 ccpAdClientId :: Lens' CustomChannelsPatch' Text
 ccpAdClientId
@@ -153,12 +159,6 @@ ccpAdClientId
 -- token.
 ccpKey :: Lens' CustomChannelsPatch' (Maybe Key)
 ccpKey = lens _ccpKey (\ s a -> s{_ccpKey = a})
-
--- | Multipart request metadata.
-ccpCustomChannel :: Lens' CustomChannelsPatch' CustomChannel
-ccpCustomChannel
-  = lens _ccpCustomChannel
-      (\ s a -> s{_ccpCustomChannel = a})
 
 -- | OAuth 2.0 token for the current user.
 ccpOAuthToken :: Lens' CustomChannelsPatch' (Maybe OAuthToken)
@@ -187,7 +187,7 @@ instance GoogleRequest CustomChannelsPatch' where
               _ccpKey
               _ccpOAuthToken
               (Just AltJSON)
-              _ccpCustomChannel
+              _ccpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CustomChannelsPatchResource)

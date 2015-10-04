@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.FusionTables.Style.Patch
     , spQuotaUser
     , spPrettyPrint
     , spUserIP
-    , spStyleSetting
+    , spPayload
     , spKey
     , spStyleId
     , spOAuthToken
@@ -65,16 +66,16 @@ type StylePatchResource =
 --
 -- /See:/ 'stylePatch'' smart constructor.
 data StylePatch' = StylePatch'
-    { _spQuotaUser    :: !(Maybe Text)
-    , _spPrettyPrint  :: !Bool
-    , _spUserIP       :: !(Maybe Text)
-    , _spStyleSetting :: !StyleSetting
-    , _spKey          :: !(Maybe Key)
-    , _spStyleId      :: !Int32
-    , _spOAuthToken   :: !(Maybe OAuthToken)
-    , _spTableId      :: !Text
-    , _spFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _spQuotaUser   :: !(Maybe Text)
+    , _spPrettyPrint :: !Bool
+    , _spUserIP      :: !(Maybe Text)
+    , _spPayload     :: !StyleSetting
+    , _spKey         :: !(Maybe Key)
+    , _spStyleId     :: !Int32
+    , _spOAuthToken  :: !(Maybe OAuthToken)
+    , _spTableId     :: !Text
+    , _spFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StylePatch'' with the minimum fields required to make a request.
 --
@@ -86,7 +87,7 @@ data StylePatch' = StylePatch'
 --
 -- * 'spUserIP'
 --
--- * 'spStyleSetting'
+-- * 'spPayload'
 --
 -- * 'spKey'
 --
@@ -98,16 +99,16 @@ data StylePatch' = StylePatch'
 --
 -- * 'spFields'
 stylePatch'
-    :: StyleSetting -- ^ 'StyleSetting'
+    :: StyleSetting -- ^ 'payload'
     -> Int32 -- ^ 'styleId'
     -> Text -- ^ 'tableId'
     -> StylePatch'
-stylePatch' pSpStyleSetting_ pSpStyleId_ pSpTableId_ =
+stylePatch' pSpPayload_ pSpStyleId_ pSpTableId_ =
     StylePatch'
     { _spQuotaUser = Nothing
     , _spPrettyPrint = True
     , _spUserIP = Nothing
-    , _spStyleSetting = pSpStyleSetting_
+    , _spPayload = pSpPayload_
     , _spKey = Nothing
     , _spStyleId = pSpStyleId_
     , _spOAuthToken = Nothing
@@ -134,10 +135,9 @@ spUserIP :: Lens' StylePatch' (Maybe Text)
 spUserIP = lens _spUserIP (\ s a -> s{_spUserIP = a})
 
 -- | Multipart request metadata.
-spStyleSetting :: Lens' StylePatch' StyleSetting
-spStyleSetting
-  = lens _spStyleSetting
-      (\ s a -> s{_spStyleSetting = a})
+spPayload :: Lens' StylePatch' StyleSetting
+spPayload
+  = lens _spPayload (\ s a -> s{_spPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -179,7 +179,7 @@ instance GoogleRequest StylePatch' where
               _spKey
               _spOAuthToken
               (Just AltJSON)
-              _spStyleSetting
+              _spPayload
           where go
                   = clientWithRoute (Proxy :: Proxy StylePatchResource)
                       r

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.DFAReporting.RemarketingListShares.Patch
     , rlspPrettyPrint
     , rlspUserIP
     , rlspProfileId
-    , rlspRemarketingListShare
+    , rlspPayload
     , rlspRemarketingListId
     , rlspKey
     , rlspOAuthToken
@@ -67,16 +68,16 @@ type RemarketingListSharesPatchResource =
 --
 -- /See:/ 'remarketingListSharesPatch'' smart constructor.
 data RemarketingListSharesPatch' = RemarketingListSharesPatch'
-    { _rlspQuotaUser            :: !(Maybe Text)
-    , _rlspPrettyPrint          :: !Bool
-    , _rlspUserIP               :: !(Maybe Text)
-    , _rlspProfileId            :: !Int64
-    , _rlspRemarketingListShare :: !RemarketingListShare
-    , _rlspRemarketingListId    :: !Int64
-    , _rlspKey                  :: !(Maybe Key)
-    , _rlspOAuthToken           :: !(Maybe OAuthToken)
-    , _rlspFields               :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rlspQuotaUser         :: !(Maybe Text)
+    , _rlspPrettyPrint       :: !Bool
+    , _rlspUserIP            :: !(Maybe Text)
+    , _rlspProfileId         :: !Int64
+    , _rlspPayload           :: !RemarketingListShare
+    , _rlspRemarketingListId :: !Int64
+    , _rlspKey               :: !(Maybe Key)
+    , _rlspOAuthToken        :: !(Maybe OAuthToken)
+    , _rlspFields            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListSharesPatch'' with the minimum fields required to make a request.
 --
@@ -90,7 +91,7 @@ data RemarketingListSharesPatch' = RemarketingListSharesPatch'
 --
 -- * 'rlspProfileId'
 --
--- * 'rlspRemarketingListShare'
+-- * 'rlspPayload'
 --
 -- * 'rlspRemarketingListId'
 --
@@ -101,16 +102,16 @@ data RemarketingListSharesPatch' = RemarketingListSharesPatch'
 -- * 'rlspFields'
 remarketingListSharesPatch'
     :: Int64 -- ^ 'profileId'
-    -> RemarketingListShare -- ^ 'RemarketingListShare'
+    -> RemarketingListShare -- ^ 'payload'
     -> Int64 -- ^ 'remarketingListId'
     -> RemarketingListSharesPatch'
-remarketingListSharesPatch' pRlspProfileId_ pRlspRemarketingListShare_ pRlspRemarketingListId_ =
+remarketingListSharesPatch' pRlspProfileId_ pRlspPayload_ pRlspRemarketingListId_ =
     RemarketingListSharesPatch'
     { _rlspQuotaUser = Nothing
     , _rlspPrettyPrint = True
     , _rlspUserIP = Nothing
     , _rlspProfileId = pRlspProfileId_
-    , _rlspRemarketingListShare = pRlspRemarketingListShare_
+    , _rlspPayload = pRlspPayload_
     , _rlspRemarketingListId = pRlspRemarketingListId_
     , _rlspKey = Nothing
     , _rlspOAuthToken = Nothing
@@ -144,10 +145,9 @@ rlspProfileId
       (\ s a -> s{_rlspProfileId = a})
 
 -- | Multipart request metadata.
-rlspRemarketingListShare :: Lens' RemarketingListSharesPatch' RemarketingListShare
-rlspRemarketingListShare
-  = lens _rlspRemarketingListShare
-      (\ s a -> s{_rlspRemarketingListShare = a})
+rlspPayload :: Lens' RemarketingListSharesPatch' RemarketingListShare
+rlspPayload
+  = lens _rlspPayload (\ s a -> s{_rlspPayload = a})
 
 -- | Remarketing list ID.
 rlspRemarketingListId :: Lens' RemarketingListSharesPatch' Int64
@@ -190,7 +190,7 @@ instance GoogleRequest RemarketingListSharesPatch'
               _rlspKey
               _rlspOAuthToken
               (Just AltJSON)
-              _rlspRemarketingListShare
+              _rlspPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RemarketingListSharesPatchResource)

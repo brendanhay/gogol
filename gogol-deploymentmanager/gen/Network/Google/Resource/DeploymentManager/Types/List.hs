@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,8 +53,8 @@ type TypesListResource =
        "global" :>
          "types" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data TypesList' = TypesList'
     , _tlOAuthToken  :: !(Maybe OAuthToken)
     , _tlMaxResults  :: !Word32
     , _tlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TypesList'' with the minimum fields required to make a request.
 --
@@ -192,8 +193,8 @@ instance GoogleRequest TypesList' where
         request
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u TypesList'{..}
-          = go _tlFilter (Just _tlMaxResults) _tlPageToken
-              _tlProject
+          = go _tlProject _tlFilter _tlPageToken
+              (Just _tlMaxResults)
               _tlQuotaUser
               (Just _tlPrettyPrint)
               _tlUserIP

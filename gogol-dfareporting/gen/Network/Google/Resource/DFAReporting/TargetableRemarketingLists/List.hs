@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,17 +56,17 @@ type TargetableRemarketingListsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "targetableRemarketingLists" :>
-           QueryParam "active" Bool :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "name" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "sortField"
-                     DfareportingTargetableRemarketingListsListSortField
-                     :>
-                     QueryParam "sortOrder"
-                       DfareportingTargetableRemarketingListsListSortOrder
+           QueryParam "advertiserId" Int64 :>
+             QueryParam "sortOrder"
+               DfareportingTargetableRemarketingListsListSortOrder
+               :>
+               QueryParam "active" Bool :>
+                 QueryParam "name" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "sortField"
+                       DfareportingTargetableRemarketingListsListSortField
                        :>
-                       QueryParam "advertiserId" Int64 :>
+                       QueryParam "maxResults" Int32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -94,7 +95,7 @@ data TargetableRemarketingListsList' = TargetableRemarketingListsList'
     , _trllOAuthToken   :: !(Maybe OAuthToken)
     , _trllMaxResults   :: !(Maybe Int32)
     , _trllFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetableRemarketingListsList'' with the minimum fields required to make a request.
 --
@@ -251,12 +252,13 @@ instance GoogleRequest
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           TargetableRemarketingListsList'{..}
-          = go _trllActive _trllMaxResults _trllName
+          = go _trllProfileId (Just _trllAdvertiserId)
+              _trllSortOrder
+              _trllActive
+              _trllName
               _trllPageToken
               _trllSortField
-              _trllSortOrder
-              _trllProfileId
-              (Just _trllAdvertiserId)
+              _trllMaxResults
               _trllQuotaUser
               (Just _trllPrettyPrint)
               _trllUserIP

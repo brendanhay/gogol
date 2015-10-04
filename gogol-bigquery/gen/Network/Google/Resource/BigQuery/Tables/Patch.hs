@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,12 +37,12 @@ module Network.Google.Resource.BigQuery.Tables.Patch
     , tpQuotaUser
     , tpPrettyPrint
     , tpUserIP
+    , tpPayload
     , tpKey
     , tpDatasetId
     , tpProjectId
     , tpOAuthToken
     , tpTableId
-    , tpTable
     , tpFields
     ) where
 
@@ -76,14 +77,14 @@ data TablesPatch' = TablesPatch'
     { _tpQuotaUser   :: !(Maybe Text)
     , _tpPrettyPrint :: !Bool
     , _tpUserIP      :: !(Maybe Text)
+    , _tpPayload     :: !Table
     , _tpKey         :: !(Maybe Key)
     , _tpDatasetId   :: !Text
     , _tpProjectId   :: !Text
     , _tpOAuthToken  :: !(Maybe OAuthToken)
     , _tpTableId     :: !Text
-    , _tpTable       :: !Table
     , _tpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesPatch'' with the minimum fields required to make a request.
 --
@@ -95,6 +96,8 @@ data TablesPatch' = TablesPatch'
 --
 -- * 'tpUserIP'
 --
+-- * 'tpPayload'
+--
 -- * 'tpKey'
 --
 -- * 'tpDatasetId'
@@ -105,26 +108,24 @@ data TablesPatch' = TablesPatch'
 --
 -- * 'tpTableId'
 --
--- * 'tpTable'
---
 -- * 'tpFields'
 tablesPatch'
-    :: Text -- ^ 'datasetId'
+    :: Table -- ^ 'payload'
+    -> Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
     -> Text -- ^ 'tableId'
-    -> Table -- ^ 'Table'
     -> TablesPatch'
-tablesPatch' pTpDatasetId_ pTpProjectId_ pTpTableId_ pTpTable_ =
+tablesPatch' pTpPayload_ pTpDatasetId_ pTpProjectId_ pTpTableId_ =
     TablesPatch'
     { _tpQuotaUser = Nothing
     , _tpPrettyPrint = True
     , _tpUserIP = Nothing
+    , _tpPayload = pTpPayload_
     , _tpKey = Nothing
     , _tpDatasetId = pTpDatasetId_
     , _tpProjectId = pTpProjectId_
     , _tpOAuthToken = Nothing
     , _tpTableId = pTpTableId_
-    , _tpTable = pTpTable_
     , _tpFields = Nothing
     }
 
@@ -145,6 +146,11 @@ tpPrettyPrint
 -- want to enforce per-user limits.
 tpUserIP :: Lens' TablesPatch' (Maybe Text)
 tpUserIP = lens _tpUserIP (\ s a -> s{_tpUserIP = a})
+
+-- | Multipart request metadata.
+tpPayload :: Lens' TablesPatch' Table
+tpPayload
+  = lens _tpPayload (\ s a -> s{_tpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -172,10 +178,6 @@ tpTableId :: Lens' TablesPatch' Text
 tpTableId
   = lens _tpTableId (\ s a -> s{_tpTableId = a})
 
--- | Multipart request metadata.
-tpTable :: Lens' TablesPatch' Table
-tpTable = lens _tpTable (\ s a -> s{_tpTable = a})
-
 -- | Selector specifying which fields to include in a partial response.
 tpFields :: Lens' TablesPatch' (Maybe Text)
 tpFields = lens _tpFields (\ s a -> s{_tpFields = a})
@@ -196,7 +198,7 @@ instance GoogleRequest TablesPatch' where
               _tpKey
               _tpOAuthToken
               (Just AltJSON)
-              _tpTable
+              _tpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TablesPatchResource)

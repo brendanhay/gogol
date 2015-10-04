@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,10 +53,10 @@ type TablesFeaturesGetResource =
        Capture "tableId" Text :>
          "features" :>
            Capture "id" Text :>
-             QueryParam "select" Text :>
-               QueryParam "version"
-                 MapsEngineTablesFeaturesGetVersion
-                 :>
+             QueryParam "version"
+               MapsEngineTablesFeaturesGetVersion
+               :>
+               QueryParam "select" Text :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -78,7 +79,7 @@ data TablesFeaturesGet' = TablesFeaturesGet'
     , _tfgOAuthToken  :: !(Maybe OAuthToken)
     , _tfgTableId     :: !Text
     , _tfgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesFeaturesGet'' with the minimum fields required to make a request.
 --
@@ -185,7 +186,7 @@ instance GoogleRequest TablesFeaturesGet' where
         type Rs TablesFeaturesGet' = Feature
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesFeaturesGet'{..}
-          = go _tfgSelect _tfgVersion _tfgTableId _tfgId
+          = go _tfgTableId _tfgId _tfgVersion _tfgSelect
               _tfgQuotaUser
               (Just _tfgPrettyPrint)
               _tfgUserIP

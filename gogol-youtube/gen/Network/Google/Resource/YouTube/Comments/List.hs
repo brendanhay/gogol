@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,13 +52,13 @@ import           Network.Google.YouTube.Types
 -- 'CommentsList'' request conforms to.
 type CommentsListResource =
      "comments" :>
-       QueryParam "id" Text :>
-         QueryParam "maxResults" Word32 :>
+       QueryParam "part" Text :>
+         QueryParam "id" Text :>
            QueryParam "pageToken" Text :>
-             QueryParam "parentId" Text :>
-               QueryParam "textFormat" YouTubeCommentsListTextFormat
-                 :>
-                 QueryParam "part" Text :>
+             QueryParam "textFormat" YouTubeCommentsListTextFormat
+               :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "parentId" Text :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -83,7 +84,7 @@ data CommentsList' = CommentsList'
     , _comMaxResults  :: !Word32
     , _comParentId    :: !(Maybe Text)
     , _comFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsList'' with the minimum fields required to make a request.
 --
@@ -217,10 +218,10 @@ instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CommentsList'{..}
-          = go _comId (Just _comMaxResults) _comPageToken
-              _comParentId
+          = go (Just _comPart) _comId _comPageToken
               (Just _comTextFormat)
-              (Just _comPart)
+              (Just _comMaxResults)
+              _comParentId
               _comQuotaUser
               (Just _comPrettyPrint)
               _comUserIP

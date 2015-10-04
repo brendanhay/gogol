@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.DNS.ManagedZones.Create
     , mzcPrettyPrint
     , mzcProject
     , mzcUserIP
+    , mzcPayload
     , mzcKey
     , mzcOAuthToken
-    , mzcManagedZone
     , mzcFields
     ) where
 
@@ -66,11 +67,11 @@ data ManagedZonesCreate' = ManagedZonesCreate'
     , _mzcPrettyPrint :: !Bool
     , _mzcProject     :: !Text
     , _mzcUserIP      :: !(Maybe Text)
+    , _mzcPayload     :: !ManagedZone
     , _mzcKey         :: !(Maybe Key)
     , _mzcOAuthToken  :: !(Maybe OAuthToken)
-    , _mzcManagedZone :: !ManagedZone
     , _mzcFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagedZonesCreate'' with the minimum fields required to make a request.
 --
@@ -84,26 +85,26 @@ data ManagedZonesCreate' = ManagedZonesCreate'
 --
 -- * 'mzcUserIP'
 --
+-- * 'mzcPayload'
+--
 -- * 'mzcKey'
 --
 -- * 'mzcOAuthToken'
 --
--- * 'mzcManagedZone'
---
 -- * 'mzcFields'
 managedZonesCreate'
     :: Text -- ^ 'project'
-    -> ManagedZone -- ^ 'ManagedZone'
+    -> ManagedZone -- ^ 'payload'
     -> ManagedZonesCreate'
-managedZonesCreate' pMzcProject_ pMzcManagedZone_ =
+managedZonesCreate' pMzcProject_ pMzcPayload_ =
     ManagedZonesCreate'
     { _mzcQuotaUser = Nothing
     , _mzcPrettyPrint = True
     , _mzcProject = pMzcProject_
     , _mzcUserIP = Nothing
+    , _mzcPayload = pMzcPayload_
     , _mzcKey = Nothing
     , _mzcOAuthToken = Nothing
-    , _mzcManagedZone = pMzcManagedZone_
     , _mzcFields = Nothing
     }
 
@@ -131,6 +132,11 @@ mzcUserIP :: Lens' ManagedZonesCreate' (Maybe Text)
 mzcUserIP
   = lens _mzcUserIP (\ s a -> s{_mzcUserIP = a})
 
+-- | Multipart request metadata.
+mzcPayload :: Lens' ManagedZonesCreate' ManagedZone
+mzcPayload
+  = lens _mzcPayload (\ s a -> s{_mzcPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -142,12 +148,6 @@ mzcOAuthToken :: Lens' ManagedZonesCreate' (Maybe OAuthToken)
 mzcOAuthToken
   = lens _mzcOAuthToken
       (\ s a -> s{_mzcOAuthToken = a})
-
--- | Multipart request metadata.
-mzcManagedZone :: Lens' ManagedZonesCreate' ManagedZone
-mzcManagedZone
-  = lens _mzcManagedZone
-      (\ s a -> s{_mzcManagedZone = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mzcFields :: Lens' ManagedZonesCreate' (Maybe Text)
@@ -168,7 +168,7 @@ instance GoogleRequest ManagedZonesCreate' where
               _mzcKey
               _mzcOAuthToken
               (Just AltJSON)
-              _mzcManagedZone
+              _mzcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagedZonesCreateResource)

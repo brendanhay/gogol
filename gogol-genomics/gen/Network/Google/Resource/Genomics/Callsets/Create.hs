@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.Genomics.Callsets.Create
     -- * Request Lenses
     , ccQuotaUser
     , ccPrettyPrint
-    , ccCallSet
     , ccUserIP
+    , ccPayload
     , ccKey
     , ccOAuthToken
     , ccFields
@@ -61,12 +62,12 @@ type CallsetsCreateResource =
 data CallsetsCreate' = CallsetsCreate'
     { _ccQuotaUser   :: !(Maybe Text)
     , _ccPrettyPrint :: !Bool
-    , _ccCallSet     :: !CallSet
     , _ccUserIP      :: !(Maybe Text)
+    , _ccPayload     :: !CallSet
     , _ccKey         :: !(Maybe Key)
     , _ccOAuthToken  :: !(Maybe OAuthToken)
     , _ccFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsCreate'' with the minimum fields required to make a request.
 --
@@ -76,9 +77,9 @@ data CallsetsCreate' = CallsetsCreate'
 --
 -- * 'ccPrettyPrint'
 --
--- * 'ccCallSet'
---
 -- * 'ccUserIP'
+--
+-- * 'ccPayload'
 --
 -- * 'ccKey'
 --
@@ -86,14 +87,14 @@ data CallsetsCreate' = CallsetsCreate'
 --
 -- * 'ccFields'
 callsetsCreate'
-    :: CallSet -- ^ 'CallSet'
+    :: CallSet -- ^ 'payload'
     -> CallsetsCreate'
-callsetsCreate' pCcCallSet_ =
+callsetsCreate' pCcPayload_ =
     CallsetsCreate'
     { _ccQuotaUser = Nothing
     , _ccPrettyPrint = True
-    , _ccCallSet = pCcCallSet_
     , _ccUserIP = Nothing
+    , _ccPayload = pCcPayload_
     , _ccKey = Nothing
     , _ccOAuthToken = Nothing
     , _ccFields = Nothing
@@ -112,15 +113,15 @@ ccPrettyPrint
   = lens _ccPrettyPrint
       (\ s a -> s{_ccPrettyPrint = a})
 
--- | Multipart request metadata.
-ccCallSet :: Lens' CallsetsCreate' CallSet
-ccCallSet
-  = lens _ccCallSet (\ s a -> s{_ccCallSet = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 ccUserIP :: Lens' CallsetsCreate' (Maybe Text)
 ccUserIP = lens _ccUserIP (\ s a -> s{_ccUserIP = a})
+
+-- | Multipart request metadata.
+ccPayload :: Lens' CallsetsCreate' CallSet
+ccPayload
+  = lens _ccPayload (\ s a -> s{_ccPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -150,7 +151,7 @@ instance GoogleRequest CallsetsCreate' where
               _ccKey
               _ccOAuthToken
               (Just AltJSON)
-              _ccCallSet
+              _ccPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CallsetsCreateResource)

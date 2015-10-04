@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,11 +53,9 @@ type PlacementsGeneratetagsResource =
        Capture "profileId" Int64 :>
          "placements" :>
            "generatetags" :>
-             QueryParam "campaignId" Int64 :>
-               QueryParams "placementIds" Int64 :>
-                 QueryParams "tagFormats"
-                   DfareportingPlacementsGeneratetagsTagFormats
-                   :>
+             QueryParams "tagFormats" TagFormats :>
+               QueryParam "campaignId" Int64 :>
+                 QueryParams "placementIds" Int64 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -72,15 +71,15 @@ type PlacementsGeneratetagsResource =
 data PlacementsGeneratetags' = PlacementsGeneratetags'
     { _pQuotaUser    :: !(Maybe Text)
     , _pPrettyPrint  :: !Bool
-    , _pTagFormats   :: !(Maybe DfareportingPlacementsGeneratetagsTagFormats)
+    , _pTagFormats   :: !(Maybe TagFormats)
     , _pUserIP       :: !(Maybe Text)
     , _pCampaignId   :: !(Maybe Int64)
     , _pProfileId    :: !Int64
     , _pKey          :: !(Maybe Key)
-    , _pPlacementIds :: !(Maybe Int64)
+    , _pPlacementIds :: !(Maybe [Int64])
     , _pOAuthToken   :: !(Maybe OAuthToken)
     , _pFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementsGeneratetags'' with the minimum fields required to make a request.
 --
@@ -135,7 +134,7 @@ pPrettyPrint
   = lens _pPrettyPrint (\ s a -> s{_pPrettyPrint = a})
 
 -- | Tag formats to generate for these placements.
-pTagFormats :: Lens' PlacementsGeneratetags' (Maybe DfareportingPlacementsGeneratetagsTagFormats)
+pTagFormats :: Lens' PlacementsGeneratetags' (Maybe TagFormats)
 pTagFormats
   = lens _pTagFormats (\ s a -> s{_pTagFormats = a})
 
@@ -162,10 +161,12 @@ pKey :: Lens' PlacementsGeneratetags' (Maybe Key)
 pKey = lens _pKey (\ s a -> s{_pKey = a})
 
 -- | Generate tags for these placements.
-pPlacementIds :: Lens' PlacementsGeneratetags' (Maybe Int64)
+pPlacementIds :: Lens' PlacementsGeneratetags' [Int64]
 pPlacementIds
   = lens _pPlacementIds
       (\ s a -> s{_pPlacementIds = a})
+      . _Default
+      . _Coerce
 
 -- | OAuth 2.0 token for the current user.
 pOAuthToken :: Lens' PlacementsGeneratetags' (Maybe OAuthToken)
@@ -185,8 +186,9 @@ instance GoogleRequest PlacementsGeneratetags' where
              PlacementsGenerateTagsResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementsGeneratetags'{..}
-          = go _pCampaignId _pPlacementIds _pTagFormats
-              _pProfileId
+          = go _pProfileId (_pTagFormats ^. _Default)
+              _pCampaignId
+              (_pPlacementIds ^. _Default)
               _pQuotaUser
               (Just _pPrettyPrint)
               _pUserIP

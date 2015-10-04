@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,8 +55,8 @@ type LinuxGetAuthorizedKeysViewResource =
          Capture "zone" Text :>
            "authorizedKeysView" :>
              Capture "user" Text :>
-               QueryParam "login" Bool :>
-                 QueryParam "instance" Text :>
+               QueryParam "instance" Text :>
+                 QueryParam "login" Bool :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -80,7 +81,7 @@ data LinuxGetAuthorizedKeysView' = LinuxGetAuthorizedKeysView'
     , _lgakvLogin       :: !(Maybe Bool)
     , _lgakvFields      :: !(Maybe Text)
     , _lgakvInstance    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinuxGetAuthorizedKeysView'' with the minimum fields required to make a request.
 --
@@ -202,8 +203,9 @@ instance GoogleRequest LinuxGetAuthorizedKeysView'
              LinuxGetAuthorizedKeysViewResponse
         request = requestWithRoute defReq userAccountsURL
         requestWithRoute r u LinuxGetAuthorizedKeysView'{..}
-          = go _lgakvLogin _lgakvProject _lgakvZone _lgakvUser
+          = go _lgakvProject _lgakvZone _lgakvUser
               (Just _lgakvInstance)
+              _lgakvLogin
               _lgakvQuotaUser
               (Just _lgakvPrettyPrint)
               _lgakvUserIP

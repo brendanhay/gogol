@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.Genomics.Experimental.Jobs.Create
     , ejcQuotaUser
     , ejcPrettyPrint
     , ejcUserIP
-    , ejcExperimentalCreateJobRequest
+    , ejcPayload
     , ejcKey
     , ejcOAuthToken
     , ejcFields
@@ -64,14 +65,14 @@ type ExperimentalJobsCreateResource =
 --
 -- /See:/ 'experimentalJobsCreate'' smart constructor.
 data ExperimentalJobsCreate' = ExperimentalJobsCreate'
-    { _ejcQuotaUser                    :: !(Maybe Text)
-    , _ejcPrettyPrint                  :: !Bool
-    , _ejcUserIP                       :: !(Maybe Text)
-    , _ejcExperimentalCreateJobRequest :: !ExperimentalCreateJobRequest
-    , _ejcKey                          :: !(Maybe Key)
-    , _ejcOAuthToken                   :: !(Maybe OAuthToken)
-    , _ejcFields                       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ejcQuotaUser   :: !(Maybe Text)
+    , _ejcPrettyPrint :: !Bool
+    , _ejcUserIP      :: !(Maybe Text)
+    , _ejcPayload     :: !ExperimentalCreateJobRequest
+    , _ejcKey         :: !(Maybe Key)
+    , _ejcOAuthToken  :: !(Maybe OAuthToken)
+    , _ejcFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ExperimentalJobsCreate'' with the minimum fields required to make a request.
 --
@@ -83,7 +84,7 @@ data ExperimentalJobsCreate' = ExperimentalJobsCreate'
 --
 -- * 'ejcUserIP'
 --
--- * 'ejcExperimentalCreateJobRequest'
+-- * 'ejcPayload'
 --
 -- * 'ejcKey'
 --
@@ -91,14 +92,14 @@ data ExperimentalJobsCreate' = ExperimentalJobsCreate'
 --
 -- * 'ejcFields'
 experimentalJobsCreate'
-    :: ExperimentalCreateJobRequest -- ^ 'ExperimentalCreateJobRequest'
+    :: ExperimentalCreateJobRequest -- ^ 'payload'
     -> ExperimentalJobsCreate'
-experimentalJobsCreate' pEjcExperimentalCreateJobRequest_ =
+experimentalJobsCreate' pEjcPayload_ =
     ExperimentalJobsCreate'
     { _ejcQuotaUser = Nothing
     , _ejcPrettyPrint = True
     , _ejcUserIP = Nothing
-    , _ejcExperimentalCreateJobRequest = pEjcExperimentalCreateJobRequest_
+    , _ejcPayload = pEjcPayload_
     , _ejcKey = Nothing
     , _ejcOAuthToken = Nothing
     , _ejcFields = Nothing
@@ -124,10 +125,9 @@ ejcUserIP
   = lens _ejcUserIP (\ s a -> s{_ejcUserIP = a})
 
 -- | Multipart request metadata.
-ejcExperimentalCreateJobRequest :: Lens' ExperimentalJobsCreate' ExperimentalCreateJobRequest
-ejcExperimentalCreateJobRequest
-  = lens _ejcExperimentalCreateJobRequest
-      (\ s a -> s{_ejcExperimentalCreateJobRequest = a})
+ejcPayload :: Lens' ExperimentalJobsCreate' ExperimentalCreateJobRequest
+ejcPayload
+  = lens _ejcPayload (\ s a -> s{_ejcPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -160,7 +160,7 @@ instance GoogleRequest ExperimentalJobsCreate' where
               _ejcKey
               _ejcOAuthToken
               (Just AltJSON)
-              _ejcExperimentalCreateJobRequest
+              _ejcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ExperimentalJobsCreateResource)

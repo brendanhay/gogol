@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,12 +58,12 @@ type ProjectsGetResource =
        "projects" :>
          Capture "projectId" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
@@ -90,7 +91,7 @@ data ProjectsGet' = ProjectsGet'
     , _pgOAuthToken     :: !(Maybe OAuthToken)
     , _pgFields         :: !(Maybe Text)
     , _pgCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsGet'' with the minimum fields required to make a request.
 --
@@ -218,12 +219,12 @@ instance GoogleRequest ProjectsGet' where
         type Rs ProjectsGet' = Project
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u ProjectsGet'{..}
-          = go _pgXgafv _pgAccessToken _pgBearerToken
-              _pgCallback
+          = go _pgProjectId _pgXgafv _pgUploadProtocol
               (Just _pgPp)
+              _pgAccessToken
               _pgUploadType
-              _pgUploadProtocol
-              _pgProjectId
+              _pgBearerToken
+              _pgCallback
               _pgQuotaUser
               (Just _pgPrettyPrint)
               _pgFields

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,14 +54,14 @@ import           Network.Google.PubSub.Types
 -- 'ProjectsSubscriptionsGetIAMPolicy'' request conforms to.
 type ProjectsSubscriptionsGetIAMPolicyResource =
      "v1beta2" :>
-       "{+resource}:getIamPolicy" :>
+       CaptureMode "resource" "getIamPolicy" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -86,7 +87,7 @@ data ProjectsSubscriptionsGetIAMPolicy' = ProjectsSubscriptionsGetIAMPolicy'
     , _psgipOAuthToken     :: !(Maybe OAuthToken)
     , _psgipFields         :: !(Maybe Text)
     , _psgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsGetIAMPolicy'' with the minimum fields required to make a request.
 --
@@ -225,12 +226,12 @@ instance GoogleRequest
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u
           ProjectsSubscriptionsGetIAMPolicy'{..}
-          = go _psgipXgafv _psgipAccessToken _psgipBearerToken
-              _psgipCallback
+          = go _psgipResource _psgipXgafv _psgipUploadProtocol
               (Just _psgipPp)
+              _psgipAccessToken
               _psgipUploadType
-              _psgipUploadProtocol
-              _psgipResource
+              _psgipBearerToken
+              _psgipCallback
               _psgipQuotaUser
               (Just _psgipPrettyPrint)
               _psgipFields

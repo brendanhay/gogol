@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -68,7 +69,7 @@ type ReportsGetFileResource =
                      QueryParam "fields" Text :>
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "alt" Media :> Get '[OctetStream] Stream
+                           QueryParam "alt" AltMedia :> Get '[OctetStream] Body
 
 -- | Downloads a report file encoded in UTF-8.
 --
@@ -82,7 +83,7 @@ data ReportsGetFile' = ReportsGetFile'
     , _rgfKey            :: !(Maybe Key)
     , _rgfOAuthToken     :: !(Maybe OAuthToken)
     , _rgfFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGetFile'' with the minimum fields required to make a request.
 --
@@ -188,19 +189,20 @@ instance GoogleRequest ReportsGetFile' where
                       r
                       u
 
-instance GoogleRequest ReportsGetFile' where
-        type Rs (Download ReportsGetFile') = Stream
+instance GoogleRequest (Download ReportsGetFile')
+         where
+        type Rs (Download ReportsGetFile') = Body
         request
           = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u ReportsGetFile'{..}
+        requestWithRoute r u (Download ReportsGetFile'{..})
           = go _rgfReportId _rgfReportFragment _rgfQuotaUser
               (Just _rgfPrettyPrint)
               _rgfUserIP
               _rgfFields
               _rgfKey
               _rgfOAuthToken
-              (Just Media)
-          where go :<|> _
+              (Just AltMedia)
+          where _ :<|> go
                   = clientWithRoute
                       (Proxy :: Proxy ReportsGetFileResource)
                       r

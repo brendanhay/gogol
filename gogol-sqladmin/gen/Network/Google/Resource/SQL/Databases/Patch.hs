@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.SQL.Databases.Patch
     , dpPrettyPrint
     , dpProject
     , dpDatabase
-    , dpDatabase
     , dpUserIP
+    , dpPayload
     , dpKey
     , dpOAuthToken
     , dpFields
@@ -73,14 +74,14 @@ data DatabasesPatch' = DatabasesPatch'
     { _dpQuotaUser   :: !(Maybe Text)
     , _dpPrettyPrint :: !Bool
     , _dpProject     :: !Text
-    , _dpDatabase    :: !Database
     , _dpDatabase    :: !Text
     , _dpUserIP      :: !(Maybe Text)
+    , _dpPayload     :: !Database
     , _dpKey         :: !(Maybe Key)
     , _dpOAuthToken  :: !(Maybe OAuthToken)
     , _dpFields      :: !(Maybe Text)
     , _dpInstance    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatabasesPatch'' with the minimum fields required to make a request.
 --
@@ -94,9 +95,9 @@ data DatabasesPatch' = DatabasesPatch'
 --
 -- * 'dpDatabase'
 --
--- * 'dpDatabase'
---
 -- * 'dpUserIP'
+--
+-- * 'dpPayload'
 --
 -- * 'dpKey'
 --
@@ -107,18 +108,18 @@ data DatabasesPatch' = DatabasesPatch'
 -- * 'dpInstance'
 databasesPatch'
     :: Text -- ^ 'project'
-    -> Database -- ^ 'Database'
     -> Text -- ^ 'database'
+    -> Database -- ^ 'payload'
     -> Text -- ^ 'instance'
     -> DatabasesPatch'
-databasesPatch' pDpProject_ pDpDatabase_ pDpDatabase_ pDpInstance_ =
+databasesPatch' pDpProject_ pDpDatabase_ pDpPayload_ pDpInstance_ =
     DatabasesPatch'
     { _dpQuotaUser = Nothing
     , _dpPrettyPrint = True
     , _dpProject = pDpProject_
     , _dpDatabase = pDpDatabase_
-    , _dpDatabase = pDpDatabase_
     , _dpUserIP = Nothing
+    , _dpPayload = pDpPayload_
     , _dpKey = Nothing
     , _dpOAuthToken = Nothing
     , _dpFields = Nothing
@@ -143,11 +144,6 @@ dpProject :: Lens' DatabasesPatch' Text
 dpProject
   = lens _dpProject (\ s a -> s{_dpProject = a})
 
--- | Multipart request metadata.
-dpDatabase :: Lens' DatabasesPatch' Database
-dpDatabase
-  = lens _dpDatabase (\ s a -> s{_dpDatabase = a})
-
 -- | Name of the database to be updated in the instance.
 dpDatabase :: Lens' DatabasesPatch' Text
 dpDatabase
@@ -157,6 +153,11 @@ dpDatabase
 -- want to enforce per-user limits.
 dpUserIP :: Lens' DatabasesPatch' (Maybe Text)
 dpUserIP = lens _dpUserIP (\ s a -> s{_dpUserIP = a})
+
+-- | Multipart request metadata.
+dpPayload :: Lens' DatabasesPatch' Database
+dpPayload
+  = lens _dpPayload (\ s a -> s{_dpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -193,7 +194,7 @@ instance GoogleRequest DatabasesPatch' where
               _dpKey
               _dpOAuthToken
               (Just AltJSON)
-              _dpDatabase
+              _dpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatabasesPatchResource)

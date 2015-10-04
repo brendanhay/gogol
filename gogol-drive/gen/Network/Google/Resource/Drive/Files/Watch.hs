@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.Drive.Files.Watch
     , fwQuotaUser
     , fwPrettyPrint
     , fwUserIP
-    , fwChannel
+    , fwPayload
     , fwUpdateViewedDate
     , fwKey
     , fwProjection
@@ -53,10 +54,10 @@ type FilesWatchResource =
      "files" :>
        Capture "fileId" Text :>
          "watch" :>
-           QueryParam "acknowledgeAbuse" Bool :>
+           QueryParam "updateViewedDate" Bool :>
              QueryParam "projection" DriveFilesWatchProjection :>
-               QueryParam "revisionId" Text :>
-                 QueryParam "updateViewedDate" Bool :>
+               QueryParam "acknowledgeAbuse" Bool :>
+                 QueryParam "revisionId" Text :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -69,19 +70,19 @@ type FilesWatchResource =
        "files" :>
          Capture "fileId" Text :>
            "watch" :>
-             QueryParam "acknowledgeAbuse" Bool :>
+             QueryParam "updateViewedDate" Bool :>
                QueryParam "projection" DriveFilesWatchProjection :>
-                 QueryParam "revisionId" Text :>
-                   QueryParam "updateViewedDate" Bool :>
+                 QueryParam "acknowledgeAbuse" Bool :>
+                   QueryParam "revisionId" Text :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "alt" Media :>
+                                 QueryParam "alt" AltMedia :>
                                    ReqBody '[JSON] Channel :>
-                                     Post '[OctetStream] Stream
+                                     Post '[OctetStream] Body
 
 -- | Subscribe to changes on a file
 --
@@ -90,7 +91,7 @@ data FilesWatch' = FilesWatch'
     { _fwQuotaUser        :: !(Maybe Text)
     , _fwPrettyPrint      :: !Bool
     , _fwUserIP           :: !(Maybe Text)
-    , _fwChannel          :: !Channel
+    , _fwPayload          :: !Channel
     , _fwUpdateViewedDate :: !Bool
     , _fwKey              :: !(Maybe Key)
     , _fwProjection       :: !(Maybe DriveFilesWatchProjection)
@@ -99,7 +100,7 @@ data FilesWatch' = FilesWatch'
     , _fwOAuthToken       :: !(Maybe OAuthToken)
     , _fwRevisionId       :: !(Maybe Text)
     , _fwFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesWatch'' with the minimum fields required to make a request.
 --
@@ -111,7 +112,7 @@ data FilesWatch' = FilesWatch'
 --
 -- * 'fwUserIP'
 --
--- * 'fwChannel'
+-- * 'fwPayload'
 --
 -- * 'fwUpdateViewedDate'
 --
@@ -129,15 +130,15 @@ data FilesWatch' = FilesWatch'
 --
 -- * 'fwFields'
 filesWatch'
-    :: Channel -- ^ 'Channel'
+    :: Channel -- ^ 'payload'
     -> Text -- ^ 'fileId'
     -> FilesWatch'
-filesWatch' pFwChannel_ pFwFileId_ =
+filesWatch' pFwPayload_ pFwFileId_ =
     FilesWatch'
     { _fwQuotaUser = Nothing
     , _fwPrettyPrint = True
     , _fwUserIP = Nothing
-    , _fwChannel = pFwChannel_
+    , _fwPayload = pFwPayload_
     , _fwUpdateViewedDate = False
     , _fwKey = Nothing
     , _fwProjection = Nothing
@@ -167,9 +168,9 @@ fwUserIP :: Lens' FilesWatch' (Maybe Text)
 fwUserIP = lens _fwUserIP (\ s a -> s{_fwUserIP = a})
 
 -- | Multipart request metadata.
-fwChannel :: Lens' FilesWatch' Channel
-fwChannel
-  = lens _fwChannel (\ s a -> s{_fwChannel = a})
+fwPayload :: Lens' FilesWatch' Channel
+fwPayload
+  = lens _fwPayload (\ s a -> s{_fwPayload = a})
 
 -- | Deprecated: Use files.update with modifiedDateBehavior=noChange,
 -- updateViewedDate=true and an empty request body.
@@ -223,10 +224,10 @@ instance GoogleRequest FilesWatch' where
         type Rs FilesWatch' = Channel
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesWatch'{..}
-          = go (Just _fwAcknowledgeAbuse) _fwProjection
+          = go _fwFileId (Just _fwUpdateViewedDate)
+              _fwProjection
+              (Just _fwAcknowledgeAbuse)
               _fwRevisionId
-              (Just _fwUpdateViewedDate)
-              _fwFileId
               _fwQuotaUser
               (Just _fwPrettyPrint)
               _fwUserIP
@@ -234,29 +235,29 @@ instance GoogleRequest FilesWatch' where
               _fwKey
               _fwOAuthToken
               (Just AltJSON)
-              _fwChannel
+              _fwPayload
           where go :<|> _
                   = clientWithRoute (Proxy :: Proxy FilesWatchResource)
                       r
                       u
 
-instance GoogleRequest FilesWatch' where
-        type Rs (Download FilesWatch') = Stream
+instance GoogleRequest (Download FilesWatch') where
+        type Rs (Download FilesWatch') = Body
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesWatch'{..}
-          = go (Just _fwAcknowledgeAbuse) _fwProjection
+        requestWithRoute r u (Download FilesWatch'{..})
+          = go _fwFileId (Just _fwUpdateViewedDate)
+              _fwProjection
+              (Just _fwAcknowledgeAbuse)
               _fwRevisionId
-              (Just _fwUpdateViewedDate)
-              _fwFileId
               _fwQuotaUser
               (Just _fwPrettyPrint)
               _fwUserIP
               _fwFields
               _fwKey
               _fwOAuthToken
-              (Just Media)
-              _fwChannel
-          where go :<|> _
+              (Just AltMedia)
+              _fwPayload
+          where _ :<|> go
                   = clientWithRoute (Proxy :: Proxy FilesWatchResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -73,7 +74,7 @@ data InstancesPromoteReplica' = InstancesPromoteReplica'
     , _iprOAuthToken  :: !(Maybe OAuthToken)
     , _iprFields      :: !(Maybe Text)
     , _iprInstance    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesPromoteReplica'' with the minimum fields required to make a request.
 --

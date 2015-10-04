@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,11 +35,11 @@ module Network.Google.Resource.FusionTables.Table.Update
     , tuQuotaUser
     , tuPrettyPrint
     , tuUserIP
+    , tuPayload
     , tuReplaceViewDefinition
     , tuKey
     , tuOAuthToken
     , tuTableId
-    , tuTable
     , tuFields
     ) where
 
@@ -68,13 +69,13 @@ data TableUpdate' = TableUpdate'
     { _tuQuotaUser             :: !(Maybe Text)
     , _tuPrettyPrint           :: !Bool
     , _tuUserIP                :: !(Maybe Text)
+    , _tuPayload               :: !Table
     , _tuReplaceViewDefinition :: !(Maybe Bool)
     , _tuKey                   :: !(Maybe Key)
     , _tuOAuthToken            :: !(Maybe OAuthToken)
     , _tuTableId               :: !Text
-    , _tuTable                 :: !Table
     , _tuFields                :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableUpdate'' with the minimum fields required to make a request.
 --
@@ -86,6 +87,8 @@ data TableUpdate' = TableUpdate'
 --
 -- * 'tuUserIP'
 --
+-- * 'tuPayload'
+--
 -- * 'tuReplaceViewDefinition'
 --
 -- * 'tuKey'
@@ -94,23 +97,21 @@ data TableUpdate' = TableUpdate'
 --
 -- * 'tuTableId'
 --
--- * 'tuTable'
---
 -- * 'tuFields'
 tableUpdate'
-    :: Text -- ^ 'tableId'
-    -> Table -- ^ 'Table'
+    :: Table -- ^ 'payload'
+    -> Text -- ^ 'tableId'
     -> TableUpdate'
-tableUpdate' pTuTableId_ pTuTable_ =
+tableUpdate' pTuPayload_ pTuTableId_ =
     TableUpdate'
     { _tuQuotaUser = Nothing
     , _tuPrettyPrint = True
     , _tuUserIP = Nothing
+    , _tuPayload = pTuPayload_
     , _tuReplaceViewDefinition = Nothing
     , _tuKey = Nothing
     , _tuOAuthToken = Nothing
     , _tuTableId = pTuTableId_
-    , _tuTable = pTuTable_
     , _tuFields = Nothing
     }
 
@@ -131,6 +132,11 @@ tuPrettyPrint
 -- want to enforce per-user limits.
 tuUserIP :: Lens' TableUpdate' (Maybe Text)
 tuUserIP = lens _tuUserIP (\ s a -> s{_tuUserIP = a})
+
+-- | Multipart request metadata.
+tuPayload :: Lens' TableUpdate' Table
+tuPayload
+  = lens _tuPayload (\ s a -> s{_tuPayload = a})
 
 -- | Whether the view definition is also updated. The specified view
 -- definition replaces the existing one. Only a view can be updated with a
@@ -156,10 +162,6 @@ tuTableId :: Lens' TableUpdate' Text
 tuTableId
   = lens _tuTableId (\ s a -> s{_tuTableId = a})
 
--- | Multipart request metadata.
-tuTable :: Lens' TableUpdate' Table
-tuTable = lens _tuTable (\ s a -> s{_tuTable = a})
-
 -- | Selector specifying which fields to include in a partial response.
 tuFields :: Lens' TableUpdate' (Maybe Text)
 tuFields = lens _tuFields (\ s a -> s{_tuFields = a})
@@ -172,14 +174,14 @@ instance GoogleRequest TableUpdate' where
         type Rs TableUpdate' = Table
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableUpdate'{..}
-          = go _tuReplaceViewDefinition _tuTableId _tuQuotaUser
+          = go _tuTableId _tuReplaceViewDefinition _tuQuotaUser
               (Just _tuPrettyPrint)
               _tuUserIP
               _tuFields
               _tuKey
               _tuOAuthToken
               (Just AltJSON)
-              _tuTable
+              _tuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TableUpdateResource)

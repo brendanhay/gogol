@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.DFAReporting.Reports.Patch
     , rpUserIP
     , rpReportId
     , rpProfileId
-    , rpReport
+    , rpPayload
     , rpKey
     , rpOAuthToken
     , rpFields
@@ -69,11 +70,11 @@ data ReportsPatch' = ReportsPatch'
     , _rpUserIP      :: !(Maybe Text)
     , _rpReportId    :: !Int64
     , _rpProfileId   :: !Int64
-    , _rpReport      :: !Report
+    , _rpPayload     :: !Report
     , _rpKey         :: !(Maybe Key)
     , _rpOAuthToken  :: !(Maybe OAuthToken)
     , _rpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsPatch'' with the minimum fields required to make a request.
 --
@@ -89,7 +90,7 @@ data ReportsPatch' = ReportsPatch'
 --
 -- * 'rpProfileId'
 --
--- * 'rpReport'
+-- * 'rpPayload'
 --
 -- * 'rpKey'
 --
@@ -99,16 +100,16 @@ data ReportsPatch' = ReportsPatch'
 reportsPatch'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
-    -> Report -- ^ 'Report'
+    -> Report -- ^ 'payload'
     -> ReportsPatch'
-reportsPatch' pRpReportId_ pRpProfileId_ pRpReport_ =
+reportsPatch' pRpReportId_ pRpProfileId_ pRpPayload_ =
     ReportsPatch'
     { _rpQuotaUser = Nothing
     , _rpPrettyPrint = True
     , _rpUserIP = Nothing
     , _rpReportId = pRpReportId_
     , _rpProfileId = pRpProfileId_
-    , _rpReport = pRpReport_
+    , _rpPayload = pRpPayload_
     , _rpKey = Nothing
     , _rpOAuthToken = Nothing
     , _rpFields = Nothing
@@ -143,8 +144,9 @@ rpProfileId
   = lens _rpProfileId (\ s a -> s{_rpProfileId = a})
 
 -- | Multipart request metadata.
-rpReport :: Lens' ReportsPatch' Report
-rpReport = lens _rpReport (\ s a -> s{_rpReport = a})
+rpPayload :: Lens' ReportsPatch' Report
+rpPayload
+  = lens _rpPayload (\ s a -> s{_rpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -176,7 +178,7 @@ instance GoogleRequest ReportsPatch' where
               _rpKey
               _rpOAuthToken
               (Just AltJSON)
-              _rpReport
+              _rpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReportsPatchResource)

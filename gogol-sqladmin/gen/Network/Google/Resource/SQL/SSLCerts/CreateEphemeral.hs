@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,8 +37,8 @@ module Network.Google.Resource.SQL.SSLCerts.CreateEphemeral
     , scceQuotaUser
     , sccePrettyPrint
     , scceProject
-    , scceSSLCertsCreateEphemeralRequest
     , scceUserIP
+    , sccePayload
     , scceKey
     , scceOAuthToken
     , scceFields
@@ -72,16 +73,16 @@ type SSLCertsCreateEphemeralResource =
 --
 -- /See:/ 'sslCertsCreateEphemeral'' smart constructor.
 data SSLCertsCreateEphemeral' = SSLCertsCreateEphemeral'
-    { _scceQuotaUser                      :: !(Maybe Text)
-    , _sccePrettyPrint                    :: !Bool
-    , _scceProject                        :: !Text
-    , _scceSSLCertsCreateEphemeralRequest :: !SSLCertsCreateEphemeralRequest
-    , _scceUserIP                         :: !(Maybe Text)
-    , _scceKey                            :: !(Maybe Key)
-    , _scceOAuthToken                     :: !(Maybe OAuthToken)
-    , _scceFields                         :: !(Maybe Text)
-    , _scceInstance                       :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _scceQuotaUser   :: !(Maybe Text)
+    , _sccePrettyPrint :: !Bool
+    , _scceProject     :: !Text
+    , _scceUserIP      :: !(Maybe Text)
+    , _sccePayload     :: !SSLCertsCreateEphemeralRequest
+    , _scceKey         :: !(Maybe Key)
+    , _scceOAuthToken  :: !(Maybe OAuthToken)
+    , _scceFields      :: !(Maybe Text)
+    , _scceInstance    :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SSLCertsCreateEphemeral'' with the minimum fields required to make a request.
 --
@@ -93,9 +94,9 @@ data SSLCertsCreateEphemeral' = SSLCertsCreateEphemeral'
 --
 -- * 'scceProject'
 --
--- * 'scceSSLCertsCreateEphemeralRequest'
---
 -- * 'scceUserIP'
+--
+-- * 'sccePayload'
 --
 -- * 'scceKey'
 --
@@ -106,16 +107,16 @@ data SSLCertsCreateEphemeral' = SSLCertsCreateEphemeral'
 -- * 'scceInstance'
 sslCertsCreateEphemeral'
     :: Text -- ^ 'project'
-    -> SSLCertsCreateEphemeralRequest -- ^ 'SSLCertsCreateEphemeralRequest'
+    -> SSLCertsCreateEphemeralRequest -- ^ 'payload'
     -> Text -- ^ 'instance'
     -> SSLCertsCreateEphemeral'
-sslCertsCreateEphemeral' pScceProject_ pScceSSLCertsCreateEphemeralRequest_ pScceInstance_ =
+sslCertsCreateEphemeral' pScceProject_ pSccePayload_ pScceInstance_ =
     SSLCertsCreateEphemeral'
     { _scceQuotaUser = Nothing
     , _sccePrettyPrint = True
     , _scceProject = pScceProject_
-    , _scceSSLCertsCreateEphemeralRequest = pScceSSLCertsCreateEphemeralRequest_
     , _scceUserIP = Nothing
+    , _sccePayload = pSccePayload_
     , _scceKey = Nothing
     , _scceOAuthToken = Nothing
     , _scceFields = Nothing
@@ -141,17 +142,16 @@ scceProject :: Lens' SSLCertsCreateEphemeral' Text
 scceProject
   = lens _scceProject (\ s a -> s{_scceProject = a})
 
--- | Multipart request metadata.
-scceSSLCertsCreateEphemeralRequest :: Lens' SSLCertsCreateEphemeral' SSLCertsCreateEphemeralRequest
-scceSSLCertsCreateEphemeralRequest
-  = lens _scceSSLCertsCreateEphemeralRequest
-      (\ s a -> s{_scceSSLCertsCreateEphemeralRequest = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 scceUserIP :: Lens' SSLCertsCreateEphemeral' (Maybe Text)
 scceUserIP
   = lens _scceUserIP (\ s a -> s{_scceUserIP = a})
+
+-- | Multipart request metadata.
+sccePayload :: Lens' SSLCertsCreateEphemeral' SSLCertsCreateEphemeralRequest
+sccePayload
+  = lens _sccePayload (\ s a -> s{_sccePayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -190,7 +190,7 @@ instance GoogleRequest SSLCertsCreateEphemeral' where
               _scceKey
               _scceOAuthToken
               (Just AltJSON)
-              _scceSSLCertsCreateEphemeralRequest
+              _sccePayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SSLCertsCreateEphemeralResource)

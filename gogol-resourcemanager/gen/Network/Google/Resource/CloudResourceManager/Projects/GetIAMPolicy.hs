@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,11 +34,11 @@ module Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
     , pgipXgafv
     , pgipQuotaUser
     , pgipPrettyPrint
-    , pgipGetIAMPolicyRequest
     , pgipUploadProtocol
     , pgipPp
     , pgipAccessToken
     , pgipUploadType
+    , pgipPayload
     , pgipBearerToken
     , pgipKey
     , pgipResource
@@ -54,14 +55,14 @@ import           Network.Google.ResourceManager.Types
 type ProjectsGetIAMPolicyResource =
      "v1beta1" :>
        "projects" :>
-         "{resource}:getIamPolicy" :>
+         CaptureMode "resource" "getIamPolicy" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
@@ -75,21 +76,21 @@ type ProjectsGetIAMPolicyResource =
 --
 -- /See:/ 'projectsGetIAMPolicy'' smart constructor.
 data ProjectsGetIAMPolicy' = ProjectsGetIAMPolicy'
-    { _pgipXgafv               :: !(Maybe Text)
-    , _pgipQuotaUser           :: !(Maybe Text)
-    , _pgipPrettyPrint         :: !Bool
-    , _pgipGetIAMPolicyRequest :: !GetIAMPolicyRequest
-    , _pgipUploadProtocol      :: !(Maybe Text)
-    , _pgipPp                  :: !Bool
-    , _pgipAccessToken         :: !(Maybe Text)
-    , _pgipUploadType          :: !(Maybe Text)
-    , _pgipBearerToken         :: !(Maybe Text)
-    , _pgipKey                 :: !(Maybe Key)
-    , _pgipResource            :: !Text
-    , _pgipOAuthToken          :: !(Maybe OAuthToken)
-    , _pgipFields              :: !(Maybe Text)
-    , _pgipCallback            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _pgipXgafv          :: !(Maybe Text)
+    , _pgipQuotaUser      :: !(Maybe Text)
+    , _pgipPrettyPrint    :: !Bool
+    , _pgipUploadProtocol :: !(Maybe Text)
+    , _pgipPp             :: !Bool
+    , _pgipAccessToken    :: !(Maybe Text)
+    , _pgipUploadType     :: !(Maybe Text)
+    , _pgipPayload        :: !GetIAMPolicyRequest
+    , _pgipBearerToken    :: !(Maybe Text)
+    , _pgipKey            :: !(Maybe Key)
+    , _pgipResource       :: !Text
+    , _pgipOAuthToken     :: !(Maybe OAuthToken)
+    , _pgipFields         :: !(Maybe Text)
+    , _pgipCallback       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsGetIAMPolicy'' with the minimum fields required to make a request.
 --
@@ -101,8 +102,6 @@ data ProjectsGetIAMPolicy' = ProjectsGetIAMPolicy'
 --
 -- * 'pgipPrettyPrint'
 --
--- * 'pgipGetIAMPolicyRequest'
---
 -- * 'pgipUploadProtocol'
 --
 -- * 'pgipPp'
@@ -110,6 +109,8 @@ data ProjectsGetIAMPolicy' = ProjectsGetIAMPolicy'
 -- * 'pgipAccessToken'
 --
 -- * 'pgipUploadType'
+--
+-- * 'pgipPayload'
 --
 -- * 'pgipBearerToken'
 --
@@ -123,19 +124,19 @@ data ProjectsGetIAMPolicy' = ProjectsGetIAMPolicy'
 --
 -- * 'pgipCallback'
 projectsGetIAMPolicy'
-    :: GetIAMPolicyRequest -- ^ 'GetIAMPolicyRequest'
+    :: GetIAMPolicyRequest -- ^ 'payload'
     -> Text -- ^ 'resource'
     -> ProjectsGetIAMPolicy'
-projectsGetIAMPolicy' pPgipGetIAMPolicyRequest_ pPgipResource_ =
+projectsGetIAMPolicy' pPgipPayload_ pPgipResource_ =
     ProjectsGetIAMPolicy'
     { _pgipXgafv = Nothing
     , _pgipQuotaUser = Nothing
     , _pgipPrettyPrint = True
-    , _pgipGetIAMPolicyRequest = pPgipGetIAMPolicyRequest_
     , _pgipUploadProtocol = Nothing
     , _pgipPp = True
     , _pgipAccessToken = Nothing
     , _pgipUploadType = Nothing
+    , _pgipPayload = pPgipPayload_
     , _pgipBearerToken = Nothing
     , _pgipKey = Nothing
     , _pgipResource = pPgipResource_
@@ -163,12 +164,6 @@ pgipPrettyPrint
   = lens _pgipPrettyPrint
       (\ s a -> s{_pgipPrettyPrint = a})
 
--- | Multipart request metadata.
-pgipGetIAMPolicyRequest :: Lens' ProjectsGetIAMPolicy' GetIAMPolicyRequest
-pgipGetIAMPolicyRequest
-  = lens _pgipGetIAMPolicyRequest
-      (\ s a -> s{_pgipGetIAMPolicyRequest = a})
-
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 pgipUploadProtocol :: Lens' ProjectsGetIAMPolicy' (Maybe Text)
 pgipUploadProtocol
@@ -190,6 +185,11 @@ pgipUploadType :: Lens' ProjectsGetIAMPolicy' (Maybe Text)
 pgipUploadType
   = lens _pgipUploadType
       (\ s a -> s{_pgipUploadType = a})
+
+-- | Multipart request metadata.
+pgipPayload :: Lens' ProjectsGetIAMPolicy' GetIAMPolicyRequest
+pgipPayload
+  = lens _pgipPayload (\ s a -> s{_pgipPayload = a})
 
 -- | OAuth bearer token.
 pgipBearerToken :: Lens' ProjectsGetIAMPolicy' (Maybe Text)
@@ -233,19 +233,19 @@ instance GoogleRequest ProjectsGetIAMPolicy' where
         type Rs ProjectsGetIAMPolicy' = Policy
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u ProjectsGetIAMPolicy'{..}
-          = go _pgipXgafv _pgipAccessToken _pgipBearerToken
-              _pgipCallback
+          = go _pgipResource _pgipXgafv _pgipUploadProtocol
               (Just _pgipPp)
+              _pgipAccessToken
               _pgipUploadType
-              _pgipUploadProtocol
-              _pgipResource
+              _pgipBearerToken
+              _pgipCallback
               _pgipQuotaUser
               (Just _pgipPrettyPrint)
               _pgipFields
               _pgipKey
               _pgipOAuthToken
               (Just AltJSON)
-              _pgipGetIAMPolicyRequest
+              _pgipPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsGetIAMPolicyResource)

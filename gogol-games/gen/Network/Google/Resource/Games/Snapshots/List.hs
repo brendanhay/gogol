@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type SnapshotsListResource =
        Capture "playerId" Text :>
          "snapshots" :>
            QueryParam "language" Text :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Int32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data SnapshotsList' = SnapshotsList'
     , _slPlayerId    :: !Text
     , _slMaxResults  :: !(Maybe Int32)
     , _slFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotsList'' with the minimum fields required to make a request.
 --
@@ -185,8 +186,8 @@ instance GoogleRequest SnapshotsList' where
         type Rs SnapshotsList' = SnapshotListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u SnapshotsList'{..}
-          = go _slLanguage _slMaxResults _slPageToken
-              _slPlayerId
+          = go _slPlayerId _slLanguage _slPageToken
+              _slMaxResults
               _slQuotaUser
               (Just _slPrettyPrint)
               _slUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -71,7 +72,7 @@ data MapsPublish' = MapsPublish'
     , _mId          :: !Text
     , _mOAuthToken  :: !(Maybe OAuthToken)
     , _mFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsPublish'' with the minimum fields required to make a request.
 --
@@ -157,7 +158,7 @@ instance GoogleRequest MapsPublish' where
         type Rs MapsPublish' = PublishResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u MapsPublish'{..}
-          = go _mForce _mId _mQuotaUser (Just _mPrettyPrint)
+          = go _mId _mForce _mQuotaUser (Just _mPrettyPrint)
               _mUserIP
               _mFields
               _mKey

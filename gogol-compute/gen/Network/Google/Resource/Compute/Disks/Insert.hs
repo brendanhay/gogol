@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,10 +35,10 @@ module Network.Google.Resource.Compute.Disks.Insert
     , diQuotaUser
     , diPrettyPrint
     , diSourceImage
-    , diDisk
     , diProject
     , diUserIP
     , diZone
+    , diPayload
     , diKey
     , diOAuthToken
     , diFields
@@ -71,14 +72,14 @@ data DisksInsert' = DisksInsert'
     { _diQuotaUser   :: !(Maybe Text)
     , _diPrettyPrint :: !Bool
     , _diSourceImage :: !(Maybe Text)
-    , _diDisk        :: !Disk
     , _diProject     :: !Text
     , _diUserIP      :: !(Maybe Text)
     , _diZone        :: !Text
+    , _diPayload     :: !Disk
     , _diKey         :: !(Maybe Key)
     , _diOAuthToken  :: !(Maybe OAuthToken)
     , _diFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksInsert'' with the minimum fields required to make a request.
 --
@@ -90,13 +91,13 @@ data DisksInsert' = DisksInsert'
 --
 -- * 'diSourceImage'
 --
--- * 'diDisk'
---
 -- * 'diProject'
 --
 -- * 'diUserIP'
 --
 -- * 'diZone'
+--
+-- * 'diPayload'
 --
 -- * 'diKey'
 --
@@ -104,19 +105,19 @@ data DisksInsert' = DisksInsert'
 --
 -- * 'diFields'
 disksInsert'
-    :: Disk -- ^ 'Disk'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
+    -> Disk -- ^ 'payload'
     -> DisksInsert'
-disksInsert' pDiDisk_ pDiProject_ pDiZone_ =
+disksInsert' pDiProject_ pDiZone_ pDiPayload_ =
     DisksInsert'
     { _diQuotaUser = Nothing
     , _diPrettyPrint = True
     , _diSourceImage = Nothing
-    , _diDisk = pDiDisk_
     , _diProject = pDiProject_
     , _diUserIP = Nothing
     , _diZone = pDiZone_
+    , _diPayload = pDiPayload_
     , _diKey = Nothing
     , _diOAuthToken = Nothing
     , _diFields = Nothing
@@ -141,10 +142,6 @@ diSourceImage
   = lens _diSourceImage
       (\ s a -> s{_diSourceImage = a})
 
--- | Multipart request metadata.
-diDisk :: Lens' DisksInsert' Disk
-diDisk = lens _diDisk (\ s a -> s{_diDisk = a})
-
 -- | Project ID for this request.
 diProject :: Lens' DisksInsert' Text
 diProject
@@ -158,6 +155,11 @@ diUserIP = lens _diUserIP (\ s a -> s{_diUserIP = a})
 -- | The name of the zone for this request.
 diZone :: Lens' DisksInsert' Text
 diZone = lens _diZone (\ s a -> s{_diZone = a})
+
+-- | Multipart request metadata.
+diPayload :: Lens' DisksInsert' Disk
+diPayload
+  = lens _diPayload (\ s a -> s{_diPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -182,14 +184,14 @@ instance GoogleRequest DisksInsert' where
         type Rs DisksInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u DisksInsert'{..}
-          = go _diSourceImage _diProject _diZone _diQuotaUser
+          = go _diProject _diZone _diSourceImage _diQuotaUser
               (Just _diPrettyPrint)
               _diUserIP
               _diFields
               _diKey
               _diOAuthToken
               (Just AltJSON)
-              _diDisk
+              _diPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DisksInsertResource)

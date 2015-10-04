@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.Tasks.Tasks.Update
     , tuQuotaUser
     , tuPrettyPrint
     , tuUserIP
+    , tuPayload
     , tuKey
     , tuTaskList
-    , tuTask
     , tuTask
     , tuOAuthToken
     , tuFields
@@ -67,13 +68,13 @@ data TasksUpdate' = TasksUpdate'
     { _tuQuotaUser   :: !(Maybe Text)
     , _tuPrettyPrint :: !Bool
     , _tuUserIP      :: !(Maybe Text)
+    , _tuPayload     :: !Task
     , _tuKey         :: !(Maybe Key)
     , _tuTaskList    :: !Text
-    , _tuTask        :: !Task
     , _tuTask        :: !Text
     , _tuOAuthToken  :: !(Maybe OAuthToken)
     , _tuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksUpdate'' with the minimum fields required to make a request.
 --
@@ -85,11 +86,11 @@ data TasksUpdate' = TasksUpdate'
 --
 -- * 'tuUserIP'
 --
+-- * 'tuPayload'
+--
 -- * 'tuKey'
 --
 -- * 'tuTaskList'
---
--- * 'tuTask'
 --
 -- * 'tuTask'
 --
@@ -97,18 +98,18 @@ data TasksUpdate' = TasksUpdate'
 --
 -- * 'tuFields'
 tasksUpdate'
-    :: Text -- ^ 'tasklist'
-    -> Task -- ^ 'Task'
+    :: Task -- ^ 'payload'
+    -> Text -- ^ 'tasklist'
     -> Text -- ^ 'task'
     -> TasksUpdate'
-tasksUpdate' pTuTaskList_ pTuTask_ pTuTask_ =
+tasksUpdate' pTuPayload_ pTuTaskList_ pTuTask_ =
     TasksUpdate'
     { _tuQuotaUser = Nothing
     , _tuPrettyPrint = True
     , _tuUserIP = Nothing
+    , _tuPayload = pTuPayload_
     , _tuKey = Nothing
     , _tuTaskList = pTuTaskList_
-    , _tuTask = pTuTask_
     , _tuTask = pTuTask_
     , _tuOAuthToken = Nothing
     , _tuFields = Nothing
@@ -132,6 +133,11 @@ tuPrettyPrint
 tuUserIP :: Lens' TasksUpdate' (Maybe Text)
 tuUserIP = lens _tuUserIP (\ s a -> s{_tuUserIP = a})
 
+-- | Multipart request metadata.
+tuPayload :: Lens' TasksUpdate' Task
+tuPayload
+  = lens _tuPayload (\ s a -> s{_tuPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -142,10 +148,6 @@ tuKey = lens _tuKey (\ s a -> s{_tuKey = a})
 tuTaskList :: Lens' TasksUpdate' Text
 tuTaskList
   = lens _tuTaskList (\ s a -> s{_tuTaskList = a})
-
--- | Multipart request metadata.
-tuTask :: Lens' TasksUpdate' Task
-tuTask = lens _tuTask (\ s a -> s{_tuTask = a})
 
 -- | Task identifier.
 tuTask :: Lens' TasksUpdate' Text
@@ -175,7 +177,7 @@ instance GoogleRequest TasksUpdate' where
               _tuKey
               _tuOAuthToken
               (Just AltJSON)
-              _tuTask
+              _tuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TasksUpdateResource)

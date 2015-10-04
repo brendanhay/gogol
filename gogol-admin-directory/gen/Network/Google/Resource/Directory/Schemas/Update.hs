@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.Directory.Schemas.Update
     , suQuotaUser
     , suPrettyPrint
     , suUserIP
+    , suPayload
     , suCustomerId
-    , suSchema
     , suKey
     , suOAuthToken
     , suSchemaKey
@@ -67,13 +68,13 @@ data SchemasUpdate' = SchemasUpdate'
     { _suQuotaUser   :: !(Maybe Text)
     , _suPrettyPrint :: !Bool
     , _suUserIP      :: !(Maybe Text)
+    , _suPayload     :: !Schema
     , _suCustomerId  :: !Text
-    , _suSchema      :: !Schema
     , _suKey         :: !(Maybe Key)
     , _suOAuthToken  :: !(Maybe OAuthToken)
     , _suSchemaKey   :: !Text
     , _suFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchemasUpdate'' with the minimum fields required to make a request.
 --
@@ -85,9 +86,9 @@ data SchemasUpdate' = SchemasUpdate'
 --
 -- * 'suUserIP'
 --
--- * 'suCustomerId'
+-- * 'suPayload'
 --
--- * 'suSchema'
+-- * 'suCustomerId'
 --
 -- * 'suKey'
 --
@@ -97,17 +98,17 @@ data SchemasUpdate' = SchemasUpdate'
 --
 -- * 'suFields'
 schemasUpdate'
-    :: Text -- ^ 'customerId'
-    -> Schema -- ^ 'Schema'
+    :: Schema -- ^ 'payload'
+    -> Text -- ^ 'customerId'
     -> Text -- ^ 'schemaKey'
     -> SchemasUpdate'
-schemasUpdate' pSuCustomerId_ pSuSchema_ pSuSchemaKey_ =
+schemasUpdate' pSuPayload_ pSuCustomerId_ pSuSchemaKey_ =
     SchemasUpdate'
     { _suQuotaUser = Nothing
     , _suPrettyPrint = True
     , _suUserIP = Nothing
+    , _suPayload = pSuPayload_
     , _suCustomerId = pSuCustomerId_
-    , _suSchema = pSuSchema_
     , _suKey = Nothing
     , _suOAuthToken = Nothing
     , _suSchemaKey = pSuSchemaKey_
@@ -132,14 +133,15 @@ suPrettyPrint
 suUserIP :: Lens' SchemasUpdate' (Maybe Text)
 suUserIP = lens _suUserIP (\ s a -> s{_suUserIP = a})
 
+-- | Multipart request metadata.
+suPayload :: Lens' SchemasUpdate' Schema
+suPayload
+  = lens _suPayload (\ s a -> s{_suPayload = a})
+
 -- | Immutable id of the Google Apps account
 suCustomerId :: Lens' SchemasUpdate' Text
 suCustomerId
   = lens _suCustomerId (\ s a -> s{_suCustomerId = a})
-
--- | Multipart request metadata.
-suSchema :: Lens' SchemasUpdate' Schema
-suSchema = lens _suSchema (\ s a -> s{_suSchema = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -176,7 +178,7 @@ instance GoogleRequest SchemasUpdate' where
               _suKey
               _suOAuthToken
               (Just AltJSON)
-              _suSchema
+              _suPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SchemasUpdateResource)

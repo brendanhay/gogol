@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,10 +38,10 @@ module Network.Google.Resource.CloudResourceManager.Projects.Create
     , pcQuotaUser
     , pcPrettyPrint
     , pcUploadProtocol
-    , pcProject
     , pcPp
     , pcAccessToken
     , pcUploadType
+    , pcPayload
     , pcBearerToken
     , pcKey
     , pcOAuthToken
@@ -57,12 +58,12 @@ type ProjectsCreateResource =
      "v1beta1" :>
        "projects" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -83,16 +84,16 @@ data ProjectsCreate' = ProjectsCreate'
     , _pcQuotaUser      :: !(Maybe Text)
     , _pcPrettyPrint    :: !Bool
     , _pcUploadProtocol :: !(Maybe Text)
-    , _pcProject        :: !Project
     , _pcPp             :: !Bool
     , _pcAccessToken    :: !(Maybe Text)
     , _pcUploadType     :: !(Maybe Text)
+    , _pcPayload        :: !Project
     , _pcBearerToken    :: !(Maybe Text)
     , _pcKey            :: !(Maybe Key)
     , _pcOAuthToken     :: !(Maybe OAuthToken)
     , _pcFields         :: !(Maybe Text)
     , _pcCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsCreate'' with the minimum fields required to make a request.
 --
@@ -106,13 +107,13 @@ data ProjectsCreate' = ProjectsCreate'
 --
 -- * 'pcUploadProtocol'
 --
--- * 'pcProject'
---
 -- * 'pcPp'
 --
 -- * 'pcAccessToken'
 --
 -- * 'pcUploadType'
+--
+-- * 'pcPayload'
 --
 -- * 'pcBearerToken'
 --
@@ -124,18 +125,18 @@ data ProjectsCreate' = ProjectsCreate'
 --
 -- * 'pcCallback'
 projectsCreate'
-    :: Project -- ^ 'Project'
+    :: Project -- ^ 'payload'
     -> ProjectsCreate'
-projectsCreate' pPcProject_ =
+projectsCreate' pPcPayload_ =
     ProjectsCreate'
     { _pcXgafv = Nothing
     , _pcQuotaUser = Nothing
     , _pcPrettyPrint = True
     , _pcUploadProtocol = Nothing
-    , _pcProject = pPcProject_
     , _pcPp = True
     , _pcAccessToken = Nothing
     , _pcUploadType = Nothing
+    , _pcPayload = pPcPayload_
     , _pcBearerToken = Nothing
     , _pcKey = Nothing
     , _pcOAuthToken = Nothing
@@ -166,11 +167,6 @@ pcUploadProtocol
   = lens _pcUploadProtocol
       (\ s a -> s{_pcUploadProtocol = a})
 
--- | Multipart request metadata.
-pcProject :: Lens' ProjectsCreate' Project
-pcProject
-  = lens _pcProject (\ s a -> s{_pcProject = a})
-
 -- | Pretty-print response.
 pcPp :: Lens' ProjectsCreate' Bool
 pcPp = lens _pcPp (\ s a -> s{_pcPp = a})
@@ -185,6 +181,11 @@ pcAccessToken
 pcUploadType :: Lens' ProjectsCreate' (Maybe Text)
 pcUploadType
   = lens _pcUploadType (\ s a -> s{_pcUploadType = a})
+
+-- | Multipart request metadata.
+pcPayload :: Lens' ProjectsCreate' Project
+pcPayload
+  = lens _pcPayload (\ s a -> s{_pcPayload = a})
 
 -- | OAuth bearer token.
 pcBearerToken :: Lens' ProjectsCreate' (Maybe Text)
@@ -220,18 +221,18 @@ instance GoogleRequest ProjectsCreate' where
         type Rs ProjectsCreate' = Project
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u ProjectsCreate'{..}
-          = go _pcXgafv _pcAccessToken _pcBearerToken
-              _pcCallback
-              (Just _pcPp)
+          = go _pcXgafv _pcUploadProtocol (Just _pcPp)
+              _pcAccessToken
               _pcUploadType
-              _pcUploadProtocol
+              _pcBearerToken
+              _pcCallback
               _pcQuotaUser
               (Just _pcPrettyPrint)
               _pcFields
               _pcKey
               _pcOAuthToken
               (Just AltJSON)
-              _pcProject
+              _pcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsCreateResource)

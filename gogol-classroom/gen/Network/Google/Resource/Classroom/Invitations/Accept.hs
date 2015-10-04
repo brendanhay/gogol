@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -59,14 +60,14 @@ import           Network.Google.Prelude
 type InvitationsAcceptResource =
      "v1" :>
        "invitations" :>
-         "{id}:accept" :>
+         CaptureMode "id" "accept" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
@@ -98,7 +99,7 @@ data InvitationsAccept' = InvitationsAccept'
     , _iaOAuthToken     :: !(Maybe OAuthToken)
     , _iaFields         :: !(Maybe Text)
     , _iaCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InvitationsAccept'' with the minimum fields required to make a request.
 --
@@ -225,12 +226,11 @@ instance GoogleRequest InvitationsAccept' where
         type Rs InvitationsAccept' = Empty
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u InvitationsAccept'{..}
-          = go _iaXgafv _iaAccessToken _iaBearerToken
-              _iaCallback
-              (Just _iaPp)
+          = go _iaId _iaXgafv _iaUploadProtocol (Just _iaPp)
+              _iaAccessToken
               _iaUploadType
-              _iaUploadProtocol
-              _iaId
+              _iaBearerToken
+              _iaCallback
               _iaQuotaUser
               (Just _iaPrettyPrint)
               _iaFields

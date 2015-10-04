@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,17 +55,17 @@ import           Network.Google.PubSub.Types
 -- 'ProjectsSubscriptionsList'' request conforms to.
 type ProjectsSubscriptionsListResource =
      "v1beta2" :>
-       "{+project}" :>
+       Capture "project" Text :>
          "subscriptions" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pageSize" Int32 :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "pageSize" Int32 :>
+                           QueryParam "callback" Text :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
@@ -92,7 +93,7 @@ data ProjectsSubscriptionsList' = ProjectsSubscriptionsList'
     , _pslPageSize       :: !(Maybe Int32)
     , _pslFields         :: !(Maybe Text)
     , _pslCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsList'' with the minimum fields required to make a request.
 --
@@ -243,14 +244,14 @@ instance GoogleRequest ProjectsSubscriptionsList'
              ListSubscriptionsResponse
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsSubscriptionsList'{..}
-          = go _pslXgafv _pslAccessToken _pslBearerToken
-              _pslCallback
-              _pslPageSize
-              _pslPageToken
+          = go _pslProject _pslXgafv _pslUploadProtocol
               (Just _pslPp)
+              _pslAccessToken
               _pslUploadType
-              _pslUploadProtocol
-              _pslProject
+              _pslBearerToken
+              _pslPageToken
+              _pslPageSize
+              _pslCallback
               _pslQuotaUser
               (Just _pslPrettyPrint)
               _pslFields

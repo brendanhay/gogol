@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -74,7 +75,7 @@ data MyLibraryReadingPositionsGet' = MyLibraryReadingPositionsGet'
     , _mlrpgSource         :: !(Maybe Text)
     , _mlrpgOAuthToken     :: !(Maybe OAuthToken)
     , _mlrpgFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyLibraryReadingPositionsGet'' with the minimum fields required to make a request.
 --
@@ -179,7 +180,7 @@ instance GoogleRequest MyLibraryReadingPositionsGet'
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
           MyLibraryReadingPositionsGet'{..}
-          = go _mlrpgContentVersion _mlrpgSource _mlrpgVolumeId
+          = go _mlrpgVolumeId _mlrpgContentVersion _mlrpgSource
               _mlrpgQuotaUser
               (Just _mlrpgPrettyPrint)
               _mlrpgUserIP

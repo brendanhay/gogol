@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.GamesManagement.Scores.ResetMultipleForAllPlayers
     -- * Request Lenses
     , srmfapQuotaUser
     , srmfapPrettyPrint
-    , srmfapScoresResetMultipleForAllRequest
     , srmfapUserIP
+    , srmfapPayload
     , srmfapKey
     , srmfapOAuthToken
     , srmfapFields
@@ -65,14 +66,14 @@ type ScoresResetMultipleForAllPlayersResource =
 --
 -- /See:/ 'scoresResetMultipleForAllPlayers'' smart constructor.
 data ScoresResetMultipleForAllPlayers' = ScoresResetMultipleForAllPlayers'
-    { _srmfapQuotaUser                        :: !(Maybe Text)
-    , _srmfapPrettyPrint                      :: !Bool
-    , _srmfapScoresResetMultipleForAllRequest :: !ScoresResetMultipleForAllRequest
-    , _srmfapUserIP                           :: !(Maybe Text)
-    , _srmfapKey                              :: !(Maybe Key)
-    , _srmfapOAuthToken                       :: !(Maybe OAuthToken)
-    , _srmfapFields                           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _srmfapQuotaUser   :: !(Maybe Text)
+    , _srmfapPrettyPrint :: !Bool
+    , _srmfapUserIP      :: !(Maybe Text)
+    , _srmfapPayload     :: !ScoresResetMultipleForAllRequest
+    , _srmfapKey         :: !(Maybe Key)
+    , _srmfapOAuthToken  :: !(Maybe OAuthToken)
+    , _srmfapFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresResetMultipleForAllPlayers'' with the minimum fields required to make a request.
 --
@@ -82,9 +83,9 @@ data ScoresResetMultipleForAllPlayers' = ScoresResetMultipleForAllPlayers'
 --
 -- * 'srmfapPrettyPrint'
 --
--- * 'srmfapScoresResetMultipleForAllRequest'
---
 -- * 'srmfapUserIP'
+--
+-- * 'srmfapPayload'
 --
 -- * 'srmfapKey'
 --
@@ -92,14 +93,14 @@ data ScoresResetMultipleForAllPlayers' = ScoresResetMultipleForAllPlayers'
 --
 -- * 'srmfapFields'
 scoresResetMultipleForAllPlayers'
-    :: ScoresResetMultipleForAllRequest -- ^ 'ScoresResetMultipleForAllRequest'
+    :: ScoresResetMultipleForAllRequest -- ^ 'payload'
     -> ScoresResetMultipleForAllPlayers'
-scoresResetMultipleForAllPlayers' pSrmfapScoresResetMultipleForAllRequest_ =
+scoresResetMultipleForAllPlayers' pSrmfapPayload_ =
     ScoresResetMultipleForAllPlayers'
     { _srmfapQuotaUser = Nothing
     , _srmfapPrettyPrint = True
-    , _srmfapScoresResetMultipleForAllRequest = pSrmfapScoresResetMultipleForAllRequest_
     , _srmfapUserIP = Nothing
+    , _srmfapPayload = pSrmfapPayload_
     , _srmfapKey = Nothing
     , _srmfapOAuthToken = Nothing
     , _srmfapFields = Nothing
@@ -119,18 +120,17 @@ srmfapPrettyPrint
   = lens _srmfapPrettyPrint
       (\ s a -> s{_srmfapPrettyPrint = a})
 
--- | Multipart request metadata.
-srmfapScoresResetMultipleForAllRequest :: Lens' ScoresResetMultipleForAllPlayers' ScoresResetMultipleForAllRequest
-srmfapScoresResetMultipleForAllRequest
-  = lens _srmfapScoresResetMultipleForAllRequest
-      (\ s a ->
-         s{_srmfapScoresResetMultipleForAllRequest = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 srmfapUserIP :: Lens' ScoresResetMultipleForAllPlayers' (Maybe Text)
 srmfapUserIP
   = lens _srmfapUserIP (\ s a -> s{_srmfapUserIP = a})
+
+-- | Multipart request metadata.
+srmfapPayload :: Lens' ScoresResetMultipleForAllPlayers' ScoresResetMultipleForAllRequest
+srmfapPayload
+  = lens _srmfapPayload
+      (\ s a -> s{_srmfapPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -167,7 +167,7 @@ instance GoogleRequest
               _srmfapKey
               _srmfapOAuthToken
               (Just AltJSON)
-              _srmfapScoresResetMultipleForAllRequest
+              _srmfapPayload
           where go
                   = clientWithRoute
                       (Proxy ::

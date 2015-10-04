@@ -27,48 +27,16 @@ module Network.Google.PageSpeed.Types
     , paivPageRect
     , paivKey
 
-    -- * ResultVersion
-    , ResultVersion
-    , resultVersion
-    , rvMinor
-    , rvMajor
+    -- * Strategy
+    , Strategy (..)
 
-    -- * ResultPageStats
-    , ResultPageStats
-    , resultPageStats
-    , rpsHTMLResponseBytes
-    , rpsTotalRequestBytes
-    , rpsNumberResources
-    , rpsNumberStaticResources
-    , rpsNumberHosts
-    , rpsNumberJsResources
-    , rpsNumberCssResources
-    , rpsTextResponseBytes
-    , rpsFlashResponseBytes
-    , rpsImageResponseBytes
-    , rpsOtherResponseBytes
-    , rpsJavascriptResponseBytes
-    , rpsCssResponseBytes
-
-    -- * PagespeedAPIImageV2Page_rect
-    , PagespeedAPIImageV2Page_rect
-    , pagespeedAPIImageV2Page_rect
-    , paivpHeight
-    , paivpLeft
-    , paivpWidth
-    , paivpTop
-
-    -- * PagespeedonlinePagespeedapiRunpagespeedStrategy
-    , PagespeedonlinePagespeedapiRunpagespeedStrategy (..)
-
-    -- * PagespeedAPIFormatStringV2Args
-    , PagespeedAPIFormatStringV2Args
-    , pagespeedAPIFormatStringV2Args
-    , pafsvaValue
-    , pafsvaRects
-    , pafsvaKey
-    , pafsvaType
-    , pafsvaSecondaryRects
+    -- * RectsItem
+    , RectsItem
+    , rectsItem
+    , riHeight
+    , riLeft
+    , riWidth
+    , riTop
 
     -- * Result
     , Result
@@ -84,41 +52,73 @@ module Network.Google.PageSpeed.Types
     , rId
     , rTitle
 
-    -- * PagespeedAPIFormatStringV2ArgsSecondary_rects
-    , PagespeedAPIFormatStringV2ArgsSecondary_rects
-    , pagespeedAPIFormatStringV2ArgsSecondary_rects
-    , pafsvasHeight
-    , pafsvasLeft
-    , pafsvasWidth
-    , pafsvasTop
+    -- * Page_rect
+    , Page_rect
+    , page_rect
+    , pHeight
+    , pLeft
+    , pWidth
+    , pTop
 
-    -- * PagespeedAPIFormatStringV2ArgsRects
-    , PagespeedAPIFormatStringV2ArgsRects
-    , pagespeedAPIFormatStringV2ArgsRects
-    , pafsvarHeight
-    , pafsvarLeft
-    , pafsvarWidth
-    , pafsvarTop
+    -- * RuleResults
+    , RuleResults
+    , ruleResults
 
-    -- * ResultFormattedResults
-    , ResultFormattedResults
-    , resultFormattedResults
-    , rfrLocale
-    , rfrRuleResults
+    -- * FormattedResults
+    , FormattedResults
+    , formattedResults
+    , frLocale
+    , frRuleResults
 
-    -- * ResultRuleGroups
-    , ResultRuleGroups
-    , resultRuleGroups
+    -- * Version
+    , Version
+    , version
+    , vMinor
+    , vMajor
+
+    -- * RuleGroups
+    , RuleGroups
+    , ruleGroups
+
+    -- * ArgsItem
+    , ArgsItem
+    , argsItem
+    , aiValue
+    , aiRects
+    , aiKey
+    , aiType
+    , aiSecondaryRects
+
+    -- * PageStats
+    , PageStats
+    , pageStats
+    , psHTMLResponseBytes
+    , psTotalRequestBytes
+    , psNumberResources
+    , psNumberStaticResources
+    , psNumberHosts
+    , psNumberJsResources
+    , psNumberCssResources
+    , psTextResponseBytes
+    , psFlashResponseBytes
+    , psImageResponseBytes
+    , psOtherResponseBytes
+    , psJavascriptResponseBytes
+    , psCssResponseBytes
+
+    -- * Secondary_rectsItem
+    , Secondary_rectsItem
+    , secondary_rectsItem
+    , siHeight
+    , siLeft
+    , siWidth
+    , siTop
 
     -- * PagespeedAPIFormatStringV2
     , PagespeedAPIFormatStringV2
     , pagespeedAPIFormatStringV2
     , pafsvArgs
     , pafsvFormat
-
-    -- * ResultFormattedResultsRuleResults
-    , ResultFormattedResultsRuleResults
-    , resultFormattedResultsRuleResults
     ) where
 
 import           Network.Google.PageSpeed.Types.Product

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,7 +37,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Update
     , acfuUserIP
     , acfuFingerprint
     , acfuFolderId
-    , acfuFolder
+    , acfuPayload
     , acfuAccountId
     , acfuKey
     , acfuOAuthToken
@@ -75,12 +76,12 @@ data AccountsContainersFoldersUpdate' = AccountsContainersFoldersUpdate'
     , _acfuUserIP      :: !(Maybe Text)
     , _acfuFingerprint :: !(Maybe Text)
     , _acfuFolderId    :: !Text
-    , _acfuFolder      :: !Folder
+    , _acfuPayload     :: !Folder
     , _acfuAccountId   :: !Text
     , _acfuKey         :: !(Maybe Key)
     , _acfuOAuthToken  :: !(Maybe OAuthToken)
     , _acfuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersFoldersUpdate'' with the minimum fields required to make a request.
 --
@@ -98,7 +99,7 @@ data AccountsContainersFoldersUpdate' = AccountsContainersFoldersUpdate'
 --
 -- * 'acfuFolderId'
 --
--- * 'acfuFolder'
+-- * 'acfuPayload'
 --
 -- * 'acfuAccountId'
 --
@@ -110,10 +111,10 @@ data AccountsContainersFoldersUpdate' = AccountsContainersFoldersUpdate'
 accountsContainersFoldersUpdate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'folderId'
-    -> Folder -- ^ 'Folder'
+    -> Folder -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> AccountsContainersFoldersUpdate'
-accountsContainersFoldersUpdate' pAcfuContainerId_ pAcfuFolderId_ pAcfuFolder_ pAcfuAccountId_ =
+accountsContainersFoldersUpdate' pAcfuContainerId_ pAcfuFolderId_ pAcfuPayload_ pAcfuAccountId_ =
     AccountsContainersFoldersUpdate'
     { _acfuQuotaUser = Nothing
     , _acfuPrettyPrint = True
@@ -121,7 +122,7 @@ accountsContainersFoldersUpdate' pAcfuContainerId_ pAcfuFolderId_ pAcfuFolder_ p
     , _acfuUserIP = Nothing
     , _acfuFingerprint = Nothing
     , _acfuFolderId = pAcfuFolderId_
-    , _acfuFolder = pAcfuFolder_
+    , _acfuPayload = pAcfuPayload_
     , _acfuAccountId = pAcfuAccountId_
     , _acfuKey = Nothing
     , _acfuOAuthToken = Nothing
@@ -167,9 +168,9 @@ acfuFolderId
   = lens _acfuFolderId (\ s a -> s{_acfuFolderId = a})
 
 -- | Multipart request metadata.
-acfuFolder :: Lens' AccountsContainersFoldersUpdate' Folder
-acfuFolder
-  = lens _acfuFolder (\ s a -> s{_acfuFolder = a})
+acfuPayload :: Lens' AccountsContainersFoldersUpdate' Folder
+acfuPayload
+  = lens _acfuPayload (\ s a -> s{_acfuPayload = a})
 
 -- | The GTM Account ID.
 acfuAccountId :: Lens' AccountsContainersFoldersUpdate' Text
@@ -205,8 +206,8 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersFoldersUpdate'{..}
-          = go _acfuFingerprint _acfuAccountId _acfuContainerId
-              _acfuFolderId
+          = go _acfuAccountId _acfuContainerId _acfuFolderId
+              _acfuFingerprint
               _acfuQuotaUser
               (Just _acfuPrettyPrint)
               _acfuUserIP
@@ -214,7 +215,7 @@ instance GoogleRequest
               _acfuKey
               _acfuOAuthToken
               (Just AltJSON)
-              _acfuFolder
+              _acfuPayload
           where go
                   = clientWithRoute
                       (Proxy ::

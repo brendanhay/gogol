@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.DFAReporting.SubAccounts.Update
     -- * Request Lenses
     , sauQuotaUser
     , sauPrettyPrint
-    , sauSubAccount
     , sauUserIP
     , sauProfileId
+    , sauPayload
     , sauKey
     , sauOAuthToken
     , sauFields
@@ -64,13 +65,13 @@ type SubAccountsUpdateResource =
 data SubAccountsUpdate' = SubAccountsUpdate'
     { _sauQuotaUser   :: !(Maybe Text)
     , _sauPrettyPrint :: !Bool
-    , _sauSubAccount  :: !SubAccount
     , _sauUserIP      :: !(Maybe Text)
     , _sauProfileId   :: !Int64
+    , _sauPayload     :: !SubAccount
     , _sauKey         :: !(Maybe Key)
     , _sauOAuthToken  :: !(Maybe OAuthToken)
     , _sauFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubAccountsUpdate'' with the minimum fields required to make a request.
 --
@@ -80,11 +81,11 @@ data SubAccountsUpdate' = SubAccountsUpdate'
 --
 -- * 'sauPrettyPrint'
 --
--- * 'sauSubAccount'
---
 -- * 'sauUserIP'
 --
 -- * 'sauProfileId'
+--
+-- * 'sauPayload'
 --
 -- * 'sauKey'
 --
@@ -92,16 +93,16 @@ data SubAccountsUpdate' = SubAccountsUpdate'
 --
 -- * 'sauFields'
 subAccountsUpdate'
-    :: SubAccount -- ^ 'SubAccount'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> SubAccount -- ^ 'payload'
     -> SubAccountsUpdate'
-subAccountsUpdate' pSauSubAccount_ pSauProfileId_ =
+subAccountsUpdate' pSauProfileId_ pSauPayload_ =
     SubAccountsUpdate'
     { _sauQuotaUser = Nothing
     , _sauPrettyPrint = True
-    , _sauSubAccount = pSauSubAccount_
     , _sauUserIP = Nothing
     , _sauProfileId = pSauProfileId_
+    , _sauPayload = pSauPayload_
     , _sauKey = Nothing
     , _sauOAuthToken = Nothing
     , _sauFields = Nothing
@@ -120,12 +121,6 @@ sauPrettyPrint
   = lens _sauPrettyPrint
       (\ s a -> s{_sauPrettyPrint = a})
 
--- | Multipart request metadata.
-sauSubAccount :: Lens' SubAccountsUpdate' SubAccount
-sauSubAccount
-  = lens _sauSubAccount
-      (\ s a -> s{_sauSubAccount = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 sauUserIP :: Lens' SubAccountsUpdate' (Maybe Text)
@@ -136,6 +131,11 @@ sauUserIP
 sauProfileId :: Lens' SubAccountsUpdate' Int64
 sauProfileId
   = lens _sauProfileId (\ s a -> s{_sauProfileId = a})
+
+-- | Multipart request metadata.
+sauPayload :: Lens' SubAccountsUpdate' SubAccount
+sauPayload
+  = lens _sauPayload (\ s a -> s{_sauPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -169,7 +169,7 @@ instance GoogleRequest SubAccountsUpdate' where
               _sauKey
               _sauOAuthToken
               (Just AltJSON)
-              _sauSubAccount
+              _sauPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SubAccountsUpdateResource)

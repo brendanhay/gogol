@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.DeleteAccount
     , rQuotaUser
     , rPrettyPrint
     , rUserIP
+    , rPayload
     , rKey
-    , rIdentitytoolkitRelyingPartyDeleteAccountRequest
     , rOAuthToken
     , rFields
     ) where
@@ -61,14 +62,14 @@ type RelyingPartyDeleteAccountResource =
 --
 -- /See:/ 'relyingPartyDeleteAccount'' smart constructor.
 data RelyingPartyDeleteAccount' = RelyingPartyDeleteAccount'
-    { _rQuotaUser                                       :: !(Maybe Text)
-    , _rPrettyPrint                                     :: !Bool
-    , _rUserIP                                          :: !(Maybe Text)
-    , _rKey                                             :: !(Maybe Key)
-    , _rIdentitytoolkitRelyingPartyDeleteAccountRequest :: !IdentitytoolkitRelyingPartyDeleteAccountRequest
-    , _rOAuthToken                                      :: !(Maybe OAuthToken)
-    , _rFields                                          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rQuotaUser   :: !(Maybe Text)
+    , _rPrettyPrint :: !Bool
+    , _rUserIP      :: !(Maybe Text)
+    , _rPayload     :: !IdentitytoolkitRelyingPartyDeleteAccountRequest
+    , _rKey         :: !(Maybe Key)
+    , _rOAuthToken  :: !(Maybe OAuthToken)
+    , _rFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingPartyDeleteAccount'' with the minimum fields required to make a request.
 --
@@ -80,23 +81,23 @@ data RelyingPartyDeleteAccount' = RelyingPartyDeleteAccount'
 --
 -- * 'rUserIP'
 --
--- * 'rKey'
+-- * 'rPayload'
 --
--- * 'rIdentitytoolkitRelyingPartyDeleteAccountRequest'
+-- * 'rKey'
 --
 -- * 'rOAuthToken'
 --
 -- * 'rFields'
 relyingPartyDeleteAccount'
-    :: IdentitytoolkitRelyingPartyDeleteAccountRequest -- ^ 'IdentitytoolkitRelyingPartyDeleteAccountRequest'
+    :: IdentitytoolkitRelyingPartyDeleteAccountRequest -- ^ 'payload'
     -> RelyingPartyDeleteAccount'
-relyingPartyDeleteAccount' pRIdentitytoolkitRelyingPartyDeleteAccountRequest_ =
+relyingPartyDeleteAccount' pRPayload_ =
     RelyingPartyDeleteAccount'
     { _rQuotaUser = Nothing
     , _rPrettyPrint = True
     , _rUserIP = Nothing
+    , _rPayload = pRPayload_
     , _rKey = Nothing
-    , _rIdentitytoolkitRelyingPartyDeleteAccountRequest = pRIdentitytoolkitRelyingPartyDeleteAccountRequest_
     , _rOAuthToken = Nothing
     , _rFields = Nothing
     }
@@ -118,20 +119,15 @@ rPrettyPrint
 rUserIP :: Lens' RelyingPartyDeleteAccount' (Maybe Text)
 rUserIP = lens _rUserIP (\ s a -> s{_rUserIP = a})
 
+-- | Multipart request metadata.
+rPayload :: Lens' RelyingPartyDeleteAccount' IdentitytoolkitRelyingPartyDeleteAccountRequest
+rPayload = lens _rPayload (\ s a -> s{_rPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 rKey :: Lens' RelyingPartyDeleteAccount' (Maybe Key)
 rKey = lens _rKey (\ s a -> s{_rKey = a})
-
--- | Multipart request metadata.
-rIdentitytoolkitRelyingPartyDeleteAccountRequest :: Lens' RelyingPartyDeleteAccount' IdentitytoolkitRelyingPartyDeleteAccountRequest
-rIdentitytoolkitRelyingPartyDeleteAccountRequest
-  = lens
-      _rIdentitytoolkitRelyingPartyDeleteAccountRequest
-      (\ s a ->
-         s{_rIdentitytoolkitRelyingPartyDeleteAccountRequest =
-             a})
 
 -- | OAuth 2.0 token for the current user.
 rOAuthToken :: Lens' RelyingPartyDeleteAccount' (Maybe OAuthToken)
@@ -157,7 +153,7 @@ instance GoogleRequest RelyingPartyDeleteAccount'
               _rKey
               _rOAuthToken
               (Just AltJSON)
-              _rIdentitytoolkitRelyingPartyDeleteAccountRequest
+              _rPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RelyingPartyDeleteAccountResource)

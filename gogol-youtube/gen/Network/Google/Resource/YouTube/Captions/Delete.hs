@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,9 +49,9 @@ import           Network.Google.YouTube.Types
 -- 'CaptionsDelete'' request conforms to.
 type CaptionsDeleteResource =
      "captions" :>
-       QueryParam "onBehalfOf" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "id" Text :>
+       QueryParam "id" Text :>
+         QueryParam "onBehalfOf" Text :>
+           QueryParam "onBehalfOfContentOwner" Text :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -72,7 +73,7 @@ data CaptionsDelete' = CaptionsDelete'
     , _cddId                     :: !Text
     , _cddOAuthToken             :: !(Maybe OAuthToken)
     , _cddFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CaptionsDelete'' with the minimum fields required to make a request.
 --
@@ -183,8 +184,8 @@ instance GoogleRequest CaptionsDelete' where
         type Rs CaptionsDelete' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CaptionsDelete'{..}
-          = go _cddOnBehalfOf _cddOnBehalfOfContentOwner
-              (Just _cddId)
+          = go (Just _cddId) _cddOnBehalfOf
+              _cddOnBehalfOfContentOwner
               _cddQuotaUser
               (Just _cddPrettyPrint)
               _cddUserIP

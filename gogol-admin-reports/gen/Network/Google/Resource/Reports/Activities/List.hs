@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -59,14 +60,14 @@ type ActivitiesListResource =
          Capture "userKey" Text :>
            "applications" :>
              Capture "applicationName" Text :>
-               QueryParam "actorIpAddress" Text :>
-                 QueryParam "customerId" Text :>
-                   QueryParam "endTime" Text :>
-                     QueryParam "eventName" Text :>
-                       QueryParam "filters" Text :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "startTime" Text :>
+               QueryParam "startTime" Text :>
+                 QueryParam "filters" Text :>
+                   QueryParam "customerId" Text :>
+                     QueryParam "actorIpAddress" Text :>
+                       QueryParam "endTime" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "eventName" Text :>
+                             QueryParam "maxResults" Int32 :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "userIp" Text :>
@@ -96,7 +97,7 @@ data ActivitiesList' = ActivitiesList'
     , _alUserKey         :: !Text
     , _alMaxResults      :: !(Maybe Int32)
     , _alFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
 --
@@ -254,14 +255,14 @@ instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = Activities
         request = requestWithRoute defReq adminReportsURL
         requestWithRoute r u ActivitiesList'{..}
-          = go _alActorIPAddress _alCustomerId _alEndTime
-              _alEventName
+          = go _alUserKey _alApplicationName _alStartTime
               _alFilters
-              _alMaxResults
+              _alCustomerId
+              _alActorIPAddress
+              _alEndTime
               _alPageToken
-              _alStartTime
-              _alUserKey
-              _alApplicationName
+              _alEventName
+              _alMaxResults
               _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP

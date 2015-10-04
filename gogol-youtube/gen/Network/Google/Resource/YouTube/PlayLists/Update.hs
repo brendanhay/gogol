@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,10 +36,10 @@ module Network.Google.Resource.YouTube.PlayLists.Update
     , pluPart
     , pluPrettyPrint
     , pluUserIP
+    , pluPayload
     , pluOnBehalfOfContentOwner
     , pluKey
     , pluOAuthToken
-    , pluPlayList
     , pluFields
     ) where
 
@@ -49,8 +50,8 @@ import           Network.Google.YouTube.Types
 -- 'PlayListsUpdate'' request conforms to.
 type PlayListsUpdateResource =
      "playlists" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -69,12 +70,12 @@ data PlayListsUpdate' = PlayListsUpdate'
     , _pluPart                   :: !Text
     , _pluPrettyPrint            :: !Bool
     , _pluUserIP                 :: !(Maybe Text)
+    , _pluPayload                :: !PlayList
     , _pluOnBehalfOfContentOwner :: !(Maybe Text)
     , _pluKey                    :: !(Maybe Key)
     , _pluOAuthToken             :: !(Maybe OAuthToken)
-    , _pluPlayList               :: !PlayList
     , _pluFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayListsUpdate'' with the minimum fields required to make a request.
 --
@@ -88,29 +89,29 @@ data PlayListsUpdate' = PlayListsUpdate'
 --
 -- * 'pluUserIP'
 --
+-- * 'pluPayload'
+--
 -- * 'pluOnBehalfOfContentOwner'
 --
 -- * 'pluKey'
 --
 -- * 'pluOAuthToken'
 --
--- * 'pluPlayList'
---
 -- * 'pluFields'
 playListsUpdate'
     :: Text -- ^ 'part'
-    -> PlayList -- ^ 'PlayList'
+    -> PlayList -- ^ 'payload'
     -> PlayListsUpdate'
-playListsUpdate' pPluPart_ pPluPlayList_ =
+playListsUpdate' pPluPart_ pPluPayload_ =
     PlayListsUpdate'
     { _pluQuotaUser = Nothing
     , _pluPart = pPluPart_
     , _pluPrettyPrint = True
     , _pluUserIP = Nothing
+    , _pluPayload = pPluPayload_
     , _pluOnBehalfOfContentOwner = Nothing
     , _pluKey = Nothing
     , _pluOAuthToken = Nothing
-    , _pluPlayList = pPluPlayList_
     , _pluFields = Nothing
     }
 
@@ -145,6 +146,11 @@ pluUserIP :: Lens' PlayListsUpdate' (Maybe Text)
 pluUserIP
   = lens _pluUserIP (\ s a -> s{_pluUserIP = a})
 
+-- | Multipart request metadata.
+pluPayload :: Lens' PlayListsUpdate' PlayList
+pluPayload
+  = lens _pluPayload (\ s a -> s{_pluPayload = a})
+
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
 -- request\'s authorization credentials identify a YouTube CMS user who is
@@ -172,11 +178,6 @@ pluOAuthToken
   = lens _pluOAuthToken
       (\ s a -> s{_pluOAuthToken = a})
 
--- | Multipart request metadata.
-pluPlayList :: Lens' PlayListsUpdate' PlayList
-pluPlayList
-  = lens _pluPlayList (\ s a -> s{_pluPlayList = a})
-
 -- | Selector specifying which fields to include in a partial response.
 pluFields :: Lens' PlayListsUpdate' (Maybe Text)
 pluFields
@@ -190,7 +191,7 @@ instance GoogleRequest PlayListsUpdate' where
         type Rs PlayListsUpdate' = PlayList
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u PlayListsUpdate'{..}
-          = go _pluOnBehalfOfContentOwner (Just _pluPart)
+          = go (Just _pluPart) _pluOnBehalfOfContentOwner
               _pluQuotaUser
               (Just _pluPrettyPrint)
               _pluUserIP
@@ -198,7 +199,7 @@ instance GoogleRequest PlayListsUpdate' where
               _pluKey
               _pluOAuthToken
               (Just AltJSON)
-              _pluPlayList
+              _pluPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlayListsUpdateResource)

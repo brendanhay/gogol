@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.Calendar.ACL.Update
     , auPrettyPrint
     , auUserIP
     , auRuleId
+    , auPayload
     , auKey
-    , auACLRule
     , auOAuthToken
     , auFields
     ) where
@@ -69,11 +70,11 @@ data ACLUpdate' = ACLUpdate'
     , _auPrettyPrint :: !Bool
     , _auUserIP      :: !(Maybe Text)
     , _auRuleId      :: !Text
+    , _auPayload     :: !ACLRule
     , _auKey         :: !(Maybe Key)
-    , _auACLRule     :: !ACLRule
     , _auOAuthToken  :: !(Maybe OAuthToken)
     , _auFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLUpdate'' with the minimum fields required to make a request.
 --
@@ -89,9 +90,9 @@ data ACLUpdate' = ACLUpdate'
 --
 -- * 'auRuleId'
 --
--- * 'auKey'
+-- * 'auPayload'
 --
--- * 'auACLRule'
+-- * 'auKey'
 --
 -- * 'auOAuthToken'
 --
@@ -99,17 +100,17 @@ data ACLUpdate' = ACLUpdate'
 aclUpdate'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'ruleId'
-    -> ACLRule -- ^ 'ACLRule'
+    -> ACLRule -- ^ 'payload'
     -> ACLUpdate'
-aclUpdate' pAuCalendarId_ pAuRuleId_ pAuACLRule_ =
+aclUpdate' pAuCalendarId_ pAuRuleId_ pAuPayload_ =
     ACLUpdate'
     { _auQuotaUser = Nothing
     , _auCalendarId = pAuCalendarId_
     , _auPrettyPrint = True
     , _auUserIP = Nothing
     , _auRuleId = pAuRuleId_
+    , _auPayload = pAuPayload_
     , _auKey = Nothing
-    , _auACLRule = pAuACLRule_
     , _auOAuthToken = Nothing
     , _auFields = Nothing
     }
@@ -143,16 +144,16 @@ auUserIP = lens _auUserIP (\ s a -> s{_auUserIP = a})
 auRuleId :: Lens' ACLUpdate' Text
 auRuleId = lens _auRuleId (\ s a -> s{_auRuleId = a})
 
+-- | Multipart request metadata.
+auPayload :: Lens' ACLUpdate' ACLRule
+auPayload
+  = lens _auPayload (\ s a -> s{_auPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 auKey :: Lens' ACLUpdate' (Maybe Key)
 auKey = lens _auKey (\ s a -> s{_auKey = a})
-
--- | Multipart request metadata.
-auACLRule :: Lens' ACLUpdate' ACLRule
-auACLRule
-  = lens _auACLRule (\ s a -> s{_auACLRule = a})
 
 -- | OAuth 2.0 token for the current user.
 auOAuthToken :: Lens' ACLUpdate' (Maybe OAuthToken)
@@ -178,7 +179,7 @@ instance GoogleRequest ACLUpdate' where
               _auKey
               _auOAuthToken
               (Just AltJSON)
-              _auACLRule
+              _auPayload
           where go
                   = clientWithRoute (Proxy :: Proxy ACLUpdateResource)
                       r

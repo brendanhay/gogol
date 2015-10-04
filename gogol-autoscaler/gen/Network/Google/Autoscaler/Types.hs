@@ -17,13 +17,6 @@ module Network.Google.Autoscaler.Types
     -- * Service URL
       autoscalerURL
 
-    -- * OperationWarnings
-    , OperationWarnings
-    , operationWarnings
-    , owData
-    , owCode
-    , owMessage
-
     -- * DeprecationStatus
     , DeprecationStatus
     , deprecationStatus
@@ -32,12 +25,6 @@ module Network.Google.Autoscaler.Types
     , dsReplacement
     , dsObsolete
     , dsDeprecated
-
-    -- * OperationWarningsData
-    , OperationWarningsData
-    , operationWarningsData
-    , owdValue
-    , owdKey
 
     -- * OperationList
     , OperationList
@@ -86,6 +73,11 @@ module Network.Google.Autoscaler.Types
     , oTargetLink
     , oClientOperationId
 
+    -- * Error'
+    , Error'
+    , error'
+    , eErrors
+
     -- * Zone
     , Zone
     , zone
@@ -116,13 +108,20 @@ module Network.Google.Autoscaler.Types
     , zlSelfLink
     , zlId
 
-    -- * ZoneMaintenanceWindows
-    , ZoneMaintenanceWindows
-    , zoneMaintenanceWindows
-    , zmwBeginTime
-    , zmwName
-    , zmwEndTime
-    , zmwDescription
+    -- * WarningsItem
+    , WarningsItem
+    , warningsItem
+    , wiData
+    , wiCode
+    , wiMessage
+
+    -- * MaintenanceWindowsItem
+    , MaintenanceWindowsItem
+    , maintenanceWindowsItem
+    , mwiBeginTime
+    , mwiName
+    , mwiEndTime
+    , mwiDescription
 
     -- * AutoscalingPolicy
     , AutoscalingPolicy
@@ -134,10 +133,11 @@ module Network.Google.Autoscaler.Types
     , apMinNumReplicas
     , apCoolDownPeriodSec
 
-    -- * OperationError
-    , OperationError
-    , operationError
-    , oeErrors
+    -- * DataItem
+    , DataItem
+    , dataItem
+    , diValue
+    , diKey
 
     -- * Autoscaler
     , Autoscaler
@@ -151,12 +151,12 @@ module Network.Google.Autoscaler.Types
     , aDescription
     , aTarget
 
-    -- * OperationErrorErrors
-    , OperationErrorErrors
-    , operationErrorErrors
-    , oeeLocation
-    , oeeCode
-    , oeeMessage
+    -- * ErrorsItem
+    , ErrorsItem
+    , errorsItem
+    , eiLocation
+    , eiCode
+    , eiMessage
 
     -- * AutoscalingPolicyCPUUtilization
     , AutoscalingPolicyCPUUtilization

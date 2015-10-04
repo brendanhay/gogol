@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,9 +54,9 @@ type PeopleListResource =
        Capture "userId" Text :>
          "people" :>
            Capture "collection" PlusPeopleListCollection :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "orderBy" PlusPeopleListOrderBy :>
-                 QueryParam "pageToken" Text :>
+             QueryParam "orderBy" PlusPeopleListOrderBy :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -80,7 +81,7 @@ data PeopleList' = PeopleList'
     , _plOAuthToken  :: !(Maybe OAuthToken)
     , _plMaxResults  :: !Word32
     , _plFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleList'' with the minimum fields required to make a request.
 --
@@ -196,9 +197,8 @@ instance GoogleRequest PeopleList' where
         type Rs PeopleList' = PeopleFeed
         request = requestWithRoute defReq plusURL
         requestWithRoute r u PeopleList'{..}
-          = go (Just _plMaxResults) _plOrderBy _plPageToken
-              _plUserId
-              _plCollection
+          = go _plUserId _plCollection _plOrderBy _plPageToken
+              (Just _plMaxResults)
               _plQuotaUser
               (Just _plPrettyPrint)
               _plUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -82,7 +83,7 @@ data PostsGet' = PostsGet'
     , _pgPostId      :: !Text
     , _pgOAuthToken  :: !(Maybe OAuthToken)
     , _pgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsGet'' with the minimum fields required to make a request.
 --
@@ -204,11 +205,10 @@ instance GoogleRequest PostsGet' where
         type Rs PostsGet' = Post
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsGet'{..}
-          = go (Just _pgFetchBody) _pgFetchImages
+          = go _pgBlogId _pgPostId (Just _pgFetchBody)
+              _pgFetchImages
               _pgMaxComments
               _pgView
-              _pgBlogId
-              _pgPostId
               _pgQuotaUser
               (Just _pgPrettyPrint)
               _pgUserIP

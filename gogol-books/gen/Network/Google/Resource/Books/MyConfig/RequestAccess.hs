@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,14 +53,12 @@ import           Network.Google.Prelude
 type MyConfigRequestAccessResource =
      "myconfig" :>
        "requestAccess" :>
-         QueryParam "licenseTypes"
-           BooksMyConfigRequestAccessLicenseTypes
-           :>
-           QueryParam "locale" Text :>
-             QueryParam "source" Text :>
-               QueryParam "volumeId" Text :>
-                 QueryParam "nonce" Text :>
-                   QueryParam "cpksver" Text :>
+         QueryParam "source" Text :>
+           QueryParam "volumeId" Text :>
+             QueryParam "nonce" Text :>
+               QueryParam "cpksver" Text :>
+                 QueryParam "locale" Text :>
+                   QueryParam "licenseTypes" LicenseTypes :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -78,14 +77,14 @@ data MyConfigRequestAccess' = MyConfigRequestAccess'
     , _mcraCpksver      :: !Text
     , _mcraUserIP       :: !(Maybe Text)
     , _mcraLocale       :: !(Maybe Text)
-    , _mcraLicenseTypes :: !(Maybe BooksMyConfigRequestAccessLicenseTypes)
+    , _mcraLicenseTypes :: !(Maybe LicenseTypes)
     , _mcraKey          :: !(Maybe Key)
     , _mcraVolumeId     :: !Text
     , _mcraSource       :: !Text
     , _mcraOAuthToken   :: !(Maybe OAuthToken)
     , _mcraFields       :: !(Maybe Text)
     , _mcraNonce        :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyConfigRequestAccess'' with the minimum fields required to make a request.
 --
@@ -168,7 +167,7 @@ mcraLocale
 
 -- | The type of access license to request. If not specified, the default is
 -- BOTH.
-mcraLicenseTypes :: Lens' MyConfigRequestAccess' (Maybe BooksMyConfigRequestAccessLicenseTypes)
+mcraLicenseTypes :: Lens' MyConfigRequestAccess' (Maybe LicenseTypes)
 mcraLicenseTypes
   = lens _mcraLicenseTypes
       (\ s a -> s{_mcraLicenseTypes = a})
@@ -213,10 +212,11 @@ instance GoogleRequest MyConfigRequestAccess' where
         type Rs MyConfigRequestAccess' = RequestAccess
         request = requestWithRoute defReq booksURL
         requestWithRoute r u MyConfigRequestAccess'{..}
-          = go _mcraLicenseTypes _mcraLocale (Just _mcraSource)
-              (Just _mcraVolumeId)
+          = go (Just _mcraSource) (Just _mcraVolumeId)
               (Just _mcraNonce)
               (Just _mcraCpksver)
+              _mcraLocale
+              _mcraLicenseTypes
               _mcraQuotaUser
               (Just _mcraPrettyPrint)
               _mcraUserIP

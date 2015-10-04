@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -71,7 +72,7 @@ data LayersPublish' = LayersPublish'
     , _lId          :: !Text
     , _lOAuthToken  :: !(Maybe OAuthToken)
     , _lFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersPublish'' with the minimum fields required to make a request.
 --
@@ -157,7 +158,7 @@ instance GoogleRequest LayersPublish' where
         type Rs LayersPublish' = PublishResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u LayersPublish'{..}
-          = go _lForce _lId _lQuotaUser (Just _lPrettyPrint)
+          = go _lId _lForce _lQuotaUser (Just _lPrettyPrint)
               _lUserIP
               _lFields
               _lKey

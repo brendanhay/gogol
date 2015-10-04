@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -63,12 +64,12 @@ type AccountsStoreInfosCountryGetResource =
                "country" :>
                  Capture "country" Text :>
                    QueryParam "$.xgafv" Text :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "upload_protocol" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "callback" Text :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "fields" Text :>
@@ -98,7 +99,7 @@ data AccountsStoreInfosCountryGet' = AccountsStoreInfosCountryGet'
     , _asicgOAuthToken     :: !(Maybe OAuthToken)
     , _asicgFields         :: !(Maybe Text)
     , _asicgCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsStoreInfosCountryGet'' with the minimum fields required to make a request.
 --
@@ -255,14 +256,14 @@ instance GoogleRequest AccountsStoreInfosCountryGet'
           = requestWithRoute defReq playMoviesPartnerURL
         requestWithRoute r u
           AccountsStoreInfosCountryGet'{..}
-          = go _asicgXgafv _asicgAccessToken _asicgBearerToken
-              _asicgCallback
-              (Just _asicgPp)
-              _asicgUploadType
+          = go _asicgAccountId _asicgVideoId _asicgCountry
+              _asicgXgafv
               _asicgUploadProtocol
-              _asicgAccountId
-              _asicgVideoId
-              _asicgCountry
+              (Just _asicgPp)
+              _asicgAccessToken
+              _asicgUploadType
+              _asicgBearerToken
+              _asicgCallback
               _asicgQuotaUser
               (Just _asicgPrettyPrint)
               _asicgFields

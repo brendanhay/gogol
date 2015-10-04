@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.Compute.Projects.SetCommonInstanceMetadata
     , pscimPrettyPrint
     , pscimProject
     , pscimUserIP
+    , pscimPayload
     , pscimKey
-    , pscimMetadata
     , pscimOAuthToken
     , pscimFields
     ) where
@@ -67,11 +68,11 @@ data ProjectsSetCommonInstanceMetadata' = ProjectsSetCommonInstanceMetadata'
     , _pscimPrettyPrint :: !Bool
     , _pscimProject     :: !Text
     , _pscimUserIP      :: !(Maybe Text)
+    , _pscimPayload     :: !Metadata
     , _pscimKey         :: !(Maybe Key)
-    , _pscimMetadata    :: !Metadata
     , _pscimOAuthToken  :: !(Maybe OAuthToken)
     , _pscimFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSetCommonInstanceMetadata'' with the minimum fields required to make a request.
 --
@@ -85,25 +86,25 @@ data ProjectsSetCommonInstanceMetadata' = ProjectsSetCommonInstanceMetadata'
 --
 -- * 'pscimUserIP'
 --
--- * 'pscimKey'
+-- * 'pscimPayload'
 --
--- * 'pscimMetadata'
+-- * 'pscimKey'
 --
 -- * 'pscimOAuthToken'
 --
 -- * 'pscimFields'
 projectsSetCommonInstanceMetadata'
     :: Text -- ^ 'project'
-    -> Metadata -- ^ 'Metadata'
+    -> Metadata -- ^ 'payload'
     -> ProjectsSetCommonInstanceMetadata'
-projectsSetCommonInstanceMetadata' pPscimProject_ pPscimMetadata_ =
+projectsSetCommonInstanceMetadata' pPscimProject_ pPscimPayload_ =
     ProjectsSetCommonInstanceMetadata'
     { _pscimQuotaUser = Nothing
     , _pscimPrettyPrint = True
     , _pscimProject = pPscimProject_
     , _pscimUserIP = Nothing
+    , _pscimPayload = pPscimPayload_
     , _pscimKey = Nothing
-    , _pscimMetadata = pPscimMetadata_
     , _pscimOAuthToken = Nothing
     , _pscimFields = Nothing
     }
@@ -133,17 +134,16 @@ pscimUserIP :: Lens' ProjectsSetCommonInstanceMetadata' (Maybe Text)
 pscimUserIP
   = lens _pscimUserIP (\ s a -> s{_pscimUserIP = a})
 
+-- | Multipart request metadata.
+pscimPayload :: Lens' ProjectsSetCommonInstanceMetadata' Metadata
+pscimPayload
+  = lens _pscimPayload (\ s a -> s{_pscimPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 pscimKey :: Lens' ProjectsSetCommonInstanceMetadata' (Maybe Key)
 pscimKey = lens _pscimKey (\ s a -> s{_pscimKey = a})
-
--- | Multipart request metadata.
-pscimMetadata :: Lens' ProjectsSetCommonInstanceMetadata' Metadata
-pscimMetadata
-  = lens _pscimMetadata
-      (\ s a -> s{_pscimMetadata = a})
 
 -- | OAuth 2.0 token for the current user.
 pscimOAuthToken :: Lens' ProjectsSetCommonInstanceMetadata' (Maybe OAuthToken)
@@ -175,7 +175,7 @@ instance GoogleRequest
               _pscimKey
               _pscimOAuthToken
               (Just AltJSON)
-              _pscimMetadata
+              _pscimPayload
           where go
                   = clientWithRoute
                       (Proxy ::

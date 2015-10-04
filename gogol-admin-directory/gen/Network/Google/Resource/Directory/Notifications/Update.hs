@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.Directory.Notifications.Update
     -- * Request Lenses
     , nuQuotaUser
     , nuPrettyPrint
-    , nuNotification
     , nuUserIP
+    , nuPayload
     , nuCustomer
     , nuKey
     , nuNotificationId
@@ -67,14 +68,14 @@ type NotificationsUpdateResource =
 data NotificationsUpdate' = NotificationsUpdate'
     { _nuQuotaUser      :: !(Maybe Text)
     , _nuPrettyPrint    :: !Bool
-    , _nuNotification   :: !Notification
     , _nuUserIP         :: !(Maybe Text)
+    , _nuPayload        :: !Notification
     , _nuCustomer       :: !Text
     , _nuKey            :: !(Maybe Key)
     , _nuNotificationId :: !Text
     , _nuOAuthToken     :: !(Maybe OAuthToken)
     , _nuFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NotificationsUpdate'' with the minimum fields required to make a request.
 --
@@ -84,9 +85,9 @@ data NotificationsUpdate' = NotificationsUpdate'
 --
 -- * 'nuPrettyPrint'
 --
--- * 'nuNotification'
---
 -- * 'nuUserIP'
+--
+-- * 'nuPayload'
 --
 -- * 'nuCustomer'
 --
@@ -98,16 +99,16 @@ data NotificationsUpdate' = NotificationsUpdate'
 --
 -- * 'nuFields'
 notificationsUpdate'
-    :: Notification -- ^ 'Notification'
+    :: Notification -- ^ 'payload'
     -> Text -- ^ 'customer'
     -> Text -- ^ 'notificationId'
     -> NotificationsUpdate'
-notificationsUpdate' pNuNotification_ pNuCustomer_ pNuNotificationId_ =
+notificationsUpdate' pNuPayload_ pNuCustomer_ pNuNotificationId_ =
     NotificationsUpdate'
     { _nuQuotaUser = Nothing
     , _nuPrettyPrint = True
-    , _nuNotification = pNuNotification_
     , _nuUserIP = Nothing
+    , _nuPayload = pNuPayload_
     , _nuCustomer = pNuCustomer_
     , _nuKey = Nothing
     , _nuNotificationId = pNuNotificationId_
@@ -128,16 +129,15 @@ nuPrettyPrint
   = lens _nuPrettyPrint
       (\ s a -> s{_nuPrettyPrint = a})
 
--- | Multipart request metadata.
-nuNotification :: Lens' NotificationsUpdate' Notification
-nuNotification
-  = lens _nuNotification
-      (\ s a -> s{_nuNotification = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 nuUserIP :: Lens' NotificationsUpdate' (Maybe Text)
 nuUserIP = lens _nuUserIP (\ s a -> s{_nuUserIP = a})
+
+-- | Multipart request metadata.
+nuPayload :: Lens' NotificationsUpdate' Notification
+nuPayload
+  = lens _nuPayload (\ s a -> s{_nuPayload = a})
 
 -- | The unique ID for the customer\'s Google account.
 nuCustomer :: Lens' NotificationsUpdate' Text
@@ -180,7 +180,7 @@ instance GoogleRequest NotificationsUpdate' where
               _nuKey
               _nuOAuthToken
               (Just AltJSON)
-              _nuNotification
+              _nuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy NotificationsUpdateResource)

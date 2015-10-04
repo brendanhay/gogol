@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -77,7 +78,7 @@ data MobileDevicesGet' = MobileDevicesGet'
     , _mdgProjection  :: !(Maybe DirectoryMobileDevicesGetProjection)
     , _mdgOAuthToken  :: !(Maybe OAuthToken)
     , _mdgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobileDevicesGet'' with the minimum fields required to make a request.
 --
@@ -179,7 +180,7 @@ instance GoogleRequest MobileDevicesGet' where
         type Rs MobileDevicesGet' = MobileDevice
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u MobileDevicesGet'{..}
-          = go _mdgProjection _mdgCustomerId _mdgResourceId
+          = go _mdgCustomerId _mdgResourceId _mdgProjection
               _mdgQuotaUser
               (Just _mdgPrettyPrint)
               _mdgUserIP

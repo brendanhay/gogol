@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -73,9 +74,9 @@ data UsersThreadsGet' = UsersThreadsGet'
     , _utgKey             :: !(Maybe Key)
     , _utgId              :: !Text
     , _utgOAuthToken      :: !(Maybe OAuthToken)
-    , _utgMetadataHeaders :: !(Maybe Text)
+    , _utgMetadataHeaders :: !(Maybe [Text])
     , _utgFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersThreadsGet'' with the minimum fields required to make a request.
 --
@@ -165,10 +166,12 @@ utgOAuthToken
       (\ s a -> s{_utgOAuthToken = a})
 
 -- | When given and format is METADATA, only include headers specified.
-utgMetadataHeaders :: Lens' UsersThreadsGet' (Maybe Text)
+utgMetadataHeaders :: Lens' UsersThreadsGet' [Text]
 utgMetadataHeaders
   = lens _utgMetadataHeaders
       (\ s a -> s{_utgMetadataHeaders = a})
+      . _Default
+      . _Coerce
 
 -- | Selector specifying which fields to include in a partial response.
 utgFields :: Lens' UsersThreadsGet' (Maybe Text)
@@ -183,8 +186,8 @@ instance GoogleRequest UsersThreadsGet' where
         type Rs UsersThreadsGet' = Thread
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersThreadsGet'{..}
-          = go (Just _utgFormat) _utgMetadataHeaders _utgUserId
-              _utgId
+          = go _utgUserId _utgId (Just _utgFormat)
+              (_utgMetadataHeaders ^. _Default)
               _utgQuotaUser
               (Just _utgPrettyPrint)
               _utgUserIP

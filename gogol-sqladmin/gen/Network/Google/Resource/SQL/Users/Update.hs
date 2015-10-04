@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.SQL.Users.Update
     , uuPrettyPrint
     , uuProject
     , uuUserIP
-    , uuUser
+    , uuPayload
     , uuKey
     , uuName
     , uuHost
@@ -73,14 +74,14 @@ data UsersUpdate' = UsersUpdate'
     , _uuPrettyPrint :: !Bool
     , _uuProject     :: !Text
     , _uuUserIP      :: !(Maybe Text)
-    , _uuUser        :: !User
+    , _uuPayload     :: !User
     , _uuKey         :: !(Maybe Key)
     , _uuName        :: !Text
     , _uuHost        :: !Text
     , _uuOAuthToken  :: !(Maybe OAuthToken)
     , _uuFields      :: !(Maybe Text)
     , _uuInstance    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersUpdate'' with the minimum fields required to make a request.
 --
@@ -94,7 +95,7 @@ data UsersUpdate' = UsersUpdate'
 --
 -- * 'uuUserIP'
 --
--- * 'uuUser'
+-- * 'uuPayload'
 --
 -- * 'uuKey'
 --
@@ -109,18 +110,18 @@ data UsersUpdate' = UsersUpdate'
 -- * 'uuInstance'
 usersUpdate'
     :: Text -- ^ 'project'
-    -> User -- ^ 'User'
+    -> User -- ^ 'payload'
     -> Text -- ^ 'name'
     -> Text -- ^ 'host'
     -> Text -- ^ 'instance'
     -> UsersUpdate'
-usersUpdate' pUuProject_ pUuUser_ pUuName_ pUuHost_ pUuInstance_ =
+usersUpdate' pUuProject_ pUuPayload_ pUuName_ pUuHost_ pUuInstance_ =
     UsersUpdate'
     { _uuQuotaUser = Nothing
     , _uuPrettyPrint = True
     , _uuProject = pUuProject_
     , _uuUserIP = Nothing
-    , _uuUser = pUuUser_
+    , _uuPayload = pUuPayload_
     , _uuKey = Nothing
     , _uuName = pUuName_
     , _uuHost = pUuHost_
@@ -153,8 +154,9 @@ uuUserIP :: Lens' UsersUpdate' (Maybe Text)
 uuUserIP = lens _uuUserIP (\ s a -> s{_uuUserIP = a})
 
 -- | Multipart request metadata.
-uuUser :: Lens' UsersUpdate' User
-uuUser = lens _uuUser (\ s a -> s{_uuUser = a})
+uuPayload :: Lens' UsersUpdate' User
+uuPayload
+  = lens _uuPayload (\ s a -> s{_uuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -201,7 +203,7 @@ instance GoogleRequest UsersUpdate' where
               _uuKey
               _uuOAuthToken
               (Just AltJSON)
-              _uuUser
+              _uuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersUpdateResource)

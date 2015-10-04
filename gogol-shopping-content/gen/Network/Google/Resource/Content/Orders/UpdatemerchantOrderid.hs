@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -30,11 +31,11 @@ module Network.Google.Resource.Content.Orders.UpdatemerchantOrderid
     , OrdersUpdatemerchantOrderid'
 
     -- * Request Lenses
-    , ouoOrdersUpdateMerchantOrderIdRequest
     , ouoQuotaUser
     , ouoMerchantId
     , ouoPrettyPrint
     , ouoUserIP
+    , ouoPayload
     , ouoKey
     , ouoOAuthToken
     , ouoOrderId
@@ -65,22 +66,20 @@ type OrdersUpdatemerchantOrderidResource =
 --
 -- /See:/ 'ordersUpdatemerchantOrderid'' smart constructor.
 data OrdersUpdatemerchantOrderid' = OrdersUpdatemerchantOrderid'
-    { _ouoOrdersUpdateMerchantOrderIdRequest :: !OrdersUpdateMerchantOrderIdRequest
-    , _ouoQuotaUser                          :: !(Maybe Text)
-    , _ouoMerchantId                         :: !Word64
-    , _ouoPrettyPrint                        :: !Bool
-    , _ouoUserIP                             :: !(Maybe Text)
-    , _ouoKey                                :: !(Maybe Key)
-    , _ouoOAuthToken                         :: !(Maybe OAuthToken)
-    , _ouoOrderId                            :: !Text
-    , _ouoFields                             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ouoQuotaUser   :: !(Maybe Text)
+    , _ouoMerchantId  :: !Word64
+    , _ouoPrettyPrint :: !Bool
+    , _ouoUserIP      :: !(Maybe Text)
+    , _ouoPayload     :: !OrdersUpdateMerchantOrderIdRequest
+    , _ouoKey         :: !(Maybe Key)
+    , _ouoOAuthToken  :: !(Maybe OAuthToken)
+    , _ouoOrderId     :: !Text
+    , _ouoFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersUpdatemerchantOrderid'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'ouoOrdersUpdateMerchantOrderIdRequest'
 --
 -- * 'ouoQuotaUser'
 --
@@ -90,6 +89,8 @@ data OrdersUpdatemerchantOrderid' = OrdersUpdatemerchantOrderid'
 --
 -- * 'ouoUserIP'
 --
+-- * 'ouoPayload'
+--
 -- * 'ouoKey'
 --
 -- * 'ouoOAuthToken'
@@ -98,29 +99,22 @@ data OrdersUpdatemerchantOrderid' = OrdersUpdatemerchantOrderid'
 --
 -- * 'ouoFields'
 ordersUpdatemerchantOrderid'
-    :: OrdersUpdateMerchantOrderIdRequest -- ^ 'OrdersUpdateMerchantOrderIdRequest'
-    -> Word64 -- ^ 'merchantId'
+    :: Word64 -- ^ 'merchantId'
+    -> OrdersUpdateMerchantOrderIdRequest -- ^ 'payload'
     -> Text -- ^ 'orderId'
     -> OrdersUpdatemerchantOrderid'
-ordersUpdatemerchantOrderid' pOuoOrdersUpdateMerchantOrderIdRequest_ pOuoMerchantId_ pOuoOrderId_ =
+ordersUpdatemerchantOrderid' pOuoMerchantId_ pOuoPayload_ pOuoOrderId_ =
     OrdersUpdatemerchantOrderid'
-    { _ouoOrdersUpdateMerchantOrderIdRequest = pOuoOrdersUpdateMerchantOrderIdRequest_
-    , _ouoQuotaUser = Nothing
+    { _ouoQuotaUser = Nothing
     , _ouoMerchantId = pOuoMerchantId_
     , _ouoPrettyPrint = True
     , _ouoUserIP = Nothing
+    , _ouoPayload = pOuoPayload_
     , _ouoKey = Nothing
     , _ouoOAuthToken = Nothing
     , _ouoOrderId = pOuoOrderId_
     , _ouoFields = Nothing
     }
-
--- | Multipart request metadata.
-ouoOrdersUpdateMerchantOrderIdRequest :: Lens' OrdersUpdatemerchantOrderid' OrdersUpdateMerchantOrderIdRequest
-ouoOrdersUpdateMerchantOrderIdRequest
-  = lens _ouoOrdersUpdateMerchantOrderIdRequest
-      (\ s a ->
-         s{_ouoOrdersUpdateMerchantOrderIdRequest = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -146,6 +140,11 @@ ouoPrettyPrint
 ouoUserIP :: Lens' OrdersUpdatemerchantOrderid' (Maybe Text)
 ouoUserIP
   = lens _ouoUserIP (\ s a -> s{_ouoUserIP = a})
+
+-- | Multipart request metadata.
+ouoPayload :: Lens' OrdersUpdatemerchantOrderid' OrdersUpdateMerchantOrderIdRequest
+ouoPayload
+  = lens _ouoPayload (\ s a -> s{_ouoPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -187,7 +186,7 @@ instance GoogleRequest OrdersUpdatemerchantOrderid'
               _ouoKey
               _ouoOAuthToken
               (Just AltJSON)
-              _ouoOrdersUpdateMerchantOrderIdRequest
+              _ouoPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrdersUpdatemerchantOrderidResource)

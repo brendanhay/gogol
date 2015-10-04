@@ -31,7 +31,7 @@ data SSLCert = SSLCert
     , _scExpirationTime   :: !(Maybe DateTime')
     , _scCreateTime       :: !(Maybe DateTime')
     , _scInstance         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SSLCert' with the minimum fields required to make a request.
 --
@@ -153,7 +153,7 @@ instance ToJSON SSLCert where
 -- /See:/ 'instancesExportRequest' smart constructor.
 newtype InstancesExportRequest = InstancesExportRequest
     { _ierExportContext :: Maybe ExportContext
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesExportRequest' with the minimum fields required to make a request.
 --
@@ -191,7 +191,7 @@ instance ToJSON InstancesExportRequest where
 data DatabasesListResponse = DatabasesListResponse
     { _dlrKind  :: !Text
     , _dlrItems :: !(Maybe [Database])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatabasesListResponse' with the minimum fields required to make a request.
 --
@@ -241,7 +241,7 @@ data OperationsListResponse = OperationsListResponse
     { _olrNextPageToken :: !(Maybe Text)
     , _olrKind          :: !Text
     , _olrItems         :: !(Maybe [Operation])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationsListResponse' with the minimum fields required to make a request.
 --
@@ -302,7 +302,7 @@ instance ToJSON OperationsListResponse where
 data OnPremisesConfiguration = OnPremisesConfiguration
     { _opcKind     :: !Text
     , _opcHostPort :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OnPremisesConfiguration' with the minimum fields required to make a request.
 --
@@ -349,10 +349,10 @@ instance ToJSON OnPremisesConfiguration where
 data ImportContext = ImportContext
     { _icDatabase         :: !(Maybe Text)
     , _icKind             :: !Text
-    , _icCSVImportOptions :: !(Maybe ImportContextCSVImportOptions)
+    , _icCSVImportOptions :: !(Maybe CSVImportOptions)
     , _icURI              :: !(Maybe Text)
     , _icFileType         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImportContext' with the minimum fields required to make a request.
 --
@@ -391,7 +391,7 @@ icKind :: Lens' ImportContext Text
 icKind = lens _icKind (\ s a -> s{_icKind = a})
 
 -- | Options for importing data as CSV.
-icCSVImportOptions :: Lens' ImportContext (Maybe ImportContextCSVImportOptions)
+icCSVImportOptions :: Lens' ImportContext (Maybe CSVImportOptions)
 icCSVImportOptions
   = lens _icCSVImportOptions
       (\ s a -> s{_icCSVImportOptions = a})
@@ -429,6 +429,41 @@ instance ToJSON ImportContext where
                   ("uri" .=) <$> _icURI,
                   ("fileType" .=) <$> _icFileType])
 
+-- | Options for exporting data as CSV.
+--
+-- /See:/ 'csvExportOptions' smart constructor.
+newtype CSVExportOptions = CSVExportOptions
+    { _ceoSelectQuery :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CSVExportOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ceoSelectQuery'
+csvExportOptions
+    :: CSVExportOptions
+csvExportOptions =
+    CSVExportOptions
+    { _ceoSelectQuery = Nothing
+    }
+
+-- | The select query used to extract the data.
+ceoSelectQuery :: Lens' CSVExportOptions (Maybe Text)
+ceoSelectQuery
+  = lens _ceoSelectQuery
+      (\ s a -> s{_ceoSelectQuery = a})
+
+instance FromJSON CSVExportOptions where
+        parseJSON
+          = withObject "CSVExportOptions"
+              (\ o -> CSVExportOptions <$> (o .:? "selectQuery"))
+
+instance ToJSON CSVExportOptions where
+        toJSON CSVExportOptions{..}
+          = object
+              (catMaybes [("selectQuery" .=) <$> _ceoSelectQuery])
+
 -- | Database instance settings.
 --
 -- /See:/ 'settings' smart constructor.
@@ -446,7 +481,7 @@ data Settings = Settings
     , _sCrashSafeReplicationEnabled :: !(Maybe Bool)
     , _sLocationPreference          :: !(Maybe LocationPreference)
     , _sBackupConfiguration         :: !(Maybe BackupConfiguration)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Settings' with the minimum fields required to make a request.
 --
@@ -635,7 +670,7 @@ instance ToJSON Settings where
 -- /See:/ 'sslCertsCreateEphemeralRequest' smart constructor.
 newtype SSLCertsCreateEphemeralRequest = SSLCertsCreateEphemeralRequest
     { _sccerPublicKey :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SSLCertsCreateEphemeralRequest' with the minimum fields required to make a request.
 --
@@ -680,7 +715,7 @@ data Database = Database
     , _dName      :: !(Maybe Text)
     , _dCharset   :: !(Maybe Text)
     , _dInstance  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Database' with the minimum fields required to make a request.
 --
@@ -784,7 +819,7 @@ instance ToJSON Database where
 data IPMapping = IPMapping
     { _imIPAddress    :: !(Maybe Text)
     , _imTimeToRetire :: !(Maybe DateTime')
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IPMapping' with the minimum fields required to make a request.
 --
@@ -851,7 +886,7 @@ data Operation = Operation
     , _oEndTime       :: !(Maybe DateTime')
     , _oOperationType :: !(Maybe Text)
     , _oTargetLink    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -1037,7 +1072,7 @@ instance ToJSON Operation where
 data TiersListResponse = TiersListResponse
     { _tlrKind  :: !Text
     , _tlrItems :: !(Maybe [Tier])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TiersListResponse' with the minimum fields required to make a request.
 --
@@ -1087,7 +1122,7 @@ data BinLogCoordinates = BinLogCoordinates
     { _blcBinLogPosition :: !(Maybe Int64)
     , _blcKind           :: !Text
     , _blcBinLogFileName :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BinLogCoordinates' with the minimum fields required to make a request.
 --
@@ -1144,13 +1179,13 @@ instance ToJSON BinLogCoordinates where
 --
 -- /See:/ 'exportContext' smart constructor.
 data ExportContext = ExportContext
-    { _ecCSVExportOptions :: !(Maybe ExportContextCSVExportOptions)
+    { _ecCSVExportOptions :: !(Maybe CSVExportOptions)
     , _ecKind             :: !Text
     , _ecURI              :: !(Maybe Text)
     , _ecFileType         :: !(Maybe Text)
-    , _ecSQLExportOptions :: !(Maybe ExportContextSQLExportOptions)
+    , _ecSQLExportOptions :: !(Maybe SQLExportOptions)
     , _ecDatabases        :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ExportContext' with the minimum fields required to make a request.
 --
@@ -1180,7 +1215,7 @@ exportContext =
     }
 
 -- | Options for exporting data as CSV.
-ecCSVExportOptions :: Lens' ExportContext (Maybe ExportContextCSVExportOptions)
+ecCSVExportOptions :: Lens' ExportContext (Maybe CSVExportOptions)
 ecCSVExportOptions
   = lens _ecCSVExportOptions
       (\ s a -> s{_ecCSVExportOptions = a})
@@ -1203,7 +1238,7 @@ ecFileType
   = lens _ecFileType (\ s a -> s{_ecFileType = a})
 
 -- | Options for exporting data as SQL statements.
-ecSQLExportOptions :: Lens' ExportContext (Maybe ExportContextSQLExportOptions)
+ecSQLExportOptions :: Lens' ExportContext (Maybe SQLExportOptions)
 ecSQLExportOptions
   = lens _ecSQLExportOptions
       (\ s a -> s{_ecSQLExportOptions = a})
@@ -1241,6 +1276,55 @@ instance ToJSON ExportContext where
                   ("sqlExportOptions" .=) <$> _ecSQLExportOptions,
                   ("databases" .=) <$> _ecDatabases])
 
+-- | Options for importing data as CSV.
+--
+-- /See:/ 'csvImportOptions' smart constructor.
+data CSVImportOptions = CSVImportOptions
+    { _cioColumns :: !(Maybe [Text])
+    , _cioTable   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CSVImportOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cioColumns'
+--
+-- * 'cioTable'
+csvImportOptions
+    :: CSVImportOptions
+csvImportOptions =
+    CSVImportOptions
+    { _cioColumns = Nothing
+    , _cioTable = Nothing
+    }
+
+-- | The columns to which CSV data is imported. If not specified, all columns
+-- of the database table are loaded with CSV data.
+cioColumns :: Lens' CSVImportOptions [Text]
+cioColumns
+  = lens _cioColumns (\ s a -> s{_cioColumns = a}) .
+      _Default
+      . _Coerce
+
+-- | The table to which CSV data is imported.
+cioTable :: Lens' CSVImportOptions (Maybe Text)
+cioTable = lens _cioTable (\ s a -> s{_cioTable = a})
+
+instance FromJSON CSVImportOptions where
+        parseJSON
+          = withObject "CSVImportOptions"
+              (\ o ->
+                 CSVImportOptions <$>
+                   (o .:? "columns" .!= mempty) <*> (o .:? "table"))
+
+instance ToJSON CSVImportOptions where
+        toJSON CSVImportOptions{..}
+          = object
+              (catMaybes
+                 [("columns" .=) <$> _cioColumns,
+                  ("table" .=) <$> _cioTable])
+
 -- | User list response.
 --
 -- /See:/ 'usersListResponse' smart constructor.
@@ -1248,7 +1332,7 @@ data UsersListResponse = UsersListResponse
     { _ulrNextPageToken :: !(Maybe Text)
     , _ulrKind          :: !Text
     , _ulrItems         :: !(Maybe [User])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersListResponse' with the minimum fields required to make a request.
 --
@@ -1310,7 +1394,7 @@ instance ToJSON UsersListResponse where
 data OperationErrors = OperationErrors
     { _oeKind   :: !Text
     , _oeErrors :: !(Maybe [OperationError])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationErrors' with the minimum fields required to make a request.
 --
@@ -1359,7 +1443,7 @@ instance ToJSON OperationErrors where
 data SSLCertsListResponse = SSLCertsListResponse
     { _sclrKind  :: !Text
     , _sclrItems :: !(Maybe [SSLCert])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SSLCertsListResponse' with the minimum fields required to make a request.
 --
@@ -1409,7 +1493,7 @@ data IPConfiguration = IPConfiguration
     { _icAuthorizedNetworks :: !(Maybe [ACLEntry])
     , _icRequireSSL         :: !(Maybe Bool)
     , _icIPv4Enabled        :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IPConfiguration' with the minimum fields required to make a request.
 --
@@ -1468,50 +1552,12 @@ instance ToJSON IPConfiguration where
                   ("requireSsl" .=) <$> _icRequireSSL,
                   ("ipv4Enabled" .=) <$> _icIPv4Enabled])
 
--- | Options for exporting data as CSV.
---
--- /See:/ 'exportContextCSVExportOptions' smart constructor.
-newtype ExportContextCSVExportOptions = ExportContextCSVExportOptions
-    { _ecceoSelectQuery :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ExportContextCSVExportOptions' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ecceoSelectQuery'
-exportContextCSVExportOptions
-    :: ExportContextCSVExportOptions
-exportContextCSVExportOptions =
-    ExportContextCSVExportOptions
-    { _ecceoSelectQuery = Nothing
-    }
-
--- | The select query used to extract the data.
-ecceoSelectQuery :: Lens' ExportContextCSVExportOptions (Maybe Text)
-ecceoSelectQuery
-  = lens _ecceoSelectQuery
-      (\ s a -> s{_ecceoSelectQuery = a})
-
-instance FromJSON ExportContextCSVExportOptions where
-        parseJSON
-          = withObject "ExportContextCSVExportOptions"
-              (\ o ->
-                 ExportContextCSVExportOptions <$>
-                   (o .:? "selectQuery"))
-
-instance ToJSON ExportContextCSVExportOptions where
-        toJSON ExportContextCSVExportOptions{..}
-          = object
-              (catMaybes
-                 [("selectQuery" .=) <$> _ecceoSelectQuery])
-
 -- | SslCerts insert request.
 --
 -- /See:/ 'sslCertsInsertRequest' smart constructor.
 newtype SSLCertsInsertRequest = SSLCertsInsertRequest
     { _scirCommonName :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SSLCertsInsertRequest' with the minimum fields required to make a request.
 --
@@ -1555,7 +1601,7 @@ data User = User
     , _uPassword :: !(Maybe Text)
     , _uHost     :: !(Maybe Text)
     , _uInstance :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
@@ -1647,56 +1693,6 @@ instance ToJSON User where
                   ("host" .=) <$> _uHost,
                   ("instance" .=) <$> _uInstance])
 
--- | Options for importing data as CSV.
---
--- /See:/ 'importContextCSVImportOptions' smart constructor.
-data ImportContextCSVImportOptions = ImportContextCSVImportOptions
-    { _iccioColumns :: !(Maybe [Text])
-    , _iccioTable   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ImportContextCSVImportOptions' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'iccioColumns'
---
--- * 'iccioTable'
-importContextCSVImportOptions
-    :: ImportContextCSVImportOptions
-importContextCSVImportOptions =
-    ImportContextCSVImportOptions
-    { _iccioColumns = Nothing
-    , _iccioTable = Nothing
-    }
-
--- | The columns to which CSV data is imported. If not specified, all columns
--- of the database table are loaded with CSV data.
-iccioColumns :: Lens' ImportContextCSVImportOptions [Text]
-iccioColumns
-  = lens _iccioColumns (\ s a -> s{_iccioColumns = a})
-      . _Default
-      . _Coerce
-
--- | The table to which CSV data is imported.
-iccioTable :: Lens' ImportContextCSVImportOptions (Maybe Text)
-iccioTable
-  = lens _iccioTable (\ s a -> s{_iccioTable = a})
-
-instance FromJSON ImportContextCSVImportOptions where
-        parseJSON
-          = withObject "ImportContextCSVImportOptions"
-              (\ o ->
-                 ImportContextCSVImportOptions <$>
-                   (o .:? "columns" .!= mempty) <*> (o .:? "table"))
-
-instance ToJSON ImportContextCSVImportOptions where
-        toJSON ImportContextCSVImportOptions{..}
-          = object
-              (catMaybes
-                 [("columns" .=) <$> _iccioColumns,
-                  ("table" .=) <$> _iccioTable])
-
 -- | A Cloud SQL instance resource.
 --
 -- /See:/ 'databaseInstance' smart constructor.
@@ -1721,7 +1717,7 @@ data DatabaseInstance = DatabaseInstance
     , _datRegion                     :: !(Maybe Text)
     , _datServiceAccountEmailAddress :: !(Maybe Text)
     , _datIPAddresses                :: !(Maybe [IPMapping])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatabaseInstance' with the minimum fields required to make a request.
 --
@@ -1984,7 +1980,7 @@ data Flag = Flag
     , _fAllowedStringValues :: !(Maybe [Text])
     , _fType                :: !(Maybe Text)
     , _fMinValue            :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Flag' with the minimum fields required to make a request.
 --
@@ -2088,7 +2084,7 @@ data CloneContext = CloneContext
     { _ccDestinationInstanceName :: !(Maybe Text)
     , _ccBinLogCoordinates       :: !(Maybe BinLogCoordinates)
     , _ccKind                    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CloneContext' with the minimum fields required to make a request.
 --
@@ -2158,7 +2154,7 @@ data BackupRun = BackupRun
     , _brId              :: !(Maybe Int64)
     , _brEnqueuedTime    :: !(Maybe DateTime')
     , _brInstance        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BackupRun' with the minimum fields required to make a request.
 --
@@ -2293,7 +2289,7 @@ data ACLEntry = ACLEntry
     , _aeValue          :: !(Maybe Text)
     , _aeName           :: !(Maybe Text)
     , _aeExpirationTime :: !(Maybe DateTime')
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLEntry' with the minimum fields required to make a request.
 --
@@ -2353,6 +2349,57 @@ instance ToJSON ACLEntry where
                   ("name" .=) <$> _aeName,
                   ("expirationTime" .=) <$> _aeExpirationTime])
 
+-- | Options for exporting data as SQL statements.
+--
+-- /See:/ 'sQLExportOptions' smart constructor.
+data SQLExportOptions = SQLExportOptions
+    { _sqleoSchemaOnly :: !(Maybe Bool)
+    , _sqleoTables     :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SQLExportOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sqleoSchemaOnly'
+--
+-- * 'sqleoTables'
+sQLExportOptions
+    :: SQLExportOptions
+sQLExportOptions =
+    SQLExportOptions
+    { _sqleoSchemaOnly = Nothing
+    , _sqleoTables = Nothing
+    }
+
+-- | Export only schema.
+sqleoSchemaOnly :: Lens' SQLExportOptions (Maybe Bool)
+sqleoSchemaOnly
+  = lens _sqleoSchemaOnly
+      (\ s a -> s{_sqleoSchemaOnly = a})
+
+-- | Tables to export, or that were exported, from the specified database. If
+-- you specify tables, specify one and only one database.
+sqleoTables :: Lens' SQLExportOptions [Text]
+sqleoTables
+  = lens _sqleoTables (\ s a -> s{_sqleoTables = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON SQLExportOptions where
+        parseJSON
+          = withObject "SQLExportOptions"
+              (\ o ->
+                 SQLExportOptions <$>
+                   (o .:? "schemaOnly") <*> (o .:? "tables" .!= mempty))
+
+instance ToJSON SQLExportOptions where
+        toJSON SQLExportOptions{..}
+          = object
+              (catMaybes
+                 [("schemaOnly" .=) <$> _sqleoSchemaOnly,
+                  ("tables" .=) <$> _sqleoTables])
+
 -- | Read-replica configuration specific to MySQL databases.
 --
 -- /See:/ 'mySQLReplicaConfiguration' smart constructor.
@@ -2368,7 +2415,7 @@ data MySQLReplicaConfiguration = MySQLReplicaConfiguration
     , _msqlrcCaCertificate           :: !(Maybe Text)
     , _msqlrcDumpFilePath            :: !(Maybe Text)
     , _msqlrcPassword                :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MySQLReplicaConfiguration' with the minimum fields required to make a request.
 --
@@ -2530,7 +2577,7 @@ data Tier = Tier
     , _tRegion    :: !(Maybe [Text])
     , _tDiskQuota :: !(Maybe Int64)
     , _tRAM       :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Tier' with the minimum fields required to make a request.
 --
@@ -2606,7 +2653,7 @@ instance ToJSON Tier where
 data DatabaseFlags = DatabaseFlags
     { _dfValue :: !(Maybe Text)
     , _dfName  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatabaseFlags' with the minimum fields required to make a request.
 --
@@ -2654,7 +2701,7 @@ instance ToJSON DatabaseFlags where
 -- /See:/ 'instancesRestoreBackupRequest' smart constructor.
 newtype InstancesRestoreBackupRequest = InstancesRestoreBackupRequest
     { _irbrRestoreBackupContext :: Maybe RestoreBackupContext
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesRestoreBackupRequest' with the minimum fields required to make a request.
 --
@@ -2695,7 +2742,7 @@ data OperationError = OperationError
     { _opeKind    :: !Text
     , _opeCode    :: !(Maybe Text)
     , _opeMessage :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationError' with the minimum fields required to make a request.
 --
@@ -2750,7 +2797,7 @@ instance ToJSON OperationError where
 data SSLCertDetail = SSLCertDetail
     { _scdCertInfo       :: !(Maybe SSLCert)
     , _scdCertPrivateKey :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SSLCertDetail' with the minimum fields required to make a request.
 --
@@ -2800,7 +2847,7 @@ data BackupRunsListResponse = BackupRunsListResponse
     { _brlrNextPageToken :: !(Maybe Text)
     , _brlrKind          :: !Text
     , _brlrItems         :: !(Maybe [BackupRun])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BackupRunsListResponse' with the minimum fields required to make a request.
 --
@@ -2861,7 +2908,7 @@ instance ToJSON BackupRunsListResponse where
 -- /See:/ 'instancesCloneRequest' smart constructor.
 newtype InstancesCloneRequest = InstancesCloneRequest
     { _icrCloneContext :: Maybe CloneContext
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesCloneRequest' with the minimum fields required to make a request.
 --
@@ -2899,7 +2946,7 @@ instance ToJSON InstancesCloneRequest where
 data ReplicaConfiguration = ReplicaConfiguration
     { _rcKind                      :: !Text
     , _rcMysqlReplicaConfiguration :: !(Maybe MySQLReplicaConfiguration)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReplicaConfiguration' with the minimum fields required to make a request.
 --
@@ -2954,7 +3001,7 @@ data SSLCertsInsertResponse = SSLCertsInsertResponse
     { _scirServerCaCert :: !(Maybe SSLCert)
     , _scirKind         :: !Text
     , _scirClientCert   :: !(Maybe SSLCertDetail)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SSLCertsInsertResponse' with the minimum fields required to make a request.
 --
@@ -3017,7 +3064,7 @@ data InstancesListResponse = InstancesListResponse
     { _ilrNextPageToken :: !(Maybe Text)
     , _ilrKind          :: !Text
     , _ilrItems         :: !(Maybe [DatabaseInstance])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesListResponse' with the minimum fields required to make a request.
 --
@@ -3083,7 +3130,7 @@ data LocationPreference = LocationPreference
     { _lpKind                 :: !Text
     , _lpFollowGaeApplication :: !(Maybe Text)
     , _lpZone                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocationPreference' with the minimum fields required to make a request.
 --
@@ -3142,7 +3189,7 @@ instance ToJSON LocationPreference where
 -- /See:/ 'instancesImportRequest' smart constructor.
 newtype InstancesImportRequest = InstancesImportRequest
     { _iirImportContext :: Maybe ImportContext
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesImportRequest' with the minimum fields required to make a request.
 --
@@ -3180,7 +3227,7 @@ instance ToJSON InstancesImportRequest where
 data FlagsListResponse = FlagsListResponse
     { _flrKind  :: !Text
     , _flrItems :: !(Maybe [Flag])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FlagsListResponse' with the minimum fields required to make a request.
 --
@@ -3231,7 +3278,7 @@ data BackupConfiguration = BackupConfiguration
     , _bcStartTime        :: !(Maybe Text)
     , _bcKind             :: !Text
     , _bcBinaryLogEnabled :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BackupConfiguration' with the minimum fields required to make a request.
 --
@@ -3294,58 +3341,6 @@ instance ToJSON BackupConfiguration where
                   Just ("kind" .= _bcKind),
                   ("binaryLogEnabled" .=) <$> _bcBinaryLogEnabled])
 
--- | Options for exporting data as SQL statements.
---
--- /See:/ 'exportContextSQLExportOptions' smart constructor.
-data ExportContextSQLExportOptions = ExportContextSQLExportOptions
-    { _ecsqleoSchemaOnly :: !(Maybe Bool)
-    , _ecsqleoTables     :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ExportContextSQLExportOptions' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ecsqleoSchemaOnly'
---
--- * 'ecsqleoTables'
-exportContextSQLExportOptions
-    :: ExportContextSQLExportOptions
-exportContextSQLExportOptions =
-    ExportContextSQLExportOptions
-    { _ecsqleoSchemaOnly = Nothing
-    , _ecsqleoTables = Nothing
-    }
-
--- | Export only schema.
-ecsqleoSchemaOnly :: Lens' ExportContextSQLExportOptions (Maybe Bool)
-ecsqleoSchemaOnly
-  = lens _ecsqleoSchemaOnly
-      (\ s a -> s{_ecsqleoSchemaOnly = a})
-
--- | Tables to export, or that were exported, from the specified database. If
--- you specify tables, specify one and only one database.
-ecsqleoTables :: Lens' ExportContextSQLExportOptions [Text]
-ecsqleoTables
-  = lens _ecsqleoTables
-      (\ s a -> s{_ecsqleoTables = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ExportContextSQLExportOptions where
-        parseJSON
-          = withObject "ExportContextSQLExportOptions"
-              (\ o ->
-                 ExportContextSQLExportOptions <$>
-                   (o .:? "schemaOnly") <*> (o .:? "tables" .!= mempty))
-
-instance ToJSON ExportContextSQLExportOptions where
-        toJSON ExportContextSQLExportOptions{..}
-          = object
-              (catMaybes
-                 [("schemaOnly" .=) <$> _ecsqleoSchemaOnly,
-                  ("tables" .=) <$> _ecsqleoTables])
-
 -- | Database instance restore from backup context.
 --
 -- /See:/ 'restoreBackupContext' smart constructor.
@@ -3353,7 +3348,7 @@ data RestoreBackupContext = RestoreBackupContext
     { _rbcInstanceId  :: !(Maybe Text)
     , _rbcBackupRunId :: !(Maybe Int64)
     , _rbcKind        :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RestoreBackupContext' with the minimum fields required to make a request.
 --

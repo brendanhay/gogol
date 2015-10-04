@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.Compute.Instances.SetScheduling
     , issProject
     , issUserIP
     , issZone
+    , issPayload
     , issKey
-    , issScheduling
     , issOAuthToken
     , issFields
     , issInstance
@@ -73,12 +74,12 @@ data InstancesSetScheduling' = InstancesSetScheduling'
     , _issProject     :: !Text
     , _issUserIP      :: !(Maybe Text)
     , _issZone        :: !Text
+    , _issPayload     :: !Scheduling
     , _issKey         :: !(Maybe Key)
-    , _issScheduling  :: !Scheduling
     , _issOAuthToken  :: !(Maybe OAuthToken)
     , _issFields      :: !(Maybe Text)
     , _issInstance    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesSetScheduling'' with the minimum fields required to make a request.
 --
@@ -94,9 +95,9 @@ data InstancesSetScheduling' = InstancesSetScheduling'
 --
 -- * 'issZone'
 --
--- * 'issKey'
+-- * 'issPayload'
 --
--- * 'issScheduling'
+-- * 'issKey'
 --
 -- * 'issOAuthToken'
 --
@@ -106,18 +107,18 @@ data InstancesSetScheduling' = InstancesSetScheduling'
 instancesSetScheduling'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> Scheduling -- ^ 'Scheduling'
+    -> Scheduling -- ^ 'payload'
     -> Text -- ^ 'instance'
     -> InstancesSetScheduling'
-instancesSetScheduling' pIssProject_ pIssZone_ pIssScheduling_ pIssInstance_ =
+instancesSetScheduling' pIssProject_ pIssZone_ pIssPayload_ pIssInstance_ =
     InstancesSetScheduling'
     { _issQuotaUser = Nothing
     , _issPrettyPrint = True
     , _issProject = pIssProject_
     , _issUserIP = Nothing
     , _issZone = pIssZone_
+    , _issPayload = pIssPayload_
     , _issKey = Nothing
-    , _issScheduling = pIssScheduling_
     , _issOAuthToken = Nothing
     , _issFields = Nothing
     , _issInstance = pIssInstance_
@@ -151,17 +152,16 @@ issUserIP
 issZone :: Lens' InstancesSetScheduling' Text
 issZone = lens _issZone (\ s a -> s{_issZone = a})
 
+-- | Multipart request metadata.
+issPayload :: Lens' InstancesSetScheduling' Scheduling
+issPayload
+  = lens _issPayload (\ s a -> s{_issPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 issKey :: Lens' InstancesSetScheduling' (Maybe Key)
 issKey = lens _issKey (\ s a -> s{_issKey = a})
-
--- | Multipart request metadata.
-issScheduling :: Lens' InstancesSetScheduling' Scheduling
-issScheduling
-  = lens _issScheduling
-      (\ s a -> s{_issScheduling = a})
 
 -- | OAuth 2.0 token for the current user.
 issOAuthToken :: Lens' InstancesSetScheduling' (Maybe OAuthToken)
@@ -194,7 +194,7 @@ instance GoogleRequest InstancesSetScheduling' where
               _issKey
               _issOAuthToken
               (Just AltJSON)
-              _issScheduling
+              _issPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesSetSchedulingResource)

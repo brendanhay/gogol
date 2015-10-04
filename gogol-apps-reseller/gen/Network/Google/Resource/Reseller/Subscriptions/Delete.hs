@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,9 +52,7 @@ type SubscriptionsDeleteResource =
        Capture "customerId" Text :>
          "subscriptions" :>
            Capture "subscriptionId" Text :>
-             QueryParam "deletionType"
-               ResellerSubscriptionsDeleteDeletionType
-               :>
+             QueryParam "deletionType" DeletionType :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -70,12 +69,12 @@ data SubscriptionsDelete' = SubscriptionsDelete'
     , _sdPrettyPrint    :: !Bool
     , _sdUserIP         :: !(Maybe Text)
     , _sdCustomerId     :: !Text
-    , _sdDeletionType   :: !ResellerSubscriptionsDeleteDeletionType
+    , _sdDeletionType   :: !DeletionType
     , _sdKey            :: !(Maybe Key)
     , _sdOAuthToken     :: !(Maybe OAuthToken)
     , _sdSubscriptionId :: !Text
     , _sdFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsDelete'' with the minimum fields required to make a request.
 --
@@ -100,7 +99,7 @@ data SubscriptionsDelete' = SubscriptionsDelete'
 -- * 'sdFields'
 subscriptionsDelete'
     :: Text -- ^ 'customerId'
-    -> ResellerSubscriptionsDeleteDeletionType -- ^ 'deletionType'
+    -> DeletionType -- ^ 'deletionType'
     -> Text -- ^ 'subscriptionId'
     -> SubscriptionsDelete'
 subscriptionsDelete' pSdCustomerId_ pSdDeletionType_ pSdSubscriptionId_ =
@@ -140,7 +139,7 @@ sdCustomerId
   = lens _sdCustomerId (\ s a -> s{_sdCustomerId = a})
 
 -- | Whether the subscription is to be fully cancelled or downgraded
-sdDeletionType :: Lens' SubscriptionsDelete' ResellerSubscriptionsDeleteDeletionType
+sdDeletionType :: Lens' SubscriptionsDelete' DeletionType
 sdDeletionType
   = lens _sdDeletionType
       (\ s a -> s{_sdDeletionType = a})

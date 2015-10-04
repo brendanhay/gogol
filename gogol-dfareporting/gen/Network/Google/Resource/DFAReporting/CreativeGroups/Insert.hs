@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Insert
     , cgiPrettyPrint
     , cgiUserIP
     , cgiProfileId
-    , cgiCreativeGroup
+    , cgiPayload
     , cgiKey
     , cgiOAuthToken
     , cgiFields
@@ -63,15 +64,15 @@ type CreativeGroupsInsertResource =
 --
 -- /See:/ 'creativeGroupsInsert'' smart constructor.
 data CreativeGroupsInsert' = CreativeGroupsInsert'
-    { _cgiQuotaUser     :: !(Maybe Text)
-    , _cgiPrettyPrint   :: !Bool
-    , _cgiUserIP        :: !(Maybe Text)
-    , _cgiProfileId     :: !Int64
-    , _cgiCreativeGroup :: !CreativeGroup
-    , _cgiKey           :: !(Maybe Key)
-    , _cgiOAuthToken    :: !(Maybe OAuthToken)
-    , _cgiFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cgiQuotaUser   :: !(Maybe Text)
+    , _cgiPrettyPrint :: !Bool
+    , _cgiUserIP      :: !(Maybe Text)
+    , _cgiProfileId   :: !Int64
+    , _cgiPayload     :: !CreativeGroup
+    , _cgiKey         :: !(Maybe Key)
+    , _cgiOAuthToken  :: !(Maybe OAuthToken)
+    , _cgiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsInsert'' with the minimum fields required to make a request.
 --
@@ -85,7 +86,7 @@ data CreativeGroupsInsert' = CreativeGroupsInsert'
 --
 -- * 'cgiProfileId'
 --
--- * 'cgiCreativeGroup'
+-- * 'cgiPayload'
 --
 -- * 'cgiKey'
 --
@@ -94,15 +95,15 @@ data CreativeGroupsInsert' = CreativeGroupsInsert'
 -- * 'cgiFields'
 creativeGroupsInsert'
     :: Int64 -- ^ 'profileId'
-    -> CreativeGroup -- ^ 'CreativeGroup'
+    -> CreativeGroup -- ^ 'payload'
     -> CreativeGroupsInsert'
-creativeGroupsInsert' pCgiProfileId_ pCgiCreativeGroup_ =
+creativeGroupsInsert' pCgiProfileId_ pCgiPayload_ =
     CreativeGroupsInsert'
     { _cgiQuotaUser = Nothing
     , _cgiPrettyPrint = True
     , _cgiUserIP = Nothing
     , _cgiProfileId = pCgiProfileId_
-    , _cgiCreativeGroup = pCgiCreativeGroup_
+    , _cgiPayload = pCgiPayload_
     , _cgiKey = Nothing
     , _cgiOAuthToken = Nothing
     , _cgiFields = Nothing
@@ -133,10 +134,9 @@ cgiProfileId
   = lens _cgiProfileId (\ s a -> s{_cgiProfileId = a})
 
 -- | Multipart request metadata.
-cgiCreativeGroup :: Lens' CreativeGroupsInsert' CreativeGroup
-cgiCreativeGroup
-  = lens _cgiCreativeGroup
-      (\ s a -> s{_cgiCreativeGroup = a})
+cgiPayload :: Lens' CreativeGroupsInsert' CreativeGroup
+cgiPayload
+  = lens _cgiPayload (\ s a -> s{_cgiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -170,7 +170,7 @@ instance GoogleRequest CreativeGroupsInsert' where
               _cgiKey
               _cgiOAuthToken
               (Just AltJSON)
-              _cgiCreativeGroup
+              _cgiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeGroupsInsertResource)

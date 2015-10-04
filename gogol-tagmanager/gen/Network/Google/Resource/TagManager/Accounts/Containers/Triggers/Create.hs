@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Create
     , actccPrettyPrint
     , actccContainerId
     , actccUserIP
+    , actccPayload
     , actccAccountId
     , actccKey
-    , actccTrigger
     , actccOAuthToken
     , actccFields
     ) where
@@ -69,12 +70,12 @@ data AccountsContainersTriggersCreate' = AccountsContainersTriggersCreate'
     , _actccPrettyPrint :: !Bool
     , _actccContainerId :: !Text
     , _actccUserIP      :: !(Maybe Text)
+    , _actccPayload     :: !Trigger
     , _actccAccountId   :: !Text
     , _actccKey         :: !(Maybe Key)
-    , _actccTrigger     :: !Trigger
     , _actccOAuthToken  :: !(Maybe OAuthToken)
     , _actccFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTriggersCreate'' with the minimum fields required to make a request.
 --
@@ -88,29 +89,29 @@ data AccountsContainersTriggersCreate' = AccountsContainersTriggersCreate'
 --
 -- * 'actccUserIP'
 --
+-- * 'actccPayload'
+--
 -- * 'actccAccountId'
 --
 -- * 'actccKey'
---
--- * 'actccTrigger'
 --
 -- * 'actccOAuthToken'
 --
 -- * 'actccFields'
 accountsContainersTriggersCreate'
     :: Text -- ^ 'containerId'
+    -> Trigger -- ^ 'payload'
     -> Text -- ^ 'accountId'
-    -> Trigger -- ^ 'Trigger'
     -> AccountsContainersTriggersCreate'
-accountsContainersTriggersCreate' pActccContainerId_ pActccAccountId_ pActccTrigger_ =
+accountsContainersTriggersCreate' pActccContainerId_ pActccPayload_ pActccAccountId_ =
     AccountsContainersTriggersCreate'
     { _actccQuotaUser = Nothing
     , _actccPrettyPrint = True
     , _actccContainerId = pActccContainerId_
     , _actccUserIP = Nothing
+    , _actccPayload = pActccPayload_
     , _actccAccountId = pActccAccountId_
     , _actccKey = Nothing
-    , _actccTrigger = pActccTrigger_
     , _actccOAuthToken = Nothing
     , _actccFields = Nothing
     }
@@ -141,6 +142,11 @@ actccUserIP :: Lens' AccountsContainersTriggersCreate' (Maybe Text)
 actccUserIP
   = lens _actccUserIP (\ s a -> s{_actccUserIP = a})
 
+-- | Multipart request metadata.
+actccPayload :: Lens' AccountsContainersTriggersCreate' Trigger
+actccPayload
+  = lens _actccPayload (\ s a -> s{_actccPayload = a})
+
 -- | The GTM Account ID.
 actccAccountId :: Lens' AccountsContainersTriggersCreate' Text
 actccAccountId
@@ -152,11 +158,6 @@ actccAccountId
 -- token.
 actccKey :: Lens' AccountsContainersTriggersCreate' (Maybe Key)
 actccKey = lens _actccKey (\ s a -> s{_actccKey = a})
-
--- | Multipart request metadata.
-actccTrigger :: Lens' AccountsContainersTriggersCreate' Trigger
-actccTrigger
-  = lens _actccTrigger (\ s a -> s{_actccTrigger = a})
 
 -- | OAuth 2.0 token for the current user.
 actccOAuthToken :: Lens' AccountsContainersTriggersCreate' (Maybe OAuthToken)
@@ -188,7 +189,7 @@ instance GoogleRequest
               _actccKey
               _actccOAuthToken
               (Just AltJSON)
-              _actccTrigger
+              _actccPayload
           where go
                   = clientWithRoute
                       (Proxy ::

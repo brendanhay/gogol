@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,16 +53,14 @@ import           Network.Google.Prelude
 type VolumesMybooksListResource =
      "volumes" :>
        "mybooks" :>
-         QueryParams "acquireMethod"
-           BooksVolumesMybooksListAcquireMethod
+         QueryParams "processingState"
+           BooksVolumesMybooksListProcessingState
            :>
-           QueryParam "locale" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParams "processingState"
-                 BooksVolumesMybooksListProcessingState
-                 :>
-                 QueryParam "source" Text :>
-                   QueryParam "startIndex" Word32 :>
+           QueryParams "acquireMethod" AcquireMethod :>
+             QueryParam "locale" Text :>
+               QueryParam "source" Text :>
+                 QueryParam "startIndex" Word32 :>
+                   QueryParam "maxResults" Word32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -76,7 +75,7 @@ type VolumesMybooksListResource =
 data VolumesMybooksList' = VolumesMybooksList'
     { _vmlProcessingState :: !(Maybe BooksVolumesMybooksListProcessingState)
     , _vmlQuotaUser       :: !(Maybe Text)
-    , _vmlAcquireMethod   :: !(Maybe BooksVolumesMybooksListAcquireMethod)
+    , _vmlAcquireMethod   :: !(Maybe AcquireMethod)
     , _vmlPrettyPrint     :: !Bool
     , _vmlUserIP          :: !(Maybe Text)
     , _vmlLocale          :: !(Maybe Text)
@@ -86,7 +85,7 @@ data VolumesMybooksList' = VolumesMybooksList'
     , _vmlStartIndex      :: !(Maybe Word32)
     , _vmlMaxResults      :: !(Maybe Word32)
     , _vmlFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesMybooksList'' with the minimum fields required to make a request.
 --
@@ -148,7 +147,7 @@ vmlQuotaUser
   = lens _vmlQuotaUser (\ s a -> s{_vmlQuotaUser = a})
 
 -- | How the book was aquired
-vmlAcquireMethod :: Lens' VolumesMybooksList' (Maybe BooksVolumesMybooksListAcquireMethod)
+vmlAcquireMethod :: Lens' VolumesMybooksList' (Maybe AcquireMethod)
 vmlAcquireMethod
   = lens _vmlAcquireMethod
       (\ s a -> s{_vmlAcquireMethod = a})
@@ -213,10 +212,12 @@ instance GoogleRequest VolumesMybooksList' where
         type Rs VolumesMybooksList' = Volumes
         request = requestWithRoute defReq booksURL
         requestWithRoute r u VolumesMybooksList'{..}
-          = go _vmlAcquireMethod _vmlLocale _vmlMaxResults
-              _vmlProcessingState
+          = go (_vmlProcessingState ^. _Default)
+              (_vmlAcquireMethod ^. _Default)
+              _vmlLocale
               _vmlSource
               _vmlStartIndex
+              _vmlMaxResults
               _vmlQuotaUser
               (Just _vmlPrettyPrint)
               _vmlUserIP

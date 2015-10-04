@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.Update
     , rluPrettyPrint
     , rluUserIP
     , rluProfileId
-    , rluRemarketingList
+    , rluPayload
     , rluKey
     , rluOAuthToken
     , rluFields
@@ -63,15 +64,15 @@ type RemarketingListsUpdateResource =
 --
 -- /See:/ 'remarketingListsUpdate'' smart constructor.
 data RemarketingListsUpdate' = RemarketingListsUpdate'
-    { _rluQuotaUser       :: !(Maybe Text)
-    , _rluPrettyPrint     :: !Bool
-    , _rluUserIP          :: !(Maybe Text)
-    , _rluProfileId       :: !Int64
-    , _rluRemarketingList :: !RemarketingList
-    , _rluKey             :: !(Maybe Key)
-    , _rluOAuthToken      :: !(Maybe OAuthToken)
-    , _rluFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rluQuotaUser   :: !(Maybe Text)
+    , _rluPrettyPrint :: !Bool
+    , _rluUserIP      :: !(Maybe Text)
+    , _rluProfileId   :: !Int64
+    , _rluPayload     :: !RemarketingList
+    , _rluKey         :: !(Maybe Key)
+    , _rluOAuthToken  :: !(Maybe OAuthToken)
+    , _rluFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListsUpdate'' with the minimum fields required to make a request.
 --
@@ -85,7 +86,7 @@ data RemarketingListsUpdate' = RemarketingListsUpdate'
 --
 -- * 'rluProfileId'
 --
--- * 'rluRemarketingList'
+-- * 'rluPayload'
 --
 -- * 'rluKey'
 --
@@ -94,15 +95,15 @@ data RemarketingListsUpdate' = RemarketingListsUpdate'
 -- * 'rluFields'
 remarketingListsUpdate'
     :: Int64 -- ^ 'profileId'
-    -> RemarketingList -- ^ 'RemarketingList'
+    -> RemarketingList -- ^ 'payload'
     -> RemarketingListsUpdate'
-remarketingListsUpdate' pRluProfileId_ pRluRemarketingList_ =
+remarketingListsUpdate' pRluProfileId_ pRluPayload_ =
     RemarketingListsUpdate'
     { _rluQuotaUser = Nothing
     , _rluPrettyPrint = True
     , _rluUserIP = Nothing
     , _rluProfileId = pRluProfileId_
-    , _rluRemarketingList = pRluRemarketingList_
+    , _rluPayload = pRluPayload_
     , _rluKey = Nothing
     , _rluOAuthToken = Nothing
     , _rluFields = Nothing
@@ -133,10 +134,9 @@ rluProfileId
   = lens _rluProfileId (\ s a -> s{_rluProfileId = a})
 
 -- | Multipart request metadata.
-rluRemarketingList :: Lens' RemarketingListsUpdate' RemarketingList
-rluRemarketingList
-  = lens _rluRemarketingList
-      (\ s a -> s{_rluRemarketingList = a})
+rluPayload :: Lens' RemarketingListsUpdate' RemarketingList
+rluPayload
+  = lens _rluPayload (\ s a -> s{_rluPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -170,7 +170,7 @@ instance GoogleRequest RemarketingListsUpdate' where
               _rluKey
               _rluOAuthToken
               (Just AltJSON)
-              _rluRemarketingList
+              _rluPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RemarketingListsUpdateResource)

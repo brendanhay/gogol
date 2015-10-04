@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -78,7 +79,7 @@ data InstancesGetSerialPortOutput' = InstancesGetSerialPortOutput'
     , _igspoFields      :: !(Maybe Text)
     , _igspoPort        :: !Int32
     , _igspoInstance    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesGetSerialPortOutput'' with the minimum fields required to make a request.
 --
@@ -192,8 +193,8 @@ instance GoogleRequest InstancesGetSerialPortOutput'
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
           InstancesGetSerialPortOutput'{..}
-          = go (Just _igspoPort) _igspoProject _igspoZone
-              _igspoInstance
+          = go _igspoProject _igspoZone _igspoInstance
+              (Just _igspoPort)
               _igspoQuotaUser
               (Just _igspoPrettyPrint)
               _igspoUserIP

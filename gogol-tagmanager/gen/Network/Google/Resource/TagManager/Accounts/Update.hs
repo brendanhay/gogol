@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.TagManager.Accounts.Update
     , auPrettyPrint
     , auUserIP
     , auFingerprint
-    , auAccount
+    , auPayload
     , auAccountId
     , auKey
     , auOAuthToken
@@ -67,12 +68,12 @@ data AccountsUpdate' = AccountsUpdate'
     , _auPrettyPrint :: !Bool
     , _auUserIP      :: !(Maybe Text)
     , _auFingerprint :: !(Maybe Text)
-    , _auAccount     :: !Account
+    , _auPayload     :: !Account
     , _auAccountId   :: !Text
     , _auKey         :: !(Maybe Key)
     , _auOAuthToken  :: !(Maybe OAuthToken)
     , _auFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsUpdate'' with the minimum fields required to make a request.
 --
@@ -86,7 +87,7 @@ data AccountsUpdate' = AccountsUpdate'
 --
 -- * 'auFingerprint'
 --
--- * 'auAccount'
+-- * 'auPayload'
 --
 -- * 'auAccountId'
 --
@@ -96,16 +97,16 @@ data AccountsUpdate' = AccountsUpdate'
 --
 -- * 'auFields'
 accountsUpdate'
-    :: Account -- ^ 'Account'
+    :: Account -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> AccountsUpdate'
-accountsUpdate' pAuAccount_ pAuAccountId_ =
+accountsUpdate' pAuPayload_ pAuAccountId_ =
     AccountsUpdate'
     { _auQuotaUser = Nothing
     , _auPrettyPrint = True
     , _auUserIP = Nothing
     , _auFingerprint = Nothing
-    , _auAccount = pAuAccount_
+    , _auPayload = pAuPayload_
     , _auAccountId = pAuAccountId_
     , _auKey = Nothing
     , _auOAuthToken = Nothing
@@ -138,9 +139,9 @@ auFingerprint
       (\ s a -> s{_auFingerprint = a})
 
 -- | Multipart request metadata.
-auAccount :: Lens' AccountsUpdate' Account
-auAccount
-  = lens _auAccount (\ s a -> s{_auAccount = a})
+auPayload :: Lens' AccountsUpdate' Account
+auPayload
+  = lens _auPayload (\ s a -> s{_auPayload = a})
 
 -- | The GTM Account ID.
 auAccountId :: Lens' AccountsUpdate' Text
@@ -170,14 +171,14 @@ instance GoogleRequest AccountsUpdate' where
         type Rs AccountsUpdate' = Account
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsUpdate'{..}
-          = go _auFingerprint _auAccountId _auQuotaUser
+          = go _auAccountId _auFingerprint _auQuotaUser
               (Just _auPrettyPrint)
               _auUserIP
               _auFields
               _auKey
               _auOAuthToken
               (Just AltJSON)
-              _auAccount
+              _auPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsUpdateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,11 +51,11 @@ import           Network.Google.Translate.Types
 -- 'TranslationsList'' request conforms to.
 type TranslationsListResource =
      "v2" :>
-       QueryParams "cid" Text :>
-         QueryParam "format" LanguageTranslationsListFormat :>
-           QueryParam "source" Text :>
-             QueryParams "q" Text :>
-               QueryParam "target" Text :>
+       QueryParams "q" Text :>
+         QueryParam "target" Text :>
+           QueryParam "format" Format :>
+             QueryParam "source" Text :>
+               QueryParams "cid" Text :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -71,15 +72,15 @@ data TranslationsList' = TranslationsList'
     { _tlQuotaUser   :: !(Maybe Text)
     , _tlPrettyPrint :: !Bool
     , _tlUserIP      :: !(Maybe Text)
-    , _tlFormat      :: !(Maybe LanguageTranslationsListFormat)
-    , _tlQ           :: !Text
+    , _tlFormat      :: !(Maybe Format)
+    , _tlQ           :: ![Text]
     , _tlKey         :: !(Maybe Key)
     , _tlSource      :: !(Maybe Text)
     , _tlOAuthToken  :: !(Maybe OAuthToken)
-    , _tlCid         :: !(Maybe Text)
+    , _tlCid         :: !(Maybe [Text])
     , _tlTarget      :: !Text
     , _tlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TranslationsList'' with the minimum fields required to make a request.
 --
@@ -107,7 +108,7 @@ data TranslationsList' = TranslationsList'
 --
 -- * 'tlFields'
 translationsList'
-    :: Text -- ^ 'q'
+    :: [Text] -- ^ 'q'
     -> Text -- ^ 'target'
     -> TranslationsList'
 translationsList' pTlQ_ pTlTarget_ =
@@ -144,12 +145,12 @@ tlUserIP :: Lens' TranslationsList' (Maybe Text)
 tlUserIP = lens _tlUserIP (\ s a -> s{_tlUserIP = a})
 
 -- | The format of the text
-tlFormat :: Lens' TranslationsList' (Maybe LanguageTranslationsListFormat)
+tlFormat :: Lens' TranslationsList' (Maybe Format)
 tlFormat = lens _tlFormat (\ s a -> s{_tlFormat = a})
 
 -- | The text to translate
-tlQ :: Lens' TranslationsList' Text
-tlQ = lens _tlQ (\ s a -> s{_tlQ = a})
+tlQ :: Lens' TranslationsList' [Text]
+tlQ = lens _tlQ (\ s a -> s{_tlQ = a}) . _Coerce
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -167,8 +168,10 @@ tlOAuthToken
   = lens _tlOAuthToken (\ s a -> s{_tlOAuthToken = a})
 
 -- | The customization id for translate
-tlCid :: Lens' TranslationsList' (Maybe Text)
-tlCid = lens _tlCid (\ s a -> s{_tlCid = a})
+tlCid :: Lens' TranslationsList' [Text]
+tlCid
+  = lens _tlCid (\ s a -> s{_tlCid = a}) . _Default .
+      _Coerce
 
 -- | The target language into which the text should be translated
 tlTarget :: Lens' TranslationsList' Text
@@ -186,8 +189,9 @@ instance GoogleRequest TranslationsList' where
         type Rs TranslationsList' = TranslationsListResponse
         request = requestWithRoute defReq translateURL
         requestWithRoute r u TranslationsList'{..}
-          = go _tlCid _tlFormat _tlSource (Just _tlQ)
-              (Just _tlTarget)
+          = go (_tlQ ^. _Default) (Just _tlTarget) _tlFormat
+              _tlSource
+              (_tlCid ^. _Default)
               _tlQuotaUser
               (Just _tlPrettyPrint)
               _tlUserIP

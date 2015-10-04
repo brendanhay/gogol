@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.AndroidPublisher.Inappproducts.Update
     , iuAutoConvertMissingPrices
     , iuPackageName
     , iuUserIP
+    , iuPayload
     , iuKey
-    , iuInAppProduct
-    , iuSku
+    , iuSKU
     , iuOAuthToken
     , iuFields
     ) where
@@ -71,12 +72,12 @@ data InappproductsUpdate' = InappproductsUpdate'
     , _iuAutoConvertMissingPrices :: !(Maybe Bool)
     , _iuPackageName              :: !Text
     , _iuUserIP                   :: !(Maybe Text)
+    , _iuPayload                  :: !InAppProduct
     , _iuKey                      :: !(Maybe Key)
-    , _iuInAppProduct             :: !InAppProduct
-    , _iuSku                      :: !Text
+    , _iuSKU                      :: !Text
     , _iuOAuthToken               :: !(Maybe OAuthToken)
     , _iuFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsUpdate'' with the minimum fields required to make a request.
 --
@@ -92,30 +93,30 @@ data InappproductsUpdate' = InappproductsUpdate'
 --
 -- * 'iuUserIP'
 --
+-- * 'iuPayload'
+--
 -- * 'iuKey'
 --
--- * 'iuInAppProduct'
---
--- * 'iuSku'
+-- * 'iuSKU'
 --
 -- * 'iuOAuthToken'
 --
 -- * 'iuFields'
 inappproductsUpdate'
     :: Text -- ^ 'packageName'
-    -> InAppProduct -- ^ 'InAppProduct'
+    -> InAppProduct -- ^ 'payload'
     -> Text -- ^ 'sku'
     -> InappproductsUpdate'
-inappproductsUpdate' pIuPackageName_ pIuInAppProduct_ pIuSku_ =
+inappproductsUpdate' pIuPackageName_ pIuPayload_ pIuSKU_ =
     InappproductsUpdate'
     { _iuQuotaUser = Nothing
     , _iuPrettyPrint = True
     , _iuAutoConvertMissingPrices = Nothing
     , _iuPackageName = pIuPackageName_
     , _iuUserIP = Nothing
+    , _iuPayload = pIuPayload_
     , _iuKey = Nothing
-    , _iuInAppProduct = pIuInAppProduct_
-    , _iuSku = pIuSku_
+    , _iuSKU = pIuSKU_
     , _iuOAuthToken = Nothing
     , _iuFields = Nothing
     }
@@ -154,21 +155,20 @@ iuPackageName
 iuUserIP :: Lens' InappproductsUpdate' (Maybe Text)
 iuUserIP = lens _iuUserIP (\ s a -> s{_iuUserIP = a})
 
+-- | Multipart request metadata.
+iuPayload :: Lens' InappproductsUpdate' InAppProduct
+iuPayload
+  = lens _iuPayload (\ s a -> s{_iuPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 iuKey :: Lens' InappproductsUpdate' (Maybe Key)
 iuKey = lens _iuKey (\ s a -> s{_iuKey = a})
 
--- | Multipart request metadata.
-iuInAppProduct :: Lens' InappproductsUpdate' InAppProduct
-iuInAppProduct
-  = lens _iuInAppProduct
-      (\ s a -> s{_iuInAppProduct = a})
-
 -- | Unique identifier for the in-app product.
-iuSku :: Lens' InappproductsUpdate' Text
-iuSku = lens _iuSku (\ s a -> s{_iuSku = a})
+iuSKU :: Lens' InappproductsUpdate' Text
+iuSKU = lens _iuSKU (\ s a -> s{_iuSKU = a})
 
 -- | OAuth 2.0 token for the current user.
 iuOAuthToken :: Lens' InappproductsUpdate' (Maybe OAuthToken)
@@ -187,8 +187,8 @@ instance GoogleRequest InappproductsUpdate' where
         type Rs InappproductsUpdate' = InAppProduct
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u InappproductsUpdate'{..}
-          = go _iuAutoConvertMissingPrices _iuPackageName
-              _iuSku
+          = go _iuPackageName _iuSKU
+              _iuAutoConvertMissingPrices
               _iuQuotaUser
               (Just _iuPrettyPrint)
               _iuUserIP
@@ -196,7 +196,7 @@ instance GoogleRequest InappproductsUpdate' where
               _iuKey
               _iuOAuthToken
               (Just AltJSON)
-              _iuInAppProduct
+              _iuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InappproductsUpdateResource)

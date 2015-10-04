@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -30,10 +31,10 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Permissions.BatchDel
     , RasterCollectionsPermissionsBatchDelete'
 
     -- * Request Lenses
-    , rcpbdPermissionsBatchDeleteRequest
     , rcpbdQuotaUser
     , rcpbdPrettyPrint
     , rcpbdUserIP
+    , rcpbdPayload
     , rcpbdKey
     , rcpbdId
     , rcpbdOAuthToken
@@ -65,27 +66,27 @@ type RasterCollectionsPermissionsBatchDeleteResource
 --
 -- /See:/ 'rasterCollectionsPermissionsBatchDelete'' smart constructor.
 data RasterCollectionsPermissionsBatchDelete' = RasterCollectionsPermissionsBatchDelete'
-    { _rcpbdPermissionsBatchDeleteRequest :: !PermissionsBatchDeleteRequest
-    , _rcpbdQuotaUser                     :: !(Maybe Text)
-    , _rcpbdPrettyPrint                   :: !Bool
-    , _rcpbdUserIP                        :: !(Maybe Text)
-    , _rcpbdKey                           :: !(Maybe Key)
-    , _rcpbdId                            :: !Text
-    , _rcpbdOAuthToken                    :: !(Maybe OAuthToken)
-    , _rcpbdFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rcpbdQuotaUser   :: !(Maybe Text)
+    , _rcpbdPrettyPrint :: !Bool
+    , _rcpbdUserIP      :: !(Maybe Text)
+    , _rcpbdPayload     :: !PermissionsBatchDeleteRequest
+    , _rcpbdKey         :: !(Maybe Key)
+    , _rcpbdId          :: !Text
+    , _rcpbdOAuthToken  :: !(Maybe OAuthToken)
+    , _rcpbdFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsPermissionsBatchDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'rcpbdPermissionsBatchDeleteRequest'
 --
 -- * 'rcpbdQuotaUser'
 --
 -- * 'rcpbdPrettyPrint'
 --
 -- * 'rcpbdUserIP'
+--
+-- * 'rcpbdPayload'
 --
 -- * 'rcpbdKey'
 --
@@ -95,26 +96,20 @@ data RasterCollectionsPermissionsBatchDelete' = RasterCollectionsPermissionsBatc
 --
 -- * 'rcpbdFields'
 rasterCollectionsPermissionsBatchDelete'
-    :: PermissionsBatchDeleteRequest -- ^ 'PermissionsBatchDeleteRequest'
+    :: PermissionsBatchDeleteRequest -- ^ 'payload'
     -> Text -- ^ 'id'
     -> RasterCollectionsPermissionsBatchDelete'
-rasterCollectionsPermissionsBatchDelete' pRcpbdPermissionsBatchDeleteRequest_ pRcpbdId_ =
+rasterCollectionsPermissionsBatchDelete' pRcpbdPayload_ pRcpbdId_ =
     RasterCollectionsPermissionsBatchDelete'
-    { _rcpbdPermissionsBatchDeleteRequest = pRcpbdPermissionsBatchDeleteRequest_
-    , _rcpbdQuotaUser = Nothing
+    { _rcpbdQuotaUser = Nothing
     , _rcpbdPrettyPrint = True
     , _rcpbdUserIP = Nothing
+    , _rcpbdPayload = pRcpbdPayload_
     , _rcpbdKey = Nothing
     , _rcpbdId = pRcpbdId_
     , _rcpbdOAuthToken = Nothing
     , _rcpbdFields = Nothing
     }
-
--- | Multipart request metadata.
-rcpbdPermissionsBatchDeleteRequest :: Lens' RasterCollectionsPermissionsBatchDelete' PermissionsBatchDeleteRequest
-rcpbdPermissionsBatchDeleteRequest
-  = lens _rcpbdPermissionsBatchDeleteRequest
-      (\ s a -> s{_rcpbdPermissionsBatchDeleteRequest = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -135,6 +130,11 @@ rcpbdPrettyPrint
 rcpbdUserIP :: Lens' RasterCollectionsPermissionsBatchDelete' (Maybe Text)
 rcpbdUserIP
   = lens _rcpbdUserIP (\ s a -> s{_rcpbdUserIP = a})
+
+-- | Multipart request metadata.
+rcpbdPayload :: Lens' RasterCollectionsPermissionsBatchDelete' PermissionsBatchDeleteRequest
+rcpbdPayload
+  = lens _rcpbdPayload (\ s a -> s{_rcpbdPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -176,7 +176,7 @@ instance GoogleRequest
               _rcpbdKey
               _rcpbdOAuthToken
               (Just AltJSON)
-              _rcpbdPermissionsBatchDeleteRequest
+              _rcpbdPayload
           where go
                   = clientWithRoute
                       (Proxy ::

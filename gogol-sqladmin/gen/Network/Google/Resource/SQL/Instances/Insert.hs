@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.SQL.Instances.Insert
     , iiPrettyPrint
     , iiProject
     , iiUserIP
-    , iiDatabaseInstance
+    , iiPayload
     , iiKey
     , iiOAuthToken
     , iiFields
@@ -63,15 +64,15 @@ type InstancesInsertResource =
 --
 -- /See:/ 'instancesInsert'' smart constructor.
 data InstancesInsert' = InstancesInsert'
-    { _iiQuotaUser        :: !(Maybe Text)
-    , _iiPrettyPrint      :: !Bool
-    , _iiProject          :: !Text
-    , _iiUserIP           :: !(Maybe Text)
-    , _iiDatabaseInstance :: !DatabaseInstance
-    , _iiKey              :: !(Maybe Key)
-    , _iiOAuthToken       :: !(Maybe OAuthToken)
-    , _iiFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _iiQuotaUser   :: !(Maybe Text)
+    , _iiPrettyPrint :: !Bool
+    , _iiProject     :: !Text
+    , _iiUserIP      :: !(Maybe Text)
+    , _iiPayload     :: !DatabaseInstance
+    , _iiKey         :: !(Maybe Key)
+    , _iiOAuthToken  :: !(Maybe OAuthToken)
+    , _iiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesInsert'' with the minimum fields required to make a request.
 --
@@ -85,7 +86,7 @@ data InstancesInsert' = InstancesInsert'
 --
 -- * 'iiUserIP'
 --
--- * 'iiDatabaseInstance'
+-- * 'iiPayload'
 --
 -- * 'iiKey'
 --
@@ -94,15 +95,15 @@ data InstancesInsert' = InstancesInsert'
 -- * 'iiFields'
 instancesInsert'
     :: Text -- ^ 'project'
-    -> DatabaseInstance -- ^ 'DatabaseInstance'
+    -> DatabaseInstance -- ^ 'payload'
     -> InstancesInsert'
-instancesInsert' pIiProject_ pIiDatabaseInstance_ =
+instancesInsert' pIiProject_ pIiPayload_ =
     InstancesInsert'
     { _iiQuotaUser = Nothing
     , _iiPrettyPrint = True
     , _iiProject = pIiProject_
     , _iiUserIP = Nothing
-    , _iiDatabaseInstance = pIiDatabaseInstance_
+    , _iiPayload = pIiPayload_
     , _iiKey = Nothing
     , _iiOAuthToken = Nothing
     , _iiFields = Nothing
@@ -133,10 +134,9 @@ iiUserIP :: Lens' InstancesInsert' (Maybe Text)
 iiUserIP = lens _iiUserIP (\ s a -> s{_iiUserIP = a})
 
 -- | Multipart request metadata.
-iiDatabaseInstance :: Lens' InstancesInsert' DatabaseInstance
-iiDatabaseInstance
-  = lens _iiDatabaseInstance
-      (\ s a -> s{_iiDatabaseInstance = a})
+iiPayload :: Lens' InstancesInsert' DatabaseInstance
+iiPayload
+  = lens _iiPayload (\ s a -> s{_iiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -167,7 +167,7 @@ instance GoogleRequest InstancesInsert' where
               _iiKey
               _iiOAuthToken
               (Just AltJSON)
-              _iiDatabaseInstance
+              _iiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesInsertResource)

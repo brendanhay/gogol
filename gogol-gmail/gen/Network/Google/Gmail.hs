@@ -133,6 +133,9 @@ module Network.Google.Gmail
     , mtrRemoveLabelIds
     , mtrAddLabelIds
 
+    -- ** MessageListVisibility
+    , MessageListVisibility (..)
+
     -- ** History
     , History
     , history
@@ -149,8 +152,8 @@ module Network.Google.Gmail
     , mmrRemoveLabelIds
     , mmrAddLabelIds
 
-    -- ** GmailUsersMessagesInsertInternalDateSource
-    , GmailUsersMessagesInsertInternalDateSource (..)
+    -- ** LabelFilterAction
+    , LabelFilterAction (..)
 
     -- ** ListHistoryResponse
     , ListHistoryResponse
@@ -158,6 +161,9 @@ module Network.Google.Gmail
     , lhrNextPageToken
     , lhrHistory
     , lhrHistoryId
+
+    -- ** Format
+    , Format (..)
 
     -- ** MessagePartHeader
     , MessagePartHeader
@@ -172,15 +178,6 @@ module Network.Google.Gmail
     , pThreadsTotal
     , pHistoryId
     , pEmailAddress
-
-    -- ** LabelType
-    , LabelType (..)
-
-    -- ** LabelMessageListVisibility
-    , LabelMessageListVisibility (..)
-
-    -- ** LabelLabelListVisibility
-    , LabelLabelListVisibility (..)
 
     -- ** HistoryMessageDeleted
     , HistoryMessageDeleted
@@ -222,9 +219,6 @@ module Network.Google.Gmail
     , mpbData
     , mpbAttachmentId
 
-    -- ** GmailUsersDraftsGetFormat
-    , GmailUsersDraftsGetFormat (..)
-
     -- ** ListDraftsResponse
     , ListDraftsResponse
     , listDraftsResponse
@@ -234,6 +228,9 @@ module Network.Google.Gmail
 
     -- ** GmailUsersMessagesImportInternalDateSource
     , GmailUsersMessagesImportInternalDateSource (..)
+
+    -- ** LabelListVisibility
+    , LabelListVisibility (..)
 
     -- ** WatchResponse
     , WatchResponse
@@ -247,9 +244,6 @@ module Network.Google.Gmail
     , dId
     , dMessage
 
-    -- ** WatchRequestLabelFilterAction
-    , WatchRequestLabelFilterAction (..)
-
     -- ** WatchRequest
     , WatchRequest
     , watchRequest
@@ -257,18 +251,24 @@ module Network.Google.Gmail
     , wrTopicName
     , wrLabelIds
 
+    -- ** Type
+    , Type (..)
+
     -- ** Message
     , Message
     , message
     , mRaw
     , mSnippet
     , mSizeEstimate
-    , mPayLoad
+    , mPayload
     , mHistoryId
     , mId
     , mLabelIds
     , mThreadId
     , mInternalDate
+
+    -- ** InternalDateSource
+    , InternalDateSource (..)
 
     -- ** Thread
     , Thread

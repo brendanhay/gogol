@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,14 +56,14 @@ import           Network.Google.ProximityBeacon.Types
 -- 'BeaconsActivate'' request conforms to.
 type BeaconsActivateResource =
      "v1beta1" :>
-       "{+beaconName}:activate" :>
+       CaptureMode "beaconName" "activate" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -90,7 +91,7 @@ data BeaconsActivate' = BeaconsActivate'
     , _baOAuthToken     :: !(Maybe OAuthToken)
     , _baFields         :: !(Maybe Text)
     , _baCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsActivate'' with the minimum fields required to make a request.
 --
@@ -218,12 +219,12 @@ instance GoogleRequest BeaconsActivate' where
         type Rs BeaconsActivate' = Empty
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u BeaconsActivate'{..}
-          = go _baXgafv _baAccessToken _baBearerToken
-              _baCallback
+          = go _baBeaconName _baXgafv _baUploadProtocol
               (Just _baPp)
+              _baAccessToken
               _baUploadType
-              _baUploadProtocol
-              _baBeaconName
+              _baBearerToken
+              _baCallback
               _baQuotaUser
               (Just _baPrettyPrint)
               _baFields

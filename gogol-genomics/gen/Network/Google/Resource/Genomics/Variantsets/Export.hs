@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Genomics.Variantsets.Export
     , vePrettyPrint
     , veVariantSetId
     , veUserIP
+    , vePayload
     , veKey
-    , veExportVariantSetRequest
     , veOAuthToken
     , veFields
     ) where
@@ -63,15 +64,15 @@ type VariantsetsExportResource =
 --
 -- /See:/ 'variantsetsExport'' smart constructor.
 data VariantsetsExport' = VariantsetsExport'
-    { _veQuotaUser               :: !(Maybe Text)
-    , _vePrettyPrint             :: !Bool
-    , _veVariantSetId            :: !Text
-    , _veUserIP                  :: !(Maybe Text)
-    , _veKey                     :: !(Maybe Key)
-    , _veExportVariantSetRequest :: !ExportVariantSetRequest
-    , _veOAuthToken              :: !(Maybe OAuthToken)
-    , _veFields                  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _veQuotaUser    :: !(Maybe Text)
+    , _vePrettyPrint  :: !Bool
+    , _veVariantSetId :: !Text
+    , _veUserIP       :: !(Maybe Text)
+    , _vePayload      :: !ExportVariantSetRequest
+    , _veKey          :: !(Maybe Key)
+    , _veOAuthToken   :: !(Maybe OAuthToken)
+    , _veFields       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsExport'' with the minimum fields required to make a request.
 --
@@ -85,25 +86,25 @@ data VariantsetsExport' = VariantsetsExport'
 --
 -- * 'veUserIP'
 --
--- * 'veKey'
+-- * 'vePayload'
 --
--- * 'veExportVariantSetRequest'
+-- * 'veKey'
 --
 -- * 'veOAuthToken'
 --
 -- * 'veFields'
 variantsetsExport'
     :: Text -- ^ 'variantSetId'
-    -> ExportVariantSetRequest -- ^ 'ExportVariantSetRequest'
+    -> ExportVariantSetRequest -- ^ 'payload'
     -> VariantsetsExport'
-variantsetsExport' pVeVariantSetId_ pVeExportVariantSetRequest_ =
+variantsetsExport' pVeVariantSetId_ pVePayload_ =
     VariantsetsExport'
     { _veQuotaUser = Nothing
     , _vePrettyPrint = True
     , _veVariantSetId = pVeVariantSetId_
     , _veUserIP = Nothing
+    , _vePayload = pVePayload_
     , _veKey = Nothing
-    , _veExportVariantSetRequest = pVeExportVariantSetRequest_
     , _veOAuthToken = Nothing
     , _veFields = Nothing
     }
@@ -134,17 +135,16 @@ veVariantSetId
 veUserIP :: Lens' VariantsetsExport' (Maybe Text)
 veUserIP = lens _veUserIP (\ s a -> s{_veUserIP = a})
 
+-- | Multipart request metadata.
+vePayload :: Lens' VariantsetsExport' ExportVariantSetRequest
+vePayload
+  = lens _vePayload (\ s a -> s{_vePayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 veKey :: Lens' VariantsetsExport' (Maybe Key)
 veKey = lens _veKey (\ s a -> s{_veKey = a})
-
--- | Multipart request metadata.
-veExportVariantSetRequest :: Lens' VariantsetsExport' ExportVariantSetRequest
-veExportVariantSetRequest
-  = lens _veExportVariantSetRequest
-      (\ s a -> s{_veExportVariantSetRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 veOAuthToken :: Lens' VariantsetsExport' (Maybe OAuthToken)
@@ -170,7 +170,7 @@ instance GoogleRequest VariantsetsExport' where
               _veKey
               _veOAuthToken
               (Just AltJSON)
-              _veExportVariantSetRequest
+              _vePayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsetsExportResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.Drive.Children.Insert
     , cPrettyPrint
     , cUserIP
     , cFolderId
-    , cChildReference
+    , cPayload
     , cKey
     , cOAuthToken
     , cFields
@@ -63,15 +64,15 @@ type ChildrenInsertResource =
 --
 -- /See:/ 'childrenInsert'' smart constructor.
 data ChildrenInsert' = ChildrenInsert'
-    { _cQuotaUser      :: !(Maybe Text)
-    , _cPrettyPrint    :: !Bool
-    , _cUserIP         :: !(Maybe Text)
-    , _cFolderId       :: !Text
-    , _cChildReference :: !ChildReference
-    , _cKey            :: !(Maybe Key)
-    , _cOAuthToken     :: !(Maybe OAuthToken)
-    , _cFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cQuotaUser   :: !(Maybe Text)
+    , _cPrettyPrint :: !Bool
+    , _cUserIP      :: !(Maybe Text)
+    , _cFolderId    :: !Text
+    , _cPayload     :: !ChildReference
+    , _cKey         :: !(Maybe Key)
+    , _cOAuthToken  :: !(Maybe OAuthToken)
+    , _cFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChildrenInsert'' with the minimum fields required to make a request.
 --
@@ -85,7 +86,7 @@ data ChildrenInsert' = ChildrenInsert'
 --
 -- * 'cFolderId'
 --
--- * 'cChildReference'
+-- * 'cPayload'
 --
 -- * 'cKey'
 --
@@ -94,15 +95,15 @@ data ChildrenInsert' = ChildrenInsert'
 -- * 'cFields'
 childrenInsert'
     :: Text -- ^ 'folderId'
-    -> ChildReference -- ^ 'ChildReference'
+    -> ChildReference -- ^ 'payload'
     -> ChildrenInsert'
-childrenInsert' pCFolderId_ pCChildReference_ =
+childrenInsert' pCFolderId_ pCPayload_ =
     ChildrenInsert'
     { _cQuotaUser = Nothing
     , _cPrettyPrint = True
     , _cUserIP = Nothing
     , _cFolderId = pCFolderId_
-    , _cChildReference = pCChildReference_
+    , _cPayload = pCPayload_
     , _cKey = Nothing
     , _cOAuthToken = Nothing
     , _cFields = Nothing
@@ -131,10 +132,8 @@ cFolderId
   = lens _cFolderId (\ s a -> s{_cFolderId = a})
 
 -- | Multipart request metadata.
-cChildReference :: Lens' ChildrenInsert' ChildReference
-cChildReference
-  = lens _cChildReference
-      (\ s a -> s{_cChildReference = a})
+cPayload :: Lens' ChildrenInsert' ChildReference
+cPayload = lens _cPayload (\ s a -> s{_cPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -165,7 +164,7 @@ instance GoogleRequest ChildrenInsert' where
               _cKey
               _cOAuthToken
               (Just AltJSON)
-              _cChildReference
+              _cPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChildrenInsertResource)

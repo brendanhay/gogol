@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -73,7 +74,7 @@ data SitemapsList' = SitemapsList'
     , _sllKey          :: !(Maybe Key)
     , _sllOAuthToken   :: !(Maybe OAuthToken)
     , _sllFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitemapsList'' with the minimum fields required to make a request.
 --
@@ -166,7 +167,7 @@ instance GoogleRequest SitemapsList' where
         type Rs SitemapsList' = SitemapsListResponse
         request = requestWithRoute defReq webmasterToolsURL
         requestWithRoute r u SitemapsList'{..}
-          = go _sllSitemapIndex _sllSiteURL _sllQuotaUser
+          = go _sllSiteURL _sllSitemapIndex _sllQuotaUser
               (Just _sllPrettyPrint)
               _sllUserIP
               _sllFields

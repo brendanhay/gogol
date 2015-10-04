@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.DNS.Changes.Create
     , ccPrettyPrint
     , ccProject
     , ccUserIP
-    , ccChange
+    , ccPayload
     , ccKey
     , ccOAuthToken
     , ccManagedZone
@@ -68,12 +69,12 @@ data ChangesCreate' = ChangesCreate'
     , _ccPrettyPrint :: !Bool
     , _ccProject     :: !Text
     , _ccUserIP      :: !(Maybe Text)
-    , _ccChange      :: !Change
+    , _ccPayload     :: !Change
     , _ccKey         :: !(Maybe Key)
     , _ccOAuthToken  :: !(Maybe OAuthToken)
     , _ccManagedZone :: !Text
     , _ccFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesCreate'' with the minimum fields required to make a request.
 --
@@ -87,7 +88,7 @@ data ChangesCreate' = ChangesCreate'
 --
 -- * 'ccUserIP'
 --
--- * 'ccChange'
+-- * 'ccPayload'
 --
 -- * 'ccKey'
 --
@@ -98,16 +99,16 @@ data ChangesCreate' = ChangesCreate'
 -- * 'ccFields'
 changesCreate'
     :: Text -- ^ 'project'
-    -> Change -- ^ 'Change'
+    -> Change -- ^ 'payload'
     -> Text -- ^ 'managedZone'
     -> ChangesCreate'
-changesCreate' pCcProject_ pCcChange_ pCcManagedZone_ =
+changesCreate' pCcProject_ pCcPayload_ pCcManagedZone_ =
     ChangesCreate'
     { _ccQuotaUser = Nothing
     , _ccPrettyPrint = True
     , _ccProject = pCcProject_
     , _ccUserIP = Nothing
-    , _ccChange = pCcChange_
+    , _ccPayload = pCcPayload_
     , _ccKey = Nothing
     , _ccOAuthToken = Nothing
     , _ccManagedZone = pCcManagedZone_
@@ -138,8 +139,9 @@ ccUserIP :: Lens' ChangesCreate' (Maybe Text)
 ccUserIP = lens _ccUserIP (\ s a -> s{_ccUserIP = a})
 
 -- | Multipart request metadata.
-ccChange :: Lens' ChangesCreate' Change
-ccChange = lens _ccChange (\ s a -> s{_ccChange = a})
+ccPayload :: Lens' ChangesCreate' Change
+ccPayload
+  = lens _ccPayload (\ s a -> s{_ccPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -178,7 +180,7 @@ instance GoogleRequest ChangesCreate' where
               _ccKey
               _ccOAuthToken
               (Just AltJSON)
-              _ccChange
+              _ccPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChangesCreateResource)

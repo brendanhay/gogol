@@ -44,12 +44,36 @@ module Network.Google.AdminReports
 
     -- * Types
 
-    -- ** ActivityEvents
-    , ActivityEvents
-    , activityEvents
-    , aeName
-    , aeParameters
-    , aeType
+    -- ** UsageReportParametersItem
+    , UsageReportParametersItem
+    , usageReportParametersItem
+    , urpiDatetimeValue
+    , urpiBoolValue
+    , urpiIntValue
+    , urpiStringValue
+    , urpiName
+    , urpiMsgValue
+
+    -- ** MsgValueItem
+    , MsgValueItem
+    , msgValueItem
+
+    -- ** EventsItem
+    , EventsItem
+    , eventsItem
+    , eiName
+    , eiParameters
+    , eiType
+
+    -- ** EventsItemParametersItem
+    , EventsItemParametersItem
+    , eventsItemParametersItem
+    , eipiBoolValue
+    , eipiIntValue
+    , eipiValue
+    , eipiMultiIntValue
+    , eipiName
+    , eipiMultiValue
 
     -- ** UsageReports
     , UsageReports
@@ -85,10 +109,6 @@ module Network.Google.AdminReports
     , uParameters
     , uEntity
 
-    -- ** UsageReportParametersMsgValue
-    , UsageReportParametersMsgValue
-    , usageReportParametersMsgValue
-
     -- ** Channel
     , Channel
     , channel
@@ -98,27 +118,35 @@ module Network.Google.AdminReports
     , cExpiration
     , cToken
     , cAddress
-    , cPayLoad
+    , cPayload
     , cParams
     , cId
     , cType
 
-    -- ** UsageReportsWarningsData
-    , UsageReportsWarningsData
-    , usageReportsWarningsData
-    , urwdValue
-    , urwdKey
+    -- ** Actor
+    , Actor
+    , actor
+    , aEmail
+    , aCallerType
+    , aProfileId
+    , aKey
 
-    -- ** UsageReportsWarnings
-    , UsageReportsWarnings
-    , usageReportsWarnings
-    , urwData
-    , urwCode
-    , urwMessage
+    -- ** Params
+    , Params
+    , params
 
-    -- ** ChannelParams
-    , ChannelParams
-    , channelParams
+    -- ** WarningsItem
+    , WarningsItem
+    , warningsItem
+    , wiData
+    , wiCode
+    , wiMessage
+
+    -- ** DataItem
+    , DataItem
+    , dataItem
+    , diValue
+    , diKey
 
     -- ** Activity
     , Activity
@@ -131,41 +159,13 @@ module Network.Google.AdminReports
     , actEvents
     , actId
 
-    -- ** ActivityEventsParameters
-    , ActivityEventsParameters
-    , activityEventsParameters
-    , aepBoolValue
-    , aepIntValue
-    , aepValue
-    , aepMultiIntValue
-    , aepName
-    , aepMultiValue
-
-    -- ** UsageReportEntity
-    , UsageReportEntity
-    , usageReportEntity
-    , ureProfileId
-    , ureCustomerId
-    , ureUserEmail
-    , ureType
-
-    -- ** ActivityActor
-    , ActivityActor
-    , activityActor
-    , aaEmail
-    , aaCallerType
-    , aaProfileId
-    , aaKey
-
-    -- ** UsageReportParameters
-    , UsageReportParameters
-    , usageReportParameters
-    , urpDatetimeValue
-    , urpBoolValue
-    , urpIntValue
-    , urpStringValue
-    , urpName
-    , urpMsgValue
+    -- ** Entity
+    , Entity
+    , entity
+    , eProfileId
+    , eCustomerId
+    , eUserEmail
+    , eType
     ) where
 
 import           Network.Google.AdminReports.Types

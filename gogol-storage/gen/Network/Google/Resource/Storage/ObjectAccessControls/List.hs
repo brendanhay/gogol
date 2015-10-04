@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -75,7 +76,7 @@ data ObjectAccessControlsList' = ObjectAccessControlsList'
     , _oaclOAuthToken  :: !(Maybe OAuthToken)
     , _oaclGeneration  :: !(Maybe Word64)
     , _oaclFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsList'' with the minimum fields required to make a request.
 --
@@ -179,7 +180,7 @@ instance GoogleRequest ObjectAccessControlsList'
              ObjectAccessControls
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectAccessControlsList'{..}
-          = go _oaclGeneration _oaclBucket _oaclObject
+          = go _oaclBucket _oaclObject _oaclGeneration
               _oaclQuotaUser
               (Just _oaclPrettyPrint)
               _oaclUserIP

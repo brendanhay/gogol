@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.BigQuery.Datasets.Insert
     -- * Request Lenses
     , diQuotaUser
     , diPrettyPrint
-    , diDataset
     , diUserIP
+    , diPayload
     , diKey
     , diProjectId
     , diOAuthToken
@@ -64,13 +65,13 @@ type DatasetsInsertResource =
 data DatasetsInsert' = DatasetsInsert'
     { _diQuotaUser   :: !(Maybe Text)
     , _diPrettyPrint :: !Bool
-    , _diDataset     :: !Dataset
     , _diUserIP      :: !(Maybe Text)
+    , _diPayload     :: !Dataset
     , _diKey         :: !(Maybe Key)
     , _diProjectId   :: !Text
     , _diOAuthToken  :: !(Maybe OAuthToken)
     , _diFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsInsert'' with the minimum fields required to make a request.
 --
@@ -80,9 +81,9 @@ data DatasetsInsert' = DatasetsInsert'
 --
 -- * 'diPrettyPrint'
 --
--- * 'diDataset'
---
 -- * 'diUserIP'
+--
+-- * 'diPayload'
 --
 -- * 'diKey'
 --
@@ -92,15 +93,15 @@ data DatasetsInsert' = DatasetsInsert'
 --
 -- * 'diFields'
 datasetsInsert'
-    :: Dataset -- ^ 'Dataset'
+    :: Dataset -- ^ 'payload'
     -> Text -- ^ 'projectId'
     -> DatasetsInsert'
-datasetsInsert' pDiDataset_ pDiProjectId_ =
+datasetsInsert' pDiPayload_ pDiProjectId_ =
     DatasetsInsert'
     { _diQuotaUser = Nothing
     , _diPrettyPrint = True
-    , _diDataset = pDiDataset_
     , _diUserIP = Nothing
+    , _diPayload = pDiPayload_
     , _diKey = Nothing
     , _diProjectId = pDiProjectId_
     , _diOAuthToken = Nothing
@@ -120,15 +121,15 @@ diPrettyPrint
   = lens _diPrettyPrint
       (\ s a -> s{_diPrettyPrint = a})
 
--- | Multipart request metadata.
-diDataset :: Lens' DatasetsInsert' Dataset
-diDataset
-  = lens _diDataset (\ s a -> s{_diDataset = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 diUserIP :: Lens' DatasetsInsert' (Maybe Text)
 diUserIP = lens _diUserIP (\ s a -> s{_diUserIP = a})
+
+-- | Multipart request metadata.
+diPayload :: Lens' DatasetsInsert' Dataset
+diPayload
+  = lens _diPayload (\ s a -> s{_diPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -164,7 +165,7 @@ instance GoogleRequest DatasetsInsert' where
               _diKey
               _diOAuthToken
               (Just AltJSON)
-              _diDataset
+              _diPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsInsertResource)

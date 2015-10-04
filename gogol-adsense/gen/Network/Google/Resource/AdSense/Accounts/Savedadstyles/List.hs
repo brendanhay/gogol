@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ type AccountsSavedadstylesListResource =
      "accounts" :>
        Capture "accountId" Text :>
          "savedadstyles" :>
-           QueryParam "maxResults" Int32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Int32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -73,7 +74,7 @@ data AccountsSavedadstylesList' = AccountsSavedadstylesList'
     , _aslOAuthToken  :: !(Maybe OAuthToken)
     , _aslMaxResults  :: !(Maybe Int32)
     , _aslFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsSavedadstylesList'' with the minimum fields required to make a request.
 --
@@ -176,7 +177,7 @@ instance GoogleRequest AccountsSavedadstylesList'
         type Rs AccountsSavedadstylesList' = SavedAdStyles
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AccountsSavedadstylesList'{..}
-          = go _aslMaxResults _aslPageToken _aslAccountId
+          = go _aslAccountId _aslPageToken _aslMaxResults
               _aslQuotaUser
               (Just _aslPrettyPrint)
               _aslUserIP

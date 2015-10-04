@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- /See:/ 'licenseAssignmentInsert' smart constructor.
 newtype LicenseAssignmentInsert = LicenseAssignmentInsert
     { _laiUserId :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentInsert' with the minimum fields required to make a request.
 --
@@ -59,7 +59,7 @@ data LicenseAssignmentList = LicenseAssignmentList
     , _lalNextPageToken :: !(Maybe Text)
     , _lalKind          :: !Text
     , _lalItems         :: !(Maybe [LicenseAssignment])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentList' with the minimum fields required to make a request.
 --
@@ -128,11 +128,11 @@ instance ToJSON LicenseAssignmentList where
 data LicenseAssignment = LicenseAssignment
     { _laEtags     :: !(Maybe Text)
     , _laKind      :: !Text
-    , _laSkuId     :: !(Maybe Text)
+    , _laSKUId     :: !(Maybe Text)
     , _laUserId    :: !(Maybe Text)
     , _laSelfLink  :: !(Maybe Text)
     , _laProductId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignment' with the minimum fields required to make a request.
 --
@@ -142,7 +142,7 @@ data LicenseAssignment = LicenseAssignment
 --
 -- * 'laKind'
 --
--- * 'laSkuId'
+-- * 'laSKUId'
 --
 -- * 'laUserId'
 --
@@ -155,7 +155,7 @@ licenseAssignment =
     LicenseAssignment
     { _laEtags = Nothing
     , _laKind = "licensing#licenseAssignment"
-    , _laSkuId = Nothing
+    , _laSKUId = Nothing
     , _laUserId = Nothing
     , _laSelfLink = Nothing
     , _laProductId = Nothing
@@ -170,8 +170,8 @@ laKind :: Lens' LicenseAssignment Text
 laKind = lens _laKind (\ s a -> s{_laKind = a})
 
 -- | Name of the sku of the product.
-laSkuId :: Lens' LicenseAssignment (Maybe Text)
-laSkuId = lens _laSkuId (\ s a -> s{_laSkuId = a})
+laSKUId :: Lens' LicenseAssignment (Maybe Text)
+laSKUId = lens _laSKUId (\ s a -> s{_laSKUId = a})
 
 -- | Email id of the user.
 laUserId :: Lens' LicenseAssignment (Maybe Text)
@@ -204,7 +204,7 @@ instance ToJSON LicenseAssignment where
           = object
               (catMaybes
                  [("etags" .=) <$> _laEtags, Just ("kind" .= _laKind),
-                  ("skuId" .=) <$> _laSkuId,
+                  ("skuId" .=) <$> _laSKUId,
                   ("userId" .=) <$> _laUserId,
                   ("selfLink" .=) <$> _laSelfLink,
                   ("productId" .=) <$> _laProductId])

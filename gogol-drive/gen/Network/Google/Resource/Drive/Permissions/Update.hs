@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,11 +34,11 @@ module Network.Google.Resource.Drive.Permissions.Update
     , puuQuotaUser
     , puuPrettyPrint
     , puuUserIP
+    , puuPayload
     , puuKey
     , puuTransferOwnership
     , puuFileId
     , puuOAuthToken
-    , puuPermission
     , puuPermissionId
     , puuFields
     ) where
@@ -70,14 +71,14 @@ data PermissionsUpdate' = PermissionsUpdate'
     { _puuQuotaUser         :: !(Maybe Text)
     , _puuPrettyPrint       :: !Bool
     , _puuUserIP            :: !(Maybe Text)
+    , _puuPayload           :: !Permission
     , _puuKey               :: !(Maybe Key)
     , _puuTransferOwnership :: !Bool
     , _puuFileId            :: !Text
     , _puuOAuthToken        :: !(Maybe OAuthToken)
-    , _puuPermission        :: !Permission
     , _puuPermissionId      :: !Text
     , _puuFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsUpdate'' with the minimum fields required to make a request.
 --
@@ -89,6 +90,8 @@ data PermissionsUpdate' = PermissionsUpdate'
 --
 -- * 'puuUserIP'
 --
+-- * 'puuPayload'
+--
 -- * 'puuKey'
 --
 -- * 'puuTransferOwnership'
@@ -97,26 +100,24 @@ data PermissionsUpdate' = PermissionsUpdate'
 --
 -- * 'puuOAuthToken'
 --
--- * 'puuPermission'
---
 -- * 'puuPermissionId'
 --
 -- * 'puuFields'
 permissionsUpdate'
-    :: Text -- ^ 'fileId'
-    -> Permission -- ^ 'Permission'
+    :: Permission -- ^ 'payload'
+    -> Text -- ^ 'fileId'
     -> Text -- ^ 'permissionId'
     -> PermissionsUpdate'
-permissionsUpdate' pPuuFileId_ pPuuPermission_ pPuuPermissionId_ =
+permissionsUpdate' pPuuPayload_ pPuuFileId_ pPuuPermissionId_ =
     PermissionsUpdate'
     { _puuQuotaUser = Nothing
     , _puuPrettyPrint = True
     , _puuUserIP = Nothing
+    , _puuPayload = pPuuPayload_
     , _puuKey = Nothing
     , _puuTransferOwnership = False
     , _puuFileId = pPuuFileId_
     , _puuOAuthToken = Nothing
-    , _puuPermission = pPuuPermission_
     , _puuPermissionId = pPuuPermissionId_
     , _puuFields = Nothing
     }
@@ -139,6 +140,11 @@ puuPrettyPrint
 puuUserIP :: Lens' PermissionsUpdate' (Maybe Text)
 puuUserIP
   = lens _puuUserIP (\ s a -> s{_puuUserIP = a})
+
+-- | Multipart request metadata.
+puuPayload :: Lens' PermissionsUpdate' Permission
+puuPayload
+  = lens _puuPayload (\ s a -> s{_puuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -164,12 +170,6 @@ puuOAuthToken
   = lens _puuOAuthToken
       (\ s a -> s{_puuOAuthToken = a})
 
--- | Multipart request metadata.
-puuPermission :: Lens' PermissionsUpdate' Permission
-puuPermission
-  = lens _puuPermission
-      (\ s a -> s{_puuPermission = a})
-
 -- | The ID for the permission.
 puuPermissionId :: Lens' PermissionsUpdate' Text
 puuPermissionId
@@ -189,8 +189,8 @@ instance GoogleRequest PermissionsUpdate' where
         type Rs PermissionsUpdate' = Permission
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PermissionsUpdate'{..}
-          = go (Just _puuTransferOwnership) _puuFileId
-              _puuPermissionId
+          = go _puuFileId _puuPermissionId
+              (Just _puuTransferOwnership)
               _puuQuotaUser
               (Just _puuPrettyPrint)
               _puuUserIP
@@ -198,7 +198,7 @@ instance GoogleRequest PermissionsUpdate' where
               _puuKey
               _puuOAuthToken
               (Just AltJSON)
-              _puuPermission
+              _puuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PermissionsUpdateResource)

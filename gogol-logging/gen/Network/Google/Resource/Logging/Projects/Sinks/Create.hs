@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,8 +38,8 @@ module Network.Google.Resource.Logging.Projects.Sinks.Create
     , pscUploadProtocol
     , pscPp
     , pscAccessToken
-    , pscLogSink
     , pscUploadType
+    , pscPayload
     , pscBearerToken
     , pscKey
     , pscOAuthToken
@@ -58,12 +59,12 @@ type ProjectsSinksCreateResource =
          Capture "projectsId" Text :>
            "sinks" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "bearer_token" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "upload_protocol" Text :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "callback" Text :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "fields" Text :>
@@ -84,15 +85,15 @@ data ProjectsSinksCreate' = ProjectsSinksCreate'
     , _pscUploadProtocol :: !(Maybe Text)
     , _pscPp             :: !Bool
     , _pscAccessToken    :: !(Maybe Text)
-    , _pscLogSink        :: !LogSink
     , _pscUploadType     :: !(Maybe Text)
+    , _pscPayload        :: !LogSink
     , _pscBearerToken    :: !(Maybe Text)
     , _pscKey            :: !(Maybe Key)
     , _pscOAuthToken     :: !(Maybe OAuthToken)
     , _pscProjectsId     :: !Text
     , _pscFields         :: !(Maybe Text)
     , _pscCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSinksCreate'' with the minimum fields required to make a request.
 --
@@ -110,9 +111,9 @@ data ProjectsSinksCreate' = ProjectsSinksCreate'
 --
 -- * 'pscAccessToken'
 --
--- * 'pscLogSink'
---
 -- * 'pscUploadType'
+--
+-- * 'pscPayload'
 --
 -- * 'pscBearerToken'
 --
@@ -126,10 +127,10 @@ data ProjectsSinksCreate' = ProjectsSinksCreate'
 --
 -- * 'pscCallback'
 projectsSinksCreate'
-    :: LogSink -- ^ 'LogSink'
+    :: LogSink -- ^ 'payload'
     -> Text -- ^ 'projectsId'
     -> ProjectsSinksCreate'
-projectsSinksCreate' pPscLogSink_ pPscProjectsId_ =
+projectsSinksCreate' pPscPayload_ pPscProjectsId_ =
     ProjectsSinksCreate'
     { _pscXgafv = Nothing
     , _pscQuotaUser = Nothing
@@ -137,8 +138,8 @@ projectsSinksCreate' pPscLogSink_ pPscProjectsId_ =
     , _pscUploadProtocol = Nothing
     , _pscPp = True
     , _pscAccessToken = Nothing
-    , _pscLogSink = pPscLogSink_
     , _pscUploadType = Nothing
+    , _pscPayload = pPscPayload_
     , _pscBearerToken = Nothing
     , _pscKey = Nothing
     , _pscOAuthToken = Nothing
@@ -180,16 +181,16 @@ pscAccessToken
   = lens _pscAccessToken
       (\ s a -> s{_pscAccessToken = a})
 
--- | Multipart request metadata.
-pscLogSink :: Lens' ProjectsSinksCreate' LogSink
-pscLogSink
-  = lens _pscLogSink (\ s a -> s{_pscLogSink = a})
-
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
 pscUploadType :: Lens' ProjectsSinksCreate' (Maybe Text)
 pscUploadType
   = lens _pscUploadType
       (\ s a -> s{_pscUploadType = a})
+
+-- | Multipart request metadata.
+pscPayload :: Lens' ProjectsSinksCreate' LogSink
+pscPayload
+  = lens _pscPayload (\ s a -> s{_pscPayload = a})
 
 -- | OAuth bearer token.
 pscBearerToken :: Lens' ProjectsSinksCreate' (Maybe Text)
@@ -234,19 +235,19 @@ instance GoogleRequest ProjectsSinksCreate' where
         type Rs ProjectsSinksCreate' = LogSink
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u ProjectsSinksCreate'{..}
-          = go _pscXgafv _pscAccessToken _pscBearerToken
-              _pscCallback
+          = go _pscProjectsId _pscXgafv _pscUploadProtocol
               (Just _pscPp)
+              _pscAccessToken
               _pscUploadType
-              _pscUploadProtocol
-              _pscProjectsId
+              _pscBearerToken
+              _pscCallback
               _pscQuotaUser
               (Just _pscPrettyPrint)
               _pscFields
               _pscKey
               _pscOAuthToken
               (Just AltJSON)
-              _pscLogSink
+              _pscPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsSinksCreateResource)

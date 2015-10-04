@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.Calendar.Settings.Watch
     , swQuotaUser
     , swPrettyPrint
     , swUserIP
-    , swChannel
+    , swPayload
     , swKey
     , swPageToken
     , swOAuthToken
@@ -52,9 +53,9 @@ type SettingsWatchResource =
        "me" :>
          "settings" :>
            "watch" :>
-             QueryParam "maxResults" Int32 :>
+             QueryParam "syncToken" Text :>
                QueryParam "pageToken" Text :>
-                 QueryParam "syncToken" Text :>
+                 QueryParam "maxResults" Int32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -72,13 +73,13 @@ data SettingsWatch' = SettingsWatch'
     , _swQuotaUser   :: !(Maybe Text)
     , _swPrettyPrint :: !Bool
     , _swUserIP      :: !(Maybe Text)
-    , _swChannel     :: !Channel
+    , _swPayload     :: !Channel
     , _swKey         :: !(Maybe Key)
     , _swPageToken   :: !(Maybe Text)
     , _swOAuthToken  :: !(Maybe OAuthToken)
     , _swMaxResults  :: !(Maybe Int32)
     , _swFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SettingsWatch'' with the minimum fields required to make a request.
 --
@@ -92,7 +93,7 @@ data SettingsWatch' = SettingsWatch'
 --
 -- * 'swUserIP'
 --
--- * 'swChannel'
+-- * 'swPayload'
 --
 -- * 'swKey'
 --
@@ -104,15 +105,15 @@ data SettingsWatch' = SettingsWatch'
 --
 -- * 'swFields'
 settingsWatch'
-    :: Channel -- ^ 'Channel'
+    :: Channel -- ^ 'payload'
     -> SettingsWatch'
-settingsWatch' pSwChannel_ =
+settingsWatch' pSwPayload_ =
     SettingsWatch'
     { _swSyncToken = Nothing
     , _swQuotaUser = Nothing
     , _swPrettyPrint = True
     , _swUserIP = Nothing
-    , _swChannel = pSwChannel_
+    , _swPayload = pSwPayload_
     , _swKey = Nothing
     , _swPageToken = Nothing
     , _swOAuthToken = Nothing
@@ -150,9 +151,9 @@ swUserIP :: Lens' SettingsWatch' (Maybe Text)
 swUserIP = lens _swUserIP (\ s a -> s{_swUserIP = a})
 
 -- | Multipart request metadata.
-swChannel :: Lens' SettingsWatch' Channel
-swChannel
-  = lens _swChannel (\ s a -> s{_swChannel = a})
+swPayload :: Lens' SettingsWatch' Channel
+swPayload
+  = lens _swPayload (\ s a -> s{_swPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -189,7 +190,7 @@ instance GoogleRequest SettingsWatch' where
         type Rs SettingsWatch' = Channel
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u SettingsWatch'{..}
-          = go _swMaxResults _swPageToken _swSyncToken
+          = go _swSyncToken _swPageToken _swMaxResults
               _swQuotaUser
               (Just _swPrettyPrint)
               _swUserIP
@@ -197,7 +198,7 @@ instance GoogleRequest SettingsWatch' where
               _swKey
               _swOAuthToken
               (Just AltJSON)
-              _swChannel
+              _swPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SettingsWatchResource)

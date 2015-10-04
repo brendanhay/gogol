@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,10 +51,10 @@ import           Network.Google.Prelude
 type CloudLoadingAddBookResource =
      "cloudloading" :>
        "addBook" :>
-         QueryParam "drive_document_id" Text :>
-           QueryParam "mime_type" Text :>
+         QueryParam "mime_type" Text :>
+           QueryParam "upload_client_token" Text :>
              QueryParam "name" Text :>
-               QueryParam "upload_client_token" Text :>
+               QueryParam "drive_document_id" Text :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data CloudLoadingAddBook' = CloudLoadingAddBook'
     , _clabOAuthToken        :: !(Maybe OAuthToken)
     , _clabDriveDocumentId   :: !(Maybe Text)
     , _clabFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CloudLoadingAddBook'' with the minimum fields required to make a request.
 --
@@ -185,8 +186,8 @@ instance GoogleRequest CloudLoadingAddBook' where
              BooksCloudLoadingResource
         request = requestWithRoute defReq booksURL
         requestWithRoute r u CloudLoadingAddBook'{..}
-          = go _clabDriveDocumentId _clabMimeType _clabName
-              _clabUploadClientToken
+          = go _clabMimeType _clabUploadClientToken _clabName
+              _clabDriveDocumentId
               _clabQuotaUser
               (Just _clabPrettyPrint)
               _clabUserIP

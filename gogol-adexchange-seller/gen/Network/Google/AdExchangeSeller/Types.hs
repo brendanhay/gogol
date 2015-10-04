@@ -28,6 +28,14 @@ module Network.Google.AdExchangeSeller.Types
     , rmeCompatibleDimensions
     , rmeSupportedProducts
 
+    -- * TargetingInfo
+    , TargetingInfo
+    , targetingInfo
+    , tiLocation
+    , tiSiteLanguage
+    , tiAdsAppearOn
+    , tiDescription
+
     -- * AdClients
     , AdClients
     , adClients
@@ -43,13 +51,6 @@ module Network.Google.AdExchangeSeller.Types
     , aNextPageToken
     , aKind
     , aItems
-
-    -- * ReportHeaders
-    , ReportHeaders
-    , reportHeaders
-    , rhName
-    , rhCurrency
-    , rhType
 
     -- * Alerts
     , Alerts
@@ -115,6 +116,13 @@ module Network.Google.AdExchangeSeller.Types
     , accName
     , accId
 
+    -- * HeadersItem
+    , HeadersItem
+    , headersItem
+    , hiName
+    , hiCurrency
+    , hiType
+
     -- * AdClient
     , AdClient
     , adClient
@@ -123,14 +131,6 @@ module Network.Google.AdExchangeSeller.Types
     , adSupportsReporting
     , adId
     , adProductCode
-
-    -- * CustomChannelTargetingInfo
-    , CustomChannelTargetingInfo
-    , customChannelTargetingInfo
-    , cctiLocation
-    , cctiSiteLanguage
-    , cctiAdsAppearOn
-    , cctiDescription
 
     -- * PreferredDeals
     , PreferredDeals

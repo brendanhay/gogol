@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Inse
     , aciQuotaUser
     , aciPrettyPrint
     , aciUserIP
+    , aciPayload
     , aciApplicationId
     , aciKey
-    , aciAchievementConfiguration
     , aciOAuthToken
     , aciFields
     ) where
@@ -63,15 +64,15 @@ type AchievementConfigurationsInsertResource =
 --
 -- /See:/ 'achievementConfigurationsInsert'' smart constructor.
 data AchievementConfigurationsInsert' = AchievementConfigurationsInsert'
-    { _aciQuotaUser                :: !(Maybe Text)
-    , _aciPrettyPrint              :: !Bool
-    , _aciUserIP                   :: !(Maybe Text)
-    , _aciApplicationId            :: !Text
-    , _aciKey                      :: !(Maybe Key)
-    , _aciAchievementConfiguration :: !AchievementConfiguration
-    , _aciOAuthToken               :: !(Maybe OAuthToken)
-    , _aciFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _aciQuotaUser     :: !(Maybe Text)
+    , _aciPrettyPrint   :: !Bool
+    , _aciUserIP        :: !(Maybe Text)
+    , _aciPayload       :: !AchievementConfiguration
+    , _aciApplicationId :: !Text
+    , _aciKey           :: !(Maybe Key)
+    , _aciOAuthToken    :: !(Maybe OAuthToken)
+    , _aciFields        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationsInsert'' with the minimum fields required to make a request.
 --
@@ -83,27 +84,27 @@ data AchievementConfigurationsInsert' = AchievementConfigurationsInsert'
 --
 -- * 'aciUserIP'
 --
+-- * 'aciPayload'
+--
 -- * 'aciApplicationId'
 --
 -- * 'aciKey'
---
--- * 'aciAchievementConfiguration'
 --
 -- * 'aciOAuthToken'
 --
 -- * 'aciFields'
 achievementConfigurationsInsert'
-    :: Text -- ^ 'applicationId'
-    -> AchievementConfiguration -- ^ 'AchievementConfiguration'
+    :: AchievementConfiguration -- ^ 'payload'
+    -> Text -- ^ 'applicationId'
     -> AchievementConfigurationsInsert'
-achievementConfigurationsInsert' pAciApplicationId_ pAciAchievementConfiguration_ =
+achievementConfigurationsInsert' pAciPayload_ pAciApplicationId_ =
     AchievementConfigurationsInsert'
     { _aciQuotaUser = Nothing
     , _aciPrettyPrint = True
     , _aciUserIP = Nothing
+    , _aciPayload = pAciPayload_
     , _aciApplicationId = pAciApplicationId_
     , _aciKey = Nothing
-    , _aciAchievementConfiguration = pAciAchievementConfiguration_
     , _aciOAuthToken = Nothing
     , _aciFields = Nothing
     }
@@ -127,6 +128,11 @@ aciUserIP :: Lens' AchievementConfigurationsInsert' (Maybe Text)
 aciUserIP
   = lens _aciUserIP (\ s a -> s{_aciUserIP = a})
 
+-- | Multipart request metadata.
+aciPayload :: Lens' AchievementConfigurationsInsert' AchievementConfiguration
+aciPayload
+  = lens _aciPayload (\ s a -> s{_aciPayload = a})
+
 -- | The application ID from the Google Play developer console.
 aciApplicationId :: Lens' AchievementConfigurationsInsert' Text
 aciApplicationId
@@ -138,12 +144,6 @@ aciApplicationId
 -- token.
 aciKey :: Lens' AchievementConfigurationsInsert' (Maybe Key)
 aciKey = lens _aciKey (\ s a -> s{_aciKey = a})
-
--- | Multipart request metadata.
-aciAchievementConfiguration :: Lens' AchievementConfigurationsInsert' AchievementConfiguration
-aciAchievementConfiguration
-  = lens _aciAchievementConfiguration
-      (\ s a -> s{_aciAchievementConfiguration = a})
 
 -- | OAuth 2.0 token for the current user.
 aciOAuthToken :: Lens' AchievementConfigurationsInsert' (Maybe OAuthToken)
@@ -176,7 +176,7 @@ instance GoogleRequest
               _aciKey
               _aciOAuthToken
               (Just AltJSON)
-              _aciAchievementConfiguration
+              _aciPayload
           where go
                   = clientWithRoute
                       (Proxy ::

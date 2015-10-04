@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.Analytics.Management.Filters.Update
     , mfuPrettyPrint
     , mfuFilterId
     , mfuUserIP
+    , mfuPayload
     , mfuAccountId
     , mfuKey
-    , mfuFilter
     , mfuOAuthToken
     , mfuFields
     ) where
@@ -69,12 +70,12 @@ data ManagementFiltersUpdate' = ManagementFiltersUpdate'
     , _mfuPrettyPrint :: !Bool
     , _mfuFilterId    :: !Text
     , _mfuUserIP      :: !(Maybe Text)
+    , _mfuPayload     :: !Filter
     , _mfuAccountId   :: !Text
     , _mfuKey         :: !(Maybe Key)
-    , _mfuFilter      :: !Filter
     , _mfuOAuthToken  :: !(Maybe OAuthToken)
     , _mfuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersUpdate'' with the minimum fields required to make a request.
 --
@@ -88,29 +89,29 @@ data ManagementFiltersUpdate' = ManagementFiltersUpdate'
 --
 -- * 'mfuUserIP'
 --
+-- * 'mfuPayload'
+--
 -- * 'mfuAccountId'
 --
 -- * 'mfuKey'
---
--- * 'mfuFilter'
 --
 -- * 'mfuOAuthToken'
 --
 -- * 'mfuFields'
 managementFiltersUpdate'
     :: Text -- ^ 'filterId'
+    -> Filter -- ^ 'payload'
     -> Text -- ^ 'accountId'
-    -> Filter -- ^ 'Filter'
     -> ManagementFiltersUpdate'
-managementFiltersUpdate' pMfuFilterId_ pMfuAccountId_ pMfuFilter_ =
+managementFiltersUpdate' pMfuFilterId_ pMfuPayload_ pMfuAccountId_ =
     ManagementFiltersUpdate'
     { _mfuQuotaUser = Nothing
     , _mfuPrettyPrint = False
     , _mfuFilterId = pMfuFilterId_
     , _mfuUserIP = Nothing
+    , _mfuPayload = pMfuPayload_
     , _mfuAccountId = pMfuAccountId_
     , _mfuKey = Nothing
-    , _mfuFilter = pMfuFilter_
     , _mfuOAuthToken = Nothing
     , _mfuFields = Nothing
     }
@@ -139,6 +140,11 @@ mfuUserIP :: Lens' ManagementFiltersUpdate' (Maybe Text)
 mfuUserIP
   = lens _mfuUserIP (\ s a -> s{_mfuUserIP = a})
 
+-- | Multipart request metadata.
+mfuPayload :: Lens' ManagementFiltersUpdate' Filter
+mfuPayload
+  = lens _mfuPayload (\ s a -> s{_mfuPayload = a})
+
 -- | Account ID to which the filter belongs.
 mfuAccountId :: Lens' ManagementFiltersUpdate' Text
 mfuAccountId
@@ -149,11 +155,6 @@ mfuAccountId
 -- token.
 mfuKey :: Lens' ManagementFiltersUpdate' (Maybe Key)
 mfuKey = lens _mfuKey (\ s a -> s{_mfuKey = a})
-
--- | Multipart request metadata.
-mfuFilter :: Lens' ManagementFiltersUpdate' Filter
-mfuFilter
-  = lens _mfuFilter (\ s a -> s{_mfuFilter = a})
 
 -- | OAuth 2.0 token for the current user.
 mfuOAuthToken :: Lens' ManagementFiltersUpdate' (Maybe OAuthToken)
@@ -181,7 +182,7 @@ instance GoogleRequest ManagementFiltersUpdate' where
               _mfuKey
               _mfuOAuthToken
               (Just AltJSON)
-              _mfuFilter
+              _mfuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementFiltersUpdateResource)

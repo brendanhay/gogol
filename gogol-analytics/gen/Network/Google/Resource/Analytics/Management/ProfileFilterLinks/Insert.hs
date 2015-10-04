@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,10 +36,10 @@ module Network.Google.Resource.Analytics.Management.ProfileFilterLinks.Insert
     , mpfliWebPropertyId
     , mpfliUserIP
     , mpfliProfileId
+    , mpfliPayload
     , mpfliAccountId
     , mpfliKey
     , mpfliOAuthToken
-    , mpfliProfileFilterLink
     , mpfliFields
     ) where
 
@@ -70,17 +71,17 @@ type ManagementProfileFilterLinksInsertResource =
 --
 -- /See:/ 'managementProfileFilterLinksInsert'' smart constructor.
 data ManagementProfileFilterLinksInsert' = ManagementProfileFilterLinksInsert'
-    { _mpfliQuotaUser         :: !(Maybe Text)
-    , _mpfliPrettyPrint       :: !Bool
-    , _mpfliWebPropertyId     :: !Text
-    , _mpfliUserIP            :: !(Maybe Text)
-    , _mpfliProfileId         :: !Text
-    , _mpfliAccountId         :: !Text
-    , _mpfliKey               :: !(Maybe Key)
-    , _mpfliOAuthToken        :: !(Maybe OAuthToken)
-    , _mpfliProfileFilterLink :: !ProfileFilterLink
-    , _mpfliFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mpfliQuotaUser     :: !(Maybe Text)
+    , _mpfliPrettyPrint   :: !Bool
+    , _mpfliWebPropertyId :: !Text
+    , _mpfliUserIP        :: !(Maybe Text)
+    , _mpfliProfileId     :: !Text
+    , _mpfliPayload       :: !ProfileFilterLink
+    , _mpfliAccountId     :: !Text
+    , _mpfliKey           :: !(Maybe Key)
+    , _mpfliOAuthToken    :: !(Maybe OAuthToken)
+    , _mpfliFields        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileFilterLinksInsert'' with the minimum fields required to make a request.
 --
@@ -96,32 +97,32 @@ data ManagementProfileFilterLinksInsert' = ManagementProfileFilterLinksInsert'
 --
 -- * 'mpfliProfileId'
 --
+-- * 'mpfliPayload'
+--
 -- * 'mpfliAccountId'
 --
 -- * 'mpfliKey'
 --
 -- * 'mpfliOAuthToken'
 --
--- * 'mpfliProfileFilterLink'
---
 -- * 'mpfliFields'
 managementProfileFilterLinksInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
+    -> ProfileFilterLink -- ^ 'payload'
     -> Text -- ^ 'accountId'
-    -> ProfileFilterLink -- ^ 'ProfileFilterLink'
     -> ManagementProfileFilterLinksInsert'
-managementProfileFilterLinksInsert' pMpfliWebPropertyId_ pMpfliProfileId_ pMpfliAccountId_ pMpfliProfileFilterLink_ =
+managementProfileFilterLinksInsert' pMpfliWebPropertyId_ pMpfliProfileId_ pMpfliPayload_ pMpfliAccountId_ =
     ManagementProfileFilterLinksInsert'
     { _mpfliQuotaUser = Nothing
     , _mpfliPrettyPrint = False
     , _mpfliWebPropertyId = pMpfliWebPropertyId_
     , _mpfliUserIP = Nothing
     , _mpfliProfileId = pMpfliProfileId_
+    , _mpfliPayload = pMpfliPayload_
     , _mpfliAccountId = pMpfliAccountId_
     , _mpfliKey = Nothing
     , _mpfliOAuthToken = Nothing
-    , _mpfliProfileFilterLink = pMpfliProfileFilterLink_
     , _mpfliFields = Nothing
     }
 
@@ -157,6 +158,11 @@ mpfliProfileId
   = lens _mpfliProfileId
       (\ s a -> s{_mpfliProfileId = a})
 
+-- | Multipart request metadata.
+mpfliPayload :: Lens' ManagementProfileFilterLinksInsert' ProfileFilterLink
+mpfliPayload
+  = lens _mpfliPayload (\ s a -> s{_mpfliPayload = a})
+
 -- | Account ID to create profile filter link for.
 mpfliAccountId :: Lens' ManagementProfileFilterLinksInsert' Text
 mpfliAccountId
@@ -174,12 +180,6 @@ mpfliOAuthToken :: Lens' ManagementProfileFilterLinksInsert' (Maybe OAuthToken)
 mpfliOAuthToken
   = lens _mpfliOAuthToken
       (\ s a -> s{_mpfliOAuthToken = a})
-
--- | Multipart request metadata.
-mpfliProfileFilterLink :: Lens' ManagementProfileFilterLinksInsert' ProfileFilterLink
-mpfliProfileFilterLink
-  = lens _mpfliProfileFilterLink
-      (\ s a -> s{_mpfliProfileFilterLink = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mpfliFields :: Lens' ManagementProfileFilterLinksInsert' (Maybe Text)
@@ -207,7 +207,7 @@ instance GoogleRequest
               _mpfliKey
               _mpfliOAuthToken
               (Just AltJSON)
-              _mpfliProfileFilterLink
+              _mpfliPayload
           where go
                   = clientWithRoute
                       (Proxy ::

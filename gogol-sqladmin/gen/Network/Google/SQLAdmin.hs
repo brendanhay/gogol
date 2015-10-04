@@ -185,6 +185,11 @@ module Network.Google.SQLAdmin
     , icURI
     , icFileType
 
+    -- ** CSVExportOptions
+    , CSVExportOptions
+    , csvExportOptions
+    , ceoSelectQuery
+
     -- ** Settings
     , Settings
     , settings
@@ -267,6 +272,12 @@ module Network.Google.SQLAdmin
     , ecSQLExportOptions
     , ecDatabases
 
+    -- ** CSVImportOptions
+    , CSVImportOptions
+    , csvImportOptions
+    , cioColumns
+    , cioTable
+
     -- ** UsersListResponse
     , UsersListResponse
     , usersListResponse
@@ -293,11 +304,6 @@ module Network.Google.SQLAdmin
     , icRequireSSL
     , icIPv4Enabled
 
-    -- ** ExportContextCSVExportOptions
-    , ExportContextCSVExportOptions
-    , exportContextCSVExportOptions
-    , ecceoSelectQuery
-
     -- ** SSLCertsInsertRequest
     , SSLCertsInsertRequest
     , sslCertsInsertRequest
@@ -313,12 +319,6 @@ module Network.Google.SQLAdmin
     , uPassword
     , uHost
     , uInstance
-
-    -- ** ImportContextCSVImportOptions
-    , ImportContextCSVImportOptions
-    , importContextCSVImportOptions
-    , iccioColumns
-    , iccioTable
 
     -- ** DatabaseInstance
     , DatabaseInstance
@@ -383,6 +383,12 @@ module Network.Google.SQLAdmin
     , aeValue
     , aeName
     , aeExpirationTime
+
+    -- ** SQLExportOptions
+    , SQLExportOptions
+    , sQLExportOptions
+    , sqleoSchemaOnly
+    , sqleoTables
 
     -- ** MySQLReplicaConfiguration
     , MySQLReplicaConfiguration
@@ -489,12 +495,6 @@ module Network.Google.SQLAdmin
     , bcStartTime
     , bcKind
     , bcBinaryLogEnabled
-
-    -- ** ExportContextSQLExportOptions
-    , ExportContextSQLExportOptions
-    , exportContextSQLExportOptions
-    , ecsqleoSchemaOnly
-    , ecsqleoTables
 
     -- ** RestoreBackupContext
     , RestoreBackupContext

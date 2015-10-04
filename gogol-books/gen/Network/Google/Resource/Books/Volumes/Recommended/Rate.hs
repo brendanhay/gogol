@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,11 +52,10 @@ type VolumesRecommendedRateResource =
      "volumes" :>
        "recommended" :>
          "rate" :>
-           QueryParam "locale" Text :>
-             QueryParam "source" Text :>
-               QueryParam "rating" BooksVolumesRecommendedRateRating
-                 :>
-                 QueryParam "volumeId" Text :>
+           QueryParam "rating" Rating :>
+             QueryParam "volumeId" Text :>
+               QueryParam "locale" Text :>
+                 QueryParam "source" Text :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -71,7 +71,7 @@ type VolumesRecommendedRateResource =
 -- /See:/ 'volumesRecommendedRate'' smart constructor.
 data VolumesRecommendedRate' = VolumesRecommendedRate'
     { _vrrQuotaUser   :: !(Maybe Text)
-    , _vrrRating      :: !BooksVolumesRecommendedRateRating
+    , _vrrRating      :: !Rating
     , _vrrPrettyPrint :: !Bool
     , _vrrUserIP      :: !(Maybe Text)
     , _vrrLocale      :: !(Maybe Text)
@@ -80,7 +80,7 @@ data VolumesRecommendedRate' = VolumesRecommendedRate'
     , _vrrSource      :: !(Maybe Text)
     , _vrrOAuthToken  :: !(Maybe OAuthToken)
     , _vrrFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesRecommendedRate'' with the minimum fields required to make a request.
 --
@@ -106,7 +106,7 @@ data VolumesRecommendedRate' = VolumesRecommendedRate'
 --
 -- * 'vrrFields'
 volumesRecommendedRate'
-    :: BooksVolumesRecommendedRateRating -- ^ 'rating'
+    :: Rating -- ^ 'rating'
     -> Text -- ^ 'volumeId'
     -> VolumesRecommendedRate'
 volumesRecommendedRate' pVrrRating_ pVrrVolumeId_ =
@@ -131,7 +131,7 @@ vrrQuotaUser
   = lens _vrrQuotaUser (\ s a -> s{_vrrQuotaUser = a})
 
 -- | Rating to be given to the volume.
-vrrRating :: Lens' VolumesRecommendedRate' BooksVolumesRecommendedRateRating
+vrrRating :: Lens' VolumesRecommendedRate' Rating
 vrrRating
   = lens _vrrRating (\ s a -> s{_vrrRating = a})
 
@@ -189,8 +189,8 @@ instance GoogleRequest VolumesRecommendedRate' where
              BooksVolumesRecommendedRateResponse
         request = requestWithRoute defReq booksURL
         requestWithRoute r u VolumesRecommendedRate'{..}
-          = go _vrrLocale _vrrSource (Just _vrrRating)
-              (Just _vrrVolumeId)
+          = go (Just _vrrRating) (Just _vrrVolumeId) _vrrLocale
+              _vrrSource
               _vrrQuotaUser
               (Just _vrrPrettyPrint)
               _vrrUserIP

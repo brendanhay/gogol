@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,14 +55,14 @@ import           Network.Google.StorageTransfer.Types
 -- 'TransferOperationsGet'' request conforms to.
 type TransferOperationsGetResource =
      "v1" :>
-       "{+name}" :>
+       Capture "name" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -89,7 +90,7 @@ data TransferOperationsGet' = TransferOperationsGet'
     , _togOAuthToken     :: !(Maybe OAuthToken)
     , _togFields         :: !(Maybe Text)
     , _togCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferOperationsGet'' with the minimum fields required to make a request.
 --
@@ -219,12 +220,12 @@ instance GoogleRequest TransferOperationsGet' where
         type Rs TransferOperationsGet' = Operation
         request = requestWithRoute defReq storageTransferURL
         requestWithRoute r u TransferOperationsGet'{..}
-          = go _togXgafv _togAccessToken _togBearerToken
-              _togCallback
+          = go _togName _togXgafv _togUploadProtocol
               (Just _togPp)
+              _togAccessToken
               _togUploadType
-              _togUploadProtocol
-              _togName
+              _togBearerToken
+              _togCallback
               _togQuotaUser
               (Just _togPrettyPrint)
               _togFields

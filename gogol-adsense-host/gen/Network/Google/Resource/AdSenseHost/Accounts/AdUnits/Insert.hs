@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Insert
     , aauiQuotaUser
     , aauiPrettyPrint
     , aauiUserIP
-    , aauiAdUnit
+    , aauiPayload
     , aauiAdClientId
     , aauiAccountId
     , aauiKey
@@ -70,13 +71,13 @@ data AccountsAdUnitsInsert' = AccountsAdUnitsInsert'
     { _aauiQuotaUser   :: !(Maybe Text)
     , _aauiPrettyPrint :: !Bool
     , _aauiUserIP      :: !(Maybe Text)
-    , _aauiAdUnit      :: !AdUnit
+    , _aauiPayload     :: !AdUnit
     , _aauiAdClientId  :: !Text
     , _aauiAccountId   :: !Text
     , _aauiKey         :: !(Maybe Key)
     , _aauiOAuthToken  :: !(Maybe OAuthToken)
     , _aauiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdUnitsInsert'' with the minimum fields required to make a request.
 --
@@ -88,7 +89,7 @@ data AccountsAdUnitsInsert' = AccountsAdUnitsInsert'
 --
 -- * 'aauiUserIP'
 --
--- * 'aauiAdUnit'
+-- * 'aauiPayload'
 --
 -- * 'aauiAdClientId'
 --
@@ -100,16 +101,16 @@ data AccountsAdUnitsInsert' = AccountsAdUnitsInsert'
 --
 -- * 'aauiFields'
 accountsAdUnitsInsert'
-    :: AdUnit -- ^ 'AdUnit'
+    :: AdUnit -- ^ 'payload'
     -> Text -- ^ 'adClientId'
     -> Text -- ^ 'accountId'
     -> AccountsAdUnitsInsert'
-accountsAdUnitsInsert' pAauiAdUnit_ pAauiAdClientId_ pAauiAccountId_ =
+accountsAdUnitsInsert' pAauiPayload_ pAauiAdClientId_ pAauiAccountId_ =
     AccountsAdUnitsInsert'
     { _aauiQuotaUser = Nothing
     , _aauiPrettyPrint = True
     , _aauiUserIP = Nothing
-    , _aauiAdUnit = pAauiAdUnit_
+    , _aauiPayload = pAauiPayload_
     , _aauiAdClientId = pAauiAdClientId_
     , _aauiAccountId = pAauiAccountId_
     , _aauiKey = Nothing
@@ -138,9 +139,9 @@ aauiUserIP
   = lens _aauiUserIP (\ s a -> s{_aauiUserIP = a})
 
 -- | Multipart request metadata.
-aauiAdUnit :: Lens' AccountsAdUnitsInsert' AdUnit
-aauiAdUnit
-  = lens _aauiAdUnit (\ s a -> s{_aauiAdUnit = a})
+aauiPayload :: Lens' AccountsAdUnitsInsert' AdUnit
+aauiPayload
+  = lens _aauiPayload (\ s a -> s{_aauiPayload = a})
 
 -- | Ad client into which to insert the ad unit.
 aauiAdClientId :: Lens' AccountsAdUnitsInsert' Text
@@ -186,7 +187,7 @@ instance GoogleRequest AccountsAdUnitsInsert' where
               _aauiKey
               _aauiOAuthToken
               (Just AltJSON)
-              _aauiAdUnit
+              _aauiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsAdUnitsInsertResource)

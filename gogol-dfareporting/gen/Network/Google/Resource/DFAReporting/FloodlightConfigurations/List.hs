@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -66,12 +67,12 @@ data FloodlightConfigurationsList' = FloodlightConfigurationsList'
     { _fclQuotaUser   :: !(Maybe Text)
     , _fclPrettyPrint :: !Bool
     , _fclUserIP      :: !(Maybe Text)
-    , _fclIds         :: !(Maybe Int64)
+    , _fclIds         :: !(Maybe [Int64])
     , _fclProfileId   :: !Int64
     , _fclKey         :: !(Maybe Key)
     , _fclOAuthToken  :: !(Maybe OAuthToken)
     , _fclFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightConfigurationsList'' with the minimum fields required to make a request.
 --
@@ -128,8 +129,10 @@ fclUserIP
 
 -- | Set of IDs of floodlight configurations to retrieve. Required field;
 -- otherwise an empty list will be returned.
-fclIds :: Lens' FloodlightConfigurationsList' (Maybe Int64)
-fclIds = lens _fclIds (\ s a -> s{_fclIds = a})
+fclIds :: Lens' FloodlightConfigurationsList' [Int64]
+fclIds
+  = lens _fclIds (\ s a -> s{_fclIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 fclProfileId :: Lens' FloodlightConfigurationsList' Int64
@@ -165,7 +168,8 @@ instance GoogleRequest FloodlightConfigurationsList'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightConfigurationsList'{..}
-          = go _fclIds _fclProfileId _fclQuotaUser
+          = go _fclProfileId (_fclIds ^. _Default)
+              _fclQuotaUser
               (Just _fclPrettyPrint)
               _fclUserIP
               _fclFields

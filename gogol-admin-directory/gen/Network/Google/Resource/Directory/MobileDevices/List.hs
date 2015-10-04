@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,18 +56,18 @@ type MobileDevicesListResource =
        Capture "customerId" Text :>
          "devices" :>
            "mobile" :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "orderBy"
-                 DirectoryMobileDevicesListOrderBy
+             QueryParam "orderBy"
+               DirectoryMobileDevicesListOrderBy
+               :>
+               QueryParam "sortOrder"
+                 DirectoryMobileDevicesListSortOrder
                  :>
-                 QueryParam "pageToken" Text :>
+                 QueryParam "query" Text :>
                    QueryParam "projection"
                      DirectoryMobileDevicesListProjection
                      :>
-                     QueryParam "query" Text :>
-                       QueryParam "sortOrder"
-                         DirectoryMobileDevicesListSortOrder
-                         :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Int32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -93,7 +94,7 @@ data MobileDevicesList' = MobileDevicesList'
     , _mdlOAuthToken  :: !(Maybe OAuthToken)
     , _mdlMaxResults  :: !(Maybe Int32)
     , _mdlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobileDevicesList'' with the minimum fields required to make a request.
 --
@@ -227,11 +228,11 @@ instance GoogleRequest MobileDevicesList' where
         type Rs MobileDevicesList' = MobileDevices
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u MobileDevicesList'{..}
-          = go _mdlMaxResults _mdlOrderBy _mdlPageToken
-              _mdlProjection
+          = go _mdlCustomerId _mdlOrderBy _mdlSortOrder
               _mdlQuery
-              _mdlSortOrder
-              _mdlCustomerId
+              _mdlProjection
+              _mdlPageToken
+              _mdlMaxResults
               _mdlQuotaUser
               (Just _mdlPrettyPrint)
               _mdlUserIP

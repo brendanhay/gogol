@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -39,7 +40,7 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.DeleteInstances
     , igmdiInstanceGroupManager
     , igmdiUserIP
     , igmdiZone
-    , igmdiInstanceGroupManagersDeleteInstancesRequest
+    , igmdiPayload
     , igmdiKey
     , igmdiOAuthToken
     , igmdiFields
@@ -75,17 +76,17 @@ type InstanceGroupManagersDeleteInstancesResource =
 --
 -- /See:/ 'instanceGroupManagersDeleteInstances'' smart constructor.
 data InstanceGroupManagersDeleteInstances' = InstanceGroupManagersDeleteInstances'
-    { _igmdiQuotaUser                                   :: !(Maybe Text)
-    , _igmdiPrettyPrint                                 :: !Bool
-    , _igmdiProject                                     :: !Text
-    , _igmdiInstanceGroupManager                        :: !Text
-    , _igmdiUserIP                                      :: !(Maybe Text)
-    , _igmdiZone                                        :: !Text
-    , _igmdiInstanceGroupManagersDeleteInstancesRequest :: !InstanceGroupManagersDeleteInstancesRequest
-    , _igmdiKey                                         :: !(Maybe Key)
-    , _igmdiOAuthToken                                  :: !(Maybe OAuthToken)
-    , _igmdiFields                                      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _igmdiQuotaUser            :: !(Maybe Text)
+    , _igmdiPrettyPrint          :: !Bool
+    , _igmdiProject              :: !Text
+    , _igmdiInstanceGroupManager :: !Text
+    , _igmdiUserIP               :: !(Maybe Text)
+    , _igmdiZone                 :: !Text
+    , _igmdiPayload              :: !InstanceGroupManagersDeleteInstancesRequest
+    , _igmdiKey                  :: !(Maybe Key)
+    , _igmdiOAuthToken           :: !(Maybe OAuthToken)
+    , _igmdiFields               :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersDeleteInstances'' with the minimum fields required to make a request.
 --
@@ -103,7 +104,7 @@ data InstanceGroupManagersDeleteInstances' = InstanceGroupManagersDeleteInstance
 --
 -- * 'igmdiZone'
 --
--- * 'igmdiInstanceGroupManagersDeleteInstancesRequest'
+-- * 'igmdiPayload'
 --
 -- * 'igmdiKey'
 --
@@ -114,9 +115,9 @@ instanceGroupManagersDeleteInstances'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instanceGroupManager'
     -> Text -- ^ 'zone'
-    -> InstanceGroupManagersDeleteInstancesRequest -- ^ 'InstanceGroupManagersDeleteInstancesRequest'
+    -> InstanceGroupManagersDeleteInstancesRequest -- ^ 'payload'
     -> InstanceGroupManagersDeleteInstances'
-instanceGroupManagersDeleteInstances' pIgmdiProject_ pIgmdiInstanceGroupManager_ pIgmdiZone_ pIgmdiInstanceGroupManagersDeleteInstancesRequest_ =
+instanceGroupManagersDeleteInstances' pIgmdiProject_ pIgmdiInstanceGroupManager_ pIgmdiZone_ pIgmdiPayload_ =
     InstanceGroupManagersDeleteInstances'
     { _igmdiQuotaUser = Nothing
     , _igmdiPrettyPrint = True
@@ -124,7 +125,7 @@ instanceGroupManagersDeleteInstances' pIgmdiProject_ pIgmdiInstanceGroupManager_
     , _igmdiInstanceGroupManager = pIgmdiInstanceGroupManager_
     , _igmdiUserIP = Nothing
     , _igmdiZone = pIgmdiZone_
-    , _igmdiInstanceGroupManagersDeleteInstancesRequest = pIgmdiInstanceGroupManagersDeleteInstancesRequest_
+    , _igmdiPayload = pIgmdiPayload_
     , _igmdiKey = Nothing
     , _igmdiOAuthToken = Nothing
     , _igmdiFields = Nothing
@@ -167,13 +168,9 @@ igmdiZone
   = lens _igmdiZone (\ s a -> s{_igmdiZone = a})
 
 -- | Multipart request metadata.
-igmdiInstanceGroupManagersDeleteInstancesRequest :: Lens' InstanceGroupManagersDeleteInstances' InstanceGroupManagersDeleteInstancesRequest
-igmdiInstanceGroupManagersDeleteInstancesRequest
-  = lens
-      _igmdiInstanceGroupManagersDeleteInstancesRequest
-      (\ s a ->
-         s{_igmdiInstanceGroupManagersDeleteInstancesRequest =
-             a})
+igmdiPayload :: Lens' InstanceGroupManagersDeleteInstances' InstanceGroupManagersDeleteInstancesRequest
+igmdiPayload
+  = lens _igmdiPayload (\ s a -> s{_igmdiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -213,7 +210,7 @@ instance GoogleRequest
               _igmdiKey
               _igmdiOAuthToken
               (Just AltJSON)
-              _igmdiInstanceGroupManagersDeleteInstancesRequest
+              _igmdiPayload
           where go
                   = clientWithRoute
                       (Proxy ::

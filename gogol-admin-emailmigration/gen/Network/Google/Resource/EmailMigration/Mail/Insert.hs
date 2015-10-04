@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -30,10 +31,10 @@ module Network.Google.Resource.EmailMigration.Mail.Insert
     , MailInsert'
 
     -- * Request Lenses
-    , miMailItem
     , miQuotaUser
     , miPrettyPrint
     , miUserIP
+    , miPayload
     , miMedia
     , miKey
     , miOAuthToken
@@ -63,28 +64,28 @@ type MailInsertResource =
 --
 -- /See:/ 'mailInsert'' smart constructor.
 data MailInsert' = MailInsert'
-    { _miMailItem    :: !MailItem
-    , _miQuotaUser   :: !(Maybe Text)
+    { _miQuotaUser   :: !(Maybe Text)
     , _miPrettyPrint :: !Bool
     , _miUserIP      :: !(Maybe Text)
+    , _miPayload     :: !MailItem
     , _miMedia       :: !Body
     , _miKey         :: !(Maybe Key)
     , _miOAuthToken  :: !(Maybe OAuthToken)
     , _miUserKey     :: !Text
     , _miFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MailInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'miMailItem'
 --
 -- * 'miQuotaUser'
 --
 -- * 'miPrettyPrint'
 --
 -- * 'miUserIP'
+--
+-- * 'miPayload'
 --
 -- * 'miMedia'
 --
@@ -96,27 +97,22 @@ data MailInsert' = MailInsert'
 --
 -- * 'miFields'
 mailInsert'
-    :: MailItem -- ^ 'MailItem'
+    :: MailItem -- ^ 'payload'
     -> Body -- ^ 'media'
     -> Text -- ^ 'userKey'
     -> MailInsert'
-mailInsert' pMiMailItem_ pMiMedia_ pMiUserKey_ =
+mailInsert' pMiPayload_ pMiMedia_ pMiUserKey_ =
     MailInsert'
-    { _miMailItem = pMiMailItem_
-    , _miQuotaUser = Nothing
+    { _miQuotaUser = Nothing
     , _miPrettyPrint = True
     , _miUserIP = Nothing
+    , _miPayload = pMiPayload_
     , _miMedia = pMiMedia_
     , _miKey = Nothing
     , _miOAuthToken = Nothing
     , _miUserKey = pMiUserKey_
     , _miFields = Nothing
     }
-
--- | Multipart request metadata.
-miMailItem :: Lens' MailInsert' MailItem
-miMailItem
-  = lens _miMailItem (\ s a -> s{_miMailItem = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -135,6 +131,11 @@ miPrettyPrint
 -- want to enforce per-user limits.
 miUserIP :: Lens' MailInsert' (Maybe Text)
 miUserIP = lens _miUserIP (\ s a -> s{_miUserIP = a})
+
+-- | Multipart request metadata.
+miPayload :: Lens' MailInsert' MailItem
+miPayload
+  = lens _miPayload (\ s a -> s{_miPayload = a})
 
 miMedia :: Lens' MailInsert' Body
 miMedia = lens _miMedia (\ s a -> s{_miMedia = a})
@@ -168,14 +169,14 @@ instance GoogleRequest MailInsert' where
         request
           = requestWithRoute defReq adminEmailMigrationURL
         requestWithRoute r u MailInsert'{..}
-          = go _miMedia _miUserKey _miQuotaUser
-              (Just _miPrettyPrint)
+          = go _miUserKey _miQuotaUser (Just _miPrettyPrint)
               _miUserIP
               _miFields
               _miKey
               _miOAuthToken
               (Just AltJSON)
-              _miMailItem
+              _miPayload
+              _miMedia
           where go
                   = clientWithRoute (Proxy :: Proxy MailInsertResource)
                       r

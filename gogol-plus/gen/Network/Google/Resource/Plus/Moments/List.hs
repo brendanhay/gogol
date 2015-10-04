@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,10 +55,10 @@ type MomentsListResource =
        Capture "userId" Text :>
          "moments" :>
            Capture "collection" PlusMomentsListCollection :>
-             QueryParam "maxResults" Word32 :>
+             QueryParam "targetUrl" Text :>
                QueryParam "pageToken" Text :>
-                 QueryParam "targetUrl" Text :>
-                   QueryParam "type" Text :>
+                 QueryParam "type" Text :>
+                   QueryParam "maxResults" Word32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -83,7 +84,7 @@ data MomentsList' = MomentsList'
     , _mlOAuthToken  :: !(Maybe OAuthToken)
     , _mlMaxResults  :: !Word32
     , _mlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MomentsList'' with the minimum fields required to make a request.
 --
@@ -206,10 +207,10 @@ instance GoogleRequest MomentsList' where
         type Rs MomentsList' = MomentsFeed
         request = requestWithRoute defReq plusURL
         requestWithRoute r u MomentsList'{..}
-          = go (Just _mlMaxResults) _mlPageToken _mlTargetURL
+          = go _mlUserId _mlCollection _mlTargetURL
+              _mlPageToken
               _mlType
-              _mlUserId
-              _mlCollection
+              (Just _mlMaxResults)
               _mlQuotaUser
               (Just _mlPrettyPrint)
               _mlUserIP

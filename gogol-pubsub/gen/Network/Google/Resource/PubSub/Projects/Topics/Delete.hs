@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -56,14 +57,14 @@ import           Network.Google.PubSub.Types
 -- 'ProjectsTopicsDelete'' request conforms to.
 type ProjectsTopicsDeleteResource =
      "v1beta2" :>
-       "{+topic}" :>
+       Capture "topic" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -93,7 +94,7 @@ data ProjectsTopicsDelete' = ProjectsTopicsDelete'
     , _ptdOAuthToken     :: !(Maybe OAuthToken)
     , _ptdFields         :: !(Maybe Text)
     , _ptdCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsTopicsDelete'' with the minimum fields required to make a request.
 --
@@ -223,12 +224,12 @@ instance GoogleRequest ProjectsTopicsDelete' where
         type Rs ProjectsTopicsDelete' = Empty
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsTopicsDelete'{..}
-          = go _ptdXgafv _ptdAccessToken _ptdBearerToken
-              _ptdCallback
+          = go _ptdTopic _ptdXgafv _ptdUploadProtocol
               (Just _ptdPp)
+              _ptdAccessToken
               _ptdUploadType
-              _ptdUploadProtocol
-              _ptdTopic
+              _ptdBearerToken
+              _ptdCallback
               _ptdQuotaUser
               (Just _ptdPrettyPrint)
               _ptdFields

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -44,7 +45,7 @@ module Network.Google.Resource.Gan.Events.List
     , elRole
     , elEventDateMax
     , elKey
-    , elSku
+    , elSKU
     , elLinkId
     , elPageToken
     , elType
@@ -65,23 +66,22 @@ type EventsListResource =
      Capture "role" GanEventsListRole :>
        Capture "roleId" Text :>
          "events" :>
-           QueryParam "advertiserId" Text :>
-             QueryParam "chargeType" GanEventsListChargeType :>
-               QueryParam "eventDateMax" Text :>
-                 QueryParam "eventDateMin" Text :>
-                   QueryParam "linkId" Text :>
-                     QueryParam "maxResults" Word32 :>
-                       QueryParam "memberId" Text :>
-                         QueryParam "modifyDateMax" Text :>
-                           QueryParam "modifyDateMin" Text :>
-                             QueryParam "orderId" Text :>
+           QueryParam "status" GanEventsListStatus :>
+             QueryParam "eventDateMin" Text :>
+               QueryParam "chargeType" ChargeType :>
+                 QueryParam "memberId" Text :>
+                   QueryParam "modifyDateMax" Text :>
+                     QueryParam "advertiserId" Text :>
+                       QueryParam "modifyDateMin" Text :>
+                         QueryParam "eventDateMax" Text :>
+                           QueryParam "sku" Text :>
+                             QueryParam "linkId" Text :>
                                QueryParam "pageToken" Text :>
-                                 QueryParam "productCategory" Text :>
-                                   QueryParam "publisherId" Text :>
-                                     QueryParam "sku" Text :>
-                                       QueryParam "status" GanEventsListStatus
-                                         :>
-                                         QueryParam "type" GanEventsListType :>
+                                 QueryParam "type" Type :>
+                                   QueryParam "orderId" Text :>
+                                     QueryParam "publisherId" Text :>
+                                       QueryParam "productCategory" Text :>
+                                         QueryParam "maxResults" Word32 :>
                                            QueryParam "quotaUser" Text :>
                                              QueryParam "prettyPrint" Bool :>
                                                QueryParam "userIp" Text :>
@@ -101,7 +101,7 @@ data EventsList' = EventsList'
     , _elQuotaUser       :: !(Maybe Text)
     , _elPrettyPrint     :: !Bool
     , _elEventDateMin    :: !(Maybe Text)
-    , _elChargeType      :: !(Maybe GanEventsListChargeType)
+    , _elChargeType      :: !(Maybe ChargeType)
     , _elMemberId        :: !(Maybe Text)
     , _elUserIP          :: !(Maybe Text)
     , _elModifyDateMax   :: !(Maybe Text)
@@ -111,17 +111,17 @@ data EventsList' = EventsList'
     , _elRole            :: !GanEventsListRole
     , _elEventDateMax    :: !(Maybe Text)
     , _elKey             :: !(Maybe Key)
-    , _elSku             :: !(Maybe Text)
+    , _elSKU             :: !(Maybe Text)
     , _elLinkId          :: !(Maybe Text)
     , _elPageToken       :: !(Maybe Text)
-    , _elType            :: !(Maybe GanEventsListType)
+    , _elType            :: !(Maybe Type)
     , _elOAuthToken      :: !(Maybe OAuthToken)
     , _elOrderId         :: !(Maybe Text)
     , _elPublisherId     :: !(Maybe Text)
     , _elProductCategory :: !(Maybe Text)
     , _elMaxResults      :: !(Maybe Word32)
     , _elFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsList'' with the minimum fields required to make a request.
 --
@@ -155,7 +155,7 @@ data EventsList' = EventsList'
 --
 -- * 'elKey'
 --
--- * 'elSku'
+-- * 'elSKU'
 --
 -- * 'elLinkId'
 --
@@ -194,7 +194,7 @@ eventsList' pElRoleId_ pElRole_ =
     , _elRole = pElRole_
     , _elEventDateMax = Nothing
     , _elKey = Nothing
-    , _elSku = Nothing
+    , _elSKU = Nothing
     , _elLinkId = Nothing
     , _elPageToken = Nothing
     , _elType = Nothing
@@ -234,7 +234,7 @@ elEventDateMin
 -- | Filters out all charge events that are not of the given charge type.
 -- Valid values: \'other\', \'slotting_fee\', \'monthly_minimum\',
 -- \'tier_bonus\', \'credit\', \'debit\'. Optional.
-elChargeType :: Lens' EventsList' (Maybe GanEventsListChargeType)
+elChargeType :: Lens' EventsList' (Maybe ChargeType)
 elChargeType
   = lens _elChargeType (\ s a -> s{_elChargeType = a})
 
@@ -297,8 +297,8 @@ elKey = lens _elKey (\ s a -> s{_elKey = a})
 
 -- | Caret(^) delimited list of SKUs. Filters out all events that do not
 -- reference one of the given SKU. Optional.
-elSku :: Lens' EventsList' (Maybe Text)
-elSku = lens _elSku (\ s a -> s{_elSku = a})
+elSKU :: Lens' EventsList' (Maybe Text)
+elSKU = lens _elSKU (\ s a -> s{_elSKU = a})
 
 -- | Caret(^) delimited list of link IDs. Filters out all events that do not
 -- reference one of the given link IDs. Optional.
@@ -312,7 +312,7 @@ elPageToken
 
 -- | Filters out all events that are not of the given type. Valid values:
 -- \'action\', \'transaction\', \'charge\'. Optional.
-elType :: Lens' EventsList' (Maybe GanEventsListType)
+elType :: Lens' EventsList' (Maybe Type)
 elType = lens _elType (\ s a -> s{_elType = a})
 
 -- | OAuth 2.0 token for the current user.
@@ -359,22 +359,21 @@ instance GoogleRequest EventsList' where
         type Rs EventsList' = Events
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u EventsList'{..}
-          = go _elAdvertiserId _elChargeType _elEventDateMax
-              _elEventDateMin
-              _elLinkId
-              _elMaxResults
+          = go _elRole _elRoleId _elStatus _elEventDateMin
+              _elChargeType
               _elMemberId
               _elModifyDateMax
+              _elAdvertiserId
               _elModifyDateMin
-              _elOrderId
+              _elEventDateMax
+              _elSKU
+              _elLinkId
               _elPageToken
-              _elProductCategory
-              _elPublisherId
-              _elSku
-              _elStatus
               _elType
-              _elRole
-              _elRoleId
+              _elOrderId
+              _elPublisherId
+              _elProductCategory
+              _elMaxResults
               _elQuotaUser
               (Just _elPrettyPrint)
               _elUserIP

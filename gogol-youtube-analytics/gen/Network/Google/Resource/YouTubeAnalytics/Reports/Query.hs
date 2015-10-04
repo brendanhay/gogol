@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,16 +56,16 @@ import           Network.Google.YouTubeAnalytics.Types
 -- 'ReportsQuery'' request conforms to.
 type ReportsQueryResource =
      "reports" :>
-       QueryParam "currency" Text :>
-         QueryParam "dimensions" Text :>
-           QueryParam "filters" Text :>
-             QueryParam "max-results" Int32 :>
-               QueryParam "sort" Text :>
-                 QueryParam "start-index" Int32 :>
-                   QueryParam "ids" Text :>
-                     QueryParam "start-date" Text :>
-                       QueryParam "end-date" Text :>
-                         QueryParam "metrics" Text :>
+       QueryParam "ids" Text :>
+         QueryParam "start-date" Text :>
+           QueryParam "end-date" Text :>
+             QueryParam "metrics" Text :>
+               QueryParam "filters" Text :>
+                 QueryParam "currency" Text :>
+                   QueryParam "sort" Text :>
+                     QueryParam "dimensions" Text :>
+                       QueryParam "start-index" Int32 :>
+                         QueryParam "max-results" Int32 :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "userIp" Text :>
@@ -94,7 +95,7 @@ data ReportsQuery' = ReportsQuery'
     , _rqMaxResults  :: !(Maybe Int32)
     , _rqStartDate   :: !Text
     , _rqFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsQuery'' with the minimum fields required to make a request.
 --
@@ -274,14 +275,15 @@ instance GoogleRequest ReportsQuery' where
         type Rs ReportsQuery' = ResultTable
         request = requestWithRoute defReq youTubeAnalyticsURL
         requestWithRoute r u ReportsQuery'{..}
-          = go _rqCurrency _rqDimensions _rqFilters
-              _rqMaxResults
-              _rqSort
-              _rqStartIndex
-              (Just _rqIds)
-              (Just _rqStartDate)
+          = go (Just _rqIds) (Just _rqStartDate)
               (Just _rqEndDate)
               (Just _rqMetrics)
+              _rqFilters
+              _rqCurrency
+              _rqSort
+              _rqDimensions
+              _rqStartIndex
+              _rqMaxResults
               _rqQuotaUser
               (Just _rqPrettyPrint)
               _rqUserIP

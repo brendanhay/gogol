@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -71,7 +72,7 @@ data EditsAPKsUpload' = EditsAPKsUpload'
     , _eapkuOAuthToken  :: !(Maybe OAuthToken)
     , _eapkuEditId      :: !Text
     , _eapkuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsAPKsUpload'' with the minimum fields required to make a request.
 --
@@ -173,14 +174,14 @@ instance GoogleRequest EditsAPKsUpload' where
         type Rs EditsAPKsUpload' = APK
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u EditsAPKsUpload'{..}
-          = go _eapkuMedia _eapkuPackageName _eapkuEditId
-              _eapkuQuotaUser
+          = go _eapkuPackageName _eapkuEditId _eapkuQuotaUser
               (Just _eapkuPrettyPrint)
               _eapkuUserIP
               _eapkuFields
               _eapkuKey
               _eapkuOAuthToken
               (Just AltJSON)
+              _eapkuMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EditsAPKsUploadResource)

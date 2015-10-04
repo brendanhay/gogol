@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.Analytics.Management.Experiments.Update
     , meuWebPropertyId
     , meuUserIP
     , meuProfileId
-    , meuExperiment
+    , meuPayload
     , meuAccountId
     , meuExperimentId
     , meuKey
@@ -77,13 +78,13 @@ data ManagementExperimentsUpdate' = ManagementExperimentsUpdate'
     , _meuWebPropertyId :: !Text
     , _meuUserIP        :: !(Maybe Text)
     , _meuProfileId     :: !Text
-    , _meuExperiment    :: !Experiment
+    , _meuPayload       :: !Experiment
     , _meuAccountId     :: !Text
     , _meuExperimentId  :: !Text
     , _meuKey           :: !(Maybe Key)
     , _meuOAuthToken    :: !(Maybe OAuthToken)
     , _meuFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsUpdate'' with the minimum fields required to make a request.
 --
@@ -99,7 +100,7 @@ data ManagementExperimentsUpdate' = ManagementExperimentsUpdate'
 --
 -- * 'meuProfileId'
 --
--- * 'meuExperiment'
+-- * 'meuPayload'
 --
 -- * 'meuAccountId'
 --
@@ -113,18 +114,18 @@ data ManagementExperimentsUpdate' = ManagementExperimentsUpdate'
 managementExperimentsUpdate'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
-    -> Experiment -- ^ 'Experiment'
+    -> Experiment -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'experimentId'
     -> ManagementExperimentsUpdate'
-managementExperimentsUpdate' pMeuWebPropertyId_ pMeuProfileId_ pMeuExperiment_ pMeuAccountId_ pMeuExperimentId_ =
+managementExperimentsUpdate' pMeuWebPropertyId_ pMeuProfileId_ pMeuPayload_ pMeuAccountId_ pMeuExperimentId_ =
     ManagementExperimentsUpdate'
     { _meuQuotaUser = Nothing
     , _meuPrettyPrint = False
     , _meuWebPropertyId = pMeuWebPropertyId_
     , _meuUserIP = Nothing
     , _meuProfileId = pMeuProfileId_
-    , _meuExperiment = pMeuExperiment_
+    , _meuPayload = pMeuPayload_
     , _meuAccountId = pMeuAccountId_
     , _meuExperimentId = pMeuExperimentId_
     , _meuKey = Nothing
@@ -163,10 +164,9 @@ meuProfileId
   = lens _meuProfileId (\ s a -> s{_meuProfileId = a})
 
 -- | Multipart request metadata.
-meuExperiment :: Lens' ManagementExperimentsUpdate' Experiment
-meuExperiment
-  = lens _meuExperiment
-      (\ s a -> s{_meuExperiment = a})
+meuPayload :: Lens' ManagementExperimentsUpdate' Experiment
+meuPayload
+  = lens _meuPayload (\ s a -> s{_meuPayload = a})
 
 -- | Account ID of the experiment to update.
 meuAccountId :: Lens' ManagementExperimentsUpdate' Text
@@ -215,7 +215,7 @@ instance GoogleRequest ManagementExperimentsUpdate'
               _meuKey
               _meuOAuthToken
               (Just AltJSON)
-              _meuExperiment
+              _meuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementExperimentsUpdateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,21 +59,19 @@ type EventTagsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "eventTags" :>
-           QueryParam "adId" Int64 :>
-             QueryParam "advertiserId" Int64 :>
-               QueryParam "campaignId" Int64 :>
-                 QueryParam "definitionsOnly" Bool :>
-                   QueryParam "enabled" Bool :>
-                     QueryParams "eventTagTypes"
-                       DfareportingEventTagsListEventTagTypes
-                       :>
+           QueryParam "definitionsOnly" Bool :>
+             QueryParams "eventTagTypes" EventTagTypes :>
+               QueryParam "enabled" Bool :>
+                 QueryParam "advertiserId" Int64 :>
+                   QueryParam "searchString" Text :>
+                     QueryParam "campaignId" Int64 :>
                        QueryParams "ids" Int64 :>
-                         QueryParam "searchString" Text :>
-                           QueryParam "sortField"
-                             DfareportingEventTagsListSortField
-                             :>
-                             QueryParam "sortOrder"
-                               DfareportingEventTagsListSortOrder
+                         QueryParam "sortOrder"
+                           DfareportingEventTagsListSortOrder
+                           :>
+                           QueryParam "adId" Int64 :>
+                             QueryParam "sortField"
+                               DfareportingEventTagsListSortField
                                :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
@@ -90,13 +89,13 @@ data EventTagsList' = EventTagsList'
     { _etlQuotaUser       :: !(Maybe Text)
     , _etlPrettyPrint     :: !Bool
     , _etlDefinitionsOnly :: !(Maybe Bool)
-    , _etlEventTagTypes   :: !(Maybe DfareportingEventTagsListEventTagTypes)
+    , _etlEventTagTypes   :: !(Maybe EventTagTypes)
     , _etlEnabled         :: !(Maybe Bool)
     , _etlUserIP          :: !(Maybe Text)
     , _etlAdvertiserId    :: !(Maybe Int64)
     , _etlSearchString    :: !(Maybe Text)
     , _etlCampaignId      :: !(Maybe Int64)
-    , _etlIds             :: !(Maybe Int64)
+    , _etlIds             :: !(Maybe [Int64])
     , _etlProfileId       :: !Int64
     , _etlSortOrder       :: !(Maybe DfareportingEventTagsListSortOrder)
     , _etlKey             :: !(Maybe Key)
@@ -104,7 +103,7 @@ data EventTagsList' = EventTagsList'
     , _etlSortField       :: !(Maybe DfareportingEventTagsListSortField)
     , _etlOAuthToken      :: !(Maybe OAuthToken)
     , _etlFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsList'' with the minimum fields required to make a request.
 --
@@ -195,7 +194,7 @@ etlDefinitionsOnly
 -- types can be used to specify whether to use a third-party pixel, a
 -- third-party JavaScript URL, or a third-party click-through URL for
 -- either impression or click tracking.
-etlEventTagTypes :: Lens' EventTagsList' (Maybe DfareportingEventTagsListEventTagTypes)
+etlEventTagTypes :: Lens' EventTagsList' (Maybe EventTagTypes)
 etlEventTagTypes
   = lens _etlEventTagTypes
       (\ s a -> s{_etlEventTagTypes = a})
@@ -242,8 +241,10 @@ etlCampaignId
       (\ s a -> s{_etlCampaignId = a})
 
 -- | Select only event tags with these IDs.
-etlIds :: Lens' EventTagsList' (Maybe Int64)
-etlIds = lens _etlIds (\ s a -> s{_etlIds = a})
+etlIds :: Lens' EventTagsList' [Int64]
+etlIds
+  = lens _etlIds (\ s a -> s{_etlIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 etlProfileId :: Lens' EventTagsList' Int64
@@ -289,15 +290,16 @@ instance GoogleRequest EventTagsList' where
         type Rs EventTagsList' = EventTagsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u EventTagsList'{..}
-          = go _etlAdId _etlAdvertiserId _etlCampaignId
-              _etlDefinitionsOnly
+          = go _etlProfileId _etlDefinitionsOnly
+              (_etlEventTagTypes ^. _Default)
               _etlEnabled
-              _etlEventTagTypes
-              _etlIds
+              _etlAdvertiserId
               _etlSearchString
-              _etlSortField
+              _etlCampaignId
+              (_etlIds ^. _Default)
               _etlSortOrder
-              _etlProfileId
+              _etlAdId
+              _etlSortField
               _etlQuotaUser
               (Just _etlPrettyPrint)
               _etlUserIP

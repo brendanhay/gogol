@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -30,11 +31,11 @@ module Network.Google.Resource.Calendar.CalendarList.Update
     , CalendarListUpdate'
 
     -- * Request Lenses
-    , cluCalendarListEntry
     , cluQuotaUser
     , cluCalendarId
     , cluPrettyPrint
     , cluUserIP
+    , cluPayload
     , cluColorRgbFormat
     , cluKey
     , cluOAuthToken
@@ -66,22 +67,20 @@ type CalendarListUpdateResource =
 --
 -- /See:/ 'calendarListUpdate'' smart constructor.
 data CalendarListUpdate' = CalendarListUpdate'
-    { _cluCalendarListEntry :: !CalendarListEntry
-    , _cluQuotaUser         :: !(Maybe Text)
-    , _cluCalendarId        :: !Text
-    , _cluPrettyPrint       :: !Bool
-    , _cluUserIP            :: !(Maybe Text)
-    , _cluColorRgbFormat    :: !(Maybe Bool)
-    , _cluKey               :: !(Maybe Key)
-    , _cluOAuthToken        :: !(Maybe OAuthToken)
-    , _cluFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cluQuotaUser      :: !(Maybe Text)
+    , _cluCalendarId     :: !Text
+    , _cluPrettyPrint    :: !Bool
+    , _cluUserIP         :: !(Maybe Text)
+    , _cluPayload        :: !CalendarListEntry
+    , _cluColorRgbFormat :: !(Maybe Bool)
+    , _cluKey            :: !(Maybe Key)
+    , _cluOAuthToken     :: !(Maybe OAuthToken)
+    , _cluFields         :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'cluCalendarListEntry'
 --
 -- * 'cluQuotaUser'
 --
@@ -91,6 +90,8 @@ data CalendarListUpdate' = CalendarListUpdate'
 --
 -- * 'cluUserIP'
 --
+-- * 'cluPayload'
+--
 -- * 'cluColorRgbFormat'
 --
 -- * 'cluKey'
@@ -99,27 +100,21 @@ data CalendarListUpdate' = CalendarListUpdate'
 --
 -- * 'cluFields'
 calendarListUpdate'
-    :: CalendarListEntry -- ^ 'CalendarListEntry'
-    -> Text -- ^ 'calendarId'
+    :: Text -- ^ 'calendarId'
+    -> CalendarListEntry -- ^ 'payload'
     -> CalendarListUpdate'
-calendarListUpdate' pCluCalendarListEntry_ pCluCalendarId_ =
+calendarListUpdate' pCluCalendarId_ pCluPayload_ =
     CalendarListUpdate'
-    { _cluCalendarListEntry = pCluCalendarListEntry_
-    , _cluQuotaUser = Nothing
+    { _cluQuotaUser = Nothing
     , _cluCalendarId = pCluCalendarId_
     , _cluPrettyPrint = True
     , _cluUserIP = Nothing
+    , _cluPayload = pCluPayload_
     , _cluColorRgbFormat = Nothing
     , _cluKey = Nothing
     , _cluOAuthToken = Nothing
     , _cluFields = Nothing
     }
-
--- | Multipart request metadata.
-cluCalendarListEntry :: Lens' CalendarListUpdate' CalendarListEntry
-cluCalendarListEntry
-  = lens _cluCalendarListEntry
-      (\ s a -> s{_cluCalendarListEntry = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -147,6 +142,11 @@ cluPrettyPrint
 cluUserIP :: Lens' CalendarListUpdate' (Maybe Text)
 cluUserIP
   = lens _cluUserIP (\ s a -> s{_cluUserIP = a})
+
+-- | Multipart request metadata.
+cluPayload :: Lens' CalendarListUpdate' CalendarListEntry
+cluPayload
+  = lens _cluPayload (\ s a -> s{_cluPayload = a})
 
 -- | Whether to use the foregroundColor and backgroundColor fields to write
 -- the calendar colors (RGB). If this feature is used, the index-based
@@ -182,14 +182,14 @@ instance GoogleRequest CalendarListUpdate' where
         type Rs CalendarListUpdate' = CalendarListEntry
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarListUpdate'{..}
-          = go _cluColorRgbFormat _cluCalendarId _cluQuotaUser
+          = go _cluCalendarId _cluColorRgbFormat _cluQuotaUser
               (Just _cluPrettyPrint)
               _cluUserIP
               _cluFields
               _cluKey
               _cluOAuthToken
               (Just AltJSON)
-              _cluCalendarListEntry
+              _cluPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CalendarListUpdateResource)

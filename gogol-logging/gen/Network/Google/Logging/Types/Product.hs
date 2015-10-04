@@ -56,10 +56,10 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'status' smart constructor.
 data Status = Status
-    { _sDetails :: !(Maybe [StatusDetails])
+    { _sDetails :: !(Maybe [DetailsItem])
     , _sCode    :: !(Maybe Int32)
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -81,7 +81,7 @@ status =
 
 -- | A list of messages that carry the error details. There will be a common
 -- set of message types for APIs to use.
-sDetails :: Lens' Status [StatusDetails]
+sDetails :: Lens' Status [DetailsItem]
 sDetails
   = lens _sDetails (\ s a -> s{_sDetails = a}) .
       _Default
@@ -120,8 +120,8 @@ instance ToJSON Status where
 data Log = Log
     { _lName        :: !(Maybe Text)
     , _lDisplayName :: !(Maybe Text)
-    , _lPayLoadType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _lPayloadType :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Log' with the minimum fields required to make a request.
 --
@@ -131,14 +131,14 @@ data Log = Log
 --
 -- * 'lDisplayName'
 --
--- * 'lPayLoadType'
+-- * 'lPayloadType'
 log
     :: Log
 log =
     Log
     { _lName = Nothing
     , _lDisplayName = Nothing
-    , _lPayLoadType = Nothing
+    , _lPayloadType = Nothing
     }
 
 -- | The resource name of the log. Example:
@@ -159,9 +159,9 @@ lDisplayName
 
 -- | _Optional_. A URI representing the expected payload type for log
 -- entries.
-lPayLoadType :: Lens' Log (Maybe Text)
-lPayLoadType
-  = lens _lPayLoadType (\ s a -> s{_lPayLoadType = a})
+lPayloadType :: Lens' Log (Maybe Text)
+lPayloadType
+  = lens _lPayloadType (\ s a -> s{_lPayloadType = a})
 
 instance FromJSON Log where
         parseJSON
@@ -177,7 +177,7 @@ instance ToJSON Log where
               (catMaybes
                  [("name" .=) <$> _lName,
                   ("displayName" .=) <$> _lDisplayName,
-                  ("payloadType" .=) <$> _lPayLoadType])
+                  ("payloadType" .=) <$> _lPayloadType])
 
 -- | Describes a problem with a logging resource or operation.
 --
@@ -186,7 +186,7 @@ data LogError = LogError
     { _leStatus    :: !(Maybe Status)
     , _leResource  :: !(Maybe Text)
     , _leTimeNanos :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogError' with the minimum fields required to make a request.
 --
@@ -239,13 +239,32 @@ instance ToJSON LogError where
                   ("resource" .=) <$> _leResource,
                   ("timeNanos" .=) <$> _leTimeNanos])
 
+--
+-- /See:/ 'detailsItem' smart constructor.
+data DetailsItem =
+    DetailsItem
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DetailsItem' with the minimum fields required to make a request.
+--
+detailsItem
+    :: DetailsItem
+detailsItem = DetailsItem
+
+instance FromJSON DetailsItem where
+        parseJSON
+          = withObject "DetailsItem" (\ o -> pure DetailsItem)
+
+instance ToJSON DetailsItem where
+        toJSON = const (Object mempty)
+
 -- | The parameters to WriteLogEntries.
 --
 -- /See:/ 'writeLogEntriesRequest' smart constructor.
 data WriteLogEntriesRequest = WriteLogEntriesRequest
     { _wlerEntries      :: !(Maybe [LogEntry])
-    , _wlerCommonLabels :: !(Maybe WriteLogEntriesRequestCommonLabels)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _wlerCommonLabels :: !(Maybe CommonLabels)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WriteLogEntriesRequest' with the minimum fields required to make a request.
 --
@@ -274,7 +293,7 @@ wlerEntries
 -- field. If any of the log entries contains a (key, value) with the same
 -- key that is in \`commonLabels\`, then the entry\'s (key, value)
 -- overrides the one in \`commonLabels\`.
-wlerCommonLabels :: Lens' WriteLogEntriesRequest (Maybe WriteLogEntriesRequestCommonLabels)
+wlerCommonLabels :: Lens' WriteLogEntriesRequest (Maybe CommonLabels)
 wlerCommonLabels
   = lens _wlerCommonLabels
       (\ s a -> s{_wlerCommonLabels = a})
@@ -293,33 +312,6 @@ instance ToJSON WriteLogEntriesRequest where
               (catMaybes
                  [("entries" .=) <$> _wlerEntries,
                   ("commonLabels" .=) <$> _wlerCommonLabels])
-
--- | Metadata labels that apply to all log entries in this request, so that
--- you don\'t have to repeat them in each log entry\'s \`metadata.labels\`
--- field. If any of the log entries contains a (key, value) with the same
--- key that is in \`commonLabels\`, then the entry\'s (key, value)
--- overrides the one in \`commonLabels\`.
---
--- /See:/ 'writeLogEntriesRequestCommonLabels' smart constructor.
-data WriteLogEntriesRequestCommonLabels =
-    WriteLogEntriesRequestCommonLabels
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'WriteLogEntriesRequestCommonLabels' with the minimum fields required to make a request.
---
-writeLogEntriesRequestCommonLabels
-    :: WriteLogEntriesRequestCommonLabels
-writeLogEntriesRequestCommonLabels = WriteLogEntriesRequestCommonLabels
-
-instance FromJSON WriteLogEntriesRequestCommonLabels
-         where
-        parseJSON
-          = withObject "WriteLogEntriesRequestCommonLabels"
-              (\ o -> pure WriteLogEntriesRequestCommonLabels)
-
-instance ToJSON WriteLogEntriesRequestCommonLabels
-         where
-        toJSON = const (Object mempty)
 
 -- | Complete log information about a single request to an application.
 --
@@ -356,7 +348,7 @@ data RequestLog = RequestLog
     , _rlResponseSize      :: !(Maybe Int64)
     , _rlSourceReference   :: !(Maybe [SourceReference])
     , _rlAppEngineRelease  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RequestLog' with the minimum fields required to make a request.
 --
@@ -721,7 +713,7 @@ instance ToJSON RequestLog where
 -- /See:/ 'empty' smart constructor.
 data Empty =
     Empty
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -744,11 +736,11 @@ data LogEntryMetadata = LogEntryMetadata
     , _lemZone        :: !(Maybe Text)
     , _lemUserId      :: !(Maybe Text)
     , _lemServiceName :: !(Maybe Text)
-    , _lemLabels      :: !(Maybe LogEntryMetadataLabels)
+    , _lemLabels      :: !(Maybe Labels)
     , _lemRegion      :: !(Maybe Text)
     , _lemProjectId   :: !(Maybe Text)
     , _lemTimestamp   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogEntryMetadata' with the minimum fields required to make a request.
 --
@@ -819,7 +811,7 @@ lemServiceName
 -- Compute Engine labels: Google Compute Engine, service_name
 -- \`compute.googleapis.com\`: \"compute.googleapis.com\/resource_type\",
 -- \"instance\" \"compute.googleapis.com\/resource_id\",
-lemLabels :: Lens' LogEntryMetadata (Maybe LogEntryMetadataLabels)
+lemLabels :: Lens' LogEntryMetadata (Maybe Labels)
 lemLabels
   = lens _lemLabels (\ s a -> s{_lemLabels = a})
 
@@ -872,7 +864,7 @@ instance ToJSON LogEntryMetadata where
 -- /See:/ 'listSinksResponse' smart constructor.
 newtype ListSinksResponse = ListSinksResponse
     { _lsrSinks :: Maybe [LogSink]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListSinksResponse' with the minimum fields required to make a request.
 --
@@ -905,27 +897,29 @@ instance ToJSON ListSinksResponse where
         toJSON ListSinksResponse{..}
           = object (catMaybes [("sinks" .=) <$> _lsrSinks])
 
--- | The log entry payload, represented as a protocol buffer that is
--- expressed as a JSON object. You can only pass \`protoPayload\` values
--- that belong to a set of approved types.
+-- | Metadata labels that apply to all log entries in this request, so that
+-- you don\'t have to repeat them in each log entry\'s \`metadata.labels\`
+-- field. If any of the log entries contains a (key, value) with the same
+-- key that is in \`commonLabels\`, then the entry\'s (key, value)
+-- overrides the one in \`commonLabels\`.
 --
--- /See:/ 'logEntryProtoPayLoad' smart constructor.
-data LogEntryProtoPayLoad =
-    LogEntryProtoPayLoad
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'commonLabels' smart constructor.
+data CommonLabels =
+    CommonLabels
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LogEntryProtoPayLoad' with the minimum fields required to make a request.
+-- | Creates a value of 'CommonLabels' with the minimum fields required to make a request.
 --
-logEntryProtoPayLoad
-    :: LogEntryProtoPayLoad
-logEntryProtoPayLoad = LogEntryProtoPayLoad
+commonLabels
+    :: CommonLabels
+commonLabels = CommonLabels
 
-instance FromJSON LogEntryProtoPayLoad where
+instance FromJSON CommonLabels where
         parseJSON
-          = withObject "LogEntryProtoPayLoad"
-              (\ o -> pure LogEntryProtoPayLoad)
+          = withObject "CommonLabels"
+              (\ o -> pure CommonLabels)
 
-instance ToJSON LogEntryProtoPayLoad where
+instance ToJSON CommonLabels where
         toJSON = const (Object mempty)
 
 -- | Result returned from ListLogServiceIndexesRequest.
@@ -934,7 +928,7 @@ instance ToJSON LogEntryProtoPayLoad where
 data ListLogServiceIndexesResponse = ListLogServiceIndexesResponse
     { _llsirNextPageToken        :: !(Maybe Text)
     , _llsirServiceIndexPrefixes :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListLogServiceIndexesResponse' with the minimum fields required to make a request.
 --
@@ -993,7 +987,7 @@ instance ToJSON ListLogServiceIndexesResponse where
 -- /See:/ 'writeLogEntriesResponse' smart constructor.
 data WriteLogEntriesResponse =
     WriteLogEntriesResponse
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WriteLogEntriesResponse' with the minimum fields required to make a request.
 --
@@ -1017,7 +1011,7 @@ data LogSink = LogSink
     , _lsName        :: !(Maybe Text)
     , _lsFilter      :: !(Maybe Text)
     , _lsErrors      :: !(Maybe [LogError])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogSink' with the minimum fields required to make a request.
 --
@@ -1091,7 +1085,7 @@ instance ToJSON LogSink where
 data ListLogServicesResponse = ListLogServicesResponse
     { _llsrNextPageToken :: !(Maybe Text)
     , _llsrLogServices   :: !(Maybe [LogService])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListLogServicesResponse' with the minimum fields required to make a request.
 --
@@ -1141,33 +1135,13 @@ instance ToJSON ListLogServicesResponse where
                  [("nextPageToken" .=) <$> _llsrNextPageToken,
                   ("logServices" .=) <$> _llsrLogServices])
 
---
--- /See:/ 'statusDetails' smart constructor.
-data StatusDetails =
-    StatusDetails
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'StatusDetails' with the minimum fields required to make a request.
---
-statusDetails
-    :: StatusDetails
-statusDetails = StatusDetails
-
-instance FromJSON StatusDetails where
-        parseJSON
-          = withObject "StatusDetails"
-              (\ o -> pure StatusDetails)
-
-instance ToJSON StatusDetails where
-        toJSON = const (Object mempty)
-
 -- | Result returned from ListLogs.
 --
 -- /See:/ 'listLogsResponse' smart constructor.
 data ListLogsResponse = ListLogsResponse
     { _llrNextPageToken :: !(Maybe Text)
     , _llrLogs          :: !(Maybe [Log])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListLogsResponse' with the minimum fields required to make a request.
 --
@@ -1226,7 +1200,7 @@ data HTTPRequest = HTTPRequest
     , _httprResponseSize  :: !(Maybe Int64)
     , _httprRequestMethod :: !(Maybe Text)
     , _httprReferer       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPRequest' with the minimum fields required to make a request.
 --
@@ -1339,12 +1313,34 @@ instance ToJSON HTTPRequest where
                   ("requestMethod" .=) <$> _httprRequestMethod,
                   ("referer" .=) <$> _httprReferer])
 
+-- | The log entry payload, represented as a structure that is expressed as a
+-- JSON object.
+--
+-- /See:/ 'structPayload' smart constructor.
+data StructPayload =
+    StructPayload
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StructPayload' with the minimum fields required to make a request.
+--
+structPayload
+    :: StructPayload
+structPayload = StructPayload
+
+instance FromJSON StructPayload where
+        parseJSON
+          = withObject "StructPayload"
+              (\ o -> pure StructPayload)
+
+instance ToJSON StructPayload where
+        toJSON = const (Object mempty)
+
 -- | Result returned from \`ListLogSinks\`.
 --
 -- /See:/ 'listLogSinksResponse' smart constructor.
 newtype ListLogSinksResponse = ListLogSinksResponse
     { _llsrSinks :: Maybe [LogSink]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListLogSinksResponse' with the minimum fields required to make a request.
 --
@@ -1383,7 +1379,7 @@ instance ToJSON ListLogSinksResponse where
 data LogService = LogService
     { _logName      :: !(Maybe Text)
     , _logIndexKeys :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogService' with the minimum fields required to make a request.
 --
@@ -1439,7 +1435,7 @@ instance ToJSON LogService where
 -- /See:/ 'listLogServiceSinksResponse' smart constructor.
 newtype ListLogServiceSinksResponse = ListLogServiceSinksResponse
     { _llssrSinks :: Maybe [LogSink]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListLogServiceSinksResponse' with the minimum fields required to make a request.
 --
@@ -1481,7 +1477,7 @@ data LogLine = LogLine
     , _llSeverity       :: !(Maybe Text)
     , _llLogMessage     :: !(Maybe Text)
     , _llSourceLocation :: !(Maybe SourceLocation)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogLine' with the minimum fields required to make a request.
 --
@@ -1554,23 +1550,44 @@ instance ToJSON LogLine where
 -- \`compute.googleapis.com\`: \"compute.googleapis.com\/resource_type\",
 -- \"instance\" \"compute.googleapis.com\/resource_id\",
 --
--- /See:/ 'logEntryMetadataLabels' smart constructor.
-data LogEntryMetadataLabels =
-    LogEntryMetadataLabels
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'labels' smart constructor.
+data Labels =
+    Labels
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LogEntryMetadataLabels' with the minimum fields required to make a request.
+-- | Creates a value of 'Labels' with the minimum fields required to make a request.
 --
-logEntryMetadataLabels
-    :: LogEntryMetadataLabels
-logEntryMetadataLabels = LogEntryMetadataLabels
+labels
+    :: Labels
+labels = Labels
 
-instance FromJSON LogEntryMetadataLabels where
+instance FromJSON Labels where
+        parseJSON = withObject "Labels" (\ o -> pure Labels)
+
+instance ToJSON Labels where
+        toJSON = const (Object mempty)
+
+-- | The log entry payload, represented as a protocol buffer that is
+-- expressed as a JSON object. You can only pass \`protoPayload\` values
+-- that belong to a set of approved types.
+--
+-- /See:/ 'protoPayload' smart constructor.
+data ProtoPayload =
+    ProtoPayload
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ProtoPayload' with the minimum fields required to make a request.
+--
+protoPayload
+    :: ProtoPayload
+protoPayload = ProtoPayload
+
+instance FromJSON ProtoPayload where
         parseJSON
-          = withObject "LogEntryMetadataLabels"
-              (\ o -> pure LogEntryMetadataLabels)
+          = withObject "ProtoPayload"
+              (\ o -> pure ProtoPayload)
 
-instance ToJSON LogEntryMetadataLabels where
+instance ToJSON ProtoPayload where
         toJSON = const (Object mempty)
 
 -- | An individual entry in a log.
@@ -1578,13 +1595,13 @@ instance ToJSON LogEntryMetadataLabels where
 -- /See:/ 'logEntry' smart constructor.
 data LogEntry = LogEntry
     { _leLog           :: !(Maybe Text)
-    , _leTextPayLoad   :: !(Maybe Text)
+    , _leTextPayload   :: !(Maybe Text)
     , _leHTTPRequest   :: !(Maybe HTTPRequest)
-    , _leStructPayLoad :: !(Maybe LogEntryStructPayLoad)
+    , _leStructPayload :: !(Maybe StructPayload)
     , _leInsertId      :: !(Maybe Text)
     , _leMetadata      :: !(Maybe LogEntryMetadata)
-    , _leProtoPayLoad  :: !(Maybe LogEntryProtoPayLoad)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _leProtoPayload  :: !(Maybe ProtoPayload)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogEntry' with the minimum fields required to make a request.
 --
@@ -1592,28 +1609,28 @@ data LogEntry = LogEntry
 --
 -- * 'leLog'
 --
--- * 'leTextPayLoad'
+-- * 'leTextPayload'
 --
 -- * 'leHTTPRequest'
 --
--- * 'leStructPayLoad'
+-- * 'leStructPayload'
 --
 -- * 'leInsertId'
 --
 -- * 'leMetadata'
 --
--- * 'leProtoPayLoad'
+-- * 'leProtoPayload'
 logEntry
     :: LogEntry
 logEntry =
     LogEntry
     { _leLog = Nothing
-    , _leTextPayLoad = Nothing
+    , _leTextPayload = Nothing
     , _leHTTPRequest = Nothing
-    , _leStructPayLoad = Nothing
+    , _leStructPayload = Nothing
     , _leInsertId = Nothing
     , _leMetadata = Nothing
-    , _leProtoPayLoad = Nothing
+    , _leProtoPayload = Nothing
     }
 
 -- | The log to which this entry belongs. When a log entry is ingested, the
@@ -1622,10 +1639,10 @@ leLog :: Lens' LogEntry (Maybe Text)
 leLog = lens _leLog (\ s a -> s{_leLog = a})
 
 -- | The log entry payload, represented as a text string.
-leTextPayLoad :: Lens' LogEntry (Maybe Text)
-leTextPayLoad
-  = lens _leTextPayLoad
-      (\ s a -> s{_leTextPayLoad = a})
+leTextPayload :: Lens' LogEntry (Maybe Text)
+leTextPayload
+  = lens _leTextPayload
+      (\ s a -> s{_leTextPayload = a})
 
 -- | Information about the HTTP request associated with this log entry, if
 -- applicable.
@@ -1636,10 +1653,10 @@ leHTTPRequest
 
 -- | The log entry payload, represented as a structure that is expressed as a
 -- JSON object.
-leStructPayLoad :: Lens' LogEntry (Maybe LogEntryStructPayLoad)
-leStructPayLoad
-  = lens _leStructPayLoad
-      (\ s a -> s{_leStructPayLoad = a})
+leStructPayload :: Lens' LogEntry (Maybe StructPayload)
+leStructPayload
+  = lens _leStructPayload
+      (\ s a -> s{_leStructPayload = a})
 
 -- | A unique ID for the log entry. If you provide this field, the logging
 -- service considers other log entries in the same log with the same ID as
@@ -1656,10 +1673,10 @@ leMetadata
 -- | The log entry payload, represented as a protocol buffer that is
 -- expressed as a JSON object. You can only pass \`protoPayload\` values
 -- that belong to a set of approved types.
-leProtoPayLoad :: Lens' LogEntry (Maybe LogEntryProtoPayLoad)
-leProtoPayLoad
-  = lens _leProtoPayLoad
-      (\ s a -> s{_leProtoPayLoad = a})
+leProtoPayload :: Lens' LogEntry (Maybe ProtoPayload)
+leProtoPayload
+  = lens _leProtoPayload
+      (\ s a -> s{_leProtoPayload = a})
 
 instance FromJSON LogEntry where
         parseJSON
@@ -1678,12 +1695,12 @@ instance ToJSON LogEntry where
           = object
               (catMaybes
                  [("log" .=) <$> _leLog,
-                  ("textPayload" .=) <$> _leTextPayLoad,
+                  ("textPayload" .=) <$> _leTextPayload,
                   ("httpRequest" .=) <$> _leHTTPRequest,
-                  ("structPayload" .=) <$> _leStructPayLoad,
+                  ("structPayload" .=) <$> _leStructPayload,
                   ("insertId" .=) <$> _leInsertId,
                   ("metadata" .=) <$> _leMetadata,
-                  ("protoPayload" .=) <$> _leProtoPayLoad])
+                  ("protoPayload" .=) <$> _leProtoPayload])
 
 -- | Specifies a location in a source file.
 --
@@ -1692,7 +1709,7 @@ data SourceLocation = SourceLocation
     { _slLine         :: !(Maybe Int64)
     , _slFunctionName :: !(Maybe Text)
     , _slFile         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceLocation' with the minimum fields required to make a request.
 --
@@ -1754,7 +1771,7 @@ instance ToJSON SourceLocation where
 data SourceReference = SourceReference
     { _srRepository :: !(Maybe Text)
     , _srRevisionId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceReference' with the minimum fields required to make a request.
 --
@@ -1796,25 +1813,3 @@ instance ToJSON SourceReference where
               (catMaybes
                  [("repository" .=) <$> _srRepository,
                   ("revisionId" .=) <$> _srRevisionId])
-
--- | The log entry payload, represented as a structure that is expressed as a
--- JSON object.
---
--- /See:/ 'logEntryStructPayLoad' smart constructor.
-data LogEntryStructPayLoad =
-    LogEntryStructPayLoad
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LogEntryStructPayLoad' with the minimum fields required to make a request.
---
-logEntryStructPayLoad
-    :: LogEntryStructPayLoad
-logEntryStructPayLoad = LogEntryStructPayLoad
-
-instance FromJSON LogEntryStructPayLoad where
-        parseJSON
-          = withObject "LogEntryStructPayLoad"
-              (\ o -> pure LogEntryStructPayLoad)
-
-instance ToJSON LogEntryStructPayLoad where
-        toJSON = const (Object mempty)

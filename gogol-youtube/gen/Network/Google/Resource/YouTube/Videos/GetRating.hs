@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -49,8 +50,8 @@ import           Network.Google.YouTube.Types
 type VideosGetRatingResource =
      "videos" :>
        "getRating" :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "id" Text :>
+         QueryParam "id" Text :>
+           QueryParam "onBehalfOfContentOwner" Text :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -73,7 +74,7 @@ data VideosGetRating' = VideosGetRating'
     , _vgrId                     :: !Text
     , _vgrOAuthToken             :: !(Maybe OAuthToken)
     , _vgrFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosGetRating'' with the minimum fields required to make a request.
 --
@@ -174,7 +175,7 @@ instance GoogleRequest VideosGetRating' where
         type Rs VideosGetRating' = VideoGetRatingResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u VideosGetRating'{..}
-          = go _vgrOnBehalfOfContentOwner (Just _vgrId)
+          = go (Just _vgrId) _vgrOnBehalfOfContentOwner
               _vgrQuotaUser
               (Just _vgrPrettyPrint)
               _vgrUserIP

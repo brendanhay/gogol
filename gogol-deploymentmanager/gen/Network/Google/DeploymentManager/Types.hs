@@ -17,24 +17,8 @@ module Network.Google.DeploymentManager.Types
     -- * Service URL
       deploymentManagerURL
 
-    -- * OperationWarnings
-    , OperationWarnings
-    , operationWarnings
-    , owData
-    , owCode
-    , owMessage
-
-    -- * OperationWarningsData
-    , OperationWarningsData
-    , operationWarningsData
-    , owdValue
-    , owdKey
-
-    -- * DeploymentManagerDeploymentsPatchDeletePolicy
-    , DeploymentManagerDeploymentsPatchDeletePolicy (..)
-
-    -- * DeploymentManagerDeploymentsPatchUpdatePolicy
-    , DeploymentManagerDeploymentsPatchUpdatePolicy (..)
+    -- * CreatePolicy
+    , CreatePolicy (..)
 
     -- * OperationsListResponse
     , OperationsListResponse
@@ -47,9 +31,6 @@ module Network.Google.DeploymentManager.Types
     , typesListResponse
     , tlrNextPageToken
     , tlrTypes
-
-    -- * DeploymentManagerDeploymentsPatchCreatePolicy
-    , DeploymentManagerDeploymentsPatchCreatePolicy (..)
 
     -- * DeploymentManagerDeploymentsUpdateCreatePolicy
     , DeploymentManagerDeploymentsUpdateCreatePolicy (..)
@@ -92,6 +73,11 @@ module Network.Google.DeploymentManager.Types
     -- * DeploymentManagerDeploymentsUpdateDeletePolicy
     , DeploymentManagerDeploymentsUpdateDeletePolicy (..)
 
+    -- * Error'
+    , Error'
+    , error'
+    , eErrors
+
     -- * DeploymentUpdate
     , DeploymentUpdate
     , deploymentUpdate
@@ -107,6 +93,19 @@ module Network.Google.DeploymentManager.Types
     , ruFinalProperties
     , ruErrors
     , ruProperties
+
+    -- * UpdatePolicy
+    , UpdatePolicy (..)
+
+    -- * DeletePolicy
+    , DeletePolicy (..)
+
+    -- * WarningsItem
+    , WarningsItem
+    , warningsItem
+    , wiData
+    , wiCode
+    , wiMessage
 
     -- * Manifest
     , Manifest
@@ -134,10 +133,11 @@ module Network.Google.DeploymentManager.Types
     , rUpdate
     , rProperties
 
-    -- * OperationError
-    , OperationError
-    , operationError
-    , oeErrors
+    -- * DataItem
+    , DataItem
+    , dataItem
+    , dValue
+    , dKey
 
     -- * ManifestsListResponse
     , ManifestsListResponse
@@ -165,12 +165,12 @@ module Network.Google.DeploymentManager.Types
     , dlrNextPageToken
     , dlrDeployments
 
-    -- * OperationErrorErrors
-    , OperationErrorErrors
-    , operationErrorErrors
-    , oeeLocation
-    , oeeCode
-    , oeeMessage
+    -- * ErrorsItem
+    , ErrorsItem
+    , errorsItem
+    , eiLocation
+    , eiCode
+    , eiMessage
 
     -- * Deployment
     , Deployment

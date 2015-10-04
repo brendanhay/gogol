@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.Storage.Buckets.Update
     , buPrettyPrint
     , buUserIP
     , buBucket
-    , buBucket
+    , buPayload
     , buKey
     , buIfMetagenerationNotMatch
     , buProjection
@@ -73,14 +74,14 @@ data BucketsUpdate' = BucketsUpdate'
     , _buIfMetagenerationMatch    :: !(Maybe Word64)
     , _buPrettyPrint              :: !Bool
     , _buUserIP                   :: !(Maybe Text)
-    , _buBucket                   :: !Bucket
     , _buBucket                   :: !Text
+    , _buPayload                  :: !Bucket
     , _buKey                      :: !(Maybe Key)
     , _buIfMetagenerationNotMatch :: !(Maybe Word64)
     , _buProjection               :: !(Maybe StorageBucketsUpdateProjection)
     , _buOAuthToken               :: !(Maybe OAuthToken)
     , _buFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsUpdate'' with the minimum fields required to make a request.
 --
@@ -96,7 +97,7 @@ data BucketsUpdate' = BucketsUpdate'
 --
 -- * 'buBucket'
 --
--- * 'buBucket'
+-- * 'buPayload'
 --
 -- * 'buKey'
 --
@@ -108,17 +109,17 @@ data BucketsUpdate' = BucketsUpdate'
 --
 -- * 'buFields'
 bucketsUpdate'
-    :: Bucket -- ^ 'Bucket'
-    -> Text -- ^ 'bucket'
+    :: Text -- ^ 'bucket'
+    -> Bucket -- ^ 'payload'
     -> BucketsUpdate'
-bucketsUpdate' pBuBucket_ pBuBucket_ =
+bucketsUpdate' pBuBucket_ pBuPayload_ =
     BucketsUpdate'
     { _buQuotaUser = Nothing
     , _buIfMetagenerationMatch = Nothing
     , _buPrettyPrint = True
     , _buUserIP = Nothing
     , _buBucket = pBuBucket_
-    , _buBucket = pBuBucket_
+    , _buPayload = pBuPayload_
     , _buKey = Nothing
     , _buIfMetagenerationNotMatch = Nothing
     , _buProjection = Nothing
@@ -151,13 +152,14 @@ buPrettyPrint
 buUserIP :: Lens' BucketsUpdate' (Maybe Text)
 buUserIP = lens _buUserIP (\ s a -> s{_buUserIP = a})
 
--- | Multipart request metadata.
-buBucket :: Lens' BucketsUpdate' Bucket
-buBucket = lens _buBucket (\ s a -> s{_buBucket = a})
-
 -- | Name of a bucket.
 buBucket :: Lens' BucketsUpdate' Text
 buBucket = lens _buBucket (\ s a -> s{_buBucket = a})
+
+-- | Multipart request metadata.
+buPayload :: Lens' BucketsUpdate' Bucket
+buPayload
+  = lens _buPayload (\ s a -> s{_buPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -194,10 +196,9 @@ instance GoogleRequest BucketsUpdate' where
         type Rs BucketsUpdate' = Bucket
         request = requestWithRoute defReq storageURL
         requestWithRoute r u BucketsUpdate'{..}
-          = go _buIfMetagenerationMatch
+          = go _buBucket _buIfMetagenerationMatch
               _buIfMetagenerationNotMatch
               _buProjection
-              _buBucket
               _buQuotaUser
               (Just _buPrettyPrint)
               _buUserIP
@@ -205,7 +206,7 @@ instance GoogleRequest BucketsUpdate' where
               _buKey
               _buOAuthToken
               (Just AltJSON)
-              _buBucket
+              _buPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BucketsUpdateResource)

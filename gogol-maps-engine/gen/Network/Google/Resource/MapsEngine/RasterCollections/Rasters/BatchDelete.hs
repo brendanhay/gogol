@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Rasters.BatchDelete
     , rcrbdQuotaUser
     , rcrbdPrettyPrint
     , rcrbdUserIP
-    , rcrbdRasterCollectionsRasterBatchDeleteRequest
+    , rcrbdPayload
     , rcrbdKey
     , rcrbdId
     , rcrbdOAuthToken
@@ -71,15 +72,15 @@ type RasterCollectionsRastersBatchDeleteResource =
 --
 -- /See:/ 'rasterCollectionsRastersBatchDelete'' smart constructor.
 data RasterCollectionsRastersBatchDelete' = RasterCollectionsRastersBatchDelete'
-    { _rcrbdQuotaUser                                 :: !(Maybe Text)
-    , _rcrbdPrettyPrint                               :: !Bool
-    , _rcrbdUserIP                                    :: !(Maybe Text)
-    , _rcrbdRasterCollectionsRasterBatchDeleteRequest :: !RasterCollectionsRasterBatchDeleteRequest
-    , _rcrbdKey                                       :: !(Maybe Key)
-    , _rcrbdId                                        :: !Text
-    , _rcrbdOAuthToken                                :: !(Maybe OAuthToken)
-    , _rcrbdFields                                    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rcrbdQuotaUser   :: !(Maybe Text)
+    , _rcrbdPrettyPrint :: !Bool
+    , _rcrbdUserIP      :: !(Maybe Text)
+    , _rcrbdPayload     :: !RasterCollectionsRasterBatchDeleteRequest
+    , _rcrbdKey         :: !(Maybe Key)
+    , _rcrbdId          :: !Text
+    , _rcrbdOAuthToken  :: !(Maybe OAuthToken)
+    , _rcrbdFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsRastersBatchDelete'' with the minimum fields required to make a request.
 --
@@ -91,7 +92,7 @@ data RasterCollectionsRastersBatchDelete' = RasterCollectionsRastersBatchDelete'
 --
 -- * 'rcrbdUserIP'
 --
--- * 'rcrbdRasterCollectionsRasterBatchDeleteRequest'
+-- * 'rcrbdPayload'
 --
 -- * 'rcrbdKey'
 --
@@ -101,15 +102,15 @@ data RasterCollectionsRastersBatchDelete' = RasterCollectionsRastersBatchDelete'
 --
 -- * 'rcrbdFields'
 rasterCollectionsRastersBatchDelete'
-    :: RasterCollectionsRasterBatchDeleteRequest -- ^ 'RasterCollectionsRasterBatchDeleteRequest'
+    :: RasterCollectionsRasterBatchDeleteRequest -- ^ 'payload'
     -> Text -- ^ 'id'
     -> RasterCollectionsRastersBatchDelete'
-rasterCollectionsRastersBatchDelete' pRcrbdRasterCollectionsRasterBatchDeleteRequest_ pRcrbdId_ =
+rasterCollectionsRastersBatchDelete' pRcrbdPayload_ pRcrbdId_ =
     RasterCollectionsRastersBatchDelete'
     { _rcrbdQuotaUser = Nothing
     , _rcrbdPrettyPrint = True
     , _rcrbdUserIP = Nothing
-    , _rcrbdRasterCollectionsRasterBatchDeleteRequest = pRcrbdRasterCollectionsRasterBatchDeleteRequest_
+    , _rcrbdPayload = pRcrbdPayload_
     , _rcrbdKey = Nothing
     , _rcrbdId = pRcrbdId_
     , _rcrbdOAuthToken = Nothing
@@ -137,13 +138,9 @@ rcrbdUserIP
   = lens _rcrbdUserIP (\ s a -> s{_rcrbdUserIP = a})
 
 -- | Multipart request metadata.
-rcrbdRasterCollectionsRasterBatchDeleteRequest :: Lens' RasterCollectionsRastersBatchDelete' RasterCollectionsRasterBatchDeleteRequest
-rcrbdRasterCollectionsRasterBatchDeleteRequest
-  = lens
-      _rcrbdRasterCollectionsRasterBatchDeleteRequest
-      (\ s a ->
-         s{_rcrbdRasterCollectionsRasterBatchDeleteRequest =
-             a})
+rcrbdPayload :: Lens' RasterCollectionsRastersBatchDelete' RasterCollectionsRasterBatchDeleteRequest
+rcrbdPayload
+  = lens _rcrbdPayload (\ s a -> s{_rcrbdPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -185,7 +182,7 @@ instance GoogleRequest
               _rcrbdKey
               _rcrbdOAuthToken
               (Just AltJSON)
-              _rcrbdRasterCollectionsRasterBatchDeleteRequest
+              _rcrbdPayload
           where go
                   = clientWithRoute
                       (Proxy ::

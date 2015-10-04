@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -81,7 +82,7 @@ data TasksMove' = TasksMove'
     , _tmOAuthToken  :: !(Maybe OAuthToken)
     , _tmFields      :: !(Maybe Text)
     , _tmPrevious    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksMove'' with the minimum fields required to make a request.
 --
@@ -185,7 +186,7 @@ instance GoogleRequest TasksMove' where
         type Rs TasksMove' = Task
         request = requestWithRoute defReq appsTasksURL
         requestWithRoute r u TasksMove'{..}
-          = go _tmParent _tmPrevious _tmTaskList _tmTask
+          = go _tmTaskList _tmTask _tmParent _tmPrevious
               _tmQuotaUser
               (Just _tmPrettyPrint)
               _tmUserIP

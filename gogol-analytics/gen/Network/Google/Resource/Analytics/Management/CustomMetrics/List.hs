@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,8 +55,8 @@ type ManagementCustomMetricsListResource =
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "customMetrics" :>
-                 QueryParam "max-results" Int32 :>
-                   QueryParam "start-index" Int32 :>
+                 QueryParam "start-index" Int32 :>
+                   QueryParam "max-results" Int32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data ManagementCustomMetricsList' = ManagementCustomMetricsList'
     , _mcmlStartIndex    :: !(Maybe Int32)
     , _mcmlMaxResults    :: !(Maybe Int32)
     , _mcmlFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsList'' with the minimum fields required to make a request.
 --
@@ -194,8 +195,9 @@ instance GoogleRequest ManagementCustomMetricsList'
         type Rs ManagementCustomMetricsList' = CustomMetrics
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementCustomMetricsList'{..}
-          = go _mcmlMaxResults _mcmlStartIndex _mcmlAccountId
-              _mcmlWebPropertyId
+          = go _mcmlAccountId _mcmlWebPropertyId
+              _mcmlStartIndex
+              _mcmlMaxResults
               _mcmlQuotaUser
               (Just _mcmlPrettyPrint)
               _mcmlUserIP

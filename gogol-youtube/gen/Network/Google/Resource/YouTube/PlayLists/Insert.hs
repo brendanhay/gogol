@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,11 +35,11 @@ module Network.Google.Resource.YouTube.PlayLists.Insert
     , pliPart
     , pliPrettyPrint
     , pliUserIP
+    , pliPayload
     , pliOnBehalfOfContentOwner
     , pliKey
     , pliOnBehalfOfContentOwnerChannel
     , pliOAuthToken
-    , pliPlayList
     , pliFields
     ) where
 
@@ -49,9 +50,9 @@ import           Network.Google.YouTube.Types
 -- 'PlayListsInsert'' request conforms to.
 type PlayListsInsertResource =
      "playlists" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "onBehalfOfContentOwnerChannel" Text :>
-           QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
+           QueryParam "onBehalfOfContentOwnerChannel" Text :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -69,13 +70,13 @@ data PlayListsInsert' = PlayListsInsert'
     , _pliPart                          :: !Text
     , _pliPrettyPrint                   :: !Bool
     , _pliUserIP                        :: !(Maybe Text)
+    , _pliPayload                       :: !PlayList
     , _pliOnBehalfOfContentOwner        :: !(Maybe Text)
     , _pliKey                           :: !(Maybe Key)
     , _pliOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _pliOAuthToken                    :: !(Maybe OAuthToken)
-    , _pliPlayList                      :: !PlayList
     , _pliFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayListsInsert'' with the minimum fields required to make a request.
 --
@@ -89,6 +90,8 @@ data PlayListsInsert' = PlayListsInsert'
 --
 -- * 'pliUserIP'
 --
+-- * 'pliPayload'
+--
 -- * 'pliOnBehalfOfContentOwner'
 --
 -- * 'pliKey'
@@ -97,24 +100,22 @@ data PlayListsInsert' = PlayListsInsert'
 --
 -- * 'pliOAuthToken'
 --
--- * 'pliPlayList'
---
 -- * 'pliFields'
 playListsInsert'
     :: Text -- ^ 'part'
-    -> PlayList -- ^ 'PlayList'
+    -> PlayList -- ^ 'payload'
     -> PlayListsInsert'
-playListsInsert' pPliPart_ pPliPlayList_ =
+playListsInsert' pPliPart_ pPliPayload_ =
     PlayListsInsert'
     { _pliQuotaUser = Nothing
     , _pliPart = pPliPart_
     , _pliPrettyPrint = True
     , _pliUserIP = Nothing
+    , _pliPayload = pPliPayload_
     , _pliOnBehalfOfContentOwner = Nothing
     , _pliKey = Nothing
     , _pliOnBehalfOfContentOwnerChannel = Nothing
     , _pliOAuthToken = Nothing
-    , _pliPlayList = pPliPlayList_
     , _pliFields = Nothing
     }
 
@@ -142,6 +143,11 @@ pliPrettyPrint
 pliUserIP :: Lens' PlayListsInsert' (Maybe Text)
 pliUserIP
   = lens _pliUserIP (\ s a -> s{_pliUserIP = a})
+
+-- | Multipart request metadata.
+pliPayload :: Lens' PlayListsInsert' PlayList
+pliPayload
+  = lens _pliPayload (\ s a -> s{_pliPayload = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -191,11 +197,6 @@ pliOAuthToken
   = lens _pliOAuthToken
       (\ s a -> s{_pliOAuthToken = a})
 
--- | Multipart request metadata.
-pliPlayList :: Lens' PlayListsInsert' PlayList
-pliPlayList
-  = lens _pliPlayList (\ s a -> s{_pliPlayList = a})
-
 -- | Selector specifying which fields to include in a partial response.
 pliFields :: Lens' PlayListsInsert' (Maybe Text)
 pliFields
@@ -209,9 +210,8 @@ instance GoogleRequest PlayListsInsert' where
         type Rs PlayListsInsert' = PlayList
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u PlayListsInsert'{..}
-          = go _pliOnBehalfOfContentOwner
+          = go (Just _pliPart) _pliOnBehalfOfContentOwner
               _pliOnBehalfOfContentOwnerChannel
-              (Just _pliPart)
               _pliQuotaUser
               (Just _pliPrettyPrint)
               _pliUserIP
@@ -219,7 +219,7 @@ instance GoogleRequest PlayListsInsert' where
               _pliKey
               _pliOAuthToken
               (Just AltJSON)
-              _pliPlayList
+              _pliPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlayListsInsertResource)

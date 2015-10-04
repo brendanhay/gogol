@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.FusionTables.Template.Patch
     , tpPrettyPrint
     , tpTemplateId
     , tpUserIP
+    , tpPayload
     , tpKey
-    , tpTemplate
     , tpOAuthToken
     , tpTableId
     , tpFields
@@ -68,12 +69,12 @@ data TemplatePatch' = TemplatePatch'
     , _tpPrettyPrint :: !Bool
     , _tpTemplateId  :: !Int32
     , _tpUserIP      :: !(Maybe Text)
+    , _tpPayload     :: !Template
     , _tpKey         :: !(Maybe Key)
-    , _tpTemplate    :: !Template
     , _tpOAuthToken  :: !(Maybe OAuthToken)
     , _tpTableId     :: !Text
     , _tpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplatePatch'' with the minimum fields required to make a request.
 --
@@ -87,9 +88,9 @@ data TemplatePatch' = TemplatePatch'
 --
 -- * 'tpUserIP'
 --
--- * 'tpKey'
+-- * 'tpPayload'
 --
--- * 'tpTemplate'
+-- * 'tpKey'
 --
 -- * 'tpOAuthToken'
 --
@@ -98,17 +99,17 @@ data TemplatePatch' = TemplatePatch'
 -- * 'tpFields'
 templatePatch'
     :: Int32 -- ^ 'templateId'
-    -> Template -- ^ 'Template'
+    -> Template -- ^ 'payload'
     -> Text -- ^ 'tableId'
     -> TemplatePatch'
-templatePatch' pTpTemplateId_ pTpTemplate_ pTpTableId_ =
+templatePatch' pTpTemplateId_ pTpPayload_ pTpTableId_ =
     TemplatePatch'
     { _tpQuotaUser = Nothing
     , _tpPrettyPrint = True
     , _tpTemplateId = pTpTemplateId_
     , _tpUserIP = Nothing
+    , _tpPayload = pTpPayload_
     , _tpKey = Nothing
-    , _tpTemplate = pTpTemplate_
     , _tpOAuthToken = Nothing
     , _tpTableId = pTpTableId_
     , _tpFields = Nothing
@@ -137,16 +138,16 @@ tpTemplateId
 tpUserIP :: Lens' TemplatePatch' (Maybe Text)
 tpUserIP = lens _tpUserIP (\ s a -> s{_tpUserIP = a})
 
+-- | Multipart request metadata.
+tpPayload :: Lens' TemplatePatch' Template
+tpPayload
+  = lens _tpPayload (\ s a -> s{_tpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 tpKey :: Lens' TemplatePatch' (Maybe Key)
 tpKey = lens _tpKey (\ s a -> s{_tpKey = a})
-
--- | Multipart request metadata.
-tpTemplate :: Lens' TemplatePatch' Template
-tpTemplate
-  = lens _tpTemplate (\ s a -> s{_tpTemplate = a})
 
 -- | OAuth 2.0 token for the current user.
 tpOAuthToken :: Lens' TemplatePatch' (Maybe OAuthToken)
@@ -177,7 +178,7 @@ instance GoogleRequest TemplatePatch' where
               _tpKey
               _tpOAuthToken
               (Just AltJSON)
-              _tpTemplate
+              _tpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TemplatePatchResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type PlayersListResource =
          "players" :>
            Capture "collection" GamesPlayersListCollection :>
              QueryParam "language" Text :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Int32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -78,7 +79,7 @@ data PlayersList' = PlayersList'
     , _plOAuthToken  :: !(Maybe OAuthToken)
     , _plMaxResults  :: !(Maybe Int32)
     , _plFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayersList'' with the minimum fields required to make a request.
 --
@@ -183,8 +184,8 @@ instance GoogleRequest PlayersList' where
         type Rs PlayersList' = PlayerListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u PlayersList'{..}
-          = go _plLanguage _plMaxResults _plPageToken
-              _plCollection
+          = go _plCollection _plLanguage _plPageToken
+              _plMaxResults
               _plQuotaUser
               (Just _plPrettyPrint)
               _plUserIP

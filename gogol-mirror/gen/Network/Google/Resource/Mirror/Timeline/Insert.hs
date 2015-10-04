@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,10 +34,10 @@ module Network.Google.Resource.Mirror.Timeline.Insert
     , tiQuotaUser
     , tiPrettyPrint
     , tiUserIP
+    , tiPayload
     , tiMedia
     , tiKey
     , tiOAuthToken
-    , tiTimelineItem
     , tiFields
     ) where
 
@@ -61,15 +62,15 @@ type TimelineInsertResource =
 --
 -- /See:/ 'timelineInsert'' smart constructor.
 data TimelineInsert' = TimelineInsert'
-    { _tiQuotaUser    :: !(Maybe Text)
-    , _tiPrettyPrint  :: !Bool
-    , _tiUserIP       :: !(Maybe Text)
-    , _tiMedia        :: !Body
-    , _tiKey          :: !(Maybe Key)
-    , _tiOAuthToken   :: !(Maybe OAuthToken)
-    , _tiTimelineItem :: !TimelineItem
-    , _tiFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _tiQuotaUser   :: !(Maybe Text)
+    , _tiPrettyPrint :: !Bool
+    , _tiUserIP      :: !(Maybe Text)
+    , _tiPayload     :: !TimelineItem
+    , _tiMedia       :: !Body
+    , _tiKey         :: !(Maybe Key)
+    , _tiOAuthToken  :: !(Maybe OAuthToken)
+    , _tiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineInsert'' with the minimum fields required to make a request.
 --
@@ -81,28 +82,28 @@ data TimelineInsert' = TimelineInsert'
 --
 -- * 'tiUserIP'
 --
+-- * 'tiPayload'
+--
 -- * 'tiMedia'
 --
 -- * 'tiKey'
 --
 -- * 'tiOAuthToken'
 --
--- * 'tiTimelineItem'
---
 -- * 'tiFields'
 timelineInsert'
-    :: Body -- ^ 'media'
-    -> TimelineItem -- ^ 'TimelineItem'
+    :: TimelineItem -- ^ 'payload'
+    -> Body -- ^ 'media'
     -> TimelineInsert'
-timelineInsert' pTiMedia_ pTiTimelineItem_ =
+timelineInsert' pTiPayload_ pTiMedia_ =
     TimelineInsert'
     { _tiQuotaUser = Nothing
     , _tiPrettyPrint = True
     , _tiUserIP = Nothing
+    , _tiPayload = pTiPayload_
     , _tiMedia = pTiMedia_
     , _tiKey = Nothing
     , _tiOAuthToken = Nothing
-    , _tiTimelineItem = pTiTimelineItem_
     , _tiFields = Nothing
     }
 
@@ -124,6 +125,11 @@ tiPrettyPrint
 tiUserIP :: Lens' TimelineInsert' (Maybe Text)
 tiUserIP = lens _tiUserIP (\ s a -> s{_tiUserIP = a})
 
+-- | Multipart request metadata.
+tiPayload :: Lens' TimelineInsert' TimelineItem
+tiPayload
+  = lens _tiPayload (\ s a -> s{_tiPayload = a})
+
 tiMedia :: Lens' TimelineInsert' Body
 tiMedia = lens _tiMedia (\ s a -> s{_tiMedia = a})
 
@@ -138,12 +144,6 @@ tiOAuthToken :: Lens' TimelineInsert' (Maybe OAuthToken)
 tiOAuthToken
   = lens _tiOAuthToken (\ s a -> s{_tiOAuthToken = a})
 
--- | Multipart request metadata.
-tiTimelineItem :: Lens' TimelineInsert' TimelineItem
-tiTimelineItem
-  = lens _tiTimelineItem
-      (\ s a -> s{_tiTimelineItem = a})
-
 -- | Selector specifying which fields to include in a partial response.
 tiFields :: Lens' TimelineInsert' (Maybe Text)
 tiFields = lens _tiFields (\ s a -> s{_tiFields = a})
@@ -156,13 +156,13 @@ instance GoogleRequest TimelineInsert' where
         type Rs TimelineInsert' = TimelineItem
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelineInsert'{..}
-          = go _tiMedia _tiQuotaUser (Just _tiPrettyPrint)
-              _tiUserIP
+          = go _tiQuotaUser (Just _tiPrettyPrint) _tiUserIP
               _tiFields
               _tiKey
               _tiOAuthToken
               (Just AltJSON)
-              _tiTimelineItem
+              _tiPayload
+              _tiMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TimelineInsertResource)

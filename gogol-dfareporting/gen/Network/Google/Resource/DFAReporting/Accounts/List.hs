@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,17 +56,17 @@ type AccountsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "accounts" :>
-           QueryParam "active" Bool :>
+           QueryParam "searchString" Text :>
              QueryParams "ids" Int64 :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "searchString" Text :>
+               QueryParam "sortOrder"
+                 DfareportingAccountsListSortOrder
+                 :>
+                 QueryParam "active" Bool :>
+                   QueryParam "pageToken" Text :>
                      QueryParam "sortField"
                        DfareportingAccountsListSortField
                        :>
-                       QueryParam "sortOrder"
-                         DfareportingAccountsListSortOrder
-                         :>
+                       QueryParam "maxResults" Int32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -83,7 +84,7 @@ data AccountsList' = AccountsList'
     , _alPrettyPrint  :: !Bool
     , _alUserIP       :: !(Maybe Text)
     , _alSearchString :: !(Maybe Text)
-    , _alIds          :: !(Maybe Int64)
+    , _alIds          :: !(Maybe [Int64])
     , _alProfileId    :: !Int64
     , _alSortOrder    :: !(Maybe DfareportingAccountsListSortOrder)
     , _alActive       :: !(Maybe Bool)
@@ -93,7 +94,7 @@ data AccountsList' = AccountsList'
     , _alOAuthToken   :: !(Maybe OAuthToken)
     , _alMaxResults   :: !(Maybe Int32)
     , _alFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsList'' with the minimum fields required to make a request.
 --
@@ -178,8 +179,10 @@ alSearchString
       (\ s a -> s{_alSearchString = a})
 
 -- | Select only accounts with these IDs.
-alIds :: Lens' AccountsList' (Maybe Int64)
-alIds = lens _alIds (\ s a -> s{_alIds = a})
+alIds :: Lens' AccountsList' [Int64]
+alIds
+  = lens _alIds (\ s a -> s{_alIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 alProfileId :: Lens' AccountsList' Int64
@@ -234,11 +237,13 @@ instance GoogleRequest AccountsList' where
         type Rs AccountsList' = AccountsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountsList'{..}
-          = go _alActive _alIds _alMaxResults _alPageToken
-              _alSearchString
-              _alSortField
+          = go _alProfileId _alSearchString
+              (_alIds ^. _Default)
               _alSortOrder
-              _alProfileId
+              _alActive
+              _alPageToken
+              _alSortField
+              _alMaxResults
               _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP

@@ -28,7 +28,7 @@ import           Network.Google.ResourceManager.Types.Sum
 data ListProjectsResponse = ListProjectsResponse
     { _lprNextPageToken :: !(Maybe Text)
     , _lprProjects      :: !(Maybe [Project])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListProjectsResponse' with the minimum fields required to make a request.
 --
@@ -90,7 +90,7 @@ instance ToJSON ListProjectsResponse where
 data ResourceId = ResourceId
     { _riId   :: !(Maybe Text)
     , _riType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResourceId' with the minimum fields required to make a request.
 --
@@ -134,7 +134,7 @@ instance ToJSON ResourceId where
 -- /See:/ 'getIAMPolicyRequest' smart constructor.
 data GetIAMPolicyRequest =
     GetIAMPolicyRequest
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -158,7 +158,7 @@ instance ToJSON GetIAMPolicyRequest where
 -- /See:/ 'organizationOwner' smart constructor.
 newtype OrganizationOwner = OrganizationOwner
     { _ooDirectoryCustomerId :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrganizationOwner' with the minimum fields required to make a request.
 --
@@ -200,11 +200,11 @@ data Project = Project
     { _pParent         :: !(Maybe ResourceId)
     , _pProjectNumber  :: !(Maybe Int64)
     , _pName           :: !(Maybe Text)
-    , _pLabels         :: !(Maybe ProjectLabels)
+    , _pLabels         :: !(Maybe Labels)
     , _pProjectId      :: !(Maybe Text)
     , _pLifecycleState :: !(Maybe Text)
     , _pCreateTime     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Project' with the minimum fields required to make a request.
 --
@@ -265,7 +265,7 @@ pName = lens _pName (\ s a -> s{_pName = a})
 -- labels in a representation such as JSON that does not depend on specific
 -- characters being disallowed. Example: \"environment\" : \"dev\"
 -- Read-write.
-pLabels :: Lens' Project (Maybe ProjectLabels)
+pLabels :: Lens' Project (Maybe Labels)
 pLabels = lens _pLabels (\ s a -> s{_pLabels = a})
 
 -- | The unique, user-assigned ID of the project. It must be 6 to 30
@@ -319,7 +319,7 @@ instance ToJSON Project where
 -- /See:/ 'empty' smart constructor.
 data Empty =
     Empty
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -338,7 +338,7 @@ instance ToJSON Empty where
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
 newtype SetIAMPolicyRequest = SetIAMPolicyRequest
     { _siprPolicy :: Maybe Policy
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -374,7 +374,7 @@ instance ToJSON SetIAMPolicyRequest where
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
 newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest
     { _tiprPermissions :: Maybe [Text]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -409,12 +409,39 @@ instance ToJSON TestIAMPermissionsRequest where
           = object
               (catMaybes [("permissions" .=) <$> _tiprPermissions])
 
+-- | The labels associated with this project. Label keys must be between 1
+-- and 63 characters long and must conform to the following regular
+-- expression: \\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?. Label values must be
+-- between 0 and 63 characters long and must conform to the regular
+-- expression (\\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?)?. No more than 256
+-- labels can be associated with a given resource. Clients should store
+-- labels in a representation such as JSON that does not depend on specific
+-- characters being disallowed. Example: \"environment\" : \"dev\"
+-- Read-write.
+--
+-- /See:/ 'labels' smart constructor.
+data Labels =
+    Labels
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Labels' with the minimum fields required to make a request.
+--
+labels
+    :: Labels
+labels = Labels
+
+instance FromJSON Labels where
+        parseJSON = withObject "Labels" (\ o -> pure Labels)
+
+instance ToJSON Labels where
+        toJSON = const (Object mempty)
+
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
 newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse
     { _tiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -450,35 +477,6 @@ instance ToJSON TestIAMPermissionsResponse where
               (catMaybes
                  [("permissions" .=) <$> _tiamprPermissions])
 
--- | The labels associated with this project. Label keys must be between 1
--- and 63 characters long and must conform to the following regular
--- expression: \\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?. Label values must be
--- between 0 and 63 characters long and must conform to the regular
--- expression (\\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?)?. No more than 256
--- labels can be associated with a given resource. Clients should store
--- labels in a representation such as JSON that does not depend on specific
--- characters being disallowed. Example: \"environment\" : \"dev\"
--- Read-write.
---
--- /See:/ 'projectLabels' smart constructor.
-data ProjectLabels =
-    ProjectLabels
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ProjectLabels' with the minimum fields required to make a request.
---
-projectLabels
-    :: ProjectLabels
-projectLabels = ProjectLabels
-
-instance FromJSON ProjectLabels where
-        parseJSON
-          = withObject "ProjectLabels"
-              (\ o -> pure ProjectLabels)
-
-instance ToJSON ProjectLabels where
-        toJSON = const (Object mempty)
-
 -- | Defines an Identity and Access Management (IAM) policy. It is used to
 -- specify access control policies for Cloud Platform resources. A
 -- \`Policy\` consists of a list of \`bindings\`. A \`Binding\` binds a
@@ -498,7 +496,7 @@ data Policy = Policy
     { _pEtag     :: !(Maybe Word8)
     , _pVersion  :: !(Maybe Int32)
     , _pBindings :: !(Maybe [Binding])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -559,7 +557,7 @@ data Organization = Organization
     { _oOwner          :: !(Maybe OrganizationOwner)
     , _oDisplayName    :: !(Maybe Text)
     , _oOrganizationId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Organization' with the minimum fields required to make a request.
 --
@@ -620,7 +618,7 @@ instance ToJSON Organization where
 data Binding = Binding
     { _bMembers :: !(Maybe [Text])
     , _bRole    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -682,7 +680,7 @@ instance ToJSON Binding where
 data ListOrganizationsResponse = ListOrganizationsResponse
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOrganizations :: !(Maybe [Organization])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListOrganizationsResponse' with the minimum fields required to make a request.
 --

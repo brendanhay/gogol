@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type SnapshotsListResource =
        "global" :>
          "snapshots" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data SnapshotsList' = SnapshotsList'
     , _slOAuthToken  :: !(Maybe OAuthToken)
     , _slMaxResults  :: !Word32
     , _slFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotsList'' with the minimum fields required to make a request.
 --
@@ -193,8 +194,8 @@ instance GoogleRequest SnapshotsList' where
         type Rs SnapshotsList' = SnapshotList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u SnapshotsList'{..}
-          = go _slFilter (Just _slMaxResults) _slPageToken
-              _slProject
+          = go _slProject _slFilter _slPageToken
+              (Just _slMaxResults)
               _slQuotaUser
               (Just _slPrettyPrint)
               _slUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -49,9 +50,9 @@ import           Network.Google.Prelude
 -- 'QuerySQL'' request conforms to.
 type QuerySQLResource =
      "query" :>
-       QueryParam "hdrs" Bool :>
+       QueryParam "sql" Text :>
          QueryParam "typed" Bool :>
-           QueryParam "sql" Text :>
+           QueryParam "hdrs" Bool :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -61,16 +62,16 @@ type QuerySQLResource =
                          QueryParam "alt" AltJSON :> Post '[JSON] SQLresponse
        :<|>
        "query" :>
-         QueryParam "hdrs" Bool :>
+         QueryParam "sql" Text :>
            QueryParam "typed" Bool :>
-             QueryParam "sql" Text :>
+             QueryParam "hdrs" Bool :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "alt" Media :> Post '[OctetStream] Stream
+                           QueryParam "alt" AltMedia :> Post '[OctetStream] Body
 
 -- | Executes a Fusion Tables SQL statement, which can be any of - SELECT -
 -- INSERT - UPDATE - DELETE - SHOW - DESCRIBE - CREATE statement.
@@ -86,7 +87,7 @@ data QuerySQL' = QuerySQL'
     , _qsqlOAuthToken  :: !(Maybe OAuthToken)
     , _qsqlSQL         :: !Text
     , _qsqlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuerySQL'' with the minimum fields required to make a request.
 --
@@ -185,7 +186,7 @@ instance GoogleRequest QuerySQL' where
         type Rs QuerySQL' = SQLresponse
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u QuerySQL'{..}
-          = go _qsqlHdrs _qsqlTyped (Just _qsqlSQL)
+          = go (Just _qsqlSQL) _qsqlTyped _qsqlHdrs
               _qsqlQuotaUser
               (Just _qsqlPrettyPrint)
               _qsqlUserIP
@@ -197,18 +198,18 @@ instance GoogleRequest QuerySQL' where
                   = clientWithRoute (Proxy :: Proxy QuerySQLResource) r
                       u
 
-instance GoogleRequest QuerySQL' where
-        type Rs (Download QuerySQL') = Stream
+instance GoogleRequest (Download QuerySQL') where
+        type Rs (Download QuerySQL') = Body
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u QuerySQL'{..}
-          = go _qsqlHdrs _qsqlTyped (Just _qsqlSQL)
+        requestWithRoute r u (Download QuerySQL'{..})
+          = go (Just _qsqlSQL) _qsqlTyped _qsqlHdrs
               _qsqlQuotaUser
               (Just _qsqlPrettyPrint)
               _qsqlUserIP
               _qsqlFields
               _qsqlKey
               _qsqlOAuthToken
-              (Just Media)
-          where go :<|> _
+              (Just AltMedia)
+          where _ :<|> go
                   = clientWithRoute (Proxy :: Proxy QuerySQLResource) r
                       u

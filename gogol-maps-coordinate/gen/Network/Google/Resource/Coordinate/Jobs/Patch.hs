@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -41,10 +42,10 @@ module Network.Google.Resource.Coordinate.Jobs.Patch
     , jpCustomerPhoneNumber
     , jpCustomerName
     , jpAddress
+    , jpPayload
     , jpAssignee
     , jpLat
     , jpKey
-    , jpJob
     , jpLng
     , jpTitle
     , jpOAuthToken
@@ -62,17 +63,16 @@ type JobsPatchResource =
        Capture "teamId" Text :>
          "jobs" :>
            Capture "jobId" Word64 :>
-             QueryParam "address" Text :>
-               QueryParam "assignee" Text :>
-                 QueryParams "customField" Text :>
+             QueryParam "progress" Progress :>
+               QueryParam "note" Text :>
+                 QueryParam "customerPhoneNumber" Text :>
                    QueryParam "customerName" Text :>
-                     QueryParam "customerPhoneNumber" Text :>
-                       QueryParam "lat" Double :>
-                         QueryParam "lng" Double :>
-                           QueryParam "note" Text :>
-                             QueryParam "progress" CoordinateJobsPatchProgress
-                               :>
-                               QueryParam "title" Text :>
+                     QueryParam "address" Text :>
+                       QueryParam "assignee" Text :>
+                         QueryParam "lat" Double :>
+                           QueryParam "lng" Double :>
+                             QueryParam "title" Text :>
+                               QueryParams "customField" Text :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
@@ -92,23 +92,23 @@ data JobsPatch' = JobsPatch'
     { _jpQuotaUser           :: !(Maybe Text)
     , _jpPrettyPrint         :: !Bool
     , _jpJobId               :: !Word64
-    , _jpProgress            :: !(Maybe CoordinateJobsPatchProgress)
+    , _jpProgress            :: !(Maybe Progress)
     , _jpNote                :: !(Maybe Text)
     , _jpUserIP              :: !(Maybe Text)
     , _jpTeamId              :: !Text
     , _jpCustomerPhoneNumber :: !(Maybe Text)
     , _jpCustomerName        :: !(Maybe Text)
     , _jpAddress             :: !(Maybe Text)
+    , _jpPayload             :: !Job
     , _jpAssignee            :: !(Maybe Text)
     , _jpLat                 :: !(Maybe Double)
     , _jpKey                 :: !(Maybe Key)
-    , _jpJob                 :: !Job
     , _jpLng                 :: !(Maybe Double)
     , _jpTitle               :: !(Maybe Text)
     , _jpOAuthToken          :: !(Maybe OAuthToken)
     , _jpFields              :: !(Maybe Text)
-    , _jpCustomField         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _jpCustomField         :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsPatch'' with the minimum fields required to make a request.
 --
@@ -134,13 +134,13 @@ data JobsPatch' = JobsPatch'
 --
 -- * 'jpAddress'
 --
+-- * 'jpPayload'
+--
 -- * 'jpAssignee'
 --
 -- * 'jpLat'
 --
 -- * 'jpKey'
---
--- * 'jpJob'
 --
 -- * 'jpLng'
 --
@@ -154,9 +154,9 @@ data JobsPatch' = JobsPatch'
 jobsPatch'
     :: Word64 -- ^ 'jobId'
     -> Text -- ^ 'teamId'
-    -> Job -- ^ 'Job'
+    -> Job -- ^ 'payload'
     -> JobsPatch'
-jobsPatch' pJpJobId_ pJpTeamId_ pJpJob_ =
+jobsPatch' pJpJobId_ pJpTeamId_ pJpPayload_ =
     JobsPatch'
     { _jpQuotaUser = Nothing
     , _jpPrettyPrint = True
@@ -168,10 +168,10 @@ jobsPatch' pJpJobId_ pJpTeamId_ pJpJob_ =
     , _jpCustomerPhoneNumber = Nothing
     , _jpCustomerName = Nothing
     , _jpAddress = Nothing
+    , _jpPayload = pJpPayload_
     , _jpAssignee = Nothing
     , _jpLat = Nothing
     , _jpKey = Nothing
-    , _jpJob = pJpJob_
     , _jpLng = Nothing
     , _jpTitle = Nothing
     , _jpOAuthToken = Nothing
@@ -197,7 +197,7 @@ jpJobId :: Lens' JobsPatch' Word64
 jpJobId = lens _jpJobId (\ s a -> s{_jpJobId = a})
 
 -- | Job progress
-jpProgress :: Lens' JobsPatch' (Maybe CoordinateJobsPatchProgress)
+jpProgress :: Lens' JobsPatch' (Maybe Progress)
 jpProgress
   = lens _jpProgress (\ s a -> s{_jpProgress = a})
 
@@ -231,6 +231,11 @@ jpAddress :: Lens' JobsPatch' (Maybe Text)
 jpAddress
   = lens _jpAddress (\ s a -> s{_jpAddress = a})
 
+-- | Multipart request metadata.
+jpPayload :: Lens' JobsPatch' Job
+jpPayload
+  = lens _jpPayload (\ s a -> s{_jpPayload = a})
+
 -- | Assignee email address, or empty string to unassign.
 jpAssignee :: Lens' JobsPatch' (Maybe Text)
 jpAssignee
@@ -245,10 +250,6 @@ jpLat = lens _jpLat (\ s a -> s{_jpLat = a})
 -- token.
 jpKey :: Lens' JobsPatch' (Maybe Key)
 jpKey = lens _jpKey (\ s a -> s{_jpKey = a})
-
--- | Multipart request metadata.
-jpJob :: Lens' JobsPatch' Job
-jpJob = lens _jpJob (\ s a -> s{_jpJob = a})
 
 -- | The longitude coordinate of this job\'s location.
 jpLng :: Lens' JobsPatch' (Maybe Double)
@@ -273,10 +274,12 @@ jpFields = lens _jpFields (\ s a -> s{_jpFields = a})
 -- customField=12%3DAlice. Repeat the parameter for each custom field. Note
 -- that \'=\' cannot appear in the parameter value. Specifying an invalid,
 -- or inactive enum field will result in an error 500.
-jpCustomField :: Lens' JobsPatch' (Maybe Text)
+jpCustomField :: Lens' JobsPatch' [Text]
 jpCustomField
   = lens _jpCustomField
       (\ s a -> s{_jpCustomField = a})
+      . _Default
+      . _Coerce
 
 instance GoogleAuth JobsPatch' where
         authKey = jpKey . _Just
@@ -286,16 +289,15 @@ instance GoogleRequest JobsPatch' where
         type Rs JobsPatch' = Job
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u JobsPatch'{..}
-          = go _jpAddress _jpAssignee _jpCustomField
-              _jpCustomerName
+          = go _jpTeamId _jpJobId _jpProgress _jpNote
               _jpCustomerPhoneNumber
+              _jpCustomerName
+              _jpAddress
+              _jpAssignee
               _jpLat
               _jpLng
-              _jpNote
-              _jpProgress
               _jpTitle
-              _jpTeamId
-              _jpJobId
+              (_jpCustomField ^. _Default)
               _jpQuotaUser
               (Just _jpPrettyPrint)
               _jpUserIP
@@ -303,7 +305,7 @@ instance GoogleRequest JobsPatch' where
               _jpKey
               _jpOAuthToken
               (Just AltJSON)
-              _jpJob
+              _jpPayload
           where go
                   = clientWithRoute (Proxy :: Proxy JobsPatchResource)
                       r

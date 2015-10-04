@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -65,23 +66,23 @@ type EventsListResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "events" :>
-           QueryParam "alwaysIncludeEmail" Bool :>
-             QueryParam "iCalUID" Text :>
-               QueryParam "maxAttendees" Int32 :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "orderBy" CalendarEventsListOrderBy :>
-                     QueryParam "pageToken" Text :>
-                       QueryParams "privateExtendedProperty" Text :>
-                         QueryParam "q" Text :>
-                           QueryParams "sharedExtendedProperty" Text :>
-                             QueryParam "showDeleted" Bool :>
-                               QueryParam "showHiddenInvitations" Bool :>
-                                 QueryParam "singleEvents" Bool :>
-                                   QueryParam "syncToken" Text :>
-                                     QueryParam "timeMax" DateTime' :>
-                                       QueryParam "timeMin" DateTime' :>
-                                         QueryParam "timeZone" Text :>
-                                           QueryParam "updatedMin" DateTime' :>
+           QueryParam "syncToken" Text :>
+             QueryParam "timeMin" DateTime' :>
+               QueryParam "orderBy" OrderBy :>
+                 QueryParam "singleEvents" Bool :>
+                   QueryParams "privateExtendedProperty" Text :>
+                     QueryParam "showDeleted" Bool :>
+                       QueryParam "q" Text :>
+                         QueryParams "sharedExtendedProperty" Text :>
+                           QueryParam "maxAttendees" Int32 :>
+                             QueryParam "iCalUID" Text :>
+                               QueryParam "updatedMin" DateTime' :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "timeZone" Text :>
+                                     QueryParam "showHiddenInvitations" Bool :>
+                                       QueryParam "maxResults" Int32 :>
+                                         QueryParam "alwaysIncludeEmail" Bool :>
+                                           QueryParam "timeMax" DateTime' :>
                                              QueryParam "quotaUser" Text :>
                                                QueryParam "prettyPrint" Bool :>
                                                  QueryParam "userIp" Text :>
@@ -103,13 +104,13 @@ data EventsList' = EventsList'
     , _elCalendarId              :: !Text
     , _elPrettyPrint             :: !Bool
     , _elTimeMin                 :: !(Maybe DateTime')
-    , _elOrderBy                 :: !(Maybe CalendarEventsListOrderBy)
+    , _elOrderBy                 :: !(Maybe OrderBy)
     , _elSingleEvents            :: !(Maybe Bool)
-    , _elPrivateExtendedProperty :: !(Maybe Text)
+    , _elPrivateExtendedProperty :: !(Maybe [Text])
     , _elUserIP                  :: !(Maybe Text)
     , _elShowDeleted             :: !(Maybe Bool)
     , _elQ                       :: !(Maybe Text)
-    , _elSharedExtendedProperty  :: !(Maybe Text)
+    , _elSharedExtendedProperty  :: !(Maybe [Text])
     , _elMaxAttendees            :: !(Maybe Int32)
     , _elKey                     :: !(Maybe Key)
     , _elICalUId                 :: !(Maybe Text)
@@ -122,7 +123,7 @@ data EventsList' = EventsList'
     , _elAlwaysIncludeEmail      :: !(Maybe Bool)
     , _elTimeMax                 :: !(Maybe DateTime')
     , _elFields                  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsList'' with the minimum fields required to make a request.
 --
@@ -254,7 +255,7 @@ elTimeMin
 
 -- | The order of the events returned in the result. Optional. The default is
 -- an unspecified, stable order.
-elOrderBy :: Lens' EventsList' (Maybe CalendarEventsListOrderBy)
+elOrderBy :: Lens' EventsList' (Maybe OrderBy)
 elOrderBy
   = lens _elOrderBy (\ s a -> s{_elOrderBy = a})
 
@@ -269,10 +270,12 @@ elSingleEvents
 -- | Extended properties constraint specified as propertyName=value. Matches
 -- only private properties. This parameter might be repeated multiple times
 -- to return events that match all given constraints.
-elPrivateExtendedProperty :: Lens' EventsList' (Maybe Text)
+elPrivateExtendedProperty :: Lens' EventsList' [Text]
 elPrivateExtendedProperty
   = lens _elPrivateExtendedProperty
       (\ s a -> s{_elPrivateExtendedProperty = a})
+      . _Default
+      . _Coerce
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
@@ -298,10 +301,12 @@ elQ = lens _elQ (\ s a -> s{_elQ = a})
 -- | Extended properties constraint specified as propertyName=value. Matches
 -- only shared properties. This parameter might be repeated multiple times
 -- to return events that match all given constraints.
-elSharedExtendedProperty :: Lens' EventsList' (Maybe Text)
+elSharedExtendedProperty :: Lens' EventsList' [Text]
 elSharedExtendedProperty
   = lens _elSharedExtendedProperty
       (\ s a -> s{_elSharedExtendedProperty = a})
+      . _Default
+      . _Coerce
 
 -- | The maximum number of attendees to include in the response. If there are
 -- more than the specified number of attendees, only the participant is
@@ -395,22 +400,21 @@ instance GoogleRequest EventsList' where
         type Rs EventsList' = Events
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsList'{..}
-          = go _elAlwaysIncludeEmail _elICalUId _elMaxAttendees
-              _elMaxResults
-              _elOrderBy
-              _elPageToken
-              _elPrivateExtendedProperty
-              _elQ
-              _elSharedExtendedProperty
-              _elShowDeleted
-              _elShowHiddenInvitations
+          = go _elCalendarId _elSyncToken _elTimeMin _elOrderBy
               _elSingleEvents
-              _elSyncToken
-              _elTimeMax
-              _elTimeMin
-              _elTimeZone
+              (_elPrivateExtendedProperty ^. _Default)
+              _elShowDeleted
+              _elQ
+              (_elSharedExtendedProperty ^. _Default)
+              _elMaxAttendees
+              _elICalUId
               _elUpdatedMin
-              _elCalendarId
+              _elPageToken
+              _elTimeZone
+              _elShowHiddenInvitations
+              _elMaxResults
+              _elAlwaysIncludeEmail
+              _elTimeMax
               _elQuotaUser
               (Just _elPrettyPrint)
               _elUserIP

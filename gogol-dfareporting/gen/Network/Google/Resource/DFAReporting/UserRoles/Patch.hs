@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.DFAReporting.UserRoles.Patch
     , urpPrettyPrint
     , urpUserIP
     , urpProfileId
+    , urpPayload
     , urpKey
     , urpId
-    , urpUserRole
     , urpOAuthToken
     , urpFields
     ) where
@@ -68,12 +69,12 @@ data UserRolesPatch' = UserRolesPatch'
     , _urpPrettyPrint :: !Bool
     , _urpUserIP      :: !(Maybe Text)
     , _urpProfileId   :: !Int64
+    , _urpPayload     :: !UserRole
     , _urpKey         :: !(Maybe Key)
     , _urpId          :: !Int64
-    , _urpUserRole    :: !UserRole
     , _urpOAuthToken  :: !(Maybe OAuthToken)
     , _urpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesPatch'' with the minimum fields required to make a request.
 --
@@ -87,29 +88,29 @@ data UserRolesPatch' = UserRolesPatch'
 --
 -- * 'urpProfileId'
 --
+-- * 'urpPayload'
+--
 -- * 'urpKey'
 --
 -- * 'urpId'
---
--- * 'urpUserRole'
 --
 -- * 'urpOAuthToken'
 --
 -- * 'urpFields'
 userRolesPatch'
     :: Int64 -- ^ 'profileId'
+    -> UserRole -- ^ 'payload'
     -> Int64 -- ^ 'id'
-    -> UserRole -- ^ 'UserRole'
     -> UserRolesPatch'
-userRolesPatch' pUrpProfileId_ pUrpId_ pUrpUserRole_ =
+userRolesPatch' pUrpProfileId_ pUrpPayload_ pUrpId_ =
     UserRolesPatch'
     { _urpQuotaUser = Nothing
     , _urpPrettyPrint = True
     , _urpUserIP = Nothing
     , _urpProfileId = pUrpProfileId_
+    , _urpPayload = pUrpPayload_
     , _urpKey = Nothing
     , _urpId = pUrpId_
-    , _urpUserRole = pUrpUserRole_
     , _urpOAuthToken = Nothing
     , _urpFields = Nothing
     }
@@ -138,6 +139,11 @@ urpProfileId :: Lens' UserRolesPatch' Int64
 urpProfileId
   = lens _urpProfileId (\ s a -> s{_urpProfileId = a})
 
+-- | Multipart request metadata.
+urpPayload :: Lens' UserRolesPatch' UserRole
+urpPayload
+  = lens _urpPayload (\ s a -> s{_urpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -147,11 +153,6 @@ urpKey = lens _urpKey (\ s a -> s{_urpKey = a})
 -- | User role ID.
 urpId :: Lens' UserRolesPatch' Int64
 urpId = lens _urpId (\ s a -> s{_urpId = a})
-
--- | Multipart request metadata.
-urpUserRole :: Lens' UserRolesPatch' UserRole
-urpUserRole
-  = lens _urpUserRole (\ s a -> s{_urpUserRole = a})
 
 -- | OAuth 2.0 token for the current user.
 urpOAuthToken :: Lens' UserRolesPatch' (Maybe OAuthToken)
@@ -179,7 +180,7 @@ instance GoogleRequest UserRolesPatch' where
               _urpKey
               _urpOAuthToken
               (Just AltJSON)
-              _urpUserRole
+              _urpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UserRolesPatchResource)

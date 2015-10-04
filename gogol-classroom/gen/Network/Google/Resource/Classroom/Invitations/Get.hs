@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -59,12 +60,12 @@ type InvitationsGetResource =
        "invitations" :>
          Capture "id" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
@@ -94,7 +95,7 @@ data InvitationsGet' = InvitationsGet'
     , _igOAuthToken     :: !(Maybe OAuthToken)
     , _igFields         :: !(Maybe Text)
     , _igCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InvitationsGet'' with the minimum fields required to make a request.
 --
@@ -221,12 +222,11 @@ instance GoogleRequest InvitationsGet' where
         type Rs InvitationsGet' = Invitation
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u InvitationsGet'{..}
-          = go _igXgafv _igAccessToken _igBearerToken
-              _igCallback
-              (Just _igPp)
+          = go _igId _igXgafv _igUploadProtocol (Just _igPp)
+              _igAccessToken
               _igUploadType
-              _igUploadProtocol
-              _igId
+              _igBearerToken
+              _igCallback
               _igQuotaUser
               (Just _igPrettyPrint)
               _igFields

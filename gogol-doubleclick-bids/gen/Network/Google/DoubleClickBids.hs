@@ -58,8 +58,8 @@ module Network.Google.DoubleClickBids
     , lrrReports
     , lrrKind
 
-    -- ** QueryMetadataFormat
-    , QueryMetadataFormat (..)
+    -- ** Frequency
+    , Frequency (..)
 
     -- ** QueryMetadata
     , QueryMetadata
@@ -75,6 +75,12 @@ module Network.Google.DoubleClickBids
     , qmReportCount
     , qmTitle
     , qmSendNotification
+
+    -- ** State
+    , State (..)
+
+    -- ** GroupBysItem
+    , GroupBysItem (..)
 
     -- ** ParametersType
     , ParametersType (..)
@@ -100,9 +106,6 @@ module Network.Google.DoubleClickBids
     , rqrReportDataStartTimeMs
     , rqrTimezoneCode
 
-    -- ** ParametersGroupBys
-    , ParametersGroupBys (..)
-
     -- ** ListQueriesResponse
     , ListQueriesResponse
     , listQueriesResponse
@@ -116,16 +119,16 @@ module Network.Google.DoubleClickBids
     , dlirFormat
     , dlirFilterIds
 
-    -- ** DownloadLineItemsRequestFilterType
-    , DownloadLineItemsRequestFilterType (..)
-
     -- ** UploadLineItemsResponse
     , UploadLineItemsResponse
     , uploadLineItemsResponse
     , ulirUploadStatus
 
-    -- ** QueryMetadataDataRange
-    , QueryMetadataDataRange (..)
+    -- ** FilterType
+    , FilterType (..)
+
+    -- ** Format
+    , Format (..)
 
     -- ** ReportMetadata
     , ReportMetadata
@@ -134,9 +137,6 @@ module Network.Google.DoubleClickBids
     , rmReportDataEndTimeMs
     , rmGoogleCloudStoragePath
     , rmReportDataStartTimeMs
-
-    -- ** QueryScheduleFrequency
-    , QueryScheduleFrequency (..)
 
     -- ** Report
     , Report
@@ -175,6 +175,9 @@ module Network.Google.DoubleClickBids
     , downloadLineItemsResponse
     , dlirLineItems
 
+    -- ** DataRange
+    , DataRange (..)
+
     -- ** QuerySchedule
     , QuerySchedule
     , querySchedule
@@ -191,8 +194,8 @@ module Network.Google.DoubleClickBids
     , rsFormat
     , rsFailure
 
-    -- ** FilterPairType
-    , FilterPairType (..)
+    -- ** MetricsItem
+    , MetricsItem (..)
 
     -- ** Query
     , Query
@@ -218,14 +221,11 @@ module Network.Google.DoubleClickBids
     -- ** RunQueryRequestDataRange
     , RunQueryRequestDataRange (..)
 
-    -- ** ReportStatusState
-    , ReportStatusState (..)
+    -- ** ErrorCode
+    , ErrorCode (..)
 
-    -- ** ParametersMetrics
-    , ParametersMetrics (..)
-
-    -- ** ReportFailureErrorCode
-    , ReportFailureErrorCode (..)
+    -- ** Type
+    , Type (..)
 
     -- ** ReportFailure
     , ReportFailure

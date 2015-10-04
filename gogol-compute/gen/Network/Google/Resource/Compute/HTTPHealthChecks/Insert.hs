@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.Compute.HTTPHealthChecks.Insert
     , httphciPrettyPrint
     , httphciProject
     , httphciUserIP
+    , httphciPayload
     , httphciKey
-    , httphciHTTPHealthCheck
     , httphciOAuthToken
     , httphciFields
     ) where
@@ -65,15 +66,15 @@ type HTTPHealthChecksInsertResource =
 --
 -- /See:/ 'hTTPHealthChecksInsert'' smart constructor.
 data HTTPHealthChecksInsert' = HTTPHealthChecksInsert'
-    { _httphciQuotaUser       :: !(Maybe Text)
-    , _httphciPrettyPrint     :: !Bool
-    , _httphciProject         :: !Text
-    , _httphciUserIP          :: !(Maybe Text)
-    , _httphciKey             :: !(Maybe Key)
-    , _httphciHTTPHealthCheck :: !HTTPHealthCheck
-    , _httphciOAuthToken      :: !(Maybe OAuthToken)
-    , _httphciFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _httphciQuotaUser   :: !(Maybe Text)
+    , _httphciPrettyPrint :: !Bool
+    , _httphciProject     :: !Text
+    , _httphciUserIP      :: !(Maybe Text)
+    , _httphciPayload     :: !HTTPHealthCheck
+    , _httphciKey         :: !(Maybe Key)
+    , _httphciOAuthToken  :: !(Maybe OAuthToken)
+    , _httphciFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthChecksInsert'' with the minimum fields required to make a request.
 --
@@ -87,25 +88,25 @@ data HTTPHealthChecksInsert' = HTTPHealthChecksInsert'
 --
 -- * 'httphciUserIP'
 --
--- * 'httphciKey'
+-- * 'httphciPayload'
 --
--- * 'httphciHTTPHealthCheck'
+-- * 'httphciKey'
 --
 -- * 'httphciOAuthToken'
 --
 -- * 'httphciFields'
 hTTPHealthChecksInsert'
     :: Text -- ^ 'project'
-    -> HTTPHealthCheck -- ^ 'HTTPHealthCheck'
+    -> HTTPHealthCheck -- ^ 'payload'
     -> HTTPHealthChecksInsert'
-hTTPHealthChecksInsert' pHttphciProject_ pHttphciHTTPHealthCheck_ =
+hTTPHealthChecksInsert' pHttphciProject_ pHttphciPayload_ =
     HTTPHealthChecksInsert'
     { _httphciQuotaUser = Nothing
     , _httphciPrettyPrint = True
     , _httphciProject = pHttphciProject_
     , _httphciUserIP = Nothing
+    , _httphciPayload = pHttphciPayload_
     , _httphciKey = Nothing
-    , _httphciHTTPHealthCheck = pHttphciHTTPHealthCheck_
     , _httphciOAuthToken = Nothing
     , _httphciFields = Nothing
     }
@@ -137,18 +138,18 @@ httphciUserIP
   = lens _httphciUserIP
       (\ s a -> s{_httphciUserIP = a})
 
+-- | Multipart request metadata.
+httphciPayload :: Lens' HTTPHealthChecksInsert' HTTPHealthCheck
+httphciPayload
+  = lens _httphciPayload
+      (\ s a -> s{_httphciPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 httphciKey :: Lens' HTTPHealthChecksInsert' (Maybe Key)
 httphciKey
   = lens _httphciKey (\ s a -> s{_httphciKey = a})
-
--- | Multipart request metadata.
-httphciHTTPHealthCheck :: Lens' HTTPHealthChecksInsert' HTTPHealthCheck
-httphciHTTPHealthCheck
-  = lens _httphciHTTPHealthCheck
-      (\ s a -> s{_httphciHTTPHealthCheck = a})
 
 -- | OAuth 2.0 token for the current user.
 httphciOAuthToken :: Lens' HTTPHealthChecksInsert' (Maybe OAuthToken)
@@ -177,7 +178,7 @@ instance GoogleRequest HTTPHealthChecksInsert' where
               _httphciKey
               _httphciOAuthToken
               (Just AltJSON)
-              _httphciHTTPHealthCheck
+              _httphciPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy HTTPHealthChecksInsertResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,11 +52,11 @@ import           Network.Google.Prelude
 -- 'SubscriptionsList'' request conforms to.
 type SubscriptionsListResource =
      "subscriptions" :>
-       QueryParam "customerAuthToken" Text :>
+       QueryParam "customerNamePrefix" Text :>
          QueryParam "customerId" Text :>
-           QueryParam "customerNamePrefix" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+           QueryParam "customerAuthToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -81,7 +82,7 @@ data SubscriptionsList' = SubscriptionsList'
     , _slOAuthToken         :: !(Maybe OAuthToken)
     , _slMaxResults         :: !(Maybe Word32)
     , _slFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsList'' with the minimum fields required to make a request.
 --
@@ -196,10 +197,10 @@ instance GoogleRequest SubscriptionsList' where
         type Rs SubscriptionsList' = Subscriptions
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u SubscriptionsList'{..}
-          = go _slCustomerAuthToken _slCustomerId
-              _slCustomerNamePrefix
-              _slMaxResults
+          = go _slCustomerNamePrefix _slCustomerId
+              _slCustomerAuthToken
               _slPageToken
+              _slMaxResults
               _slQuotaUser
               (Just _slPrettyPrint)
               _slUserIP

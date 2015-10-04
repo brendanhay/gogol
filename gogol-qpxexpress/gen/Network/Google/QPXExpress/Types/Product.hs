@@ -28,7 +28,7 @@ data FreeBaggageAllowance = FreeBaggageAllowance
     , _fbaKilosPerPiece :: !(Maybe Int32)
     , _fbaKilos         :: !(Maybe Int32)
     , _fbaPieces        :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FreeBaggageAllowance' with the minimum fields required to make a request.
 --
@@ -122,7 +122,7 @@ data CarrierData = CarrierData
     { _cdKind :: !Text
     , _cdName :: !(Maybe Text)
     , _cdCode :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CarrierData' with the minimum fields required to make a request.
 --
@@ -180,7 +180,7 @@ data TripOptionsResponse = TripOptionsResponse
     , _torKind       :: !Text
     , _torData       :: !(Maybe Data)
     , _torTripOption :: !(Maybe [TripOption])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TripOptionsResponse' with the minimum fields required to make a request.
 --
@@ -250,7 +250,7 @@ data TimeOfDayRange = TimeOfDayRange
     { _todrKind         :: !Text
     , _todrLatestTime   :: !(Maybe Text)
     , _todrEarliestTime :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimeOfDayRange' with the minimum fields required to make a request.
 --
@@ -317,7 +317,7 @@ data Data = Data
     , _dAirport  :: !(Maybe [AirportData])
     , _dCity     :: !(Maybe [CityData])
     , _dTax      :: !(Maybe [TaxData])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Data' with the minimum fields required to make a request.
 --
@@ -415,7 +415,7 @@ data AircraftData = AircraftData
     { _adKind :: !Text
     , _adName :: !(Maybe Text)
     , _adCode :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AircraftData' with the minimum fields required to make a request.
 --
@@ -487,7 +487,7 @@ data LegInfo = LegInfo
     , _liDuration            :: !(Maybe Int32)
     , _liMileage             :: !(Maybe Int32)
     , _liDePartureTime       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LegInfo' with the minimum fields required to make a request.
 --
@@ -704,7 +704,7 @@ data AirportData = AirportData
     , _aName :: !(Maybe Text)
     , _aCity :: !(Maybe Text)
     , _aCode :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AirportData' with the minimum fields required to make a request.
 --
@@ -771,7 +771,7 @@ data SegmentPricing = SegmentPricing
     , _spKind              :: !Text
     , _spFareId            :: !(Maybe Text)
     , _spSegmentId         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SegmentPricing' with the minimum fields required to make a request.
 --
@@ -849,7 +849,7 @@ data SliceInfo = SliceInfo
     { _siKind     :: !Text
     , _siSegment  :: !(Maybe [SegmentInfo])
     , _siDuration :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SliceInfo' with the minimum fields required to make a request.
 --
@@ -912,7 +912,7 @@ instance ToJSON SliceInfo where
 data TripsSearchResponse = TripsSearchResponse
     { _tsrTrips :: !(Maybe TripOptionsResponse)
     , _tsrKind  :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TripsSearchResponse' with the minimum fields required to make a request.
 --
@@ -962,7 +962,7 @@ data TripOption = TripOption
     , _toId        :: !(Maybe Text)
     , _toSlice     :: !(Maybe [SliceInfo])
     , _toSaleTotal :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TripOption' with the minimum fields required to make a request.
 --
@@ -1045,7 +1045,7 @@ data CityData = CityData
     , _cKind    :: !Text
     , _cName    :: !(Maybe Text)
     , _cCode    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CityData' with the minimum fields required to make a request.
 --
@@ -1113,7 +1113,7 @@ data BagDescriptor = BagDescriptor
     , _bdCount          :: !(Maybe Int32)
     , _bdDescription    :: !(Maybe [Text])
     , _bdSubcode        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BagDescriptor' with the minimum fields required to make a request.
 --
@@ -1200,7 +1200,7 @@ data PassengerCounts = PassengerCounts
     , _pcChildCount        :: !(Maybe Int32)
     , _pcInfantInSeatCount :: !(Maybe Int32)
     , _pcAdultCount        :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PassengerCounts' with the minimum fields required to make a request.
 --
@@ -1304,7 +1304,7 @@ data SegmentInfo = SegmentInfo
     , _sConnectionDuration          :: !(Maybe Int32)
     , _sDuration                    :: !(Maybe Int32)
     , _sLeg                         :: !(Maybe [LegInfo])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SegmentInfo' with the minimum fields required to make a request.
 --
@@ -1457,7 +1457,7 @@ data TaxData = TaxData
     { _tdKind :: !Text
     , _tdName :: !(Maybe Text)
     , _tdId   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaxData' with the minimum fields required to make a request.
 --
@@ -1516,7 +1516,7 @@ data TaxInfo = TaxInfo
     , _tiSalePrice  :: !(Maybe Text)
     , _tiCode       :: !(Maybe Text)
     , _tiId         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaxInfo' with the minimum fields required to make a request.
 --
@@ -1600,7 +1600,7 @@ instance ToJSON TaxInfo where
 -- /See:/ 'tripsSearchRequest' smart constructor.
 newtype TripsSearchRequest = TripsSearchRequest
     { _tsrRequest :: Maybe TripOptionsRequest
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TripsSearchRequest' with the minimum fields required to make a request.
 --
@@ -1649,7 +1649,7 @@ data PricingInfo = PricingInfo
     , _piTax                 :: !(Maybe [TaxInfo])
     , _piSaleTotal           :: !(Maybe Text)
     , _piSaleFareTotal       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PricingInfo' with the minimum fields required to make a request.
 --
@@ -1830,7 +1830,7 @@ instance ToJSON PricingInfo where
 data FlightInfo = FlightInfo
     { _fiCarrier :: !(Maybe Text)
     , _fiNumber  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FlightInfo' with the minimum fields required to make a request.
 --
@@ -1884,7 +1884,7 @@ data FareInfo = FareInfo
     , _fKind        :: !Text
     , _fBasisCode   :: !(Maybe Text)
     , _fId          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FareInfo' with the minimum fields required to make a request.
 --
@@ -1987,7 +1987,7 @@ data SliceInput = SliceInput
     , _sliPermittedDePartureTime :: !(Maybe TimeOfDayRange)
     , _sliPermittedCarrier       :: !(Maybe [Text])
     , _sliAlliance               :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SliceInput' with the minimum fields required to make a request.
 --
@@ -2147,7 +2147,7 @@ data TripOptionsRequest = TripOptionsRequest
     , _torSolutions   :: !(Maybe Int32)
     , _torSlice       :: !(Maybe [SliceInput])
     , _torMaxPrice    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TripOptionsRequest' with the minimum fields required to make a request.
 --

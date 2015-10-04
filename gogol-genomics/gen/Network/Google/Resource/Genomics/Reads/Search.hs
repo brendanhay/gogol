@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -43,7 +44,7 @@ module Network.Google.Resource.Genomics.Reads.Search
     , rsQuotaUser
     , rsPrettyPrint
     , rsUserIP
-    , rsSearchReadsRequest
+    , rsPayload
     , rsKey
     , rsOAuthToken
     , rsFields
@@ -81,14 +82,14 @@ type ReadsSearchResource =
 --
 -- /See:/ 'readsSearch'' smart constructor.
 data ReadsSearch' = ReadsSearch'
-    { _rsQuotaUser          :: !(Maybe Text)
-    , _rsPrettyPrint        :: !Bool
-    , _rsUserIP             :: !(Maybe Text)
-    , _rsSearchReadsRequest :: !SearchReadsRequest
-    , _rsKey                :: !(Maybe Key)
-    , _rsOAuthToken         :: !(Maybe OAuthToken)
-    , _rsFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rsQuotaUser   :: !(Maybe Text)
+    , _rsPrettyPrint :: !Bool
+    , _rsUserIP      :: !(Maybe Text)
+    , _rsPayload     :: !SearchReadsRequest
+    , _rsKey         :: !(Maybe Key)
+    , _rsOAuthToken  :: !(Maybe OAuthToken)
+    , _rsFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadsSearch'' with the minimum fields required to make a request.
 --
@@ -100,7 +101,7 @@ data ReadsSearch' = ReadsSearch'
 --
 -- * 'rsUserIP'
 --
--- * 'rsSearchReadsRequest'
+-- * 'rsPayload'
 --
 -- * 'rsKey'
 --
@@ -108,14 +109,14 @@ data ReadsSearch' = ReadsSearch'
 --
 -- * 'rsFields'
 readsSearch'
-    :: SearchReadsRequest -- ^ 'SearchReadsRequest'
+    :: SearchReadsRequest -- ^ 'payload'
     -> ReadsSearch'
-readsSearch' pRsSearchReadsRequest_ =
+readsSearch' pRsPayload_ =
     ReadsSearch'
     { _rsQuotaUser = Nothing
     , _rsPrettyPrint = True
     , _rsUserIP = Nothing
-    , _rsSearchReadsRequest = pRsSearchReadsRequest_
+    , _rsPayload = pRsPayload_
     , _rsKey = Nothing
     , _rsOAuthToken = Nothing
     , _rsFields = Nothing
@@ -140,10 +141,9 @@ rsUserIP :: Lens' ReadsSearch' (Maybe Text)
 rsUserIP = lens _rsUserIP (\ s a -> s{_rsUserIP = a})
 
 -- | Multipart request metadata.
-rsSearchReadsRequest :: Lens' ReadsSearch' SearchReadsRequest
-rsSearchReadsRequest
-  = lens _rsSearchReadsRequest
-      (\ s a -> s{_rsSearchReadsRequest = a})
+rsPayload :: Lens' ReadsSearch' SearchReadsRequest
+rsPayload
+  = lens _rsPayload (\ s a -> s{_rsPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -173,7 +173,7 @@ instance GoogleRequest ReadsSearch' where
               _rsKey
               _rsOAuthToken
               (Just AltJSON)
-              _rsSearchReadsRequest
+              _rsPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReadsSearchResource)

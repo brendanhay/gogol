@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,10 +33,10 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Permissions.BatchUpd
     , RasterCollectionsPermissionsBatchUpdate'
 
     -- * Request Lenses
-    , rcpbuPermissionsBatchUpdateRequest
     , rcpbuQuotaUser
     , rcpbuPrettyPrint
     , rcpbuUserIP
+    , rcpbuPayload
     , rcpbuKey
     , rcpbuId
     , rcpbuOAuthToken
@@ -69,27 +70,27 @@ type RasterCollectionsPermissionsBatchUpdateResource
 --
 -- /See:/ 'rasterCollectionsPermissionsBatchUpdate'' smart constructor.
 data RasterCollectionsPermissionsBatchUpdate' = RasterCollectionsPermissionsBatchUpdate'
-    { _rcpbuPermissionsBatchUpdateRequest :: !PermissionsBatchUpdateRequest
-    , _rcpbuQuotaUser                     :: !(Maybe Text)
-    , _rcpbuPrettyPrint                   :: !Bool
-    , _rcpbuUserIP                        :: !(Maybe Text)
-    , _rcpbuKey                           :: !(Maybe Key)
-    , _rcpbuId                            :: !Text
-    , _rcpbuOAuthToken                    :: !(Maybe OAuthToken)
-    , _rcpbuFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rcpbuQuotaUser   :: !(Maybe Text)
+    , _rcpbuPrettyPrint :: !Bool
+    , _rcpbuUserIP      :: !(Maybe Text)
+    , _rcpbuPayload     :: !PermissionsBatchUpdateRequest
+    , _rcpbuKey         :: !(Maybe Key)
+    , _rcpbuId          :: !Text
+    , _rcpbuOAuthToken  :: !(Maybe OAuthToken)
+    , _rcpbuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsPermissionsBatchUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'rcpbuPermissionsBatchUpdateRequest'
 --
 -- * 'rcpbuQuotaUser'
 --
 -- * 'rcpbuPrettyPrint'
 --
 -- * 'rcpbuUserIP'
+--
+-- * 'rcpbuPayload'
 --
 -- * 'rcpbuKey'
 --
@@ -99,26 +100,20 @@ data RasterCollectionsPermissionsBatchUpdate' = RasterCollectionsPermissionsBatc
 --
 -- * 'rcpbuFields'
 rasterCollectionsPermissionsBatchUpdate'
-    :: PermissionsBatchUpdateRequest -- ^ 'PermissionsBatchUpdateRequest'
+    :: PermissionsBatchUpdateRequest -- ^ 'payload'
     -> Text -- ^ 'id'
     -> RasterCollectionsPermissionsBatchUpdate'
-rasterCollectionsPermissionsBatchUpdate' pRcpbuPermissionsBatchUpdateRequest_ pRcpbuId_ =
+rasterCollectionsPermissionsBatchUpdate' pRcpbuPayload_ pRcpbuId_ =
     RasterCollectionsPermissionsBatchUpdate'
-    { _rcpbuPermissionsBatchUpdateRequest = pRcpbuPermissionsBatchUpdateRequest_
-    , _rcpbuQuotaUser = Nothing
+    { _rcpbuQuotaUser = Nothing
     , _rcpbuPrettyPrint = True
     , _rcpbuUserIP = Nothing
+    , _rcpbuPayload = pRcpbuPayload_
     , _rcpbuKey = Nothing
     , _rcpbuId = pRcpbuId_
     , _rcpbuOAuthToken = Nothing
     , _rcpbuFields = Nothing
     }
-
--- | Multipart request metadata.
-rcpbuPermissionsBatchUpdateRequest :: Lens' RasterCollectionsPermissionsBatchUpdate' PermissionsBatchUpdateRequest
-rcpbuPermissionsBatchUpdateRequest
-  = lens _rcpbuPermissionsBatchUpdateRequest
-      (\ s a -> s{_rcpbuPermissionsBatchUpdateRequest = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -139,6 +134,11 @@ rcpbuPrettyPrint
 rcpbuUserIP :: Lens' RasterCollectionsPermissionsBatchUpdate' (Maybe Text)
 rcpbuUserIP
   = lens _rcpbuUserIP (\ s a -> s{_rcpbuUserIP = a})
+
+-- | Multipart request metadata.
+rcpbuPayload :: Lens' RasterCollectionsPermissionsBatchUpdate' PermissionsBatchUpdateRequest
+rcpbuPayload
+  = lens _rcpbuPayload (\ s a -> s{_rcpbuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -180,7 +180,7 @@ instance GoogleRequest
               _rcpbuKey
               _rcpbuOAuthToken
               (Just AltJSON)
-              _rcpbuPermissionsBatchUpdateRequest
+              _rcpbuPayload
           where go
                   = clientWithRoute
                       (Proxy ::

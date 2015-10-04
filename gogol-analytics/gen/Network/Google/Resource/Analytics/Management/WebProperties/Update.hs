@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.Analytics.Management.WebProperties.Update
     , mwpuPrettyPrint
     , mwpuWebPropertyId
     , mwpuUserIP
+    , mwpuPayload
     , mwpuAccountId
     , mwpuKey
-    , mwpuWebProperty
     , mwpuOAuthToken
     , mwpuFields
     ) where
@@ -70,12 +71,12 @@ data ManagementWebPropertiesUpdate' = ManagementWebPropertiesUpdate'
     , _mwpuPrettyPrint   :: !Bool
     , _mwpuWebPropertyId :: !Text
     , _mwpuUserIP        :: !(Maybe Text)
+    , _mwpuPayload       :: !WebProperty
     , _mwpuAccountId     :: !Text
     , _mwpuKey           :: !(Maybe Key)
-    , _mwpuWebProperty   :: !WebProperty
     , _mwpuOAuthToken    :: !(Maybe OAuthToken)
     , _mwpuFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertiesUpdate'' with the minimum fields required to make a request.
 --
@@ -89,29 +90,29 @@ data ManagementWebPropertiesUpdate' = ManagementWebPropertiesUpdate'
 --
 -- * 'mwpuUserIP'
 --
+-- * 'mwpuPayload'
+--
 -- * 'mwpuAccountId'
 --
 -- * 'mwpuKey'
---
--- * 'mwpuWebProperty'
 --
 -- * 'mwpuOAuthToken'
 --
 -- * 'mwpuFields'
 managementWebPropertiesUpdate'
     :: Text -- ^ 'webPropertyId'
+    -> WebProperty -- ^ 'payload'
     -> Text -- ^ 'accountId'
-    -> WebProperty -- ^ 'WebProperty'
     -> ManagementWebPropertiesUpdate'
-managementWebPropertiesUpdate' pMwpuWebPropertyId_ pMwpuAccountId_ pMwpuWebProperty_ =
+managementWebPropertiesUpdate' pMwpuWebPropertyId_ pMwpuPayload_ pMwpuAccountId_ =
     ManagementWebPropertiesUpdate'
     { _mwpuQuotaUser = Nothing
     , _mwpuPrettyPrint = False
     , _mwpuWebPropertyId = pMwpuWebPropertyId_
     , _mwpuUserIP = Nothing
+    , _mwpuPayload = pMwpuPayload_
     , _mwpuAccountId = pMwpuAccountId_
     , _mwpuKey = Nothing
-    , _mwpuWebProperty = pMwpuWebProperty_
     , _mwpuOAuthToken = Nothing
     , _mwpuFields = Nothing
     }
@@ -142,6 +143,11 @@ mwpuUserIP :: Lens' ManagementWebPropertiesUpdate' (Maybe Text)
 mwpuUserIP
   = lens _mwpuUserIP (\ s a -> s{_mwpuUserIP = a})
 
+-- | Multipart request metadata.
+mwpuPayload :: Lens' ManagementWebPropertiesUpdate' WebProperty
+mwpuPayload
+  = lens _mwpuPayload (\ s a -> s{_mwpuPayload = a})
+
 -- | Account ID to which the web property belongs
 mwpuAccountId :: Lens' ManagementWebPropertiesUpdate' Text
 mwpuAccountId
@@ -153,12 +159,6 @@ mwpuAccountId
 -- token.
 mwpuKey :: Lens' ManagementWebPropertiesUpdate' (Maybe Key)
 mwpuKey = lens _mwpuKey (\ s a -> s{_mwpuKey = a})
-
--- | Multipart request metadata.
-mwpuWebProperty :: Lens' ManagementWebPropertiesUpdate' WebProperty
-mwpuWebProperty
-  = lens _mwpuWebProperty
-      (\ s a -> s{_mwpuWebProperty = a})
 
 -- | OAuth 2.0 token for the current user.
 mwpuOAuthToken :: Lens' ManagementWebPropertiesUpdate' (Maybe OAuthToken)
@@ -189,7 +189,7 @@ instance GoogleRequest ManagementWebPropertiesUpdate'
               _mwpuKey
               _mwpuOAuthToken
               (Just AltJSON)
-              _mwpuWebProperty
+              _mwpuPayload
           where go
                   = clientWithRoute
                       (Proxy ::

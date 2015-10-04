@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Patch
     , cgpPrettyPrint
     , cgpUserIP
     , cgpProfileId
-    , cgpCreativeGroup
+    , cgpPayload
     , cgpKey
     , cgpId
     , cgpOAuthToken
@@ -67,16 +68,16 @@ type CreativeGroupsPatchResource =
 --
 -- /See:/ 'creativeGroupsPatch'' smart constructor.
 data CreativeGroupsPatch' = CreativeGroupsPatch'
-    { _cgpQuotaUser     :: !(Maybe Text)
-    , _cgpPrettyPrint   :: !Bool
-    , _cgpUserIP        :: !(Maybe Text)
-    , _cgpProfileId     :: !Int64
-    , _cgpCreativeGroup :: !CreativeGroup
-    , _cgpKey           :: !(Maybe Key)
-    , _cgpId            :: !Int64
-    , _cgpOAuthToken    :: !(Maybe OAuthToken)
-    , _cgpFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cgpQuotaUser   :: !(Maybe Text)
+    , _cgpPrettyPrint :: !Bool
+    , _cgpUserIP      :: !(Maybe Text)
+    , _cgpProfileId   :: !Int64
+    , _cgpPayload     :: !CreativeGroup
+    , _cgpKey         :: !(Maybe Key)
+    , _cgpId          :: !Int64
+    , _cgpOAuthToken  :: !(Maybe OAuthToken)
+    , _cgpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsPatch'' with the minimum fields required to make a request.
 --
@@ -90,7 +91,7 @@ data CreativeGroupsPatch' = CreativeGroupsPatch'
 --
 -- * 'cgpProfileId'
 --
--- * 'cgpCreativeGroup'
+-- * 'cgpPayload'
 --
 -- * 'cgpKey'
 --
@@ -101,16 +102,16 @@ data CreativeGroupsPatch' = CreativeGroupsPatch'
 -- * 'cgpFields'
 creativeGroupsPatch'
     :: Int64 -- ^ 'profileId'
-    -> CreativeGroup -- ^ 'CreativeGroup'
+    -> CreativeGroup -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> CreativeGroupsPatch'
-creativeGroupsPatch' pCgpProfileId_ pCgpCreativeGroup_ pCgpId_ =
+creativeGroupsPatch' pCgpProfileId_ pCgpPayload_ pCgpId_ =
     CreativeGroupsPatch'
     { _cgpQuotaUser = Nothing
     , _cgpPrettyPrint = True
     , _cgpUserIP = Nothing
     , _cgpProfileId = pCgpProfileId_
-    , _cgpCreativeGroup = pCgpCreativeGroup_
+    , _cgpPayload = pCgpPayload_
     , _cgpKey = Nothing
     , _cgpId = pCgpId_
     , _cgpOAuthToken = Nothing
@@ -142,10 +143,9 @@ cgpProfileId
   = lens _cgpProfileId (\ s a -> s{_cgpProfileId = a})
 
 -- | Multipart request metadata.
-cgpCreativeGroup :: Lens' CreativeGroupsPatch' CreativeGroup
-cgpCreativeGroup
-  = lens _cgpCreativeGroup
-      (\ s a -> s{_cgpCreativeGroup = a})
+cgpPayload :: Lens' CreativeGroupsPatch' CreativeGroup
+cgpPayload
+  = lens _cgpPayload (\ s a -> s{_cgpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -183,7 +183,7 @@ instance GoogleRequest CreativeGroupsPatch' where
               _cgpKey
               _cgpOAuthToken
               (Just AltJSON)
-              _cgpCreativeGroup
+              _cgpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeGroupsPatchResource)

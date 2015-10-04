@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -47,8 +48,8 @@ import           Network.Google.YouTubeAnalytics.Types
 -- 'GroupItemsDelete'' request conforms to.
 type GroupItemsDeleteResource =
      "groupItems" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "id" Text :>
+       QueryParam "id" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -69,7 +70,7 @@ data GroupItemsDelete' = GroupItemsDelete'
     , _gidId                     :: !Text
     , _gidOAuthToken             :: !(Maybe OAuthToken)
     , _gidFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupItemsDelete'' with the minimum fields required to make a request.
 --
@@ -169,7 +170,7 @@ instance GoogleRequest GroupItemsDelete' where
         type Rs GroupItemsDelete' = ()
         request = requestWithRoute defReq youTubeAnalyticsURL
         requestWithRoute r u GroupItemsDelete'{..}
-          = go _gidOnBehalfOfContentOwner (Just _gidId)
+          = go (Just _gidId) _gidOnBehalfOfContentOwner
               _gidQuotaUser
               (Just _gidPrettyPrint)
               _gidUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.Analytics.Management.Experiments.Patch
     , mepWebPropertyId
     , mepUserIP
     , mepProfileId
-    , mepExperiment
+    , mepPayload
     , mepAccountId
     , mepExperimentId
     , mepKey
@@ -77,13 +78,13 @@ data ManagementExperimentsPatch' = ManagementExperimentsPatch'
     , _mepWebPropertyId :: !Text
     , _mepUserIP        :: !(Maybe Text)
     , _mepProfileId     :: !Text
-    , _mepExperiment    :: !Experiment
+    , _mepPayload       :: !Experiment
     , _mepAccountId     :: !Text
     , _mepExperimentId  :: !Text
     , _mepKey           :: !(Maybe Key)
     , _mepOAuthToken    :: !(Maybe OAuthToken)
     , _mepFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsPatch'' with the minimum fields required to make a request.
 --
@@ -99,7 +100,7 @@ data ManagementExperimentsPatch' = ManagementExperimentsPatch'
 --
 -- * 'mepProfileId'
 --
--- * 'mepExperiment'
+-- * 'mepPayload'
 --
 -- * 'mepAccountId'
 --
@@ -113,18 +114,18 @@ data ManagementExperimentsPatch' = ManagementExperimentsPatch'
 managementExperimentsPatch'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
-    -> Experiment -- ^ 'Experiment'
+    -> Experiment -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'experimentId'
     -> ManagementExperimentsPatch'
-managementExperimentsPatch' pMepWebPropertyId_ pMepProfileId_ pMepExperiment_ pMepAccountId_ pMepExperimentId_ =
+managementExperimentsPatch' pMepWebPropertyId_ pMepProfileId_ pMepPayload_ pMepAccountId_ pMepExperimentId_ =
     ManagementExperimentsPatch'
     { _mepQuotaUser = Nothing
     , _mepPrettyPrint = False
     , _mepWebPropertyId = pMepWebPropertyId_
     , _mepUserIP = Nothing
     , _mepProfileId = pMepProfileId_
-    , _mepExperiment = pMepExperiment_
+    , _mepPayload = pMepPayload_
     , _mepAccountId = pMepAccountId_
     , _mepExperimentId = pMepExperimentId_
     , _mepKey = Nothing
@@ -163,10 +164,9 @@ mepProfileId
   = lens _mepProfileId (\ s a -> s{_mepProfileId = a})
 
 -- | Multipart request metadata.
-mepExperiment :: Lens' ManagementExperimentsPatch' Experiment
-mepExperiment
-  = lens _mepExperiment
-      (\ s a -> s{_mepExperiment = a})
+mepPayload :: Lens' ManagementExperimentsPatch' Experiment
+mepPayload
+  = lens _mepPayload (\ s a -> s{_mepPayload = a})
 
 -- | Account ID of the experiment to update.
 mepAccountId :: Lens' ManagementExperimentsPatch' Text
@@ -214,7 +214,7 @@ instance GoogleRequest ManagementExperimentsPatch'
               _mepKey
               _mepOAuthToken
               (Just AltJSON)
-              _mepExperiment
+              _mepPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementExperimentsPatchResource)

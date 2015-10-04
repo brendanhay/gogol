@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.Gan.Links.Insert
     -- * Request Lenses
     , liQuotaUser
     , liPrettyPrint
-    , liLink
     , liUserIP
+    , liPayload
     , liRoleId
     , liRole
     , liKey
@@ -65,14 +66,14 @@ type LinksInsertResource =
 data LinksInsert' = LinksInsert'
     { _liQuotaUser   :: !(Maybe Text)
     , _liPrettyPrint :: !Bool
-    , _liLink        :: !Link
     , _liUserIP      :: !(Maybe Text)
+    , _liPayload     :: !Link
     , _liRoleId      :: !Text
     , _liRole        :: !GanLinksInsertRole
     , _liKey         :: !(Maybe Key)
     , _liOAuthToken  :: !(Maybe OAuthToken)
     , _liFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinksInsert'' with the minimum fields required to make a request.
 --
@@ -82,9 +83,9 @@ data LinksInsert' = LinksInsert'
 --
 -- * 'liPrettyPrint'
 --
--- * 'liLink'
---
 -- * 'liUserIP'
+--
+-- * 'liPayload'
 --
 -- * 'liRoleId'
 --
@@ -96,16 +97,16 @@ data LinksInsert' = LinksInsert'
 --
 -- * 'liFields'
 linksInsert'
-    :: Link -- ^ 'Link'
+    :: Link -- ^ 'payload'
     -> Text -- ^ 'roleId'
     -> GanLinksInsertRole -- ^ 'role'
     -> LinksInsert'
-linksInsert' pLiLink_ pLiRoleId_ pLiRole_ =
+linksInsert' pLiPayload_ pLiRoleId_ pLiRole_ =
     LinksInsert'
     { _liQuotaUser = Nothing
     , _liPrettyPrint = True
-    , _liLink = pLiLink_
     , _liUserIP = Nothing
+    , _liPayload = pLiPayload_
     , _liRoleId = pLiRoleId_
     , _liRole = pLiRole_
     , _liKey = Nothing
@@ -126,14 +127,15 @@ liPrettyPrint
   = lens _liPrettyPrint
       (\ s a -> s{_liPrettyPrint = a})
 
--- | Multipart request metadata.
-liLink :: Lens' LinksInsert' Link
-liLink = lens _liLink (\ s a -> s{_liLink = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 liUserIP :: Lens' LinksInsert' (Maybe Text)
 liUserIP = lens _liUserIP (\ s a -> s{_liUserIP = a})
+
+-- | Multipart request metadata.
+liPayload :: Lens' LinksInsert' Link
+liPayload
+  = lens _liPayload (\ s a -> s{_liPayload = a})
 
 -- | The ID of the requesting advertiser or publisher.
 liRoleId :: Lens' LinksInsert' Text
@@ -174,7 +176,7 @@ instance GoogleRequest LinksInsert' where
               _liKey
               _liOAuthToken
               (Just AltJSON)
-              _liLink
+              _liPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LinksInsertResource)

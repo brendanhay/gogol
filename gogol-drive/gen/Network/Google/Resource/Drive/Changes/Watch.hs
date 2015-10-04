@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.Drive.Changes.Watch
     , cwUserIP
     , cwIncludeSubscribed
     , cwStartChangeId
-    , cwChannel
+    , cwPayload
     , cwKey
     , cwSpaces
     , cwPageToken
@@ -53,12 +54,12 @@ import           Network.Google.Prelude
 type ChangesWatchResource =
      "changes" :>
        "watch" :>
-         QueryParam "includeDeleted" Bool :>
-           QueryParam "includeSubscribed" Bool :>
-             QueryParam "maxResults" Int32 :>
+         QueryParam "includeSubscribed" Bool :>
+           QueryParam "startChangeId" Int64 :>
+             QueryParam "spaces" Text :>
                QueryParam "pageToken" Text :>
-                 QueryParam "spaces" Text :>
-                   QueryParam "startChangeId" Int64 :>
+                 QueryParam "maxResults" Int32 :>
+                   QueryParam "includeDeleted" Bool :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -78,7 +79,7 @@ data ChangesWatch' = ChangesWatch'
     , _cwUserIP            :: !(Maybe Text)
     , _cwIncludeSubscribed :: !Bool
     , _cwStartChangeId     :: !(Maybe Int64)
-    , _cwChannel           :: !Channel
+    , _cwPayload           :: !Channel
     , _cwKey               :: !(Maybe Key)
     , _cwSpaces            :: !(Maybe Text)
     , _cwPageToken         :: !(Maybe Text)
@@ -86,7 +87,7 @@ data ChangesWatch' = ChangesWatch'
     , _cwMaxResults        :: !Int32
     , _cwIncludeDeleted    :: !Bool
     , _cwFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesWatch'' with the minimum fields required to make a request.
 --
@@ -102,7 +103,7 @@ data ChangesWatch' = ChangesWatch'
 --
 -- * 'cwStartChangeId'
 --
--- * 'cwChannel'
+-- * 'cwPayload'
 --
 -- * 'cwKey'
 --
@@ -118,16 +119,16 @@ data ChangesWatch' = ChangesWatch'
 --
 -- * 'cwFields'
 changesWatch'
-    :: Channel -- ^ 'Channel'
+    :: Channel -- ^ 'payload'
     -> ChangesWatch'
-changesWatch' pCwChannel_ =
+changesWatch' pCwPayload_ =
     ChangesWatch'
     { _cwQuotaUser = Nothing
     , _cwPrettyPrint = True
     , _cwUserIP = Nothing
     , _cwIncludeSubscribed = True
     , _cwStartChangeId = Nothing
-    , _cwChannel = pCwChannel_
+    , _cwPayload = pCwPayload_
     , _cwKey = Nothing
     , _cwSpaces = Nothing
     , _cwPageToken = Nothing
@@ -170,9 +171,9 @@ cwStartChangeId
       (\ s a -> s{_cwStartChangeId = a})
 
 -- | Multipart request metadata.
-cwChannel :: Lens' ChangesWatch' Channel
-cwChannel
-  = lens _cwChannel (\ s a -> s{_cwChannel = a})
+cwPayload :: Lens' ChangesWatch' Channel
+cwPayload
+  = lens _cwPayload (\ s a -> s{_cwPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -218,12 +219,11 @@ instance GoogleRequest ChangesWatch' where
         type Rs ChangesWatch' = Channel
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ChangesWatch'{..}
-          = go (Just _cwIncludeDeleted)
-              (Just _cwIncludeSubscribed)
-              (Just _cwMaxResults)
-              _cwPageToken
+          = go (Just _cwIncludeSubscribed) _cwStartChangeId
               _cwSpaces
-              _cwStartChangeId
+              _cwPageToken
+              (Just _cwMaxResults)
+              (Just _cwIncludeDeleted)
               _cwQuotaUser
               (Just _cwPrettyPrint)
               _cwUserIP
@@ -231,7 +231,7 @@ instance GoogleRequest ChangesWatch' where
               _cwKey
               _cwOAuthToken
               (Just AltJSON)
-              _cwChannel
+              _cwPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChangesWatchResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,8 +37,8 @@ module Network.Google.Resource.Genomics.AnnotationSets.Update
     , asuPrettyPrint
     , asuAnnotationSetId
     , asuUserIP
+    , asuPayload
     , asuKey
-    , asuAnnotationSet
     , asuOAuthToken
     , asuFields
     ) where
@@ -70,11 +71,11 @@ data AnnotationSetsUpdate' = AnnotationSetsUpdate'
     , _asuPrettyPrint     :: !Bool
     , _asuAnnotationSetId :: !Text
     , _asuUserIP          :: !(Maybe Text)
+    , _asuPayload         :: !AnnotationSet
     , _asuKey             :: !(Maybe Key)
-    , _asuAnnotationSet   :: !AnnotationSet
     , _asuOAuthToken      :: !(Maybe OAuthToken)
     , _asuFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSetsUpdate'' with the minimum fields required to make a request.
 --
@@ -88,25 +89,25 @@ data AnnotationSetsUpdate' = AnnotationSetsUpdate'
 --
 -- * 'asuUserIP'
 --
--- * 'asuKey'
+-- * 'asuPayload'
 --
--- * 'asuAnnotationSet'
+-- * 'asuKey'
 --
 -- * 'asuOAuthToken'
 --
 -- * 'asuFields'
 annotationSetsUpdate'
     :: Text -- ^ 'annotationSetId'
-    -> AnnotationSet -- ^ 'AnnotationSet'
+    -> AnnotationSet -- ^ 'payload'
     -> AnnotationSetsUpdate'
-annotationSetsUpdate' pAsuAnnotationSetId_ pAsuAnnotationSet_ =
+annotationSetsUpdate' pAsuAnnotationSetId_ pAsuPayload_ =
     AnnotationSetsUpdate'
     { _asuQuotaUser = Nothing
     , _asuPrettyPrint = True
     , _asuAnnotationSetId = pAsuAnnotationSetId_
     , _asuUserIP = Nothing
+    , _asuPayload = pAsuPayload_
     , _asuKey = Nothing
-    , _asuAnnotationSet = pAsuAnnotationSet_
     , _asuOAuthToken = Nothing
     , _asuFields = Nothing
     }
@@ -136,17 +137,16 @@ asuUserIP :: Lens' AnnotationSetsUpdate' (Maybe Text)
 asuUserIP
   = lens _asuUserIP (\ s a -> s{_asuUserIP = a})
 
+-- | Multipart request metadata.
+asuPayload :: Lens' AnnotationSetsUpdate' AnnotationSet
+asuPayload
+  = lens _asuPayload (\ s a -> s{_asuPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 asuKey :: Lens' AnnotationSetsUpdate' (Maybe Key)
 asuKey = lens _asuKey (\ s a -> s{_asuKey = a})
-
--- | Multipart request metadata.
-asuAnnotationSet :: Lens' AnnotationSetsUpdate' AnnotationSet
-asuAnnotationSet
-  = lens _asuAnnotationSet
-      (\ s a -> s{_asuAnnotationSet = a})
 
 -- | OAuth 2.0 token for the current user.
 asuOAuthToken :: Lens' AnnotationSetsUpdate' (Maybe OAuthToken)
@@ -174,7 +174,7 @@ instance GoogleRequest AnnotationSetsUpdate' where
               _asuKey
               _asuOAuthToken
               (Just AltJSON)
-              _asuAnnotationSet
+              _asuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationSetsUpdateResource)

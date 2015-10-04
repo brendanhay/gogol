@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,8 +52,8 @@ type EventsQuickAddResource =
        Capture "calendarId" Text :>
          "events" :>
            "quickAdd" :>
-             QueryParam "sendNotifications" Bool :>
-               QueryParam "text" Text :>
+             QueryParam "text" Text :>
+               QueryParam "sendNotifications" Bool :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -74,7 +75,7 @@ data EventsQuickAdd' = EventsQuickAdd'
     , _eqaSendNotifications :: !(Maybe Bool)
     , _eqaOAuthToken        :: !(Maybe OAuthToken)
     , _eqaFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsQuickAdd'' with the minimum fields required to make a request.
 --
@@ -177,8 +178,8 @@ instance GoogleRequest EventsQuickAdd' where
         type Rs EventsQuickAdd' = Event
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsQuickAdd'{..}
-          = go _eqaSendNotifications _eqaCalendarId
-              (Just _eqaText)
+          = go _eqaCalendarId (Just _eqaText)
+              _eqaSendNotifications
               _eqaQuotaUser
               (Just _eqaPrettyPrint)
               _eqaUserIP

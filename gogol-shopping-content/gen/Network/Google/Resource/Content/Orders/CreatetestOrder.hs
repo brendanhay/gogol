@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.Content.Orders.CreatetestOrder
     , ocoMerchantId
     , ocoPrettyPrint
     , ocoUserIP
-    , ocoOrdersCreateTestOrderRequest
+    , ocoPayload
     , ocoKey
     , ocoOAuthToken
     , ocoFields
@@ -62,15 +63,15 @@ type OrdersCreatetestOrderResource =
 --
 -- /See:/ 'ordersCreatetestOrder'' smart constructor.
 data OrdersCreatetestOrder' = OrdersCreatetestOrder'
-    { _ocoQuotaUser                    :: !(Maybe Text)
-    , _ocoMerchantId                   :: !Word64
-    , _ocoPrettyPrint                  :: !Bool
-    , _ocoUserIP                       :: !(Maybe Text)
-    , _ocoOrdersCreateTestOrderRequest :: !OrdersCreateTestOrderRequest
-    , _ocoKey                          :: !(Maybe Key)
-    , _ocoOAuthToken                   :: !(Maybe OAuthToken)
-    , _ocoFields                       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ocoQuotaUser   :: !(Maybe Text)
+    , _ocoMerchantId  :: !Word64
+    , _ocoPrettyPrint :: !Bool
+    , _ocoUserIP      :: !(Maybe Text)
+    , _ocoPayload     :: !OrdersCreateTestOrderRequest
+    , _ocoKey         :: !(Maybe Key)
+    , _ocoOAuthToken  :: !(Maybe OAuthToken)
+    , _ocoFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCreatetestOrder'' with the minimum fields required to make a request.
 --
@@ -84,7 +85,7 @@ data OrdersCreatetestOrder' = OrdersCreatetestOrder'
 --
 -- * 'ocoUserIP'
 --
--- * 'ocoOrdersCreateTestOrderRequest'
+-- * 'ocoPayload'
 --
 -- * 'ocoKey'
 --
@@ -93,15 +94,15 @@ data OrdersCreatetestOrder' = OrdersCreatetestOrder'
 -- * 'ocoFields'
 ordersCreatetestOrder'
     :: Word64 -- ^ 'merchantId'
-    -> OrdersCreateTestOrderRequest -- ^ 'OrdersCreateTestOrderRequest'
+    -> OrdersCreateTestOrderRequest -- ^ 'payload'
     -> OrdersCreatetestOrder'
-ordersCreatetestOrder' pOcoMerchantId_ pOcoOrdersCreateTestOrderRequest_ =
+ordersCreatetestOrder' pOcoMerchantId_ pOcoPayload_ =
     OrdersCreatetestOrder'
     { _ocoQuotaUser = Nothing
     , _ocoMerchantId = pOcoMerchantId_
     , _ocoPrettyPrint = True
     , _ocoUserIP = Nothing
-    , _ocoOrdersCreateTestOrderRequest = pOcoOrdersCreateTestOrderRequest_
+    , _ocoPayload = pOcoPayload_
     , _ocoKey = Nothing
     , _ocoOAuthToken = Nothing
     , _ocoFields = Nothing
@@ -133,10 +134,9 @@ ocoUserIP
   = lens _ocoUserIP (\ s a -> s{_ocoUserIP = a})
 
 -- | Multipart request metadata.
-ocoOrdersCreateTestOrderRequest :: Lens' OrdersCreatetestOrder' OrdersCreateTestOrderRequest
-ocoOrdersCreateTestOrderRequest
-  = lens _ocoOrdersCreateTestOrderRequest
-      (\ s a -> s{_ocoOrdersCreateTestOrderRequest = a})
+ocoPayload :: Lens' OrdersCreatetestOrder' OrdersCreateTestOrderRequest
+ocoPayload
+  = lens _ocoPayload (\ s a -> s{_ocoPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -171,7 +171,7 @@ instance GoogleRequest OrdersCreatetestOrder' where
               _ocoKey
               _ocoOAuthToken
               (Just AltJSON)
-              _ocoOrdersCreateTestOrderRequest
+              _ocoPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrdersCreatetestOrderResource)

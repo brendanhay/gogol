@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- /See:/ 'parent' smart constructor.
 newtype Parent = Parent
     { _pId :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Parent' with the minimum fields required to make a request.
 --
@@ -55,7 +55,7 @@ instance ToJSON Parent where
 -- /See:/ 'permissionsBatchUpdateRequest' smart constructor.
 newtype PermissionsBatchUpdateRequest = PermissionsBatchUpdateRequest
     { _pburPermissions :: Maybe [Permission]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsBatchUpdateRequest' with the minimum fields required to make a request.
 --
@@ -94,7 +94,7 @@ instance ToJSON PermissionsBatchUpdateRequest where
 -- /See:/ 'geoJSONProperties' smart constructor.
 data GeoJSONProperties =
     GeoJSONProperties
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoJSONProperties' with the minimum fields required to make a request.
 --
@@ -116,7 +116,7 @@ instance ToJSON GeoJSONProperties where
 data FeaturesBatchPatchRequest = FeaturesBatchPatchRequest
     { _fbprFeatures            :: !(Maybe [Feature])
     , _fbprNormalizeGeometries :: !Bool
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FeaturesBatchPatchRequest' with the minimum fields required to make a request.
 --
@@ -172,7 +172,7 @@ instance ToJSON FeaturesBatchPatchRequest where
 data ValueRange = ValueRange
     { _vrMax :: !(Maybe Double)
     , _vrMin :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ValueRange' with the minimum fields required to make a request.
 --
@@ -216,7 +216,7 @@ data Feature = Feature
     { _fGeometry   :: !(Maybe GeoJSONGeometry)
     , _fType       :: !Text
     , _fProperties :: !(Maybe GeoJSONProperties)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Feature' with the minimum fields required to make a request.
 --
@@ -271,7 +271,7 @@ instance ToJSON Feature where
 -- /See:/ 'permissionsBatchDeleteRequest' smart constructor.
 newtype PermissionsBatchDeleteRequest = PermissionsBatchDeleteRequest
     { _pbdrIds :: Maybe [Text]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsBatchDeleteRequest' with the minimum fields required to make a request.
 --
@@ -308,7 +308,7 @@ instance ToJSON PermissionsBatchDeleteRequest where
 -- /See:/ 'geoJSONGeometry' smart constructor.
 data GeoJSONGeometry =
     GeoJSONGeometry
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoJSONGeometry' with the minimum fields required to make a request.
 --
@@ -333,7 +333,7 @@ data MapLayer = MapLayer
     , _mlName            :: !(Maybe Text)
     , _mlId              :: !(Maybe Text)
     , _mlType            :: !(Maybe MapLayerType)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapLayer' with the minimum fields required to make a request.
 --
@@ -426,7 +426,7 @@ instance ToJSON MapLayer where
 data RasterCollectionsListResponse = RasterCollectionsListResponse
     { _rclrNextPageToken     :: !(Maybe Word8)
     , _rclrRasterCollections :: !(Maybe [RasterCollection])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsListResponse' with the minimum fields required to make a request.
 --
@@ -477,7 +477,7 @@ instance ToJSON RasterCollectionsListResponse where
 -- /See:/ 'projectsListResponse' smart constructor.
 newtype ProjectsListResponse = ProjectsListResponse
     { _plrProjects :: Maybe [Project]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsListResponse' with the minimum fields required to make a request.
 --
@@ -517,7 +517,7 @@ instance ToJSON ProjectsListResponse where
 data ZoomLevels = ZoomLevels
     { _zlMax :: !(Maybe Int32)
     , _zlMin :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoomLevels' with the minimum fields required to make a request.
 --
@@ -559,7 +559,7 @@ instance ToJSON ZoomLevels where
 -- /See:/ 'featureInfo' smart constructor.
 newtype FeatureInfo = FeatureInfo
     { _fiContent :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FeatureInfo' with the minimum fields required to make a request.
 --
@@ -595,7 +595,7 @@ instance ToJSON FeatureInfo where
 data SizeRange = SizeRange
     { _srMax :: !(Maybe Double)
     , _srMin :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SizeRange' with the minimum fields required to make a request.
 --
@@ -642,7 +642,7 @@ data MapFolder = MapFolder
     , _mfKey             :: !(Maybe Text)
     , _mfName            :: !(Maybe Text)
     , _mfType            :: !(Maybe MapFolderType)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapFolder' with the minimum fields required to make a request.
 --
@@ -747,7 +747,7 @@ data RasterCollection = RasterCollection
     , _rcWritersCanEditPermissions :: !(Maybe Bool)
     , _rcEtag                      :: !(Maybe Text)
     , _rcCreatorEmail              :: !(Maybe Text)
-    , _rcRasterType                :: !(Maybe RasterCollectionRasterType)
+    , _rcRasterType                :: !(Maybe RasterType)
     , _rcLastModifiedTime          :: !(Maybe DateTime')
     , _rcLastModifierEmail         :: !(Maybe Text)
     , _rcName                      :: !(Maybe Text)
@@ -760,7 +760,7 @@ data RasterCollection = RasterCollection
     , _rcDescription               :: !(Maybe Text)
     , _rcAttribution               :: !(Maybe Text)
     , _rcTags                      :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollection' with the minimum fields required to make a request.
 --
@@ -848,7 +848,7 @@ rcCreatorEmail
       (\ s a -> s{_rcCreatorEmail = a})
 
 -- | The type of rasters contained within this RasterCollection.
-rcRasterType :: Lens' RasterCollection (Maybe RasterCollectionRasterType)
+rcRasterType :: Lens' RasterCollection (Maybe RasterType)
 rcRasterType
   = lens _rcRasterType (\ s a -> s{_rcRasterType = a})
 
@@ -986,7 +986,7 @@ data LineStyleStroke = LineStyleStroke
     { _lssColor   :: !(Maybe Text)
     , _lssWidth   :: !(Maybe Double)
     , _lssOpacity :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LineStyleStroke' with the minimum fields required to make a request.
 --
@@ -1042,7 +1042,7 @@ instance ToJSON LineStyleStroke where
 data Project = Project
     { _proName :: !(Maybe Text)
     , _proId   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Project' with the minimum fields required to make a request.
 --
@@ -1084,7 +1084,7 @@ instance ToJSON Project where
 data Color = Color
     { _cColor   :: !(Maybe Text)
     , _cOpacity :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Color' with the minimum fields required to make a request.
 --
@@ -1144,7 +1144,7 @@ data Asset = Asset
     , _aType                      :: !(Maybe AssetType)
     , _aDescription               :: !(Maybe Text)
     , _aTags                      :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Asset' with the minimum fields required to make a request.
 --
@@ -1325,7 +1325,7 @@ instance ToJSON Asset where
 -- /See:/ 'processResponse' smart constructor.
 data ProcessResponse =
     ProcessResponse
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProcessResponse' with the minimum fields required to make a request.
 --
@@ -1346,7 +1346,7 @@ instance ToJSON ProcessResponse where
 data TableColumn = TableColumn
     { _tcName :: !(Maybe Text)
     , _tcType :: !(Maybe TableColumnType)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableColumn' with the minimum fields required to make a request.
 --
@@ -1389,7 +1389,7 @@ instance ToJSON TableColumn where
 -- /See:/ 'rasterCollectionsRastersBatchDeleteResponse' smart constructor.
 data RasterCollectionsRastersBatchDeleteResponse =
     RasterCollectionsRastersBatchDeleteResponse
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsRastersBatchDeleteResponse' with the minimum fields required to make a request.
 --
@@ -1416,8 +1416,8 @@ instance ToJSON
 data ScaledShape = ScaledShape
     { _ssBOrder :: !(Maybe BOrder)
     , _ssFill   :: !(Maybe Color)
-    , _ssShape  :: !(Maybe ScaledShapeShape)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _ssShape  :: !(Maybe Shape)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScaledShape' with the minimum fields required to make a request.
 --
@@ -1448,7 +1448,7 @@ ssFill :: Lens' ScaledShape (Maybe Color)
 ssFill = lens _ssFill (\ s a -> s{_ssFill = a})
 
 -- | Name of the shape.
-ssShape :: Lens' ScaledShape (Maybe ScaledShapeShape)
+ssShape :: Lens' ScaledShape (Maybe Shape)
 ssShape = lens _ssShape (\ s a -> s{_ssShape = a})
 
 instance FromJSON ScaledShape where
@@ -1474,7 +1474,7 @@ data Icon = Icon
     { _iName        :: !(Maybe Text)
     , _iId          :: !(Maybe Text)
     , _iDescription :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Icon' with the minimum fields required to make a request.
 --
@@ -1528,7 +1528,7 @@ instance ToJSON Icon where
 data FeaturesBatchDeleteRequest = FeaturesBatchDeleteRequest
     { _fbdrPrimaryKeys :: !(Maybe [Text])
     , _fbdrGxIds       :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FeaturesBatchDeleteRequest' with the minimum fields required to make a request.
 --
@@ -1579,7 +1579,7 @@ instance ToJSON FeaturesBatchDeleteRequest where
 -- /See:/ 'rasterCollectionsRastersBatchInsertResponse' smart constructor.
 data RasterCollectionsRastersBatchInsertResponse =
     RasterCollectionsRastersBatchInsertResponse
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsRastersBatchInsertResponse' with the minimum fields required to make a request.
 --
@@ -1609,7 +1609,7 @@ data FeaturesListResponse = FeaturesListResponse
     , _flrSchema                  :: !(Maybe Schema)
     , _flrFeatures                :: !(Maybe [Feature])
     , _flrType                    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FeaturesListResponse' with the minimum fields required to make a request.
 --
@@ -1691,7 +1691,7 @@ instance ToJSON FeaturesListResponse where
 data ParentsListResponse = ParentsListResponse
     { _plrNextPageToken :: !(Maybe Text)
     , _plrParents       :: !(Maybe [Parent])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ParentsListResponse' with the minimum fields required to make a request.
 --
@@ -1741,7 +1741,7 @@ instance ToJSON ParentsListResponse where
 -- /See:/ 'rasterCollectionsRasterBatchDeleteRequest' smart constructor.
 newtype RasterCollectionsRasterBatchDeleteRequest = RasterCollectionsRasterBatchDeleteRequest
     { _rcrbdrIds :: Maybe [Text]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsRasterBatchDeleteRequest' with the minimum fields required to make a request.
 --
@@ -1780,14 +1780,14 @@ instance ToJSON
 --
 -- /See:/ 'labelStyle' smart constructor.
 data LabelStyle = LabelStyle
-    { _lsFontStyle  :: !(Maybe LabelStyleFontStyle)
+    { _lsFontStyle  :: !(Maybe FontStyle)
     , _lsColor      :: !(Maybe Text)
     , _lsSize       :: !(Maybe Double)
     , _lsOpacity    :: !(Maybe Double)
     , _lsOutline    :: !(Maybe Color)
-    , _lsFontWeight :: !(Maybe LabelStyleFontWeight)
+    , _lsFontWeight :: !(Maybe FontWeight)
     , _lsColumn     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LabelStyle' with the minimum fields required to make a request.
 --
@@ -1820,7 +1820,7 @@ labelStyle =
     }
 
 -- | Font style of the label, defaults to \'normal\'.
-lsFontStyle :: Lens' LabelStyle (Maybe LabelStyleFontStyle)
+lsFontStyle :: Lens' LabelStyle (Maybe FontStyle)
 lsFontStyle
   = lens _lsFontStyle (\ s a -> s{_lsFontStyle = a})
 
@@ -1844,7 +1844,7 @@ lsOutline
   = lens _lsOutline (\ s a -> s{_lsOutline = a})
 
 -- | Font weight of the label, defaults to \'normal\'.
-lsFontWeight :: Lens' LabelStyle (Maybe LabelStyleFontWeight)
+lsFontWeight :: Lens' LabelStyle (Maybe FontWeight)
 lsFontWeight
   = lens _lsFontWeight (\ s a -> s{_lsFontWeight = a})
 
@@ -1879,7 +1879,7 @@ instance ToJSON LabelStyle where
 -- /See:/ 'mapItem' smart constructor.
 data MapItem =
     MapItem
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapItem' with the minimum fields required to make a request.
 --
@@ -1900,7 +1900,7 @@ instance ToJSON MapItem where
 data IconsListResponse = IconsListResponse
     { _ilrNextPageToken :: !(Maybe Text)
     , _ilrIcons         :: !(Maybe [Icon])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IconsListResponse' with the minimum fields required to make a request.
 --
@@ -1953,7 +1953,7 @@ data Schema = Schema
     { _sPrimaryKey      :: !(Maybe Text)
     , _sColumns         :: !(Maybe [TableColumn])
     , _sPrimaryGeometry :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Schema' with the minimum fields required to make a request.
 --
@@ -2017,9 +2017,9 @@ instance ToJSON Schema where
 -- /See:/ 'acquisitionTime' smart constructor.
 data AcquisitionTime = AcquisitionTime
     { _atStart     :: !(Maybe DateTime')
-    , _atPrecision :: !(Maybe AcquisitionTimePrecision)
+    , _atPrecision :: !(Maybe Precision)
     , _atEnd       :: !(Maybe DateTime')
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AcquisitionTime' with the minimum fields required to make a request.
 --
@@ -2047,7 +2047,7 @@ atStart
       mapping _DateTime
 
 -- | The precision of acquisition time.
-atPrecision :: Lens' AcquisitionTime (Maybe AcquisitionTimePrecision)
+atPrecision :: Lens' AcquisitionTime (Maybe Precision)
 atPrecision
   = lens _atPrecision (\ s a -> s{_atPrecision = a})
 
@@ -2084,7 +2084,7 @@ instance ToJSON AcquisitionTime where
 data TablesListResponse = TablesListResponse
     { _tlrNextPageToken :: !(Maybe Word8)
     , _tlrTables        :: !(Maybe [Table])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesListResponse' with the minimum fields required to make a request.
 --
@@ -2138,7 +2138,7 @@ data Map = Map
     , _mapaEtag                      :: !(Maybe Text)
     , _mapaDefaultViewport           :: !(Maybe [Double])
     , _mapaContents                  :: !(Maybe [MapItem])
-    , _mapaPublishingStatus          :: !(Maybe MapPublishingStatus)
+    , _mapaPublishingStatus          :: !(Maybe PublishingStatus)
     , _mapaCreatorEmail              :: !(Maybe Text)
     , _mapaLastModifiedTime          :: !(Maybe DateTime')
     , _mapaLastModifierEmail         :: !(Maybe Text)
@@ -2152,7 +2152,7 @@ data Map = Map
     , _mapaPublishedAccessList       :: !(Maybe Text)
     , _mapaDescription               :: !(Maybe Text)
     , _mapaTags                      :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Map' with the minimum fields required to make a request.
 --
@@ -2256,7 +2256,7 @@ mapaContents
       . _Coerce
 
 -- | The publishing status of this map.
-mapaPublishingStatus :: Lens' Map (Maybe MapPublishingStatus)
+mapaPublishingStatus :: Lens' Map (Maybe PublishingStatus)
 mapaPublishingStatus
   = lens _mapaPublishingStatus
       (\ s a -> s{_mapaPublishingStatus = a})
@@ -2421,7 +2421,7 @@ data IconStyle = IconStyle
     , _isScalingFunction :: !(Maybe ScalingFunction)
     , _isName            :: !(Maybe Text)
     , _isId              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IconStyle' with the minimum fields required to make a request.
 --
@@ -2491,7 +2491,7 @@ data BOrder = BOrder
     { _boColor   :: !(Maybe Text)
     , _boWidth   :: !(Maybe Double)
     , _boOpacity :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BOrder' with the minimum fields required to make a request.
 --
@@ -2550,7 +2550,7 @@ data DisplayRule = DisplayRule
     , _drFilters        :: !(Maybe [Filter])
     , _drName           :: !(Maybe Text)
     , _drLineOptions    :: !(Maybe LineStyle)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisplayRule' with the minimum fields required to make a request.
 --
@@ -2648,7 +2648,7 @@ data PublishedMap = PublishedMap
     , _pmId              :: !(Maybe Text)
     , _pmProjectId       :: !(Maybe Text)
     , _pmDescription     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishedMap' with the minimum fields required to make a request.
 --
@@ -2739,7 +2739,7 @@ instance ToJSON PublishedMap where
 -- /See:/ 'rasterCollectionsRastersBatchInsertRequest' smart constructor.
 newtype RasterCollectionsRastersBatchInsertRequest = RasterCollectionsRastersBatchInsertRequest
     { _rcrbirIds :: Maybe [Text]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsRastersBatchInsertRequest' with the minimum fields required to make a request.
 --
@@ -2780,7 +2780,7 @@ instance ToJSON
 data RasterCollectionsRastersListResponse = RasterCollectionsRastersListResponse
     { _rcrlrNextPageToken :: !(Maybe Text)
     , _rcrlrRasters       :: !(Maybe [RasterCollectionsRaster])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsRastersListResponse' with the minimum fields required to make a request.
 --
@@ -2833,7 +2833,7 @@ instance ToJSON RasterCollectionsRastersListResponse
 data GeoJSONMultiLineString = GeoJSONMultiLineString
     { _gjmlsCoordinates :: !(Maybe [[[Double]]])
     , _gjmlsType        :: !(Maybe GeoJSONMultiLineStringType)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoJSONMultiLineString' with the minimum fields required to make a request.
 --
@@ -2883,9 +2883,9 @@ instance ToJSON GeoJSONMultiLineString where
 data ScalingFunction = ScalingFunction
     { _sfValueRange  :: !(Maybe ValueRange)
     , _sfSizeRange   :: !(Maybe SizeRange)
-    , _sfScalingType :: !(Maybe ScalingFunctionScalingType)
+    , _sfScalingType :: !(Maybe ScalingType)
     , _sfColumn      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScalingFunction' with the minimum fields required to make a request.
 --
@@ -2921,7 +2921,7 @@ sfSizeRange
 
 -- | The type of scaling function to use. Defaults to SQRT. Currently only
 -- linear and square root scaling are supported.
-sfScalingType :: Lens' ScalingFunction (Maybe ScalingFunctionScalingType)
+sfScalingType :: Lens' ScalingFunction (Maybe ScalingType)
 sfScalingType
   = lens _sfScalingType
       (\ s a -> s{_sfScalingType = a})
@@ -2954,7 +2954,7 @@ instance ToJSON ScalingFunction where
 data AssetsListResponse = AssetsListResponse
     { _alrNextPageToken :: !(Maybe Word8)
     , _alrAssets        :: !(Maybe [Asset])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AssetsListResponse' with the minimum fields required to make a request.
 --
@@ -3004,7 +3004,7 @@ instance ToJSON AssetsListResponse where
 -- /See:/ 'publishResponse' smart constructor.
 data PublishResponse =
     PublishResponse
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishResponse' with the minimum fields required to make a request.
 --
@@ -3033,7 +3033,7 @@ data RasterCollectionsRaster = RasterCollectionsRaster
     , _rcrProjectId        :: !(Maybe Text)
     , _rcrDescription      :: !(Maybe Text)
     , _rcrTags             :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsRaster' with the minimum fields required to make a request.
 --
@@ -3158,7 +3158,7 @@ instance ToJSON RasterCollectionsRaster where
 -- /See:/ 'datasource' smart constructor.
 newtype Datasource = Datasource
     { _dId :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Datasource' with the minimum fields required to make a request.
 --
@@ -3191,7 +3191,7 @@ instance ToJSON Datasource where
 data FeaturesBatchInsertRequest = FeaturesBatchInsertRequest
     { _fbirFeatures            :: !(Maybe [Feature])
     , _fbirNormalizeGeometries :: !Bool
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FeaturesBatchInsertRequest' with the minimum fields required to make a request.
 --
@@ -3244,10 +3244,10 @@ instance ToJSON FeaturesBatchInsertRequest where
 --
 -- /See:/ 'filter'' smart constructor.
 data Filter = Filter
-    { _fOperator :: !(Maybe FilterOperator)
+    { _fOperator :: !(Maybe Operator)
     , _fValue    :: !(Maybe JSONValue)
     , _fColumn   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Filter' with the minimum fields required to make a request.
 --
@@ -3268,7 +3268,7 @@ filter' =
     }
 
 -- | Operation used to evaluate the filter.
-fOperator :: Lens' Filter (Maybe FilterOperator)
+fOperator :: Lens' Filter (Maybe Operator)
 fOperator
   = lens _fOperator (\ s a -> s{_fOperator = a})
 
@@ -3301,7 +3301,7 @@ instance ToJSON Filter where
 data GeoJSONMultiPolygon = GeoJSONMultiPolygon
     { _gjmpCoordinates :: !(Maybe [[[[Double]]]])
     , _gjmpType        :: !(Maybe GeoJSONMultiPolygonType)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoJSONMultiPolygon' with the minimum fields required to make a request.
 --
@@ -3349,7 +3349,7 @@ instance ToJSON GeoJSONMultiPolygon where
 data GeoJSONMultiPoint = GeoJSONMultiPoint
     { _gjsonmpCoordinates :: !(Maybe [[Double]])
     , _gjsonmpType        :: !(Maybe GeoJSONMultiPointType)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoJSONMultiPoint' with the minimum fields required to make a request.
 --
@@ -3416,7 +3416,7 @@ data Raster = Raster
     , _rrDescription               :: !(Maybe Text)
     , _rrAttribution               :: !(Maybe Text)
     , _rrTags                      :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Raster' with the minimum fields required to make a request.
 --
@@ -3657,12 +3657,12 @@ instance ToJSON Raster where
 --
 -- /See:/ 'publishedLayer' smart constructor.
 data PublishedLayer = PublishedLayer
-    { _plLayerType   :: !(Maybe PublishedLayerLayerType)
+    { _plLayerType   :: !(Maybe LayerType)
     , _plName        :: !(Maybe Text)
     , _plId          :: !(Maybe Text)
     , _plProjectId   :: !(Maybe Text)
     , _plDescription :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishedLayer' with the minimum fields required to make a request.
 --
@@ -3691,7 +3691,7 @@ publishedLayer =
 -- | The type of the datasources used to build this Layer. This should be
 -- used instead of datasourceType. At least one of layerType and
 -- datasourceType and must be specified, but layerType takes precedence.
-plLayerType :: Lens' PublishedLayer (Maybe PublishedLayerLayerType)
+plLayerType :: Lens' PublishedLayer (Maybe LayerType)
 plLayerType
   = lens _plLayerType (\ s a -> s{_plLayerType = a})
 
@@ -3739,7 +3739,7 @@ instance ToJSON PublishedLayer where
 data PointStyle = PointStyle
     { _psIcon  :: !(Maybe IconStyle)
     , _psLabel :: !(Maybe LabelStyle)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PointStyle' with the minimum fields required to make a request.
 --
@@ -3786,7 +3786,7 @@ data Permission = Permission
     , _perId           :: !(Maybe Text)
     , _perType         :: !(Maybe PermissionType)
     , _perDiscoverable :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Permission' with the minimum fields required to make a request.
 --
@@ -3856,7 +3856,7 @@ data Layer = Layer
     , _layaWritersCanEditPermissions :: !(Maybe Bool)
     , _layaStyle                     :: !(Maybe VectorStyle)
     , _layaEtag                      :: !(Maybe Text)
-    , _layaDatasourceType            :: !(Maybe LayerDatasourceType)
+    , _layaDatasourceType            :: !(Maybe DatasourceType)
     , _layaPublishingStatus          :: !(Maybe LayerPublishingStatus)
     , _layaCreatorEmail              :: !(Maybe Text)
     , _layaLayerType                 :: !(Maybe LayerLayerType)
@@ -3872,7 +3872,7 @@ data Layer = Layer
     , _layaPublishedAccessList       :: !(Maybe Text)
     , _layaDescription               :: !(Maybe Text)
     , _layaTags                      :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Layer' with the minimum fields required to make a request.
 --
@@ -3972,7 +3972,7 @@ layaEtag = lens _layaEtag (\ s a -> s{_layaEtag = a})
 -- | Deprecated: The type of the datasources used to build this Layer. Note:
 -- This has been replaced by layerType, but is still available for now to
 -- maintain backward compatibility.
-layaDatasourceType :: Lens' Layer (Maybe LayerDatasourceType)
+layaDatasourceType :: Lens' Layer (Maybe DatasourceType)
 layaDatasourceType
   = lens _layaDatasourceType
       (\ s a -> s{_layaDatasourceType = a})
@@ -4155,7 +4155,7 @@ data PolygonStyle = PolygonStyle
     { _pStroke :: !(Maybe BOrder)
     , _pFill   :: !(Maybe Color)
     , _pLabel  :: !(Maybe LabelStyle)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PolygonStyle' with the minimum fields required to make a request.
 --
@@ -4208,7 +4208,7 @@ instance ToJSON PolygonStyle where
 -- /See:/ 'permissionsBatchUpdateResponse' smart constructor.
 data PermissionsBatchUpdateResponse =
     PermissionsBatchUpdateResponse
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsBatchUpdateResponse' with the minimum fields required to make a request.
 --
@@ -4233,7 +4233,7 @@ data MapKmlLink = MapKmlLink
     , _mklName            :: !(Maybe Text)
     , _mklType            :: !(Maybe MapKmlLinkType)
     , _mklKmlURL          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapKmlLink' with the minimum fields required to make a request.
 --
@@ -4316,7 +4316,7 @@ data VectorStyle = VectorStyle
     { _vsDisplayRules :: !(Maybe [DisplayRule])
     , _vsFeatureInfo  :: !(Maybe FeatureInfo)
     , _vsType         :: !(Maybe VectorStyleType)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VectorStyle' with the minimum fields required to make a request.
 --
@@ -4378,7 +4378,7 @@ instance ToJSON VectorStyle where
 data PublishedMapsListResponse = PublishedMapsListResponse
     { _pmlrMaps          :: !(Maybe [PublishedMap])
     , _pmlrNextPageToken :: !(Maybe Word8)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishedMapsListResponse' with the minimum fields required to make a request.
 --
@@ -4428,7 +4428,7 @@ instance ToJSON PublishedMapsListResponse where
 -- /See:/ 'permissionsBatchDeleteResponse' smart constructor.
 data PermissionsBatchDeleteResponse =
     PermissionsBatchDeleteResponse
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsBatchDeleteResponse' with the minimum fields required to make a request.
 --
@@ -4467,7 +4467,7 @@ data Table = Table
     , _ttSourceEncoding            :: !Text
     , _ttDescription               :: !(Maybe Text)
     , _ttTags                      :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Table' with the minimum fields required to make a request.
 --
@@ -4713,7 +4713,7 @@ instance ToJSON Table where
 data GeoJSONLineString = GeoJSONLineString
     { _gjlsCoordinates :: !(Maybe [[Double]])
     , _gjlsType        :: !(Maybe GeoJSONLineStringType)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoJSONLineString' with the minimum fields required to make a request.
 --
@@ -4762,7 +4762,7 @@ instance ToJSON GeoJSONLineString where
 data MapsListResponse = MapsListResponse
     { _mlrMaps          :: !(Maybe [Map])
     , _mlrNextPageToken :: !(Maybe Word8)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsListResponse' with the minimum fields required to make a request.
 --
@@ -4811,9 +4811,9 @@ instance ToJSON MapsListResponse where
 -- /See:/ 'file' smart constructor.
 data File = File
     { _fSize         :: !(Maybe Int64)
-    , _fUploadStatus :: !(Maybe FileUploadStatus)
+    , _fUploadStatus :: !(Maybe UploadStatus)
     , _fFilename     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'File' with the minimum fields required to make a request.
 --
@@ -4838,7 +4838,7 @@ fSize :: Lens' File (Maybe Int64)
 fSize = lens _fSize (\ s a -> s{_fSize = a})
 
 -- | The upload status of the file.
-fUploadStatus :: Lens' File (Maybe FileUploadStatus)
+fUploadStatus :: Lens' File (Maybe UploadStatus)
 fUploadStatus
   = lens _fUploadStatus
       (\ s a -> s{_fUploadStatus = a})
@@ -4874,7 +4874,7 @@ instance ToJSON File where
 data LayersListResponse = LayersListResponse
     { _llrNextPageToken :: !(Maybe Word8)
     , _llrLayers        :: !(Maybe [Layer])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersListResponse' with the minimum fields required to make a request.
 --
@@ -4924,7 +4924,7 @@ instance ToJSON LayersListResponse where
 data GeoJSONPolygon = GeoJSONPolygon
     { _gjpCoordinates :: !(Maybe [[[Double]]])
     , _gjpType        :: !(Maybe GeoJSONPolygonType)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoJSONPolygon' with the minimum fields required to make a request.
 --
@@ -4976,7 +4976,7 @@ instance ToJSON GeoJSONPolygon where
 data GeoJSONPoint = GeoJSONPoint
     { _gjsonpCoordinates :: !(Maybe [Double])
     , _gjsonpType        :: !(Maybe GeoJSONPointType)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoJSONPoint' with the minimum fields required to make a request.
 --
@@ -5024,7 +5024,7 @@ instance ToJSON GeoJSONPoint where
 -- /See:/ 'permissionsListResponse' smart constructor.
 newtype PermissionsListResponse = PermissionsListResponse
     { _plrPermissions :: Maybe [Permission]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsListResponse' with the minimum fields required to make a request.
 --
@@ -5066,7 +5066,7 @@ data LineStyle = LineStyle
     , _lsBOrder :: !(Maybe BOrder)
     , _lsDash   :: !(Maybe [Double])
     , _lsLabel  :: !(Maybe LabelStyle)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LineStyle' with the minimum fields required to make a request.
 --
@@ -5133,7 +5133,7 @@ instance ToJSON LineStyle where
 data PublishedLayersListResponse = PublishedLayersListResponse
     { _pllrNextPageToken :: !(Maybe Word8)
     , _pllrLayers        :: !(Maybe [PublishedLayer])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishedLayersListResponse' with the minimum fields required to make a request.
 --
@@ -5184,7 +5184,7 @@ instance ToJSON PublishedLayersListResponse where
 data GeoJSONGeometryCollection = GeoJSONGeometryCollection
     { _gjgcGeometries :: !(Maybe [GeoJSONGeometry])
     , _gjgcType       :: !(Maybe GeoJSONGeometryCollectionType)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoJSONGeometryCollection' with the minimum fields required to make a request.
 --
@@ -5234,7 +5234,7 @@ instance ToJSON GeoJSONGeometryCollection where
 data RastersListResponse = RastersListResponse
     { _rlrNextPageToken :: !(Maybe Text)
     , _rlrRasters       :: !(Maybe [Raster])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersListResponse' with the minimum fields required to make a request.
 --

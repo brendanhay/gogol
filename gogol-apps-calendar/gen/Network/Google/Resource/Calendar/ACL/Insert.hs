@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Calendar.ACL.Insert
     , aiCalendarId
     , aiPrettyPrint
     , aiUserIP
+    , aiPayload
     , aiKey
-    , aiACLRule
     , aiOAuthToken
     , aiFields
     ) where
@@ -66,11 +67,11 @@ data ACLInsert' = ACLInsert'
     , _aiCalendarId  :: !Text
     , _aiPrettyPrint :: !Bool
     , _aiUserIP      :: !(Maybe Text)
+    , _aiPayload     :: !ACLRule
     , _aiKey         :: !(Maybe Key)
-    , _aiACLRule     :: !ACLRule
     , _aiOAuthToken  :: !(Maybe OAuthToken)
     , _aiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLInsert'' with the minimum fields required to make a request.
 --
@@ -84,25 +85,25 @@ data ACLInsert' = ACLInsert'
 --
 -- * 'aiUserIP'
 --
--- * 'aiKey'
+-- * 'aiPayload'
 --
--- * 'aiACLRule'
+-- * 'aiKey'
 --
 -- * 'aiOAuthToken'
 --
 -- * 'aiFields'
 aclInsert'
     :: Text -- ^ 'calendarId'
-    -> ACLRule -- ^ 'ACLRule'
+    -> ACLRule -- ^ 'payload'
     -> ACLInsert'
-aclInsert' pAiCalendarId_ pAiACLRule_ =
+aclInsert' pAiCalendarId_ pAiPayload_ =
     ACLInsert'
     { _aiQuotaUser = Nothing
     , _aiCalendarId = pAiCalendarId_
     , _aiPrettyPrint = True
     , _aiUserIP = Nothing
+    , _aiPayload = pAiPayload_
     , _aiKey = Nothing
-    , _aiACLRule = pAiACLRule_
     , _aiOAuthToken = Nothing
     , _aiFields = Nothing
     }
@@ -132,16 +133,16 @@ aiPrettyPrint
 aiUserIP :: Lens' ACLInsert' (Maybe Text)
 aiUserIP = lens _aiUserIP (\ s a -> s{_aiUserIP = a})
 
+-- | Multipart request metadata.
+aiPayload :: Lens' ACLInsert' ACLRule
+aiPayload
+  = lens _aiPayload (\ s a -> s{_aiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 aiKey :: Lens' ACLInsert' (Maybe Key)
 aiKey = lens _aiKey (\ s a -> s{_aiKey = a})
-
--- | Multipart request metadata.
-aiACLRule :: Lens' ACLInsert' ACLRule
-aiACLRule
-  = lens _aiACLRule (\ s a -> s{_aiACLRule = a})
 
 -- | OAuth 2.0 token for the current user.
 aiOAuthToken :: Lens' ACLInsert' (Maybe OAuthToken)
@@ -166,7 +167,7 @@ instance GoogleRequest ACLInsert' where
               _aiKey
               _aiOAuthToken
               (Just AltJSON)
-              _aiACLRule
+              _aiPayload
           where go
                   = clientWithRoute (Proxy :: Proxy ACLInsertResource)
                       r

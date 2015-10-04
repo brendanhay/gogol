@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,11 +56,11 @@ type LiveBroadcastsBindDirectResource =
      "liveBroadcasts" :>
        "bind" :>
          "direct" :>
-           QueryParam "onBehalfOfContentOwner" Text :>
-             QueryParam "onBehalfOfContentOwnerChannel" Text :>
-               QueryParam "streamId" Text :>
-                 QueryParam "id" Text :>
-                   QueryParam "part" Text :>
+           QueryParam "id" Text :>
+             QueryParam "part" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                   QueryParam "streamId" Text :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -87,7 +88,7 @@ data LiveBroadcastsBindDirect' = LiveBroadcastsBindDirect'
     , _lbbdOAuthToken                    :: !(Maybe OAuthToken)
     , _lbbdStreamId                      :: !(Maybe Text)
     , _lbbdFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsBindDirect'' with the minimum fields required to make a request.
 --
@@ -235,11 +236,10 @@ instance GoogleRequest LiveBroadcastsBindDirect'
         type Rs LiveBroadcastsBindDirect' = LiveBroadcast
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveBroadcastsBindDirect'{..}
-          = go _lbbdOnBehalfOfContentOwner
+          = go (Just _lbbdId) (Just _lbbdPart)
+              _lbbdOnBehalfOfContentOwner
               _lbbdOnBehalfOfContentOwnerChannel
               _lbbdStreamId
-              (Just _lbbdId)
-              (Just _lbbdPart)
               _lbbdQuotaUser
               (Just _lbbdPrettyPrint)
               _lbbdUserIP

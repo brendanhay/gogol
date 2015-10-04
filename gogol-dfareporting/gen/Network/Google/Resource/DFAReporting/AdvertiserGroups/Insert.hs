@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Insert
     -- * Request Lenses
     , agiQuotaUser
     , agiPrettyPrint
-    , agiAdvertiserGroup
     , agiUserIP
     , agiProfileId
+    , agiPayload
     , agiKey
     , agiOAuthToken
     , agiFields
@@ -63,15 +64,15 @@ type AdvertiserGroupsInsertResource =
 --
 -- /See:/ 'advertiserGroupsInsert'' smart constructor.
 data AdvertiserGroupsInsert' = AdvertiserGroupsInsert'
-    { _agiQuotaUser       :: !(Maybe Text)
-    , _agiPrettyPrint     :: !Bool
-    , _agiAdvertiserGroup :: !AdvertiserGroup
-    , _agiUserIP          :: !(Maybe Text)
-    , _agiProfileId       :: !Int64
-    , _agiKey             :: !(Maybe Key)
-    , _agiOAuthToken      :: !(Maybe OAuthToken)
-    , _agiFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _agiQuotaUser   :: !(Maybe Text)
+    , _agiPrettyPrint :: !Bool
+    , _agiUserIP      :: !(Maybe Text)
+    , _agiProfileId   :: !Int64
+    , _agiPayload     :: !AdvertiserGroup
+    , _agiKey         :: !(Maybe Key)
+    , _agiOAuthToken  :: !(Maybe OAuthToken)
+    , _agiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsInsert'' with the minimum fields required to make a request.
 --
@@ -81,11 +82,11 @@ data AdvertiserGroupsInsert' = AdvertiserGroupsInsert'
 --
 -- * 'agiPrettyPrint'
 --
--- * 'agiAdvertiserGroup'
---
 -- * 'agiUserIP'
 --
 -- * 'agiProfileId'
+--
+-- * 'agiPayload'
 --
 -- * 'agiKey'
 --
@@ -93,16 +94,16 @@ data AdvertiserGroupsInsert' = AdvertiserGroupsInsert'
 --
 -- * 'agiFields'
 advertiserGroupsInsert'
-    :: AdvertiserGroup -- ^ 'AdvertiserGroup'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> AdvertiserGroup -- ^ 'payload'
     -> AdvertiserGroupsInsert'
-advertiserGroupsInsert' pAgiAdvertiserGroup_ pAgiProfileId_ =
+advertiserGroupsInsert' pAgiProfileId_ pAgiPayload_ =
     AdvertiserGroupsInsert'
     { _agiQuotaUser = Nothing
     , _agiPrettyPrint = True
-    , _agiAdvertiserGroup = pAgiAdvertiserGroup_
     , _agiUserIP = Nothing
     , _agiProfileId = pAgiProfileId_
+    , _agiPayload = pAgiPayload_
     , _agiKey = Nothing
     , _agiOAuthToken = Nothing
     , _agiFields = Nothing
@@ -121,12 +122,6 @@ agiPrettyPrint
   = lens _agiPrettyPrint
       (\ s a -> s{_agiPrettyPrint = a})
 
--- | Multipart request metadata.
-agiAdvertiserGroup :: Lens' AdvertiserGroupsInsert' AdvertiserGroup
-agiAdvertiserGroup
-  = lens _agiAdvertiserGroup
-      (\ s a -> s{_agiAdvertiserGroup = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 agiUserIP :: Lens' AdvertiserGroupsInsert' (Maybe Text)
@@ -137,6 +132,11 @@ agiUserIP
 agiProfileId :: Lens' AdvertiserGroupsInsert' Int64
 agiProfileId
   = lens _agiProfileId (\ s a -> s{_agiProfileId = a})
+
+-- | Multipart request metadata.
+agiPayload :: Lens' AdvertiserGroupsInsert' AdvertiserGroup
+agiPayload
+  = lens _agiPayload (\ s a -> s{_agiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -170,7 +170,7 @@ instance GoogleRequest AdvertiserGroupsInsert' where
               _agiKey
               _agiOAuthToken
               (Just AltJSON)
-              _agiAdvertiserGroup
+              _agiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AdvertiserGroupsInsertResource)

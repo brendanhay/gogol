@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.Directory.Users.Aliases.Insert
     , uaiQuotaUser
     , uaiPrettyPrint
     , uaiUserIP
-    , uaiAlias
+    , uaiPayload
     , uaiKey
     , uaiOAuthToken
     , uaiUserKey
@@ -65,12 +66,12 @@ data UsersAliasesInsert' = UsersAliasesInsert'
     { _uaiQuotaUser   :: !(Maybe Text)
     , _uaiPrettyPrint :: !Bool
     , _uaiUserIP      :: !(Maybe Text)
-    , _uaiAlias       :: !Alias
+    , _uaiPayload     :: !Alias
     , _uaiKey         :: !(Maybe Key)
     , _uaiOAuthToken  :: !(Maybe OAuthToken)
     , _uaiUserKey     :: !Text
     , _uaiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersAliasesInsert'' with the minimum fields required to make a request.
 --
@@ -82,7 +83,7 @@ data UsersAliasesInsert' = UsersAliasesInsert'
 --
 -- * 'uaiUserIP'
 --
--- * 'uaiAlias'
+-- * 'uaiPayload'
 --
 -- * 'uaiKey'
 --
@@ -92,15 +93,15 @@ data UsersAliasesInsert' = UsersAliasesInsert'
 --
 -- * 'uaiFields'
 usersAliasesInsert'
-    :: Alias -- ^ 'Alias'
+    :: Alias -- ^ 'payload'
     -> Text -- ^ 'userKey'
     -> UsersAliasesInsert'
-usersAliasesInsert' pUaiAlias_ pUaiUserKey_ =
+usersAliasesInsert' pUaiPayload_ pUaiUserKey_ =
     UsersAliasesInsert'
     { _uaiQuotaUser = Nothing
     , _uaiPrettyPrint = True
     , _uaiUserIP = Nothing
-    , _uaiAlias = pUaiAlias_
+    , _uaiPayload = pUaiPayload_
     , _uaiKey = Nothing
     , _uaiOAuthToken = Nothing
     , _uaiUserKey = pUaiUserKey_
@@ -127,8 +128,9 @@ uaiUserIP
   = lens _uaiUserIP (\ s a -> s{_uaiUserIP = a})
 
 -- | Multipart request metadata.
-uaiAlias :: Lens' UsersAliasesInsert' Alias
-uaiAlias = lens _uaiAlias (\ s a -> s{_uaiAlias = a})
+uaiPayload :: Lens' UsersAliasesInsert' Alias
+uaiPayload
+  = lens _uaiPayload (\ s a -> s{_uaiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -166,7 +168,7 @@ instance GoogleRequest UsersAliasesInsert' where
               _uaiKey
               _uaiOAuthToken
               (Just AltJSON)
-              _uaiAlias
+              _uaiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersAliasesInsertResource)

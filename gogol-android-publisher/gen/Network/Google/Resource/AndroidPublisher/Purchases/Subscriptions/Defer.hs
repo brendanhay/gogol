@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,10 +34,10 @@ module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Defer
     -- * Request Lenses
     , psdQuotaUser
     , psdPrettyPrint
-    , psdSubscriptionPurchasesDeferRequest
     , psdPackageName
     , psdUserIP
     , psdToken
+    , psdPayload
     , psdKey
     , psdOAuthToken
     , psdSubscriptionId
@@ -54,7 +55,7 @@ type PurchasesSubscriptionsDeferResource =
          "subscriptions" :>
            Capture "subscriptionId" Text :>
              "tokens" :>
-               "{token}:defer" :>
+               CaptureMode "token" "defer" Text :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -71,17 +72,17 @@ type PurchasesSubscriptionsDeferResource =
 --
 -- /See:/ 'purchasesSubscriptionsDefer'' smart constructor.
 data PurchasesSubscriptionsDefer' = PurchasesSubscriptionsDefer'
-    { _psdQuotaUser                         :: !(Maybe Text)
-    , _psdPrettyPrint                       :: !Bool
-    , _psdSubscriptionPurchasesDeferRequest :: !SubscriptionPurchasesDeferRequest
-    , _psdPackageName                       :: !Text
-    , _psdUserIP                            :: !(Maybe Text)
-    , _psdToken                             :: !Text
-    , _psdKey                               :: !(Maybe Key)
-    , _psdOAuthToken                        :: !(Maybe OAuthToken)
-    , _psdSubscriptionId                    :: !Text
-    , _psdFields                            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _psdQuotaUser      :: !(Maybe Text)
+    , _psdPrettyPrint    :: !Bool
+    , _psdPackageName    :: !Text
+    , _psdUserIP         :: !(Maybe Text)
+    , _psdToken          :: !Text
+    , _psdPayload        :: !SubscriptionPurchasesDeferRequest
+    , _psdKey            :: !(Maybe Key)
+    , _psdOAuthToken     :: !(Maybe OAuthToken)
+    , _psdSubscriptionId :: !Text
+    , _psdFields         :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PurchasesSubscriptionsDefer'' with the minimum fields required to make a request.
 --
@@ -91,13 +92,13 @@ data PurchasesSubscriptionsDefer' = PurchasesSubscriptionsDefer'
 --
 -- * 'psdPrettyPrint'
 --
--- * 'psdSubscriptionPurchasesDeferRequest'
---
 -- * 'psdPackageName'
 --
 -- * 'psdUserIP'
 --
 -- * 'psdToken'
+--
+-- * 'psdPayload'
 --
 -- * 'psdKey'
 --
@@ -107,19 +108,19 @@ data PurchasesSubscriptionsDefer' = PurchasesSubscriptionsDefer'
 --
 -- * 'psdFields'
 purchasesSubscriptionsDefer'
-    :: SubscriptionPurchasesDeferRequest -- ^ 'SubscriptionPurchasesDeferRequest'
-    -> Text -- ^ 'packageName'
+    :: Text -- ^ 'packageName'
     -> Text -- ^ 'token'
+    -> SubscriptionPurchasesDeferRequest -- ^ 'payload'
     -> Text -- ^ 'subscriptionId'
     -> PurchasesSubscriptionsDefer'
-purchasesSubscriptionsDefer' pPsdSubscriptionPurchasesDeferRequest_ pPsdPackageName_ pPsdToken_ pPsdSubscriptionId_ =
+purchasesSubscriptionsDefer' pPsdPackageName_ pPsdToken_ pPsdPayload_ pPsdSubscriptionId_ =
     PurchasesSubscriptionsDefer'
     { _psdQuotaUser = Nothing
     , _psdPrettyPrint = True
-    , _psdSubscriptionPurchasesDeferRequest = pPsdSubscriptionPurchasesDeferRequest_
     , _psdPackageName = pPsdPackageName_
     , _psdUserIP = Nothing
     , _psdToken = pPsdToken_
+    , _psdPayload = pPsdPayload_
     , _psdKey = Nothing
     , _psdOAuthToken = Nothing
     , _psdSubscriptionId = pPsdSubscriptionId_
@@ -139,13 +140,6 @@ psdPrettyPrint
   = lens _psdPrettyPrint
       (\ s a -> s{_psdPrettyPrint = a})
 
--- | Multipart request metadata.
-psdSubscriptionPurchasesDeferRequest :: Lens' PurchasesSubscriptionsDefer' SubscriptionPurchasesDeferRequest
-psdSubscriptionPurchasesDeferRequest
-  = lens _psdSubscriptionPurchasesDeferRequest
-      (\ s a ->
-         s{_psdSubscriptionPurchasesDeferRequest = a})
-
 -- | The package name of the application for which this subscription was
 -- purchased (for example, \'com.some.thing\').
 psdPackageName :: Lens' PurchasesSubscriptionsDefer' Text
@@ -163,6 +157,11 @@ psdUserIP
 -- purchased.
 psdToken :: Lens' PurchasesSubscriptionsDefer' Text
 psdToken = lens _psdToken (\ s a -> s{_psdToken = a})
+
+-- | Multipart request metadata.
+psdPayload :: Lens' PurchasesSubscriptionsDefer' SubscriptionPurchasesDeferRequest
+psdPayload
+  = lens _psdPayload (\ s a -> s{_psdPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -206,7 +205,7 @@ instance GoogleRequest PurchasesSubscriptionsDefer'
               _psdKey
               _psdOAuthToken
               (Just AltJSON)
-              _psdSubscriptionPurchasesDeferRequest
+              _psdPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PurchasesSubscriptionsDeferResource)

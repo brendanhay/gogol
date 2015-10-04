@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,17 +56,17 @@ type CreativeFieldsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeFields" :>
-           QueryParams "advertiserIds" Int64 :>
+           QueryParam "searchString" Text :>
              QueryParams "ids" Int64 :>
-               QueryParam "maxResults" Int32 :>
+               QueryParam "sortOrder"
+                 DfareportingCreativeFieldsListSortOrder
+                 :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "searchString" Text :>
-                     QueryParam "sortField"
-                       DfareportingCreativeFieldsListSortField
-                       :>
-                       QueryParam "sortOrder"
-                         DfareportingCreativeFieldsListSortOrder
-                         :>
+                   QueryParam "sortField"
+                     DfareportingCreativeFieldsListSortField
+                     :>
+                     QueryParams "advertiserIds" Int64 :>
+                       QueryParam "maxResults" Int32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -83,17 +84,17 @@ data CreativeFieldsList' = CreativeFieldsList'
     , _cflPrettyPrint   :: !Bool
     , _cflUserIP        :: !(Maybe Text)
     , _cflSearchString  :: !(Maybe Text)
-    , _cflIds           :: !(Maybe Int64)
+    , _cflIds           :: !(Maybe [Int64])
     , _cflProfileId     :: !Int64
     , _cflSortOrder     :: !(Maybe DfareportingCreativeFieldsListSortOrder)
     , _cflKey           :: !(Maybe Key)
     , _cflPageToken     :: !(Maybe Text)
     , _cflSortField     :: !(Maybe DfareportingCreativeFieldsListSortField)
     , _cflOAuthToken    :: !(Maybe OAuthToken)
-    , _cflAdvertiserIds :: !(Maybe Int64)
+    , _cflAdvertiserIds :: !(Maybe [Int64])
     , _cflMaxResults    :: !(Maybe Int32)
     , _cflFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsList'' with the minimum fields required to make a request.
 --
@@ -180,8 +181,10 @@ cflSearchString
       (\ s a -> s{_cflSearchString = a})
 
 -- | Select only creative fields with these IDs.
-cflIds :: Lens' CreativeFieldsList' (Maybe Int64)
-cflIds = lens _cflIds (\ s a -> s{_cflIds = a})
+cflIds :: Lens' CreativeFieldsList' [Int64]
+cflIds
+  = lens _cflIds (\ s a -> s{_cflIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 cflProfileId :: Lens' CreativeFieldsList' Int64
@@ -216,10 +219,12 @@ cflOAuthToken
       (\ s a -> s{_cflOAuthToken = a})
 
 -- | Select only creative fields that belong to these advertisers.
-cflAdvertiserIds :: Lens' CreativeFieldsList' (Maybe Int64)
+cflAdvertiserIds :: Lens' CreativeFieldsList' [Int64]
 cflAdvertiserIds
   = lens _cflAdvertiserIds
       (\ s a -> s{_cflAdvertiserIds = a})
+      . _Default
+      . _Coerce
 
 -- | Maximum number of results to return.
 cflMaxResults :: Lens' CreativeFieldsList' (Maybe Int32)
@@ -241,12 +246,13 @@ instance GoogleRequest CreativeFieldsList' where
              CreativeFieldsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldsList'{..}
-          = go _cflAdvertiserIds _cflIds _cflMaxResults
-              _cflPageToken
-              _cflSearchString
-              _cflSortField
+          = go _cflProfileId _cflSearchString
+              (_cflIds ^. _Default)
               _cflSortOrder
-              _cflProfileId
+              _cflPageToken
+              _cflSortField
+              (_cflAdvertiserIds ^. _Default)
+              _cflMaxResults
               _cflQuotaUser
               (Just _cflPrettyPrint)
               _cflUserIP

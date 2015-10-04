@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.SQL.Instances.Import
     , insPrettyPrint
     , insProject
     , insUserIP
+    , insPayload
     , insKey
     , insOAuthToken
-    , insInstancesImportRequest
     , insFields
     , insInstance
     ) where
@@ -68,16 +69,16 @@ type InstancesImportResource =
 --
 -- /See:/ 'instancesImport'' smart constructor.
 data InstancesImport' = InstancesImport'
-    { _insQuotaUser              :: !(Maybe Text)
-    , _insPrettyPrint            :: !Bool
-    , _insProject                :: !Text
-    , _insUserIP                 :: !(Maybe Text)
-    , _insKey                    :: !(Maybe Key)
-    , _insOAuthToken             :: !(Maybe OAuthToken)
-    , _insInstancesImportRequest :: !InstancesImportRequest
-    , _insFields                 :: !(Maybe Text)
-    , _insInstance               :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _insQuotaUser   :: !(Maybe Text)
+    , _insPrettyPrint :: !Bool
+    , _insProject     :: !Text
+    , _insUserIP      :: !(Maybe Text)
+    , _insPayload     :: !InstancesImportRequest
+    , _insKey         :: !(Maybe Key)
+    , _insOAuthToken  :: !(Maybe OAuthToken)
+    , _insFields      :: !(Maybe Text)
+    , _insInstance    :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesImport'' with the minimum fields required to make a request.
 --
@@ -91,29 +92,29 @@ data InstancesImport' = InstancesImport'
 --
 -- * 'insUserIP'
 --
+-- * 'insPayload'
+--
 -- * 'insKey'
 --
 -- * 'insOAuthToken'
---
--- * 'insInstancesImportRequest'
 --
 -- * 'insFields'
 --
 -- * 'insInstance'
 instancesImport'
     :: Text -- ^ 'project'
-    -> InstancesImportRequest -- ^ 'InstancesImportRequest'
+    -> InstancesImportRequest -- ^ 'payload'
     -> Text -- ^ 'instance'
     -> InstancesImport'
-instancesImport' pInsProject_ pInsInstancesImportRequest_ pInsInstance_ =
+instancesImport' pInsProject_ pInsPayload_ pInsInstance_ =
     InstancesImport'
     { _insQuotaUser = Nothing
     , _insPrettyPrint = True
     , _insProject = pInsProject_
     , _insUserIP = Nothing
+    , _insPayload = pInsPayload_
     , _insKey = Nothing
     , _insOAuthToken = Nothing
-    , _insInstancesImportRequest = pInsInstancesImportRequest_
     , _insFields = Nothing
     , _insInstance = pInsInstance_
     }
@@ -142,6 +143,11 @@ insUserIP :: Lens' InstancesImport' (Maybe Text)
 insUserIP
   = lens _insUserIP (\ s a -> s{_insUserIP = a})
 
+-- | Multipart request metadata.
+insPayload :: Lens' InstancesImport' InstancesImportRequest
+insPayload
+  = lens _insPayload (\ s a -> s{_insPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -153,12 +159,6 @@ insOAuthToken :: Lens' InstancesImport' (Maybe OAuthToken)
 insOAuthToken
   = lens _insOAuthToken
       (\ s a -> s{_insOAuthToken = a})
-
--- | Multipart request metadata.
-insInstancesImportRequest :: Lens' InstancesImport' InstancesImportRequest
-insInstancesImportRequest
-  = lens _insInstancesImportRequest
-      (\ s a -> s{_insInstancesImportRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 insFields :: Lens' InstancesImport' (Maybe Text)
@@ -185,7 +185,7 @@ instance GoogleRequest InstancesImport' where
               _insKey
               _insOAuthToken
               (Just AltJSON)
-              _insInstancesImportRequest
+              _insPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesImportResource)

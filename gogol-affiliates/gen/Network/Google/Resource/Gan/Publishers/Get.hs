@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -78,7 +79,7 @@ data PublishersGet' = PublishersGet'
     , _pgOAuthToken  :: !(Maybe OAuthToken)
     , _pgPublisherId :: !(Maybe Text)
     , _pgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishersGet'' with the minimum fields required to make a request.
 --
@@ -174,7 +175,7 @@ instance GoogleRequest PublishersGet' where
         type Rs PublishersGet' = Publisher
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u PublishersGet'{..}
-          = go _pgPublisherId _pgRole _pgRoleId _pgQuotaUser
+          = go _pgRole _pgRoleId _pgPublisherId _pgQuotaUser
               (Just _pgPrettyPrint)
               _pgUserIP
               _pgFields

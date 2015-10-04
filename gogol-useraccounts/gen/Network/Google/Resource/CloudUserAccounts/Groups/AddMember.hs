@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.CloudUserAccounts.Groups.AddMember
     , gamPrettyPrint
     , gamProject
     , gamUserIP
-    , gamGroupsAddMemberRequest
+    , gamPayload
     , gamKey
     , gamGroupName
     , gamOAuthToken
@@ -66,16 +67,16 @@ type GroupsAddMemberResource =
 --
 -- /See:/ 'groupsAddMember'' smart constructor.
 data GroupsAddMember' = GroupsAddMember'
-    { _gamQuotaUser              :: !(Maybe Text)
-    , _gamPrettyPrint            :: !Bool
-    , _gamProject                :: !Text
-    , _gamUserIP                 :: !(Maybe Text)
-    , _gamGroupsAddMemberRequest :: !GroupsAddMemberRequest
-    , _gamKey                    :: !(Maybe Key)
-    , _gamGroupName              :: !Text
-    , _gamOAuthToken             :: !(Maybe OAuthToken)
-    , _gamFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _gamQuotaUser   :: !(Maybe Text)
+    , _gamPrettyPrint :: !Bool
+    , _gamProject     :: !Text
+    , _gamUserIP      :: !(Maybe Text)
+    , _gamPayload     :: !GroupsAddMemberRequest
+    , _gamKey         :: !(Maybe Key)
+    , _gamGroupName   :: !Text
+    , _gamOAuthToken  :: !(Maybe OAuthToken)
+    , _gamFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsAddMember'' with the minimum fields required to make a request.
 --
@@ -89,7 +90,7 @@ data GroupsAddMember' = GroupsAddMember'
 --
 -- * 'gamUserIP'
 --
--- * 'gamGroupsAddMemberRequest'
+-- * 'gamPayload'
 --
 -- * 'gamKey'
 --
@@ -100,16 +101,16 @@ data GroupsAddMember' = GroupsAddMember'
 -- * 'gamFields'
 groupsAddMember'
     :: Text -- ^ 'project'
-    -> GroupsAddMemberRequest -- ^ 'GroupsAddMemberRequest'
+    -> GroupsAddMemberRequest -- ^ 'payload'
     -> Text -- ^ 'groupName'
     -> GroupsAddMember'
-groupsAddMember' pGamProject_ pGamGroupsAddMemberRequest_ pGamGroupName_ =
+groupsAddMember' pGamProject_ pGamPayload_ pGamGroupName_ =
     GroupsAddMember'
     { _gamQuotaUser = Nothing
     , _gamPrettyPrint = True
     , _gamProject = pGamProject_
     , _gamUserIP = Nothing
-    , _gamGroupsAddMemberRequest = pGamGroupsAddMemberRequest_
+    , _gamPayload = pGamPayload_
     , _gamKey = Nothing
     , _gamGroupName = pGamGroupName_
     , _gamOAuthToken = Nothing
@@ -141,10 +142,9 @@ gamUserIP
   = lens _gamUserIP (\ s a -> s{_gamUserIP = a})
 
 -- | Multipart request metadata.
-gamGroupsAddMemberRequest :: Lens' GroupsAddMember' GroupsAddMemberRequest
-gamGroupsAddMemberRequest
-  = lens _gamGroupsAddMemberRequest
-      (\ s a -> s{_gamGroupsAddMemberRequest = a})
+gamPayload :: Lens' GroupsAddMember' GroupsAddMemberRequest
+gamPayload
+  = lens _gamPayload (\ s a -> s{_gamPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -183,7 +183,7 @@ instance GoogleRequest GroupsAddMember' where
               _gamKey
               _gamOAuthToken
               (Just AltJSON)
-              _gamGroupsAddMemberRequest
+              _gamPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GroupsAddMemberResource)

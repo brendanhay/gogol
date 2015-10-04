@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,9 +53,9 @@ type TurnBasedMatchesLeaveTurnResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
          "leaveTurn" :>
-           QueryParam "language" Text :>
-             QueryParam "pendingParticipantId" Text :>
-               QueryParam "matchVersion" Int32 :>
+           QueryParam "matchVersion" Int32 :>
+             QueryParam "language" Text :>
+               QueryParam "pendingParticipantId" Text :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data TurnBasedMatchesLeaveTurn' = TurnBasedMatchesLeaveTurn'
     , _tbmltMatchId              :: !Text
     , _tbmltMatchVersion         :: !Int32
     , _tbmltFields               :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesLeaveTurn'' with the minimum fields required to make a request.
 --
@@ -194,9 +195,9 @@ instance GoogleRequest TurnBasedMatchesLeaveTurn'
         type Rs TurnBasedMatchesLeaveTurn' = TurnBasedMatch
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesLeaveTurn'{..}
-          = go _tbmltLanguage _tbmltPendingParticipantId
-              _tbmltMatchId
-              (Just _tbmltMatchVersion)
+          = go _tbmltMatchId (Just _tbmltMatchVersion)
+              _tbmltLanguage
+              _tbmltPendingParticipantId
               _tbmltQuotaUser
               (Just _tbmltPrettyPrint)
               _tbmltUserIP

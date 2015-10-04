@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.DFAReporting.Reports.Insert
     , riPrettyPrint
     , riUserIP
     , riProfileId
-    , riReport
+    , riPayload
     , riKey
     , riOAuthToken
     , riFields
@@ -66,11 +67,11 @@ data ReportsInsert' = ReportsInsert'
     , _riPrettyPrint :: !Bool
     , _riUserIP      :: !(Maybe Text)
     , _riProfileId   :: !Int64
-    , _riReport      :: !Report
+    , _riPayload     :: !Report
     , _riKey         :: !(Maybe Key)
     , _riOAuthToken  :: !(Maybe OAuthToken)
     , _riFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsInsert'' with the minimum fields required to make a request.
 --
@@ -84,7 +85,7 @@ data ReportsInsert' = ReportsInsert'
 --
 -- * 'riProfileId'
 --
--- * 'riReport'
+-- * 'riPayload'
 --
 -- * 'riKey'
 --
@@ -93,15 +94,15 @@ data ReportsInsert' = ReportsInsert'
 -- * 'riFields'
 reportsInsert'
     :: Int64 -- ^ 'profileId'
-    -> Report -- ^ 'Report'
+    -> Report -- ^ 'payload'
     -> ReportsInsert'
-reportsInsert' pRiProfileId_ pRiReport_ =
+reportsInsert' pRiProfileId_ pRiPayload_ =
     ReportsInsert'
     { _riQuotaUser = Nothing
     , _riPrettyPrint = True
     , _riUserIP = Nothing
     , _riProfileId = pRiProfileId_
-    , _riReport = pRiReport_
+    , _riPayload = pRiPayload_
     , _riKey = Nothing
     , _riOAuthToken = Nothing
     , _riFields = Nothing
@@ -131,8 +132,9 @@ riProfileId
   = lens _riProfileId (\ s a -> s{_riProfileId = a})
 
 -- | Multipart request metadata.
-riReport :: Lens' ReportsInsert' Report
-riReport = lens _riReport (\ s a -> s{_riReport = a})
+riPayload :: Lens' ReportsInsert' Report
+riPayload
+  = lens _riPayload (\ s a -> s{_riPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -163,7 +165,7 @@ instance GoogleRequest ReportsInsert' where
               _riKey
               _riOAuthToken
               (Just AltJSON)
-              _riReport
+              _riPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReportsInsertResource)

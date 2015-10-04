@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,7 +38,7 @@ module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.Insert
     , ccaiUserIP
     , ccaiCampaignId
     , ccaiProfileId
-    , ccaiCampaignCreativeAssociation
+    , ccaiPayload
     , ccaiKey
     , ccaiOAuthToken
     , ccaiFields
@@ -70,16 +71,16 @@ type CampaignCreativeAssociationsInsertResource =
 --
 -- /See:/ 'campaignCreativeAssociationsInsert'' smart constructor.
 data CampaignCreativeAssociationsInsert' = CampaignCreativeAssociationsInsert'
-    { _ccaiQuotaUser                   :: !(Maybe Text)
-    , _ccaiPrettyPrint                 :: !Bool
-    , _ccaiUserIP                      :: !(Maybe Text)
-    , _ccaiCampaignId                  :: !Int64
-    , _ccaiProfileId                   :: !Int64
-    , _ccaiCampaignCreativeAssociation :: !CampaignCreativeAssociation
-    , _ccaiKey                         :: !(Maybe Key)
-    , _ccaiOAuthToken                  :: !(Maybe OAuthToken)
-    , _ccaiFields                      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ccaiQuotaUser   :: !(Maybe Text)
+    , _ccaiPrettyPrint :: !Bool
+    , _ccaiUserIP      :: !(Maybe Text)
+    , _ccaiCampaignId  :: !Int64
+    , _ccaiProfileId   :: !Int64
+    , _ccaiPayload     :: !CampaignCreativeAssociation
+    , _ccaiKey         :: !(Maybe Key)
+    , _ccaiOAuthToken  :: !(Maybe OAuthToken)
+    , _ccaiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignCreativeAssociationsInsert'' with the minimum fields required to make a request.
 --
@@ -95,7 +96,7 @@ data CampaignCreativeAssociationsInsert' = CampaignCreativeAssociationsInsert'
 --
 -- * 'ccaiProfileId'
 --
--- * 'ccaiCampaignCreativeAssociation'
+-- * 'ccaiPayload'
 --
 -- * 'ccaiKey'
 --
@@ -105,16 +106,16 @@ data CampaignCreativeAssociationsInsert' = CampaignCreativeAssociationsInsert'
 campaignCreativeAssociationsInsert'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
-    -> CampaignCreativeAssociation -- ^ 'CampaignCreativeAssociation'
+    -> CampaignCreativeAssociation -- ^ 'payload'
     -> CampaignCreativeAssociationsInsert'
-campaignCreativeAssociationsInsert' pCcaiCampaignId_ pCcaiProfileId_ pCcaiCampaignCreativeAssociation_ =
+campaignCreativeAssociationsInsert' pCcaiCampaignId_ pCcaiProfileId_ pCcaiPayload_ =
     CampaignCreativeAssociationsInsert'
     { _ccaiQuotaUser = Nothing
     , _ccaiPrettyPrint = True
     , _ccaiUserIP = Nothing
     , _ccaiCampaignId = pCcaiCampaignId_
     , _ccaiProfileId = pCcaiProfileId_
-    , _ccaiCampaignCreativeAssociation = pCcaiCampaignCreativeAssociation_
+    , _ccaiPayload = pCcaiPayload_
     , _ccaiKey = Nothing
     , _ccaiOAuthToken = Nothing
     , _ccaiFields = Nothing
@@ -153,10 +154,9 @@ ccaiProfileId
       (\ s a -> s{_ccaiProfileId = a})
 
 -- | Multipart request metadata.
-ccaiCampaignCreativeAssociation :: Lens' CampaignCreativeAssociationsInsert' CampaignCreativeAssociation
-ccaiCampaignCreativeAssociation
-  = lens _ccaiCampaignCreativeAssociation
-      (\ s a -> s{_ccaiCampaignCreativeAssociation = a})
+ccaiPayload :: Lens' CampaignCreativeAssociationsInsert' CampaignCreativeAssociation
+ccaiPayload
+  = lens _ccaiPayload (\ s a -> s{_ccaiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -194,7 +194,7 @@ instance GoogleRequest
               _ccaiKey
               _ccaiOAuthToken
               (Just AltJSON)
-              _ccaiCampaignCreativeAssociation
+              _ccaiPayload
           where go
                   = clientWithRoute
                       (Proxy ::

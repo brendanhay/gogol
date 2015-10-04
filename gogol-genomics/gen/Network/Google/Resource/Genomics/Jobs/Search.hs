@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.Genomics.Jobs.Search
     , jsQuotaUser
     , jsPrettyPrint
     , jsUserIP
-    , jsSearchJobsRequest
+    , jsPayload
     , jsKey
     , jsOAuthToken
     , jsFields
@@ -61,14 +62,14 @@ type JobsSearchResource =
 --
 -- /See:/ 'jobsSearch'' smart constructor.
 data JobsSearch' = JobsSearch'
-    { _jsQuotaUser         :: !(Maybe Text)
-    , _jsPrettyPrint       :: !Bool
-    , _jsUserIP            :: !(Maybe Text)
-    , _jsSearchJobsRequest :: !SearchJobsRequest
-    , _jsKey               :: !(Maybe Key)
-    , _jsOAuthToken        :: !(Maybe OAuthToken)
-    , _jsFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _jsQuotaUser   :: !(Maybe Text)
+    , _jsPrettyPrint :: !Bool
+    , _jsUserIP      :: !(Maybe Text)
+    , _jsPayload     :: !SearchJobsRequest
+    , _jsKey         :: !(Maybe Key)
+    , _jsOAuthToken  :: !(Maybe OAuthToken)
+    , _jsFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsSearch'' with the minimum fields required to make a request.
 --
@@ -80,7 +81,7 @@ data JobsSearch' = JobsSearch'
 --
 -- * 'jsUserIP'
 --
--- * 'jsSearchJobsRequest'
+-- * 'jsPayload'
 --
 -- * 'jsKey'
 --
@@ -88,14 +89,14 @@ data JobsSearch' = JobsSearch'
 --
 -- * 'jsFields'
 jobsSearch'
-    :: SearchJobsRequest -- ^ 'SearchJobsRequest'
+    :: SearchJobsRequest -- ^ 'payload'
     -> JobsSearch'
-jobsSearch' pJsSearchJobsRequest_ =
+jobsSearch' pJsPayload_ =
     JobsSearch'
     { _jsQuotaUser = Nothing
     , _jsPrettyPrint = True
     , _jsUserIP = Nothing
-    , _jsSearchJobsRequest = pJsSearchJobsRequest_
+    , _jsPayload = pJsPayload_
     , _jsKey = Nothing
     , _jsOAuthToken = Nothing
     , _jsFields = Nothing
@@ -120,10 +121,9 @@ jsUserIP :: Lens' JobsSearch' (Maybe Text)
 jsUserIP = lens _jsUserIP (\ s a -> s{_jsUserIP = a})
 
 -- | Multipart request metadata.
-jsSearchJobsRequest :: Lens' JobsSearch' SearchJobsRequest
-jsSearchJobsRequest
-  = lens _jsSearchJobsRequest
-      (\ s a -> s{_jsSearchJobsRequest = a})
+jsPayload :: Lens' JobsSearch' SearchJobsRequest
+jsPayload
+  = lens _jsPayload (\ s a -> s{_jsPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -153,7 +153,7 @@ instance GoogleRequest JobsSearch' where
               _jsKey
               _jsOAuthToken
               (Just AltJSON)
-              _jsSearchJobsRequest
+              _jsPayload
           where go
                   = clientWithRoute (Proxy :: Proxy JobsSearchResource)
                       r

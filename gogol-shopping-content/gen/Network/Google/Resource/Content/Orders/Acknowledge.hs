@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -30,11 +31,11 @@ module Network.Google.Resource.Content.Orders.Acknowledge
     , OrdersAcknowledge'
 
     -- * Request Lenses
-    , oaOrdersAcknowledgeRequest
     , oaQuotaUser
     , oaMerchantId
     , oaPrettyPrint
     , oaUserIP
+    , oaPayload
     , oaKey
     , oaOAuthToken
     , oaOrderId
@@ -65,22 +66,20 @@ type OrdersAcknowledgeResource =
 --
 -- /See:/ 'ordersAcknowledge'' smart constructor.
 data OrdersAcknowledge' = OrdersAcknowledge'
-    { _oaOrdersAcknowledgeRequest :: !OrdersAcknowledgeRequest
-    , _oaQuotaUser                :: !(Maybe Text)
-    , _oaMerchantId               :: !Word64
-    , _oaPrettyPrint              :: !Bool
-    , _oaUserIP                   :: !(Maybe Text)
-    , _oaKey                      :: !(Maybe Key)
-    , _oaOAuthToken               :: !(Maybe OAuthToken)
-    , _oaOrderId                  :: !Text
-    , _oaFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _oaQuotaUser   :: !(Maybe Text)
+    , _oaMerchantId  :: !Word64
+    , _oaPrettyPrint :: !Bool
+    , _oaUserIP      :: !(Maybe Text)
+    , _oaPayload     :: !OrdersAcknowledgeRequest
+    , _oaKey         :: !(Maybe Key)
+    , _oaOAuthToken  :: !(Maybe OAuthToken)
+    , _oaOrderId     :: !Text
+    , _oaFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersAcknowledge'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'oaOrdersAcknowledgeRequest'
 --
 -- * 'oaQuotaUser'
 --
@@ -90,6 +89,8 @@ data OrdersAcknowledge' = OrdersAcknowledge'
 --
 -- * 'oaUserIP'
 --
+-- * 'oaPayload'
+--
 -- * 'oaKey'
 --
 -- * 'oaOAuthToken'
@@ -98,28 +99,22 @@ data OrdersAcknowledge' = OrdersAcknowledge'
 --
 -- * 'oaFields'
 ordersAcknowledge'
-    :: OrdersAcknowledgeRequest -- ^ 'OrdersAcknowledgeRequest'
-    -> Word64 -- ^ 'merchantId'
+    :: Word64 -- ^ 'merchantId'
+    -> OrdersAcknowledgeRequest -- ^ 'payload'
     -> Text -- ^ 'orderId'
     -> OrdersAcknowledge'
-ordersAcknowledge' pOaOrdersAcknowledgeRequest_ pOaMerchantId_ pOaOrderId_ =
+ordersAcknowledge' pOaMerchantId_ pOaPayload_ pOaOrderId_ =
     OrdersAcknowledge'
-    { _oaOrdersAcknowledgeRequest = pOaOrdersAcknowledgeRequest_
-    , _oaQuotaUser = Nothing
+    { _oaQuotaUser = Nothing
     , _oaMerchantId = pOaMerchantId_
     , _oaPrettyPrint = True
     , _oaUserIP = Nothing
+    , _oaPayload = pOaPayload_
     , _oaKey = Nothing
     , _oaOAuthToken = Nothing
     , _oaOrderId = pOaOrderId_
     , _oaFields = Nothing
     }
-
--- | Multipart request metadata.
-oaOrdersAcknowledgeRequest :: Lens' OrdersAcknowledge' OrdersAcknowledgeRequest
-oaOrdersAcknowledgeRequest
-  = lens _oaOrdersAcknowledgeRequest
-      (\ s a -> s{_oaOrdersAcknowledgeRequest = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -143,6 +138,11 @@ oaPrettyPrint
 -- want to enforce per-user limits.
 oaUserIP :: Lens' OrdersAcknowledge' (Maybe Text)
 oaUserIP = lens _oaUserIP (\ s a -> s{_oaUserIP = a})
+
+-- | Multipart request metadata.
+oaPayload :: Lens' OrdersAcknowledge' OrdersAcknowledgeRequest
+oaPayload
+  = lens _oaPayload (\ s a -> s{_oaPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -180,7 +180,7 @@ instance GoogleRequest OrdersAcknowledge' where
               _oaKey
               _oaOAuthToken
               (Just AltJSON)
-              _oaOrdersAcknowledgeRequest
+              _oaPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrdersAcknowledgeResource)

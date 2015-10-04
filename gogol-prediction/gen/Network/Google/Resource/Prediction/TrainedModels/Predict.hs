@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.Prediction.TrainedModels.Predict
     , tmpPrettyPrint
     , tmpProject
     , tmpUserIP
-    , tmpInput
+    , tmpPayload
     , tmpKey
     , tmpId
     , tmpOAuthToken
@@ -68,12 +69,12 @@ data TrainedModelsPredict' = TrainedModelsPredict'
     , _tmpPrettyPrint :: !Bool
     , _tmpProject     :: !Text
     , _tmpUserIP      :: !(Maybe Text)
-    , _tmpInput       :: !Input
+    , _tmpPayload     :: !Input
     , _tmpKey         :: !(Maybe Key)
     , _tmpId          :: !Text
     , _tmpOAuthToken  :: !(Maybe OAuthToken)
     , _tmpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrainedModelsPredict'' with the minimum fields required to make a request.
 --
@@ -87,7 +88,7 @@ data TrainedModelsPredict' = TrainedModelsPredict'
 --
 -- * 'tmpUserIP'
 --
--- * 'tmpInput'
+-- * 'tmpPayload'
 --
 -- * 'tmpKey'
 --
@@ -98,16 +99,16 @@ data TrainedModelsPredict' = TrainedModelsPredict'
 -- * 'tmpFields'
 trainedModelsPredict'
     :: Text -- ^ 'project'
-    -> Input -- ^ 'Input'
+    -> Input -- ^ 'payload'
     -> Text -- ^ 'id'
     -> TrainedModelsPredict'
-trainedModelsPredict' pTmpProject_ pTmpInput_ pTmpId_ =
+trainedModelsPredict' pTmpProject_ pTmpPayload_ pTmpId_ =
     TrainedModelsPredict'
     { _tmpQuotaUser = Nothing
     , _tmpPrettyPrint = True
     , _tmpProject = pTmpProject_
     , _tmpUserIP = Nothing
-    , _tmpInput = pTmpInput_
+    , _tmpPayload = pTmpPayload_
     , _tmpKey = Nothing
     , _tmpId = pTmpId_
     , _tmpOAuthToken = Nothing
@@ -139,8 +140,9 @@ tmpUserIP
   = lens _tmpUserIP (\ s a -> s{_tmpUserIP = a})
 
 -- | Multipart request metadata.
-tmpInput :: Lens' TrainedModelsPredict' Input
-tmpInput = lens _tmpInput (\ s a -> s{_tmpInput = a})
+tmpPayload :: Lens' TrainedModelsPredict' Input
+tmpPayload
+  = lens _tmpPayload (\ s a -> s{_tmpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -178,7 +180,7 @@ instance GoogleRequest TrainedModelsPredict' where
               _tmpKey
               _tmpOAuthToken
               (Just AltJSON)
-              _tmpInput
+              _tmpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TrainedModelsPredictResource)

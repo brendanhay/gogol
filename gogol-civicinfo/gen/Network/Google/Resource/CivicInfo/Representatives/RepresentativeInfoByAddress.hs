@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,13 +52,13 @@ import           Network.Google.Prelude
 type RepresentativesRepresentativeInfoByAddressResource
      =
      "representatives" :>
-       QueryParam "address" Text :>
-         QueryParam "includeOffices" Bool :>
-           QueryParams "levels"
-             CivicInfoRepresentativesRepresentativeInfoByAddressLevels
-             :>
-             QueryParams "roles"
-               CivicInfoRepresentativesRepresentativeInfoByAddressRoles
+       QueryParams "roles"
+         CivicInfoRepresentativesRepresentativeInfoByAddressRoles
+         :>
+         QueryParam "address" Text :>
+           QueryParam "includeOffices" Bool :>
+             QueryParams "levels"
+               CivicInfoRepresentativesRepresentativeInfoByAddressLevels
                :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
@@ -83,7 +84,7 @@ data RepresentativesRepresentativeInfoByAddress' = RepresentativesRepresentative
     , _rribaLevels         :: !(Maybe CivicInfoRepresentativesRepresentativeInfoByAddressLevels)
     , _rribaOAuthToken     :: !(Maybe OAuthToken)
     , _rribaFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepresentativesRepresentativeInfoByAddress'' with the minimum fields required to make a request.
 --
@@ -200,9 +201,9 @@ instance GoogleRequest
         request = requestWithRoute defReq civicInfoURL
         requestWithRoute r u
           RepresentativesRepresentativeInfoByAddress'{..}
-          = go _rribaAddress (Just _rribaIncludeOffices)
-              _rribaLevels
-              _rribaRoles
+          = go (_rribaRoles ^. _Default) _rribaAddress
+              (Just _rribaIncludeOffices)
+              (_rribaLevels ^. _Default)
               _rribaQuotaUser
               (Just _rribaPrettyPrint)
               _rribaUserIP

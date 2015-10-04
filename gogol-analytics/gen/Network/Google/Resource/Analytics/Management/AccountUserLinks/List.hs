@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,8 +52,8 @@ type ManagementAccountUserLinksListResource =
        "accounts" :>
          Capture "accountId" Text :>
            "entityUserLinks" :>
-             QueryParam "max-results" Int32 :>
-               QueryParam "start-index" Int32 :>
+             QueryParam "start-index" Int32 :>
+               QueryParam "max-results" Int32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -75,7 +76,7 @@ data ManagementAccountUserLinksList' = ManagementAccountUserLinksList'
     , _maullStartIndex  :: !(Maybe Int32)
     , _maullMaxResults  :: !(Maybe Int32)
     , _maullFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksList'' with the minimum fields required to make a request.
 --
@@ -182,8 +183,8 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementAccountUserLinksList'{..}
-          = go _maullMaxResults _maullStartIndex
-              _maullAccountId
+          = go _maullAccountId _maullStartIndex
+              _maullMaxResults
               _maullQuotaUser
               (Just _maullPrettyPrint)
               _maullUserIP

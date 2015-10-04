@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.DFAReporting.CreativeFields.Update
     , cfuPrettyPrint
     , cfuUserIP
     , cfuProfileId
+    , cfuPayload
     , cfuKey
     , cfuOAuthToken
-    , cfuCreativeField
     , cfuFields
     ) where
 
@@ -63,15 +64,15 @@ type CreativeFieldsUpdateResource =
 --
 -- /See:/ 'creativeFieldsUpdate'' smart constructor.
 data CreativeFieldsUpdate' = CreativeFieldsUpdate'
-    { _cfuQuotaUser     :: !(Maybe Text)
-    , _cfuPrettyPrint   :: !Bool
-    , _cfuUserIP        :: !(Maybe Text)
-    , _cfuProfileId     :: !Int64
-    , _cfuKey           :: !(Maybe Key)
-    , _cfuOAuthToken    :: !(Maybe OAuthToken)
-    , _cfuCreativeField :: !CreativeField
-    , _cfuFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cfuQuotaUser   :: !(Maybe Text)
+    , _cfuPrettyPrint :: !Bool
+    , _cfuUserIP      :: !(Maybe Text)
+    , _cfuProfileId   :: !Int64
+    , _cfuPayload     :: !CreativeField
+    , _cfuKey         :: !(Maybe Key)
+    , _cfuOAuthToken  :: !(Maybe OAuthToken)
+    , _cfuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsUpdate'' with the minimum fields required to make a request.
 --
@@ -85,26 +86,26 @@ data CreativeFieldsUpdate' = CreativeFieldsUpdate'
 --
 -- * 'cfuProfileId'
 --
+-- * 'cfuPayload'
+--
 -- * 'cfuKey'
 --
 -- * 'cfuOAuthToken'
 --
--- * 'cfuCreativeField'
---
 -- * 'cfuFields'
 creativeFieldsUpdate'
     :: Int64 -- ^ 'profileId'
-    -> CreativeField -- ^ 'CreativeField'
+    -> CreativeField -- ^ 'payload'
     -> CreativeFieldsUpdate'
-creativeFieldsUpdate' pCfuProfileId_ pCfuCreativeField_ =
+creativeFieldsUpdate' pCfuProfileId_ pCfuPayload_ =
     CreativeFieldsUpdate'
     { _cfuQuotaUser = Nothing
     , _cfuPrettyPrint = True
     , _cfuUserIP = Nothing
     , _cfuProfileId = pCfuProfileId_
+    , _cfuPayload = pCfuPayload_
     , _cfuKey = Nothing
     , _cfuOAuthToken = Nothing
-    , _cfuCreativeField = pCfuCreativeField_
     , _cfuFields = Nothing
     }
 
@@ -132,6 +133,11 @@ cfuProfileId :: Lens' CreativeFieldsUpdate' Int64
 cfuProfileId
   = lens _cfuProfileId (\ s a -> s{_cfuProfileId = a})
 
+-- | Multipart request metadata.
+cfuPayload :: Lens' CreativeFieldsUpdate' CreativeField
+cfuPayload
+  = lens _cfuPayload (\ s a -> s{_cfuPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -143,12 +149,6 @@ cfuOAuthToken :: Lens' CreativeFieldsUpdate' (Maybe OAuthToken)
 cfuOAuthToken
   = lens _cfuOAuthToken
       (\ s a -> s{_cfuOAuthToken = a})
-
--- | Multipart request metadata.
-cfuCreativeField :: Lens' CreativeFieldsUpdate' CreativeField
-cfuCreativeField
-  = lens _cfuCreativeField
-      (\ s a -> s{_cfuCreativeField = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cfuFields :: Lens' CreativeFieldsUpdate' (Maybe Text)
@@ -170,7 +170,7 @@ instance GoogleRequest CreativeFieldsUpdate' where
               _cfuKey
               _cfuOAuthToken
               (Just AltJSON)
-              _cfuCreativeField
+              _cfuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeFieldsUpdateResource)

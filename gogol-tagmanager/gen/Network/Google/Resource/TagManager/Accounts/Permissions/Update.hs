@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.TagManager.Accounts.Permissions.Update
     -- * Request Lenses
     , apuQuotaUser
     , apuPrettyPrint
-    , apuUserAccess
     , apuUserIP
+    , apuPayload
     , apuAccountId
     , apuKey
     , apuOAuthToken
@@ -66,14 +67,14 @@ type AccountsPermissionsUpdateResource =
 data AccountsPermissionsUpdate' = AccountsPermissionsUpdate'
     { _apuQuotaUser    :: !(Maybe Text)
     , _apuPrettyPrint  :: !Bool
-    , _apuUserAccess   :: !UserAccess
     , _apuUserIP       :: !(Maybe Text)
+    , _apuPayload      :: !UserAccess
     , _apuAccountId    :: !Text
     , _apuKey          :: !(Maybe Key)
     , _apuOAuthToken   :: !(Maybe OAuthToken)
     , _apuPermissionId :: !Text
     , _apuFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPermissionsUpdate'' with the minimum fields required to make a request.
 --
@@ -83,9 +84,9 @@ data AccountsPermissionsUpdate' = AccountsPermissionsUpdate'
 --
 -- * 'apuPrettyPrint'
 --
--- * 'apuUserAccess'
---
 -- * 'apuUserIP'
+--
+-- * 'apuPayload'
 --
 -- * 'apuAccountId'
 --
@@ -97,16 +98,16 @@ data AccountsPermissionsUpdate' = AccountsPermissionsUpdate'
 --
 -- * 'apuFields'
 accountsPermissionsUpdate'
-    :: UserAccess -- ^ 'UserAccess'
+    :: UserAccess -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'permissionId'
     -> AccountsPermissionsUpdate'
-accountsPermissionsUpdate' pApuUserAccess_ pApuAccountId_ pApuPermissionId_ =
+accountsPermissionsUpdate' pApuPayload_ pApuAccountId_ pApuPermissionId_ =
     AccountsPermissionsUpdate'
     { _apuQuotaUser = Nothing
     , _apuPrettyPrint = True
-    , _apuUserAccess = pApuUserAccess_
     , _apuUserIP = Nothing
+    , _apuPayload = pApuPayload_
     , _apuAccountId = pApuAccountId_
     , _apuKey = Nothing
     , _apuOAuthToken = Nothing
@@ -127,17 +128,16 @@ apuPrettyPrint
   = lens _apuPrettyPrint
       (\ s a -> s{_apuPrettyPrint = a})
 
--- | Multipart request metadata.
-apuUserAccess :: Lens' AccountsPermissionsUpdate' UserAccess
-apuUserAccess
-  = lens _apuUserAccess
-      (\ s a -> s{_apuUserAccess = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 apuUserIP :: Lens' AccountsPermissionsUpdate' (Maybe Text)
 apuUserIP
   = lens _apuUserIP (\ s a -> s{_apuUserIP = a})
+
+-- | Multipart request metadata.
+apuPayload :: Lens' AccountsPermissionsUpdate' UserAccess
+apuPayload
+  = lens _apuPayload (\ s a -> s{_apuPayload = a})
 
 -- | The GTM Account ID.
 apuAccountId :: Lens' AccountsPermissionsUpdate' Text
@@ -183,7 +183,7 @@ instance GoogleRequest AccountsPermissionsUpdate'
               _apuKey
               _apuOAuthToken
               (Just AltJSON)
-              _apuUserAccess
+              _apuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsPermissionsUpdateResource)

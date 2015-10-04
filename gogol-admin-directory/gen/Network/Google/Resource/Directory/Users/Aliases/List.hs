@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -49,7 +50,7 @@ type UsersAliasesListResource =
      "users" :>
        Capture "userKey" Text :>
          "aliases" :>
-           QueryParam "event" DirectoryUsersAliasesListEvent :>
+           QueryParam "event" Event :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -62,7 +63,7 @@ type UsersAliasesListResource =
 --
 -- /See:/ 'usersAliasesList'' smart constructor.
 data UsersAliasesList' = UsersAliasesList'
-    { _ualEvent       :: !(Maybe DirectoryUsersAliasesListEvent)
+    { _ualEvent       :: !(Maybe Event)
     , _ualQuotaUser   :: !(Maybe Text)
     , _ualPrettyPrint :: !Bool
     , _ualUserIP      :: !(Maybe Text)
@@ -70,7 +71,7 @@ data UsersAliasesList' = UsersAliasesList'
     , _ualOAuthToken  :: !(Maybe OAuthToken)
     , _ualUserKey     :: !Text
     , _ualFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersAliasesList'' with the minimum fields required to make a request.
 --
@@ -107,7 +108,7 @@ usersAliasesList' pUalUserKey_ =
     }
 
 -- | Event on which subscription is intended (if subscribing)
-ualEvent :: Lens' UsersAliasesList' (Maybe DirectoryUsersAliasesListEvent)
+ualEvent :: Lens' UsersAliasesList' (Maybe Event)
 ualEvent = lens _ualEvent (\ s a -> s{_ualEvent = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,7 +160,7 @@ instance GoogleRequest UsersAliasesList' where
         type Rs UsersAliasesList' = Aliases
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersAliasesList'{..}
-          = go _ualEvent _ualUserKey _ualQuotaUser
+          = go _ualUserKey _ualEvent _ualQuotaUser
               (Just _ualPrettyPrint)
               _ualUserIP
               _ualFields

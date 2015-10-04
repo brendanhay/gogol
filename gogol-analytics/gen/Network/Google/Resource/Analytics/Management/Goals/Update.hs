@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,9 +37,9 @@ module Network.Google.Resource.Analytics.Management.Goals.Update
     , mguGoalId
     , mguUserIP
     , mguProfileId
+    , mguPayload
     , mguAccountId
     , mguKey
-    , mguGoal
     , mguOAuthToken
     , mguFields
     ) where
@@ -77,12 +78,12 @@ data ManagementGoalsUpdate' = ManagementGoalsUpdate'
     , _mguGoalId        :: !Text
     , _mguUserIP        :: !(Maybe Text)
     , _mguProfileId     :: !Text
+    , _mguPayload       :: !Goal
     , _mguAccountId     :: !Text
     , _mguKey           :: !(Maybe Key)
-    , _mguGoal          :: !Goal
     , _mguOAuthToken    :: !(Maybe OAuthToken)
     , _mguFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementGoalsUpdate'' with the minimum fields required to make a request.
 --
@@ -100,11 +101,11 @@ data ManagementGoalsUpdate' = ManagementGoalsUpdate'
 --
 -- * 'mguProfileId'
 --
+-- * 'mguPayload'
+--
 -- * 'mguAccountId'
 --
 -- * 'mguKey'
---
--- * 'mguGoal'
 --
 -- * 'mguOAuthToken'
 --
@@ -113,10 +114,10 @@ managementGoalsUpdate'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'goalId'
     -> Text -- ^ 'profileId'
+    -> Goal -- ^ 'payload'
     -> Text -- ^ 'accountId'
-    -> Goal -- ^ 'Goal'
     -> ManagementGoalsUpdate'
-managementGoalsUpdate' pMguWebPropertyId_ pMguGoalId_ pMguProfileId_ pMguAccountId_ pMguGoal_ =
+managementGoalsUpdate' pMguWebPropertyId_ pMguGoalId_ pMguProfileId_ pMguPayload_ pMguAccountId_ =
     ManagementGoalsUpdate'
     { _mguQuotaUser = Nothing
     , _mguPrettyPrint = False
@@ -124,9 +125,9 @@ managementGoalsUpdate' pMguWebPropertyId_ pMguGoalId_ pMguProfileId_ pMguAccount
     , _mguGoalId = pMguGoalId_
     , _mguUserIP = Nothing
     , _mguProfileId = pMguProfileId_
+    , _mguPayload = pMguPayload_
     , _mguAccountId = pMguAccountId_
     , _mguKey = Nothing
-    , _mguGoal = pMguGoal_
     , _mguOAuthToken = Nothing
     , _mguFields = Nothing
     }
@@ -166,6 +167,11 @@ mguProfileId :: Lens' ManagementGoalsUpdate' Text
 mguProfileId
   = lens _mguProfileId (\ s a -> s{_mguProfileId = a})
 
+-- | Multipart request metadata.
+mguPayload :: Lens' ManagementGoalsUpdate' Goal
+mguPayload
+  = lens _mguPayload (\ s a -> s{_mguPayload = a})
+
 -- | Account ID to update the goal.
 mguAccountId :: Lens' ManagementGoalsUpdate' Text
 mguAccountId
@@ -176,10 +182,6 @@ mguAccountId
 -- token.
 mguKey :: Lens' ManagementGoalsUpdate' (Maybe Key)
 mguKey = lens _mguKey (\ s a -> s{_mguKey = a})
-
--- | Multipart request metadata.
-mguGoal :: Lens' ManagementGoalsUpdate' Goal
-mguGoal = lens _mguGoal (\ s a -> s{_mguGoal = a})
 
 -- | OAuth 2.0 token for the current user.
 mguOAuthToken :: Lens' ManagementGoalsUpdate' (Maybe OAuthToken)
@@ -209,7 +211,7 @@ instance GoogleRequest ManagementGoalsUpdate' where
               _mguKey
               _mguOAuthToken
               (Just AltJSON)
-              _mguGoal
+              _mguPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementGoalsUpdateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,15 +54,15 @@ import           Network.Google.StorageTransfer.Types
 -- 'TransferJobsGet'' request conforms to.
 type TransferJobsGetResource =
      "v1" :>
-       "{+jobName}" :>
+       Capture "jobName" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "projectId" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "projectId" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
@@ -88,7 +89,7 @@ data TransferJobsGet' = TransferJobsGet'
     , _tjgOAuthToken     :: !(Maybe OAuthToken)
     , _tjgFields         :: !(Maybe Text)
     , _tjgCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferJobsGet'' with the minimum fields required to make a request.
 --
@@ -228,13 +229,13 @@ instance GoogleRequest TransferJobsGet' where
         type Rs TransferJobsGet' = TransferJob
         request = requestWithRoute defReq storageTransferURL
         requestWithRoute r u TransferJobsGet'{..}
-          = go _tjgXgafv _tjgAccessToken _tjgBearerToken
-              _tjgCallback
+          = go _tjgJobName _tjgXgafv _tjgUploadProtocol
               (Just _tjgPp)
-              _tjgProjectId
+              _tjgAccessToken
               _tjgUploadType
-              _tjgUploadProtocol
-              _tjgJobName
+              _tjgBearerToken
+              _tjgProjectId
+              _tjgCallback
               _tjgQuotaUser
               (Just _tjgPrettyPrint)
               _tjgFields

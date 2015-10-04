@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.Tasks.TaskLists.Update
     , tluQuotaUser
     , tluPrettyPrint
     , tluUserIP
+    , tluPayload
     , tluKey
-    , tluTaskList
     , tluTaskList
     , tluOAuthToken
     , tluFields
@@ -66,12 +67,12 @@ data TaskListsUpdate' = TaskListsUpdate'
     { _tluQuotaUser   :: !(Maybe Text)
     , _tluPrettyPrint :: !Bool
     , _tluUserIP      :: !(Maybe Text)
+    , _tluPayload     :: !TaskList
     , _tluKey         :: !(Maybe Key)
     , _tluTaskList    :: !Text
-    , _tluTaskList    :: !TaskList
     , _tluOAuthToken  :: !(Maybe OAuthToken)
     , _tluFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskListsUpdate'' with the minimum fields required to make a request.
 --
@@ -83,9 +84,9 @@ data TaskListsUpdate' = TaskListsUpdate'
 --
 -- * 'tluUserIP'
 --
--- * 'tluKey'
+-- * 'tluPayload'
 --
--- * 'tluTaskList'
+-- * 'tluKey'
 --
 -- * 'tluTaskList'
 --
@@ -93,16 +94,16 @@ data TaskListsUpdate' = TaskListsUpdate'
 --
 -- * 'tluFields'
 taskListsUpdate'
-    :: Text -- ^ 'tasklist'
-    -> TaskList -- ^ 'TaskList'
+    :: TaskList -- ^ 'payload'
+    -> Text -- ^ 'tasklist'
     -> TaskListsUpdate'
-taskListsUpdate' pTluTaskList_ pTluTaskList_ =
+taskListsUpdate' pTluPayload_ pTluTaskList_ =
     TaskListsUpdate'
     { _tluQuotaUser = Nothing
     , _tluPrettyPrint = True
     , _tluUserIP = Nothing
+    , _tluPayload = pTluPayload_
     , _tluKey = Nothing
-    , _tluTaskList = pTluTaskList_
     , _tluTaskList = pTluTaskList_
     , _tluOAuthToken = Nothing
     , _tluFields = Nothing
@@ -127,6 +128,11 @@ tluUserIP :: Lens' TaskListsUpdate' (Maybe Text)
 tluUserIP
   = lens _tluUserIP (\ s a -> s{_tluUserIP = a})
 
+-- | Multipart request metadata.
+tluPayload :: Lens' TaskListsUpdate' TaskList
+tluPayload
+  = lens _tluPayload (\ s a -> s{_tluPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -135,11 +141,6 @@ tluKey = lens _tluKey (\ s a -> s{_tluKey = a})
 
 -- | Task list identifier.
 tluTaskList :: Lens' TaskListsUpdate' Text
-tluTaskList
-  = lens _tluTaskList (\ s a -> s{_tluTaskList = a})
-
--- | Multipart request metadata.
-tluTaskList :: Lens' TaskListsUpdate' TaskList
 tluTaskList
   = lens _tluTaskList (\ s a -> s{_tluTaskList = a})
 
@@ -169,7 +170,7 @@ instance GoogleRequest TaskListsUpdate' where
               _tluKey
               _tluOAuthToken
               (Just AltJSON)
-              _tluTaskList
+              _tluPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TaskListsUpdateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,10 +35,10 @@ module Network.Google.Resource.YouTube.Watermarks.Set
     , wsPrettyPrint
     , wsUserIP
     , wsChannelId
+    , wsPayload
     , wsMedia
     , wsOnBehalfOfContentOwner
     , wsKey
-    , wsInvideoBranding
     , wsOAuthToken
     , wsFields
     ) where
@@ -50,8 +51,8 @@ import           Network.Google.YouTube.Types
 type WatermarksSetResource =
      "watermarks" :>
        "set" :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "channelId" Text :>
+         QueryParam "channelId" Text :>
+           QueryParam "onBehalfOfContentOwner" Text :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -70,13 +71,13 @@ data WatermarksSet' = WatermarksSet'
     , _wsPrettyPrint            :: !Bool
     , _wsUserIP                 :: !(Maybe Text)
     , _wsChannelId              :: !Text
+    , _wsPayload                :: !InvideoBranding
     , _wsMedia                  :: !Body
     , _wsOnBehalfOfContentOwner :: !(Maybe Text)
     , _wsKey                    :: !(Maybe Key)
-    , _wsInvideoBranding        :: !InvideoBranding
     , _wsOAuthToken             :: !(Maybe OAuthToken)
     , _wsFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WatermarksSet'' with the minimum fields required to make a request.
 --
@@ -90,32 +91,32 @@ data WatermarksSet' = WatermarksSet'
 --
 -- * 'wsChannelId'
 --
+-- * 'wsPayload'
+--
 -- * 'wsMedia'
 --
 -- * 'wsOnBehalfOfContentOwner'
 --
 -- * 'wsKey'
 --
--- * 'wsInvideoBranding'
---
 -- * 'wsOAuthToken'
 --
 -- * 'wsFields'
 watermarksSet'
     :: Text -- ^ 'channelId'
+    -> InvideoBranding -- ^ 'payload'
     -> Body -- ^ 'media'
-    -> InvideoBranding -- ^ 'InvideoBranding'
     -> WatermarksSet'
-watermarksSet' pWsChannelId_ pWsMedia_ pWsInvideoBranding_ =
+watermarksSet' pWsChannelId_ pWsPayload_ pWsMedia_ =
     WatermarksSet'
     { _wsQuotaUser = Nothing
     , _wsPrettyPrint = True
     , _wsUserIP = Nothing
     , _wsChannelId = pWsChannelId_
+    , _wsPayload = pWsPayload_
     , _wsMedia = pWsMedia_
     , _wsOnBehalfOfContentOwner = Nothing
     , _wsKey = Nothing
-    , _wsInvideoBranding = pWsInvideoBranding_
     , _wsOAuthToken = Nothing
     , _wsFields = Nothing
     }
@@ -144,6 +145,11 @@ wsChannelId :: Lens' WatermarksSet' Text
 wsChannelId
   = lens _wsChannelId (\ s a -> s{_wsChannelId = a})
 
+-- | Multipart request metadata.
+wsPayload :: Lens' WatermarksSet' InvideoBranding
+wsPayload
+  = lens _wsPayload (\ s a -> s{_wsPayload = a})
+
 wsMedia :: Lens' WatermarksSet' Body
 wsMedia = lens _wsMedia (\ s a -> s{_wsMedia = a})
 
@@ -168,12 +174,6 @@ wsOnBehalfOfContentOwner
 wsKey :: Lens' WatermarksSet' (Maybe Key)
 wsKey = lens _wsKey (\ s a -> s{_wsKey = a})
 
--- | Multipart request metadata.
-wsInvideoBranding :: Lens' WatermarksSet' InvideoBranding
-wsInvideoBranding
-  = lens _wsInvideoBranding
-      (\ s a -> s{_wsInvideoBranding = a})
-
 -- | OAuth 2.0 token for the current user.
 wsOAuthToken :: Lens' WatermarksSet' (Maybe OAuthToken)
 wsOAuthToken
@@ -191,8 +191,7 @@ instance GoogleRequest WatermarksSet' where
         type Rs WatermarksSet' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u WatermarksSet'{..}
-          = go _wsMedia _wsOnBehalfOfContentOwner
-              (Just _wsChannelId)
+          = go (Just _wsChannelId) _wsOnBehalfOfContentOwner
               _wsQuotaUser
               (Just _wsPrettyPrint)
               _wsUserIP
@@ -200,7 +199,8 @@ instance GoogleRequest WatermarksSet' where
               _wsKey
               _wsOAuthToken
               (Just AltJSON)
-              _wsInvideoBranding
+              _wsPayload
+              _wsMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy WatermarksSetResource)

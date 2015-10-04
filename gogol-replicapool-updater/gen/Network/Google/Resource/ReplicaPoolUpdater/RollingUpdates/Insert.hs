@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -30,12 +31,12 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Insert
     , RollingUpdatesInsert'
 
     -- * Request Lenses
-    , ruiRollingUpdate
     , ruiQuotaUser
     , ruiPrettyPrint
     , ruiProject
     , ruiUserIP
     , ruiZone
+    , ruiPayload
     , ruiKey
     , ruiOAuthToken
     , ruiFields
@@ -65,22 +66,20 @@ type RollingUpdatesInsertResource =
 --
 -- /See:/ 'rollingUpdatesInsert'' smart constructor.
 data RollingUpdatesInsert' = RollingUpdatesInsert'
-    { _ruiRollingUpdate :: !RollingUpdate
-    , _ruiQuotaUser     :: !(Maybe Text)
-    , _ruiPrettyPrint   :: !Bool
-    , _ruiProject       :: !Text
-    , _ruiUserIP        :: !(Maybe Text)
-    , _ruiZone          :: !Text
-    , _ruiKey           :: !(Maybe Key)
-    , _ruiOAuthToken    :: !(Maybe OAuthToken)
-    , _ruiFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ruiQuotaUser   :: !(Maybe Text)
+    , _ruiPrettyPrint :: !Bool
+    , _ruiProject     :: !Text
+    , _ruiUserIP      :: !(Maybe Text)
+    , _ruiZone        :: !Text
+    , _ruiPayload     :: !RollingUpdate
+    , _ruiKey         :: !(Maybe Key)
+    , _ruiOAuthToken  :: !(Maybe OAuthToken)
+    , _ruiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollingUpdatesInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'ruiRollingUpdate'
 --
 -- * 'ruiQuotaUser'
 --
@@ -92,34 +91,30 @@ data RollingUpdatesInsert' = RollingUpdatesInsert'
 --
 -- * 'ruiZone'
 --
+-- * 'ruiPayload'
+--
 -- * 'ruiKey'
 --
 -- * 'ruiOAuthToken'
 --
 -- * 'ruiFields'
 rollingUpdatesInsert'
-    :: RollingUpdate -- ^ 'RollingUpdate'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
+    -> RollingUpdate -- ^ 'payload'
     -> RollingUpdatesInsert'
-rollingUpdatesInsert' pRuiRollingUpdate_ pRuiProject_ pRuiZone_ =
+rollingUpdatesInsert' pRuiProject_ pRuiZone_ pRuiPayload_ =
     RollingUpdatesInsert'
-    { _ruiRollingUpdate = pRuiRollingUpdate_
-    , _ruiQuotaUser = Nothing
+    { _ruiQuotaUser = Nothing
     , _ruiPrettyPrint = True
     , _ruiProject = pRuiProject_
     , _ruiUserIP = Nothing
     , _ruiZone = pRuiZone_
+    , _ruiPayload = pRuiPayload_
     , _ruiKey = Nothing
     , _ruiOAuthToken = Nothing
     , _ruiFields = Nothing
     }
-
--- | Multipart request metadata.
-ruiRollingUpdate :: Lens' RollingUpdatesInsert' RollingUpdate
-ruiRollingUpdate
-  = lens _ruiRollingUpdate
-      (\ s a -> s{_ruiRollingUpdate = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -148,6 +143,11 @@ ruiUserIP
 -- | The name of the zone in which the update\'s target resides.
 ruiZone :: Lens' RollingUpdatesInsert' Text
 ruiZone = lens _ruiZone (\ s a -> s{_ruiZone = a})
+
+-- | Multipart request metadata.
+ruiPayload :: Lens' RollingUpdatesInsert' RollingUpdate
+ruiPayload
+  = lens _ruiPayload (\ s a -> s{_ruiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -182,7 +182,7 @@ instance GoogleRequest RollingUpdatesInsert' where
               _ruiKey
               _ruiOAuthToken
               (Just AltJSON)
-              _ruiRollingUpdate
+              _ruiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RollingUpdatesInsertResource)

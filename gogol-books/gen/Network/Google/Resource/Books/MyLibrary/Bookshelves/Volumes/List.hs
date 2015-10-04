@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,14 +58,12 @@ type MyLibraryBookshelvesVolumesListResource =
          Capture "shelf" Text :>
            "volumes" :>
              QueryParam "country" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "projection"
-                   BooksMyLibraryBookshelvesVolumesListProjection
-                   :>
-                   QueryParam "q" Text :>
-                     QueryParam "showPreorders" Bool :>
-                       QueryParam "source" Text :>
-                         QueryParam "startIndex" Word32 :>
+               QueryParam "q" Text :>
+                 QueryParam "source" Text :>
+                   QueryParam "projection" Projection :>
+                     QueryParam "startIndex" Word32 :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "showPreorders" Bool :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "userIp" Text :>
@@ -86,13 +85,13 @@ data MyLibraryBookshelvesVolumesList' = MyLibraryBookshelvesVolumesList'
     , _mlbvlShelf         :: !Text
     , _mlbvlKey           :: !(Maybe Key)
     , _mlbvlSource        :: !(Maybe Text)
-    , _mlbvlProjection    :: !(Maybe BooksMyLibraryBookshelvesVolumesListProjection)
+    , _mlbvlProjection    :: !(Maybe Projection)
     , _mlbvlOAuthToken    :: !(Maybe OAuthToken)
     , _mlbvlStartIndex    :: !(Maybe Word32)
     , _mlbvlMaxResults    :: !(Maybe Word32)
     , _mlbvlShowPreOrders :: !(Maybe Bool)
     , _mlbvlFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyLibraryBookshelvesVolumesList'' with the minimum fields required to make a request.
 --
@@ -192,7 +191,7 @@ mlbvlSource
   = lens _mlbvlSource (\ s a -> s{_mlbvlSource = a})
 
 -- | Restrict information returned to a set of selected fields.
-mlbvlProjection :: Lens' MyLibraryBookshelvesVolumesList' (Maybe BooksMyLibraryBookshelvesVolumesListProjection)
+mlbvlProjection :: Lens' MyLibraryBookshelvesVolumesList' (Maybe Projection)
 mlbvlProjection
   = lens _mlbvlProjection
       (\ s a -> s{_mlbvlProjection = a})
@@ -237,12 +236,11 @@ instance GoogleRequest
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
           MyLibraryBookshelvesVolumesList'{..}
-          = go _mlbvlCountry _mlbvlMaxResults _mlbvlProjection
-              _mlbvlQ
-              _mlbvlShowPreOrders
-              _mlbvlSource
+          = go _mlbvlShelf _mlbvlCountry _mlbvlQ _mlbvlSource
+              _mlbvlProjection
               _mlbvlStartIndex
-              _mlbvlShelf
+              _mlbvlMaxResults
+              _mlbvlShowPreOrders
               _mlbvlQuotaUser
               (Just _mlbvlPrettyPrint)
               _mlbvlUserIP

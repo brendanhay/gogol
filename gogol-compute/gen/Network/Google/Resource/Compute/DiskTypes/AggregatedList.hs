@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,8 +53,8 @@ type DiskTypesAggregatedListResource =
        "aggregated" :>
          "diskTypes" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data DiskTypesAggregatedList' = DiskTypesAggregatedList'
     , _dtalOAuthToken  :: !(Maybe OAuthToken)
     , _dtalMaxResults  :: !Word32
     , _dtalFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DiskTypesAggregatedList'' with the minimum fields required to make a request.
 --
@@ -199,9 +200,8 @@ instance GoogleRequest DiskTypesAggregatedList' where
              DiskTypeAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u DiskTypesAggregatedList'{..}
-          = go _dtalFilter (Just _dtalMaxResults)
-              _dtalPageToken
-              _dtalProject
+          = go _dtalProject _dtalFilter _dtalPageToken
+              (Just _dtalMaxResults)
               _dtalQuotaUser
               (Just _dtalPrettyPrint)
               _dtalUserIP

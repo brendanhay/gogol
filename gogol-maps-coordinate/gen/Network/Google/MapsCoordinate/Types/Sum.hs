@@ -18,7 +18,7 @@ module Network.Google.MapsCoordinate.Types.Sum where
 import           Network.Google.Prelude
 
 -- | Job progress
-data CoordinateJobsUpdateProgress
+data Progress
     = Completed
       -- ^ @COMPLETED@
       -- Completed
@@ -36,9 +36,9 @@ data CoordinateJobsUpdateProgress
       -- Obsolete
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CoordinateJobsUpdateProgress
+instance Hashable Progress
 
-instance FromText CoordinateJobsUpdateProgress where
+instance FromText Progress where
     fromText = \case
         "COMPLETED" -> Just Completed
         "IN_PROGRESS" -> Just InProgress
@@ -47,7 +47,7 @@ instance FromText CoordinateJobsUpdateProgress where
         "OBSOLETE" -> Just Obsolete
         _ -> Nothing
 
-instance ToText CoordinateJobsUpdateProgress where
+instance ToText Progress where
     toText = \case
         Completed -> "COMPLETED"
         InProgress -> "IN_PROGRESS"
@@ -55,52 +55,52 @@ instance ToText CoordinateJobsUpdateProgress where
         NotStarted -> "NOT_STARTED"
         Obsolete -> "OBSOLETE"
 
-instance FromJSON CoordinateJobsUpdateProgress where
-    parseJSON = parseJSONText "CoordinateJobsUpdateProgress"
+instance FromJSON Progress where
+    parseJSON = parseJSONText "Progress"
 
-instance ToJSON CoordinateJobsUpdateProgress where
+instance ToJSON Progress where
     toJSON = toJSONText
 
 -- | Job progress
-data CoordinateJobsPatchProgress
-    = CJPPCompleted
+data CoordinateJobsUpdateProgress
+    = CJUPCompleted
       -- ^ @COMPLETED@
       -- Completed
-    | CJPPInProgress
+    | CJUPInProgress
       -- ^ @IN_PROGRESS@
       -- In progress
-    | CJPPNotAccepted
+    | CJUPNotAccepted
       -- ^ @NOT_ACCEPTED@
       -- Not accepted
-    | CJPPNotStarted
+    | CJUPNotStarted
       -- ^ @NOT_STARTED@
       -- Not started
-    | CJPPObsolete
+    | CJUPObsolete
       -- ^ @OBSOLETE@
       -- Obsolete
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CoordinateJobsPatchProgress
+instance Hashable CoordinateJobsUpdateProgress
 
-instance FromText CoordinateJobsPatchProgress where
+instance FromText CoordinateJobsUpdateProgress where
     fromText = \case
-        "COMPLETED" -> Just CJPPCompleted
-        "IN_PROGRESS" -> Just CJPPInProgress
-        "NOT_ACCEPTED" -> Just CJPPNotAccepted
-        "NOT_STARTED" -> Just CJPPNotStarted
-        "OBSOLETE" -> Just CJPPObsolete
+        "COMPLETED" -> Just CJUPCompleted
+        "IN_PROGRESS" -> Just CJUPInProgress
+        "NOT_ACCEPTED" -> Just CJUPNotAccepted
+        "NOT_STARTED" -> Just CJUPNotStarted
+        "OBSOLETE" -> Just CJUPObsolete
         _ -> Nothing
 
-instance ToText CoordinateJobsPatchProgress where
+instance ToText CoordinateJobsUpdateProgress where
     toText = \case
-        CJPPCompleted -> "COMPLETED"
-        CJPPInProgress -> "IN_PROGRESS"
-        CJPPNotAccepted -> "NOT_ACCEPTED"
-        CJPPNotStarted -> "NOT_STARTED"
-        CJPPObsolete -> "OBSOLETE"
+        CJUPCompleted -> "COMPLETED"
+        CJUPInProgress -> "IN_PROGRESS"
+        CJUPNotAccepted -> "NOT_ACCEPTED"
+        CJUPNotStarted -> "NOT_STARTED"
+        CJUPObsolete -> "OBSOLETE"
 
-instance FromJSON CoordinateJobsPatchProgress where
-    parseJSON = parseJSONText "CoordinateJobsPatchProgress"
+instance FromJSON CoordinateJobsUpdateProgress where
+    parseJSON = parseJSONText "CoordinateJobsUpdateProgress"
 
-instance ToJSON CoordinateJobsPatchProgress where
+instance ToJSON CoordinateJobsUpdateProgress where
     toJSON = toJSONText

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,10 +53,10 @@ type GroupsListResource =
      Capture "project" Text :>
        "global" :>
          "groups" :>
-           QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "orderBy" Text :>
-                 QueryParam "pageToken" Text :>
+           QueryParam "orderBy" Text :>
+             QueryParam "filter" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data GroupsList' = GroupsList'
     , _glOAuthToken  :: !(Maybe OAuthToken)
     , _glMaxResults  :: !Word32
     , _glFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsList'' with the minimum fields required to make a request.
 --
@@ -208,9 +209,8 @@ instance GoogleRequest GroupsList' where
         type Rs GroupsList' = GroupList
         request = requestWithRoute defReq userAccountsURL
         requestWithRoute r u GroupsList'{..}
-          = go _glFilter (Just _glMaxResults) _glOrderBy
-              _glPageToken
-              _glProject
+          = go _glProject _glOrderBy _glFilter _glPageToken
+              (Just _glMaxResults)
               _glQuotaUser
               (Just _glPrettyPrint)
               _glUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.Insert
     , mauliQuotaUser
     , mauliPrettyPrint
     , mauliUserIP
+    , mauliPayload
     , mauliAccountId
     , mauliKey
-    , mauliEntityUserLink
     , mauliOAuthToken
     , mauliFields
     ) where
@@ -64,15 +65,15 @@ type ManagementAccountUserLinksInsertResource =
 --
 -- /See:/ 'managementAccountUserLinksInsert'' smart constructor.
 data ManagementAccountUserLinksInsert' = ManagementAccountUserLinksInsert'
-    { _mauliQuotaUser      :: !(Maybe Text)
-    , _mauliPrettyPrint    :: !Bool
-    , _mauliUserIP         :: !(Maybe Text)
-    , _mauliAccountId      :: !Text
-    , _mauliKey            :: !(Maybe Key)
-    , _mauliEntityUserLink :: !EntityUserLink
-    , _mauliOAuthToken     :: !(Maybe OAuthToken)
-    , _mauliFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mauliQuotaUser   :: !(Maybe Text)
+    , _mauliPrettyPrint :: !Bool
+    , _mauliUserIP      :: !(Maybe Text)
+    , _mauliPayload     :: !EntityUserLink
+    , _mauliAccountId   :: !Text
+    , _mauliKey         :: !(Maybe Key)
+    , _mauliOAuthToken  :: !(Maybe OAuthToken)
+    , _mauliFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksInsert'' with the minimum fields required to make a request.
 --
@@ -84,27 +85,27 @@ data ManagementAccountUserLinksInsert' = ManagementAccountUserLinksInsert'
 --
 -- * 'mauliUserIP'
 --
+-- * 'mauliPayload'
+--
 -- * 'mauliAccountId'
 --
 -- * 'mauliKey'
---
--- * 'mauliEntityUserLink'
 --
 -- * 'mauliOAuthToken'
 --
 -- * 'mauliFields'
 managementAccountUserLinksInsert'
-    :: Text -- ^ 'accountId'
-    -> EntityUserLink -- ^ 'EntityUserLink'
+    :: EntityUserLink -- ^ 'payload'
+    -> Text -- ^ 'accountId'
     -> ManagementAccountUserLinksInsert'
-managementAccountUserLinksInsert' pMauliAccountId_ pMauliEntityUserLink_ =
+managementAccountUserLinksInsert' pMauliPayload_ pMauliAccountId_ =
     ManagementAccountUserLinksInsert'
     { _mauliQuotaUser = Nothing
     , _mauliPrettyPrint = False
     , _mauliUserIP = Nothing
+    , _mauliPayload = pMauliPayload_
     , _mauliAccountId = pMauliAccountId_
     , _mauliKey = Nothing
-    , _mauliEntityUserLink = pMauliEntityUserLink_
     , _mauliOAuthToken = Nothing
     , _mauliFields = Nothing
     }
@@ -129,6 +130,11 @@ mauliUserIP :: Lens' ManagementAccountUserLinksInsert' (Maybe Text)
 mauliUserIP
   = lens _mauliUserIP (\ s a -> s{_mauliUserIP = a})
 
+-- | Multipart request metadata.
+mauliPayload :: Lens' ManagementAccountUserLinksInsert' EntityUserLink
+mauliPayload
+  = lens _mauliPayload (\ s a -> s{_mauliPayload = a})
+
 -- | Account ID to create the user link for.
 mauliAccountId :: Lens' ManagementAccountUserLinksInsert' Text
 mauliAccountId
@@ -140,12 +146,6 @@ mauliAccountId
 -- token.
 mauliKey :: Lens' ManagementAccountUserLinksInsert' (Maybe Key)
 mauliKey = lens _mauliKey (\ s a -> s{_mauliKey = a})
-
--- | Multipart request metadata.
-mauliEntityUserLink :: Lens' ManagementAccountUserLinksInsert' EntityUserLink
-mauliEntityUserLink
-  = lens _mauliEntityUserLink
-      (\ s a -> s{_mauliEntityUserLink = a})
 
 -- | OAuth 2.0 token for the current user.
 mauliOAuthToken :: Lens' ManagementAccountUserLinksInsert' (Maybe OAuthToken)
@@ -177,7 +177,7 @@ instance GoogleRequest
               _mauliKey
               _mauliOAuthToken
               (Just AltJSON)
-              _mauliEntityUserLink
+              _mauliPayload
           where go
                   = clientWithRoute
                       (Proxy ::

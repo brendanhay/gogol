@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Upda
     , mwpawluPrettyPrint
     , mwpawluWebPropertyId
     , mwpawluUserIP
-    , mwpawluEntityAdWordsLink
+    , mwpawluPayload
     , mwpawluAccountId
     , mwpawluKey
     , mwpawluWebPropertyAdWordsLinkId
@@ -74,13 +75,13 @@ data ManagementWebPropertyAdWordsLinksUpdate' = ManagementWebPropertyAdWordsLink
     , _mwpawluPrettyPrint              :: !Bool
     , _mwpawluWebPropertyId            :: !Text
     , _mwpawluUserIP                   :: !(Maybe Text)
-    , _mwpawluEntityAdWordsLink        :: !EntityAdWordsLink
+    , _mwpawluPayload                  :: !EntityAdWordsLink
     , _mwpawluAccountId                :: !Text
     , _mwpawluKey                      :: !(Maybe Key)
     , _mwpawluWebPropertyAdWordsLinkId :: !Text
     , _mwpawluOAuthToken               :: !(Maybe OAuthToken)
     , _mwpawluFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksUpdate'' with the minimum fields required to make a request.
 --
@@ -94,7 +95,7 @@ data ManagementWebPropertyAdWordsLinksUpdate' = ManagementWebPropertyAdWordsLink
 --
 -- * 'mwpawluUserIP'
 --
--- * 'mwpawluEntityAdWordsLink'
+-- * 'mwpawluPayload'
 --
 -- * 'mwpawluAccountId'
 --
@@ -107,17 +108,17 @@ data ManagementWebPropertyAdWordsLinksUpdate' = ManagementWebPropertyAdWordsLink
 -- * 'mwpawluFields'
 managementWebPropertyAdWordsLinksUpdate'
     :: Text -- ^ 'webPropertyId'
-    -> EntityAdWordsLink -- ^ 'EntityAdWordsLink'
+    -> EntityAdWordsLink -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'webPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksUpdate'
-managementWebPropertyAdWordsLinksUpdate' pMwpawluWebPropertyId_ pMwpawluEntityAdWordsLink_ pMwpawluAccountId_ pMwpawluWebPropertyAdWordsLinkId_ =
+managementWebPropertyAdWordsLinksUpdate' pMwpawluWebPropertyId_ pMwpawluPayload_ pMwpawluAccountId_ pMwpawluWebPropertyAdWordsLinkId_ =
     ManagementWebPropertyAdWordsLinksUpdate'
     { _mwpawluQuotaUser = Nothing
     , _mwpawluPrettyPrint = False
     , _mwpawluWebPropertyId = pMwpawluWebPropertyId_
     , _mwpawluUserIP = Nothing
-    , _mwpawluEntityAdWordsLink = pMwpawluEntityAdWordsLink_
+    , _mwpawluPayload = pMwpawluPayload_
     , _mwpawluAccountId = pMwpawluAccountId_
     , _mwpawluKey = Nothing
     , _mwpawluWebPropertyAdWordsLinkId = pMwpawluWebPropertyAdWordsLinkId_
@@ -153,10 +154,10 @@ mwpawluUserIP
       (\ s a -> s{_mwpawluUserIP = a})
 
 -- | Multipart request metadata.
-mwpawluEntityAdWordsLink :: Lens' ManagementWebPropertyAdWordsLinksUpdate' EntityAdWordsLink
-mwpawluEntityAdWordsLink
-  = lens _mwpawluEntityAdWordsLink
-      (\ s a -> s{_mwpawluEntityAdWordsLink = a})
+mwpawluPayload :: Lens' ManagementWebPropertyAdWordsLinksUpdate' EntityAdWordsLink
+mwpawluPayload
+  = lens _mwpawluPayload
+      (\ s a -> s{_mwpawluPayload = a})
 
 -- | ID of the account which the given web property belongs to.
 mwpawluAccountId :: Lens' ManagementWebPropertyAdWordsLinksUpdate' Text
@@ -210,7 +211,7 @@ instance GoogleRequest
               _mwpawluKey
               _mwpawluOAuthToken
               (Just AltJSON)
-              _mwpawluEntityAdWordsLink
+              _mwpawluPayload
           where go
                   = clientWithRoute
                       (Proxy ::

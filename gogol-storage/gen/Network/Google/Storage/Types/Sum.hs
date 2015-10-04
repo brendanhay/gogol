@@ -280,6 +280,37 @@ instance FromJSON StorageObjectsInsertProjection where
 instance ToJSON StorageObjectsInsertProjection where
     toJSON = toJSONText
 
+-- | Set of properties to return. Defaults to noAcl, unless the bucket
+-- resource specifies acl or defaultObjectAcl properties, when it defaults
+-- to full.
+data Projection
+    = PFull
+      -- ^ @full@
+      -- Include all properties.
+    | PNoACL
+      -- ^ @noAcl@
+      -- Omit acl and defaultObjectAcl properties.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Projection
+
+instance FromText Projection where
+    fromText = \case
+        "full" -> Just PFull
+        "noAcl" -> Just PNoACL
+        _ -> Nothing
+
+instance ToText Projection where
+    toText = \case
+        PFull -> "full"
+        PNoACL -> "noAcl"
+
+instance FromJSON Projection where
+    parseJSON = parseJSONText "Projection"
+
+instance ToJSON Projection where
+    toJSON = toJSONText
+
 -- | Set of properties to return. Defaults to full.
 data StorageBucketsUpdateProjection
     = SBUPFull
@@ -336,35 +367,4 @@ instance FromJSON StorageObjectsListProjection where
     parseJSON = parseJSONText "StorageObjectsListProjection"
 
 instance ToJSON StorageObjectsListProjection where
-    toJSON = toJSONText
-
--- | Set of properties to return. Defaults to noAcl, unless the bucket
--- resource specifies acl or defaultObjectAcl properties, when it defaults
--- to full.
-data StorageBucketsInsertProjection
-    = SBIPFull
-      -- ^ @full@
-      -- Include all properties.
-    | SBIPNoACL
-      -- ^ @noAcl@
-      -- Omit acl and defaultObjectAcl properties.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable StorageBucketsInsertProjection
-
-instance FromText StorageBucketsInsertProjection where
-    fromText = \case
-        "full" -> Just SBIPFull
-        "noAcl" -> Just SBIPNoACL
-        _ -> Nothing
-
-instance ToText StorageBucketsInsertProjection where
-    toText = \case
-        SBIPFull -> "full"
-        SBIPNoACL -> "noAcl"
-
-instance FromJSON StorageBucketsInsertProjection where
-    parseJSON = parseJSONText "StorageBucketsInsertProjection"
-
-instance ToJSON StorageBucketsInsertProjection where
     toJSON = toJSONText

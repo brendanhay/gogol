@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -60,19 +61,19 @@ type OrderDocumentsListResource =
          "projects" :>
            Capture "projectId" Int64 :>
              "orderDocuments" :>
-               QueryParam "approved" Bool :>
+               QueryParam "searchString" Text :>
                  QueryParams "ids" Int64 :>
-                   QueryParam "maxResults" Int32 :>
-                     QueryParams "orderId" Int64 :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "searchString" Text :>
-                           QueryParams "siteId" Int64 :>
-                             QueryParam "sortField"
-                               DfareportingOrderDocumentsListSortField
-                               :>
-                               QueryParam "sortOrder"
-                                 DfareportingOrderDocumentsListSortOrder
-                                 :>
+                   QueryParam "sortOrder"
+                     DfareportingOrderDocumentsListSortOrder
+                     :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "sortField"
+                         DfareportingOrderDocumentsListSortField
+                         :>
+                         QueryParams "orderId" Int64 :>
+                           QueryParam "approved" Bool :>
+                             QueryParams "siteId" Int64 :>
+                               QueryParam "maxResults" Int32 :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
@@ -92,7 +93,7 @@ data OrderDocumentsList' = OrderDocumentsList'
     , _odlPrettyPrint  :: !Bool
     , _odlUserIP       :: !(Maybe Text)
     , _odlSearchString :: !(Maybe Text)
-    , _odlIds          :: !(Maybe Int64)
+    , _odlIds          :: !(Maybe [Int64])
     , _odlProfileId    :: !Int64
     , _odlSortOrder    :: !(Maybe DfareportingOrderDocumentsListSortOrder)
     , _odlKey          :: !(Maybe Key)
@@ -100,12 +101,12 @@ data OrderDocumentsList' = OrderDocumentsList'
     , _odlProjectId    :: !Int64
     , _odlSortField    :: !(Maybe DfareportingOrderDocumentsListSortField)
     , _odlOAuthToken   :: !(Maybe OAuthToken)
-    , _odlOrderId      :: !(Maybe Int64)
+    , _odlOrderId      :: !(Maybe [Int64])
     , _odlApproved     :: !(Maybe Bool)
-    , _odlSiteId       :: !(Maybe Int64)
+    , _odlSiteId       :: !(Maybe [Int64])
     , _odlMaxResults   :: !(Maybe Int32)
     , _odlFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderDocumentsList'' with the minimum fields required to make a request.
 --
@@ -202,8 +203,10 @@ odlSearchString
       (\ s a -> s{_odlSearchString = a})
 
 -- | Select only order documents with these IDs.
-odlIds :: Lens' OrderDocumentsList' (Maybe Int64)
-odlIds = lens _odlIds (\ s a -> s{_odlIds = a})
+odlIds :: Lens' OrderDocumentsList' [Int64]
+odlIds
+  = lens _odlIds (\ s a -> s{_odlIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 odlProfileId :: Lens' OrderDocumentsList' Int64
@@ -243,9 +246,11 @@ odlOAuthToken
       (\ s a -> s{_odlOAuthToken = a})
 
 -- | Select only order documents for specified orders.
-odlOrderId :: Lens' OrderDocumentsList' (Maybe Int64)
+odlOrderId :: Lens' OrderDocumentsList' [Int64]
 odlOrderId
-  = lens _odlOrderId (\ s a -> s{_odlOrderId = a})
+  = lens _odlOrderId (\ s a -> s{_odlOrderId = a}) .
+      _Default
+      . _Coerce
 
 -- | Select only order documents that have been approved by at least one
 -- user.
@@ -254,9 +259,11 @@ odlApproved
   = lens _odlApproved (\ s a -> s{_odlApproved = a})
 
 -- | Select only order documents that are associated with these sites.
-odlSiteId :: Lens' OrderDocumentsList' (Maybe Int64)
+odlSiteId :: Lens' OrderDocumentsList' [Int64]
 odlSiteId
-  = lens _odlSiteId (\ s a -> s{_odlSiteId = a})
+  = lens _odlSiteId (\ s a -> s{_odlSiteId = a}) .
+      _Default
+      . _Coerce
 
 -- | Maximum number of results to return.
 odlMaxResults :: Lens' OrderDocumentsList' (Maybe Int32)
@@ -278,14 +285,15 @@ instance GoogleRequest OrderDocumentsList' where
              OrderDocumentsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OrderDocumentsList'{..}
-          = go _odlApproved _odlIds _odlMaxResults _odlOrderId
-              _odlPageToken
-              _odlSearchString
-              _odlSiteId
-              _odlSortField
+          = go _odlProfileId _odlProjectId _odlSearchString
+              (_odlIds ^. _Default)
               _odlSortOrder
-              _odlProfileId
-              _odlProjectId
+              _odlPageToken
+              _odlSortField
+              (_odlOrderId ^. _Default)
+              _odlApproved
+              (_odlSiteId ^. _Default)
+              _odlMaxResults
               _odlQuotaUser
               (Just _odlPrettyPrint)
               _odlUserIP

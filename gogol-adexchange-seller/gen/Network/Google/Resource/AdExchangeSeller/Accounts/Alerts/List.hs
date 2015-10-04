@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -70,7 +71,7 @@ data AccountsAlertsList' = AccountsAlertsList'
     , _aalKey         :: !(Maybe Key)
     , _aalOAuthToken  :: !(Maybe OAuthToken)
     , _aalFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAlertsList'' with the minimum fields required to make a request.
 --
@@ -162,7 +163,7 @@ instance GoogleRequest AccountsAlertsList' where
         type Rs AccountsAlertsList' = Alerts
         request = requestWithRoute defReq adExchangeSellerURL
         requestWithRoute r u AccountsAlertsList'{..}
-          = go _aalLocale _aalAccountId _aalQuotaUser
+          = go _aalAccountId _aalLocale _aalQuotaUser
               (Just _aalPrettyPrint)
               _aalUserIP
               _aalFields

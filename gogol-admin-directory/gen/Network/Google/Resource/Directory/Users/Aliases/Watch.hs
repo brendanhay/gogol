@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.Directory.Users.Aliases.Watch
     , uawQuotaUser
     , uawPrettyPrint
     , uawUserIP
-    , uawChannel
+    , uawPayload
     , uawKey
     , uawOAuthToken
     , uawUserKey
@@ -69,12 +70,12 @@ data UsersAliasesWatch' = UsersAliasesWatch'
     , _uawQuotaUser   :: !(Maybe Text)
     , _uawPrettyPrint :: !Bool
     , _uawUserIP      :: !(Maybe Text)
-    , _uawChannel     :: !Channel
+    , _uawPayload     :: !Channel
     , _uawKey         :: !(Maybe Key)
     , _uawOAuthToken  :: !(Maybe OAuthToken)
     , _uawUserKey     :: !Text
     , _uawFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersAliasesWatch'' with the minimum fields required to make a request.
 --
@@ -88,7 +89,7 @@ data UsersAliasesWatch' = UsersAliasesWatch'
 --
 -- * 'uawUserIP'
 --
--- * 'uawChannel'
+-- * 'uawPayload'
 --
 -- * 'uawKey'
 --
@@ -98,16 +99,16 @@ data UsersAliasesWatch' = UsersAliasesWatch'
 --
 -- * 'uawFields'
 usersAliasesWatch'
-    :: Channel -- ^ 'Channel'
+    :: Channel -- ^ 'payload'
     -> Text -- ^ 'userKey'
     -> UsersAliasesWatch'
-usersAliasesWatch' pUawChannel_ pUawUserKey_ =
+usersAliasesWatch' pUawPayload_ pUawUserKey_ =
     UsersAliasesWatch'
     { _uawEvent = Nothing
     , _uawQuotaUser = Nothing
     , _uawPrettyPrint = True
     , _uawUserIP = Nothing
-    , _uawChannel = pUawChannel_
+    , _uawPayload = pUawPayload_
     , _uawKey = Nothing
     , _uawOAuthToken = Nothing
     , _uawUserKey = pUawUserKey_
@@ -138,9 +139,9 @@ uawUserIP
   = lens _uawUserIP (\ s a -> s{_uawUserIP = a})
 
 -- | Multipart request metadata.
-uawChannel :: Lens' UsersAliasesWatch' Channel
-uawChannel
-  = lens _uawChannel (\ s a -> s{_uawChannel = a})
+uawPayload :: Lens' UsersAliasesWatch' Channel
+uawPayload
+  = lens _uawPayload (\ s a -> s{_uawPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -172,14 +173,14 @@ instance GoogleRequest UsersAliasesWatch' where
         type Rs UsersAliasesWatch' = Channel
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersAliasesWatch'{..}
-          = go _uawEvent _uawUserKey _uawQuotaUser
+          = go _uawUserKey _uawEvent _uawQuotaUser
               (Just _uawPrettyPrint)
               _uawUserIP
               _uawFields
               _uawKey
               _uawOAuthToken
               (Just AltJSON)
-              _uawChannel
+              _uawPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersAliasesWatchResource)

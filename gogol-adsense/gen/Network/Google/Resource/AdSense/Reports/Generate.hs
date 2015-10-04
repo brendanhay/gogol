@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -59,18 +60,18 @@ import           Network.Google.Prelude
 -- 'ReportsGenerate'' request conforms to.
 type ReportsGenerateResource =
      "reports" :>
-       QueryParams "accountId" Text :>
-         QueryParam "currency" Text :>
+       QueryParam "startDate" Text :>
+         QueryParam "endDate" Text :>
            QueryParams "dimension" Text :>
-             QueryParams "filter" Text :>
-               QueryParam "locale" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParams "metric" Text :>
+             QueryParam "locale" Text :>
+               QueryParams "accountId" Text :>
+                 QueryParams "metric" Text :>
+                   QueryParam "currency" Text :>
                      QueryParams "sort" Text :>
-                       QueryParam "startIndex" Int32 :>
-                         QueryParam "useTimezoneReporting" Bool :>
-                           QueryParam "startDate" Text :>
-                             QueryParam "endDate" Text :>
+                       QueryParams "filter" Text :>
+                         QueryParam "startIndex" Int32 :>
+                           QueryParam "useTimezoneReporting" Bool :>
+                             QueryParam "maxResults" Int32 :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "userIp" Text :>
@@ -82,18 +83,18 @@ type ReportsGenerateResource =
                                                AdsenseReportsGenerateResponse
        :<|>
        "reports" :>
-         QueryParams "accountId" Text :>
-           QueryParam "currency" Text :>
+         QueryParam "startDate" Text :>
+           QueryParam "endDate" Text :>
              QueryParams "dimension" Text :>
-               QueryParams "filter" Text :>
-                 QueryParam "locale" Text :>
-                   QueryParam "maxResults" Int32 :>
-                     QueryParams "metric" Text :>
+               QueryParam "locale" Text :>
+                 QueryParams "accountId" Text :>
+                   QueryParams "metric" Text :>
+                     QueryParam "currency" Text :>
                        QueryParams "sort" Text :>
-                         QueryParam "startIndex" Int32 :>
-                           QueryParam "useTimezoneReporting" Bool :>
-                             QueryParam "startDate" Text :>
-                               QueryParam "endDate" Text :>
+                         QueryParams "filter" Text :>
+                           QueryParam "startIndex" Int32 :>
+                             QueryParam "useTimezoneReporting" Bool :>
+                               QueryParam "maxResults" Int32 :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
@@ -101,8 +102,8 @@ type ReportsGenerateResource =
                                          QueryParam "key" Key :>
                                            QueryParam "oauth_token" OAuthToken
                                              :>
-                                             QueryParam "alt" Media :>
-                                               Get '[OctetStream] Stream
+                                             QueryParam "alt" AltMedia :>
+                                               Get '[OctetStream] Body
 
 -- | Generate an AdSense report based on the report request sent in the query
 -- parameters. Returns the result as JSON; to retrieve output in CSV format
@@ -113,22 +114,22 @@ data ReportsGenerate' = ReportsGenerate'
     { _rgQuotaUser            :: !(Maybe Text)
     , _rgPrettyPrint          :: !Bool
     , _rgUserIP               :: !(Maybe Text)
-    , _rgDimension            :: !(Maybe Text)
+    , _rgDimension            :: !(Maybe [Text])
     , _rgLocale               :: !(Maybe Text)
     , _rgEndDate              :: !Text
     , _rgStartDate            :: !Text
-    , _rgAccountId            :: !(Maybe Text)
-    , _rgMetric               :: !(Maybe Text)
+    , _rgAccountId            :: !(Maybe [Text])
+    , _rgMetric               :: !(Maybe [Text])
     , _rgKey                  :: !(Maybe Key)
     , _rgCurrency             :: !(Maybe Text)
-    , _rgSort                 :: !(Maybe Text)
-    , _rgFilter               :: !(Maybe Text)
+    , _rgSort                 :: !(Maybe [Text])
+    , _rgFilter               :: !(Maybe [Text])
     , _rgOAuthToken           :: !(Maybe OAuthToken)
     , _rgStartIndex           :: !(Maybe Int32)
     , _rgUseTimezoneReporting :: !(Maybe Bool)
     , _rgMaxResults           :: !(Maybe Int32)
     , _rgFields               :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGenerate'' with the minimum fields required to make a request.
 --
@@ -214,9 +215,11 @@ rgUserIP :: Lens' ReportsGenerate' (Maybe Text)
 rgUserIP = lens _rgUserIP (\ s a -> s{_rgUserIP = a})
 
 -- | Dimensions to base the report on.
-rgDimension :: Lens' ReportsGenerate' (Maybe Text)
+rgDimension :: Lens' ReportsGenerate' [Text]
 rgDimension
-  = lens _rgDimension (\ s a -> s{_rgDimension = a})
+  = lens _rgDimension (\ s a -> s{_rgDimension = a}) .
+      _Default
+      . _Coerce
 
 -- | Optional locale to use for translating report output to a local
 -- language. Defaults to \"en_US\" if not specified.
@@ -235,13 +238,18 @@ rgStartDate
   = lens _rgStartDate (\ s a -> s{_rgStartDate = a})
 
 -- | Accounts upon which to report.
-rgAccountId :: Lens' ReportsGenerate' (Maybe Text)
+rgAccountId :: Lens' ReportsGenerate' [Text]
 rgAccountId
-  = lens _rgAccountId (\ s a -> s{_rgAccountId = a})
+  = lens _rgAccountId (\ s a -> s{_rgAccountId = a}) .
+      _Default
+      . _Coerce
 
 -- | Numeric columns to include in the report.
-rgMetric :: Lens' ReportsGenerate' (Maybe Text)
-rgMetric = lens _rgMetric (\ s a -> s{_rgMetric = a})
+rgMetric :: Lens' ReportsGenerate' [Text]
+rgMetric
+  = lens _rgMetric (\ s a -> s{_rgMetric = a}) .
+      _Default
+      . _Coerce
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -258,12 +266,17 @@ rgCurrency
 -- | The name of a dimension or metric to sort the resulting report on,
 -- optionally prefixed with \"+\" to sort ascending or \"-\" to sort
 -- descending. If no prefix is specified, the column is sorted ascending.
-rgSort :: Lens' ReportsGenerate' (Maybe Text)
-rgSort = lens _rgSort (\ s a -> s{_rgSort = a})
+rgSort :: Lens' ReportsGenerate' [Text]
+rgSort
+  = lens _rgSort (\ s a -> s{_rgSort = a}) . _Default .
+      _Coerce
 
 -- | Filters to be run on the report.
-rgFilter :: Lens' ReportsGenerate' (Maybe Text)
-rgFilter = lens _rgFilter (\ s a -> s{_rgFilter = a})
+rgFilter :: Lens' ReportsGenerate' [Text]
+rgFilter
+  = lens _rgFilter (\ s a -> s{_rgFilter = a}) .
+      _Default
+      . _Coerce
 
 -- | OAuth 2.0 token for the current user.
 rgOAuthToken :: Lens' ReportsGenerate' (Maybe OAuthToken)
@@ -300,15 +313,17 @@ instance GoogleRequest ReportsGenerate' where
              AdsenseReportsGenerateResponse
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u ReportsGenerate'{..}
-          = go _rgAccountId _rgCurrency _rgDimension _rgFilter
+          = go (Just _rgStartDate) (Just _rgEndDate)
+              (_rgDimension ^. _Default)
               _rgLocale
-              _rgMaxResults
-              _rgMetric
-              _rgSort
+              (_rgAccountId ^. _Default)
+              (_rgMetric ^. _Default)
+              _rgCurrency
+              (_rgSort ^. _Default)
+              (_rgFilter ^. _Default)
               _rgStartIndex
               _rgUseTimezoneReporting
-              (Just _rgStartDate)
-              (Just _rgEndDate)
+              _rgMaxResults
               _rgQuotaUser
               (Just _rgPrettyPrint)
               _rgUserIP
@@ -322,27 +337,30 @@ instance GoogleRequest ReportsGenerate' where
                       r
                       u
 
-instance GoogleRequest ReportsGenerate' where
-        type Rs (Download ReportsGenerate') = Stream
+instance GoogleRequest (Download ReportsGenerate')
+         where
+        type Rs (Download ReportsGenerate') = Body
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u ReportsGenerate'{..}
-          = go _rgAccountId _rgCurrency _rgDimension _rgFilter
+        requestWithRoute r u (Download ReportsGenerate'{..})
+          = go (Just _rgStartDate) (Just _rgEndDate)
+              (_rgDimension ^. _Default)
               _rgLocale
-              _rgMaxResults
-              _rgMetric
-              _rgSort
+              (_rgAccountId ^. _Default)
+              (_rgMetric ^. _Default)
+              _rgCurrency
+              (_rgSort ^. _Default)
+              (_rgFilter ^. _Default)
               _rgStartIndex
               _rgUseTimezoneReporting
-              (Just _rgStartDate)
-              (Just _rgEndDate)
+              _rgMaxResults
               _rgQuotaUser
               (Just _rgPrettyPrint)
               _rgUserIP
               _rgFields
               _rgKey
               _rgOAuthToken
-              (Just Media)
-          where go :<|> _
+              (Just AltMedia)
+          where _ :<|> go
                   = clientWithRoute
                       (Proxy :: Proxy ReportsGenerateResource)
                       r

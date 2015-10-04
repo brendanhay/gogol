@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,9 +53,9 @@ type PostsSearchResource =
        Capture "blogId" Text :>
          "posts" :>
            "search" :>
-             QueryParam "fetchBodies" Bool :>
+             QueryParam "q" Text :>
                QueryParam "orderBy" BloggerPostsSearchOrderBy :>
-                 QueryParam "q" Text :>
+                 QueryParam "fetchBodies" Bool :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data PostsSearch' = PostsSearch'
     , _psFetchBodies :: !Bool
     , _psOAuthToken  :: !(Maybe OAuthToken)
     , _psFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsSearch'' with the minimum fields required to make a request.
 --
@@ -182,9 +183,8 @@ instance GoogleRequest PostsSearch' where
         type Rs PostsSearch' = PostList
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsSearch'{..}
-          = go (Just _psFetchBodies) (Just _psOrderBy)
-              _psBlogId
-              (Just _psQ)
+          = go _psBlogId (Just _psQ) (Just _psOrderBy)
+              (Just _psFetchBodies)
               _psQuotaUser
               (Just _psPrettyPrint)
               _psUserIP

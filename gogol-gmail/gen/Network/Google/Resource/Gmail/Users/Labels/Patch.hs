@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,11 +34,11 @@ module Network.Google.Resource.Gmail.Users.Labels.Patch
     , ulpQuotaUser
     , ulpPrettyPrint
     , ulpUserIP
+    , ulpPayload
     , ulpUserId
     , ulpKey
     , ulpId
     , ulpOAuthToken
-    , ulpLabel
     , ulpFields
     ) where
 
@@ -66,13 +67,13 @@ data UsersLabelsPatch' = UsersLabelsPatch'
     { _ulpQuotaUser   :: !(Maybe Text)
     , _ulpPrettyPrint :: !Bool
     , _ulpUserIP      :: !(Maybe Text)
+    , _ulpPayload     :: !Label
     , _ulpUserId      :: !Text
     , _ulpKey         :: !(Maybe Key)
     , _ulpId          :: !Text
     , _ulpOAuthToken  :: !(Maybe OAuthToken)
-    , _ulpLabel       :: !Label
     , _ulpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersLabelsPatch'' with the minimum fields required to make a request.
 --
@@ -84,6 +85,8 @@ data UsersLabelsPatch' = UsersLabelsPatch'
 --
 -- * 'ulpUserIP'
 --
+-- * 'ulpPayload'
+--
 -- * 'ulpUserId'
 --
 -- * 'ulpKey'
@@ -92,24 +95,22 @@ data UsersLabelsPatch' = UsersLabelsPatch'
 --
 -- * 'ulpOAuthToken'
 --
--- * 'ulpLabel'
---
 -- * 'ulpFields'
 usersLabelsPatch'
-    :: Text -- ^ 'id'
-    -> Text -- ^ 'Label'
-    -> Label
+    :: Label -- ^ 'payload'
+    -> Text -- ^ 'id'
+    -> Text
     -> UsersLabelsPatch'
-usersLabelsPatch' pUlpUserId_ pUlpId_ pUlpLabel_ =
+usersLabelsPatch' pUlpPayload_ pUlpUserId_ pUlpId_ =
     UsersLabelsPatch'
     { _ulpQuotaUser = Nothing
     , _ulpPrettyPrint = True
     , _ulpUserIP = Nothing
+    , _ulpPayload = pUlpPayload_
     , _ulpUserId = pUlpUserId_
     , _ulpKey = Nothing
     , _ulpId = pUlpId_
     , _ulpOAuthToken = Nothing
-    , _ulpLabel = pUlpLabel_
     , _ulpFields = Nothing
     }
 
@@ -131,6 +132,11 @@ ulpPrettyPrint
 ulpUserIP :: Lens' UsersLabelsPatch' (Maybe Text)
 ulpUserIP
   = lens _ulpUserIP (\ s a -> s{_ulpUserIP = a})
+
+-- | Multipart request metadata.
+ulpPayload :: Lens' UsersLabelsPatch' Label
+ulpPayload
+  = lens _ulpPayload (\ s a -> s{_ulpPayload = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -154,10 +160,6 @@ ulpOAuthToken
   = lens _ulpOAuthToken
       (\ s a -> s{_ulpOAuthToken = a})
 
--- | Multipart request metadata.
-ulpLabel :: Lens' UsersLabelsPatch' Label
-ulpLabel = lens _ulpLabel (\ s a -> s{_ulpLabel = a})
-
 -- | Selector specifying which fields to include in a partial response.
 ulpFields :: Lens' UsersLabelsPatch' (Maybe Text)
 ulpFields
@@ -178,7 +180,7 @@ instance GoogleRequest UsersLabelsPatch' where
               _ulpKey
               _ulpOAuthToken
               (Just AltJSON)
-              _ulpLabel
+              _ulpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersLabelsPatchResource)

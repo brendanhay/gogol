@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.YouTube.CommentThreads.Insert
     , ctiPart
     , ctiPrettyPrint
     , ctiUserIP
+    , ctiPayload
     , ctiKey
-    , ctiCommentThread
     , ctiOAuthToken
     , ctiFields
     ) where
@@ -64,15 +65,15 @@ type CommentThreadsInsertResource =
 --
 -- /See:/ 'commentThreadsInsert'' smart constructor.
 data CommentThreadsInsert' = CommentThreadsInsert'
-    { _ctiQuotaUser     :: !(Maybe Text)
-    , _ctiPart          :: !Text
-    , _ctiPrettyPrint   :: !Bool
-    , _ctiUserIP        :: !(Maybe Text)
-    , _ctiKey           :: !(Maybe Key)
-    , _ctiCommentThread :: !CommentThread
-    , _ctiOAuthToken    :: !(Maybe OAuthToken)
-    , _ctiFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ctiQuotaUser   :: !(Maybe Text)
+    , _ctiPart        :: !Text
+    , _ctiPrettyPrint :: !Bool
+    , _ctiUserIP      :: !(Maybe Text)
+    , _ctiPayload     :: !CommentThread
+    , _ctiKey         :: !(Maybe Key)
+    , _ctiOAuthToken  :: !(Maybe OAuthToken)
+    , _ctiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentThreadsInsert'' with the minimum fields required to make a request.
 --
@@ -86,25 +87,25 @@ data CommentThreadsInsert' = CommentThreadsInsert'
 --
 -- * 'ctiUserIP'
 --
--- * 'ctiKey'
+-- * 'ctiPayload'
 --
--- * 'ctiCommentThread'
+-- * 'ctiKey'
 --
 -- * 'ctiOAuthToken'
 --
 -- * 'ctiFields'
 commentThreadsInsert'
     :: Text -- ^ 'part'
-    -> CommentThread -- ^ 'CommentThread'
+    -> CommentThread -- ^ 'payload'
     -> CommentThreadsInsert'
-commentThreadsInsert' pCtiPart_ pCtiCommentThread_ =
+commentThreadsInsert' pCtiPart_ pCtiPayload_ =
     CommentThreadsInsert'
     { _ctiQuotaUser = Nothing
     , _ctiPart = pCtiPart_
     , _ctiPrettyPrint = True
     , _ctiUserIP = Nothing
+    , _ctiPayload = pCtiPayload_
     , _ctiKey = Nothing
-    , _ctiCommentThread = pCtiCommentThread_
     , _ctiOAuthToken = Nothing
     , _ctiFields = Nothing
     }
@@ -134,17 +135,16 @@ ctiUserIP :: Lens' CommentThreadsInsert' (Maybe Text)
 ctiUserIP
   = lens _ctiUserIP (\ s a -> s{_ctiUserIP = a})
 
+-- | Multipart request metadata.
+ctiPayload :: Lens' CommentThreadsInsert' CommentThread
+ctiPayload
+  = lens _ctiPayload (\ s a -> s{_ctiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 ctiKey :: Lens' CommentThreadsInsert' (Maybe Key)
 ctiKey = lens _ctiKey (\ s a -> s{_ctiKey = a})
-
--- | Multipart request metadata.
-ctiCommentThread :: Lens' CommentThreadsInsert' CommentThread
-ctiCommentThread
-  = lens _ctiCommentThread
-      (\ s a -> s{_ctiCommentThread = a})
 
 -- | OAuth 2.0 token for the current user.
 ctiOAuthToken :: Lens' CommentThreadsInsert' (Maybe OAuthToken)
@@ -172,7 +172,7 @@ instance GoogleRequest CommentThreadsInsert' where
               _ctiKey
               _ctiOAuthToken
               (Just AltJSON)
-              _ctiCommentThread
+              _ctiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentThreadsInsertResource)

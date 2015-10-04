@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -68,7 +69,7 @@ type ProjectsIconsGetResource =
                      QueryParam "fields" Text :>
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "alt" Media :> Get '[OctetStream] Stream
+                           QueryParam "alt" AltMedia :> Get '[OctetStream] Body
 
 -- | Return an icon or its associated metadata
 --
@@ -82,7 +83,7 @@ data ProjectsIconsGet' = ProjectsIconsGet'
     , _pigProjectId   :: !Text
     , _pigOAuthToken  :: !(Maybe OAuthToken)
     , _pigFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsIconsGet'' with the minimum fields required to make a request.
 --
@@ -185,18 +186,19 @@ instance GoogleRequest ProjectsIconsGet' where
                       r
                       u
 
-instance GoogleRequest ProjectsIconsGet' where
-        type Rs (Download ProjectsIconsGet') = Stream
+instance GoogleRequest (Download ProjectsIconsGet')
+         where
+        type Rs (Download ProjectsIconsGet') = Body
         request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u ProjectsIconsGet'{..}
+        requestWithRoute r u (Download ProjectsIconsGet'{..})
           = go _pigProjectId _pigId _pigQuotaUser
               (Just _pigPrettyPrint)
               _pigUserIP
               _pigFields
               _pigKey
               _pigOAuthToken
-              (Just Media)
-          where go :<|> _
+              (Just AltMedia)
+          where _ :<|> go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsIconsGetResource)
                       r

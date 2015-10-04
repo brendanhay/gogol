@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -30,10 +31,10 @@ module Network.Google.Resource.MapsEngine.Layers.Permissions.BatchDelete
     , LayersPermissionsBatchDelete'
 
     -- * Request Lenses
-    , lpbdPermissionsBatchDeleteRequest
     , lpbdQuotaUser
     , lpbdPrettyPrint
     , lpbdUserIP
+    , lpbdPayload
     , lpbdKey
     , lpbdId
     , lpbdOAuthToken
@@ -64,27 +65,27 @@ type LayersPermissionsBatchDeleteResource =
 --
 -- /See:/ 'layersPermissionsBatchDelete'' smart constructor.
 data LayersPermissionsBatchDelete' = LayersPermissionsBatchDelete'
-    { _lpbdPermissionsBatchDeleteRequest :: !PermissionsBatchDeleteRequest
-    , _lpbdQuotaUser                     :: !(Maybe Text)
-    , _lpbdPrettyPrint                   :: !Bool
-    , _lpbdUserIP                        :: !(Maybe Text)
-    , _lpbdKey                           :: !(Maybe Key)
-    , _lpbdId                            :: !Text
-    , _lpbdOAuthToken                    :: !(Maybe OAuthToken)
-    , _lpbdFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _lpbdQuotaUser   :: !(Maybe Text)
+    , _lpbdPrettyPrint :: !Bool
+    , _lpbdUserIP      :: !(Maybe Text)
+    , _lpbdPayload     :: !PermissionsBatchDeleteRequest
+    , _lpbdKey         :: !(Maybe Key)
+    , _lpbdId          :: !Text
+    , _lpbdOAuthToken  :: !(Maybe OAuthToken)
+    , _lpbdFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersPermissionsBatchDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'lpbdPermissionsBatchDeleteRequest'
 --
 -- * 'lpbdQuotaUser'
 --
 -- * 'lpbdPrettyPrint'
 --
 -- * 'lpbdUserIP'
+--
+-- * 'lpbdPayload'
 --
 -- * 'lpbdKey'
 --
@@ -94,26 +95,20 @@ data LayersPermissionsBatchDelete' = LayersPermissionsBatchDelete'
 --
 -- * 'lpbdFields'
 layersPermissionsBatchDelete'
-    :: PermissionsBatchDeleteRequest -- ^ 'PermissionsBatchDeleteRequest'
+    :: PermissionsBatchDeleteRequest -- ^ 'payload'
     -> Text -- ^ 'id'
     -> LayersPermissionsBatchDelete'
-layersPermissionsBatchDelete' pLpbdPermissionsBatchDeleteRequest_ pLpbdId_ =
+layersPermissionsBatchDelete' pLpbdPayload_ pLpbdId_ =
     LayersPermissionsBatchDelete'
-    { _lpbdPermissionsBatchDeleteRequest = pLpbdPermissionsBatchDeleteRequest_
-    , _lpbdQuotaUser = Nothing
+    { _lpbdQuotaUser = Nothing
     , _lpbdPrettyPrint = True
     , _lpbdUserIP = Nothing
+    , _lpbdPayload = pLpbdPayload_
     , _lpbdKey = Nothing
     , _lpbdId = pLpbdId_
     , _lpbdOAuthToken = Nothing
     , _lpbdFields = Nothing
     }
-
--- | Multipart request metadata.
-lpbdPermissionsBatchDeleteRequest :: Lens' LayersPermissionsBatchDelete' PermissionsBatchDeleteRequest
-lpbdPermissionsBatchDeleteRequest
-  = lens _lpbdPermissionsBatchDeleteRequest
-      (\ s a -> s{_lpbdPermissionsBatchDeleteRequest = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -134,6 +129,11 @@ lpbdPrettyPrint
 lpbdUserIP :: Lens' LayersPermissionsBatchDelete' (Maybe Text)
 lpbdUserIP
   = lens _lpbdUserIP (\ s a -> s{_lpbdUserIP = a})
+
+-- | Multipart request metadata.
+lpbdPayload :: Lens' LayersPermissionsBatchDelete' PermissionsBatchDeleteRequest
+lpbdPayload
+  = lens _lpbdPayload (\ s a -> s{_lpbdPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -174,7 +174,7 @@ instance GoogleRequest LayersPermissionsBatchDelete'
               _lpbdKey
               _lpbdOAuthToken
               (Just AltJSON)
-              _lpbdPermissionsBatchDeleteRequest
+              _lpbdPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LayersPermissionsBatchDeleteResource)

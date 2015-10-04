@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,8 +37,8 @@ module Network.Google.Resource.Compute.Autoscalers.Patch
     , apProject
     , apUserIP
     , apZone
+    , apPayload
     , apKey
-    , apAutoscaler
     , apAutoscaler
     , apOAuthToken
     , apFields
@@ -74,12 +75,12 @@ data AutoscalersPatch' = AutoscalersPatch'
     , _apProject     :: !Text
     , _apUserIP      :: !(Maybe Text)
     , _apZone        :: !Text
+    , _apPayload     :: !Autoscaler
     , _apKey         :: !(Maybe Key)
-    , _apAutoscaler  :: !Autoscaler
     , _apAutoscaler  :: !Text
     , _apOAuthToken  :: !(Maybe OAuthToken)
     , _apFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersPatch'' with the minimum fields required to make a request.
 --
@@ -95,9 +96,9 @@ data AutoscalersPatch' = AutoscalersPatch'
 --
 -- * 'apZone'
 --
--- * 'apKey'
+-- * 'apPayload'
 --
--- * 'apAutoscaler'
+-- * 'apKey'
 --
 -- * 'apAutoscaler'
 --
@@ -107,18 +108,18 @@ data AutoscalersPatch' = AutoscalersPatch'
 autoscalersPatch'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> Autoscaler -- ^ 'Autoscaler'
+    -> Autoscaler -- ^ 'payload'
     -> Text -- ^ 'autoscaler'
     -> AutoscalersPatch'
-autoscalersPatch' pApProject_ pApZone_ pApAutoscaler_ pApAutoscaler_ =
+autoscalersPatch' pApProject_ pApZone_ pApPayload_ pApAutoscaler_ =
     AutoscalersPatch'
     { _apQuotaUser = Nothing
     , _apPrettyPrint = True
     , _apProject = pApProject_
     , _apUserIP = Nothing
     , _apZone = pApZone_
+    , _apPayload = pApPayload_
     , _apKey = Nothing
-    , _apAutoscaler = pApAutoscaler_
     , _apAutoscaler = pApAutoscaler_
     , _apOAuthToken = Nothing
     , _apFields = Nothing
@@ -151,16 +152,16 @@ apUserIP = lens _apUserIP (\ s a -> s{_apUserIP = a})
 apZone :: Lens' AutoscalersPatch' Text
 apZone = lens _apZone (\ s a -> s{_apZone = a})
 
+-- | Multipart request metadata.
+apPayload :: Lens' AutoscalersPatch' Autoscaler
+apPayload
+  = lens _apPayload (\ s a -> s{_apPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 apKey :: Lens' AutoscalersPatch' (Maybe Key)
 apKey = lens _apKey (\ s a -> s{_apKey = a})
-
--- | Multipart request metadata.
-apAutoscaler :: Lens' AutoscalersPatch' Autoscaler
-apAutoscaler
-  = lens _apAutoscaler (\ s a -> s{_apAutoscaler = a})
 
 -- | Name of the autoscaler resource to update.
 apAutoscaler :: Lens' AutoscalersPatch' Text
@@ -192,7 +193,7 @@ instance GoogleRequest AutoscalersPatch' where
               _apKey
               _apOAuthToken
               (Just AltJSON)
-              _apAutoscaler
+              _apPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AutoscalersPatchResource)

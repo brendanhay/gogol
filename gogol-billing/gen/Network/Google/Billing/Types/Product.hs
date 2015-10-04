@@ -27,7 +27,7 @@ data BillingAccount = BillingAccount
     { _baOpen        :: !(Maybe Bool)
     , _baName        :: !(Maybe Text)
     , _baDisplayName :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BillingAccount' with the minimum fields required to make a request.
 --
@@ -93,7 +93,7 @@ data ProjectBillingInfo = ProjectBillingInfo
     , _pbiBillingAccountName :: !(Maybe Text)
     , _pbiProjectId          :: !(Maybe Text)
     , _pbiBillingEnabled     :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectBillingInfo' with the minimum fields required to make a request.
 --
@@ -171,7 +171,7 @@ instance ToJSON ProjectBillingInfo where
 data ListProjectBillingInfoResponse = ListProjectBillingInfoResponse
     { _lpbirNextPageToken      :: !(Maybe Text)
     , _lpbirProjectBillingInfo :: !(Maybe [ProjectBillingInfo])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListProjectBillingInfoResponse' with the minimum fields required to make a request.
 --
@@ -229,7 +229,7 @@ instance ToJSON ListProjectBillingInfoResponse where
 data ListBillingAccountsResponse = ListBillingAccountsResponse
     { _lbarNextPageToken   :: !(Maybe Text)
     , _lbarBillingAccounts :: !(Maybe [BillingAccount])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListBillingAccountsResponse' with the minimum fields required to make a request.
 --

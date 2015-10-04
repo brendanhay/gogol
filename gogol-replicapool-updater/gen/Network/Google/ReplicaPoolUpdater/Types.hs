@@ -17,18 +17,6 @@ module Network.Google.ReplicaPoolUpdater.Types
     -- * Service URL
       replicaPoolUpdaterURL
 
-    -- * RollingUpdateError
-    , RollingUpdateError
-    , rollingUpdateError
-    , rueErrors
-
-    -- * OperationWarnings
-    , OperationWarnings
-    , operationWarnings
-    , owData
-    , owCode
-    , owMessage
-
     -- * RollingUpdate
     , RollingUpdate
     , rollingUpdate
@@ -48,12 +36,6 @@ module Network.Google.ReplicaPoolUpdater.Types
     , ruOldInstanceTemplate
     , ruDescription
     , ruInstanceGroup
-
-    -- * OperationWarningsData
-    , OperationWarningsData
-    , operationWarningsData
-    , owdValue
-    , owdKey
 
     -- * OperationList
     , OperationList
@@ -98,6 +80,11 @@ module Network.Google.ReplicaPoolUpdater.Types
     , oTargetLink
     , oClientOperationId
 
+    -- * Error'
+    , Error'
+    , error'
+    , eErrors
+
     -- * InstanceUpdateError
     , InstanceUpdateError
     , instanceUpdateError
@@ -110,33 +97,39 @@ module Network.Google.ReplicaPoolUpdater.Types
     , iuError
     , iuInstance
 
-    -- * RollingUpdatePolicy
-    , RollingUpdatePolicy
-    , rollingUpdatePolicy
-    , rupMinInstanceUpdateTimeSec
-    , rupInstanceStartupTimeoutSec
-    , rupMaxNumFailedInstances
-    , rupAutoPauseAfterInstances
-    , rupMaxNumConcurrentInstances
+    -- * WarningsItem
+    , WarningsItem
+    , warningsItem
+    , wiData
+    , wiCode
+    , wiMessage
 
-    -- * RollingUpdateErrorErrors
-    , RollingUpdateErrorErrors
-    , rollingUpdateErrorErrors
-    , rueeLocation
-    , rueeCode
-    , rueeMessage
+    -- * DataItem
+    , DataItem
+    , dataItem
+    , diValue
+    , diKey
 
     -- * OperationError
     , OperationError
     , operationError
     , oeErrors
 
-    -- * InstanceUpdateErrorErrors
-    , InstanceUpdateErrorErrors
-    , instanceUpdateErrorErrors
-    , iueeLocation
-    , iueeCode
-    , iueeMessage
+    -- * Policy
+    , Policy
+    , policy
+    , pMinInstanceUpdateTimeSec
+    , pInstanceStartupTimeoutSec
+    , pMaxNumFailedInstances
+    , pAutoPauseAfterInstances
+    , pMaxNumConcurrentInstances
+
+    -- * OperationErrorErrorsItem
+    , OperationErrorErrorsItem
+    , operationErrorErrorsItem
+    , oeeiLocation
+    , oeeiCode
+    , oeeiMessage
 
     -- * RollingUpdateList
     , RollingUpdateList
@@ -146,12 +139,19 @@ module Network.Google.ReplicaPoolUpdater.Types
     , rulItems
     , rulSelfLink
 
-    -- * OperationErrorErrors
-    , OperationErrorErrors
-    , operationErrorErrors
-    , oeeLocation
-    , oeeCode
-    , oeeMessage
+    -- * ErrorsItem
+    , ErrorsItem
+    , errorsItem
+    , eiLocation
+    , eiCode
+    , eiMessage
+
+    -- * InstanceUpdateErrorErrorsItem
+    , InstanceUpdateErrorErrorsItem
+    , instanceUpdateErrorErrorsItem
+    , iueeiLocation
+    , iueeiCode
+    , iueeiMessage
     ) where
 
 import           Network.Google.Prelude

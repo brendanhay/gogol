@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.Update
     , cfvuCreativeFieldId
     , cfvuQuotaUser
     , cfvuPrettyPrint
-    , cfvuCreativeFieldValue
     , cfvuUserIP
     , cfvuProfileId
+    , cfvuPayload
     , cfvuKey
     , cfvuOAuthToken
     , cfvuFields
@@ -66,16 +67,16 @@ type CreativeFieldValuesUpdateResource =
 --
 -- /See:/ 'creativeFieldValuesUpdate'' smart constructor.
 data CreativeFieldValuesUpdate' = CreativeFieldValuesUpdate'
-    { _cfvuCreativeFieldId    :: !Int64
-    , _cfvuQuotaUser          :: !(Maybe Text)
-    , _cfvuPrettyPrint        :: !Bool
-    , _cfvuCreativeFieldValue :: !CreativeFieldValue
-    , _cfvuUserIP             :: !(Maybe Text)
-    , _cfvuProfileId          :: !Int64
-    , _cfvuKey                :: !(Maybe Key)
-    , _cfvuOAuthToken         :: !(Maybe OAuthToken)
-    , _cfvuFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cfvuCreativeFieldId :: !Int64
+    , _cfvuQuotaUser       :: !(Maybe Text)
+    , _cfvuPrettyPrint     :: !Bool
+    , _cfvuUserIP          :: !(Maybe Text)
+    , _cfvuProfileId       :: !Int64
+    , _cfvuPayload         :: !CreativeFieldValue
+    , _cfvuKey             :: !(Maybe Key)
+    , _cfvuOAuthToken      :: !(Maybe OAuthToken)
+    , _cfvuFields          :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesUpdate'' with the minimum fields required to make a request.
 --
@@ -87,11 +88,11 @@ data CreativeFieldValuesUpdate' = CreativeFieldValuesUpdate'
 --
 -- * 'cfvuPrettyPrint'
 --
--- * 'cfvuCreativeFieldValue'
---
 -- * 'cfvuUserIP'
 --
 -- * 'cfvuProfileId'
+--
+-- * 'cfvuPayload'
 --
 -- * 'cfvuKey'
 --
@@ -100,17 +101,17 @@ data CreativeFieldValuesUpdate' = CreativeFieldValuesUpdate'
 -- * 'cfvuFields'
 creativeFieldValuesUpdate'
     :: Int64 -- ^ 'creativeFieldId'
-    -> CreativeFieldValue -- ^ 'CreativeFieldValue'
     -> Int64 -- ^ 'profileId'
+    -> CreativeFieldValue -- ^ 'payload'
     -> CreativeFieldValuesUpdate'
-creativeFieldValuesUpdate' pCfvuCreativeFieldId_ pCfvuCreativeFieldValue_ pCfvuProfileId_ =
+creativeFieldValuesUpdate' pCfvuCreativeFieldId_ pCfvuProfileId_ pCfvuPayload_ =
     CreativeFieldValuesUpdate'
     { _cfvuCreativeFieldId = pCfvuCreativeFieldId_
     , _cfvuQuotaUser = Nothing
     , _cfvuPrettyPrint = True
-    , _cfvuCreativeFieldValue = pCfvuCreativeFieldValue_
     , _cfvuUserIP = Nothing
     , _cfvuProfileId = pCfvuProfileId_
+    , _cfvuPayload = pCfvuPayload_
     , _cfvuKey = Nothing
     , _cfvuOAuthToken = Nothing
     , _cfvuFields = Nothing
@@ -136,12 +137,6 @@ cfvuPrettyPrint
   = lens _cfvuPrettyPrint
       (\ s a -> s{_cfvuPrettyPrint = a})
 
--- | Multipart request metadata.
-cfvuCreativeFieldValue :: Lens' CreativeFieldValuesUpdate' CreativeFieldValue
-cfvuCreativeFieldValue
-  = lens _cfvuCreativeFieldValue
-      (\ s a -> s{_cfvuCreativeFieldValue = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 cfvuUserIP :: Lens' CreativeFieldValuesUpdate' (Maybe Text)
@@ -153,6 +148,11 @@ cfvuProfileId :: Lens' CreativeFieldValuesUpdate' Int64
 cfvuProfileId
   = lens _cfvuProfileId
       (\ s a -> s{_cfvuProfileId = a})
+
+-- | Multipart request metadata.
+cfvuPayload :: Lens' CreativeFieldValuesUpdate' CreativeFieldValue
+cfvuPayload
+  = lens _cfvuPayload (\ s a -> s{_cfvuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -189,7 +189,7 @@ instance GoogleRequest CreativeFieldValuesUpdate'
               _cfvuKey
               _cfvuOAuthToken
               (Just AltJSON)
-              _cfvuCreativeFieldValue
+              _cfvuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeFieldValuesUpdateResource)

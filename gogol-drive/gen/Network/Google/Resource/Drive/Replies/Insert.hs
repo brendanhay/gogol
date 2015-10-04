@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.Drive.Replies.Insert
     , riQuotaUser
     , riPrettyPrint
     , riUserIP
-    , riCommentReply
+    , riPayload
     , riKey
     , riFileId
     , riOAuthToken
@@ -66,16 +67,16 @@ type RepliesInsertResource =
 --
 -- /See:/ 'repliesInsert'' smart constructor.
 data RepliesInsert' = RepliesInsert'
-    { _riQuotaUser    :: !(Maybe Text)
-    , _riPrettyPrint  :: !Bool
-    , _riUserIP       :: !(Maybe Text)
-    , _riCommentReply :: !CommentReply
-    , _riKey          :: !(Maybe Key)
-    , _riFileId       :: !Text
-    , _riOAuthToken   :: !(Maybe OAuthToken)
-    , _riCommentId    :: !Text
-    , _riFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _riQuotaUser   :: !(Maybe Text)
+    , _riPrettyPrint :: !Bool
+    , _riUserIP      :: !(Maybe Text)
+    , _riPayload     :: !CommentReply
+    , _riKey         :: !(Maybe Key)
+    , _riFileId      :: !Text
+    , _riOAuthToken  :: !(Maybe OAuthToken)
+    , _riCommentId   :: !Text
+    , _riFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepliesInsert'' with the minimum fields required to make a request.
 --
@@ -87,7 +88,7 @@ data RepliesInsert' = RepliesInsert'
 --
 -- * 'riUserIP'
 --
--- * 'riCommentReply'
+-- * 'riPayload'
 --
 -- * 'riKey'
 --
@@ -99,16 +100,16 @@ data RepliesInsert' = RepliesInsert'
 --
 -- * 'riFields'
 repliesInsert'
-    :: CommentReply -- ^ 'CommentReply'
+    :: CommentReply -- ^ 'payload'
     -> Text -- ^ 'fileId'
     -> Text -- ^ 'commentId'
     -> RepliesInsert'
-repliesInsert' pRiCommentReply_ pRiFileId_ pRiCommentId_ =
+repliesInsert' pRiPayload_ pRiFileId_ pRiCommentId_ =
     RepliesInsert'
     { _riQuotaUser = Nothing
     , _riPrettyPrint = True
     , _riUserIP = Nothing
-    , _riCommentReply = pRiCommentReply_
+    , _riPayload = pRiPayload_
     , _riKey = Nothing
     , _riFileId = pRiFileId_
     , _riOAuthToken = Nothing
@@ -135,10 +136,9 @@ riUserIP :: Lens' RepliesInsert' (Maybe Text)
 riUserIP = lens _riUserIP (\ s a -> s{_riUserIP = a})
 
 -- | Multipart request metadata.
-riCommentReply :: Lens' RepliesInsert' CommentReply
-riCommentReply
-  = lens _riCommentReply
-      (\ s a -> s{_riCommentReply = a})
+riPayload :: Lens' RepliesInsert' CommentReply
+riPayload
+  = lens _riPayload (\ s a -> s{_riPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -179,7 +179,7 @@ instance GoogleRequest RepliesInsert' where
               _riKey
               _riOAuthToken
               (Just AltJSON)
-              _riCommentReply
+              _riPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RepliesInsertResource)

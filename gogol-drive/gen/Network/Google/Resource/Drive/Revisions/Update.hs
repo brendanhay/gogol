@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,10 +34,10 @@ module Network.Google.Resource.Drive.Revisions.Update
     , ruQuotaUser
     , ruPrettyPrint
     , ruUserIP
+    , ruPayload
     , ruKey
     , ruFileId
     , ruOAuthToken
-    , ruRevision
     , ruRevisionId
     , ruFields
     ) where
@@ -67,13 +68,13 @@ data RevisionsUpdate' = RevisionsUpdate'
     { _ruQuotaUser   :: !(Maybe Text)
     , _ruPrettyPrint :: !Bool
     , _ruUserIP      :: !(Maybe Text)
+    , _ruPayload     :: !Revision
     , _ruKey         :: !(Maybe Key)
     , _ruFileId      :: !Text
     , _ruOAuthToken  :: !(Maybe OAuthToken)
-    , _ruRevision    :: !Revision
     , _ruRevisionId  :: !Text
     , _ruFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RevisionsUpdate'' with the minimum fields required to make a request.
 --
@@ -85,31 +86,31 @@ data RevisionsUpdate' = RevisionsUpdate'
 --
 -- * 'ruUserIP'
 --
+-- * 'ruPayload'
+--
 -- * 'ruKey'
 --
 -- * 'ruFileId'
 --
 -- * 'ruOAuthToken'
 --
--- * 'ruRevision'
---
 -- * 'ruRevisionId'
 --
 -- * 'ruFields'
 revisionsUpdate'
-    :: Text -- ^ 'fileId'
-    -> Revision -- ^ 'Revision'
+    :: Revision -- ^ 'payload'
+    -> Text -- ^ 'fileId'
     -> Text -- ^ 'revisionId'
     -> RevisionsUpdate'
-revisionsUpdate' pRuFileId_ pRuRevision_ pRuRevisionId_ =
+revisionsUpdate' pRuPayload_ pRuFileId_ pRuRevisionId_ =
     RevisionsUpdate'
     { _ruQuotaUser = Nothing
     , _ruPrettyPrint = True
     , _ruUserIP = Nothing
+    , _ruPayload = pRuPayload_
     , _ruKey = Nothing
     , _ruFileId = pRuFileId_
     , _ruOAuthToken = Nothing
-    , _ruRevision = pRuRevision_
     , _ruRevisionId = pRuRevisionId_
     , _ruFields = Nothing
     }
@@ -132,6 +133,11 @@ ruPrettyPrint
 ruUserIP :: Lens' RevisionsUpdate' (Maybe Text)
 ruUserIP = lens _ruUserIP (\ s a -> s{_ruUserIP = a})
 
+-- | Multipart request metadata.
+ruPayload :: Lens' RevisionsUpdate' Revision
+ruPayload
+  = lens _ruPayload (\ s a -> s{_ruPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -146,11 +152,6 @@ ruFileId = lens _ruFileId (\ s a -> s{_ruFileId = a})
 ruOAuthToken :: Lens' RevisionsUpdate' (Maybe OAuthToken)
 ruOAuthToken
   = lens _ruOAuthToken (\ s a -> s{_ruOAuthToken = a})
-
--- | Multipart request metadata.
-ruRevision :: Lens' RevisionsUpdate' Revision
-ruRevision
-  = lens _ruRevision (\ s a -> s{_ruRevision = a})
 
 -- | The ID for the revision.
 ruRevisionId :: Lens' RevisionsUpdate' Text
@@ -176,7 +177,7 @@ instance GoogleRequest RevisionsUpdate' where
               _ruKey
               _ruOAuthToken
               (Just AltJSON)
-              _ruRevision
+              _ruPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RevisionsUpdateResource)

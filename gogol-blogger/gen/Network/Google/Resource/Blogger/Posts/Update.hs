@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.Blogger.Posts.Update
     , puQuotaUser
     , puPrettyPrint
     , puUserIP
-    , puPost
     , puFetchImages
     , puBlogId
+    , puPayload
     , puMaxComments
     , puKey
     , puRevert
@@ -59,8 +60,8 @@ type PostsUpdateResource =
              QueryParam "fetchBody" Bool :>
                QueryParam "fetchImages" Bool :>
                  QueryParam "maxComments" Word32 :>
-                   QueryParam "publish" Bool :>
-                     QueryParam "revert" Bool :>
+                   QueryParam "revert" Bool :>
+                     QueryParam "publish" Bool :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -78,9 +79,9 @@ data PostsUpdate' = PostsUpdate'
     , _puQuotaUser   :: !(Maybe Text)
     , _puPrettyPrint :: !Bool
     , _puUserIP      :: !(Maybe Text)
-    , _puPost        :: !Post
     , _puFetchImages :: !(Maybe Bool)
     , _puBlogId      :: !Text
+    , _puPayload     :: !Post
     , _puMaxComments :: !(Maybe Word32)
     , _puKey         :: !(Maybe Key)
     , _puRevert      :: !(Maybe Bool)
@@ -88,7 +89,7 @@ data PostsUpdate' = PostsUpdate'
     , _puOAuthToken  :: !(Maybe OAuthToken)
     , _puPublish     :: !(Maybe Bool)
     , _puFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsUpdate'' with the minimum fields required to make a request.
 --
@@ -102,11 +103,11 @@ data PostsUpdate' = PostsUpdate'
 --
 -- * 'puUserIP'
 --
--- * 'puPost'
---
 -- * 'puFetchImages'
 --
 -- * 'puBlogId'
+--
+-- * 'puPayload'
 --
 -- * 'puMaxComments'
 --
@@ -122,19 +123,19 @@ data PostsUpdate' = PostsUpdate'
 --
 -- * 'puFields'
 postsUpdate'
-    :: Post -- ^ 'Post'
-    -> Text -- ^ 'blogId'
+    :: Text -- ^ 'blogId'
+    -> Post -- ^ 'payload'
     -> Text -- ^ 'postId'
     -> PostsUpdate'
-postsUpdate' pPuPost_ pPuBlogId_ pPuPostId_ =
+postsUpdate' pPuBlogId_ pPuPayload_ pPuPostId_ =
     PostsUpdate'
     { _puFetchBody = True
     , _puQuotaUser = Nothing
     , _puPrettyPrint = True
     , _puUserIP = Nothing
-    , _puPost = pPuPost_
     , _puFetchImages = Nothing
     , _puBlogId = pPuBlogId_
+    , _puPayload = pPuPayload_
     , _puMaxComments = Nothing
     , _puKey = Nothing
     , _puRevert = Nothing
@@ -168,10 +169,6 @@ puPrettyPrint
 puUserIP :: Lens' PostsUpdate' (Maybe Text)
 puUserIP = lens _puUserIP (\ s a -> s{_puUserIP = a})
 
--- | Multipart request metadata.
-puPost :: Lens' PostsUpdate' Post
-puPost = lens _puPost (\ s a -> s{_puPost = a})
-
 -- | Whether image URL metadata for each post is included in the returned
 -- result (default: false).
 puFetchImages :: Lens' PostsUpdate' (Maybe Bool)
@@ -182,6 +179,11 @@ puFetchImages
 -- | The ID of the Blog.
 puBlogId :: Lens' PostsUpdate' Text
 puBlogId = lens _puBlogId (\ s a -> s{_puBlogId = a})
+
+-- | Multipart request metadata.
+puPayload :: Lens' PostsUpdate' Post
+puPayload
+  = lens _puPayload (\ s a -> s{_puPayload = a})
 
 -- | Maximum number of comments to retrieve with the returned post.
 puMaxComments :: Lens' PostsUpdate' (Maybe Word32)
@@ -227,12 +229,11 @@ instance GoogleRequest PostsUpdate' where
         type Rs PostsUpdate' = Post
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsUpdate'{..}
-          = go (Just _puFetchBody) _puFetchImages
+          = go _puBlogId _puPostId (Just _puFetchBody)
+              _puFetchImages
               _puMaxComments
-              _puPublish
               _puRevert
-              _puBlogId
-              _puPostId
+              _puPublish
               _puQuotaUser
               (Just _puPrettyPrint)
               _puUserIP
@@ -240,7 +241,7 @@ instance GoogleRequest PostsUpdate' where
               _puKey
               _puOAuthToken
               (Just AltJSON)
-              _puPost
+              _puPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PostsUpdateResource)

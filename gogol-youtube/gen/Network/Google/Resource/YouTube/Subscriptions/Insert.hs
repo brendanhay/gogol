@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.YouTube.Subscriptions.Insert
     , siPart
     , siPrettyPrint
     , siUserIP
+    , siPayload
     , siKey
     , siOAuthToken
-    , siSubscription
     , siFields
     ) where
 
@@ -62,15 +63,15 @@ type SubscriptionsInsertResource =
 --
 -- /See:/ 'subscriptionsInsert'' smart constructor.
 data SubscriptionsInsert' = SubscriptionsInsert'
-    { _siQuotaUser    :: !(Maybe Text)
-    , _siPart         :: !Text
-    , _siPrettyPrint  :: !Bool
-    , _siUserIP       :: !(Maybe Text)
-    , _siKey          :: !(Maybe Key)
-    , _siOAuthToken   :: !(Maybe OAuthToken)
-    , _siSubscription :: !Subscription
-    , _siFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _siQuotaUser   :: !(Maybe Text)
+    , _siPart        :: !Text
+    , _siPrettyPrint :: !Bool
+    , _siUserIP      :: !(Maybe Text)
+    , _siPayload     :: !Subscription
+    , _siKey         :: !(Maybe Key)
+    , _siOAuthToken  :: !(Maybe OAuthToken)
+    , _siFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsInsert'' with the minimum fields required to make a request.
 --
@@ -84,26 +85,26 @@ data SubscriptionsInsert' = SubscriptionsInsert'
 --
 -- * 'siUserIP'
 --
+-- * 'siPayload'
+--
 -- * 'siKey'
 --
 -- * 'siOAuthToken'
 --
--- * 'siSubscription'
---
 -- * 'siFields'
 subscriptionsInsert'
     :: Text -- ^ 'part'
-    -> Subscription -- ^ 'Subscription'
+    -> Subscription -- ^ 'payload'
     -> SubscriptionsInsert'
-subscriptionsInsert' pSiPart_ pSiSubscription_ =
+subscriptionsInsert' pSiPart_ pSiPayload_ =
     SubscriptionsInsert'
     { _siQuotaUser = Nothing
     , _siPart = pSiPart_
     , _siPrettyPrint = True
     , _siUserIP = Nothing
+    , _siPayload = pSiPayload_
     , _siKey = Nothing
     , _siOAuthToken = Nothing
-    , _siSubscription = pSiSubscription_
     , _siFields = Nothing
     }
 
@@ -131,6 +132,11 @@ siPrettyPrint
 siUserIP :: Lens' SubscriptionsInsert' (Maybe Text)
 siUserIP = lens _siUserIP (\ s a -> s{_siUserIP = a})
 
+-- | Multipart request metadata.
+siPayload :: Lens' SubscriptionsInsert' Subscription
+siPayload
+  = lens _siPayload (\ s a -> s{_siPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -141,12 +147,6 @@ siKey = lens _siKey (\ s a -> s{_siKey = a})
 siOAuthToken :: Lens' SubscriptionsInsert' (Maybe OAuthToken)
 siOAuthToken
   = lens _siOAuthToken (\ s a -> s{_siOAuthToken = a})
-
--- | Multipart request metadata.
-siSubscription :: Lens' SubscriptionsInsert' Subscription
-siSubscription
-  = lens _siSubscription
-      (\ s a -> s{_siSubscription = a})
 
 -- | Selector specifying which fields to include in a partial response.
 siFields :: Lens' SubscriptionsInsert' (Maybe Text)
@@ -167,7 +167,7 @@ instance GoogleRequest SubscriptionsInsert' where
               _siKey
               _siOAuthToken
               (Just AltJSON)
-              _siSubscription
+              _siPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SubscriptionsInsertResource)

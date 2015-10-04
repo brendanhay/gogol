@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -73,7 +74,7 @@ data TurnBasedMatchesGet' = TurnBasedMatchesGet'
     , _tbmgOAuthToken       :: !(Maybe OAuthToken)
     , _tbmgMatchId          :: !Text
     , _tbmgFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesGet'' with the minimum fields required to make a request.
 --
@@ -173,7 +174,7 @@ instance GoogleRequest TurnBasedMatchesGet' where
         type Rs TurnBasedMatchesGet' = TurnBasedMatch
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesGet'{..}
-          = go _tbmgIncludeMatchData _tbmgLanguage _tbmgMatchId
+          = go _tbmgMatchId _tbmgIncludeMatchData _tbmgLanguage
               _tbmgQuotaUser
               (Just _tbmgPrettyPrint)
               _tbmgUserIP

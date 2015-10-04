@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,12 +52,12 @@ import           Network.Google.YouTube.Types
 -- 'ChannelSectionsList'' request conforms to.
 type ChannelSectionsListResource =
      "channelSections" :>
-       QueryParam "channelId" Text :>
-         QueryParam "hl" Text :>
-           QueryParam "id" Text :>
-             QueryParam "mine" Bool :>
+       QueryParam "part" Text :>
+         QueryParam "mine" Bool :>
+           QueryParam "channelId" Text :>
+             QueryParam "hl" Text :>
                QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "part" Text :>
+                 QueryParam "id" Text :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,7 +83,7 @@ data ChannelSectionsList' = ChannelSectionsList'
     , _cslId                     :: !(Maybe Text)
     , _cslOAuthToken             :: !(Maybe OAuthToken)
     , _cslFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelSectionsList'' with the minimum fields required to make a request.
 --
@@ -231,9 +232,9 @@ instance GoogleRequest ChannelSectionsList' where
              ChannelSectionListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u ChannelSectionsList'{..}
-          = go _cslChannelId _cslHl _cslId _cslMine
+          = go (Just _cslPart) _cslMine _cslChannelId _cslHl
               _cslOnBehalfOfContentOwner
-              (Just _cslPart)
+              _cslId
               _cslQuotaUser
               (Just _cslPrettyPrint)
               _cslUserIP

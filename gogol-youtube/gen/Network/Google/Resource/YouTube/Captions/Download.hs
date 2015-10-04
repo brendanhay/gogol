@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,9 +56,9 @@ type CaptionsDownloadResource =
      "captions" :>
        Capture "id" Text :>
          QueryParam "onBehalfOf" Text :>
-           QueryParam "onBehalfOfContentOwner" Text :>
-             QueryParam "tfmt" YouTubeCaptionsDownloadTfmt :>
-               QueryParam "tlang" Text :>
+           QueryParam "tlang" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "tfmt" Tfmt :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -69,17 +70,17 @@ type CaptionsDownloadResource =
        "captions" :>
          Capture "id" Text :>
            QueryParam "onBehalfOf" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "tfmt" YouTubeCaptionsDownloadTfmt :>
-                 QueryParam "tlang" Text :>
+             QueryParam "tlang" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "tfmt" Tfmt :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "alt" Media :>
-                                 Get '[OctetStream] Stream
+                               QueryParam "alt" AltMedia :>
+                                 Get '[OctetStream] Body
 
 -- | Downloads a caption track. The caption track is returned in its original
 -- format unless the request specifies a value for the tfmt parameter and
@@ -96,10 +97,10 @@ data CaptionsDownload' = CaptionsDownload'
     , _capaOnBehalfOfContentOwner :: !(Maybe Text)
     , _capaKey                    :: !(Maybe Key)
     , _capaId                     :: !Text
-    , _capaTfmt                   :: !(Maybe YouTubeCaptionsDownloadTfmt)
+    , _capaTfmt                   :: !(Maybe Tfmt)
     , _capaOAuthToken             :: !(Maybe OAuthToken)
     , _capaFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CaptionsDownload'' with the minimum fields required to make a request.
 --
@@ -210,7 +211,7 @@ capaId = lens _capaId (\ s a -> s{_capaId = a})
 -- | The tfmt parameter specifies that the caption track should be returned
 -- in a specific format. If the parameter is not included in the request,
 -- the track is returned in its original format.
-capaTfmt :: Lens' CaptionsDownload' (Maybe YouTubeCaptionsDownloadTfmt)
+capaTfmt :: Lens' CaptionsDownload' (Maybe Tfmt)
 capaTfmt = lens _capaTfmt (\ s a -> s{_capaTfmt = a})
 
 -- | OAuth 2.0 token for the current user.
@@ -232,10 +233,9 @@ instance GoogleRequest CaptionsDownload' where
         type Rs CaptionsDownload' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CaptionsDownload'{..}
-          = go _capaOnBehalfOf _capaOnBehalfOfContentOwner
+          = go _capaId _capaOnBehalfOf _capaTlang
+              _capaOnBehalfOfContentOwner
               _capaTfmt
-              _capaTlang
-              _capaId
               _capaQuotaUser
               (Just _capaPrettyPrint)
               _capaUserIP
@@ -249,22 +249,22 @@ instance GoogleRequest CaptionsDownload' where
                       r
                       u
 
-instance GoogleRequest CaptionsDownload' where
-        type Rs (Download CaptionsDownload') = Stream
+instance GoogleRequest (Download CaptionsDownload')
+         where
+        type Rs (Download CaptionsDownload') = Body
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CaptionsDownload'{..}
-          = go _capaOnBehalfOf _capaOnBehalfOfContentOwner
+        requestWithRoute r u (Download CaptionsDownload'{..})
+          = go _capaId _capaOnBehalfOf _capaTlang
+              _capaOnBehalfOfContentOwner
               _capaTfmt
-              _capaTlang
-              _capaId
               _capaQuotaUser
               (Just _capaPrettyPrint)
               _capaUserIP
               _capaFields
               _capaKey
               _capaOAuthToken
-              (Just Media)
-          where go :<|> _
+              (Just AltMedia)
+          where _ :<|> go
                   = clientWithRoute
                       (Proxy :: Proxy CaptionsDownloadResource)
                       r

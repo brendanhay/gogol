@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Insert
     , faiPrettyPrint
     , faiUserIP
     , faiProfileId
+    , faiPayload
     , faiKey
-    , faiFloodlightActivity
     , faiOAuthToken
     , faiFields
     ) where
@@ -63,15 +64,15 @@ type FloodlightActivitiesInsertResource =
 --
 -- /See:/ 'floodlightActivitiesInsert'' smart constructor.
 data FloodlightActivitiesInsert' = FloodlightActivitiesInsert'
-    { _faiQuotaUser          :: !(Maybe Text)
-    , _faiPrettyPrint        :: !Bool
-    , _faiUserIP             :: !(Maybe Text)
-    , _faiProfileId          :: !Int64
-    , _faiKey                :: !(Maybe Key)
-    , _faiFloodlightActivity :: !FloodlightActivity
-    , _faiOAuthToken         :: !(Maybe OAuthToken)
-    , _faiFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _faiQuotaUser   :: !(Maybe Text)
+    , _faiPrettyPrint :: !Bool
+    , _faiUserIP      :: !(Maybe Text)
+    , _faiProfileId   :: !Int64
+    , _faiPayload     :: !FloodlightActivity
+    , _faiKey         :: !(Maybe Key)
+    , _faiOAuthToken  :: !(Maybe OAuthToken)
+    , _faiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesInsert'' with the minimum fields required to make a request.
 --
@@ -85,25 +86,25 @@ data FloodlightActivitiesInsert' = FloodlightActivitiesInsert'
 --
 -- * 'faiProfileId'
 --
--- * 'faiKey'
+-- * 'faiPayload'
 --
--- * 'faiFloodlightActivity'
+-- * 'faiKey'
 --
 -- * 'faiOAuthToken'
 --
 -- * 'faiFields'
 floodlightActivitiesInsert'
     :: Int64 -- ^ 'profileId'
-    -> FloodlightActivity -- ^ 'FloodlightActivity'
+    -> FloodlightActivity -- ^ 'payload'
     -> FloodlightActivitiesInsert'
-floodlightActivitiesInsert' pFaiProfileId_ pFaiFloodlightActivity_ =
+floodlightActivitiesInsert' pFaiProfileId_ pFaiPayload_ =
     FloodlightActivitiesInsert'
     { _faiQuotaUser = Nothing
     , _faiPrettyPrint = True
     , _faiUserIP = Nothing
     , _faiProfileId = pFaiProfileId_
+    , _faiPayload = pFaiPayload_
     , _faiKey = Nothing
-    , _faiFloodlightActivity = pFaiFloodlightActivity_
     , _faiOAuthToken = Nothing
     , _faiFields = Nothing
     }
@@ -132,17 +133,16 @@ faiProfileId :: Lens' FloodlightActivitiesInsert' Int64
 faiProfileId
   = lens _faiProfileId (\ s a -> s{_faiProfileId = a})
 
+-- | Multipart request metadata.
+faiPayload :: Lens' FloodlightActivitiesInsert' FloodlightActivity
+faiPayload
+  = lens _faiPayload (\ s a -> s{_faiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 faiKey :: Lens' FloodlightActivitiesInsert' (Maybe Key)
 faiKey = lens _faiKey (\ s a -> s{_faiKey = a})
-
--- | Multipart request metadata.
-faiFloodlightActivity :: Lens' FloodlightActivitiesInsert' FloodlightActivity
-faiFloodlightActivity
-  = lens _faiFloodlightActivity
-      (\ s a -> s{_faiFloodlightActivity = a})
 
 -- | OAuth 2.0 token for the current user.
 faiOAuthToken :: Lens' FloodlightActivitiesInsert' (Maybe OAuthToken)
@@ -172,7 +172,7 @@ instance GoogleRequest FloodlightActivitiesInsert'
               _faiKey
               _faiOAuthToken
               (Just AltJSON)
-              _faiFloodlightActivity
+              _faiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FloodlightActivitiesInsertResource)

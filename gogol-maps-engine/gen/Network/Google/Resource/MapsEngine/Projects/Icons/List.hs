@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ type ProjectsIconsListResource =
      "projects" :>
        Capture "projectId" Text :>
          "icons" :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -74,7 +75,7 @@ data ProjectsIconsList' = ProjectsIconsList'
     , _pilOAuthToken  :: !(Maybe OAuthToken)
     , _pilMaxResults  :: !(Maybe Word32)
     , _pilFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsIconsList'' with the minimum fields required to make a request.
 --
@@ -176,7 +177,7 @@ instance GoogleRequest ProjectsIconsList' where
         type Rs ProjectsIconsList' = IconsListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u ProjectsIconsList'{..}
-          = go _pilMaxResults _pilPageToken _pilProjectId
+          = go _pilProjectId _pilPageToken _pilMaxResults
               _pilQuotaUser
               (Just _pilPrettyPrint)
               _pilUserIP

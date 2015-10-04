@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.Genomics.Variantsets.Search
     , vQuotaUser
     , vPrettyPrint
     , vUserIP
-    , vSearchVariantSetsRequest
+    , vPayload
     , vKey
     , vOAuthToken
     , vFields
@@ -63,14 +64,14 @@ type VariantsetsSearchResource =
 --
 -- /See:/ 'variantsetsSearch'' smart constructor.
 data VariantsetsSearch' = VariantsetsSearch'
-    { _vQuotaUser                :: !(Maybe Text)
-    , _vPrettyPrint              :: !Bool
-    , _vUserIP                   :: !(Maybe Text)
-    , _vSearchVariantSetsRequest :: !SearchVariantSetsRequest
-    , _vKey                      :: !(Maybe Key)
-    , _vOAuthToken               :: !(Maybe OAuthToken)
-    , _vFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _vQuotaUser   :: !(Maybe Text)
+    , _vPrettyPrint :: !Bool
+    , _vUserIP      :: !(Maybe Text)
+    , _vPayload     :: !SearchVariantSetsRequest
+    , _vKey         :: !(Maybe Key)
+    , _vOAuthToken  :: !(Maybe OAuthToken)
+    , _vFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsSearch'' with the minimum fields required to make a request.
 --
@@ -82,7 +83,7 @@ data VariantsetsSearch' = VariantsetsSearch'
 --
 -- * 'vUserIP'
 --
--- * 'vSearchVariantSetsRequest'
+-- * 'vPayload'
 --
 -- * 'vKey'
 --
@@ -90,14 +91,14 @@ data VariantsetsSearch' = VariantsetsSearch'
 --
 -- * 'vFields'
 variantsetsSearch'
-    :: SearchVariantSetsRequest -- ^ 'SearchVariantSetsRequest'
+    :: SearchVariantSetsRequest -- ^ 'payload'
     -> VariantsetsSearch'
-variantsetsSearch' pVSearchVariantSetsRequest_ =
+variantsetsSearch' pVPayload_ =
     VariantsetsSearch'
     { _vQuotaUser = Nothing
     , _vPrettyPrint = True
     , _vUserIP = Nothing
-    , _vSearchVariantSetsRequest = pVSearchVariantSetsRequest_
+    , _vPayload = pVPayload_
     , _vKey = Nothing
     , _vOAuthToken = Nothing
     , _vFields = Nothing
@@ -121,10 +122,8 @@ vUserIP :: Lens' VariantsetsSearch' (Maybe Text)
 vUserIP = lens _vUserIP (\ s a -> s{_vUserIP = a})
 
 -- | Multipart request metadata.
-vSearchVariantSetsRequest :: Lens' VariantsetsSearch' SearchVariantSetsRequest
-vSearchVariantSetsRequest
-  = lens _vSearchVariantSetsRequest
-      (\ s a -> s{_vSearchVariantSetsRequest = a})
+vPayload :: Lens' VariantsetsSearch' SearchVariantSetsRequest
+vPayload = lens _vPayload (\ s a -> s{_vPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -155,7 +154,7 @@ instance GoogleRequest VariantsetsSearch' where
               _vKey
               _vOAuthToken
               (Just AltJSON)
-              _vSearchVariantSetsRequest
+              _vPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsetsSearchResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,7 +37,7 @@ module Network.Google.Resource.DFAReporting.LandingPages.Patch
     , lppUserIP
     , lppCampaignId
     , lppProfileId
-    , lppLandingPage
+    , lppPayload
     , lppKey
     , lppId
     , lppOAuthToken
@@ -75,12 +76,12 @@ data LandingPagesPatch' = LandingPagesPatch'
     , _lppUserIP      :: !(Maybe Text)
     , _lppCampaignId  :: !Int64
     , _lppProfileId   :: !Int64
-    , _lppLandingPage :: !LandingPage
+    , _lppPayload     :: !LandingPage
     , _lppKey         :: !(Maybe Key)
     , _lppId          :: !Int64
     , _lppOAuthToken  :: !(Maybe OAuthToken)
     , _lppFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesPatch'' with the minimum fields required to make a request.
 --
@@ -96,7 +97,7 @@ data LandingPagesPatch' = LandingPagesPatch'
 --
 -- * 'lppProfileId'
 --
--- * 'lppLandingPage'
+-- * 'lppPayload'
 --
 -- * 'lppKey'
 --
@@ -108,17 +109,17 @@ data LandingPagesPatch' = LandingPagesPatch'
 landingPagesPatch'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
-    -> LandingPage -- ^ 'LandingPage'
+    -> LandingPage -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> LandingPagesPatch'
-landingPagesPatch' pLppCampaignId_ pLppProfileId_ pLppLandingPage_ pLppId_ =
+landingPagesPatch' pLppCampaignId_ pLppProfileId_ pLppPayload_ pLppId_ =
     LandingPagesPatch'
     { _lppQuotaUser = Nothing
     , _lppPrettyPrint = True
     , _lppUserIP = Nothing
     , _lppCampaignId = pLppCampaignId_
     , _lppProfileId = pLppProfileId_
-    , _lppLandingPage = pLppLandingPage_
+    , _lppPayload = pLppPayload_
     , _lppKey = Nothing
     , _lppId = pLppId_
     , _lppOAuthToken = Nothing
@@ -156,10 +157,9 @@ lppProfileId
   = lens _lppProfileId (\ s a -> s{_lppProfileId = a})
 
 -- | Multipart request metadata.
-lppLandingPage :: Lens' LandingPagesPatch' LandingPage
-lppLandingPage
-  = lens _lppLandingPage
-      (\ s a -> s{_lppLandingPage = a})
+lppPayload :: Lens' LandingPagesPatch' LandingPage
+lppPayload
+  = lens _lppPayload (\ s a -> s{_lppPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -198,7 +198,7 @@ instance GoogleRequest LandingPagesPatch' where
               _lppKey
               _lppOAuthToken
               (Just AltJSON)
-              _lppLandingPage
+              _lppPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LandingPagesPatchResource)

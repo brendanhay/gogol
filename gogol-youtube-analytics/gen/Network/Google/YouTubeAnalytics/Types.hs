@@ -17,12 +17,6 @@ module Network.Google.YouTubeAnalytics.Types
     -- * Service URL
       youTubeAnalyticsURL
 
-    -- * GroupContentDetails
-    , GroupContentDetails
-    , groupContentDetails
-    , gcdItemType
-    , gcdItemCount
-
     -- * Group
     , Group
     , group'
@@ -32,11 +26,37 @@ module Network.Google.YouTubeAnalytics.Types
     , gContentDetails
     , gId
 
-    -- * GroupItemResource
-    , GroupItemResource
-    , groupItemResource
-    , girKind
-    , girId
+    -- * ColumnHeadersItem
+    , ColumnHeadersItem
+    , columnHeadersItem
+    , chiColumnType
+    , chiName
+    , chiDataType
+
+    -- * Snippet
+    , Snippet
+    , snippet
+    , sPublishedAt
+    , sTitle
+
+    -- * ContentDetails
+    , ContentDetails
+    , contentDetails
+    , cdItemType
+    , cdItemCount
+
+    -- * TimeSpan
+    , TimeSpan
+    , timeSpan
+    , tsStartTime
+    , tsEndTime
+
+    -- * OutputsItem
+    , OutputsItem
+    , outputsItem
+    , oiFormat
+    , oiDownloadURL
+    , oiType
 
     -- * ResultTable
     , ResultTable
@@ -54,11 +74,11 @@ module Network.Google.YouTubeAnalytics.Types
     , brdId
     , brdType
 
-    -- * GroupSnippet
-    , GroupSnippet
-    , groupSnippet
-    , gsPublishedAt
-    , gsTitle
+    -- * Resource
+    , Resource
+    , resource
+    , rKind
+    , rId
 
     -- * BatchReport
     , BatchReport
@@ -85,24 +105,11 @@ module Network.Google.YouTubeAnalytics.Types
     , brdlKind
     , brdlItems
 
-    -- * ResultTableColumnHeaders
-    , ResultTableColumnHeaders
-    , resultTableColumnHeaders
-    , rtchColumnType
-    , rtchName
-    , rtchDataType
-
     -- * BatchReportList
     , BatchReportList
     , batchReportList
     , brlKind
     , brlItems
-
-    -- * BatchReportTimeSpan
-    , BatchReportTimeSpan
-    , batchReportTimeSpan
-    , brtsStartTime
-    , brtsEndTime
 
     -- * GroupItemListResponse
     , GroupItemListResponse
@@ -110,13 +117,6 @@ module Network.Google.YouTubeAnalytics.Types
     , gilrEtag
     , gilrKind
     , gilrItems
-
-    -- * BatchReportOutputs
-    , BatchReportOutputs
-    , batchReportOutputs
-    , broFormat
-    , broDownloadURL
-    , broType
 
     -- * GroupListResponse
     , GroupListResponse

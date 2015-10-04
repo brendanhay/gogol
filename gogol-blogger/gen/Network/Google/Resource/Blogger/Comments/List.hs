@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,13 +59,13 @@ type CommentsListResource =
          "posts" :>
            Capture "postId" Text :>
              "comments" :>
-               QueryParam "endDate" DateTime' :>
-                 QueryParam "fetchBodies" Bool :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "startDate" DateTime' :>
-                         QueryParams "status" BloggerCommentsListStatus :>
-                           QueryParam "view" BloggerCommentsListView :>
+               QueryParams "status" BloggerCommentsListStatus :>
+                 QueryParam "endDate" DateTime' :>
+                   QueryParam "startDate" DateTime' :>
+                     QueryParam "fetchBodies" Bool :>
+                       QueryParam "view" BloggerCommentsListView :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" Word32 :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
@@ -93,7 +94,7 @@ data CommentsList' = CommentsList'
     , _clOAuthToken  :: !(Maybe OAuthToken)
     , _clMaxResults  :: !(Maybe Word32)
     , _clFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsList'' with the minimum fields required to make a request.
 --
@@ -236,13 +237,13 @@ instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentList
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u CommentsList'{..}
-          = go _clEndDate _clFetchBodies _clMaxResults
-              _clPageToken
+          = go _clBlogId _clPostId (_clStatus ^. _Default)
+              _clEndDate
               _clStartDate
-              _clStatus
+              _clFetchBodies
               _clView
-              _clBlogId
-              _clPostId
+              _clPageToken
+              _clMaxResults
               _clQuotaUser
               (Just _clPrettyPrint)
               _clUserIP

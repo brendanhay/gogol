@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -44,9 +45,9 @@ module Network.Google.Resource.Classroom.Courses.Create
     , ccPp
     , ccAccessToken
     , ccUploadType
+    , ccPayload
     , ccBearerToken
     , ccKey
-    , ccCourse
     , ccOAuthToken
     , ccFields
     , ccCallback
@@ -61,12 +62,12 @@ type CoursesCreateResource =
      "v1" :>
        "courses" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -93,13 +94,13 @@ data CoursesCreate' = CoursesCreate'
     , _ccPp             :: !Bool
     , _ccAccessToken    :: !(Maybe Text)
     , _ccUploadType     :: !(Maybe Text)
+    , _ccPayload        :: !Course
     , _ccBearerToken    :: !(Maybe Text)
     , _ccKey            :: !(Maybe Key)
-    , _ccCourse         :: !Course
     , _ccOAuthToken     :: !(Maybe OAuthToken)
     , _ccFields         :: !(Maybe Text)
     , _ccCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesCreate'' with the minimum fields required to make a request.
 --
@@ -119,11 +120,11 @@ data CoursesCreate' = CoursesCreate'
 --
 -- * 'ccUploadType'
 --
+-- * 'ccPayload'
+--
 -- * 'ccBearerToken'
 --
 -- * 'ccKey'
---
--- * 'ccCourse'
 --
 -- * 'ccOAuthToken'
 --
@@ -131,9 +132,9 @@ data CoursesCreate' = CoursesCreate'
 --
 -- * 'ccCallback'
 coursesCreate'
-    :: Course -- ^ 'Course'
+    :: Course -- ^ 'payload'
     -> CoursesCreate'
-coursesCreate' pCcCourse_ =
+coursesCreate' pCcPayload_ =
     CoursesCreate'
     { _ccXgafv = Nothing
     , _ccQuotaUser = Nothing
@@ -142,9 +143,9 @@ coursesCreate' pCcCourse_ =
     , _ccPp = True
     , _ccAccessToken = Nothing
     , _ccUploadType = Nothing
+    , _ccPayload = pCcPayload_
     , _ccBearerToken = Nothing
     , _ccKey = Nothing
-    , _ccCourse = pCcCourse_
     , _ccOAuthToken = Nothing
     , _ccFields = Nothing
     , _ccCallback = Nothing
@@ -188,6 +189,11 @@ ccUploadType :: Lens' CoursesCreate' (Maybe Text)
 ccUploadType
   = lens _ccUploadType (\ s a -> s{_ccUploadType = a})
 
+-- | Multipart request metadata.
+ccPayload :: Lens' CoursesCreate' Course
+ccPayload
+  = lens _ccPayload (\ s a -> s{_ccPayload = a})
+
 -- | OAuth bearer token.
 ccBearerToken :: Lens' CoursesCreate' (Maybe Text)
 ccBearerToken
@@ -199,10 +205,6 @@ ccBearerToken
 -- token.
 ccKey :: Lens' CoursesCreate' (Maybe Key)
 ccKey = lens _ccKey (\ s a -> s{_ccKey = a})
-
--- | Multipart request metadata.
-ccCourse :: Lens' CoursesCreate' Course
-ccCourse = lens _ccCourse (\ s a -> s{_ccCourse = a})
 
 -- | OAuth 2.0 token for the current user.
 ccOAuthToken :: Lens' CoursesCreate' (Maybe OAuthToken)
@@ -226,18 +228,18 @@ instance GoogleRequest CoursesCreate' where
         type Rs CoursesCreate' = Course
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesCreate'{..}
-          = go _ccXgafv _ccAccessToken _ccBearerToken
-              _ccCallback
-              (Just _ccPp)
+          = go _ccXgafv _ccUploadProtocol (Just _ccPp)
+              _ccAccessToken
               _ccUploadType
-              _ccUploadProtocol
+              _ccBearerToken
+              _ccCallback
               _ccQuotaUser
               (Just _ccPrettyPrint)
               _ccFields
               _ccKey
               _ccOAuthToken
               (Just AltJSON)
-              _ccCourse
+              _ccPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesCreateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -68,7 +69,7 @@ data ArchiveInsert' = ArchiveInsert'
     , _aiGroupId     :: !Text
     , _aiOAuthToken  :: !(Maybe OAuthToken)
     , _aiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ArchiveInsert'' with the minimum fields required to make a request.
 --
@@ -154,13 +155,13 @@ instance GoogleRequest ArchiveInsert' where
         type Rs ArchiveInsert' = Groups
         request = requestWithRoute defReq groupsMigrationURL
         requestWithRoute r u ArchiveInsert'{..}
-          = go _aiMedia _aiGroupId _aiQuotaUser
-              (Just _aiPrettyPrint)
+          = go _aiGroupId _aiQuotaUser (Just _aiPrettyPrint)
               _aiUserIP
               _aiFields
               _aiKey
               _aiOAuthToken
               (Just AltJSON)
+              _aiMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ArchiveInsertResource)

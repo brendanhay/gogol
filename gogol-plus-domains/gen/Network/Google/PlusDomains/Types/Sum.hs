@@ -18,7 +18,7 @@ module Network.Google.PlusDomains.Types.Sum where
 import           Network.Google.Prelude
 
 -- | The order to return people in.
-data PlusDomainsPeopleListOrderBy
+data OrderBy
     = Alphabetical
       -- ^ @alphabetical@
       -- Order the people by their display name.
@@ -27,34 +27,34 @@ data PlusDomainsPeopleListOrderBy
       -- Order people based on the relevence to the viewer.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable PlusDomainsPeopleListOrderBy
+instance Hashable OrderBy
 
-instance FromText PlusDomainsPeopleListOrderBy where
+instance FromText OrderBy where
     fromText = \case
         "alphabetical" -> Just Alphabetical
         "best" -> Just Best
         _ -> Nothing
 
-instance ToText PlusDomainsPeopleListOrderBy where
+instance ToText OrderBy where
     toText = \case
         Alphabetical -> "alphabetical"
         Best -> "best"
 
-instance FromJSON PlusDomainsPeopleListOrderBy where
-    parseJSON = parseJSONText "PlusDomainsPeopleListOrderBy"
+instance FromJSON OrderBy where
+    parseJSON = parseJSONText "OrderBy"
 
-instance ToJSON PlusDomainsPeopleListOrderBy where
+instance ToJSON OrderBy where
     toJSON = toJSONText
 
 -- | The collection of people to list.
 data PlusDomainsPeopleListByActivityCollection
-    = Plusoners
+    = PDPLBACPlusoners
       -- ^ @plusoners@
       -- List all people who have +1\'d this activity.
-    | Resharers
+    | PDPLBACResharers
       -- ^ @resharers@
       -- List all people who have reshared this activity.
-    | Sharedto
+    | PDPLBACSharedto
       -- ^ @sharedto@
       -- List all people who this activity was shared to.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -63,46 +63,21 @@ instance Hashable PlusDomainsPeopleListByActivityCollection
 
 instance FromText PlusDomainsPeopleListByActivityCollection where
     fromText = \case
-        "plusoners" -> Just Plusoners
-        "resharers" -> Just Resharers
-        "sharedto" -> Just Sharedto
+        "plusoners" -> Just PDPLBACPlusoners
+        "resharers" -> Just PDPLBACResharers
+        "sharedto" -> Just PDPLBACSharedto
         _ -> Nothing
 
 instance ToText PlusDomainsPeopleListByActivityCollection where
     toText = \case
-        Plusoners -> "plusoners"
-        Resharers -> "resharers"
-        Sharedto -> "sharedto"
+        PDPLBACPlusoners -> "plusoners"
+        PDPLBACResharers -> "resharers"
+        PDPLBACSharedto -> "sharedto"
 
 instance FromJSON PlusDomainsPeopleListByActivityCollection where
     parseJSON = parseJSONText "PlusDomainsPeopleListByActivityCollection"
 
 instance ToJSON PlusDomainsPeopleListByActivityCollection where
-    toJSON = toJSONText
-
--- | The collection of activities to list.
-data PlusDomainsActivitiesListCollection
-    = User
-      -- ^ @user@
-      -- All activities created by the specified user that the authenticated user
-      -- is authorized to view.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable PlusDomainsActivitiesListCollection
-
-instance FromText PlusDomainsActivitiesListCollection where
-    fromText = \case
-        "user" -> Just User
-        _ -> Nothing
-
-instance ToText PlusDomainsActivitiesListCollection where
-    toText = \case
-        User -> "user"
-
-instance FromJSON PlusDomainsActivitiesListCollection where
-    parseJSON = parseJSONText "PlusDomainsActivitiesListCollection"
-
-instance ToJSON PlusDomainsActivitiesListCollection where
     toJSON = toJSONText
 
 -- | The collection of people to list.
@@ -129,6 +104,60 @@ instance FromJSON PlusDomainsPeopleListCollection where
 instance ToJSON PlusDomainsPeopleListCollection where
     toJSON = toJSONText
 
+-- | The collection of activities to list.
+data Collection
+    = User
+      -- ^ @user@
+      -- All activities created by the specified user that the authenticated user
+      -- is authorized to view.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Collection
+
+instance FromText Collection where
+    fromText = \case
+        "user" -> Just User
+        _ -> Nothing
+
+instance ToText Collection where
+    toText = \case
+        User -> "user"
+
+instance FromJSON Collection where
+    parseJSON = parseJSONText "Collection"
+
+instance ToJSON Collection where
+    toJSON = toJSONText
+
+-- | The order in which to sort the list of comments.
+data SortOrder
+    = Ascending
+      -- ^ @ascending@
+      -- Sort oldest comments first.
+    | Descending
+      -- ^ @descending@
+      -- Sort newest comments first.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable SortOrder
+
+instance FromText SortOrder where
+    fromText = \case
+        "ascending" -> Just Ascending
+        "descending" -> Just Descending
+        _ -> Nothing
+
+instance ToText SortOrder where
+    toText = \case
+        Ascending -> "ascending"
+        Descending -> "descending"
+
+instance FromJSON SortOrder where
+    parseJSON = parseJSONText "SortOrder"
+
+instance ToJSON SortOrder where
+    toJSON = toJSONText
+
 data PlusDomainsMediaInsertCollection
     = Cloud
       -- ^ @cloud@
@@ -150,33 +179,4 @@ instance FromJSON PlusDomainsMediaInsertCollection where
     parseJSON = parseJSONText "PlusDomainsMediaInsertCollection"
 
 instance ToJSON PlusDomainsMediaInsertCollection where
-    toJSON = toJSONText
-
--- | The order in which to sort the list of comments.
-data PlusDomainsCommentsListSortOrder
-    = Ascending
-      -- ^ @ascending@
-      -- Sort oldest comments first.
-    | Descending
-      -- ^ @descending@
-      -- Sort newest comments first.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable PlusDomainsCommentsListSortOrder
-
-instance FromText PlusDomainsCommentsListSortOrder where
-    fromText = \case
-        "ascending" -> Just Ascending
-        "descending" -> Just Descending
-        _ -> Nothing
-
-instance ToText PlusDomainsCommentsListSortOrder where
-    toText = \case
-        Ascending -> "ascending"
-        Descending -> "descending"
-
-instance FromJSON PlusDomainsCommentsListSortOrder where
-    parseJSON = parseJSONText "PlusDomainsCommentsListSortOrder"
-
-instance ToJSON PlusDomainsCommentsListSortOrder where
     toJSON = toJSONText

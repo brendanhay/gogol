@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,10 +36,10 @@ module Network.Google.Resource.AndroidEnterprise.Devices.SetState
 
     -- * Request Lenses
     , dssQuotaUser
-    , dssDeviceState
     , dssPrettyPrint
     , dssEnterpriseId
     , dssUserIP
+    , dssPayload
     , dssUserId
     , dssKey
     , dssDeviceId
@@ -78,16 +79,16 @@ type DevicesSetStateResource =
 -- /See:/ 'devicesSetState'' smart constructor.
 data DevicesSetState' = DevicesSetState'
     { _dssQuotaUser    :: !(Maybe Text)
-    , _dssDeviceState  :: !DeviceState
     , _dssPrettyPrint  :: !Bool
     , _dssEnterpriseId :: !Text
     , _dssUserIP       :: !(Maybe Text)
+    , _dssPayload      :: !DeviceState
     , _dssUserId       :: !Text
     , _dssKey          :: !(Maybe Key)
     , _dssDeviceId     :: !Text
     , _dssOAuthToken   :: !(Maybe OAuthToken)
     , _dssFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DevicesSetState'' with the minimum fields required to make a request.
 --
@@ -95,13 +96,13 @@ data DevicesSetState' = DevicesSetState'
 --
 -- * 'dssQuotaUser'
 --
--- * 'dssDeviceState'
---
 -- * 'dssPrettyPrint'
 --
 -- * 'dssEnterpriseId'
 --
 -- * 'dssUserIP'
+--
+-- * 'dssPayload'
 --
 -- * 'dssUserId'
 --
@@ -113,18 +114,18 @@ data DevicesSetState' = DevicesSetState'
 --
 -- * 'dssFields'
 devicesSetState'
-    :: DeviceState -- ^ 'DeviceState'
-    -> Text -- ^ 'enterpriseId'
+    :: Text -- ^ 'enterpriseId'
+    -> DeviceState -- ^ 'payload'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'deviceId'
     -> DevicesSetState'
-devicesSetState' pDssDeviceState_ pDssEnterpriseId_ pDssUserId_ pDssDeviceId_ =
+devicesSetState' pDssEnterpriseId_ pDssPayload_ pDssUserId_ pDssDeviceId_ =
     DevicesSetState'
     { _dssQuotaUser = Nothing
-    , _dssDeviceState = pDssDeviceState_
     , _dssPrettyPrint = True
     , _dssEnterpriseId = pDssEnterpriseId_
     , _dssUserIP = Nothing
+    , _dssPayload = pDssPayload_
     , _dssUserId = pDssUserId_
     , _dssKey = Nothing
     , _dssDeviceId = pDssDeviceId_
@@ -138,12 +139,6 @@ devicesSetState' pDssDeviceState_ pDssEnterpriseId_ pDssUserId_ pDssDeviceId_ =
 dssQuotaUser :: Lens' DevicesSetState' (Maybe Text)
 dssQuotaUser
   = lens _dssQuotaUser (\ s a -> s{_dssQuotaUser = a})
-
--- | Multipart request metadata.
-dssDeviceState :: Lens' DevicesSetState' DeviceState
-dssDeviceState
-  = lens _dssDeviceState
-      (\ s a -> s{_dssDeviceState = a})
 
 -- | Returns response with indentations and line breaks.
 dssPrettyPrint :: Lens' DevicesSetState' Bool
@@ -162,6 +157,11 @@ dssEnterpriseId
 dssUserIP :: Lens' DevicesSetState' (Maybe Text)
 dssUserIP
   = lens _dssUserIP (\ s a -> s{_dssUserIP = a})
+
+-- | Multipart request metadata.
+dssPayload :: Lens' DevicesSetState' DeviceState
+dssPayload
+  = lens _dssPayload (\ s a -> s{_dssPayload = a})
 
 -- | The ID of the user.
 dssUserId :: Lens' DevicesSetState' Text
@@ -207,7 +207,7 @@ instance GoogleRequest DevicesSetState' where
               _dssKey
               _dssOAuthToken
               (Just AltJSON)
-              _dssDeviceState
+              _dssPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DevicesSetStateResource)

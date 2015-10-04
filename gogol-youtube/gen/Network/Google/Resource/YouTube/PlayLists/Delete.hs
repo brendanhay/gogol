@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -47,8 +48,8 @@ import           Network.Google.YouTube.Types
 -- 'PlayListsDelete'' request conforms to.
 type PlayListsDeleteResource =
      "playlists" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "id" Text :>
+       QueryParam "id" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -69,7 +70,7 @@ data PlayListsDelete' = PlayListsDelete'
     , _pldId                     :: !Text
     , _pldOAuthToken             :: !(Maybe OAuthToken)
     , _pldFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayListsDelete'' with the minimum fields required to make a request.
 --
@@ -170,7 +171,7 @@ instance GoogleRequest PlayListsDelete' where
         type Rs PlayListsDelete' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u PlayListsDelete'{..}
-          = go _pldOnBehalfOfContentOwner (Just _pldId)
+          = go (Just _pldId) _pldOnBehalfOfContentOwner
               _pldQuotaUser
               (Just _pldPrettyPrint)
               _pldUserIP

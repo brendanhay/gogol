@@ -37,6 +37,9 @@ module Network.Google.WebmasterTools.Types
     , afgFilters
     , afgGroupType
 
+    -- * Platform
+    , Platform (..)
+
     -- * URLSampleDetails
     , URLSampleDetails
     , urlSampleDetails
@@ -59,6 +62,9 @@ module Network.Google.WebmasterTools.Types
     , afDimension
     , afExpression
 
+    -- * Category
+    , Category (..)
+
     -- * URLCrawlErrorCount
     , URLCrawlErrorCount
     , urlCrawlErrorCount
@@ -73,9 +79,6 @@ module Network.Google.WebmasterTools.Types
     , searchAnalyticsQueryResponse
     , saqrRows
     , saqrResponseAggregationType
-
-    -- * WebmastersURLCrawlErrorsSamplesListPlatform
-    , WebmastersURLCrawlErrorsSamplesListPlatform (..)
 
     -- * WebmastersURLCrawlErrorsSamplesGetCategory
     , WebmastersURLCrawlErrorsSamplesGetCategory (..)
@@ -136,9 +139,6 @@ module Network.Google.WebmasterTools.Types
     , saqrDimensionFilterGroups
     , saqrStartDate
     , saqrDimensions
-
-    -- * WebmastersURLCrawlErrorsSamplesListCategory
-    , WebmastersURLCrawlErrorsSamplesListCategory (..)
 
     -- * SitesListResponse
     , SitesListResponse

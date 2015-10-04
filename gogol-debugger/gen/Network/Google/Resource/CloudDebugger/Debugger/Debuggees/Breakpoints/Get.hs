@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -59,12 +60,12 @@ type DebuggerDebuggeesBreakpointsGetResource =
              "breakpoints" :>
                Capture "breakpointId" Text :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "upload_protocol" Text :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "callback" Text :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
@@ -91,7 +92,7 @@ data DebuggerDebuggeesBreakpointsGet' = DebuggerDebuggeesBreakpointsGet'
     , _ddbgOAuthToken     :: !(Maybe OAuthToken)
     , _ddbgFields         :: !(Maybe Text)
     , _ddbgCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DebuggerDebuggeesBreakpointsGet'' with the minimum fields required to make a request.
 --
@@ -239,13 +240,13 @@ instance GoogleRequest
         request = requestWithRoute defReq debuggerURL
         requestWithRoute r u
           DebuggerDebuggeesBreakpointsGet'{..}
-          = go _ddbgXgafv _ddbgAccessToken _ddbgBearerToken
-              _ddbgCallback
-              (Just _ddbgPp)
-              _ddbgUploadType
+          = go _ddbgDebuggeeId _ddbgBreakpointId _ddbgXgafv
               _ddbgUploadProtocol
-              _ddbgDebuggeeId
-              _ddbgBreakpointId
+              (Just _ddbgPp)
+              _ddbgAccessToken
+              _ddbgUploadType
+              _ddbgBearerToken
+              _ddbgCallback
               _ddbgQuotaUser
               (Just _ddbgPrettyPrint)
               _ddbgFields

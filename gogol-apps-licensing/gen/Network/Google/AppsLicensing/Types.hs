@@ -35,7 +35,7 @@ module Network.Google.AppsLicensing.Types
     , licenseAssignment
     , laEtags
     , laKind
-    , laSkuId
+    , laSKUId
     , laUserId
     , laSelfLink
     , laProductId

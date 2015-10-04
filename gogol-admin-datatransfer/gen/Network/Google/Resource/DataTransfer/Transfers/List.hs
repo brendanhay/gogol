@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,12 +53,12 @@ import           Network.Google.Prelude
 -- 'TransfersList'' request conforms to.
 type TransfersListResource =
      "transfers" :>
-       QueryParam "customerId" Text :>
-         QueryParam "maxResults" Int32 :>
+       QueryParam "status" Text :>
+         QueryParam "oldOwnerUserId" Text :>
            QueryParam "newOwnerUserId" Text :>
-             QueryParam "oldOwnerUserId" Text :>
+             QueryParam "customerId" Text :>
                QueryParam "pageToken" Text :>
-                 QueryParam "status" Text :>
+                 QueryParam "maxResults" Int32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -84,7 +85,7 @@ data TransfersList' = TransfersList'
     , _tlOAuthToken     :: !(Maybe OAuthToken)
     , _tlMaxResults     :: !(Maybe Int32)
     , _tlFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransfersList'' with the minimum fields required to make a request.
 --
@@ -204,10 +205,10 @@ instance GoogleRequest TransfersList' where
         request
           = requestWithRoute defReq adminDataTransferURL
         requestWithRoute r u TransfersList'{..}
-          = go _tlCustomerId _tlMaxResults _tlNewOwnerUserId
-              _tlOldOwnerUserId
+          = go _tlStatus _tlOldOwnerUserId _tlNewOwnerUserId
+              _tlCustomerId
               _tlPageToken
-              _tlStatus
+              _tlMaxResults
               _tlQuotaUser
               (Just _tlPrettyPrint)
               _tlUserIP

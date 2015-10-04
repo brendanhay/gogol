@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -60,17 +61,13 @@ type InventoryItemsListResource =
            Capture "projectId" Int64 :>
              "inventoryItems" :>
                QueryParams "ids" Int64 :>
-                 QueryParam "inPlan" Bool :>
-                   QueryParam "maxResults" Int32 :>
-                     QueryParams "orderId" Int64 :>
-                       QueryParam "pageToken" Text :>
-                         QueryParams "siteId" Int64 :>
-                           QueryParam "sortField"
-                             DfareportingInventoryItemsListSortField
-                             :>
-                             QueryParam "sortOrder"
-                               DfareportingInventoryItemsListSortOrder
-                               :>
+                 QueryParam "sortOrder" SortOrder :>
+                   QueryParam "inPlan" Bool :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "sortField" SortField :>
+                         QueryParams "orderId" Int64 :>
+                           QueryParams "siteId" Int64 :>
+                             QueryParam "maxResults" Int32 :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "userIp" Text :>
@@ -88,20 +85,20 @@ data InventoryItemsList' = InventoryItemsList'
     { _iilQuotaUser   :: !(Maybe Text)
     , _iilPrettyPrint :: !Bool
     , _iilUserIP      :: !(Maybe Text)
-    , _iilIds         :: !(Maybe Int64)
+    , _iilIds         :: !(Maybe [Int64])
     , _iilProfileId   :: !Int64
-    , _iilSortOrder   :: !(Maybe DfareportingInventoryItemsListSortOrder)
+    , _iilSortOrder   :: !(Maybe SortOrder)
     , _iilInPlan      :: !(Maybe Bool)
     , _iilKey         :: !(Maybe Key)
     , _iilPageToken   :: !(Maybe Text)
     , _iilProjectId   :: !Int64
-    , _iilSortField   :: !(Maybe DfareportingInventoryItemsListSortField)
+    , _iilSortField   :: !(Maybe SortField)
     , _iilOAuthToken  :: !(Maybe OAuthToken)
-    , _iilOrderId     :: !(Maybe Int64)
-    , _iilSiteId      :: !(Maybe Int64)
+    , _iilOrderId     :: !(Maybe [Int64])
+    , _iilSiteId      :: !(Maybe [Int64])
     , _iilMaxResults  :: !(Maybe Int32)
     , _iilFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InventoryItemsList'' with the minimum fields required to make a request.
 --
@@ -182,8 +179,10 @@ iilUserIP
   = lens _iilUserIP (\ s a -> s{_iilUserIP = a})
 
 -- | Select only inventory items with these IDs.
-iilIds :: Lens' InventoryItemsList' (Maybe Int64)
-iilIds = lens _iilIds (\ s a -> s{_iilIds = a})
+iilIds :: Lens' InventoryItemsList' [Int64]
+iilIds
+  = lens _iilIds (\ s a -> s{_iilIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 iilProfileId :: Lens' InventoryItemsList' Int64
@@ -191,7 +190,7 @@ iilProfileId
   = lens _iilProfileId (\ s a -> s{_iilProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-iilSortOrder :: Lens' InventoryItemsList' (Maybe DfareportingInventoryItemsListSortOrder)
+iilSortOrder :: Lens' InventoryItemsList' (Maybe SortOrder)
 iilSortOrder
   = lens _iilSortOrder (\ s a -> s{_iilSortOrder = a})
 
@@ -217,7 +216,7 @@ iilProjectId
   = lens _iilProjectId (\ s a -> s{_iilProjectId = a})
 
 -- | Field by which to sort the list.
-iilSortField :: Lens' InventoryItemsList' (Maybe DfareportingInventoryItemsListSortField)
+iilSortField :: Lens' InventoryItemsList' (Maybe SortField)
 iilSortField
   = lens _iilSortField (\ s a -> s{_iilSortField = a})
 
@@ -228,14 +227,18 @@ iilOAuthToken
       (\ s a -> s{_iilOAuthToken = a})
 
 -- | Select only inventory items that belong to specified orders.
-iilOrderId :: Lens' InventoryItemsList' (Maybe Int64)
+iilOrderId :: Lens' InventoryItemsList' [Int64]
 iilOrderId
-  = lens _iilOrderId (\ s a -> s{_iilOrderId = a})
+  = lens _iilOrderId (\ s a -> s{_iilOrderId = a}) .
+      _Default
+      . _Coerce
 
 -- | Select only inventory items that are associated with these sites.
-iilSiteId :: Lens' InventoryItemsList' (Maybe Int64)
+iilSiteId :: Lens' InventoryItemsList' [Int64]
 iilSiteId
-  = lens _iilSiteId (\ s a -> s{_iilSiteId = a})
+  = lens _iilSiteId (\ s a -> s{_iilSiteId = a}) .
+      _Default
+      . _Coerce
 
 -- | Maximum number of results to return.
 iilMaxResults :: Lens' InventoryItemsList' (Maybe Int32)
@@ -257,13 +260,15 @@ instance GoogleRequest InventoryItemsList' where
              InventoryItemsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u InventoryItemsList'{..}
-          = go _iilIds _iilInPlan _iilMaxResults _iilOrderId
-              _iilPageToken
-              _iilSiteId
-              _iilSortField
+          = go _iilProfileId _iilProjectId
+              (_iilIds ^. _Default)
               _iilSortOrder
-              _iilProfileId
-              _iilProjectId
+              _iilInPlan
+              _iilPageToken
+              _iilSortField
+              (_iilOrderId ^. _Default)
+              (_iilSiteId ^. _Default)
+              _iilMaxResults
               _iilQuotaUser
               (Just _iilPrettyPrint)
               _iilUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,11 +56,11 @@ type TableReplaceRowsResource =
      "tables" :>
        Capture "tableId" Text :>
          "replace" :>
-           QueryParam "delimiter" Text :>
-             QueryParam "encoding" Text :>
-               QueryParam "endLine" Int32 :>
-                 QueryParam "isStrict" Bool :>
-                   QueryParam "startLine" Int32 :>
+           QueryParam "startLine" Int32 :>
+             QueryParam "endLine" Int32 :>
+               QueryParam "delimiter" Text :>
+                 QueryParam "encoding" Text :>
+                   QueryParam "isStrict" Bool :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -86,7 +87,7 @@ data TableReplaceRows' = TableReplaceRows'
     , _trrEncoding    :: !(Maybe Text)
     , _trrIsStrict    :: !(Maybe Bool)
     , _trrFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableReplaceRows'' with the minimum fields required to make a request.
 --
@@ -224,11 +225,10 @@ instance GoogleRequest TableReplaceRows' where
         type Rs TableReplaceRows' = Task
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableReplaceRows'{..}
-          = go _trrDelimiter _trrEncoding _trrEndLine
+          = go _trrTableId _trrStartLine _trrEndLine
+              _trrDelimiter
+              _trrEncoding
               _trrIsStrict
-              _trrMedia
-              _trrStartLine
-              _trrTableId
               _trrQuotaUser
               (Just _trrPrettyPrint)
               _trrUserIP
@@ -236,6 +236,7 @@ instance GoogleRequest TableReplaceRows' where
               _trrKey
               _trrOAuthToken
               (Just AltJSON)
+              _trrMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TableReplaceRowsResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.Genomics.Variants.Search
     , vsQuotaUser
     , vsPrettyPrint
     , vsUserIP
+    , vsPayload
     , vsKey
     , vsOAuthToken
-    , vsSearchVariantsRequest
     , vsFields
     ) where
 
@@ -63,14 +64,14 @@ type VariantsSearchResource =
 --
 -- /See:/ 'variantsSearch'' smart constructor.
 data VariantsSearch' = VariantsSearch'
-    { _vsQuotaUser             :: !(Maybe Text)
-    , _vsPrettyPrint           :: !Bool
-    , _vsUserIP                :: !(Maybe Text)
-    , _vsKey                   :: !(Maybe Key)
-    , _vsOAuthToken            :: !(Maybe OAuthToken)
-    , _vsSearchVariantsRequest :: !SearchVariantsRequest
-    , _vsFields                :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _vsQuotaUser   :: !(Maybe Text)
+    , _vsPrettyPrint :: !Bool
+    , _vsUserIP      :: !(Maybe Text)
+    , _vsPayload     :: !SearchVariantsRequest
+    , _vsKey         :: !(Maybe Key)
+    , _vsOAuthToken  :: !(Maybe OAuthToken)
+    , _vsFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsSearch'' with the minimum fields required to make a request.
 --
@@ -82,24 +83,24 @@ data VariantsSearch' = VariantsSearch'
 --
 -- * 'vsUserIP'
 --
+-- * 'vsPayload'
+--
 -- * 'vsKey'
 --
 -- * 'vsOAuthToken'
 --
--- * 'vsSearchVariantsRequest'
---
 -- * 'vsFields'
 variantsSearch'
-    :: SearchVariantsRequest -- ^ 'SearchVariantsRequest'
+    :: SearchVariantsRequest -- ^ 'payload'
     -> VariantsSearch'
-variantsSearch' pVsSearchVariantsRequest_ =
+variantsSearch' pVsPayload_ =
     VariantsSearch'
     { _vsQuotaUser = Nothing
     , _vsPrettyPrint = True
     , _vsUserIP = Nothing
+    , _vsPayload = pVsPayload_
     , _vsKey = Nothing
     , _vsOAuthToken = Nothing
-    , _vsSearchVariantsRequest = pVsSearchVariantsRequest_
     , _vsFields = Nothing
     }
 
@@ -121,6 +122,11 @@ vsPrettyPrint
 vsUserIP :: Lens' VariantsSearch' (Maybe Text)
 vsUserIP = lens _vsUserIP (\ s a -> s{_vsUserIP = a})
 
+-- | Multipart request metadata.
+vsPayload :: Lens' VariantsSearch' SearchVariantsRequest
+vsPayload
+  = lens _vsPayload (\ s a -> s{_vsPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -131,12 +137,6 @@ vsKey = lens _vsKey (\ s a -> s{_vsKey = a})
 vsOAuthToken :: Lens' VariantsSearch' (Maybe OAuthToken)
 vsOAuthToken
   = lens _vsOAuthToken (\ s a -> s{_vsOAuthToken = a})
-
--- | Multipart request metadata.
-vsSearchVariantsRequest :: Lens' VariantsSearch' SearchVariantsRequest
-vsSearchVariantsRequest
-  = lens _vsSearchVariantsRequest
-      (\ s a -> s{_vsSearchVariantsRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vsFields :: Lens' VariantsSearch' (Maybe Text)
@@ -155,7 +155,7 @@ instance GoogleRequest VariantsSearch' where
               _vsKey
               _vsOAuthToken
               (Just AltJSON)
-              _vsSearchVariantsRequest
+              _vsPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsSearchResource)

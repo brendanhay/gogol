@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,9 +49,9 @@ import           Network.Google.YouTube.Types
 -- 'LiveStreamsDelete'' request conforms to.
 type LiveStreamsDeleteResource =
      "liveStreams" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "onBehalfOfContentOwnerChannel" Text :>
-           QueryParam "id" Text :>
+       QueryParam "id" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
+           QueryParam "onBehalfOfContentOwnerChannel" Text :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -72,7 +73,7 @@ data LiveStreamsDelete' = LiveStreamsDelete'
     , _lsdId                            :: !Text
     , _lsdOAuthToken                    :: !(Maybe OAuthToken)
     , _lsdFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveStreamsDelete'' with the minimum fields required to make a request.
 --
@@ -196,9 +197,8 @@ instance GoogleRequest LiveStreamsDelete' where
         type Rs LiveStreamsDelete' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveStreamsDelete'{..}
-          = go _lsdOnBehalfOfContentOwner
+          = go (Just _lsdId) _lsdOnBehalfOfContentOwner
               _lsdOnBehalfOfContentOwnerChannel
-              (Just _lsdId)
               _lsdQuotaUser
               (Just _lsdPrettyPrint)
               _lsdUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,10 +35,10 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Pause
     , topQuotaUser
     , topPrettyPrint
     , topUploadProtocol
-    , topPauseTransferOperationRequest
     , topPp
     , topAccessToken
     , topUploadType
+    , topPayload
     , topBearerToken
     , topKey
     , topName
@@ -53,14 +54,14 @@ import           Network.Google.StorageTransfer.Types
 -- 'TransferOperationsPause'' request conforms to.
 type TransferOperationsPauseResource =
      "v1" :>
-       "{+name}:pause" :>
+       CaptureMode "name" "pause" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -74,21 +75,21 @@ type TransferOperationsPauseResource =
 --
 -- /See:/ 'transferOperationsPause'' smart constructor.
 data TransferOperationsPause' = TransferOperationsPause'
-    { _topXgafv                         :: !(Maybe Text)
-    , _topQuotaUser                     :: !(Maybe Text)
-    , _topPrettyPrint                   :: !Bool
-    , _topUploadProtocol                :: !(Maybe Text)
-    , _topPauseTransferOperationRequest :: !PauseTransferOperationRequest
-    , _topPp                            :: !Bool
-    , _topAccessToken                   :: !(Maybe Text)
-    , _topUploadType                    :: !(Maybe Text)
-    , _topBearerToken                   :: !(Maybe Text)
-    , _topKey                           :: !(Maybe Key)
-    , _topName                          :: !Text
-    , _topOAuthToken                    :: !(Maybe OAuthToken)
-    , _topFields                        :: !(Maybe Text)
-    , _topCallback                      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _topXgafv          :: !(Maybe Text)
+    , _topQuotaUser      :: !(Maybe Text)
+    , _topPrettyPrint    :: !Bool
+    , _topUploadProtocol :: !(Maybe Text)
+    , _topPp             :: !Bool
+    , _topAccessToken    :: !(Maybe Text)
+    , _topUploadType     :: !(Maybe Text)
+    , _topPayload        :: !PauseTransferOperationRequest
+    , _topBearerToken    :: !(Maybe Text)
+    , _topKey            :: !(Maybe Key)
+    , _topName           :: !Text
+    , _topOAuthToken     :: !(Maybe OAuthToken)
+    , _topFields         :: !(Maybe Text)
+    , _topCallback       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferOperationsPause'' with the minimum fields required to make a request.
 --
@@ -102,13 +103,13 @@ data TransferOperationsPause' = TransferOperationsPause'
 --
 -- * 'topUploadProtocol'
 --
--- * 'topPauseTransferOperationRequest'
---
 -- * 'topPp'
 --
 -- * 'topAccessToken'
 --
 -- * 'topUploadType'
+--
+-- * 'topPayload'
 --
 -- * 'topBearerToken'
 --
@@ -122,19 +123,19 @@ data TransferOperationsPause' = TransferOperationsPause'
 --
 -- * 'topCallback'
 transferOperationsPause'
-    :: PauseTransferOperationRequest -- ^ 'PauseTransferOperationRequest'
+    :: PauseTransferOperationRequest -- ^ 'payload'
     -> Text -- ^ 'name'
     -> TransferOperationsPause'
-transferOperationsPause' pTopPauseTransferOperationRequest_ pTopName_ =
+transferOperationsPause' pTopPayload_ pTopName_ =
     TransferOperationsPause'
     { _topXgafv = Nothing
     , _topQuotaUser = Nothing
     , _topPrettyPrint = True
     , _topUploadProtocol = Nothing
-    , _topPauseTransferOperationRequest = pTopPauseTransferOperationRequest_
     , _topPp = True
     , _topAccessToken = Nothing
     , _topUploadType = Nothing
+    , _topPayload = pTopPayload_
     , _topBearerToken = Nothing
     , _topKey = Nothing
     , _topName = pTopName_
@@ -166,12 +167,6 @@ topUploadProtocol
   = lens _topUploadProtocol
       (\ s a -> s{_topUploadProtocol = a})
 
--- | Multipart request metadata.
-topPauseTransferOperationRequest :: Lens' TransferOperationsPause' PauseTransferOperationRequest
-topPauseTransferOperationRequest
-  = lens _topPauseTransferOperationRequest
-      (\ s a -> s{_topPauseTransferOperationRequest = a})
-
 -- | Pretty-print response.
 topPp :: Lens' TransferOperationsPause' Bool
 topPp = lens _topPp (\ s a -> s{_topPp = a})
@@ -187,6 +182,11 @@ topUploadType :: Lens' TransferOperationsPause' (Maybe Text)
 topUploadType
   = lens _topUploadType
       (\ s a -> s{_topUploadType = a})
+
+-- | Multipart request metadata.
+topPayload :: Lens' TransferOperationsPause' PauseTransferOperationRequest
+topPayload
+  = lens _topPayload (\ s a -> s{_topPayload = a})
 
 -- | OAuth bearer token.
 topBearerToken :: Lens' TransferOperationsPause' (Maybe Text)
@@ -228,19 +228,19 @@ instance GoogleRequest TransferOperationsPause' where
         type Rs TransferOperationsPause' = Empty
         request = requestWithRoute defReq storageTransferURL
         requestWithRoute r u TransferOperationsPause'{..}
-          = go _topXgafv _topAccessToken _topBearerToken
-              _topCallback
+          = go _topName _topXgafv _topUploadProtocol
               (Just _topPp)
+              _topAccessToken
               _topUploadType
-              _topUploadProtocol
-              _topName
+              _topBearerToken
+              _topCallback
               _topQuotaUser
               (Just _topPrettyPrint)
               _topFields
               _topKey
               _topOAuthToken
               (Just AltJSON)
-              _topPauseTransferOperationRequest
+              _topPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TransferOperationsPauseResource)

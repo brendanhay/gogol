@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,11 +34,11 @@ module Network.Google.Resource.Mirror.Timeline.Update
     , tuQuotaUser
     , tuPrettyPrint
     , tuUserIP
+    , tuPayload
     , tuMedia
     , tuKey
     , tuId
     , tuOAuthToken
-    , tuTimelineItem
     , tuFields
     ) where
 
@@ -63,16 +64,16 @@ type TimelineUpdateResource =
 --
 -- /See:/ 'timelineUpdate'' smart constructor.
 data TimelineUpdate' = TimelineUpdate'
-    { _tuQuotaUser    :: !(Maybe Text)
-    , _tuPrettyPrint  :: !Bool
-    , _tuUserIP       :: !(Maybe Text)
-    , _tuMedia        :: !Body
-    , _tuKey          :: !(Maybe Key)
-    , _tuId           :: !Text
-    , _tuOAuthToken   :: !(Maybe OAuthToken)
-    , _tuTimelineItem :: !TimelineItem
-    , _tuFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _tuQuotaUser   :: !(Maybe Text)
+    , _tuPrettyPrint :: !Bool
+    , _tuUserIP      :: !(Maybe Text)
+    , _tuPayload     :: !TimelineItem
+    , _tuMedia       :: !Body
+    , _tuKey         :: !(Maybe Key)
+    , _tuId          :: !Text
+    , _tuOAuthToken  :: !(Maybe OAuthToken)
+    , _tuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineUpdate'' with the minimum fields required to make a request.
 --
@@ -84,6 +85,8 @@ data TimelineUpdate' = TimelineUpdate'
 --
 -- * 'tuUserIP'
 --
+-- * 'tuPayload'
+--
 -- * 'tuMedia'
 --
 -- * 'tuKey'
@@ -92,24 +95,22 @@ data TimelineUpdate' = TimelineUpdate'
 --
 -- * 'tuOAuthToken'
 --
--- * 'tuTimelineItem'
---
 -- * 'tuFields'
 timelineUpdate'
-    :: Body -- ^ 'media'
+    :: TimelineItem -- ^ 'payload'
+    -> Body -- ^ 'media'
     -> Text -- ^ 'id'
-    -> TimelineItem -- ^ 'TimelineItem'
     -> TimelineUpdate'
-timelineUpdate' pTuMedia_ pTuId_ pTuTimelineItem_ =
+timelineUpdate' pTuPayload_ pTuMedia_ pTuId_ =
     TimelineUpdate'
     { _tuQuotaUser = Nothing
     , _tuPrettyPrint = True
     , _tuUserIP = Nothing
+    , _tuPayload = pTuPayload_
     , _tuMedia = pTuMedia_
     , _tuKey = Nothing
     , _tuId = pTuId_
     , _tuOAuthToken = Nothing
-    , _tuTimelineItem = pTuTimelineItem_
     , _tuFields = Nothing
     }
 
@@ -131,6 +132,11 @@ tuPrettyPrint
 tuUserIP :: Lens' TimelineUpdate' (Maybe Text)
 tuUserIP = lens _tuUserIP (\ s a -> s{_tuUserIP = a})
 
+-- | Multipart request metadata.
+tuPayload :: Lens' TimelineUpdate' TimelineItem
+tuPayload
+  = lens _tuPayload (\ s a -> s{_tuPayload = a})
+
 tuMedia :: Lens' TimelineUpdate' Body
 tuMedia = lens _tuMedia (\ s a -> s{_tuMedia = a})
 
@@ -149,12 +155,6 @@ tuOAuthToken :: Lens' TimelineUpdate' (Maybe OAuthToken)
 tuOAuthToken
   = lens _tuOAuthToken (\ s a -> s{_tuOAuthToken = a})
 
--- | Multipart request metadata.
-tuTimelineItem :: Lens' TimelineUpdate' TimelineItem
-tuTimelineItem
-  = lens _tuTimelineItem
-      (\ s a -> s{_tuTimelineItem = a})
-
 -- | Selector specifying which fields to include in a partial response.
 tuFields :: Lens' TimelineUpdate' (Maybe Text)
 tuFields = lens _tuFields (\ s a -> s{_tuFields = a})
@@ -167,14 +167,14 @@ instance GoogleRequest TimelineUpdate' where
         type Rs TimelineUpdate' = TimelineItem
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelineUpdate'{..}
-          = go _tuMedia _tuId _tuQuotaUser
-              (Just _tuPrettyPrint)
+          = go _tuId _tuQuotaUser (Just _tuPrettyPrint)
               _tuUserIP
               _tuFields
               _tuKey
               _tuOAuthToken
               (Just AltJSON)
-              _tuTimelineItem
+              _tuPayload
+              _tuMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TimelineUpdateResource)

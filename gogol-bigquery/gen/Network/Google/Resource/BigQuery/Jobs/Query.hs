@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.BigQuery.Jobs.Query
     , jqQuotaUser
     , jqPrettyPrint
     , jqUserIP
-    , jqQueryRequest
+    , jqPayload
     , jqKey
     , jqProjectId
     , jqOAuthToken
@@ -65,15 +66,15 @@ type JobsQueryResource =
 --
 -- /See:/ 'jobsQuery'' smart constructor.
 data JobsQuery' = JobsQuery'
-    { _jqQuotaUser    :: !(Maybe Text)
-    , _jqPrettyPrint  :: !Bool
-    , _jqUserIP       :: !(Maybe Text)
-    , _jqQueryRequest :: !QueryRequest
-    , _jqKey          :: !(Maybe Key)
-    , _jqProjectId    :: !Text
-    , _jqOAuthToken   :: !(Maybe OAuthToken)
-    , _jqFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _jqQuotaUser   :: !(Maybe Text)
+    , _jqPrettyPrint :: !Bool
+    , _jqUserIP      :: !(Maybe Text)
+    , _jqPayload     :: !QueryRequest
+    , _jqKey         :: !(Maybe Key)
+    , _jqProjectId   :: !Text
+    , _jqOAuthToken  :: !(Maybe OAuthToken)
+    , _jqFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsQuery'' with the minimum fields required to make a request.
 --
@@ -85,7 +86,7 @@ data JobsQuery' = JobsQuery'
 --
 -- * 'jqUserIP'
 --
--- * 'jqQueryRequest'
+-- * 'jqPayload'
 --
 -- * 'jqKey'
 --
@@ -95,15 +96,15 @@ data JobsQuery' = JobsQuery'
 --
 -- * 'jqFields'
 jobsQuery'
-    :: QueryRequest -- ^ 'QueryRequest'
+    :: QueryRequest -- ^ 'payload'
     -> Text -- ^ 'projectId'
     -> JobsQuery'
-jobsQuery' pJqQueryRequest_ pJqProjectId_ =
+jobsQuery' pJqPayload_ pJqProjectId_ =
     JobsQuery'
     { _jqQuotaUser = Nothing
     , _jqPrettyPrint = True
     , _jqUserIP = Nothing
-    , _jqQueryRequest = pJqQueryRequest_
+    , _jqPayload = pJqPayload_
     , _jqKey = Nothing
     , _jqProjectId = pJqProjectId_
     , _jqOAuthToken = Nothing
@@ -129,10 +130,9 @@ jqUserIP :: Lens' JobsQuery' (Maybe Text)
 jqUserIP = lens _jqUserIP (\ s a -> s{_jqUserIP = a})
 
 -- | Multipart request metadata.
-jqQueryRequest :: Lens' JobsQuery' QueryRequest
-jqQueryRequest
-  = lens _jqQueryRequest
-      (\ s a -> s{_jqQueryRequest = a})
+jqPayload :: Lens' JobsQuery' QueryRequest
+jqPayload
+  = lens _jqPayload (\ s a -> s{_jqPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -168,7 +168,7 @@ instance GoogleRequest JobsQuery' where
               _jqKey
               _jqOAuthToken
               (Just AltJSON)
-              _jqQueryRequest
+              _jqPayload
           where go
                   = clientWithRoute (Proxy :: Proxy JobsQueryResource)
                       r

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.Calendar.ACL.Watch
     , awCalendarId
     , awPrettyPrint
     , awUserIP
-    , awChannel
     , awShowDeleted
+    , awPayload
     , awKey
     , awPageToken
     , awOAuthToken
@@ -54,10 +55,10 @@ type ACLWatchResource =
        Capture "calendarId" Text :>
          "acl" :>
            "watch" :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "showDeleted" Bool :>
-                   QueryParam "syncToken" Text :>
+             QueryParam "syncToken" Text :>
+               QueryParam "showDeleted" Bool :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Int32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -77,14 +78,14 @@ data ACLWatch' = ACLWatch'
     , _awCalendarId  :: !Text
     , _awPrettyPrint :: !Bool
     , _awUserIP      :: !(Maybe Text)
-    , _awChannel     :: !Channel
     , _awShowDeleted :: !(Maybe Bool)
+    , _awPayload     :: !Channel
     , _awKey         :: !(Maybe Key)
     , _awPageToken   :: !(Maybe Text)
     , _awOAuthToken  :: !(Maybe OAuthToken)
     , _awMaxResults  :: !(Maybe Int32)
     , _awFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLWatch'' with the minimum fields required to make a request.
 --
@@ -100,9 +101,9 @@ data ACLWatch' = ACLWatch'
 --
 -- * 'awUserIP'
 --
--- * 'awChannel'
---
 -- * 'awShowDeleted'
+--
+-- * 'awPayload'
 --
 -- * 'awKey'
 --
@@ -115,17 +116,17 @@ data ACLWatch' = ACLWatch'
 -- * 'awFields'
 aclWatch'
     :: Text -- ^ 'calendarId'
-    -> Channel -- ^ 'Channel'
+    -> Channel -- ^ 'payload'
     -> ACLWatch'
-aclWatch' pAwCalendarId_ pAwChannel_ =
+aclWatch' pAwCalendarId_ pAwPayload_ =
     ACLWatch'
     { _awSyncToken = Nothing
     , _awQuotaUser = Nothing
     , _awCalendarId = pAwCalendarId_
     , _awPrettyPrint = True
     , _awUserIP = Nothing
-    , _awChannel = pAwChannel_
     , _awShowDeleted = Nothing
+    , _awPayload = pAwPayload_
     , _awKey = Nothing
     , _awPageToken = Nothing
     , _awOAuthToken = Nothing
@@ -171,11 +172,6 @@ awPrettyPrint
 awUserIP :: Lens' ACLWatch' (Maybe Text)
 awUserIP = lens _awUserIP (\ s a -> s{_awUserIP = a})
 
--- | Multipart request metadata.
-awChannel :: Lens' ACLWatch' Channel
-awChannel
-  = lens _awChannel (\ s a -> s{_awChannel = a})
-
 -- | Whether to include deleted ACLs in the result. Deleted ACLs are
 -- represented by role equal to \"none\". Deleted ACLs will always be
 -- included if syncToken is provided. Optional. The default is False.
@@ -183,6 +179,11 @@ awShowDeleted :: Lens' ACLWatch' (Maybe Bool)
 awShowDeleted
   = lens _awShowDeleted
       (\ s a -> s{_awShowDeleted = a})
+
+-- | Multipart request metadata.
+awPayload :: Lens' ACLWatch' Channel
+awPayload
+  = lens _awPayload (\ s a -> s{_awPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -219,9 +220,9 @@ instance GoogleRequest ACLWatch' where
         type Rs ACLWatch' = Channel
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u ACLWatch'{..}
-          = go _awMaxResults _awPageToken _awShowDeleted
-              _awSyncToken
-              _awCalendarId
+          = go _awCalendarId _awSyncToken _awShowDeleted
+              _awPageToken
+              _awMaxResults
               _awQuotaUser
               (Just _awPrettyPrint)
               _awUserIP
@@ -229,7 +230,7 @@ instance GoogleRequest ACLWatch' where
               _awKey
               _awOAuthToken
               (Just AltJSON)
-              _awChannel
+              _awPayload
           where go
                   = clientWithRoute (Proxy :: Proxy ACLWatchResource) r
                       u

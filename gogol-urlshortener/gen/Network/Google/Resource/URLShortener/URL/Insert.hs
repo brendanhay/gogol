@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.URLShortener.URL.Insert
     , uiQuotaUser
     , uiPrettyPrint
     , uiUserIP
-    , uiURL
+    , uiPayload
     , uiKey
     , uiOAuthToken
     , uiFields
@@ -62,11 +63,11 @@ data URLInsert' = URLInsert'
     { _uiQuotaUser   :: !(Maybe Text)
     , _uiPrettyPrint :: !Bool
     , _uiUserIP      :: !(Maybe Text)
-    , _uiURL         :: !URL
+    , _uiPayload     :: !URL
     , _uiKey         :: !(Maybe Key)
     , _uiOAuthToken  :: !(Maybe OAuthToken)
     , _uiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLInsert'' with the minimum fields required to make a request.
 --
@@ -78,7 +79,7 @@ data URLInsert' = URLInsert'
 --
 -- * 'uiUserIP'
 --
--- * 'uiURL'
+-- * 'uiPayload'
 --
 -- * 'uiKey'
 --
@@ -86,14 +87,14 @@ data URLInsert' = URLInsert'
 --
 -- * 'uiFields'
 urlInsert'
-    :: URL -- ^ 'URL'
+    :: URL -- ^ 'payload'
     -> URLInsert'
-urlInsert' pUiURL_ =
+urlInsert' pUiPayload_ =
     URLInsert'
     { _uiQuotaUser = Nothing
     , _uiPrettyPrint = True
     , _uiUserIP = Nothing
-    , _uiURL = pUiURL_
+    , _uiPayload = pUiPayload_
     , _uiKey = Nothing
     , _uiOAuthToken = Nothing
     , _uiFields = Nothing
@@ -118,8 +119,9 @@ uiUserIP :: Lens' URLInsert' (Maybe Text)
 uiUserIP = lens _uiUserIP (\ s a -> s{_uiUserIP = a})
 
 -- | Multipart request metadata.
-uiURL :: Lens' URLInsert' URL
-uiURL = lens _uiURL (\ s a -> s{_uiURL = a})
+uiPayload :: Lens' URLInsert' URL
+uiPayload
+  = lens _uiPayload (\ s a -> s{_uiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -149,7 +151,7 @@ instance GoogleRequest URLInsert' where
               _uiKey
               _uiOAuthToken
               (Just AltJSON)
-              _uiURL
+              _uiPayload
           where go
                   = clientWithRoute (Proxy :: Proxy URLInsertResource)
                       r

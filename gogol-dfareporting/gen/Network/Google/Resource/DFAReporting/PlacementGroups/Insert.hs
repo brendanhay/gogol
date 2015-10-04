@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.Insert
     , pgiPrettyPrint
     , pgiUserIP
     , pgiProfileId
+    , pgiPayload
     , pgiKey
     , pgiOAuthToken
-    , pgiPlacementGroup
     , pgiFields
     ) where
 
@@ -63,15 +64,15 @@ type PlacementGroupsInsertResource =
 --
 -- /See:/ 'placementGroupsInsert'' smart constructor.
 data PlacementGroupsInsert' = PlacementGroupsInsert'
-    { _pgiQuotaUser      :: !(Maybe Text)
-    , _pgiPrettyPrint    :: !Bool
-    , _pgiUserIP         :: !(Maybe Text)
-    , _pgiProfileId      :: !Int64
-    , _pgiKey            :: !(Maybe Key)
-    , _pgiOAuthToken     :: !(Maybe OAuthToken)
-    , _pgiPlacementGroup :: !PlacementGroup
-    , _pgiFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _pgiQuotaUser   :: !(Maybe Text)
+    , _pgiPrettyPrint :: !Bool
+    , _pgiUserIP      :: !(Maybe Text)
+    , _pgiProfileId   :: !Int64
+    , _pgiPayload     :: !PlacementGroup
+    , _pgiKey         :: !(Maybe Key)
+    , _pgiOAuthToken  :: !(Maybe OAuthToken)
+    , _pgiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementGroupsInsert'' with the minimum fields required to make a request.
 --
@@ -85,26 +86,26 @@ data PlacementGroupsInsert' = PlacementGroupsInsert'
 --
 -- * 'pgiProfileId'
 --
+-- * 'pgiPayload'
+--
 -- * 'pgiKey'
 --
 -- * 'pgiOAuthToken'
 --
--- * 'pgiPlacementGroup'
---
 -- * 'pgiFields'
 placementGroupsInsert'
     :: Int64 -- ^ 'profileId'
-    -> PlacementGroup -- ^ 'PlacementGroup'
+    -> PlacementGroup -- ^ 'payload'
     -> PlacementGroupsInsert'
-placementGroupsInsert' pPgiProfileId_ pPgiPlacementGroup_ =
+placementGroupsInsert' pPgiProfileId_ pPgiPayload_ =
     PlacementGroupsInsert'
     { _pgiQuotaUser = Nothing
     , _pgiPrettyPrint = True
     , _pgiUserIP = Nothing
     , _pgiProfileId = pPgiProfileId_
+    , _pgiPayload = pPgiPayload_
     , _pgiKey = Nothing
     , _pgiOAuthToken = Nothing
-    , _pgiPlacementGroup = pPgiPlacementGroup_
     , _pgiFields = Nothing
     }
 
@@ -132,6 +133,11 @@ pgiProfileId :: Lens' PlacementGroupsInsert' Int64
 pgiProfileId
   = lens _pgiProfileId (\ s a -> s{_pgiProfileId = a})
 
+-- | Multipart request metadata.
+pgiPayload :: Lens' PlacementGroupsInsert' PlacementGroup
+pgiPayload
+  = lens _pgiPayload (\ s a -> s{_pgiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -143,12 +149,6 @@ pgiOAuthToken :: Lens' PlacementGroupsInsert' (Maybe OAuthToken)
 pgiOAuthToken
   = lens _pgiOAuthToken
       (\ s a -> s{_pgiOAuthToken = a})
-
--- | Multipart request metadata.
-pgiPlacementGroup :: Lens' PlacementGroupsInsert' PlacementGroup
-pgiPlacementGroup
-  = lens _pgiPlacementGroup
-      (\ s a -> s{_pgiPlacementGroup = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pgiFields :: Lens' PlacementGroupsInsert' (Maybe Text)
@@ -170,7 +170,7 @@ instance GoogleRequest PlacementGroupsInsert' where
               _pgiKey
               _pgiOAuthToken
               (Just AltJSON)
-              _pgiPlacementGroup
+              _pgiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementGroupsInsertResource)

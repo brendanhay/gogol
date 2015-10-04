@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,10 +52,10 @@ import           Network.Google.Prelude
 type UsersSessionsListResource =
      Capture "userId" Text :>
        "sessions" :>
-         QueryParam "endTime" Text :>
-           QueryParam "includeDeleted" Bool :>
+         QueryParam "startTime" Text :>
+           QueryParam "endTime" Text :>
              QueryParam "pageToken" Text :>
-               QueryParam "startTime" Text :>
+               QueryParam "includeDeleted" Bool :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data UsersSessionsList' = UsersSessionsList'
     , _uslOAuthToken     :: !(Maybe OAuthToken)
     , _uslIncludeDeleted :: !(Maybe Bool)
     , _uslFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersSessionsList'' with the minimum fields required to make a request.
 --
@@ -201,9 +202,9 @@ instance GoogleRequest UsersSessionsList' where
         type Rs UsersSessionsList' = ListSessionsResponse
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersSessionsList'{..}
-          = go _uslEndTime _uslIncludeDeleted _uslPageToken
-              _uslStartTime
-              _uslUserId
+          = go _uslUserId _uslStartTime _uslEndTime
+              _uslPageToken
+              _uslIncludeDeleted
               _uslQuotaUser
               (Just _uslPrettyPrint)
               _uslUserIP

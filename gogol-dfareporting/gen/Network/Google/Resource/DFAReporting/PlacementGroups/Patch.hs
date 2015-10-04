@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,10 +36,10 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.Patch
     , pgpPrettyPrint
     , pgpUserIP
     , pgpProfileId
+    , pgpPayload
     , pgpKey
     , pgpId
     , pgpOAuthToken
-    , pgpPlacementGroup
     , pgpFields
     ) where
 
@@ -67,16 +68,16 @@ type PlacementGroupsPatchResource =
 --
 -- /See:/ 'placementGroupsPatch'' smart constructor.
 data PlacementGroupsPatch' = PlacementGroupsPatch'
-    { _pgpQuotaUser      :: !(Maybe Text)
-    , _pgpPrettyPrint    :: !Bool
-    , _pgpUserIP         :: !(Maybe Text)
-    , _pgpProfileId      :: !Int64
-    , _pgpKey            :: !(Maybe Key)
-    , _pgpId             :: !Int64
-    , _pgpOAuthToken     :: !(Maybe OAuthToken)
-    , _pgpPlacementGroup :: !PlacementGroup
-    , _pgpFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _pgpQuotaUser   :: !(Maybe Text)
+    , _pgpPrettyPrint :: !Bool
+    , _pgpUserIP      :: !(Maybe Text)
+    , _pgpProfileId   :: !Int64
+    , _pgpPayload     :: !PlacementGroup
+    , _pgpKey         :: !(Maybe Key)
+    , _pgpId          :: !Int64
+    , _pgpOAuthToken  :: !(Maybe OAuthToken)
+    , _pgpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementGroupsPatch'' with the minimum fields required to make a request.
 --
@@ -90,30 +91,30 @@ data PlacementGroupsPatch' = PlacementGroupsPatch'
 --
 -- * 'pgpProfileId'
 --
+-- * 'pgpPayload'
+--
 -- * 'pgpKey'
 --
 -- * 'pgpId'
 --
 -- * 'pgpOAuthToken'
 --
--- * 'pgpPlacementGroup'
---
 -- * 'pgpFields'
 placementGroupsPatch'
     :: Int64 -- ^ 'profileId'
+    -> PlacementGroup -- ^ 'payload'
     -> Int64 -- ^ 'id'
-    -> PlacementGroup -- ^ 'PlacementGroup'
     -> PlacementGroupsPatch'
-placementGroupsPatch' pPgpProfileId_ pPgpId_ pPgpPlacementGroup_ =
+placementGroupsPatch' pPgpProfileId_ pPgpPayload_ pPgpId_ =
     PlacementGroupsPatch'
     { _pgpQuotaUser = Nothing
     , _pgpPrettyPrint = True
     , _pgpUserIP = Nothing
     , _pgpProfileId = pPgpProfileId_
+    , _pgpPayload = pPgpPayload_
     , _pgpKey = Nothing
     , _pgpId = pPgpId_
     , _pgpOAuthToken = Nothing
-    , _pgpPlacementGroup = pPgpPlacementGroup_
     , _pgpFields = Nothing
     }
 
@@ -141,6 +142,11 @@ pgpProfileId :: Lens' PlacementGroupsPatch' Int64
 pgpProfileId
   = lens _pgpProfileId (\ s a -> s{_pgpProfileId = a})
 
+-- | Multipart request metadata.
+pgpPayload :: Lens' PlacementGroupsPatch' PlacementGroup
+pgpPayload
+  = lens _pgpPayload (\ s a -> s{_pgpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -156,12 +162,6 @@ pgpOAuthToken :: Lens' PlacementGroupsPatch' (Maybe OAuthToken)
 pgpOAuthToken
   = lens _pgpOAuthToken
       (\ s a -> s{_pgpOAuthToken = a})
-
--- | Multipart request metadata.
-pgpPlacementGroup :: Lens' PlacementGroupsPatch' PlacementGroup
-pgpPlacementGroup
-  = lens _pgpPlacementGroup
-      (\ s a -> s{_pgpPlacementGroup = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pgpFields :: Lens' PlacementGroupsPatch' (Maybe Text)
@@ -183,7 +183,7 @@ instance GoogleRequest PlacementGroupsPatch' where
               _pgpKey
               _pgpOAuthToken
               (Just AltJSON)
-              _pgpPlacementGroup
+              _pgpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementGroupsPatchResource)

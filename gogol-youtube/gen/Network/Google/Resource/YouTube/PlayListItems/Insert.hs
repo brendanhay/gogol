@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,10 +35,10 @@ module Network.Google.Resource.YouTube.PlayListItems.Insert
     , pliiPart
     , pliiPrettyPrint
     , pliiUserIP
+    , pliiPayload
     , pliiOnBehalfOfContentOwner
     , pliiKey
     , pliiOAuthToken
-    , pliiPlayListItem
     , pliiFields
     ) where
 
@@ -48,8 +49,8 @@ import           Network.Google.YouTube.Types
 -- 'PlayListItemsInsert'' request conforms to.
 type PlayListItemsInsertResource =
      "playlistItems" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -68,12 +69,12 @@ data PlayListItemsInsert' = PlayListItemsInsert'
     , _pliiPart                   :: !Text
     , _pliiPrettyPrint            :: !Bool
     , _pliiUserIP                 :: !(Maybe Text)
+    , _pliiPayload                :: !PlayListItem
     , _pliiOnBehalfOfContentOwner :: !(Maybe Text)
     , _pliiKey                    :: !(Maybe Key)
     , _pliiOAuthToken             :: !(Maybe OAuthToken)
-    , _pliiPlayListItem           :: !PlayListItem
     , _pliiFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayListItemsInsert'' with the minimum fields required to make a request.
 --
@@ -87,29 +88,29 @@ data PlayListItemsInsert' = PlayListItemsInsert'
 --
 -- * 'pliiUserIP'
 --
+-- * 'pliiPayload'
+--
 -- * 'pliiOnBehalfOfContentOwner'
 --
 -- * 'pliiKey'
 --
 -- * 'pliiOAuthToken'
 --
--- * 'pliiPlayListItem'
---
 -- * 'pliiFields'
 playListItemsInsert'
     :: Text -- ^ 'part'
-    -> PlayListItem -- ^ 'PlayListItem'
+    -> PlayListItem -- ^ 'payload'
     -> PlayListItemsInsert'
-playListItemsInsert' pPliiPart_ pPliiPlayListItem_ =
+playListItemsInsert' pPliiPart_ pPliiPayload_ =
     PlayListItemsInsert'
     { _pliiQuotaUser = Nothing
     , _pliiPart = pPliiPart_
     , _pliiPrettyPrint = True
     , _pliiUserIP = Nothing
+    , _pliiPayload = pPliiPayload_
     , _pliiOnBehalfOfContentOwner = Nothing
     , _pliiKey = Nothing
     , _pliiOAuthToken = Nothing
-    , _pliiPlayListItem = pPliiPlayListItem_
     , _pliiFields = Nothing
     }
 
@@ -139,6 +140,11 @@ pliiUserIP :: Lens' PlayListItemsInsert' (Maybe Text)
 pliiUserIP
   = lens _pliiUserIP (\ s a -> s{_pliiUserIP = a})
 
+-- | Multipart request metadata.
+pliiPayload :: Lens' PlayListItemsInsert' PlayListItem
+pliiPayload
+  = lens _pliiPayload (\ s a -> s{_pliiPayload = a})
+
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
 -- request\'s authorization credentials identify a YouTube CMS user who is
@@ -166,12 +172,6 @@ pliiOAuthToken
   = lens _pliiOAuthToken
       (\ s a -> s{_pliiOAuthToken = a})
 
--- | Multipart request metadata.
-pliiPlayListItem :: Lens' PlayListItemsInsert' PlayListItem
-pliiPlayListItem
-  = lens _pliiPlayListItem
-      (\ s a -> s{_pliiPlayListItem = a})
-
 -- | Selector specifying which fields to include in a partial response.
 pliiFields :: Lens' PlayListItemsInsert' (Maybe Text)
 pliiFields
@@ -185,7 +185,7 @@ instance GoogleRequest PlayListItemsInsert' where
         type Rs PlayListItemsInsert' = PlayListItem
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u PlayListItemsInsert'{..}
-          = go _pliiOnBehalfOfContentOwner (Just _pliiPart)
+          = go (Just _pliiPart) _pliiOnBehalfOfContentOwner
               _pliiQuotaUser
               (Just _pliiPrettyPrint)
               _pliiUserIP
@@ -193,7 +193,7 @@ instance GoogleRequest PlayListItemsInsert' where
               _pliiKey
               _pliiOAuthToken
               (Just AltJSON)
-              _pliiPlayListItem
+              _pliiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlayListItemsInsertResource)

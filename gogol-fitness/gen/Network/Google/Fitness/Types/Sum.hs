@@ -85,51 +85,8 @@ instance FromJSON DataSourceType where
 instance ToJSON DataSourceType where
     toJSON = toJSONText
 
--- | A constant representing the type of the device.
-data DeviceType
-    = ChestStrap
-      -- ^ @chestStrap@
-    | Phone
-      -- ^ @phone@
-    | Scale
-      -- ^ @scale@
-    | Tablet
-      -- ^ @tablet@
-    | Unknown
-      -- ^ @unknown@
-    | Watch
-      -- ^ @watch@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DeviceType
-
-instance FromText DeviceType where
-    fromText = \case
-        "chestStrap" -> Just ChestStrap
-        "phone" -> Just Phone
-        "scale" -> Just Scale
-        "tablet" -> Just Tablet
-        "unknown" -> Just Unknown
-        "watch" -> Just Watch
-        _ -> Nothing
-
-instance ToText DeviceType where
-    toText = \case
-        ChestStrap -> "chestStrap"
-        Phone -> "phone"
-        Scale -> "scale"
-        Tablet -> "tablet"
-        Unknown -> "unknown"
-        Watch -> "watch"
-
-instance FromJSON DeviceType where
-    parseJSON = parseJSONText "DeviceType"
-
-instance ToJSON DeviceType where
-    toJSON = toJSONText
-
 -- | The different supported formats for each field in a data type.
-data DataTypeFieldFormat
+data Format
     = FloatList
       -- ^ @floatList@
     | FloatPoint
@@ -144,9 +101,9 @@ data DataTypeFieldFormat
       -- ^ @string@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DataTypeFieldFormat
+instance Hashable Format
 
-instance FromText DataTypeFieldFormat where
+instance FromText Format where
     fromText = \case
         "floatList" -> Just FloatList
         "floatPoint" -> Just FloatPoint
@@ -156,7 +113,7 @@ instance FromText DataTypeFieldFormat where
         "string" -> Just String
         _ -> Nothing
 
-instance ToText DataTypeFieldFormat where
+instance ToText Format where
     toText = \case
         FloatList -> "floatList"
         FloatPoint -> "floatPoint"
@@ -165,8 +122,51 @@ instance ToText DataTypeFieldFormat where
         Map -> "map"
         String -> "string"
 
-instance FromJSON DataTypeFieldFormat where
-    parseJSON = parseJSONText "DataTypeFieldFormat"
+instance FromJSON Format where
+    parseJSON = parseJSONText "Format"
 
-instance ToJSON DataTypeFieldFormat where
+instance ToJSON Format where
+    toJSON = toJSONText
+
+-- | A constant representing the type of the device.
+data Type
+    = ChestStrap
+      -- ^ @chestStrap@
+    | Phone
+      -- ^ @phone@
+    | Scale
+      -- ^ @scale@
+    | Tablet
+      -- ^ @tablet@
+    | Unknown
+      -- ^ @unknown@
+    | Watch
+      -- ^ @watch@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Type
+
+instance FromText Type where
+    fromText = \case
+        "chestStrap" -> Just ChestStrap
+        "phone" -> Just Phone
+        "scale" -> Just Scale
+        "tablet" -> Just Tablet
+        "unknown" -> Just Unknown
+        "watch" -> Just Watch
+        _ -> Nothing
+
+instance ToText Type where
+    toText = \case
+        ChestStrap -> "chestStrap"
+        Phone -> "phone"
+        Scale -> "scale"
+        Tablet -> "tablet"
+        Unknown -> "unknown"
+        Watch -> "watch"
+
+instance FromJSON Type where
+    parseJSON = parseJSONText "Type"
+
+instance ToJSON Type where
     toJSON = toJSONText

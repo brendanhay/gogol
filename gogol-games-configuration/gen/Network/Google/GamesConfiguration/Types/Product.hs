@@ -26,7 +26,7 @@ data ImageConfiguration = ImageConfiguration
     , _icKind       :: !Text
     , _icURL        :: !(Maybe Text)
     , _icImageType  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImageConfiguration' with the minimum fields required to make a request.
 --
@@ -94,7 +94,7 @@ data LeaderboardConfigurationListResponse = LeaderboardConfigurationListResponse
     { _lclrNextPageToken :: !(Maybe Text)
     , _lclrKind          :: !Text
     , _lclrItems         :: !(Maybe [LeaderboardConfiguration])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationListResponse' with the minimum fields required to make a request.
 --
@@ -162,7 +162,7 @@ data GamesNumberAffixConfiguration = GamesNumberAffixConfiguration
     , _gnacOne   :: !(Maybe LocalizedStringBundle)
     , _gnacZero  :: !(Maybe LocalizedStringBundle)
     , _gnacMany  :: !(Maybe LocalizedStringBundle)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesNumberAffixConfiguration' with the minimum fields required to make a request.
 --
@@ -250,7 +250,7 @@ data AchievementConfigurationListResponse = AchievementConfigurationListResponse
     { _aclrNextPageToken :: !(Maybe Text)
     , _aclrKind          :: !Text
     , _aclrItems         :: !(Maybe [AchievementConfiguration])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationListResponse' with the minimum fields required to make a request.
 --
@@ -320,7 +320,7 @@ data LeaderboardConfiguration = LeaderboardConfiguration
     , _lcDraft      :: !(Maybe LeaderboardConfigurationDetail)
     , _lcId         :: !(Maybe Text)
     , _lcScoreOrder :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfiguration' with the minimum fields required to make a request.
 --
@@ -433,7 +433,7 @@ data AchievementConfiguration = AchievementConfiguration
     , _acInitialState    :: !(Maybe Text)
     , _acDraft           :: !(Maybe AchievementConfigurationDetail)
     , _acId              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfiguration' with the minimum fields required to make a request.
 --
@@ -546,7 +546,7 @@ data LocalizedString = LocalizedString
     { _lsKind   :: !Text
     , _lsLocale :: !(Maybe Text)
     , _lsValue  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocalizedString' with the minimum fields required to make a request.
 --
@@ -605,7 +605,7 @@ data GamesNumberFormatConfiguration = GamesNumberFormatConfiguration
     , _gnfcCurrencyCode     :: !(Maybe Text)
     , _gnfcNumberFormatType :: !(Maybe Text)
     , _gnfcNumDecimalPlaces :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesNumberFormatConfiguration' with the minimum fields required to make a request.
 --
@@ -686,7 +686,7 @@ data LeaderboardConfigurationDetail = LeaderboardConfigurationDetail
     , _lcdSortRank    :: !(Maybe Int32)
     , _lcdName        :: !(Maybe LocalizedStringBundle)
     , _lcdIconURL     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationDetail' with the minimum fields required to make a request.
 --
@@ -766,7 +766,7 @@ instance ToJSON LeaderboardConfigurationDetail where
 data LocalizedStringBundle = LocalizedStringBundle
     { _lsbKind         :: !Text
     , _lsbTranslations :: !(Maybe [LocalizedString])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocalizedStringBundle' with the minimum fields required to make a request.
 --
@@ -822,7 +822,7 @@ data AchievementConfigurationDetail = AchievementConfigurationDetail
     , _acdPointValue  :: !(Maybe Int32)
     , _acdIconURL     :: !(Maybe Text)
     , _acdDescription :: !(Maybe LocalizedStringBundle)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationDetail' with the minimum fields required to make a request.
 --

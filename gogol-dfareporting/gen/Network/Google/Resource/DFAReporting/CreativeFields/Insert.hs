@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.DFAReporting.CreativeFields.Insert
     , cfiPrettyPrint
     , cfiUserIP
     , cfiProfileId
+    , cfiPayload
     , cfiKey
     , cfiOAuthToken
-    , cfiCreativeField
     , cfiFields
     ) where
 
@@ -63,15 +64,15 @@ type CreativeFieldsInsertResource =
 --
 -- /See:/ 'creativeFieldsInsert'' smart constructor.
 data CreativeFieldsInsert' = CreativeFieldsInsert'
-    { _cfiQuotaUser     :: !(Maybe Text)
-    , _cfiPrettyPrint   :: !Bool
-    , _cfiUserIP        :: !(Maybe Text)
-    , _cfiProfileId     :: !Int64
-    , _cfiKey           :: !(Maybe Key)
-    , _cfiOAuthToken    :: !(Maybe OAuthToken)
-    , _cfiCreativeField :: !CreativeField
-    , _cfiFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cfiQuotaUser   :: !(Maybe Text)
+    , _cfiPrettyPrint :: !Bool
+    , _cfiUserIP      :: !(Maybe Text)
+    , _cfiProfileId   :: !Int64
+    , _cfiPayload     :: !CreativeField
+    , _cfiKey         :: !(Maybe Key)
+    , _cfiOAuthToken  :: !(Maybe OAuthToken)
+    , _cfiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsInsert'' with the minimum fields required to make a request.
 --
@@ -85,26 +86,26 @@ data CreativeFieldsInsert' = CreativeFieldsInsert'
 --
 -- * 'cfiProfileId'
 --
+-- * 'cfiPayload'
+--
 -- * 'cfiKey'
 --
 -- * 'cfiOAuthToken'
 --
--- * 'cfiCreativeField'
---
 -- * 'cfiFields'
 creativeFieldsInsert'
     :: Int64 -- ^ 'profileId'
-    -> CreativeField -- ^ 'CreativeField'
+    -> CreativeField -- ^ 'payload'
     -> CreativeFieldsInsert'
-creativeFieldsInsert' pCfiProfileId_ pCfiCreativeField_ =
+creativeFieldsInsert' pCfiProfileId_ pCfiPayload_ =
     CreativeFieldsInsert'
     { _cfiQuotaUser = Nothing
     , _cfiPrettyPrint = True
     , _cfiUserIP = Nothing
     , _cfiProfileId = pCfiProfileId_
+    , _cfiPayload = pCfiPayload_
     , _cfiKey = Nothing
     , _cfiOAuthToken = Nothing
-    , _cfiCreativeField = pCfiCreativeField_
     , _cfiFields = Nothing
     }
 
@@ -132,6 +133,11 @@ cfiProfileId :: Lens' CreativeFieldsInsert' Int64
 cfiProfileId
   = lens _cfiProfileId (\ s a -> s{_cfiProfileId = a})
 
+-- | Multipart request metadata.
+cfiPayload :: Lens' CreativeFieldsInsert' CreativeField
+cfiPayload
+  = lens _cfiPayload (\ s a -> s{_cfiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -143,12 +149,6 @@ cfiOAuthToken :: Lens' CreativeFieldsInsert' (Maybe OAuthToken)
 cfiOAuthToken
   = lens _cfiOAuthToken
       (\ s a -> s{_cfiOAuthToken = a})
-
--- | Multipart request metadata.
-cfiCreativeField :: Lens' CreativeFieldsInsert' CreativeField
-cfiCreativeField
-  = lens _cfiCreativeField
-      (\ s a -> s{_cfiCreativeField = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cfiFields :: Lens' CreativeFieldsInsert' (Maybe Text)
@@ -170,7 +170,7 @@ instance GoogleRequest CreativeFieldsInsert' where
               _cfiKey
               _cfiOAuthToken
               (Just AltJSON)
-              _cfiCreativeField
+              _cfiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeFieldsInsertResource)

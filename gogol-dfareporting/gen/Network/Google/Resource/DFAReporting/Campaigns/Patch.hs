@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.DFAReporting.Campaigns.Patch
     , cpPrettyPrint
     , cpUserIP
     , cpProfileId
-    , cpCampaign
+    , cpPayload
     , cpKey
     , cpId
     , cpOAuthToken
@@ -68,12 +69,12 @@ data CampaignsPatch' = CampaignsPatch'
     , _cpPrettyPrint :: !Bool
     , _cpUserIP      :: !(Maybe Text)
     , _cpProfileId   :: !Int64
-    , _cpCampaign    :: !Campaign
+    , _cpPayload     :: !Campaign
     , _cpKey         :: !(Maybe Key)
     , _cpId          :: !Int64
     , _cpOAuthToken  :: !(Maybe OAuthToken)
     , _cpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsPatch'' with the minimum fields required to make a request.
 --
@@ -87,7 +88,7 @@ data CampaignsPatch' = CampaignsPatch'
 --
 -- * 'cpProfileId'
 --
--- * 'cpCampaign'
+-- * 'cpPayload'
 --
 -- * 'cpKey'
 --
@@ -98,16 +99,16 @@ data CampaignsPatch' = CampaignsPatch'
 -- * 'cpFields'
 campaignsPatch'
     :: Int64 -- ^ 'profileId'
-    -> Campaign -- ^ 'Campaign'
+    -> Campaign -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> CampaignsPatch'
-campaignsPatch' pCpProfileId_ pCpCampaign_ pCpId_ =
+campaignsPatch' pCpProfileId_ pCpPayload_ pCpId_ =
     CampaignsPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
     , _cpUserIP = Nothing
     , _cpProfileId = pCpProfileId_
-    , _cpCampaign = pCpCampaign_
+    , _cpPayload = pCpPayload_
     , _cpKey = Nothing
     , _cpId = pCpId_
     , _cpOAuthToken = Nothing
@@ -138,9 +139,9 @@ cpProfileId
   = lens _cpProfileId (\ s a -> s{_cpProfileId = a})
 
 -- | Multipart request metadata.
-cpCampaign :: Lens' CampaignsPatch' Campaign
-cpCampaign
-  = lens _cpCampaign (\ s a -> s{_cpCampaign = a})
+cpPayload :: Lens' CampaignsPatch' Campaign
+cpPayload
+  = lens _cpPayload (\ s a -> s{_cpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -176,7 +177,7 @@ instance GoogleRequest CampaignsPatch' where
               _cpKey
               _cpOAuthToken
               (Just AltJSON)
-              _cpCampaign
+              _cpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CampaignsPatchResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.Spectrum.Paws.NotifySpectrumUse
 
     -- * Request Lenses
     , pnsuQuotaUser
-    , pnsuPawsNotifySpectrumUseRequest
     , pnsuPrettyPrint
     , pnsuUserIP
+    , pnsuPayload
     , pnsuKey
     , pnsuOAuthToken
     , pnsuFields
@@ -66,14 +67,14 @@ type PawsNotifySpectrumUseResource =
 --
 -- /See:/ 'pawsNotifySpectrumUse'' smart constructor.
 data PawsNotifySpectrumUse' = PawsNotifySpectrumUse'
-    { _pnsuQuotaUser                    :: !(Maybe Text)
-    , _pnsuPawsNotifySpectrumUseRequest :: !PawsNotifySpectrumUseRequest
-    , _pnsuPrettyPrint                  :: !Bool
-    , _pnsuUserIP                       :: !(Maybe Text)
-    , _pnsuKey                          :: !(Maybe Key)
-    , _pnsuOAuthToken                   :: !(Maybe OAuthToken)
-    , _pnsuFields                       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _pnsuQuotaUser   :: !(Maybe Text)
+    , _pnsuPrettyPrint :: !Bool
+    , _pnsuUserIP      :: !(Maybe Text)
+    , _pnsuPayload     :: !PawsNotifySpectrumUseRequest
+    , _pnsuKey         :: !(Maybe Key)
+    , _pnsuOAuthToken  :: !(Maybe OAuthToken)
+    , _pnsuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsNotifySpectrumUse'' with the minimum fields required to make a request.
 --
@@ -81,11 +82,11 @@ data PawsNotifySpectrumUse' = PawsNotifySpectrumUse'
 --
 -- * 'pnsuQuotaUser'
 --
--- * 'pnsuPawsNotifySpectrumUseRequest'
---
 -- * 'pnsuPrettyPrint'
 --
 -- * 'pnsuUserIP'
+--
+-- * 'pnsuPayload'
 --
 -- * 'pnsuKey'
 --
@@ -93,14 +94,14 @@ data PawsNotifySpectrumUse' = PawsNotifySpectrumUse'
 --
 -- * 'pnsuFields'
 pawsNotifySpectrumUse'
-    :: PawsNotifySpectrumUseRequest -- ^ 'PawsNotifySpectrumUseRequest'
+    :: PawsNotifySpectrumUseRequest -- ^ 'payload'
     -> PawsNotifySpectrumUse'
-pawsNotifySpectrumUse' pPnsuPawsNotifySpectrumUseRequest_ =
+pawsNotifySpectrumUse' pPnsuPayload_ =
     PawsNotifySpectrumUse'
     { _pnsuQuotaUser = Nothing
-    , _pnsuPawsNotifySpectrumUseRequest = pPnsuPawsNotifySpectrumUseRequest_
     , _pnsuPrettyPrint = True
     , _pnsuUserIP = Nothing
+    , _pnsuPayload = pPnsuPayload_
     , _pnsuKey = Nothing
     , _pnsuOAuthToken = Nothing
     , _pnsuFields = Nothing
@@ -114,12 +115,6 @@ pnsuQuotaUser
   = lens _pnsuQuotaUser
       (\ s a -> s{_pnsuQuotaUser = a})
 
--- | Multipart request metadata.
-pnsuPawsNotifySpectrumUseRequest :: Lens' PawsNotifySpectrumUse' PawsNotifySpectrumUseRequest
-pnsuPawsNotifySpectrumUseRequest
-  = lens _pnsuPawsNotifySpectrumUseRequest
-      (\ s a -> s{_pnsuPawsNotifySpectrumUseRequest = a})
-
 -- | Returns response with indentations and line breaks.
 pnsuPrettyPrint :: Lens' PawsNotifySpectrumUse' Bool
 pnsuPrettyPrint
@@ -131,6 +126,11 @@ pnsuPrettyPrint
 pnsuUserIP :: Lens' PawsNotifySpectrumUse' (Maybe Text)
 pnsuUserIP
   = lens _pnsuUserIP (\ s a -> s{_pnsuUserIP = a})
+
+-- | Multipart request metadata.
+pnsuPayload :: Lens' PawsNotifySpectrumUse' PawsNotifySpectrumUseRequest
+pnsuPayload
+  = lens _pnsuPayload (\ s a -> s{_pnsuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -164,7 +164,7 @@ instance GoogleRequest PawsNotifySpectrumUse' where
               _pnsuKey
               _pnsuOAuthToken
               (Just AltJSON)
-              _pnsuPawsNotifySpectrumUseRequest
+              _pnsuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PawsNotifySpectrumUseResource)

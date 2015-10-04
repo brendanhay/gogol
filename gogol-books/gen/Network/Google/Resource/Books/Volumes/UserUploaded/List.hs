@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,14 +53,12 @@ import           Network.Google.Prelude
 type VolumesUserUploadedListResource =
      "volumes" :>
        "useruploaded" :>
-         QueryParam "locale" Text :>
-           QueryParam "maxResults" Word32 :>
-             QueryParams "processingState"
-               BooksVolumesUserUploadedListProcessingState
-               :>
+         QueryParams "processingState" ProcessingState :>
+           QueryParam "locale" Text :>
+             QueryParams "volumeId" Text :>
                QueryParam "source" Text :>
                  QueryParam "startIndex" Word32 :>
-                   QueryParams "volumeId" Text :>
+                   QueryParam "maxResults" Word32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -72,19 +71,19 @@ type VolumesUserUploadedListResource =
 --
 -- /See:/ 'volumesUserUploadedList'' smart constructor.
 data VolumesUserUploadedList' = VolumesUserUploadedList'
-    { _vuulProcessingState :: !(Maybe BooksVolumesUserUploadedListProcessingState)
+    { _vuulProcessingState :: !(Maybe ProcessingState)
     , _vuulQuotaUser       :: !(Maybe Text)
     , _vuulPrettyPrint     :: !Bool
     , _vuulUserIP          :: !(Maybe Text)
     , _vuulLocale          :: !(Maybe Text)
     , _vuulKey             :: !(Maybe Key)
-    , _vuulVolumeId        :: !(Maybe Text)
+    , _vuulVolumeId        :: !(Maybe [Text])
     , _vuulSource          :: !(Maybe Text)
     , _vuulOAuthToken      :: !(Maybe OAuthToken)
     , _vuulStartIndex      :: !(Maybe Word32)
     , _vuulMaxResults      :: !(Maybe Word32)
     , _vuulFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesUserUploadedList'' with the minimum fields required to make a request.
 --
@@ -132,7 +131,7 @@ volumesUserUploadedList' =
     }
 
 -- | The processing state of the user uploaded volumes to be returned.
-vuulProcessingState :: Lens' VolumesUserUploadedList' (Maybe BooksVolumesUserUploadedListProcessingState)
+vuulProcessingState :: Lens' VolumesUserUploadedList' (Maybe ProcessingState)
 vuulProcessingState
   = lens _vuulProcessingState
       (\ s a -> s{_vuulProcessingState = a})
@@ -171,9 +170,11 @@ vuulKey = lens _vuulKey (\ s a -> s{_vuulKey = a})
 
 -- | The ids of the volumes to be returned. If not specified all that match
 -- the processingState are returned.
-vuulVolumeId :: Lens' VolumesUserUploadedList' (Maybe Text)
+vuulVolumeId :: Lens' VolumesUserUploadedList' [Text]
 vuulVolumeId
   = lens _vuulVolumeId (\ s a -> s{_vuulVolumeId = a})
+      . _Default
+      . _Coerce
 
 -- | String to identify the originator of this request.
 vuulSource :: Lens' VolumesUserUploadedList' (Maybe Text)
@@ -211,10 +212,11 @@ instance GoogleRequest VolumesUserUploadedList' where
         type Rs VolumesUserUploadedList' = Volumes
         request = requestWithRoute defReq booksURL
         requestWithRoute r u VolumesUserUploadedList'{..}
-          = go _vuulLocale _vuulMaxResults _vuulProcessingState
+          = go (_vuulProcessingState ^. _Default) _vuulLocale
+              (_vuulVolumeId ^. _Default)
               _vuulSource
               _vuulStartIndex
-              _vuulVolumeId
+              _vuulMaxResults
               _vuulQuotaUser
               (Just _vuulPrettyPrint)
               _vuulUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.GamesManagement.Achievements.ResetMultipleForAllP
     , armfapQuotaUser
     , armfapPrettyPrint
     , armfapUserIP
-    , armfapAchievementResetMultipleForAllRequest
+    , armfapPayload
     , armfapKey
     , armfapOAuthToken
     , armfapFields
@@ -65,14 +66,14 @@ type AchievementsResetMultipleForAllPlayersResource =
 --
 -- /See:/ 'achievementsResetMultipleForAllPlayers'' smart constructor.
 data AchievementsResetMultipleForAllPlayers' = AchievementsResetMultipleForAllPlayers'
-    { _armfapQuotaUser                             :: !(Maybe Text)
-    , _armfapPrettyPrint                           :: !Bool
-    , _armfapUserIP                                :: !(Maybe Text)
-    , _armfapAchievementResetMultipleForAllRequest :: !AchievementResetMultipleForAllRequest
-    , _armfapKey                                   :: !(Maybe Key)
-    , _armfapOAuthToken                            :: !(Maybe OAuthToken)
-    , _armfapFields                                :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _armfapQuotaUser   :: !(Maybe Text)
+    , _armfapPrettyPrint :: !Bool
+    , _armfapUserIP      :: !(Maybe Text)
+    , _armfapPayload     :: !AchievementResetMultipleForAllRequest
+    , _armfapKey         :: !(Maybe Key)
+    , _armfapOAuthToken  :: !(Maybe OAuthToken)
+    , _armfapFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsResetMultipleForAllPlayers'' with the minimum fields required to make a request.
 --
@@ -84,7 +85,7 @@ data AchievementsResetMultipleForAllPlayers' = AchievementsResetMultipleForAllPl
 --
 -- * 'armfapUserIP'
 --
--- * 'armfapAchievementResetMultipleForAllRequest'
+-- * 'armfapPayload'
 --
 -- * 'armfapKey'
 --
@@ -92,14 +93,14 @@ data AchievementsResetMultipleForAllPlayers' = AchievementsResetMultipleForAllPl
 --
 -- * 'armfapFields'
 achievementsResetMultipleForAllPlayers'
-    :: AchievementResetMultipleForAllRequest -- ^ 'AchievementResetMultipleForAllRequest'
+    :: AchievementResetMultipleForAllRequest -- ^ 'payload'
     -> AchievementsResetMultipleForAllPlayers'
-achievementsResetMultipleForAllPlayers' pArmfapAchievementResetMultipleForAllRequest_ =
+achievementsResetMultipleForAllPlayers' pArmfapPayload_ =
     AchievementsResetMultipleForAllPlayers'
     { _armfapQuotaUser = Nothing
     , _armfapPrettyPrint = True
     , _armfapUserIP = Nothing
-    , _armfapAchievementResetMultipleForAllRequest = pArmfapAchievementResetMultipleForAllRequest_
+    , _armfapPayload = pArmfapPayload_
     , _armfapKey = Nothing
     , _armfapOAuthToken = Nothing
     , _armfapFields = Nothing
@@ -126,11 +127,10 @@ armfapUserIP
   = lens _armfapUserIP (\ s a -> s{_armfapUserIP = a})
 
 -- | Multipart request metadata.
-armfapAchievementResetMultipleForAllRequest :: Lens' AchievementsResetMultipleForAllPlayers' AchievementResetMultipleForAllRequest
-armfapAchievementResetMultipleForAllRequest
-  = lens _armfapAchievementResetMultipleForAllRequest
-      (\ s a ->
-         s{_armfapAchievementResetMultipleForAllRequest = a})
+armfapPayload :: Lens' AchievementsResetMultipleForAllPlayers' AchievementResetMultipleForAllRequest
+armfapPayload
+  = lens _armfapPayload
+      (\ s a -> s{_armfapPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -167,7 +167,7 @@ instance GoogleRequest
               _armfapKey
               _armfapOAuthToken
               (Just AltJSON)
-              _armfapAchievementResetMultipleForAllRequest
+              _armfapPayload
           where go
                   = clientWithRoute
                       (Proxy ::

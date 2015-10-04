@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,10 +55,10 @@ type ResourceRecordSetsListResource =
        "managedZones" :>
          Capture "managedZone" Text :>
            "rrsets" :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "name" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "type" Text :>
+             QueryParam "name" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "type" Text :>
+                   QueryParam "maxResults" Int32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -83,7 +84,7 @@ data ResourceRecordSetsList' = ResourceRecordSetsList'
     , _rrslManagedZone :: !Text
     , _rrslMaxResults  :: !(Maybe Int32)
     , _rrslFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResourceRecordSetsList'' with the minimum fields required to make a request.
 --
@@ -214,10 +215,10 @@ instance GoogleRequest ResourceRecordSetsList' where
              ResourceRecordSetsListResponse
         request = requestWithRoute defReq dNSURL
         requestWithRoute r u ResourceRecordSetsList'{..}
-          = go _rrslMaxResults _rrslName _rrslPageToken
+          = go _rrslProject _rrslManagedZone _rrslName
+              _rrslPageToken
               _rrslType
-              _rrslProject
-              _rrslManagedZone
+              _rrslMaxResults
               _rrslQuotaUser
               (Just _rrslPrettyPrint)
               _rrslUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.Reseller.Subscriptions.ChangePlan
     , scpQuotaUser
     , scpPrettyPrint
     , scpUserIP
+    , scpPayload
     , scpCustomerId
-    , scpChangePlanRequest
     , scpKey
     , scpOAuthToken
     , scpSubscriptionId
@@ -66,16 +67,16 @@ type SubscriptionsChangePlanResource =
 --
 -- /See:/ 'subscriptionsChangePlan'' smart constructor.
 data SubscriptionsChangePlan' = SubscriptionsChangePlan'
-    { _scpQuotaUser         :: !(Maybe Text)
-    , _scpPrettyPrint       :: !Bool
-    , _scpUserIP            :: !(Maybe Text)
-    , _scpCustomerId        :: !Text
-    , _scpChangePlanRequest :: !ChangePlanRequest
-    , _scpKey               :: !(Maybe Key)
-    , _scpOAuthToken        :: !(Maybe OAuthToken)
-    , _scpSubscriptionId    :: !Text
-    , _scpFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _scpQuotaUser      :: !(Maybe Text)
+    , _scpPrettyPrint    :: !Bool
+    , _scpUserIP         :: !(Maybe Text)
+    , _scpPayload        :: !ChangePlanRequest
+    , _scpCustomerId     :: !Text
+    , _scpKey            :: !(Maybe Key)
+    , _scpOAuthToken     :: !(Maybe OAuthToken)
+    , _scpSubscriptionId :: !Text
+    , _scpFields         :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsChangePlan'' with the minimum fields required to make a request.
 --
@@ -87,9 +88,9 @@ data SubscriptionsChangePlan' = SubscriptionsChangePlan'
 --
 -- * 'scpUserIP'
 --
--- * 'scpCustomerId'
+-- * 'scpPayload'
 --
--- * 'scpChangePlanRequest'
+-- * 'scpCustomerId'
 --
 -- * 'scpKey'
 --
@@ -99,17 +100,17 @@ data SubscriptionsChangePlan' = SubscriptionsChangePlan'
 --
 -- * 'scpFields'
 subscriptionsChangePlan'
-    :: Text -- ^ 'customerId'
-    -> ChangePlanRequest -- ^ 'ChangePlanRequest'
+    :: ChangePlanRequest -- ^ 'payload'
+    -> Text -- ^ 'customerId'
     -> Text -- ^ 'subscriptionId'
     -> SubscriptionsChangePlan'
-subscriptionsChangePlan' pScpCustomerId_ pScpChangePlanRequest_ pScpSubscriptionId_ =
+subscriptionsChangePlan' pScpPayload_ pScpCustomerId_ pScpSubscriptionId_ =
     SubscriptionsChangePlan'
     { _scpQuotaUser = Nothing
     , _scpPrettyPrint = True
     , _scpUserIP = Nothing
+    , _scpPayload = pScpPayload_
     , _scpCustomerId = pScpCustomerId_
-    , _scpChangePlanRequest = pScpChangePlanRequest_
     , _scpKey = Nothing
     , _scpOAuthToken = Nothing
     , _scpSubscriptionId = pScpSubscriptionId_
@@ -135,17 +136,16 @@ scpUserIP :: Lens' SubscriptionsChangePlan' (Maybe Text)
 scpUserIP
   = lens _scpUserIP (\ s a -> s{_scpUserIP = a})
 
+-- | Multipart request metadata.
+scpPayload :: Lens' SubscriptionsChangePlan' ChangePlanRequest
+scpPayload
+  = lens _scpPayload (\ s a -> s{_scpPayload = a})
+
 -- | Id of the Customer
 scpCustomerId :: Lens' SubscriptionsChangePlan' Text
 scpCustomerId
   = lens _scpCustomerId
       (\ s a -> s{_scpCustomerId = a})
-
--- | Multipart request metadata.
-scpChangePlanRequest :: Lens' SubscriptionsChangePlan' ChangePlanRequest
-scpChangePlanRequest
-  = lens _scpChangePlanRequest
-      (\ s a -> s{_scpChangePlanRequest = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -185,7 +185,7 @@ instance GoogleRequest SubscriptionsChangePlan' where
               _scpKey
               _scpOAuthToken
               (Just AltJSON)
-              _scpChangePlanRequest
+              _scpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SubscriptionsChangePlanResource)

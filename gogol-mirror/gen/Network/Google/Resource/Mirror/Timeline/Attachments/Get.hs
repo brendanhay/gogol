@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -68,7 +69,7 @@ type TimelineAttachmentsGetResource =
                      QueryParam "fields" Text :>
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "alt" Media :> Get '[OctetStream] Stream
+                           QueryParam "alt" AltMedia :> Get '[OctetStream] Body
 
 -- | Retrieves an attachment on a timeline item by item ID and attachment ID.
 --
@@ -82,7 +83,7 @@ data TimelineAttachmentsGet' = TimelineAttachmentsGet'
     , _tagKey          :: !(Maybe Key)
     , _tagOAuthToken   :: !(Maybe OAuthToken)
     , _tagFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineAttachmentsGet'' with the minimum fields required to make a request.
 --
@@ -187,18 +188,20 @@ instance GoogleRequest TimelineAttachmentsGet' where
                       r
                       u
 
-instance GoogleRequest TimelineAttachmentsGet' where
-        type Rs (Download TimelineAttachmentsGet') = Stream
+instance GoogleRequest
+         (Download TimelineAttachmentsGet') where
+        type Rs (Download TimelineAttachmentsGet') = Body
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelineAttachmentsGet'{..}
+        requestWithRoute r u
+          (Download TimelineAttachmentsGet'{..})
           = go _tagItemId _tagAttachmentId _tagQuotaUser
               (Just _tagPrettyPrint)
               _tagUserIP
               _tagFields
               _tagKey
               _tagOAuthToken
-              (Just Media)
-          where go :<|> _
+              (Just AltMedia)
+          where _ :<|> go
                   = clientWithRoute
                       (Proxy :: Proxy TimelineAttachmentsGetResource)
                       r

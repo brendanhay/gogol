@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,9 +51,9 @@ import           Network.Google.Prelude
 type ManagedZonesListResource =
      Capture "project" Text :>
        "managedZones" :>
-         QueryParam "dnsName" Text :>
-           QueryParam "maxResults" Int32 :>
-             QueryParam "pageToken" Text :>
+         QueryParam "pageToken" Text :>
+           QueryParam "dnsName" Text :>
+             QueryParam "maxResults" Int32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -76,7 +77,7 @@ data ManagedZonesList' = ManagedZonesList'
     , _mzlDNSName     :: !(Maybe Text)
     , _mzlMaxResults  :: !(Maybe Int32)
     , _mzlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagedZonesList'' with the minimum fields required to make a request.
 --
@@ -185,8 +186,8 @@ instance GoogleRequest ManagedZonesList' where
         type Rs ManagedZonesList' = ManagedZonesListResponse
         request = requestWithRoute defReq dNSURL
         requestWithRoute r u ManagedZonesList'{..}
-          = go _mzlDNSName _mzlMaxResults _mzlPageToken
-              _mzlProject
+          = go _mzlProject _mzlPageToken _mzlDNSName
+              _mzlMaxResults
               _mzlQuotaUser
               (Just _mzlPrettyPrint)
               _mzlUserIP

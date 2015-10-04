@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -31,10 +32,10 @@ module Network.Google.Resource.Directory.Groups.Patch
 
     -- * Request Lenses
     , gpQuotaUser
-    , gpGroup
     , gpPrettyPrint
     , gpUserIP
     , gpGroupKey
+    , gpPayload
     , gpKey
     , gpOAuthToken
     , gpFields
@@ -62,14 +63,14 @@ type GroupsPatchResource =
 -- /See:/ 'groupsPatch'' smart constructor.
 data GroupsPatch' = GroupsPatch'
     { _gpQuotaUser   :: !(Maybe Text)
-    , _gpGroup       :: !Group
     , _gpPrettyPrint :: !Bool
     , _gpUserIP      :: !(Maybe Text)
     , _gpGroupKey    :: !Text
+    , _gpPayload     :: !Group
     , _gpKey         :: !(Maybe Key)
     , _gpOAuthToken  :: !(Maybe OAuthToken)
     , _gpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsPatch'' with the minimum fields required to make a request.
 --
@@ -77,13 +78,13 @@ data GroupsPatch' = GroupsPatch'
 --
 -- * 'gpQuotaUser'
 --
--- * 'gpGroup'
---
 -- * 'gpPrettyPrint'
 --
 -- * 'gpUserIP'
 --
 -- * 'gpGroupKey'
+--
+-- * 'gpPayload'
 --
 -- * 'gpKey'
 --
@@ -91,16 +92,16 @@ data GroupsPatch' = GroupsPatch'
 --
 -- * 'gpFields'
 groupsPatch'
-    :: Group -- ^ 'Group'
-    -> Text -- ^ 'groupKey'
+    :: Text -- ^ 'groupKey'
+    -> Group -- ^ 'payload'
     -> GroupsPatch'
-groupsPatch' pGpGroup_ pGpGroupKey_ =
+groupsPatch' pGpGroupKey_ pGpPayload_ =
     GroupsPatch'
     { _gpQuotaUser = Nothing
-    , _gpGroup = pGpGroup_
     , _gpPrettyPrint = True
     , _gpUserIP = Nothing
     , _gpGroupKey = pGpGroupKey_
+    , _gpPayload = pGpPayload_
     , _gpKey = Nothing
     , _gpOAuthToken = Nothing
     , _gpFields = Nothing
@@ -112,10 +113,6 @@ groupsPatch' pGpGroup_ pGpGroupKey_ =
 gpQuotaUser :: Lens' GroupsPatch' (Maybe Text)
 gpQuotaUser
   = lens _gpQuotaUser (\ s a -> s{_gpQuotaUser = a})
-
--- | Multipart request metadata.
-gpGroup :: Lens' GroupsPatch' Group
-gpGroup = lens _gpGroup (\ s a -> s{_gpGroup = a})
 
 -- | Returns response with indentations and line breaks.
 gpPrettyPrint :: Lens' GroupsPatch' Bool
@@ -133,6 +130,11 @@ gpUserIP = lens _gpUserIP (\ s a -> s{_gpUserIP = a})
 gpGroupKey :: Lens' GroupsPatch' Text
 gpGroupKey
   = lens _gpGroupKey (\ s a -> s{_gpGroupKey = a})
+
+-- | Multipart request metadata.
+gpPayload :: Lens' GroupsPatch' Group
+gpPayload
+  = lens _gpPayload (\ s a -> s{_gpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -163,7 +165,7 @@ instance GoogleRequest GroupsPatch' where
               _gpKey
               _gpOAuthToken
               (Just AltJSON)
-              _gpGroup
+              _gpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GroupsPatchResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,10 +33,10 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Macros.Update
     -- * Request Lenses
     , acmuQuotaUser
     , acmuPrettyPrint
-    , acmuMacro
     , acmuContainerId
     , acmuUserIP
     , acmuFingerprint
+    , acmuPayload
     , acmuAccountId
     , acmuKey
     , acmuMacroId
@@ -71,16 +72,16 @@ type AccountsContainersMacrosUpdateResource =
 data AccountsContainersMacrosUpdate' = AccountsContainersMacrosUpdate'
     { _acmuQuotaUser   :: !(Maybe Text)
     , _acmuPrettyPrint :: !Bool
-    , _acmuMacro       :: !Macro
     , _acmuContainerId :: !Text
     , _acmuUserIP      :: !(Maybe Text)
     , _acmuFingerprint :: !(Maybe Text)
+    , _acmuPayload     :: !Macro
     , _acmuAccountId   :: !Text
     , _acmuKey         :: !(Maybe Key)
     , _acmuMacroId     :: !Text
     , _acmuOAuthToken  :: !(Maybe OAuthToken)
     , _acmuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersMacrosUpdate'' with the minimum fields required to make a request.
 --
@@ -90,13 +91,13 @@ data AccountsContainersMacrosUpdate' = AccountsContainersMacrosUpdate'
 --
 -- * 'acmuPrettyPrint'
 --
--- * 'acmuMacro'
---
 -- * 'acmuContainerId'
 --
 -- * 'acmuUserIP'
 --
 -- * 'acmuFingerprint'
+--
+-- * 'acmuPayload'
 --
 -- * 'acmuAccountId'
 --
@@ -108,19 +109,19 @@ data AccountsContainersMacrosUpdate' = AccountsContainersMacrosUpdate'
 --
 -- * 'acmuFields'
 accountsContainersMacrosUpdate'
-    :: Macro -- ^ 'Macro'
-    -> Text -- ^ 'containerId'
+    :: Text -- ^ 'containerId'
+    -> Macro -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'macroId'
     -> AccountsContainersMacrosUpdate'
-accountsContainersMacrosUpdate' pAcmuMacro_ pAcmuContainerId_ pAcmuAccountId_ pAcmuMacroId_ =
+accountsContainersMacrosUpdate' pAcmuContainerId_ pAcmuPayload_ pAcmuAccountId_ pAcmuMacroId_ =
     AccountsContainersMacrosUpdate'
     { _acmuQuotaUser = Nothing
     , _acmuPrettyPrint = True
-    , _acmuMacro = pAcmuMacro_
     , _acmuContainerId = pAcmuContainerId_
     , _acmuUserIP = Nothing
     , _acmuFingerprint = Nothing
+    , _acmuPayload = pAcmuPayload_
     , _acmuAccountId = pAcmuAccountId_
     , _acmuKey = Nothing
     , _acmuMacroId = pAcmuMacroId_
@@ -142,11 +143,6 @@ acmuPrettyPrint
   = lens _acmuPrettyPrint
       (\ s a -> s{_acmuPrettyPrint = a})
 
--- | Multipart request metadata.
-acmuMacro :: Lens' AccountsContainersMacrosUpdate' Macro
-acmuMacro
-  = lens _acmuMacro (\ s a -> s{_acmuMacro = a})
-
 -- | The GTM Container ID.
 acmuContainerId :: Lens' AccountsContainersMacrosUpdate' Text
 acmuContainerId
@@ -165,6 +161,11 @@ acmuFingerprint :: Lens' AccountsContainersMacrosUpdate' (Maybe Text)
 acmuFingerprint
   = lens _acmuFingerprint
       (\ s a -> s{_acmuFingerprint = a})
+
+-- | Multipart request metadata.
+acmuPayload :: Lens' AccountsContainersMacrosUpdate' Macro
+acmuPayload
+  = lens _acmuPayload (\ s a -> s{_acmuPayload = a})
 
 -- | The GTM Account ID.
 acmuAccountId :: Lens' AccountsContainersMacrosUpdate' Text
@@ -205,8 +206,8 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersMacrosUpdate'{..}
-          = go _acmuFingerprint _acmuAccountId _acmuContainerId
-              _acmuMacroId
+          = go _acmuAccountId _acmuContainerId _acmuMacroId
+              _acmuFingerprint
               _acmuQuotaUser
               (Just _acmuPrettyPrint)
               _acmuUserIP
@@ -214,7 +215,7 @@ instance GoogleRequest
               _acmuKey
               _acmuOAuthToken
               (Just AltJSON)
-              _acmuMacro
+              _acmuPayload
           where go
                   = clientWithRoute
                       (Proxy ::

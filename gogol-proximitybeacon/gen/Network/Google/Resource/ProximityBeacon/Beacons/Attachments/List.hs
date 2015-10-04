@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,16 +59,16 @@ import           Network.Google.ProximityBeacon.Types
 -- 'BeaconsAttachmentsList'' request conforms to.
 type BeaconsAttachmentsListResource =
      "v1beta1" :>
-       "{+beaconName}" :>
+       Capture "beaconName" Text :>
          "attachments" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "namespacedType" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "namespacedType" Text :>
+                         QueryParam "callback" Text :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "fields" Text :>
@@ -99,7 +100,7 @@ data BeaconsAttachmentsList' = BeaconsAttachmentsList'
     , _balOAuthToken     :: !(Maybe OAuthToken)
     , _balFields         :: !(Maybe Text)
     , _balCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsAttachmentsList'' with the minimum fields required to make a request.
 --
@@ -243,13 +244,13 @@ instance GoogleRequest BeaconsAttachmentsList' where
              ListBeaconAttachmentsResponse
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u BeaconsAttachmentsList'{..}
-          = go _balXgafv _balAccessToken _balBearerToken
-              _balCallback
-              _balNamespacedType
+          = go _balBeaconName _balXgafv _balUploadProtocol
               (Just _balPp)
+              _balAccessToken
               _balUploadType
-              _balUploadProtocol
-              _balBeaconName
+              _balBearerToken
+              _balNamespacedType
+              _balCallback
               _balQuotaUser
               (Just _balPrettyPrint)
               _balFields

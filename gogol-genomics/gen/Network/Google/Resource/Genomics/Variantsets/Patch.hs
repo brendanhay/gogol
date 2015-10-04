@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.Genomics.Variantsets.Patch
     , vpPrettyPrint
     , vpVariantSetId
     , vpUserIP
+    , vpPayload
     , vpKey
-    , vpVariantSet
     , vpOAuthToken
     , vpFields
     ) where
@@ -68,11 +69,11 @@ data VariantsetsPatch' = VariantsetsPatch'
     , _vpPrettyPrint  :: !Bool
     , _vpVariantSetId :: !Text
     , _vpUserIP       :: !(Maybe Text)
+    , _vpPayload      :: !VariantSet
     , _vpKey          :: !(Maybe Key)
-    , _vpVariantSet   :: !VariantSet
     , _vpOAuthToken   :: !(Maybe OAuthToken)
     , _vpFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsPatch'' with the minimum fields required to make a request.
 --
@@ -86,25 +87,25 @@ data VariantsetsPatch' = VariantsetsPatch'
 --
 -- * 'vpUserIP'
 --
--- * 'vpKey'
+-- * 'vpPayload'
 --
--- * 'vpVariantSet'
+-- * 'vpKey'
 --
 -- * 'vpOAuthToken'
 --
 -- * 'vpFields'
 variantsetsPatch'
     :: Text -- ^ 'variantSetId'
-    -> VariantSet -- ^ 'VariantSet'
+    -> VariantSet -- ^ 'payload'
     -> VariantsetsPatch'
-variantsetsPatch' pVpVariantSetId_ pVpVariantSet_ =
+variantsetsPatch' pVpVariantSetId_ pVpPayload_ =
     VariantsetsPatch'
     { _vpQuotaUser = Nothing
     , _vpPrettyPrint = True
     , _vpVariantSetId = pVpVariantSetId_
     , _vpUserIP = Nothing
+    , _vpPayload = pVpPayload_
     , _vpKey = Nothing
-    , _vpVariantSet = pVpVariantSet_
     , _vpOAuthToken = Nothing
     , _vpFields = Nothing
     }
@@ -133,16 +134,16 @@ vpVariantSetId
 vpUserIP :: Lens' VariantsetsPatch' (Maybe Text)
 vpUserIP = lens _vpUserIP (\ s a -> s{_vpUserIP = a})
 
+-- | Multipart request metadata.
+vpPayload :: Lens' VariantsetsPatch' VariantSet
+vpPayload
+  = lens _vpPayload (\ s a -> s{_vpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 vpKey :: Lens' VariantsetsPatch' (Maybe Key)
 vpKey = lens _vpKey (\ s a -> s{_vpKey = a})
-
--- | Multipart request metadata.
-vpVariantSet :: Lens' VariantsetsPatch' VariantSet
-vpVariantSet
-  = lens _vpVariantSet (\ s a -> s{_vpVariantSet = a})
 
 -- | OAuth 2.0 token for the current user.
 vpOAuthToken :: Lens' VariantsetsPatch' (Maybe OAuthToken)
@@ -168,7 +169,7 @@ instance GoogleRequest VariantsetsPatch' where
               _vpKey
               _vpOAuthToken
               (Just AltJSON)
-              _vpVariantSet
+              _vpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsetsPatchResource)

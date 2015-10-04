@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -59,15 +60,15 @@ type ProjectsJobsListResource =
          Capture "projectId" Text :>
            "jobs" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "bearer_token" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParam "pageSize" Int32 :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "upload_protocol" Text :>
-                               QueryParam "view" Text :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "view" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "pageSize" Int32 :>
+                               QueryParam "callback" Text :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "fields" Text :>
@@ -96,7 +97,7 @@ data ProjectsJobsList' = ProjectsJobsList'
     , _pjlPageSize       :: !(Maybe Int32)
     , _pjlFields         :: !(Maybe Text)
     , _pjlCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsJobsList'' with the minimum fields required to make a request.
 --
@@ -253,15 +254,15 @@ instance GoogleRequest ProjectsJobsList' where
         type Rs ProjectsJobsList' = ListJobsResponse
         request = requestWithRoute defReq dataflowURL
         requestWithRoute r u ProjectsJobsList'{..}
-          = go _pjlXgafv _pjlAccessToken _pjlBearerToken
-              _pjlCallback
-              _pjlPageSize
-              _pjlPageToken
+          = go _pjlProjectId _pjlXgafv _pjlUploadProtocol
               (Just _pjlPp)
+              _pjlAccessToken
               _pjlUploadType
-              _pjlUploadProtocol
+              _pjlBearerToken
               _pjlView
-              _pjlProjectId
+              _pjlPageToken
+              _pjlPageSize
+              _pjlCallback
               _pjlQuotaUser
               (Just _pjlPrettyPrint)
               _pjlFields

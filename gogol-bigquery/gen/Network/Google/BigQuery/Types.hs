@@ -23,6 +23,14 @@ module Network.Google.BigQuery.Types
     , jrJobId
     , jrProjectId
 
+    -- * DatasetsItem
+    , DatasetsItem
+    , datasetsItem
+    , diFriendlyName
+    , diKind
+    , diDatasetReference
+    , diId
+
     -- * TableList
     , TableList
     , tableList
@@ -55,12 +63,6 @@ module Network.Google.BigQuery.Types
     , tableSchema
     , tsFields
 
-    -- * TableDataInsertAllResponseInsertErrors
-    , TableDataInsertAllResponseInsertErrors
-    , tableDataInsertAllResponseInsertErrors
-    , tdiarieErrors
-    , tdiarieIndex
-
     -- * ProjectList
     , ProjectList
     , projectList
@@ -69,9 +71,6 @@ module Network.Google.BigQuery.Types
     , plNextPageToken
     , plKind
     , plProjects
-
-    -- * BigqueryJobsListStateFilter
-    , BigqueryJobsListStateFilter (..)
 
     -- * JobStatistics
     , JobStatistics
@@ -106,9 +105,6 @@ module Network.Google.BigQuery.Types
     , trDatasetId
     , trProjectId
     , trTableId
-
-    -- * BigqueryJobsListProjection
-    , BigqueryJobsListProjection (..)
 
     -- * TableFieldSchema
     , TableFieldSchema
@@ -145,6 +141,19 @@ module Network.Google.BigQuery.Types
     , gqrrJobComplete
     , gqrrCacheHit
 
+    -- * TablesItem
+    , TablesItem
+    , tablesItem
+    , tiTableReference
+    , tiFriendlyName
+    , tiKind
+    , tiId
+    , tiType
+
+    -- * TableDefinitions
+    , TableDefinitions
+    , tableDefinitions
+
     -- * DatasetList
     , DatasetList
     , datasetList
@@ -152,12 +161,6 @@ module Network.Google.BigQuery.Types
     , dlNextPageToken
     , dlKind
     , dlDatasets
-
-    -- * TableDataInsertAllRequestRows
-    , TableDataInsertAllRequestRows
-    , tableDataInsertAllRequestRows
-    , tdiarrJSON
-    , tdiarrInsertId
 
     -- * QueryRequest
     , QueryRequest
@@ -181,6 +184,25 @@ module Network.Google.BigQuery.Types
     , projectReference
     , prProjectId
 
+    -- * JobsItem
+    , JobsItem
+    , jobsItem
+    , jiJobReference
+    , jiStatus
+    , jiState
+    , jiUserEmail
+    , jiKind
+    , jiErrorResult
+    , jiId
+    , jiStatistics
+    , jiConfiguration
+
+    -- * InsertErrorsItem
+    , InsertErrorsItem
+    , insertErrorsItem
+    , ieiErrors
+    , ieiIndex
+
     -- * TableDataInsertAllRequest
     , TableDataInsertAllRequest
     , tableDataInsertAllRequest
@@ -188,15 +210,6 @@ module Network.Google.BigQuery.Types
     , tdiarIgnoreUnknownValues
     , tdiarRows
     , tdiarSkipInvalidRows
-
-    -- * ProjectListProjects
-    , ProjectListProjects
-    , projectListProjects
-    , plpFriendlyName
-    , plpKind
-    , plpProjectReference
-    , plpId
-    , plpNumericId
 
     -- * JobConfigurationLoad
     , JobConfigurationLoad
@@ -224,19 +237,6 @@ module Network.Google.BigQuery.Types
     , datasetReference
     , drDatasetId
     , drProjectId
-
-    -- * JobListJobs
-    , JobListJobs
-    , jobListJobs
-    , jljJobReference
-    , jljStatus
-    , jljState
-    , jljUserEmail
-    , jljKind
-    , jljErrorResult
-    , jljId
-    , jljStatistics
-    , jljConfiguration
 
     -- * TableRow
     , TableRow
@@ -281,6 +281,9 @@ module Network.Google.BigQuery.Types
     , jcExtract
     , jcDryRun
 
+    -- * StateFilter
+    , StateFilter (..)
+
     -- * JobCancelResponse
     , JobCancelResponse
     , jobCancelResponse
@@ -302,9 +305,11 @@ module Network.Google.BigQuery.Types
     , JSONObject
     , jsonObject
 
-    -- * JobConfigurationQueryTableDefinitions
-    , JobConfigurationQueryTableDefinitions
-    , jobConfigurationQueryTableDefinitions
+    -- * TableDataInsertAllRequestRowsItem
+    , TableDataInsertAllRequestRowsItem
+    , tableDataInsertAllRequestRowsItem
+    , tdiarriJSON
+    , tdiarriInsertId
 
     -- * JobConfigurationQuery
     , JobConfigurationQuery
@@ -329,6 +334,9 @@ module Network.Google.BigQuery.Types
     , jlNextPageToken
     , jlKind
     , jlJobs
+
+    -- * Projection
+    , Projection (..)
 
     -- * TableCell
     , TableCell
@@ -367,15 +375,14 @@ module Network.Google.BigQuery.Types
     , tKind
     , tInsertErrors
 
-    -- * DatasetAccess
-    , DatasetAccess
-    , datasetAccess
-    , daGroupByEmail
-    , daDomain
-    , daSpecialGroup
-    , daRole
-    , daView
-    , daUserByEmail
+    -- * ProjectsItem
+    , ProjectsItem
+    , projectsItem
+    , piFriendlyName
+    , piKind
+    , piProjectReference
+    , piId
+    , piNumericId
 
     -- * Table
     , Table
@@ -425,14 +432,6 @@ module Network.Google.BigQuery.Types
     , jsOutputBytes
     , jsInputFileBytes
 
-    -- * DatasetListDatasets
-    , DatasetListDatasets
-    , datasetListDatasets
-    , dldFriendlyName
-    , dldKind
-    , dldDatasetReference
-    , dldId
-
     -- * QueryResponse
     , QueryResponse
     , queryResponse
@@ -447,14 +446,15 @@ module Network.Google.BigQuery.Types
     , qJobComplete
     , qCacheHit
 
-    -- * TableListTables
-    , TableListTables
-    , tableListTables
-    , tltTableReference
-    , tltFriendlyName
-    , tltKind
-    , tltId
-    , tltType
+    -- * AccessItem
+    , AccessItem
+    , accessItem
+    , aiGroupByEmail
+    , aiDomain
+    , aiSpecialGroup
+    , aiRole
+    , aiView
+    , aiUserByEmail
     ) where
 
 import           Network.Google.BigQuery.Types.Product

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,9 +37,9 @@ module Network.Google.Resource.Compute.Instances.AddAccessConfig
     , iaacUserIP
     , iaacNetworkInterface
     , iaacZone
+    , iaacPayload
     , iaacKey
     , iaacOAuthToken
-    , iaacAccessConfig
     , iaacFields
     , iaacInstance
     ) where
@@ -76,12 +77,12 @@ data InstancesAddAccessConfig' = InstancesAddAccessConfig'
     , _iaacUserIP           :: !(Maybe Text)
     , _iaacNetworkInterface :: !Text
     , _iaacZone             :: !Text
+    , _iaacPayload          :: !AccessConfig
     , _iaacKey              :: !(Maybe Key)
     , _iaacOAuthToken       :: !(Maybe OAuthToken)
-    , _iaacAccessConfig     :: !AccessConfig
     , _iaacFields           :: !(Maybe Text)
     , _iaacInstance         :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesAddAccessConfig'' with the minimum fields required to make a request.
 --
@@ -99,11 +100,11 @@ data InstancesAddAccessConfig' = InstancesAddAccessConfig'
 --
 -- * 'iaacZone'
 --
+-- * 'iaacPayload'
+--
 -- * 'iaacKey'
 --
 -- * 'iaacOAuthToken'
---
--- * 'iaacAccessConfig'
 --
 -- * 'iaacFields'
 --
@@ -112,10 +113,10 @@ instancesAddAccessConfig'
     :: Text -- ^ 'project'
     -> Text -- ^ 'networkInterface'
     -> Text -- ^ 'zone'
-    -> AccessConfig -- ^ 'AccessConfig'
+    -> AccessConfig -- ^ 'payload'
     -> Text -- ^ 'instance'
     -> InstancesAddAccessConfig'
-instancesAddAccessConfig' pIaacProject_ pIaacNetworkInterface_ pIaacZone_ pIaacAccessConfig_ pIaacInstance_ =
+instancesAddAccessConfig' pIaacProject_ pIaacNetworkInterface_ pIaacZone_ pIaacPayload_ pIaacInstance_ =
     InstancesAddAccessConfig'
     { _iaacQuotaUser = Nothing
     , _iaacPrettyPrint = True
@@ -123,9 +124,9 @@ instancesAddAccessConfig' pIaacProject_ pIaacNetworkInterface_ pIaacZone_ pIaacA
     , _iaacUserIP = Nothing
     , _iaacNetworkInterface = pIaacNetworkInterface_
     , _iaacZone = pIaacZone_
+    , _iaacPayload = pIaacPayload_
     , _iaacKey = Nothing
     , _iaacOAuthToken = Nothing
-    , _iaacAccessConfig = pIaacAccessConfig_
     , _iaacFields = Nothing
     , _iaacInstance = pIaacInstance_
     }
@@ -165,6 +166,11 @@ iaacNetworkInterface
 iaacZone :: Lens' InstancesAddAccessConfig' Text
 iaacZone = lens _iaacZone (\ s a -> s{_iaacZone = a})
 
+-- | Multipart request metadata.
+iaacPayload :: Lens' InstancesAddAccessConfig' AccessConfig
+iaacPayload
+  = lens _iaacPayload (\ s a -> s{_iaacPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -176,12 +182,6 @@ iaacOAuthToken :: Lens' InstancesAddAccessConfig' (Maybe OAuthToken)
 iaacOAuthToken
   = lens _iaacOAuthToken
       (\ s a -> s{_iaacOAuthToken = a})
-
--- | Multipart request metadata.
-iaacAccessConfig :: Lens' InstancesAddAccessConfig' AccessConfig
-iaacAccessConfig
-  = lens _iaacAccessConfig
-      (\ s a -> s{_iaacAccessConfig = a})
 
 -- | Selector specifying which fields to include in a partial response.
 iaacFields :: Lens' InstancesAddAccessConfig' (Maybe Text)
@@ -211,7 +211,7 @@ instance GoogleRequest InstancesAddAccessConfig'
               _iaacKey
               _iaacOAuthToken
               (Just AltJSON)
-              _iaacAccessConfig
+              _iaacPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesAddAccessConfigResource)

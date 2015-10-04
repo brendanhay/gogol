@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.MapsEngine.Layers.Create
     , lcPrettyPrint
     , lcUserIP
     , lcProcess
+    , lcPayload
     , lcKey
     , lcOAuthToken
-    , lcLayer
     , lcFields
     ) where
 
@@ -65,11 +66,11 @@ data LayersCreate' = LayersCreate'
     , _lcPrettyPrint :: !Bool
     , _lcUserIP      :: !(Maybe Text)
     , _lcProcess     :: !(Maybe Bool)
+    , _lcPayload     :: !Layer
     , _lcKey         :: !(Maybe Key)
     , _lcOAuthToken  :: !(Maybe OAuthToken)
-    , _lcLayer       :: !Layer
     , _lcFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersCreate'' with the minimum fields required to make a request.
 --
@@ -83,25 +84,25 @@ data LayersCreate' = LayersCreate'
 --
 -- * 'lcProcess'
 --
+-- * 'lcPayload'
+--
 -- * 'lcKey'
 --
 -- * 'lcOAuthToken'
 --
--- * 'lcLayer'
---
 -- * 'lcFields'
 layersCreate'
-    :: Layer -- ^ 'Layer'
+    :: Layer -- ^ 'payload'
     -> LayersCreate'
-layersCreate' pLcLayer_ =
+layersCreate' pLcPayload_ =
     LayersCreate'
     { _lcQuotaUser = Nothing
     , _lcPrettyPrint = True
     , _lcUserIP = Nothing
     , _lcProcess = Nothing
+    , _lcPayload = pLcPayload_
     , _lcKey = Nothing
     , _lcOAuthToken = Nothing
-    , _lcLayer = pLcLayer_
     , _lcFields = Nothing
     }
 
@@ -128,6 +129,11 @@ lcProcess :: Lens' LayersCreate' (Maybe Bool)
 lcProcess
   = lens _lcProcess (\ s a -> s{_lcProcess = a})
 
+-- | Multipart request metadata.
+lcPayload :: Lens' LayersCreate' Layer
+lcPayload
+  = lens _lcPayload (\ s a -> s{_lcPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -138,10 +144,6 @@ lcKey = lens _lcKey (\ s a -> s{_lcKey = a})
 lcOAuthToken :: Lens' LayersCreate' (Maybe OAuthToken)
 lcOAuthToken
   = lens _lcOAuthToken (\ s a -> s{_lcOAuthToken = a})
-
--- | Multipart request metadata.
-lcLayer :: Lens' LayersCreate' Layer
-lcLayer = lens _lcLayer (\ s a -> s{_lcLayer = a})
 
 -- | Selector specifying which fields to include in a partial response.
 lcFields :: Lens' LayersCreate' (Maybe Text)
@@ -161,7 +163,7 @@ instance GoogleRequest LayersCreate' where
               _lcKey
               _lcOAuthToken
               (Just AltJSON)
-              _lcLayer
+              _lcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LayersCreateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,15 +58,15 @@ type PublishersListResource =
      Capture "role" GanPublishersListRole :>
        Capture "roleId" Text :>
          "publishers" :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "minNinetyDayEpc" Double :>
-               QueryParam "minPayoutRank" Int32 :>
-                 QueryParam "minSevenDayEpc" Double :>
+           QueryParam "relationshipStatus"
+             GanPublishersListRelationshipStatus
+             :>
+             QueryParam "minSevenDayEpc" Double :>
+               QueryParam "minNinetyDayEpc" Double :>
+                 QueryParam "minPayoutRank" Int32 :>
                    QueryParam "pageToken" Text :>
                      QueryParam "publisherCategory" Text :>
-                       QueryParam "relationshipStatus"
-                         GanPublishersListRelationshipStatus
-                         :>
+                       QueryParam "maxResults" Word32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -95,7 +96,7 @@ data PublishersList' = PublishersList'
     , _plPublisherCategory  :: !(Maybe Text)
     , _plMaxResults         :: !(Maybe Word32)
     , _plFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishersList'' with the minimum fields required to make a request.
 --
@@ -253,14 +254,13 @@ instance GoogleRequest PublishersList' where
         type Rs PublishersList' = Publishers
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u PublishersList'{..}
-          = go _plMaxResults _plMinNinetyDayEpc
-              _plMinPayoutRank
+          = go _plRole _plRoleId _plRelationshipStatus
               _plMinSevenDayEpc
+              _plMinNinetyDayEpc
+              _plMinPayoutRank
               _plPageToken
               _plPublisherCategory
-              _plRelationshipStatus
-              _plRole
-              _plRoleId
+              _plMaxResults
               _plQuotaUser
               (Just _plPrettyPrint)
               _plUserIP

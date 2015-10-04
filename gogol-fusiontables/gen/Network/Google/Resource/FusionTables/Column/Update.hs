@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,11 +34,11 @@ module Network.Google.Resource.FusionTables.Column.Update
     , cuQuotaUser
     , cuPrettyPrint
     , cuUserIP
+    , cuPayload
     , cuKey
     , cuOAuthToken
     , cuTableId
     , cuColumnId
-    , cuColumn
     , cuFields
     ) where
 
@@ -67,13 +68,13 @@ data ColumnUpdate' = ColumnUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
     , _cuUserIP      :: !(Maybe Text)
+    , _cuPayload     :: !Column
     , _cuKey         :: !(Maybe Key)
     , _cuOAuthToken  :: !(Maybe OAuthToken)
     , _cuTableId     :: !Text
     , _cuColumnId    :: !Text
-    , _cuColumn      :: !Column
     , _cuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnUpdate'' with the minimum fields required to make a request.
 --
@@ -85,6 +86,8 @@ data ColumnUpdate' = ColumnUpdate'
 --
 -- * 'cuUserIP'
 --
+-- * 'cuPayload'
+--
 -- * 'cuKey'
 --
 -- * 'cuOAuthToken'
@@ -93,24 +96,22 @@ data ColumnUpdate' = ColumnUpdate'
 --
 -- * 'cuColumnId'
 --
--- * 'cuColumn'
---
 -- * 'cuFields'
 columnUpdate'
-    :: Text -- ^ 'tableId'
+    :: Column -- ^ 'payload'
+    -> Text -- ^ 'tableId'
     -> Text -- ^ 'columnId'
-    -> Column -- ^ 'Column'
     -> ColumnUpdate'
-columnUpdate' pCuTableId_ pCuColumnId_ pCuColumn_ =
+columnUpdate' pCuPayload_ pCuTableId_ pCuColumnId_ =
     ColumnUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
     , _cuUserIP = Nothing
+    , _cuPayload = pCuPayload_
     , _cuKey = Nothing
     , _cuOAuthToken = Nothing
     , _cuTableId = pCuTableId_
     , _cuColumnId = pCuColumnId_
-    , _cuColumn = pCuColumn_
     , _cuFields = Nothing
     }
 
@@ -131,6 +132,11 @@ cuPrettyPrint
 -- want to enforce per-user limits.
 cuUserIP :: Lens' ColumnUpdate' (Maybe Text)
 cuUserIP = lens _cuUserIP (\ s a -> s{_cuUserIP = a})
+
+-- | Multipart request metadata.
+cuPayload :: Lens' ColumnUpdate' Column
+cuPayload
+  = lens _cuPayload (\ s a -> s{_cuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -153,10 +159,6 @@ cuColumnId :: Lens' ColumnUpdate' Text
 cuColumnId
   = lens _cuColumnId (\ s a -> s{_cuColumnId = a})
 
--- | Multipart request metadata.
-cuColumn :: Lens' ColumnUpdate' Column
-cuColumn = lens _cuColumn (\ s a -> s{_cuColumn = a})
-
 -- | Selector specifying which fields to include in a partial response.
 cuFields :: Lens' ColumnUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
@@ -176,7 +178,7 @@ instance GoogleRequest ColumnUpdate' where
               _cuKey
               _cuOAuthToken
               (Just AltJSON)
-              _cuColumn
+              _cuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ColumnUpdateResource)

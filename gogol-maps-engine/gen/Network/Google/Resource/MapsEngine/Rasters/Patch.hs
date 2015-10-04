@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.MapsEngine.Rasters.Patch
     , rQuotaUser
     , rPrettyPrint
     , rUserIP
+    , rPayload
     , rKey
     , rId
-    , rRaster
     , rOAuthToken
     , rFields
     ) where
@@ -64,12 +65,12 @@ data RastersPatch' = RastersPatch'
     { _rQuotaUser   :: !(Maybe Text)
     , _rPrettyPrint :: !Bool
     , _rUserIP      :: !(Maybe Text)
+    , _rPayload     :: !Raster
     , _rKey         :: !(Maybe Key)
     , _rId          :: !Text
-    , _rRaster      :: !Raster
     , _rOAuthToken  :: !(Maybe OAuthToken)
     , _rFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersPatch'' with the minimum fields required to make a request.
 --
@@ -81,27 +82,27 @@ data RastersPatch' = RastersPatch'
 --
 -- * 'rUserIP'
 --
+-- * 'rPayload'
+--
 -- * 'rKey'
 --
 -- * 'rId'
---
--- * 'rRaster'
 --
 -- * 'rOAuthToken'
 --
 -- * 'rFields'
 rastersPatch'
-    :: Text -- ^ 'id'
-    -> Raster -- ^ 'Raster'
+    :: Raster -- ^ 'payload'
+    -> Text -- ^ 'id'
     -> RastersPatch'
-rastersPatch' pRId_ pRRaster_ =
+rastersPatch' pRPayload_ pRId_ =
     RastersPatch'
     { _rQuotaUser = Nothing
     , _rPrettyPrint = True
     , _rUserIP = Nothing
+    , _rPayload = pRPayload_
     , _rKey = Nothing
     , _rId = pRId_
-    , _rRaster = pRRaster_
     , _rOAuthToken = Nothing
     , _rFields = Nothing
     }
@@ -123,6 +124,10 @@ rPrettyPrint
 rUserIP :: Lens' RastersPatch' (Maybe Text)
 rUserIP = lens _rUserIP (\ s a -> s{_rUserIP = a})
 
+-- | Multipart request metadata.
+rPayload :: Lens' RastersPatch' Raster
+rPayload = lens _rPayload (\ s a -> s{_rPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -132,10 +137,6 @@ rKey = lens _rKey (\ s a -> s{_rKey = a})
 -- | The ID of the raster.
 rId :: Lens' RastersPatch' Text
 rId = lens _rId (\ s a -> s{_rId = a})
-
--- | Multipart request metadata.
-rRaster :: Lens' RastersPatch' Raster
-rRaster = lens _rRaster (\ s a -> s{_rRaster = a})
 
 -- | OAuth 2.0 token for the current user.
 rOAuthToken :: Lens' RastersPatch' (Maybe OAuthToken)
@@ -159,7 +160,7 @@ instance GoogleRequest RastersPatch' where
               _rKey
               _rOAuthToken
               (Just AltJSON)
-              _rRaster
+              _rPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RastersPatchResource)

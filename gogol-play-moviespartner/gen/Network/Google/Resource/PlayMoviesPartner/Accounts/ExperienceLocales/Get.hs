@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -60,12 +61,12 @@ type AccountsExperienceLocalesGetResource =
            "experienceLocales" :>
              Capture "elId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "callback" Text :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
@@ -94,7 +95,7 @@ data AccountsExperienceLocalesGet' = AccountsExperienceLocalesGet'
     , _aelgOAuthToken     :: !(Maybe OAuthToken)
     , _aelgFields         :: !(Maybe Text)
     , _aelgCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsExperienceLocalesGet'' with the minimum fields required to make a request.
 --
@@ -241,13 +242,13 @@ instance GoogleRequest AccountsExperienceLocalesGet'
           = requestWithRoute defReq playMoviesPartnerURL
         requestWithRoute r u
           AccountsExperienceLocalesGet'{..}
-          = go _aelgXgafv _aelgAccessToken _aelgBearerToken
-              _aelgCallback
-              (Just _aelgPp)
-              _aelgUploadType
+          = go _aelgAccountId _aelgElId _aelgXgafv
               _aelgUploadProtocol
-              _aelgAccountId
-              _aelgElId
+              (Just _aelgPp)
+              _aelgAccessToken
+              _aelgUploadType
+              _aelgBearerToken
+              _aelgCallback
               _aelgQuotaUser
               (Just _aelgPrettyPrint)
               _aelgFields

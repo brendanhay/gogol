@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Update
     , mwpuluPrettyPrint
     , mwpuluWebPropertyId
     , mwpuluUserIP
+    , mwpuluPayload
     , mwpuluAccountId
     , mwpuluKey
-    , mwpuluEntityUserLink
     , mwpuluLinkId
     , mwpuluOAuthToken
     , mwpuluFields
@@ -69,17 +70,17 @@ type ManagementWebPropertyUserLinksUpdateResource =
 --
 -- /See:/ 'managementWebPropertyUserLinksUpdate'' smart constructor.
 data ManagementWebPropertyUserLinksUpdate' = ManagementWebPropertyUserLinksUpdate'
-    { _mwpuluQuotaUser      :: !(Maybe Text)
-    , _mwpuluPrettyPrint    :: !Bool
-    , _mwpuluWebPropertyId  :: !Text
-    , _mwpuluUserIP         :: !(Maybe Text)
-    , _mwpuluAccountId      :: !Text
-    , _mwpuluKey            :: !(Maybe Key)
-    , _mwpuluEntityUserLink :: !EntityUserLink
-    , _mwpuluLinkId         :: !Text
-    , _mwpuluOAuthToken     :: !(Maybe OAuthToken)
-    , _mwpuluFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mwpuluQuotaUser     :: !(Maybe Text)
+    , _mwpuluPrettyPrint   :: !Bool
+    , _mwpuluWebPropertyId :: !Text
+    , _mwpuluUserIP        :: !(Maybe Text)
+    , _mwpuluPayload       :: !EntityUserLink
+    , _mwpuluAccountId     :: !Text
+    , _mwpuluKey           :: !(Maybe Key)
+    , _mwpuluLinkId        :: !Text
+    , _mwpuluOAuthToken    :: !(Maybe OAuthToken)
+    , _mwpuluFields        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyUserLinksUpdate'' with the minimum fields required to make a request.
 --
@@ -93,11 +94,11 @@ data ManagementWebPropertyUserLinksUpdate' = ManagementWebPropertyUserLinksUpdat
 --
 -- * 'mwpuluUserIP'
 --
+-- * 'mwpuluPayload'
+--
 -- * 'mwpuluAccountId'
 --
 -- * 'mwpuluKey'
---
--- * 'mwpuluEntityUserLink'
 --
 -- * 'mwpuluLinkId'
 --
@@ -106,19 +107,19 @@ data ManagementWebPropertyUserLinksUpdate' = ManagementWebPropertyUserLinksUpdat
 -- * 'mwpuluFields'
 managementWebPropertyUserLinksUpdate'
     :: Text -- ^ 'webPropertyId'
+    -> EntityUserLink -- ^ 'payload'
     -> Text -- ^ 'accountId'
-    -> EntityUserLink -- ^ 'EntityUserLink'
     -> Text -- ^ 'linkId'
     -> ManagementWebPropertyUserLinksUpdate'
-managementWebPropertyUserLinksUpdate' pMwpuluWebPropertyId_ pMwpuluAccountId_ pMwpuluEntityUserLink_ pMwpuluLinkId_ =
+managementWebPropertyUserLinksUpdate' pMwpuluWebPropertyId_ pMwpuluPayload_ pMwpuluAccountId_ pMwpuluLinkId_ =
     ManagementWebPropertyUserLinksUpdate'
     { _mwpuluQuotaUser = Nothing
     , _mwpuluPrettyPrint = False
     , _mwpuluWebPropertyId = pMwpuluWebPropertyId_
     , _mwpuluUserIP = Nothing
+    , _mwpuluPayload = pMwpuluPayload_
     , _mwpuluAccountId = pMwpuluAccountId_
     , _mwpuluKey = Nothing
-    , _mwpuluEntityUserLink = pMwpuluEntityUserLink_
     , _mwpuluLinkId = pMwpuluLinkId_
     , _mwpuluOAuthToken = Nothing
     , _mwpuluFields = Nothing
@@ -150,6 +151,12 @@ mwpuluUserIP :: Lens' ManagementWebPropertyUserLinksUpdate' (Maybe Text)
 mwpuluUserIP
   = lens _mwpuluUserIP (\ s a -> s{_mwpuluUserIP = a})
 
+-- | Multipart request metadata.
+mwpuluPayload :: Lens' ManagementWebPropertyUserLinksUpdate' EntityUserLink
+mwpuluPayload
+  = lens _mwpuluPayload
+      (\ s a -> s{_mwpuluPayload = a})
+
 -- | Account ID to update the account-user link for.
 mwpuluAccountId :: Lens' ManagementWebPropertyUserLinksUpdate' Text
 mwpuluAccountId
@@ -162,12 +169,6 @@ mwpuluAccountId
 mwpuluKey :: Lens' ManagementWebPropertyUserLinksUpdate' (Maybe Key)
 mwpuluKey
   = lens _mwpuluKey (\ s a -> s{_mwpuluKey = a})
-
--- | Multipart request metadata.
-mwpuluEntityUserLink :: Lens' ManagementWebPropertyUserLinksUpdate' EntityUserLink
-mwpuluEntityUserLink
-  = lens _mwpuluEntityUserLink
-      (\ s a -> s{_mwpuluEntityUserLink = a})
 
 -- | Link ID to update the account-user link for.
 mwpuluLinkId :: Lens' ManagementWebPropertyUserLinksUpdate' Text
@@ -206,7 +207,7 @@ instance GoogleRequest
               _mwpuluKey
               _mwpuluOAuthToken
               (Just AltJSON)
-              _mwpuluEntityUserLink
+              _mwpuluPayload
           where go
                   = clientWithRoute
                       (Proxy ::

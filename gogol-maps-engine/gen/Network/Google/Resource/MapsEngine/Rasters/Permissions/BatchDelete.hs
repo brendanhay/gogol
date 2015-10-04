@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -30,10 +31,10 @@ module Network.Google.Resource.MapsEngine.Rasters.Permissions.BatchDelete
     , RastersPermissionsBatchDelete'
 
     -- * Request Lenses
-    , rpbdPermissionsBatchDeleteRequest
     , rpbdQuotaUser
     , rpbdPrettyPrint
     , rpbdUserIP
+    , rpbdPayload
     , rpbdKey
     , rpbdId
     , rpbdOAuthToken
@@ -64,27 +65,27 @@ type RastersPermissionsBatchDeleteResource =
 --
 -- /See:/ 'rastersPermissionsBatchDelete'' smart constructor.
 data RastersPermissionsBatchDelete' = RastersPermissionsBatchDelete'
-    { _rpbdPermissionsBatchDeleteRequest :: !PermissionsBatchDeleteRequest
-    , _rpbdQuotaUser                     :: !(Maybe Text)
-    , _rpbdPrettyPrint                   :: !Bool
-    , _rpbdUserIP                        :: !(Maybe Text)
-    , _rpbdKey                           :: !(Maybe Key)
-    , _rpbdId                            :: !Text
-    , _rpbdOAuthToken                    :: !(Maybe OAuthToken)
-    , _rpbdFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rpbdQuotaUser   :: !(Maybe Text)
+    , _rpbdPrettyPrint :: !Bool
+    , _rpbdUserIP      :: !(Maybe Text)
+    , _rpbdPayload     :: !PermissionsBatchDeleteRequest
+    , _rpbdKey         :: !(Maybe Key)
+    , _rpbdId          :: !Text
+    , _rpbdOAuthToken  :: !(Maybe OAuthToken)
+    , _rpbdFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersPermissionsBatchDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'rpbdPermissionsBatchDeleteRequest'
 --
 -- * 'rpbdQuotaUser'
 --
 -- * 'rpbdPrettyPrint'
 --
 -- * 'rpbdUserIP'
+--
+-- * 'rpbdPayload'
 --
 -- * 'rpbdKey'
 --
@@ -94,26 +95,20 @@ data RastersPermissionsBatchDelete' = RastersPermissionsBatchDelete'
 --
 -- * 'rpbdFields'
 rastersPermissionsBatchDelete'
-    :: PermissionsBatchDeleteRequest -- ^ 'PermissionsBatchDeleteRequest'
+    :: PermissionsBatchDeleteRequest -- ^ 'payload'
     -> Text -- ^ 'id'
     -> RastersPermissionsBatchDelete'
-rastersPermissionsBatchDelete' pRpbdPermissionsBatchDeleteRequest_ pRpbdId_ =
+rastersPermissionsBatchDelete' pRpbdPayload_ pRpbdId_ =
     RastersPermissionsBatchDelete'
-    { _rpbdPermissionsBatchDeleteRequest = pRpbdPermissionsBatchDeleteRequest_
-    , _rpbdQuotaUser = Nothing
+    { _rpbdQuotaUser = Nothing
     , _rpbdPrettyPrint = True
     , _rpbdUserIP = Nothing
+    , _rpbdPayload = pRpbdPayload_
     , _rpbdKey = Nothing
     , _rpbdId = pRpbdId_
     , _rpbdOAuthToken = Nothing
     , _rpbdFields = Nothing
     }
-
--- | Multipart request metadata.
-rpbdPermissionsBatchDeleteRequest :: Lens' RastersPermissionsBatchDelete' PermissionsBatchDeleteRequest
-rpbdPermissionsBatchDeleteRequest
-  = lens _rpbdPermissionsBatchDeleteRequest
-      (\ s a -> s{_rpbdPermissionsBatchDeleteRequest = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -134,6 +129,11 @@ rpbdPrettyPrint
 rpbdUserIP :: Lens' RastersPermissionsBatchDelete' (Maybe Text)
 rpbdUserIP
   = lens _rpbdUserIP (\ s a -> s{_rpbdUserIP = a})
+
+-- | Multipart request metadata.
+rpbdPayload :: Lens' RastersPermissionsBatchDelete' PermissionsBatchDeleteRequest
+rpbdPayload
+  = lens _rpbdPayload (\ s a -> s{_rpbdPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -174,7 +174,7 @@ instance GoogleRequest RastersPermissionsBatchDelete'
               _rpbdKey
               _rpbdOAuthToken
               (Just AltJSON)
-              _rpbdPermissionsBatchDeleteRequest
+              _rpbdPayload
           where go
                   = clientWithRoute
                       (Proxy ::

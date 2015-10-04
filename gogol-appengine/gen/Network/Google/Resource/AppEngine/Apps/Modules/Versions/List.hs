@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -62,15 +63,15 @@ type AppsModulesVersionsListResource =
              Capture "modulesId" Text :>
                "versions" :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "pageSize" Int32 :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "pp" Bool :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "upload_protocol" Text :>
-                                   QueryParam "view" Text :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "view" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "pageSize" Int32 :>
+                                   QueryParam "callback" Text :>
                                      QueryParam "quotaUser" Text :>
                                        QueryParam "prettyPrint" Bool :>
                                          QueryParam "fields" Text :>
@@ -102,7 +103,7 @@ data AppsModulesVersionsList' = AppsModulesVersionsList'
     , _amvlPageSize       :: !(Maybe Int32)
     , _amvlFields         :: !(Maybe Text)
     , _amvlCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsModulesVersionsList'' with the minimum fields required to make a request.
 --
@@ -271,16 +272,16 @@ instance GoogleRequest AppsModulesVersionsList' where
              ListVersionsResponse
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsModulesVersionsList'{..}
-          = go _amvlXgafv _amvlAccessToken _amvlBearerToken
-              _amvlCallback
-              _amvlPageSize
-              _amvlPageToken
-              (Just _amvlPp)
-              _amvlUploadType
+          = go _amvlAppsId _amvlModulesId _amvlXgafv
               _amvlUploadProtocol
+              (Just _amvlPp)
+              _amvlAccessToken
+              _amvlUploadType
+              _amvlBearerToken
               _amvlView
-              _amvlAppsId
-              _amvlModulesId
+              _amvlPageToken
+              _amvlPageSize
+              _amvlCallback
               _amvlQuotaUser
               (Just _amvlPrettyPrint)
               _amvlFields

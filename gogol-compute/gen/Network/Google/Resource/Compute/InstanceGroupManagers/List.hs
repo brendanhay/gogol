@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type InstanceGroupManagersListResource =
          Capture "zone" Text :>
            "instanceGroupManagers" :>
              QueryParam "filter" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,7 +83,7 @@ data InstanceGroupManagersList' = InstanceGroupManagersList'
     , _igmlOAuthToken  :: !(Maybe OAuthToken)
     , _igmlMaxResults  :: !Word32
     , _igmlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersList'' with the minimum fields required to make a request.
 --
@@ -213,10 +214,9 @@ instance GoogleRequest InstanceGroupManagersList'
              InstanceGroupManagerList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceGroupManagersList'{..}
-          = go _igmlFilter (Just _igmlMaxResults)
+          = go _igmlProject _igmlZone _igmlFilter
               _igmlPageToken
-              _igmlProject
-              _igmlZone
+              (Just _igmlMaxResults)
               _igmlQuotaUser
               (Just _igmlPrettyPrint)
               _igmlUserIP

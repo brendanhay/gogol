@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,10 +35,10 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Update
     , cauPrettyPrint
     , cauUserIP
     , cauSponsorAccountId
+    , cauPayload
     , cauKey
     , cauClientAccountId
     , cauOAuthToken
-    , cauClientAccessCapabilities
     , cauFields
     ) where
 
@@ -63,16 +64,16 @@ type ClientAccessUpdateResource =
 --
 -- /See:/ 'clientAccessUpdate'' smart constructor.
 data ClientAccessUpdate' = ClientAccessUpdate'
-    { _cauQuotaUser                :: !(Maybe Text)
-    , _cauPrettyPrint              :: !Bool
-    , _cauUserIP                   :: !(Maybe Text)
-    , _cauSponsorAccountId         :: !Int32
-    , _cauKey                      :: !(Maybe Key)
-    , _cauClientAccountId          :: !Int64
-    , _cauOAuthToken               :: !(Maybe OAuthToken)
-    , _cauClientAccessCapabilities :: !ClientAccessCapabilities
-    , _cauFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cauQuotaUser        :: !(Maybe Text)
+    , _cauPrettyPrint      :: !Bool
+    , _cauUserIP           :: !(Maybe Text)
+    , _cauSponsorAccountId :: !Int32
+    , _cauPayload          :: !ClientAccessCapabilities
+    , _cauKey              :: !(Maybe Key)
+    , _cauClientAccountId  :: !Int64
+    , _cauOAuthToken       :: !(Maybe OAuthToken)
+    , _cauFields           :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessUpdate'' with the minimum fields required to make a request.
 --
@@ -86,30 +87,30 @@ data ClientAccessUpdate' = ClientAccessUpdate'
 --
 -- * 'cauSponsorAccountId'
 --
+-- * 'cauPayload'
+--
 -- * 'cauKey'
 --
 -- * 'cauClientAccountId'
 --
 -- * 'cauOAuthToken'
 --
--- * 'cauClientAccessCapabilities'
---
 -- * 'cauFields'
 clientAccessUpdate'
     :: Int32 -- ^ 'sponsorAccountId'
+    -> ClientAccessCapabilities -- ^ 'payload'
     -> Int64 -- ^ 'clientAccountId'
-    -> ClientAccessCapabilities -- ^ 'ClientAccessCapabilities'
     -> ClientAccessUpdate'
-clientAccessUpdate' pCauSponsorAccountId_ pCauClientAccountId_ pCauClientAccessCapabilities_ =
+clientAccessUpdate' pCauSponsorAccountId_ pCauPayload_ pCauClientAccountId_ =
     ClientAccessUpdate'
     { _cauQuotaUser = Nothing
     , _cauPrettyPrint = True
     , _cauUserIP = Nothing
     , _cauSponsorAccountId = pCauSponsorAccountId_
+    , _cauPayload = pCauPayload_
     , _cauKey = Nothing
     , _cauClientAccountId = pCauClientAccountId_
     , _cauOAuthToken = Nothing
-    , _cauClientAccessCapabilities = pCauClientAccessCapabilities_
     , _cauFields = Nothing
     }
 
@@ -137,6 +138,11 @@ cauSponsorAccountId
   = lens _cauSponsorAccountId
       (\ s a -> s{_cauSponsorAccountId = a})
 
+-- | Multipart request metadata.
+cauPayload :: Lens' ClientAccessUpdate' ClientAccessCapabilities
+cauPayload
+  = lens _cauPayload (\ s a -> s{_cauPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -153,12 +159,6 @@ cauOAuthToken :: Lens' ClientAccessUpdate' (Maybe OAuthToken)
 cauOAuthToken
   = lens _cauOAuthToken
       (\ s a -> s{_cauOAuthToken = a})
-
--- | Multipart request metadata.
-cauClientAccessCapabilities :: Lens' ClientAccessUpdate' ClientAccessCapabilities
-cauClientAccessCapabilities
-  = lens _cauClientAccessCapabilities
-      (\ s a -> s{_cauClientAccessCapabilities = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cauFields :: Lens' ClientAccessUpdate' (Maybe Text)
@@ -182,7 +182,7 @@ instance GoogleRequest ClientAccessUpdate' where
               _cauKey
               _cauOAuthToken
               (Just AltJSON)
-              _cauClientAccessCapabilities
+              _cauPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ClientAccessUpdateResource)

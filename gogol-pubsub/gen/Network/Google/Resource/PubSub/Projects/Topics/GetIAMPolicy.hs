@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,14 +54,14 @@ import           Network.Google.PubSub.Types
 -- 'ProjectsTopicsGetIAMPolicy'' request conforms to.
 type ProjectsTopicsGetIAMPolicyResource =
      "v1beta2" :>
-       "{+resource}:getIamPolicy" :>
+       CaptureMode "resource" "getIamPolicy" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -86,7 +87,7 @@ data ProjectsTopicsGetIAMPolicy' = ProjectsTopicsGetIAMPolicy'
     , _ptgipOAuthToken     :: !(Maybe OAuthToken)
     , _ptgipFields         :: !(Maybe Text)
     , _ptgipCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsTopicsGetIAMPolicy'' with the minimum fields required to make a request.
 --
@@ -223,12 +224,12 @@ instance GoogleRequest ProjectsTopicsGetIAMPolicy'
         type Rs ProjectsTopicsGetIAMPolicy' = Policy
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsTopicsGetIAMPolicy'{..}
-          = go _ptgipXgafv _ptgipAccessToken _ptgipBearerToken
-              _ptgipCallback
+          = go _ptgipResource _ptgipXgafv _ptgipUploadProtocol
               (Just _ptgipPp)
+              _ptgipAccessToken
               _ptgipUploadType
-              _ptgipUploadProtocol
-              _ptgipResource
+              _ptgipBearerToken
+              _ptgipCallback
               _ptgipQuotaUser
               (Just _ptgipPrettyPrint)
               _ptgipFields

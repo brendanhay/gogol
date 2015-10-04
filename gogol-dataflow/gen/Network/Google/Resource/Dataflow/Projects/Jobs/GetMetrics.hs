@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -60,13 +61,13 @@ type ProjectsJobsGetMetricsResource =
              Capture "jobId" Text :>
                "metrics" :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "startTime" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "upload_protocol" Text :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "startTime" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "callback" Text :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "fields" Text :>
@@ -94,7 +95,7 @@ data ProjectsJobsGetMetrics' = ProjectsJobsGetMetrics'
     , _pjgmOAuthToken     :: !(Maybe OAuthToken)
     , _pjgmFields         :: !(Maybe Text)
     , _pjgmCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsJobsGetMetrics'' with the minimum fields required to make a request.
 --
@@ -247,14 +248,14 @@ instance GoogleRequest ProjectsJobsGetMetrics' where
         type Rs ProjectsJobsGetMetrics' = JobMetrics
         request = requestWithRoute defReq dataflowURL
         requestWithRoute r u ProjectsJobsGetMetrics'{..}
-          = go _pjgmXgafv _pjgmAccessToken _pjgmBearerToken
-              _pjgmCallback
-              (Just _pjgmPp)
-              _pjgmStartTime
-              _pjgmUploadType
+          = go _pjgmProjectId _pjgmJobId _pjgmXgafv
               _pjgmUploadProtocol
-              _pjgmProjectId
-              _pjgmJobId
+              _pjgmStartTime
+              (Just _pjgmPp)
+              _pjgmAccessToken
+              _pjgmUploadType
+              _pjgmBearerToken
+              _pjgmCallback
               _pjgmQuotaUser
               (Just _pjgmPrettyPrint)
               _pjgmFields

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,8 +53,8 @@ type MachineTypesAggregatedListResource =
        "aggregated" :>
          "machineTypes" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data MachineTypesAggregatedList' = MachineTypesAggregatedList'
     , _mtalOAuthToken  :: !(Maybe OAuthToken)
     , _mtalMaxResults  :: !Word32
     , _mtalFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MachineTypesAggregatedList'' with the minimum fields required to make a request.
 --
@@ -200,9 +201,8 @@ instance GoogleRequest MachineTypesAggregatedList'
              MachineTypeAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u MachineTypesAggregatedList'{..}
-          = go _mtalFilter (Just _mtalMaxResults)
-              _mtalPageToken
-              _mtalProject
+          = go _mtalProject _mtalFilter _mtalPageToken
+              (Just _mtalMaxResults)
               _mtalQuotaUser
               (Just _mtalPrettyPrint)
               _mtalUserIP

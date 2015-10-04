@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,13 +54,13 @@ import           Network.Google.Prelude
 type PromoOfferDismissResource =
      "promooffer" :>
        "dismiss" :>
-         QueryParam "androidId" Text :>
-           QueryParam "device" Text :>
-             QueryParam "manufacturer" Text :>
+         QueryParam "manufacturer" Text :>
+           QueryParam "serial" Text :>
+             QueryParam "device" Text :>
                QueryParam "model" Text :>
                  QueryParam "offerId" Text :>
                    QueryParam "product" Text :>
-                     QueryParam "serial" Text :>
+                     QueryParam "androidId" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -85,7 +86,7 @@ data PromoOfferDismiss' = PromoOfferDismiss'
     , _podOAuthToken   :: !(Maybe OAuthToken)
     , _podAndroidId    :: !(Maybe Text)
     , _podFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PromoOfferDismiss'' with the minimum fields required to make a request.
 --
@@ -214,11 +215,10 @@ instance GoogleRequest PromoOfferDismiss' where
         type Rs PromoOfferDismiss' = ()
         request = requestWithRoute defReq booksURL
         requestWithRoute r u PromoOfferDismiss'{..}
-          = go _podAndroidId _podDevice _podManufacturer
-              _podModel
+          = go _podManufacturer _podSerial _podDevice _podModel
               _podOfferId
               _podProduct
-              _podSerial
+              _podAndroidId
               _podQuotaUser
               (Just _podPrettyPrint)
               _podUserIP

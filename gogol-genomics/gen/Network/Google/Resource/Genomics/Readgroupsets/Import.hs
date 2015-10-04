@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -40,8 +41,8 @@ module Network.Google.Resource.Genomics.Readgroupsets.Import
     , riQuotaUser
     , riPrettyPrint
     , riUserIP
+    , riPayload
     , riKey
-    , riImportReadGroupSetsRequest
     , riOAuthToken
     , riFields
     ) where
@@ -75,14 +76,14 @@ type ReadgroupsetsImportResource =
 --
 -- /See:/ 'readgroupsetsImport'' smart constructor.
 data ReadgroupsetsImport' = ReadgroupsetsImport'
-    { _riQuotaUser                  :: !(Maybe Text)
-    , _riPrettyPrint                :: !Bool
-    , _riUserIP                     :: !(Maybe Text)
-    , _riKey                        :: !(Maybe Key)
-    , _riImportReadGroupSetsRequest :: !ImportReadGroupSetsRequest
-    , _riOAuthToken                 :: !(Maybe OAuthToken)
-    , _riFields                     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _riQuotaUser   :: !(Maybe Text)
+    , _riPrettyPrint :: !Bool
+    , _riUserIP      :: !(Maybe Text)
+    , _riPayload     :: !ImportReadGroupSetsRequest
+    , _riKey         :: !(Maybe Key)
+    , _riOAuthToken  :: !(Maybe OAuthToken)
+    , _riFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsImport'' with the minimum fields required to make a request.
 --
@@ -94,23 +95,23 @@ data ReadgroupsetsImport' = ReadgroupsetsImport'
 --
 -- * 'riUserIP'
 --
--- * 'riKey'
+-- * 'riPayload'
 --
--- * 'riImportReadGroupSetsRequest'
+-- * 'riKey'
 --
 -- * 'riOAuthToken'
 --
 -- * 'riFields'
 readgroupsetsImport'
-    :: ImportReadGroupSetsRequest -- ^ 'ImportReadGroupSetsRequest'
+    :: ImportReadGroupSetsRequest -- ^ 'payload'
     -> ReadgroupsetsImport'
-readgroupsetsImport' pRiImportReadGroupSetsRequest_ =
+readgroupsetsImport' pRiPayload_ =
     ReadgroupsetsImport'
     { _riQuotaUser = Nothing
     , _riPrettyPrint = True
     , _riUserIP = Nothing
+    , _riPayload = pRiPayload_
     , _riKey = Nothing
-    , _riImportReadGroupSetsRequest = pRiImportReadGroupSetsRequest_
     , _riOAuthToken = Nothing
     , _riFields = Nothing
     }
@@ -133,17 +134,16 @@ riPrettyPrint
 riUserIP :: Lens' ReadgroupsetsImport' (Maybe Text)
 riUserIP = lens _riUserIP (\ s a -> s{_riUserIP = a})
 
+-- | Multipart request metadata.
+riPayload :: Lens' ReadgroupsetsImport' ImportReadGroupSetsRequest
+riPayload
+  = lens _riPayload (\ s a -> s{_riPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 riKey :: Lens' ReadgroupsetsImport' (Maybe Key)
 riKey = lens _riKey (\ s a -> s{_riKey = a})
-
--- | Multipart request metadata.
-riImportReadGroupSetsRequest :: Lens' ReadgroupsetsImport' ImportReadGroupSetsRequest
-riImportReadGroupSetsRequest
-  = lens _riImportReadGroupSetsRequest
-      (\ s a -> s{_riImportReadGroupSetsRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 riOAuthToken :: Lens' ReadgroupsetsImport' (Maybe OAuthToken)
@@ -168,7 +168,7 @@ instance GoogleRequest ReadgroupsetsImport' where
               _riKey
               _riOAuthToken
               (Just AltJSON)
-              _riImportReadGroupSetsRequest
+              _riPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReadgroupsetsImportResource)

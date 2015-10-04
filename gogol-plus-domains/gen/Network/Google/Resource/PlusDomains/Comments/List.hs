@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,11 +52,9 @@ type CommentsListResource =
      "activities" :>
        Capture "activityId" Text :>
          "comments" :>
-           QueryParam "maxResults" Word32 :>
+           QueryParam "sortOrder" SortOrder :>
              QueryParam "pageToken" Text :>
-               QueryParam "sortOrder"
-                 PlusDomainsCommentsListSortOrder
-                 :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -72,13 +71,13 @@ data CommentsList' = CommentsList'
     , _comPrettyPrint :: !Bool
     , _comUserIP      :: !(Maybe Text)
     , _comActivityId  :: !Text
-    , _comSortOrder   :: !PlusDomainsCommentsListSortOrder
+    , _comSortOrder   :: !SortOrder
     , _comKey         :: !(Maybe Key)
     , _comPageToken   :: !(Maybe Text)
     , _comOAuthToken  :: !(Maybe OAuthToken)
     , _comMaxResults  :: !Word32
     , _comFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsList'' with the minimum fields required to make a request.
 --
@@ -146,7 +145,7 @@ comActivityId
       (\ s a -> s{_comActivityId = a})
 
 -- | The order in which to sort the list of comments.
-comSortOrder :: Lens' CommentsList' PlusDomainsCommentsListSortOrder
+comSortOrder :: Lens' CommentsList' SortOrder
 comSortOrder
   = lens _comSortOrder (\ s a -> s{_comSortOrder = a})
 
@@ -190,9 +189,9 @@ instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentFeed
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CommentsList'{..}
-          = go (Just _comMaxResults) _comPageToken
-              (Just _comSortOrder)
-              _comActivityId
+          = go _comActivityId (Just _comSortOrder)
+              _comPageToken
+              (Just _comMaxResults)
               _comQuotaUser
               (Just _comPrettyPrint)
               _comUserIP

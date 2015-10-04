@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ type TemplateListResource =
      "tables" :>
        Capture "tableId" Text :>
          "templates" :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -73,7 +74,7 @@ data TemplateList' = TemplateList'
     , _tllTableId     :: !Text
     , _tllMaxResults  :: !(Maybe Word32)
     , _tllFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateList'' with the minimum fields required to make a request.
 --
@@ -172,7 +173,7 @@ instance GoogleRequest TemplateList' where
         type Rs TemplateList' = TemplateList
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TemplateList'{..}
-          = go _tllMaxResults _tllPageToken _tllTableId
+          = go _tllTableId _tllPageToken _tllMaxResults
               _tllQuotaUser
               (Just _tllPrettyPrint)
               _tllUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,10 +34,10 @@ module Network.Google.Resource.Mirror.Timeline.Patch
     , tpQuotaUser
     , tpPrettyPrint
     , tpUserIP
+    , tpPayload
     , tpKey
     , tpId
     , tpOAuthToken
-    , tpTimelineItem
     , tpFields
     ) where
 
@@ -62,15 +63,15 @@ type TimelinePatchResource =
 --
 -- /See:/ 'timelinePatch'' smart constructor.
 data TimelinePatch' = TimelinePatch'
-    { _tpQuotaUser    :: !(Maybe Text)
-    , _tpPrettyPrint  :: !Bool
-    , _tpUserIP       :: !(Maybe Text)
-    , _tpKey          :: !(Maybe Key)
-    , _tpId           :: !Text
-    , _tpOAuthToken   :: !(Maybe OAuthToken)
-    , _tpTimelineItem :: !TimelineItem
-    , _tpFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _tpQuotaUser   :: !(Maybe Text)
+    , _tpPrettyPrint :: !Bool
+    , _tpUserIP      :: !(Maybe Text)
+    , _tpPayload     :: !TimelineItem
+    , _tpKey         :: !(Maybe Key)
+    , _tpId          :: !Text
+    , _tpOAuthToken  :: !(Maybe OAuthToken)
+    , _tpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelinePatch'' with the minimum fields required to make a request.
 --
@@ -82,28 +83,28 @@ data TimelinePatch' = TimelinePatch'
 --
 -- * 'tpUserIP'
 --
+-- * 'tpPayload'
+--
 -- * 'tpKey'
 --
 -- * 'tpId'
 --
 -- * 'tpOAuthToken'
 --
--- * 'tpTimelineItem'
---
 -- * 'tpFields'
 timelinePatch'
-    :: Text -- ^ 'id'
-    -> TimelineItem -- ^ 'TimelineItem'
+    :: TimelineItem -- ^ 'payload'
+    -> Text -- ^ 'id'
     -> TimelinePatch'
-timelinePatch' pTpId_ pTpTimelineItem_ =
+timelinePatch' pTpPayload_ pTpId_ =
     TimelinePatch'
     { _tpQuotaUser = Nothing
     , _tpPrettyPrint = True
     , _tpUserIP = Nothing
+    , _tpPayload = pTpPayload_
     , _tpKey = Nothing
     , _tpId = pTpId_
     , _tpOAuthToken = Nothing
-    , _tpTimelineItem = pTpTimelineItem_
     , _tpFields = Nothing
     }
 
@@ -125,6 +126,11 @@ tpPrettyPrint
 tpUserIP :: Lens' TimelinePatch' (Maybe Text)
 tpUserIP = lens _tpUserIP (\ s a -> s{_tpUserIP = a})
 
+-- | Multipart request metadata.
+tpPayload :: Lens' TimelinePatch' TimelineItem
+tpPayload
+  = lens _tpPayload (\ s a -> s{_tpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -139,12 +145,6 @@ tpId = lens _tpId (\ s a -> s{_tpId = a})
 tpOAuthToken :: Lens' TimelinePatch' (Maybe OAuthToken)
 tpOAuthToken
   = lens _tpOAuthToken (\ s a -> s{_tpOAuthToken = a})
-
--- | Multipart request metadata.
-tpTimelineItem :: Lens' TimelinePatch' TimelineItem
-tpTimelineItem
-  = lens _tpTimelineItem
-      (\ s a -> s{_tpTimelineItem = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tpFields :: Lens' TimelinePatch' (Maybe Text)
@@ -164,7 +164,7 @@ instance GoogleRequest TimelinePatch' where
               _tpKey
               _tpOAuthToken
               (Just AltJSON)
-              _tpTimelineItem
+              _tpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TimelinePatchResource)

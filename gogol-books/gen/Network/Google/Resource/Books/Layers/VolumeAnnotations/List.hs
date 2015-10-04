@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -63,19 +64,19 @@ type LayersVolumeAnnotationsListResource =
        Capture "volumeId" Text :>
          "layers" :>
            Capture "layerId" Text :>
-             QueryParam "endOffset" Text :>
-               QueryParam "endPosition" Text :>
+             QueryParam "contentVersion" Text :>
+               QueryParam "startOffset" Text :>
                  QueryParam "locale" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "showDeleted" Bool :>
-                         QueryParam "source" Text :>
-                           QueryParam "startOffset" Text :>
-                             QueryParam "startPosition" Text :>
-                               QueryParam "updatedMax" Text :>
-                                 QueryParam "updatedMin" Text :>
-                                   QueryParam "volumeAnnotationsVersion" Text :>
-                                     QueryParam "contentVersion" Text :>
+                   QueryParam "showDeleted" Bool :>
+                     QueryParam "volumeAnnotationsVersion" Text :>
+                       QueryParam "updatedMax" Text :>
+                         QueryParam "updatedMin" Text :>
+                           QueryParam "endOffset" Text :>
+                             QueryParam "source" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "endPosition" Text :>
+                                   QueryParam "maxResults" Word32 :>
+                                     QueryParam "startPosition" Text :>
                                        QueryParam "quotaUser" Text :>
                                          QueryParam "prettyPrint" Bool :>
                                            QueryParam "userIp" Text :>
@@ -113,7 +114,7 @@ data LayersVolumeAnnotationsList' = LayersVolumeAnnotationsList'
     , _lvalMaxResults               :: !(Maybe Word32)
     , _lvalStartPosition            :: !(Maybe Text)
     , _lvalFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersVolumeAnnotationsList'' with the minimum fields required to make a request.
 --
@@ -328,19 +329,20 @@ instance GoogleRequest LayersVolumeAnnotationsList'
              Volumeannotations
         request = requestWithRoute defReq booksURL
         requestWithRoute r u LayersVolumeAnnotationsList'{..}
-          = go _lvalEndOffset _lvalEndPosition _lvalLocale
-              _lvalMaxResults
-              _lvalPageToken
-              _lvalShowDeleted
-              _lvalSource
+          = go _lvalVolumeId _lvalLayerId
+              (Just _lvalContentVersion)
               _lvalStartOffset
-              _lvalStartPosition
+              _lvalLocale
+              _lvalShowDeleted
+              _lvalVolumeAnnotationsVersion
               _lvalUpdatedMax
               _lvalUpdatedMin
-              _lvalVolumeAnnotationsVersion
-              _lvalVolumeId
-              _lvalLayerId
-              (Just _lvalContentVersion)
+              _lvalEndOffset
+              _lvalSource
+              _lvalPageToken
+              _lvalEndPosition
+              _lvalMaxResults
+              _lvalStartPosition
               _lvalQuotaUser
               (Just _lvalPrettyPrint)
               _lvalUserIP

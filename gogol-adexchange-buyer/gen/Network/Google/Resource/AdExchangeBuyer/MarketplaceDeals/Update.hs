@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Update
     , mduQuotaUser
     , mduPrettyPrint
     , mduUserIP
+    , mduPayload
     , mduKey
-    , mduEditAllOrderDealsRequest
     , mduOAuthToken
     , mduOrderId
     , mduFields
@@ -64,15 +65,15 @@ type MarketplaceDealsUpdateResource =
 --
 -- /See:/ 'marketplaceDealsUpdate'' smart constructor.
 data MarketplaceDealsUpdate' = MarketplaceDealsUpdate'
-    { _mduQuotaUser                :: !(Maybe Text)
-    , _mduPrettyPrint              :: !Bool
-    , _mduUserIP                   :: !(Maybe Text)
-    , _mduKey                      :: !(Maybe Key)
-    , _mduEditAllOrderDealsRequest :: !EditAllOrderDealsRequest
-    , _mduOAuthToken               :: !(Maybe OAuthToken)
-    , _mduOrderId                  :: !Text
-    , _mduFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mduQuotaUser   :: !(Maybe Text)
+    , _mduPrettyPrint :: !Bool
+    , _mduUserIP      :: !(Maybe Text)
+    , _mduPayload     :: !EditAllOrderDealsRequest
+    , _mduKey         :: !(Maybe Key)
+    , _mduOAuthToken  :: !(Maybe OAuthToken)
+    , _mduOrderId     :: !Text
+    , _mduFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceDealsUpdate'' with the minimum fields required to make a request.
 --
@@ -84,9 +85,9 @@ data MarketplaceDealsUpdate' = MarketplaceDealsUpdate'
 --
 -- * 'mduUserIP'
 --
--- * 'mduKey'
+-- * 'mduPayload'
 --
--- * 'mduEditAllOrderDealsRequest'
+-- * 'mduKey'
 --
 -- * 'mduOAuthToken'
 --
@@ -94,16 +95,16 @@ data MarketplaceDealsUpdate' = MarketplaceDealsUpdate'
 --
 -- * 'mduFields'
 marketplaceDealsUpdate'
-    :: EditAllOrderDealsRequest -- ^ 'EditAllOrderDealsRequest'
+    :: EditAllOrderDealsRequest -- ^ 'payload'
     -> Text -- ^ 'orderId'
     -> MarketplaceDealsUpdate'
-marketplaceDealsUpdate' pMduEditAllOrderDealsRequest_ pMduOrderId_ =
+marketplaceDealsUpdate' pMduPayload_ pMduOrderId_ =
     MarketplaceDealsUpdate'
     { _mduQuotaUser = Nothing
     , _mduPrettyPrint = True
     , _mduUserIP = Nothing
+    , _mduPayload = pMduPayload_
     , _mduKey = Nothing
-    , _mduEditAllOrderDealsRequest = pMduEditAllOrderDealsRequest_
     , _mduOAuthToken = Nothing
     , _mduOrderId = pMduOrderId_
     , _mduFields = Nothing
@@ -128,17 +129,16 @@ mduUserIP :: Lens' MarketplaceDealsUpdate' (Maybe Text)
 mduUserIP
   = lens _mduUserIP (\ s a -> s{_mduUserIP = a})
 
+-- | Multipart request metadata.
+mduPayload :: Lens' MarketplaceDealsUpdate' EditAllOrderDealsRequest
+mduPayload
+  = lens _mduPayload (\ s a -> s{_mduPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 mduKey :: Lens' MarketplaceDealsUpdate' (Maybe Key)
 mduKey = lens _mduKey (\ s a -> s{_mduKey = a})
-
--- | Multipart request metadata.
-mduEditAllOrderDealsRequest :: Lens' MarketplaceDealsUpdate' EditAllOrderDealsRequest
-mduEditAllOrderDealsRequest
-  = lens _mduEditAllOrderDealsRequest
-      (\ s a -> s{_mduEditAllOrderDealsRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 mduOAuthToken :: Lens' MarketplaceDealsUpdate' (Maybe OAuthToken)
@@ -171,7 +171,7 @@ instance GoogleRequest MarketplaceDealsUpdate' where
               _mduKey
               _mduOAuthToken
               (Just AltJSON)
-              _mduEditAllOrderDealsRequest
+              _mduPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MarketplaceDealsUpdateResource)

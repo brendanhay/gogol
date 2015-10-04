@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -62,14 +63,14 @@ type CoursesAliasesListResource =
          Capture "courseId" Text :>
            "aliases" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "bearer_token" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParam "pageSize" Int32 :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "upload_protocol" Text :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "pageSize" Int32 :>
+                             QueryParam "callback" Text :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
@@ -101,7 +102,7 @@ data CoursesAliasesList' = CoursesAliasesList'
     , _calPageSize       :: !(Maybe Int32)
     , _calFields         :: !(Maybe Text)
     , _calCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesAliasesList'' with the minimum fields required to make a request.
 --
@@ -258,14 +259,14 @@ instance GoogleRequest CoursesAliasesList' where
              ListCourseAliasesResponse
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesAliasesList'{..}
-          = go _calXgafv _calAccessToken _calBearerToken
-              _calCallback
-              _calPageSize
-              _calPageToken
+          = go _calCourseId _calXgafv _calUploadProtocol
               (Just _calPp)
+              _calAccessToken
               _calUploadType
-              _calUploadProtocol
-              _calCourseId
+              _calBearerToken
+              _calPageToken
+              _calPageSize
+              _calCallback
               _calQuotaUser
               (Just _calPrettyPrint)
               _calFields

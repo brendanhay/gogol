@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -63,15 +64,15 @@ type AppsOperationsListResource =
          Capture "appsId" Text :>
            "operations" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "bearer_token" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageSize" Int32 :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "upload_protocol" Text :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "filter" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "pageSize" Int32 :>
+                               QueryParam "callback" Text :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "fields" Text :>
@@ -104,7 +105,7 @@ data AppsOperationsList' = AppsOperationsList'
     , _aolPageSize       :: !(Maybe Int32)
     , _aolFields         :: !(Maybe Text)
     , _aolCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsOperationsList'' with the minimum fields required to make a request.
 --
@@ -259,15 +260,15 @@ instance GoogleRequest AppsOperationsList' where
         type Rs AppsOperationsList' = ListOperationsResponse
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsOperationsList'{..}
-          = go _aolXgafv _aolAccessToken _aolBearerToken
-              _aolCallback
-              _aolFilter
-              _aolPageSize
-              _aolPageToken
+          = go _aolAppsId _aolXgafv _aolUploadProtocol
               (Just _aolPp)
+              _aolAccessToken
               _aolUploadType
-              _aolUploadProtocol
-              _aolAppsId
+              _aolBearerToken
+              _aolFilter
+              _aolPageToken
+              _aolPageSize
+              _aolCallback
               _aolQuotaUser
               (Just _aolPrettyPrint)
               _aolFields

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.SiteVerification.WebResource.Patch
     , wrpQuotaUser
     , wrpPrettyPrint
     , wrpUserIP
+    , wrpPayload
     , wrpKey
-    , wrpSiteVerificationWebResourceResource
     , wrpId
     , wrpOAuthToken
     , wrpFields
@@ -64,15 +65,15 @@ type WebResourcePatchResource =
 --
 -- /See:/ 'webResourcePatch'' smart constructor.
 data WebResourcePatch' = WebResourcePatch'
-    { _wrpQuotaUser                           :: !(Maybe Text)
-    , _wrpPrettyPrint                         :: !Bool
-    , _wrpUserIP                              :: !(Maybe Text)
-    , _wrpKey                                 :: !(Maybe Key)
-    , _wrpSiteVerificationWebResourceResource :: !SiteVerificationWebResourceResource
-    , _wrpId                                  :: !Text
-    , _wrpOAuthToken                          :: !(Maybe OAuthToken)
-    , _wrpFields                              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _wrpQuotaUser   :: !(Maybe Text)
+    , _wrpPrettyPrint :: !Bool
+    , _wrpUserIP      :: !(Maybe Text)
+    , _wrpPayload     :: !SiteVerificationWebResourceResource
+    , _wrpKey         :: !(Maybe Key)
+    , _wrpId          :: !Text
+    , _wrpOAuthToken  :: !(Maybe OAuthToken)
+    , _wrpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebResourcePatch'' with the minimum fields required to make a request.
 --
@@ -84,9 +85,9 @@ data WebResourcePatch' = WebResourcePatch'
 --
 -- * 'wrpUserIP'
 --
--- * 'wrpKey'
+-- * 'wrpPayload'
 --
--- * 'wrpSiteVerificationWebResourceResource'
+-- * 'wrpKey'
 --
 -- * 'wrpId'
 --
@@ -94,16 +95,16 @@ data WebResourcePatch' = WebResourcePatch'
 --
 -- * 'wrpFields'
 webResourcePatch'
-    :: SiteVerificationWebResourceResource -- ^ 'SiteVerificationWebResourceResource'
+    :: SiteVerificationWebResourceResource -- ^ 'payload'
     -> Text -- ^ 'id'
     -> WebResourcePatch'
-webResourcePatch' pWrpSiteVerificationWebResourceResource_ pWrpId_ =
+webResourcePatch' pWrpPayload_ pWrpId_ =
     WebResourcePatch'
     { _wrpQuotaUser = Nothing
     , _wrpPrettyPrint = False
     , _wrpUserIP = Nothing
+    , _wrpPayload = pWrpPayload_
     , _wrpKey = Nothing
-    , _wrpSiteVerificationWebResourceResource = pWrpSiteVerificationWebResourceResource_
     , _wrpId = pWrpId_
     , _wrpOAuthToken = Nothing
     , _wrpFields = Nothing
@@ -128,18 +129,16 @@ wrpUserIP :: Lens' WebResourcePatch' (Maybe Text)
 wrpUserIP
   = lens _wrpUserIP (\ s a -> s{_wrpUserIP = a})
 
+-- | Multipart request metadata.
+wrpPayload :: Lens' WebResourcePatch' SiteVerificationWebResourceResource
+wrpPayload
+  = lens _wrpPayload (\ s a -> s{_wrpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 wrpKey :: Lens' WebResourcePatch' (Maybe Key)
 wrpKey = lens _wrpKey (\ s a -> s{_wrpKey = a})
-
--- | Multipart request metadata.
-wrpSiteVerificationWebResourceResource :: Lens' WebResourcePatch' SiteVerificationWebResourceResource
-wrpSiteVerificationWebResourceResource
-  = lens _wrpSiteVerificationWebResourceResource
-      (\ s a ->
-         s{_wrpSiteVerificationWebResourceResource = a})
 
 -- | The id of a verified site or domain.
 wrpId :: Lens' WebResourcePatch' Text
@@ -171,7 +170,7 @@ instance GoogleRequest WebResourcePatch' where
               _wrpKey
               _wrpOAuthToken
               (Just AltJSON)
-              _wrpSiteVerificationWebResourceResource
+              _wrpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy WebResourcePatchResource)

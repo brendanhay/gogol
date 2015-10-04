@@ -18,13 +18,98 @@ module Network.Google.AdminDirectory.Types.Product where
 import           Network.Google.AdminDirectory.Types.Sum
 import           Network.Google.Prelude
 
+--
+-- /See:/ 'applicationsItem' smart constructor.
+data ApplicationsItem = ApplicationsItem
+    { _aiVersionCode :: !(Maybe Int32)
+    , _aiVersionName :: !(Maybe Text)
+    , _aiPackageName :: !(Maybe Text)
+    , _aiDisplayName :: !(Maybe Text)
+    , _aiPermission  :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ApplicationsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aiVersionCode'
+--
+-- * 'aiVersionName'
+--
+-- * 'aiPackageName'
+--
+-- * 'aiDisplayName'
+--
+-- * 'aiPermission'
+applicationsItem
+    :: ApplicationsItem
+applicationsItem =
+    ApplicationsItem
+    { _aiVersionCode = Nothing
+    , _aiVersionName = Nothing
+    , _aiPackageName = Nothing
+    , _aiDisplayName = Nothing
+    , _aiPermission = Nothing
+    }
+
+-- | Version code of application
+aiVersionCode :: Lens' ApplicationsItem (Maybe Int32)
+aiVersionCode
+  = lens _aiVersionCode
+      (\ s a -> s{_aiVersionCode = a})
+
+-- | Version name of application
+aiVersionName :: Lens' ApplicationsItem (Maybe Text)
+aiVersionName
+  = lens _aiVersionName
+      (\ s a -> s{_aiVersionName = a})
+
+-- | Package name of application
+aiPackageName :: Lens' ApplicationsItem (Maybe Text)
+aiPackageName
+  = lens _aiPackageName
+      (\ s a -> s{_aiPackageName = a})
+
+-- | Display name of application
+aiDisplayName :: Lens' ApplicationsItem (Maybe Text)
+aiDisplayName
+  = lens _aiDisplayName
+      (\ s a -> s{_aiDisplayName = a})
+
+-- | List of Permissions for application
+aiPermission :: Lens' ApplicationsItem [Text]
+aiPermission
+  = lens _aiPermission (\ s a -> s{_aiPermission = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ApplicationsItem where
+        parseJSON
+          = withObject "ApplicationsItem"
+              (\ o ->
+                 ApplicationsItem <$>
+                   (o .:? "versionCode") <*> (o .:? "versionName") <*>
+                     (o .:? "packageName")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "permission" .!= mempty))
+
+instance ToJSON ApplicationsItem where
+        toJSON ApplicationsItem{..}
+          = object
+              (catMaybes
+                 [("versionCode" .=) <$> _aiVersionCode,
+                  ("versionName" .=) <$> _aiVersionName,
+                  ("packageName" .=) <$> _aiPackageName,
+                  ("displayName" .=) <$> _aiDisplayName,
+                  ("permission" .=) <$> _aiPermission])
+
 -- | JSON template for About (notes) of a user in Directory API.
 --
 -- /See:/ 'userAbout' smart constructor.
 data UserAbout = UserAbout
     { _uaValue       :: !(Maybe Text)
     , _uaContentType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserAbout' with the minimum fields required to make a request.
 --
@@ -75,7 +160,7 @@ data VerificationCode = VerificationCode
     , _vcEtag             :: !(Maybe Text)
     , _vcKind             :: !Text
     , _vcUserId           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VerificationCode' with the minimum fields required to make a request.
 --
@@ -148,7 +233,7 @@ data OrgUnit = OrgUnit
     , _ouParentOrgUnitId   :: !(Maybe Text)
     , _ouDescription       :: !(Maybe Text)
     , _ouOrgUnitId         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrgUnit' with the minimum fields required to make a request.
 --
@@ -269,7 +354,7 @@ data Groups = Groups
     , _gEtag          :: !(Maybe Text)
     , _gNextPageToken :: !(Maybe Text)
     , _gKind          :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Groups' with the minimum fields required to make a request.
 --
@@ -335,7 +420,7 @@ instance ToJSON Groups where
 -- /See:/ 'userMakeAdmin' smart constructor.
 newtype UserMakeAdmin = UserMakeAdmin
     { _umaStatus :: Maybe Bool
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserMakeAdmin' with the minimum fields required to make a request.
 --
@@ -380,7 +465,7 @@ data UserAddress = UserAddress
     , _uaType               :: !(Maybe Text)
     , _uaCustomType         :: !(Maybe Text)
     , _uaSourceIsStructured :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserAddress' with the minimum fields required to make a request.
 --
@@ -552,7 +637,7 @@ data Group = Group
     , _groAdminCreated       :: !(Maybe Bool)
     , _groId                 :: !(Maybe Text)
     , _groDescription        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Group' with the minimum fields required to make a request.
 --
@@ -676,55 +761,6 @@ instance ToJSON Group where
                   ("id" .=) <$> _groId,
                   ("description" .=) <$> _groDescription])
 
---
--- /See:/ 'chromeOSDeviceActiveTimeRanges' smart constructor.
-data ChromeOSDeviceActiveTimeRanges = ChromeOSDeviceActiveTimeRanges
-    { _codatrDate       :: !(Maybe Date')
-    , _codatrActiveTime :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ChromeOSDeviceActiveTimeRanges' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'codatrDate'
---
--- * 'codatrActiveTime'
-chromeOSDeviceActiveTimeRanges
-    :: ChromeOSDeviceActiveTimeRanges
-chromeOSDeviceActiveTimeRanges =
-    ChromeOSDeviceActiveTimeRanges
-    { _codatrDate = Nothing
-    , _codatrActiveTime = Nothing
-    }
-
--- | Date of usage
-codatrDate :: Lens' ChromeOSDeviceActiveTimeRanges (Maybe LocalTime)
-codatrDate
-  = lens _codatrDate (\ s a -> s{_codatrDate = a}) .
-      mapping _Date
-
--- | Duration in milliseconds
-codatrActiveTime :: Lens' ChromeOSDeviceActiveTimeRanges (Maybe Int32)
-codatrActiveTime
-  = lens _codatrActiveTime
-      (\ s a -> s{_codatrActiveTime = a})
-
-instance FromJSON ChromeOSDeviceActiveTimeRanges
-         where
-        parseJSON
-          = withObject "ChromeOSDeviceActiveTimeRanges"
-              (\ o ->
-                 ChromeOSDeviceActiveTimeRanges <$>
-                   (o .:? "date") <*> (o .:? "activeTime"))
-
-instance ToJSON ChromeOSDeviceActiveTimeRanges where
-        toJSON ChromeOSDeviceActiveTimeRanges{..}
-          = object
-              (catMaybes
-                 [("date" .=) <$> _codatrDate,
-                  ("activeTime" .=) <$> _codatrActiveTime])
-
 -- | The template that returns individual ASP (Access Code) data.
 --
 -- /See:/ 'asp' smart constructor.
@@ -736,7 +772,7 @@ data Asp = Asp
     , _aName         :: !(Maybe Text)
     , _aLastTimeUsed :: !(Maybe Int64)
     , _aUserKey      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Asp' with the minimum fields required to make a request.
 --
@@ -830,7 +866,7 @@ data Schemas = Schemas
     { _sEtag    :: !(Maybe Text)
     , _sSchemas :: !(Maybe [Schema])
     , _sKind    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Schemas' with the minimum fields required to make a request.
 --
@@ -890,14 +926,14 @@ data ChromeOSDevice = ChromeOSDevice
     , _codAnnotatedUser      :: !(Maybe Text)
     , _codPlatformVersion    :: !(Maybe Text)
     , _codLastSync           :: !(Maybe DateTime')
-    , _codActiveTimeRanges   :: !(Maybe [ChromeOSDeviceActiveTimeRanges])
+    , _codActiveTimeRanges   :: !(Maybe [ActiveTimeRangesItem])
     , _codKind               :: !Text
     , _codEthernetMACAddress :: !(Maybe Text)
     , _codLastEnrollmentTime :: !(Maybe DateTime')
     , _codAnnotatedLocation  :: !(Maybe Text)
     , _codMACAddress         :: !(Maybe Text)
     , _codOrgUnitPath        :: !(Maybe Text)
-    , _codRecentUsers        :: !(Maybe [ChromeOSDeviceRecentUsers])
+    , _codRecentUsers        :: !(Maybe [RecentUsersItem])
     , _codSupportEndDate     :: !(Maybe DateTime')
     , _codModel              :: !(Maybe Text)
     , _codWillAutoRenew      :: !(Maybe Bool)
@@ -910,7 +946,7 @@ data ChromeOSDevice = ChromeOSDevice
     , _codSerialNumber       :: !(Maybe Text)
     , _codFirmwareVersion    :: !(Maybe Text)
     , _codOSVersion          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChromeOSDevice' with the minimum fields required to make a request.
 --
@@ -1025,7 +1061,7 @@ codLastSync
       mapping _DateTime
 
 -- | List of active time ranges (Read-only)
-codActiveTimeRanges :: Lens' ChromeOSDevice [ChromeOSDeviceActiveTimeRanges]
+codActiveTimeRanges :: Lens' ChromeOSDevice [ActiveTimeRangesItem]
 codActiveTimeRanges
   = lens _codActiveTimeRanges
       (\ s a -> s{_codActiveTimeRanges = a})
@@ -1069,7 +1105,7 @@ codOrgUnitPath
 
 -- | List of recent device users, in descending order by last login time
 -- (Read-only)
-codRecentUsers :: Lens' ChromeOSDevice [ChromeOSDeviceRecentUsers]
+codRecentUsers :: Lens' ChromeOSDevice [RecentUsersItem]
 codRecentUsers
   = lens _codRecentUsers
       (\ s a -> s{_codRecentUsers = a})
@@ -1211,7 +1247,7 @@ data Users = Users
     , _uUsers         :: !(Maybe [User])
     , _uKind          :: !Text
     , _uTriggerEvent  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Users' with the minimum fields required to make a request.
 --
@@ -1292,7 +1328,7 @@ data UserIm = UserIm
     , _uiCustomProtocol :: !(Maybe Text)
     , _uiType           :: !(Maybe Text)
     , _uiCustomType     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserIm' with the minimum fields required to make a request.
 --
@@ -1391,7 +1427,7 @@ data Notification = Notification
     , _nIsUnread       :: !(Maybe Bool)
     , _nNotificationId :: !(Maybe Text)
     , _nSendTime       :: !(Maybe DateTime')
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Notification' with the minimum fields required to make a request.
 --
@@ -1488,27 +1524,6 @@ instance ToJSON Notification where
                   ("notificationId" .=) <$> _nNotificationId,
                   ("sendTime" .=) <$> _nSendTime])
 
--- | Custom fields of the user.
---
--- /See:/ 'userCustomSchemas' smart constructor.
-data UserCustomSchemas =
-    UserCustomSchemas
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'UserCustomSchemas' with the minimum fields required to make a request.
---
-userCustomSchemas
-    :: UserCustomSchemas
-userCustomSchemas = UserCustomSchemas
-
-instance FromJSON UserCustomSchemas where
-        parseJSON
-          = withObject "UserCustomSchemas"
-              (\ o -> pure UserCustomSchemas)
-
-instance ToJSON UserCustomSchemas where
-        toJSON = const (Object mempty)
-
 -- | JSON response template to list aliases in Directory API.
 --
 -- /See:/ 'aliases' smart constructor.
@@ -1516,7 +1531,7 @@ data Aliases = Aliases
     { _aliEtag    :: !(Maybe Text)
     , _aliKind    :: !Text
     , _aliAliases :: !(Maybe [Alias])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Aliases' with the minimum fields required to make a request.
 --
@@ -1567,6 +1582,59 @@ instance ToJSON Aliases where
                  [("etag" .=) <$> _aliEtag, Just ("kind" .= _aliKind),
                   ("aliases" .=) <$> _aliAliases])
 
+-- | Indexing spec for a numeric field. By default, only exact match queries
+-- will be supported for numeric fields. Setting the numericIndexingSpec
+-- allows range queries to be supported.
+--
+-- /See:/ 'numericIndexingSpec' smart constructor.
+data NumericIndexingSpec = NumericIndexingSpec
+    { _nisMaxValue :: !(Maybe Double)
+    , _nisMinValue :: !(Maybe Double)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'NumericIndexingSpec' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'nisMaxValue'
+--
+-- * 'nisMinValue'
+numericIndexingSpec
+    :: NumericIndexingSpec
+numericIndexingSpec =
+    NumericIndexingSpec
+    { _nisMaxValue = Nothing
+    , _nisMinValue = Nothing
+    }
+
+-- | Maximum value of this field. This is meant to be indicative rather than
+-- enforced. Values outside this range will still be indexed, but search
+-- may not be as performant.
+nisMaxValue :: Lens' NumericIndexingSpec (Maybe Double)
+nisMaxValue
+  = lens _nisMaxValue (\ s a -> s{_nisMaxValue = a})
+
+-- | Minimum value of this field. This is meant to be indicative rather than
+-- enforced. Values outside this range will still be indexed, but search
+-- may not be as performant.
+nisMinValue :: Lens' NumericIndexingSpec (Maybe Double)
+nisMinValue
+  = lens _nisMinValue (\ s a -> s{_nisMinValue = a})
+
+instance FromJSON NumericIndexingSpec where
+        parseJSON
+          = withObject "NumericIndexingSpec"
+              (\ o ->
+                 NumericIndexingSpec <$>
+                   (o .:? "maxValue") <*> (o .:? "minValue"))
+
+instance ToJSON NumericIndexingSpec where
+        toJSON NumericIndexingSpec{..}
+          = object
+              (catMaybes
+                 [("maxValue" .=) <$> _nisMaxValue,
+                  ("minValue" .=) <$> _nisMinValue])
+
 -- | JSON response template for List tokens operation in Directory API.
 --
 -- /See:/ 'tokens' smart constructor.
@@ -1574,7 +1642,7 @@ data Tokens = Tokens
     { _tEtag  :: !(Maybe Text)
     , _tKind  :: !Text
     , _tItems :: !(Maybe [Token])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Tokens' with the minimum fields required to make a request.
 --
@@ -1636,7 +1704,7 @@ data Token = Token
     , _tokNATiveApp   :: !(Maybe Bool)
     , _tokAnonymous   :: !(Maybe Bool)
     , _tokUserKey     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Token' with the minimum fields required to make a request.
 --
@@ -1740,58 +1808,12 @@ instance ToJSON Token where
                   ("anonymous" .=) <$> _tokAnonymous,
                   ("userKey" .=) <$> _tokUserKey])
 
---
--- /See:/ 'chromeOSDeviceRecentUsers' smart constructor.
-data ChromeOSDeviceRecentUsers = ChromeOSDeviceRecentUsers
-    { _codruEmail :: !(Maybe Text)
-    , _codruType  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ChromeOSDeviceRecentUsers' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'codruEmail'
---
--- * 'codruType'
-chromeOSDeviceRecentUsers
-    :: ChromeOSDeviceRecentUsers
-chromeOSDeviceRecentUsers =
-    ChromeOSDeviceRecentUsers
-    { _codruEmail = Nothing
-    , _codruType = Nothing
-    }
-
--- | Email address of the user. Present only if the user type is managed
-codruEmail :: Lens' ChromeOSDeviceRecentUsers (Maybe Text)
-codruEmail
-  = lens _codruEmail (\ s a -> s{_codruEmail = a})
-
--- | The type of the user
-codruType :: Lens' ChromeOSDeviceRecentUsers (Maybe Text)
-codruType
-  = lens _codruType (\ s a -> s{_codruType = a})
-
-instance FromJSON ChromeOSDeviceRecentUsers where
-        parseJSON
-          = withObject "ChromeOSDeviceRecentUsers"
-              (\ o ->
-                 ChromeOSDeviceRecentUsers <$>
-                   (o .:? "email") <*> (o .:? "type"))
-
-instance ToJSON ChromeOSDeviceRecentUsers where
-        toJSON ChromeOSDeviceRecentUsers{..}
-          = object
-              (catMaybes
-                 [("email" .=) <$> _codruEmail,
-                  ("type" .=) <$> _codruType])
-
 -- | JSON request template to undelete a user in Directory API.
 --
 -- /See:/ 'userUndelete' smart constructor.
 newtype UserUndelete = UserUndelete
     { _uuOrgUnitPath :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserUndelete' with the minimum fields required to make a request.
 --
@@ -1830,7 +1852,7 @@ data MobileDevices = MobileDevices
     , _mdNextPageToken :: !(Maybe Text)
     , _mdKind          :: !Text
     , _mdMobileDevices :: !(Maybe [MobileDevice])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobileDevices' with the minimum fields required to make a request.
 --
@@ -1901,7 +1923,7 @@ data Members = Members
     , _mNextPageToken :: !(Maybe Text)
     , _mKind          :: !Text
     , _mMembers       :: !(Maybe [Member])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Members' with the minimum fields required to make a request.
 --
@@ -1973,11 +1995,11 @@ data Channel = Channel
     , _cExpiration  :: !(Maybe Int64)
     , _cToken       :: !(Maybe Text)
     , _cAddress     :: !(Maybe Text)
-    , _cPayLoad     :: !(Maybe Bool)
-    , _cParams      :: !(Maybe ChannelParams)
+    , _cPayload     :: !(Maybe Bool)
+    , _cParams      :: !(Maybe Params)
     , _cId          :: !(Maybe Text)
     , _cType        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Channel' with the minimum fields required to make a request.
 --
@@ -1995,7 +2017,7 @@ data Channel = Channel
 --
 -- * 'cAddress'
 --
--- * 'cPayLoad'
+-- * 'cPayload'
 --
 -- * 'cParams'
 --
@@ -2012,7 +2034,7 @@ channel =
     , _cExpiration = Nothing
     , _cToken = Nothing
     , _cAddress = Nothing
-    , _cPayLoad = Nothing
+    , _cPayload = Nothing
     , _cParams = Nothing
     , _cId = Nothing
     , _cType = Nothing
@@ -2050,11 +2072,11 @@ cAddress :: Lens' Channel (Maybe Text)
 cAddress = lens _cAddress (\ s a -> s{_cAddress = a})
 
 -- | A Boolean value to indicate whether payload is wanted. Optional.
-cPayLoad :: Lens' Channel (Maybe Bool)
-cPayLoad = lens _cPayLoad (\ s a -> s{_cPayLoad = a})
+cPayload :: Lens' Channel (Maybe Bool)
+cPayload = lens _cPayload (\ s a -> s{_cPayload = a})
 
 -- | Additional parameters controlling delivery channel behavior. Optional.
-cParams :: Lens' Channel (Maybe ChannelParams)
+cParams :: Lens' Channel (Maybe Params)
 cParams = lens _cParams (\ s a -> s{_cParams = a})
 
 -- | A UUID or similar unique string that identifies this channel.
@@ -2090,7 +2112,7 @@ instance ToJSON Channel where
                   ("expiration" .=) <$> _cExpiration,
                   ("token" .=) <$> _cToken,
                   ("address" .=) <$> _cAddress,
-                  ("payload" .=) <$> _cPayLoad,
+                  ("payload" .=) <$> _cPayload,
                   ("params" .=) <$> _cParams, ("id" .=) <$> _cId,
                   ("type" .=) <$> _cType])
 
@@ -2103,7 +2125,7 @@ data Alias = Alias
     , _aaAlias        :: !(Maybe Text)
     , _aaId           :: !(Maybe Text)
     , _aaPrimaryEmail :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Alias' with the minimum fields required to make a request.
 --
@@ -2177,7 +2199,7 @@ data UserName = UserName
     { _unGivenName  :: !(Maybe Text)
     , _unFullName   :: !(Maybe Text)
     , _unFamilyName :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserName' with the minimum fields required to make a request.
 --
@@ -2228,92 +2250,6 @@ instance ToJSON UserName where
                   ("fullName" .=) <$> _unFullName,
                   ("familyName" .=) <$> _unFamilyName])
 
---
--- /See:/ 'mobileDeviceApplications' smart constructor.
-data MobileDeviceApplications = MobileDeviceApplications
-    { _mdaVersionCode :: !(Maybe Int32)
-    , _mdaVersionName :: !(Maybe Text)
-    , _mdaPackageName :: !(Maybe Text)
-    , _mdaDisplayName :: !(Maybe Text)
-    , _mdaPermission  :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'MobileDeviceApplications' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mdaVersionCode'
---
--- * 'mdaVersionName'
---
--- * 'mdaPackageName'
---
--- * 'mdaDisplayName'
---
--- * 'mdaPermission'
-mobileDeviceApplications
-    :: MobileDeviceApplications
-mobileDeviceApplications =
-    MobileDeviceApplications
-    { _mdaVersionCode = Nothing
-    , _mdaVersionName = Nothing
-    , _mdaPackageName = Nothing
-    , _mdaDisplayName = Nothing
-    , _mdaPermission = Nothing
-    }
-
--- | Version code of application
-mdaVersionCode :: Lens' MobileDeviceApplications (Maybe Int32)
-mdaVersionCode
-  = lens _mdaVersionCode
-      (\ s a -> s{_mdaVersionCode = a})
-
--- | Version name of application
-mdaVersionName :: Lens' MobileDeviceApplications (Maybe Text)
-mdaVersionName
-  = lens _mdaVersionName
-      (\ s a -> s{_mdaVersionName = a})
-
--- | Package name of application
-mdaPackageName :: Lens' MobileDeviceApplications (Maybe Text)
-mdaPackageName
-  = lens _mdaPackageName
-      (\ s a -> s{_mdaPackageName = a})
-
--- | Display name of application
-mdaDisplayName :: Lens' MobileDeviceApplications (Maybe Text)
-mdaDisplayName
-  = lens _mdaDisplayName
-      (\ s a -> s{_mdaDisplayName = a})
-
--- | List of Permissions for application
-mdaPermission :: Lens' MobileDeviceApplications [Text]
-mdaPermission
-  = lens _mdaPermission
-      (\ s a -> s{_mdaPermission = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON MobileDeviceApplications where
-        parseJSON
-          = withObject "MobileDeviceApplications"
-              (\ o ->
-                 MobileDeviceApplications <$>
-                   (o .:? "versionCode") <*> (o .:? "versionName") <*>
-                     (o .:? "packageName")
-                     <*> (o .:? "displayName")
-                     <*> (o .:? "permission" .!= mempty))
-
-instance ToJSON MobileDeviceApplications where
-        toJSON MobileDeviceApplications{..}
-          = object
-              (catMaybes
-                 [("versionCode" .=) <$> _mdaVersionCode,
-                  ("versionName" .=) <$> _mdaVersionName,
-                  ("packageName" .=) <$> _mdaPackageName,
-                  ("displayName" .=) <$> _mdaDisplayName,
-                  ("permission" .=) <$> _mdaPermission])
-
 -- | JSON template for User object in Directory API.
 --
 -- /See:/ 'user' smart constructor.
@@ -2351,9 +2287,9 @@ data User = User
     , _useNotes                      :: !(Maybe JSONValue)
     , _useIsDelegatedAdmin           :: !(Maybe Bool)
     , _useIsMailboxSetup             :: !(Maybe Bool)
-    , _useCustomSchemas              :: !(Maybe UserCustomSchemas)
+    , _useCustomSchemas              :: !(Maybe CustomSchemas)
     , _useSuspensionReason           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
@@ -2644,7 +2580,7 @@ useIsMailboxSetup
       (\ s a -> s{_useIsMailboxSetup = a})
 
 -- | Custom fields of the user.
-useCustomSchemas :: Lens' User (Maybe UserCustomSchemas)
+useCustomSchemas :: Lens' User (Maybe CustomSchemas)
 useCustomSchemas
   = lens _useCustomSchemas
       (\ s a -> s{_useCustomSchemas = a})
@@ -2744,7 +2680,7 @@ data Schema = Schema
     , _schSchemaName :: !(Maybe Text)
     , _schSchemaId   :: !(Maybe Text)
     , _schFields     :: !(Maybe [SchemaFieldSpec])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Schema' with the minimum fields required to make a request.
 --
@@ -2816,6 +2752,69 @@ instance ToJSON Schema where
                   ("schemaId" .=) <$> _schSchemaId,
                   ("fields" .=) <$> _schFields])
 
+-- | Additional parameters controlling delivery channel behavior. Optional.
+--
+-- /See:/ 'params' smart constructor.
+data Params =
+    Params
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Params' with the minimum fields required to make a request.
+--
+params
+    :: Params
+params = Params
+
+instance FromJSON Params where
+        parseJSON = withObject "Params" (\ o -> pure Params)
+
+instance ToJSON Params where
+        toJSON = const (Object mempty)
+
+--
+-- /See:/ 'recentUsersItem' smart constructor.
+data RecentUsersItem = RecentUsersItem
+    { _ruiEmail :: !(Maybe Text)
+    , _ruiType  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RecentUsersItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ruiEmail'
+--
+-- * 'ruiType'
+recentUsersItem
+    :: RecentUsersItem
+recentUsersItem =
+    RecentUsersItem
+    { _ruiEmail = Nothing
+    , _ruiType = Nothing
+    }
+
+-- | Email address of the user. Present only if the user type is managed
+ruiEmail :: Lens' RecentUsersItem (Maybe Text)
+ruiEmail = lens _ruiEmail (\ s a -> s{_ruiEmail = a})
+
+-- | The type of the user
+ruiType :: Lens' RecentUsersItem (Maybe Text)
+ruiType = lens _ruiType (\ s a -> s{_ruiType = a})
+
+instance FromJSON RecentUsersItem where
+        parseJSON
+          = withObject "RecentUsersItem"
+              (\ o ->
+                 RecentUsersItem <$>
+                   (o .:? "email") <*> (o .:? "type"))
+
+instance ToJSON RecentUsersItem where
+        toJSON RecentUsersItem{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _ruiEmail,
+                  ("type" .=) <$> _ruiType])
+
 -- | JSON response template for List Organization Units operation in
 -- Directory API.
 --
@@ -2824,7 +2823,7 @@ data OrgUnits = OrgUnits
     { _oEtag              :: !(Maybe Text)
     , _oKind              :: !Text
     , _oOrganizationUnits :: !(Maybe [OrgUnit])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrgUnits' with the minimum fields required to make a request.
 --
@@ -2876,27 +2875,6 @@ instance ToJSON OrgUnits where
                  [("etag" .=) <$> _oEtag, Just ("kind" .= _oKind),
                   ("organizationUnits" .=) <$> _oOrganizationUnits])
 
--- | Additional parameters controlling delivery channel behavior. Optional.
---
--- /See:/ 'channelParams' smart constructor.
-data ChannelParams =
-    ChannelParams
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
---
-channelParams
-    :: ChannelParams
-channelParams = ChannelParams
-
-instance FromJSON ChannelParams where
-        parseJSON
-          = withObject "ChannelParams"
-              (\ o -> pure ChannelParams)
-
-instance ToJSON ChannelParams where
-        toJSON = const (Object mempty)
-
 -- | JSON response template for List verification codes operation in
 -- Directory API.
 --
@@ -2905,7 +2883,7 @@ data VerificationCodes = VerificationCodes
     { _vEtag  :: !(Maybe Text)
     , _vKind  :: !Text
     , _vItems :: !(Maybe [VerificationCode])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VerificationCodes' with the minimum fields required to make a request.
 --
@@ -2964,7 +2942,7 @@ data UserRelation = UserRelation
     { _urValue      :: !(Maybe Text)
     , _urType       :: !(Maybe Text)
     , _urCustomType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRelation' with the minimum fields required to make a request.
 --
@@ -3021,7 +2999,7 @@ data UserWebsite = UserWebsite
     , _uwPrimary    :: !(Maybe Bool)
     , _uwType       :: !(Maybe Text)
     , _uwCustomType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserWebsite' with the minimum fields required to make a request.
 --
@@ -3099,7 +3077,7 @@ data UserOrganization = UserOrganization
     , _uoType        :: !(Maybe Text)
     , _uoCustomType  :: !(Maybe Text)
     , _uoDescription :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserOrganization' with the minimum fields required to make a request.
 --
@@ -3237,7 +3215,7 @@ data UserPhone = UserPhone
     , _upPrimary    :: !(Maybe Bool)
     , _upType       :: !(Maybe Text)
     , _upCustomType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserPhone' with the minimum fields required to make a request.
 --
@@ -3312,7 +3290,7 @@ data UserPhoto = UserPhoto
     , _upMimeType     :: !(Maybe Text)
     , _upId           :: !(Maybe Text)
     , _upPrimaryEmail :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserPhoto' with the minimum fields required to make a request.
 --
@@ -3414,7 +3392,7 @@ data UserEmail = UserEmail
     , _uePrimary    :: !(Maybe Bool)
     , _ueType       :: !(Maybe Text)
     , _ueCustomType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserEmail' with the minimum fields required to make a request.
 --
@@ -3489,7 +3467,7 @@ data Member = Member
     , _memRole  :: !(Maybe Text)
     , _memId    :: !(Maybe Text)
     , _memType  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Member' with the minimum fields required to make a request.
 --
@@ -3596,9 +3574,9 @@ data MobileDevice = MobileDevice
     , _mobBasebandVersion                :: !(Maybe Text)
     , _mobSupportsWorkProfile            :: !(Maybe Bool)
     , _mobDeviceCompromisedStatus        :: !(Maybe Text)
-    , _mobApplications                   :: !(Maybe [MobileDeviceApplications])
+    , _mobApplications                   :: !(Maybe [ApplicationsItem])
     , _mobDefaultLanguage                :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobileDevice' with the minimum fields required to make a request.
 --
@@ -3865,7 +3843,7 @@ mobDeviceCompromisedStatus
       (\ s a -> s{_mobDeviceCompromisedStatus = a})
 
 -- | List of applications installed on Mobile Device
-mobApplications :: Lens' MobileDevice [MobileDeviceApplications]
+mobApplications :: Lens' MobileDevice [ApplicationsItem]
 mobApplications
   = lens _mobApplications
       (\ s a -> s{_mobApplications = a})
@@ -3953,13 +3931,61 @@ instance ToJSON MobileDevice where
                   ("applications" .=) <$> _mobApplications,
                   ("defaultLanguage" .=) <$> _mobDefaultLanguage])
 
+--
+-- /See:/ 'activeTimeRangesItem' smart constructor.
+data ActiveTimeRangesItem = ActiveTimeRangesItem
+    { _atriDate       :: !(Maybe Date')
+    , _atriActiveTime :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ActiveTimeRangesItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'atriDate'
+--
+-- * 'atriActiveTime'
+activeTimeRangesItem
+    :: ActiveTimeRangesItem
+activeTimeRangesItem =
+    ActiveTimeRangesItem
+    { _atriDate = Nothing
+    , _atriActiveTime = Nothing
+    }
+
+-- | Date of usage
+atriDate :: Lens' ActiveTimeRangesItem (Maybe LocalTime)
+atriDate
+  = lens _atriDate (\ s a -> s{_atriDate = a}) .
+      mapping _Date
+
+-- | Duration in milliseconds
+atriActiveTime :: Lens' ActiveTimeRangesItem (Maybe Int32)
+atriActiveTime
+  = lens _atriActiveTime
+      (\ s a -> s{_atriActiveTime = a})
+
+instance FromJSON ActiveTimeRangesItem where
+        parseJSON
+          = withObject "ActiveTimeRangesItem"
+              (\ o ->
+                 ActiveTimeRangesItem <$>
+                   (o .:? "date") <*> (o .:? "activeTime"))
+
+instance ToJSON ActiveTimeRangesItem where
+        toJSON ActiveTimeRangesItem{..}
+          = object
+              (catMaybes
+                 [("date" .=) <$> _atriDate,
+                  ("activeTime" .=) <$> _atriActiveTime])
+
 -- | JSON template for a set of custom properties (i.e. all fields in a
 -- particular schema)
 --
 -- /See:/ 'userCustomProperties' smart constructor.
 data UserCustomProperties =
     UserCustomProperties
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserCustomProperties' with the minimum fields required to make a request.
 --
@@ -3975,70 +4001,13 @@ instance FromJSON UserCustomProperties where
 instance ToJSON UserCustomProperties where
         toJSON = const (Object mempty)
 
--- | Indexing spec for a numeric field. By default, only exact match queries
--- will be supported for numeric fields. Setting the numericIndexingSpec
--- allows range queries to be supported.
---
--- /See:/ 'schemaFieldSpecNumericIndexingSpec' smart constructor.
-data SchemaFieldSpecNumericIndexingSpec = SchemaFieldSpecNumericIndexingSpec
-    { _sfsnisMaxValue :: !(Maybe Double)
-    , _sfsnisMinValue :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SchemaFieldSpecNumericIndexingSpec' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sfsnisMaxValue'
---
--- * 'sfsnisMinValue'
-schemaFieldSpecNumericIndexingSpec
-    :: SchemaFieldSpecNumericIndexingSpec
-schemaFieldSpecNumericIndexingSpec =
-    SchemaFieldSpecNumericIndexingSpec
-    { _sfsnisMaxValue = Nothing
-    , _sfsnisMinValue = Nothing
-    }
-
--- | Maximum value of this field. This is meant to be indicative rather than
--- enforced. Values outside this range will still be indexed, but search
--- may not be as performant.
-sfsnisMaxValue :: Lens' SchemaFieldSpecNumericIndexingSpec (Maybe Double)
-sfsnisMaxValue
-  = lens _sfsnisMaxValue
-      (\ s a -> s{_sfsnisMaxValue = a})
-
--- | Minimum value of this field. This is meant to be indicative rather than
--- enforced. Values outside this range will still be indexed, but search
--- may not be as performant.
-sfsnisMinValue :: Lens' SchemaFieldSpecNumericIndexingSpec (Maybe Double)
-sfsnisMinValue
-  = lens _sfsnisMinValue
-      (\ s a -> s{_sfsnisMinValue = a})
-
-instance FromJSON SchemaFieldSpecNumericIndexingSpec
-         where
-        parseJSON
-          = withObject "SchemaFieldSpecNumericIndexingSpec"
-              (\ o ->
-                 SchemaFieldSpecNumericIndexingSpec <$>
-                   (o .:? "maxValue") <*> (o .:? "minValue"))
-
-instance ToJSON SchemaFieldSpecNumericIndexingSpec
-         where
-        toJSON SchemaFieldSpecNumericIndexingSpec{..}
-          = object
-              (catMaybes
-                 [("maxValue" .=) <$> _sfsnisMaxValue,
-                  ("minValue" .=) <$> _sfsnisMinValue])
-
 -- | JSON request template for firing commands on Mobile Device in Directory
 -- Devices API.
 --
 -- /See:/ 'mobileDeviceAction' smart constructor.
 newtype MobileDeviceAction = MobileDeviceAction
     { _mdaAction :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobileDeviceAction' with the minimum fields required to make a request.
 --
@@ -4072,14 +4041,14 @@ instance ToJSON MobileDeviceAction where
 data SchemaFieldSpec = SchemaFieldSpec
     { _sfsEtag                :: !(Maybe Text)
     , _sfsKind                :: !Text
-    , _sfsNumericIndexingSpec :: !(Maybe SchemaFieldSpecNumericIndexingSpec)
+    , _sfsNumericIndexingSpec :: !(Maybe NumericIndexingSpec)
     , _sfsReadAccessType      :: !Text
     , _sfsFieldId             :: !(Maybe Text)
     , _sfsIndexed             :: !Bool
     , _sfsFieldType           :: !(Maybe Text)
     , _sfsFieldName           :: !(Maybe Text)
     , _sfsMultiValued         :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchemaFieldSpec' with the minimum fields required to make a request.
 --
@@ -4128,7 +4097,7 @@ sfsKind = lens _sfsKind (\ s a -> s{_sfsKind = a})
 -- | Indexing spec for a numeric field. By default, only exact match queries
 -- will be supported for numeric fields. Setting the numericIndexingSpec
 -- allows range queries to be supported.
-sfsNumericIndexingSpec :: Lens' SchemaFieldSpec (Maybe SchemaFieldSpecNumericIndexingSpec)
+sfsNumericIndexingSpec :: Lens' SchemaFieldSpec (Maybe NumericIndexingSpec)
 sfsNumericIndexingSpec
   = lens _sfsNumericIndexingSpec
       (\ s a -> s{_sfsNumericIndexingSpec = a})
@@ -4204,7 +4173,7 @@ data Notifications = Notifications
     , _notKind                     :: !Text
     , _notItems                    :: !(Maybe [Notification])
     , _notUnreadNotificationsCount :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Notifications' with the minimum fields required to make a request.
 --
@@ -4285,7 +4254,7 @@ data UserExternalId = UserExternalId
     { _ueiValue      :: !(Maybe Text)
     , _ueiType       :: !(Maybe Text)
     , _ueiCustomType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserExternalId' with the minimum fields required to make a request.
 --
@@ -4338,42 +4307,41 @@ instance ToJSON UserExternalId where
 --
 -- /See:/ 'asps' smart constructor.
 data Asps = Asps
-    { _aspEtag  :: !(Maybe Text)
-    , _aspKind  :: !Text
-    , _aspItems :: !(Maybe [Asp])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _a1Etag  :: !(Maybe Text)
+    , _a1Kind  :: !Text
+    , _a1Items :: !(Maybe [Asp])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Asps' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aspEtag'
+-- * 'a1Etag'
 --
--- * 'aspKind'
+-- * 'a1Kind'
 --
--- * 'aspItems'
+-- * 'a1Items'
 asps
     :: Asps
 asps =
     Asps
-    { _aspEtag = Nothing
-    , _aspKind = "admin#directory#aspList"
-    , _aspItems = Nothing
+    { _a1Etag = Nothing
+    , _a1Kind = "admin#directory#aspList"
+    , _a1Items = Nothing
     }
 
 -- | ETag of the resource.
-aspEtag :: Lens' Asps (Maybe Text)
-aspEtag = lens _aspEtag (\ s a -> s{_aspEtag = a})
+a1Etag :: Lens' Asps (Maybe Text)
+a1Etag = lens _a1Etag (\ s a -> s{_a1Etag = a})
 
 -- | The type of the API resource. This is always admin#directory#aspList.
-aspKind :: Lens' Asps Text
-aspKind = lens _aspKind (\ s a -> s{_aspKind = a})
+a1Kind :: Lens' Asps Text
+a1Kind = lens _a1Kind (\ s a -> s{_a1Kind = a})
 
 -- | A list of ASP resources.
-aspItems :: Lens' Asps [Asp]
-aspItems
-  = lens _aspItems (\ s a -> s{_aspItems = a}) .
-      _Default
+a1Items :: Lens' Asps [Asp]
+a1Items
+  = lens _a1Items (\ s a -> s{_a1Items = a}) . _Default
       . _Coerce
 
 instance FromJSON Asps where
@@ -4389,8 +4357,29 @@ instance ToJSON Asps where
         toJSON Asps{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _aspEtag, Just ("kind" .= _aspKind),
-                  ("items" .=) <$> _aspItems])
+                 [("etag" .=) <$> _a1Etag, Just ("kind" .= _a1Kind),
+                  ("items" .=) <$> _a1Items])
+
+-- | Custom fields of the user.
+--
+-- /See:/ 'customSchemas' smart constructor.
+data CustomSchemas =
+    CustomSchemas
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CustomSchemas' with the minimum fields required to make a request.
+--
+customSchemas
+    :: CustomSchemas
+customSchemas = CustomSchemas
+
+instance FromJSON CustomSchemas where
+        parseJSON
+          = withObject "CustomSchemas"
+              (\ o -> pure CustomSchemas)
+
+instance ToJSON CustomSchemas where
+        toJSON = const (Object mempty)
 
 -- | JSON response template for List Chrome OS Devices operation in Directory
 -- API.
@@ -4401,7 +4390,7 @@ data ChromeOSDevices = ChromeOSDevices
     , _cosdNextPageToken   :: !(Maybe Text)
     , _cosdKind            :: !Text
     , _cosdChromeosDevices :: !(Maybe [ChromeOSDevice])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChromeOSDevices' with the minimum fields required to make a request.
 --

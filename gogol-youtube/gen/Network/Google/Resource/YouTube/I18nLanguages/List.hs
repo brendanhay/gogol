@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,8 +49,8 @@ import           Network.Google.YouTube.Types
 -- 'I18nLanguagesList'' request conforms to.
 type I18nLanguagesListResource =
      "i18nLanguages" :>
-       QueryParam "hl" Text :>
-         QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "hl" Text :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -72,7 +73,7 @@ data I18nLanguagesList' = I18nLanguagesList'
     , _illKey         :: !(Maybe Key)
     , _illOAuthToken  :: !(Maybe OAuthToken)
     , _illFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'I18nLanguagesList'' with the minimum fields required to make a request.
 --
@@ -162,7 +163,7 @@ instance GoogleRequest I18nLanguagesList' where
         type Rs I18nLanguagesList' = I18nLanguageListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u I18nLanguagesList'{..}
-          = go (Just _illHl) (Just _illPart) _illQuotaUser
+          = go (Just _illPart) (Just _illHl) _illQuotaUser
               (Just _illPrettyPrint)
               _illUserIP
               _illFields

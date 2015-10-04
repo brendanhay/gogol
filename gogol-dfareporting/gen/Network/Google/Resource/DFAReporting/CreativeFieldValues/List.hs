@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,16 +58,16 @@ type CreativeFieldValuesListResource =
          "creativeFields" :>
            Capture "creativeFieldId" Int64 :>
              "creativeFieldValues" :>
-               QueryParams "ids" Int64 :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "searchString" Text :>
+               QueryParam "searchString" Text :>
+                 QueryParams "ids" Int64 :>
+                   QueryParam "sortOrder"
+                     DfareportingCreativeFieldValuesListSortOrder
+                     :>
+                     QueryParam "pageToken" Text :>
                        QueryParam "sortField"
                          DfareportingCreativeFieldValuesListSortField
                          :>
-                         QueryParam "sortOrder"
-                           DfareportingCreativeFieldValuesListSortOrder
-                           :>
+                         QueryParam "maxResults" Int32 :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "userIp" Text :>
@@ -86,7 +87,7 @@ data CreativeFieldValuesList' = CreativeFieldValuesList'
     , _cfvlPrettyPrint     :: !Bool
     , _cfvlUserIP          :: !(Maybe Text)
     , _cfvlSearchString    :: !(Maybe Text)
-    , _cfvlIds             :: !(Maybe Int64)
+    , _cfvlIds             :: !(Maybe [Int64])
     , _cfvlProfileId       :: !Int64
     , _cfvlSortOrder       :: !(Maybe DfareportingCreativeFieldValuesListSortOrder)
     , _cfvlKey             :: !(Maybe Key)
@@ -95,7 +96,7 @@ data CreativeFieldValuesList' = CreativeFieldValuesList'
     , _cfvlOAuthToken      :: !(Maybe OAuthToken)
     , _cfvlMaxResults      :: !(Maybe Int32)
     , _cfvlFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesList'' with the minimum fields required to make a request.
 --
@@ -184,8 +185,10 @@ cfvlSearchString
       (\ s a -> s{_cfvlSearchString = a})
 
 -- | Select only creative field values with these IDs.
-cfvlIds :: Lens' CreativeFieldValuesList' (Maybe Int64)
-cfvlIds = lens _cfvlIds (\ s a -> s{_cfvlIds = a})
+cfvlIds :: Lens' CreativeFieldValuesList' [Int64]
+cfvlIds
+  = lens _cfvlIds (\ s a -> s{_cfvlIds = a}) . _Default
+      . _Coerce
 
 -- | User profile ID associated with this request.
 cfvlProfileId :: Lens' CreativeFieldValuesList' Int64
@@ -243,12 +246,13 @@ instance GoogleRequest CreativeFieldValuesList' where
              CreativeFieldValuesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldValuesList'{..}
-          = go _cfvlIds _cfvlMaxResults _cfvlPageToken
+          = go _cfvlProfileId _cfvlCreativeFieldId
               _cfvlSearchString
-              _cfvlSortField
+              (_cfvlIds ^. _Default)
               _cfvlSortOrder
-              _cfvlProfileId
-              _cfvlCreativeFieldId
+              _cfvlPageToken
+              _cfvlSortField
+              _cfvlMaxResults
               _cfvlQuotaUser
               (Just _cfvlPrettyPrint)
               _cfvlUserIP

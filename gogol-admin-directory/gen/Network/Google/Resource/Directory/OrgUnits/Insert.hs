@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -30,10 +31,10 @@ module Network.Google.Resource.Directory.OrgUnits.Insert
     , OrgUnitsInsert'
 
     -- * Request Lenses
-    , ouiOrgUnit
     , ouiQuotaUser
     , ouiPrettyPrint
     , ouiUserIP
+    , ouiPayload
     , ouiCustomerId
     , ouiKey
     , ouiOAuthToken
@@ -62,27 +63,27 @@ type OrgUnitsInsertResource =
 --
 -- /See:/ 'orgUnitsInsert'' smart constructor.
 data OrgUnitsInsert' = OrgUnitsInsert'
-    { _ouiOrgUnit     :: !OrgUnit
-    , _ouiQuotaUser   :: !(Maybe Text)
+    { _ouiQuotaUser   :: !(Maybe Text)
     , _ouiPrettyPrint :: !Bool
     , _ouiUserIP      :: !(Maybe Text)
+    , _ouiPayload     :: !OrgUnit
     , _ouiCustomerId  :: !Text
     , _ouiKey         :: !(Maybe Key)
     , _ouiOAuthToken  :: !(Maybe OAuthToken)
     , _ouiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrgUnitsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'ouiOrgUnit'
 --
 -- * 'ouiQuotaUser'
 --
 -- * 'ouiPrettyPrint'
 --
 -- * 'ouiUserIP'
+--
+-- * 'ouiPayload'
 --
 -- * 'ouiCustomerId'
 --
@@ -92,25 +93,20 @@ data OrgUnitsInsert' = OrgUnitsInsert'
 --
 -- * 'ouiFields'
 orgUnitsInsert'
-    :: OrgUnit -- ^ 'OrgUnit'
+    :: OrgUnit -- ^ 'payload'
     -> Text -- ^ 'customerId'
     -> OrgUnitsInsert'
-orgUnitsInsert' pOuiOrgUnit_ pOuiCustomerId_ =
+orgUnitsInsert' pOuiPayload_ pOuiCustomerId_ =
     OrgUnitsInsert'
-    { _ouiOrgUnit = pOuiOrgUnit_
-    , _ouiQuotaUser = Nothing
+    { _ouiQuotaUser = Nothing
     , _ouiPrettyPrint = True
     , _ouiUserIP = Nothing
+    , _ouiPayload = pOuiPayload_
     , _ouiCustomerId = pOuiCustomerId_
     , _ouiKey = Nothing
     , _ouiOAuthToken = Nothing
     , _ouiFields = Nothing
     }
-
--- | Multipart request metadata.
-ouiOrgUnit :: Lens' OrgUnitsInsert' OrgUnit
-ouiOrgUnit
-  = lens _ouiOrgUnit (\ s a -> s{_ouiOrgUnit = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -130,6 +126,11 @@ ouiPrettyPrint
 ouiUserIP :: Lens' OrgUnitsInsert' (Maybe Text)
 ouiUserIP
   = lens _ouiUserIP (\ s a -> s{_ouiUserIP = a})
+
+-- | Multipart request metadata.
+ouiPayload :: Lens' OrgUnitsInsert' OrgUnit
+ouiPayload
+  = lens _ouiPayload (\ s a -> s{_ouiPayload = a})
 
 -- | Immutable id of the Google Apps account
 ouiCustomerId :: Lens' OrgUnitsInsert' Text
@@ -169,7 +170,7 @@ instance GoogleRequest OrgUnitsInsert' where
               _ouiKey
               _ouiOAuthToken
               (Just AltJSON)
-              _ouiOrgUnit
+              _ouiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrgUnitsInsertResource)

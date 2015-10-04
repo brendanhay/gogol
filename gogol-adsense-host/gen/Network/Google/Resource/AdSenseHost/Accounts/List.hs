@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -66,9 +67,9 @@ data AccountsList' = AccountsList'
     , _alUserIP           :: !(Maybe Text)
     , _alKey              :: !(Maybe Key)
     , _alOAuthToken       :: !(Maybe OAuthToken)
-    , _alFilterAdClientId :: !Text
+    , _alFilterAdClientId :: ![Text]
     , _alFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsList'' with the minimum fields required to make a request.
 --
@@ -88,7 +89,7 @@ data AccountsList' = AccountsList'
 --
 -- * 'alFields'
 accountsList'
-    :: Text -- ^ 'filterAdClientId'
+    :: [Text] -- ^ 'filterAdClientId'
     -> AccountsList'
 accountsList' pAlFilterAdClientId_ =
     AccountsList'
@@ -131,10 +132,11 @@ alOAuthToken
   = lens _alOAuthToken (\ s a -> s{_alOAuthToken = a})
 
 -- | Ad clients to list accounts for.
-alFilterAdClientId :: Lens' AccountsList' Text
+alFilterAdClientId :: Lens' AccountsList' [Text]
 alFilterAdClientId
   = lens _alFilterAdClientId
       (\ s a -> s{_alFilterAdClientId = a})
+      . _Coerce
 
 -- | Selector specifying which fields to include in a partial response.
 alFields :: Lens' AccountsList' (Maybe Text)
@@ -148,7 +150,7 @@ instance GoogleRequest AccountsList' where
         type Rs AccountsList' = Accounts
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u AccountsList'{..}
-          = go (Just _alFilterAdClientId) _alQuotaUser
+          = go (_alFilterAdClientId ^. _Default) _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP
               _alFields

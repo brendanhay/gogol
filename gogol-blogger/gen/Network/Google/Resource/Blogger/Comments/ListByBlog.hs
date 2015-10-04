@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,13 +55,13 @@ type CommentsListByBlogResource =
      "blogs" :>
        Capture "blogId" Text :>
          "comments" :>
-           QueryParam "endDate" DateTime' :>
-             QueryParam "fetchBodies" Bool :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "startDate" DateTime' :>
-                     QueryParams "status" BloggerCommentsListByBlogStatus
-                       :>
+           QueryParams "status" BloggerCommentsListByBlogStatus
+             :>
+             QueryParam "endDate" DateTime' :>
+               QueryParam "startDate" DateTime' :>
+                 QueryParam "fetchBodies" Bool :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -87,7 +88,7 @@ data CommentsListByBlog' = CommentsListByBlog'
     , _clbbOAuthToken  :: !(Maybe OAuthToken)
     , _clbbMaxResults  :: !(Maybe Word32)
     , _clbbFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsListByBlog'' with the minimum fields required to make a request.
 --
@@ -223,11 +224,12 @@ instance GoogleRequest CommentsListByBlog' where
         type Rs CommentsListByBlog' = CommentList
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u CommentsListByBlog'{..}
-          = go _clbbEndDate _clbbFetchBodies _clbbMaxResults
-              _clbbPageToken
+          = go _clbbBlogId (_clbbStatus ^. _Default)
+              _clbbEndDate
               _clbbStartDate
-              _clbbStatus
-              _clbbBlogId
+              _clbbFetchBodies
+              _clbbPageToken
+              _clbbMaxResults
               _clbbQuotaUser
               (Just _clbbPrettyPrint)
               _clbbUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Patch
     , ccpPrettyPrint
     , ccpUserIP
     , ccpProfileId
-    , ccpContentCategory
+    , ccpPayload
     , ccpKey
     , ccpId
     , ccpOAuthToken
@@ -67,16 +68,16 @@ type ContentCategoriesPatchResource =
 --
 -- /See:/ 'contentCategoriesPatch'' smart constructor.
 data ContentCategoriesPatch' = ContentCategoriesPatch'
-    { _ccpQuotaUser       :: !(Maybe Text)
-    , _ccpPrettyPrint     :: !Bool
-    , _ccpUserIP          :: !(Maybe Text)
-    , _ccpProfileId       :: !Int64
-    , _ccpContentCategory :: !ContentCategory
-    , _ccpKey             :: !(Maybe Key)
-    , _ccpId              :: !Int64
-    , _ccpOAuthToken      :: !(Maybe OAuthToken)
-    , _ccpFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ccpQuotaUser   :: !(Maybe Text)
+    , _ccpPrettyPrint :: !Bool
+    , _ccpUserIP      :: !(Maybe Text)
+    , _ccpProfileId   :: !Int64
+    , _ccpPayload     :: !ContentCategory
+    , _ccpKey         :: !(Maybe Key)
+    , _ccpId          :: !Int64
+    , _ccpOAuthToken  :: !(Maybe OAuthToken)
+    , _ccpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesPatch'' with the minimum fields required to make a request.
 --
@@ -90,7 +91,7 @@ data ContentCategoriesPatch' = ContentCategoriesPatch'
 --
 -- * 'ccpProfileId'
 --
--- * 'ccpContentCategory'
+-- * 'ccpPayload'
 --
 -- * 'ccpKey'
 --
@@ -101,16 +102,16 @@ data ContentCategoriesPatch' = ContentCategoriesPatch'
 -- * 'ccpFields'
 contentCategoriesPatch'
     :: Int64 -- ^ 'profileId'
-    -> ContentCategory -- ^ 'ContentCategory'
+    -> ContentCategory -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> ContentCategoriesPatch'
-contentCategoriesPatch' pCcpProfileId_ pCcpContentCategory_ pCcpId_ =
+contentCategoriesPatch' pCcpProfileId_ pCcpPayload_ pCcpId_ =
     ContentCategoriesPatch'
     { _ccpQuotaUser = Nothing
     , _ccpPrettyPrint = True
     , _ccpUserIP = Nothing
     , _ccpProfileId = pCcpProfileId_
-    , _ccpContentCategory = pCcpContentCategory_
+    , _ccpPayload = pCcpPayload_
     , _ccpKey = Nothing
     , _ccpId = pCcpId_
     , _ccpOAuthToken = Nothing
@@ -142,10 +143,9 @@ ccpProfileId
   = lens _ccpProfileId (\ s a -> s{_ccpProfileId = a})
 
 -- | Multipart request metadata.
-ccpContentCategory :: Lens' ContentCategoriesPatch' ContentCategory
-ccpContentCategory
-  = lens _ccpContentCategory
-      (\ s a -> s{_ccpContentCategory = a})
+ccpPayload :: Lens' ContentCategoriesPatch' ContentCategory
+ccpPayload
+  = lens _ccpPayload (\ s a -> s{_ccpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -183,7 +183,7 @@ instance GoogleRequest ContentCategoriesPatch' where
               _ccpKey
               _ccpOAuthToken
               (Just AltJSON)
-              _ccpContentCategory
+              _ccpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ContentCategoriesPatchResource)

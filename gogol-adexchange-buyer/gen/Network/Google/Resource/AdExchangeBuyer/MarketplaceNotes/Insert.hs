@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.Insert
     -- * Request Lenses
     , mniQuotaUser
     , mniPrettyPrint
-    , mniAddOrderNotesRequest
     , mniUserIP
+    , mniPayload
     , mniKey
     , mniOAuthToken
     , mniOrderId
@@ -64,15 +65,15 @@ type MarketplaceNotesInsertResource =
 --
 -- /See:/ 'marketplaceNotesInsert'' smart constructor.
 data MarketplaceNotesInsert' = MarketplaceNotesInsert'
-    { _mniQuotaUser            :: !(Maybe Text)
-    , _mniPrettyPrint          :: !Bool
-    , _mniAddOrderNotesRequest :: !AddOrderNotesRequest
-    , _mniUserIP               :: !(Maybe Text)
-    , _mniKey                  :: !(Maybe Key)
-    , _mniOAuthToken           :: !(Maybe OAuthToken)
-    , _mniOrderId              :: !Text
-    , _mniFields               :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mniQuotaUser   :: !(Maybe Text)
+    , _mniPrettyPrint :: !Bool
+    , _mniUserIP      :: !(Maybe Text)
+    , _mniPayload     :: !AddOrderNotesRequest
+    , _mniKey         :: !(Maybe Key)
+    , _mniOAuthToken  :: !(Maybe OAuthToken)
+    , _mniOrderId     :: !Text
+    , _mniFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceNotesInsert'' with the minimum fields required to make a request.
 --
@@ -82,9 +83,9 @@ data MarketplaceNotesInsert' = MarketplaceNotesInsert'
 --
 -- * 'mniPrettyPrint'
 --
--- * 'mniAddOrderNotesRequest'
---
 -- * 'mniUserIP'
+--
+-- * 'mniPayload'
 --
 -- * 'mniKey'
 --
@@ -94,15 +95,15 @@ data MarketplaceNotesInsert' = MarketplaceNotesInsert'
 --
 -- * 'mniFields'
 marketplaceNotesInsert'
-    :: AddOrderNotesRequest -- ^ 'AddOrderNotesRequest'
+    :: AddOrderNotesRequest -- ^ 'payload'
     -> Text -- ^ 'orderId'
     -> MarketplaceNotesInsert'
-marketplaceNotesInsert' pMniAddOrderNotesRequest_ pMniOrderId_ =
+marketplaceNotesInsert' pMniPayload_ pMniOrderId_ =
     MarketplaceNotesInsert'
     { _mniQuotaUser = Nothing
     , _mniPrettyPrint = True
-    , _mniAddOrderNotesRequest = pMniAddOrderNotesRequest_
     , _mniUserIP = Nothing
+    , _mniPayload = pMniPayload_
     , _mniKey = Nothing
     , _mniOAuthToken = Nothing
     , _mniOrderId = pMniOrderId_
@@ -122,17 +123,16 @@ mniPrettyPrint
   = lens _mniPrettyPrint
       (\ s a -> s{_mniPrettyPrint = a})
 
--- | Multipart request metadata.
-mniAddOrderNotesRequest :: Lens' MarketplaceNotesInsert' AddOrderNotesRequest
-mniAddOrderNotesRequest
-  = lens _mniAddOrderNotesRequest
-      (\ s a -> s{_mniAddOrderNotesRequest = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 mniUserIP :: Lens' MarketplaceNotesInsert' (Maybe Text)
 mniUserIP
   = lens _mniUserIP (\ s a -> s{_mniUserIP = a})
+
+-- | Multipart request metadata.
+mniPayload :: Lens' MarketplaceNotesInsert' AddOrderNotesRequest
+mniPayload
+  = lens _mniPayload (\ s a -> s{_mniPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -171,7 +171,7 @@ instance GoogleRequest MarketplaceNotesInsert' where
               _mniKey
               _mniOAuthToken
               (Just AltJSON)
-              _mniAddOrderNotesRequest
+              _mniPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MarketplaceNotesInsertResource)

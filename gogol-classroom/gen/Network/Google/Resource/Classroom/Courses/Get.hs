@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -59,12 +60,12 @@ type CoursesGetResource =
        "courses" :>
          Capture "id" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
@@ -94,7 +95,7 @@ data CoursesGet' = CoursesGet'
     , _cgOAuthToken     :: !(Maybe OAuthToken)
     , _cgFields         :: !(Maybe Text)
     , _cgCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesGet'' with the minimum fields required to make a request.
 --
@@ -223,12 +224,11 @@ instance GoogleRequest CoursesGet' where
         type Rs CoursesGet' = Course
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesGet'{..}
-          = go _cgXgafv _cgAccessToken _cgBearerToken
-              _cgCallback
-              (Just _cgPp)
+          = go _cgId _cgXgafv _cgUploadProtocol (Just _cgPp)
+              _cgAccessToken
               _cgUploadType
-              _cgUploadProtocol
-              _cgId
+              _cgBearerToken
+              _cgCallback
               _cgQuotaUser
               (Just _cgPrettyPrint)
               _cgFields

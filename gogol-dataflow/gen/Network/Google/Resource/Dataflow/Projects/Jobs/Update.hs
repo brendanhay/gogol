@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -38,9 +39,9 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Update
     , pjuPp
     , pjuAccessToken
     , pjuUploadType
+    , pjuPayload
     , pjuBearerToken
     , pjuKey
-    , pjuJob
     , pjuProjectId
     , pjuOAuthToken
     , pjuFields
@@ -59,12 +60,12 @@ type ProjectsJobsUpdateResource =
            "jobs" :>
              Capture "jobId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "callback" Text :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
@@ -85,14 +86,14 @@ data ProjectsJobsUpdate' = ProjectsJobsUpdate'
     , _pjuPp             :: !Bool
     , _pjuAccessToken    :: !(Maybe Text)
     , _pjuUploadType     :: !(Maybe Text)
+    , _pjuPayload        :: !Job
     , _pjuBearerToken    :: !(Maybe Text)
     , _pjuKey            :: !(Maybe Key)
-    , _pjuJob            :: !Job
     , _pjuProjectId      :: !Text
     , _pjuOAuthToken     :: !(Maybe OAuthToken)
     , _pjuFields         :: !(Maybe Text)
     , _pjuCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsJobsUpdate'' with the minimum fields required to make a request.
 --
@@ -114,11 +115,11 @@ data ProjectsJobsUpdate' = ProjectsJobsUpdate'
 --
 -- * 'pjuUploadType'
 --
+-- * 'pjuPayload'
+--
 -- * 'pjuBearerToken'
 --
 -- * 'pjuKey'
---
--- * 'pjuJob'
 --
 -- * 'pjuProjectId'
 --
@@ -129,10 +130,10 @@ data ProjectsJobsUpdate' = ProjectsJobsUpdate'
 -- * 'pjuCallback'
 projectsJobsUpdate'
     :: Text -- ^ 'jobId'
-    -> Job -- ^ 'Job'
+    -> Job -- ^ 'payload'
     -> Text -- ^ 'projectId'
     -> ProjectsJobsUpdate'
-projectsJobsUpdate' pPjuJobId_ pPjuJob_ pPjuProjectId_ =
+projectsJobsUpdate' pPjuJobId_ pPjuPayload_ pPjuProjectId_ =
     ProjectsJobsUpdate'
     { _pjuXgafv = Nothing
     , _pjuQuotaUser = Nothing
@@ -142,9 +143,9 @@ projectsJobsUpdate' pPjuJobId_ pPjuJob_ pPjuProjectId_ =
     , _pjuPp = True
     , _pjuAccessToken = Nothing
     , _pjuUploadType = Nothing
+    , _pjuPayload = pPjuPayload_
     , _pjuBearerToken = Nothing
     , _pjuKey = Nothing
-    , _pjuJob = pPjuJob_
     , _pjuProjectId = pPjuProjectId_
     , _pjuOAuthToken = Nothing
     , _pjuFields = Nothing
@@ -194,6 +195,11 @@ pjuUploadType
   = lens _pjuUploadType
       (\ s a -> s{_pjuUploadType = a})
 
+-- | Multipart request metadata.
+pjuPayload :: Lens' ProjectsJobsUpdate' Job
+pjuPayload
+  = lens _pjuPayload (\ s a -> s{_pjuPayload = a})
+
 -- | OAuth bearer token.
 pjuBearerToken :: Lens' ProjectsJobsUpdate' (Maybe Text)
 pjuBearerToken
@@ -205,10 +211,6 @@ pjuBearerToken
 -- token.
 pjuKey :: Lens' ProjectsJobsUpdate' (Maybe Key)
 pjuKey = lens _pjuKey (\ s a -> s{_pjuKey = a})
-
--- | Multipart request metadata.
-pjuJob :: Lens' ProjectsJobsUpdate' Job
-pjuJob = lens _pjuJob (\ s a -> s{_pjuJob = a})
 
 -- | The project which owns the job.
 pjuProjectId :: Lens' ProjectsJobsUpdate' Text
@@ -239,20 +241,20 @@ instance GoogleRequest ProjectsJobsUpdate' where
         type Rs ProjectsJobsUpdate' = Job
         request = requestWithRoute defReq dataflowURL
         requestWithRoute r u ProjectsJobsUpdate'{..}
-          = go _pjuXgafv _pjuAccessToken _pjuBearerToken
-              _pjuCallback
-              (Just _pjuPp)
-              _pjuUploadType
+          = go _pjuProjectId _pjuJobId _pjuXgafv
               _pjuUploadProtocol
-              _pjuProjectId
-              _pjuJobId
+              (Just _pjuPp)
+              _pjuAccessToken
+              _pjuUploadType
+              _pjuBearerToken
+              _pjuCallback
               _pjuQuotaUser
               (Just _pjuPrettyPrint)
               _pjuFields
               _pjuKey
               _pjuOAuthToken
               (Just AltJSON)
-              _pjuJob
+              _pjuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsJobsUpdateResource)

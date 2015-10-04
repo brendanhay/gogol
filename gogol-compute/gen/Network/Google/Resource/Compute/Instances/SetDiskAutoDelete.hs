@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -81,7 +82,7 @@ data InstancesSetDiskAutoDelete' = InstancesSetDiskAutoDelete'
     , _isdadOAuthToken  :: !(Maybe OAuthToken)
     , _isdadFields      :: !(Maybe Text)
     , _isdadInstance    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesSetDiskAutoDelete'' with the minimum fields required to make a request.
 --

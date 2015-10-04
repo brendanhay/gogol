@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,15 +54,15 @@ type ReportsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "reports" :>
-           QueryParam "maxResults" Int32 :>
-             QueryParam "pageToken" Text :>
-               QueryParam "scope" DfareportingReportsListScope :>
+           QueryParam "sortOrder"
+             DfareportingReportsListSortOrder
+             :>
+             QueryParam "scope" Scope :>
+               QueryParam "pageToken" Text :>
                  QueryParam "sortField"
                    DfareportingReportsListSortField
                    :>
-                   QueryParam "sortOrder"
-                     DfareportingReportsListSortOrder
-                     :>
+                   QueryParam "maxResults" Int32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -81,13 +82,13 @@ data ReportsList' = ReportsList'
     , _rProfileId   :: !Int64
     , _rSortOrder   :: !DfareportingReportsListSortOrder
     , _rKey         :: !(Maybe Key)
-    , _rScope       :: !DfareportingReportsListScope
+    , _rScope       :: !Scope
     , _rPageToken   :: !(Maybe Text)
     , _rSortField   :: !DfareportingReportsListSortField
     , _rOAuthToken  :: !(Maybe OAuthToken)
     , _rMaxResults  :: !(Maybe Int32)
     , _rFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsList'' with the minimum fields required to make a request.
 --
@@ -127,7 +128,7 @@ reportsList' pRProfileId_ =
     , _rProfileId = pRProfileId_
     , _rSortOrder = DRLSODescending
     , _rKey = Nothing
-    , _rScope = DRLSMine
+    , _rScope = SMine
     , _rPageToken = Nothing
     , _rSortField = DRLSFLastModifiedTime
     , _rOAuthToken = Nothing
@@ -169,7 +170,7 @@ rKey :: Lens' ReportsList' (Maybe Key)
 rKey = lens _rKey (\ s a -> s{_rKey = a})
 
 -- | The scope that defines which results are returned, default is \'MINE\'.
-rScope :: Lens' ReportsList' DfareportingReportsListScope
+rScope :: Lens' ReportsList' Scope
 rScope = lens _rScope (\ s a -> s{_rScope = a})
 
 -- | The value of the nextToken from the previous result page.
@@ -204,10 +205,10 @@ instance GoogleRequest ReportsList' where
         type Rs ReportsList' = ReportList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsList'{..}
-          = go _rMaxResults _rPageToken (Just _rScope)
+          = go _rProfileId (Just _rSortOrder) (Just _rScope)
+              _rPageToken
               (Just _rSortField)
-              (Just _rSortOrder)
-              _rProfileId
+              _rMaxResults
               _rQuotaUser
               (Just _rPrettyPrint)
               _rUserIP

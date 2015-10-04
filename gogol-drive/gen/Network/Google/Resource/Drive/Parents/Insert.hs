@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -31,9 +32,9 @@ module Network.Google.Resource.Drive.Parents.Insert
 
     -- * Request Lenses
     , piiQuotaUser
-    , piiParentReference
     , piiPrettyPrint
     , piiUserIP
+    , piiPayload
     , piiKey
     , piiFileId
     , piiOAuthToken
@@ -63,15 +64,15 @@ type ParentsInsertResource =
 --
 -- /See:/ 'parentsInsert'' smart constructor.
 data ParentsInsert' = ParentsInsert'
-    { _piiQuotaUser       :: !(Maybe Text)
-    , _piiParentReference :: !ParentReference
-    , _piiPrettyPrint     :: !Bool
-    , _piiUserIP          :: !(Maybe Text)
-    , _piiKey             :: !(Maybe Key)
-    , _piiFileId          :: !Text
-    , _piiOAuthToken      :: !(Maybe OAuthToken)
-    , _piiFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _piiQuotaUser   :: !(Maybe Text)
+    , _piiPrettyPrint :: !Bool
+    , _piiUserIP      :: !(Maybe Text)
+    , _piiPayload     :: !ParentReference
+    , _piiKey         :: !(Maybe Key)
+    , _piiFileId      :: !Text
+    , _piiOAuthToken  :: !(Maybe OAuthToken)
+    , _piiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ParentsInsert'' with the minimum fields required to make a request.
 --
@@ -79,11 +80,11 @@ data ParentsInsert' = ParentsInsert'
 --
 -- * 'piiQuotaUser'
 --
--- * 'piiParentReference'
---
 -- * 'piiPrettyPrint'
 --
 -- * 'piiUserIP'
+--
+-- * 'piiPayload'
 --
 -- * 'piiKey'
 --
@@ -93,15 +94,15 @@ data ParentsInsert' = ParentsInsert'
 --
 -- * 'piiFields'
 parentsInsert'
-    :: ParentReference -- ^ 'ParentReference'
+    :: ParentReference -- ^ 'payload'
     -> Text -- ^ 'fileId'
     -> ParentsInsert'
-parentsInsert' pPiiParentReference_ pPiiFileId_ =
+parentsInsert' pPiiPayload_ pPiiFileId_ =
     ParentsInsert'
     { _piiQuotaUser = Nothing
-    , _piiParentReference = pPiiParentReference_
     , _piiPrettyPrint = True
     , _piiUserIP = Nothing
+    , _piiPayload = pPiiPayload_
     , _piiKey = Nothing
     , _piiFileId = pPiiFileId_
     , _piiOAuthToken = Nothing
@@ -115,12 +116,6 @@ piiQuotaUser :: Lens' ParentsInsert' (Maybe Text)
 piiQuotaUser
   = lens _piiQuotaUser (\ s a -> s{_piiQuotaUser = a})
 
--- | Multipart request metadata.
-piiParentReference :: Lens' ParentsInsert' ParentReference
-piiParentReference
-  = lens _piiParentReference
-      (\ s a -> s{_piiParentReference = a})
-
 -- | Returns response with indentations and line breaks.
 piiPrettyPrint :: Lens' ParentsInsert' Bool
 piiPrettyPrint
@@ -132,6 +127,11 @@ piiPrettyPrint
 piiUserIP :: Lens' ParentsInsert' (Maybe Text)
 piiUserIP
   = lens _piiUserIP (\ s a -> s{_piiUserIP = a})
+
+-- | Multipart request metadata.
+piiPayload :: Lens' ParentsInsert' ParentReference
+piiPayload
+  = lens _piiPayload (\ s a -> s{_piiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -169,7 +169,7 @@ instance GoogleRequest ParentsInsert' where
               _piiKey
               _piiOAuthToken
               (Just AltJSON)
-              _piiParentReference
+              _piiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ParentsInsertResource)

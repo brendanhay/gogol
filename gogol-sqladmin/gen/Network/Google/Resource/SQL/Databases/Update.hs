@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.SQL.Databases.Update
     , duPrettyPrint
     , duProject
     , duDatabase
-    , duDatabase
     , duUserIP
+    , duPayload
     , duKey
     , duOAuthToken
     , duFields
@@ -72,14 +73,14 @@ data DatabasesUpdate' = DatabasesUpdate'
     { _duQuotaUser   :: !(Maybe Text)
     , _duPrettyPrint :: !Bool
     , _duProject     :: !Text
-    , _duDatabase    :: !Database
     , _duDatabase    :: !Text
     , _duUserIP      :: !(Maybe Text)
+    , _duPayload     :: !Database
     , _duKey         :: !(Maybe Key)
     , _duOAuthToken  :: !(Maybe OAuthToken)
     , _duFields      :: !(Maybe Text)
     , _duInstance    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatabasesUpdate'' with the minimum fields required to make a request.
 --
@@ -93,9 +94,9 @@ data DatabasesUpdate' = DatabasesUpdate'
 --
 -- * 'duDatabase'
 --
--- * 'duDatabase'
---
 -- * 'duUserIP'
+--
+-- * 'duPayload'
 --
 -- * 'duKey'
 --
@@ -106,18 +107,18 @@ data DatabasesUpdate' = DatabasesUpdate'
 -- * 'duInstance'
 databasesUpdate'
     :: Text -- ^ 'project'
-    -> Database -- ^ 'Database'
     -> Text -- ^ 'database'
+    -> Database -- ^ 'payload'
     -> Text -- ^ 'instance'
     -> DatabasesUpdate'
-databasesUpdate' pDuProject_ pDuDatabase_ pDuDatabase_ pDuInstance_ =
+databasesUpdate' pDuProject_ pDuDatabase_ pDuPayload_ pDuInstance_ =
     DatabasesUpdate'
     { _duQuotaUser = Nothing
     , _duPrettyPrint = True
     , _duProject = pDuProject_
     , _duDatabase = pDuDatabase_
-    , _duDatabase = pDuDatabase_
     , _duUserIP = Nothing
+    , _duPayload = pDuPayload_
     , _duKey = Nothing
     , _duOAuthToken = Nothing
     , _duFields = Nothing
@@ -142,11 +143,6 @@ duProject :: Lens' DatabasesUpdate' Text
 duProject
   = lens _duProject (\ s a -> s{_duProject = a})
 
--- | Multipart request metadata.
-duDatabase :: Lens' DatabasesUpdate' Database
-duDatabase
-  = lens _duDatabase (\ s a -> s{_duDatabase = a})
-
 -- | Name of the database to be updated in the instance.
 duDatabase :: Lens' DatabasesUpdate' Text
 duDatabase
@@ -156,6 +152,11 @@ duDatabase
 -- want to enforce per-user limits.
 duUserIP :: Lens' DatabasesUpdate' (Maybe Text)
 duUserIP = lens _duUserIP (\ s a -> s{_duUserIP = a})
+
+-- | Multipart request metadata.
+duPayload :: Lens' DatabasesUpdate' Database
+duPayload
+  = lens _duPayload (\ s a -> s{_duPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -192,7 +193,7 @@ instance GoogleRequest DatabasesUpdate' where
               _duKey
               _duOAuthToken
               (Just AltJSON)
-              _duDatabase
+              _duPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatabasesUpdateResource)

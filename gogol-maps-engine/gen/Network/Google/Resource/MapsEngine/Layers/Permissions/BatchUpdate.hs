@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,10 +33,10 @@ module Network.Google.Resource.MapsEngine.Layers.Permissions.BatchUpdate
     , LayersPermissionsBatchUpdate'
 
     -- * Request Lenses
-    , lpbuPermissionsBatchUpdateRequest
     , lpbuQuotaUser
     , lpbuPrettyPrint
     , lpbuUserIP
+    , lpbuPayload
     , lpbuKey
     , lpbuId
     , lpbuOAuthToken
@@ -68,27 +69,27 @@ type LayersPermissionsBatchUpdateResource =
 --
 -- /See:/ 'layersPermissionsBatchUpdate'' smart constructor.
 data LayersPermissionsBatchUpdate' = LayersPermissionsBatchUpdate'
-    { _lpbuPermissionsBatchUpdateRequest :: !PermissionsBatchUpdateRequest
-    , _lpbuQuotaUser                     :: !(Maybe Text)
-    , _lpbuPrettyPrint                   :: !Bool
-    , _lpbuUserIP                        :: !(Maybe Text)
-    , _lpbuKey                           :: !(Maybe Key)
-    , _lpbuId                            :: !Text
-    , _lpbuOAuthToken                    :: !(Maybe OAuthToken)
-    , _lpbuFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _lpbuQuotaUser   :: !(Maybe Text)
+    , _lpbuPrettyPrint :: !Bool
+    , _lpbuUserIP      :: !(Maybe Text)
+    , _lpbuPayload     :: !PermissionsBatchUpdateRequest
+    , _lpbuKey         :: !(Maybe Key)
+    , _lpbuId          :: !Text
+    , _lpbuOAuthToken  :: !(Maybe OAuthToken)
+    , _lpbuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersPermissionsBatchUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'lpbuPermissionsBatchUpdateRequest'
 --
 -- * 'lpbuQuotaUser'
 --
 -- * 'lpbuPrettyPrint'
 --
 -- * 'lpbuUserIP'
+--
+-- * 'lpbuPayload'
 --
 -- * 'lpbuKey'
 --
@@ -98,26 +99,20 @@ data LayersPermissionsBatchUpdate' = LayersPermissionsBatchUpdate'
 --
 -- * 'lpbuFields'
 layersPermissionsBatchUpdate'
-    :: PermissionsBatchUpdateRequest -- ^ 'PermissionsBatchUpdateRequest'
+    :: PermissionsBatchUpdateRequest -- ^ 'payload'
     -> Text -- ^ 'id'
     -> LayersPermissionsBatchUpdate'
-layersPermissionsBatchUpdate' pLpbuPermissionsBatchUpdateRequest_ pLpbuId_ =
+layersPermissionsBatchUpdate' pLpbuPayload_ pLpbuId_ =
     LayersPermissionsBatchUpdate'
-    { _lpbuPermissionsBatchUpdateRequest = pLpbuPermissionsBatchUpdateRequest_
-    , _lpbuQuotaUser = Nothing
+    { _lpbuQuotaUser = Nothing
     , _lpbuPrettyPrint = True
     , _lpbuUserIP = Nothing
+    , _lpbuPayload = pLpbuPayload_
     , _lpbuKey = Nothing
     , _lpbuId = pLpbuId_
     , _lpbuOAuthToken = Nothing
     , _lpbuFields = Nothing
     }
-
--- | Multipart request metadata.
-lpbuPermissionsBatchUpdateRequest :: Lens' LayersPermissionsBatchUpdate' PermissionsBatchUpdateRequest
-lpbuPermissionsBatchUpdateRequest
-  = lens _lpbuPermissionsBatchUpdateRequest
-      (\ s a -> s{_lpbuPermissionsBatchUpdateRequest = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -138,6 +133,11 @@ lpbuPrettyPrint
 lpbuUserIP :: Lens' LayersPermissionsBatchUpdate' (Maybe Text)
 lpbuUserIP
   = lens _lpbuUserIP (\ s a -> s{_lpbuUserIP = a})
+
+-- | Multipart request metadata.
+lpbuPayload :: Lens' LayersPermissionsBatchUpdate' PermissionsBatchUpdateRequest
+lpbuPayload
+  = lens _lpbuPayload (\ s a -> s{_lpbuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -178,7 +178,7 @@ instance GoogleRequest LayersPermissionsBatchUpdate'
               _lpbuKey
               _lpbuOAuthToken
               (Just AltJSON)
-              _lpbuPermissionsBatchUpdateRequest
+              _lpbuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LayersPermissionsBatchUpdateResource)

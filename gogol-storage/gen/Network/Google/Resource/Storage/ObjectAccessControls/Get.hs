@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -78,7 +79,7 @@ data ObjectAccessControlsGet' = ObjectAccessControlsGet'
     , _oacgEntity      :: !Text
     , _oacgGeneration  :: !(Maybe Word64)
     , _oacgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsGet'' with the minimum fields required to make a request.
 --
@@ -192,8 +193,8 @@ instance GoogleRequest ObjectAccessControlsGet' where
              ObjectAccessControl
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectAccessControlsGet'{..}
-          = go _oacgGeneration _oacgBucket _oacgObject
-              _oacgEntity
+          = go _oacgBucket _oacgObject _oacgEntity
+              _oacgGeneration
               _oacgQuotaUser
               (Just _oacgPrettyPrint)
               _oacgUserIP

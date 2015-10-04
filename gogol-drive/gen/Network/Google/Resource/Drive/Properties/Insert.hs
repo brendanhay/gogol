@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.Drive.Properties.Insert
     -- * Request Lenses
     , proQuotaUser
     , proPrettyPrint
-    , proProperty
     , proUserIP
+    , proPayload
     , proKey
     , proFileId
     , proOAuthToken
@@ -64,13 +65,13 @@ type PropertiesInsertResource =
 data PropertiesInsert' = PropertiesInsert'
     { _proQuotaUser   :: !(Maybe Text)
     , _proPrettyPrint :: !Bool
-    , _proProperty    :: !Property
     , _proUserIP      :: !(Maybe Text)
+    , _proPayload     :: !Property
     , _proKey         :: !(Maybe Key)
     , _proFileId      :: !Text
     , _proOAuthToken  :: !(Maybe OAuthToken)
     , _proFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertiesInsert'' with the minimum fields required to make a request.
 --
@@ -80,9 +81,9 @@ data PropertiesInsert' = PropertiesInsert'
 --
 -- * 'proPrettyPrint'
 --
--- * 'proProperty'
---
 -- * 'proUserIP'
+--
+-- * 'proPayload'
 --
 -- * 'proKey'
 --
@@ -92,15 +93,15 @@ data PropertiesInsert' = PropertiesInsert'
 --
 -- * 'proFields'
 propertiesInsert'
-    :: Property -- ^ 'Property'
+    :: Property -- ^ 'payload'
     -> Text -- ^ 'fileId'
     -> PropertiesInsert'
-propertiesInsert' pProProperty_ pProFileId_ =
+propertiesInsert' pProPayload_ pProFileId_ =
     PropertiesInsert'
     { _proQuotaUser = Nothing
     , _proPrettyPrint = True
-    , _proProperty = pProProperty_
     , _proUserIP = Nothing
+    , _proPayload = pProPayload_
     , _proKey = Nothing
     , _proFileId = pProFileId_
     , _proOAuthToken = Nothing
@@ -120,16 +121,16 @@ proPrettyPrint
   = lens _proPrettyPrint
       (\ s a -> s{_proPrettyPrint = a})
 
--- | Multipart request metadata.
-proProperty :: Lens' PropertiesInsert' Property
-proProperty
-  = lens _proProperty (\ s a -> s{_proProperty = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 proUserIP :: Lens' PropertiesInsert' (Maybe Text)
 proUserIP
   = lens _proUserIP (\ s a -> s{_proUserIP = a})
+
+-- | Multipart request metadata.
+proPayload :: Lens' PropertiesInsert' Property
+proPayload
+  = lens _proPayload (\ s a -> s{_proPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -167,7 +168,7 @@ instance GoogleRequest PropertiesInsert' where
               _proKey
               _proOAuthToken
               (Just AltJSON)
-              _proProperty
+              _proPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PropertiesInsertResource)

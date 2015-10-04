@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.DoubleClickBidManager.Lineitems.Uploadlineitems
     -- * Request Lenses
     , luQuotaUser
     , luPrettyPrint
-    , luUploadLineItemsRequest
     , luUserIP
+    , luPayload
     , luKey
     , luOAuthToken
     , luFields
@@ -61,14 +62,14 @@ type LineitemsUploadlineitemsResource =
 --
 -- /See:/ 'lineitemsUploadlineitems'' smart constructor.
 data LineitemsUploadlineitems' = LineitemsUploadlineitems'
-    { _luQuotaUser              :: !(Maybe Text)
-    , _luPrettyPrint            :: !Bool
-    , _luUploadLineItemsRequest :: !UploadLineItemsRequest
-    , _luUserIP                 :: !(Maybe Text)
-    , _luKey                    :: !(Maybe Key)
-    , _luOAuthToken             :: !(Maybe OAuthToken)
-    , _luFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _luQuotaUser   :: !(Maybe Text)
+    , _luPrettyPrint :: !Bool
+    , _luUserIP      :: !(Maybe Text)
+    , _luPayload     :: !UploadLineItemsRequest
+    , _luKey         :: !(Maybe Key)
+    , _luOAuthToken  :: !(Maybe OAuthToken)
+    , _luFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LineitemsUploadlineitems'' with the minimum fields required to make a request.
 --
@@ -78,9 +79,9 @@ data LineitemsUploadlineitems' = LineitemsUploadlineitems'
 --
 -- * 'luPrettyPrint'
 --
--- * 'luUploadLineItemsRequest'
---
 -- * 'luUserIP'
+--
+-- * 'luPayload'
 --
 -- * 'luKey'
 --
@@ -88,14 +89,14 @@ data LineitemsUploadlineitems' = LineitemsUploadlineitems'
 --
 -- * 'luFields'
 lineitemsUploadlineitems'
-    :: UploadLineItemsRequest -- ^ 'UploadLineItemsRequest'
+    :: UploadLineItemsRequest -- ^ 'payload'
     -> LineitemsUploadlineitems'
-lineitemsUploadlineitems' pLuUploadLineItemsRequest_ =
+lineitemsUploadlineitems' pLuPayload_ =
     LineitemsUploadlineitems'
     { _luQuotaUser = Nothing
     , _luPrettyPrint = True
-    , _luUploadLineItemsRequest = pLuUploadLineItemsRequest_
     , _luUserIP = Nothing
+    , _luPayload = pLuPayload_
     , _luKey = Nothing
     , _luOAuthToken = Nothing
     , _luFields = Nothing
@@ -114,16 +115,15 @@ luPrettyPrint
   = lens _luPrettyPrint
       (\ s a -> s{_luPrettyPrint = a})
 
--- | Multipart request metadata.
-luUploadLineItemsRequest :: Lens' LineitemsUploadlineitems' UploadLineItemsRequest
-luUploadLineItemsRequest
-  = lens _luUploadLineItemsRequest
-      (\ s a -> s{_luUploadLineItemsRequest = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 luUserIP :: Lens' LineitemsUploadlineitems' (Maybe Text)
 luUserIP = lens _luUserIP (\ s a -> s{_luUserIP = a})
+
+-- | Multipart request metadata.
+luPayload :: Lens' LineitemsUploadlineitems' UploadLineItemsRequest
+luPayload
+  = lens _luPayload (\ s a -> s{_luPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -155,7 +155,7 @@ instance GoogleRequest LineitemsUploadlineitems'
               _luKey
               _luOAuthToken
               (Just AltJSON)
-              _luUploadLineItemsRequest
+              _luPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LineitemsUploadlineitemsResource)

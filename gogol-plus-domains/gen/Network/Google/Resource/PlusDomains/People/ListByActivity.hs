@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type PeopleListByActivityResource =
            Capture "collection"
              PlusDomainsPeopleListByActivityCollection
              :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -80,7 +81,7 @@ data PeopleListByActivity' = PeopleListByActivity'
     , _plbaOAuthToken  :: !(Maybe OAuthToken)
     , _plbaMaxResults  :: !Word32
     , _plbaFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleListByActivity'' with the minimum fields required to make a request.
 --
@@ -196,9 +197,8 @@ instance GoogleRequest PeopleListByActivity' where
         type Rs PeopleListByActivity' = PeopleFeed
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u PeopleListByActivity'{..}
-          = go (Just _plbaMaxResults) _plbaPageToken
-              _plbaActivityId
-              _plbaCollection
+          = go _plbaActivityId _plbaCollection _plbaPageToken
+              (Just _plbaMaxResults)
               _plbaQuotaUser
               (Just _plbaPrettyPrint)
               _plbaUserIP

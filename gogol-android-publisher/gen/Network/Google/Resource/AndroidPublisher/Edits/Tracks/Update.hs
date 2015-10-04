@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,10 +35,10 @@ module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Update
     -- * Request Lenses
     , etuQuotaUser
     , etuTrack
-    , etuTrack
     , etuPrettyPrint
     , etuPackageName
     , etuUserIP
+    , etuPayload
     , etuKey
     , etuOAuthToken
     , etuEditId
@@ -74,15 +75,15 @@ type EditsTracksUpdateResource =
 data EditsTracksUpdate' = EditsTracksUpdate'
     { _etuQuotaUser   :: !(Maybe Text)
     , _etuTrack       :: !AndroidPublisherEditsTracksUpdateTrack
-    , _etuTrack       :: !Track
     , _etuPrettyPrint :: !Bool
     , _etuPackageName :: !Text
     , _etuUserIP      :: !(Maybe Text)
+    , _etuPayload     :: !Track
     , _etuKey         :: !(Maybe Key)
     , _etuOAuthToken  :: !(Maybe OAuthToken)
     , _etuEditId      :: !Text
     , _etuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsTracksUpdate'' with the minimum fields required to make a request.
 --
@@ -92,13 +93,13 @@ data EditsTracksUpdate' = EditsTracksUpdate'
 --
 -- * 'etuTrack'
 --
--- * 'etuTrack'
---
 -- * 'etuPrettyPrint'
 --
 -- * 'etuPackageName'
 --
 -- * 'etuUserIP'
+--
+-- * 'etuPayload'
 --
 -- * 'etuKey'
 --
@@ -109,18 +110,18 @@ data EditsTracksUpdate' = EditsTracksUpdate'
 -- * 'etuFields'
 editsTracksUpdate'
     :: AndroidPublisherEditsTracksUpdateTrack -- ^ 'track'
-    -> Track -- ^ 'Track'
     -> Text -- ^ 'packageName'
+    -> Track -- ^ 'payload'
     -> Text -- ^ 'editId'
     -> EditsTracksUpdate'
-editsTracksUpdate' pEtuTrack_ pEtuTrack_ pEtuPackageName_ pEtuEditId_ =
+editsTracksUpdate' pEtuTrack_ pEtuPackageName_ pEtuPayload_ pEtuEditId_ =
     EditsTracksUpdate'
     { _etuQuotaUser = Nothing
-    , _etuTrack = pEtuTrack_
     , _etuTrack = pEtuTrack_
     , _etuPrettyPrint = True
     , _etuPackageName = pEtuPackageName_
     , _etuUserIP = Nothing
+    , _etuPayload = pEtuPayload_
     , _etuKey = Nothing
     , _etuOAuthToken = Nothing
     , _etuEditId = pEtuEditId_
@@ -136,10 +137,6 @@ etuQuotaUser
 
 -- | The track type to read or modify.
 etuTrack :: Lens' EditsTracksUpdate' AndroidPublisherEditsTracksUpdateTrack
-etuTrack = lens _etuTrack (\ s a -> s{_etuTrack = a})
-
--- | Multipart request metadata.
-etuTrack :: Lens' EditsTracksUpdate' Track
 etuTrack = lens _etuTrack (\ s a -> s{_etuTrack = a})
 
 -- | Returns response with indentations and line breaks.
@@ -160,6 +157,11 @@ etuPackageName
 etuUserIP :: Lens' EditsTracksUpdate' (Maybe Text)
 etuUserIP
   = lens _etuUserIP (\ s a -> s{_etuUserIP = a})
+
+-- | Multipart request metadata.
+etuPayload :: Lens' EditsTracksUpdate' Track
+etuPayload
+  = lens _etuPayload (\ s a -> s{_etuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -199,7 +201,7 @@ instance GoogleRequest EditsTracksUpdate' where
               _etuKey
               _etuOAuthToken
               (Just AltJSON)
-              _etuTrack
+              _etuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EditsTracksUpdateResource)

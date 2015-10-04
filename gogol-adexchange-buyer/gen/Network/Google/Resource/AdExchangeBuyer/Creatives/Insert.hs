@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.AdExchangeBuyer.Creatives.Insert
     , ciQuotaUser
     , ciPrettyPrint
     , ciUserIP
-    , ciCreative
+    , ciPayload
     , ciKey
     , ciOAuthToken
     , ciFields
@@ -62,11 +63,11 @@ data CreativesInsert' = CreativesInsert'
     { _ciQuotaUser   :: !(Maybe Text)
     , _ciPrettyPrint :: !Bool
     , _ciUserIP      :: !(Maybe Text)
-    , _ciCreative    :: !Creative
+    , _ciPayload     :: !Creative
     , _ciKey         :: !(Maybe Key)
     , _ciOAuthToken  :: !(Maybe OAuthToken)
     , _ciFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesInsert'' with the minimum fields required to make a request.
 --
@@ -78,7 +79,7 @@ data CreativesInsert' = CreativesInsert'
 --
 -- * 'ciUserIP'
 --
--- * 'ciCreative'
+-- * 'ciPayload'
 --
 -- * 'ciKey'
 --
@@ -86,14 +87,14 @@ data CreativesInsert' = CreativesInsert'
 --
 -- * 'ciFields'
 creativesInsert'
-    :: Creative -- ^ 'Creative'
+    :: Creative -- ^ 'payload'
     -> CreativesInsert'
-creativesInsert' pCiCreative_ =
+creativesInsert' pCiPayload_ =
     CreativesInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
     , _ciUserIP = Nothing
-    , _ciCreative = pCiCreative_
+    , _ciPayload = pCiPayload_
     , _ciKey = Nothing
     , _ciOAuthToken = Nothing
     , _ciFields = Nothing
@@ -118,9 +119,9 @@ ciUserIP :: Lens' CreativesInsert' (Maybe Text)
 ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
 
 -- | Multipart request metadata.
-ciCreative :: Lens' CreativesInsert' Creative
-ciCreative
-  = lens _ciCreative (\ s a -> s{_ciCreative = a})
+ciPayload :: Lens' CreativesInsert' Creative
+ciPayload
+  = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -150,7 +151,7 @@ instance GoogleRequest CreativesInsert' where
               _ciKey
               _ciOAuthToken
               (Just AltJSON)
-              _ciCreative
+              _ciPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativesInsertResource)

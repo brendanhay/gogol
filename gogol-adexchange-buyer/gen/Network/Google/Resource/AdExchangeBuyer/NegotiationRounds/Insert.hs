@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,10 +34,10 @@ module Network.Google.Resource.AdExchangeBuyer.NegotiationRounds.Insert
     , nriQuotaUser
     , nriPrettyPrint
     , nriUserIP
+    , nriPayload
     , nriKey
     , nriOAuthToken
     , nriNegotiationId
-    , nriNegotiationRoundDTO
     , nriFields
     ) where
 
@@ -63,15 +64,15 @@ type NegotiationRoundsInsertResource =
 --
 -- /See:/ 'negotiationRoundsInsert'' smart constructor.
 data NegotiationRoundsInsert' = NegotiationRoundsInsert'
-    { _nriQuotaUser           :: !(Maybe Text)
-    , _nriPrettyPrint         :: !Bool
-    , _nriUserIP              :: !(Maybe Text)
-    , _nriKey                 :: !(Maybe Key)
-    , _nriOAuthToken          :: !(Maybe OAuthToken)
-    , _nriNegotiationId       :: !Int64
-    , _nriNegotiationRoundDTO :: !NegotiationRoundDTO
-    , _nriFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _nriQuotaUser     :: !(Maybe Text)
+    , _nriPrettyPrint   :: !Bool
+    , _nriUserIP        :: !(Maybe Text)
+    , _nriPayload       :: !NegotiationRoundDTO
+    , _nriKey           :: !(Maybe Key)
+    , _nriOAuthToken    :: !(Maybe OAuthToken)
+    , _nriNegotiationId :: !Int64
+    , _nriFields        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationRoundsInsert'' with the minimum fields required to make a request.
 --
@@ -83,28 +84,28 @@ data NegotiationRoundsInsert' = NegotiationRoundsInsert'
 --
 -- * 'nriUserIP'
 --
+-- * 'nriPayload'
+--
 -- * 'nriKey'
 --
 -- * 'nriOAuthToken'
 --
 -- * 'nriNegotiationId'
 --
--- * 'nriNegotiationRoundDTO'
---
 -- * 'nriFields'
 negotiationRoundsInsert'
-    :: Int64 -- ^ 'negotiationId'
-    -> NegotiationRoundDTO -- ^ 'NegotiationRoundDTO'
+    :: NegotiationRoundDTO -- ^ 'payload'
+    -> Int64 -- ^ 'negotiationId'
     -> NegotiationRoundsInsert'
-negotiationRoundsInsert' pNriNegotiationId_ pNriNegotiationRoundDTO_ =
+negotiationRoundsInsert' pNriPayload_ pNriNegotiationId_ =
     NegotiationRoundsInsert'
     { _nriQuotaUser = Nothing
     , _nriPrettyPrint = True
     , _nriUserIP = Nothing
+    , _nriPayload = pNriPayload_
     , _nriKey = Nothing
     , _nriOAuthToken = Nothing
     , _nriNegotiationId = pNriNegotiationId_
-    , _nriNegotiationRoundDTO = pNriNegotiationRoundDTO_
     , _nriFields = Nothing
     }
 
@@ -127,6 +128,11 @@ nriUserIP :: Lens' NegotiationRoundsInsert' (Maybe Text)
 nriUserIP
   = lens _nriUserIP (\ s a -> s{_nriUserIP = a})
 
+-- | Multipart request metadata.
+nriPayload :: Lens' NegotiationRoundsInsert' NegotiationRoundDTO
+nriPayload
+  = lens _nriPayload (\ s a -> s{_nriPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -143,12 +149,6 @@ nriNegotiationId :: Lens' NegotiationRoundsInsert' Int64
 nriNegotiationId
   = lens _nriNegotiationId
       (\ s a -> s{_nriNegotiationId = a})
-
--- | Multipart request metadata.
-nriNegotiationRoundDTO :: Lens' NegotiationRoundsInsert' NegotiationRoundDTO
-nriNegotiationRoundDTO
-  = lens _nriNegotiationRoundDTO
-      (\ s a -> s{_nriNegotiationRoundDTO = a})
 
 -- | Selector specifying which fields to include in a partial response.
 nriFields :: Lens' NegotiationRoundsInsert' (Maybe Text)
@@ -171,7 +171,7 @@ instance GoogleRequest NegotiationRoundsInsert' where
               _nriKey
               _nriOAuthToken
               (Just AltJSON)
-              _nriNegotiationRoundDTO
+              _nriPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy NegotiationRoundsInsertResource)

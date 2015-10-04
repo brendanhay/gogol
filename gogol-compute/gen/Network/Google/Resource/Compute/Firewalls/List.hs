@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type FirewallsListResource =
        "global" :>
          "firewalls" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data FirewallsList' = FirewallsList'
     , _flOAuthToken  :: !(Maybe OAuthToken)
     , _flMaxResults  :: !Word32
     , _flFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsList'' with the minimum fields required to make a request.
 --
@@ -193,8 +194,8 @@ instance GoogleRequest FirewallsList' where
         type Rs FirewallsList' = FirewallList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u FirewallsList'{..}
-          = go _flFilter (Just _flMaxResults) _flPageToken
-              _flProject
+          = go _flProject _flFilter _flPageToken
+              (Just _flMaxResults)
               _flQuotaUser
               (Just _flPrettyPrint)
               _flUserIP

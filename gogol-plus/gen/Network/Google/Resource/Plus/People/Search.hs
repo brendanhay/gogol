@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -49,10 +50,10 @@ import           Network.Google.Prelude
 -- 'PeopleSearch'' request conforms to.
 type PeopleSearchResource =
      "people" :>
-       QueryParam "language" Text :>
-         QueryParam "maxResults" Word32 :>
+       QueryParam "query" Text :>
+         QueryParam "language" Text :>
            QueryParam "pageToken" Text :>
-             QueryParam "query" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -75,7 +76,7 @@ data PeopleSearch' = PeopleSearch'
     , _psOAuthToken  :: !(Maybe OAuthToken)
     , _psMaxResults  :: !Word32
     , _psFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleSearch'' with the minimum fields required to make a request.
 --
@@ -184,9 +185,8 @@ instance GoogleRequest PeopleSearch' where
         type Rs PeopleSearch' = PeopleFeed
         request = requestWithRoute defReq plusURL
         requestWithRoute r u PeopleSearch'{..}
-          = go (Just _psLanguage) (Just _psMaxResults)
-              _psPageToken
-              (Just _psQuery)
+          = go (Just _psQuery) (Just _psLanguage) _psPageToken
+              (Just _psMaxResults)
               _psQuotaUser
               (Just _psPrettyPrint)
               _psUserIP

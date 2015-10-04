@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,11 +35,11 @@ module Network.Google.Resource.Prediction.TrainedModels.Update
     , tmuPrettyPrint
     , tmuProject
     , tmuUserIP
+    , tmuPayload
     , tmuKey
     , tmuId
     , tmuOAuthToken
     , tmuFields
-    , tmuUpdate
     ) where
 
 import           Network.Google.Prediction.Types
@@ -67,12 +68,12 @@ data TrainedModelsUpdate' = TrainedModelsUpdate'
     , _tmuPrettyPrint :: !Bool
     , _tmuProject     :: !Text
     , _tmuUserIP      :: !(Maybe Text)
+    , _tmuPayload     :: !Update
     , _tmuKey         :: !(Maybe Key)
     , _tmuId          :: !Text
     , _tmuOAuthToken  :: !(Maybe OAuthToken)
     , _tmuFields      :: !(Maybe Text)
-    , _tmuUpdate      :: !Update
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrainedModelsUpdate'' with the minimum fields required to make a request.
 --
@@ -86,6 +87,8 @@ data TrainedModelsUpdate' = TrainedModelsUpdate'
 --
 -- * 'tmuUserIP'
 --
+-- * 'tmuPayload'
+--
 -- * 'tmuKey'
 --
 -- * 'tmuId'
@@ -93,24 +96,22 @@ data TrainedModelsUpdate' = TrainedModelsUpdate'
 -- * 'tmuOAuthToken'
 --
 -- * 'tmuFields'
---
--- * 'tmuUpdate'
 trainedModelsUpdate'
     :: Text -- ^ 'project'
+    -> Update -- ^ 'payload'
     -> Text -- ^ 'id'
-    -> Update -- ^ 'Update'
     -> TrainedModelsUpdate'
-trainedModelsUpdate' pTmuProject_ pTmuId_ pTmuUpdate_ =
+trainedModelsUpdate' pTmuProject_ pTmuPayload_ pTmuId_ =
     TrainedModelsUpdate'
     { _tmuQuotaUser = Nothing
     , _tmuPrettyPrint = True
     , _tmuProject = pTmuProject_
     , _tmuUserIP = Nothing
+    , _tmuPayload = pTmuPayload_
     , _tmuKey = Nothing
     , _tmuId = pTmuId_
     , _tmuOAuthToken = Nothing
     , _tmuFields = Nothing
-    , _tmuUpdate = pTmuUpdate_
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,6 +138,11 @@ tmuUserIP :: Lens' TrainedModelsUpdate' (Maybe Text)
 tmuUserIP
   = lens _tmuUserIP (\ s a -> s{_tmuUserIP = a})
 
+-- | Multipart request metadata.
+tmuPayload :: Lens' TrainedModelsUpdate' Update
+tmuPayload
+  = lens _tmuPayload (\ s a -> s{_tmuPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -158,11 +164,6 @@ tmuFields :: Lens' TrainedModelsUpdate' (Maybe Text)
 tmuFields
   = lens _tmuFields (\ s a -> s{_tmuFields = a})
 
--- | Multipart request metadata.
-tmuUpdate :: Lens' TrainedModelsUpdate' Update
-tmuUpdate
-  = lens _tmuUpdate (\ s a -> s{_tmuUpdate = a})
-
 instance GoogleAuth TrainedModelsUpdate' where
         authKey = tmuKey . _Just
         authToken = tmuOAuthToken . _Just
@@ -178,7 +179,7 @@ instance GoogleRequest TrainedModelsUpdate' where
               _tmuKey
               _tmuOAuthToken
               (Just AltJSON)
-              _tmuUpdate
+              _tmuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TrainedModelsUpdateResource)

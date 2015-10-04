@@ -26,7 +26,7 @@ data Parent = Parent
     { _pIsRoot :: !(Maybe Bool)
     , _pId     :: !(Maybe Text)
     , _pTitle  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Parent' with the minimum fields required to make a request.
 --
@@ -78,7 +78,7 @@ instance ToJSON Parent where
 -- /See:/ 'photo' smart constructor.
 newtype Photo = Photo
     { _pURL :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Photo' with the minimum fields required to make a request.
 --
@@ -108,16 +108,16 @@ instance ToJSON Photo where
 --
 -- /See:/ 'event' smart constructor.
 data Event = Event
-    { _ePrimaryEventType     :: !(Maybe EventPrimaryEventType)
+    { _ePrimaryEventType     :: !(Maybe PrimaryEventType)
     , _eUser                 :: !(Maybe User)
     , _eEventTimeMillis      :: !(Maybe Word64)
     , _eRename               :: !(Maybe Rename)
     , _eFromUserDeletion     :: !(Maybe Bool)
-    , _eAdditionalEventTypes :: !(Maybe [EventAdditionalEventTypes])
+    , _eAdditionalEventTypes :: !(Maybe [AdditionalEventTypesItem])
     , _ePermissionChanges    :: !(Maybe [PermissionChange])
     , _eTarget               :: !(Maybe Target)
     , _eMove                 :: !(Maybe Move)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Event' with the minimum fields required to make a request.
 --
@@ -156,7 +156,7 @@ event =
     }
 
 -- | The main type of event that occurred.
-ePrimaryEventType :: Lens' Event (Maybe EventPrimaryEventType)
+ePrimaryEventType :: Lens' Event (Maybe PrimaryEventType)
 ePrimaryEventType
   = lens _ePrimaryEventType
       (\ s a -> s{_ePrimaryEventType = a})
@@ -186,7 +186,7 @@ eFromUserDeletion
 -- multiple actions are part of a single event. For example, creating a
 -- document, renaming it, and sharing it may be part of a single
 -- file-creation event.
-eAdditionalEventTypes :: Lens' Event [EventAdditionalEventTypes]
+eAdditionalEventTypes :: Lens' Event [AdditionalEventTypesItem]
 eAdditionalEventTypes
   = lens _eAdditionalEventTypes
       (\ s a -> s{_eAdditionalEventTypes = a})
@@ -246,7 +246,7 @@ instance ToJSON Event where
 data ListActivitiesResponse = ListActivitiesResponse
     { _larNextPageToken :: !(Maybe Text)
     , _larActivities    :: !(Maybe [Activity])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListActivitiesResponse' with the minimum fields required to make a request.
 --
@@ -299,7 +299,7 @@ instance ToJSON ListActivitiesResponse where
 data PermissionChange = PermissionChange
     { _pcAddedPermissions   :: !(Maybe [Permission])
     , _pcRemovedPermissions :: !(Maybe [Permission])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionChange' with the minimum fields required to make a request.
 --
@@ -353,7 +353,7 @@ instance ToJSON PermissionChange where
 data User = User
     { _uPhoto :: !(Maybe Photo)
     , _uName  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
@@ -397,7 +397,7 @@ instance ToJSON User where
 data Activity = Activity
     { _aSingleEvents  :: !(Maybe [Event])
     , _aCombinedEvent :: !(Maybe Event)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Activity' with the minimum fields required to make a request.
 --
@@ -449,7 +449,7 @@ instance ToJSON Activity where
 data Rename = Rename
     { _rNewTitle :: !(Maybe Text)
     , _rOldTitle :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Rename' with the minimum fields required to make a request.
 --
@@ -497,11 +497,11 @@ instance ToJSON Rename where
 data Permission = Permission
     { _pWithLink     :: !(Maybe Bool)
     , _pUser         :: !(Maybe User)
-    , _pRole         :: !(Maybe PermissionRole)
+    , _pRole         :: !(Maybe Role)
     , _pName         :: !(Maybe Text)
-    , _pType         :: !(Maybe PermissionType)
+    , _pType         :: !(Maybe Type)
     , _pPermissionId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Permission' with the minimum fields required to make a request.
 --
@@ -541,7 +541,7 @@ pUser = lens _pUser (\ s a -> s{_pUser = a})
 
 -- | Indicates the Google Drive permissions role. The role determines a
 -- user\'s ability to read, write, or comment on the file.
-pRole :: Lens' Permission (Maybe PermissionRole)
+pRole :: Lens' Permission (Maybe Role)
 pRole = lens _pRole (\ s a -> s{_pRole = a})
 
 -- | The name of the user or group the permission applies to.
@@ -549,7 +549,7 @@ pName :: Lens' Permission (Maybe Text)
 pName = lens _pName (\ s a -> s{_pName = a})
 
 -- | Indicates how widely permissions are granted.
-pType :: Lens' Permission (Maybe PermissionType)
+pType :: Lens' Permission (Maybe Type)
 pType = lens _pType (\ s a -> s{_pType = a})
 
 -- | The ID for this permission. Corresponds to the Drive API\'s permission
@@ -586,7 +586,7 @@ instance ToJSON Permission where
 data Move = Move
     { _mAddedParents   :: !(Maybe [Parent])
     , _mRemovedParents :: !(Maybe [Parent])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Move' with the minimum fields required to make a request.
 --
@@ -641,7 +641,7 @@ data Target = Target
     { _tMimeType :: !(Maybe Text)
     , _tName     :: !(Maybe Text)
     , _tId       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Target' with the minimum fields required to make a request.
 --

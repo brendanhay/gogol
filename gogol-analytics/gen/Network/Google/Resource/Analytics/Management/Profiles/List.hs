@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,8 +55,8 @@ type ManagementProfilesListResource =
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "profiles" :>
-                 QueryParam "max-results" Int32 :>
-                   QueryParam "start-index" Int32 :>
+                 QueryParam "start-index" Int32 :>
+                   QueryParam "max-results" Int32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data ManagementProfilesList' = ManagementProfilesList'
     , _mplStartIndex    :: !(Maybe Int32)
     , _mplMaxResults    :: !(Maybe Int32)
     , _mplFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfilesList'' with the minimum fields required to make a request.
 --
@@ -194,8 +195,8 @@ instance GoogleRequest ManagementProfilesList' where
         type Rs ManagementProfilesList' = Profiles
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementProfilesList'{..}
-          = go _mplMaxResults _mplStartIndex _mplAccountId
-              _mplWebPropertyId
+          = go _mplAccountId _mplWebPropertyId _mplStartIndex
+              _mplMaxResults
               _mplQuotaUser
               (Just _mplPrettyPrint)
               _mplUserIP

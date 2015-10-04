@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -64,11 +65,11 @@ data DetectionsList' = DetectionsList'
     { _dlQuotaUser   :: !(Maybe Text)
     , _dlPrettyPrint :: !Bool
     , _dlUserIP      :: !(Maybe Text)
-    , _dlQ           :: !Text
+    , _dlQ           :: ![Text]
     , _dlKey         :: !(Maybe Key)
     , _dlOAuthToken  :: !(Maybe OAuthToken)
     , _dlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DetectionsList'' with the minimum fields required to make a request.
 --
@@ -88,7 +89,7 @@ data DetectionsList' = DetectionsList'
 --
 -- * 'dlFields'
 detectionsList'
-    :: Text -- ^ 'q'
+    :: [Text] -- ^ 'q'
     -> DetectionsList'
 detectionsList' pDlQ_ =
     DetectionsList'
@@ -120,8 +121,8 @@ dlUserIP :: Lens' DetectionsList' (Maybe Text)
 dlUserIP = lens _dlUserIP (\ s a -> s{_dlUserIP = a})
 
 -- | The text to detect
-dlQ :: Lens' DetectionsList' Text
-dlQ = lens _dlQ (\ s a -> s{_dlQ = a})
+dlQ :: Lens' DetectionsList' [Text]
+dlQ = lens _dlQ (\ s a -> s{_dlQ = a}) . _Coerce
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -146,7 +147,8 @@ instance GoogleRequest DetectionsList' where
         type Rs DetectionsList' = DetectionsListResponse
         request = requestWithRoute defReq translateURL
         requestWithRoute r u DetectionsList'{..}
-          = go (Just _dlQ) _dlQuotaUser (Just _dlPrettyPrint)
+          = go (_dlQ ^. _Default) _dlQuotaUser
+              (Just _dlPrettyPrint)
               _dlUserIP
               _dlFields
               _dlKey

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -44,7 +45,7 @@ module Network.Google.Resource.Classroom.Courses.Teachers.Create
     , ctcCourseId
     , ctcAccessToken
     , ctcUploadType
-    , ctcTeacher
+    , ctcPayload
     , ctcBearerToken
     , ctcKey
     , ctcOAuthToken
@@ -63,12 +64,12 @@ type CoursesTeachersCreateResource =
          Capture "courseId" Text :>
            "teachers" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "bearer_token" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "upload_protocol" Text :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "callback" Text :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "fields" Text :>
@@ -96,13 +97,13 @@ data CoursesTeachersCreate' = CoursesTeachersCreate'
     , _ctcCourseId       :: !Text
     , _ctcAccessToken    :: !(Maybe Text)
     , _ctcUploadType     :: !(Maybe Text)
-    , _ctcTeacher        :: !Teacher
+    , _ctcPayload        :: !Teacher
     , _ctcBearerToken    :: !(Maybe Text)
     , _ctcKey            :: !(Maybe Key)
     , _ctcOAuthToken     :: !(Maybe OAuthToken)
     , _ctcFields         :: !(Maybe Text)
     , _ctcCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesTeachersCreate'' with the minimum fields required to make a request.
 --
@@ -124,7 +125,7 @@ data CoursesTeachersCreate' = CoursesTeachersCreate'
 --
 -- * 'ctcUploadType'
 --
--- * 'ctcTeacher'
+-- * 'ctcPayload'
 --
 -- * 'ctcBearerToken'
 --
@@ -137,9 +138,9 @@ data CoursesTeachersCreate' = CoursesTeachersCreate'
 -- * 'ctcCallback'
 coursesTeachersCreate'
     :: Text -- ^ 'courseId'
-    -> Teacher -- ^ 'Teacher'
+    -> Teacher -- ^ 'payload'
     -> CoursesTeachersCreate'
-coursesTeachersCreate' pCtcCourseId_ pCtcTeacher_ =
+coursesTeachersCreate' pCtcCourseId_ pCtcPayload_ =
     CoursesTeachersCreate'
     { _ctcXgafv = Nothing
     , _ctcQuotaUser = Nothing
@@ -149,7 +150,7 @@ coursesTeachersCreate' pCtcCourseId_ pCtcTeacher_ =
     , _ctcCourseId = pCtcCourseId_
     , _ctcAccessToken = Nothing
     , _ctcUploadType = Nothing
-    , _ctcTeacher = pCtcTeacher_
+    , _ctcPayload = pCtcPayload_
     , _ctcBearerToken = Nothing
     , _ctcKey = Nothing
     , _ctcOAuthToken = Nothing
@@ -204,9 +205,9 @@ ctcUploadType
       (\ s a -> s{_ctcUploadType = a})
 
 -- | Multipart request metadata.
-ctcTeacher :: Lens' CoursesTeachersCreate' Teacher
-ctcTeacher
-  = lens _ctcTeacher (\ s a -> s{_ctcTeacher = a})
+ctcPayload :: Lens' CoursesTeachersCreate' Teacher
+ctcPayload
+  = lens _ctcPayload (\ s a -> s{_ctcPayload = a})
 
 -- | OAuth bearer token.
 ctcBearerToken :: Lens' CoursesTeachersCreate' (Maybe Text)
@@ -244,19 +245,19 @@ instance GoogleRequest CoursesTeachersCreate' where
         type Rs CoursesTeachersCreate' = Teacher
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesTeachersCreate'{..}
-          = go _ctcXgafv _ctcAccessToken _ctcBearerToken
-              _ctcCallback
+          = go _ctcCourseId _ctcXgafv _ctcUploadProtocol
               (Just _ctcPp)
+              _ctcAccessToken
               _ctcUploadType
-              _ctcUploadProtocol
-              _ctcCourseId
+              _ctcBearerToken
+              _ctcCallback
               _ctcQuotaUser
               (Just _ctcPrettyPrint)
               _ctcFields
               _ctcKey
               _ctcOAuthToken
               (Just AltJSON)
-              _ctcTeacher
+              _ctcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesTeachersCreateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.DFAReporting.AccountUserProfiles.Update
     , aupuQuotaUser
     , aupuPrettyPrint
     , aupuUserIP
-    , aupuAccountUserProfile
     , aupuProfileId
+    , aupuPayload
     , aupuKey
     , aupuOAuthToken
     , aupuFields
@@ -63,15 +64,15 @@ type AccountUserProfilesUpdateResource =
 --
 -- /See:/ 'accountUserProfilesUpdate'' smart constructor.
 data AccountUserProfilesUpdate' = AccountUserProfilesUpdate'
-    { _aupuQuotaUser          :: !(Maybe Text)
-    , _aupuPrettyPrint        :: !Bool
-    , _aupuUserIP             :: !(Maybe Text)
-    , _aupuAccountUserProfile :: !AccountUserProfile
-    , _aupuProfileId          :: !Int64
-    , _aupuKey                :: !(Maybe Key)
-    , _aupuOAuthToken         :: !(Maybe OAuthToken)
-    , _aupuFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _aupuQuotaUser   :: !(Maybe Text)
+    , _aupuPrettyPrint :: !Bool
+    , _aupuUserIP      :: !(Maybe Text)
+    , _aupuProfileId   :: !Int64
+    , _aupuPayload     :: !AccountUserProfile
+    , _aupuKey         :: !(Maybe Key)
+    , _aupuOAuthToken  :: !(Maybe OAuthToken)
+    , _aupuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProfilesUpdate'' with the minimum fields required to make a request.
 --
@@ -83,9 +84,9 @@ data AccountUserProfilesUpdate' = AccountUserProfilesUpdate'
 --
 -- * 'aupuUserIP'
 --
--- * 'aupuAccountUserProfile'
---
 -- * 'aupuProfileId'
+--
+-- * 'aupuPayload'
 --
 -- * 'aupuKey'
 --
@@ -93,16 +94,16 @@ data AccountUserProfilesUpdate' = AccountUserProfilesUpdate'
 --
 -- * 'aupuFields'
 accountUserProfilesUpdate'
-    :: AccountUserProfile -- ^ 'AccountUserProfile'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> AccountUserProfile -- ^ 'payload'
     -> AccountUserProfilesUpdate'
-accountUserProfilesUpdate' pAupuAccountUserProfile_ pAupuProfileId_ =
+accountUserProfilesUpdate' pAupuProfileId_ pAupuPayload_ =
     AccountUserProfilesUpdate'
     { _aupuQuotaUser = Nothing
     , _aupuPrettyPrint = True
     , _aupuUserIP = Nothing
-    , _aupuAccountUserProfile = pAupuAccountUserProfile_
     , _aupuProfileId = pAupuProfileId_
+    , _aupuPayload = pAupuPayload_
     , _aupuKey = Nothing
     , _aupuOAuthToken = Nothing
     , _aupuFields = Nothing
@@ -128,17 +129,16 @@ aupuUserIP :: Lens' AccountUserProfilesUpdate' (Maybe Text)
 aupuUserIP
   = lens _aupuUserIP (\ s a -> s{_aupuUserIP = a})
 
--- | Multipart request metadata.
-aupuAccountUserProfile :: Lens' AccountUserProfilesUpdate' AccountUserProfile
-aupuAccountUserProfile
-  = lens _aupuAccountUserProfile
-      (\ s a -> s{_aupuAccountUserProfile = a})
-
 -- | User profile ID associated with this request.
 aupuProfileId :: Lens' AccountUserProfilesUpdate' Int64
 aupuProfileId
   = lens _aupuProfileId
       (\ s a -> s{_aupuProfileId = a})
+
+-- | Multipart request metadata.
+aupuPayload :: Lens' AccountUserProfilesUpdate' AccountUserProfile
+aupuPayload
+  = lens _aupuPayload (\ s a -> s{_aupuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -174,7 +174,7 @@ instance GoogleRequest AccountUserProfilesUpdate'
               _aupuKey
               _aupuOAuthToken
               (Just AltJSON)
-              _aupuAccountUserProfile
+              _aupuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountUserProfilesUpdateResource)

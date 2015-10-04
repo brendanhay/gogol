@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,10 +54,10 @@ type GlobalAccountsOperationsListResource =
      Capture "project" Text :>
        "global" :>
          "operations" :>
-           QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "orderBy" Text :>
-                 QueryParam "pageToken" Text :>
+           QueryParam "orderBy" Text :>
+             QueryParam "filter" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,7 +83,7 @@ data GlobalAccountsOperationsList' = GlobalAccountsOperationsList'
     , _gaolOAuthToken  :: !(Maybe OAuthToken)
     , _gaolMaxResults  :: !Word32
     , _gaolFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalAccountsOperationsList'' with the minimum fields required to make a request.
 --
@@ -221,9 +222,9 @@ instance GoogleRequest GlobalAccountsOperationsList'
         request = requestWithRoute defReq userAccountsURL
         requestWithRoute r u
           GlobalAccountsOperationsList'{..}
-          = go _gaolFilter (Just _gaolMaxResults) _gaolOrderBy
+          = go _gaolProject _gaolOrderBy _gaolFilter
               _gaolPageToken
-              _gaolProject
+              (Just _gaolMaxResults)
               _gaolQuotaUser
               (Just _gaolPrettyPrint)
               _gaolUserIP

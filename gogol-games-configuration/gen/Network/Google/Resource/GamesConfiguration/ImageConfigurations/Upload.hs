@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,9 +51,7 @@ type ImageConfigurationsUploadResource =
      "images" :>
        Capture "resourceId" Text :>
          "imageType" :>
-           Capture "imageType"
-             GamesConfigurationImageConfigurationsUploadImageType
-             :>
+           Capture "imageType" ImageType :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -71,11 +70,11 @@ data ImageConfigurationsUpload' = ImageConfigurationsUpload'
     , _icuPrettyPrint :: !Bool
     , _icuUserIP      :: !(Maybe Text)
     , _icuMedia       :: !Body
-    , _icuImageType   :: !GamesConfigurationImageConfigurationsUploadImageType
+    , _icuImageType   :: !ImageType
     , _icuKey         :: !(Maybe Key)
     , _icuOAuthToken  :: !(Maybe OAuthToken)
     , _icuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImageConfigurationsUpload'' with the minimum fields required to make a request.
 --
@@ -101,7 +100,7 @@ data ImageConfigurationsUpload' = ImageConfigurationsUpload'
 imageConfigurationsUpload'
     :: Text -- ^ 'resourceId'
     -> Body -- ^ 'media'
-    -> GamesConfigurationImageConfigurationsUploadImageType -- ^ 'imageType'
+    -> ImageType -- ^ 'imageType'
     -> ImageConfigurationsUpload'
 imageConfigurationsUpload' pIcuResourceId_ pIcuMedia_ pIcuImageType_ =
     ImageConfigurationsUpload'
@@ -145,7 +144,7 @@ icuMedia :: Lens' ImageConfigurationsUpload' Body
 icuMedia = lens _icuMedia (\ s a -> s{_icuMedia = a})
 
 -- | Selects which image in a resource for this method.
-icuImageType :: Lens' ImageConfigurationsUpload' GamesConfigurationImageConfigurationsUploadImageType
+icuImageType :: Lens' ImageConfigurationsUpload' ImageType
 icuImageType
   = lens _icuImageType (\ s a -> s{_icuImageType = a})
 
@@ -177,14 +176,14 @@ instance GoogleRequest ImageConfigurationsUpload'
         request
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u ImageConfigurationsUpload'{..}
-          = go _icuMedia _icuResourceId _icuImageType
-              _icuQuotaUser
+          = go _icuResourceId _icuImageType _icuQuotaUser
               (Just _icuPrettyPrint)
               _icuUserIP
               _icuFields
               _icuKey
               _icuOAuthToken
               (Just AltJSON)
+              _icuMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ImageConfigurationsUploadResource)

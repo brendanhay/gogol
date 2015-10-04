@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.Directory.ChromeosDevices.Update
     -- * Request Lenses
     , cduQuotaUser
     , cduPrettyPrint
-    , cduChromeOSDevice
     , cduUserIP
+    , cduPayload
     , cduCustomerId
     , cduKey
     , cduDeviceId
@@ -70,17 +71,17 @@ type ChromeosDevicesUpdateResource =
 --
 -- /See:/ 'chromeosDevicesUpdate'' smart constructor.
 data ChromeosDevicesUpdate' = ChromeosDevicesUpdate'
-    { _cduQuotaUser      :: !(Maybe Text)
-    , _cduPrettyPrint    :: !Bool
-    , _cduChromeOSDevice :: !ChromeOSDevice
-    , _cduUserIP         :: !(Maybe Text)
-    , _cduCustomerId     :: !Text
-    , _cduKey            :: !(Maybe Key)
-    , _cduDeviceId       :: !Text
-    , _cduProjection     :: !(Maybe DirectoryChromeosDevicesUpdateProjection)
-    , _cduOAuthToken     :: !(Maybe OAuthToken)
-    , _cduFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cduQuotaUser   :: !(Maybe Text)
+    , _cduPrettyPrint :: !Bool
+    , _cduUserIP      :: !(Maybe Text)
+    , _cduPayload     :: !ChromeOSDevice
+    , _cduCustomerId  :: !Text
+    , _cduKey         :: !(Maybe Key)
+    , _cduDeviceId    :: !Text
+    , _cduProjection  :: !(Maybe DirectoryChromeosDevicesUpdateProjection)
+    , _cduOAuthToken  :: !(Maybe OAuthToken)
+    , _cduFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChromeosDevicesUpdate'' with the minimum fields required to make a request.
 --
@@ -90,9 +91,9 @@ data ChromeosDevicesUpdate' = ChromeosDevicesUpdate'
 --
 -- * 'cduPrettyPrint'
 --
--- * 'cduChromeOSDevice'
---
 -- * 'cduUserIP'
+--
+-- * 'cduPayload'
 --
 -- * 'cduCustomerId'
 --
@@ -106,16 +107,16 @@ data ChromeosDevicesUpdate' = ChromeosDevicesUpdate'
 --
 -- * 'cduFields'
 chromeosDevicesUpdate'
-    :: ChromeOSDevice -- ^ 'ChromeOSDevice'
+    :: ChromeOSDevice -- ^ 'payload'
     -> Text -- ^ 'customerId'
     -> Text -- ^ 'deviceId'
     -> ChromeosDevicesUpdate'
-chromeosDevicesUpdate' pCduChromeOSDevice_ pCduCustomerId_ pCduDeviceId_ =
+chromeosDevicesUpdate' pCduPayload_ pCduCustomerId_ pCduDeviceId_ =
     ChromeosDevicesUpdate'
     { _cduQuotaUser = Nothing
     , _cduPrettyPrint = True
-    , _cduChromeOSDevice = pCduChromeOSDevice_
     , _cduUserIP = Nothing
+    , _cduPayload = pCduPayload_
     , _cduCustomerId = pCduCustomerId_
     , _cduKey = Nothing
     , _cduDeviceId = pCduDeviceId_
@@ -137,17 +138,16 @@ cduPrettyPrint
   = lens _cduPrettyPrint
       (\ s a -> s{_cduPrettyPrint = a})
 
--- | Multipart request metadata.
-cduChromeOSDevice :: Lens' ChromeosDevicesUpdate' ChromeOSDevice
-cduChromeOSDevice
-  = lens _cduChromeOSDevice
-      (\ s a -> s{_cduChromeOSDevice = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 cduUserIP :: Lens' ChromeosDevicesUpdate' (Maybe Text)
 cduUserIP
   = lens _cduUserIP (\ s a -> s{_cduUserIP = a})
+
+-- | Multipart request metadata.
+cduPayload :: Lens' ChromeosDevicesUpdate' ChromeOSDevice
+cduPayload
+  = lens _cduPayload (\ s a -> s{_cduPayload = a})
 
 -- | Immutable id of the Google Apps account
 cduCustomerId :: Lens' ChromeosDevicesUpdate' Text
@@ -191,7 +191,7 @@ instance GoogleRequest ChromeosDevicesUpdate' where
         type Rs ChromeosDevicesUpdate' = ChromeOSDevice
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u ChromeosDevicesUpdate'{..}
-          = go _cduProjection _cduCustomerId _cduDeviceId
+          = go _cduCustomerId _cduDeviceId _cduProjection
               _cduQuotaUser
               (Just _cduPrettyPrint)
               _cduUserIP
@@ -199,7 +199,7 @@ instance GoogleRequest ChromeosDevicesUpdate' where
               _cduKey
               _cduOAuthToken
               (Just AltJSON)
-              _cduChromeOSDevice
+              _cduPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChromeosDevicesUpdateResource)

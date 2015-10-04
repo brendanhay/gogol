@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -42,10 +43,10 @@ module Network.Google.Resource.Classroom.Courses.Aliases.Create
     , cacCourseId
     , cacAccessToken
     , cacUploadType
+    , cacPayload
     , cacBearerToken
     , cacKey
     , cacOAuthToken
-    , cacCourseAlias
     , cacFields
     , cacCallback
     ) where
@@ -61,12 +62,12 @@ type CoursesAliasesCreateResource =
          Capture "courseId" Text :>
            "aliases" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "bearer_token" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "upload_protocol" Text :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "callback" Text :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "fields" Text :>
@@ -92,13 +93,13 @@ data CoursesAliasesCreate' = CoursesAliasesCreate'
     , _cacCourseId       :: !Text
     , _cacAccessToken    :: !(Maybe Text)
     , _cacUploadType     :: !(Maybe Text)
+    , _cacPayload        :: !CourseAlias
     , _cacBearerToken    :: !(Maybe Text)
     , _cacKey            :: !(Maybe Key)
     , _cacOAuthToken     :: !(Maybe OAuthToken)
-    , _cacCourseAlias    :: !CourseAlias
     , _cacFields         :: !(Maybe Text)
     , _cacCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesAliasesCreate'' with the minimum fields required to make a request.
 --
@@ -120,22 +121,22 @@ data CoursesAliasesCreate' = CoursesAliasesCreate'
 --
 -- * 'cacUploadType'
 --
+-- * 'cacPayload'
+--
 -- * 'cacBearerToken'
 --
 -- * 'cacKey'
 --
 -- * 'cacOAuthToken'
 --
--- * 'cacCourseAlias'
---
 -- * 'cacFields'
 --
 -- * 'cacCallback'
 coursesAliasesCreate'
     :: Text -- ^ 'courseId'
-    -> CourseAlias -- ^ 'CourseAlias'
+    -> CourseAlias -- ^ 'payload'
     -> CoursesAliasesCreate'
-coursesAliasesCreate' pCacCourseId_ pCacCourseAlias_ =
+coursesAliasesCreate' pCacCourseId_ pCacPayload_ =
     CoursesAliasesCreate'
     { _cacXgafv = Nothing
     , _cacQuotaUser = Nothing
@@ -145,10 +146,10 @@ coursesAliasesCreate' pCacCourseId_ pCacCourseAlias_ =
     , _cacCourseId = pCacCourseId_
     , _cacAccessToken = Nothing
     , _cacUploadType = Nothing
+    , _cacPayload = pCacPayload_
     , _cacBearerToken = Nothing
     , _cacKey = Nothing
     , _cacOAuthToken = Nothing
-    , _cacCourseAlias = pCacCourseAlias_
     , _cacFields = Nothing
     , _cacCallback = Nothing
     }
@@ -199,6 +200,11 @@ cacUploadType
   = lens _cacUploadType
       (\ s a -> s{_cacUploadType = a})
 
+-- | Multipart request metadata.
+cacPayload :: Lens' CoursesAliasesCreate' CourseAlias
+cacPayload
+  = lens _cacPayload (\ s a -> s{_cacPayload = a})
+
 -- | OAuth bearer token.
 cacBearerToken :: Lens' CoursesAliasesCreate' (Maybe Text)
 cacBearerToken
@@ -216,12 +222,6 @@ cacOAuthToken :: Lens' CoursesAliasesCreate' (Maybe OAuthToken)
 cacOAuthToken
   = lens _cacOAuthToken
       (\ s a -> s{_cacOAuthToken = a})
-
--- | Multipart request metadata.
-cacCourseAlias :: Lens' CoursesAliasesCreate' CourseAlias
-cacCourseAlias
-  = lens _cacCourseAlias
-      (\ s a -> s{_cacCourseAlias = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cacFields :: Lens' CoursesAliasesCreate' (Maybe Text)
@@ -241,19 +241,19 @@ instance GoogleRequest CoursesAliasesCreate' where
         type Rs CoursesAliasesCreate' = CourseAlias
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesAliasesCreate'{..}
-          = go _cacXgafv _cacAccessToken _cacBearerToken
-              _cacCallback
+          = go _cacCourseId _cacXgafv _cacUploadProtocol
               (Just _cacPp)
+              _cacAccessToken
               _cacUploadType
-              _cacUploadProtocol
-              _cacCourseId
+              _cacBearerToken
+              _cacCallback
               _cacQuotaUser
               (Just _cacPrettyPrint)
               _cacFields
               _cacKey
               _cacOAuthToken
               (Just AltJSON)
-              _cacCourseAlias
+              _cacPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesAliasesCreateResource)

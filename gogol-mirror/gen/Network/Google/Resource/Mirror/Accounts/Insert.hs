@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.Mirror.Accounts.Insert
     , aiPrettyPrint
     , aiUserIP
     , aiAccountName
-    , aiAccount
+    , aiPayload
     , aiKey
     , aiUserToken
     , aiOAuthToken
@@ -69,13 +70,13 @@ data AccountsInsert' = AccountsInsert'
     , _aiPrettyPrint :: !Bool
     , _aiUserIP      :: !(Maybe Text)
     , _aiAccountName :: !Text
-    , _aiAccount     :: !Account
+    , _aiPayload     :: !Account
     , _aiKey         :: !(Maybe Key)
     , _aiUserToken   :: !Text
     , _aiOAuthToken  :: !(Maybe OAuthToken)
     , _aiAccountType :: !Text
     , _aiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsInsert'' with the minimum fields required to make a request.
 --
@@ -89,7 +90,7 @@ data AccountsInsert' = AccountsInsert'
 --
 -- * 'aiAccountName'
 --
--- * 'aiAccount'
+-- * 'aiPayload'
 --
 -- * 'aiKey'
 --
@@ -102,17 +103,17 @@ data AccountsInsert' = AccountsInsert'
 -- * 'aiFields'
 accountsInsert'
     :: Text -- ^ 'accountName'
-    -> Account -- ^ 'Account'
+    -> Account -- ^ 'payload'
     -> Text -- ^ 'userToken'
     -> Text -- ^ 'accountType'
     -> AccountsInsert'
-accountsInsert' pAiAccountName_ pAiAccount_ pAiUserToken_ pAiAccountType_ =
+accountsInsert' pAiAccountName_ pAiPayload_ pAiUserToken_ pAiAccountType_ =
     AccountsInsert'
     { _aiQuotaUser = Nothing
     , _aiPrettyPrint = True
     , _aiUserIP = Nothing
     , _aiAccountName = pAiAccountName_
-    , _aiAccount = pAiAccount_
+    , _aiPayload = pAiPayload_
     , _aiKey = Nothing
     , _aiUserToken = pAiUserToken_
     , _aiOAuthToken = Nothing
@@ -145,9 +146,9 @@ aiAccountName
       (\ s a -> s{_aiAccountName = a})
 
 -- | Multipart request metadata.
-aiAccount :: Lens' AccountsInsert' Account
-aiAccount
-  = lens _aiAccount (\ s a -> s{_aiAccount = a})
+aiPayload :: Lens' AccountsInsert' Account
+aiPayload
+  = lens _aiPayload (\ s a -> s{_aiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -191,7 +192,7 @@ instance GoogleRequest AccountsInsert' where
               _aiKey
               _aiOAuthToken
               (Just AltJSON)
-              _aiAccount
+              _aiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsInsertResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.Fitness.Users.Dataset.Aggregate
     -- * Request Lenses
     , udaQuotaUser
     , udaPrettyPrint
-    , udaAggregateRequest
     , udaUserIP
+    , udaPayload
     , udaUserId
     , udaKey
     , udaOAuthToken
@@ -68,15 +69,15 @@ type UsersDatasetAggregateResource =
 --
 -- /See:/ 'usersDatasetAggregate'' smart constructor.
 data UsersDatasetAggregate' = UsersDatasetAggregate'
-    { _udaQuotaUser        :: !(Maybe Text)
-    , _udaPrettyPrint      :: !Bool
-    , _udaAggregateRequest :: !AggregateRequest
-    , _udaUserIP           :: !(Maybe Text)
-    , _udaUserId           :: !Text
-    , _udaKey              :: !(Maybe Key)
-    , _udaOAuthToken       :: !(Maybe OAuthToken)
-    , _udaFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _udaQuotaUser   :: !(Maybe Text)
+    , _udaPrettyPrint :: !Bool
+    , _udaUserIP      :: !(Maybe Text)
+    , _udaPayload     :: !AggregateRequest
+    , _udaUserId      :: !Text
+    , _udaKey         :: !(Maybe Key)
+    , _udaOAuthToken  :: !(Maybe OAuthToken)
+    , _udaFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDatasetAggregate'' with the minimum fields required to make a request.
 --
@@ -86,9 +87,9 @@ data UsersDatasetAggregate' = UsersDatasetAggregate'
 --
 -- * 'udaPrettyPrint'
 --
--- * 'udaAggregateRequest'
---
 -- * 'udaUserIP'
+--
+-- * 'udaPayload'
 --
 -- * 'udaUserId'
 --
@@ -98,15 +99,15 @@ data UsersDatasetAggregate' = UsersDatasetAggregate'
 --
 -- * 'udaFields'
 usersDatasetAggregate'
-    :: AggregateRequest -- ^ 'AggregateRequest'
+    :: AggregateRequest -- ^ 'payload'
     -> Text -- ^ 'userId'
     -> UsersDatasetAggregate'
-usersDatasetAggregate' pUdaAggregateRequest_ pUdaUserId_ =
+usersDatasetAggregate' pUdaPayload_ pUdaUserId_ =
     UsersDatasetAggregate'
     { _udaQuotaUser = Nothing
     , _udaPrettyPrint = True
-    , _udaAggregateRequest = pUdaAggregateRequest_
     , _udaUserIP = Nothing
+    , _udaPayload = pUdaPayload_
     , _udaUserId = pUdaUserId_
     , _udaKey = Nothing
     , _udaOAuthToken = Nothing
@@ -126,17 +127,16 @@ udaPrettyPrint
   = lens _udaPrettyPrint
       (\ s a -> s{_udaPrettyPrint = a})
 
--- | Multipart request metadata.
-udaAggregateRequest :: Lens' UsersDatasetAggregate' AggregateRequest
-udaAggregateRequest
-  = lens _udaAggregateRequest
-      (\ s a -> s{_udaAggregateRequest = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 udaUserIP :: Lens' UsersDatasetAggregate' (Maybe Text)
 udaUserIP
   = lens _udaUserIP (\ s a -> s{_udaUserIP = a})
+
+-- | Multipart request metadata.
+udaPayload :: Lens' UsersDatasetAggregate' AggregateRequest
+udaPayload
+  = lens _udaPayload (\ s a -> s{_udaPayload = a})
 
 -- | Aggregate data for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
@@ -175,7 +175,7 @@ instance GoogleRequest UsersDatasetAggregate' where
               _udaKey
               _udaOAuthToken
               (Just AltJSON)
-              _udaAggregateRequest
+              _udaPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDatasetAggregateResource)

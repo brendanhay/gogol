@@ -46,9 +46,6 @@ module Network.Google.Games.Types
     , sDescription
     , sDriveId
 
-    -- * GamesAchievementsListState
-    , GamesAchievementsListState (..)
-
     -- * TurnBasedMatchData
     , TurnBasedMatchData
     , turnBasedMatchData
@@ -88,6 +85,9 @@ module Network.Google.Games.Types
     , peFormattedNumEvents
     , peDefinitionId
     , pePlayerId
+
+    -- * State
+    , State (..)
 
     -- * Room
     , Room
@@ -187,6 +187,12 @@ module Network.Google.Games.Types
     , qcKind
     , qcInitialPlayerProgress
     , qcEventId
+
+    -- * Ios
+    , Ios
+    , ios
+    , iAPNSDeviceToken
+    , iAPNSEnvironment
 
     -- * AchievementUpdateResponse
     , AchievementUpdateResponse
@@ -419,6 +425,9 @@ module Network.Google.Games.Types
     , eurEventFailures
     , eurKind
 
+    -- * Collection
+    , Collection (..)
+
     -- * RevisionCheckResponse
     , RevisionCheckResponse
     , revisionCheckResponse
@@ -433,6 +442,9 @@ module Network.Google.Games.Types
     , prKind
     , prResult
     , prPlacing
+
+    -- * TimeSpan
+    , TimeSpan (..)
 
     -- * CategoryListResponse
     , CategoryListResponse
@@ -522,9 +534,6 @@ module Network.Google.Games.Types
     , paCurrentSteps
     , paLastUpdatedTimestamp
 
-    -- * GamesMetagameListCategoriesByPlayerCollection
-    , GamesMetagameListCategoriesByPlayerCollection (..)
-
     -- * RoomP2PStatuses
     , RoomP2PStatuses
     , roomP2PStatuses
@@ -537,8 +546,8 @@ module Network.Google.Games.Types
     , auruAchievementId
     , auruKind
     , auruUpdateType
-    , auruSetStepsAtLeastPayLoad
-    , auruIncrementPayLoad
+    , auruSetStepsAtLeastPayload
+    , auruIncrementPayload
 
     -- * ImageAsset
     , ImageAsset
@@ -570,6 +579,9 @@ module Network.Google.Games.Types
     , ramsKind
     , ramsWaitEstimateSeconds
 
+    -- * PlatformType
+    , PlatformType (..)
+
     -- * RoomCreateRequest
     , RoomCreateRequest
     , roomCreateRequest
@@ -599,8 +611,8 @@ module Network.Google.Games.Types
     , plrKind
     , plrItems
 
-    -- * GamesScoresGetIncludeRankType
-    , GamesScoresGetIncludeRankType (..)
+    -- * IncludeRankType
+    , IncludeRankType (..)
 
     -- * TurnBasedMatchCreateRequest
     , TurnBasedMatchCreateRequest
@@ -627,12 +639,6 @@ module Network.Google.Games.Types
     , adDescription
     , adIsRevealedIconURLDefault
     , adUnlockedIconURL
-
-    -- * PushTokenIdIos
-    , PushTokenIdIos
-    , pushTokenIdIos
-    , ptiiAPNSDeviceToken
-    , ptiiAPNSEnvironment
 
     -- * PlayerAchievementListResponse
     , PlayerAchievementListResponse
@@ -670,9 +676,6 @@ module Network.Google.Games.Types
     , rlrReason
     , rlrLeaveDiagnostics
 
-    -- * GamesApplicationsGetPlatformType
-    , GamesApplicationsGetPlatformType (..)
-
     -- * AchievementIncrementResponse
     , AchievementIncrementResponse
     , achievementIncrementResponse
@@ -692,9 +695,6 @@ module Network.Google.Games.Types
     , pKind
     , pAutoMatched
     , pTimeMillis
-
-    -- * GamesScoresListTimeSpan
-    , GamesScoresListTimeSpan (..)
 
     -- * RoomAutoMatchingCriteria
     , RoomAutoMatchingCriteria

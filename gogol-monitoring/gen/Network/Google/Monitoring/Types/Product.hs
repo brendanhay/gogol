@@ -25,7 +25,7 @@ import           Network.Google.Prelude
 data MetricDescriptorTypeDescriptor = MetricDescriptorTypeDescriptor
     { _mdtdMetricType :: !(Maybe Text)
     , _mdtdValueType  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetricDescriptorTypeDescriptor' with the minimum fields required to make a request.
 --
@@ -79,7 +79,7 @@ data ListTimeseriesResponse = ListTimeseriesResponse
     , _ltrOldest        :: !(Maybe DateTime')
     , _ltrYoungest      :: !(Maybe DateTime')
     , _ltrTimeseries    :: !(Maybe [Timeseries])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListTimeseriesResponse' with the minimum fields required to make a request.
 --
@@ -174,7 +174,7 @@ data MetricDescriptor = MetricDescriptor
     , _mdName           :: !(Maybe Text)
     , _mdLabels         :: !(Maybe [MetricDescriptorLabelDescriptor])
     , _mdDescription    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetricDescriptor' with the minimum fields required to make a request.
 --
@@ -255,7 +255,7 @@ instance ToJSON MetricDescriptor where
 data MetricDescriptorLabelDescriptor = MetricDescriptorLabelDescriptor
     { _mdldKey         :: !(Maybe Text)
     , _mdldDescription :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetricDescriptorLabelDescriptor' with the minimum fields required to make a request.
 --
@@ -305,7 +305,7 @@ instance ToJSON MetricDescriptorLabelDescriptor where
 data PointDistributionUnderflowBucket = PointDistributionUnderflowBucket
     { _pdubUpperBound :: !(Maybe Double)
     , _pdubCount      :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PointDistributionUnderflowBucket' with the minimum fields required to make a request.
 --
@@ -350,36 +350,13 @@ instance ToJSON PointDistributionUnderflowBucket
                  [("upperBound" .=) <$> _pdubUpperBound,
                   ("count" .=) <$> _pdubCount])
 
--- | The label\'s name.
---
--- /See:/ 'writeTimeseriesRequestCommonLabels' smart constructor.
-data WriteTimeseriesRequestCommonLabels =
-    WriteTimeseriesRequestCommonLabels
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'WriteTimeseriesRequestCommonLabels' with the minimum fields required to make a request.
---
-writeTimeseriesRequestCommonLabels
-    :: WriteTimeseriesRequestCommonLabels
-writeTimeseriesRequestCommonLabels = WriteTimeseriesRequestCommonLabels
-
-instance FromJSON WriteTimeseriesRequestCommonLabels
-         where
-        parseJSON
-          = withObject "WriteTimeseriesRequestCommonLabels"
-              (\ o -> pure WriteTimeseriesRequestCommonLabels)
-
-instance ToJSON WriteTimeseriesRequestCommonLabels
-         where
-        toJSON = const (Object mempty)
-
 -- | The request of cloudmonitoring.timeseries.write
 --
 -- /See:/ 'writeTimeseriesRequest' smart constructor.
 data WriteTimeseriesRequest = WriteTimeseriesRequest
-    { _wtrCommonLabels :: !(Maybe WriteTimeseriesRequestCommonLabels)
+    { _wtrCommonLabels :: !(Maybe CommonLabels)
     , _wtrTimeseries   :: !(Maybe [TimeseriesPoint])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WriteTimeseriesRequest' with the minimum fields required to make a request.
 --
@@ -397,7 +374,7 @@ writeTimeseriesRequest =
     }
 
 -- | The label\'s name.
-wtrCommonLabels :: Lens' WriteTimeseriesRequest (Maybe WriteTimeseriesRequestCommonLabels)
+wtrCommonLabels :: Lens' WriteTimeseriesRequest (Maybe CommonLabels)
 wtrCommonLabels
   = lens _wtrCommonLabels
       (\ s a -> s{_wtrCommonLabels = a})
@@ -434,7 +411,7 @@ data ListMetricDescriptorsResponse = ListMetricDescriptorsResponse
     { _lmdrMetrics       :: !(Maybe [MetricDescriptor])
     , _lmdrNextPageToken :: !(Maybe Text)
     , _lmdrKind          :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListMetricDescriptorsResponse' with the minimum fields required to make a request.
 --
@@ -498,7 +475,7 @@ instance ToJSON ListMetricDescriptorsResponse where
 -- /See:/ 'listTimeseriesDescriptorsRequest' smart constructor.
 newtype ListTimeseriesDescriptorsRequest = ListTimeseriesDescriptorsRequest
     { _ltdrKind :: Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListTimeseriesDescriptorsRequest' with the minimum fields required to make a request.
 --
@@ -536,7 +513,7 @@ instance ToJSON ListTimeseriesDescriptorsRequest
 -- /See:/ 'writeTimeseriesResponse' smart constructor.
 newtype WriteTimeseriesResponse = WriteTimeseriesResponse
     { _wtrKind :: Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WriteTimeseriesResponse' with the minimum fields required to make a request.
 --
@@ -572,7 +549,7 @@ instance ToJSON WriteTimeseriesResponse where
 -- /See:/ 'timeseriesDescriptorLabels' smart constructor.
 data TimeseriesDescriptorLabels =
     TimeseriesDescriptorLabels
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimeseriesDescriptorLabels' with the minimum fields required to make a request.
 --
@@ -588,6 +565,27 @@ instance FromJSON TimeseriesDescriptorLabels where
 instance ToJSON TimeseriesDescriptorLabels where
         toJSON = const (Object mempty)
 
+-- | The label\'s name.
+--
+-- /See:/ 'commonLabels' smart constructor.
+data CommonLabels =
+    CommonLabels
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CommonLabels' with the minimum fields required to make a request.
+--
+commonLabels
+    :: CommonLabels
+commonLabels = CommonLabels
+
+instance FromJSON CommonLabels where
+        parseJSON
+          = withObject "CommonLabels"
+              (\ o -> pure CommonLabels)
+
+instance ToJSON CommonLabels where
+        toJSON = const (Object mempty)
+
 -- | The histogram\'s bucket. Buckets that form the histogram of a
 -- distribution value. If the upper bound of a bucket, say U1, does not
 -- equal the lower bound of the next bucket, say L2, this means that there
@@ -598,7 +596,7 @@ data PointDistributionBucket = PointDistributionBucket
     { _pdbUpperBound :: !(Maybe Double)
     , _pdbCount      :: !(Maybe Int64)
     , _pdbLowerBound :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PointDistributionBucket' with the minimum fields required to make a request.
 --
@@ -656,7 +654,7 @@ instance ToJSON PointDistributionBucket where
 data TimeseriesDescriptorLabel = TimeseriesDescriptorLabel
     { _tdlValue :: !(Maybe Text)
     , _tdlKey   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimeseriesDescriptorLabel' with the minimum fields required to make a request.
 --
@@ -704,7 +702,7 @@ data PointDistribution = PointDistribution
     { _pdOverflowBucket  :: !(Maybe PointDistributionOverflowBucket)
     , _pdBuckets         :: !(Maybe [PointDistributionBucket])
     , _pdUnderflowBucket :: !(Maybe PointDistributionUnderflowBucket)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PointDistribution' with the minimum fields required to make a request.
 --
@@ -772,7 +770,7 @@ data Point = Point
     , _pDistributionValue :: !(Maybe PointDistribution)
     , _pEnd               :: !(Maybe DateTime')
     , _pInt64Value        :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Point' with the minimum fields required to make a request.
 --
@@ -886,7 +884,7 @@ instance ToJSON Point where
 data PointDistributionOverflowBucket = PointDistributionOverflowBucket
     { _pdobCount      :: !(Maybe Int64)
     , _pdobLowerBound :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PointDistributionOverflowBucket' with the minimum fields required to make a request.
 --
@@ -939,7 +937,7 @@ data ListTimeseriesDescriptorsResponse = ListTimeseriesDescriptorsResponse
     , _lOldest        :: !(Maybe DateTime')
     , _lYoungest      :: !(Maybe DateTime')
     , _lTimeseries    :: !(Maybe [TimeseriesDescriptor])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListTimeseriesDescriptorsResponse' with the minimum fields required to make a request.
 --
@@ -1027,7 +1025,7 @@ instance ToJSON ListTimeseriesDescriptorsResponse
 -- /See:/ 'listMetricDescriptorsRequest' smart constructor.
 newtype ListMetricDescriptorsRequest = ListMetricDescriptorsRequest
     { _lisKind :: Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListMetricDescriptorsRequest' with the minimum fields required to make a request.
 --
@@ -1066,7 +1064,7 @@ instance ToJSON ListMetricDescriptorsRequest where
 data TimeseriesPoint = TimeseriesPoint
     { _tpPoint          :: !(Maybe Point)
     , _tpTimeseriesDesc :: !(Maybe TimeseriesDescriptor)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimeseriesPoint' with the minimum fields required to make a request.
 --
@@ -1114,7 +1112,7 @@ data TimeseriesDescriptor = TimeseriesDescriptor
     { _tdProject :: !(Maybe Text)
     , _tdMetric  :: !(Maybe Text)
     , _tdLabels  :: !(Maybe TimeseriesDescriptorLabels)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimeseriesDescriptor' with the minimum fields required to make a request.
 --
@@ -1168,7 +1166,7 @@ instance ToJSON TimeseriesDescriptor where
 -- /See:/ 'listTimeseriesRequest' smart constructor.
 newtype ListTimeseriesRequest = ListTimeseriesRequest
     { _ltrtKind :: Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListTimeseriesRequest' with the minimum fields required to make a request.
 --
@@ -1204,7 +1202,7 @@ instance ToJSON ListTimeseriesRequest where
 -- /See:/ 'deleteMetricDescriptorResponse' smart constructor.
 newtype DeleteMetricDescriptorResponse = DeleteMetricDescriptorResponse
     { _dmdrKind :: Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeleteMetricDescriptorResponse' with the minimum fields required to make a request.
 --
@@ -1245,7 +1243,7 @@ instance ToJSON DeleteMetricDescriptorResponse where
 data Timeseries = Timeseries
     { _tPoints         :: !(Maybe [Point])
     , _tTimeseriesDesc :: !(Maybe TimeseriesDescriptor)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Timeseries' with the minimum fields required to make a request.
 --

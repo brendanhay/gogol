@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Patc
     , acpPrettyPrint
     , acpAchievementId
     , acpUserIP
+    , acpPayload
     , acpKey
-    , acpAchievementConfiguration
     , acpOAuthToken
     , acpFields
     ) where
@@ -64,15 +65,15 @@ type AchievementConfigurationsPatchResource =
 --
 -- /See:/ 'achievementConfigurationsPatch'' smart constructor.
 data AchievementConfigurationsPatch' = AchievementConfigurationsPatch'
-    { _acpQuotaUser                :: !(Maybe Text)
-    , _acpPrettyPrint              :: !Bool
-    , _acpAchievementId            :: !Text
-    , _acpUserIP                   :: !(Maybe Text)
-    , _acpKey                      :: !(Maybe Key)
-    , _acpAchievementConfiguration :: !AchievementConfiguration
-    , _acpOAuthToken               :: !(Maybe OAuthToken)
-    , _acpFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _acpQuotaUser     :: !(Maybe Text)
+    , _acpPrettyPrint   :: !Bool
+    , _acpAchievementId :: !Text
+    , _acpUserIP        :: !(Maybe Text)
+    , _acpPayload       :: !AchievementConfiguration
+    , _acpKey           :: !(Maybe Key)
+    , _acpOAuthToken    :: !(Maybe OAuthToken)
+    , _acpFields        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationsPatch'' with the minimum fields required to make a request.
 --
@@ -86,25 +87,25 @@ data AchievementConfigurationsPatch' = AchievementConfigurationsPatch'
 --
 -- * 'acpUserIP'
 --
--- * 'acpKey'
+-- * 'acpPayload'
 --
--- * 'acpAchievementConfiguration'
+-- * 'acpKey'
 --
 -- * 'acpOAuthToken'
 --
 -- * 'acpFields'
 achievementConfigurationsPatch'
     :: Text -- ^ 'achievementId'
-    -> AchievementConfiguration -- ^ 'AchievementConfiguration'
+    -> AchievementConfiguration -- ^ 'payload'
     -> AchievementConfigurationsPatch'
-achievementConfigurationsPatch' pAcpAchievementId_ pAcpAchievementConfiguration_ =
+achievementConfigurationsPatch' pAcpAchievementId_ pAcpPayload_ =
     AchievementConfigurationsPatch'
     { _acpQuotaUser = Nothing
     , _acpPrettyPrint = True
     , _acpAchievementId = pAcpAchievementId_
     , _acpUserIP = Nothing
+    , _acpPayload = pAcpPayload_
     , _acpKey = Nothing
-    , _acpAchievementConfiguration = pAcpAchievementConfiguration_
     , _acpOAuthToken = Nothing
     , _acpFields = Nothing
     }
@@ -134,17 +135,16 @@ acpUserIP :: Lens' AchievementConfigurationsPatch' (Maybe Text)
 acpUserIP
   = lens _acpUserIP (\ s a -> s{_acpUserIP = a})
 
+-- | Multipart request metadata.
+acpPayload :: Lens' AchievementConfigurationsPatch' AchievementConfiguration
+acpPayload
+  = lens _acpPayload (\ s a -> s{_acpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 acpKey :: Lens' AchievementConfigurationsPatch' (Maybe Key)
 acpKey = lens _acpKey (\ s a -> s{_acpKey = a})
-
--- | Multipart request metadata.
-acpAchievementConfiguration :: Lens' AchievementConfigurationsPatch' AchievementConfiguration
-acpAchievementConfiguration
-  = lens _acpAchievementConfiguration
-      (\ s a -> s{_acpAchievementConfiguration = a})
 
 -- | OAuth 2.0 token for the current user.
 acpOAuthToken :: Lens' AchievementConfigurationsPatch' (Maybe OAuthToken)
@@ -177,7 +177,7 @@ instance GoogleRequest
               _acpKey
               _acpOAuthToken
               (Just AltJSON)
-              _acpAchievementConfiguration
+              _acpPayload
           where go
                   = clientWithRoute
                       (Proxy ::

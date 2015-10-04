@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.CreateAuthURI
     , rpcauQuotaUser
     , rpcauPrettyPrint
     , rpcauUserIP
+    , rpcauPayload
     , rpcauKey
-    , rpcauIdentitytoolkitRelyingPartyCreateAuthURIRequest
     , rpcauOAuthToken
     , rpcauFields
     ) where
@@ -61,14 +62,14 @@ type RelyingPartyCreateAuthURIResource =
 --
 -- /See:/ 'relyingPartyCreateAuthURI'' smart constructor.
 data RelyingPartyCreateAuthURI' = RelyingPartyCreateAuthURI'
-    { _rpcauQuotaUser                                       :: !(Maybe Text)
-    , _rpcauPrettyPrint                                     :: !Bool
-    , _rpcauUserIP                                          :: !(Maybe Text)
-    , _rpcauKey                                             :: !(Maybe Key)
-    , _rpcauIdentitytoolkitRelyingPartyCreateAuthURIRequest :: !IdentitytoolkitRelyingPartyCreateAuthURIRequest
-    , _rpcauOAuthToken                                      :: !(Maybe OAuthToken)
-    , _rpcauFields                                          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rpcauQuotaUser   :: !(Maybe Text)
+    , _rpcauPrettyPrint :: !Bool
+    , _rpcauUserIP      :: !(Maybe Text)
+    , _rpcauPayload     :: !IdentitytoolkitRelyingPartyCreateAuthURIRequest
+    , _rpcauKey         :: !(Maybe Key)
+    , _rpcauOAuthToken  :: !(Maybe OAuthToken)
+    , _rpcauFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingPartyCreateAuthURI'' with the minimum fields required to make a request.
 --
@@ -80,23 +81,23 @@ data RelyingPartyCreateAuthURI' = RelyingPartyCreateAuthURI'
 --
 -- * 'rpcauUserIP'
 --
--- * 'rpcauKey'
+-- * 'rpcauPayload'
 --
--- * 'rpcauIdentitytoolkitRelyingPartyCreateAuthURIRequest'
+-- * 'rpcauKey'
 --
 -- * 'rpcauOAuthToken'
 --
 -- * 'rpcauFields'
 relyingPartyCreateAuthURI'
-    :: IdentitytoolkitRelyingPartyCreateAuthURIRequest -- ^ 'IdentitytoolkitRelyingPartyCreateAuthURIRequest'
+    :: IdentitytoolkitRelyingPartyCreateAuthURIRequest -- ^ 'payload'
     -> RelyingPartyCreateAuthURI'
-relyingPartyCreateAuthURI' pRpcauIdentitytoolkitRelyingPartyCreateAuthURIRequest_ =
+relyingPartyCreateAuthURI' pRpcauPayload_ =
     RelyingPartyCreateAuthURI'
     { _rpcauQuotaUser = Nothing
     , _rpcauPrettyPrint = True
     , _rpcauUserIP = Nothing
+    , _rpcauPayload = pRpcauPayload_
     , _rpcauKey = Nothing
-    , _rpcauIdentitytoolkitRelyingPartyCreateAuthURIRequest = pRpcauIdentitytoolkitRelyingPartyCreateAuthURIRequest_
     , _rpcauOAuthToken = Nothing
     , _rpcauFields = Nothing
     }
@@ -121,20 +122,16 @@ rpcauUserIP :: Lens' RelyingPartyCreateAuthURI' (Maybe Text)
 rpcauUserIP
   = lens _rpcauUserIP (\ s a -> s{_rpcauUserIP = a})
 
+-- | Multipart request metadata.
+rpcauPayload :: Lens' RelyingPartyCreateAuthURI' IdentitytoolkitRelyingPartyCreateAuthURIRequest
+rpcauPayload
+  = lens _rpcauPayload (\ s a -> s{_rpcauPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 rpcauKey :: Lens' RelyingPartyCreateAuthURI' (Maybe Key)
 rpcauKey = lens _rpcauKey (\ s a -> s{_rpcauKey = a})
-
--- | Multipart request metadata.
-rpcauIdentitytoolkitRelyingPartyCreateAuthURIRequest :: Lens' RelyingPartyCreateAuthURI' IdentitytoolkitRelyingPartyCreateAuthURIRequest
-rpcauIdentitytoolkitRelyingPartyCreateAuthURIRequest
-  = lens
-      _rpcauIdentitytoolkitRelyingPartyCreateAuthURIRequest
-      (\ s a ->
-         s{_rpcauIdentitytoolkitRelyingPartyCreateAuthURIRequest
-             = a})
 
 -- | OAuth 2.0 token for the current user.
 rpcauOAuthToken :: Lens' RelyingPartyCreateAuthURI' (Maybe OAuthToken)
@@ -163,7 +160,7 @@ instance GoogleRequest RelyingPartyCreateAuthURI'
               _rpcauKey
               _rpcauOAuthToken
               (Just AltJSON)
-              _rpcauIdentitytoolkitRelyingPartyCreateAuthURIRequest
+              _rpcauPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RelyingPartyCreateAuthURIResource)

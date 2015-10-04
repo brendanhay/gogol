@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.PlusDomains.Circles.Insert
     -- * Request Lenses
     , cirQuotaUser
     , cirPrettyPrint
-    , cirCircle
     , cirUserIP
+    , cirPayload
     , cirUserId
     , cirKey
     , cirOAuthToken
@@ -64,13 +65,13 @@ type CirclesInsertResource =
 data CirclesInsert' = CirclesInsert'
     { _cirQuotaUser   :: !(Maybe Text)
     , _cirPrettyPrint :: !Bool
-    , _cirCircle      :: !Circle
     , _cirUserIP      :: !(Maybe Text)
+    , _cirPayload     :: !Circle
     , _cirUserId      :: !Text
     , _cirKey         :: !(Maybe Key)
     , _cirOAuthToken  :: !(Maybe OAuthToken)
     , _cirFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesInsert'' with the minimum fields required to make a request.
 --
@@ -80,9 +81,9 @@ data CirclesInsert' = CirclesInsert'
 --
 -- * 'cirPrettyPrint'
 --
--- * 'cirCircle'
---
 -- * 'cirUserIP'
+--
+-- * 'cirPayload'
 --
 -- * 'cirUserId'
 --
@@ -92,15 +93,15 @@ data CirclesInsert' = CirclesInsert'
 --
 -- * 'cirFields'
 circlesInsert'
-    :: Circle -- ^ 'Circle'
+    :: Circle -- ^ 'payload'
     -> Text -- ^ 'userId'
     -> CirclesInsert'
-circlesInsert' pCirCircle_ pCirUserId_ =
+circlesInsert' pCirPayload_ pCirUserId_ =
     CirclesInsert'
     { _cirQuotaUser = Nothing
     , _cirPrettyPrint = True
-    , _cirCircle = pCirCircle_
     , _cirUserIP = Nothing
+    , _cirPayload = pCirPayload_
     , _cirUserId = pCirUserId_
     , _cirKey = Nothing
     , _cirOAuthToken = Nothing
@@ -120,16 +121,16 @@ cirPrettyPrint
   = lens _cirPrettyPrint
       (\ s a -> s{_cirPrettyPrint = a})
 
--- | Multipart request metadata.
-cirCircle :: Lens' CirclesInsert' Circle
-cirCircle
-  = lens _cirCircle (\ s a -> s{_cirCircle = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 cirUserIP :: Lens' CirclesInsert' (Maybe Text)
 cirUserIP
   = lens _cirUserIP (\ s a -> s{_cirUserIP = a})
+
+-- | Multipart request metadata.
+cirPayload :: Lens' CirclesInsert' Circle
+cirPayload
+  = lens _cirPayload (\ s a -> s{_cirPayload = a})
 
 -- | The ID of the user to create the circle on behalf of. The value \"me\"
 -- can be used to indicate the authenticated user.
@@ -168,7 +169,7 @@ instance GoogleRequest CirclesInsert' where
               _cirKey
               _cirOAuthToken
               (Just AltJSON)
-              _cirCircle
+              _cirPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CirclesInsertResource)

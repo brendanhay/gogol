@@ -24,7 +24,7 @@ data TestOrderCustomer = TestOrderCustomer
     { _tocFullName                    :: !(Maybe Text)
     , _tocEmail                       :: !(Maybe Text)
     , _tocExplicitMarketingPreference :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TestOrderCustomer' with the minimum fields required to make a request.
 --
@@ -85,7 +85,7 @@ instance ToJSON TestOrderCustomer where
 data OrdersUpdateMerchantOrderIdRequest = OrdersUpdateMerchantOrderIdRequest
     { _oumoirMerchantOrderId :: !(Maybe Text)
     , _oumoirOperationId     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersUpdateMerchantOrderIdRequest' with the minimum fields required to make a request.
 --
@@ -135,7 +135,7 @@ instance ToJSON OrdersUpdateMerchantOrderIdRequest
 -- /See:/ 'ordersAdvanceTestOrderResponse' smart constructor.
 newtype OrdersAdvanceTestOrderResponse = OrdersAdvanceTestOrderResponse
     { _oatorKind :: Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersAdvanceTestOrderResponse' with the minimum fields required to make a request.
 --
@@ -172,7 +172,7 @@ instance ToJSON OrdersAdvanceTestOrderResponse where
 -- /See:/ 'ordersAcknowledgeRequest' smart constructor.
 newtype OrdersAcknowledgeRequest = OrdersAcknowledgeRequest
     { _oarOperationId :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersAcknowledgeRequest' with the minimum fields required to make a request.
 --
@@ -211,7 +211,7 @@ data OrderReturn = OrderReturn
     , _orReason       :: !(Maybe Text)
     , _orCreationDate :: !(Maybe Text)
     , _orReasonText   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderReturn' with the minimum fields required to make a request.
 --
@@ -296,7 +296,7 @@ data OrdersCustomBatchRequestEntry = OrdersCustomBatchRequestEntry
     , _ocbreOrderId         :: !(Maybe Text)
     , _ocbreCancel          :: !(Maybe OrdersCustomBatchRequestEntryCancel)
     , _ocbreBatchId         :: !(Maybe Word32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
@@ -454,7 +454,7 @@ data OrderLineItemShippingDetailsMethod = OrderLineItemShippingDetailsMethod
     , _olisdmMethodName       :: !(Maybe Text)
     , _olisdmMaxDaysInTransit :: !(Maybe Word32)
     , _olisdmMinDaysInTransit :: !(Maybe Word32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderLineItemShippingDetailsMethod' with the minimum fields required to make a request.
 --
@@ -526,7 +526,7 @@ instance ToJSON OrderLineItemShippingDetailsMethod
 data OrdersCreateTestOrderResponse = OrdersCreateTestOrderResponse
     { _octorKind    :: !Text
     , _octorOrderId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCreateTestOrderResponse' with the minimum fields required to make a request.
 --
@@ -577,7 +577,7 @@ data OrdersRefundRequest = OrdersRefundRequest
     , _orrReason      :: !(Maybe Text)
     , _orrOperationId :: !(Maybe Text)
     , _orrReasonText  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersRefundRequest' with the minimum fields required to make a request.
 --
@@ -647,7 +647,7 @@ data OrdersCustomBatchRequestEntryCancelLineItem = OrdersCustomBatchRequestEntry
     , _ocbrecliLineItemId :: !(Maybe Text)
     , _ocbrecliReason     :: !(Maybe Text)
     , _ocbrecliReasonText :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustomBatchRequestEntryCancelLineItem' with the minimum fields required to make a request.
 --
@@ -724,7 +724,7 @@ data OrdersUpdateShipmentRequest = OrdersUpdateShipmentRequest
     , _ousrTrackingId  :: !(Maybe Text)
     , _ousrShipmentId  :: !(Maybe Text)
     , _ousrOperationId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersUpdateShipmentRequest' with the minimum fields required to make a request.
 --
@@ -806,7 +806,7 @@ data TestOrderPaymentMethod = TestOrderPaymentMethod
     , _topmLastFourDigits           :: !(Maybe Text)
     , _topmType                     :: !(Maybe Text)
     , _topmPredefinedBillingAddress :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TestOrderPaymentMethod' with the minimum fields required to make a request.
 --
@@ -891,7 +891,7 @@ data OrdersReturnLineItemRequest = OrdersReturnLineItemRequest
     , _orlirReason      :: !(Maybe Text)
     , _orlirOperationId :: !(Maybe Text)
     , _orlirReasonText  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersReturnLineItemRequest' with the minimum fields required to make a request.
 --
@@ -973,7 +973,7 @@ data OrdersCustomBatchRequestEntryShipLineItems = OrdersCustomBatchRequestEntryS
     , _ocbresliTrackingId :: !(Maybe Text)
     , _ocbresliShipmentId :: !(Maybe Text)
     , _ocbresliLineItems  :: !(Maybe [OrderShipmentLineItemShipment])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustomBatchRequestEntryShipLineItems' with the minimum fields required to make a request.
 --
@@ -1060,7 +1060,7 @@ data OrderLineItem = OrderLineItem
     , _oliQuantityReturned  :: !(Maybe Word32)
     , _oliProduct           :: !(Maybe OrderLineItemProduct)
     , _oliReturns           :: !(Maybe [OrderReturn])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderLineItem' with the minimum fields required to make a request.
 --
@@ -1238,7 +1238,7 @@ instance ToJSON OrderLineItem where
 data OrderShipmentLineItemShipment = OrderShipmentLineItemShipment
     { _oslisQuantity   :: !(Maybe Word32)
     , _oslisLineItemId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderShipmentLineItemShipment' with the minimum fields required to make a request.
 --
@@ -1286,7 +1286,7 @@ instance ToJSON OrderShipmentLineItemShipment where
 data OrdersRefundResponse = OrdersRefundResponse
     { _orrKind            :: !Text
     , _orrExecutionStatus :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersRefundResponse' with the minimum fields required to make a request.
 --
@@ -1334,7 +1334,7 @@ instance ToJSON OrdersRefundResponse where
 data OrdersCreateTestOrderRequest = OrdersCreateTestOrderRequest
     { _octorTemplateName :: !(Maybe Text)
     , _octorTestOrder    :: !(Maybe TestOrder)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCreateTestOrderRequest' with the minimum fields required to make a request.
 --
@@ -1384,7 +1384,7 @@ instance ToJSON OrdersCreateTestOrderRequest where
 data OrdersGetTestOrderTemplateResponse = OrdersGetTestOrderTemplateResponse
     { _ogtotrKind     :: !Text
     , _ogtotrTemplate :: !(Maybe TestOrder)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersGetTestOrderTemplateResponse' with the minimum fields required to make a request.
 --
@@ -1434,11 +1434,11 @@ instance ToJSON OrdersGetTestOrderTemplateResponse
 -- | An error returned by the API.
 --
 -- /See:/ 'error'' smart constructor.
-data Error = Error
+data Error' = Error'
     { _eDomain  :: !(Maybe Text)
     , _eReason  :: !(Maybe Text)
     , _eMessage :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Error' with the minimum fields required to make a request.
 --
@@ -1450,36 +1450,36 @@ data Error = Error
 --
 -- * 'eMessage'
 error'
-    :: Error
+    :: Error'
 error' =
-    Error
+    Error'
     { _eDomain = Nothing
     , _eReason = Nothing
     , _eMessage = Nothing
     }
 
 -- | The domain of the error.
-eDomain :: Lens' Error (Maybe Text)
+eDomain :: Lens' Error' (Maybe Text)
 eDomain = lens _eDomain (\ s a -> s{_eDomain = a})
 
 -- | The error code.
-eReason :: Lens' Error (Maybe Text)
+eReason :: Lens' Error' (Maybe Text)
 eReason = lens _eReason (\ s a -> s{_eReason = a})
 
 -- | A description of the error.
-eMessage :: Lens' Error (Maybe Text)
+eMessage :: Lens' Error' (Maybe Text)
 eMessage = lens _eMessage (\ s a -> s{_eMessage = a})
 
-instance FromJSON Error where
+instance FromJSON Error' where
         parseJSON
           = withObject "Error"
               (\ o ->
-                 Error <$>
+                 Error' <$>
                    (o .:? "domain") <*> (o .:? "reason") <*>
                      (o .:? "message"))
 
-instance ToJSON Error where
-        toJSON Error{..}
+instance ToJSON Error' where
+        toJSON Error'{..}
           = object
               (catMaybes
                  [("domain" .=) <$> _eDomain,
@@ -1490,7 +1490,7 @@ instance ToJSON Error where
 -- /See:/ 'ordersCustomBatchRequest' smart constructor.
 newtype OrdersCustomBatchRequest = OrdersCustomBatchRequest
     { _ocbrEntries :: Maybe [OrdersCustomBatchRequestEntry]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustomBatchRequest' with the minimum fields required to make a request.
 --
@@ -1531,7 +1531,7 @@ data OrdersShipLineItemsRequest = OrdersShipLineItemsRequest
     , _oslirShipmentId  :: !(Maybe Text)
     , _oslirLineItems   :: !(Maybe [OrderShipmentLineItemShipment])
     , _oslirOperationId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersShipLineItemsRequest' with the minimum fields required to make a request.
 --
@@ -1618,7 +1618,7 @@ data OrderShipment = OrderShipment
     , _osId           :: !(Maybe Text)
     , _osCreationDate :: !(Maybe Text)
     , _osDeliveryDate :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderShipment' with the minimum fields required to make a request.
 --
@@ -1718,7 +1718,7 @@ data OrderLineItemReturnInfo = OrderLineItemReturnInfo
     { _oliriIsReturnable :: !(Maybe Bool)
     , _oliriPolicyURL    :: !(Maybe Text)
     , _oliriDaysToReturn :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderLineItemReturnInfo' with the minimum fields required to make a request.
 --
@@ -1780,7 +1780,7 @@ data OrdersCancelLineItemRequest = OrdersCancelLineItemRequest
     , _oclirReason      :: !(Maybe Text)
     , _oclirOperationId :: !(Maybe Text)
     , _oclirReasonText  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCancelLineItemRequest' with the minimum fields required to make a request.
 --
@@ -1860,7 +1860,7 @@ instance ToJSON OrdersCancelLineItemRequest where
 data OrdersCustomBatchRequestEntryCancel = OrdersCustomBatchRequestEntryCancel
     { _ocbrecReason     :: !(Maybe Text)
     , _ocbrecReasonText :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustomBatchRequestEntryCancel' with the minimum fields required to make a request.
 --
@@ -1909,7 +1909,7 @@ instance ToJSON OrdersCustomBatchRequestEntryCancel
 data OrdersShipLineItemsResponse = OrdersShipLineItemsResponse
     { _oslirKind            :: !Text
     , _oslirExecutionStatus :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersShipLineItemsResponse' with the minimum fields required to make a request.
 --
@@ -1960,7 +1960,7 @@ data OrdersListResponse = OrdersListResponse
     { _olrNextPageToken :: !(Maybe Text)
     , _olrKind          :: !Text
     , _olrResources     :: !(Maybe [Order])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersListResponse' with the minimum fields required to make a request.
 --
@@ -2019,7 +2019,7 @@ instance ToJSON OrdersListResponse where
 data OrdersReturnLineItemResponse = OrdersReturnLineItemResponse
     { _orlirKind            :: !Text
     , _orlirExecutionStatus :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersReturnLineItemResponse' with the minimum fields required to make a request.
 --
@@ -2069,7 +2069,7 @@ instance ToJSON OrdersReturnLineItemResponse where
 data OrdersUpdateShipmentResponse = OrdersUpdateShipmentResponse
     { _ousrKind            :: !Text
     , _ousrExecutionStatus :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersUpdateShipmentResponse' with the minimum fields required to make a request.
 --
@@ -2119,7 +2119,7 @@ data OrdersCancelRequest = OrdersCancelRequest
     { _ocrReason      :: !(Maybe Text)
     , _ocrOperationId :: !(Maybe Text)
     , _ocrReasonText  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCancelRequest' with the minimum fields required to make a request.
 --
@@ -2178,7 +2178,7 @@ data OrderCustomer = OrderCustomer
     { _ocFullName                    :: !(Maybe Text)
     , _ocEmail                       :: !(Maybe Text)
     , _ocExplicitMarketingPreference :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderCustomer' with the minimum fields required to make a request.
 --
@@ -2239,7 +2239,7 @@ instance ToJSON OrderCustomer where
 data OrdersGetByMerchantOrderIdResponse = OrdersGetByMerchantOrderIdResponse
     { _ogbmoirKind  :: !Text
     , _ogbmoirOrder :: !(Maybe Order)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersGetByMerchantOrderIdResponse' with the minimum fields required to make a request.
 --
@@ -2291,7 +2291,7 @@ data OrderLineItemShippingDetails = OrderLineItemShippingDetails
     { _olisdShipByDate    :: !(Maybe Text)
     , _olisdMethod        :: !(Maybe OrderLineItemShippingDetailsMethod)
     , _olisdDeliverByDate :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderLineItemShippingDetails' with the minimum fields required to make a request.
 --
@@ -2349,7 +2349,7 @@ instance ToJSON OrderLineItemShippingDetails where
 data Price = Price
     { _pValue    :: !(Maybe Text)
     , _pCurrency :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Price' with the minimum fields required to make a request.
 --
@@ -2393,7 +2393,7 @@ instance ToJSON Price where
 data OrderLineItemProductVariantAttribute = OrderLineItemProductVariantAttribute
     { _olipvaDimension :: !(Maybe Text)
     , _olipvaValue     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderLineItemProductVariantAttribute' with the minimum fields required to make a request.
 --
@@ -2445,7 +2445,7 @@ data OrdersCustomBatchResponseEntry = OrdersCustomBatchResponseEntry
     , _oErrors          :: !(Maybe Errors)
     , _oOrder           :: !(Maybe Order)
     , _oBatchId         :: !(Maybe Word32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustomBatchResponseEntry' with the minimum fields required to make a request.
 --
@@ -2534,7 +2534,7 @@ data TestOrderLineItemProduct = TestOrderLineItemProduct
     , _tolipContentLanguage   :: !(Maybe Text)
     , _tolipMpn               :: !(Maybe Text)
     , _tolipCondition         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TestOrderLineItemProduct' with the minimum fields required to make a request.
 --
@@ -2703,7 +2703,7 @@ data TestOrder = TestOrder
     , _toCustomer                  :: !(Maybe TestOrderCustomer)
     , _toPaymentMethod             :: !(Maybe TestOrderPaymentMethod)
     , _toShippingCost              :: !(Maybe Price)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TestOrder' with the minimum fields required to make a request.
 --
@@ -2821,7 +2821,7 @@ data OrderRefund = OrderRefund
     , _oReason       :: !(Maybe Text)
     , _oCreationDate :: !(Maybe Text)
     , _oReasonText   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderRefund' with the minimum fields required to make a request.
 --
@@ -2894,7 +2894,7 @@ instance ToJSON OrderRefund where
 data OrderDeliveryDetails = OrderDeliveryDetails
     { _oddAddress     :: !(Maybe OrderAddress)
     , _oddPhoneNumber :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderDeliveryDetails' with the minimum fields required to make a request.
 --
@@ -2947,7 +2947,7 @@ data OrderAddress = OrderAddress
     , _oaIsPostOfficeBox :: !(Maybe Bool)
     , _oaFullAddress     :: !(Maybe [Text])
     , _oaRegion          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderAddress' with the minimum fields required to make a request.
 --
@@ -3064,7 +3064,7 @@ instance ToJSON OrderAddress where
 data OrdersCancelResponse = OrdersCancelResponse
     { _ocrKind            :: !Text
     , _ocrExecutionStatus :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCancelResponse' with the minimum fields required to make a request.
 --
@@ -3115,7 +3115,7 @@ data TestOrderLineItem = TestOrderLineItem
     , _toliShippingDetails :: !(Maybe OrderLineItemShippingDetails)
     , _toliProduct         :: !(Maybe TestOrderLineItemProduct)
     , _toliUnitTax         :: !(Maybe Price)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TestOrderLineItem' with the minimum fields required to make a request.
 --
@@ -3198,7 +3198,7 @@ data OrderPaymentMethod = OrderPaymentMethod
     , _opmBillingAddress  :: !(Maybe OrderAddress)
     , _opmLastFourDigits  :: !(Maybe Text)
     , _opmType            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderPaymentMethod' with the minimum fields required to make a request.
 --
@@ -3290,8 +3290,8 @@ instance ToJSON OrderPaymentMethod where
 data Errors = Errors
     { _errCode    :: !(Maybe Word32)
     , _errMessage :: !(Maybe Text)
-    , _errErrors  :: !(Maybe [Error])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _errErrors  :: !(Maybe [Error'])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Errors' with the minimum fields required to make a request.
 --
@@ -3321,7 +3321,7 @@ errMessage
   = lens _errMessage (\ s a -> s{_errMessage = a})
 
 -- | A list of errors.
-errErrors :: Lens' Errors [Error]
+errErrors :: Lens' Errors [Error']
 errErrors
   = lens _errErrors (\ s a -> s{_errErrors = a}) .
       _Default
@@ -3348,7 +3348,7 @@ instance ToJSON Errors where
 data OrdersCancelLineItemResponse = OrdersCancelLineItemResponse
     { _oclirKind            :: !Text
     , _oclirExecutionStatus :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCancelLineItemResponse' with the minimum fields required to make a request.
 --
@@ -3400,7 +3400,7 @@ data OrdersCustomBatchRequestEntryUpdateShipment = OrdersCustomBatchRequestEntry
     , _ocbreusStatus     :: !(Maybe Text)
     , _ocbreusTrackingId :: !(Maybe Text)
     , _ocbreusShipmentId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustomBatchRequestEntryUpdateShipment' with the minimum fields required to make a request.
 --
@@ -3487,7 +3487,7 @@ data OrderLineItemProduct = OrderLineItemProduct
     , _olipContentLanguage   :: !(Maybe Text)
     , _olipMpn               :: !(Maybe Text)
     , _olipCondition         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderLineItemProduct' with the minimum fields required to make a request.
 --
@@ -3670,7 +3670,7 @@ instance ToJSON OrderLineItemProduct where
 data OrdersAcknowledgeResponse = OrdersAcknowledgeResponse
     { _oarKind            :: !Text
     , _oarExecutionStatus :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersAcknowledgeResponse' with the minimum fields required to make a request.
 --
@@ -3735,7 +3735,7 @@ data Order = Order
     , _ordPaymentMethod   :: !(Maybe OrderPaymentMethod)
     , _ordPaymentStatus   :: !(Maybe Text)
     , _ordShippingCost    :: !(Maybe Price)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Order' with the minimum fields required to make a request.
 --
@@ -3959,7 +3959,7 @@ data OrdersCustomBatchRequestEntryReturnLineItem = OrdersCustomBatchRequestEntry
     , _ocbrerliLineItemId :: !(Maybe Text)
     , _ocbrerliReason     :: !(Maybe Text)
     , _ocbrerliReasonText :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustomBatchRequestEntryReturnLineItem' with the minimum fields required to make a request.
 --
@@ -4033,7 +4033,7 @@ instance ToJSON
 data OrdersUpdateMerchantOrderIdResponse = OrdersUpdateMerchantOrderIdResponse
     { _oumoirKind            :: !Text
     , _oumoirExecutionStatus :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersUpdateMerchantOrderIdResponse' with the minimum fields required to make a request.
 --
@@ -4086,7 +4086,7 @@ data OrdersCustomBatchRequestEntryRefund = OrdersCustomBatchRequestEntryRefund
     { _ocbrerAmount     :: !(Maybe Price)
     , _ocbrerReason     :: !(Maybe Text)
     , _ocbrerReasonText :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustomBatchRequestEntryRefund' with the minimum fields required to make a request.
 --
@@ -4148,7 +4148,7 @@ data OrderCancellation = OrderCancellation
     , _ocReason       :: !(Maybe Text)
     , _ocCreationDate :: !(Maybe Text)
     , _ocReasonText   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderCancellation' with the minimum fields required to make a request.
 --
@@ -4223,7 +4223,7 @@ instance ToJSON OrderCancellation where
 data OrdersCustomBatchResponse = OrdersCustomBatchResponse
     { _ocbrcEntries :: !(Maybe [OrdersCustomBatchResponseEntry])
     , _ocbrcKind    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustomBatchResponse' with the minimum fields required to make a request.
 --

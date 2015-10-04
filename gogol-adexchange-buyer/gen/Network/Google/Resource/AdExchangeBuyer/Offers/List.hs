@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.AdExchangeBuyer.Offers.List
     , olQuotaUser
     , olPrettyPrint
     , olUserIP
+    , olPayload
     , olKey
-    , olListOffersRequest
     , olOAuthToken
     , olFields
     ) where
@@ -60,14 +61,14 @@ type OffersListResource =
 --
 -- /See:/ 'offersList'' smart constructor.
 data OffersList' = OffersList'
-    { _olQuotaUser         :: !(Maybe Text)
-    , _olPrettyPrint       :: !Bool
-    , _olUserIP            :: !(Maybe Text)
-    , _olKey               :: !(Maybe Key)
-    , _olListOffersRequest :: !ListOffersRequest
-    , _olOAuthToken        :: !(Maybe OAuthToken)
-    , _olFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _olQuotaUser   :: !(Maybe Text)
+    , _olPrettyPrint :: !Bool
+    , _olUserIP      :: !(Maybe Text)
+    , _olPayload     :: !ListOffersRequest
+    , _olKey         :: !(Maybe Key)
+    , _olOAuthToken  :: !(Maybe OAuthToken)
+    , _olFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OffersList'' with the minimum fields required to make a request.
 --
@@ -79,23 +80,23 @@ data OffersList' = OffersList'
 --
 -- * 'olUserIP'
 --
--- * 'olKey'
+-- * 'olPayload'
 --
--- * 'olListOffersRequest'
+-- * 'olKey'
 --
 -- * 'olOAuthToken'
 --
 -- * 'olFields'
 offersList'
-    :: ListOffersRequest -- ^ 'ListOffersRequest'
+    :: ListOffersRequest -- ^ 'payload'
     -> OffersList'
-offersList' pOlListOffersRequest_ =
+offersList' pOlPayload_ =
     OffersList'
     { _olQuotaUser = Nothing
     , _olPrettyPrint = True
     , _olUserIP = Nothing
+    , _olPayload = pOlPayload_
     , _olKey = Nothing
-    , _olListOffersRequest = pOlListOffersRequest_
     , _olOAuthToken = Nothing
     , _olFields = Nothing
     }
@@ -118,17 +119,16 @@ olPrettyPrint
 olUserIP :: Lens' OffersList' (Maybe Text)
 olUserIP = lens _olUserIP (\ s a -> s{_olUserIP = a})
 
+-- | Multipart request metadata.
+olPayload :: Lens' OffersList' ListOffersRequest
+olPayload
+  = lens _olPayload (\ s a -> s{_olPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 olKey :: Lens' OffersList' (Maybe Key)
 olKey = lens _olKey (\ s a -> s{_olKey = a})
-
--- | Multipart request metadata.
-olListOffersRequest :: Lens' OffersList' ListOffersRequest
-olListOffersRequest
-  = lens _olListOffersRequest
-      (\ s a -> s{_olListOffersRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 olOAuthToken :: Lens' OffersList' (Maybe OAuthToken)
@@ -152,7 +152,7 @@ instance GoogleRequest OffersList' where
               _olKey
               _olOAuthToken
               (Just AltJSON)
-              _olListOffersRequest
+              _olPayload
           where go
                   = clientWithRoute (Proxy :: Proxy OffersListResource)
                       r

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type GlobalOperationsListResource =
        "global" :>
          "operations" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data GlobalOperationsList' = GlobalOperationsList'
     , _golOAuthToken  :: !(Maybe OAuthToken)
     , _golMaxResults  :: !Word32
     , _golFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalOperationsList'' with the minimum fields required to make a request.
 --
@@ -198,8 +199,8 @@ instance GoogleRequest GlobalOperationsList' where
         type Rs GlobalOperationsList' = OperationList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u GlobalOperationsList'{..}
-          = go _golFilter (Just _golMaxResults) _golPageToken
-              _golProject
+          = go _golProject _golFilter _golPageToken
+              (Just _golMaxResults)
               _golQuotaUser
               (Just _golPrettyPrint)
               _golUserIP

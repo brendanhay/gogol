@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,7 +37,7 @@ module Network.Google.Resource.AndroidEnterprise.Installs.Patch
     , ipPrettyPrint
     , ipEnterpriseId
     , ipUserIP
-    , ipInstall
+    , ipPayload
     , ipUserId
     , ipInstallId
     , ipKey
@@ -79,14 +80,14 @@ data InstallsPatch' = InstallsPatch'
     , _ipPrettyPrint  :: !Bool
     , _ipEnterpriseId :: !Text
     , _ipUserIP       :: !(Maybe Text)
-    , _ipInstall      :: !Install
+    , _ipPayload      :: !Install
     , _ipUserId       :: !Text
     , _ipInstallId    :: !Text
     , _ipKey          :: !(Maybe Key)
     , _ipDeviceId     :: !Text
     , _ipOAuthToken   :: !(Maybe OAuthToken)
     , _ipFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstallsPatch'' with the minimum fields required to make a request.
 --
@@ -100,7 +101,7 @@ data InstallsPatch' = InstallsPatch'
 --
 -- * 'ipUserIP'
 --
--- * 'ipInstall'
+-- * 'ipPayload'
 --
 -- * 'ipUserId'
 --
@@ -115,18 +116,18 @@ data InstallsPatch' = InstallsPatch'
 -- * 'ipFields'
 installsPatch'
     :: Text -- ^ 'enterpriseId'
-    -> Install -- ^ 'Install'
+    -> Install -- ^ 'payload'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'installId'
     -> Text -- ^ 'deviceId'
     -> InstallsPatch'
-installsPatch' pIpEnterpriseId_ pIpInstall_ pIpUserId_ pIpInstallId_ pIpDeviceId_ =
+installsPatch' pIpEnterpriseId_ pIpPayload_ pIpUserId_ pIpInstallId_ pIpDeviceId_ =
     InstallsPatch'
     { _ipQuotaUser = Nothing
     , _ipPrettyPrint = True
     , _ipEnterpriseId = pIpEnterpriseId_
     , _ipUserIP = Nothing
-    , _ipInstall = pIpInstall_
+    , _ipPayload = pIpPayload_
     , _ipUserId = pIpUserId_
     , _ipInstallId = pIpInstallId_
     , _ipKey = Nothing
@@ -160,9 +161,9 @@ ipUserIP :: Lens' InstallsPatch' (Maybe Text)
 ipUserIP = lens _ipUserIP (\ s a -> s{_ipUserIP = a})
 
 -- | Multipart request metadata.
-ipInstall :: Lens' InstallsPatch' Install
-ipInstall
-  = lens _ipInstall (\ s a -> s{_ipInstall = a})
+ipPayload :: Lens' InstallsPatch' Install
+ipPayload
+  = lens _ipPayload (\ s a -> s{_ipPayload = a})
 
 -- | The ID of the user.
 ipUserId :: Lens' InstallsPatch' Text
@@ -212,7 +213,7 @@ instance GoogleRequest InstallsPatch' where
               _ipKey
               _ipOAuthToken
               (Just AltJSON)
-              _ipInstall
+              _ipPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstallsPatchResource)

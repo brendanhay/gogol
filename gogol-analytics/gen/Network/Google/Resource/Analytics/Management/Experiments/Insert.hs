@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.Analytics.Management.Experiments.Insert
     , meiWebPropertyId
     , meiUserIP
     , meiProfileId
-    , meiExperiment
+    , meiPayload
     , meiAccountId
     , meiKey
     , meiOAuthToken
@@ -75,12 +76,12 @@ data ManagementExperimentsInsert' = ManagementExperimentsInsert'
     , _meiWebPropertyId :: !Text
     , _meiUserIP        :: !(Maybe Text)
     , _meiProfileId     :: !Text
-    , _meiExperiment    :: !Experiment
+    , _meiPayload       :: !Experiment
     , _meiAccountId     :: !Text
     , _meiKey           :: !(Maybe Key)
     , _meiOAuthToken    :: !(Maybe OAuthToken)
     , _meiFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsInsert'' with the minimum fields required to make a request.
 --
@@ -96,7 +97,7 @@ data ManagementExperimentsInsert' = ManagementExperimentsInsert'
 --
 -- * 'meiProfileId'
 --
--- * 'meiExperiment'
+-- * 'meiPayload'
 --
 -- * 'meiAccountId'
 --
@@ -108,17 +109,17 @@ data ManagementExperimentsInsert' = ManagementExperimentsInsert'
 managementExperimentsInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
-    -> Experiment -- ^ 'Experiment'
+    -> Experiment -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementExperimentsInsert'
-managementExperimentsInsert' pMeiWebPropertyId_ pMeiProfileId_ pMeiExperiment_ pMeiAccountId_ =
+managementExperimentsInsert' pMeiWebPropertyId_ pMeiProfileId_ pMeiPayload_ pMeiAccountId_ =
     ManagementExperimentsInsert'
     { _meiQuotaUser = Nothing
     , _meiPrettyPrint = False
     , _meiWebPropertyId = pMeiWebPropertyId_
     , _meiUserIP = Nothing
     , _meiProfileId = pMeiProfileId_
-    , _meiExperiment = pMeiExperiment_
+    , _meiPayload = pMeiPayload_
     , _meiAccountId = pMeiAccountId_
     , _meiKey = Nothing
     , _meiOAuthToken = Nothing
@@ -156,10 +157,9 @@ meiProfileId
   = lens _meiProfileId (\ s a -> s{_meiProfileId = a})
 
 -- | Multipart request metadata.
-meiExperiment :: Lens' ManagementExperimentsInsert' Experiment
-meiExperiment
-  = lens _meiExperiment
-      (\ s a -> s{_meiExperiment = a})
+meiPayload :: Lens' ManagementExperimentsInsert' Experiment
+meiPayload
+  = lens _meiPayload (\ s a -> s{_meiPayload = a})
 
 -- | Account ID to create the experiment for.
 meiAccountId :: Lens' ManagementExperimentsInsert' Text
@@ -201,7 +201,7 @@ instance GoogleRequest ManagementExperimentsInsert'
               _meiKey
               _meiOAuthToken
               (Just AltJSON)
-              _meiExperiment
+              _meiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementExperimentsInsertResource)

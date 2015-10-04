@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -49,8 +50,8 @@ type TaskListsListResource =
      "users" :>
        "@me" :>
          "lists" :>
-           QueryParam "maxResults" Int64 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Int64 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -71,7 +72,7 @@ data TaskListsList' = TaskListsList'
     , _tllOAuthToken  :: !(Maybe OAuthToken)
     , _tllMaxResults  :: !(Maybe Int64)
     , _tllFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskListsList'' with the minimum fields required to make a request.
 --
@@ -162,7 +163,7 @@ instance GoogleRequest TaskListsList' where
         type Rs TaskListsList' = TaskLists
         request = requestWithRoute defReq appsTasksURL
         requestWithRoute r u TaskListsList'{..}
-          = go _tllMaxResults _tllPageToken _tllQuotaUser
+          = go _tllPageToken _tllMaxResults _tllQuotaUser
               (Just _tllPrettyPrint)
               _tllUserIP
               _tllFields

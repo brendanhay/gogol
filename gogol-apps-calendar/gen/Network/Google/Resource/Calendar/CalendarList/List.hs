@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,14 +54,12 @@ type CalendarListListResource =
      "users" :>
        "me" :>
          "calendarList" :>
-           QueryParam "maxResults" Int32 :>
-             QueryParam "minAccessRole"
-               CalendarCalendarListListMinAccessRole
-               :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "showDeleted" Bool :>
-                   QueryParam "showHidden" Bool :>
-                     QueryParam "syncToken" Text :>
+           QueryParam "syncToken" Text :>
+             QueryParam "minAccessRole" MinAccessRole :>
+               QueryParam "showDeleted" Bool :>
+                 QueryParam "showHidden" Bool :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Int32 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -77,7 +76,7 @@ data CalendarListList' = CalendarListList'
     { _cllSyncToken     :: !(Maybe Text)
     , _cllQuotaUser     :: !(Maybe Text)
     , _cllPrettyPrint   :: !Bool
-    , _cllMinAccessRole :: !(Maybe CalendarCalendarListListMinAccessRole)
+    , _cllMinAccessRole :: !(Maybe MinAccessRole)
     , _cllUserIP        :: !(Maybe Text)
     , _cllShowDeleted   :: !(Maybe Bool)
     , _cllShowHidden    :: !(Maybe Bool)
@@ -86,7 +85,7 @@ data CalendarListList' = CalendarListList'
     , _cllOAuthToken    :: !(Maybe OAuthToken)
     , _cllMaxResults    :: !(Maybe Int32)
     , _cllFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListList'' with the minimum fields required to make a request.
 --
@@ -165,7 +164,7 @@ cllPrettyPrint
 
 -- | The minimum access role for the user in the returned entries. Optional.
 -- The default is no restriction.
-cllMinAccessRole :: Lens' CalendarListList' (Maybe CalendarCalendarListListMinAccessRole)
+cllMinAccessRole :: Lens' CalendarListList' (Maybe MinAccessRole)
 cllMinAccessRole
   = lens _cllMinAccessRole
       (\ s a -> s{_cllMinAccessRole = a})
@@ -227,10 +226,10 @@ instance GoogleRequest CalendarListList' where
         type Rs CalendarListList' = CalendarList
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarListList'{..}
-          = go _cllMaxResults _cllMinAccessRole _cllPageToken
-              _cllShowDeleted
+          = go _cllSyncToken _cllMinAccessRole _cllShowDeleted
               _cllShowHidden
-              _cllSyncToken
+              _cllPageToken
+              _cllMaxResults
               _cllQuotaUser
               (Just _cllPrettyPrint)
               _cllUserIP

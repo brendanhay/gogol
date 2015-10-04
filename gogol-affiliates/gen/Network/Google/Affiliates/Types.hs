@@ -17,15 +17,14 @@ module Network.Google.Affiliates.Types
     -- * Service URL
       affiliatesURL
 
-    -- * CcOfferRewards
-    , CcOfferRewards
-    , ccOfferRewards
-    , corAmount
-    , corExpirationMonths
-    , corCategory
-    , corAdditionalDetails
-    , corMaxRewardTier
-    , corMinRewardTier
+    -- * Status
+    , Status (..)
+
+    -- * BonusRewardsItem
+    , BonusRewardsItem
+    , bonusRewardsItem
+    , briAmount
+    , briDetails
 
     -- * Event
     , Event
@@ -49,26 +48,30 @@ module Network.Google.Affiliates.Types
     , eEarnings
     , ePublisherName
 
+    -- * Authorship
+    , Authorship (..)
+
     -- * GanPublishersGetRole
     , GanPublishersGetRole (..)
 
-    -- * GanReportsGetEventType
-    , GanReportsGetEventType (..)
-
-    -- * GanReportsGetStatus
-    , GanReportsGetStatus (..)
-
-    -- * GanLinksListPromotionType
-    , GanLinksListPromotionType (..)
+    -- * ChargeType
+    , ChargeType (..)
 
     -- * GanLinksListRole
     , GanLinksListRole (..)
 
-    -- * GanEventsListType
-    , GanEventsListType (..)
-
-    -- * GanReportsGetReportType
-    , GanReportsGetReportType (..)
+    -- * ProductsItem
+    , ProductsItem
+    , productsItem
+    , piSKUName
+    , piNetworkFee
+    , piQuantity
+    , piCategoryName
+    , piCategoryId
+    , piSKU
+    , piPublisherFee
+    , piUnitPrice
+    , piEarnings
 
     -- * Link
     , Link
@@ -95,6 +98,9 @@ module Network.Google.Affiliates.Types
     , lDuration
     , lDescription
 
+    -- * RelationshipStatus
+    , RelationshipStatus (..)
+
     -- * Money
     , Money
     , money
@@ -106,6 +112,9 @@ module Network.Google.Affiliates.Types
 
     -- * GanAdvertisersListRole
     , GanAdvertisersListRole (..)
+
+    -- * PromotionType
+    , PromotionType (..)
 
     -- * CcOffers
     , CcOffers
@@ -123,14 +132,6 @@ module Network.Google.Affiliates.Types
     , aKind
     , aItems
 
-    -- * CcOfferDefaultFees
-    , CcOfferDefaultFees
-    , ccOfferDefaultFees
-    , codfRateType
-    , codfMinRate
-    , codfCategory
-    , codfMaxRate
-
     -- * Report
     , Report
     , report
@@ -143,48 +144,30 @@ module Network.Google.Affiliates.Types
     , rColumnNames
     , rType
 
-    -- * GanLinksListAuthorship
-    , GanLinksListAuthorship (..)
-
     -- * GanLinksGetRole
     , GanLinksGetRole (..)
 
-    -- * CcOfferBonusRewards
-    , CcOfferBonusRewards
-    , ccOfferBonusRewards
-    , cobrAmount
-    , cobrDetails
+    -- * RewardsItem
+    , RewardsItem
+    , rewardsItem
+    , riAmount
+    , riExpirationMonths
+    , riCategory
+    , riAdditionalDetails
+    , riMaxRewardTier
+    , riMinRewardTier
 
     -- * GanEventsListRole
     , GanEventsListRole (..)
 
-    -- * GanLinksListLinkType
-    , GanLinksListLinkType (..)
+    -- * Role
+    , Role (..)
 
     -- * GanAdvertisersGetRole
     , GanAdvertisersGetRole (..)
 
-    -- * EventProducts
-    , EventProducts
-    , eventProducts
-    , epSkuName
-    , epNetworkFee
-    , epQuantity
-    , epCategoryName
-    , epCategoryId
-    , epSku
-    , epPublisherFee
-    , epUnitPrice
-    , epEarnings
-
-    -- * GanAdvertisersListRelationshipStatus
-    , GanAdvertisersListRelationshipStatus (..)
-
-    -- * GanCcOffersListProjection
-    , GanCcOffersListProjection (..)
-
-    -- * GanReportsGetRole
-    , GanReportsGetRole (..)
+    -- * EventType
+    , EventType (..)
 
     -- * Events
     , Events
@@ -193,23 +176,20 @@ module Network.Google.Affiliates.Types
     , eveKind
     , eveItems
 
-    -- * GanEventsListChargeType
-    , GanEventsListChargeType (..)
-
     -- * GanPublishersListRelationshipStatus
     , GanPublishersListRelationshipStatus (..)
 
-    -- * LinkSpecialOffers
-    , LinkSpecialOffers
-    , linkSpecialOffers
-    , lsoFreeShippingMin
-    , lsoPercentOff
-    , lsoPriceCut
-    , lsoPriceCutMin
-    , lsoPercentOffMin
-    , lsoFreeShipping
-    , lsoPromotionCodes
-    , lsoFreeGift
+    -- * SpecialOffers
+    , SpecialOffers
+    , specialOffers
+    , soFreeShippingMin
+    , soPercentOff
+    , soPriceCut
+    , soPriceCutMin
+    , soPercentOffMin
+    , soFreeShipping
+    , soPromotionCodes
+    , soFreeGift
 
     -- * Publishers
     , Publishers
@@ -242,6 +222,12 @@ module Network.Google.Affiliates.Types
     , advEpcNinetyDayAverage
     , advCommissionDuration
     , advDescription
+
+    -- * Projection
+    , Projection (..)
+
+    -- * LinkType
+    , LinkType (..)
 
     -- * CcOffer
     , CcOffer
@@ -310,12 +296,26 @@ module Network.Google.Affiliates.Types
     , cRewardPartner
     , cPurchaseRateType
 
+    -- * Type
+    , Type (..)
+
+    -- * DefaultFeesItem
+    , DefaultFeesItem
+    , defaultFeesItem
+    , dfiRateType
+    , dfiMinRate
+    , dfiCategory
+    , dfiMaxRate
+
     -- * Links
     , Links
     , links
     , linNextPageToken
     , linKind
     , linItems
+
+    -- * ReportType
+    , ReportType (..)
 
     -- * Publisher
     , Publisher

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.FusionTables.Template.Insert
     , tiQuotaUser
     , tiPrettyPrint
     , tiUserIP
+    , tiPayload
     , tiKey
-    , tiTemplate
     , tiOAuthToken
     , tiTableId
     , tiFields
@@ -65,12 +66,12 @@ data TemplateInsert' = TemplateInsert'
     { _tiQuotaUser   :: !(Maybe Text)
     , _tiPrettyPrint :: !Bool
     , _tiUserIP      :: !(Maybe Text)
+    , _tiPayload     :: !Template
     , _tiKey         :: !(Maybe Key)
-    , _tiTemplate    :: !Template
     , _tiOAuthToken  :: !(Maybe OAuthToken)
     , _tiTableId     :: !Text
     , _tiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateInsert'' with the minimum fields required to make a request.
 --
@@ -82,9 +83,9 @@ data TemplateInsert' = TemplateInsert'
 --
 -- * 'tiUserIP'
 --
--- * 'tiKey'
+-- * 'tiPayload'
 --
--- * 'tiTemplate'
+-- * 'tiKey'
 --
 -- * 'tiOAuthToken'
 --
@@ -92,16 +93,16 @@ data TemplateInsert' = TemplateInsert'
 --
 -- * 'tiFields'
 templateInsert'
-    :: Template -- ^ 'Template'
+    :: Template -- ^ 'payload'
     -> Text -- ^ 'tableId'
     -> TemplateInsert'
-templateInsert' pTiTemplate_ pTiTableId_ =
+templateInsert' pTiPayload_ pTiTableId_ =
     TemplateInsert'
     { _tiQuotaUser = Nothing
     , _tiPrettyPrint = True
     , _tiUserIP = Nothing
+    , _tiPayload = pTiPayload_
     , _tiKey = Nothing
-    , _tiTemplate = pTiTemplate_
     , _tiOAuthToken = Nothing
     , _tiTableId = pTiTableId_
     , _tiFields = Nothing
@@ -125,16 +126,16 @@ tiPrettyPrint
 tiUserIP :: Lens' TemplateInsert' (Maybe Text)
 tiUserIP = lens _tiUserIP (\ s a -> s{_tiUserIP = a})
 
+-- | Multipart request metadata.
+tiPayload :: Lens' TemplateInsert' Template
+tiPayload
+  = lens _tiPayload (\ s a -> s{_tiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 tiKey :: Lens' TemplateInsert' (Maybe Key)
 tiKey = lens _tiKey (\ s a -> s{_tiKey = a})
-
--- | Multipart request metadata.
-tiTemplate :: Lens' TemplateInsert' Template
-tiTemplate
-  = lens _tiTemplate (\ s a -> s{_tiTemplate = a})
 
 -- | OAuth 2.0 token for the current user.
 tiOAuthToken :: Lens' TemplateInsert' (Maybe OAuthToken)
@@ -164,7 +165,7 @@ instance GoogleRequest TemplateInsert' where
               _tiKey
               _tiOAuthToken
               (Just AltJSON)
-              _tiTemplate
+              _tiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TemplateInsertResource)

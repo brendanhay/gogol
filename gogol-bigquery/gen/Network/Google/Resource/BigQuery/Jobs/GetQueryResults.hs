@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,10 +55,10 @@ type JobsGetQueryResultsResource =
        Capture "projectId" Text :>
          "queries" :>
            Capture "jobId" Text :>
-             QueryParam "maxResults" Word32 :>
+             QueryParam "timeoutMs" Word32 :>
                QueryParam "pageToken" Text :>
                  QueryParam "startIndex" Word64 :>
-                   QueryParam "timeoutMs" Word32 :>
+                   QueryParam "maxResults" Word32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -83,7 +84,7 @@ data JobsGetQueryResults' = JobsGetQueryResults'
     , _jgqrStartIndex  :: !(Maybe Word64)
     , _jgqrMaxResults  :: !(Maybe Word32)
     , _jgqrFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsGetQueryResults'' with the minimum fields required to make a request.
 --
@@ -216,10 +217,10 @@ instance GoogleRequest JobsGetQueryResults' where
              GetQueryResultsResponse
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u JobsGetQueryResults'{..}
-          = go _jgqrMaxResults _jgqrPageToken _jgqrStartIndex
-              _jgqrTimeoutMs
-              _jgqrProjectId
-              _jgqrJobId
+          = go _jgqrProjectId _jgqrJobId _jgqrTimeoutMs
+              _jgqrPageToken
+              _jgqrStartIndex
+              _jgqrMaxResults
               _jgqrQuotaUser
               (Just _jgqrPrettyPrint)
               _jgqrUserIP

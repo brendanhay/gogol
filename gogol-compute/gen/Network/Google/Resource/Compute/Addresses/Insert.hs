@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.Compute.Addresses.Insert
     , aiPrettyPrint
     , aiProject
     , aiUserIP
-    , aiAddress
+    , aiPayload
     , aiKey
     , aiRegion
     , aiOAuthToken
@@ -70,12 +71,12 @@ data AddressesInsert' = AddressesInsert'
     , _aiPrettyPrint :: !Bool
     , _aiProject     :: !Text
     , _aiUserIP      :: !(Maybe Text)
-    , _aiAddress     :: !Address
+    , _aiPayload     :: !Address
     , _aiKey         :: !(Maybe Key)
     , _aiRegion      :: !Text
     , _aiOAuthToken  :: !(Maybe OAuthToken)
     , _aiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddressesInsert'' with the minimum fields required to make a request.
 --
@@ -89,7 +90,7 @@ data AddressesInsert' = AddressesInsert'
 --
 -- * 'aiUserIP'
 --
--- * 'aiAddress'
+-- * 'aiPayload'
 --
 -- * 'aiKey'
 --
@@ -100,16 +101,16 @@ data AddressesInsert' = AddressesInsert'
 -- * 'aiFields'
 addressesInsert'
     :: Text -- ^ 'project'
-    -> Address -- ^ 'Address'
+    -> Address -- ^ 'payload'
     -> Text -- ^ 'region'
     -> AddressesInsert'
-addressesInsert' pAiProject_ pAiAddress_ pAiRegion_ =
+addressesInsert' pAiProject_ pAiPayload_ pAiRegion_ =
     AddressesInsert'
     { _aiQuotaUser = Nothing
     , _aiPrettyPrint = True
     , _aiProject = pAiProject_
     , _aiUserIP = Nothing
-    , _aiAddress = pAiAddress_
+    , _aiPayload = pAiPayload_
     , _aiKey = Nothing
     , _aiRegion = pAiRegion_
     , _aiOAuthToken = Nothing
@@ -140,9 +141,9 @@ aiUserIP :: Lens' AddressesInsert' (Maybe Text)
 aiUserIP = lens _aiUserIP (\ s a -> s{_aiUserIP = a})
 
 -- | Multipart request metadata.
-aiAddress :: Lens' AddressesInsert' Address
-aiAddress
-  = lens _aiAddress (\ s a -> s{_aiAddress = a})
+aiPayload :: Lens' AddressesInsert' Address
+aiPayload
+  = lens _aiPayload (\ s a -> s{_aiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -178,7 +179,7 @@ instance GoogleRequest AddressesInsert' where
               _aiKey
               _aiOAuthToken
               (Just AltJSON)
-              _aiAddress
+              _aiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AddressesInsertResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -30,10 +31,10 @@ module Network.Google.Resource.Directory.Users.MakeAdmin
     , UsersMakeAdmin'
 
     -- * Request Lenses
-    , umaUserMakeAdmin
     , umaQuotaUser
     , umaPrettyPrint
     , umaUserIP
+    , umaPayload
     , umaKey
     , umaOAuthToken
     , umaUserKey
@@ -62,27 +63,27 @@ type UsersMakeAdminResource =
 --
 -- /See:/ 'usersMakeAdmin'' smart constructor.
 data UsersMakeAdmin' = UsersMakeAdmin'
-    { _umaUserMakeAdmin :: !UserMakeAdmin
-    , _umaQuotaUser     :: !(Maybe Text)
-    , _umaPrettyPrint   :: !Bool
-    , _umaUserIP        :: !(Maybe Text)
-    , _umaKey           :: !(Maybe Key)
-    , _umaOAuthToken    :: !(Maybe OAuthToken)
-    , _umaUserKey       :: !Text
-    , _umaFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _umaQuotaUser   :: !(Maybe Text)
+    , _umaPrettyPrint :: !Bool
+    , _umaUserIP      :: !(Maybe Text)
+    , _umaPayload     :: !UserMakeAdmin
+    , _umaKey         :: !(Maybe Key)
+    , _umaOAuthToken  :: !(Maybe OAuthToken)
+    , _umaUserKey     :: !Text
+    , _umaFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMakeAdmin'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'umaUserMakeAdmin'
 --
 -- * 'umaQuotaUser'
 --
 -- * 'umaPrettyPrint'
 --
 -- * 'umaUserIP'
+--
+-- * 'umaPayload'
 --
 -- * 'umaKey'
 --
@@ -92,26 +93,20 @@ data UsersMakeAdmin' = UsersMakeAdmin'
 --
 -- * 'umaFields'
 usersMakeAdmin'
-    :: UserMakeAdmin -- ^ 'UserMakeAdmin'
+    :: UserMakeAdmin -- ^ 'payload'
     -> Text -- ^ 'userKey'
     -> UsersMakeAdmin'
-usersMakeAdmin' pUmaUserMakeAdmin_ pUmaUserKey_ =
+usersMakeAdmin' pUmaPayload_ pUmaUserKey_ =
     UsersMakeAdmin'
-    { _umaUserMakeAdmin = pUmaUserMakeAdmin_
-    , _umaQuotaUser = Nothing
+    { _umaQuotaUser = Nothing
     , _umaPrettyPrint = True
     , _umaUserIP = Nothing
+    , _umaPayload = pUmaPayload_
     , _umaKey = Nothing
     , _umaOAuthToken = Nothing
     , _umaUserKey = pUmaUserKey_
     , _umaFields = Nothing
     }
-
--- | Multipart request metadata.
-umaUserMakeAdmin :: Lens' UsersMakeAdmin' UserMakeAdmin
-umaUserMakeAdmin
-  = lens _umaUserMakeAdmin
-      (\ s a -> s{_umaUserMakeAdmin = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -131,6 +126,11 @@ umaPrettyPrint
 umaUserIP :: Lens' UsersMakeAdmin' (Maybe Text)
 umaUserIP
   = lens _umaUserIP (\ s a -> s{_umaUserIP = a})
+
+-- | Multipart request metadata.
+umaPayload :: Lens' UsersMakeAdmin' UserMakeAdmin
+umaPayload
+  = lens _umaPayload (\ s a -> s{_umaPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -168,7 +168,7 @@ instance GoogleRequest UsersMakeAdmin' where
               _umaKey
               _umaOAuthToken
               (Just AltJSON)
-              _umaUserMakeAdmin
+              _umaPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersMakeAdminResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,11 +55,11 @@ type TableImportRowsResource =
      "tables" :>
        Capture "tableId" Text :>
          "import" :>
-           QueryParam "delimiter" Text :>
-             QueryParam "encoding" Text :>
-               QueryParam "endLine" Int32 :>
-                 QueryParam "isStrict" Bool :>
-                   QueryParam "startLine" Int32 :>
+           QueryParam "startLine" Int32 :>
+             QueryParam "endLine" Int32 :>
+               QueryParam "delimiter" Text :>
+                 QueryParam "encoding" Text :>
+                   QueryParam "isStrict" Bool :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -84,7 +85,7 @@ data TableImportRows' = TableImportRows'
     , _tirEncoding    :: !(Maybe Text)
     , _tirIsStrict    :: !(Maybe Bool)
     , _tirFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableImportRows'' with the minimum fields required to make a request.
 --
@@ -221,11 +222,10 @@ instance GoogleRequest TableImportRows' where
         type Rs TableImportRows' = Import
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableImportRows'{..}
-          = go _tirDelimiter _tirEncoding _tirEndLine
+          = go _tirTableId _tirStartLine _tirEndLine
+              _tirDelimiter
+              _tirEncoding
               _tirIsStrict
-              _tirMedia
-              _tirStartLine
-              _tirTableId
               _tirQuotaUser
               (Just _tirPrettyPrint)
               _tirUserIP
@@ -233,6 +233,7 @@ instance GoogleRequest TableImportRows' where
               _tirKey
               _tirOAuthToken
               (Just AltJSON)
+              _tirMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TableImportRowsResource)

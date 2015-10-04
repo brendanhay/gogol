@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.DFAReporting.Campaigns.Insert
     , ciPrettyPrint
     , ciUserIP
     , ciProfileId
-    , ciCampaign
+    , ciPayload
     , ciDefaultLandingPageURL
     , ciKey
     , ciDefaultLandingPageName
@@ -70,13 +71,13 @@ data CampaignsInsert' = CampaignsInsert'
     , _ciPrettyPrint            :: !Bool
     , _ciUserIP                 :: !(Maybe Text)
     , _ciProfileId              :: !Int64
-    , _ciCampaign               :: !Campaign
+    , _ciPayload                :: !Campaign
     , _ciDefaultLandingPageURL  :: !Text
     , _ciKey                    :: !(Maybe Key)
     , _ciDefaultLandingPageName :: !Text
     , _ciOAuthToken             :: !(Maybe OAuthToken)
     , _ciFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsInsert'' with the minimum fields required to make a request.
 --
@@ -90,7 +91,7 @@ data CampaignsInsert' = CampaignsInsert'
 --
 -- * 'ciProfileId'
 --
--- * 'ciCampaign'
+-- * 'ciPayload'
 --
 -- * 'ciDefaultLandingPageURL'
 --
@@ -103,17 +104,17 @@ data CampaignsInsert' = CampaignsInsert'
 -- * 'ciFields'
 campaignsInsert'
     :: Int64 -- ^ 'profileId'
-    -> Campaign -- ^ 'Campaign'
+    -> Campaign -- ^ 'payload'
     -> Text -- ^ 'defaultLandingPageUrl'
     -> Text -- ^ 'defaultLandingPageName'
     -> CampaignsInsert'
-campaignsInsert' pCiProfileId_ pCiCampaign_ pCiDefaultLandingPageURL_ pCiDefaultLandingPageName_ =
+campaignsInsert' pCiProfileId_ pCiPayload_ pCiDefaultLandingPageURL_ pCiDefaultLandingPageName_ =
     CampaignsInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
     , _ciUserIP = Nothing
     , _ciProfileId = pCiProfileId_
-    , _ciCampaign = pCiCampaign_
+    , _ciPayload = pCiPayload_
     , _ciDefaultLandingPageURL = pCiDefaultLandingPageURL_
     , _ciKey = Nothing
     , _ciDefaultLandingPageName = pCiDefaultLandingPageName_
@@ -145,9 +146,9 @@ ciProfileId
   = lens _ciProfileId (\ s a -> s{_ciProfileId = a})
 
 -- | Multipart request metadata.
-ciCampaign :: Lens' CampaignsInsert' Campaign
-ciCampaign
-  = lens _ciCampaign (\ s a -> s{_ciCampaign = a})
+ciPayload :: Lens' CampaignsInsert' Campaign
+ciPayload
+  = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
 -- | Default landing page URL for this new campaign.
 ciDefaultLandingPageURL :: Lens' CampaignsInsert' Text
@@ -194,7 +195,7 @@ instance GoogleRequest CampaignsInsert' where
               _ciKey
               _ciOAuthToken
               (Just AltJSON)
-              _ciCampaign
+              _ciPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CampaignsInsertResource)

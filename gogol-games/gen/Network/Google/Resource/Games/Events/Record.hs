@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.Games.Events.Record
     , erQuotaUser
     , erPrettyPrint
     , erUserIP
+    , erPayload
     , erKey
     , erLanguage
-    , erEventRecordRequest
     , erOAuthToken
     , erFields
     ) where
@@ -64,15 +65,15 @@ type EventsRecordResource =
 --
 -- /See:/ 'eventsRecord'' smart constructor.
 data EventsRecord' = EventsRecord'
-    { _erQuotaUser          :: !(Maybe Text)
-    , _erPrettyPrint        :: !Bool
-    , _erUserIP             :: !(Maybe Text)
-    , _erKey                :: !(Maybe Key)
-    , _erLanguage           :: !(Maybe Text)
-    , _erEventRecordRequest :: !EventRecordRequest
-    , _erOAuthToken         :: !(Maybe OAuthToken)
-    , _erFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _erQuotaUser   :: !(Maybe Text)
+    , _erPrettyPrint :: !Bool
+    , _erUserIP      :: !(Maybe Text)
+    , _erPayload     :: !EventRecordRequest
+    , _erKey         :: !(Maybe Key)
+    , _erLanguage    :: !(Maybe Text)
+    , _erOAuthToken  :: !(Maybe OAuthToken)
+    , _erFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsRecord'' with the minimum fields required to make a request.
 --
@@ -84,26 +85,26 @@ data EventsRecord' = EventsRecord'
 --
 -- * 'erUserIP'
 --
+-- * 'erPayload'
+--
 -- * 'erKey'
 --
 -- * 'erLanguage'
---
--- * 'erEventRecordRequest'
 --
 -- * 'erOAuthToken'
 --
 -- * 'erFields'
 eventsRecord'
-    :: EventRecordRequest -- ^ 'EventRecordRequest'
+    :: EventRecordRequest -- ^ 'payload'
     -> EventsRecord'
-eventsRecord' pErEventRecordRequest_ =
+eventsRecord' pErPayload_ =
     EventsRecord'
     { _erQuotaUser = Nothing
     , _erPrettyPrint = True
     , _erUserIP = Nothing
+    , _erPayload = pErPayload_
     , _erKey = Nothing
     , _erLanguage = Nothing
-    , _erEventRecordRequest = pErEventRecordRequest_
     , _erOAuthToken = Nothing
     , _erFields = Nothing
     }
@@ -126,6 +127,11 @@ erPrettyPrint
 erUserIP :: Lens' EventsRecord' (Maybe Text)
 erUserIP = lens _erUserIP (\ s a -> s{_erUserIP = a})
 
+-- | Multipart request metadata.
+erPayload :: Lens' EventsRecord' EventRecordRequest
+erPayload
+  = lens _erPayload (\ s a -> s{_erPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -136,12 +142,6 @@ erKey = lens _erKey (\ s a -> s{_erKey = a})
 erLanguage :: Lens' EventsRecord' (Maybe Text)
 erLanguage
   = lens _erLanguage (\ s a -> s{_erLanguage = a})
-
--- | Multipart request metadata.
-erEventRecordRequest :: Lens' EventsRecord' EventRecordRequest
-erEventRecordRequest
-  = lens _erEventRecordRequest
-      (\ s a -> s{_erEventRecordRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 erOAuthToken :: Lens' EventsRecord' (Maybe OAuthToken)
@@ -166,7 +166,7 @@ instance GoogleRequest EventsRecord' where
               _erKey
               _erOAuthToken
               (Just AltJSON)
-              _erEventRecordRequest
+              _erPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsRecordResource)

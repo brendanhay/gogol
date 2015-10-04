@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -39,10 +40,10 @@ module Network.Google.Resource.PubSub.Projects.Topics.Publish
     , ptpPp
     , ptpAccessToken
     , ptpUploadType
+    , ptpPayload
     , ptpTopic
     , ptpBearerToken
     , ptpKey
-    , ptpPublishRequest
     , ptpOAuthToken
     , ptpFields
     , ptpCallback
@@ -55,14 +56,14 @@ import           Network.Google.PubSub.Types
 -- 'ProjectsTopicsPublish'' request conforms to.
 type ProjectsTopicsPublishResource =
      "v1beta2" :>
-       "{+topic}:publish" :>
+       CaptureMode "topic" "publish" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -85,14 +86,14 @@ data ProjectsTopicsPublish' = ProjectsTopicsPublish'
     , _ptpPp             :: !Bool
     , _ptpAccessToken    :: !(Maybe Text)
     , _ptpUploadType     :: !(Maybe Text)
+    , _ptpPayload        :: !PublishRequest
     , _ptpTopic          :: !Text
     , _ptpBearerToken    :: !(Maybe Text)
     , _ptpKey            :: !(Maybe Key)
-    , _ptpPublishRequest :: !PublishRequest
     , _ptpOAuthToken     :: !(Maybe OAuthToken)
     , _ptpFields         :: !(Maybe Text)
     , _ptpCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsTopicsPublish'' with the minimum fields required to make a request.
 --
@@ -112,13 +113,13 @@ data ProjectsTopicsPublish' = ProjectsTopicsPublish'
 --
 -- * 'ptpUploadType'
 --
+-- * 'ptpPayload'
+--
 -- * 'ptpTopic'
 --
 -- * 'ptpBearerToken'
 --
 -- * 'ptpKey'
---
--- * 'ptpPublishRequest'
 --
 -- * 'ptpOAuthToken'
 --
@@ -126,10 +127,10 @@ data ProjectsTopicsPublish' = ProjectsTopicsPublish'
 --
 -- * 'ptpCallback'
 projectsTopicsPublish'
-    :: Text -- ^ 'topic'
-    -> PublishRequest -- ^ 'PublishRequest'
+    :: PublishRequest -- ^ 'payload'
+    -> Text -- ^ 'topic'
     -> ProjectsTopicsPublish'
-projectsTopicsPublish' pPtpTopic_ pPtpPublishRequest_ =
+projectsTopicsPublish' pPtpPayload_ pPtpTopic_ =
     ProjectsTopicsPublish'
     { _ptpXgafv = Nothing
     , _ptpQuotaUser = Nothing
@@ -138,10 +139,10 @@ projectsTopicsPublish' pPtpTopic_ pPtpPublishRequest_ =
     , _ptpPp = True
     , _ptpAccessToken = Nothing
     , _ptpUploadType = Nothing
+    , _ptpPayload = pPtpPayload_
     , _ptpTopic = pPtpTopic_
     , _ptpBearerToken = Nothing
     , _ptpKey = Nothing
-    , _ptpPublishRequest = pPtpPublishRequest_
     , _ptpOAuthToken = Nothing
     , _ptpFields = Nothing
     , _ptpCallback = Nothing
@@ -186,6 +187,11 @@ ptpUploadType
   = lens _ptpUploadType
       (\ s a -> s{_ptpUploadType = a})
 
+-- | Multipart request metadata.
+ptpPayload :: Lens' ProjectsTopicsPublish' PublishRequest
+ptpPayload
+  = lens _ptpPayload (\ s a -> s{_ptpPayload = a})
+
 -- | The messages in the request will be published on this topic.
 ptpTopic :: Lens' ProjectsTopicsPublish' Text
 ptpTopic = lens _ptpTopic (\ s a -> s{_ptpTopic = a})
@@ -201,12 +207,6 @@ ptpBearerToken
 -- token.
 ptpKey :: Lens' ProjectsTopicsPublish' (Maybe Key)
 ptpKey = lens _ptpKey (\ s a -> s{_ptpKey = a})
-
--- | Multipart request metadata.
-ptpPublishRequest :: Lens' ProjectsTopicsPublish' PublishRequest
-ptpPublishRequest
-  = lens _ptpPublishRequest
-      (\ s a -> s{_ptpPublishRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 ptpOAuthToken :: Lens' ProjectsTopicsPublish' (Maybe OAuthToken)
@@ -232,19 +232,19 @@ instance GoogleRequest ProjectsTopicsPublish' where
         type Rs ProjectsTopicsPublish' = PublishResponse
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsTopicsPublish'{..}
-          = go _ptpXgafv _ptpAccessToken _ptpBearerToken
-              _ptpCallback
+          = go _ptpTopic _ptpXgafv _ptpUploadProtocol
               (Just _ptpPp)
+              _ptpAccessToken
               _ptpUploadType
-              _ptpUploadProtocol
-              _ptpTopic
+              _ptpBearerToken
+              _ptpCallback
               _ptpQuotaUser
               (Just _ptpPrettyPrint)
               _ptpFields
               _ptpKey
               _ptpOAuthToken
               (Just AltJSON)
-              _ptpPublishRequest
+              _ptpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsTopicsPublishResource)

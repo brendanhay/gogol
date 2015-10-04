@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.AndroidEnterprise.Collections.Update
     , cuEnterpriseId
     , cuUserIP
     , cuCollectionId
-    , cuCollection
+    , cuPayload
     , cuKey
     , cuOAuthToken
     , cuFields
@@ -69,11 +70,11 @@ data CollectionsUpdate' = CollectionsUpdate'
     , _cuEnterpriseId :: !Text
     , _cuUserIP       :: !(Maybe Text)
     , _cuCollectionId :: !Text
-    , _cuCollection   :: !Collection
+    , _cuPayload      :: !Collection
     , _cuKey          :: !(Maybe Key)
     , _cuOAuthToken   :: !(Maybe OAuthToken)
     , _cuFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CollectionsUpdate'' with the minimum fields required to make a request.
 --
@@ -89,7 +90,7 @@ data CollectionsUpdate' = CollectionsUpdate'
 --
 -- * 'cuCollectionId'
 --
--- * 'cuCollection'
+-- * 'cuPayload'
 --
 -- * 'cuKey'
 --
@@ -99,16 +100,16 @@ data CollectionsUpdate' = CollectionsUpdate'
 collectionsUpdate'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'collectionId'
-    -> Collection -- ^ 'Collection'
+    -> Collection -- ^ 'payload'
     -> CollectionsUpdate'
-collectionsUpdate' pCuEnterpriseId_ pCuCollectionId_ pCuCollection_ =
+collectionsUpdate' pCuEnterpriseId_ pCuCollectionId_ pCuPayload_ =
     CollectionsUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
     , _cuEnterpriseId = pCuEnterpriseId_
     , _cuUserIP = Nothing
     , _cuCollectionId = pCuCollectionId_
-    , _cuCollection = pCuCollection_
+    , _cuPayload = pCuPayload_
     , _cuKey = Nothing
     , _cuOAuthToken = Nothing
     , _cuFields = Nothing
@@ -145,9 +146,9 @@ cuCollectionId
       (\ s a -> s{_cuCollectionId = a})
 
 -- | Multipart request metadata.
-cuCollection :: Lens' CollectionsUpdate' Collection
-cuCollection
-  = lens _cuCollection (\ s a -> s{_cuCollection = a})
+cuPayload :: Lens' CollectionsUpdate' Collection
+cuPayload
+  = lens _cuPayload (\ s a -> s{_cuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -180,7 +181,7 @@ instance GoogleRequest CollectionsUpdate' where
               _cuKey
               _cuOAuthToken
               (Just AltJSON)
-              _cuCollection
+              _cuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CollectionsUpdateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.Cloudlatencytest.Statscollection.Updatestats
     , sQuotaUser
     , sPrettyPrint
     , sUserIP
-    , sStats
+    , sPayload
     , sKey
     , sOAuthToken
     , sFields
@@ -62,11 +63,11 @@ data StatscollectionUpdatestats' = StatscollectionUpdatestats'
     { _sQuotaUser   :: !(Maybe Text)
     , _sPrettyPrint :: !Bool
     , _sUserIP      :: !(Maybe Text)
-    , _sStats       :: !Stats
+    , _sPayload     :: !Stats
     , _sKey         :: !(Maybe Key)
     , _sOAuthToken  :: !(Maybe OAuthToken)
     , _sFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatscollectionUpdatestats'' with the minimum fields required to make a request.
 --
@@ -78,7 +79,7 @@ data StatscollectionUpdatestats' = StatscollectionUpdatestats'
 --
 -- * 'sUserIP'
 --
--- * 'sStats'
+-- * 'sPayload'
 --
 -- * 'sKey'
 --
@@ -86,14 +87,14 @@ data StatscollectionUpdatestats' = StatscollectionUpdatestats'
 --
 -- * 'sFields'
 statscollectionUpdatestats'
-    :: Stats -- ^ 'Stats'
+    :: Stats -- ^ 'payload'
     -> StatscollectionUpdatestats'
-statscollectionUpdatestats' pSStats_ =
+statscollectionUpdatestats' pSPayload_ =
     StatscollectionUpdatestats'
     { _sQuotaUser = Nothing
     , _sPrettyPrint = True
     , _sUserIP = Nothing
-    , _sStats = pSStats_
+    , _sPayload = pSPayload_
     , _sKey = Nothing
     , _sOAuthToken = Nothing
     , _sFields = Nothing
@@ -117,8 +118,8 @@ sUserIP :: Lens' StatscollectionUpdatestats' (Maybe Text)
 sUserIP = lens _sUserIP (\ s a -> s{_sUserIP = a})
 
 -- | Multipart request metadata.
-sStats :: Lens' StatscollectionUpdatestats' Stats
-sStats = lens _sStats (\ s a -> s{_sStats = a})
+sPayload :: Lens' StatscollectionUpdatestats' Stats
+sPayload = lens _sPayload (\ s a -> s{_sPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -149,7 +150,7 @@ instance GoogleRequest StatscollectionUpdatestats'
               _sKey
               _sOAuthToken
               (Just AltJSON)
-              _sStats
+              _sPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy StatscollectionUpdatestatsResource)

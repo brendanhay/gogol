@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -66,16 +67,16 @@ type CirclesAddPeopleResource =
 --
 -- /See:/ 'circlesAddPeople'' smart constructor.
 data CirclesAddPeople' = CirclesAddPeople'
-    { _capEmail       :: !(Maybe Text)
+    { _capEmail       :: !(Maybe [Text])
     , _capQuotaUser   :: !(Maybe Text)
     , _capPrettyPrint :: !Bool
     , _capUserIP      :: !(Maybe Text)
-    , _capUserId      :: !(Maybe Text)
+    , _capUserId      :: !(Maybe [Text])
     , _capKey         :: !(Maybe Key)
     , _capCircleId    :: !Text
     , _capOAuthToken  :: !(Maybe OAuthToken)
     , _capFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesAddPeople'' with the minimum fields required to make a request.
 --
@@ -115,8 +116,11 @@ circlesAddPeople' pCapCircleId_ =
     }
 
 -- | Email of the people to add to the circle. Optional, can be repeated.
-capEmail :: Lens' CirclesAddPeople' (Maybe Text)
-capEmail = lens _capEmail (\ s a -> s{_capEmail = a})
+capEmail :: Lens' CirclesAddPeople' [Text]
+capEmail
+  = lens _capEmail (\ s a -> s{_capEmail = a}) .
+      _Default
+      . _Coerce
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -138,9 +142,11 @@ capUserIP
   = lens _capUserIP (\ s a -> s{_capUserIP = a})
 
 -- | IDs of the people to add to the circle. Optional, can be repeated.
-capUserId :: Lens' CirclesAddPeople' (Maybe Text)
+capUserId :: Lens' CirclesAddPeople' [Text]
 capUserId
-  = lens _capUserId (\ s a -> s{_capUserId = a})
+  = lens _capUserId (\ s a -> s{_capUserId = a}) .
+      _Default
+      . _Coerce
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -172,7 +178,9 @@ instance GoogleRequest CirclesAddPeople' where
         type Rs CirclesAddPeople' = Circle
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CirclesAddPeople'{..}
-          = go _capEmail _capUserId _capCircleId _capQuotaUser
+          = go _capCircleId (_capEmail ^. _Default)
+              (_capUserId ^. _Default)
+              _capQuotaUser
               (Just _capPrettyPrint)
               _capUserIP
               _capFields

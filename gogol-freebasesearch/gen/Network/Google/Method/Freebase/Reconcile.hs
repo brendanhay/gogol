@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,11 +52,11 @@ import           Network.Google.Prelude
 -- 'Reconcile'' request conforms to.
 type ReconcileMethod =
      "reconcile" :>
-       QueryParam "confidence" Float :>
-         QueryParams "kind" Text :>
-           QueryParams "lang" Text :>
-             QueryParam "limit" Int32 :>
-               QueryParam "name" Text :>
+       QueryParams "kind" Text :>
+         QueryParams "lang" Text :>
+           QueryParam "confidence" Float :>
+             QueryParam "name" Text :>
+               QueryParam "limit" Int32 :>
                  QueryParams "prop" Text :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
@@ -72,17 +73,17 @@ type ReconcileMethod =
 data Reconcile' = Reconcile'
     { _rQuotaUser   :: !(Maybe Text)
     , _rPrettyPrint :: !Bool
-    , _rKind        :: !(Maybe Text)
+    , _rKind        :: !(Maybe [Text])
     , _rUserIP      :: !(Maybe Text)
-    , _rLang        :: !(Maybe Text)
+    , _rLang        :: !(Maybe [Text])
     , _rConfidence  :: !Float
     , _rKey         :: !(Maybe Key)
     , _rName        :: !(Maybe Text)
     , _rLimit       :: !Int32
-    , _rProp        :: !(Maybe Text)
+    , _rProp        :: !(Maybe [Text])
     , _rOAuthToken  :: !(Maybe OAuthToken)
     , _rFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Reconcile'' with the minimum fields required to make a request.
 --
@@ -142,8 +143,10 @@ rPrettyPrint
   = lens _rPrettyPrint (\ s a -> s{_rPrettyPrint = a})
 
 -- | Classifications of entity e.g. type, category, title.
-rKind :: Lens' Reconcile' (Maybe Text)
-rKind = lens _rKind (\ s a -> s{_rKind = a})
+rKind :: Lens' Reconcile' [Text]
+rKind
+  = lens _rKind (\ s a -> s{_rKind = a}) . _Default .
+      _Coerce
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
@@ -152,8 +155,10 @@ rUserIP = lens _rUserIP (\ s a -> s{_rUserIP = a})
 
 -- | Languages for names and values. First language is used for display.
 -- Default is \'en\'.
-rLang :: Lens' Reconcile' (Maybe Text)
-rLang = lens _rLang (\ s a -> s{_rLang = a})
+rLang :: Lens' Reconcile' [Text]
+rLang
+  = lens _rLang (\ s a -> s{_rLang = a}) . _Default .
+      _Coerce
 
 -- | Required confidence for a candidate to match. Must be between .5 and 1.0
 rConfidence :: Lens' Reconcile' Float
@@ -175,8 +180,10 @@ rLimit :: Lens' Reconcile' Int32
 rLimit = lens _rLimit (\ s a -> s{_rLimit = a})
 
 -- | Property values for entity formatted as :
-rProp :: Lens' Reconcile' (Maybe Text)
-rProp = lens _rProp (\ s a -> s{_rProp = a})
+rProp :: Lens' Reconcile' [Text]
+rProp
+  = lens _rProp (\ s a -> s{_rProp = a}) . _Default .
+      _Coerce
 
 -- | OAuth 2.0 token for the current user.
 rOAuthToken :: Lens' Reconcile' (Maybe OAuthToken)
@@ -195,9 +202,11 @@ instance GoogleRequest Reconcile' where
         type Rs Reconcile' = ReconcileGet
         request = requestWithRoute defReq freebaseSearchURL
         requestWithRoute r u Reconcile'{..}
-          = go (Just _rConfidence) _rKind _rLang (Just _rLimit)
+          = go (_rKind ^. _Default) (_rLang ^. _Default)
+              (Just _rConfidence)
               _rName
-              _rProp
+              (Just _rLimit)
+              (_rProp ^. _Default)
               _rQuotaUser
               (Just _rPrettyPrint)
               _rUserIP

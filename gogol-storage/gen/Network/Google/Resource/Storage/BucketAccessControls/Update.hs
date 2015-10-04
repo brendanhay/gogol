@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Storage.BucketAccessControls.Update
     , bacuPrettyPrint
     , bacuUserIP
     , bacuBucket
+    , bacuPayload
     , bacuKey
-    , bacuBucketAccessControl
     , bacuOAuthToken
     , bacuEntity
     , bacuFields
@@ -65,16 +66,16 @@ type BucketAccessControlsUpdateResource =
 --
 -- /See:/ 'bucketAccessControlsUpdate'' smart constructor.
 data BucketAccessControlsUpdate' = BucketAccessControlsUpdate'
-    { _bacuQuotaUser           :: !(Maybe Text)
-    , _bacuPrettyPrint         :: !Bool
-    , _bacuUserIP              :: !(Maybe Text)
-    , _bacuBucket              :: !Text
-    , _bacuKey                 :: !(Maybe Key)
-    , _bacuBucketAccessControl :: !BucketAccessControl
-    , _bacuOAuthToken          :: !(Maybe OAuthToken)
-    , _bacuEntity              :: !Text
-    , _bacuFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _bacuQuotaUser   :: !(Maybe Text)
+    , _bacuPrettyPrint :: !Bool
+    , _bacuUserIP      :: !(Maybe Text)
+    , _bacuBucket      :: !Text
+    , _bacuPayload     :: !BucketAccessControl
+    , _bacuKey         :: !(Maybe Key)
+    , _bacuOAuthToken  :: !(Maybe OAuthToken)
+    , _bacuEntity      :: !Text
+    , _bacuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControlsUpdate'' with the minimum fields required to make a request.
 --
@@ -88,9 +89,9 @@ data BucketAccessControlsUpdate' = BucketAccessControlsUpdate'
 --
 -- * 'bacuBucket'
 --
--- * 'bacuKey'
+-- * 'bacuPayload'
 --
--- * 'bacuBucketAccessControl'
+-- * 'bacuKey'
 --
 -- * 'bacuOAuthToken'
 --
@@ -99,17 +100,17 @@ data BucketAccessControlsUpdate' = BucketAccessControlsUpdate'
 -- * 'bacuFields'
 bucketAccessControlsUpdate'
     :: Text -- ^ 'bucket'
-    -> BucketAccessControl -- ^ 'BucketAccessControl'
+    -> BucketAccessControl -- ^ 'payload'
     -> Text -- ^ 'entity'
     -> BucketAccessControlsUpdate'
-bucketAccessControlsUpdate' pBacuBucket_ pBacuBucketAccessControl_ pBacuEntity_ =
+bucketAccessControlsUpdate' pBacuBucket_ pBacuPayload_ pBacuEntity_ =
     BucketAccessControlsUpdate'
     { _bacuQuotaUser = Nothing
     , _bacuPrettyPrint = True
     , _bacuUserIP = Nothing
     , _bacuBucket = pBacuBucket_
+    , _bacuPayload = pBacuPayload_
     , _bacuKey = Nothing
-    , _bacuBucketAccessControl = pBacuBucketAccessControl_
     , _bacuOAuthToken = Nothing
     , _bacuEntity = pBacuEntity_
     , _bacuFields = Nothing
@@ -140,17 +141,16 @@ bacuBucket :: Lens' BucketAccessControlsUpdate' Text
 bacuBucket
   = lens _bacuBucket (\ s a -> s{_bacuBucket = a})
 
+-- | Multipart request metadata.
+bacuPayload :: Lens' BucketAccessControlsUpdate' BucketAccessControl
+bacuPayload
+  = lens _bacuPayload (\ s a -> s{_bacuPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 bacuKey :: Lens' BucketAccessControlsUpdate' (Maybe Key)
 bacuKey = lens _bacuKey (\ s a -> s{_bacuKey = a})
-
--- | Multipart request metadata.
-bacuBucketAccessControl :: Lens' BucketAccessControlsUpdate' BucketAccessControl
-bacuBucketAccessControl
-  = lens _bacuBucketAccessControl
-      (\ s a -> s{_bacuBucketAccessControl = a})
 
 -- | OAuth 2.0 token for the current user.
 bacuOAuthToken :: Lens' BucketAccessControlsUpdate' (Maybe OAuthToken)
@@ -187,7 +187,7 @@ instance GoogleRequest BucketAccessControlsUpdate'
               _bacuKey
               _bacuOAuthToken
               (Just AltJSON)
-              _bacuBucketAccessControl
+              _bacuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BucketAccessControlsUpdateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,7 +38,7 @@ module Network.Google.Resource.YouTube.Captions.Update
     , capPart
     , capPrettyPrint
     , capUserIP
-    , capCaption
+    , capPayload
     , capMedia
     , capOnBehalfOfContentOwner
     , capKey
@@ -53,10 +54,10 @@ import           Network.Google.YouTube.Types
 -- 'CaptionsUpdate'' request conforms to.
 type CaptionsUpdateResource =
      "captions" :>
-       QueryParam "onBehalfOf" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "sync" Bool :>
-             QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "onBehalfOf" Text :>
+           QueryParam "onBehalfOfContentOwner" Text :>
+             QueryParam "sync" Bool :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -78,14 +79,14 @@ data CaptionsUpdate' = CaptionsUpdate'
     , _capPart                   :: !Text
     , _capPrettyPrint            :: !Bool
     , _capUserIP                 :: !(Maybe Text)
-    , _capCaption                :: !Caption
+    , _capPayload                :: !Caption
     , _capMedia                  :: !Body
     , _capOnBehalfOfContentOwner :: !(Maybe Text)
     , _capKey                    :: !(Maybe Key)
     , _capSync                   :: !(Maybe Bool)
     , _capOAuthToken             :: !(Maybe OAuthToken)
     , _capFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CaptionsUpdate'' with the minimum fields required to make a request.
 --
@@ -101,7 +102,7 @@ data CaptionsUpdate' = CaptionsUpdate'
 --
 -- * 'capUserIP'
 --
--- * 'capCaption'
+-- * 'capPayload'
 --
 -- * 'capMedia'
 --
@@ -116,17 +117,17 @@ data CaptionsUpdate' = CaptionsUpdate'
 -- * 'capFields'
 captionsUpdate'
     :: Text -- ^ 'part'
-    -> Caption -- ^ 'Caption'
+    -> Caption -- ^ 'payload'
     -> Body -- ^ 'media'
     -> CaptionsUpdate'
-captionsUpdate' pCapPart_ pCapCaption_ pCapMedia_ =
+captionsUpdate' pCapPart_ pCapPayload_ pCapMedia_ =
     CaptionsUpdate'
     { _capOnBehalfOf = Nothing
     , _capQuotaUser = Nothing
     , _capPart = pCapPart_
     , _capPrettyPrint = True
     , _capUserIP = Nothing
-    , _capCaption = pCapCaption_
+    , _capPayload = pCapPayload_
     , _capMedia = pCapMedia_
     , _capOnBehalfOfContentOwner = Nothing
     , _capKey = Nothing
@@ -170,9 +171,9 @@ capUserIP
   = lens _capUserIP (\ s a -> s{_capUserIP = a})
 
 -- | Multipart request metadata.
-capCaption :: Lens' CaptionsUpdate' Caption
-capCaption
-  = lens _capCaption (\ s a -> s{_capCaption = a})
+capPayload :: Lens' CaptionsUpdate' Caption
+capPayload
+  = lens _capPayload (\ s a -> s{_capPayload = a})
 
 capMedia :: Lens' CaptionsUpdate' Body
 capMedia = lens _capMedia (\ s a -> s{_capMedia = a})
@@ -225,10 +226,9 @@ instance GoogleRequest CaptionsUpdate' where
         type Rs CaptionsUpdate' = Caption
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CaptionsUpdate'{..}
-          = go _capMedia _capOnBehalfOf
+          = go (Just _capPart) _capOnBehalfOf
               _capOnBehalfOfContentOwner
               _capSync
-              (Just _capPart)
               _capQuotaUser
               (Just _capPrettyPrint)
               _capUserIP
@@ -236,7 +236,8 @@ instance GoogleRequest CaptionsUpdate' where
               _capKey
               _capOAuthToken
               (Just AltJSON)
-              _capCaption
+              _capPayload
+              _capMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CaptionsUpdateResource)

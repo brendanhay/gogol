@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,11 +36,11 @@ module Network.Google.Resource.FusionTables.Table.Patch
     , tppQuotaUser
     , tppPrettyPrint
     , tppUserIP
+    , tppPayload
     , tppReplaceViewDefinition
     , tppKey
     , tppOAuthToken
     , tppTableId
-    , tppTable
     , tppFields
     ) where
 
@@ -70,13 +71,13 @@ data TablePatch' = TablePatch'
     { _tppQuotaUser             :: !(Maybe Text)
     , _tppPrettyPrint           :: !Bool
     , _tppUserIP                :: !(Maybe Text)
+    , _tppPayload               :: !Table
     , _tppReplaceViewDefinition :: !(Maybe Bool)
     , _tppKey                   :: !(Maybe Key)
     , _tppOAuthToken            :: !(Maybe OAuthToken)
     , _tppTableId               :: !Text
-    , _tppTable                 :: !Table
     , _tppFields                :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablePatch'' with the minimum fields required to make a request.
 --
@@ -88,6 +89,8 @@ data TablePatch' = TablePatch'
 --
 -- * 'tppUserIP'
 --
+-- * 'tppPayload'
+--
 -- * 'tppReplaceViewDefinition'
 --
 -- * 'tppKey'
@@ -96,23 +99,21 @@ data TablePatch' = TablePatch'
 --
 -- * 'tppTableId'
 --
--- * 'tppTable'
---
 -- * 'tppFields'
 tablePatch'
-    :: Text -- ^ 'tableId'
-    -> Table -- ^ 'Table'
+    :: Table -- ^ 'payload'
+    -> Text -- ^ 'tableId'
     -> TablePatch'
-tablePatch' pTppTableId_ pTppTable_ =
+tablePatch' pTppPayload_ pTppTableId_ =
     TablePatch'
     { _tppQuotaUser = Nothing
     , _tppPrettyPrint = True
     , _tppUserIP = Nothing
+    , _tppPayload = pTppPayload_
     , _tppReplaceViewDefinition = Nothing
     , _tppKey = Nothing
     , _tppOAuthToken = Nothing
     , _tppTableId = pTppTableId_
-    , _tppTable = pTppTable_
     , _tppFields = Nothing
     }
 
@@ -134,6 +135,11 @@ tppPrettyPrint
 tppUserIP :: Lens' TablePatch' (Maybe Text)
 tppUserIP
   = lens _tppUserIP (\ s a -> s{_tppUserIP = a})
+
+-- | Multipart request metadata.
+tppPayload :: Lens' TablePatch' Table
+tppPayload
+  = lens _tppPayload (\ s a -> s{_tppPayload = a})
 
 -- | Whether the view definition is also updated. The specified view
 -- definition replaces the existing one. Only a view can be updated with a
@@ -160,10 +166,6 @@ tppTableId :: Lens' TablePatch' Text
 tppTableId
   = lens _tppTableId (\ s a -> s{_tppTableId = a})
 
--- | Multipart request metadata.
-tppTable :: Lens' TablePatch' Table
-tppTable = lens _tppTable (\ s a -> s{_tppTable = a})
-
 -- | Selector specifying which fields to include in a partial response.
 tppFields :: Lens' TablePatch' (Maybe Text)
 tppFields
@@ -177,7 +179,7 @@ instance GoogleRequest TablePatch' where
         type Rs TablePatch' = Table
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TablePatch'{..}
-          = go _tppReplaceViewDefinition _tppTableId
+          = go _tppTableId _tppReplaceViewDefinition
               _tppQuotaUser
               (Just _tppPrettyPrint)
               _tppUserIP
@@ -185,7 +187,7 @@ instance GoogleRequest TablePatch' where
               _tppKey
               _tppOAuthToken
               (Just AltJSON)
-              _tppTable
+              _tppPayload
           where go
                   = clientWithRoute (Proxy :: Proxy TablePatchResource)
                       r

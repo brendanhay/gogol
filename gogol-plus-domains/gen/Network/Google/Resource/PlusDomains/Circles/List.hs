@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ type CirclesListResource =
      "people" :>
        Capture "userId" Text :>
          "circles" :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -73,7 +74,7 @@ data CirclesList' = CirclesList'
     , _clOAuthToken  :: !(Maybe OAuthToken)
     , _clMaxResults  :: !Word32
     , _clFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesList'' with the minimum fields required to make a request.
 --
@@ -172,7 +173,7 @@ instance GoogleRequest CirclesList' where
         type Rs CirclesList' = CircleFeed
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CirclesList'{..}
-          = go (Just _clMaxResults) _clPageToken _clUserId
+          = go _clUserId _clPageToken (Just _clMaxResults)
               _clQuotaUser
               (Just _clPrettyPrint)
               _clUserIP

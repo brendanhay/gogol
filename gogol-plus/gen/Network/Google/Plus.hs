@@ -67,58 +67,49 @@ module Network.Google.Plus
     , commentPlusoners
     , cpTotalItems
 
-    -- ** ActivityProvider
-    , ActivityProvider
-    , activityProvider
-    , apTitle
+    -- ** AgeRange
+    , AgeRange
+    , ageRange
+    , arMax
+    , arMin
+
+    -- ** FullImage
+    , FullImage
+    , fullImage
+    , fiHeight
+    , fiURL
+    , fiWidth
+    , fiType
 
     -- ** CommentActorImage
     , CommentActorImage
     , commentActorImage
     , caiURL
 
-    -- ** ActivityObjectPlusoners
-    , ActivityObjectPlusoners
-    , activityObjectPlusoners
-    , aopTotalItems
-    , aopSelfLink
+    -- ** Plusoners
+    , Plusoners
+    , plusoners
+    , pTotalItems
+    , pSelfLink
 
-    -- ** PlusActivitiesSearchOrderBy
-    , PlusActivitiesSearchOrderBy (..)
+    -- ** Image
+    , Image
+    , image
+    , iURL
+    , iIsDefault
 
-    -- ** ActivityObjectAttachments
-    , ActivityObjectAttachments
-    , activityObjectAttachments
-    , aoaFullImage
-    , aoaImage
-    , aoaObjectType
-    , aoaURL
-    , aoaEmbed
-    , aoaContent
-    , aoaThumbnails
-    , aoaDisplayName
-    , aoaId
+    -- ** ThumbnailsItem
+    , ThumbnailsItem
+    , thumbnailsItem
+    , tiImage
+    , tiURL
+    , tiDescription
 
-    -- ** ActivityObjectAttachmentsThumbnailsImage
-    , ActivityObjectAttachmentsThumbnailsImage
-    , activityObjectAttachmentsThumbnailsImage
-    , aoatiHeight
-    , aoatiURL
-    , aoatiWidth
-    , aoatiType
-
-    -- ** PlacePosition
-    , PlacePosition
-    , placePosition
-    , ppLatitude
-    , ppLongitude
-
-    -- ** PersonURLs
-    , PersonURLs
-    , personURLs
-    , puValue
-    , puType
-    , puLabel
+    -- ** EmailsItem
+    , EmailsItem
+    , emailsItem
+    , eiValue
+    , eiType
 
     -- ** Person
     , Person
@@ -154,38 +145,47 @@ module Network.Google.Plus
     , pOrganizations
     , pCircledByCount
 
-    -- ** PlusActivitiesListCollection
-    , PlusActivitiesListCollection (..)
+    -- ** OrderBy
+    , OrderBy (..)
+
+    -- ** Cover
+    , Cover
+    , cover
+    , cLayout
+    , cCoverInfo
+    , cCoverPhoto
 
     -- ** PlusPeopleListCollection
     , PlusPeopleListCollection (..)
 
-    -- ** CommentInReplyTo
-    , CommentInReplyTo
-    , commentInReplyTo
-    , cirtURL
-    , cirtId
+    -- ** OrganizationsItem
+    , OrganizationsItem
+    , organizationsItem
+    , oiDePartment
+    , oiLocation
+    , oiEndDate
+    , oiPrimary
+    , oiStartDate
+    , oiName
+    , oiTitle
+    , oiType
+    , oiDescription
 
-    -- ** PersonOrganizations
-    , PersonOrganizations
-    , personOrganizations
-    , poDePartment
-    , poLocation
-    , poEndDate
-    , poPrimary
-    , poStartDate
-    , poName
-    , poTitle
-    , poType
-    , poDescription
+    -- ** ThumbnailsItemImage
+    , ThumbnailsItemImage
+    , thumbnailsItemImage
+    , tiiHeight
+    , tiiURL
+    , tiiWidth
+    , tiiType
 
-    -- ** ActivityObjectAttachmentsImage
-    , ActivityObjectAttachmentsImage
-    , activityObjectAttachmentsImage
-    , aoaiHeight
-    , aoaiURL
-    , aoaiWidth
-    , aoaiType
+    -- ** AttachmentsItemImage
+    , AttachmentsItemImage
+    , attachmentsItemImage
+    , aiiHeight
+    , aiiURL
+    , aiiWidth
+    , aiiType
 
     -- ** CommentActor
     , CommentActor
@@ -224,16 +224,36 @@ module Network.Google.Plus
     -- ** ActivityObjectActor
     , ActivityObjectActor
     , activityObjectActor
+    , aoaImage
+    , aoaURL
+    , aoaDisplayName
+    , aoaId
+    , aoaVerification
+
+    -- ** CoverInfo
+    , CoverInfo
+    , coverInfo
+    , ciTopImageOffset
+    , ciLeftImageOffset
+
+    -- ** Embed
+    , Embed
+    , embed
+    , eURL
+    , eType
+
+    -- ** Actor
+    , Actor
+    , actor
     , aImage
     , aURL
+    , aName
     , aDisplayName
     , aId
     , aVerification
 
-    -- ** ActivityActorImage
-    , ActivityActorImage
-    , activityActorImage
-    , aaiURL
+    -- ** Collection
+    , Collection (..)
 
     -- ** PeopleFeed
     , PeopleFeed
@@ -246,38 +266,40 @@ module Network.Google.Plus
     , pfSelfLink
     , pfTitle
 
-    -- ** ActivityObjectAttachmentsEmbed
-    , ActivityObjectAttachmentsEmbed
-    , activityObjectAttachmentsEmbed
-    , aoaeURL
-    , aoaeType
+    -- ** ActorName
+    , ActorName
+    , actorName
+    , anGivenName
+    , anFamilyName
 
-    -- ** PersonCoverCoverPhoto
-    , PersonCoverCoverPhoto
-    , personCoverCoverPhoto
-    , pccpHeight
-    , pccpURL
-    , pccpWidth
+    -- ** ActorImage
+    , ActorImage
+    , actorImage
+    , aiURL
 
-    -- ** PersonAgeRange
-    , PersonAgeRange
-    , personAgeRange
-    , parMax
-    , parMin
+    -- ** SortOrder
+    , SortOrder (..)
 
-    -- ** ActivityObjectReplies
-    , ActivityObjectReplies
-    , activityObjectReplies
-    , aorTotalItems
-    , aorSelfLink
+    -- ** Replies
+    , Replies
+    , replies
+    , rTotalItems
+    , rSelfLink
 
     -- ** ActivityObjectActorImage
     , ActivityObjectActorImage
     , activityObjectActorImage
-    , actURL
+    , aoaiURL
 
-    -- ** PlusCommentsListSortOrder
-    , PlusCommentsListSortOrder (..)
+    -- ** Name
+    , Name
+    , name
+    , nGivenName
+    , nMiddleName
+    , nFormatted
+    , nHonorificPrefix
+    , nFamilyName
+    , nHonorificSuffix
 
     -- ** ItemScope
     , ItemScope
@@ -338,10 +360,11 @@ module Network.Google.Plus
     , isDescription
     , isBirthDate
 
-    -- ** ActivityActorVerification
-    , ActivityActorVerification
-    , activityActorVerification
-    , aavAdHocVerified
+    -- ** PlacesLivedItem
+    , PlacesLivedItem
+    , placesLivedItem
+    , pliValue
+    , pliPrimary
 
     -- ** ActivityFeed
     , ActivityFeed
@@ -356,11 +379,18 @@ module Network.Google.Plus
     , afUpdated
     , afTitle
 
-    -- ** PersonPlacesLived
-    , PersonPlacesLived
-    , personPlacesLived
-    , pplValue
-    , pplPrimary
+    -- ** AttachmentsItem
+    , AttachmentsItem
+    , attachmentsItem
+    , attFullImage
+    , attImage
+    , attObjectType
+    , attURL
+    , attEmbed
+    , attContent
+    , attThumbnails
+    , attDisplayName
+    , attId
 
     -- ** ActivityObjectActorVerification
     , ActivityObjectActorVerification
@@ -374,39 +404,17 @@ module Network.Google.Plus
     , parId
     , parType
 
-    -- ** PersonEmails
-    , PersonEmails
-    , personEmails
-    , peValue
-    , peType
-
-    -- ** PersonImage
-    , PersonImage
-    , personImage
-    , piURL
-    , piIsDefault
-
-    -- ** PersonName
-    , PersonName
-    , personName
-    , pnGivenName
-    , pnMiddleName
-    , pnFormatted
-    , pnHonorificPrefix
-    , pnFamilyName
-    , pnHonorificSuffix
-
     -- ** PlaceAddress
     , PlaceAddress
     , placeAddress
     , paFormatted
 
-    -- ** ActivityObjectAttachmentsThumbnails
-    , ActivityObjectAttachmentsThumbnails
-    , activityObjectAttachmentsThumbnails
-    , aoatImage
-    , aoatURL
-    , aoatDescription
+    -- ** URLsItem
+    , URLsItem
+    , urlsItem
+    , uiValue
+    , uiType
+    , uiLabel
 
     -- ** PlusMomentsListCollection
     , PlusMomentsListCollection (..)
@@ -414,33 +422,26 @@ module Network.Google.Plus
     -- ** Activity
     , Activity
     , activity
-    , aaAccess
-    , aaPlaceName
-    , aaEtag
-    , aaAnnotation
-    , aaLocation
-    , aaGeocode
-    , aaKind
-    , aaRadius
-    , aaPublished
-    , aaURL
-    , aaActor
-    , aaAddress
-    , aaObject
-    , aaId
-    , aaUpdated
-    , aaTitle
-    , aaVerb
-    , aaCrosspostSource
-    , aaPlaceId
-    , aaProvider
-
-    -- ** PersonCover
-    , PersonCover
-    , personCover
-    , pcLayout
-    , pcCoverInfo
-    , pcCoverPhoto
+    , actAccess
+    , actPlaceName
+    , actEtag
+    , actAnnotation
+    , actLocation
+    , actGeocode
+    , actKind
+    , actRadius
+    , actPublished
+    , actURL
+    , actActor
+    , actAddress
+    , actObject
+    , actId
+    , actUpdated
+    , actTitle
+    , actVerb
+    , actCrosspostSource
+    , actPlaceId
+    , actProvider
 
     -- ** PlusMomentsInsertCollection
     , PlusMomentsInsertCollection (..)
@@ -454,20 +455,20 @@ module Network.Google.Plus
     , plaId
     , plaPosition
 
-    -- ** PersonCoverCoverInfo
-    , PersonCoverCoverInfo
-    , personCoverCoverInfo
-    , pcciTopImageOffset
-    , pcciLeftImageOffset
+    -- ** InReplyToItem
+    , InReplyToItem
+    , inReplyToItem
+    , irtiURL
+    , irtiId
+
+    -- ** Resharers
+    , Resharers
+    , resharers
+    , resTotalItems
+    , resSelfLink
 
     -- ** PlusPeopleListByActivityCollection
     , PlusPeopleListByActivityCollection (..)
-
-    -- ** ActivityObjectResharers
-    , ActivityObjectResharers
-    , activityObjectResharers
-    , aTotalItems
-    , aSelfLink
 
     -- ** Comment
     , Comment
@@ -484,30 +485,12 @@ module Network.Google.Plus
     , cVerb
     , cInReplyTo
 
-    -- ** ActivityActor
-    , ActivityActor
-    , activityActor
-    , aaaImage
-    , aaaURL
-    , aaaName
-    , aaaDisplayName
-    , aaaId
-    , aaaVerification
-
     -- ** CommentObject
     , CommentObject
     , commentObject
     , coObjectType
     , coOriginalContent
     , coContent
-
-    -- ** ActivityObjectAttachmentsFullImage
-    , ActivityObjectAttachmentsFullImage
-    , activityObjectAttachmentsFullImage
-    , aoafiHeight
-    , aoafiURL
-    , aoafiWidth
-    , aoafiType
 
     -- ** PlusPeopleListOrderBy
     , PlusPeopleListOrderBy (..)
@@ -531,6 +514,18 @@ module Network.Google.Plus
     , mfUpdated
     , mfTitle
 
+    -- ** CoverPhoto
+    , CoverPhoto
+    , coverPhoto
+    , cpHeight
+    , cpURL
+    , cpWidth
+
+    -- ** Provider
+    , Provider
+    , provider
+    , pTitle
+
     -- ** CommentFeed
     , CommentFeed
     , commentFeed
@@ -543,16 +538,21 @@ module Network.Google.Plus
     , cfUpdated
     , cfTitle
 
+    -- ** Position
+    , Position
+    , position
+    , pLatitude
+    , pLongitude
+
     -- ** CommentActorVerification
     , CommentActorVerification
     , commentActorVerification
     , cavAdHocVerified
 
-    -- ** ActivityActorName
-    , ActivityActorName
-    , activityActorName
-    , aanGivenName
-    , aanFamilyName
+    -- ** Verification
+    , Verification
+    , verification
+    , vAdHocVerified
     ) where
 
 import           Network.Google.Plus.Types

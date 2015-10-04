@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.Update
     , cuQuotaUser
     , cuPrettyPrint
     , cuUserIP
+    , cuPayload
     , cuKey
-    , cuConversionList
     , cuOAuthToken
     , cuFields
     ) where
@@ -60,14 +61,14 @@ type ConversionUpdateResource =
 --
 -- /See:/ 'conversionUpdate'' smart constructor.
 data ConversionUpdate' = ConversionUpdate'
-    { _cuQuotaUser      :: !(Maybe Text)
-    , _cuPrettyPrint    :: !Bool
-    , _cuUserIP         :: !(Maybe Text)
-    , _cuKey            :: !(Maybe Key)
-    , _cuConversionList :: !ConversionList
-    , _cuOAuthToken     :: !(Maybe OAuthToken)
-    , _cuFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cuQuotaUser   :: !(Maybe Text)
+    , _cuPrettyPrint :: !Bool
+    , _cuUserIP      :: !(Maybe Text)
+    , _cuPayload     :: !ConversionList
+    , _cuKey         :: !(Maybe Key)
+    , _cuOAuthToken  :: !(Maybe OAuthToken)
+    , _cuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConversionUpdate'' with the minimum fields required to make a request.
 --
@@ -79,23 +80,23 @@ data ConversionUpdate' = ConversionUpdate'
 --
 -- * 'cuUserIP'
 --
--- * 'cuKey'
+-- * 'cuPayload'
 --
--- * 'cuConversionList'
+-- * 'cuKey'
 --
 -- * 'cuOAuthToken'
 --
 -- * 'cuFields'
 conversionUpdate'
-    :: ConversionList -- ^ 'ConversionList'
+    :: ConversionList -- ^ 'payload'
     -> ConversionUpdate'
-conversionUpdate' pCuConversionList_ =
+conversionUpdate' pCuPayload_ =
     ConversionUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
     , _cuUserIP = Nothing
+    , _cuPayload = pCuPayload_
     , _cuKey = Nothing
-    , _cuConversionList = pCuConversionList_
     , _cuOAuthToken = Nothing
     , _cuFields = Nothing
     }
@@ -118,17 +119,16 @@ cuPrettyPrint
 cuUserIP :: Lens' ConversionUpdate' (Maybe Text)
 cuUserIP = lens _cuUserIP (\ s a -> s{_cuUserIP = a})
 
+-- | Multipart request metadata.
+cuPayload :: Lens' ConversionUpdate' ConversionList
+cuPayload
+  = lens _cuPayload (\ s a -> s{_cuPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 cuKey :: Lens' ConversionUpdate' (Maybe Key)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
-
--- | Multipart request metadata.
-cuConversionList :: Lens' ConversionUpdate' ConversionList
-cuConversionList
-  = lens _cuConversionList
-      (\ s a -> s{_cuConversionList = a})
 
 -- | OAuth 2.0 token for the current user.
 cuOAuthToken :: Lens' ConversionUpdate' (Maybe OAuthToken)
@@ -153,7 +153,7 @@ instance GoogleRequest ConversionUpdate' where
               _cuKey
               _cuOAuthToken
               (Just AltJSON)
-              _cuConversionList
+              _cuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ConversionUpdateResource)

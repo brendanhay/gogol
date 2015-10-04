@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,9 +51,9 @@ type SettingsListResource =
      "users" :>
        "me" :>
          "settings" :>
-           QueryParam "maxResults" Int32 :>
+           QueryParam "syncToken" Text :>
              QueryParam "pageToken" Text :>
-               QueryParam "syncToken" Text :>
+               QueryParam "maxResults" Int32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -74,7 +75,7 @@ data SettingsList' = SettingsList'
     , _slOAuthToken  :: !(Maybe OAuthToken)
     , _slMaxResults  :: !(Maybe Int32)
     , _slFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SettingsList'' with the minimum fields required to make a request.
 --
@@ -176,7 +177,7 @@ instance GoogleRequest SettingsList' where
         type Rs SettingsList' = Settings
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u SettingsList'{..}
-          = go _slMaxResults _slPageToken _slSyncToken
+          = go _slSyncToken _slPageToken _slMaxResults
               _slQuotaUser
               (Just _slPrettyPrint)
               _slUserIP

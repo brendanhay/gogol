@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,11 +34,11 @@ module Network.Google.Resource.BigQuery.Tables.Insert
     , tiQuotaUser
     , tiPrettyPrint
     , tiUserIP
+    , tiPayload
     , tiKey
     , tiDatasetId
     , tiProjectId
     , tiOAuthToken
-    , tiTable
     , tiFields
     ) where
 
@@ -68,13 +69,13 @@ data TablesInsert' = TablesInsert'
     { _tiQuotaUser   :: !(Maybe Text)
     , _tiPrettyPrint :: !Bool
     , _tiUserIP      :: !(Maybe Text)
+    , _tiPayload     :: !Table
     , _tiKey         :: !(Maybe Key)
     , _tiDatasetId   :: !Text
     , _tiProjectId   :: !Text
     , _tiOAuthToken  :: !(Maybe OAuthToken)
-    , _tiTable       :: !Table
     , _tiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesInsert'' with the minimum fields required to make a request.
 --
@@ -86,6 +87,8 @@ data TablesInsert' = TablesInsert'
 --
 -- * 'tiUserIP'
 --
+-- * 'tiPayload'
+--
 -- * 'tiKey'
 --
 -- * 'tiDatasetId'
@@ -94,24 +97,22 @@ data TablesInsert' = TablesInsert'
 --
 -- * 'tiOAuthToken'
 --
--- * 'tiTable'
---
 -- * 'tiFields'
 tablesInsert'
-    :: Text -- ^ 'datasetId'
+    :: Table -- ^ 'payload'
+    -> Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
-    -> Table -- ^ 'Table'
     -> TablesInsert'
-tablesInsert' pTiDatasetId_ pTiProjectId_ pTiTable_ =
+tablesInsert' pTiPayload_ pTiDatasetId_ pTiProjectId_ =
     TablesInsert'
     { _tiQuotaUser = Nothing
     , _tiPrettyPrint = True
     , _tiUserIP = Nothing
+    , _tiPayload = pTiPayload_
     , _tiKey = Nothing
     , _tiDatasetId = pTiDatasetId_
     , _tiProjectId = pTiProjectId_
     , _tiOAuthToken = Nothing
-    , _tiTable = pTiTable_
     , _tiFields = Nothing
     }
 
@@ -132,6 +133,11 @@ tiPrettyPrint
 -- want to enforce per-user limits.
 tiUserIP :: Lens' TablesInsert' (Maybe Text)
 tiUserIP = lens _tiUserIP (\ s a -> s{_tiUserIP = a})
+
+-- | Multipart request metadata.
+tiPayload :: Lens' TablesInsert' Table
+tiPayload
+  = lens _tiPayload (\ s a -> s{_tiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -154,10 +160,6 @@ tiOAuthToken :: Lens' TablesInsert' (Maybe OAuthToken)
 tiOAuthToken
   = lens _tiOAuthToken (\ s a -> s{_tiOAuthToken = a})
 
--- | Multipart request metadata.
-tiTable :: Lens' TablesInsert' Table
-tiTable = lens _tiTable (\ s a -> s{_tiTable = a})
-
 -- | Selector specifying which fields to include in a partial response.
 tiFields :: Lens' TablesInsert' (Maybe Text)
 tiFields = lens _tiFields (\ s a -> s{_tiFields = a})
@@ -177,7 +179,7 @@ instance GoogleRequest TablesInsert' where
               _tiKey
               _tiOAuthToken
               (Just AltJSON)
-              _tiTable
+              _tiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TablesInsertResource)

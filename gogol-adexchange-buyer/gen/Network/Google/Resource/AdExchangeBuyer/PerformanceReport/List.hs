@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,11 +51,11 @@ import           Network.Google.Prelude
 -- 'PerformanceReportList'' request conforms to.
 type PerformanceReportListResource =
      "performancereport" :>
-       QueryParam "maxResults" Word32 :>
-         QueryParam "pageToken" Text :>
-           QueryParam "accountId" Int64 :>
-             QueryParam "endDateTime" Text :>
-               QueryParam "startDateTime" Text :>
+       QueryParam "accountId" Int64 :>
+         QueryParam "endDateTime" Text :>
+           QueryParam "startDateTime" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data PerformanceReportList' = PerformanceReportList'
     , _prlMaxResults    :: !(Maybe Word32)
     , _prlStartDateTime :: !Text
     , _prlFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PerformanceReportList'' with the minimum fields required to make a request.
 --
@@ -202,10 +203,10 @@ instance GoogleRequest PerformanceReportList' where
              PerformanceReportList
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u PerformanceReportList'{..}
-          = go _prlMaxResults _prlPageToken
-              (Just _prlAccountId)
-              (Just _prlEndDateTime)
+          = go (Just _prlAccountId) (Just _prlEndDateTime)
               (Just _prlStartDateTime)
+              _prlPageToken
+              _prlMaxResults
               _prlQuotaUser
               (Just _prlPrettyPrint)
               _prlUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ type TablesParentsListResource =
      "tables" :>
        Capture "id" Text :>
          "parents" :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -74,7 +75,7 @@ data TablesParentsList' = TablesParentsList'
     , _tabOAuthToken  :: !(Maybe OAuthToken)
     , _tabMaxResults  :: !(Maybe Word32)
     , _tabFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesParentsList'' with the minimum fields required to make a request.
 --
@@ -175,7 +176,7 @@ instance GoogleRequest TablesParentsList' where
         type Rs TablesParentsList' = ParentsListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesParentsList'{..}
-          = go _tabMaxResults _tabPageToken _tabId
+          = go _tabId _tabPageToken _tabMaxResults
               _tabQuotaUser
               (Just _tabPrettyPrint)
               _tabUserIP

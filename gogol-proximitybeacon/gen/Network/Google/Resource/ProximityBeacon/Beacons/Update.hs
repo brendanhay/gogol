@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -43,7 +44,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Update
     , buAccessToken
     , buBeaconName
     , buUploadType
-    , buBeacon
+    , buPayload
     , buBearerToken
     , buKey
     , buOAuthToken
@@ -58,14 +59,14 @@ import           Network.Google.ProximityBeacon.Types
 -- 'BeaconsUpdate'' request conforms to.
 type BeaconsUpdateResource =
      "v1beta1" :>
-       "{+beaconName}" :>
+       Capture "beaconName" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -91,13 +92,13 @@ data BeaconsUpdate' = BeaconsUpdate'
     , _buAccessToken    :: !(Maybe Text)
     , _buBeaconName     :: !Text
     , _buUploadType     :: !(Maybe Text)
-    , _buBeacon         :: !Beacon
+    , _buPayload        :: !Beacon
     , _buBearerToken    :: !(Maybe Text)
     , _buKey            :: !(Maybe Key)
     , _buOAuthToken     :: !(Maybe OAuthToken)
     , _buFields         :: !(Maybe Text)
     , _buCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsUpdate'' with the minimum fields required to make a request.
 --
@@ -119,7 +120,7 @@ data BeaconsUpdate' = BeaconsUpdate'
 --
 -- * 'buUploadType'
 --
--- * 'buBeacon'
+-- * 'buPayload'
 --
 -- * 'buBearerToken'
 --
@@ -132,9 +133,9 @@ data BeaconsUpdate' = BeaconsUpdate'
 -- * 'buCallback'
 beaconsUpdate'
     :: Text -- ^ 'beaconName'
-    -> Beacon -- ^ 'Beacon'
+    -> Beacon -- ^ 'payload'
     -> BeaconsUpdate'
-beaconsUpdate' pBuBeaconName_ pBuBeacon_ =
+beaconsUpdate' pBuBeaconName_ pBuPayload_ =
     BeaconsUpdate'
     { _buXgafv = Nothing
     , _buQuotaUser = Nothing
@@ -144,7 +145,7 @@ beaconsUpdate' pBuBeaconName_ pBuBeacon_ =
     , _buAccessToken = Nothing
     , _buBeaconName = pBuBeaconName_
     , _buUploadType = Nothing
-    , _buBeacon = pBuBeacon_
+    , _buPayload = pBuPayload_
     , _buBearerToken = Nothing
     , _buKey = Nothing
     , _buOAuthToken = Nothing
@@ -201,8 +202,9 @@ buUploadType
   = lens _buUploadType (\ s a -> s{_buUploadType = a})
 
 -- | Multipart request metadata.
-buBeacon :: Lens' BeaconsUpdate' Beacon
-buBeacon = lens _buBeacon (\ s a -> s{_buBeacon = a})
+buPayload :: Lens' BeaconsUpdate' Beacon
+buPayload
+  = lens _buPayload (\ s a -> s{_buPayload = a})
 
 -- | OAuth bearer token.
 buBearerToken :: Lens' BeaconsUpdate' (Maybe Text)
@@ -238,19 +240,19 @@ instance GoogleRequest BeaconsUpdate' where
         type Rs BeaconsUpdate' = Beacon
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u BeaconsUpdate'{..}
-          = go _buXgafv _buAccessToken _buBearerToken
-              _buCallback
+          = go _buBeaconName _buXgafv _buUploadProtocol
               (Just _buPp)
+              _buAccessToken
               _buUploadType
-              _buUploadProtocol
-              _buBeaconName
+              _buBearerToken
+              _buCallback
               _buQuotaUser
               (Just _buPrettyPrint)
               _buFields
               _buKey
               _buOAuthToken
               (Just AltJSON)
-              _buBeacon
+              _buPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BeaconsUpdateResource)

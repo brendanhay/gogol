@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -68,11 +69,11 @@ data MyLibraryAnnotationsSummary' = MyLibraryAnnotationsSummary'
     , _mlasPrettyPrint :: !Bool
     , _mlasUserIP      :: !(Maybe Text)
     , _mlasKey         :: !(Maybe Key)
-    , _mlasLayerIds    :: !Text
+    , _mlasLayerIds    :: ![Text]
     , _mlasVolumeId    :: !Text
     , _mlasOAuthToken  :: !(Maybe OAuthToken)
     , _mlasFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyLibraryAnnotationsSummary'' with the minimum fields required to make a request.
 --
@@ -94,7 +95,7 @@ data MyLibraryAnnotationsSummary' = MyLibraryAnnotationsSummary'
 --
 -- * 'mlasFields'
 myLibraryAnnotationsSummary'
-    :: Text -- ^ 'layerIds'
+    :: [Text] -- ^ 'layerIds'
     -> Text -- ^ 'volumeId'
     -> MyLibraryAnnotationsSummary'
 myLibraryAnnotationsSummary' pMlasLayerIds_ pMlasVolumeId_ =
@@ -136,9 +137,10 @@ mlasKey :: Lens' MyLibraryAnnotationsSummary' (Maybe Key)
 mlasKey = lens _mlasKey (\ s a -> s{_mlasKey = a})
 
 -- | Array of layer IDs to get the summary for.
-mlasLayerIds :: Lens' MyLibraryAnnotationsSummary' Text
+mlasLayerIds :: Lens' MyLibraryAnnotationsSummary' [Text]
 mlasLayerIds
   = lens _mlasLayerIds (\ s a -> s{_mlasLayerIds = a})
+      . _Coerce
 
 -- | Volume id to get the summary for.
 mlasVolumeId :: Lens' MyLibraryAnnotationsSummary' Text
@@ -167,7 +169,7 @@ instance GoogleRequest MyLibraryAnnotationsSummary'
              AnnotationsSummary
         request = requestWithRoute defReq booksURL
         requestWithRoute r u MyLibraryAnnotationsSummary'{..}
-          = go (Just _mlasLayerIds) (Just _mlasVolumeId)
+          = go (_mlasLayerIds ^. _Default) (Just _mlasVolumeId)
               _mlasQuotaUser
               (Just _mlasPrettyPrint)
               _mlasUserIP

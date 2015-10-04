@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -64,28 +65,26 @@ type CreativesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creatives" :>
-           QueryParam "active" Bool :>
+           QueryParams "renderingIds" Int64 :>
              QueryParam "advertiserId" Int64 :>
-               QueryParam "archived" Bool :>
-                 QueryParam "campaignId" Int64 :>
+               QueryParam "searchString" Text :>
+                 QueryParams "sizeIds" Int64 :>
                    QueryParams "companionCreativeIds" Int64 :>
-                     QueryParams "creativeFieldIds" Int64 :>
-                       QueryParams "ids" Int64 :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "pageToken" Text :>
-                             QueryParams "renderingIds" Int64 :>
-                               QueryParam "searchString" Text :>
-                                 QueryParams "sizeIds" Int64 :>
+                     QueryParam "campaignId" Int64 :>
+                       QueryParams "types" Types :>
+                         QueryParams "ids" Int64 :>
+                           QueryParam "sortOrder"
+                             DfareportingCreativesListSortOrder
+                             :>
+                             QueryParam "active" Bool :>
+                               QueryParams "creativeFieldIds" Int64 :>
+                                 QueryParam "pageToken" Text :>
                                    QueryParam "sortField"
                                      DfareportingCreativesListSortField
                                      :>
-                                     QueryParam "sortOrder"
-                                       DfareportingCreativesListSortOrder
-                                       :>
-                                       QueryParam "studioCreativeId" Int64 :>
-                                         QueryParams "types"
-                                           DfareportingCreativesListTypes
-                                           :>
+                                     QueryParam "studioCreativeId" Int64 :>
+                                       QueryParam "archived" Bool :>
+                                         QueryParam "maxResults" Int32 :>
                                            QueryParam "quotaUser" Text :>
                                              QueryParam "prettyPrint" Bool :>
                                                QueryParam "userIp" Text :>
@@ -103,22 +102,22 @@ type CreativesListResource =
 --
 -- /See:/ 'creativesList'' smart constructor.
 data CreativesList' = CreativesList'
-    { _clRenderingIds         :: !(Maybe Int64)
+    { _clRenderingIds         :: !(Maybe [Int64])
     , _clQuotaUser            :: !(Maybe Text)
     , _clPrettyPrint          :: !Bool
     , _clUserIP               :: !(Maybe Text)
     , _clAdvertiserId         :: !(Maybe Int64)
     , _clSearchString         :: !(Maybe Text)
-    , _clSizeIds              :: !(Maybe Int64)
-    , _clCompanionCreativeIds :: !(Maybe Int64)
+    , _clSizeIds              :: !(Maybe [Int64])
+    , _clCompanionCreativeIds :: !(Maybe [Int64])
     , _clCampaignId           :: !(Maybe Int64)
-    , _clTypes                :: !(Maybe DfareportingCreativesListTypes)
-    , _clIds                  :: !(Maybe Int64)
+    , _clTypes                :: !(Maybe Types)
+    , _clIds                  :: !(Maybe [Int64])
     , _clProfileId            :: !Int64
     , _clSortOrder            :: !(Maybe DfareportingCreativesListSortOrder)
     , _clActive               :: !(Maybe Bool)
     , _clKey                  :: !(Maybe Key)
-    , _clCreativeFieldIds     :: !(Maybe Int64)
+    , _clCreativeFieldIds     :: !(Maybe [Int64])
     , _clPageToken            :: !(Maybe Text)
     , _clSortField            :: !(Maybe DfareportingCreativesListSortField)
     , _clOAuthToken           :: !(Maybe OAuthToken)
@@ -126,7 +125,7 @@ data CreativesList' = CreativesList'
     , _clArchived             :: !(Maybe Bool)
     , _clMaxResults           :: !(Maybe Int32)
     , _clFields               :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesList'' with the minimum fields required to make a request.
 --
@@ -208,10 +207,12 @@ creativesList' pClProfileId_ =
     }
 
 -- | Select only creatives with these rendering IDs.
-clRenderingIds :: Lens' CreativesList' (Maybe Int64)
+clRenderingIds :: Lens' CreativesList' [Int64]
 clRenderingIds
   = lens _clRenderingIds
       (\ s a -> s{_clRenderingIds = a})
+      . _Default
+      . _Coerce
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -250,15 +251,19 @@ clSearchString
       (\ s a -> s{_clSearchString = a})
 
 -- | Select only creatives with these size IDs.
-clSizeIds :: Lens' CreativesList' (Maybe Int64)
+clSizeIds :: Lens' CreativesList' [Int64]
 clSizeIds
-  = lens _clSizeIds (\ s a -> s{_clSizeIds = a})
+  = lens _clSizeIds (\ s a -> s{_clSizeIds = a}) .
+      _Default
+      . _Coerce
 
 -- | Select only in-stream video creatives with these companion IDs.
-clCompanionCreativeIds :: Lens' CreativesList' (Maybe Int64)
+clCompanionCreativeIds :: Lens' CreativesList' [Int64]
 clCompanionCreativeIds
   = lens _clCompanionCreativeIds
       (\ s a -> s{_clCompanionCreativeIds = a})
+      . _Default
+      . _Coerce
 
 -- | Select only creatives with this campaign ID.
 clCampaignId :: Lens' CreativesList' (Maybe Int64)
@@ -266,12 +271,14 @@ clCampaignId
   = lens _clCampaignId (\ s a -> s{_clCampaignId = a})
 
 -- | Select only creatives with these creative types.
-clTypes :: Lens' CreativesList' (Maybe DfareportingCreativesListTypes)
+clTypes :: Lens' CreativesList' (Maybe Types)
 clTypes = lens _clTypes (\ s a -> s{_clTypes = a})
 
 -- | Select only creatives with these IDs.
-clIds :: Lens' CreativesList' (Maybe Int64)
-clIds = lens _clIds (\ s a -> s{_clIds = a})
+clIds :: Lens' CreativesList' [Int64]
+clIds
+  = lens _clIds (\ s a -> s{_clIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 clProfileId :: Lens' CreativesList' Int64
@@ -295,10 +302,12 @@ clKey :: Lens' CreativesList' (Maybe Key)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | Select only creatives with these creative field IDs.
-clCreativeFieldIds :: Lens' CreativesList' (Maybe Int64)
+clCreativeFieldIds :: Lens' CreativesList' [Int64]
 clCreativeFieldIds
   = lens _clCreativeFieldIds
       (\ s a -> s{_clCreativeFieldIds = a})
+      . _Default
+      . _Coerce
 
 -- | Value of the nextPageToken from the previous result page.
 clPageToken :: Lens' CreativesList' (Maybe Text)
@@ -344,21 +353,22 @@ instance GoogleRequest CreativesList' where
         type Rs CreativesList' = CreativesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativesList'{..}
-          = go _clActive _clAdvertiserId _clArchived
-              _clCampaignId
-              _clCompanionCreativeIds
-              _clCreativeFieldIds
-              _clIds
-              _clMaxResults
-              _clPageToken
-              _clRenderingIds
+          = go _clProfileId (_clRenderingIds ^. _Default)
+              _clAdvertiserId
               _clSearchString
-              _clSizeIds
-              _clSortField
+              (_clSizeIds ^. _Default)
+              (_clCompanionCreativeIds ^. _Default)
+              _clCampaignId
+              (_clTypes ^. _Default)
+              (_clIds ^. _Default)
               _clSortOrder
+              _clActive
+              (_clCreativeFieldIds ^. _Default)
+              _clPageToken
+              _clSortField
               _clStudioCreativeId
-              _clTypes
-              _clProfileId
+              _clArchived
+              _clMaxResults
               _clQuotaUser
               (Just _clPrettyPrint)
               _clUserIP

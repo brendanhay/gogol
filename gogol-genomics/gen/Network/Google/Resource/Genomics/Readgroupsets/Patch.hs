@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Genomics.Readgroupsets.Patch
     , rpPrettyPrint
     , rpReadGroupSetId
     , rpUserIP
+    , rpPayload
     , rpKey
-    , rpReadGroupSet
     , rpOAuthToken
     , rpFields
     ) where
@@ -66,11 +67,11 @@ data ReadgroupsetsPatch' = ReadgroupsetsPatch'
     , _rpPrettyPrint    :: !Bool
     , _rpReadGroupSetId :: !Text
     , _rpUserIP         :: !(Maybe Text)
+    , _rpPayload        :: !ReadGroupSet
     , _rpKey            :: !(Maybe Key)
-    , _rpReadGroupSet   :: !ReadGroupSet
     , _rpOAuthToken     :: !(Maybe OAuthToken)
     , _rpFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsPatch'' with the minimum fields required to make a request.
 --
@@ -84,25 +85,25 @@ data ReadgroupsetsPatch' = ReadgroupsetsPatch'
 --
 -- * 'rpUserIP'
 --
--- * 'rpKey'
+-- * 'rpPayload'
 --
--- * 'rpReadGroupSet'
+-- * 'rpKey'
 --
 -- * 'rpOAuthToken'
 --
 -- * 'rpFields'
 readgroupsetsPatch'
     :: Text -- ^ 'readGroupSetId'
-    -> ReadGroupSet -- ^ 'ReadGroupSet'
+    -> ReadGroupSet -- ^ 'payload'
     -> ReadgroupsetsPatch'
-readgroupsetsPatch' pRpReadGroupSetId_ pRpReadGroupSet_ =
+readgroupsetsPatch' pRpReadGroupSetId_ pRpPayload_ =
     ReadgroupsetsPatch'
     { _rpQuotaUser = Nothing
     , _rpPrettyPrint = True
     , _rpReadGroupSetId = pRpReadGroupSetId_
     , _rpUserIP = Nothing
+    , _rpPayload = pRpPayload_
     , _rpKey = Nothing
-    , _rpReadGroupSet = pRpReadGroupSet_
     , _rpOAuthToken = Nothing
     , _rpFields = Nothing
     }
@@ -132,17 +133,16 @@ rpReadGroupSetId
 rpUserIP :: Lens' ReadgroupsetsPatch' (Maybe Text)
 rpUserIP = lens _rpUserIP (\ s a -> s{_rpUserIP = a})
 
+-- | Multipart request metadata.
+rpPayload :: Lens' ReadgroupsetsPatch' ReadGroupSet
+rpPayload
+  = lens _rpPayload (\ s a -> s{_rpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 rpKey :: Lens' ReadgroupsetsPatch' (Maybe Key)
 rpKey = lens _rpKey (\ s a -> s{_rpKey = a})
-
--- | Multipart request metadata.
-rpReadGroupSet :: Lens' ReadgroupsetsPatch' ReadGroupSet
-rpReadGroupSet
-  = lens _rpReadGroupSet
-      (\ s a -> s{_rpReadGroupSet = a})
 
 -- | OAuth 2.0 token for the current user.
 rpOAuthToken :: Lens' ReadgroupsetsPatch' (Maybe OAuthToken)
@@ -168,7 +168,7 @@ instance GoogleRequest ReadgroupsetsPatch' where
               _rpKey
               _rpOAuthToken
               (Just AltJSON)
-              _rpReadGroupSet
+              _rpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReadgroupsetsPatchResource)

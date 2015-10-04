@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,9 +37,9 @@ module Network.Google.Resource.Compute.Instances.Insert
     , iiProject
     , iiUserIP
     , iiZone
+    , iiPayload
     , iiKey
     , iiOAuthToken
-    , iiInstance
     , iiFields
     ) where
 
@@ -71,11 +72,11 @@ data InstancesInsert' = InstancesInsert'
     , _iiProject     :: !Text
     , _iiUserIP      :: !(Maybe Text)
     , _iiZone        :: !Text
+    , _iiPayload     :: !Instance
     , _iiKey         :: !(Maybe Key)
     , _iiOAuthToken  :: !(Maybe OAuthToken)
-    , _iiInstance    :: !Instance
     , _iiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesInsert'' with the minimum fields required to make a request.
 --
@@ -91,28 +92,28 @@ data InstancesInsert' = InstancesInsert'
 --
 -- * 'iiZone'
 --
+-- * 'iiPayload'
+--
 -- * 'iiKey'
 --
 -- * 'iiOAuthToken'
---
--- * 'iiInstance'
 --
 -- * 'iiFields'
 instancesInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> Instance -- ^ 'Instance'
+    -> Instance -- ^ 'payload'
     -> InstancesInsert'
-instancesInsert' pIiProject_ pIiZone_ pIiInstance_ =
+instancesInsert' pIiProject_ pIiZone_ pIiPayload_ =
     InstancesInsert'
     { _iiQuotaUser = Nothing
     , _iiPrettyPrint = True
     , _iiProject = pIiProject_
     , _iiUserIP = Nothing
     , _iiZone = pIiZone_
+    , _iiPayload = pIiPayload_
     , _iiKey = Nothing
     , _iiOAuthToken = Nothing
-    , _iiInstance = pIiInstance_
     , _iiFields = Nothing
     }
 
@@ -143,6 +144,11 @@ iiUserIP = lens _iiUserIP (\ s a -> s{_iiUserIP = a})
 iiZone :: Lens' InstancesInsert' Text
 iiZone = lens _iiZone (\ s a -> s{_iiZone = a})
 
+-- | Multipart request metadata.
+iiPayload :: Lens' InstancesInsert' Instance
+iiPayload
+  = lens _iiPayload (\ s a -> s{_iiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -153,11 +159,6 @@ iiKey = lens _iiKey (\ s a -> s{_iiKey = a})
 iiOAuthToken :: Lens' InstancesInsert' (Maybe OAuthToken)
 iiOAuthToken
   = lens _iiOAuthToken (\ s a -> s{_iiOAuthToken = a})
-
--- | Multipart request metadata.
-iiInstance :: Lens' InstancesInsert' Instance
-iiInstance
-  = lens _iiInstance (\ s a -> s{_iiInstance = a})
 
 -- | Selector specifying which fields to include in a partial response.
 iiFields :: Lens' InstancesInsert' (Maybe Text)
@@ -178,7 +179,7 @@ instance GoogleRequest InstancesInsert' where
               _iiKey
               _iiOAuthToken
               (Just AltJSON)
-              _iiInstance
+              _iiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesInsertResource)

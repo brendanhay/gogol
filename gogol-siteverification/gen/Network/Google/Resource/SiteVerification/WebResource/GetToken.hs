@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.SiteVerification.WebResource.GetToken
     , wrgtQuotaUser
     , wrgtPrettyPrint
     , wrgtUserIP
-    , wrgtSiteVerificationWebResourceGettokenRequest
+    , wrgtPayload
     , wrgtKey
     , wrgtOAuthToken
     , wrgtFields
@@ -63,14 +64,14 @@ type WebResourceGetTokenResource =
 --
 -- /See:/ 'webResourceGetToken'' smart constructor.
 data WebResourceGetToken' = WebResourceGetToken'
-    { _wrgtQuotaUser                                  :: !(Maybe Text)
-    , _wrgtPrettyPrint                                :: !Bool
-    , _wrgtUserIP                                     :: !(Maybe Text)
-    , _wrgtSiteVerificationWebResourceGettokenRequest :: !SiteVerificationWebResourceGettokenRequest
-    , _wrgtKey                                        :: !(Maybe Key)
-    , _wrgtOAuthToken                                 :: !(Maybe OAuthToken)
-    , _wrgtFields                                     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _wrgtQuotaUser   :: !(Maybe Text)
+    , _wrgtPrettyPrint :: !Bool
+    , _wrgtUserIP      :: !(Maybe Text)
+    , _wrgtPayload     :: !SiteVerificationWebResourceGettokenRequest
+    , _wrgtKey         :: !(Maybe Key)
+    , _wrgtOAuthToken  :: !(Maybe OAuthToken)
+    , _wrgtFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebResourceGetToken'' with the minimum fields required to make a request.
 --
@@ -82,7 +83,7 @@ data WebResourceGetToken' = WebResourceGetToken'
 --
 -- * 'wrgtUserIP'
 --
--- * 'wrgtSiteVerificationWebResourceGettokenRequest'
+-- * 'wrgtPayload'
 --
 -- * 'wrgtKey'
 --
@@ -90,14 +91,14 @@ data WebResourceGetToken' = WebResourceGetToken'
 --
 -- * 'wrgtFields'
 webResourceGetToken'
-    :: SiteVerificationWebResourceGettokenRequest -- ^ 'SiteVerificationWebResourceGettokenRequest'
+    :: SiteVerificationWebResourceGettokenRequest -- ^ 'payload'
     -> WebResourceGetToken'
-webResourceGetToken' pWrgtSiteVerificationWebResourceGettokenRequest_ =
+webResourceGetToken' pWrgtPayload_ =
     WebResourceGetToken'
     { _wrgtQuotaUser = Nothing
     , _wrgtPrettyPrint = False
     , _wrgtUserIP = Nothing
-    , _wrgtSiteVerificationWebResourceGettokenRequest = pWrgtSiteVerificationWebResourceGettokenRequest_
+    , _wrgtPayload = pWrgtPayload_
     , _wrgtKey = Nothing
     , _wrgtOAuthToken = Nothing
     , _wrgtFields = Nothing
@@ -124,13 +125,9 @@ wrgtUserIP
   = lens _wrgtUserIP (\ s a -> s{_wrgtUserIP = a})
 
 -- | Multipart request metadata.
-wrgtSiteVerificationWebResourceGettokenRequest :: Lens' WebResourceGetToken' SiteVerificationWebResourceGettokenRequest
-wrgtSiteVerificationWebResourceGettokenRequest
-  = lens
-      _wrgtSiteVerificationWebResourceGettokenRequest
-      (\ s a ->
-         s{_wrgtSiteVerificationWebResourceGettokenRequest =
-             a})
+wrgtPayload :: Lens' WebResourceGetToken' SiteVerificationWebResourceGettokenRequest
+wrgtPayload
+  = lens _wrgtPayload (\ s a -> s{_wrgtPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -164,7 +161,7 @@ instance GoogleRequest WebResourceGetToken' where
               _wrgtKey
               _wrgtOAuthToken
               (Just AltJSON)
-              _wrgtSiteVerificationWebResourceGettokenRequest
+              _wrgtPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy WebResourceGetTokenResource)

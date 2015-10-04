@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type AddressesListResource =
          Capture "region" Text :>
            "addresses" :>
              QueryParam "filter" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,7 +83,7 @@ data AddressesList' = AddressesList'
     , _alOAuthToken  :: !(Maybe OAuthToken)
     , _alMaxResults  :: !Word32
     , _alFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddressesList'' with the minimum fields required to make a request.
 --
@@ -204,9 +205,8 @@ instance GoogleRequest AddressesList' where
         type Rs AddressesList' = AddressList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u AddressesList'{..}
-          = go _alFilter (Just _alMaxResults) _alPageToken
-              _alProject
-              _alRegion
+          = go _alProject _alRegion _alFilter _alPageToken
+              (Just _alMaxResults)
               _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP

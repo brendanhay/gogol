@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.Enroll
     , eePrettyPrint
     , eeUserIP
     , eeToken
+    , eePayload
     , eeKey
-    , eeEnterprise
     , eeOAuthToken
     , eeFields
     ) where
@@ -66,11 +67,11 @@ data EnterprisesEnroll' = EnterprisesEnroll'
     , _eePrettyPrint :: !Bool
     , _eeUserIP      :: !(Maybe Text)
     , _eeToken       :: !Text
+    , _eePayload     :: !Enterprise
     , _eeKey         :: !(Maybe Key)
-    , _eeEnterprise  :: !Enterprise
     , _eeOAuthToken  :: !(Maybe OAuthToken)
     , _eeFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EnterprisesEnroll'' with the minimum fields required to make a request.
 --
@@ -84,25 +85,25 @@ data EnterprisesEnroll' = EnterprisesEnroll'
 --
 -- * 'eeToken'
 --
--- * 'eeKey'
+-- * 'eePayload'
 --
--- * 'eeEnterprise'
+-- * 'eeKey'
 --
 -- * 'eeOAuthToken'
 --
 -- * 'eeFields'
 enterprisesEnroll'
     :: Text -- ^ 'token'
-    -> Enterprise -- ^ 'Enterprise'
+    -> Enterprise -- ^ 'payload'
     -> EnterprisesEnroll'
-enterprisesEnroll' pEeToken_ pEeEnterprise_ =
+enterprisesEnroll' pEeToken_ pEePayload_ =
     EnterprisesEnroll'
     { _eeQuotaUser = Nothing
     , _eePrettyPrint = True
     , _eeUserIP = Nothing
     , _eeToken = pEeToken_
+    , _eePayload = pEePayload_
     , _eeKey = Nothing
-    , _eeEnterprise = pEeEnterprise_
     , _eeOAuthToken = Nothing
     , _eeFields = Nothing
     }
@@ -129,16 +130,16 @@ eeUserIP = lens _eeUserIP (\ s a -> s{_eeUserIP = a})
 eeToken :: Lens' EnterprisesEnroll' Text
 eeToken = lens _eeToken (\ s a -> s{_eeToken = a})
 
+-- | Multipart request metadata.
+eePayload :: Lens' EnterprisesEnroll' Enterprise
+eePayload
+  = lens _eePayload (\ s a -> s{_eePayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 eeKey :: Lens' EnterprisesEnroll' (Maybe Key)
 eeKey = lens _eeKey (\ s a -> s{_eeKey = a})
-
--- | Multipart request metadata.
-eeEnterprise :: Lens' EnterprisesEnroll' Enterprise
-eeEnterprise
-  = lens _eeEnterprise (\ s a -> s{_eeEnterprise = a})
 
 -- | OAuth 2.0 token for the current user.
 eeOAuthToken :: Lens' EnterprisesEnroll' (Maybe OAuthToken)
@@ -165,7 +166,7 @@ instance GoogleRequest EnterprisesEnroll' where
               _eeKey
               _eeOAuthToken
               (Just AltJSON)
-              _eeEnterprise
+              _eePayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EnterprisesEnrollResource)

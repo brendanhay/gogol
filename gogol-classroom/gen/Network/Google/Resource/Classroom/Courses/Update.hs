@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -41,9 +42,9 @@ module Network.Google.Resource.Classroom.Courses.Update
     , cuPp
     , cuAccessToken
     , cuUploadType
+    , cuPayload
     , cuBearerToken
     , cuKey
-    , cuCourse
     , cuId
     , cuOAuthToken
     , cuFields
@@ -60,12 +61,12 @@ type CoursesUpdateResource =
        "courses" :>
          Capture "id" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
@@ -90,14 +91,14 @@ data CoursesUpdate' = CoursesUpdate'
     , _cuPp             :: !Bool
     , _cuAccessToken    :: !(Maybe Text)
     , _cuUploadType     :: !(Maybe Text)
+    , _cuPayload        :: !Course
     , _cuBearerToken    :: !(Maybe Text)
     , _cuKey            :: !(Maybe Key)
-    , _cuCourse         :: !Course
     , _cuId             :: !Text
     , _cuOAuthToken     :: !(Maybe OAuthToken)
     , _cuFields         :: !(Maybe Text)
     , _cuCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesUpdate'' with the minimum fields required to make a request.
 --
@@ -117,11 +118,11 @@ data CoursesUpdate' = CoursesUpdate'
 --
 -- * 'cuUploadType'
 --
+-- * 'cuPayload'
+--
 -- * 'cuBearerToken'
 --
 -- * 'cuKey'
---
--- * 'cuCourse'
 --
 -- * 'cuId'
 --
@@ -131,10 +132,10 @@ data CoursesUpdate' = CoursesUpdate'
 --
 -- * 'cuCallback'
 coursesUpdate'
-    :: Course -- ^ 'Course'
+    :: Course -- ^ 'payload'
     -> Text -- ^ 'id'
     -> CoursesUpdate'
-coursesUpdate' pCuCourse_ pCuId_ =
+coursesUpdate' pCuPayload_ pCuId_ =
     CoursesUpdate'
     { _cuXgafv = Nothing
     , _cuQuotaUser = Nothing
@@ -143,9 +144,9 @@ coursesUpdate' pCuCourse_ pCuId_ =
     , _cuPp = True
     , _cuAccessToken = Nothing
     , _cuUploadType = Nothing
+    , _cuPayload = pCuPayload_
     , _cuBearerToken = Nothing
     , _cuKey = Nothing
-    , _cuCourse = pCuCourse_
     , _cuId = pCuId_
     , _cuOAuthToken = Nothing
     , _cuFields = Nothing
@@ -190,6 +191,11 @@ cuUploadType :: Lens' CoursesUpdate' (Maybe Text)
 cuUploadType
   = lens _cuUploadType (\ s a -> s{_cuUploadType = a})
 
+-- | Multipart request metadata.
+cuPayload :: Lens' CoursesUpdate' Course
+cuPayload
+  = lens _cuPayload (\ s a -> s{_cuPayload = a})
+
 -- | OAuth bearer token.
 cuBearerToken :: Lens' CoursesUpdate' (Maybe Text)
 cuBearerToken
@@ -201,10 +207,6 @@ cuBearerToken
 -- token.
 cuKey :: Lens' CoursesUpdate' (Maybe Key)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
-
--- | Multipart request metadata.
-cuCourse :: Lens' CoursesUpdate' Course
-cuCourse = lens _cuCourse (\ s a -> s{_cuCourse = a})
 
 -- | Identifier of the course to update. This identifier can be either the
 -- Classroom-assigned identifier or an
@@ -234,19 +236,18 @@ instance GoogleRequest CoursesUpdate' where
         type Rs CoursesUpdate' = Course
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesUpdate'{..}
-          = go _cuXgafv _cuAccessToken _cuBearerToken
-              _cuCallback
-              (Just _cuPp)
+          = go _cuId _cuXgafv _cuUploadProtocol (Just _cuPp)
+              _cuAccessToken
               _cuUploadType
-              _cuUploadProtocol
-              _cuId
+              _cuBearerToken
+              _cuCallback
               _cuQuotaUser
               (Just _cuPrettyPrint)
               _cuFields
               _cuKey
               _cuOAuthToken
               (Just AltJSON)
-              _cuCourse
+              _cuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesUpdateResource)

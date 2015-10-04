@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.Directory.Schemas.Patch
     , spQuotaUser
     , spPrettyPrint
     , spUserIP
+    , spPayload
     , spCustomerId
-    , spSchema
     , spKey
     , spOAuthToken
     , spSchemaKey
@@ -67,13 +68,13 @@ data SchemasPatch' = SchemasPatch'
     { _spQuotaUser   :: !(Maybe Text)
     , _spPrettyPrint :: !Bool
     , _spUserIP      :: !(Maybe Text)
+    , _spPayload     :: !Schema
     , _spCustomerId  :: !Text
-    , _spSchema      :: !Schema
     , _spKey         :: !(Maybe Key)
     , _spOAuthToken  :: !(Maybe OAuthToken)
     , _spSchemaKey   :: !Text
     , _spFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchemasPatch'' with the minimum fields required to make a request.
 --
@@ -85,9 +86,9 @@ data SchemasPatch' = SchemasPatch'
 --
 -- * 'spUserIP'
 --
--- * 'spCustomerId'
+-- * 'spPayload'
 --
--- * 'spSchema'
+-- * 'spCustomerId'
 --
 -- * 'spKey'
 --
@@ -97,17 +98,17 @@ data SchemasPatch' = SchemasPatch'
 --
 -- * 'spFields'
 schemasPatch'
-    :: Text -- ^ 'customerId'
-    -> Schema -- ^ 'Schema'
+    :: Schema -- ^ 'payload'
+    -> Text -- ^ 'customerId'
     -> Text -- ^ 'schemaKey'
     -> SchemasPatch'
-schemasPatch' pSpCustomerId_ pSpSchema_ pSpSchemaKey_ =
+schemasPatch' pSpPayload_ pSpCustomerId_ pSpSchemaKey_ =
     SchemasPatch'
     { _spQuotaUser = Nothing
     , _spPrettyPrint = True
     , _spUserIP = Nothing
+    , _spPayload = pSpPayload_
     , _spCustomerId = pSpCustomerId_
-    , _spSchema = pSpSchema_
     , _spKey = Nothing
     , _spOAuthToken = Nothing
     , _spSchemaKey = pSpSchemaKey_
@@ -132,14 +133,15 @@ spPrettyPrint
 spUserIP :: Lens' SchemasPatch' (Maybe Text)
 spUserIP = lens _spUserIP (\ s a -> s{_spUserIP = a})
 
+-- | Multipart request metadata.
+spPayload :: Lens' SchemasPatch' Schema
+spPayload
+  = lens _spPayload (\ s a -> s{_spPayload = a})
+
 -- | Immutable id of the Google Apps account
 spCustomerId :: Lens' SchemasPatch' Text
 spCustomerId
   = lens _spCustomerId (\ s a -> s{_spCustomerId = a})
-
--- | Multipart request metadata.
-spSchema :: Lens' SchemasPatch' Schema
-spSchema = lens _spSchema (\ s a -> s{_spSchema = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -176,7 +178,7 @@ instance GoogleRequest SchemasPatch' where
               _spKey
               _spOAuthToken
               (Just AltJSON)
-              _spSchema
+              _spPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SchemasPatchResource)

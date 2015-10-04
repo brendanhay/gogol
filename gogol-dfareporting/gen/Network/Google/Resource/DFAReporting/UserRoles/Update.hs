@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.DFAReporting.UserRoles.Update
     , uruPrettyPrint
     , uruUserIP
     , uruProfileId
+    , uruPayload
     , uruKey
-    , uruUserRole
     , uruOAuthToken
     , uruFields
     ) where
@@ -66,11 +67,11 @@ data UserRolesUpdate' = UserRolesUpdate'
     , _uruPrettyPrint :: !Bool
     , _uruUserIP      :: !(Maybe Text)
     , _uruProfileId   :: !Int64
+    , _uruPayload     :: !UserRole
     , _uruKey         :: !(Maybe Key)
-    , _uruUserRole    :: !UserRole
     , _uruOAuthToken  :: !(Maybe OAuthToken)
     , _uruFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesUpdate'' with the minimum fields required to make a request.
 --
@@ -84,25 +85,25 @@ data UserRolesUpdate' = UserRolesUpdate'
 --
 -- * 'uruProfileId'
 --
--- * 'uruKey'
+-- * 'uruPayload'
 --
--- * 'uruUserRole'
+-- * 'uruKey'
 --
 -- * 'uruOAuthToken'
 --
 -- * 'uruFields'
 userRolesUpdate'
     :: Int64 -- ^ 'profileId'
-    -> UserRole -- ^ 'UserRole'
+    -> UserRole -- ^ 'payload'
     -> UserRolesUpdate'
-userRolesUpdate' pUruProfileId_ pUruUserRole_ =
+userRolesUpdate' pUruProfileId_ pUruPayload_ =
     UserRolesUpdate'
     { _uruQuotaUser = Nothing
     , _uruPrettyPrint = True
     , _uruUserIP = Nothing
     , _uruProfileId = pUruProfileId_
+    , _uruPayload = pUruPayload_
     , _uruKey = Nothing
-    , _uruUserRole = pUruUserRole_
     , _uruOAuthToken = Nothing
     , _uruFields = Nothing
     }
@@ -131,16 +132,16 @@ uruProfileId :: Lens' UserRolesUpdate' Int64
 uruProfileId
   = lens _uruProfileId (\ s a -> s{_uruProfileId = a})
 
+-- | Multipart request metadata.
+uruPayload :: Lens' UserRolesUpdate' UserRole
+uruPayload
+  = lens _uruPayload (\ s a -> s{_uruPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 uruKey :: Lens' UserRolesUpdate' (Maybe Key)
 uruKey = lens _uruKey (\ s a -> s{_uruKey = a})
-
--- | Multipart request metadata.
-uruUserRole :: Lens' UserRolesUpdate' UserRole
-uruUserRole
-  = lens _uruUserRole (\ s a -> s{_uruUserRole = a})
 
 -- | OAuth 2.0 token for the current user.
 uruOAuthToken :: Lens' UserRolesUpdate' (Maybe OAuthToken)
@@ -168,7 +169,7 @@ instance GoogleRequest UserRolesUpdate' where
               _uruKey
               _uruOAuthToken
               (Just AltJSON)
-              _uruUserRole
+              _uruPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UserRolesUpdateResource)

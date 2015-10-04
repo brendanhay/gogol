@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -76,53 +77,55 @@ import           Network.Google.Prelude
 type CompaniesListResource =
      "v2" :>
        "companies" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "address" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "companyName" Text :>
-                     QueryParams "gpsMotivations" Text :>
-                       QueryParams "industries" Text :>
-                         QueryParams "languageCodes" Text :>
-                           QueryParam "maxMonthlyBudget.currencyCode" Text :>
-                             QueryParam "maxMonthlyBudget.nanos" Int32 :>
-                               QueryParam "maxMonthlyBudget.units" Int64 :>
-                                 QueryParam "minMonthlyBudget.currencyCode" Text
+         QueryParams "languageCodes" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "maxMonthlyBudget.units" Int64 :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "orderBy" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "companyName" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "address" Text :>
+                             QueryParam "minMonthlyBudget.nanos" Int32 :>
+                               QueryParams "industries" Text :>
+                                 QueryParam "requestMetadata.partnersSessionId"
+                                   Text
                                    :>
-                                   QueryParam "minMonthlyBudget.nanos" Int32 :>
-                                     QueryParam "minMonthlyBudget.units" Int64
+                                   QueryParam "bearer_token" Text :>
+                                     QueryParam "maxMonthlyBudget.nanos" Int32
                                        :>
-                                       QueryParam "orderBy" Text :>
-                                         QueryParam "pageSize" Int32 :>
-                                           QueryParam "pageToken" Text :>
-                                             QueryParam "pp" Bool :>
-                                               QueryParams
-                                                 "requestMetadata.experimentIds"
+                                       QueryParam "requestMetadata.locale" Text
+                                         :>
+                                         QueryParam "view" Text :>
+                                           QueryParams
+                                             "requestMetadata.experimentIds"
+                                             Text
+                                             :>
+                                             QueryParam
+                                               "requestMetadata.userOverrides.ipAddress"
+                                               Text
+                                               :>
+                                               QueryParam
+                                                 "maxMonthlyBudget.currencyCode"
                                                  Text
                                                  :>
-                                                 QueryParam
-                                                   "requestMetadata.locale"
-                                                   Text
-                                                   :>
-                                                   QueryParam
-                                                     "requestMetadata.partnersSessionId"
-                                                     Text
+                                                 QueryParam "websiteUrl" Text :>
+                                                   QueryParam "pageToken" Text
                                                      :>
                                                      QueryParam
-                                                       "requestMetadata.trafficSource.trafficSourceId"
+                                                       "requestMetadata.trafficSource.trafficSubId"
                                                        Text
                                                        :>
-                                                       QueryParam
-                                                         "requestMetadata.trafficSource.trafficSubId"
+                                                       QueryParams
+                                                         "gpsMotivations"
                                                          Text
                                                          :>
-                                                         QueryParam
-                                                           "requestMetadata.userOverrides.ipAddress"
-                                                           Text
+                                                         QueryParam "pageSize"
+                                                           Int32
                                                            :>
                                                            QueryParam
-                                                             "requestMetadata.userOverrides.userId"
+                                                             "minMonthlyBudget.currencyCode"
                                                              Text
                                                              :>
                                                              QueryParams
@@ -130,19 +133,19 @@ type CompaniesListResource =
                                                                Text
                                                                :>
                                                                QueryParam
-                                                                 "uploadType"
+                                                                 "requestMetadata.userOverrides.userId"
                                                                  Text
                                                                  :>
                                                                  QueryParam
-                                                                   "upload_protocol"
-                                                                   Text
+                                                                   "minMonthlyBudget.units"
+                                                                   Int64
                                                                    :>
                                                                    QueryParam
-                                                                     "view"
+                                                                     "requestMetadata.trafficSource.trafficSourceId"
                                                                      Text
                                                                      :>
                                                                      QueryParam
-                                                                       "websiteUrl"
+                                                                       "callback"
                                                                        Text
                                                                        :>
                                                                        QueryParam
@@ -177,7 +180,7 @@ type CompaniesListResource =
 --
 -- /See:/ 'companiesList'' smart constructor.
 data CompaniesList' = CompaniesList'
-    { _clLanguageCodes                               :: !(Maybe Text)
+    { _clLanguageCodes                               :: !(Maybe [Text])
     , _clXgafv                                       :: !(Maybe Text)
     , _clMaxMonthlyBudgetUnits                       :: !(Maybe Int64)
     , _clQuotaUser                                   :: !(Maybe Text)
@@ -190,30 +193,30 @@ data CompaniesList' = CompaniesList'
     , _clUploadType                                  :: !(Maybe Text)
     , _clAddress                                     :: !(Maybe Text)
     , _clMinMonthlyBudgetNanos                       :: !(Maybe Int32)
-    , _clIndustries                                  :: !(Maybe Text)
+    , _clIndustries                                  :: !(Maybe [Text])
     , _clRequestMetadataPartnersSessionId            :: !(Maybe Text)
     , _clBearerToken                                 :: !(Maybe Text)
     , _clKey                                         :: !(Maybe Key)
     , _clMaxMonthlyBudgetNanos                       :: !(Maybe Int32)
     , _clRequestMetadataLocale                       :: !(Maybe Text)
     , _clView                                        :: !(Maybe Text)
-    , _clRequestMetadataExperimentIds                :: !(Maybe Text)
+    , _clRequestMetadataExperimentIds                :: !(Maybe [Text])
     , _clRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
     , _clMaxMonthlyBudgetCurrencyCode                :: !(Maybe Text)
     , _clWebsiteURL                                  :: !(Maybe Text)
     , _clPageToken                                   :: !(Maybe Text)
     , _clRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
     , _clOAuthToken                                  :: !(Maybe OAuthToken)
-    , _clGpsMotivations                              :: !(Maybe Text)
+    , _clGpsMotivations                              :: !(Maybe [Text])
     , _clPageSize                                    :: !(Maybe Int32)
     , _clMinMonthlyBudgetCurrencyCode                :: !(Maybe Text)
-    , _clServices                                    :: !(Maybe Text)
+    , _clServices                                    :: !(Maybe [Text])
     , _clRequestMetadataUserOverridesUserId          :: !(Maybe Text)
     , _clMinMonthlyBudgetUnits                       :: !(Maybe Int64)
     , _clRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _clFields                                      :: !(Maybe Text)
     , _clCallback                                    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CompaniesList'' with the minimum fields required to make a request.
 --
@@ -335,10 +338,12 @@ companiesList' =
 -- | List of language codes that company can support. Only primary language
 -- subtags are accepted as defined by BCP 47 (IETF BCP 47, \"Tags for
 -- Identifying Languages\").
-clLanguageCodes :: Lens' CompaniesList' (Maybe Text)
+clLanguageCodes :: Lens' CompaniesList' [Text]
 clLanguageCodes
   = lens _clLanguageCodes
       (\ s a -> s{_clLanguageCodes = a})
+      . _Default
+      . _Coerce
 
 -- | V1 error format.
 clXgafv :: Lens' CompaniesList' (Maybe Text)
@@ -417,9 +422,11 @@ clMinMonthlyBudgetNanos
       (\ s a -> s{_clMinMonthlyBudgetNanos = a})
 
 -- | List of industries the company can help with.
-clIndustries :: Lens' CompaniesList' (Maybe Text)
+clIndustries :: Lens' CompaniesList' [Text]
 clIndustries
   = lens _clIndustries (\ s a -> s{_clIndustries = a})
+      . _Default
+      . _Coerce
 
 -- | Google Partners session ID.
 clRequestMetadataPartnersSessionId :: Lens' CompaniesList' (Maybe Text)
@@ -462,10 +469,12 @@ clView :: Lens' CompaniesList' (Maybe Text)
 clView = lens _clView (\ s a -> s{_clView = a})
 
 -- | Experiment IDs the current request belongs to.
-clRequestMetadataExperimentIds :: Lens' CompaniesList' (Maybe Text)
+clRequestMetadataExperimentIds :: Lens' CompaniesList' [Text]
 clRequestMetadataExperimentIds
   = lens _clRequestMetadataExperimentIds
       (\ s a -> s{_clRequestMetadataExperimentIds = a})
+      . _Default
+      . _Coerce
 
 -- | IP address to use instead of the user\'s geo-located IP address.
 clRequestMetadataUserOverridesIPAddress :: Lens' CompaniesList' (Maybe Text)
@@ -508,10 +517,12 @@ clOAuthToken
   = lens _clOAuthToken (\ s a -> s{_clOAuthToken = a})
 
 -- | List of reasons for using Google Partner Search to get companies.
-clGpsMotivations :: Lens' CompaniesList' (Maybe Text)
+clGpsMotivations :: Lens' CompaniesList' [Text]
 clGpsMotivations
   = lens _clGpsMotivations
       (\ s a -> s{_clGpsMotivations = a})
+      . _Default
+      . _Coerce
 
 -- | Requested page size. Server may return fewer companies than requested.
 -- If unspecified, server picks an appropriate default.
@@ -526,9 +537,11 @@ clMinMonthlyBudgetCurrencyCode
       (\ s a -> s{_clMinMonthlyBudgetCurrencyCode = a})
 
 -- | List of services the company can help with.
-clServices :: Lens' CompaniesList' (Maybe Text)
+clServices :: Lens' CompaniesList' [Text]
 clServices
-  = lens _clServices (\ s a -> s{_clServices = a})
+  = lens _clServices (\ s a -> s{_clServices = a}) .
+      _Default
+      . _Coerce
 
 -- | Logged-in user ID to impersonate instead of the user\'s ID.
 clRequestMetadataUserOverridesUserId :: Lens' CompaniesList' (Maybe Text)
@@ -570,35 +583,36 @@ instance GoogleRequest CompaniesList' where
         type Rs CompaniesList' = ListCompaniesResponse
         request = requestWithRoute defReq partnersURL
         requestWithRoute r u CompaniesList'{..}
-          = go _clXgafv _clAccessToken _clAddress
-              _clBearerToken
-              _clCallback
-              _clCompanyName
-              _clGpsMotivations
-              _clIndustries
-              _clLanguageCodes
-              _clMaxMonthlyBudgetCurrencyCode
-              _clMaxMonthlyBudgetNanos
+          = go (_clLanguageCodes ^. _Default) _clXgafv
               _clMaxMonthlyBudgetUnits
-              _clMinMonthlyBudgetCurrencyCode
-              _clMinMonthlyBudgetNanos
-              _clMinMonthlyBudgetUnits
-              _clOrderBy
-              _clPageSize
-              _clPageToken
-              (Just _clPp)
-              _clRequestMetadataExperimentIds
-              _clRequestMetadataLocale
-              _clRequestMetadataPartnersSessionId
-              _clRequestMetadataTrafficSourceTrafficSourceId
-              _clRequestMetadataTrafficSourceTrafficSubId
-              _clRequestMetadataUserOverridesIPAddress
-              _clRequestMetadataUserOverridesUserId
-              _clServices
-              _clUploadType
               _clUploadProtocol
+              _clOrderBy
+              (Just _clPp)
+              _clCompanyName
+              _clAccessToken
+              _clUploadType
+              _clAddress
+              _clMinMonthlyBudgetNanos
+              (_clIndustries ^. _Default)
+              _clRequestMetadataPartnersSessionId
+              _clBearerToken
+              _clMaxMonthlyBudgetNanos
+              _clRequestMetadataLocale
               _clView
+              (_clRequestMetadataExperimentIds ^. _Default)
+              _clRequestMetadataUserOverridesIPAddress
+              _clMaxMonthlyBudgetCurrencyCode
               _clWebsiteURL
+              _clPageToken
+              _clRequestMetadataTrafficSourceTrafficSubId
+              (_clGpsMotivations ^. _Default)
+              _clPageSize
+              _clMinMonthlyBudgetCurrencyCode
+              (_clServices ^. _Default)
+              _clRequestMetadataUserOverridesUserId
+              _clMinMonthlyBudgetUnits
+              _clRequestMetadataTrafficSourceTrafficSourceId
+              _clCallback
               _clQuotaUser
               (Just _clPrettyPrint)
               _clFields

@@ -27,7 +27,7 @@ data Application = Application
     , _aKind           :: !Text
     , _aName           :: !(Maybe Text)
     , _aId             :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
 --
@@ -106,7 +106,7 @@ instance ToJSON Application where
 data ApplicationTransferParam = ApplicationTransferParam
     { _atpValue :: !(Maybe [Text])
     , _atpKey   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationTransferParam' with the minimum fields required to make a request.
 --
@@ -156,7 +156,7 @@ data ApplicationsListResponse = ApplicationsListResponse
     , _alrNextPageToken :: !(Maybe Text)
     , _alrKind          :: !Text
     , _alrApplications  :: !(Maybe [Application])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsListResponse' with the minimum fields required to make a request.
 --
@@ -233,7 +233,7 @@ data DataTransfer = DataTransfer
     , _dtApplicationDataTransfers  :: !(Maybe [ApplicationDataTransfer])
     , _dtId                        :: !(Maybe Text)
     , _dtOverallTransferStatusCode :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataTransfer' with the minimum fields required to make a request.
 --
@@ -353,7 +353,7 @@ data DataTransfersListResponse = DataTransfersListResponse
     , _dtlrNextPageToken :: !(Maybe Text)
     , _dtlrKind          :: !Text
     , _dtlrDataTransfers :: !(Maybe [DataTransfer])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataTransfersListResponse' with the minimum fields required to make a request.
 --
@@ -424,7 +424,7 @@ data ApplicationDataTransfer = ApplicationDataTransfer
     { _adtApplicationTransferParams :: !(Maybe [ApplicationTransferParam])
     , _adtApplicationId             :: !(Maybe Int64)
     , _adtApplicationTransferStatus :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationDataTransfer' with the minimum fields required to make a request.
 --

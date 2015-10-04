@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,10 +33,10 @@ module Network.Google.Resource.SQL.Instances.Export
 
     -- * Request Lenses
     , ieQuotaUser
-    , ieInstancesExportRequest
     , iePrettyPrint
     , ieProject
     , ieUserIP
+    , iePayload
     , ieKey
     , ieOAuthToken
     , ieFields
@@ -68,16 +69,16 @@ type InstancesExportResource =
 --
 -- /See:/ 'instancesExport'' smart constructor.
 data InstancesExport' = InstancesExport'
-    { _ieQuotaUser              :: !(Maybe Text)
-    , _ieInstancesExportRequest :: !InstancesExportRequest
-    , _iePrettyPrint            :: !Bool
-    , _ieProject                :: !Text
-    , _ieUserIP                 :: !(Maybe Text)
-    , _ieKey                    :: !(Maybe Key)
-    , _ieOAuthToken             :: !(Maybe OAuthToken)
-    , _ieFields                 :: !(Maybe Text)
-    , _ieInstance               :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ieQuotaUser   :: !(Maybe Text)
+    , _iePrettyPrint :: !Bool
+    , _ieProject     :: !Text
+    , _ieUserIP      :: !(Maybe Text)
+    , _iePayload     :: !InstancesExportRequest
+    , _ieKey         :: !(Maybe Key)
+    , _ieOAuthToken  :: !(Maybe OAuthToken)
+    , _ieFields      :: !(Maybe Text)
+    , _ieInstance    :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesExport'' with the minimum fields required to make a request.
 --
@@ -85,13 +86,13 @@ data InstancesExport' = InstancesExport'
 --
 -- * 'ieQuotaUser'
 --
--- * 'ieInstancesExportRequest'
---
 -- * 'iePrettyPrint'
 --
 -- * 'ieProject'
 --
 -- * 'ieUserIP'
+--
+-- * 'iePayload'
 --
 -- * 'ieKey'
 --
@@ -101,17 +102,17 @@ data InstancesExport' = InstancesExport'
 --
 -- * 'ieInstance'
 instancesExport'
-    :: InstancesExportRequest -- ^ 'InstancesExportRequest'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'project'
+    -> InstancesExportRequest -- ^ 'payload'
     -> Text -- ^ 'instance'
     -> InstancesExport'
-instancesExport' pIeInstancesExportRequest_ pIeProject_ pIeInstance_ =
+instancesExport' pIeProject_ pIePayload_ pIeInstance_ =
     InstancesExport'
     { _ieQuotaUser = Nothing
-    , _ieInstancesExportRequest = pIeInstancesExportRequest_
     , _iePrettyPrint = True
     , _ieProject = pIeProject_
     , _ieUserIP = Nothing
+    , _iePayload = pIePayload_
     , _ieKey = Nothing
     , _ieOAuthToken = Nothing
     , _ieFields = Nothing
@@ -124,12 +125,6 @@ instancesExport' pIeInstancesExportRequest_ pIeProject_ pIeInstance_ =
 ieQuotaUser :: Lens' InstancesExport' (Maybe Text)
 ieQuotaUser
   = lens _ieQuotaUser (\ s a -> s{_ieQuotaUser = a})
-
--- | Multipart request metadata.
-ieInstancesExportRequest :: Lens' InstancesExport' InstancesExportRequest
-ieInstancesExportRequest
-  = lens _ieInstancesExportRequest
-      (\ s a -> s{_ieInstancesExportRequest = a})
 
 -- | Returns response with indentations and line breaks.
 iePrettyPrint :: Lens' InstancesExport' Bool
@@ -146,6 +141,11 @@ ieProject
 -- want to enforce per-user limits.
 ieUserIP :: Lens' InstancesExport' (Maybe Text)
 ieUserIP = lens _ieUserIP (\ s a -> s{_ieUserIP = a})
+
+-- | Multipart request metadata.
+iePayload :: Lens' InstancesExport' InstancesExportRequest
+iePayload
+  = lens _iePayload (\ s a -> s{_iePayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -182,7 +182,7 @@ instance GoogleRequest InstancesExport' where
               _ieKey
               _ieOAuthToken
               (Just AltJSON)
-              _ieInstancesExportRequest
+              _iePayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesExportResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,11 +35,11 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Update
     , oacuPrettyPrint
     , oacuUserIP
     , oacuBucket
+    , oacuPayload
     , oacuKey
     , oacuObject
     , oacuOAuthToken
     , oacuEntity
-    , oacuObjectAccessControl
     , oacuGeneration
     , oacuFields
     ) where
@@ -70,18 +71,18 @@ type ObjectAccessControlsUpdateResource =
 --
 -- /See:/ 'objectAccessControlsUpdate'' smart constructor.
 data ObjectAccessControlsUpdate' = ObjectAccessControlsUpdate'
-    { _oacuQuotaUser           :: !(Maybe Text)
-    , _oacuPrettyPrint         :: !Bool
-    , _oacuUserIP              :: !(Maybe Text)
-    , _oacuBucket              :: !Text
-    , _oacuKey                 :: !(Maybe Key)
-    , _oacuObject              :: !Text
-    , _oacuOAuthToken          :: !(Maybe OAuthToken)
-    , _oacuEntity              :: !Text
-    , _oacuObjectAccessControl :: !ObjectAccessControl
-    , _oacuGeneration          :: !(Maybe Word64)
-    , _oacuFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _oacuQuotaUser   :: !(Maybe Text)
+    , _oacuPrettyPrint :: !Bool
+    , _oacuUserIP      :: !(Maybe Text)
+    , _oacuBucket      :: !Text
+    , _oacuPayload     :: !ObjectAccessControl
+    , _oacuKey         :: !(Maybe Key)
+    , _oacuObject      :: !Text
+    , _oacuOAuthToken  :: !(Maybe OAuthToken)
+    , _oacuEntity      :: !Text
+    , _oacuGeneration  :: !(Maybe Word64)
+    , _oacuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsUpdate'' with the minimum fields required to make a request.
 --
@@ -95,6 +96,8 @@ data ObjectAccessControlsUpdate' = ObjectAccessControlsUpdate'
 --
 -- * 'oacuBucket'
 --
+-- * 'oacuPayload'
+--
 -- * 'oacuKey'
 --
 -- * 'oacuObject'
@@ -103,28 +106,26 @@ data ObjectAccessControlsUpdate' = ObjectAccessControlsUpdate'
 --
 -- * 'oacuEntity'
 --
--- * 'oacuObjectAccessControl'
---
 -- * 'oacuGeneration'
 --
 -- * 'oacuFields'
 objectAccessControlsUpdate'
     :: Text -- ^ 'bucket'
+    -> ObjectAccessControl -- ^ 'payload'
     -> Text -- ^ 'object'
     -> Text -- ^ 'entity'
-    -> ObjectAccessControl -- ^ 'ObjectAccessControl'
     -> ObjectAccessControlsUpdate'
-objectAccessControlsUpdate' pOacuBucket_ pOacuObject_ pOacuEntity_ pOacuObjectAccessControl_ =
+objectAccessControlsUpdate' pOacuBucket_ pOacuPayload_ pOacuObject_ pOacuEntity_ =
     ObjectAccessControlsUpdate'
     { _oacuQuotaUser = Nothing
     , _oacuPrettyPrint = True
     , _oacuUserIP = Nothing
     , _oacuBucket = pOacuBucket_
+    , _oacuPayload = pOacuPayload_
     , _oacuKey = Nothing
     , _oacuObject = pOacuObject_
     , _oacuOAuthToken = Nothing
     , _oacuEntity = pOacuEntity_
-    , _oacuObjectAccessControl = pOacuObjectAccessControl_
     , _oacuGeneration = Nothing
     , _oacuFields = Nothing
     }
@@ -154,6 +155,11 @@ oacuBucket :: Lens' ObjectAccessControlsUpdate' Text
 oacuBucket
   = lens _oacuBucket (\ s a -> s{_oacuBucket = a})
 
+-- | Multipart request metadata.
+oacuPayload :: Lens' ObjectAccessControlsUpdate' ObjectAccessControl
+oacuPayload
+  = lens _oacuPayload (\ s a -> s{_oacuPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -178,12 +184,6 @@ oacuEntity :: Lens' ObjectAccessControlsUpdate' Text
 oacuEntity
   = lens _oacuEntity (\ s a -> s{_oacuEntity = a})
 
--- | Multipart request metadata.
-oacuObjectAccessControl :: Lens' ObjectAccessControlsUpdate' ObjectAccessControl
-oacuObjectAccessControl
-  = lens _oacuObjectAccessControl
-      (\ s a -> s{_oacuObjectAccessControl = a})
-
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
 oacuGeneration :: Lens' ObjectAccessControlsUpdate' (Maybe Word64)
@@ -206,8 +206,8 @@ instance GoogleRequest ObjectAccessControlsUpdate'
              ObjectAccessControl
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectAccessControlsUpdate'{..}
-          = go _oacuGeneration _oacuBucket _oacuObject
-              _oacuEntity
+          = go _oacuBucket _oacuObject _oacuEntity
+              _oacuGeneration
               _oacuQuotaUser
               (Just _oacuPrettyPrint)
               _oacuUserIP
@@ -215,7 +215,7 @@ instance GoogleRequest ObjectAccessControlsUpdate'
               _oacuKey
               _oacuOAuthToken
               (Just AltJSON)
-              _oacuObjectAccessControl
+              _oacuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ObjectAccessControlsUpdateResource)

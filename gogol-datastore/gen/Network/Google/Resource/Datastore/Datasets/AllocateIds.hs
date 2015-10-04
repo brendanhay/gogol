@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.Datastore.Datasets.AllocateIds
     -- * Request Lenses
     , daiQuotaUser
     , daiPrettyPrint
-    , daiAllocateIdsRequest
     , daiUserIP
+    , daiPayload
     , daiKey
     , daiDatasetId
     , daiOAuthToken
@@ -64,15 +65,15 @@ type DatasetsAllocateIdsResource =
 --
 -- /See:/ 'datasetsAllocateIds'' smart constructor.
 data DatasetsAllocateIds' = DatasetsAllocateIds'
-    { _daiQuotaUser          :: !(Maybe Text)
-    , _daiPrettyPrint        :: !Bool
-    , _daiAllocateIdsRequest :: !AllocateIdsRequest
-    , _daiUserIP             :: !(Maybe Text)
-    , _daiKey                :: !(Maybe Key)
-    , _daiDatasetId          :: !Text
-    , _daiOAuthToken         :: !(Maybe OAuthToken)
-    , _daiFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _daiQuotaUser   :: !(Maybe Text)
+    , _daiPrettyPrint :: !Bool
+    , _daiUserIP      :: !(Maybe Text)
+    , _daiPayload     :: !AllocateIdsRequest
+    , _daiKey         :: !(Maybe Key)
+    , _daiDatasetId   :: !Text
+    , _daiOAuthToken  :: !(Maybe OAuthToken)
+    , _daiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsAllocateIds'' with the minimum fields required to make a request.
 --
@@ -82,9 +83,9 @@ data DatasetsAllocateIds' = DatasetsAllocateIds'
 --
 -- * 'daiPrettyPrint'
 --
--- * 'daiAllocateIdsRequest'
---
 -- * 'daiUserIP'
+--
+-- * 'daiPayload'
 --
 -- * 'daiKey'
 --
@@ -94,15 +95,15 @@ data DatasetsAllocateIds' = DatasetsAllocateIds'
 --
 -- * 'daiFields'
 datasetsAllocateIds'
-    :: AllocateIdsRequest -- ^ 'AllocateIdsRequest'
+    :: AllocateIdsRequest -- ^ 'payload'
     -> Text -- ^ 'datasetId'
     -> DatasetsAllocateIds'
-datasetsAllocateIds' pDaiAllocateIdsRequest_ pDaiDatasetId_ =
+datasetsAllocateIds' pDaiPayload_ pDaiDatasetId_ =
     DatasetsAllocateIds'
     { _daiQuotaUser = Nothing
     , _daiPrettyPrint = True
-    , _daiAllocateIdsRequest = pDaiAllocateIdsRequest_
     , _daiUserIP = Nothing
+    , _daiPayload = pDaiPayload_
     , _daiKey = Nothing
     , _daiDatasetId = pDaiDatasetId_
     , _daiOAuthToken = Nothing
@@ -122,17 +123,16 @@ daiPrettyPrint
   = lens _daiPrettyPrint
       (\ s a -> s{_daiPrettyPrint = a})
 
--- | Multipart request metadata.
-daiAllocateIdsRequest :: Lens' DatasetsAllocateIds' AllocateIdsRequest
-daiAllocateIdsRequest
-  = lens _daiAllocateIdsRequest
-      (\ s a -> s{_daiAllocateIdsRequest = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 daiUserIP :: Lens' DatasetsAllocateIds' (Maybe Text)
 daiUserIP
   = lens _daiUserIP (\ s a -> s{_daiUserIP = a})
+
+-- | Multipart request metadata.
+daiPayload :: Lens' DatasetsAllocateIds' AllocateIdsRequest
+daiPayload
+  = lens _daiPayload (\ s a -> s{_daiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -171,7 +171,7 @@ instance GoogleRequest DatasetsAllocateIds' where
               _daiKey
               _daiOAuthToken
               (Just AltPROTO)
-              _daiAllocateIdsRequest
+              _daiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsAllocateIdsResource)

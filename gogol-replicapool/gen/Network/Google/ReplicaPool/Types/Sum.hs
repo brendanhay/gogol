@@ -17,39 +17,8 @@ module Network.Google.ReplicaPool.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | The action to perform when an instance becomes unhealthy. Possible
--- values are RECREATE or REBOOT. RECREATE replaces an unhealthy instance
--- with a new instance that is based on the instance template for this
--- managed instance group. REBOOT performs a soft reboot on an instance. If
--- the instance cannot reboot, the instance performs a hard restart.
-data ReplicaPoolAutoHealingPolicyActionType
-    = Reboot
-      -- ^ @REBOOT@
-    | Recreate
-      -- ^ @RECREATE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ReplicaPoolAutoHealingPolicyActionType
-
-instance FromText ReplicaPoolAutoHealingPolicyActionType where
-    fromText = \case
-        "REBOOT" -> Just Reboot
-        "RECREATE" -> Just Recreate
-        _ -> Nothing
-
-instance ToText ReplicaPoolAutoHealingPolicyActionType where
-    toText = \case
-        Reboot -> "REBOOT"
-        Recreate -> "RECREATE"
-
-instance FromJSON ReplicaPoolAutoHealingPolicyActionType where
-    parseJSON = parseJSONText "ReplicaPoolAutoHealingPolicyActionType"
-
-instance ToJSON ReplicaPoolAutoHealingPolicyActionType where
-    toJSON = toJSONText
-
 -- | [Output Only] Status of the operation.
-data OperationStatus
+data Status
     = Done
       -- ^ @DONE@
     | Pending
@@ -58,29 +27,29 @@ data OperationStatus
       -- ^ @RUNNING@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable OperationStatus
+instance Hashable Status
 
-instance FromText OperationStatus where
+instance FromText Status where
     fromText = \case
         "DONE" -> Just Done
         "PENDING" -> Just Pending
         "RUNNING" -> Just Running
         _ -> Nothing
 
-instance ToText OperationStatus where
+instance ToText Status where
     toText = \case
         Done -> "DONE"
         Pending -> "PENDING"
         Running -> "RUNNING"
 
-instance FromJSON OperationStatus where
-    parseJSON = parseJSONText "OperationStatus"
+instance FromJSON Status where
+    parseJSON = parseJSONText "Status"
 
-instance ToJSON OperationStatus where
+instance ToJSON Status where
     toJSON = toJSONText
 
 -- | [Output only] The warning type identifier for this warning.
-data OperationWarningsCode
+data WarningsItemCode
     = DeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | DiskSizeLargerThanImageSize
@@ -109,9 +78,9 @@ data OperationWarningsCode
       -- ^ @UNREACHABLE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable OperationWarningsCode
+instance Hashable WarningsItemCode
 
-instance FromText OperationWarningsCode where
+instance FromText WarningsItemCode where
     fromText = \case
         "DEPRECATED_RESOURCE_USED" -> Just DeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just DiskSizeLargerThanImageSize
@@ -128,7 +97,7 @@ instance FromText OperationWarningsCode where
         "UNREACHABLE" -> Just Unreachable
         _ -> Nothing
 
-instance ToText OperationWarningsCode where
+instance ToText WarningsItemCode where
     toText = \case
         DeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         DiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -144,8 +113,39 @@ instance ToText OperationWarningsCode where
         SingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         Unreachable -> "UNREACHABLE"
 
-instance FromJSON OperationWarningsCode where
-    parseJSON = parseJSONText "OperationWarningsCode"
+instance FromJSON WarningsItemCode where
+    parseJSON = parseJSONText "WarningsItemCode"
 
-instance ToJSON OperationWarningsCode where
+instance ToJSON WarningsItemCode where
+    toJSON = toJSONText
+
+-- | The action to perform when an instance becomes unhealthy. Possible
+-- values are RECREATE or REBOOT. RECREATE replaces an unhealthy instance
+-- with a new instance that is based on the instance template for this
+-- managed instance group. REBOOT performs a soft reboot on an instance. If
+-- the instance cannot reboot, the instance performs a hard restart.
+data ActionType
+    = Reboot
+      -- ^ @REBOOT@
+    | Recreate
+      -- ^ @RECREATE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ActionType
+
+instance FromText ActionType where
+    fromText = \case
+        "REBOOT" -> Just Reboot
+        "RECREATE" -> Just Recreate
+        _ -> Nothing
+
+instance ToText ActionType where
+    toText = \case
+        Reboot -> "REBOOT"
+        Recreate -> "RECREATE"
+
+instance FromJSON ActionType where
+    parseJSON = parseJSONText "ActionType"
+
+instance ToJSON ActionType where
     toJSON = toJSONText

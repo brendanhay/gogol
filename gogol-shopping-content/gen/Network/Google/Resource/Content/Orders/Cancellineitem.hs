@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.Content.Orders.Cancellineitem
     , oMerchantId
     , oPrettyPrint
     , oUserIP
-    , oOrdersCancelLineItemRequest
+    , oPayload
     , oKey
     , oOAuthToken
     , oOrderId
@@ -65,16 +66,16 @@ type OrdersCancellineitemResource =
 --
 -- /See:/ 'ordersCancellineitem'' smart constructor.
 data OrdersCancellineitem' = OrdersCancellineitem'
-    { _oQuotaUser                   :: !(Maybe Text)
-    , _oMerchantId                  :: !Word64
-    , _oPrettyPrint                 :: !Bool
-    , _oUserIP                      :: !(Maybe Text)
-    , _oOrdersCancelLineItemRequest :: !OrdersCancelLineItemRequest
-    , _oKey                         :: !(Maybe Key)
-    , _oOAuthToken                  :: !(Maybe OAuthToken)
-    , _oOrderId                     :: !Text
-    , _oFields                      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _oQuotaUser   :: !(Maybe Text)
+    , _oMerchantId  :: !Word64
+    , _oPrettyPrint :: !Bool
+    , _oUserIP      :: !(Maybe Text)
+    , _oPayload     :: !OrdersCancelLineItemRequest
+    , _oKey         :: !(Maybe Key)
+    , _oOAuthToken  :: !(Maybe OAuthToken)
+    , _oOrderId     :: !Text
+    , _oFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCancellineitem'' with the minimum fields required to make a request.
 --
@@ -88,7 +89,7 @@ data OrdersCancellineitem' = OrdersCancellineitem'
 --
 -- * 'oUserIP'
 --
--- * 'oOrdersCancelLineItemRequest'
+-- * 'oPayload'
 --
 -- * 'oKey'
 --
@@ -99,16 +100,16 @@ data OrdersCancellineitem' = OrdersCancellineitem'
 -- * 'oFields'
 ordersCancellineitem'
     :: Word64 -- ^ 'merchantId'
-    -> OrdersCancelLineItemRequest -- ^ 'OrdersCancelLineItemRequest'
+    -> OrdersCancelLineItemRequest -- ^ 'payload'
     -> Text -- ^ 'orderId'
     -> OrdersCancellineitem'
-ordersCancellineitem' pOMerchantId_ pOOrdersCancelLineItemRequest_ pOOrderId_ =
+ordersCancellineitem' pOMerchantId_ pOPayload_ pOOrderId_ =
     OrdersCancellineitem'
     { _oQuotaUser = Nothing
     , _oMerchantId = pOMerchantId_
     , _oPrettyPrint = True
     , _oUserIP = Nothing
-    , _oOrdersCancelLineItemRequest = pOOrdersCancelLineItemRequest_
+    , _oPayload = pOPayload_
     , _oKey = Nothing
     , _oOAuthToken = Nothing
     , _oOrderId = pOOrderId_
@@ -138,10 +139,8 @@ oUserIP :: Lens' OrdersCancellineitem' (Maybe Text)
 oUserIP = lens _oUserIP (\ s a -> s{_oUserIP = a})
 
 -- | Multipart request metadata.
-oOrdersCancelLineItemRequest :: Lens' OrdersCancellineitem' OrdersCancelLineItemRequest
-oOrdersCancelLineItemRequest
-  = lens _oOrdersCancelLineItemRequest
-      (\ s a -> s{_oOrdersCancelLineItemRequest = a})
+oPayload :: Lens' OrdersCancellineitem' OrdersCancelLineItemRequest
+oPayload = lens _oPayload (\ s a -> s{_oPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -178,7 +177,7 @@ instance GoogleRequest OrdersCancellineitem' where
               _oKey
               _oOAuthToken
               (Just AltJSON)
-              _oOrdersCancelLineItemRequest
+              _oPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrdersCancellineitemResource)

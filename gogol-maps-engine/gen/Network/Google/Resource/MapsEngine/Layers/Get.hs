@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -69,7 +70,7 @@ data LayersGet' = LayersGet'
     , _lgId          :: !Text
     , _lgOAuthToken  :: !(Maybe OAuthToken)
     , _lgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersGet'' with the minimum fields required to make a request.
 --
@@ -158,7 +159,7 @@ instance GoogleRequest LayersGet' where
         type Rs LayersGet' = Layer
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u LayersGet'{..}
-          = go _lgVersion _lgId _lgQuotaUser
+          = go _lgId _lgVersion _lgQuotaUser
               (Just _lgPrettyPrint)
               _lgUserIP
               _lgFields

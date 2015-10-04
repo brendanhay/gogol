@@ -46,7 +46,7 @@ import           Network.Google.ProximityBeacon.Types.Sum
 data LatLng = LatLng
     { _llLatitude  :: !(Maybe Double)
     , _llLongitude :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 --
@@ -95,7 +95,7 @@ instance ToJSON LatLng where
 data AttachmentInfo = AttachmentInfo
     { _aiData           :: !(Maybe Word8)
     , _aiNamespacedType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AttachmentInfo' with the minimum fields required to make a request.
 --
@@ -147,7 +147,7 @@ instance ToJSON AttachmentInfo where
 -- /See:/ 'empty' smart constructor.
 data Empty =
     Empty
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -161,34 +161,12 @@ instance FromJSON Empty where
 instance ToJSON Empty where
         toJSON = const (Object mempty)
 
--- | Properties of the beacon device, for example battery type or firmware
--- version. Optional.
---
--- /See:/ 'beaconProperties' smart constructor.
-data BeaconProperties =
-    BeaconProperties
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BeaconProperties' with the minimum fields required to make a request.
---
-beaconProperties
-    :: BeaconProperties
-beaconProperties = BeaconProperties
-
-instance FromJSON BeaconProperties where
-        parseJSON
-          = withObject "BeaconProperties"
-              (\ o -> pure BeaconProperties)
-
-instance ToJSON BeaconProperties where
-        toJSON = const (Object mempty)
-
 -- | Response for a request to delete attachments.
 --
 -- /See:/ 'deleteAttachmentsResponse' smart constructor.
 newtype DeleteAttachmentsResponse = DeleteAttachmentsResponse
     { _darNumDeleted :: Maybe Int32
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeleteAttachmentsResponse' with the minimum fields required to make a request.
 --
@@ -228,7 +206,7 @@ instance ToJSON DeleteAttachmentsResponse where
 data Namespace = Namespace
     { _nServingVisibility :: !(Maybe Text)
     , _nNamespaceName     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Namespace' with the minimum fields required to make a request.
 --
@@ -281,7 +259,7 @@ instance ToJSON Namespace where
 data GetInfoForObservedBeaconsRequest = GetInfoForObservedBeaconsRequest
     { _gifobrObservations    :: !(Maybe [Observation])
     , _gifobrNamespacedTypes :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetInfoForObservedBeaconsRequest' with the minimum fields required to make a request.
 --
@@ -341,7 +319,7 @@ instance ToJSON GetInfoForObservedBeaconsRequest
 -- /See:/ 'listNamespacesResponse' smart constructor.
 newtype ListNamespacesResponse = ListNamespacesResponse
     { _lnrNamespaces :: Maybe [Namespace]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListNamespacesResponse' with the minimum fields required to make a request.
 --
@@ -382,7 +360,7 @@ data Diagnostics = Diagnostics
     { _dAlerts                  :: !(Maybe [Text])
     , _dBeaconName              :: !(Maybe Text)
     , _dEstimatedLowBatteryDate :: !(Maybe Date)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Diagnostics' with the minimum fields required to make a request.
 --
@@ -451,7 +429,7 @@ data Date = Date
     { _dDay   :: !(Maybe Int32)
     , _dYear  :: !(Maybe Int32)
     , _dMonth :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
@@ -511,8 +489,8 @@ data Beacon = Beacon
     , _bDescription       :: !(Maybe Text)
     , _bPlaceId           :: !(Maybe Text)
     , _bAdvertisedId      :: !(Maybe AdvertisedId)
-    , _bProperties        :: !(Maybe BeaconProperties)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _bProperties        :: !(Maybe Properties)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Beacon' with the minimum fields required to make a request.
 --
@@ -606,7 +584,7 @@ bAdvertisedId
 
 -- | Properties of the beacon device, for example battery type or firmware
 -- version. Optional.
-bProperties :: Lens' Beacon (Maybe BeaconProperties)
+bProperties :: Lens' Beacon (Maybe Properties)
 bProperties
   = lens _bProperties (\ s a -> s{_bProperties = a})
 
@@ -644,7 +622,7 @@ instance ToJSON Beacon where
 -- /See:/ 'listBeaconAttachmentsResponse' smart constructor.
 newtype ListBeaconAttachmentsResponse = ListBeaconAttachmentsResponse
     { _lbarAttachments :: Maybe [BeaconAttachment]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListBeaconAttachmentsResponse' with the minimum fields required to make a request.
 --
@@ -684,7 +662,7 @@ instance ToJSON ListBeaconAttachmentsResponse where
 -- /See:/ 'indoorLevel' smart constructor.
 newtype IndoorLevel = IndoorLevel
     { _ilName :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IndoorLevel' with the minimum fields required to make a request.
 --
@@ -718,7 +696,7 @@ data Observation = Observation
     { _oTelemetry    :: !(Maybe Word8)
     , _oTimestampMs  :: !(Maybe Text)
     , _oAdvertisedId :: !(Maybe AdvertisedId)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Observation' with the minimum fields required to make a request.
 --
@@ -783,7 +761,7 @@ data BeaconInfo = BeaconInfo
     , _biBeaconName   :: !(Maybe Text)
     , _biDescription  :: !(Maybe Text)
     , _biAdvertisedId :: !(Maybe AdvertisedId)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconInfo' with the minimum fields required to make a request.
 --
@@ -860,7 +838,7 @@ data BeaconAttachment = BeaconAttachment
     { _baData           :: !(Maybe Word8)
     , _baAttachmentName :: !(Maybe Text)
     , _baNamespacedType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconAttachment' with the minimum fields required to make a request.
 --
@@ -927,7 +905,7 @@ instance ToJSON BeaconAttachment where
 data ListDiagnosticsResponse = ListDiagnosticsResponse
     { _ldrNextPageToken :: !(Maybe Text)
     , _ldrDiagnostics   :: !(Maybe [Diagnostics])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListDiagnosticsResponse' with the minimum fields required to make a request.
 --
@@ -980,7 +958,7 @@ instance ToJSON ListDiagnosticsResponse where
 data AdvertisedId = AdvertisedId
     { _aiId   :: !(Maybe Word8)
     , _aiType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisedId' with the minimum fields required to make a request.
 --
@@ -1028,7 +1006,7 @@ data ListBeaconsResponse = ListBeaconsResponse
     { _lbrNextPageToken :: !(Maybe Text)
     , _lbrBeacons       :: !(Maybe [Beacon])
     , _lbrTotalCount    :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListBeaconsResponse' with the minimum fields required to make a request.
 --
@@ -1092,7 +1070,7 @@ instance ToJSON ListBeaconsResponse where
 -- /See:/ 'getInfoForObservedBeaconsResponse' smart constructor.
 newtype GetInfoForObservedBeaconsResponse = GetInfoForObservedBeaconsResponse
     { _gifobrBeacons :: Maybe [BeaconInfo]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetInfoForObservedBeaconsResponse' with the minimum fields required to make a request.
 --
@@ -1128,3 +1106,24 @@ instance ToJSON GetInfoForObservedBeaconsResponse
         toJSON GetInfoForObservedBeaconsResponse{..}
           = object
               (catMaybes [("beacons" .=) <$> _gifobrBeacons])
+
+-- | Properties of the beacon device, for example battery type or firmware
+-- version. Optional.
+--
+-- /See:/ 'properties' smart constructor.
+data Properties =
+    Properties
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Properties' with the minimum fields required to make a request.
+--
+properties
+    :: Properties
+properties = Properties
+
+instance FromJSON Properties where
+        parseJSON
+          = withObject "Properties" (\ o -> pure Properties)
+
+instance ToJSON Properties where
+        toJSON = const (Object mempty)

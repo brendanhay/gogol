@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -56,13 +57,13 @@ type AppsGetResource =
        "apps" :>
          Capture "appsId" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "ensureResourcesExist" Bool :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "ensureResourcesExist" Bool :>
+                         QueryParam "callback" Text :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "fields" Text :>
@@ -89,7 +90,7 @@ data AppsGet' = AppsGet'
     , _agOAuthToken           :: !(Maybe OAuthToken)
     , _agFields               :: !(Maybe Text)
     , _agCallback             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsGet'' with the minimum fields required to make a request.
 --
@@ -229,13 +230,13 @@ instance GoogleRequest AppsGet' where
         type Rs AppsGet' = Application
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsGet'{..}
-          = go _agXgafv _agAccessToken _agBearerToken
-              _agCallback
-              _agEnsureResourcesExist
+          = go _agAppsId _agXgafv _agUploadProtocol
               (Just _agPp)
+              _agAccessToken
               _agUploadType
-              _agUploadProtocol
-              _agAppsId
+              _agBearerToken
+              _agEnsureResourcesExist
+              _agCallback
               _agQuotaUser
               (Just _agPrettyPrint)
               _agFields

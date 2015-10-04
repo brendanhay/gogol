@@ -131,6 +131,10 @@ module Network.Google.Debugger.Types
     , labrNextWaitToken
     , labrBreakpoints
 
+    -- * Labels
+    , Labels
+    , labels
+
     -- * GitSourceContext
     , GitSourceContext
     , gitSourceContext
@@ -150,10 +154,6 @@ module Network.Google.Debugger.Types
     , sfLocation
     , sfArguments
     , sfLocals
-
-    -- * DebuggeeLabels
-    , DebuggeeLabels
-    , debuggeeLabels
 
     -- * CloudRepoSourceContext
     , CloudRepoSourceContext

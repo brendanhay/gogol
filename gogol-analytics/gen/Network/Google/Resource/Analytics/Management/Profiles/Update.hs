@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Analytics.Management.Profiles.Update
     , mpuPrettyPrint
     , mpuWebPropertyId
     , mpuUserIP
-    , mpuProfile
     , mpuProfileId
+    , mpuPayload
     , mpuAccountId
     , mpuKey
     , mpuOAuthToken
@@ -72,13 +73,13 @@ data ManagementProfilesUpdate' = ManagementProfilesUpdate'
     , _mpuPrettyPrint   :: !Bool
     , _mpuWebPropertyId :: !Text
     , _mpuUserIP        :: !(Maybe Text)
-    , _mpuProfile       :: !Profile
     , _mpuProfileId     :: !Text
+    , _mpuPayload       :: !Profile
     , _mpuAccountId     :: !Text
     , _mpuKey           :: !(Maybe Key)
     , _mpuOAuthToken    :: !(Maybe OAuthToken)
     , _mpuFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfilesUpdate'' with the minimum fields required to make a request.
 --
@@ -92,9 +93,9 @@ data ManagementProfilesUpdate' = ManagementProfilesUpdate'
 --
 -- * 'mpuUserIP'
 --
--- * 'mpuProfile'
---
 -- * 'mpuProfileId'
+--
+-- * 'mpuPayload'
 --
 -- * 'mpuAccountId'
 --
@@ -105,18 +106,18 @@ data ManagementProfilesUpdate' = ManagementProfilesUpdate'
 -- * 'mpuFields'
 managementProfilesUpdate'
     :: Text -- ^ 'webPropertyId'
-    -> Profile -- ^ 'Profile'
     -> Text -- ^ 'profileId'
+    -> Profile -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementProfilesUpdate'
-managementProfilesUpdate' pMpuWebPropertyId_ pMpuProfile_ pMpuProfileId_ pMpuAccountId_ =
+managementProfilesUpdate' pMpuWebPropertyId_ pMpuProfileId_ pMpuPayload_ pMpuAccountId_ =
     ManagementProfilesUpdate'
     { _mpuQuotaUser = Nothing
     , _mpuPrettyPrint = False
     , _mpuWebPropertyId = pMpuWebPropertyId_
     , _mpuUserIP = Nothing
-    , _mpuProfile = pMpuProfile_
     , _mpuProfileId = pMpuProfileId_
+    , _mpuPayload = pMpuPayload_
     , _mpuAccountId = pMpuAccountId_
     , _mpuKey = Nothing
     , _mpuOAuthToken = Nothing
@@ -148,15 +149,15 @@ mpuUserIP :: Lens' ManagementProfilesUpdate' (Maybe Text)
 mpuUserIP
   = lens _mpuUserIP (\ s a -> s{_mpuUserIP = a})
 
--- | Multipart request metadata.
-mpuProfile :: Lens' ManagementProfilesUpdate' Profile
-mpuProfile
-  = lens _mpuProfile (\ s a -> s{_mpuProfile = a})
-
 -- | ID of the view (profile) to be updated.
 mpuProfileId :: Lens' ManagementProfilesUpdate' Text
 mpuProfileId
   = lens _mpuProfileId (\ s a -> s{_mpuProfileId = a})
+
+-- | Multipart request metadata.
+mpuPayload :: Lens' ManagementProfilesUpdate' Profile
+mpuPayload
+  = lens _mpuPayload (\ s a -> s{_mpuPayload = a})
 
 -- | Account ID to which the view (profile) belongs
 mpuAccountId :: Lens' ManagementProfilesUpdate' Text
@@ -197,7 +198,7 @@ instance GoogleRequest ManagementProfilesUpdate'
               _mpuKey
               _mpuOAuthToken
               (Just AltJSON)
-              _mpuProfile
+              _mpuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementProfilesUpdateResource)

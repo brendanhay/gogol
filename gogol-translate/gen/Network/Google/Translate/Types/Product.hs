@@ -23,7 +23,7 @@ import           Network.Google.Translate.Types.Sum
 data TranslationsResource = TranslationsResource
     { _trDetectedSourceLanguage :: !(Maybe Text)
     , _trTranslatedText         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TranslationsResource' with the minimum fields required to make a request.
 --
@@ -71,8 +71,8 @@ instance ToJSON TranslationsResource where
 --
 -- /See:/ 'detectionsListResponse' smart constructor.
 newtype DetectionsListResponse = DetectionsListResponse
-    { _dlrDetections :: Maybe [[DetectionsResource]]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _dlrDetections :: Maybe [[DetectionsResourceItem]]
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DetectionsListResponse' with the minimum fields required to make a request.
 --
@@ -87,7 +87,7 @@ detectionsListResponse =
     }
 
 -- | A detections contains detection results of several text
-dlrDetections :: Lens' DetectionsListResponse [[DetectionsResource]]
+dlrDetections :: Lens' DetectionsListResponse [[DetectionsResourceItem]]
 dlrDetections
   = lens _dlrDetections
       (\ s a -> s{_dlrDetections = a})
@@ -110,7 +110,7 @@ instance ToJSON DetectionsListResponse where
 -- /See:/ 'languagesListResponse' smart constructor.
 newtype LanguagesListResponse = LanguagesListResponse
     { _llrLanguages :: Maybe [LanguagesResource]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LanguagesListResponse' with the minimum fields required to make a request.
 --
@@ -148,68 +148,70 @@ instance ToJSON LanguagesListResponse where
               (catMaybes [("languages" .=) <$> _llrLanguages])
 
 --
--- /See:/ 'detectionsResource' smart constructor.
-data DetectionsResource = DetectionsResource
-    { _drConfidence :: !(Maybe Float)
-    , _drIsReliable :: !(Maybe Bool)
-    , _drLanguage   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'detectionsResourceItem' smart constructor.
+data DetectionsResourceItem = DetectionsResourceItem
+    { _driConfidence :: !(Maybe Float)
+    , _driIsReliable :: !(Maybe Bool)
+    , _driLanguage   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DetectionsResource' with the minimum fields required to make a request.
+-- | Creates a value of 'DetectionsResourceItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'drConfidence'
+-- * 'driConfidence'
 --
--- * 'drIsReliable'
+-- * 'driIsReliable'
 --
--- * 'drLanguage'
-detectionsResource
-    :: DetectionsResource
-detectionsResource =
-    DetectionsResource
-    { _drConfidence = Nothing
-    , _drIsReliable = Nothing
-    , _drLanguage = Nothing
+-- * 'driLanguage'
+detectionsResourceItem
+    :: DetectionsResourceItem
+detectionsResourceItem =
+    DetectionsResourceItem
+    { _driConfidence = Nothing
+    , _driIsReliable = Nothing
+    , _driLanguage = Nothing
     }
 
 -- | The confidence of the detection resul of this language.
-drConfidence :: Lens' DetectionsResource (Maybe Float)
-drConfidence
-  = lens _drConfidence (\ s a -> s{_drConfidence = a})
+driConfidence :: Lens' DetectionsResourceItem (Maybe Float)
+driConfidence
+  = lens _driConfidence
+      (\ s a -> s{_driConfidence = a})
 
 -- | A boolean to indicate is the language detection result reliable.
-drIsReliable :: Lens' DetectionsResource (Maybe Bool)
-drIsReliable
-  = lens _drIsReliable (\ s a -> s{_drIsReliable = a})
+driIsReliable :: Lens' DetectionsResourceItem (Maybe Bool)
+driIsReliable
+  = lens _driIsReliable
+      (\ s a -> s{_driIsReliable = a})
 
 -- | The language we detect
-drLanguage :: Lens' DetectionsResource (Maybe Text)
-drLanguage
-  = lens _drLanguage (\ s a -> s{_drLanguage = a})
+driLanguage :: Lens' DetectionsResourceItem (Maybe Text)
+driLanguage
+  = lens _driLanguage (\ s a -> s{_driLanguage = a})
 
-instance FromJSON DetectionsResource where
+instance FromJSON DetectionsResourceItem where
         parseJSON
-          = withObject "DetectionsResource"
+          = withObject "DetectionsResourceItem"
               (\ o ->
-                 DetectionsResource <$>
+                 DetectionsResourceItem <$>
                    (o .:? "confidence") <*> (o .:? "isReliable") <*>
                      (o .:? "language"))
 
-instance ToJSON DetectionsResource where
-        toJSON DetectionsResource{..}
+instance ToJSON DetectionsResourceItem where
+        toJSON DetectionsResourceItem{..}
           = object
               (catMaybes
-                 [("confidence" .=) <$> _drConfidence,
-                  ("isReliable" .=) <$> _drIsReliable,
-                  ("language" .=) <$> _drLanguage])
+                 [("confidence" .=) <$> _driConfidence,
+                  ("isReliable" .=) <$> _driIsReliable,
+                  ("language" .=) <$> _driLanguage])
 
 --
 -- /See:/ 'languagesResource' smart constructor.
 data LanguagesResource = LanguagesResource
     { _lrName     :: !(Maybe Text)
     , _lrLanguage :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LanguagesResource' with the minimum fields required to make a request.
 --
@@ -253,7 +255,7 @@ instance ToJSON LanguagesResource where
 -- /See:/ 'translationsListResponse' smart constructor.
 newtype TranslationsListResponse = TranslationsListResponse
     { _tlrTranslations :: Maybe [TranslationsResource]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TranslationsListResponse' with the minimum fields required to make a request.
 --

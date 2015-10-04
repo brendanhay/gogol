@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,9 +54,7 @@ type EditsImagesListResource =
          Capture "editId" Text :>
            "listings" :>
              Capture "language" Text :>
-               Capture "imageType"
-                 AndroidPublisherEditsImagesListImageType
-                 :>
+               Capture "imageType" ImageType :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -73,13 +72,13 @@ data EditsImagesList' = EditsImagesList'
     , _eilPrettyPrint :: !Bool
     , _eilPackageName :: !Text
     , _eilUserIP      :: !(Maybe Text)
-    , _eilImageType   :: !AndroidPublisherEditsImagesListImageType
+    , _eilImageType   :: !ImageType
     , _eilKey         :: !(Maybe Key)
     , _eilLanguage    :: !Text
     , _eilOAuthToken  :: !(Maybe OAuthToken)
     , _eilEditId      :: !Text
     , _eilFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsImagesList'' with the minimum fields required to make a request.
 --
@@ -106,7 +105,7 @@ data EditsImagesList' = EditsImagesList'
 -- * 'eilFields'
 editsImagesList'
     :: Text -- ^ 'packageName'
-    -> AndroidPublisherEditsImagesListImageType -- ^ 'imageType'
+    -> ImageType -- ^ 'imageType'
     -> Text -- ^ 'language'
     -> Text -- ^ 'editId'
     -> EditsImagesList'
@@ -150,7 +149,7 @@ eilUserIP :: Lens' EditsImagesList' (Maybe Text)
 eilUserIP
   = lens _eilUserIP (\ s a -> s{_eilUserIP = a})
 
-eilImageType :: Lens' EditsImagesList' AndroidPublisherEditsImagesListImageType
+eilImageType :: Lens' EditsImagesList' ImageType
 eilImageType
   = lens _eilImageType (\ s a -> s{_eilImageType = a})
 

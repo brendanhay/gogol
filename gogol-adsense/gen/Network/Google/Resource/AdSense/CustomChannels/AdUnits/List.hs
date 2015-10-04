@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type CustomChannelsAdUnitsListResource =
            Capture "customChannelId" Text :>
              "adunits" :>
                QueryParam "includeInactive" Bool :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "pageToken" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Int32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -80,7 +81,7 @@ data CustomChannelsAdUnitsList' = CustomChannelsAdUnitsList'
     , _ccaulOAuthToken      :: !(Maybe OAuthToken)
     , _ccaulMaxResults      :: !(Maybe Int32)
     , _ccaulFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomChannelsAdUnitsList'' with the minimum fields required to make a request.
 --
@@ -205,10 +206,10 @@ instance GoogleRequest CustomChannelsAdUnitsList'
         type Rs CustomChannelsAdUnitsList' = AdUnits
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u CustomChannelsAdUnitsList'{..}
-          = go _ccaulIncludeInactive _ccaulMaxResults
+          = go _ccaulAdClientId _ccaulCustomChannelId
+              _ccaulIncludeInactive
               _ccaulPageToken
-              _ccaulAdClientId
-              _ccaulCustomChannelId
+              _ccaulMaxResults
               _ccaulQuotaUser
               (Just _ccaulPrettyPrint)
               _ccaulUserIP

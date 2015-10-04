@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,10 +36,10 @@ module Network.Google.Resource.DFAReporting.CreativeAssets.Insert
     , caiUserIP
     , caiAdvertiserId
     , caiProfileId
+    , caiPayload
     , caiMedia
     , caiKey
     , caiOAuthToken
-    , caiCreativeAssetMetadata
     , caiFields
     ) where
 
@@ -67,17 +68,17 @@ type CreativeAssetsInsertResource =
 --
 -- /See:/ 'creativeAssetsInsert'' smart constructor.
 data CreativeAssetsInsert' = CreativeAssetsInsert'
-    { _caiQuotaUser             :: !(Maybe Text)
-    , _caiPrettyPrint           :: !Bool
-    , _caiUserIP                :: !(Maybe Text)
-    , _caiAdvertiserId          :: !Int64
-    , _caiProfileId             :: !Int64
-    , _caiMedia                 :: !Body
-    , _caiKey                   :: !(Maybe Key)
-    , _caiOAuthToken            :: !(Maybe OAuthToken)
-    , _caiCreativeAssetMetadata :: !CreativeAssetMetadata
-    , _caiFields                :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _caiQuotaUser    :: !(Maybe Text)
+    , _caiPrettyPrint  :: !Bool
+    , _caiUserIP       :: !(Maybe Text)
+    , _caiAdvertiserId :: !Int64
+    , _caiProfileId    :: !Int64
+    , _caiPayload      :: !CreativeAssetMetadata
+    , _caiMedia        :: !Body
+    , _caiKey          :: !(Maybe Key)
+    , _caiOAuthToken   :: !(Maybe OAuthToken)
+    , _caiFields       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeAssetsInsert'' with the minimum fields required to make a request.
 --
@@ -93,32 +94,32 @@ data CreativeAssetsInsert' = CreativeAssetsInsert'
 --
 -- * 'caiProfileId'
 --
+-- * 'caiPayload'
+--
 -- * 'caiMedia'
 --
 -- * 'caiKey'
 --
 -- * 'caiOAuthToken'
 --
--- * 'caiCreativeAssetMetadata'
---
 -- * 'caiFields'
 creativeAssetsInsert'
     :: Int64 -- ^ 'advertiserId'
     -> Int64 -- ^ 'profileId'
+    -> CreativeAssetMetadata -- ^ 'payload'
     -> Body -- ^ 'media'
-    -> CreativeAssetMetadata -- ^ 'CreativeAssetMetadata'
     -> CreativeAssetsInsert'
-creativeAssetsInsert' pCaiAdvertiserId_ pCaiProfileId_ pCaiMedia_ pCaiCreativeAssetMetadata_ =
+creativeAssetsInsert' pCaiAdvertiserId_ pCaiProfileId_ pCaiPayload_ pCaiMedia_ =
     CreativeAssetsInsert'
     { _caiQuotaUser = Nothing
     , _caiPrettyPrint = True
     , _caiUserIP = Nothing
     , _caiAdvertiserId = pCaiAdvertiserId_
     , _caiProfileId = pCaiProfileId_
+    , _caiPayload = pCaiPayload_
     , _caiMedia = pCaiMedia_
     , _caiKey = Nothing
     , _caiOAuthToken = Nothing
-    , _caiCreativeAssetMetadata = pCaiCreativeAssetMetadata_
     , _caiFields = Nothing
     }
 
@@ -152,6 +153,11 @@ caiProfileId :: Lens' CreativeAssetsInsert' Int64
 caiProfileId
   = lens _caiProfileId (\ s a -> s{_caiProfileId = a})
 
+-- | Multipart request metadata.
+caiPayload :: Lens' CreativeAssetsInsert' CreativeAssetMetadata
+caiPayload
+  = lens _caiPayload (\ s a -> s{_caiPayload = a})
+
 caiMedia :: Lens' CreativeAssetsInsert' Body
 caiMedia = lens _caiMedia (\ s a -> s{_caiMedia = a})
 
@@ -167,12 +173,6 @@ caiOAuthToken
   = lens _caiOAuthToken
       (\ s a -> s{_caiOAuthToken = a})
 
--- | Multipart request metadata.
-caiCreativeAssetMetadata :: Lens' CreativeAssetsInsert' CreativeAssetMetadata
-caiCreativeAssetMetadata
-  = lens _caiCreativeAssetMetadata
-      (\ s a -> s{_caiCreativeAssetMetadata = a})
-
 -- | Selector specifying which fields to include in a partial response.
 caiFields :: Lens' CreativeAssetsInsert' (Maybe Text)
 caiFields
@@ -186,15 +186,15 @@ instance GoogleRequest CreativeAssetsInsert' where
         type Rs CreativeAssetsInsert' = CreativeAssetMetadata
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeAssetsInsert'{..}
-          = go _caiMedia _caiProfileId _caiAdvertiserId
-              _caiQuotaUser
+          = go _caiProfileId _caiAdvertiserId _caiQuotaUser
               (Just _caiPrettyPrint)
               _caiUserIP
               _caiFields
               _caiKey
               _caiOAuthToken
               (Just AltJSON)
-              _caiCreativeAssetMetadata
+              _caiPayload
+              _caiMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeAssetsInsertResource)

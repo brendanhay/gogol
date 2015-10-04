@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,7 +38,7 @@ module Network.Google.Resource.SQL.Instances.Patch
     , ipPrettyPrint
     , ipProject
     , ipUserIP
-    , ipDatabaseInstance
+    , ipPayload
     , ipKey
     , ipOAuthToken
     , ipFields
@@ -71,16 +72,16 @@ type InstancesPatchResource =
 --
 -- /See:/ 'instancesPatch'' smart constructor.
 data InstancesPatch' = InstancesPatch'
-    { _ipQuotaUser        :: !(Maybe Text)
-    , _ipPrettyPrint      :: !Bool
-    , _ipProject          :: !Text
-    , _ipUserIP           :: !(Maybe Text)
-    , _ipDatabaseInstance :: !DatabaseInstance
-    , _ipKey              :: !(Maybe Key)
-    , _ipOAuthToken       :: !(Maybe OAuthToken)
-    , _ipFields           :: !(Maybe Text)
-    , _ipInstance         :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ipQuotaUser   :: !(Maybe Text)
+    , _ipPrettyPrint :: !Bool
+    , _ipProject     :: !Text
+    , _ipUserIP      :: !(Maybe Text)
+    , _ipPayload     :: !DatabaseInstance
+    , _ipKey         :: !(Maybe Key)
+    , _ipOAuthToken  :: !(Maybe OAuthToken)
+    , _ipFields      :: !(Maybe Text)
+    , _ipInstance    :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesPatch'' with the minimum fields required to make a request.
 --
@@ -94,7 +95,7 @@ data InstancesPatch' = InstancesPatch'
 --
 -- * 'ipUserIP'
 --
--- * 'ipDatabaseInstance'
+-- * 'ipPayload'
 --
 -- * 'ipKey'
 --
@@ -105,16 +106,16 @@ data InstancesPatch' = InstancesPatch'
 -- * 'ipInstance'
 instancesPatch'
     :: Text -- ^ 'project'
-    -> DatabaseInstance -- ^ 'DatabaseInstance'
+    -> DatabaseInstance -- ^ 'payload'
     -> Text -- ^ 'instance'
     -> InstancesPatch'
-instancesPatch' pIpProject_ pIpDatabaseInstance_ pIpInstance_ =
+instancesPatch' pIpProject_ pIpPayload_ pIpInstance_ =
     InstancesPatch'
     { _ipQuotaUser = Nothing
     , _ipPrettyPrint = True
     , _ipProject = pIpProject_
     , _ipUserIP = Nothing
-    , _ipDatabaseInstance = pIpDatabaseInstance_
+    , _ipPayload = pIpPayload_
     , _ipKey = Nothing
     , _ipOAuthToken = Nothing
     , _ipFields = Nothing
@@ -145,10 +146,9 @@ ipUserIP :: Lens' InstancesPatch' (Maybe Text)
 ipUserIP = lens _ipUserIP (\ s a -> s{_ipUserIP = a})
 
 -- | Multipart request metadata.
-ipDatabaseInstance :: Lens' InstancesPatch' DatabaseInstance
-ipDatabaseInstance
-  = lens _ipDatabaseInstance
-      (\ s a -> s{_ipDatabaseInstance = a})
+ipPayload :: Lens' InstancesPatch' DatabaseInstance
+ipPayload
+  = lens _ipPayload (\ s a -> s{_ipPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -185,7 +185,7 @@ instance GoogleRequest InstancesPatch' where
               _ipKey
               _ipOAuthToken
               (Just AltJSON)
-              _ipDatabaseInstance
+              _ipPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesPatchResource)

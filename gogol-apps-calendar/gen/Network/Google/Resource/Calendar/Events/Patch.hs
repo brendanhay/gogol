@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -30,11 +31,11 @@ module Network.Google.Resource.Calendar.Events.Patch
     , EventsPatch'
 
     -- * Request Lenses
-    , epEvent
     , epQuotaUser
     , epCalendarId
     , epPrettyPrint
     , epUserIP
+    , epPayload
     , epMaxAttendees
     , epKey
     , epSendNotifications
@@ -55,10 +56,10 @@ type EventsPatchResource =
        Capture "calendarId" Text :>
          "events" :>
            Capture "eventId" Text :>
-             QueryParam "alwaysIncludeEmail" Bool :>
-               QueryParam "maxAttendees" Int32 :>
-                 QueryParam "sendNotifications" Bool :>
-                   QueryParam "supportsAttachments" Bool :>
+             QueryParam "maxAttendees" Int32 :>
+               QueryParam "sendNotifications" Bool :>
+                 QueryParam "supportsAttachments" Bool :>
+                   QueryParam "alwaysIncludeEmail" Bool :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -72,11 +73,11 @@ type EventsPatchResource =
 --
 -- /See:/ 'eventsPatch'' smart constructor.
 data EventsPatch' = EventsPatch'
-    { _epEvent               :: !Event
-    , _epQuotaUser           :: !(Maybe Text)
+    { _epQuotaUser           :: !(Maybe Text)
     , _epCalendarId          :: !Text
     , _epPrettyPrint         :: !Bool
     , _epUserIP              :: !(Maybe Text)
+    , _epPayload             :: !Event
     , _epMaxAttendees        :: !(Maybe Int32)
     , _epKey                 :: !(Maybe Key)
     , _epSendNotifications   :: !(Maybe Bool)
@@ -85,13 +86,11 @@ data EventsPatch' = EventsPatch'
     , _epAlwaysIncludeEmail  :: !(Maybe Bool)
     , _epEventId             :: !Text
     , _epFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'epEvent'
 --
 -- * 'epQuotaUser'
 --
@@ -100,6 +99,8 @@ data EventsPatch' = EventsPatch'
 -- * 'epPrettyPrint'
 --
 -- * 'epUserIP'
+--
+-- * 'epPayload'
 --
 -- * 'epMaxAttendees'
 --
@@ -117,17 +118,17 @@ data EventsPatch' = EventsPatch'
 --
 -- * 'epFields'
 eventsPatch'
-    :: Event -- ^ 'Event'
-    -> Text -- ^ 'calendarId'
+    :: Text -- ^ 'calendarId'
+    -> Event -- ^ 'payload'
     -> Text -- ^ 'eventId'
     -> EventsPatch'
-eventsPatch' pEpEvent_ pEpCalendarId_ pEpEventId_ =
+eventsPatch' pEpCalendarId_ pEpPayload_ pEpEventId_ =
     EventsPatch'
-    { _epEvent = pEpEvent_
-    , _epQuotaUser = Nothing
+    { _epQuotaUser = Nothing
     , _epCalendarId = pEpCalendarId_
     , _epPrettyPrint = True
     , _epUserIP = Nothing
+    , _epPayload = pEpPayload_
     , _epMaxAttendees = Nothing
     , _epKey = Nothing
     , _epSendNotifications = Nothing
@@ -137,10 +138,6 @@ eventsPatch' pEpEvent_ pEpCalendarId_ pEpEventId_ =
     , _epEventId = pEpEventId_
     , _epFields = Nothing
     }
-
--- | Multipart request metadata.
-epEvent :: Lens' EventsPatch' Event
-epEvent = lens _epEvent (\ s a -> s{_epEvent = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -166,6 +163,11 @@ epPrettyPrint
 -- want to enforce per-user limits.
 epUserIP :: Lens' EventsPatch' (Maybe Text)
 epUserIP = lens _epUserIP (\ s a -> s{_epUserIP = a})
+
+-- | Multipart request metadata.
+epPayload :: Lens' EventsPatch' Event
+epPayload
+  = lens _epPayload (\ s a -> s{_epPayload = a})
 
 -- | The maximum number of attendees to include in the response. If there are
 -- more than the specified number of attendees, only the participant is
@@ -228,11 +230,10 @@ instance GoogleRequest EventsPatch' where
         type Rs EventsPatch' = Event
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsPatch'{..}
-          = go _epAlwaysIncludeEmail _epMaxAttendees
+          = go _epCalendarId _epEventId _epMaxAttendees
               _epSendNotifications
               _epSupportsAttachments
-              _epCalendarId
-              _epEventId
+              _epAlwaysIncludeEmail
               _epQuotaUser
               (Just _epPrettyPrint)
               _epUserIP
@@ -240,7 +241,7 @@ instance GoogleRequest EventsPatch' where
               _epKey
               _epOAuthToken
               (Just AltJSON)
-              _epEvent
+              _epPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsPatchResource)

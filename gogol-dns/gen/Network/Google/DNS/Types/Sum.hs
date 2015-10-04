@@ -18,24 +18,24 @@ module Network.Google.DNS.Types.Sum where
 import           Network.Google.Prelude
 
 -- | Sorting criterion. The only supported value is change sequence.
-data DNSChangesListSortBy
+data SortBy
     = ChangeSequence
       -- ^ @changeSequence@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DNSChangesListSortBy
+instance Hashable SortBy
 
-instance FromText DNSChangesListSortBy where
+instance FromText SortBy where
     fromText = \case
         "changeSequence" -> Just ChangeSequence
         _ -> Nothing
 
-instance ToText DNSChangesListSortBy where
+instance ToText SortBy where
     toText = \case
         ChangeSequence -> "changeSequence"
 
-instance FromJSON DNSChangesListSortBy where
-    parseJSON = parseJSONText "DNSChangesListSortBy"
+instance FromJSON SortBy where
+    parseJSON = parseJSONText "SortBy"
 
-instance ToJSON DNSChangesListSortBy where
+instance ToJSON SortBy where
     toJSON = toJSONText

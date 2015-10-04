@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.Games.TurnBasedMatches.TakeTurn
     -- * Request Lenses
     , tbmttQuotaUser
     , tbmttPrettyPrint
-    , tbmttTurnBasedMatchTurn
     , tbmttUserIP
+    , tbmttPayload
     , tbmttKey
     , tbmttLanguage
     , tbmttOAuthToken
@@ -65,16 +66,16 @@ type TurnBasedMatchesTakeTurnResource =
 --
 -- /See:/ 'turnBasedMatchesTakeTurn'' smart constructor.
 data TurnBasedMatchesTakeTurn' = TurnBasedMatchesTakeTurn'
-    { _tbmttQuotaUser          :: !(Maybe Text)
-    , _tbmttPrettyPrint        :: !Bool
-    , _tbmttTurnBasedMatchTurn :: !TurnBasedMatchTurn
-    , _tbmttUserIP             :: !(Maybe Text)
-    , _tbmttKey                :: !(Maybe Key)
-    , _tbmttLanguage           :: !(Maybe Text)
-    , _tbmttOAuthToken         :: !(Maybe OAuthToken)
-    , _tbmttMatchId            :: !Text
-    , _tbmttFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _tbmttQuotaUser   :: !(Maybe Text)
+    , _tbmttPrettyPrint :: !Bool
+    , _tbmttUserIP      :: !(Maybe Text)
+    , _tbmttPayload     :: !TurnBasedMatchTurn
+    , _tbmttKey         :: !(Maybe Key)
+    , _tbmttLanguage    :: !(Maybe Text)
+    , _tbmttOAuthToken  :: !(Maybe OAuthToken)
+    , _tbmttMatchId     :: !Text
+    , _tbmttFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesTakeTurn'' with the minimum fields required to make a request.
 --
@@ -84,9 +85,9 @@ data TurnBasedMatchesTakeTurn' = TurnBasedMatchesTakeTurn'
 --
 -- * 'tbmttPrettyPrint'
 --
--- * 'tbmttTurnBasedMatchTurn'
---
 -- * 'tbmttUserIP'
+--
+-- * 'tbmttPayload'
 --
 -- * 'tbmttKey'
 --
@@ -98,15 +99,15 @@ data TurnBasedMatchesTakeTurn' = TurnBasedMatchesTakeTurn'
 --
 -- * 'tbmttFields'
 turnBasedMatchesTakeTurn'
-    :: TurnBasedMatchTurn -- ^ 'TurnBasedMatchTurn'
+    :: TurnBasedMatchTurn -- ^ 'payload'
     -> Text -- ^ 'matchId'
     -> TurnBasedMatchesTakeTurn'
-turnBasedMatchesTakeTurn' pTbmttTurnBasedMatchTurn_ pTbmttMatchId_ =
+turnBasedMatchesTakeTurn' pTbmttPayload_ pTbmttMatchId_ =
     TurnBasedMatchesTakeTurn'
     { _tbmttQuotaUser = Nothing
     , _tbmttPrettyPrint = True
-    , _tbmttTurnBasedMatchTurn = pTbmttTurnBasedMatchTurn_
     , _tbmttUserIP = Nothing
+    , _tbmttPayload = pTbmttPayload_
     , _tbmttKey = Nothing
     , _tbmttLanguage = Nothing
     , _tbmttOAuthToken = Nothing
@@ -128,17 +129,16 @@ tbmttPrettyPrint
   = lens _tbmttPrettyPrint
       (\ s a -> s{_tbmttPrettyPrint = a})
 
--- | Multipart request metadata.
-tbmttTurnBasedMatchTurn :: Lens' TurnBasedMatchesTakeTurn' TurnBasedMatchTurn
-tbmttTurnBasedMatchTurn
-  = lens _tbmttTurnBasedMatchTurn
-      (\ s a -> s{_tbmttTurnBasedMatchTurn = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 tbmttUserIP :: Lens' TurnBasedMatchesTakeTurn' (Maybe Text)
 tbmttUserIP
   = lens _tbmttUserIP (\ s a -> s{_tbmttUserIP = a})
+
+-- | Multipart request metadata.
+tbmttPayload :: Lens' TurnBasedMatchesTakeTurn' TurnBasedMatchTurn
+tbmttPayload
+  = lens _tbmttPayload (\ s a -> s{_tbmttPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -177,14 +177,14 @@ instance GoogleRequest TurnBasedMatchesTakeTurn'
         type Rs TurnBasedMatchesTakeTurn' = TurnBasedMatch
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesTakeTurn'{..}
-          = go _tbmttLanguage _tbmttMatchId _tbmttQuotaUser
+          = go _tbmttMatchId _tbmttLanguage _tbmttQuotaUser
               (Just _tbmttPrettyPrint)
               _tbmttUserIP
               _tbmttFields
               _tbmttKey
               _tbmttOAuthToken
               (Just AltJSON)
-              _tbmttTurnBasedMatchTurn
+              _tbmttPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TurnBasedMatchesTakeTurnResource)

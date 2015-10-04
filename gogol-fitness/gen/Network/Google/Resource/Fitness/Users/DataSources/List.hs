@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -70,13 +71,13 @@ type UsersDataSourcesListResource =
 data UsersDataSourcesList' = UsersDataSourcesList'
     { _udslQuotaUser    :: !(Maybe Text)
     , _udslPrettyPrint  :: !Bool
-    , _udslDataTypeName :: !(Maybe Text)
+    , _udslDataTypeName :: !(Maybe [Text])
     , _udslUserIP       :: !(Maybe Text)
     , _udslUserId       :: !Text
     , _udslKey          :: !(Maybe Key)
     , _udslOAuthToken   :: !(Maybe OAuthToken)
     , _udslFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesList'' with the minimum fields required to make a request.
 --
@@ -128,10 +129,12 @@ udslPrettyPrint
 
 -- | The names of data types to include in the list. If not specified, all
 -- data sources will be returned.
-udslDataTypeName :: Lens' UsersDataSourcesList' (Maybe Text)
+udslDataTypeName :: Lens' UsersDataSourcesList' [Text]
 udslDataTypeName
   = lens _udslDataTypeName
       (\ s a -> s{_udslDataTypeName = a})
+      . _Default
+      . _Coerce
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
@@ -171,7 +174,8 @@ instance GoogleRequest UsersDataSourcesList' where
              ListDataSourcesResponse
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersDataSourcesList'{..}
-          = go _udslDataTypeName _udslUserId _udslQuotaUser
+          = go _udslUserId (_udslDataTypeName ^. _Default)
+              _udslQuotaUser
               (Just _udslPrettyPrint)
               _udslUserIP
               _udslFields

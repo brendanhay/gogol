@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,11 +33,11 @@ module Network.Google.Resource.Compute.InstanceGroups.AddInstances
 
     -- * Request Lenses
     , igaiQuotaUser
-    , igaiInstanceGroupsAddInstancesRequest
     , igaiPrettyPrint
     , igaiProject
     , igaiUserIP
     , igaiZone
+    , igaiPayload
     , igaiKey
     , igaiOAuthToken
     , igaiInstanceGroup
@@ -70,25 +71,23 @@ type InstanceGroupsAddInstancesResource =
 --
 -- /See:/ 'instanceGroupsAddInstances'' smart constructor.
 data InstanceGroupsAddInstances' = InstanceGroupsAddInstances'
-    { _igaiQuotaUser                         :: !(Maybe Text)
-    , _igaiInstanceGroupsAddInstancesRequest :: !InstanceGroupsAddInstancesRequest
-    , _igaiPrettyPrint                       :: !Bool
-    , _igaiProject                           :: !Text
-    , _igaiUserIP                            :: !(Maybe Text)
-    , _igaiZone                              :: !Text
-    , _igaiKey                               :: !(Maybe Key)
-    , _igaiOAuthToken                        :: !(Maybe OAuthToken)
-    , _igaiInstanceGroup                     :: !Text
-    , _igaiFields                            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _igaiQuotaUser     :: !(Maybe Text)
+    , _igaiPrettyPrint   :: !Bool
+    , _igaiProject       :: !Text
+    , _igaiUserIP        :: !(Maybe Text)
+    , _igaiZone          :: !Text
+    , _igaiPayload       :: !InstanceGroupsAddInstancesRequest
+    , _igaiKey           :: !(Maybe Key)
+    , _igaiOAuthToken    :: !(Maybe OAuthToken)
+    , _igaiInstanceGroup :: !Text
+    , _igaiFields        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsAddInstances'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'igaiQuotaUser'
---
--- * 'igaiInstanceGroupsAddInstancesRequest'
 --
 -- * 'igaiPrettyPrint'
 --
@@ -98,6 +97,8 @@ data InstanceGroupsAddInstances' = InstanceGroupsAddInstances'
 --
 -- * 'igaiZone'
 --
+-- * 'igaiPayload'
+--
 -- * 'igaiKey'
 --
 -- * 'igaiOAuthToken'
@@ -106,19 +107,19 @@ data InstanceGroupsAddInstances' = InstanceGroupsAddInstances'
 --
 -- * 'igaiFields'
 instanceGroupsAddInstances'
-    :: InstanceGroupsAddInstancesRequest -- ^ 'InstanceGroupsAddInstancesRequest'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
+    -> InstanceGroupsAddInstancesRequest -- ^ 'payload'
     -> Text -- ^ 'instanceGroup'
     -> InstanceGroupsAddInstances'
-instanceGroupsAddInstances' pIgaiInstanceGroupsAddInstancesRequest_ pIgaiProject_ pIgaiZone_ pIgaiInstanceGroup_ =
+instanceGroupsAddInstances' pIgaiProject_ pIgaiZone_ pIgaiPayload_ pIgaiInstanceGroup_ =
     InstanceGroupsAddInstances'
     { _igaiQuotaUser = Nothing
-    , _igaiInstanceGroupsAddInstancesRequest = pIgaiInstanceGroupsAddInstancesRequest_
     , _igaiPrettyPrint = True
     , _igaiProject = pIgaiProject_
     , _igaiUserIP = Nothing
     , _igaiZone = pIgaiZone_
+    , _igaiPayload = pIgaiPayload_
     , _igaiKey = Nothing
     , _igaiOAuthToken = Nothing
     , _igaiInstanceGroup = pIgaiInstanceGroup_
@@ -132,13 +133,6 @@ igaiQuotaUser :: Lens' InstanceGroupsAddInstances' (Maybe Text)
 igaiQuotaUser
   = lens _igaiQuotaUser
       (\ s a -> s{_igaiQuotaUser = a})
-
--- | Multipart request metadata.
-igaiInstanceGroupsAddInstancesRequest :: Lens' InstanceGroupsAddInstances' InstanceGroupsAddInstancesRequest
-igaiInstanceGroupsAddInstancesRequest
-  = lens _igaiInstanceGroupsAddInstancesRequest
-      (\ s a ->
-         s{_igaiInstanceGroupsAddInstancesRequest = a})
 
 -- | Returns response with indentations and line breaks.
 igaiPrettyPrint :: Lens' InstanceGroupsAddInstances' Bool
@@ -160,6 +154,11 @@ igaiUserIP
 -- | The URL of the zone where the instance group is located.
 igaiZone :: Lens' InstanceGroupsAddInstances' Text
 igaiZone = lens _igaiZone (\ s a -> s{_igaiZone = a})
+
+-- | Multipart request metadata.
+igaiPayload :: Lens' InstanceGroupsAddInstances' InstanceGroupsAddInstancesRequest
+igaiPayload
+  = lens _igaiPayload (\ s a -> s{_igaiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -201,7 +200,7 @@ instance GoogleRequest InstanceGroupsAddInstances'
               _igaiKey
               _igaiOAuthToken
               (Just AltJSON)
-              _igaiInstanceGroupsAddInstancesRequest
+              _igaiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceGroupsAddInstancesResource)

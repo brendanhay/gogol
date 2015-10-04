@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -74,7 +75,7 @@ data DefaultObjectAccessControlsList' = DefaultObjectAccessControlsList'
     , _doaclIfMetagenerationNotMatch :: !(Maybe Int64)
     , _doaclOAuthToken               :: !(Maybe OAuthToken)
     , _doaclFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsList'' with the minimum fields required to make a request.
 --
@@ -181,9 +182,8 @@ instance GoogleRequest
         request = requestWithRoute defReq storageURL
         requestWithRoute r u
           DefaultObjectAccessControlsList'{..}
-          = go _doaclIfMetagenerationMatch
+          = go _doaclBucket _doaclIfMetagenerationMatch
               _doaclIfMetagenerationNotMatch
-              _doaclBucket
               _doaclQuotaUser
               (Just _doaclPrettyPrint)
               _doaclUserIP

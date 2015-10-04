@@ -26,7 +26,7 @@ data RoomJoinRequest = RoomJoinRequest
     , _rjrKind               :: !Text
     , _rjrClientAddress      :: !(Maybe RoomClientAddress)
     , _rjrCapabilities       :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomJoinRequest' with the minimum fields required to make a request.
 --
@@ -101,7 +101,7 @@ instance ToJSON RoomJoinRequest where
 data PlayerName = PlayerName
     { _pnGivenName  :: !(Maybe Text)
     , _pnFamilyName :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerName' with the minimum fields required to make a request.
 --
@@ -159,7 +159,7 @@ data Snapshot = Snapshot
     , _sType               :: !(Maybe Text)
     , _sDescription        :: !(Maybe Text)
     , _sDriveId            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Snapshot' with the minimum fields required to make a request.
 --
@@ -301,7 +301,7 @@ data TurnBasedMatchData = TurnBasedMatchData
     { _tbmdKind          :: !Text
     , _tbmdData          :: !(Maybe Word8)
     , _tbmdDataAvailable :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchData' with the minimum fields required to make a request.
 --
@@ -379,7 +379,7 @@ data TurnBasedMatch = TurnBasedMatch
     , _tbmDescription          :: !(Maybe Text)
     , _tbmRematchId            :: !(Maybe Text)
     , _tbmMatchVersion         :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatch' with the minimum fields required to make a request.
 --
@@ -649,7 +649,7 @@ data PlayerEvent = PlayerEvent
     , _peFormattedNumEvents :: !(Maybe Text)
     , _peDefinitionId       :: !(Maybe Text)
     , _pePlayerId           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerEvent' with the minimum fields required to make a request.
 --
@@ -742,7 +742,7 @@ data Room = Room
     , _rAutoMatchingCriteria :: !(Maybe RoomAutoMatchingCriteria)
     , _rRoomId               :: !(Maybe Text)
     , _rDescription          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Room' with the minimum fields required to make a request.
 --
@@ -922,7 +922,7 @@ data QuestListResponse = QuestListResponse
     { _qlrNextPageToken :: !(Maybe Text)
     , _qlrKind          :: !Text
     , _qlrItems         :: !(Maybe [Quest])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestListResponse' with the minimum fields required to make a request.
 --
@@ -994,7 +994,7 @@ data Application = Application
     , _aAssets               :: !(Maybe [ImageAsset])
     , _aDescription          :: !(Maybe Text)
     , _aLastUpdatedTimestamp :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
 --
@@ -1164,7 +1164,7 @@ data TurnBasedMatchTurn = TurnBasedMatchTurn
     , _tbmtData                 :: !(Maybe TurnBasedMatchDataRequest)
     , _tbmtPendingParticipantId :: !(Maybe Text)
     , _tbmtMatchVersion         :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchTurn' with the minimum fields required to make a request.
 --
@@ -1252,7 +1252,7 @@ data ApplicationCategory = ApplicationCategory
     { _acSecondary :: !(Maybe Text)
     , _acKind      :: !Text
     , _acPrimary   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationCategory' with the minimum fields required to make a request.
 --
@@ -1310,7 +1310,7 @@ instance ToJSON ApplicationCategory where
 data PlayerScoreListResponse = PlayerScoreListResponse
     { _pslrSubmittedScores :: !(Maybe [PlayerScoreResponse])
     , _pslrKind            :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerScoreListResponse' with the minimum fields required to make a request.
 --
@@ -1366,7 +1366,7 @@ data NetworkDiagnostics = NetworkDiagnostics
     , _ndRegistrationLatencyMillis :: !(Maybe Int32)
     , _ndIosNetworkType            :: !(Maybe Int32)
     , _ndAndroidNetworkSubtype     :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NetworkDiagnostics' with the minimum fields required to make a request.
 --
@@ -1488,7 +1488,7 @@ data PlayerLeaderboardScore = PlayerLeaderboardScore
     , _plsSocialRank     :: !(Maybe LeaderboardScoreRank)
     , _plsLeaderboardId  :: !(Maybe Text)
     , _plsWriteTimestamp :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerLeaderboardScore' with the minimum fields required to make a request.
 --
@@ -1619,7 +1619,7 @@ data QuestCriterion = QuestCriterion
     , _qcKind                   :: !Text
     , _qcInitialPlayerProgress  :: !(Maybe QuestContribution)
     , _qcEventId                :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestCriterion' with the minimum fields required to make a request.
 --
@@ -1705,6 +1705,58 @@ instance ToJSON QuestCriterion where
                     _qcInitialPlayerProgress,
                   ("eventId" .=) <$> _qcEventId])
 
+-- | A push token ID for iOS devices.
+--
+-- /See:/ 'ios' smart constructor.
+data Ios = Ios
+    { _iAPNSDeviceToken :: !(Maybe Word8)
+    , _iAPNSEnvironment :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Ios' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iAPNSDeviceToken'
+--
+-- * 'iAPNSEnvironment'
+ios
+    :: Ios
+ios =
+    Ios
+    { _iAPNSDeviceToken = Nothing
+    , _iAPNSEnvironment = Nothing
+    }
+
+-- | Device token supplied by an iOS system call to register for remote
+-- notifications. Encode this field as web-safe base64.
+iAPNSDeviceToken :: Lens' Ios (Maybe Word8)
+iAPNSDeviceToken
+  = lens _iAPNSDeviceToken
+      (\ s a -> s{_iAPNSDeviceToken = a})
+
+-- | Indicates whether this token should be used for the production or
+-- sandbox APNS server.
+iAPNSEnvironment :: Lens' Ios (Maybe Text)
+iAPNSEnvironment
+  = lens _iAPNSEnvironment
+      (\ s a -> s{_iAPNSEnvironment = a})
+
+instance FromJSON Ios where
+        parseJSON
+          = withObject "Ios"
+              (\ o ->
+                 Ios <$>
+                   (o .:? "apns_device_token") <*>
+                     (o .:? "apns_environment"))
+
+instance ToJSON Ios where
+        toJSON Ios{..}
+          = object
+              (catMaybes
+                 [("apns_device_token" .=) <$> _iAPNSDeviceToken,
+                  ("apns_environment" .=) <$> _iAPNSEnvironment])
+
 -- | This is a JSON template for an achievement update response.
 --
 -- /See:/ 'achievementUpdateResponse' smart constructor.
@@ -1715,7 +1767,7 @@ data AchievementUpdateResponse = AchievementUpdateResponse
     , _aurCurrentState   :: !(Maybe Text)
     , _aurNewlyUnlocked  :: !(Maybe Bool)
     , _aurCurrentSteps   :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementUpdateResponse' with the minimum fields required to make a request.
 --
@@ -1812,7 +1864,7 @@ data SnapshotListResponse = SnapshotListResponse
     { _slrNextPageToken :: !(Maybe Text)
     , _slrKind          :: !Text
     , _slrItems         :: !(Maybe [Snapshot])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotListResponse' with the minimum fields required to make a request.
 --
@@ -1876,7 +1928,7 @@ data PushToken = PushToken
     , _ptKind           :: !Text
     , _ptLanguage       :: !(Maybe Text)
     , _ptId             :: !(Maybe PushTokenId)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PushToken' with the minimum fields required to make a request.
 --
@@ -1948,7 +2000,7 @@ data TurnBasedMatchList = TurnBasedMatchList
     { _tbmlNextPageToken :: !(Maybe Text)
     , _tbmlKind          :: !Text
     , _tbmlItems         :: !(Maybe [TurnBasedMatch])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchList' with the minimum fields required to make a request.
 --
@@ -2011,7 +2063,7 @@ data PlayerLevel = PlayerLevel
     , _plKind                :: !Text
     , _plMinExperiencePoints :: !(Maybe Int64)
     , _plLevel               :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerLevel' with the minimum fields required to make a request.
 --
@@ -2083,7 +2135,7 @@ data RoomList = RoomList
     { _rlNextPageToken :: !(Maybe Text)
     , _rlKind          :: !Text
     , _rlItems         :: !(Maybe [Room])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomList' with the minimum fields required to make a request.
 --
@@ -2148,7 +2200,7 @@ data PeerChannelDiagnostics = PeerChannelDiagnostics
     , _pcdNumMessagesReceived    :: !(Maybe Int32)
     , _pcdNumSendFailures        :: !(Maybe Int32)
     , _pcdNumMessagesSent        :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeerChannelDiagnostics' with the minimum fields required to make a request.
 --
@@ -2270,7 +2322,7 @@ data LeaderboardEntry = LeaderboardEntry
     , _leFormattedScoreRank   :: !(Maybe Text)
     , _lePlayer               :: !(Maybe Player)
     , _leScoreRank            :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardEntry' with the minimum fields required to make a request.
 --
@@ -2394,7 +2446,7 @@ instance ToJSON LeaderboardEntry where
 data AchievementUpdateMultipleResponse = AchievementUpdateMultipleResponse
     { _aumrKind                :: !Text
     , _aumrUpdatedAchievements :: !(Maybe [AchievementUpdateResponse])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementUpdateMultipleResponse' with the minimum fields required to make a request.
 --
@@ -2453,7 +2505,7 @@ data PlayerScoreResponse = PlayerScoreResponse
     , _psrLeaderboardId        :: !(Maybe Text)
     , _psrBeatenScoreTimeSpans :: !(Maybe [Text])
     , _psrUnbeatenScores       :: !(Maybe [PlayerScore])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerScoreResponse' with the minimum fields required to make a request.
 --
@@ -2560,7 +2612,7 @@ data TurnBasedMatchParticipant = TurnBasedMatchParticipant
     , _tbmpAutoMatched       :: !(Maybe Bool)
     , _tbmpPlayer            :: !(Maybe Player)
     , _tbmpAutoMatchedPlayer :: !(Maybe AnonymousPlayer)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchParticipant' with the minimum fields required to make a request.
 --
@@ -2664,7 +2716,7 @@ instance ToJSON TurnBasedMatchParticipant where
 data RoomClientAddress = RoomClientAddress
     { _rcaKind        :: !Text
     , _rcaXmppAddress :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomClientAddress' with the minimum fields required to make a request.
 --
@@ -2715,7 +2767,7 @@ data InstanceAndroidDetails = InstanceAndroidDetails
     , _iadPreferred         :: !(Maybe Bool)
     , _iadKind              :: !Text
     , _iadEnablePiracyCheck :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceAndroidDetails' with the minimum fields required to make a request.
 --
@@ -2785,7 +2837,7 @@ data LeaderboardListResponse = LeaderboardListResponse
     { _llrNextPageToken :: !(Maybe Text)
     , _llrKind          :: !Text
     , _llrItems         :: !(Maybe [Leaderboard])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardListResponse' with the minimum fields required to make a request.
 --
@@ -2847,7 +2899,7 @@ data Category = Category
     { _cKind             :: !Text
     , _cCategory         :: !(Maybe Text)
     , _cExperiencePoints :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Category' with the minimum fields required to make a request.
 --
@@ -2907,7 +2959,7 @@ data EventDefinitionListResponse = EventDefinitionListResponse
     { _edlrNextPageToken :: !(Maybe Text)
     , _edlrKind          :: !Text
     , _edlrItems         :: !(Maybe [EventDefinition])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventDefinitionListResponse' with the minimum fields required to make a request.
 --
@@ -2977,7 +3029,7 @@ data RoomParticipant = RoomParticipant
     , _rpPlayer            :: !(Maybe Player)
     , _rpCapabilities      :: !(Maybe [Text])
     , _rpAutoMatchedPlayer :: !(Maybe AnonymousPlayer)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomParticipant' with the minimum fields required to make a request.
 --
@@ -3132,7 +3184,7 @@ data AnonymousPlayer = AnonymousPlayer
     { _apAvatarImageURL :: !(Maybe Text)
     , _apKind           :: !Text
     , _apDisplayName    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnonymousPlayer' with the minimum fields required to make a request.
 --
@@ -3193,7 +3245,7 @@ data AchievementDefinitionsListResponse = AchievementDefinitionsListResponse
     { _adlrNextPageToken :: !(Maybe Text)
     , _adlrKind          :: !Text
     , _adlrItems         :: !(Maybe [AchievementDefinition])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementDefinitionsListResponse' with the minimum fields required to make a request.
 --
@@ -3258,7 +3310,7 @@ data QuestContribution = QuestContribution
     { _qKind           :: !Text
     , _qValue          :: !(Maybe Int64)
     , _qFormattedValue :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestContribution' with the minimum fields required to make a request.
 --
@@ -3319,7 +3371,7 @@ data PlayerLeaderboardScoreListResponse = PlayerLeaderboardScoreListResponse
     , _plslrKind          :: !Text
     , _plslrItems         :: !(Maybe [PlayerLeaderboardScore])
     , _plslrPlayer        :: !(Maybe Player)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerLeaderboardScoreListResponse' with the minimum fields required to make a request.
 --
@@ -3397,7 +3449,7 @@ data SnapshotImage = SnapshotImage
     , _siURL      :: !(Maybe Text)
     , _siMimeType :: !(Maybe Text)
     , _siWidth    :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotImage' with the minimum fields required to make a request.
 --
@@ -3477,7 +3529,7 @@ data RoomStatus = RoomStatus
     , _rsStatusVersion      :: !(Maybe Int32)
     , _rsParticipants       :: !(Maybe [RoomParticipant])
     , _rsRoomId             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomStatus' with the minimum fields required to make a request.
 --
@@ -3579,7 +3631,7 @@ data TurnBasedAutoMatchingCriteria = TurnBasedAutoMatchingCriteria
     , _tbamcExclusiveBitmask       :: !(Maybe Int64)
     , _tbamcMaxAutoMatchingPlayers :: !(Maybe Int32)
     , _tbamcMinAutoMatchingPlayers :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedAutoMatchingCriteria' with the minimum fields required to make a request.
 --
@@ -3661,7 +3713,7 @@ data PlayerScore = PlayerScore
     , _psKind           :: !Text
     , _psFormattedScore :: !(Maybe Text)
     , _psTimeSpan       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerScore' with the minimum fields required to make a request.
 --
@@ -3745,7 +3797,7 @@ data InstanceIosDetails = InstanceIosDetails
     , _iidSupportIPad        :: !(Maybe Bool)
     , _iidPreferredForIPhone :: !(Maybe Bool)
     , _iidBundleIdentifier   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceIosDetails' with the minimum fields required to make a request.
 --
@@ -3852,7 +3904,7 @@ data EventUpdateResponse = EventUpdateResponse
     , _eurBatchFailures :: !(Maybe [EventBatchRecordFailure])
     , _eurEventFailures :: !(Maybe [EventRecordFailure])
     , _eurKind          :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventUpdateResponse' with the minimum fields required to make a request.
 --
@@ -3930,7 +3982,7 @@ data RevisionCheckResponse = RevisionCheckResponse
     { _rcrAPIVersion     :: !(Maybe Text)
     , _rcrKind           :: !Text
     , _rcrRevisionStatus :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RevisionCheckResponse' with the minimum fields required to make a request.
 --
@@ -3997,7 +4049,7 @@ data ParticipantResult = ParticipantResult
     , _prKind          :: !Text
     , _prResult        :: !(Maybe Text)
     , _prPlacing       :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ParticipantResult' with the minimum fields required to make a request.
 --
@@ -4076,7 +4128,7 @@ data CategoryListResponse = CategoryListResponse
     { _clrNextPageToken :: !(Maybe Text)
     , _clrKind          :: !Text
     , _clrItems         :: !(Maybe [Category])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CategoryListResponse' with the minimum fields required to make a request.
 --
@@ -4138,7 +4190,7 @@ data TurnBasedMatchModification = TurnBasedMatchModification
     { _tbmmParticipantId           :: !(Maybe Text)
     , _tbmmKind                    :: !Text
     , _tbmmModifiedTimestampMillis :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchModification' with the minimum fields required to make a request.
 --
@@ -4205,7 +4257,7 @@ data RoomP2PStatus = RoomP2PStatus
     , _rppsErrorReason                      :: !(Maybe Text)
     , _rppsConnectionSetupLatencyMillis     :: !(Maybe Int32)
     , _rppsUnreliableRoundtripLatencyMillis :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomP2PStatus' with the minimum fields required to make a request.
 --
@@ -4320,7 +4372,7 @@ data MetagameConfig = MetagameConfig
     { _mcKind           :: !Text
     , _mcCurrentVersion :: !(Maybe Int32)
     , _mcPlayerLevels   :: !(Maybe [PlayerLevel])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetagameConfig' with the minimum fields required to make a request.
 --
@@ -4387,7 +4439,7 @@ data Leaderboard = Leaderboard
     , _lId               :: !(Maybe Text)
     , _lIconURL          :: !(Maybe Text)
     , _lOrder            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Leaderboard' with the minimum fields required to make a request.
 --
@@ -4481,7 +4533,7 @@ data EventDefinition = EventDefinition
     , _edId                :: !(Maybe Text)
     , _edChildEvents       :: !(Maybe [EventChild])
     , _edDescription       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventDefinition' with the minimum fields required to make a request.
 --
@@ -4599,7 +4651,7 @@ data RoomModification = RoomModification
     { _rmParticipantId           :: !(Maybe Text)
     , _rmKind                    :: !Text
     , _rmModifiedTimestampMillis :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomModification' with the minimum fields required to make a request.
 --
@@ -4661,7 +4713,7 @@ instance ToJSON RoomModification where
 data AchievementUnlockResponse = AchievementUnlockResponse
     { _achKind          :: !Text
     , _achNewlyUnlocked :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementUnlockResponse' with the minimum fields required to make a request.
 --
@@ -4712,7 +4764,7 @@ data EventUpdateRequest = EventUpdateRequest
     { _eUpdateCount  :: !(Maybe Int64)
     , _eKind         :: !Text
     , _eDefinitionId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventUpdateRequest' with the minimum fields required to make a request.
 --
@@ -4776,7 +4828,7 @@ data PlayerAchievement = PlayerAchievement
     , _paId                          :: !(Maybe Text)
     , _paCurrentSteps                :: !(Maybe Int32)
     , _paLastUpdatedTimestamp        :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerAchievement' with the minimum fields required to make a request.
 --
@@ -4884,7 +4936,7 @@ instance ToJSON PlayerAchievement where
 data RoomP2PStatuses = RoomP2PStatuses
     { _rppssKind    :: !Text
     , _rppssUpdates :: !(Maybe [RoomP2PStatus])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomP2PStatuses' with the minimum fields required to make a request.
 --
@@ -4936,9 +4988,9 @@ data AchievementUpdateRequest = AchievementUpdateRequest
     { _auruAchievementId          :: !(Maybe Text)
     , _auruKind                   :: !Text
     , _auruUpdateType             :: !(Maybe Text)
-    , _auruSetStepsAtLeastPayLoad :: !(Maybe GamesAchievementSetStepsAtLeast)
-    , _auruIncrementPayLoad       :: !(Maybe GamesAchievementIncrement)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _auruSetStepsAtLeastPayload :: !(Maybe GamesAchievementSetStepsAtLeast)
+    , _auruIncrementPayload       :: !(Maybe GamesAchievementIncrement)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementUpdateRequest' with the minimum fields required to make a request.
 --
@@ -4950,9 +5002,9 @@ data AchievementUpdateRequest = AchievementUpdateRequest
 --
 -- * 'auruUpdateType'
 --
--- * 'auruSetStepsAtLeastPayLoad'
+-- * 'auruSetStepsAtLeastPayload'
 --
--- * 'auruIncrementPayLoad'
+-- * 'auruIncrementPayload'
 achievementUpdateRequest
     :: AchievementUpdateRequest
 achievementUpdateRequest =
@@ -4960,8 +5012,8 @@ achievementUpdateRequest =
     { _auruAchievementId = Nothing
     , _auruKind = "games#achievementUpdateRequest"
     , _auruUpdateType = Nothing
-    , _auruSetStepsAtLeastPayLoad = Nothing
-    , _auruIncrementPayLoad = Nothing
+    , _auruSetStepsAtLeastPayload = Nothing
+    , _auruIncrementPayload = Nothing
     }
 
 -- | The achievement this update is being applied to.
@@ -4986,17 +5038,17 @@ auruUpdateType
 
 -- | The payload if an update of type SET_STEPS_AT_LEAST was requested for
 -- the achievement.
-auruSetStepsAtLeastPayLoad :: Lens' AchievementUpdateRequest (Maybe GamesAchievementSetStepsAtLeast)
-auruSetStepsAtLeastPayLoad
-  = lens _auruSetStepsAtLeastPayLoad
-      (\ s a -> s{_auruSetStepsAtLeastPayLoad = a})
+auruSetStepsAtLeastPayload :: Lens' AchievementUpdateRequest (Maybe GamesAchievementSetStepsAtLeast)
+auruSetStepsAtLeastPayload
+  = lens _auruSetStepsAtLeastPayload
+      (\ s a -> s{_auruSetStepsAtLeastPayload = a})
 
 -- | The payload if an update of type INCREMENT was requested for the
 -- achievement.
-auruIncrementPayLoad :: Lens' AchievementUpdateRequest (Maybe GamesAchievementIncrement)
-auruIncrementPayLoad
-  = lens _auruIncrementPayLoad
-      (\ s a -> s{_auruIncrementPayLoad = a})
+auruIncrementPayload :: Lens' AchievementUpdateRequest (Maybe GamesAchievementIncrement)
+auruIncrementPayload
+  = lens _auruIncrementPayload
+      (\ s a -> s{_auruIncrementPayload = a})
 
 instance FromJSON AchievementUpdateRequest where
         parseJSON
@@ -5017,8 +5069,8 @@ instance ToJSON AchievementUpdateRequest where
                   Just ("kind" .= _auruKind),
                   ("updateType" .=) <$> _auruUpdateType,
                   ("setStepsAtLeastPayload" .=) <$>
-                    _auruSetStepsAtLeastPayLoad,
-                  ("incrementPayload" .=) <$> _auruIncrementPayLoad])
+                    _auruSetStepsAtLeastPayload,
+                  ("incrementPayload" .=) <$> _auruIncrementPayload])
 
 -- | This is a JSON template for an image asset object.
 --
@@ -5029,7 +5081,7 @@ data ImageAsset = ImageAsset
     , _iaURL    :: !(Maybe Text)
     , _iaWidth  :: !(Maybe Int32)
     , _iaName   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImageAsset' with the minimum fields required to make a request.
 --
@@ -5104,7 +5156,7 @@ data LeaderboardScoreRank = LeaderboardScoreRank
     , _lsrFormattedRank      :: !(Maybe Text)
     , _lsrFormattedNumScores :: !(Maybe Text)
     , _lsrRank               :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardScoreRank' with the minimum fields required to make a request.
 --
@@ -5183,7 +5235,7 @@ instance ToJSON LeaderboardScoreRank where
 data AchievementUpdateMultipleRequest = AchievementUpdateMultipleRequest
     { _aumruKind    :: !Text
     , _aumruUpdates :: !(Maybe [AchievementUpdateRequest])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementUpdateMultipleRequest' with the minimum fields required to make a request.
 --
@@ -5238,7 +5290,7 @@ instance ToJSON AchievementUpdateMultipleRequest
 data RoomAutoMatchStatus = RoomAutoMatchStatus
     { _ramsKind                :: !Text
     , _ramsWaitEstimateSeconds :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomAutoMatchStatus' with the minimum fields required to make a request.
 --
@@ -5295,7 +5347,7 @@ data RoomCreateRequest = RoomCreateRequest
     , _rooClientAddress        :: !(Maybe RoomClientAddress)
     , _rooAutoMatchingCriteria :: !(Maybe RoomAutoMatchingCriteria)
     , _rooCapabilities         :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomCreateRequest' with the minimum fields required to make a request.
 --
@@ -5419,7 +5471,7 @@ data LeaderboardScores = LeaderboardScores
     , _lsPlayerScore   :: !(Maybe LeaderboardEntry)
     , _lsItems         :: !(Maybe [LeaderboardEntry])
     , _lsPrevPageToken :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardScores' with the minimum fields required to make a request.
 --
@@ -5515,7 +5567,7 @@ data PlayerListResponse = PlayerListResponse
     { _plrNextPageToken :: !(Maybe Text)
     , _plrKind          :: !Text
     , _plrItems         :: !(Maybe [Player])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerListResponse' with the minimum fields required to make a request.
 --
@@ -5579,7 +5631,7 @@ data TurnBasedMatchCreateRequest = TurnBasedMatchCreateRequest
     , _tbmcrKind                 :: !Text
     , _tbmcrInvitedPlayerIds     :: !(Maybe [Text])
     , _tbmcrAutoMatchingCriteria :: !(Maybe TurnBasedAutoMatchingCriteria)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchCreateRequest' with the minimum fields required to make a request.
 --
@@ -5678,7 +5730,7 @@ data AchievementDefinition = AchievementDefinition
     , _adDescription              :: !(Maybe Text)
     , _adIsRevealedIconURLDefault :: !(Maybe Bool)
     , _adUnlockedIconURL          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementDefinition' with the minimum fields required to make a request.
 --
@@ -5845,58 +5897,6 @@ instance ToJSON AchievementDefinition where
                     _adIsRevealedIconURLDefault,
                   ("unlockedIconUrl" .=) <$> _adUnlockedIconURL])
 
--- | A push token ID for iOS devices.
---
--- /See:/ 'pushTokenIdIos' smart constructor.
-data PushTokenIdIos = PushTokenIdIos
-    { _ptiiAPNSDeviceToken :: !(Maybe Word8)
-    , _ptiiAPNSEnvironment :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PushTokenIdIos' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ptiiAPNSDeviceToken'
---
--- * 'ptiiAPNSEnvironment'
-pushTokenIdIos
-    :: PushTokenIdIos
-pushTokenIdIos =
-    PushTokenIdIos
-    { _ptiiAPNSDeviceToken = Nothing
-    , _ptiiAPNSEnvironment = Nothing
-    }
-
--- | Device token supplied by an iOS system call to register for remote
--- notifications. Encode this field as web-safe base64.
-ptiiAPNSDeviceToken :: Lens' PushTokenIdIos (Maybe Word8)
-ptiiAPNSDeviceToken
-  = lens _ptiiAPNSDeviceToken
-      (\ s a -> s{_ptiiAPNSDeviceToken = a})
-
--- | Indicates whether this token should be used for the production or
--- sandbox APNS server.
-ptiiAPNSEnvironment :: Lens' PushTokenIdIos (Maybe Text)
-ptiiAPNSEnvironment
-  = lens _ptiiAPNSEnvironment
-      (\ s a -> s{_ptiiAPNSEnvironment = a})
-
-instance FromJSON PushTokenIdIos where
-        parseJSON
-          = withObject "PushTokenIdIos"
-              (\ o ->
-                 PushTokenIdIos <$>
-                   (o .:? "apns_device_token") <*>
-                     (o .:? "apns_environment"))
-
-instance ToJSON PushTokenIdIos where
-        toJSON PushTokenIdIos{..}
-          = object
-              (catMaybes
-                 [("apns_device_token" .=) <$> _ptiiAPNSDeviceToken,
-                  ("apns_environment" .=) <$> _ptiiAPNSEnvironment])
-
 -- | This is a JSON template for a list of achievement objects.
 --
 -- /See:/ 'playerAchievementListResponse' smart constructor.
@@ -5904,7 +5904,7 @@ data PlayerAchievementListResponse = PlayerAchievementListResponse
     { _palrNextPageToken :: !(Maybe Text)
     , _palrKind          :: !Text
     , _palrItems         :: !(Maybe [PlayerAchievement])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerAchievementListResponse' with the minimum fields required to make a request.
 --
@@ -5967,7 +5967,7 @@ data AchievementSetStepsAtLeastResponse = AchievementSetStepsAtLeastResponse
     { _assalrKind          :: !Text
     , _assalrNewlyUnlocked :: !(Maybe Bool)
     , _assalrCurrentSteps  :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementSetStepsAtLeastResponse' with the minimum fields required to make a request.
 --
@@ -6033,7 +6033,7 @@ data EventBatchRecordFailure = EventBatchRecordFailure
     { _ebrfKind         :: !Text
     , _ebrfRange        :: !(Maybe EventPeriodRange)
     , _ebrfFailureCause :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventBatchRecordFailure' with the minimum fields required to make a request.
 --
@@ -6102,7 +6102,7 @@ data TurnBasedMatchResults = TurnBasedMatchResults
     , _tbmrKind         :: !Text
     , _tbmrData         :: !(Maybe TurnBasedMatchDataRequest)
     , _tbmrMatchVersion :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchResults' with the minimum fields required to make a request.
 --
@@ -6173,7 +6173,7 @@ data RoomLeaveRequest = RoomLeaveRequest
     { _rlrKind             :: !Text
     , _rlrReason           :: !(Maybe Text)
     , _rlrLeaveDiagnostics :: !(Maybe RoomLeaveDiagnostics)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomLeaveRequest' with the minimum fields required to make a request.
 --
@@ -6249,7 +6249,7 @@ data AchievementIncrementResponse = AchievementIncrementResponse
     { _airKind          :: !Text
     , _airNewlyUnlocked :: !(Maybe Bool)
     , _airCurrentSteps  :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementIncrementResponse' with the minimum fields required to make a request.
 --
@@ -6311,7 +6311,7 @@ instance ToJSON AchievementIncrementResponse where
 data AchievementRevealResponse = AchievementRevealResponse
     { _arrKind         :: !Text
     , _arrCurrentState :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementRevealResponse' with the minimum fields required to make a request.
 --
@@ -6365,7 +6365,7 @@ data Played = Played
     { _pKind        :: !Text
     , _pAutoMatched :: !(Maybe Bool)
     , _pTimeMillis  :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Played' with the minimum fields required to make a request.
 --
@@ -6427,7 +6427,7 @@ data RoomAutoMatchingCriteria = RoomAutoMatchingCriteria
     , _ramcExclusiveBitmask       :: !(Maybe Int64)
     , _ramcMaxAutoMatchingPlayers :: !(Maybe Int32)
     , _ramcMinAutoMatchingPlayers :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomAutoMatchingCriteria' with the minimum fields required to make a request.
 --
@@ -6507,7 +6507,7 @@ data AggregateStats = AggregateStats
     , _asCount :: !(Maybe Int64)
     , _asMin   :: !(Maybe Int64)
     , _asSum   :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AggregateStats' with the minimum fields required to make a request.
 --
@@ -6585,7 +6585,7 @@ data RoomLeaveDiagnostics = RoomLeaveDiagnostics
     , _rldSocketsUsed           :: !(Maybe Bool)
     , _rldIosNetworkType        :: !(Maybe Int32)
     , _rldAndroidNetworkSubtype :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomLeaveDiagnostics' with the minimum fields required to make a request.
 --
@@ -6716,7 +6716,7 @@ data TurnBasedMatchSync = TurnBasedMatchSync
     , _tbmsNextPageToken :: !(Maybe Text)
     , _tbmsKind          :: !Text
     , _tbmsItems         :: !(Maybe [TurnBasedMatch])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchSync' with the minimum fields required to make a request.
 --
@@ -6792,7 +6792,7 @@ data QuestMilestone = QuestMilestone
     , _qmId                   :: !(Maybe Text)
     , _qmCompletionRewardData :: !(Maybe Word8)
     , _qmCriteria             :: !(Maybe [QuestCriterion])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestMilestone' with the minimum fields required to make a request.
 --
@@ -6876,9 +6876,9 @@ instance ToJSON QuestMilestone where
 --
 -- /See:/ 'pushTokenId' smart constructor.
 data PushTokenId = PushTokenId
-    { _ptiIos  :: !(Maybe PushTokenIdIos)
+    { _ptiIos  :: !(Maybe Ios)
     , _ptiKind :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PushTokenId' with the minimum fields required to make a request.
 --
@@ -6896,7 +6896,7 @@ pushTokenId =
     }
 
 -- | A push token ID for iOS devices.
-ptiIos :: Lens' PushTokenId (Maybe PushTokenIdIos)
+ptiIos :: Lens' PushTokenId (Maybe Ios)
 ptiIos = lens _ptiIos (\ s a -> s{_ptiIos = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
@@ -6926,7 +6926,7 @@ data EventRecordRequest = EventRecordRequest
     , _errKind              :: !Text
     , _errCurrentTimeMillis :: !(Maybe Int64)
     , _errTimePeriods       :: !(Maybe [EventPeriodUpdate])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventRecordRequest' with the minimum fields required to make a request.
 --
@@ -7002,7 +7002,7 @@ data ScoreSubmission = ScoreSubmission
     , _ssScore         :: !(Maybe Int64)
     , _ssKind          :: !Text
     , _ssLeaderboardId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoreSubmission' with the minimum fields required to make a request.
 --
@@ -7083,7 +7083,7 @@ data PeerSessionDiagnostics = PeerSessionDiagnostics
     , _psdKind                     :: !Text
     , _psdUnreliableChannel        :: !(Maybe PeerChannelDiagnostics)
     , _psdReliableChannel          :: !(Maybe PeerChannelDiagnostics)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeerSessionDiagnostics' with the minimum fields required to make a request.
 --
@@ -7167,7 +7167,7 @@ data EventPeriodUpdate = EventPeriodUpdate
     { _epuKind       :: !Text
     , _epuTimePeriod :: !(Maybe EventPeriodRange)
     , _epuUpdates    :: !(Maybe [EventUpdateRequest])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventPeriodUpdate' with the minimum fields required to make a request.
 --
@@ -7230,7 +7230,7 @@ data GamesAchievementIncrement = GamesAchievementIncrement
     { _gaiRequestId :: !(Maybe Int64)
     , _gaiKind      :: !Text
     , _gaiSteps     :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesAchievementIncrement' with the minimum fields required to make a request.
 --
@@ -7288,7 +7288,7 @@ instance ToJSON GamesAchievementIncrement where
 data GamesAchievementSetStepsAtLeast = GamesAchievementSetStepsAtLeast
     { _gassalKind  :: !Text
     , _gassalSteps :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesAchievementSetStepsAtLeast' with the minimum fields required to make a request.
 --
@@ -7343,7 +7343,7 @@ data PlayerExperienceInfo = PlayerExperienceInfo
     , _peiCurrentLevel               :: !(Maybe PlayerLevel)
     , _peiNextLevel                  :: !(Maybe PlayerLevel)
     , _peiLastLevelUpTimestampMillis :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerExperienceInfo' with the minimum fields required to make a request.
 --
@@ -7434,7 +7434,7 @@ data Player = Player
     , _plaDisplayName    :: !(Maybe Text)
     , _plaTitle          :: !(Maybe Text)
     , _plaPlayerId       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Player' with the minimum fields required to make a request.
 --
@@ -7547,7 +7547,7 @@ data TurnBasedMatchRematch = TurnBasedMatchRematch
     { _tRematch       :: !(Maybe TurnBasedMatch)
     , _tKind          :: !Text
     , _tPreviousMatch :: !(Maybe TurnBasedMatch)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchRematch' with the minimum fields required to make a request.
 --
@@ -7608,7 +7608,7 @@ data InstanceWebDetails = InstanceWebDetails
     { _iwdPreferred :: !(Maybe Bool)
     , _iwdKind      :: !Text
     , _iwdLaunchURL :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceWebDetails' with the minimum fields required to make a request.
 --
@@ -7666,7 +7666,7 @@ instance ToJSON InstanceWebDetails where
 data EventChild = EventChild
     { _ecKind    :: !Text
     , _ecChildId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventChild' with the minimum fields required to make a request.
 --
@@ -7714,7 +7714,7 @@ instance ToJSON EventChild where
 data TurnBasedMatchDataRequest = TurnBasedMatchDataRequest
     { _tbmdrKind :: !Text
     , _tbmdrData :: !(Maybe Word8)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchDataRequest' with the minimum fields required to make a request.
 --
@@ -7765,7 +7765,7 @@ data PlayerEventListResponse = PlayerEventListResponse
     { _pelrNextPageToken :: !(Maybe Text)
     , _pelrKind          :: !Text
     , _pelrItems         :: !(Maybe [PlayerEvent])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerEventListResponse' with the minimum fields required to make a request.
 --
@@ -7827,7 +7827,7 @@ data EventPeriodRange = EventPeriodRange
     { _eprKind              :: !Text
     , _eprPeriodStartMillis :: !(Maybe Int64)
     , _eprPeriodEndMillis   :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventPeriodRange' with the minimum fields required to make a request.
 --
@@ -7903,7 +7903,7 @@ data Quest = Quest
     , _queIsDefaultBannerURL         :: !(Maybe Bool)
     , _queIsDefaultIconURL           :: !(Maybe Bool)
     , _queAcceptedTimestampMillis    :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Quest' with the minimum fields required to make a request.
 --
@@ -8119,7 +8119,7 @@ data EventRecordFailure = EventRecordFailure
     { _erfKind         :: !Text
     , _erfFailureCause :: !(Maybe Text)
     , _erfEventId      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventRecordFailure' with the minimum fields required to make a request.
 --
@@ -8188,7 +8188,7 @@ data Instance = Instance
     , _iPlatformType    :: !(Maybe Text)
     , _iTurnBasedPlay   :: !(Maybe Bool)
     , _iRealtimePlay    :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Instance' with the minimum fields required to make a request.
 --
@@ -8312,7 +8312,7 @@ instance ToJSON Instance where
 data PlayerScoreSubmissionList = PlayerScoreSubmissionList
     { _psslKind   :: !Text
     , _psslScores :: !(Maybe [ScoreSubmission])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerScoreSubmissionList' with the minimum fields required to make a request.
 --

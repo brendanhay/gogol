@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,12 +52,12 @@ import           Network.Google.Prelude
 -- 'ChangesList'' request conforms to.
 type ChangesListResource =
      "changes" :>
-       QueryParam "includeDeleted" Bool :>
-         QueryParam "includeSubscribed" Bool :>
-           QueryParam "maxResults" Int32 :>
+       QueryParam "includeSubscribed" Bool :>
+         QueryParam "startChangeId" Int64 :>
+           QueryParam "spaces" Text :>
              QueryParam "pageToken" Text :>
-               QueryParam "spaces" Text :>
-                 QueryParam "startChangeId" Int64 :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "includeDeleted" Bool :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,7 +83,7 @@ data ChangesList' = ChangesList'
     , _cllMaxResults        :: !Int32
     , _cllIncludeDeleted    :: !Bool
     , _cllFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesList'' with the minimum fields required to make a request.
 --
@@ -210,12 +211,11 @@ instance GoogleRequest ChangesList' where
         type Rs ChangesList' = ChangeList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ChangesList'{..}
-          = go (Just _cllIncludeDeleted)
-              (Just _cllIncludeSubscribed)
-              (Just _cllMaxResults)
-              _cllPageToken
+          = go (Just _cllIncludeSubscribed) _cllStartChangeId
               _cllSpaces
-              _cllStartChangeId
+              _cllPageToken
+              (Just _cllMaxResults)
+              (Just _cllIncludeDeleted)
               _cllQuotaUser
               (Just _cllPrettyPrint)
               _cllUserIP

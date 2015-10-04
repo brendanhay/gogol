@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,9 +37,9 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Update
     , actuTriggerId
     , actuUserIP
     , actuFingerprint
+    , actuPayload
     , actuAccountId
     , actuKey
-    , actuTrigger
     , actuOAuthToken
     , actuFields
     ) where
@@ -75,12 +76,12 @@ data AccountsContainersTriggersUpdate' = AccountsContainersTriggersUpdate'
     , _actuTriggerId   :: !Text
     , _actuUserIP      :: !(Maybe Text)
     , _actuFingerprint :: !(Maybe Text)
+    , _actuPayload     :: !Trigger
     , _actuAccountId   :: !Text
     , _actuKey         :: !(Maybe Key)
-    , _actuTrigger     :: !Trigger
     , _actuOAuthToken  :: !(Maybe OAuthToken)
     , _actuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTriggersUpdate'' with the minimum fields required to make a request.
 --
@@ -98,11 +99,11 @@ data AccountsContainersTriggersUpdate' = AccountsContainersTriggersUpdate'
 --
 -- * 'actuFingerprint'
 --
+-- * 'actuPayload'
+--
 -- * 'actuAccountId'
 --
 -- * 'actuKey'
---
--- * 'actuTrigger'
 --
 -- * 'actuOAuthToken'
 --
@@ -110,10 +111,10 @@ data AccountsContainersTriggersUpdate' = AccountsContainersTriggersUpdate'
 accountsContainersTriggersUpdate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'triggerId'
+    -> Trigger -- ^ 'payload'
     -> Text -- ^ 'accountId'
-    -> Trigger -- ^ 'Trigger'
     -> AccountsContainersTriggersUpdate'
-accountsContainersTriggersUpdate' pActuContainerId_ pActuTriggerId_ pActuAccountId_ pActuTrigger_ =
+accountsContainersTriggersUpdate' pActuContainerId_ pActuTriggerId_ pActuPayload_ pActuAccountId_ =
     AccountsContainersTriggersUpdate'
     { _actuQuotaUser = Nothing
     , _actuPrettyPrint = True
@@ -121,9 +122,9 @@ accountsContainersTriggersUpdate' pActuContainerId_ pActuTriggerId_ pActuAccount
     , _actuTriggerId = pActuTriggerId_
     , _actuUserIP = Nothing
     , _actuFingerprint = Nothing
+    , _actuPayload = pActuPayload_
     , _actuAccountId = pActuAccountId_
     , _actuKey = Nothing
-    , _actuTrigger = pActuTrigger_
     , _actuOAuthToken = Nothing
     , _actuFields = Nothing
     }
@@ -167,6 +168,11 @@ actuFingerprint
   = lens _actuFingerprint
       (\ s a -> s{_actuFingerprint = a})
 
+-- | Multipart request metadata.
+actuPayload :: Lens' AccountsContainersTriggersUpdate' Trigger
+actuPayload
+  = lens _actuPayload (\ s a -> s{_actuPayload = a})
+
 -- | The GTM Account ID.
 actuAccountId :: Lens' AccountsContainersTriggersUpdate' Text
 actuAccountId
@@ -178,11 +184,6 @@ actuAccountId
 -- token.
 actuKey :: Lens' AccountsContainersTriggersUpdate' (Maybe Key)
 actuKey = lens _actuKey (\ s a -> s{_actuKey = a})
-
--- | Multipart request metadata.
-actuTrigger :: Lens' AccountsContainersTriggersUpdate' Trigger
-actuTrigger
-  = lens _actuTrigger (\ s a -> s{_actuTrigger = a})
 
 -- | OAuth 2.0 token for the current user.
 actuOAuthToken :: Lens' AccountsContainersTriggersUpdate' (Maybe OAuthToken)
@@ -206,8 +207,8 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersTriggersUpdate'{..}
-          = go _actuFingerprint _actuAccountId _actuContainerId
-              _actuTriggerId
+          = go _actuAccountId _actuContainerId _actuTriggerId
+              _actuFingerprint
               _actuQuotaUser
               (Just _actuPrettyPrint)
               _actuUserIP
@@ -215,7 +216,7 @@ instance GoogleRequest
               _actuKey
               _actuOAuthToken
               (Just AltJSON)
-              _actuTrigger
+              _actuPayload
           where go
                   = clientWithRoute
                       (Proxy ::

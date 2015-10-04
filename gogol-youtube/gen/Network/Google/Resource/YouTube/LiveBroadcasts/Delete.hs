@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,9 +49,9 @@ import           Network.Google.YouTube.Types
 -- 'LiveBroadcastsDelete'' request conforms to.
 type LiveBroadcastsDeleteResource =
      "liveBroadcasts" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "onBehalfOfContentOwnerChannel" Text :>
-           QueryParam "id" Text :>
+       QueryParam "id" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
+           QueryParam "onBehalfOfContentOwnerChannel" Text :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -72,7 +73,7 @@ data LiveBroadcastsDelete' = LiveBroadcastsDelete'
     , _lbdId                            :: !Text
     , _lbdOAuthToken                    :: !(Maybe OAuthToken)
     , _lbdFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsDelete'' with the minimum fields required to make a request.
 --
@@ -196,9 +197,8 @@ instance GoogleRequest LiveBroadcastsDelete' where
         type Rs LiveBroadcastsDelete' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveBroadcastsDelete'{..}
-          = go _lbdOnBehalfOfContentOwner
+          = go (Just _lbdId) _lbdOnBehalfOfContentOwner
               _lbdOnBehalfOfContentOwnerChannel
-              (Just _lbdId)
               _lbdQuotaUser
               (Just _lbdPrettyPrint)
               _lbdUserIP

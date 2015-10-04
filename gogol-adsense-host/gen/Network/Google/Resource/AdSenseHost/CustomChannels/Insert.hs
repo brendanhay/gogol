@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.AdSenseHost.CustomChannels.Insert
     , cciQuotaUser
     , cciPrettyPrint
     , cciUserIP
+    , cciPayload
     , cciAdClientId
     , cciKey
-    , cciCustomChannel
     , cciOAuthToken
     , cciFields
     ) where
@@ -63,15 +64,15 @@ type CustomChannelsInsertResource =
 --
 -- /See:/ 'customChannelsInsert'' smart constructor.
 data CustomChannelsInsert' = CustomChannelsInsert'
-    { _cciQuotaUser     :: !(Maybe Text)
-    , _cciPrettyPrint   :: !Bool
-    , _cciUserIP        :: !(Maybe Text)
-    , _cciAdClientId    :: !Text
-    , _cciKey           :: !(Maybe Key)
-    , _cciCustomChannel :: !CustomChannel
-    , _cciOAuthToken    :: !(Maybe OAuthToken)
-    , _cciFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cciQuotaUser   :: !(Maybe Text)
+    , _cciPrettyPrint :: !Bool
+    , _cciUserIP      :: !(Maybe Text)
+    , _cciPayload     :: !CustomChannel
+    , _cciAdClientId  :: !Text
+    , _cciKey         :: !(Maybe Key)
+    , _cciOAuthToken  :: !(Maybe OAuthToken)
+    , _cciFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomChannelsInsert'' with the minimum fields required to make a request.
 --
@@ -83,27 +84,27 @@ data CustomChannelsInsert' = CustomChannelsInsert'
 --
 -- * 'cciUserIP'
 --
+-- * 'cciPayload'
+--
 -- * 'cciAdClientId'
 --
 -- * 'cciKey'
---
--- * 'cciCustomChannel'
 --
 -- * 'cciOAuthToken'
 --
 -- * 'cciFields'
 customChannelsInsert'
-    :: Text -- ^ 'adClientId'
-    -> CustomChannel -- ^ 'CustomChannel'
+    :: CustomChannel -- ^ 'payload'
+    -> Text -- ^ 'adClientId'
     -> CustomChannelsInsert'
-customChannelsInsert' pCciAdClientId_ pCciCustomChannel_ =
+customChannelsInsert' pCciPayload_ pCciAdClientId_ =
     CustomChannelsInsert'
     { _cciQuotaUser = Nothing
     , _cciPrettyPrint = True
     , _cciUserIP = Nothing
+    , _cciPayload = pCciPayload_
     , _cciAdClientId = pCciAdClientId_
     , _cciKey = Nothing
-    , _cciCustomChannel = pCciCustomChannel_
     , _cciOAuthToken = Nothing
     , _cciFields = Nothing
     }
@@ -127,6 +128,11 @@ cciUserIP :: Lens' CustomChannelsInsert' (Maybe Text)
 cciUserIP
   = lens _cciUserIP (\ s a -> s{_cciUserIP = a})
 
+-- | Multipart request metadata.
+cciPayload :: Lens' CustomChannelsInsert' CustomChannel
+cciPayload
+  = lens _cciPayload (\ s a -> s{_cciPayload = a})
+
 -- | Ad client to which the new custom channel will be added.
 cciAdClientId :: Lens' CustomChannelsInsert' Text
 cciAdClientId
@@ -138,12 +144,6 @@ cciAdClientId
 -- token.
 cciKey :: Lens' CustomChannelsInsert' (Maybe Key)
 cciKey = lens _cciKey (\ s a -> s{_cciKey = a})
-
--- | Multipart request metadata.
-cciCustomChannel :: Lens' CustomChannelsInsert' CustomChannel
-cciCustomChannel
-  = lens _cciCustomChannel
-      (\ s a -> s{_cciCustomChannel = a})
 
 -- | OAuth 2.0 token for the current user.
 cciOAuthToken :: Lens' CustomChannelsInsert' (Maybe OAuthToken)
@@ -171,7 +171,7 @@ instance GoogleRequest CustomChannelsInsert' where
               _cciKey
               _cciOAuthToken
               (Just AltJSON)
-              _cciCustomChannel
+              _cciPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CustomChannelsInsertResource)

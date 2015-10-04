@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -47,8 +48,8 @@ import           Network.Google.Prelude
 -- 'APIsList'' request conforms to.
 type APIsListResource =
      "apis" :>
-       QueryParam "name" Text :>
-         QueryParam "preferred" Bool :>
+       QueryParam "preferred" Bool :>
+         QueryParam "name" Text :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -69,7 +70,7 @@ data APIsList' = APIsList'
     , _alName        :: !(Maybe Text)
     , _alOAuthToken  :: !(Maybe OAuthToken)
     , _alFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APIsList'' with the minimum fields required to make a request.
 --
@@ -154,7 +155,7 @@ instance GoogleRequest APIsList' where
         type Rs APIsList' = DirectoryList
         request = requestWithRoute defReq discoveryURL
         requestWithRoute r u APIsList'{..}
-          = go _alName (Just _alPreferred) _alQuotaUser
+          = go (Just _alPreferred) _alName _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP
               _alFields

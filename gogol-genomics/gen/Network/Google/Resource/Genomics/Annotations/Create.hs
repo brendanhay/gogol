@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.Genomics.Annotations.Create
 
     -- * Request Lenses
     , acQuotaUser
-    , acAnnotation
     , acPrettyPrint
     , acUserIP
+    , acPayload
     , acKey
     , acOAuthToken
     , acFields
@@ -62,13 +63,13 @@ type AnnotationsCreateResource =
 -- /See:/ 'annotationsCreate'' smart constructor.
 data AnnotationsCreate' = AnnotationsCreate'
     { _acQuotaUser   :: !(Maybe Text)
-    , _acAnnotation  :: !Annotation
     , _acPrettyPrint :: !Bool
     , _acUserIP      :: !(Maybe Text)
+    , _acPayload     :: !Annotation
     , _acKey         :: !(Maybe Key)
     , _acOAuthToken  :: !(Maybe OAuthToken)
     , _acFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsCreate'' with the minimum fields required to make a request.
 --
@@ -76,11 +77,11 @@ data AnnotationsCreate' = AnnotationsCreate'
 --
 -- * 'acQuotaUser'
 --
--- * 'acAnnotation'
---
 -- * 'acPrettyPrint'
 --
 -- * 'acUserIP'
+--
+-- * 'acPayload'
 --
 -- * 'acKey'
 --
@@ -88,14 +89,14 @@ data AnnotationsCreate' = AnnotationsCreate'
 --
 -- * 'acFields'
 annotationsCreate'
-    :: Annotation -- ^ 'Annotation'
+    :: Annotation -- ^ 'payload'
     -> AnnotationsCreate'
-annotationsCreate' pAcAnnotation_ =
+annotationsCreate' pAcPayload_ =
     AnnotationsCreate'
     { _acQuotaUser = Nothing
-    , _acAnnotation = pAcAnnotation_
     , _acPrettyPrint = True
     , _acUserIP = Nothing
+    , _acPayload = pAcPayload_
     , _acKey = Nothing
     , _acOAuthToken = Nothing
     , _acFields = Nothing
@@ -108,11 +109,6 @@ acQuotaUser :: Lens' AnnotationsCreate' (Maybe Text)
 acQuotaUser
   = lens _acQuotaUser (\ s a -> s{_acQuotaUser = a})
 
--- | Multipart request metadata.
-acAnnotation :: Lens' AnnotationsCreate' Annotation
-acAnnotation
-  = lens _acAnnotation (\ s a -> s{_acAnnotation = a})
-
 -- | Returns response with indentations and line breaks.
 acPrettyPrint :: Lens' AnnotationsCreate' Bool
 acPrettyPrint
@@ -123,6 +119,11 @@ acPrettyPrint
 -- want to enforce per-user limits.
 acUserIP :: Lens' AnnotationsCreate' (Maybe Text)
 acUserIP = lens _acUserIP (\ s a -> s{_acUserIP = a})
+
+-- | Multipart request metadata.
+acPayload :: Lens' AnnotationsCreate' Annotation
+acPayload
+  = lens _acPayload (\ s a -> s{_acPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -152,7 +153,7 @@ instance GoogleRequest AnnotationsCreate' where
               _acKey
               _acOAuthToken
               (Just AltJSON)
-              _acAnnotation
+              _acPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationsCreateResource)

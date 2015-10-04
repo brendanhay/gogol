@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.DoubleClickBidManager.Lineitems.Downloadlineitems
     -- * Request Lenses
     , ldQuotaUser
     , ldPrettyPrint
-    , ldDownloadLineItemsRequest
     , ldUserIP
+    , ldPayload
     , ldKey
     , ldOAuthToken
     , ldFields
@@ -61,14 +62,14 @@ type LineitemsDownloadlineitemsResource =
 --
 -- /See:/ 'lineitemsDownloadlineitems'' smart constructor.
 data LineitemsDownloadlineitems' = LineitemsDownloadlineitems'
-    { _ldQuotaUser                :: !(Maybe Text)
-    , _ldPrettyPrint              :: !Bool
-    , _ldDownloadLineItemsRequest :: !DownloadLineItemsRequest
-    , _ldUserIP                   :: !(Maybe Text)
-    , _ldKey                      :: !(Maybe Key)
-    , _ldOAuthToken               :: !(Maybe OAuthToken)
-    , _ldFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ldQuotaUser   :: !(Maybe Text)
+    , _ldPrettyPrint :: !Bool
+    , _ldUserIP      :: !(Maybe Text)
+    , _ldPayload     :: !DownloadLineItemsRequest
+    , _ldKey         :: !(Maybe Key)
+    , _ldOAuthToken  :: !(Maybe OAuthToken)
+    , _ldFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LineitemsDownloadlineitems'' with the minimum fields required to make a request.
 --
@@ -78,9 +79,9 @@ data LineitemsDownloadlineitems' = LineitemsDownloadlineitems'
 --
 -- * 'ldPrettyPrint'
 --
--- * 'ldDownloadLineItemsRequest'
---
 -- * 'ldUserIP'
+--
+-- * 'ldPayload'
 --
 -- * 'ldKey'
 --
@@ -88,14 +89,14 @@ data LineitemsDownloadlineitems' = LineitemsDownloadlineitems'
 --
 -- * 'ldFields'
 lineitemsDownloadlineitems'
-    :: DownloadLineItemsRequest -- ^ 'DownloadLineItemsRequest'
+    :: DownloadLineItemsRequest -- ^ 'payload'
     -> LineitemsDownloadlineitems'
-lineitemsDownloadlineitems' pLdDownloadLineItemsRequest_ =
+lineitemsDownloadlineitems' pLdPayload_ =
     LineitemsDownloadlineitems'
     { _ldQuotaUser = Nothing
     , _ldPrettyPrint = True
-    , _ldDownloadLineItemsRequest = pLdDownloadLineItemsRequest_
     , _ldUserIP = Nothing
+    , _ldPayload = pLdPayload_
     , _ldKey = Nothing
     , _ldOAuthToken = Nothing
     , _ldFields = Nothing
@@ -114,16 +115,15 @@ ldPrettyPrint
   = lens _ldPrettyPrint
       (\ s a -> s{_ldPrettyPrint = a})
 
--- | Multipart request metadata.
-ldDownloadLineItemsRequest :: Lens' LineitemsDownloadlineitems' DownloadLineItemsRequest
-ldDownloadLineItemsRequest
-  = lens _ldDownloadLineItemsRequest
-      (\ s a -> s{_ldDownloadLineItemsRequest = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 ldUserIP :: Lens' LineitemsDownloadlineitems' (Maybe Text)
 ldUserIP = lens _ldUserIP (\ s a -> s{_ldUserIP = a})
+
+-- | Multipart request metadata.
+ldPayload :: Lens' LineitemsDownloadlineitems' DownloadLineItemsRequest
+ldPayload
+  = lens _ldPayload (\ s a -> s{_ldPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -155,7 +155,7 @@ instance GoogleRequest LineitemsDownloadlineitems'
               _ldKey
               _ldOAuthToken
               (Just AltJSON)
-              _ldDownloadLineItemsRequest
+              _ldPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LineitemsDownloadlineitemsResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.Insert
     , rliPrettyPrint
     , rliUserIP
     , rliProfileId
-    , rliRemarketingList
+    , rliPayload
     , rliKey
     , rliOAuthToken
     , rliFields
@@ -63,15 +64,15 @@ type RemarketingListsInsertResource =
 --
 -- /See:/ 'remarketingListsInsert'' smart constructor.
 data RemarketingListsInsert' = RemarketingListsInsert'
-    { _rliQuotaUser       :: !(Maybe Text)
-    , _rliPrettyPrint     :: !Bool
-    , _rliUserIP          :: !(Maybe Text)
-    , _rliProfileId       :: !Int64
-    , _rliRemarketingList :: !RemarketingList
-    , _rliKey             :: !(Maybe Key)
-    , _rliOAuthToken      :: !(Maybe OAuthToken)
-    , _rliFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rliQuotaUser   :: !(Maybe Text)
+    , _rliPrettyPrint :: !Bool
+    , _rliUserIP      :: !(Maybe Text)
+    , _rliProfileId   :: !Int64
+    , _rliPayload     :: !RemarketingList
+    , _rliKey         :: !(Maybe Key)
+    , _rliOAuthToken  :: !(Maybe OAuthToken)
+    , _rliFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListsInsert'' with the minimum fields required to make a request.
 --
@@ -85,7 +86,7 @@ data RemarketingListsInsert' = RemarketingListsInsert'
 --
 -- * 'rliProfileId'
 --
--- * 'rliRemarketingList'
+-- * 'rliPayload'
 --
 -- * 'rliKey'
 --
@@ -94,15 +95,15 @@ data RemarketingListsInsert' = RemarketingListsInsert'
 -- * 'rliFields'
 remarketingListsInsert'
     :: Int64 -- ^ 'profileId'
-    -> RemarketingList -- ^ 'RemarketingList'
+    -> RemarketingList -- ^ 'payload'
     -> RemarketingListsInsert'
-remarketingListsInsert' pRliProfileId_ pRliRemarketingList_ =
+remarketingListsInsert' pRliProfileId_ pRliPayload_ =
     RemarketingListsInsert'
     { _rliQuotaUser = Nothing
     , _rliPrettyPrint = True
     , _rliUserIP = Nothing
     , _rliProfileId = pRliProfileId_
-    , _rliRemarketingList = pRliRemarketingList_
+    , _rliPayload = pRliPayload_
     , _rliKey = Nothing
     , _rliOAuthToken = Nothing
     , _rliFields = Nothing
@@ -133,10 +134,9 @@ rliProfileId
   = lens _rliProfileId (\ s a -> s{_rliProfileId = a})
 
 -- | Multipart request metadata.
-rliRemarketingList :: Lens' RemarketingListsInsert' RemarketingList
-rliRemarketingList
-  = lens _rliRemarketingList
-      (\ s a -> s{_rliRemarketingList = a})
+rliPayload :: Lens' RemarketingListsInsert' RemarketingList
+rliPayload
+  = lens _rliPayload (\ s a -> s{_rliPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -170,7 +170,7 @@ instance GoogleRequest RemarketingListsInsert' where
               _rliKey
               _rliOAuthToken
               (Just AltJSON)
-              _rliRemarketingList
+              _rliPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RemarketingListsInsertResource)

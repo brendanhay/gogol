@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -77,7 +78,7 @@ data LayersGet' = LayersGet'
     , _lgOAuthToken     :: !(Maybe OAuthToken)
     , _lgFields         :: !(Maybe Text)
     , _lgSummaryId      :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersGet'' with the minimum fields required to make a request.
 --
@@ -181,8 +182,8 @@ instance GoogleRequest LayersGet' where
         type Rs LayersGet' = Layersummary
         request = requestWithRoute defReq booksURL
         requestWithRoute r u LayersGet'{..}
-          = go _lgContentVersion _lgSource _lgVolumeId
-              _lgSummaryId
+          = go _lgVolumeId _lgSummaryId _lgContentVersion
+              _lgSource
               _lgQuotaUser
               (Just _lgPrettyPrint)
               _lgUserIP

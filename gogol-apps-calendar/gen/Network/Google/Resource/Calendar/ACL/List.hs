@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,10 +53,10 @@ type ACLListResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "acl" :>
-           QueryParam "maxResults" Int32 :>
-             QueryParam "pageToken" Text :>
-               QueryParam "showDeleted" Bool :>
-                 QueryParam "syncToken" Text :>
+           QueryParam "syncToken" Text :>
+             QueryParam "showDeleted" Bool :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Int32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data ACLList' = ACLList'
     , _alOAuthToken  :: !(Maybe OAuthToken)
     , _alMaxResults  :: !(Maybe Int32)
     , _alFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLList'' with the minimum fields required to make a request.
 --
@@ -205,9 +206,9 @@ instance GoogleRequest ACLList' where
         type Rs ACLList' = ACL
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u ACLList'{..}
-          = go _alMaxResults _alPageToken _alShowDeleted
-              _alSyncToken
-              _alCalendarId
+          = go _alCalendarId _alSyncToken _alShowDeleted
+              _alPageToken
+              _alMaxResults
               _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type ZoneOperationsListResource =
          Capture "zone" Text :>
            "operations" :>
              QueryParam "filter" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,7 +83,7 @@ data ZoneOperationsList' = ZoneOperationsList'
     , _zolOAuthToken  :: !(Maybe OAuthToken)
     , _zolMaxResults  :: !Word32
     , _zolFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneOperationsList'' with the minimum fields required to make a request.
 --
@@ -192,9 +193,8 @@ instance GoogleRequest ZoneOperationsList' where
         type Rs ZoneOperationsList' = OperationList
         request = requestWithRoute defReq autoscalerURL
         requestWithRoute r u ZoneOperationsList'{..}
-          = go _zolFilter (Just _zolMaxResults) _zolPageToken
-              _zolProject
-              _zolZone
+          = go _zolProject _zolZone _zolFilter _zolPageToken
+              (Just _zolMaxResults)
               _zolQuotaUser
               (Just _zolPrettyPrint)
               _zolUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.AndroidPublisher.Inappproducts.Insert
     , iiAutoConvertMissingPrices
     , iiPackageName
     , iiUserIP
+    , iiPayload
     , iiKey
-    , iiInAppProduct
     , iiOAuthToken
     , iiFields
     ) where
@@ -69,11 +70,11 @@ data InappproductsInsert' = InappproductsInsert'
     , _iiAutoConvertMissingPrices :: !(Maybe Bool)
     , _iiPackageName              :: !Text
     , _iiUserIP                   :: !(Maybe Text)
+    , _iiPayload                  :: !InAppProduct
     , _iiKey                      :: !(Maybe Key)
-    , _iiInAppProduct             :: !InAppProduct
     , _iiOAuthToken               :: !(Maybe OAuthToken)
     , _iiFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsInsert'' with the minimum fields required to make a request.
 --
@@ -89,26 +90,26 @@ data InappproductsInsert' = InappproductsInsert'
 --
 -- * 'iiUserIP'
 --
--- * 'iiKey'
+-- * 'iiPayload'
 --
--- * 'iiInAppProduct'
+-- * 'iiKey'
 --
 -- * 'iiOAuthToken'
 --
 -- * 'iiFields'
 inappproductsInsert'
     :: Text -- ^ 'packageName'
-    -> InAppProduct -- ^ 'InAppProduct'
+    -> InAppProduct -- ^ 'payload'
     -> InappproductsInsert'
-inappproductsInsert' pIiPackageName_ pIiInAppProduct_ =
+inappproductsInsert' pIiPackageName_ pIiPayload_ =
     InappproductsInsert'
     { _iiQuotaUser = Nothing
     , _iiPrettyPrint = True
     , _iiAutoConvertMissingPrices = Nothing
     , _iiPackageName = pIiPackageName_
     , _iiUserIP = Nothing
+    , _iiPayload = pIiPayload_
     , _iiKey = Nothing
-    , _iiInAppProduct = pIiInAppProduct_
     , _iiOAuthToken = Nothing
     , _iiFields = Nothing
     }
@@ -146,17 +147,16 @@ iiPackageName
 iiUserIP :: Lens' InappproductsInsert' (Maybe Text)
 iiUserIP = lens _iiUserIP (\ s a -> s{_iiUserIP = a})
 
+-- | Multipart request metadata.
+iiPayload :: Lens' InappproductsInsert' InAppProduct
+iiPayload
+  = lens _iiPayload (\ s a -> s{_iiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 iiKey :: Lens' InappproductsInsert' (Maybe Key)
 iiKey = lens _iiKey (\ s a -> s{_iiKey = a})
-
--- | Multipart request metadata.
-iiInAppProduct :: Lens' InappproductsInsert' InAppProduct
-iiInAppProduct
-  = lens _iiInAppProduct
-      (\ s a -> s{_iiInAppProduct = a})
 
 -- | OAuth 2.0 token for the current user.
 iiOAuthToken :: Lens' InappproductsInsert' (Maybe OAuthToken)
@@ -175,7 +175,7 @@ instance GoogleRequest InappproductsInsert' where
         type Rs InappproductsInsert' = InAppProduct
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u InappproductsInsert'{..}
-          = go _iiAutoConvertMissingPrices _iiPackageName
+          = go _iiPackageName _iiAutoConvertMissingPrices
               _iiQuotaUser
               (Just _iiPrettyPrint)
               _iiUserIP
@@ -183,7 +183,7 @@ instance GoogleRequest InappproductsInsert' where
               _iiKey
               _iiOAuthToken
               (Just AltJSON)
-              _iiInAppProduct
+              _iiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InappproductsInsertResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.Blogger.Posts.Insert
     , piiPrettyPrint
     , piiIsDraft
     , piiUserIP
-    , piiPost
     , piiFetchImages
     , piiBlogId
+    , piiPayload
     , piiKey
     , piiOAuthToken
     , piiFields
@@ -53,8 +54,8 @@ type PostsInsertResource =
        Capture "blogId" Text :>
          "posts" :>
            QueryParam "fetchBody" Bool :>
-             QueryParam "fetchImages" Bool :>
-               QueryParam "isDraft" Bool :>
+             QueryParam "isDraft" Bool :>
+               QueryParam "fetchImages" Bool :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -73,13 +74,13 @@ data PostsInsert' = PostsInsert'
     , _piiPrettyPrint :: !Bool
     , _piiIsDraft     :: !(Maybe Bool)
     , _piiUserIP      :: !(Maybe Text)
-    , _piiPost        :: !Post
     , _piiFetchImages :: !(Maybe Bool)
     , _piiBlogId      :: !Text
+    , _piiPayload     :: !Post
     , _piiKey         :: !(Maybe Key)
     , _piiOAuthToken  :: !(Maybe OAuthToken)
     , _piiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsInsert'' with the minimum fields required to make a request.
 --
@@ -95,11 +96,11 @@ data PostsInsert' = PostsInsert'
 --
 -- * 'piiUserIP'
 --
--- * 'piiPost'
---
 -- * 'piiFetchImages'
 --
 -- * 'piiBlogId'
+--
+-- * 'piiPayload'
 --
 -- * 'piiKey'
 --
@@ -107,19 +108,19 @@ data PostsInsert' = PostsInsert'
 --
 -- * 'piiFields'
 postsInsert'
-    :: Post -- ^ 'Post'
-    -> Text -- ^ 'blogId'
+    :: Text -- ^ 'blogId'
+    -> Post -- ^ 'payload'
     -> PostsInsert'
-postsInsert' pPiiPost_ pPiiBlogId_ =
+postsInsert' pPiiBlogId_ pPiiPayload_ =
     PostsInsert'
     { _piiFetchBody = True
     , _piiQuotaUser = Nothing
     , _piiPrettyPrint = True
     , _piiIsDraft = Nothing
     , _piiUserIP = Nothing
-    , _piiPost = pPiiPost_
     , _piiFetchImages = Nothing
     , _piiBlogId = pPiiBlogId_
+    , _piiPayload = pPiiPayload_
     , _piiKey = Nothing
     , _piiOAuthToken = Nothing
     , _piiFields = Nothing
@@ -155,10 +156,6 @@ piiUserIP :: Lens' PostsInsert' (Maybe Text)
 piiUserIP
   = lens _piiUserIP (\ s a -> s{_piiUserIP = a})
 
--- | Multipart request metadata.
-piiPost :: Lens' PostsInsert' Post
-piiPost = lens _piiPost (\ s a -> s{_piiPost = a})
-
 -- | Whether image URL metadata for each post is included in the returned
 -- result (default: false).
 piiFetchImages :: Lens' PostsInsert' (Maybe Bool)
@@ -170,6 +167,11 @@ piiFetchImages
 piiBlogId :: Lens' PostsInsert' Text
 piiBlogId
   = lens _piiBlogId (\ s a -> s{_piiBlogId = a})
+
+-- | Multipart request metadata.
+piiPayload :: Lens' PostsInsert' Post
+piiPayload
+  = lens _piiPayload (\ s a -> s{_piiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -196,8 +198,8 @@ instance GoogleRequest PostsInsert' where
         type Rs PostsInsert' = Post
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsInsert'{..}
-          = go (Just _piiFetchBody) _piiFetchImages _piiIsDraft
-              _piiBlogId
+          = go _piiBlogId (Just _piiFetchBody) _piiIsDraft
+              _piiFetchImages
               _piiQuotaUser
               (Just _piiPrettyPrint)
               _piiUserIP
@@ -205,7 +207,7 @@ instance GoogleRequest PostsInsert' where
               _piiKey
               _piiOAuthToken
               (Just AltJSON)
-              _piiPost
+              _piiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PostsInsertResource)

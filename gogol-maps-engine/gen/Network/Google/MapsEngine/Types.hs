@@ -53,9 +53,6 @@ module Network.Google.MapsEngine.Types
     , fType
     , fProperties
 
-    -- * ScaledShapeShape
-    , ScaledShapeShape (..)
-
     -- * MapsEngineRastersListProcessingStatus
     , MapsEngineRastersListProcessingStatus (..)
 
@@ -66,6 +63,9 @@ module Network.Google.MapsEngine.Types
 
     -- * RasterProcessingStatus
     , RasterProcessingStatus (..)
+
+    -- * FontStyle
+    , FontStyle (..)
 
     -- * GeoJSONGeometry
     , GeoJSONGeometry
@@ -112,9 +112,6 @@ module Network.Google.MapsEngine.Types
     , featureInfo
     , fiContent
 
-    -- * ScalingFunctionScalingType
-    , ScalingFunctionScalingType (..)
-
     -- * SizeRange
     , SizeRange
     , sizeRange
@@ -131,9 +128,6 @@ module Network.Google.MapsEngine.Types
     , mfKey
     , mfName
     , mfType
-
-    -- * AcquisitionTimePrecision
-    , AcquisitionTimePrecision (..)
 
     -- * RasterCollection
     , RasterCollection
@@ -156,6 +150,15 @@ module Network.Google.MapsEngine.Types
     , rcAttribution
     , rcTags
 
+    -- * DatasourceType
+    , DatasourceType (..)
+
+    -- * PublishingStatus
+    , PublishingStatus (..)
+
+    -- * ScalingType
+    , ScalingType (..)
+
     -- * LineStyleStroke
     , LineStyleStroke
     , lineStyleStroke
@@ -177,6 +180,9 @@ module Network.Google.MapsEngine.Types
 
     -- * MapsEngineLayersGetVersion
     , MapsEngineLayersGetVersion (..)
+
+    -- * Operator
+    , Operator (..)
 
     -- * Asset
     , Asset
@@ -209,9 +215,6 @@ module Network.Google.MapsEngine.Types
     -- * MapsEngineTablesGetVersion
     , MapsEngineTablesGetVersion (..)
 
-    -- * MapsEngineMapsListRole
-    , MapsEngineMapsListRole (..)
-
     -- * RasterCollectionsRastersBatchDeleteResponse
     , RasterCollectionsRastersBatchDeleteResponse
     , rasterCollectionsRastersBatchDeleteResponse
@@ -222,11 +225,11 @@ module Network.Google.MapsEngine.Types
     -- * GeoJSONMultiPolygonType
     , GeoJSONMultiPolygonType (..)
 
-    -- * PublishedLayerLayerType
-    , PublishedLayerLayerType (..)
-
     -- * GeoJSONMultiPointType
     , GeoJSONMultiPointType (..)
+
+    -- * LayerType
+    , LayerType (..)
 
     -- * ScaledShape
     , ScaledShape
@@ -237,9 +240,6 @@ module Network.Google.MapsEngine.Types
 
     -- * MapProcessingStatus
     , MapProcessingStatus (..)
-
-    -- * MapsEngineMapsListProcessingStatus
-    , MapsEngineMapsListProcessingStatus (..)
 
     -- * Icon
     , Icon
@@ -254,6 +254,9 @@ module Network.Google.MapsEngine.Types
     , fbdrPrimaryKeys
     , fbdrGxIds
 
+    -- * RasterType
+    , RasterType (..)
+
     -- * PermissionType
     , PermissionType (..)
 
@@ -267,14 +270,14 @@ module Network.Google.MapsEngine.Types
     -- * VectorStyleType
     , VectorStyleType (..)
 
+    -- * Precision
+    , Precision (..)
+
     -- * MapKmlLinkType
     , MapKmlLinkType (..)
 
     -- * LayerPublishingStatus
     , LayerPublishingStatus (..)
-
-    -- * LayerDatasourceType
-    , LayerDatasourceType (..)
 
     -- * FeaturesListResponse
     , FeaturesListResponse
@@ -372,6 +375,9 @@ module Network.Google.MapsEngine.Types
     , mapaDescription
     , mapaTags
 
+    -- * Role
+    , Role (..)
+
     -- * IconStyle
     , IconStyle
     , iconStyle
@@ -430,11 +436,20 @@ module Network.Google.MapsEngine.Types
     -- * MapsEngineLayersListRole
     , MapsEngineLayersListRole (..)
 
+    -- * ProcessingStatus
+    , ProcessingStatus (..)
+
+    -- * Shape
+    , Shape (..)
+
     -- * GeoJSONMultiLineString
     , GeoJSONMultiLineString
     , geoJSONMultiLineString
     , gjmlsCoordinates
     , gjmlsType
+
+    -- * UploadStatus
+    , UploadStatus (..)
 
     -- * ScalingFunction
     , ScalingFunction
@@ -444,17 +459,14 @@ module Network.Google.MapsEngine.Types
     , sfScalingType
     , sfColumn
 
+    -- * Version
+    , Version (..)
+
     -- * MapFolderType
     , MapFolderType (..)
 
-    -- * LabelStyleFontWeight
-    , LabelStyleFontWeight (..)
-
     -- * RasterCollectionProcessingStatus
     , RasterCollectionProcessingStatus (..)
-
-    -- * MapsEngineMapsGetVersion
-    , MapsEngineMapsGetVersion (..)
 
     -- * AssetsListResponse
     , AssetsListResponse
@@ -485,9 +497,6 @@ module Network.Google.MapsEngine.Types
     , rcrDescription
     , rcrTags
 
-    -- * LabelStyleFontStyle
-    , LabelStyleFontStyle (..)
-
     -- * Datasource
     , Datasource
     , datasource
@@ -498,9 +507,6 @@ module Network.Google.MapsEngine.Types
     , featuresBatchInsertRequest
     , fbirFeatures
     , fbirNormalizeGeometries
-
-    -- * FilterOperator
-    , FilterOperator (..)
 
     -- * AssetType
     , AssetType (..)
@@ -607,6 +613,9 @@ module Network.Google.MapsEngine.Types
     , pFill
     , pLabel
 
+    -- * FontWeight
+    , FontWeight (..)
+
     -- * MapsEngineTablesFeaturesListVersion
     , MapsEngineTablesFeaturesListVersion (..)
 
@@ -622,9 +631,6 @@ module Network.Google.MapsEngine.Types
     , mklName
     , mklType
     , mklKmlURL
-
-    -- * RasterCollectionRasterType
-    , RasterCollectionRasterType (..)
 
     -- * VectorStyle
     , VectorStyle
@@ -716,9 +722,6 @@ module Network.Google.MapsEngine.Types
     -- * MapsEngineRasterCollectionsRastersListRole
     , MapsEngineRasterCollectionsRastersListRole (..)
 
-    -- * FileUploadStatus
-    , FileUploadStatus (..)
-
     -- * LineStyle
     , LineStyle
     , lineStyle
@@ -738,9 +741,6 @@ module Network.Google.MapsEngine.Types
     , geoJSONGeometryCollection
     , gjgcGeometries
     , gjgcType
-
-    -- * MapPublishingStatus
-    , MapPublishingStatus (..)
 
     -- * RastersListResponse
     , RastersListResponse

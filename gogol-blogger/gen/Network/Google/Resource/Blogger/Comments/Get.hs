@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -77,7 +78,7 @@ data CommentsGet' = CommentsGet'
     , _cgOAuthToken  :: !(Maybe OAuthToken)
     , _cgCommentId   :: !Text
     , _cgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsGet'' with the minimum fields required to make a request.
 --
@@ -182,7 +183,7 @@ instance GoogleRequest CommentsGet' where
         type Rs CommentsGet' = Comment
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u CommentsGet'{..}
-          = go _cgView _cgBlogId _cgPostId _cgCommentId
+          = go _cgBlogId _cgPostId _cgCommentId _cgView
               _cgQuotaUser
               (Just _cgPrettyPrint)
               _cgUserIP

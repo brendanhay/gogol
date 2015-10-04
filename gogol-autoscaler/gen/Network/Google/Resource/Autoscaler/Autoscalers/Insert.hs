@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.Autoscaler.Autoscalers.Insert
     , aiProject
     , aiUserIP
     , aiZone
+    , aiPayload
     , aiKey
-    , aiAutoscaler
     , aiOAuthToken
     , aiFields
     ) where
@@ -71,11 +72,11 @@ data AutoscalersInsert' = AutoscalersInsert'
     , _aiProject     :: !Text
     , _aiUserIP      :: !(Maybe Text)
     , _aiZone        :: !Text
+    , _aiPayload     :: !Autoscaler
     , _aiKey         :: !(Maybe Key)
-    , _aiAutoscaler  :: !Autoscaler
     , _aiOAuthToken  :: !(Maybe OAuthToken)
     , _aiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersInsert'' with the minimum fields required to make a request.
 --
@@ -91,9 +92,9 @@ data AutoscalersInsert' = AutoscalersInsert'
 --
 -- * 'aiZone'
 --
--- * 'aiKey'
+-- * 'aiPayload'
 --
--- * 'aiAutoscaler'
+-- * 'aiKey'
 --
 -- * 'aiOAuthToken'
 --
@@ -101,17 +102,17 @@ data AutoscalersInsert' = AutoscalersInsert'
 autoscalersInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> Autoscaler -- ^ 'Autoscaler'
+    -> Autoscaler -- ^ 'payload'
     -> AutoscalersInsert'
-autoscalersInsert' pAiProject_ pAiZone_ pAiAutoscaler_ =
+autoscalersInsert' pAiProject_ pAiZone_ pAiPayload_ =
     AutoscalersInsert'
     { _aiQuotaUser = Nothing
     , _aiPrettyPrint = True
     , _aiProject = pAiProject_
     , _aiUserIP = Nothing
     , _aiZone = pAiZone_
+    , _aiPayload = pAiPayload_
     , _aiKey = Nothing
-    , _aiAutoscaler = pAiAutoscaler_
     , _aiOAuthToken = Nothing
     , _aiFields = Nothing
     }
@@ -143,16 +144,16 @@ aiUserIP = lens _aiUserIP (\ s a -> s{_aiUserIP = a})
 aiZone :: Lens' AutoscalersInsert' Text
 aiZone = lens _aiZone (\ s a -> s{_aiZone = a})
 
+-- | Multipart request metadata.
+aiPayload :: Lens' AutoscalersInsert' Autoscaler
+aiPayload
+  = lens _aiPayload (\ s a -> s{_aiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 aiKey :: Lens' AutoscalersInsert' (Maybe Key)
 aiKey = lens _aiKey (\ s a -> s{_aiKey = a})
-
--- | Multipart request metadata.
-aiAutoscaler :: Lens' AutoscalersInsert' Autoscaler
-aiAutoscaler
-  = lens _aiAutoscaler (\ s a -> s{_aiAutoscaler = a})
 
 -- | OAuth 2.0 token for the current user.
 aiOAuthToken :: Lens' AutoscalersInsert' (Maybe OAuthToken)
@@ -178,7 +179,7 @@ instance GoogleRequest AutoscalersInsert' where
               _aiKey
               _aiOAuthToken
               (Just AltJSON)
-              _aiAutoscaler
+              _aiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AutoscalersInsertResource)

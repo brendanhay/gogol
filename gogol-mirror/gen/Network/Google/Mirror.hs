@@ -129,6 +129,9 @@ module Network.Google.Mirror
     , lLongitude
     , lTimestamp
 
+    -- ** OrderBy
+    , OrderBy (..)
+
     -- ** Notification
     , Notification
     , notification
@@ -138,9 +141,6 @@ module Network.Google.Mirror
     , nUserActions
     , nVerifyToken
     , nUserToken
-
-    -- ** MirrorTimelineListOrderBy
-    , MirrorTimelineListOrderBy (..)
 
     -- ** Contact
     , Contact
@@ -176,7 +176,7 @@ module Network.Google.Mirror
     , miValues
     , miRemoveWhenSelected
     , miAction
-    , miPayLoad
+    , miPayload
     , miContextualCommand
     , miId
 
@@ -212,7 +212,7 @@ module Network.Google.Mirror
     -- ** UserAction
     , UserAction
     , userAction
-    , uaPayLoad
+    , uaPayload
     , uaType
 
     -- ** ContactsListResponse

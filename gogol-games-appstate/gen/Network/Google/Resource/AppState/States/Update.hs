@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,8 +38,8 @@ module Network.Google.Resource.AppState.States.Update
     , suPrettyPrint
     , suUserIP
     , suStateKey
+    , suPayload
     , suKey
-    , suUpdateRequest
     , suOAuthToken
     , suFields
     ) where
@@ -73,11 +74,11 @@ data StatesUpdate' = StatesUpdate'
     , _suPrettyPrint         :: !Bool
     , _suUserIP              :: !(Maybe Text)
     , _suStateKey            :: !Int32
+    , _suPayload             :: !UpdateRequest
     , _suKey                 :: !(Maybe Key)
-    , _suUpdateRequest       :: !UpdateRequest
     , _suOAuthToken          :: !(Maybe OAuthToken)
     , _suFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatesUpdate'' with the minimum fields required to make a request.
 --
@@ -93,26 +94,26 @@ data StatesUpdate' = StatesUpdate'
 --
 -- * 'suStateKey'
 --
--- * 'suKey'
+-- * 'suPayload'
 --
--- * 'suUpdateRequest'
+-- * 'suKey'
 --
 -- * 'suOAuthToken'
 --
 -- * 'suFields'
 statesUpdate'
     :: Int32 -- ^ 'stateKey'
-    -> UpdateRequest -- ^ 'UpdateRequest'
+    -> UpdateRequest -- ^ 'payload'
     -> StatesUpdate'
-statesUpdate' pSuStateKey_ pSuUpdateRequest_ =
+statesUpdate' pSuStateKey_ pSuPayload_ =
     StatesUpdate'
     { _suCurrentStateVersion = Nothing
     , _suQuotaUser = Nothing
     , _suPrettyPrint = True
     , _suUserIP = Nothing
     , _suStateKey = pSuStateKey_
+    , _suPayload = pSuPayload_
     , _suKey = Nothing
-    , _suUpdateRequest = pSuUpdateRequest_
     , _suOAuthToken = Nothing
     , _suFields = Nothing
     }
@@ -149,17 +150,16 @@ suStateKey :: Lens' StatesUpdate' Int32
 suStateKey
   = lens _suStateKey (\ s a -> s{_suStateKey = a})
 
+-- | Multipart request metadata.
+suPayload :: Lens' StatesUpdate' UpdateRequest
+suPayload
+  = lens _suPayload (\ s a -> s{_suPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 suKey :: Lens' StatesUpdate' (Maybe Key)
 suKey = lens _suKey (\ s a -> s{_suKey = a})
-
--- | Multipart request metadata.
-suUpdateRequest :: Lens' StatesUpdate' UpdateRequest
-suUpdateRequest
-  = lens _suUpdateRequest
-      (\ s a -> s{_suUpdateRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 suOAuthToken :: Lens' StatesUpdate' (Maybe OAuthToken)
@@ -178,14 +178,14 @@ instance GoogleRequest StatesUpdate' where
         type Rs StatesUpdate' = WriteResult
         request = requestWithRoute defReq appStateURL
         requestWithRoute r u StatesUpdate'{..}
-          = go _suCurrentStateVersion _suStateKey _suQuotaUser
+          = go _suStateKey _suCurrentStateVersion _suQuotaUser
               (Just _suPrettyPrint)
               _suUserIP
               _suFields
               _suKey
               _suOAuthToken
               (Just AltJSON)
-              _suUpdateRequest
+              _suPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy StatesUpdateResource)

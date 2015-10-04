@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,12 +54,10 @@ type MetagameListCategoriesByPlayerResource =
      "players" :>
        Capture "playerId" Text :>
          "categories" :>
-           Capture "collection"
-             GamesMetagameListCategoriesByPlayerCollection
-             :>
+           Capture "collection" Collection :>
              QueryParam "language" Text :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Int32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -76,7 +75,7 @@ data MetagameListCategoriesByPlayer' = MetagameListCategoriesByPlayer'
     { _mlcbpQuotaUser   :: !(Maybe Text)
     , _mlcbpPrettyPrint :: !Bool
     , _mlcbpUserIP      :: !(Maybe Text)
-    , _mlcbpCollection  :: !GamesMetagameListCategoriesByPlayerCollection
+    , _mlcbpCollection  :: !Collection
     , _mlcbpKey         :: !(Maybe Key)
     , _mlcbpLanguage    :: !(Maybe Text)
     , _mlcbpPageToken   :: !(Maybe Text)
@@ -84,7 +83,7 @@ data MetagameListCategoriesByPlayer' = MetagameListCategoriesByPlayer'
     , _mlcbpPlayerId    :: !Text
     , _mlcbpMaxResults  :: !(Maybe Int32)
     , _mlcbpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetagameListCategoriesByPlayer'' with the minimum fields required to make a request.
 --
@@ -112,7 +111,7 @@ data MetagameListCategoriesByPlayer' = MetagameListCategoriesByPlayer'
 --
 -- * 'mlcbpFields'
 metagameListCategoriesByPlayer'
-    :: GamesMetagameListCategoriesByPlayerCollection -- ^ 'collection'
+    :: Collection -- ^ 'collection'
     -> Text -- ^ 'playerId'
     -> MetagameListCategoriesByPlayer'
 metagameListCategoriesByPlayer' pMlcbpCollection_ pMlcbpPlayerId_ =
@@ -151,7 +150,7 @@ mlcbpUserIP
   = lens _mlcbpUserIP (\ s a -> s{_mlcbpUserIP = a})
 
 -- | The collection of categories for which data will be returned.
-mlcbpCollection :: Lens' MetagameListCategoriesByPlayer' GamesMetagameListCategoriesByPlayerCollection
+mlcbpCollection :: Lens' MetagameListCategoriesByPlayer' Collection
 mlcbpCollection
   = lens _mlcbpCollection
       (\ s a -> s{_mlcbpCollection = a})
@@ -212,9 +211,9 @@ instance GoogleRequest
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u
           MetagameListCategoriesByPlayer'{..}
-          = go _mlcbpLanguage _mlcbpMaxResults _mlcbpPageToken
-              _mlcbpPlayerId
-              _mlcbpCollection
+          = go _mlcbpPlayerId _mlcbpCollection _mlcbpLanguage
+              _mlcbpPageToken
+              _mlcbpMaxResults
               _mlcbpQuotaUser
               (Just _mlcbpPrettyPrint)
               _mlcbpUserIP

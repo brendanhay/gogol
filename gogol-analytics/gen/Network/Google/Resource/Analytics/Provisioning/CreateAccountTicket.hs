@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
     , pcatQuotaUser
     , pcatPrettyPrint
     , pcatUserIP
+    , pcatPayload
     , pcatKey
-    , pcatAccountTicket
     , pcatOAuthToken
     , pcatFields
     ) where
@@ -61,14 +62,14 @@ type ProvisioningCreateAccountTicketResource =
 --
 -- /See:/ 'provisioningCreateAccountTicket'' smart constructor.
 data ProvisioningCreateAccountTicket' = ProvisioningCreateAccountTicket'
-    { _pcatQuotaUser     :: !(Maybe Text)
-    , _pcatPrettyPrint   :: !Bool
-    , _pcatUserIP        :: !(Maybe Text)
-    , _pcatKey           :: !(Maybe Key)
-    , _pcatAccountTicket :: !AccountTicket
-    , _pcatOAuthToken    :: !(Maybe OAuthToken)
-    , _pcatFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _pcatQuotaUser   :: !(Maybe Text)
+    , _pcatPrettyPrint :: !Bool
+    , _pcatUserIP      :: !(Maybe Text)
+    , _pcatPayload     :: !AccountTicket
+    , _pcatKey         :: !(Maybe Key)
+    , _pcatOAuthToken  :: !(Maybe OAuthToken)
+    , _pcatFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProvisioningCreateAccountTicket'' with the minimum fields required to make a request.
 --
@@ -80,23 +81,23 @@ data ProvisioningCreateAccountTicket' = ProvisioningCreateAccountTicket'
 --
 -- * 'pcatUserIP'
 --
--- * 'pcatKey'
+-- * 'pcatPayload'
 --
--- * 'pcatAccountTicket'
+-- * 'pcatKey'
 --
 -- * 'pcatOAuthToken'
 --
 -- * 'pcatFields'
 provisioningCreateAccountTicket'
-    :: AccountTicket -- ^ 'AccountTicket'
+    :: AccountTicket -- ^ 'payload'
     -> ProvisioningCreateAccountTicket'
-provisioningCreateAccountTicket' pPcatAccountTicket_ =
+provisioningCreateAccountTicket' pPcatPayload_ =
     ProvisioningCreateAccountTicket'
     { _pcatQuotaUser = Nothing
     , _pcatPrettyPrint = False
     , _pcatUserIP = Nothing
+    , _pcatPayload = pPcatPayload_
     , _pcatKey = Nothing
-    , _pcatAccountTicket = pPcatAccountTicket_
     , _pcatOAuthToken = Nothing
     , _pcatFields = Nothing
     }
@@ -121,17 +122,16 @@ pcatUserIP :: Lens' ProvisioningCreateAccountTicket' (Maybe Text)
 pcatUserIP
   = lens _pcatUserIP (\ s a -> s{_pcatUserIP = a})
 
+-- | Multipart request metadata.
+pcatPayload :: Lens' ProvisioningCreateAccountTicket' AccountTicket
+pcatPayload
+  = lens _pcatPayload (\ s a -> s{_pcatPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 pcatKey :: Lens' ProvisioningCreateAccountTicket' (Maybe Key)
 pcatKey = lens _pcatKey (\ s a -> s{_pcatKey = a})
-
--- | Multipart request metadata.
-pcatAccountTicket :: Lens' ProvisioningCreateAccountTicket' AccountTicket
-pcatAccountTicket
-  = lens _pcatAccountTicket
-      (\ s a -> s{_pcatAccountTicket = a})
 
 -- | OAuth 2.0 token for the current user.
 pcatOAuthToken :: Lens' ProvisioningCreateAccountTicket' (Maybe OAuthToken)
@@ -162,7 +162,7 @@ instance GoogleRequest
               _pcatKey
               _pcatOAuthToken
               (Just AltJSON)
-              _pcatAccountTicket
+              _pcatPayload
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.YouTubeAnalytics.GroupItems.Insert
     , giiQuotaUser
     , giiPrettyPrint
     , giiUserIP
+    , giiPayload
     , giiOnBehalfOfContentOwner
     , giiKey
-    , giiGroupItem
     , giiOAuthToken
     , giiFields
     ) where
@@ -64,12 +65,12 @@ data GroupItemsInsert' = GroupItemsInsert'
     { _giiQuotaUser              :: !(Maybe Text)
     , _giiPrettyPrint            :: !Bool
     , _giiUserIP                 :: !(Maybe Text)
+    , _giiPayload                :: !GroupItem
     , _giiOnBehalfOfContentOwner :: !(Maybe Text)
     , _giiKey                    :: !(Maybe Key)
-    , _giiGroupItem              :: !GroupItem
     , _giiOAuthToken             :: !(Maybe OAuthToken)
     , _giiFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupItemsInsert'' with the minimum fields required to make a request.
 --
@@ -81,26 +82,26 @@ data GroupItemsInsert' = GroupItemsInsert'
 --
 -- * 'giiUserIP'
 --
+-- * 'giiPayload'
+--
 -- * 'giiOnBehalfOfContentOwner'
 --
 -- * 'giiKey'
---
--- * 'giiGroupItem'
 --
 -- * 'giiOAuthToken'
 --
 -- * 'giiFields'
 groupItemsInsert'
-    :: GroupItem -- ^ 'GroupItem'
+    :: GroupItem -- ^ 'payload'
     -> GroupItemsInsert'
-groupItemsInsert' pGiiGroupItem_ =
+groupItemsInsert' pGiiPayload_ =
     GroupItemsInsert'
     { _giiQuotaUser = Nothing
     , _giiPrettyPrint = True
     , _giiUserIP = Nothing
+    , _giiPayload = pGiiPayload_
     , _giiOnBehalfOfContentOwner = Nothing
     , _giiKey = Nothing
-    , _giiGroupItem = pGiiGroupItem_
     , _giiOAuthToken = Nothing
     , _giiFields = Nothing
     }
@@ -124,6 +125,11 @@ giiUserIP :: Lens' GroupItemsInsert' (Maybe Text)
 giiUserIP
   = lens _giiUserIP (\ s a -> s{_giiUserIP = a})
 
+-- | Multipart request metadata.
+giiPayload :: Lens' GroupItemsInsert' GroupItem
+giiPayload
+  = lens _giiPayload (\ s a -> s{_giiPayload = a})
+
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
 -- request\'s authorization credentials identify a YouTube CMS user who is
@@ -144,11 +150,6 @@ giiOnBehalfOfContentOwner
 -- token.
 giiKey :: Lens' GroupItemsInsert' (Maybe Key)
 giiKey = lens _giiKey (\ s a -> s{_giiKey = a})
-
--- | Multipart request metadata.
-giiGroupItem :: Lens' GroupItemsInsert' GroupItem
-giiGroupItem
-  = lens _giiGroupItem (\ s a -> s{_giiGroupItem = a})
 
 -- | OAuth 2.0 token for the current user.
 giiOAuthToken :: Lens' GroupItemsInsert' (Maybe OAuthToken)
@@ -176,7 +177,7 @@ instance GoogleRequest GroupItemsInsert' where
               _giiKey
               _giiOAuthToken
               (Just AltJSON)
-              _giiGroupItem
+              _giiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GroupItemsInsertResource)

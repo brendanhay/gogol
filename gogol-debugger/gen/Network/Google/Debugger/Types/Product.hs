@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- /See:/ 'registerDebuggeeResponse' smart constructor.
 newtype RegisterDebuggeeResponse = RegisterDebuggeeResponse
     { _rdrDebuggee :: Maybe Debuggee
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegisterDebuggeeResponse' with the minimum fields required to make a request.
 --
@@ -59,7 +59,7 @@ instance ToJSON RegisterDebuggeeResponse where
 -- /See:/ 'setBreakpointResponse' smart constructor.
 newtype SetBreakpointResponse = SetBreakpointResponse
     { _sbrBreakpoint :: Maybe Breakpoint
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SetBreakpointResponse' with the minimum fields required to make a request.
 --
@@ -101,7 +101,7 @@ data SourceContext = SourceContext
     , _scCloudRepo      :: !(Maybe CloudRepoSourceContext)
     , _scGerrit         :: !(Maybe GerritSourceContext)
     , _scGit            :: !(Maybe GitSourceContext)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceContext' with the minimum fields required to make a request.
 --
@@ -166,7 +166,7 @@ instance ToJSON SourceContext where
 data RepoId = RepoId
     { _riUid           :: !(Maybe Text)
     , _riProjectRepoId :: !(Maybe ProjectRepoId)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepoId' with the minimum fields required to make a request.
 --
@@ -212,7 +212,7 @@ instance ToJSON RepoId where
 -- /See:/ 'updateActiveBreakpointResponse' smart constructor.
 data UpdateActiveBreakpointResponse =
     UpdateActiveBreakpointResponse
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UpdateActiveBreakpointResponse' with the minimum fields required to make a request.
 --
@@ -238,7 +238,7 @@ instance ToJSON UpdateActiveBreakpointResponse where
 -- /See:/ 'empty' smart constructor.
 data Empty =
     Empty
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -260,7 +260,7 @@ data GerritSourceContext = GerritSourceContext
     , _gscAliasName     :: !(Maybe Text)
     , _gscRevisionId    :: !(Maybe Text)
     , _gscHostURI       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GerritSourceContext' with the minimum fields required to make a request.
 --
@@ -332,7 +332,7 @@ instance ToJSON GerritSourceContext where
 data ProjectRepoId = ProjectRepoId
     { _priRepoName  :: !(Maybe Text)
     , _priProjectId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectRepoId' with the minimum fields required to make a request.
 --
@@ -379,7 +379,7 @@ instance ToJSON ProjectRepoId where
 data FormatMessage = FormatMessage
     { _fmFormat     :: !(Maybe Text)
     , _fmParameters :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FormatMessage' with the minimum fields required to make a request.
 --
@@ -444,7 +444,7 @@ data Breakpoint = Breakpoint
     , _bEvaluatedExpressions :: !(Maybe [Variable])
     , _bCreateTime           :: !(Maybe Text)
     , _bIsFinalState         :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Breakpoint' with the minimum fields required to make a request.
 --
@@ -664,7 +664,7 @@ instance ToJSON Breakpoint where
 -- /See:/ 'getBreakpointResponse' smart constructor.
 newtype GetBreakpointResponse = GetBreakpointResponse
     { _gbrBreakpoint :: Maybe Breakpoint
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetBreakpointResponse' with the minimum fields required to make a request.
 --
@@ -735,7 +735,7 @@ data Variable = Variable
     , _vMembers       :: !(Maybe [Variable])
     , _vValue         :: !(Maybe Text)
     , _vName          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Variable' with the minimum fields required to make a request.
 --
@@ -824,7 +824,7 @@ instance ToJSON Variable where
 data ListBreakpointsResponse = ListBreakpointsResponse
     { _lbrNextWaitToken :: !(Maybe Text)
     , _lbrBreakpoints   :: !(Maybe [Breakpoint])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListBreakpointsResponse' with the minimum fields required to make a request.
 --
@@ -877,7 +877,7 @@ instance ToJSON ListBreakpointsResponse where
 -- /See:/ 'listDebuggeesResponse' smart constructor.
 newtype ListDebuggeesResponse = ListDebuggeesResponse
     { _ldrDebuggees :: Maybe [Debuggee]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListDebuggeesResponse' with the minimum fields required to make a request.
 --
@@ -918,7 +918,7 @@ instance ToJSON ListDebuggeesResponse where
 -- /See:/ 'updateActiveBreakpointRequest' smart constructor.
 newtype UpdateActiveBreakpointRequest = UpdateActiveBreakpointRequest
     { _uabrBreakpoint :: Maybe Breakpoint
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UpdateActiveBreakpointRequest' with the minimum fields required to make a request.
 --
@@ -961,7 +961,7 @@ data StatusMessage = StatusMessage
     { _smRefersTo    :: !(Maybe Text)
     , _smIsError     :: !(Maybe Bool)
     , _smDescription :: !(Maybe FormatMessage)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatusMessage' with the minimum fields required to make a request.
 --
@@ -1019,7 +1019,7 @@ instance ToJSON StatusMessage where
 data ListActiveBreakpointsResponse = ListActiveBreakpointsResponse
     { _labrNextWaitToken :: !(Maybe Text)
     , _labrBreakpoints   :: !(Maybe [Breakpoint])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListActiveBreakpointsResponse' with the minimum fields required to make a request.
 --
@@ -1067,6 +1067,26 @@ instance ToJSON ListActiveBreakpointsResponse where
                  [("nextWaitToken" .=) <$> _labrNextWaitToken,
                   ("breakpoints" .=) <$> _labrBreakpoints])
 
+-- | A set of custom debuggee properties, populated by the agent, to be
+-- displayed to the user.
+--
+-- /See:/ 'labels' smart constructor.
+data Labels =
+    Labels
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Labels' with the minimum fields required to make a request.
+--
+labels
+    :: Labels
+labels = Labels
+
+instance FromJSON Labels where
+        parseJSON = withObject "Labels" (\ o -> pure Labels)
+
+instance ToJSON Labels where
+        toJSON = const (Object mempty)
+
 -- | A GitSourceContext denotes a particular revision in a third party Git
 -- repository (e.g. GitHub).
 --
@@ -1074,7 +1094,7 @@ instance ToJSON ListActiveBreakpointsResponse where
 data GitSourceContext = GitSourceContext
     { _gURL        :: !(Maybe Text)
     , _gRevisionId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GitSourceContext' with the minimum fields required to make a request.
 --
@@ -1120,7 +1140,7 @@ instance ToJSON GitSourceContext where
 data SourceLocation = SourceLocation
     { _slPath :: !(Maybe Text)
     , _slLine :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceLocation' with the minimum fields required to make a request.
 --
@@ -1166,7 +1186,7 @@ data StackFrame = StackFrame
     , _sfLocation  :: !(Maybe SourceLocation)
     , _sfArguments :: !(Maybe [Variable])
     , _sfLocals    :: !(Maybe [Variable])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StackFrame' with the minimum fields required to make a request.
 --
@@ -1233,28 +1253,6 @@ instance ToJSON StackFrame where
                   ("arguments" .=) <$> _sfArguments,
                   ("locals" .=) <$> _sfLocals])
 
--- | A set of custom debuggee properties, populated by the agent, to be
--- displayed to the user.
---
--- /See:/ 'debuggeeLabels' smart constructor.
-data DebuggeeLabels =
-    DebuggeeLabels
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DebuggeeLabels' with the minimum fields required to make a request.
---
-debuggeeLabels
-    :: DebuggeeLabels
-debuggeeLabels = DebuggeeLabels
-
-instance FromJSON DebuggeeLabels where
-        parseJSON
-          = withObject "DebuggeeLabels"
-              (\ o -> pure DebuggeeLabels)
-
-instance ToJSON DebuggeeLabels where
-        toJSON = const (Object mempty)
-
 -- | A CloudRepoSourceContext denotes a particular revision in a cloud repo
 -- (a repo hosted by the Google Cloud Platform).
 --
@@ -1263,7 +1261,7 @@ data CloudRepoSourceContext = CloudRepoSourceContext
     { _crscRepoId     :: !(Maybe RepoId)
     , _crscAliasName  :: !(Maybe Text)
     , _crscRevisionId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CloudRepoSourceContext' with the minimum fields required to make a request.
 --
@@ -1321,7 +1319,7 @@ instance ToJSON CloudRepoSourceContext where
 -- /See:/ 'registerDebuggeeRequest' smart constructor.
 newtype RegisterDebuggeeRequest = RegisterDebuggeeRequest
     { _rDebuggee :: Maybe Debuggee
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegisterDebuggeeRequest' with the minimum fields required to make a request.
 --
@@ -1359,7 +1357,7 @@ instance ToJSON RegisterDebuggeeRequest where
 data CloudWorkspaceSourceContext = CloudWorkspaceSourceContext
     { _cwscWorkspaceId :: !(Maybe CloudWorkspaceId)
     , _cwscSnapshotId  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CloudWorkspaceSourceContext' with the minimum fields required to make a request.
 --
@@ -1417,11 +1415,11 @@ data Debuggee = Debuggee
     , _dAgentVersion   :: !(Maybe Text)
     , _dIsDisabled     :: !(Maybe Bool)
     , _dId             :: !(Maybe Text)
-    , _dLabels         :: !(Maybe DebuggeeLabels)
+    , _dLabels         :: !(Maybe Labels)
     , _dDescription    :: !(Maybe Text)
     , _dIsInactive     :: !(Maybe Bool)
     , _dSourceContexts :: !(Maybe [SourceContext])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Debuggee' with the minimum fields required to make a request.
 --
@@ -1500,7 +1498,7 @@ dId = lens _dId (\ s a -> s{_dId = a})
 
 -- | A set of custom debuggee properties, populated by the agent, to be
 -- displayed to the user.
-dLabels :: Lens' Debuggee (Maybe DebuggeeLabels)
+dLabels :: Lens' Debuggee (Maybe Labels)
 dLabels = lens _dLabels (\ s a -> s{_dLabels = a})
 
 -- | A human readable description of the debuggee. Recommended to include
@@ -1561,7 +1559,7 @@ instance ToJSON Debuggee where
 data CloudWorkspaceId = CloudWorkspaceId
     { _cwiRepoId :: !(Maybe RepoId)
     , _cwiName   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CloudWorkspaceId' with the minimum fields required to make a request.
 --

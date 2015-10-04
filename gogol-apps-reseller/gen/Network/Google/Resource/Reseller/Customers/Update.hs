@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Reseller.Customers.Update
     , cuQuotaUser
     , cuPrettyPrint
     , cuUserIP
+    , cuPayload
     , cuCustomerId
-    , cuCustomer
     , cuKey
     , cuOAuthToken
     , cuFields
@@ -66,12 +67,12 @@ data CustomersUpdate' = CustomersUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
     , _cuUserIP      :: !(Maybe Text)
+    , _cuPayload     :: !Customer
     , _cuCustomerId  :: !Text
-    , _cuCustomer    :: !Customer
     , _cuKey         :: !(Maybe Key)
     , _cuOAuthToken  :: !(Maybe OAuthToken)
     , _cuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomersUpdate'' with the minimum fields required to make a request.
 --
@@ -83,9 +84,9 @@ data CustomersUpdate' = CustomersUpdate'
 --
 -- * 'cuUserIP'
 --
--- * 'cuCustomerId'
+-- * 'cuPayload'
 --
--- * 'cuCustomer'
+-- * 'cuCustomerId'
 --
 -- * 'cuKey'
 --
@@ -93,16 +94,16 @@ data CustomersUpdate' = CustomersUpdate'
 --
 -- * 'cuFields'
 customersUpdate'
-    :: Text -- ^ 'customerId'
-    -> Customer -- ^ 'Customer'
+    :: Customer -- ^ 'payload'
+    -> Text -- ^ 'customerId'
     -> CustomersUpdate'
-customersUpdate' pCuCustomerId_ pCuCustomer_ =
+customersUpdate' pCuPayload_ pCuCustomerId_ =
     CustomersUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
     , _cuUserIP = Nothing
+    , _cuPayload = pCuPayload_
     , _cuCustomerId = pCuCustomerId_
-    , _cuCustomer = pCuCustomer_
     , _cuKey = Nothing
     , _cuOAuthToken = Nothing
     , _cuFields = Nothing
@@ -126,15 +127,15 @@ cuPrettyPrint
 cuUserIP :: Lens' CustomersUpdate' (Maybe Text)
 cuUserIP = lens _cuUserIP (\ s a -> s{_cuUserIP = a})
 
+-- | Multipart request metadata.
+cuPayload :: Lens' CustomersUpdate' Customer
+cuPayload
+  = lens _cuPayload (\ s a -> s{_cuPayload = a})
+
 -- | Id of the Customer
 cuCustomerId :: Lens' CustomersUpdate' Text
 cuCustomerId
   = lens _cuCustomerId (\ s a -> s{_cuCustomerId = a})
-
--- | Multipart request metadata.
-cuCustomer :: Lens' CustomersUpdate' Customer
-cuCustomer
-  = lens _cuCustomer (\ s a -> s{_cuCustomer = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -165,7 +166,7 @@ instance GoogleRequest CustomersUpdate' where
               _cuKey
               _cuOAuthToken
               (Just AltJSON)
-              _cuCustomer
+              _cuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CustomersUpdateResource)

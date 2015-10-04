@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.Storage.Buckets.Insert
     , biPrettyPrint
     , biProject
     , biUserIP
-    , biBucket
+    , biPayload
     , biKey
     , biProjection
     , biOAuthToken
@@ -48,10 +49,8 @@ import           Network.Google.Storage.Types
 -- 'BucketsInsert'' request conforms to.
 type BucketsInsertResource =
      "b" :>
-       QueryParam "projection"
-         StorageBucketsInsertProjection
-         :>
-         QueryParam "project" Text :>
+       QueryParam "project" Text :>
+         QueryParam "projection" Projection :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -69,12 +68,12 @@ data BucketsInsert' = BucketsInsert'
     , _biPrettyPrint :: !Bool
     , _biProject     :: !Text
     , _biUserIP      :: !(Maybe Text)
-    , _biBucket      :: !Bucket
+    , _biPayload     :: !Bucket
     , _biKey         :: !(Maybe Key)
-    , _biProjection  :: !(Maybe StorageBucketsInsertProjection)
+    , _biProjection  :: !(Maybe Projection)
     , _biOAuthToken  :: !(Maybe OAuthToken)
     , _biFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsInsert'' with the minimum fields required to make a request.
 --
@@ -88,7 +87,7 @@ data BucketsInsert' = BucketsInsert'
 --
 -- * 'biUserIP'
 --
--- * 'biBucket'
+-- * 'biPayload'
 --
 -- * 'biKey'
 --
@@ -99,15 +98,15 @@ data BucketsInsert' = BucketsInsert'
 -- * 'biFields'
 bucketsInsert'
     :: Text -- ^ 'project'
-    -> Bucket -- ^ 'Bucket'
+    -> Bucket -- ^ 'payload'
     -> BucketsInsert'
-bucketsInsert' pBiProject_ pBiBucket_ =
+bucketsInsert' pBiProject_ pBiPayload_ =
     BucketsInsert'
     { _biQuotaUser = Nothing
     , _biPrettyPrint = True
     , _biProject = pBiProject_
     , _biUserIP = Nothing
-    , _biBucket = pBiBucket_
+    , _biPayload = pBiPayload_
     , _biKey = Nothing
     , _biProjection = Nothing
     , _biOAuthToken = Nothing
@@ -138,8 +137,9 @@ biUserIP :: Lens' BucketsInsert' (Maybe Text)
 biUserIP = lens _biUserIP (\ s a -> s{_biUserIP = a})
 
 -- | Multipart request metadata.
-biBucket :: Lens' BucketsInsert' Bucket
-biBucket = lens _biBucket (\ s a -> s{_biBucket = a})
+biPayload :: Lens' BucketsInsert' Bucket
+biPayload
+  = lens _biPayload (\ s a -> s{_biPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -150,7 +150,7 @@ biKey = lens _biKey (\ s a -> s{_biKey = a})
 -- | Set of properties to return. Defaults to noAcl, unless the bucket
 -- resource specifies acl or defaultObjectAcl properties, when it defaults
 -- to full.
-biProjection :: Lens' BucketsInsert' (Maybe StorageBucketsInsertProjection)
+biProjection :: Lens' BucketsInsert' (Maybe Projection)
 biProjection
   = lens _biProjection (\ s a -> s{_biProjection = a})
 
@@ -171,14 +171,14 @@ instance GoogleRequest BucketsInsert' where
         type Rs BucketsInsert' = Bucket
         request = requestWithRoute defReq storageURL
         requestWithRoute r u BucketsInsert'{..}
-          = go _biProjection (Just _biProject) _biQuotaUser
+          = go (Just _biProject) _biProjection _biQuotaUser
               (Just _biPrettyPrint)
               _biUserIP
               _biFields
               _biKey
               _biOAuthToken
               (Just AltJSON)
-              _biBucket
+              _biPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BucketsInsertResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -82,7 +83,7 @@ data PostUserInfosGet' = PostUserInfosGet'
     , _puigPostId      :: !Text
     , _puigOAuthToken  :: !(Maybe OAuthToken)
     , _puigFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostUserInfosGet'' with the minimum fields required to make a request.
 --
@@ -193,8 +194,8 @@ instance GoogleRequest PostUserInfosGet' where
         type Rs PostUserInfosGet' = PostUserInfo
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostUserInfosGet'{..}
-          = go _puigMaxComments _puigUserId _puigBlogId
-              _puigPostId
+          = go _puigUserId _puigBlogId _puigPostId
+              _puigMaxComments
               _puigQuotaUser
               (Just _puigPrettyPrint)
               _puigUserIP

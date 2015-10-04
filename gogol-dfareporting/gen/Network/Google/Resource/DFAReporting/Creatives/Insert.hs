@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.DFAReporting.Creatives.Insert
     , creQuotaUser
     , crePrettyPrint
     , creUserIP
-    , creCreative
     , creProfileId
+    , crePayload
     , creKey
     , creOAuthToken
     , creFields
@@ -65,12 +66,12 @@ data CreativesInsert' = CreativesInsert'
     { _creQuotaUser   :: !(Maybe Text)
     , _crePrettyPrint :: !Bool
     , _creUserIP      :: !(Maybe Text)
-    , _creCreative    :: !Creative
     , _creProfileId   :: !Int64
+    , _crePayload     :: !Creative
     , _creKey         :: !(Maybe Key)
     , _creOAuthToken  :: !(Maybe OAuthToken)
     , _creFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesInsert'' with the minimum fields required to make a request.
 --
@@ -82,9 +83,9 @@ data CreativesInsert' = CreativesInsert'
 --
 -- * 'creUserIP'
 --
--- * 'creCreative'
---
 -- * 'creProfileId'
+--
+-- * 'crePayload'
 --
 -- * 'creKey'
 --
@@ -92,16 +93,16 @@ data CreativesInsert' = CreativesInsert'
 --
 -- * 'creFields'
 creativesInsert'
-    :: Creative -- ^ 'Creative'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> Creative -- ^ 'payload'
     -> CreativesInsert'
-creativesInsert' pCreCreative_ pCreProfileId_ =
+creativesInsert' pCreProfileId_ pCrePayload_ =
     CreativesInsert'
     { _creQuotaUser = Nothing
     , _crePrettyPrint = True
     , _creUserIP = Nothing
-    , _creCreative = pCreCreative_
     , _creProfileId = pCreProfileId_
+    , _crePayload = pCrePayload_
     , _creKey = Nothing
     , _creOAuthToken = Nothing
     , _creFields = Nothing
@@ -126,15 +127,15 @@ creUserIP :: Lens' CreativesInsert' (Maybe Text)
 creUserIP
   = lens _creUserIP (\ s a -> s{_creUserIP = a})
 
--- | Multipart request metadata.
-creCreative :: Lens' CreativesInsert' Creative
-creCreative
-  = lens _creCreative (\ s a -> s{_creCreative = a})
-
 -- | User profile ID associated with this request.
 creProfileId :: Lens' CreativesInsert' Int64
 creProfileId
   = lens _creProfileId (\ s a -> s{_creProfileId = a})
+
+-- | Multipart request metadata.
+crePayload :: Lens' CreativesInsert' Creative
+crePayload
+  = lens _crePayload (\ s a -> s{_crePayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -168,7 +169,7 @@ instance GoogleRequest CreativesInsert' where
               _creKey
               _creOAuthToken
               (Just AltJSON)
-              _creCreative
+              _crePayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativesInsertResource)

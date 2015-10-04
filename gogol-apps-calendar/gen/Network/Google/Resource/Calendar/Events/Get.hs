@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,9 +54,9 @@ type EventsGetResource =
        Capture "calendarId" Text :>
          "events" :>
            Capture "eventId" Text :>
-             QueryParam "alwaysIncludeEmail" Bool :>
-               QueryParam "maxAttendees" Int32 :>
-                 QueryParam "timeZone" Text :>
+             QueryParam "maxAttendees" Int32 :>
+               QueryParam "timeZone" Text :>
+                 QueryParam "alwaysIncludeEmail" Bool :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data EventsGet' = EventsGet'
     , _egAlwaysIncludeEmail :: !(Maybe Bool)
     , _egEventId            :: !Text
     , _egFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsGet'' with the minimum fields required to make a request.
 --
@@ -203,10 +204,9 @@ instance GoogleRequest EventsGet' where
         type Rs EventsGet' = Event
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsGet'{..}
-          = go _egAlwaysIncludeEmail _egMaxAttendees
+          = go _egCalendarId _egEventId _egMaxAttendees
               _egTimeZone
-              _egCalendarId
-              _egEventId
+              _egAlwaysIncludeEmail
               _egQuotaUser
               (Just _egPrettyPrint)
               _egUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -66,12 +67,12 @@ data UserRolePermissionsList' = UserRolePermissionsList'
     { _urplQuotaUser   :: !(Maybe Text)
     , _urplPrettyPrint :: !Bool
     , _urplUserIP      :: !(Maybe Text)
-    , _urplIds         :: !(Maybe Int64)
+    , _urplIds         :: !(Maybe [Int64])
     , _urplProfileId   :: !Int64
     , _urplKey         :: !(Maybe Key)
     , _urplOAuthToken  :: !(Maybe OAuthToken)
     , _urplFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolePermissionsList'' with the minimum fields required to make a request.
 --
@@ -128,8 +129,10 @@ urplUserIP
   = lens _urplUserIP (\ s a -> s{_urplUserIP = a})
 
 -- | Select only user role permissions with these IDs.
-urplIds :: Lens' UserRolePermissionsList' (Maybe Int64)
-urplIds = lens _urplIds (\ s a -> s{_urplIds = a})
+urplIds :: Lens' UserRolePermissionsList' [Int64]
+urplIds
+  = lens _urplIds (\ s a -> s{_urplIds = a}) . _Default
+      . _Coerce
 
 -- | User profile ID associated with this request.
 urplProfileId :: Lens' UserRolePermissionsList' Int64
@@ -163,7 +166,8 @@ instance GoogleRequest UserRolePermissionsList' where
              UserRolePermissionsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolePermissionsList'{..}
-          = go _urplIds _urplProfileId _urplQuotaUser
+          = go _urplProfileId (_urplIds ^. _Default)
+              _urplQuotaUser
               (Just _urplPrettyPrint)
               _urplUserIP
               _urplFields

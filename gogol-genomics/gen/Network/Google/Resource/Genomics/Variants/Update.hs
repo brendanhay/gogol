@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.Genomics.Variants.Update
 
     -- * Request Lenses
     , vuQuotaUser
-    , vuVariant
     , vuPrettyPrint
     , vuUserIP
+    , vuPayload
     , vuKey
     , vuVariantId
     , vuOAuthToken
@@ -64,14 +65,14 @@ type VariantsUpdateResource =
 -- /See:/ 'variantsUpdate'' smart constructor.
 data VariantsUpdate' = VariantsUpdate'
     { _vuQuotaUser   :: !(Maybe Text)
-    , _vuVariant     :: !Variant
     , _vuPrettyPrint :: !Bool
     , _vuUserIP      :: !(Maybe Text)
+    , _vuPayload     :: !Variant
     , _vuKey         :: !(Maybe Key)
     , _vuVariantId   :: !Text
     , _vuOAuthToken  :: !(Maybe OAuthToken)
     , _vuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsUpdate'' with the minimum fields required to make a request.
 --
@@ -79,11 +80,11 @@ data VariantsUpdate' = VariantsUpdate'
 --
 -- * 'vuQuotaUser'
 --
--- * 'vuVariant'
---
 -- * 'vuPrettyPrint'
 --
 -- * 'vuUserIP'
+--
+-- * 'vuPayload'
 --
 -- * 'vuKey'
 --
@@ -93,15 +94,15 @@ data VariantsUpdate' = VariantsUpdate'
 --
 -- * 'vuFields'
 variantsUpdate'
-    :: Variant -- ^ 'Variant'
+    :: Variant -- ^ 'payload'
     -> Text -- ^ 'variantId'
     -> VariantsUpdate'
-variantsUpdate' pVuVariant_ pVuVariantId_ =
+variantsUpdate' pVuPayload_ pVuVariantId_ =
     VariantsUpdate'
     { _vuQuotaUser = Nothing
-    , _vuVariant = pVuVariant_
     , _vuPrettyPrint = True
     , _vuUserIP = Nothing
+    , _vuPayload = pVuPayload_
     , _vuKey = Nothing
     , _vuVariantId = pVuVariantId_
     , _vuOAuthToken = Nothing
@@ -115,11 +116,6 @@ vuQuotaUser :: Lens' VariantsUpdate' (Maybe Text)
 vuQuotaUser
   = lens _vuQuotaUser (\ s a -> s{_vuQuotaUser = a})
 
--- | Multipart request metadata.
-vuVariant :: Lens' VariantsUpdate' Variant
-vuVariant
-  = lens _vuVariant (\ s a -> s{_vuVariant = a})
-
 -- | Returns response with indentations and line breaks.
 vuPrettyPrint :: Lens' VariantsUpdate' Bool
 vuPrettyPrint
@@ -130,6 +126,11 @@ vuPrettyPrint
 -- want to enforce per-user limits.
 vuUserIP :: Lens' VariantsUpdate' (Maybe Text)
 vuUserIP = lens _vuUserIP (\ s a -> s{_vuUserIP = a})
+
+-- | Multipart request metadata.
+vuPayload :: Lens' VariantsUpdate' Variant
+vuPayload
+  = lens _vuPayload (\ s a -> s{_vuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -165,7 +166,7 @@ instance GoogleRequest VariantsUpdate' where
               _vuKey
               _vuOAuthToken
               (Just AltJSON)
-              _vuVariant
+              _vuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsUpdateResource)

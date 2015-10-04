@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.YouTube.Comments.Update
     , cuPart
     , cuPrettyPrint
     , cuUserIP
+    , cuPayload
     , cuKey
     , cuOAuthToken
-    , cuComment
     , cuFields
     ) where
 
@@ -65,11 +66,11 @@ data CommentsUpdate' = CommentsUpdate'
     , _cuPart        :: !Text
     , _cuPrettyPrint :: !Bool
     , _cuUserIP      :: !(Maybe Text)
+    , _cuPayload     :: !Comment
     , _cuKey         :: !(Maybe Key)
     , _cuOAuthToken  :: !(Maybe OAuthToken)
-    , _cuComment     :: !Comment
     , _cuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsUpdate'' with the minimum fields required to make a request.
 --
@@ -83,26 +84,26 @@ data CommentsUpdate' = CommentsUpdate'
 --
 -- * 'cuUserIP'
 --
+-- * 'cuPayload'
+--
 -- * 'cuKey'
 --
 -- * 'cuOAuthToken'
 --
--- * 'cuComment'
---
 -- * 'cuFields'
 commentsUpdate'
     :: Text -- ^ 'part'
-    -> Comment -- ^ 'Comment'
+    -> Comment -- ^ 'payload'
     -> CommentsUpdate'
-commentsUpdate' pCuPart_ pCuComment_ =
+commentsUpdate' pCuPart_ pCuPayload_ =
     CommentsUpdate'
     { _cuQuotaUser = Nothing
     , _cuPart = pCuPart_
     , _cuPrettyPrint = True
     , _cuUserIP = Nothing
+    , _cuPayload = pCuPayload_
     , _cuKey = Nothing
     , _cuOAuthToken = Nothing
-    , _cuComment = pCuComment_
     , _cuFields = Nothing
     }
 
@@ -131,6 +132,11 @@ cuPrettyPrint
 cuUserIP :: Lens' CommentsUpdate' (Maybe Text)
 cuUserIP = lens _cuUserIP (\ s a -> s{_cuUserIP = a})
 
+-- | Multipart request metadata.
+cuPayload :: Lens' CommentsUpdate' Comment
+cuPayload
+  = lens _cuPayload (\ s a -> s{_cuPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -141,11 +147,6 @@ cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
 cuOAuthToken :: Lens' CommentsUpdate' (Maybe OAuthToken)
 cuOAuthToken
   = lens _cuOAuthToken (\ s a -> s{_cuOAuthToken = a})
-
--- | Multipart request metadata.
-cuComment :: Lens' CommentsUpdate' Comment
-cuComment
-  = lens _cuComment (\ s a -> s{_cuComment = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cuFields :: Lens' CommentsUpdate' (Maybe Text)
@@ -166,7 +167,7 @@ instance GoogleRequest CommentsUpdate' where
               _cuKey
               _cuOAuthToken
               (Just AltJSON)
-              _cuComment
+              _cuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentsUpdateResource)

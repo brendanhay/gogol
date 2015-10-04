@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.Content.Orders.Shiplineitems
     , osMerchantId
     , osPrettyPrint
     , osUserIP
-    , osOrdersShipLineItemsRequest
+    , osPayload
     , osKey
     , osOAuthToken
     , osOrderId
@@ -65,16 +66,16 @@ type OrdersShiplineitemsResource =
 --
 -- /See:/ 'ordersShiplineitems'' smart constructor.
 data OrdersShiplineitems' = OrdersShiplineitems'
-    { _osQuotaUser                  :: !(Maybe Text)
-    , _osMerchantId                 :: !Word64
-    , _osPrettyPrint                :: !Bool
-    , _osUserIP                     :: !(Maybe Text)
-    , _osOrdersShipLineItemsRequest :: !OrdersShipLineItemsRequest
-    , _osKey                        :: !(Maybe Key)
-    , _osOAuthToken                 :: !(Maybe OAuthToken)
-    , _osOrderId                    :: !Text
-    , _osFields                     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _osQuotaUser   :: !(Maybe Text)
+    , _osMerchantId  :: !Word64
+    , _osPrettyPrint :: !Bool
+    , _osUserIP      :: !(Maybe Text)
+    , _osPayload     :: !OrdersShipLineItemsRequest
+    , _osKey         :: !(Maybe Key)
+    , _osOAuthToken  :: !(Maybe OAuthToken)
+    , _osOrderId     :: !Text
+    , _osFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersShiplineitems'' with the minimum fields required to make a request.
 --
@@ -88,7 +89,7 @@ data OrdersShiplineitems' = OrdersShiplineitems'
 --
 -- * 'osUserIP'
 --
--- * 'osOrdersShipLineItemsRequest'
+-- * 'osPayload'
 --
 -- * 'osKey'
 --
@@ -99,16 +100,16 @@ data OrdersShiplineitems' = OrdersShiplineitems'
 -- * 'osFields'
 ordersShiplineitems'
     :: Word64 -- ^ 'merchantId'
-    -> OrdersShipLineItemsRequest -- ^ 'OrdersShipLineItemsRequest'
+    -> OrdersShipLineItemsRequest -- ^ 'payload'
     -> Text -- ^ 'orderId'
     -> OrdersShiplineitems'
-ordersShiplineitems' pOsMerchantId_ pOsOrdersShipLineItemsRequest_ pOsOrderId_ =
+ordersShiplineitems' pOsMerchantId_ pOsPayload_ pOsOrderId_ =
     OrdersShiplineitems'
     { _osQuotaUser = Nothing
     , _osMerchantId = pOsMerchantId_
     , _osPrettyPrint = True
     , _osUserIP = Nothing
-    , _osOrdersShipLineItemsRequest = pOsOrdersShipLineItemsRequest_
+    , _osPayload = pOsPayload_
     , _osKey = Nothing
     , _osOAuthToken = Nothing
     , _osOrderId = pOsOrderId_
@@ -139,10 +140,9 @@ osUserIP :: Lens' OrdersShiplineitems' (Maybe Text)
 osUserIP = lens _osUserIP (\ s a -> s{_osUserIP = a})
 
 -- | Multipart request metadata.
-osOrdersShipLineItemsRequest :: Lens' OrdersShiplineitems' OrdersShipLineItemsRequest
-osOrdersShipLineItemsRequest
-  = lens _osOrdersShipLineItemsRequest
-      (\ s a -> s{_osOrdersShipLineItemsRequest = a})
+osPayload :: Lens' OrdersShiplineitems' OrdersShipLineItemsRequest
+osPayload
+  = lens _osPayload (\ s a -> s{_osPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -180,7 +180,7 @@ instance GoogleRequest OrdersShiplineitems' where
               _osKey
               _osOAuthToken
               (Just AltJSON)
-              _osOrdersShipLineItemsRequest
+              _osPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrdersShiplineitemsResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,7 +37,7 @@ module Network.Google.Resource.Compute.Projects.SetUsageExportBucket
     , psuebPrettyPrint
     , psuebProject
     , psuebUserIP
-    , psuebUsageExportLocation
+    , psuebPayload
     , psuebKey
     , psuebOAuthToken
     , psuebFields
@@ -66,15 +67,15 @@ type ProjectsSetUsageExportBucketResource =
 --
 -- /See:/ 'projectsSetUsageExportBucket'' smart constructor.
 data ProjectsSetUsageExportBucket' = ProjectsSetUsageExportBucket'
-    { _psuebQuotaUser           :: !(Maybe Text)
-    , _psuebPrettyPrint         :: !Bool
-    , _psuebProject             :: !Text
-    , _psuebUserIP              :: !(Maybe Text)
-    , _psuebUsageExportLocation :: !UsageExportLocation
-    , _psuebKey                 :: !(Maybe Key)
-    , _psuebOAuthToken          :: !(Maybe OAuthToken)
-    , _psuebFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _psuebQuotaUser   :: !(Maybe Text)
+    , _psuebPrettyPrint :: !Bool
+    , _psuebProject     :: !Text
+    , _psuebUserIP      :: !(Maybe Text)
+    , _psuebPayload     :: !UsageExportLocation
+    , _psuebKey         :: !(Maybe Key)
+    , _psuebOAuthToken  :: !(Maybe OAuthToken)
+    , _psuebFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSetUsageExportBucket'' with the minimum fields required to make a request.
 --
@@ -88,7 +89,7 @@ data ProjectsSetUsageExportBucket' = ProjectsSetUsageExportBucket'
 --
 -- * 'psuebUserIP'
 --
--- * 'psuebUsageExportLocation'
+-- * 'psuebPayload'
 --
 -- * 'psuebKey'
 --
@@ -97,15 +98,15 @@ data ProjectsSetUsageExportBucket' = ProjectsSetUsageExportBucket'
 -- * 'psuebFields'
 projectsSetUsageExportBucket'
     :: Text -- ^ 'project'
-    -> UsageExportLocation -- ^ 'UsageExportLocation'
+    -> UsageExportLocation -- ^ 'payload'
     -> ProjectsSetUsageExportBucket'
-projectsSetUsageExportBucket' pPsuebProject_ pPsuebUsageExportLocation_ =
+projectsSetUsageExportBucket' pPsuebProject_ pPsuebPayload_ =
     ProjectsSetUsageExportBucket'
     { _psuebQuotaUser = Nothing
     , _psuebPrettyPrint = True
     , _psuebProject = pPsuebProject_
     , _psuebUserIP = Nothing
-    , _psuebUsageExportLocation = pPsuebUsageExportLocation_
+    , _psuebPayload = pPsuebPayload_
     , _psuebKey = Nothing
     , _psuebOAuthToken = Nothing
     , _psuebFields = Nothing
@@ -137,10 +138,9 @@ psuebUserIP
   = lens _psuebUserIP (\ s a -> s{_psuebUserIP = a})
 
 -- | Multipart request metadata.
-psuebUsageExportLocation :: Lens' ProjectsSetUsageExportBucket' UsageExportLocation
-psuebUsageExportLocation
-  = lens _psuebUsageExportLocation
-      (\ s a -> s{_psuebUsageExportLocation = a})
+psuebPayload :: Lens' ProjectsSetUsageExportBucket' UsageExportLocation
+psuebPayload
+  = lens _psuebPayload (\ s a -> s{_psuebPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -177,7 +177,7 @@ instance GoogleRequest ProjectsSetUsageExportBucket'
               _psuebKey
               _psuebOAuthToken
               (Just AltJSON)
-              _psuebUsageExportLocation
+              _psuebPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsSetUsageExportBucketResource)

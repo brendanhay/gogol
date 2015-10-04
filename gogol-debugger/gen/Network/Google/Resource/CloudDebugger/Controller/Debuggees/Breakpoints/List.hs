@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -67,13 +68,13 @@ type ControllerDebuggeesBreakpointsListResource =
            Capture "debuggeeId" Text :>
              "breakpoints" :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
-                             QueryParam "waitToken" Text :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "waitToken" Text :>
+                             QueryParam "callback" Text :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
@@ -110,7 +111,7 @@ data ControllerDebuggeesBreakpointsList' = ControllerDebuggeesBreakpointsList'
     , _cdblOAuthToken     :: !(Maybe OAuthToken)
     , _cdblFields         :: !(Maybe Text)
     , _cdblCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ControllerDebuggeesBreakpointsList'' with the minimum fields required to make a request.
 --
@@ -261,13 +262,13 @@ instance GoogleRequest
         request = requestWithRoute defReq debuggerURL
         requestWithRoute r u
           ControllerDebuggeesBreakpointsList'{..}
-          = go _cdblXgafv _cdblAccessToken _cdblBearerToken
-              _cdblCallback
+          = go _cdblDebuggeeId _cdblXgafv _cdblUploadProtocol
               (Just _cdblPp)
+              _cdblAccessToken
               _cdblUploadType
-              _cdblUploadProtocol
+              _cdblBearerToken
               _cdblWaitToken
-              _cdblDebuggeeId
+              _cdblCallback
               _cdblQuotaUser
               (Just _cdblPrettyPrint)
               _cdblFields

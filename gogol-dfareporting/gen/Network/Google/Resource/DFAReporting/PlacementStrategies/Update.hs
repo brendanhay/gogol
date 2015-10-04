@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Update
     , psuPrettyPrint
     , psuUserIP
     , psuProfileId
+    , psuPayload
     , psuKey
-    , psuPlacementStrategy
     , psuOAuthToken
     , psuFields
     ) where
@@ -63,15 +64,15 @@ type PlacementStrategiesUpdateResource =
 --
 -- /See:/ 'placementStrategiesUpdate'' smart constructor.
 data PlacementStrategiesUpdate' = PlacementStrategiesUpdate'
-    { _psuQuotaUser         :: !(Maybe Text)
-    , _psuPrettyPrint       :: !Bool
-    , _psuUserIP            :: !(Maybe Text)
-    , _psuProfileId         :: !Int64
-    , _psuKey               :: !(Maybe Key)
-    , _psuPlacementStrategy :: !PlacementStrategy
-    , _psuOAuthToken        :: !(Maybe OAuthToken)
-    , _psuFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _psuQuotaUser   :: !(Maybe Text)
+    , _psuPrettyPrint :: !Bool
+    , _psuUserIP      :: !(Maybe Text)
+    , _psuProfileId   :: !Int64
+    , _psuPayload     :: !PlacementStrategy
+    , _psuKey         :: !(Maybe Key)
+    , _psuOAuthToken  :: !(Maybe OAuthToken)
+    , _psuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesUpdate'' with the minimum fields required to make a request.
 --
@@ -85,25 +86,25 @@ data PlacementStrategiesUpdate' = PlacementStrategiesUpdate'
 --
 -- * 'psuProfileId'
 --
--- * 'psuKey'
+-- * 'psuPayload'
 --
--- * 'psuPlacementStrategy'
+-- * 'psuKey'
 --
 -- * 'psuOAuthToken'
 --
 -- * 'psuFields'
 placementStrategiesUpdate'
     :: Int64 -- ^ 'profileId'
-    -> PlacementStrategy -- ^ 'PlacementStrategy'
+    -> PlacementStrategy -- ^ 'payload'
     -> PlacementStrategiesUpdate'
-placementStrategiesUpdate' pPsuProfileId_ pPsuPlacementStrategy_ =
+placementStrategiesUpdate' pPsuProfileId_ pPsuPayload_ =
     PlacementStrategiesUpdate'
     { _psuQuotaUser = Nothing
     , _psuPrettyPrint = True
     , _psuUserIP = Nothing
     , _psuProfileId = pPsuProfileId_
+    , _psuPayload = pPsuPayload_
     , _psuKey = Nothing
-    , _psuPlacementStrategy = pPsuPlacementStrategy_
     , _psuOAuthToken = Nothing
     , _psuFields = Nothing
     }
@@ -132,17 +133,16 @@ psuProfileId :: Lens' PlacementStrategiesUpdate' Int64
 psuProfileId
   = lens _psuProfileId (\ s a -> s{_psuProfileId = a})
 
+-- | Multipart request metadata.
+psuPayload :: Lens' PlacementStrategiesUpdate' PlacementStrategy
+psuPayload
+  = lens _psuPayload (\ s a -> s{_psuPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 psuKey :: Lens' PlacementStrategiesUpdate' (Maybe Key)
 psuKey = lens _psuKey (\ s a -> s{_psuKey = a})
-
--- | Multipart request metadata.
-psuPlacementStrategy :: Lens' PlacementStrategiesUpdate' PlacementStrategy
-psuPlacementStrategy
-  = lens _psuPlacementStrategy
-      (\ s a -> s{_psuPlacementStrategy = a})
 
 -- | OAuth 2.0 token for the current user.
 psuOAuthToken :: Lens' PlacementStrategiesUpdate' (Maybe OAuthToken)
@@ -172,7 +172,7 @@ instance GoogleRequest PlacementStrategiesUpdate'
               _psuKey
               _psuOAuthToken
               (Just AltJSON)
-              _psuPlacementStrategy
+              _psuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementStrategiesUpdateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -66,24 +67,19 @@ type CompaniesGetResource =
        "companies" :>
          Capture "companyId" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "address" Text :>
-                 QueryParam "bearer_token" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParam "currencyCode" Text :>
-                       QueryParam "orderBy" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParams "requestMetadata.experimentIds" Text :>
-                             QueryParam "requestMetadata.locale" Text :>
-                               QueryParam "requestMetadata.partnersSessionId"
-                                 Text
-                                 :>
-                                 QueryParam
-                                   "requestMetadata.trafficSource.trafficSourceId"
-                                   Text
-                                   :>
-                                   QueryParam
-                                     "requestMetadata.trafficSource.trafficSubId"
+             QueryParam "currencyCode" Text :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "orderBy" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "address" Text :>
+                           QueryParam "requestMetadata.partnersSessionId" Text
+                             :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "requestMetadata.locale" Text :>
+                                 QueryParam "view" Text :>
+                                   QueryParams "requestMetadata.experimentIds"
                                      Text
                                      :>
                                      QueryParam
@@ -91,12 +87,18 @@ type CompaniesGetResource =
                                        Text
                                        :>
                                        QueryParam
-                                         "requestMetadata.userOverrides.userId"
+                                         "requestMetadata.trafficSource.trafficSubId"
                                          Text
                                          :>
-                                         QueryParam "uploadType" Text :>
-                                           QueryParam "upload_protocol" Text :>
-                                             QueryParam "view" Text :>
+                                         QueryParam
+                                           "requestMetadata.userOverrides.userId"
+                                           Text
+                                           :>
+                                           QueryParam
+                                             "requestMetadata.trafficSource.trafficSourceId"
+                                             Text
+                                             :>
+                                             QueryParam "callback" Text :>
                                                QueryParam "quotaUser" Text :>
                                                  QueryParam "prettyPrint" Bool
                                                    :>
@@ -131,7 +133,7 @@ data CompaniesGet' = CompaniesGet'
     , _cgKey                                         :: !(Maybe Key)
     , _cgRequestMetadataLocale                       :: !(Maybe Text)
     , _cgView                                        :: !(Maybe Text)
-    , _cgRequestMetadataExperimentIds                :: !(Maybe Text)
+    , _cgRequestMetadataExperimentIds                :: !(Maybe [Text])
     , _cgRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
     , _cgRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
     , _cgOAuthToken                                  :: !(Maybe OAuthToken)
@@ -139,7 +141,7 @@ data CompaniesGet' = CompaniesGet'
     , _cgRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _cgFields                                      :: !(Maybe Text)
     , _cgCallback                                    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CompaniesGet'' with the minimum fields required to make a request.
 --
@@ -318,10 +320,12 @@ cgView :: Lens' CompaniesGet' (Maybe Text)
 cgView = lens _cgView (\ s a -> s{_cgView = a})
 
 -- | Experiment IDs the current request belongs to.
-cgRequestMetadataExperimentIds :: Lens' CompaniesGet' (Maybe Text)
+cgRequestMetadataExperimentIds :: Lens' CompaniesGet' [Text]
 cgRequestMetadataExperimentIds
   = lens _cgRequestMetadataExperimentIds
       (\ s a -> s{_cgRequestMetadataExperimentIds = a})
+      . _Default
+      . _Coerce
 
 -- | IP address to use instead of the user\'s geo-located IP address.
 cgRequestMetadataUserOverridesIPAddress :: Lens' CompaniesGet' (Maybe Text)
@@ -377,23 +381,23 @@ instance GoogleRequest CompaniesGet' where
         type Rs CompaniesGet' = GetCompanyResponse
         request = requestWithRoute defReq partnersURL
         requestWithRoute r u CompaniesGet'{..}
-          = go _cgXgafv _cgAccessToken _cgAddress
-              _cgBearerToken
-              _cgCallback
-              _cgCurrencyCode
+          = go _cgCompanyId _cgXgafv _cgCurrencyCode
+              _cgUploadProtocol
               _cgOrderBy
               (Just _cgPp)
-              _cgRequestMetadataExperimentIds
-              _cgRequestMetadataLocale
-              _cgRequestMetadataPartnersSessionId
-              _cgRequestMetadataTrafficSourceTrafficSourceId
-              _cgRequestMetadataTrafficSourceTrafficSubId
-              _cgRequestMetadataUserOverridesIPAddress
-              _cgRequestMetadataUserOverridesUserId
+              _cgAccessToken
               _cgUploadType
-              _cgUploadProtocol
+              _cgAddress
+              _cgRequestMetadataPartnersSessionId
+              _cgBearerToken
+              _cgRequestMetadataLocale
               _cgView
-              _cgCompanyId
+              (_cgRequestMetadataExperimentIds ^. _Default)
+              _cgRequestMetadataUserOverridesIPAddress
+              _cgRequestMetadataTrafficSourceTrafficSubId
+              _cgRequestMetadataUserOverridesUserId
+              _cgRequestMetadataTrafficSourceTrafficSourceId
+              _cgCallback
               _cgQuotaUser
               (Just _cgPrettyPrint)
               _cgFields

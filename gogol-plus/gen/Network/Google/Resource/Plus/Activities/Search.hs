@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,11 +51,11 @@ import           Network.Google.Prelude
 -- 'ActivitiesSearch'' request conforms to.
 type ActivitiesSearchResource =
      "activities" :>
-       QueryParam "language" Text :>
-         QueryParam "maxResults" Word32 :>
-           QueryParam "orderBy" PlusActivitiesSearchOrderBy :>
+       QueryParam "query" Text :>
+         QueryParam "orderBy" OrderBy :>
+           QueryParam "language" Text :>
              QueryParam "pageToken" Text :>
-               QueryParam "query" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -70,7 +71,7 @@ type ActivitiesSearchResource =
 data ActivitiesSearch' = ActivitiesSearch'
     { _asQuotaUser   :: !(Maybe Text)
     , _asPrettyPrint :: !Bool
-    , _asOrderBy     :: !PlusActivitiesSearchOrderBy
+    , _asOrderBy     :: !OrderBy
     , _asUserIP      :: !(Maybe Text)
     , _asKey         :: !(Maybe Key)
     , _asQuery       :: !Text
@@ -79,7 +80,7 @@ data ActivitiesSearch' = ActivitiesSearch'
     , _asOAuthToken  :: !(Maybe OAuthToken)
     , _asMaxResults  :: !Word32
     , _asFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesSearch'' with the minimum fields required to make a request.
 --
@@ -138,7 +139,7 @@ asPrettyPrint
       (\ s a -> s{_asPrettyPrint = a})
 
 -- | Specifies how to order search results.
-asOrderBy :: Lens' ActivitiesSearch' PlusActivitiesSearchOrderBy
+asOrderBy :: Lens' ActivitiesSearch' OrderBy
 asOrderBy
   = lens _asOrderBy (\ s a -> s{_asOrderBy = a})
 
@@ -195,10 +196,10 @@ instance GoogleRequest ActivitiesSearch' where
         type Rs ActivitiesSearch' = ActivityFeed
         request = requestWithRoute defReq plusURL
         requestWithRoute r u ActivitiesSearch'{..}
-          = go (Just _asLanguage) (Just _asMaxResults)
-              (Just _asOrderBy)
+          = go (Just _asQuery) (Just _asOrderBy)
+              (Just _asLanguage)
               _asPageToken
-              (Just _asQuery)
+              (Just _asMaxResults)
               _asQuotaUser
               (Just _asPrettyPrint)
               _asUserIP

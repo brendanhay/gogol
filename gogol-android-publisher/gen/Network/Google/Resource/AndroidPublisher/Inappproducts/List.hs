@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,9 +52,9 @@ import           Network.Google.Prelude
 type InappproductsListResource =
      Capture "packageName" Text :>
        "inappproducts" :>
-         QueryParam "maxResults" Word32 :>
+         QueryParam "token" Text :>
            QueryParam "startIndex" Word32 :>
-             QueryParam "token" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -78,7 +79,7 @@ data InappproductsList' = InappproductsList'
     , _ilStartIndex  :: !(Maybe Word32)
     , _ilMaxResults  :: !(Maybe Word32)
     , _ilFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsList'' with the minimum fields required to make a request.
 --
@@ -180,8 +181,8 @@ instance GoogleRequest InappproductsList' where
              InappproductsListResponse
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u InappproductsList'{..}
-          = go _ilMaxResults _ilStartIndex _ilToken
-              _ilPackageName
+          = go _ilPackageName _ilToken _ilStartIndex
+              _ilMaxResults
               _ilQuotaUser
               (Just _ilPrettyPrint)
               _ilUserIP

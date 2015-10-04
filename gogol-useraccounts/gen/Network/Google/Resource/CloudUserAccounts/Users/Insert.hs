@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.CloudUserAccounts.Users.Insert
     , uiPrettyPrint
     , uiProject
     , uiUserIP
-    , uiUser
+    , uiPayload
     , uiKey
     , uiOAuthToken
     , uiFields
@@ -68,11 +69,11 @@ data UsersInsert' = UsersInsert'
     , _uiPrettyPrint :: !Bool
     , _uiProject     :: !Text
     , _uiUserIP      :: !(Maybe Text)
-    , _uiUser        :: !User
+    , _uiPayload     :: !User
     , _uiKey         :: !(Maybe Key)
     , _uiOAuthToken  :: !(Maybe OAuthToken)
     , _uiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersInsert'' with the minimum fields required to make a request.
 --
@@ -86,7 +87,7 @@ data UsersInsert' = UsersInsert'
 --
 -- * 'uiUserIP'
 --
--- * 'uiUser'
+-- * 'uiPayload'
 --
 -- * 'uiKey'
 --
@@ -95,15 +96,15 @@ data UsersInsert' = UsersInsert'
 -- * 'uiFields'
 usersInsert'
     :: Text -- ^ 'project'
-    -> User -- ^ 'User'
+    -> User -- ^ 'payload'
     -> UsersInsert'
-usersInsert' pUiProject_ pUiUser_ =
+usersInsert' pUiProject_ pUiPayload_ =
     UsersInsert'
     { _uiQuotaUser = Nothing
     , _uiPrettyPrint = True
     , _uiProject = pUiProject_
     , _uiUserIP = Nothing
-    , _uiUser = pUiUser_
+    , _uiPayload = pUiPayload_
     , _uiKey = Nothing
     , _uiOAuthToken = Nothing
     , _uiFields = Nothing
@@ -133,8 +134,9 @@ uiUserIP :: Lens' UsersInsert' (Maybe Text)
 uiUserIP = lens _uiUserIP (\ s a -> s{_uiUserIP = a})
 
 -- | Multipart request metadata.
-uiUser :: Lens' UsersInsert' User
-uiUser = lens _uiUser (\ s a -> s{_uiUser = a})
+uiPayload :: Lens' UsersInsert' User
+uiPayload
+  = lens _uiPayload (\ s a -> s{_uiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -165,7 +167,7 @@ instance GoogleRequest UsersInsert' where
               _uiKey
               _uiOAuthToken
               (Just AltJSON)
-              _uiUser
+              _uiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersInsertResource)

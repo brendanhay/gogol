@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,10 +52,10 @@ import           Network.Google.Prelude
 type FilesGetResource =
      "files" :>
        Capture "fileId" Text :>
-         QueryParam "acknowledgeAbuse" Bool :>
+         QueryParam "updateViewedDate" Bool :>
            QueryParam "projection" DriveFilesGetProjection :>
-             QueryParam "revisionId" Text :>
-               QueryParam "updateViewedDate" Bool :>
+             QueryParam "acknowledgeAbuse" Bool :>
+               QueryParam "revisionId" Text :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -65,18 +66,18 @@ type FilesGetResource =
        :<|>
        "files" :>
          Capture "fileId" Text :>
-           QueryParam "acknowledgeAbuse" Bool :>
+           QueryParam "updateViewedDate" Bool :>
              QueryParam "projection" DriveFilesGetProjection :>
-               QueryParam "revisionId" Text :>
-                 QueryParam "updateViewedDate" Bool :>
+               QueryParam "acknowledgeAbuse" Bool :>
+                 QueryParam "revisionId" Text :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "alt" Media :>
-                                 Get '[OctetStream] Stream
+                               QueryParam "alt" AltMedia :>
+                                 Get '[OctetStream] Body
 
 -- | Gets a file\'s metadata by ID.
 --
@@ -93,7 +94,7 @@ data FilesGet' = FilesGet'
     , _fgOAuthToken       :: !(Maybe OAuthToken)
     , _fgRevisionId       :: !(Maybe Text)
     , _fgFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesGet'' with the minimum fields required to make a request.
 --
@@ -208,10 +209,10 @@ instance GoogleRequest FilesGet' where
         type Rs FilesGet' = File
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesGet'{..}
-          = go (Just _fgAcknowledgeAbuse) _fgProjection
+          = go _fgFileId (Just _fgUpdateViewedDate)
+              _fgProjection
+              (Just _fgAcknowledgeAbuse)
               _fgRevisionId
-              (Just _fgUpdateViewedDate)
-              _fgFileId
               _fgQuotaUser
               (Just _fgPrettyPrint)
               _fgUserIP
@@ -223,21 +224,21 @@ instance GoogleRequest FilesGet' where
                   = clientWithRoute (Proxy :: Proxy FilesGetResource) r
                       u
 
-instance GoogleRequest FilesGet' where
-        type Rs (Download FilesGet') = Stream
+instance GoogleRequest (Download FilesGet') where
+        type Rs (Download FilesGet') = Body
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesGet'{..}
-          = go (Just _fgAcknowledgeAbuse) _fgProjection
+        requestWithRoute r u (Download FilesGet'{..})
+          = go _fgFileId (Just _fgUpdateViewedDate)
+              _fgProjection
+              (Just _fgAcknowledgeAbuse)
               _fgRevisionId
-              (Just _fgUpdateViewedDate)
-              _fgFileId
               _fgQuotaUser
               (Just _fgPrettyPrint)
               _fgUserIP
               _fgFields
               _fgKey
               _fgOAuthToken
-              (Just Media)
-          where go :<|> _
+              (Just AltMedia)
+          where _ :<|> go
                   = clientWithRoute (Proxy :: Proxy FilesGetResource) r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -47,7 +48,7 @@ import           Network.Google.Prelude
 -- 'WebfontsList'' request conforms to.
 type WebfontsListResource =
      "webfonts" :>
-       QueryParam "sort" WebfontsWebfontsListSort :>
+       QueryParam "sort" Sort :>
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
@@ -65,10 +66,10 @@ data WebfontsList' = WebfontsList'
     , _wlPrettyPrint :: !Bool
     , _wlUserIP      :: !(Maybe Text)
     , _wlKey         :: !(Maybe Key)
-    , _wlSort        :: !(Maybe WebfontsWebfontsListSort)
+    , _wlSort        :: !(Maybe Sort)
     , _wlOAuthToken  :: !(Maybe OAuthToken)
     , _wlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebfontsList'' with the minimum fields required to make a request.
 --
@@ -125,7 +126,7 @@ wlKey :: Lens' WebfontsList' (Maybe Key)
 wlKey = lens _wlKey (\ s a -> s{_wlKey = a})
 
 -- | Enables sorting of the list
-wlSort :: Lens' WebfontsList' (Maybe WebfontsWebfontsListSort)
+wlSort :: Lens' WebfontsList' (Maybe Sort)
 wlSort = lens _wlSort (\ s a -> s{_wlSort = a})
 
 -- | OAuth 2.0 token for the current user.

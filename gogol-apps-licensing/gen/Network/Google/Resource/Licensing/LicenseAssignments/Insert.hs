@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Insert
     -- * Request Lenses
     , laiQuotaUser
     , laiPrettyPrint
-    , laiLicenseAssignmentInsert
     , laiUserIP
-    , laiSkuId
+    , laiSKUId
+    , laiPayload
     , laiKey
     , laiOAuthToken
     , laiProductId
@@ -65,16 +66,16 @@ type LicenseAssignmentsInsertResource =
 --
 -- /See:/ 'licenseAssignmentsInsert'' smart constructor.
 data LicenseAssignmentsInsert' = LicenseAssignmentsInsert'
-    { _laiQuotaUser               :: !(Maybe Text)
-    , _laiPrettyPrint             :: !Bool
-    , _laiLicenseAssignmentInsert :: !LicenseAssignmentInsert
-    , _laiUserIP                  :: !(Maybe Text)
-    , _laiSkuId                   :: !Text
-    , _laiKey                     :: !(Maybe Key)
-    , _laiOAuthToken              :: !(Maybe OAuthToken)
-    , _laiProductId               :: !Text
-    , _laiFields                  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _laiQuotaUser   :: !(Maybe Text)
+    , _laiPrettyPrint :: !Bool
+    , _laiUserIP      :: !(Maybe Text)
+    , _laiSKUId       :: !Text
+    , _laiPayload     :: !LicenseAssignmentInsert
+    , _laiKey         :: !(Maybe Key)
+    , _laiOAuthToken  :: !(Maybe OAuthToken)
+    , _laiProductId   :: !Text
+    , _laiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentsInsert'' with the minimum fields required to make a request.
 --
@@ -84,11 +85,11 @@ data LicenseAssignmentsInsert' = LicenseAssignmentsInsert'
 --
 -- * 'laiPrettyPrint'
 --
--- * 'laiLicenseAssignmentInsert'
---
 -- * 'laiUserIP'
 --
--- * 'laiSkuId'
+-- * 'laiSKUId'
+--
+-- * 'laiPayload'
 --
 -- * 'laiKey'
 --
@@ -98,17 +99,17 @@ data LicenseAssignmentsInsert' = LicenseAssignmentsInsert'
 --
 -- * 'laiFields'
 licenseAssignmentsInsert'
-    :: LicenseAssignmentInsert -- ^ 'LicenseAssignmentInsert'
-    -> Text -- ^ 'skuId'
+    :: Text -- ^ 'skuId'
+    -> LicenseAssignmentInsert -- ^ 'payload'
     -> Text -- ^ 'productId'
     -> LicenseAssignmentsInsert'
-licenseAssignmentsInsert' pLaiLicenseAssignmentInsert_ pLaiSkuId_ pLaiProductId_ =
+licenseAssignmentsInsert' pLaiSKUId_ pLaiPayload_ pLaiProductId_ =
     LicenseAssignmentsInsert'
     { _laiQuotaUser = Nothing
     , _laiPrettyPrint = True
-    , _laiLicenseAssignmentInsert = pLaiLicenseAssignmentInsert_
     , _laiUserIP = Nothing
-    , _laiSkuId = pLaiSkuId_
+    , _laiSKUId = pLaiSKUId_
+    , _laiPayload = pLaiPayload_
     , _laiKey = Nothing
     , _laiOAuthToken = Nothing
     , _laiProductId = pLaiProductId_
@@ -128,12 +129,6 @@ laiPrettyPrint
   = lens _laiPrettyPrint
       (\ s a -> s{_laiPrettyPrint = a})
 
--- | Multipart request metadata.
-laiLicenseAssignmentInsert :: Lens' LicenseAssignmentsInsert' LicenseAssignmentInsert
-laiLicenseAssignmentInsert
-  = lens _laiLicenseAssignmentInsert
-      (\ s a -> s{_laiLicenseAssignmentInsert = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 laiUserIP :: Lens' LicenseAssignmentsInsert' (Maybe Text)
@@ -141,8 +136,13 @@ laiUserIP
   = lens _laiUserIP (\ s a -> s{_laiUserIP = a})
 
 -- | Name for sku
-laiSkuId :: Lens' LicenseAssignmentsInsert' Text
-laiSkuId = lens _laiSkuId (\ s a -> s{_laiSkuId = a})
+laiSKUId :: Lens' LicenseAssignmentsInsert' Text
+laiSKUId = lens _laiSKUId (\ s a -> s{_laiSKUId = a})
+
+-- | Multipart request metadata.
+laiPayload :: Lens' LicenseAssignmentsInsert' LicenseAssignmentInsert
+laiPayload
+  = lens _laiPayload (\ s a -> s{_laiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -175,14 +175,14 @@ instance GoogleRequest LicenseAssignmentsInsert'
         type Rs LicenseAssignmentsInsert' = LicenseAssignment
         request = requestWithRoute defReq appsLicensingURL
         requestWithRoute r u LicenseAssignmentsInsert'{..}
-          = go _laiProductId _laiSkuId _laiQuotaUser
+          = go _laiProductId _laiSKUId _laiQuotaUser
               (Just _laiPrettyPrint)
               _laiUserIP
               _laiFields
               _laiKey
               _laiOAuthToken
               (Just AltJSON)
-              _laiLicenseAssignmentInsert
+              _laiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LicenseAssignmentsInsertResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.SQL.Instances.RestoreBackup
     , irbPrettyPrint
     , irbProject
     , irbUserIP
+    , irbPayload
     , irbKey
-    , irbInstancesRestoreBackupRequest
     , irbOAuthToken
     , irbFields
     , irbInstance
@@ -66,16 +67,16 @@ type InstancesRestoreBackupResource =
 --
 -- /See:/ 'instancesRestoreBackup'' smart constructor.
 data InstancesRestoreBackup' = InstancesRestoreBackup'
-    { _irbQuotaUser                     :: !(Maybe Text)
-    , _irbPrettyPrint                   :: !Bool
-    , _irbProject                       :: !Text
-    , _irbUserIP                        :: !(Maybe Text)
-    , _irbKey                           :: !(Maybe Key)
-    , _irbInstancesRestoreBackupRequest :: !InstancesRestoreBackupRequest
-    , _irbOAuthToken                    :: !(Maybe OAuthToken)
-    , _irbFields                        :: !(Maybe Text)
-    , _irbInstance                      :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _irbQuotaUser   :: !(Maybe Text)
+    , _irbPrettyPrint :: !Bool
+    , _irbProject     :: !Text
+    , _irbUserIP      :: !(Maybe Text)
+    , _irbPayload     :: !InstancesRestoreBackupRequest
+    , _irbKey         :: !(Maybe Key)
+    , _irbOAuthToken  :: !(Maybe OAuthToken)
+    , _irbFields      :: !(Maybe Text)
+    , _irbInstance    :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesRestoreBackup'' with the minimum fields required to make a request.
 --
@@ -89,9 +90,9 @@ data InstancesRestoreBackup' = InstancesRestoreBackup'
 --
 -- * 'irbUserIP'
 --
--- * 'irbKey'
+-- * 'irbPayload'
 --
--- * 'irbInstancesRestoreBackupRequest'
+-- * 'irbKey'
 --
 -- * 'irbOAuthToken'
 --
@@ -100,17 +101,17 @@ data InstancesRestoreBackup' = InstancesRestoreBackup'
 -- * 'irbInstance'
 instancesRestoreBackup'
     :: Text -- ^ 'project'
-    -> InstancesRestoreBackupRequest -- ^ 'InstancesRestoreBackupRequest'
+    -> InstancesRestoreBackupRequest -- ^ 'payload'
     -> Text -- ^ 'instance'
     -> InstancesRestoreBackup'
-instancesRestoreBackup' pIrbProject_ pIrbInstancesRestoreBackupRequest_ pIrbInstance_ =
+instancesRestoreBackup' pIrbProject_ pIrbPayload_ pIrbInstance_ =
     InstancesRestoreBackup'
     { _irbQuotaUser = Nothing
     , _irbPrettyPrint = True
     , _irbProject = pIrbProject_
     , _irbUserIP = Nothing
+    , _irbPayload = pIrbPayload_
     , _irbKey = Nothing
-    , _irbInstancesRestoreBackupRequest = pIrbInstancesRestoreBackupRequest_
     , _irbOAuthToken = Nothing
     , _irbFields = Nothing
     , _irbInstance = pIrbInstance_
@@ -140,17 +141,16 @@ irbUserIP :: Lens' InstancesRestoreBackup' (Maybe Text)
 irbUserIP
   = lens _irbUserIP (\ s a -> s{_irbUserIP = a})
 
+-- | Multipart request metadata.
+irbPayload :: Lens' InstancesRestoreBackup' InstancesRestoreBackupRequest
+irbPayload
+  = lens _irbPayload (\ s a -> s{_irbPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 irbKey :: Lens' InstancesRestoreBackup' (Maybe Key)
 irbKey = lens _irbKey (\ s a -> s{_irbKey = a})
-
--- | Multipart request metadata.
-irbInstancesRestoreBackupRequest :: Lens' InstancesRestoreBackup' InstancesRestoreBackupRequest
-irbInstancesRestoreBackupRequest
-  = lens _irbInstancesRestoreBackupRequest
-      (\ s a -> s{_irbInstancesRestoreBackupRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 irbOAuthToken :: Lens' InstancesRestoreBackup' (Maybe OAuthToken)
@@ -183,7 +183,7 @@ instance GoogleRequest InstancesRestoreBackup' where
               _irbKey
               _irbOAuthToken
               (Just AltJSON)
-              _irbInstancesRestoreBackupRequest
+              _irbPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesRestoreBackupResource)

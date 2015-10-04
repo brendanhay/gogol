@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,8 +37,8 @@ module Network.Google.Resource.Genomics.Variantsets.Create
     , vcQuotaUser
     , vcPrettyPrint
     , vcUserIP
+    , vcPayload
     , vcKey
-    , vcVariantSet
     , vcOAuthToken
     , vcFields
     ) where
@@ -68,11 +69,11 @@ data VariantsetsCreate' = VariantsetsCreate'
     { _vcQuotaUser   :: !(Maybe Text)
     , _vcPrettyPrint :: !Bool
     , _vcUserIP      :: !(Maybe Text)
+    , _vcPayload     :: !VariantSet
     , _vcKey         :: !(Maybe Key)
-    , _vcVariantSet  :: !VariantSet
     , _vcOAuthToken  :: !(Maybe OAuthToken)
     , _vcFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsCreate'' with the minimum fields required to make a request.
 --
@@ -84,23 +85,23 @@ data VariantsetsCreate' = VariantsetsCreate'
 --
 -- * 'vcUserIP'
 --
--- * 'vcKey'
+-- * 'vcPayload'
 --
--- * 'vcVariantSet'
+-- * 'vcKey'
 --
 -- * 'vcOAuthToken'
 --
 -- * 'vcFields'
 variantsetsCreate'
-    :: VariantSet -- ^ 'VariantSet'
+    :: VariantSet -- ^ 'payload'
     -> VariantsetsCreate'
-variantsetsCreate' pVcVariantSet_ =
+variantsetsCreate' pVcPayload_ =
     VariantsetsCreate'
     { _vcQuotaUser = Nothing
     , _vcPrettyPrint = True
     , _vcUserIP = Nothing
+    , _vcPayload = pVcPayload_
     , _vcKey = Nothing
-    , _vcVariantSet = pVcVariantSet_
     , _vcOAuthToken = Nothing
     , _vcFields = Nothing
     }
@@ -123,16 +124,16 @@ vcPrettyPrint
 vcUserIP :: Lens' VariantsetsCreate' (Maybe Text)
 vcUserIP = lens _vcUserIP (\ s a -> s{_vcUserIP = a})
 
+-- | Multipart request metadata.
+vcPayload :: Lens' VariantsetsCreate' VariantSet
+vcPayload
+  = lens _vcPayload (\ s a -> s{_vcPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 vcKey :: Lens' VariantsetsCreate' (Maybe Key)
 vcKey = lens _vcKey (\ s a -> s{_vcKey = a})
-
--- | Multipart request metadata.
-vcVariantSet :: Lens' VariantsetsCreate' VariantSet
-vcVariantSet
-  = lens _vcVariantSet (\ s a -> s{_vcVariantSet = a})
 
 -- | OAuth 2.0 token for the current user.
 vcOAuthToken :: Lens' VariantsetsCreate' (Maybe OAuthToken)
@@ -156,7 +157,7 @@ instance GoogleRequest VariantsetsCreate' where
               _vcKey
               _vcOAuthToken
               (Just AltJSON)
-              _vcVariantSet
+              _vcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsetsCreateResource)

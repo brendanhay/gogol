@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,7 +38,7 @@ module Network.Google.Resource.PubSub.Projects.Topics.Create
     , ptcPp
     , ptcAccessToken
     , ptcUploadType
-    , ptcTopic
+    , ptcPayload
     , ptcBearerToken
     , ptcKey
     , ptcName
@@ -53,14 +54,14 @@ import           Network.Google.PubSub.Types
 -- 'ProjectsTopicsCreate'' request conforms to.
 type ProjectsTopicsCreateResource =
      "v1beta2" :>
-       "{+name}" :>
+       Capture "name" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -80,14 +81,14 @@ data ProjectsTopicsCreate' = ProjectsTopicsCreate'
     , _ptcPp             :: !Bool
     , _ptcAccessToken    :: !(Maybe Text)
     , _ptcUploadType     :: !(Maybe Text)
-    , _ptcTopic          :: !Topic
+    , _ptcPayload        :: !Topic
     , _ptcBearerToken    :: !(Maybe Text)
     , _ptcKey            :: !(Maybe Key)
     , _ptcName           :: !Text
     , _ptcOAuthToken     :: !(Maybe OAuthToken)
     , _ptcFields         :: !(Maybe Text)
     , _ptcCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsTopicsCreate'' with the minimum fields required to make a request.
 --
@@ -107,7 +108,7 @@ data ProjectsTopicsCreate' = ProjectsTopicsCreate'
 --
 -- * 'ptcUploadType'
 --
--- * 'ptcTopic'
+-- * 'ptcPayload'
 --
 -- * 'ptcBearerToken'
 --
@@ -121,10 +122,10 @@ data ProjectsTopicsCreate' = ProjectsTopicsCreate'
 --
 -- * 'ptcCallback'
 projectsTopicsCreate'
-    :: Topic -- ^ 'Topic'
+    :: Topic -- ^ 'payload'
     -> Text -- ^ 'name'
     -> ProjectsTopicsCreate'
-projectsTopicsCreate' pPtcTopic_ pPtcName_ =
+projectsTopicsCreate' pPtcPayload_ pPtcName_ =
     ProjectsTopicsCreate'
     { _ptcXgafv = Nothing
     , _ptcQuotaUser = Nothing
@@ -133,7 +134,7 @@ projectsTopicsCreate' pPtcTopic_ pPtcName_ =
     , _ptcPp = True
     , _ptcAccessToken = Nothing
     , _ptcUploadType = Nothing
-    , _ptcTopic = pPtcTopic_
+    , _ptcPayload = pPtcPayload_
     , _ptcBearerToken = Nothing
     , _ptcKey = Nothing
     , _ptcName = pPtcName_
@@ -182,8 +183,9 @@ ptcUploadType
       (\ s a -> s{_ptcUploadType = a})
 
 -- | Multipart request metadata.
-ptcTopic :: Lens' ProjectsTopicsCreate' Topic
-ptcTopic = lens _ptcTopic (\ s a -> s{_ptcTopic = a})
+ptcPayload :: Lens' ProjectsTopicsCreate' Topic
+ptcPayload
+  = lens _ptcPayload (\ s a -> s{_ptcPayload = a})
 
 -- | OAuth bearer token.
 ptcBearerToken :: Lens' ProjectsTopicsCreate' (Maybe Text)
@@ -231,19 +233,19 @@ instance GoogleRequest ProjectsTopicsCreate' where
         type Rs ProjectsTopicsCreate' = Topic
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsTopicsCreate'{..}
-          = go _ptcXgafv _ptcAccessToken _ptcBearerToken
-              _ptcCallback
+          = go _ptcName _ptcXgafv _ptcUploadProtocol
               (Just _ptcPp)
+              _ptcAccessToken
               _ptcUploadType
-              _ptcUploadProtocol
-              _ptcName
+              _ptcBearerToken
+              _ptcCallback
               _ptcQuotaUser
               (Just _ptcPrettyPrint)
               _ptcFields
               _ptcKey
               _ptcOAuthToken
               (Just AltJSON)
-              _ptcTopic
+              _ptcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsTopicsCreateResource)

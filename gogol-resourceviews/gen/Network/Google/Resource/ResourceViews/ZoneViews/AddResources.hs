@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,7 +37,7 @@ module Network.Google.Resource.ResourceViews.ZoneViews.AddResources
     , zvarProject
     , zvarUserIP
     , zvarZone
-    , zvarZoneViewsAddResourcesRequest
+    , zvarPayload
     , zvarKey
     , zvarOAuthToken
     , zvarFields
@@ -68,17 +69,17 @@ type ZoneViewsAddResourcesResource =
 --
 -- /See:/ 'zoneViewsAddResources'' smart constructor.
 data ZoneViewsAddResources' = ZoneViewsAddResources'
-    { _zvarQuotaUser                    :: !(Maybe Text)
-    , _zvarPrettyPrint                  :: !Bool
-    , _zvarResourceView                 :: !Text
-    , _zvarProject                      :: !Text
-    , _zvarUserIP                       :: !(Maybe Text)
-    , _zvarZone                         :: !Text
-    , _zvarZoneViewsAddResourcesRequest :: !ZoneViewsAddResourcesRequest
-    , _zvarKey                          :: !(Maybe Key)
-    , _zvarOAuthToken                   :: !(Maybe OAuthToken)
-    , _zvarFields                       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _zvarQuotaUser    :: !(Maybe Text)
+    , _zvarPrettyPrint  :: !Bool
+    , _zvarResourceView :: !Text
+    , _zvarProject      :: !Text
+    , _zvarUserIP       :: !(Maybe Text)
+    , _zvarZone         :: !Text
+    , _zvarPayload      :: !ZoneViewsAddResourcesRequest
+    , _zvarKey          :: !(Maybe Key)
+    , _zvarOAuthToken   :: !(Maybe OAuthToken)
+    , _zvarFields       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsAddResources'' with the minimum fields required to make a request.
 --
@@ -96,7 +97,7 @@ data ZoneViewsAddResources' = ZoneViewsAddResources'
 --
 -- * 'zvarZone'
 --
--- * 'zvarZoneViewsAddResourcesRequest'
+-- * 'zvarPayload'
 --
 -- * 'zvarKey'
 --
@@ -107,9 +108,9 @@ zoneViewsAddResources'
     :: Text -- ^ 'resourceView'
     -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> ZoneViewsAddResourcesRequest -- ^ 'ZoneViewsAddResourcesRequest'
+    -> ZoneViewsAddResourcesRequest -- ^ 'payload'
     -> ZoneViewsAddResources'
-zoneViewsAddResources' pZvarResourceView_ pZvarProject_ pZvarZone_ pZvarZoneViewsAddResourcesRequest_ =
+zoneViewsAddResources' pZvarResourceView_ pZvarProject_ pZvarZone_ pZvarPayload_ =
     ZoneViewsAddResources'
     { _zvarQuotaUser = Nothing
     , _zvarPrettyPrint = True
@@ -117,7 +118,7 @@ zoneViewsAddResources' pZvarResourceView_ pZvarProject_ pZvarZone_ pZvarZoneView
     , _zvarProject = pZvarProject_
     , _zvarUserIP = Nothing
     , _zvarZone = pZvarZone_
-    , _zvarZoneViewsAddResourcesRequest = pZvarZoneViewsAddResourcesRequest_
+    , _zvarPayload = pZvarPayload_
     , _zvarKey = Nothing
     , _zvarOAuthToken = Nothing
     , _zvarFields = Nothing
@@ -159,10 +160,9 @@ zvarZone :: Lens' ZoneViewsAddResources' Text
 zvarZone = lens _zvarZone (\ s a -> s{_zvarZone = a})
 
 -- | Multipart request metadata.
-zvarZoneViewsAddResourcesRequest :: Lens' ZoneViewsAddResources' ZoneViewsAddResourcesRequest
-zvarZoneViewsAddResourcesRequest
-  = lens _zvarZoneViewsAddResourcesRequest
-      (\ s a -> s{_zvarZoneViewsAddResourcesRequest = a})
+zvarPayload :: Lens' ZoneViewsAddResources' ZoneViewsAddResourcesRequest
+zvarPayload
+  = lens _zvarPayload (\ s a -> s{_zvarPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -197,7 +197,7 @@ instance GoogleRequest ZoneViewsAddResources' where
               _zvarKey
               _zvarOAuthToken
               (Just AltJSON)
-              _zvarZoneViewsAddResourcesRequest
+              _zvarPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ZoneViewsAddResourcesResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.PlusDomains.Circles.Update
     -- * Request Lenses
     , cuQuotaUser
     , cuPrettyPrint
-    , cuCircle
     , cuUserIP
+    , cuPayload
     , cuKey
     , cuCircleId
     , cuOAuthToken
@@ -63,13 +64,13 @@ type CirclesUpdateResource =
 data CirclesUpdate' = CirclesUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
-    , _cuCircle      :: !Circle
     , _cuUserIP      :: !(Maybe Text)
+    , _cuPayload     :: !Circle
     , _cuKey         :: !(Maybe Key)
     , _cuCircleId    :: !Text
     , _cuOAuthToken  :: !(Maybe OAuthToken)
     , _cuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesUpdate'' with the minimum fields required to make a request.
 --
@@ -79,9 +80,9 @@ data CirclesUpdate' = CirclesUpdate'
 --
 -- * 'cuPrettyPrint'
 --
--- * 'cuCircle'
---
 -- * 'cuUserIP'
+--
+-- * 'cuPayload'
 --
 -- * 'cuKey'
 --
@@ -91,15 +92,15 @@ data CirclesUpdate' = CirclesUpdate'
 --
 -- * 'cuFields'
 circlesUpdate'
-    :: Circle -- ^ 'Circle'
+    :: Circle -- ^ 'payload'
     -> Text -- ^ 'circleId'
     -> CirclesUpdate'
-circlesUpdate' pCuCircle_ pCuCircleId_ =
+circlesUpdate' pCuPayload_ pCuCircleId_ =
     CirclesUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
-    , _cuCircle = pCuCircle_
     , _cuUserIP = Nothing
+    , _cuPayload = pCuPayload_
     , _cuKey = Nothing
     , _cuCircleId = pCuCircleId_
     , _cuOAuthToken = Nothing
@@ -119,14 +120,15 @@ cuPrettyPrint
   = lens _cuPrettyPrint
       (\ s a -> s{_cuPrettyPrint = a})
 
--- | Multipart request metadata.
-cuCircle :: Lens' CirclesUpdate' Circle
-cuCircle = lens _cuCircle (\ s a -> s{_cuCircle = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 cuUserIP :: Lens' CirclesUpdate' (Maybe Text)
 cuUserIP = lens _cuUserIP (\ s a -> s{_cuUserIP = a})
+
+-- | Multipart request metadata.
+cuPayload :: Lens' CirclesUpdate' Circle
+cuPayload
+  = lens _cuPayload (\ s a -> s{_cuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -162,7 +164,7 @@ instance GoogleRequest CirclesUpdate' where
               _cuKey
               _cuOAuthToken
               (Just AltJSON)
-              _cuCircle
+              _cuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CirclesUpdateResource)

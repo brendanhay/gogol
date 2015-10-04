@@ -26,7 +26,7 @@ data Volumeannotations = Volumeannotations
     , _vKind          :: !Text
     , _vItems         :: !(Maybe [Volumeannotation])
     , _vVersion       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Volumeannotations' with the minimum fields required to make a request.
 --
@@ -107,7 +107,7 @@ data Annotations = Annotations
     , _aNextPageToken :: !(Maybe Text)
     , _aKind          :: !Text
     , _aItems         :: !(Maybe [Annotation])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Annotations' with the minimum fields required to make a request.
 --
@@ -170,12 +170,105 @@ instance ToJSON Annotations where
                   ("nextPageToken" .=) <$> _aNextPageToken,
                   Just ("kind" .= _aKind), ("items" .=) <$> _aItems])
 
+-- | A list of image links for all the sizes that are available. (In LITE
+-- projection.)
+--
+-- /See:/ 'imageLinks' smart constructor.
+data ImageLinks = ImageLinks
+    { _ilThumbnail      :: !(Maybe Text)
+    , _ilSmall          :: !(Maybe Text)
+    , _ilExtraLarge     :: !(Maybe Text)
+    , _ilLarge          :: !(Maybe Text)
+    , _ilMedium         :: !(Maybe Text)
+    , _ilSmallThumbnail :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ImageLinks' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ilThumbnail'
+--
+-- * 'ilSmall'
+--
+-- * 'ilExtraLarge'
+--
+-- * 'ilLarge'
+--
+-- * 'ilMedium'
+--
+-- * 'ilSmallThumbnail'
+imageLinks
+    :: ImageLinks
+imageLinks =
+    ImageLinks
+    { _ilThumbnail = Nothing
+    , _ilSmall = Nothing
+    , _ilExtraLarge = Nothing
+    , _ilLarge = Nothing
+    , _ilMedium = Nothing
+    , _ilSmallThumbnail = Nothing
+    }
+
+-- | Image link for thumbnail size (width of ~128 pixels). (In LITE
+-- projection)
+ilThumbnail :: Lens' ImageLinks (Maybe Text)
+ilThumbnail
+  = lens _ilThumbnail (\ s a -> s{_ilThumbnail = a})
+
+-- | Image link for small size (width of ~300 pixels). (In LITE projection)
+ilSmall :: Lens' ImageLinks (Maybe Text)
+ilSmall = lens _ilSmall (\ s a -> s{_ilSmall = a})
+
+-- | Image link for extra large size (width of ~1280 pixels). (In LITE
+-- projection)
+ilExtraLarge :: Lens' ImageLinks (Maybe Text)
+ilExtraLarge
+  = lens _ilExtraLarge (\ s a -> s{_ilExtraLarge = a})
+
+-- | Image link for large size (width of ~800 pixels). (In LITE projection)
+ilLarge :: Lens' ImageLinks (Maybe Text)
+ilLarge = lens _ilLarge (\ s a -> s{_ilLarge = a})
+
+-- | Image link for medium size (width of ~575 pixels). (In LITE projection)
+ilMedium :: Lens' ImageLinks (Maybe Text)
+ilMedium = lens _ilMedium (\ s a -> s{_ilMedium = a})
+
+-- | Image link for small thumbnail size (width of ~80 pixels). (In LITE
+-- projection)
+ilSmallThumbnail :: Lens' ImageLinks (Maybe Text)
+ilSmallThumbnail
+  = lens _ilSmallThumbnail
+      (\ s a -> s{_ilSmallThumbnail = a})
+
+instance FromJSON ImageLinks where
+        parseJSON
+          = withObject "ImageLinks"
+              (\ o ->
+                 ImageLinks <$>
+                   (o .:? "thumbnail") <*> (o .:? "small") <*>
+                     (o .:? "extraLarge")
+                     <*> (o .:? "large")
+                     <*> (o .:? "medium")
+                     <*> (o .:? "smallThumbnail"))
+
+instance ToJSON ImageLinks where
+        toJSON ImageLinks{..}
+          = object
+              (catMaybes
+                 [("thumbnail" .=) <$> _ilThumbnail,
+                  ("small" .=) <$> _ilSmall,
+                  ("extraLarge" .=) <$> _ilExtraLarge,
+                  ("large" .=) <$> _ilLarge,
+                  ("medium" .=) <$> _ilMedium,
+                  ("smallThumbnail" .=) <$> _ilSmallThumbnail])
+
 --
 -- /See:/ 'usersettings' smart constructor.
 data Usersettings = Usersettings
     { _uKind        :: !Text
-    , _uNotesExport :: !(Maybe UsersettingsNotesExport)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _uNotesExport :: !(Maybe NotesExport)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Usersettings' with the minimum fields required to make a request.
 --
@@ -197,7 +290,7 @@ uKind :: Lens' Usersettings Text
 uKind = lens _uKind (\ s a -> s{_uKind = a})
 
 -- | User settings in sub-objects, each for different purposes.
-uNotesExport :: Lens' Usersettings (Maybe UsersettingsNotesExport)
+uNotesExport :: Lens' Usersettings (Maybe NotesExport)
 uNotesExport
   = lens _uNotesExport (\ s a -> s{_uNotesExport = a})
 
@@ -217,62 +310,13 @@ instance ToJSON Usersettings where
                   ("notesExport" .=) <$> _uNotesExport])
 
 --
--- /See:/ 'volumeVolumeInfoIndustryIdentifiers' smart constructor.
-data VolumeVolumeInfoIndustryIdentifiers = VolumeVolumeInfoIndustryIdentifiers
-    { _vviiiIdentifier :: !(Maybe Text)
-    , _vviiiType       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VolumeVolumeInfoIndustryIdentifiers' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vviiiIdentifier'
---
--- * 'vviiiType'
-volumeVolumeInfoIndustryIdentifiers
-    :: VolumeVolumeInfoIndustryIdentifiers
-volumeVolumeInfoIndustryIdentifiers =
-    VolumeVolumeInfoIndustryIdentifiers
-    { _vviiiIdentifier = Nothing
-    , _vviiiType = Nothing
-    }
-
--- | Industry specific volume identifier.
-vviiiIdentifier :: Lens' VolumeVolumeInfoIndustryIdentifiers (Maybe Text)
-vviiiIdentifier
-  = lens _vviiiIdentifier
-      (\ s a -> s{_vviiiIdentifier = a})
-
--- | Identifier type. Possible values are ISBN_10, ISBN_13, ISSN and OTHER.
-vviiiType :: Lens' VolumeVolumeInfoIndustryIdentifiers (Maybe Text)
-vviiiType
-  = lens _vviiiType (\ s a -> s{_vviiiType = a})
-
-instance FromJSON VolumeVolumeInfoIndustryIdentifiers
-         where
-        parseJSON
-          = withObject "VolumeVolumeInfoIndustryIdentifiers"
-              (\ o ->
-                 VolumeVolumeInfoIndustryIdentifiers <$>
-                   (o .:? "identifier") <*> (o .:? "type"))
-
-instance ToJSON VolumeVolumeInfoIndustryIdentifiers
-         where
-        toJSON VolumeVolumeInfoIndustryIdentifiers{..}
-          = object
-              (catMaybes
-                 [("identifier" .=) <$> _vviiiIdentifier,
-                  ("type" .=) <$> _vviiiType])
-
---
 -- /See:/ 'annotationsdata' smart constructor.
 data Annotationsdata = Annotationsdata
     { _annTotalItems    :: !(Maybe Int32)
     , _annNextPageToken :: !(Maybe Text)
     , _annKind          :: !Text
     , _annItems         :: !(Maybe [Annotationdata])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Annotationsdata' with the minimum fields required to make a request.
 --
@@ -340,67 +384,222 @@ instance ToJSON Annotationsdata where
 -- | The viewport for showing this location. This is a latitude, longitude
 -- rectangle.
 --
--- /See:/ 'geolayerdataGeoViewport' smart constructor.
-data GeolayerdataGeoViewport = GeolayerdataGeoViewport
-    { _ggvHi :: !(Maybe GeolayerdataGeoViewportHi)
-    , _ggvLo :: !(Maybe GeolayerdataGeoViewportLo)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'viewport' smart constructor.
+data Viewport = Viewport
+    { _vHi :: !(Maybe Hi)
+    , _vLo :: !(Maybe Lo)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GeolayerdataGeoViewport' with the minimum fields required to make a request.
+-- | Creates a value of 'Viewport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ggvHi'
+-- * 'vHi'
 --
--- * 'ggvLo'
-geolayerdataGeoViewport
-    :: GeolayerdataGeoViewport
-geolayerdataGeoViewport =
-    GeolayerdataGeoViewport
-    { _ggvHi = Nothing
-    , _ggvLo = Nothing
+-- * 'vLo'
+viewport
+    :: Viewport
+viewport =
+    Viewport
+    { _vHi = Nothing
+    , _vLo = Nothing
     }
 
-ggvHi :: Lens' GeolayerdataGeoViewport (Maybe GeolayerdataGeoViewportHi)
-ggvHi = lens _ggvHi (\ s a -> s{_ggvHi = a})
+vHi :: Lens' Viewport (Maybe Hi)
+vHi = lens _vHi (\ s a -> s{_vHi = a})
 
-ggvLo :: Lens' GeolayerdataGeoViewport (Maybe GeolayerdataGeoViewportLo)
-ggvLo = lens _ggvLo (\ s a -> s{_ggvLo = a})
+vLo :: Lens' Viewport (Maybe Lo)
+vLo = lens _vLo (\ s a -> s{_vLo = a})
 
-instance FromJSON GeolayerdataGeoViewport where
+instance FromJSON Viewport where
         parseJSON
-          = withObject "GeolayerdataGeoViewport"
-              (\ o ->
-                 GeolayerdataGeoViewport <$>
-                   (o .:? "hi") <*> (o .:? "lo"))
+          = withObject "Viewport"
+              (\ o -> Viewport <$> (o .:? "hi") <*> (o .:? "lo"))
 
-instance ToJSON GeolayerdataGeoViewport where
-        toJSON GeolayerdataGeoViewport{..}
+instance ToJSON Viewport where
+        toJSON Viewport{..}
+          = object
+              (catMaybes [("hi" .=) <$> _vHi, ("lo" .=) <$> _vLo])
+
+-- | User specific information related to this volume. (e.g. page this user
+-- last read or whether they purchased this book)
+--
+-- /See:/ 'userInfo' smart constructor.
+data UserInfo = UserInfo
+    { _uiCopy                   :: !(Maybe Copy)
+    , _uiUserUploadedVolumeInfo :: !(Maybe UserUploadedVolumeInfo)
+    , _uiIsPurchased            :: !(Maybe Bool)
+    , _uiRentalState            :: !(Maybe Text)
+    , _uiIsPreOrdered           :: !(Maybe Bool)
+    , _uiReview                 :: !(Maybe Review)
+    , _uiRentalPeriod           :: !(Maybe RentalPeriod)
+    , _uiUpdated                :: !(Maybe DateTime')
+    , _uiIsUploaded             :: !(Maybe Bool)
+    , _uiIsInMyBooks            :: !(Maybe Bool)
+    , _uiReadingPosition        :: !(Maybe ReadingPosition)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uiCopy'
+--
+-- * 'uiUserUploadedVolumeInfo'
+--
+-- * 'uiIsPurchased'
+--
+-- * 'uiRentalState'
+--
+-- * 'uiIsPreOrdered'
+--
+-- * 'uiReview'
+--
+-- * 'uiRentalPeriod'
+--
+-- * 'uiUpdated'
+--
+-- * 'uiIsUploaded'
+--
+-- * 'uiIsInMyBooks'
+--
+-- * 'uiReadingPosition'
+userInfo
+    :: UserInfo
+userInfo =
+    UserInfo
+    { _uiCopy = Nothing
+    , _uiUserUploadedVolumeInfo = Nothing
+    , _uiIsPurchased = Nothing
+    , _uiRentalState = Nothing
+    , _uiIsPreOrdered = Nothing
+    , _uiReview = Nothing
+    , _uiRentalPeriod = Nothing
+    , _uiUpdated = Nothing
+    , _uiIsUploaded = Nothing
+    , _uiIsInMyBooks = Nothing
+    , _uiReadingPosition = Nothing
+    }
+
+-- | Copy\/Paste accounting information.
+uiCopy :: Lens' UserInfo (Maybe Copy)
+uiCopy = lens _uiCopy (\ s a -> s{_uiCopy = a})
+
+uiUserUploadedVolumeInfo :: Lens' UserInfo (Maybe UserUploadedVolumeInfo)
+uiUserUploadedVolumeInfo
+  = lens _uiUserUploadedVolumeInfo
+      (\ s a -> s{_uiUserUploadedVolumeInfo = a})
+
+-- | Whether or not this volume was purchased by the authenticated user
+-- making the request. (In LITE projection.)
+uiIsPurchased :: Lens' UserInfo (Maybe Bool)
+uiIsPurchased
+  = lens _uiIsPurchased
+      (\ s a -> s{_uiIsPurchased = a})
+
+-- | Whether this book is an active or an expired rental.
+uiRentalState :: Lens' UserInfo (Maybe Text)
+uiRentalState
+  = lens _uiRentalState
+      (\ s a -> s{_uiRentalState = a})
+
+-- | Whether or not this volume was pre-ordered by the authenticated user
+-- making the request. (In LITE projection.)
+uiIsPreOrdered :: Lens' UserInfo (Maybe Bool)
+uiIsPreOrdered
+  = lens _uiIsPreOrdered
+      (\ s a -> s{_uiIsPreOrdered = a})
+
+-- | This user\'s review of this volume, if one exists.
+uiReview :: Lens' UserInfo (Maybe Review)
+uiReview = lens _uiReview (\ s a -> s{_uiReview = a})
+
+-- | Period during this book is\/was a valid rental.
+uiRentalPeriod :: Lens' UserInfo (Maybe RentalPeriod)
+uiRentalPeriod
+  = lens _uiRentalPeriod
+      (\ s a -> s{_uiRentalPeriod = a})
+
+-- | Timestamp when this volume was last modified by a user action, such as a
+-- reading position update, volume purchase or writing a review. (RFC 3339
+-- UTC date-time format).
+uiUpdated :: Lens' UserInfo (Maybe UTCTime)
+uiUpdated
+  = lens _uiUpdated (\ s a -> s{_uiUpdated = a}) .
+      mapping _DateTime
+
+-- | Whether or not this volume was user uploaded.
+uiIsUploaded :: Lens' UserInfo (Maybe Bool)
+uiIsUploaded
+  = lens _uiIsUploaded (\ s a -> s{_uiIsUploaded = a})
+
+-- | Whether or not this volume is currently in \"my books.\"
+uiIsInMyBooks :: Lens' UserInfo (Maybe Bool)
+uiIsInMyBooks
+  = lens _uiIsInMyBooks
+      (\ s a -> s{_uiIsInMyBooks = a})
+
+-- | The user\'s current reading position in the volume, if one is available.
+-- (In LITE projection.)
+uiReadingPosition :: Lens' UserInfo (Maybe ReadingPosition)
+uiReadingPosition
+  = lens _uiReadingPosition
+      (\ s a -> s{_uiReadingPosition = a})
+
+instance FromJSON UserInfo where
+        parseJSON
+          = withObject "UserInfo"
+              (\ o ->
+                 UserInfo <$>
+                   (o .:? "copy") <*> (o .:? "userUploadedVolumeInfo")
+                     <*> (o .:? "isPurchased")
+                     <*> (o .:? "rentalState")
+                     <*> (o .:? "isPreordered")
+                     <*> (o .:? "review")
+                     <*> (o .:? "rentalPeriod")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "isUploaded")
+                     <*> (o .:? "isInMyBooks")
+                     <*> (o .:? "readingPosition"))
+
+instance ToJSON UserInfo where
+        toJSON UserInfo{..}
           = object
               (catMaybes
-                 [("hi" .=) <$> _ggvHi, ("lo" .=) <$> _ggvLo])
+                 [("copy" .=) <$> _uiCopy,
+                  ("userUploadedVolumeInfo" .=) <$>
+                    _uiUserUploadedVolumeInfo,
+                  ("isPurchased" .=) <$> _uiIsPurchased,
+                  ("rentalState" .=) <$> _uiRentalState,
+                  ("isPreordered" .=) <$> _uiIsPreOrdered,
+                  ("review" .=) <$> _uiReview,
+                  ("rentalPeriod" .=) <$> _uiRentalPeriod,
+                  ("updated" .=) <$> _uiUpdated,
+                  ("isUploaded" .=) <$> _uiIsUploaded,
+                  ("isInMyBooks" .=) <$> _uiIsInMyBooks,
+                  ("readingPosition" .=) <$> _uiReadingPosition])
 
 --
 -- /See:/ 'annotation' smart constructor.
 data Annotation = Annotation
     { _aaSelectedText         :: !(Maybe Text)
-    , _aaLayerSummary         :: !(Maybe AnnotationLayerSummary)
+    , _aaLayerSummary         :: !(Maybe LayerSummary)
     , _aaHighlightStyle       :: !(Maybe Text)
-    , _aaClientVersionRanges  :: !(Maybe AnnotationClientVersionRanges)
+    , _aaClientVersionRanges  :: !(Maybe ClientVersionRanges)
     , _aaPageIds              :: !(Maybe [Text])
     , _aaKind                 :: !Text
     , _aaData                 :: !(Maybe Text)
     , _aaCreated              :: !(Maybe DateTime')
     , _aaAfterSelectedText    :: !(Maybe Text)
     , _aaSelfLink             :: !(Maybe Text)
-    , _aaCurrentVersionRanges :: !(Maybe AnnotationCurrentVersionRanges)
+    , _aaCurrentVersionRanges :: !(Maybe CurrentVersionRanges)
     , _aaVolumeId             :: !(Maybe Text)
     , _aaBeforeSelectedText   :: !(Maybe Text)
     , _aaId                   :: !(Maybe Text)
     , _aaDeleted              :: !(Maybe Bool)
     , _aaUpdated              :: !(Maybe DateTime')
     , _aaLayerId              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Annotation' with the minimum fields required to make a request.
 --
@@ -468,7 +667,7 @@ aaSelectedText
   = lens _aaSelectedText
       (\ s a -> s{_aaSelectedText = a})
 
-aaLayerSummary :: Lens' Annotation (Maybe AnnotationLayerSummary)
+aaLayerSummary :: Lens' Annotation (Maybe LayerSummary)
 aaLayerSummary
   = lens _aaLayerSummary
       (\ s a -> s{_aaLayerSummary = a})
@@ -480,7 +679,7 @@ aaHighlightStyle
       (\ s a -> s{_aaHighlightStyle = a})
 
 -- | Selection ranges sent from the client.
-aaClientVersionRanges :: Lens' Annotation (Maybe AnnotationClientVersionRanges)
+aaClientVersionRanges :: Lens' Annotation (Maybe ClientVersionRanges)
 aaClientVersionRanges
   = lens _aaClientVersionRanges
       (\ s a -> s{_aaClientVersionRanges = a})
@@ -519,7 +718,7 @@ aaSelfLink
   = lens _aaSelfLink (\ s a -> s{_aaSelfLink = a})
 
 -- | Selection ranges for the most recent content version.
-aaCurrentVersionRanges :: Lens' Annotation (Maybe AnnotationCurrentVersionRanges)
+aaCurrentVersionRanges :: Lens' Annotation (Maybe CurrentVersionRanges)
 aaCurrentVersionRanges
   = lens _aaCurrentVersionRanges
       (\ s a -> s{_aaCurrentVersionRanges = a})
@@ -605,7 +804,7 @@ instance ToJSON Annotation where
 -- /See:/ 'reviewAuthor' smart constructor.
 newtype ReviewAuthor = ReviewAuthor
     { _raDisplayName :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReviewAuthor' with the minimum fields required to make a request.
 --
@@ -635,52 +834,115 @@ instance ToJSON ReviewAuthor where
           = object
               (catMaybes [("displayName" .=) <$> _raDisplayName])
 
+-- | The source, url and attribution for this dictionary data.
 --
--- /See:/ 'dictlayerdataDictWordsSensesConjugations' smart constructor.
-data DictlayerdataDictWordsSensesConjugations = DictlayerdataDictWordsSensesConjugations
-    { _ddwscValue :: !(Maybe Text)
-    , _ddwscType  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'dictSource' smart constructor.
+data DictSource = DictSource
+    { _dsURL         :: !(Maybe Text)
+    , _dsAttribution :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsSensesConjugations' with the minimum fields required to make a request.
+-- | Creates a value of 'DictSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwscValue'
+-- * 'dsURL'
 --
--- * 'ddwscType'
-dictlayerdataDictWordsSensesConjugations
-    :: DictlayerdataDictWordsSensesConjugations
-dictlayerdataDictWordsSensesConjugations =
-    DictlayerdataDictWordsSensesConjugations
-    { _ddwscValue = Nothing
-    , _ddwscType = Nothing
+-- * 'dsAttribution'
+dictSource
+    :: DictSource
+dictSource =
+    DictSource
+    { _dsURL = Nothing
+    , _dsAttribution = Nothing
     }
 
-ddwscValue :: Lens' DictlayerdataDictWordsSensesConjugations (Maybe Text)
-ddwscValue
-  = lens _ddwscValue (\ s a -> s{_ddwscValue = a})
+dsURL :: Lens' DictSource (Maybe Text)
+dsURL = lens _dsURL (\ s a -> s{_dsURL = a})
 
-ddwscType :: Lens' DictlayerdataDictWordsSensesConjugations (Maybe Text)
-ddwscType
-  = lens _ddwscType (\ s a -> s{_ddwscType = a})
+dsAttribution :: Lens' DictSource (Maybe Text)
+dsAttribution
+  = lens _dsAttribution
+      (\ s a -> s{_dsAttribution = a})
 
-instance FromJSON
-         DictlayerdataDictWordsSensesConjugations where
+instance FromJSON DictSource where
         parseJSON
-          = withObject
-              "DictlayerdataDictWordsSensesConjugations"
+          = withObject "DictSource"
               (\ o ->
-                 DictlayerdataDictWordsSensesConjugations <$>
-                   (o .:? "value") <*> (o .:? "type"))
+                 DictSource <$>
+                   (o .:? "url") <*> (o .:? "attribution"))
 
-instance ToJSON
-         DictlayerdataDictWordsSensesConjugations where
-        toJSON DictlayerdataDictWordsSensesConjugations{..}
+instance ToJSON DictSource where
+        toJSON DictSource{..}
           = object
               (catMaybes
-                 [("value" .=) <$> _ddwscValue,
-                  ("type" .=) <$> _ddwscType])
+                 [("url" .=) <$> _dsURL,
+                  ("attribution" .=) <$> _dsAttribution])
+
+--
+-- /See:/ 'layerSummary' smart constructor.
+data LayerSummary = LayerSummary
+    { _lsLimitType               :: !(Maybe Text)
+    , _lsAllowedCharacterCount   :: !(Maybe Int32)
+    , _lsRemainingCharacterCount :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LayerSummary' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsLimitType'
+--
+-- * 'lsAllowedCharacterCount'
+--
+-- * 'lsRemainingCharacterCount'
+layerSummary
+    :: LayerSummary
+layerSummary =
+    LayerSummary
+    { _lsLimitType = Nothing
+    , _lsAllowedCharacterCount = Nothing
+    , _lsRemainingCharacterCount = Nothing
+    }
+
+-- | Type of limitation on this layer. \"limited\" or \"unlimited\" for the
+-- \"copy\" layer.
+lsLimitType :: Lens' LayerSummary (Maybe Text)
+lsLimitType
+  = lens _lsLimitType (\ s a -> s{_lsLimitType = a})
+
+-- | Maximum allowed characters on this layer, especially for the \"copy\"
+-- layer.
+lsAllowedCharacterCount :: Lens' LayerSummary (Maybe Int32)
+lsAllowedCharacterCount
+  = lens _lsAllowedCharacterCount
+      (\ s a -> s{_lsAllowedCharacterCount = a})
+
+-- | Remaining allowed characters on this layer, especially for the \"copy\"
+-- layer.
+lsRemainingCharacterCount :: Lens' LayerSummary (Maybe Int32)
+lsRemainingCharacterCount
+  = lens _lsRemainingCharacterCount
+      (\ s a -> s{_lsRemainingCharacterCount = a})
+
+instance FromJSON LayerSummary where
+        parseJSON
+          = withObject "LayerSummary"
+              (\ o ->
+                 LayerSummary <$>
+                   (o .:? "limitType") <*>
+                     (o .:? "allowedCharacterCount")
+                     <*> (o .:? "remainingCharacterCount"))
+
+instance ToJSON LayerSummary where
+        toJSON LayerSummary{..}
+          = object
+              (catMaybes
+                 [("limitType" .=) <$> _lsLimitType,
+                  ("allowedCharacterCount" .=) <$>
+                    _lsAllowedCharacterCount,
+                  ("remainingCharacterCount" .=) <$>
+                    _lsRemainingCharacterCount])
 
 --
 -- /See:/ 'booksCloudLoadingResource' smart constructor.
@@ -689,7 +951,7 @@ data BooksCloudLoadingResource = BooksCloudLoadingResource
     , _bclrVolumeId        :: !(Maybe Text)
     , _bclrAuthor          :: !(Maybe Text)
     , _bclrTitle           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BooksCloudLoadingResource' with the minimum fields required to make a request.
 --
@@ -763,7 +1025,7 @@ data Layersummary = Layersummary
     , _lId                       :: !(Maybe Text)
     , _lUpdated                  :: !(Maybe DateTime')
     , _lLayerId                  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Layersummary' with the minimum fields required to make a request.
 --
@@ -925,166 +1187,6 @@ instance ToJSON Layersummary where
                   ("updated" .=) <$> _lUpdated,
                   ("layerId" .=) <$> _lLayerId])
 
--- | User specific information related to this volume. (e.g. page this user
--- last read or whether they purchased this book)
---
--- /See:/ 'volumeUserInfo' smart constructor.
-data VolumeUserInfo = VolumeUserInfo
-    { _vuiCopy                   :: !(Maybe VolumeUserInfoCopy)
-    , _vuiUserUploadedVolumeInfo :: !(Maybe VolumeUserInfoUserUploadedVolumeInfo)
-    , _vuiIsPurchased            :: !(Maybe Bool)
-    , _vuiRentalState            :: !(Maybe Text)
-    , _vuiIsPreOrdered           :: !(Maybe Bool)
-    , _vuiReview                 :: !(Maybe Review)
-    , _vuiRentalPeriod           :: !(Maybe VolumeUserInfoRentalPeriod)
-    , _vuiUpdated                :: !(Maybe DateTime')
-    , _vuiIsUploaded             :: !(Maybe Bool)
-    , _vuiIsInMyBooks            :: !(Maybe Bool)
-    , _vuiReadingPosition        :: !(Maybe ReadingPosition)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VolumeUserInfo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vuiCopy'
---
--- * 'vuiUserUploadedVolumeInfo'
---
--- * 'vuiIsPurchased'
---
--- * 'vuiRentalState'
---
--- * 'vuiIsPreOrdered'
---
--- * 'vuiReview'
---
--- * 'vuiRentalPeriod'
---
--- * 'vuiUpdated'
---
--- * 'vuiIsUploaded'
---
--- * 'vuiIsInMyBooks'
---
--- * 'vuiReadingPosition'
-volumeUserInfo
-    :: VolumeUserInfo
-volumeUserInfo =
-    VolumeUserInfo
-    { _vuiCopy = Nothing
-    , _vuiUserUploadedVolumeInfo = Nothing
-    , _vuiIsPurchased = Nothing
-    , _vuiRentalState = Nothing
-    , _vuiIsPreOrdered = Nothing
-    , _vuiReview = Nothing
-    , _vuiRentalPeriod = Nothing
-    , _vuiUpdated = Nothing
-    , _vuiIsUploaded = Nothing
-    , _vuiIsInMyBooks = Nothing
-    , _vuiReadingPosition = Nothing
-    }
-
--- | Copy\/Paste accounting information.
-vuiCopy :: Lens' VolumeUserInfo (Maybe VolumeUserInfoCopy)
-vuiCopy = lens _vuiCopy (\ s a -> s{_vuiCopy = a})
-
-vuiUserUploadedVolumeInfo :: Lens' VolumeUserInfo (Maybe VolumeUserInfoUserUploadedVolumeInfo)
-vuiUserUploadedVolumeInfo
-  = lens _vuiUserUploadedVolumeInfo
-      (\ s a -> s{_vuiUserUploadedVolumeInfo = a})
-
--- | Whether or not this volume was purchased by the authenticated user
--- making the request. (In LITE projection.)
-vuiIsPurchased :: Lens' VolumeUserInfo (Maybe Bool)
-vuiIsPurchased
-  = lens _vuiIsPurchased
-      (\ s a -> s{_vuiIsPurchased = a})
-
--- | Whether this book is an active or an expired rental.
-vuiRentalState :: Lens' VolumeUserInfo (Maybe Text)
-vuiRentalState
-  = lens _vuiRentalState
-      (\ s a -> s{_vuiRentalState = a})
-
--- | Whether or not this volume was pre-ordered by the authenticated user
--- making the request. (In LITE projection.)
-vuiIsPreOrdered :: Lens' VolumeUserInfo (Maybe Bool)
-vuiIsPreOrdered
-  = lens _vuiIsPreOrdered
-      (\ s a -> s{_vuiIsPreOrdered = a})
-
--- | This user\'s review of this volume, if one exists.
-vuiReview :: Lens' VolumeUserInfo (Maybe Review)
-vuiReview
-  = lens _vuiReview (\ s a -> s{_vuiReview = a})
-
--- | Period during this book is\/was a valid rental.
-vuiRentalPeriod :: Lens' VolumeUserInfo (Maybe VolumeUserInfoRentalPeriod)
-vuiRentalPeriod
-  = lens _vuiRentalPeriod
-      (\ s a -> s{_vuiRentalPeriod = a})
-
--- | Timestamp when this volume was last modified by a user action, such as a
--- reading position update, volume purchase or writing a review. (RFC 3339
--- UTC date-time format).
-vuiUpdated :: Lens' VolumeUserInfo (Maybe UTCTime)
-vuiUpdated
-  = lens _vuiUpdated (\ s a -> s{_vuiUpdated = a}) .
-      mapping _DateTime
-
--- | Whether or not this volume was user uploaded.
-vuiIsUploaded :: Lens' VolumeUserInfo (Maybe Bool)
-vuiIsUploaded
-  = lens _vuiIsUploaded
-      (\ s a -> s{_vuiIsUploaded = a})
-
--- | Whether or not this volume is currently in \"my books.\"
-vuiIsInMyBooks :: Lens' VolumeUserInfo (Maybe Bool)
-vuiIsInMyBooks
-  = lens _vuiIsInMyBooks
-      (\ s a -> s{_vuiIsInMyBooks = a})
-
--- | The user\'s current reading position in the volume, if one is available.
--- (In LITE projection.)
-vuiReadingPosition :: Lens' VolumeUserInfo (Maybe ReadingPosition)
-vuiReadingPosition
-  = lens _vuiReadingPosition
-      (\ s a -> s{_vuiReadingPosition = a})
-
-instance FromJSON VolumeUserInfo where
-        parseJSON
-          = withObject "VolumeUserInfo"
-              (\ o ->
-                 VolumeUserInfo <$>
-                   (o .:? "copy") <*> (o .:? "userUploadedVolumeInfo")
-                     <*> (o .:? "isPurchased")
-                     <*> (o .:? "rentalState")
-                     <*> (o .:? "isPreordered")
-                     <*> (o .:? "review")
-                     <*> (o .:? "rentalPeriod")
-                     <*> (o .:? "updated")
-                     <*> (o .:? "isUploaded")
-                     <*> (o .:? "isInMyBooks")
-                     <*> (o .:? "readingPosition"))
-
-instance ToJSON VolumeUserInfo where
-        toJSON VolumeUserInfo{..}
-          = object
-              (catMaybes
-                 [("copy" .=) <$> _vuiCopy,
-                  ("userUploadedVolumeInfo" .=) <$>
-                    _vuiUserUploadedVolumeInfo,
-                  ("isPurchased" .=) <$> _vuiIsPurchased,
-                  ("rentalState" .=) <$> _vuiRentalState,
-                  ("isPreordered" .=) <$> _vuiIsPreOrdered,
-                  ("review" .=) <$> _vuiReview,
-                  ("rentalPeriod" .=) <$> _vuiRentalPeriod,
-                  ("updated" .=) <$> _vuiUpdated,
-                  ("isUploaded" .=) <$> _vuiIsUploaded,
-                  ("isInMyBooks" .=) <$> _vuiIsInMyBooks,
-                  ("readingPosition" .=) <$> _vuiReadingPosition])
-
 -- | Information regarding the source of this review, when the review is not
 -- from a Google Books user.
 --
@@ -1093,7 +1195,7 @@ data ReviewSource = ReviewSource
     { _rsExtraDescription :: !(Maybe Text)
     , _rsURL              :: !(Maybe Text)
     , _rsDescription      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReviewSource' with the minimum fields required to make a request.
 --
@@ -1146,6 +1248,131 @@ instance ToJSON ReviewSource where
                   ("description" .=) <$> _rsDescription])
 
 --
+-- /See:/ 'synonymsItem' smart constructor.
+data SynonymsItem = SynonymsItem
+    { _siText   :: !(Maybe Text)
+    , _siSource :: !(Maybe SynonymsItemSource)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SynonymsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'siText'
+--
+-- * 'siSource'
+synonymsItem
+    :: SynonymsItem
+synonymsItem =
+    SynonymsItem
+    { _siText = Nothing
+    , _siSource = Nothing
+    }
+
+siText :: Lens' SynonymsItem (Maybe Text)
+siText = lens _siText (\ s a -> s{_siText = a})
+
+siSource :: Lens' SynonymsItem (Maybe SynonymsItemSource)
+siSource = lens _siSource (\ s a -> s{_siSource = a})
+
+instance FromJSON SynonymsItem where
+        parseJSON
+          = withObject "SynonymsItem"
+              (\ o ->
+                 SynonymsItem <$> (o .:? "text") <*> (o .:? "source"))
+
+instance ToJSON SynonymsItem where
+        toJSON SynonymsItem{..}
+          = object
+              (catMaybes
+                 [("text" .=) <$> _siText,
+                  ("source" .=) <$> _siSource])
+
+-- | Selection ranges sent from the client.
+--
+-- /See:/ 'clientVersionRanges' smart constructor.
+data ClientVersionRanges = ClientVersionRanges
+    { _cvrGbImageRange   :: !(Maybe BooksAnnotationsRange)
+    , _cvrContentVersion :: !(Maybe Text)
+    , _cvrImageCfiRange  :: !(Maybe BooksAnnotationsRange)
+    , _cvrGbTextRange    :: !(Maybe BooksAnnotationsRange)
+    , _cvrCfiRange       :: !(Maybe BooksAnnotationsRange)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ClientVersionRanges' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cvrGbImageRange'
+--
+-- * 'cvrContentVersion'
+--
+-- * 'cvrImageCfiRange'
+--
+-- * 'cvrGbTextRange'
+--
+-- * 'cvrCfiRange'
+clientVersionRanges
+    :: ClientVersionRanges
+clientVersionRanges =
+    ClientVersionRanges
+    { _cvrGbImageRange = Nothing
+    , _cvrContentVersion = Nothing
+    , _cvrImageCfiRange = Nothing
+    , _cvrGbTextRange = Nothing
+    , _cvrCfiRange = Nothing
+    }
+
+-- | Range in GB image format for this annotation sent by client.
+cvrGbImageRange :: Lens' ClientVersionRanges (Maybe BooksAnnotationsRange)
+cvrGbImageRange
+  = lens _cvrGbImageRange
+      (\ s a -> s{_cvrGbImageRange = a})
+
+-- | Content version the client sent in.
+cvrContentVersion :: Lens' ClientVersionRanges (Maybe Text)
+cvrContentVersion
+  = lens _cvrContentVersion
+      (\ s a -> s{_cvrContentVersion = a})
+
+-- | Range in image CFI format for this annotation sent by client.
+cvrImageCfiRange :: Lens' ClientVersionRanges (Maybe BooksAnnotationsRange)
+cvrImageCfiRange
+  = lens _cvrImageCfiRange
+      (\ s a -> s{_cvrImageCfiRange = a})
+
+-- | Range in GB text format for this annotation sent by client.
+cvrGbTextRange :: Lens' ClientVersionRanges (Maybe BooksAnnotationsRange)
+cvrGbTextRange
+  = lens _cvrGbTextRange
+      (\ s a -> s{_cvrGbTextRange = a})
+
+-- | Range in CFI format for this annotation sent by client.
+cvrCfiRange :: Lens' ClientVersionRanges (Maybe BooksAnnotationsRange)
+cvrCfiRange
+  = lens _cvrCfiRange (\ s a -> s{_cvrCfiRange = a})
+
+instance FromJSON ClientVersionRanges where
+        parseJSON
+          = withObject "ClientVersionRanges"
+              (\ o ->
+                 ClientVersionRanges <$>
+                   (o .:? "gbImageRange") <*> (o .:? "contentVersion")
+                     <*> (o .:? "imageCfiRange")
+                     <*> (o .:? "gbTextRange")
+                     <*> (o .:? "cfiRange"))
+
+instance ToJSON ClientVersionRanges where
+        toJSON ClientVersionRanges{..}
+          = object
+              (catMaybes
+                 [("gbImageRange" .=) <$> _cvrGbImageRange,
+                  ("contentVersion" .=) <$> _cvrContentVersion,
+                  ("imageCfiRange" .=) <$> _cvrImageCfiRange,
+                  ("gbTextRange" .=) <$> _cvrGbTextRange,
+                  ("cfiRange" .=) <$> _cvrCfiRange])
+
+--
 -- /See:/ 'annotationdata' smart constructor.
 data Annotationdata = Annotationdata
     { _annnEncodedData    :: !(Maybe Word8)
@@ -1157,7 +1384,7 @@ data Annotationdata = Annotationdata
     , _annnId             :: !(Maybe Text)
     , _annnUpdated        :: !(Maybe DateTime')
     , _annnLayerId        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Annotationdata' with the minimum fields required to make a request.
 --
@@ -1280,13 +1507,13 @@ data Volumeannotation = Volumeannotation
     , _volSelfLink           :: !(Maybe Text)
     , _volAnnotationType     :: !(Maybe Text)
     , _volAnnotationDataId   :: !(Maybe Text)
-    , _volContentRanges      :: !(Maybe VolumeannotationContentRanges)
+    , _volContentRanges      :: !(Maybe ContentRanges)
     , _volVolumeId           :: !(Maybe Text)
     , _volId                 :: !(Maybe Text)
     , _volDeleted            :: !(Maybe Bool)
     , _volUpdated            :: !(Maybe DateTime')
     , _volLayerId            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Volumeannotation' with the minimum fields required to make a request.
 --
@@ -1384,7 +1611,7 @@ volAnnotationDataId
       (\ s a -> s{_volAnnotationDataId = a})
 
 -- | The content ranges to identify the selected text.
-volContentRanges :: Lens' Volumeannotation (Maybe VolumeannotationContentRanges)
+volContentRanges :: Lens' Volumeannotation (Maybe ContentRanges)
 volContentRanges
   = lens _volContentRanges
       (\ s a -> s{_volContentRanges = a})
@@ -1452,315 +1679,106 @@ instance ToJSON Volumeannotation where
                   ("updated" .=) <$> _volUpdated,
                   ("layerId" .=) <$> _volLayerId])
 
---
--- /See:/ 'volumeUserInfoUserUploadedVolumeInfo' smart constructor.
-newtype VolumeUserInfoUserUploadedVolumeInfo = VolumeUserInfoUserUploadedVolumeInfo
-    { _vuiuuviProcessingState :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VolumeUserInfoUserUploadedVolumeInfo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vuiuuviProcessingState'
-volumeUserInfoUserUploadedVolumeInfo
-    :: VolumeUserInfoUserUploadedVolumeInfo
-volumeUserInfoUserUploadedVolumeInfo =
-    VolumeUserInfoUserUploadedVolumeInfo
-    { _vuiuuviProcessingState = Nothing
-    }
-
-vuiuuviProcessingState :: Lens' VolumeUserInfoUserUploadedVolumeInfo (Maybe Text)
-vuiuuviProcessingState
-  = lens _vuiuuviProcessingState
-      (\ s a -> s{_vuiuuviProcessingState = a})
-
-instance FromJSON
-         VolumeUserInfoUserUploadedVolumeInfo where
-        parseJSON
-          = withObject "VolumeUserInfoUserUploadedVolumeInfo"
-              (\ o ->
-                 VolumeUserInfoUserUploadedVolumeInfo <$>
-                   (o .:? "processingState"))
-
-instance ToJSON VolumeUserInfoUserUploadedVolumeInfo
-         where
-        toJSON VolumeUserInfoUserUploadedVolumeInfo{..}
-          = object
-              (catMaybes
-                 [("processingState" .=) <$> _vuiuuviProcessingState])
-
--- | The content ranges to identify the selected text.
---
--- /See:/ 'volumeannotationContentRanges' smart constructor.
-data VolumeannotationContentRanges = VolumeannotationContentRanges
-    { _vcrGbImageRange   :: !(Maybe BooksAnnotationsRange)
-    , _vcrContentVersion :: !(Maybe Text)
-    , _vcrGbTextRange    :: !(Maybe BooksAnnotationsRange)
-    , _vcrCfiRange       :: !(Maybe BooksAnnotationsRange)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VolumeannotationContentRanges' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vcrGbImageRange'
---
--- * 'vcrContentVersion'
---
--- * 'vcrGbTextRange'
---
--- * 'vcrCfiRange'
-volumeannotationContentRanges
-    :: VolumeannotationContentRanges
-volumeannotationContentRanges =
-    VolumeannotationContentRanges
-    { _vcrGbImageRange = Nothing
-    , _vcrContentVersion = Nothing
-    , _vcrGbTextRange = Nothing
-    , _vcrCfiRange = Nothing
-    }
-
--- | Range in GB image format for this annotation for version above.
-vcrGbImageRange :: Lens' VolumeannotationContentRanges (Maybe BooksAnnotationsRange)
-vcrGbImageRange
-  = lens _vcrGbImageRange
-      (\ s a -> s{_vcrGbImageRange = a})
-
--- | Content version applicable to ranges below.
-vcrContentVersion :: Lens' VolumeannotationContentRanges (Maybe Text)
-vcrContentVersion
-  = lens _vcrContentVersion
-      (\ s a -> s{_vcrContentVersion = a})
-
--- | Range in GB text format for this annotation for version above.
-vcrGbTextRange :: Lens' VolumeannotationContentRanges (Maybe BooksAnnotationsRange)
-vcrGbTextRange
-  = lens _vcrGbTextRange
-      (\ s a -> s{_vcrGbTextRange = a})
-
--- | Range in CFI format for this annotation for version above.
-vcrCfiRange :: Lens' VolumeannotationContentRanges (Maybe BooksAnnotationsRange)
-vcrCfiRange
-  = lens _vcrCfiRange (\ s a -> s{_vcrCfiRange = a})
-
-instance FromJSON VolumeannotationContentRanges where
-        parseJSON
-          = withObject "VolumeannotationContentRanges"
-              (\ o ->
-                 VolumeannotationContentRanges <$>
-                   (o .:? "gbImageRange") <*> (o .:? "contentVersion")
-                     <*> (o .:? "gbTextRange")
-                     <*> (o .:? "cfiRange"))
-
-instance ToJSON VolumeannotationContentRanges where
-        toJSON VolumeannotationContentRanges{..}
-          = object
-              (catMaybes
-                 [("gbImageRange" .=) <$> _vcrGbImageRange,
-                  ("contentVersion" .=) <$> _vcrContentVersion,
-                  ("gbTextRange" .=) <$> _vcrGbTextRange,
-                  ("cfiRange" .=) <$> _vcrCfiRange])
-
--- | A list of image links for all the sizes that are available. (In LITE
--- projection.)
---
--- /See:/ 'volumeVolumeInfoImageLinks' smart constructor.
-data VolumeVolumeInfoImageLinks = VolumeVolumeInfoImageLinks
-    { _vviilThumbnail      :: !(Maybe Text)
-    , _vviilSmall          :: !(Maybe Text)
-    , _vviilExtraLarge     :: !(Maybe Text)
-    , _vviilLarge          :: !(Maybe Text)
-    , _vviilMedium         :: !(Maybe Text)
-    , _vviilSmallThumbnail :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VolumeVolumeInfoImageLinks' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vviilThumbnail'
---
--- * 'vviilSmall'
---
--- * 'vviilExtraLarge'
---
--- * 'vviilLarge'
---
--- * 'vviilMedium'
---
--- * 'vviilSmallThumbnail'
-volumeVolumeInfoImageLinks
-    :: VolumeVolumeInfoImageLinks
-volumeVolumeInfoImageLinks =
-    VolumeVolumeInfoImageLinks
-    { _vviilThumbnail = Nothing
-    , _vviilSmall = Nothing
-    , _vviilExtraLarge = Nothing
-    , _vviilLarge = Nothing
-    , _vviilMedium = Nothing
-    , _vviilSmallThumbnail = Nothing
-    }
-
--- | Image link for thumbnail size (width of ~128 pixels). (In LITE
--- projection)
-vviilThumbnail :: Lens' VolumeVolumeInfoImageLinks (Maybe Text)
-vviilThumbnail
-  = lens _vviilThumbnail
-      (\ s a -> s{_vviilThumbnail = a})
-
--- | Image link for small size (width of ~300 pixels). (In LITE projection)
-vviilSmall :: Lens' VolumeVolumeInfoImageLinks (Maybe Text)
-vviilSmall
-  = lens _vviilSmall (\ s a -> s{_vviilSmall = a})
-
--- | Image link for extra large size (width of ~1280 pixels). (In LITE
--- projection)
-vviilExtraLarge :: Lens' VolumeVolumeInfoImageLinks (Maybe Text)
-vviilExtraLarge
-  = lens _vviilExtraLarge
-      (\ s a -> s{_vviilExtraLarge = a})
-
--- | Image link for large size (width of ~800 pixels). (In LITE projection)
-vviilLarge :: Lens' VolumeVolumeInfoImageLinks (Maybe Text)
-vviilLarge
-  = lens _vviilLarge (\ s a -> s{_vviilLarge = a})
-
--- | Image link for medium size (width of ~575 pixels). (In LITE projection)
-vviilMedium :: Lens' VolumeVolumeInfoImageLinks (Maybe Text)
-vviilMedium
-  = lens _vviilMedium (\ s a -> s{_vviilMedium = a})
-
--- | Image link for small thumbnail size (width of ~80 pixels). (In LITE
--- projection)
-vviilSmallThumbnail :: Lens' VolumeVolumeInfoImageLinks (Maybe Text)
-vviilSmallThumbnail
-  = lens _vviilSmallThumbnail
-      (\ s a -> s{_vviilSmallThumbnail = a})
-
-instance FromJSON VolumeVolumeInfoImageLinks where
-        parseJSON
-          = withObject "VolumeVolumeInfoImageLinks"
-              (\ o ->
-                 VolumeVolumeInfoImageLinks <$>
-                   (o .:? "thumbnail") <*> (o .:? "small") <*>
-                     (o .:? "extraLarge")
-                     <*> (o .:? "large")
-                     <*> (o .:? "medium")
-                     <*> (o .:? "smallThumbnail"))
-
-instance ToJSON VolumeVolumeInfoImageLinks where
-        toJSON VolumeVolumeInfoImageLinks{..}
-          = object
-              (catMaybes
-                 [("thumbnail" .=) <$> _vviilThumbnail,
-                  ("small" .=) <$> _vviilSmall,
-                  ("extraLarge" .=) <$> _vviilExtraLarge,
-                  ("large" .=) <$> _vviilLarge,
-                  ("medium" .=) <$> _vviilMedium,
-                  ("smallThumbnail" .=) <$> _vviilSmallThumbnail])
-
 -- | Any information about a volume related to reading or obtaining that
 -- volume text. This information can depend on country (books may be public
 -- domain in one country but not in another, e.g.).
 --
--- /See:/ 'volumeAccessInfo' smart constructor.
-data VolumeAccessInfo = VolumeAccessInfo
-    { _vaiWebReaderLink                    :: !(Maybe Text)
-    , _vaiCountry                          :: !(Maybe Text)
-    , _vaiDriveImportedContentLink         :: !(Maybe Text)
-    , _vaiExplicitOfflineLicenseManagement :: !(Maybe Bool)
-    , _vaiViewability                      :: !(Maybe Text)
-    , _vaiQuoteSharingAllowed              :: !(Maybe Bool)
-    , _vaiEpub                             :: !(Maybe VolumeAccessInfoEpub)
-    , _vaiPdf                              :: !(Maybe VolumeAccessInfoPdf)
-    , _vaiTextToSpeechPermission           :: !(Maybe Text)
-    , _vaiEmbeddable                       :: !(Maybe Bool)
-    , _vaiAccessViewStatus                 :: !(Maybe Text)
-    , _vaiDownloadAccess                   :: !(Maybe DownloadAccessRestriction)
-    , _vaiViewOrderURL                     :: !(Maybe Text)
-    , _vaiPublicDomain                     :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'accessInfo' smart constructor.
+data AccessInfo = AccessInfo
+    { _aiWebReaderLink                    :: !(Maybe Text)
+    , _aiCountry                          :: !(Maybe Text)
+    , _aiDriveImportedContentLink         :: !(Maybe Text)
+    , _aiExplicitOfflineLicenseManagement :: !(Maybe Bool)
+    , _aiViewability                      :: !(Maybe Text)
+    , _aiQuoteSharingAllowed              :: !(Maybe Bool)
+    , _aiEpub                             :: !(Maybe Epub)
+    , _aiPdf                              :: !(Maybe Pdf)
+    , _aiTextToSpeechPermission           :: !(Maybe Text)
+    , _aiEmbeddable                       :: !(Maybe Bool)
+    , _aiAccessViewStatus                 :: !(Maybe Text)
+    , _aiDownloadAccess                   :: !(Maybe DownloadAccessRestriction)
+    , _aiViewOrderURL                     :: !(Maybe Text)
+    , _aiPublicDomain                     :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VolumeAccessInfo' with the minimum fields required to make a request.
+-- | Creates a value of 'AccessInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vaiWebReaderLink'
+-- * 'aiWebReaderLink'
 --
--- * 'vaiCountry'
+-- * 'aiCountry'
 --
--- * 'vaiDriveImportedContentLink'
+-- * 'aiDriveImportedContentLink'
 --
--- * 'vaiExplicitOfflineLicenseManagement'
+-- * 'aiExplicitOfflineLicenseManagement'
 --
--- * 'vaiViewability'
+-- * 'aiViewability'
 --
--- * 'vaiQuoteSharingAllowed'
+-- * 'aiQuoteSharingAllowed'
 --
--- * 'vaiEpub'
+-- * 'aiEpub'
 --
--- * 'vaiPdf'
+-- * 'aiPdf'
 --
--- * 'vaiTextToSpeechPermission'
+-- * 'aiTextToSpeechPermission'
 --
--- * 'vaiEmbeddable'
+-- * 'aiEmbeddable'
 --
--- * 'vaiAccessViewStatus'
+-- * 'aiAccessViewStatus'
 --
--- * 'vaiDownloadAccess'
+-- * 'aiDownloadAccess'
 --
--- * 'vaiViewOrderURL'
+-- * 'aiViewOrderURL'
 --
--- * 'vaiPublicDomain'
-volumeAccessInfo
-    :: VolumeAccessInfo
-volumeAccessInfo =
-    VolumeAccessInfo
-    { _vaiWebReaderLink = Nothing
-    , _vaiCountry = Nothing
-    , _vaiDriveImportedContentLink = Nothing
-    , _vaiExplicitOfflineLicenseManagement = Nothing
-    , _vaiViewability = Nothing
-    , _vaiQuoteSharingAllowed = Nothing
-    , _vaiEpub = Nothing
-    , _vaiPdf = Nothing
-    , _vaiTextToSpeechPermission = Nothing
-    , _vaiEmbeddable = Nothing
-    , _vaiAccessViewStatus = Nothing
-    , _vaiDownloadAccess = Nothing
-    , _vaiViewOrderURL = Nothing
-    , _vaiPublicDomain = Nothing
+-- * 'aiPublicDomain'
+accessInfo
+    :: AccessInfo
+accessInfo =
+    AccessInfo
+    { _aiWebReaderLink = Nothing
+    , _aiCountry = Nothing
+    , _aiDriveImportedContentLink = Nothing
+    , _aiExplicitOfflineLicenseManagement = Nothing
+    , _aiViewability = Nothing
+    , _aiQuoteSharingAllowed = Nothing
+    , _aiEpub = Nothing
+    , _aiPdf = Nothing
+    , _aiTextToSpeechPermission = Nothing
+    , _aiEmbeddable = Nothing
+    , _aiAccessViewStatus = Nothing
+    , _aiDownloadAccess = Nothing
+    , _aiViewOrderURL = Nothing
+    , _aiPublicDomain = Nothing
     }
 
 -- | URL to read this volume on the Google Books site. Link will not allow
 -- users to read non-viewable volumes.
-vaiWebReaderLink :: Lens' VolumeAccessInfo (Maybe Text)
-vaiWebReaderLink
-  = lens _vaiWebReaderLink
-      (\ s a -> s{_vaiWebReaderLink = a})
+aiWebReaderLink :: Lens' AccessInfo (Maybe Text)
+aiWebReaderLink
+  = lens _aiWebReaderLink
+      (\ s a -> s{_aiWebReaderLink = a})
 
 -- | The two-letter ISO_3166-1 country code for which this access information
 -- is valid. (In LITE projection.)
-vaiCountry :: Lens' VolumeAccessInfo (Maybe Text)
-vaiCountry
-  = lens _vaiCountry (\ s a -> s{_vaiCountry = a})
+aiCountry :: Lens' AccessInfo (Maybe Text)
+aiCountry
+  = lens _aiCountry (\ s a -> s{_aiCountry = a})
 
 -- | URL to the Google Drive viewer if this volume is uploaded by the user by
 -- selecting the file from Google Drive.
-vaiDriveImportedContentLink :: Lens' VolumeAccessInfo (Maybe Text)
-vaiDriveImportedContentLink
-  = lens _vaiDriveImportedContentLink
-      (\ s a -> s{_vaiDriveImportedContentLink = a})
+aiDriveImportedContentLink :: Lens' AccessInfo (Maybe Text)
+aiDriveImportedContentLink
+  = lens _aiDriveImportedContentLink
+      (\ s a -> s{_aiDriveImportedContentLink = a})
 
 -- | Whether this volume requires that the client explicitly request offline
 -- download license rather than have it done automatically when loading the
 -- content, if the client supports it.
-vaiExplicitOfflineLicenseManagement :: Lens' VolumeAccessInfo (Maybe Bool)
-vaiExplicitOfflineLicenseManagement
-  = lens _vaiExplicitOfflineLicenseManagement
-      (\ s a ->
-         s{_vaiExplicitOfflineLicenseManagement = a})
+aiExplicitOfflineLicenseManagement :: Lens' AccessInfo (Maybe Bool)
+aiExplicitOfflineLicenseManagement
+  = lens _aiExplicitOfflineLicenseManagement
+      (\ s a -> s{_aiExplicitOfflineLicenseManagement = a})
 
 -- | The read access of a volume. Possible values are PARTIAL, ALL_PAGES,
 -- NO_PAGES or UNKNOWN. This value depends on the country listed above. A
@@ -1768,71 +1786,70 @@ vaiExplicitOfflineLicenseManagement
 -- the volume to be viewed publicly, without purchase. This can apply to
 -- eBooks as well as non-eBooks. Public domain books will always have a
 -- value of ALL_PAGES.
-vaiViewability :: Lens' VolumeAccessInfo (Maybe Text)
-vaiViewability
-  = lens _vaiViewability
-      (\ s a -> s{_vaiViewability = a})
+aiViewability :: Lens' AccessInfo (Maybe Text)
+aiViewability
+  = lens _aiViewability
+      (\ s a -> s{_aiViewability = a})
 
 -- | Whether quote sharing is allowed for this volume.
-vaiQuoteSharingAllowed :: Lens' VolumeAccessInfo (Maybe Bool)
-vaiQuoteSharingAllowed
-  = lens _vaiQuoteSharingAllowed
-      (\ s a -> s{_vaiQuoteSharingAllowed = a})
+aiQuoteSharingAllowed :: Lens' AccessInfo (Maybe Bool)
+aiQuoteSharingAllowed
+  = lens _aiQuoteSharingAllowed
+      (\ s a -> s{_aiQuoteSharingAllowed = a})
 
 -- | Information about epub content. (In LITE projection.)
-vaiEpub :: Lens' VolumeAccessInfo (Maybe VolumeAccessInfoEpub)
-vaiEpub = lens _vaiEpub (\ s a -> s{_vaiEpub = a})
+aiEpub :: Lens' AccessInfo (Maybe Epub)
+aiEpub = lens _aiEpub (\ s a -> s{_aiEpub = a})
 
 -- | Information about pdf content. (In LITE projection.)
-vaiPdf :: Lens' VolumeAccessInfo (Maybe VolumeAccessInfoPdf)
-vaiPdf = lens _vaiPdf (\ s a -> s{_vaiPdf = a})
+aiPdf :: Lens' AccessInfo (Maybe Pdf)
+aiPdf = lens _aiPdf (\ s a -> s{_aiPdf = a})
 
 -- | Whether text-to-speech is permitted for this volume. Values can be
 -- ALLOWED, ALLOWED_FOR_ACCESSIBILITY, or NOT_ALLOWED.
-vaiTextToSpeechPermission :: Lens' VolumeAccessInfo (Maybe Text)
-vaiTextToSpeechPermission
-  = lens _vaiTextToSpeechPermission
-      (\ s a -> s{_vaiTextToSpeechPermission = a})
+aiTextToSpeechPermission :: Lens' AccessInfo (Maybe Text)
+aiTextToSpeechPermission
+  = lens _aiTextToSpeechPermission
+      (\ s a -> s{_aiTextToSpeechPermission = a})
 
 -- | Whether this volume can be embedded in a viewport using the Embedded
 -- Viewer API.
-vaiEmbeddable :: Lens' VolumeAccessInfo (Maybe Bool)
-vaiEmbeddable
-  = lens _vaiEmbeddable
-      (\ s a -> s{_vaiEmbeddable = a})
+aiEmbeddable :: Lens' AccessInfo (Maybe Bool)
+aiEmbeddable
+  = lens _aiEmbeddable (\ s a -> s{_aiEmbeddable = a})
 
 -- | Combines the access and viewability of this volume into a single status
 -- field for this user. Values can be FULL_PURCHASED, FULL_PUBLIC_DOMAIN,
 -- SAMPLE or NONE. (In LITE projection.)
-vaiAccessViewStatus :: Lens' VolumeAccessInfo (Maybe Text)
-vaiAccessViewStatus
-  = lens _vaiAccessViewStatus
-      (\ s a -> s{_vaiAccessViewStatus = a})
+aiAccessViewStatus :: Lens' AccessInfo (Maybe Text)
+aiAccessViewStatus
+  = lens _aiAccessViewStatus
+      (\ s a -> s{_aiAccessViewStatus = a})
 
 -- | Information about a volume\'s download license access restrictions.
-vaiDownloadAccess :: Lens' VolumeAccessInfo (Maybe DownloadAccessRestriction)
-vaiDownloadAccess
-  = lens _vaiDownloadAccess
-      (\ s a -> s{_vaiDownloadAccess = a})
+aiDownloadAccess :: Lens' AccessInfo (Maybe DownloadAccessRestriction)
+aiDownloadAccess
+  = lens _aiDownloadAccess
+      (\ s a -> s{_aiDownloadAccess = a})
 
 -- | For ordered but not yet processed orders, we give a URL that can be used
 -- to go to the appropriate Google Wallet page.
-vaiViewOrderURL :: Lens' VolumeAccessInfo (Maybe Text)
-vaiViewOrderURL
-  = lens _vaiViewOrderURL
-      (\ s a -> s{_vaiViewOrderURL = a})
+aiViewOrderURL :: Lens' AccessInfo (Maybe Text)
+aiViewOrderURL
+  = lens _aiViewOrderURL
+      (\ s a -> s{_aiViewOrderURL = a})
 
 -- | Whether or not this book is public domain in the country listed above.
-vaiPublicDomain :: Lens' VolumeAccessInfo (Maybe Bool)
-vaiPublicDomain
-  = lens _vaiPublicDomain
-      (\ s a -> s{_vaiPublicDomain = a})
+aiPublicDomain :: Lens' AccessInfo (Maybe Bool)
+aiPublicDomain
+  = lens _aiPublicDomain
+      (\ s a -> s{_aiPublicDomain = a})
 
-instance FromJSON VolumeAccessInfo where
+instance FromJSON AccessInfo where
         parseJSON
-          = withObject "VolumeAccessInfo"
+          = withObject "AccessInfo"
               (\ o ->
-                 VolumeAccessInfo <$>
+                 AccessInfo <$>
                    (o .:? "webReaderLink") <*> (o .:? "country") <*>
                      (o .:? "driveImportedContentLink")
                      <*> (o .:? "explicitOfflineLicenseManagement")
@@ -1847,105 +1864,184 @@ instance FromJSON VolumeAccessInfo where
                      <*> (o .:? "viewOrderUrl")
                      <*> (o .:? "publicDomain"))
 
-instance ToJSON VolumeAccessInfo where
-        toJSON VolumeAccessInfo{..}
+instance ToJSON AccessInfo where
+        toJSON AccessInfo{..}
           = object
               (catMaybes
-                 [("webReaderLink" .=) <$> _vaiWebReaderLink,
-                  ("country" .=) <$> _vaiCountry,
+                 [("webReaderLink" .=) <$> _aiWebReaderLink,
+                  ("country" .=) <$> _aiCountry,
                   ("driveImportedContentLink" .=) <$>
-                    _vaiDriveImportedContentLink,
+                    _aiDriveImportedContentLink,
                   ("explicitOfflineLicenseManagement" .=) <$>
-                    _vaiExplicitOfflineLicenseManagement,
-                  ("viewability" .=) <$> _vaiViewability,
+                    _aiExplicitOfflineLicenseManagement,
+                  ("viewability" .=) <$> _aiViewability,
                   ("quoteSharingAllowed" .=) <$>
-                    _vaiQuoteSharingAllowed,
-                  ("epub" .=) <$> _vaiEpub, ("pdf" .=) <$> _vaiPdf,
+                    _aiQuoteSharingAllowed,
+                  ("epub" .=) <$> _aiEpub, ("pdf" .=) <$> _aiPdf,
                   ("textToSpeechPermission" .=) <$>
-                    _vaiTextToSpeechPermission,
-                  ("embeddable" .=) <$> _vaiEmbeddable,
-                  ("accessViewStatus" .=) <$> _vaiAccessViewStatus,
-                  ("downloadAccess" .=) <$> _vaiDownloadAccess,
-                  ("viewOrderUrl" .=) <$> _vaiViewOrderURL,
-                  ("publicDomain" .=) <$> _vaiPublicDomain])
+                    _aiTextToSpeechPermission,
+                  ("embeddable" .=) <$> _aiEmbeddable,
+                  ("accessViewStatus" .=) <$> _aiAccessViewStatus,
+                  ("downloadAccess" .=) <$> _aiDownloadAccess,
+                  ("viewOrderUrl" .=) <$> _aiViewOrderURL,
+                  ("publicDomain" .=) <$> _aiPublicDomain])
 
 -- | Copy\/Paste accounting information.
 --
--- /See:/ 'volumeUserInfoCopy' smart constructor.
-data VolumeUserInfoCopy = VolumeUserInfoCopy
-    { _vuicLimitType               :: !(Maybe Text)
-    , _vuicAllowedCharacterCount   :: !(Maybe Int32)
-    , _vuicUpdated                 :: !(Maybe DateTime')
-    , _vuicRemainingCharacterCount :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'copy' smart constructor.
+data Copy = Copy
+    { _cLimitType               :: !(Maybe Text)
+    , _cAllowedCharacterCount   :: !(Maybe Int32)
+    , _cUpdated                 :: !(Maybe DateTime')
+    , _cRemainingCharacterCount :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VolumeUserInfoCopy' with the minimum fields required to make a request.
+-- | Creates a value of 'Copy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vuicLimitType'
+-- * 'cLimitType'
 --
--- * 'vuicAllowedCharacterCount'
+-- * 'cAllowedCharacterCount'
 --
--- * 'vuicUpdated'
+-- * 'cUpdated'
 --
--- * 'vuicRemainingCharacterCount'
-volumeUserInfoCopy
-    :: VolumeUserInfoCopy
-volumeUserInfoCopy =
-    VolumeUserInfoCopy
-    { _vuicLimitType = Nothing
-    , _vuicAllowedCharacterCount = Nothing
-    , _vuicUpdated = Nothing
-    , _vuicRemainingCharacterCount = Nothing
+-- * 'cRemainingCharacterCount'
+copy
+    :: Copy
+copy =
+    Copy
+    { _cLimitType = Nothing
+    , _cAllowedCharacterCount = Nothing
+    , _cUpdated = Nothing
+    , _cRemainingCharacterCount = Nothing
     }
 
-vuicLimitType :: Lens' VolumeUserInfoCopy (Maybe Text)
-vuicLimitType
-  = lens _vuicLimitType
-      (\ s a -> s{_vuicLimitType = a})
+cLimitType :: Lens' Copy (Maybe Text)
+cLimitType
+  = lens _cLimitType (\ s a -> s{_cLimitType = a})
 
-vuicAllowedCharacterCount :: Lens' VolumeUserInfoCopy (Maybe Int32)
-vuicAllowedCharacterCount
-  = lens _vuicAllowedCharacterCount
-      (\ s a -> s{_vuicAllowedCharacterCount = a})
+cAllowedCharacterCount :: Lens' Copy (Maybe Int32)
+cAllowedCharacterCount
+  = lens _cAllowedCharacterCount
+      (\ s a -> s{_cAllowedCharacterCount = a})
 
-vuicUpdated :: Lens' VolumeUserInfoCopy (Maybe UTCTime)
-vuicUpdated
-  = lens _vuicUpdated (\ s a -> s{_vuicUpdated = a}) .
+cUpdated :: Lens' Copy (Maybe UTCTime)
+cUpdated
+  = lens _cUpdated (\ s a -> s{_cUpdated = a}) .
       mapping _DateTime
 
-vuicRemainingCharacterCount :: Lens' VolumeUserInfoCopy (Maybe Int32)
-vuicRemainingCharacterCount
-  = lens _vuicRemainingCharacterCount
-      (\ s a -> s{_vuicRemainingCharacterCount = a})
+cRemainingCharacterCount :: Lens' Copy (Maybe Int32)
+cRemainingCharacterCount
+  = lens _cRemainingCharacterCount
+      (\ s a -> s{_cRemainingCharacterCount = a})
 
-instance FromJSON VolumeUserInfoCopy where
+instance FromJSON Copy where
         parseJSON
-          = withObject "VolumeUserInfoCopy"
+          = withObject "Copy"
               (\ o ->
-                 VolumeUserInfoCopy <$>
+                 Copy <$>
                    (o .:? "limitType") <*>
                      (o .:? "allowedCharacterCount")
                      <*> (o .:? "updated")
                      <*> (o .:? "remainingCharacterCount"))
 
-instance ToJSON VolumeUserInfoCopy where
-        toJSON VolumeUserInfoCopy{..}
+instance ToJSON Copy where
+        toJSON Copy{..}
           = object
               (catMaybes
-                 [("limitType" .=) <$> _vuicLimitType,
+                 [("limitType" .=) <$> _cLimitType,
                   ("allowedCharacterCount" .=) <$>
-                    _vuicAllowedCharacterCount,
-                  ("updated" .=) <$> _vuicUpdated,
+                    _cAllowedCharacterCount,
+                  ("updated" .=) <$> _cUpdated,
                   ("remainingCharacterCount" .=) <$>
-                    _vuicRemainingCharacterCount])
+                    _cRemainingCharacterCount])
+
+--
+-- /See:/ 'layersItem' smart constructor.
+data LayersItem = LayersItem
+    { _liLimitType               :: !(Maybe Text)
+    , _liAllowedCharacterCount   :: !(Maybe Int32)
+    , _liUpdated                 :: !(Maybe DateTime')
+    , _liLayerId                 :: !(Maybe Text)
+    , _liRemainingCharacterCount :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LayersItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'liLimitType'
+--
+-- * 'liAllowedCharacterCount'
+--
+-- * 'liUpdated'
+--
+-- * 'liLayerId'
+--
+-- * 'liRemainingCharacterCount'
+layersItem
+    :: LayersItem
+layersItem =
+    LayersItem
+    { _liLimitType = Nothing
+    , _liAllowedCharacterCount = Nothing
+    , _liUpdated = Nothing
+    , _liLayerId = Nothing
+    , _liRemainingCharacterCount = Nothing
+    }
+
+liLimitType :: Lens' LayersItem (Maybe Text)
+liLimitType
+  = lens _liLimitType (\ s a -> s{_liLimitType = a})
+
+liAllowedCharacterCount :: Lens' LayersItem (Maybe Int32)
+liAllowedCharacterCount
+  = lens _liAllowedCharacterCount
+      (\ s a -> s{_liAllowedCharacterCount = a})
+
+liUpdated :: Lens' LayersItem (Maybe UTCTime)
+liUpdated
+  = lens _liUpdated (\ s a -> s{_liUpdated = a}) .
+      mapping _DateTime
+
+liLayerId :: Lens' LayersItem (Maybe Text)
+liLayerId
+  = lens _liLayerId (\ s a -> s{_liLayerId = a})
+
+liRemainingCharacterCount :: Lens' LayersItem (Maybe Int32)
+liRemainingCharacterCount
+  = lens _liRemainingCharacterCount
+      (\ s a -> s{_liRemainingCharacterCount = a})
+
+instance FromJSON LayersItem where
+        parseJSON
+          = withObject "LayersItem"
+              (\ o ->
+                 LayersItem <$>
+                   (o .:? "limitType") <*>
+                     (o .:? "allowedCharacterCount")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "layerId")
+                     <*> (o .:? "remainingCharacterCount"))
+
+instance ToJSON LayersItem where
+        toJSON LayersItem{..}
+          = object
+              (catMaybes
+                 [("limitType" .=) <$> _liLimitType,
+                  ("allowedCharacterCount" .=) <$>
+                    _liAllowedCharacterCount,
+                  ("updated" .=) <$> _liUpdated,
+                  ("layerId" .=) <$> _liLayerId,
+                  ("remainingCharacterCount" .=) <$>
+                    _liRemainingCharacterCount])
 
 --
 -- /See:/ 'booksVolumesRecommendedRateResponse' smart constructor.
 newtype BooksVolumesRecommendedRateResponse = BooksVolumesRecommendedRateResponse
     { _bvrrrConsistencyToken :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BooksVolumesRecommendedRateResponse' with the minimum fields required to make a request.
 --
@@ -1981,99 +2077,39 @@ instance ToJSON BooksVolumesRecommendedRateResponse
                     _bvrrrConsistencyToken])
 
 --
--- /See:/ 'volumeLayerInfoLayers' smart constructor.
-data VolumeLayerInfoLayers = VolumeLayerInfoLayers
-    { _vlilVolumeAnnotationsVersion :: !(Maybe Text)
-    , _vlilLayerId                  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'userUploadedVolumeInfo' smart constructor.
+newtype UserUploadedVolumeInfo = UserUploadedVolumeInfo
+    { _uuviProcessingState :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VolumeLayerInfoLayers' with the minimum fields required to make a request.
+-- | Creates a value of 'UserUploadedVolumeInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vlilVolumeAnnotationsVersion'
---
--- * 'vlilLayerId'
-volumeLayerInfoLayers
-    :: VolumeLayerInfoLayers
-volumeLayerInfoLayers =
-    VolumeLayerInfoLayers
-    { _vlilVolumeAnnotationsVersion = Nothing
-    , _vlilLayerId = Nothing
+-- * 'uuviProcessingState'
+userUploadedVolumeInfo
+    :: UserUploadedVolumeInfo
+userUploadedVolumeInfo =
+    UserUploadedVolumeInfo
+    { _uuviProcessingState = Nothing
     }
 
--- | The current version of this layer\'s volume annotations. Note that this
--- version applies only to the data in the books.layers.volumeAnnotations.*
--- responses. The actual annotation data is versioned separately.
-vlilVolumeAnnotationsVersion :: Lens' VolumeLayerInfoLayers (Maybe Text)
-vlilVolumeAnnotationsVersion
-  = lens _vlilVolumeAnnotationsVersion
-      (\ s a -> s{_vlilVolumeAnnotationsVersion = a})
+uuviProcessingState :: Lens' UserUploadedVolumeInfo (Maybe Text)
+uuviProcessingState
+  = lens _uuviProcessingState
+      (\ s a -> s{_uuviProcessingState = a})
 
--- | The layer id of this layer (e.g. \"geo\").
-vlilLayerId :: Lens' VolumeLayerInfoLayers (Maybe Text)
-vlilLayerId
-  = lens _vlilLayerId (\ s a -> s{_vlilLayerId = a})
-
-instance FromJSON VolumeLayerInfoLayers where
+instance FromJSON UserUploadedVolumeInfo where
         parseJSON
-          = withObject "VolumeLayerInfoLayers"
+          = withObject "UserUploadedVolumeInfo"
               (\ o ->
-                 VolumeLayerInfoLayers <$>
-                   (o .:? "volumeAnnotationsVersion") <*>
-                     (o .:? "layerId"))
+                 UserUploadedVolumeInfo <$> (o .:? "processingState"))
 
-instance ToJSON VolumeLayerInfoLayers where
-        toJSON VolumeLayerInfoLayers{..}
+instance ToJSON UserUploadedVolumeInfo where
+        toJSON UserUploadedVolumeInfo{..}
           = object
               (catMaybes
-                 [("volumeAnnotationsVersion" .=) <$>
-                    _vlilVolumeAnnotationsVersion,
-                  ("layerId" .=) <$> _vlilLayerId])
-
---
--- /See:/ 'dictlayerdataDictWordsExamples' smart constructor.
-data DictlayerdataDictWordsExamples = DictlayerdataDictWordsExamples
-    { _ddweText   :: !(Maybe Text)
-    , _ddweSource :: !(Maybe DictlayerdataDictWordsExamplesSource)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DictlayerdataDictWordsExamples' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ddweText'
---
--- * 'ddweSource'
-dictlayerdataDictWordsExamples
-    :: DictlayerdataDictWordsExamples
-dictlayerdataDictWordsExamples =
-    DictlayerdataDictWordsExamples
-    { _ddweText = Nothing
-    , _ddweSource = Nothing
-    }
-
-ddweText :: Lens' DictlayerdataDictWordsExamples (Maybe Text)
-ddweText = lens _ddweText (\ s a -> s{_ddweText = a})
-
-ddweSource :: Lens' DictlayerdataDictWordsExamples (Maybe DictlayerdataDictWordsExamplesSource)
-ddweSource
-  = lens _ddweSource (\ s a -> s{_ddweSource = a})
-
-instance FromJSON DictlayerdataDictWordsExamples
-         where
-        parseJSON
-          = withObject "DictlayerdataDictWordsExamples"
-              (\ o ->
-                 DictlayerdataDictWordsExamples <$>
-                   (o .:? "text") <*> (o .:? "source"))
-
-instance ToJSON DictlayerdataDictWordsExamples where
-        toJSON DictlayerdataDictWordsExamples{..}
-          = object
-              (catMaybes
-                 [("text" .=) <$> _ddweText,
-                  ("source" .=) <$> _ddweSource])
+                 [("processingState" .=) <$> _uuviProcessingState])
 
 --
 -- /See:/ 'bookshelf' smart constructor.
@@ -2088,7 +2124,7 @@ data Bookshelf = Bookshelf
     , _bUpdated            :: !(Maybe DateTime')
     , _bTitle              :: !(Maybe Text)
     , _bDescription        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Bookshelf' with the minimum fields required to make a request.
 --
@@ -2212,128 +2248,141 @@ instance ToJSON Bookshelf where
                   ("description" .=) <$> _bDescription])
 
 --
--- /See:/ 'dictlayerdataDictWordsSensesDefinitions' smart constructor.
-data DictlayerdataDictWordsSensesDefinitions = DictlayerdataDictWordsSensesDefinitions
-    { _ddwsdDefinition :: !(Maybe Text)
-    , _ddwsdExamples   :: !(Maybe [DictlayerdataDictWordsSensesDefinitionsExamples])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'derivativesItem' smart constructor.
+data DerivativesItem = DerivativesItem
+    { _diText   :: !(Maybe Text)
+    , _diSource :: !(Maybe DerivativesItemSource)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsSensesDefinitions' with the minimum fields required to make a request.
+-- | Creates a value of 'DerivativesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwsdDefinition'
+-- * 'diText'
 --
--- * 'ddwsdExamples'
-dictlayerdataDictWordsSensesDefinitions
-    :: DictlayerdataDictWordsSensesDefinitions
-dictlayerdataDictWordsSensesDefinitions =
-    DictlayerdataDictWordsSensesDefinitions
-    { _ddwsdDefinition = Nothing
-    , _ddwsdExamples = Nothing
+-- * 'diSource'
+derivativesItem
+    :: DerivativesItem
+derivativesItem =
+    DerivativesItem
+    { _diText = Nothing
+    , _diSource = Nothing
     }
 
-ddwsdDefinition :: Lens' DictlayerdataDictWordsSensesDefinitions (Maybe Text)
-ddwsdDefinition
-  = lens _ddwsdDefinition
-      (\ s a -> s{_ddwsdDefinition = a})
+diText :: Lens' DerivativesItem (Maybe Text)
+diText = lens _diText (\ s a -> s{_diText = a})
 
-ddwsdExamples :: Lens' DictlayerdataDictWordsSensesDefinitions [DictlayerdataDictWordsSensesDefinitionsExamples]
-ddwsdExamples
-  = lens _ddwsdExamples
-      (\ s a -> s{_ddwsdExamples = a})
-      . _Default
-      . _Coerce
+diSource :: Lens' DerivativesItem (Maybe DerivativesItemSource)
+diSource = lens _diSource (\ s a -> s{_diSource = a})
 
-instance FromJSON
-         DictlayerdataDictWordsSensesDefinitions where
+instance FromJSON DerivativesItem where
         parseJSON
-          = withObject
-              "DictlayerdataDictWordsSensesDefinitions"
+          = withObject "DerivativesItem"
               (\ o ->
-                 DictlayerdataDictWordsSensesDefinitions <$>
-                   (o .:? "definition") <*>
-                     (o .:? "examples" .!= mempty))
+                 DerivativesItem <$>
+                   (o .:? "text") <*> (o .:? "source"))
 
-instance ToJSON
-         DictlayerdataDictWordsSensesDefinitions where
-        toJSON DictlayerdataDictWordsSensesDefinitions{..}
+instance ToJSON DerivativesItem where
+        toJSON DerivativesItem{..}
           = object
               (catMaybes
-                 [("definition" .=) <$> _ddwsdDefinition,
-                  ("examples" .=) <$> _ddwsdExamples])
+                 [("text" .=) <$> _diText,
+                  ("source" .=) <$> _diSource])
 
 --
--- /See:/ 'annotationLayerSummary' smart constructor.
-data AnnotationLayerSummary = AnnotationLayerSummary
-    { _alsLimitType               :: !(Maybe Text)
-    , _alsAllowedCharacterCount   :: !(Maybe Int32)
-    , _alsRemainingCharacterCount :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'sensesItemSource' smart constructor.
+data SensesItemSource = SensesItemSource
+    { _sisURL         :: !(Maybe Text)
+    , _sisAttribution :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AnnotationLayerSummary' with the minimum fields required to make a request.
+-- | Creates a value of 'SensesItemSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'alsLimitType'
+-- * 'sisURL'
 --
--- * 'alsAllowedCharacterCount'
---
--- * 'alsRemainingCharacterCount'
-annotationLayerSummary
-    :: AnnotationLayerSummary
-annotationLayerSummary =
-    AnnotationLayerSummary
-    { _alsLimitType = Nothing
-    , _alsAllowedCharacterCount = Nothing
-    , _alsRemainingCharacterCount = Nothing
+-- * 'sisAttribution'
+sensesItemSource
+    :: SensesItemSource
+sensesItemSource =
+    SensesItemSource
+    { _sisURL = Nothing
+    , _sisAttribution = Nothing
     }
 
--- | Type of limitation on this layer. \"limited\" or \"unlimited\" for the
--- \"copy\" layer.
-alsLimitType :: Lens' AnnotationLayerSummary (Maybe Text)
-alsLimitType
-  = lens _alsLimitType (\ s a -> s{_alsLimitType = a})
+sisURL :: Lens' SensesItemSource (Maybe Text)
+sisURL = lens _sisURL (\ s a -> s{_sisURL = a})
 
--- | Maximum allowed characters on this layer, especially for the \"copy\"
--- layer.
-alsAllowedCharacterCount :: Lens' AnnotationLayerSummary (Maybe Int32)
-alsAllowedCharacterCount
-  = lens _alsAllowedCharacterCount
-      (\ s a -> s{_alsAllowedCharacterCount = a})
+sisAttribution :: Lens' SensesItemSource (Maybe Text)
+sisAttribution
+  = lens _sisAttribution
+      (\ s a -> s{_sisAttribution = a})
 
--- | Remaining allowed characters on this layer, especially for the \"copy\"
--- layer.
-alsRemainingCharacterCount :: Lens' AnnotationLayerSummary (Maybe Int32)
-alsRemainingCharacterCount
-  = lens _alsRemainingCharacterCount
-      (\ s a -> s{_alsRemainingCharacterCount = a})
-
-instance FromJSON AnnotationLayerSummary where
+instance FromJSON SensesItemSource where
         parseJSON
-          = withObject "AnnotationLayerSummary"
+          = withObject "SensesItemSource"
               (\ o ->
-                 AnnotationLayerSummary <$>
-                   (o .:? "limitType") <*>
-                     (o .:? "allowedCharacterCount")
-                     <*> (o .:? "remainingCharacterCount"))
+                 SensesItemSource <$>
+                   (o .:? "url") <*> (o .:? "attribution"))
 
-instance ToJSON AnnotationLayerSummary where
-        toJSON AnnotationLayerSummary{..}
+instance ToJSON SensesItemSource where
+        toJSON SensesItemSource{..}
           = object
               (catMaybes
-                 [("limitType" .=) <$> _alsLimitType,
-                  ("allowedCharacterCount" .=) <$>
-                    _alsAllowedCharacterCount,
-                  ("remainingCharacterCount" .=) <$>
-                    _alsRemainingCharacterCount])
+                 [("url" .=) <$> _sisURL,
+                  ("attribution" .=) <$> _sisAttribution])
+
+--
+-- /See:/ 'boundaryItemItem' smart constructor.
+data BoundaryItemItem = BoundaryItemItem
+    { _biiLatitude  :: !(Maybe Word32)
+    , _biiLongitude :: !(Maybe Word32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BoundaryItemItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'biiLatitude'
+--
+-- * 'biiLongitude'
+boundaryItemItem
+    :: BoundaryItemItem
+boundaryItemItem =
+    BoundaryItemItem
+    { _biiLatitude = Nothing
+    , _biiLongitude = Nothing
+    }
+
+biiLatitude :: Lens' BoundaryItemItem (Maybe Word32)
+biiLatitude
+  = lens _biiLatitude (\ s a -> s{_biiLatitude = a})
+
+biiLongitude :: Lens' BoundaryItemItem (Maybe Word32)
+biiLongitude
+  = lens _biiLongitude (\ s a -> s{_biiLongitude = a})
+
+instance FromJSON BoundaryItemItem where
+        parseJSON
+          = withObject "BoundaryItemItem"
+              (\ o ->
+                 BoundaryItemItem <$>
+                   (o .:? "latitude") <*> (o .:? "longitude"))
+
+instance ToJSON BoundaryItemItem where
+        toJSON BoundaryItemItem{..}
+          = object
+              (catMaybes
+                 [("latitude" .=) <$> _biiLatitude,
+                  ("longitude" .=) <$> _biiLongitude])
 
 --
 -- /See:/ 'category' smart constructor.
 data Category = Category
     { _cKind  :: !Text
-    , _cItems :: !(Maybe [CategoryItems])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _cItems :: !(Maybe [CategoryItemsItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Category' with the minimum fields required to make a request.
 --
@@ -2355,7 +2404,7 @@ cKind :: Lens' Category Text
 cKind = lens _cKind (\ s a -> s{_cKind = a})
 
 -- | A list of onboarding categories.
-cItems :: Lens' Category [CategoryItems]
+cItems :: Lens' Category [CategoryItemsItem]
 cItems
   = lens _cItems (\ s a -> s{_cItems = a}) . _Default .
       _Coerce
@@ -2374,47 +2423,77 @@ instance ToJSON Category where
               (catMaybes
                  [Just ("kind" .= _cKind), ("items" .=) <$> _cItems])
 
--- | Search result information related to this volume.
 --
--- /See:/ 'volumeSearchInfo' smart constructor.
-newtype VolumeSearchInfo = VolumeSearchInfo
-    { _vsiTextSnippet :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'offersItemsItem' smart constructor.
+data OffersItemsItem = OffersItemsItem
+    { _oiiItems        :: !(Maybe [OffersItemsItemItemsItem])
+    , _oiiArtURL       :: !(Maybe Text)
+    , _oiiId           :: !(Maybe Text)
+    , _oiiGServicesKey :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VolumeSearchInfo' with the minimum fields required to make a request.
+-- | Creates a value of 'OffersItemsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vsiTextSnippet'
-volumeSearchInfo
-    :: VolumeSearchInfo
-volumeSearchInfo =
-    VolumeSearchInfo
-    { _vsiTextSnippet = Nothing
+-- * 'oiiItems'
+--
+-- * 'oiiArtURL'
+--
+-- * 'oiiId'
+--
+-- * 'oiiGServicesKey'
+offersItemsItem
+    :: OffersItemsItem
+offersItemsItem =
+    OffersItemsItem
+    { _oiiItems = Nothing
+    , _oiiArtURL = Nothing
+    , _oiiId = Nothing
+    , _oiiGServicesKey = Nothing
     }
 
--- | A text snippet containing the search query.
-vsiTextSnippet :: Lens' VolumeSearchInfo (Maybe Text)
-vsiTextSnippet
-  = lens _vsiTextSnippet
-      (\ s a -> s{_vsiTextSnippet = a})
+oiiItems :: Lens' OffersItemsItem [OffersItemsItemItemsItem]
+oiiItems
+  = lens _oiiItems (\ s a -> s{_oiiItems = a}) .
+      _Default
+      . _Coerce
 
-instance FromJSON VolumeSearchInfo where
+oiiArtURL :: Lens' OffersItemsItem (Maybe Text)
+oiiArtURL
+  = lens _oiiArtURL (\ s a -> s{_oiiArtURL = a})
+
+oiiId :: Lens' OffersItemsItem (Maybe Text)
+oiiId = lens _oiiId (\ s a -> s{_oiiId = a})
+
+oiiGServicesKey :: Lens' OffersItemsItem (Maybe Text)
+oiiGServicesKey
+  = lens _oiiGServicesKey
+      (\ s a -> s{_oiiGServicesKey = a})
+
+instance FromJSON OffersItemsItem where
         parseJSON
-          = withObject "VolumeSearchInfo"
-              (\ o -> VolumeSearchInfo <$> (o .:? "textSnippet"))
+          = withObject "OffersItemsItem"
+              (\ o ->
+                 OffersItemsItem <$>
+                   (o .:? "items" .!= mempty) <*> (o .:? "artUrl") <*>
+                     (o .:? "id")
+                     <*> (o .:? "gservicesKey"))
 
-instance ToJSON VolumeSearchInfo where
-        toJSON VolumeSearchInfo{..}
+instance ToJSON OffersItemsItem where
+        toJSON OffersItemsItem{..}
           = object
-              (catMaybes [("textSnippet" .=) <$> _vsiTextSnippet])
+              (catMaybes
+                 [("items" .=) <$> _oiiItems,
+                  ("artUrl" .=) <$> _oiiArtURL, ("id" .=) <$> _oiiId,
+                  ("gservicesKey" .=) <$> _oiiGServicesKey])
 
 --
 -- /See:/ 'annotationsSummary' smart constructor.
 data AnnotationsSummary = AnnotationsSummary
     { _asKind   :: !Text
-    , _asLayers :: !(Maybe [AnnotationsSummaryLayers])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _asLayers :: !(Maybe [LayersItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsSummary' with the minimum fields required to make a request.
 --
@@ -2434,7 +2513,7 @@ annotationsSummary =
 asKind :: Lens' AnnotationsSummary Text
 asKind = lens _asKind (\ s a -> s{_asKind = a})
 
-asLayers :: Lens' AnnotationsSummary [AnnotationsSummaryLayers]
+asLayers :: Lens' AnnotationsSummary [LayersItem]
 asLayers
   = lens _asLayers (\ s a -> s{_asLayers = a}) .
       _Default
@@ -2455,21 +2534,56 @@ instance ToJSON AnnotationsSummary where
                  [Just ("kind" .= _asKind),
                   ("layers" .=) <$> _asLayers])
 
+-- | Search result information related to this volume.
+--
+-- /See:/ 'searchInfo' smart constructor.
+newtype SearchInfo = SearchInfo
+    { _siTextSnippet :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SearchInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'siTextSnippet'
+searchInfo
+    :: SearchInfo
+searchInfo =
+    SearchInfo
+    { _siTextSnippet = Nothing
+    }
+
+-- | A text snippet containing the search query.
+siTextSnippet :: Lens' SearchInfo (Maybe Text)
+siTextSnippet
+  = lens _siTextSnippet
+      (\ s a -> s{_siTextSnippet = a})
+
+instance FromJSON SearchInfo where
+        parseJSON
+          = withObject "SearchInfo"
+              (\ o -> SearchInfo <$> (o .:? "textSnippet"))
+
+instance ToJSON SearchInfo where
+        toJSON SearchInfo{..}
+          = object
+              (catMaybes [("textSnippet" .=) <$> _siTextSnippet])
+
 --
 -- /See:/ 'volume' smart constructor.
 data Volume = Volume
-    { _vvUserInfo        :: !(Maybe VolumeUserInfo)
+    { _vvUserInfo        :: !(Maybe UserInfo)
     , _vvEtag            :: !(Maybe Text)
-    , _vvAccessInfo      :: !(Maybe VolumeAccessInfo)
+    , _vvAccessInfo      :: !(Maybe AccessInfo)
     , _vvKind            :: !Text
-    , _vvSearchInfo      :: !(Maybe VolumeSearchInfo)
+    , _vvSearchInfo      :: !(Maybe SearchInfo)
     , _vvSelfLink        :: !(Maybe Text)
-    , _vvLayerInfo       :: !(Maybe VolumeLayerInfo)
-    , _vvSaleInfo        :: !(Maybe VolumeSaleInfo)
+    , _vvLayerInfo       :: !(Maybe LayerInfo)
+    , _vvSaleInfo        :: !(Maybe SaleInfo)
     , _vvId              :: !(Maybe Text)
-    , _vvRecommendedInfo :: !(Maybe VolumeRecommendedInfo)
-    , _vvVolumeInfo      :: !(Maybe VolumeVolumeInfo)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _vvRecommendedInfo :: !(Maybe RecommendedInfo)
+    , _vvVolumeInfo      :: !(Maybe VolumeInfo)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Volume' with the minimum fields required to make a request.
 --
@@ -2515,7 +2629,7 @@ volume =
 
 -- | User specific information related to this volume. (e.g. page this user
 -- last read or whether they purchased this book)
-vvUserInfo :: Lens' Volume (Maybe VolumeUserInfo)
+vvUserInfo :: Lens' Volume (Maybe UserInfo)
 vvUserInfo
   = lens _vvUserInfo (\ s a -> s{_vvUserInfo = a})
 
@@ -2527,7 +2641,7 @@ vvEtag = lens _vvEtag (\ s a -> s{_vvEtag = a})
 -- | Any information about a volume related to reading or obtaining that
 -- volume text. This information can depend on country (books may be public
 -- domain in one country but not in another, e.g.).
-vvAccessInfo :: Lens' Volume (Maybe VolumeAccessInfo)
+vvAccessInfo :: Lens' Volume (Maybe AccessInfo)
 vvAccessInfo
   = lens _vvAccessInfo (\ s a -> s{_vvAccessInfo = a})
 
@@ -2536,7 +2650,7 @@ vvKind :: Lens' Volume Text
 vvKind = lens _vvKind (\ s a -> s{_vvKind = a})
 
 -- | Search result information related to this volume.
-vvSearchInfo :: Lens' Volume (Maybe VolumeSearchInfo)
+vvSearchInfo :: Lens' Volume (Maybe SearchInfo)
 vvSearchInfo
   = lens _vvSearchInfo (\ s a -> s{_vvSearchInfo = a})
 
@@ -2546,7 +2660,7 @@ vvSelfLink
   = lens _vvSelfLink (\ s a -> s{_vvSelfLink = a})
 
 -- | What layers exist in this volume and high level information about them.
-vvLayerInfo :: Lens' Volume (Maybe VolumeLayerInfo)
+vvLayerInfo :: Lens' Volume (Maybe LayerInfo)
 vvLayerInfo
   = lens _vvLayerInfo (\ s a -> s{_vvLayerInfo = a})
 
@@ -2554,7 +2668,7 @@ vvLayerInfo
 -- purchaseability. This information can depend on the country where the
 -- request originates from (i.e. books may not be for sale in certain
 -- countries).
-vvSaleInfo :: Lens' Volume (Maybe VolumeSaleInfo)
+vvSaleInfo :: Lens' Volume (Maybe SaleInfo)
 vvSaleInfo
   = lens _vvSaleInfo (\ s a -> s{_vvSaleInfo = a})
 
@@ -2563,13 +2677,13 @@ vvId :: Lens' Volume (Maybe Text)
 vvId = lens _vvId (\ s a -> s{_vvId = a})
 
 -- | Recommendation related information for this volume.
-vvRecommendedInfo :: Lens' Volume (Maybe VolumeRecommendedInfo)
+vvRecommendedInfo :: Lens' Volume (Maybe RecommendedInfo)
 vvRecommendedInfo
   = lens _vvRecommendedInfo
       (\ s a -> s{_vvRecommendedInfo = a})
 
 -- | General volume information.
-vvVolumeInfo :: Lens' Volume (Maybe VolumeVolumeInfo)
+vvVolumeInfo :: Lens' Volume (Maybe VolumeInfo)
 vvVolumeInfo
   = lens _vvVolumeInfo (\ s a -> s{_vvVolumeInfo = a})
 
@@ -2605,527 +2719,269 @@ instance ToJSON Volume where
                   ("volumeInfo" .=) <$> _vvVolumeInfo])
 
 --
--- /See:/ 'geolayerdataCommon' smart constructor.
-data GeolayerdataCommon = GeolayerdataCommon
-    { _gcSnippet         :: !(Maybe Text)
-    , _gcSnippetURL      :: !(Maybe Text)
-    , _gcLang            :: !(Maybe Text)
-    , _gcTitle           :: !(Maybe Text)
-    , _gcPreviewImageURL :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'wordsItem' smart constructor.
+data WordsItem = WordsItem
+    { _wiSenses      :: !(Maybe [SensesItem])
+    , _wiSource      :: !(Maybe WordsItemSource)
+    , _wiDerivatives :: !(Maybe [DerivativesItem])
+    , _wiExamples    :: !(Maybe [WordsItemExamplesItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GeolayerdataCommon' with the minimum fields required to make a request.
+-- | Creates a value of 'WordsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gcSnippet'
+-- * 'wiSenses'
 --
--- * 'gcSnippetURL'
+-- * 'wiSource'
 --
--- * 'gcLang'
+-- * 'wiDerivatives'
 --
--- * 'gcTitle'
---
--- * 'gcPreviewImageURL'
-geolayerdataCommon
-    :: GeolayerdataCommon
-geolayerdataCommon =
-    GeolayerdataCommon
-    { _gcSnippet = Nothing
-    , _gcSnippetURL = Nothing
-    , _gcLang = Nothing
-    , _gcTitle = Nothing
-    , _gcPreviewImageURL = Nothing
+-- * 'wiExamples'
+wordsItem
+    :: WordsItem
+wordsItem =
+    WordsItem
+    { _wiSenses = Nothing
+    , _wiSource = Nothing
+    , _wiDerivatives = Nothing
+    , _wiExamples = Nothing
     }
 
--- | The description for this location.
-gcSnippet :: Lens' GeolayerdataCommon (Maybe Text)
-gcSnippet
-  = lens _gcSnippet (\ s a -> s{_gcSnippet = a})
-
--- | The URL for information for this location. Ex: wikipedia link.
-gcSnippetURL :: Lens' GeolayerdataCommon (Maybe Text)
-gcSnippetURL
-  = lens _gcSnippetURL (\ s a -> s{_gcSnippetURL = a})
-
--- | The language of the information url and description.
-gcLang :: Lens' GeolayerdataCommon (Maybe Text)
-gcLang = lens _gcLang (\ s a -> s{_gcLang = a})
-
--- | The display title and localized canonical name to use when searching for
--- this entity on Google search.
-gcTitle :: Lens' GeolayerdataCommon (Maybe Text)
-gcTitle = lens _gcTitle (\ s a -> s{_gcTitle = a})
-
--- | The URL for the preview image information.
-gcPreviewImageURL :: Lens' GeolayerdataCommon (Maybe Text)
-gcPreviewImageURL
-  = lens _gcPreviewImageURL
-      (\ s a -> s{_gcPreviewImageURL = a})
-
-instance FromJSON GeolayerdataCommon where
-        parseJSON
-          = withObject "GeolayerdataCommon"
-              (\ o ->
-                 GeolayerdataCommon <$>
-                   (o .:? "snippet") <*> (o .:? "snippetUrl") <*>
-                     (o .:? "lang")
-                     <*> (o .:? "title")
-                     <*> (o .:? "previewImageUrl"))
-
-instance ToJSON GeolayerdataCommon where
-        toJSON GeolayerdataCommon{..}
-          = object
-              (catMaybes
-                 [("snippet" .=) <$> _gcSnippet,
-                  ("snippetUrl" .=) <$> _gcSnippetURL,
-                  ("lang" .=) <$> _gcLang, ("title" .=) <$> _gcTitle,
-                  ("previewImageUrl" .=) <$> _gcPreviewImageURL])
-
--- | The words with different meanings but not related words, e.g. \"go\"
--- (game) and \"go\" (verb).
---
--- /See:/ 'dictlayerdataDictWordsSource' smart constructor.
-data DictlayerdataDictWordsSource = DictlayerdataDictWordsSource
-    { _ddwsURL         :: !(Maybe Text)
-    , _ddwsAttribution :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DictlayerdataDictWordsSource' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ddwsURL'
---
--- * 'ddwsAttribution'
-dictlayerdataDictWordsSource
-    :: DictlayerdataDictWordsSource
-dictlayerdataDictWordsSource =
-    DictlayerdataDictWordsSource
-    { _ddwsURL = Nothing
-    , _ddwsAttribution = Nothing
-    }
-
-ddwsURL :: Lens' DictlayerdataDictWordsSource (Maybe Text)
-ddwsURL = lens _ddwsURL (\ s a -> s{_ddwsURL = a})
-
-ddwsAttribution :: Lens' DictlayerdataDictWordsSource (Maybe Text)
-ddwsAttribution
-  = lens _ddwsAttribution
-      (\ s a -> s{_ddwsAttribution = a})
-
-instance FromJSON DictlayerdataDictWordsSource where
-        parseJSON
-          = withObject "DictlayerdataDictWordsSource"
-              (\ o ->
-                 DictlayerdataDictWordsSource <$>
-                   (o .:? "url") <*> (o .:? "attribution"))
-
-instance ToJSON DictlayerdataDictWordsSource where
-        toJSON DictlayerdataDictWordsSource{..}
-          = object
-              (catMaybes
-                 [("url" .=) <$> _ddwsURL,
-                  ("attribution" .=) <$> _ddwsAttribution])
-
---
--- /See:/ 'dictlayerdataDictWordsSensesDefinitionsExamplesSource' smart constructor.
-data DictlayerdataDictWordsSensesDefinitionsExamplesSource = DictlayerdataDictWordsSensesDefinitionsExamplesSource
-    { _ddwsdesURL         :: !(Maybe Text)
-    , _ddwsdesAttribution :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DictlayerdataDictWordsSensesDefinitionsExamplesSource' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ddwsdesURL'
---
--- * 'ddwsdesAttribution'
-dictlayerdataDictWordsSensesDefinitionsExamplesSource
-    :: DictlayerdataDictWordsSensesDefinitionsExamplesSource
-dictlayerdataDictWordsSensesDefinitionsExamplesSource =
-    DictlayerdataDictWordsSensesDefinitionsExamplesSource
-    { _ddwsdesURL = Nothing
-    , _ddwsdesAttribution = Nothing
-    }
-
-ddwsdesURL :: Lens' DictlayerdataDictWordsSensesDefinitionsExamplesSource (Maybe Text)
-ddwsdesURL
-  = lens _ddwsdesURL (\ s a -> s{_ddwsdesURL = a})
-
-ddwsdesAttribution :: Lens' DictlayerdataDictWordsSensesDefinitionsExamplesSource (Maybe Text)
-ddwsdesAttribution
-  = lens _ddwsdesAttribution
-      (\ s a -> s{_ddwsdesAttribution = a})
-
-instance FromJSON
-         DictlayerdataDictWordsSensesDefinitionsExamplesSource
-         where
-        parseJSON
-          = withObject
-              "DictlayerdataDictWordsSensesDefinitionsExamplesSource"
-              (\ o ->
-                 DictlayerdataDictWordsSensesDefinitionsExamplesSource
-                   <$> (o .:? "url") <*> (o .:? "attribution"))
-
-instance ToJSON
-         DictlayerdataDictWordsSensesDefinitionsExamplesSource
-         where
-        toJSON
-          DictlayerdataDictWordsSensesDefinitionsExamplesSource{..}
-          = object
-              (catMaybes
-                 [("url" .=) <$> _ddwsdesURL,
-                  ("attribution" .=) <$> _ddwsdesAttribution])
-
---
--- /See:/ 'geolayerdataGeoBoundary' smart constructor.
-data GeolayerdataGeoBoundary = GeolayerdataGeoBoundary
-    { _ggbLatitude  :: !(Maybe Word32)
-    , _ggbLongitude :: !(Maybe Word32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GeolayerdataGeoBoundary' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ggbLatitude'
---
--- * 'ggbLongitude'
-geolayerdataGeoBoundary
-    :: GeolayerdataGeoBoundary
-geolayerdataGeoBoundary =
-    GeolayerdataGeoBoundary
-    { _ggbLatitude = Nothing
-    , _ggbLongitude = Nothing
-    }
-
-ggbLatitude :: Lens' GeolayerdataGeoBoundary (Maybe Word32)
-ggbLatitude
-  = lens _ggbLatitude (\ s a -> s{_ggbLatitude = a})
-
-ggbLongitude :: Lens' GeolayerdataGeoBoundary (Maybe Word32)
-ggbLongitude
-  = lens _ggbLongitude (\ s a -> s{_ggbLongitude = a})
-
-instance FromJSON GeolayerdataGeoBoundary where
-        parseJSON
-          = withObject "GeolayerdataGeoBoundary"
-              (\ o ->
-                 GeolayerdataGeoBoundary <$>
-                   (o .:? "latitude") <*> (o .:? "longitude"))
-
-instance ToJSON GeolayerdataGeoBoundary where
-        toJSON GeolayerdataGeoBoundary{..}
-          = object
-              (catMaybes
-                 [("latitude" .=) <$> _ggbLatitude,
-                  ("longitude" .=) <$> _ggbLongitude])
-
---
--- /See:/ 'geolayerdataGeo' smart constructor.
-data GeolayerdataGeo = GeolayerdataGeo
-    { _ggMapType     :: !(Maybe Text)
-    , _ggCachePolicy :: !(Maybe Text)
-    , _ggViewport    :: !(Maybe GeolayerdataGeoViewport)
-    , _ggBoundary    :: !(Maybe [[GeolayerdataGeoBoundary]])
-    , _ggLatitude    :: !(Maybe Double)
-    , _ggZoom        :: !(Maybe Int32)
-    , _ggCountryCode :: !(Maybe Text)
-    , _ggLongitude   :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GeolayerdataGeo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ggMapType'
---
--- * 'ggCachePolicy'
---
--- * 'ggViewport'
---
--- * 'ggBoundary'
---
--- * 'ggLatitude'
---
--- * 'ggZoom'
---
--- * 'ggCountryCode'
---
--- * 'ggLongitude'
-geolayerdataGeo
-    :: GeolayerdataGeo
-geolayerdataGeo =
-    GeolayerdataGeo
-    { _ggMapType = Nothing
-    , _ggCachePolicy = Nothing
-    , _ggViewport = Nothing
-    , _ggBoundary = Nothing
-    , _ggLatitude = Nothing
-    , _ggZoom = Nothing
-    , _ggCountryCode = Nothing
-    , _ggLongitude = Nothing
-    }
-
--- | The type of map that should be used for this location. EX: HYBRID,
--- ROADMAP, SATELLITE, TERRAIN
-ggMapType :: Lens' GeolayerdataGeo (Maybe Text)
-ggMapType
-  = lens _ggMapType (\ s a -> s{_ggMapType = a})
-
--- | The cache policy active for this data. EX: UNRESTRICTED, RESTRICTED,
--- NEVER
-ggCachePolicy :: Lens' GeolayerdataGeo (Maybe Text)
-ggCachePolicy
-  = lens _ggCachePolicy
-      (\ s a -> s{_ggCachePolicy = a})
-
--- | The viewport for showing this location. This is a latitude, longitude
--- rectangle.
-ggViewport :: Lens' GeolayerdataGeo (Maybe GeolayerdataGeoViewport)
-ggViewport
-  = lens _ggViewport (\ s a -> s{_ggViewport = a})
-
--- | The boundary of the location as a set of loops containing pairs of
--- latitude, longitude coordinates.
-ggBoundary :: Lens' GeolayerdataGeo [[GeolayerdataGeoBoundary]]
-ggBoundary
-  = lens _ggBoundary (\ s a -> s{_ggBoundary = a}) .
-      _Default
-      . _Coerce
-
--- | The latitude of the location.
-ggLatitude :: Lens' GeolayerdataGeo (Maybe Double)
-ggLatitude
-  = lens _ggLatitude (\ s a -> s{_ggLatitude = a})
-
--- | The Zoom level to use for the map. Zoom levels between 0 (the lowest
--- zoom level, in which the entire world can be seen on one map) to 21+
--- (down to individual buildings). See:
--- https:\/\/developers.google.com\/maps\/documentation\/staticmaps\/#Zoomlevels
-ggZoom :: Lens' GeolayerdataGeo (Maybe Int32)
-ggZoom = lens _ggZoom (\ s a -> s{_ggZoom = a})
-
--- | The country code of the location.
-ggCountryCode :: Lens' GeolayerdataGeo (Maybe Text)
-ggCountryCode
-  = lens _ggCountryCode
-      (\ s a -> s{_ggCountryCode = a})
-
--- | The longitude of the location.
-ggLongitude :: Lens' GeolayerdataGeo (Maybe Double)
-ggLongitude
-  = lens _ggLongitude (\ s a -> s{_ggLongitude = a})
-
-instance FromJSON GeolayerdataGeo where
-        parseJSON
-          = withObject "GeolayerdataGeo"
-              (\ o ->
-                 GeolayerdataGeo <$>
-                   (o .:? "mapType") <*> (o .:? "cachePolicy") <*>
-                     (o .:? "viewport")
-                     <*> (o .:? "boundary" .!= mempty)
-                     <*> (o .:? "latitude")
-                     <*> (o .:? "zoom")
-                     <*> (o .:? "countryCode")
-                     <*> (o .:? "longitude"))
-
-instance ToJSON GeolayerdataGeo where
-        toJSON GeolayerdataGeo{..}
-          = object
-              (catMaybes
-                 [("mapType" .=) <$> _ggMapType,
-                  ("cachePolicy" .=) <$> _ggCachePolicy,
-                  ("viewport" .=) <$> _ggViewport,
-                  ("boundary" .=) <$> _ggBoundary,
-                  ("latitude" .=) <$> _ggLatitude,
-                  ("zoom" .=) <$> _ggZoom,
-                  ("countryCode" .=) <$> _ggCountryCode,
-                  ("longitude" .=) <$> _ggLongitude])
-
---
--- /See:/ 'categoryItems' smart constructor.
-data CategoryItems = CategoryItems
-    { _ciName       :: !(Maybe Text)
-    , _ciCategoryId :: !(Maybe Text)
-    , _ciBadgeURL   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CategoryItems' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ciName'
---
--- * 'ciCategoryId'
---
--- * 'ciBadgeURL'
-categoryItems
-    :: CategoryItems
-categoryItems =
-    CategoryItems
-    { _ciName = Nothing
-    , _ciCategoryId = Nothing
-    , _ciBadgeURL = Nothing
-    }
-
-ciName :: Lens' CategoryItems (Maybe Text)
-ciName = lens _ciName (\ s a -> s{_ciName = a})
-
-ciCategoryId :: Lens' CategoryItems (Maybe Text)
-ciCategoryId
-  = lens _ciCategoryId (\ s a -> s{_ciCategoryId = a})
-
-ciBadgeURL :: Lens' CategoryItems (Maybe Text)
-ciBadgeURL
-  = lens _ciBadgeURL (\ s a -> s{_ciBadgeURL = a})
-
-instance FromJSON CategoryItems where
-        parseJSON
-          = withObject "CategoryItems"
-              (\ o ->
-                 CategoryItems <$>
-                   (o .:? "name") <*> (o .:? "categoryId") <*>
-                     (o .:? "badgeUrl"))
-
-instance ToJSON CategoryItems where
-        toJSON CategoryItems{..}
-          = object
-              (catMaybes
-                 [("name" .=) <$> _ciName,
-                  ("categoryId" .=) <$> _ciCategoryId,
-                  ("badgeUrl" .=) <$> _ciBadgeURL])
-
---
--- /See:/ 'dictlayerdataDictWordsSensesDefinitionsExamples' smart constructor.
-data DictlayerdataDictWordsSensesDefinitionsExamples = DictlayerdataDictWordsSensesDefinitionsExamples
-    { _ddwsdeText   :: !(Maybe Text)
-    , _ddwsdeSource :: !(Maybe DictlayerdataDictWordsSensesDefinitionsExamplesSource)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DictlayerdataDictWordsSensesDefinitionsExamples' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ddwsdeText'
---
--- * 'ddwsdeSource'
-dictlayerdataDictWordsSensesDefinitionsExamples
-    :: DictlayerdataDictWordsSensesDefinitionsExamples
-dictlayerdataDictWordsSensesDefinitionsExamples =
-    DictlayerdataDictWordsSensesDefinitionsExamples
-    { _ddwsdeText = Nothing
-    , _ddwsdeSource = Nothing
-    }
-
-ddwsdeText :: Lens' DictlayerdataDictWordsSensesDefinitionsExamples (Maybe Text)
-ddwsdeText
-  = lens _ddwsdeText (\ s a -> s{_ddwsdeText = a})
-
-ddwsdeSource :: Lens' DictlayerdataDictWordsSensesDefinitionsExamples (Maybe DictlayerdataDictWordsSensesDefinitionsExamplesSource)
-ddwsdeSource
-  = lens _ddwsdeSource (\ s a -> s{_ddwsdeSource = a})
-
-instance FromJSON
-         DictlayerdataDictWordsSensesDefinitionsExamples where
-        parseJSON
-          = withObject
-              "DictlayerdataDictWordsSensesDefinitionsExamples"
-              (\ o ->
-                 DictlayerdataDictWordsSensesDefinitionsExamples <$>
-                   (o .:? "text") <*> (o .:? "source"))
-
-instance ToJSON
-         DictlayerdataDictWordsSensesDefinitionsExamples where
-        toJSON
-          DictlayerdataDictWordsSensesDefinitionsExamples{..}
-          = object
-              (catMaybes
-                 [("text" .=) <$> _ddwsdeText,
-                  ("source" .=) <$> _ddwsdeSource])
-
---
--- /See:/ 'dictlayerdataDictWords' smart constructor.
-data DictlayerdataDictWords = DictlayerdataDictWords
-    { _ddwSenses      :: !(Maybe [DictlayerdataDictWordsSenses])
-    , _ddwSource      :: !(Maybe DictlayerdataDictWordsSource)
-    , _ddwDerivatives :: !(Maybe [DictlayerdataDictWordsDerivatives])
-    , _ddwExamples    :: !(Maybe [DictlayerdataDictWordsExamples])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DictlayerdataDictWords' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ddwSenses'
---
--- * 'ddwSource'
---
--- * 'ddwDerivatives'
---
--- * 'ddwExamples'
-dictlayerdataDictWords
-    :: DictlayerdataDictWords
-dictlayerdataDictWords =
-    DictlayerdataDictWords
-    { _ddwSenses = Nothing
-    , _ddwSource = Nothing
-    , _ddwDerivatives = Nothing
-    , _ddwExamples = Nothing
-    }
-
-ddwSenses :: Lens' DictlayerdataDictWords [DictlayerdataDictWordsSenses]
-ddwSenses
-  = lens _ddwSenses (\ s a -> s{_ddwSenses = a}) .
+wiSenses :: Lens' WordsItem [SensesItem]
+wiSenses
+  = lens _wiSenses (\ s a -> s{_wiSenses = a}) .
       _Default
       . _Coerce
 
 -- | The words with different meanings but not related words, e.g. \"go\"
 -- (game) and \"go\" (verb).
-ddwSource :: Lens' DictlayerdataDictWords (Maybe DictlayerdataDictWordsSource)
-ddwSource
-  = lens _ddwSource (\ s a -> s{_ddwSource = a})
+wiSource :: Lens' WordsItem (Maybe WordsItemSource)
+wiSource = lens _wiSource (\ s a -> s{_wiSource = a})
 
-ddwDerivatives :: Lens' DictlayerdataDictWords [DictlayerdataDictWordsDerivatives]
-ddwDerivatives
-  = lens _ddwDerivatives
-      (\ s a -> s{_ddwDerivatives = a})
+wiDerivatives :: Lens' WordsItem [DerivativesItem]
+wiDerivatives
+  = lens _wiDerivatives
+      (\ s a -> s{_wiDerivatives = a})
       . _Default
       . _Coerce
 
-ddwExamples :: Lens' DictlayerdataDictWords [DictlayerdataDictWordsExamples]
-ddwExamples
-  = lens _ddwExamples (\ s a -> s{_ddwExamples = a}) .
+wiExamples :: Lens' WordsItem [WordsItemExamplesItem]
+wiExamples
+  = lens _wiExamples (\ s a -> s{_wiExamples = a}) .
       _Default
       . _Coerce
 
-instance FromJSON DictlayerdataDictWords where
+instance FromJSON WordsItem where
         parseJSON
-          = withObject "DictlayerdataDictWords"
+          = withObject "WordsItem"
               (\ o ->
-                 DictlayerdataDictWords <$>
+                 WordsItem <$>
                    (o .:? "senses" .!= mempty) <*> (o .:? "source") <*>
                      (o .:? "derivatives" .!= mempty)
                      <*> (o .:? "examples" .!= mempty))
 
-instance ToJSON DictlayerdataDictWords where
-        toJSON DictlayerdataDictWords{..}
+instance ToJSON WordsItem where
+        toJSON WordsItem{..}
           = object
               (catMaybes
-                 [("senses" .=) <$> _ddwSenses,
-                  ("source" .=) <$> _ddwSource,
-                  ("derivatives" .=) <$> _ddwDerivatives,
-                  ("examples" .=) <$> _ddwExamples])
+                 [("senses" .=) <$> _wiSenses,
+                  ("source" .=) <$> _wiSource,
+                  ("derivatives" .=) <$> _wiDerivatives,
+                  ("examples" .=) <$> _wiExamples])
+
+--
+-- /See:/ 'categoryItemsItem' smart constructor.
+data CategoryItemsItem = CategoryItemsItem
+    { _ciiName       :: !(Maybe Text)
+    , _ciiCategoryId :: !(Maybe Text)
+    , _ciiBadgeURL   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CategoryItemsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ciiName'
+--
+-- * 'ciiCategoryId'
+--
+-- * 'ciiBadgeURL'
+categoryItemsItem
+    :: CategoryItemsItem
+categoryItemsItem =
+    CategoryItemsItem
+    { _ciiName = Nothing
+    , _ciiCategoryId = Nothing
+    , _ciiBadgeURL = Nothing
+    }
+
+ciiName :: Lens' CategoryItemsItem (Maybe Text)
+ciiName = lens _ciiName (\ s a -> s{_ciiName = a})
+
+ciiCategoryId :: Lens' CategoryItemsItem (Maybe Text)
+ciiCategoryId
+  = lens _ciiCategoryId
+      (\ s a -> s{_ciiCategoryId = a})
+
+ciiBadgeURL :: Lens' CategoryItemsItem (Maybe Text)
+ciiBadgeURL
+  = lens _ciiBadgeURL (\ s a -> s{_ciiBadgeURL = a})
+
+instance FromJSON CategoryItemsItem where
+        parseJSON
+          = withObject "CategoryItemsItem"
+              (\ o ->
+                 CategoryItemsItem <$>
+                   (o .:? "name") <*> (o .:? "categoryId") <*>
+                     (o .:? "badgeUrl"))
+
+instance ToJSON CategoryItemsItem where
+        toJSON CategoryItemsItem{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _ciiName,
+                  ("categoryId" .=) <$> _ciiCategoryId,
+                  ("badgeUrl" .=) <$> _ciiBadgeURL])
+
+--
+-- /See:/ 'offersItemsItemItemsItem' smart constructor.
+data OffersItemsItemItemsItem = OffersItemsItemItemsItem
+    { _oiiiiCanonicalVolumeLink :: !(Maybe Text)
+    , _oiiiiCoverURL            :: !(Maybe Text)
+    , _oiiiiVolumeId            :: !(Maybe Text)
+    , _oiiiiAuthor              :: !(Maybe Text)
+    , _oiiiiTitle               :: !(Maybe Text)
+    , _oiiiiDescription         :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OffersItemsItemItemsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oiiiiCanonicalVolumeLink'
+--
+-- * 'oiiiiCoverURL'
+--
+-- * 'oiiiiVolumeId'
+--
+-- * 'oiiiiAuthor'
+--
+-- * 'oiiiiTitle'
+--
+-- * 'oiiiiDescription'
+offersItemsItemItemsItem
+    :: OffersItemsItemItemsItem
+offersItemsItemItemsItem =
+    OffersItemsItemItemsItem
+    { _oiiiiCanonicalVolumeLink = Nothing
+    , _oiiiiCoverURL = Nothing
+    , _oiiiiVolumeId = Nothing
+    , _oiiiiAuthor = Nothing
+    , _oiiiiTitle = Nothing
+    , _oiiiiDescription = Nothing
+    }
+
+oiiiiCanonicalVolumeLink :: Lens' OffersItemsItemItemsItem (Maybe Text)
+oiiiiCanonicalVolumeLink
+  = lens _oiiiiCanonicalVolumeLink
+      (\ s a -> s{_oiiiiCanonicalVolumeLink = a})
+
+oiiiiCoverURL :: Lens' OffersItemsItemItemsItem (Maybe Text)
+oiiiiCoverURL
+  = lens _oiiiiCoverURL
+      (\ s a -> s{_oiiiiCoverURL = a})
+
+oiiiiVolumeId :: Lens' OffersItemsItemItemsItem (Maybe Text)
+oiiiiVolumeId
+  = lens _oiiiiVolumeId
+      (\ s a -> s{_oiiiiVolumeId = a})
+
+oiiiiAuthor :: Lens' OffersItemsItemItemsItem (Maybe Text)
+oiiiiAuthor
+  = lens _oiiiiAuthor (\ s a -> s{_oiiiiAuthor = a})
+
+oiiiiTitle :: Lens' OffersItemsItemItemsItem (Maybe Text)
+oiiiiTitle
+  = lens _oiiiiTitle (\ s a -> s{_oiiiiTitle = a})
+
+oiiiiDescription :: Lens' OffersItemsItemItemsItem (Maybe Text)
+oiiiiDescription
+  = lens _oiiiiDescription
+      (\ s a -> s{_oiiiiDescription = a})
+
+instance FromJSON OffersItemsItemItemsItem where
+        parseJSON
+          = withObject "OffersItemsItemItemsItem"
+              (\ o ->
+                 OffersItemsItemItemsItem <$>
+                   (o .:? "canonicalVolumeLink") <*> (o .:? "coverUrl")
+                     <*> (o .:? "volumeId")
+                     <*> (o .:? "author")
+                     <*> (o .:? "title")
+                     <*> (o .:? "description"))
+
+instance ToJSON OffersItemsItemItemsItem where
+        toJSON OffersItemsItemItemsItem{..}
+          = object
+              (catMaybes
+                 [("canonicalVolumeLink" .=) <$>
+                    _oiiiiCanonicalVolumeLink,
+                  ("coverUrl" .=) <$> _oiiiiCoverURL,
+                  ("volumeId" .=) <$> _oiiiiVolumeId,
+                  ("author" .=) <$> _oiiiiAuthor,
+                  ("title" .=) <$> _oiiiiTitle,
+                  ("description" .=) <$> _oiiiiDescription])
+
+-- | The rental duration (for rental offers only).
+--
+-- /See:/ 'rentalDuration' smart constructor.
+data RentalDuration = RentalDuration
+    { _rdCount :: !(Maybe Double)
+    , _rdUnit  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RentalDuration' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdCount'
+--
+-- * 'rdUnit'
+rentalDuration
+    :: RentalDuration
+rentalDuration =
+    RentalDuration
+    { _rdCount = Nothing
+    , _rdUnit = Nothing
+    }
+
+rdCount :: Lens' RentalDuration (Maybe Double)
+rdCount = lens _rdCount (\ s a -> s{_rdCount = a})
+
+rdUnit :: Lens' RentalDuration (Maybe Text)
+rdUnit = lens _rdUnit (\ s a -> s{_rdUnit = a})
+
+instance FromJSON RentalDuration where
+        parseJSON
+          = withObject "RentalDuration"
+              (\ o ->
+                 RentalDuration <$>
+                   (o .:? "count") <*> (o .:? "unit"))
+
+instance ToJSON RentalDuration where
+        toJSON RentalDuration{..}
+          = object
+              (catMaybes
+                 [("count" .=) <$> _rdCount, ("unit" .=) <$> _rdUnit])
 
 --
 -- /See:/ 'geolayerdata' smart constructor.
 data Geolayerdata = Geolayerdata
     { _gKind   :: !Text
-    , _gGeo    :: !(Maybe GeolayerdataGeo)
-    , _gCommon :: !(Maybe GeolayerdataCommon)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _gGeo    :: !(Maybe Geo)
+    , _gCommon :: !(Maybe Common)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Geolayerdata' with the minimum fields required to make a request.
 --
@@ -3148,10 +3004,10 @@ geolayerdata =
 gKind :: Lens' Geolayerdata Text
 gKind = lens _gKind (\ s a -> s{_gKind = a})
 
-gGeo :: Lens' Geolayerdata (Maybe GeolayerdataGeo)
+gGeo :: Lens' Geolayerdata (Maybe Geo)
 gGeo = lens _gGeo (\ s a -> s{_gGeo = a})
 
-gCommon :: Lens' Geolayerdata (Maybe GeolayerdataCommon)
+gCommon :: Lens' Geolayerdata (Maybe Common)
 gCommon = lens _gCommon (\ s a -> s{_gCommon = a})
 
 instance FromJSON Geolayerdata where
@@ -3171,58 +3027,12 @@ instance ToJSON Geolayerdata where
                   ("common" .=) <$> _gCommon])
 
 --
--- /See:/ 'dictlayerdataDictWordsSensesSynonyms' smart constructor.
-data DictlayerdataDictWordsSensesSynonyms = DictlayerdataDictWordsSensesSynonyms
-    { _ddwssText   :: !(Maybe Text)
-    , _ddwssSource :: !(Maybe DictlayerdataDictWordsSensesSynonymsSource)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DictlayerdataDictWordsSensesSynonyms' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ddwssText'
---
--- * 'ddwssSource'
-dictlayerdataDictWordsSensesSynonyms
-    :: DictlayerdataDictWordsSensesSynonyms
-dictlayerdataDictWordsSensesSynonyms =
-    DictlayerdataDictWordsSensesSynonyms
-    { _ddwssText = Nothing
-    , _ddwssSource = Nothing
-    }
-
-ddwssText :: Lens' DictlayerdataDictWordsSensesSynonyms (Maybe Text)
-ddwssText
-  = lens _ddwssText (\ s a -> s{_ddwssText = a})
-
-ddwssSource :: Lens' DictlayerdataDictWordsSensesSynonyms (Maybe DictlayerdataDictWordsSensesSynonymsSource)
-ddwssSource
-  = lens _ddwssSource (\ s a -> s{_ddwssSource = a})
-
-instance FromJSON
-         DictlayerdataDictWordsSensesSynonyms where
-        parseJSON
-          = withObject "DictlayerdataDictWordsSensesSynonyms"
-              (\ o ->
-                 DictlayerdataDictWordsSensesSynonyms <$>
-                   (o .:? "text") <*> (o .:? "source"))
-
-instance ToJSON DictlayerdataDictWordsSensesSynonyms
-         where
-        toJSON DictlayerdataDictWordsSensesSynonyms{..}
-          = object
-              (catMaybes
-                 [("text" .=) <$> _ddwssText,
-                  ("source" .=) <$> _ddwssSource])
-
---
 -- /See:/ 'dictlayerdata' smart constructor.
 data Dictlayerdata = Dictlayerdata
     { _dKind   :: !Text
-    , _dDict   :: !(Maybe DictlayerdataDict)
+    , _dDict   :: !(Maybe Dict)
     , _dCommon :: !(Maybe DictlayerdataCommon)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Dictlayerdata' with the minimum fields required to make a request.
 --
@@ -3245,7 +3055,7 @@ dictlayerdata =
 dKind :: Lens' Dictlayerdata Text
 dKind = lens _dKind (\ s a -> s{_dKind = a})
 
-dDict :: Lens' Dictlayerdata (Maybe DictlayerdataDict)
+dDict :: Lens' Dictlayerdata (Maybe Dict)
 dDict = lens _dDict (\ s a -> s{_dDict = a})
 
 dCommon :: Lens' Dictlayerdata (Maybe DictlayerdataCommon)
@@ -3268,106 +3078,94 @@ instance ToJSON Dictlayerdata where
                   ("common" .=) <$> _dCommon])
 
 --
--- /See:/ 'dictlayerdataDictWordsSensesSynonymsSource' smart constructor.
-data DictlayerdataDictWordsSensesSynonymsSource = DictlayerdataDictWordsSensesSynonymsSource
-    { _ddwsssURL         :: !(Maybe Text)
-    , _ddwsssAttribution :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'conjugationsItem' smart constructor.
+data ConjugationsItem = ConjugationsItem
+    { _ciValue :: !(Maybe Text)
+    , _ciType  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsSensesSynonymsSource' with the minimum fields required to make a request.
+-- | Creates a value of 'ConjugationsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwsssURL'
+-- * 'ciValue'
 --
--- * 'ddwsssAttribution'
-dictlayerdataDictWordsSensesSynonymsSource
-    :: DictlayerdataDictWordsSensesSynonymsSource
-dictlayerdataDictWordsSensesSynonymsSource =
-    DictlayerdataDictWordsSensesSynonymsSource
-    { _ddwsssURL = Nothing
-    , _ddwsssAttribution = Nothing
+-- * 'ciType'
+conjugationsItem
+    :: ConjugationsItem
+conjugationsItem =
+    ConjugationsItem
+    { _ciValue = Nothing
+    , _ciType = Nothing
     }
 
-ddwsssURL :: Lens' DictlayerdataDictWordsSensesSynonymsSource (Maybe Text)
-ddwsssURL
-  = lens _ddwsssURL (\ s a -> s{_ddwsssURL = a})
+ciValue :: Lens' ConjugationsItem (Maybe Text)
+ciValue = lens _ciValue (\ s a -> s{_ciValue = a})
 
-ddwsssAttribution :: Lens' DictlayerdataDictWordsSensesSynonymsSource (Maybe Text)
-ddwsssAttribution
-  = lens _ddwsssAttribution
-      (\ s a -> s{_ddwsssAttribution = a})
+ciType :: Lens' ConjugationsItem (Maybe Text)
+ciType = lens _ciType (\ s a -> s{_ciType = a})
 
-instance FromJSON
-         DictlayerdataDictWordsSensesSynonymsSource where
+instance FromJSON ConjugationsItem where
         parseJSON
-          = withObject
-              "DictlayerdataDictWordsSensesSynonymsSource"
+          = withObject "ConjugationsItem"
               (\ o ->
-                 DictlayerdataDictWordsSensesSynonymsSource <$>
-                   (o .:? "url") <*> (o .:? "attribution"))
+                 ConjugationsItem <$>
+                   (o .:? "value") <*> (o .:? "type"))
 
-instance ToJSON
-         DictlayerdataDictWordsSensesSynonymsSource where
-        toJSON DictlayerdataDictWordsSensesSynonymsSource{..}
+instance ToJSON ConjugationsItem where
+        toJSON ConjugationsItem{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _ddwsssURL,
-                  ("attribution" .=) <$> _ddwsssAttribution])
+                 [("value" .=) <$> _ciValue, ("type" .=) <$> _ciType])
 
--- | Offer retail (=discounted) price in Micros
 --
--- /See:/ 'volumeSaleInfoOffersRetailPrice' smart constructor.
-data VolumeSaleInfoOffersRetailPrice = VolumeSaleInfoOffersRetailPrice
-    { _vsiorpCurrencyCode   :: !(Maybe Text)
-    , _vsiorpAmountInMicros :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'hi' smart constructor.
+data Hi = Hi
+    { _hLatitude  :: !(Maybe Double)
+    , _hLongitude :: !(Maybe Double)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VolumeSaleInfoOffersRetailPrice' with the minimum fields required to make a request.
+-- | Creates a value of 'Hi' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vsiorpCurrencyCode'
+-- * 'hLatitude'
 --
--- * 'vsiorpAmountInMicros'
-volumeSaleInfoOffersRetailPrice
-    :: VolumeSaleInfoOffersRetailPrice
-volumeSaleInfoOffersRetailPrice =
-    VolumeSaleInfoOffersRetailPrice
-    { _vsiorpCurrencyCode = Nothing
-    , _vsiorpAmountInMicros = Nothing
+-- * 'hLongitude'
+hi
+    :: Hi
+hi =
+    Hi
+    { _hLatitude = Nothing
+    , _hLongitude = Nothing
     }
 
-vsiorpCurrencyCode :: Lens' VolumeSaleInfoOffersRetailPrice (Maybe Text)
-vsiorpCurrencyCode
-  = lens _vsiorpCurrencyCode
-      (\ s a -> s{_vsiorpCurrencyCode = a})
+hLatitude :: Lens' Hi (Maybe Double)
+hLatitude
+  = lens _hLatitude (\ s a -> s{_hLatitude = a})
 
-vsiorpAmountInMicros :: Lens' VolumeSaleInfoOffersRetailPrice (Maybe Double)
-vsiorpAmountInMicros
-  = lens _vsiorpAmountInMicros
-      (\ s a -> s{_vsiorpAmountInMicros = a})
+hLongitude :: Lens' Hi (Maybe Double)
+hLongitude
+  = lens _hLongitude (\ s a -> s{_hLongitude = a})
 
-instance FromJSON VolumeSaleInfoOffersRetailPrice
-         where
+instance FromJSON Hi where
         parseJSON
-          = withObject "VolumeSaleInfoOffersRetailPrice"
+          = withObject "Hi"
               (\ o ->
-                 VolumeSaleInfoOffersRetailPrice <$>
-                   (o .:? "currencyCode") <*> (o .:? "amountInMicros"))
+                 Hi <$> (o .:? "latitude") <*> (o .:? "longitude"))
 
-instance ToJSON VolumeSaleInfoOffersRetailPrice where
-        toJSON VolumeSaleInfoOffersRetailPrice{..}
+instance ToJSON Hi where
+        toJSON Hi{..}
           = object
               (catMaybes
-                 [("currencyCode" .=) <$> _vsiorpCurrencyCode,
-                  ("amountInMicros" .=) <$> _vsiorpAmountInMicros])
+                 [("latitude" .=) <$> _hLatitude,
+                  ("longitude" .=) <$> _hLongitude])
 
 --
 -- /See:/ 'dictlayerdataCommon' smart constructor.
 newtype DictlayerdataCommon = DictlayerdataCommon
     { _dcTitle :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DictlayerdataCommon' with the minimum fields required to make a request.
 --
@@ -3395,50 +3193,52 @@ instance ToJSON DictlayerdataCommon where
         toJSON DictlayerdataCommon{..}
           = object (catMaybes [("title" .=) <$> _dcTitle])
 
+-- | Offer retail (=discounted) price in Micros
 --
--- /See:/ 'geolayerdataGeoViewportLo' smart constructor.
-data GeolayerdataGeoViewportLo = GeolayerdataGeoViewportLo
-    { _ggvlLatitude  :: !(Maybe Double)
-    , _ggvlLongitude :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'offersItemRetailPrice' smart constructor.
+data OffersItemRetailPrice = OffersItemRetailPrice
+    { _oirpCurrencyCode   :: !(Maybe Text)
+    , _oirpAmountInMicros :: !(Maybe Double)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GeolayerdataGeoViewportLo' with the minimum fields required to make a request.
+-- | Creates a value of 'OffersItemRetailPrice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ggvlLatitude'
+-- * 'oirpCurrencyCode'
 --
--- * 'ggvlLongitude'
-geolayerdataGeoViewportLo
-    :: GeolayerdataGeoViewportLo
-geolayerdataGeoViewportLo =
-    GeolayerdataGeoViewportLo
-    { _ggvlLatitude = Nothing
-    , _ggvlLongitude = Nothing
+-- * 'oirpAmountInMicros'
+offersItemRetailPrice
+    :: OffersItemRetailPrice
+offersItemRetailPrice =
+    OffersItemRetailPrice
+    { _oirpCurrencyCode = Nothing
+    , _oirpAmountInMicros = Nothing
     }
 
-ggvlLatitude :: Lens' GeolayerdataGeoViewportLo (Maybe Double)
-ggvlLatitude
-  = lens _ggvlLatitude (\ s a -> s{_ggvlLatitude = a})
+oirpCurrencyCode :: Lens' OffersItemRetailPrice (Maybe Text)
+oirpCurrencyCode
+  = lens _oirpCurrencyCode
+      (\ s a -> s{_oirpCurrencyCode = a})
 
-ggvlLongitude :: Lens' GeolayerdataGeoViewportLo (Maybe Double)
-ggvlLongitude
-  = lens _ggvlLongitude
-      (\ s a -> s{_ggvlLongitude = a})
+oirpAmountInMicros :: Lens' OffersItemRetailPrice (Maybe Double)
+oirpAmountInMicros
+  = lens _oirpAmountInMicros
+      (\ s a -> s{_oirpAmountInMicros = a})
 
-instance FromJSON GeolayerdataGeoViewportLo where
+instance FromJSON OffersItemRetailPrice where
         parseJSON
-          = withObject "GeolayerdataGeoViewportLo"
+          = withObject "OffersItemRetailPrice"
               (\ o ->
-                 GeolayerdataGeoViewportLo <$>
-                   (o .:? "latitude") <*> (o .:? "longitude"))
+                 OffersItemRetailPrice <$>
+                   (o .:? "currencyCode") <*> (o .:? "amountInMicros"))
 
-instance ToJSON GeolayerdataGeoViewportLo where
-        toJSON GeolayerdataGeoViewportLo{..}
+instance ToJSON OffersItemRetailPrice where
+        toJSON OffersItemRetailPrice{..}
           = object
               (catMaybes
-                 [("latitude" .=) <$> _ggvlLatitude,
-                  ("longitude" .=) <$> _ggvlLongitude])
+                 [("currencyCode" .=) <$> _oirpCurrencyCode,
+                  ("amountInMicros" .=) <$> _oirpAmountInMicros])
 
 --
 -- /See:/ 'downloadAccessRestriction' smart constructor.
@@ -3455,7 +3255,7 @@ data DownloadAccessRestriction = DownloadAccessRestriction
     , _darDeviceAllowed      :: !(Maybe Bool)
     , _darMessage            :: !(Maybe Text)
     , _darNonce              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DownloadAccessRestriction' with the minimum fields required to make a request.
 --
@@ -3607,55 +3407,226 @@ instance ToJSON DownloadAccessRestriction where
                   ("message" .=) <$> _darMessage,
                   ("nonce" .=) <$> _darNonce])
 
--- | The actual selling price of the book. This is the same as the suggested
--- retail or list price unless there are offers or discounts on this
--- volume. (In LITE projection.)
+-- | Suggested retail price. (In LITE projection.)
 --
--- /See:/ 'volumeSaleInfoRetailPrice' smart constructor.
-data VolumeSaleInfoRetailPrice = VolumeSaleInfoRetailPrice
-    { _vsirpAmount       :: !(Maybe Double)
-    , _vsirpCurrencyCode :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'listPrice' smart constructor.
+data ListPrice = ListPrice
+    { _lpAmount       :: !(Maybe Double)
+    , _lpCurrencyCode :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VolumeSaleInfoRetailPrice' with the minimum fields required to make a request.
+-- | Creates a value of 'ListPrice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vsirpAmount'
+-- * 'lpAmount'
 --
--- * 'vsirpCurrencyCode'
-volumeSaleInfoRetailPrice
-    :: VolumeSaleInfoRetailPrice
-volumeSaleInfoRetailPrice =
-    VolumeSaleInfoRetailPrice
-    { _vsirpAmount = Nothing
-    , _vsirpCurrencyCode = Nothing
+-- * 'lpCurrencyCode'
+listPrice
+    :: ListPrice
+listPrice =
+    ListPrice
+    { _lpAmount = Nothing
+    , _lpCurrencyCode = Nothing
     }
 
 -- | Amount in the currency listed below. (In LITE projection.)
-vsirpAmount :: Lens' VolumeSaleInfoRetailPrice (Maybe Double)
-vsirpAmount
-  = lens _vsirpAmount (\ s a -> s{_vsirpAmount = a})
+lpAmount :: Lens' ListPrice (Maybe Double)
+lpAmount = lens _lpAmount (\ s a -> s{_lpAmount = a})
 
 -- | An ISO 4217, three-letter currency code. (In LITE projection.)
-vsirpCurrencyCode :: Lens' VolumeSaleInfoRetailPrice (Maybe Text)
-vsirpCurrencyCode
-  = lens _vsirpCurrencyCode
-      (\ s a -> s{_vsirpCurrencyCode = a})
+lpCurrencyCode :: Lens' ListPrice (Maybe Text)
+lpCurrencyCode
+  = lens _lpCurrencyCode
+      (\ s a -> s{_lpCurrencyCode = a})
 
-instance FromJSON VolumeSaleInfoRetailPrice where
+instance FromJSON ListPrice where
         parseJSON
-          = withObject "VolumeSaleInfoRetailPrice"
+          = withObject "ListPrice"
               (\ o ->
-                 VolumeSaleInfoRetailPrice <$>
+                 ListPrice <$>
                    (o .:? "amount") <*> (o .:? "currencyCode"))
 
-instance ToJSON VolumeSaleInfoRetailPrice where
-        toJSON VolumeSaleInfoRetailPrice{..}
+instance ToJSON ListPrice where
+        toJSON ListPrice{..}
           = object
               (catMaybes
-                 [("amount" .=) <$> _vsirpAmount,
-                  ("currencyCode" .=) <$> _vsirpCurrencyCode])
+                 [("amount" .=) <$> _lpAmount,
+                  ("currencyCode" .=) <$> _lpCurrencyCode])
+
+--
+-- /See:/ 'industryIdentifiersItem' smart constructor.
+data IndustryIdentifiersItem = IndustryIdentifiersItem
+    { _iiiIdentifier :: !(Maybe Text)
+    , _iiiType       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'IndustryIdentifiersItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iiiIdentifier'
+--
+-- * 'iiiType'
+industryIdentifiersItem
+    :: IndustryIdentifiersItem
+industryIdentifiersItem =
+    IndustryIdentifiersItem
+    { _iiiIdentifier = Nothing
+    , _iiiType = Nothing
+    }
+
+-- | Industry specific volume identifier.
+iiiIdentifier :: Lens' IndustryIdentifiersItem (Maybe Text)
+iiiIdentifier
+  = lens _iiiIdentifier
+      (\ s a -> s{_iiiIdentifier = a})
+
+-- | Identifier type. Possible values are ISBN_10, ISBN_13, ISSN and OTHER.
+iiiType :: Lens' IndustryIdentifiersItem (Maybe Text)
+iiiType = lens _iiiType (\ s a -> s{_iiiType = a})
+
+instance FromJSON IndustryIdentifiersItem where
+        parseJSON
+          = withObject "IndustryIdentifiersItem"
+              (\ o ->
+                 IndustryIdentifiersItem <$>
+                   (o .:? "identifier") <*> (o .:? "type"))
+
+instance ToJSON IndustryIdentifiersItem where
+        toJSON IndustryIdentifiersItem{..}
+          = object
+              (catMaybes
+                 [("identifier" .=) <$> _iiiIdentifier,
+                  ("type" .=) <$> _iiiType])
+
+-- | User settings in sub-objects, each for different purposes.
+--
+-- /See:/ 'notesExport' smart constructor.
+data NotesExport = NotesExport
+    { _neFolderName :: !(Maybe Text)
+    , _neIsEnabled  :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'NotesExport' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'neFolderName'
+--
+-- * 'neIsEnabled'
+notesExport
+    :: NotesExport
+notesExport =
+    NotesExport
+    { _neFolderName = Nothing
+    , _neIsEnabled = Nothing
+    }
+
+neFolderName :: Lens' NotesExport (Maybe Text)
+neFolderName
+  = lens _neFolderName (\ s a -> s{_neFolderName = a})
+
+neIsEnabled :: Lens' NotesExport (Maybe Bool)
+neIsEnabled
+  = lens _neIsEnabled (\ s a -> s{_neIsEnabled = a})
+
+instance FromJSON NotesExport where
+        parseJSON
+          = withObject "NotesExport"
+              (\ o ->
+                 NotesExport <$>
+                   (o .:? "folderName") <*> (o .:? "isEnabled"))
+
+instance ToJSON NotesExport where
+        toJSON NotesExport{..}
+          = object
+              (catMaybes
+                 [("folderName" .=) <$> _neFolderName,
+                  ("isEnabled" .=) <$> _neIsEnabled])
+
+-- | Selection ranges for the most recent content version.
+--
+-- /See:/ 'currentVersionRanges' smart constructor.
+data CurrentVersionRanges = CurrentVersionRanges
+    { _cGbImageRange   :: !(Maybe BooksAnnotationsRange)
+    , _cContentVersion :: !(Maybe Text)
+    , _cImageCfiRange  :: !(Maybe BooksAnnotationsRange)
+    , _cGbTextRange    :: !(Maybe BooksAnnotationsRange)
+    , _cCfiRange       :: !(Maybe BooksAnnotationsRange)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CurrentVersionRanges' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cGbImageRange'
+--
+-- * 'cContentVersion'
+--
+-- * 'cImageCfiRange'
+--
+-- * 'cGbTextRange'
+--
+-- * 'cCfiRange'
+currentVersionRanges
+    :: CurrentVersionRanges
+currentVersionRanges =
+    CurrentVersionRanges
+    { _cGbImageRange = Nothing
+    , _cContentVersion = Nothing
+    , _cImageCfiRange = Nothing
+    , _cGbTextRange = Nothing
+    , _cCfiRange = Nothing
+    }
+
+-- | Range in GB image format for this annotation for version above.
+cGbImageRange :: Lens' CurrentVersionRanges (Maybe BooksAnnotationsRange)
+cGbImageRange
+  = lens _cGbImageRange
+      (\ s a -> s{_cGbImageRange = a})
+
+-- | Content version applicable to ranges below.
+cContentVersion :: Lens' CurrentVersionRanges (Maybe Text)
+cContentVersion
+  = lens _cContentVersion
+      (\ s a -> s{_cContentVersion = a})
+
+-- | Range in image CFI format for this annotation for version above.
+cImageCfiRange :: Lens' CurrentVersionRanges (Maybe BooksAnnotationsRange)
+cImageCfiRange
+  = lens _cImageCfiRange
+      (\ s a -> s{_cImageCfiRange = a})
+
+-- | Range in GB text format for this annotation for version above.
+cGbTextRange :: Lens' CurrentVersionRanges (Maybe BooksAnnotationsRange)
+cGbTextRange
+  = lens _cGbTextRange (\ s a -> s{_cGbTextRange = a})
+
+-- | Range in CFI format for this annotation for version above.
+cCfiRange :: Lens' CurrentVersionRanges (Maybe BooksAnnotationsRange)
+cCfiRange
+  = lens _cCfiRange (\ s a -> s{_cCfiRange = a})
+
+instance FromJSON CurrentVersionRanges where
+        parseJSON
+          = withObject "CurrentVersionRanges"
+              (\ o ->
+                 CurrentVersionRanges <$>
+                   (o .:? "gbImageRange") <*> (o .:? "contentVersion")
+                     <*> (o .:? "imageCfiRange")
+                     <*> (o .:? "gbTextRange")
+                     <*> (o .:? "cfiRange"))
+
+instance ToJSON CurrentVersionRanges where
+        toJSON CurrentVersionRanges{..}
+          = object
+              (catMaybes
+                 [("gbImageRange" .=) <$> _cGbImageRange,
+                  ("contentVersion" .=) <$> _cContentVersion,
+                  ("imageCfiRange" .=) <$> _cImageCfiRange,
+                  ("gbTextRange" .=) <$> _cGbTextRange,
+                  ("cfiRange" .=) <$> _cCfiRange])
 
 --
 -- /See:/ 'review' smart constructor.
@@ -3670,7 +3641,7 @@ data Review = Review
     , _rFullTextURL :: !(Maybe Text)
     , _rTitle       :: !(Maybe Text)
     , _rType        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Review' with the minimum fields required to make a request.
 --
@@ -3790,7 +3761,7 @@ data Volume2 = Volume2
     { _voloNextPageToken :: !(Maybe Text)
     , _voloKind          :: !Text
     , _voloItems         :: !(Maybe [Volume])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Volume2' with the minimum fields required to make a request.
 --
@@ -3843,267 +3814,372 @@ instance ToJSON Volume2 where
                   Just ("kind" .= _voloKind),
                   ("items" .=) <$> _voloItems])
 
--- | Suggested retail price. (In LITE projection.)
+-- | The actual selling price of the book. This is the same as the suggested
+-- retail or list price unless there are offers or discounts on this
+-- volume. (In LITE projection.)
 --
--- /See:/ 'volumeSaleInfoListPrice' smart constructor.
-data VolumeSaleInfoListPrice = VolumeSaleInfoListPrice
-    { _vsilpAmount       :: !(Maybe Double)
-    , _vsilpCurrencyCode :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'retailPrice' smart constructor.
+data RetailPrice = RetailPrice
+    { _rpAmount       :: !(Maybe Double)
+    , _rpCurrencyCode :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VolumeSaleInfoListPrice' with the minimum fields required to make a request.
+-- | Creates a value of 'RetailPrice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vsilpAmount'
+-- * 'rpAmount'
 --
--- * 'vsilpCurrencyCode'
-volumeSaleInfoListPrice
-    :: VolumeSaleInfoListPrice
-volumeSaleInfoListPrice =
-    VolumeSaleInfoListPrice
-    { _vsilpAmount = Nothing
-    , _vsilpCurrencyCode = Nothing
+-- * 'rpCurrencyCode'
+retailPrice
+    :: RetailPrice
+retailPrice =
+    RetailPrice
+    { _rpAmount = Nothing
+    , _rpCurrencyCode = Nothing
     }
 
 -- | Amount in the currency listed below. (In LITE projection.)
-vsilpAmount :: Lens' VolumeSaleInfoListPrice (Maybe Double)
-vsilpAmount
-  = lens _vsilpAmount (\ s a -> s{_vsilpAmount = a})
+rpAmount :: Lens' RetailPrice (Maybe Double)
+rpAmount = lens _rpAmount (\ s a -> s{_rpAmount = a})
 
 -- | An ISO 4217, three-letter currency code. (In LITE projection.)
-vsilpCurrencyCode :: Lens' VolumeSaleInfoListPrice (Maybe Text)
-vsilpCurrencyCode
-  = lens _vsilpCurrencyCode
-      (\ s a -> s{_vsilpCurrencyCode = a})
+rpCurrencyCode :: Lens' RetailPrice (Maybe Text)
+rpCurrencyCode
+  = lens _rpCurrencyCode
+      (\ s a -> s{_rpCurrencyCode = a})
 
-instance FromJSON VolumeSaleInfoListPrice where
+instance FromJSON RetailPrice where
         parseJSON
-          = withObject "VolumeSaleInfoListPrice"
+          = withObject "RetailPrice"
               (\ o ->
-                 VolumeSaleInfoListPrice <$>
+                 RetailPrice <$>
                    (o .:? "amount") <*> (o .:? "currencyCode"))
 
-instance ToJSON VolumeSaleInfoListPrice where
-        toJSON VolumeSaleInfoListPrice{..}
+instance ToJSON RetailPrice where
+        toJSON RetailPrice{..}
           = object
               (catMaybes
-                 [("amount" .=) <$> _vsilpAmount,
-                  ("currencyCode" .=) <$> _vsilpCurrencyCode])
+                 [("amount" .=) <$> _rpAmount,
+                  ("currencyCode" .=) <$> _rpCurrencyCode])
 
--- | Period during this book is\/was a valid rental.
+-- | Information about epub content. (In LITE projection.)
 --
--- /See:/ 'volumeUserInfoRentalPeriod' smart constructor.
-data VolumeUserInfoRentalPeriod = VolumeUserInfoRentalPeriod
-    { _vuirpEndUtcSec   :: !(Maybe Int64)
-    , _vuirpStartUtcSec :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'epub' smart constructor.
+data Epub = Epub
+    { _eAcsTokenLink :: !(Maybe Text)
+    , _eIsAvailable  :: !(Maybe Bool)
+    , _eDownloadLink :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VolumeUserInfoRentalPeriod' with the minimum fields required to make a request.
+-- | Creates a value of 'Epub' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vuirpEndUtcSec'
+-- * 'eAcsTokenLink'
 --
--- * 'vuirpStartUtcSec'
-volumeUserInfoRentalPeriod
-    :: VolumeUserInfoRentalPeriod
-volumeUserInfoRentalPeriod =
-    VolumeUserInfoRentalPeriod
-    { _vuirpEndUtcSec = Nothing
-    , _vuirpStartUtcSec = Nothing
+-- * 'eIsAvailable'
+--
+-- * 'eDownloadLink'
+epub
+    :: Epub
+epub =
+    Epub
+    { _eAcsTokenLink = Nothing
+    , _eIsAvailable = Nothing
+    , _eDownloadLink = Nothing
     }
 
-vuirpEndUtcSec :: Lens' VolumeUserInfoRentalPeriod (Maybe Int64)
-vuirpEndUtcSec
-  = lens _vuirpEndUtcSec
-      (\ s a -> s{_vuirpEndUtcSec = a})
+-- | URL to retrieve ACS token for epub download. (In LITE projection.)
+eAcsTokenLink :: Lens' Epub (Maybe Text)
+eAcsTokenLink
+  = lens _eAcsTokenLink
+      (\ s a -> s{_eAcsTokenLink = a})
 
-vuirpStartUtcSec :: Lens' VolumeUserInfoRentalPeriod (Maybe Int64)
-vuirpStartUtcSec
-  = lens _vuirpStartUtcSec
-      (\ s a -> s{_vuirpStartUtcSec = a})
+-- | Is a flowing text epub available either as public domain or for
+-- purchase. (In LITE projection.)
+eIsAvailable :: Lens' Epub (Maybe Bool)
+eIsAvailable
+  = lens _eIsAvailable (\ s a -> s{_eIsAvailable = a})
 
-instance FromJSON VolumeUserInfoRentalPeriod where
+-- | URL to download epub. (In LITE projection.)
+eDownloadLink :: Lens' Epub (Maybe Text)
+eDownloadLink
+  = lens _eDownloadLink
+      (\ s a -> s{_eDownloadLink = a})
+
+instance FromJSON Epub where
         parseJSON
-          = withObject "VolumeUserInfoRentalPeriod"
+          = withObject "Epub"
               (\ o ->
-                 VolumeUserInfoRentalPeriod <$>
-                   (o .:? "endUtcSec") <*> (o .:? "startUtcSec"))
+                 Epub <$>
+                   (o .:? "acsTokenLink") <*> (o .:? "isAvailable") <*>
+                     (o .:? "downloadLink"))
 
-instance ToJSON VolumeUserInfoRentalPeriod where
-        toJSON VolumeUserInfoRentalPeriod{..}
+instance ToJSON Epub where
+        toJSON Epub{..}
           = object
               (catMaybes
-                 [("endUtcSec" .=) <$> _vuirpEndUtcSec,
-                  ("startUtcSec" .=) <$> _vuirpStartUtcSec])
+                 [("acsTokenLink" .=) <$> _eAcsTokenLink,
+                  ("isAvailable" .=) <$> _eIsAvailable,
+                  ("downloadLink" .=) <$> _eDownloadLink])
+
+--
+-- /See:/ 'dict' smart constructor.
+data Dict = Dict
+    { _dSource :: !(Maybe DictSource)
+    , _dWords  :: !(Maybe [WordsItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Dict' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dSource'
+--
+-- * 'dWords'
+dict
+    :: Dict
+dict =
+    Dict
+    { _dSource = Nothing
+    , _dWords = Nothing
+    }
+
+-- | The source, url and attribution for this dictionary data.
+dSource :: Lens' Dict (Maybe DictSource)
+dSource = lens _dSource (\ s a -> s{_dSource = a})
+
+dWords :: Lens' Dict [WordsItem]
+dWords
+  = lens _dWords (\ s a -> s{_dWords = a}) . _Default .
+      _Coerce
+
+instance FromJSON Dict where
+        parseJSON
+          = withObject "Dict"
+              (\ o ->
+                 Dict <$>
+                   (o .:? "source") <*> (o .:? "words" .!= mempty))
+
+instance ToJSON Dict where
+        toJSON Dict{..}
+          = object
+              (catMaybes
+                 [("source" .=) <$> _dSource,
+                  ("words" .=) <$> _dWords])
+
+-- | Information about pdf content. (In LITE projection.)
+--
+-- /See:/ 'pdf' smart constructor.
+data Pdf = Pdf
+    { _pAcsTokenLink :: !(Maybe Text)
+    , _pIsAvailable  :: !(Maybe Bool)
+    , _pDownloadLink :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Pdf' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pAcsTokenLink'
+--
+-- * 'pIsAvailable'
+--
+-- * 'pDownloadLink'
+pdf
+    :: Pdf
+pdf =
+    Pdf
+    { _pAcsTokenLink = Nothing
+    , _pIsAvailable = Nothing
+    , _pDownloadLink = Nothing
+    }
+
+-- | URL to retrieve ACS token for pdf download. (In LITE projection.)
+pAcsTokenLink :: Lens' Pdf (Maybe Text)
+pAcsTokenLink
+  = lens _pAcsTokenLink
+      (\ s a -> s{_pAcsTokenLink = a})
+
+-- | Is a scanned image pdf available either as public domain or for
+-- purchase. (In LITE projection.)
+pIsAvailable :: Lens' Pdf (Maybe Bool)
+pIsAvailable
+  = lens _pIsAvailable (\ s a -> s{_pIsAvailable = a})
+
+-- | URL to download pdf. (In LITE projection.)
+pDownloadLink :: Lens' Pdf (Maybe Text)
+pDownloadLink
+  = lens _pDownloadLink
+      (\ s a -> s{_pDownloadLink = a})
+
+instance FromJSON Pdf where
+        parseJSON
+          = withObject "Pdf"
+              (\ o ->
+                 Pdf <$>
+                   (o .:? "acsTokenLink") <*> (o .:? "isAvailable") <*>
+                     (o .:? "downloadLink"))
+
+instance ToJSON Pdf where
+        toJSON Pdf{..}
+          = object
+              (catMaybes
+                 [("acsTokenLink" .=) <$> _pAcsTokenLink,
+                  ("isAvailable" .=) <$> _pIsAvailable,
+                  ("downloadLink" .=) <$> _pDownloadLink])
+
+--
+-- /See:/ 'synonymsItemSource' smart constructor.
+data SynonymsItemSource = SynonymsItemSource
+    { _sURL         :: !(Maybe Text)
+    , _sAttribution :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SynonymsItemSource' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sURL'
+--
+-- * 'sAttribution'
+synonymsItemSource
+    :: SynonymsItemSource
+synonymsItemSource =
+    SynonymsItemSource
+    { _sURL = Nothing
+    , _sAttribution = Nothing
+    }
+
+sURL :: Lens' SynonymsItemSource (Maybe Text)
+sURL = lens _sURL (\ s a -> s{_sURL = a})
+
+sAttribution :: Lens' SynonymsItemSource (Maybe Text)
+sAttribution
+  = lens _sAttribution (\ s a -> s{_sAttribution = a})
+
+instance FromJSON SynonymsItemSource where
+        parseJSON
+          = withObject "SynonymsItemSource"
+              (\ o ->
+                 SynonymsItemSource <$>
+                   (o .:? "url") <*> (o .:? "attribution"))
+
+instance ToJSON SynonymsItemSource where
+        toJSON SynonymsItemSource{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _sURL,
+                  ("attribution" .=) <$> _sAttribution])
+
+-- | The content ranges to identify the selected text.
+--
+-- /See:/ 'contentRanges' smart constructor.
+data ContentRanges = ContentRanges
+    { _crGbImageRange   :: !(Maybe BooksAnnotationsRange)
+    , _crContentVersion :: !(Maybe Text)
+    , _crGbTextRange    :: !(Maybe BooksAnnotationsRange)
+    , _crCfiRange       :: !(Maybe BooksAnnotationsRange)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ContentRanges' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'crGbImageRange'
+--
+-- * 'crContentVersion'
+--
+-- * 'crGbTextRange'
+--
+-- * 'crCfiRange'
+contentRanges
+    :: ContentRanges
+contentRanges =
+    ContentRanges
+    { _crGbImageRange = Nothing
+    , _crContentVersion = Nothing
+    , _crGbTextRange = Nothing
+    , _crCfiRange = Nothing
+    }
+
+-- | Range in GB image format for this annotation for version above.
+crGbImageRange :: Lens' ContentRanges (Maybe BooksAnnotationsRange)
+crGbImageRange
+  = lens _crGbImageRange
+      (\ s a -> s{_crGbImageRange = a})
+
+-- | Content version applicable to ranges below.
+crContentVersion :: Lens' ContentRanges (Maybe Text)
+crContentVersion
+  = lens _crContentVersion
+      (\ s a -> s{_crContentVersion = a})
+
+-- | Range in GB text format for this annotation for version above.
+crGbTextRange :: Lens' ContentRanges (Maybe BooksAnnotationsRange)
+crGbTextRange
+  = lens _crGbTextRange
+      (\ s a -> s{_crGbTextRange = a})
+
+-- | Range in CFI format for this annotation for version above.
+crCfiRange :: Lens' ContentRanges (Maybe BooksAnnotationsRange)
+crCfiRange
+  = lens _crCfiRange (\ s a -> s{_crCfiRange = a})
+
+instance FromJSON ContentRanges where
+        parseJSON
+          = withObject "ContentRanges"
+              (\ o ->
+                 ContentRanges <$>
+                   (o .:? "gbImageRange") <*> (o .:? "contentVersion")
+                     <*> (o .:? "gbTextRange")
+                     <*> (o .:? "cfiRange"))
+
+instance ToJSON ContentRanges where
+        toJSON ContentRanges{..}
+          = object
+              (catMaybes
+                 [("gbImageRange" .=) <$> _crGbImageRange,
+                  ("contentVersion" .=) <$> _crContentVersion,
+                  ("gbTextRange" .=) <$> _crGbTextRange,
+                  ("cfiRange" .=) <$> _crCfiRange])
 
 -- | What layers exist in this volume and high level information about them.
 --
--- /See:/ 'volumeLayerInfo' smart constructor.
-newtype VolumeLayerInfo = VolumeLayerInfo
-    { _vliLayers :: Maybe [VolumeLayerInfoLayers]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'layerInfo' smart constructor.
+newtype LayerInfo = LayerInfo
+    { _liLayers :: Maybe [LayerInfoLayersItem]
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VolumeLayerInfo' with the minimum fields required to make a request.
+-- | Creates a value of 'LayerInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vliLayers'
-volumeLayerInfo
-    :: VolumeLayerInfo
-volumeLayerInfo =
-    VolumeLayerInfo
-    { _vliLayers = Nothing
+-- * 'liLayers'
+layerInfo
+    :: LayerInfo
+layerInfo =
+    LayerInfo
+    { _liLayers = Nothing
     }
 
 -- | A layer should appear here if and only if the layer exists for this
 -- book.
-vliLayers :: Lens' VolumeLayerInfo [VolumeLayerInfoLayers]
-vliLayers
-  = lens _vliLayers (\ s a -> s{_vliLayers = a}) .
+liLayers :: Lens' LayerInfo [LayerInfoLayersItem]
+liLayers
+  = lens _liLayers (\ s a -> s{_liLayers = a}) .
       _Default
       . _Coerce
 
-instance FromJSON VolumeLayerInfo where
+instance FromJSON LayerInfo where
         parseJSON
-          = withObject "VolumeLayerInfo"
-              (\ o ->
-                 VolumeLayerInfo <$> (o .:? "layers" .!= mempty))
+          = withObject "LayerInfo"
+              (\ o -> LayerInfo <$> (o .:? "layers" .!= mempty))
 
-instance ToJSON VolumeLayerInfo where
-        toJSON VolumeLayerInfo{..}
-          = object (catMaybes [("layers" .=) <$> _vliLayers])
-
--- | Any information about a volume related to the eBookstore and\/or
--- purchaseability. This information can depend on the country where the
--- request originates from (i.e. books may not be for sale in certain
--- countries).
---
--- /See:/ 'volumeSaleInfo' smart constructor.
-data VolumeSaleInfo = VolumeSaleInfo
-    { _vsiCountry     :: !(Maybe Text)
-    , _vsiOnSaleDate  :: !(Maybe DateTime')
-    , _vsiListPrice   :: !(Maybe VolumeSaleInfoListPrice)
-    , _vsiRetailPrice :: !(Maybe VolumeSaleInfoRetailPrice)
-    , _vsiOffers      :: !(Maybe [VolumeSaleInfoOffers])
-    , _vsiBuyLink     :: !(Maybe Text)
-    , _vsiIsEbook     :: !(Maybe Bool)
-    , _vsiSaleability :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VolumeSaleInfo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vsiCountry'
---
--- * 'vsiOnSaleDate'
---
--- * 'vsiListPrice'
---
--- * 'vsiRetailPrice'
---
--- * 'vsiOffers'
---
--- * 'vsiBuyLink'
---
--- * 'vsiIsEbook'
---
--- * 'vsiSaleability'
-volumeSaleInfo
-    :: VolumeSaleInfo
-volumeSaleInfo =
-    VolumeSaleInfo
-    { _vsiCountry = Nothing
-    , _vsiOnSaleDate = Nothing
-    , _vsiListPrice = Nothing
-    , _vsiRetailPrice = Nothing
-    , _vsiOffers = Nothing
-    , _vsiBuyLink = Nothing
-    , _vsiIsEbook = Nothing
-    , _vsiSaleability = Nothing
-    }
-
--- | The two-letter ISO_3166-1 country code for which this sale information
--- is valid. (In LITE projection.)
-vsiCountry :: Lens' VolumeSaleInfo (Maybe Text)
-vsiCountry
-  = lens _vsiCountry (\ s a -> s{_vsiCountry = a})
-
--- | The date on which this book is available for sale.
-vsiOnSaleDate :: Lens' VolumeSaleInfo (Maybe UTCTime)
-vsiOnSaleDate
-  = lens _vsiOnSaleDate
-      (\ s a -> s{_vsiOnSaleDate = a})
-      . mapping _DateTime
-
--- | Suggested retail price. (In LITE projection.)
-vsiListPrice :: Lens' VolumeSaleInfo (Maybe VolumeSaleInfoListPrice)
-vsiListPrice
-  = lens _vsiListPrice (\ s a -> s{_vsiListPrice = a})
-
--- | The actual selling price of the book. This is the same as the suggested
--- retail or list price unless there are offers or discounts on this
--- volume. (In LITE projection.)
-vsiRetailPrice :: Lens' VolumeSaleInfo (Maybe VolumeSaleInfoRetailPrice)
-vsiRetailPrice
-  = lens _vsiRetailPrice
-      (\ s a -> s{_vsiRetailPrice = a})
-
--- | Offers available for this volume (sales and rentals).
-vsiOffers :: Lens' VolumeSaleInfo [VolumeSaleInfoOffers]
-vsiOffers
-  = lens _vsiOffers (\ s a -> s{_vsiOffers = a}) .
-      _Default
-      . _Coerce
-
--- | URL to purchase this volume on the Google Books site. (In LITE
--- projection)
-vsiBuyLink :: Lens' VolumeSaleInfo (Maybe Text)
-vsiBuyLink
-  = lens _vsiBuyLink (\ s a -> s{_vsiBuyLink = a})
-
--- | Whether or not this volume is an eBook (can be added to the My eBooks
--- shelf).
-vsiIsEbook :: Lens' VolumeSaleInfo (Maybe Bool)
-vsiIsEbook
-  = lens _vsiIsEbook (\ s a -> s{_vsiIsEbook = a})
-
--- | Whether or not this book is available for sale or offered for free in
--- the Google eBookstore for the country listed above. Possible values are
--- FOR_SALE, FOR_RENTAL_ONLY, FOR_SALE_AND_RENTAL, FREE, NOT_FOR_SALE, or
--- FOR_PREORDER.
-vsiSaleability :: Lens' VolumeSaleInfo (Maybe Text)
-vsiSaleability
-  = lens _vsiSaleability
-      (\ s a -> s{_vsiSaleability = a})
-
-instance FromJSON VolumeSaleInfo where
-        parseJSON
-          = withObject "VolumeSaleInfo"
-              (\ o ->
-                 VolumeSaleInfo <$>
-                   (o .:? "country") <*> (o .:? "onSaleDate") <*>
-                     (o .:? "listPrice")
-                     <*> (o .:? "retailPrice")
-                     <*> (o .:? "offers" .!= mempty)
-                     <*> (o .:? "buyLink")
-                     <*> (o .:? "isEbook")
-                     <*> (o .:? "saleability"))
-
-instance ToJSON VolumeSaleInfo where
-        toJSON VolumeSaleInfo{..}
-          = object
-              (catMaybes
-                 [("country" .=) <$> _vsiCountry,
-                  ("onSaleDate" .=) <$> _vsiOnSaleDate,
-                  ("listPrice" .=) <$> _vsiListPrice,
-                  ("retailPrice" .=) <$> _vsiRetailPrice,
-                  ("offers" .=) <$> _vsiOffers,
-                  ("buyLink" .=) <$> _vsiBuyLink,
-                  ("isEbook" .=) <$> _vsiIsEbook,
-                  ("saleability" .=) <$> _vsiSaleability])
+instance ToJSON LayerInfo where
+        toJSON LayerInfo{..}
+          = object (catMaybes [("layers" .=) <$> _liLayers])
 
 --
 -- /See:/ 'requestAccess' smart constructor.
@@ -4111,7 +4187,7 @@ data RequestAccess = RequestAccess
     { _raConcurrentAccess :: !(Maybe ConcurrentAccessRestriction)
     , _raKind             :: !Text
     , _raDownloadAccess   :: !(Maybe DownloadAccessRestriction)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RequestAccess' with the minimum fields required to make a request.
 --
@@ -4164,75 +4240,383 @@ instance ToJSON RequestAccess where
                   Just ("kind" .= _raKind),
                   ("downloadAccess" .=) <$> _raDownloadAccess])
 
+-- | Any information about a volume related to the eBookstore and\/or
+-- purchaseability. This information can depend on the country where the
+-- request originates from (i.e. books may not be for sale in certain
+-- countries).
 --
--- /See:/ 'offersItems' smart constructor.
-data OffersItems = OffersItems
-    { _oiItems        :: !(Maybe [OffersItemsItems])
-    , _oiArtURL       :: !(Maybe Text)
-    , _oiId           :: !(Maybe Text)
-    , _oiGServicesKey :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'saleInfo' smart constructor.
+data SaleInfo = SaleInfo
+    { _siCountry     :: !(Maybe Text)
+    , _siOnSaleDate  :: !(Maybe DateTime')
+    , _siListPrice   :: !(Maybe ListPrice)
+    , _siRetailPrice :: !(Maybe RetailPrice)
+    , _siOffers      :: !(Maybe [OffersItem])
+    , _siBuyLink     :: !(Maybe Text)
+    , _siIsEbook     :: !(Maybe Bool)
+    , _siSaleability :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OffersItems' with the minimum fields required to make a request.
+-- | Creates a value of 'SaleInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oiItems'
+-- * 'siCountry'
 --
--- * 'oiArtURL'
+-- * 'siOnSaleDate'
 --
--- * 'oiId'
+-- * 'siListPrice'
 --
--- * 'oiGServicesKey'
-offersItems
-    :: OffersItems
-offersItems =
-    OffersItems
-    { _oiItems = Nothing
-    , _oiArtURL = Nothing
-    , _oiId = Nothing
-    , _oiGServicesKey = Nothing
+-- * 'siRetailPrice'
+--
+-- * 'siOffers'
+--
+-- * 'siBuyLink'
+--
+-- * 'siIsEbook'
+--
+-- * 'siSaleability'
+saleInfo
+    :: SaleInfo
+saleInfo =
+    SaleInfo
+    { _siCountry = Nothing
+    , _siOnSaleDate = Nothing
+    , _siListPrice = Nothing
+    , _siRetailPrice = Nothing
+    , _siOffers = Nothing
+    , _siBuyLink = Nothing
+    , _siIsEbook = Nothing
+    , _siSaleability = Nothing
     }
 
-oiItems :: Lens' OffersItems [OffersItemsItems]
-oiItems
-  = lens _oiItems (\ s a -> s{_oiItems = a}) . _Default
+-- | The two-letter ISO_3166-1 country code for which this sale information
+-- is valid. (In LITE projection.)
+siCountry :: Lens' SaleInfo (Maybe Text)
+siCountry
+  = lens _siCountry (\ s a -> s{_siCountry = a})
+
+-- | The date on which this book is available for sale.
+siOnSaleDate :: Lens' SaleInfo (Maybe UTCTime)
+siOnSaleDate
+  = lens _siOnSaleDate (\ s a -> s{_siOnSaleDate = a})
+      . mapping _DateTime
+
+-- | Suggested retail price. (In LITE projection.)
+siListPrice :: Lens' SaleInfo (Maybe ListPrice)
+siListPrice
+  = lens _siListPrice (\ s a -> s{_siListPrice = a})
+
+-- | The actual selling price of the book. This is the same as the suggested
+-- retail or list price unless there are offers or discounts on this
+-- volume. (In LITE projection.)
+siRetailPrice :: Lens' SaleInfo (Maybe RetailPrice)
+siRetailPrice
+  = lens _siRetailPrice
+      (\ s a -> s{_siRetailPrice = a})
+
+-- | Offers available for this volume (sales and rentals).
+siOffers :: Lens' SaleInfo [OffersItem]
+siOffers
+  = lens _siOffers (\ s a -> s{_siOffers = a}) .
+      _Default
       . _Coerce
 
-oiArtURL :: Lens' OffersItems (Maybe Text)
-oiArtURL = lens _oiArtURL (\ s a -> s{_oiArtURL = a})
+-- | URL to purchase this volume on the Google Books site. (In LITE
+-- projection)
+siBuyLink :: Lens' SaleInfo (Maybe Text)
+siBuyLink
+  = lens _siBuyLink (\ s a -> s{_siBuyLink = a})
 
-oiId :: Lens' OffersItems (Maybe Text)
-oiId = lens _oiId (\ s a -> s{_oiId = a})
+-- | Whether or not this volume is an eBook (can be added to the My eBooks
+-- shelf).
+siIsEbook :: Lens' SaleInfo (Maybe Bool)
+siIsEbook
+  = lens _siIsEbook (\ s a -> s{_siIsEbook = a})
 
-oiGServicesKey :: Lens' OffersItems (Maybe Text)
-oiGServicesKey
-  = lens _oiGServicesKey
-      (\ s a -> s{_oiGServicesKey = a})
+-- | Whether or not this book is available for sale or offered for free in
+-- the Google eBookstore for the country listed above. Possible values are
+-- FOR_SALE, FOR_RENTAL_ONLY, FOR_SALE_AND_RENTAL, FREE, NOT_FOR_SALE, or
+-- FOR_PREORDER.
+siSaleability :: Lens' SaleInfo (Maybe Text)
+siSaleability
+  = lens _siSaleability
+      (\ s a -> s{_siSaleability = a})
 
-instance FromJSON OffersItems where
+instance FromJSON SaleInfo where
         parseJSON
-          = withObject "OffersItems"
+          = withObject "SaleInfo"
               (\ o ->
-                 OffersItems <$>
-                   (o .:? "items" .!= mempty) <*> (o .:? "artUrl") <*>
-                     (o .:? "id")
-                     <*> (o .:? "gservicesKey"))
+                 SaleInfo <$>
+                   (o .:? "country") <*> (o .:? "onSaleDate") <*>
+                     (o .:? "listPrice")
+                     <*> (o .:? "retailPrice")
+                     <*> (o .:? "offers" .!= mempty)
+                     <*> (o .:? "buyLink")
+                     <*> (o .:? "isEbook")
+                     <*> (o .:? "saleability"))
 
-instance ToJSON OffersItems where
-        toJSON OffersItems{..}
+instance ToJSON SaleInfo where
+        toJSON SaleInfo{..}
           = object
               (catMaybes
-                 [("items" .=) <$> _oiItems,
-                  ("artUrl" .=) <$> _oiArtURL, ("id" .=) <$> _oiId,
-                  ("gservicesKey" .=) <$> _oiGServicesKey])
+                 [("country" .=) <$> _siCountry,
+                  ("onSaleDate" .=) <$> _siOnSaleDate,
+                  ("listPrice" .=) <$> _siListPrice,
+                  ("retailPrice" .=) <$> _siRetailPrice,
+                  ("offers" .=) <$> _siOffers,
+                  ("buyLink" .=) <$> _siBuyLink,
+                  ("isEbook" .=) <$> _siIsEbook,
+                  ("saleability" .=) <$> _siSaleability])
+
+--
+-- /See:/ 'geo' smart constructor.
+data Geo = Geo
+    { _gMapType     :: !(Maybe Text)
+    , _gCachePolicy :: !(Maybe Text)
+    , _gViewport    :: !(Maybe Viewport)
+    , _gBoundary    :: !(Maybe [[BoundaryItemItem]])
+    , _gLatitude    :: !(Maybe Double)
+    , _gZoom        :: !(Maybe Int32)
+    , _gCountryCode :: !(Maybe Text)
+    , _gLongitude   :: !(Maybe Double)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Geo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gMapType'
+--
+-- * 'gCachePolicy'
+--
+-- * 'gViewport'
+--
+-- * 'gBoundary'
+--
+-- * 'gLatitude'
+--
+-- * 'gZoom'
+--
+-- * 'gCountryCode'
+--
+-- * 'gLongitude'
+geo
+    :: Geo
+geo =
+    Geo
+    { _gMapType = Nothing
+    , _gCachePolicy = Nothing
+    , _gViewport = Nothing
+    , _gBoundary = Nothing
+    , _gLatitude = Nothing
+    , _gZoom = Nothing
+    , _gCountryCode = Nothing
+    , _gLongitude = Nothing
+    }
+
+-- | The type of map that should be used for this location. EX: HYBRID,
+-- ROADMAP, SATELLITE, TERRAIN
+gMapType :: Lens' Geo (Maybe Text)
+gMapType = lens _gMapType (\ s a -> s{_gMapType = a})
+
+-- | The cache policy active for this data. EX: UNRESTRICTED, RESTRICTED,
+-- NEVER
+gCachePolicy :: Lens' Geo (Maybe Text)
+gCachePolicy
+  = lens _gCachePolicy (\ s a -> s{_gCachePolicy = a})
+
+-- | The viewport for showing this location. This is a latitude, longitude
+-- rectangle.
+gViewport :: Lens' Geo (Maybe Viewport)
+gViewport
+  = lens _gViewport (\ s a -> s{_gViewport = a})
+
+-- | The boundary of the location as a set of loops containing pairs of
+-- latitude, longitude coordinates.
+gBoundary :: Lens' Geo [[BoundaryItemItem]]
+gBoundary
+  = lens _gBoundary (\ s a -> s{_gBoundary = a}) .
+      _Default
+      . _Coerce
+
+-- | The latitude of the location.
+gLatitude :: Lens' Geo (Maybe Double)
+gLatitude
+  = lens _gLatitude (\ s a -> s{_gLatitude = a})
+
+-- | The Zoom level to use for the map. Zoom levels between 0 (the lowest
+-- zoom level, in which the entire world can be seen on one map) to 21+
+-- (down to individual buildings). See:
+-- https:\/\/developers.google.com\/maps\/documentation\/staticmaps\/#Zoomlevels
+gZoom :: Lens' Geo (Maybe Int32)
+gZoom = lens _gZoom (\ s a -> s{_gZoom = a})
+
+-- | The country code of the location.
+gCountryCode :: Lens' Geo (Maybe Text)
+gCountryCode
+  = lens _gCountryCode (\ s a -> s{_gCountryCode = a})
+
+-- | The longitude of the location.
+gLongitude :: Lens' Geo (Maybe Double)
+gLongitude
+  = lens _gLongitude (\ s a -> s{_gLongitude = a})
+
+instance FromJSON Geo where
+        parseJSON
+          = withObject "Geo"
+              (\ o ->
+                 Geo <$>
+                   (o .:? "mapType") <*> (o .:? "cachePolicy") <*>
+                     (o .:? "viewport")
+                     <*> (o .:? "boundary" .!= mempty)
+                     <*> (o .:? "latitude")
+                     <*> (o .:? "zoom")
+                     <*> (o .:? "countryCode")
+                     <*> (o .:? "longitude"))
+
+instance ToJSON Geo where
+        toJSON Geo{..}
+          = object
+              (catMaybes
+                 [("mapType" .=) <$> _gMapType,
+                  ("cachePolicy" .=) <$> _gCachePolicy,
+                  ("viewport" .=) <$> _gViewport,
+                  ("boundary" .=) <$> _gBoundary,
+                  ("latitude" .=) <$> _gLatitude,
+                  ("zoom" .=) <$> _gZoom,
+                  ("countryCode" .=) <$> _gCountryCode,
+                  ("longitude" .=) <$> _gLongitude])
+
+--
+-- /See:/ 'common' smart constructor.
+data Common = Common
+    { _cSnippet         :: !(Maybe Text)
+    , _cSnippetURL      :: !(Maybe Text)
+    , _cLang            :: !(Maybe Text)
+    , _cTitle           :: !(Maybe Text)
+    , _cPreviewImageURL :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Common' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cSnippet'
+--
+-- * 'cSnippetURL'
+--
+-- * 'cLang'
+--
+-- * 'cTitle'
+--
+-- * 'cPreviewImageURL'
+common
+    :: Common
+common =
+    Common
+    { _cSnippet = Nothing
+    , _cSnippetURL = Nothing
+    , _cLang = Nothing
+    , _cTitle = Nothing
+    , _cPreviewImageURL = Nothing
+    }
+
+-- | The description for this location.
+cSnippet :: Lens' Common (Maybe Text)
+cSnippet = lens _cSnippet (\ s a -> s{_cSnippet = a})
+
+-- | The URL for information for this location. Ex: wikipedia link.
+cSnippetURL :: Lens' Common (Maybe Text)
+cSnippetURL
+  = lens _cSnippetURL (\ s a -> s{_cSnippetURL = a})
+
+-- | The language of the information url and description.
+cLang :: Lens' Common (Maybe Text)
+cLang = lens _cLang (\ s a -> s{_cLang = a})
+
+-- | The display title and localized canonical name to use when searching for
+-- this entity on Google search.
+cTitle :: Lens' Common (Maybe Text)
+cTitle = lens _cTitle (\ s a -> s{_cTitle = a})
+
+-- | The URL for the preview image information.
+cPreviewImageURL :: Lens' Common (Maybe Text)
+cPreviewImageURL
+  = lens _cPreviewImageURL
+      (\ s a -> s{_cPreviewImageURL = a})
+
+instance FromJSON Common where
+        parseJSON
+          = withObject "Common"
+              (\ o ->
+                 Common <$>
+                   (o .:? "snippet") <*> (o .:? "snippetUrl") <*>
+                     (o .:? "lang")
+                     <*> (o .:? "title")
+                     <*> (o .:? "previewImageUrl"))
+
+instance ToJSON Common where
+        toJSON Common{..}
+          = object
+              (catMaybes
+                 [("snippet" .=) <$> _cSnippet,
+                  ("snippetUrl" .=) <$> _cSnippetURL,
+                  ("lang" .=) <$> _cLang, ("title" .=) <$> _cTitle,
+                  ("previewImageUrl" .=) <$> _cPreviewImageURL])
+
+-- | The words with different meanings but not related words, e.g. \"go\"
+-- (game) and \"go\" (verb).
+--
+-- /See:/ 'wordsItemSource' smart constructor.
+data WordsItemSource = WordsItemSource
+    { _wisURL         :: !(Maybe Text)
+    , _wisAttribution :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WordsItemSource' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wisURL'
+--
+-- * 'wisAttribution'
+wordsItemSource
+    :: WordsItemSource
+wordsItemSource =
+    WordsItemSource
+    { _wisURL = Nothing
+    , _wisAttribution = Nothing
+    }
+
+wisURL :: Lens' WordsItemSource (Maybe Text)
+wisURL = lens _wisURL (\ s a -> s{_wisURL = a})
+
+wisAttribution :: Lens' WordsItemSource (Maybe Text)
+wisAttribution
+  = lens _wisAttribution
+      (\ s a -> s{_wisAttribution = a})
+
+instance FromJSON WordsItemSource where
+        parseJSON
+          = withObject "WordsItemSource"
+              (\ o ->
+                 WordsItemSource <$>
+                   (o .:? "url") <*> (o .:? "attribution"))
+
+instance ToJSON WordsItemSource where
+        toJSON WordsItemSource{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _wisURL,
+                  ("attribution" .=) <$> _wisAttribution])
 
 --
 -- /See:/ 'metadata' smart constructor.
 data Metadata = Metadata
     { _mKind  :: !Text
-    , _mItems :: !(Maybe [MetadataItems])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _mItems :: !(Maybe [MetadataItemsItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Metadata' with the minimum fields required to make a request.
 --
@@ -4254,7 +4638,7 @@ mKind :: Lens' Metadata Text
 mKind = lens _mKind (\ s a -> s{_mKind = a})
 
 -- | A list of offline dictionary metadata.
-mItems :: Lens' Metadata [MetadataItems]
+mItems :: Lens' Metadata [MetadataItemsItem]
 mItems
   = lens _mItems (\ s a -> s{_mItems = a}) . _Default .
       _Coerce
@@ -4273,529 +4657,261 @@ instance ToJSON Metadata where
               (catMaybes
                  [Just ("kind" .= _mKind), ("items" .=) <$> _mItems])
 
--- | Physical dimensions of this volume.
+-- | Period during this book is\/was a valid rental.
 --
--- /See:/ 'volumeVolumeInfoDimensions' smart constructor.
-data VolumeVolumeInfoDimensions = VolumeVolumeInfoDimensions
-    { _vvidHeight    :: !(Maybe Text)
-    , _vvidWidth     :: !(Maybe Text)
-    , _vvidThickness :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'rentalPeriod' smart constructor.
+data RentalPeriod = RentalPeriod
+    { _rpEndUtcSec   :: !(Maybe Int64)
+    , _rpStartUtcSec :: !(Maybe Int64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VolumeVolumeInfoDimensions' with the minimum fields required to make a request.
+-- | Creates a value of 'RentalPeriod' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vvidHeight'
+-- * 'rpEndUtcSec'
 --
--- * 'vvidWidth'
---
--- * 'vvidThickness'
-volumeVolumeInfoDimensions
-    :: VolumeVolumeInfoDimensions
-volumeVolumeInfoDimensions =
-    VolumeVolumeInfoDimensions
-    { _vvidHeight = Nothing
-    , _vvidWidth = Nothing
-    , _vvidThickness = Nothing
+-- * 'rpStartUtcSec'
+rentalPeriod
+    :: RentalPeriod
+rentalPeriod =
+    RentalPeriod
+    { _rpEndUtcSec = Nothing
+    , _rpStartUtcSec = Nothing
     }
 
--- | Height or length of this volume (in cm).
-vvidHeight :: Lens' VolumeVolumeInfoDimensions (Maybe Text)
-vvidHeight
-  = lens _vvidHeight (\ s a -> s{_vvidHeight = a})
+rpEndUtcSec :: Lens' RentalPeriod (Maybe Int64)
+rpEndUtcSec
+  = lens _rpEndUtcSec (\ s a -> s{_rpEndUtcSec = a})
 
--- | Width of this volume (in cm).
-vvidWidth :: Lens' VolumeVolumeInfoDimensions (Maybe Text)
-vvidWidth
-  = lens _vvidWidth (\ s a -> s{_vvidWidth = a})
+rpStartUtcSec :: Lens' RentalPeriod (Maybe Int64)
+rpStartUtcSec
+  = lens _rpStartUtcSec
+      (\ s a -> s{_rpStartUtcSec = a})
 
--- | Thickness of this volume (in cm).
-vvidThickness :: Lens' VolumeVolumeInfoDimensions (Maybe Text)
-vvidThickness
-  = lens _vvidThickness
-      (\ s a -> s{_vvidThickness = a})
-
-instance FromJSON VolumeVolumeInfoDimensions where
+instance FromJSON RentalPeriod where
         parseJSON
-          = withObject "VolumeVolumeInfoDimensions"
+          = withObject "RentalPeriod"
               (\ o ->
-                 VolumeVolumeInfoDimensions <$>
-                   (o .:? "height") <*> (o .:? "width") <*>
-                     (o .:? "thickness"))
+                 RentalPeriod <$>
+                   (o .:? "endUtcSec") <*> (o .:? "startUtcSec"))
 
-instance ToJSON VolumeVolumeInfoDimensions where
-        toJSON VolumeVolumeInfoDimensions{..}
+instance ToJSON RentalPeriod where
+        toJSON RentalPeriod{..}
           = object
               (catMaybes
-                 [("height" .=) <$> _vvidHeight,
-                  ("width" .=) <$> _vvidWidth,
-                  ("thickness" .=) <$> _vvidThickness])
+                 [("endUtcSec" .=) <$> _rpEndUtcSec,
+                  ("startUtcSec" .=) <$> _rpStartUtcSec])
 
--- | Selection ranges for the most recent content version.
 --
--- /See:/ 'annotationCurrentVersionRanges' smart constructor.
-data AnnotationCurrentVersionRanges = AnnotationCurrentVersionRanges
-    { _acvrGbImageRange   :: !(Maybe BooksAnnotationsRange)
-    , _acvrContentVersion :: !(Maybe Text)
-    , _acvrImageCfiRange  :: !(Maybe BooksAnnotationsRange)
-    , _acvrGbTextRange    :: !(Maybe BooksAnnotationsRange)
-    , _acvrCfiRange       :: !(Maybe BooksAnnotationsRange)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'layerInfoLayersItem' smart constructor.
+data LayerInfoLayersItem = LayerInfoLayersItem
+    { _liliVolumeAnnotationsVersion :: !(Maybe Text)
+    , _liliLayerId                  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AnnotationCurrentVersionRanges' with the minimum fields required to make a request.
+-- | Creates a value of 'LayerInfoLayersItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acvrGbImageRange'
+-- * 'liliVolumeAnnotationsVersion'
 --
--- * 'acvrContentVersion'
---
--- * 'acvrImageCfiRange'
---
--- * 'acvrGbTextRange'
---
--- * 'acvrCfiRange'
-annotationCurrentVersionRanges
-    :: AnnotationCurrentVersionRanges
-annotationCurrentVersionRanges =
-    AnnotationCurrentVersionRanges
-    { _acvrGbImageRange = Nothing
-    , _acvrContentVersion = Nothing
-    , _acvrImageCfiRange = Nothing
-    , _acvrGbTextRange = Nothing
-    , _acvrCfiRange = Nothing
+-- * 'liliLayerId'
+layerInfoLayersItem
+    :: LayerInfoLayersItem
+layerInfoLayersItem =
+    LayerInfoLayersItem
+    { _liliVolumeAnnotationsVersion = Nothing
+    , _liliLayerId = Nothing
     }
 
--- | Range in GB image format for this annotation for version above.
-acvrGbImageRange :: Lens' AnnotationCurrentVersionRanges (Maybe BooksAnnotationsRange)
-acvrGbImageRange
-  = lens _acvrGbImageRange
-      (\ s a -> s{_acvrGbImageRange = a})
+-- | The current version of this layer\'s volume annotations. Note that this
+-- version applies only to the data in the books.layers.volumeAnnotations.*
+-- responses. The actual annotation data is versioned separately.
+liliVolumeAnnotationsVersion :: Lens' LayerInfoLayersItem (Maybe Text)
+liliVolumeAnnotationsVersion
+  = lens _liliVolumeAnnotationsVersion
+      (\ s a -> s{_liliVolumeAnnotationsVersion = a})
 
--- | Content version applicable to ranges below.
-acvrContentVersion :: Lens' AnnotationCurrentVersionRanges (Maybe Text)
-acvrContentVersion
-  = lens _acvrContentVersion
-      (\ s a -> s{_acvrContentVersion = a})
+-- | The layer id of this layer (e.g. \"geo\").
+liliLayerId :: Lens' LayerInfoLayersItem (Maybe Text)
+liliLayerId
+  = lens _liliLayerId (\ s a -> s{_liliLayerId = a})
 
--- | Range in image CFI format for this annotation for version above.
-acvrImageCfiRange :: Lens' AnnotationCurrentVersionRanges (Maybe BooksAnnotationsRange)
-acvrImageCfiRange
-  = lens _acvrImageCfiRange
-      (\ s a -> s{_acvrImageCfiRange = a})
-
--- | Range in GB text format for this annotation for version above.
-acvrGbTextRange :: Lens' AnnotationCurrentVersionRanges (Maybe BooksAnnotationsRange)
-acvrGbTextRange
-  = lens _acvrGbTextRange
-      (\ s a -> s{_acvrGbTextRange = a})
-
--- | Range in CFI format for this annotation for version above.
-acvrCfiRange :: Lens' AnnotationCurrentVersionRanges (Maybe BooksAnnotationsRange)
-acvrCfiRange
-  = lens _acvrCfiRange (\ s a -> s{_acvrCfiRange = a})
-
-instance FromJSON AnnotationCurrentVersionRanges
-         where
+instance FromJSON LayerInfoLayersItem where
         parseJSON
-          = withObject "AnnotationCurrentVersionRanges"
+          = withObject "LayerInfoLayersItem"
               (\ o ->
-                 AnnotationCurrentVersionRanges <$>
-                   (o .:? "gbImageRange") <*> (o .:? "contentVersion")
-                     <*> (o .:? "imageCfiRange")
-                     <*> (o .:? "gbTextRange")
-                     <*> (o .:? "cfiRange"))
+                 LayerInfoLayersItem <$>
+                   (o .:? "volumeAnnotationsVersion") <*>
+                     (o .:? "layerId"))
 
-instance ToJSON AnnotationCurrentVersionRanges where
-        toJSON AnnotationCurrentVersionRanges{..}
+instance ToJSON LayerInfoLayersItem where
+        toJSON LayerInfoLayersItem{..}
           = object
               (catMaybes
-                 [("gbImageRange" .=) <$> _acvrGbImageRange,
-                  ("contentVersion" .=) <$> _acvrContentVersion,
-                  ("imageCfiRange" .=) <$> _acvrImageCfiRange,
-                  ("gbTextRange" .=) <$> _acvrGbTextRange,
-                  ("cfiRange" .=) <$> _acvrCfiRange])
+                 [("volumeAnnotationsVersion" .=) <$>
+                    _liliVolumeAnnotationsVersion,
+                  ("layerId" .=) <$> _liliLayerId])
 
--- | Information about epub content. (In LITE projection.)
 --
--- /See:/ 'volumeAccessInfoEpub' smart constructor.
-data VolumeAccessInfoEpub = VolumeAccessInfoEpub
-    { _vaieAcsTokenLink :: !(Maybe Text)
-    , _vaieIsAvailable  :: !(Maybe Bool)
-    , _vaieDownloadLink :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'derivativesItemSource' smart constructor.
+data DerivativesItemSource = DerivativesItemSource
+    { _disURL         :: !(Maybe Text)
+    , _disAttribution :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VolumeAccessInfoEpub' with the minimum fields required to make a request.
+-- | Creates a value of 'DerivativesItemSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vaieAcsTokenLink'
+-- * 'disURL'
 --
--- * 'vaieIsAvailable'
---
--- * 'vaieDownloadLink'
-volumeAccessInfoEpub
-    :: VolumeAccessInfoEpub
-volumeAccessInfoEpub =
-    VolumeAccessInfoEpub
-    { _vaieAcsTokenLink = Nothing
-    , _vaieIsAvailable = Nothing
-    , _vaieDownloadLink = Nothing
+-- * 'disAttribution'
+derivativesItemSource
+    :: DerivativesItemSource
+derivativesItemSource =
+    DerivativesItemSource
+    { _disURL = Nothing
+    , _disAttribution = Nothing
     }
 
--- | URL to retrieve ACS token for epub download. (In LITE projection.)
-vaieAcsTokenLink :: Lens' VolumeAccessInfoEpub (Maybe Text)
-vaieAcsTokenLink
-  = lens _vaieAcsTokenLink
-      (\ s a -> s{_vaieAcsTokenLink = a})
+disURL :: Lens' DerivativesItemSource (Maybe Text)
+disURL = lens _disURL (\ s a -> s{_disURL = a})
 
--- | Is a flowing text epub available either as public domain or for
--- purchase. (In LITE projection.)
-vaieIsAvailable :: Lens' VolumeAccessInfoEpub (Maybe Bool)
-vaieIsAvailable
-  = lens _vaieIsAvailable
-      (\ s a -> s{_vaieIsAvailable = a})
+disAttribution :: Lens' DerivativesItemSource (Maybe Text)
+disAttribution
+  = lens _disAttribution
+      (\ s a -> s{_disAttribution = a})
 
--- | URL to download epub. (In LITE projection.)
-vaieDownloadLink :: Lens' VolumeAccessInfoEpub (Maybe Text)
-vaieDownloadLink
-  = lens _vaieDownloadLink
-      (\ s a -> s{_vaieDownloadLink = a})
-
-instance FromJSON VolumeAccessInfoEpub where
+instance FromJSON DerivativesItemSource where
         parseJSON
-          = withObject "VolumeAccessInfoEpub"
+          = withObject "DerivativesItemSource"
               (\ o ->
-                 VolumeAccessInfoEpub <$>
-                   (o .:? "acsTokenLink") <*> (o .:? "isAvailable") <*>
-                     (o .:? "downloadLink"))
-
-instance ToJSON VolumeAccessInfoEpub where
-        toJSON VolumeAccessInfoEpub{..}
-          = object
-              (catMaybes
-                 [("acsTokenLink" .=) <$> _vaieAcsTokenLink,
-                  ("isAvailable" .=) <$> _vaieIsAvailable,
-                  ("downloadLink" .=) <$> _vaieDownloadLink])
-
--- | Information about pdf content. (In LITE projection.)
---
--- /See:/ 'volumeAccessInfoPdf' smart constructor.
-data VolumeAccessInfoPdf = VolumeAccessInfoPdf
-    { _vaipAcsTokenLink :: !(Maybe Text)
-    , _vaipIsAvailable  :: !(Maybe Bool)
-    , _vaipDownloadLink :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VolumeAccessInfoPdf' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vaipAcsTokenLink'
---
--- * 'vaipIsAvailable'
---
--- * 'vaipDownloadLink'
-volumeAccessInfoPdf
-    :: VolumeAccessInfoPdf
-volumeAccessInfoPdf =
-    VolumeAccessInfoPdf
-    { _vaipAcsTokenLink = Nothing
-    , _vaipIsAvailable = Nothing
-    , _vaipDownloadLink = Nothing
-    }
-
--- | URL to retrieve ACS token for pdf download. (In LITE projection.)
-vaipAcsTokenLink :: Lens' VolumeAccessInfoPdf (Maybe Text)
-vaipAcsTokenLink
-  = lens _vaipAcsTokenLink
-      (\ s a -> s{_vaipAcsTokenLink = a})
-
--- | Is a scanned image pdf available either as public domain or for
--- purchase. (In LITE projection.)
-vaipIsAvailable :: Lens' VolumeAccessInfoPdf (Maybe Bool)
-vaipIsAvailable
-  = lens _vaipIsAvailable
-      (\ s a -> s{_vaipIsAvailable = a})
-
--- | URL to download pdf. (In LITE projection.)
-vaipDownloadLink :: Lens' VolumeAccessInfoPdf (Maybe Text)
-vaipDownloadLink
-  = lens _vaipDownloadLink
-      (\ s a -> s{_vaipDownloadLink = a})
-
-instance FromJSON VolumeAccessInfoPdf where
-        parseJSON
-          = withObject "VolumeAccessInfoPdf"
-              (\ o ->
-                 VolumeAccessInfoPdf <$>
-                   (o .:? "acsTokenLink") <*> (o .:? "isAvailable") <*>
-                     (o .:? "downloadLink"))
-
-instance ToJSON VolumeAccessInfoPdf where
-        toJSON VolumeAccessInfoPdf{..}
-          = object
-              (catMaybes
-                 [("acsTokenLink" .=) <$> _vaipAcsTokenLink,
-                  ("isAvailable" .=) <$> _vaipIsAvailable,
-                  ("downloadLink" .=) <$> _vaipDownloadLink])
-
--- | Selection ranges sent from the client.
---
--- /See:/ 'annotationClientVersionRanges' smart constructor.
-data AnnotationClientVersionRanges = AnnotationClientVersionRanges
-    { _aGbImageRange   :: !(Maybe BooksAnnotationsRange)
-    , _aContentVersion :: !(Maybe Text)
-    , _aImageCfiRange  :: !(Maybe BooksAnnotationsRange)
-    , _aGbTextRange    :: !(Maybe BooksAnnotationsRange)
-    , _aCfiRange       :: !(Maybe BooksAnnotationsRange)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AnnotationClientVersionRanges' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aGbImageRange'
---
--- * 'aContentVersion'
---
--- * 'aImageCfiRange'
---
--- * 'aGbTextRange'
---
--- * 'aCfiRange'
-annotationClientVersionRanges
-    :: AnnotationClientVersionRanges
-annotationClientVersionRanges =
-    AnnotationClientVersionRanges
-    { _aGbImageRange = Nothing
-    , _aContentVersion = Nothing
-    , _aImageCfiRange = Nothing
-    , _aGbTextRange = Nothing
-    , _aCfiRange = Nothing
-    }
-
--- | Range in GB image format for this annotation sent by client.
-aGbImageRange :: Lens' AnnotationClientVersionRanges (Maybe BooksAnnotationsRange)
-aGbImageRange
-  = lens _aGbImageRange
-      (\ s a -> s{_aGbImageRange = a})
-
--- | Content version the client sent in.
-aContentVersion :: Lens' AnnotationClientVersionRanges (Maybe Text)
-aContentVersion
-  = lens _aContentVersion
-      (\ s a -> s{_aContentVersion = a})
-
--- | Range in image CFI format for this annotation sent by client.
-aImageCfiRange :: Lens' AnnotationClientVersionRanges (Maybe BooksAnnotationsRange)
-aImageCfiRange
-  = lens _aImageCfiRange
-      (\ s a -> s{_aImageCfiRange = a})
-
--- | Range in GB text format for this annotation sent by client.
-aGbTextRange :: Lens' AnnotationClientVersionRanges (Maybe BooksAnnotationsRange)
-aGbTextRange
-  = lens _aGbTextRange (\ s a -> s{_aGbTextRange = a})
-
--- | Range in CFI format for this annotation sent by client.
-aCfiRange :: Lens' AnnotationClientVersionRanges (Maybe BooksAnnotationsRange)
-aCfiRange
-  = lens _aCfiRange (\ s a -> s{_aCfiRange = a})
-
-instance FromJSON AnnotationClientVersionRanges where
-        parseJSON
-          = withObject "AnnotationClientVersionRanges"
-              (\ o ->
-                 AnnotationClientVersionRanges <$>
-                   (o .:? "gbImageRange") <*> (o .:? "contentVersion")
-                     <*> (o .:? "imageCfiRange")
-                     <*> (o .:? "gbTextRange")
-                     <*> (o .:? "cfiRange"))
-
-instance ToJSON AnnotationClientVersionRanges where
-        toJSON AnnotationClientVersionRanges{..}
-          = object
-              (catMaybes
-                 [("gbImageRange" .=) <$> _aGbImageRange,
-                  ("contentVersion" .=) <$> _aContentVersion,
-                  ("imageCfiRange" .=) <$> _aImageCfiRange,
-                  ("gbTextRange" .=) <$> _aGbTextRange,
-                  ("cfiRange" .=) <$> _aCfiRange])
-
---
--- /See:/ 'annotationsSummaryLayers' smart constructor.
-data AnnotationsSummaryLayers = AnnotationsSummaryLayers
-    { _aslLimitType               :: !(Maybe Text)
-    , _aslAllowedCharacterCount   :: !(Maybe Int32)
-    , _aslUpdated                 :: !(Maybe DateTime')
-    , _aslLayerId                 :: !(Maybe Text)
-    , _aslRemainingCharacterCount :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AnnotationsSummaryLayers' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aslLimitType'
---
--- * 'aslAllowedCharacterCount'
---
--- * 'aslUpdated'
---
--- * 'aslLayerId'
---
--- * 'aslRemainingCharacterCount'
-annotationsSummaryLayers
-    :: AnnotationsSummaryLayers
-annotationsSummaryLayers =
-    AnnotationsSummaryLayers
-    { _aslLimitType = Nothing
-    , _aslAllowedCharacterCount = Nothing
-    , _aslUpdated = Nothing
-    , _aslLayerId = Nothing
-    , _aslRemainingCharacterCount = Nothing
-    }
-
-aslLimitType :: Lens' AnnotationsSummaryLayers (Maybe Text)
-aslLimitType
-  = lens _aslLimitType (\ s a -> s{_aslLimitType = a})
-
-aslAllowedCharacterCount :: Lens' AnnotationsSummaryLayers (Maybe Int32)
-aslAllowedCharacterCount
-  = lens _aslAllowedCharacterCount
-      (\ s a -> s{_aslAllowedCharacterCount = a})
-
-aslUpdated :: Lens' AnnotationsSummaryLayers (Maybe UTCTime)
-aslUpdated
-  = lens _aslUpdated (\ s a -> s{_aslUpdated = a}) .
-      mapping _DateTime
-
-aslLayerId :: Lens' AnnotationsSummaryLayers (Maybe Text)
-aslLayerId
-  = lens _aslLayerId (\ s a -> s{_aslLayerId = a})
-
-aslRemainingCharacterCount :: Lens' AnnotationsSummaryLayers (Maybe Int32)
-aslRemainingCharacterCount
-  = lens _aslRemainingCharacterCount
-      (\ s a -> s{_aslRemainingCharacterCount = a})
-
-instance FromJSON AnnotationsSummaryLayers where
-        parseJSON
-          = withObject "AnnotationsSummaryLayers"
-              (\ o ->
-                 AnnotationsSummaryLayers <$>
-                   (o .:? "limitType") <*>
-                     (o .:? "allowedCharacterCount")
-                     <*> (o .:? "updated")
-                     <*> (o .:? "layerId")
-                     <*> (o .:? "remainingCharacterCount"))
-
-instance ToJSON AnnotationsSummaryLayers where
-        toJSON AnnotationsSummaryLayers{..}
-          = object
-              (catMaybes
-                 [("limitType" .=) <$> _aslLimitType,
-                  ("allowedCharacterCount" .=) <$>
-                    _aslAllowedCharacterCount,
-                  ("updated" .=) <$> _aslUpdated,
-                  ("layerId" .=) <$> _aslLayerId,
-                  ("remainingCharacterCount" .=) <$>
-                    _aslRemainingCharacterCount])
-
---
--- /See:/ 'dictlayerdataDictWordsExamplesSource' smart constructor.
-data DictlayerdataDictWordsExamplesSource = DictlayerdataDictWordsExamplesSource
-    { _ddwesURL         :: !(Maybe Text)
-    , _ddwesAttribution :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DictlayerdataDictWordsExamplesSource' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ddwesURL'
---
--- * 'ddwesAttribution'
-dictlayerdataDictWordsExamplesSource
-    :: DictlayerdataDictWordsExamplesSource
-dictlayerdataDictWordsExamplesSource =
-    DictlayerdataDictWordsExamplesSource
-    { _ddwesURL = Nothing
-    , _ddwesAttribution = Nothing
-    }
-
-ddwesURL :: Lens' DictlayerdataDictWordsExamplesSource (Maybe Text)
-ddwesURL = lens _ddwesURL (\ s a -> s{_ddwesURL = a})
-
-ddwesAttribution :: Lens' DictlayerdataDictWordsExamplesSource (Maybe Text)
-ddwesAttribution
-  = lens _ddwesAttribution
-      (\ s a -> s{_ddwesAttribution = a})
-
-instance FromJSON
-         DictlayerdataDictWordsExamplesSource where
-        parseJSON
-          = withObject "DictlayerdataDictWordsExamplesSource"
-              (\ o ->
-                 DictlayerdataDictWordsExamplesSource <$>
+                 DerivativesItemSource <$>
                    (o .:? "url") <*> (o .:? "attribution"))
 
-instance ToJSON DictlayerdataDictWordsExamplesSource
-         where
-        toJSON DictlayerdataDictWordsExamplesSource{..}
+instance ToJSON DerivativesItemSource where
+        toJSON DerivativesItemSource{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _ddwesURL,
-                  ("attribution" .=) <$> _ddwesAttribution])
+                 [("url" .=) <$> _disURL,
+                  ("attribution" .=) <$> _disAttribution])
 
--- | The rental duration (for rental offers only).
 --
--- /See:/ 'volumeSaleInfoOffersRentalDuration' smart constructor.
-data VolumeSaleInfoOffersRentalDuration = VolumeSaleInfoOffersRentalDuration
-    { _vsiordCount :: !(Maybe Double)
-    , _vsiordUnit  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'sensesItem' smart constructor.
+data SensesItem = SensesItem
+    { _sPronunciationURL :: !(Maybe Text)
+    , _sConjugations     :: !(Maybe [ConjugationsItem])
+    , _sPronunciation    :: !(Maybe Text)
+    , _sSynonyms         :: !(Maybe [SynonymsItem])
+    , _sSource           :: !(Maybe SensesItemSource)
+    , _sPartOfSpeech     :: !(Maybe Text)
+    , _sDefinitions      :: !(Maybe [DefinitionsItem])
+    , _sSyllabification  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VolumeSaleInfoOffersRentalDuration' with the minimum fields required to make a request.
+-- | Creates a value of 'SensesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vsiordCount'
+-- * 'sPronunciationURL'
 --
--- * 'vsiordUnit'
-volumeSaleInfoOffersRentalDuration
-    :: VolumeSaleInfoOffersRentalDuration
-volumeSaleInfoOffersRentalDuration =
-    VolumeSaleInfoOffersRentalDuration
-    { _vsiordCount = Nothing
-    , _vsiordUnit = Nothing
+-- * 'sConjugations'
+--
+-- * 'sPronunciation'
+--
+-- * 'sSynonyms'
+--
+-- * 'sSource'
+--
+-- * 'sPartOfSpeech'
+--
+-- * 'sDefinitions'
+--
+-- * 'sSyllabification'
+sensesItem
+    :: SensesItem
+sensesItem =
+    SensesItem
+    { _sPronunciationURL = Nothing
+    , _sConjugations = Nothing
+    , _sPronunciation = Nothing
+    , _sSynonyms = Nothing
+    , _sSource = Nothing
+    , _sPartOfSpeech = Nothing
+    , _sDefinitions = Nothing
+    , _sSyllabification = Nothing
     }
 
-vsiordCount :: Lens' VolumeSaleInfoOffersRentalDuration (Maybe Double)
-vsiordCount
-  = lens _vsiordCount (\ s a -> s{_vsiordCount = a})
+sPronunciationURL :: Lens' SensesItem (Maybe Text)
+sPronunciationURL
+  = lens _sPronunciationURL
+      (\ s a -> s{_sPronunciationURL = a})
 
-vsiordUnit :: Lens' VolumeSaleInfoOffersRentalDuration (Maybe Text)
-vsiordUnit
-  = lens _vsiordUnit (\ s a -> s{_vsiordUnit = a})
+sConjugations :: Lens' SensesItem [ConjugationsItem]
+sConjugations
+  = lens _sConjugations
+      (\ s a -> s{_sConjugations = a})
+      . _Default
+      . _Coerce
 
-instance FromJSON VolumeSaleInfoOffersRentalDuration
-         where
+sPronunciation :: Lens' SensesItem (Maybe Text)
+sPronunciation
+  = lens _sPronunciation
+      (\ s a -> s{_sPronunciation = a})
+
+sSynonyms :: Lens' SensesItem [SynonymsItem]
+sSynonyms
+  = lens _sSynonyms (\ s a -> s{_sSynonyms = a}) .
+      _Default
+      . _Coerce
+
+sSource :: Lens' SensesItem (Maybe SensesItemSource)
+sSource = lens _sSource (\ s a -> s{_sSource = a})
+
+sPartOfSpeech :: Lens' SensesItem (Maybe Text)
+sPartOfSpeech
+  = lens _sPartOfSpeech
+      (\ s a -> s{_sPartOfSpeech = a})
+
+sDefinitions :: Lens' SensesItem [DefinitionsItem]
+sDefinitions
+  = lens _sDefinitions (\ s a -> s{_sDefinitions = a})
+      . _Default
+      . _Coerce
+
+sSyllabification :: Lens' SensesItem (Maybe Text)
+sSyllabification
+  = lens _sSyllabification
+      (\ s a -> s{_sSyllabification = a})
+
+instance FromJSON SensesItem where
         parseJSON
-          = withObject "VolumeSaleInfoOffersRentalDuration"
+          = withObject "SensesItem"
               (\ o ->
-                 VolumeSaleInfoOffersRentalDuration <$>
-                   (o .:? "count") <*> (o .:? "unit"))
+                 SensesItem <$>
+                   (o .:? "pronunciationUrl") <*>
+                     (o .:? "conjugations" .!= mempty)
+                     <*> (o .:? "pronunciation")
+                     <*> (o .:? "synonyms" .!= mempty)
+                     <*> (o .:? "source")
+                     <*> (o .:? "partOfSpeech")
+                     <*> (o .:? "definitions" .!= mempty)
+                     <*> (o .:? "syllabification"))
 
-instance ToJSON VolumeSaleInfoOffersRentalDuration
-         where
-        toJSON VolumeSaleInfoOffersRentalDuration{..}
+instance ToJSON SensesItem where
+        toJSON SensesItem{..}
           = object
               (catMaybes
-                 [("count" .=) <$> _vsiordCount,
-                  ("unit" .=) <$> _vsiordUnit])
+                 [("pronunciationUrl" .=) <$> _sPronunciationURL,
+                  ("conjugations" .=) <$> _sConjugations,
+                  ("pronunciation" .=) <$> _sPronunciation,
+                  ("synonyms" .=) <$> _sSynonyms,
+                  ("source" .=) <$> _sSource,
+                  ("partOfSpeech" .=) <$> _sPartOfSpeech,
+                  ("definitions" .=) <$> _sDefinitions,
+                  ("syllabification" .=) <$> _sSyllabification])
 
 --
 -- /See:/ 'readingPosition' smart constructor.
@@ -4807,7 +4923,7 @@ data ReadingPosition = ReadingPosition
     , _rpVolumeId        :: !(Maybe Text)
     , _rpUpdated         :: !(Maybe DateTime')
     , _rpGbTextPosition  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadingPosition' with the minimum fields required to make a request.
 --
@@ -4908,8 +5024,8 @@ instance ToJSON ReadingPosition where
 -- /See:/ 'offers' smart constructor.
 data Offers = Offers
     { _oKind  :: !Text
-    , _oItems :: !(Maybe [OffersItems])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _oItems :: !(Maybe [OffersItemsItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Offers' with the minimum fields required to make a request.
 --
@@ -4931,7 +5047,7 @@ oKind :: Lens' Offers Text
 oKind = lens _oKind (\ s a -> s{_oKind = a})
 
 -- | A list of offers.
-oItems :: Lens' Offers [OffersItems]
+oItems :: Lens' Offers [OffersItemsItem]
 oItems
   = lens _oItems (\ s a -> s{_oItems = a}) . _Default .
       _Coerce
@@ -4956,7 +5072,7 @@ data Volumes = Volumes
     { _v1TotalItems :: !(Maybe Int32)
     , _v1Kind       :: !Text
     , _v1Items      :: !(Maybe [Volume])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Volumes' with the minimum fields required to make a request.
 --
@@ -5008,48 +5124,103 @@ instance ToJSON Volumes where
                  [("totalItems" .=) <$> _v1TotalItems,
                   Just ("kind" .= _v1Kind), ("items" .=) <$> _v1Items])
 
--- | Recommendation related information for this volume.
+-- | Physical dimensions of this volume.
 --
--- /See:/ 'volumeRecommendedInfo' smart constructor.
-newtype VolumeRecommendedInfo = VolumeRecommendedInfo
-    { _vriExplanation :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'dimensions' smart constructor.
+data Dimensions = Dimensions
+    { _dHeight    :: !(Maybe Text)
+    , _dWidth     :: !(Maybe Text)
+    , _dThickness :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VolumeRecommendedInfo' with the minimum fields required to make a request.
+-- | Creates a value of 'Dimensions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vriExplanation'
-volumeRecommendedInfo
-    :: VolumeRecommendedInfo
-volumeRecommendedInfo =
-    VolumeRecommendedInfo
-    { _vriExplanation = Nothing
+-- * 'dHeight'
+--
+-- * 'dWidth'
+--
+-- * 'dThickness'
+dimensions
+    :: Dimensions
+dimensions =
+    Dimensions
+    { _dHeight = Nothing
+    , _dWidth = Nothing
+    , _dThickness = Nothing
+    }
+
+-- | Height or length of this volume (in cm).
+dHeight :: Lens' Dimensions (Maybe Text)
+dHeight = lens _dHeight (\ s a -> s{_dHeight = a})
+
+-- | Width of this volume (in cm).
+dWidth :: Lens' Dimensions (Maybe Text)
+dWidth = lens _dWidth (\ s a -> s{_dWidth = a})
+
+-- | Thickness of this volume (in cm).
+dThickness :: Lens' Dimensions (Maybe Text)
+dThickness
+  = lens _dThickness (\ s a -> s{_dThickness = a})
+
+instance FromJSON Dimensions where
+        parseJSON
+          = withObject "Dimensions"
+              (\ o ->
+                 Dimensions <$>
+                   (o .:? "height") <*> (o .:? "width") <*>
+                     (o .:? "thickness"))
+
+instance ToJSON Dimensions where
+        toJSON Dimensions{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _dHeight,
+                  ("width" .=) <$> _dWidth,
+                  ("thickness" .=) <$> _dThickness])
+
+-- | Recommendation related information for this volume.
+--
+-- /See:/ 'recommendedInfo' smart constructor.
+newtype RecommendedInfo = RecommendedInfo
+    { _riExplanation :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RecommendedInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'riExplanation'
+recommendedInfo
+    :: RecommendedInfo
+recommendedInfo =
+    RecommendedInfo
+    { _riExplanation = Nothing
     }
 
 -- | A text explaining why this volume is recommended.
-vriExplanation :: Lens' VolumeRecommendedInfo (Maybe Text)
-vriExplanation
-  = lens _vriExplanation
-      (\ s a -> s{_vriExplanation = a})
+riExplanation :: Lens' RecommendedInfo (Maybe Text)
+riExplanation
+  = lens _riExplanation
+      (\ s a -> s{_riExplanation = a})
 
-instance FromJSON VolumeRecommendedInfo where
+instance FromJSON RecommendedInfo where
         parseJSON
-          = withObject "VolumeRecommendedInfo"
-              (\ o ->
-                 VolumeRecommendedInfo <$> (o .:? "explanation"))
+          = withObject "RecommendedInfo"
+              (\ o -> RecommendedInfo <$> (o .:? "explanation"))
 
-instance ToJSON VolumeRecommendedInfo where
-        toJSON VolumeRecommendedInfo{..}
+instance ToJSON RecommendedInfo where
+        toJSON RecommendedInfo{..}
           = object
-              (catMaybes [("explanation" .=) <$> _vriExplanation])
+              (catMaybes [("explanation" .=) <$> _riExplanation])
 
 --
 -- /See:/ 'bookshelves' smart constructor.
 data Bookshelves = Bookshelves
     { _booKind  :: !Text
     , _booItems :: !(Maybe [Bookshelf])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Bookshelves' with the minimum fields required to make a request.
 --
@@ -5093,420 +5264,95 @@ instance ToJSON Bookshelves where
                   ("items" .=) <$> _booItems])
 
 --
--- /See:/ 'dictlayerdataDictWordsSenses' smart constructor.
-data DictlayerdataDictWordsSenses = DictlayerdataDictWordsSenses
-    { _ddwsPronunciationURL :: !(Maybe Text)
-    , _ddwsConjugations     :: !(Maybe [DictlayerdataDictWordsSensesConjugations])
-    , _ddwsPronunciation    :: !(Maybe Text)
-    , _ddwsSynonyms         :: !(Maybe [DictlayerdataDictWordsSensesSynonyms])
-    , _ddwsSource           :: !(Maybe DictlayerdataDictWordsSensesSource)
-    , _ddwsPartOfSpeech     :: !(Maybe Text)
-    , _ddwsDefinitions      :: !(Maybe [DictlayerdataDictWordsSensesDefinitions])
-    , _ddwsSyllabification  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'wordsItemExamplesItemSource' smart constructor.
+data WordsItemExamplesItemSource = WordsItemExamplesItemSource
+    { _wieisURL         :: !(Maybe Text)
+    , _wieisAttribution :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsSenses' with the minimum fields required to make a request.
+-- | Creates a value of 'WordsItemExamplesItemSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwsPronunciationURL'
+-- * 'wieisURL'
 --
--- * 'ddwsConjugations'
---
--- * 'ddwsPronunciation'
---
--- * 'ddwsSynonyms'
---
--- * 'ddwsSource'
---
--- * 'ddwsPartOfSpeech'
---
--- * 'ddwsDefinitions'
---
--- * 'ddwsSyllabification'
-dictlayerdataDictWordsSenses
-    :: DictlayerdataDictWordsSenses
-dictlayerdataDictWordsSenses =
-    DictlayerdataDictWordsSenses
-    { _ddwsPronunciationURL = Nothing
-    , _ddwsConjugations = Nothing
-    , _ddwsPronunciation = Nothing
-    , _ddwsSynonyms = Nothing
-    , _ddwsSource = Nothing
-    , _ddwsPartOfSpeech = Nothing
-    , _ddwsDefinitions = Nothing
-    , _ddwsSyllabification = Nothing
+-- * 'wieisAttribution'
+wordsItemExamplesItemSource
+    :: WordsItemExamplesItemSource
+wordsItemExamplesItemSource =
+    WordsItemExamplesItemSource
+    { _wieisURL = Nothing
+    , _wieisAttribution = Nothing
     }
 
-ddwsPronunciationURL :: Lens' DictlayerdataDictWordsSenses (Maybe Text)
-ddwsPronunciationURL
-  = lens _ddwsPronunciationURL
-      (\ s a -> s{_ddwsPronunciationURL = a})
+wieisURL :: Lens' WordsItemExamplesItemSource (Maybe Text)
+wieisURL = lens _wieisURL (\ s a -> s{_wieisURL = a})
 
-ddwsConjugations :: Lens' DictlayerdataDictWordsSenses [DictlayerdataDictWordsSensesConjugations]
-ddwsConjugations
-  = lens _ddwsConjugations
-      (\ s a -> s{_ddwsConjugations = a})
-      . _Default
-      . _Coerce
+wieisAttribution :: Lens' WordsItemExamplesItemSource (Maybe Text)
+wieisAttribution
+  = lens _wieisAttribution
+      (\ s a -> s{_wieisAttribution = a})
 
-ddwsPronunciation :: Lens' DictlayerdataDictWordsSenses (Maybe Text)
-ddwsPronunciation
-  = lens _ddwsPronunciation
-      (\ s a -> s{_ddwsPronunciation = a})
-
-ddwsSynonyms :: Lens' DictlayerdataDictWordsSenses [DictlayerdataDictWordsSensesSynonyms]
-ddwsSynonyms
-  = lens _ddwsSynonyms (\ s a -> s{_ddwsSynonyms = a})
-      . _Default
-      . _Coerce
-
-ddwsSource :: Lens' DictlayerdataDictWordsSenses (Maybe DictlayerdataDictWordsSensesSource)
-ddwsSource
-  = lens _ddwsSource (\ s a -> s{_ddwsSource = a})
-
-ddwsPartOfSpeech :: Lens' DictlayerdataDictWordsSenses (Maybe Text)
-ddwsPartOfSpeech
-  = lens _ddwsPartOfSpeech
-      (\ s a -> s{_ddwsPartOfSpeech = a})
-
-ddwsDefinitions :: Lens' DictlayerdataDictWordsSenses [DictlayerdataDictWordsSensesDefinitions]
-ddwsDefinitions
-  = lens _ddwsDefinitions
-      (\ s a -> s{_ddwsDefinitions = a})
-      . _Default
-      . _Coerce
-
-ddwsSyllabification :: Lens' DictlayerdataDictWordsSenses (Maybe Text)
-ddwsSyllabification
-  = lens _ddwsSyllabification
-      (\ s a -> s{_ddwsSyllabification = a})
-
-instance FromJSON DictlayerdataDictWordsSenses where
+instance FromJSON WordsItemExamplesItemSource where
         parseJSON
-          = withObject "DictlayerdataDictWordsSenses"
+          = withObject "WordsItemExamplesItemSource"
               (\ o ->
-                 DictlayerdataDictWordsSenses <$>
-                   (o .:? "pronunciationUrl") <*>
-                     (o .:? "conjugations" .!= mempty)
-                     <*> (o .:? "pronunciation")
-                     <*> (o .:? "synonyms" .!= mempty)
-                     <*> (o .:? "source")
-                     <*> (o .:? "partOfSpeech")
-                     <*> (o .:? "definitions" .!= mempty)
-                     <*> (o .:? "syllabification"))
-
-instance ToJSON DictlayerdataDictWordsSenses where
-        toJSON DictlayerdataDictWordsSenses{..}
-          = object
-              (catMaybes
-                 [("pronunciationUrl" .=) <$> _ddwsPronunciationURL,
-                  ("conjugations" .=) <$> _ddwsConjugations,
-                  ("pronunciation" .=) <$> _ddwsPronunciation,
-                  ("synonyms" .=) <$> _ddwsSynonyms,
-                  ("source" .=) <$> _ddwsSource,
-                  ("partOfSpeech" .=) <$> _ddwsPartOfSpeech,
-                  ("definitions" .=) <$> _ddwsDefinitions,
-                  ("syllabification" .=) <$> _ddwsSyllabification])
-
---
--- /See:/ 'dictlayerdataDictWordsDerivativesSource' smart constructor.
-data DictlayerdataDictWordsDerivativesSource = DictlayerdataDictWordsDerivativesSource
-    { _ddwdsURL         :: !(Maybe Text)
-    , _ddwdsAttribution :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DictlayerdataDictWordsDerivativesSource' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ddwdsURL'
---
--- * 'ddwdsAttribution'
-dictlayerdataDictWordsDerivativesSource
-    :: DictlayerdataDictWordsDerivativesSource
-dictlayerdataDictWordsDerivativesSource =
-    DictlayerdataDictWordsDerivativesSource
-    { _ddwdsURL = Nothing
-    , _ddwdsAttribution = Nothing
-    }
-
-ddwdsURL :: Lens' DictlayerdataDictWordsDerivativesSource (Maybe Text)
-ddwdsURL = lens _ddwdsURL (\ s a -> s{_ddwdsURL = a})
-
-ddwdsAttribution :: Lens' DictlayerdataDictWordsDerivativesSource (Maybe Text)
-ddwdsAttribution
-  = lens _ddwdsAttribution
-      (\ s a -> s{_ddwdsAttribution = a})
-
-instance FromJSON
-         DictlayerdataDictWordsDerivativesSource where
-        parseJSON
-          = withObject
-              "DictlayerdataDictWordsDerivativesSource"
-              (\ o ->
-                 DictlayerdataDictWordsDerivativesSource <$>
+                 WordsItemExamplesItemSource <$>
                    (o .:? "url") <*> (o .:? "attribution"))
 
-instance ToJSON
-         DictlayerdataDictWordsDerivativesSource where
-        toJSON DictlayerdataDictWordsDerivativesSource{..}
+instance ToJSON WordsItemExamplesItemSource where
+        toJSON WordsItemExamplesItemSource{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _ddwdsURL,
-                  ("attribution" .=) <$> _ddwdsAttribution])
+                 [("url" .=) <$> _wieisURL,
+                  ("attribution" .=) <$> _wieisAttribution])
 
 --
--- /See:/ 'metadataItems' smart constructor.
-data MetadataItems = MetadataItems
-    { _miSize         :: !(Maybe Int64)
-    , _miVersion      :: !(Maybe Int64)
-    , _miLanguage     :: !(Maybe Text)
-    , _miDownloadURL  :: !(Maybe Text)
-    , _miEncryptedKey :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'definitionsItem' smart constructor.
+data DefinitionsItem = DefinitionsItem
+    { _diDefinition :: !(Maybe Text)
+    , _diExamples   :: !(Maybe [ExamplesItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MetadataItems' with the minimum fields required to make a request.
+-- | Creates a value of 'DefinitionsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'miSize'
+-- * 'diDefinition'
 --
--- * 'miVersion'
---
--- * 'miLanguage'
---
--- * 'miDownloadURL'
---
--- * 'miEncryptedKey'
-metadataItems
-    :: MetadataItems
-metadataItems =
-    MetadataItems
-    { _miSize = Nothing
-    , _miVersion = Nothing
-    , _miLanguage = Nothing
-    , _miDownloadURL = Nothing
-    , _miEncryptedKey = Nothing
+-- * 'diExamples'
+definitionsItem
+    :: DefinitionsItem
+definitionsItem =
+    DefinitionsItem
+    { _diDefinition = Nothing
+    , _diExamples = Nothing
     }
 
-miSize :: Lens' MetadataItems (Maybe Int64)
-miSize = lens _miSize (\ s a -> s{_miSize = a})
+diDefinition :: Lens' DefinitionsItem (Maybe Text)
+diDefinition
+  = lens _diDefinition (\ s a -> s{_diDefinition = a})
 
-miVersion :: Lens' MetadataItems (Maybe Int64)
-miVersion
-  = lens _miVersion (\ s a -> s{_miVersion = a})
-
-miLanguage :: Lens' MetadataItems (Maybe Text)
-miLanguage
-  = lens _miLanguage (\ s a -> s{_miLanguage = a})
-
-miDownloadURL :: Lens' MetadataItems (Maybe Text)
-miDownloadURL
-  = lens _miDownloadURL
-      (\ s a -> s{_miDownloadURL = a})
-
-miEncryptedKey :: Lens' MetadataItems (Maybe Text)
-miEncryptedKey
-  = lens _miEncryptedKey
-      (\ s a -> s{_miEncryptedKey = a})
-
-instance FromJSON MetadataItems where
-        parseJSON
-          = withObject "MetadataItems"
-              (\ o ->
-                 MetadataItems <$>
-                   (o .:? "size") <*> (o .:? "version") <*>
-                     (o .:? "language")
-                     <*> (o .:? "download_url")
-                     <*> (o .:? "encrypted_key"))
-
-instance ToJSON MetadataItems where
-        toJSON MetadataItems{..}
-          = object
-              (catMaybes
-                 [("size" .=) <$> _miSize,
-                  ("version" .=) <$> _miVersion,
-                  ("language" .=) <$> _miLanguage,
-                  ("download_url" .=) <$> _miDownloadURL,
-                  ("encrypted_key" .=) <$> _miEncryptedKey])
-
---
--- /See:/ 'dictlayerdataDict' smart constructor.
-data DictlayerdataDict = DictlayerdataDict
-    { _ddSource :: !(Maybe DictlayerdataDictSource)
-    , _ddWords  :: !(Maybe [DictlayerdataDictWords])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DictlayerdataDict' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ddSource'
---
--- * 'ddWords'
-dictlayerdataDict
-    :: DictlayerdataDict
-dictlayerdataDict =
-    DictlayerdataDict
-    { _ddSource = Nothing
-    , _ddWords = Nothing
-    }
-
--- | The source, url and attribution for this dictionary data.
-ddSource :: Lens' DictlayerdataDict (Maybe DictlayerdataDictSource)
-ddSource = lens _ddSource (\ s a -> s{_ddSource = a})
-
-ddWords :: Lens' DictlayerdataDict [DictlayerdataDictWords]
-ddWords
-  = lens _ddWords (\ s a -> s{_ddWords = a}) . _Default
+diExamples :: Lens' DefinitionsItem [ExamplesItem]
+diExamples
+  = lens _diExamples (\ s a -> s{_diExamples = a}) .
+      _Default
       . _Coerce
 
-instance FromJSON DictlayerdataDict where
+instance FromJSON DefinitionsItem where
         parseJSON
-          = withObject "DictlayerdataDict"
+          = withObject "DefinitionsItem"
               (\ o ->
-                 DictlayerdataDict <$>
-                   (o .:? "source") <*> (o .:? "words" .!= mempty))
+                 DefinitionsItem <$>
+                   (o .:? "definition") <*>
+                     (o .:? "examples" .!= mempty))
 
-instance ToJSON DictlayerdataDict where
-        toJSON DictlayerdataDict{..}
+instance ToJSON DefinitionsItem where
+        toJSON DefinitionsItem{..}
           = object
               (catMaybes
-                 [("source" .=) <$> _ddSource,
-                  ("words" .=) <$> _ddWords])
-
--- | User settings in sub-objects, each for different purposes.
---
--- /See:/ 'usersettingsNotesExport' smart constructor.
-data UsersettingsNotesExport = UsersettingsNotesExport
-    { _uneFolderName :: !(Maybe Text)
-    , _uneIsEnabled  :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'UsersettingsNotesExport' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'uneFolderName'
---
--- * 'uneIsEnabled'
-usersettingsNotesExport
-    :: UsersettingsNotesExport
-usersettingsNotesExport =
-    UsersettingsNotesExport
-    { _uneFolderName = Nothing
-    , _uneIsEnabled = Nothing
-    }
-
-uneFolderName :: Lens' UsersettingsNotesExport (Maybe Text)
-uneFolderName
-  = lens _uneFolderName
-      (\ s a -> s{_uneFolderName = a})
-
-uneIsEnabled :: Lens' UsersettingsNotesExport (Maybe Bool)
-uneIsEnabled
-  = lens _uneIsEnabled (\ s a -> s{_uneIsEnabled = a})
-
-instance FromJSON UsersettingsNotesExport where
-        parseJSON
-          = withObject "UsersettingsNotesExport"
-              (\ o ->
-                 UsersettingsNotesExport <$>
-                   (o .:? "folderName") <*> (o .:? "isEnabled"))
-
-instance ToJSON UsersettingsNotesExport where
-        toJSON UsersettingsNotesExport{..}
-          = object
-              (catMaybes
-                 [("folderName" .=) <$> _uneFolderName,
-                  ("isEnabled" .=) <$> _uneIsEnabled])
-
---
--- /See:/ 'offersItemsItems' smart constructor.
-data OffersItemsItems = OffersItemsItems
-    { _oiiCanonicalVolumeLink :: !(Maybe Text)
-    , _oiiCoverURL            :: !(Maybe Text)
-    , _oiiVolumeId            :: !(Maybe Text)
-    , _oiiAuthor              :: !(Maybe Text)
-    , _oiiTitle               :: !(Maybe Text)
-    , _oiiDescription         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OffersItemsItems' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oiiCanonicalVolumeLink'
---
--- * 'oiiCoverURL'
---
--- * 'oiiVolumeId'
---
--- * 'oiiAuthor'
---
--- * 'oiiTitle'
---
--- * 'oiiDescription'
-offersItemsItems
-    :: OffersItemsItems
-offersItemsItems =
-    OffersItemsItems
-    { _oiiCanonicalVolumeLink = Nothing
-    , _oiiCoverURL = Nothing
-    , _oiiVolumeId = Nothing
-    , _oiiAuthor = Nothing
-    , _oiiTitle = Nothing
-    , _oiiDescription = Nothing
-    }
-
-oiiCanonicalVolumeLink :: Lens' OffersItemsItems (Maybe Text)
-oiiCanonicalVolumeLink
-  = lens _oiiCanonicalVolumeLink
-      (\ s a -> s{_oiiCanonicalVolumeLink = a})
-
-oiiCoverURL :: Lens' OffersItemsItems (Maybe Text)
-oiiCoverURL
-  = lens _oiiCoverURL (\ s a -> s{_oiiCoverURL = a})
-
-oiiVolumeId :: Lens' OffersItemsItems (Maybe Text)
-oiiVolumeId
-  = lens _oiiVolumeId (\ s a -> s{_oiiVolumeId = a})
-
-oiiAuthor :: Lens' OffersItemsItems (Maybe Text)
-oiiAuthor
-  = lens _oiiAuthor (\ s a -> s{_oiiAuthor = a})
-
-oiiTitle :: Lens' OffersItemsItems (Maybe Text)
-oiiTitle = lens _oiiTitle (\ s a -> s{_oiiTitle = a})
-
-oiiDescription :: Lens' OffersItemsItems (Maybe Text)
-oiiDescription
-  = lens _oiiDescription
-      (\ s a -> s{_oiiDescription = a})
-
-instance FromJSON OffersItemsItems where
-        parseJSON
-          = withObject "OffersItemsItems"
-              (\ o ->
-                 OffersItemsItems <$>
-                   (o .:? "canonicalVolumeLink") <*> (o .:? "coverUrl")
-                     <*> (o .:? "volumeId")
-                     <*> (o .:? "author")
-                     <*> (o .:? "title")
-                     <*> (o .:? "description"))
-
-instance ToJSON OffersItemsItems where
-        toJSON OffersItemsItems{..}
-          = object
-              (catMaybes
-                 [("canonicalVolumeLink" .=) <$>
-                    _oiiCanonicalVolumeLink,
-                  ("coverUrl" .=) <$> _oiiCoverURL,
-                  ("volumeId" .=) <$> _oiiVolumeId,
-                  ("author" .=) <$> _oiiAuthor,
-                  ("title" .=) <$> _oiiTitle,
-                  ("description" .=) <$> _oiiDescription])
+                 [("definition" .=) <$> _diDefinition,
+                  ("examples" .=) <$> _diExamples])
 
 --
 -- /See:/ 'concurrentAccessRestriction' smart constructor.
@@ -5522,7 +5368,7 @@ data ConcurrentAccessRestriction = ConcurrentAccessRestriction
     , _carDeviceAllowed        :: !(Maybe Bool)
     , _carMessage              :: !(Maybe Text)
     , _carNonce                :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConcurrentAccessRestriction' with the minimum fields required to make a request.
 --
@@ -5663,11 +5509,586 @@ instance ToJSON ConcurrentAccessRestriction where
                   ("nonce" .=) <$> _carNonce])
 
 --
+-- /See:/ 'examplesItemSource' smart constructor.
+data ExamplesItemSource = ExamplesItemSource
+    { _eisURL         :: !(Maybe Text)
+    , _eisAttribution :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ExamplesItemSource' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eisURL'
+--
+-- * 'eisAttribution'
+examplesItemSource
+    :: ExamplesItemSource
+examplesItemSource =
+    ExamplesItemSource
+    { _eisURL = Nothing
+    , _eisAttribution = Nothing
+    }
+
+eisURL :: Lens' ExamplesItemSource (Maybe Text)
+eisURL = lens _eisURL (\ s a -> s{_eisURL = a})
+
+eisAttribution :: Lens' ExamplesItemSource (Maybe Text)
+eisAttribution
+  = lens _eisAttribution
+      (\ s a -> s{_eisAttribution = a})
+
+instance FromJSON ExamplesItemSource where
+        parseJSON
+          = withObject "ExamplesItemSource"
+              (\ o ->
+                 ExamplesItemSource <$>
+                   (o .:? "url") <*> (o .:? "attribution"))
+
+instance ToJSON ExamplesItemSource where
+        toJSON ExamplesItemSource{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _eisURL,
+                  ("attribution" .=) <$> _eisAttribution])
+
+--
+-- /See:/ 'lo' smart constructor.
+data Lo = Lo
+    { _lLatitude  :: !(Maybe Double)
+    , _lLongitude :: !(Maybe Double)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Lo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lLatitude'
+--
+-- * 'lLongitude'
+lo
+    :: Lo
+lo =
+    Lo
+    { _lLatitude = Nothing
+    , _lLongitude = Nothing
+    }
+
+lLatitude :: Lens' Lo (Maybe Double)
+lLatitude
+  = lens _lLatitude (\ s a -> s{_lLatitude = a})
+
+lLongitude :: Lens' Lo (Maybe Double)
+lLongitude
+  = lens _lLongitude (\ s a -> s{_lLongitude = a})
+
+instance FromJSON Lo where
+        parseJSON
+          = withObject "Lo"
+              (\ o ->
+                 Lo <$> (o .:? "latitude") <*> (o .:? "longitude"))
+
+instance ToJSON Lo where
+        toJSON Lo{..}
+          = object
+              (catMaybes
+                 [("latitude" .=) <$> _lLatitude,
+                  ("longitude" .=) <$> _lLongitude])
+
+--
+-- /See:/ 'examplesItem' smart constructor.
+data ExamplesItem = ExamplesItem
+    { _eiText   :: !(Maybe Text)
+    , _eiSource :: !(Maybe ExamplesItemSource)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ExamplesItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eiText'
+--
+-- * 'eiSource'
+examplesItem
+    :: ExamplesItem
+examplesItem =
+    ExamplesItem
+    { _eiText = Nothing
+    , _eiSource = Nothing
+    }
+
+eiText :: Lens' ExamplesItem (Maybe Text)
+eiText = lens _eiText (\ s a -> s{_eiText = a})
+
+eiSource :: Lens' ExamplesItem (Maybe ExamplesItemSource)
+eiSource = lens _eiSource (\ s a -> s{_eiSource = a})
+
+instance FromJSON ExamplesItem where
+        parseJSON
+          = withObject "ExamplesItem"
+              (\ o ->
+                 ExamplesItem <$> (o .:? "text") <*> (o .:? "source"))
+
+instance ToJSON ExamplesItem where
+        toJSON ExamplesItem{..}
+          = object
+              (catMaybes
+                 [("text" .=) <$> _eiText,
+                  ("source" .=) <$> _eiSource])
+
+--
+-- /See:/ 'metadataItemsItem' smart constructor.
+data MetadataItemsItem = MetadataItemsItem
+    { _miiSize         :: !(Maybe Int64)
+    , _miiVersion      :: !(Maybe Int64)
+    , _miiLanguage     :: !(Maybe Text)
+    , _miiDownloadURL  :: !(Maybe Text)
+    , _miiEncryptedKey :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MetadataItemsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'miiSize'
+--
+-- * 'miiVersion'
+--
+-- * 'miiLanguage'
+--
+-- * 'miiDownloadURL'
+--
+-- * 'miiEncryptedKey'
+metadataItemsItem
+    :: MetadataItemsItem
+metadataItemsItem =
+    MetadataItemsItem
+    { _miiSize = Nothing
+    , _miiVersion = Nothing
+    , _miiLanguage = Nothing
+    , _miiDownloadURL = Nothing
+    , _miiEncryptedKey = Nothing
+    }
+
+miiSize :: Lens' MetadataItemsItem (Maybe Int64)
+miiSize = lens _miiSize (\ s a -> s{_miiSize = a})
+
+miiVersion :: Lens' MetadataItemsItem (Maybe Int64)
+miiVersion
+  = lens _miiVersion (\ s a -> s{_miiVersion = a})
+
+miiLanguage :: Lens' MetadataItemsItem (Maybe Text)
+miiLanguage
+  = lens _miiLanguage (\ s a -> s{_miiLanguage = a})
+
+miiDownloadURL :: Lens' MetadataItemsItem (Maybe Text)
+miiDownloadURL
+  = lens _miiDownloadURL
+      (\ s a -> s{_miiDownloadURL = a})
+
+miiEncryptedKey :: Lens' MetadataItemsItem (Maybe Text)
+miiEncryptedKey
+  = lens _miiEncryptedKey
+      (\ s a -> s{_miiEncryptedKey = a})
+
+instance FromJSON MetadataItemsItem where
+        parseJSON
+          = withObject "MetadataItemsItem"
+              (\ o ->
+                 MetadataItemsItem <$>
+                   (o .:? "size") <*> (o .:? "version") <*>
+                     (o .:? "language")
+                     <*> (o .:? "download_url")
+                     <*> (o .:? "encrypted_key"))
+
+instance ToJSON MetadataItemsItem where
+        toJSON MetadataItemsItem{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _miiSize,
+                  ("version" .=) <$> _miiVersion,
+                  ("language" .=) <$> _miiLanguage,
+                  ("download_url" .=) <$> _miiDownloadURL,
+                  ("encrypted_key" .=) <$> _miiEncryptedKey])
+
+--
+-- /See:/ 'wordsItemExamplesItem' smart constructor.
+data WordsItemExamplesItem = WordsItemExamplesItem
+    { _wieiText   :: !(Maybe Text)
+    , _wieiSource :: !(Maybe WordsItemExamplesItemSource)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WordsItemExamplesItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wieiText'
+--
+-- * 'wieiSource'
+wordsItemExamplesItem
+    :: WordsItemExamplesItem
+wordsItemExamplesItem =
+    WordsItemExamplesItem
+    { _wieiText = Nothing
+    , _wieiSource = Nothing
+    }
+
+wieiText :: Lens' WordsItemExamplesItem (Maybe Text)
+wieiText = lens _wieiText (\ s a -> s{_wieiText = a})
+
+wieiSource :: Lens' WordsItemExamplesItem (Maybe WordsItemExamplesItemSource)
+wieiSource
+  = lens _wieiSource (\ s a -> s{_wieiSource = a})
+
+instance FromJSON WordsItemExamplesItem where
+        parseJSON
+          = withObject "WordsItemExamplesItem"
+              (\ o ->
+                 WordsItemExamplesItem <$>
+                   (o .:? "text") <*> (o .:? "source"))
+
+instance ToJSON WordsItemExamplesItem where
+        toJSON WordsItemExamplesItem{..}
+          = object
+              (catMaybes
+                 [("text" .=) <$> _wieiText,
+                  ("source" .=) <$> _wieiSource])
+
+-- | General volume information.
+--
+-- /See:/ 'volumeInfo' smart constructor.
+data VolumeInfo = VolumeInfo
+    { _viImageLinks          :: !(Maybe ImageLinks)
+    , _viAverageRating       :: !(Maybe Double)
+    , _viRatingsCount        :: !(Maybe Int32)
+    , _viCanonicalVolumeLink :: !(Maybe Text)
+    , _viReadingModes        :: !(Maybe JSONValue)
+    , _viIndustryIdentifiers :: !(Maybe [IndustryIdentifiersItem])
+    , _viPrintedPageCount    :: !(Maybe Int32)
+    , _viMainCategory        :: !(Maybe Text)
+    , _viContentVersion      :: !(Maybe Text)
+    , _viSamplePageCount     :: !(Maybe Int32)
+    , _viCategories          :: !(Maybe [Text])
+    , _viAuthors             :: !(Maybe [Text])
+    , _viAllowAnonLogging    :: !(Maybe Bool)
+    , _viSubtitle            :: !(Maybe Text)
+    , _viPublishedDate       :: !(Maybe Text)
+    , _viMaturityRating      :: !(Maybe Text)
+    , _viPreviewLink         :: !(Maybe Text)
+    , _viLanguage            :: !(Maybe Text)
+    , _viTitle               :: !(Maybe Text)
+    , _viPageCount           :: !(Maybe Int32)
+    , _viDimensions          :: !(Maybe Dimensions)
+    , _viInfoLink            :: !(Maybe Text)
+    , _viPublisher           :: !(Maybe Text)
+    , _viDescription         :: !(Maybe Text)
+    , _viPrintType           :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VolumeInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'viImageLinks'
+--
+-- * 'viAverageRating'
+--
+-- * 'viRatingsCount'
+--
+-- * 'viCanonicalVolumeLink'
+--
+-- * 'viReadingModes'
+--
+-- * 'viIndustryIdentifiers'
+--
+-- * 'viPrintedPageCount'
+--
+-- * 'viMainCategory'
+--
+-- * 'viContentVersion'
+--
+-- * 'viSamplePageCount'
+--
+-- * 'viCategories'
+--
+-- * 'viAuthors'
+--
+-- * 'viAllowAnonLogging'
+--
+-- * 'viSubtitle'
+--
+-- * 'viPublishedDate'
+--
+-- * 'viMaturityRating'
+--
+-- * 'viPreviewLink'
+--
+-- * 'viLanguage'
+--
+-- * 'viTitle'
+--
+-- * 'viPageCount'
+--
+-- * 'viDimensions'
+--
+-- * 'viInfoLink'
+--
+-- * 'viPublisher'
+--
+-- * 'viDescription'
+--
+-- * 'viPrintType'
+volumeInfo
+    :: VolumeInfo
+volumeInfo =
+    VolumeInfo
+    { _viImageLinks = Nothing
+    , _viAverageRating = Nothing
+    , _viRatingsCount = Nothing
+    , _viCanonicalVolumeLink = Nothing
+    , _viReadingModes = Nothing
+    , _viIndustryIdentifiers = Nothing
+    , _viPrintedPageCount = Nothing
+    , _viMainCategory = Nothing
+    , _viContentVersion = Nothing
+    , _viSamplePageCount = Nothing
+    , _viCategories = Nothing
+    , _viAuthors = Nothing
+    , _viAllowAnonLogging = Nothing
+    , _viSubtitle = Nothing
+    , _viPublishedDate = Nothing
+    , _viMaturityRating = Nothing
+    , _viPreviewLink = Nothing
+    , _viLanguage = Nothing
+    , _viTitle = Nothing
+    , _viPageCount = Nothing
+    , _viDimensions = Nothing
+    , _viInfoLink = Nothing
+    , _viPublisher = Nothing
+    , _viDescription = Nothing
+    , _viPrintType = Nothing
+    }
+
+-- | A list of image links for all the sizes that are available. (In LITE
+-- projection.)
+viImageLinks :: Lens' VolumeInfo (Maybe ImageLinks)
+viImageLinks
+  = lens _viImageLinks (\ s a -> s{_viImageLinks = a})
+
+-- | The mean review rating for this volume. (min = 1.0, max = 5.0)
+viAverageRating :: Lens' VolumeInfo (Maybe Double)
+viAverageRating
+  = lens _viAverageRating
+      (\ s a -> s{_viAverageRating = a})
+
+-- | The number of review ratings for this volume.
+viRatingsCount :: Lens' VolumeInfo (Maybe Int32)
+viRatingsCount
+  = lens _viRatingsCount
+      (\ s a -> s{_viRatingsCount = a})
+
+-- | Canonical URL for a volume. (In LITE projection.)
+viCanonicalVolumeLink :: Lens' VolumeInfo (Maybe Text)
+viCanonicalVolumeLink
+  = lens _viCanonicalVolumeLink
+      (\ s a -> s{_viCanonicalVolumeLink = a})
+
+-- | The reading modes available for this volume.
+viReadingModes :: Lens' VolumeInfo (Maybe JSONValue)
+viReadingModes
+  = lens _viReadingModes
+      (\ s a -> s{_viReadingModes = a})
+
+-- | Industry standard identifiers for this volume.
+viIndustryIdentifiers :: Lens' VolumeInfo [IndustryIdentifiersItem]
+viIndustryIdentifiers
+  = lens _viIndustryIdentifiers
+      (\ s a -> s{_viIndustryIdentifiers = a})
+      . _Default
+      . _Coerce
+
+-- | Total number of printed pages in generated pdf representation.
+viPrintedPageCount :: Lens' VolumeInfo (Maybe Int32)
+viPrintedPageCount
+  = lens _viPrintedPageCount
+      (\ s a -> s{_viPrintedPageCount = a})
+
+-- | The main category to which this volume belongs. It will be the category
+-- from the categories list returned below that has the highest weight.
+viMainCategory :: Lens' VolumeInfo (Maybe Text)
+viMainCategory
+  = lens _viMainCategory
+      (\ s a -> s{_viMainCategory = a})
+
+-- | An identifier for the version of the volume content (text & images). (In
+-- LITE projection)
+viContentVersion :: Lens' VolumeInfo (Maybe Text)
+viContentVersion
+  = lens _viContentVersion
+      (\ s a -> s{_viContentVersion = a})
+
+-- | Total number of sample pages as per publisher metadata.
+viSamplePageCount :: Lens' VolumeInfo (Maybe Int32)
+viSamplePageCount
+  = lens _viSamplePageCount
+      (\ s a -> s{_viSamplePageCount = a})
+
+-- | A list of subject categories, such as \"Fiction\", \"Suspense\", etc.
+viCategories :: Lens' VolumeInfo [Text]
+viCategories
+  = lens _viCategories (\ s a -> s{_viCategories = a})
+      . _Default
+      . _Coerce
+
+-- | The names of the authors and\/or editors for this volume. (In LITE
+-- projection)
+viAuthors :: Lens' VolumeInfo [Text]
+viAuthors
+  = lens _viAuthors (\ s a -> s{_viAuthors = a}) .
+      _Default
+      . _Coerce
+
+-- | Whether anonymous logging should be allowed.
+viAllowAnonLogging :: Lens' VolumeInfo (Maybe Bool)
+viAllowAnonLogging
+  = lens _viAllowAnonLogging
+      (\ s a -> s{_viAllowAnonLogging = a})
+
+-- | Volume subtitle. (In LITE projection.)
+viSubtitle :: Lens' VolumeInfo (Maybe Text)
+viSubtitle
+  = lens _viSubtitle (\ s a -> s{_viSubtitle = a})
+
+-- | Date of publication. (In LITE projection.)
+viPublishedDate :: Lens' VolumeInfo (Maybe Text)
+viPublishedDate
+  = lens _viPublishedDate
+      (\ s a -> s{_viPublishedDate = a})
+
+viMaturityRating :: Lens' VolumeInfo (Maybe Text)
+viMaturityRating
+  = lens _viMaturityRating
+      (\ s a -> s{_viMaturityRating = a})
+
+-- | URL to preview this volume on the Google Books site.
+viPreviewLink :: Lens' VolumeInfo (Maybe Text)
+viPreviewLink
+  = lens _viPreviewLink
+      (\ s a -> s{_viPreviewLink = a})
+
+-- | Best language for this volume (based on content). It is the two-letter
+-- ISO 639-1 code such as \'fr\', \'en\', etc.
+viLanguage :: Lens' VolumeInfo (Maybe Text)
+viLanguage
+  = lens _viLanguage (\ s a -> s{_viLanguage = a})
+
+-- | Volume title. (In LITE projection.)
+viTitle :: Lens' VolumeInfo (Maybe Text)
+viTitle = lens _viTitle (\ s a -> s{_viTitle = a})
+
+-- | Total number of pages as per publisher metadata.
+viPageCount :: Lens' VolumeInfo (Maybe Int32)
+viPageCount
+  = lens _viPageCount (\ s a -> s{_viPageCount = a})
+
+-- | Physical dimensions of this volume.
+viDimensions :: Lens' VolumeInfo (Maybe Dimensions)
+viDimensions
+  = lens _viDimensions (\ s a -> s{_viDimensions = a})
+
+-- | URL to view information about this volume on the Google Books site. (In
+-- LITE projection)
+viInfoLink :: Lens' VolumeInfo (Maybe Text)
+viInfoLink
+  = lens _viInfoLink (\ s a -> s{_viInfoLink = a})
+
+-- | Publisher of this volume. (In LITE projection.)
+viPublisher :: Lens' VolumeInfo (Maybe Text)
+viPublisher
+  = lens _viPublisher (\ s a -> s{_viPublisher = a})
+
+-- | A synopsis of the volume. The text of the description is formatted in
+-- HTML and includes simple formatting elements, such as b, i, and br tags.
+-- (In LITE projection.)
+viDescription :: Lens' VolumeInfo (Maybe Text)
+viDescription
+  = lens _viDescription
+      (\ s a -> s{_viDescription = a})
+
+-- | Type of publication of this volume. Possible values are BOOK or
+-- MAGAZINE.
+viPrintType :: Lens' VolumeInfo (Maybe Text)
+viPrintType
+  = lens _viPrintType (\ s a -> s{_viPrintType = a})
+
+instance FromJSON VolumeInfo where
+        parseJSON
+          = withObject "VolumeInfo"
+              (\ o ->
+                 VolumeInfo <$>
+                   (o .:? "imageLinks") <*> (o .:? "averageRating") <*>
+                     (o .:? "ratingsCount")
+                     <*> (o .:? "canonicalVolumeLink")
+                     <*> (o .:? "readingModes")
+                     <*> (o .:? "industryIdentifiers" .!= mempty)
+                     <*> (o .:? "printedPageCount")
+                     <*> (o .:? "mainCategory")
+                     <*> (o .:? "contentVersion")
+                     <*> (o .:? "samplePageCount")
+                     <*> (o .:? "categories" .!= mempty)
+                     <*> (o .:? "authors" .!= mempty)
+                     <*> (o .:? "allowAnonLogging")
+                     <*> (o .:? "subtitle")
+                     <*> (o .:? "publishedDate")
+                     <*> (o .:? "maturityRating")
+                     <*> (o .:? "previewLink")
+                     <*> (o .:? "language")
+                     <*> (o .:? "title")
+                     <*> (o .:? "pageCount")
+                     <*> (o .:? "dimensions")
+                     <*> (o .:? "infoLink")
+                     <*> (o .:? "publisher")
+                     <*> (o .:? "description")
+                     <*> (o .:? "printType"))
+
+instance ToJSON VolumeInfo where
+        toJSON VolumeInfo{..}
+          = object
+              (catMaybes
+                 [("imageLinks" .=) <$> _viImageLinks,
+                  ("averageRating" .=) <$> _viAverageRating,
+                  ("ratingsCount" .=) <$> _viRatingsCount,
+                  ("canonicalVolumeLink" .=) <$>
+                    _viCanonicalVolumeLink,
+                  ("readingModes" .=) <$> _viReadingModes,
+                  ("industryIdentifiers" .=) <$>
+                    _viIndustryIdentifiers,
+                  ("printedPageCount" .=) <$> _viPrintedPageCount,
+                  ("mainCategory" .=) <$> _viMainCategory,
+                  ("contentVersion" .=) <$> _viContentVersion,
+                  ("samplePageCount" .=) <$> _viSamplePageCount,
+                  ("categories" .=) <$> _viCategories,
+                  ("authors" .=) <$> _viAuthors,
+                  ("allowAnonLogging" .=) <$> _viAllowAnonLogging,
+                  ("subtitle" .=) <$> _viSubtitle,
+                  ("publishedDate" .=) <$> _viPublishedDate,
+                  ("maturityRating" .=) <$> _viMaturityRating,
+                  ("previewLink" .=) <$> _viPreviewLink,
+                  ("language" .=) <$> _viLanguage,
+                  ("title" .=) <$> _viTitle,
+                  ("pageCount" .=) <$> _viPageCount,
+                  ("dimensions" .=) <$> _viDimensions,
+                  ("infoLink" .=) <$> _viInfoLink,
+                  ("publisher" .=) <$> _viPublisher,
+                  ("description" .=) <$> _viDescription,
+                  ("printType" .=) <$> _viPrintType])
+
+--
 -- /See:/ 'downloadAccesses' smart constructor.
 data DownloadAccesses = DownloadAccesses
     { _daKind               :: !Text
     , _daDownloadAccessList :: !(Maybe [DownloadAccessRestriction])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DownloadAccesses' with the minimum fields required to make a request.
 --
@@ -5712,590 +6133,123 @@ instance ToJSON DownloadAccesses where
                   ("downloadAccessList" .=) <$> _daDownloadAccessList])
 
 --
--- /See:/ 'dictlayerdataDictWordsDerivatives' smart constructor.
-data DictlayerdataDictWordsDerivatives = DictlayerdataDictWordsDerivatives
-    { _ddwdText   :: !(Maybe Text)
-    , _ddwdSource :: !(Maybe DictlayerdataDictWordsDerivativesSource)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'offersItem' smart constructor.
+data OffersItem = OffersItem
+    { _oiFinskyOfferType :: !(Maybe Int32)
+    , _oiRentalDuration  :: !(Maybe RentalDuration)
+    , _oiListPrice       :: !(Maybe OffersItemListPrice)
+    , _oiRetailPrice     :: !(Maybe OffersItemRetailPrice)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsDerivatives' with the minimum fields required to make a request.
+-- | Creates a value of 'OffersItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwdText'
+-- * 'oiFinskyOfferType'
 --
--- * 'ddwdSource'
-dictlayerdataDictWordsDerivatives
-    :: DictlayerdataDictWordsDerivatives
-dictlayerdataDictWordsDerivatives =
-    DictlayerdataDictWordsDerivatives
-    { _ddwdText = Nothing
-    , _ddwdSource = Nothing
-    }
-
-ddwdText :: Lens' DictlayerdataDictWordsDerivatives (Maybe Text)
-ddwdText = lens _ddwdText (\ s a -> s{_ddwdText = a})
-
-ddwdSource :: Lens' DictlayerdataDictWordsDerivatives (Maybe DictlayerdataDictWordsDerivativesSource)
-ddwdSource
-  = lens _ddwdSource (\ s a -> s{_ddwdSource = a})
-
-instance FromJSON DictlayerdataDictWordsDerivatives
-         where
-        parseJSON
-          = withObject "DictlayerdataDictWordsDerivatives"
-              (\ o ->
-                 DictlayerdataDictWordsDerivatives <$>
-                   (o .:? "text") <*> (o .:? "source"))
-
-instance ToJSON DictlayerdataDictWordsDerivatives
-         where
-        toJSON DictlayerdataDictWordsDerivatives{..}
-          = object
-              (catMaybes
-                 [("text" .=) <$> _ddwdText,
-                  ("source" .=) <$> _ddwdSource])
-
--- | The source, url and attribution for this dictionary data.
+-- * 'oiRentalDuration'
 --
--- /See:/ 'dictlayerdataDictSource' smart constructor.
-data DictlayerdataDictSource = DictlayerdataDictSource
-    { _ddsURL         :: !(Maybe Text)
-    , _ddsAttribution :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DictlayerdataDictSource' with the minimum fields required to make a request.
+-- * 'oiListPrice'
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ddsURL'
---
--- * 'ddsAttribution'
-dictlayerdataDictSource
-    :: DictlayerdataDictSource
-dictlayerdataDictSource =
-    DictlayerdataDictSource
-    { _ddsURL = Nothing
-    , _ddsAttribution = Nothing
-    }
-
-ddsURL :: Lens' DictlayerdataDictSource (Maybe Text)
-ddsURL = lens _ddsURL (\ s a -> s{_ddsURL = a})
-
-ddsAttribution :: Lens' DictlayerdataDictSource (Maybe Text)
-ddsAttribution
-  = lens _ddsAttribution
-      (\ s a -> s{_ddsAttribution = a})
-
-instance FromJSON DictlayerdataDictSource where
-        parseJSON
-          = withObject "DictlayerdataDictSource"
-              (\ o ->
-                 DictlayerdataDictSource <$>
-                   (o .:? "url") <*> (o .:? "attribution"))
-
-instance ToJSON DictlayerdataDictSource where
-        toJSON DictlayerdataDictSource{..}
-          = object
-              (catMaybes
-                 [("url" .=) <$> _ddsURL,
-                  ("attribution" .=) <$> _ddsAttribution])
-
---
--- /See:/ 'geolayerdataGeoViewportHi' smart constructor.
-data GeolayerdataGeoViewportHi = GeolayerdataGeoViewportHi
-    { _ggvhLatitude  :: !(Maybe Double)
-    , _ggvhLongitude :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GeolayerdataGeoViewportHi' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ggvhLatitude'
---
--- * 'ggvhLongitude'
-geolayerdataGeoViewportHi
-    :: GeolayerdataGeoViewportHi
-geolayerdataGeoViewportHi =
-    GeolayerdataGeoViewportHi
-    { _ggvhLatitude = Nothing
-    , _ggvhLongitude = Nothing
-    }
-
-ggvhLatitude :: Lens' GeolayerdataGeoViewportHi (Maybe Double)
-ggvhLatitude
-  = lens _ggvhLatitude (\ s a -> s{_ggvhLatitude = a})
-
-ggvhLongitude :: Lens' GeolayerdataGeoViewportHi (Maybe Double)
-ggvhLongitude
-  = lens _ggvhLongitude
-      (\ s a -> s{_ggvhLongitude = a})
-
-instance FromJSON GeolayerdataGeoViewportHi where
-        parseJSON
-          = withObject "GeolayerdataGeoViewportHi"
-              (\ o ->
-                 GeolayerdataGeoViewportHi <$>
-                   (o .:? "latitude") <*> (o .:? "longitude"))
-
-instance ToJSON GeolayerdataGeoViewportHi where
-        toJSON GeolayerdataGeoViewportHi{..}
-          = object
-              (catMaybes
-                 [("latitude" .=) <$> _ggvhLatitude,
-                  ("longitude" .=) <$> _ggvhLongitude])
-
--- | General volume information.
---
--- /See:/ 'volumeVolumeInfo' smart constructor.
-data VolumeVolumeInfo = VolumeVolumeInfo
-    { _vviImageLinks          :: !(Maybe VolumeVolumeInfoImageLinks)
-    , _vviAverageRating       :: !(Maybe Double)
-    , _vviRatingsCount        :: !(Maybe Int32)
-    , _vviCanonicalVolumeLink :: !(Maybe Text)
-    , _vviReadingModes        :: !(Maybe JSONValue)
-    , _vviIndustryIdentifiers :: !(Maybe [VolumeVolumeInfoIndustryIdentifiers])
-    , _vviPrintedPageCount    :: !(Maybe Int32)
-    , _vviMainCategory        :: !(Maybe Text)
-    , _vviContentVersion      :: !(Maybe Text)
-    , _vviSamplePageCount     :: !(Maybe Int32)
-    , _vviCategories          :: !(Maybe [Text])
-    , _vviAuthors             :: !(Maybe [Text])
-    , _vviAllowAnonLogging    :: !(Maybe Bool)
-    , _vviSubtitle            :: !(Maybe Text)
-    , _vviPublishedDate       :: !(Maybe Text)
-    , _vviMaturityRating      :: !(Maybe Text)
-    , _vviPreviewLink         :: !(Maybe Text)
-    , _vviLanguage            :: !(Maybe Text)
-    , _vviTitle               :: !(Maybe Text)
-    , _vviPageCount           :: !(Maybe Int32)
-    , _vviDimensions          :: !(Maybe VolumeVolumeInfoDimensions)
-    , _vviInfoLink            :: !(Maybe Text)
-    , _vviPublisher           :: !(Maybe Text)
-    , _vviDescription         :: !(Maybe Text)
-    , _vviPrintType           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VolumeVolumeInfo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vviImageLinks'
---
--- * 'vviAverageRating'
---
--- * 'vviRatingsCount'
---
--- * 'vviCanonicalVolumeLink'
---
--- * 'vviReadingModes'
---
--- * 'vviIndustryIdentifiers'
---
--- * 'vviPrintedPageCount'
---
--- * 'vviMainCategory'
---
--- * 'vviContentVersion'
---
--- * 'vviSamplePageCount'
---
--- * 'vviCategories'
---
--- * 'vviAuthors'
---
--- * 'vviAllowAnonLogging'
---
--- * 'vviSubtitle'
---
--- * 'vviPublishedDate'
---
--- * 'vviMaturityRating'
---
--- * 'vviPreviewLink'
---
--- * 'vviLanguage'
---
--- * 'vviTitle'
---
--- * 'vviPageCount'
---
--- * 'vviDimensions'
---
--- * 'vviInfoLink'
---
--- * 'vviPublisher'
---
--- * 'vviDescription'
---
--- * 'vviPrintType'
-volumeVolumeInfo
-    :: VolumeVolumeInfo
-volumeVolumeInfo =
-    VolumeVolumeInfo
-    { _vviImageLinks = Nothing
-    , _vviAverageRating = Nothing
-    , _vviRatingsCount = Nothing
-    , _vviCanonicalVolumeLink = Nothing
-    , _vviReadingModes = Nothing
-    , _vviIndustryIdentifiers = Nothing
-    , _vviPrintedPageCount = Nothing
-    , _vviMainCategory = Nothing
-    , _vviContentVersion = Nothing
-    , _vviSamplePageCount = Nothing
-    , _vviCategories = Nothing
-    , _vviAuthors = Nothing
-    , _vviAllowAnonLogging = Nothing
-    , _vviSubtitle = Nothing
-    , _vviPublishedDate = Nothing
-    , _vviMaturityRating = Nothing
-    , _vviPreviewLink = Nothing
-    , _vviLanguage = Nothing
-    , _vviTitle = Nothing
-    , _vviPageCount = Nothing
-    , _vviDimensions = Nothing
-    , _vviInfoLink = Nothing
-    , _vviPublisher = Nothing
-    , _vviDescription = Nothing
-    , _vviPrintType = Nothing
-    }
-
--- | A list of image links for all the sizes that are available. (In LITE
--- projection.)
-vviImageLinks :: Lens' VolumeVolumeInfo (Maybe VolumeVolumeInfoImageLinks)
-vviImageLinks
-  = lens _vviImageLinks
-      (\ s a -> s{_vviImageLinks = a})
-
--- | The mean review rating for this volume. (min = 1.0, max = 5.0)
-vviAverageRating :: Lens' VolumeVolumeInfo (Maybe Double)
-vviAverageRating
-  = lens _vviAverageRating
-      (\ s a -> s{_vviAverageRating = a})
-
--- | The number of review ratings for this volume.
-vviRatingsCount :: Lens' VolumeVolumeInfo (Maybe Int32)
-vviRatingsCount
-  = lens _vviRatingsCount
-      (\ s a -> s{_vviRatingsCount = a})
-
--- | Canonical URL for a volume. (In LITE projection.)
-vviCanonicalVolumeLink :: Lens' VolumeVolumeInfo (Maybe Text)
-vviCanonicalVolumeLink
-  = lens _vviCanonicalVolumeLink
-      (\ s a -> s{_vviCanonicalVolumeLink = a})
-
--- | The reading modes available for this volume.
-vviReadingModes :: Lens' VolumeVolumeInfo (Maybe JSONValue)
-vviReadingModes
-  = lens _vviReadingModes
-      (\ s a -> s{_vviReadingModes = a})
-
--- | Industry standard identifiers for this volume.
-vviIndustryIdentifiers :: Lens' VolumeVolumeInfo [VolumeVolumeInfoIndustryIdentifiers]
-vviIndustryIdentifiers
-  = lens _vviIndustryIdentifiers
-      (\ s a -> s{_vviIndustryIdentifiers = a})
-      . _Default
-      . _Coerce
-
--- | Total number of printed pages in generated pdf representation.
-vviPrintedPageCount :: Lens' VolumeVolumeInfo (Maybe Int32)
-vviPrintedPageCount
-  = lens _vviPrintedPageCount
-      (\ s a -> s{_vviPrintedPageCount = a})
-
--- | The main category to which this volume belongs. It will be the category
--- from the categories list returned below that has the highest weight.
-vviMainCategory :: Lens' VolumeVolumeInfo (Maybe Text)
-vviMainCategory
-  = lens _vviMainCategory
-      (\ s a -> s{_vviMainCategory = a})
-
--- | An identifier for the version of the volume content (text & images). (In
--- LITE projection)
-vviContentVersion :: Lens' VolumeVolumeInfo (Maybe Text)
-vviContentVersion
-  = lens _vviContentVersion
-      (\ s a -> s{_vviContentVersion = a})
-
--- | Total number of sample pages as per publisher metadata.
-vviSamplePageCount :: Lens' VolumeVolumeInfo (Maybe Int32)
-vviSamplePageCount
-  = lens _vviSamplePageCount
-      (\ s a -> s{_vviSamplePageCount = a})
-
--- | A list of subject categories, such as \"Fiction\", \"Suspense\", etc.
-vviCategories :: Lens' VolumeVolumeInfo [Text]
-vviCategories
-  = lens _vviCategories
-      (\ s a -> s{_vviCategories = a})
-      . _Default
-      . _Coerce
-
--- | The names of the authors and\/or editors for this volume. (In LITE
--- projection)
-vviAuthors :: Lens' VolumeVolumeInfo [Text]
-vviAuthors
-  = lens _vviAuthors (\ s a -> s{_vviAuthors = a}) .
-      _Default
-      . _Coerce
-
--- | Whether anonymous logging should be allowed.
-vviAllowAnonLogging :: Lens' VolumeVolumeInfo (Maybe Bool)
-vviAllowAnonLogging
-  = lens _vviAllowAnonLogging
-      (\ s a -> s{_vviAllowAnonLogging = a})
-
--- | Volume subtitle. (In LITE projection.)
-vviSubtitle :: Lens' VolumeVolumeInfo (Maybe Text)
-vviSubtitle
-  = lens _vviSubtitle (\ s a -> s{_vviSubtitle = a})
-
--- | Date of publication. (In LITE projection.)
-vviPublishedDate :: Lens' VolumeVolumeInfo (Maybe Text)
-vviPublishedDate
-  = lens _vviPublishedDate
-      (\ s a -> s{_vviPublishedDate = a})
-
-vviMaturityRating :: Lens' VolumeVolumeInfo (Maybe Text)
-vviMaturityRating
-  = lens _vviMaturityRating
-      (\ s a -> s{_vviMaturityRating = a})
-
--- | URL to preview this volume on the Google Books site.
-vviPreviewLink :: Lens' VolumeVolumeInfo (Maybe Text)
-vviPreviewLink
-  = lens _vviPreviewLink
-      (\ s a -> s{_vviPreviewLink = a})
-
--- | Best language for this volume (based on content). It is the two-letter
--- ISO 639-1 code such as \'fr\', \'en\', etc.
-vviLanguage :: Lens' VolumeVolumeInfo (Maybe Text)
-vviLanguage
-  = lens _vviLanguage (\ s a -> s{_vviLanguage = a})
-
--- | Volume title. (In LITE projection.)
-vviTitle :: Lens' VolumeVolumeInfo (Maybe Text)
-vviTitle = lens _vviTitle (\ s a -> s{_vviTitle = a})
-
--- | Total number of pages as per publisher metadata.
-vviPageCount :: Lens' VolumeVolumeInfo (Maybe Int32)
-vviPageCount
-  = lens _vviPageCount (\ s a -> s{_vviPageCount = a})
-
--- | Physical dimensions of this volume.
-vviDimensions :: Lens' VolumeVolumeInfo (Maybe VolumeVolumeInfoDimensions)
-vviDimensions
-  = lens _vviDimensions
-      (\ s a -> s{_vviDimensions = a})
-
--- | URL to view information about this volume on the Google Books site. (In
--- LITE projection)
-vviInfoLink :: Lens' VolumeVolumeInfo (Maybe Text)
-vviInfoLink
-  = lens _vviInfoLink (\ s a -> s{_vviInfoLink = a})
-
--- | Publisher of this volume. (In LITE projection.)
-vviPublisher :: Lens' VolumeVolumeInfo (Maybe Text)
-vviPublisher
-  = lens _vviPublisher (\ s a -> s{_vviPublisher = a})
-
--- | A synopsis of the volume. The text of the description is formatted in
--- HTML and includes simple formatting elements, such as b, i, and br tags.
--- (In LITE projection.)
-vviDescription :: Lens' VolumeVolumeInfo (Maybe Text)
-vviDescription
-  = lens _vviDescription
-      (\ s a -> s{_vviDescription = a})
-
--- | Type of publication of this volume. Possible values are BOOK or
--- MAGAZINE.
-vviPrintType :: Lens' VolumeVolumeInfo (Maybe Text)
-vviPrintType
-  = lens _vviPrintType (\ s a -> s{_vviPrintType = a})
-
-instance FromJSON VolumeVolumeInfo where
-        parseJSON
-          = withObject "VolumeVolumeInfo"
-              (\ o ->
-                 VolumeVolumeInfo <$>
-                   (o .:? "imageLinks") <*> (o .:? "averageRating") <*>
-                     (o .:? "ratingsCount")
-                     <*> (o .:? "canonicalVolumeLink")
-                     <*> (o .:? "readingModes")
-                     <*> (o .:? "industryIdentifiers" .!= mempty)
-                     <*> (o .:? "printedPageCount")
-                     <*> (o .:? "mainCategory")
-                     <*> (o .:? "contentVersion")
-                     <*> (o .:? "samplePageCount")
-                     <*> (o .:? "categories" .!= mempty)
-                     <*> (o .:? "authors" .!= mempty)
-                     <*> (o .:? "allowAnonLogging")
-                     <*> (o .:? "subtitle")
-                     <*> (o .:? "publishedDate")
-                     <*> (o .:? "maturityRating")
-                     <*> (o .:? "previewLink")
-                     <*> (o .:? "language")
-                     <*> (o .:? "title")
-                     <*> (o .:? "pageCount")
-                     <*> (o .:? "dimensions")
-                     <*> (o .:? "infoLink")
-                     <*> (o .:? "publisher")
-                     <*> (o .:? "description")
-                     <*> (o .:? "printType"))
-
-instance ToJSON VolumeVolumeInfo where
-        toJSON VolumeVolumeInfo{..}
-          = object
-              (catMaybes
-                 [("imageLinks" .=) <$> _vviImageLinks,
-                  ("averageRating" .=) <$> _vviAverageRating,
-                  ("ratingsCount" .=) <$> _vviRatingsCount,
-                  ("canonicalVolumeLink" .=) <$>
-                    _vviCanonicalVolumeLink,
-                  ("readingModes" .=) <$> _vviReadingModes,
-                  ("industryIdentifiers" .=) <$>
-                    _vviIndustryIdentifiers,
-                  ("printedPageCount" .=) <$> _vviPrintedPageCount,
-                  ("mainCategory" .=) <$> _vviMainCategory,
-                  ("contentVersion" .=) <$> _vviContentVersion,
-                  ("samplePageCount" .=) <$> _vviSamplePageCount,
-                  ("categories" .=) <$> _vviCategories,
-                  ("authors" .=) <$> _vviAuthors,
-                  ("allowAnonLogging" .=) <$> _vviAllowAnonLogging,
-                  ("subtitle" .=) <$> _vviSubtitle,
-                  ("publishedDate" .=) <$> _vviPublishedDate,
-                  ("maturityRating" .=) <$> _vviMaturityRating,
-                  ("previewLink" .=) <$> _vviPreviewLink,
-                  ("language" .=) <$> _vviLanguage,
-                  ("title" .=) <$> _vviTitle,
-                  ("pageCount" .=) <$> _vviPageCount,
-                  ("dimensions" .=) <$> _vviDimensions,
-                  ("infoLink" .=) <$> _vviInfoLink,
-                  ("publisher" .=) <$> _vviPublisher,
-                  ("description" .=) <$> _vviDescription,
-                  ("printType" .=) <$> _vviPrintType])
-
---
--- /See:/ 'volumeSaleInfoOffers' smart constructor.
-data VolumeSaleInfoOffers = VolumeSaleInfoOffers
-    { _vsioFinskyOfferType :: !(Maybe Int32)
-    , _vsioRentalDuration  :: !(Maybe VolumeSaleInfoOffersRentalDuration)
-    , _vsioListPrice       :: !(Maybe VolumeSaleInfoOffersListPrice)
-    , _vsioRetailPrice     :: !(Maybe VolumeSaleInfoOffersRetailPrice)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VolumeSaleInfoOffers' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vsioFinskyOfferType'
---
--- * 'vsioRentalDuration'
---
--- * 'vsioListPrice'
---
--- * 'vsioRetailPrice'
-volumeSaleInfoOffers
-    :: VolumeSaleInfoOffers
-volumeSaleInfoOffers =
-    VolumeSaleInfoOffers
-    { _vsioFinskyOfferType = Nothing
-    , _vsioRentalDuration = Nothing
-    , _vsioListPrice = Nothing
-    , _vsioRetailPrice = Nothing
+-- * 'oiRetailPrice'
+offersItem
+    :: OffersItem
+offersItem =
+    OffersItem
+    { _oiFinskyOfferType = Nothing
+    , _oiRentalDuration = Nothing
+    , _oiListPrice = Nothing
+    , _oiRetailPrice = Nothing
     }
 
 -- | The finsky offer type (e.g., PURCHASE=0 RENTAL=3)
-vsioFinskyOfferType :: Lens' VolumeSaleInfoOffers (Maybe Int32)
-vsioFinskyOfferType
-  = lens _vsioFinskyOfferType
-      (\ s a -> s{_vsioFinskyOfferType = a})
+oiFinskyOfferType :: Lens' OffersItem (Maybe Int32)
+oiFinskyOfferType
+  = lens _oiFinskyOfferType
+      (\ s a -> s{_oiFinskyOfferType = a})
 
 -- | The rental duration (for rental offers only).
-vsioRentalDuration :: Lens' VolumeSaleInfoOffers (Maybe VolumeSaleInfoOffersRentalDuration)
-vsioRentalDuration
-  = lens _vsioRentalDuration
-      (\ s a -> s{_vsioRentalDuration = a})
+oiRentalDuration :: Lens' OffersItem (Maybe RentalDuration)
+oiRentalDuration
+  = lens _oiRentalDuration
+      (\ s a -> s{_oiRentalDuration = a})
 
 -- | Offer list (=undiscounted) price in Micros.
-vsioListPrice :: Lens' VolumeSaleInfoOffers (Maybe VolumeSaleInfoOffersListPrice)
-vsioListPrice
-  = lens _vsioListPrice
-      (\ s a -> s{_vsioListPrice = a})
+oiListPrice :: Lens' OffersItem (Maybe OffersItemListPrice)
+oiListPrice
+  = lens _oiListPrice (\ s a -> s{_oiListPrice = a})
 
 -- | Offer retail (=discounted) price in Micros
-vsioRetailPrice :: Lens' VolumeSaleInfoOffers (Maybe VolumeSaleInfoOffersRetailPrice)
-vsioRetailPrice
-  = lens _vsioRetailPrice
-      (\ s a -> s{_vsioRetailPrice = a})
+oiRetailPrice :: Lens' OffersItem (Maybe OffersItemRetailPrice)
+oiRetailPrice
+  = lens _oiRetailPrice
+      (\ s a -> s{_oiRetailPrice = a})
 
-instance FromJSON VolumeSaleInfoOffers where
+instance FromJSON OffersItem where
         parseJSON
-          = withObject "VolumeSaleInfoOffers"
+          = withObject "OffersItem"
               (\ o ->
-                 VolumeSaleInfoOffers <$>
+                 OffersItem <$>
                    (o .:? "finskyOfferType") <*>
                      (o .:? "rentalDuration")
                      <*> (o .:? "listPrice")
                      <*> (o .:? "retailPrice"))
 
-instance ToJSON VolumeSaleInfoOffers where
-        toJSON VolumeSaleInfoOffers{..}
+instance ToJSON OffersItem where
+        toJSON OffersItem{..}
           = object
               (catMaybes
-                 [("finskyOfferType" .=) <$> _vsioFinskyOfferType,
-                  ("rentalDuration" .=) <$> _vsioRentalDuration,
-                  ("listPrice" .=) <$> _vsioListPrice,
-                  ("retailPrice" .=) <$> _vsioRetailPrice])
+                 [("finskyOfferType" .=) <$> _oiFinskyOfferType,
+                  ("rentalDuration" .=) <$> _oiRentalDuration,
+                  ("listPrice" .=) <$> _oiListPrice,
+                  ("retailPrice" .=) <$> _oiRetailPrice])
 
+-- | Offer list (=undiscounted) price in Micros.
 --
--- /See:/ 'dictlayerdataDictWordsSensesSource' smart constructor.
-data DictlayerdataDictWordsSensesSource = DictlayerdataDictWordsSensesSource
-    { _ddwssURL         :: !(Maybe Text)
-    , _ddwssAttribution :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'offersItemListPrice' smart constructor.
+data OffersItemListPrice = OffersItemListPrice
+    { _oilpCurrencyCode   :: !(Maybe Text)
+    , _oilpAmountInMicros :: !(Maybe Double)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictlayerdataDictWordsSensesSource' with the minimum fields required to make a request.
+-- | Creates a value of 'OffersItemListPrice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddwssURL'
+-- * 'oilpCurrencyCode'
 --
--- * 'ddwssAttribution'
-dictlayerdataDictWordsSensesSource
-    :: DictlayerdataDictWordsSensesSource
-dictlayerdataDictWordsSensesSource =
-    DictlayerdataDictWordsSensesSource
-    { _ddwssURL = Nothing
-    , _ddwssAttribution = Nothing
+-- * 'oilpAmountInMicros'
+offersItemListPrice
+    :: OffersItemListPrice
+offersItemListPrice =
+    OffersItemListPrice
+    { _oilpCurrencyCode = Nothing
+    , _oilpAmountInMicros = Nothing
     }
 
-ddwssURL :: Lens' DictlayerdataDictWordsSensesSource (Maybe Text)
-ddwssURL = lens _ddwssURL (\ s a -> s{_ddwssURL = a})
+oilpCurrencyCode :: Lens' OffersItemListPrice (Maybe Text)
+oilpCurrencyCode
+  = lens _oilpCurrencyCode
+      (\ s a -> s{_oilpCurrencyCode = a})
 
-ddwssAttribution :: Lens' DictlayerdataDictWordsSensesSource (Maybe Text)
-ddwssAttribution
-  = lens _ddwssAttribution
-      (\ s a -> s{_ddwssAttribution = a})
+oilpAmountInMicros :: Lens' OffersItemListPrice (Maybe Double)
+oilpAmountInMicros
+  = lens _oilpAmountInMicros
+      (\ s a -> s{_oilpAmountInMicros = a})
 
-instance FromJSON DictlayerdataDictWordsSensesSource
-         where
+instance FromJSON OffersItemListPrice where
         parseJSON
-          = withObject "DictlayerdataDictWordsSensesSource"
+          = withObject "OffersItemListPrice"
               (\ o ->
-                 DictlayerdataDictWordsSensesSource <$>
-                   (o .:? "url") <*> (o .:? "attribution"))
+                 OffersItemListPrice <$>
+                   (o .:? "currencyCode") <*> (o .:? "amountInMicros"))
 
-instance ToJSON DictlayerdataDictWordsSensesSource
-         where
-        toJSON DictlayerdataDictWordsSensesSource{..}
+instance ToJSON OffersItemListPrice where
+        toJSON OffersItemListPrice{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _ddwssURL,
-                  ("attribution" .=) <$> _ddwssAttribution])
+                 [("currencyCode" .=) <$> _oilpCurrencyCode,
+                  ("amountInMicros" .=) <$> _oilpAmountInMicros])
 
 --
 -- /See:/ 'layersummaries' smart constructor.
@@ -6303,7 +6257,7 @@ data Layersummaries = Layersummaries
     { _layTotalItems :: !(Maybe Int32)
     , _layKind       :: !Text
     , _layItems      :: !(Maybe [Layersummary])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Layersummaries' with the minimum fields required to make a request.
 --
@@ -6357,53 +6311,6 @@ instance ToJSON Layersummaries where
                   Just ("kind" .= _layKind),
                   ("items" .=) <$> _layItems])
 
--- | Offer list (=undiscounted) price in Micros.
---
--- /See:/ 'volumeSaleInfoOffersListPrice' smart constructor.
-data VolumeSaleInfoOffersListPrice = VolumeSaleInfoOffersListPrice
-    { _vsiolpCurrencyCode   :: !(Maybe Text)
-    , _vsiolpAmountInMicros :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VolumeSaleInfoOffersListPrice' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vsiolpCurrencyCode'
---
--- * 'vsiolpAmountInMicros'
-volumeSaleInfoOffersListPrice
-    :: VolumeSaleInfoOffersListPrice
-volumeSaleInfoOffersListPrice =
-    VolumeSaleInfoOffersListPrice
-    { _vsiolpCurrencyCode = Nothing
-    , _vsiolpAmountInMicros = Nothing
-    }
-
-vsiolpCurrencyCode :: Lens' VolumeSaleInfoOffersListPrice (Maybe Text)
-vsiolpCurrencyCode
-  = lens _vsiolpCurrencyCode
-      (\ s a -> s{_vsiolpCurrencyCode = a})
-
-vsiolpAmountInMicros :: Lens' VolumeSaleInfoOffersListPrice (Maybe Double)
-vsiolpAmountInMicros
-  = lens _vsiolpAmountInMicros
-      (\ s a -> s{_vsiolpAmountInMicros = a})
-
-instance FromJSON VolumeSaleInfoOffersListPrice where
-        parseJSON
-          = withObject "VolumeSaleInfoOffersListPrice"
-              (\ o ->
-                 VolumeSaleInfoOffersListPrice <$>
-                   (o .:? "currencyCode") <*> (o .:? "amountInMicros"))
-
-instance ToJSON VolumeSaleInfoOffersListPrice where
-        toJSON VolumeSaleInfoOffersListPrice{..}
-          = object
-              (catMaybes
-                 [("currencyCode" .=) <$> _vsiolpCurrencyCode,
-                  ("amountInMicros" .=) <$> _vsiolpAmountInMicros])
-
 --
 -- /See:/ 'booksAnnotationsRange' smart constructor.
 data BooksAnnotationsRange = BooksAnnotationsRange
@@ -6411,7 +6318,7 @@ data BooksAnnotationsRange = BooksAnnotationsRange
     , _barEndOffset     :: !(Maybe Text)
     , _barEndPosition   :: !(Maybe Text)
     , _barStartPosition :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BooksAnnotationsRange' with the minimum fields required to make a request.
 --

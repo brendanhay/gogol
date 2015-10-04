@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,17 +56,17 @@ type DirectorySiteContactsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "directorySiteContacts" :>
-           QueryParams "directorySiteIds" Int64 :>
+           QueryParam "searchString" Text :>
              QueryParams "ids" Int64 :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "searchString" Text :>
+               QueryParams "directorySiteIds" Int64 :>
+                 QueryParam "sortOrder"
+                   DfareportingDirectorySiteContactsListSortOrder
+                   :>
+                   QueryParam "pageToken" Text :>
                      QueryParam "sortField"
                        DfareportingDirectorySiteContactsListSortField
                        :>
-                       QueryParam "sortOrder"
-                         DfareportingDirectorySiteContactsListSortOrder
-                         :>
+                       QueryParam "maxResults" Int32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -84,9 +85,9 @@ data DirectorySiteContactsList' = DirectorySiteContactsList'
     , _dsclPrettyPrint      :: !Bool
     , _dsclUserIP           :: !(Maybe Text)
     , _dsclSearchString     :: !(Maybe Text)
-    , _dsclIds              :: !(Maybe Int64)
+    , _dsclIds              :: !(Maybe [Int64])
     , _dsclProfileId        :: !Int64
-    , _dsclDirectorySiteIds :: !(Maybe Int64)
+    , _dsclDirectorySiteIds :: !(Maybe [Int64])
     , _dsclSortOrder        :: !(Maybe DfareportingDirectorySiteContactsListSortOrder)
     , _dsclKey              :: !(Maybe Key)
     , _dsclPageToken        :: !(Maybe Text)
@@ -94,7 +95,7 @@ data DirectorySiteContactsList' = DirectorySiteContactsList'
     , _dsclOAuthToken       :: !(Maybe OAuthToken)
     , _dsclMaxResults       :: !(Maybe Int32)
     , _dsclFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySiteContactsList'' with the minimum fields required to make a request.
 --
@@ -183,8 +184,10 @@ dsclSearchString
       (\ s a -> s{_dsclSearchString = a})
 
 -- | Select only directory site contacts with these IDs.
-dsclIds :: Lens' DirectorySiteContactsList' (Maybe Int64)
-dsclIds = lens _dsclIds (\ s a -> s{_dsclIds = a})
+dsclIds :: Lens' DirectorySiteContactsList' [Int64]
+dsclIds
+  = lens _dsclIds (\ s a -> s{_dsclIds = a}) . _Default
+      . _Coerce
 
 -- | User profile ID associated with this request.
 dsclProfileId :: Lens' DirectorySiteContactsList' Int64
@@ -194,10 +197,12 @@ dsclProfileId
 
 -- | Select only directory site contacts with these directory site IDs. This
 -- is a required field.
-dsclDirectorySiteIds :: Lens' DirectorySiteContactsList' (Maybe Int64)
+dsclDirectorySiteIds :: Lens' DirectorySiteContactsList' [Int64]
 dsclDirectorySiteIds
   = lens _dsclDirectorySiteIds
       (\ s a -> s{_dsclDirectorySiteIds = a})
+      . _Default
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 dsclSortOrder :: Lens' DirectorySiteContactsList' (Maybe DfareportingDirectorySiteContactsListSortOrder)
@@ -250,12 +255,13 @@ instance GoogleRequest DirectorySiteContactsList'
              DirectorySiteContactsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u DirectorySiteContactsList'{..}
-          = go _dsclDirectorySiteIds _dsclIds _dsclMaxResults
-              _dsclPageToken
-              _dsclSearchString
-              _dsclSortField
+          = go _dsclProfileId _dsclSearchString
+              (_dsclIds ^. _Default)
+              (_dsclDirectorySiteIds ^. _Default)
               _dsclSortOrder
-              _dsclProfileId
+              _dsclPageToken
+              _dsclSortField
+              _dsclMaxResults
               _dsclQuotaUser
               (Just _dsclPrettyPrint)
               _dsclUserIP

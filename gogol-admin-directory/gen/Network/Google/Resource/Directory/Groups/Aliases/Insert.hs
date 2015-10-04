@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.Directory.Groups.Aliases.Insert
     , gaiPrettyPrint
     , gaiUserIP
     , gaiGroupKey
-    , gaiAlias
+    , gaiPayload
     , gaiKey
     , gaiOAuthToken
     , gaiFields
@@ -66,11 +67,11 @@ data GroupsAliasesInsert' = GroupsAliasesInsert'
     , _gaiPrettyPrint :: !Bool
     , _gaiUserIP      :: !(Maybe Text)
     , _gaiGroupKey    :: !Text
-    , _gaiAlias       :: !Alias
+    , _gaiPayload     :: !Alias
     , _gaiKey         :: !(Maybe Key)
     , _gaiOAuthToken  :: !(Maybe OAuthToken)
     , _gaiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsAliasesInsert'' with the minimum fields required to make a request.
 --
@@ -84,7 +85,7 @@ data GroupsAliasesInsert' = GroupsAliasesInsert'
 --
 -- * 'gaiGroupKey'
 --
--- * 'gaiAlias'
+-- * 'gaiPayload'
 --
 -- * 'gaiKey'
 --
@@ -93,15 +94,15 @@ data GroupsAliasesInsert' = GroupsAliasesInsert'
 -- * 'gaiFields'
 groupsAliasesInsert'
     :: Text -- ^ 'groupKey'
-    -> Alias -- ^ 'Alias'
+    -> Alias -- ^ 'payload'
     -> GroupsAliasesInsert'
-groupsAliasesInsert' pGaiGroupKey_ pGaiAlias_ =
+groupsAliasesInsert' pGaiGroupKey_ pGaiPayload_ =
     GroupsAliasesInsert'
     { _gaiQuotaUser = Nothing
     , _gaiPrettyPrint = True
     , _gaiUserIP = Nothing
     , _gaiGroupKey = pGaiGroupKey_
-    , _gaiAlias = pGaiAlias_
+    , _gaiPayload = pGaiPayload_
     , _gaiKey = Nothing
     , _gaiOAuthToken = Nothing
     , _gaiFields = Nothing
@@ -132,8 +133,9 @@ gaiGroupKey
   = lens _gaiGroupKey (\ s a -> s{_gaiGroupKey = a})
 
 -- | Multipart request metadata.
-gaiAlias :: Lens' GroupsAliasesInsert' Alias
-gaiAlias = lens _gaiAlias (\ s a -> s{_gaiAlias = a})
+gaiPayload :: Lens' GroupsAliasesInsert' Alias
+gaiPayload
+  = lens _gaiPayload (\ s a -> s{_gaiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -167,7 +169,7 @@ instance GoogleRequest GroupsAliasesInsert' where
               _gaiKey
               _gaiOAuthToken
               (Just AltJSON)
-              _gaiAlias
+              _gaiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GroupsAliasesInsertResource)

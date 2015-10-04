@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,8 +58,8 @@ type ManagementUploadsListResource =
                "customDataSources" :>
                  Capture "customDataSourceId" Text :>
                    "uploads" :>
-                     QueryParam "max-results" Int32 :>
-                       QueryParam "start-index" Int32 :>
+                     QueryParam "start-index" Int32 :>
+                       QueryParam "max-results" Int32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -83,7 +84,7 @@ data ManagementUploadsList' = ManagementUploadsList'
     , _mulStartIndex         :: !(Maybe Int32)
     , _mulMaxResults         :: !(Maybe Int32)
     , _mulFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUploadsList'' with the minimum fields required to make a request.
 --
@@ -204,9 +205,10 @@ instance GoogleRequest ManagementUploadsList' where
         type Rs ManagementUploadsList' = Uploads
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementUploadsList'{..}
-          = go _mulMaxResults _mulStartIndex _mulAccountId
-              _mulWebPropertyId
+          = go _mulAccountId _mulWebPropertyId
               _mulCustomDataSourceId
+              _mulStartIndex
+              _mulMaxResults
               _mulQuotaUser
               (Just _mulPrettyPrint)
               _mulUserIP

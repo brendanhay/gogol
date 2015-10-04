@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 -- /See:/ 'rollbackRequest' smart constructor.
 newtype RollbackRequest = RollbackRequest
     { _rrTransaction :: Maybe Word8
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollbackRequest' with the minimum fields required to make a request.
 --
@@ -60,7 +60,7 @@ instance ToJSON RollbackRequest where
 data PartitionId = PartitionId
     { _piNamespace :: !(Maybe Text)
     , _piDatasetId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PartitionId' with the minimum fields required to make a request.
 --
@@ -106,11 +106,11 @@ instance ToJSON PartitionId where
 -- /See:/ 'queryResultBatch' smart constructor.
 data QueryResultBatch = QueryResultBatch
     { _qrbSkippedResults   :: !(Maybe Int32)
-    , _qrbEntityResultType :: !(Maybe QueryResultBatchEntityResultType)
+    , _qrbEntityResultType :: !(Maybe EntityResultType)
     , _qrbEntityResults    :: !(Maybe [EntityResult])
-    , _qrbMoreResults      :: !(Maybe QueryResultBatchMoreResults)
+    , _qrbMoreResults      :: !(Maybe MoreResults)
     , _qrbEndCursor        :: !(Maybe Word8)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueryResultBatch' with the minimum fields required to make a request.
 --
@@ -145,7 +145,7 @@ qrbSkippedResults
 -- | The result type for every entity in entityResults. full for full
 -- entities, projection for entities with only projected properties,
 -- keyOnly for entities with only a key.
-qrbEntityResultType :: Lens' QueryResultBatch (Maybe QueryResultBatchEntityResultType)
+qrbEntityResultType :: Lens' QueryResultBatch (Maybe EntityResultType)
 qrbEntityResultType
   = lens _qrbEntityResultType
       (\ s a -> s{_qrbEntityResultType = a})
@@ -160,7 +160,7 @@ qrbEntityResults
 
 -- | The state of the query after the current batch. One of notFinished,
 -- moreResultsAfterLimit, noMoreResults.
-qrbMoreResults :: Lens' QueryResultBatch (Maybe QueryResultBatchMoreResults)
+qrbMoreResults :: Lens' QueryResultBatch (Maybe MoreResults)
 qrbMoreResults
   = lens _qrbMoreResults
       (\ s a -> s{_qrbMoreResults = a})
@@ -209,7 +209,7 @@ data Property = Property
     , _pBooleanValue  :: !(Maybe Bool)
     , _pMeaning       :: !(Maybe Int32)
     , _pBlobValue     :: !(Maybe Word8)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Property' with the minimum fields required to make a request.
 --
@@ -369,7 +369,7 @@ instance ToJSON Property where
 -- /See:/ 'allocateIdsRequest' smart constructor.
 newtype AllocateIdsRequest = AllocateIdsRequest
     { _airKeys :: Maybe [Key]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AllocateIdsRequest' with the minimum fields required to make a request.
 --
@@ -400,32 +400,11 @@ instance ToJSON AllocateIdsRequest where
         toJSON AllocateIdsRequest{..}
           = object (catMaybes [("keys" .=) <$> _airKeys])
 
--- | The entity\'s properties.
---
--- /See:/ 'entityProperties' smart constructor.
-data EntityProperties =
-    EntityProperties
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'EntityProperties' with the minimum fields required to make a request.
---
-entityProperties
-    :: EntityProperties
-entityProperties = EntityProperties
-
-instance FromJSON EntityProperties where
-        parseJSON
-          = withObject "EntityProperties"
-              (\ o -> pure EntityProperties)
-
-instance ToJSON EntityProperties where
-        toJSON = const (Object mempty)
-
 --
 -- /See:/ 'beginTransactionRequest' smart constructor.
 newtype BeginTransactionRequest = BeginTransactionRequest
-    { _btrIsolationLevel :: Maybe BeginTransactionRequestIsolationLevel
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _btrIsolationLevel :: Maybe IsolationLevel
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeginTransactionRequest' with the minimum fields required to make a request.
 --
@@ -445,7 +424,7 @@ beginTransactionRequest =
 -- this transaction. Optionally, a transaction can request to be made
 -- serializable which means that another transaction cannot concurrently
 -- modify the data that is read or modified by this transaction.
-btrIsolationLevel :: Lens' BeginTransactionRequest (Maybe BeginTransactionRequestIsolationLevel)
+btrIsolationLevel :: Lens' BeginTransactionRequest (Maybe IsolationLevel)
 btrIsolationLevel
   = lens _btrIsolationLevel
       (\ s a -> s{_btrIsolationLevel = a})
@@ -469,7 +448,7 @@ data RunQueryRequest = RunQueryRequest
     , _rqrGqlQuery    :: !(Maybe GqlQuery)
     , _rqrQuery       :: !(Maybe Query)
     , _rqrReadOptions :: !(Maybe ReadOptions)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RunQueryRequest' with the minimum fields required to make a request.
 --
@@ -543,9 +522,9 @@ instance ToJSON RunQueryRequest where
 --
 -- /See:/ 'compositeFilter' smart constructor.
 data CompositeFilter = CompositeFilter
-    { _cfOperator :: !(Maybe CompositeFilterOperator)
+    { _cfOperator :: !(Maybe Operator)
     , _cfFilters  :: !(Maybe [Filter])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CompositeFilter' with the minimum fields required to make a request.
 --
@@ -564,7 +543,7 @@ compositeFilter =
 
 -- | The operator for combining multiple filters. Only \"and\" is currently
 -- supported.
-cfOperator :: Lens' CompositeFilter (Maybe CompositeFilterOperator)
+cfOperator :: Lens' CompositeFilter (Maybe Operator)
 cfOperator
   = lens _cfOperator (\ s a -> s{_cfOperator = a})
 
@@ -594,7 +573,7 @@ instance ToJSON CompositeFilter where
 data BeginTransactionResponse = BeginTransactionResponse
     { _btrTransaction :: !(Maybe Word8)
     , _btrHeader      :: !(Maybe ResponseHeader)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeginTransactionResponse' with the minimum fields required to make a request.
 --
@@ -640,7 +619,7 @@ instance ToJSON BeginTransactionResponse where
 data RunQueryResponse = RunQueryResponse
     { _rqrBatch  :: !(Maybe QueryResultBatch)
     , _rqrHeader :: !(Maybe ResponseHeader)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RunQueryResponse' with the minimum fields required to make a request.
 --
@@ -684,7 +663,7 @@ instance ToJSON RunQueryResponse where
 data MutationResult = MutationResult
     { _mrInsertAutoIdKeys :: !(Maybe [Key])
     , _mrIndexUpdates     :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MutationResult' with the minimum fields required to make a request.
 --
@@ -739,7 +718,7 @@ data GqlQuery = GqlQuery
     , _gqNumberArgs   :: !(Maybe [GqlQueryArg])
     , _gqQueryString  :: !(Maybe Text)
     , _gqNameArgs     :: !(Maybe [GqlQueryArg])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GqlQuery' with the minimum fields required to make a request.
 --
@@ -819,7 +798,7 @@ instance ToJSON GqlQuery where
 data AllocateIdsResponse = AllocateIdsResponse
     { _aKeys   :: !(Maybe [Key])
     , _aHeader :: !(Maybe ResponseHeader)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AllocateIdsResponse' with the minimum fields required to make a request.
 --
@@ -876,7 +855,7 @@ data Value = Value
     , _vBooleanValue  :: !(Maybe Bool)
     , _vMeaning       :: !(Maybe Int32)
     , _vBlobValue     :: !(Maybe Word8)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Value' with the minimum fields required to make a request.
 --
@@ -1037,7 +1016,7 @@ instance ToJSON Value where
 data LookupRequest = LookupRequest
     { _lrKeys        :: !(Maybe [Key])
     , _lrReadOptions :: !(Maybe ReadOptions)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LookupRequest' with the minimum fields required to make a request.
 --
@@ -1090,7 +1069,7 @@ data Mutation = Mutation
     , _mUpsert       :: !(Maybe [Entity])
     , _mDelete       :: !(Maybe [Key])
     , _mUpdate       :: !(Maybe [Entity])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Mutation' with the minimum fields required to make a request.
 --
@@ -1187,7 +1166,7 @@ instance ToJSON Mutation where
 -- /See:/ 'responseHeader' smart constructor.
 newtype ResponseHeader = ResponseHeader
     { _rhKind :: Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResponseHeader' with the minimum fields required to make a request.
 --
@@ -1224,7 +1203,7 @@ data GqlQueryArg = GqlQueryArg
     { _gqaCursor :: !(Maybe Word8)
     , _gqaValue  :: !(Maybe Value)
     , _gqaName   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GqlQueryArg' with the minimum fields required to make a request.
 --
@@ -1277,7 +1256,7 @@ instance ToJSON GqlQueryArg where
 -- /See:/ 'propertyReference' smart constructor.
 newtype PropertyReference = PropertyReference
     { _prName :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertyReference' with the minimum fields required to make a request.
 --
@@ -1313,7 +1292,7 @@ data KeyPathElement = KeyPathElement
     { _kpeKind :: !(Maybe Text)
     , _kpeName :: !(Maybe Text)
     , _kpeId   :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'KeyPathElement' with the minimum fields required to make a request.
 --
@@ -1370,7 +1349,7 @@ instance ToJSON KeyPathElement where
 data Key = Key
     { _kPartitionId :: !(Maybe PartitionId)
     , _kPath        :: !(Maybe [KeyPathElement])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Key' with the minimum fields required to make a request.
 --
@@ -1431,7 +1410,7 @@ data PropertyFilter = PropertyFilter
     { _pfProperty :: !(Maybe PropertyReference)
     , _pfOperator :: !(Maybe PropertyFilterOperator)
     , _pfValue    :: !(Maybe Value)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertyFilter' with the minimum fields required to make a request.
 --
@@ -1487,7 +1466,7 @@ instance ToJSON PropertyFilter where
 data CommitResponse = CommitResponse
     { _crMutationResult :: !(Maybe MutationResult)
     , _crHeader         :: !(Maybe ResponseHeader)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommitResponse' with the minimum fields required to make a request.
 --
@@ -1532,7 +1511,7 @@ instance ToJSON CommitResponse where
 -- /See:/ 'entityResult' smart constructor.
 newtype EntityResult = EntityResult
     { _erEntity :: Maybe Entity
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EntityResult' with the minimum fields required to make a request.
 --
@@ -1572,7 +1551,7 @@ data Query = Query
     , _qFilter      :: !(Maybe Filter)
     , _qKinds       :: !(Maybe [KindExpression])
     , _qOrder       :: !(Maybe [PropertyOrder])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Query' with the minimum fields required to make a request.
 --
@@ -1697,7 +1676,7 @@ instance ToJSON Query where
 -- /See:/ 'kindExpression' smart constructor.
 newtype KindExpression = KindExpression
     { _keName :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'KindExpression' with the minimum fields required to make a request.
 --
@@ -1727,9 +1706,9 @@ instance ToJSON KindExpression where
 --
 -- /See:/ 'readOptions' smart constructor.
 data ReadOptions = ReadOptions
-    { _roReadConsistency :: !(Maybe ReadOptionsReadConsistency)
+    { _roReadConsistency :: !(Maybe ReadConsistency)
     , _roTransaction     :: !(Maybe Word8)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadOptions' with the minimum fields required to make a request.
 --
@@ -1750,7 +1729,7 @@ readOptions =
 -- be set when transaction is set. Lookup and ancestor queries default to
 -- strong, global queries default to eventual and cannot be set to strong.
 -- Optional. Default is default.
-roReadConsistency :: Lens' ReadOptions (Maybe ReadOptionsReadConsistency)
+roReadConsistency :: Lens' ReadOptions (Maybe ReadConsistency)
 roReadConsistency
   = lens _roReadConsistency
       (\ s a -> s{_roReadConsistency = a})
@@ -1779,7 +1758,7 @@ instance ToJSON ReadOptions where
 -- /See:/ 'rollbackResponse' smart constructor.
 newtype RollbackResponse = RollbackResponse
     { _rrHeader :: Maybe ResponseHeader
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollbackResponse' with the minimum fields required to make a request.
 --
@@ -1810,8 +1789,8 @@ instance ToJSON RollbackResponse where
 -- /See:/ 'propertyExpression' smart constructor.
 data PropertyExpression = PropertyExpression
     { _peProperty            :: !(Maybe PropertyReference)
-    , _peAggregationFunction :: !(Maybe PropertyExpressionAggregationFunction)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _peAggregationFunction :: !(Maybe AggregationFunction)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertyExpression' with the minimum fields required to make a request.
 --
@@ -1838,7 +1817,7 @@ peProperty
 -- properties in the projection that are not being grouped by. Aggregation
 -- functions: first selects the first result as determined by the query\'s
 -- order.
-peAggregationFunction :: Lens' PropertyExpression (Maybe PropertyExpressionAggregationFunction)
+peAggregationFunction :: Lens' PropertyExpression (Maybe AggregationFunction)
 peAggregationFunction
   = lens _peAggregationFunction
       (\ s a -> s{_peAggregationFunction = a})
@@ -1864,7 +1843,7 @@ instance ToJSON PropertyExpression where
 data Filter = Filter
     { _fCompositeFilter :: !(Maybe CompositeFilter)
     , _fPropertyFilter  :: !(Maybe PropertyFilter)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Filter' with the minimum fields required to make a request.
 --
@@ -1911,11 +1890,11 @@ instance ToJSON Filter where
 --
 -- /See:/ 'commitRequest' smart constructor.
 data CommitRequest = CommitRequest
-    { _crMode           :: !(Maybe CommitRequestMode)
+    { _crMode           :: !(Maybe Mode)
     , _crMutation       :: !(Maybe Mutation)
     , _crTransaction    :: !(Maybe Word8)
     , _crIgnoreReadOnly :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommitRequest' with the minimum fields required to make a request.
 --
@@ -1940,7 +1919,7 @@ commitRequest =
 
 -- | The type of commit to perform. Either TRANSACTIONAL or
 -- NON_TRANSACTIONAL.
-crMode :: Lens' CommitRequest (Maybe CommitRequestMode)
+crMode :: Lens' CommitRequest (Maybe Mode)
 crMode = lens _crMode (\ s a -> s{_crMode = a})
 
 -- | The mutation to perform. Optional.
@@ -1983,8 +1962,8 @@ instance ToJSON CommitRequest where
 -- /See:/ 'entity' smart constructor.
 data Entity = Entity
     { _eKey        :: !(Maybe Key)
-    , _eProperties :: !(Maybe EntityProperties)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _eProperties :: !(Maybe Properties)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Entity' with the minimum fields required to make a request.
 --
@@ -2009,7 +1988,7 @@ eKey :: Lens' Entity (Maybe Key)
 eKey = lens _eKey (\ s a -> s{_eKey = a})
 
 -- | The entity\'s properties.
-eProperties :: Lens' Entity (Maybe EntityProperties)
+eProperties :: Lens' Entity (Maybe Properties)
 eProperties
   = lens _eProperties (\ s a -> s{_eProperties = a})
 
@@ -2033,7 +2012,7 @@ data LookupResponse = LookupResponse
     , _lrFound    :: !(Maybe [EntityResult])
     , _lrMissing  :: !(Maybe [EntityResult])
     , _lrHeader   :: !(Maybe ResponseHeader)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LookupResponse' with the minimum fields required to make a request.
 --
@@ -2103,8 +2082,8 @@ instance ToJSON LookupResponse where
 -- /See:/ 'propertyOrder' smart constructor.
 data PropertyOrder = PropertyOrder
     { _poProperty  :: !(Maybe PropertyReference)
-    , _poDirection :: !(Maybe PropertyOrderDirection)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _poDirection :: !(Maybe Direction)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertyOrder' with the minimum fields required to make a request.
 --
@@ -2128,7 +2107,7 @@ poProperty
 
 -- | The direction to order by. One of ascending or descending. Optional,
 -- defaults to ascending.
-poDirection :: Lens' PropertyOrder (Maybe PropertyOrderDirection)
+poDirection :: Lens' PropertyOrder (Maybe Direction)
 poDirection
   = lens _poDirection (\ s a -> s{_poDirection = a})
 
@@ -2145,3 +2124,23 @@ instance ToJSON PropertyOrder where
               (catMaybes
                  [("property" .=) <$> _poProperty,
                   ("direction" .=) <$> _poDirection])
+
+-- | The entity\'s properties.
+--
+-- /See:/ 'properties' smart constructor.
+data Properties =
+    Properties
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Properties' with the minimum fields required to make a request.
+--
+properties
+    :: Properties
+properties = Properties
+
+instance FromJSON Properties where
+        parseJSON
+          = withObject "Properties" (\ o -> pure Properties)
+
+instance ToJSON Properties where
+        toJSON = const (Object mempty)

@@ -17,6 +17,15 @@ module Network.Google.AdminDirectory.Types
     -- * Service URL
       adminDirectoryURL
 
+    -- * ApplicationsItem
+    , ApplicationsItem
+    , applicationsItem
+    , aiVersionCode
+    , aiVersionName
+    , aiPackageName
+    , aiDisplayName
+    , aiPermission
+
     -- * UserAbout
     , UserAbout
     , userAbout
@@ -57,8 +66,8 @@ module Network.Google.AdminDirectory.Types
     , userMakeAdmin
     , umaStatus
 
-    -- * DirectoryUsersListViewType
-    , DirectoryUsersListViewType (..)
+    -- * Event
+    , Event (..)
 
     -- * DirectoryChromeosDevicesListProjection
     , DirectoryChromeosDevicesListProjection (..)
@@ -96,12 +105,6 @@ module Network.Google.AdminDirectory.Types
     , groAdminCreated
     , groId
     , groDescription
-
-    -- * ChromeOSDeviceActiveTimeRanges
-    , ChromeOSDeviceActiveTimeRanges
-    , chromeOSDeviceActiveTimeRanges
-    , codatrDate
-    , codatrActiveTime
 
     -- * DirectoryUsersWatchViewType
     , DirectoryUsersWatchViewType (..)
@@ -172,8 +175,14 @@ module Network.Google.AdminDirectory.Types
     , uiType
     , uiCustomType
 
+    -- * OrderBy
+    , OrderBy (..)
+
     -- * DirectoryMobileDevicesListOrderBy
     , DirectoryMobileDevicesListOrderBy (..)
+
+    -- * ViewType
+    , ViewType (..)
 
     -- * Notification
     , Notification
@@ -187,16 +196,6 @@ module Network.Google.AdminDirectory.Types
     , nNotificationId
     , nSendTime
 
-    -- * DirectoryUsersListSortOrder
-    , DirectoryUsersListSortOrder (..)
-
-    -- * DirectoryUsersAliasesListEvent
-    , DirectoryUsersAliasesListEvent (..)
-
-    -- * UserCustomSchemas
-    , UserCustomSchemas
-    , userCustomSchemas
-
     -- * DirectoryUsersGetViewType
     , DirectoryUsersGetViewType (..)
 
@@ -206,6 +205,12 @@ module Network.Google.AdminDirectory.Types
     , aliEtag
     , aliKind
     , aliAliases
+
+    -- * NumericIndexingSpec
+    , NumericIndexingSpec
+    , numericIndexingSpec
+    , nisMaxValue
+    , nisMinValue
 
     -- * Tokens
     , Tokens
@@ -225,12 +230,6 @@ module Network.Google.AdminDirectory.Types
     , tokNATiveApp
     , tokAnonymous
     , tokUserKey
-
-    -- * ChromeOSDeviceRecentUsers
-    , ChromeOSDeviceRecentUsers
-    , chromeOSDeviceRecentUsers
-    , codruEmail
-    , codruType
 
     -- * UserUndelete
     , UserUndelete
@@ -262,7 +261,7 @@ module Network.Google.AdminDirectory.Types
     , cExpiration
     , cToken
     , cAddress
-    , cPayLoad
+    , cPayload
     , cParams
     , cId
     , cType
@@ -291,15 +290,6 @@ module Network.Google.AdminDirectory.Types
 
     -- * DirectoryMobileDevicesGetProjection
     , DirectoryMobileDevicesGetProjection (..)
-
-    -- * MobileDeviceApplications
-    , MobileDeviceApplications
-    , mobileDeviceApplications
-    , mdaVersionCode
-    , mdaVersionName
-    , mdaPackageName
-    , mdaDisplayName
-    , mdaPermission
 
     -- * User
     , User
@@ -349,17 +339,21 @@ module Network.Google.AdminDirectory.Types
     , schSchemaId
     , schFields
 
+    -- * Params
+    , Params
+    , params
+
+    -- * SortOrder
+    , SortOrder (..)
+
     -- * DirectoryMobileDevicesListSortOrder
     , DirectoryMobileDevicesListSortOrder (..)
 
-    -- * DirectoryUsersListOrderBy
-    , DirectoryUsersListOrderBy (..)
-
-    -- * DirectoryOrgUnitsListType
-    , DirectoryOrgUnitsListType (..)
-
-    -- * DirectoryUsersListProjection
-    , DirectoryUsersListProjection (..)
+    -- * RecentUsersItem
+    , RecentUsersItem
+    , recentUsersItem
+    , ruiEmail
+    , ruiType
 
     -- * DirectoryChromeosDevicesUpdateProjection
     , DirectoryChromeosDevicesUpdateProjection (..)
@@ -373,10 +367,6 @@ module Network.Google.AdminDirectory.Types
     , oEtag
     , oKind
     , oOrganizationUnits
-
-    -- * ChannelParams
-    , ChannelParams
-    , channelParams
 
     -- * VerificationCodes
     , VerificationCodes
@@ -444,6 +434,9 @@ module Network.Google.AdminDirectory.Types
     -- * DirectoryMobileDevicesListProjection
     , DirectoryMobileDevicesListProjection (..)
 
+    -- * Projection
+    , Projection (..)
+
     -- * UserEmail
     , UserEmail
     , userEmail
@@ -500,6 +493,15 @@ module Network.Google.AdminDirectory.Types
     , mobApplications
     , mobDefaultLanguage
 
+    -- * ActiveTimeRangesItem
+    , ActiveTimeRangesItem
+    , activeTimeRangesItem
+    , atriDate
+    , atriActiveTime
+
+    -- * Type
+    , Type (..)
+
     -- * DirectoryChromeosDevicesGetProjection
     , DirectoryChromeosDevicesGetProjection (..)
 
@@ -509,12 +511,6 @@ module Network.Google.AdminDirectory.Types
     -- * UserCustomProperties
     , UserCustomProperties
     , userCustomProperties
-
-    -- * SchemaFieldSpecNumericIndexingSpec
-    , SchemaFieldSpecNumericIndexingSpec
-    , schemaFieldSpecNumericIndexingSpec
-    , sfsnisMaxValue
-    , sfsnisMinValue
 
     -- * MobileDeviceAction
     , MobileDeviceAction
@@ -559,9 +555,13 @@ module Network.Google.AdminDirectory.Types
     -- * Asps
     , Asps
     , asps
-    , aspEtag
-    , aspKind
-    , aspItems
+    , a1Etag
+    , a1Kind
+    , a1Items
+
+    -- * CustomSchemas
+    , CustomSchemas
+    , customSchemas
 
     -- * ChromeOSDevices
     , ChromeOSDevices

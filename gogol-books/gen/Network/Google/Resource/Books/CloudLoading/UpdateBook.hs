@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -31,9 +32,9 @@ module Network.Google.Resource.Books.CloudLoading.UpdateBook
 
     -- * Request Lenses
     , clubQuotaUser
-    , clubBooksCloudLoadingResource
     , clubPrettyPrint
     , clubUserIP
+    , clubPayload
     , clubKey
     , clubOAuthToken
     , clubFields
@@ -61,14 +62,14 @@ type CloudLoadingUpdateBookResource =
 --
 -- /See:/ 'cloudLoadingUpdateBook'' smart constructor.
 data CloudLoadingUpdateBook' = CloudLoadingUpdateBook'
-    { _clubQuotaUser                 :: !(Maybe Text)
-    , _clubBooksCloudLoadingResource :: !BooksCloudLoadingResource
-    , _clubPrettyPrint               :: !Bool
-    , _clubUserIP                    :: !(Maybe Text)
-    , _clubKey                       :: !(Maybe Key)
-    , _clubOAuthToken                :: !(Maybe OAuthToken)
-    , _clubFields                    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _clubQuotaUser   :: !(Maybe Text)
+    , _clubPrettyPrint :: !Bool
+    , _clubUserIP      :: !(Maybe Text)
+    , _clubPayload     :: !BooksCloudLoadingResource
+    , _clubKey         :: !(Maybe Key)
+    , _clubOAuthToken  :: !(Maybe OAuthToken)
+    , _clubFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CloudLoadingUpdateBook'' with the minimum fields required to make a request.
 --
@@ -76,11 +77,11 @@ data CloudLoadingUpdateBook' = CloudLoadingUpdateBook'
 --
 -- * 'clubQuotaUser'
 --
--- * 'clubBooksCloudLoadingResource'
---
 -- * 'clubPrettyPrint'
 --
 -- * 'clubUserIP'
+--
+-- * 'clubPayload'
 --
 -- * 'clubKey'
 --
@@ -88,14 +89,14 @@ data CloudLoadingUpdateBook' = CloudLoadingUpdateBook'
 --
 -- * 'clubFields'
 cloudLoadingUpdateBook'
-    :: BooksCloudLoadingResource -- ^ 'BooksCloudLoadingResource'
+    :: BooksCloudLoadingResource -- ^ 'payload'
     -> CloudLoadingUpdateBook'
-cloudLoadingUpdateBook' pClubBooksCloudLoadingResource_ =
+cloudLoadingUpdateBook' pClubPayload_ =
     CloudLoadingUpdateBook'
     { _clubQuotaUser = Nothing
-    , _clubBooksCloudLoadingResource = pClubBooksCloudLoadingResource_
     , _clubPrettyPrint = True
     , _clubUserIP = Nothing
+    , _clubPayload = pClubPayload_
     , _clubKey = Nothing
     , _clubOAuthToken = Nothing
     , _clubFields = Nothing
@@ -109,12 +110,6 @@ clubQuotaUser
   = lens _clubQuotaUser
       (\ s a -> s{_clubQuotaUser = a})
 
--- | Multipart request metadata.
-clubBooksCloudLoadingResource :: Lens' CloudLoadingUpdateBook' BooksCloudLoadingResource
-clubBooksCloudLoadingResource
-  = lens _clubBooksCloudLoadingResource
-      (\ s a -> s{_clubBooksCloudLoadingResource = a})
-
 -- | Returns response with indentations and line breaks.
 clubPrettyPrint :: Lens' CloudLoadingUpdateBook' Bool
 clubPrettyPrint
@@ -126,6 +121,11 @@ clubPrettyPrint
 clubUserIP :: Lens' CloudLoadingUpdateBook' (Maybe Text)
 clubUserIP
   = lens _clubUserIP (\ s a -> s{_clubUserIP = a})
+
+-- | Multipart request metadata.
+clubPayload :: Lens' CloudLoadingUpdateBook' BooksCloudLoadingResource
+clubPayload
+  = lens _clubPayload (\ s a -> s{_clubPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -159,7 +159,7 @@ instance GoogleRequest CloudLoadingUpdateBook' where
               _clubKey
               _clubOAuthToken
               (Just AltJSON)
-              _clubBooksCloudLoadingResource
+              _clubPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CloudLoadingUpdateBookResource)

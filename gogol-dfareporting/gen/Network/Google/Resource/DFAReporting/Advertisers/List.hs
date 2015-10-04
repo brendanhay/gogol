@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -60,25 +61,23 @@ type AdvertisersListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "advertisers" :>
-           QueryParams "advertiserGroupIds" Int64 :>
-             QueryParams "floodlightConfigurationIds" Int64 :>
-               QueryParams "ids" Int64 :>
-                 QueryParam "includeAdvertisersWithoutGroupsOnly" Bool
-                   :>
-                   QueryParam "maxResults" Int32 :>
-                     QueryParam "onlyParent" Bool :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "searchString" Text :>
+           QueryParam "status" Status :>
+             QueryParam "onlyParent" Bool :>
+               QueryParam "searchString" Text :>
+                 QueryParams "ids" Int64 :>
+                   QueryParam "includeAdvertisersWithoutGroupsOnly" Bool
+                     :>
+                     QueryParam "sortOrder"
+                       DfareportingAdvertisersListSortOrder
+                       :>
+                       QueryParams "advertiserGroupIds" Int64 :>
+                         QueryParam "pageToken" Text :>
                            QueryParam "sortField"
                              DfareportingAdvertisersListSortField
                              :>
-                             QueryParam "sortOrder"
-                               DfareportingAdvertisersListSortOrder
-                               :>
-                               QueryParam "status"
-                                 DfareportingAdvertisersListStatus
-                                 :>
-                                 QueryParam "subaccountId" Int64 :>
+                             QueryParam "subaccountId" Int64 :>
+                               QueryParams "floodlightConfigurationIds" Int64 :>
+                                 QueryParam "maxResults" Int32 :>
                                    QueryParam "quotaUser" Text :>
                                      QueryParam "prettyPrint" Bool :>
                                        QueryParam "userIp" Text :>
@@ -94,26 +93,26 @@ type AdvertisersListResource =
 --
 -- /See:/ 'advertisersList'' smart constructor.
 data AdvertisersList' = AdvertisersList'
-    { _allStatus                              :: !(Maybe DfareportingAdvertisersListStatus)
+    { _allStatus                              :: !(Maybe Status)
     , _allQuotaUser                           :: !(Maybe Text)
     , _allPrettyPrint                         :: !Bool
     , _allUserIP                              :: !(Maybe Text)
     , _allOnlyParent                          :: !(Maybe Bool)
     , _allSearchString                        :: !(Maybe Text)
-    , _allIds                                 :: !(Maybe Int64)
+    , _allIds                                 :: !(Maybe [Int64])
     , _allIncludeAdvertisersWithoutGroupsOnly :: !(Maybe Bool)
     , _allProfileId                           :: !Int64
     , _allSortOrder                           :: !(Maybe DfareportingAdvertisersListSortOrder)
-    , _allAdvertiserGroupIds                  :: !(Maybe Int64)
+    , _allAdvertiserGroupIds                  :: !(Maybe [Int64])
     , _allKey                                 :: !(Maybe Key)
     , _allPageToken                           :: !(Maybe Text)
     , _allSortField                           :: !(Maybe DfareportingAdvertisersListSortField)
     , _allSubAccountId                        :: !(Maybe Int64)
     , _allOAuthToken                          :: !(Maybe OAuthToken)
-    , _allFloodlightConfigurationIds          :: !(Maybe Int64)
+    , _allFloodlightConfigurationIds          :: !(Maybe [Int64])
     , _allMaxResults                          :: !(Maybe Int32)
     , _allFields                              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersList'' with the minimum fields required to make a request.
 --
@@ -183,7 +182,7 @@ advertisersList' pAllProfileId_ =
     }
 
 -- | Select only advertisers with the specified status.
-allStatus :: Lens' AdvertisersList' (Maybe DfareportingAdvertisersListStatus)
+allStatus :: Lens' AdvertisersList' (Maybe Status)
 allStatus
   = lens _allStatus (\ s a -> s{_allStatus = a})
 
@@ -226,8 +225,10 @@ allSearchString
       (\ s a -> s{_allSearchString = a})
 
 -- | Select only advertisers with these IDs.
-allIds :: Lens' AdvertisersList' (Maybe Int64)
-allIds = lens _allIds (\ s a -> s{_allIds = a})
+allIds :: Lens' AdvertisersList' [Int64]
+allIds
+  = lens _allIds (\ s a -> s{_allIds = a}) . _Default .
+      _Coerce
 
 -- | Select only advertisers which do not belong to any advertiser group.
 allIncludeAdvertisersWithoutGroupsOnly :: Lens' AdvertisersList' (Maybe Bool)
@@ -247,10 +248,12 @@ allSortOrder
   = lens _allSortOrder (\ s a -> s{_allSortOrder = a})
 
 -- | Select only advertisers with these advertiser group IDs.
-allAdvertiserGroupIds :: Lens' AdvertisersList' (Maybe Int64)
+allAdvertiserGroupIds :: Lens' AdvertisersList' [Int64]
 allAdvertiserGroupIds
   = lens _allAdvertiserGroupIds
       (\ s a -> s{_allAdvertiserGroupIds = a})
+      . _Default
+      . _Coerce
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -281,10 +284,12 @@ allOAuthToken
       (\ s a -> s{_allOAuthToken = a})
 
 -- | Select only advertisers with these floodlight configuration IDs.
-allFloodlightConfigurationIds :: Lens' AdvertisersList' (Maybe Int64)
+allFloodlightConfigurationIds :: Lens' AdvertisersList' [Int64]
 allFloodlightConfigurationIds
   = lens _allFloodlightConfigurationIds
       (\ s a -> s{_allFloodlightConfigurationIds = a})
+      . _Default
+      . _Coerce
 
 -- | Maximum number of results to return.
 allMaxResults :: Lens' AdvertisersList' (Maybe Int32)
@@ -305,19 +310,17 @@ instance GoogleRequest AdvertisersList' where
         type Rs AdvertisersList' = AdvertisersListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertisersList'{..}
-          = go _allAdvertiserGroupIds
-              _allFloodlightConfigurationIds
-              _allIds
-              _allIncludeAdvertisersWithoutGroupsOnly
-              _allMaxResults
-              _allOnlyParent
-              _allPageToken
+          = go _allProfileId _allStatus _allOnlyParent
               _allSearchString
-              _allSortField
+              (_allIds ^. _Default)
+              _allIncludeAdvertisersWithoutGroupsOnly
               _allSortOrder
-              _allStatus
+              (_allAdvertiserGroupIds ^. _Default)
+              _allPageToken
+              _allSortField
               _allSubAccountId
-              _allProfileId
+              (_allFloodlightConfigurationIds ^. _Default)
+              _allMaxResults
               _allQuotaUser
               (Just _allPrettyPrint)
               _allUserIP

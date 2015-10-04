@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.DFAReporting.Accounts.Update
     , auPrettyPrint
     , auUserIP
     , auProfileId
-    , auAccount
+    , auPayload
     , auKey
     , auOAuthToken
     , auFields
@@ -66,11 +67,11 @@ data AccountsUpdate' = AccountsUpdate'
     , _auPrettyPrint :: !Bool
     , _auUserIP      :: !(Maybe Text)
     , _auProfileId   :: !Int64
-    , _auAccount     :: !Account
+    , _auPayload     :: !Account
     , _auKey         :: !(Maybe Key)
     , _auOAuthToken  :: !(Maybe OAuthToken)
     , _auFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsUpdate'' with the minimum fields required to make a request.
 --
@@ -84,7 +85,7 @@ data AccountsUpdate' = AccountsUpdate'
 --
 -- * 'auProfileId'
 --
--- * 'auAccount'
+-- * 'auPayload'
 --
 -- * 'auKey'
 --
@@ -93,15 +94,15 @@ data AccountsUpdate' = AccountsUpdate'
 -- * 'auFields'
 accountsUpdate'
     :: Int64 -- ^ 'profileId'
-    -> Account -- ^ 'Account'
+    -> Account -- ^ 'payload'
     -> AccountsUpdate'
-accountsUpdate' pAuProfileId_ pAuAccount_ =
+accountsUpdate' pAuProfileId_ pAuPayload_ =
     AccountsUpdate'
     { _auQuotaUser = Nothing
     , _auPrettyPrint = True
     , _auUserIP = Nothing
     , _auProfileId = pAuProfileId_
-    , _auAccount = pAuAccount_
+    , _auPayload = pAuPayload_
     , _auKey = Nothing
     , _auOAuthToken = Nothing
     , _auFields = Nothing
@@ -131,9 +132,9 @@ auProfileId
   = lens _auProfileId (\ s a -> s{_auProfileId = a})
 
 -- | Multipart request metadata.
-auAccount :: Lens' AccountsUpdate' Account
-auAccount
-  = lens _auAccount (\ s a -> s{_auAccount = a})
+auPayload :: Lens' AccountsUpdate' Account
+auPayload
+  = lens _auPayload (\ s a -> s{_auPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -164,7 +165,7 @@ instance GoogleRequest AccountsUpdate' where
               _auKey
               _auOAuthToken
               (Just AltJSON)
-              _auAccount
+              _auPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsUpdateResource)

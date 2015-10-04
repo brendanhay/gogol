@@ -28,7 +28,7 @@ data PawsInitResponse = PawsInitResponse
     , _pirRulesetInfo    :: !(Maybe RulesetInfo)
     , _pirType           :: !(Maybe Text)
     , _pirDatabaseChange :: !(Maybe DBUpdateSpec)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsInitResponse' with the minimum fields required to make a request.
 --
@@ -116,7 +116,7 @@ instance ToJSON PawsInitResponse where
 data GeoLocationPoint = GeoLocationPoint
     { _glpLatitude  :: !(Maybe Double)
     , _glpLongitude :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoLocationPoint' with the minimum fields required to make a request.
 --
@@ -166,7 +166,7 @@ instance ToJSON GeoLocationPoint where
 -- /See:/ 'geoLocationPolygon' smart constructor.
 newtype GeoLocationPolygon = GeoLocationPolygon
     { _glpExterior :: Maybe [GeoLocationPoint]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoLocationPolygon' with the minimum fields required to make a request.
 --
@@ -218,7 +218,7 @@ data PawsRegisterResponse = PawsRegisterResponse
     , _prrVersion        :: !(Maybe Text)
     , _prrType           :: !(Maybe Text)
     , _prrDatabaseChange :: !(Maybe DBUpdateSpec)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsRegisterResponse' with the minimum fields required to make a request.
 --
@@ -295,7 +295,7 @@ data PawsNotifySpectrumUseRequest = PawsNotifySpectrumUseRequest
     , _pnsurVersion    :: !(Maybe Text)
     , _pnsurType       :: !(Maybe Text)
     , _pnsurDeviceDesc :: !(Maybe DeviceDescriptor)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsNotifySpectrumUseRequest' with the minimum fields required to make a request.
 --
@@ -398,7 +398,7 @@ data Vcard = Vcard
     , _vOrg   :: !(Maybe VcardTypedText)
     , _vTel   :: !(Maybe VcardTelephone)
     , _vFn    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Vcard' with the minimum fields required to make a request.
 --
@@ -467,7 +467,7 @@ instance ToJSON Vcard where
 -- /See:/ 'dbUpdateSpec' smart constructor.
 newtype DBUpdateSpec = DBUpdateSpec
     { _dusDatabases :: Maybe [DatabaseSpec]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DBUpdateSpec' with the minimum fields required to make a request.
 --
@@ -514,7 +514,7 @@ data PawsGetSpectrumBatchRequest = PawsGetSpectrumBatchRequest
     , _pgsbrLocations        :: !(Maybe [GeoLocation])
     , _pgsbrCapabilities     :: !(Maybe DeviceCapabilities)
     , _pgsbrDeviceDesc       :: !(Maybe DeviceDescriptor)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsGetSpectrumBatchRequest' with the minimum fields required to make a request.
 --
@@ -675,7 +675,7 @@ instance ToJSON PawsGetSpectrumBatchRequest where
 -- /See:/ 'vcardTypedText' smart constructor.
 newtype VcardTypedText = VcardTypedText
     { _vttText :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VcardTypedText' with the minimum fields required to make a request.
 --
@@ -709,7 +709,7 @@ instance ToJSON VcardTypedText where
 data GeoSpectrumSchedule = GeoSpectrumSchedule
     { _gssLocation          :: !(Maybe GeoLocation)
     , _gssSpectrumSchedules :: !(Maybe [SpectrumSchedule])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoSpectrumSchedule' with the minimum fields required to make a request.
 --
@@ -765,7 +765,7 @@ instance ToJSON GeoSpectrumSchedule where
 data SpectrumSchedule = SpectrumSchedule
     { _ssSpectra   :: !(Maybe [SpectrumMessage])
     , _ssEventTime :: !(Maybe EventTime)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SpectrumSchedule' with the minimum fields required to make a request.
 --
@@ -815,7 +815,7 @@ instance ToJSON SpectrumSchedule where
 -- /See:/ 'vcardTelephone' smart constructor.
 newtype VcardTelephone = VcardTelephone
     { _vtURI :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VcardTelephone' with the minimum fields required to make a request.
 --
@@ -855,7 +855,7 @@ instance ToJSON VcardTelephone where
 data DeviceOwner = DeviceOwner
     { _doOperator :: !(Maybe Vcard)
     , _doOwner    :: !(Maybe Vcard)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeviceOwner' with the minimum fields required to make a request.
 --
@@ -907,7 +907,7 @@ data AntennaCharacteristics = AntennaCharacteristics
     { _acHeight            :: !(Maybe Double)
     , _acHeightType        :: !(Maybe Text)
     , _acHeightUncertainty :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AntennaCharacteristics' with the minimum fields required to make a request.
 --
@@ -972,7 +972,7 @@ data PawsVerifyDeviceResponse = PawsVerifyDeviceResponse
     , _pvdrVersion          :: !(Maybe Text)
     , _pvdrType             :: !(Maybe Text)
     , _pvdrDatabaseChange   :: !(Maybe DBUpdateSpec)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsVerifyDeviceResponse' with the minimum fields required to make a request.
 --
@@ -1070,7 +1070,7 @@ data PawsGetSpectrumRequest = PawsGetSpectrumRequest
     , _pgsrType             :: !(Maybe Text)
     , _pgsrCapabilities     :: !(Maybe DeviceCapabilities)
     , _pgsrDeviceDesc       :: !(Maybe DeviceDescriptor)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsGetSpectrumRequest' with the minimum fields required to make a request.
 --
@@ -1227,7 +1227,7 @@ instance ToJSON PawsGetSpectrumRequest where
 data EventTime = EventTime
     { _etStartTime :: !(Maybe Text)
     , _etStopTime  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTime' with the minimum fields required to make a request.
 --
@@ -1278,7 +1278,7 @@ data VcardAddress = VcardAddress
     , _vaLocality :: !(Maybe Text)
     , _vaCode     :: !(Maybe Text)
     , _vaRegion   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VcardAddress' with the minimum fields required to make a request.
 --
@@ -1372,7 +1372,7 @@ data PawsGetSpectrumBatchResponse = PawsGetSpectrumBatchResponse
     , _pTimestamp            :: !(Maybe Text)
     , _pDeviceDesc           :: !(Maybe DeviceDescriptor)
     , _pMaxTotalBwHz         :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsGetSpectrumBatchResponse' with the minimum fields required to make a request.
 --
@@ -1560,7 +1560,7 @@ data GeoLocationEllipse = GeoLocationEllipse
     , _gleCenter        :: !(Maybe GeoLocationPoint)
     , _gleOrientation   :: !(Maybe Double)
     , _gleSemiMinorAxis :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoLocationEllipse' with the minimum fields required to make a request.
 --
@@ -1642,7 +1642,7 @@ data DeviceValidity = DeviceValidity
     { _dvIsValid    :: !(Maybe Bool)
     , _dvReason     :: !(Maybe Text)
     , _dvDeviceDesc :: !(Maybe DeviceDescriptor)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeviceValidity' with the minimum fields required to make a request.
 --
@@ -1705,7 +1705,7 @@ data RulesetInfo = RulesetInfo
     , _riMaxPollingSecs    :: !(Maybe Int32)
     , _riMaxLocationChange :: !(Maybe Double)
     , _riAuthority         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RulesetInfo' with the minimum fields required to make a request.
 --
@@ -1804,7 +1804,7 @@ data PawsNotifySpectrumUseResponse = PawsNotifySpectrumUseResponse
     { _pawKind    :: !Text
     , _pawVersion :: !(Maybe Text)
     , _pawType    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsNotifySpectrumUseResponse' with the minimum fields required to make a request.
 --
@@ -1868,7 +1868,7 @@ data PawsRegisterRequest = PawsRegisterRequest
     , _prrrVersion     :: !(Maybe Text)
     , _prrrType        :: !(Maybe Text)
     , _prrrDeviceDesc  :: !(Maybe DeviceDescriptor)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsRegisterRequest' with the minimum fields required to make a request.
 --
@@ -1957,7 +1957,7 @@ instance ToJSON PawsRegisterRequest where
 data DatabaseSpec = DatabaseSpec
     { _dsURI  :: !(Maybe Text)
     , _dsName :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatabaseSpec' with the minimum fields required to make a request.
 --
@@ -2001,7 +2001,7 @@ instance ToJSON DatabaseSpec where
 data SpectrumMessage = SpectrumMessage
     { _smBandwidth       :: !(Maybe Double)
     , _smFrequencyRanges :: !(Maybe [FrequencyRange])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SpectrumMessage' with the minimum fields required to make a request.
 --
@@ -2059,7 +2059,7 @@ data GeoLocation = GeoLocation
     { _glConfidence :: !(Maybe Int32)
     , _glPoint      :: !(Maybe GeoLocationEllipse)
     , _glRegion     :: !(Maybe GeoLocationPolygon)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoLocation' with the minimum fields required to make a request.
 --
@@ -2127,7 +2127,7 @@ data FrequencyRange = FrequencyRange
     , _frMaxPowerDBm :: !(Maybe Double)
     , _frChannelId   :: !(Maybe Text)
     , _frStartHz     :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FrequencyRange' with the minimum fields required to make a request.
 --
@@ -2204,7 +2204,7 @@ data PawsVerifyDeviceRequest = PawsVerifyDeviceRequest
     { _pvdrvVersion     :: !(Maybe Text)
     , _pvdrvDeviceDescs :: !(Maybe [DeviceDescriptor])
     , _pvdrvType        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsVerifyDeviceRequest' with the minimum fields required to make a request.
 --
@@ -2278,7 +2278,7 @@ data DeviceDescriptor = DeviceDescriptor
     , _ddFccTvbdDeviceType          :: !(Maybe Text)
     , _ddEtsiEnDeviceCategory       :: !(Maybe Text)
     , _ddSerialNumber               :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeviceDescriptor' with the minimum fields required to make a request.
 --
@@ -2451,7 +2451,7 @@ data PawsGetSpectrumResponse = PawsGetSpectrumResponse
     , _pgsrgTimestamp           :: !(Maybe Text)
     , _pgsrgDeviceDesc          :: !(Maybe DeviceDescriptor)
     , _pgsrgMaxTotalBwHz        :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsGetSpectrumResponse' with the minimum fields required to make a request.
 --
@@ -2640,7 +2640,7 @@ data PawsInitRequest = PawsInitRequest
     , _piriVersion    :: !(Maybe Text)
     , _piriType       :: !(Maybe Text)
     , _piriDeviceDesc :: !(Maybe DeviceDescriptor)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsInitRequest' with the minimum fields required to make a request.
 --
@@ -2713,7 +2713,7 @@ instance ToJSON PawsInitRequest where
 -- /See:/ 'deviceCapabilities' smart constructor.
 newtype DeviceCapabilities = DeviceCapabilities
     { _dcFrequencyRanges :: Maybe [FrequencyRange]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeviceCapabilities' with the minimum fields required to make a request.
 --

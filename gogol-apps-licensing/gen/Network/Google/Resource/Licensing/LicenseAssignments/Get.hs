@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Get
     , lagQuotaUser
     , lagPrettyPrint
     , lagUserIP
-    , lagSkuId
+    , lagSKUId
     , lagUserId
     , lagKey
     , lagOAuthToken
@@ -68,13 +69,13 @@ data LicenseAssignmentsGet' = LicenseAssignmentsGet'
     { _lagQuotaUser   :: !(Maybe Text)
     , _lagPrettyPrint :: !Bool
     , _lagUserIP      :: !(Maybe Text)
-    , _lagSkuId       :: !Text
+    , _lagSKUId       :: !Text
     , _lagUserId      :: !Text
     , _lagKey         :: !(Maybe Key)
     , _lagOAuthToken  :: !(Maybe OAuthToken)
     , _lagProductId   :: !Text
     , _lagFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentsGet'' with the minimum fields required to make a request.
 --
@@ -86,7 +87,7 @@ data LicenseAssignmentsGet' = LicenseAssignmentsGet'
 --
 -- * 'lagUserIP'
 --
--- * 'lagSkuId'
+-- * 'lagSKUId'
 --
 -- * 'lagUserId'
 --
@@ -102,12 +103,12 @@ licenseAssignmentsGet'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'productId'
     -> LicenseAssignmentsGet'
-licenseAssignmentsGet' pLagSkuId_ pLagUserId_ pLagProductId_ =
+licenseAssignmentsGet' pLagSKUId_ pLagUserId_ pLagProductId_ =
     LicenseAssignmentsGet'
     { _lagQuotaUser = Nothing
     , _lagPrettyPrint = True
     , _lagUserIP = Nothing
-    , _lagSkuId = pLagSkuId_
+    , _lagSKUId = pLagSKUId_
     , _lagUserId = pLagUserId_
     , _lagKey = Nothing
     , _lagOAuthToken = Nothing
@@ -135,8 +136,8 @@ lagUserIP
   = lens _lagUserIP (\ s a -> s{_lagUserIP = a})
 
 -- | Name for sku
-lagSkuId :: Lens' LicenseAssignmentsGet' Text
-lagSkuId = lens _lagSkuId (\ s a -> s{_lagSkuId = a})
+lagSKUId :: Lens' LicenseAssignmentsGet' Text
+lagSKUId = lens _lagSKUId (\ s a -> s{_lagSKUId = a})
 
 -- | email id or unique Id of the user
 lagUserId :: Lens' LicenseAssignmentsGet' Text
@@ -173,7 +174,7 @@ instance GoogleRequest LicenseAssignmentsGet' where
         type Rs LicenseAssignmentsGet' = LicenseAssignment
         request = requestWithRoute defReq appsLicensingURL
         requestWithRoute r u LicenseAssignmentsGet'{..}
-          = go _lagProductId _lagSkuId _lagUserId _lagQuotaUser
+          = go _lagProductId _lagSKUId _lagUserId _lagQuotaUser
               (Just _lagPrettyPrint)
               _lagUserIP
               _lagFields

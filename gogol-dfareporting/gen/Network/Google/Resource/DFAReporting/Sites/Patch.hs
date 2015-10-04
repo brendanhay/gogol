@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,10 +35,10 @@ module Network.Google.Resource.DFAReporting.Sites.Patch
     , spPrettyPrint
     , spUserIP
     , spProfileId
+    , spPayload
     , spKey
     , spId
     , spOAuthToken
-    , spSite
     , spFields
     ) where
 
@@ -68,12 +69,12 @@ data SitesPatch' = SitesPatch'
     , _spPrettyPrint :: !Bool
     , _spUserIP      :: !(Maybe Text)
     , _spProfileId   :: !Int64
+    , _spPayload     :: !Site
     , _spKey         :: !(Maybe Key)
     , _spId          :: !Int64
     , _spOAuthToken  :: !(Maybe OAuthToken)
-    , _spSite        :: !Site
     , _spFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesPatch'' with the minimum fields required to make a request.
 --
@@ -87,30 +88,30 @@ data SitesPatch' = SitesPatch'
 --
 -- * 'spProfileId'
 --
+-- * 'spPayload'
+--
 -- * 'spKey'
 --
 -- * 'spId'
 --
 -- * 'spOAuthToken'
 --
--- * 'spSite'
---
 -- * 'spFields'
 sitesPatch'
     :: Int64 -- ^ 'profileId'
+    -> Site -- ^ 'payload'
     -> Int64 -- ^ 'id'
-    -> Site -- ^ 'Site'
     -> SitesPatch'
-sitesPatch' pSpProfileId_ pSpId_ pSpSite_ =
+sitesPatch' pSpProfileId_ pSpPayload_ pSpId_ =
     SitesPatch'
     { _spQuotaUser = Nothing
     , _spPrettyPrint = True
     , _spUserIP = Nothing
     , _spProfileId = pSpProfileId_
+    , _spPayload = pSpPayload_
     , _spKey = Nothing
     , _spId = pSpId_
     , _spOAuthToken = Nothing
-    , _spSite = pSpSite_
     , _spFields = Nothing
     }
 
@@ -137,6 +138,11 @@ spProfileId :: Lens' SitesPatch' Int64
 spProfileId
   = lens _spProfileId (\ s a -> s{_spProfileId = a})
 
+-- | Multipart request metadata.
+spPayload :: Lens' SitesPatch' Site
+spPayload
+  = lens _spPayload (\ s a -> s{_spPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -151,10 +157,6 @@ spId = lens _spId (\ s a -> s{_spId = a})
 spOAuthToken :: Lens' SitesPatch' (Maybe OAuthToken)
 spOAuthToken
   = lens _spOAuthToken (\ s a -> s{_spOAuthToken = a})
-
--- | Multipart request metadata.
-spSite :: Lens' SitesPatch' Site
-spSite = lens _spSite (\ s a -> s{_spSite = a})
 
 -- | Selector specifying which fields to include in a partial response.
 spFields :: Lens' SitesPatch' (Maybe Text)
@@ -175,7 +177,7 @@ instance GoogleRequest SitesPatch' where
               _spKey
               _spOAuthToken
               (Just AltJSON)
-              _spSite
+              _spPayload
           where go
                   = clientWithRoute (Proxy :: Proxy SitesPatchResource)
                       r

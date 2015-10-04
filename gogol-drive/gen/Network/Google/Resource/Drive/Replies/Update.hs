@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.Drive.Replies.Update
     , repQuotaUser
     , repPrettyPrint
     , repUserIP
-    , repCommentReply
+    , repPayload
     , repKey
     , repReplyId
     , repFileId
@@ -68,17 +69,17 @@ type RepliesUpdateResource =
 --
 -- /See:/ 'repliesUpdate'' smart constructor.
 data RepliesUpdate' = RepliesUpdate'
-    { _repQuotaUser    :: !(Maybe Text)
-    , _repPrettyPrint  :: !Bool
-    , _repUserIP       :: !(Maybe Text)
-    , _repCommentReply :: !CommentReply
-    , _repKey          :: !(Maybe Key)
-    , _repReplyId      :: !Text
-    , _repFileId       :: !Text
-    , _repOAuthToken   :: !(Maybe OAuthToken)
-    , _repCommentId    :: !Text
-    , _repFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _repQuotaUser   :: !(Maybe Text)
+    , _repPrettyPrint :: !Bool
+    , _repUserIP      :: !(Maybe Text)
+    , _repPayload     :: !CommentReply
+    , _repKey         :: !(Maybe Key)
+    , _repReplyId     :: !Text
+    , _repFileId      :: !Text
+    , _repOAuthToken  :: !(Maybe OAuthToken)
+    , _repCommentId   :: !Text
+    , _repFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepliesUpdate'' with the minimum fields required to make a request.
 --
@@ -90,7 +91,7 @@ data RepliesUpdate' = RepliesUpdate'
 --
 -- * 'repUserIP'
 --
--- * 'repCommentReply'
+-- * 'repPayload'
 --
 -- * 'repKey'
 --
@@ -104,17 +105,17 @@ data RepliesUpdate' = RepliesUpdate'
 --
 -- * 'repFields'
 repliesUpdate'
-    :: CommentReply -- ^ 'CommentReply'
+    :: CommentReply -- ^ 'payload'
     -> Text -- ^ 'replyId'
     -> Text -- ^ 'fileId'
     -> Text -- ^ 'commentId'
     -> RepliesUpdate'
-repliesUpdate' pRepCommentReply_ pRepReplyId_ pRepFileId_ pRepCommentId_ =
+repliesUpdate' pRepPayload_ pRepReplyId_ pRepFileId_ pRepCommentId_ =
     RepliesUpdate'
     { _repQuotaUser = Nothing
     , _repPrettyPrint = True
     , _repUserIP = Nothing
-    , _repCommentReply = pRepCommentReply_
+    , _repPayload = pRepPayload_
     , _repKey = Nothing
     , _repReplyId = pRepReplyId_
     , _repFileId = pRepFileId_
@@ -143,10 +144,9 @@ repUserIP
   = lens _repUserIP (\ s a -> s{_repUserIP = a})
 
 -- | Multipart request metadata.
-repCommentReply :: Lens' RepliesUpdate' CommentReply
-repCommentReply
-  = lens _repCommentReply
-      (\ s a -> s{_repCommentReply = a})
+repPayload :: Lens' RepliesUpdate' CommentReply
+repPayload
+  = lens _repPayload (\ s a -> s{_repPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -196,7 +196,7 @@ instance GoogleRequest RepliesUpdate' where
               _repKey
               _repOAuthToken
               (Just AltJSON)
-              _repCommentReply
+              _repPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RepliesUpdateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,7 +52,7 @@ type OrgUnitsListResource =
        Capture "customerId" Text :>
          "orgunits" :>
            QueryParam "orgUnitPath" Text :>
-             QueryParam "type" DirectoryOrgUnitsListType :>
+             QueryParam "type" Type :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -70,10 +71,10 @@ data OrgUnitsList' = OrgUnitsList'
     , _oulOrgUnitPath :: !Text
     , _oulCustomerId  :: !Text
     , _oulKey         :: !(Maybe Key)
-    , _oulType        :: !(Maybe DirectoryOrgUnitsListType)
+    , _oulType        :: !(Maybe Type)
     , _oulOAuthToken  :: !(Maybe OAuthToken)
     , _oulFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrgUnitsList'' with the minimum fields required to make a request.
 --
@@ -150,7 +151,7 @@ oulKey :: Lens' OrgUnitsList' (Maybe Key)
 oulKey = lens _oulKey (\ s a -> s{_oulKey = a})
 
 -- | Whether to return all sub-organizations or just immediate children
-oulType :: Lens' OrgUnitsList' (Maybe DirectoryOrgUnitsListType)
+oulType :: Lens' OrgUnitsList' (Maybe Type)
 oulType = lens _oulType (\ s a -> s{_oulType = a})
 
 -- | OAuth 2.0 token for the current user.
@@ -172,7 +173,7 @@ instance GoogleRequest OrgUnitsList' where
         type Rs OrgUnitsList' = OrgUnits
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u OrgUnitsList'{..}
-          = go (Just _oulOrgUnitPath) _oulType _oulCustomerId
+          = go _oulCustomerId (Just _oulOrgUnitPath) _oulType
               _oulQuotaUser
               (Just _oulPrettyPrint)
               _oulUserIP

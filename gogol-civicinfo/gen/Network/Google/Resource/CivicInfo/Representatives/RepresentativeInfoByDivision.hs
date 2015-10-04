@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,13 +52,9 @@ type RepresentativesRepresentativeInfoByDivisionResource
      =
      "representatives" :>
        Capture "ocdId" Text :>
-         QueryParams "levels"
-           CivicInfoRepresentativesRepresentativeInfoByDivisionLevels
-           :>
+         QueryParams "roles" Roles :>
            QueryParam "recursive" Bool :>
-             QueryParams "roles"
-               CivicInfoRepresentativesRepresentativeInfoByDivisionRoles
-               :>
+             QueryParams "levels" Levels :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -72,16 +69,16 @@ type RepresentativesRepresentativeInfoByDivisionResource
 -- /See:/ 'representativesRepresentativeInfoByDivision'' smart constructor.
 data RepresentativesRepresentativeInfoByDivision' = RepresentativesRepresentativeInfoByDivision'
     { _rribdQuotaUser   :: !(Maybe Text)
-    , _rribdRoles       :: !(Maybe CivicInfoRepresentativesRepresentativeInfoByDivisionRoles)
+    , _rribdRoles       :: !(Maybe Roles)
     , _rribdPrettyPrint :: !Bool
     , _rribdUserIP      :: !(Maybe Text)
     , _rribdKey         :: !(Maybe Key)
     , _rribdRecursive   :: !(Maybe Bool)
     , _rribdOcdId       :: !Text
-    , _rribdLevels      :: !(Maybe CivicInfoRepresentativesRepresentativeInfoByDivisionLevels)
+    , _rribdLevels      :: !(Maybe Levels)
     , _rribdOAuthToken  :: !(Maybe OAuthToken)
     , _rribdFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepresentativesRepresentativeInfoByDivision'' with the minimum fields required to make a request.
 --
@@ -134,7 +131,7 @@ rribdQuotaUser
 -- | A list of office roles to filter by. Only offices fulfilling one of
 -- these roles will be returned. Divisions that don\'t contain a matching
 -- office will not be returned.
-rribdRoles :: Lens' RepresentativesRepresentativeInfoByDivision' (Maybe CivicInfoRepresentativesRepresentativeInfoByDivisionRoles)
+rribdRoles :: Lens' RepresentativesRepresentativeInfoByDivision' (Maybe Roles)
 rribdRoles
   = lens _rribdRoles (\ s a -> s{_rribdRoles = a})
 
@@ -173,7 +170,7 @@ rribdOcdId
 -- | A list of office levels to filter by. Only offices that serve at least
 -- one of these levels will be returned. Divisions that don\'t contain a
 -- matching office will not be returned.
-rribdLevels :: Lens' RepresentativesRepresentativeInfoByDivision' (Maybe CivicInfoRepresentativesRepresentativeInfoByDivisionLevels)
+rribdLevels :: Lens' RepresentativesRepresentativeInfoByDivision' (Maybe Levels)
 rribdLevels
   = lens _rribdLevels (\ s a -> s{_rribdLevels = a})
 
@@ -200,8 +197,9 @@ instance GoogleRequest
         request = requestWithRoute defReq civicInfoURL
         requestWithRoute r u
           RepresentativesRepresentativeInfoByDivision'{..}
-          = go _rribdLevels _rribdRecursive _rribdRoles
-              _rribdOcdId
+          = go _rribdOcdId (_rribdRoles ^. _Default)
+              _rribdRecursive
+              (_rribdLevels ^. _Default)
               _rribdQuotaUser
               (Just _rribdPrettyPrint)
               _rribdUserIP

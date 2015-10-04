@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,11 +36,11 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Update
     , mouPrettyPrint
     , mouUserIP
     , mouRevisionNumber
+    , mouPayload
     , mouKey
     , mouOAuthToken
     , mouOrderId
     , mouFields
-    , mouMarketplaceOrder
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -68,17 +69,17 @@ type MarketplaceOrdersUpdateResource =
 --
 -- /See:/ 'marketplaceOrdersUpdate'' smart constructor.
 data MarketplaceOrdersUpdate' = MarketplaceOrdersUpdate'
-    { _mouQuotaUser        :: !(Maybe Text)
-    , _mouUpdateAction     :: !AdexchangebuyerMarketplaceOrdersUpdateUpdateAction
-    , _mouPrettyPrint      :: !Bool
-    , _mouUserIP           :: !(Maybe Text)
-    , _mouRevisionNumber   :: !Int64
-    , _mouKey              :: !(Maybe Key)
-    , _mouOAuthToken       :: !(Maybe OAuthToken)
-    , _mouOrderId          :: !Text
-    , _mouFields           :: !(Maybe Text)
-    , _mouMarketplaceOrder :: !MarketplaceOrder
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mouQuotaUser      :: !(Maybe Text)
+    , _mouUpdateAction   :: !AdexchangebuyerMarketplaceOrdersUpdateUpdateAction
+    , _mouPrettyPrint    :: !Bool
+    , _mouUserIP         :: !(Maybe Text)
+    , _mouRevisionNumber :: !Int64
+    , _mouPayload        :: !MarketplaceOrder
+    , _mouKey            :: !(Maybe Key)
+    , _mouOAuthToken     :: !(Maybe OAuthToken)
+    , _mouOrderId        :: !Text
+    , _mouFields         :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceOrdersUpdate'' with the minimum fields required to make a request.
 --
@@ -94,6 +95,8 @@ data MarketplaceOrdersUpdate' = MarketplaceOrdersUpdate'
 --
 -- * 'mouRevisionNumber'
 --
+-- * 'mouPayload'
+--
 -- * 'mouKey'
 --
 -- * 'mouOAuthToken'
@@ -101,26 +104,24 @@ data MarketplaceOrdersUpdate' = MarketplaceOrdersUpdate'
 -- * 'mouOrderId'
 --
 -- * 'mouFields'
---
--- * 'mouMarketplaceOrder'
 marketplaceOrdersUpdate'
     :: AdexchangebuyerMarketplaceOrdersUpdateUpdateAction -- ^ 'updateAction'
     -> Int64 -- ^ 'revisionNumber'
+    -> MarketplaceOrder -- ^ 'payload'
     -> Text -- ^ 'orderId'
-    -> MarketplaceOrder -- ^ 'MarketplaceOrder'
     -> MarketplaceOrdersUpdate'
-marketplaceOrdersUpdate' pMouUpdateAction_ pMouRevisionNumber_ pMouOrderId_ pMouMarketplaceOrder_ =
+marketplaceOrdersUpdate' pMouUpdateAction_ pMouRevisionNumber_ pMouPayload_ pMouOrderId_ =
     MarketplaceOrdersUpdate'
     { _mouQuotaUser = Nothing
     , _mouUpdateAction = pMouUpdateAction_
     , _mouPrettyPrint = True
     , _mouUserIP = Nothing
     , _mouRevisionNumber = pMouRevisionNumber_
+    , _mouPayload = pMouPayload_
     , _mouKey = Nothing
     , _mouOAuthToken = Nothing
     , _mouOrderId = pMouOrderId_
     , _mouFields = Nothing
-    , _mouMarketplaceOrder = pMouMarketplaceOrder_
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,6 +158,11 @@ mouRevisionNumber
   = lens _mouRevisionNumber
       (\ s a -> s{_mouRevisionNumber = a})
 
+-- | Multipart request metadata.
+mouPayload :: Lens' MarketplaceOrdersUpdate' MarketplaceOrder
+mouPayload
+  = lens _mouPayload (\ s a -> s{_mouPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -179,12 +185,6 @@ mouFields :: Lens' MarketplaceOrdersUpdate' (Maybe Text)
 mouFields
   = lens _mouFields (\ s a -> s{_mouFields = a})
 
--- | Multipart request metadata.
-mouMarketplaceOrder :: Lens' MarketplaceOrdersUpdate' MarketplaceOrder
-mouMarketplaceOrder
-  = lens _mouMarketplaceOrder
-      (\ s a -> s{_mouMarketplaceOrder = a})
-
 instance GoogleAuth MarketplaceOrdersUpdate' where
         authKey = mouKey . _Just
         authToken = mouOAuthToken . _Just
@@ -201,7 +201,7 @@ instance GoogleRequest MarketplaceOrdersUpdate' where
               _mouKey
               _mouOAuthToken
               (Just AltJSON)
-              _mouMarketplaceOrder
+              _mouPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MarketplaceOrdersUpdateResource)

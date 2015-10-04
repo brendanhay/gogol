@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.AndroidPublisher.Edits.Testers.Update
     , etutQuotaUser
     , etutTrack
     , etutPrettyPrint
-    , etutTesters
     , etutPackageName
     , etutUserIP
+    , etutPayload
     , etutKey
     , etutOAuthToken
     , etutEditId
@@ -70,14 +71,14 @@ data EditsTestersUpdate' = EditsTestersUpdate'
     { _etutQuotaUser   :: !(Maybe Text)
     , _etutTrack       :: !AndroidPublisherEditsTestersUpdateTrack
     , _etutPrettyPrint :: !Bool
-    , _etutTesters     :: !Testers
     , _etutPackageName :: !Text
     , _etutUserIP      :: !(Maybe Text)
+    , _etutPayload     :: !Testers
     , _etutKey         :: !(Maybe Key)
     , _etutOAuthToken  :: !(Maybe OAuthToken)
     , _etutEditId      :: !Text
     , _etutFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsTestersUpdate'' with the minimum fields required to make a request.
 --
@@ -89,11 +90,11 @@ data EditsTestersUpdate' = EditsTestersUpdate'
 --
 -- * 'etutPrettyPrint'
 --
--- * 'etutTesters'
---
 -- * 'etutPackageName'
 --
 -- * 'etutUserIP'
+--
+-- * 'etutPayload'
 --
 -- * 'etutKey'
 --
@@ -104,18 +105,18 @@ data EditsTestersUpdate' = EditsTestersUpdate'
 -- * 'etutFields'
 editsTestersUpdate'
     :: AndroidPublisherEditsTestersUpdateTrack -- ^ 'track'
-    -> Testers -- ^ 'Testers'
     -> Text -- ^ 'packageName'
+    -> Testers -- ^ 'payload'
     -> Text -- ^ 'editId'
     -> EditsTestersUpdate'
-editsTestersUpdate' pEtutTrack_ pEtutTesters_ pEtutPackageName_ pEtutEditId_ =
+editsTestersUpdate' pEtutTrack_ pEtutPackageName_ pEtutPayload_ pEtutEditId_ =
     EditsTestersUpdate'
     { _etutQuotaUser = Nothing
     , _etutTrack = pEtutTrack_
     , _etutPrettyPrint = True
-    , _etutTesters = pEtutTesters_
     , _etutPackageName = pEtutPackageName_
     , _etutUserIP = Nothing
+    , _etutPayload = pEtutPayload_
     , _etutKey = Nothing
     , _etutOAuthToken = Nothing
     , _etutEditId = pEtutEditId_
@@ -140,11 +141,6 @@ etutPrettyPrint
   = lens _etutPrettyPrint
       (\ s a -> s{_etutPrettyPrint = a})
 
--- | Multipart request metadata.
-etutTesters :: Lens' EditsTestersUpdate' Testers
-etutTesters
-  = lens _etutTesters (\ s a -> s{_etutTesters = a})
-
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
 etutPackageName :: Lens' EditsTestersUpdate' Text
@@ -157,6 +153,11 @@ etutPackageName
 etutUserIP :: Lens' EditsTestersUpdate' (Maybe Text)
 etutUserIP
   = lens _etutUserIP (\ s a -> s{_etutUserIP = a})
+
+-- | Multipart request metadata.
+etutPayload :: Lens' EditsTestersUpdate' Testers
+etutPayload
+  = lens _etutPayload (\ s a -> s{_etutPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -196,7 +197,7 @@ instance GoogleRequest EditsTestersUpdate' where
               _etutKey
               _etutOAuthToken
               (Just AltJSON)
-              _etutTesters
+              _etutPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EditsTestersUpdateResource)

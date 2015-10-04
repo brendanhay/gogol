@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ type RastersParentsListResource =
      "rasters" :>
        Capture "id" Text :>
          "parents" :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -74,7 +75,7 @@ data RastersParentsList' = RastersParentsList'
     , _rasOAuthToken  :: !(Maybe OAuthToken)
     , _rasMaxResults  :: !(Maybe Word32)
     , _rasFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersParentsList'' with the minimum fields required to make a request.
 --
@@ -175,7 +176,7 @@ instance GoogleRequest RastersParentsList' where
         type Rs RastersParentsList' = ParentsListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u RastersParentsList'{..}
-          = go _rasMaxResults _rasPageToken _rasId
+          = go _rasId _rasPageToken _rasMaxResults
               _rasQuotaUser
               (Just _rasPrettyPrint)
               _rasUserIP

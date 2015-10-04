@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -61,12 +62,12 @@ type AppsModulesVersionsDeleteResource =
                "versions" :>
                  Capture "versionsId" Text :>
                    QueryParam "$.xgafv" Text :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "upload_protocol" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "callback" Text :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "fields" Text :>
@@ -94,7 +95,7 @@ data AppsModulesVersionsDelete' = AppsModulesVersionsDelete'
     , _amvdOAuthToken     :: !(Maybe OAuthToken)
     , _amvdFields         :: !(Maybe Text)
     , _amvdCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsModulesVersionsDelete'' with the minimum fields required to make a request.
 --
@@ -249,14 +250,14 @@ instance GoogleRequest AppsModulesVersionsDelete'
         type Rs AppsModulesVersionsDelete' = Operation
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsModulesVersionsDelete'{..}
-          = go _amvdXgafv _amvdAccessToken _amvdBearerToken
-              _amvdCallback
-              (Just _amvdPp)
-              _amvdUploadType
+          = go _amvdAppsId _amvdModulesId _amvdVersionsId
+              _amvdXgafv
               _amvdUploadProtocol
-              _amvdAppsId
-              _amvdModulesId
-              _amvdVersionsId
+              (Just _amvdPp)
+              _amvdAccessToken
+              _amvdUploadType
+              _amvdBearerToken
+              _amvdCallback
               _amvdQuotaUser
               (Just _amvdPrettyPrint)
               _amvdFields

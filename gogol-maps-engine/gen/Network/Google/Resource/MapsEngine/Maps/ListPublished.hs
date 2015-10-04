@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -49,9 +50,9 @@ import           Network.Google.Prelude
 type MapsListPublishedResource =
      "maps" :>
        "published" :>
-         QueryParam "maxResults" Word32 :>
-           QueryParam "pageToken" Text :>
-             QueryParam "projectId" Text :>
+         QueryParam "pageToken" Text :>
+           QueryParam "projectId" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -74,7 +75,7 @@ data MapsListPublished' = MapsListPublished'
     , _mlpOAuthToken  :: !(Maybe OAuthToken)
     , _mlpMaxResults  :: !(Maybe Word32)
     , _mlpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsListPublished'' with the minimum fields required to make a request.
 --
@@ -179,7 +180,7 @@ instance GoogleRequest MapsListPublished' where
              PublishedMapsListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u MapsListPublished'{..}
-          = go _mlpMaxResults _mlpPageToken _mlpProjectId
+          = go _mlpPageToken _mlpProjectId _mlpMaxResults
               _mlpQuotaUser
               (Just _mlpPrettyPrint)
               _mlpUserIP

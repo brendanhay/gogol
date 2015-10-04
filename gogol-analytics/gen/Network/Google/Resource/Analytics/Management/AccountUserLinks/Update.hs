@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.Update
     , mauluQuotaUser
     , mauluPrettyPrint
     , mauluUserIP
+    , mauluPayload
     , mauluAccountId
     , mauluKey
-    , mauluEntityUserLink
     , mauluLinkId
     , mauluOAuthToken
     , mauluFields
@@ -66,16 +67,16 @@ type ManagementAccountUserLinksUpdateResource =
 --
 -- /See:/ 'managementAccountUserLinksUpdate'' smart constructor.
 data ManagementAccountUserLinksUpdate' = ManagementAccountUserLinksUpdate'
-    { _mauluQuotaUser      :: !(Maybe Text)
-    , _mauluPrettyPrint    :: !Bool
-    , _mauluUserIP         :: !(Maybe Text)
-    , _mauluAccountId      :: !Text
-    , _mauluKey            :: !(Maybe Key)
-    , _mauluEntityUserLink :: !EntityUserLink
-    , _mauluLinkId         :: !Text
-    , _mauluOAuthToken     :: !(Maybe OAuthToken)
-    , _mauluFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mauluQuotaUser   :: !(Maybe Text)
+    , _mauluPrettyPrint :: !Bool
+    , _mauluUserIP      :: !(Maybe Text)
+    , _mauluPayload     :: !EntityUserLink
+    , _mauluAccountId   :: !Text
+    , _mauluKey         :: !(Maybe Key)
+    , _mauluLinkId      :: !Text
+    , _mauluOAuthToken  :: !(Maybe OAuthToken)
+    , _mauluFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksUpdate'' with the minimum fields required to make a request.
 --
@@ -87,11 +88,11 @@ data ManagementAccountUserLinksUpdate' = ManagementAccountUserLinksUpdate'
 --
 -- * 'mauluUserIP'
 --
+-- * 'mauluPayload'
+--
 -- * 'mauluAccountId'
 --
 -- * 'mauluKey'
---
--- * 'mauluEntityUserLink'
 --
 -- * 'mauluLinkId'
 --
@@ -99,18 +100,18 @@ data ManagementAccountUserLinksUpdate' = ManagementAccountUserLinksUpdate'
 --
 -- * 'mauluFields'
 managementAccountUserLinksUpdate'
-    :: Text -- ^ 'accountId'
-    -> EntityUserLink -- ^ 'EntityUserLink'
+    :: EntityUserLink -- ^ 'payload'
+    -> Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
     -> ManagementAccountUserLinksUpdate'
-managementAccountUserLinksUpdate' pMauluAccountId_ pMauluEntityUserLink_ pMauluLinkId_ =
+managementAccountUserLinksUpdate' pMauluPayload_ pMauluAccountId_ pMauluLinkId_ =
     ManagementAccountUserLinksUpdate'
     { _mauluQuotaUser = Nothing
     , _mauluPrettyPrint = False
     , _mauluUserIP = Nothing
+    , _mauluPayload = pMauluPayload_
     , _mauluAccountId = pMauluAccountId_
     , _mauluKey = Nothing
-    , _mauluEntityUserLink = pMauluEntityUserLink_
     , _mauluLinkId = pMauluLinkId_
     , _mauluOAuthToken = Nothing
     , _mauluFields = Nothing
@@ -136,6 +137,11 @@ mauluUserIP :: Lens' ManagementAccountUserLinksUpdate' (Maybe Text)
 mauluUserIP
   = lens _mauluUserIP (\ s a -> s{_mauluUserIP = a})
 
+-- | Multipart request metadata.
+mauluPayload :: Lens' ManagementAccountUserLinksUpdate' EntityUserLink
+mauluPayload
+  = lens _mauluPayload (\ s a -> s{_mauluPayload = a})
+
 -- | Account ID to update the account-user link for.
 mauluAccountId :: Lens' ManagementAccountUserLinksUpdate' Text
 mauluAccountId
@@ -147,12 +153,6 @@ mauluAccountId
 -- token.
 mauluKey :: Lens' ManagementAccountUserLinksUpdate' (Maybe Key)
 mauluKey = lens _mauluKey (\ s a -> s{_mauluKey = a})
-
--- | Multipart request metadata.
-mauluEntityUserLink :: Lens' ManagementAccountUserLinksUpdate' EntityUserLink
-mauluEntityUserLink
-  = lens _mauluEntityUserLink
-      (\ s a -> s{_mauluEntityUserLink = a})
 
 -- | Link ID to update the account-user link for.
 mauluLinkId :: Lens' ManagementAccountUserLinksUpdate' Text
@@ -189,7 +189,7 @@ instance GoogleRequest
               _mauluKey
               _mauluOAuthToken
               (Just AltJSON)
-              _mauluEntityUserLink
+              _mauluPayload
           where go
                   = clientWithRoute
                       (Proxy ::

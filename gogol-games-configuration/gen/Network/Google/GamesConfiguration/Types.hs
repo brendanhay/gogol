@@ -61,6 +61,9 @@ module Network.Google.GamesConfiguration.Types
     , lcId
     , lcScoreOrder
 
+    -- * ImageType
+    , ImageType (..)
+
     -- * AchievementConfiguration
     , AchievementConfiguration
     , achievementConfiguration
@@ -87,9 +90,6 @@ module Network.Google.GamesConfiguration.Types
     , gnfcCurrencyCode
     , gnfcNumberFormatType
     , gnfcNumDecimalPlaces
-
-    -- * GamesConfigurationImageConfigurationsUploadImageType
-    , GamesConfigurationImageConfigurationsUploadImageType (..)
 
     -- * LeaderboardConfigurationDetail
     , LeaderboardConfigurationDetail

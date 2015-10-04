@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -49,9 +50,9 @@ import           Network.Google.Prelude
 type LayersListPublishedResource =
      "layers" :>
        "published" :>
-         QueryParam "maxResults" Word32 :>
-           QueryParam "pageToken" Text :>
-             QueryParam "projectId" Text :>
+         QueryParam "pageToken" Text :>
+           QueryParam "projectId" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -74,7 +75,7 @@ data LayersListPublished' = LayersListPublished'
     , _llpOAuthToken  :: !(Maybe OAuthToken)
     , _llpMaxResults  :: !(Maybe Word32)
     , _llpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersListPublished'' with the minimum fields required to make a request.
 --
@@ -179,7 +180,7 @@ instance GoogleRequest LayersListPublished' where
              PublishedLayersListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u LayersListPublished'{..}
-          = go _llpMaxResults _llpPageToken _llpProjectId
+          = go _llpPageToken _llpProjectId _llpMaxResults
               _llpQuotaUser
               (Just _llpPrettyPrint)
               _llpUserIP

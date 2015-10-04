@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyAssertion
     , rpvaQuotaUser
     , rpvaPrettyPrint
     , rpvaUserIP
-    , rpvaIdentitytoolkitRelyingPartyVerifyAssertionRequest
+    , rpvaPayload
     , rpvaKey
     , rpvaOAuthToken
     , rpvaFields
@@ -61,14 +62,14 @@ type RelyingPartyVerifyAssertionResource =
 --
 -- /See:/ 'relyingPartyVerifyAssertion'' smart constructor.
 data RelyingPartyVerifyAssertion' = RelyingPartyVerifyAssertion'
-    { _rpvaQuotaUser                                         :: !(Maybe Text)
-    , _rpvaPrettyPrint                                       :: !Bool
-    , _rpvaUserIP                                            :: !(Maybe Text)
-    , _rpvaIdentitytoolkitRelyingPartyVerifyAssertionRequest :: !IdentitytoolkitRelyingPartyVerifyAssertionRequest
-    , _rpvaKey                                               :: !(Maybe Key)
-    , _rpvaOAuthToken                                        :: !(Maybe OAuthToken)
-    , _rpvaFields                                            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rpvaQuotaUser   :: !(Maybe Text)
+    , _rpvaPrettyPrint :: !Bool
+    , _rpvaUserIP      :: !(Maybe Text)
+    , _rpvaPayload     :: !IdentitytoolkitRelyingPartyVerifyAssertionRequest
+    , _rpvaKey         :: !(Maybe Key)
+    , _rpvaOAuthToken  :: !(Maybe OAuthToken)
+    , _rpvaFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingPartyVerifyAssertion'' with the minimum fields required to make a request.
 --
@@ -80,7 +81,7 @@ data RelyingPartyVerifyAssertion' = RelyingPartyVerifyAssertion'
 --
 -- * 'rpvaUserIP'
 --
--- * 'rpvaIdentitytoolkitRelyingPartyVerifyAssertionRequest'
+-- * 'rpvaPayload'
 --
 -- * 'rpvaKey'
 --
@@ -88,14 +89,14 @@ data RelyingPartyVerifyAssertion' = RelyingPartyVerifyAssertion'
 --
 -- * 'rpvaFields'
 relyingPartyVerifyAssertion'
-    :: IdentitytoolkitRelyingPartyVerifyAssertionRequest -- ^ 'IdentitytoolkitRelyingPartyVerifyAssertionRequest'
+    :: IdentitytoolkitRelyingPartyVerifyAssertionRequest -- ^ 'payload'
     -> RelyingPartyVerifyAssertion'
-relyingPartyVerifyAssertion' pRpvaIdentitytoolkitRelyingPartyVerifyAssertionRequest_ =
+relyingPartyVerifyAssertion' pRpvaPayload_ =
     RelyingPartyVerifyAssertion'
     { _rpvaQuotaUser = Nothing
     , _rpvaPrettyPrint = True
     , _rpvaUserIP = Nothing
-    , _rpvaIdentitytoolkitRelyingPartyVerifyAssertionRequest = pRpvaIdentitytoolkitRelyingPartyVerifyAssertionRequest_
+    , _rpvaPayload = pRpvaPayload_
     , _rpvaKey = Nothing
     , _rpvaOAuthToken = Nothing
     , _rpvaFields = Nothing
@@ -122,13 +123,9 @@ rpvaUserIP
   = lens _rpvaUserIP (\ s a -> s{_rpvaUserIP = a})
 
 -- | Multipart request metadata.
-rpvaIdentitytoolkitRelyingPartyVerifyAssertionRequest :: Lens' RelyingPartyVerifyAssertion' IdentitytoolkitRelyingPartyVerifyAssertionRequest
-rpvaIdentitytoolkitRelyingPartyVerifyAssertionRequest
-  = lens
-      _rpvaIdentitytoolkitRelyingPartyVerifyAssertionRequest
-      (\ s a ->
-         s{_rpvaIdentitytoolkitRelyingPartyVerifyAssertionRequest
-             = a})
+rpvaPayload :: Lens' RelyingPartyVerifyAssertion' IdentitytoolkitRelyingPartyVerifyAssertionRequest
+rpvaPayload
+  = lens _rpvaPayload (\ s a -> s{_rpvaPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -164,7 +161,7 @@ instance GoogleRequest RelyingPartyVerifyAssertion'
               _rpvaKey
               _rpvaOAuthToken
               (Just AltJSON)
-              _rpvaIdentitytoolkitRelyingPartyVerifyAssertionRequest
+              _rpvaPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RelyingPartyVerifyAssertionResource)

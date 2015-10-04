@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -73,7 +74,7 @@ data ProductsGet' = ProductsGet'
     , _pOAuthToken   :: !(Maybe OAuthToken)
     , _pProductId    :: !Text
     , _pFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsGet'' with the minimum fields required to make a request.
 --
@@ -171,7 +172,7 @@ instance GoogleRequest ProductsGet' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u ProductsGet'{..}
-          = go _pLanguage _pEnterpriseId _pProductId
+          = go _pEnterpriseId _pProductId _pLanguage
               _pQuotaUser
               (Just _pPrettyPrint)
               _pUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,8 +37,8 @@ module Network.Google.Resource.Compute.Instances.SetMetadata
     , ismProject
     , ismUserIP
     , ismZone
+    , ismPayload
     , ismKey
-    , ismMetadata
     , ismOAuthToken
     , ismFields
     , ismInstance
@@ -75,12 +76,12 @@ data InstancesSetMetadata' = InstancesSetMetadata'
     , _ismProject     :: !Text
     , _ismUserIP      :: !(Maybe Text)
     , _ismZone        :: !Text
+    , _ismPayload     :: !Metadata
     , _ismKey         :: !(Maybe Key)
-    , _ismMetadata    :: !Metadata
     , _ismOAuthToken  :: !(Maybe OAuthToken)
     , _ismFields      :: !(Maybe Text)
     , _ismInstance    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesSetMetadata'' with the minimum fields required to make a request.
 --
@@ -96,9 +97,9 @@ data InstancesSetMetadata' = InstancesSetMetadata'
 --
 -- * 'ismZone'
 --
--- * 'ismKey'
+-- * 'ismPayload'
 --
--- * 'ismMetadata'
+-- * 'ismKey'
 --
 -- * 'ismOAuthToken'
 --
@@ -108,18 +109,18 @@ data InstancesSetMetadata' = InstancesSetMetadata'
 instancesSetMetadata'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> Metadata -- ^ 'Metadata'
+    -> Metadata -- ^ 'payload'
     -> Text -- ^ 'instance'
     -> InstancesSetMetadata'
-instancesSetMetadata' pIsmProject_ pIsmZone_ pIsmMetadata_ pIsmInstance_ =
+instancesSetMetadata' pIsmProject_ pIsmZone_ pIsmPayload_ pIsmInstance_ =
     InstancesSetMetadata'
     { _ismQuotaUser = Nothing
     , _ismPrettyPrint = True
     , _ismProject = pIsmProject_
     , _ismUserIP = Nothing
     , _ismZone = pIsmZone_
+    , _ismPayload = pIsmPayload_
     , _ismKey = Nothing
-    , _ismMetadata = pIsmMetadata_
     , _ismOAuthToken = Nothing
     , _ismFields = Nothing
     , _ismInstance = pIsmInstance_
@@ -153,16 +154,16 @@ ismUserIP
 ismZone :: Lens' InstancesSetMetadata' Text
 ismZone = lens _ismZone (\ s a -> s{_ismZone = a})
 
+-- | Multipart request metadata.
+ismPayload :: Lens' InstancesSetMetadata' Metadata
+ismPayload
+  = lens _ismPayload (\ s a -> s{_ismPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 ismKey :: Lens' InstancesSetMetadata' (Maybe Key)
 ismKey = lens _ismKey (\ s a -> s{_ismKey = a})
-
--- | Multipart request metadata.
-ismMetadata :: Lens' InstancesSetMetadata' Metadata
-ismMetadata
-  = lens _ismMetadata (\ s a -> s{_ismMetadata = a})
 
 -- | OAuth 2.0 token for the current user.
 ismOAuthToken :: Lens' InstancesSetMetadata' (Maybe OAuthToken)
@@ -195,7 +196,7 @@ instance GoogleRequest InstancesSetMetadata' where
               _ismKey
               _ismOAuthToken
               (Just AltJSON)
-              _ismMetadata
+              _ismPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesSetMetadataResource)

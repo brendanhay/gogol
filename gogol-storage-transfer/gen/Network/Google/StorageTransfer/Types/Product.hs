@@ -26,7 +26,7 @@ data ErrorSummary = ErrorSummary
     { _esErrorCount      :: !(Maybe Int64)
     , _esErrorCode       :: !(Maybe Text)
     , _esErrorLogEntries :: !(Maybe [ErrorLogEntry])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ErrorSummary' with the minimum fields required to make a request.
 --
@@ -119,10 +119,10 @@ instance ToJSON ErrorSummary where
 --
 -- /See:/ 'status' smart constructor.
 data Status = Status
-    { _sDetails :: !(Maybe [StatusDetails])
+    { _sDetails :: !(Maybe [DetailsItem])
     , _sCode    :: !(Maybe Int32)
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -144,7 +144,7 @@ status =
 
 -- | A list of messages that carry the error details. There will be a common
 -- set of message types for APIs to use.
-sDetails :: Lens' Status [StatusDetails]
+sDetails :: Lens' Status [DetailsItem]
 sDetails
   = lens _sDetails (\ s a -> s{_sDetails = a}) .
       _Default
@@ -185,7 +185,7 @@ instance ToJSON Status where
 data ListOperationsResponse = ListOperationsResponse
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -231,12 +231,31 @@ instance ToJSON ListOperationsResponse where
                  [("nextPageToken" .=) <$> _lorNextPageToken,
                   ("operations" .=) <$> _lorOperations])
 
+--
+-- /See:/ 'detailsItem' smart constructor.
+data DetailsItem =
+    DetailsItem
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DetailsItem' with the minimum fields required to make a request.
+--
+detailsItem
+    :: DetailsItem
+detailsItem = DetailsItem
+
+instance FromJSON DetailsItem where
+        parseJSON
+          = withObject "DetailsItem" (\ o -> pure DetailsItem)
+
+instance ToJSON DetailsItem where
+        toJSON = const (Object mempty)
+
 -- | Request passed to PauseTransferOperation.
 --
 -- /See:/ 'pauseTransferOperationRequest' smart constructor.
 data PauseTransferOperationRequest =
     PauseTransferOperationRequest
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PauseTransferOperationRequest' with the minimum fields required to make a request.
 --
@@ -257,7 +276,7 @@ instance ToJSON PauseTransferOperationRequest where
 -- /See:/ 'googleServiceAccount' smart constructor.
 newtype GoogleServiceAccount = GoogleServiceAccount
     { _gsaAccountEmail :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GoogleServiceAccount' with the minimum fields required to make a request.
 --
@@ -297,7 +316,7 @@ data ObjectConditions = ObjectConditions
     , _ocIncludePrefixes                     :: !(Maybe [Text])
     , _ocMaxTimeElapsedSinceLastModification :: !(Maybe Text)
     , _ocExcludePrefixes                     :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectConditions' with the minimum fields required to make a request.
 --
@@ -403,10 +422,10 @@ instance ToJSON ObjectConditions where
 data Operation = Operation
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
-    , _oResponse :: !(Maybe OperationResponse)
+    , _oResponse :: !(Maybe Response)
     , _oName     :: !(Maybe Text)
-    , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _oMetadata :: !(Maybe Metadata)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -449,7 +468,7 @@ oError = lens _oError (\ s a -> s{_oError = a})
 -- where \`Xxx\` is the original method name. For example, if the original
 -- method name is \`TakeSnapshot()\`, the inferred response type is
 -- \`TakeSnapshotResponse\`.
-oResponse :: Lens' Operation (Maybe OperationResponse)
+oResponse :: Lens' Operation (Maybe Response)
 oResponse
   = lens _oResponse (\ s a -> s{_oResponse = a})
 
@@ -461,7 +480,7 @@ oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
 -- | Represents the transfer operation object.
-oMetadata :: Lens' Operation (Maybe OperationMetadata)
+oMetadata :: Lens' Operation (Maybe Metadata)
 oMetadata
   = lens _oMetadata (\ s a -> s{_oMetadata = a})
 
@@ -491,7 +510,7 @@ data Schedule = Schedule
     { _sScheduleEndDate   :: !(Maybe Date)
     , _sScheduleStartDate :: !(Maybe Date)
     , _sStartTimeOfDay    :: !(Maybe TimeOfDay)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Schedule' with the minimum fields required to make a request.
 --
@@ -559,7 +578,7 @@ instance ToJSON Schedule where
 -- /See:/ 'empty' smart constructor.
 data Empty =
     Empty
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -573,24 +592,31 @@ instance FromJSON Empty where
 instance ToJSON Empty where
         toJSON = const (Object mempty)
 
+-- | The normal response of the operation in case of success. If the original
+-- method returns no data on success, such as \`Delete\`, the response is
+-- \`google.protobuf.Empty\`. If the original method is standard
+-- \`Get\`\/\`Create\`\/\`Update\`, the response should be the resource.
+-- For other methods, the response should have the type \`XxxResponse\`,
+-- where \`Xxx\` is the original method name. For example, if the original
+-- method name is \`TakeSnapshot()\`, the inferred response type is
+-- \`TakeSnapshotResponse\`.
 --
--- /See:/ 'statusDetails' smart constructor.
-data StatusDetails =
-    StatusDetails
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'response' smart constructor.
+data Response =
+    Response
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'StatusDetails' with the minimum fields required to make a request.
+-- | Creates a value of 'Response' with the minimum fields required to make a request.
 --
-statusDetails
-    :: StatusDetails
-statusDetails = StatusDetails
+response
+    :: Response
+response = Response
 
-instance FromJSON StatusDetails where
+instance FromJSON Response where
         parseJSON
-          = withObject "StatusDetails"
-              (\ o -> pure StatusDetails)
+          = withObject "Response" (\ o -> pure Response)
 
-instance ToJSON StatusDetails where
+instance ToJSON Response where
         toJSON = const (Object mempty)
 
 -- | Represents a whole calendar date, e.g. date of birth. The time of day
@@ -607,7 +633,7 @@ data Date = Date
     { _dDay   :: !(Maybe Int32)
     , _dYear  :: !(Maybe Int32)
     , _dMonth :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
@@ -662,7 +688,7 @@ data UpdateTransferJobRequest = UpdateTransferJobRequest
     { _utjrTransferJob                :: !(Maybe TransferJob)
     , _utjrProjectId                  :: !(Maybe Text)
     , _utjrUpdateTransferJobFieldMask :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UpdateTransferJobRequest' with the minimum fields required to make a request.
 --
@@ -744,7 +770,7 @@ data TransferCounters = TransferCounters
     , _tcObjectsFromSourceFailed        :: !(Maybe Int64)
     , _tcObjectsFailedToDeleteFromSink  :: !(Maybe Int64)
     , _tcObjectsFromSourceSkippedBySync :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferCounters' with the minimum fields required to make a request.
 --
@@ -977,7 +1003,7 @@ data TransferJob = TransferJob
     , _tjTransferSpec         :: !(Maybe TransferSpec)
     , _tjDescription          :: !(Maybe Text)
     , _tjLastModificationTime :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferJob' with the minimum fields required to make a request.
 --
@@ -1110,7 +1136,7 @@ instance ToJSON TransferJob where
 -- /See:/ 'gcsData' smart constructor.
 newtype GcsData = GcsData
     { _gdBucketName :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GcsData' with the minimum fields required to make a request.
 --
@@ -1141,6 +1167,26 @@ instance ToJSON GcsData where
           = object
               (catMaybes [("bucketName" .=) <$> _gdBucketName])
 
+-- | Represents the transfer operation object.
+--
+-- /See:/ 'metadata' smart constructor.
+data Metadata =
+    Metadata
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Metadata' with the minimum fields required to make a request.
+--
+metadata
+    :: Metadata
+metadata = Metadata
+
+instance FromJSON Metadata where
+        parseJSON
+          = withObject "Metadata" (\ o -> pure Metadata)
+
+instance ToJSON Metadata where
+        toJSON = const (Object mempty)
+
 -- | An AwsS3Data can be a data source, but not a data sink. In an AwsS3Data,
 -- an object\'s name is the S3 object\'s key name.
 --
@@ -1148,7 +1194,7 @@ instance ToJSON GcsData where
 data AwsS3Data = AwsS3Data
     { _asdBucketName   :: !(Maybe Text)
     , _asdAwsAccessKey :: !(Maybe AwsAccessKey)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AwsS3Data' with the minimum fields required to make a request.
 --
@@ -1195,27 +1241,6 @@ instance ToJSON AwsS3Data where
                  [("bucketName" .=) <$> _asdBucketName,
                   ("awsAccessKey" .=) <$> _asdAwsAccessKey])
 
--- | Represents the transfer operation object.
---
--- /See:/ 'operationMetadata' smart constructor.
-data OperationMetadata =
-    OperationMetadata
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
---
-operationMetadata
-    :: OperationMetadata
-operationMetadata = OperationMetadata
-
-instance FromJSON OperationMetadata where
-        parseJSON
-          = withObject "OperationMetadata"
-              (\ o -> pure OperationMetadata)
-
-instance ToJSON OperationMetadata where
-        toJSON = const (Object mempty)
-
 -- | An HttpData specifies a list of objects on the web to be transferred
 -- over HTTP. The information of the objects to be transferred is contained
 -- in a file referenced by a URL. The first line in the file must be
@@ -1240,7 +1265,7 @@ instance ToJSON OperationMetadata where
 -- /See:/ 'hTTPData' smart constructor.
 newtype HTTPData = HTTPData
     { _httpdListURL :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPData' with the minimum fields required to make a request.
 --
@@ -1277,7 +1302,7 @@ instance ToJSON HTTPData where
 data ErrorLogEntry = ErrorLogEntry
     { _eleURL          :: !(Maybe Text)
     , _eleErrorDetails :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ErrorLogEntry' with the minimum fields required to make a request.
 --
@@ -1332,7 +1357,7 @@ data TimeOfDay = TimeOfDay
     , _todHours   :: !(Maybe Int32)
     , _todMinutes :: !(Maybe Int32)
     , _todSeconds :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimeOfDay' with the minimum fields required to make a request.
 --
@@ -1402,7 +1427,7 @@ data TransferOptions = TransferOptions
     { _toDeleteObjectsUniqueInSink             :: !(Maybe Bool)
     , _toDeleteObjectsFromSourceAfterTransfer  :: !(Maybe Bool)
     , _toOverwriteObjectsAlreadyExistingInSink :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferOptions' with the minimum fields required to make a request.
 --
@@ -1476,7 +1501,7 @@ data TransferOperation = TransferOperation
     , _toProjectId       :: !(Maybe Text)
     , _toTransferSpec    :: !(Maybe TransferSpec)
     , _toErrorBreakdowns :: !(Maybe [ErrorSummary])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferOperation' with the minimum fields required to make a request.
 --
@@ -1601,7 +1626,7 @@ data TransferSpec = TransferSpec
     , _tsAwsS3DataSource  :: !(Maybe AwsS3Data)
     , _tsGcsDataSink      :: !(Maybe GcsData)
     , _tsTransferOptions  :: !(Maybe TransferOptions)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferSpec' with the minimum fields required to make a request.
 --
@@ -1700,7 +1725,7 @@ instance ToJSON TransferSpec where
 data ListTransferJobsResponse = ListTransferJobsResponse
     { _ltjrNextPageToken :: !(Maybe Text)
     , _ltjrTransferJobs  :: !(Maybe [TransferJob])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListTransferJobsResponse' with the minimum fields required to make a request.
 --
@@ -1753,7 +1778,7 @@ instance ToJSON ListTransferJobsResponse where
 data AwsAccessKey = AwsAccessKey
     { _aakSecretAccessKey :: !(Maybe Text)
     , _aakAccessKeyId     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AwsAccessKey' with the minimum fields required to make a request.
 --
@@ -1802,7 +1827,7 @@ instance ToJSON AwsAccessKey where
 -- /See:/ 'resumeTransferOperationRequest' smart constructor.
 data ResumeTransferOperationRequest =
     ResumeTransferOperationRequest
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResumeTransferOperationRequest' with the minimum fields required to make a request.
 --
@@ -1817,32 +1842,4 @@ instance FromJSON ResumeTransferOperationRequest
               (\ o -> pure ResumeTransferOperationRequest)
 
 instance ToJSON ResumeTransferOperationRequest where
-        toJSON = const (Object mempty)
-
--- | The normal response of the operation in case of success. If the original
--- method returns no data on success, such as \`Delete\`, the response is
--- \`google.protobuf.Empty\`. If the original method is standard
--- \`Get\`\/\`Create\`\/\`Update\`, the response should be the resource.
--- For other methods, the response should have the type \`XxxResponse\`,
--- where \`Xxx\` is the original method name. For example, if the original
--- method name is \`TakeSnapshot()\`, the inferred response type is
--- \`TakeSnapshotResponse\`.
---
--- /See:/ 'operationResponse' smart constructor.
-data OperationResponse =
-    OperationResponse
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
---
-operationResponse
-    :: OperationResponse
-operationResponse = OperationResponse
-
-instance FromJSON OperationResponse where
-        parseJSON
-          = withObject "OperationResponse"
-              (\ o -> pure OperationResponse)
-
-instance ToJSON OperationResponse where
         toJSON = const (Object mempty)

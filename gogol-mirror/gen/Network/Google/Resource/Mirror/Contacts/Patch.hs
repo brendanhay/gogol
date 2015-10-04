@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.Mirror.Contacts.Patch
     -- * Request Lenses
     , cpQuotaUser
     , cpPrettyPrint
-    , cpContact
     , cpUserIP
+    , cpPayload
     , cpKey
     , cpId
     , cpOAuthToken
@@ -63,13 +64,13 @@ type ContactsPatchResource =
 data ContactsPatch' = ContactsPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
-    , _cpContact     :: !Contact
     , _cpUserIP      :: !(Maybe Text)
+    , _cpPayload     :: !Contact
     , _cpKey         :: !(Maybe Key)
     , _cpId          :: !Text
     , _cpOAuthToken  :: !(Maybe OAuthToken)
     , _cpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContactsPatch'' with the minimum fields required to make a request.
 --
@@ -79,9 +80,9 @@ data ContactsPatch' = ContactsPatch'
 --
 -- * 'cpPrettyPrint'
 --
--- * 'cpContact'
---
 -- * 'cpUserIP'
+--
+-- * 'cpPayload'
 --
 -- * 'cpKey'
 --
@@ -91,15 +92,15 @@ data ContactsPatch' = ContactsPatch'
 --
 -- * 'cpFields'
 contactsPatch'
-    :: Contact -- ^ 'Contact'
+    :: Contact -- ^ 'payload'
     -> Text -- ^ 'id'
     -> ContactsPatch'
-contactsPatch' pCpContact_ pCpId_ =
+contactsPatch' pCpPayload_ pCpId_ =
     ContactsPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
-    , _cpContact = pCpContact_
     , _cpUserIP = Nothing
+    , _cpPayload = pCpPayload_
     , _cpKey = Nothing
     , _cpId = pCpId_
     , _cpOAuthToken = Nothing
@@ -119,15 +120,15 @@ cpPrettyPrint
   = lens _cpPrettyPrint
       (\ s a -> s{_cpPrettyPrint = a})
 
--- | Multipart request metadata.
-cpContact :: Lens' ContactsPatch' Contact
-cpContact
-  = lens _cpContact (\ s a -> s{_cpContact = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 cpUserIP :: Lens' ContactsPatch' (Maybe Text)
 cpUserIP = lens _cpUserIP (\ s a -> s{_cpUserIP = a})
+
+-- | Multipart request metadata.
+cpPayload :: Lens' ContactsPatch' Contact
+cpPayload
+  = lens _cpPayload (\ s a -> s{_cpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -162,7 +163,7 @@ instance GoogleRequest ContactsPatch' where
               _cpKey
               _cpOAuthToken
               (Just AltJSON)
-              _cpContact
+              _cpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ContactsPatchResource)

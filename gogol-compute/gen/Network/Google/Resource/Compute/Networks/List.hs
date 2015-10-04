@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type NetworksListResource =
        "global" :>
          "networks" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -78,7 +79,7 @@ data NetworksList' = NetworksList'
     , _nlOAuthToken  :: !(Maybe OAuthToken)
     , _nlMaxResults  :: !Word32
     , _nlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NetworksList'' with the minimum fields required to make a request.
 --
@@ -192,8 +193,8 @@ instance GoogleRequest NetworksList' where
         type Rs NetworksList' = NetworkList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u NetworksList'{..}
-          = go _nlFilter (Just _nlMaxResults) _nlPageToken
-              _nlProject
+          = go _nlProject _nlFilter _nlPageToken
+              (Just _nlMaxResults)
               _nlQuotaUser
               (Just _nlPrettyPrint)
               _nlUserIP

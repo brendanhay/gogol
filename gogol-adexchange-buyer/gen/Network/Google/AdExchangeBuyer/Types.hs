@@ -17,12 +17,44 @@ module Network.Google.AdExchangeBuyer.Types
     -- * Service URL
       adExchangeBuyerURL
 
+    -- * BidderLocationItem
+    , BidderLocationItem
+    , bidderLocationItem
+    , bliURL
+    , bliMaximumQps
+    , bliRegion
+
+    -- * NATiveAd
+    , NATiveAd
+    , nATiveAd
+    , nataImage
+    , nataAppIcon
+    , nataClickTrackingURL
+    , nataBody
+    , nataHeadline
+    , nataImpressionTrackingURL
+    , nataCallToAction
+    , nataStore
+    , nataPrice
+    , nataAdvertiser
+    , nataStarRating
+    , nataLogo
+
     -- * BrandDTO
     , BrandDTO
     , brandDTO
     , bdtoAdvertiserId
     , bdtoName
     , bdtoId
+
+    -- * PlacementsItem
+    , PlacementsItem
+    , placementsItem
+    , piToken
+    , piType
+
+    -- * UpdateAction
+    , UpdateAction (..)
 
     -- * EditAllOrderDealsResponse
     , EditAllOrderDealsResponse
@@ -41,27 +73,12 @@ module Network.Google.AdExchangeBuyer.Types
     , mnOrderId
     , mnOrderRevisionNumber
 
-    -- * CreativeNATiveAd
-    , CreativeNATiveAd
-    , creativeNATiveAd
-    , cnataImage
-    , cnataAppIcon
-    , cnataClickTrackingURL
-    , cnataBody
-    , cnataHeadline
-    , cnataImpressionTrackingURL
-    , cnataCallToAction
-    , cnataStore
-    , cnataPrice
-    , cnataAdvertiser
-    , cnataStarRating
-    , cnataLogo
-
-    -- * PretargetingConfigDimensions
-    , PretargetingConfigDimensions
-    , pretargetingConfigDimensions
-    , pcdHeight
-    , pcdWidth
+    -- * Image
+    , Image
+    , image
+    , iHeight
+    , iURL
+    , iWidth
 
     -- * TermsDTO
     , TermsDTO
@@ -94,20 +111,19 @@ module Network.Google.AdExchangeBuyer.Types
     , tdtoBillingTerms
     , tdtoDescription
 
+    -- * AppIcon
+    , AppIcon
+    , appIcon
+    , aiHeight
+    , aiURL
+    , aiWidth
+
     -- * CreativesList
     , CreativesList
     , creativesList
     , clNextPageToken
     , clKind
     , clItems
-
-    -- * CreativeServingRestrictionsContexts
-    , CreativeServingRestrictionsContexts
-    , creativeServingRestrictionsContexts
-    , csrcPlatform
-    , csrcContextType
-    , csrcAuctionType
-    , csrcGeoCriteriaId
 
     -- * CreateOrdersResponse
     , CreateOrdersResponse
@@ -165,7 +181,7 @@ module Network.Google.AdExchangeBuyer.Types
     -- * PrivateData
     , PrivateData
     , privateData
-    , pdReferencePayLoad
+    , pdReferencePayload
     , pdReferenceId
 
     -- * AdSize
@@ -191,11 +207,12 @@ module Network.Google.AdExchangeBuyer.Types
     , alKind
     , alItems
 
-    -- * CreativeServingRestrictionsDisapprovalReasons
-    , CreativeServingRestrictionsDisapprovalReasons
-    , creativeServingRestrictionsDisapprovalReasons
-    , csrdrReason
-    , csrdrDetails
+    -- * ServingRestrictionsItem
+    , ServingRestrictionsItem
+    , servingRestrictionsItem
+    , sriContexts
+    , sriReason
+    , sriDisapprovalReasons
 
     -- * GetOrderNotesResponse
     , GetOrderNotesResponse
@@ -222,6 +239,9 @@ module Network.Google.AdExchangeBuyer.Types
     , tvdptdpStartMinute
     , tvdptdpDayOfWeek
     , tvdptdpEndMinute
+
+    -- * OpenAuctionStatusFilter
+    , OpenAuctionStatusFilter (..)
 
     -- * DeliveryControl
     , DeliveryControl
@@ -272,15 +292,6 @@ module Network.Google.AdExchangeBuyer.Types
     , pretargetingConfigList
     , pclKind
     , pclItems
-
-    -- * CreativeCorrections
-    , CreativeCorrections
-    , creativeCorrections
-    , ccReason
-    , ccDetails
-
-    -- * AdexchangebuyerCreativesListOpenAuctionStatusFilter
-    , AdexchangebuyerCreativesListOpenAuctionStatusFilter (..)
 
     -- * BuyerDTO
     , BuyerDTO
@@ -359,29 +370,10 @@ module Network.Google.AdExchangeBuyer.Types
     , dodrDealIds
     , dodrOrderRevisionNumber
 
-    -- * PretargetingConfigExcludedPlacements
-    , PretargetingConfigExcludedPlacements
-    , pretargetingConfigExcludedPlacements
-    , pcepToken
-    , pcepType
-
-    -- * CreativeNATiveAdLogo
-    , CreativeNATiveAdLogo
-    , creativeNATiveAdLogo
-    , cnatalHeight
-    , cnatalURL
-    , cnatalWidth
-
     -- * GetOrderDealsResponse
     , GetOrderDealsResponse
     , getOrderDealsResponse
     , godrDeals
-
-    -- * CreativeFilteringReasons
-    , CreativeFilteringReasons
-    , creativeFilteringReasons
-    , cfrReasons
-    , cfrDate
 
     -- * ContactInformation
     , ContactInformation
@@ -428,9 +420,6 @@ module Network.Google.AdExchangeBuyer.Types
     , performanceReportList
     , prlKind
     , prlPerformanceReport
-
-    -- * AdexchangebuyerMarketplaceOrdersPatchUpdateAction
-    , AdexchangebuyerMarketplaceOrdersPatchUpdateAction (..)
 
     -- * NegotiationDTO
     , NegotiationDTO
@@ -482,6 +471,12 @@ module Network.Google.AdExchangeBuyer.Types
     , targetingValueSize
     , tvsHeight
     , tvsWidth
+
+    -- * FilteringReasons
+    , FilteringReasons
+    , filteringReasons
+    , frReasons
+    , frDate
 
     -- * MarketplaceOffer
     , MarketplaceOffer
@@ -544,6 +539,12 @@ module Network.Google.AdExchangeBuyer.Types
     , lorKind
     , lorOffers
 
+    -- * ReasonsItem
+    , ReasonsItem
+    , reasonsItem
+    , riFilteringStatus
+    , riFilteringCount
+
     -- * AdvertiserDTO
     , AdvertiserDTO
     , advertiserDTO
@@ -566,12 +567,11 @@ module Network.Google.AdExchangeBuyer.Types
     , pCurrencyCode
     , pAmountMicros
 
-    -- * CreativeNATiveAdAppIcon
-    , CreativeNATiveAdAppIcon
-    , creativeNATiveAdAppIcon
-    , cnataaiHeight
-    , cnataaiURL
-    , cnataaiWidth
+    -- * ExcludedPlacementsItem
+    , ExcludedPlacementsItem
+    , excludedPlacementsItem
+    , epiToken
+    , epiType
 
     -- * EditAllOrderDealsRequest
     , EditAllOrderDealsRequest
@@ -610,13 +610,6 @@ module Network.Google.AdExchangeBuyer.Types
     , ListOffersRequest
     , listOffersRequest
     , lorSinceTimestampMillis
-
-    -- * CreativeNATiveAdImage
-    , CreativeNATiveAdImage
-    , creativeNATiveAdImage
-    , cnataiHeight
-    , cnataiURL
-    , cnataiWidth
 
     -- * ListClientAccessCapabilitiesRequest
     , ListClientAccessCapabilitiesRequest
@@ -670,24 +663,33 @@ module Network.Google.AdExchangeBuyer.Types
     , stExclusions
     , stInclusions
 
-    -- * AccountBidderLocation
-    , AccountBidderLocation
-    , accountBidderLocation
-    , ablURL
-    , ablMaximumQps
-    , ablRegion
+    -- * CorrectionsItem
+    , CorrectionsItem
+    , correctionsItem
+    , ciReason
+    , ciDetails
 
-    -- * CreativeFilteringReasonsReasons
-    , CreativeFilteringReasonsReasons
-    , creativeFilteringReasonsReasons
-    , cfrrFilteringStatus
-    , cfrrFilteringCount
+    -- * DealsStatusFilter
+    , DealsStatusFilter (..)
+
+    -- * Logo
+    , Logo
+    , logo
+    , lHeight
+    , lURL
+    , lWidth
 
     -- * ClientAccessCapabilities
     , ClientAccessCapabilities
     , clientAccessCapabilities
     , cacClientAccountId
     , cacCapabilities
+
+    -- * DisapprovalReasonsItem
+    , DisapprovalReasonsItem
+    , disapprovalReasonsItem
+    , driReason
+    , driDetails
 
     -- * DeleteOrderDealsResponse
     , DeleteOrderDealsResponse
@@ -718,11 +720,11 @@ module Network.Google.AdExchangeBuyer.Types
     , mdOfferId
     , mdOrderId
 
-    -- * PretargetingConfigPlacements
-    , PretargetingConfigPlacements
-    , pretargetingConfigPlacements
-    , pcpToken
-    , pcpType
+    -- * DimensionsItem
+    , DimensionsItem
+    , dimensionsItem
+    , diHeight
+    , diWidth
 
     -- * NegotiationRoundDTO
     , NegotiationRoundDTO
@@ -758,20 +760,18 @@ module Network.Google.AdExchangeBuyer.Types
     , dtngatReservePricePerBuyers
     , dtngatPrivateAuctionId
 
-    -- * CreativeServingRestrictions
-    , CreativeServingRestrictions
-    , creativeServingRestrictions
-    , csrContexts
-    , csrReason
-    , csrDisapprovalReasons
-
-    -- * AdexchangebuyerCreativesListDealsStatusFilter
-    , AdexchangebuyerCreativesListDealsStatusFilter (..)
-
     -- * Buyer
     , Buyer
     , buyer
     , bbAccountId
+
+    -- * ContextsItem
+    , ContextsItem
+    , contextsItem
+    , ciPlatform
+    , ciContextType
+    , ciAuctionType
+    , ciGeoCriteriaId
 
     -- * MarketplaceLabel
     , MarketplaceLabel

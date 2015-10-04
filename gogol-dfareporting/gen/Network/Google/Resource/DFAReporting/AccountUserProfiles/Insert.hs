@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.DFAReporting.AccountUserProfiles.Insert
     , aupiQuotaUser
     , aupiPrettyPrint
     , aupiUserIP
-    , aupiAccountUserProfile
     , aupiProfileId
+    , aupiPayload
     , aupiKey
     , aupiOAuthToken
     , aupiFields
@@ -63,15 +64,15 @@ type AccountUserProfilesInsertResource =
 --
 -- /See:/ 'accountUserProfilesInsert'' smart constructor.
 data AccountUserProfilesInsert' = AccountUserProfilesInsert'
-    { _aupiQuotaUser          :: !(Maybe Text)
-    , _aupiPrettyPrint        :: !Bool
-    , _aupiUserIP             :: !(Maybe Text)
-    , _aupiAccountUserProfile :: !AccountUserProfile
-    , _aupiProfileId          :: !Int64
-    , _aupiKey                :: !(Maybe Key)
-    , _aupiOAuthToken         :: !(Maybe OAuthToken)
-    , _aupiFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _aupiQuotaUser   :: !(Maybe Text)
+    , _aupiPrettyPrint :: !Bool
+    , _aupiUserIP      :: !(Maybe Text)
+    , _aupiProfileId   :: !Int64
+    , _aupiPayload     :: !AccountUserProfile
+    , _aupiKey         :: !(Maybe Key)
+    , _aupiOAuthToken  :: !(Maybe OAuthToken)
+    , _aupiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProfilesInsert'' with the minimum fields required to make a request.
 --
@@ -83,9 +84,9 @@ data AccountUserProfilesInsert' = AccountUserProfilesInsert'
 --
 -- * 'aupiUserIP'
 --
--- * 'aupiAccountUserProfile'
---
 -- * 'aupiProfileId'
+--
+-- * 'aupiPayload'
 --
 -- * 'aupiKey'
 --
@@ -93,16 +94,16 @@ data AccountUserProfilesInsert' = AccountUserProfilesInsert'
 --
 -- * 'aupiFields'
 accountUserProfilesInsert'
-    :: AccountUserProfile -- ^ 'AccountUserProfile'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> AccountUserProfile -- ^ 'payload'
     -> AccountUserProfilesInsert'
-accountUserProfilesInsert' pAupiAccountUserProfile_ pAupiProfileId_ =
+accountUserProfilesInsert' pAupiProfileId_ pAupiPayload_ =
     AccountUserProfilesInsert'
     { _aupiQuotaUser = Nothing
     , _aupiPrettyPrint = True
     , _aupiUserIP = Nothing
-    , _aupiAccountUserProfile = pAupiAccountUserProfile_
     , _aupiProfileId = pAupiProfileId_
+    , _aupiPayload = pAupiPayload_
     , _aupiKey = Nothing
     , _aupiOAuthToken = Nothing
     , _aupiFields = Nothing
@@ -128,17 +129,16 @@ aupiUserIP :: Lens' AccountUserProfilesInsert' (Maybe Text)
 aupiUserIP
   = lens _aupiUserIP (\ s a -> s{_aupiUserIP = a})
 
--- | Multipart request metadata.
-aupiAccountUserProfile :: Lens' AccountUserProfilesInsert' AccountUserProfile
-aupiAccountUserProfile
-  = lens _aupiAccountUserProfile
-      (\ s a -> s{_aupiAccountUserProfile = a})
-
 -- | User profile ID associated with this request.
 aupiProfileId :: Lens' AccountUserProfilesInsert' Int64
 aupiProfileId
   = lens _aupiProfileId
       (\ s a -> s{_aupiProfileId = a})
+
+-- | Multipart request metadata.
+aupiPayload :: Lens' AccountUserProfilesInsert' AccountUserProfile
+aupiPayload
+  = lens _aupiPayload (\ s a -> s{_aupiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -174,7 +174,7 @@ instance GoogleRequest AccountUserProfilesInsert'
               _aupiKey
               _aupiOAuthToken
               (Just AltJSON)
-              _aupiAccountUserProfile
+              _aupiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountUserProfilesInsertResource)

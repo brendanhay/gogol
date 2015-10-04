@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -39,7 +40,7 @@ module Network.Google.Resource.Partners.ClientMessages.Log
     , cmlPp
     , cmlAccessToken
     , cmlUploadType
-    , cmlLogMessageRequest
+    , cmlPayload
     , cmlBearerToken
     , cmlKey
     , cmlOAuthToken
@@ -56,12 +57,12 @@ type ClientMessagesLogResource =
      "v2" :>
        "clientMessages:log" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -77,20 +78,20 @@ type ClientMessagesLogResource =
 --
 -- /See:/ 'clientMessagesLog'' smart constructor.
 data ClientMessagesLog' = ClientMessagesLog'
-    { _cmlXgafv             :: !(Maybe Text)
-    , _cmlQuotaUser         :: !(Maybe Text)
-    , _cmlPrettyPrint       :: !Bool
-    , _cmlUploadProtocol    :: !(Maybe Text)
-    , _cmlPp                :: !Bool
-    , _cmlAccessToken       :: !(Maybe Text)
-    , _cmlUploadType        :: !(Maybe Text)
-    , _cmlLogMessageRequest :: !LogMessageRequest
-    , _cmlBearerToken       :: !(Maybe Text)
-    , _cmlKey               :: !(Maybe Key)
-    , _cmlOAuthToken        :: !(Maybe OAuthToken)
-    , _cmlFields            :: !(Maybe Text)
-    , _cmlCallback          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cmlXgafv          :: !(Maybe Text)
+    , _cmlQuotaUser      :: !(Maybe Text)
+    , _cmlPrettyPrint    :: !Bool
+    , _cmlUploadProtocol :: !(Maybe Text)
+    , _cmlPp             :: !Bool
+    , _cmlAccessToken    :: !(Maybe Text)
+    , _cmlUploadType     :: !(Maybe Text)
+    , _cmlPayload        :: !LogMessageRequest
+    , _cmlBearerToken    :: !(Maybe Text)
+    , _cmlKey            :: !(Maybe Key)
+    , _cmlOAuthToken     :: !(Maybe OAuthToken)
+    , _cmlFields         :: !(Maybe Text)
+    , _cmlCallback       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientMessagesLog'' with the minimum fields required to make a request.
 --
@@ -110,7 +111,7 @@ data ClientMessagesLog' = ClientMessagesLog'
 --
 -- * 'cmlUploadType'
 --
--- * 'cmlLogMessageRequest'
+-- * 'cmlPayload'
 --
 -- * 'cmlBearerToken'
 --
@@ -122,9 +123,9 @@ data ClientMessagesLog' = ClientMessagesLog'
 --
 -- * 'cmlCallback'
 clientMessagesLog'
-    :: LogMessageRequest -- ^ 'LogMessageRequest'
+    :: LogMessageRequest -- ^ 'payload'
     -> ClientMessagesLog'
-clientMessagesLog' pCmlLogMessageRequest_ =
+clientMessagesLog' pCmlPayload_ =
     ClientMessagesLog'
     { _cmlXgafv = Nothing
     , _cmlQuotaUser = Nothing
@@ -133,7 +134,7 @@ clientMessagesLog' pCmlLogMessageRequest_ =
     , _cmlPp = True
     , _cmlAccessToken = Nothing
     , _cmlUploadType = Nothing
-    , _cmlLogMessageRequest = pCmlLogMessageRequest_
+    , _cmlPayload = pCmlPayload_
     , _cmlBearerToken = Nothing
     , _cmlKey = Nothing
     , _cmlOAuthToken = Nothing
@@ -181,10 +182,9 @@ cmlUploadType
       (\ s a -> s{_cmlUploadType = a})
 
 -- | Multipart request metadata.
-cmlLogMessageRequest :: Lens' ClientMessagesLog' LogMessageRequest
-cmlLogMessageRequest
-  = lens _cmlLogMessageRequest
-      (\ s a -> s{_cmlLogMessageRequest = a})
+cmlPayload :: Lens' ClientMessagesLog' LogMessageRequest
+cmlPayload
+  = lens _cmlPayload (\ s a -> s{_cmlPayload = a})
 
 -- | OAuth bearer token.
 cmlBearerToken :: Lens' ClientMessagesLog' (Maybe Text)
@@ -222,18 +222,18 @@ instance GoogleRequest ClientMessagesLog' where
         type Rs ClientMessagesLog' = LogMessageResponse
         request = requestWithRoute defReq partnersURL
         requestWithRoute r u ClientMessagesLog'{..}
-          = go _cmlXgafv _cmlAccessToken _cmlBearerToken
-              _cmlCallback
-              (Just _cmlPp)
+          = go _cmlXgafv _cmlUploadProtocol (Just _cmlPp)
+              _cmlAccessToken
               _cmlUploadType
-              _cmlUploadProtocol
+              _cmlBearerToken
+              _cmlCallback
               _cmlQuotaUser
               (Just _cmlPrettyPrint)
               _cmlFields
               _cmlKey
               _cmlOAuthToken
               (Just AltJSON)
-              _cmlLogMessageRequest
+              _cmlPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ClientMessagesLogResource)

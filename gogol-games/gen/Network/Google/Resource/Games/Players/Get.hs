@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -71,7 +72,7 @@ data PlayersGet' = PlayersGet'
     , _pgOAuthToken  :: !(Maybe OAuthToken)
     , _pgPlayerId    :: !Text
     , _pgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayersGet'' with the minimum fields required to make a request.
 --
@@ -159,7 +160,7 @@ instance GoogleRequest PlayersGet' where
         type Rs PlayersGet' = Player
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u PlayersGet'{..}
-          = go _pgLanguage _pgPlayerId _pgQuotaUser
+          = go _pgPlayerId _pgLanguage _pgQuotaUser
               (Just _pgPrettyPrint)
               _pgUserIP
               _pgFields

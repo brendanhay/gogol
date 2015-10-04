@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -61,25 +62,25 @@ type FloodlightActivitiesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightActivities" :>
-           QueryParam "advertiserId" Int64 :>
-             QueryParams "floodlightActivityGroupIds" Int64 :>
-               QueryParam "floodlightActivityGroupName" Text :>
-                 QueryParam "floodlightActivityGroupTagString" Text :>
-                   QueryParam "floodlightActivityGroupType"
-                     DfareportingFloodlightActivitiesListFloodlightActivityGroupType
-                     :>
-                     QueryParam "floodlightConfigurationId" Int64 :>
-                       QueryParams "ids" Int64 :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "searchString" Text :>
-                               QueryParam "sortField"
-                                 DfareportingFloodlightActivitiesListSortField
-                                 :>
-                                 QueryParam "sortOrder"
-                                   DfareportingFloodlightActivitiesListSortOrder
+           QueryParam "tagString" Text :>
+             QueryParam "floodlightActivityGroupTagString" Text :>
+               QueryParam "floodlightConfigurationId" Int64 :>
+                 QueryParam "advertiserId" Int64 :>
+                   QueryParam "searchString" Text :>
+                     QueryParams "ids" Int64 :>
+                       QueryParams "floodlightActivityGroupIds" Int64 :>
+                         QueryParam "sortOrder"
+                           DfareportingFloodlightActivitiesListSortOrder
+                           :>
+                           QueryParam "floodlightActivityGroupType"
+                             FloodlightActivityGroupType
+                             :>
+                             QueryParam "floodlightActivityGroupName" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "sortField"
+                                   DfareportingFloodlightActivitiesListSortField
                                    :>
-                                   QueryParam "tagString" Text :>
+                                   QueryParam "maxResults" Int32 :>
                                      QueryParam "quotaUser" Text :>
                                        QueryParam "prettyPrint" Bool :>
                                          QueryParam "userIp" Text :>
@@ -104,19 +105,19 @@ data FloodlightActivitiesList' = FloodlightActivitiesList'
     , _falUserIP                           :: !(Maybe Text)
     , _falAdvertiserId                     :: !(Maybe Int64)
     , _falSearchString                     :: !(Maybe Text)
-    , _falIds                              :: !(Maybe Int64)
+    , _falIds                              :: !(Maybe [Int64])
     , _falProfileId                        :: !Int64
-    , _falFloodlightActivityGroupIds       :: !(Maybe Int64)
+    , _falFloodlightActivityGroupIds       :: !(Maybe [Int64])
     , _falSortOrder                        :: !(Maybe DfareportingFloodlightActivitiesListSortOrder)
     , _falKey                              :: !(Maybe Key)
-    , _falFloodlightActivityGroupType      :: !(Maybe DfareportingFloodlightActivitiesListFloodlightActivityGroupType)
+    , _falFloodlightActivityGroupType      :: !(Maybe FloodlightActivityGroupType)
     , _falFloodlightActivityGroupName      :: !(Maybe Text)
     , _falPageToken                        :: !(Maybe Text)
     , _falSortField                        :: !(Maybe DfareportingFloodlightActivitiesListSortField)
     , _falOAuthToken                       :: !(Maybe OAuthToken)
     , _falMaxResults                       :: !(Maybe Int32)
     , _falFields                           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesList'' with the minimum fields required to make a request.
 --
@@ -252,8 +253,10 @@ falSearchString
 -- | Select only floodlight activities with the specified IDs. Must specify
 -- either ids, advertiserId, or floodlightConfigurationId for a non-empty
 -- result.
-falIds :: Lens' FloodlightActivitiesList' (Maybe Int64)
-falIds = lens _falIds (\ s a -> s{_falIds = a})
+falIds :: Lens' FloodlightActivitiesList' [Int64]
+falIds
+  = lens _falIds (\ s a -> s{_falIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 falProfileId :: Lens' FloodlightActivitiesList' Int64
@@ -262,10 +265,12 @@ falProfileId
 
 -- | Select only floodlight activities with the specified floodlight activity
 -- group IDs.
-falFloodlightActivityGroupIds :: Lens' FloodlightActivitiesList' (Maybe Int64)
+falFloodlightActivityGroupIds :: Lens' FloodlightActivitiesList' [Int64]
 falFloodlightActivityGroupIds
   = lens _falFloodlightActivityGroupIds
       (\ s a -> s{_falFloodlightActivityGroupIds = a})
+      . _Default
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 falSortOrder :: Lens' FloodlightActivitiesList' (Maybe DfareportingFloodlightActivitiesListSortOrder)
@@ -280,7 +285,7 @@ falKey = lens _falKey (\ s a -> s{_falKey = a})
 
 -- | Select only floodlight activities with the specified floodlight activity
 -- group type.
-falFloodlightActivityGroupType :: Lens' FloodlightActivitiesList' (Maybe DfareportingFloodlightActivitiesListFloodlightActivityGroupType)
+falFloodlightActivityGroupType :: Lens' FloodlightActivitiesList' (Maybe FloodlightActivityGroupType)
 falFloodlightActivityGroupType
   = lens _falFloodlightActivityGroupType
       (\ s a -> s{_falFloodlightActivityGroupType = a})
@@ -329,19 +334,19 @@ instance GoogleRequest FloodlightActivitiesList'
              FloodlightActivitiesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightActivitiesList'{..}
-          = go _falAdvertiserId _falFloodlightActivityGroupIds
-              _falFloodlightActivityGroupName
+          = go _falProfileId _falTagString
               _falFloodlightActivityGroupTagString
-              _falFloodlightActivityGroupType
               _falFloodlightConfigurationId
-              _falIds
-              _falMaxResults
-              _falPageToken
+              _falAdvertiserId
               _falSearchString
-              _falSortField
+              (_falIds ^. _Default)
+              (_falFloodlightActivityGroupIds ^. _Default)
               _falSortOrder
-              _falTagString
-              _falProfileId
+              _falFloodlightActivityGroupType
+              _falFloodlightActivityGroupName
+              _falPageToken
+              _falSortField
+              _falMaxResults
               _falQuotaUser
               (Just _falPrettyPrint)
               _falUserIP

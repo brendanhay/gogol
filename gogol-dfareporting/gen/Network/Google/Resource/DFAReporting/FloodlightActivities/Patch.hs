@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Patch
     , fapPrettyPrint
     , fapUserIP
     , fapProfileId
+    , fapPayload
     , fapKey
-    , fapFloodlightActivity
     , fapId
     , fapOAuthToken
     , fapFields
@@ -67,16 +68,16 @@ type FloodlightActivitiesPatchResource =
 --
 -- /See:/ 'floodlightActivitiesPatch'' smart constructor.
 data FloodlightActivitiesPatch' = FloodlightActivitiesPatch'
-    { _fapQuotaUser          :: !(Maybe Text)
-    , _fapPrettyPrint        :: !Bool
-    , _fapUserIP             :: !(Maybe Text)
-    , _fapProfileId          :: !Int64
-    , _fapKey                :: !(Maybe Key)
-    , _fapFloodlightActivity :: !FloodlightActivity
-    , _fapId                 :: !Int64
-    , _fapOAuthToken         :: !(Maybe OAuthToken)
-    , _fapFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _fapQuotaUser   :: !(Maybe Text)
+    , _fapPrettyPrint :: !Bool
+    , _fapUserIP      :: !(Maybe Text)
+    , _fapProfileId   :: !Int64
+    , _fapPayload     :: !FloodlightActivity
+    , _fapKey         :: !(Maybe Key)
+    , _fapId          :: !Int64
+    , _fapOAuthToken  :: !(Maybe OAuthToken)
+    , _fapFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesPatch'' with the minimum fields required to make a request.
 --
@@ -90,9 +91,9 @@ data FloodlightActivitiesPatch' = FloodlightActivitiesPatch'
 --
 -- * 'fapProfileId'
 --
--- * 'fapKey'
+-- * 'fapPayload'
 --
--- * 'fapFloodlightActivity'
+-- * 'fapKey'
 --
 -- * 'fapId'
 --
@@ -101,17 +102,17 @@ data FloodlightActivitiesPatch' = FloodlightActivitiesPatch'
 -- * 'fapFields'
 floodlightActivitiesPatch'
     :: Int64 -- ^ 'profileId'
-    -> FloodlightActivity -- ^ 'FloodlightActivity'
+    -> FloodlightActivity -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> FloodlightActivitiesPatch'
-floodlightActivitiesPatch' pFapProfileId_ pFapFloodlightActivity_ pFapId_ =
+floodlightActivitiesPatch' pFapProfileId_ pFapPayload_ pFapId_ =
     FloodlightActivitiesPatch'
     { _fapQuotaUser = Nothing
     , _fapPrettyPrint = True
     , _fapUserIP = Nothing
     , _fapProfileId = pFapProfileId_
+    , _fapPayload = pFapPayload_
     , _fapKey = Nothing
-    , _fapFloodlightActivity = pFapFloodlightActivity_
     , _fapId = pFapId_
     , _fapOAuthToken = Nothing
     , _fapFields = Nothing
@@ -141,17 +142,16 @@ fapProfileId :: Lens' FloodlightActivitiesPatch' Int64
 fapProfileId
   = lens _fapProfileId (\ s a -> s{_fapProfileId = a})
 
+-- | Multipart request metadata.
+fapPayload :: Lens' FloodlightActivitiesPatch' FloodlightActivity
+fapPayload
+  = lens _fapPayload (\ s a -> s{_fapPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 fapKey :: Lens' FloodlightActivitiesPatch' (Maybe Key)
 fapKey = lens _fapKey (\ s a -> s{_fapKey = a})
-
--- | Multipart request metadata.
-fapFloodlightActivity :: Lens' FloodlightActivitiesPatch' FloodlightActivity
-fapFloodlightActivity
-  = lens _fapFloodlightActivity
-      (\ s a -> s{_fapFloodlightActivity = a})
 
 -- | Floodlight activity ID.
 fapId :: Lens' FloodlightActivitiesPatch' Int64
@@ -185,7 +185,7 @@ instance GoogleRequest FloodlightActivitiesPatch'
               _fapKey
               _fapOAuthToken
               (Just AltJSON)
-              _fapFloodlightActivity
+              _fapPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FloodlightActivitiesPatchResource)

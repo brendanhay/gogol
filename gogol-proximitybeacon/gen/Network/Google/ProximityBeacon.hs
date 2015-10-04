@@ -87,10 +87,6 @@ module Network.Google.ProximityBeacon
     , Empty
     , empty
 
-    -- ** BeaconProperties
-    , BeaconProperties
-    , beaconProperties
-
     -- ** DeleteAttachmentsResponse
     , DeleteAttachmentsResponse
     , deleteAttachmentsResponse
@@ -195,6 +191,10 @@ module Network.Google.ProximityBeacon
     , GetInfoForObservedBeaconsResponse
     , getInfoForObservedBeaconsResponse
     , gifobrBeacons
+
+    -- ** Properties
+    , Properties
+    , properties
     ) where
 
 import           Network.Google.Prelude

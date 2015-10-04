@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,11 +53,11 @@ import           Network.Google.Prelude
 type UsersThreadsListResource =
      Capture "userId" Text :>
        "threads" :>
-         QueryParam "includeSpamTrash" Bool :>
-           QueryParams "labelIds" Text :>
-             QueryParam "maxResults" Word32 :>
+         QueryParam "q" Text :>
+           QueryParam "includeSpamTrash" Bool :>
+             QueryParams "labelIds" Text :>
                QueryParam "pageToken" Text :>
-                 QueryParam "q" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -77,12 +78,12 @@ data UsersThreadsList' = UsersThreadsList'
     , _utlUserId           :: !Text
     , _utlKey              :: !(Maybe Key)
     , _utlIncludeSpamTrash :: !Bool
-    , _utlLabelIds         :: !(Maybe Text)
+    , _utlLabelIds         :: !(Maybe [Text])
     , _utlPageToken        :: !(Maybe Text)
     , _utlOAuthToken       :: !(Maybe OAuthToken)
     , _utlMaxResults       :: !Word32
     , _utlFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersThreadsList'' with the minimum fields required to make a request.
 --
@@ -175,9 +176,11 @@ utlIncludeSpamTrash
 
 -- | Only return threads with labels that match all of the specified label
 -- IDs.
-utlLabelIds :: Lens' UsersThreadsList' (Maybe Text)
+utlLabelIds :: Lens' UsersThreadsList' [Text]
 utlLabelIds
-  = lens _utlLabelIds (\ s a -> s{_utlLabelIds = a})
+  = lens _utlLabelIds (\ s a -> s{_utlLabelIds = a}) .
+      _Default
+      . _Coerce
 
 -- | Page token to retrieve a specific page of results in the list.
 utlPageToken :: Lens' UsersThreadsList' (Maybe Text)
@@ -209,11 +212,10 @@ instance GoogleRequest UsersThreadsList' where
         type Rs UsersThreadsList' = ListThreadsResponse
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersThreadsList'{..}
-          = go (Just _utlIncludeSpamTrash) _utlLabelIds
-              (Just _utlMaxResults)
+          = go _utlUserId _utlQ (Just _utlIncludeSpamTrash)
+              (_utlLabelIds ^. _Default)
               _utlPageToken
-              _utlQ
-              _utlUserId
+              (Just _utlMaxResults)
               _utlQuotaUser
               (Just _utlPrettyPrint)
               _utlUserIP

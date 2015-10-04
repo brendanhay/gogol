@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -30,10 +31,10 @@ module Network.Google.Resource.Directory.OrgUnits.Patch
     , OrgUnitsPatch'
 
     -- * Request Lenses
-    , oupOrgUnit
     , oupQuotaUser
     , oupPrettyPrint
     , oupUserIP
+    , oupPayload
     , oupOrgUnitPath
     , oupCustomerId
     , oupKey
@@ -49,8 +50,8 @@ import           Network.Google.Prelude
 type OrgUnitsPatchResource =
      "customer" :>
        Capture "customerId" Text :>
-         "orgunits{" :>
-           "orgUnitPath*}" :>
+         "orgunits" :>
+           Captures "orgUnitPath" Text :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -64,28 +65,28 @@ type OrgUnitsPatchResource =
 --
 -- /See:/ 'orgUnitsPatch'' smart constructor.
 data OrgUnitsPatch' = OrgUnitsPatch'
-    { _oupOrgUnit     :: !OrgUnit
-    , _oupQuotaUser   :: !(Maybe Text)
+    { _oupQuotaUser   :: !(Maybe Text)
     , _oupPrettyPrint :: !Bool
     , _oupUserIP      :: !(Maybe Text)
-    , _oupOrgUnitPath :: !Text
+    , _oupPayload     :: !OrgUnit
+    , _oupOrgUnitPath :: ![Text]
     , _oupCustomerId  :: !Text
     , _oupKey         :: !(Maybe Key)
     , _oupOAuthToken  :: !(Maybe OAuthToken)
     , _oupFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrgUnitsPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'oupOrgUnit'
 --
 -- * 'oupQuotaUser'
 --
 -- * 'oupPrettyPrint'
 --
 -- * 'oupUserIP'
+--
+-- * 'oupPayload'
 --
 -- * 'oupOrgUnitPath'
 --
@@ -97,27 +98,22 @@ data OrgUnitsPatch' = OrgUnitsPatch'
 --
 -- * 'oupFields'
 orgUnitsPatch'
-    :: OrgUnit -- ^ 'OrgUnit'
-    -> Text -- ^ 'orgUnitPath'
+    :: OrgUnit -- ^ 'payload'
+    -> [Text] -- ^ 'orgUnitPath'
     -> Text -- ^ 'customerId'
     -> OrgUnitsPatch'
-orgUnitsPatch' pOupOrgUnit_ pOupOrgUnitPath_ pOupCustomerId_ =
+orgUnitsPatch' pOupPayload_ pOupOrgUnitPath_ pOupCustomerId_ =
     OrgUnitsPatch'
-    { _oupOrgUnit = pOupOrgUnit_
-    , _oupQuotaUser = Nothing
+    { _oupQuotaUser = Nothing
     , _oupPrettyPrint = True
     , _oupUserIP = Nothing
+    , _oupPayload = pOupPayload_
     , _oupOrgUnitPath = pOupOrgUnitPath_
     , _oupCustomerId = pOupCustomerId_
     , _oupKey = Nothing
     , _oupOAuthToken = Nothing
     , _oupFields = Nothing
     }
-
--- | Multipart request metadata.
-oupOrgUnit :: Lens' OrgUnitsPatch' OrgUnit
-oupOrgUnit
-  = lens _oupOrgUnit (\ s a -> s{_oupOrgUnit = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -138,11 +134,17 @@ oupUserIP :: Lens' OrgUnitsPatch' (Maybe Text)
 oupUserIP
   = lens _oupUserIP (\ s a -> s{_oupUserIP = a})
 
+-- | Multipart request metadata.
+oupPayload :: Lens' OrgUnitsPatch' OrgUnit
+oupPayload
+  = lens _oupPayload (\ s a -> s{_oupPayload = a})
+
 -- | Full path of the organization unit or its Id
-oupOrgUnitPath :: Lens' OrgUnitsPatch' Text
+oupOrgUnitPath :: Lens' OrgUnitsPatch' [Text]
 oupOrgUnitPath
   = lens _oupOrgUnitPath
       (\ s a -> s{_oupOrgUnitPath = a})
+      . _Coerce
 
 -- | Immutable id of the Google Apps account
 oupCustomerId :: Lens' OrgUnitsPatch' Text
@@ -182,7 +184,7 @@ instance GoogleRequest OrgUnitsPatch' where
               _oupKey
               _oupOAuthToken
               (Just AltJSON)
-              _oupOrgUnit
+              _oupPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrgUnitsPatchResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ type PeopleListByCircleResource =
      "circles" :>
        Capture "circleId" Text :>
          "people" :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -73,7 +74,7 @@ data PeopleListByCircle' = PeopleListByCircle'
     , _plbcOAuthToken  :: !(Maybe OAuthToken)
     , _plbcMaxResults  :: !Word32
     , _plbcFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleListByCircle'' with the minimum fields required to make a request.
 --
@@ -178,8 +179,8 @@ instance GoogleRequest PeopleListByCircle' where
         type Rs PeopleListByCircle' = PeopleFeed
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u PeopleListByCircle'{..}
-          = go (Just _plbcMaxResults) _plbcPageToken
-              _plbcCircleId
+          = go _plbcCircleId _plbcPageToken
+              (Just _plbcMaxResults)
               _plbcQuotaUser
               (Just _plbcPrettyPrint)
               _plbcUserIP

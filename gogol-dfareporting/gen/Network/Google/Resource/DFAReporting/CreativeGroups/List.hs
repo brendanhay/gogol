@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -56,18 +57,18 @@ type CreativeGroupsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeGroups" :>
-           QueryParams "advertiserIds" Int64 :>
-             QueryParam "groupNumber" Int32 :>
-               QueryParams "ids" Int64 :>
-                 QueryParam "maxResults" Int32 :>
+           QueryParam "searchString" Text :>
+             QueryParams "ids" Int64 :>
+               QueryParam "sortOrder"
+                 DfareportingCreativeGroupsListSortOrder
+                 :>
+                 QueryParam "groupNumber" Int32 :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "searchString" Text :>
-                       QueryParam "sortField"
-                         DfareportingCreativeGroupsListSortField
-                         :>
-                         QueryParam "sortOrder"
-                           DfareportingCreativeGroupsListSortOrder
-                           :>
+                     QueryParam "sortField"
+                       DfareportingCreativeGroupsListSortField
+                       :>
+                       QueryParams "advertiserIds" Int64 :>
+                         QueryParam "maxResults" Int32 :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "userIp" Text :>
@@ -85,7 +86,7 @@ data CreativeGroupsList' = CreativeGroupsList'
     , _cglPrettyPrint   :: !Bool
     , _cglUserIP        :: !(Maybe Text)
     , _cglSearchString  :: !(Maybe Text)
-    , _cglIds           :: !(Maybe Int64)
+    , _cglIds           :: !(Maybe [Int64])
     , _cglProfileId     :: !Int64
     , _cglSortOrder     :: !(Maybe DfareportingCreativeGroupsListSortOrder)
     , _cglGroupNumber   :: !(Maybe Int32)
@@ -93,10 +94,10 @@ data CreativeGroupsList' = CreativeGroupsList'
     , _cglPageToken     :: !(Maybe Text)
     , _cglSortField     :: !(Maybe DfareportingCreativeGroupsListSortField)
     , _cglOAuthToken    :: !(Maybe OAuthToken)
-    , _cglAdvertiserIds :: !(Maybe Int64)
+    , _cglAdvertiserIds :: !(Maybe [Int64])
     , _cglMaxResults    :: !(Maybe Int32)
     , _cglFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsList'' with the minimum fields required to make a request.
 --
@@ -186,8 +187,10 @@ cglSearchString
       (\ s a -> s{_cglSearchString = a})
 
 -- | Select only creative groups with these IDs.
-cglIds :: Lens' CreativeGroupsList' (Maybe Int64)
-cglIds = lens _cglIds (\ s a -> s{_cglIds = a})
+cglIds :: Lens' CreativeGroupsList' [Int64]
+cglIds
+  = lens _cglIds (\ s a -> s{_cglIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 cglProfileId :: Lens' CreativeGroupsList' Int64
@@ -228,10 +231,12 @@ cglOAuthToken
       (\ s a -> s{_cglOAuthToken = a})
 
 -- | Select only creative groups that belong to these advertisers.
-cglAdvertiserIds :: Lens' CreativeGroupsList' (Maybe Int64)
+cglAdvertiserIds :: Lens' CreativeGroupsList' [Int64]
 cglAdvertiserIds
   = lens _cglAdvertiserIds
       (\ s a -> s{_cglAdvertiserIds = a})
+      . _Default
+      . _Coerce
 
 -- | Maximum number of results to return.
 cglMaxResults :: Lens' CreativeGroupsList' (Maybe Int32)
@@ -253,13 +258,14 @@ instance GoogleRequest CreativeGroupsList' where
              CreativeGroupsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeGroupsList'{..}
-          = go _cglAdvertiserIds _cglGroupNumber _cglIds
-              _cglMaxResults
-              _cglPageToken
-              _cglSearchString
-              _cglSortField
+          = go _cglProfileId _cglSearchString
+              (_cglIds ^. _Default)
               _cglSortOrder
-              _cglProfileId
+              _cglGroupNumber
+              _cglPageToken
+              _cglSortField
+              (_cglAdvertiserIds ^. _Default)
+              _cglMaxResults
               _cglQuotaUser
               (Just _cglPrettyPrint)
               _cglUserIP

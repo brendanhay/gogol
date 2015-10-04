@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -65,21 +66,21 @@ type AccountsAvailsListResource =
        "accounts" :>
          Capture "accountId" Text :>
            "avails" :>
-             QueryParam "$.xgafv" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "altId" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "pageSize" Int32 :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParams "pphNames" Text :>
-                               QueryParams "studioNames" Text :>
-                                 QueryParams "territories" Text :>
-                                   QueryParam "title" Text :>
-                                     QueryParam "uploadType" Text :>
-                                       QueryParam "upload_protocol" Text :>
-                                         QueryParams "videoIds" Text :>
+             QueryParam "altId" Text :>
+               QueryParams "pphNames" Text :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParams "studioNames" Text :>
+                     QueryParams "videoIds" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParams "territories" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "title" Text :>
+                                       QueryParam "pageSize" Int32 :>
+                                         QueryParam "callback" Text :>
                                            QueryParam "quotaUser" Text :>
                                              QueryParam "prettyPrint" Bool :>
                                                QueryParam "fields" Text :>
@@ -98,17 +99,17 @@ type AccountsAvailsListResource =
 -- /See:/ 'accountsAvailsList'' smart constructor.
 data AccountsAvailsList' = AccountsAvailsList'
     { _aalAltId          :: !(Maybe Text)
-    , _aalPphNames       :: !(Maybe Text)
+    , _aalPphNames       :: !(Maybe [Text])
     , _aalXgafv          :: !(Maybe Text)
-    , _aalStudioNames    :: !(Maybe Text)
+    , _aalStudioNames    :: !(Maybe [Text])
     , _aalQuotaUser      :: !(Maybe Text)
-    , _aalVideoIds       :: !(Maybe Text)
+    , _aalVideoIds       :: !(Maybe [Text])
     , _aalPrettyPrint    :: !Bool
     , _aalUploadProtocol :: !(Maybe Text)
     , _aalPp             :: !Bool
     , _aalAccessToken    :: !(Maybe Text)
     , _aalUploadType     :: !(Maybe Text)
-    , _aalTerritories    :: !(Maybe Text)
+    , _aalTerritories    :: !(Maybe [Text])
     , _aalAccountId      :: !Text
     , _aalBearerToken    :: !(Maybe Text)
     , _aalKey            :: !(Maybe Key)
@@ -118,7 +119,7 @@ data AccountsAvailsList' = AccountsAvailsList'
     , _aalPageSize       :: !(Maybe Int32)
     , _aalFields         :: !(Maybe Text)
     , _aalCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAvailsList'' with the minimum fields required to make a request.
 --
@@ -198,19 +199,23 @@ aalAltId :: Lens' AccountsAvailsList' (Maybe Text)
 aalAltId = lens _aalAltId (\ s a -> s{_aalAltId = a})
 
 -- | See _List methods rules_ for info about this field.
-aalPphNames :: Lens' AccountsAvailsList' (Maybe Text)
+aalPphNames :: Lens' AccountsAvailsList' [Text]
 aalPphNames
-  = lens _aalPphNames (\ s a -> s{_aalPphNames = a})
+  = lens _aalPphNames (\ s a -> s{_aalPphNames = a}) .
+      _Default
+      . _Coerce
 
 -- | V1 error format.
 aalXgafv :: Lens' AccountsAvailsList' (Maybe Text)
 aalXgafv = lens _aalXgafv (\ s a -> s{_aalXgafv = a})
 
 -- | See _List methods rules_ for info about this field.
-aalStudioNames :: Lens' AccountsAvailsList' (Maybe Text)
+aalStudioNames :: Lens' AccountsAvailsList' [Text]
 aalStudioNames
   = lens _aalStudioNames
       (\ s a -> s{_aalStudioNames = a})
+      . _Default
+      . _Coerce
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -220,9 +225,11 @@ aalQuotaUser
   = lens _aalQuotaUser (\ s a -> s{_aalQuotaUser = a})
 
 -- | Filter Avails that match any of the given \`video_id\`s.
-aalVideoIds :: Lens' AccountsAvailsList' (Maybe Text)
+aalVideoIds :: Lens' AccountsAvailsList' [Text]
 aalVideoIds
-  = lens _aalVideoIds (\ s a -> s{_aalVideoIds = a})
+  = lens _aalVideoIds (\ s a -> s{_aalVideoIds = a}) .
+      _Default
+      . _Coerce
 
 -- | Returns response with indentations and line breaks.
 aalPrettyPrint :: Lens' AccountsAvailsList' Bool
@@ -255,10 +262,12 @@ aalUploadType
 -- | Filter Avails that match (case-insensitive) any of the given country
 -- codes, using the \"ISO 3166-1 alpha-2\" format (examples: \"US\",
 -- \"us\", \"Us\").
-aalTerritories :: Lens' AccountsAvailsList' (Maybe Text)
+aalTerritories :: Lens' AccountsAvailsList' [Text]
 aalTerritories
   = lens _aalTerritories
       (\ s a -> s{_aalTerritories = a})
+      . _Default
+      . _Coerce
 
 -- | REQUIRED. See _General rules_ for more information about this field.
 aalAccountId :: Lens' AccountsAvailsList' Text
@@ -317,20 +326,21 @@ instance GoogleRequest AccountsAvailsList' where
         request
           = requestWithRoute defReq playMoviesPartnerURL
         requestWithRoute r u AccountsAvailsList'{..}
-          = go _aalXgafv _aalAccessToken _aalAltId
-              _aalBearerToken
-              _aalCallback
-              _aalPageSize
-              _aalPageToken
-              (Just _aalPp)
-              _aalPphNames
-              _aalStudioNames
-              _aalTerritories
-              _aalTitle
-              _aalUploadType
+          = go _aalAccountId _aalAltId
+              (_aalPphNames ^. _Default)
+              _aalXgafv
+              (_aalStudioNames ^. _Default)
+              (_aalVideoIds ^. _Default)
               _aalUploadProtocol
-              _aalVideoIds
-              _aalAccountId
+              (Just _aalPp)
+              _aalAccessToken
+              _aalUploadType
+              (_aalTerritories ^. _Default)
+              _aalBearerToken
+              _aalPageToken
+              _aalTitle
+              _aalPageSize
+              _aalCallback
               _aalQuotaUser
               (Just _aalPrettyPrint)
               _aalFields

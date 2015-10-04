@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.DFAReporting.Sites.Update
     , suPrettyPrint
     , suUserIP
     , suProfileId
+    , suPayload
     , suKey
     , suOAuthToken
-    , suSite
     , suFields
     ) where
 
@@ -66,11 +67,11 @@ data SitesUpdate' = SitesUpdate'
     , _suPrettyPrint :: !Bool
     , _suUserIP      :: !(Maybe Text)
     , _suProfileId   :: !Int64
+    , _suPayload     :: !Site
     , _suKey         :: !(Maybe Key)
     , _suOAuthToken  :: !(Maybe OAuthToken)
-    , _suSite        :: !Site
     , _suFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesUpdate'' with the minimum fields required to make a request.
 --
@@ -84,26 +85,26 @@ data SitesUpdate' = SitesUpdate'
 --
 -- * 'suProfileId'
 --
+-- * 'suPayload'
+--
 -- * 'suKey'
 --
 -- * 'suOAuthToken'
 --
--- * 'suSite'
---
 -- * 'suFields'
 sitesUpdate'
     :: Int64 -- ^ 'profileId'
-    -> Site -- ^ 'Site'
+    -> Site -- ^ 'payload'
     -> SitesUpdate'
-sitesUpdate' pSuProfileId_ pSuSite_ =
+sitesUpdate' pSuProfileId_ pSuPayload_ =
     SitesUpdate'
     { _suQuotaUser = Nothing
     , _suPrettyPrint = True
     , _suUserIP = Nothing
     , _suProfileId = pSuProfileId_
+    , _suPayload = pSuPayload_
     , _suKey = Nothing
     , _suOAuthToken = Nothing
-    , _suSite = pSuSite_
     , _suFields = Nothing
     }
 
@@ -130,6 +131,11 @@ suProfileId :: Lens' SitesUpdate' Int64
 suProfileId
   = lens _suProfileId (\ s a -> s{_suProfileId = a})
 
+-- | Multipart request metadata.
+suPayload :: Lens' SitesUpdate' Site
+suPayload
+  = lens _suPayload (\ s a -> s{_suPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -140,10 +146,6 @@ suKey = lens _suKey (\ s a -> s{_suKey = a})
 suOAuthToken :: Lens' SitesUpdate' (Maybe OAuthToken)
 suOAuthToken
   = lens _suOAuthToken (\ s a -> s{_suOAuthToken = a})
-
--- | Multipart request metadata.
-suSite :: Lens' SitesUpdate' Site
-suSite = lens _suSite (\ s a -> s{_suSite = a})
 
 -- | Selector specifying which fields to include in a partial response.
 suFields :: Lens' SitesUpdate' (Maybe Text)
@@ -163,7 +165,7 @@ instance GoogleRequest SitesUpdate' where
               _suKey
               _suOAuthToken
               (Just AltJSON)
-              _suSite
+              _suPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SitesUpdateResource)

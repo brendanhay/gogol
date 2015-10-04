@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type DiskTypesListResource =
          Capture "zone" Text :>
            "diskTypes" :>
              QueryParam "filter" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,7 +83,7 @@ data DiskTypesList' = DiskTypesList'
     , _dtlOAuthToken  :: !(Maybe OAuthToken)
     , _dtlMaxResults  :: !Word32
     , _dtlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DiskTypesList'' with the minimum fields required to make a request.
 --
@@ -209,9 +210,8 @@ instance GoogleRequest DiskTypesList' where
         type Rs DiskTypesList' = DiskTypeList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u DiskTypesList'{..}
-          = go _dtlFilter (Just _dtlMaxResults) _dtlPageToken
-              _dtlProject
-              _dtlZone
+          = go _dtlProject _dtlZone _dtlFilter _dtlPageToken
+              (Just _dtlMaxResults)
               _dtlQuotaUser
               (Just _dtlPrettyPrint)
               _dtlUserIP

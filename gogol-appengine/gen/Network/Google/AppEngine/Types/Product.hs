@@ -57,10 +57,10 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'status' smart constructor.
 data Status = Status
-    { _sDetails :: !(Maybe [StatusDetails])
+    { _sDetails :: !(Maybe [DetailsItem])
     , _sCode    :: !(Maybe Int32)
     , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Status' with the minimum fields required to make a request.
 --
@@ -82,7 +82,7 @@ status =
 
 -- | A list of messages that carry the error details. There will be a common
 -- set of message types for APIs to use.
-sDetails :: Lens' Status [StatusDetails]
+sDetails :: Lens' Status [DetailsItem]
 sDetails
   = lens _sDetails (\ s a -> s{_sDetails = a}) .
       _Default
@@ -116,13 +116,33 @@ instance ToJSON Status where
                   ("code" .=) <$> _sCode,
                   ("message" .=) <$> _sMessage])
 
+-- | HTTP headers to use for all responses from these URLs.
+--
+-- /See:/ 'hTTPHeaders' smart constructor.
+data HTTPHeaders =
+    HTTPHeaders
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'HTTPHeaders' with the minimum fields required to make a request.
+--
+hTTPHeaders
+    :: HTTPHeaders
+hTTPHeaders = HTTPHeaders
+
+instance FromJSON HTTPHeaders where
+        parseJSON
+          = withObject "HTTPHeaders" (\ o -> pure HTTPHeaders)
+
+instance ToJSON HTTPHeaders where
+        toJSON = const (Object mempty)
+
 -- | A Python runtime third-party library required by the application.
 --
 -- /See:/ 'library' smart constructor.
 data Library = Library
     { _lName    :: !(Maybe Text)
     , _lVersion :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Library' with the minimum fields required to make a request.
 --
@@ -167,7 +187,7 @@ instance ToJSON Library where
 data ListOperationsResponse = ListOperationsResponse
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -221,8 +241,8 @@ instance ToJSON ListOperationsResponse where
 -- /See:/ 'trafficSplit' smart constructor.
 data TrafficSplit = TrafficSplit
     { _tsShardBy     :: !(Maybe Text)
-    , _tsAllocations :: !(Maybe TrafficSplitAllocations)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _tsAllocations :: !(Maybe Allocations)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrafficSplit' with the minimum fields required to make a request.
 --
@@ -254,7 +274,7 @@ tsShardBy
 -- removed. Allocations must sum to 1. Supports precision up to two decimal
 -- places for IP-based splits and up to three decimal places for
 -- cookie-based splits.
-tsAllocations :: Lens' TrafficSplit (Maybe TrafficSplitAllocations)
+tsAllocations :: Lens' TrafficSplit (Maybe Allocations)
 tsAllocations
   = lens _tsAllocations
       (\ s a -> s{_tsAllocations = a})
@@ -278,7 +298,7 @@ instance ToJSON TrafficSplit where
 -- /See:/ 'scriptHandler' smart constructor.
 newtype ScriptHandler = ScriptHandler
     { _shScriptPath :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScriptHandler' with the minimum fields required to make a request.
 --
@@ -307,6 +327,25 @@ instance ToJSON ScriptHandler where
           = object
               (catMaybes [("scriptPath" .=) <$> _shScriptPath])
 
+--
+-- /See:/ 'detailsItem' smart constructor.
+data DetailsItem =
+    DetailsItem
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DetailsItem' with the minimum fields required to make a request.
+--
+detailsItem
+    :: DetailsItem
+detailsItem = DetailsItem
+
+instance FromJSON DetailsItem where
+        parseJSON
+          = withObject "DetailsItem" (\ o -> pure DetailsItem)
+
+instance ToJSON DetailsItem where
+        toJSON = const (Object mempty)
+
 -- | A URL pattern and description of how it should be handled. App Engine
 -- can handle URLs by executing application code, or by serving static
 -- files uploaded with the code, such as images, CSS or JavaScript.
@@ -322,7 +361,7 @@ data URLMap = URLMap
     , _umStaticFiles              :: !(Maybe StaticFilesHandler)
     , _umLogin                    :: !(Maybe Text)
     , _umStaticDirectory          :: !(Maybe StaticDirectoryHandler)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMap' with the minimum fields required to make a request.
 --
@@ -455,7 +494,7 @@ data APIConfigHandler = APIConfigHandler
     , _achURL            :: !(Maybe Text)
     , _achAuthFailAction :: !(Maybe Text)
     , _achLogin          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APIConfigHandler' with the minimum fields required to make a request.
 --
@@ -538,7 +577,7 @@ data Application = Application
     , _aName          :: !(Maybe Text)
     , _aDispatchRules :: !(Maybe [URLDispatchRule])
     , _aId            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
 --
@@ -620,29 +659,6 @@ instance ToJSON Application where
                   ("dispatchRules" .=) <$> _aDispatchRules,
                   ("id" .=) <$> _aId])
 
--- | Environment variables made available to the application. Only returned
--- in \`GET\` requests if \`view=FULL\` is set. May only be set on create
--- requests; once created, is immutable.
---
--- /See:/ 'versionEnvVariables' smart constructor.
-data VersionEnvVariables =
-    VersionEnvVariables
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VersionEnvVariables' with the minimum fields required to make a request.
---
-versionEnvVariables
-    :: VersionEnvVariables
-versionEnvVariables = VersionEnvVariables
-
-instance FromJSON VersionEnvVariables where
-        parseJSON
-          = withObject "VersionEnvVariables"
-              (\ o -> pure VersionEnvVariables)
-
-instance ToJSON VersionEnvVariables where
-        toJSON = const (Object mempty)
-
 -- | Configure health checking for the VM instances. Unhealthy VM instances
 -- will be killed and replaced with new instances.
 --
@@ -655,7 +671,7 @@ data HealthCheck = HealthCheck
     , _hcHost               :: !(Maybe Text)
     , _hcTimeout            :: !(Maybe Text)
     , _hcUnhealthyThreshold :: !(Maybe Word32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HealthCheck' with the minimum fields required to make a request.
 --
@@ -761,7 +777,7 @@ data URLDispatchRule = URLDispatchRule
     { _udrPath   :: !(Maybe Text)
     , _udrDomain :: !(Maybe Text)
     , _udrModule :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLDispatchRule' with the minimum fields required to make a request.
 --
@@ -823,10 +839,10 @@ instance ToJSON URLDispatchRule where
 data Operation = Operation
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
-    , _oResponse :: !(Maybe OperationResponse)
+    , _oResponse :: !(Maybe Response)
     , _oName     :: !(Maybe Text)
-    , _oMetadata :: !(Maybe OperationMetadata)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _oMetadata :: !(Maybe Metadata)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -870,7 +886,7 @@ oError = lens _oError (\ s a -> s{_oError = a})
 -- where \`Xxx\` is the original method name. For example, if the original
 -- method name is \`TakeSnapshot()\`, the inferred response type is
 -- \`TakeSnapshotResponse\`.
-oResponse :: Lens' Operation (Maybe OperationResponse)
+oResponse :: Lens' Operation (Maybe Response)
 oResponse
   = lens _oResponse (\ s a -> s{_oResponse = a})
 
@@ -885,7 +901,7 @@ oName = lens _oName (\ s a -> s{_oName = a})
 -- contains progress information and common metadata such as create time.
 -- Some services might not provide such metadata. Any method that returns a
 -- long-running operation should document the metadata type, if any.
-oMetadata :: Lens' Operation (Maybe OperationMetadata)
+oMetadata :: Lens' Operation (Maybe Metadata)
 oMetadata
   = lens _oMetadata (\ s a -> s{_oMetadata = a})
 
@@ -908,33 +924,12 @@ instance ToJSON Operation where
                   ("name" .=) <$> _oName,
                   ("metadata" .=) <$> _oMetadata])
 
--- | Beta settings supplied to the application via metadata.
---
--- /See:/ 'versionBetaSettings' smart constructor.
-data VersionBetaSettings =
-    VersionBetaSettings
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'VersionBetaSettings' with the minimum fields required to make a request.
---
-versionBetaSettings
-    :: VersionBetaSettings
-versionBetaSettings = VersionBetaSettings
-
-instance FromJSON VersionBetaSettings where
-        parseJSON
-          = withObject "VersionBetaSettings"
-              (\ o -> pure VersionBetaSettings)
-
-instance ToJSON VersionBetaSettings where
-        toJSON = const (Object mempty)
-
 -- | HTTP headers to use for all responses from these URLs.
 --
 -- /See:/ 'staticDirectoryHandlerHTTPHeaders' smart constructor.
 data StaticDirectoryHandlerHTTPHeaders =
     StaticDirectoryHandlerHTTPHeaders
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StaticDirectoryHandlerHTTPHeaders' with the minimum fields required to make a request.
 --
@@ -958,7 +953,7 @@ instance ToJSON StaticDirectoryHandlerHTTPHeaders
 data ListVersionsResponse = ListVersionsResponse
     { _lvrNextPageToken :: !(Maybe Text)
     , _lvrVersions      :: !(Maybe [Version])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListVersionsResponse' with the minimum fields required to make a request.
 --
@@ -1009,7 +1004,7 @@ instance ToJSON ListVersionsResponse where
 data ListModulesResponse = ListModulesResponse
     { _lmrNextPageToken :: !(Maybe Text)
     , _lmrModules       :: !(Maybe [Module])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListModulesResponse' with the minimum fields required to make a request.
 --
@@ -1061,7 +1056,7 @@ data FileInfo = FileInfo
     { _fiSha1Sum   :: !(Maybe Text)
     , _fiMimeType  :: !(Maybe Text)
     , _fiSourceURL :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FileInfo' with the minimum fields required to make a request.
 --
@@ -1129,7 +1124,7 @@ data AutomaticScaling = AutomaticScaling
     , _asMaxConcurrentRequests :: !(Maybe Int32)
     , _asCoolDownPeriod        :: !(Maybe Text)
     , _asMaxPendingLatency     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutomaticScaling' with the minimum fields required to make a request.
 --
@@ -1261,12 +1256,66 @@ instance ToJSON AutomaticScaling where
                   ("coolDownPeriod" .=) <$> _asCoolDownPeriod,
                   ("maxPendingLatency" .=) <$> _asMaxPendingLatency])
 
+-- | The normal response of the operation in case of success. If the original
+-- method returns no data on success, such as \`Delete\`, the response is
+-- \`google.protobuf.Empty\`. If the original method is standard
+-- \`Get\`\/\`Create\`\/\`Update\`, the response should be the resource.
+-- For other methods, the response should have the type \`XxxResponse\`,
+-- where \`Xxx\` is the original method name. For example, if the original
+-- method name is \`TakeSnapshot()\`, the inferred response type is
+-- \`TakeSnapshotResponse\`.
+--
+-- /See:/ 'response' smart constructor.
+data Response =
+    Response
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Response' with the minimum fields required to make a request.
+--
+response
+    :: Response
+response = Response
+
+instance FromJSON Response where
+        parseJSON
+          = withObject "Response" (\ o -> pure Response)
+
+instance ToJSON Response where
+        toJSON = const (Object mempty)
+
+-- | Mapping from module version IDs within the module to fractional (0.000,
+-- 1] allocations of traffic for that version. Each version may only be
+-- specified once, but some versions in the module may not have any traffic
+-- allocation. Modules that have traffic allocated in this field may not be
+-- deleted until the module is deleted, or their traffic allocation is
+-- removed. Allocations must sum to 1. Supports precision up to two decimal
+-- places for IP-based splits and up to three decimal places for
+-- cookie-based splits.
+--
+-- /See:/ 'allocations' smart constructor.
+data Allocations =
+    Allocations
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Allocations' with the minimum fields required to make a request.
+--
+allocations
+    :: Allocations
+allocations = Allocations
+
+instance FromJSON Allocations where
+        parseJSON
+          = withObject "Allocations" (\ o -> pure Allocations)
+
+instance ToJSON Allocations where
+        toJSON = const (Object mempty)
+
 -- | Use Google Cloud Endpoints to handle requests.
 --
 -- /See:/ 'apiEndpointHandler' smart constructor.
 newtype APIEndpointHandler = APIEndpointHandler
     { _aehScriptPath :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APIEndpointHandler' with the minimum fields required to make a request.
 --
@@ -1296,26 +1345,6 @@ instance ToJSON APIEndpointHandler where
           = object
               (catMaybes [("scriptPath" .=) <$> _aehScriptPath])
 
---
--- /See:/ 'statusDetails' smart constructor.
-data StatusDetails =
-    StatusDetails
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'StatusDetails' with the minimum fields required to make a request.
---
-statusDetails
-    :: StatusDetails
-statusDetails = StatusDetails
-
-instance FromJSON StatusDetails where
-        parseJSON
-          = withObject "StatusDetails"
-              (\ o -> pure StatusDetails)
-
-instance ToJSON StatusDetails where
-        toJSON = const (Object mempty)
-
 -- | Used to specify extra network settings (for VM runtimes only).
 --
 -- /See:/ 'network' smart constructor.
@@ -1323,7 +1352,7 @@ data Network = Network
     { _nForwardedPorts :: !(Maybe [Text])
     , _nInstanceTag    :: !(Maybe Text)
     , _nName           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Network' with the minimum fields required to make a request.
 --
@@ -1387,7 +1416,7 @@ data Resources = Resources
     { _rMemoryGb :: !(Maybe Double)
     , _rDiskGb   :: !(Maybe Double)
     , _rCPU      :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Resources' with the minimum fields required to make a request.
 --
@@ -1435,34 +1464,13 @@ instance ToJSON Resources where
                  [("memoryGb" .=) <$> _rMemoryGb,
                   ("diskGb" .=) <$> _rDiskGb, ("cpu" .=) <$> _rCPU])
 
--- | HTTP headers to use for all responses from these URLs.
---
--- /See:/ 'staticFilesHandlerHTTPHeaders' smart constructor.
-data StaticFilesHandlerHTTPHeaders =
-    StaticFilesHandlerHTTPHeaders
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'StaticFilesHandlerHTTPHeaders' with the minimum fields required to make a request.
---
-staticFilesHandlerHTTPHeaders
-    :: StaticFilesHandlerHTTPHeaders
-staticFilesHandlerHTTPHeaders = StaticFilesHandlerHTTPHeaders
-
-instance FromJSON StaticFilesHandlerHTTPHeaders where
-        parseJSON
-          = withObject "StaticFilesHandlerHTTPHeaders"
-              (\ o -> pure StaticFilesHandlerHTTPHeaders)
-
-instance ToJSON StaticFilesHandlerHTTPHeaders where
-        toJSON = const (Object mempty)
-
 -- | Target scaling by CPU usage.
 --
 -- /See:/ 'cpuUtilization' smart constructor.
 data CPUUtilization = CPUUtilization
     { _cuAggregationWindowLength :: !(Maybe Text)
     , _cuTargetUtilization       :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CPUUtilization' with the minimum fields required to make a request.
 --
@@ -1507,64 +1515,13 @@ instance ToJSON CPUUtilization where
                     _cuAggregationWindowLength,
                   ("targetUtilization" .=) <$> _cuTargetUtilization])
 
--- | A manifest of files stored in Google Cloud Storage which should be
--- included as part of this application. All files must be readable using
--- the credentials supplied with this call.
---
--- /See:/ 'deploymentFiles' smart constructor.
-data DeploymentFiles =
-    DeploymentFiles
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DeploymentFiles' with the minimum fields required to make a request.
---
-deploymentFiles
-    :: DeploymentFiles
-deploymentFiles = DeploymentFiles
-
-instance FromJSON DeploymentFiles where
-        parseJSON
-          = withObject "DeploymentFiles"
-              (\ o -> pure DeploymentFiles)
-
-instance ToJSON DeploymentFiles where
-        toJSON = const (Object mempty)
-
--- | Mapping from module version IDs within the module to fractional (0.000,
--- 1] allocations of traffic for that version. Each version may only be
--- specified once, but some versions in the module may not have any traffic
--- allocation. Modules that have traffic allocated in this field may not be
--- deleted until the module is deleted, or their traffic allocation is
--- removed. Allocations must sum to 1. Supports precision up to two decimal
--- places for IP-based splits and up to three decimal places for
--- cookie-based splits.
---
--- /See:/ 'trafficSplitAllocations' smart constructor.
-data TrafficSplitAllocations =
-    TrafficSplitAllocations
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TrafficSplitAllocations' with the minimum fields required to make a request.
---
-trafficSplitAllocations
-    :: TrafficSplitAllocations
-trafficSplitAllocations = TrafficSplitAllocations
-
-instance FromJSON TrafficSplitAllocations where
-        parseJSON
-          = withObject "TrafficSplitAllocations"
-              (\ o -> pure TrafficSplitAllocations)
-
-instance ToJSON TrafficSplitAllocations where
-        toJSON = const (Object mempty)
-
 -- | A module with manual scaling runs continuously, allowing you to perform
 -- complex initialization and rely on the state of its memory over time.
 --
 -- /See:/ 'manualScaling' smart constructor.
 newtype ManualScaling = ManualScaling
     { _msInstances :: Maybe Int32
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManualScaling' with the minimum fields required to make a request.
 --
@@ -1596,6 +1553,27 @@ instance ToJSON ManualScaling where
           = object
               (catMaybes [("instances" .=) <$> _msInstances])
 
+-- | Beta settings supplied to the application via metadata.
+--
+-- /See:/ 'betaSettings' smart constructor.
+data BetaSettings =
+    BetaSettings
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BetaSettings' with the minimum fields required to make a request.
+--
+betaSettings
+    :: BetaSettings
+betaSettings = BetaSettings
+
+instance FromJSON BetaSettings where
+        parseJSON
+          = withObject "BetaSettings"
+              (\ o -> pure BetaSettings)
+
+instance ToJSON BetaSettings where
+        toJSON = const (Object mempty)
+
 -- | A module with basic scaling will create an instance when the application
 -- receives a request. The instance will be turned down when the app
 -- becomes idle. Basic scaling is ideal for work that is intermittent or
@@ -1605,7 +1583,7 @@ instance ToJSON ManualScaling where
 data BasicScaling = BasicScaling
     { _bsMaxInstances :: !(Maybe Int32)
     , _bsIdleTimeout  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BasicScaling' with the minimum fields required to make a request.
 --
@@ -1672,16 +1650,16 @@ data Version = Version
     , _vResources         :: !(Maybe Resources)
     , _vName              :: !(Maybe Text)
     , _vThreadsafe        :: !(Maybe Bool)
-    , _vBetaSettings      :: !(Maybe VersionBetaSettings)
+    , _vBetaSettings      :: !(Maybe BetaSettings)
     , _vBasicScaling      :: !(Maybe BasicScaling)
     , _vManualScaling     :: !(Maybe ManualScaling)
     , _vAPIConfig         :: !(Maybe APIConfigHandler)
     , _vId                :: !(Maybe Text)
-    , _vEnvVariables      :: !(Maybe VersionEnvVariables)
+    , _vEnvVariables      :: !(Maybe EnvVariables)
     , _vServingStatus     :: !(Maybe Text)
     , _vLibraries         :: !(Maybe [Library])
     , _vDeployment        :: !(Maybe Deployment)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Version' with the minimum fields required to make a request.
 --
@@ -1887,7 +1865,7 @@ vThreadsafe
   = lens _vThreadsafe (\ s a -> s{_vThreadsafe = a})
 
 -- | Beta settings supplied to the application via metadata.
-vBetaSettings :: Lens' Version (Maybe VersionBetaSettings)
+vBetaSettings :: Lens' Version (Maybe BetaSettings)
 vBetaSettings
   = lens _vBetaSettings
       (\ s a -> s{_vBetaSettings = a})
@@ -1925,7 +1903,7 @@ vId = lens _vId (\ s a -> s{_vId = a})
 -- | Environment variables made available to the application. Only returned
 -- in \`GET\` requests if \`view=FULL\` is set. May only be set on create
 -- requests; once created, is immutable.
-vEnvVariables :: Lens' Version (Maybe VersionEnvVariables)
+vEnvVariables :: Lens' Version (Maybe EnvVariables)
 vEnvVariables
   = lens _vEnvVariables
       (\ s a -> s{_vEnvVariables = a})
@@ -2024,7 +2002,7 @@ data Module = Module
     { _mSplit :: !(Maybe TrafficSplit)
     , _mName  :: !(Maybe Text)
     , _mId    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Module' with the minimum fields required to make a request.
 --
@@ -2073,6 +2051,50 @@ instance ToJSON Module where
                  [("split" .=) <$> _mSplit, ("name" .=) <$> _mName,
                   ("id" .=) <$> _mId])
 
+-- | Service-specific metadata associated with the operation. It typically
+-- contains progress information and common metadata such as create time.
+-- Some services might not provide such metadata. Any method that returns a
+-- long-running operation should document the metadata type, if any.
+--
+-- /See:/ 'metadata' smart constructor.
+data Metadata =
+    Metadata
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Metadata' with the minimum fields required to make a request.
+--
+metadata
+    :: Metadata
+metadata = Metadata
+
+instance FromJSON Metadata where
+        parseJSON
+          = withObject "Metadata" (\ o -> pure Metadata)
+
+instance ToJSON Metadata where
+        toJSON = const (Object mempty)
+
+-- | A manifest of files stored in Google Cloud Storage which should be
+-- included as part of this application. All files must be readable using
+-- the credentials supplied with this call.
+--
+-- /See:/ 'files' smart constructor.
+data Files =
+    Files
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Files' with the minimum fields required to make a request.
+--
+files
+    :: Files
+files = Files
+
+instance FromJSON Files where
+        parseJSON = withObject "Files" (\ o -> pure Files)
+
+instance ToJSON Files where
+        toJSON = const (Object mempty)
+
 -- | Files served directly to the user for a given URL, such as images, CSS
 -- stylesheets, or JavaScript source files. Static file handlers describe
 -- which files in the application directory are static files, and which
@@ -2080,14 +2102,14 @@ instance ToJSON Module where
 --
 -- /See:/ 'staticFilesHandler' smart constructor.
 data StaticFilesHandler = StaticFilesHandler
-    { _sfhHTTPHeaders         :: !(Maybe StaticFilesHandlerHTTPHeaders)
+    { _sfhHTTPHeaders         :: !(Maybe HTTPHeaders)
     , _sfhPath                :: !(Maybe Text)
     , _sfhRequireMatchingFile :: !(Maybe Bool)
     , _sfhExpiration          :: !(Maybe Text)
     , _sfhMimeType            :: !(Maybe Text)
     , _sfhApplicationReadable :: !(Maybe Bool)
     , _sfhUploadPathRegex     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StaticFilesHandler' with the minimum fields required to make a request.
 --
@@ -2120,7 +2142,7 @@ staticFilesHandler =
     }
 
 -- | HTTP headers to use for all responses from these URLs.
-sfhHTTPHeaders :: Lens' StaticFilesHandler (Maybe StaticFilesHandlerHTTPHeaders)
+sfhHTTPHeaders :: Lens' StaticFilesHandler (Maybe HTTPHeaders)
 sfhHTTPHeaders
   = lens _sfhHTTPHeaders
       (\ s a -> s{_sfhHTTPHeaders = a})
@@ -2205,7 +2227,7 @@ data ErrorHandler = ErrorHandler
     { _ehMimeType   :: !(Maybe Text)
     , _ehErrorCode  :: !(Maybe Text)
     , _ehStaticFile :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ErrorHandler' with the minimum fields required to make a request.
 --
@@ -2256,28 +2278,27 @@ instance ToJSON ErrorHandler where
                   ("errorCode" .=) <$> _ehErrorCode,
                   ("staticFile" .=) <$> _ehStaticFile])
 
--- | Service-specific metadata associated with the operation. It typically
--- contains progress information and common metadata such as create time.
--- Some services might not provide such metadata. Any method that returns a
--- long-running operation should document the metadata type, if any.
+-- | Environment variables made available to the application. Only returned
+-- in \`GET\` requests if \`view=FULL\` is set. May only be set on create
+-- requests; once created, is immutable.
 --
--- /See:/ 'operationMetadata' smart constructor.
-data OperationMetadata =
-    OperationMetadata
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'envVariables' smart constructor.
+data EnvVariables =
+    EnvVariables
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
+-- | Creates a value of 'EnvVariables' with the minimum fields required to make a request.
 --
-operationMetadata
-    :: OperationMetadata
-operationMetadata = OperationMetadata
+envVariables
+    :: EnvVariables
+envVariables = EnvVariables
 
-instance FromJSON OperationMetadata where
+instance FromJSON EnvVariables where
         parseJSON
-          = withObject "OperationMetadata"
-              (\ o -> pure OperationMetadata)
+          = withObject "EnvVariables"
+              (\ o -> pure EnvVariables)
 
-instance ToJSON OperationMetadata where
+instance ToJSON EnvVariables where
         toJSON = const (Object mempty)
 
 -- | Metadata for the given
@@ -2291,7 +2312,7 @@ data OperationMetadata = OperationMetadata
     , _omEndTime       :: !(Maybe Text)
     , _omOperationType :: !(Maybe Text)
     , _omTarget        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
@@ -2380,7 +2401,7 @@ instance ToJSON OperationMetadata where
 data SourceReference = SourceReference
     { _srRepository :: !(Maybe Text)
     , _srRevisionId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceReference' with the minimum fields required to make a request.
 --
@@ -2424,41 +2445,13 @@ instance ToJSON SourceReference where
                  [("repository" .=) <$> _srRepository,
                   ("revisionId" .=) <$> _srRevisionId])
 
--- | The normal response of the operation in case of success. If the original
--- method returns no data on success, such as \`Delete\`, the response is
--- \`google.protobuf.Empty\`. If the original method is standard
--- \`Get\`\/\`Create\`\/\`Update\`, the response should be the resource.
--- For other methods, the response should have the type \`XxxResponse\`,
--- where \`Xxx\` is the original method name. For example, if the original
--- method name is \`TakeSnapshot()\`, the inferred response type is
--- \`TakeSnapshotResponse\`.
---
--- /See:/ 'operationResponse' smart constructor.
-data OperationResponse =
-    OperationResponse
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
---
-operationResponse
-    :: OperationResponse
-operationResponse = OperationResponse
-
-instance FromJSON OperationResponse where
-        parseJSON
-          = withObject "OperationResponse"
-              (\ o -> pure OperationResponse)
-
-instance ToJSON OperationResponse where
-        toJSON = const (Object mempty)
-
 -- | A Docker (container) image which should be used to start the
 -- application.
 --
 -- /See:/ 'containerInfo' smart constructor.
 newtype ContainerInfo = ContainerInfo
     { _ciImage :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContainerInfo' with the minimum fields required to make a request.
 --
@@ -2492,9 +2485,9 @@ instance ToJSON ContainerInfo where
 -- /See:/ 'deployment' smart constructor.
 data Deployment = Deployment
     { _dContainer        :: !(Maybe ContainerInfo)
-    , _dFiles            :: !(Maybe DeploymentFiles)
+    , _dFiles            :: !(Maybe Files)
     , _dSourceReferences :: !(Maybe [SourceReference])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Deployment' with the minimum fields required to make a request.
 --
@@ -2523,7 +2516,7 @@ dContainer
 -- | A manifest of files stored in Google Cloud Storage which should be
 -- included as part of this application. All files must be readable using
 -- the credentials supplied with this call.
-dFiles :: Lens' Deployment (Maybe DeploymentFiles)
+dFiles :: Lens' Deployment (Maybe Files)
 dFiles = lens _dFiles (\ s a -> s{_dFiles = a})
 
 -- | The origin of the source code for this deployment. There can be more
@@ -2564,7 +2557,7 @@ data StaticDirectoryHandler = StaticDirectoryHandler
     , _sdhMimeType            :: !(Maybe Text)
     , _sdhApplicationReadable :: !(Maybe Bool)
     , _sdhDirectory           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StaticDirectoryHandler' with the minimum fields required to make a request.
 --

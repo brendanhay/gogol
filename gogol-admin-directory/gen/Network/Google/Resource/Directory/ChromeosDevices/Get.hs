@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -77,7 +78,7 @@ data ChromeosDevicesGet' = ChromeosDevicesGet'
     , _cdgProjection  :: !(Maybe DirectoryChromeosDevicesGetProjection)
     , _cdgOAuthToken  :: !(Maybe OAuthToken)
     , _cdgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChromeosDevicesGet'' with the minimum fields required to make a request.
 --
@@ -178,7 +179,7 @@ instance GoogleRequest ChromeosDevicesGet' where
         type Rs ChromeosDevicesGet' = ChromeOSDevice
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u ChromeosDevicesGet'{..}
-          = go _cdgProjection _cdgCustomerId _cdgDeviceId
+          = go _cdgCustomerId _cdgDeviceId _cdgProjection
               _cdgQuotaUser
               (Just _cdgPrettyPrint)
               _cdgUserIP

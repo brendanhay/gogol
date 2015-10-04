@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.Mirror.Contacts.Update
     -- * Request Lenses
     , cuQuotaUser
     , cuPrettyPrint
-    , cuContact
     , cuUserIP
+    , cuPayload
     , cuKey
     , cuId
     , cuOAuthToken
@@ -63,13 +64,13 @@ type ContactsUpdateResource =
 data ContactsUpdate' = ContactsUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
-    , _cuContact     :: !Contact
     , _cuUserIP      :: !(Maybe Text)
+    , _cuPayload     :: !Contact
     , _cuKey         :: !(Maybe Key)
     , _cuId          :: !Text
     , _cuOAuthToken  :: !(Maybe OAuthToken)
     , _cuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContactsUpdate'' with the minimum fields required to make a request.
 --
@@ -79,9 +80,9 @@ data ContactsUpdate' = ContactsUpdate'
 --
 -- * 'cuPrettyPrint'
 --
--- * 'cuContact'
---
 -- * 'cuUserIP'
+--
+-- * 'cuPayload'
 --
 -- * 'cuKey'
 --
@@ -91,15 +92,15 @@ data ContactsUpdate' = ContactsUpdate'
 --
 -- * 'cuFields'
 contactsUpdate'
-    :: Contact -- ^ 'Contact'
+    :: Contact -- ^ 'payload'
     -> Text -- ^ 'id'
     -> ContactsUpdate'
-contactsUpdate' pCuContact_ pCuId_ =
+contactsUpdate' pCuPayload_ pCuId_ =
     ContactsUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
-    , _cuContact = pCuContact_
     , _cuUserIP = Nothing
+    , _cuPayload = pCuPayload_
     , _cuKey = Nothing
     , _cuId = pCuId_
     , _cuOAuthToken = Nothing
@@ -119,15 +120,15 @@ cuPrettyPrint
   = lens _cuPrettyPrint
       (\ s a -> s{_cuPrettyPrint = a})
 
--- | Multipart request metadata.
-cuContact :: Lens' ContactsUpdate' Contact
-cuContact
-  = lens _cuContact (\ s a -> s{_cuContact = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 cuUserIP :: Lens' ContactsUpdate' (Maybe Text)
 cuUserIP = lens _cuUserIP (\ s a -> s{_cuUserIP = a})
+
+-- | Multipart request metadata.
+cuPayload :: Lens' ContactsUpdate' Contact
+cuPayload
+  = lens _cuPayload (\ s a -> s{_cuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -162,7 +163,7 @@ instance GoogleRequest ContactsUpdate' where
               _cuKey
               _cuOAuthToken
               (Just AltJSON)
-              _cuContact
+              _cuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ContactsUpdateResource)

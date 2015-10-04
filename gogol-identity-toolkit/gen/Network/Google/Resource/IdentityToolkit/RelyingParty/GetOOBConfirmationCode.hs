@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.GetOOBConfirmationCo
     , rpgoobccQuotaUser
     , rpgoobccPrettyPrint
     , rpgoobccUserIP
-    , rpgoobccRelyingParty
+    , rpgoobccPayload
     , rpgoobccKey
     , rpgoobccOAuthToken
     , rpgoobccFields
@@ -60,14 +61,14 @@ type RelyingPartyGetOOBConfirmationCodeResource =
 --
 -- /See:/ 'relyingPartyGetOOBConfirmationCode'' smart constructor.
 data RelyingPartyGetOOBConfirmationCode' = RelyingPartyGetOOBConfirmationCode'
-    { _rpgoobccQuotaUser    :: !(Maybe Text)
-    , _rpgoobccPrettyPrint  :: !Bool
-    , _rpgoobccUserIP       :: !(Maybe Text)
-    , _rpgoobccRelyingParty :: !RelyingParty
-    , _rpgoobccKey          :: !(Maybe Key)
-    , _rpgoobccOAuthToken   :: !(Maybe OAuthToken)
-    , _rpgoobccFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rpgoobccQuotaUser   :: !(Maybe Text)
+    , _rpgoobccPrettyPrint :: !Bool
+    , _rpgoobccUserIP      :: !(Maybe Text)
+    , _rpgoobccPayload     :: !RelyingParty
+    , _rpgoobccKey         :: !(Maybe Key)
+    , _rpgoobccOAuthToken  :: !(Maybe OAuthToken)
+    , _rpgoobccFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingPartyGetOOBConfirmationCode'' with the minimum fields required to make a request.
 --
@@ -79,7 +80,7 @@ data RelyingPartyGetOOBConfirmationCode' = RelyingPartyGetOOBConfirmationCode'
 --
 -- * 'rpgoobccUserIP'
 --
--- * 'rpgoobccRelyingParty'
+-- * 'rpgoobccPayload'
 --
 -- * 'rpgoobccKey'
 --
@@ -87,14 +88,14 @@ data RelyingPartyGetOOBConfirmationCode' = RelyingPartyGetOOBConfirmationCode'
 --
 -- * 'rpgoobccFields'
 relyingPartyGetOOBConfirmationCode'
-    :: RelyingParty -- ^ 'RelyingParty'
+    :: RelyingParty -- ^ 'payload'
     -> RelyingPartyGetOOBConfirmationCode'
-relyingPartyGetOOBConfirmationCode' pRpgoobccRelyingParty_ =
+relyingPartyGetOOBConfirmationCode' pRpgoobccPayload_ =
     RelyingPartyGetOOBConfirmationCode'
     { _rpgoobccQuotaUser = Nothing
     , _rpgoobccPrettyPrint = True
     , _rpgoobccUserIP = Nothing
-    , _rpgoobccRelyingParty = pRpgoobccRelyingParty_
+    , _rpgoobccPayload = pRpgoobccPayload_
     , _rpgoobccKey = Nothing
     , _rpgoobccOAuthToken = Nothing
     , _rpgoobccFields = Nothing
@@ -122,10 +123,10 @@ rpgoobccUserIP
       (\ s a -> s{_rpgoobccUserIP = a})
 
 -- | Multipart request metadata.
-rpgoobccRelyingParty :: Lens' RelyingPartyGetOOBConfirmationCode' RelyingParty
-rpgoobccRelyingParty
-  = lens _rpgoobccRelyingParty
-      (\ s a -> s{_rpgoobccRelyingParty = a})
+rpgoobccPayload :: Lens' RelyingPartyGetOOBConfirmationCode' RelyingParty
+rpgoobccPayload
+  = lens _rpgoobccPayload
+      (\ s a -> s{_rpgoobccPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -164,7 +165,7 @@ instance GoogleRequest
               _rpgoobccKey
               _rpgoobccOAuthToken
               (Just AltJSON)
-              _rpgoobccRelyingParty
+              _rpgoobccPayload
           where go
                   = clientWithRoute
                       (Proxy ::

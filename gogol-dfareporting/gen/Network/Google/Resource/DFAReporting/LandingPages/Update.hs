@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.DFAReporting.LandingPages.Update
     , lpuUserIP
     , lpuCampaignId
     , lpuProfileId
-    , lpuLandingPage
+    , lpuPayload
     , lpuKey
     , lpuOAuthToken
     , lpuFields
@@ -71,11 +72,11 @@ data LandingPagesUpdate' = LandingPagesUpdate'
     , _lpuUserIP      :: !(Maybe Text)
     , _lpuCampaignId  :: !Int64
     , _lpuProfileId   :: !Int64
-    , _lpuLandingPage :: !LandingPage
+    , _lpuPayload     :: !LandingPage
     , _lpuKey         :: !(Maybe Key)
     , _lpuOAuthToken  :: !(Maybe OAuthToken)
     , _lpuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesUpdate'' with the minimum fields required to make a request.
 --
@@ -91,7 +92,7 @@ data LandingPagesUpdate' = LandingPagesUpdate'
 --
 -- * 'lpuProfileId'
 --
--- * 'lpuLandingPage'
+-- * 'lpuPayload'
 --
 -- * 'lpuKey'
 --
@@ -101,16 +102,16 @@ data LandingPagesUpdate' = LandingPagesUpdate'
 landingPagesUpdate'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
-    -> LandingPage -- ^ 'LandingPage'
+    -> LandingPage -- ^ 'payload'
     -> LandingPagesUpdate'
-landingPagesUpdate' pLpuCampaignId_ pLpuProfileId_ pLpuLandingPage_ =
+landingPagesUpdate' pLpuCampaignId_ pLpuProfileId_ pLpuPayload_ =
     LandingPagesUpdate'
     { _lpuQuotaUser = Nothing
     , _lpuPrettyPrint = True
     , _lpuUserIP = Nothing
     , _lpuCampaignId = pLpuCampaignId_
     , _lpuProfileId = pLpuProfileId_
-    , _lpuLandingPage = pLpuLandingPage_
+    , _lpuPayload = pLpuPayload_
     , _lpuKey = Nothing
     , _lpuOAuthToken = Nothing
     , _lpuFields = Nothing
@@ -147,10 +148,9 @@ lpuProfileId
   = lens _lpuProfileId (\ s a -> s{_lpuProfileId = a})
 
 -- | Multipart request metadata.
-lpuLandingPage :: Lens' LandingPagesUpdate' LandingPage
-lpuLandingPage
-  = lens _lpuLandingPage
-      (\ s a -> s{_lpuLandingPage = a})
+lpuPayload :: Lens' LandingPagesUpdate' LandingPage
+lpuPayload
+  = lens _lpuPayload (\ s a -> s{_lpuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -184,7 +184,7 @@ instance GoogleRequest LandingPagesUpdate' where
               _lpuKey
               _lpuOAuthToken
               (Just AltJSON)
-              _lpuLandingPage
+              _lpuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LandingPagesUpdateResource)

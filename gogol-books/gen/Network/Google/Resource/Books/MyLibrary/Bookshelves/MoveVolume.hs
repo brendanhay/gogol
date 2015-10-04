@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,9 +53,9 @@ type MyLibraryBookshelvesMoveVolumeResource =
        "bookshelves" :>
          Capture "shelf" Text :>
            "moveVolume" :>
-             QueryParam "source" Text :>
-               QueryParam "volumeId" Text :>
-                 QueryParam "volumePosition" Int32 :>
+             QueryParam "volumeId" Text :>
+               QueryParam "volumePosition" Int32 :>
+                 QueryParam "source" Text :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data MyLibraryBookshelvesMoveVolume' = MyLibraryBookshelvesMoveVolume'
     , _mlbmvOAuthToken     :: !(Maybe OAuthToken)
     , _mlbmvVolumePosition :: !Int32
     , _mlbmvFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyLibraryBookshelvesMoveVolume'' with the minimum fields required to make a request.
 --
@@ -192,8 +193,9 @@ instance GoogleRequest
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
           MyLibraryBookshelvesMoveVolume'{..}
-          = go _mlbmvSource _mlbmvShelf (Just _mlbmvVolumeId)
+          = go _mlbmvShelf (Just _mlbmvVolumeId)
               (Just _mlbmvVolumePosition)
+              _mlbmvSource
               _mlbmvQuotaUser
               (Just _mlbmvPrettyPrint)
               _mlbmvUserIP

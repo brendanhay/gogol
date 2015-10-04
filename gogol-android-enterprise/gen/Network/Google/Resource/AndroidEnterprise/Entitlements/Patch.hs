@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,12 +37,12 @@ module Network.Google.Resource.AndroidEnterprise.Entitlements.Patch
     , epPrettyPrint
     , epEnterpriseId
     , epUserIP
+    , epPayload
     , epInstall
     , epUserId
     , epKey
     , epOAuthToken
     , epFields
-    , epEntitlement
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
@@ -77,13 +78,13 @@ data EntitlementsPatch' = EntitlementsPatch'
     , _epPrettyPrint   :: !Bool
     , _epEnterpriseId  :: !Text
     , _epUserIP        :: !(Maybe Text)
+    , _epPayload       :: !Entitlement
     , _epInstall       :: !(Maybe Bool)
     , _epUserId        :: !Text
     , _epKey           :: !(Maybe Key)
     , _epOAuthToken    :: !(Maybe OAuthToken)
     , _epFields        :: !(Maybe Text)
-    , _epEntitlement   :: !Entitlement
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EntitlementsPatch'' with the minimum fields required to make a request.
 --
@@ -99,6 +100,8 @@ data EntitlementsPatch' = EntitlementsPatch'
 --
 -- * 'epUserIP'
 --
+-- * 'epPayload'
+--
 -- * 'epInstall'
 --
 -- * 'epUserId'
@@ -108,27 +111,25 @@ data EntitlementsPatch' = EntitlementsPatch'
 -- * 'epOAuthToken'
 --
 -- * 'epFields'
---
--- * 'epEntitlement'
 entitlementsPatch'
     :: Text -- ^ 'entitlementId'
     -> Text -- ^ 'enterpriseId'
+    -> Entitlement -- ^ 'payload'
     -> Text -- ^ 'userId'
-    -> Entitlement -- ^ 'Entitlement'
     -> EntitlementsPatch'
-entitlementsPatch' pEpEntitlementId_ pEpEnterpriseId_ pEpUserId_ pEpEntitlement_ =
+entitlementsPatch' pEpEntitlementId_ pEpEnterpriseId_ pEpPayload_ pEpUserId_ =
     EntitlementsPatch'
     { _epEntitlementId = pEpEntitlementId_
     , _epQuotaUser = Nothing
     , _epPrettyPrint = True
     , _epEnterpriseId = pEpEnterpriseId_
     , _epUserIP = Nothing
+    , _epPayload = pEpPayload_
     , _epInstall = Nothing
     , _epUserId = pEpUserId_
     , _epKey = Nothing
     , _epOAuthToken = Nothing
     , _epFields = Nothing
-    , _epEntitlement = pEpEntitlement_
     }
 
 -- | The ID of the entitlement, e.g. \"app:com.google.android.gm\".
@@ -161,6 +162,11 @@ epEnterpriseId
 epUserIP :: Lens' EntitlementsPatch' (Maybe Text)
 epUserIP = lens _epUserIP (\ s a -> s{_epUserIP = a})
 
+-- | Multipart request metadata.
+epPayload :: Lens' EntitlementsPatch' Entitlement
+epPayload
+  = lens _epPayload (\ s a -> s{_epPayload = a})
+
 -- | Set to true to also install the product on all the user\'s devices where
 -- possible. Failure to install on one or more devices will not prevent
 -- this operation from returning successfully, as long as the entitlement
@@ -188,12 +194,6 @@ epOAuthToken
 epFields :: Lens' EntitlementsPatch' (Maybe Text)
 epFields = lens _epFields (\ s a -> s{_epFields = a})
 
--- | Multipart request metadata.
-epEntitlement :: Lens' EntitlementsPatch' Entitlement
-epEntitlement
-  = lens _epEntitlement
-      (\ s a -> s{_epEntitlement = a})
-
 instance GoogleAuth EntitlementsPatch' where
         authKey = epKey . _Just
         authToken = epOAuthToken . _Just
@@ -203,8 +203,8 @@ instance GoogleRequest EntitlementsPatch' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u EntitlementsPatch'{..}
-          = go _epInstall _epEnterpriseId _epUserId
-              _epEntitlementId
+          = go _epEnterpriseId _epUserId _epEntitlementId
+              _epInstall
               _epQuotaUser
               (Just _epPrettyPrint)
               _epUserIP
@@ -212,7 +212,7 @@ instance GoogleRequest EntitlementsPatch' where
               _epKey
               _epOAuthToken
               (Just AltJSON)
-              _epEntitlement
+              _epPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EntitlementsPatchResource)

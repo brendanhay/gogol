@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.Compute.BackendServices.GetHealth
     , bsghPrettyPrint
     , bsghProject
     , bsghUserIP
+    , bsghPayload
     , bsghKey
     , bsghOAuthToken
-    , bsghResourceGroupReference
     , bsghFields
     , bsghBackendService
     ) where
@@ -66,16 +67,16 @@ type BackendServicesGetHealthResource =
 --
 -- /See:/ 'backendServicesGetHealth'' smart constructor.
 data BackendServicesGetHealth' = BackendServicesGetHealth'
-    { _bsghQuotaUser              :: !(Maybe Text)
-    , _bsghPrettyPrint            :: !Bool
-    , _bsghProject                :: !Text
-    , _bsghUserIP                 :: !(Maybe Text)
-    , _bsghKey                    :: !(Maybe Key)
-    , _bsghOAuthToken             :: !(Maybe OAuthToken)
-    , _bsghResourceGroupReference :: !ResourceGroupReference
-    , _bsghFields                 :: !(Maybe Text)
-    , _bsghBackendService         :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _bsghQuotaUser      :: !(Maybe Text)
+    , _bsghPrettyPrint    :: !Bool
+    , _bsghProject        :: !Text
+    , _bsghUserIP         :: !(Maybe Text)
+    , _bsghPayload        :: !ResourceGroupReference
+    , _bsghKey            :: !(Maybe Key)
+    , _bsghOAuthToken     :: !(Maybe OAuthToken)
+    , _bsghFields         :: !(Maybe Text)
+    , _bsghBackendService :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BackendServicesGetHealth'' with the minimum fields required to make a request.
 --
@@ -89,29 +90,29 @@ data BackendServicesGetHealth' = BackendServicesGetHealth'
 --
 -- * 'bsghUserIP'
 --
+-- * 'bsghPayload'
+--
 -- * 'bsghKey'
 --
 -- * 'bsghOAuthToken'
---
--- * 'bsghResourceGroupReference'
 --
 -- * 'bsghFields'
 --
 -- * 'bsghBackendService'
 backendServicesGetHealth'
     :: Text -- ^ 'project'
-    -> ResourceGroupReference -- ^ 'ResourceGroupReference'
+    -> ResourceGroupReference -- ^ 'payload'
     -> Text -- ^ 'backendService'
     -> BackendServicesGetHealth'
-backendServicesGetHealth' pBsghProject_ pBsghResourceGroupReference_ pBsghBackendService_ =
+backendServicesGetHealth' pBsghProject_ pBsghPayload_ pBsghBackendService_ =
     BackendServicesGetHealth'
     { _bsghQuotaUser = Nothing
     , _bsghPrettyPrint = True
     , _bsghProject = pBsghProject_
     , _bsghUserIP = Nothing
+    , _bsghPayload = pBsghPayload_
     , _bsghKey = Nothing
     , _bsghOAuthToken = Nothing
-    , _bsghResourceGroupReference = pBsghResourceGroupReference_
     , _bsghFields = Nothing
     , _bsghBackendService = pBsghBackendService_
     }
@@ -140,6 +141,11 @@ bsghUserIP :: Lens' BackendServicesGetHealth' (Maybe Text)
 bsghUserIP
   = lens _bsghUserIP (\ s a -> s{_bsghUserIP = a})
 
+-- | Multipart request metadata.
+bsghPayload :: Lens' BackendServicesGetHealth' ResourceGroupReference
+bsghPayload
+  = lens _bsghPayload (\ s a -> s{_bsghPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -151,12 +157,6 @@ bsghOAuthToken :: Lens' BackendServicesGetHealth' (Maybe OAuthToken)
 bsghOAuthToken
   = lens _bsghOAuthToken
       (\ s a -> s{_bsghOAuthToken = a})
-
--- | Multipart request metadata.
-bsghResourceGroupReference :: Lens' BackendServicesGetHealth' ResourceGroupReference
-bsghResourceGroupReference
-  = lens _bsghResourceGroupReference
-      (\ s a -> s{_bsghResourceGroupReference = a})
 
 -- | Selector specifying which fields to include in a partial response.
 bsghFields :: Lens' BackendServicesGetHealth' (Maybe Text)
@@ -187,7 +187,7 @@ instance GoogleRequest BackendServicesGetHealth'
               _bsghKey
               _bsghOAuthToken
               (Just AltJSON)
-              _bsghResourceGroupReference
+              _bsghPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BackendServicesGetHealthResource)

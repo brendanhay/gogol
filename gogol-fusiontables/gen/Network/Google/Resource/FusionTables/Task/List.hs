@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,9 +52,9 @@ type TaskListResource =
      "tables" :>
        Capture "tableId" Text :>
          "tasks" :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
-               QueryParam "startIndex" Word32 :>
+           QueryParam "pageToken" Text :>
+             QueryParam "startIndex" Word32 :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -76,7 +77,7 @@ data TaskList' = TaskList'
     , _tlStartIndex  :: !(Maybe Word32)
     , _tlMaxResults  :: !(Maybe Word32)
     , _tlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskList'' with the minimum fields required to make a request.
 --
@@ -179,8 +180,8 @@ instance GoogleRequest TaskList' where
         type Rs TaskList' = TaskList
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TaskList'{..}
-          = go _tlMaxResults _tlPageToken _tlStartIndex
-              _tlTableId
+          = go _tlTableId _tlPageToken _tlStartIndex
+              _tlMaxResults
               _tlQuotaUser
               (Just _tlPrettyPrint)
               _tlUserIP

@@ -31,7 +31,7 @@ data MailItem = MailItem
     , _miIsInbox   :: !(Maybe Bool)
     , _miIsTrash   :: !(Maybe Bool)
     , _miIsSent    :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MailItem' with the minimum fields required to make a request.
 --

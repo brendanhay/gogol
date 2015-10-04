@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ type ColumnListResource =
      "tables" :>
        Capture "tableId" Text :>
          "columns" :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -73,7 +74,7 @@ data ColumnList' = ColumnList'
     , _clTableId     :: !Text
     , _clMaxResults  :: !(Maybe Word32)
     , _clFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnList'' with the minimum fields required to make a request.
 --
@@ -168,7 +169,7 @@ instance GoogleRequest ColumnList' where
         type Rs ColumnList' = ColumnList
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u ColumnList'{..}
-          = go _clMaxResults _clPageToken _clTableId
+          = go _clTableId _clPageToken _clMaxResults
               _clQuotaUser
               (Just _clPrettyPrint)
               _clUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Create
     , acvccPrettyPrint
     , acvccContainerId
     , acvccUserIP
-    , acvccVariable
+    , acvccPayload
     , acvccAccountId
     , acvccKey
     , acvccOAuthToken
@@ -69,12 +70,12 @@ data AccountsContainersVariablesCreate' = AccountsContainersVariablesCreate'
     , _acvccPrettyPrint :: !Bool
     , _acvccContainerId :: !Text
     , _acvccUserIP      :: !(Maybe Text)
-    , _acvccVariable    :: !Variable
+    , _acvccPayload     :: !Variable
     , _acvccAccountId   :: !Text
     , _acvccKey         :: !(Maybe Key)
     , _acvccOAuthToken  :: !(Maybe OAuthToken)
     , _acvccFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVariablesCreate'' with the minimum fields required to make a request.
 --
@@ -88,7 +89,7 @@ data AccountsContainersVariablesCreate' = AccountsContainersVariablesCreate'
 --
 -- * 'acvccUserIP'
 --
--- * 'acvccVariable'
+-- * 'acvccPayload'
 --
 -- * 'acvccAccountId'
 --
@@ -99,16 +100,16 @@ data AccountsContainersVariablesCreate' = AccountsContainersVariablesCreate'
 -- * 'acvccFields'
 accountsContainersVariablesCreate'
     :: Text -- ^ 'containerId'
-    -> Variable -- ^ 'Variable'
+    -> Variable -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> AccountsContainersVariablesCreate'
-accountsContainersVariablesCreate' pAcvccContainerId_ pAcvccVariable_ pAcvccAccountId_ =
+accountsContainersVariablesCreate' pAcvccContainerId_ pAcvccPayload_ pAcvccAccountId_ =
     AccountsContainersVariablesCreate'
     { _acvccQuotaUser = Nothing
     , _acvccPrettyPrint = True
     , _acvccContainerId = pAcvccContainerId_
     , _acvccUserIP = Nothing
-    , _acvccVariable = pAcvccVariable_
+    , _acvccPayload = pAcvccPayload_
     , _acvccAccountId = pAcvccAccountId_
     , _acvccKey = Nothing
     , _acvccOAuthToken = Nothing
@@ -142,10 +143,9 @@ acvccUserIP
   = lens _acvccUserIP (\ s a -> s{_acvccUserIP = a})
 
 -- | Multipart request metadata.
-acvccVariable :: Lens' AccountsContainersVariablesCreate' Variable
-acvccVariable
-  = lens _acvccVariable
-      (\ s a -> s{_acvccVariable = a})
+acvccPayload :: Lens' AccountsContainersVariablesCreate' Variable
+acvccPayload
+  = lens _acvccPayload (\ s a -> s{_acvccPayload = a})
 
 -- | The GTM Account ID.
 acvccAccountId :: Lens' AccountsContainersVariablesCreate' Text
@@ -189,7 +189,7 @@ instance GoogleRequest
               _acvccKey
               _acvccOAuthToken
               (Just AltJSON)
-              _acvccVariable
+              _acvccPayload
           where go
                   = clientWithRoute
                       (Proxy ::

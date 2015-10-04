@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -41,10 +42,10 @@ module Network.Google.Resource.YouTube.ChannelBanners.Insert
     , cbiQuotaUser
     , cbiPrettyPrint
     , cbiUserIP
+    , cbiPayload
     , cbiMedia
     , cbiOnBehalfOfContentOwner
     , cbiKey
-    , cbiChannelBannerResource
     , cbiOAuthToken
     , cbiFields
     ) where
@@ -83,13 +84,13 @@ data ChannelBannersInsert' = ChannelBannersInsert'
     { _cbiQuotaUser              :: !(Maybe Text)
     , _cbiPrettyPrint            :: !Bool
     , _cbiUserIP                 :: !(Maybe Text)
+    , _cbiPayload                :: !ChannelBannerResource
     , _cbiMedia                  :: !Body
     , _cbiOnBehalfOfContentOwner :: !(Maybe Text)
     , _cbiKey                    :: !(Maybe Key)
-    , _cbiChannelBannerResource  :: !ChannelBannerResource
     , _cbiOAuthToken             :: !(Maybe OAuthToken)
     , _cbiFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelBannersInsert'' with the minimum fields required to make a request.
 --
@@ -101,30 +102,30 @@ data ChannelBannersInsert' = ChannelBannersInsert'
 --
 -- * 'cbiUserIP'
 --
+-- * 'cbiPayload'
+--
 -- * 'cbiMedia'
 --
 -- * 'cbiOnBehalfOfContentOwner'
 --
 -- * 'cbiKey'
 --
--- * 'cbiChannelBannerResource'
---
 -- * 'cbiOAuthToken'
 --
 -- * 'cbiFields'
 channelBannersInsert'
-    :: Body -- ^ 'media'
-    -> ChannelBannerResource -- ^ 'ChannelBannerResource'
+    :: ChannelBannerResource -- ^ 'payload'
+    -> Body -- ^ 'media'
     -> ChannelBannersInsert'
-channelBannersInsert' pCbiMedia_ pCbiChannelBannerResource_ =
+channelBannersInsert' pCbiPayload_ pCbiMedia_ =
     ChannelBannersInsert'
     { _cbiQuotaUser = Nothing
     , _cbiPrettyPrint = True
     , _cbiUserIP = Nothing
+    , _cbiPayload = pCbiPayload_
     , _cbiMedia = pCbiMedia_
     , _cbiOnBehalfOfContentOwner = Nothing
     , _cbiKey = Nothing
-    , _cbiChannelBannerResource = pCbiChannelBannerResource_
     , _cbiOAuthToken = Nothing
     , _cbiFields = Nothing
     }
@@ -147,6 +148,11 @@ cbiPrettyPrint
 cbiUserIP :: Lens' ChannelBannersInsert' (Maybe Text)
 cbiUserIP
   = lens _cbiUserIP (\ s a -> s{_cbiUserIP = a})
+
+-- | Multipart request metadata.
+cbiPayload :: Lens' ChannelBannersInsert' ChannelBannerResource
+cbiPayload
+  = lens _cbiPayload (\ s a -> s{_cbiPayload = a})
 
 cbiMedia :: Lens' ChannelBannersInsert' Body
 cbiMedia = lens _cbiMedia (\ s a -> s{_cbiMedia = a})
@@ -172,12 +178,6 @@ cbiOnBehalfOfContentOwner
 cbiKey :: Lens' ChannelBannersInsert' (Maybe Key)
 cbiKey = lens _cbiKey (\ s a -> s{_cbiKey = a})
 
--- | Multipart request metadata.
-cbiChannelBannerResource :: Lens' ChannelBannersInsert' ChannelBannerResource
-cbiChannelBannerResource
-  = lens _cbiChannelBannerResource
-      (\ s a -> s{_cbiChannelBannerResource = a})
-
 -- | OAuth 2.0 token for the current user.
 cbiOAuthToken :: Lens' ChannelBannersInsert' (Maybe OAuthToken)
 cbiOAuthToken
@@ -197,15 +197,15 @@ instance GoogleRequest ChannelBannersInsert' where
         type Rs ChannelBannersInsert' = ChannelBannerResource
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u ChannelBannersInsert'{..}
-          = go _cbiMedia _cbiOnBehalfOfContentOwner
-              _cbiQuotaUser
+          = go _cbiOnBehalfOfContentOwner _cbiQuotaUser
               (Just _cbiPrettyPrint)
               _cbiUserIP
               _cbiFields
               _cbiKey
               _cbiOAuthToken
               (Just AltJSON)
-              _cbiChannelBannerResource
+              _cbiPayload
+              _cbiMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChannelBannersInsertResource)

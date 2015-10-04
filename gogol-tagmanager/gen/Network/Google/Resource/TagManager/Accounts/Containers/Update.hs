@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Update
     , acuContainerId
     , acuUserIP
     , acuFingerprint
+    , acuPayload
     , acuAccountId
     , acuKey
-    , acuContainer
     , acuOAuthToken
     , acuFields
     ) where
@@ -71,12 +72,12 @@ data AccountsContainersUpdate' = AccountsContainersUpdate'
     , _acuContainerId :: !Text
     , _acuUserIP      :: !(Maybe Text)
     , _acuFingerprint :: !(Maybe Text)
+    , _acuPayload     :: !Container
     , _acuAccountId   :: !Text
     , _acuKey         :: !(Maybe Key)
-    , _acuContainer   :: !Container
     , _acuOAuthToken  :: !(Maybe OAuthToken)
     , _acuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersUpdate'' with the minimum fields required to make a request.
 --
@@ -92,30 +93,30 @@ data AccountsContainersUpdate' = AccountsContainersUpdate'
 --
 -- * 'acuFingerprint'
 --
+-- * 'acuPayload'
+--
 -- * 'acuAccountId'
 --
 -- * 'acuKey'
---
--- * 'acuContainer'
 --
 -- * 'acuOAuthToken'
 --
 -- * 'acuFields'
 accountsContainersUpdate'
     :: Text -- ^ 'containerId'
+    -> Container -- ^ 'payload'
     -> Text -- ^ 'accountId'
-    -> Container -- ^ 'Container'
     -> AccountsContainersUpdate'
-accountsContainersUpdate' pAcuContainerId_ pAcuAccountId_ pAcuContainer_ =
+accountsContainersUpdate' pAcuContainerId_ pAcuPayload_ pAcuAccountId_ =
     AccountsContainersUpdate'
     { _acuQuotaUser = Nothing
     , _acuPrettyPrint = True
     , _acuContainerId = pAcuContainerId_
     , _acuUserIP = Nothing
     , _acuFingerprint = Nothing
+    , _acuPayload = pAcuPayload_
     , _acuAccountId = pAcuAccountId_
     , _acuKey = Nothing
-    , _acuContainer = pAcuContainer_
     , _acuOAuthToken = Nothing
     , _acuFields = Nothing
     }
@@ -152,6 +153,11 @@ acuFingerprint
   = lens _acuFingerprint
       (\ s a -> s{_acuFingerprint = a})
 
+-- | Multipart request metadata.
+acuPayload :: Lens' AccountsContainersUpdate' Container
+acuPayload
+  = lens _acuPayload (\ s a -> s{_acuPayload = a})
+
 -- | The GTM Account ID.
 acuAccountId :: Lens' AccountsContainersUpdate' Text
 acuAccountId
@@ -162,11 +168,6 @@ acuAccountId
 -- token.
 acuKey :: Lens' AccountsContainersUpdate' (Maybe Key)
 acuKey = lens _acuKey (\ s a -> s{_acuKey = a})
-
--- | Multipart request metadata.
-acuContainer :: Lens' AccountsContainersUpdate' Container
-acuContainer
-  = lens _acuContainer (\ s a -> s{_acuContainer = a})
 
 -- | OAuth 2.0 token for the current user.
 acuOAuthToken :: Lens' AccountsContainersUpdate' (Maybe OAuthToken)
@@ -188,7 +189,7 @@ instance GoogleRequest AccountsContainersUpdate'
         type Rs AccountsContainersUpdate' = Container
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsContainersUpdate'{..}
-          = go _acuFingerprint _acuAccountId _acuContainerId
+          = go _acuAccountId _acuContainerId _acuFingerprint
               _acuQuotaUser
               (Just _acuPrettyPrint)
               _acuUserIP
@@ -196,7 +197,7 @@ instance GoogleRequest AccountsContainersUpdate'
               _acuKey
               _acuOAuthToken
               (Just AltJSON)
-              _acuContainer
+              _acuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsContainersUpdateResource)

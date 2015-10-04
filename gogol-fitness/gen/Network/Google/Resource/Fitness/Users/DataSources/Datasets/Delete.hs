@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -60,8 +61,8 @@ type UsersDataSourcesDatasetsDeleteResource =
          Capture "dataSourceId" Text :>
            "datasets" :>
              Capture "datasetId" Text :>
-               QueryParam "currentTimeMillis" Int64 :>
-                 QueryParam "modifiedTimeMillis" Int64 :>
+               QueryParam "modifiedTimeMillis" Int64 :>
+                 QueryParam "currentTimeMillis" Int64 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -91,7 +92,7 @@ data UsersDataSourcesDatasetsDelete' = UsersDataSourcesDatasetsDelete'
     , _udsddCurrentTimeMillis  :: !(Maybe Int64)
     , _udsddOAuthToken         :: !(Maybe OAuthToken)
     , _udsddFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesDatasetsDelete'' with the minimum fields required to make a request.
 --
@@ -219,10 +220,9 @@ instance GoogleRequest
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u
           UsersDataSourcesDatasetsDelete'{..}
-          = go _udsddCurrentTimeMillis _udsddModifiedTimeMillis
-              _udsddUserId
-              _udsddDataSourceId
-              _udsddDatasetId
+          = go _udsddUserId _udsddDataSourceId _udsddDatasetId
+              _udsddModifiedTimeMillis
+              _udsddCurrentTimeMillis
               _udsddQuotaUser
               (Just _udsddPrettyPrint)
               _udsddUserIP

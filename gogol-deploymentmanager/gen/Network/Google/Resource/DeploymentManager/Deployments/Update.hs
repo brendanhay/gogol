@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,11 +37,11 @@ module Network.Google.Resource.DeploymentManager.Deployments.Update
     , duPrettyPrint
     , duProject
     , duUserIP
+    , duPayload
     , duUpdatePolicy
     , duDeletePolicy
     , duKey
     , duOAuthToken
-    , duDeployment
     , duFields
     , duDeployment
     ) where
@@ -58,11 +59,11 @@ type DeploymentsUpdateResource =
              QueryParam "createPolicy"
                DeploymentManagerDeploymentsUpdateCreatePolicy
                :>
-               QueryParam "deletePolicy"
-                 DeploymentManagerDeploymentsUpdateDeletePolicy
+               QueryParam "updatePolicy"
+                 DeploymentManagerDeploymentsUpdateUpdatePolicy
                  :>
-                 QueryParam "updatePolicy"
-                   DeploymentManagerDeploymentsUpdateUpdatePolicy
+                 QueryParam "deletePolicy"
+                   DeploymentManagerDeploymentsUpdateDeletePolicy
                    :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
@@ -84,14 +85,14 @@ data DeploymentsUpdate' = DeploymentsUpdate'
     , _duPrettyPrint  :: !Bool
     , _duProject      :: !Text
     , _duUserIP       :: !(Maybe Text)
+    , _duPayload      :: !Deployment
     , _duUpdatePolicy :: !DeploymentManagerDeploymentsUpdateUpdatePolicy
     , _duDeletePolicy :: !DeploymentManagerDeploymentsUpdateDeletePolicy
     , _duKey          :: !(Maybe Key)
     , _duOAuthToken   :: !(Maybe OAuthToken)
-    , _duDeployment   :: !Deployment
     , _duFields       :: !(Maybe Text)
     , _duDeployment   :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsUpdate'' with the minimum fields required to make a request.
 --
@@ -107,6 +108,8 @@ data DeploymentsUpdate' = DeploymentsUpdate'
 --
 -- * 'duUserIP'
 --
+-- * 'duPayload'
+--
 -- * 'duUpdatePolicy'
 --
 -- * 'duDeletePolicy'
@@ -115,28 +118,26 @@ data DeploymentsUpdate' = DeploymentsUpdate'
 --
 -- * 'duOAuthToken'
 --
--- * 'duDeployment'
---
 -- * 'duFields'
 --
 -- * 'duDeployment'
 deploymentsUpdate'
     :: Text -- ^ 'project'
-    -> Deployment -- ^ 'Deployment'
+    -> Deployment -- ^ 'payload'
     -> Text -- ^ 'deployment'
     -> DeploymentsUpdate'
-deploymentsUpdate' pDuProject_ pDuDeployment_ pDuDeployment_ =
+deploymentsUpdate' pDuProject_ pDuPayload_ pDuDeployment_ =
     DeploymentsUpdate'
     { _duCreatePolicy = DMDUCPCreateOrAcquire
     , _duQuotaUser = Nothing
     , _duPrettyPrint = True
     , _duProject = pDuProject_
     , _duUserIP = Nothing
+    , _duPayload = pDuPayload_
     , _duUpdatePolicy = DMDUUPPatch
-    , _duDeletePolicy = DMDUDPDelete
+    , _duDeletePolicy = Delete
     , _duKey = Nothing
     , _duOAuthToken = Nothing
-    , _duDeployment = pDuDeployment_
     , _duFields = Nothing
     , _duDeployment = pDuDeployment_
     }
@@ -170,6 +171,11 @@ duProject
 duUserIP :: Lens' DeploymentsUpdate' (Maybe Text)
 duUserIP = lens _duUserIP (\ s a -> s{_duUserIP = a})
 
+-- | Multipart request metadata.
+duPayload :: Lens' DeploymentsUpdate' Deployment
+duPayload
+  = lens _duPayload (\ s a -> s{_duPayload = a})
+
 -- | Sets the policy to use for updating resources.
 duUpdatePolicy :: Lens' DeploymentsUpdate' DeploymentManagerDeploymentsUpdateUpdatePolicy
 duUpdatePolicy
@@ -193,11 +199,6 @@ duOAuthToken :: Lens' DeploymentsUpdate' (Maybe OAuthToken)
 duOAuthToken
   = lens _duOAuthToken (\ s a -> s{_duOAuthToken = a})
 
--- | Multipart request metadata.
-duDeployment :: Lens' DeploymentsUpdate' Deployment
-duDeployment
-  = lens _duDeployment (\ s a -> s{_duDeployment = a})
-
 -- | Selector specifying which fields to include in a partial response.
 duFields :: Lens' DeploymentsUpdate' (Maybe Text)
 duFields = lens _duFields (\ s a -> s{_duFields = a})
@@ -216,10 +217,9 @@ instance GoogleRequest DeploymentsUpdate' where
         request
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u DeploymentsUpdate'{..}
-          = go (Just _duCreatePolicy) (Just _duDeletePolicy)
+          = go _duProject _duDeployment (Just _duCreatePolicy)
               (Just _duUpdatePolicy)
-              _duProject
-              _duDeployment
+              (Just _duDeletePolicy)
               _duQuotaUser
               (Just _duPrettyPrint)
               _duUserIP
@@ -227,7 +227,7 @@ instance GoogleRequest DeploymentsUpdate' where
               _duKey
               _duOAuthToken
               (Just AltJSON)
-              _duDeployment
+              _duPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DeploymentsUpdateResource)

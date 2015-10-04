@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,8 +49,8 @@ import           Network.Google.Prelude
 type ManagementSegmentsListResource =
      "management" :>
        "segments" :>
-         QueryParam "max-results" Int32 :>
-           QueryParam "start-index" Int32 :>
+         QueryParam "start-index" Int32 :>
+           QueryParam "max-results" Int32 :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -70,7 +71,7 @@ data ManagementSegmentsList' = ManagementSegmentsList'
     , _mslStartIndex  :: !(Maybe Int32)
     , _mslMaxResults  :: !(Maybe Int32)
     , _mslFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementSegmentsList'' with the minimum fields required to make a request.
 --
@@ -162,7 +163,7 @@ instance GoogleRequest ManagementSegmentsList' where
         type Rs ManagementSegmentsList' = Segments
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementSegmentsList'{..}
-          = go _mslMaxResults _mslStartIndex _mslQuotaUser
+          = go _mslStartIndex _mslMaxResults _mslQuotaUser
               (Just _mslPrettyPrint)
               _mslUserIP
               _mslFields

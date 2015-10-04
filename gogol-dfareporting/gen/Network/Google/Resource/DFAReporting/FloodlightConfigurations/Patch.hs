@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Patch
     , fcpPrettyPrint
     , fcpUserIP
     , fcpProfileId
+    , fcpPayload
     , fcpKey
     , fcpId
-    , fcpFloodlightConfiguration
     , fcpOAuthToken
     , fcpFields
     ) where
@@ -67,16 +68,16 @@ type FloodlightConfigurationsPatchResource =
 --
 -- /See:/ 'floodlightConfigurationsPatch'' smart constructor.
 data FloodlightConfigurationsPatch' = FloodlightConfigurationsPatch'
-    { _fcpQuotaUser               :: !(Maybe Text)
-    , _fcpPrettyPrint             :: !Bool
-    , _fcpUserIP                  :: !(Maybe Text)
-    , _fcpProfileId               :: !Int64
-    , _fcpKey                     :: !(Maybe Key)
-    , _fcpId                      :: !Int64
-    , _fcpFloodlightConfiguration :: !FloodlightConfiguration
-    , _fcpOAuthToken              :: !(Maybe OAuthToken)
-    , _fcpFields                  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _fcpQuotaUser   :: !(Maybe Text)
+    , _fcpPrettyPrint :: !Bool
+    , _fcpUserIP      :: !(Maybe Text)
+    , _fcpProfileId   :: !Int64
+    , _fcpPayload     :: !FloodlightConfiguration
+    , _fcpKey         :: !(Maybe Key)
+    , _fcpId          :: !Int64
+    , _fcpOAuthToken  :: !(Maybe OAuthToken)
+    , _fcpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightConfigurationsPatch'' with the minimum fields required to make a request.
 --
@@ -90,29 +91,29 @@ data FloodlightConfigurationsPatch' = FloodlightConfigurationsPatch'
 --
 -- * 'fcpProfileId'
 --
+-- * 'fcpPayload'
+--
 -- * 'fcpKey'
 --
 -- * 'fcpId'
---
--- * 'fcpFloodlightConfiguration'
 --
 -- * 'fcpOAuthToken'
 --
 -- * 'fcpFields'
 floodlightConfigurationsPatch'
     :: Int64 -- ^ 'profileId'
+    -> FloodlightConfiguration -- ^ 'payload'
     -> Int64 -- ^ 'id'
-    -> FloodlightConfiguration -- ^ 'FloodlightConfiguration'
     -> FloodlightConfigurationsPatch'
-floodlightConfigurationsPatch' pFcpProfileId_ pFcpId_ pFcpFloodlightConfiguration_ =
+floodlightConfigurationsPatch' pFcpProfileId_ pFcpPayload_ pFcpId_ =
     FloodlightConfigurationsPatch'
     { _fcpQuotaUser = Nothing
     , _fcpPrettyPrint = True
     , _fcpUserIP = Nothing
     , _fcpProfileId = pFcpProfileId_
+    , _fcpPayload = pFcpPayload_
     , _fcpKey = Nothing
     , _fcpId = pFcpId_
-    , _fcpFloodlightConfiguration = pFcpFloodlightConfiguration_
     , _fcpOAuthToken = Nothing
     , _fcpFields = Nothing
     }
@@ -141,6 +142,11 @@ fcpProfileId :: Lens' FloodlightConfigurationsPatch' Int64
 fcpProfileId
   = lens _fcpProfileId (\ s a -> s{_fcpProfileId = a})
 
+-- | Multipart request metadata.
+fcpPayload :: Lens' FloodlightConfigurationsPatch' FloodlightConfiguration
+fcpPayload
+  = lens _fcpPayload (\ s a -> s{_fcpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -150,12 +156,6 @@ fcpKey = lens _fcpKey (\ s a -> s{_fcpKey = a})
 -- | Floodlight configuration ID.
 fcpId :: Lens' FloodlightConfigurationsPatch' Int64
 fcpId = lens _fcpId (\ s a -> s{_fcpId = a})
-
--- | Multipart request metadata.
-fcpFloodlightConfiguration :: Lens' FloodlightConfigurationsPatch' FloodlightConfiguration
-fcpFloodlightConfiguration
-  = lens _fcpFloodlightConfiguration
-      (\ s a -> s{_fcpFloodlightConfiguration = a})
 
 -- | OAuth 2.0 token for the current user.
 fcpOAuthToken :: Lens' FloodlightConfigurationsPatch' (Maybe OAuthToken)
@@ -187,7 +187,7 @@ instance GoogleRequest FloodlightConfigurationsPatch'
               _fcpKey
               _fcpOAuthToken
               (Just AltJSON)
-              _fcpFloodlightConfiguration
+              _fcpPayload
           where go
                   = clientWithRoute
                       (Proxy ::

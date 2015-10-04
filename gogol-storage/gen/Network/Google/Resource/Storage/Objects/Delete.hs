@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,11 +58,11 @@ type ObjectsDeleteResource =
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
-             QueryParam "generation" Word64 :>
-               QueryParam "ifGenerationMatch" Word64 :>
-                 QueryParam "ifGenerationNotMatch" Word64 :>
-                   QueryParam "ifMetagenerationMatch" Word64 :>
-                     QueryParam "ifMetagenerationNotMatch" Word64 :>
+             QueryParam "ifMetagenerationMatch" Word64 :>
+               QueryParam "ifGenerationNotMatch" Word64 :>
+                 QueryParam "ifGenerationMatch" Word64 :>
+                   QueryParam "ifMetagenerationNotMatch" Word64 :>
+                     QueryParam "generation" Word64 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -89,7 +90,7 @@ data ObjectsDelete' = ObjectsDelete'
     , _odOAuthToken               :: !(Maybe OAuthToken)
     , _odGeneration               :: !(Maybe Word64)
     , _odFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsDelete'' with the minimum fields required to make a request.
 --
@@ -224,12 +225,11 @@ instance GoogleRequest ObjectsDelete' where
         type Rs ObjectsDelete' = ()
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsDelete'{..}
-          = go _odGeneration _odIfGenerationMatch
+          = go _odBucket _odObject _odIfMetagenerationMatch
               _odIfGenerationNotMatch
-              _odIfMetagenerationMatch
+              _odIfGenerationMatch
               _odIfMetagenerationNotMatch
-              _odBucket
-              _odObject
+              _odGeneration
               _odQuotaUser
               (Just _odPrettyPrint)
               _odUserIP

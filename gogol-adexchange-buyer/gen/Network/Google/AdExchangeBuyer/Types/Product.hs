@@ -19,12 +19,233 @@ import           Network.Google.AdExchangeBuyer.Types.Sum
 import           Network.Google.Prelude
 
 --
+-- /See:/ 'bidderLocationItem' smart constructor.
+data BidderLocationItem = BidderLocationItem
+    { _bliURL        :: !(Maybe Text)
+    , _bliMaximumQps :: !(Maybe Int32)
+    , _bliRegion     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BidderLocationItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bliURL'
+--
+-- * 'bliMaximumQps'
+--
+-- * 'bliRegion'
+bidderLocationItem
+    :: BidderLocationItem
+bidderLocationItem =
+    BidderLocationItem
+    { _bliURL = Nothing
+    , _bliMaximumQps = Nothing
+    , _bliRegion = Nothing
+    }
+
+-- | The URL to which the Ad Exchange will send bid requests.
+bliURL :: Lens' BidderLocationItem (Maybe Text)
+bliURL = lens _bliURL (\ s a -> s{_bliURL = a})
+
+-- | The maximum queries per second the Ad Exchange will send.
+bliMaximumQps :: Lens' BidderLocationItem (Maybe Int32)
+bliMaximumQps
+  = lens _bliMaximumQps
+      (\ s a -> s{_bliMaximumQps = a})
+
+-- | The geographical region the Ad Exchange should send requests from. Only
+-- used by some quota systems, but always setting the value is recommended.
+-- Allowed values: - ASIA - EUROPE - US_EAST - US_WEST
+bliRegion :: Lens' BidderLocationItem (Maybe Text)
+bliRegion
+  = lens _bliRegion (\ s a -> s{_bliRegion = a})
+
+instance FromJSON BidderLocationItem where
+        parseJSON
+          = withObject "BidderLocationItem"
+              (\ o ->
+                 BidderLocationItem <$>
+                   (o .:? "url") <*> (o .:? "maximumQps") <*>
+                     (o .:? "region"))
+
+instance ToJSON BidderLocationItem where
+        toJSON BidderLocationItem{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _bliURL,
+                  ("maximumQps" .=) <$> _bliMaximumQps,
+                  ("region" .=) <$> _bliRegion])
+
+-- | If nativeAd is set, HTMLSnippet and videoURL should not be set.
+--
+-- /See:/ 'nATiveAd' smart constructor.
+data NATiveAd = NATiveAd
+    { _nataImage                 :: !(Maybe Image)
+    , _nataAppIcon               :: !(Maybe AppIcon)
+    , _nataClickTrackingURL      :: !(Maybe Text)
+    , _nataBody                  :: !(Maybe Text)
+    , _nataHeadline              :: !(Maybe Text)
+    , _nataImpressionTrackingURL :: !(Maybe [Text])
+    , _nataCallToAction          :: !(Maybe Text)
+    , _nataStore                 :: !(Maybe Text)
+    , _nataPrice                 :: !(Maybe Text)
+    , _nataAdvertiser            :: !(Maybe Text)
+    , _nataStarRating            :: !(Maybe Double)
+    , _nataLogo                  :: !(Maybe Logo)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'NATiveAd' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'nataImage'
+--
+-- * 'nataAppIcon'
+--
+-- * 'nataClickTrackingURL'
+--
+-- * 'nataBody'
+--
+-- * 'nataHeadline'
+--
+-- * 'nataImpressionTrackingURL'
+--
+-- * 'nataCallToAction'
+--
+-- * 'nataStore'
+--
+-- * 'nataPrice'
+--
+-- * 'nataAdvertiser'
+--
+-- * 'nataStarRating'
+--
+-- * 'nataLogo'
+nATiveAd
+    :: NATiveAd
+nATiveAd =
+    NATiveAd
+    { _nataImage = Nothing
+    , _nataAppIcon = Nothing
+    , _nataClickTrackingURL = Nothing
+    , _nataBody = Nothing
+    , _nataHeadline = Nothing
+    , _nataImpressionTrackingURL = Nothing
+    , _nataCallToAction = Nothing
+    , _nataStore = Nothing
+    , _nataPrice = Nothing
+    , _nataAdvertiser = Nothing
+    , _nataStarRating = Nothing
+    , _nataLogo = Nothing
+    }
+
+-- | A large image.
+nataImage :: Lens' NATiveAd (Maybe Image)
+nataImage
+  = lens _nataImage (\ s a -> s{_nataImage = a})
+
+-- | The app icon, for app download ads.
+nataAppIcon :: Lens' NATiveAd (Maybe AppIcon)
+nataAppIcon
+  = lens _nataAppIcon (\ s a -> s{_nataAppIcon = a})
+
+-- | The URL to use for click tracking.
+nataClickTrackingURL :: Lens' NATiveAd (Maybe Text)
+nataClickTrackingURL
+  = lens _nataClickTrackingURL
+      (\ s a -> s{_nataClickTrackingURL = a})
+
+-- | A long description of the ad.
+nataBody :: Lens' NATiveAd (Maybe Text)
+nataBody = lens _nataBody (\ s a -> s{_nataBody = a})
+
+-- | A short title for the ad.
+nataHeadline :: Lens' NATiveAd (Maybe Text)
+nataHeadline
+  = lens _nataHeadline (\ s a -> s{_nataHeadline = a})
+
+-- | The URLs are called when the impression is rendered.
+nataImpressionTrackingURL :: Lens' NATiveAd [Text]
+nataImpressionTrackingURL
+  = lens _nataImpressionTrackingURL
+      (\ s a -> s{_nataImpressionTrackingURL = a})
+      . _Default
+      . _Coerce
+
+-- | A label for the button that the user is supposed to click.
+nataCallToAction :: Lens' NATiveAd (Maybe Text)
+nataCallToAction
+  = lens _nataCallToAction
+      (\ s a -> s{_nataCallToAction = a})
+
+-- | The URL to the app store to purchase\/download the promoted app.
+nataStore :: Lens' NATiveAd (Maybe Text)
+nataStore
+  = lens _nataStore (\ s a -> s{_nataStore = a})
+
+-- | The price of the promoted app including the currency info.
+nataPrice :: Lens' NATiveAd (Maybe Text)
+nataPrice
+  = lens _nataPrice (\ s a -> s{_nataPrice = a})
+
+nataAdvertiser :: Lens' NATiveAd (Maybe Text)
+nataAdvertiser
+  = lens _nataAdvertiser
+      (\ s a -> s{_nataAdvertiser = a})
+
+-- | The app rating in the app store. Must be in the range [0-5].
+nataStarRating :: Lens' NATiveAd (Maybe Double)
+nataStarRating
+  = lens _nataStarRating
+      (\ s a -> s{_nataStarRating = a})
+
+-- | A smaller image, for the advertiser logo.
+nataLogo :: Lens' NATiveAd (Maybe Logo)
+nataLogo = lens _nataLogo (\ s a -> s{_nataLogo = a})
+
+instance FromJSON NATiveAd where
+        parseJSON
+          = withObject "NATiveAd"
+              (\ o ->
+                 NATiveAd <$>
+                   (o .:? "image") <*> (o .:? "appIcon") <*>
+                     (o .:? "clickTrackingUrl")
+                     <*> (o .:? "body")
+                     <*> (o .:? "headline")
+                     <*> (o .:? "impressionTrackingUrl" .!= mempty)
+                     <*> (o .:? "callToAction")
+                     <*> (o .:? "store")
+                     <*> (o .:? "price")
+                     <*> (o .:? "advertiser")
+                     <*> (o .:? "starRating")
+                     <*> (o .:? "logo"))
+
+instance ToJSON NATiveAd where
+        toJSON NATiveAd{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _nataImage,
+                  ("appIcon" .=) <$> _nataAppIcon,
+                  ("clickTrackingUrl" .=) <$> _nataClickTrackingURL,
+                  ("body" .=) <$> _nataBody,
+                  ("headline" .=) <$> _nataHeadline,
+                  ("impressionTrackingUrl" .=) <$>
+                    _nataImpressionTrackingURL,
+                  ("callToAction" .=) <$> _nataCallToAction,
+                  ("store" .=) <$> _nataStore,
+                  ("price" .=) <$> _nataPrice,
+                  ("advertiser" .=) <$> _nataAdvertiser,
+                  ("starRating" .=) <$> _nataStarRating,
+                  ("logo" .=) <$> _nataLogo])
+
+--
 -- /See:/ 'brandDTO' smart constructor.
 data BrandDTO = BrandDTO
     { _bdtoAdvertiserId :: !(Maybe Int64)
     , _bdtoName         :: !(Maybe Text)
     , _bdtoId           :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BrandDTO' with the minimum fields required to make a request.
 --
@@ -71,10 +292,55 @@ instance ToJSON BrandDTO where
                   ("name" .=) <$> _bdtoName, ("id" .=) <$> _bdtoId])
 
 --
+-- /See:/ 'placementsItem' smart constructor.
+data PlacementsItem = PlacementsItem
+    { _piToken :: !(Maybe Text)
+    , _piType  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PlacementsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'piToken'
+--
+-- * 'piType'
+placementsItem
+    :: PlacementsItem
+placementsItem =
+    PlacementsItem
+    { _piToken = Nothing
+    , _piType = Nothing
+    }
+
+-- | The value of the placement. Interpretation depends on the placement
+-- type, e.g. URL for a site placement, channel name for a channel
+-- placement, app id for a mobile app placement.
+piToken :: Lens' PlacementsItem (Maybe Text)
+piToken = lens _piToken (\ s a -> s{_piToken = a})
+
+-- | The type of the placement.
+piType :: Lens' PlacementsItem (Maybe Text)
+piType = lens _piType (\ s a -> s{_piType = a})
+
+instance FromJSON PlacementsItem where
+        parseJSON
+          = withObject "PlacementsItem"
+              (\ o ->
+                 PlacementsItem <$>
+                   (o .:? "token") <*> (o .:? "type"))
+
+instance ToJSON PlacementsItem where
+        toJSON PlacementsItem{..}
+          = object
+              (catMaybes
+                 [("token" .=) <$> _piToken, ("type" .=) <$> _piType])
+
+--
 -- /See:/ 'editAllOrderDealsResponse' smart constructor.
 newtype EditAllOrderDealsResponse = EditAllOrderDealsResponse
     { _eaodrDeals :: Maybe [MarketplaceDeal]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditAllOrderDealsResponse' with the minimum fields required to make a request.
 --
@@ -119,7 +385,7 @@ data MarketplaceNote = MarketplaceNote
     , _mnCreatorRole         :: !(Maybe Text)
     , _mnOrderId             :: !(Maybe Text)
     , _mnOrderRevisionNumber :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceNote' with the minimum fields required to make a request.
 --
@@ -223,215 +489,56 @@ instance ToJSON MarketplaceNote where
                   ("orderRevisionNumber" .=) <$>
                     _mnOrderRevisionNumber])
 
--- | If nativeAd is set, HTMLSnippet and videoURL should not be set.
---
--- /See:/ 'creativeNATiveAd' smart constructor.
-data CreativeNATiveAd = CreativeNATiveAd
-    { _cnataImage                 :: !(Maybe CreativeNATiveAdImage)
-    , _cnataAppIcon               :: !(Maybe CreativeNATiveAdAppIcon)
-    , _cnataClickTrackingURL      :: !(Maybe Text)
-    , _cnataBody                  :: !(Maybe Text)
-    , _cnataHeadline              :: !(Maybe Text)
-    , _cnataImpressionTrackingURL :: !(Maybe [Text])
-    , _cnataCallToAction          :: !(Maybe Text)
-    , _cnataStore                 :: !(Maybe Text)
-    , _cnataPrice                 :: !(Maybe Text)
-    , _cnataAdvertiser            :: !(Maybe Text)
-    , _cnataStarRating            :: !(Maybe Double)
-    , _cnataLogo                  :: !(Maybe CreativeNATiveAdLogo)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CreativeNATiveAd' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cnataImage'
---
--- * 'cnataAppIcon'
---
--- * 'cnataClickTrackingURL'
---
--- * 'cnataBody'
---
--- * 'cnataHeadline'
---
--- * 'cnataImpressionTrackingURL'
---
--- * 'cnataCallToAction'
---
--- * 'cnataStore'
---
--- * 'cnataPrice'
---
--- * 'cnataAdvertiser'
---
--- * 'cnataStarRating'
---
--- * 'cnataLogo'
-creativeNATiveAd
-    :: CreativeNATiveAd
-creativeNATiveAd =
-    CreativeNATiveAd
-    { _cnataImage = Nothing
-    , _cnataAppIcon = Nothing
-    , _cnataClickTrackingURL = Nothing
-    , _cnataBody = Nothing
-    , _cnataHeadline = Nothing
-    , _cnataImpressionTrackingURL = Nothing
-    , _cnataCallToAction = Nothing
-    , _cnataStore = Nothing
-    , _cnataPrice = Nothing
-    , _cnataAdvertiser = Nothing
-    , _cnataStarRating = Nothing
-    , _cnataLogo = Nothing
-    }
-
 -- | A large image.
-cnataImage :: Lens' CreativeNATiveAd (Maybe CreativeNATiveAdImage)
-cnataImage
-  = lens _cnataImage (\ s a -> s{_cnataImage = a})
-
--- | The app icon, for app download ads.
-cnataAppIcon :: Lens' CreativeNATiveAd (Maybe CreativeNATiveAdAppIcon)
-cnataAppIcon
-  = lens _cnataAppIcon (\ s a -> s{_cnataAppIcon = a})
-
--- | The URL to use for click tracking.
-cnataClickTrackingURL :: Lens' CreativeNATiveAd (Maybe Text)
-cnataClickTrackingURL
-  = lens _cnataClickTrackingURL
-      (\ s a -> s{_cnataClickTrackingURL = a})
-
--- | A long description of the ad.
-cnataBody :: Lens' CreativeNATiveAd (Maybe Text)
-cnataBody
-  = lens _cnataBody (\ s a -> s{_cnataBody = a})
-
--- | A short title for the ad.
-cnataHeadline :: Lens' CreativeNATiveAd (Maybe Text)
-cnataHeadline
-  = lens _cnataHeadline
-      (\ s a -> s{_cnataHeadline = a})
-
--- | The URLs are called when the impression is rendered.
-cnataImpressionTrackingURL :: Lens' CreativeNATiveAd [Text]
-cnataImpressionTrackingURL
-  = lens _cnataImpressionTrackingURL
-      (\ s a -> s{_cnataImpressionTrackingURL = a})
-      . _Default
-      . _Coerce
-
--- | A label for the button that the user is supposed to click.
-cnataCallToAction :: Lens' CreativeNATiveAd (Maybe Text)
-cnataCallToAction
-  = lens _cnataCallToAction
-      (\ s a -> s{_cnataCallToAction = a})
-
--- | The URL to the app store to purchase\/download the promoted app.
-cnataStore :: Lens' CreativeNATiveAd (Maybe Text)
-cnataStore
-  = lens _cnataStore (\ s a -> s{_cnataStore = a})
-
--- | The price of the promoted app including the currency info.
-cnataPrice :: Lens' CreativeNATiveAd (Maybe Text)
-cnataPrice
-  = lens _cnataPrice (\ s a -> s{_cnataPrice = a})
-
-cnataAdvertiser :: Lens' CreativeNATiveAd (Maybe Text)
-cnataAdvertiser
-  = lens _cnataAdvertiser
-      (\ s a -> s{_cnataAdvertiser = a})
-
--- | The app rating in the app store. Must be in the range [0-5].
-cnataStarRating :: Lens' CreativeNATiveAd (Maybe Double)
-cnataStarRating
-  = lens _cnataStarRating
-      (\ s a -> s{_cnataStarRating = a})
-
--- | A smaller image, for the advertiser logo.
-cnataLogo :: Lens' CreativeNATiveAd (Maybe CreativeNATiveAdLogo)
-cnataLogo
-  = lens _cnataLogo (\ s a -> s{_cnataLogo = a})
-
-instance FromJSON CreativeNATiveAd where
-        parseJSON
-          = withObject "CreativeNATiveAd"
-              (\ o ->
-                 CreativeNATiveAd <$>
-                   (o .:? "image") <*> (o .:? "appIcon") <*>
-                     (o .:? "clickTrackingUrl")
-                     <*> (o .:? "body")
-                     <*> (o .:? "headline")
-                     <*> (o .:? "impressionTrackingUrl" .!= mempty)
-                     <*> (o .:? "callToAction")
-                     <*> (o .:? "store")
-                     <*> (o .:? "price")
-                     <*> (o .:? "advertiser")
-                     <*> (o .:? "starRating")
-                     <*> (o .:? "logo"))
-
-instance ToJSON CreativeNATiveAd where
-        toJSON CreativeNATiveAd{..}
-          = object
-              (catMaybes
-                 [("image" .=) <$> _cnataImage,
-                  ("appIcon" .=) <$> _cnataAppIcon,
-                  ("clickTrackingUrl" .=) <$> _cnataClickTrackingURL,
-                  ("body" .=) <$> _cnataBody,
-                  ("headline" .=) <$> _cnataHeadline,
-                  ("impressionTrackingUrl" .=) <$>
-                    _cnataImpressionTrackingURL,
-                  ("callToAction" .=) <$> _cnataCallToAction,
-                  ("store" .=) <$> _cnataStore,
-                  ("price" .=) <$> _cnataPrice,
-                  ("advertiser" .=) <$> _cnataAdvertiser,
-                  ("starRating" .=) <$> _cnataStarRating,
-                  ("logo" .=) <$> _cnataLogo])
-
 --
--- /See:/ 'pretargetingConfigDimensions' smart constructor.
-data PretargetingConfigDimensions = PretargetingConfigDimensions
-    { _pcdHeight :: !(Maybe Int64)
-    , _pcdWidth  :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'image' smart constructor.
+data Image = Image
+    { _iHeight :: !(Maybe Int32)
+    , _iURL    :: !(Maybe Text)
+    , _iWidth  :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PretargetingConfigDimensions' with the minimum fields required to make a request.
+-- | Creates a value of 'Image' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pcdHeight'
+-- * 'iHeight'
 --
--- * 'pcdWidth'
-pretargetingConfigDimensions
-    :: PretargetingConfigDimensions
-pretargetingConfigDimensions =
-    PretargetingConfigDimensions
-    { _pcdHeight = Nothing
-    , _pcdWidth = Nothing
+-- * 'iURL'
+--
+-- * 'iWidth'
+image
+    :: Image
+image =
+    Image
+    { _iHeight = Nothing
+    , _iURL = Nothing
+    , _iWidth = Nothing
     }
 
--- | Height in pixels.
-pcdHeight :: Lens' PretargetingConfigDimensions (Maybe Int64)
-pcdHeight
-  = lens _pcdHeight (\ s a -> s{_pcdHeight = a})
+iHeight :: Lens' Image (Maybe Int32)
+iHeight = lens _iHeight (\ s a -> s{_iHeight = a})
 
--- | Width in pixels.
-pcdWidth :: Lens' PretargetingConfigDimensions (Maybe Int64)
-pcdWidth = lens _pcdWidth (\ s a -> s{_pcdWidth = a})
+iURL :: Lens' Image (Maybe Text)
+iURL = lens _iURL (\ s a -> s{_iURL = a})
 
-instance FromJSON PretargetingConfigDimensions where
+iWidth :: Lens' Image (Maybe Int32)
+iWidth = lens _iWidth (\ s a -> s{_iWidth = a})
+
+instance FromJSON Image where
         parseJSON
-          = withObject "PretargetingConfigDimensions"
+          = withObject "Image"
               (\ o ->
-                 PretargetingConfigDimensions <$>
-                   (o .:? "height") <*> (o .:? "width"))
+                 Image <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width"))
 
-instance ToJSON PretargetingConfigDimensions where
-        toJSON PretargetingConfigDimensions{..}
+instance ToJSON Image where
+        toJSON Image{..}
           = object
               (catMaybes
-                 [("height" .=) <$> _pcdHeight,
-                  ("width" .=) <$> _pcdWidth])
+                 [("height" .=) <$> _iHeight, ("url" .=) <$> _iURL,
+                  ("width" .=) <$> _iWidth])
 
 --
 -- /See:/ 'termsDTO' smart constructor.
@@ -463,7 +570,7 @@ data TermsDTO = TermsDTO
     , _tdtoTargetByDealId             :: !(Maybe Bool)
     , _tdtoBillingTerms               :: !(Maybe Text)
     , _tdtoDescription                :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TermsDTO' with the minimum fields required to make a request.
 --
@@ -793,6 +900,57 @@ instance ToJSON TermsDTO where
                   ("billingTerms" .=) <$> _tdtoBillingTerms,
                   ("description" .=) <$> _tdtoDescription])
 
+-- | The app icon, for app download ads.
+--
+-- /See:/ 'appIcon' smart constructor.
+data AppIcon = AppIcon
+    { _aiHeight :: !(Maybe Int32)
+    , _aiURL    :: !(Maybe Text)
+    , _aiWidth  :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AppIcon' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aiHeight'
+--
+-- * 'aiURL'
+--
+-- * 'aiWidth'
+appIcon
+    :: AppIcon
+appIcon =
+    AppIcon
+    { _aiHeight = Nothing
+    , _aiURL = Nothing
+    , _aiWidth = Nothing
+    }
+
+aiHeight :: Lens' AppIcon (Maybe Int32)
+aiHeight = lens _aiHeight (\ s a -> s{_aiHeight = a})
+
+aiURL :: Lens' AppIcon (Maybe Text)
+aiURL = lens _aiURL (\ s a -> s{_aiURL = a})
+
+aiWidth :: Lens' AppIcon (Maybe Int32)
+aiWidth = lens _aiWidth (\ s a -> s{_aiWidth = a})
+
+instance FromJSON AppIcon where
+        parseJSON
+          = withObject "AppIcon"
+              (\ o ->
+                 AppIcon <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width"))
+
+instance ToJSON AppIcon where
+        toJSON AppIcon{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _aiHeight, ("url" .=) <$> _aiURL,
+                  ("width" .=) <$> _aiWidth])
+
 -- | The creatives feed lists the active creatives for the Ad Exchange buyer
 -- accounts that the user has access to. Each entry in the feed corresponds
 -- to a single creative.
@@ -802,7 +960,7 @@ data CreativesList = CreativesList
     { _clNextPageToken :: !(Maybe Text)
     , _clKind          :: !Text
     , _clItems         :: !(Maybe [Creative])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesList' with the minimum fields required to make a request.
 --
@@ -856,93 +1014,10 @@ instance ToJSON CreativesList where
                   Just ("kind" .= _clKind), ("items" .=) <$> _clItems])
 
 --
--- /See:/ 'creativeServingRestrictionsContexts' smart constructor.
-data CreativeServingRestrictionsContexts = CreativeServingRestrictionsContexts
-    { _csrcPlatform      :: !(Maybe [Text])
-    , _csrcContextType   :: !(Maybe Text)
-    , _csrcAuctionType   :: !(Maybe [Text])
-    , _csrcGeoCriteriaId :: !(Maybe [Int32])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CreativeServingRestrictionsContexts' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'csrcPlatform'
---
--- * 'csrcContextType'
---
--- * 'csrcAuctionType'
---
--- * 'csrcGeoCriteriaId'
-creativeServingRestrictionsContexts
-    :: CreativeServingRestrictionsContexts
-creativeServingRestrictionsContexts =
-    CreativeServingRestrictionsContexts
-    { _csrcPlatform = Nothing
-    , _csrcContextType = Nothing
-    , _csrcAuctionType = Nothing
-    , _csrcGeoCriteriaId = Nothing
-    }
-
--- | Only set when contextType=PLATFORM. Represents the platforms this
--- restriction applies to.
-csrcPlatform :: Lens' CreativeServingRestrictionsContexts [Text]
-csrcPlatform
-  = lens _csrcPlatform (\ s a -> s{_csrcPlatform = a})
-      . _Default
-      . _Coerce
-
--- | The type of context (e.g., location, platform, auction type, SSL-ness).
-csrcContextType :: Lens' CreativeServingRestrictionsContexts (Maybe Text)
-csrcContextType
-  = lens _csrcContextType
-      (\ s a -> s{_csrcContextType = a})
-
--- | Only set when contextType=AUCTION_TYPE. Represents the auction types
--- this restriction applies to.
-csrcAuctionType :: Lens' CreativeServingRestrictionsContexts [Text]
-csrcAuctionType
-  = lens _csrcAuctionType
-      (\ s a -> s{_csrcAuctionType = a})
-      . _Default
-      . _Coerce
-
--- | Only set when contextType=LOCATION. Represents the geo criterias this
--- restriction applies to.
-csrcGeoCriteriaId :: Lens' CreativeServingRestrictionsContexts [Int32]
-csrcGeoCriteriaId
-  = lens _csrcGeoCriteriaId
-      (\ s a -> s{_csrcGeoCriteriaId = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON CreativeServingRestrictionsContexts
-         where
-        parseJSON
-          = withObject "CreativeServingRestrictionsContexts"
-              (\ o ->
-                 CreativeServingRestrictionsContexts <$>
-                   (o .:? "platform" .!= mempty) <*>
-                     (o .:? "contextType")
-                     <*> (o .:? "auctionType" .!= mempty)
-                     <*> (o .:? "geoCriteriaId" .!= mempty))
-
-instance ToJSON CreativeServingRestrictionsContexts
-         where
-        toJSON CreativeServingRestrictionsContexts{..}
-          = object
-              (catMaybes
-                 [("platform" .=) <$> _csrcPlatform,
-                  ("contextType" .=) <$> _csrcContextType,
-                  ("auctionType" .=) <$> _csrcAuctionType,
-                  ("geoCriteriaId" .=) <$> _csrcGeoCriteriaId])
-
---
 -- /See:/ 'createOrdersResponse' smart constructor.
 newtype CreateOrdersResponse = CreateOrdersResponse
     { _corOrders :: Maybe [MarketplaceOrder]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreateOrdersResponse' with the minimum fields required to make a request.
 --
@@ -977,7 +1052,7 @@ instance ToJSON CreateOrdersResponse where
 -- /See:/ 'addOrderNotesRequest' smart constructor.
 newtype AddOrderNotesRequest = AddOrderNotesRequest
     { _aonrNotes :: Maybe [MarketplaceNote]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddOrderNotesRequest' with the minimum fields required to make a request.
 --
@@ -1013,7 +1088,7 @@ instance ToJSON AddOrderNotesRequest where
 data MarketplaceDealParty = MarketplaceDealParty
     { _mdpSeller :: !(Maybe Seller)
     , _mdpBuyer  :: !(Maybe Buyer)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceDealParty' with the minimum fields required to make a request.
 --
@@ -1063,7 +1138,7 @@ data DealPartyDTO = DealPartyDTO
     , _dpdtoName            :: !(Maybe Text)
     , _dpdtoWebProperty     :: !(Maybe WebPropertyDTO)
     , _dpdtoBuyer           :: !(Maybe BuyerDTO)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DealPartyDTO' with the minimum fields required to make a request.
 --
@@ -1138,7 +1213,7 @@ data DeliveryControlFrequencyCap = DeliveryControlFrequencyCap
     { _dcfcMaxImpressions :: !(Maybe Int32)
     , _dcfcNumTimeUnits   :: !(Maybe Int32)
     , _dcfcTimeUnitType   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeliveryControlFrequencyCap' with the minimum fields required to make a request.
 --
@@ -1194,7 +1269,7 @@ instance ToJSON DeliveryControlFrequencyCap where
 data GetNegotiationsResponse = GetNegotiationsResponse
     { _gnrKind         :: !Text
     , _gnrNegotiations :: !(Maybe [NegotiationDTO])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetNegotiationsResponse' with the minimum fields required to make a request.
 --
@@ -1246,7 +1321,7 @@ data Budget = Budget
     , _bAccountId    :: !(Maybe Int64)
     , _bId           :: !(Maybe Text)
     , _bBillingId    :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Budget' with the minimum fields required to make a request.
 --
@@ -1333,7 +1408,7 @@ instance ToJSON Budget where
 -- /See:/ 'getFinalizedNegotiationByExternalDealIdRequest' smart constructor.
 newtype GetFinalizedNegotiationByExternalDealIdRequest = GetFinalizedNegotiationByExternalDealIdRequest
     { _gfnbedirIncludePrivateAuctions :: Maybe Bool
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetFinalizedNegotiationByExternalDealIdRequest' with the minimum fields required to make a request.
 --
@@ -1373,29 +1448,29 @@ instance ToJSON
 --
 -- /See:/ 'privateData' smart constructor.
 data PrivateData = PrivateData
-    { _pdReferencePayLoad :: !(Maybe Word8)
+    { _pdReferencePayload :: !(Maybe Word8)
     , _pdReferenceId      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PrivateData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pdReferencePayLoad'
+-- * 'pdReferencePayload'
 --
 -- * 'pdReferenceId'
 privateData
     :: PrivateData
 privateData =
     PrivateData
-    { _pdReferencePayLoad = Nothing
+    { _pdReferencePayload = Nothing
     , _pdReferenceId = Nothing
     }
 
-pdReferencePayLoad :: Lens' PrivateData (Maybe Word8)
-pdReferencePayLoad
-  = lens _pdReferencePayLoad
-      (\ s a -> s{_pdReferencePayLoad = a})
+pdReferencePayload :: Lens' PrivateData (Maybe Word8)
+pdReferencePayload
+  = lens _pdReferencePayload
+      (\ s a -> s{_pdReferencePayload = a})
 
 pdReferenceId :: Lens' PrivateData (Maybe Text)
 pdReferenceId
@@ -1413,7 +1488,7 @@ instance ToJSON PrivateData where
         toJSON PrivateData{..}
           = object
               (catMaybes
-                 [("referencePayload" .=) <$> _pdReferencePayLoad,
+                 [("referencePayload" .=) <$> _pdReferencePayload,
                   ("referenceId" .=) <$> _pdReferenceId])
 
 --
@@ -1421,7 +1496,7 @@ instance ToJSON PrivateData where
 data AdSize = AdSize
     { _asHeight :: !(Maybe Int32)
     , _asWidth  :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdSize' with the minimum fields required to make a request.
 --
@@ -1462,7 +1537,7 @@ instance ToJSON AdSize where
 data RuleKeyValuePair = RuleKeyValuePair
     { _rkvpKeyName :: !(Maybe Text)
     , _rkvpValue   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RuleKeyValuePair' with the minimum fields required to make a request.
 --
@@ -1505,7 +1580,7 @@ instance ToJSON RuleKeyValuePair where
 -- /See:/ 'getOrdersResponse' smart constructor.
 newtype GetOrdersResponse = GetOrdersResponse
     { _gorOrders :: Maybe [MarketplaceOrder]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetOrdersResponse' with the minimum fields required to make a request.
 --
@@ -1543,7 +1618,7 @@ instance ToJSON GetOrdersResponse where
 data AccountsList = AccountsList
     { _alKind  :: !Text
     , _alItems :: !(Maybe [Account])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
 --
@@ -1586,62 +1661,78 @@ instance ToJSON AccountsList where
                   ("items" .=) <$> _alItems])
 
 --
--- /See:/ 'creativeServingRestrictionsDisapprovalReasons' smart constructor.
-data CreativeServingRestrictionsDisapprovalReasons = CreativeServingRestrictionsDisapprovalReasons
-    { _csrdrReason  :: !(Maybe Text)
-    , _csrdrDetails :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'servingRestrictionsItem' smart constructor.
+data ServingRestrictionsItem = ServingRestrictionsItem
+    { _sriContexts           :: !(Maybe [ContextsItem])
+    , _sriReason             :: !(Maybe Text)
+    , _sriDisapprovalReasons :: !(Maybe [DisapprovalReasonsItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CreativeServingRestrictionsDisapprovalReasons' with the minimum fields required to make a request.
+-- | Creates a value of 'ServingRestrictionsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'csrdrReason'
+-- * 'sriContexts'
 --
--- * 'csrdrDetails'
-creativeServingRestrictionsDisapprovalReasons
-    :: CreativeServingRestrictionsDisapprovalReasons
-creativeServingRestrictionsDisapprovalReasons =
-    CreativeServingRestrictionsDisapprovalReasons
-    { _csrdrReason = Nothing
-    , _csrdrDetails = Nothing
+-- * 'sriReason'
+--
+-- * 'sriDisapprovalReasons'
+servingRestrictionsItem
+    :: ServingRestrictionsItem
+servingRestrictionsItem =
+    ServingRestrictionsItem
+    { _sriContexts = Nothing
+    , _sriReason = Nothing
+    , _sriDisapprovalReasons = Nothing
     }
 
--- | The categorized reason for disapproval.
-csrdrReason :: Lens' CreativeServingRestrictionsDisapprovalReasons (Maybe Text)
-csrdrReason
-  = lens _csrdrReason (\ s a -> s{_csrdrReason = a})
+-- | All known contexts\/restrictions.
+sriContexts :: Lens' ServingRestrictionsItem [ContextsItem]
+sriContexts
+  = lens _sriContexts (\ s a -> s{_sriContexts = a}) .
+      _Default
+      . _Coerce
 
--- | Additional details about the reason for disapproval.
-csrdrDetails :: Lens' CreativeServingRestrictionsDisapprovalReasons [Text]
-csrdrDetails
-  = lens _csrdrDetails (\ s a -> s{_csrdrDetails = a})
+-- | Why the creative is ineligible to serve in this context (e.g., it has
+-- been explicitly disapproved or is pending review).
+sriReason :: Lens' ServingRestrictionsItem (Maybe Text)
+sriReason
+  = lens _sriReason (\ s a -> s{_sriReason = a})
+
+-- | The reasons for disapproval within this restriction, if any. Note that
+-- not all disapproval reasons may be categorized, so it is possible for
+-- the creative to have a status of DISAPPROVED or CONDITIONALLY_APPROVED
+-- with an empty list for disapproval_reasons. In this case, please reach
+-- out to your TAM to help debug the issue.
+sriDisapprovalReasons :: Lens' ServingRestrictionsItem [DisapprovalReasonsItem]
+sriDisapprovalReasons
+  = lens _sriDisapprovalReasons
+      (\ s a -> s{_sriDisapprovalReasons = a})
       . _Default
       . _Coerce
 
-instance FromJSON
-         CreativeServingRestrictionsDisapprovalReasons where
+instance FromJSON ServingRestrictionsItem where
         parseJSON
-          = withObject
-              "CreativeServingRestrictionsDisapprovalReasons"
+          = withObject "ServingRestrictionsItem"
               (\ o ->
-                 CreativeServingRestrictionsDisapprovalReasons <$>
-                   (o .:? "reason") <*> (o .:? "details" .!= mempty))
+                 ServingRestrictionsItem <$>
+                   (o .:? "contexts" .!= mempty) <*> (o .:? "reason")
+                     <*> (o .:? "disapprovalReasons" .!= mempty))
 
-instance ToJSON
-         CreativeServingRestrictionsDisapprovalReasons where
-        toJSON
-          CreativeServingRestrictionsDisapprovalReasons{..}
+instance ToJSON ServingRestrictionsItem where
+        toJSON ServingRestrictionsItem{..}
           = object
               (catMaybes
-                 [("reason" .=) <$> _csrdrReason,
-                  ("details" .=) <$> _csrdrDetails])
+                 [("contexts" .=) <$> _sriContexts,
+                  ("reason" .=) <$> _sriReason,
+                  ("disapprovalReasons" .=) <$>
+                    _sriDisapprovalReasons])
 
 --
 -- /See:/ 'getOrderNotesResponse' smart constructor.
 newtype GetOrderNotesResponse = GetOrderNotesResponse
     { _gonrNotes :: Maybe [MarketplaceNote]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetOrderNotesResponse' with the minimum fields required to make a request.
 --
@@ -1677,7 +1768,7 @@ instance ToJSON GetOrderNotesResponse where
 data CreateOrdersRequest = CreateOrdersRequest
     { _cWebPropertyCode :: !(Maybe Text)
     , _cOrders          :: !(Maybe [MarketplaceOrder])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreateOrdersRequest' with the minimum fields required to make a request.
 --
@@ -1732,7 +1823,7 @@ instance ToJSON CreateOrdersRequest where
 data PricePerBuyer = PricePerBuyer
     { _ppbPrice :: !(Maybe Price)
     , _ppbBuyer :: !(Maybe Buyer)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PricePerBuyer' with the minimum fields required to make a request.
 --
@@ -1781,7 +1872,7 @@ data TargetingValueDayPartTargetingDayPart = TargetingValueDayPartTargetingDayPa
     , _tvdptdpStartMinute :: !(Maybe Int32)
     , _tvdptdpDayOfWeek   :: !(Maybe Text)
     , _tvdptdpEndMinute   :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetingValueDayPartTargetingDayPart' with the minimum fields required to make a request.
 --
@@ -1859,7 +1950,7 @@ instance ToJSON TargetingValueDayPartTargetingDayPart
 data DeliveryControl = DeliveryControl
     { _dcFrequencyCaps    :: !(Maybe [DeliveryControlFrequencyCap])
     , _dcDeliveryRateType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeliveryControl' with the minimum fields required to make a request.
 --
@@ -1908,12 +1999,12 @@ instance ToJSON DeliveryControl where
 -- /See:/ 'creative' smart constructor.
 data Creative = Creative
     { _cAttribute             :: !(Maybe [Int32])
-    , _cNATiveAd              :: !(Maybe CreativeNATiveAd)
+    , _cNATiveAd              :: !(Maybe NATiveAd)
     , _cHeight                :: !(Maybe Int32)
     , _cBuyerCreativeId       :: !(Maybe Text)
     , _cAdvertiserName        :: !(Maybe Text)
     , _cAgencyId              :: !(Maybe Int64)
-    , _cCorrections           :: !(Maybe [CreativeCorrections])
+    , _cCorrections           :: !(Maybe [CorrectionsItem])
     , _cProductCategories     :: !(Maybe [Int32])
     , _cKind                  :: !Text
     , _cHTMLSnippet           :: !(Maybe Text)
@@ -1925,14 +2016,14 @@ data Creative = Creative
     , _cVendorType            :: !(Maybe [Int32])
     , _cAccountId             :: !(Maybe Int32)
     , _cImpressionTrackingURL :: !(Maybe [Text])
-    , _cFilteringReasons      :: !(Maybe CreativeFilteringReasons)
+    , _cFilteringReasons      :: !(Maybe FilteringReasons)
     , _cVersion               :: !(Maybe Int32)
     , _cSensitiveCategories   :: !(Maybe [Int32])
     , _cVideoURL              :: !(Maybe Text)
     , _cAPIUploadTimestamp    :: !(Maybe DateTime')
-    , _cServingRestrictions   :: !(Maybe [CreativeServingRestrictions])
+    , _cServingRestrictions   :: !(Maybe [ServingRestrictionsItem])
     , _cOpenAuctionStatus     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Creative' with the minimum fields required to make a request.
 --
@@ -2026,7 +2117,7 @@ cAttribute
       . _Coerce
 
 -- | If nativeAd is set, HTMLSnippet and videoURL should not be set.
-cNATiveAd :: Lens' Creative (Maybe CreativeNATiveAd)
+cNATiveAd :: Lens' Creative (Maybe NATiveAd)
 cNATiveAd
   = lens _cNATiveAd (\ s a -> s{_cNATiveAd = a})
 
@@ -2053,7 +2144,7 @@ cAgencyId
 
 -- | Shows any corrections that were applied to this creative. Read-only.
 -- This field should not be set in requests.
-cCorrections :: Lens' Creative [CreativeCorrections]
+cCorrections :: Lens' Creative [CorrectionsItem]
 cCorrections
   = lens _cCorrections (\ s a -> s{_cCorrections = a})
       . _Default
@@ -2139,7 +2230,7 @@ cImpressionTrackingURL
 
 -- | The filtering reasons for the creative. Read-only. This field should not
 -- be set in requests.
-cFilteringReasons :: Lens' Creative (Maybe CreativeFilteringReasons)
+cFilteringReasons :: Lens' Creative (Maybe FilteringReasons)
 cFilteringReasons
   = lens _cFilteringReasons
       (\ s a -> s{_cFilteringReasons = a})
@@ -2176,7 +2267,7 @@ cAPIUploadTimestamp
 -- relates to where something ultimately serves (for example, a physical
 -- location, a platform, an HTTPS vs HTTP request, or the type of auction).
 -- Read-only. This field should not be set in requests.
-cServingRestrictions :: Lens' Creative [CreativeServingRestrictions]
+cServingRestrictions :: Lens' Creative [ServingRestrictionsItem]
 cServingRestrictions
   = lens _cServingRestrictions
       (\ s a -> s{_cServingRestrictions = a})
@@ -2260,7 +2351,7 @@ instance ToJSON Creative where
 data AddOrderDealsResponse = AddOrderDealsResponse
     { _aodrDeals               :: !(Maybe [MarketplaceDeal])
     , _aodrOrderRevisionNumber :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddOrderDealsResponse' with the minimum fields required to make a request.
 --
@@ -2311,7 +2402,7 @@ instance ToJSON AddOrderDealsResponse where
 data PretargetingConfigList = PretargetingConfigList
     { _pclKind  :: !Text
     , _pclItems :: !(Maybe [PretargetingConfig])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigList' with the minimum fields required to make a request.
 --
@@ -2356,53 +2447,6 @@ instance ToJSON PretargetingConfigList where
                   ("items" .=) <$> _pclItems])
 
 --
--- /See:/ 'creativeCorrections' smart constructor.
-data CreativeCorrections = CreativeCorrections
-    { _ccReason  :: !(Maybe Text)
-    , _ccDetails :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CreativeCorrections' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ccReason'
---
--- * 'ccDetails'
-creativeCorrections
-    :: CreativeCorrections
-creativeCorrections =
-    CreativeCorrections
-    { _ccReason = Nothing
-    , _ccDetails = Nothing
-    }
-
--- | The type of correction that was applied to the creative.
-ccReason :: Lens' CreativeCorrections (Maybe Text)
-ccReason = lens _ccReason (\ s a -> s{_ccReason = a})
-
--- | Additional details about the correction.
-ccDetails :: Lens' CreativeCorrections [Text]
-ccDetails
-  = lens _ccDetails (\ s a -> s{_ccDetails = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON CreativeCorrections where
-        parseJSON
-          = withObject "CreativeCorrections"
-              (\ o ->
-                 CreativeCorrections <$>
-                   (o .:? "reason") <*> (o .:? "details" .!= mempty))
-
-instance ToJSON CreativeCorrections where
-        toJSON CreativeCorrections{..}
-          = object
-              (catMaybes
-                 [("reason" .=) <$> _ccReason,
-                  ("details" .=) <$> _ccDetails])
-
---
 -- /See:/ 'buyerDTO' smart constructor.
 data BuyerDTO = BuyerDTO
     { _buySponsorAccountId                 :: !(Maybe Int32)
@@ -2412,7 +2456,7 @@ data BuyerDTO = BuyerDTO
     , _buyAccountId                        :: !(Maybe Int32)
     , _buyDisplayName                      :: !(Maybe Text)
     , _buyId                               :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BuyerDTO' with the minimum fields required to make a request.
 --
@@ -2508,7 +2552,7 @@ instance ToJSON BuyerDTO where
 -- /See:/ 'dealTermsNonGuaranteedFixedPriceTerms' smart constructor.
 newtype DealTermsNonGuaranteedFixedPriceTerms = DealTermsNonGuaranteedFixedPriceTerms
     { _dtngfptFixedPrices :: Maybe [PricePerBuyer]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DealTermsNonGuaranteedFixedPriceTerms' with the minimum fields required to make a request.
 --
@@ -2554,7 +2598,7 @@ data AdSlotDTO = AdSlotDTO
     , _asdtoChannelId     :: !(Maybe Int32)
     , _asdtoName          :: !(Maybe Text)
     , _asdtoDescription   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdSlotDTO' with the minimum fields required to make a request.
 --
@@ -2659,7 +2703,7 @@ data PerformanceReport = PerformanceReport
     , _prTimestamp               :: !(Maybe Int64)
     , _prPixelMatchRequests      :: !(Maybe Double)
     , _prOutOfQuota              :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PerformanceReport' with the minimum fields required to make a request.
 --
@@ -2954,8 +2998,8 @@ data Account = Account
     , _aCookieMatchingNid      :: !(Maybe Text)
     , _aNumberActiveCreatives  :: !(Maybe Int32)
     , _aId                     :: !(Maybe Int32)
-    , _aBidderLocation         :: !(Maybe [AccountBidderLocation])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _aBidderLocation         :: !(Maybe [BidderLocationItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
@@ -3036,7 +3080,7 @@ aId :: Lens' Account (Maybe Int32)
 aId = lens _aId (\ s a -> s{_aId = a})
 
 -- | Your bidder locations that have distinct URLs.
-aBidderLocation :: Lens' Account [AccountBidderLocation]
+aBidderLocation :: Lens' Account [BidderLocationItem]
 aBidderLocation
   = lens _aBidderLocation
       (\ s a -> s{_aBidderLocation = a})
@@ -3077,7 +3121,7 @@ instance ToJSON Account where
 data Seller = Seller
     { _sAccountId    :: !(Maybe Text)
     , _sSubAccountId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Seller' with the minimum fields required to make a request.
 --
@@ -3126,7 +3170,7 @@ data DeleteOrderDealsRequest = DeleteOrderDealsRequest
     { _dodrUpdateAction        :: !(Maybe Text)
     , _dodrDealIds             :: !(Maybe [Text])
     , _dodrOrderRevisionNumber :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeleteOrderDealsRequest' with the minimum fields required to make a request.
 --
@@ -3183,114 +3227,10 @@ instance ToJSON DeleteOrderDealsRequest where
                     _dodrOrderRevisionNumber])
 
 --
--- /See:/ 'pretargetingConfigExcludedPlacements' smart constructor.
-data PretargetingConfigExcludedPlacements = PretargetingConfigExcludedPlacements
-    { _pcepToken :: !(Maybe Text)
-    , _pcepType  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PretargetingConfigExcludedPlacements' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pcepToken'
---
--- * 'pcepType'
-pretargetingConfigExcludedPlacements
-    :: PretargetingConfigExcludedPlacements
-pretargetingConfigExcludedPlacements =
-    PretargetingConfigExcludedPlacements
-    { _pcepToken = Nothing
-    , _pcepType = Nothing
-    }
-
--- | The value of the placement. Interpretation depends on the placement
--- type, e.g. URL for a site placement, channel name for a channel
--- placement, app id for a mobile app placement.
-pcepToken :: Lens' PretargetingConfigExcludedPlacements (Maybe Text)
-pcepToken
-  = lens _pcepToken (\ s a -> s{_pcepToken = a})
-
--- | The type of the placement.
-pcepType :: Lens' PretargetingConfigExcludedPlacements (Maybe Text)
-pcepType = lens _pcepType (\ s a -> s{_pcepType = a})
-
-instance FromJSON
-         PretargetingConfigExcludedPlacements where
-        parseJSON
-          = withObject "PretargetingConfigExcludedPlacements"
-              (\ o ->
-                 PretargetingConfigExcludedPlacements <$>
-                   (o .:? "token") <*> (o .:? "type"))
-
-instance ToJSON PretargetingConfigExcludedPlacements
-         where
-        toJSON PretargetingConfigExcludedPlacements{..}
-          = object
-              (catMaybes
-                 [("token" .=) <$> _pcepToken,
-                  ("type" .=) <$> _pcepType])
-
--- | A smaller image, for the advertiser logo.
---
--- /See:/ 'creativeNATiveAdLogo' smart constructor.
-data CreativeNATiveAdLogo = CreativeNATiveAdLogo
-    { _cnatalHeight :: !(Maybe Int32)
-    , _cnatalURL    :: !(Maybe Text)
-    , _cnatalWidth  :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CreativeNATiveAdLogo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cnatalHeight'
---
--- * 'cnatalURL'
---
--- * 'cnatalWidth'
-creativeNATiveAdLogo
-    :: CreativeNATiveAdLogo
-creativeNATiveAdLogo =
-    CreativeNATiveAdLogo
-    { _cnatalHeight = Nothing
-    , _cnatalURL = Nothing
-    , _cnatalWidth = Nothing
-    }
-
-cnatalHeight :: Lens' CreativeNATiveAdLogo (Maybe Int32)
-cnatalHeight
-  = lens _cnatalHeight (\ s a -> s{_cnatalHeight = a})
-
-cnatalURL :: Lens' CreativeNATiveAdLogo (Maybe Text)
-cnatalURL
-  = lens _cnatalURL (\ s a -> s{_cnatalURL = a})
-
-cnatalWidth :: Lens' CreativeNATiveAdLogo (Maybe Int32)
-cnatalWidth
-  = lens _cnatalWidth (\ s a -> s{_cnatalWidth = a})
-
-instance FromJSON CreativeNATiveAdLogo where
-        parseJSON
-          = withObject "CreativeNATiveAdLogo"
-              (\ o ->
-                 CreativeNATiveAdLogo <$>
-                   (o .:? "height") <*> (o .:? "url") <*>
-                     (o .:? "width"))
-
-instance ToJSON CreativeNATiveAdLogo where
-        toJSON CreativeNATiveAdLogo{..}
-          = object
-              (catMaybes
-                 [("height" .=) <$> _cnatalHeight,
-                  ("url" .=) <$> _cnatalURL,
-                  ("width" .=) <$> _cnatalWidth])
-
---
 -- /See:/ 'getOrderDealsResponse' smart constructor.
 newtype GetOrderDealsResponse = GetOrderDealsResponse
     { _godrDeals :: Maybe [MarketplaceDeal]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetOrderDealsResponse' with the minimum fields required to make a request.
 --
@@ -3321,62 +3261,12 @@ instance ToJSON GetOrderDealsResponse where
         toJSON GetOrderDealsResponse{..}
           = object (catMaybes [("deals" .=) <$> _godrDeals])
 
--- | The filtering reasons for the creative. Read-only. This field should not
--- be set in requests.
---
--- /See:/ 'creativeFilteringReasons' smart constructor.
-data CreativeFilteringReasons = CreativeFilteringReasons
-    { _cfrReasons :: !(Maybe [CreativeFilteringReasonsReasons])
-    , _cfrDate    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CreativeFilteringReasons' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cfrReasons'
---
--- * 'cfrDate'
-creativeFilteringReasons
-    :: CreativeFilteringReasons
-creativeFilteringReasons =
-    CreativeFilteringReasons
-    { _cfrReasons = Nothing
-    , _cfrDate = Nothing
-    }
-
--- | The filtering reasons.
-cfrReasons :: Lens' CreativeFilteringReasons [CreativeFilteringReasonsReasons]
-cfrReasons
-  = lens _cfrReasons (\ s a -> s{_cfrReasons = a}) .
-      _Default
-      . _Coerce
-
--- | The date in ISO 8601 format for the data. The data is collected from
--- 00:00:00 to 23:59:59 in PST.
-cfrDate :: Lens' CreativeFilteringReasons (Maybe Text)
-cfrDate = lens _cfrDate (\ s a -> s{_cfrDate = a})
-
-instance FromJSON CreativeFilteringReasons where
-        parseJSON
-          = withObject "CreativeFilteringReasons"
-              (\ o ->
-                 CreativeFilteringReasons <$>
-                   (o .:? "reasons" .!= mempty) <*> (o .:? "date"))
-
-instance ToJSON CreativeFilteringReasons where
-        toJSON CreativeFilteringReasons{..}
-          = object
-              (catMaybes
-                 [("reasons" .=) <$> _cfrReasons,
-                  ("date" .=) <$> _cfrDate])
-
 --
 -- /See:/ 'contactInformation' smart constructor.
 data ContactInformation = ContactInformation
     { _ciEmail :: !(Maybe Text)
     , _ciName  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContactInformation' with the minimum fields required to make a request.
 --
@@ -3420,7 +3310,7 @@ data TargetingValueCreativeSize = TargetingValueCreativeSize
     { _tvcsSize             :: !(Maybe TargetingValueSize)
     , _tvcsCompanionSizes   :: !(Maybe [TargetingValueSize])
     , _tvcsCreativeSizeType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetingValueCreativeSize' with the minimum fields required to make a request.
 --
@@ -3485,23 +3375,23 @@ data PretargetingConfig = PretargetingConfig
     , _pcSupportedCreativeAttributes   :: !(Maybe [Int64])
     , _pcUserLists                     :: !(Maybe [Int64])
     , _pcKind                          :: !Text
-    , _pcExcludedPlacements            :: !(Maybe [PretargetingConfigExcludedPlacements])
+    , _pcExcludedPlacements            :: !(Maybe [ExcludedPlacementsItem])
     , _pcMobileDevices                 :: !(Maybe [Int64])
     , _pcLanguages                     :: !(Maybe [Text])
     , _pcVerticals                     :: !(Maybe [Int64])
     , _pcConfigId                      :: !(Maybe Int64)
-    , _pcPlacements                    :: !(Maybe [PretargetingConfigPlacements])
+    , _pcPlacements                    :: !(Maybe [PlacementsItem])
     , _pcExcludedUserLists             :: !(Maybe [Int64])
     , _pcConfigName                    :: !(Maybe Text)
     , _pcGeoCriteriaIds                :: !(Maybe [Int64])
-    , _pcDimensions                    :: !(Maybe [PretargetingConfigDimensions])
+    , _pcDimensions                    :: !(Maybe [DimensionsItem])
     , _pcExcludedVerticals             :: !(Maybe [Int64])
     , _pcCreativeType                  :: !(Maybe [Text])
     , _pcIsActive                      :: !(Maybe Bool)
     , _pcExcludedContentLabels         :: !(Maybe [Int64])
     , _pcBillingId                     :: !(Maybe Int64)
     , _pcMobileOperatingSystemVersions :: !(Maybe [Int64])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfig' with the minimum fields required to make a request.
 --
@@ -3639,7 +3529,7 @@ pcKind :: Lens' PretargetingConfig Text
 pcKind = lens _pcKind (\ s a -> s{_pcKind = a})
 
 -- | Requests containing any of these placements will not match.
-pcExcludedPlacements :: Lens' PretargetingConfig [PretargetingConfigExcludedPlacements]
+pcExcludedPlacements :: Lens' PretargetingConfig [ExcludedPlacementsItem]
 pcExcludedPlacements
   = lens _pcExcludedPlacements
       (\ s a -> s{_pcExcludedPlacements = a})
@@ -3676,7 +3566,7 @@ pcConfigId
   = lens _pcConfigId (\ s a -> s{_pcConfigId = a})
 
 -- | Requests containing any of these placements will match.
-pcPlacements :: Lens' PretargetingConfig [PretargetingConfigPlacements]
+pcPlacements :: Lens' PretargetingConfig [PlacementsItem]
 pcPlacements
   = lens _pcPlacements (\ s a -> s{_pcPlacements = a})
       . _Default
@@ -3705,7 +3595,7 @@ pcGeoCriteriaIds
 
 -- | Requests which allow one of these (width, height) pairs will match. All
 -- pairs must be supported ad dimensions.
-pcDimensions :: Lens' PretargetingConfig [PretargetingConfigDimensions]
+pcDimensions :: Lens' PretargetingConfig [DimensionsItem]
 pcDimensions
   = lens _pcDimensions (\ s a -> s{_pcDimensions = a})
       . _Default
@@ -3831,7 +3721,7 @@ instance ToJSON PretargetingConfig where
 data PerformanceReportList = PerformanceReportList
     { _prlKind              :: !Text
     , _prlPerformanceReport :: !(Maybe [PerformanceReport])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PerformanceReportList' with the minimum fields required to make a request.
 --
@@ -3894,7 +3784,7 @@ data NegotiationDTO = NegotiationDTO
     , _ndtoNegotiationId       :: !(Maybe Int64)
     , _ndtoSellerEmailContacts :: !(Maybe [Text])
     , _ndtoBuyer               :: !(Maybe DealPartyDTO)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationDTO' with the minimum fields required to make a request.
 --
@@ -4089,7 +3979,7 @@ data AudienceSegment = AudienceSegment
     , _asName        :: !(Maybe Text)
     , _asId          :: !(Maybe Int64)
     , _asDescription :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AudienceSegment' with the minimum fields required to make a request.
 --
@@ -4161,7 +4051,7 @@ data OfferDTO = OfferDTO
     , _odtoClosedToDealParties :: !(Maybe [DealPartyDTO])
     , _odtoAnonymous           :: !(Maybe Bool)
     , _odtoIsOpen              :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OfferDTO' with the minimum fields required to make a request.
 --
@@ -4343,7 +4233,7 @@ instance ToJSON OfferDTO where
 data TargetingValueSize = TargetingValueSize
     { _tvsHeight :: !(Maybe Int32)
     , _tvsWidth  :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetingValueSize' with the minimum fields required to make a request.
 --
@@ -4383,6 +4273,56 @@ instance ToJSON TargetingValueSize where
                  [("height" .=) <$> _tvsHeight,
                   ("width" .=) <$> _tvsWidth])
 
+-- | The filtering reasons for the creative. Read-only. This field should not
+-- be set in requests.
+--
+-- /See:/ 'filteringReasons' smart constructor.
+data FilteringReasons = FilteringReasons
+    { _frReasons :: !(Maybe [ReasonsItem])
+    , _frDate    :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FilteringReasons' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'frReasons'
+--
+-- * 'frDate'
+filteringReasons
+    :: FilteringReasons
+filteringReasons =
+    FilteringReasons
+    { _frReasons = Nothing
+    , _frDate = Nothing
+    }
+
+-- | The filtering reasons.
+frReasons :: Lens' FilteringReasons [ReasonsItem]
+frReasons
+  = lens _frReasons (\ s a -> s{_frReasons = a}) .
+      _Default
+      . _Coerce
+
+-- | The date in ISO 8601 format for the data. The data is collected from
+-- 00:00:00 to 23:59:59 in PST.
+frDate :: Lens' FilteringReasons (Maybe Text)
+frDate = lens _frDate (\ s a -> s{_frDate = a})
+
+instance FromJSON FilteringReasons where
+        parseJSON
+          = withObject "FilteringReasons"
+              (\ o ->
+                 FilteringReasons <$>
+                   (o .:? "reasons" .!= mempty) <*> (o .:? "date"))
+
+instance ToJSON FilteringReasons where
+        toJSON FilteringReasons{..}
+          = object
+              (catMaybes
+                 [("reasons" .=) <$> _frReasons,
+                  ("date" .=) <$> _frDate])
+
 -- | An offer is segment of inventory that a seller wishes to sell. It is
 -- associated with certain terms and targeting information which helps
 -- buyer know more about the inventory. Each field in an order can have one
@@ -4410,7 +4350,7 @@ data MarketplaceOffer = MarketplaceOffer
     , _moCreatorContacts     :: !(Maybe [ContactInformation])
     , _moOfferId             :: !(Maybe Text)
     , _moLabels              :: !(Maybe [MarketplaceLabel])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceOffer' with the minimum fields required to make a request.
 --
@@ -4629,7 +4569,7 @@ data GetNegotiationsRequest = GetNegotiationsRequest
     { _gnrSinceTimestampMillis   :: !(Maybe Int64)
     , _gnrFinalized              :: !(Maybe Bool)
     , _gnrIncludePrivateAuctions :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetNegotiationsRequest' with the minimum fields required to make a request.
 --
@@ -4689,7 +4629,7 @@ instance ToJSON GetNegotiationsRequest where
 data BillingInfoList = BillingInfoList
     { _bilKind  :: !Text
     , _bilItems :: !(Maybe [BillingInfo])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BillingInfoList' with the minimum fields required to make a request.
 --
@@ -4736,7 +4676,7 @@ instance ToJSON BillingInfoList where
 -- /See:/ 'addOrderNotesResponse' smart constructor.
 newtype AddOrderNotesResponse = AddOrderNotesResponse
     { _aNotes :: Maybe [MarketplaceNote]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddOrderNotesResponse' with the minimum fields required to make a request.
 --
@@ -4770,7 +4710,7 @@ instance ToJSON AddOrderNotesResponse where
 data MoneyDTO = MoneyDTO
     { _mdtoCurrencyCode :: !(Maybe Text)
     , _mdtoMicros       :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MoneyDTO' with the minimum fields required to make a request.
 --
@@ -4814,7 +4754,7 @@ instance ToJSON MoneyDTO where
 -- /See:/ 'listClientAccessCapabilitiesResponse' smart constructor.
 newtype ListClientAccessCapabilitiesResponse = ListClientAccessCapabilitiesResponse
     { _lcacrClientAccessPermissions :: Maybe [ClientAccessCapabilities]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListClientAccessCapabilitiesResponse' with the minimum fields required to make a request.
 --
@@ -4855,7 +4795,7 @@ instance ToJSON ListClientAccessCapabilitiesResponse
 -- /See:/ 'getNegotiationByIdRequest' smart constructor.
 newtype GetNegotiationByIdRequest = GetNegotiationByIdRequest
     { _gnbirIncludePrivateAuctions :: Maybe Bool
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetNegotiationByIdRequest' with the minimum fields required to make a request.
 --
@@ -4893,7 +4833,7 @@ instance ToJSON GetNegotiationByIdRequest where
 data ListOffersResponse = ListOffersResponse
     { _lorKind   :: !Text
     , _lorOffers :: !(Maybe [OfferDTO])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListOffersResponse' with the minimum fields required to make a request.
 --
@@ -4935,13 +4875,64 @@ instance ToJSON ListOffersResponse where
                   ("offers" .=) <$> _lorOffers])
 
 --
+-- /See:/ 'reasonsItem' smart constructor.
+data ReasonsItem = ReasonsItem
+    { _riFilteringStatus :: !(Maybe Int32)
+    , _riFilteringCount  :: !(Maybe Int64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReasonsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'riFilteringStatus'
+--
+-- * 'riFilteringCount'
+reasonsItem
+    :: ReasonsItem
+reasonsItem =
+    ReasonsItem
+    { _riFilteringStatus = Nothing
+    , _riFilteringCount = Nothing
+    }
+
+-- | The filtering status code. Please refer to the creative-status-codes.txt
+-- file for different statuses.
+riFilteringStatus :: Lens' ReasonsItem (Maybe Int32)
+riFilteringStatus
+  = lens _riFilteringStatus
+      (\ s a -> s{_riFilteringStatus = a})
+
+-- | The number of times the creative was filtered for the status. The count
+-- is aggregated across all publishers on the exchange.
+riFilteringCount :: Lens' ReasonsItem (Maybe Int64)
+riFilteringCount
+  = lens _riFilteringCount
+      (\ s a -> s{_riFilteringCount = a})
+
+instance FromJSON ReasonsItem where
+        parseJSON
+          = withObject "ReasonsItem"
+              (\ o ->
+                 ReasonsItem <$>
+                   (o .:? "filteringStatus") <*>
+                     (o .:? "filteringCount"))
+
+instance ToJSON ReasonsItem where
+        toJSON ReasonsItem{..}
+          = object
+              (catMaybes
+                 [("filteringStatus" .=) <$> _riFilteringStatus,
+                  ("filteringCount" .=) <$> _riFilteringCount])
+
+--
 -- /See:/ 'advertiserDTO' smart constructor.
 data AdvertiserDTO = AdvertiserDTO
     { _adtoStatus :: !(Maybe Text)
     , _adtoBrands :: !(Maybe [BrandDTO])
     , _adtoName   :: !(Maybe Text)
     , _adtoId     :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserDTO' with the minimum fields required to make a request.
 --
@@ -5004,7 +4995,7 @@ data TargetingValue = TargetingValue
     , _tvStringValue           :: !(Maybe Text)
     , _tvLongValue             :: !(Maybe Int64)
     , _tvDayPartTargetingValue :: !(Maybe TargetingValueDayPartTargeting)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetingValue' with the minimum fields required to make a request.
 --
@@ -5075,7 +5066,7 @@ instance ToJSON TargetingValue where
 data Price = Price
     { _pCurrencyCode :: !(Maybe Text)
     , _pAmountMicros :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Price' with the minimum fields required to make a request.
 --
@@ -5118,61 +5109,51 @@ instance ToJSON Price where
                  [("currencyCode" .=) <$> _pCurrencyCode,
                   ("amountMicros" .=) <$> _pAmountMicros])
 
--- | The app icon, for app download ads.
 --
--- /See:/ 'creativeNATiveAdAppIcon' smart constructor.
-data CreativeNATiveAdAppIcon = CreativeNATiveAdAppIcon
-    { _cnataaiHeight :: !(Maybe Int32)
-    , _cnataaiURL    :: !(Maybe Text)
-    , _cnataaiWidth  :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'excludedPlacementsItem' smart constructor.
+data ExcludedPlacementsItem = ExcludedPlacementsItem
+    { _epiToken :: !(Maybe Text)
+    , _epiType  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CreativeNATiveAdAppIcon' with the minimum fields required to make a request.
+-- | Creates a value of 'ExcludedPlacementsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cnataaiHeight'
+-- * 'epiToken'
 --
--- * 'cnataaiURL'
---
--- * 'cnataaiWidth'
-creativeNATiveAdAppIcon
-    :: CreativeNATiveAdAppIcon
-creativeNATiveAdAppIcon =
-    CreativeNATiveAdAppIcon
-    { _cnataaiHeight = Nothing
-    , _cnataaiURL = Nothing
-    , _cnataaiWidth = Nothing
+-- * 'epiType'
+excludedPlacementsItem
+    :: ExcludedPlacementsItem
+excludedPlacementsItem =
+    ExcludedPlacementsItem
+    { _epiToken = Nothing
+    , _epiType = Nothing
     }
 
-cnataaiHeight :: Lens' CreativeNATiveAdAppIcon (Maybe Int32)
-cnataaiHeight
-  = lens _cnataaiHeight
-      (\ s a -> s{_cnataaiHeight = a})
+-- | The value of the placement. Interpretation depends on the placement
+-- type, e.g. URL for a site placement, channel name for a channel
+-- placement, app id for a mobile app placement.
+epiToken :: Lens' ExcludedPlacementsItem (Maybe Text)
+epiToken = lens _epiToken (\ s a -> s{_epiToken = a})
 
-cnataaiURL :: Lens' CreativeNATiveAdAppIcon (Maybe Text)
-cnataaiURL
-  = lens _cnataaiURL (\ s a -> s{_cnataaiURL = a})
+-- | The type of the placement.
+epiType :: Lens' ExcludedPlacementsItem (Maybe Text)
+epiType = lens _epiType (\ s a -> s{_epiType = a})
 
-cnataaiWidth :: Lens' CreativeNATiveAdAppIcon (Maybe Int32)
-cnataaiWidth
-  = lens _cnataaiWidth (\ s a -> s{_cnataaiWidth = a})
-
-instance FromJSON CreativeNATiveAdAppIcon where
+instance FromJSON ExcludedPlacementsItem where
         parseJSON
-          = withObject "CreativeNATiveAdAppIcon"
+          = withObject "ExcludedPlacementsItem"
               (\ o ->
-                 CreativeNATiveAdAppIcon <$>
-                   (o .:? "height") <*> (o .:? "url") <*>
-                     (o .:? "width"))
+                 ExcludedPlacementsItem <$>
+                   (o .:? "token") <*> (o .:? "type"))
 
-instance ToJSON CreativeNATiveAdAppIcon where
-        toJSON CreativeNATiveAdAppIcon{..}
+instance ToJSON ExcludedPlacementsItem where
+        toJSON ExcludedPlacementsItem{..}
           = object
               (catMaybes
-                 [("height" .=) <$> _cnataaiHeight,
-                  ("url" .=) <$> _cnataaiURL,
-                  ("width" .=) <$> _cnataaiWidth])
+                 [("token" .=) <$> _epiToken,
+                  ("type" .=) <$> _epiType])
 
 --
 -- /See:/ 'editAllOrderDealsRequest' smart constructor.
@@ -5181,7 +5162,7 @@ data EditAllOrderDealsRequest = EditAllOrderDealsRequest
     , _eDeals               :: !(Maybe [MarketplaceDeal])
     , _eOrder               :: !(Maybe MarketplaceOrder)
     , _eOrderRevisionNumber :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditAllOrderDealsRequest' with the minimum fields required to make a request.
 --
@@ -5264,7 +5245,7 @@ data BillingInfo = BillingInfo
     , _biAccountName :: !(Maybe Text)
     , _biAccountId   :: !(Maybe Int32)
     , _biBillingId   :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BillingInfo' with the minimum fields required to make a request.
 --
@@ -5340,7 +5321,7 @@ data WebPropertyDTO = WebPropertyDTO
     , _wpdtoId                       :: !(Maybe Int32)
     , _wpdtoSiteURLs                 :: !(Maybe [Text])
     , _wpdtoAllowInterestTargetedAds :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebPropertyDTO' with the minimum fields required to make a request.
 --
@@ -5439,7 +5420,7 @@ instance ToJSON WebPropertyDTO where
 data TargetingValueDayPartTargeting = TargetingValueDayPartTargeting
     { _tvdptTimeZoneType :: !(Maybe Text)
     , _tvdptDayParts     :: !(Maybe [TargetingValueDayPartTargetingDayPart])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetingValueDayPartTargeting' with the minimum fields required to make a request.
 --
@@ -5488,7 +5469,7 @@ instance ToJSON TargetingValueDayPartTargeting where
 -- /See:/ 'listOffersRequest' smart constructor.
 newtype ListOffersRequest = ListOffersRequest
     { _lorSinceTimestampMillis :: Maybe Int64
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListOffersRequest' with the minimum fields required to make a request.
 --
@@ -5520,66 +5501,11 @@ instance ToJSON ListOffersRequest where
                  [("sinceTimestampMillis" .=) <$>
                     _lorSinceTimestampMillis])
 
--- | A large image.
---
--- /See:/ 'creativeNATiveAdImage' smart constructor.
-data CreativeNATiveAdImage = CreativeNATiveAdImage
-    { _cnataiHeight :: !(Maybe Int32)
-    , _cnataiURL    :: !(Maybe Text)
-    , _cnataiWidth  :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CreativeNATiveAdImage' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cnataiHeight'
---
--- * 'cnataiURL'
---
--- * 'cnataiWidth'
-creativeNATiveAdImage
-    :: CreativeNATiveAdImage
-creativeNATiveAdImage =
-    CreativeNATiveAdImage
-    { _cnataiHeight = Nothing
-    , _cnataiURL = Nothing
-    , _cnataiWidth = Nothing
-    }
-
-cnataiHeight :: Lens' CreativeNATiveAdImage (Maybe Int32)
-cnataiHeight
-  = lens _cnataiHeight (\ s a -> s{_cnataiHeight = a})
-
-cnataiURL :: Lens' CreativeNATiveAdImage (Maybe Text)
-cnataiURL
-  = lens _cnataiURL (\ s a -> s{_cnataiURL = a})
-
-cnataiWidth :: Lens' CreativeNATiveAdImage (Maybe Int32)
-cnataiWidth
-  = lens _cnataiWidth (\ s a -> s{_cnataiWidth = a})
-
-instance FromJSON CreativeNATiveAdImage where
-        parseJSON
-          = withObject "CreativeNATiveAdImage"
-              (\ o ->
-                 CreativeNATiveAdImage <$>
-                   (o .:? "height") <*> (o .:? "url") <*>
-                     (o .:? "width"))
-
-instance ToJSON CreativeNATiveAdImage where
-        toJSON CreativeNATiveAdImage{..}
-          = object
-              (catMaybes
-                 [("height" .=) <$> _cnataiHeight,
-                  ("url" .=) <$> _cnataiURL,
-                  ("width" .=) <$> _cnataiWidth])
-
 --
 -- /See:/ 'listClientAccessCapabilitiesRequest' smart constructor.
 newtype ListClientAccessCapabilitiesRequest = ListClientAccessCapabilitiesRequest
     { _lcacrSponsorAccountId :: Maybe Int64
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListClientAccessCapabilitiesRequest' with the minimum fields required to make a request.
 --
@@ -5652,7 +5578,7 @@ data InventorySegmentTargeting = InventorySegmentTargeting
     , _istPositiveInventorySlots          :: !(Maybe [Text])
     , _istNegativeMobileApps              :: !(Maybe [Text])
     , _istNegativeIcmInterests            :: !(Maybe [Int64])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InventorySegmentTargeting' with the minimum fields required to make a request.
 --
@@ -6137,7 +6063,7 @@ data SharedTargeting = SharedTargeting
     { _stKey        :: !(Maybe Text)
     , _stExclusions :: !(Maybe [TargetingValue])
     , _stInclusions :: !(Maybe [TargetingValue])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SharedTargeting' with the minimum fields required to make a request.
 --
@@ -6192,122 +6118,109 @@ instance ToJSON SharedTargeting where
                   ("inclusions" .=) <$> _stInclusions])
 
 --
--- /See:/ 'accountBidderLocation' smart constructor.
-data AccountBidderLocation = AccountBidderLocation
-    { _ablURL        :: !(Maybe Text)
-    , _ablMaximumQps :: !(Maybe Int32)
-    , _ablRegion     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'correctionsItem' smart constructor.
+data CorrectionsItem = CorrectionsItem
+    { _ciReason  :: !(Maybe Text)
+    , _ciDetails :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountBidderLocation' with the minimum fields required to make a request.
+-- | Creates a value of 'CorrectionsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ablURL'
+-- * 'ciReason'
 --
--- * 'ablMaximumQps'
---
--- * 'ablRegion'
-accountBidderLocation
-    :: AccountBidderLocation
-accountBidderLocation =
-    AccountBidderLocation
-    { _ablURL = Nothing
-    , _ablMaximumQps = Nothing
-    , _ablRegion = Nothing
+-- * 'ciDetails'
+correctionsItem
+    :: CorrectionsItem
+correctionsItem =
+    CorrectionsItem
+    { _ciReason = Nothing
+    , _ciDetails = Nothing
     }
 
--- | The URL to which the Ad Exchange will send bid requests.
-ablURL :: Lens' AccountBidderLocation (Maybe Text)
-ablURL = lens _ablURL (\ s a -> s{_ablURL = a})
+-- | The type of correction that was applied to the creative.
+ciReason :: Lens' CorrectionsItem (Maybe Text)
+ciReason = lens _ciReason (\ s a -> s{_ciReason = a})
 
--- | The maximum queries per second the Ad Exchange will send.
-ablMaximumQps :: Lens' AccountBidderLocation (Maybe Int32)
-ablMaximumQps
-  = lens _ablMaximumQps
-      (\ s a -> s{_ablMaximumQps = a})
+-- | Additional details about the correction.
+ciDetails :: Lens' CorrectionsItem [Text]
+ciDetails
+  = lens _ciDetails (\ s a -> s{_ciDetails = a}) .
+      _Default
+      . _Coerce
 
--- | The geographical region the Ad Exchange should send requests from. Only
--- used by some quota systems, but always setting the value is recommended.
--- Allowed values: - ASIA - EUROPE - US_EAST - US_WEST
-ablRegion :: Lens' AccountBidderLocation (Maybe Text)
-ablRegion
-  = lens _ablRegion (\ s a -> s{_ablRegion = a})
-
-instance FromJSON AccountBidderLocation where
+instance FromJSON CorrectionsItem where
         parseJSON
-          = withObject "AccountBidderLocation"
+          = withObject "CorrectionsItem"
               (\ o ->
-                 AccountBidderLocation <$>
-                   (o .:? "url") <*> (o .:? "maximumQps") <*>
-                     (o .:? "region"))
+                 CorrectionsItem <$>
+                   (o .:? "reason") <*> (o .:? "details" .!= mempty))
 
-instance ToJSON AccountBidderLocation where
-        toJSON AccountBidderLocation{..}
+instance ToJSON CorrectionsItem where
+        toJSON CorrectionsItem{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _ablURL,
-                  ("maximumQps" .=) <$> _ablMaximumQps,
-                  ("region" .=) <$> _ablRegion])
+                 [("reason" .=) <$> _ciReason,
+                  ("details" .=) <$> _ciDetails])
 
+-- | A smaller image, for the advertiser logo.
 --
--- /See:/ 'creativeFilteringReasonsReasons' smart constructor.
-data CreativeFilteringReasonsReasons = CreativeFilteringReasonsReasons
-    { _cfrrFilteringStatus :: !(Maybe Int32)
-    , _cfrrFilteringCount  :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'logo' smart constructor.
+data Logo = Logo
+    { _lHeight :: !(Maybe Int32)
+    , _lURL    :: !(Maybe Text)
+    , _lWidth  :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CreativeFilteringReasonsReasons' with the minimum fields required to make a request.
+-- | Creates a value of 'Logo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cfrrFilteringStatus'
+-- * 'lHeight'
 --
--- * 'cfrrFilteringCount'
-creativeFilteringReasonsReasons
-    :: CreativeFilteringReasonsReasons
-creativeFilteringReasonsReasons =
-    CreativeFilteringReasonsReasons
-    { _cfrrFilteringStatus = Nothing
-    , _cfrrFilteringCount = Nothing
+-- * 'lURL'
+--
+-- * 'lWidth'
+logo
+    :: Logo
+logo =
+    Logo
+    { _lHeight = Nothing
+    , _lURL = Nothing
+    , _lWidth = Nothing
     }
 
--- | The filtering status code. Please refer to the creative-status-codes.txt
--- file for different statuses.
-cfrrFilteringStatus :: Lens' CreativeFilteringReasonsReasons (Maybe Int32)
-cfrrFilteringStatus
-  = lens _cfrrFilteringStatus
-      (\ s a -> s{_cfrrFilteringStatus = a})
+lHeight :: Lens' Logo (Maybe Int32)
+lHeight = lens _lHeight (\ s a -> s{_lHeight = a})
 
--- | The number of times the creative was filtered for the status. The count
--- is aggregated across all publishers on the exchange.
-cfrrFilteringCount :: Lens' CreativeFilteringReasonsReasons (Maybe Int64)
-cfrrFilteringCount
-  = lens _cfrrFilteringCount
-      (\ s a -> s{_cfrrFilteringCount = a})
+lURL :: Lens' Logo (Maybe Text)
+lURL = lens _lURL (\ s a -> s{_lURL = a})
 
-instance FromJSON CreativeFilteringReasonsReasons
-         where
+lWidth :: Lens' Logo (Maybe Int32)
+lWidth = lens _lWidth (\ s a -> s{_lWidth = a})
+
+instance FromJSON Logo where
         parseJSON
-          = withObject "CreativeFilteringReasonsReasons"
+          = withObject "Logo"
               (\ o ->
-                 CreativeFilteringReasonsReasons <$>
-                   (o .:? "filteringStatus") <*>
-                     (o .:? "filteringCount"))
+                 Logo <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width"))
 
-instance ToJSON CreativeFilteringReasonsReasons where
-        toJSON CreativeFilteringReasonsReasons{..}
+instance ToJSON Logo where
+        toJSON Logo{..}
           = object
               (catMaybes
-                 [("filteringStatus" .=) <$> _cfrrFilteringStatus,
-                  ("filteringCount" .=) <$> _cfrrFilteringCount])
+                 [("height" .=) <$> _lHeight, ("url" .=) <$> _lURL,
+                  ("width" .=) <$> _lWidth])
 
 --
 -- /See:/ 'clientAccessCapabilities' smart constructor.
 data ClientAccessCapabilities = ClientAccessCapabilities
     { _cacClientAccountId :: !(Maybe Int64)
     , _cacCapabilities    :: !(Maybe [Int32])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessCapabilities' with the minimum fields required to make a request.
 --
@@ -6352,11 +6265,59 @@ instance ToJSON ClientAccessCapabilities where
                   ("capabilities" .=) <$> _cacCapabilities])
 
 --
+-- /See:/ 'disapprovalReasonsItem' smart constructor.
+data DisapprovalReasonsItem = DisapprovalReasonsItem
+    { _driReason  :: !(Maybe Text)
+    , _driDetails :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DisapprovalReasonsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'driReason'
+--
+-- * 'driDetails'
+disapprovalReasonsItem
+    :: DisapprovalReasonsItem
+disapprovalReasonsItem =
+    DisapprovalReasonsItem
+    { _driReason = Nothing
+    , _driDetails = Nothing
+    }
+
+-- | The categorized reason for disapproval.
+driReason :: Lens' DisapprovalReasonsItem (Maybe Text)
+driReason
+  = lens _driReason (\ s a -> s{_driReason = a})
+
+-- | Additional details about the reason for disapproval.
+driDetails :: Lens' DisapprovalReasonsItem [Text]
+driDetails
+  = lens _driDetails (\ s a -> s{_driDetails = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON DisapprovalReasonsItem where
+        parseJSON
+          = withObject "DisapprovalReasonsItem"
+              (\ o ->
+                 DisapprovalReasonsItem <$>
+                   (o .:? "reason") <*> (o .:? "details" .!= mempty))
+
+instance ToJSON DisapprovalReasonsItem where
+        toJSON DisapprovalReasonsItem{..}
+          = object
+              (catMaybes
+                 [("reason" .=) <$> _driReason,
+                  ("details" .=) <$> _driDetails])
+
+--
 -- /See:/ 'deleteOrderDealsResponse' smart constructor.
 data DeleteOrderDealsResponse = DeleteOrderDealsResponse
     { _dDeals               :: !(Maybe [MarketplaceDeal])
     , _dOrderRevisionNumber :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeleteOrderDealsResponse' with the minimum fields required to make a request.
 --
@@ -6425,7 +6386,7 @@ data MarketplaceDeal = MarketplaceDeal
     , _mdSellerContacts       :: !(Maybe [ContactInformation])
     , _mdOfferId              :: !(Maybe Text)
     , _mdOrderId              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceDeal' with the minimum fields required to make a request.
 --
@@ -6662,50 +6623,48 @@ instance ToJSON MarketplaceDeal where
                   ("orderId" .=) <$> _mdOrderId])
 
 --
--- /See:/ 'pretargetingConfigPlacements' smart constructor.
-data PretargetingConfigPlacements = PretargetingConfigPlacements
-    { _pcpToken :: !(Maybe Text)
-    , _pcpType  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'dimensionsItem' smart constructor.
+data DimensionsItem = DimensionsItem
+    { _diHeight :: !(Maybe Int64)
+    , _diWidth  :: !(Maybe Int64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PretargetingConfigPlacements' with the minimum fields required to make a request.
+-- | Creates a value of 'DimensionsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pcpToken'
+-- * 'diHeight'
 --
--- * 'pcpType'
-pretargetingConfigPlacements
-    :: PretargetingConfigPlacements
-pretargetingConfigPlacements =
-    PretargetingConfigPlacements
-    { _pcpToken = Nothing
-    , _pcpType = Nothing
+-- * 'diWidth'
+dimensionsItem
+    :: DimensionsItem
+dimensionsItem =
+    DimensionsItem
+    { _diHeight = Nothing
+    , _diWidth = Nothing
     }
 
--- | The value of the placement. Interpretation depends on the placement
--- type, e.g. URL for a site placement, channel name for a channel
--- placement, app id for a mobile app placement.
-pcpToken :: Lens' PretargetingConfigPlacements (Maybe Text)
-pcpToken = lens _pcpToken (\ s a -> s{_pcpToken = a})
+-- | Height in pixels.
+diHeight :: Lens' DimensionsItem (Maybe Int64)
+diHeight = lens _diHeight (\ s a -> s{_diHeight = a})
 
--- | The type of the placement.
-pcpType :: Lens' PretargetingConfigPlacements (Maybe Text)
-pcpType = lens _pcpType (\ s a -> s{_pcpType = a})
+-- | Width in pixels.
+diWidth :: Lens' DimensionsItem (Maybe Int64)
+diWidth = lens _diWidth (\ s a -> s{_diWidth = a})
 
-instance FromJSON PretargetingConfigPlacements where
+instance FromJSON DimensionsItem where
         parseJSON
-          = withObject "PretargetingConfigPlacements"
+          = withObject "DimensionsItem"
               (\ o ->
-                 PretargetingConfigPlacements <$>
-                   (o .:? "token") <*> (o .:? "type"))
+                 DimensionsItem <$>
+                   (o .:? "height") <*> (o .:? "width"))
 
-instance ToJSON PretargetingConfigPlacements where
-        toJSON PretargetingConfigPlacements{..}
+instance ToJSON DimensionsItem where
+        toJSON DimensionsItem{..}
           = object
               (catMaybes
-                 [("token" .=) <$> _pcpToken,
-                  ("type" .=) <$> _pcpType])
+                 [("height" .=) <$> _diHeight,
+                  ("width" .=) <$> _diWidth])
 
 --
 -- /See:/ 'negotiationRoundDTO' smart constructor.
@@ -6719,7 +6678,7 @@ data NegotiationRoundDTO = NegotiationRoundDTO
     , _nrdtoNegotiationId  :: !(Maybe Int64)
     , _nrdtoEditHistory    :: !(Maybe EditHistoryDTO)
     , _nrdtoRoundNumber    :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationRoundDTO' with the minimum fields required to make a request.
 --
@@ -6844,7 +6803,7 @@ data StatsDTO = StatsDTO
     , _sdtoGoodBids    :: !(Maybe Int64)
     , _sdtoRevenue     :: !(Maybe MoneyDTO)
     , _sdtoRequests    :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatsDTO' with the minimum fields required to make a request.
 --
@@ -6923,7 +6882,7 @@ instance ToJSON StatsDTO where
 -- /See:/ 'getOffersResponse' smart constructor.
 newtype GetOffersResponse = GetOffersResponse
     { _gorOffers :: Maybe [MarketplaceOffer]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetOffersResponse' with the minimum fields required to make a request.
 --
@@ -6959,7 +6918,7 @@ instance ToJSON GetOffersResponse where
 data DealTermsNonGuaranteedAuctionTerms = DealTermsNonGuaranteedAuctionTerms
     { _dtngatReservePricePerBuyers :: !(Maybe [PricePerBuyer])
     , _dtngatPrivateAuctionId      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DealTermsNonGuaranteedAuctionTerms' with the minimum fields required to make a request.
 --
@@ -7009,78 +6968,10 @@ instance ToJSON DealTermsNonGuaranteedAuctionTerms
                   ("privateAuctionId" .=) <$> _dtngatPrivateAuctionId])
 
 --
--- /See:/ 'creativeServingRestrictions' smart constructor.
-data CreativeServingRestrictions = CreativeServingRestrictions
-    { _csrContexts           :: !(Maybe [CreativeServingRestrictionsContexts])
-    , _csrReason             :: !(Maybe Text)
-    , _csrDisapprovalReasons :: !(Maybe [CreativeServingRestrictionsDisapprovalReasons])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CreativeServingRestrictions' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'csrContexts'
---
--- * 'csrReason'
---
--- * 'csrDisapprovalReasons'
-creativeServingRestrictions
-    :: CreativeServingRestrictions
-creativeServingRestrictions =
-    CreativeServingRestrictions
-    { _csrContexts = Nothing
-    , _csrReason = Nothing
-    , _csrDisapprovalReasons = Nothing
-    }
-
--- | All known contexts\/restrictions.
-csrContexts :: Lens' CreativeServingRestrictions [CreativeServingRestrictionsContexts]
-csrContexts
-  = lens _csrContexts (\ s a -> s{_csrContexts = a}) .
-      _Default
-      . _Coerce
-
--- | Why the creative is ineligible to serve in this context (e.g., it has
--- been explicitly disapproved or is pending review).
-csrReason :: Lens' CreativeServingRestrictions (Maybe Text)
-csrReason
-  = lens _csrReason (\ s a -> s{_csrReason = a})
-
--- | The reasons for disapproval within this restriction, if any. Note that
--- not all disapproval reasons may be categorized, so it is possible for
--- the creative to have a status of DISAPPROVED or CONDITIONALLY_APPROVED
--- with an empty list for disapproval_reasons. In this case, please reach
--- out to your TAM to help debug the issue.
-csrDisapprovalReasons :: Lens' CreativeServingRestrictions [CreativeServingRestrictionsDisapprovalReasons]
-csrDisapprovalReasons
-  = lens _csrDisapprovalReasons
-      (\ s a -> s{_csrDisapprovalReasons = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON CreativeServingRestrictions where
-        parseJSON
-          = withObject "CreativeServingRestrictions"
-              (\ o ->
-                 CreativeServingRestrictions <$>
-                   (o .:? "contexts" .!= mempty) <*> (o .:? "reason")
-                     <*> (o .:? "disapprovalReasons" .!= mempty))
-
-instance ToJSON CreativeServingRestrictions where
-        toJSON CreativeServingRestrictions{..}
-          = object
-              (catMaybes
-                 [("contexts" .=) <$> _csrContexts,
-                  ("reason" .=) <$> _csrReason,
-                  ("disapprovalReasons" .=) <$>
-                    _csrDisapprovalReasons])
-
---
 -- /See:/ 'buyer' smart constructor.
 newtype Buyer = Buyer
     { _bbAccountId :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Buyer' with the minimum fields required to make a request.
 --
@@ -7110,13 +7001,94 @@ instance ToJSON Buyer where
               (catMaybes [("accountId" .=) <$> _bbAccountId])
 
 --
+-- /See:/ 'contextsItem' smart constructor.
+data ContextsItem = ContextsItem
+    { _ciPlatform      :: !(Maybe [Text])
+    , _ciContextType   :: !(Maybe Text)
+    , _ciAuctionType   :: !(Maybe [Text])
+    , _ciGeoCriteriaId :: !(Maybe [Int32])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ContextsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ciPlatform'
+--
+-- * 'ciContextType'
+--
+-- * 'ciAuctionType'
+--
+-- * 'ciGeoCriteriaId'
+contextsItem
+    :: ContextsItem
+contextsItem =
+    ContextsItem
+    { _ciPlatform = Nothing
+    , _ciContextType = Nothing
+    , _ciAuctionType = Nothing
+    , _ciGeoCriteriaId = Nothing
+    }
+
+-- | Only set when contextType=PLATFORM. Represents the platforms this
+-- restriction applies to.
+ciPlatform :: Lens' ContextsItem [Text]
+ciPlatform
+  = lens _ciPlatform (\ s a -> s{_ciPlatform = a}) .
+      _Default
+      . _Coerce
+
+-- | The type of context (e.g., location, platform, auction type, SSL-ness).
+ciContextType :: Lens' ContextsItem (Maybe Text)
+ciContextType
+  = lens _ciContextType
+      (\ s a -> s{_ciContextType = a})
+
+-- | Only set when contextType=AUCTION_TYPE. Represents the auction types
+-- this restriction applies to.
+ciAuctionType :: Lens' ContextsItem [Text]
+ciAuctionType
+  = lens _ciAuctionType
+      (\ s a -> s{_ciAuctionType = a})
+      . _Default
+      . _Coerce
+
+-- | Only set when contextType=LOCATION. Represents the geo criterias this
+-- restriction applies to.
+ciGeoCriteriaId :: Lens' ContextsItem [Int32]
+ciGeoCriteriaId
+  = lens _ciGeoCriteriaId
+      (\ s a -> s{_ciGeoCriteriaId = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ContextsItem where
+        parseJSON
+          = withObject "ContextsItem"
+              (\ o ->
+                 ContextsItem <$>
+                   (o .:? "platform" .!= mempty) <*>
+                     (o .:? "contextType")
+                     <*> (o .:? "auctionType" .!= mempty)
+                     <*> (o .:? "geoCriteriaId" .!= mempty))
+
+instance ToJSON ContextsItem where
+        toJSON ContextsItem{..}
+          = object
+              (catMaybes
+                 [("platform" .=) <$> _ciPlatform,
+                  ("contextType" .=) <$> _ciContextType,
+                  ("auctionType" .=) <$> _ciAuctionType,
+                  ("geoCriteriaId" .=) <$> _ciGeoCriteriaId])
+
+--
 -- /See:/ 'marketplaceLabel' smart constructor.
 data MarketplaceLabel = MarketplaceLabel
     { _mlDeprecatedMarketplaceDealParty :: !(Maybe MarketplaceDealParty)
     , _mlAccountId                      :: !(Maybe Text)
     , _mlCreateTimeMs                   :: !(Maybe Int64)
     , _mlLabel                          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceLabel' with the minimum fields required to make a request.
 --
@@ -7190,7 +7162,7 @@ data DateTime = DateTime
     , _dtMonth      :: !(Maybe Int32)
     , _dtMinute     :: !(Maybe Int32)
     , _dtTimeZoneId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DateTime' with the minimum fields required to make a request.
 --
@@ -7271,7 +7243,7 @@ data DealTermsGuaranteedFixedPriceTerms = DealTermsGuaranteedFixedPriceTerms
     { _dtgfptGuaranteedLooks       :: !(Maybe Int64)
     , _dtgfptGuaranteedImpressions :: !(Maybe Int64)
     , _dtgfptFixedPrices           :: !(Maybe [PricePerBuyer])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DealTermsGuaranteedFixedPriceTerms' with the minimum fields required to make a request.
 --
@@ -7362,7 +7334,7 @@ data MarketplaceOrder = MarketplaceOrder
     , _marLastUpdaterOrCommentorRole :: !(Maybe Text)
     , _marHasBuyerSignedOff          :: !(Maybe Bool)
     , _marBuyer                      :: !(Maybe Buyer)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceOrder' with the minimum fields required to make a request.
 --
@@ -7615,7 +7587,7 @@ data AddOrderDealsRequest = AddOrderDealsRequest
     { _aUpdateAction        :: !(Maybe Text)
     , _aDeals               :: !(Maybe [MarketplaceDeal])
     , _aOrderRevisionNumber :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddOrderDealsRequest' with the minimum fields required to make a request.
 --
@@ -7677,7 +7649,7 @@ data DealTerms = DealTerms
     , _dtNonGuaranteedAuctionTerms    :: !(Maybe DealTermsNonGuaranteedAuctionTerms)
     , _dtGuaranteedFixedPriceTerms    :: !(Maybe DealTermsGuaranteedFixedPriceTerms)
     , _dtDescription                  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DealTerms' with the minimum fields required to make a request.
 --
@@ -7753,7 +7725,7 @@ data EditHistoryDTO = EditHistoryDTO
     , _ehdtoCreatedByLoginName     :: !(Maybe Text)
     , _ehdtoLastUpdateTimeStamp    :: !(Maybe Int64)
     , _ehdtoCreatedTimeStamp       :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditHistoryDTO' with the minimum fields required to make a request.
 --

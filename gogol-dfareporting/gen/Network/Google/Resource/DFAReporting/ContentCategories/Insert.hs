@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Insert
     , cciPrettyPrint
     , cciUserIP
     , cciProfileId
-    , cciContentCategory
+    , cciPayload
     , cciKey
     , cciOAuthToken
     , cciFields
@@ -63,15 +64,15 @@ type ContentCategoriesInsertResource =
 --
 -- /See:/ 'contentCategoriesInsert'' smart constructor.
 data ContentCategoriesInsert' = ContentCategoriesInsert'
-    { _cciQuotaUser       :: !(Maybe Text)
-    , _cciPrettyPrint     :: !Bool
-    , _cciUserIP          :: !(Maybe Text)
-    , _cciProfileId       :: !Int64
-    , _cciContentCategory :: !ContentCategory
-    , _cciKey             :: !(Maybe Key)
-    , _cciOAuthToken      :: !(Maybe OAuthToken)
-    , _cciFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cciQuotaUser   :: !(Maybe Text)
+    , _cciPrettyPrint :: !Bool
+    , _cciUserIP      :: !(Maybe Text)
+    , _cciProfileId   :: !Int64
+    , _cciPayload     :: !ContentCategory
+    , _cciKey         :: !(Maybe Key)
+    , _cciOAuthToken  :: !(Maybe OAuthToken)
+    , _cciFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesInsert'' with the minimum fields required to make a request.
 --
@@ -85,7 +86,7 @@ data ContentCategoriesInsert' = ContentCategoriesInsert'
 --
 -- * 'cciProfileId'
 --
--- * 'cciContentCategory'
+-- * 'cciPayload'
 --
 -- * 'cciKey'
 --
@@ -94,15 +95,15 @@ data ContentCategoriesInsert' = ContentCategoriesInsert'
 -- * 'cciFields'
 contentCategoriesInsert'
     :: Int64 -- ^ 'profileId'
-    -> ContentCategory -- ^ 'ContentCategory'
+    -> ContentCategory -- ^ 'payload'
     -> ContentCategoriesInsert'
-contentCategoriesInsert' pCciProfileId_ pCciContentCategory_ =
+contentCategoriesInsert' pCciProfileId_ pCciPayload_ =
     ContentCategoriesInsert'
     { _cciQuotaUser = Nothing
     , _cciPrettyPrint = True
     , _cciUserIP = Nothing
     , _cciProfileId = pCciProfileId_
-    , _cciContentCategory = pCciContentCategory_
+    , _cciPayload = pCciPayload_
     , _cciKey = Nothing
     , _cciOAuthToken = Nothing
     , _cciFields = Nothing
@@ -133,10 +134,9 @@ cciProfileId
   = lens _cciProfileId (\ s a -> s{_cciProfileId = a})
 
 -- | Multipart request metadata.
-cciContentCategory :: Lens' ContentCategoriesInsert' ContentCategory
-cciContentCategory
-  = lens _cciContentCategory
-      (\ s a -> s{_cciContentCategory = a})
+cciPayload :: Lens' ContentCategoriesInsert' ContentCategory
+cciPayload
+  = lens _cciPayload (\ s a -> s{_cciPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -170,7 +170,7 @@ instance GoogleRequest ContentCategoriesInsert' where
               _cciKey
               _cciOAuthToken
               (Just AltJSON)
-              _cciContentCategory
+              _cciPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ContentCategoriesInsertResource)

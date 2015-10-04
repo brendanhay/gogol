@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.AdExchangeBuyer.Negotiations.Get
     , ngQuotaUser
     , ngPrettyPrint
     , ngUserIP
+    , ngPayload
     , ngKey
-    , ngGetNegotiationByIdRequest
     , ngOAuthToken
     , ngNegotiationId
     , ngFields
@@ -62,15 +63,15 @@ type NegotiationsGetResource =
 --
 -- /See:/ 'negotiationsGet'' smart constructor.
 data NegotiationsGet' = NegotiationsGet'
-    { _ngQuotaUser                 :: !(Maybe Text)
-    , _ngPrettyPrint               :: !Bool
-    , _ngUserIP                    :: !(Maybe Text)
-    , _ngKey                       :: !(Maybe Key)
-    , _ngGetNegotiationByIdRequest :: !GetNegotiationByIdRequest
-    , _ngOAuthToken                :: !(Maybe OAuthToken)
-    , _ngNegotiationId             :: !Int64
-    , _ngFields                    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ngQuotaUser     :: !(Maybe Text)
+    , _ngPrettyPrint   :: !Bool
+    , _ngUserIP        :: !(Maybe Text)
+    , _ngPayload       :: !GetNegotiationByIdRequest
+    , _ngKey           :: !(Maybe Key)
+    , _ngOAuthToken    :: !(Maybe OAuthToken)
+    , _ngNegotiationId :: !Int64
+    , _ngFields        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationsGet'' with the minimum fields required to make a request.
 --
@@ -82,9 +83,9 @@ data NegotiationsGet' = NegotiationsGet'
 --
 -- * 'ngUserIP'
 --
--- * 'ngKey'
+-- * 'ngPayload'
 --
--- * 'ngGetNegotiationByIdRequest'
+-- * 'ngKey'
 --
 -- * 'ngOAuthToken'
 --
@@ -92,16 +93,16 @@ data NegotiationsGet' = NegotiationsGet'
 --
 -- * 'ngFields'
 negotiationsGet'
-    :: GetNegotiationByIdRequest -- ^ 'GetNegotiationByIdRequest'
+    :: GetNegotiationByIdRequest -- ^ 'payload'
     -> Int64 -- ^ 'negotiationId'
     -> NegotiationsGet'
-negotiationsGet' pNgGetNegotiationByIdRequest_ pNgNegotiationId_ =
+negotiationsGet' pNgPayload_ pNgNegotiationId_ =
     NegotiationsGet'
     { _ngQuotaUser = Nothing
     , _ngPrettyPrint = True
     , _ngUserIP = Nothing
+    , _ngPayload = pNgPayload_
     , _ngKey = Nothing
-    , _ngGetNegotiationByIdRequest = pNgGetNegotiationByIdRequest_
     , _ngOAuthToken = Nothing
     , _ngNegotiationId = pNgNegotiationId_
     , _ngFields = Nothing
@@ -125,17 +126,16 @@ ngPrettyPrint
 ngUserIP :: Lens' NegotiationsGet' (Maybe Text)
 ngUserIP = lens _ngUserIP (\ s a -> s{_ngUserIP = a})
 
+-- | Multipart request metadata.
+ngPayload :: Lens' NegotiationsGet' GetNegotiationByIdRequest
+ngPayload
+  = lens _ngPayload (\ s a -> s{_ngPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 ngKey :: Lens' NegotiationsGet' (Maybe Key)
 ngKey = lens _ngKey (\ s a -> s{_ngKey = a})
-
--- | Multipart request metadata.
-ngGetNegotiationByIdRequest :: Lens' NegotiationsGet' GetNegotiationByIdRequest
-ngGetNegotiationByIdRequest
-  = lens _ngGetNegotiationByIdRequest
-      (\ s a -> s{_ngGetNegotiationByIdRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 ngOAuthToken :: Lens' NegotiationsGet' (Maybe OAuthToken)
@@ -166,7 +166,7 @@ instance GoogleRequest NegotiationsGet' where
               _ngKey
               _ngOAuthToken
               (Just AltJSON)
-              _ngGetNegotiationByIdRequest
+              _ngPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy NegotiationsGetResource)

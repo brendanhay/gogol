@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.YouTube.Videos.Insert
     , viPrettyPrint
     , viStabilize
     , viUserIP
-    , viVideo
+    , viPayload
     , viMedia
     , viOnBehalfOfContentOwner
     , viKey
@@ -53,12 +54,12 @@ import           Network.Google.YouTube.Types
 -- 'VideosInsert'' request conforms to.
 type VideosInsertResource =
      "videos" :>
-       QueryParam "autoLevels" Bool :>
-         QueryParam "notifySubscribers" Bool :>
+       QueryParam "part" Text :>
+         QueryParam "stabilize" Bool :>
            QueryParam "onBehalfOfContentOwner" Text :>
              QueryParam "onBehalfOfContentOwnerChannel" Text :>
-               QueryParam "stabilize" Bool :>
-                 QueryParam "part" Text :>
+               QueryParam "notifySubscribers" Bool :>
+                 QueryParam "autoLevels" Bool :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -78,7 +79,7 @@ data VideosInsert' = VideosInsert'
     , _viPrettyPrint                   :: !Bool
     , _viStabilize                     :: !(Maybe Bool)
     , _viUserIP                        :: !(Maybe Text)
-    , _viVideo                         :: !Video
+    , _viPayload                       :: !Video
     , _viMedia                         :: !Body
     , _viOnBehalfOfContentOwner        :: !(Maybe Text)
     , _viKey                           :: !(Maybe Key)
@@ -87,7 +88,7 @@ data VideosInsert' = VideosInsert'
     , _viAutoLevels                    :: !(Maybe Bool)
     , _viOAuthToken                    :: !(Maybe OAuthToken)
     , _viFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosInsert'' with the minimum fields required to make a request.
 --
@@ -103,7 +104,7 @@ data VideosInsert' = VideosInsert'
 --
 -- * 'viUserIP'
 --
--- * 'viVideo'
+-- * 'viPayload'
 --
 -- * 'viMedia'
 --
@@ -122,17 +123,17 @@ data VideosInsert' = VideosInsert'
 -- * 'viFields'
 videosInsert'
     :: Text -- ^ 'part'
-    -> Video -- ^ 'Video'
+    -> Video -- ^ 'payload'
     -> Body -- ^ 'media'
     -> VideosInsert'
-videosInsert' pViPart_ pViVideo_ pViMedia_ =
+videosInsert' pViPart_ pViPayload_ pViMedia_ =
     VideosInsert'
     { _viQuotaUser = Nothing
     , _viPart = pViPart_
     , _viPrettyPrint = True
     , _viStabilize = Nothing
     , _viUserIP = Nothing
-    , _viVideo = pViVideo_
+    , _viPayload = pViPayload_
     , _viMedia = pViMedia_
     , _viOnBehalfOfContentOwner = Nothing
     , _viKey = Nothing
@@ -179,8 +180,9 @@ viUserIP :: Lens' VideosInsert' (Maybe Text)
 viUserIP = lens _viUserIP (\ s a -> s{_viUserIP = a})
 
 -- | Multipart request metadata.
-viVideo :: Lens' VideosInsert' Video
-viVideo = lens _viVideo (\ s a -> s{_viVideo = a})
+viPayload :: Lens' VideosInsert' Video
+viPayload
+  = lens _viPayload (\ s a -> s{_viPayload = a})
 
 viMedia :: Lens' VideosInsert' Body
 viMedia = lens _viMedia (\ s a -> s{_viMedia = a})
@@ -262,12 +264,11 @@ instance GoogleRequest VideosInsert' where
         type Rs VideosInsert' = Video
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u VideosInsert'{..}
-          = go _viAutoLevels _viMedia
-              (Just _viNotifySubscribers)
+          = go (Just _viPart) _viStabilize
               _viOnBehalfOfContentOwner
               _viOnBehalfOfContentOwnerChannel
-              _viStabilize
-              (Just _viPart)
+              (Just _viNotifySubscribers)
+              _viAutoLevels
               _viQuotaUser
               (Just _viPrettyPrint)
               _viUserIP
@@ -275,7 +276,8 @@ instance GoogleRequest VideosInsert' where
               _viKey
               _viOAuthToken
               (Just AltJSON)
-              _viVideo
+              _viPayload
+              _viMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VideosInsertResource)

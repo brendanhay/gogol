@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,11 +58,11 @@ type UserUsageReportGetResource =
          Capture "userKey" Text :>
            "dates" :>
              Capture "date" Text :>
-               QueryParam "customerId" Text :>
-                 QueryParam "filters" Text :>
-                   QueryParam "maxResults" Word32 :>
+               QueryParam "filters" Text :>
+                 QueryParam "customerId" Text :>
+                   QueryParam "parameters" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "parameters" Text :>
+                       QueryParam "maxResults" Word32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -89,7 +90,7 @@ data UserUsageReportGet' = UserUsageReportGet'
     , _uurgUserKey     :: !Text
     , _uurgMaxResults  :: !(Maybe Word32)
     , _uurgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserUsageReportGet'' with the minimum fields required to make a request.
 --
@@ -227,11 +228,11 @@ instance GoogleRequest UserUsageReportGet' where
         type Rs UserUsageReportGet' = UsageReports
         request = requestWithRoute defReq adminReportsURL
         requestWithRoute r u UserUsageReportGet'{..}
-          = go _uurgCustomerId _uurgFilters _uurgMaxResults
-              _uurgPageToken
+          = go _uurgUserKey _uurgDate _uurgFilters
+              _uurgCustomerId
               _uurgParameters
-              _uurgUserKey
-              _uurgDate
+              _uurgPageToken
+              _uurgMaxResults
               _uurgQuotaUser
               (Just _uurgPrettyPrint)
               _uurgUserIP

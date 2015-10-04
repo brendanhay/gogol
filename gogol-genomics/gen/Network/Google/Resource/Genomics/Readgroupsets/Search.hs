@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.Genomics.Readgroupsets.Search
     , reaQuotaUser
     , reaPrettyPrint
     , reaUserIP
-    , reaSearchReadGroupSetsRequest
+    , reaPayload
     , reaKey
     , reaOAuthToken
     , reaFields
@@ -63,14 +64,14 @@ type ReadgroupsetsSearchResource =
 --
 -- /See:/ 'readgroupsetsSearch'' smart constructor.
 data ReadgroupsetsSearch' = ReadgroupsetsSearch'
-    { _reaQuotaUser                  :: !(Maybe Text)
-    , _reaPrettyPrint                :: !Bool
-    , _reaUserIP                     :: !(Maybe Text)
-    , _reaSearchReadGroupSetsRequest :: !SearchReadGroupSetsRequest
-    , _reaKey                        :: !(Maybe Key)
-    , _reaOAuthToken                 :: !(Maybe OAuthToken)
-    , _reaFields                     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _reaQuotaUser   :: !(Maybe Text)
+    , _reaPrettyPrint :: !Bool
+    , _reaUserIP      :: !(Maybe Text)
+    , _reaPayload     :: !SearchReadGroupSetsRequest
+    , _reaKey         :: !(Maybe Key)
+    , _reaOAuthToken  :: !(Maybe OAuthToken)
+    , _reaFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsSearch'' with the minimum fields required to make a request.
 --
@@ -82,7 +83,7 @@ data ReadgroupsetsSearch' = ReadgroupsetsSearch'
 --
 -- * 'reaUserIP'
 --
--- * 'reaSearchReadGroupSetsRequest'
+-- * 'reaPayload'
 --
 -- * 'reaKey'
 --
@@ -90,14 +91,14 @@ data ReadgroupsetsSearch' = ReadgroupsetsSearch'
 --
 -- * 'reaFields'
 readgroupsetsSearch'
-    :: SearchReadGroupSetsRequest -- ^ 'SearchReadGroupSetsRequest'
+    :: SearchReadGroupSetsRequest -- ^ 'payload'
     -> ReadgroupsetsSearch'
-readgroupsetsSearch' pReaSearchReadGroupSetsRequest_ =
+readgroupsetsSearch' pReaPayload_ =
     ReadgroupsetsSearch'
     { _reaQuotaUser = Nothing
     , _reaPrettyPrint = True
     , _reaUserIP = Nothing
-    , _reaSearchReadGroupSetsRequest = pReaSearchReadGroupSetsRequest_
+    , _reaPayload = pReaPayload_
     , _reaKey = Nothing
     , _reaOAuthToken = Nothing
     , _reaFields = Nothing
@@ -123,10 +124,9 @@ reaUserIP
   = lens _reaUserIP (\ s a -> s{_reaUserIP = a})
 
 -- | Multipart request metadata.
-reaSearchReadGroupSetsRequest :: Lens' ReadgroupsetsSearch' SearchReadGroupSetsRequest
-reaSearchReadGroupSetsRequest
-  = lens _reaSearchReadGroupSetsRequest
-      (\ s a -> s{_reaSearchReadGroupSetsRequest = a})
+reaPayload :: Lens' ReadgroupsetsSearch' SearchReadGroupSetsRequest
+reaPayload
+  = lens _reaPayload (\ s a -> s{_reaPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -159,7 +159,7 @@ instance GoogleRequest ReadgroupsetsSearch' where
               _reaKey
               _reaOAuthToken
               (Just AltJSON)
-              _reaSearchReadGroupSetsRequest
+              _reaPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReadgroupsetsSearchResource)

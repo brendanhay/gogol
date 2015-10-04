@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,12 +36,12 @@ module Network.Google.Resource.Gmail.Users.Messages.Insert
     , umiQuotaUser
     , umiPrettyPrint
     , umiUserIP
+    , umiPayload
     , umiUserId
     , umiMedia
     , umiKey
     , umiDeleted
     , umiOAuthToken
-    , umiMessage
     , umiInternalDateSource
     , umiFields
     ) where
@@ -54,9 +55,7 @@ type UsersMessagesInsertResource =
      Capture "userId" Text :>
        "messages" :>
          QueryParam "deleted" Bool :>
-           QueryParam "internalDateSource"
-             GmailUsersMessagesInsertInternalDateSource
-             :>
+           QueryParam "internalDateSource" InternalDateSource :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -76,15 +75,15 @@ data UsersMessagesInsert' = UsersMessagesInsert'
     { _umiQuotaUser          :: !(Maybe Text)
     , _umiPrettyPrint        :: !Bool
     , _umiUserIP             :: !(Maybe Text)
+    , _umiPayload            :: !Message
     , _umiUserId             :: !Text
     , _umiMedia              :: !Body
     , _umiKey                :: !(Maybe Key)
     , _umiDeleted            :: !Bool
     , _umiOAuthToken         :: !(Maybe OAuthToken)
-    , _umiMessage            :: !Message
-    , _umiInternalDateSource :: !GmailUsersMessagesInsertInternalDateSource
+    , _umiInternalDateSource :: !InternalDateSource
     , _umiFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesInsert'' with the minimum fields required to make a request.
 --
@@ -96,6 +95,8 @@ data UsersMessagesInsert' = UsersMessagesInsert'
 --
 -- * 'umiUserIP'
 --
+-- * 'umiPayload'
+--
 -- * 'umiUserId'
 --
 -- * 'umiMedia'
@@ -106,28 +107,26 @@ data UsersMessagesInsert' = UsersMessagesInsert'
 --
 -- * 'umiOAuthToken'
 --
--- * 'umiMessage'
---
 -- * 'umiInternalDateSource'
 --
 -- * 'umiFields'
 usersMessagesInsert'
-    :: Text -- ^ 'media'
-    -> Body -- ^ 'Message'
-    -> Message
+    :: Message -- ^ 'payload'
+    -> Text -- ^ 'media'
+    -> Body
     -> UsersMessagesInsert'
-usersMessagesInsert' pUmiUserId_ pUmiMedia_ pUmiMessage_ =
+usersMessagesInsert' pUmiPayload_ pUmiUserId_ pUmiMedia_ =
     UsersMessagesInsert'
     { _umiQuotaUser = Nothing
     , _umiPrettyPrint = True
     , _umiUserIP = Nothing
+    , _umiPayload = pUmiPayload_
     , _umiUserId = pUmiUserId_
     , _umiMedia = pUmiMedia_
     , _umiKey = Nothing
     , _umiDeleted = False
     , _umiOAuthToken = Nothing
-    , _umiMessage = pUmiMessage_
-    , _umiInternalDateSource = ReceivedTime
+    , _umiInternalDateSource = IDSReceivedTime
     , _umiFields = Nothing
     }
 
@@ -149,6 +148,11 @@ umiPrettyPrint
 umiUserIP :: Lens' UsersMessagesInsert' (Maybe Text)
 umiUserIP
   = lens _umiUserIP (\ s a -> s{_umiUserIP = a})
+
+-- | Multipart request metadata.
+umiPayload :: Lens' UsersMessagesInsert' Message
+umiPayload
+  = lens _umiPayload (\ s a -> s{_umiPayload = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -178,13 +182,8 @@ umiOAuthToken
   = lens _umiOAuthToken
       (\ s a -> s{_umiOAuthToken = a})
 
--- | Multipart request metadata.
-umiMessage :: Lens' UsersMessagesInsert' Message
-umiMessage
-  = lens _umiMessage (\ s a -> s{_umiMessage = a})
-
 -- | Source for Gmail\'s internal date of the message.
-umiInternalDateSource :: Lens' UsersMessagesInsert' GmailUsersMessagesInsertInternalDateSource
+umiInternalDateSource :: Lens' UsersMessagesInsert' InternalDateSource
 umiInternalDateSource
   = lens _umiInternalDateSource
       (\ s a -> s{_umiInternalDateSource = a})
@@ -202,9 +201,8 @@ instance GoogleRequest UsersMessagesInsert' where
         type Rs UsersMessagesInsert' = Message
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesInsert'{..}
-          = go (Just _umiDeleted) (Just _umiInternalDateSource)
-              _umiMedia
-              _umiUserId
+          = go _umiUserId (Just _umiDeleted)
+              (Just _umiInternalDateSource)
               _umiQuotaUser
               (Just _umiPrettyPrint)
               _umiUserIP
@@ -212,7 +210,8 @@ instance GoogleRequest UsersMessagesInsert' where
               _umiKey
               _umiOAuthToken
               (Just AltJSON)
-              _umiMessage
+              _umiPayload
+              _umiMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersMessagesInsertResource)

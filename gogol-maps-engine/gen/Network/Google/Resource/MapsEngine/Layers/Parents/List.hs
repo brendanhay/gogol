@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ type LayersParentsListResource =
      "layers" :>
        Capture "id" Text :>
          "parents" :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -74,7 +75,7 @@ data LayersParentsList' = LayersParentsList'
     , _lplpOAuthToken  :: !(Maybe OAuthToken)
     , _lplpMaxResults  :: !(Maybe Word32)
     , _lplpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersParentsList'' with the minimum fields required to make a request.
 --
@@ -177,7 +178,7 @@ instance GoogleRequest LayersParentsList' where
         type Rs LayersParentsList' = ParentsListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u LayersParentsList'{..}
-          = go _lplpMaxResults _lplpPageToken _lplpId
+          = go _lplpId _lplpPageToken _lplpMaxResults
               _lplpQuotaUser
               (Just _lplpPrettyPrint)
               _lplpUserIP

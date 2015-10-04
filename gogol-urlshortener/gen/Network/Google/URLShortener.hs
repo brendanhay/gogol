@@ -53,9 +53,6 @@ module Network.Google.URLShortener
     , scCount
     , scId
 
-    -- ** URLshortenerURLListProjection
-    , URLshortenerURLListProjection (..)
-
     -- ** AnalyticsSnapshot
     , AnalyticsSnapshot
     , analyticsSnapshot
@@ -77,6 +74,9 @@ module Network.Google.URLShortener
 
     -- ** URLshortenerURLGetProjection
     , URLshortenerURLGetProjection (..)
+
+    -- ** Projection
+    , Projection (..)
 
     -- ** URLHistory
     , URLHistory

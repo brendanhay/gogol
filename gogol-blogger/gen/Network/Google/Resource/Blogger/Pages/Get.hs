@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -73,7 +74,7 @@ data PagesGet' = PagesGet'
     , _pggView        :: !(Maybe BloggerPagesGetView)
     , _pggOAuthToken  :: !(Maybe OAuthToken)
     , _pggFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesGet'' with the minimum fields required to make a request.
 --
@@ -170,7 +171,7 @@ instance GoogleRequest PagesGet' where
         type Rs PagesGet' = Page
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesGet'{..}
-          = go _pggView _pggBlogId _pggPageId _pggQuotaUser
+          = go _pggBlogId _pggPageId _pggView _pggQuotaUser
               (Just _pggPrettyPrint)
               _pggUserIP
               _pggFields

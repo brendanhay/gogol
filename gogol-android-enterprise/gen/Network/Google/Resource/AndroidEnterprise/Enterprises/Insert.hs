@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.Insert
     , eiPrettyPrint
     , eiUserIP
     , eiToken
+    , eiPayload
     , eiKey
-    , eiEnterprise
     , eiOAuthToken
     , eiFields
     ) where
@@ -67,11 +68,11 @@ data EnterprisesInsert' = EnterprisesInsert'
     , _eiPrettyPrint :: !Bool
     , _eiUserIP      :: !(Maybe Text)
     , _eiToken       :: !Text
+    , _eiPayload     :: !Enterprise
     , _eiKey         :: !(Maybe Key)
-    , _eiEnterprise  :: !Enterprise
     , _eiOAuthToken  :: !(Maybe OAuthToken)
     , _eiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EnterprisesInsert'' with the minimum fields required to make a request.
 --
@@ -85,25 +86,25 @@ data EnterprisesInsert' = EnterprisesInsert'
 --
 -- * 'eiToken'
 --
--- * 'eiKey'
+-- * 'eiPayload'
 --
--- * 'eiEnterprise'
+-- * 'eiKey'
 --
 -- * 'eiOAuthToken'
 --
 -- * 'eiFields'
 enterprisesInsert'
     :: Text -- ^ 'token'
-    -> Enterprise -- ^ 'Enterprise'
+    -> Enterprise -- ^ 'payload'
     -> EnterprisesInsert'
-enterprisesInsert' pEiToken_ pEiEnterprise_ =
+enterprisesInsert' pEiToken_ pEiPayload_ =
     EnterprisesInsert'
     { _eiQuotaUser = Nothing
     , _eiPrettyPrint = True
     , _eiUserIP = Nothing
     , _eiToken = pEiToken_
+    , _eiPayload = pEiPayload_
     , _eiKey = Nothing
-    , _eiEnterprise = pEiEnterprise_
     , _eiOAuthToken = Nothing
     , _eiFields = Nothing
     }
@@ -130,16 +131,16 @@ eiUserIP = lens _eiUserIP (\ s a -> s{_eiUserIP = a})
 eiToken :: Lens' EnterprisesInsert' Text
 eiToken = lens _eiToken (\ s a -> s{_eiToken = a})
 
+-- | Multipart request metadata.
+eiPayload :: Lens' EnterprisesInsert' Enterprise
+eiPayload
+  = lens _eiPayload (\ s a -> s{_eiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 eiKey :: Lens' EnterprisesInsert' (Maybe Key)
 eiKey = lens _eiKey (\ s a -> s{_eiKey = a})
-
--- | Multipart request metadata.
-eiEnterprise :: Lens' EnterprisesInsert' Enterprise
-eiEnterprise
-  = lens _eiEnterprise (\ s a -> s{_eiEnterprise = a})
 
 -- | OAuth 2.0 token for the current user.
 eiOAuthToken :: Lens' EnterprisesInsert' (Maybe OAuthToken)
@@ -166,7 +167,7 @@ instance GoogleRequest EnterprisesInsert' where
               _eiKey
               _eiOAuthToken
               (Just AltJSON)
-              _eiEnterprise
+              _eiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EnterprisesInsertResource)

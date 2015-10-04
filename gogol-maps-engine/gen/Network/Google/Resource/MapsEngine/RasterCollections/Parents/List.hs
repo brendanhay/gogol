@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ type RasterCollectionsParentsListResource =
      "rasterCollections" :>
        Capture "id" Text :>
          "parents" :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -74,7 +75,7 @@ data RasterCollectionsParentsList' = RasterCollectionsParentsList'
     , _rcplOAuthToken  :: !(Maybe OAuthToken)
     , _rcplMaxResults  :: !(Maybe Word32)
     , _rcplFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsParentsList'' with the minimum fields required to make a request.
 --
@@ -181,7 +182,7 @@ instance GoogleRequest RasterCollectionsParentsList'
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u
           RasterCollectionsParentsList'{..}
-          = go _rcplMaxResults _rcplPageToken _rcplId
+          = go _rcplId _rcplPageToken _rcplMaxResults
               _rcplQuotaUser
               (Just _rcplPrettyPrint)
               _rcplUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ type StyleListResource =
      "tables" :>
        Capture "tableId" Text :>
          "styles" :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -74,7 +75,7 @@ data StyleList' = StyleList'
     , _slTableId     :: !Text
     , _slMaxResults  :: !(Maybe Word32)
     , _slFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleList'' with the minimum fields required to make a request.
 --
@@ -169,7 +170,7 @@ instance GoogleRequest StyleList' where
         type Rs StyleList' = StyleSettingList
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u StyleList'{..}
-          = go _slMaxResults _slPageToken _slTableId
+          = go _slTableId _slPageToken _slMaxResults
               _slQuotaUser
               (Just _slPrettyPrint)
               _slUserIP

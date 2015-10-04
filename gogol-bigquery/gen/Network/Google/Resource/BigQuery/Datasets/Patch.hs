@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.BigQuery.Datasets.Patch
     -- * Request Lenses
     , dpQuotaUser
     , dpPrettyPrint
-    , dpDataset
     , dpUserIP
+    , dpPayload
     , dpKey
     , dpDatasetId
     , dpProjectId
@@ -72,14 +73,14 @@ type DatasetsPatchResource =
 data DatasetsPatch' = DatasetsPatch'
     { _dpQuotaUser   :: !(Maybe Text)
     , _dpPrettyPrint :: !Bool
-    , _dpDataset     :: !Dataset
     , _dpUserIP      :: !(Maybe Text)
+    , _dpPayload     :: !Dataset
     , _dpKey         :: !(Maybe Key)
     , _dpDatasetId   :: !Text
     , _dpProjectId   :: !Text
     , _dpOAuthToken  :: !(Maybe OAuthToken)
     , _dpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsPatch'' with the minimum fields required to make a request.
 --
@@ -89,9 +90,9 @@ data DatasetsPatch' = DatasetsPatch'
 --
 -- * 'dpPrettyPrint'
 --
--- * 'dpDataset'
---
 -- * 'dpUserIP'
+--
+-- * 'dpPayload'
 --
 -- * 'dpKey'
 --
@@ -103,16 +104,16 @@ data DatasetsPatch' = DatasetsPatch'
 --
 -- * 'dpFields'
 datasetsPatch'
-    :: Dataset -- ^ 'Dataset'
+    :: Dataset -- ^ 'payload'
     -> Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
     -> DatasetsPatch'
-datasetsPatch' pDpDataset_ pDpDatasetId_ pDpProjectId_ =
+datasetsPatch' pDpPayload_ pDpDatasetId_ pDpProjectId_ =
     DatasetsPatch'
     { _dpQuotaUser = Nothing
     , _dpPrettyPrint = True
-    , _dpDataset = pDpDataset_
     , _dpUserIP = Nothing
+    , _dpPayload = pDpPayload_
     , _dpKey = Nothing
     , _dpDatasetId = pDpDatasetId_
     , _dpProjectId = pDpProjectId_
@@ -133,15 +134,15 @@ dpPrettyPrint
   = lens _dpPrettyPrint
       (\ s a -> s{_dpPrettyPrint = a})
 
--- | Multipart request metadata.
-dpDataset :: Lens' DatasetsPatch' Dataset
-dpDataset
-  = lens _dpDataset (\ s a -> s{_dpDataset = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 dpUserIP :: Lens' DatasetsPatch' (Maybe Text)
 dpUserIP = lens _dpUserIP (\ s a -> s{_dpUserIP = a})
+
+-- | Multipart request metadata.
+dpPayload :: Lens' DatasetsPatch' Dataset
+dpPayload
+  = lens _dpPayload (\ s a -> s{_dpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -183,7 +184,7 @@ instance GoogleRequest DatasetsPatch' where
               _dpKey
               _dpOAuthToken
               (Just AltJSON)
-              _dpDataset
+              _dpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsPatchResource)

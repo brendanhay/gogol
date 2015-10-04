@@ -22,9 +22,9 @@ import           Network.Google.PubSub.Types.Sum
 --
 -- /See:/ 'pushConfig' smart constructor.
 data PushConfig = PushConfig
-    { _pcAttributes   :: !(Maybe PushConfigAttributes)
+    { _pcAttributes   :: !(Maybe Attributes)
     , _pcPushEndpoint :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PushConfig' with the minimum fields required to make a request.
 --
@@ -56,7 +56,7 @@ pushConfig =
 -- this attribute are: * \`v1beta1\`: uses the push format defined in the
 -- v1beta1 Pub\/Sub API. * \`v1\` or \`v1beta2\`: uses the push format
 -- defined in the v1 Pub\/Sub API.
-pcAttributes :: Lens' PushConfig (Maybe PushConfigAttributes)
+pcAttributes :: Lens' PushConfig (Maybe Attributes)
 pcAttributes
   = lens _pcAttributes (\ s a -> s{_pcAttributes = a})
 
@@ -87,7 +87,7 @@ instance ToJSON PushConfig where
 data ReceivedMessage = ReceivedMessage
     { _rmAckId   :: !(Maybe Text)
     , _rmMessage :: !(Maybe PubsubMessage)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReceivedMessage' with the minimum fields required to make a request.
 --
@@ -134,7 +134,7 @@ data ModifyAckDeadlineRequest = ModifyAckDeadlineRequest
     { _madrAckIds             :: !(Maybe [Text])
     , _madrAckId              :: !(Maybe Text)
     , _madrAckDeadlineSeconds :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ModifyAckDeadlineRequest' with the minimum fields required to make a request.
 --
@@ -199,7 +199,7 @@ instance ToJSON ModifyAckDeadlineRequest where
 -- /See:/ 'modifyPushConfigRequest' smart constructor.
 newtype ModifyPushConfigRequest = ModifyPushConfigRequest
     { _mpcrPushConfig :: Maybe PushConfig
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ModifyPushConfigRequest' with the minimum fields required to make a request.
 --
@@ -242,7 +242,7 @@ instance ToJSON ModifyPushConfigRequest where
 -- /See:/ 'empty' smart constructor.
 data Empty =
     Empty
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
@@ -262,7 +262,7 @@ instance ToJSON Empty where
 data ListTopicSubscriptionsResponse = ListTopicSubscriptionsResponse
     { _ltsrNextPageToken :: !(Maybe Text)
     , _ltsrSubscriptions :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListTopicSubscriptionsResponse' with the minimum fields required to make a request.
 --
@@ -320,7 +320,7 @@ data PubsubMessage = PubsubMessage
     { _pmData       :: !(Maybe Word8)
     , _pmAttributes :: !(Maybe PubsubMessageAttributes)
     , _pmMessageId  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PubsubMessage' with the minimum fields required to make a request.
 --
@@ -380,7 +380,7 @@ instance ToJSON PubsubMessage where
 data ListTopicsResponse = ListTopicsResponse
     { _ltrNextPageToken :: !(Maybe Text)
     , _ltrTopics        :: !(Maybe [Topic])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListTopicsResponse' with the minimum fields required to make a request.
 --
@@ -431,7 +431,7 @@ instance ToJSON ListTopicsResponse where
 -- /See:/ 'pullResponse' smart constructor.
 newtype PullResponse = PullResponse
     { _prReceivedMessages :: Maybe [ReceivedMessage]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PullResponse' with the minimum fields required to make a request.
 --
@@ -474,7 +474,7 @@ instance ToJSON PullResponse where
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
 newtype SetIAMPolicyRequest = SetIAMPolicyRequest
     { _siprPolicy :: Maybe Policy
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
@@ -510,7 +510,7 @@ instance ToJSON SetIAMPolicyRequest where
 -- /See:/ 'topic' smart constructor.
 newtype Topic = Topic
     { _tName :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Topic' with the minimum fields required to make a request.
 --
@@ -549,7 +549,7 @@ instance ToJSON Topic where
 data PullRequest = PullRequest
     { _prMaxMessages       :: !(Maybe Int32)
     , _prReturnImmediately :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PullRequest' with the minimum fields required to make a request.
 --
@@ -603,7 +603,7 @@ instance ToJSON PullRequest where
 -- /See:/ 'pubsubMessageAttributes' smart constructor.
 data PubsubMessageAttributes =
     PubsubMessageAttributes
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PubsubMessageAttributes' with the minimum fields required to make a request.
 --
@@ -619,12 +619,46 @@ instance FromJSON PubsubMessageAttributes where
 instance ToJSON PubsubMessageAttributes where
         toJSON = const (Object mempty)
 
+-- | Endpoint configuration attributes. Every endpoint has a set of API
+-- supported attributes that can be used to control different aspects of
+-- the message delivery. The currently supported attribute is
+-- \`x-goog-version\`, which you can use to change the format of the push
+-- message. This attribute indicates the version of the data expected by
+-- the endpoint. This controls the shape of the envelope (i.e. its fields
+-- and metadata). The endpoint version is based on the version of the
+-- Pub\/Sub API. If not present during the CreateSubscription call, it will
+-- default to the version of the API used to make such call. If not present
+-- during a ModifyPushConfig call, its value will not be changed.
+-- GetSubscription calls will always return a valid version, even if the
+-- subscription was created without this attribute. The possible values for
+-- this attribute are: * \`v1beta1\`: uses the push format defined in the
+-- v1beta1 Pub\/Sub API. * \`v1\` or \`v1beta2\`: uses the push format
+-- defined in the v1 Pub\/Sub API.
+--
+-- /See:/ 'attributes' smart constructor.
+data Attributes =
+    Attributes
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Attributes' with the minimum fields required to make a request.
+--
+attributes
+    :: Attributes
+attributes = Attributes
+
+instance FromJSON Attributes where
+        parseJSON
+          = withObject "Attributes" (\ o -> pure Attributes)
+
+instance ToJSON Attributes where
+        toJSON = const (Object mempty)
+
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
 newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest
     { _tiprPermissions :: Maybe [Text]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TestIAMPermissionsRequest' with the minimum fields required to make a request.
 --
@@ -664,7 +698,7 @@ instance ToJSON TestIAMPermissionsRequest where
 -- /See:/ 'publishResponse' smart constructor.
 newtype PublishResponse = PublishResponse
     { _prMessageIds :: Maybe [Text]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishResponse' with the minimum fields required to make a request.
 --
@@ -703,7 +737,7 @@ instance ToJSON PublishResponse where
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
 newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse
     { _tiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TestIAMPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -744,7 +778,7 @@ instance ToJSON TestIAMPermissionsResponse where
 -- /See:/ 'publishRequest' smart constructor.
 newtype PublishRequest = PublishRequest
     { _prMessages :: Maybe [PubsubMessage]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishRequest' with the minimum fields required to make a request.
 --
@@ -798,7 +832,7 @@ data Policy = Policy
     { _pEtag     :: !(Maybe Word8)
     , _pVersion  :: !(Maybe Int32)
     , _pBindings :: !(Maybe [Binding])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
@@ -859,7 +893,7 @@ data Subscription = Subscription
     , _sTopic              :: !(Maybe Text)
     , _sName               :: !(Maybe Text)
     , _sAckDeadlineSeconds :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Subscription' with the minimum fields required to make a request.
 --
@@ -939,48 +973,13 @@ instance ToJSON Subscription where
                   ("topic" .=) <$> _sTopic, ("name" .=) <$> _sName,
                   ("ackDeadlineSeconds" .=) <$> _sAckDeadlineSeconds])
 
--- | Endpoint configuration attributes. Every endpoint has a set of API
--- supported attributes that can be used to control different aspects of
--- the message delivery. The currently supported attribute is
--- \`x-goog-version\`, which you can use to change the format of the push
--- message. This attribute indicates the version of the data expected by
--- the endpoint. This controls the shape of the envelope (i.e. its fields
--- and metadata). The endpoint version is based on the version of the
--- Pub\/Sub API. If not present during the CreateSubscription call, it will
--- default to the version of the API used to make such call. If not present
--- during a ModifyPushConfig call, its value will not be changed.
--- GetSubscription calls will always return a valid version, even if the
--- subscription was created without this attribute. The possible values for
--- this attribute are: * \`v1beta1\`: uses the push format defined in the
--- v1beta1 Pub\/Sub API. * \`v1\` or \`v1beta2\`: uses the push format
--- defined in the v1 Pub\/Sub API.
---
--- /See:/ 'pushConfigAttributes' smart constructor.
-data PushConfigAttributes =
-    PushConfigAttributes
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PushConfigAttributes' with the minimum fields required to make a request.
---
-pushConfigAttributes
-    :: PushConfigAttributes
-pushConfigAttributes = PushConfigAttributes
-
-instance FromJSON PushConfigAttributes where
-        parseJSON
-          = withObject "PushConfigAttributes"
-              (\ o -> pure PushConfigAttributes)
-
-instance ToJSON PushConfigAttributes where
-        toJSON = const (Object mempty)
-
 -- | Associates members with roles. See below for allowed formats of members.
 --
 -- /See:/ 'binding' smart constructor.
 data Binding = Binding
     { _bMembers :: !(Maybe [Text])
     , _bRole    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
 --
@@ -1035,7 +1034,7 @@ instance ToJSON Binding where
 -- /See:/ 'acknowledgeRequest' smart constructor.
 newtype AcknowledgeRequest = AcknowledgeRequest
     { _arAckIds :: Maybe [Text]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AcknowledgeRequest' with the minimum fields required to make a request.
 --
@@ -1073,7 +1072,7 @@ instance ToJSON AcknowledgeRequest where
 data ListSubscriptionsResponse = ListSubscriptionsResponse
     { _lsrNextPageToken :: !(Maybe Text)
     , _lsrSubscriptions :: !(Maybe [Subscription])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListSubscriptionsResponse' with the minimum fields required to make a request.
 --

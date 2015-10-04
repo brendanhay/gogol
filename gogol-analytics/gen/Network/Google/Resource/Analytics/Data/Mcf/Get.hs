@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -56,18 +57,16 @@ import           Network.Google.Prelude
 type DataMcfGetResource =
      "data" :>
        "mcf" :>
-         QueryParam "dimensions" Text :>
-           QueryParam "filters" Text :>
-             QueryParam "max-results" Int32 :>
-               QueryParam "samplingLevel"
-                 AnalyticsDataMcfGetSamplingLevel
-                 :>
-                 QueryParam "sort" Text :>
-                   QueryParam "start-index" Int32 :>
-                     QueryParam "ids" Text :>
-                       QueryParam "start-date" Text :>
-                         QueryParam "end-date" Text :>
-                           QueryParam "metrics" Text :>
+         QueryParam "ids" Text :>
+           QueryParam "start-date" Text :>
+             QueryParam "end-date" Text :>
+               QueryParam "metrics" Text :>
+                 QueryParam "samplingLevel" SamplingLevel :>
+                   QueryParam "filters" Text :>
+                     QueryParam "sort" Text :>
+                       QueryParam "dimensions" Text :>
+                         QueryParam "start-index" Int32 :>
+                           QueryParam "max-results" Int32 :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
@@ -84,7 +83,7 @@ data DataMcfGet' = DataMcfGet'
     { _dmgQuotaUser     :: !(Maybe Text)
     , _dmgMetrics       :: !Text
     , _dmgPrettyPrint   :: !Bool
-    , _dmgSamplingLevel :: !(Maybe AnalyticsDataMcfGetSamplingLevel)
+    , _dmgSamplingLevel :: !(Maybe SamplingLevel)
     , _dmgUserIP        :: !(Maybe Text)
     , _dmgFilters       :: !(Maybe Text)
     , _dmgIds           :: !Text
@@ -97,7 +96,7 @@ data DataMcfGet' = DataMcfGet'
     , _dmgMaxResults    :: !(Maybe Int32)
     , _dmgStartDate     :: !Text
     , _dmgFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataMcfGet'' with the minimum fields required to make a request.
 --
@@ -181,7 +180,7 @@ dmgPrettyPrint
       (\ s a -> s{_dmgPrettyPrint = a})
 
 -- | The desired sampling level.
-dmgSamplingLevel :: Lens' DataMcfGet' (Maybe AnalyticsDataMcfGetSamplingLevel)
+dmgSamplingLevel :: Lens' DataMcfGet' (Maybe SamplingLevel)
 dmgSamplingLevel
   = lens _dmgSamplingLevel
       (\ s a -> s{_dmgSamplingLevel = a})
@@ -267,14 +266,15 @@ instance GoogleRequest DataMcfGet' where
         type Rs DataMcfGet' = McfData
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u DataMcfGet'{..}
-          = go _dmgDimensions _dmgFilters _dmgMaxResults
-              _dmgSamplingLevel
-              _dmgSort
-              _dmgStartIndex
-              (Just _dmgIds)
-              (Just _dmgStartDate)
+          = go (Just _dmgIds) (Just _dmgStartDate)
               (Just _dmgEndDate)
               (Just _dmgMetrics)
+              _dmgSamplingLevel
+              _dmgFilters
+              _dmgSort
+              _dmgDimensions
+              _dmgStartIndex
+              _dmgMaxResults
               _dmgQuotaUser
               (Just _dmgPrettyPrint)
               _dmgUserIP

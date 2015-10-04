@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -31,9 +32,9 @@ module Network.Google.Resource.DoubleClickSearch.Reports.Request
 
     -- * Request Lenses
     , rrQuotaUser
-    , rrReportRequest
     , rrPrettyPrint
     , rrUserIP
+    , rrPayload
     , rrKey
     , rrOAuthToken
     , rrFields
@@ -59,14 +60,14 @@ type ReportsRequestResource =
 --
 -- /See:/ 'reportsRequest'' smart constructor.
 data ReportsRequest' = ReportsRequest'
-    { _rrQuotaUser     :: !(Maybe Text)
-    , _rrReportRequest :: !ReportRequest
-    , _rrPrettyPrint   :: !Bool
-    , _rrUserIP        :: !(Maybe Text)
-    , _rrKey           :: !(Maybe Key)
-    , _rrOAuthToken    :: !(Maybe OAuthToken)
-    , _rrFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rrQuotaUser   :: !(Maybe Text)
+    , _rrPrettyPrint :: !Bool
+    , _rrUserIP      :: !(Maybe Text)
+    , _rrPayload     :: !ReportRequest
+    , _rrKey         :: !(Maybe Key)
+    , _rrOAuthToken  :: !(Maybe OAuthToken)
+    , _rrFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsRequest'' with the minimum fields required to make a request.
 --
@@ -74,11 +75,11 @@ data ReportsRequest' = ReportsRequest'
 --
 -- * 'rrQuotaUser'
 --
--- * 'rrReportRequest'
---
 -- * 'rrPrettyPrint'
 --
 -- * 'rrUserIP'
+--
+-- * 'rrPayload'
 --
 -- * 'rrKey'
 --
@@ -86,14 +87,14 @@ data ReportsRequest' = ReportsRequest'
 --
 -- * 'rrFields'
 reportsRequest'
-    :: ReportRequest -- ^ 'ReportRequest'
+    :: ReportRequest -- ^ 'payload'
     -> ReportsRequest'
-reportsRequest' pRrReportRequest_ =
+reportsRequest' pRrPayload_ =
     ReportsRequest'
     { _rrQuotaUser = Nothing
-    , _rrReportRequest = pRrReportRequest_
     , _rrPrettyPrint = True
     , _rrUserIP = Nothing
+    , _rrPayload = pRrPayload_
     , _rrKey = Nothing
     , _rrOAuthToken = Nothing
     , _rrFields = Nothing
@@ -106,12 +107,6 @@ rrQuotaUser :: Lens' ReportsRequest' (Maybe Text)
 rrQuotaUser
   = lens _rrQuotaUser (\ s a -> s{_rrQuotaUser = a})
 
--- | Multipart request metadata.
-rrReportRequest :: Lens' ReportsRequest' ReportRequest
-rrReportRequest
-  = lens _rrReportRequest
-      (\ s a -> s{_rrReportRequest = a})
-
 -- | Returns response with indentations and line breaks.
 rrPrettyPrint :: Lens' ReportsRequest' Bool
 rrPrettyPrint
@@ -122,6 +117,11 @@ rrPrettyPrint
 -- want to enforce per-user limits.
 rrUserIP :: Lens' ReportsRequest' (Maybe Text)
 rrUserIP = lens _rrUserIP (\ s a -> s{_rrUserIP = a})
+
+-- | Multipart request metadata.
+rrPayload :: Lens' ReportsRequest' ReportRequest
+rrPayload
+  = lens _rrPayload (\ s a -> s{_rrPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -152,7 +152,7 @@ instance GoogleRequest ReportsRequest' where
               _rrKey
               _rrOAuthToken
               (Just AltJSON)
-              _rrReportRequest
+              _rrPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReportsRequestResource)

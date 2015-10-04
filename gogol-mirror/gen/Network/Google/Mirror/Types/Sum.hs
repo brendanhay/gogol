@@ -18,32 +18,32 @@ module Network.Google.Mirror.Types.Sum where
 import           Network.Google.Prelude
 
 -- | Controls the order in which timeline items are returned.
-data MirrorTimelineListOrderBy
-    = DisplayTime
+data OrderBy
+    = OBDisplayTime
       -- ^ @displayTime@
       -- Results will be ordered by displayTime (default). This is the same
       -- ordering as is used in the timeline on the device.
-    | WriteTime
+    | OBWriteTime
       -- ^ @writeTime@
       -- Results will be ordered by the time at which they were last written to
       -- the data store.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable MirrorTimelineListOrderBy
+instance Hashable OrderBy
 
-instance FromText MirrorTimelineListOrderBy where
+instance FromText OrderBy where
     fromText = \case
-        "displayTime" -> Just DisplayTime
-        "writeTime" -> Just WriteTime
+        "displayTime" -> Just OBDisplayTime
+        "writeTime" -> Just OBWriteTime
         _ -> Nothing
 
-instance ToText MirrorTimelineListOrderBy where
+instance ToText OrderBy where
     toText = \case
-        DisplayTime -> "displayTime"
-        WriteTime -> "writeTime"
+        OBDisplayTime -> "displayTime"
+        OBWriteTime -> "writeTime"
 
-instance FromJSON MirrorTimelineListOrderBy where
-    parseJSON = parseJSONText "MirrorTimelineListOrderBy"
+instance FromJSON OrderBy where
+    parseJSON = parseJSONText "OrderBy"
 
-instance ToJSON MirrorTimelineListOrderBy where
+instance ToJSON OrderBy where
     toJSON = toJSONText

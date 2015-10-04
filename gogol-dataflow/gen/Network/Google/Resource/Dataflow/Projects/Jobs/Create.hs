@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,9 +38,9 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Create
     , pjcPp
     , pjcAccessToken
     , pjcUploadType
+    , pjcPayload
     , pjcBearerToken
     , pjcKey
-    , pjcJob
     , pjcView
     , pjcProjectId
     , pjcOAuthToken
@@ -59,14 +60,14 @@ type ProjectsJobsCreateResource =
          Capture "projectId" Text :>
            "jobs" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "bearer_token" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "replaceJobId" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
-                             QueryParam "view" Text :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "view" Text :>
+                           QueryParam "replaceJobId" Text :>
+                             QueryParam "callback" Text :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
@@ -87,16 +88,16 @@ data ProjectsJobsCreate' = ProjectsJobsCreate'
     , _pjcPp             :: !Bool
     , _pjcAccessToken    :: !(Maybe Text)
     , _pjcUploadType     :: !(Maybe Text)
+    , _pjcPayload        :: !Job
     , _pjcBearerToken    :: !(Maybe Text)
     , _pjcKey            :: !(Maybe Key)
-    , _pjcJob            :: !Job
     , _pjcView           :: !(Maybe Text)
     , _pjcProjectId      :: !Text
     , _pjcOAuthToken     :: !(Maybe OAuthToken)
     , _pjcReplaceJobId   :: !(Maybe Text)
     , _pjcFields         :: !(Maybe Text)
     , _pjcCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsJobsCreate'' with the minimum fields required to make a request.
 --
@@ -116,11 +117,11 @@ data ProjectsJobsCreate' = ProjectsJobsCreate'
 --
 -- * 'pjcUploadType'
 --
+-- * 'pjcPayload'
+--
 -- * 'pjcBearerToken'
 --
 -- * 'pjcKey'
---
--- * 'pjcJob'
 --
 -- * 'pjcView'
 --
@@ -134,10 +135,10 @@ data ProjectsJobsCreate' = ProjectsJobsCreate'
 --
 -- * 'pjcCallback'
 projectsJobsCreate'
-    :: Job -- ^ 'Job'
+    :: Job -- ^ 'payload'
     -> Text -- ^ 'projectId'
     -> ProjectsJobsCreate'
-projectsJobsCreate' pPjcJob_ pPjcProjectId_ =
+projectsJobsCreate' pPjcPayload_ pPjcProjectId_ =
     ProjectsJobsCreate'
     { _pjcXgafv = Nothing
     , _pjcQuotaUser = Nothing
@@ -146,9 +147,9 @@ projectsJobsCreate' pPjcJob_ pPjcProjectId_ =
     , _pjcPp = True
     , _pjcAccessToken = Nothing
     , _pjcUploadType = Nothing
+    , _pjcPayload = pPjcPayload_
     , _pjcBearerToken = Nothing
     , _pjcKey = Nothing
-    , _pjcJob = pPjcJob_
     , _pjcView = Nothing
     , _pjcProjectId = pPjcProjectId_
     , _pjcOAuthToken = Nothing
@@ -196,6 +197,11 @@ pjcUploadType
   = lens _pjcUploadType
       (\ s a -> s{_pjcUploadType = a})
 
+-- | Multipart request metadata.
+pjcPayload :: Lens' ProjectsJobsCreate' Job
+pjcPayload
+  = lens _pjcPayload (\ s a -> s{_pjcPayload = a})
+
 -- | OAuth bearer token.
 pjcBearerToken :: Lens' ProjectsJobsCreate' (Maybe Text)
 pjcBearerToken
@@ -207,10 +213,6 @@ pjcBearerToken
 -- token.
 pjcKey :: Lens' ProjectsJobsCreate' (Maybe Key)
 pjcKey = lens _pjcKey (\ s a -> s{_pjcKey = a})
-
--- | Multipart request metadata.
-pjcJob :: Lens' ProjectsJobsCreate' Job
-pjcJob = lens _pjcJob (\ s a -> s{_pjcJob = a})
 
 -- | Level of information requested in response.
 pjcView :: Lens' ProjectsJobsCreate' (Maybe Text)
@@ -251,21 +253,21 @@ instance GoogleRequest ProjectsJobsCreate' where
         type Rs ProjectsJobsCreate' = Job
         request = requestWithRoute defReq dataflowURL
         requestWithRoute r u ProjectsJobsCreate'{..}
-          = go _pjcXgafv _pjcAccessToken _pjcBearerToken
-              _pjcCallback
+          = go _pjcProjectId _pjcXgafv _pjcUploadProtocol
               (Just _pjcPp)
-              _pjcReplaceJobId
+              _pjcAccessToken
               _pjcUploadType
-              _pjcUploadProtocol
+              _pjcBearerToken
               _pjcView
-              _pjcProjectId
+              _pjcReplaceJobId
+              _pjcCallback
               _pjcQuotaUser
               (Just _pjcPrettyPrint)
               _pjcFields
               _pjcKey
               _pjcOAuthToken
               (Just AltJSON)
-              _pjcJob
+              _pjcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsJobsCreateResource)

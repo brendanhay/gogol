@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,7 +37,7 @@ module Network.Google.Resource.SQL.SSLCerts.Insert
     , sciPrettyPrint
     , sciProject
     , sciUserIP
-    , sciSSLCertsInsertRequest
+    , sciPayload
     , sciKey
     , sciOAuthToken
     , sciFields
@@ -70,16 +71,16 @@ type SSLCertsInsertResource =
 --
 -- /See:/ 'sslCertsInsert'' smart constructor.
 data SSLCertsInsert' = SSLCertsInsert'
-    { _sciQuotaUser             :: !(Maybe Text)
-    , _sciPrettyPrint           :: !Bool
-    , _sciProject               :: !Text
-    , _sciUserIP                :: !(Maybe Text)
-    , _sciSSLCertsInsertRequest :: !SSLCertsInsertRequest
-    , _sciKey                   :: !(Maybe Key)
-    , _sciOAuthToken            :: !(Maybe OAuthToken)
-    , _sciFields                :: !(Maybe Text)
-    , _sciInstance              :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _sciQuotaUser   :: !(Maybe Text)
+    , _sciPrettyPrint :: !Bool
+    , _sciProject     :: !Text
+    , _sciUserIP      :: !(Maybe Text)
+    , _sciPayload     :: !SSLCertsInsertRequest
+    , _sciKey         :: !(Maybe Key)
+    , _sciOAuthToken  :: !(Maybe OAuthToken)
+    , _sciFields      :: !(Maybe Text)
+    , _sciInstance    :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SSLCertsInsert'' with the minimum fields required to make a request.
 --
@@ -93,7 +94,7 @@ data SSLCertsInsert' = SSLCertsInsert'
 --
 -- * 'sciUserIP'
 --
--- * 'sciSSLCertsInsertRequest'
+-- * 'sciPayload'
 --
 -- * 'sciKey'
 --
@@ -104,16 +105,16 @@ data SSLCertsInsert' = SSLCertsInsert'
 -- * 'sciInstance'
 sslCertsInsert'
     :: Text -- ^ 'project'
-    -> SSLCertsInsertRequest -- ^ 'SSLCertsInsertRequest'
+    -> SSLCertsInsertRequest -- ^ 'payload'
     -> Text -- ^ 'instance'
     -> SSLCertsInsert'
-sslCertsInsert' pSciProject_ pSciSSLCertsInsertRequest_ pSciInstance_ =
+sslCertsInsert' pSciProject_ pSciPayload_ pSciInstance_ =
     SSLCertsInsert'
     { _sciQuotaUser = Nothing
     , _sciPrettyPrint = True
     , _sciProject = pSciProject_
     , _sciUserIP = Nothing
-    , _sciSSLCertsInsertRequest = pSciSSLCertsInsertRequest_
+    , _sciPayload = pSciPayload_
     , _sciKey = Nothing
     , _sciOAuthToken = Nothing
     , _sciFields = Nothing
@@ -146,10 +147,9 @@ sciUserIP
   = lens _sciUserIP (\ s a -> s{_sciUserIP = a})
 
 -- | Multipart request metadata.
-sciSSLCertsInsertRequest :: Lens' SSLCertsInsert' SSLCertsInsertRequest
-sciSSLCertsInsertRequest
-  = lens _sciSSLCertsInsertRequest
-      (\ s a -> s{_sciSSLCertsInsertRequest = a})
+sciPayload :: Lens' SSLCertsInsert' SSLCertsInsertRequest
+sciPayload
+  = lens _sciPayload (\ s a -> s{_sciPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -188,7 +188,7 @@ instance GoogleRequest SSLCertsInsert' where
               _sciKey
               _sciOAuthToken
               (Just AltJSON)
-              _sciSSLCertsInsertRequest
+              _sciPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SSLCertsInsertResource)

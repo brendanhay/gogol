@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.AdSenseHost.URLChannels.Insert
     , uciQuotaUser
     , uciPrettyPrint
     , uciUserIP
+    , uciPayload
     , uciAdClientId
     , uciKey
-    , uciURLChannel
     , uciOAuthToken
     , uciFields
     ) where
@@ -65,12 +66,12 @@ data URLChannelsInsert' = URLChannelsInsert'
     { _uciQuotaUser   :: !(Maybe Text)
     , _uciPrettyPrint :: !Bool
     , _uciUserIP      :: !(Maybe Text)
+    , _uciPayload     :: !URLChannel
     , _uciAdClientId  :: !Text
     , _uciKey         :: !(Maybe Key)
-    , _uciURLChannel  :: !URLChannel
     , _uciOAuthToken  :: !(Maybe OAuthToken)
     , _uciFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLChannelsInsert'' with the minimum fields required to make a request.
 --
@@ -82,27 +83,27 @@ data URLChannelsInsert' = URLChannelsInsert'
 --
 -- * 'uciUserIP'
 --
+-- * 'uciPayload'
+--
 -- * 'uciAdClientId'
 --
 -- * 'uciKey'
---
--- * 'uciURLChannel'
 --
 -- * 'uciOAuthToken'
 --
 -- * 'uciFields'
 urlChannelsInsert'
-    :: Text -- ^ 'adClientId'
-    -> URLChannel -- ^ 'URLChannel'
+    :: URLChannel -- ^ 'payload'
+    -> Text -- ^ 'adClientId'
     -> URLChannelsInsert'
-urlChannelsInsert' pUciAdClientId_ pUciURLChannel_ =
+urlChannelsInsert' pUciPayload_ pUciAdClientId_ =
     URLChannelsInsert'
     { _uciQuotaUser = Nothing
     , _uciPrettyPrint = True
     , _uciUserIP = Nothing
+    , _uciPayload = pUciPayload_
     , _uciAdClientId = pUciAdClientId_
     , _uciKey = Nothing
-    , _uciURLChannel = pUciURLChannel_
     , _uciOAuthToken = Nothing
     , _uciFields = Nothing
     }
@@ -126,6 +127,11 @@ uciUserIP :: Lens' URLChannelsInsert' (Maybe Text)
 uciUserIP
   = lens _uciUserIP (\ s a -> s{_uciUserIP = a})
 
+-- | Multipart request metadata.
+uciPayload :: Lens' URLChannelsInsert' URLChannel
+uciPayload
+  = lens _uciPayload (\ s a -> s{_uciPayload = a})
+
 -- | Ad client to which the new URL channel will be added.
 uciAdClientId :: Lens' URLChannelsInsert' Text
 uciAdClientId
@@ -137,12 +143,6 @@ uciAdClientId
 -- token.
 uciKey :: Lens' URLChannelsInsert' (Maybe Key)
 uciKey = lens _uciKey (\ s a -> s{_uciKey = a})
-
--- | Multipart request metadata.
-uciURLChannel :: Lens' URLChannelsInsert' URLChannel
-uciURLChannel
-  = lens _uciURLChannel
-      (\ s a -> s{_uciURLChannel = a})
 
 -- | OAuth 2.0 token for the current user.
 uciOAuthToken :: Lens' URLChannelsInsert' (Maybe OAuthToken)
@@ -170,7 +170,7 @@ instance GoogleRequest URLChannelsInsert' where
               _uciKey
               _uciOAuthToken
               (Just AltJSON)
-              _uciURLChannel
+              _uciPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy URLChannelsInsertResource)

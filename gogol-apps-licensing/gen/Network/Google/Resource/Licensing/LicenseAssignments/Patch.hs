@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Patch
     , lapQuotaUser
     , lapPrettyPrint
     , lapUserIP
-    , lapLicenseAssignment
-    , lapSkuId
+    , lapSKUId
+    , lapPayload
     , lapUserId
     , lapKey
     , lapOAuthToken
@@ -67,17 +68,17 @@ type LicenseAssignmentsPatchResource =
 --
 -- /See:/ 'licenseAssignmentsPatch'' smart constructor.
 data LicenseAssignmentsPatch' = LicenseAssignmentsPatch'
-    { _lapQuotaUser         :: !(Maybe Text)
-    , _lapPrettyPrint       :: !Bool
-    , _lapUserIP            :: !(Maybe Text)
-    , _lapLicenseAssignment :: !LicenseAssignment
-    , _lapSkuId             :: !Text
-    , _lapUserId            :: !Text
-    , _lapKey               :: !(Maybe Key)
-    , _lapOAuthToken        :: !(Maybe OAuthToken)
-    , _lapProductId         :: !Text
-    , _lapFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _lapQuotaUser   :: !(Maybe Text)
+    , _lapPrettyPrint :: !Bool
+    , _lapUserIP      :: !(Maybe Text)
+    , _lapSKUId       :: !Text
+    , _lapPayload     :: !LicenseAssignment
+    , _lapUserId      :: !Text
+    , _lapKey         :: !(Maybe Key)
+    , _lapOAuthToken  :: !(Maybe OAuthToken)
+    , _lapProductId   :: !Text
+    , _lapFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentsPatch'' with the minimum fields required to make a request.
 --
@@ -89,9 +90,9 @@ data LicenseAssignmentsPatch' = LicenseAssignmentsPatch'
 --
 -- * 'lapUserIP'
 --
--- * 'lapLicenseAssignment'
+-- * 'lapSKUId'
 --
--- * 'lapSkuId'
+-- * 'lapPayload'
 --
 -- * 'lapUserId'
 --
@@ -103,18 +104,18 @@ data LicenseAssignmentsPatch' = LicenseAssignmentsPatch'
 --
 -- * 'lapFields'
 licenseAssignmentsPatch'
-    :: LicenseAssignment -- ^ 'LicenseAssignment'
-    -> Text -- ^ 'skuId'
+    :: Text -- ^ 'skuId'
+    -> LicenseAssignment -- ^ 'payload'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'productId'
     -> LicenseAssignmentsPatch'
-licenseAssignmentsPatch' pLapLicenseAssignment_ pLapSkuId_ pLapUserId_ pLapProductId_ =
+licenseAssignmentsPatch' pLapSKUId_ pLapPayload_ pLapUserId_ pLapProductId_ =
     LicenseAssignmentsPatch'
     { _lapQuotaUser = Nothing
     , _lapPrettyPrint = True
     , _lapUserIP = Nothing
-    , _lapLicenseAssignment = pLapLicenseAssignment_
-    , _lapSkuId = pLapSkuId_
+    , _lapSKUId = pLapSKUId_
+    , _lapPayload = pLapPayload_
     , _lapUserId = pLapUserId_
     , _lapKey = Nothing
     , _lapOAuthToken = Nothing
@@ -141,15 +142,14 @@ lapUserIP :: Lens' LicenseAssignmentsPatch' (Maybe Text)
 lapUserIP
   = lens _lapUserIP (\ s a -> s{_lapUserIP = a})
 
--- | Multipart request metadata.
-lapLicenseAssignment :: Lens' LicenseAssignmentsPatch' LicenseAssignment
-lapLicenseAssignment
-  = lens _lapLicenseAssignment
-      (\ s a -> s{_lapLicenseAssignment = a})
-
 -- | Name for sku for which license would be revoked
-lapSkuId :: Lens' LicenseAssignmentsPatch' Text
-lapSkuId = lens _lapSkuId (\ s a -> s{_lapSkuId = a})
+lapSKUId :: Lens' LicenseAssignmentsPatch' Text
+lapSKUId = lens _lapSKUId (\ s a -> s{_lapSKUId = a})
+
+-- | Multipart request metadata.
+lapPayload :: Lens' LicenseAssignmentsPatch' LicenseAssignment
+lapPayload
+  = lens _lapPayload (\ s a -> s{_lapPayload = a})
 
 -- | email id or unique Id of the user
 lapUserId :: Lens' LicenseAssignmentsPatch' Text
@@ -186,14 +186,14 @@ instance GoogleRequest LicenseAssignmentsPatch' where
         type Rs LicenseAssignmentsPatch' = LicenseAssignment
         request = requestWithRoute defReq appsLicensingURL
         requestWithRoute r u LicenseAssignmentsPatch'{..}
-          = go _lapProductId _lapSkuId _lapUserId _lapQuotaUser
+          = go _lapProductId _lapSKUId _lapUserId _lapQuotaUser
               (Just _lapPrettyPrint)
               _lapUserIP
               _lapFields
               _lapKey
               _lapOAuthToken
               (Just AltJSON)
-              _lapLicenseAssignment
+              _lapPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LicenseAssignmentsPatchResource)

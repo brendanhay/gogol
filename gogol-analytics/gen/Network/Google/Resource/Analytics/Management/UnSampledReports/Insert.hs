@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -31,11 +32,11 @@ module Network.Google.Resource.Analytics.Management.UnSampledReports.Insert
 
     -- * Request Lenses
     , musriQuotaUser
-    , musriUnSampledReport
     , musriPrettyPrint
     , musriWebPropertyId
     , musriUserIP
     , musriProfileId
+    , musriPayload
     , musriAccountId
     , musriKey
     , musriOAuthToken
@@ -70,25 +71,23 @@ type ManagementUnSampledReportsInsertResource =
 --
 -- /See:/ 'managementUnSampledReportsInsert'' smart constructor.
 data ManagementUnSampledReportsInsert' = ManagementUnSampledReportsInsert'
-    { _musriQuotaUser       :: !(Maybe Text)
-    , _musriUnSampledReport :: !UnSampledReport
-    , _musriPrettyPrint     :: !Bool
-    , _musriWebPropertyId   :: !Text
-    , _musriUserIP          :: !(Maybe Text)
-    , _musriProfileId       :: !Text
-    , _musriAccountId       :: !Text
-    , _musriKey             :: !(Maybe Key)
-    , _musriOAuthToken      :: !(Maybe OAuthToken)
-    , _musriFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _musriQuotaUser     :: !(Maybe Text)
+    , _musriPrettyPrint   :: !Bool
+    , _musriWebPropertyId :: !Text
+    , _musriUserIP        :: !(Maybe Text)
+    , _musriProfileId     :: !Text
+    , _musriPayload       :: !UnSampledReport
+    , _musriAccountId     :: !Text
+    , _musriKey           :: !(Maybe Key)
+    , _musriOAuthToken    :: !(Maybe OAuthToken)
+    , _musriFields        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUnSampledReportsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'musriQuotaUser'
---
--- * 'musriUnSampledReport'
 --
 -- * 'musriPrettyPrint'
 --
@@ -98,6 +97,8 @@ data ManagementUnSampledReportsInsert' = ManagementUnSampledReportsInsert'
 --
 -- * 'musriProfileId'
 --
+-- * 'musriPayload'
+--
 -- * 'musriAccountId'
 --
 -- * 'musriKey'
@@ -106,19 +107,19 @@ data ManagementUnSampledReportsInsert' = ManagementUnSampledReportsInsert'
 --
 -- * 'musriFields'
 managementUnSampledReportsInsert'
-    :: UnSampledReport -- ^ 'UnSampledReport'
-    -> Text -- ^ 'webPropertyId'
+    :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
+    -> UnSampledReport -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementUnSampledReportsInsert'
-managementUnSampledReportsInsert' pMusriUnSampledReport_ pMusriWebPropertyId_ pMusriProfileId_ pMusriAccountId_ =
+managementUnSampledReportsInsert' pMusriWebPropertyId_ pMusriProfileId_ pMusriPayload_ pMusriAccountId_ =
     ManagementUnSampledReportsInsert'
     { _musriQuotaUser = Nothing
-    , _musriUnSampledReport = pMusriUnSampledReport_
     , _musriPrettyPrint = False
     , _musriWebPropertyId = pMusriWebPropertyId_
     , _musriUserIP = Nothing
     , _musriProfileId = pMusriProfileId_
+    , _musriPayload = pMusriPayload_
     , _musriAccountId = pMusriAccountId_
     , _musriKey = Nothing
     , _musriOAuthToken = Nothing
@@ -132,12 +133,6 @@ musriQuotaUser :: Lens' ManagementUnSampledReportsInsert' (Maybe Text)
 musriQuotaUser
   = lens _musriQuotaUser
       (\ s a -> s{_musriQuotaUser = a})
-
--- | Multipart request metadata.
-musriUnSampledReport :: Lens' ManagementUnSampledReportsInsert' UnSampledReport
-musriUnSampledReport
-  = lens _musriUnSampledReport
-      (\ s a -> s{_musriUnSampledReport = a})
 
 -- | Returns response with indentations and line breaks.
 musriPrettyPrint :: Lens' ManagementUnSampledReportsInsert' Bool
@@ -162,6 +157,11 @@ musriProfileId :: Lens' ManagementUnSampledReportsInsert' Text
 musriProfileId
   = lens _musriProfileId
       (\ s a -> s{_musriProfileId = a})
+
+-- | Multipart request metadata.
+musriPayload :: Lens' ManagementUnSampledReportsInsert' UnSampledReport
+musriPayload
+  = lens _musriPayload (\ s a -> s{_musriPayload = a})
 
 -- | Account ID to create the unsampled report for.
 musriAccountId :: Lens' ManagementUnSampledReportsInsert' Text
@@ -207,7 +207,7 @@ instance GoogleRequest
               _musriKey
               _musriOAuthToken
               (Just AltJSON)
-              _musriUnSampledReport
+              _musriPayload
           where go
                   = clientWithRoute
                       (Proxy ::

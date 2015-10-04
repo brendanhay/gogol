@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,20 +59,20 @@ import           Network.Google.Prelude
 type DataGaGetResource =
      "data" :>
        "ga" :>
-         QueryParam "dimensions" Text :>
-           QueryParam "filters" Text :>
-             QueryParam "max-results" Int32 :>
-               QueryParam "output" AnalyticsDataGaGetOutput :>
+         QueryParam "ids" Text :>
+           QueryParam "start-date" Text :>
+             QueryParam "end-date" Text :>
+               QueryParam "metrics" Text :>
                  QueryParam "samplingLevel"
                    AnalyticsDataGaGetSamplingLevel
                    :>
-                   QueryParam "segment" Text :>
-                     QueryParam "sort" Text :>
-                       QueryParam "start-index" Int32 :>
-                         QueryParam "ids" Text :>
-                           QueryParam "start-date" Text :>
-                             QueryParam "end-date" Text :>
-                               QueryParam "metrics" Text :>
+                   QueryParam "filters" Text :>
+                     QueryParam "output" Output :>
+                       QueryParam "sort" Text :>
+                         QueryParam "dimensions" Text :>
+                           QueryParam "start-index" Int32 :>
+                             QueryParam "max-results" Int32 :>
+                               QueryParam "segment" Text :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
@@ -95,7 +96,7 @@ data DataGaGet' = DataGaGet'
     , _dggIds           :: !Text
     , _dggEndDate       :: !Text
     , _dggKey           :: !(Maybe Key)
-    , _dggOutput        :: !(Maybe AnalyticsDataGaGetOutput)
+    , _dggOutput        :: !(Maybe Output)
     , _dggSort          :: !(Maybe Text)
     , _dggDimensions    :: !(Maybe Text)
     , _dggOAuthToken    :: !(Maybe OAuthToken)
@@ -104,7 +105,7 @@ data DataGaGet' = DataGaGet'
     , _dggSegment       :: !(Maybe Text)
     , _dggStartDate     :: !Text
     , _dggFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataGaGet'' with the minimum fields required to make a request.
 --
@@ -229,7 +230,7 @@ dggKey :: Lens' DataGaGet' (Maybe Key)
 dggKey = lens _dggKey (\ s a -> s{_dggKey = a})
 
 -- | The selected format for the response. Default format is JSON.
-dggOutput :: Lens' DataGaGet' (Maybe AnalyticsDataGaGetOutput)
+dggOutput :: Lens' DataGaGet' (Maybe Output)
 dggOutput
   = lens _dggOutput (\ s a -> s{_dggOutput = a})
 
@@ -289,16 +290,17 @@ instance GoogleRequest DataGaGet' where
         type Rs DataGaGet' = GaData
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u DataGaGet'{..}
-          = go _dggDimensions _dggFilters _dggMaxResults
-              _dggOutput
-              _dggSamplingLevel
-              _dggSegment
-              _dggSort
-              _dggStartIndex
-              (Just _dggIds)
-              (Just _dggStartDate)
+          = go (Just _dggIds) (Just _dggStartDate)
               (Just _dggEndDate)
               (Just _dggMetrics)
+              _dggSamplingLevel
+              _dggFilters
+              _dggOutput
+              _dggSort
+              _dggDimensions
+              _dggStartIndex
+              _dggMaxResults
+              _dggSegment
               _dggQuotaUser
               (Just _dggPrettyPrint)
               _dggUserIP

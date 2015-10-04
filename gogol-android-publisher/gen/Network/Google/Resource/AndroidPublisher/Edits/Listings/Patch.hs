@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.AndroidPublisher.Edits.Listings.Patch
     -- * Request Lenses
     , elpQuotaUser
     , elpPrettyPrint
-    , elpListing
     , elpPackageName
     , elpUserIP
+    , elpPayload
     , elpKey
     , elpLanguage
     , elpOAuthToken
@@ -70,15 +71,15 @@ type EditsListingsPatchResource =
 data EditsListingsPatch' = EditsListingsPatch'
     { _elpQuotaUser   :: !(Maybe Text)
     , _elpPrettyPrint :: !Bool
-    , _elpListing     :: !Listing
     , _elpPackageName :: !Text
     , _elpUserIP      :: !(Maybe Text)
+    , _elpPayload     :: !Listing
     , _elpKey         :: !(Maybe Key)
     , _elpLanguage    :: !Text
     , _elpOAuthToken  :: !(Maybe OAuthToken)
     , _elpEditId      :: !Text
     , _elpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsListingsPatch'' with the minimum fields required to make a request.
 --
@@ -88,11 +89,11 @@ data EditsListingsPatch' = EditsListingsPatch'
 --
 -- * 'elpPrettyPrint'
 --
--- * 'elpListing'
---
 -- * 'elpPackageName'
 --
 -- * 'elpUserIP'
+--
+-- * 'elpPayload'
 --
 -- * 'elpKey'
 --
@@ -104,18 +105,18 @@ data EditsListingsPatch' = EditsListingsPatch'
 --
 -- * 'elpFields'
 editsListingsPatch'
-    :: Listing -- ^ 'Listing'
-    -> Text -- ^ 'packageName'
+    :: Text -- ^ 'packageName'
+    -> Listing -- ^ 'payload'
     -> Text -- ^ 'language'
     -> Text -- ^ 'editId'
     -> EditsListingsPatch'
-editsListingsPatch' pElpListing_ pElpPackageName_ pElpLanguage_ pElpEditId_ =
+editsListingsPatch' pElpPackageName_ pElpPayload_ pElpLanguage_ pElpEditId_ =
     EditsListingsPatch'
     { _elpQuotaUser = Nothing
     , _elpPrettyPrint = True
-    , _elpListing = pElpListing_
     , _elpPackageName = pElpPackageName_
     , _elpUserIP = Nothing
+    , _elpPayload = pElpPayload_
     , _elpKey = Nothing
     , _elpLanguage = pElpLanguage_
     , _elpOAuthToken = Nothing
@@ -136,11 +137,6 @@ elpPrettyPrint
   = lens _elpPrettyPrint
       (\ s a -> s{_elpPrettyPrint = a})
 
--- | Multipart request metadata.
-elpListing :: Lens' EditsListingsPatch' Listing
-elpListing
-  = lens _elpListing (\ s a -> s{_elpListing = a})
-
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
 elpPackageName :: Lens' EditsListingsPatch' Text
@@ -153,6 +149,11 @@ elpPackageName
 elpUserIP :: Lens' EditsListingsPatch' (Maybe Text)
 elpUserIP
   = lens _elpUserIP (\ s a -> s{_elpUserIP = a})
+
+-- | Multipart request metadata.
+elpPayload :: Lens' EditsListingsPatch' Listing
+elpPayload
+  = lens _elpPayload (\ s a -> s{_elpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -198,7 +199,7 @@ instance GoogleRequest EditsListingsPatch' where
               _elpKey
               _elpOAuthToken
               (Just AltJSON)
-              _elpListing
+              _elpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EditsListingsPatchResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.AdExchangeBuyer.Negotiations.Insert
     , niQuotaUser
     , niPrettyPrint
     , niUserIP
-    , niNegotiationDTO
+    , niPayload
     , niKey
     , niOAuthToken
     , niFields
@@ -60,14 +61,14 @@ type NegotiationsInsertResource =
 --
 -- /See:/ 'negotiationsInsert'' smart constructor.
 data NegotiationsInsert' = NegotiationsInsert'
-    { _niQuotaUser      :: !(Maybe Text)
-    , _niPrettyPrint    :: !Bool
-    , _niUserIP         :: !(Maybe Text)
-    , _niNegotiationDTO :: !NegotiationDTO
-    , _niKey            :: !(Maybe Key)
-    , _niOAuthToken     :: !(Maybe OAuthToken)
-    , _niFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _niQuotaUser   :: !(Maybe Text)
+    , _niPrettyPrint :: !Bool
+    , _niUserIP      :: !(Maybe Text)
+    , _niPayload     :: !NegotiationDTO
+    , _niKey         :: !(Maybe Key)
+    , _niOAuthToken  :: !(Maybe OAuthToken)
+    , _niFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationsInsert'' with the minimum fields required to make a request.
 --
@@ -79,7 +80,7 @@ data NegotiationsInsert' = NegotiationsInsert'
 --
 -- * 'niUserIP'
 --
--- * 'niNegotiationDTO'
+-- * 'niPayload'
 --
 -- * 'niKey'
 --
@@ -87,14 +88,14 @@ data NegotiationsInsert' = NegotiationsInsert'
 --
 -- * 'niFields'
 negotiationsInsert'
-    :: NegotiationDTO -- ^ 'NegotiationDTO'
+    :: NegotiationDTO -- ^ 'payload'
     -> NegotiationsInsert'
-negotiationsInsert' pNiNegotiationDTO_ =
+negotiationsInsert' pNiPayload_ =
     NegotiationsInsert'
     { _niQuotaUser = Nothing
     , _niPrettyPrint = True
     , _niUserIP = Nothing
-    , _niNegotiationDTO = pNiNegotiationDTO_
+    , _niPayload = pNiPayload_
     , _niKey = Nothing
     , _niOAuthToken = Nothing
     , _niFields = Nothing
@@ -119,10 +120,9 @@ niUserIP :: Lens' NegotiationsInsert' (Maybe Text)
 niUserIP = lens _niUserIP (\ s a -> s{_niUserIP = a})
 
 -- | Multipart request metadata.
-niNegotiationDTO :: Lens' NegotiationsInsert' NegotiationDTO
-niNegotiationDTO
-  = lens _niNegotiationDTO
-      (\ s a -> s{_niNegotiationDTO = a})
+niPayload :: Lens' NegotiationsInsert' NegotiationDTO
+niPayload
+  = lens _niPayload (\ s a -> s{_niPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -152,7 +152,7 @@ instance GoogleRequest NegotiationsInsert' where
               _niKey
               _niOAuthToken
               (Just AltJSON)
-              _niNegotiationDTO
+              _niPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy NegotiationsInsertResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.FusionTables.Template.Update
     , temPrettyPrint
     , temTemplateId
     , temUserIP
+    , temPayload
     , temKey
-    , temTemplate
     , temOAuthToken
     , temTableId
     , temFields
@@ -68,12 +69,12 @@ data TemplateUpdate' = TemplateUpdate'
     , _temPrettyPrint :: !Bool
     , _temTemplateId  :: !Int32
     , _temUserIP      :: !(Maybe Text)
+    , _temPayload     :: !Template
     , _temKey         :: !(Maybe Key)
-    , _temTemplate    :: !Template
     , _temOAuthToken  :: !(Maybe OAuthToken)
     , _temTableId     :: !Text
     , _temFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateUpdate'' with the minimum fields required to make a request.
 --
@@ -87,9 +88,9 @@ data TemplateUpdate' = TemplateUpdate'
 --
 -- * 'temUserIP'
 --
--- * 'temKey'
+-- * 'temPayload'
 --
--- * 'temTemplate'
+-- * 'temKey'
 --
 -- * 'temOAuthToken'
 --
@@ -98,17 +99,17 @@ data TemplateUpdate' = TemplateUpdate'
 -- * 'temFields'
 templateUpdate'
     :: Int32 -- ^ 'templateId'
-    -> Template -- ^ 'Template'
+    -> Template -- ^ 'payload'
     -> Text -- ^ 'tableId'
     -> TemplateUpdate'
-templateUpdate' pTemTemplateId_ pTemTemplate_ pTemTableId_ =
+templateUpdate' pTemTemplateId_ pTemPayload_ pTemTableId_ =
     TemplateUpdate'
     { _temQuotaUser = Nothing
     , _temPrettyPrint = True
     , _temTemplateId = pTemTemplateId_
     , _temUserIP = Nothing
+    , _temPayload = pTemPayload_
     , _temKey = Nothing
-    , _temTemplate = pTemTemplate_
     , _temOAuthToken = Nothing
     , _temTableId = pTemTableId_
     , _temFields = Nothing
@@ -139,16 +140,16 @@ temUserIP :: Lens' TemplateUpdate' (Maybe Text)
 temUserIP
   = lens _temUserIP (\ s a -> s{_temUserIP = a})
 
+-- | Multipart request metadata.
+temPayload :: Lens' TemplateUpdate' Template
+temPayload
+  = lens _temPayload (\ s a -> s{_temPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 temKey :: Lens' TemplateUpdate' (Maybe Key)
 temKey = lens _temKey (\ s a -> s{_temKey = a})
-
--- | Multipart request metadata.
-temTemplate :: Lens' TemplateUpdate' Template
-temTemplate
-  = lens _temTemplate (\ s a -> s{_temTemplate = a})
 
 -- | OAuth 2.0 token for the current user.
 temOAuthToken :: Lens' TemplateUpdate' (Maybe OAuthToken)
@@ -181,7 +182,7 @@ instance GoogleRequest TemplateUpdate' where
               _temKey
               _temOAuthToken
               (Just AltJSON)
-              _temTemplate
+              _temPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TemplateUpdateResource)

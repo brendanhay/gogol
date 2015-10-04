@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,15 +59,11 @@ type ZoneViewsListResourcesResource =
            "resourceViews" :>
              Capture "resourceView" Text :>
                "resources" :>
-                 QueryParam "format"
-                   ResourceviewsZoneViewsListResourcesFormat
-                   :>
-                   QueryParam "listState"
-                     ResourceviewsZoneViewsListResourcesListState
-                     :>
-                     QueryParam "maxResults" Int32 :>
+                 QueryParam "listState" ListState :>
+                   QueryParam "format" Format :>
+                     QueryParam "serviceName" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "serviceName" Text :>
+                         QueryParam "maxResults" Int32 :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "userIp" Text :>
@@ -84,10 +81,10 @@ data ZoneViewsListResources' = ZoneViewsListResources'
     { _zvlrQuotaUser    :: !(Maybe Text)
     , _zvlrPrettyPrint  :: !Bool
     , _zvlrResourceView :: !Text
-    , _zvlrListState    :: !ResourceviewsZoneViewsListResourcesListState
+    , _zvlrListState    :: !ListState
     , _zvlrProject      :: !Text
     , _zvlrUserIP       :: !(Maybe Text)
-    , _zvlrFormat       :: !(Maybe ResourceviewsZoneViewsListResourcesFormat)
+    , _zvlrFormat       :: !(Maybe Format)
     , _zvlrZone         :: !Text
     , _zvlrKey          :: !(Maybe Key)
     , _zvlrServiceName  :: !(Maybe Text)
@@ -95,7 +92,7 @@ data ZoneViewsListResources' = ZoneViewsListResources'
     , _zvlrOAuthToken   :: !(Maybe OAuthToken)
     , _zvlrMaxResults   :: !Int32
     , _zvlrFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsListResources'' with the minimum fields required to make a request.
 --
@@ -172,7 +169,7 @@ zvlrResourceView
       (\ s a -> s{_zvlrResourceView = a})
 
 -- | The state of the instance to list. By default, it lists all instances.
-zvlrListState :: Lens' ZoneViewsListResources' ResourceviewsZoneViewsListResourcesListState
+zvlrListState :: Lens' ZoneViewsListResources' ListState
 zvlrListState
   = lens _zvlrListState
       (\ s a -> s{_zvlrListState = a})
@@ -191,7 +188,7 @@ zvlrUserIP
 -- | The requested format of the return value. It can be URL or URL_PORT. A
 -- JSON object will be included in the response based on the format. The
 -- default format is NONE, which results in no JSON in the response.
-zvlrFormat :: Lens' ZoneViewsListResources' (Maybe ResourceviewsZoneViewsListResourcesFormat)
+zvlrFormat :: Lens' ZoneViewsListResources' (Maybe Format)
 zvlrFormat
   = lens _zvlrFormat (\ s a -> s{_zvlrFormat = a})
 
@@ -247,13 +244,12 @@ instance GoogleRequest ZoneViewsListResources' where
              ZoneViewsListResourcesResponse
         request = requestWithRoute defReq resourceViewsURL
         requestWithRoute r u ZoneViewsListResources'{..}
-          = go _zvlrFormat (Just _zvlrListState)
-              (Just _zvlrMaxResults)
-              _zvlrPageToken
+          = go _zvlrProject _zvlrZone _zvlrResourceView
+              (Just _zvlrListState)
+              _zvlrFormat
               _zvlrServiceName
-              _zvlrProject
-              _zvlrZone
-              _zvlrResourceView
+              _zvlrPageToken
+              (Just _zvlrMaxResults)
               _zvlrQuotaUser
               (Just _zvlrPrettyPrint)
               _zvlrUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type MachineTypesListResource =
          Capture "zone" Text :>
            "machineTypes" :>
              QueryParam "filter" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,7 +83,7 @@ data MachineTypesList' = MachineTypesList'
     , _mtlOAuthToken  :: !(Maybe OAuthToken)
     , _mtlMaxResults  :: !Word32
     , _mtlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MachineTypesList'' with the minimum fields required to make a request.
 --
@@ -209,9 +210,8 @@ instance GoogleRequest MachineTypesList' where
         type Rs MachineTypesList' = MachineTypeList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u MachineTypesList'{..}
-          = go _mtlFilter (Just _mtlMaxResults) _mtlPageToken
-              _mtlProject
-              _mtlZone
+          = go _mtlProject _mtlZone _mtlFilter _mtlPageToken
+              (Just _mtlMaxResults)
               _mtlQuotaUser
               (Just _mtlPrettyPrint)
               _mtlUserIP

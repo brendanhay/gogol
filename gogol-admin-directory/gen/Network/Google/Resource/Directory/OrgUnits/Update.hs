@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -30,10 +31,10 @@ module Network.Google.Resource.Directory.OrgUnits.Update
     , OrgUnitsUpdate'
 
     -- * Request Lenses
-    , ouuOrgUnit
     , ouuQuotaUser
     , ouuPrettyPrint
     , ouuUserIP
+    , ouuPayload
     , ouuOrgUnitPath
     , ouuCustomerId
     , ouuKey
@@ -49,8 +50,8 @@ import           Network.Google.Prelude
 type OrgUnitsUpdateResource =
      "customer" :>
        Capture "customerId" Text :>
-         "orgunits{" :>
-           "orgUnitPath*}" :>
+         "orgunits" :>
+           Captures "orgUnitPath" Text :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -64,28 +65,28 @@ type OrgUnitsUpdateResource =
 --
 -- /See:/ 'orgUnitsUpdate'' smart constructor.
 data OrgUnitsUpdate' = OrgUnitsUpdate'
-    { _ouuOrgUnit     :: !OrgUnit
-    , _ouuQuotaUser   :: !(Maybe Text)
+    { _ouuQuotaUser   :: !(Maybe Text)
     , _ouuPrettyPrint :: !Bool
     , _ouuUserIP      :: !(Maybe Text)
-    , _ouuOrgUnitPath :: !Text
+    , _ouuPayload     :: !OrgUnit
+    , _ouuOrgUnitPath :: ![Text]
     , _ouuCustomerId  :: !Text
     , _ouuKey         :: !(Maybe Key)
     , _ouuOAuthToken  :: !(Maybe OAuthToken)
     , _ouuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrgUnitsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'ouuOrgUnit'
 --
 -- * 'ouuQuotaUser'
 --
 -- * 'ouuPrettyPrint'
 --
 -- * 'ouuUserIP'
+--
+-- * 'ouuPayload'
 --
 -- * 'ouuOrgUnitPath'
 --
@@ -97,27 +98,22 @@ data OrgUnitsUpdate' = OrgUnitsUpdate'
 --
 -- * 'ouuFields'
 orgUnitsUpdate'
-    :: OrgUnit -- ^ 'OrgUnit'
-    -> Text -- ^ 'orgUnitPath'
+    :: OrgUnit -- ^ 'payload'
+    -> [Text] -- ^ 'orgUnitPath'
     -> Text -- ^ 'customerId'
     -> OrgUnitsUpdate'
-orgUnitsUpdate' pOuuOrgUnit_ pOuuOrgUnitPath_ pOuuCustomerId_ =
+orgUnitsUpdate' pOuuPayload_ pOuuOrgUnitPath_ pOuuCustomerId_ =
     OrgUnitsUpdate'
-    { _ouuOrgUnit = pOuuOrgUnit_
-    , _ouuQuotaUser = Nothing
+    { _ouuQuotaUser = Nothing
     , _ouuPrettyPrint = True
     , _ouuUserIP = Nothing
+    , _ouuPayload = pOuuPayload_
     , _ouuOrgUnitPath = pOuuOrgUnitPath_
     , _ouuCustomerId = pOuuCustomerId_
     , _ouuKey = Nothing
     , _ouuOAuthToken = Nothing
     , _ouuFields = Nothing
     }
-
--- | Multipart request metadata.
-ouuOrgUnit :: Lens' OrgUnitsUpdate' OrgUnit
-ouuOrgUnit
-  = lens _ouuOrgUnit (\ s a -> s{_ouuOrgUnit = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -138,11 +134,17 @@ ouuUserIP :: Lens' OrgUnitsUpdate' (Maybe Text)
 ouuUserIP
   = lens _ouuUserIP (\ s a -> s{_ouuUserIP = a})
 
+-- | Multipart request metadata.
+ouuPayload :: Lens' OrgUnitsUpdate' OrgUnit
+ouuPayload
+  = lens _ouuPayload (\ s a -> s{_ouuPayload = a})
+
 -- | Full path of the organization unit or its Id
-ouuOrgUnitPath :: Lens' OrgUnitsUpdate' Text
+ouuOrgUnitPath :: Lens' OrgUnitsUpdate' [Text]
 ouuOrgUnitPath
   = lens _ouuOrgUnitPath
       (\ s a -> s{_ouuOrgUnitPath = a})
+      . _Coerce
 
 -- | Immutable id of the Google Apps account
 ouuCustomerId :: Lens' OrgUnitsUpdate' Text
@@ -182,7 +184,7 @@ instance GoogleRequest OrgUnitsUpdate' where
               _ouuKey
               _ouuOAuthToken
               (Just AltJSON)
-              _ouuOrgUnit
+              _ouuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrgUnitsUpdateResource)

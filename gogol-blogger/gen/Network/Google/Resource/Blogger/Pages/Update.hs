@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.Blogger.Pages.Update
     , puuQuotaUser
     , puuPrettyPrint
     , puuUserIP
-    , puuPage
     , puuBlogId
     , puuPageId
+    , puuPayload
     , puuKey
     , puuRevert
     , puuOAuthToken
@@ -53,8 +54,8 @@ type PagesUpdateResource =
        Capture "blogId" Text :>
          "pages" :>
            Capture "pageId" Text :>
-             QueryParam "publish" Bool :>
-               QueryParam "revert" Bool :>
+             QueryParam "revert" Bool :>
+               QueryParam "publish" Bool :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -71,15 +72,15 @@ data PagesUpdate' = PagesUpdate'
     { _puuQuotaUser   :: !(Maybe Text)
     , _puuPrettyPrint :: !Bool
     , _puuUserIP      :: !(Maybe Text)
-    , _puuPage        :: !Page
     , _puuBlogId      :: !Text
     , _puuPageId      :: !Text
+    , _puuPayload     :: !Page
     , _puuKey         :: !(Maybe Key)
     , _puuRevert      :: !(Maybe Bool)
     , _puuOAuthToken  :: !(Maybe OAuthToken)
     , _puuPublish     :: !(Maybe Bool)
     , _puuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesUpdate'' with the minimum fields required to make a request.
 --
@@ -91,11 +92,11 @@ data PagesUpdate' = PagesUpdate'
 --
 -- * 'puuUserIP'
 --
--- * 'puuPage'
---
 -- * 'puuBlogId'
 --
 -- * 'puuPageId'
+--
+-- * 'puuPayload'
 --
 -- * 'puuKey'
 --
@@ -107,18 +108,18 @@ data PagesUpdate' = PagesUpdate'
 --
 -- * 'puuFields'
 pagesUpdate'
-    :: Page -- ^ 'Page'
-    -> Text -- ^ 'blogId'
+    :: Text -- ^ 'blogId'
     -> Text -- ^ 'pageId'
+    -> Page -- ^ 'payload'
     -> PagesUpdate'
-pagesUpdate' pPuuPage_ pPuuBlogId_ pPuuPageId_ =
+pagesUpdate' pPuuBlogId_ pPuuPageId_ pPuuPayload_ =
     PagesUpdate'
     { _puuQuotaUser = Nothing
     , _puuPrettyPrint = True
     , _puuUserIP = Nothing
-    , _puuPage = pPuuPage_
     , _puuBlogId = pPuuBlogId_
     , _puuPageId = pPuuPageId_
+    , _puuPayload = pPuuPayload_
     , _puuKey = Nothing
     , _puuRevert = Nothing
     , _puuOAuthToken = Nothing
@@ -145,10 +146,6 @@ puuUserIP :: Lens' PagesUpdate' (Maybe Text)
 puuUserIP
   = lens _puuUserIP (\ s a -> s{_puuUserIP = a})
 
--- | Multipart request metadata.
-puuPage :: Lens' PagesUpdate' Page
-puuPage = lens _puuPage (\ s a -> s{_puuPage = a})
-
 -- | The ID of the Blog.
 puuBlogId :: Lens' PagesUpdate' Text
 puuBlogId
@@ -158,6 +155,11 @@ puuBlogId
 puuPageId :: Lens' PagesUpdate' Text
 puuPageId
   = lens _puuPageId (\ s a -> s{_puuPageId = a})
+
+-- | Multipart request metadata.
+puuPayload :: Lens' PagesUpdate' Page
+puuPayload
+  = lens _puuPayload (\ s a -> s{_puuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -196,7 +198,7 @@ instance GoogleRequest PagesUpdate' where
         type Rs PagesUpdate' = Page
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesUpdate'{..}
-          = go _puuPublish _puuRevert _puuBlogId _puuPageId
+          = go _puuBlogId _puuPageId _puuRevert _puuPublish
               _puuQuotaUser
               (Just _puuPrettyPrint)
               _puuUserIP
@@ -204,7 +206,7 @@ instance GoogleRequest PagesUpdate' where
               _puuKey
               _puuOAuthToken
               (Just AltJSON)
-              _puuPage
+              _puuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PagesUpdateResource)

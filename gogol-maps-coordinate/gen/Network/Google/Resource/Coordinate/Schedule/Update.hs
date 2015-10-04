@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.Coordinate.Schedule.Update
     , suJobId
     , suAllDay
     , suStartTime
-    , suSchedule
     , suUserIP
     , suTeamId
+    , suPayload
     , suKey
     , suEndTime
     , suOAuthToken
@@ -57,9 +58,9 @@ type ScheduleUpdateResource =
            Capture "jobId" Word64 :>
              "schedule" :>
                QueryParam "allDay" Bool :>
-                 QueryParam "duration" Word64 :>
+                 QueryParam "startTime" Word64 :>
                    QueryParam "endTime" Word64 :>
-                     QueryParam "startTime" Word64 :>
+                     QueryParam "duration" Word64 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -79,15 +80,15 @@ data ScheduleUpdate' = ScheduleUpdate'
     , _suJobId       :: !Word64
     , _suAllDay      :: !(Maybe Bool)
     , _suStartTime   :: !(Maybe Word64)
-    , _suSchedule    :: !Schedule
     , _suUserIP      :: !(Maybe Text)
     , _suTeamId      :: !Text
+    , _suPayload     :: !Schedule
     , _suKey         :: !(Maybe Key)
     , _suEndTime     :: !(Maybe Word64)
     , _suOAuthToken  :: !(Maybe OAuthToken)
     , _suDuration    :: !(Maybe Word64)
     , _suFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScheduleUpdate'' with the minimum fields required to make a request.
 --
@@ -103,11 +104,11 @@ data ScheduleUpdate' = ScheduleUpdate'
 --
 -- * 'suStartTime'
 --
--- * 'suSchedule'
---
 -- * 'suUserIP'
 --
 -- * 'suTeamId'
+--
+-- * 'suPayload'
 --
 -- * 'suKey'
 --
@@ -120,19 +121,19 @@ data ScheduleUpdate' = ScheduleUpdate'
 -- * 'suFields'
 scheduleUpdate'
     :: Word64 -- ^ 'jobId'
-    -> Schedule -- ^ 'Schedule'
     -> Text -- ^ 'teamId'
+    -> Schedule -- ^ 'payload'
     -> ScheduleUpdate'
-scheduleUpdate' pSuJobId_ pSuSchedule_ pSuTeamId_ =
+scheduleUpdate' pSuJobId_ pSuTeamId_ pSuPayload_ =
     ScheduleUpdate'
     { _suQuotaUser = Nothing
     , _suPrettyPrint = True
     , _suJobId = pSuJobId_
     , _suAllDay = Nothing
     , _suStartTime = Nothing
-    , _suSchedule = pSuSchedule_
     , _suUserIP = Nothing
     , _suTeamId = pSuTeamId_
+    , _suPayload = pSuPayload_
     , _suKey = Nothing
     , _suEndTime = Nothing
     , _suOAuthToken = Nothing
@@ -167,11 +168,6 @@ suStartTime :: Lens' ScheduleUpdate' (Maybe Word64)
 suStartTime
   = lens _suStartTime (\ s a -> s{_suStartTime = a})
 
--- | Multipart request metadata.
-suSchedule :: Lens' ScheduleUpdate' Schedule
-suSchedule
-  = lens _suSchedule (\ s a -> s{_suSchedule = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 suUserIP :: Lens' ScheduleUpdate' (Maybe Text)
@@ -180,6 +176,11 @@ suUserIP = lens _suUserIP (\ s a -> s{_suUserIP = a})
 -- | Team ID
 suTeamId :: Lens' ScheduleUpdate' Text
 suTeamId = lens _suTeamId (\ s a -> s{_suTeamId = a})
+
+-- | Multipart request metadata.
+suPayload :: Lens' ScheduleUpdate' Schedule
+suPayload
+  = lens _suPayload (\ s a -> s{_suPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -214,9 +215,9 @@ instance GoogleRequest ScheduleUpdate' where
         type Rs ScheduleUpdate' = Schedule
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u ScheduleUpdate'{..}
-          = go _suAllDay _suDuration _suEndTime _suStartTime
-              _suTeamId
-              _suJobId
+          = go _suTeamId _suJobId _suAllDay _suStartTime
+              _suEndTime
+              _suDuration
               _suQuotaUser
               (Just _suPrettyPrint)
               _suUserIP
@@ -224,7 +225,7 @@ instance GoogleRequest ScheduleUpdate' where
               _suKey
               _suOAuthToken
               (Just AltJSON)
-              _suSchedule
+              _suPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ScheduleUpdateResource)

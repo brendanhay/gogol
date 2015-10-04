@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -59,13 +60,13 @@ import           Network.Google.StorageTransfer.Types
 type GetGoogleServiceAccountResource =
      "v1:getGoogleServiceAccount" :>
        QueryParam "$.xgafv" Text :>
-         QueryParam "access_token" Text :>
-           QueryParam "bearer_token" Text :>
-             QueryParam "callback" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "projectId" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+         QueryParam "upload_protocol" Text :>
+           QueryParam "pp" Bool :>
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "bearer_token" Text :>
+                   QueryParam "projectId" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -97,7 +98,7 @@ data GetGoogleServiceAccount' = GetGoogleServiceAccount'
     , _ggsaOAuthToken     :: !(Maybe OAuthToken)
     , _ggsaFields         :: !(Maybe Text)
     , _ggsaCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetGoogleServiceAccount'' with the minimum fields required to make a request.
 --
@@ -232,12 +233,12 @@ instance GoogleRequest GetGoogleServiceAccount' where
              GoogleServiceAccount
         request = requestWithRoute defReq storageTransferURL
         requestWithRoute r u GetGoogleServiceAccount'{..}
-          = go _ggsaXgafv _ggsaAccessToken _ggsaBearerToken
-              _ggsaCallback
-              (Just _ggsaPp)
-              _ggsaProjectId
+          = go _ggsaXgafv _ggsaUploadProtocol (Just _ggsaPp)
+              _ggsaAccessToken
               _ggsaUploadType
-              _ggsaUploadProtocol
+              _ggsaBearerToken
+              _ggsaProjectId
+              _ggsaCallback
               _ggsaQuotaUser
               (Just _ggsaPrettyPrint)
               _ggsaFields

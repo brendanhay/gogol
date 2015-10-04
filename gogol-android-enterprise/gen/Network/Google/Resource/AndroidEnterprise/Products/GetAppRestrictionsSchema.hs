@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -79,7 +80,7 @@ data ProductsGetAppRestrictionsSchema' = ProductsGetAppRestrictionsSchema'
     , _pgarsOAuthToken   :: !(Maybe OAuthToken)
     , _pgarsProductId    :: !Text
     , _pgarsFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsGetAppRestrictionsSchema'' with the minimum fields required to make a request.
 --
@@ -188,8 +189,8 @@ instance GoogleRequest
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u
           ProductsGetAppRestrictionsSchema'{..}
-          = go _pgarsLanguage _pgarsEnterpriseId
-              _pgarsProductId
+          = go _pgarsEnterpriseId _pgarsProductId
+              _pgarsLanguage
               _pgarsQuotaUser
               (Just _pgarsPrettyPrint)
               _pgarsUserIP

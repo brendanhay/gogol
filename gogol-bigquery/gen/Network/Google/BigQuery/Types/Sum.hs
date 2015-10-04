@@ -18,7 +18,7 @@ module Network.Google.BigQuery.Types.Sum where
 import           Network.Google.Prelude
 
 -- | Filter for job state
-data BigqueryJobsListStateFilter
+data StateFilter
     = Done
       -- ^ @done@
       -- Finished jobs
@@ -30,29 +30,29 @@ data BigqueryJobsListStateFilter
       -- Running jobs
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BigqueryJobsListStateFilter
+instance Hashable StateFilter
 
-instance FromText BigqueryJobsListStateFilter where
+instance FromText StateFilter where
     fromText = \case
         "done" -> Just Done
         "pending" -> Just Pending
         "running" -> Just Running
         _ -> Nothing
 
-instance ToText BigqueryJobsListStateFilter where
+instance ToText StateFilter where
     toText = \case
         Done -> "done"
         Pending -> "pending"
         Running -> "running"
 
-instance FromJSON BigqueryJobsListStateFilter where
-    parseJSON = parseJSONText "BigqueryJobsListStateFilter"
+instance FromJSON StateFilter where
+    parseJSON = parseJSONText "StateFilter"
 
-instance ToJSON BigqueryJobsListStateFilter where
+instance ToJSON StateFilter where
     toJSON = toJSONText
 
 -- | Restrict information returned to a set of selected fields
-data BigqueryJobsListProjection
+data Projection
     = Full
       -- ^ @full@
       -- Includes all job data
@@ -61,21 +61,21 @@ data BigqueryJobsListProjection
       -- Does not include the job configuration
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BigqueryJobsListProjection
+instance Hashable Projection
 
-instance FromText BigqueryJobsListProjection where
+instance FromText Projection where
     fromText = \case
         "full" -> Just Full
         "minimal" -> Just Minimal
         _ -> Nothing
 
-instance ToText BigqueryJobsListProjection where
+instance ToText Projection where
     toText = \case
         Full -> "full"
         Minimal -> "minimal"
 
-instance FromJSON BigqueryJobsListProjection where
-    parseJSON = parseJSONText "BigqueryJobsListProjection"
+instance FromJSON Projection where
+    parseJSON = parseJSONText "Projection"
 
-instance ToJSON BigqueryJobsListProjection where
+instance ToJSON Projection where
     toJSON = toJSONText

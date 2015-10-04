@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -62,17 +63,17 @@ type DebuggerDebuggeesBreakpointsListResource =
            Capture "debuggeeId" Text :>
              "breakpoints" :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "action.value" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "includeAllUsers" Bool :>
-                           QueryParam "includeInactive" Bool :>
-                             QueryParam "pp" Bool :>
-                               QueryParam "stripResults" Bool :>
-                                 QueryParam "uploadType" Text :>
-                                   QueryParam "upload_protocol" Text :>
-                                     QueryParam "waitToken" Text :>
+                 QueryParam "includeInactive" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "action.value" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "stripResults" Bool :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "includeAllUsers" Bool :>
+                                   QueryParam "waitToken" Text :>
+                                     QueryParam "callback" Text :>
                                        QueryParam "quotaUser" Text :>
                                          QueryParam "prettyPrint" Bool :>
                                            QueryParam "fields" Text :>
@@ -106,7 +107,7 @@ data DebuggerDebuggeesBreakpointsList' = DebuggerDebuggeesBreakpointsList'
     , _ddblOAuthToken      :: !(Maybe OAuthToken)
     , _ddblFields          :: !(Maybe Text)
     , _ddblCallback        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DebuggerDebuggeesBreakpointsList'' with the minimum fields required to make a request.
 --
@@ -296,17 +297,17 @@ instance GoogleRequest
         request = requestWithRoute defReq debuggerURL
         requestWithRoute r u
           DebuggerDebuggeesBreakpointsList'{..}
-          = go _ddblXgafv _ddblAccessToken _ddblActionValue
-              _ddblBearerToken
-              _ddblCallback
-              _ddblIncludeAllUsers
-              _ddblIncludeInactive
-              (Just _ddblPp)
-              _ddblStripResults
-              _ddblUploadType
+          = go _ddblDebuggeeId _ddblXgafv _ddblIncludeInactive
               _ddblUploadProtocol
+              (Just _ddblPp)
+              _ddblAccessToken
+              _ddblActionValue
+              _ddblUploadType
+              _ddblStripResults
+              _ddblBearerToken
+              _ddblIncludeAllUsers
               _ddblWaitToken
-              _ddblDebuggeeId
+              _ddblCallback
               _ddblQuotaUser
               (Just _ddblPrettyPrint)
               _ddblFields

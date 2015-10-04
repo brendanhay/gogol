@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,8 +53,8 @@ type ForwardingRulesAggregatedListResource =
        "aggregated" :>
          "forwardingRules" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data ForwardingRulesAggregatedList' = ForwardingRulesAggregatedList'
     , _fralOAuthToken  :: !(Maybe OAuthToken)
     , _fralMaxResults  :: !Word32
     , _fralFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRulesAggregatedList'' with the minimum fields required to make a request.
 --
@@ -202,9 +203,8 @@ instance GoogleRequest ForwardingRulesAggregatedList'
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
           ForwardingRulesAggregatedList'{..}
-          = go _fralFilter (Just _fralMaxResults)
-              _fralPageToken
-              _fralProject
+          = go _fralProject _fralFilter _fralPageToken
+              (Just _fralMaxResults)
               _fralQuotaUser
               (Just _fralPrettyPrint)
               _fralUserIP

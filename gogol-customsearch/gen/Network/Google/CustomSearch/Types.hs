@@ -17,6 +17,9 @@ module Network.Google.CustomSearch.Types
     -- * Service URL
       customSearchURL
 
+    -- * ImgDominantColor
+    , ImgDominantColor (..)
+
     -- * PromotionImage
     , PromotionImage
     , promotionImage
@@ -24,8 +27,9 @@ module Network.Google.CustomSearch.Types
     , piWidth
     , piSource
 
-    -- * SearchCseListSiteSearchFilter
-    , SearchCseListSiteSearchFilter (..)
+    -- * Queries
+    , Queries
+    , queries
 
     -- * Context
     , Context
@@ -33,15 +37,20 @@ module Network.Google.CustomSearch.Types
     , cFacets
     , cTitle
 
-    -- * SearchCseListImgColorType
-    , SearchCseListImgColorType (..)
+    -- * Image
+    , Image
+    , image
+    , iThumbnailLink
+    , iHeight
+    , iByteSize
+    , iContextLink
+    , iThumbnailHeight
+    , iWidth
+    , iThumbnailWidth
 
-    -- * SearchCseListImgType
-    , SearchCseListImgType (..)
-
-    -- * SearchQueries
-    , SearchQueries
-    , searchQueries
+    -- * Pagemap
+    , Pagemap
+    , pagemap
 
     -- * SearchURL
     , SearchURL
@@ -49,29 +58,28 @@ module Network.Google.CustomSearch.Types
     , suType
     , suTemplate
 
-    -- * SearchCseListImgDominantColor
-    , SearchCseListImgDominantColor (..)
+    -- * SiteSearchFilter
+    , SiteSearchFilter (..)
 
-    -- * SearchSpelling
-    , SearchSpelling
-    , searchSpelling
-    , ssCorrectedQuery
-    , ssHTMLCorrectedQuery
+    -- * LabelsItem
+    , LabelsItem
+    , labelsItem
+    , liName
+    , liDisplayName
+    , liLabelWithOp
 
-    -- * ResultPagemap
-    , ResultPagemap
-    , resultPagemap
+    -- * SearchType
+    , SearchType (..)
 
-    -- * ResultImage
-    , ResultImage
-    , resultImage
-    , riThumbnailLink
-    , riHeight
-    , riByteSize
-    , riContextLink
-    , riThumbnailHeight
-    , riWidth
-    , riThumbnailWidth
+    -- * FacetsItemItem
+    , FacetsItemItem
+    , facetsItemItem
+    , fiiAnchor
+    , fiiLabelWithOp
+    , fiiLabel
+
+    -- * Lr
+    , Lr (..)
 
     -- * Result
     , Result
@@ -92,29 +100,13 @@ module Network.Google.CustomSearch.Types
     , rLabels
     , rTitle
 
-    -- * ResultLabels
-    , ResultLabels
-    , resultLabels
-    , rlName
-    , rlDisplayName
-    , rlLabelWithOp
-
-    -- * SearchSearchInformation
-    , SearchSearchInformation
-    , searchSearchInformation
-    , ssiSearchTime
-    , ssiFormattedSearchTime
-    , ssiTotalResults
-    , ssiFormattedTotalResults
-
-    -- * SearchCseListSearchType
-    , SearchCseListSearchType (..)
-
-    -- * SearchCseListLr
-    , SearchCseListLr (..)
-
-    -- * SearchCseListImgSize
-    , SearchCseListImgSize (..)
+    -- * SearchInformation
+    , SearchInformation
+    , searchInformation
+    , siSearchTime
+    , siFormattedSearchTime
+    , siTotalResults
+    , siFormattedTotalResults
 
     -- * Query
     , Query
@@ -157,8 +149,16 @@ module Network.Google.CustomSearch.Types
     , qHq
     , qHighRange
 
-    -- * SearchCseListSafe
-    , SearchCseListSafe (..)
+    -- * Filter
+    , Filter (..)
+
+    -- * BodyLinesItem
+    , BodyLinesItem
+    , bodyLinesItem
+    , bliLink
+    , bliURL
+    , bliHTMLTitle
+    , bliTitle
 
     -- * Promotion
     , Promotion
@@ -169,6 +169,12 @@ module Network.Google.CustomSearch.Types
     , pLink
     , pHTMLTitle
     , pTitle
+
+    -- * ImgType
+    , ImgType (..)
+
+    -- * ImgColorType
+    , ImgColorType (..)
 
     -- * Search
     , Search
@@ -182,23 +188,17 @@ module Network.Google.CustomSearch.Types
     , sPromotions
     , sSpelling
 
-    -- * PromotionBodyLines
-    , PromotionBodyLines
-    , promotionBodyLines
-    , pblLink
-    , pblURL
-    , pblHTMLTitle
-    , pblTitle
+    -- * ImgSize
+    , ImgSize (..)
 
-    -- * SearchCseListFilter
-    , SearchCseListFilter (..)
+    -- * Spelling
+    , Spelling
+    , spelling
+    , sCorrectedQuery
+    , sHTMLCorrectedQuery
 
-    -- * ContextFacets
-    , ContextFacets
-    , contextFacets
-    , cfAnchor
-    , cfLabelWithOp
-    , cfLabel
+    -- * Safe
+    , Safe (..)
     ) where
 
 import           Network.Google.CustomSearch.Types.Product

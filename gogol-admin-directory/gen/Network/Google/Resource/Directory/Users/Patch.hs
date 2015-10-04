@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.Directory.Users.Patch
     , upQuotaUser
     , upPrettyPrint
     , upUserIP
-    , upUser
+    , upPayload
     , upKey
     , upOAuthToken
     , upUserKey
@@ -64,12 +65,12 @@ data UsersPatch' = UsersPatch'
     { _upQuotaUser   :: !(Maybe Text)
     , _upPrettyPrint :: !Bool
     , _upUserIP      :: !(Maybe Text)
-    , _upUser        :: !User
+    , _upPayload     :: !User
     , _upKey         :: !(Maybe Key)
     , _upOAuthToken  :: !(Maybe OAuthToken)
     , _upUserKey     :: !Text
     , _upFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersPatch'' with the minimum fields required to make a request.
 --
@@ -81,7 +82,7 @@ data UsersPatch' = UsersPatch'
 --
 -- * 'upUserIP'
 --
--- * 'upUser'
+-- * 'upPayload'
 --
 -- * 'upKey'
 --
@@ -91,15 +92,15 @@ data UsersPatch' = UsersPatch'
 --
 -- * 'upFields'
 usersPatch'
-    :: User -- ^ 'User'
+    :: User -- ^ 'payload'
     -> Text -- ^ 'userKey'
     -> UsersPatch'
-usersPatch' pUpUser_ pUpUserKey_ =
+usersPatch' pUpPayload_ pUpUserKey_ =
     UsersPatch'
     { _upQuotaUser = Nothing
     , _upPrettyPrint = True
     , _upUserIP = Nothing
-    , _upUser = pUpUser_
+    , _upPayload = pUpPayload_
     , _upKey = Nothing
     , _upOAuthToken = Nothing
     , _upUserKey = pUpUserKey_
@@ -125,8 +126,9 @@ upUserIP :: Lens' UsersPatch' (Maybe Text)
 upUserIP = lens _upUserIP (\ s a -> s{_upUserIP = a})
 
 -- | Multipart request metadata.
-upUser :: Lens' UsersPatch' User
-upUser = lens _upUser (\ s a -> s{_upUser = a})
+upPayload :: Lens' UsersPatch' User
+upPayload
+  = lens _upPayload (\ s a -> s{_upPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -163,7 +165,7 @@ instance GoogleRequest UsersPatch' where
               _upKey
               _upOAuthToken
               (Just AltJSON)
-              _upUser
+              _upPayload
           where go
                   = clientWithRoute (Proxy :: Proxy UsersPatchResource)
                       r

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,10 +38,10 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyAckDeadline
     , psmadQuotaUser
     , psmadPrettyPrint
     , psmadUploadProtocol
-    , psmadModifyAckDeadlineRequest
     , psmadPp
     , psmadAccessToken
     , psmadUploadType
+    , psmadPayload
     , psmadBearerToken
     , psmadKey
     , psmadOAuthToken
@@ -56,14 +57,15 @@ import           Network.Google.PubSub.Types
 -- 'ProjectsSubscriptionsModifyAckDeadline'' request conforms to.
 type ProjectsSubscriptionsModifyAckDeadlineResource =
      "v1beta2" :>
-       "{+subscription}:modifyAckDeadline" :>
+       CaptureMode "subscription" "modifyAckDeadline" Text
+         :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -80,21 +82,21 @@ type ProjectsSubscriptionsModifyAckDeadlineResource =
 --
 -- /See:/ 'projectsSubscriptionsModifyAckDeadline'' smart constructor.
 data ProjectsSubscriptionsModifyAckDeadline' = ProjectsSubscriptionsModifyAckDeadline'
-    { _psmadXgafv                    :: !(Maybe Text)
-    , _psmadQuotaUser                :: !(Maybe Text)
-    , _psmadPrettyPrint              :: !Bool
-    , _psmadUploadProtocol           :: !(Maybe Text)
-    , _psmadModifyAckDeadlineRequest :: !ModifyAckDeadlineRequest
-    , _psmadPp                       :: !Bool
-    , _psmadAccessToken              :: !(Maybe Text)
-    , _psmadUploadType               :: !(Maybe Text)
-    , _psmadBearerToken              :: !(Maybe Text)
-    , _psmadKey                      :: !(Maybe Key)
-    , _psmadOAuthToken               :: !(Maybe OAuthToken)
-    , _psmadSubscription             :: !Text
-    , _psmadFields                   :: !(Maybe Text)
-    , _psmadCallback                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _psmadXgafv          :: !(Maybe Text)
+    , _psmadQuotaUser      :: !(Maybe Text)
+    , _psmadPrettyPrint    :: !Bool
+    , _psmadUploadProtocol :: !(Maybe Text)
+    , _psmadPp             :: !Bool
+    , _psmadAccessToken    :: !(Maybe Text)
+    , _psmadUploadType     :: !(Maybe Text)
+    , _psmadPayload        :: !ModifyAckDeadlineRequest
+    , _psmadBearerToken    :: !(Maybe Text)
+    , _psmadKey            :: !(Maybe Key)
+    , _psmadOAuthToken     :: !(Maybe OAuthToken)
+    , _psmadSubscription   :: !Text
+    , _psmadFields         :: !(Maybe Text)
+    , _psmadCallback       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsModifyAckDeadline'' with the minimum fields required to make a request.
 --
@@ -108,13 +110,13 @@ data ProjectsSubscriptionsModifyAckDeadline' = ProjectsSubscriptionsModifyAckDea
 --
 -- * 'psmadUploadProtocol'
 --
--- * 'psmadModifyAckDeadlineRequest'
---
 -- * 'psmadPp'
 --
 -- * 'psmadAccessToken'
 --
 -- * 'psmadUploadType'
+--
+-- * 'psmadPayload'
 --
 -- * 'psmadBearerToken'
 --
@@ -128,19 +130,19 @@ data ProjectsSubscriptionsModifyAckDeadline' = ProjectsSubscriptionsModifyAckDea
 --
 -- * 'psmadCallback'
 projectsSubscriptionsModifyAckDeadline'
-    :: ModifyAckDeadlineRequest -- ^ 'ModifyAckDeadlineRequest'
+    :: ModifyAckDeadlineRequest -- ^ 'payload'
     -> Text -- ^ 'subscription'
     -> ProjectsSubscriptionsModifyAckDeadline'
-projectsSubscriptionsModifyAckDeadline' pPsmadModifyAckDeadlineRequest_ pPsmadSubscription_ =
+projectsSubscriptionsModifyAckDeadline' pPsmadPayload_ pPsmadSubscription_ =
     ProjectsSubscriptionsModifyAckDeadline'
     { _psmadXgafv = Nothing
     , _psmadQuotaUser = Nothing
     , _psmadPrettyPrint = True
     , _psmadUploadProtocol = Nothing
-    , _psmadModifyAckDeadlineRequest = pPsmadModifyAckDeadlineRequest_
     , _psmadPp = True
     , _psmadAccessToken = Nothing
     , _psmadUploadType = Nothing
+    , _psmadPayload = pPsmadPayload_
     , _psmadBearerToken = Nothing
     , _psmadKey = Nothing
     , _psmadOAuthToken = Nothing
@@ -174,12 +176,6 @@ psmadUploadProtocol
   = lens _psmadUploadProtocol
       (\ s a -> s{_psmadUploadProtocol = a})
 
--- | Multipart request metadata.
-psmadModifyAckDeadlineRequest :: Lens' ProjectsSubscriptionsModifyAckDeadline' ModifyAckDeadlineRequest
-psmadModifyAckDeadlineRequest
-  = lens _psmadModifyAckDeadlineRequest
-      (\ s a -> s{_psmadModifyAckDeadlineRequest = a})
-
 -- | Pretty-print response.
 psmadPp :: Lens' ProjectsSubscriptionsModifyAckDeadline' Bool
 psmadPp = lens _psmadPp (\ s a -> s{_psmadPp = a})
@@ -195,6 +191,11 @@ psmadUploadType :: Lens' ProjectsSubscriptionsModifyAckDeadline' (Maybe Text)
 psmadUploadType
   = lens _psmadUploadType
       (\ s a -> s{_psmadUploadType = a})
+
+-- | Multipart request metadata.
+psmadPayload :: Lens' ProjectsSubscriptionsModifyAckDeadline' ModifyAckDeadlineRequest
+psmadPayload
+  = lens _psmadPayload (\ s a -> s{_psmadPayload = a})
 
 -- | OAuth bearer token.
 psmadBearerToken :: Lens' ProjectsSubscriptionsModifyAckDeadline' (Maybe Text)
@@ -243,19 +244,20 @@ instance GoogleRequest
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u
           ProjectsSubscriptionsModifyAckDeadline'{..}
-          = go _psmadXgafv _psmadAccessToken _psmadBearerToken
-              _psmadCallback
-              (Just _psmadPp)
-              _psmadUploadType
+          = go _psmadSubscription _psmadXgafv
               _psmadUploadProtocol
-              _psmadSubscription
+              (Just _psmadPp)
+              _psmadAccessToken
+              _psmadUploadType
+              _psmadBearerToken
+              _psmadCallback
               _psmadQuotaUser
               (Just _psmadPrettyPrint)
               _psmadFields
               _psmadKey
               _psmadOAuthToken
               (Just AltJSON)
-              _psmadModifyAckDeadlineRequest
+              _psmadPayload
           where go
                   = clientWithRoute
                       (Proxy ::

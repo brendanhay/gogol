@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,13 +38,13 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Patch
     , ampPp
     , ampAccessToken
     , ampUploadType
+    , ampPayload
     , ampModulesId
     , ampMigrateTraffic
     , ampMask
     , ampBearerToken
     , ampKey
     , ampAppsId
-    , ampModule
     , ampOAuthToken
     , ampFields
     , ampCallback
@@ -61,14 +62,14 @@ type AppsModulesPatchResource =
            "modules" :>
              Capture "modulesId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "mask" Text :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
                          QueryParam "migrateTraffic" Bool :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "upload_protocol" Text :>
+                           QueryParam "mask" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "callback" Text :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "fields" Text :>
@@ -89,17 +90,17 @@ data AppsModulesPatch' = AppsModulesPatch'
     , _ampPp             :: !Bool
     , _ampAccessToken    :: !(Maybe Text)
     , _ampUploadType     :: !(Maybe Text)
+    , _ampPayload        :: !Module
     , _ampModulesId      :: !Text
     , _ampMigrateTraffic :: !(Maybe Bool)
     , _ampMask           :: !(Maybe Text)
     , _ampBearerToken    :: !(Maybe Text)
     , _ampKey            :: !(Maybe Key)
     , _ampAppsId         :: !Text
-    , _ampModule         :: !Module
     , _ampOAuthToken     :: !(Maybe OAuthToken)
     , _ampFields         :: !(Maybe Text)
     , _ampCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsModulesPatch'' with the minimum fields required to make a request.
 --
@@ -119,6 +120,8 @@ data AppsModulesPatch' = AppsModulesPatch'
 --
 -- * 'ampUploadType'
 --
+-- * 'ampPayload'
+--
 -- * 'ampModulesId'
 --
 -- * 'ampMigrateTraffic'
@@ -131,19 +134,17 @@ data AppsModulesPatch' = AppsModulesPatch'
 --
 -- * 'ampAppsId'
 --
--- * 'ampModule'
---
 -- * 'ampOAuthToken'
 --
 -- * 'ampFields'
 --
 -- * 'ampCallback'
 appsModulesPatch'
-    :: Text -- ^ 'modulesId'
+    :: Module -- ^ 'payload'
+    -> Text -- ^ 'modulesId'
     -> Text -- ^ 'appsId'
-    -> Module -- ^ 'Module'
     -> AppsModulesPatch'
-appsModulesPatch' pAmpModulesId_ pAmpAppsId_ pAmpModule_ =
+appsModulesPatch' pAmpPayload_ pAmpModulesId_ pAmpAppsId_ =
     AppsModulesPatch'
     { _ampXgafv = Nothing
     , _ampQuotaUser = Nothing
@@ -152,13 +153,13 @@ appsModulesPatch' pAmpModulesId_ pAmpAppsId_ pAmpModule_ =
     , _ampPp = True
     , _ampAccessToken = Nothing
     , _ampUploadType = Nothing
+    , _ampPayload = pAmpPayload_
     , _ampModulesId = pAmpModulesId_
     , _ampMigrateTraffic = Nothing
     , _ampMask = Nothing
     , _ampBearerToken = Nothing
     , _ampKey = Nothing
     , _ampAppsId = pAmpAppsId_
-    , _ampModule = pAmpModule_
     , _ampOAuthToken = Nothing
     , _ampFields = Nothing
     , _ampCallback = Nothing
@@ -203,6 +204,11 @@ ampUploadType
   = lens _ampUploadType
       (\ s a -> s{_ampUploadType = a})
 
+-- | Multipart request metadata.
+ampPayload :: Lens' AppsModulesPatch' Module
+ampPayload
+  = lens _ampPayload (\ s a -> s{_ampPayload = a})
+
 -- | Part of \`name\`. See documentation of \`appsId\`.
 ampModulesId :: Lens' AppsModulesPatch' Text
 ampModulesId
@@ -237,11 +243,6 @@ ampAppsId :: Lens' AppsModulesPatch' Text
 ampAppsId
   = lens _ampAppsId (\ s a -> s{_ampAppsId = a})
 
--- | Multipart request metadata.
-ampModule :: Lens' AppsModulesPatch' Module
-ampModule
-  = lens _ampModule (\ s a -> s{_ampModule = a})
-
 -- | OAuth 2.0 token for the current user.
 ampOAuthToken :: Lens' AppsModulesPatch' (Maybe OAuthToken)
 ampOAuthToken
@@ -266,22 +267,22 @@ instance GoogleRequest AppsModulesPatch' where
         type Rs AppsModulesPatch' = Operation
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsModulesPatch'{..}
-          = go _ampXgafv _ampAccessToken _ampBearerToken
-              _ampCallback
-              _ampMask
-              _ampMigrateTraffic
-              (Just _ampPp)
-              _ampUploadType
+          = go _ampAppsId _ampModulesId _ampXgafv
               _ampUploadProtocol
-              _ampAppsId
-              _ampModulesId
+              (Just _ampPp)
+              _ampAccessToken
+              _ampUploadType
+              _ampMigrateTraffic
+              _ampMask
+              _ampBearerToken
+              _ampCallback
               _ampQuotaUser
               (Just _ampPrettyPrint)
               _ampFields
               _ampKey
               _ampOAuthToken
               (Just AltJSON)
-              _ampModule
+              _ampPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AppsModulesPatchResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,8 +49,8 @@ import           Network.Google.Prelude
 type FilesGenerateIdsResource =
      "files" :>
        "generateIds" :>
-         QueryParam "maxResults" Int32 :>
-           QueryParam "space" Text :>
+         QueryParam "space" Text :>
+           QueryParam "maxResults" Int32 :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -70,7 +71,7 @@ data FilesGenerateIds' = FilesGenerateIds'
     , _fgiOAuthToken  :: !(Maybe OAuthToken)
     , _fgiMaxResults  :: !Int32
     , _fgiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesGenerateIds'' with the minimum fields required to make a request.
 --
@@ -160,7 +161,7 @@ instance GoogleRequest FilesGenerateIds' where
         type Rs FilesGenerateIds' = GeneratedIds
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesGenerateIds'{..}
-          = go (Just _fgiMaxResults) (Just _fgiSpace)
+          = go (Just _fgiSpace) (Just _fgiMaxResults)
               _fgiQuotaUser
               (Just _fgiPrettyPrint)
               _fgiUserIP

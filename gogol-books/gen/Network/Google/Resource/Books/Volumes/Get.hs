@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,8 +55,8 @@ type VolumesGetResource =
        Capture "volumeId" Text :>
          QueryParam "country" Text :>
            QueryParam "partner" Text :>
-             QueryParam "projection" BooksVolumesGetProjection :>
-               QueryParam "source" Text :>
+             QueryParam "source" Text :>
+               QueryParam "projection" BooksVolumesGetProjection :>
                  QueryParam "user_library_consistent_read" Bool :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
@@ -81,7 +82,7 @@ data VolumesGet' = VolumesGet'
     , _vgOAuthToken                :: !(Maybe OAuthToken)
     , _vgUserLibraryConsistentRead :: !(Maybe Bool)
     , _vgFields                    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesGet'' with the minimum fields required to make a request.
 --
@@ -199,9 +200,9 @@ instance GoogleRequest VolumesGet' where
         type Rs VolumesGet' = Volume
         request = requestWithRoute defReq booksURL
         requestWithRoute r u VolumesGet'{..}
-          = go _vgCountry _vgPartner _vgProjection _vgSource
+          = go _vgVolumeId _vgCountry _vgPartner _vgSource
+              _vgProjection
               _vgUserLibraryConsistentRead
-              _vgVolumeId
               _vgQuotaUser
               (Just _vgPrettyPrint)
               _vgUserIP

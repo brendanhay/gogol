@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -73,7 +74,7 @@ data EventsDelete' = EventsDelete'
     , _edOAuthToken        :: !(Maybe OAuthToken)
     , _edEventId           :: !Text
     , _edFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsDelete'' with the minimum fields required to make a request.
 --
@@ -173,7 +174,7 @@ instance GoogleRequest EventsDelete' where
         type Rs EventsDelete' = ()
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsDelete'{..}
-          = go _edSendNotifications _edCalendarId _edEventId
+          = go _edCalendarId _edEventId _edSendNotifications
               _edQuotaUser
               (Just _edPrettyPrint)
               _edUserIP

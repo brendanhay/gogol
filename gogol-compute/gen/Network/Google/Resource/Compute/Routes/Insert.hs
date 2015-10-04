@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.Compute.Routes.Insert
     , riPrettyPrint
     , riProject
     , riUserIP
-    , riRoute
+    , riPayload
     , riKey
     , riOAuthToken
     , riFields
@@ -68,11 +69,11 @@ data RoutesInsert' = RoutesInsert'
     , _riPrettyPrint :: !Bool
     , _riProject     :: !Text
     , _riUserIP      :: !(Maybe Text)
-    , _riRoute       :: !Route
+    , _riPayload     :: !Route
     , _riKey         :: !(Maybe Key)
     , _riOAuthToken  :: !(Maybe OAuthToken)
     , _riFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoutesInsert'' with the minimum fields required to make a request.
 --
@@ -86,7 +87,7 @@ data RoutesInsert' = RoutesInsert'
 --
 -- * 'riUserIP'
 --
--- * 'riRoute'
+-- * 'riPayload'
 --
 -- * 'riKey'
 --
@@ -95,15 +96,15 @@ data RoutesInsert' = RoutesInsert'
 -- * 'riFields'
 routesInsert'
     :: Text -- ^ 'project'
-    -> Route -- ^ 'Route'
+    -> Route -- ^ 'payload'
     -> RoutesInsert'
-routesInsert' pRiProject_ pRiRoute_ =
+routesInsert' pRiProject_ pRiPayload_ =
     RoutesInsert'
     { _riQuotaUser = Nothing
     , _riPrettyPrint = True
     , _riProject = pRiProject_
     , _riUserIP = Nothing
-    , _riRoute = pRiRoute_
+    , _riPayload = pRiPayload_
     , _riKey = Nothing
     , _riOAuthToken = Nothing
     , _riFields = Nothing
@@ -133,8 +134,9 @@ riUserIP :: Lens' RoutesInsert' (Maybe Text)
 riUserIP = lens _riUserIP (\ s a -> s{_riUserIP = a})
 
 -- | Multipart request metadata.
-riRoute :: Lens' RoutesInsert' Route
-riRoute = lens _riRoute (\ s a -> s{_riRoute = a})
+riPayload :: Lens' RoutesInsert' Route
+riPayload
+  = lens _riPayload (\ s a -> s{_riPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -165,7 +167,7 @@ instance GoogleRequest RoutesInsert' where
               _riKey
               _riOAuthToken
               (Just AltJSON)
-              _riRoute
+              _riPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RoutesInsertResource)

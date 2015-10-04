@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,7 +38,7 @@ module Network.Google.Resource.Compute.InstanceGroups.ListInstances
     , igliProject
     , igliUserIP
     , igliZone
-    , igliInstanceGroupsListInstancesRequest
+    , igliPayload
     , igliKey
     , igliFilter
     , igliPageToken
@@ -60,8 +61,8 @@ type InstanceGroupsListInstancesResource =
              Capture "instanceGroup" Text :>
                "listInstances" :>
                  QueryParam "filter" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "pageToken" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -80,20 +81,20 @@ type InstanceGroupsListInstancesResource =
 --
 -- /See:/ 'instanceGroupsListInstances'' smart constructor.
 data InstanceGroupsListInstances' = InstanceGroupsListInstances'
-    { _igliQuotaUser                          :: !(Maybe Text)
-    , _igliPrettyPrint                        :: !Bool
-    , _igliProject                            :: !Text
-    , _igliUserIP                             :: !(Maybe Text)
-    , _igliZone                               :: !Text
-    , _igliInstanceGroupsListInstancesRequest :: !InstanceGroupsListInstancesRequest
-    , _igliKey                                :: !(Maybe Key)
-    , _igliFilter                             :: !(Maybe Text)
-    , _igliPageToken                          :: !(Maybe Text)
-    , _igliOAuthToken                         :: !(Maybe OAuthToken)
-    , _igliInstanceGroup                      :: !Text
-    , _igliMaxResults                         :: !Word32
-    , _igliFields                             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _igliQuotaUser     :: !(Maybe Text)
+    , _igliPrettyPrint   :: !Bool
+    , _igliProject       :: !Text
+    , _igliUserIP        :: !(Maybe Text)
+    , _igliZone          :: !Text
+    , _igliPayload       :: !InstanceGroupsListInstancesRequest
+    , _igliKey           :: !(Maybe Key)
+    , _igliFilter        :: !(Maybe Text)
+    , _igliPageToken     :: !(Maybe Text)
+    , _igliOAuthToken    :: !(Maybe OAuthToken)
+    , _igliInstanceGroup :: !Text
+    , _igliMaxResults    :: !Word32
+    , _igliFields        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsListInstances'' with the minimum fields required to make a request.
 --
@@ -109,7 +110,7 @@ data InstanceGroupsListInstances' = InstanceGroupsListInstances'
 --
 -- * 'igliZone'
 --
--- * 'igliInstanceGroupsListInstancesRequest'
+-- * 'igliPayload'
 --
 -- * 'igliKey'
 --
@@ -127,17 +128,17 @@ data InstanceGroupsListInstances' = InstanceGroupsListInstances'
 instanceGroupsListInstances'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> InstanceGroupsListInstancesRequest -- ^ 'InstanceGroupsListInstancesRequest'
+    -> InstanceGroupsListInstancesRequest -- ^ 'payload'
     -> Text -- ^ 'instanceGroup'
     -> InstanceGroupsListInstances'
-instanceGroupsListInstances' pIgliProject_ pIgliZone_ pIgliInstanceGroupsListInstancesRequest_ pIgliInstanceGroup_ =
+instanceGroupsListInstances' pIgliProject_ pIgliZone_ pIgliPayload_ pIgliInstanceGroup_ =
     InstanceGroupsListInstances'
     { _igliQuotaUser = Nothing
     , _igliPrettyPrint = True
     , _igliProject = pIgliProject_
     , _igliUserIP = Nothing
     , _igliZone = pIgliZone_
-    , _igliInstanceGroupsListInstancesRequest = pIgliInstanceGroupsListInstancesRequest_
+    , _igliPayload = pIgliPayload_
     , _igliKey = Nothing
     , _igliFilter = Nothing
     , _igliPageToken = Nothing
@@ -177,11 +178,9 @@ igliZone :: Lens' InstanceGroupsListInstances' Text
 igliZone = lens _igliZone (\ s a -> s{_igliZone = a})
 
 -- | Multipart request metadata.
-igliInstanceGroupsListInstancesRequest :: Lens' InstanceGroupsListInstances' InstanceGroupsListInstancesRequest
-igliInstanceGroupsListInstancesRequest
-  = lens _igliInstanceGroupsListInstancesRequest
-      (\ s a ->
-         s{_igliInstanceGroupsListInstancesRequest = a})
+igliPayload :: Lens' InstanceGroupsListInstances' InstanceGroupsListInstancesRequest
+igliPayload
+  = lens _igliPayload (\ s a -> s{_igliPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -247,11 +246,10 @@ instance GoogleRequest InstanceGroupsListInstances'
              InstanceGroupsListInstances
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceGroupsListInstances'{..}
-          = go _igliFilter (Just _igliMaxResults)
+          = go _igliProject _igliZone _igliInstanceGroup
+              _igliFilter
               _igliPageToken
-              _igliProject
-              _igliZone
-              _igliInstanceGroup
+              (Just _igliMaxResults)
               _igliQuotaUser
               (Just _igliPrettyPrint)
               _igliUserIP
@@ -259,7 +257,7 @@ instance GoogleRequest InstanceGroupsListInstances'
               _igliKey
               _igliOAuthToken
               (Just AltJSON)
-              _igliInstanceGroupsListInstancesRequest
+              _igliPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceGroupsListInstancesResource)

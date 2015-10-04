@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.Analytics.Management.WebProperties.Insert
     , mwpiQuotaUser
     , mwpiPrettyPrint
     , mwpiUserIP
+    , mwpiPayload
     , mwpiAccountId
     , mwpiKey
-    , mwpiWebProperty
     , mwpiOAuthToken
     , mwpiFields
     ) where
@@ -71,12 +72,12 @@ data ManagementWebPropertiesInsert' = ManagementWebPropertiesInsert'
     { _mwpiQuotaUser   :: !(Maybe Text)
     , _mwpiPrettyPrint :: !Bool
     , _mwpiUserIP      :: !(Maybe Text)
+    , _mwpiPayload     :: !WebProperty
     , _mwpiAccountId   :: !Text
     , _mwpiKey         :: !(Maybe Key)
-    , _mwpiWebProperty :: !WebProperty
     , _mwpiOAuthToken  :: !(Maybe OAuthToken)
     , _mwpiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertiesInsert'' with the minimum fields required to make a request.
 --
@@ -88,27 +89,27 @@ data ManagementWebPropertiesInsert' = ManagementWebPropertiesInsert'
 --
 -- * 'mwpiUserIP'
 --
+-- * 'mwpiPayload'
+--
 -- * 'mwpiAccountId'
 --
 -- * 'mwpiKey'
---
--- * 'mwpiWebProperty'
 --
 -- * 'mwpiOAuthToken'
 --
 -- * 'mwpiFields'
 managementWebPropertiesInsert'
-    :: Text -- ^ 'accountId'
-    -> WebProperty -- ^ 'WebProperty'
+    :: WebProperty -- ^ 'payload'
+    -> Text -- ^ 'accountId'
     -> ManagementWebPropertiesInsert'
-managementWebPropertiesInsert' pMwpiAccountId_ pMwpiWebProperty_ =
+managementWebPropertiesInsert' pMwpiPayload_ pMwpiAccountId_ =
     ManagementWebPropertiesInsert'
     { _mwpiQuotaUser = Nothing
     , _mwpiPrettyPrint = False
     , _mwpiUserIP = Nothing
+    , _mwpiPayload = pMwpiPayload_
     , _mwpiAccountId = pMwpiAccountId_
     , _mwpiKey = Nothing
-    , _mwpiWebProperty = pMwpiWebProperty_
     , _mwpiOAuthToken = Nothing
     , _mwpiFields = Nothing
     }
@@ -133,6 +134,11 @@ mwpiUserIP :: Lens' ManagementWebPropertiesInsert' (Maybe Text)
 mwpiUserIP
   = lens _mwpiUserIP (\ s a -> s{_mwpiUserIP = a})
 
+-- | Multipart request metadata.
+mwpiPayload :: Lens' ManagementWebPropertiesInsert' WebProperty
+mwpiPayload
+  = lens _mwpiPayload (\ s a -> s{_mwpiPayload = a})
+
 -- | Account ID to create the web property for.
 mwpiAccountId :: Lens' ManagementWebPropertiesInsert' Text
 mwpiAccountId
@@ -144,12 +150,6 @@ mwpiAccountId
 -- token.
 mwpiKey :: Lens' ManagementWebPropertiesInsert' (Maybe Key)
 mwpiKey = lens _mwpiKey (\ s a -> s{_mwpiKey = a})
-
--- | Multipart request metadata.
-mwpiWebProperty :: Lens' ManagementWebPropertiesInsert' WebProperty
-mwpiWebProperty
-  = lens _mwpiWebProperty
-      (\ s a -> s{_mwpiWebProperty = a})
 
 -- | OAuth 2.0 token for the current user.
 mwpiOAuthToken :: Lens' ManagementWebPropertiesInsert' (Maybe OAuthToken)
@@ -180,7 +180,7 @@ instance GoogleRequest ManagementWebPropertiesInsert'
               _mwpiKey
               _mwpiOAuthToken
               (Just AltJSON)
-              _mwpiWebProperty
+              _mwpiPayload
           where go
                   = clientWithRoute
                       (Proxy ::

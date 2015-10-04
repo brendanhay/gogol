@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 data Groups = Groups
     { _gKind         :: !Text
     , _gResponseCode :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Groups' with the minimum fields required to make a request.
 --

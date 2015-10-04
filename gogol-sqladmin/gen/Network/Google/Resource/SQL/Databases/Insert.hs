@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.SQL.Databases.Insert
     , diQuotaUser
     , diPrettyPrint
     , diProject
-    , diDatabase
     , diUserIP
+    , diPayload
     , diKey
     , diOAuthToken
     , diFields
@@ -70,13 +71,13 @@ data DatabasesInsert' = DatabasesInsert'
     { _diQuotaUser   :: !(Maybe Text)
     , _diPrettyPrint :: !Bool
     , _diProject     :: !Text
-    , _diDatabase    :: !Database
     , _diUserIP      :: !(Maybe Text)
+    , _diPayload     :: !Database
     , _diKey         :: !(Maybe Key)
     , _diOAuthToken  :: !(Maybe OAuthToken)
     , _diFields      :: !(Maybe Text)
     , _diInstance    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatabasesInsert'' with the minimum fields required to make a request.
 --
@@ -88,9 +89,9 @@ data DatabasesInsert' = DatabasesInsert'
 --
 -- * 'diProject'
 --
--- * 'diDatabase'
---
 -- * 'diUserIP'
+--
+-- * 'diPayload'
 --
 -- * 'diKey'
 --
@@ -101,16 +102,16 @@ data DatabasesInsert' = DatabasesInsert'
 -- * 'diInstance'
 databasesInsert'
     :: Text -- ^ 'project'
-    -> Database -- ^ 'Database'
+    -> Database -- ^ 'payload'
     -> Text -- ^ 'instance'
     -> DatabasesInsert'
-databasesInsert' pDiProject_ pDiDatabase_ pDiInstance_ =
+databasesInsert' pDiProject_ pDiPayload_ pDiInstance_ =
     DatabasesInsert'
     { _diQuotaUser = Nothing
     , _diPrettyPrint = True
     , _diProject = pDiProject_
-    , _diDatabase = pDiDatabase_
     , _diUserIP = Nothing
+    , _diPayload = pDiPayload_
     , _diKey = Nothing
     , _diOAuthToken = Nothing
     , _diFields = Nothing
@@ -135,15 +136,15 @@ diProject :: Lens' DatabasesInsert' Text
 diProject
   = lens _diProject (\ s a -> s{_diProject = a})
 
--- | Multipart request metadata.
-diDatabase :: Lens' DatabasesInsert' Database
-diDatabase
-  = lens _diDatabase (\ s a -> s{_diDatabase = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 diUserIP :: Lens' DatabasesInsert' (Maybe Text)
 diUserIP = lens _diUserIP (\ s a -> s{_diUserIP = a})
+
+-- | Multipart request metadata.
+diPayload :: Lens' DatabasesInsert' Database
+diPayload
+  = lens _diPayload (\ s a -> s{_diPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -180,7 +181,7 @@ instance GoogleRequest DatabasesInsert' where
               _diKey
               _diOAuthToken
               (Just AltJSON)
-              _diDatabase
+              _diPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatabasesInsertResource)

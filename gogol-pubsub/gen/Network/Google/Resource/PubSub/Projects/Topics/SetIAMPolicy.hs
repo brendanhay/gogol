@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -38,7 +39,7 @@ module Network.Google.Resource.PubSub.Projects.Topics.SetIAMPolicy
     , ptsipPp
     , ptsipAccessToken
     , ptsipUploadType
-    , ptsipSetIAMPolicyRequest
+    , ptsipPayload
     , ptsipBearerToken
     , ptsipKey
     , ptsipResource
@@ -54,14 +55,14 @@ import           Network.Google.PubSub.Types
 -- 'ProjectsTopicsSetIAMPolicy'' request conforms to.
 type ProjectsTopicsSetIAMPolicyResource =
      "v1beta2" :>
-       "{+resource}:setIamPolicy" :>
+       CaptureMode "resource" "setIamPolicy" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -76,21 +77,21 @@ type ProjectsTopicsSetIAMPolicyResource =
 --
 -- /See:/ 'projectsTopicsSetIAMPolicy'' smart constructor.
 data ProjectsTopicsSetIAMPolicy' = ProjectsTopicsSetIAMPolicy'
-    { _ptsipXgafv               :: !(Maybe Text)
-    , _ptsipQuotaUser           :: !(Maybe Text)
-    , _ptsipPrettyPrint         :: !Bool
-    , _ptsipUploadProtocol      :: !(Maybe Text)
-    , _ptsipPp                  :: !Bool
-    , _ptsipAccessToken         :: !(Maybe Text)
-    , _ptsipUploadType          :: !(Maybe Text)
-    , _ptsipSetIAMPolicyRequest :: !SetIAMPolicyRequest
-    , _ptsipBearerToken         :: !(Maybe Text)
-    , _ptsipKey                 :: !(Maybe Key)
-    , _ptsipResource            :: !Text
-    , _ptsipOAuthToken          :: !(Maybe OAuthToken)
-    , _ptsipFields              :: !(Maybe Text)
-    , _ptsipCallback            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ptsipXgafv          :: !(Maybe Text)
+    , _ptsipQuotaUser      :: !(Maybe Text)
+    , _ptsipPrettyPrint    :: !Bool
+    , _ptsipUploadProtocol :: !(Maybe Text)
+    , _ptsipPp             :: !Bool
+    , _ptsipAccessToken    :: !(Maybe Text)
+    , _ptsipUploadType     :: !(Maybe Text)
+    , _ptsipPayload        :: !SetIAMPolicyRequest
+    , _ptsipBearerToken    :: !(Maybe Text)
+    , _ptsipKey            :: !(Maybe Key)
+    , _ptsipResource       :: !Text
+    , _ptsipOAuthToken     :: !(Maybe OAuthToken)
+    , _ptsipFields         :: !(Maybe Text)
+    , _ptsipCallback       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsTopicsSetIAMPolicy'' with the minimum fields required to make a request.
 --
@@ -110,7 +111,7 @@ data ProjectsTopicsSetIAMPolicy' = ProjectsTopicsSetIAMPolicy'
 --
 -- * 'ptsipUploadType'
 --
--- * 'ptsipSetIAMPolicyRequest'
+-- * 'ptsipPayload'
 --
 -- * 'ptsipBearerToken'
 --
@@ -124,10 +125,10 @@ data ProjectsTopicsSetIAMPolicy' = ProjectsTopicsSetIAMPolicy'
 --
 -- * 'ptsipCallback'
 projectsTopicsSetIAMPolicy'
-    :: SetIAMPolicyRequest -- ^ 'SetIAMPolicyRequest'
+    :: SetIAMPolicyRequest -- ^ 'payload'
     -> Text -- ^ 'resource'
     -> ProjectsTopicsSetIAMPolicy'
-projectsTopicsSetIAMPolicy' pPtsipSetIAMPolicyRequest_ pPtsipResource_ =
+projectsTopicsSetIAMPolicy' pPtsipPayload_ pPtsipResource_ =
     ProjectsTopicsSetIAMPolicy'
     { _ptsipXgafv = Nothing
     , _ptsipQuotaUser = Nothing
@@ -136,7 +137,7 @@ projectsTopicsSetIAMPolicy' pPtsipSetIAMPolicyRequest_ pPtsipResource_ =
     , _ptsipPp = True
     , _ptsipAccessToken = Nothing
     , _ptsipUploadType = Nothing
-    , _ptsipSetIAMPolicyRequest = pPtsipSetIAMPolicyRequest_
+    , _ptsipPayload = pPtsipPayload_
     , _ptsipBearerToken = Nothing
     , _ptsipKey = Nothing
     , _ptsipResource = pPtsipResource_
@@ -187,10 +188,9 @@ ptsipUploadType
       (\ s a -> s{_ptsipUploadType = a})
 
 -- | Multipart request metadata.
-ptsipSetIAMPolicyRequest :: Lens' ProjectsTopicsSetIAMPolicy' SetIAMPolicyRequest
-ptsipSetIAMPolicyRequest
-  = lens _ptsipSetIAMPolicyRequest
-      (\ s a -> s{_ptsipSetIAMPolicyRequest = a})
+ptsipPayload :: Lens' ProjectsTopicsSetIAMPolicy' SetIAMPolicyRequest
+ptsipPayload
+  = lens _ptsipPayload (\ s a -> s{_ptsipPayload = a})
 
 -- | OAuth bearer token.
 ptsipBearerToken :: Lens' ProjectsTopicsSetIAMPolicy' (Maybe Text)
@@ -238,19 +238,19 @@ instance GoogleRequest ProjectsTopicsSetIAMPolicy'
         type Rs ProjectsTopicsSetIAMPolicy' = Policy
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsTopicsSetIAMPolicy'{..}
-          = go _ptsipXgafv _ptsipAccessToken _ptsipBearerToken
-              _ptsipCallback
+          = go _ptsipResource _ptsipXgafv _ptsipUploadProtocol
               (Just _ptsipPp)
+              _ptsipAccessToken
               _ptsipUploadType
-              _ptsipUploadProtocol
-              _ptsipResource
+              _ptsipBearerToken
+              _ptsipCallback
               _ptsipQuotaUser
               (Just _ptsipPrettyPrint)
               _ptsipFields
               _ptsipKey
               _ptsipOAuthToken
               (Just AltJSON)
-              _ptsipSetIAMPolicyRequest
+              _ptsipPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsTopicsSetIAMPolicyResource)

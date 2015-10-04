@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Update
     -- * Request Lenses
     , aguQuotaUser
     , aguPrettyPrint
-    , aguAdvertiserGroup
     , aguUserIP
     , aguProfileId
+    , aguPayload
     , aguKey
     , aguOAuthToken
     , aguFields
@@ -63,15 +64,15 @@ type AdvertiserGroupsUpdateResource =
 --
 -- /See:/ 'advertiserGroupsUpdate'' smart constructor.
 data AdvertiserGroupsUpdate' = AdvertiserGroupsUpdate'
-    { _aguQuotaUser       :: !(Maybe Text)
-    , _aguPrettyPrint     :: !Bool
-    , _aguAdvertiserGroup :: !AdvertiserGroup
-    , _aguUserIP          :: !(Maybe Text)
-    , _aguProfileId       :: !Int64
-    , _aguKey             :: !(Maybe Key)
-    , _aguOAuthToken      :: !(Maybe OAuthToken)
-    , _aguFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _aguQuotaUser   :: !(Maybe Text)
+    , _aguPrettyPrint :: !Bool
+    , _aguUserIP      :: !(Maybe Text)
+    , _aguProfileId   :: !Int64
+    , _aguPayload     :: !AdvertiserGroup
+    , _aguKey         :: !(Maybe Key)
+    , _aguOAuthToken  :: !(Maybe OAuthToken)
+    , _aguFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsUpdate'' with the minimum fields required to make a request.
 --
@@ -81,11 +82,11 @@ data AdvertiserGroupsUpdate' = AdvertiserGroupsUpdate'
 --
 -- * 'aguPrettyPrint'
 --
--- * 'aguAdvertiserGroup'
---
 -- * 'aguUserIP'
 --
 -- * 'aguProfileId'
+--
+-- * 'aguPayload'
 --
 -- * 'aguKey'
 --
@@ -93,16 +94,16 @@ data AdvertiserGroupsUpdate' = AdvertiserGroupsUpdate'
 --
 -- * 'aguFields'
 advertiserGroupsUpdate'
-    :: AdvertiserGroup -- ^ 'AdvertiserGroup'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> AdvertiserGroup -- ^ 'payload'
     -> AdvertiserGroupsUpdate'
-advertiserGroupsUpdate' pAguAdvertiserGroup_ pAguProfileId_ =
+advertiserGroupsUpdate' pAguProfileId_ pAguPayload_ =
     AdvertiserGroupsUpdate'
     { _aguQuotaUser = Nothing
     , _aguPrettyPrint = True
-    , _aguAdvertiserGroup = pAguAdvertiserGroup_
     , _aguUserIP = Nothing
     , _aguProfileId = pAguProfileId_
+    , _aguPayload = pAguPayload_
     , _aguKey = Nothing
     , _aguOAuthToken = Nothing
     , _aguFields = Nothing
@@ -121,12 +122,6 @@ aguPrettyPrint
   = lens _aguPrettyPrint
       (\ s a -> s{_aguPrettyPrint = a})
 
--- | Multipart request metadata.
-aguAdvertiserGroup :: Lens' AdvertiserGroupsUpdate' AdvertiserGroup
-aguAdvertiserGroup
-  = lens _aguAdvertiserGroup
-      (\ s a -> s{_aguAdvertiserGroup = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 aguUserIP :: Lens' AdvertiserGroupsUpdate' (Maybe Text)
@@ -137,6 +132,11 @@ aguUserIP
 aguProfileId :: Lens' AdvertiserGroupsUpdate' Int64
 aguProfileId
   = lens _aguProfileId (\ s a -> s{_aguProfileId = a})
+
+-- | Multipart request metadata.
+aguPayload :: Lens' AdvertiserGroupsUpdate' AdvertiserGroup
+aguPayload
+  = lens _aguPayload (\ s a -> s{_aguPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -170,7 +170,7 @@ instance GoogleRequest AdvertiserGroupsUpdate' where
               _aguKey
               _aguOAuthToken
               (Just AltJSON)
-              _aguAdvertiserGroup
+              _aguPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AdvertiserGroupsUpdateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.DoubleClickBidManager.Queries.Createquery
     , qcQuotaUser
     , qcPrettyPrint
     , qcUserIP
+    , qcPayload
     , qcKey
-    , qcQuery
     , qcOAuthToken
     , qcFields
     ) where
@@ -62,11 +63,11 @@ data QueriesCreatequery' = QueriesCreatequery'
     { _qcQuotaUser   :: !(Maybe Text)
     , _qcPrettyPrint :: !Bool
     , _qcUserIP      :: !(Maybe Text)
+    , _qcPayload     :: !Query
     , _qcKey         :: !(Maybe Key)
-    , _qcQuery       :: !Query
     , _qcOAuthToken  :: !(Maybe OAuthToken)
     , _qcFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueriesCreatequery'' with the minimum fields required to make a request.
 --
@@ -78,23 +79,23 @@ data QueriesCreatequery' = QueriesCreatequery'
 --
 -- * 'qcUserIP'
 --
--- * 'qcKey'
+-- * 'qcPayload'
 --
--- * 'qcQuery'
+-- * 'qcKey'
 --
 -- * 'qcOAuthToken'
 --
 -- * 'qcFields'
 queriesCreatequery'
-    :: Query -- ^ 'Query'
+    :: Query -- ^ 'payload'
     -> QueriesCreatequery'
-queriesCreatequery' pQcQuery_ =
+queriesCreatequery' pQcPayload_ =
     QueriesCreatequery'
     { _qcQuotaUser = Nothing
     , _qcPrettyPrint = True
     , _qcUserIP = Nothing
+    , _qcPayload = pQcPayload_
     , _qcKey = Nothing
-    , _qcQuery = pQcQuery_
     , _qcOAuthToken = Nothing
     , _qcFields = Nothing
     }
@@ -117,15 +118,16 @@ qcPrettyPrint
 qcUserIP :: Lens' QueriesCreatequery' (Maybe Text)
 qcUserIP = lens _qcUserIP (\ s a -> s{_qcUserIP = a})
 
+-- | Multipart request metadata.
+qcPayload :: Lens' QueriesCreatequery' Query
+qcPayload
+  = lens _qcPayload (\ s a -> s{_qcPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 qcKey :: Lens' QueriesCreatequery' (Maybe Key)
 qcKey = lens _qcKey (\ s a -> s{_qcKey = a})
-
--- | Multipart request metadata.
-qcQuery :: Lens' QueriesCreatequery' Query
-qcQuery = lens _qcQuery (\ s a -> s{_qcQuery = a})
 
 -- | OAuth 2.0 token for the current user.
 qcOAuthToken :: Lens' QueriesCreatequery' (Maybe OAuthToken)
@@ -149,7 +151,7 @@ instance GoogleRequest QueriesCreatequery' where
               _qcKey
               _qcOAuthToken
               (Just AltJSON)
-              _qcQuery
+              _qcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy QueriesCreatequeryResource)

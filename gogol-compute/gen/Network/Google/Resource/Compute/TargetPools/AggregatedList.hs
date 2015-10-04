@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,8 +53,8 @@ type TargetPoolsAggregatedListResource =
        "aggregated" :>
          "targetPools" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data TargetPoolsAggregatedList' = TargetPoolsAggregatedList'
     , _tpalOAuthToken  :: !(Maybe OAuthToken)
     , _tpalMaxResults  :: !Word32
     , _tpalFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsAggregatedList'' with the minimum fields required to make a request.
 --
@@ -200,9 +201,8 @@ instance GoogleRequest TargetPoolsAggregatedList'
              TargetPoolAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetPoolsAggregatedList'{..}
-          = go _tpalFilter (Just _tpalMaxResults)
-              _tpalPageToken
-              _tpalProject
+          = go _tpalProject _tpalFilter _tpalPageToken
+              (Just _tpalMaxResults)
               _tpalQuotaUser
               (Just _tpalPrettyPrint)
               _tpalUserIP

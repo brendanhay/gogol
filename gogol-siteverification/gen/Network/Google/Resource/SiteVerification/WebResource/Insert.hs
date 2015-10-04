@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.SiteVerification.WebResource.Insert
     , wriQuotaUser
     , wriPrettyPrint
     , wriUserIP
+    , wriPayload
     , wriKey
-    , wriSiteVerificationWebResourceResource
     , wriOAuthToken
     , wriVerificationMethod
     , wriFields
@@ -62,15 +63,15 @@ type WebResourceInsertResource =
 --
 -- /See:/ 'webResourceInsert'' smart constructor.
 data WebResourceInsert' = WebResourceInsert'
-    { _wriQuotaUser                           :: !(Maybe Text)
-    , _wriPrettyPrint                         :: !Bool
-    , _wriUserIP                              :: !(Maybe Text)
-    , _wriKey                                 :: !(Maybe Key)
-    , _wriSiteVerificationWebResourceResource :: !SiteVerificationWebResourceResource
-    , _wriOAuthToken                          :: !(Maybe OAuthToken)
-    , _wriVerificationMethod                  :: !Text
-    , _wriFields                              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _wriQuotaUser          :: !(Maybe Text)
+    , _wriPrettyPrint        :: !Bool
+    , _wriUserIP             :: !(Maybe Text)
+    , _wriPayload            :: !SiteVerificationWebResourceResource
+    , _wriKey                :: !(Maybe Key)
+    , _wriOAuthToken         :: !(Maybe OAuthToken)
+    , _wriVerificationMethod :: !Text
+    , _wriFields             :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebResourceInsert'' with the minimum fields required to make a request.
 --
@@ -82,9 +83,9 @@ data WebResourceInsert' = WebResourceInsert'
 --
 -- * 'wriUserIP'
 --
--- * 'wriKey'
+-- * 'wriPayload'
 --
--- * 'wriSiteVerificationWebResourceResource'
+-- * 'wriKey'
 --
 -- * 'wriOAuthToken'
 --
@@ -92,16 +93,16 @@ data WebResourceInsert' = WebResourceInsert'
 --
 -- * 'wriFields'
 webResourceInsert'
-    :: SiteVerificationWebResourceResource -- ^ 'SiteVerificationWebResourceResource'
+    :: SiteVerificationWebResourceResource -- ^ 'payload'
     -> Text -- ^ 'verificationMethod'
     -> WebResourceInsert'
-webResourceInsert' pWriSiteVerificationWebResourceResource_ pWriVerificationMethod_ =
+webResourceInsert' pWriPayload_ pWriVerificationMethod_ =
     WebResourceInsert'
     { _wriQuotaUser = Nothing
     , _wriPrettyPrint = False
     , _wriUserIP = Nothing
+    , _wriPayload = pWriPayload_
     , _wriKey = Nothing
-    , _wriSiteVerificationWebResourceResource = pWriSiteVerificationWebResourceResource_
     , _wriOAuthToken = Nothing
     , _wriVerificationMethod = pWriVerificationMethod_
     , _wriFields = Nothing
@@ -126,18 +127,16 @@ wriUserIP :: Lens' WebResourceInsert' (Maybe Text)
 wriUserIP
   = lens _wriUserIP (\ s a -> s{_wriUserIP = a})
 
+-- | Multipart request metadata.
+wriPayload :: Lens' WebResourceInsert' SiteVerificationWebResourceResource
+wriPayload
+  = lens _wriPayload (\ s a -> s{_wriPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 wriKey :: Lens' WebResourceInsert' (Maybe Key)
 wriKey = lens _wriKey (\ s a -> s{_wriKey = a})
-
--- | Multipart request metadata.
-wriSiteVerificationWebResourceResource :: Lens' WebResourceInsert' SiteVerificationWebResourceResource
-wriSiteVerificationWebResourceResource
-  = lens _wriSiteVerificationWebResourceResource
-      (\ s a ->
-         s{_wriSiteVerificationWebResourceResource = a})
 
 -- | OAuth 2.0 token for the current user.
 wriOAuthToken :: Lens' WebResourceInsert' (Maybe OAuthToken)
@@ -172,7 +171,7 @@ instance GoogleRequest WebResourceInsert' where
               _wriKey
               _wriOAuthToken
               (Just AltJSON)
-              _wriSiteVerificationWebResourceResource
+              _wriPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy WebResourceInsertResource)

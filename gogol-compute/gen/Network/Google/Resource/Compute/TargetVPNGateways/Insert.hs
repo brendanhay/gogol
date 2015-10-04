@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.Compute.TargetVPNGateways.Insert
     , tvgiPrettyPrint
     , tvgiProject
     , tvgiUserIP
-    , tvgiTargetVPNGateway
+    , tvgiPayload
     , tvgiKey
     , tvgiRegion
     , tvgiOAuthToken
@@ -67,16 +68,16 @@ type TargetVPNGatewaysInsertResource =
 --
 -- /See:/ 'targetVPNGatewaysInsert'' smart constructor.
 data TargetVPNGatewaysInsert' = TargetVPNGatewaysInsert'
-    { _tvgiQuotaUser        :: !(Maybe Text)
-    , _tvgiPrettyPrint      :: !Bool
-    , _tvgiProject          :: !Text
-    , _tvgiUserIP           :: !(Maybe Text)
-    , _tvgiTargetVPNGateway :: !TargetVPNGateway
-    , _tvgiKey              :: !(Maybe Key)
-    , _tvgiRegion           :: !Text
-    , _tvgiOAuthToken       :: !(Maybe OAuthToken)
-    , _tvgiFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _tvgiQuotaUser   :: !(Maybe Text)
+    , _tvgiPrettyPrint :: !Bool
+    , _tvgiProject     :: !Text
+    , _tvgiUserIP      :: !(Maybe Text)
+    , _tvgiPayload     :: !TargetVPNGateway
+    , _tvgiKey         :: !(Maybe Key)
+    , _tvgiRegion      :: !Text
+    , _tvgiOAuthToken  :: !(Maybe OAuthToken)
+    , _tvgiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetVPNGatewaysInsert'' with the minimum fields required to make a request.
 --
@@ -90,7 +91,7 @@ data TargetVPNGatewaysInsert' = TargetVPNGatewaysInsert'
 --
 -- * 'tvgiUserIP'
 --
--- * 'tvgiTargetVPNGateway'
+-- * 'tvgiPayload'
 --
 -- * 'tvgiKey'
 --
@@ -101,16 +102,16 @@ data TargetVPNGatewaysInsert' = TargetVPNGatewaysInsert'
 -- * 'tvgiFields'
 targetVPNGatewaysInsert'
     :: Text -- ^ 'project'
-    -> TargetVPNGateway -- ^ 'TargetVPNGateway'
+    -> TargetVPNGateway -- ^ 'payload'
     -> Text -- ^ 'region'
     -> TargetVPNGatewaysInsert'
-targetVPNGatewaysInsert' pTvgiProject_ pTvgiTargetVPNGateway_ pTvgiRegion_ =
+targetVPNGatewaysInsert' pTvgiProject_ pTvgiPayload_ pTvgiRegion_ =
     TargetVPNGatewaysInsert'
     { _tvgiQuotaUser = Nothing
     , _tvgiPrettyPrint = True
     , _tvgiProject = pTvgiProject_
     , _tvgiUserIP = Nothing
-    , _tvgiTargetVPNGateway = pTvgiTargetVPNGateway_
+    , _tvgiPayload = pTvgiPayload_
     , _tvgiKey = Nothing
     , _tvgiRegion = pTvgiRegion_
     , _tvgiOAuthToken = Nothing
@@ -143,10 +144,9 @@ tvgiUserIP
   = lens _tvgiUserIP (\ s a -> s{_tvgiUserIP = a})
 
 -- | Multipart request metadata.
-tvgiTargetVPNGateway :: Lens' TargetVPNGatewaysInsert' TargetVPNGateway
-tvgiTargetVPNGateway
-  = lens _tvgiTargetVPNGateway
-      (\ s a -> s{_tvgiTargetVPNGateway = a})
+tvgiPayload :: Lens' TargetVPNGatewaysInsert' TargetVPNGateway
+tvgiPayload
+  = lens _tvgiPayload (\ s a -> s{_tvgiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -185,7 +185,7 @@ instance GoogleRequest TargetVPNGatewaysInsert' where
               _tvgiKey
               _tvgiOAuthToken
               (Just AltJSON)
-              _tvgiTargetVPNGateway
+              _tvgiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetVPNGatewaysInsertResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.DFAReporting.Sites.Insert
     , siPrettyPrint
     , siUserIP
     , siProfileId
+    , siPayload
     , siKey
     , siOAuthToken
-    , siSite
     , siFields
     ) where
 
@@ -66,11 +67,11 @@ data SitesInsert' = SitesInsert'
     , _siPrettyPrint :: !Bool
     , _siUserIP      :: !(Maybe Text)
     , _siProfileId   :: !Int64
+    , _siPayload     :: !Site
     , _siKey         :: !(Maybe Key)
     , _siOAuthToken  :: !(Maybe OAuthToken)
-    , _siSite        :: !Site
     , _siFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesInsert'' with the minimum fields required to make a request.
 --
@@ -84,26 +85,26 @@ data SitesInsert' = SitesInsert'
 --
 -- * 'siProfileId'
 --
+-- * 'siPayload'
+--
 -- * 'siKey'
 --
 -- * 'siOAuthToken'
 --
--- * 'siSite'
---
 -- * 'siFields'
 sitesInsert'
     :: Int64 -- ^ 'profileId'
-    -> Site -- ^ 'Site'
+    -> Site -- ^ 'payload'
     -> SitesInsert'
-sitesInsert' pSiProfileId_ pSiSite_ =
+sitesInsert' pSiProfileId_ pSiPayload_ =
     SitesInsert'
     { _siQuotaUser = Nothing
     , _siPrettyPrint = True
     , _siUserIP = Nothing
     , _siProfileId = pSiProfileId_
+    , _siPayload = pSiPayload_
     , _siKey = Nothing
     , _siOAuthToken = Nothing
-    , _siSite = pSiSite_
     , _siFields = Nothing
     }
 
@@ -130,6 +131,11 @@ siProfileId :: Lens' SitesInsert' Int64
 siProfileId
   = lens _siProfileId (\ s a -> s{_siProfileId = a})
 
+-- | Multipart request metadata.
+siPayload :: Lens' SitesInsert' Site
+siPayload
+  = lens _siPayload (\ s a -> s{_siPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -140,10 +146,6 @@ siKey = lens _siKey (\ s a -> s{_siKey = a})
 siOAuthToken :: Lens' SitesInsert' (Maybe OAuthToken)
 siOAuthToken
   = lens _siOAuthToken (\ s a -> s{_siOAuthToken = a})
-
--- | Multipart request metadata.
-siSite :: Lens' SitesInsert' Site
-siSite = lens _siSite (\ s a -> s{_siSite = a})
 
 -- | Selector specifying which fields to include in a partial response.
 siFields :: Lens' SitesInsert' (Maybe Text)
@@ -163,7 +165,7 @@ instance GoogleRequest SitesInsert' where
               _siKey
               _siOAuthToken
               (Just AltJSON)
-              _siSite
+              _siPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SitesInsertResource)

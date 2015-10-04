@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,6 +37,7 @@ module Network.Google.Resource.Drive.Files.Update
     , fuUserIP
     , fuPinned
     , fuTimedTextLanguage
+    , fuPayload
     , fuUpdateViewedDate
     , fuRemoveParents
     , fuModifiedDateBehavior
@@ -50,7 +52,6 @@ module Network.Google.Resource.Drive.Files.Update
     , fuOAuthToken
     , fuAddParents
     , fuOCR
-    , fuFile
     , fuFields
     ) where
 
@@ -62,21 +63,21 @@ import           Network.Google.Prelude
 type FilesUpdateResource =
      "files" :>
        Capture "fileId" Text :>
-         QueryParam "addParents" Text :>
-           QueryParam "convert" Bool :>
-             QueryParam "modifiedDateBehavior"
-               DriveFilesUpdateModifiedDateBehavior
-               :>
-               QueryParam "newRevision" Bool :>
-                 QueryParam "ocr" Bool :>
-                   QueryParam "ocrLanguage" Text :>
-                     QueryParam "pinned" Bool :>
-                       QueryParam "removeParents" Text :>
-                         QueryParam "setModifiedDate" Bool :>
-                           QueryParam "timedTextLanguage" Text :>
-                             QueryParam "timedTextTrackName" Text :>
-                               QueryParam "updateViewedDate" Bool :>
-                                 QueryParam "useContentAsIndexableText" Bool :>
+         QueryParam "newRevision" Bool :>
+           QueryParam "pinned" Bool :>
+             QueryParam "timedTextLanguage" Text :>
+               QueryParam "updateViewedDate" Bool :>
+                 QueryParam "removeParents" Text :>
+                   QueryParam "modifiedDateBehavior"
+                     DriveFilesUpdateModifiedDateBehavior
+                     :>
+                     QueryParam "useContentAsIndexableText" Bool :>
+                       QueryParam "timedTextTrackName" Text :>
+                         QueryParam "ocrLanguage" Text :>
+                           QueryParam "convert" Bool :>
+                             QueryParam "setModifiedDate" Bool :>
+                               QueryParam "addParents" Text :>
+                                 QueryParam "ocr" Bool :>
                                    QueryParam "quotaUser" Text :>
                                      QueryParam "prettyPrint" Bool :>
                                        QueryParam "userIp" Text :>
@@ -99,6 +100,7 @@ data FilesUpdate' = FilesUpdate'
     , _fuUserIP                    :: !(Maybe Text)
     , _fuPinned                    :: !Bool
     , _fuTimedTextLanguage         :: !(Maybe Text)
+    , _fuPayload                   :: !File
     , _fuUpdateViewedDate          :: !Bool
     , _fuRemoveParents             :: !(Maybe Text)
     , _fuModifiedDateBehavior      :: !(Maybe DriveFilesUpdateModifiedDateBehavior)
@@ -113,9 +115,8 @@ data FilesUpdate' = FilesUpdate'
     , _fuOAuthToken                :: !(Maybe OAuthToken)
     , _fuAddParents                :: !(Maybe Text)
     , _fuOCR                       :: !Bool
-    , _fuFile                      :: !File
     , _fuFields                    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesUpdate'' with the minimum fields required to make a request.
 --
@@ -132,6 +133,8 @@ data FilesUpdate' = FilesUpdate'
 -- * 'fuPinned'
 --
 -- * 'fuTimedTextLanguage'
+--
+-- * 'fuPayload'
 --
 -- * 'fuUpdateViewedDate'
 --
@@ -161,15 +164,13 @@ data FilesUpdate' = FilesUpdate'
 --
 -- * 'fuOCR'
 --
--- * 'fuFile'
---
 -- * 'fuFields'
 filesUpdate'
-    :: Body -- ^ 'media'
+    :: File -- ^ 'payload'
+    -> Body -- ^ 'media'
     -> Text -- ^ 'fileId'
-    -> File -- ^ 'File'
     -> FilesUpdate'
-filesUpdate' pFuMedia_ pFuFileId_ pFuFile_ =
+filesUpdate' pFuPayload_ pFuMedia_ pFuFileId_ =
     FilesUpdate'
     { _fuQuotaUser = Nothing
     , _fuNewRevision = True
@@ -177,6 +178,7 @@ filesUpdate' pFuMedia_ pFuFileId_ pFuFile_ =
     , _fuUserIP = Nothing
     , _fuPinned = False
     , _fuTimedTextLanguage = Nothing
+    , _fuPayload = pFuPayload_
     , _fuUpdateViewedDate = True
     , _fuRemoveParents = Nothing
     , _fuModifiedDateBehavior = Nothing
@@ -191,7 +193,6 @@ filesUpdate' pFuMedia_ pFuFileId_ pFuFile_ =
     , _fuOAuthToken = Nothing
     , _fuAddParents = Nothing
     , _fuOCR = False
-    , _fuFile = pFuFile_
     , _fuFields = Nothing
     }
 
@@ -235,6 +236,11 @@ fuTimedTextLanguage :: Lens' FilesUpdate' (Maybe Text)
 fuTimedTextLanguage
   = lens _fuTimedTextLanguage
       (\ s a -> s{_fuTimedTextLanguage = a})
+
+-- | Multipart request metadata.
+fuPayload :: Lens' FilesUpdate' File
+fuPayload
+  = lens _fuPayload (\ s a -> s{_fuPayload = a})
 
 -- | Whether to update the view date after successfully updating the file.
 fuUpdateViewedDate :: Lens' FilesUpdate' Bool
@@ -312,10 +318,6 @@ fuAddParents
 fuOCR :: Lens' FilesUpdate' Bool
 fuOCR = lens _fuOCR (\ s a -> s{_fuOCR = a})
 
--- | Multipart request metadata.
-fuFile :: Lens' FilesUpdate' File
-fuFile = lens _fuFile (\ s a -> s{_fuFile = a})
-
 -- | Selector specifying which fields to include in a partial response.
 fuFields :: Lens' FilesUpdate' (Maybe Text)
 fuFields = lens _fuFields (\ s a -> s{_fuFields = a})
@@ -328,19 +330,18 @@ instance GoogleRequest FilesUpdate' where
         type Rs FilesUpdate' = File
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesUpdate'{..}
-          = go _fuAddParents (Just _fuConvert) _fuMedia
-              _fuModifiedDateBehavior
-              (Just _fuNewRevision)
-              (Just _fuOCR)
-              _fuOCRLanguage
-              (Just _fuPinned)
-              _fuRemoveParents
-              (Just _fuSetModifiedDate)
+          = go _fuFileId (Just _fuNewRevision) (Just _fuPinned)
               _fuTimedTextLanguage
-              _fuTimedTextTrackName
               (Just _fuUpdateViewedDate)
+              _fuRemoveParents
+              _fuModifiedDateBehavior
               (Just _fuUseContentAsIndexableText)
-              _fuFileId
+              _fuTimedTextTrackName
+              _fuOCRLanguage
+              (Just _fuConvert)
+              (Just _fuSetModifiedDate)
+              _fuAddParents
+              (Just _fuOCR)
               _fuQuotaUser
               (Just _fuPrettyPrint)
               _fuUserIP
@@ -348,7 +349,8 @@ instance GoogleRequest FilesUpdate' where
               _fuKey
               _fuOAuthToken
               (Just AltJSON)
-              _fuFile
+              _fuPayload
+              _fuMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FilesUpdateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -61,12 +62,12 @@ type CoursesAliasesDeleteResource =
            "aliases" :>
              Capture "alias" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "callback" Text :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
@@ -96,7 +97,7 @@ data CoursesAliasesDelete' = CoursesAliasesDelete'
     , _cadOAuthToken     :: !(Maybe OAuthToken)
     , _cadFields         :: !(Maybe Text)
     , _cadCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesAliasesDelete'' with the minimum fields required to make a request.
 --
@@ -237,13 +238,13 @@ instance GoogleRequest CoursesAliasesDelete' where
         type Rs CoursesAliasesDelete' = Empty
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesAliasesDelete'{..}
-          = go _cadXgafv _cadAccessToken _cadBearerToken
-              _cadCallback
-              (Just _cadPp)
-              _cadUploadType
+          = go _cadCourseId _cadAlias _cadXgafv
               _cadUploadProtocol
-              _cadCourseId
-              _cadAlias
+              (Just _cadPp)
+              _cadAccessToken
+              _cadUploadType
+              _cadBearerToken
+              _cadCallback
               _cadQuotaUser
               (Just _cadPrettyPrint)
               _cadFields

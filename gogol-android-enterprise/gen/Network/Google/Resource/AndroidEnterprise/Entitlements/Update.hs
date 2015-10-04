@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,12 +36,12 @@ module Network.Google.Resource.AndroidEnterprise.Entitlements.Update
     , entPrettyPrint
     , entEnterpriseId
     , entUserIP
+    , entPayload
     , entInstall
     , entUserId
     , entKey
     , entOAuthToken
     , entFields
-    , entEntitlement
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
@@ -75,13 +76,13 @@ data EntitlementsUpdate' = EntitlementsUpdate'
     , _entPrettyPrint   :: !Bool
     , _entEnterpriseId  :: !Text
     , _entUserIP        :: !(Maybe Text)
+    , _entPayload       :: !Entitlement
     , _entInstall       :: !(Maybe Bool)
     , _entUserId        :: !Text
     , _entKey           :: !(Maybe Key)
     , _entOAuthToken    :: !(Maybe OAuthToken)
     , _entFields        :: !(Maybe Text)
-    , _entEntitlement   :: !Entitlement
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EntitlementsUpdate'' with the minimum fields required to make a request.
 --
@@ -97,6 +98,8 @@ data EntitlementsUpdate' = EntitlementsUpdate'
 --
 -- * 'entUserIP'
 --
+-- * 'entPayload'
+--
 -- * 'entInstall'
 --
 -- * 'entUserId'
@@ -106,27 +109,25 @@ data EntitlementsUpdate' = EntitlementsUpdate'
 -- * 'entOAuthToken'
 --
 -- * 'entFields'
---
--- * 'entEntitlement'
 entitlementsUpdate'
     :: Text -- ^ 'entitlementId'
     -> Text -- ^ 'enterpriseId'
+    -> Entitlement -- ^ 'payload'
     -> Text -- ^ 'userId'
-    -> Entitlement -- ^ 'Entitlement'
     -> EntitlementsUpdate'
-entitlementsUpdate' pEntEntitlementId_ pEntEnterpriseId_ pEntUserId_ pEntEntitlement_ =
+entitlementsUpdate' pEntEntitlementId_ pEntEnterpriseId_ pEntPayload_ pEntUserId_ =
     EntitlementsUpdate'
     { _entEntitlementId = pEntEntitlementId_
     , _entQuotaUser = Nothing
     , _entPrettyPrint = True
     , _entEnterpriseId = pEntEnterpriseId_
     , _entUserIP = Nothing
+    , _entPayload = pEntPayload_
     , _entInstall = Nothing
     , _entUserId = pEntUserId_
     , _entKey = Nothing
     , _entOAuthToken = Nothing
     , _entFields = Nothing
-    , _entEntitlement = pEntEntitlement_
     }
 
 -- | The ID of the entitlement, e.g. \"app:com.google.android.gm\".
@@ -160,6 +161,11 @@ entUserIP :: Lens' EntitlementsUpdate' (Maybe Text)
 entUserIP
   = lens _entUserIP (\ s a -> s{_entUserIP = a})
 
+-- | Multipart request metadata.
+entPayload :: Lens' EntitlementsUpdate' Entitlement
+entPayload
+  = lens _entPayload (\ s a -> s{_entPayload = a})
+
 -- | Set to true to also install the product on all the user\'s devices where
 -- possible. Failure to install on one or more devices will not prevent
 -- this operation from returning successfully, as long as the entitlement
@@ -190,12 +196,6 @@ entFields :: Lens' EntitlementsUpdate' (Maybe Text)
 entFields
   = lens _entFields (\ s a -> s{_entFields = a})
 
--- | Multipart request metadata.
-entEntitlement :: Lens' EntitlementsUpdate' Entitlement
-entEntitlement
-  = lens _entEntitlement
-      (\ s a -> s{_entEntitlement = a})
-
 instance GoogleAuth EntitlementsUpdate' where
         authKey = entKey . _Just
         authToken = entOAuthToken . _Just
@@ -205,8 +205,8 @@ instance GoogleRequest EntitlementsUpdate' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u EntitlementsUpdate'{..}
-          = go _entInstall _entEnterpriseId _entUserId
-              _entEntitlementId
+          = go _entEnterpriseId _entUserId _entEntitlementId
+              _entInstall
               _entQuotaUser
               (Just _entPrettyPrint)
               _entUserIP
@@ -214,7 +214,7 @@ instance GoogleRequest EntitlementsUpdate' where
               _entKey
               _entOAuthToken
               (Just AltJSON)
-              _entEntitlement
+              _entPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EntitlementsUpdateResource)

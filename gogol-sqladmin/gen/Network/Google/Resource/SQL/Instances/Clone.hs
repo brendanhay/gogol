@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.SQL.Instances.Clone
     , icPrettyPrint
     , icProject
     , icUserIP
+    , icPayload
     , icKey
-    , icInstancesCloneRequest
     , icOAuthToken
     , icFields
     , icInstance
@@ -66,16 +67,16 @@ type InstancesCloneResource =
 --
 -- /See:/ 'instancesClone'' smart constructor.
 data InstancesClone' = InstancesClone'
-    { _icQuotaUser             :: !(Maybe Text)
-    , _icPrettyPrint           :: !Bool
-    , _icProject               :: !Text
-    , _icUserIP                :: !(Maybe Text)
-    , _icKey                   :: !(Maybe Key)
-    , _icInstancesCloneRequest :: !InstancesCloneRequest
-    , _icOAuthToken            :: !(Maybe OAuthToken)
-    , _icFields                :: !(Maybe Text)
-    , _icInstance              :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _icQuotaUser   :: !(Maybe Text)
+    , _icPrettyPrint :: !Bool
+    , _icProject     :: !Text
+    , _icUserIP      :: !(Maybe Text)
+    , _icPayload     :: !InstancesCloneRequest
+    , _icKey         :: !(Maybe Key)
+    , _icOAuthToken  :: !(Maybe OAuthToken)
+    , _icFields      :: !(Maybe Text)
+    , _icInstance    :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesClone'' with the minimum fields required to make a request.
 --
@@ -89,9 +90,9 @@ data InstancesClone' = InstancesClone'
 --
 -- * 'icUserIP'
 --
--- * 'icKey'
+-- * 'icPayload'
 --
--- * 'icInstancesCloneRequest'
+-- * 'icKey'
 --
 -- * 'icOAuthToken'
 --
@@ -100,17 +101,17 @@ data InstancesClone' = InstancesClone'
 -- * 'icInstance'
 instancesClone'
     :: Text -- ^ 'project'
-    -> InstancesCloneRequest -- ^ 'InstancesCloneRequest'
+    -> InstancesCloneRequest -- ^ 'payload'
     -> Text -- ^ 'instance'
     -> InstancesClone'
-instancesClone' pIcProject_ pIcInstancesCloneRequest_ pIcInstance_ =
+instancesClone' pIcProject_ pIcPayload_ pIcInstance_ =
     InstancesClone'
     { _icQuotaUser = Nothing
     , _icPrettyPrint = True
     , _icProject = pIcProject_
     , _icUserIP = Nothing
+    , _icPayload = pIcPayload_
     , _icKey = Nothing
-    , _icInstancesCloneRequest = pIcInstancesCloneRequest_
     , _icOAuthToken = Nothing
     , _icFields = Nothing
     , _icInstance = pIcInstance_
@@ -139,17 +140,16 @@ icProject
 icUserIP :: Lens' InstancesClone' (Maybe Text)
 icUserIP = lens _icUserIP (\ s a -> s{_icUserIP = a})
 
+-- | Multipart request metadata.
+icPayload :: Lens' InstancesClone' InstancesCloneRequest
+icPayload
+  = lens _icPayload (\ s a -> s{_icPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 icKey :: Lens' InstancesClone' (Maybe Key)
 icKey = lens _icKey (\ s a -> s{_icKey = a})
-
--- | Multipart request metadata.
-icInstancesCloneRequest :: Lens' InstancesClone' InstancesCloneRequest
-icInstancesCloneRequest
-  = lens _icInstancesCloneRequest
-      (\ s a -> s{_icInstancesCloneRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 icOAuthToken :: Lens' InstancesClone' (Maybe OAuthToken)
@@ -181,7 +181,7 @@ instance GoogleRequest InstancesClone' where
               _icKey
               _icOAuthToken
               (Just AltJSON)
-              _icInstancesCloneRequest
+              _icPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesCloneResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -72,7 +73,7 @@ data BucketsDelete' = BucketsDelete'
     , _bdIfMetagenerationNotMatch :: !(Maybe Word64)
     , _bdOAuthToken               :: !(Maybe OAuthToken)
     , _bdFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsDelete'' with the minimum fields required to make a request.
 --
@@ -170,9 +171,8 @@ instance GoogleRequest BucketsDelete' where
         type Rs BucketsDelete' = ()
         request = requestWithRoute defReq storageURL
         requestWithRoute r u BucketsDelete'{..}
-          = go _bdIfMetagenerationMatch
+          = go _bdBucket _bdIfMetagenerationMatch
               _bdIfMetagenerationNotMatch
-              _bdBucket
               _bdQuotaUser
               (Just _bdPrettyPrint)
               _bdUserIP

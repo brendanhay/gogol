@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 data CollectionsListResponse = CollectionsListResponse
     { _clrKind       :: !Text
     , _clrCollection :: !(Maybe [Collection])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CollectionsListResponse' with the minimum fields required to make a request.
 --
@@ -78,7 +78,7 @@ instance ToJSON CollectionsListResponse where
 data EnterpriseAccount = EnterpriseAccount
     { _eaKind         :: !Text
     , _eaAccountEmail :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EnterpriseAccount' with the minimum fields required to make a request.
 --
@@ -148,7 +148,7 @@ data GroupLicense = GroupLicense
     , _glApproval        :: !(Maybe Text)
     , _glProductId       :: !(Maybe Text)
     , _glAcquisitionKind :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupLicense' with the minimum fields required to make a request.
 --
@@ -254,7 +254,7 @@ data AppRestrictionsSchemaRestrictionRestrictionValue = AppRestrictionsSchemaRes
     , _arsrrvValueInteger     :: !(Maybe Int32)
     , _arsrrvType             :: !(Maybe Text)
     , _arsrrvValueString      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppRestrictionsSchemaRestrictionRestrictionValue' with the minimum fields required to make a request.
 --
@@ -346,7 +346,7 @@ instance ToJSON
 data GroupLicenseUsersListResponse = GroupLicenseUsersListResponse
     { _glulrKind :: !Text
     , _glulrUser :: !(Maybe [User])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupLicenseUsersListResponse' with the minimum fields required to make a request.
 --
@@ -399,7 +399,7 @@ instance ToJSON GroupLicenseUsersListResponse where
 data DeviceState = DeviceState
     { _dsKind         :: !Text
     , _dsAccountState :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeviceState' with the minimum fields required to make a request.
 --
@@ -451,7 +451,7 @@ instance ToJSON DeviceState where
 data ApprovalURLInfo = ApprovalURLInfo
     { _auiApprovalURL :: !(Maybe Text)
     , _auiKind        :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApprovalURLInfo' with the minimum fields required to make a request.
 --
@@ -506,7 +506,7 @@ data Device = Device
     { _dKind           :: !Text
     , _dManagementType :: !(Maybe Text)
     , _dAndroidId      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Device' with the minimum fields required to make a request.
 --
@@ -575,7 +575,7 @@ instance ToJSON Device where
 data ProductPermission = ProductPermission
     { _ppState        :: !(Maybe Text)
     , _ppPermissionId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductPermission' with the minimum fields required to make a request.
 --
@@ -622,7 +622,7 @@ instance ToJSON ProductPermission where
 data AppVersion = AppVersion
     { _avVersionCode   :: !(Maybe Int32)
     , _avVersionString :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppVersion' with the minimum fields required to make a request.
 --
@@ -679,7 +679,7 @@ data AppRestrictionsSchemaRestriction = AppRestrictionsSchemaRestriction
     , _arsrDefaultValue    :: !(Maybe AppRestrictionsSchemaRestrictionRestrictionValue)
     , _arsrTitle           :: !(Maybe Text)
     , _arsrDescription     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppRestrictionsSchemaRestriction' with the minimum fields required to make a request.
 --
@@ -789,7 +789,7 @@ instance ToJSON AppRestrictionsSchemaRestriction
 data UsersListResponse = UsersListResponse
     { _ulrKind :: !Text
     , _ulrUser :: !(Maybe [User])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersListResponse' with the minimum fields required to make a request.
 --
@@ -839,7 +839,7 @@ instance ToJSON UsersListResponse where
 data InstallsListResponse = InstallsListResponse
     { _ilrKind    :: !Text
     , _ilrInstall :: !(Maybe [Install])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstallsListResponse' with the minimum fields required to make a request.
 --
@@ -904,7 +904,7 @@ data Collection = Collection
     , _cVisibility   :: !(Maybe Text)
     , _cName         :: !(Maybe Text)
     , _cProductId    :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Collection' with the minimum fields required to make a request.
 --
@@ -991,7 +991,7 @@ instance ToJSON Collection where
 data GroupLicensesListResponse = GroupLicensesListResponse
     { _gllrGroupLicense :: !(Maybe [GroupLicense])
     , _gllrKind         :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupLicensesListResponse' with the minimum fields required to make a request.
 --
@@ -1052,7 +1052,7 @@ data User = User
     { _uKind         :: !Text
     , _uId           :: !(Maybe Text)
     , _uPrimaryEmail :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
@@ -1109,7 +1109,7 @@ instance ToJSON User where
 data ProductSet = ProductSet
     { _psKind      :: !Text
     , _psProductId :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductSet' with the minimum fields required to make a request.
 --
@@ -1179,7 +1179,7 @@ data Install = Install
     , _iKind         :: !Text
     , _iInstallState :: !(Maybe Text)
     , _iProductId    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Install' with the minimum fields required to make a request.
 --
@@ -1252,7 +1252,7 @@ instance ToJSON Install where
 data EnterprisesSendTestPushNotificationResponse = EnterprisesSendTestPushNotificationResponse
     { _estpnrTopicName :: !(Maybe Text)
     , _estpnrMessageId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EnterprisesSendTestPushNotificationResponse' with the minimum fields required to make a request.
 --
@@ -1304,7 +1304,7 @@ instance ToJSON
 -- /See:/ 'productsGenerateApprovalURLResponse' smart constructor.
 newtype ProductsGenerateApprovalURLResponse = ProductsGenerateApprovalURLResponse
     { _pgaurURL :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsGenerateApprovalURLResponse' with the minimum fields required to make a request.
 --
@@ -1349,7 +1349,7 @@ instance ToJSON ProductsGenerateApprovalURLResponse
 data AppRestrictionsSchema = AppRestrictionsSchema
     { _arsKind         :: !Text
     , _arsRestrictions :: !(Maybe [AppRestrictionsSchemaRestriction])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppRestrictionsSchema' with the minimum fields required to make a request.
 --
@@ -1401,7 +1401,7 @@ instance ToJSON AppRestrictionsSchema where
 data EnterprisesListResponse = EnterprisesListResponse
     { _elrKind       :: !Text
     , _elrEnterprise :: !(Maybe [Enterprise])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EnterprisesListResponse' with the minimum fields required to make a request.
 --
@@ -1453,7 +1453,7 @@ instance ToJSON EnterprisesListResponse where
 data DevicesListResponse = DevicesListResponse
     { _dlrKind   :: !Text
     , _dlrDevice :: !(Maybe [Device])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DevicesListResponse' with the minimum fields required to make a request.
 --
@@ -1508,7 +1508,7 @@ data UserToken = UserToken
     { _utKind   :: !Text
     , _utToken  :: !(Maybe Text)
     , _utUserId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserToken' with the minimum fields required to make a request.
 --
@@ -1588,7 +1588,7 @@ data Enterprise = Enterprise
     , _ePrimaryDomain :: !(Maybe Text)
     , _eName          :: !(Maybe Text)
     , _eId            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Enterprise' with the minimum fields required to make a request.
 --
@@ -1662,7 +1662,7 @@ data Permission = Permission
     , _pName         :: !(Maybe Text)
     , _pDescription  :: !(Maybe Text)
     , _pPermissionId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Permission' with the minimum fields required to make a request.
 --
@@ -1744,7 +1744,7 @@ data Product = Product
     , _proTitle                :: !(Maybe Text)
     , _proProductId            :: !(Maybe Text)
     , _proDetailsURL           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Product' with the minimum fields required to make a request.
 --
@@ -1889,37 +1889,37 @@ instance ToJSON Product where
 --
 -- /See:/ 'entitlementsListResponse' smart constructor.
 data EntitlementsListResponse = EntitlementsListResponse
-    { _elrlKind        :: !Text
-    , _elrlEntitlement :: !(Maybe [Entitlement])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _entKind        :: !Text
+    , _entEntitlement :: !(Maybe [Entitlement])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EntitlementsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'elrlKind'
+-- * 'entKind'
 --
--- * 'elrlEntitlement'
+-- * 'entEntitlement'
 entitlementsListResponse
     :: EntitlementsListResponse
 entitlementsListResponse =
     EntitlementsListResponse
-    { _elrlKind = "androidenterprise#entitlementsListResponse"
-    , _elrlEntitlement = Nothing
+    { _entKind = "androidenterprise#entitlementsListResponse"
+    , _entEntitlement = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#entitlementsListResponse\".
-elrlKind :: Lens' EntitlementsListResponse Text
-elrlKind = lens _elrlKind (\ s a -> s{_elrlKind = a})
+entKind :: Lens' EntitlementsListResponse Text
+entKind = lens _entKind (\ s a -> s{_entKind = a})
 
 -- | An entitlement of a user to a product (e.g. an app). For example, a free
 -- app that they have installed, or a paid app that they have been
 -- allocated a license to.
-elrlEntitlement :: Lens' EntitlementsListResponse [Entitlement]
-elrlEntitlement
-  = lens _elrlEntitlement
-      (\ s a -> s{_elrlEntitlement = a})
+entEntitlement :: Lens' EntitlementsListResponse [Entitlement]
+entEntitlement
+  = lens _entEntitlement
+      (\ s a -> s{_entEntitlement = a})
       . _Default
       . _Coerce
 
@@ -1936,8 +1936,8 @@ instance ToJSON EntitlementsListResponse where
         toJSON EntitlementsListResponse{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _elrlKind),
-                  ("entitlement" .=) <$> _elrlEntitlement])
+                 [Just ("kind" .= _entKind),
+                  ("entitlement" .=) <$> _entEntitlement])
 
 -- | Information about the permissions required by a specific app and whether
 -- they have been accepted by the enterprise.
@@ -1947,7 +1947,7 @@ data ProductPermissions = ProductPermissions
     { _ppKind       :: !Text
     , _ppPermission :: !(Maybe [ProductPermission])
     , _ppProductId  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductPermissions' with the minimum fields required to make a request.
 --
@@ -2009,7 +2009,7 @@ instance ToJSON ProductPermissions where
 data CollectionViewersListResponse = CollectionViewersListResponse
     { _cvlrKind :: !Text
     , _cvlrUser :: !(Maybe [User])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CollectionViewersListResponse' with the minimum fields required to make a request.
 --
@@ -2058,7 +2058,7 @@ instance ToJSON CollectionViewersListResponse where
 -- /See:/ 'productsApproveRequest' smart constructor.
 newtype ProductsApproveRequest = ProductsApproveRequest
     { _parApprovalURLInfo :: Maybe ApprovalURLInfo
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsApproveRequest' with the minimum fields required to make a request.
 --
@@ -2122,46 +2122,45 @@ instance ToJSON ProductsApproveRequest where
 --
 -- /See:/ 'entitlement' smart constructor.
 data Entitlement = Entitlement
-    { _entKind      :: !Text
-    , _entReason    :: !(Maybe Text)
-    , _entProductId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _eeKind      :: !Text
+    , _eeReason    :: !(Maybe Text)
+    , _eeProductId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Entitlement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'entKind'
+-- * 'eeKind'
 --
--- * 'entReason'
+-- * 'eeReason'
 --
--- * 'entProductId'
+-- * 'eeProductId'
 entitlement
     :: Entitlement
 entitlement =
     Entitlement
-    { _entKind = "androidenterprise#entitlement"
-    , _entReason = Nothing
-    , _entProductId = Nothing
+    { _eeKind = "androidenterprise#entitlement"
+    , _eeReason = Nothing
+    , _eeProductId = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#entitlement\".
-entKind :: Lens' Entitlement Text
-entKind = lens _entKind (\ s a -> s{_entKind = a})
+eeKind :: Lens' Entitlement Text
+eeKind = lens _eeKind (\ s a -> s{_eeKind = a})
 
 -- | The reason for the entitlement, e.g. \"free\" for free apps. This is
 -- temporary, it will be replaced by the acquisition kind field of group
 -- licenses.
-entReason :: Lens' Entitlement (Maybe Text)
-entReason
-  = lens _entReason (\ s a -> s{_entReason = a})
+eeReason :: Lens' Entitlement (Maybe Text)
+eeReason = lens _eeReason (\ s a -> s{_eeReason = a})
 
 -- | The ID of the product that the entitlement is for, e.g.
 -- \"app:com.google.android.gm\".
-entProductId :: Lens' Entitlement (Maybe Text)
-entProductId
-  = lens _entProductId (\ s a -> s{_entProductId = a})
+eeProductId :: Lens' Entitlement (Maybe Text)
+eeProductId
+  = lens _eeProductId (\ s a -> s{_eeProductId = a})
 
 instance FromJSON Entitlement where
         parseJSON
@@ -2176,6 +2175,6 @@ instance ToJSON Entitlement where
         toJSON Entitlement{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _entKind),
-                  ("reason" .=) <$> _entReason,
-                  ("productId" .=) <$> _entProductId])
+                 [Just ("kind" .= _eeKind),
+                  ("reason" .=) <$> _eeReason,
+                  ("productId" .=) <$> _eeProductId])

@@ -19,7 +19,7 @@ import           Network.Google.Prelude
 
 -- | Tells the server to return only achievements with the specified state.
 -- If this parameter isn\'t specified, all achievements are returned.
-data GamesAchievementsListState
+data State
     = All
       -- ^ @ALL@
       -- List all achievements. This is the default.
@@ -34,9 +34,9 @@ data GamesAchievementsListState
       -- List only unlocked achievements.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable GamesAchievementsListState
+instance Hashable State
 
-instance FromText GamesAchievementsListState where
+instance FromText State where
     fromText = \case
         "ALL" -> Just All
         "HIDDEN" -> Just Hidden
@@ -44,17 +44,17 @@ instance FromText GamesAchievementsListState where
         "UNLOCKED" -> Just Unlocked
         _ -> Nothing
 
-instance ToText GamesAchievementsListState where
+instance ToText State where
     toText = \case
         All -> "ALL"
         Hidden -> "HIDDEN"
         Revealed -> "REVEALED"
         Unlocked -> "UNLOCKED"
 
-instance FromJSON GamesAchievementsListState where
-    parseJSON = parseJSONText "GamesAchievementsListState"
+instance FromJSON State where
+    parseJSON = parseJSONText "State"
 
-instance ToJSON GamesAchievementsListState where
+instance ToJSON State where
     toJSON = toJSONText
 
 -- | The collection of scores you\'re requesting.
@@ -84,6 +84,64 @@ instance FromJSON GamesScoresListCollection where
     parseJSON = parseJSONText "GamesScoresListCollection"
 
 instance ToJSON GamesScoresListCollection where
+    toJSON = toJSONText
+
+-- | The collection of categories for which data will be returned.
+data Collection
+    = CAll
+      -- ^ @all@
+      -- Retrieve data for all categories. This is the default.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Collection
+
+instance FromText Collection where
+    fromText = \case
+        "all" -> Just CAll
+        _ -> Nothing
+
+instance ToText Collection where
+    toText = \case
+        CAll -> "all"
+
+instance FromJSON Collection where
+    parseJSON = parseJSONText "Collection"
+
+instance ToJSON Collection where
+    toJSON = toJSONText
+
+-- | The time span for the scores and ranks you\'re requesting.
+data TimeSpan
+    = AllTime
+      -- ^ @ALL_TIME@
+      -- List the all-time top scores.
+    | Daily
+      -- ^ @DAILY@
+      -- List the top scores for the current day.
+    | Weekly
+      -- ^ @WEEKLY@
+      -- List the top scores for the current week.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable TimeSpan
+
+instance FromText TimeSpan where
+    fromText = \case
+        "ALL_TIME" -> Just AllTime
+        "DAILY" -> Just Daily
+        "WEEKLY" -> Just Weekly
+        _ -> Nothing
+
+instance ToText TimeSpan where
+    toText = \case
+        AllTime -> "ALL_TIME"
+        Daily -> "DAILY"
+        Weekly -> "WEEKLY"
+
+instance FromJSON TimeSpan where
+    parseJSON = parseJSONText "TimeSpan"
+
+instance ToJSON TimeSpan where
     toJSON = toJSONText
 
 -- | The time span for the scores and ranks you\'re requesting.
@@ -126,132 +184,74 @@ instance FromJSON GamesScoresGetTimeSpan where
 instance ToJSON GamesScoresGetTimeSpan where
     toJSON = toJSONText
 
--- | The collection of categories for which data will be returned.
-data GamesMetagameListCategoriesByPlayerCollection
-    = GMLCBPCAll
-      -- ^ @all@
-      -- Retrieve data for all categories. This is the default.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable GamesMetagameListCategoriesByPlayerCollection
-
-instance FromText GamesMetagameListCategoriesByPlayerCollection where
-    fromText = \case
-        "all" -> Just GMLCBPCAll
-        _ -> Nothing
-
-instance ToText GamesMetagameListCategoriesByPlayerCollection where
-    toText = \case
-        GMLCBPCAll -> "all"
-
-instance FromJSON GamesMetagameListCategoriesByPlayerCollection where
-    parseJSON = parseJSONText "GamesMetagameListCategoriesByPlayerCollection"
-
-instance ToJSON GamesMetagameListCategoriesByPlayerCollection where
-    toJSON = toJSONText
-
--- | The types of ranks to return. If the parameter is omitted, no ranks will
--- be returned.
-data GamesScoresGetIncludeRankType
-    = GSGIRTAll
-      -- ^ @ALL@
-      -- Retrieve public and social ranks.
-    | GSGIRTPublic
-      -- ^ @PUBLIC@
-      -- Retrieve public ranks, if the player is sharing their gameplay activity
-      -- publicly.
-    | GSGIRTSocial
-      -- ^ @SOCIAL@
-      -- Retrieve the social rank.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable GamesScoresGetIncludeRankType
-
-instance FromText GamesScoresGetIncludeRankType where
-    fromText = \case
-        "ALL" -> Just GSGIRTAll
-        "PUBLIC" -> Just GSGIRTPublic
-        "SOCIAL" -> Just GSGIRTSocial
-        _ -> Nothing
-
-instance ToText GamesScoresGetIncludeRankType where
-    toText = \case
-        GSGIRTAll -> "ALL"
-        GSGIRTPublic -> "PUBLIC"
-        GSGIRTSocial -> "SOCIAL"
-
-instance FromJSON GamesScoresGetIncludeRankType where
-    parseJSON = parseJSONText "GamesScoresGetIncludeRankType"
-
-instance ToJSON GamesScoresGetIncludeRankType where
-    toJSON = toJSONText
-
 -- | Restrict application details returned to the specific platform.
-data GamesApplicationsGetPlatformType
-    = Android
+data PlatformType
+    = PTAndroid
       -- ^ @ANDROID@
       -- Retrieve applications that can be played on Android.
-    | Ios
+    | PTIos
       -- ^ @IOS@
       -- Retrieve applications that can be played on iOS.
-    | WebApp
+    | PTWebApp
       -- ^ @WEB_APP@
       -- Retrieve applications that can be played on desktop web.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable GamesApplicationsGetPlatformType
+instance Hashable PlatformType
 
-instance FromText GamesApplicationsGetPlatformType where
+instance FromText PlatformType where
     fromText = \case
-        "ANDROID" -> Just Android
-        "IOS" -> Just Ios
-        "WEB_APP" -> Just WebApp
+        "ANDROID" -> Just PTAndroid
+        "IOS" -> Just PTIos
+        "WEB_APP" -> Just PTWebApp
         _ -> Nothing
 
-instance ToText GamesApplicationsGetPlatformType where
+instance ToText PlatformType where
     toText = \case
-        Android -> "ANDROID"
-        Ios -> "IOS"
-        WebApp -> "WEB_APP"
+        PTAndroid -> "ANDROID"
+        PTIos -> "IOS"
+        PTWebApp -> "WEB_APP"
 
-instance FromJSON GamesApplicationsGetPlatformType where
-    parseJSON = parseJSONText "GamesApplicationsGetPlatformType"
+instance FromJSON PlatformType where
+    parseJSON = parseJSONText "PlatformType"
 
-instance ToJSON GamesApplicationsGetPlatformType where
+instance ToJSON PlatformType where
     toJSON = toJSONText
 
--- | The time span for the scores and ranks you\'re requesting.
-data GamesScoresListTimeSpan
-    = AllTime
-      -- ^ @ALL_TIME@
-      -- List the all-time top scores.
-    | Daily
-      -- ^ @DAILY@
-      -- List the top scores for the current day.
-    | Weekly
-      -- ^ @WEEKLY@
-      -- List the top scores for the current week.
+-- | The types of ranks to return. If the parameter is omitted, no ranks will
+-- be returned.
+data IncludeRankType
+    = IRTAll
+      -- ^ @ALL@
+      -- Retrieve public and social ranks.
+    | IRTPublic
+      -- ^ @PUBLIC@
+      -- Retrieve public ranks, if the player is sharing their gameplay activity
+      -- publicly.
+    | IRTSocial
+      -- ^ @SOCIAL@
+      -- Retrieve the social rank.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable GamesScoresListTimeSpan
+instance Hashable IncludeRankType
 
-instance FromText GamesScoresListTimeSpan where
+instance FromText IncludeRankType where
     fromText = \case
-        "ALL_TIME" -> Just AllTime
-        "DAILY" -> Just Daily
-        "WEEKLY" -> Just Weekly
+        "ALL" -> Just IRTAll
+        "PUBLIC" -> Just IRTPublic
+        "SOCIAL" -> Just IRTSocial
         _ -> Nothing
 
-instance ToText GamesScoresListTimeSpan where
+instance ToText IncludeRankType where
     toText = \case
-        AllTime -> "ALL_TIME"
-        Daily -> "DAILY"
-        Weekly -> "WEEKLY"
+        IRTAll -> "ALL"
+        IRTPublic -> "PUBLIC"
+        IRTSocial -> "SOCIAL"
 
-instance FromJSON GamesScoresListTimeSpan where
-    parseJSON = parseJSONText "GamesScoresListTimeSpan"
+instance FromJSON IncludeRankType where
+    parseJSON = parseJSONText "IncludeRankType"
 
-instance ToJSON GamesScoresListTimeSpan where
+instance ToJSON IncludeRankType where
     toJSON = toJSONText
 
 -- | The collection of scores you\'re requesting.

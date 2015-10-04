@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -49,9 +50,7 @@ import           Network.Google.ShoppingContent.Types
 type OrdersGettestOrdertemplateResource =
      Capture "merchantId" Word64 :>
        "testordertemplates" :>
-         Capture "templateName"
-           ContentOrdersGettestOrdertemplateTemplateName
-           :>
+         Capture "templateName" TemplateName :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -69,12 +68,12 @@ data OrdersGettestOrdertemplate' = OrdersGettestOrdertemplate'
     { _ogoQuotaUser    :: !(Maybe Text)
     , _ogoMerchantId   :: !Word64
     , _ogoPrettyPrint  :: !Bool
-    , _ogoTemplateName :: !ContentOrdersGettestOrdertemplateTemplateName
+    , _ogoTemplateName :: !TemplateName
     , _ogoUserIP       :: !(Maybe Text)
     , _ogoKey          :: !(Maybe Key)
     , _ogoOAuthToken   :: !(Maybe OAuthToken)
     , _ogoFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersGettestOrdertemplate'' with the minimum fields required to make a request.
 --
@@ -97,7 +96,7 @@ data OrdersGettestOrdertemplate' = OrdersGettestOrdertemplate'
 -- * 'ogoFields'
 ordersGettestOrdertemplate'
     :: Word64 -- ^ 'merchantId'
-    -> ContentOrdersGettestOrdertemplateTemplateName -- ^ 'templateName'
+    -> TemplateName -- ^ 'templateName'
     -> OrdersGettestOrdertemplate'
 ordersGettestOrdertemplate' pOgoMerchantId_ pOgoTemplateName_ =
     OrdersGettestOrdertemplate'
@@ -131,7 +130,7 @@ ogoPrettyPrint
       (\ s a -> s{_ogoPrettyPrint = a})
 
 -- | The name of the template to retrieve.
-ogoTemplateName :: Lens' OrdersGettestOrdertemplate' ContentOrdersGettestOrdertemplateTemplateName
+ogoTemplateName :: Lens' OrdersGettestOrdertemplate' TemplateName
 ogoTemplateName
   = lens _ogoTemplateName
       (\ s a -> s{_ogoTemplateName = a})

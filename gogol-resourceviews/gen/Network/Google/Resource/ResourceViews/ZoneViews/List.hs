@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,8 +53,8 @@ type ZoneViewsListResource =
        "zones" :>
          Capture "zone" Text :>
            "resourceViews" :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Int32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data ZoneViewsList' = ZoneViewsList'
     , _zvlOAuthToken  :: !(Maybe OAuthToken)
     , _zvlMaxResults  :: !Int32
     , _zvlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsList'' with the minimum fields required to make a request.
 --
@@ -187,8 +188,8 @@ instance GoogleRequest ZoneViewsList' where
         type Rs ZoneViewsList' = ZoneViewsList
         request = requestWithRoute defReq resourceViewsURL
         requestWithRoute r u ZoneViewsList'{..}
-          = go (Just _zvlMaxResults) _zvlPageToken _zvlProject
-              _zvlZone
+          = go _zvlProject _zvlZone _zvlPageToken
+              (Just _zvlMaxResults)
               _zvlQuotaUser
               (Just _zvlPrettyPrint)
               _zvlUserIP

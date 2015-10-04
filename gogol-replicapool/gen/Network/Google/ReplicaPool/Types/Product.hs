@@ -22,7 +22,7 @@ import           Network.Google.ReplicaPool.Types.Sum
 -- /See:/ 'instanceGroupManagersSetInstanceTemplateRequest' smart constructor.
 newtype InstanceGroupManagersSetInstanceTemplateRequest = InstanceGroupManagersSetInstanceTemplateRequest
     { _igmsitrInstanceTemplate :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersSetInstanceTemplateRequest' with the minimum fields required to make a request.
 --
@@ -62,66 +62,10 @@ instance ToJSON
                     _igmsitrInstanceTemplate])
 
 --
--- /See:/ 'operationWarnings' smart constructor.
-data OperationWarnings = OperationWarnings
-    { _owData    :: !(Maybe [OperationWarningsData])
-    , _owCode    :: !(Maybe OperationWarningsCode)
-    , _owMessage :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OperationWarnings' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'owData'
---
--- * 'owCode'
---
--- * 'owMessage'
-operationWarnings
-    :: OperationWarnings
-operationWarnings =
-    OperationWarnings
-    { _owData = Nothing
-    , _owCode = Nothing
-    , _owMessage = Nothing
-    }
-
--- | [Output only] Metadata for this warning in key:value format.
-owData :: Lens' OperationWarnings [OperationWarningsData]
-owData
-  = lens _owData (\ s a -> s{_owData = a}) . _Default .
-      _Coerce
-
--- | [Output only] The warning type identifier for this warning.
-owCode :: Lens' OperationWarnings (Maybe OperationWarningsCode)
-owCode = lens _owCode (\ s a -> s{_owCode = a})
-
--- | [Output only] Optional human-readable details for this warning.
-owMessage :: Lens' OperationWarnings (Maybe Text)
-owMessage
-  = lens _owMessage (\ s a -> s{_owMessage = a})
-
-instance FromJSON OperationWarnings where
-        parseJSON
-          = withObject "OperationWarnings"
-              (\ o ->
-                 OperationWarnings <$>
-                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
-                     (o .:? "message"))
-
-instance ToJSON OperationWarnings where
-        toJSON OperationWarnings{..}
-          = object
-              (catMaybes
-                 [("data" .=) <$> _owData, ("code" .=) <$> _owCode,
-                  ("message" .=) <$> _owMessage])
-
---
 -- /See:/ 'instanceGroupManagersAbandonInstancesRequest' smart constructor.
 newtype InstanceGroupManagersAbandonInstancesRequest = InstanceGroupManagersAbandonInstancesRequest
     { _igmairInstances :: Maybe [Text]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersAbandonInstancesRequest' with the minimum fields required to make a request.
 --
@@ -161,49 +105,6 @@ instance ToJSON
               (catMaybes [("instances" .=) <$> _igmairInstances])
 
 --
--- /See:/ 'operationWarningsData' smart constructor.
-data OperationWarningsData = OperationWarningsData
-    { _owdValue :: !(Maybe Text)
-    , _owdKey   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OperationWarningsData' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'owdValue'
---
--- * 'owdKey'
-operationWarningsData
-    :: OperationWarningsData
-operationWarningsData =
-    OperationWarningsData
-    { _owdValue = Nothing
-    , _owdKey = Nothing
-    }
-
--- | [Output Only] Metadata value for this warning.
-owdValue :: Lens' OperationWarningsData (Maybe Text)
-owdValue = lens _owdValue (\ s a -> s{_owdValue = a})
-
--- | [Output Only] Metadata key for this warning.
-owdKey :: Lens' OperationWarningsData (Maybe Text)
-owdKey = lens _owdKey (\ s a -> s{_owdKey = a})
-
-instance FromJSON OperationWarningsData where
-        parseJSON
-          = withObject "OperationWarningsData"
-              (\ o ->
-                 OperationWarningsData <$>
-                   (o .:? "value") <*> (o .:? "key"))
-
-instance ToJSON OperationWarningsData where
-        toJSON OperationWarningsData{..}
-          = object
-              (catMaybes
-                 [("value" .=) <$> _owdValue, ("key" .=) <$> _owdKey])
-
---
 -- /See:/ 'operationList' smart constructor.
 data OperationList = OperationList
     { _olNextPageToken :: !(Maybe Text)
@@ -211,7 +112,7 @@ data OperationList = OperationList
     , _olItems         :: !(Maybe [Operation])
     , _olSelfLink      :: !(Maybe Text)
     , _olId            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationList' with the minimum fields required to make a request.
 --
@@ -290,7 +191,7 @@ data InstanceGroupManagerList = InstanceGroupManagerList
     , _igmlItems         :: !(Maybe [InstanceGroupManager])
     , _igmlSelfLink      :: !(Maybe Text)
     , _igmlId            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagerList' with the minimum fields required to make a request.
 --
@@ -382,7 +283,7 @@ data InstanceGroupManager = InstanceGroupManager
     , _igmId                  :: !(Maybe Word64)
     , _igmTargetPools         :: !(Maybe [Text])
     , _igmDescription         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManager' with the minimum fields required to make a request.
 --
@@ -578,15 +479,15 @@ instance ToJSON InstanceGroupManager where
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
     { _oTargetId            :: !(Maybe Word64)
-    , _oStatus              :: !(Maybe OperationStatus)
+    , _oStatus              :: !(Maybe Status)
     , _oInsertTime          :: !(Maybe Text)
     , _oProgress            :: !(Maybe Int32)
     , _oStartTime           :: !(Maybe Text)
     , _oKind                :: !Text
-    , _oError               :: !(Maybe OperationError)
+    , _oError               :: !(Maybe Error')
     , _oHTTPErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
-    , _oWarnings            :: !(Maybe [OperationWarnings])
+    , _oWarnings            :: !(Maybe [WarningsItem])
     , _oHTTPErrorStatusCode :: !(Maybe Int32)
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
@@ -599,7 +500,7 @@ data Operation = Operation
     , _oRegion              :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
     , _oClientOperationId   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -683,7 +584,7 @@ oTargetId
   = lens _oTargetId (\ s a -> s{_oTargetId = a})
 
 -- | [Output Only] Status of the operation.
-oStatus :: Lens' Operation (Maybe OperationStatus)
+oStatus :: Lens' Operation (Maybe Status)
 oStatus = lens _oStatus (\ s a -> s{_oStatus = a})
 
 -- | [Output Only] The time that this operation was requested, in RFC3339
@@ -713,7 +614,7 @@ oKind = lens _oKind (\ s a -> s{_oKind = a})
 
 -- | [Output Only] If errors occurred during processing of this operation,
 -- this field will be populated.
-oError :: Lens' Operation (Maybe OperationError)
+oError :: Lens' Operation (Maybe Error')
 oError = lens _oError (\ s a -> s{_oError = a})
 
 -- | [Output only] If operation fails, the HTTP error message returned.
@@ -729,7 +630,7 @@ oZone = lens _oZone (\ s a -> s{_oZone = a})
 
 -- | [Output Only] If there are issues with this operation, a warning is
 -- returned.
-oWarnings :: Lens' Operation [OperationWarnings]
+oWarnings :: Lens' Operation [WarningsItem]
 oWarnings
   = lens _oWarnings (\ s a -> s{_oWarnings = a}) .
       _Default
@@ -856,12 +757,48 @@ instance ToJSON Operation where
                   ("targetLink" .=) <$> _oTargetLink,
                   ("clientOperationId" .=) <$> _oClientOperationId])
 
+-- | [Output Only] If errors occurred during processing of this operation,
+-- this field will be populated.
+--
+-- /See:/ 'error'' smart constructor.
+newtype Error' = Error'
+    { _eErrors :: Maybe [ErrorsItem]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Error' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eErrors'
+error'
+    :: Error'
+error' =
+    Error'
+    { _eErrors = Nothing
+    }
+
+-- | [Output Only] The array of errors encountered while processing this
+-- operation.
+eErrors :: Lens' Error' [ErrorsItem]
+eErrors
+  = lens _eErrors (\ s a -> s{_eErrors = a}) . _Default
+      . _Coerce
+
+instance FromJSON Error' where
+        parseJSON
+          = withObject "Error"
+              (\ o -> Error' <$> (o .:? "errors" .!= mempty))
+
+instance ToJSON Error' where
+        toJSON Error'{..}
+          = object (catMaybes [("errors" .=) <$> _eErrors])
+
 --
 -- /See:/ 'replicaPoolAutoHealingPolicy' smart constructor.
 data ReplicaPoolAutoHealingPolicy = ReplicaPoolAutoHealingPolicy
     { _rpahpHealthCheck :: !(Maybe Text)
-    , _rpahpActionType  :: !(Maybe ReplicaPoolAutoHealingPolicyActionType)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _rpahpActionType  :: !(Maybe ActionType)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReplicaPoolAutoHealingPolicy' with the minimum fields required to make a request.
 --
@@ -889,7 +826,7 @@ rpahpHealthCheck
 -- with a new instance that is based on the instance template for this
 -- managed instance group. REBOOT performs a soft reboot on an instance. If
 -- the instance cannot reboot, the instance performs a hard restart.
-rpahpActionType :: Lens' ReplicaPoolAutoHealingPolicy (Maybe ReplicaPoolAutoHealingPolicyActionType)
+rpahpActionType :: Lens' ReplicaPoolAutoHealingPolicy (Maybe ActionType)
 rpahpActionType
   = lens _rpahpActionType
       (\ s a -> s{_rpahpActionType = a})
@@ -912,7 +849,7 @@ instance ToJSON ReplicaPoolAutoHealingPolicy where
 -- /See:/ 'instanceGroupManagersRecreateInstancesRequest' smart constructor.
 newtype InstanceGroupManagersRecreateInstancesRequest = InstanceGroupManagersRecreateInstancesRequest
     { _igmrirInstances :: Maybe [Text]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersRecreateInstancesRequest' with the minimum fields required to make a request.
 --
@@ -955,7 +892,7 @@ instance ToJSON
 -- /See:/ 'instanceGroupManagersDeleteInstancesRequest' smart constructor.
 newtype InstanceGroupManagersDeleteInstancesRequest = InstanceGroupManagersDeleteInstancesRequest
     { _igmdirInstances :: Maybe [Text]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersDeleteInstancesRequest' with the minimum fields required to make a request.
 --
@@ -994,50 +931,110 @@ instance ToJSON
           = object
               (catMaybes [("instances" .=) <$> _igmdirInstances])
 
--- | [Output Only] If errors occurred during processing of this operation,
--- this field will be populated.
 --
--- /See:/ 'operationError' smart constructor.
-newtype OperationError = OperationError
-    { _oeErrors :: Maybe [OperationErrorErrors]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'warningsItem' smart constructor.
+data WarningsItem = WarningsItem
+    { _wiData    :: !(Maybe [DataItem])
+    , _wiCode    :: !(Maybe WarningsItemCode)
+    , _wiMessage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OperationError' with the minimum fields required to make a request.
+-- | Creates a value of 'WarningsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oeErrors'
-operationError
-    :: OperationError
-operationError =
-    OperationError
-    { _oeErrors = Nothing
+-- * 'wiData'
+--
+-- * 'wiCode'
+--
+-- * 'wiMessage'
+warningsItem
+    :: WarningsItem
+warningsItem =
+    WarningsItem
+    { _wiData = Nothing
+    , _wiCode = Nothing
+    , _wiMessage = Nothing
     }
 
--- | [Output Only] The array of errors encountered while processing this
--- operation.
-oeErrors :: Lens' OperationError [OperationErrorErrors]
-oeErrors
-  = lens _oeErrors (\ s a -> s{_oeErrors = a}) .
-      _Default
-      . _Coerce
+-- | [Output only] Metadata for this warning in key:value format.
+wiData :: Lens' WarningsItem [DataItem]
+wiData
+  = lens _wiData (\ s a -> s{_wiData = a}) . _Default .
+      _Coerce
 
-instance FromJSON OperationError where
+-- | [Output only] The warning type identifier for this warning.
+wiCode :: Lens' WarningsItem (Maybe WarningsItemCode)
+wiCode = lens _wiCode (\ s a -> s{_wiCode = a})
+
+-- | [Output only] Optional human-readable details for this warning.
+wiMessage :: Lens' WarningsItem (Maybe Text)
+wiMessage
+  = lens _wiMessage (\ s a -> s{_wiMessage = a})
+
+instance FromJSON WarningsItem where
         parseJSON
-          = withObject "OperationError"
+          = withObject "WarningsItem"
               (\ o ->
-                 OperationError <$> (o .:? "errors" .!= mempty))
+                 WarningsItem <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
 
-instance ToJSON OperationError where
-        toJSON OperationError{..}
-          = object (catMaybes [("errors" .=) <$> _oeErrors])
+instance ToJSON WarningsItem where
+        toJSON WarningsItem{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _wiData, ("code" .=) <$> _wiCode,
+                  ("message" .=) <$> _wiMessage])
+
+--
+-- /See:/ 'dataItem' smart constructor.
+data DataItem = DataItem
+    { _diValue :: !(Maybe Text)
+    , _diKey   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DataItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'diValue'
+--
+-- * 'diKey'
+dataItem
+    :: DataItem
+dataItem =
+    DataItem
+    { _diValue = Nothing
+    , _diKey = Nothing
+    }
+
+-- | [Output Only] Metadata value for this warning.
+diValue :: Lens' DataItem (Maybe Text)
+diValue = lens _diValue (\ s a -> s{_diValue = a})
+
+-- | [Output Only] Metadata key for this warning.
+diKey :: Lens' DataItem (Maybe Text)
+diKey = lens _diKey (\ s a -> s{_diKey = a})
+
+instance FromJSON DataItem where
+        parseJSON
+          = withObject "DataItem"
+              (\ o ->
+                 DataItem <$> (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON DataItem where
+        toJSON DataItem{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _diValue, ("key" .=) <$> _diKey])
 
 --
 -- /See:/ 'instanceGroupManagersSetTargetPoolsRequest' smart constructor.
 data InstanceGroupManagersSetTargetPoolsRequest = InstanceGroupManagersSetTargetPoolsRequest
     { _igmstprFingerprint :: !(Maybe Word8)
     , _igmstprTargetPools :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersSetTargetPoolsRequest' with the minimum fields required to make a request.
 --
@@ -1091,58 +1088,58 @@ instance ToJSON
                   ("targetPools" .=) <$> _igmstprTargetPools])
 
 --
--- /See:/ 'operationErrorErrors' smart constructor.
-data OperationErrorErrors = OperationErrorErrors
-    { _oeeLocation :: !(Maybe Text)
-    , _oeeCode     :: !(Maybe Text)
-    , _oeeMessage  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'errorsItem' smart constructor.
+data ErrorsItem = ErrorsItem
+    { _eiLocation :: !(Maybe Text)
+    , _eiCode     :: !(Maybe Text)
+    , _eiMessage  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OperationErrorErrors' with the minimum fields required to make a request.
+-- | Creates a value of 'ErrorsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oeeLocation'
+-- * 'eiLocation'
 --
--- * 'oeeCode'
+-- * 'eiCode'
 --
--- * 'oeeMessage'
-operationErrorErrors
-    :: OperationErrorErrors
-operationErrorErrors =
-    OperationErrorErrors
-    { _oeeLocation = Nothing
-    , _oeeCode = Nothing
-    , _oeeMessage = Nothing
+-- * 'eiMessage'
+errorsItem
+    :: ErrorsItem
+errorsItem =
+    ErrorsItem
+    { _eiLocation = Nothing
+    , _eiCode = Nothing
+    , _eiMessage = Nothing
     }
 
 -- | [Output Only] Indicates the field in the request which caused the error.
 -- This property is optional.
-oeeLocation :: Lens' OperationErrorErrors (Maybe Text)
-oeeLocation
-  = lens _oeeLocation (\ s a -> s{_oeeLocation = a})
+eiLocation :: Lens' ErrorsItem (Maybe Text)
+eiLocation
+  = lens _eiLocation (\ s a -> s{_eiLocation = a})
 
 -- | [Output Only] The error type identifier for this error.
-oeeCode :: Lens' OperationErrorErrors (Maybe Text)
-oeeCode = lens _oeeCode (\ s a -> s{_oeeCode = a})
+eiCode :: Lens' ErrorsItem (Maybe Text)
+eiCode = lens _eiCode (\ s a -> s{_eiCode = a})
 
 -- | [Output Only] An optional, human-readable error message.
-oeeMessage :: Lens' OperationErrorErrors (Maybe Text)
-oeeMessage
-  = lens _oeeMessage (\ s a -> s{_oeeMessage = a})
+eiMessage :: Lens' ErrorsItem (Maybe Text)
+eiMessage
+  = lens _eiMessage (\ s a -> s{_eiMessage = a})
 
-instance FromJSON OperationErrorErrors where
+instance FromJSON ErrorsItem where
         parseJSON
-          = withObject "OperationErrorErrors"
+          = withObject "ErrorsItem"
               (\ o ->
-                 OperationErrorErrors <$>
+                 ErrorsItem <$>
                    (o .:? "location") <*> (o .:? "code") <*>
                      (o .:? "message"))
 
-instance ToJSON OperationErrorErrors where
-        toJSON OperationErrorErrors{..}
+instance ToJSON ErrorsItem where
+        toJSON ErrorsItem{..}
           = object
               (catMaybes
-                 [("location" .=) <$> _oeeLocation,
-                  ("code" .=) <$> _oeeCode,
-                  ("message" .=) <$> _oeeMessage])
+                 [("location" .=) <$> _eiLocation,
+                  ("code" .=) <$> _eiCode,
+                  ("message" .=) <$> _eiMessage])

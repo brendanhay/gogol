@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -31,10 +32,10 @@ module Network.Google.Resource.Directory.Groups.Update
 
     -- * Request Lenses
     , guQuotaUser
-    , guGroup
     , guPrettyPrint
     , guUserIP
     , guGroupKey
+    , guPayload
     , guKey
     , guOAuthToken
     , guFields
@@ -62,14 +63,14 @@ type GroupsUpdateResource =
 -- /See:/ 'groupsUpdate'' smart constructor.
 data GroupsUpdate' = GroupsUpdate'
     { _guQuotaUser   :: !(Maybe Text)
-    , _guGroup       :: !Group
     , _guPrettyPrint :: !Bool
     , _guUserIP      :: !(Maybe Text)
     , _guGroupKey    :: !Text
+    , _guPayload     :: !Group
     , _guKey         :: !(Maybe Key)
     , _guOAuthToken  :: !(Maybe OAuthToken)
     , _guFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsUpdate'' with the minimum fields required to make a request.
 --
@@ -77,13 +78,13 @@ data GroupsUpdate' = GroupsUpdate'
 --
 -- * 'guQuotaUser'
 --
--- * 'guGroup'
---
 -- * 'guPrettyPrint'
 --
 -- * 'guUserIP'
 --
 -- * 'guGroupKey'
+--
+-- * 'guPayload'
 --
 -- * 'guKey'
 --
@@ -91,16 +92,16 @@ data GroupsUpdate' = GroupsUpdate'
 --
 -- * 'guFields'
 groupsUpdate'
-    :: Group -- ^ 'Group'
-    -> Text -- ^ 'groupKey'
+    :: Text -- ^ 'groupKey'
+    -> Group -- ^ 'payload'
     -> GroupsUpdate'
-groupsUpdate' pGuGroup_ pGuGroupKey_ =
+groupsUpdate' pGuGroupKey_ pGuPayload_ =
     GroupsUpdate'
     { _guQuotaUser = Nothing
-    , _guGroup = pGuGroup_
     , _guPrettyPrint = True
     , _guUserIP = Nothing
     , _guGroupKey = pGuGroupKey_
+    , _guPayload = pGuPayload_
     , _guKey = Nothing
     , _guOAuthToken = Nothing
     , _guFields = Nothing
@@ -112,10 +113,6 @@ groupsUpdate' pGuGroup_ pGuGroupKey_ =
 guQuotaUser :: Lens' GroupsUpdate' (Maybe Text)
 guQuotaUser
   = lens _guQuotaUser (\ s a -> s{_guQuotaUser = a})
-
--- | Multipart request metadata.
-guGroup :: Lens' GroupsUpdate' Group
-guGroup = lens _guGroup (\ s a -> s{_guGroup = a})
 
 -- | Returns response with indentations and line breaks.
 guPrettyPrint :: Lens' GroupsUpdate' Bool
@@ -133,6 +130,11 @@ guUserIP = lens _guUserIP (\ s a -> s{_guUserIP = a})
 guGroupKey :: Lens' GroupsUpdate' Text
 guGroupKey
   = lens _guGroupKey (\ s a -> s{_guGroupKey = a})
+
+-- | Multipart request metadata.
+guPayload :: Lens' GroupsUpdate' Group
+guPayload
+  = lens _guPayload (\ s a -> s{_guPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -163,7 +165,7 @@ instance GoogleRequest GroupsUpdate' where
               _guKey
               _guOAuthToken
               (Just AltJSON)
-              _guGroup
+              _guPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GroupsUpdateResource)

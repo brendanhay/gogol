@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.Gmail.Users.Threads.Modify
 
     -- * Request Lenses
     , utmQuotaUser
-    , utmModifyThreadRequest
     , utmPrettyPrint
     , utmUserIP
+    , utmPayload
     , utmUserId
     , utmKey
     , utmId
@@ -67,16 +68,16 @@ type UsersThreadsModifyResource =
 --
 -- /See:/ 'usersThreadsModify'' smart constructor.
 data UsersThreadsModify' = UsersThreadsModify'
-    { _utmQuotaUser           :: !(Maybe Text)
-    , _utmModifyThreadRequest :: !ModifyThreadRequest
-    , _utmPrettyPrint         :: !Bool
-    , _utmUserIP              :: !(Maybe Text)
-    , _utmUserId              :: !Text
-    , _utmKey                 :: !(Maybe Key)
-    , _utmId                  :: !Text
-    , _utmOAuthToken          :: !(Maybe OAuthToken)
-    , _utmFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _utmQuotaUser   :: !(Maybe Text)
+    , _utmPrettyPrint :: !Bool
+    , _utmUserIP      :: !(Maybe Text)
+    , _utmPayload     :: !ModifyThreadRequest
+    , _utmUserId      :: !Text
+    , _utmKey         :: !(Maybe Key)
+    , _utmId          :: !Text
+    , _utmOAuthToken  :: !(Maybe OAuthToken)
+    , _utmFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersThreadsModify'' with the minimum fields required to make a request.
 --
@@ -84,11 +85,11 @@ data UsersThreadsModify' = UsersThreadsModify'
 --
 -- * 'utmQuotaUser'
 --
--- * 'utmModifyThreadRequest'
---
 -- * 'utmPrettyPrint'
 --
 -- * 'utmUserIP'
+--
+-- * 'utmPayload'
 --
 -- * 'utmUserId'
 --
@@ -100,16 +101,16 @@ data UsersThreadsModify' = UsersThreadsModify'
 --
 -- * 'utmFields'
 usersThreadsModify'
-    :: ModifyThreadRequest -- ^ 'ModifyThreadRequest'
+    :: ModifyThreadRequest -- ^ 'payload'
     -> Text -- ^ 'id'
     -> Text
     -> UsersThreadsModify'
-usersThreadsModify' pUtmModifyThreadRequest_ pUtmUserId_ pUtmId_ =
+usersThreadsModify' pUtmPayload_ pUtmUserId_ pUtmId_ =
     UsersThreadsModify'
     { _utmQuotaUser = Nothing
-    , _utmModifyThreadRequest = pUtmModifyThreadRequest_
     , _utmPrettyPrint = True
     , _utmUserIP = Nothing
+    , _utmPayload = pUtmPayload_
     , _utmUserId = pUtmUserId_
     , _utmKey = Nothing
     , _utmId = pUtmId_
@@ -124,12 +125,6 @@ utmQuotaUser :: Lens' UsersThreadsModify' (Maybe Text)
 utmQuotaUser
   = lens _utmQuotaUser (\ s a -> s{_utmQuotaUser = a})
 
--- | Multipart request metadata.
-utmModifyThreadRequest :: Lens' UsersThreadsModify' ModifyThreadRequest
-utmModifyThreadRequest
-  = lens _utmModifyThreadRequest
-      (\ s a -> s{_utmModifyThreadRequest = a})
-
 -- | Returns response with indentations and line breaks.
 utmPrettyPrint :: Lens' UsersThreadsModify' Bool
 utmPrettyPrint
@@ -141,6 +136,11 @@ utmPrettyPrint
 utmUserIP :: Lens' UsersThreadsModify' (Maybe Text)
 utmUserIP
   = lens _utmUserIP (\ s a -> s{_utmUserIP = a})
+
+-- | Multipart request metadata.
+utmPayload :: Lens' UsersThreadsModify' ModifyThreadRequest
+utmPayload
+  = lens _utmPayload (\ s a -> s{_utmPayload = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -184,7 +184,7 @@ instance GoogleRequest UsersThreadsModify' where
               _utmKey
               _utmOAuthToken
               (Just AltJSON)
-              _utmModifyThreadRequest
+              _utmPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersThreadsModifyResource)

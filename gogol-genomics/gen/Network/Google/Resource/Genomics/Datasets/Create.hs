@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.Genomics.Datasets.Create
     -- * Request Lenses
     , dcQuotaUser
     , dcPrettyPrint
-    , dcDataset
     , dcUserIP
+    , dcPayload
     , dcKey
     , dcOAuthToken
     , dcFields
@@ -61,12 +62,12 @@ type DatasetsCreateResource =
 data DatasetsCreate' = DatasetsCreate'
     { _dcQuotaUser   :: !(Maybe Text)
     , _dcPrettyPrint :: !Bool
-    , _dcDataset     :: !Dataset
     , _dcUserIP      :: !(Maybe Text)
+    , _dcPayload     :: !Dataset
     , _dcKey         :: !(Maybe Key)
     , _dcOAuthToken  :: !(Maybe OAuthToken)
     , _dcFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsCreate'' with the minimum fields required to make a request.
 --
@@ -76,9 +77,9 @@ data DatasetsCreate' = DatasetsCreate'
 --
 -- * 'dcPrettyPrint'
 --
--- * 'dcDataset'
---
 -- * 'dcUserIP'
+--
+-- * 'dcPayload'
 --
 -- * 'dcKey'
 --
@@ -86,14 +87,14 @@ data DatasetsCreate' = DatasetsCreate'
 --
 -- * 'dcFields'
 datasetsCreate'
-    :: Dataset -- ^ 'Dataset'
+    :: Dataset -- ^ 'payload'
     -> DatasetsCreate'
-datasetsCreate' pDcDataset_ =
+datasetsCreate' pDcPayload_ =
     DatasetsCreate'
     { _dcQuotaUser = Nothing
     , _dcPrettyPrint = True
-    , _dcDataset = pDcDataset_
     , _dcUserIP = Nothing
+    , _dcPayload = pDcPayload_
     , _dcKey = Nothing
     , _dcOAuthToken = Nothing
     , _dcFields = Nothing
@@ -112,15 +113,15 @@ dcPrettyPrint
   = lens _dcPrettyPrint
       (\ s a -> s{_dcPrettyPrint = a})
 
--- | Multipart request metadata.
-dcDataset :: Lens' DatasetsCreate' Dataset
-dcDataset
-  = lens _dcDataset (\ s a -> s{_dcDataset = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 dcUserIP :: Lens' DatasetsCreate' (Maybe Text)
 dcUserIP = lens _dcUserIP (\ s a -> s{_dcUserIP = a})
+
+-- | Multipart request metadata.
+dcPayload :: Lens' DatasetsCreate' Dataset
+dcPayload
+  = lens _dcPayload (\ s a -> s{_dcPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -150,7 +151,7 @@ instance GoogleRequest DatasetsCreate' where
               _dcKey
               _dcOAuthToken
               (Just AltJSON)
-              _dcDataset
+              _dcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsCreateResource)

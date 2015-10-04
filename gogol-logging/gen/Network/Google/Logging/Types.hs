@@ -29,7 +29,7 @@ module Network.Google.Logging.Types
     , log
     , lName
     , lDisplayName
-    , lPayLoadType
+    , lPayloadType
 
     -- * LogError
     , LogError
@@ -38,15 +38,15 @@ module Network.Google.Logging.Types
     , leResource
     , leTimeNanos
 
+    -- * DetailsItem
+    , DetailsItem
+    , detailsItem
+
     -- * WriteLogEntriesRequest
     , WriteLogEntriesRequest
     , writeLogEntriesRequest
     , wlerEntries
     , wlerCommonLabels
-
-    -- * WriteLogEntriesRequestCommonLabels
-    , WriteLogEntriesRequestCommonLabels
-    , writeLogEntriesRequestCommonLabels
 
     -- * RequestLog
     , RequestLog
@@ -104,9 +104,9 @@ module Network.Google.Logging.Types
     , listSinksResponse
     , lsrSinks
 
-    -- * LogEntryProtoPayLoad
-    , LogEntryProtoPayLoad
-    , logEntryProtoPayLoad
+    -- * CommonLabels
+    , CommonLabels
+    , commonLabels
 
     -- * ListLogServiceIndexesResponse
     , ListLogServiceIndexesResponse
@@ -132,10 +132,6 @@ module Network.Google.Logging.Types
     , llsrNextPageToken
     , llsrLogServices
 
-    -- * StatusDetails
-    , StatusDetails
-    , statusDetails
-
     -- * ListLogsResponse
     , ListLogsResponse
     , listLogsResponse
@@ -153,6 +149,10 @@ module Network.Google.Logging.Types
     , httprResponseSize
     , httprRequestMethod
     , httprReferer
+
+    -- * StructPayload
+    , StructPayload
+    , structPayload
 
     -- * ListLogSinksResponse
     , ListLogSinksResponse
@@ -178,20 +178,24 @@ module Network.Google.Logging.Types
     , llLogMessage
     , llSourceLocation
 
-    -- * LogEntryMetadataLabels
-    , LogEntryMetadataLabels
-    , logEntryMetadataLabels
+    -- * Labels
+    , Labels
+    , labels
+
+    -- * ProtoPayload
+    , ProtoPayload
+    , protoPayload
 
     -- * LogEntry
     , LogEntry
     , logEntry
     , leLog
-    , leTextPayLoad
+    , leTextPayload
     , leHTTPRequest
-    , leStructPayLoad
+    , leStructPayload
     , leInsertId
     , leMetadata
-    , leProtoPayLoad
+    , leProtoPayload
 
     -- * SourceLocation
     , SourceLocation
@@ -205,10 +209,6 @@ module Network.Google.Logging.Types
     , sourceReference
     , srRepository
     , srRevisionId
-
-    -- * LogEntryStructPayLoad
-    , LogEntryStructPayLoad
-    , logEntryStructPayLoad
     ) where
 
 import           Network.Google.Logging.Types.Product

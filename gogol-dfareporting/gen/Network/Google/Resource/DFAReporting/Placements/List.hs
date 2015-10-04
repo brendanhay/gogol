@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -70,39 +71,37 @@ type PlacementsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "placements" :>
-           QueryParams "advertiserIds" Int64 :>
-             QueryParam "archived" Bool :>
-               QueryParams "campaignIds" Int64 :>
-                 QueryParams "compatibilities"
-                   DfareportingPlacementsListCompatibilities
-                   :>
-                   QueryParams "contentCategoryIds" Int64 :>
-                     QueryParams "directorySiteIds" Int64 :>
-                       QueryParams "groupIds" Int64 :>
+           QueryParams "placementStrategyIds" Int64 :>
+             QueryParams "contentCategoryIds" Int64 :>
+               QueryParam "maxEndDate" Text :>
+                 QueryParams "campaignIds" Int64 :>
+                   QueryParams "pricingTypes" PricingTypes :>
+                     QueryParam "searchString" Text :>
+                       QueryParams "sizeIds" Int64 :>
                          QueryParams "ids" Int64 :>
-                           QueryParam "maxEndDate" Text :>
-                             QueryParam "maxResults" Int32 :>
-                               QueryParam "maxStartDate" Text :>
-                                 QueryParam "minEndDate" Text :>
-                                   QueryParam "minStartDate" Text :>
+                           QueryParams "groupIds" Int64 :>
+                             QueryParams "directorySiteIds" Int64 :>
+                               QueryParam "sortOrder"
+                                 DfareportingPlacementsListSortOrder
+                                 :>
+                                 QueryParam "paymentSource" PaymentSource :>
+                                   QueryParams "siteIds" Int64 :>
                                      QueryParam "pageToken" Text :>
-                                       QueryParam "paymentSource"
-                                         DfareportingPlacementsListPaymentSource
+                                       QueryParam "sortField"
+                                         DfareportingPlacementsListSortField
                                          :>
-                                         QueryParams "placementStrategyIds"
-                                           Int64
+                                         QueryParams "compatibilities"
+                                           Compatibilities
                                            :>
-                                           QueryParams "pricingTypes"
-                                             DfareportingPlacementsListPricingTypes
-                                             :>
-                                             QueryParam "searchString" Text :>
-                                               QueryParams "siteIds" Int64 :>
-                                                 QueryParams "sizeIds" Int64 :>
-                                                   QueryParam "sortField"
-                                                     DfareportingPlacementsListSortField
+                                           QueryParam "maxStartDate" Text :>
+                                             QueryParams "advertiserIds" Int64
+                                               :>
+                                               QueryParam "minStartDate" Text :>
+                                                 QueryParam "archived" Bool :>
+                                                   QueryParam "maxResults" Int32
                                                      :>
-                                                     QueryParam "sortOrder"
-                                                       DfareportingPlacementsListSortOrder
+                                                     QueryParam "minEndDate"
+                                                       Text
                                                        :>
                                                        QueryParam "quotaUser"
                                                          Text
@@ -135,36 +134,36 @@ type PlacementsListResource =
 --
 -- /See:/ 'placementsList'' smart constructor.
 data PlacementsList' = PlacementsList'
-    { _plaPlacementStrategyIds :: !(Maybe Int64)
+    { _plaPlacementStrategyIds :: !(Maybe [Int64])
     , _plaQuotaUser            :: !(Maybe Text)
     , _plaPrettyPrint          :: !Bool
-    , _plaContentCategoryIds   :: !(Maybe Int64)
+    , _plaContentCategoryIds   :: !(Maybe [Int64])
     , _plaMaxEndDate           :: !(Maybe Text)
     , _plaUserIP               :: !(Maybe Text)
-    , _plaCampaignIds          :: !(Maybe Int64)
-    , _plaPricingTypes         :: !(Maybe DfareportingPlacementsListPricingTypes)
+    , _plaCampaignIds          :: !(Maybe [Int64])
+    , _plaPricingTypes         :: !(Maybe PricingTypes)
     , _plaSearchString         :: !(Maybe Text)
-    , _plaSizeIds              :: !(Maybe Int64)
-    , _plaIds                  :: !(Maybe Int64)
+    , _plaSizeIds              :: !(Maybe [Int64])
+    , _plaIds                  :: !(Maybe [Int64])
     , _plaProfileId            :: !Int64
-    , _plaGroupIds             :: !(Maybe Int64)
-    , _plaDirectorySiteIds     :: !(Maybe Int64)
+    , _plaGroupIds             :: !(Maybe [Int64])
+    , _plaDirectorySiteIds     :: !(Maybe [Int64])
     , _plaSortOrder            :: !(Maybe DfareportingPlacementsListSortOrder)
-    , _plaPaymentSource        :: !(Maybe DfareportingPlacementsListPaymentSource)
+    , _plaPaymentSource        :: !(Maybe PaymentSource)
     , _plaKey                  :: !(Maybe Key)
-    , _plaSiteIds              :: !(Maybe Int64)
+    , _plaSiteIds              :: !(Maybe [Int64])
     , _plaPageToken            :: !(Maybe Text)
     , _plaSortField            :: !(Maybe DfareportingPlacementsListSortField)
-    , _plaCompatibilities      :: !(Maybe DfareportingPlacementsListCompatibilities)
+    , _plaCompatibilities      :: !(Maybe Compatibilities)
     , _plaMaxStartDate         :: !(Maybe Text)
     , _plaOAuthToken           :: !(Maybe OAuthToken)
-    , _plaAdvertiserIds        :: !(Maybe Int64)
+    , _plaAdvertiserIds        :: !(Maybe [Int64])
     , _plaMinStartDate         :: !(Maybe Text)
     , _plaArchived             :: !(Maybe Bool)
     , _plaMaxResults           :: !(Maybe Int32)
     , _plaMinEndDate           :: !(Maybe Text)
     , _plaFields               :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementsList'' with the minimum fields required to make a request.
 --
@@ -265,10 +264,12 @@ placementsList' pPlaProfileId_ =
 
 -- | Select only placements that are associated with these placement
 -- strategies.
-plaPlacementStrategyIds :: Lens' PlacementsList' (Maybe Int64)
+plaPlacementStrategyIds :: Lens' PlacementsList' [Int64]
 plaPlacementStrategyIds
   = lens _plaPlacementStrategyIds
       (\ s a -> s{_plaPlacementStrategyIds = a})
+      . _Default
+      . _Coerce
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -285,10 +286,12 @@ plaPrettyPrint
 
 -- | Select only placements that are associated with these content
 -- categories.
-plaContentCategoryIds :: Lens' PlacementsList' (Maybe Int64)
+plaContentCategoryIds :: Lens' PlacementsList' [Int64]
 plaContentCategoryIds
   = lens _plaContentCategoryIds
       (\ s a -> s{_plaContentCategoryIds = a})
+      . _Default
+      . _Coerce
 
 -- | Select only placements or placement groups whose end date is on or
 -- before the specified maxEndDate. The date should be formatted as
@@ -305,13 +308,15 @@ plaUserIP
   = lens _plaUserIP (\ s a -> s{_plaUserIP = a})
 
 -- | Select only placements that belong to these campaigns.
-plaCampaignIds :: Lens' PlacementsList' (Maybe Int64)
+plaCampaignIds :: Lens' PlacementsList' [Int64]
 plaCampaignIds
   = lens _plaCampaignIds
       (\ s a -> s{_plaCampaignIds = a})
+      . _Default
+      . _Coerce
 
 -- | Select only placements with these pricing types.
-plaPricingTypes :: Lens' PlacementsList' (Maybe DfareportingPlacementsListPricingTypes)
+plaPricingTypes :: Lens' PlacementsList' (Maybe PricingTypes)
 plaPricingTypes
   = lens _plaPricingTypes
       (\ s a -> s{_plaPricingTypes = a})
@@ -329,13 +334,17 @@ plaSearchString
       (\ s a -> s{_plaSearchString = a})
 
 -- | Select only placements that are associated with these sizes.
-plaSizeIds :: Lens' PlacementsList' (Maybe Int64)
+plaSizeIds :: Lens' PlacementsList' [Int64]
 plaSizeIds
-  = lens _plaSizeIds (\ s a -> s{_plaSizeIds = a})
+  = lens _plaSizeIds (\ s a -> s{_plaSizeIds = a}) .
+      _Default
+      . _Coerce
 
 -- | Select only placements with these IDs.
-plaIds :: Lens' PlacementsList' (Maybe Int64)
-plaIds = lens _plaIds (\ s a -> s{_plaIds = a})
+plaIds :: Lens' PlacementsList' [Int64]
+plaIds
+  = lens _plaIds (\ s a -> s{_plaIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 plaProfileId :: Lens' PlacementsList' Int64
@@ -343,15 +352,19 @@ plaProfileId
   = lens _plaProfileId (\ s a -> s{_plaProfileId = a})
 
 -- | Select only placements that belong to these placement groups.
-plaGroupIds :: Lens' PlacementsList' (Maybe Int64)
+plaGroupIds :: Lens' PlacementsList' [Int64]
 plaGroupIds
-  = lens _plaGroupIds (\ s a -> s{_plaGroupIds = a})
+  = lens _plaGroupIds (\ s a -> s{_plaGroupIds = a}) .
+      _Default
+      . _Coerce
 
 -- | Select only placements that are associated with these directory sites.
-plaDirectorySiteIds :: Lens' PlacementsList' (Maybe Int64)
+plaDirectorySiteIds :: Lens' PlacementsList' [Int64]
 plaDirectorySiteIds
   = lens _plaDirectorySiteIds
       (\ s a -> s{_plaDirectorySiteIds = a})
+      . _Default
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 plaSortOrder :: Lens' PlacementsList' (Maybe DfareportingPlacementsListSortOrder)
@@ -359,7 +372,7 @@ plaSortOrder
   = lens _plaSortOrder (\ s a -> s{_plaSortOrder = a})
 
 -- | Select only placements with this payment source.
-plaPaymentSource :: Lens' PlacementsList' (Maybe DfareportingPlacementsListPaymentSource)
+plaPaymentSource :: Lens' PlacementsList' (Maybe PaymentSource)
 plaPaymentSource
   = lens _plaPaymentSource
       (\ s a -> s{_plaPaymentSource = a})
@@ -371,9 +384,11 @@ plaKey :: Lens' PlacementsList' (Maybe Key)
 plaKey = lens _plaKey (\ s a -> s{_plaKey = a})
 
 -- | Select only placements that are associated with these sites.
-plaSiteIds :: Lens' PlacementsList' (Maybe Int64)
+plaSiteIds :: Lens' PlacementsList' [Int64]
 plaSiteIds
-  = lens _plaSiteIds (\ s a -> s{_plaSiteIds = a})
+  = lens _plaSiteIds (\ s a -> s{_plaSiteIds = a}) .
+      _Default
+      . _Coerce
 
 -- | Value of the nextPageToken from the previous result page.
 plaPageToken :: Lens' PlacementsList' (Maybe Text)
@@ -390,7 +405,7 @@ plaSortField
 -- mobile devices for regular or interstitial ads respectively. APP and
 -- APP_INTERSTITIAL are for rendering in mobile apps.IN_STREAM_VIDEO refers
 -- to rendering in in-stream video ads developed with the VAST standard.
-plaCompatibilities :: Lens' PlacementsList' (Maybe DfareportingPlacementsListCompatibilities)
+plaCompatibilities :: Lens' PlacementsList' (Maybe Compatibilities)
 plaCompatibilities
   = lens _plaCompatibilities
       (\ s a -> s{_plaCompatibilities = a})
@@ -410,10 +425,12 @@ plaOAuthToken
       (\ s a -> s{_plaOAuthToken = a})
 
 -- | Select only placements that belong to these advertisers.
-plaAdvertiserIds :: Lens' PlacementsList' (Maybe Int64)
+plaAdvertiserIds :: Lens' PlacementsList' [Int64]
 plaAdvertiserIds
   = lens _plaAdvertiserIds
       (\ s a -> s{_plaAdvertiserIds = a})
+      . _Default
+      . _Coerce
 
 -- | Select only placements or placement groups whose start date is on or
 -- after the specified minStartDate. The date should be formatted as
@@ -456,27 +473,29 @@ instance GoogleRequest PlacementsList' where
         type Rs PlacementsList' = PlacementsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementsList'{..}
-          = go _plaAdvertiserIds _plaArchived _plaCampaignIds
-              _plaCompatibilities
-              _plaContentCategoryIds
-              _plaDirectorySiteIds
-              _plaGroupIds
-              _plaIds
+          = go _plaProfileId
+              (_plaPlacementStrategyIds ^. _Default)
+              (_plaContentCategoryIds ^. _Default)
               _plaMaxEndDate
-              _plaMaxResults
-              _plaMaxStartDate
-              _plaMinEndDate
-              _plaMinStartDate
-              _plaPageToken
-              _plaPaymentSource
-              _plaPlacementStrategyIds
-              _plaPricingTypes
+              (_plaCampaignIds ^. _Default)
+              (_plaPricingTypes ^. _Default)
               _plaSearchString
-              _plaSiteIds
-              _plaSizeIds
-              _plaSortField
+              (_plaSizeIds ^. _Default)
+              (_plaIds ^. _Default)
+              (_plaGroupIds ^. _Default)
+              (_plaDirectorySiteIds ^. _Default)
               _plaSortOrder
-              _plaProfileId
+              _plaPaymentSource
+              (_plaSiteIds ^. _Default)
+              _plaPageToken
+              _plaSortField
+              (_plaCompatibilities ^. _Default)
+              _plaMaxStartDate
+              (_plaAdvertiserIds ^. _Default)
+              _plaMinStartDate
+              _plaArchived
+              _plaMaxResults
+              _plaMinEndDate
               _plaQuotaUser
               (Just _plaPrettyPrint)
               _plaUserIP

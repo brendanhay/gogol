@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Update
     , lauQuotaUser
     , lauPrettyPrint
     , lauUserIP
-    , lauLicenseAssignment
-    , lauSkuId
+    , lauSKUId
+    , lauPayload
     , lauUserId
     , lauKey
     , lauOAuthToken
@@ -67,17 +68,17 @@ type LicenseAssignmentsUpdateResource =
 --
 -- /See:/ 'licenseAssignmentsUpdate'' smart constructor.
 data LicenseAssignmentsUpdate' = LicenseAssignmentsUpdate'
-    { _lauQuotaUser         :: !(Maybe Text)
-    , _lauPrettyPrint       :: !Bool
-    , _lauUserIP            :: !(Maybe Text)
-    , _lauLicenseAssignment :: !LicenseAssignment
-    , _lauSkuId             :: !Text
-    , _lauUserId            :: !Text
-    , _lauKey               :: !(Maybe Key)
-    , _lauOAuthToken        :: !(Maybe OAuthToken)
-    , _lauProductId         :: !Text
-    , _lauFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _lauQuotaUser   :: !(Maybe Text)
+    , _lauPrettyPrint :: !Bool
+    , _lauUserIP      :: !(Maybe Text)
+    , _lauSKUId       :: !Text
+    , _lauPayload     :: !LicenseAssignment
+    , _lauUserId      :: !Text
+    , _lauKey         :: !(Maybe Key)
+    , _lauOAuthToken  :: !(Maybe OAuthToken)
+    , _lauProductId   :: !Text
+    , _lauFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentsUpdate'' with the minimum fields required to make a request.
 --
@@ -89,9 +90,9 @@ data LicenseAssignmentsUpdate' = LicenseAssignmentsUpdate'
 --
 -- * 'lauUserIP'
 --
--- * 'lauLicenseAssignment'
+-- * 'lauSKUId'
 --
--- * 'lauSkuId'
+-- * 'lauPayload'
 --
 -- * 'lauUserId'
 --
@@ -103,18 +104,18 @@ data LicenseAssignmentsUpdate' = LicenseAssignmentsUpdate'
 --
 -- * 'lauFields'
 licenseAssignmentsUpdate'
-    :: LicenseAssignment -- ^ 'LicenseAssignment'
-    -> Text -- ^ 'skuId'
+    :: Text -- ^ 'skuId'
+    -> LicenseAssignment -- ^ 'payload'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'productId'
     -> LicenseAssignmentsUpdate'
-licenseAssignmentsUpdate' pLauLicenseAssignment_ pLauSkuId_ pLauUserId_ pLauProductId_ =
+licenseAssignmentsUpdate' pLauSKUId_ pLauPayload_ pLauUserId_ pLauProductId_ =
     LicenseAssignmentsUpdate'
     { _lauQuotaUser = Nothing
     , _lauPrettyPrint = True
     , _lauUserIP = Nothing
-    , _lauLicenseAssignment = pLauLicenseAssignment_
-    , _lauSkuId = pLauSkuId_
+    , _lauSKUId = pLauSKUId_
+    , _lauPayload = pLauPayload_
     , _lauUserId = pLauUserId_
     , _lauKey = Nothing
     , _lauOAuthToken = Nothing
@@ -141,15 +142,14 @@ lauUserIP :: Lens' LicenseAssignmentsUpdate' (Maybe Text)
 lauUserIP
   = lens _lauUserIP (\ s a -> s{_lauUserIP = a})
 
--- | Multipart request metadata.
-lauLicenseAssignment :: Lens' LicenseAssignmentsUpdate' LicenseAssignment
-lauLicenseAssignment
-  = lens _lauLicenseAssignment
-      (\ s a -> s{_lauLicenseAssignment = a})
-
 -- | Name for sku for which license would be revoked
-lauSkuId :: Lens' LicenseAssignmentsUpdate' Text
-lauSkuId = lens _lauSkuId (\ s a -> s{_lauSkuId = a})
+lauSKUId :: Lens' LicenseAssignmentsUpdate' Text
+lauSKUId = lens _lauSKUId (\ s a -> s{_lauSKUId = a})
+
+-- | Multipart request metadata.
+lauPayload :: Lens' LicenseAssignmentsUpdate' LicenseAssignment
+lauPayload
+  = lens _lauPayload (\ s a -> s{_lauPayload = a})
 
 -- | email id or unique Id of the user
 lauUserId :: Lens' LicenseAssignmentsUpdate' Text
@@ -187,14 +187,14 @@ instance GoogleRequest LicenseAssignmentsUpdate'
         type Rs LicenseAssignmentsUpdate' = LicenseAssignment
         request = requestWithRoute defReq appsLicensingURL
         requestWithRoute r u LicenseAssignmentsUpdate'{..}
-          = go _lauProductId _lauSkuId _lauUserId _lauQuotaUser
+          = go _lauProductId _lauSKUId _lauUserId _lauQuotaUser
               (Just _lauPrettyPrint)
               _lauUserIP
               _lauFields
               _lauKey
               _lauOAuthToken
               (Just AltJSON)
-              _lauLicenseAssignment
+              _lauPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LicenseAssignmentsUpdateResource)

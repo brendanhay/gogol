@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,14 +55,14 @@ import           Network.Google.Prelude
 -- 'BillingAccountsGet'' request conforms to.
 type BillingAccountsGetResource =
      "v1" :>
-       "{+name}" :>
+       Capture "name" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -89,7 +90,7 @@ data BillingAccountsGet' = BillingAccountsGet'
     , _bagOAuthToken     :: !(Maybe OAuthToken)
     , _bagFields         :: !(Maybe Text)
     , _bagCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BillingAccountsGet'' with the minimum fields required to make a request.
 --
@@ -220,12 +221,12 @@ instance GoogleRequest BillingAccountsGet' where
         type Rs BillingAccountsGet' = BillingAccount
         request = requestWithRoute defReq billingURL
         requestWithRoute r u BillingAccountsGet'{..}
-          = go _bagXgafv _bagAccessToken _bagBearerToken
-              _bagCallback
+          = go _bagName _bagXgafv _bagUploadProtocol
               (Just _bagPp)
+              _bagAccessToken
               _bagUploadType
-              _bagUploadProtocol
-              _bagName
+              _bagBearerToken
+              _bagCallback
               _bagQuotaUser
               (Just _bagPrettyPrint)
               _bagFields

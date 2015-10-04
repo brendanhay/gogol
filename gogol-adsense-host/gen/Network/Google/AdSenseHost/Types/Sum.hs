@@ -18,7 +18,7 @@ module Network.Google.AdSenseHost.Types.Sum where
 import           Network.Google.Prelude
 
 -- | Products to associate with the user.
-data AdsensehostAssociationsessionsStartProductCode
+data ProductCode
     = Afc
       -- ^ @AFC@
       -- AdSense For Content
@@ -36,9 +36,9 @@ data AdsensehostAssociationsessionsStartProductCode
       -- AdSense For Video
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AdsensehostAssociationsessionsStartProductCode
+instance Hashable ProductCode
 
-instance FromText AdsensehostAssociationsessionsStartProductCode where
+instance FromText ProductCode where
     fromText = \case
         "AFC" -> Just Afc
         "AFG" -> Just Afg
@@ -47,7 +47,7 @@ instance FromText AdsensehostAssociationsessionsStartProductCode where
         "AFV" -> Just Afv
         _ -> Nothing
 
-instance ToText AdsensehostAssociationsessionsStartProductCode where
+instance ToText ProductCode where
     toText = \case
         Afc -> "AFC"
         Afg -> "AFG"
@@ -55,8 +55,8 @@ instance ToText AdsensehostAssociationsessionsStartProductCode where
         Afs -> "AFS"
         Afv -> "AFV"
 
-instance FromJSON AdsensehostAssociationsessionsStartProductCode where
-    parseJSON = parseJSONText "AdsensehostAssociationsessionsStartProductCode"
+instance FromJSON ProductCode where
+    parseJSON = parseJSONText "ProductCode"
 
-instance ToJSON AdsensehostAssociationsessionsStartProductCode where
+instance ToJSON ProductCode where
     toJSON = toJSONText

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.Compute.URLMaps.Update
     , umuQuotaUser
     , umuURLMap
     , umuPrettyPrint
-    , umuURLMap
     , umuProject
     , umuUserIP
+    , umuPayload
     , umuKey
     , umuOAuthToken
     , umuFields
@@ -67,13 +68,13 @@ data URLMapsUpdate' = URLMapsUpdate'
     { _umuQuotaUser   :: !(Maybe Text)
     , _umuURLMap      :: !Text
     , _umuPrettyPrint :: !Bool
-    , _umuURLMap      :: !URLMap
     , _umuProject     :: !Text
     , _umuUserIP      :: !(Maybe Text)
+    , _umuPayload     :: !URLMap
     , _umuKey         :: !(Maybe Key)
     , _umuOAuthToken  :: !(Maybe OAuthToken)
     , _umuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsUpdate'' with the minimum fields required to make a request.
 --
@@ -85,11 +86,11 @@ data URLMapsUpdate' = URLMapsUpdate'
 --
 -- * 'umuPrettyPrint'
 --
--- * 'umuURLMap'
---
 -- * 'umuProject'
 --
 -- * 'umuUserIP'
+--
+-- * 'umuPayload'
 --
 -- * 'umuKey'
 --
@@ -98,17 +99,17 @@ data URLMapsUpdate' = URLMapsUpdate'
 -- * 'umuFields'
 urlMapsUpdate'
     :: Text -- ^ 'urlMap'
-    -> URLMap -- ^ 'URLMap'
     -> Text -- ^ 'project'
+    -> URLMap -- ^ 'payload'
     -> URLMapsUpdate'
-urlMapsUpdate' pUmuURLMap_ pUmuURLMap_ pUmuProject_ =
+urlMapsUpdate' pUmuURLMap_ pUmuProject_ pUmuPayload_ =
     URLMapsUpdate'
     { _umuQuotaUser = Nothing
     , _umuURLMap = pUmuURLMap_
     , _umuPrettyPrint = True
-    , _umuURLMap = pUmuURLMap_
     , _umuProject = pUmuProject_
     , _umuUserIP = Nothing
+    , _umuPayload = pUmuPayload_
     , _umuKey = Nothing
     , _umuOAuthToken = Nothing
     , _umuFields = Nothing
@@ -132,11 +133,6 @@ umuPrettyPrint
   = lens _umuPrettyPrint
       (\ s a -> s{_umuPrettyPrint = a})
 
--- | Multipart request metadata.
-umuURLMap :: Lens' URLMapsUpdate' URLMap
-umuURLMap
-  = lens _umuURLMap (\ s a -> s{_umuURLMap = a})
-
 -- | Name of the project scoping this request.
 umuProject :: Lens' URLMapsUpdate' Text
 umuProject
@@ -147,6 +143,11 @@ umuProject
 umuUserIP :: Lens' URLMapsUpdate' (Maybe Text)
 umuUserIP
   = lens _umuUserIP (\ s a -> s{_umuUserIP = a})
+
+-- | Multipart request metadata.
+umuPayload :: Lens' URLMapsUpdate' URLMap
+umuPayload
+  = lens _umuPayload (\ s a -> s{_umuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -180,7 +181,7 @@ instance GoogleRequest URLMapsUpdate' where
               _umuKey
               _umuOAuthToken
               (Just AltJSON)
-              _umuURLMap
+              _umuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy URLMapsUpdateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -38,8 +39,8 @@ module Network.Google.Resource.Logging.Projects.Logs.Sinks.Create
     , plscLogsId
     , plscPp
     , plscAccessToken
-    , plscLogSink
     , plscUploadType
+    , plscPayload
     , plscBearerToken
     , plscKey
     , plscOAuthToken
@@ -61,12 +62,12 @@ type ProjectsLogsSinksCreateResource =
              Capture "logsId" Text :>
                "sinks" :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "upload_protocol" Text :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "callback" Text :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
@@ -88,15 +89,15 @@ data ProjectsLogsSinksCreate' = ProjectsLogsSinksCreate'
     , _plscLogsId         :: !Text
     , _plscPp             :: !Bool
     , _plscAccessToken    :: !(Maybe Text)
-    , _plscLogSink        :: !LogSink
     , _plscUploadType     :: !(Maybe Text)
+    , _plscPayload        :: !LogSink
     , _plscBearerToken    :: !(Maybe Text)
     , _plscKey            :: !(Maybe Key)
     , _plscOAuthToken     :: !(Maybe OAuthToken)
     , _plscProjectsId     :: !Text
     , _plscFields         :: !(Maybe Text)
     , _plscCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogsSinksCreate'' with the minimum fields required to make a request.
 --
@@ -116,9 +117,9 @@ data ProjectsLogsSinksCreate' = ProjectsLogsSinksCreate'
 --
 -- * 'plscAccessToken'
 --
--- * 'plscLogSink'
---
 -- * 'plscUploadType'
+--
+-- * 'plscPayload'
 --
 -- * 'plscBearerToken'
 --
@@ -133,10 +134,10 @@ data ProjectsLogsSinksCreate' = ProjectsLogsSinksCreate'
 -- * 'plscCallback'
 projectsLogsSinksCreate'
     :: Text -- ^ 'logsId'
-    -> LogSink -- ^ 'LogSink'
+    -> LogSink -- ^ 'payload'
     -> Text -- ^ 'projectsId'
     -> ProjectsLogsSinksCreate'
-projectsLogsSinksCreate' pPlscLogsId_ pPlscLogSink_ pPlscProjectsId_ =
+projectsLogsSinksCreate' pPlscLogsId_ pPlscPayload_ pPlscProjectsId_ =
     ProjectsLogsSinksCreate'
     { _plscXgafv = Nothing
     , _plscQuotaUser = Nothing
@@ -145,8 +146,8 @@ projectsLogsSinksCreate' pPlscLogsId_ pPlscLogSink_ pPlscProjectsId_ =
     , _plscLogsId = pPlscLogsId_
     , _plscPp = True
     , _plscAccessToken = Nothing
-    , _plscLogSink = pPlscLogSink_
     , _plscUploadType = Nothing
+    , _plscPayload = pPlscPayload_
     , _plscBearerToken = Nothing
     , _plscKey = Nothing
     , _plscOAuthToken = Nothing
@@ -195,16 +196,16 @@ plscAccessToken
   = lens _plscAccessToken
       (\ s a -> s{_plscAccessToken = a})
 
--- | Multipart request metadata.
-plscLogSink :: Lens' ProjectsLogsSinksCreate' LogSink
-plscLogSink
-  = lens _plscLogSink (\ s a -> s{_plscLogSink = a})
-
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
 plscUploadType :: Lens' ProjectsLogsSinksCreate' (Maybe Text)
 plscUploadType
   = lens _plscUploadType
       (\ s a -> s{_plscUploadType = a})
+
+-- | Multipart request metadata.
+plscPayload :: Lens' ProjectsLogsSinksCreate' LogSink
+plscPayload
+  = lens _plscPayload (\ s a -> s{_plscPayload = a})
 
 -- | OAuth bearer token.
 plscBearerToken :: Lens' ProjectsLogsSinksCreate' (Maybe Text)
@@ -249,20 +250,20 @@ instance GoogleRequest ProjectsLogsSinksCreate' where
         type Rs ProjectsLogsSinksCreate' = LogSink
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u ProjectsLogsSinksCreate'{..}
-          = go _plscXgafv _plscAccessToken _plscBearerToken
-              _plscCallback
-              (Just _plscPp)
-              _plscUploadType
+          = go _plscProjectsId _plscLogsId _plscXgafv
               _plscUploadProtocol
-              _plscProjectsId
-              _plscLogsId
+              (Just _plscPp)
+              _plscAccessToken
+              _plscUploadType
+              _plscBearerToken
+              _plscCallback
               _plscQuotaUser
               (Just _plscPrettyPrint)
               _plscFields
               _plscKey
               _plscOAuthToken
               (Just AltJSON)
-              _plscLogSink
+              _plscPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsLogsSinksCreateResource)

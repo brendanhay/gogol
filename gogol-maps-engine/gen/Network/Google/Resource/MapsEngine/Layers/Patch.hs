@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,10 +34,10 @@ module Network.Google.Resource.MapsEngine.Layers.Patch
     , layQuotaUser
     , layPrettyPrint
     , layUserIP
+    , layPayload
     , layKey
     , layId
     , layOAuthToken
-    , layLayer
     , layFields
     ) where
 
@@ -64,12 +65,12 @@ data LayersPatch' = LayersPatch'
     { _layQuotaUser   :: !(Maybe Text)
     , _layPrettyPrint :: !Bool
     , _layUserIP      :: !(Maybe Text)
+    , _layPayload     :: !Layer
     , _layKey         :: !(Maybe Key)
     , _layId          :: !Text
     , _layOAuthToken  :: !(Maybe OAuthToken)
-    , _layLayer       :: !Layer
     , _layFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersPatch'' with the minimum fields required to make a request.
 --
@@ -81,28 +82,28 @@ data LayersPatch' = LayersPatch'
 --
 -- * 'layUserIP'
 --
+-- * 'layPayload'
+--
 -- * 'layKey'
 --
 -- * 'layId'
 --
 -- * 'layOAuthToken'
 --
--- * 'layLayer'
---
 -- * 'layFields'
 layersPatch'
-    :: Text -- ^ 'id'
-    -> Layer -- ^ 'Layer'
+    :: Layer -- ^ 'payload'
+    -> Text -- ^ 'id'
     -> LayersPatch'
-layersPatch' pLayId_ pLayLayer_ =
+layersPatch' pLayPayload_ pLayId_ =
     LayersPatch'
     { _layQuotaUser = Nothing
     , _layPrettyPrint = True
     , _layUserIP = Nothing
+    , _layPayload = pLayPayload_
     , _layKey = Nothing
     , _layId = pLayId_
     , _layOAuthToken = Nothing
-    , _layLayer = pLayLayer_
     , _layFields = Nothing
     }
 
@@ -125,6 +126,11 @@ layUserIP :: Lens' LayersPatch' (Maybe Text)
 layUserIP
   = lens _layUserIP (\ s a -> s{_layUserIP = a})
 
+-- | Multipart request metadata.
+layPayload :: Lens' LayersPatch' Layer
+layPayload
+  = lens _layPayload (\ s a -> s{_layPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -140,10 +146,6 @@ layOAuthToken :: Lens' LayersPatch' (Maybe OAuthToken)
 layOAuthToken
   = lens _layOAuthToken
       (\ s a -> s{_layOAuthToken = a})
-
--- | Multipart request metadata.
-layLayer :: Lens' LayersPatch' Layer
-layLayer = lens _layLayer (\ s a -> s{_layLayer = a})
 
 -- | Selector specifying which fields to include in a partial response.
 layFields :: Lens' LayersPatch' (Maybe Text)
@@ -164,7 +166,7 @@ instance GoogleRequest LayersPatch' where
               _layKey
               _layOAuthToken
               (Just AltJSON)
-              _layLayer
+              _layPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LayersPatchResource)

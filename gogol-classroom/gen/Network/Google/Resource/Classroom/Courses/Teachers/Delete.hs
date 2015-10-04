@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -64,12 +65,12 @@ type CoursesTeachersDeleteResource =
            "teachers" :>
              Capture "userId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "callback" Text :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
@@ -102,7 +103,7 @@ data CoursesTeachersDelete' = CoursesTeachersDelete'
     , _ctdOAuthToken     :: !(Maybe OAuthToken)
     , _ctdFields         :: !(Maybe Text)
     , _ctdCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesTeachersDelete'' with the minimum fields required to make a request.
 --
@@ -246,13 +247,13 @@ instance GoogleRequest CoursesTeachersDelete' where
         type Rs CoursesTeachersDelete' = Empty
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesTeachersDelete'{..}
-          = go _ctdXgafv _ctdAccessToken _ctdBearerToken
-              _ctdCallback
-              (Just _ctdPp)
-              _ctdUploadType
+          = go _ctdCourseId _ctdUserId _ctdXgafv
               _ctdUploadProtocol
-              _ctdCourseId
-              _ctdUserId
+              (Just _ctdPp)
+              _ctdAccessToken
+              _ctdUploadType
+              _ctdBearerToken
+              _ctdCallback
               _ctdQuotaUser
               (Just _ctdPrettyPrint)
               _ctdFields

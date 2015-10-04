@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.MapsEngine.Tables.Features.BatchDelete
     , tfbdQuotaUser
     , tfbdPrettyPrint
     , tfbdUserIP
-    , tfbdFeaturesBatchDeleteRequest
+    , tfbdPayload
     , tfbdKey
     , tfbdId
     , tfbdOAuthToken
@@ -64,15 +65,15 @@ type TablesFeaturesBatchDeleteResource =
 --
 -- /See:/ 'tablesFeaturesBatchDelete'' smart constructor.
 data TablesFeaturesBatchDelete' = TablesFeaturesBatchDelete'
-    { _tfbdQuotaUser                  :: !(Maybe Text)
-    , _tfbdPrettyPrint                :: !Bool
-    , _tfbdUserIP                     :: !(Maybe Text)
-    , _tfbdFeaturesBatchDeleteRequest :: !FeaturesBatchDeleteRequest
-    , _tfbdKey                        :: !(Maybe Key)
-    , _tfbdId                         :: !Text
-    , _tfbdOAuthToken                 :: !(Maybe OAuthToken)
-    , _tfbdFields                     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _tfbdQuotaUser   :: !(Maybe Text)
+    , _tfbdPrettyPrint :: !Bool
+    , _tfbdUserIP      :: !(Maybe Text)
+    , _tfbdPayload     :: !FeaturesBatchDeleteRequest
+    , _tfbdKey         :: !(Maybe Key)
+    , _tfbdId          :: !Text
+    , _tfbdOAuthToken  :: !(Maybe OAuthToken)
+    , _tfbdFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesFeaturesBatchDelete'' with the minimum fields required to make a request.
 --
@@ -84,7 +85,7 @@ data TablesFeaturesBatchDelete' = TablesFeaturesBatchDelete'
 --
 -- * 'tfbdUserIP'
 --
--- * 'tfbdFeaturesBatchDeleteRequest'
+-- * 'tfbdPayload'
 --
 -- * 'tfbdKey'
 --
@@ -94,15 +95,15 @@ data TablesFeaturesBatchDelete' = TablesFeaturesBatchDelete'
 --
 -- * 'tfbdFields'
 tablesFeaturesBatchDelete'
-    :: FeaturesBatchDeleteRequest -- ^ 'FeaturesBatchDeleteRequest'
+    :: FeaturesBatchDeleteRequest -- ^ 'payload'
     -> Text -- ^ 'id'
     -> TablesFeaturesBatchDelete'
-tablesFeaturesBatchDelete' pTfbdFeaturesBatchDeleteRequest_ pTfbdId_ =
+tablesFeaturesBatchDelete' pTfbdPayload_ pTfbdId_ =
     TablesFeaturesBatchDelete'
     { _tfbdQuotaUser = Nothing
     , _tfbdPrettyPrint = True
     , _tfbdUserIP = Nothing
-    , _tfbdFeaturesBatchDeleteRequest = pTfbdFeaturesBatchDeleteRequest_
+    , _tfbdPayload = pTfbdPayload_
     , _tfbdKey = Nothing
     , _tfbdId = pTfbdId_
     , _tfbdOAuthToken = Nothing
@@ -130,10 +131,9 @@ tfbdUserIP
   = lens _tfbdUserIP (\ s a -> s{_tfbdUserIP = a})
 
 -- | Multipart request metadata.
-tfbdFeaturesBatchDeleteRequest :: Lens' TablesFeaturesBatchDelete' FeaturesBatchDeleteRequest
-tfbdFeaturesBatchDeleteRequest
-  = lens _tfbdFeaturesBatchDeleteRequest
-      (\ s a -> s{_tfbdFeaturesBatchDeleteRequest = a})
+tfbdPayload :: Lens' TablesFeaturesBatchDelete' FeaturesBatchDeleteRequest
+tfbdPayload
+  = lens _tfbdPayload (\ s a -> s{_tfbdPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -171,7 +171,7 @@ instance GoogleRequest TablesFeaturesBatchDelete'
               _tfbdKey
               _tfbdOAuthToken
               (Just AltJSON)
-              _tfbdFeaturesBatchDeleteRequest
+              _tfbdPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TablesFeaturesBatchDeleteResource)

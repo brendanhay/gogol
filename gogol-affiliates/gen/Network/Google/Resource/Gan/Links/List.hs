@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -62,22 +63,21 @@ type LinksListResource =
      Capture "role" GanLinksListRole :>
        Capture "roleId" Text :>
          "links" :>
-           QueryParams "advertiserId" Int64 :>
-             QueryParams "assetSize" Text :>
-               QueryParam "authorship" GanLinksListAuthorship :>
-                 QueryParam "createDateMax" Text :>
-                   QueryParam "createDateMin" Text :>
-                     QueryParam "linkType" GanLinksListLinkType :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "pageToken" Text :>
-                           QueryParams "promotionType" GanLinksListPromotionType
-                             :>
-                             QueryParam "relationshipStatus"
-                               GanLinksListRelationshipStatus
-                               :>
-                               QueryParam "searchText" Text :>
-                                 QueryParam "startDateMax" Text :>
-                                   QueryParam "startDateMin" Text :>
+           QueryParam "createDateMax" Text :>
+             QueryParam "authorship" Authorship :>
+               QueryParams "assetSize" Text :>
+                 QueryParam "relationshipStatus"
+                   GanLinksListRelationshipStatus
+                   :>
+                   QueryParams "advertiserId" Int64 :>
+                     QueryParam "searchText" Text :>
+                       QueryParams "promotionType" PromotionType :>
+                         QueryParam "createDateMin" Text :>
+                           QueryParam "linkType" LinkType :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "startDateMax" Text :>
+                                 QueryParam "startDateMin" Text :>
+                                   QueryParam "maxResults" Word32 :>
                                      QueryParam "quotaUser" Text :>
                                        QueryParam "prettyPrint" Bool :>
                                          QueryParam "userIp" Text :>
@@ -94,27 +94,27 @@ type LinksListResource =
 -- /See:/ 'linksList'' smart constructor.
 data LinksList' = LinksList'
     { _llCreateDateMax      :: !(Maybe Text)
-    , _llAuthorship         :: !(Maybe GanLinksListAuthorship)
+    , _llAuthorship         :: !(Maybe Authorship)
     , _llQuotaUser          :: !(Maybe Text)
     , _llPrettyPrint        :: !Bool
-    , _llAssetSize          :: !(Maybe Text)
+    , _llAssetSize          :: !(Maybe [Text])
     , _llUserIP             :: !(Maybe Text)
     , _llRelationshipStatus :: !(Maybe GanLinksListRelationshipStatus)
-    , _llAdvertiserId       :: !(Maybe Int64)
+    , _llAdvertiserId       :: !(Maybe [Int64])
     , _llSearchText         :: !(Maybe Text)
-    , _llPromotionType      :: !(Maybe GanLinksListPromotionType)
+    , _llPromotionType      :: !(Maybe PromotionType)
     , _llRoleId             :: !Text
     , _llRole               :: !GanLinksListRole
     , _llKey                :: !(Maybe Key)
     , _llCreateDateMin      :: !(Maybe Text)
-    , _llLinkType           :: !(Maybe GanLinksListLinkType)
+    , _llLinkType           :: !(Maybe LinkType)
     , _llPageToken          :: !(Maybe Text)
     , _llStartDateMax       :: !(Maybe Text)
     , _llOAuthToken         :: !(Maybe OAuthToken)
     , _llStartDateMin       :: !(Maybe Text)
     , _llMaxResults         :: !(Maybe Word32)
     , _llFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinksList'' with the minimum fields required to make a request.
 --
@@ -197,7 +197,7 @@ llCreateDateMax
       (\ s a -> s{_llCreateDateMax = a})
 
 -- | The role of the author of the link.
-llAuthorship :: Lens' LinksList' (Maybe GanLinksListAuthorship)
+llAuthorship :: Lens' LinksList' (Maybe Authorship)
 llAuthorship
   = lens _llAuthorship (\ s a -> s{_llAuthorship = a})
 
@@ -215,9 +215,11 @@ llPrettyPrint
       (\ s a -> s{_llPrettyPrint = a})
 
 -- | The size of the given asset.
-llAssetSize :: Lens' LinksList' (Maybe Text)
+llAssetSize :: Lens' LinksList' [Text]
 llAssetSize
-  = lens _llAssetSize (\ s a -> s{_llAssetSize = a})
+  = lens _llAssetSize (\ s a -> s{_llAssetSize = a}) .
+      _Default
+      . _Coerce
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
@@ -232,10 +234,12 @@ llRelationshipStatus
 
 -- | Limits the resulting links to the ones belonging to the listed
 -- advertisers.
-llAdvertiserId :: Lens' LinksList' (Maybe Int64)
+llAdvertiserId :: Lens' LinksList' [Int64]
 llAdvertiserId
   = lens _llAdvertiserId
       (\ s a -> s{_llAdvertiserId = a})
+      . _Default
+      . _Coerce
 
 -- | Field for full text search across title and merchandising text, supports
 -- link id search.
@@ -244,7 +248,7 @@ llSearchText
   = lens _llSearchText (\ s a -> s{_llSearchText = a})
 
 -- | The promotion type.
-llPromotionType :: Lens' LinksList' (Maybe GanLinksListPromotionType)
+llPromotionType :: Lens' LinksList' (Maybe PromotionType)
 llPromotionType
   = lens _llPromotionType
       (\ s a -> s{_llPromotionType = a})
@@ -271,7 +275,7 @@ llCreateDateMin
       (\ s a -> s{_llCreateDateMin = a})
 
 -- | The type of the link.
-llLinkType :: Lens' LinksList' (Maybe GanLinksListLinkType)
+llLinkType :: Lens' LinksList' (Maybe LinkType)
 llLinkType
   = lens _llLinkType (\ s a -> s{_llLinkType = a})
 
@@ -314,19 +318,18 @@ instance GoogleRequest LinksList' where
         type Rs LinksList' = Links
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u LinksList'{..}
-          = go _llAdvertiserId _llAssetSize _llAuthorship
-              _llCreateDateMax
+          = go _llRole _llRoleId _llCreateDateMax _llAuthorship
+              (_llAssetSize ^. _Default)
+              _llRelationshipStatus
+              (_llAdvertiserId ^. _Default)
+              _llSearchText
+              (_llPromotionType ^. _Default)
               _llCreateDateMin
               _llLinkType
-              _llMaxResults
               _llPageToken
-              _llPromotionType
-              _llRelationshipStatus
-              _llSearchText
               _llStartDateMax
               _llStartDateMin
-              _llRole
-              _llRoleId
+              _llMaxResults
               _llQuotaUser
               (Just _llPrettyPrint)
               _llUserIP

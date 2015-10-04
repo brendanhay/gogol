@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -47,8 +48,8 @@ import           Network.Google.Prelude
 -- 'AccountsList'' request conforms to.
 type AccountsListResource =
      "accounts" :>
-       QueryParam "maxResults" Int32 :>
-         QueryParam "pageToken" Text :>
+       QueryParam "pageToken" Text :>
+         QueryParam "maxResults" Int32 :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -69,7 +70,7 @@ data AccountsList' = AccountsList'
     , _alOAuthToken  :: !(Maybe OAuthToken)
     , _alMaxResults  :: !(Maybe Int32)
     , _alFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsList'' with the minimum fields required to make a request.
 --
@@ -158,7 +159,7 @@ instance GoogleRequest AccountsList' where
         type Rs AccountsList' = Accounts
         request = requestWithRoute defReq adExchangeSellerURL
         requestWithRoute r u AccountsList'{..}
-          = go _alMaxResults _alPageToken _alQuotaUser
+          = go _alPageToken _alMaxResults _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP
               _alFields

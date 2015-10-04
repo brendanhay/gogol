@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -64,16 +65,16 @@ type CirclesRemovePeopleResource =
 --
 -- /See:/ 'circlesRemovePeople'' smart constructor.
 data CirclesRemovePeople' = CirclesRemovePeople'
-    { _crpEmail       :: !(Maybe Text)
+    { _crpEmail       :: !(Maybe [Text])
     , _crpQuotaUser   :: !(Maybe Text)
     , _crpPrettyPrint :: !Bool
     , _crpUserIP      :: !(Maybe Text)
-    , _crpUserId      :: !(Maybe Text)
+    , _crpUserId      :: !(Maybe [Text])
     , _crpKey         :: !(Maybe Key)
     , _crpCircleId    :: !Text
     , _crpOAuthToken  :: !(Maybe OAuthToken)
     , _crpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesRemovePeople'' with the minimum fields required to make a request.
 --
@@ -113,8 +114,11 @@ circlesRemovePeople' pCrpCircleId_ =
     }
 
 -- | Email of the people to add to the circle. Optional, can be repeated.
-crpEmail :: Lens' CirclesRemovePeople' (Maybe Text)
-crpEmail = lens _crpEmail (\ s a -> s{_crpEmail = a})
+crpEmail :: Lens' CirclesRemovePeople' [Text]
+crpEmail
+  = lens _crpEmail (\ s a -> s{_crpEmail = a}) .
+      _Default
+      . _Coerce
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -136,9 +140,11 @@ crpUserIP
   = lens _crpUserIP (\ s a -> s{_crpUserIP = a})
 
 -- | IDs of the people to remove from the circle. Optional, can be repeated.
-crpUserId :: Lens' CirclesRemovePeople' (Maybe Text)
+crpUserId :: Lens' CirclesRemovePeople' [Text]
 crpUserId
-  = lens _crpUserId (\ s a -> s{_crpUserId = a})
+  = lens _crpUserId (\ s a -> s{_crpUserId = a}) .
+      _Default
+      . _Coerce
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -170,7 +176,9 @@ instance GoogleRequest CirclesRemovePeople' where
         type Rs CirclesRemovePeople' = ()
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CirclesRemovePeople'{..}
-          = go _crpEmail _crpUserId _crpCircleId _crpQuotaUser
+          = go _crpCircleId (_crpEmail ^. _Default)
+              (_crpUserId ^. _Default)
+              _crpQuotaUser
               (Just _crpPrettyPrint)
               _crpUserIP
               _crpFields

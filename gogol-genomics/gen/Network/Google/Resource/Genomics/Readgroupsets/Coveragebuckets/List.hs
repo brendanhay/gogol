@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -61,12 +62,12 @@ type ReadgroupsetsCoveragebucketsListResource =
      "readgroupsets" :>
        Capture "readGroupSetId" Text :>
          "coveragebuckets" :>
-           QueryParam "pageSize" Int32 :>
-             QueryParam "pageToken" Text :>
-               QueryParam "range.end" Int64 :>
+           QueryParam "range.end" Int64 :>
+             QueryParam "range.start" Int64 :>
+               QueryParam "targetBucketWidth" Int64 :>
                  QueryParam "range.referenceName" Text :>
-                   QueryParam "range.start" Int64 :>
-                     QueryParam "targetBucketWidth" Int64 :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" Int32 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -100,7 +101,7 @@ data ReadgroupsetsCoveragebucketsList' = ReadgroupsetsCoveragebucketsList'
     , _rclOAuthToken         :: !(Maybe OAuthToken)
     , _rclPageSize           :: !(Maybe Int32)
     , _rclFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsCoveragebucketsList'' with the minimum fields required to make a request.
 --
@@ -248,11 +249,11 @@ instance GoogleRequest
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u
           ReadgroupsetsCoveragebucketsList'{..}
-          = go _rclPageSize _rclPageToken _rclRangeEnd
-              _rclRangeReferenceName
-              _rclRangeStart
+          = go _rclReadGroupSetId _rclRangeEnd _rclRangeStart
               _rclTargetBucketWidth
-              _rclReadGroupSetId
+              _rclRangeReferenceName
+              _rclPageToken
+              _rclPageSize
               _rclQuotaUser
               (Just _rclPrettyPrint)
               _rclUserIP

@@ -19,81 +19,6 @@ import           Network.Google.OAuth2.Types.Sum
 import           Network.Google.Prelude
 
 --
--- /See:/ 'jwkKeys' smart constructor.
-data JWKKeys = JWKKeys
-    { _jkAlg :: !Text
-    , _jkUse :: !Text
-    , _jkKid :: !(Maybe Text)
-    , _jkN   :: !(Maybe Text)
-    , _jkE   :: !(Maybe Text)
-    , _jkKty :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'JWKKeys' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'jkAlg'
---
--- * 'jkUse'
---
--- * 'jkKid'
---
--- * 'jkN'
---
--- * 'jkE'
---
--- * 'jkKty'
-jwkKeys
-    :: JWKKeys
-jwkKeys =
-    JWKKeys
-    { _jkAlg = "RS256"
-    , _jkUse = "sig"
-    , _jkKid = Nothing
-    , _jkN = Nothing
-    , _jkE = Nothing
-    , _jkKty = "RSA"
-    }
-
-jkAlg :: Lens' JWKKeys Text
-jkAlg = lens _jkAlg (\ s a -> s{_jkAlg = a})
-
-jkUse :: Lens' JWKKeys Text
-jkUse = lens _jkUse (\ s a -> s{_jkUse = a})
-
-jkKid :: Lens' JWKKeys (Maybe Text)
-jkKid = lens _jkKid (\ s a -> s{_jkKid = a})
-
-jkN :: Lens' JWKKeys (Maybe Text)
-jkN = lens _jkN (\ s a -> s{_jkN = a})
-
-jkE :: Lens' JWKKeys (Maybe Text)
-jkE = lens _jkE (\ s a -> s{_jkE = a})
-
-jkKty :: Lens' JWKKeys Text
-jkKty = lens _jkKty (\ s a -> s{_jkKty = a})
-
-instance FromJSON JWKKeys where
-        parseJSON
-          = withObject "JWKKeys"
-              (\ o ->
-                 JWKKeys <$>
-                   (o .:? "alg" .!= "RS256") <*> (o .:? "use" .!= "sig")
-                     <*> (o .:? "kid")
-                     <*> (o .:? "n")
-                     <*> (o .:? "e")
-                     <*> (o .:? "kty" .!= "RSA"))
-
-instance ToJSON JWKKeys where
-        toJSON JWKKeys{..}
-          = object
-              (catMaybes
-                 [Just ("alg" .= _jkAlg), Just ("use" .= _jkUse),
-                  ("kid" .=) <$> _jkKid, ("n" .=) <$> _jkN,
-                  ("e" .=) <$> _jkE, Just ("kty" .= _jkKty)])
-
---
 -- /See:/ 'tokenInfo' smart constructor.
 data TokenInfo = TokenInfo
     { _tiAudience      :: !(Maybe Text)
@@ -105,7 +30,7 @@ data TokenInfo = TokenInfo
     , _tiUserId        :: !(Maybe Text)
     , _tiTokenHandle   :: !(Maybe Text)
     , _tiIssuedTo      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TokenInfo' with the minimum fields required to make a request.
 --
@@ -221,8 +146,8 @@ instance ToJSON TokenInfo where
 --
 -- /See:/ 'jwk' smart constructor.
 newtype JWK = JWK
-    { _jKeys :: Maybe [JWKKeys]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _jKeys :: Maybe [KeysItem]
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JWK' with the minimum fields required to make a request.
 --
@@ -236,7 +161,7 @@ jwk =
     { _jKeys = Nothing
     }
 
-jKeys :: Lens' JWK [JWKKeys]
+jKeys :: Lens' JWK [KeysItem]
 jKeys
   = lens _jKeys (\ s a -> s{_jKeys = a}) . _Default .
       _Coerce
@@ -249,6 +174,81 @@ instance FromJSON JWK where
 instance ToJSON JWK where
         toJSON JWK{..}
           = object (catMaybes [("keys" .=) <$> _jKeys])
+
+--
+-- /See:/ 'keysItem' smart constructor.
+data KeysItem = KeysItem
+    { _kiAlg :: !Text
+    , _kiUse :: !Text
+    , _kiKid :: !(Maybe Text)
+    , _kiN   :: !(Maybe Text)
+    , _kiE   :: !(Maybe Text)
+    , _kiKty :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'KeysItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'kiAlg'
+--
+-- * 'kiUse'
+--
+-- * 'kiKid'
+--
+-- * 'kiN'
+--
+-- * 'kiE'
+--
+-- * 'kiKty'
+keysItem
+    :: KeysItem
+keysItem =
+    KeysItem
+    { _kiAlg = "RS256"
+    , _kiUse = "sig"
+    , _kiKid = Nothing
+    , _kiN = Nothing
+    , _kiE = Nothing
+    , _kiKty = "RSA"
+    }
+
+kiAlg :: Lens' KeysItem Text
+kiAlg = lens _kiAlg (\ s a -> s{_kiAlg = a})
+
+kiUse :: Lens' KeysItem Text
+kiUse = lens _kiUse (\ s a -> s{_kiUse = a})
+
+kiKid :: Lens' KeysItem (Maybe Text)
+kiKid = lens _kiKid (\ s a -> s{_kiKid = a})
+
+kiN :: Lens' KeysItem (Maybe Text)
+kiN = lens _kiN (\ s a -> s{_kiN = a})
+
+kiE :: Lens' KeysItem (Maybe Text)
+kiE = lens _kiE (\ s a -> s{_kiE = a})
+
+kiKty :: Lens' KeysItem Text
+kiKty = lens _kiKty (\ s a -> s{_kiKty = a})
+
+instance FromJSON KeysItem where
+        parseJSON
+          = withObject "KeysItem"
+              (\ o ->
+                 KeysItem <$>
+                   (o .:? "alg" .!= "RS256") <*> (o .:? "use" .!= "sig")
+                     <*> (o .:? "kid")
+                     <*> (o .:? "n")
+                     <*> (o .:? "e")
+                     <*> (o .:? "kty" .!= "RSA"))
+
+instance ToJSON KeysItem where
+        toJSON KeysItem{..}
+          = object
+              (catMaybes
+                 [Just ("alg" .= _kiAlg), Just ("use" .= _kiUse),
+                  ("kid" .=) <$> _kiKid, ("n" .=) <$> _kiN,
+                  ("e" .=) <$> _kiE, Just ("kty" .= _kiKty)])
 
 --
 -- /See:/ 'userInfoplus' smart constructor.
@@ -264,7 +264,7 @@ data UserInfoplus = UserInfoplus
     , _uiName          :: !(Maybe Text)
     , _uiVerifiedEmail :: !Bool
     , _uiId            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserInfoplus' with the minimum fields required to make a request.
 --

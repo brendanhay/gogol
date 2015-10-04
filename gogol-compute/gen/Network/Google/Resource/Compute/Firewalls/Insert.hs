@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.Compute.Firewalls.Insert
     , fiPrettyPrint
     , fiProject
     , fiUserIP
+    , fiPayload
     , fiKey
     , fiOAuthToken
-    , fiFirewall
     , fiFields
     ) where
 
@@ -68,11 +69,11 @@ data FirewallsInsert' = FirewallsInsert'
     , _fiPrettyPrint :: !Bool
     , _fiProject     :: !Text
     , _fiUserIP      :: !(Maybe Text)
+    , _fiPayload     :: !Firewall
     , _fiKey         :: !(Maybe Key)
     , _fiOAuthToken  :: !(Maybe OAuthToken)
-    , _fiFirewall    :: !Firewall
     , _fiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsInsert'' with the minimum fields required to make a request.
 --
@@ -86,26 +87,26 @@ data FirewallsInsert' = FirewallsInsert'
 --
 -- * 'fiUserIP'
 --
+-- * 'fiPayload'
+--
 -- * 'fiKey'
 --
 -- * 'fiOAuthToken'
 --
--- * 'fiFirewall'
---
 -- * 'fiFields'
 firewallsInsert'
     :: Text -- ^ 'project'
-    -> Firewall -- ^ 'Firewall'
+    -> Firewall -- ^ 'payload'
     -> FirewallsInsert'
-firewallsInsert' pFiProject_ pFiFirewall_ =
+firewallsInsert' pFiProject_ pFiPayload_ =
     FirewallsInsert'
     { _fiQuotaUser = Nothing
     , _fiPrettyPrint = True
     , _fiProject = pFiProject_
     , _fiUserIP = Nothing
+    , _fiPayload = pFiPayload_
     , _fiKey = Nothing
     , _fiOAuthToken = Nothing
-    , _fiFirewall = pFiFirewall_
     , _fiFields = Nothing
     }
 
@@ -132,6 +133,11 @@ fiProject
 fiUserIP :: Lens' FirewallsInsert' (Maybe Text)
 fiUserIP = lens _fiUserIP (\ s a -> s{_fiUserIP = a})
 
+-- | Multipart request metadata.
+fiPayload :: Lens' FirewallsInsert' Firewall
+fiPayload
+  = lens _fiPayload (\ s a -> s{_fiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -142,11 +148,6 @@ fiKey = lens _fiKey (\ s a -> s{_fiKey = a})
 fiOAuthToken :: Lens' FirewallsInsert' (Maybe OAuthToken)
 fiOAuthToken
   = lens _fiOAuthToken (\ s a -> s{_fiOAuthToken = a})
-
--- | Multipart request metadata.
-fiFirewall :: Lens' FirewallsInsert' Firewall
-fiFirewall
-  = lens _fiFirewall (\ s a -> s{_fiFirewall = a})
 
 -- | Selector specifying which fields to include in a partial response.
 fiFields :: Lens' FirewallsInsert' (Maybe Text)
@@ -166,7 +167,7 @@ instance GoogleRequest FirewallsInsert' where
               _fiKey
               _fiOAuthToken
               (Just AltJSON)
-              _fiFirewall
+              _fiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FirewallsInsertResource)

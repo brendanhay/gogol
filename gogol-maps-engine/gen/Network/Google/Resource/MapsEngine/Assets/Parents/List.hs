@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ type AssetsParentsListResource =
      "assets" :>
        Capture "id" Text :>
          "parents" :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -74,7 +75,7 @@ data AssetsParentsList' = AssetsParentsList'
     , _assOAuthToken  :: !(Maybe OAuthToken)
     , _assMaxResults  :: !(Maybe Word32)
     , _assFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AssetsParentsList'' with the minimum fields required to make a request.
 --
@@ -175,7 +176,7 @@ instance GoogleRequest AssetsParentsList' where
         type Rs AssetsParentsList' = ParentsListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u AssetsParentsList'{..}
-          = go _assMaxResults _assPageToken _assId
+          = go _assId _assPageToken _assMaxResults
               _assQuotaUser
               (Just _assPrettyPrint)
               _assUserIP

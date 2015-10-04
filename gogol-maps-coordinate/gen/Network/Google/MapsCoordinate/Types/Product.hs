@@ -26,7 +26,7 @@ data LocationListResponse = LocationListResponse
     , _llrNextPageToken   :: !(Maybe Text)
     , _llrKind            :: !Text
     , _llrItems           :: !(Maybe [LocationRecord])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocationListResponse' with the minimum fields required to make a request.
 --
@@ -96,7 +96,7 @@ instance ToJSON LocationListResponse where
 data WorkerListResponse = WorkerListResponse
     { _wlrKind  :: !Text
     , _wlrItems :: !(Maybe [Worker])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WorkerListResponse' with the minimum fields required to make a request.
 --
@@ -146,7 +146,7 @@ data TokenPagination = TokenPagination
     { _tpNextPageToken     :: !(Maybe Text)
     , _tpKind              :: !Text
     , _tpPreviousPageToken :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TokenPagination' with the minimum fields required to make a request.
 --
@@ -207,7 +207,7 @@ data Location = Location
     , _lKind        :: !Text
     , _lLat         :: !(Maybe Double)
     , _lLng         :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -276,7 +276,7 @@ data Schedule = Schedule
     , _sKind      :: !Text
     , _sEndTime   :: !(Maybe Word64)
     , _sDuration  :: !(Maybe Word64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Schedule' with the minimum fields required to make a request.
 --
@@ -358,7 +358,7 @@ data JobState = JobState
     , _jsAssignee            :: !(Maybe Text)
     , _jsCustomFields        :: !(Maybe CustomFields)
     , _jsTitle               :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobState' with the minimum fields required to make a request.
 --
@@ -483,7 +483,7 @@ data CustomFieldDef = CustomFieldDef
     , _cfdId                  :: !(Maybe Int64)
     , _cfdEnumitems           :: !(Maybe [EnumItemDef])
     , _cfdType                :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomFieldDef' with the minimum fields required to make a request.
 --
@@ -583,7 +583,7 @@ data JobListResponse = JobListResponse
     { _jlrNextPageToken :: !(Maybe Text)
     , _jlrKind          :: !Text
     , _jlrItems         :: !(Maybe [Job])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobListResponse' with the minimum fields required to make a request.
 --
@@ -644,7 +644,7 @@ data JobChange = JobChange
     { _jcState     :: !(Maybe JobState)
     , _jcKind      :: !Text
     , _jcTimestamp :: !(Maybe Word64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobChange' with the minimum fields required to make a request.
 --
@@ -699,7 +699,7 @@ instance ToJSON JobChange where
 data TeamListResponse = TeamListResponse
     { _tlrKind  :: !Text
     , _tlrItems :: !(Maybe [Team])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TeamListResponse' with the minimum fields required to make a request.
 --
@@ -748,7 +748,7 @@ instance ToJSON TeamListResponse where
 data CustomFieldDefListResponse = CustomFieldDefListResponse
     { _cfdlrKind  :: !Text
     , _cfdlrItems :: !(Maybe [CustomFieldDef])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomFieldDefListResponse' with the minimum fields required to make a request.
 --
@@ -801,7 +801,7 @@ data Job = Job
     , _jKind      :: !Text
     , _jJobChange :: !(Maybe [JobChange])
     , _jId        :: !(Maybe Word64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
 --
@@ -868,7 +868,7 @@ instance ToJSON Job where
 data CustomFields = CustomFields
     { _cfKind        :: !Text
     , _cfCustomField :: !(Maybe [CustomField])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomFields' with the minimum fields required to make a request.
 --
@@ -919,7 +919,7 @@ data Team = Team
     { _tKind :: !Text
     , _tName :: !(Maybe Text)
     , _tId   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Team' with the minimum fields required to make a request.
 --
@@ -977,7 +977,7 @@ data LocationRecord = LocationRecord
     , _lrConfidenceRadius :: !(Maybe Double)
     , _lrLongitude        :: !(Maybe Double)
     , _lrCollectionTime   :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocationRecord' with the minimum fields required to make a request.
 --
@@ -1057,7 +1057,7 @@ instance ToJSON LocationRecord where
 data Worker = Worker
     { _wKind :: !Text
     , _wId   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Worker' with the minimum fields required to make a request.
 --
@@ -1104,7 +1104,7 @@ data CustomField = CustomField
     { _cCustomFieldId :: !(Maybe Int64)
     , _cKind          :: !Text
     , _cValue         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomField' with the minimum fields required to make a request.
 --
@@ -1161,7 +1161,7 @@ data EnumItemDef = EnumItemDef
     { _eidKind   :: !Text
     , _eidValue  :: !(Maybe Text)
     , _eidActive :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EnumItemDef' with the minimum fields required to make a request.
 --

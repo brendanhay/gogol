@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 data EventData = EventData
     { _edValues :: !(Maybe [Text])
     , _edKey    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventData' with the minimum fields required to make a request.
 --
@@ -93,7 +93,7 @@ instance ToJSON EventData where
 data LatLng = LatLng
     { _llLatitude  :: !(Maybe Double)
     , _llLongitude :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 --
@@ -141,7 +141,7 @@ data CertificationStatus = CertificationStatus
     { _csIsCertified  :: !(Maybe Bool)
     , _csType         :: !(Maybe Text)
     , _csExamStatuses :: !(Maybe [CertificationExamStatus])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CertificationStatus' with the minimum fields required to make a request.
 --
@@ -204,7 +204,7 @@ data RequestMetadata = RequestMetadata
     , _rmLocale            :: !(Maybe Text)
     , _rmUserOverrides     :: !(Maybe UserOverrides)
     , _rmPartnersSessionId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RequestMetadata' with the minimum fields required to make a request.
 --
@@ -288,7 +288,7 @@ instance ToJSON RequestMetadata where
 data ListUserStatesResponse = ListUserStatesResponse
     { _lusrUserStates       :: !(Maybe [Text])
     , _lusrResponseMetadata :: !(Maybe ResponseMetadata)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListUserStatesResponse' with the minimum fields required to make a request.
 --
@@ -341,7 +341,7 @@ data DebugInfo = DebugInfo
     { _diServiceURL      :: !(Maybe Text)
     , _diServerTraceInfo :: !(Maybe Text)
     , _diServerInfo      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DebugInfo' with the minimum fields required to make a request.
 --
@@ -399,7 +399,7 @@ instance ToJSON DebugInfo where
 data GetCompanyResponse = GetCompanyResponse
     { _gcrResponseMetadata :: !(Maybe ResponseMetadata)
     , _gcrCompany          :: !(Maybe Company)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetCompanyResponse' with the minimum fields required to make a request.
 --
@@ -449,7 +449,7 @@ data PublicProfile = PublicProfile
     , _ppDisplayImageURL :: !(Maybe Text)
     , _ppDisplayName     :: !(Maybe Text)
     , _ppId              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublicProfile' with the minimum fields required to make a request.
 --
@@ -517,7 +517,7 @@ instance ToJSON PublicProfile where
 data Location = Location
     { _lLatLng  :: !(Maybe LatLng)
     , _lAddress :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
@@ -561,7 +561,7 @@ instance ToJSON Location where
 data CertificationExamStatus = CertificationExamStatus
     { _cesNumberUsersPass :: !(Maybe Int32)
     , _cesType            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CertificationExamStatus' with the minimum fields required to make a request.
 --
@@ -608,7 +608,7 @@ instance ToJSON CertificationExamStatus where
 data TrafficSource = TrafficSource
     { _tsTrafficSubId    :: !(Maybe Text)
     , _tsTrafficSourceId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrafficSource' with the minimum fields required to make a request.
 --
@@ -661,7 +661,7 @@ data Money = Money
     { _mCurrencyCode :: !(Maybe Text)
     , _mNanos        :: !(Maybe Int32)
     , _mUnits        :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Money' with the minimum fields required to make a request.
 --
@@ -722,7 +722,7 @@ instance ToJSON Money where
 data RecaptchaChallenge = RecaptchaChallenge
     { _rcResponse :: !(Maybe Text)
     , _rcId       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RecaptchaChallenge' with the minimum fields required to make a request.
 --
@@ -769,7 +769,7 @@ data ListCompaniesResponse = ListCompaniesResponse
     { _lcrNextPageToken    :: !(Maybe Text)
     , _lcrResponseMetadata :: !(Maybe ResponseMetadata)
     , _lcrCompanies        :: !(Maybe [Company])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListCompaniesResponse' with the minimum fields required to make a request.
 --
@@ -834,7 +834,7 @@ data CreateLeadResponse = CreateLeadResponse
     { _clrRecaptchaStatus  :: !(Maybe Text)
     , _clrResponseMetadata :: !(Maybe ResponseMetadata)
     , _clrLead             :: !(Maybe Lead)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreateLeadResponse' with the minimum fields required to make a request.
 --
@@ -895,7 +895,7 @@ data LocalizedCompanyInfo = LocalizedCompanyInfo
     , _lciOverview     :: !(Maybe Text)
     , _lciCountryCodes :: !(Maybe [Text])
     , _lciDisplayName  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocalizedCompanyInfo' with the minimum fields required to make a request.
 --
@@ -968,7 +968,7 @@ instance ToJSON LocalizedCompanyInfo where
 -- /See:/ 'responseMetadata' smart constructor.
 newtype ResponseMetadata = ResponseMetadata
     { _rmDebugInfo :: Maybe DebugInfo
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResponseMetadata' with the minimum fields required to make a request.
 --
@@ -1002,10 +1002,10 @@ instance ToJSON ResponseMetadata where
 -- /See:/ 'logMessageRequest' smart constructor.
 data LogMessageRequest = LogMessageRequest
     { _lmrRequestMetadata :: !(Maybe RequestMetadata)
-    , _lmrClientInfo      :: !(Maybe LogMessageRequestClientInfo)
+    , _lmrClientInfo      :: !(Maybe ClientInfo)
     , _lmrDetails         :: !(Maybe Text)
     , _lmrLevel           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogMessageRequest' with the minimum fields required to make a request.
 --
@@ -1036,7 +1036,7 @@ lmrRequestMetadata
 
 -- | Map of client info, such as URL, browser navigator, browser platform,
 -- etc.
-lmrClientInfo :: Lens' LogMessageRequest (Maybe LogMessageRequestClientInfo)
+lmrClientInfo :: Lens' LogMessageRequest (Maybe ClientInfo)
 lmrClientInfo
   = lens _lmrClientInfo
       (\ s a -> s{_lmrClientInfo = a})
@@ -1075,7 +1075,7 @@ instance ToJSON LogMessageRequest where
 data UserOverrides = UserOverrides
     { _uoIPAddress :: !(Maybe Text)
     , _uoUserId    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserOverrides' with the minimum fields required to make a request.
 --
@@ -1115,34 +1115,12 @@ instance ToJSON UserOverrides where
                  [("ipAddress" .=) <$> _uoIPAddress,
                   ("userId" .=) <$> _uoUserId])
 
--- | Map of client info, such as URL, browser navigator, browser platform,
--- etc.
---
--- /See:/ 'logMessageRequestClientInfo' smart constructor.
-data LogMessageRequestClientInfo =
-    LogMessageRequestClientInfo
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LogMessageRequestClientInfo' with the minimum fields required to make a request.
---
-logMessageRequestClientInfo
-    :: LogMessageRequestClientInfo
-logMessageRequestClientInfo = LogMessageRequestClientInfo
-
-instance FromJSON LogMessageRequestClientInfo where
-        parseJSON
-          = withObject "LogMessageRequestClientInfo"
-              (\ o -> pure LogMessageRequestClientInfo)
-
-instance ToJSON LogMessageRequestClientInfo where
-        toJSON = const (Object mempty)
-
 -- | Response message for LogClientMessage.
 --
 -- /See:/ 'logMessageResponse' smart constructor.
 newtype LogMessageResponse = LogMessageResponse
     { _lmrResponseMetadata :: Maybe ResponseMetadata
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogMessageResponse' with the minimum fields required to make a request.
 --
@@ -1190,7 +1168,7 @@ data Lead = Lead
     , _lWebsiteURL       :: !(Maybe Text)
     , _lType             :: !(Maybe Text)
     , _lGpsMotivations   :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Lead' with the minimum fields required to make a request.
 --
@@ -1311,6 +1289,27 @@ instance ToJSON Lead where
                   ("type" .=) <$> _lType,
                   ("gpsMotivations" .=) <$> _lGpsMotivations])
 
+-- | Map of client info, such as URL, browser navigator, browser platform,
+-- etc.
+--
+-- /See:/ 'clientInfo' smart constructor.
+data ClientInfo =
+    ClientInfo
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ClientInfo' with the minimum fields required to make a request.
+--
+clientInfo
+    :: ClientInfo
+clientInfo = ClientInfo
+
+instance FromJSON ClientInfo where
+        parseJSON
+          = withObject "ClientInfo" (\ o -> pure ClientInfo)
+
+instance ToJSON ClientInfo where
+        toJSON = const (Object mempty)
+
 -- | A company resource in the Google Partners API. Once certified, it
 -- qualifies for being searched by advertisers.
 --
@@ -1328,7 +1327,7 @@ data Company = Company
     , _cWebsiteURL                :: !(Maybe Text)
     , _cLocations                 :: !(Maybe [Location])
     , _cServices                  :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Company' with the minimum fields required to make a request.
 --
@@ -1494,7 +1493,7 @@ instance ToJSON Company where
 -- /See:/ 'logUserEventResponse' smart constructor.
 newtype LogUserEventResponse = LogUserEventResponse
     { _luerResponseMetadata :: Maybe ResponseMetadata
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogUserEventResponse' with the minimum fields required to make a request.
 --
@@ -1537,7 +1536,7 @@ data LogUserEventRequest = LogUserEventRequest
     , _luerLead            :: !(Maybe Lead)
     , _luerEventDatas      :: !(Maybe [EventData])
     , _luerEventAction     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogUserEventRequest' with the minimum fields required to make a request.
 --
@@ -1639,7 +1638,7 @@ instance ToJSON LogUserEventRequest where
 data Rank = Rank
     { _rValue :: !(Maybe Double)
     , _rType  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Rank' with the minimum fields required to make a request.
 --
@@ -1682,7 +1681,7 @@ data CreateLeadRequest = CreateLeadRequest
     { _cRequestMetadata    :: !(Maybe RequestMetadata)
     , _cRecaptchaChallenge :: !(Maybe RecaptchaChallenge)
     , _cLead               :: !(Maybe Lead)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreateLeadRequest' with the minimum fields required to make a request.
 --

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -41,10 +42,10 @@ module Network.Google.Resource.MapsEngine.Tables.Features.BatchPatch
     , TablesFeaturesBatchPatch'
 
     -- * Request Lenses
-    , tfbpFeaturesBatchPatchRequest
     , tfbpQuotaUser
     , tfbpPrettyPrint
     , tfbpUserIP
+    , tfbpPayload
     , tfbpKey
     , tfbpId
     , tfbpOAuthToken
@@ -86,27 +87,27 @@ type TablesFeaturesBatchPatchResource =
 --
 -- /See:/ 'tablesFeaturesBatchPatch'' smart constructor.
 data TablesFeaturesBatchPatch' = TablesFeaturesBatchPatch'
-    { _tfbpFeaturesBatchPatchRequest :: !FeaturesBatchPatchRequest
-    , _tfbpQuotaUser                 :: !(Maybe Text)
-    , _tfbpPrettyPrint               :: !Bool
-    , _tfbpUserIP                    :: !(Maybe Text)
-    , _tfbpKey                       :: !(Maybe Key)
-    , _tfbpId                        :: !Text
-    , _tfbpOAuthToken                :: !(Maybe OAuthToken)
-    , _tfbpFields                    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _tfbpQuotaUser   :: !(Maybe Text)
+    , _tfbpPrettyPrint :: !Bool
+    , _tfbpUserIP      :: !(Maybe Text)
+    , _tfbpPayload     :: !FeaturesBatchPatchRequest
+    , _tfbpKey         :: !(Maybe Key)
+    , _tfbpId          :: !Text
+    , _tfbpOAuthToken  :: !(Maybe OAuthToken)
+    , _tfbpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesFeaturesBatchPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'tfbpFeaturesBatchPatchRequest'
 --
 -- * 'tfbpQuotaUser'
 --
 -- * 'tfbpPrettyPrint'
 --
 -- * 'tfbpUserIP'
+--
+-- * 'tfbpPayload'
 --
 -- * 'tfbpKey'
 --
@@ -116,26 +117,20 @@ data TablesFeaturesBatchPatch' = TablesFeaturesBatchPatch'
 --
 -- * 'tfbpFields'
 tablesFeaturesBatchPatch'
-    :: FeaturesBatchPatchRequest -- ^ 'FeaturesBatchPatchRequest'
+    :: FeaturesBatchPatchRequest -- ^ 'payload'
     -> Text -- ^ 'id'
     -> TablesFeaturesBatchPatch'
-tablesFeaturesBatchPatch' pTfbpFeaturesBatchPatchRequest_ pTfbpId_ =
+tablesFeaturesBatchPatch' pTfbpPayload_ pTfbpId_ =
     TablesFeaturesBatchPatch'
-    { _tfbpFeaturesBatchPatchRequest = pTfbpFeaturesBatchPatchRequest_
-    , _tfbpQuotaUser = Nothing
+    { _tfbpQuotaUser = Nothing
     , _tfbpPrettyPrint = True
     , _tfbpUserIP = Nothing
+    , _tfbpPayload = pTfbpPayload_
     , _tfbpKey = Nothing
     , _tfbpId = pTfbpId_
     , _tfbpOAuthToken = Nothing
     , _tfbpFields = Nothing
     }
-
--- | Multipart request metadata.
-tfbpFeaturesBatchPatchRequest :: Lens' TablesFeaturesBatchPatch' FeaturesBatchPatchRequest
-tfbpFeaturesBatchPatchRequest
-  = lens _tfbpFeaturesBatchPatchRequest
-      (\ s a -> s{_tfbpFeaturesBatchPatchRequest = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -156,6 +151,11 @@ tfbpPrettyPrint
 tfbpUserIP :: Lens' TablesFeaturesBatchPatch' (Maybe Text)
 tfbpUserIP
   = lens _tfbpUserIP (\ s a -> s{_tfbpUserIP = a})
+
+-- | Multipart request metadata.
+tfbpPayload :: Lens' TablesFeaturesBatchPatch' FeaturesBatchPatchRequest
+tfbpPayload
+  = lens _tfbpPayload (\ s a -> s{_tfbpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -193,7 +193,7 @@ instance GoogleRequest TablesFeaturesBatchPatch'
               _tfbpKey
               _tfbpOAuthToken
               (Just AltJSON)
-              _tfbpFeaturesBatchPatchRequest
+              _tfbpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TablesFeaturesBatchPatchResource)

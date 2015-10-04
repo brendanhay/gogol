@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -30,11 +31,11 @@ module Network.Google.Resource.Calendar.Events.Update
     , EventsUpdate'
 
     -- * Request Lenses
-    , euEvent
     , euQuotaUser
     , euCalendarId
     , euPrettyPrint
     , euUserIP
+    , euPayload
     , euMaxAttendees
     , euKey
     , euSendNotifications
@@ -55,10 +56,10 @@ type EventsUpdateResource =
        Capture "calendarId" Text :>
          "events" :>
            Capture "eventId" Text :>
-             QueryParam "alwaysIncludeEmail" Bool :>
-               QueryParam "maxAttendees" Int32 :>
-                 QueryParam "sendNotifications" Bool :>
-                   QueryParam "supportsAttachments" Bool :>
+             QueryParam "maxAttendees" Int32 :>
+               QueryParam "sendNotifications" Bool :>
+                 QueryParam "supportsAttachments" Bool :>
+                   QueryParam "alwaysIncludeEmail" Bool :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -72,11 +73,11 @@ type EventsUpdateResource =
 --
 -- /See:/ 'eventsUpdate'' smart constructor.
 data EventsUpdate' = EventsUpdate'
-    { _euEvent               :: !Event
-    , _euQuotaUser           :: !(Maybe Text)
+    { _euQuotaUser           :: !(Maybe Text)
     , _euCalendarId          :: !Text
     , _euPrettyPrint         :: !Bool
     , _euUserIP              :: !(Maybe Text)
+    , _euPayload             :: !Event
     , _euMaxAttendees        :: !(Maybe Int32)
     , _euKey                 :: !(Maybe Key)
     , _euSendNotifications   :: !(Maybe Bool)
@@ -85,13 +86,11 @@ data EventsUpdate' = EventsUpdate'
     , _euAlwaysIncludeEmail  :: !(Maybe Bool)
     , _euEventId             :: !Text
     , _euFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'euEvent'
 --
 -- * 'euQuotaUser'
 --
@@ -100,6 +99,8 @@ data EventsUpdate' = EventsUpdate'
 -- * 'euPrettyPrint'
 --
 -- * 'euUserIP'
+--
+-- * 'euPayload'
 --
 -- * 'euMaxAttendees'
 --
@@ -117,17 +118,17 @@ data EventsUpdate' = EventsUpdate'
 --
 -- * 'euFields'
 eventsUpdate'
-    :: Event -- ^ 'Event'
-    -> Text -- ^ 'calendarId'
+    :: Text -- ^ 'calendarId'
+    -> Event -- ^ 'payload'
     -> Text -- ^ 'eventId'
     -> EventsUpdate'
-eventsUpdate' pEuEvent_ pEuCalendarId_ pEuEventId_ =
+eventsUpdate' pEuCalendarId_ pEuPayload_ pEuEventId_ =
     EventsUpdate'
-    { _euEvent = pEuEvent_
-    , _euQuotaUser = Nothing
+    { _euQuotaUser = Nothing
     , _euCalendarId = pEuCalendarId_
     , _euPrettyPrint = True
     , _euUserIP = Nothing
+    , _euPayload = pEuPayload_
     , _euMaxAttendees = Nothing
     , _euKey = Nothing
     , _euSendNotifications = Nothing
@@ -137,10 +138,6 @@ eventsUpdate' pEuEvent_ pEuCalendarId_ pEuEventId_ =
     , _euEventId = pEuEventId_
     , _euFields = Nothing
     }
-
--- | Multipart request metadata.
-euEvent :: Lens' EventsUpdate' Event
-euEvent = lens _euEvent (\ s a -> s{_euEvent = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -166,6 +163,11 @@ euPrettyPrint
 -- want to enforce per-user limits.
 euUserIP :: Lens' EventsUpdate' (Maybe Text)
 euUserIP = lens _euUserIP (\ s a -> s{_euUserIP = a})
+
+-- | Multipart request metadata.
+euPayload :: Lens' EventsUpdate' Event
+euPayload
+  = lens _euPayload (\ s a -> s{_euPayload = a})
 
 -- | The maximum number of attendees to include in the response. If there are
 -- more than the specified number of attendees, only the participant is
@@ -228,11 +230,10 @@ instance GoogleRequest EventsUpdate' where
         type Rs EventsUpdate' = Event
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsUpdate'{..}
-          = go _euAlwaysIncludeEmail _euMaxAttendees
+          = go _euCalendarId _euEventId _euMaxAttendees
               _euSendNotifications
               _euSupportsAttachments
-              _euCalendarId
-              _euEventId
+              _euAlwaysIncludeEmail
               _euQuotaUser
               (Just _euPrettyPrint)
               _euUserIP
@@ -240,7 +241,7 @@ instance GoogleRequest EventsUpdate' where
               _euKey
               _euOAuthToken
               (Just AltJSON)
-              _euEvent
+              _euPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsUpdateResource)

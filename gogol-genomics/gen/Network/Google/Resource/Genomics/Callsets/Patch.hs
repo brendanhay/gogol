@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.Genomics.Callsets.Patch
     -- * Request Lenses
     , cpQuotaUser
     , cpPrettyPrint
-    , cpCallSet
     , cpUserIP
+    , cpPayload
     , cpKey
     , cpCallSetId
     , cpOAuthToken
@@ -63,13 +64,13 @@ type CallsetsPatchResource =
 data CallsetsPatch' = CallsetsPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
-    , _cpCallSet     :: !CallSet
     , _cpUserIP      :: !(Maybe Text)
+    , _cpPayload     :: !CallSet
     , _cpKey         :: !(Maybe Key)
     , _cpCallSetId   :: !Text
     , _cpOAuthToken  :: !(Maybe OAuthToken)
     , _cpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsPatch'' with the minimum fields required to make a request.
 --
@@ -79,9 +80,9 @@ data CallsetsPatch' = CallsetsPatch'
 --
 -- * 'cpPrettyPrint'
 --
--- * 'cpCallSet'
---
 -- * 'cpUserIP'
+--
+-- * 'cpPayload'
 --
 -- * 'cpKey'
 --
@@ -91,15 +92,15 @@ data CallsetsPatch' = CallsetsPatch'
 --
 -- * 'cpFields'
 callsetsPatch'
-    :: CallSet -- ^ 'CallSet'
+    :: CallSet -- ^ 'payload'
     -> Text -- ^ 'callSetId'
     -> CallsetsPatch'
-callsetsPatch' pCpCallSet_ pCpCallSetId_ =
+callsetsPatch' pCpPayload_ pCpCallSetId_ =
     CallsetsPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
-    , _cpCallSet = pCpCallSet_
     , _cpUserIP = Nothing
+    , _cpPayload = pCpPayload_
     , _cpKey = Nothing
     , _cpCallSetId = pCpCallSetId_
     , _cpOAuthToken = Nothing
@@ -119,15 +120,15 @@ cpPrettyPrint
   = lens _cpPrettyPrint
       (\ s a -> s{_cpPrettyPrint = a})
 
--- | Multipart request metadata.
-cpCallSet :: Lens' CallsetsPatch' CallSet
-cpCallSet
-  = lens _cpCallSet (\ s a -> s{_cpCallSet = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 cpUserIP :: Lens' CallsetsPatch' (Maybe Text)
 cpUserIP = lens _cpUserIP (\ s a -> s{_cpUserIP = a})
+
+-- | Multipart request metadata.
+cpPayload :: Lens' CallsetsPatch' CallSet
+cpPayload
+  = lens _cpPayload (\ s a -> s{_cpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -163,7 +164,7 @@ instance GoogleRequest CallsetsPatch' where
               _cpKey
               _cpOAuthToken
               (Just AltJSON)
-              _cpCallSet
+              _cpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CallsetsPatchResource)

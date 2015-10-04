@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.AndroidPublisher.Inappproducts.Batch
     , ibQuotaUser
     , ibPrettyPrint
     , ibUserIP
-    , ibInappproductsBatchRequest
+    , ibPayload
     , ibKey
     , ibOAuthToken
     , ibFields
@@ -60,14 +61,14 @@ type InappproductsBatchResource =
 --
 -- /See:/ 'inappproductsBatch'' smart constructor.
 data InappproductsBatch' = InappproductsBatch'
-    { _ibQuotaUser                 :: !(Maybe Text)
-    , _ibPrettyPrint               :: !Bool
-    , _ibUserIP                    :: !(Maybe Text)
-    , _ibInappproductsBatchRequest :: !InappproductsBatchRequest
-    , _ibKey                       :: !(Maybe Key)
-    , _ibOAuthToken                :: !(Maybe OAuthToken)
-    , _ibFields                    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ibQuotaUser   :: !(Maybe Text)
+    , _ibPrettyPrint :: !Bool
+    , _ibUserIP      :: !(Maybe Text)
+    , _ibPayload     :: !InappproductsBatchRequest
+    , _ibKey         :: !(Maybe Key)
+    , _ibOAuthToken  :: !(Maybe OAuthToken)
+    , _ibFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsBatch'' with the minimum fields required to make a request.
 --
@@ -79,7 +80,7 @@ data InappproductsBatch' = InappproductsBatch'
 --
 -- * 'ibUserIP'
 --
--- * 'ibInappproductsBatchRequest'
+-- * 'ibPayload'
 --
 -- * 'ibKey'
 --
@@ -87,14 +88,14 @@ data InappproductsBatch' = InappproductsBatch'
 --
 -- * 'ibFields'
 inappproductsBatch'
-    :: InappproductsBatchRequest -- ^ 'InappproductsBatchRequest'
+    :: InappproductsBatchRequest -- ^ 'payload'
     -> InappproductsBatch'
-inappproductsBatch' pIbInappproductsBatchRequest_ =
+inappproductsBatch' pIbPayload_ =
     InappproductsBatch'
     { _ibQuotaUser = Nothing
     , _ibPrettyPrint = True
     , _ibUserIP = Nothing
-    , _ibInappproductsBatchRequest = pIbInappproductsBatchRequest_
+    , _ibPayload = pIbPayload_
     , _ibKey = Nothing
     , _ibOAuthToken = Nothing
     , _ibFields = Nothing
@@ -119,10 +120,9 @@ ibUserIP :: Lens' InappproductsBatch' (Maybe Text)
 ibUserIP = lens _ibUserIP (\ s a -> s{_ibUserIP = a})
 
 -- | Multipart request metadata.
-ibInappproductsBatchRequest :: Lens' InappproductsBatch' InappproductsBatchRequest
-ibInappproductsBatchRequest
-  = lens _ibInappproductsBatchRequest
-      (\ s a -> s{_ibInappproductsBatchRequest = a})
+ibPayload :: Lens' InappproductsBatch' InappproductsBatchRequest
+ibPayload
+  = lens _ibPayload (\ s a -> s{_ibPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -153,7 +153,7 @@ instance GoogleRequest InappproductsBatch' where
               _ibKey
               _ibOAuthToken
               (Just AltJSON)
-              _ibInappproductsBatchRequest
+              _ibPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InappproductsBatchResource)

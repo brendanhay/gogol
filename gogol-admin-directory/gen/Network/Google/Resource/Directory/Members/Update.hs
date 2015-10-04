@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.Directory.Members.Update
     , muPrettyPrint
     , muUserIP
     , muGroupKey
+    , muPayload
     , muKey
-    , muMember
     , muOAuthToken
     , muFields
     ) where
@@ -69,11 +70,11 @@ data MembersUpdate' = MembersUpdate'
     , _muPrettyPrint :: !Bool
     , _muUserIP      :: !(Maybe Text)
     , _muGroupKey    :: !Text
+    , _muPayload     :: !Member
     , _muKey         :: !(Maybe Key)
-    , _muMember      :: !Member
     , _muOAuthToken  :: !(Maybe OAuthToken)
     , _muFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MembersUpdate'' with the minimum fields required to make a request.
 --
@@ -89,9 +90,9 @@ data MembersUpdate' = MembersUpdate'
 --
 -- * 'muGroupKey'
 --
--- * 'muKey'
+-- * 'muPayload'
 --
--- * 'muMember'
+-- * 'muKey'
 --
 -- * 'muOAuthToken'
 --
@@ -99,17 +100,17 @@ data MembersUpdate' = MembersUpdate'
 membersUpdate'
     :: Text -- ^ 'memberKey'
     -> Text -- ^ 'groupKey'
-    -> Member -- ^ 'Member'
+    -> Member -- ^ 'payload'
     -> MembersUpdate'
-membersUpdate' pMuMemberKey_ pMuGroupKey_ pMuMember_ =
+membersUpdate' pMuMemberKey_ pMuGroupKey_ pMuPayload_ =
     MembersUpdate'
     { _muQuotaUser = Nothing
     , _muMemberKey = pMuMemberKey_
     , _muPrettyPrint = True
     , _muUserIP = Nothing
     , _muGroupKey = pMuGroupKey_
+    , _muPayload = pMuPayload_
     , _muKey = Nothing
-    , _muMember = pMuMember_
     , _muOAuthToken = Nothing
     , _muFields = Nothing
     }
@@ -144,15 +145,16 @@ muGroupKey :: Lens' MembersUpdate' Text
 muGroupKey
   = lens _muGroupKey (\ s a -> s{_muGroupKey = a})
 
+-- | Multipart request metadata.
+muPayload :: Lens' MembersUpdate' Member
+muPayload
+  = lens _muPayload (\ s a -> s{_muPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 muKey :: Lens' MembersUpdate' (Maybe Key)
 muKey = lens _muKey (\ s a -> s{_muKey = a})
-
--- | Multipart request metadata.
-muMember :: Lens' MembersUpdate' Member
-muMember = lens _muMember (\ s a -> s{_muMember = a})
 
 -- | OAuth 2.0 token for the current user.
 muOAuthToken :: Lens' MembersUpdate' (Maybe OAuthToken)
@@ -178,7 +180,7 @@ instance GoogleRequest MembersUpdate' where
               _muKey
               _muOAuthToken
               (Just AltJSON)
-              _muMember
+              _muPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MembersUpdateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type TargetHTTPProxiesListResource =
        "global" :>
          "targetHttpProxies" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data TargetHTTPProxiesList' = TargetHTTPProxiesList'
     , _thttpplOAuthToken  :: !(Maybe OAuthToken)
     , _thttpplMaxResults  :: !Word32
     , _thttpplFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetHTTPProxiesList'' with the minimum fields required to make a request.
 --
@@ -205,9 +206,8 @@ instance GoogleRequest TargetHTTPProxiesList' where
         type Rs TargetHTTPProxiesList' = TargetHTTPProxyList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetHTTPProxiesList'{..}
-          = go _thttpplFilter (Just _thttpplMaxResults)
-              _thttpplPageToken
-              _thttpplProject
+          = go _thttpplProject _thttpplFilter _thttpplPageToken
+              (Just _thttpplMaxResults)
               _thttpplQuotaUser
               (Just _thttpplPrettyPrint)
               _thttpplUserIP

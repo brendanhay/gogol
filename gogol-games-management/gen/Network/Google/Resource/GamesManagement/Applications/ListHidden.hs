@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,8 +53,8 @@ type ApplicationsListHiddenResource =
        Capture "applicationId" Text :>
          "players" :>
            "hidden" :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Int32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data ApplicationsListHidden' = ApplicationsListHidden'
     , _alhOAuthToken    :: !(Maybe OAuthToken)
     , _alhMaxResults    :: !(Maybe Int32)
     , _alhFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsListHidden'' with the minimum fields required to make a request.
 --
@@ -179,7 +180,7 @@ instance GoogleRequest ApplicationsListHidden' where
         type Rs ApplicationsListHidden' = HiddenPlayerList
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u ApplicationsListHidden'{..}
-          = go _alhMaxResults _alhPageToken _alhApplicationId
+          = go _alhApplicationId _alhPageToken _alhMaxResults
               _alhQuotaUser
               (Just _alhPrettyPrint)
               _alhUserIP

@@ -26,10 +26,13 @@ module Network.Google.CustomSearch
 
     -- * REST Resources
 
-    -- ** SearchCseList
-    , module Network.Google.Resource.Search.Cse.List
+    -- ** SearchCSEList
+    , module Network.Google.Resource.Search.CSE.List
 
     -- * Types
+
+    -- ** ImgDominantColor
+    , ImgDominantColor (..)
 
     -- ** PromotionImage
     , PromotionImage
@@ -38,8 +41,9 @@ module Network.Google.CustomSearch
     , piWidth
     , piSource
 
-    -- ** SearchCseListSiteSearchFilter
-    , SearchCseListSiteSearchFilter (..)
+    -- ** Queries
+    , Queries
+    , queries
 
     -- ** Context
     , Context
@@ -47,15 +51,20 @@ module Network.Google.CustomSearch
     , cFacets
     , cTitle
 
-    -- ** SearchCseListImgColorType
-    , SearchCseListImgColorType (..)
+    -- ** Image
+    , Image
+    , image
+    , iThumbnailLink
+    , iHeight
+    , iByteSize
+    , iContextLink
+    , iThumbnailHeight
+    , iWidth
+    , iThumbnailWidth
 
-    -- ** SearchCseListImgType
-    , SearchCseListImgType (..)
-
-    -- ** SearchQueries
-    , SearchQueries
-    , searchQueries
+    -- ** Pagemap
+    , Pagemap
+    , pagemap
 
     -- ** SearchURL
     , SearchURL
@@ -63,29 +72,28 @@ module Network.Google.CustomSearch
     , suType
     , suTemplate
 
-    -- ** SearchCseListImgDominantColor
-    , SearchCseListImgDominantColor (..)
+    -- ** SiteSearchFilter
+    , SiteSearchFilter (..)
 
-    -- ** SearchSpelling
-    , SearchSpelling
-    , searchSpelling
-    , ssCorrectedQuery
-    , ssHTMLCorrectedQuery
+    -- ** LabelsItem
+    , LabelsItem
+    , labelsItem
+    , liName
+    , liDisplayName
+    , liLabelWithOp
 
-    -- ** ResultPagemap
-    , ResultPagemap
-    , resultPagemap
+    -- ** SearchType
+    , SearchType (..)
 
-    -- ** ResultImage
-    , ResultImage
-    , resultImage
-    , riThumbnailLink
-    , riHeight
-    , riByteSize
-    , riContextLink
-    , riThumbnailHeight
-    , riWidth
-    , riThumbnailWidth
+    -- ** FacetsItemItem
+    , FacetsItemItem
+    , facetsItemItem
+    , fiiAnchor
+    , fiiLabelWithOp
+    , fiiLabel
+
+    -- ** Lr
+    , Lr (..)
 
     -- ** Result
     , Result
@@ -106,29 +114,13 @@ module Network.Google.CustomSearch
     , rLabels
     , rTitle
 
-    -- ** ResultLabels
-    , ResultLabels
-    , resultLabels
-    , rlName
-    , rlDisplayName
-    , rlLabelWithOp
-
-    -- ** SearchSearchInformation
-    , SearchSearchInformation
-    , searchSearchInformation
-    , ssiSearchTime
-    , ssiFormattedSearchTime
-    , ssiTotalResults
-    , ssiFormattedTotalResults
-
-    -- ** SearchCseListSearchType
-    , SearchCseListSearchType (..)
-
-    -- ** SearchCseListLr
-    , SearchCseListLr (..)
-
-    -- ** SearchCseListImgSize
-    , SearchCseListImgSize (..)
+    -- ** SearchInformation
+    , SearchInformation
+    , searchInformation
+    , siSearchTime
+    , siFormattedSearchTime
+    , siTotalResults
+    , siFormattedTotalResults
 
     -- ** Query
     , Query
@@ -171,8 +163,16 @@ module Network.Google.CustomSearch
     , qHq
     , qHighRange
 
-    -- ** SearchCseListSafe
-    , SearchCseListSafe (..)
+    -- ** Filter
+    , Filter (..)
+
+    -- ** BodyLinesItem
+    , BodyLinesItem
+    , bodyLinesItem
+    , bliLink
+    , bliURL
+    , bliHTMLTitle
+    , bliTitle
 
     -- ** Promotion
     , Promotion
@@ -183,6 +183,12 @@ module Network.Google.CustomSearch
     , pLink
     , pHTMLTitle
     , pTitle
+
+    -- ** ImgType
+    , ImgType (..)
+
+    -- ** ImgColorType
+    , ImgColorType (..)
 
     -- ** Search
     , Search
@@ -196,34 +202,28 @@ module Network.Google.CustomSearch
     , sPromotions
     , sSpelling
 
-    -- ** PromotionBodyLines
-    , PromotionBodyLines
-    , promotionBodyLines
-    , pblLink
-    , pblURL
-    , pblHTMLTitle
-    , pblTitle
+    -- ** ImgSize
+    , ImgSize (..)
 
-    -- ** SearchCseListFilter
-    , SearchCseListFilter (..)
+    -- ** Spelling
+    , Spelling
+    , spelling
+    , sCorrectedQuery
+    , sHTMLCorrectedQuery
 
-    -- ** ContextFacets
-    , ContextFacets
-    , contextFacets
-    , cfAnchor
-    , cfLabelWithOp
-    , cfLabel
+    -- ** Safe
+    , Safe (..)
     ) where
 
 import           Network.Google.CustomSearch.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.Search.Cse.List
+import           Network.Google.Resource.Search.CSE.List
 
 {- $resources
 TODO
 -}
 
-type CustomSearchAPI = CseListResource
+type CustomSearchAPI = CSEListResource
 
 customSearchAPI :: Proxy CustomSearchAPI
 customSearchAPI = Proxy

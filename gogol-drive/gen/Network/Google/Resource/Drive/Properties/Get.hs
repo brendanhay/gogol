@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -73,7 +74,7 @@ data PropertiesGet' = PropertiesGet'
     , _pgFileId      :: !Text
     , _pgOAuthToken  :: !(Maybe OAuthToken)
     , _pgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertiesGet'' with the minimum fields required to make a request.
 --
@@ -169,7 +170,7 @@ instance GoogleRequest PropertiesGet' where
         type Rs PropertiesGet' = Property
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PropertiesGet'{..}
-          = go (Just _pgVisibility) _pgFileId _pgPropertyKey
+          = go _pgFileId _pgPropertyKey (Just _pgVisibility)
               _pgQuotaUser
               (Just _pgPrettyPrint)
               _pgUserIP

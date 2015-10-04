@@ -69,6 +69,10 @@ module Network.Google.AppEngine
     , sCode
     , sMessage
 
+    -- ** HTTPHeaders
+    , HTTPHeaders
+    , hTTPHeaders
+
     -- ** Library
     , Library
     , library
@@ -91,6 +95,10 @@ module Network.Google.AppEngine
     , ScriptHandler
     , scriptHandler
     , shScriptPath
+
+    -- ** DetailsItem
+    , DetailsItem
+    , detailsItem
 
     -- ** URLMap
     , URLMap
@@ -123,10 +131,6 @@ module Network.Google.AppEngine
     , aDispatchRules
     , aId
 
-    -- ** VersionEnvVariables
-    , VersionEnvVariables
-    , versionEnvVariables
-
     -- ** HealthCheck
     , HealthCheck
     , healthCheck
@@ -153,10 +157,6 @@ module Network.Google.AppEngine
     , oResponse
     , oName
     , oMetadata
-
-    -- ** VersionBetaSettings
-    , VersionBetaSettings
-    , versionBetaSettings
 
     -- ** StaticDirectoryHandlerHTTPHeaders
     , StaticDirectoryHandlerHTTPHeaders
@@ -194,14 +194,18 @@ module Network.Google.AppEngine
     , asCoolDownPeriod
     , asMaxPendingLatency
 
+    -- ** Response
+    , Response
+    , response
+
+    -- ** Allocations
+    , Allocations
+    , allocations
+
     -- ** APIEndpointHandler
     , APIEndpointHandler
     , apiEndpointHandler
     , aehScriptPath
-
-    -- ** StatusDetails
-    , StatusDetails
-    , statusDetails
 
     -- ** Network
     , Network
@@ -217,28 +221,20 @@ module Network.Google.AppEngine
     , rDiskGb
     , rCPU
 
-    -- ** StaticFilesHandlerHTTPHeaders
-    , StaticFilesHandlerHTTPHeaders
-    , staticFilesHandlerHTTPHeaders
-
     -- ** CPUUtilization
     , CPUUtilization
     , cpuUtilization
     , cuAggregationWindowLength
     , cuTargetUtilization
 
-    -- ** DeploymentFiles
-    , DeploymentFiles
-    , deploymentFiles
-
-    -- ** TrafficSplitAllocations
-    , TrafficSplitAllocations
-    , trafficSplitAllocations
-
     -- ** ManualScaling
     , ManualScaling
     , manualScaling
     , msInstances
+
+    -- ** BetaSettings
+    , BetaSettings
+    , betaSettings
 
     -- ** BasicScaling
     , BasicScaling
@@ -283,6 +279,14 @@ module Network.Google.AppEngine
     , mName
     , mId
 
+    -- ** Metadata
+    , Metadata
+    , metadata
+
+    -- ** Files
+    , Files
+    , files
+
     -- ** StaticFilesHandler
     , StaticFilesHandler
     , staticFilesHandler
@@ -301,9 +305,9 @@ module Network.Google.AppEngine
     , ehErrorCode
     , ehStaticFile
 
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
+    -- ** EnvVariables
+    , EnvVariables
+    , envVariables
 
     -- ** OperationMetadata
     , OperationMetadata
@@ -320,10 +324,6 @@ module Network.Google.AppEngine
     , sourceReference
     , srRepository
     , srRevisionId
-
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
 
     -- ** ContainerInfo
     , ContainerInfo

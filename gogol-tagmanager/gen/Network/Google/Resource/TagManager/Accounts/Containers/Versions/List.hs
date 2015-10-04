@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -75,7 +76,7 @@ data AccountsContainersVersionsList' = AccountsContainersVersionsList'
     , _acvlKey         :: !(Maybe Key)
     , _acvlOAuthToken  :: !(Maybe OAuthToken)
     , _acvlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsList'' with the minimum fields required to make a request.
 --
@@ -181,8 +182,8 @@ instance GoogleRequest
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersVersionsList'{..}
-          = go (Just _acvlHeaders) _acvlAccountId
-              _acvlContainerId
+          = go _acvlAccountId _acvlContainerId
+              (Just _acvlHeaders)
               _acvlQuotaUser
               (Just _acvlPrettyPrint)
               _acvlUserIP

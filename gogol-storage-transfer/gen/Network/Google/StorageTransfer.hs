@@ -85,6 +85,10 @@ module Network.Google.StorageTransfer
     , lorNextPageToken
     , lorOperations
 
+    -- ** DetailsItem
+    , DetailsItem
+    , detailsItem
+
     -- ** PauseTransferOperationRequest
     , PauseTransferOperationRequest
     , pauseTransferOperationRequest
@@ -122,9 +126,9 @@ module Network.Google.StorageTransfer
     , Empty
     , empty
 
-    -- ** StatusDetails
-    , StatusDetails
-    , statusDetails
+    -- ** Response
+    , Response
+    , response
 
     -- ** Date
     , Date
@@ -178,15 +182,15 @@ module Network.Google.StorageTransfer
     , gcsData
     , gdBucketName
 
+    -- ** Metadata
+    , Metadata
+    , metadata
+
     -- ** AwsS3Data
     , AwsS3Data
     , awsS3Data
     , asdBucketName
     , asdAwsAccessKey
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
 
     -- ** HTTPData
     , HTTPData
@@ -252,10 +256,6 @@ module Network.Google.StorageTransfer
     -- ** ResumeTransferOperationRequest
     , ResumeTransferOperationRequest
     , resumeTransferOperationRequest
-
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
     ) where
 
 import           Network.Google.Prelude

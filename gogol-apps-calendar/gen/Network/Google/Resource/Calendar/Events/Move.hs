@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type EventsMoveResource =
          "events" :>
            Capture "eventId" Text :>
              "move" :>
-               QueryParam "sendNotifications" Bool :>
-                 QueryParam "destination" Text :>
+               QueryParam "destination" Text :>
+                 QueryParam "sendNotifications" Bool :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data EventsMove' = EventsMove'
     , _emOAuthToken        :: !(Maybe OAuthToken)
     , _emEventId           :: !Text
     , _emFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsMove'' with the minimum fields required to make a request.
 --
@@ -187,8 +188,8 @@ instance GoogleRequest EventsMove' where
         type Rs EventsMove' = Event
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsMove'{..}
-          = go _emSendNotifications _emCalendarId _emEventId
-              (Just _emDestination)
+          = go _emCalendarId _emEventId (Just _emDestination)
+              _emSendNotifications
               _emQuotaUser
               (Just _emPrettyPrint)
               _emUserIP

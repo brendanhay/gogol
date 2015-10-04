@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.Compute.BackendServices.Patch
     , bspPrettyPrint
     , bspProject
     , bspUserIP
+    , bspPayload
     , bspKey
     , bspOAuthToken
-    , bspBackendService
     , bspFields
     , bspBackendService
     ) where
@@ -71,12 +72,12 @@ data BackendServicesPatch' = BackendServicesPatch'
     , _bspPrettyPrint    :: !Bool
     , _bspProject        :: !Text
     , _bspUserIP         :: !(Maybe Text)
+    , _bspPayload        :: !BackendService
     , _bspKey            :: !(Maybe Key)
     , _bspOAuthToken     :: !(Maybe OAuthToken)
-    , _bspBackendService :: !BackendService
     , _bspFields         :: !(Maybe Text)
     , _bspBackendService :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BackendServicesPatch'' with the minimum fields required to make a request.
 --
@@ -90,29 +91,29 @@ data BackendServicesPatch' = BackendServicesPatch'
 --
 -- * 'bspUserIP'
 --
+-- * 'bspPayload'
+--
 -- * 'bspKey'
 --
 -- * 'bspOAuthToken'
---
--- * 'bspBackendService'
 --
 -- * 'bspFields'
 --
 -- * 'bspBackendService'
 backendServicesPatch'
     :: Text -- ^ 'project'
-    -> BackendService -- ^ 'BackendService'
+    -> BackendService -- ^ 'payload'
     -> Text -- ^ 'backendService'
     -> BackendServicesPatch'
-backendServicesPatch' pBspProject_ pBspBackendService_ pBspBackendService_ =
+backendServicesPatch' pBspProject_ pBspPayload_ pBspBackendService_ =
     BackendServicesPatch'
     { _bspQuotaUser = Nothing
     , _bspPrettyPrint = True
     , _bspProject = pBspProject_
     , _bspUserIP = Nothing
+    , _bspPayload = pBspPayload_
     , _bspKey = Nothing
     , _bspOAuthToken = Nothing
-    , _bspBackendService = pBspBackendService_
     , _bspFields = Nothing
     , _bspBackendService = pBspBackendService_
     }
@@ -141,6 +142,11 @@ bspUserIP :: Lens' BackendServicesPatch' (Maybe Text)
 bspUserIP
   = lens _bspUserIP (\ s a -> s{_bspUserIP = a})
 
+-- | Multipart request metadata.
+bspPayload :: Lens' BackendServicesPatch' BackendService
+bspPayload
+  = lens _bspPayload (\ s a -> s{_bspPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -152,12 +158,6 @@ bspOAuthToken :: Lens' BackendServicesPatch' (Maybe OAuthToken)
 bspOAuthToken
   = lens _bspOAuthToken
       (\ s a -> s{_bspOAuthToken = a})
-
--- | Multipart request metadata.
-bspBackendService :: Lens' BackendServicesPatch' BackendService
-bspBackendService
-  = lens _bspBackendService
-      (\ s a -> s{_bspBackendService = a})
 
 -- | Selector specifying which fields to include in a partial response.
 bspFields :: Lens' BackendServicesPatch' (Maybe Text)
@@ -185,7 +185,7 @@ instance GoogleRequest BackendServicesPatch' where
               _bspKey
               _bspOAuthToken
               (Just AltJSON)
-              _bspBackendService
+              _bspPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BackendServicesPatchResource)

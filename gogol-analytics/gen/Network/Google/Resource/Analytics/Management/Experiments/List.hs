@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,8 +58,8 @@ type ManagementExperimentsListResource =
                "profiles" :>
                  Capture "profileId" Text :>
                    "experiments" :>
-                     QueryParam "max-results" Int32 :>
-                       QueryParam "start-index" Int32 :>
+                     QueryParam "start-index" Int32 :>
+                       QueryParam "max-results" Int32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -83,7 +84,7 @@ data ManagementExperimentsList' = ManagementExperimentsList'
     , _melStartIndex    :: !(Maybe Int32)
     , _melMaxResults    :: !(Maybe Int32)
     , _melFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsList'' with the minimum fields required to make a request.
 --
@@ -204,9 +205,9 @@ instance GoogleRequest ManagementExperimentsList'
         type Rs ManagementExperimentsList' = Experiments
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementExperimentsList'{..}
-          = go _melMaxResults _melStartIndex _melAccountId
-              _melWebPropertyId
-              _melProfileId
+          = go _melAccountId _melWebPropertyId _melProfileId
+              _melStartIndex
+              _melMaxResults
               _melQuotaUser
               (Just _melPrettyPrint)
               _melUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,16 +55,16 @@ import           Network.Google.YouTube.Types
 -- 'LiveBroadcastsList'' request conforms to.
 type LiveBroadcastsListResource =
      "liveBroadcasts" :>
-       QueryParam "broadcastStatus"
-         YouTubeLiveBroadcastsListBroadcastStatus
-         :>
-         QueryParam "id" Text :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "mine" Bool :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "onBehalfOfContentOwnerChannel" Text :>
+       QueryParam "part" Text :>
+         QueryParam "mine" Bool :>
+           QueryParam "broadcastStatus"
+             YouTubeLiveBroadcastsListBroadcastStatus
+             :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                 QueryParam "id" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "part" Text :>
+                     QueryParam "maxResults" Word32 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -92,7 +93,7 @@ data LiveBroadcastsList' = LiveBroadcastsList'
     , _lblOAuthToken                    :: !(Maybe OAuthToken)
     , _lblMaxResults                    :: !Word32
     , _lblFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsList'' with the minimum fields required to make a request.
 --
@@ -267,12 +268,12 @@ instance GoogleRequest LiveBroadcastsList' where
              LiveBroadcastListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveBroadcastsList'{..}
-          = go _lblBroadcastStatus _lblId (Just _lblMaxResults)
-              _lblMine
+          = go (Just _lblPart) _lblMine _lblBroadcastStatus
               _lblOnBehalfOfContentOwner
               _lblOnBehalfOfContentOwnerChannel
+              _lblId
               _lblPageToken
-              (Just _lblPart)
+              (Just _lblMaxResults)
               _lblQuotaUser
               (Just _lblPrettyPrint)
               _lblUserIP

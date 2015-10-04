@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.Autoscaler.Autoscalers.Update
     , auProject
     , auUserIP
     , auZone
+    , auPayload
     , auKey
-    , auAutoscaler
     , auAutoscaler
     , auOAuthToken
     , auFields
@@ -73,12 +74,12 @@ data AutoscalersUpdate' = AutoscalersUpdate'
     , _auProject     :: !Text
     , _auUserIP      :: !(Maybe Text)
     , _auZone        :: !Text
+    , _auPayload     :: !Autoscaler
     , _auKey         :: !(Maybe Key)
-    , _auAutoscaler  :: !Autoscaler
     , _auAutoscaler  :: !Text
     , _auOAuthToken  :: !(Maybe OAuthToken)
     , _auFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersUpdate'' with the minimum fields required to make a request.
 --
@@ -94,9 +95,9 @@ data AutoscalersUpdate' = AutoscalersUpdate'
 --
 -- * 'auZone'
 --
--- * 'auKey'
+-- * 'auPayload'
 --
--- * 'auAutoscaler'
+-- * 'auKey'
 --
 -- * 'auAutoscaler'
 --
@@ -106,18 +107,18 @@ data AutoscalersUpdate' = AutoscalersUpdate'
 autoscalersUpdate'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> Autoscaler -- ^ 'Autoscaler'
+    -> Autoscaler -- ^ 'payload'
     -> Text -- ^ 'autoscaler'
     -> AutoscalersUpdate'
-autoscalersUpdate' pAuProject_ pAuZone_ pAuAutoscaler_ pAuAutoscaler_ =
+autoscalersUpdate' pAuProject_ pAuZone_ pAuPayload_ pAuAutoscaler_ =
     AutoscalersUpdate'
     { _auQuotaUser = Nothing
     , _auPrettyPrint = True
     , _auProject = pAuProject_
     , _auUserIP = Nothing
     , _auZone = pAuZone_
+    , _auPayload = pAuPayload_
     , _auKey = Nothing
-    , _auAutoscaler = pAuAutoscaler_
     , _auAutoscaler = pAuAutoscaler_
     , _auOAuthToken = Nothing
     , _auFields = Nothing
@@ -150,16 +151,16 @@ auUserIP = lens _auUserIP (\ s a -> s{_auUserIP = a})
 auZone :: Lens' AutoscalersUpdate' Text
 auZone = lens _auZone (\ s a -> s{_auZone = a})
 
+-- | Multipart request metadata.
+auPayload :: Lens' AutoscalersUpdate' Autoscaler
+auPayload
+  = lens _auPayload (\ s a -> s{_auPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 auKey :: Lens' AutoscalersUpdate' (Maybe Key)
 auKey = lens _auKey (\ s a -> s{_auKey = a})
-
--- | Multipart request metadata.
-auAutoscaler :: Lens' AutoscalersUpdate' Autoscaler
-auAutoscaler
-  = lens _auAutoscaler (\ s a -> s{_auAutoscaler = a})
 
 -- | Name of the Autoscaler resource.
 auAutoscaler :: Lens' AutoscalersUpdate' Text
@@ -190,7 +191,7 @@ instance GoogleRequest AutoscalersUpdate' where
               _auKey
               _auOAuthToken
               (Just AltJSON)
-              _auAutoscaler
+              _auPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AutoscalersUpdateResource)

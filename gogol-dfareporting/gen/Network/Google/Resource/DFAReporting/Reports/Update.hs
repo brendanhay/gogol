@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.DFAReporting.Reports.Update
     , ruUserIP
     , ruReportId
     , ruProfileId
-    , ruReport
+    , ruPayload
     , ruKey
     , ruOAuthToken
     , ruFields
@@ -69,11 +70,11 @@ data ReportsUpdate' = ReportsUpdate'
     , _ruUserIP      :: !(Maybe Text)
     , _ruReportId    :: !Int64
     , _ruProfileId   :: !Int64
-    , _ruReport      :: !Report
+    , _ruPayload     :: !Report
     , _ruKey         :: !(Maybe Key)
     , _ruOAuthToken  :: !(Maybe OAuthToken)
     , _ruFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsUpdate'' with the minimum fields required to make a request.
 --
@@ -89,7 +90,7 @@ data ReportsUpdate' = ReportsUpdate'
 --
 -- * 'ruProfileId'
 --
--- * 'ruReport'
+-- * 'ruPayload'
 --
 -- * 'ruKey'
 --
@@ -99,16 +100,16 @@ data ReportsUpdate' = ReportsUpdate'
 reportsUpdate'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
-    -> Report -- ^ 'Report'
+    -> Report -- ^ 'payload'
     -> ReportsUpdate'
-reportsUpdate' pRuReportId_ pRuProfileId_ pRuReport_ =
+reportsUpdate' pRuReportId_ pRuProfileId_ pRuPayload_ =
     ReportsUpdate'
     { _ruQuotaUser = Nothing
     , _ruPrettyPrint = True
     , _ruUserIP = Nothing
     , _ruReportId = pRuReportId_
     , _ruProfileId = pRuProfileId_
-    , _ruReport = pRuReport_
+    , _ruPayload = pRuPayload_
     , _ruKey = Nothing
     , _ruOAuthToken = Nothing
     , _ruFields = Nothing
@@ -143,8 +144,9 @@ ruProfileId
   = lens _ruProfileId (\ s a -> s{_ruProfileId = a})
 
 -- | Multipart request metadata.
-ruReport :: Lens' ReportsUpdate' Report
-ruReport = lens _ruReport (\ s a -> s{_ruReport = a})
+ruPayload :: Lens' ReportsUpdate' Report
+ruPayload
+  = lens _ruPayload (\ s a -> s{_ruPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -176,7 +178,7 @@ instance GoogleRequest ReportsUpdate' where
               _ruKey
               _ruOAuthToken
               (Just AltJSON)
-              _ruReport
+              _ruPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReportsUpdateResource)

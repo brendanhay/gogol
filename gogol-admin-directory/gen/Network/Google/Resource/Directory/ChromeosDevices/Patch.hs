@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.Directory.ChromeosDevices.Patch
     -- * Request Lenses
     , cdpQuotaUser
     , cdpPrettyPrint
-    , cdpChromeOSDevice
     , cdpUserIP
+    , cdpPayload
     , cdpCustomerId
     , cdpKey
     , cdpDeviceId
@@ -70,17 +71,17 @@ type ChromeosDevicesPatchResource =
 --
 -- /See:/ 'chromeosDevicesPatch'' smart constructor.
 data ChromeosDevicesPatch' = ChromeosDevicesPatch'
-    { _cdpQuotaUser      :: !(Maybe Text)
-    , _cdpPrettyPrint    :: !Bool
-    , _cdpChromeOSDevice :: !ChromeOSDevice
-    , _cdpUserIP         :: !(Maybe Text)
-    , _cdpCustomerId     :: !Text
-    , _cdpKey            :: !(Maybe Key)
-    , _cdpDeviceId       :: !Text
-    , _cdpProjection     :: !(Maybe DirectoryChromeosDevicesPatchProjection)
-    , _cdpOAuthToken     :: !(Maybe OAuthToken)
-    , _cdpFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cdpQuotaUser   :: !(Maybe Text)
+    , _cdpPrettyPrint :: !Bool
+    , _cdpUserIP      :: !(Maybe Text)
+    , _cdpPayload     :: !ChromeOSDevice
+    , _cdpCustomerId  :: !Text
+    , _cdpKey         :: !(Maybe Key)
+    , _cdpDeviceId    :: !Text
+    , _cdpProjection  :: !(Maybe DirectoryChromeosDevicesPatchProjection)
+    , _cdpOAuthToken  :: !(Maybe OAuthToken)
+    , _cdpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChromeosDevicesPatch'' with the minimum fields required to make a request.
 --
@@ -90,9 +91,9 @@ data ChromeosDevicesPatch' = ChromeosDevicesPatch'
 --
 -- * 'cdpPrettyPrint'
 --
--- * 'cdpChromeOSDevice'
---
 -- * 'cdpUserIP'
+--
+-- * 'cdpPayload'
 --
 -- * 'cdpCustomerId'
 --
@@ -106,16 +107,16 @@ data ChromeosDevicesPatch' = ChromeosDevicesPatch'
 --
 -- * 'cdpFields'
 chromeosDevicesPatch'
-    :: ChromeOSDevice -- ^ 'ChromeOSDevice'
+    :: ChromeOSDevice -- ^ 'payload'
     -> Text -- ^ 'customerId'
     -> Text -- ^ 'deviceId'
     -> ChromeosDevicesPatch'
-chromeosDevicesPatch' pCdpChromeOSDevice_ pCdpCustomerId_ pCdpDeviceId_ =
+chromeosDevicesPatch' pCdpPayload_ pCdpCustomerId_ pCdpDeviceId_ =
     ChromeosDevicesPatch'
     { _cdpQuotaUser = Nothing
     , _cdpPrettyPrint = True
-    , _cdpChromeOSDevice = pCdpChromeOSDevice_
     , _cdpUserIP = Nothing
+    , _cdpPayload = pCdpPayload_
     , _cdpCustomerId = pCdpCustomerId_
     , _cdpKey = Nothing
     , _cdpDeviceId = pCdpDeviceId_
@@ -137,17 +138,16 @@ cdpPrettyPrint
   = lens _cdpPrettyPrint
       (\ s a -> s{_cdpPrettyPrint = a})
 
--- | Multipart request metadata.
-cdpChromeOSDevice :: Lens' ChromeosDevicesPatch' ChromeOSDevice
-cdpChromeOSDevice
-  = lens _cdpChromeOSDevice
-      (\ s a -> s{_cdpChromeOSDevice = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 cdpUserIP :: Lens' ChromeosDevicesPatch' (Maybe Text)
 cdpUserIP
   = lens _cdpUserIP (\ s a -> s{_cdpUserIP = a})
+
+-- | Multipart request metadata.
+cdpPayload :: Lens' ChromeosDevicesPatch' ChromeOSDevice
+cdpPayload
+  = lens _cdpPayload (\ s a -> s{_cdpPayload = a})
 
 -- | Immutable id of the Google Apps account
 cdpCustomerId :: Lens' ChromeosDevicesPatch' Text
@@ -191,7 +191,7 @@ instance GoogleRequest ChromeosDevicesPatch' where
         type Rs ChromeosDevicesPatch' = ChromeOSDevice
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u ChromeosDevicesPatch'{..}
-          = go _cdpProjection _cdpCustomerId _cdpDeviceId
+          = go _cdpCustomerId _cdpDeviceId _cdpProjection
               _cdpQuotaUser
               (Just _cdpPrettyPrint)
               _cdpUserIP
@@ -199,7 +199,7 @@ instance GoogleRequest ChromeosDevicesPatch' where
               _cdpKey
               _cdpOAuthToken
               (Just AltJSON)
-              _cdpChromeOSDevice
+              _cdpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChromeosDevicesPatchResource)

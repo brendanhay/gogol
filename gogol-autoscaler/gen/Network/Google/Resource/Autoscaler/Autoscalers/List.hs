@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type AutoscalersListResource =
            Capture "zone" Text :>
              "autoscalers" :>
                QueryParam "filter" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "pageToken" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Word32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -81,7 +82,7 @@ data AutoscalersList' = AutoscalersList'
     , _alOAuthToken  :: !(Maybe OAuthToken)
     , _alMaxResults  :: !Word32
     , _alFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersList'' with the minimum fields required to make a request.
 --
@@ -188,9 +189,8 @@ instance GoogleRequest AutoscalersList' where
         type Rs AutoscalersList' = AutoscalerListResponse
         request = requestWithRoute defReq autoscalerURL
         requestWithRoute r u AutoscalersList'{..}
-          = go _alFilter (Just _alMaxResults) _alPageToken
-              _alProject
-              _alZone
+          = go _alProject _alZone _alFilter _alPageToken
+              (Just _alMaxResults)
               _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP

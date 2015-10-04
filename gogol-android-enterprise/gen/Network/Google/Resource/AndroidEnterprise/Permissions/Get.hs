@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -71,7 +72,7 @@ data PermissionsGet' = PermissionsGet'
     , _pgOAuthToken   :: !(Maybe OAuthToken)
     , _pgPermissionId :: !Text
     , _pgFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsGet'' with the minimum fields required to make a request.
 --
@@ -161,7 +162,7 @@ instance GoogleRequest PermissionsGet' where
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u PermissionsGet'{..}
-          = go _pgLanguage _pgPermissionId _pgQuotaUser
+          = go _pgPermissionId _pgLanguage _pgQuotaUser
               (Just _pgPrettyPrint)
               _pgUserIP
               _pgFields

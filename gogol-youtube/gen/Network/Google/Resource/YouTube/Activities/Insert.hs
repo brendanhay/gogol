@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -40,8 +41,8 @@ module Network.Google.Resource.YouTube.Activities.Insert
     , aiPart
     , aiPrettyPrint
     , aiUserIP
+    , aiPayload
     , aiKey
-    , aiActivity
     , aiOAuthToken
     , aiFields
     ) where
@@ -77,11 +78,11 @@ data ActivitiesInsert' = ActivitiesInsert'
     , _aiPart        :: !Text
     , _aiPrettyPrint :: !Bool
     , _aiUserIP      :: !(Maybe Text)
+    , _aiPayload     :: !Activity
     , _aiKey         :: !(Maybe Key)
-    , _aiActivity    :: !Activity
     , _aiOAuthToken  :: !(Maybe OAuthToken)
     , _aiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesInsert'' with the minimum fields required to make a request.
 --
@@ -95,25 +96,25 @@ data ActivitiesInsert' = ActivitiesInsert'
 --
 -- * 'aiUserIP'
 --
--- * 'aiKey'
+-- * 'aiPayload'
 --
--- * 'aiActivity'
+-- * 'aiKey'
 --
 -- * 'aiOAuthToken'
 --
 -- * 'aiFields'
 activitiesInsert'
     :: Text -- ^ 'part'
-    -> Activity -- ^ 'Activity'
+    -> Activity -- ^ 'payload'
     -> ActivitiesInsert'
-activitiesInsert' pAiPart_ pAiActivity_ =
+activitiesInsert' pAiPart_ pAiPayload_ =
     ActivitiesInsert'
     { _aiQuotaUser = Nothing
     , _aiPart = pAiPart_
     , _aiPrettyPrint = True
     , _aiUserIP = Nothing
+    , _aiPayload = pAiPayload_
     , _aiKey = Nothing
-    , _aiActivity = pAiActivity_
     , _aiOAuthToken = Nothing
     , _aiFields = Nothing
     }
@@ -142,16 +143,16 @@ aiPrettyPrint
 aiUserIP :: Lens' ActivitiesInsert' (Maybe Text)
 aiUserIP = lens _aiUserIP (\ s a -> s{_aiUserIP = a})
 
+-- | Multipart request metadata.
+aiPayload :: Lens' ActivitiesInsert' Activity
+aiPayload
+  = lens _aiPayload (\ s a -> s{_aiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 aiKey :: Lens' ActivitiesInsert' (Maybe Key)
 aiKey = lens _aiKey (\ s a -> s{_aiKey = a})
-
--- | Multipart request metadata.
-aiActivity :: Lens' ActivitiesInsert' Activity
-aiActivity
-  = lens _aiActivity (\ s a -> s{_aiActivity = a})
 
 -- | OAuth 2.0 token for the current user.
 aiOAuthToken :: Lens' ActivitiesInsert' (Maybe OAuthToken)
@@ -177,7 +178,7 @@ instance GoogleRequest ActivitiesInsert' where
               _aiKey
               _aiOAuthToken
               (Just AltJSON)
-              _aiActivity
+              _aiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ActivitiesInsertResource)

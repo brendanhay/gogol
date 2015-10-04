@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.AndroidPublisher.Edits.Testers.Patch
     , etptQuotaUser
     , etptTrack
     , etptPrettyPrint
-    , etptTesters
     , etptPackageName
     , etptUserIP
+    , etptPayload
     , etptKey
     , etptOAuthToken
     , etptEditId
@@ -70,14 +71,14 @@ data EditsTestersPatch' = EditsTestersPatch'
     { _etptQuotaUser   :: !(Maybe Text)
     , _etptTrack       :: !AndroidPublisherEditsTestersPatchTrack
     , _etptPrettyPrint :: !Bool
-    , _etptTesters     :: !Testers
     , _etptPackageName :: !Text
     , _etptUserIP      :: !(Maybe Text)
+    , _etptPayload     :: !Testers
     , _etptKey         :: !(Maybe Key)
     , _etptOAuthToken  :: !(Maybe OAuthToken)
     , _etptEditId      :: !Text
     , _etptFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsTestersPatch'' with the minimum fields required to make a request.
 --
@@ -89,11 +90,11 @@ data EditsTestersPatch' = EditsTestersPatch'
 --
 -- * 'etptPrettyPrint'
 --
--- * 'etptTesters'
---
 -- * 'etptPackageName'
 --
 -- * 'etptUserIP'
+--
+-- * 'etptPayload'
 --
 -- * 'etptKey'
 --
@@ -104,18 +105,18 @@ data EditsTestersPatch' = EditsTestersPatch'
 -- * 'etptFields'
 editsTestersPatch'
     :: AndroidPublisherEditsTestersPatchTrack -- ^ 'track'
-    -> Testers -- ^ 'Testers'
     -> Text -- ^ 'packageName'
+    -> Testers -- ^ 'payload'
     -> Text -- ^ 'editId'
     -> EditsTestersPatch'
-editsTestersPatch' pEtptTrack_ pEtptTesters_ pEtptPackageName_ pEtptEditId_ =
+editsTestersPatch' pEtptTrack_ pEtptPackageName_ pEtptPayload_ pEtptEditId_ =
     EditsTestersPatch'
     { _etptQuotaUser = Nothing
     , _etptTrack = pEtptTrack_
     , _etptPrettyPrint = True
-    , _etptTesters = pEtptTesters_
     , _etptPackageName = pEtptPackageName_
     , _etptUserIP = Nothing
+    , _etptPayload = pEtptPayload_
     , _etptKey = Nothing
     , _etptOAuthToken = Nothing
     , _etptEditId = pEtptEditId_
@@ -140,11 +141,6 @@ etptPrettyPrint
   = lens _etptPrettyPrint
       (\ s a -> s{_etptPrettyPrint = a})
 
--- | Multipart request metadata.
-etptTesters :: Lens' EditsTestersPatch' Testers
-etptTesters
-  = lens _etptTesters (\ s a -> s{_etptTesters = a})
-
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
 etptPackageName :: Lens' EditsTestersPatch' Text
@@ -157,6 +153,11 @@ etptPackageName
 etptUserIP :: Lens' EditsTestersPatch' (Maybe Text)
 etptUserIP
   = lens _etptUserIP (\ s a -> s{_etptUserIP = a})
+
+-- | Multipart request metadata.
+etptPayload :: Lens' EditsTestersPatch' Testers
+etptPayload
+  = lens _etptPayload (\ s a -> s{_etptPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -196,7 +197,7 @@ instance GoogleRequest EditsTestersPatch' where
               _etptKey
               _etptOAuthToken
               (Just AltJSON)
-              _etptTesters
+              _etptPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EditsTestersPatchResource)

@@ -82,10 +82,6 @@ module Network.Google.Monitoring
     , pdubUpperBound
     , pdubCount
 
-    -- ** WriteTimeseriesRequestCommonLabels
-    , WriteTimeseriesRequestCommonLabels
-    , writeTimeseriesRequestCommonLabels
-
     -- ** WriteTimeseriesRequest
     , WriteTimeseriesRequest
     , writeTimeseriesRequest
@@ -113,6 +109,10 @@ module Network.Google.Monitoring
     , TimeseriesDescriptorLabels
     , timeseriesDescriptorLabels
 
+    -- ** CommonLabels
+    , CommonLabels
+    , commonLabels
+
     -- ** PointDistributionBucket
     , PointDistributionBucket
     , pointDistributionBucket
@@ -122,9 +122,6 @@ module Network.Google.Monitoring
 
     -- ** CloudMonitoringTimeseriesListAggregator
     , CloudMonitoringTimeseriesListAggregator (..)
-
-    -- ** CloudMonitoringTimeseriesDescriptorsListAggregator
-    , CloudMonitoringTimeseriesDescriptorsListAggregator (..)
 
     -- ** TimeseriesDescriptorLabel
     , TimeseriesDescriptorLabel
@@ -138,6 +135,9 @@ module Network.Google.Monitoring
     , pdOverflowBucket
     , pdBuckets
     , pdUnderflowBucket
+
+    -- ** Aggregator
+    , Aggregator (..)
 
     -- ** Point
     , Point

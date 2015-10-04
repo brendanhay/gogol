@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Spectrum.Paws.Register
     , prQuotaUser
     , prPrettyPrint
     , prUserIP
+    , prPayload
     , prKey
-    , prPawsRegisterRequest
     , prOAuthToken
     , prFields
     ) where
@@ -62,14 +63,14 @@ type PawsRegisterResource =
 --
 -- /See:/ 'pawsRegister'' smart constructor.
 data PawsRegister' = PawsRegister'
-    { _prQuotaUser           :: !(Maybe Text)
-    , _prPrettyPrint         :: !Bool
-    , _prUserIP              :: !(Maybe Text)
-    , _prKey                 :: !(Maybe Key)
-    , _prPawsRegisterRequest :: !PawsRegisterRequest
-    , _prOAuthToken          :: !(Maybe OAuthToken)
-    , _prFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _prQuotaUser   :: !(Maybe Text)
+    , _prPrettyPrint :: !Bool
+    , _prUserIP      :: !(Maybe Text)
+    , _prPayload     :: !PawsRegisterRequest
+    , _prKey         :: !(Maybe Key)
+    , _prOAuthToken  :: !(Maybe OAuthToken)
+    , _prFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsRegister'' with the minimum fields required to make a request.
 --
@@ -81,23 +82,23 @@ data PawsRegister' = PawsRegister'
 --
 -- * 'prUserIP'
 --
--- * 'prKey'
+-- * 'prPayload'
 --
--- * 'prPawsRegisterRequest'
+-- * 'prKey'
 --
 -- * 'prOAuthToken'
 --
 -- * 'prFields'
 pawsRegister'
-    :: PawsRegisterRequest -- ^ 'PawsRegisterRequest'
+    :: PawsRegisterRequest -- ^ 'payload'
     -> PawsRegister'
-pawsRegister' pPrPawsRegisterRequest_ =
+pawsRegister' pPrPayload_ =
     PawsRegister'
     { _prQuotaUser = Nothing
     , _prPrettyPrint = True
     , _prUserIP = Nothing
+    , _prPayload = pPrPayload_
     , _prKey = Nothing
-    , _prPawsRegisterRequest = pPrPawsRegisterRequest_
     , _prOAuthToken = Nothing
     , _prFields = Nothing
     }
@@ -120,17 +121,16 @@ prPrettyPrint
 prUserIP :: Lens' PawsRegister' (Maybe Text)
 prUserIP = lens _prUserIP (\ s a -> s{_prUserIP = a})
 
+-- | Multipart request metadata.
+prPayload :: Lens' PawsRegister' PawsRegisterRequest
+prPayload
+  = lens _prPayload (\ s a -> s{_prPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 prKey :: Lens' PawsRegister' (Maybe Key)
 prKey = lens _prKey (\ s a -> s{_prKey = a})
-
--- | Multipart request metadata.
-prPawsRegisterRequest :: Lens' PawsRegister' PawsRegisterRequest
-prPawsRegisterRequest
-  = lens _prPawsRegisterRequest
-      (\ s a -> s{_prPawsRegisterRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 prOAuthToken :: Lens' PawsRegister' (Maybe OAuthToken)
@@ -154,7 +154,7 @@ instance GoogleRequest PawsRegister' where
               _prKey
               _prOAuthToken
               (Just AltJSON)
-              _prPawsRegisterRequest
+              _prPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PawsRegisterResource)

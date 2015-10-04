@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type TurnBasedMatchesRematchResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
          "rematch" :>
-           QueryParam "language" Text :>
-             QueryParam "requestId" Int64 :>
+           QueryParam "requestId" Int64 :>
+             QueryParam "language" Text :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -80,7 +81,7 @@ data TurnBasedMatchesRematch' = TurnBasedMatchesRematch'
     , _tbmrOAuthToken  :: !(Maybe OAuthToken)
     , _tbmrMatchId     :: !Text
     , _tbmrFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesRematch'' with the minimum fields required to make a request.
 --
@@ -183,7 +184,7 @@ instance GoogleRequest TurnBasedMatchesRematch' where
              TurnBasedMatchRematch
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesRematch'{..}
-          = go _tbmrLanguage _tbmrRequestId _tbmrMatchId
+          = go _tbmrMatchId _tbmrRequestId _tbmrLanguage
               _tbmrQuotaUser
               (Just _tbmrPrettyPrint)
               _tbmrUserIP

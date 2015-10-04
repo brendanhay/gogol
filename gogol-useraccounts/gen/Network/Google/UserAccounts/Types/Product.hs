@@ -18,105 +18,6 @@ module Network.Google.UserAccounts.Types.Product where
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types.Sum
 
---
--- /See:/ 'operationWarnings' smart constructor.
-data OperationWarnings = OperationWarnings
-    { _owData    :: !(Maybe [OperationWarningsData])
-    , _owCode    :: !(Maybe OperationWarningsCode)
-    , _owMessage :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OperationWarnings' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'owData'
---
--- * 'owCode'
---
--- * 'owMessage'
-operationWarnings
-    :: OperationWarnings
-operationWarnings =
-    OperationWarnings
-    { _owData = Nothing
-    , _owCode = Nothing
-    , _owMessage = Nothing
-    }
-
--- | [Output Only] Metadata for this warning in key: value format.
-owData :: Lens' OperationWarnings [OperationWarningsData]
-owData
-  = lens _owData (\ s a -> s{_owData = a}) . _Default .
-      _Coerce
-
--- | [Output Only] The warning type identifier for this warning.
-owCode :: Lens' OperationWarnings (Maybe OperationWarningsCode)
-owCode = lens _owCode (\ s a -> s{_owCode = a})
-
--- | [Output Only] Optional human-readable details for this warning.
-owMessage :: Lens' OperationWarnings (Maybe Text)
-owMessage
-  = lens _owMessage (\ s a -> s{_owMessage = a})
-
-instance FromJSON OperationWarnings where
-        parseJSON
-          = withObject "OperationWarnings"
-              (\ o ->
-                 OperationWarnings <$>
-                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
-                     (o .:? "message"))
-
-instance ToJSON OperationWarnings where
-        toJSON OperationWarnings{..}
-          = object
-              (catMaybes
-                 [("data" .=) <$> _owData, ("code" .=) <$> _owCode,
-                  ("message" .=) <$> _owMessage])
-
---
--- /See:/ 'operationWarningsData' smart constructor.
-data OperationWarningsData = OperationWarningsData
-    { _owdValue :: !(Maybe Text)
-    , _owdKey   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OperationWarningsData' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'owdValue'
---
--- * 'owdKey'
-operationWarningsData
-    :: OperationWarningsData
-operationWarningsData =
-    OperationWarningsData
-    { _owdValue = Nothing
-    , _owdKey = Nothing
-    }
-
--- | [Output Only] A warning data value corresponding to the key.
-owdValue :: Lens' OperationWarningsData (Maybe Text)
-owdValue = lens _owdValue (\ s a -> s{_owdValue = a})
-
--- | [Output Only] A key for the warning data.
-owdKey :: Lens' OperationWarningsData (Maybe Text)
-owdKey = lens _owdKey (\ s a -> s{_owdKey = a})
-
-instance FromJSON OperationWarningsData where
-        parseJSON
-          = withObject "OperationWarningsData"
-              (\ o ->
-                 OperationWarningsData <$>
-                   (o .:? "value") <*> (o .:? "key"))
-
-instance ToJSON OperationWarningsData where
-        toJSON OperationWarningsData{..}
-          = object
-              (catMaybes
-                 [("value" .=) <$> _owdValue, ("key" .=) <$> _owdKey])
-
 -- | Contains a list of Operation resources.
 --
 -- /See:/ 'operationList' smart constructor.
@@ -126,7 +27,7 @@ data OperationList = OperationList
     , _olItems         :: !(Maybe [Operation])
     , _olSelfLink      :: !(Maybe Text)
     , _olId            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationList' with the minimum fields required to make a request.
 --
@@ -209,7 +110,7 @@ data Group = Group
     , _gCreationTimestamp :: !(Maybe Text)
     , _gId                :: !(Maybe Word64)
     , _gDescription       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Group' with the minimum fields required to make a request.
 --
@@ -313,7 +214,7 @@ data GroupList = GroupList
     , _glItems         :: !(Maybe [Group])
     , _glSelfLink      :: !(Maybe Text)
     , _glId            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupList' with the minimum fields required to make a request.
 --
@@ -390,15 +291,15 @@ instance ToJSON GroupList where
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
     { _oTargetId            :: !(Maybe Word64)
-    , _oStatus              :: !(Maybe OperationStatus)
+    , _oStatus              :: !(Maybe Status)
     , _oInsertTime          :: !(Maybe Text)
     , _oProgress            :: !(Maybe Int32)
     , _oStartTime           :: !(Maybe Text)
     , _oKind                :: !Text
-    , _oError               :: !(Maybe OperationError)
+    , _oError               :: !(Maybe Error')
     , _oHTTPErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
-    , _oWarnings            :: !(Maybe [OperationWarnings])
+    , _oWarnings            :: !(Maybe [WarningsItem])
     , _oHTTPErrorStatusCode :: !(Maybe Int32)
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
@@ -411,7 +312,7 @@ data Operation = Operation
     , _oRegion              :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
     , _oClientOperationId   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -496,7 +397,7 @@ oTargetId
 
 -- | [Output Only] Status of the operation. Can be one of the following:
 -- PENDING, RUNNING, or DONE.
-oStatus :: Lens' Operation (Maybe OperationStatus)
+oStatus :: Lens' Operation (Maybe Status)
 oStatus = lens _oStatus (\ s a -> s{_oStatus = a})
 
 -- | [Output Only] The time that this operation was requested. This is in
@@ -527,7 +428,7 @@ oKind = lens _oKind (\ s a -> s{_oKind = a})
 
 -- | [Output Only] If errors are generated during processing of the
 -- operation, this field will be populated.
-oError :: Lens' Operation (Maybe OperationError)
+oError :: Lens' Operation (Maybe Error')
 oError = lens _oError (\ s a -> s{_oError = a})
 
 -- | [Output Only] If the operation fails, this field contains the HTTP error
@@ -543,7 +444,7 @@ oZone = lens _oZone (\ s a -> s{_oZone = a})
 
 -- | [Output Only] If warning messages are generated during processing of the
 -- operation, this field will be populated.
-oWarnings :: Lens' Operation [OperationWarnings]
+oWarnings :: Lens' Operation [WarningsItem]
 oWarnings
   = lens _oWarnings (\ s a -> s{_oWarnings = a}) .
       _Default
@@ -669,6 +570,42 @@ instance ToJSON Operation where
                   ("targetLink" .=) <$> _oTargetLink,
                   ("clientOperationId" .=) <$> _oClientOperationId])
 
+-- | [Output Only] If errors are generated during processing of the
+-- operation, this field will be populated.
+--
+-- /See:/ 'error'' smart constructor.
+newtype Error' = Error'
+    { _eErrors :: Maybe [ErrorsItem]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Error' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eErrors'
+error'
+    :: Error'
+error' =
+    Error'
+    { _eErrors = Nothing
+    }
+
+-- | [Output Only] The array of errors encountered while processing this
+-- operation.
+eErrors :: Lens' Error' [ErrorsItem]
+eErrors
+  = lens _eErrors (\ s a -> s{_eErrors = a}) . _Default
+      . _Coerce
+
+instance FromJSON Error' where
+        parseJSON
+          = withObject "Error"
+              (\ o -> Error' <$> (o .:? "errors" .!= mempty))
+
+instance ToJSON Error' where
+        toJSON Error'{..}
+          = object (catMaybes [("errors" .=) <$> _eErrors])
+
 --
 -- /See:/ 'userList' smart constructor.
 data UserList = UserList
@@ -677,7 +614,7 @@ data UserList = UserList
     , _ulItems         :: !(Maybe [User])
     , _ulSelfLink      :: !(Maybe Text)
     , _ulId            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserList' with the minimum fields required to make a request.
 --
@@ -758,7 +695,7 @@ data PublicKey = PublicKey
     , _pkCreationTimestamp   :: !(Maybe Text)
     , _pkExpirationTimestamp :: !(Maybe Text)
     , _pkDescription         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublicKey' with the minimum fields required to make a request.
 --
@@ -849,7 +786,7 @@ data User = User
     , _uCreationTimestamp :: !(Maybe Text)
     , _uId                :: !(Maybe Word64)
     , _uDescription       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
@@ -976,7 +913,7 @@ data LinuxAccountViews = LinuxAccountViews
     { _lavUserViews  :: !(Maybe [LinuxUserView])
     , _lavKind       :: !Text
     , _lavGroupViews :: !(Maybe [LinuxGroupView])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinuxAccountViews' with the minimum fields required to make a request.
 --
@@ -1041,7 +978,7 @@ data LinuxGroupView = LinuxGroupView
     { _lgvMembers   :: !(Maybe [Text])
     , _lgvGid       :: !(Maybe Word32)
     , _lgvGroupName :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinuxGroupView' with the minimum fields required to make a request.
 --
@@ -1097,7 +1034,7 @@ instance ToJSON LinuxGroupView where
 -- /See:/ 'groupsAddMemberRequest' smart constructor.
 newtype GroupsAddMemberRequest = GroupsAddMemberRequest
     { _gamrUsers :: Maybe [Text]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsAddMemberRequest' with the minimum fields required to make a request.
 --
@@ -1130,10 +1067,66 @@ instance ToJSON GroupsAddMemberRequest where
           = object (catMaybes [("users" .=) <$> _gamrUsers])
 
 --
+-- /See:/ 'warningsItem' smart constructor.
+data WarningsItem = WarningsItem
+    { _wiData    :: !(Maybe [DataItem])
+    , _wiCode    :: !(Maybe WarningsItemCode)
+    , _wiMessage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WarningsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wiData'
+--
+-- * 'wiCode'
+--
+-- * 'wiMessage'
+warningsItem
+    :: WarningsItem
+warningsItem =
+    WarningsItem
+    { _wiData = Nothing
+    , _wiCode = Nothing
+    , _wiMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+wiData :: Lens' WarningsItem [DataItem]
+wiData
+  = lens _wiData (\ s a -> s{_wiData = a}) . _Default .
+      _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+wiCode :: Lens' WarningsItem (Maybe WarningsItemCode)
+wiCode = lens _wiCode (\ s a -> s{_wiCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+wiMessage :: Lens' WarningsItem (Maybe Text)
+wiMessage
+  = lens _wiMessage (\ s a -> s{_wiMessage = a})
+
+instance FromJSON WarningsItem where
+        parseJSON
+          = withObject "WarningsItem"
+              (\ o ->
+                 WarningsItem <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON WarningsItem where
+        toJSON WarningsItem{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _wiData, ("code" .=) <$> _wiCode,
+                  ("message" .=) <$> _wiMessage])
+
+--
 -- /See:/ 'linuxGetLinuxAccountViewsResponse' smart constructor.
 newtype LinuxGetLinuxAccountViewsResponse = LinuxGetLinuxAccountViewsResponse
     { _lglavrResource :: Maybe LinuxAccountViews
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinuxGetLinuxAccountViewsResponse' with the minimum fields required to make a request.
 --
@@ -1177,7 +1170,7 @@ data LinuxUserView = LinuxUserView
     , _luvShell         :: !(Maybe Text)
     , _luvGid           :: !(Maybe Word32)
     , _luvHomeDirectory :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinuxUserView' with the minimum fields required to make a request.
 --
@@ -1253,49 +1246,53 @@ instance ToJSON LinuxUserView where
                   ("shell" .=) <$> _luvShell, ("gid" .=) <$> _luvGid,
                   ("homeDirectory" .=) <$> _luvHomeDirectory])
 
--- | [Output Only] If errors are generated during processing of the
--- operation, this field will be populated.
 --
--- /See:/ 'operationError' smart constructor.
-newtype OperationError = OperationError
-    { _oeErrors :: Maybe [OperationErrorErrors]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'dataItem' smart constructor.
+data DataItem = DataItem
+    { _diValue :: !(Maybe Text)
+    , _diKey   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OperationError' with the minimum fields required to make a request.
+-- | Creates a value of 'DataItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oeErrors'
-operationError
-    :: OperationError
-operationError =
-    OperationError
-    { _oeErrors = Nothing
+-- * 'diValue'
+--
+-- * 'diKey'
+dataItem
+    :: DataItem
+dataItem =
+    DataItem
+    { _diValue = Nothing
+    , _diKey = Nothing
     }
 
--- | [Output Only] The array of errors encountered while processing this
--- operation.
-oeErrors :: Lens' OperationError [OperationErrorErrors]
-oeErrors
-  = lens _oeErrors (\ s a -> s{_oeErrors = a}) .
-      _Default
-      . _Coerce
+-- | [Output Only] A warning data value corresponding to the key.
+diValue :: Lens' DataItem (Maybe Text)
+diValue = lens _diValue (\ s a -> s{_diValue = a})
 
-instance FromJSON OperationError where
+-- | [Output Only] A key for the warning data.
+diKey :: Lens' DataItem (Maybe Text)
+diKey = lens _diKey (\ s a -> s{_diKey = a})
+
+instance FromJSON DataItem where
         parseJSON
-          = withObject "OperationError"
+          = withObject "DataItem"
               (\ o ->
-                 OperationError <$> (o .:? "errors" .!= mempty))
+                 DataItem <$> (o .:? "value") <*> (o .:? "key"))
 
-instance ToJSON OperationError where
-        toJSON OperationError{..}
-          = object (catMaybes [("errors" .=) <$> _oeErrors])
+instance ToJSON DataItem where
+        toJSON DataItem{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _diValue, ("key" .=) <$> _diKey])
 
 --
 -- /See:/ 'linuxGetAuthorizedKeysViewResponse' smart constructor.
 newtype LinuxGetAuthorizedKeysViewResponse = LinuxGetAuthorizedKeysViewResponse
     { _lgakvrResource :: Maybe AuthorizedKeysView
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinuxGetAuthorizedKeysViewResponse' with the minimum fields required to make a request.
 --
@@ -1333,7 +1330,7 @@ instance ToJSON LinuxGetAuthorizedKeysViewResponse
 -- /See:/ 'groupsRemoveMemberRequest' smart constructor.
 newtype GroupsRemoveMemberRequest = GroupsRemoveMemberRequest
     { _grmrUsers :: Maybe [Text]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsRemoveMemberRequest' with the minimum fields required to make a request.
 --
@@ -1366,61 +1363,61 @@ instance ToJSON GroupsRemoveMemberRequest where
           = object (catMaybes [("users" .=) <$> _grmrUsers])
 
 --
--- /See:/ 'operationErrorErrors' smart constructor.
-data OperationErrorErrors = OperationErrorErrors
-    { _oeeLocation :: !(Maybe Text)
-    , _oeeCode     :: !(Maybe Text)
-    , _oeeMessage  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'errorsItem' smart constructor.
+data ErrorsItem = ErrorsItem
+    { _eiLocation :: !(Maybe Text)
+    , _eiCode     :: !(Maybe Text)
+    , _eiMessage  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OperationErrorErrors' with the minimum fields required to make a request.
+-- | Creates a value of 'ErrorsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oeeLocation'
+-- * 'eiLocation'
 --
--- * 'oeeCode'
+-- * 'eiCode'
 --
--- * 'oeeMessage'
-operationErrorErrors
-    :: OperationErrorErrors
-operationErrorErrors =
-    OperationErrorErrors
-    { _oeeLocation = Nothing
-    , _oeeCode = Nothing
-    , _oeeMessage = Nothing
+-- * 'eiMessage'
+errorsItem
+    :: ErrorsItem
+errorsItem =
+    ErrorsItem
+    { _eiLocation = Nothing
+    , _eiCode = Nothing
+    , _eiMessage = Nothing
     }
 
 -- | [Output Only] Indicates the field in the request which caused the error.
 -- This property is optional.
-oeeLocation :: Lens' OperationErrorErrors (Maybe Text)
-oeeLocation
-  = lens _oeeLocation (\ s a -> s{_oeeLocation = a})
+eiLocation :: Lens' ErrorsItem (Maybe Text)
+eiLocation
+  = lens _eiLocation (\ s a -> s{_eiLocation = a})
 
 -- | [Output Only] The error type identifier for this error.
-oeeCode :: Lens' OperationErrorErrors (Maybe Text)
-oeeCode = lens _oeeCode (\ s a -> s{_oeeCode = a})
+eiCode :: Lens' ErrorsItem (Maybe Text)
+eiCode = lens _eiCode (\ s a -> s{_eiCode = a})
 
 -- | [Output Only] An optional, human-readable error message.
-oeeMessage :: Lens' OperationErrorErrors (Maybe Text)
-oeeMessage
-  = lens _oeeMessage (\ s a -> s{_oeeMessage = a})
+eiMessage :: Lens' ErrorsItem (Maybe Text)
+eiMessage
+  = lens _eiMessage (\ s a -> s{_eiMessage = a})
 
-instance FromJSON OperationErrorErrors where
+instance FromJSON ErrorsItem where
         parseJSON
-          = withObject "OperationErrorErrors"
+          = withObject "ErrorsItem"
               (\ o ->
-                 OperationErrorErrors <$>
+                 ErrorsItem <$>
                    (o .:? "location") <*> (o .:? "code") <*>
                      (o .:? "message"))
 
-instance ToJSON OperationErrorErrors where
-        toJSON OperationErrorErrors{..}
+instance ToJSON ErrorsItem where
+        toJSON ErrorsItem{..}
           = object
               (catMaybes
-                 [("location" .=) <$> _oeeLocation,
-                  ("code" .=) <$> _oeeCode,
-                  ("message" .=) <$> _oeeMessage])
+                 [("location" .=) <$> _eiLocation,
+                  ("code" .=) <$> _eiCode,
+                  ("message" .=) <$> _eiMessage])
 
 -- | A list of authorized public keys for a user account.
 --
@@ -1428,7 +1425,7 @@ instance ToJSON OperationErrorErrors where
 data AuthorizedKeysView = AuthorizedKeysView
     { _akvSudoer :: !(Maybe Bool)
     , _akvKeys   :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AuthorizedKeysView' with the minimum fields required to make a request.
 --

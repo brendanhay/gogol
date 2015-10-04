@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Patch
     -- * Request Lenses
     , fagpQuotaUser
     , fagpPrettyPrint
-    , fagpFloodlightActivityGroup
     , fagpUserIP
     , fagpProfileId
+    , fagpPayload
     , fagpKey
     , fagpId
     , fagpOAuthToken
@@ -67,16 +68,16 @@ type FloodlightActivityGroupsPatchResource =
 --
 -- /See:/ 'floodlightActivityGroupsPatch'' smart constructor.
 data FloodlightActivityGroupsPatch' = FloodlightActivityGroupsPatch'
-    { _fagpQuotaUser               :: !(Maybe Text)
-    , _fagpPrettyPrint             :: !Bool
-    , _fagpFloodlightActivityGroup :: !FloodlightActivityGroup
-    , _fagpUserIP                  :: !(Maybe Text)
-    , _fagpProfileId               :: !Int64
-    , _fagpKey                     :: !(Maybe Key)
-    , _fagpId                      :: !Int64
-    , _fagpOAuthToken              :: !(Maybe OAuthToken)
-    , _fagpFields                  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _fagpQuotaUser   :: !(Maybe Text)
+    , _fagpPrettyPrint :: !Bool
+    , _fagpUserIP      :: !(Maybe Text)
+    , _fagpProfileId   :: !Int64
+    , _fagpPayload     :: !FloodlightActivityGroup
+    , _fagpKey         :: !(Maybe Key)
+    , _fagpId          :: !Int64
+    , _fagpOAuthToken  :: !(Maybe OAuthToken)
+    , _fagpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsPatch'' with the minimum fields required to make a request.
 --
@@ -86,11 +87,11 @@ data FloodlightActivityGroupsPatch' = FloodlightActivityGroupsPatch'
 --
 -- * 'fagpPrettyPrint'
 --
--- * 'fagpFloodlightActivityGroup'
---
 -- * 'fagpUserIP'
 --
 -- * 'fagpProfileId'
+--
+-- * 'fagpPayload'
 --
 -- * 'fagpKey'
 --
@@ -100,17 +101,17 @@ data FloodlightActivityGroupsPatch' = FloodlightActivityGroupsPatch'
 --
 -- * 'fagpFields'
 floodlightActivityGroupsPatch'
-    :: FloodlightActivityGroup -- ^ 'FloodlightActivityGroup'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> FloodlightActivityGroup -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> FloodlightActivityGroupsPatch'
-floodlightActivityGroupsPatch' pFagpFloodlightActivityGroup_ pFagpProfileId_ pFagpId_ =
+floodlightActivityGroupsPatch' pFagpProfileId_ pFagpPayload_ pFagpId_ =
     FloodlightActivityGroupsPatch'
     { _fagpQuotaUser = Nothing
     , _fagpPrettyPrint = True
-    , _fagpFloodlightActivityGroup = pFagpFloodlightActivityGroup_
     , _fagpUserIP = Nothing
     , _fagpProfileId = pFagpProfileId_
+    , _fagpPayload = pFagpPayload_
     , _fagpKey = Nothing
     , _fagpId = pFagpId_
     , _fagpOAuthToken = Nothing
@@ -131,12 +132,6 @@ fagpPrettyPrint
   = lens _fagpPrettyPrint
       (\ s a -> s{_fagpPrettyPrint = a})
 
--- | Multipart request metadata.
-fagpFloodlightActivityGroup :: Lens' FloodlightActivityGroupsPatch' FloodlightActivityGroup
-fagpFloodlightActivityGroup
-  = lens _fagpFloodlightActivityGroup
-      (\ s a -> s{_fagpFloodlightActivityGroup = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 fagpUserIP :: Lens' FloodlightActivityGroupsPatch' (Maybe Text)
@@ -148,6 +143,11 @@ fagpProfileId :: Lens' FloodlightActivityGroupsPatch' Int64
 fagpProfileId
   = lens _fagpProfileId
       (\ s a -> s{_fagpProfileId = a})
+
+-- | Multipart request metadata.
+fagpPayload :: Lens' FloodlightActivityGroupsPatch' FloodlightActivityGroup
+fagpPayload
+  = lens _fagpPayload (\ s a -> s{_fagpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -189,7 +189,7 @@ instance GoogleRequest FloodlightActivityGroupsPatch'
               _fagpKey
               _fagpOAuthToken
               (Just AltJSON)
-              _fagpFloodlightActivityGroup
+              _fagpPayload
           where go
                   = clientWithRoute
                       (Proxy ::

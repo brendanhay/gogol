@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -89,7 +90,7 @@ data ProductsGenerateApprovalURL' = ProductsGenerateApprovalURL'
     , _pgauOAuthToken   :: !(Maybe OAuthToken)
     , _pgauProductId    :: !Text
     , _pgauFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsGenerateApprovalURL'' with the minimum fields required to make a request.
 --
@@ -197,8 +198,8 @@ instance GoogleRequest ProductsGenerateApprovalURL'
         request
           = requestWithRoute defReq androidEnterpriseURL
         requestWithRoute r u ProductsGenerateApprovalURL'{..}
-          = go _pgauLanguageCode _pgauEnterpriseId
-              _pgauProductId
+          = go _pgauEnterpriseId _pgauProductId
+              _pgauLanguageCode
               _pgauQuotaUser
               (Just _pgauPrettyPrint)
               _pgauUserIP

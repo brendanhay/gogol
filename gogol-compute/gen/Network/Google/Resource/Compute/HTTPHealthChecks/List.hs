@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type HTTPHealthChecksListResource =
        "global" :>
          "httpHealthChecks" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data HTTPHealthChecksList' = HTTPHealthChecksList'
     , _httphclOAuthToken  :: !(Maybe OAuthToken)
     , _httphclMaxResults  :: !Word32
     , _httphclFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthChecksList'' with the minimum fields required to make a request.
 --
@@ -205,9 +206,8 @@ instance GoogleRequest HTTPHealthChecksList' where
         type Rs HTTPHealthChecksList' = HTTPHealthCheckList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u HTTPHealthChecksList'{..}
-          = go _httphclFilter (Just _httphclMaxResults)
-              _httphclPageToken
-              _httphclProject
+          = go _httphclProject _httphclFilter _httphclPageToken
+              (Just _httphclMaxResults)
               _httphclQuotaUser
               (Just _httphclPrettyPrint)
               _httphclUserIP

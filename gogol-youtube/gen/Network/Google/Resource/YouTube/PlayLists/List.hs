@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -56,15 +57,15 @@ import           Network.Google.YouTube.Types
 -- 'PlayListsList'' request conforms to.
 type PlayListsListResource =
      "playlists" :>
-       QueryParam "channelId" Text :>
-         QueryParam "hl" Text :>
-           QueryParam "id" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "mine" Bool :>
-                 QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "onBehalfOfContentOwnerChannel" Text :>
+       QueryParam "part" Text :>
+         QueryParam "mine" Bool :>
+           QueryParam "channelId" Text :>
+             QueryParam "hl" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                   QueryParam "id" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "part" Text :>
+                       QueryParam "maxResults" Word32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -95,7 +96,7 @@ data PlayListsList' = PlayListsList'
     , _pllOAuthToken                    :: !(Maybe OAuthToken)
     , _pllMaxResults                    :: !Word32
     , _pllFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayListsList'' with the minimum fields required to make a request.
 --
@@ -279,13 +280,12 @@ instance GoogleRequest PlayListsList' where
         type Rs PlayListsList' = PlayListListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u PlayListsList'{..}
-          = go _pllChannelId _pllHl _pllId
-              (Just _pllMaxResults)
-              _pllMine
+          = go (Just _pllPart) _pllMine _pllChannelId _pllHl
               _pllOnBehalfOfContentOwner
               _pllOnBehalfOfContentOwnerChannel
+              _pllId
               _pllPageToken
-              (Just _pllPart)
+              (Just _pllMaxResults)
               _pllQuotaUser
               (Just _pllPrettyPrint)
               _pllUserIP

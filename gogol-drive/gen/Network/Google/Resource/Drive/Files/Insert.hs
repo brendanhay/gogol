@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,6 +37,7 @@ module Network.Google.Resource.Drive.Files.Insert
     , fiPinned
     , fiVisibility
     , fiTimedTextLanguage
+    , fiPayload
     , fiUseContentAsIndexableText
     , fiMedia
     , fiTimedTextTrackName
@@ -44,7 +46,6 @@ module Network.Google.Resource.Drive.Files.Insert
     , fiConvert
     , fiOAuthToken
     , fiOCR
-    , fiFile
     , fiFields
     ) where
 
@@ -55,14 +56,14 @@ import           Network.Google.Prelude
 -- 'FilesInsert'' request conforms to.
 type FilesInsertResource =
      "files" :>
-       QueryParam "convert" Bool :>
-         QueryParam "ocr" Bool :>
-           QueryParam "ocrLanguage" Text :>
-             QueryParam "pinned" Bool :>
-               QueryParam "timedTextLanguage" Text :>
-                 QueryParam "timedTextTrackName" Text :>
-                   QueryParam "useContentAsIndexableText" Bool :>
-                     QueryParam "visibility" DriveFilesInsertVisibility :>
+       QueryParam "pinned" Bool :>
+         QueryParam "visibility" Visibility :>
+           QueryParam "timedTextLanguage" Text :>
+             QueryParam "useContentAsIndexableText" Bool :>
+               QueryParam "timedTextTrackName" Text :>
+                 QueryParam "ocrLanguage" Text :>
+                   QueryParam "convert" Bool :>
+                     QueryParam "ocr" Bool :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -81,8 +82,9 @@ data FilesInsert' = FilesInsert'
     , _fiPrettyPrint               :: !Bool
     , _fiUserIP                    :: !(Maybe Text)
     , _fiPinned                    :: !Bool
-    , _fiVisibility                :: !DriveFilesInsertVisibility
+    , _fiVisibility                :: !Visibility
     , _fiTimedTextLanguage         :: !(Maybe Text)
+    , _fiPayload                   :: !File
     , _fiUseContentAsIndexableText :: !Bool
     , _fiMedia                     :: !Body
     , _fiTimedTextTrackName        :: !(Maybe Text)
@@ -91,9 +93,8 @@ data FilesInsert' = FilesInsert'
     , _fiConvert                   :: !Bool
     , _fiOAuthToken                :: !(Maybe OAuthToken)
     , _fiOCR                       :: !Bool
-    , _fiFile                      :: !File
     , _fiFields                    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesInsert'' with the minimum fields required to make a request.
 --
@@ -111,6 +112,8 @@ data FilesInsert' = FilesInsert'
 --
 -- * 'fiTimedTextLanguage'
 --
+-- * 'fiPayload'
+--
 -- * 'fiUseContentAsIndexableText'
 --
 -- * 'fiMedia'
@@ -127,21 +130,20 @@ data FilesInsert' = FilesInsert'
 --
 -- * 'fiOCR'
 --
--- * 'fiFile'
---
 -- * 'fiFields'
 filesInsert'
-    :: Body -- ^ 'media'
-    -> File -- ^ 'File'
+    :: File -- ^ 'payload'
+    -> Body -- ^ 'media'
     -> FilesInsert'
-filesInsert' pFiMedia_ pFiFile_ =
+filesInsert' pFiPayload_ pFiMedia_ =
     FilesInsert'
     { _fiQuotaUser = Nothing
     , _fiPrettyPrint = True
     , _fiUserIP = Nothing
     , _fiPinned = False
-    , _fiVisibility = DFIVDefault
+    , _fiVisibility = VDefault
     , _fiTimedTextLanguage = Nothing
+    , _fiPayload = pFiPayload_
     , _fiUseContentAsIndexableText = False
     , _fiMedia = pFiMedia_
     , _fiTimedTextTrackName = Nothing
@@ -150,7 +152,6 @@ filesInsert' pFiMedia_ pFiFile_ =
     , _fiConvert = False
     , _fiOAuthToken = Nothing
     , _fiOCR = False
-    , _fiFile = pFiFile_
     , _fiFields = Nothing
     }
 
@@ -179,7 +180,7 @@ fiPinned = lens _fiPinned (\ s a -> s{_fiPinned = a})
 
 -- | The visibility of the new file. This parameter is only relevant when
 -- convert=false.
-fiVisibility :: Lens' FilesInsert' DriveFilesInsertVisibility
+fiVisibility :: Lens' FilesInsert' Visibility
 fiVisibility
   = lens _fiVisibility (\ s a -> s{_fiVisibility = a})
 
@@ -188,6 +189,11 @@ fiTimedTextLanguage :: Lens' FilesInsert' (Maybe Text)
 fiTimedTextLanguage
   = lens _fiTimedTextLanguage
       (\ s a -> s{_fiTimedTextLanguage = a})
+
+-- | Multipart request metadata.
+fiPayload :: Lens' FilesInsert' File
+fiPayload
+  = lens _fiPayload (\ s a -> s{_fiPayload = a})
 
 -- | Whether to use the content as indexable text.
 fiUseContentAsIndexableText :: Lens' FilesInsert' Bool
@@ -231,10 +237,6 @@ fiOAuthToken
 fiOCR :: Lens' FilesInsert' Bool
 fiOCR = lens _fiOCR (\ s a -> s{_fiOCR = a})
 
--- | Multipart request metadata.
-fiFile :: Lens' FilesInsert' File
-fiFile = lens _fiFile (\ s a -> s{_fiFile = a})
-
 -- | Selector specifying which fields to include in a partial response.
 fiFields :: Lens' FilesInsert' (Maybe Text)
 fiFields = lens _fiFields (\ s a -> s{_fiFields = a})
@@ -247,13 +249,13 @@ instance GoogleRequest FilesInsert' where
         type Rs FilesInsert' = File
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesInsert'{..}
-          = go (Just _fiConvert) _fiMedia (Just _fiOCR)
-              _fiOCRLanguage
-              (Just _fiPinned)
+          = go (Just _fiPinned) (Just _fiVisibility)
               _fiTimedTextLanguage
-              _fiTimedTextTrackName
               (Just _fiUseContentAsIndexableText)
-              (Just _fiVisibility)
+              _fiTimedTextTrackName
+              _fiOCRLanguage
+              (Just _fiConvert)
+              (Just _fiOCR)
               _fiQuotaUser
               (Just _fiPrettyPrint)
               _fiUserIP
@@ -261,7 +263,8 @@ instance GoogleRequest FilesInsert' where
               _fiKey
               _fiOAuthToken
               (Just AltJSON)
-              _fiFile
+              _fiPayload
+              _fiMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FilesInsertResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,9 +49,9 @@ import           Network.Google.Prelude
 -- 'QuerySQLGet'' request conforms to.
 type QuerySQLGetResource =
      "query" :>
-       QueryParam "hdrs" Bool :>
+       QueryParam "sql" Text :>
          QueryParam "typed" Bool :>
-           QueryParam "sql" Text :>
+           QueryParam "hdrs" Bool :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -60,16 +61,16 @@ type QuerySQLGetResource =
                          QueryParam "alt" AltJSON :> Get '[JSON] SQLresponse
        :<|>
        "query" :>
-         QueryParam "hdrs" Bool :>
+         QueryParam "sql" Text :>
            QueryParam "typed" Bool :>
-             QueryParam "sql" Text :>
+             QueryParam "hdrs" Bool :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "alt" Media :> Get '[OctetStream] Stream
+                           QueryParam "alt" AltMedia :> Get '[OctetStream] Body
 
 -- | Executes a SQL statement which can be any of - SELECT - SHOW - DESCRIBE
 --
@@ -84,7 +85,7 @@ data QuerySQLGet' = QuerySQLGet'
     , _qsqlgOAuthToken  :: !(Maybe OAuthToken)
     , _qsqlgSQL         :: !Text
     , _qsqlgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuerySQLGet'' with the minimum fields required to make a request.
 --
@@ -183,7 +184,7 @@ instance GoogleRequest QuerySQLGet' where
         type Rs QuerySQLGet' = SQLresponse
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u QuerySQLGet'{..}
-          = go _qsqlgHdrs _qsqlgTyped (Just _qsqlgSQL)
+          = go (Just _qsqlgSQL) _qsqlgTyped _qsqlgHdrs
               _qsqlgQuotaUser
               (Just _qsqlgPrettyPrint)
               _qsqlgUserIP
@@ -197,19 +198,19 @@ instance GoogleRequest QuerySQLGet' where
                       r
                       u
 
-instance GoogleRequest QuerySQLGet' where
-        type Rs (Download QuerySQLGet') = Stream
+instance GoogleRequest (Download QuerySQLGet') where
+        type Rs (Download QuerySQLGet') = Body
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u QuerySQLGet'{..}
-          = go _qsqlgHdrs _qsqlgTyped (Just _qsqlgSQL)
+        requestWithRoute r u (Download QuerySQLGet'{..})
+          = go (Just _qsqlgSQL) _qsqlgTyped _qsqlgHdrs
               _qsqlgQuotaUser
               (Just _qsqlgPrettyPrint)
               _qsqlgUserIP
               _qsqlgFields
               _qsqlgKey
               _qsqlgOAuthToken
-              (Just Media)
-          where go :<|> _
+              (Just AltMedia)
+          where _ :<|> go
                   = clientWithRoute
                       (Proxy :: Proxy QuerySQLGetResource)
                       r

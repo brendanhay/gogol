@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,10 +52,8 @@ import           Network.Google.Prelude
 type ApplicationsGetResource =
      "applications" :>
        Capture "applicationId" Text :>
-         QueryParam "language" Text :>
-           QueryParam "platformType"
-             GamesApplicationsGetPlatformType
-             :>
+         QueryParam "platformType" PlatformType :>
+           QueryParam "language" Text :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -74,11 +73,11 @@ data ApplicationsGet' = ApplicationsGet'
     , _agUserIP        :: !(Maybe Text)
     , _agApplicationId :: !Text
     , _agKey           :: !(Maybe Key)
-    , _agPlatformType  :: !(Maybe GamesApplicationsGetPlatformType)
+    , _agPlatformType  :: !(Maybe PlatformType)
     , _agLanguage      :: !(Maybe Text)
     , _agOAuthToken    :: !(Maybe OAuthToken)
     , _agFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsGet'' with the minimum fields required to make a request.
 --
@@ -148,7 +147,7 @@ agKey :: Lens' ApplicationsGet' (Maybe Key)
 agKey = lens _agKey (\ s a -> s{_agKey = a})
 
 -- | Restrict application details returned to the specific platform.
-agPlatformType :: Lens' ApplicationsGet' (Maybe GamesApplicationsGetPlatformType)
+agPlatformType :: Lens' ApplicationsGet' (Maybe PlatformType)
 agPlatformType
   = lens _agPlatformType
       (\ s a -> s{_agPlatformType = a})
@@ -175,7 +174,7 @@ instance GoogleRequest ApplicationsGet' where
         type Rs ApplicationsGet' = Application
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u ApplicationsGet'{..}
-          = go _agLanguage _agPlatformType _agApplicationId
+          = go _agApplicationId _agPlatformType _agLanguage
               _agQuotaUser
               (Just _agPrettyPrint)
               _agUserIP

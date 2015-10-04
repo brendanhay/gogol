@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,7 +37,7 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Rasters.BatchInsert
     , rcrbiQuotaUser
     , rcrbiPrettyPrint
     , rcrbiUserIP
-    , rcrbiRasterCollectionsRastersBatchInsertRequest
+    , rcrbiPayload
     , rcrbiKey
     , rcrbiId
     , rcrbiOAuthToken
@@ -73,15 +74,15 @@ type RasterCollectionsRastersBatchInsertResource =
 --
 -- /See:/ 'rasterCollectionsRastersBatchInsert'' smart constructor.
 data RasterCollectionsRastersBatchInsert' = RasterCollectionsRastersBatchInsert'
-    { _rcrbiQuotaUser                                  :: !(Maybe Text)
-    , _rcrbiPrettyPrint                                :: !Bool
-    , _rcrbiUserIP                                     :: !(Maybe Text)
-    , _rcrbiRasterCollectionsRastersBatchInsertRequest :: !RasterCollectionsRastersBatchInsertRequest
-    , _rcrbiKey                                        :: !(Maybe Key)
-    , _rcrbiId                                         :: !Text
-    , _rcrbiOAuthToken                                 :: !(Maybe OAuthToken)
-    , _rcrbiFields                                     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rcrbiQuotaUser   :: !(Maybe Text)
+    , _rcrbiPrettyPrint :: !Bool
+    , _rcrbiUserIP      :: !(Maybe Text)
+    , _rcrbiPayload     :: !RasterCollectionsRastersBatchInsertRequest
+    , _rcrbiKey         :: !(Maybe Key)
+    , _rcrbiId          :: !Text
+    , _rcrbiOAuthToken  :: !(Maybe OAuthToken)
+    , _rcrbiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsRastersBatchInsert'' with the minimum fields required to make a request.
 --
@@ -93,7 +94,7 @@ data RasterCollectionsRastersBatchInsert' = RasterCollectionsRastersBatchInsert'
 --
 -- * 'rcrbiUserIP'
 --
--- * 'rcrbiRasterCollectionsRastersBatchInsertRequest'
+-- * 'rcrbiPayload'
 --
 -- * 'rcrbiKey'
 --
@@ -103,15 +104,15 @@ data RasterCollectionsRastersBatchInsert' = RasterCollectionsRastersBatchInsert'
 --
 -- * 'rcrbiFields'
 rasterCollectionsRastersBatchInsert'
-    :: RasterCollectionsRastersBatchInsertRequest -- ^ 'RasterCollectionsRastersBatchInsertRequest'
+    :: RasterCollectionsRastersBatchInsertRequest -- ^ 'payload'
     -> Text -- ^ 'id'
     -> RasterCollectionsRastersBatchInsert'
-rasterCollectionsRastersBatchInsert' pRcrbiRasterCollectionsRastersBatchInsertRequest_ pRcrbiId_ =
+rasterCollectionsRastersBatchInsert' pRcrbiPayload_ pRcrbiId_ =
     RasterCollectionsRastersBatchInsert'
     { _rcrbiQuotaUser = Nothing
     , _rcrbiPrettyPrint = True
     , _rcrbiUserIP = Nothing
-    , _rcrbiRasterCollectionsRastersBatchInsertRequest = pRcrbiRasterCollectionsRastersBatchInsertRequest_
+    , _rcrbiPayload = pRcrbiPayload_
     , _rcrbiKey = Nothing
     , _rcrbiId = pRcrbiId_
     , _rcrbiOAuthToken = Nothing
@@ -139,13 +140,9 @@ rcrbiUserIP
   = lens _rcrbiUserIP (\ s a -> s{_rcrbiUserIP = a})
 
 -- | Multipart request metadata.
-rcrbiRasterCollectionsRastersBatchInsertRequest :: Lens' RasterCollectionsRastersBatchInsert' RasterCollectionsRastersBatchInsertRequest
-rcrbiRasterCollectionsRastersBatchInsertRequest
-  = lens
-      _rcrbiRasterCollectionsRastersBatchInsertRequest
-      (\ s a ->
-         s{_rcrbiRasterCollectionsRastersBatchInsertRequest =
-             a})
+rcrbiPayload :: Lens' RasterCollectionsRastersBatchInsert' RasterCollectionsRastersBatchInsertRequest
+rcrbiPayload
+  = lens _rcrbiPayload (\ s a -> s{_rcrbiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -187,7 +184,7 @@ instance GoogleRequest
               _rcrbiKey
               _rcrbiOAuthToken
               (Just AltJSON)
-              _rcrbiRasterCollectionsRastersBatchInsertRequest
+              _rcrbiPayload
           where go
                   = clientWithRoute
                       (Proxy ::

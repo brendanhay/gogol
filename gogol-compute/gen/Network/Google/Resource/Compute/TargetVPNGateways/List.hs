@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type TargetVPNGatewaysListResource =
          Capture "region" Text :>
            "targetVpnGateways" :>
              QueryParam "filter" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,7 +83,7 @@ data TargetVPNGatewaysList' = TargetVPNGatewaysList'
     , _tvglOAuthToken  :: !(Maybe OAuthToken)
     , _tvglMaxResults  :: !Word32
     , _tvglFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetVPNGatewaysList'' with the minimum fields required to make a request.
 --
@@ -212,10 +213,9 @@ instance GoogleRequest TargetVPNGatewaysList' where
         type Rs TargetVPNGatewaysList' = TargetVPNGatewayList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetVPNGatewaysList'{..}
-          = go _tvglFilter (Just _tvglMaxResults)
+          = go _tvglProject _tvglRegion _tvglFilter
               _tvglPageToken
-              _tvglProject
-              _tvglRegion
+              (Just _tvglMaxResults)
               _tvglQuotaUser
               (Just _tvglPrettyPrint)
               _tvglUserIP

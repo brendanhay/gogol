@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,8 +53,8 @@ type NotificationsListResource =
        Capture "customer" Text :>
          "notifications" :>
            QueryParam "language" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data NotificationsList' = NotificationsList'
     , _nlOAuthToken  :: !(Maybe OAuthToken)
     , _nlMaxResults  :: !(Maybe Word32)
     , _nlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NotificationsList'' with the minimum fields required to make a request.
 --
@@ -181,8 +182,8 @@ instance GoogleRequest NotificationsList' where
         type Rs NotificationsList' = Notifications
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u NotificationsList'{..}
-          = go _nlLanguage _nlMaxResults _nlPageToken
-              _nlCustomer
+          = go _nlCustomer _nlLanguage _nlPageToken
+              _nlMaxResults
               _nlQuotaUser
               (Just _nlPrettyPrint)
               _nlUserIP

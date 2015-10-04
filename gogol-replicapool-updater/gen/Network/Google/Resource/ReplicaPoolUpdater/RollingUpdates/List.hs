@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type RollingUpdatesListResource =
          Capture "zone" Text :>
            "rollingUpdates" :>
              QueryParam "filter" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,7 +83,7 @@ data RollingUpdatesList' = RollingUpdatesList'
     , _rulOAuthToken  :: !(Maybe OAuthToken)
     , _rulMaxResults  :: !Word32
     , _rulFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollingUpdatesList'' with the minimum fields required to make a request.
 --
@@ -200,9 +201,8 @@ instance GoogleRequest RollingUpdatesList' where
         request
           = requestWithRoute defReq replicaPoolUpdaterURL
         requestWithRoute r u RollingUpdatesList'{..}
-          = go _rulFilter (Just _rulMaxResults) _rulPageToken
-              _rulProject
-              _rulZone
+          = go _rulProject _rulZone _rulFilter _rulPageToken
+              (Just _rulMaxResults)
               _rulQuotaUser
               (Just _rulPrettyPrint)
               _rulUserIP

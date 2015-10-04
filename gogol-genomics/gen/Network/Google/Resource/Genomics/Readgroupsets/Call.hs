@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Genomics.Readgroupsets.Call
     -- * Request Lenses
     , rcQuotaUser
     , rcPrettyPrint
-    , rcCallReadGroupSetsRequest
     , rcUserIP
+    , rcPayload
     , rcKey
     , rcOAuthToken
     , rcFields
@@ -65,14 +66,14 @@ type ReadgroupsetsCallResource =
 --
 -- /See:/ 'readgroupsetsCall'' smart constructor.
 data ReadgroupsetsCall' = ReadgroupsetsCall'
-    { _rcQuotaUser                :: !(Maybe Text)
-    , _rcPrettyPrint              :: !Bool
-    , _rcCallReadGroupSetsRequest :: !CallReadGroupSetsRequest
-    , _rcUserIP                   :: !(Maybe Text)
-    , _rcKey                      :: !(Maybe Key)
-    , _rcOAuthToken               :: !(Maybe OAuthToken)
-    , _rcFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rcQuotaUser   :: !(Maybe Text)
+    , _rcPrettyPrint :: !Bool
+    , _rcUserIP      :: !(Maybe Text)
+    , _rcPayload     :: !CallReadGroupSetsRequest
+    , _rcKey         :: !(Maybe Key)
+    , _rcOAuthToken  :: !(Maybe OAuthToken)
+    , _rcFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsCall'' with the minimum fields required to make a request.
 --
@@ -82,9 +83,9 @@ data ReadgroupsetsCall' = ReadgroupsetsCall'
 --
 -- * 'rcPrettyPrint'
 --
--- * 'rcCallReadGroupSetsRequest'
---
 -- * 'rcUserIP'
+--
+-- * 'rcPayload'
 --
 -- * 'rcKey'
 --
@@ -92,14 +93,14 @@ data ReadgroupsetsCall' = ReadgroupsetsCall'
 --
 -- * 'rcFields'
 readgroupsetsCall'
-    :: CallReadGroupSetsRequest -- ^ 'CallReadGroupSetsRequest'
+    :: CallReadGroupSetsRequest -- ^ 'payload'
     -> ReadgroupsetsCall'
-readgroupsetsCall' pRcCallReadGroupSetsRequest_ =
+readgroupsetsCall' pRcPayload_ =
     ReadgroupsetsCall'
     { _rcQuotaUser = Nothing
     , _rcPrettyPrint = True
-    , _rcCallReadGroupSetsRequest = pRcCallReadGroupSetsRequest_
     , _rcUserIP = Nothing
+    , _rcPayload = pRcPayload_
     , _rcKey = Nothing
     , _rcOAuthToken = Nothing
     , _rcFields = Nothing
@@ -118,16 +119,15 @@ rcPrettyPrint
   = lens _rcPrettyPrint
       (\ s a -> s{_rcPrettyPrint = a})
 
--- | Multipart request metadata.
-rcCallReadGroupSetsRequest :: Lens' ReadgroupsetsCall' CallReadGroupSetsRequest
-rcCallReadGroupSetsRequest
-  = lens _rcCallReadGroupSetsRequest
-      (\ s a -> s{_rcCallReadGroupSetsRequest = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 rcUserIP :: Lens' ReadgroupsetsCall' (Maybe Text)
 rcUserIP = lens _rcUserIP (\ s a -> s{_rcUserIP = a})
+
+-- | Multipart request metadata.
+rcPayload :: Lens' ReadgroupsetsCall' CallReadGroupSetsRequest
+rcPayload
+  = lens _rcPayload (\ s a -> s{_rcPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -158,7 +158,7 @@ instance GoogleRequest ReadgroupsetsCall' where
               _rcKey
               _rcOAuthToken
               (Just AltJSON)
-              _rcCallReadGroupSetsRequest
+              _rcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReadgroupsetsCallResource)

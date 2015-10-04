@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Storage.BucketAccessControls.Insert
     , baciPrettyPrint
     , baciUserIP
     , baciBucket
+    , baciPayload
     , baciKey
-    , baciBucketAccessControl
     , baciOAuthToken
     , baciFields
     ) where
@@ -63,15 +64,15 @@ type BucketAccessControlsInsertResource =
 --
 -- /See:/ 'bucketAccessControlsInsert'' smart constructor.
 data BucketAccessControlsInsert' = BucketAccessControlsInsert'
-    { _baciQuotaUser           :: !(Maybe Text)
-    , _baciPrettyPrint         :: !Bool
-    , _baciUserIP              :: !(Maybe Text)
-    , _baciBucket              :: !Text
-    , _baciKey                 :: !(Maybe Key)
-    , _baciBucketAccessControl :: !BucketAccessControl
-    , _baciOAuthToken          :: !(Maybe OAuthToken)
-    , _baciFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _baciQuotaUser   :: !(Maybe Text)
+    , _baciPrettyPrint :: !Bool
+    , _baciUserIP      :: !(Maybe Text)
+    , _baciBucket      :: !Text
+    , _baciPayload     :: !BucketAccessControl
+    , _baciKey         :: !(Maybe Key)
+    , _baciOAuthToken  :: !(Maybe OAuthToken)
+    , _baciFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControlsInsert'' with the minimum fields required to make a request.
 --
@@ -85,25 +86,25 @@ data BucketAccessControlsInsert' = BucketAccessControlsInsert'
 --
 -- * 'baciBucket'
 --
--- * 'baciKey'
+-- * 'baciPayload'
 --
--- * 'baciBucketAccessControl'
+-- * 'baciKey'
 --
 -- * 'baciOAuthToken'
 --
 -- * 'baciFields'
 bucketAccessControlsInsert'
     :: Text -- ^ 'bucket'
-    -> BucketAccessControl -- ^ 'BucketAccessControl'
+    -> BucketAccessControl -- ^ 'payload'
     -> BucketAccessControlsInsert'
-bucketAccessControlsInsert' pBaciBucket_ pBaciBucketAccessControl_ =
+bucketAccessControlsInsert' pBaciBucket_ pBaciPayload_ =
     BucketAccessControlsInsert'
     { _baciQuotaUser = Nothing
     , _baciPrettyPrint = True
     , _baciUserIP = Nothing
     , _baciBucket = pBaciBucket_
+    , _baciPayload = pBaciPayload_
     , _baciKey = Nothing
-    , _baciBucketAccessControl = pBaciBucketAccessControl_
     , _baciOAuthToken = Nothing
     , _baciFields = Nothing
     }
@@ -133,17 +134,16 @@ baciBucket :: Lens' BucketAccessControlsInsert' Text
 baciBucket
   = lens _baciBucket (\ s a -> s{_baciBucket = a})
 
+-- | Multipart request metadata.
+baciPayload :: Lens' BucketAccessControlsInsert' BucketAccessControl
+baciPayload
+  = lens _baciPayload (\ s a -> s{_baciPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 baciKey :: Lens' BucketAccessControlsInsert' (Maybe Key)
 baciKey = lens _baciKey (\ s a -> s{_baciKey = a})
-
--- | Multipart request metadata.
-baciBucketAccessControl :: Lens' BucketAccessControlsInsert' BucketAccessControl
-baciBucketAccessControl
-  = lens _baciBucketAccessControl
-      (\ s a -> s{_baciBucketAccessControl = a})
 
 -- | OAuth 2.0 token for the current user.
 baciOAuthToken :: Lens' BucketAccessControlsInsert' (Maybe OAuthToken)
@@ -173,7 +173,7 @@ instance GoogleRequest BucketAccessControlsInsert'
               _baciKey
               _baciOAuthToken
               (Just AltJSON)
-              _baciBucketAccessControl
+              _baciPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BucketAccessControlsInsertResource)

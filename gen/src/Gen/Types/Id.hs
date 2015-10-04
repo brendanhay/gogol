@@ -171,20 +171,22 @@ globalise :: Local -> Global
 globalise = Global . (:[]) . local
 
 extractPath :: Text -> [Either Text (Local, Maybe Text)]
-extractPath = either (error . show) id . A.parseOnly path
+extractPath x = either (error . err) id $ A.parseOnly path x
   where
+    err e = "Error parsing \"" <> Text.unpack x <> "\", " <> e
+
     path = A.many1 (seg <|> repeat <|> var) <* A.endOfInput
 
     seg = fmap Left $
-        optional (A.char '/') *> A.takeWhile1 (A.notInClass "/{+*}:")
+        optional (A.char '/') *> A.takeWhile1 (A.notInClass "/{+*}")
 
     repeat = fmap Right $ do
-        A.string "{/"
+        void $ A.string "{/"
         (,Nothing) <$> fmap Local (A.takeWhile1 (/= '*'))
                     <* A.string "*}"
 
     var = fmap Right $ do
-        void $ optional (A.char '/') *> A.char '{'
+        void $ optional (A.char '/') *> A.char '{' *> optional (A.char '+')
         (,) <$> fmap Local (A.takeWhile1 (A.notInClass "/{+*}:"))
              <* A.char '}'
             <*> optional (A.char ':' *> A.takeWhile1 (A.notInClass "/{+*}:"))

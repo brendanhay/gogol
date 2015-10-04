@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,9 +52,9 @@ type CommentsListResource =
      "activities" :>
        Capture "activityId" Text :>
          "comments" :>
-           QueryParam "maxResults" Word32 :>
+           QueryParam "sortOrder" SortOrder :>
              QueryParam "pageToken" Text :>
-               QueryParam "sortOrder" PlusCommentsListSortOrder :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -70,13 +71,13 @@ data CommentsList' = CommentsList'
     , _clPrettyPrint :: !Bool
     , _clUserIP      :: !(Maybe Text)
     , _clActivityId  :: !Text
-    , _clSortOrder   :: !PlusCommentsListSortOrder
+    , _clSortOrder   :: !SortOrder
     , _clKey         :: !(Maybe Key)
     , _clPageToken   :: !(Maybe Text)
     , _clOAuthToken  :: !(Maybe OAuthToken)
     , _clMaxResults  :: !Word32
     , _clFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsList'' with the minimum fields required to make a request.
 --
@@ -142,7 +143,7 @@ clActivityId
   = lens _clActivityId (\ s a -> s{_clActivityId = a})
 
 -- | The order in which to sort the list of comments.
-clSortOrder :: Lens' CommentsList' PlusCommentsListSortOrder
+clSortOrder :: Lens' CommentsList' SortOrder
 clSortOrder
   = lens _clSortOrder (\ s a -> s{_clSortOrder = a})
 
@@ -183,9 +184,8 @@ instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentFeed
         request = requestWithRoute defReq plusURL
         requestWithRoute r u CommentsList'{..}
-          = go (Just _clMaxResults) _clPageToken
-              (Just _clSortOrder)
-              _clActivityId
+          = go _clActivityId (Just _clSortOrder) _clPageToken
+              (Just _clMaxResults)
               _clQuotaUser
               (Just _clPrettyPrint)
               _clUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,19 +59,16 @@ type ChangeLogsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "changeLogs" :>
-           QueryParam "action" DfareportingChangeLogsListAction
-             :>
-             QueryParams "ids" Int64 :>
-               QueryParam "maxChangeTime" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "minChangeTime" Text :>
-                     QueryParams "objectIds" Int64 :>
-                       QueryParam "objectType"
-                         DfareportingChangeLogsListObjectType
-                         :>
+           QueryParams "userProfileIds" Int64 :>
+             QueryParam "objectType" ObjectType :>
+               QueryParam "searchString" Text :>
+                 QueryParams "ids" Int64 :>
+                   QueryParam "action" Action :>
+                     QueryParam "minChangeTime" Text :>
+                       QueryParam "maxChangeTime" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "searchString" Text :>
-                             QueryParams "userProfileIds" Int64 :>
+                           QueryParams "objectIds" Int64 :>
+                             QueryParam "maxResults" Int32 :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "userIp" Text :>
@@ -84,24 +82,24 @@ type ChangeLogsListResource =
 --
 -- /See:/ 'changeLogsList'' smart constructor.
 data ChangeLogsList' = ChangeLogsList'
-    { _cllUserProfileIds :: !(Maybe Int64)
+    { _cllUserProfileIds :: !(Maybe [Int64])
     , _cllQuotaUser      :: !(Maybe Text)
     , _cllPrettyPrint    :: !Bool
-    , _cllObjectType     :: !(Maybe DfareportingChangeLogsListObjectType)
+    , _cllObjectType     :: !(Maybe ObjectType)
     , _cllUserIP         :: !(Maybe Text)
     , _cllSearchString   :: !(Maybe Text)
-    , _cllIds            :: !(Maybe Int64)
+    , _cllIds            :: !(Maybe [Int64])
     , _cllProfileId      :: !Int64
-    , _cllAction         :: !(Maybe DfareportingChangeLogsListAction)
+    , _cllAction         :: !(Maybe Action)
     , _cllMinChangeTime  :: !(Maybe Text)
     , _cllKey            :: !(Maybe Key)
     , _cllMaxChangeTime  :: !(Maybe Text)
     , _cllPageToken      :: !(Maybe Text)
     , _cllOAuthToken     :: !(Maybe OAuthToken)
-    , _cllObjectIds      :: !(Maybe Int64)
+    , _cllObjectIds      :: !(Maybe [Int64])
     , _cllMaxResults     :: !(Maybe Int32)
     , _cllFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangeLogsList'' with the minimum fields required to make a request.
 --
@@ -165,10 +163,12 @@ changeLogsList' pCllProfileId_ =
     }
 
 -- | Select only change logs with these user profile IDs.
-cllUserProfileIds :: Lens' ChangeLogsList' (Maybe Int64)
+cllUserProfileIds :: Lens' ChangeLogsList' [Int64]
 cllUserProfileIds
   = lens _cllUserProfileIds
       (\ s a -> s{_cllUserProfileIds = a})
+      . _Default
+      . _Coerce
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -184,7 +184,7 @@ cllPrettyPrint
       (\ s a -> s{_cllPrettyPrint = a})
 
 -- | Select only change logs with the specified object type.
-cllObjectType :: Lens' ChangeLogsList' (Maybe DfareportingChangeLogsListObjectType)
+cllObjectType :: Lens' ChangeLogsList' (Maybe ObjectType)
 cllObjectType
   = lens _cllObjectType
       (\ s a -> s{_cllObjectType = a})
@@ -203,8 +203,10 @@ cllSearchString
       (\ s a -> s{_cllSearchString = a})
 
 -- | Select only change logs with these IDs.
-cllIds :: Lens' ChangeLogsList' (Maybe Int64)
-cllIds = lens _cllIds (\ s a -> s{_cllIds = a})
+cllIds :: Lens' ChangeLogsList' [Int64]
+cllIds
+  = lens _cllIds (\ s a -> s{_cllIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 cllProfileId :: Lens' ChangeLogsList' Int64
@@ -212,7 +214,7 @@ cllProfileId
   = lens _cllProfileId (\ s a -> s{_cllProfileId = a})
 
 -- | Select only change logs with the specified action.
-cllAction :: Lens' ChangeLogsList' (Maybe DfareportingChangeLogsListAction)
+cllAction :: Lens' ChangeLogsList' (Maybe Action)
 cllAction
   = lens _cllAction (\ s a -> s{_cllAction = a})
 
@@ -258,9 +260,11 @@ cllOAuthToken
       (\ s a -> s{_cllOAuthToken = a})
 
 -- | Select only change logs with these object IDs.
-cllObjectIds :: Lens' ChangeLogsList' (Maybe Int64)
+cllObjectIds :: Lens' ChangeLogsList' [Int64]
 cllObjectIds
   = lens _cllObjectIds (\ s a -> s{_cllObjectIds = a})
+      . _Default
+      . _Coerce
 
 -- | Maximum number of results to return.
 cllMaxResults :: Lens' ChangeLogsList' (Maybe Int32)
@@ -281,15 +285,16 @@ instance GoogleRequest ChangeLogsList' where
         type Rs ChangeLogsList' = ChangeLogsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ChangeLogsList'{..}
-          = go _cllAction _cllIds _cllMaxChangeTime
-              _cllMaxResults
-              _cllMinChangeTime
-              _cllObjectIds
+          = go _cllProfileId (_cllUserProfileIds ^. _Default)
               _cllObjectType
-              _cllPageToken
               _cllSearchString
-              _cllUserProfileIds
-              _cllProfileId
+              (_cllIds ^. _Default)
+              _cllAction
+              _cllMinChangeTime
+              _cllMaxChangeTime
+              _cllPageToken
+              (_cllObjectIds ^. _Default)
+              _cllMaxResults
               _cllQuotaUser
               (Just _cllPrettyPrint)
               _cllUserIP

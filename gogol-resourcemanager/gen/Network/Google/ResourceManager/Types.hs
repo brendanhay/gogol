@@ -63,14 +63,14 @@ module Network.Google.ResourceManager.Types
     , testIAMPermissionsRequest
     , tiprPermissions
 
+    -- * Labels
+    , Labels
+    , labels
+
     -- * TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
     , testIAMPermissionsResponse
     , tiamprPermissions
-
-    -- * ProjectLabels
-    , ProjectLabels
-    , projectLabels
 
     -- * Policy
     , Policy

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,10 +34,10 @@ module Network.Google.Resource.Reseller.Subscriptions.ChangeRenewalSettings
     , scrsQuotaUser
     , scrsPrettyPrint
     , scrsUserIP
+    , scrsPayload
     , scrsCustomerId
     , scrsKey
     , scrsOAuthToken
-    , scrsRenewalSettings
     , scrsSubscriptionId
     , scrsFields
     ) where
@@ -66,16 +67,16 @@ type SubscriptionsChangeRenewalSettingsResource =
 --
 -- /See:/ 'subscriptionsChangeRenewalSettings'' smart constructor.
 data SubscriptionsChangeRenewalSettings' = SubscriptionsChangeRenewalSettings'
-    { _scrsQuotaUser       :: !(Maybe Text)
-    , _scrsPrettyPrint     :: !Bool
-    , _scrsUserIP          :: !(Maybe Text)
-    , _scrsCustomerId      :: !Text
-    , _scrsKey             :: !(Maybe Key)
-    , _scrsOAuthToken      :: !(Maybe OAuthToken)
-    , _scrsRenewalSettings :: !RenewalSettings
-    , _scrsSubscriptionId  :: !Text
-    , _scrsFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _scrsQuotaUser      :: !(Maybe Text)
+    , _scrsPrettyPrint    :: !Bool
+    , _scrsUserIP         :: !(Maybe Text)
+    , _scrsPayload        :: !RenewalSettings
+    , _scrsCustomerId     :: !Text
+    , _scrsKey            :: !(Maybe Key)
+    , _scrsOAuthToken     :: !(Maybe OAuthToken)
+    , _scrsSubscriptionId :: !Text
+    , _scrsFields         :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsChangeRenewalSettings'' with the minimum fields required to make a request.
 --
@@ -87,31 +88,31 @@ data SubscriptionsChangeRenewalSettings' = SubscriptionsChangeRenewalSettings'
 --
 -- * 'scrsUserIP'
 --
+-- * 'scrsPayload'
+--
 -- * 'scrsCustomerId'
 --
 -- * 'scrsKey'
 --
 -- * 'scrsOAuthToken'
 --
--- * 'scrsRenewalSettings'
---
 -- * 'scrsSubscriptionId'
 --
 -- * 'scrsFields'
 subscriptionsChangeRenewalSettings'
-    :: Text -- ^ 'customerId'
-    -> RenewalSettings -- ^ 'RenewalSettings'
+    :: RenewalSettings -- ^ 'payload'
+    -> Text -- ^ 'customerId'
     -> Text -- ^ 'subscriptionId'
     -> SubscriptionsChangeRenewalSettings'
-subscriptionsChangeRenewalSettings' pScrsCustomerId_ pScrsRenewalSettings_ pScrsSubscriptionId_ =
+subscriptionsChangeRenewalSettings' pScrsPayload_ pScrsCustomerId_ pScrsSubscriptionId_ =
     SubscriptionsChangeRenewalSettings'
     { _scrsQuotaUser = Nothing
     , _scrsPrettyPrint = True
     , _scrsUserIP = Nothing
+    , _scrsPayload = pScrsPayload_
     , _scrsCustomerId = pScrsCustomerId_
     , _scrsKey = Nothing
     , _scrsOAuthToken = Nothing
-    , _scrsRenewalSettings = pScrsRenewalSettings_
     , _scrsSubscriptionId = pScrsSubscriptionId_
     , _scrsFields = Nothing
     }
@@ -136,6 +137,11 @@ scrsUserIP :: Lens' SubscriptionsChangeRenewalSettings' (Maybe Text)
 scrsUserIP
   = lens _scrsUserIP (\ s a -> s{_scrsUserIP = a})
 
+-- | Multipart request metadata.
+scrsPayload :: Lens' SubscriptionsChangeRenewalSettings' RenewalSettings
+scrsPayload
+  = lens _scrsPayload (\ s a -> s{_scrsPayload = a})
+
 -- | Id of the Customer
 scrsCustomerId :: Lens' SubscriptionsChangeRenewalSettings' Text
 scrsCustomerId
@@ -153,12 +159,6 @@ scrsOAuthToken :: Lens' SubscriptionsChangeRenewalSettings' (Maybe OAuthToken)
 scrsOAuthToken
   = lens _scrsOAuthToken
       (\ s a -> s{_scrsOAuthToken = a})
-
--- | Multipart request metadata.
-scrsRenewalSettings :: Lens' SubscriptionsChangeRenewalSettings' RenewalSettings
-scrsRenewalSettings
-  = lens _scrsRenewalSettings
-      (\ s a -> s{_scrsRenewalSettings = a})
 
 -- | Id of the subscription, which is unique for a customer
 scrsSubscriptionId :: Lens' SubscriptionsChangeRenewalSettings' Text
@@ -191,7 +191,7 @@ instance GoogleRequest
               _scrsKey
               _scrsOAuthToken
               (Just AltJSON)
-              _scrsRenewalSettings
+              _scrsPayload
           where go
                   = clientWithRoute
                       (Proxy ::

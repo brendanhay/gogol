@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -78,7 +79,7 @@ data TablesFilesInsert' = TablesFilesInsert'
     , _tfiOAuthToken  :: !(Maybe OAuthToken)
     , _tfiFilename    :: !Text
     , _tfiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesFilesInsert'' with the minimum fields required to make a request.
 --
@@ -175,14 +176,14 @@ instance GoogleRequest TablesFilesInsert' where
         type Rs TablesFilesInsert' = ()
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesFilesInsert'{..}
-          = go _tfiMedia _tfiId (Just _tfiFilename)
-              _tfiQuotaUser
+          = go _tfiId (Just _tfiFilename) _tfiQuotaUser
               (Just _tfiPrettyPrint)
               _tfiUserIP
               _tfiFields
               _tfiKey
               _tfiOAuthToken
               (Just AltJSON)
+              _tfiMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TablesFilesInsertResource)

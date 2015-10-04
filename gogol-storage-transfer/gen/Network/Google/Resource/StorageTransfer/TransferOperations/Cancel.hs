@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,14 +54,14 @@ import           Network.Google.StorageTransfer.Types
 -- 'TransferOperationsCancel'' request conforms to.
 type TransferOperationsCancelResource =
      "v1" :>
-       "{+name}:cancel" :>
+       CaptureMode "name" "cancel" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -86,7 +87,7 @@ data TransferOperationsCancel' = TransferOperationsCancel'
     , _tocOAuthToken     :: !(Maybe OAuthToken)
     , _tocFields         :: !(Maybe Text)
     , _tocCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferOperationsCancel'' with the minimum fields required to make a request.
 --
@@ -217,12 +218,12 @@ instance GoogleRequest TransferOperationsCancel'
         type Rs TransferOperationsCancel' = Empty
         request = requestWithRoute defReq storageTransferURL
         requestWithRoute r u TransferOperationsCancel'{..}
-          = go _tocXgafv _tocAccessToken _tocBearerToken
-              _tocCallback
+          = go _tocName _tocXgafv _tocUploadProtocol
               (Just _tocPp)
+              _tocAccessToken
               _tocUploadType
-              _tocUploadProtocol
-              _tocName
+              _tocBearerToken
+              _tocCallback
               _tocQuotaUser
               (Just _tocPrettyPrint)
               _tocFields

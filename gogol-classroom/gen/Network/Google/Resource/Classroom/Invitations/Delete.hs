@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -59,12 +60,12 @@ type InvitationsDeleteResource =
        "invitations" :>
          Capture "id" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
@@ -94,7 +95,7 @@ data InvitationsDelete' = InvitationsDelete'
     , _idOAuthToken     :: !(Maybe OAuthToken)
     , _idFields         :: !(Maybe Text)
     , _idCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InvitationsDelete'' with the minimum fields required to make a request.
 --
@@ -221,12 +222,11 @@ instance GoogleRequest InvitationsDelete' where
         type Rs InvitationsDelete' = Empty
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u InvitationsDelete'{..}
-          = go _idXgafv _idAccessToken _idBearerToken
-              _idCallback
-              (Just _idPp)
+          = go _idId _idXgafv _idUploadProtocol (Just _idPp)
+              _idAccessToken
               _idUploadType
-              _idUploadProtocol
-              _idId
+              _idBearerToken
+              _idCallback
               _idQuotaUser
               (Just _idPrettyPrint)
               _idFields

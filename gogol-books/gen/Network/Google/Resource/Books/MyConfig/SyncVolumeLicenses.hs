@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,15 +55,13 @@ import           Network.Google.Prelude
 type MyConfigSyncVolumeLicensesResource =
      "myconfig" :>
        "syncVolumeLicenses" :>
-         QueryParams "features"
-           BooksMyConfigSyncVolumeLicensesFeatures
-           :>
-           QueryParam "locale" Text :>
-             QueryParam "showPreorders" Bool :>
-               QueryParams "volumeIds" Text :>
-                 QueryParam "source" Text :>
-                   QueryParam "nonce" Text :>
-                     QueryParam "cpksver" Text :>
+         QueryParam "source" Text :>
+           QueryParam "nonce" Text :>
+             QueryParam "cpksver" Text :>
+               QueryParam "locale" Text :>
+                 QueryParams "volumeIds" Text :>
+                   QueryParams "features" Features :>
+                     QueryParam "showPreorders" Bool :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -82,15 +81,15 @@ data MyConfigSyncVolumeLicenses' = MyConfigSyncVolumeLicenses'
     , _mcsvlCpksver       :: !Text
     , _mcsvlUserIP        :: !(Maybe Text)
     , _mcsvlLocale        :: !(Maybe Text)
-    , _mcsvlVolumeIds     :: !(Maybe Text)
+    , _mcsvlVolumeIds     :: !(Maybe [Text])
     , _mcsvlKey           :: !(Maybe Key)
-    , _mcsvlFeatures      :: !(Maybe BooksMyConfigSyncVolumeLicensesFeatures)
+    , _mcsvlFeatures      :: !(Maybe Features)
     , _mcsvlSource        :: !Text
     , _mcsvlOAuthToken    :: !(Maybe OAuthToken)
     , _mcsvlShowPreOrders :: !(Maybe Bool)
     , _mcsvlFields        :: !(Maybe Text)
     , _mcsvlNonce         :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyConfigSyncVolumeLicenses'' with the minimum fields required to make a request.
 --
@@ -174,10 +173,12 @@ mcsvlLocale
   = lens _mcsvlLocale (\ s a -> s{_mcsvlLocale = a})
 
 -- | The volume(s) to request download restrictions for.
-mcsvlVolumeIds :: Lens' MyConfigSyncVolumeLicenses' (Maybe Text)
+mcsvlVolumeIds :: Lens' MyConfigSyncVolumeLicenses' [Text]
 mcsvlVolumeIds
   = lens _mcsvlVolumeIds
       (\ s a -> s{_mcsvlVolumeIds = a})
+      . _Default
+      . _Coerce
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -186,7 +187,7 @@ mcsvlKey :: Lens' MyConfigSyncVolumeLicenses' (Maybe Key)
 mcsvlKey = lens _mcsvlKey (\ s a -> s{_mcsvlKey = a})
 
 -- | List of features supported by the client, i.e., \'RENTALS\'
-mcsvlFeatures :: Lens' MyConfigSyncVolumeLicenses' (Maybe BooksMyConfigSyncVolumeLicensesFeatures)
+mcsvlFeatures :: Lens' MyConfigSyncVolumeLicenses' (Maybe Features)
 mcsvlFeatures
   = lens _mcsvlFeatures
       (\ s a -> s{_mcsvlFeatures = a})
@@ -227,11 +228,12 @@ instance GoogleRequest MyConfigSyncVolumeLicenses'
         type Rs MyConfigSyncVolumeLicenses' = Volumes
         request = requestWithRoute defReq booksURL
         requestWithRoute r u MyConfigSyncVolumeLicenses'{..}
-          = go _mcsvlFeatures _mcsvlLocale _mcsvlShowPreOrders
-              _mcsvlVolumeIds
-              (Just _mcsvlSource)
-              (Just _mcsvlNonce)
+          = go (Just _mcsvlSource) (Just _mcsvlNonce)
               (Just _mcsvlCpksver)
+              _mcsvlLocale
+              (_mcsvlVolumeIds ^. _Default)
+              (_mcsvlFeatures ^. _Default)
+              _mcsvlShowPreOrders
               _mcsvlQuotaUser
               (Just _mcsvlPrettyPrint)
               _mcsvlUserIP

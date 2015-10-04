@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -62,12 +63,12 @@ type ProjectsLogsSinksDeleteResource =
                "sinks" :>
                  Capture "sinksId" Text :>
                    QueryParam "$.xgafv" Text :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "upload_protocol" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "callback" Text :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "fields" Text :>
@@ -96,7 +97,7 @@ data ProjectsLogsSinksDelete' = ProjectsLogsSinksDelete'
     , _plsdSinksId        :: !Text
     , _plsdFields         :: !(Maybe Text)
     , _plsdCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogsSinksDelete'' with the minimum fields required to make a request.
 --
@@ -248,14 +249,14 @@ instance GoogleRequest ProjectsLogsSinksDelete' where
         type Rs ProjectsLogsSinksDelete' = Empty
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u ProjectsLogsSinksDelete'{..}
-          = go _plsdXgafv _plsdAccessToken _plsdBearerToken
-              _plsdCallback
-              (Just _plsdPp)
-              _plsdUploadType
+          = go _plsdProjectsId _plsdLogsId _plsdSinksId
+              _plsdXgafv
               _plsdUploadProtocol
-              _plsdProjectsId
-              _plsdLogsId
-              _plsdSinksId
+              (Just _plsdPp)
+              _plsdAccessToken
+              _plsdUploadType
+              _plsdBearerToken
+              _plsdCallback
               _plsdQuotaUser
               (Just _plsdPrettyPrint)
               _plsdFields

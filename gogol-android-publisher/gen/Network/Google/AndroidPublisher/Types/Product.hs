@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 -- /See:/ 'inappproductsUpdateResponse' smart constructor.
 newtype InappproductsUpdateResponse = InappproductsUpdateResponse
     { _iurInappproduct :: Maybe InAppProduct
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsUpdateResponse' with the minimum fields required to make a request.
 --
@@ -59,7 +59,7 @@ instance ToJSON InappproductsUpdateResponse where
 -- /See:/ 'inAppProductListings' smart constructor.
 data InAppProductListings =
     InAppProductListings
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InAppProductListings' with the minimum fields required to make a request.
 --
@@ -80,7 +80,7 @@ instance ToJSON InAppProductListings where
 data MonthDay = MonthDay
     { _mdDay   :: !(Maybe Word32)
     , _mdMonth :: !(Maybe Word32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MonthDay' with the minimum fields required to make a request.
 --
@@ -125,7 +125,7 @@ data InappproductsBatchRequestEntry = InappproductsBatchRequestEntry
     , _ibreInappproductsinsertrequest :: !(Maybe InappproductsInsertRequest)
     , _ibreInappproductsupdaterequest :: !(Maybe InappproductsUpdateRequest)
     , _ibreBatchId                    :: !(Maybe Word32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsBatchRequestEntry' with the minimum fields required to make a request.
 --
@@ -194,7 +194,7 @@ instance ToJSON InappproductsBatchRequestEntry where
 data InAppProductListing = InAppProductListing
     { _iaplTitle       :: !(Maybe Text)
     , _iaplDescription :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InAppProductListing' with the minimum fields required to make a request.
 --
@@ -240,7 +240,7 @@ data Track = Track
     { _tVersionCodes :: !(Maybe [Int32])
     , _tTrack        :: !(Maybe Text)
     , _tUserFraction :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Track' with the minimum fields required to make a request.
 --
@@ -296,7 +296,7 @@ instance ToJSON Track where
 data TokenPagination = TokenPagination
     { _tpNextPageToken     :: !(Maybe Text)
     , _tpPreviousPageToken :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TokenPagination' with the minimum fields required to make a request.
 --
@@ -343,7 +343,7 @@ instance ToJSON TokenPagination where
 data ExpansionFile = ExpansionFile
     { _efFileSize          :: !(Maybe Int64)
     , _efReferencesVersion :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ExpansionFile' with the minimum fields required to make a request.
 --
@@ -394,7 +394,7 @@ data Image = Image
     { _iURL  :: !(Maybe Text)
     , _iSha1 :: !(Maybe Text)
     , _iId   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
 --
@@ -444,7 +444,7 @@ instance ToJSON Image where
 -- /See:/ 'imagesDeleteAllResponse' smart constructor.
 newtype ImagesDeleteAllResponse = ImagesDeleteAllResponse
     { _idarDeleted :: Maybe [Image]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImagesDeleteAllResponse' with the minimum fields required to make a request.
 --
@@ -480,7 +480,7 @@ instance ToJSON ImagesDeleteAllResponse where
 -- /See:/ 'subscriptionPurchasesDeferRequest' smart constructor.
 newtype SubscriptionPurchasesDeferRequest = SubscriptionPurchasesDeferRequest
     { _spdrDeferralInfo :: Maybe SubscriptionDeferralInfo
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionPurchasesDeferRequest' with the minimum fields required to make a request.
 --
@@ -520,7 +520,7 @@ instance ToJSON SubscriptionPurchasesDeferRequest
 data APK = APK
     { _aVersionCode :: !(Maybe Int32)
     , _aBinary      :: !(Maybe APKBinary)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APK' with the minimum fields required to make a request.
 --
@@ -564,7 +564,7 @@ instance ToJSON APK where
 data Testers = Testers
     { _tGooglePlusCommUnities :: !(Maybe [Text])
     , _tGoogleGroups          :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Testers' with the minimum fields required to make a request.
 --
@@ -619,7 +619,7 @@ data Listing = Listing
     , _lShortDescription :: !(Maybe Text)
     , _lLanguage         :: !(Maybe Text)
     , _lTitle            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Listing' with the minimum fields required to make a request.
 --
@@ -697,7 +697,7 @@ instance ToJSON Listing where
 data Season = Season
     { _sStart :: !(Maybe MonthDay)
     , _sEnd   :: !(Maybe MonthDay)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Season' with the minimum fields required to make a request.
 --
@@ -737,7 +737,7 @@ instance ToJSON Season where
 -- /See:/ 'imagesListResponse' smart constructor.
 newtype ImagesListResponse = ImagesListResponse
     { _ilrImages :: Maybe [Image]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImagesListResponse' with the minimum fields required to make a request.
 --
@@ -774,7 +774,7 @@ instance ToJSON ImagesListResponse where
 data AppEdit = AppEdit
     { _aeId                :: !(Maybe Text)
     , _aeExpiryTimeSeconds :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppEdit' with the minimum fields required to make a request.
 --
@@ -821,7 +821,7 @@ instance ToJSON AppEdit where
 data TracksListResponse = TracksListResponse
     { _tlrTracks :: !(Maybe [Track])
     , _tlrKind   :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TracksListResponse' with the minimum fields required to make a request.
 --
@@ -871,7 +871,7 @@ data PageInfo = PageInfo
     { _piResultPerPage :: !(Maybe Int32)
     , _piTotalResults  :: !(Maybe Int32)
     , _piStartIndex    :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
 --
@@ -926,7 +926,7 @@ instance ToJSON PageInfo where
 data APKListing = APKListing
     { _apklLanguage      :: !(Maybe Text)
     , _apklRecentChanges :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APKListing' with the minimum fields required to make a request.
 --
@@ -972,7 +972,7 @@ instance ToJSON APKListing where
 -- /See:/ 'subscriptionPurchasesDeferResponse' smart constructor.
 newtype SubscriptionPurchasesDeferResponse = SubscriptionPurchasesDeferResponse
     { _spdrNewExpiryTimeMillis :: Maybe Int64
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionPurchasesDeferResponse' with the minimum fields required to make a request.
 --
@@ -1018,8 +1018,8 @@ data ProductPurchase = ProductPurchase
     , _ppConsumptionState   :: !(Maybe Int32)
     , _ppKind               :: !Text
     , _ppPurchaseTimeMillis :: !(Maybe Int64)
-    , _ppDeveloperPayLoad   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _ppDeveloperPayload   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductPurchase' with the minimum fields required to make a request.
 --
@@ -1033,7 +1033,7 @@ data ProductPurchase = ProductPurchase
 --
 -- * 'ppPurchaseTimeMillis'
 --
--- * 'ppDeveloperPayLoad'
+-- * 'ppDeveloperPayload'
 productPurchase
     :: ProductPurchase
 productPurchase =
@@ -1042,7 +1042,7 @@ productPurchase =
     , _ppConsumptionState = Nothing
     , _ppKind = "androidpublisher#productPurchase"
     , _ppPurchaseTimeMillis = Nothing
-    , _ppDeveloperPayLoad = Nothing
+    , _ppDeveloperPayload = Nothing
     }
 
 -- | The purchase state of the order. Possible values are: - Purchased -
@@ -1073,10 +1073,10 @@ ppPurchaseTimeMillis
 
 -- | A developer-specified string that contains supplemental information
 -- about an order.
-ppDeveloperPayLoad :: Lens' ProductPurchase (Maybe Text)
-ppDeveloperPayLoad
-  = lens _ppDeveloperPayLoad
-      (\ s a -> s{_ppDeveloperPayLoad = a})
+ppDeveloperPayload :: Lens' ProductPurchase (Maybe Text)
+ppDeveloperPayload
+  = lens _ppDeveloperPayload
+      (\ s a -> s{_ppDeveloperPayload = a})
 
 instance FromJSON ProductPurchase where
         parseJSON
@@ -1098,7 +1098,7 @@ instance ToJSON ProductPurchase where
                   ("consumptionState" .=) <$> _ppConsumptionState,
                   Just ("kind" .= _ppKind),
                   ("purchaseTimeMillis" .=) <$> _ppPurchaseTimeMillis,
-                  ("developerPayload" .=) <$> _ppDeveloperPayLoad])
+                  ("developerPayload" .=) <$> _ppDeveloperPayload])
 
 -- | A SubscriptionPurchase resource indicates the status of a user\'s
 -- subscription purchase.
@@ -1109,7 +1109,7 @@ data SubscriptionPurchase = SubscriptionPurchase
     , _spExpiryTimeMillis :: !(Maybe Int64)
     , _spAutoRenewing     :: !(Maybe Bool)
     , _spStartTimeMillis  :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionPurchase' with the minimum fields required to make a request.
 --
@@ -1180,7 +1180,7 @@ instance ToJSON SubscriptionPurchase where
 -- /See:/ 'inappproductsBatchRequest' smart constructor.
 newtype InappproductsBatchRequest = InappproductsBatchRequest
     { _ibrEntrys :: Maybe [InappproductsBatchRequestEntry]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsBatchRequest' with the minimum fields required to make a request.
 --
@@ -1218,7 +1218,7 @@ data AppDetails = AppDetails
     , _adContactEmail    :: !(Maybe Text)
     , _adContactWebsite  :: !(Maybe Text)
     , _adDefaultLanguage :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppDetails' with the minimum fields required to make a request.
 --
@@ -1305,7 +1305,7 @@ data ExternallyHostedAPK = ExternallyHostedAPK
     , _ehapkFileSha1Base64      :: !(Maybe Text)
     , _ehapkUsesPermissions     :: !(Maybe [ExternallyHostedAPKUsesPermission])
     , _ehapkCertificateBase64s  :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ExternallyHostedAPK' with the minimum fields required to make a request.
 --
@@ -1507,30 +1507,28 @@ instance ToJSON ExternallyHostedAPK where
 -- | Prices per buyer region. None of these prices should be zero. In-app
 -- products can never be free.
 --
--- /See:/ 'inAppProductPrices' smart constructor.
-data InAppProductPrices =
-    InAppProductPrices
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'prices' smart constructor.
+data Prices =
+    Prices
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InAppProductPrices' with the minimum fields required to make a request.
+-- | Creates a value of 'Prices' with the minimum fields required to make a request.
 --
-inAppProductPrices
-    :: InAppProductPrices
-inAppProductPrices = InAppProductPrices
+prices
+    :: Prices
+prices = Prices
 
-instance FromJSON InAppProductPrices where
-        parseJSON
-          = withObject "InAppProductPrices"
-              (\ o -> pure InAppProductPrices)
+instance FromJSON Prices where
+        parseJSON = withObject "Prices" (\ o -> pure Prices)
 
-instance ToJSON InAppProductPrices where
+instance ToJSON Prices where
         toJSON = const (Object mempty)
 
 --
 -- /See:/ 'imagesUploadResponse' smart constructor.
 newtype ImagesUploadResponse = ImagesUploadResponse
     { _iurImage :: Maybe Image
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImagesUploadResponse' with the minimum fields required to make a request.
 --
@@ -1560,7 +1558,7 @@ instance ToJSON ImagesUploadResponse where
 -- /See:/ 'expansionFilesUploadResponse' smart constructor.
 newtype ExpansionFilesUploadResponse = ExpansionFilesUploadResponse
     { _efurExpansionFile :: Maybe ExpansionFile
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ExpansionFilesUploadResponse' with the minimum fields required to make a request.
 --
@@ -1599,7 +1597,7 @@ data InappproductsListResponse = InappproductsListResponse
     , _ilrPageInfo        :: !(Maybe PageInfo)
     , _ilrKind            :: !Text
     , _ilrInappproduct    :: !(Maybe [InAppProduct])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsListResponse' with the minimum fields required to make a request.
 --
@@ -1669,7 +1667,7 @@ instance ToJSON InappproductsListResponse where
 data SubscriptionDeferralInfo = SubscriptionDeferralInfo
     { _sdiDesiredExpiryTimeMillis  :: !(Maybe Int64)
     , _sdiExpectedExpiryTimeMillis :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionDeferralInfo' with the minimum fields required to make a request.
 --
@@ -1723,7 +1721,7 @@ instance ToJSON SubscriptionDeferralInfo where
 -- /See:/ 'aPKsAddExternallyHostedResponse' smart constructor.
 newtype APKsAddExternallyHostedResponse = APKsAddExternallyHostedResponse
     { _apkaehrExternallyHostedAPK :: Maybe ExternallyHostedAPK
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APKsAddExternallyHostedResponse' with the minimum fields required to make a request.
 --
@@ -1763,7 +1761,7 @@ instance ToJSON APKsAddExternallyHostedResponse where
 data APKListingsListResponse = APKListingsListResponse
     { _apkllrKind     :: !Text
     , _apkllrListings :: !(Maybe [APKListing])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APKListingsListResponse' with the minimum fields required to make a request.
 --
@@ -1813,7 +1811,7 @@ instance ToJSON APKListingsListResponse where
 -- /See:/ 'inappproductsInsertResponse' smart constructor.
 newtype InappproductsInsertResponse = InappproductsInsertResponse
     { _iirInappproduct :: Maybe InAppProduct
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsInsertResponse' with the minimum fields required to make a request.
 --
@@ -1850,7 +1848,7 @@ instance ToJSON InappproductsInsertResponse where
 data Price = Price
     { _pPriceMicros :: !(Maybe Text)
     , _pCurrency    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Price' with the minimum fields required to make a request.
 --
@@ -1898,7 +1896,7 @@ data InappproductsBatchResponseEntry = InappproductsBatchResponseEntry
     { _iInappproductsupdateresponse :: !(Maybe InappproductsUpdateResponse)
     , _iInappproductsinsertresponse :: !(Maybe InappproductsInsertResponse)
     , _iBatchId                     :: !(Maybe Word32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsBatchResponseEntry' with the minimum fields required to make a request.
 --
@@ -1960,12 +1958,12 @@ data InAppProduct = InAppProduct
     , _iapSeason             :: !(Maybe Season)
     , _iapPurchaseType       :: !(Maybe Text)
     , _iapSubscriptionPeriod :: !(Maybe Text)
-    , _iapPrices             :: !(Maybe InAppProductPrices)
-    , _iapSku                :: !(Maybe Text)
+    , _iapPrices             :: !(Maybe Prices)
+    , _iapSKU                :: !(Maybe Text)
     , _iapDefaultPrice       :: !(Maybe Price)
     , _iapListings           :: !(Maybe InAppProductListings)
     , _iapDefaultLanguage    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InAppProduct' with the minimum fields required to make a request.
 --
@@ -1985,7 +1983,7 @@ data InAppProduct = InAppProduct
 --
 -- * 'iapPrices'
 --
--- * 'iapSku'
+-- * 'iapSKU'
 --
 -- * 'iapDefaultPrice'
 --
@@ -2003,7 +2001,7 @@ inAppProduct =
     , _iapPurchaseType = Nothing
     , _iapSubscriptionPeriod = Nothing
     , _iapPrices = Nothing
-    , _iapSku = Nothing
+    , _iapSKU = Nothing
     , _iapDefaultPrice = Nothing
     , _iapListings = Nothing
     , _iapDefaultLanguage = Nothing
@@ -2048,13 +2046,13 @@ iapSubscriptionPeriod
 
 -- | Prices per buyer region. None of these prices should be zero. In-app
 -- products can never be free.
-iapPrices :: Lens' InAppProduct (Maybe InAppProductPrices)
+iapPrices :: Lens' InAppProduct (Maybe Prices)
 iapPrices
   = lens _iapPrices (\ s a -> s{_iapPrices = a})
 
 -- | The stock-keeping-unit (SKU) of the product, unique within an app.
-iapSku :: Lens' InAppProduct (Maybe Text)
-iapSku = lens _iapSku (\ s a -> s{_iapSku = a})
+iapSKU :: Lens' InAppProduct (Maybe Text)
+iapSKU = lens _iapSKU (\ s a -> s{_iapSKU = a})
 
 -- | Default price cannot be zero. In-app products can never be free. Default
 -- price is always in the developer\'s Checkout merchant currency.
@@ -2101,7 +2099,7 @@ instance ToJSON InAppProduct where
                   ("season" .=) <$> _iapSeason,
                   ("purchaseType" .=) <$> _iapPurchaseType,
                   ("subscriptionPeriod" .=) <$> _iapSubscriptionPeriod,
-                  ("prices" .=) <$> _iapPrices, ("sku" .=) <$> _iapSku,
+                  ("prices" .=) <$> _iapPrices, ("sku" .=) <$> _iapSKU,
                   ("defaultPrice" .=) <$> _iapDefaultPrice,
                   ("listings" .=) <$> _iapListings,
                   ("defaultLanguage" .=) <$> _iapDefaultLanguage])
@@ -2111,7 +2109,7 @@ instance ToJSON InAppProduct where
 -- /See:/ 'aPKBinary' smart constructor.
 newtype APKBinary = APKBinary
     { _apkbSha1 :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APKBinary' with the minimum fields required to make a request.
 --
@@ -2145,7 +2143,7 @@ instance ToJSON APKBinary where
 data ExternallyHostedAPKUsesPermission = ExternallyHostedAPKUsesPermission
     { _ehapkupName          :: !(Maybe Text)
     , _ehapkupMaxSdkVersion :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ExternallyHostedAPKUsesPermission' with the minimum fields required to make a request.
 --
@@ -2195,7 +2193,7 @@ instance ToJSON ExternallyHostedAPKUsesPermission
 data ListingsListResponse = ListingsListResponse
     { _llrKind     :: !Text
     , _llrListings :: !(Maybe [Listing])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListingsListResponse' with the minimum fields required to make a request.
 --
@@ -2243,7 +2241,7 @@ instance ToJSON ListingsListResponse where
 -- /See:/ 'inappproductsInsertRequest' smart constructor.
 newtype InappproductsInsertRequest = InappproductsInsertRequest
     { _iInappproduct :: Maybe InAppProduct
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsInsertRequest' with the minimum fields required to make a request.
 --
@@ -2278,7 +2276,7 @@ instance ToJSON InappproductsInsertRequest where
 -- /See:/ 'aPKsAddExternallyHostedRequest' smart constructor.
 newtype APKsAddExternallyHostedRequest = APKsAddExternallyHostedRequest
     { _aExternallyHostedAPK :: Maybe ExternallyHostedAPK
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APKsAddExternallyHostedRequest' with the minimum fields required to make a request.
 --
@@ -2318,7 +2316,7 @@ instance ToJSON APKsAddExternallyHostedRequest where
 data APKsListResponse = APKsListResponse
     { _apklrKind :: !Text
     , _apklrAPKs :: !(Maybe [APK])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APKsListResponse' with the minimum fields required to make a request.
 --
@@ -2369,7 +2367,7 @@ data EntitlementsListResponse = EntitlementsListResponse
     { _elrTokenPagination :: !(Maybe TokenPagination)
     , _elrPageInfo        :: !(Maybe PageInfo)
     , _elrResources       :: !(Maybe [Entitlement])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EntitlementsListResponse' with the minimum fields required to make a request.
 --
@@ -2424,7 +2422,7 @@ instance ToJSON EntitlementsListResponse where
 -- /See:/ 'inappproductsUpdateRequest' smart constructor.
 newtype InappproductsUpdateRequest = InappproductsUpdateRequest
     { _inaInappproduct :: Maybe InAppProduct
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsUpdateRequest' with the minimum fields required to make a request.
 --
@@ -2461,7 +2459,7 @@ instance ToJSON InappproductsUpdateRequest where
 data InappproductsBatchResponse = InappproductsBatchResponse
     { _iEntrys :: !(Maybe [InappproductsBatchResponseEntry])
     , _iKind   :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsBatchResponse' with the minimum fields required to make a request.
 --
@@ -2513,7 +2511,7 @@ data Entitlement = Entitlement
     , _eProductType :: !(Maybe Text)
     , _eToken       :: !(Maybe Text)
     , _eProductId   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Entitlement' with the minimum fields required to make a request.
 --

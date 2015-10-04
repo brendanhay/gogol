@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -67,33 +68,31 @@ type PlacementGroupsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "placementGroups" :>
-           QueryParams "advertiserIds" Int64 :>
-             QueryParam "archived" Bool :>
-               QueryParams "campaignIds" Int64 :>
-                 QueryParams "contentCategoryIds" Int64 :>
-                   QueryParams "directorySiteIds" Int64 :>
-                     QueryParams "ids" Int64 :>
-                       QueryParam "maxEndDate" Text :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "maxStartDate" Text :>
-                             QueryParam "minEndDate" Text :>
-                               QueryParam "minStartDate" Text :>
+           QueryParams "placementStrategyIds" Int64 :>
+             QueryParams "contentCategoryIds" Int64 :>
+               QueryParam "maxEndDate" Text :>
+                 QueryParams "campaignIds" Int64 :>
+                   QueryParams "pricingTypes"
+                     DfareportingPlacementGroupsListPricingTypes
+                     :>
+                     QueryParam "searchString" Text :>
+                       QueryParams "ids" Int64 :>
+                         QueryParam "placementGroupType" PlacementGroupType :>
+                           QueryParams "directorySiteIds" Int64 :>
+                             QueryParam "sortOrder"
+                               DfareportingPlacementGroupsListSortOrder
+                               :>
+                               QueryParams "siteIds" Int64 :>
                                  QueryParam "pageToken" Text :>
-                                   QueryParam "placementGroupType"
-                                     DfareportingPlacementGroupsListPlacementGroupType
+                                   QueryParam "sortField"
+                                     DfareportingPlacementGroupsListSortField
                                      :>
-                                     QueryParams "placementStrategyIds" Int64 :>
-                                       QueryParams "pricingTypes"
-                                         DfareportingPlacementGroupsListPricingTypes
-                                         :>
-                                         QueryParam "searchString" Text :>
-                                           QueryParams "siteIds" Int64 :>
-                                             QueryParam "sortField"
-                                               DfareportingPlacementGroupsListSortField
-                                               :>
-                                               QueryParam "sortOrder"
-                                                 DfareportingPlacementGroupsListSortOrder
-                                                 :>
+                                     QueryParam "maxStartDate" Text :>
+                                       QueryParams "advertiserIds" Int64 :>
+                                         QueryParam "minStartDate" Text :>
+                                           QueryParam "archived" Bool :>
+                                             QueryParam "maxResults" Int32 :>
+                                               QueryParam "minEndDate" Text :>
                                                  QueryParam "quotaUser" Text :>
                                                    QueryParam "prettyPrint" Bool
                                                      :>
@@ -115,33 +114,33 @@ type PlacementGroupsListResource =
 --
 -- /See:/ 'placementGroupsList'' smart constructor.
 data PlacementGroupsList' = PlacementGroupsList'
-    { _pglPlacementStrategyIds :: !(Maybe Int64)
+    { _pglPlacementStrategyIds :: !(Maybe [Int64])
     , _pglQuotaUser            :: !(Maybe Text)
     , _pglPrettyPrint          :: !Bool
-    , _pglContentCategoryIds   :: !(Maybe Int64)
+    , _pglContentCategoryIds   :: !(Maybe [Int64])
     , _pglMaxEndDate           :: !(Maybe Text)
     , _pglUserIP               :: !(Maybe Text)
-    , _pglCampaignIds          :: !(Maybe Int64)
+    , _pglCampaignIds          :: !(Maybe [Int64])
     , _pglPricingTypes         :: !(Maybe DfareportingPlacementGroupsListPricingTypes)
     , _pglSearchString         :: !(Maybe Text)
-    , _pglIds                  :: !(Maybe Int64)
+    , _pglIds                  :: !(Maybe [Int64])
     , _pglProfileId            :: !Int64
-    , _pglPlacementGroupType   :: !(Maybe DfareportingPlacementGroupsListPlacementGroupType)
-    , _pglDirectorySiteIds     :: !(Maybe Int64)
+    , _pglPlacementGroupType   :: !(Maybe PlacementGroupType)
+    , _pglDirectorySiteIds     :: !(Maybe [Int64])
     , _pglSortOrder            :: !(Maybe DfareportingPlacementGroupsListSortOrder)
     , _pglKey                  :: !(Maybe Key)
-    , _pglSiteIds              :: !(Maybe Int64)
+    , _pglSiteIds              :: !(Maybe [Int64])
     , _pglPageToken            :: !(Maybe Text)
     , _pglSortField            :: !(Maybe DfareportingPlacementGroupsListSortField)
     , _pglMaxStartDate         :: !(Maybe Text)
     , _pglOAuthToken           :: !(Maybe OAuthToken)
-    , _pglAdvertiserIds        :: !(Maybe Int64)
+    , _pglAdvertiserIds        :: !(Maybe [Int64])
     , _pglMinStartDate         :: !(Maybe Text)
     , _pglArchived             :: !(Maybe Bool)
     , _pglMaxResults           :: !(Maybe Int32)
     , _pglMinEndDate           :: !(Maybe Text)
     , _pglFields               :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementGroupsList'' with the minimum fields required to make a request.
 --
@@ -233,10 +232,12 @@ placementGroupsList' pPglProfileId_ =
 
 -- | Select only placement groups that are associated with these placement
 -- strategies.
-pglPlacementStrategyIds :: Lens' PlacementGroupsList' (Maybe Int64)
+pglPlacementStrategyIds :: Lens' PlacementGroupsList' [Int64]
 pglPlacementStrategyIds
   = lens _pglPlacementStrategyIds
       (\ s a -> s{_pglPlacementStrategyIds = a})
+      . _Default
+      . _Coerce
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -253,10 +254,12 @@ pglPrettyPrint
 
 -- | Select only placement groups that are associated with these content
 -- categories.
-pglContentCategoryIds :: Lens' PlacementGroupsList' (Maybe Int64)
+pglContentCategoryIds :: Lens' PlacementGroupsList' [Int64]
 pglContentCategoryIds
   = lens _pglContentCategoryIds
       (\ s a -> s{_pglContentCategoryIds = a})
+      . _Default
+      . _Coerce
 
 -- | Select only placements or placement groups whose end date is on or
 -- before the specified maxEndDate. The date should be formatted as
@@ -273,10 +276,12 @@ pglUserIP
   = lens _pglUserIP (\ s a -> s{_pglUserIP = a})
 
 -- | Select only placement groups that belong to these campaigns.
-pglCampaignIds :: Lens' PlacementGroupsList' (Maybe Int64)
+pglCampaignIds :: Lens' PlacementGroupsList' [Int64]
 pglCampaignIds
   = lens _pglCampaignIds
       (\ s a -> s{_pglCampaignIds = a})
+      . _Default
+      . _Coerce
 
 -- | Select only placement groups with these pricing types.
 pglPricingTypes :: Lens' PlacementGroupsList' (Maybe DfareportingPlacementGroupsListPricingTypes)
@@ -298,8 +303,10 @@ pglSearchString
       (\ s a -> s{_pglSearchString = a})
 
 -- | Select only placement groups with these IDs.
-pglIds :: Lens' PlacementGroupsList' (Maybe Int64)
-pglIds = lens _pglIds (\ s a -> s{_pglIds = a})
+pglIds :: Lens' PlacementGroupsList' [Int64]
+pglIds
+  = lens _pglIds (\ s a -> s{_pglIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 pglProfileId :: Lens' PlacementGroupsList' Int64
@@ -312,17 +319,19 @@ pglProfileId
 -- as a single pricing point but also assumes that all the tags in it will
 -- be served at the same time. A roadblock requires one of its assigned
 -- placements to be marked as primary for reporting.
-pglPlacementGroupType :: Lens' PlacementGroupsList' (Maybe DfareportingPlacementGroupsListPlacementGroupType)
+pglPlacementGroupType :: Lens' PlacementGroupsList' (Maybe PlacementGroupType)
 pglPlacementGroupType
   = lens _pglPlacementGroupType
       (\ s a -> s{_pglPlacementGroupType = a})
 
 -- | Select only placement groups that are associated with these directory
 -- sites.
-pglDirectorySiteIds :: Lens' PlacementGroupsList' (Maybe Int64)
+pglDirectorySiteIds :: Lens' PlacementGroupsList' [Int64]
 pglDirectorySiteIds
   = lens _pglDirectorySiteIds
       (\ s a -> s{_pglDirectorySiteIds = a})
+      . _Default
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 pglSortOrder :: Lens' PlacementGroupsList' (Maybe DfareportingPlacementGroupsListSortOrder)
@@ -336,9 +345,11 @@ pglKey :: Lens' PlacementGroupsList' (Maybe Key)
 pglKey = lens _pglKey (\ s a -> s{_pglKey = a})
 
 -- | Select only placement groups that are associated with these sites.
-pglSiteIds :: Lens' PlacementGroupsList' (Maybe Int64)
+pglSiteIds :: Lens' PlacementGroupsList' [Int64]
 pglSiteIds
-  = lens _pglSiteIds (\ s a -> s{_pglSiteIds = a})
+  = lens _pglSiteIds (\ s a -> s{_pglSiteIds = a}) .
+      _Default
+      . _Coerce
 
 -- | Value of the nextPageToken from the previous result page.
 pglPageToken :: Lens' PlacementGroupsList' (Maybe Text)
@@ -365,10 +376,12 @@ pglOAuthToken
       (\ s a -> s{_pglOAuthToken = a})
 
 -- | Select only placement groups that belong to these advertisers.
-pglAdvertiserIds :: Lens' PlacementGroupsList' (Maybe Int64)
+pglAdvertiserIds :: Lens' PlacementGroupsList' [Int64]
 pglAdvertiserIds
   = lens _pglAdvertiserIds
       (\ s a -> s{_pglAdvertiserIds = a})
+      . _Default
+      . _Coerce
 
 -- | Select only placements or placement groups whose start date is on or
 -- after the specified minStartDate. The date should be formatted as
@@ -412,24 +425,26 @@ instance GoogleRequest PlacementGroupsList' where
              PlacementGroupsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementGroupsList'{..}
-          = go _pglAdvertiserIds _pglArchived _pglCampaignIds
-              _pglContentCategoryIds
-              _pglDirectorySiteIds
-              _pglIds
+          = go _pglProfileId
+              (_pglPlacementStrategyIds ^. _Default)
+              (_pglContentCategoryIds ^. _Default)
               _pglMaxEndDate
-              _pglMaxResults
-              _pglMaxStartDate
-              _pglMinEndDate
-              _pglMinStartDate
-              _pglPageToken
-              _pglPlacementGroupType
-              _pglPlacementStrategyIds
-              _pglPricingTypes
+              (_pglCampaignIds ^. _Default)
+              (_pglPricingTypes ^. _Default)
               _pglSearchString
-              _pglSiteIds
-              _pglSortField
+              (_pglIds ^. _Default)
+              _pglPlacementGroupType
+              (_pglDirectorySiteIds ^. _Default)
               _pglSortOrder
-              _pglProfileId
+              (_pglSiteIds ^. _Default)
+              _pglPageToken
+              _pglSortField
+              _pglMaxStartDate
+              (_pglAdvertiserIds ^. _Default)
+              _pglMinStartDate
+              _pglArchived
+              _pglMaxResults
+              _pglMinEndDate
               _pglQuotaUser
               (Just _pglPrettyPrint)
               _pglUserIP

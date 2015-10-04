@@ -38,8 +38,8 @@ module Network.Google.AppsLicensing
     -- ** LicensingLicenseAssignmentsListForProduct
     , module Network.Google.Resource.Licensing.LicenseAssignments.ListForProduct
 
-    -- ** LicensingLicenseAssignmentsListForProductAndSku
-    , module Network.Google.Resource.Licensing.LicenseAssignments.ListForProductAndSku
+    -- ** LicensingLicenseAssignmentsListForProductAndSKU
+    , module Network.Google.Resource.Licensing.LicenseAssignments.ListForProductAndSKU
 
     -- ** LicensingLicenseAssignmentsPatch
     , module Network.Google.Resource.Licensing.LicenseAssignments.Patch
@@ -67,7 +67,7 @@ module Network.Google.AppsLicensing
     , licenseAssignment
     , laEtags
     , laKind
-    , laSkuId
+    , laSKUId
     , laUserId
     , laSelfLink
     , laProductId
@@ -79,7 +79,7 @@ import           Network.Google.Resource.Licensing.LicenseAssignments.Delete
 import           Network.Google.Resource.Licensing.LicenseAssignments.Get
 import           Network.Google.Resource.Licensing.LicenseAssignments.Insert
 import           Network.Google.Resource.Licensing.LicenseAssignments.ListForProduct
-import           Network.Google.Resource.Licensing.LicenseAssignments.ListForProductAndSku
+import           Network.Google.Resource.Licensing.LicenseAssignments.ListForProductAndSKU
 import           Network.Google.Resource.Licensing.LicenseAssignments.Patch
 import           Network.Google.Resource.Licensing.LicenseAssignments.Update
 
@@ -91,7 +91,7 @@ type AppsLicensingAPI =
      LicenseAssignmentsInsertResource :<|>
        LicenseAssignmentsPatchResource
        :<|> LicenseAssignmentsGetResource
-       :<|> LicenseAssignmentsListForProductAndSkuResource
+       :<|> LicenseAssignmentsListForProductAndSKUResource
        :<|> LicenseAssignmentsListForProductResource
        :<|> LicenseAssignmentsDeleteResource
        :<|> LicenseAssignmentsUpdateResource

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.AdExchangeBuyer.Budget.Update
     -- * Request Lenses
     , buQuotaUser
     , buPrettyPrint
-    , buBudget
     , buUserIP
+    , buPayload
     , buAccountId
     , buKey
     , buOAuthToken
@@ -67,14 +68,14 @@ type BudgetUpdateResource =
 data BudgetUpdate' = BudgetUpdate'
     { _buQuotaUser   :: !(Maybe Text)
     , _buPrettyPrint :: !Bool
-    , _buBudget      :: !Budget
     , _buUserIP      :: !(Maybe Text)
+    , _buPayload     :: !Budget
     , _buAccountId   :: !Int64
     , _buKey         :: !(Maybe Key)
     , _buOAuthToken  :: !(Maybe OAuthToken)
     , _buBillingId   :: !Int64
     , _buFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BudgetUpdate'' with the minimum fields required to make a request.
 --
@@ -84,9 +85,9 @@ data BudgetUpdate' = BudgetUpdate'
 --
 -- * 'buPrettyPrint'
 --
--- * 'buBudget'
---
 -- * 'buUserIP'
+--
+-- * 'buPayload'
 --
 -- * 'buAccountId'
 --
@@ -98,16 +99,16 @@ data BudgetUpdate' = BudgetUpdate'
 --
 -- * 'buFields'
 budgetUpdate'
-    :: Budget -- ^ 'Budget'
+    :: Budget -- ^ 'payload'
     -> Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'billingId'
     -> BudgetUpdate'
-budgetUpdate' pBuBudget_ pBuAccountId_ pBuBillingId_ =
+budgetUpdate' pBuPayload_ pBuAccountId_ pBuBillingId_ =
     BudgetUpdate'
     { _buQuotaUser = Nothing
     , _buPrettyPrint = True
-    , _buBudget = pBuBudget_
     , _buUserIP = Nothing
+    , _buPayload = pBuPayload_
     , _buAccountId = pBuAccountId_
     , _buKey = Nothing
     , _buOAuthToken = Nothing
@@ -128,14 +129,15 @@ buPrettyPrint
   = lens _buPrettyPrint
       (\ s a -> s{_buPrettyPrint = a})
 
--- | Multipart request metadata.
-buBudget :: Lens' BudgetUpdate' Budget
-buBudget = lens _buBudget (\ s a -> s{_buBudget = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 buUserIP :: Lens' BudgetUpdate' (Maybe Text)
 buUserIP = lens _buUserIP (\ s a -> s{_buUserIP = a})
+
+-- | Multipart request metadata.
+buPayload :: Lens' BudgetUpdate' Budget
+buPayload
+  = lens _buPayload (\ s a -> s{_buPayload = a})
 
 -- | The account id associated with the budget being updated.
 buAccountId :: Lens' BudgetUpdate' Int64
@@ -177,7 +179,7 @@ instance GoogleRequest BudgetUpdate' where
               _buKey
               _buOAuthToken
               (Just AltJSON)
-              _buBudget
+              _buPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BudgetUpdateResource)

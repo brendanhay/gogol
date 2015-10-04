@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.Compute.Projects.MoveDisk
     , pmdQuotaUser
     , pmdPrettyPrint
     , pmdProject
-    , pmdDiskMoveRequest
     , pmdUserIP
+    , pmdPayload
     , pmdKey
     , pmdOAuthToken
     , pmdFields
@@ -62,15 +63,15 @@ type ProjectsMoveDiskResource =
 --
 -- /See:/ 'projectsMoveDisk'' smart constructor.
 data ProjectsMoveDisk' = ProjectsMoveDisk'
-    { _pmdQuotaUser       :: !(Maybe Text)
-    , _pmdPrettyPrint     :: !Bool
-    , _pmdProject         :: !Text
-    , _pmdDiskMoveRequest :: !DiskMoveRequest
-    , _pmdUserIP          :: !(Maybe Text)
-    , _pmdKey             :: !(Maybe Key)
-    , _pmdOAuthToken      :: !(Maybe OAuthToken)
-    , _pmdFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _pmdQuotaUser   :: !(Maybe Text)
+    , _pmdPrettyPrint :: !Bool
+    , _pmdProject     :: !Text
+    , _pmdUserIP      :: !(Maybe Text)
+    , _pmdPayload     :: !DiskMoveRequest
+    , _pmdKey         :: !(Maybe Key)
+    , _pmdOAuthToken  :: !(Maybe OAuthToken)
+    , _pmdFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsMoveDisk'' with the minimum fields required to make a request.
 --
@@ -82,9 +83,9 @@ data ProjectsMoveDisk' = ProjectsMoveDisk'
 --
 -- * 'pmdProject'
 --
--- * 'pmdDiskMoveRequest'
---
 -- * 'pmdUserIP'
+--
+-- * 'pmdPayload'
 --
 -- * 'pmdKey'
 --
@@ -93,15 +94,15 @@ data ProjectsMoveDisk' = ProjectsMoveDisk'
 -- * 'pmdFields'
 projectsMoveDisk'
     :: Text -- ^ 'project'
-    -> DiskMoveRequest -- ^ 'DiskMoveRequest'
+    -> DiskMoveRequest -- ^ 'payload'
     -> ProjectsMoveDisk'
-projectsMoveDisk' pPmdProject_ pPmdDiskMoveRequest_ =
+projectsMoveDisk' pPmdProject_ pPmdPayload_ =
     ProjectsMoveDisk'
     { _pmdQuotaUser = Nothing
     , _pmdPrettyPrint = True
     , _pmdProject = pPmdProject_
-    , _pmdDiskMoveRequest = pPmdDiskMoveRequest_
     , _pmdUserIP = Nothing
+    , _pmdPayload = pPmdPayload_
     , _pmdKey = Nothing
     , _pmdOAuthToken = Nothing
     , _pmdFields = Nothing
@@ -125,17 +126,16 @@ pmdProject :: Lens' ProjectsMoveDisk' Text
 pmdProject
   = lens _pmdProject (\ s a -> s{_pmdProject = a})
 
--- | Multipart request metadata.
-pmdDiskMoveRequest :: Lens' ProjectsMoveDisk' DiskMoveRequest
-pmdDiskMoveRequest
-  = lens _pmdDiskMoveRequest
-      (\ s a -> s{_pmdDiskMoveRequest = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 pmdUserIP :: Lens' ProjectsMoveDisk' (Maybe Text)
 pmdUserIP
   = lens _pmdUserIP (\ s a -> s{_pmdUserIP = a})
+
+-- | Multipart request metadata.
+pmdPayload :: Lens' ProjectsMoveDisk' DiskMoveRequest
+pmdPayload
+  = lens _pmdPayload (\ s a -> s{_pmdPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -168,7 +168,7 @@ instance GoogleRequest ProjectsMoveDisk' where
               _pmdKey
               _pmdOAuthToken
               (Just AltJSON)
-              _pmdDiskMoveRequest
+              _pmdPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsMoveDiskResource)

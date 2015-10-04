@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Directory.Members.Insert
     , miPrettyPrint
     , miUserIP
     , miGroupKey
+    , miPayload
     , miKey
-    , miMember
     , miOAuthToken
     , miFields
     ) where
@@ -66,11 +67,11 @@ data MembersInsert' = MembersInsert'
     , _miPrettyPrint :: !Bool
     , _miUserIP      :: !(Maybe Text)
     , _miGroupKey    :: !Text
+    , _miPayload     :: !Member
     , _miKey         :: !(Maybe Key)
-    , _miMember      :: !Member
     , _miOAuthToken  :: !(Maybe OAuthToken)
     , _miFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MembersInsert'' with the minimum fields required to make a request.
 --
@@ -84,25 +85,25 @@ data MembersInsert' = MembersInsert'
 --
 -- * 'miGroupKey'
 --
--- * 'miKey'
+-- * 'miPayload'
 --
--- * 'miMember'
+-- * 'miKey'
 --
 -- * 'miOAuthToken'
 --
 -- * 'miFields'
 membersInsert'
     :: Text -- ^ 'groupKey'
-    -> Member -- ^ 'Member'
+    -> Member -- ^ 'payload'
     -> MembersInsert'
-membersInsert' pMiGroupKey_ pMiMember_ =
+membersInsert' pMiGroupKey_ pMiPayload_ =
     MembersInsert'
     { _miQuotaUser = Nothing
     , _miPrettyPrint = True
     , _miUserIP = Nothing
     , _miGroupKey = pMiGroupKey_
+    , _miPayload = pMiPayload_
     , _miKey = Nothing
-    , _miMember = pMiMember_
     , _miOAuthToken = Nothing
     , _miFields = Nothing
     }
@@ -130,15 +131,16 @@ miGroupKey :: Lens' MembersInsert' Text
 miGroupKey
   = lens _miGroupKey (\ s a -> s{_miGroupKey = a})
 
+-- | Multipart request metadata.
+miPayload :: Lens' MembersInsert' Member
+miPayload
+  = lens _miPayload (\ s a -> s{_miPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 miKey :: Lens' MembersInsert' (Maybe Key)
 miKey = lens _miKey (\ s a -> s{_miKey = a})
-
--- | Multipart request metadata.
-miMember :: Lens' MembersInsert' Member
-miMember = lens _miMember (\ s a -> s{_miMember = a})
 
 -- | OAuth 2.0 token for the current user.
 miOAuthToken :: Lens' MembersInsert' (Maybe OAuthToken)
@@ -163,7 +165,7 @@ instance GoogleRequest MembersInsert' where
               _miKey
               _miOAuthToken
               (Just AltJSON)
-              _miMember
+              _miPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MembersInsertResource)

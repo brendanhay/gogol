@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.Datastore.Datasets.RunQuery
     -- * Request Lenses
     , drqQuotaUser
     , drqPrettyPrint
-    , drqRunQueryRequest
     , drqUserIP
+    , drqPayload
     , drqKey
     , drqDatasetId
     , drqOAuthToken
@@ -62,15 +63,15 @@ type DatasetsRunQueryResource =
 --
 -- /See:/ 'datasetsRunQuery'' smart constructor.
 data DatasetsRunQuery' = DatasetsRunQuery'
-    { _drqQuotaUser       :: !(Maybe Text)
-    , _drqPrettyPrint     :: !Bool
-    , _drqRunQueryRequest :: !RunQueryRequest
-    , _drqUserIP          :: !(Maybe Text)
-    , _drqKey             :: !(Maybe Key)
-    , _drqDatasetId       :: !Text
-    , _drqOAuthToken      :: !(Maybe OAuthToken)
-    , _drqFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _drqQuotaUser   :: !(Maybe Text)
+    , _drqPrettyPrint :: !Bool
+    , _drqUserIP      :: !(Maybe Text)
+    , _drqPayload     :: !RunQueryRequest
+    , _drqKey         :: !(Maybe Key)
+    , _drqDatasetId   :: !Text
+    , _drqOAuthToken  :: !(Maybe OAuthToken)
+    , _drqFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsRunQuery'' with the minimum fields required to make a request.
 --
@@ -80,9 +81,9 @@ data DatasetsRunQuery' = DatasetsRunQuery'
 --
 -- * 'drqPrettyPrint'
 --
--- * 'drqRunQueryRequest'
---
 -- * 'drqUserIP'
+--
+-- * 'drqPayload'
 --
 -- * 'drqKey'
 --
@@ -92,15 +93,15 @@ data DatasetsRunQuery' = DatasetsRunQuery'
 --
 -- * 'drqFields'
 datasetsRunQuery'
-    :: RunQueryRequest -- ^ 'RunQueryRequest'
+    :: RunQueryRequest -- ^ 'payload'
     -> Text -- ^ 'datasetId'
     -> DatasetsRunQuery'
-datasetsRunQuery' pDrqRunQueryRequest_ pDrqDatasetId_ =
+datasetsRunQuery' pDrqPayload_ pDrqDatasetId_ =
     DatasetsRunQuery'
     { _drqQuotaUser = Nothing
     , _drqPrettyPrint = True
-    , _drqRunQueryRequest = pDrqRunQueryRequest_
     , _drqUserIP = Nothing
+    , _drqPayload = pDrqPayload_
     , _drqKey = Nothing
     , _drqDatasetId = pDrqDatasetId_
     , _drqOAuthToken = Nothing
@@ -120,17 +121,16 @@ drqPrettyPrint
   = lens _drqPrettyPrint
       (\ s a -> s{_drqPrettyPrint = a})
 
--- | Multipart request metadata.
-drqRunQueryRequest :: Lens' DatasetsRunQuery' RunQueryRequest
-drqRunQueryRequest
-  = lens _drqRunQueryRequest
-      (\ s a -> s{_drqRunQueryRequest = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 drqUserIP :: Lens' DatasetsRunQuery' (Maybe Text)
 drqUserIP
   = lens _drqUserIP (\ s a -> s{_drqUserIP = a})
+
+-- | Multipart request metadata.
+drqPayload :: Lens' DatasetsRunQuery' RunQueryRequest
+drqPayload
+  = lens _drqPayload (\ s a -> s{_drqPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -169,7 +169,7 @@ instance GoogleRequest DatasetsRunQuery' where
               _drqKey
               _drqOAuthToken
               (Just AltPROTO)
-              _drqRunQueryRequest
+              _drqPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsRunQueryResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,10 +35,10 @@ module Network.Google.Resource.Directory.MobileDevices.Action
     , mdaResourceId
     , mdaPrettyPrint
     , mdaUserIP
+    , mdaPayload
     , mdaCustomerId
     , mdaKey
     , mdaOAuthToken
-    , mdaMobileDeviceAction
     , mdaFields
     ) where
 
@@ -67,16 +68,16 @@ type MobileDevicesActionResource =
 --
 -- /See:/ 'mobileDevicesAction'' smart constructor.
 data MobileDevicesAction' = MobileDevicesAction'
-    { _mdaQuotaUser          :: !(Maybe Text)
-    , _mdaResourceId         :: !Text
-    , _mdaPrettyPrint        :: !Bool
-    , _mdaUserIP             :: !(Maybe Text)
-    , _mdaCustomerId         :: !Text
-    , _mdaKey                :: !(Maybe Key)
-    , _mdaOAuthToken         :: !(Maybe OAuthToken)
-    , _mdaMobileDeviceAction :: !MobileDeviceAction
-    , _mdaFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mdaQuotaUser   :: !(Maybe Text)
+    , _mdaResourceId  :: !Text
+    , _mdaPrettyPrint :: !Bool
+    , _mdaUserIP      :: !(Maybe Text)
+    , _mdaPayload     :: !MobileDeviceAction
+    , _mdaCustomerId  :: !Text
+    , _mdaKey         :: !(Maybe Key)
+    , _mdaOAuthToken  :: !(Maybe OAuthToken)
+    , _mdaFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobileDevicesAction'' with the minimum fields required to make a request.
 --
@@ -90,30 +91,30 @@ data MobileDevicesAction' = MobileDevicesAction'
 --
 -- * 'mdaUserIP'
 --
+-- * 'mdaPayload'
+--
 -- * 'mdaCustomerId'
 --
 -- * 'mdaKey'
 --
 -- * 'mdaOAuthToken'
 --
--- * 'mdaMobileDeviceAction'
---
 -- * 'mdaFields'
 mobileDevicesAction'
     :: Text -- ^ 'resourceId'
+    -> MobileDeviceAction -- ^ 'payload'
     -> Text -- ^ 'customerId'
-    -> MobileDeviceAction -- ^ 'MobileDeviceAction'
     -> MobileDevicesAction'
-mobileDevicesAction' pMdaResourceId_ pMdaCustomerId_ pMdaMobileDeviceAction_ =
+mobileDevicesAction' pMdaResourceId_ pMdaPayload_ pMdaCustomerId_ =
     MobileDevicesAction'
     { _mdaQuotaUser = Nothing
     , _mdaResourceId = pMdaResourceId_
     , _mdaPrettyPrint = True
     , _mdaUserIP = Nothing
+    , _mdaPayload = pMdaPayload_
     , _mdaCustomerId = pMdaCustomerId_
     , _mdaKey = Nothing
     , _mdaOAuthToken = Nothing
-    , _mdaMobileDeviceAction = pMdaMobileDeviceAction_
     , _mdaFields = Nothing
     }
 
@@ -142,6 +143,11 @@ mdaUserIP :: Lens' MobileDevicesAction' (Maybe Text)
 mdaUserIP
   = lens _mdaUserIP (\ s a -> s{_mdaUserIP = a})
 
+-- | Multipart request metadata.
+mdaPayload :: Lens' MobileDevicesAction' MobileDeviceAction
+mdaPayload
+  = lens _mdaPayload (\ s a -> s{_mdaPayload = a})
+
 -- | Immutable id of the Google Apps account
 mdaCustomerId :: Lens' MobileDevicesAction' Text
 mdaCustomerId
@@ -159,12 +165,6 @@ mdaOAuthToken :: Lens' MobileDevicesAction' (Maybe OAuthToken)
 mdaOAuthToken
   = lens _mdaOAuthToken
       (\ s a -> s{_mdaOAuthToken = a})
-
--- | Multipart request metadata.
-mdaMobileDeviceAction :: Lens' MobileDevicesAction' MobileDeviceAction
-mdaMobileDeviceAction
-  = lens _mdaMobileDeviceAction
-      (\ s a -> s{_mdaMobileDeviceAction = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mdaFields :: Lens' MobileDevicesAction' (Maybe Text)
@@ -186,7 +186,7 @@ instance GoogleRequest MobileDevicesAction' where
               _mdaKey
               _mdaOAuthToken
               (Just AltJSON)
-              _mdaMobileDeviceAction
+              _mdaPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MobileDevicesActionResource)

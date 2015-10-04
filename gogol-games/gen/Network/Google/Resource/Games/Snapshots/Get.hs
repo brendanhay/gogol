@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -69,7 +70,7 @@ data SnapshotsGet' = SnapshotsGet'
     , _snaOAuthToken  :: !(Maybe OAuthToken)
     , _snaFields      :: !(Maybe Text)
     , _snaSnapshotId  :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotsGet'' with the minimum fields required to make a request.
 --
@@ -160,7 +161,7 @@ instance GoogleRequest SnapshotsGet' where
         type Rs SnapshotsGet' = Snapshot
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u SnapshotsGet'{..}
-          = go _snaLanguage _snaSnapshotId _snaQuotaUser
+          = go _snaSnapshotId _snaLanguage _snaQuotaUser
               (Just _snaPrettyPrint)
               _snaUserIP
               _snaFields

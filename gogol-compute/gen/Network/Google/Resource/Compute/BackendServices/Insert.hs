@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.Compute.BackendServices.Insert
     , bsiPrettyPrint
     , bsiProject
     , bsiUserIP
+    , bsiPayload
     , bsiKey
     , bsiOAuthToken
-    , bsiBackendService
     , bsiFields
     ) where
 
@@ -65,15 +66,15 @@ type BackendServicesInsertResource =
 --
 -- /See:/ 'backendServicesInsert'' smart constructor.
 data BackendServicesInsert' = BackendServicesInsert'
-    { _bsiQuotaUser      :: !(Maybe Text)
-    , _bsiPrettyPrint    :: !Bool
-    , _bsiProject        :: !Text
-    , _bsiUserIP         :: !(Maybe Text)
-    , _bsiKey            :: !(Maybe Key)
-    , _bsiOAuthToken     :: !(Maybe OAuthToken)
-    , _bsiBackendService :: !BackendService
-    , _bsiFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _bsiQuotaUser   :: !(Maybe Text)
+    , _bsiPrettyPrint :: !Bool
+    , _bsiProject     :: !Text
+    , _bsiUserIP      :: !(Maybe Text)
+    , _bsiPayload     :: !BackendService
+    , _bsiKey         :: !(Maybe Key)
+    , _bsiOAuthToken  :: !(Maybe OAuthToken)
+    , _bsiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BackendServicesInsert'' with the minimum fields required to make a request.
 --
@@ -87,26 +88,26 @@ data BackendServicesInsert' = BackendServicesInsert'
 --
 -- * 'bsiUserIP'
 --
+-- * 'bsiPayload'
+--
 -- * 'bsiKey'
 --
 -- * 'bsiOAuthToken'
 --
--- * 'bsiBackendService'
---
 -- * 'bsiFields'
 backendServicesInsert'
     :: Text -- ^ 'project'
-    -> BackendService -- ^ 'BackendService'
+    -> BackendService -- ^ 'payload'
     -> BackendServicesInsert'
-backendServicesInsert' pBsiProject_ pBsiBackendService_ =
+backendServicesInsert' pBsiProject_ pBsiPayload_ =
     BackendServicesInsert'
     { _bsiQuotaUser = Nothing
     , _bsiPrettyPrint = True
     , _bsiProject = pBsiProject_
     , _bsiUserIP = Nothing
+    , _bsiPayload = pBsiPayload_
     , _bsiKey = Nothing
     , _bsiOAuthToken = Nothing
-    , _bsiBackendService = pBsiBackendService_
     , _bsiFields = Nothing
     }
 
@@ -134,6 +135,11 @@ bsiUserIP :: Lens' BackendServicesInsert' (Maybe Text)
 bsiUserIP
   = lens _bsiUserIP (\ s a -> s{_bsiUserIP = a})
 
+-- | Multipart request metadata.
+bsiPayload :: Lens' BackendServicesInsert' BackendService
+bsiPayload
+  = lens _bsiPayload (\ s a -> s{_bsiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -145,12 +151,6 @@ bsiOAuthToken :: Lens' BackendServicesInsert' (Maybe OAuthToken)
 bsiOAuthToken
   = lens _bsiOAuthToken
       (\ s a -> s{_bsiOAuthToken = a})
-
--- | Multipart request metadata.
-bsiBackendService :: Lens' BackendServicesInsert' BackendService
-bsiBackendService
-  = lens _bsiBackendService
-      (\ s a -> s{_bsiBackendService = a})
 
 -- | Selector specifying which fields to include in a partial response.
 bsiFields :: Lens' BackendServicesInsert' (Maybe Text)
@@ -171,7 +171,7 @@ instance GoogleRequest BackendServicesInsert' where
               _bsiKey
               _bsiOAuthToken
               (Just AltJSON)
-              _bsiBackendService
+              _bsiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BackendServicesInsertResource)

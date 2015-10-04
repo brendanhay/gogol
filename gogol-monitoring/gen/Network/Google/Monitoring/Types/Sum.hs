@@ -57,36 +57,36 @@ instance ToJSON CloudMonitoringTimeseriesListAggregator where
 -- | The aggregation function that will reduce the data points in each window
 -- to a single point. This parameter is only valid for non-cumulative
 -- metrics with a value type of INT64 or DOUBLE.
-data CloudMonitoringTimeseriesDescriptorsListAggregator
-    = CMTDLAMax
+data Aggregator
+    = AMax
       -- ^ @max@
-    | CMTDLAMean
+    | AMean
       -- ^ @mean@
-    | CMTDLAMin
+    | AMin
       -- ^ @min@
-    | CMTDLASum
+    | ASum
       -- ^ @sum@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CloudMonitoringTimeseriesDescriptorsListAggregator
+instance Hashable Aggregator
 
-instance FromText CloudMonitoringTimeseriesDescriptorsListAggregator where
+instance FromText Aggregator where
     fromText = \case
-        "max" -> Just CMTDLAMax
-        "mean" -> Just CMTDLAMean
-        "min" -> Just CMTDLAMin
-        "sum" -> Just CMTDLASum
+        "max" -> Just AMax
+        "mean" -> Just AMean
+        "min" -> Just AMin
+        "sum" -> Just ASum
         _ -> Nothing
 
-instance ToText CloudMonitoringTimeseriesDescriptorsListAggregator where
+instance ToText Aggregator where
     toText = \case
-        CMTDLAMax -> "max"
-        CMTDLAMean -> "mean"
-        CMTDLAMin -> "min"
-        CMTDLASum -> "sum"
+        AMax -> "max"
+        AMean -> "mean"
+        AMin -> "min"
+        ASum -> "sum"
 
-instance FromJSON CloudMonitoringTimeseriesDescriptorsListAggregator where
-    parseJSON = parseJSONText "CloudMonitoringTimeseriesDescriptorsListAggregator"
+instance FromJSON Aggregator where
+    parseJSON = parseJSONText "Aggregator"
 
-instance ToJSON CloudMonitoringTimeseriesDescriptorsListAggregator where
+instance ToJSON Aggregator where
     toJSON = toJSONText

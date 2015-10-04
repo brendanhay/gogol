@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -31,9 +32,9 @@ module Network.Google.Resource.Datastore.Datasets.Rollback
 
     -- * Request Lenses
     , drQuotaUser
-    , drRollbackRequest
     , drPrettyPrint
     , drUserIP
+    , drPayload
     , drKey
     , drDatasetId
     , drOAuthToken
@@ -62,15 +63,15 @@ type DatasetsRollbackResource =
 --
 -- /See:/ 'datasetsRollback'' smart constructor.
 data DatasetsRollback' = DatasetsRollback'
-    { _drQuotaUser       :: !(Maybe Text)
-    , _drRollbackRequest :: !RollbackRequest
-    , _drPrettyPrint     :: !Bool
-    , _drUserIP          :: !(Maybe Text)
-    , _drKey             :: !(Maybe Key)
-    , _drDatasetId       :: !Text
-    , _drOAuthToken      :: !(Maybe OAuthToken)
-    , _drFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _drQuotaUser   :: !(Maybe Text)
+    , _drPrettyPrint :: !Bool
+    , _drUserIP      :: !(Maybe Text)
+    , _drPayload     :: !RollbackRequest
+    , _drKey         :: !(Maybe Key)
+    , _drDatasetId   :: !Text
+    , _drOAuthToken  :: !(Maybe OAuthToken)
+    , _drFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsRollback'' with the minimum fields required to make a request.
 --
@@ -78,11 +79,11 @@ data DatasetsRollback' = DatasetsRollback'
 --
 -- * 'drQuotaUser'
 --
--- * 'drRollbackRequest'
---
 -- * 'drPrettyPrint'
 --
 -- * 'drUserIP'
+--
+-- * 'drPayload'
 --
 -- * 'drKey'
 --
@@ -92,15 +93,15 @@ data DatasetsRollback' = DatasetsRollback'
 --
 -- * 'drFields'
 datasetsRollback'
-    :: RollbackRequest -- ^ 'RollbackRequest'
+    :: RollbackRequest -- ^ 'payload'
     -> Text -- ^ 'datasetId'
     -> DatasetsRollback'
-datasetsRollback' pDrRollbackRequest_ pDrDatasetId_ =
+datasetsRollback' pDrPayload_ pDrDatasetId_ =
     DatasetsRollback'
     { _drQuotaUser = Nothing
-    , _drRollbackRequest = pDrRollbackRequest_
     , _drPrettyPrint = True
     , _drUserIP = Nothing
+    , _drPayload = pDrPayload_
     , _drKey = Nothing
     , _drDatasetId = pDrDatasetId_
     , _drOAuthToken = Nothing
@@ -114,12 +115,6 @@ drQuotaUser :: Lens' DatasetsRollback' (Maybe Text)
 drQuotaUser
   = lens _drQuotaUser (\ s a -> s{_drQuotaUser = a})
 
--- | Multipart request metadata.
-drRollbackRequest :: Lens' DatasetsRollback' RollbackRequest
-drRollbackRequest
-  = lens _drRollbackRequest
-      (\ s a -> s{_drRollbackRequest = a})
-
 -- | Returns response with indentations and line breaks.
 drPrettyPrint :: Lens' DatasetsRollback' Bool
 drPrettyPrint
@@ -130,6 +125,11 @@ drPrettyPrint
 -- want to enforce per-user limits.
 drUserIP :: Lens' DatasetsRollback' (Maybe Text)
 drUserIP = lens _drUserIP (\ s a -> s{_drUserIP = a})
+
+-- | Multipart request metadata.
+drPayload :: Lens' DatasetsRollback' RollbackRequest
+drPayload
+  = lens _drPayload (\ s a -> s{_drPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -165,7 +165,7 @@ instance GoogleRequest DatasetsRollback' where
               _drKey
               _drOAuthToken
               (Just AltPROTO)
-              _drRollbackRequest
+              _drPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsRollbackResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,8 +37,8 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Set
     , ddbsUploadProtocol
     , ddbsPp
     , ddbsAccessToken
-    , ddbsBreakpoint
     , ddbsUploadType
+    , ddbsPayload
     , ddbsBearerToken
     , ddbsKey
     , ddbsDebuggeeId
@@ -59,12 +60,12 @@ type DebuggerDebuggeesBreakpointsSetResource =
              "breakpoints" :>
                "set" :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "upload_protocol" Text :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "callback" Text :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
@@ -84,15 +85,15 @@ data DebuggerDebuggeesBreakpointsSet' = DebuggerDebuggeesBreakpointsSet'
     , _ddbsUploadProtocol :: !(Maybe Text)
     , _ddbsPp             :: !Bool
     , _ddbsAccessToken    :: !(Maybe Text)
-    , _ddbsBreakpoint     :: !Breakpoint
     , _ddbsUploadType     :: !(Maybe Text)
+    , _ddbsPayload        :: !Breakpoint
     , _ddbsBearerToken    :: !(Maybe Text)
     , _ddbsKey            :: !(Maybe Key)
     , _ddbsDebuggeeId     :: !Text
     , _ddbsOAuthToken     :: !(Maybe OAuthToken)
     , _ddbsFields         :: !(Maybe Text)
     , _ddbsCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DebuggerDebuggeesBreakpointsSet'' with the minimum fields required to make a request.
 --
@@ -110,9 +111,9 @@ data DebuggerDebuggeesBreakpointsSet' = DebuggerDebuggeesBreakpointsSet'
 --
 -- * 'ddbsAccessToken'
 --
--- * 'ddbsBreakpoint'
---
 -- * 'ddbsUploadType'
+--
+-- * 'ddbsPayload'
 --
 -- * 'ddbsBearerToken'
 --
@@ -126,10 +127,10 @@ data DebuggerDebuggeesBreakpointsSet' = DebuggerDebuggeesBreakpointsSet'
 --
 -- * 'ddbsCallback'
 debuggerDebuggeesBreakpointsSet'
-    :: Breakpoint -- ^ 'Breakpoint'
+    :: Breakpoint -- ^ 'payload'
     -> Text -- ^ 'debuggeeId'
     -> DebuggerDebuggeesBreakpointsSet'
-debuggerDebuggeesBreakpointsSet' pDdbsBreakpoint_ pDdbsDebuggeeId_ =
+debuggerDebuggeesBreakpointsSet' pDdbsPayload_ pDdbsDebuggeeId_ =
     DebuggerDebuggeesBreakpointsSet'
     { _ddbsXgafv = Nothing
     , _ddbsQuotaUser = Nothing
@@ -137,8 +138,8 @@ debuggerDebuggeesBreakpointsSet' pDdbsBreakpoint_ pDdbsDebuggeeId_ =
     , _ddbsUploadProtocol = Nothing
     , _ddbsPp = True
     , _ddbsAccessToken = Nothing
-    , _ddbsBreakpoint = pDdbsBreakpoint_
     , _ddbsUploadType = Nothing
+    , _ddbsPayload = pDdbsPayload_
     , _ddbsBearerToken = Nothing
     , _ddbsKey = Nothing
     , _ddbsDebuggeeId = pDdbsDebuggeeId_
@@ -182,17 +183,16 @@ ddbsAccessToken
   = lens _ddbsAccessToken
       (\ s a -> s{_ddbsAccessToken = a})
 
--- | Multipart request metadata.
-ddbsBreakpoint :: Lens' DebuggerDebuggeesBreakpointsSet' Breakpoint
-ddbsBreakpoint
-  = lens _ddbsBreakpoint
-      (\ s a -> s{_ddbsBreakpoint = a})
-
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
 ddbsUploadType :: Lens' DebuggerDebuggeesBreakpointsSet' (Maybe Text)
 ddbsUploadType
   = lens _ddbsUploadType
       (\ s a -> s{_ddbsUploadType = a})
+
+-- | Multipart request metadata.
+ddbsPayload :: Lens' DebuggerDebuggeesBreakpointsSet' Breakpoint
+ddbsPayload
+  = lens _ddbsPayload (\ s a -> s{_ddbsPayload = a})
 
 -- | OAuth bearer token.
 ddbsBearerToken :: Lens' DebuggerDebuggeesBreakpointsSet' (Maybe Text)
@@ -240,19 +240,19 @@ instance GoogleRequest
         request = requestWithRoute defReq debuggerURL
         requestWithRoute r u
           DebuggerDebuggeesBreakpointsSet'{..}
-          = go _ddbsXgafv _ddbsAccessToken _ddbsBearerToken
-              _ddbsCallback
+          = go _ddbsDebuggeeId _ddbsXgafv _ddbsUploadProtocol
               (Just _ddbsPp)
+              _ddbsAccessToken
               _ddbsUploadType
-              _ddbsUploadProtocol
-              _ddbsDebuggeeId
+              _ddbsBearerToken
+              _ddbsCallback
               _ddbsQuotaUser
               (Just _ddbsPrettyPrint)
               _ddbsFields
               _ddbsKey
               _ddbsOAuthToken
               (Just AltJSON)
-              _ddbsBreakpoint
+              _ddbsPayload
           where go
                   = clientWithRoute
                       (Proxy ::

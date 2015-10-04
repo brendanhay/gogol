@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.DFAReporting.Sizes.Insert
     -- * Request Lenses
     , sQuotaUser
     , sPrettyPrint
-    , sSize
     , sUserIP
     , sProfileId
+    , sPayload
     , sKey
     , sOAuthToken
     , sFields
@@ -64,13 +65,13 @@ type SizesInsertResource =
 data SizesInsert' = SizesInsert'
     { _sQuotaUser   :: !(Maybe Text)
     , _sPrettyPrint :: !Bool
-    , _sSize        :: !Size
     , _sUserIP      :: !(Maybe Text)
     , _sProfileId   :: !Int64
+    , _sPayload     :: !Size
     , _sKey         :: !(Maybe Key)
     , _sOAuthToken  :: !(Maybe OAuthToken)
     , _sFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SizesInsert'' with the minimum fields required to make a request.
 --
@@ -80,11 +81,11 @@ data SizesInsert' = SizesInsert'
 --
 -- * 'sPrettyPrint'
 --
--- * 'sSize'
---
 -- * 'sUserIP'
 --
 -- * 'sProfileId'
+--
+-- * 'sPayload'
 --
 -- * 'sKey'
 --
@@ -92,16 +93,16 @@ data SizesInsert' = SizesInsert'
 --
 -- * 'sFields'
 sizesInsert'
-    :: Size -- ^ 'Size'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> Size -- ^ 'payload'
     -> SizesInsert'
-sizesInsert' pSSize_ pSProfileId_ =
+sizesInsert' pSProfileId_ pSPayload_ =
     SizesInsert'
     { _sQuotaUser = Nothing
     , _sPrettyPrint = True
-    , _sSize = pSSize_
     , _sUserIP = Nothing
     , _sProfileId = pSProfileId_
+    , _sPayload = pSPayload_
     , _sKey = Nothing
     , _sOAuthToken = Nothing
     , _sFields = Nothing
@@ -119,10 +120,6 @@ sPrettyPrint :: Lens' SizesInsert' Bool
 sPrettyPrint
   = lens _sPrettyPrint (\ s a -> s{_sPrettyPrint = a})
 
--- | Multipart request metadata.
-sSize :: Lens' SizesInsert' Size
-sSize = lens _sSize (\ s a -> s{_sSize = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 sUserIP :: Lens' SizesInsert' (Maybe Text)
@@ -132,6 +129,10 @@ sUserIP = lens _sUserIP (\ s a -> s{_sUserIP = a})
 sProfileId :: Lens' SizesInsert' Int64
 sProfileId
   = lens _sProfileId (\ s a -> s{_sProfileId = a})
+
+-- | Multipart request metadata.
+sPayload :: Lens' SizesInsert' Size
+sPayload = lens _sPayload (\ s a -> s{_sPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -162,7 +163,7 @@ instance GoogleRequest SizesInsert' where
               _sKey
               _sOAuthToken
               (Just AltJSON)
-              _sSize
+              _sPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SizesInsertResource)

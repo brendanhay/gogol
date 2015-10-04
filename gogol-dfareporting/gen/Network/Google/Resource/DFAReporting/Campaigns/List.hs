@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -61,23 +62,23 @@ type CampaignsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "campaigns" :>
-           QueryParams "advertiserGroupIds" Int64 :>
-             QueryParams "advertiserIds" Int64 :>
-               QueryParam "archived" Bool :>
-                 QueryParam "atLeastOneOptimizationActivity" Bool :>
-                   QueryParams "excludedIds" Int64 :>
-                     QueryParams "ids" Int64 :>
-                       QueryParam "maxResults" Int32 :>
-                         QueryParam "overriddenEventTagId" Int64 :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "searchString" Text :>
-                               QueryParam "sortField"
-                                 DfareportingCampaignsListSortField
-                                 :>
-                                 QueryParam "sortOrder"
-                                   DfareportingCampaignsListSortOrder
-                                   :>
-                                   QueryParam "subaccountId" Int64 :>
+           QueryParams "excludedIds" Int64 :>
+             QueryParam "searchString" Text :>
+               QueryParams "ids" Int64 :>
+                 QueryParam "sortOrder"
+                   DfareportingCampaignsListSortOrder
+                   :>
+                   QueryParams "advertiserGroupIds" Int64 :>
+                     QueryParam "atLeastOneOptimizationActivity" Bool :>
+                       QueryParam "overriddenEventTagId" Int64 :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "sortField"
+                             DfareportingCampaignsListSortField
+                             :>
+                             QueryParam "subaccountId" Int64 :>
+                               QueryParams "advertiserIds" Int64 :>
+                                 QueryParam "archived" Bool :>
+                                   QueryParam "maxResults" Int32 :>
                                      QueryParam "quotaUser" Text :>
                                        QueryParam "prettyPrint" Bool :>
                                          QueryParam "userIp" Text :>
@@ -94,15 +95,15 @@ type CampaignsListResource =
 --
 -- /See:/ 'campaignsList'' smart constructor.
 data CampaignsList' = CampaignsList'
-    { _ccExcludedIds                    :: !(Maybe Int64)
+    { _ccExcludedIds                    :: !(Maybe [Int64])
     , _ccQuotaUser                      :: !(Maybe Text)
     , _ccPrettyPrint                    :: !Bool
     , _ccUserIP                         :: !(Maybe Text)
     , _ccSearchString                   :: !(Maybe Text)
-    , _ccIds                            :: !(Maybe Int64)
+    , _ccIds                            :: !(Maybe [Int64])
     , _ccProfileId                      :: !Int64
     , _ccSortOrder                      :: !(Maybe DfareportingCampaignsListSortOrder)
-    , _ccAdvertiserGroupIds             :: !(Maybe Int64)
+    , _ccAdvertiserGroupIds             :: !(Maybe [Int64])
     , _ccKey                            :: !(Maybe Key)
     , _ccAtLeastOneOptimizationActivity :: !(Maybe Bool)
     , _ccOverriddenEventTagId           :: !(Maybe Int64)
@@ -110,11 +111,11 @@ data CampaignsList' = CampaignsList'
     , _ccSortField                      :: !(Maybe DfareportingCampaignsListSortField)
     , _ccSubAccountId                   :: !(Maybe Int64)
     , _ccOAuthToken                     :: !(Maybe OAuthToken)
-    , _ccAdvertiserIds                  :: !(Maybe Int64)
+    , _ccAdvertiserIds                  :: !(Maybe [Int64])
     , _ccArchived                       :: !(Maybe Bool)
     , _ccMaxResults                     :: !(Maybe Int32)
     , _ccFields                         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsList'' with the minimum fields required to make a request.
 --
@@ -187,10 +188,12 @@ campaignsList' pCcProfileId_ =
     }
 
 -- | Exclude campaigns with these IDs.
-ccExcludedIds :: Lens' CampaignsList' (Maybe Int64)
+ccExcludedIds :: Lens' CampaignsList' [Int64]
 ccExcludedIds
   = lens _ccExcludedIds
       (\ s a -> s{_ccExcludedIds = a})
+      . _Default
+      . _Coerce
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -223,8 +226,10 @@ ccSearchString
       (\ s a -> s{_ccSearchString = a})
 
 -- | Select only campaigns with these IDs.
-ccIds :: Lens' CampaignsList' (Maybe Int64)
-ccIds = lens _ccIds (\ s a -> s{_ccIds = a})
+ccIds :: Lens' CampaignsList' [Int64]
+ccIds
+  = lens _ccIds (\ s a -> s{_ccIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 ccProfileId :: Lens' CampaignsList' Int64
@@ -238,10 +243,12 @@ ccSortOrder
 
 -- | Select only campaigns whose advertisers belong to these advertiser
 -- groups.
-ccAdvertiserGroupIds :: Lens' CampaignsList' (Maybe Int64)
+ccAdvertiserGroupIds :: Lens' CampaignsList' [Int64]
 ccAdvertiserGroupIds
   = lens _ccAdvertiserGroupIds
       (\ s a -> s{_ccAdvertiserGroupIds = a})
+      . _Default
+      . _Coerce
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -283,10 +290,12 @@ ccOAuthToken
   = lens _ccOAuthToken (\ s a -> s{_ccOAuthToken = a})
 
 -- | Select only campaigns that belong to these advertisers.
-ccAdvertiserIds :: Lens' CampaignsList' (Maybe Int64)
+ccAdvertiserIds :: Lens' CampaignsList' [Int64]
 ccAdvertiserIds
   = lens _ccAdvertiserIds
       (\ s a -> s{_ccAdvertiserIds = a})
+      . _Default
+      . _Coerce
 
 -- | Select only archived campaigns. Don\'t set this field to select both
 -- archived and non-archived campaigns.
@@ -311,19 +320,19 @@ instance GoogleRequest CampaignsList' where
         type Rs CampaignsList' = CampaignsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CampaignsList'{..}
-          = go _ccAdvertiserGroupIds _ccAdvertiserIds
-              _ccArchived
+          = go _ccProfileId (_ccExcludedIds ^. _Default)
+              _ccSearchString
+              (_ccIds ^. _Default)
+              _ccSortOrder
+              (_ccAdvertiserGroupIds ^. _Default)
               _ccAtLeastOneOptimizationActivity
-              _ccExcludedIds
-              _ccIds
-              _ccMaxResults
               _ccOverriddenEventTagId
               _ccPageToken
-              _ccSearchString
               _ccSortField
-              _ccSortOrder
               _ccSubAccountId
-              _ccProfileId
+              (_ccAdvertiserIds ^. _Default)
+              _ccArchived
+              _ccMaxResults
               _ccQuotaUser
               (Just _ccPrettyPrint)
               _ccUserIP

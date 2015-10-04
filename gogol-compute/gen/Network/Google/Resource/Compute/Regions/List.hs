@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,8 +53,8 @@ type RegionsListResource =
      Capture "project" Text :>
        "regions" :>
          QueryParam "filter" Text :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data RegionsList' = RegionsList'
     , _rOAuthToken  :: !(Maybe OAuthToken)
     , _rMaxResults  :: !Word32
     , _rFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionsList'' with the minimum fields required to make a request.
 --
@@ -189,8 +190,8 @@ instance GoogleRequest RegionsList' where
         type Rs RegionsList' = RegionList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u RegionsList'{..}
-          = go _rFilter (Just _rMaxResults) _rPageToken
-              _rProject
+          = go _rProject _rFilter _rPageToken
+              (Just _rMaxResults)
               _rQuotaUser
               (Just _rPrettyPrint)
               _rUserIP

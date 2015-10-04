@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,10 +35,10 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Insert
     , oaciPrettyPrint
     , oaciUserIP
     , oaciBucket
+    , oaciPayload
     , oaciKey
     , oaciObject
     , oaciOAuthToken
-    , oaciObjectAccessControl
     , oaciGeneration
     , oaciFields
     ) where
@@ -68,17 +69,17 @@ type ObjectAccessControlsInsertResource =
 --
 -- /See:/ 'objectAccessControlsInsert'' smart constructor.
 data ObjectAccessControlsInsert' = ObjectAccessControlsInsert'
-    { _oaciQuotaUser           :: !(Maybe Text)
-    , _oaciPrettyPrint         :: !Bool
-    , _oaciUserIP              :: !(Maybe Text)
-    , _oaciBucket              :: !Text
-    , _oaciKey                 :: !(Maybe Key)
-    , _oaciObject              :: !Text
-    , _oaciOAuthToken          :: !(Maybe OAuthToken)
-    , _oaciObjectAccessControl :: !ObjectAccessControl
-    , _oaciGeneration          :: !(Maybe Word64)
-    , _oaciFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _oaciQuotaUser   :: !(Maybe Text)
+    , _oaciPrettyPrint :: !Bool
+    , _oaciUserIP      :: !(Maybe Text)
+    , _oaciBucket      :: !Text
+    , _oaciPayload     :: !ObjectAccessControl
+    , _oaciKey         :: !(Maybe Key)
+    , _oaciObject      :: !Text
+    , _oaciOAuthToken  :: !(Maybe OAuthToken)
+    , _oaciGeneration  :: !(Maybe Word64)
+    , _oaciFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsInsert'' with the minimum fields required to make a request.
 --
@@ -92,32 +93,32 @@ data ObjectAccessControlsInsert' = ObjectAccessControlsInsert'
 --
 -- * 'oaciBucket'
 --
+-- * 'oaciPayload'
+--
 -- * 'oaciKey'
 --
 -- * 'oaciObject'
 --
 -- * 'oaciOAuthToken'
 --
--- * 'oaciObjectAccessControl'
---
 -- * 'oaciGeneration'
 --
 -- * 'oaciFields'
 objectAccessControlsInsert'
     :: Text -- ^ 'bucket'
+    -> ObjectAccessControl -- ^ 'payload'
     -> Text -- ^ 'object'
-    -> ObjectAccessControl -- ^ 'ObjectAccessControl'
     -> ObjectAccessControlsInsert'
-objectAccessControlsInsert' pOaciBucket_ pOaciObject_ pOaciObjectAccessControl_ =
+objectAccessControlsInsert' pOaciBucket_ pOaciPayload_ pOaciObject_ =
     ObjectAccessControlsInsert'
     { _oaciQuotaUser = Nothing
     , _oaciPrettyPrint = True
     , _oaciUserIP = Nothing
     , _oaciBucket = pOaciBucket_
+    , _oaciPayload = pOaciPayload_
     , _oaciKey = Nothing
     , _oaciObject = pOaciObject_
     , _oaciOAuthToken = Nothing
-    , _oaciObjectAccessControl = pOaciObjectAccessControl_
     , _oaciGeneration = Nothing
     , _oaciFields = Nothing
     }
@@ -147,6 +148,11 @@ oaciBucket :: Lens' ObjectAccessControlsInsert' Text
 oaciBucket
   = lens _oaciBucket (\ s a -> s{_oaciBucket = a})
 
+-- | Multipart request metadata.
+oaciPayload :: Lens' ObjectAccessControlsInsert' ObjectAccessControl
+oaciPayload
+  = lens _oaciPayload (\ s a -> s{_oaciPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -163,12 +169,6 @@ oaciOAuthToken :: Lens' ObjectAccessControlsInsert' (Maybe OAuthToken)
 oaciOAuthToken
   = lens _oaciOAuthToken
       (\ s a -> s{_oaciOAuthToken = a})
-
--- | Multipart request metadata.
-oaciObjectAccessControl :: Lens' ObjectAccessControlsInsert' ObjectAccessControl
-oaciObjectAccessControl
-  = lens _oaciObjectAccessControl
-      (\ s a -> s{_oaciObjectAccessControl = a})
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
@@ -192,7 +192,7 @@ instance GoogleRequest ObjectAccessControlsInsert'
              ObjectAccessControl
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectAccessControlsInsert'{..}
-          = go _oaciGeneration _oaciBucket _oaciObject
+          = go _oaciBucket _oaciObject _oaciGeneration
               _oaciQuotaUser
               (Just _oaciPrettyPrint)
               _oaciUserIP
@@ -200,7 +200,7 @@ instance GoogleRequest ObjectAccessControlsInsert'
               _oaciKey
               _oaciOAuthToken
               (Just AltJSON)
-              _oaciObjectAccessControl
+              _oaciPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ObjectAccessControlsInsertResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -65,21 +66,21 @@ type AccountsStoreInfosListResource =
        "accounts" :>
          Capture "accountId" Text :>
            "storeInfos" :>
-             QueryParam "$.xgafv" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "bearer_token" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParams "countries" Text :>
-                       QueryParam "name" Text :>
-                         QueryParam "pageSize" Int32 :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "pp" Bool :>
-                               QueryParams "pphNames" Text :>
-                                 QueryParams "studioNames" Text :>
-                                   QueryParam "uploadType" Text :>
-                                     QueryParam "upload_protocol" Text :>
-                                       QueryParam "videoId" Text :>
-                                         QueryParams "videoIds" Text :>
+             QueryParams "pphNames" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParams "studioNames" Text :>
+                   QueryParams "videoIds" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParams "countries" Text :>
+                               QueryParam "videoId" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "name" Text :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "pageSize" Int32 :>
+                                         QueryParam "callback" Text :>
                                            QueryParam "quotaUser" Text :>
                                              QueryParam "prettyPrint" Bool :>
                                                QueryParam "fields" Text :>
@@ -97,17 +98,17 @@ type AccountsStoreInfosListResource =
 --
 -- /See:/ 'accountsStoreInfosList'' smart constructor.
 data AccountsStoreInfosList' = AccountsStoreInfosList'
-    { _asilPphNames       :: !(Maybe Text)
+    { _asilPphNames       :: !(Maybe [Text])
     , _asilXgafv          :: !(Maybe Text)
-    , _asilStudioNames    :: !(Maybe Text)
+    , _asilStudioNames    :: !(Maybe [Text])
     , _asilQuotaUser      :: !(Maybe Text)
-    , _asilVideoIds       :: !(Maybe Text)
+    , _asilVideoIds       :: !(Maybe [Text])
     , _asilPrettyPrint    :: !Bool
     , _asilUploadProtocol :: !(Maybe Text)
     , _asilPp             :: !Bool
     , _asilAccessToken    :: !(Maybe Text)
     , _asilUploadType     :: !(Maybe Text)
-    , _asilCountries      :: !(Maybe Text)
+    , _asilCountries      :: !(Maybe [Text])
     , _asilVideoId        :: !(Maybe Text)
     , _asilAccountId      :: !Text
     , _asilBearerToken    :: !(Maybe Text)
@@ -118,7 +119,7 @@ data AccountsStoreInfosList' = AccountsStoreInfosList'
     , _asilPageSize       :: !(Maybe Int32)
     , _asilFields         :: !(Maybe Text)
     , _asilCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsStoreInfosList'' with the minimum fields required to make a request.
 --
@@ -194,9 +195,11 @@ accountsStoreInfosList' pAsilAccountId_ =
     }
 
 -- | See _List methods rules_ for info about this field.
-asilPphNames :: Lens' AccountsStoreInfosList' (Maybe Text)
+asilPphNames :: Lens' AccountsStoreInfosList' [Text]
 asilPphNames
   = lens _asilPphNames (\ s a -> s{_asilPphNames = a})
+      . _Default
+      . _Coerce
 
 -- | V1 error format.
 asilXgafv :: Lens' AccountsStoreInfosList' (Maybe Text)
@@ -204,10 +207,12 @@ asilXgafv
   = lens _asilXgafv (\ s a -> s{_asilXgafv = a})
 
 -- | See _List methods rules_ for info about this field.
-asilStudioNames :: Lens' AccountsStoreInfosList' (Maybe Text)
+asilStudioNames :: Lens' AccountsStoreInfosList' [Text]
 asilStudioNames
   = lens _asilStudioNames
       (\ s a -> s{_asilStudioNames = a})
+      . _Default
+      . _Coerce
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -218,9 +223,11 @@ asilQuotaUser
       (\ s a -> s{_asilQuotaUser = a})
 
 -- | Filter StoreInfos that match any of the given \`video_id\`s.
-asilVideoIds :: Lens' AccountsStoreInfosList' (Maybe Text)
+asilVideoIds :: Lens' AccountsStoreInfosList' [Text]
 asilVideoIds
   = lens _asilVideoIds (\ s a -> s{_asilVideoIds = a})
+      . _Default
+      . _Coerce
 
 -- | Returns response with indentations and line breaks.
 asilPrettyPrint :: Lens' AccountsStoreInfosList' Bool
@@ -253,10 +260,12 @@ asilUploadType
 -- | Filter StoreInfos that match (case-insensitive) any of the given country
 -- codes, using the \"ISO 3166-1 alpha-2\" format (examples: \"US\",
 -- \"us\", \"Us\").
-asilCountries :: Lens' AccountsStoreInfosList' (Maybe Text)
+asilCountries :: Lens' AccountsStoreInfosList' [Text]
 asilCountries
   = lens _asilCountries
       (\ s a -> s{_asilCountries = a})
+      . _Default
+      . _Coerce
 
 -- | Filter StoreInfos that match a given \`video_id\`. NOTE: this field is
 -- deprecated and will be removed on V2; \`video_ids\` should be used
@@ -325,20 +334,21 @@ instance GoogleRequest AccountsStoreInfosList' where
         request
           = requestWithRoute defReq playMoviesPartnerURL
         requestWithRoute r u AccountsStoreInfosList'{..}
-          = go _asilXgafv _asilAccessToken _asilBearerToken
-              _asilCallback
-              _asilCountries
-              _asilName
-              _asilPageSize
-              _asilPageToken
-              (Just _asilPp)
-              _asilPphNames
-              _asilStudioNames
-              _asilUploadType
+          = go _asilAccountId (_asilPphNames ^. _Default)
+              _asilXgafv
+              (_asilStudioNames ^. _Default)
+              (_asilVideoIds ^. _Default)
               _asilUploadProtocol
+              (Just _asilPp)
+              _asilAccessToken
+              _asilUploadType
+              (_asilCountries ^. _Default)
               _asilVideoId
-              _asilVideoIds
-              _asilAccountId
+              _asilBearerToken
+              _asilName
+              _asilPageToken
+              _asilPageSize
+              _asilCallback
               _asilQuotaUser
               (Just _asilPrettyPrint)
               _asilFields

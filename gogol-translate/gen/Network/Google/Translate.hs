@@ -53,15 +53,15 @@ module Network.Google.Translate
     , languagesListResponse
     , llrLanguages
 
-    -- ** LanguageTranslationsListFormat
-    , LanguageTranslationsListFormat (..)
+    -- ** Format
+    , Format (..)
 
-    -- ** DetectionsResource
-    , DetectionsResource
-    , detectionsResource
-    , drConfidence
-    , drIsReliable
-    , drLanguage
+    -- ** DetectionsResourceItem
+    , DetectionsResourceItem
+    , detectionsResourceItem
+    , driConfidence
+    , driIsReliable
+    , driLanguage
 
     -- ** LanguagesResource
     , LanguagesResource

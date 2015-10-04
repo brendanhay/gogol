@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.AndroidPublisher.Edits.Listings.Update
     -- * Request Lenses
     , eluQuotaUser
     , eluPrettyPrint
-    , eluListing
     , eluPackageName
     , eluUserIP
+    , eluPayload
     , eluKey
     , eluLanguage
     , eluOAuthToken
@@ -68,15 +69,15 @@ type EditsListingsUpdateResource =
 data EditsListingsUpdate' = EditsListingsUpdate'
     { _eluQuotaUser   :: !(Maybe Text)
     , _eluPrettyPrint :: !Bool
-    , _eluListing     :: !Listing
     , _eluPackageName :: !Text
     , _eluUserIP      :: !(Maybe Text)
+    , _eluPayload     :: !Listing
     , _eluKey         :: !(Maybe Key)
     , _eluLanguage    :: !Text
     , _eluOAuthToken  :: !(Maybe OAuthToken)
     , _eluEditId      :: !Text
     , _eluFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsListingsUpdate'' with the minimum fields required to make a request.
 --
@@ -86,11 +87,11 @@ data EditsListingsUpdate' = EditsListingsUpdate'
 --
 -- * 'eluPrettyPrint'
 --
--- * 'eluListing'
---
 -- * 'eluPackageName'
 --
 -- * 'eluUserIP'
+--
+-- * 'eluPayload'
 --
 -- * 'eluKey'
 --
@@ -102,18 +103,18 @@ data EditsListingsUpdate' = EditsListingsUpdate'
 --
 -- * 'eluFields'
 editsListingsUpdate'
-    :: Listing -- ^ 'Listing'
-    -> Text -- ^ 'packageName'
+    :: Text -- ^ 'packageName'
+    -> Listing -- ^ 'payload'
     -> Text -- ^ 'language'
     -> Text -- ^ 'editId'
     -> EditsListingsUpdate'
-editsListingsUpdate' pEluListing_ pEluPackageName_ pEluLanguage_ pEluEditId_ =
+editsListingsUpdate' pEluPackageName_ pEluPayload_ pEluLanguage_ pEluEditId_ =
     EditsListingsUpdate'
     { _eluQuotaUser = Nothing
     , _eluPrettyPrint = True
-    , _eluListing = pEluListing_
     , _eluPackageName = pEluPackageName_
     , _eluUserIP = Nothing
+    , _eluPayload = pEluPayload_
     , _eluKey = Nothing
     , _eluLanguage = pEluLanguage_
     , _eluOAuthToken = Nothing
@@ -134,11 +135,6 @@ eluPrettyPrint
   = lens _eluPrettyPrint
       (\ s a -> s{_eluPrettyPrint = a})
 
--- | Multipart request metadata.
-eluListing :: Lens' EditsListingsUpdate' Listing
-eluListing
-  = lens _eluListing (\ s a -> s{_eluListing = a})
-
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
 eluPackageName :: Lens' EditsListingsUpdate' Text
@@ -151,6 +147,11 @@ eluPackageName
 eluUserIP :: Lens' EditsListingsUpdate' (Maybe Text)
 eluUserIP
   = lens _eluUserIP (\ s a -> s{_eluUserIP = a})
+
+-- | Multipart request metadata.
+eluPayload :: Lens' EditsListingsUpdate' Listing
+eluPayload
+  = lens _eluPayload (\ s a -> s{_eluPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -196,7 +197,7 @@ instance GoogleRequest EditsListingsUpdate' where
               _eluKey
               _eluOAuthToken
               (Just AltJSON)
-              _eluListing
+              _eluPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EditsListingsUpdateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -31,10 +32,10 @@ module Network.Google.Resource.Prediction.TrainedModels.Insert
 
     -- * Request Lenses
     , tmiQuotaUser
-    , tmiInsert
     , tmiPrettyPrint
     , tmiProject
     , tmiUserIP
+    , tmiPayload
     , tmiKey
     , tmiOAuthToken
     , tmiFields
@@ -62,14 +63,14 @@ type TrainedModelsInsertResource =
 -- /See:/ 'trainedModelsInsert'' smart constructor.
 data TrainedModelsInsert' = TrainedModelsInsert'
     { _tmiQuotaUser   :: !(Maybe Text)
-    , _tmiInsert      :: !Insert
     , _tmiPrettyPrint :: !Bool
     , _tmiProject     :: !Text
     , _tmiUserIP      :: !(Maybe Text)
+    , _tmiPayload     :: !Insert
     , _tmiKey         :: !(Maybe Key)
     , _tmiOAuthToken  :: !(Maybe OAuthToken)
     , _tmiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrainedModelsInsert'' with the minimum fields required to make a request.
 --
@@ -77,13 +78,13 @@ data TrainedModelsInsert' = TrainedModelsInsert'
 --
 -- * 'tmiQuotaUser'
 --
--- * 'tmiInsert'
---
 -- * 'tmiPrettyPrint'
 --
 -- * 'tmiProject'
 --
 -- * 'tmiUserIP'
+--
+-- * 'tmiPayload'
 --
 -- * 'tmiKey'
 --
@@ -91,16 +92,16 @@ data TrainedModelsInsert' = TrainedModelsInsert'
 --
 -- * 'tmiFields'
 trainedModelsInsert'
-    :: Insert -- ^ 'Insert'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'project'
+    -> Insert -- ^ 'payload'
     -> TrainedModelsInsert'
-trainedModelsInsert' pTmiInsert_ pTmiProject_ =
+trainedModelsInsert' pTmiProject_ pTmiPayload_ =
     TrainedModelsInsert'
     { _tmiQuotaUser = Nothing
-    , _tmiInsert = pTmiInsert_
     , _tmiPrettyPrint = True
     , _tmiProject = pTmiProject_
     , _tmiUserIP = Nothing
+    , _tmiPayload = pTmiPayload_
     , _tmiKey = Nothing
     , _tmiOAuthToken = Nothing
     , _tmiFields = Nothing
@@ -112,11 +113,6 @@ trainedModelsInsert' pTmiInsert_ pTmiProject_ =
 tmiQuotaUser :: Lens' TrainedModelsInsert' (Maybe Text)
 tmiQuotaUser
   = lens _tmiQuotaUser (\ s a -> s{_tmiQuotaUser = a})
-
--- | Multipart request metadata.
-tmiInsert :: Lens' TrainedModelsInsert' Insert
-tmiInsert
-  = lens _tmiInsert (\ s a -> s{_tmiInsert = a})
 
 -- | Returns response with indentations and line breaks.
 tmiPrettyPrint :: Lens' TrainedModelsInsert' Bool
@@ -134,6 +130,11 @@ tmiProject
 tmiUserIP :: Lens' TrainedModelsInsert' (Maybe Text)
 tmiUserIP
   = lens _tmiUserIP (\ s a -> s{_tmiUserIP = a})
+
+-- | Multipart request metadata.
+tmiPayload :: Lens' TrainedModelsInsert' Insert
+tmiPayload
+  = lens _tmiPayload (\ s a -> s{_tmiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -166,7 +167,7 @@ instance GoogleRequest TrainedModelsInsert' where
               _tmiKey
               _tmiOAuthToken
               (Just AltJSON)
-              _tmiInsert
+              _tmiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TrainedModelsInsertResource)

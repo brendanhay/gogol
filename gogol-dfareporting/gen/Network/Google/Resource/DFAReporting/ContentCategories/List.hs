@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,16 +55,16 @@ type ContentCategoriesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "contentCategories" :>
-           QueryParams "ids" Int64 :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "searchString" Text :>
+           QueryParam "searchString" Text :>
+             QueryParams "ids" Int64 :>
+               QueryParam "sortOrder"
+                 DfareportingContentCategoriesListSortOrder
+                 :>
+                 QueryParam "pageToken" Text :>
                    QueryParam "sortField"
                      DfareportingContentCategoriesListSortField
                      :>
-                     QueryParam "sortOrder"
-                       DfareportingContentCategoriesListSortOrder
-                       :>
+                     QueryParam "maxResults" Int32 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -81,7 +82,7 @@ data ContentCategoriesList' = ContentCategoriesList'
     , _cclPrettyPrint  :: !Bool
     , _cclUserIP       :: !(Maybe Text)
     , _cclSearchString :: !(Maybe Text)
-    , _cclIds          :: !(Maybe Int64)
+    , _cclIds          :: !(Maybe [Int64])
     , _cclProfileId    :: !Int64
     , _cclSortOrder    :: !(Maybe DfareportingContentCategoriesListSortOrder)
     , _cclKey          :: !(Maybe Key)
@@ -90,7 +91,7 @@ data ContentCategoriesList' = ContentCategoriesList'
     , _cclOAuthToken   :: !(Maybe OAuthToken)
     , _cclMaxResults   :: !(Maybe Int32)
     , _cclFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesList'' with the minimum fields required to make a request.
 --
@@ -174,8 +175,10 @@ cclSearchString
       (\ s a -> s{_cclSearchString = a})
 
 -- | Select only content categories with these IDs.
-cclIds :: Lens' ContentCategoriesList' (Maybe Int64)
-cclIds = lens _cclIds (\ s a -> s{_cclIds = a})
+cclIds :: Lens' ContentCategoriesList' [Int64]
+cclIds
+  = lens _cclIds (\ s a -> s{_cclIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 cclProfileId :: Lens' ContentCategoriesList' Int64
@@ -229,11 +232,12 @@ instance GoogleRequest ContentCategoriesList' where
              ContentCategoriesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ContentCategoriesList'{..}
-          = go _cclIds _cclMaxResults _cclPageToken
-              _cclSearchString
-              _cclSortField
+          = go _cclProfileId _cclSearchString
+              (_cclIds ^. _Default)
               _cclSortOrder
-              _cclProfileId
+              _cclPageToken
+              _cclSortField
+              _cclMaxResults
               _cclQuotaUser
               (Just _cclPrettyPrint)
               _cclUserIP

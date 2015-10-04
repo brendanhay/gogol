@@ -23,7 +23,7 @@ import           Network.Google.TagManager.Types.Sum
 -- /See:/ 'listFoldersResponse' smart constructor.
 newtype ListFoldersResponse = ListFoldersResponse
     { _lfrFolders :: Maybe [Folder]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListFoldersResponse' with the minimum fields required to make a request.
 --
@@ -59,7 +59,7 @@ instance ToJSON ListFoldersResponse where
 -- /See:/ 'listVariablesResponse' smart constructor.
 newtype ListVariablesResponse = ListVariablesResponse
     { _lvrVariables :: Maybe [Variable]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListVariablesResponse' with the minimum fields required to make a request.
 --
@@ -97,7 +97,7 @@ instance ToJSON ListVariablesResponse where
 -- /See:/ 'listRulesResponse' smart constructor.
 newtype ListRulesResponse = ListRulesResponse
     { _lrrRules :: Maybe [Rule]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListRulesResponse' with the minimum fields required to make a request.
 --
@@ -134,7 +134,7 @@ instance ToJSON ListRulesResponse where
 data PublishContainerVersionResponse = PublishContainerVersionResponse
     { _pcvrCompilerError    :: !(Maybe Bool)
     , _pcvrContainerVersion :: !(Maybe ContainerVersion)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishContainerVersionResponse' with the minimum fields required to make a request.
 --
@@ -196,7 +196,7 @@ data Macro = Macro
     , _mScheduleStartMs :: !(Maybe Int64)
     , _mNotes           :: !(Maybe Text)
     , _mParameter       :: !(Maybe [Parameter])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Macro' with the minimum fields required to make a request.
 --
@@ -370,7 +370,7 @@ data Tag = Tag
     , _tPriority          :: !(Maybe Parameter)
     , _tTeardownTag       :: !(Maybe [TeardownTag])
     , _tFingerprint       :: !(Maybe Text)
-    , _tTagFiringOption   :: !(Maybe TagTagFiringOption)
+    , _tTagFiringOption   :: !(Maybe TagFiringOption)
     , _tAccountId         :: !(Maybe Text)
     , _tTagId             :: !(Maybe Text)
     , _tName              :: !(Maybe Text)
@@ -382,7 +382,7 @@ data Tag = Tag
     , _tNotes             :: !(Maybe Text)
     , _tFiringRuleId      :: !(Maybe [Text])
     , _tParameter         :: !(Maybe [Parameter])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Tag' with the minimum fields required to make a request.
 --
@@ -507,7 +507,7 @@ tFingerprint
   = lens _tFingerprint (\ s a -> s{_tFingerprint = a})
 
 -- | Option to fire this tag.
-tTagFiringOption :: Lens' Tag (Maybe TagTagFiringOption)
+tTagFiringOption :: Lens' Tag (Maybe TagFiringOption)
 tTagFiringOption
   = lens _tTagFiringOption
       (\ s a -> s{_tTagFiringOption = a})
@@ -635,7 +635,7 @@ instance ToJSON Tag where
 data TeardownTag = TeardownTag
     { _ttStopTeardownOnFailure :: !(Maybe Bool)
     , _ttTagName               :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TeardownTag' with the minimum fields required to make a request.
 --
@@ -687,7 +687,7 @@ instance ToJSON TeardownTag where
 data CreateContainerVersionResponse = CreateContainerVersionResponse
     { _ccvrCompilerError    :: !(Maybe Bool)
     , _ccvrContainerVersion :: !(Maybe ContainerVersion)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreateContainerVersionResponse' with the minimum fields required to make a request.
 --
@@ -737,7 +737,7 @@ instance ToJSON CreateContainerVersionResponse where
 -- /See:/ 'listTriggersResponse' smart constructor.
 newtype ListTriggersResponse = ListTriggersResponse
     { _ltrTriggers :: Maybe [Trigger]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListTriggersResponse' with the minimum fields required to make a request.
 --
@@ -777,7 +777,7 @@ data CreateContainerVersionRequestVersionOptions = CreateContainerVersionRequest
     { _ccvrvoName         :: !(Maybe Text)
     , _ccvrvoQuickPreview :: !(Maybe Bool)
     , _ccvrvoNotes        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreateContainerVersionRequestVersionOptions' with the minimum fields required to make a request.
 --
@@ -848,7 +848,7 @@ data ContainerVersionHeader = ContainerVersionHeader
     , _cvhDeleted            :: !(Maybe Bool)
     , _cvhNumRules           :: !(Maybe Text)
     , _cvhNumVariables       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContainerVersionHeader' with the minimum fields required to make a request.
 --
@@ -976,8 +976,8 @@ instance ToJSON ContainerVersionHeader where
 --
 -- /See:/ 'accountAccess' smart constructor.
 newtype AccountAccess = AccountAccess
-    { _aaPermission :: Maybe [AccountAccessPermission]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _aaPermission :: Maybe [PermissionItem]
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountAccess' with the minimum fields required to make a request.
 --
@@ -993,7 +993,7 @@ accountAccess =
 
 -- | List of Account permissions. Valid account permissions are read and
 -- manage.
-aaPermission :: Lens' AccountAccess [AccountAccessPermission]
+aaPermission :: Lens' AccountAccess [PermissionItem]
 aaPermission
   = lens _aaPermission (\ s a -> s{_aaPermission = a})
       . _Default
@@ -1019,7 +1019,7 @@ data UserAccess = UserAccess
     , _uaEmailAddress    :: !(Maybe Text)
     , _uaContainerAccess :: !(Maybe [ContainerAccess])
     , _uaPermissionId    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserAccess' with the minimum fields required to make a request.
 --
@@ -1101,7 +1101,7 @@ instance ToJSON UserAccess where
 -- /See:/ 'listAccountsResponse' smart constructor.
 newtype ListAccountsResponse = ListAccountsResponse
     { _larAccounts :: Maybe [Account]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListAccountsResponse' with the minimum fields required to make a request.
 --
@@ -1151,7 +1151,7 @@ data Variable = Variable
     , _vNotes              :: !(Maybe Text)
     , _vEnablingTriggerId  :: !(Maybe [Text])
     , _vParameter          :: !(Maybe [Parameter])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Variable' with the minimum fields required to make a request.
 --
@@ -1327,7 +1327,7 @@ data Rule = Rule
     , _rName        :: !(Maybe Text)
     , _rNotes       :: !(Maybe Text)
     , _rCondition   :: !(Maybe [Condition])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Rule' with the minimum fields required to make a request.
 --
@@ -1427,7 +1427,7 @@ data Folder = Folder
     , _fFolderId    :: !(Maybe Text)
     , _fAccountId   :: !(Maybe Text)
     , _fName        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Folder' with the minimum fields required to make a request.
 --
@@ -1506,7 +1506,7 @@ data Account = Account
     , _aaFingerprint :: !(Maybe Text)
     , _aaAccountId   :: !(Maybe Text)
     , _aaName        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
@@ -1574,7 +1574,7 @@ instance ToJSON Account where
 data ListContainerVersionsResponse = ListContainerVersionsResponse
     { _lcvrContainerVersionHeader :: !(Maybe [ContainerVersionHeader])
     , _lcvrContainerVersion       :: !(Maybe [ContainerVersion])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListContainerVersionsResponse' with the minimum fields required to make a request.
 --
@@ -1628,8 +1628,8 @@ instance ToJSON ListContainerVersionsResponse where
 -- /See:/ 'container' smart constructor.
 data Container = Container
     { _cPublicId               :: !(Maybe Text)
-    , _cUsageContext           :: !(Maybe [ContainerUsageContext])
-    , _cEnabledBuiltInVariable :: !(Maybe [ContainerEnabledBuiltInVariable])
+    , _cUsageContext           :: !(Maybe [UsageContextItem])
+    , _cEnabledBuiltInVariable :: !(Maybe [EnabledBuiltInVariableItem])
     , _cContainerId            :: !(Maybe Text)
     , _cFingerprint            :: !(Maybe Text)
     , _cTimeZoneCountryId      :: !(Maybe Text)
@@ -1638,7 +1638,7 @@ data Container = Container
     , _cName                   :: !(Maybe Text)
     , _cNotes                  :: !(Maybe Text)
     , _cTimeZoneId             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Container' with the minimum fields required to make a request.
 --
@@ -1689,7 +1689,7 @@ cPublicId
 
 -- | List of Usage Contexts for the Container. Valid values include: web,
 -- android, ios.
-cUsageContext :: Lens' Container [ContainerUsageContext]
+cUsageContext :: Lens' Container [UsageContextItem]
 cUsageContext
   = lens _cUsageContext
       (\ s a -> s{_cUsageContext = a})
@@ -1703,7 +1703,7 @@ cUsageContext
 -- errorLine, newHistoryFragment, oldHistoryFragment, newHistoryState,
 -- oldHistoryState, historySource, containerVersion, debugMode,
 -- randomNumber, containerId.
-cEnabledBuiltInVariable :: Lens' Container [ContainerEnabledBuiltInVariable]
+cEnabledBuiltInVariable :: Lens' Container [EnabledBuiltInVariableItem]
 cEnabledBuiltInVariable
   = lens _cEnabledBuiltInVariable
       (\ s a -> s{_cEnabledBuiltInVariable = a})
@@ -1790,7 +1790,7 @@ instance ToJSON Container where
 -- /See:/ 'listAccountUsersResponse' smart constructor.
 newtype ListAccountUsersResponse = ListAccountUsersResponse
     { _laurUserAccess :: Maybe [UserAccess]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListAccountUsersResponse' with the minimum fields required to make a request.
 --
@@ -1829,7 +1829,7 @@ instance ToJSON ListAccountUsersResponse where
 -- /See:/ 'listContainersResponse' smart constructor.
 newtype ListContainersResponse = ListContainersResponse
     { _lcrContainers :: Maybe [Container]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListContainersResponse' with the minimum fields required to make a request.
 --
@@ -1868,7 +1868,7 @@ instance ToJSON ListContainersResponse where
 data SetupTag = SetupTag
     { _stTagName            :: !(Maybe Text)
     , _stStopOnSetupFailure :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SetupTag' with the minimum fields required to make a request.
 --
@@ -1930,7 +1930,7 @@ data ContainerVersion = ContainerVersion
     , _cvDeleted            :: !(Maybe Bool)
     , _cvTrigger            :: !(Maybe [Trigger])
     , _cvNotes              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContainerVersion' with the minimum fields required to make a request.
 --
@@ -2107,7 +2107,7 @@ instance ToJSON ContainerVersion where
 -- /See:/ 'listTagsResponse' smart constructor.
 newtype ListTagsResponse = ListTagsResponse
     { _ltrTags :: Maybe [Tag]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListTagsResponse' with the minimum fields required to make a request.
 --
@@ -2142,7 +2142,7 @@ instance ToJSON ListTagsResponse where
 -- /See:/ 'listMacrosResponse' smart constructor.
 newtype ListMacrosResponse = ListMacrosResponse
     { _lmrMacros :: Maybe [Macro]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListMacrosResponse' with the minimum fields required to make a request.
 --
@@ -2196,7 +2196,7 @@ data Trigger = Trigger
     , _triVideoPercentageList :: !(Maybe Parameter)
     , _triEventName           :: !(Maybe Parameter)
     , _triWaitForTags         :: !(Maybe Parameter)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Trigger' with the minimum fields required to make a request.
 --
@@ -2450,7 +2450,7 @@ instance ToJSON Trigger where
 data Condition = Condition
     { _cType      :: !(Maybe ConditionType)
     , _cParameter :: !(Maybe [Parameter])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Condition' with the minimum fields required to make a request.
 --
@@ -2507,7 +2507,7 @@ data FolderEntities = FolderEntities
     { _feTag      :: !(Maybe [Tag])
     , _feVariable :: !(Maybe [Variable])
     , _feTrigger  :: !(Maybe [Trigger])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FolderEntities' with the minimum fields required to make a request.
 --
@@ -2569,8 +2569,8 @@ instance ToJSON FolderEntities where
 -- /See:/ 'containerAccess' smart constructor.
 data ContainerAccess = ContainerAccess
     { _caContainerId :: !(Maybe Text)
-    , _caPermission  :: !(Maybe [ContainerAccessPermission])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _caPermission  :: !(Maybe [ContainerAccessPermissionItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContainerAccess' with the minimum fields required to make a request.
 --
@@ -2595,7 +2595,7 @@ caContainerId
 
 -- | List of Container permissions. Valid container permissions are: read,
 -- edit, delete, publish.
-caPermission :: Lens' ContainerAccess [ContainerAccessPermission]
+caPermission :: Lens' ContainerAccess [ContainerAccessPermissionItem]
 caPermission
   = lens _caPermission (\ s a -> s{_caPermission = a})
       . _Default
@@ -2625,7 +2625,7 @@ data Parameter = Parameter
     , _pMap   :: !(Maybe [Parameter])
     , _pKey   :: !(Maybe Text)
     , _pType  :: !(Maybe ParameterType)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Parameter' with the minimum fields required to make a request.
 --

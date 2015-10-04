@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,11 +34,11 @@ module Network.Google.Resource.Drive.Permissions.Patch
     , pppQuotaUser
     , pppPrettyPrint
     , pppUserIP
+    , pppPayload
     , pppKey
     , pppTransferOwnership
     , pppFileId
     , pppOAuthToken
-    , pppPermission
     , pppPermissionId
     , pppFields
     ) where
@@ -70,14 +71,14 @@ data PermissionsPatch' = PermissionsPatch'
     { _pppQuotaUser         :: !(Maybe Text)
     , _pppPrettyPrint       :: !Bool
     , _pppUserIP            :: !(Maybe Text)
+    , _pppPayload           :: !Permission
     , _pppKey               :: !(Maybe Key)
     , _pppTransferOwnership :: !Bool
     , _pppFileId            :: !Text
     , _pppOAuthToken        :: !(Maybe OAuthToken)
-    , _pppPermission        :: !Permission
     , _pppPermissionId      :: !Text
     , _pppFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsPatch'' with the minimum fields required to make a request.
 --
@@ -89,6 +90,8 @@ data PermissionsPatch' = PermissionsPatch'
 --
 -- * 'pppUserIP'
 --
+-- * 'pppPayload'
+--
 -- * 'pppKey'
 --
 -- * 'pppTransferOwnership'
@@ -97,26 +100,24 @@ data PermissionsPatch' = PermissionsPatch'
 --
 -- * 'pppOAuthToken'
 --
--- * 'pppPermission'
---
 -- * 'pppPermissionId'
 --
 -- * 'pppFields'
 permissionsPatch'
-    :: Text -- ^ 'fileId'
-    -> Permission -- ^ 'Permission'
+    :: Permission -- ^ 'payload'
+    -> Text -- ^ 'fileId'
     -> Text -- ^ 'permissionId'
     -> PermissionsPatch'
-permissionsPatch' pPppFileId_ pPppPermission_ pPppPermissionId_ =
+permissionsPatch' pPppPayload_ pPppFileId_ pPppPermissionId_ =
     PermissionsPatch'
     { _pppQuotaUser = Nothing
     , _pppPrettyPrint = True
     , _pppUserIP = Nothing
+    , _pppPayload = pPppPayload_
     , _pppKey = Nothing
     , _pppTransferOwnership = False
     , _pppFileId = pPppFileId_
     , _pppOAuthToken = Nothing
-    , _pppPermission = pPppPermission_
     , _pppPermissionId = pPppPermissionId_
     , _pppFields = Nothing
     }
@@ -139,6 +140,11 @@ pppPrettyPrint
 pppUserIP :: Lens' PermissionsPatch' (Maybe Text)
 pppUserIP
   = lens _pppUserIP (\ s a -> s{_pppUserIP = a})
+
+-- | Multipart request metadata.
+pppPayload :: Lens' PermissionsPatch' Permission
+pppPayload
+  = lens _pppPayload (\ s a -> s{_pppPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -164,12 +170,6 @@ pppOAuthToken
   = lens _pppOAuthToken
       (\ s a -> s{_pppOAuthToken = a})
 
--- | Multipart request metadata.
-pppPermission :: Lens' PermissionsPatch' Permission
-pppPermission
-  = lens _pppPermission
-      (\ s a -> s{_pppPermission = a})
-
 -- | The ID for the permission.
 pppPermissionId :: Lens' PermissionsPatch' Text
 pppPermissionId
@@ -189,8 +189,8 @@ instance GoogleRequest PermissionsPatch' where
         type Rs PermissionsPatch' = Permission
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PermissionsPatch'{..}
-          = go (Just _pppTransferOwnership) _pppFileId
-              _pppPermissionId
+          = go _pppFileId _pppPermissionId
+              (Just _pppTransferOwnership)
               _pppQuotaUser
               (Just _pppPrettyPrint)
               _pppUserIP
@@ -198,7 +198,7 @@ instance GoogleRequest PermissionsPatch' where
               _pppKey
               _pppOAuthToken
               (Just AltJSON)
-              _pppPermission
+              _pppPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PermissionsPatchResource)

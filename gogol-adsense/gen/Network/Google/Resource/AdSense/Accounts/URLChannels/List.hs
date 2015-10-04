@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,8 +55,8 @@ type AccountsURLChannelsListResource =
          "adclients" :>
            Capture "adClientId" Text :>
              "urlchannels" :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Int32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -80,7 +81,7 @@ data AccountsURLChannelsList' = AccountsURLChannelsList'
     , _auclOAuthToken  :: !(Maybe OAuthToken)
     , _auclMaxResults  :: !(Maybe Int32)
     , _auclFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsURLChannelsList'' with the minimum fields required to make a request.
 --
@@ -195,8 +196,8 @@ instance GoogleRequest AccountsURLChannelsList' where
         type Rs AccountsURLChannelsList' = URLChannels
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AccountsURLChannelsList'{..}
-          = go _auclMaxResults _auclPageToken _auclAccountId
-              _auclAdClientId
+          = go _auclAccountId _auclAdClientId _auclPageToken
+              _auclMaxResults
               _auclQuotaUser
               (Just _auclPrettyPrint)
               _auclUserIP

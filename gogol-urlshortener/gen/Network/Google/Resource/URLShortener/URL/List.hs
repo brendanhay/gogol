@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,9 +49,8 @@ import           Network.Google.URLShortener.Types
 type URLListResource =
      "url" :>
        "history" :>
-         QueryParam "projection" URLshortenerURLListProjection
-           :>
-           QueryParam "start-token" Text :>
+         QueryParam "start-token" Text :>
+           QueryParam "projection" Projection :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -68,10 +68,10 @@ data URLList' = URLList'
     , _ulUserIP      :: !(Maybe Text)
     , _ulStartToken  :: !(Maybe Text)
     , _ulKey         :: !(Maybe Key)
-    , _ulProjection  :: !(Maybe URLshortenerURLListProjection)
+    , _ulProjection  :: !(Maybe Projection)
     , _ulOAuthToken  :: !(Maybe OAuthToken)
     , _ulFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLList'' with the minimum fields required to make a request.
 --
@@ -136,7 +136,7 @@ ulKey :: Lens' URLList' (Maybe Key)
 ulKey = lens _ulKey (\ s a -> s{_ulKey = a})
 
 -- | Additional information to return.
-ulProjection :: Lens' URLList' (Maybe URLshortenerURLListProjection)
+ulProjection :: Lens' URLList' (Maybe Projection)
 ulProjection
   = lens _ulProjection (\ s a -> s{_ulProjection = a})
 
@@ -157,7 +157,7 @@ instance GoogleRequest URLList' where
         type Rs URLList' = URLHistory
         request = requestWithRoute defReq uRLShortenerURL
         requestWithRoute r u URLList'{..}
-          = go _ulProjection _ulStartToken _ulQuotaUser
+          = go _ulStartToken _ulProjection _ulQuotaUser
               (Just _ulPrettyPrint)
               _ulUserIP
               _ulFields

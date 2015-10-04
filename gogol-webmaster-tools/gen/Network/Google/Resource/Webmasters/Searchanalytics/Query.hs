@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -39,9 +40,9 @@ module Network.Google.Resource.Webmasters.Searchanalytics.Query
     , sqPrettyPrint
     , sqUserIP
     , sqSiteURL
+    , sqPayload
     , sqKey
     , sqOAuthToken
-    , sqSearchAnalyticsQueryRequest
     , sqFields
     ) where
 
@@ -74,15 +75,15 @@ type SearchanalyticsQueryResource =
 --
 -- /See:/ 'searchanalyticsQuery'' smart constructor.
 data SearchanalyticsQuery' = SearchanalyticsQuery'
-    { _sqQuotaUser                   :: !(Maybe Text)
-    , _sqPrettyPrint                 :: !Bool
-    , _sqUserIP                      :: !(Maybe Text)
-    , _sqSiteURL                     :: !Text
-    , _sqKey                         :: !(Maybe Key)
-    , _sqOAuthToken                  :: !(Maybe OAuthToken)
-    , _sqSearchAnalyticsQueryRequest :: !SearchAnalyticsQueryRequest
-    , _sqFields                      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _sqQuotaUser   :: !(Maybe Text)
+    , _sqPrettyPrint :: !Bool
+    , _sqUserIP      :: !(Maybe Text)
+    , _sqSiteURL     :: !Text
+    , _sqPayload     :: !SearchAnalyticsQueryRequest
+    , _sqKey         :: !(Maybe Key)
+    , _sqOAuthToken  :: !(Maybe OAuthToken)
+    , _sqFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchanalyticsQuery'' with the minimum fields required to make a request.
 --
@@ -96,26 +97,26 @@ data SearchanalyticsQuery' = SearchanalyticsQuery'
 --
 -- * 'sqSiteURL'
 --
+-- * 'sqPayload'
+--
 -- * 'sqKey'
 --
 -- * 'sqOAuthToken'
 --
--- * 'sqSearchAnalyticsQueryRequest'
---
 -- * 'sqFields'
 searchanalyticsQuery'
     :: Text -- ^ 'siteUrl'
-    -> SearchAnalyticsQueryRequest -- ^ 'SearchAnalyticsQueryRequest'
+    -> SearchAnalyticsQueryRequest -- ^ 'payload'
     -> SearchanalyticsQuery'
-searchanalyticsQuery' pSqSiteURL_ pSqSearchAnalyticsQueryRequest_ =
+searchanalyticsQuery' pSqSiteURL_ pSqPayload_ =
     SearchanalyticsQuery'
     { _sqQuotaUser = Nothing
     , _sqPrettyPrint = True
     , _sqUserIP = Nothing
     , _sqSiteURL = pSqSiteURL_
+    , _sqPayload = pSqPayload_
     , _sqKey = Nothing
     , _sqOAuthToken = Nothing
-    , _sqSearchAnalyticsQueryRequest = pSqSearchAnalyticsQueryRequest_
     , _sqFields = Nothing
     }
 
@@ -143,6 +144,11 @@ sqSiteURL :: Lens' SearchanalyticsQuery' Text
 sqSiteURL
   = lens _sqSiteURL (\ s a -> s{_sqSiteURL = a})
 
+-- | Multipart request metadata.
+sqPayload :: Lens' SearchanalyticsQuery' SearchAnalyticsQueryRequest
+sqPayload
+  = lens _sqPayload (\ s a -> s{_sqPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -153,12 +159,6 @@ sqKey = lens _sqKey (\ s a -> s{_sqKey = a})
 sqOAuthToken :: Lens' SearchanalyticsQuery' (Maybe OAuthToken)
 sqOAuthToken
   = lens _sqOAuthToken (\ s a -> s{_sqOAuthToken = a})
-
--- | Multipart request metadata.
-sqSearchAnalyticsQueryRequest :: Lens' SearchanalyticsQuery' SearchAnalyticsQueryRequest
-sqSearchAnalyticsQueryRequest
-  = lens _sqSearchAnalyticsQueryRequest
-      (\ s a -> s{_sqSearchAnalyticsQueryRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 sqFields :: Lens' SearchanalyticsQuery' (Maybe Text)
@@ -179,7 +179,7 @@ instance GoogleRequest SearchanalyticsQuery' where
               _sqKey
               _sqOAuthToken
               (Just AltJSON)
-              _sqSearchAnalyticsQueryRequest
+              _sqPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SearchanalyticsQueryResource)

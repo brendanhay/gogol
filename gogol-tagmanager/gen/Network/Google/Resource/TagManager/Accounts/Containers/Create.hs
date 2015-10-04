@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Create
     , accQuotaUser
     , accPrettyPrint
     , accUserIP
+    , accPayload
     , accAccountId
     , accKey
-    , accContainer
     , accOAuthToken
     , accFields
     ) where
@@ -65,12 +66,12 @@ data AccountsContainersCreate' = AccountsContainersCreate'
     { _accQuotaUser   :: !(Maybe Text)
     , _accPrettyPrint :: !Bool
     , _accUserIP      :: !(Maybe Text)
+    , _accPayload     :: !Container
     , _accAccountId   :: !Text
     , _accKey         :: !(Maybe Key)
-    , _accContainer   :: !Container
     , _accOAuthToken  :: !(Maybe OAuthToken)
     , _accFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersCreate'' with the minimum fields required to make a request.
 --
@@ -82,27 +83,27 @@ data AccountsContainersCreate' = AccountsContainersCreate'
 --
 -- * 'accUserIP'
 --
+-- * 'accPayload'
+--
 -- * 'accAccountId'
 --
 -- * 'accKey'
---
--- * 'accContainer'
 --
 -- * 'accOAuthToken'
 --
 -- * 'accFields'
 accountsContainersCreate'
-    :: Text -- ^ 'accountId'
-    -> Container -- ^ 'Container'
+    :: Container -- ^ 'payload'
+    -> Text -- ^ 'accountId'
     -> AccountsContainersCreate'
-accountsContainersCreate' pAccAccountId_ pAccContainer_ =
+accountsContainersCreate' pAccPayload_ pAccAccountId_ =
     AccountsContainersCreate'
     { _accQuotaUser = Nothing
     , _accPrettyPrint = True
     , _accUserIP = Nothing
+    , _accPayload = pAccPayload_
     , _accAccountId = pAccAccountId_
     , _accKey = Nothing
-    , _accContainer = pAccContainer_
     , _accOAuthToken = Nothing
     , _accFields = Nothing
     }
@@ -126,6 +127,11 @@ accUserIP :: Lens' AccountsContainersCreate' (Maybe Text)
 accUserIP
   = lens _accUserIP (\ s a -> s{_accUserIP = a})
 
+-- | Multipart request metadata.
+accPayload :: Lens' AccountsContainersCreate' Container
+accPayload
+  = lens _accPayload (\ s a -> s{_accPayload = a})
+
 -- | The GTM Account ID.
 accAccountId :: Lens' AccountsContainersCreate' Text
 accAccountId
@@ -136,11 +142,6 @@ accAccountId
 -- token.
 accKey :: Lens' AccountsContainersCreate' (Maybe Key)
 accKey = lens _accKey (\ s a -> s{_accKey = a})
-
--- | Multipart request metadata.
-accContainer :: Lens' AccountsContainersCreate' Container
-accContainer
-  = lens _accContainer (\ s a -> s{_accContainer = a})
 
 -- | OAuth 2.0 token for the current user.
 accOAuthToken :: Lens' AccountsContainersCreate' (Maybe OAuthToken)
@@ -169,7 +170,7 @@ instance GoogleRequest AccountsContainersCreate'
               _accKey
               _accOAuthToken
               (Just AltJSON)
-              _accContainer
+              _accPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsContainersCreateResource)

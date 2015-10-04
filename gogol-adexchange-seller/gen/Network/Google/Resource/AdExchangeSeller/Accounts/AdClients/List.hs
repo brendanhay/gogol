@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ type AccountsAdClientsListResource =
      "accounts" :>
        Capture "accountId" Text :>
          "adclients" :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -73,7 +74,7 @@ data AccountsAdClientsList' = AccountsAdClientsList'
     , _aaclOAuthToken  :: !(Maybe OAuthToken)
     , _aaclMaxResults  :: !(Maybe Word32)
     , _aaclFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdClientsList'' with the minimum fields required to make a request.
 --
@@ -178,7 +179,7 @@ instance GoogleRequest AccountsAdClientsList' where
         type Rs AccountsAdClientsList' = AdClients
         request = requestWithRoute defReq adExchangeSellerURL
         requestWithRoute r u AccountsAdClientsList'{..}
-          = go _aaclMaxResults _aaclPageToken _aaclAccountId
+          = go _aaclAccountId _aaclPageToken _aaclMaxResults
               _aaclQuotaUser
               (Just _aaclPrettyPrint)
               _aaclUserIP

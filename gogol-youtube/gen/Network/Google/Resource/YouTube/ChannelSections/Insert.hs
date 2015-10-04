@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.YouTube.ChannelSections.Insert
     , csiQuotaUser
     , csiPart
     , csiPrettyPrint
-    , csiChannelSection
     , csiUserIP
+    , csiPayload
     , csiOnBehalfOfContentOwner
     , csiKey
     , csiOnBehalfOfContentOwnerChannel
@@ -49,9 +50,9 @@ import           Network.Google.YouTube.Types
 -- 'ChannelSectionsInsert'' request conforms to.
 type ChannelSectionsInsertResource =
      "channelSections" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "onBehalfOfContentOwnerChannel" Text :>
-           QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
+           QueryParam "onBehalfOfContentOwnerChannel" Text :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -69,14 +70,14 @@ data ChannelSectionsInsert' = ChannelSectionsInsert'
     { _csiQuotaUser                     :: !(Maybe Text)
     , _csiPart                          :: !Text
     , _csiPrettyPrint                   :: !Bool
-    , _csiChannelSection                :: !ChannelSection
     , _csiUserIP                        :: !(Maybe Text)
+    , _csiPayload                       :: !ChannelSection
     , _csiOnBehalfOfContentOwner        :: !(Maybe Text)
     , _csiKey                           :: !(Maybe Key)
     , _csiOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _csiOAuthToken                    :: !(Maybe OAuthToken)
     , _csiFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelSectionsInsert'' with the minimum fields required to make a request.
 --
@@ -88,9 +89,9 @@ data ChannelSectionsInsert' = ChannelSectionsInsert'
 --
 -- * 'csiPrettyPrint'
 --
--- * 'csiChannelSection'
---
 -- * 'csiUserIP'
+--
+-- * 'csiPayload'
 --
 -- * 'csiOnBehalfOfContentOwner'
 --
@@ -103,15 +104,15 @@ data ChannelSectionsInsert' = ChannelSectionsInsert'
 -- * 'csiFields'
 channelSectionsInsert'
     :: Text -- ^ 'part'
-    -> ChannelSection -- ^ 'ChannelSection'
+    -> ChannelSection -- ^ 'payload'
     -> ChannelSectionsInsert'
-channelSectionsInsert' pCsiPart_ pCsiChannelSection_ =
+channelSectionsInsert' pCsiPart_ pCsiPayload_ =
     ChannelSectionsInsert'
     { _csiQuotaUser = Nothing
     , _csiPart = pCsiPart_
     , _csiPrettyPrint = True
-    , _csiChannelSection = pCsiChannelSection_
     , _csiUserIP = Nothing
+    , _csiPayload = pCsiPayload_
     , _csiOnBehalfOfContentOwner = Nothing
     , _csiKey = Nothing
     , _csiOnBehalfOfContentOwnerChannel = Nothing
@@ -139,17 +140,16 @@ csiPrettyPrint
   = lens _csiPrettyPrint
       (\ s a -> s{_csiPrettyPrint = a})
 
--- | Multipart request metadata.
-csiChannelSection :: Lens' ChannelSectionsInsert' ChannelSection
-csiChannelSection
-  = lens _csiChannelSection
-      (\ s a -> s{_csiChannelSection = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 csiUserIP :: Lens' ChannelSectionsInsert' (Maybe Text)
 csiUserIP
   = lens _csiUserIP (\ s a -> s{_csiUserIP = a})
+
+-- | Multipart request metadata.
+csiPayload :: Lens' ChannelSectionsInsert' ChannelSection
+csiPayload
+  = lens _csiPayload (\ s a -> s{_csiPayload = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -212,9 +212,8 @@ instance GoogleRequest ChannelSectionsInsert' where
         type Rs ChannelSectionsInsert' = ChannelSection
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u ChannelSectionsInsert'{..}
-          = go _csiOnBehalfOfContentOwner
+          = go (Just _csiPart) _csiOnBehalfOfContentOwner
               _csiOnBehalfOfContentOwnerChannel
-              (Just _csiPart)
               _csiQuotaUser
               (Just _csiPrettyPrint)
               _csiUserIP
@@ -222,7 +221,7 @@ instance GoogleRequest ChannelSectionsInsert' where
               _csiKey
               _csiOAuthToken
               (Just AltJSON)
-              _csiChannelSection
+              _csiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChannelSectionsInsertResource)

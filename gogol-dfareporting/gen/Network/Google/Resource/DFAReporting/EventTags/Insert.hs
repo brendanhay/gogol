@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.DFAReporting.EventTags.Insert
     , etiPrettyPrint
     , etiUserIP
     , etiProfileId
+    , etiPayload
     , etiKey
     , etiOAuthToken
-    , etiEventTag
     , etiFields
     ) where
 
@@ -66,11 +67,11 @@ data EventTagsInsert' = EventTagsInsert'
     , _etiPrettyPrint :: !Bool
     , _etiUserIP      :: !(Maybe Text)
     , _etiProfileId   :: !Int64
+    , _etiPayload     :: !EventTag
     , _etiKey         :: !(Maybe Key)
     , _etiOAuthToken  :: !(Maybe OAuthToken)
-    , _etiEventTag    :: !EventTag
     , _etiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsInsert'' with the minimum fields required to make a request.
 --
@@ -84,26 +85,26 @@ data EventTagsInsert' = EventTagsInsert'
 --
 -- * 'etiProfileId'
 --
+-- * 'etiPayload'
+--
 -- * 'etiKey'
 --
 -- * 'etiOAuthToken'
 --
--- * 'etiEventTag'
---
 -- * 'etiFields'
 eventTagsInsert'
     :: Int64 -- ^ 'profileId'
-    -> EventTag -- ^ 'EventTag'
+    -> EventTag -- ^ 'payload'
     -> EventTagsInsert'
-eventTagsInsert' pEtiProfileId_ pEtiEventTag_ =
+eventTagsInsert' pEtiProfileId_ pEtiPayload_ =
     EventTagsInsert'
     { _etiQuotaUser = Nothing
     , _etiPrettyPrint = True
     , _etiUserIP = Nothing
     , _etiProfileId = pEtiProfileId_
+    , _etiPayload = pEtiPayload_
     , _etiKey = Nothing
     , _etiOAuthToken = Nothing
-    , _etiEventTag = pEtiEventTag_
     , _etiFields = Nothing
     }
 
@@ -131,6 +132,11 @@ etiProfileId :: Lens' EventTagsInsert' Int64
 etiProfileId
   = lens _etiProfileId (\ s a -> s{_etiProfileId = a})
 
+-- | Multipart request metadata.
+etiPayload :: Lens' EventTagsInsert' EventTag
+etiPayload
+  = lens _etiPayload (\ s a -> s{_etiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -142,11 +148,6 @@ etiOAuthToken :: Lens' EventTagsInsert' (Maybe OAuthToken)
 etiOAuthToken
   = lens _etiOAuthToken
       (\ s a -> s{_etiOAuthToken = a})
-
--- | Multipart request metadata.
-etiEventTag :: Lens' EventTagsInsert' EventTag
-etiEventTag
-  = lens _etiEventTag (\ s a -> s{_etiEventTag = a})
 
 -- | Selector specifying which fields to include in a partial response.
 etiFields :: Lens' EventTagsInsert' (Maybe Text)
@@ -168,7 +169,7 @@ instance GoogleRequest EventTagsInsert' where
               _etiKey
               _etiOAuthToken
               (Just AltJSON)
-              _etiEventTag
+              _etiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventTagsInsertResource)

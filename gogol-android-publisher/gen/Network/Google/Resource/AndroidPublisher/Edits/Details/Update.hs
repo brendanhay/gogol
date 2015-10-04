@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Details.Update
     , eduPrettyPrint
     , eduPackageName
     , eduUserIP
-    , eduAppDetails
+    , eduPayload
     , eduKey
     , eduOAuthToken
     , eduEditId
@@ -68,12 +69,12 @@ data EditsDetailsUpdate' = EditsDetailsUpdate'
     , _eduPrettyPrint :: !Bool
     , _eduPackageName :: !Text
     , _eduUserIP      :: !(Maybe Text)
-    , _eduAppDetails  :: !AppDetails
+    , _eduPayload     :: !AppDetails
     , _eduKey         :: !(Maybe Key)
     , _eduOAuthToken  :: !(Maybe OAuthToken)
     , _eduEditId      :: !Text
     , _eduFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsDetailsUpdate'' with the minimum fields required to make a request.
 --
@@ -87,7 +88,7 @@ data EditsDetailsUpdate' = EditsDetailsUpdate'
 --
 -- * 'eduUserIP'
 --
--- * 'eduAppDetails'
+-- * 'eduPayload'
 --
 -- * 'eduKey'
 --
@@ -98,16 +99,16 @@ data EditsDetailsUpdate' = EditsDetailsUpdate'
 -- * 'eduFields'
 editsDetailsUpdate'
     :: Text -- ^ 'packageName'
-    -> AppDetails -- ^ 'AppDetails'
+    -> AppDetails -- ^ 'payload'
     -> Text -- ^ 'editId'
     -> EditsDetailsUpdate'
-editsDetailsUpdate' pEduPackageName_ pEduAppDetails_ pEduEditId_ =
+editsDetailsUpdate' pEduPackageName_ pEduPayload_ pEduEditId_ =
     EditsDetailsUpdate'
     { _eduQuotaUser = Nothing
     , _eduPrettyPrint = True
     , _eduPackageName = pEduPackageName_
     , _eduUserIP = Nothing
-    , _eduAppDetails = pEduAppDetails_
+    , _eduPayload = pEduPayload_
     , _eduKey = Nothing
     , _eduOAuthToken = Nothing
     , _eduEditId = pEduEditId_
@@ -141,10 +142,9 @@ eduUserIP
   = lens _eduUserIP (\ s a -> s{_eduUserIP = a})
 
 -- | Multipart request metadata.
-eduAppDetails :: Lens' EditsDetailsUpdate' AppDetails
-eduAppDetails
-  = lens _eduAppDetails
-      (\ s a -> s{_eduAppDetails = a})
+eduPayload :: Lens' EditsDetailsUpdate' AppDetails
+eduPayload
+  = lens _eduPayload (\ s a -> s{_eduPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -183,7 +183,7 @@ instance GoogleRequest EditsDetailsUpdate' where
               _eduKey
               _eduOAuthToken
               (Just AltJSON)
-              _eduAppDetails
+              _eduPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EditsDetailsUpdateResource)

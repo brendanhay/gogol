@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.DeploymentManager.Deployments.Insert
     , diPrettyPrint
     , diProject
     , diUserIP
+    , diPayload
     , diKey
     , diOAuthToken
-    , diDeployment
     , diFields
     ) where
 
@@ -68,11 +69,11 @@ data DeploymentsInsert' = DeploymentsInsert'
     , _diPrettyPrint :: !Bool
     , _diProject     :: !Text
     , _diUserIP      :: !(Maybe Text)
+    , _diPayload     :: !Deployment
     , _diKey         :: !(Maybe Key)
     , _diOAuthToken  :: !(Maybe OAuthToken)
-    , _diDeployment  :: !Deployment
     , _diFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsInsert'' with the minimum fields required to make a request.
 --
@@ -86,26 +87,26 @@ data DeploymentsInsert' = DeploymentsInsert'
 --
 -- * 'diUserIP'
 --
+-- * 'diPayload'
+--
 -- * 'diKey'
 --
 -- * 'diOAuthToken'
 --
--- * 'diDeployment'
---
 -- * 'diFields'
 deploymentsInsert'
     :: Text -- ^ 'project'
-    -> Deployment -- ^ 'Deployment'
+    -> Deployment -- ^ 'payload'
     -> DeploymentsInsert'
-deploymentsInsert' pDiProject_ pDiDeployment_ =
+deploymentsInsert' pDiProject_ pDiPayload_ =
     DeploymentsInsert'
     { _diQuotaUser = Nothing
     , _diPrettyPrint = True
     , _diProject = pDiProject_
     , _diUserIP = Nothing
+    , _diPayload = pDiPayload_
     , _diKey = Nothing
     , _diOAuthToken = Nothing
-    , _diDeployment = pDiDeployment_
     , _diFields = Nothing
     }
 
@@ -132,6 +133,11 @@ diProject
 diUserIP :: Lens' DeploymentsInsert' (Maybe Text)
 diUserIP = lens _diUserIP (\ s a -> s{_diUserIP = a})
 
+-- | Multipart request metadata.
+diPayload :: Lens' DeploymentsInsert' Deployment
+diPayload
+  = lens _diPayload (\ s a -> s{_diPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -142,11 +148,6 @@ diKey = lens _diKey (\ s a -> s{_diKey = a})
 diOAuthToken :: Lens' DeploymentsInsert' (Maybe OAuthToken)
 diOAuthToken
   = lens _diOAuthToken (\ s a -> s{_diOAuthToken = a})
-
--- | Multipart request metadata.
-diDeployment :: Lens' DeploymentsInsert' Deployment
-diDeployment
-  = lens _diDeployment (\ s a -> s{_diDeployment = a})
 
 -- | Selector specifying which fields to include in a partial response.
 diFields :: Lens' DeploymentsInsert' (Maybe Text)
@@ -167,7 +168,7 @@ instance GoogleRequest DeploymentsInsert' where
               _diKey
               _diOAuthToken
               (Just AltJSON)
-              _diDeployment
+              _diPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DeploymentsInsertResource)

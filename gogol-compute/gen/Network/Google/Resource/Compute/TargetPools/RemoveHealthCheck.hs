@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.Compute.TargetPools.RemoveHealthCheck
     , tprhcProject
     , tprhcTargetPool
     , tprhcUserIP
-    , tprhcTargetPoolsRemoveHealthCheckRequest
+    , tprhcPayload
     , tprhcKey
     , tprhcRegion
     , tprhcOAuthToken
@@ -69,17 +70,17 @@ type TargetPoolsRemoveHealthCheckResource =
 --
 -- /See:/ 'targetPoolsRemoveHealthCheck'' smart constructor.
 data TargetPoolsRemoveHealthCheck' = TargetPoolsRemoveHealthCheck'
-    { _tprhcQuotaUser                           :: !(Maybe Text)
-    , _tprhcPrettyPrint                         :: !Bool
-    , _tprhcProject                             :: !Text
-    , _tprhcTargetPool                          :: !Text
-    , _tprhcUserIP                              :: !(Maybe Text)
-    , _tprhcTargetPoolsRemoveHealthCheckRequest :: !TargetPoolsRemoveHealthCheckRequest
-    , _tprhcKey                                 :: !(Maybe Key)
-    , _tprhcRegion                              :: !Text
-    , _tprhcOAuthToken                          :: !(Maybe OAuthToken)
-    , _tprhcFields                              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _tprhcQuotaUser   :: !(Maybe Text)
+    , _tprhcPrettyPrint :: !Bool
+    , _tprhcProject     :: !Text
+    , _tprhcTargetPool  :: !Text
+    , _tprhcUserIP      :: !(Maybe Text)
+    , _tprhcPayload     :: !TargetPoolsRemoveHealthCheckRequest
+    , _tprhcKey         :: !(Maybe Key)
+    , _tprhcRegion      :: !Text
+    , _tprhcOAuthToken  :: !(Maybe OAuthToken)
+    , _tprhcFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsRemoveHealthCheck'' with the minimum fields required to make a request.
 --
@@ -95,7 +96,7 @@ data TargetPoolsRemoveHealthCheck' = TargetPoolsRemoveHealthCheck'
 --
 -- * 'tprhcUserIP'
 --
--- * 'tprhcTargetPoolsRemoveHealthCheckRequest'
+-- * 'tprhcPayload'
 --
 -- * 'tprhcKey'
 --
@@ -107,17 +108,17 @@ data TargetPoolsRemoveHealthCheck' = TargetPoolsRemoveHealthCheck'
 targetPoolsRemoveHealthCheck'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetPool'
-    -> TargetPoolsRemoveHealthCheckRequest -- ^ 'TargetPoolsRemoveHealthCheckRequest'
+    -> TargetPoolsRemoveHealthCheckRequest -- ^ 'payload'
     -> Text -- ^ 'region'
     -> TargetPoolsRemoveHealthCheck'
-targetPoolsRemoveHealthCheck' pTprhcProject_ pTprhcTargetPool_ pTprhcTargetPoolsRemoveHealthCheckRequest_ pTprhcRegion_ =
+targetPoolsRemoveHealthCheck' pTprhcProject_ pTprhcTargetPool_ pTprhcPayload_ pTprhcRegion_ =
     TargetPoolsRemoveHealthCheck'
     { _tprhcQuotaUser = Nothing
     , _tprhcPrettyPrint = True
     , _tprhcProject = pTprhcProject_
     , _tprhcTargetPool = pTprhcTargetPool_
     , _tprhcUserIP = Nothing
-    , _tprhcTargetPoolsRemoveHealthCheckRequest = pTprhcTargetPoolsRemoveHealthCheckRequest_
+    , _tprhcPayload = pTprhcPayload_
     , _tprhcKey = Nothing
     , _tprhcRegion = pTprhcRegion_
     , _tprhcOAuthToken = Nothing
@@ -156,11 +157,9 @@ tprhcUserIP
   = lens _tprhcUserIP (\ s a -> s{_tprhcUserIP = a})
 
 -- | Multipart request metadata.
-tprhcTargetPoolsRemoveHealthCheckRequest :: Lens' TargetPoolsRemoveHealthCheck' TargetPoolsRemoveHealthCheckRequest
-tprhcTargetPoolsRemoveHealthCheckRequest
-  = lens _tprhcTargetPoolsRemoveHealthCheckRequest
-      (\ s a ->
-         s{_tprhcTargetPoolsRemoveHealthCheckRequest = a})
+tprhcPayload :: Lens' TargetPoolsRemoveHealthCheck' TargetPoolsRemoveHealthCheckRequest
+tprhcPayload
+  = lens _tprhcPayload (\ s a -> s{_tprhcPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -203,7 +202,7 @@ instance GoogleRequest TargetPoolsRemoveHealthCheck'
               _tprhcKey
               _tprhcOAuthToken
               (Just AltJSON)
-              _tprhcTargetPoolsRemoveHealthCheckRequest
+              _tprhcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetPoolsRemoveHealthCheckResource)

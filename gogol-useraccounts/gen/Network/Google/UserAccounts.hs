@@ -79,18 +79,8 @@ module Network.Google.UserAccounts
 
     -- * Types
 
-    -- ** OperationWarnings
-    , OperationWarnings
-    , operationWarnings
-    , owData
-    , owCode
-    , owMessage
-
-    -- ** OperationWarningsData
-    , OperationWarningsData
-    , operationWarningsData
-    , owdValue
-    , owdKey
+    -- ** Status
+    , Status (..)
 
     -- ** OperationList
     , OperationList
@@ -147,6 +137,11 @@ module Network.Google.UserAccounts
     , oTargetLink
     , oClientOperationId
 
+    -- ** Error'
+    , Error'
+    , error'
+    , eErrors
+
     -- ** UserList
     , UserList
     , userList
@@ -165,8 +160,8 @@ module Network.Google.UserAccounts
     , pkExpirationTimestamp
     , pkDescription
 
-    -- ** OperationStatus
-    , OperationStatus (..)
+    -- ** WarningsItemCode
+    , WarningsItemCode (..)
 
     -- ** User
     , User
@@ -200,6 +195,13 @@ module Network.Google.UserAccounts
     , groupsAddMemberRequest
     , gamrUsers
 
+    -- ** WarningsItem
+    , WarningsItem
+    , warningsItem
+    , wiData
+    , wiCode
+    , wiMessage
+
     -- ** LinuxGetLinuxAccountViewsResponse
     , LinuxGetLinuxAccountViewsResponse
     , linuxGetLinuxAccountViewsResponse
@@ -215,10 +217,11 @@ module Network.Google.UserAccounts
     , luvGid
     , luvHomeDirectory
 
-    -- ** OperationError
-    , OperationError
-    , operationError
-    , oeErrors
+    -- ** DataItem
+    , DataItem
+    , dataItem
+    , diValue
+    , diKey
 
     -- ** LinuxGetAuthorizedKeysViewResponse
     , LinuxGetAuthorizedKeysViewResponse
@@ -230,21 +233,18 @@ module Network.Google.UserAccounts
     , groupsRemoveMemberRequest
     , grmrUsers
 
-    -- ** OperationErrorErrors
-    , OperationErrorErrors
-    , operationErrorErrors
-    , oeeLocation
-    , oeeCode
-    , oeeMessage
+    -- ** ErrorsItem
+    , ErrorsItem
+    , errorsItem
+    , eiLocation
+    , eiCode
+    , eiMessage
 
     -- ** AuthorizedKeysView
     , AuthorizedKeysView
     , authorizedKeysView
     , akvSudoer
     , akvKeys
-
-    -- ** OperationWarningsCode
-    , OperationWarningsCode (..)
     ) where
 
 import           Network.Google.Prelude

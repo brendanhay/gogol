@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,11 +38,11 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Create
     , amvcPp
     , amvcAccessToken
     , amvcUploadType
+    , amvcPayload
     , amvcModulesId
     , amvcBearerToken
     , amvcKey
     , amvcAppsId
-    , amvcVersion
     , amvcOAuthToken
     , amvcFields
     , amvcCallback
@@ -60,12 +61,12 @@ type AppsModulesVersionsCreateResource =
              Capture "modulesId" Text :>
                "versions" :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "upload_protocol" Text :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "callback" Text :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
@@ -86,15 +87,15 @@ data AppsModulesVersionsCreate' = AppsModulesVersionsCreate'
     , _amvcPp             :: !Bool
     , _amvcAccessToken    :: !(Maybe Text)
     , _amvcUploadType     :: !(Maybe Text)
+    , _amvcPayload        :: !Version
     , _amvcModulesId      :: !Text
     , _amvcBearerToken    :: !(Maybe Text)
     , _amvcKey            :: !(Maybe Key)
     , _amvcAppsId         :: !Text
-    , _amvcVersion        :: !Version
     , _amvcOAuthToken     :: !(Maybe OAuthToken)
     , _amvcFields         :: !(Maybe Text)
     , _amvcCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsModulesVersionsCreate'' with the minimum fields required to make a request.
 --
@@ -114,6 +115,8 @@ data AppsModulesVersionsCreate' = AppsModulesVersionsCreate'
 --
 -- * 'amvcUploadType'
 --
+-- * 'amvcPayload'
+--
 -- * 'amvcModulesId'
 --
 -- * 'amvcBearerToken'
@@ -122,19 +125,17 @@ data AppsModulesVersionsCreate' = AppsModulesVersionsCreate'
 --
 -- * 'amvcAppsId'
 --
--- * 'amvcVersion'
---
 -- * 'amvcOAuthToken'
 --
 -- * 'amvcFields'
 --
 -- * 'amvcCallback'
 appsModulesVersionsCreate'
-    :: Text -- ^ 'modulesId'
+    :: Version -- ^ 'payload'
+    -> Text -- ^ 'modulesId'
     -> Text -- ^ 'appsId'
-    -> Version -- ^ 'Version'
     -> AppsModulesVersionsCreate'
-appsModulesVersionsCreate' pAmvcModulesId_ pAmvcAppsId_ pAmvcVersion_ =
+appsModulesVersionsCreate' pAmvcPayload_ pAmvcModulesId_ pAmvcAppsId_ =
     AppsModulesVersionsCreate'
     { _amvcXgafv = Nothing
     , _amvcQuotaUser = Nothing
@@ -143,11 +144,11 @@ appsModulesVersionsCreate' pAmvcModulesId_ pAmvcAppsId_ pAmvcVersion_ =
     , _amvcPp = True
     , _amvcAccessToken = Nothing
     , _amvcUploadType = Nothing
+    , _amvcPayload = pAmvcPayload_
     , _amvcModulesId = pAmvcModulesId_
     , _amvcBearerToken = Nothing
     , _amvcKey = Nothing
     , _amvcAppsId = pAmvcAppsId_
-    , _amvcVersion = pAmvcVersion_
     , _amvcOAuthToken = Nothing
     , _amvcFields = Nothing
     , _amvcCallback = Nothing
@@ -194,6 +195,11 @@ amvcUploadType
   = lens _amvcUploadType
       (\ s a -> s{_amvcUploadType = a})
 
+-- | Multipart request metadata.
+amvcPayload :: Lens' AppsModulesVersionsCreate' Version
+amvcPayload
+  = lens _amvcPayload (\ s a -> s{_amvcPayload = a})
+
 -- | Part of \`name\`. See documentation of \`appsId\`.
 amvcModulesId :: Lens' AppsModulesVersionsCreate' Text
 amvcModulesId
@@ -217,11 +223,6 @@ amvcKey = lens _amvcKey (\ s a -> s{_amvcKey = a})
 amvcAppsId :: Lens' AppsModulesVersionsCreate' Text
 amvcAppsId
   = lens _amvcAppsId (\ s a -> s{_amvcAppsId = a})
-
--- | Multipart request metadata.
-amvcVersion :: Lens' AppsModulesVersionsCreate' Version
-amvcVersion
-  = lens _amvcVersion (\ s a -> s{_amvcVersion = a})
 
 -- | OAuth 2.0 token for the current user.
 amvcOAuthToken :: Lens' AppsModulesVersionsCreate' (Maybe OAuthToken)
@@ -248,20 +249,20 @@ instance GoogleRequest AppsModulesVersionsCreate'
         type Rs AppsModulesVersionsCreate' = Operation
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsModulesVersionsCreate'{..}
-          = go _amvcXgafv _amvcAccessToken _amvcBearerToken
-              _amvcCallback
-              (Just _amvcPp)
-              _amvcUploadType
+          = go _amvcAppsId _amvcModulesId _amvcXgafv
               _amvcUploadProtocol
-              _amvcAppsId
-              _amvcModulesId
+              (Just _amvcPp)
+              _amvcAccessToken
+              _amvcUploadType
+              _amvcBearerToken
+              _amvcCallback
               _amvcQuotaUser
               (Just _amvcPrettyPrint)
               _amvcFields
               _amvcKey
               _amvcOAuthToken
               (Just AltJSON)
-              _amvcVersion
+              _amvcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AppsModulesVersionsCreateResource)

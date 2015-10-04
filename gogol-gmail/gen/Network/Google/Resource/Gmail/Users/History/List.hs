@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,10 +53,10 @@ import           Network.Google.Prelude
 type UsersHistoryListResource =
      Capture "userId" Text :>
        "history" :>
-         QueryParam "labelId" Text :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
-               QueryParam "startHistoryId" Word64 :>
+         QueryParam "startHistoryId" Word64 :>
+           QueryParam "pageToken" Text :>
+             QueryParam "labelId" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -81,7 +82,7 @@ data UsersHistoryList' = UsersHistoryList'
     , _uhlLabelId        :: !(Maybe Text)
     , _uhlMaxResults     :: !Word32
     , _uhlFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersHistoryList'' with the minimum fields required to make a request.
 --
@@ -208,9 +209,9 @@ instance GoogleRequest UsersHistoryList' where
         type Rs UsersHistoryList' = ListHistoryResponse
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersHistoryList'{..}
-          = go _uhlLabelId (Just _uhlMaxResults) _uhlPageToken
-              _uhlStartHistoryId
-              _uhlUserId
+          = go _uhlUserId _uhlStartHistoryId _uhlPageToken
+              _uhlLabelId
+              (Just _uhlMaxResults)
               _uhlQuotaUser
               (Just _uhlPrettyPrint)
               _uhlUserIP

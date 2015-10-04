@@ -109,12 +109,6 @@ module Network.Google.GamesManagement
 
     -- * Types
 
-    -- ** PlayerName
-    , PlayerName
-    , playerName
-    , pnGivenName
-    , pnFamilyName
-
     -- ** GamesPlayerExperienceInfoResource
     , GamesPlayerExperienceInfoResource
     , gamesPlayerExperienceInfoResource
@@ -186,6 +180,12 @@ module Network.Google.GamesManagement
     , hpKind
     , hpHiddenTimeMillis
     , hpPlayer
+
+    -- ** Name
+    , Name
+    , name
+    , nGivenName
+    , nFamilyName
 
     -- ** AchievementResetAllResponse
     , AchievementResetAllResponse

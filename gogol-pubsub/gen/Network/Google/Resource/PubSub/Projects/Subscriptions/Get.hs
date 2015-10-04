@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,14 +53,14 @@ import           Network.Google.PubSub.Types
 -- 'ProjectsSubscriptionsGet'' request conforms to.
 type ProjectsSubscriptionsGetResource =
      "v1beta2" :>
-       "{+subscription}" :>
+       Capture "subscription" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -85,7 +86,7 @@ data ProjectsSubscriptionsGet' = ProjectsSubscriptionsGet'
     , _psgSubscription   :: !Text
     , _psgFields         :: !(Maybe Text)
     , _psgCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsGet'' with the minimum fields required to make a request.
 --
@@ -218,12 +219,12 @@ instance GoogleRequest ProjectsSubscriptionsGet'
         type Rs ProjectsSubscriptionsGet' = Subscription
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsSubscriptionsGet'{..}
-          = go _psgXgafv _psgAccessToken _psgBearerToken
-              _psgCallback
+          = go _psgSubscription _psgXgafv _psgUploadProtocol
               (Just _psgPp)
+              _psgAccessToken
               _psgUploadType
-              _psgUploadProtocol
-              _psgSubscription
+              _psgBearerToken
+              _psgCallback
               _psgQuotaUser
               (Just _psgPrettyPrint)
               _psgFields

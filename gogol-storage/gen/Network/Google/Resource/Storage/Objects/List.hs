@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,13 +55,13 @@ type ObjectsListResource =
      "b" :>
        Capture "bucket" Text :>
          "o" :>
-           QueryParam "delimiter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "prefix" Text :>
-                   QueryParam "projection" StorageObjectsListProjection
-                     :>
-                     QueryParam "versions" Bool :>
+           QueryParam "prefix" Text :>
+             QueryParam "versions" Bool :>
+               QueryParam "projection" StorageObjectsListProjection
+                 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "delimiter" Text :>
+                     QueryParam "maxResults" Word32 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -87,7 +88,7 @@ data ObjectsList' = ObjectsList'
     , _olDelimiter   :: !(Maybe Text)
     , _olMaxResults  :: !(Maybe Word32)
     , _olFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsList'' with the minimum fields required to make a request.
 --
@@ -218,11 +219,10 @@ instance GoogleRequest ObjectsList' where
         type Rs ObjectsList' = Objects
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsList'{..}
-          = go _olDelimiter _olMaxResults _olPageToken
-              _olPrefix
-              _olProjection
-              _olVersions
-              _olBucket
+          = go _olBucket _olPrefix _olVersions _olProjection
+              _olPageToken
+              _olDelimiter
+              _olMaxResults
               _olQuotaUser
               (Just _olPrettyPrint)
               _olUserIP

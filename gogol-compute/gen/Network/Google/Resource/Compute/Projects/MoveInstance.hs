@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.Compute.Projects.MoveInstance
     , pmiPrettyPrint
     , pmiProject
     , pmiUserIP
+    , pmiPayload
     , pmiKey
     , pmiOAuthToken
-    , pmiInstanceMoveRequest
     , pmiFields
     ) where
 
@@ -64,15 +65,15 @@ type ProjectsMoveInstanceResource =
 --
 -- /See:/ 'projectsMoveInstance'' smart constructor.
 data ProjectsMoveInstance' = ProjectsMoveInstance'
-    { _pmiQuotaUser           :: !(Maybe Text)
-    , _pmiPrettyPrint         :: !Bool
-    , _pmiProject             :: !Text
-    , _pmiUserIP              :: !(Maybe Text)
-    , _pmiKey                 :: !(Maybe Key)
-    , _pmiOAuthToken          :: !(Maybe OAuthToken)
-    , _pmiInstanceMoveRequest :: !InstanceMoveRequest
-    , _pmiFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _pmiQuotaUser   :: !(Maybe Text)
+    , _pmiPrettyPrint :: !Bool
+    , _pmiProject     :: !Text
+    , _pmiUserIP      :: !(Maybe Text)
+    , _pmiPayload     :: !InstanceMoveRequest
+    , _pmiKey         :: !(Maybe Key)
+    , _pmiOAuthToken  :: !(Maybe OAuthToken)
+    , _pmiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsMoveInstance'' with the minimum fields required to make a request.
 --
@@ -86,26 +87,26 @@ data ProjectsMoveInstance' = ProjectsMoveInstance'
 --
 -- * 'pmiUserIP'
 --
+-- * 'pmiPayload'
+--
 -- * 'pmiKey'
 --
 -- * 'pmiOAuthToken'
 --
--- * 'pmiInstanceMoveRequest'
---
 -- * 'pmiFields'
 projectsMoveInstance'
     :: Text -- ^ 'project'
-    -> InstanceMoveRequest -- ^ 'InstanceMoveRequest'
+    -> InstanceMoveRequest -- ^ 'payload'
     -> ProjectsMoveInstance'
-projectsMoveInstance' pPmiProject_ pPmiInstanceMoveRequest_ =
+projectsMoveInstance' pPmiProject_ pPmiPayload_ =
     ProjectsMoveInstance'
     { _pmiQuotaUser = Nothing
     , _pmiPrettyPrint = True
     , _pmiProject = pPmiProject_
     , _pmiUserIP = Nothing
+    , _pmiPayload = pPmiPayload_
     , _pmiKey = Nothing
     , _pmiOAuthToken = Nothing
-    , _pmiInstanceMoveRequest = pPmiInstanceMoveRequest_
     , _pmiFields = Nothing
     }
 
@@ -133,6 +134,11 @@ pmiUserIP :: Lens' ProjectsMoveInstance' (Maybe Text)
 pmiUserIP
   = lens _pmiUserIP (\ s a -> s{_pmiUserIP = a})
 
+-- | Multipart request metadata.
+pmiPayload :: Lens' ProjectsMoveInstance' InstanceMoveRequest
+pmiPayload
+  = lens _pmiPayload (\ s a -> s{_pmiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -144,12 +150,6 @@ pmiOAuthToken :: Lens' ProjectsMoveInstance' (Maybe OAuthToken)
 pmiOAuthToken
   = lens _pmiOAuthToken
       (\ s a -> s{_pmiOAuthToken = a})
-
--- | Multipart request metadata.
-pmiInstanceMoveRequest :: Lens' ProjectsMoveInstance' InstanceMoveRequest
-pmiInstanceMoveRequest
-  = lens _pmiInstanceMoveRequest
-      (\ s a -> s{_pmiInstanceMoveRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pmiFields :: Lens' ProjectsMoveInstance' (Maybe Text)
@@ -170,7 +170,7 @@ instance GoogleRequest ProjectsMoveInstance' where
               _pmiKey
               _pmiOAuthToken
               (Just AltJSON)
-              _pmiInstanceMoveRequest
+              _pmiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsMoveInstanceResource)

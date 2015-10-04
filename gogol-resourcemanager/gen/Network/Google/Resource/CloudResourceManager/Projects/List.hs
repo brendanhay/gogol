@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,15 +59,15 @@ type ProjectsListResource =
      "v1beta1" :>
        "projects" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageSize" Int32 :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "pageSize" Int32 :>
+                           QueryParam "callback" Text :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
@@ -96,7 +97,7 @@ data ProjectsList' = ProjectsList'
     , _plPageSize       :: !(Maybe Int32)
     , _plFields         :: !(Maybe Text)
     , _plCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsList'' with the minimum fields required to make a request.
 --
@@ -253,14 +254,14 @@ instance GoogleRequest ProjectsList' where
         type Rs ProjectsList' = ListProjectsResponse
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u ProjectsList'{..}
-          = go _plXgafv _plAccessToken _plBearerToken
-              _plCallback
-              _plFilter
-              _plPageSize
-              _plPageToken
-              (Just _plPp)
+          = go _plXgafv _plUploadProtocol (Just _plPp)
+              _plAccessToken
               _plUploadType
-              _plUploadProtocol
+              _plBearerToken
+              _plFilter
+              _plPageToken
+              _plPageSize
+              _plCallback
               _plQuotaUser
               (Just _plPrettyPrint)
               _plFields

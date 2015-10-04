@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -78,12 +79,12 @@ type ProjectsDeleteResource =
        "projects" :>
          Capture "projectId" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
@@ -132,7 +133,7 @@ data ProjectsDelete' = ProjectsDelete'
     , _pdOAuthToken     :: !(Maybe OAuthToken)
     , _pdFields         :: !(Maybe Text)
     , _pdCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsDelete'' with the minimum fields required to make a request.
 --
@@ -260,12 +261,12 @@ instance GoogleRequest ProjectsDelete' where
         type Rs ProjectsDelete' = Empty
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u ProjectsDelete'{..}
-          = go _pdXgafv _pdAccessToken _pdBearerToken
-              _pdCallback
+          = go _pdProjectId _pdXgafv _pdUploadProtocol
               (Just _pdPp)
+              _pdAccessToken
               _pdUploadType
-              _pdUploadProtocol
-              _pdProjectId
+              _pdBearerToken
+              _pdCallback
               _pdQuotaUser
               (Just _pdPrettyPrint)
               _pdFields

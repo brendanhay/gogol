@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Inse
     , lciQuotaUser
     , lciPrettyPrint
     , lciUserIP
-    , lciLeaderboardConfiguration
+    , lciPayload
     , lciApplicationId
     , lciKey
     , lciOAuthToken
@@ -63,15 +64,15 @@ type LeaderboardConfigurationsInsertResource =
 --
 -- /See:/ 'leaderboardConfigurationsInsert'' smart constructor.
 data LeaderboardConfigurationsInsert' = LeaderboardConfigurationsInsert'
-    { _lciQuotaUser                :: !(Maybe Text)
-    , _lciPrettyPrint              :: !Bool
-    , _lciUserIP                   :: !(Maybe Text)
-    , _lciLeaderboardConfiguration :: !LeaderboardConfiguration
-    , _lciApplicationId            :: !Text
-    , _lciKey                      :: !(Maybe Key)
-    , _lciOAuthToken               :: !(Maybe OAuthToken)
-    , _lciFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _lciQuotaUser     :: !(Maybe Text)
+    , _lciPrettyPrint   :: !Bool
+    , _lciUserIP        :: !(Maybe Text)
+    , _lciPayload       :: !LeaderboardConfiguration
+    , _lciApplicationId :: !Text
+    , _lciKey           :: !(Maybe Key)
+    , _lciOAuthToken    :: !(Maybe OAuthToken)
+    , _lciFields        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationsInsert'' with the minimum fields required to make a request.
 --
@@ -83,7 +84,7 @@ data LeaderboardConfigurationsInsert' = LeaderboardConfigurationsInsert'
 --
 -- * 'lciUserIP'
 --
--- * 'lciLeaderboardConfiguration'
+-- * 'lciPayload'
 --
 -- * 'lciApplicationId'
 --
@@ -93,15 +94,15 @@ data LeaderboardConfigurationsInsert' = LeaderboardConfigurationsInsert'
 --
 -- * 'lciFields'
 leaderboardConfigurationsInsert'
-    :: LeaderboardConfiguration -- ^ 'LeaderboardConfiguration'
+    :: LeaderboardConfiguration -- ^ 'payload'
     -> Text -- ^ 'applicationId'
     -> LeaderboardConfigurationsInsert'
-leaderboardConfigurationsInsert' pLciLeaderboardConfiguration_ pLciApplicationId_ =
+leaderboardConfigurationsInsert' pLciPayload_ pLciApplicationId_ =
     LeaderboardConfigurationsInsert'
     { _lciQuotaUser = Nothing
     , _lciPrettyPrint = True
     , _lciUserIP = Nothing
-    , _lciLeaderboardConfiguration = pLciLeaderboardConfiguration_
+    , _lciPayload = pLciPayload_
     , _lciApplicationId = pLciApplicationId_
     , _lciKey = Nothing
     , _lciOAuthToken = Nothing
@@ -128,10 +129,9 @@ lciUserIP
   = lens _lciUserIP (\ s a -> s{_lciUserIP = a})
 
 -- | Multipart request metadata.
-lciLeaderboardConfiguration :: Lens' LeaderboardConfigurationsInsert' LeaderboardConfiguration
-lciLeaderboardConfiguration
-  = lens _lciLeaderboardConfiguration
-      (\ s a -> s{_lciLeaderboardConfiguration = a})
+lciPayload :: Lens' LeaderboardConfigurationsInsert' LeaderboardConfiguration
+lciPayload
+  = lens _lciPayload (\ s a -> s{_lciPayload = a})
 
 -- | The application ID from the Google Play developer console.
 lciApplicationId :: Lens' LeaderboardConfigurationsInsert' Text
@@ -176,7 +176,7 @@ instance GoogleRequest
               _lciKey
               _lciOAuthToken
               (Just AltJSON)
-              _lciLeaderboardConfiguration
+              _lciPayload
           where go
                   = clientWithRoute
                       (Proxy ::

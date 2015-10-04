@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type DisksListResource =
          Capture "zone" Text :>
            "disks" :>
              QueryParam "filter" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -81,7 +82,7 @@ data DisksList' = DisksList'
     , _dlOAuthToken  :: !(Maybe OAuthToken)
     , _dlMaxResults  :: !Word32
     , _dlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksList'' with the minimum fields required to make a request.
 --
@@ -203,9 +204,8 @@ instance GoogleRequest DisksList' where
         type Rs DisksList' = DiskList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u DisksList'{..}
-          = go _dlFilter (Just _dlMaxResults) _dlPageToken
-              _dlProject
-              _dlZone
+          = go _dlProject _dlZone _dlFilter _dlPageToken
+              (Just _dlMaxResults)
               _dlQuotaUser
               (Just _dlPrettyPrint)
               _dlUserIP

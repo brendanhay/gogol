@@ -19,7 +19,7 @@ import           Network.Google.Prelude
 
 -- | The minimum access role for the user in the returned entries. Optional.
 -- The default is no restriction.
-data CalendarCalendarListListMinAccessRole
+data MinAccessRole
     = FreeBusyReader
       -- ^ @freeBusyReader@
       -- The user can read free\/busy information.
@@ -34,9 +34,9 @@ data CalendarCalendarListListMinAccessRole
       -- The user can read and modify events.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CalendarCalendarListListMinAccessRole
+instance Hashable MinAccessRole
 
-instance FromText CalendarCalendarListListMinAccessRole where
+instance FromText MinAccessRole where
     fromText = \case
         "freeBusyReader" -> Just FreeBusyReader
         "owner" -> Just Owner
@@ -44,17 +44,48 @@ instance FromText CalendarCalendarListListMinAccessRole where
         "writer" -> Just Writer
         _ -> Nothing
 
-instance ToText CalendarCalendarListListMinAccessRole where
+instance ToText MinAccessRole where
     toText = \case
         FreeBusyReader -> "freeBusyReader"
         Owner -> "owner"
         Reader -> "reader"
         Writer -> "writer"
 
-instance FromJSON CalendarCalendarListListMinAccessRole where
-    parseJSON = parseJSONText "CalendarCalendarListListMinAccessRole"
+instance FromJSON MinAccessRole where
+    parseJSON = parseJSONText "MinAccessRole"
 
-instance ToJSON CalendarCalendarListListMinAccessRole where
+instance ToJSON MinAccessRole where
+    toJSON = toJSONText
+
+-- | The order of the events returned in the result. Optional. The default is
+-- an unspecified, stable order.
+data OrderBy
+    = OBStartTime
+      -- ^ @startTime@
+      -- Order by the start date\/time (ascending). This is only available when
+      -- querying single events (i.e. the parameter singleEvents is True)
+    | OBUpdated
+      -- ^ @updated@
+      -- Order by last modification time (ascending).
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable OrderBy
+
+instance FromText OrderBy where
+    fromText = \case
+        "startTime" -> Just OBStartTime
+        "updated" -> Just OBUpdated
+        _ -> Nothing
+
+instance ToText OrderBy where
+    toText = \case
+        OBStartTime -> "startTime"
+        OBUpdated -> "updated"
+
+instance FromJSON OrderBy where
+    parseJSON = parseJSONText "OrderBy"
+
+instance ToJSON OrderBy where
     toJSON = toJSONText
 
 -- | The minimum access role for the user in the returned entries. Optional.
@@ -100,11 +131,11 @@ instance ToJSON CalendarCalendarListWatchMinAccessRole where
 -- | The order of the events returned in the result. Optional. The default is
 -- an unspecified, stable order.
 data CalendarEventsWatchOrderBy
-    = StartTime
+    = CEWOBStartTime
       -- ^ @startTime@
       -- Order by the start date\/time (ascending). This is only available when
       -- querying single events (i.e. the parameter singleEvents is True)
-    | Updated
+    | CEWOBUpdated
       -- ^ @updated@
       -- Order by last modification time (ascending).
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -113,48 +144,17 @@ instance Hashable CalendarEventsWatchOrderBy
 
 instance FromText CalendarEventsWatchOrderBy where
     fromText = \case
-        "startTime" -> Just StartTime
-        "updated" -> Just Updated
+        "startTime" -> Just CEWOBStartTime
+        "updated" -> Just CEWOBUpdated
         _ -> Nothing
 
 instance ToText CalendarEventsWatchOrderBy where
     toText = \case
-        StartTime -> "startTime"
-        Updated -> "updated"
+        CEWOBStartTime -> "startTime"
+        CEWOBUpdated -> "updated"
 
 instance FromJSON CalendarEventsWatchOrderBy where
     parseJSON = parseJSONText "CalendarEventsWatchOrderBy"
 
 instance ToJSON CalendarEventsWatchOrderBy where
-    toJSON = toJSONText
-
--- | The order of the events returned in the result. Optional. The default is
--- an unspecified, stable order.
-data CalendarEventsListOrderBy
-    = CELOBStartTime
-      -- ^ @startTime@
-      -- Order by the start date\/time (ascending). This is only available when
-      -- querying single events (i.e. the parameter singleEvents is True)
-    | CELOBUpdated
-      -- ^ @updated@
-      -- Order by last modification time (ascending).
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CalendarEventsListOrderBy
-
-instance FromText CalendarEventsListOrderBy where
-    fromText = \case
-        "startTime" -> Just CELOBStartTime
-        "updated" -> Just CELOBUpdated
-        _ -> Nothing
-
-instance ToText CalendarEventsListOrderBy where
-    toText = \case
-        CELOBStartTime -> "startTime"
-        CELOBUpdated -> "updated"
-
-instance FromJSON CalendarEventsListOrderBy where
-    parseJSON = parseJSONText "CalendarEventsListOrderBy"
-
-instance ToJSON CalendarEventsListOrderBy where
     toJSON = toJSONText

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ import           Network.Google.Prelude
 type EventsListByPlayerResource =
      "events" :>
        QueryParam "language" Text :>
-         QueryParam "maxResults" Int32 :>
-           QueryParam "pageToken" Text :>
+         QueryParam "pageToken" Text :>
+           QueryParam "maxResults" Int32 :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -75,7 +76,7 @@ data EventsListByPlayer' = EventsListByPlayer'
     , _elbpOAuthToken  :: !(Maybe OAuthToken)
     , _elbpMaxResults  :: !(Maybe Int32)
     , _elbpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsListByPlayer'' with the minimum fields required to make a request.
 --
@@ -177,7 +178,7 @@ instance GoogleRequest EventsListByPlayer' where
         type Rs EventsListByPlayer' = PlayerEventListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u EventsListByPlayer'{..}
-          = go _elbpLanguage _elbpMaxResults _elbpPageToken
+          = go _elbpLanguage _elbpPageToken _elbpMaxResults
               _elbpQuotaUser
               (Just _elbpPrettyPrint)
               _elbpUserIP

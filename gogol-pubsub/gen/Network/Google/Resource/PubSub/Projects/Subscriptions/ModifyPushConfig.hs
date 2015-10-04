@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -38,10 +39,10 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyPushConfig
     , psmpcQuotaUser
     , psmpcPrettyPrint
     , psmpcUploadProtocol
-    , psmpcModifyPushConfigRequest
     , psmpcPp
     , psmpcAccessToken
     , psmpcUploadType
+    , psmpcPayload
     , psmpcBearerToken
     , psmpcKey
     , psmpcOAuthToken
@@ -57,14 +58,14 @@ import           Network.Google.PubSub.Types
 -- 'ProjectsSubscriptionsModifyPushConfig'' request conforms to.
 type ProjectsSubscriptionsModifyPushConfigResource =
      "v1beta2" :>
-       "{+subscription}:modifyPushConfig" :>
+       CaptureMode "subscription" "modifyPushConfig" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -82,21 +83,21 @@ type ProjectsSubscriptionsModifyPushConfigResource =
 --
 -- /See:/ 'projectsSubscriptionsModifyPushConfig'' smart constructor.
 data ProjectsSubscriptionsModifyPushConfig' = ProjectsSubscriptionsModifyPushConfig'
-    { _psmpcXgafv                   :: !(Maybe Text)
-    , _psmpcQuotaUser               :: !(Maybe Text)
-    , _psmpcPrettyPrint             :: !Bool
-    , _psmpcUploadProtocol          :: !(Maybe Text)
-    , _psmpcModifyPushConfigRequest :: !ModifyPushConfigRequest
-    , _psmpcPp                      :: !Bool
-    , _psmpcAccessToken             :: !(Maybe Text)
-    , _psmpcUploadType              :: !(Maybe Text)
-    , _psmpcBearerToken             :: !(Maybe Text)
-    , _psmpcKey                     :: !(Maybe Key)
-    , _psmpcOAuthToken              :: !(Maybe OAuthToken)
-    , _psmpcSubscription            :: !Text
-    , _psmpcFields                  :: !(Maybe Text)
-    , _psmpcCallback                :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _psmpcXgafv          :: !(Maybe Text)
+    , _psmpcQuotaUser      :: !(Maybe Text)
+    , _psmpcPrettyPrint    :: !Bool
+    , _psmpcUploadProtocol :: !(Maybe Text)
+    , _psmpcPp             :: !Bool
+    , _psmpcAccessToken    :: !(Maybe Text)
+    , _psmpcUploadType     :: !(Maybe Text)
+    , _psmpcPayload        :: !ModifyPushConfigRequest
+    , _psmpcBearerToken    :: !(Maybe Text)
+    , _psmpcKey            :: !(Maybe Key)
+    , _psmpcOAuthToken     :: !(Maybe OAuthToken)
+    , _psmpcSubscription   :: !Text
+    , _psmpcFields         :: !(Maybe Text)
+    , _psmpcCallback       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsModifyPushConfig'' with the minimum fields required to make a request.
 --
@@ -110,13 +111,13 @@ data ProjectsSubscriptionsModifyPushConfig' = ProjectsSubscriptionsModifyPushCon
 --
 -- * 'psmpcUploadProtocol'
 --
--- * 'psmpcModifyPushConfigRequest'
---
 -- * 'psmpcPp'
 --
 -- * 'psmpcAccessToken'
 --
 -- * 'psmpcUploadType'
+--
+-- * 'psmpcPayload'
 --
 -- * 'psmpcBearerToken'
 --
@@ -130,19 +131,19 @@ data ProjectsSubscriptionsModifyPushConfig' = ProjectsSubscriptionsModifyPushCon
 --
 -- * 'psmpcCallback'
 projectsSubscriptionsModifyPushConfig'
-    :: ModifyPushConfigRequest -- ^ 'ModifyPushConfigRequest'
+    :: ModifyPushConfigRequest -- ^ 'payload'
     -> Text -- ^ 'subscription'
     -> ProjectsSubscriptionsModifyPushConfig'
-projectsSubscriptionsModifyPushConfig' pPsmpcModifyPushConfigRequest_ pPsmpcSubscription_ =
+projectsSubscriptionsModifyPushConfig' pPsmpcPayload_ pPsmpcSubscription_ =
     ProjectsSubscriptionsModifyPushConfig'
     { _psmpcXgafv = Nothing
     , _psmpcQuotaUser = Nothing
     , _psmpcPrettyPrint = True
     , _psmpcUploadProtocol = Nothing
-    , _psmpcModifyPushConfigRequest = pPsmpcModifyPushConfigRequest_
     , _psmpcPp = True
     , _psmpcAccessToken = Nothing
     , _psmpcUploadType = Nothing
+    , _psmpcPayload = pPsmpcPayload_
     , _psmpcBearerToken = Nothing
     , _psmpcKey = Nothing
     , _psmpcOAuthToken = Nothing
@@ -176,12 +177,6 @@ psmpcUploadProtocol
   = lens _psmpcUploadProtocol
       (\ s a -> s{_psmpcUploadProtocol = a})
 
--- | Multipart request metadata.
-psmpcModifyPushConfigRequest :: Lens' ProjectsSubscriptionsModifyPushConfig' ModifyPushConfigRequest
-psmpcModifyPushConfigRequest
-  = lens _psmpcModifyPushConfigRequest
-      (\ s a -> s{_psmpcModifyPushConfigRequest = a})
-
 -- | Pretty-print response.
 psmpcPp :: Lens' ProjectsSubscriptionsModifyPushConfig' Bool
 psmpcPp = lens _psmpcPp (\ s a -> s{_psmpcPp = a})
@@ -197,6 +192,11 @@ psmpcUploadType :: Lens' ProjectsSubscriptionsModifyPushConfig' (Maybe Text)
 psmpcUploadType
   = lens _psmpcUploadType
       (\ s a -> s{_psmpcUploadType = a})
+
+-- | Multipart request metadata.
+psmpcPayload :: Lens' ProjectsSubscriptionsModifyPushConfig' ModifyPushConfigRequest
+psmpcPayload
+  = lens _psmpcPayload (\ s a -> s{_psmpcPayload = a})
 
 -- | OAuth bearer token.
 psmpcBearerToken :: Lens' ProjectsSubscriptionsModifyPushConfig' (Maybe Text)
@@ -245,19 +245,20 @@ instance GoogleRequest
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u
           ProjectsSubscriptionsModifyPushConfig'{..}
-          = go _psmpcXgafv _psmpcAccessToken _psmpcBearerToken
-              _psmpcCallback
-              (Just _psmpcPp)
-              _psmpcUploadType
+          = go _psmpcSubscription _psmpcXgafv
               _psmpcUploadProtocol
-              _psmpcSubscription
+              (Just _psmpcPp)
+              _psmpcAccessToken
+              _psmpcUploadType
+              _psmpcBearerToken
+              _psmpcCallback
               _psmpcQuotaUser
               (Just _psmpcPrettyPrint)
               _psmpcFields
               _psmpcKey
               _psmpcOAuthToken
               (Just AltJSON)
-              _psmpcModifyPushConfigRequest
+              _psmpcPayload
           where go
                   = clientWithRoute
                       (Proxy ::

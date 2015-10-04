@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,8 +58,8 @@ type RollingUpdatesListInstanceUpdatesResource =
              Capture "rollingUpdate" Text :>
                "instanceUpdates" :>
                  QueryParam "filter" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "pageToken" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -84,7 +85,7 @@ data RollingUpdatesListInstanceUpdates' = RollingUpdatesListInstanceUpdates'
     , _ruliuOAuthToken    :: !(Maybe OAuthToken)
     , _ruliuMaxResults    :: !Word32
     , _ruliuFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollingUpdatesListInstanceUpdates'' with the minimum fields required to make a request.
 --
@@ -219,11 +220,10 @@ instance GoogleRequest
           = requestWithRoute defReq replicaPoolUpdaterURL
         requestWithRoute r u
           RollingUpdatesListInstanceUpdates'{..}
-          = go _ruliuFilter (Just _ruliuMaxResults)
+          = go _ruliuProject _ruliuZone _ruliuRollingUpdate
+              _ruliuFilter
               _ruliuPageToken
-              _ruliuProject
-              _ruliuZone
-              _ruliuRollingUpdate
+              (Just _ruliuMaxResults)
               _ruliuQuotaUser
               (Just _ruliuPrettyPrint)
               _ruliuUserIP

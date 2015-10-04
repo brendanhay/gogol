@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Tasks.TaskLists.Patch
     , tlpQuotaUser
     , tlpPrettyPrint
     , tlpUserIP
+    , tlpPayload
     , tlpKey
-    , tlpTaskList
     , tlpTaskList
     , tlpOAuthToken
     , tlpFields
@@ -68,12 +69,12 @@ data TaskListsPatch' = TaskListsPatch'
     { _tlpQuotaUser   :: !(Maybe Text)
     , _tlpPrettyPrint :: !Bool
     , _tlpUserIP      :: !(Maybe Text)
+    , _tlpPayload     :: !TaskList
     , _tlpKey         :: !(Maybe Key)
     , _tlpTaskList    :: !Text
-    , _tlpTaskList    :: !TaskList
     , _tlpOAuthToken  :: !(Maybe OAuthToken)
     , _tlpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskListsPatch'' with the minimum fields required to make a request.
 --
@@ -85,9 +86,9 @@ data TaskListsPatch' = TaskListsPatch'
 --
 -- * 'tlpUserIP'
 --
--- * 'tlpKey'
+-- * 'tlpPayload'
 --
--- * 'tlpTaskList'
+-- * 'tlpKey'
 --
 -- * 'tlpTaskList'
 --
@@ -95,16 +96,16 @@ data TaskListsPatch' = TaskListsPatch'
 --
 -- * 'tlpFields'
 taskListsPatch'
-    :: Text -- ^ 'tasklist'
-    -> TaskList -- ^ 'TaskList'
+    :: TaskList -- ^ 'payload'
+    -> Text -- ^ 'tasklist'
     -> TaskListsPatch'
-taskListsPatch' pTlpTaskList_ pTlpTaskList_ =
+taskListsPatch' pTlpPayload_ pTlpTaskList_ =
     TaskListsPatch'
     { _tlpQuotaUser = Nothing
     , _tlpPrettyPrint = True
     , _tlpUserIP = Nothing
+    , _tlpPayload = pTlpPayload_
     , _tlpKey = Nothing
-    , _tlpTaskList = pTlpTaskList_
     , _tlpTaskList = pTlpTaskList_
     , _tlpOAuthToken = Nothing
     , _tlpFields = Nothing
@@ -129,6 +130,11 @@ tlpUserIP :: Lens' TaskListsPatch' (Maybe Text)
 tlpUserIP
   = lens _tlpUserIP (\ s a -> s{_tlpUserIP = a})
 
+-- | Multipart request metadata.
+tlpPayload :: Lens' TaskListsPatch' TaskList
+tlpPayload
+  = lens _tlpPayload (\ s a -> s{_tlpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -137,11 +143,6 @@ tlpKey = lens _tlpKey (\ s a -> s{_tlpKey = a})
 
 -- | Task list identifier.
 tlpTaskList :: Lens' TaskListsPatch' Text
-tlpTaskList
-  = lens _tlpTaskList (\ s a -> s{_tlpTaskList = a})
-
--- | Multipart request metadata.
-tlpTaskList :: Lens' TaskListsPatch' TaskList
 tlpTaskList
   = lens _tlpTaskList (\ s a -> s{_tlpTaskList = a})
 
@@ -171,7 +172,7 @@ instance GoogleRequest TaskListsPatch' where
               _tlpKey
               _tlpOAuthToken
               (Just AltJSON)
-              _tlpTaskList
+              _tlpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TaskListsPatchResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.DFAReporting.Advertisers.Patch
     , apPrettyPrint
     , apUserIP
     , apProfileId
+    , apPayload
     , apKey
-    , apAdvertiser
     , apId
     , apOAuthToken
     , apFields
@@ -69,12 +70,12 @@ data AdvertisersPatch' = AdvertisersPatch'
     , _apPrettyPrint :: !Bool
     , _apUserIP      :: !(Maybe Text)
     , _apProfileId   :: !Int64
+    , _apPayload     :: !Advertiser
     , _apKey         :: !(Maybe Key)
-    , _apAdvertiser  :: !Advertiser
     , _apId          :: !Int64
     , _apOAuthToken  :: !(Maybe OAuthToken)
     , _apFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersPatch'' with the minimum fields required to make a request.
 --
@@ -88,9 +89,9 @@ data AdvertisersPatch' = AdvertisersPatch'
 --
 -- * 'apProfileId'
 --
--- * 'apKey'
+-- * 'apPayload'
 --
--- * 'apAdvertiser'
+-- * 'apKey'
 --
 -- * 'apId'
 --
@@ -99,17 +100,17 @@ data AdvertisersPatch' = AdvertisersPatch'
 -- * 'apFields'
 advertisersPatch'
     :: Int64 -- ^ 'profileId'
-    -> Advertiser -- ^ 'Advertiser'
+    -> Advertiser -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> AdvertisersPatch'
-advertisersPatch' pApProfileId_ pApAdvertiser_ pApId_ =
+advertisersPatch' pApProfileId_ pApPayload_ pApId_ =
     AdvertisersPatch'
     { _apQuotaUser = Nothing
     , _apPrettyPrint = True
     , _apUserIP = Nothing
     , _apProfileId = pApProfileId_
+    , _apPayload = pApPayload_
     , _apKey = Nothing
-    , _apAdvertiser = pApAdvertiser_
     , _apId = pApId_
     , _apOAuthToken = Nothing
     , _apFields = Nothing
@@ -138,16 +139,16 @@ apProfileId :: Lens' AdvertisersPatch' Int64
 apProfileId
   = lens _apProfileId (\ s a -> s{_apProfileId = a})
 
+-- | Multipart request metadata.
+apPayload :: Lens' AdvertisersPatch' Advertiser
+apPayload
+  = lens _apPayload (\ s a -> s{_apPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 apKey :: Lens' AdvertisersPatch' (Maybe Key)
 apKey = lens _apKey (\ s a -> s{_apKey = a})
-
--- | Multipart request metadata.
-apAdvertiser :: Lens' AdvertisersPatch' Advertiser
-apAdvertiser
-  = lens _apAdvertiser (\ s a -> s{_apAdvertiser = a})
 
 -- | Advertiser ID.
 apId :: Lens' AdvertisersPatch' Int64
@@ -177,7 +178,7 @@ instance GoogleRequest AdvertisersPatch' where
               _apKey
               _apOAuthToken
               (Just AltJSON)
-              _apAdvertiser
+              _apPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AdvertisersPatchResource)

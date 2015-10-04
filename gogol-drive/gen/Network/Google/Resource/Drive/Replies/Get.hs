@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -78,7 +79,7 @@ data RepliesGet' = RepliesGet'
     , _rgCommentId      :: !Text
     , _rgIncludeDeleted :: !Bool
     , _rgFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepliesGet'' with the minimum fields required to make a request.
 --
@@ -183,8 +184,8 @@ instance GoogleRequest RepliesGet' where
         type Rs RepliesGet' = CommentReply
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RepliesGet'{..}
-          = go (Just _rgIncludeDeleted) _rgFileId _rgCommentId
-              _rgReplyId
+          = go _rgFileId _rgCommentId _rgReplyId
+              (Just _rgIncludeDeleted)
               _rgQuotaUser
               (Just _rgPrettyPrint)
               _rgUserIP

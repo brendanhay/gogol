@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -67,7 +68,7 @@ data BatchReportDefinitionsList' = BatchReportDefinitionsList'
     , _brdlKey                    :: !(Maybe Key)
     , _brdlOAuthToken             :: !(Maybe OAuthToken)
     , _brdlFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BatchReportDefinitionsList'' with the minimum fields required to make a request.
 --

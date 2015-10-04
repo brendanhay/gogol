@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,8 +55,8 @@ type ManagementCustomDataSourcesListResource =
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "customDataSources" :>
-                 QueryParam "max-results" Int32 :>
-                   QueryParam "start-index" Int32 :>
+                 QueryParam "start-index" Int32 :>
+                   QueryParam "max-results" Int32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data ManagementCustomDataSourcesList' = ManagementCustomDataSourcesList'
     , _mcdslStartIndex    :: !(Maybe Int32)
     , _mcdslMaxResults    :: !(Maybe Int32)
     , _mcdslFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDataSourcesList'' with the minimum fields required to make a request.
 --
@@ -197,9 +198,9 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementCustomDataSourcesList'{..}
-          = go _mcdslMaxResults _mcdslStartIndex
-              _mcdslAccountId
-              _mcdslWebPropertyId
+          = go _mcdslAccountId _mcdslWebPropertyId
+              _mcdslStartIndex
+              _mcdslMaxResults
               _mcdslQuotaUser
               (Just _mcdslPrettyPrint)
               _mcdslUserIP

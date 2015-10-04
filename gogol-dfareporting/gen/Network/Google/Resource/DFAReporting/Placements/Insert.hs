@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.DFAReporting.Placements.Insert
     , piPrettyPrint
     , piUserIP
     , piProfileId
+    , piPayload
     , piKey
     , piOAuthToken
-    , piPlacement
     , piFields
     ) where
 
@@ -66,11 +67,11 @@ data PlacementsInsert' = PlacementsInsert'
     , _piPrettyPrint :: !Bool
     , _piUserIP      :: !(Maybe Text)
     , _piProfileId   :: !Int64
+    , _piPayload     :: !Placement
     , _piKey         :: !(Maybe Key)
     , _piOAuthToken  :: !(Maybe OAuthToken)
-    , _piPlacement   :: !Placement
     , _piFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementsInsert'' with the minimum fields required to make a request.
 --
@@ -84,26 +85,26 @@ data PlacementsInsert' = PlacementsInsert'
 --
 -- * 'piProfileId'
 --
+-- * 'piPayload'
+--
 -- * 'piKey'
 --
 -- * 'piOAuthToken'
 --
--- * 'piPlacement'
---
 -- * 'piFields'
 placementsInsert'
     :: Int64 -- ^ 'profileId'
-    -> Placement -- ^ 'Placement'
+    -> Placement -- ^ 'payload'
     -> PlacementsInsert'
-placementsInsert' pPiProfileId_ pPiPlacement_ =
+placementsInsert' pPiProfileId_ pPiPayload_ =
     PlacementsInsert'
     { _piQuotaUser = Nothing
     , _piPrettyPrint = True
     , _piUserIP = Nothing
     , _piProfileId = pPiProfileId_
+    , _piPayload = pPiPayload_
     , _piKey = Nothing
     , _piOAuthToken = Nothing
-    , _piPlacement = pPiPlacement_
     , _piFields = Nothing
     }
 
@@ -130,6 +131,11 @@ piProfileId :: Lens' PlacementsInsert' Int64
 piProfileId
   = lens _piProfileId (\ s a -> s{_piProfileId = a})
 
+-- | Multipart request metadata.
+piPayload :: Lens' PlacementsInsert' Placement
+piPayload
+  = lens _piPayload (\ s a -> s{_piPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -140,11 +146,6 @@ piKey = lens _piKey (\ s a -> s{_piKey = a})
 piOAuthToken :: Lens' PlacementsInsert' (Maybe OAuthToken)
 piOAuthToken
   = lens _piOAuthToken (\ s a -> s{_piOAuthToken = a})
-
--- | Multipart request metadata.
-piPlacement :: Lens' PlacementsInsert' Placement
-piPlacement
-  = lens _piPlacement (\ s a -> s{_piPlacement = a})
 
 -- | Selector specifying which fields to include in a partial response.
 piFields :: Lens' PlacementsInsert' (Maybe Text)
@@ -164,7 +165,7 @@ instance GoogleRequest PlacementsInsert' where
               _piKey
               _piOAuthToken
               (Just AltJSON)
-              _piPlacement
+              _piPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementsInsertResource)

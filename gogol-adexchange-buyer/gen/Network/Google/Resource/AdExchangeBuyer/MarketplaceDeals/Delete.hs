@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Delete
     , mddQuotaUser
     , mddPrettyPrint
     , mddUserIP
-    , mddDeleteOrderDealsRequest
+    , mddPayload
     , mddKey
     , mddOAuthToken
     , mddOrderId
@@ -64,15 +65,15 @@ type MarketplaceDealsDeleteResource =
 --
 -- /See:/ 'marketplaceDealsDelete'' smart constructor.
 data MarketplaceDealsDelete' = MarketplaceDealsDelete'
-    { _mddQuotaUser               :: !(Maybe Text)
-    , _mddPrettyPrint             :: !Bool
-    , _mddUserIP                  :: !(Maybe Text)
-    , _mddDeleteOrderDealsRequest :: !DeleteOrderDealsRequest
-    , _mddKey                     :: !(Maybe Key)
-    , _mddOAuthToken              :: !(Maybe OAuthToken)
-    , _mddOrderId                 :: !Text
-    , _mddFields                  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mddQuotaUser   :: !(Maybe Text)
+    , _mddPrettyPrint :: !Bool
+    , _mddUserIP      :: !(Maybe Text)
+    , _mddPayload     :: !DeleteOrderDealsRequest
+    , _mddKey         :: !(Maybe Key)
+    , _mddOAuthToken  :: !(Maybe OAuthToken)
+    , _mddOrderId     :: !Text
+    , _mddFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceDealsDelete'' with the minimum fields required to make a request.
 --
@@ -84,7 +85,7 @@ data MarketplaceDealsDelete' = MarketplaceDealsDelete'
 --
 -- * 'mddUserIP'
 --
--- * 'mddDeleteOrderDealsRequest'
+-- * 'mddPayload'
 --
 -- * 'mddKey'
 --
@@ -94,15 +95,15 @@ data MarketplaceDealsDelete' = MarketplaceDealsDelete'
 --
 -- * 'mddFields'
 marketplaceDealsDelete'
-    :: DeleteOrderDealsRequest -- ^ 'DeleteOrderDealsRequest'
+    :: DeleteOrderDealsRequest -- ^ 'payload'
     -> Text -- ^ 'orderId'
     -> MarketplaceDealsDelete'
-marketplaceDealsDelete' pMddDeleteOrderDealsRequest_ pMddOrderId_ =
+marketplaceDealsDelete' pMddPayload_ pMddOrderId_ =
     MarketplaceDealsDelete'
     { _mddQuotaUser = Nothing
     , _mddPrettyPrint = True
     , _mddUserIP = Nothing
-    , _mddDeleteOrderDealsRequest = pMddDeleteOrderDealsRequest_
+    , _mddPayload = pMddPayload_
     , _mddKey = Nothing
     , _mddOAuthToken = Nothing
     , _mddOrderId = pMddOrderId_
@@ -129,10 +130,9 @@ mddUserIP
   = lens _mddUserIP (\ s a -> s{_mddUserIP = a})
 
 -- | Multipart request metadata.
-mddDeleteOrderDealsRequest :: Lens' MarketplaceDealsDelete' DeleteOrderDealsRequest
-mddDeleteOrderDealsRequest
-  = lens _mddDeleteOrderDealsRequest
-      (\ s a -> s{_mddDeleteOrderDealsRequest = a})
+mddPayload :: Lens' MarketplaceDealsDelete' DeleteOrderDealsRequest
+mddPayload
+  = lens _mddPayload (\ s a -> s{_mddPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -171,7 +171,7 @@ instance GoogleRequest MarketplaceDealsDelete' where
               _mddKey
               _mddOAuthToken
               (Just AltJSON)
-              _mddDeleteOrderDealsRequest
+              _mddPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MarketplaceDealsDeleteResource)

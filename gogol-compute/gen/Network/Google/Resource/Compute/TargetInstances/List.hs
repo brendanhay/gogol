@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type TargetInstancesListResource =
          Capture "zone" Text :>
            "targetInstances" :>
              QueryParam "filter" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,7 +83,7 @@ data TargetInstancesList' = TargetInstancesList'
     , _tilOAuthToken  :: !(Maybe OAuthToken)
     , _tilMaxResults  :: !Word32
     , _tilFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetInstancesList'' with the minimum fields required to make a request.
 --
@@ -209,9 +210,8 @@ instance GoogleRequest TargetInstancesList' where
         type Rs TargetInstancesList' = TargetInstanceList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetInstancesList'{..}
-          = go _tilFilter (Just _tilMaxResults) _tilPageToken
-              _tilProject
-              _tilZone
+          = go _tilProject _tilZone _tilFilter _tilPageToken
+              (Just _tilMaxResults)
               _tilQuotaUser
               (Just _tilPrettyPrint)
               _tilUserIP

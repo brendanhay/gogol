@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -31,10 +32,10 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.Insert
 
     -- * Request Lenses
     , mlaiQuotaUser
-    , mlaiAnnotation
     , mlaiPrettyPrint
     , mlaiCountry
     , mlaiUserIP
+    , mlaiPayload
     , mlaiKey
     , mlaiShowOnlySummaryInResponse
     , mlaiSource
@@ -68,16 +69,16 @@ type MyLibraryAnnotationsInsertResource =
 -- /See:/ 'myLibraryAnnotationsInsert'' smart constructor.
 data MyLibraryAnnotationsInsert' = MyLibraryAnnotationsInsert'
     { _mlaiQuotaUser                 :: !(Maybe Text)
-    , _mlaiAnnotation                :: !Annotation
     , _mlaiPrettyPrint               :: !Bool
     , _mlaiCountry                   :: !(Maybe Text)
     , _mlaiUserIP                    :: !(Maybe Text)
+    , _mlaiPayload                   :: !Annotation
     , _mlaiKey                       :: !(Maybe Key)
     , _mlaiShowOnlySummaryInResponse :: !(Maybe Bool)
     , _mlaiSource                    :: !(Maybe Text)
     , _mlaiOAuthToken                :: !(Maybe OAuthToken)
     , _mlaiFields                    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyLibraryAnnotationsInsert'' with the minimum fields required to make a request.
 --
@@ -85,13 +86,13 @@ data MyLibraryAnnotationsInsert' = MyLibraryAnnotationsInsert'
 --
 -- * 'mlaiQuotaUser'
 --
--- * 'mlaiAnnotation'
---
 -- * 'mlaiPrettyPrint'
 --
 -- * 'mlaiCountry'
 --
 -- * 'mlaiUserIP'
+--
+-- * 'mlaiPayload'
 --
 -- * 'mlaiKey'
 --
@@ -103,15 +104,15 @@ data MyLibraryAnnotationsInsert' = MyLibraryAnnotationsInsert'
 --
 -- * 'mlaiFields'
 myLibraryAnnotationsInsert'
-    :: Annotation -- ^ 'Annotation'
+    :: Annotation -- ^ 'payload'
     -> MyLibraryAnnotationsInsert'
-myLibraryAnnotationsInsert' pMlaiAnnotation_ =
+myLibraryAnnotationsInsert' pMlaiPayload_ =
     MyLibraryAnnotationsInsert'
     { _mlaiQuotaUser = Nothing
-    , _mlaiAnnotation = pMlaiAnnotation_
     , _mlaiPrettyPrint = True
     , _mlaiCountry = Nothing
     , _mlaiUserIP = Nothing
+    , _mlaiPayload = pMlaiPayload_
     , _mlaiKey = Nothing
     , _mlaiShowOnlySummaryInResponse = Nothing
     , _mlaiSource = Nothing
@@ -126,12 +127,6 @@ mlaiQuotaUser :: Lens' MyLibraryAnnotationsInsert' (Maybe Text)
 mlaiQuotaUser
   = lens _mlaiQuotaUser
       (\ s a -> s{_mlaiQuotaUser = a})
-
--- | Multipart request metadata.
-mlaiAnnotation :: Lens' MyLibraryAnnotationsInsert' Annotation
-mlaiAnnotation
-  = lens _mlaiAnnotation
-      (\ s a -> s{_mlaiAnnotation = a})
 
 -- | Returns response with indentations and line breaks.
 mlaiPrettyPrint :: Lens' MyLibraryAnnotationsInsert' Bool
@@ -149,6 +144,11 @@ mlaiCountry
 mlaiUserIP :: Lens' MyLibraryAnnotationsInsert' (Maybe Text)
 mlaiUserIP
   = lens _mlaiUserIP (\ s a -> s{_mlaiUserIP = a})
+
+-- | Multipart request metadata.
+mlaiPayload :: Lens' MyLibraryAnnotationsInsert' Annotation
+mlaiPayload
+  = lens _mlaiPayload (\ s a -> s{_mlaiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -197,7 +197,7 @@ instance GoogleRequest MyLibraryAnnotationsInsert'
               _mlaiKey
               _mlaiOAuthToken
               (Just AltJSON)
-              _mlaiAnnotation
+              _mlaiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MyLibraryAnnotationsInsertResource)

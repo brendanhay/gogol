@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,8 +55,8 @@ type ManagementWebPropertyAdWordsLinksListResource =
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "entityAdWordsLinks" :>
-                 QueryParam "max-results" Int32 :>
-                   QueryParam "start-index" Int32 :>
+                 QueryParam "start-index" Int32 :>
+                   QueryParam "max-results" Int32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data ManagementWebPropertyAdWordsLinksList' = ManagementWebPropertyAdWordsLinksL
     , _mwpawllStartIndex    :: !(Maybe Int32)
     , _mwpawllMaxResults    :: !(Maybe Int32)
     , _mwpawllFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksList'' with the minimum fields required to make a request.
 --
@@ -201,9 +202,9 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementWebPropertyAdWordsLinksList'{..}
-          = go _mwpawllMaxResults _mwpawllStartIndex
-              _mwpawllAccountId
-              _mwpawllWebPropertyId
+          = go _mwpawllAccountId _mwpawllWebPropertyId
+              _mwpawllStartIndex
+              _mwpawllMaxResults
               _mwpawllQuotaUser
               (Just _mwpawllPrettyPrint)
               _mwpawllUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,21 +59,21 @@ import           Network.Google.Prelude
 -- | A resource alias for @GanReportsGet@ which the
 -- 'ReportsGet'' request conforms to.
 type ReportsGetResource =
-     Capture "role" GanReportsGetRole :>
+     Capture "role" Role :>
        Capture "roleId" Text :>
          "report" :>
-           Capture "reportType" GanReportsGetReportType :>
-             QueryParams "advertiserId" Text :>
-               QueryParam "calculateTotals" Bool :>
+           Capture "reportType" ReportType :>
+             QueryParam "status" Status :>
+               QueryParams "advertiserId" Text :>
                  QueryParam "endDate" Text :>
-                   QueryParam "eventType" GanReportsGetEventType :>
-                     QueryParams "linkId" Text :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParams "orderId" Text :>
-                           QueryParams "publisherId" Text :>
-                             QueryParam "startDate" Text :>
+                   QueryParam "eventType" EventType :>
+                     QueryParam "startDate" Text :>
+                       QueryParam "calculateTotals" Bool :>
+                         QueryParams "linkId" Text :>
+                           QueryParams "orderId" Text :>
+                             QueryParams "publisherId" Text :>
                                QueryParam "startIndex" Word32 :>
-                                 QueryParam "status" GanReportsGetStatus :>
+                                 QueryParam "maxResults" Word32 :>
                                    QueryParam "quotaUser" Text :>
                                      QueryParam "prettyPrint" Bool :>
                                        QueryParam "userIp" Text :>
@@ -87,27 +88,27 @@ type ReportsGetResource =
 --
 -- /See:/ 'reportsGet'' smart constructor.
 data ReportsGet' = ReportsGet'
-    { _rgStatus          :: !(Maybe GanReportsGetStatus)
+    { _rgStatus          :: !(Maybe Status)
     , _rgQuotaUser       :: !(Maybe Text)
     , _rgPrettyPrint     :: !Bool
     , _rgUserIP          :: !(Maybe Text)
-    , _rgAdvertiserId    :: !(Maybe Text)
+    , _rgAdvertiserId    :: !(Maybe [Text])
     , _rgEndDate         :: !(Maybe Text)
     , _rgRoleId          :: !Text
-    , _rgRole            :: !GanReportsGetRole
-    , _rgEventType       :: !(Maybe GanReportsGetEventType)
+    , _rgRole            :: !Role
+    , _rgEventType       :: !(Maybe EventType)
     , _rgStartDate       :: !(Maybe Text)
     , _rgKey             :: !(Maybe Key)
     , _rgCalculateTotals :: !(Maybe Bool)
-    , _rgLinkId          :: !(Maybe Text)
+    , _rgLinkId          :: !(Maybe [Text])
     , _rgOAuthToken      :: !(Maybe OAuthToken)
-    , _rgOrderId         :: !(Maybe Text)
-    , _rgPublisherId     :: !(Maybe Text)
-    , _rgReportType      :: !GanReportsGetReportType
+    , _rgOrderId         :: !(Maybe [Text])
+    , _rgPublisherId     :: !(Maybe [Text])
+    , _rgReportType      :: !ReportType
     , _rgStartIndex      :: !(Maybe Word32)
     , _rgMaxResults      :: !(Maybe Word32)
     , _rgFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGet'' with the minimum fields required to make a request.
 --
@@ -154,8 +155,8 @@ data ReportsGet' = ReportsGet'
 -- * 'rgFields'
 reportsGet'
     :: Text -- ^ 'roleId'
-    -> GanReportsGetRole -- ^ 'role'
-    -> GanReportsGetReportType -- ^ 'reportType'
+    -> Role -- ^ 'role'
+    -> ReportType -- ^ 'reportType'
     -> ReportsGet'
 reportsGet' pRgRoleId_ pRgRole_ pRgReportType_ =
     ReportsGet'
@@ -183,7 +184,7 @@ reportsGet' pRgRoleId_ pRgRole_ pRgReportType_ =
 
 -- | Filters out all events that do not have the given status. Valid values:
 -- \'active\', \'canceled\', or \'invalid\'. Optional.
-rgStatus :: Lens' ReportsGet' (Maybe GanReportsGetStatus)
+rgStatus :: Lens' ReportsGet' (Maybe Status)
 rgStatus = lens _rgStatus (\ s a -> s{_rgStatus = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -205,10 +206,12 @@ rgUserIP :: Lens' ReportsGet' (Maybe Text)
 rgUserIP = lens _rgUserIP (\ s a -> s{_rgUserIP = a})
 
 -- | The IDs of the advertisers to look up, if applicable.
-rgAdvertiserId :: Lens' ReportsGet' (Maybe Text)
+rgAdvertiserId :: Lens' ReportsGet' [Text]
 rgAdvertiserId
   = lens _rgAdvertiserId
       (\ s a -> s{_rgAdvertiserId = a})
+      . _Default
+      . _Coerce
 
 -- | The end date (exclusive), in RFC 3339 format, for the report data to be
 -- returned. Defaults to one day after startDate, if that is given, or
@@ -223,12 +226,12 @@ rgRoleId = lens _rgRoleId (\ s a -> s{_rgRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-rgRole :: Lens' ReportsGet' GanReportsGetRole
+rgRole :: Lens' ReportsGet' Role
 rgRole = lens _rgRole (\ s a -> s{_rgRole = a})
 
 -- | Filters out all events that are not of the given type. Valid values:
 -- \'action\', \'transaction\', or \'charge\'. Optional.
-rgEventType :: Lens' ReportsGet' (Maybe GanReportsGetEventType)
+rgEventType :: Lens' ReportsGet' (Maybe EventType)
 rgEventType
   = lens _rgEventType (\ s a -> s{_rgEventType = a})
 
@@ -252,8 +255,11 @@ rgCalculateTotals
       (\ s a -> s{_rgCalculateTotals = a})
 
 -- | Filters to capture one of given link IDs. Optional.
-rgLinkId :: Lens' ReportsGet' (Maybe Text)
-rgLinkId = lens _rgLinkId (\ s a -> s{_rgLinkId = a})
+rgLinkId :: Lens' ReportsGet' [Text]
+rgLinkId
+  = lens _rgLinkId (\ s a -> s{_rgLinkId = a}) .
+      _Default
+      . _Coerce
 
 -- | OAuth 2.0 token for the current user.
 rgOAuthToken :: Lens' ReportsGet' (Maybe OAuthToken)
@@ -261,19 +267,23 @@ rgOAuthToken
   = lens _rgOAuthToken (\ s a -> s{_rgOAuthToken = a})
 
 -- | Filters to capture one of the given order IDs. Optional.
-rgOrderId :: Lens' ReportsGet' (Maybe Text)
+rgOrderId :: Lens' ReportsGet' [Text]
 rgOrderId
-  = lens _rgOrderId (\ s a -> s{_rgOrderId = a})
+  = lens _rgOrderId (\ s a -> s{_rgOrderId = a}) .
+      _Default
+      . _Coerce
 
 -- | The IDs of the publishers to look up, if applicable.
-rgPublisherId :: Lens' ReportsGet' (Maybe Text)
+rgPublisherId :: Lens' ReportsGet' [Text]
 rgPublisherId
   = lens _rgPublisherId
       (\ s a -> s{_rgPublisherId = a})
+      . _Default
+      . _Coerce
 
 -- | The type of report being requested. Valid values: \'order_delta\'.
 -- Required.
-rgReportType :: Lens' ReportsGet' GanReportsGetReportType
+rgReportType :: Lens' ReportsGet' ReportType
 rgReportType
   = lens _rgReportType (\ s a -> s{_rgReportType = a})
 
@@ -300,18 +310,17 @@ instance GoogleRequest ReportsGet' where
         type Rs ReportsGet' = Report
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u ReportsGet'{..}
-          = go _rgAdvertiserId _rgCalculateTotals _rgEndDate
+          = go _rgRole _rgRoleId _rgReportType _rgStatus
+              (_rgAdvertiserId ^. _Default)
+              _rgEndDate
               _rgEventType
-              _rgLinkId
-              _rgMaxResults
-              _rgOrderId
-              _rgPublisherId
               _rgStartDate
+              _rgCalculateTotals
+              (_rgLinkId ^. _Default)
+              (_rgOrderId ^. _Default)
+              (_rgPublisherId ^. _Default)
               _rgStartIndex
-              _rgStatus
-              _rgRole
-              _rgRoleId
-              _rgReportType
+              _rgMaxResults
               _rgQuotaUser
               (Just _rgPrettyPrint)
               _rgUserIP

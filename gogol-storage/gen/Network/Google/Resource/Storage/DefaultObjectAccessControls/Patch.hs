@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,10 +36,10 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Patch
     , doacpPrettyPrint
     , doacpUserIP
     , doacpBucket
+    , doacpPayload
     , doacpKey
     , doacpOAuthToken
     , doacpEntity
-    , doacpObjectAccessControl
     , doacpFields
     ) where
 
@@ -67,16 +68,16 @@ type DefaultObjectAccessControlsPatchResource =
 --
 -- /See:/ 'defaultObjectAccessControlsPatch'' smart constructor.
 data DefaultObjectAccessControlsPatch' = DefaultObjectAccessControlsPatch'
-    { _doacpQuotaUser           :: !(Maybe Text)
-    , _doacpPrettyPrint         :: !Bool
-    , _doacpUserIP              :: !(Maybe Text)
-    , _doacpBucket              :: !Text
-    , _doacpKey                 :: !(Maybe Key)
-    , _doacpOAuthToken          :: !(Maybe OAuthToken)
-    , _doacpEntity              :: !Text
-    , _doacpObjectAccessControl :: !ObjectAccessControl
-    , _doacpFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _doacpQuotaUser   :: !(Maybe Text)
+    , _doacpPrettyPrint :: !Bool
+    , _doacpUserIP      :: !(Maybe Text)
+    , _doacpBucket      :: !Text
+    , _doacpPayload     :: !ObjectAccessControl
+    , _doacpKey         :: !(Maybe Key)
+    , _doacpOAuthToken  :: !(Maybe OAuthToken)
+    , _doacpEntity      :: !Text
+    , _doacpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsPatch'' with the minimum fields required to make a request.
 --
@@ -90,30 +91,30 @@ data DefaultObjectAccessControlsPatch' = DefaultObjectAccessControlsPatch'
 --
 -- * 'doacpBucket'
 --
+-- * 'doacpPayload'
+--
 -- * 'doacpKey'
 --
 -- * 'doacpOAuthToken'
 --
 -- * 'doacpEntity'
 --
--- * 'doacpObjectAccessControl'
---
 -- * 'doacpFields'
 defaultObjectAccessControlsPatch'
     :: Text -- ^ 'bucket'
+    -> ObjectAccessControl -- ^ 'payload'
     -> Text -- ^ 'entity'
-    -> ObjectAccessControl -- ^ 'ObjectAccessControl'
     -> DefaultObjectAccessControlsPatch'
-defaultObjectAccessControlsPatch' pDoacpBucket_ pDoacpEntity_ pDoacpObjectAccessControl_ =
+defaultObjectAccessControlsPatch' pDoacpBucket_ pDoacpPayload_ pDoacpEntity_ =
     DefaultObjectAccessControlsPatch'
     { _doacpQuotaUser = Nothing
     , _doacpPrettyPrint = True
     , _doacpUserIP = Nothing
     , _doacpBucket = pDoacpBucket_
+    , _doacpPayload = pDoacpPayload_
     , _doacpKey = Nothing
     , _doacpOAuthToken = Nothing
     , _doacpEntity = pDoacpEntity_
-    , _doacpObjectAccessControl = pDoacpObjectAccessControl_
     , _doacpFields = Nothing
     }
 
@@ -142,6 +143,11 @@ doacpBucket :: Lens' DefaultObjectAccessControlsPatch' Text
 doacpBucket
   = lens _doacpBucket (\ s a -> s{_doacpBucket = a})
 
+-- | Multipart request metadata.
+doacpPayload :: Lens' DefaultObjectAccessControlsPatch' ObjectAccessControl
+doacpPayload
+  = lens _doacpPayload (\ s a -> s{_doacpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -160,12 +166,6 @@ doacpOAuthToken
 doacpEntity :: Lens' DefaultObjectAccessControlsPatch' Text
 doacpEntity
   = lens _doacpEntity (\ s a -> s{_doacpEntity = a})
-
--- | Multipart request metadata.
-doacpObjectAccessControl :: Lens' DefaultObjectAccessControlsPatch' ObjectAccessControl
-doacpObjectAccessControl
-  = lens _doacpObjectAccessControl
-      (\ s a -> s{_doacpObjectAccessControl = a})
 
 -- | Selector specifying which fields to include in a partial response.
 doacpFields :: Lens' DefaultObjectAccessControlsPatch' (Maybe Text)
@@ -191,7 +191,7 @@ instance GoogleRequest
               _doacpKey
               _doacpOAuthToken
               (Just AltJSON)
-              _doacpObjectAccessControl
+              _doacpPayload
           where go
                   = clientWithRoute
                       (Proxy ::

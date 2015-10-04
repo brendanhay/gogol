@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,8 +37,8 @@ module Network.Google.Resource.Logging.Projects.LogServices.Sinks.Update
     , plssuUploadProtocol
     , plssuPp
     , plssuAccessToken
-    , plssuLogSink
     , plssuUploadType
+    , plssuPayload
     , plssuBearerToken
     , plssuKey
     , plssuLogServicesId
@@ -62,12 +63,12 @@ type ProjectsLogServicesSinksUpdateResource =
                "sinks" :>
                  Capture "sinksId" Text :>
                    QueryParam "$.xgafv" Text :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "upload_protocol" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "callback" Text :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "fields" Text :>
@@ -87,8 +88,8 @@ data ProjectsLogServicesSinksUpdate' = ProjectsLogServicesSinksUpdate'
     , _plssuUploadProtocol :: !(Maybe Text)
     , _plssuPp             :: !Bool
     , _plssuAccessToken    :: !(Maybe Text)
-    , _plssuLogSink        :: !LogSink
     , _plssuUploadType     :: !(Maybe Text)
+    , _plssuPayload        :: !LogSink
     , _plssuBearerToken    :: !(Maybe Text)
     , _plssuKey            :: !(Maybe Key)
     , _plssuLogServicesId  :: !Text
@@ -97,7 +98,7 @@ data ProjectsLogServicesSinksUpdate' = ProjectsLogServicesSinksUpdate'
     , _plssuSinksId        :: !Text
     , _plssuFields         :: !(Maybe Text)
     , _plssuCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogServicesSinksUpdate'' with the minimum fields required to make a request.
 --
@@ -115,9 +116,9 @@ data ProjectsLogServicesSinksUpdate' = ProjectsLogServicesSinksUpdate'
 --
 -- * 'plssuAccessToken'
 --
--- * 'plssuLogSink'
---
 -- * 'plssuUploadType'
+--
+-- * 'plssuPayload'
 --
 -- * 'plssuBearerToken'
 --
@@ -135,12 +136,12 @@ data ProjectsLogServicesSinksUpdate' = ProjectsLogServicesSinksUpdate'
 --
 -- * 'plssuCallback'
 projectsLogServicesSinksUpdate'
-    :: LogSink -- ^ 'LogSink'
+    :: LogSink -- ^ 'payload'
     -> Text -- ^ 'logServicesId'
     -> Text -- ^ 'projectsId'
     -> Text -- ^ 'sinksId'
     -> ProjectsLogServicesSinksUpdate'
-projectsLogServicesSinksUpdate' pPlssuLogSink_ pPlssuLogServicesId_ pPlssuProjectsId_ pPlssuSinksId_ =
+projectsLogServicesSinksUpdate' pPlssuPayload_ pPlssuLogServicesId_ pPlssuProjectsId_ pPlssuSinksId_ =
     ProjectsLogServicesSinksUpdate'
     { _plssuXgafv = Nothing
     , _plssuQuotaUser = Nothing
@@ -148,8 +149,8 @@ projectsLogServicesSinksUpdate' pPlssuLogSink_ pPlssuLogServicesId_ pPlssuProjec
     , _plssuUploadProtocol = Nothing
     , _plssuPp = True
     , _plssuAccessToken = Nothing
-    , _plssuLogSink = pPlssuLogSink_
     , _plssuUploadType = Nothing
+    , _plssuPayload = pPlssuPayload_
     , _plssuBearerToken = Nothing
     , _plssuKey = Nothing
     , _plssuLogServicesId = pPlssuLogServicesId_
@@ -195,16 +196,16 @@ plssuAccessToken
   = lens _plssuAccessToken
       (\ s a -> s{_plssuAccessToken = a})
 
--- | Multipart request metadata.
-plssuLogSink :: Lens' ProjectsLogServicesSinksUpdate' LogSink
-plssuLogSink
-  = lens _plssuLogSink (\ s a -> s{_plssuLogSink = a})
-
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
 plssuUploadType :: Lens' ProjectsLogServicesSinksUpdate' (Maybe Text)
 plssuUploadType
   = lens _plssuUploadType
       (\ s a -> s{_plssuUploadType = a})
+
+-- | Multipart request metadata.
+plssuPayload :: Lens' ProjectsLogServicesSinksUpdate' LogSink
+plssuPayload
+  = lens _plssuPayload (\ s a -> s{_plssuPayload = a})
 
 -- | OAuth bearer token.
 plssuBearerToken :: Lens' ProjectsLogServicesSinksUpdate' (Maybe Text)
@@ -264,21 +265,22 @@ instance GoogleRequest
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u
           ProjectsLogServicesSinksUpdate'{..}
-          = go _plssuXgafv _plssuAccessToken _plssuBearerToken
-              _plssuCallback
-              (Just _plssuPp)
-              _plssuUploadType
-              _plssuUploadProtocol
-              _plssuProjectsId
-              _plssuLogServicesId
+          = go _plssuProjectsId _plssuLogServicesId
               _plssuSinksId
+              _plssuXgafv
+              _plssuUploadProtocol
+              (Just _plssuPp)
+              _plssuAccessToken
+              _plssuUploadType
+              _plssuBearerToken
+              _plssuCallback
               _plssuQuotaUser
               (Just _plssuPrettyPrint)
               _plssuFields
               _plssuKey
               _plssuOAuthToken
               (Just AltJSON)
-              _plssuLogSink
+              _plssuPayload
           where go
                   = clientWithRoute
                       (Proxy ::

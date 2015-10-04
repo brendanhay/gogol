@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.YouTube.ChannelSections.Update
     , csuQuotaUser
     , csuPart
     , csuPrettyPrint
-    , csuChannelSection
     , csuUserIP
+    , csuPayload
     , csuOnBehalfOfContentOwner
     , csuKey
     , csuOAuthToken
@@ -48,8 +49,8 @@ import           Network.Google.YouTube.Types
 -- 'ChannelSectionsUpdate'' request conforms to.
 type ChannelSectionsUpdateResource =
      "channelSections" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -67,13 +68,13 @@ data ChannelSectionsUpdate' = ChannelSectionsUpdate'
     { _csuQuotaUser              :: !(Maybe Text)
     , _csuPart                   :: !Text
     , _csuPrettyPrint            :: !Bool
-    , _csuChannelSection         :: !ChannelSection
     , _csuUserIP                 :: !(Maybe Text)
+    , _csuPayload                :: !ChannelSection
     , _csuOnBehalfOfContentOwner :: !(Maybe Text)
     , _csuKey                    :: !(Maybe Key)
     , _csuOAuthToken             :: !(Maybe OAuthToken)
     , _csuFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelSectionsUpdate'' with the minimum fields required to make a request.
 --
@@ -85,9 +86,9 @@ data ChannelSectionsUpdate' = ChannelSectionsUpdate'
 --
 -- * 'csuPrettyPrint'
 --
--- * 'csuChannelSection'
---
 -- * 'csuUserIP'
+--
+-- * 'csuPayload'
 --
 -- * 'csuOnBehalfOfContentOwner'
 --
@@ -98,15 +99,15 @@ data ChannelSectionsUpdate' = ChannelSectionsUpdate'
 -- * 'csuFields'
 channelSectionsUpdate'
     :: Text -- ^ 'part'
-    -> ChannelSection -- ^ 'ChannelSection'
+    -> ChannelSection -- ^ 'payload'
     -> ChannelSectionsUpdate'
-channelSectionsUpdate' pCsuPart_ pCsuChannelSection_ =
+channelSectionsUpdate' pCsuPart_ pCsuPayload_ =
     ChannelSectionsUpdate'
     { _csuQuotaUser = Nothing
     , _csuPart = pCsuPart_
     , _csuPrettyPrint = True
-    , _csuChannelSection = pCsuChannelSection_
     , _csuUserIP = Nothing
+    , _csuPayload = pCsuPayload_
     , _csuOnBehalfOfContentOwner = Nothing
     , _csuKey = Nothing
     , _csuOAuthToken = Nothing
@@ -133,17 +134,16 @@ csuPrettyPrint
   = lens _csuPrettyPrint
       (\ s a -> s{_csuPrettyPrint = a})
 
--- | Multipart request metadata.
-csuChannelSection :: Lens' ChannelSectionsUpdate' ChannelSection
-csuChannelSection
-  = lens _csuChannelSection
-      (\ s a -> s{_csuChannelSection = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 csuUserIP :: Lens' ChannelSectionsUpdate' (Maybe Text)
 csuUserIP
   = lens _csuUserIP (\ s a -> s{_csuUserIP = a})
+
+-- | Multipart request metadata.
+csuPayload :: Lens' ChannelSectionsUpdate' ChannelSection
+csuPayload
+  = lens _csuPayload (\ s a -> s{_csuPayload = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -185,7 +185,7 @@ instance GoogleRequest ChannelSectionsUpdate' where
         type Rs ChannelSectionsUpdate' = ChannelSection
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u ChannelSectionsUpdate'{..}
-          = go _csuOnBehalfOfContentOwner (Just _csuPart)
+          = go (Just _csuPart) _csuOnBehalfOfContentOwner
               _csuQuotaUser
               (Just _csuPrettyPrint)
               _csuUserIP
@@ -193,7 +193,7 @@ instance GoogleRequest ChannelSectionsUpdate' where
               _csuKey
               _csuOAuthToken
               (Just AltJSON)
-              _csuChannelSection
+              _csuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChannelSectionsUpdateResource)

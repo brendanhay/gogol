@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,9 +37,9 @@ module Network.Google.Resource.Genomics.Annotations.Search
     , asQuotaUser
     , asPrettyPrint
     , asUserIP
+    , asPayload
     , asKey
     , asOAuthToken
-    , asSearchAnnotationsRequest
     , asFields
     ) where
 
@@ -67,14 +68,14 @@ type AnnotationsSearchResource =
 --
 -- /See:/ 'annotationsSearch'' smart constructor.
 data AnnotationsSearch' = AnnotationsSearch'
-    { _asQuotaUser                :: !(Maybe Text)
-    , _asPrettyPrint              :: !Bool
-    , _asUserIP                   :: !(Maybe Text)
-    , _asKey                      :: !(Maybe Key)
-    , _asOAuthToken               :: !(Maybe OAuthToken)
-    , _asSearchAnnotationsRequest :: !SearchAnnotationsRequest
-    , _asFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _asQuotaUser   :: !(Maybe Text)
+    , _asPrettyPrint :: !Bool
+    , _asUserIP      :: !(Maybe Text)
+    , _asPayload     :: !SearchAnnotationsRequest
+    , _asKey         :: !(Maybe Key)
+    , _asOAuthToken  :: !(Maybe OAuthToken)
+    , _asFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsSearch'' with the minimum fields required to make a request.
 --
@@ -86,24 +87,24 @@ data AnnotationsSearch' = AnnotationsSearch'
 --
 -- * 'asUserIP'
 --
+-- * 'asPayload'
+--
 -- * 'asKey'
 --
 -- * 'asOAuthToken'
 --
--- * 'asSearchAnnotationsRequest'
---
 -- * 'asFields'
 annotationsSearch'
-    :: SearchAnnotationsRequest -- ^ 'SearchAnnotationsRequest'
+    :: SearchAnnotationsRequest -- ^ 'payload'
     -> AnnotationsSearch'
-annotationsSearch' pAsSearchAnnotationsRequest_ =
+annotationsSearch' pAsPayload_ =
     AnnotationsSearch'
     { _asQuotaUser = Nothing
     , _asPrettyPrint = True
     , _asUserIP = Nothing
+    , _asPayload = pAsPayload_
     , _asKey = Nothing
     , _asOAuthToken = Nothing
-    , _asSearchAnnotationsRequest = pAsSearchAnnotationsRequest_
     , _asFields = Nothing
     }
 
@@ -125,6 +126,11 @@ asPrettyPrint
 asUserIP :: Lens' AnnotationsSearch' (Maybe Text)
 asUserIP = lens _asUserIP (\ s a -> s{_asUserIP = a})
 
+-- | Multipart request metadata.
+asPayload :: Lens' AnnotationsSearch' SearchAnnotationsRequest
+asPayload
+  = lens _asPayload (\ s a -> s{_asPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -135,12 +141,6 @@ asKey = lens _asKey (\ s a -> s{_asKey = a})
 asOAuthToken :: Lens' AnnotationsSearch' (Maybe OAuthToken)
 asOAuthToken
   = lens _asOAuthToken (\ s a -> s{_asOAuthToken = a})
-
--- | Multipart request metadata.
-asSearchAnnotationsRequest :: Lens' AnnotationsSearch' SearchAnnotationsRequest
-asSearchAnnotationsRequest
-  = lens _asSearchAnnotationsRequest
-      (\ s a -> s{_asSearchAnnotationsRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 asFields :: Lens' AnnotationsSearch' (Maybe Text)
@@ -160,7 +160,7 @@ instance GoogleRequest AnnotationsSearch' where
               _asKey
               _asOAuthToken
               (Just AltJSON)
-              _asSearchAnnotationsRequest
+              _asPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationsSearchResource)

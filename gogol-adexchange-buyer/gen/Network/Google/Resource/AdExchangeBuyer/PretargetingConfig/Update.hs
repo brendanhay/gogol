@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Update
     , pcuQuotaUser
     , pcuPrettyPrint
     , pcuUserIP
-    , pcuPretargetingConfig
+    , pcuPayload
     , pcuAccountId
     , pcuKey
     , pcuConfigId
@@ -64,16 +65,16 @@ type PretargetingConfigUpdateResource =
 --
 -- /See:/ 'pretargetingConfigUpdate'' smart constructor.
 data PretargetingConfigUpdate' = PretargetingConfigUpdate'
-    { _pcuQuotaUser          :: !(Maybe Text)
-    , _pcuPrettyPrint        :: !Bool
-    , _pcuUserIP             :: !(Maybe Text)
-    , _pcuPretargetingConfig :: !PretargetingConfig
-    , _pcuAccountId          :: !Int64
-    , _pcuKey                :: !(Maybe Key)
-    , _pcuConfigId           :: !Int64
-    , _pcuOAuthToken         :: !(Maybe OAuthToken)
-    , _pcuFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _pcuQuotaUser   :: !(Maybe Text)
+    , _pcuPrettyPrint :: !Bool
+    , _pcuUserIP      :: !(Maybe Text)
+    , _pcuPayload     :: !PretargetingConfig
+    , _pcuAccountId   :: !Int64
+    , _pcuKey         :: !(Maybe Key)
+    , _pcuConfigId    :: !Int64
+    , _pcuOAuthToken  :: !(Maybe OAuthToken)
+    , _pcuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigUpdate'' with the minimum fields required to make a request.
 --
@@ -85,7 +86,7 @@ data PretargetingConfigUpdate' = PretargetingConfigUpdate'
 --
 -- * 'pcuUserIP'
 --
--- * 'pcuPretargetingConfig'
+-- * 'pcuPayload'
 --
 -- * 'pcuAccountId'
 --
@@ -97,16 +98,16 @@ data PretargetingConfigUpdate' = PretargetingConfigUpdate'
 --
 -- * 'pcuFields'
 pretargetingConfigUpdate'
-    :: PretargetingConfig -- ^ 'PretargetingConfig'
+    :: PretargetingConfig -- ^ 'payload'
     -> Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'configId'
     -> PretargetingConfigUpdate'
-pretargetingConfigUpdate' pPcuPretargetingConfig_ pPcuAccountId_ pPcuConfigId_ =
+pretargetingConfigUpdate' pPcuPayload_ pPcuAccountId_ pPcuConfigId_ =
     PretargetingConfigUpdate'
     { _pcuQuotaUser = Nothing
     , _pcuPrettyPrint = True
     , _pcuUserIP = Nothing
-    , _pcuPretargetingConfig = pPcuPretargetingConfig_
+    , _pcuPayload = pPcuPayload_
     , _pcuAccountId = pPcuAccountId_
     , _pcuKey = Nothing
     , _pcuConfigId = pPcuConfigId_
@@ -134,10 +135,9 @@ pcuUserIP
   = lens _pcuUserIP (\ s a -> s{_pcuUserIP = a})
 
 -- | Multipart request metadata.
-pcuPretargetingConfig :: Lens' PretargetingConfigUpdate' PretargetingConfig
-pcuPretargetingConfig
-  = lens _pcuPretargetingConfig
-      (\ s a -> s{_pcuPretargetingConfig = a})
+pcuPayload :: Lens' PretargetingConfigUpdate' PretargetingConfig
+pcuPayload
+  = lens _pcuPayload (\ s a -> s{_pcuPayload = a})
 
 -- | The account id to update the pretargeting config for.
 pcuAccountId :: Lens' PretargetingConfigUpdate' Int64
@@ -183,7 +183,7 @@ instance GoogleRequest PretargetingConfigUpdate'
               _pcuKey
               _pcuOAuthToken
               (Just AltJSON)
-              _pcuPretargetingConfig
+              _pcuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PretargetingConfigUpdateResource)

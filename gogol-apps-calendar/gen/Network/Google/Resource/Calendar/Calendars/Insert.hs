@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.Calendar.Calendars.Insert
     , ciQuotaUser
     , ciPrettyPrint
     , ciUserIP
+    , ciPayload
     , ciKey
-    , ciCalendar
     , ciOAuthToken
     , ciFields
     ) where
@@ -62,11 +63,11 @@ data CalendarsInsert' = CalendarsInsert'
     { _ciQuotaUser   :: !(Maybe Text)
     , _ciPrettyPrint :: !Bool
     , _ciUserIP      :: !(Maybe Text)
+    , _ciPayload     :: !Calendar
     , _ciKey         :: !(Maybe Key)
-    , _ciCalendar    :: !Calendar
     , _ciOAuthToken  :: !(Maybe OAuthToken)
     , _ciFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarsInsert'' with the minimum fields required to make a request.
 --
@@ -78,23 +79,23 @@ data CalendarsInsert' = CalendarsInsert'
 --
 -- * 'ciUserIP'
 --
--- * 'ciKey'
+-- * 'ciPayload'
 --
--- * 'ciCalendar'
+-- * 'ciKey'
 --
 -- * 'ciOAuthToken'
 --
 -- * 'ciFields'
 calendarsInsert'
-    :: Calendar -- ^ 'Calendar'
+    :: Calendar -- ^ 'payload'
     -> CalendarsInsert'
-calendarsInsert' pCiCalendar_ =
+calendarsInsert' pCiPayload_ =
     CalendarsInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
     , _ciUserIP = Nothing
+    , _ciPayload = pCiPayload_
     , _ciKey = Nothing
-    , _ciCalendar = pCiCalendar_
     , _ciOAuthToken = Nothing
     , _ciFields = Nothing
     }
@@ -117,16 +118,16 @@ ciPrettyPrint
 ciUserIP :: Lens' CalendarsInsert' (Maybe Text)
 ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
 
+-- | Multipart request metadata.
+ciPayload :: Lens' CalendarsInsert' Calendar
+ciPayload
+  = lens _ciPayload (\ s a -> s{_ciPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 ciKey :: Lens' CalendarsInsert' (Maybe Key)
 ciKey = lens _ciKey (\ s a -> s{_ciKey = a})
-
--- | Multipart request metadata.
-ciCalendar :: Lens' CalendarsInsert' Calendar
-ciCalendar
-  = lens _ciCalendar (\ s a -> s{_ciCalendar = a})
 
 -- | OAuth 2.0 token for the current user.
 ciOAuthToken :: Lens' CalendarsInsert' (Maybe OAuthToken)
@@ -150,7 +151,7 @@ instance GoogleRequest CalendarsInsert' where
               _ciKey
               _ciOAuthToken
               (Just AltJSON)
-              _ciCalendar
+              _ciPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CalendarsInsertResource)

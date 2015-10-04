@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ type CustomChannelsListResource =
      "adclients" :>
        Capture "adClientId" Text :>
          "customchannels" :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -74,7 +75,7 @@ data CustomChannelsList' = CustomChannelsList'
     , _cclOAuthToken  :: !(Maybe OAuthToken)
     , _cclMaxResults  :: !(Maybe Word32)
     , _cclFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomChannelsList'' with the minimum fields required to make a request.
 --
@@ -177,7 +178,7 @@ instance GoogleRequest CustomChannelsList' where
         type Rs CustomChannelsList' = CustomChannels
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u CustomChannelsList'{..}
-          = go _cclMaxResults _cclPageToken _cclAdClientId
+          = go _cclAdClientId _cclPageToken _cclMaxResults
               _cclQuotaUser
               (Just _cclPrettyPrint)
               _cclUserIP

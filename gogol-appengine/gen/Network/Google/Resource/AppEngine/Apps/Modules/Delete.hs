@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,12 +59,12 @@ type AppsModulesDeleteResource =
            "modules" :>
              Capture "modulesId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "callback" Text :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
@@ -90,7 +91,7 @@ data AppsModulesDelete' = AppsModulesDelete'
     , _amdOAuthToken     :: !(Maybe OAuthToken)
     , _amdFields         :: !(Maybe Text)
     , _amdCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsModulesDelete'' with the minimum fields required to make a request.
 --
@@ -231,13 +232,13 @@ instance GoogleRequest AppsModulesDelete' where
         type Rs AppsModulesDelete' = Operation
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsModulesDelete'{..}
-          = go _amdXgafv _amdAccessToken _amdBearerToken
-              _amdCallback
-              (Just _amdPp)
-              _amdUploadType
+          = go _amdAppsId _amdModulesId _amdXgafv
               _amdUploadProtocol
-              _amdAppsId
-              _amdModulesId
+              (Just _amdPp)
+              _amdAccessToken
+              _amdUploadType
+              _amdBearerToken
+              _amdCallback
               _amdQuotaUser
               (Just _amdPrettyPrint)
               _amdFields

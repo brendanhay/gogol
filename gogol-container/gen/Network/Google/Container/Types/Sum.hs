@@ -17,40 +17,48 @@ module Network.Google.Container.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | The operation type.
-data OperationOperationType
-    = CreateCluster
-      -- ^ @createCluster@
-    | DeleteCluster
-      -- ^ @deleteCluster@
+-- | [Output only] The current status of this cluster.
+data Status
+    = Error'
+      -- ^ @error@
+    | Provisioning
+      -- ^ @provisioning@
+    | Running
+      -- ^ @running@
+    | Stopping
+      -- ^ @stopping@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable OperationOperationType
+instance Hashable Status
 
-instance FromText OperationOperationType where
+instance FromText Status where
     fromText = \case
-        "createCluster" -> Just CreateCluster
-        "deleteCluster" -> Just DeleteCluster
+        "error" -> Just Error'
+        "provisioning" -> Just Provisioning
+        "running" -> Just Running
+        "stopping" -> Just Stopping
         _ -> Nothing
 
-instance ToText OperationOperationType where
+instance ToText Status where
     toText = \case
-        CreateCluster -> "createCluster"
-        DeleteCluster -> "deleteCluster"
+        Error' -> "error"
+        Provisioning -> "provisioning"
+        Running -> "running"
+        Stopping -> "stopping"
 
-instance FromJSON OperationOperationType where
-    parseJSON = parseJSONText "OperationOperationType"
+instance FromJSON Status where
+    parseJSON = parseJSONText "Status"
 
-instance ToJSON OperationOperationType where
+instance ToJSON Status where
     toJSON = toJSONText
 
 -- | The current status of the operation.
 data OperationStatus
-    = Done
+    = OSDone
       -- ^ @done@
-    | Pending
+    | OSPending
       -- ^ @pending@
-    | Running
+    | OSRunning
       -- ^ @running@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -58,16 +66,16 @@ instance Hashable OperationStatus
 
 instance FromText OperationStatus where
     fromText = \case
-        "done" -> Just Done
-        "pending" -> Just Pending
-        "running" -> Just Running
+        "done" -> Just OSDone
+        "pending" -> Just OSPending
+        "running" -> Just OSRunning
         _ -> Nothing
 
 instance ToText OperationStatus where
     toText = \case
-        Done -> "done"
-        Pending -> "pending"
-        Running -> "running"
+        OSDone -> "done"
+        OSPending -> "pending"
+        OSRunning -> "running"
 
 instance FromJSON OperationStatus where
     parseJSON = parseJSONText "OperationStatus"
@@ -75,37 +83,29 @@ instance FromJSON OperationStatus where
 instance ToJSON OperationStatus where
     toJSON = toJSONText
 
--- | [Output only] The current status of this cluster.
-data ClusterStatus
-    = CSError'
-      -- ^ @error@
-    | CSProvisioning
-      -- ^ @provisioning@
-    | CSRunning
-      -- ^ @running@
-    | CSStopping
-      -- ^ @stopping@
+-- | The operation type.
+data OperationType
+    = CreateCluster
+      -- ^ @createCluster@
+    | DeleteCluster
+      -- ^ @deleteCluster@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ClusterStatus
+instance Hashable OperationType
 
-instance FromText ClusterStatus where
+instance FromText OperationType where
     fromText = \case
-        "error" -> Just CSError'
-        "provisioning" -> Just CSProvisioning
-        "running" -> Just CSRunning
-        "stopping" -> Just CSStopping
+        "createCluster" -> Just CreateCluster
+        "deleteCluster" -> Just DeleteCluster
         _ -> Nothing
 
-instance ToText ClusterStatus where
+instance ToText OperationType where
     toText = \case
-        CSError' -> "error"
-        CSProvisioning -> "provisioning"
-        CSRunning -> "running"
-        CSStopping -> "stopping"
+        CreateCluster -> "createCluster"
+        DeleteCluster -> "deleteCluster"
 
-instance FromJSON ClusterStatus where
-    parseJSON = parseJSONText "ClusterStatus"
+instance FromJSON OperationType where
+    parseJSON = parseJSONText "OperationType"
 
-instance ToJSON ClusterStatus where
+instance ToJSON OperationType where
     toJSON = toJSONText

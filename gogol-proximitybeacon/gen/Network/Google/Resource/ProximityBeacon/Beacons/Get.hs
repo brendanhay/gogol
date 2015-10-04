@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,14 +53,14 @@ import           Network.Google.ProximityBeacon.Types
 -- 'BeaconsGet'' request conforms to.
 type BeaconsGetResource =
      "v1beta1" :>
-       "{+beaconName}" :>
+       Capture "beaconName" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -84,7 +85,7 @@ data BeaconsGet' = BeaconsGet'
     , _bgOAuthToken     :: !(Maybe OAuthToken)
     , _bgFields         :: !(Maybe Text)
     , _bgCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsGet'' with the minimum fields required to make a request.
 --
@@ -212,12 +213,12 @@ instance GoogleRequest BeaconsGet' where
         type Rs BeaconsGet' = Beacon
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u BeaconsGet'{..}
-          = go _bgXgafv _bgAccessToken _bgBearerToken
-              _bgCallback
+          = go _bgBeaconName _bgXgafv _bgUploadProtocol
               (Just _bgPp)
+              _bgAccessToken
               _bgUploadType
-              _bgUploadProtocol
-              _bgBeaconName
+              _bgBearerToken
+              _bgCallback
               _bgQuotaUser
               (Just _bgPrettyPrint)
               _bgFields

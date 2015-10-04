@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.YouTube.CommentThreads.Update
     , ctuPart
     , ctuPrettyPrint
     , ctuUserIP
+    , ctuPayload
     , ctuKey
-    , ctuCommentThread
     , ctuOAuthToken
     , ctuFields
     ) where
@@ -62,15 +63,15 @@ type CommentThreadsUpdateResource =
 --
 -- /See:/ 'commentThreadsUpdate'' smart constructor.
 data CommentThreadsUpdate' = CommentThreadsUpdate'
-    { _ctuQuotaUser     :: !(Maybe Text)
-    , _ctuPart          :: !Text
-    , _ctuPrettyPrint   :: !Bool
-    , _ctuUserIP        :: !(Maybe Text)
-    , _ctuKey           :: !(Maybe Key)
-    , _ctuCommentThread :: !CommentThread
-    , _ctuOAuthToken    :: !(Maybe OAuthToken)
-    , _ctuFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ctuQuotaUser   :: !(Maybe Text)
+    , _ctuPart        :: !Text
+    , _ctuPrettyPrint :: !Bool
+    , _ctuUserIP      :: !(Maybe Text)
+    , _ctuPayload     :: !CommentThread
+    , _ctuKey         :: !(Maybe Key)
+    , _ctuOAuthToken  :: !(Maybe OAuthToken)
+    , _ctuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentThreadsUpdate'' with the minimum fields required to make a request.
 --
@@ -84,25 +85,25 @@ data CommentThreadsUpdate' = CommentThreadsUpdate'
 --
 -- * 'ctuUserIP'
 --
--- * 'ctuKey'
+-- * 'ctuPayload'
 --
--- * 'ctuCommentThread'
+-- * 'ctuKey'
 --
 -- * 'ctuOAuthToken'
 --
 -- * 'ctuFields'
 commentThreadsUpdate'
     :: Text -- ^ 'part'
-    -> CommentThread -- ^ 'CommentThread'
+    -> CommentThread -- ^ 'payload'
     -> CommentThreadsUpdate'
-commentThreadsUpdate' pCtuPart_ pCtuCommentThread_ =
+commentThreadsUpdate' pCtuPart_ pCtuPayload_ =
     CommentThreadsUpdate'
     { _ctuQuotaUser = Nothing
     , _ctuPart = pCtuPart_
     , _ctuPrettyPrint = True
     , _ctuUserIP = Nothing
+    , _ctuPayload = pCtuPayload_
     , _ctuKey = Nothing
-    , _ctuCommentThread = pCtuCommentThread_
     , _ctuOAuthToken = Nothing
     , _ctuFields = Nothing
     }
@@ -133,17 +134,16 @@ ctuUserIP :: Lens' CommentThreadsUpdate' (Maybe Text)
 ctuUserIP
   = lens _ctuUserIP (\ s a -> s{_ctuUserIP = a})
 
+-- | Multipart request metadata.
+ctuPayload :: Lens' CommentThreadsUpdate' CommentThread
+ctuPayload
+  = lens _ctuPayload (\ s a -> s{_ctuPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 ctuKey :: Lens' CommentThreadsUpdate' (Maybe Key)
 ctuKey = lens _ctuKey (\ s a -> s{_ctuKey = a})
-
--- | Multipart request metadata.
-ctuCommentThread :: Lens' CommentThreadsUpdate' CommentThread
-ctuCommentThread
-  = lens _ctuCommentThread
-      (\ s a -> s{_ctuCommentThread = a})
 
 -- | OAuth 2.0 token for the current user.
 ctuOAuthToken :: Lens' CommentThreadsUpdate' (Maybe OAuthToken)
@@ -171,7 +171,7 @@ instance GoogleRequest CommentThreadsUpdate' where
               _ctuKey
               _ctuOAuthToken
               (Just AltJSON)
-              _ctuCommentThread
+              _ctuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentThreadsUpdateResource)

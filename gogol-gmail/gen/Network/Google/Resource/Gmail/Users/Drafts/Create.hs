@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,10 +34,10 @@ module Network.Google.Resource.Gmail.Users.Drafts.Create
     , udcQuotaUser
     , udcPrettyPrint
     , udcUserIP
+    , udcPayload
     , udcUserId
     , udcMedia
     , udcKey
-    , udcDraft
     , udcOAuthToken
     , udcFields
     ) where
@@ -66,13 +67,13 @@ data UsersDraftsCreate' = UsersDraftsCreate'
     { _udcQuotaUser   :: !(Maybe Text)
     , _udcPrettyPrint :: !Bool
     , _udcUserIP      :: !(Maybe Text)
+    , _udcPayload     :: !Draft
     , _udcUserId      :: !Text
     , _udcMedia       :: !Body
     , _udcKey         :: !(Maybe Key)
-    , _udcDraft       :: !Draft
     , _udcOAuthToken  :: !(Maybe OAuthToken)
     , _udcFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsCreate'' with the minimum fields required to make a request.
 --
@@ -84,31 +85,31 @@ data UsersDraftsCreate' = UsersDraftsCreate'
 --
 -- * 'udcUserIP'
 --
+-- * 'udcPayload'
+--
 -- * 'udcUserId'
 --
 -- * 'udcMedia'
 --
 -- * 'udcKey'
 --
--- * 'udcDraft'
---
 -- * 'udcOAuthToken'
 --
 -- * 'udcFields'
 usersDraftsCreate'
-    :: Text -- ^ 'media'
-    -> Body -- ^ 'Draft'
-    -> Draft
+    :: Draft -- ^ 'payload'
+    -> Text -- ^ 'media'
+    -> Body
     -> UsersDraftsCreate'
-usersDraftsCreate' pUdcUserId_ pUdcMedia_ pUdcDraft_ =
+usersDraftsCreate' pUdcPayload_ pUdcUserId_ pUdcMedia_ =
     UsersDraftsCreate'
     { _udcQuotaUser = Nothing
     , _udcPrettyPrint = True
     , _udcUserIP = Nothing
+    , _udcPayload = pUdcPayload_
     , _udcUserId = pUdcUserId_
     , _udcMedia = pUdcMedia_
     , _udcKey = Nothing
-    , _udcDraft = pUdcDraft_
     , _udcOAuthToken = Nothing
     , _udcFields = Nothing
     }
@@ -132,6 +133,11 @@ udcUserIP :: Lens' UsersDraftsCreate' (Maybe Text)
 udcUserIP
   = lens _udcUserIP (\ s a -> s{_udcUserIP = a})
 
+-- | Multipart request metadata.
+udcPayload :: Lens' UsersDraftsCreate' Draft
+udcPayload
+  = lens _udcPayload (\ s a -> s{_udcPayload = a})
+
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
 udcUserId :: Lens' UsersDraftsCreate' Text
@@ -146,10 +152,6 @@ udcMedia = lens _udcMedia (\ s a -> s{_udcMedia = a})
 -- token.
 udcKey :: Lens' UsersDraftsCreate' (Maybe Key)
 udcKey = lens _udcKey (\ s a -> s{_udcKey = a})
-
--- | Multipart request metadata.
-udcDraft :: Lens' UsersDraftsCreate' Draft
-udcDraft = lens _udcDraft (\ s a -> s{_udcDraft = a})
 
 -- | OAuth 2.0 token for the current user.
 udcOAuthToken :: Lens' UsersDraftsCreate' (Maybe OAuthToken)
@@ -170,14 +172,14 @@ instance GoogleRequest UsersDraftsCreate' where
         type Rs UsersDraftsCreate' = Draft
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersDraftsCreate'{..}
-          = go _udcMedia _udcUserId _udcQuotaUser
-              (Just _udcPrettyPrint)
+          = go _udcUserId _udcQuotaUser (Just _udcPrettyPrint)
               _udcUserIP
               _udcFields
               _udcKey
               _udcOAuthToken
               (Just AltJSON)
-              _udcDraft
+              _udcPayload
+              _udcMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDraftsCreateResource)

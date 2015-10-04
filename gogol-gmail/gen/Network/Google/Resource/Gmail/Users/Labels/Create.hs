@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,10 +34,10 @@ module Network.Google.Resource.Gmail.Users.Labels.Create
     , ulcQuotaUser
     , ulcPrettyPrint
     , ulcUserIP
+    , ulcPayload
     , ulcUserId
     , ulcKey
     , ulcOAuthToken
-    , ulcLabel
     , ulcFields
     ) where
 
@@ -64,12 +65,12 @@ data UsersLabelsCreate' = UsersLabelsCreate'
     { _ulcQuotaUser   :: !(Maybe Text)
     , _ulcPrettyPrint :: !Bool
     , _ulcUserIP      :: !(Maybe Text)
+    , _ulcPayload     :: !Label
     , _ulcUserId      :: !Text
     , _ulcKey         :: !(Maybe Key)
     , _ulcOAuthToken  :: !(Maybe OAuthToken)
-    , _ulcLabel       :: !Label
     , _ulcFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersLabelsCreate'' with the minimum fields required to make a request.
 --
@@ -81,28 +82,28 @@ data UsersLabelsCreate' = UsersLabelsCreate'
 --
 -- * 'ulcUserIP'
 --
+-- * 'ulcPayload'
+--
 -- * 'ulcUserId'
 --
 -- * 'ulcKey'
 --
 -- * 'ulcOAuthToken'
 --
--- * 'ulcLabel'
---
 -- * 'ulcFields'
 usersLabelsCreate'
-    :: Text -- ^ 'Label'
-    -> Label
+    :: Label -- ^ 'payload'
+    -> Text
     -> UsersLabelsCreate'
-usersLabelsCreate' pUlcUserId_ pUlcLabel_ =
+usersLabelsCreate' pUlcPayload_ pUlcUserId_ =
     UsersLabelsCreate'
     { _ulcQuotaUser = Nothing
     , _ulcPrettyPrint = True
     , _ulcUserIP = Nothing
+    , _ulcPayload = pUlcPayload_
     , _ulcUserId = pUlcUserId_
     , _ulcKey = Nothing
     , _ulcOAuthToken = Nothing
-    , _ulcLabel = pUlcLabel_
     , _ulcFields = Nothing
     }
 
@@ -125,6 +126,11 @@ ulcUserIP :: Lens' UsersLabelsCreate' (Maybe Text)
 ulcUserIP
   = lens _ulcUserIP (\ s a -> s{_ulcUserIP = a})
 
+-- | Multipart request metadata.
+ulcPayload :: Lens' UsersLabelsCreate' Label
+ulcPayload
+  = lens _ulcPayload (\ s a -> s{_ulcPayload = a})
+
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
 ulcUserId :: Lens' UsersLabelsCreate' Text
@@ -142,10 +148,6 @@ ulcOAuthToken :: Lens' UsersLabelsCreate' (Maybe OAuthToken)
 ulcOAuthToken
   = lens _ulcOAuthToken
       (\ s a -> s{_ulcOAuthToken = a})
-
--- | Multipart request metadata.
-ulcLabel :: Lens' UsersLabelsCreate' Label
-ulcLabel = lens _ulcLabel (\ s a -> s{_ulcLabel = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ulcFields :: Lens' UsersLabelsCreate' (Maybe Text)
@@ -166,7 +168,7 @@ instance GoogleRequest UsersLabelsCreate' where
               _ulcKey
               _ulcOAuthToken
               (Just AltJSON)
-              _ulcLabel
+              _ulcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersLabelsCreateResource)

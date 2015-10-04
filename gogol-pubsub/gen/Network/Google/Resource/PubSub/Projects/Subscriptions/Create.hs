@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -41,11 +42,11 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Create
     , pscPp
     , pscAccessToken
     , pscUploadType
+    , pscPayload
     , pscBearerToken
     , pscKey
     , pscName
     , pscOAuthToken
-    , pscSubscription
     , pscFields
     , pscCallback
     ) where
@@ -57,14 +58,14 @@ import           Network.Google.PubSub.Types
 -- 'ProjectsSubscriptionsCreate'' request conforms to.
 type ProjectsSubscriptionsCreateResource =
      "v1beta2" :>
-       "{+name}" :>
+       Capture "name" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -89,14 +90,14 @@ data ProjectsSubscriptionsCreate' = ProjectsSubscriptionsCreate'
     , _pscPp             :: !Bool
     , _pscAccessToken    :: !(Maybe Text)
     , _pscUploadType     :: !(Maybe Text)
+    , _pscPayload        :: !Subscription
     , _pscBearerToken    :: !(Maybe Text)
     , _pscKey            :: !(Maybe Key)
     , _pscName           :: !Text
     , _pscOAuthToken     :: !(Maybe OAuthToken)
-    , _pscSubscription   :: !Subscription
     , _pscFields         :: !(Maybe Text)
     , _pscCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsCreate'' with the minimum fields required to make a request.
 --
@@ -116,6 +117,8 @@ data ProjectsSubscriptionsCreate' = ProjectsSubscriptionsCreate'
 --
 -- * 'pscUploadType'
 --
+-- * 'pscPayload'
+--
 -- * 'pscBearerToken'
 --
 -- * 'pscKey'
@@ -124,16 +127,14 @@ data ProjectsSubscriptionsCreate' = ProjectsSubscriptionsCreate'
 --
 -- * 'pscOAuthToken'
 --
--- * 'pscSubscription'
---
 -- * 'pscFields'
 --
 -- * 'pscCallback'
 projectsSubscriptionsCreate'
-    :: Text -- ^ 'name'
-    -> Subscription -- ^ 'Subscription'
+    :: Subscription -- ^ 'payload'
+    -> Text -- ^ 'name'
     -> ProjectsSubscriptionsCreate'
-projectsSubscriptionsCreate' pPscName_ pPscSubscription_ =
+projectsSubscriptionsCreate' pPscPayload_ pPscName_ =
     ProjectsSubscriptionsCreate'
     { _pscXgafv = Nothing
     , _pscQuotaUser = Nothing
@@ -142,11 +143,11 @@ projectsSubscriptionsCreate' pPscName_ pPscSubscription_ =
     , _pscPp = True
     , _pscAccessToken = Nothing
     , _pscUploadType = Nothing
+    , _pscPayload = pPscPayload_
     , _pscBearerToken = Nothing
     , _pscKey = Nothing
     , _pscName = pPscName_
     , _pscOAuthToken = Nothing
-    , _pscSubscription = pPscSubscription_
     , _pscFields = Nothing
     , _pscCallback = Nothing
     }
@@ -190,6 +191,11 @@ pscUploadType
   = lens _pscUploadType
       (\ s a -> s{_pscUploadType = a})
 
+-- | Multipart request metadata.
+pscPayload :: Lens' ProjectsSubscriptionsCreate' Subscription
+pscPayload
+  = lens _pscPayload (\ s a -> s{_pscPayload = a})
+
 -- | OAuth bearer token.
 pscBearerToken :: Lens' ProjectsSubscriptionsCreate' (Maybe Text)
 pscBearerToken
@@ -218,12 +224,6 @@ pscOAuthToken
   = lens _pscOAuthToken
       (\ s a -> s{_pscOAuthToken = a})
 
--- | Multipart request metadata.
-pscSubscription :: Lens' ProjectsSubscriptionsCreate' Subscription
-pscSubscription
-  = lens _pscSubscription
-      (\ s a -> s{_pscSubscription = a})
-
 -- | Selector specifying which fields to include in a partial response.
 pscFields :: Lens' ProjectsSubscriptionsCreate' (Maybe Text)
 pscFields
@@ -244,19 +244,19 @@ instance GoogleRequest ProjectsSubscriptionsCreate'
         type Rs ProjectsSubscriptionsCreate' = Subscription
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsSubscriptionsCreate'{..}
-          = go _pscXgafv _pscAccessToken _pscBearerToken
-              _pscCallback
+          = go _pscName _pscXgafv _pscUploadProtocol
               (Just _pscPp)
+              _pscAccessToken
               _pscUploadType
-              _pscUploadProtocol
-              _pscName
+              _pscBearerToken
+              _pscCallback
               _pscQuotaUser
               (Just _pscPrettyPrint)
               _pscFields
               _pscKey
               _pscOAuthToken
               (Just AltJSON)
-              _pscSubscription
+              _pscPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsSubscriptionsCreateResource)

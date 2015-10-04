@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.Content.Orders.Updateshipment
     , ouQuotaUser
     , ouMerchantId
     , ouPrettyPrint
-    , ouOrdersUpdateShipmentRequest
     , ouUserIP
+    , ouPayload
     , ouKey
     , ouOAuthToken
     , ouOrderId
@@ -65,16 +66,16 @@ type OrdersUpdateshipmentResource =
 --
 -- /See:/ 'ordersUpdateshipment'' smart constructor.
 data OrdersUpdateshipment' = OrdersUpdateshipment'
-    { _ouQuotaUser                   :: !(Maybe Text)
-    , _ouMerchantId                  :: !Word64
-    , _ouPrettyPrint                 :: !Bool
-    , _ouOrdersUpdateShipmentRequest :: !OrdersUpdateShipmentRequest
-    , _ouUserIP                      :: !(Maybe Text)
-    , _ouKey                         :: !(Maybe Key)
-    , _ouOAuthToken                  :: !(Maybe OAuthToken)
-    , _ouOrderId                     :: !Text
-    , _ouFields                      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ouQuotaUser   :: !(Maybe Text)
+    , _ouMerchantId  :: !Word64
+    , _ouPrettyPrint :: !Bool
+    , _ouUserIP      :: !(Maybe Text)
+    , _ouPayload     :: !OrdersUpdateShipmentRequest
+    , _ouKey         :: !(Maybe Key)
+    , _ouOAuthToken  :: !(Maybe OAuthToken)
+    , _ouOrderId     :: !Text
+    , _ouFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersUpdateshipment'' with the minimum fields required to make a request.
 --
@@ -86,9 +87,9 @@ data OrdersUpdateshipment' = OrdersUpdateshipment'
 --
 -- * 'ouPrettyPrint'
 --
--- * 'ouOrdersUpdateShipmentRequest'
---
 -- * 'ouUserIP'
+--
+-- * 'ouPayload'
 --
 -- * 'ouKey'
 --
@@ -99,16 +100,16 @@ data OrdersUpdateshipment' = OrdersUpdateshipment'
 -- * 'ouFields'
 ordersUpdateshipment'
     :: Word64 -- ^ 'merchantId'
-    -> OrdersUpdateShipmentRequest -- ^ 'OrdersUpdateShipmentRequest'
+    -> OrdersUpdateShipmentRequest -- ^ 'payload'
     -> Text -- ^ 'orderId'
     -> OrdersUpdateshipment'
-ordersUpdateshipment' pOuMerchantId_ pOuOrdersUpdateShipmentRequest_ pOuOrderId_ =
+ordersUpdateshipment' pOuMerchantId_ pOuPayload_ pOuOrderId_ =
     OrdersUpdateshipment'
     { _ouQuotaUser = Nothing
     , _ouMerchantId = pOuMerchantId_
     , _ouPrettyPrint = True
-    , _ouOrdersUpdateShipmentRequest = pOuOrdersUpdateShipmentRequest_
     , _ouUserIP = Nothing
+    , _ouPayload = pOuPayload_
     , _ouKey = Nothing
     , _ouOAuthToken = Nothing
     , _ouOrderId = pOuOrderId_
@@ -133,16 +134,15 @@ ouPrettyPrint
   = lens _ouPrettyPrint
       (\ s a -> s{_ouPrettyPrint = a})
 
--- | Multipart request metadata.
-ouOrdersUpdateShipmentRequest :: Lens' OrdersUpdateshipment' OrdersUpdateShipmentRequest
-ouOrdersUpdateShipmentRequest
-  = lens _ouOrdersUpdateShipmentRequest
-      (\ s a -> s{_ouOrdersUpdateShipmentRequest = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 ouUserIP :: Lens' OrdersUpdateshipment' (Maybe Text)
 ouUserIP = lens _ouUserIP (\ s a -> s{_ouUserIP = a})
+
+-- | Multipart request metadata.
+ouPayload :: Lens' OrdersUpdateshipment' OrdersUpdateShipmentRequest
+ouPayload
+  = lens _ouPayload (\ s a -> s{_ouPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -180,7 +180,7 @@ instance GoogleRequest OrdersUpdateshipment' where
               _ouKey
               _ouOAuthToken
               (Just AltJSON)
-              _ouOrdersUpdateShipmentRequest
+              _ouPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrdersUpdateshipmentResource)

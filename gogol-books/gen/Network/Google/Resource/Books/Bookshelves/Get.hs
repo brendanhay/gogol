@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -73,7 +74,7 @@ data BookshelvesGet' = BookshelvesGet'
     , _bgSource      :: !(Maybe Text)
     , _bgOAuthToken  :: !(Maybe OAuthToken)
     , _bgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BookshelvesGet'' with the minimum fields required to make a request.
 --
@@ -166,7 +167,7 @@ instance GoogleRequest BookshelvesGet' where
         type Rs BookshelvesGet' = Bookshelf
         request = requestWithRoute defReq booksURL
         requestWithRoute r u BookshelvesGet'{..}
-          = go _bgSource _bgUserId _bgShelf _bgQuotaUser
+          = go _bgUserId _bgShelf _bgSource _bgQuotaUser
               (Just _bgPrettyPrint)
               _bgUserIP
               _bgFields

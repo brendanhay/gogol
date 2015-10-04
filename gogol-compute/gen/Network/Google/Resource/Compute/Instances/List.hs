@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type InstancesListResource =
          Capture "zone" Text :>
            "instances" :>
              QueryParam "filter" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,7 +83,7 @@ data InstancesList' = InstancesList'
     , _insOAuthToken  :: !(Maybe OAuthToken)
     , _insMaxResults  :: !Word32
     , _insFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesList'' with the minimum fields required to make a request.
 --
@@ -209,9 +210,8 @@ instance GoogleRequest InstancesList' where
         type Rs InstancesList' = InstanceList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesList'{..}
-          = go _insFilter (Just _insMaxResults) _insPageToken
-              _insProject
-              _insZone
+          = go _insProject _insZone _insFilter _insPageToken
+              (Just _insMaxResults)
               _insQuotaUser
               (Just _insPrettyPrint)
               _insUserIP

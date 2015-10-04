@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,11 +55,11 @@ import           Network.Google.YouTube.Types
 type LiveBroadcastsBindResource =
      "liveBroadcasts" :>
        "bind" :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "onBehalfOfContentOwnerChannel" Text :>
-             QueryParam "streamId" Text :>
-               QueryParam "id" Text :>
-                 QueryParam "part" Text :>
+         QueryParam "id" Text :>
+           QueryParam "part" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                 QueryParam "streamId" Text :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -86,7 +87,7 @@ data LiveBroadcastsBind' = LiveBroadcastsBind'
     , _lbbOAuthToken                    :: !(Maybe OAuthToken)
     , _lbbStreamId                      :: !(Maybe Text)
     , _lbbFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsBind'' with the minimum fields required to make a request.
 --
@@ -232,11 +233,10 @@ instance GoogleRequest LiveBroadcastsBind' where
         type Rs LiveBroadcastsBind' = LiveBroadcast
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveBroadcastsBind'{..}
-          = go _lbbOnBehalfOfContentOwner
+          = go (Just _lbbId) (Just _lbbPart)
+              _lbbOnBehalfOfContentOwner
               _lbbOnBehalfOfContentOwnerChannel
               _lbbStreamId
-              (Just _lbbId)
-              (Just _lbbPart)
               _lbbQuotaUser
               (Just _lbbPrettyPrint)
               _lbbUserIP

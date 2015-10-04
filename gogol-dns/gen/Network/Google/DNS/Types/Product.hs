@@ -26,7 +26,7 @@ data ChangesListResponse = ChangesListResponse
     { _clrNextPageToken :: !(Maybe Text)
     , _clrChanges       :: !(Maybe [Change])
     , _clrKind          :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesListResponse' with the minimum fields required to make a request.
 --
@@ -98,7 +98,7 @@ data Project = Project
     , _pId     :: !(Maybe Text)
     , _pNumber :: !(Maybe Word64)
     , _pQuota  :: !(Maybe Quota)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Project' with the minimum fields required to make a request.
 --
@@ -166,7 +166,7 @@ data Change = Change
     , _cKind      :: !Text
     , _cDeletions :: !(Maybe [ResourceRecordSet])
     , _cId        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Change' with the minimum fields required to make a request.
 --
@@ -256,7 +256,7 @@ data ResourceRecordSetsListResponse = ResourceRecordSetsListResponse
     { _rrslrNextPageToken :: !(Maybe Text)
     , _rrslrKind          :: !Text
     , _rrslrRrsets        :: !(Maybe [ResourceRecordSet])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResourceRecordSetsListResponse' with the minimum fields required to make a request.
 --
@@ -330,7 +330,7 @@ data ResourceRecordSet = ResourceRecordSet
     , _rrsName    :: !(Maybe Text)
     , _rrsType    :: !(Maybe Text)
     , _rrsRrdatas :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResourceRecordSet' with the minimum fields required to make a request.
 --
@@ -415,7 +415,7 @@ data ManagedZone = ManagedZone
     , _mzDNSName       :: !(Maybe Text)
     , _mzDescription   :: !(Maybe Text)
     , _mzNameServers   :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagedZone' with the minimum fields required to make a request.
 --
@@ -540,7 +540,7 @@ data Quota = Quota
     , _qRrsetAdditionsPerChange  :: !(Maybe Int32)
     , _qManagedZones             :: !(Maybe Int32)
     , _qTotalRrdataSizePerChange :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Quota' with the minimum fields required to make a request.
 --
@@ -652,7 +652,7 @@ data ManagedZonesListResponse = ManagedZonesListResponse
     { _mzlrNextPageToken :: !(Maybe Text)
     , _mzlrKind          :: !Text
     , _mzlrManagedZones  :: !(Maybe [ManagedZone])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagedZonesListResponse' with the minimum fields required to make a request.
 --

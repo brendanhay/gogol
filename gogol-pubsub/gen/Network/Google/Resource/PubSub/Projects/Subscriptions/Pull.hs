@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -40,7 +41,7 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Pull
     , pspPp
     , pspAccessToken
     , pspUploadType
-    , pspPullRequest
+    , pspPayload
     , pspBearerToken
     , pspKey
     , pspOAuthToken
@@ -56,14 +57,14 @@ import           Network.Google.PubSub.Types
 -- 'ProjectsSubscriptionsPull'' request conforms to.
 type ProjectsSubscriptionsPullResource =
      "v1beta2" :>
-       "{+subscription}:pull" :>
+       CaptureMode "subscription" "pull" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -87,14 +88,14 @@ data ProjectsSubscriptionsPull' = ProjectsSubscriptionsPull'
     , _pspPp             :: !Bool
     , _pspAccessToken    :: !(Maybe Text)
     , _pspUploadType     :: !(Maybe Text)
-    , _pspPullRequest    :: !PullRequest
+    , _pspPayload        :: !PullRequest
     , _pspBearerToken    :: !(Maybe Text)
     , _pspKey            :: !(Maybe Key)
     , _pspOAuthToken     :: !(Maybe OAuthToken)
     , _pspSubscription   :: !Text
     , _pspFields         :: !(Maybe Text)
     , _pspCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsPull'' with the minimum fields required to make a request.
 --
@@ -114,7 +115,7 @@ data ProjectsSubscriptionsPull' = ProjectsSubscriptionsPull'
 --
 -- * 'pspUploadType'
 --
--- * 'pspPullRequest'
+-- * 'pspPayload'
 --
 -- * 'pspBearerToken'
 --
@@ -128,10 +129,10 @@ data ProjectsSubscriptionsPull' = ProjectsSubscriptionsPull'
 --
 -- * 'pspCallback'
 projectsSubscriptionsPull'
-    :: PullRequest -- ^ 'PullRequest'
+    :: PullRequest -- ^ 'payload'
     -> Text -- ^ 'subscription'
     -> ProjectsSubscriptionsPull'
-projectsSubscriptionsPull' pPspPullRequest_ pPspSubscription_ =
+projectsSubscriptionsPull' pPspPayload_ pPspSubscription_ =
     ProjectsSubscriptionsPull'
     { _pspXgafv = Nothing
     , _pspQuotaUser = Nothing
@@ -140,7 +141,7 @@ projectsSubscriptionsPull' pPspPullRequest_ pPspSubscription_ =
     , _pspPp = True
     , _pspAccessToken = Nothing
     , _pspUploadType = Nothing
-    , _pspPullRequest = pPspPullRequest_
+    , _pspPayload = pPspPayload_
     , _pspBearerToken = Nothing
     , _pspKey = Nothing
     , _pspOAuthToken = Nothing
@@ -189,10 +190,9 @@ pspUploadType
       (\ s a -> s{_pspUploadType = a})
 
 -- | Multipart request metadata.
-pspPullRequest :: Lens' ProjectsSubscriptionsPull' PullRequest
-pspPullRequest
-  = lens _pspPullRequest
-      (\ s a -> s{_pspPullRequest = a})
+pspPayload :: Lens' ProjectsSubscriptionsPull' PullRequest
+pspPayload
+  = lens _pspPayload (\ s a -> s{_pspPayload = a})
 
 -- | OAuth bearer token.
 pspBearerToken :: Lens' ProjectsSubscriptionsPull' (Maybe Text)
@@ -237,19 +237,19 @@ instance GoogleRequest ProjectsSubscriptionsPull'
         type Rs ProjectsSubscriptionsPull' = PullResponse
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u ProjectsSubscriptionsPull'{..}
-          = go _pspXgafv _pspAccessToken _pspBearerToken
-              _pspCallback
+          = go _pspSubscription _pspXgafv _pspUploadProtocol
               (Just _pspPp)
+              _pspAccessToken
               _pspUploadType
-              _pspUploadProtocol
-              _pspSubscription
+              _pspBearerToken
+              _pspCallback
               _pspQuotaUser
               (Just _pspPrettyPrint)
               _pspFields
               _pspKey
               _pspOAuthToken
               (Just AltJSON)
-              _pspPullRequest
+              _pspPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsSubscriptionsPullResource)

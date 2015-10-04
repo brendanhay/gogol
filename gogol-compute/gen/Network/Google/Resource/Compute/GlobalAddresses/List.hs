@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,8 +53,8 @@ type GlobalAddressesListResource =
        "global" :>
          "addresses" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -76,7 +77,7 @@ data GlobalAddressesList' = GlobalAddressesList'
     , _galOAuthToken  :: !(Maybe OAuthToken)
     , _galMaxResults  :: !Word32
     , _galFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalAddressesList'' with the minimum fields required to make a request.
 --
@@ -195,8 +196,8 @@ instance GoogleRequest GlobalAddressesList' where
         type Rs GlobalAddressesList' = AddressList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u GlobalAddressesList'{..}
-          = go _galFilter (Just _galMaxResults) _galPageToken
-              _galProject
+          = go _galProject _galFilter _galPageToken
+              (Just _galMaxResults)
               _galQuotaUser
               (Just _galPrettyPrint)
               _galUserIP

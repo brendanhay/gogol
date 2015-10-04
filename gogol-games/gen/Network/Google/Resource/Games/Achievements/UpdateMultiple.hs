@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.Games.Achievements.UpdateMultiple
     , aumQuotaUser
     , aumPrettyPrint
     , aumUserIP
+    , aumPayload
     , aumKey
-    , aumAchievementUpdateMultipleRequest
     , aumOAuthToken
     , aumFields
     ) where
@@ -61,14 +62,14 @@ type AchievementsUpdateMultipleResource =
 --
 -- /See:/ 'achievementsUpdateMultiple'' smart constructor.
 data AchievementsUpdateMultiple' = AchievementsUpdateMultiple'
-    { _aumQuotaUser                        :: !(Maybe Text)
-    , _aumPrettyPrint                      :: !Bool
-    , _aumUserIP                           :: !(Maybe Text)
-    , _aumKey                              :: !(Maybe Key)
-    , _aumAchievementUpdateMultipleRequest :: !AchievementUpdateMultipleRequest
-    , _aumOAuthToken                       :: !(Maybe OAuthToken)
-    , _aumFields                           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _aumQuotaUser   :: !(Maybe Text)
+    , _aumPrettyPrint :: !Bool
+    , _aumUserIP      :: !(Maybe Text)
+    , _aumPayload     :: !AchievementUpdateMultipleRequest
+    , _aumKey         :: !(Maybe Key)
+    , _aumOAuthToken  :: !(Maybe OAuthToken)
+    , _aumFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsUpdateMultiple'' with the minimum fields required to make a request.
 --
@@ -80,23 +81,23 @@ data AchievementsUpdateMultiple' = AchievementsUpdateMultiple'
 --
 -- * 'aumUserIP'
 --
--- * 'aumKey'
+-- * 'aumPayload'
 --
--- * 'aumAchievementUpdateMultipleRequest'
+-- * 'aumKey'
 --
 -- * 'aumOAuthToken'
 --
 -- * 'aumFields'
 achievementsUpdateMultiple'
-    :: AchievementUpdateMultipleRequest -- ^ 'AchievementUpdateMultipleRequest'
+    :: AchievementUpdateMultipleRequest -- ^ 'payload'
     -> AchievementsUpdateMultiple'
-achievementsUpdateMultiple' pAumAchievementUpdateMultipleRequest_ =
+achievementsUpdateMultiple' pAumPayload_ =
     AchievementsUpdateMultiple'
     { _aumQuotaUser = Nothing
     , _aumPrettyPrint = True
     , _aumUserIP = Nothing
+    , _aumPayload = pAumPayload_
     , _aumKey = Nothing
-    , _aumAchievementUpdateMultipleRequest = pAumAchievementUpdateMultipleRequest_
     , _aumOAuthToken = Nothing
     , _aumFields = Nothing
     }
@@ -120,18 +121,16 @@ aumUserIP :: Lens' AchievementsUpdateMultiple' (Maybe Text)
 aumUserIP
   = lens _aumUserIP (\ s a -> s{_aumUserIP = a})
 
+-- | Multipart request metadata.
+aumPayload :: Lens' AchievementsUpdateMultiple' AchievementUpdateMultipleRequest
+aumPayload
+  = lens _aumPayload (\ s a -> s{_aumPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 aumKey :: Lens' AchievementsUpdateMultiple' (Maybe Key)
 aumKey = lens _aumKey (\ s a -> s{_aumKey = a})
-
--- | Multipart request metadata.
-aumAchievementUpdateMultipleRequest :: Lens' AchievementsUpdateMultiple' AchievementUpdateMultipleRequest
-aumAchievementUpdateMultipleRequest
-  = lens _aumAchievementUpdateMultipleRequest
-      (\ s a ->
-         s{_aumAchievementUpdateMultipleRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 aumOAuthToken :: Lens' AchievementsUpdateMultiple' (Maybe OAuthToken)
@@ -159,7 +158,7 @@ instance GoogleRequest AchievementsUpdateMultiple'
               _aumKey
               _aumOAuthToken
               (Just AltJSON)
-              _aumAchievementUpdateMultipleRequest
+              _aumPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AchievementsUpdateMultipleResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,17 +58,17 @@ import           Network.Google.YouTube.Types
 -- 'ChannelsList'' request conforms to.
 type ChannelsListResource =
      "channels" :>
-       QueryParam "categoryId" Text :>
-         QueryParam "forUsername" Text :>
-           QueryParam "hl" Text :>
-             QueryParam "id" Text :>
-               QueryParam "managedByMe" Bool :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "mine" Bool :>
+       QueryParam "part" Text :>
+         QueryParam "mine" Bool :>
+           QueryParam "forUsername" Text :>
+             QueryParam "hl" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "categoryId" Text :>
+                   QueryParam "id" Text :>
                      QueryParam "mySubscribers" Bool :>
-                       QueryParam "onBehalfOfContentOwner" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "part" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "managedByMe" Bool :>
+                           QueryParam "maxResults" Word32 :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
@@ -99,7 +100,7 @@ data ChannelsList' = ChannelsList'
     , _clManagedByMe            :: !(Maybe Bool)
     , _clMaxResults             :: !Word32
     , _clFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelsList'' with the minimum fields required to make a request.
 --
@@ -288,14 +289,14 @@ instance GoogleRequest ChannelsList' where
         type Rs ChannelsList' = ChannelListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u ChannelsList'{..}
-          = go _clCategoryId _clForUsername _clHl _clId
+          = go (Just _clPart) _clMine _clForUsername _clHl
+              _clOnBehalfOfContentOwner
+              _clCategoryId
+              _clId
+              _clMySubscribers
+              _clPageToken
               _clManagedByMe
               (Just _clMaxResults)
-              _clMine
-              _clMySubscribers
-              _clOnBehalfOfContentOwner
-              _clPageToken
-              (Just _clPart)
               _clQuotaUser
               (Just _clPrettyPrint)
               _clUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,11 +35,11 @@ module Network.Google.Resource.FusionTables.Column.Patch
     , cpQuotaUser
     , cpPrettyPrint
     , cpUserIP
+    , cpPayload
     , cpKey
     , cpOAuthToken
     , cpTableId
     , cpColumnId
-    , cpColumn
     , cpFields
     ) where
 
@@ -69,13 +70,13 @@ data ColumnPatch' = ColumnPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
     , _cpUserIP      :: !(Maybe Text)
+    , _cpPayload     :: !Column
     , _cpKey         :: !(Maybe Key)
     , _cpOAuthToken  :: !(Maybe OAuthToken)
     , _cpTableId     :: !Text
     , _cpColumnId    :: !Text
-    , _cpColumn      :: !Column
     , _cpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnPatch'' with the minimum fields required to make a request.
 --
@@ -87,6 +88,8 @@ data ColumnPatch' = ColumnPatch'
 --
 -- * 'cpUserIP'
 --
+-- * 'cpPayload'
+--
 -- * 'cpKey'
 --
 -- * 'cpOAuthToken'
@@ -95,24 +98,22 @@ data ColumnPatch' = ColumnPatch'
 --
 -- * 'cpColumnId'
 --
--- * 'cpColumn'
---
 -- * 'cpFields'
 columnPatch'
-    :: Text -- ^ 'tableId'
+    :: Column -- ^ 'payload'
+    -> Text -- ^ 'tableId'
     -> Text -- ^ 'columnId'
-    -> Column -- ^ 'Column'
     -> ColumnPatch'
-columnPatch' pCpTableId_ pCpColumnId_ pCpColumn_ =
+columnPatch' pCpPayload_ pCpTableId_ pCpColumnId_ =
     ColumnPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
     , _cpUserIP = Nothing
+    , _cpPayload = pCpPayload_
     , _cpKey = Nothing
     , _cpOAuthToken = Nothing
     , _cpTableId = pCpTableId_
     , _cpColumnId = pCpColumnId_
-    , _cpColumn = pCpColumn_
     , _cpFields = Nothing
     }
 
@@ -133,6 +134,11 @@ cpPrettyPrint
 -- want to enforce per-user limits.
 cpUserIP :: Lens' ColumnPatch' (Maybe Text)
 cpUserIP = lens _cpUserIP (\ s a -> s{_cpUserIP = a})
+
+-- | Multipart request metadata.
+cpPayload :: Lens' ColumnPatch' Column
+cpPayload
+  = lens _cpPayload (\ s a -> s{_cpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -155,10 +161,6 @@ cpColumnId :: Lens' ColumnPatch' Text
 cpColumnId
   = lens _cpColumnId (\ s a -> s{_cpColumnId = a})
 
--- | Multipart request metadata.
-cpColumn :: Lens' ColumnPatch' Column
-cpColumn = lens _cpColumn (\ s a -> s{_cpColumn = a})
-
 -- | Selector specifying which fields to include in a partial response.
 cpFields :: Lens' ColumnPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
@@ -178,7 +180,7 @@ instance GoogleRequest ColumnPatch' where
               _cpKey
               _cpOAuthToken
               (Just AltJSON)
-              _cpColumn
+              _cpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ColumnPatchResource)

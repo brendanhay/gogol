@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type TargetPoolsListResource =
          Capture "region" Text :>
            "targetPools" :>
              QueryParam "filter" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,7 +83,7 @@ data TargetPoolsList' = TargetPoolsList'
     , _tplOAuthToken  :: !(Maybe OAuthToken)
     , _tplMaxResults  :: !Word32
     , _tplFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsList'' with the minimum fields required to make a request.
 --
@@ -210,9 +211,8 @@ instance GoogleRequest TargetPoolsList' where
         type Rs TargetPoolsList' = TargetPoolList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetPoolsList'{..}
-          = go _tplFilter (Just _tplMaxResults) _tplPageToken
-              _tplProject
-              _tplRegion
+          = go _tplProject _tplRegion _tplFilter _tplPageToken
+              (Just _tplMaxResults)
               _tplQuotaUser
               (Just _tplPrettyPrint)
               _tplUserIP

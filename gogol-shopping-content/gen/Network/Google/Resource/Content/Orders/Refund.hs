@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.Content.Orders.Refund
     , orQuotaUser
     , orMerchantId
     , orPrettyPrint
-    , orOrdersRefundRequest
     , orUserIP
+    , orPayload
     , orKey
     , orOAuthToken
     , orOrderId
@@ -65,16 +66,16 @@ type OrdersRefundResource =
 --
 -- /See:/ 'ordersRefund'' smart constructor.
 data OrdersRefund' = OrdersRefund'
-    { _orQuotaUser           :: !(Maybe Text)
-    , _orMerchantId          :: !Word64
-    , _orPrettyPrint         :: !Bool
-    , _orOrdersRefundRequest :: !OrdersRefundRequest
-    , _orUserIP              :: !(Maybe Text)
-    , _orKey                 :: !(Maybe Key)
-    , _orOAuthToken          :: !(Maybe OAuthToken)
-    , _orOrderId             :: !Text
-    , _orFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _orQuotaUser   :: !(Maybe Text)
+    , _orMerchantId  :: !Word64
+    , _orPrettyPrint :: !Bool
+    , _orUserIP      :: !(Maybe Text)
+    , _orPayload     :: !OrdersRefundRequest
+    , _orKey         :: !(Maybe Key)
+    , _orOAuthToken  :: !(Maybe OAuthToken)
+    , _orOrderId     :: !Text
+    , _orFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersRefund'' with the minimum fields required to make a request.
 --
@@ -86,9 +87,9 @@ data OrdersRefund' = OrdersRefund'
 --
 -- * 'orPrettyPrint'
 --
--- * 'orOrdersRefundRequest'
---
 -- * 'orUserIP'
+--
+-- * 'orPayload'
 --
 -- * 'orKey'
 --
@@ -99,16 +100,16 @@ data OrdersRefund' = OrdersRefund'
 -- * 'orFields'
 ordersRefund'
     :: Word64 -- ^ 'merchantId'
-    -> OrdersRefundRequest -- ^ 'OrdersRefundRequest'
+    -> OrdersRefundRequest -- ^ 'payload'
     -> Text -- ^ 'orderId'
     -> OrdersRefund'
-ordersRefund' pOrMerchantId_ pOrOrdersRefundRequest_ pOrOrderId_ =
+ordersRefund' pOrMerchantId_ pOrPayload_ pOrOrderId_ =
     OrdersRefund'
     { _orQuotaUser = Nothing
     , _orMerchantId = pOrMerchantId_
     , _orPrettyPrint = True
-    , _orOrdersRefundRequest = pOrOrdersRefundRequest_
     , _orUserIP = Nothing
+    , _orPayload = pOrPayload_
     , _orKey = Nothing
     , _orOAuthToken = Nothing
     , _orOrderId = pOrOrderId_
@@ -133,16 +134,15 @@ orPrettyPrint
   = lens _orPrettyPrint
       (\ s a -> s{_orPrettyPrint = a})
 
--- | Multipart request metadata.
-orOrdersRefundRequest :: Lens' OrdersRefund' OrdersRefundRequest
-orOrdersRefundRequest
-  = lens _orOrdersRefundRequest
-      (\ s a -> s{_orOrdersRefundRequest = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 orUserIP :: Lens' OrdersRefund' (Maybe Text)
 orUserIP = lens _orUserIP (\ s a -> s{_orUserIP = a})
+
+-- | Multipart request metadata.
+orPayload :: Lens' OrdersRefund' OrdersRefundRequest
+orPayload
+  = lens _orPayload (\ s a -> s{_orPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -179,7 +179,7 @@ instance GoogleRequest OrdersRefund' where
               _orKey
               _orOAuthToken
               (Just AltJSON)
-              _orOrdersRefundRequest
+              _orPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrdersRefundResource)

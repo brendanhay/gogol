@@ -58,7 +58,7 @@ data Avail = Avail
     , _aProductId                 :: !(Maybe Text)
     , _aSeasonAltId               :: !(Maybe Text)
     , _aTitleInternalAlias        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Avail' with the minimum fields required to make a request.
 --
@@ -456,7 +456,7 @@ instance ToJSON Avail where
 data ListAvailsResponse = ListAvailsResponse
     { _larNextPageToken :: !(Maybe Text)
     , _larAvails        :: !(Maybe [Avail])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListAvailsResponse' with the minimum fields required to make a request.
 --
@@ -507,7 +507,7 @@ instance ToJSON ListAvailsResponse where
 data ListOrdersResponse = ListOrdersResponse
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOrders        :: !(Maybe [Order])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListOrdersResponse' with the minimum fields required to make a request.
 --
@@ -558,7 +558,7 @@ instance ToJSON ListOrdersResponse where
 data ListExperienceLocalesResponse = ListExperienceLocalesResponse
     { _lelrNextPageToken     :: !(Maybe Text)
     , _lelrExperienceLocales :: !(Maybe [ExperienceLocale])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListExperienceLocalesResponse' with the minimum fields required to make a request.
 --
@@ -610,7 +610,7 @@ instance ToJSON ListExperienceLocalesResponse where
 data ListStoreInfosResponse = ListStoreInfosResponse
     { _lsirNextPageToken :: !(Maybe Text)
     , _lsirStoreInfos    :: !(Maybe [StoreInfo])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListStoreInfosResponse' with the minimum fields required to make a request.
 --
@@ -690,7 +690,7 @@ data ExperienceLocale = ExperienceLocale
     , _elEditLevelEidr          :: !(Maybe Text)
     , _elType                   :: !(Maybe Text)
     , _elNormalizedPriority     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ExperienceLocale' with the minimum fields required to make a request.
 --
@@ -993,7 +993,7 @@ data Order = Order
     , _oNormalizedPriority     :: !(Maybe Text)
     , _oOrderId                :: !(Maybe Text)
     , _oEpisodeName            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Order' with the minimum fields required to make a request.
 --
@@ -1294,7 +1294,7 @@ data StoreInfo = StoreInfo
     , _siHasAudio51     :: !(Maybe Bool)
     , _siSeasonId       :: !(Maybe Text)
     , _siShowId         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StoreInfo' with the minimum fields required to make a request.
 --

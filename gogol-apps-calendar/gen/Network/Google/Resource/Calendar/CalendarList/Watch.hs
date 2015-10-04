@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.Calendar.CalendarList.Watch
     , clwPrettyPrint
     , clwMinAccessRole
     , clwUserIP
-    , clwChannel
     , clwShowDeleted
+    , clwPayload
     , clwShowHidden
     , clwKey
     , clwPageToken
@@ -55,14 +56,14 @@ type CalendarListWatchResource =
        "me" :>
          "calendarList" :>
            "watch" :>
-             QueryParam "maxResults" Int32 :>
+             QueryParam "syncToken" Text :>
                QueryParam "minAccessRole"
                  CalendarCalendarListWatchMinAccessRole
                  :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "showDeleted" Bool :>
-                     QueryParam "showHidden" Bool :>
-                       QueryParam "syncToken" Text :>
+                 QueryParam "showDeleted" Bool :>
+                   QueryParam "showHidden" Bool :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Int32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -82,15 +83,15 @@ data CalendarListWatch' = CalendarListWatch'
     , _clwPrettyPrint   :: !Bool
     , _clwMinAccessRole :: !(Maybe CalendarCalendarListWatchMinAccessRole)
     , _clwUserIP        :: !(Maybe Text)
-    , _clwChannel       :: !Channel
     , _clwShowDeleted   :: !(Maybe Bool)
+    , _clwPayload       :: !Channel
     , _clwShowHidden    :: !(Maybe Bool)
     , _clwKey           :: !(Maybe Key)
     , _clwPageToken     :: !(Maybe Text)
     , _clwOAuthToken    :: !(Maybe OAuthToken)
     , _clwMaxResults    :: !(Maybe Int32)
     , _clwFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListWatch'' with the minimum fields required to make a request.
 --
@@ -106,9 +107,9 @@ data CalendarListWatch' = CalendarListWatch'
 --
 -- * 'clwUserIP'
 --
--- * 'clwChannel'
---
 -- * 'clwShowDeleted'
+--
+-- * 'clwPayload'
 --
 -- * 'clwShowHidden'
 --
@@ -122,17 +123,17 @@ data CalendarListWatch' = CalendarListWatch'
 --
 -- * 'clwFields'
 calendarListWatch'
-    :: Channel -- ^ 'Channel'
+    :: Channel -- ^ 'payload'
     -> CalendarListWatch'
-calendarListWatch' pClwChannel_ =
+calendarListWatch' pClwPayload_ =
     CalendarListWatch'
     { _clwSyncToken = Nothing
     , _clwQuotaUser = Nothing
     , _clwPrettyPrint = True
     , _clwMinAccessRole = Nothing
     , _clwUserIP = Nothing
-    , _clwChannel = pClwChannel_
     , _clwShowDeleted = Nothing
+    , _clwPayload = pClwPayload_
     , _clwShowHidden = Nothing
     , _clwKey = Nothing
     , _clwPageToken = Nothing
@@ -184,17 +185,17 @@ clwUserIP :: Lens' CalendarListWatch' (Maybe Text)
 clwUserIP
   = lens _clwUserIP (\ s a -> s{_clwUserIP = a})
 
--- | Multipart request metadata.
-clwChannel :: Lens' CalendarListWatch' Channel
-clwChannel
-  = lens _clwChannel (\ s a -> s{_clwChannel = a})
-
 -- | Whether to include deleted calendar list entries in the result.
 -- Optional. The default is False.
 clwShowDeleted :: Lens' CalendarListWatch' (Maybe Bool)
 clwShowDeleted
   = lens _clwShowDeleted
       (\ s a -> s{_clwShowDeleted = a})
+
+-- | Multipart request metadata.
+clwPayload :: Lens' CalendarListWatch' Channel
+clwPayload
+  = lens _clwPayload (\ s a -> s{_clwPayload = a})
 
 -- | Whether to show hidden entries. Optional. The default is False.
 clwShowHidden :: Lens' CalendarListWatch' (Maybe Bool)
@@ -240,10 +241,10 @@ instance GoogleRequest CalendarListWatch' where
         type Rs CalendarListWatch' = Channel
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarListWatch'{..}
-          = go _clwMaxResults _clwMinAccessRole _clwPageToken
-              _clwShowDeleted
+          = go _clwSyncToken _clwMinAccessRole _clwShowDeleted
               _clwShowHidden
-              _clwSyncToken
+              _clwPageToken
+              _clwMaxResults
               _clwQuotaUser
               (Just _clwPrettyPrint)
               _clwUserIP
@@ -251,7 +252,7 @@ instance GoogleRequest CalendarListWatch' where
               _clwKey
               _clwOAuthToken
               (Just AltJSON)
-              _clwChannel
+              _clwPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CalendarListWatchResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,12 +52,10 @@ import           Network.Google.Prelude
 type AssociationsessionsStartResource =
      "associationsessions" :>
        "start" :>
-         QueryParam "userLocale" Text :>
-           QueryParam "websiteLocale" Text :>
-             QueryParams "productCode"
-               AdsensehostAssociationsessionsStartProductCode
-               :>
-               QueryParam "websiteUrl" Text :>
+         QueryParams "productCode" ProductCode :>
+           QueryParam "websiteUrl" Text :>
+             QueryParam "websiteLocale" Text :>
+               QueryParam "userLocale" Text :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,9 +78,9 @@ data AssociationsessionsStart' = AssociationsessionsStart'
     , _aKey           :: !(Maybe Key)
     , _aWebsiteURL    :: !Text
     , _aOAuthToken    :: !(Maybe OAuthToken)
-    , _aProductCode   :: !AdsensehostAssociationsessionsStartProductCode
+    , _aProductCode   :: !ProductCode
     , _aFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AssociationsessionsStart'' with the minimum fields required to make a request.
 --
@@ -108,7 +107,7 @@ data AssociationsessionsStart' = AssociationsessionsStart'
 -- * 'aFields'
 associationsessionsStart'
     :: Text -- ^ 'websiteUrl'
-    -> AdsensehostAssociationsessionsStartProductCode -- ^ 'productCode'
+    -> ProductCode -- ^ 'productCode'
     -> AssociationsessionsStart'
 associationsessionsStart' pAWebsiteURL_ pAProductCode_ =
     AssociationsessionsStart'
@@ -169,7 +168,7 @@ aOAuthToken
   = lens _aOAuthToken (\ s a -> s{_aOAuthToken = a})
 
 -- | Products to associate with the user.
-aProductCode :: Lens' AssociationsessionsStart' AdsensehostAssociationsessionsStartProductCode
+aProductCode :: Lens' AssociationsessionsStart' ProductCode
 aProductCode
   = lens _aProductCode (\ s a -> s{_aProductCode = a})
 
@@ -187,9 +186,9 @@ instance GoogleRequest AssociationsessionsStart'
              AssociationSession
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u AssociationsessionsStart'{..}
-          = go _aUserLocale _aWebsiteLocale
-              (Just _aProductCode)
-              (Just _aWebsiteURL)
+          = go (_aProductCode ^. _Default) (Just _aWebsiteURL)
+              _aWebsiteLocale
+              _aUserLocale
               _aQuotaUser
               (Just _aPrettyPrint)
               _aUserIP

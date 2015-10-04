@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.Compute.Firewalls.Patch
     , fpPrettyPrint
     , fpProject
     , fpUserIP
+    , fpPayload
     , fpKey
     , fpOAuthToken
-    , fpFirewall
     , fpFirewall
     , fpFields
     ) where
@@ -70,12 +71,12 @@ data FirewallsPatch' = FirewallsPatch'
     , _fpPrettyPrint :: !Bool
     , _fpProject     :: !Text
     , _fpUserIP      :: !(Maybe Text)
+    , _fpPayload     :: !Firewall
     , _fpKey         :: !(Maybe Key)
     , _fpOAuthToken  :: !(Maybe OAuthToken)
     , _fpFirewall    :: !Text
-    , _fpFirewall    :: !Firewall
     , _fpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsPatch'' with the minimum fields required to make a request.
 --
@@ -89,29 +90,29 @@ data FirewallsPatch' = FirewallsPatch'
 --
 -- * 'fpUserIP'
 --
+-- * 'fpPayload'
+--
 -- * 'fpKey'
 --
 -- * 'fpOAuthToken'
 --
 -- * 'fpFirewall'
 --
--- * 'fpFirewall'
---
 -- * 'fpFields'
 firewallsPatch'
     :: Text -- ^ 'project'
+    -> Firewall -- ^ 'payload'
     -> Text -- ^ 'firewall'
-    -> Firewall -- ^ 'Firewall'
     -> FirewallsPatch'
-firewallsPatch' pFpProject_ pFpFirewall_ pFpFirewall_ =
+firewallsPatch' pFpProject_ pFpPayload_ pFpFirewall_ =
     FirewallsPatch'
     { _fpQuotaUser = Nothing
     , _fpPrettyPrint = True
     , _fpProject = pFpProject_
     , _fpUserIP = Nothing
+    , _fpPayload = pFpPayload_
     , _fpKey = Nothing
     , _fpOAuthToken = Nothing
-    , _fpFirewall = pFpFirewall_
     , _fpFirewall = pFpFirewall_
     , _fpFields = Nothing
     }
@@ -139,6 +140,11 @@ fpProject
 fpUserIP :: Lens' FirewallsPatch' (Maybe Text)
 fpUserIP = lens _fpUserIP (\ s a -> s{_fpUserIP = a})
 
+-- | Multipart request metadata.
+fpPayload :: Lens' FirewallsPatch' Firewall
+fpPayload
+  = lens _fpPayload (\ s a -> s{_fpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -152,11 +158,6 @@ fpOAuthToken
 
 -- | Name of the firewall resource to update.
 fpFirewall :: Lens' FirewallsPatch' Text
-fpFirewall
-  = lens _fpFirewall (\ s a -> s{_fpFirewall = a})
-
--- | Multipart request metadata.
-fpFirewall :: Lens' FirewallsPatch' Firewall
 fpFirewall
   = lens _fpFirewall (\ s a -> s{_fpFirewall = a})
 
@@ -179,7 +180,7 @@ instance GoogleRequest FirewallsPatch' where
               _fpKey
               _fpOAuthToken
               (Just AltJSON)
-              _fpFirewall
+              _fpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FirewallsPatchResource)

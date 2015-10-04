@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,7 +51,7 @@ type UsersDraftsGetResource =
      Capture "userId" Text :>
        "drafts" :>
          Capture "id" Text :>
-           QueryParam "format" GmailUsersDraftsGetFormat :>
+           QueryParam "format" Format :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -66,13 +67,13 @@ data UsersDraftsGet' = UsersDraftsGet'
     { _udgQuotaUser   :: !(Maybe Text)
     , _udgPrettyPrint :: !Bool
     , _udgUserIP      :: !(Maybe Text)
-    , _udgFormat      :: !GmailUsersDraftsGetFormat
+    , _udgFormat      :: !Format
     , _udgUserId      :: !Text
     , _udgKey         :: !(Maybe Key)
     , _udgId          :: !Text
     , _udgOAuthToken  :: !(Maybe OAuthToken)
     , _udgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsGet'' with the minimum fields required to make a request.
 --
@@ -104,7 +105,7 @@ usersDraftsGet' pUdgUserId_ pUdgId_ =
     { _udgQuotaUser = Nothing
     , _udgPrettyPrint = True
     , _udgUserIP = Nothing
-    , _udgFormat = GUDGFFull
+    , _udgFormat = FFull
     , _udgUserId = pUdgUserId_
     , _udgKey = Nothing
     , _udgId = pUdgId_
@@ -132,7 +133,7 @@ udgUserIP
   = lens _udgUserIP (\ s a -> s{_udgUserIP = a})
 
 -- | The format to return the draft in.
-udgFormat :: Lens' UsersDraftsGet' GmailUsersDraftsGetFormat
+udgFormat :: Lens' UsersDraftsGet' Format
 udgFormat
   = lens _udgFormat (\ s a -> s{_udgFormat = a})
 
@@ -171,7 +172,7 @@ instance GoogleRequest UsersDraftsGet' where
         type Rs UsersDraftsGet' = Draft
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersDraftsGet'{..}
-          = go (Just _udgFormat) _udgUserId _udgId
+          = go _udgUserId _udgId (Just _udgFormat)
               _udgQuotaUser
               (Just _udgPrettyPrint)
               _udgUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -59,12 +60,12 @@ type ProjectsLogServicesSinksListResource =
              Capture "logServicesId" Text :>
                "sinks" :>
                  QueryParam "$.xgafv" Text :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "upload_protocol" Text :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "callback" Text :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
@@ -92,7 +93,7 @@ data ProjectsLogServicesSinksList' = ProjectsLogServicesSinksList'
     , _plsslProjectsId     :: !Text
     , _plsslFields         :: !(Maybe Text)
     , _plsslCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogServicesSinksList'' with the minimum fields required to make a request.
 --
@@ -241,13 +242,13 @@ instance GoogleRequest ProjectsLogServicesSinksList'
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u
           ProjectsLogServicesSinksList'{..}
-          = go _plsslXgafv _plsslAccessToken _plsslBearerToken
-              _plsslCallback
-              (Just _plsslPp)
-              _plsslUploadType
+          = go _plsslProjectsId _plsslLogServicesId _plsslXgafv
               _plsslUploadProtocol
-              _plsslProjectsId
-              _plsslLogServicesId
+              (Just _plsslPp)
+              _plsslAccessToken
+              _plsslUploadType
+              _plsslBearerToken
+              _plsslCallback
               _plsslQuotaUser
               (Just _plsslPrettyPrint)
               _plsslFields

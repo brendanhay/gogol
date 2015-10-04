@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Patch
     , aaupQuotaUser
     , aaupPrettyPrint
     , aaupUserIP
-    , aaupAdUnit
     , aaupAdUnitId
+    , aaupPayload
     , aaupAdClientId
     , aaupAccountId
     , aaupKey
@@ -72,14 +73,14 @@ data AccountsAdUnitsPatch' = AccountsAdUnitsPatch'
     { _aaupQuotaUser   :: !(Maybe Text)
     , _aaupPrettyPrint :: !Bool
     , _aaupUserIP      :: !(Maybe Text)
-    , _aaupAdUnit      :: !AdUnit
     , _aaupAdUnitId    :: !Text
+    , _aaupPayload     :: !AdUnit
     , _aaupAdClientId  :: !Text
     , _aaupAccountId   :: !Text
     , _aaupKey         :: !(Maybe Key)
     , _aaupOAuthToken  :: !(Maybe OAuthToken)
     , _aaupFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdUnitsPatch'' with the minimum fields required to make a request.
 --
@@ -91,9 +92,9 @@ data AccountsAdUnitsPatch' = AccountsAdUnitsPatch'
 --
 -- * 'aaupUserIP'
 --
--- * 'aaupAdUnit'
---
 -- * 'aaupAdUnitId'
+--
+-- * 'aaupPayload'
 --
 -- * 'aaupAdClientId'
 --
@@ -105,18 +106,18 @@ data AccountsAdUnitsPatch' = AccountsAdUnitsPatch'
 --
 -- * 'aaupFields'
 accountsAdUnitsPatch'
-    :: AdUnit -- ^ 'AdUnit'
-    -> Text -- ^ 'adUnitId'
+    :: Text -- ^ 'adUnitId'
+    -> AdUnit -- ^ 'payload'
     -> Text -- ^ 'adClientId'
     -> Text -- ^ 'accountId'
     -> AccountsAdUnitsPatch'
-accountsAdUnitsPatch' pAaupAdUnit_ pAaupAdUnitId_ pAaupAdClientId_ pAaupAccountId_ =
+accountsAdUnitsPatch' pAaupAdUnitId_ pAaupPayload_ pAaupAdClientId_ pAaupAccountId_ =
     AccountsAdUnitsPatch'
     { _aaupQuotaUser = Nothing
     , _aaupPrettyPrint = True
     , _aaupUserIP = Nothing
-    , _aaupAdUnit = pAaupAdUnit_
     , _aaupAdUnitId = pAaupAdUnitId_
+    , _aaupPayload = pAaupPayload_
     , _aaupAdClientId = pAaupAdClientId_
     , _aaupAccountId = pAaupAccountId_
     , _aaupKey = Nothing
@@ -144,15 +145,15 @@ aaupUserIP :: Lens' AccountsAdUnitsPatch' (Maybe Text)
 aaupUserIP
   = lens _aaupUserIP (\ s a -> s{_aaupUserIP = a})
 
--- | Multipart request metadata.
-aaupAdUnit :: Lens' AccountsAdUnitsPatch' AdUnit
-aaupAdUnit
-  = lens _aaupAdUnit (\ s a -> s{_aaupAdUnit = a})
-
 -- | Ad unit to get.
 aaupAdUnitId :: Lens' AccountsAdUnitsPatch' Text
 aaupAdUnitId
   = lens _aaupAdUnitId (\ s a -> s{_aaupAdUnitId = a})
+
+-- | Multipart request metadata.
+aaupPayload :: Lens' AccountsAdUnitsPatch' AdUnit
+aaupPayload
+  = lens _aaupPayload (\ s a -> s{_aaupPayload = a})
 
 -- | Ad client which contains the ad unit.
 aaupAdClientId :: Lens' AccountsAdUnitsPatch' Text
@@ -200,7 +201,7 @@ instance GoogleRequest AccountsAdUnitsPatch' where
               _aaupKey
               _aaupOAuthToken
               (Just AltJSON)
-              _aaupAdUnit
+              _aaupPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsAdUnitsPatchResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -72,7 +73,7 @@ data BlogsGet' = BlogsGet'
     , _bgView        :: !(Maybe BloggerBlogsGetView)
     , _bgOAuthToken  :: !(Maybe OAuthToken)
     , _bgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BlogsGet'' with the minimum fields required to make a request.
 --
@@ -166,7 +167,7 @@ instance GoogleRequest BlogsGet' where
         type Rs BlogsGet' = Blog
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u BlogsGet'{..}
-          = go _bgMaxPosts _bgView _bgBlogId _bgQuotaUser
+          = go _bgBlogId _bgMaxPosts _bgView _bgQuotaUser
               (Just _bgPrettyPrint)
               _bgUserIP
               _bgFields

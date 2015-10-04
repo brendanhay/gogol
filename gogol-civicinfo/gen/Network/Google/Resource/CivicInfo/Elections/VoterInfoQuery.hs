@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -49,9 +50,9 @@ import           Network.Google.Prelude
 -- 'ElectionsVoterInfoQuery'' request conforms to.
 type ElectionsVoterInfoQueryResource =
      "voterinfo" :>
-       QueryParam "electionId" Int64 :>
-         QueryParam "officialOnly" Bool :>
-           QueryParam "address" Text :>
+       QueryParam "address" Text :>
+         QueryParam "electionId" Int64 :>
+           QueryParam "officialOnly" Bool :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -75,7 +76,7 @@ data ElectionsVoterInfoQuery' = ElectionsVoterInfoQuery'
     , _eviqOfficialOnly :: !Bool
     , _eviqOAuthToken   :: !(Maybe OAuthToken)
     , _eviqFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ElectionsVoterInfoQuery'' with the minimum fields required to make a request.
 --
@@ -178,8 +179,8 @@ instance GoogleRequest ElectionsVoterInfoQuery' where
         type Rs ElectionsVoterInfoQuery' = VoterInfoResponse
         request = requestWithRoute defReq civicInfoURL
         requestWithRoute r u ElectionsVoterInfoQuery'{..}
-          = go (Just _eviqElectionId) (Just _eviqOfficialOnly)
-              (Just _eviqAddress)
+          = go (Just _eviqAddress) (Just _eviqElectionId)
+              (Just _eviqOfficialOnly)
               _eviqQuotaUser
               (Just _eviqPrettyPrint)
               _eviqUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -73,9 +74,9 @@ data UsersMessagesGet' = UsersMessagesGet'
     , _umgKey             :: !(Maybe Key)
     , _umgId              :: !Text
     , _umgOAuthToken      :: !(Maybe OAuthToken)
-    , _umgMetadataHeaders :: !(Maybe Text)
+    , _umgMetadataHeaders :: !(Maybe [Text])
     , _umgFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesGet'' with the minimum fields required to make a request.
 --
@@ -165,10 +166,12 @@ umgOAuthToken
       (\ s a -> s{_umgOAuthToken = a})
 
 -- | When given and format is METADATA, only include headers specified.
-umgMetadataHeaders :: Lens' UsersMessagesGet' (Maybe Text)
+umgMetadataHeaders :: Lens' UsersMessagesGet' [Text]
 umgMetadataHeaders
   = lens _umgMetadataHeaders
       (\ s a -> s{_umgMetadataHeaders = a})
+      . _Default
+      . _Coerce
 
 -- | Selector specifying which fields to include in a partial response.
 umgFields :: Lens' UsersMessagesGet' (Maybe Text)
@@ -183,8 +186,8 @@ instance GoogleRequest UsersMessagesGet' where
         type Rs UsersMessagesGet' = Message
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesGet'{..}
-          = go (Just _umgFormat) _umgMetadataHeaders _umgUserId
-              _umgId
+          = go _umgUserId _umgId (Just _umgFormat)
+              (_umgMetadataHeaders ^. _Default)
               _umgQuotaUser
               (Just _umgPrettyPrint)
               _umgUserIP

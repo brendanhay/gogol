@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,16 +59,16 @@ type TasksListResource =
      "lists" :>
        Capture "tasklist" Text :>
          "tasks" :>
-           QueryParam "completedMax" Text :>
-             QueryParam "completedMin" Text :>
-               QueryParam "dueMax" Text :>
+           QueryParam "dueMax" Text :>
+             QueryParam "showDeleted" Bool :>
+               QueryParam "showCompleted" Bool :>
                  QueryParam "dueMin" Text :>
-                   QueryParam "maxResults" Int64 :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "showCompleted" Bool :>
-                         QueryParam "showDeleted" Bool :>
-                           QueryParam "showHidden" Bool :>
-                             QueryParam "updatedMin" Text :>
+                   QueryParam "showHidden" Bool :>
+                     QueryParam "completedMax" Text :>
+                       QueryParam "updatedMin" Text :>
+                         QueryParam "completedMin" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "maxResults" Int64 :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "userIp" Text :>
@@ -98,7 +99,7 @@ data TasksList' = TasksList'
     , _tlOAuthToken    :: !(Maybe OAuthToken)
     , _tlMaxResults    :: !(Maybe Int64)
     , _tlFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksList'' with the minimum fields required to make a request.
 --
@@ -269,15 +270,15 @@ instance GoogleRequest TasksList' where
         type Rs TasksList' = Tasks
         request = requestWithRoute defReq appsTasksURL
         requestWithRoute r u TasksList'{..}
-          = go _tlCompletedMax _tlCompletedMin _tlDueMax
-              _tlDueMin
-              _tlMaxResults
-              _tlPageToken
+          = go _tlTaskList _tlDueMax _tlShowDeleted
               _tlShowCompleted
-              _tlShowDeleted
+              _tlDueMin
               _tlShowHidden
+              _tlCompletedMax
               _tlUpdatedMin
-              _tlTaskList
+              _tlCompletedMin
+              _tlPageToken
+              _tlMaxResults
               _tlQuotaUser
               (Just _tlPrettyPrint)
               _tlUserIP

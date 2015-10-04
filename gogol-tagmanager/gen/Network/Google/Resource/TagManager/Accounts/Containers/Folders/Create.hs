@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Create
     , acfcPrettyPrint
     , acfcContainerId
     , acfcUserIP
-    , acfcFolder
+    , acfcPayload
     , acfcAccountId
     , acfcKey
     , acfcOAuthToken
@@ -69,12 +70,12 @@ data AccountsContainersFoldersCreate' = AccountsContainersFoldersCreate'
     , _acfcPrettyPrint :: !Bool
     , _acfcContainerId :: !Text
     , _acfcUserIP      :: !(Maybe Text)
-    , _acfcFolder      :: !Folder
+    , _acfcPayload     :: !Folder
     , _acfcAccountId   :: !Text
     , _acfcKey         :: !(Maybe Key)
     , _acfcOAuthToken  :: !(Maybe OAuthToken)
     , _acfcFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersFoldersCreate'' with the minimum fields required to make a request.
 --
@@ -88,7 +89,7 @@ data AccountsContainersFoldersCreate' = AccountsContainersFoldersCreate'
 --
 -- * 'acfcUserIP'
 --
--- * 'acfcFolder'
+-- * 'acfcPayload'
 --
 -- * 'acfcAccountId'
 --
@@ -99,16 +100,16 @@ data AccountsContainersFoldersCreate' = AccountsContainersFoldersCreate'
 -- * 'acfcFields'
 accountsContainersFoldersCreate'
     :: Text -- ^ 'containerId'
-    -> Folder -- ^ 'Folder'
+    -> Folder -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> AccountsContainersFoldersCreate'
-accountsContainersFoldersCreate' pAcfcContainerId_ pAcfcFolder_ pAcfcAccountId_ =
+accountsContainersFoldersCreate' pAcfcContainerId_ pAcfcPayload_ pAcfcAccountId_ =
     AccountsContainersFoldersCreate'
     { _acfcQuotaUser = Nothing
     , _acfcPrettyPrint = True
     , _acfcContainerId = pAcfcContainerId_
     , _acfcUserIP = Nothing
-    , _acfcFolder = pAcfcFolder_
+    , _acfcPayload = pAcfcPayload_
     , _acfcAccountId = pAcfcAccountId_
     , _acfcKey = Nothing
     , _acfcOAuthToken = Nothing
@@ -142,9 +143,9 @@ acfcUserIP
   = lens _acfcUserIP (\ s a -> s{_acfcUserIP = a})
 
 -- | Multipart request metadata.
-acfcFolder :: Lens' AccountsContainersFoldersCreate' Folder
-acfcFolder
-  = lens _acfcFolder (\ s a -> s{_acfcFolder = a})
+acfcPayload :: Lens' AccountsContainersFoldersCreate' Folder
+acfcPayload
+  = lens _acfcPayload (\ s a -> s{_acfcPayload = a})
 
 -- | The GTM Account ID.
 acfcAccountId :: Lens' AccountsContainersFoldersCreate' Text
@@ -187,7 +188,7 @@ instance GoogleRequest
               _acfcKey
               _acfcOAuthToken
               (Just AltJSON)
-              _acfcFolder
+              _acfcPayload
           where go
                   = clientWithRoute
                       (Proxy ::

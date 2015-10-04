@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Patch
     -- * Request Lenses
     , udsdpQuotaUser
     , udsdpPrettyPrint
-    , udsdpDataset
     , udsdpUserIP
     , udsdpDataSourceId
+    , udsdpPayload
     , udsdpUserId
     , udsdpKey
     , udsdpDatasetId
@@ -76,16 +77,16 @@ type UsersDataSourcesDatasetsPatchResource =
 data UsersDataSourcesDatasetsPatch' = UsersDataSourcesDatasetsPatch'
     { _udsdpQuotaUser         :: !(Maybe Text)
     , _udsdpPrettyPrint       :: !Bool
-    , _udsdpDataset           :: !Dataset
     , _udsdpUserIP            :: !(Maybe Text)
     , _udsdpDataSourceId      :: !Text
+    , _udsdpPayload           :: !Dataset
     , _udsdpUserId            :: !Text
     , _udsdpKey               :: !(Maybe Key)
     , _udsdpDatasetId         :: !Text
     , _udsdpCurrentTimeMillis :: !(Maybe Int64)
     , _udsdpOAuthToken        :: !(Maybe OAuthToken)
     , _udsdpFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesDatasetsPatch'' with the minimum fields required to make a request.
 --
@@ -95,11 +96,11 @@ data UsersDataSourcesDatasetsPatch' = UsersDataSourcesDatasetsPatch'
 --
 -- * 'udsdpPrettyPrint'
 --
--- * 'udsdpDataset'
---
 -- * 'udsdpUserIP'
 --
 -- * 'udsdpDataSourceId'
+--
+-- * 'udsdpPayload'
 --
 -- * 'udsdpUserId'
 --
@@ -113,18 +114,18 @@ data UsersDataSourcesDatasetsPatch' = UsersDataSourcesDatasetsPatch'
 --
 -- * 'udsdpFields'
 usersDataSourcesDatasetsPatch'
-    :: Dataset -- ^ 'Dataset'
-    -> Text -- ^ 'dataSourceId'
+    :: Text -- ^ 'dataSourceId'
+    -> Dataset -- ^ 'payload'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'datasetId'
     -> UsersDataSourcesDatasetsPatch'
-usersDataSourcesDatasetsPatch' pUdsdpDataset_ pUdsdpDataSourceId_ pUdsdpUserId_ pUdsdpDatasetId_ =
+usersDataSourcesDatasetsPatch' pUdsdpDataSourceId_ pUdsdpPayload_ pUdsdpUserId_ pUdsdpDatasetId_ =
     UsersDataSourcesDatasetsPatch'
     { _udsdpQuotaUser = Nothing
     , _udsdpPrettyPrint = True
-    , _udsdpDataset = pUdsdpDataset_
     , _udsdpUserIP = Nothing
     , _udsdpDataSourceId = pUdsdpDataSourceId_
+    , _udsdpPayload = pUdsdpPayload_
     , _udsdpUserId = pUdsdpUserId_
     , _udsdpKey = Nothing
     , _udsdpDatasetId = pUdsdpDatasetId_
@@ -147,11 +148,6 @@ udsdpPrettyPrint
   = lens _udsdpPrettyPrint
       (\ s a -> s{_udsdpPrettyPrint = a})
 
--- | Multipart request metadata.
-udsdpDataset :: Lens' UsersDataSourcesDatasetsPatch' Dataset
-udsdpDataset
-  = lens _udsdpDataset (\ s a -> s{_udsdpDataset = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 udsdpUserIP :: Lens' UsersDataSourcesDatasetsPatch' (Maybe Text)
@@ -163,6 +159,11 @@ udsdpDataSourceId :: Lens' UsersDataSourcesDatasetsPatch' Text
 udsdpDataSourceId
   = lens _udsdpDataSourceId
       (\ s a -> s{_udsdpDataSourceId = a})
+
+-- | Multipart request metadata.
+udsdpPayload :: Lens' UsersDataSourcesDatasetsPatch' Dataset
+udsdpPayload
+  = lens _udsdpPayload (\ s a -> s{_udsdpPayload = a})
 
 -- | Patch a dataset for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
@@ -215,9 +216,8 @@ instance GoogleRequest UsersDataSourcesDatasetsPatch'
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u
           UsersDataSourcesDatasetsPatch'{..}
-          = go _udsdpCurrentTimeMillis _udsdpUserId
-              _udsdpDataSourceId
-              _udsdpDatasetId
+          = go _udsdpUserId _udsdpDataSourceId _udsdpDatasetId
+              _udsdpCurrentTimeMillis
               _udsdpQuotaUser
               (Just _udsdpPrettyPrint)
               _udsdpUserIP
@@ -225,7 +225,7 @@ instance GoogleRequest UsersDataSourcesDatasetsPatch'
               _udsdpKey
               _udsdpOAuthToken
               (Just AltJSON)
-              _udsdpDataset
+              _udsdpPayload
           where go
                   = clientWithRoute
                       (Proxy ::

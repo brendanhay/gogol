@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.Reseller.Customers.Insert
     , ciQuotaUser
     , ciPrettyPrint
     , ciUserIP
-    , ciCustomer
+    , ciPayload
     , ciKey
     , ciCustomerAuthToken
     , ciOAuthToken
@@ -64,12 +65,12 @@ data CustomersInsert' = CustomersInsert'
     { _ciQuotaUser         :: !(Maybe Text)
     , _ciPrettyPrint       :: !Bool
     , _ciUserIP            :: !(Maybe Text)
-    , _ciCustomer          :: !Customer
+    , _ciPayload           :: !Customer
     , _ciKey               :: !(Maybe Key)
     , _ciCustomerAuthToken :: !(Maybe Text)
     , _ciOAuthToken        :: !(Maybe OAuthToken)
     , _ciFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomersInsert'' with the minimum fields required to make a request.
 --
@@ -81,7 +82,7 @@ data CustomersInsert' = CustomersInsert'
 --
 -- * 'ciUserIP'
 --
--- * 'ciCustomer'
+-- * 'ciPayload'
 --
 -- * 'ciKey'
 --
@@ -91,14 +92,14 @@ data CustomersInsert' = CustomersInsert'
 --
 -- * 'ciFields'
 customersInsert'
-    :: Customer -- ^ 'Customer'
+    :: Customer -- ^ 'payload'
     -> CustomersInsert'
-customersInsert' pCiCustomer_ =
+customersInsert' pCiPayload_ =
     CustomersInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
     , _ciUserIP = Nothing
-    , _ciCustomer = pCiCustomer_
+    , _ciPayload = pCiPayload_
     , _ciKey = Nothing
     , _ciCustomerAuthToken = Nothing
     , _ciOAuthToken = Nothing
@@ -124,9 +125,9 @@ ciUserIP :: Lens' CustomersInsert' (Maybe Text)
 ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
 
 -- | Multipart request metadata.
-ciCustomer :: Lens' CustomersInsert' Customer
-ciCustomer
-  = lens _ciCustomer (\ s a -> s{_ciCustomer = a})
+ciPayload :: Lens' CustomersInsert' Customer
+ciPayload
+  = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -166,7 +167,7 @@ instance GoogleRequest CustomersInsert' where
               _ciKey
               _ciOAuthToken
               (Just AltJSON)
-              _ciCustomer
+              _ciPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CustomersInsertResource)

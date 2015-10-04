@@ -18,7 +18,7 @@ module Network.Google.Translate.Types.Sum where
 import           Network.Google.Prelude
 
 -- | The format of the text
-data LanguageTranslationsListFormat
+data Format
     = HTML
       -- ^ @html@
       -- Specifies the input is in HTML
@@ -27,21 +27,21 @@ data LanguageTranslationsListFormat
       -- Specifies the input is in plain textual format
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable LanguageTranslationsListFormat
+instance Hashable Format
 
-instance FromText LanguageTranslationsListFormat where
+instance FromText Format where
     fromText = \case
         "html" -> Just HTML
         "text" -> Just Text
         _ -> Nothing
 
-instance ToText LanguageTranslationsListFormat where
+instance ToText Format where
     toText = \case
         HTML -> "html"
         Text -> "text"
 
-instance FromJSON LanguageTranslationsListFormat where
-    parseJSON = parseJSONText "LanguageTranslationsListFormat"
+instance FromJSON Format where
+    parseJSON = parseJSONText "Format"
 
-instance ToJSON LanguageTranslationsListFormat where
+instance ToJSON Format where
     toJSON = toJSONText

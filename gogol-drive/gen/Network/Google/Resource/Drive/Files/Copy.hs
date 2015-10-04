@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,6 +37,7 @@ module Network.Google.Resource.Drive.Files.Copy
     , fcPinned
     , fcVisibility
     , fcTimedTextLanguage
+    , fcPayload
     , fcTimedTextTrackName
     , fcOCRLanguage
     , fcKey
@@ -43,7 +45,6 @@ module Network.Google.Resource.Drive.Files.Copy
     , fcFileId
     , fcOAuthToken
     , fcOCR
-    , fcFile
     , fcFields
     ) where
 
@@ -56,13 +57,13 @@ type FilesCopyResource =
      "files" :>
        Capture "fileId" Text :>
          "copy" :>
-           QueryParam "convert" Bool :>
-             QueryParam "ocr" Bool :>
-               QueryParam "ocrLanguage" Text :>
-                 QueryParam "pinned" Bool :>
-                   QueryParam "timedTextLanguage" Text :>
-                     QueryParam "timedTextTrackName" Text :>
-                       QueryParam "visibility" DriveFilesCopyVisibility :>
+           QueryParam "pinned" Bool :>
+             QueryParam "visibility" DriveFilesCopyVisibility :>
+               QueryParam "timedTextLanguage" Text :>
+                 QueryParam "timedTextTrackName" Text :>
+                   QueryParam "ocrLanguage" Text :>
+                     QueryParam "convert" Bool :>
+                       QueryParam "ocr" Bool :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -82,6 +83,7 @@ data FilesCopy' = FilesCopy'
     , _fcPinned             :: !Bool
     , _fcVisibility         :: !DriveFilesCopyVisibility
     , _fcTimedTextLanguage  :: !(Maybe Text)
+    , _fcPayload            :: !File
     , _fcTimedTextTrackName :: !(Maybe Text)
     , _fcOCRLanguage        :: !(Maybe Text)
     , _fcKey                :: !(Maybe Key)
@@ -89,9 +91,8 @@ data FilesCopy' = FilesCopy'
     , _fcFileId             :: !Text
     , _fcOAuthToken         :: !(Maybe OAuthToken)
     , _fcOCR                :: !Bool
-    , _fcFile               :: !File
     , _fcFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesCopy'' with the minimum fields required to make a request.
 --
@@ -109,6 +110,8 @@ data FilesCopy' = FilesCopy'
 --
 -- * 'fcTimedTextLanguage'
 --
+-- * 'fcPayload'
+--
 -- * 'fcTimedTextTrackName'
 --
 -- * 'fcOCRLanguage'
@@ -123,14 +126,12 @@ data FilesCopy' = FilesCopy'
 --
 -- * 'fcOCR'
 --
--- * 'fcFile'
---
 -- * 'fcFields'
 filesCopy'
-    :: Text -- ^ 'fileId'
-    -> File -- ^ 'File'
+    :: File -- ^ 'payload'
+    -> Text -- ^ 'fileId'
     -> FilesCopy'
-filesCopy' pFcFileId_ pFcFile_ =
+filesCopy' pFcPayload_ pFcFileId_ =
     FilesCopy'
     { _fcQuotaUser = Nothing
     , _fcPrettyPrint = True
@@ -138,6 +139,7 @@ filesCopy' pFcFileId_ pFcFile_ =
     , _fcPinned = False
     , _fcVisibility = Default
     , _fcTimedTextLanguage = Nothing
+    , _fcPayload = pFcPayload_
     , _fcTimedTextTrackName = Nothing
     , _fcOCRLanguage = Nothing
     , _fcKey = Nothing
@@ -145,7 +147,6 @@ filesCopy' pFcFileId_ pFcFile_ =
     , _fcFileId = pFcFileId_
     , _fcOAuthToken = Nothing
     , _fcOCR = False
-    , _fcFile = pFcFile_
     , _fcFields = Nothing
     }
 
@@ -184,6 +185,11 @@ fcTimedTextLanguage
   = lens _fcTimedTextLanguage
       (\ s a -> s{_fcTimedTextLanguage = a})
 
+-- | Multipart request metadata.
+fcPayload :: Lens' FilesCopy' File
+fcPayload
+  = lens _fcPayload (\ s a -> s{_fcPayload = a})
+
 -- | The timed text track name.
 fcTimedTextTrackName :: Lens' FilesCopy' (Maybe Text)
 fcTimedTextTrackName
@@ -221,10 +227,6 @@ fcOAuthToken
 fcOCR :: Lens' FilesCopy' Bool
 fcOCR = lens _fcOCR (\ s a -> s{_fcOCR = a})
 
--- | Multipart request metadata.
-fcFile :: Lens' FilesCopy' File
-fcFile = lens _fcFile (\ s a -> s{_fcFile = a})
-
 -- | Selector specifying which fields to include in a partial response.
 fcFields :: Lens' FilesCopy' (Maybe Text)
 fcFields = lens _fcFields (\ s a -> s{_fcFields = a})
@@ -237,12 +239,12 @@ instance GoogleRequest FilesCopy' where
         type Rs FilesCopy' = File
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesCopy'{..}
-          = go (Just _fcConvert) (Just _fcOCR) _fcOCRLanguage
-              (Just _fcPinned)
+          = go _fcFileId (Just _fcPinned) (Just _fcVisibility)
               _fcTimedTextLanguage
               _fcTimedTextTrackName
-              (Just _fcVisibility)
-              _fcFileId
+              _fcOCRLanguage
+              (Just _fcConvert)
+              (Just _fcOCR)
               _fcQuotaUser
               (Just _fcPrettyPrint)
               _fcUserIP
@@ -250,7 +252,7 @@ instance GoogleRequest FilesCopy' where
               _fcKey
               _fcOAuthToken
               (Just AltJSON)
-              _fcFile
+              _fcPayload
           where go
                   = clientWithRoute (Proxy :: Proxy FilesCopyResource)
                       r

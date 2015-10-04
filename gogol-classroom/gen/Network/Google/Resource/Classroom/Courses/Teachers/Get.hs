@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -62,12 +63,12 @@ type CoursesTeachersGetResource =
            "teachers" :>
              Capture "userId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "callback" Text :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
@@ -98,7 +99,7 @@ data CoursesTeachersGet' = CoursesTeachersGet'
     , _ctgOAuthToken     :: !(Maybe OAuthToken)
     , _ctgFields         :: !(Maybe Text)
     , _ctgCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesTeachersGet'' with the minimum fields required to make a request.
 --
@@ -242,13 +243,13 @@ instance GoogleRequest CoursesTeachersGet' where
         type Rs CoursesTeachersGet' = Teacher
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesTeachersGet'{..}
-          = go _ctgXgafv _ctgAccessToken _ctgBearerToken
-              _ctgCallback
-              (Just _ctgPp)
-              _ctgUploadType
+          = go _ctgCourseId _ctgUserId _ctgXgafv
               _ctgUploadProtocol
-              _ctgCourseId
-              _ctgUserId
+              (Just _ctgPp)
+              _ctgAccessToken
+              _ctgUploadType
+              _ctgBearerToken
+              _ctgCallback
               _ctgQuotaUser
               (Just _ctgPrettyPrint)
               _ctgFields

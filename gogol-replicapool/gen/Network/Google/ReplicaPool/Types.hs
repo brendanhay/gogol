@@ -22,23 +22,13 @@ module Network.Google.ReplicaPool.Types
     , instanceGroupManagersSetInstanceTemplateRequest
     , igmsitrInstanceTemplate
 
-    -- * OperationWarnings
-    , OperationWarnings
-    , operationWarnings
-    , owData
-    , owCode
-    , owMessage
-
     -- * InstanceGroupManagersAbandonInstancesRequest
     , InstanceGroupManagersAbandonInstancesRequest
     , instanceGroupManagersAbandonInstancesRequest
     , igmairInstances
 
-    -- * OperationWarningsData
-    , OperationWarningsData
-    , operationWarningsData
-    , owdValue
-    , owdKey
+    -- * Status
+    , Status (..)
 
     -- * OperationList
     , OperationList
@@ -57,9 +47,6 @@ module Network.Google.ReplicaPool.Types
     , igmlItems
     , igmlSelfLink
     , igmlId
-
-    -- * ReplicaPoolAutoHealingPolicyActionType
-    , ReplicaPoolAutoHealingPolicyActionType (..)
 
     -- * InstanceGroupManager
     , InstanceGroupManager
@@ -105,6 +92,11 @@ module Network.Google.ReplicaPool.Types
     , oTargetLink
     , oClientOperationId
 
+    -- * Error'
+    , Error'
+    , error'
+    , eErrors
+
     -- * ReplicaPoolAutoHealingPolicy
     , ReplicaPoolAutoHealingPolicy
     , replicaPoolAutoHealingPolicy
@@ -116,18 +108,26 @@ module Network.Google.ReplicaPool.Types
     , instanceGroupManagersRecreateInstancesRequest
     , igmrirInstances
 
-    -- * OperationStatus
-    , OperationStatus (..)
+    -- * WarningsItemCode
+    , WarningsItemCode (..)
 
     -- * InstanceGroupManagersDeleteInstancesRequest
     , InstanceGroupManagersDeleteInstancesRequest
     , instanceGroupManagersDeleteInstancesRequest
     , igmdirInstances
 
-    -- * OperationError
-    , OperationError
-    , operationError
-    , oeErrors
+    -- * WarningsItem
+    , WarningsItem
+    , warningsItem
+    , wiData
+    , wiCode
+    , wiMessage
+
+    -- * DataItem
+    , DataItem
+    , dataItem
+    , diValue
+    , diKey
 
     -- * InstanceGroupManagersSetTargetPoolsRequest
     , InstanceGroupManagersSetTargetPoolsRequest
@@ -135,15 +135,15 @@ module Network.Google.ReplicaPool.Types
     , igmstprFingerprint
     , igmstprTargetPools
 
-    -- * OperationErrorErrors
-    , OperationErrorErrors
-    , operationErrorErrors
-    , oeeLocation
-    , oeeCode
-    , oeeMessage
+    -- * ActionType
+    , ActionType (..)
 
-    -- * OperationWarningsCode
-    , OperationWarningsCode (..)
+    -- * ErrorsItem
+    , ErrorsItem
+    , errorsItem
+    , eiLocation
+    , eiCode
+    , eiMessage
     ) where
 
 import           Network.Google.Prelude

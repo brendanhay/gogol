@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -61,12 +62,10 @@ type ScoresGetResource =
            Capture "leaderboardId" Text :>
              "scores" :>
                Capture "timeSpan" GamesScoresGetTimeSpan :>
-                 QueryParam "includeRankType"
-                   GamesScoresGetIncludeRankType
-                   :>
+                 QueryParam "includeRankType" IncludeRankType :>
                    QueryParam "language" Text :>
-                     QueryParam "maxResults" Int32 :>
-                       QueryParam "pageToken" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Int32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -91,14 +90,14 @@ data ScoresGet' = ScoresGet'
     , _sgTimeSpan        :: !GamesScoresGetTimeSpan
     , _sgLeaderboardId   :: !Text
     , _sgKey             :: !(Maybe Key)
-    , _sgIncludeRankType :: !(Maybe GamesScoresGetIncludeRankType)
+    , _sgIncludeRankType :: !(Maybe IncludeRankType)
     , _sgLanguage        :: !(Maybe Text)
     , _sgPageToken       :: !(Maybe Text)
     , _sgOAuthToken      :: !(Maybe OAuthToken)
     , _sgPlayerId        :: !Text
     , _sgMaxResults      :: !(Maybe Int32)
     , _sgFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresGet'' with the minimum fields required to make a request.
 --
@@ -189,7 +188,7 @@ sgKey = lens _sgKey (\ s a -> s{_sgKey = a})
 
 -- | The types of ranks to return. If the parameter is omitted, no ranks will
 -- be returned.
-sgIncludeRankType :: Lens' ScoresGet' (Maybe GamesScoresGetIncludeRankType)
+sgIncludeRankType :: Lens' ScoresGet' (Maybe IncludeRankType)
 sgIncludeRankType
   = lens _sgIncludeRankType
       (\ s a -> s{_sgIncludeRankType = a})
@@ -235,11 +234,11 @@ instance GoogleRequest ScoresGet' where
              PlayerLeaderboardScoreListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u ScoresGet'{..}
-          = go _sgIncludeRankType _sgLanguage _sgMaxResults
+          = go _sgPlayerId _sgLeaderboardId _sgTimeSpan
+              _sgIncludeRankType
+              _sgLanguage
               _sgPageToken
-              _sgPlayerId
-              _sgLeaderboardId
-              _sgTimeSpan
+              _sgMaxResults
               _sgQuotaUser
               (Just _sgPrettyPrint)
               _sgUserIP

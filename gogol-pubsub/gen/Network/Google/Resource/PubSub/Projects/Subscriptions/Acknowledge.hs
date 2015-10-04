@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -41,13 +42,13 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
     , psaPp
     , psaAccessToken
     , psaUploadType
+    , psaPayload
     , psaBearerToken
     , psaKey
     , psaOAuthToken
     , psaSubscription
     , psaFields
     , psaCallback
-    , psaAcknowledgeRequest
     ) where
 
 import           Network.Google.Prelude
@@ -57,14 +58,14 @@ import           Network.Google.PubSub.Types
 -- 'ProjectsSubscriptionsAcknowledge'' request conforms to.
 type ProjectsSubscriptionsAcknowledgeResource =
      "v1beta2" :>
-       "{+subscription}:acknowledge" :>
+       CaptureMode "subscription" "acknowledge" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -82,21 +83,21 @@ type ProjectsSubscriptionsAcknowledgeResource =
 --
 -- /See:/ 'projectsSubscriptionsAcknowledge'' smart constructor.
 data ProjectsSubscriptionsAcknowledge' = ProjectsSubscriptionsAcknowledge'
-    { _psaXgafv              :: !(Maybe Text)
-    , _psaQuotaUser          :: !(Maybe Text)
-    , _psaPrettyPrint        :: !Bool
-    , _psaUploadProtocol     :: !(Maybe Text)
-    , _psaPp                 :: !Bool
-    , _psaAccessToken        :: !(Maybe Text)
-    , _psaUploadType         :: !(Maybe Text)
-    , _psaBearerToken        :: !(Maybe Text)
-    , _psaKey                :: !(Maybe Key)
-    , _psaOAuthToken         :: !(Maybe OAuthToken)
-    , _psaSubscription       :: !Text
-    , _psaFields             :: !(Maybe Text)
-    , _psaCallback           :: !(Maybe Text)
-    , _psaAcknowledgeRequest :: !AcknowledgeRequest
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _psaXgafv          :: !(Maybe Text)
+    , _psaQuotaUser      :: !(Maybe Text)
+    , _psaPrettyPrint    :: !Bool
+    , _psaUploadProtocol :: !(Maybe Text)
+    , _psaPp             :: !Bool
+    , _psaAccessToken    :: !(Maybe Text)
+    , _psaUploadType     :: !(Maybe Text)
+    , _psaPayload        :: !AcknowledgeRequest
+    , _psaBearerToken    :: !(Maybe Text)
+    , _psaKey            :: !(Maybe Key)
+    , _psaOAuthToken     :: !(Maybe OAuthToken)
+    , _psaSubscription   :: !Text
+    , _psaFields         :: !(Maybe Text)
+    , _psaCallback       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsAcknowledge'' with the minimum fields required to make a request.
 --
@@ -116,6 +117,8 @@ data ProjectsSubscriptionsAcknowledge' = ProjectsSubscriptionsAcknowledge'
 --
 -- * 'psaUploadType'
 --
+-- * 'psaPayload'
+--
 -- * 'psaBearerToken'
 --
 -- * 'psaKey'
@@ -127,13 +130,11 @@ data ProjectsSubscriptionsAcknowledge' = ProjectsSubscriptionsAcknowledge'
 -- * 'psaFields'
 --
 -- * 'psaCallback'
---
--- * 'psaAcknowledgeRequest'
 projectsSubscriptionsAcknowledge'
-    :: Text -- ^ 'subscription'
-    -> AcknowledgeRequest -- ^ 'AcknowledgeRequest'
+    :: AcknowledgeRequest -- ^ 'payload'
+    -> Text -- ^ 'subscription'
     -> ProjectsSubscriptionsAcknowledge'
-projectsSubscriptionsAcknowledge' pPsaSubscription_ pPsaAcknowledgeRequest_ =
+projectsSubscriptionsAcknowledge' pPsaPayload_ pPsaSubscription_ =
     ProjectsSubscriptionsAcknowledge'
     { _psaXgafv = Nothing
     , _psaQuotaUser = Nothing
@@ -142,13 +143,13 @@ projectsSubscriptionsAcknowledge' pPsaSubscription_ pPsaAcknowledgeRequest_ =
     , _psaPp = True
     , _psaAccessToken = Nothing
     , _psaUploadType = Nothing
+    , _psaPayload = pPsaPayload_
     , _psaBearerToken = Nothing
     , _psaKey = Nothing
     , _psaOAuthToken = Nothing
     , _psaSubscription = pPsaSubscription_
     , _psaFields = Nothing
     , _psaCallback = Nothing
-    , _psaAcknowledgeRequest = pPsaAcknowledgeRequest_
     }
 
 -- | V1 error format.
@@ -190,6 +191,11 @@ psaUploadType
   = lens _psaUploadType
       (\ s a -> s{_psaUploadType = a})
 
+-- | Multipart request metadata.
+psaPayload :: Lens' ProjectsSubscriptionsAcknowledge' AcknowledgeRequest
+psaPayload
+  = lens _psaPayload (\ s a -> s{_psaPayload = a})
+
 -- | OAuth bearer token.
 psaBearerToken :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe Text)
 psaBearerToken
@@ -224,12 +230,6 @@ psaCallback :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe Text)
 psaCallback
   = lens _psaCallback (\ s a -> s{_psaCallback = a})
 
--- | Multipart request metadata.
-psaAcknowledgeRequest :: Lens' ProjectsSubscriptionsAcknowledge' AcknowledgeRequest
-psaAcknowledgeRequest
-  = lens _psaAcknowledgeRequest
-      (\ s a -> s{_psaAcknowledgeRequest = a})
-
 instance GoogleAuth ProjectsSubscriptionsAcknowledge'
          where
         authKey = psaKey . _Just
@@ -241,19 +241,19 @@ instance GoogleRequest
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u
           ProjectsSubscriptionsAcknowledge'{..}
-          = go _psaXgafv _psaAccessToken _psaBearerToken
-              _psaCallback
+          = go _psaSubscription _psaXgafv _psaUploadProtocol
               (Just _psaPp)
+              _psaAccessToken
               _psaUploadType
-              _psaUploadProtocol
-              _psaSubscription
+              _psaBearerToken
+              _psaCallback
               _psaQuotaUser
               (Just _psaPrettyPrint)
               _psaFields
               _psaKey
               _psaOAuthToken
               (Just AltJSON)
-              _psaAcknowledgeRequest
+              _psaPayload
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -18,56 +18,6 @@ module Network.Google.GamesManagement.Types.Product where
 import           Network.Google.GamesManagement.Types.Sum
 import           Network.Google.Prelude
 
--- | An object representation of the individual components of the player\'s
--- name. For some players, these fields may not be present.
---
--- /See:/ 'playerName' smart constructor.
-data PlayerName = PlayerName
-    { _pnGivenName  :: !(Maybe Text)
-    , _pnFamilyName :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PlayerName' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pnGivenName'
---
--- * 'pnFamilyName'
-playerName
-    :: PlayerName
-playerName =
-    PlayerName
-    { _pnGivenName = Nothing
-    , _pnFamilyName = Nothing
-    }
-
--- | The given name of this player. In some places, this is known as the
--- first name.
-pnGivenName :: Lens' PlayerName (Maybe Text)
-pnGivenName
-  = lens _pnGivenName (\ s a -> s{_pnGivenName = a})
-
--- | The family name of this player. In some places, this is known as the
--- last name.
-pnFamilyName :: Lens' PlayerName (Maybe Text)
-pnFamilyName
-  = lens _pnFamilyName (\ s a -> s{_pnFamilyName = a})
-
-instance FromJSON PlayerName where
-        parseJSON
-          = withObject "PlayerName"
-              (\ o ->
-                 PlayerName <$>
-                   (o .:? "givenName") <*> (o .:? "familyName"))
-
-instance ToJSON PlayerName where
-        toJSON PlayerName{..}
-          = object
-              (catMaybes
-                 [("givenName" .=) <$> _pnGivenName,
-                  ("familyName" .=) <$> _pnFamilyName])
-
 -- | This is a JSON template for 1P\/3P metadata about the player\'s
 -- experience.
 --
@@ -77,7 +27,7 @@ data GamesPlayerExperienceInfoResource = GamesPlayerExperienceInfoResource
     , _gpeirCurrentLevel               :: !(Maybe GamesPlayerLevelResource)
     , _gpeirNextLevel                  :: !(Maybe GamesPlayerLevelResource)
     , _gpeirLastLevelUpTimestampMillis :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesPlayerExperienceInfoResource' with the minimum fields required to make a request.
 --
@@ -155,7 +105,7 @@ instance ToJSON GamesPlayerExperienceInfoResource
 data PlayerScoreResetAllResponse = PlayerScoreResetAllResponse
     { _psrarResults :: !(Maybe [PlayerScoreResetResponse])
     , _psrarKind    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerScoreResetAllResponse' with the minimum fields required to make a request.
 --
@@ -208,7 +158,7 @@ instance ToJSON PlayerScoreResetAllResponse where
 data GamesPlayedResource = GamesPlayedResource
     { _gprAutoMatched :: !(Maybe Bool)
     , _gprTimeMillis  :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesPlayedResource' with the minimum fields required to make a request.
 --
@@ -260,7 +210,7 @@ data GamesPlayerLevelResource = GamesPlayerLevelResource
     { _gplrMaxExperiencePoints :: !(Maybe Int64)
     , _gplrMinExperiencePoints :: !(Maybe Int64)
     , _gplrLevel               :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesPlayerLevelResource' with the minimum fields required to make a request.
 --
@@ -323,7 +273,7 @@ data PlayerScoreResetResponse = PlayerScoreResetResponse
     { _psrrKind                :: !Text
     , _psrrResetScoreTimeSpans :: !(Maybe [Text])
     , _psrrDefinitionId        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerScoreResetResponse' with the minimum fields required to make a request.
 --
@@ -389,7 +339,7 @@ instance ToJSON PlayerScoreResetResponse where
 data ScoresResetMultipleForAllRequest = ScoresResetMultipleForAllRequest
     { _srmfarKind           :: !Text
     , _srmfarLeaderboardIds :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresResetMultipleForAllRequest' with the minimum fields required to make a request.
 --
@@ -445,7 +395,7 @@ data HiddenPlayerList = HiddenPlayerList
     { _hplNextPageToken :: !(Maybe Text)
     , _hplKind          :: !Text
     , _hplItems         :: !(Maybe [HiddenPlayer])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HiddenPlayerList' with the minimum fields required to make a request.
 --
@@ -506,7 +456,7 @@ instance ToJSON HiddenPlayerList where
 data QuestsResetMultipleForAllRequest = QuestsResetMultipleForAllRequest
     { _qrmfarKind     :: !Text
     , _qrmfarQuestIds :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsResetMultipleForAllRequest' with the minimum fields required to make a request.
 --
@@ -561,7 +511,7 @@ instance ToJSON QuestsResetMultipleForAllRequest
 data EventsResetMultipleForAllRequest = EventsResetMultipleForAllRequest
     { _ermfarKind     :: !Text
     , _ermfarEventIds :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsResetMultipleForAllRequest' with the minimum fields required to make a request.
 --
@@ -616,7 +566,7 @@ instance ToJSON EventsResetMultipleForAllRequest
 data AchievementResetMultipleForAllRequest = AchievementResetMultipleForAllRequest
     { _armfarKind           :: !Text
     , _armfarAchievementIds :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementResetMultipleForAllRequest' with the minimum fields required to make a request.
 --
@@ -672,7 +622,7 @@ data HiddenPlayer = HiddenPlayer
     { _hpKind             :: !Text
     , _hpHiddenTimeMillis :: !(Maybe Int64)
     , _hpPlayer           :: !(Maybe Player)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HiddenPlayer' with the minimum fields required to make a request.
 --
@@ -724,13 +674,63 @@ instance ToJSON HiddenPlayer where
                   ("hiddenTimeMillis" .=) <$> _hpHiddenTimeMillis,
                   ("player" .=) <$> _hpPlayer])
 
+-- | An object representation of the individual components of the player\'s
+-- name. For some players, these fields may not be present.
+--
+-- /See:/ 'name' smart constructor.
+data Name = Name
+    { _nGivenName  :: !(Maybe Text)
+    , _nFamilyName :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Name' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'nGivenName'
+--
+-- * 'nFamilyName'
+name
+    :: Name
+name =
+    Name
+    { _nGivenName = Nothing
+    , _nFamilyName = Nothing
+    }
+
+-- | The given name of this player. In some places, this is known as the
+-- first name.
+nGivenName :: Lens' Name (Maybe Text)
+nGivenName
+  = lens _nGivenName (\ s a -> s{_nGivenName = a})
+
+-- | The family name of this player. In some places, this is known as the
+-- last name.
+nFamilyName :: Lens' Name (Maybe Text)
+nFamilyName
+  = lens _nFamilyName (\ s a -> s{_nFamilyName = a})
+
+instance FromJSON Name where
+        parseJSON
+          = withObject "Name"
+              (\ o ->
+                 Name <$>
+                   (o .:? "givenName") <*> (o .:? "familyName"))
+
+instance ToJSON Name where
+        toJSON Name{..}
+          = object
+              (catMaybes
+                 [("givenName" .=) <$> _nGivenName,
+                  ("familyName" .=) <$> _nFamilyName])
+
 -- | This is a JSON template for achievement reset all response.
 --
 -- /See:/ 'achievementResetAllResponse' smart constructor.
 data AchievementResetAllResponse = AchievementResetAllResponse
     { _ararResults :: !(Maybe [AchievementResetResponse])
     , _ararKind    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementResetAllResponse' with the minimum fields required to make a request.
 --
@@ -783,11 +783,11 @@ data Player = Player
     , _pAvatarImageURL :: !(Maybe Text)
     , _pKind           :: !Text
     , _pExperienceInfo :: !(Maybe GamesPlayerExperienceInfoResource)
-    , _pName           :: !(Maybe PlayerName)
+    , _pName           :: !(Maybe Name)
     , _pDisplayName    :: !(Maybe Text)
     , _pTitle          :: !(Maybe Text)
     , _pPlayerId       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Player' with the minimum fields required to make a request.
 --
@@ -849,7 +849,7 @@ pExperienceInfo
 
 -- | An object representation of the individual components of the player\'s
 -- name. For some players, these fields may not be present.
-pName :: Lens' Player (Maybe PlayerName)
+pName :: Lens' Player (Maybe Name)
 pName = lens _pName (\ s a -> s{_pName = a})
 
 -- | The name to display for the player.
@@ -900,7 +900,7 @@ data AchievementResetResponse = AchievementResetResponse
     , _arrKind           :: !Text
     , _arrCurrentState   :: !(Maybe Text)
     , _arrDefinitionId   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementResetResponse' with the minimum fields required to make a request.
 --

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -56,21 +57,17 @@ import           Network.Google.YouTube.Types
 -- 'CommentThreadsList'' request conforms to.
 type CommentThreadsListResource =
      "commentThreads" :>
-       QueryParam "allThreadsRelatedToChannelId" Text :>
-         QueryParam "channelId" Text :>
-           QueryParam "id" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "moderationStatus"
-                 YouTubeCommentThreadsListModerationStatus
-                 :>
-                 QueryParam "order" YouTubeCommentThreadsListOrder :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "searchTerms" Text :>
-                       QueryParam "textFormat"
-                         YouTubeCommentThreadsListTextFormat
-                         :>
-                         QueryParam "videoId" Text :>
-                           QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "moderationStatus" ModerationStatus :>
+           QueryParam "searchTerms" Text :>
+             QueryParam "channelId" Text :>
+               QueryParam "allThreadsRelatedToChannelId" Text :>
+                 QueryParam "videoId" Text :>
+                   QueryParam "id" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "order" Order :>
+                         QueryParam "textFormat" TextFormat :>
+                           QueryParam "maxResults" Word32 :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
@@ -87,7 +84,7 @@ data CommentThreadsList' = CommentThreadsList'
     { _ctlQuotaUser                    :: !(Maybe Text)
     , _ctlPart                         :: !Text
     , _ctlPrettyPrint                  :: !Bool
-    , _ctlModerationStatus             :: !YouTubeCommentThreadsListModerationStatus
+    , _ctlModerationStatus             :: !ModerationStatus
     , _ctlUserIP                       :: !(Maybe Text)
     , _ctlSearchTerms                  :: !(Maybe Text)
     , _ctlChannelId                    :: !(Maybe Text)
@@ -97,11 +94,11 @@ data CommentThreadsList' = CommentThreadsList'
     , _ctlId                           :: !(Maybe Text)
     , _ctlPageToken                    :: !(Maybe Text)
     , _ctlOAuthToken                   :: !(Maybe OAuthToken)
-    , _ctlOrder                        :: !YouTubeCommentThreadsListOrder
-    , _ctlTextFormat                   :: !YouTubeCommentThreadsListTextFormat
+    , _ctlOrder                        :: !Order
+    , _ctlTextFormat                   :: !TextFormat
     , _ctlMaxResults                   :: !Word32
     , _ctlFields                       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentThreadsList'' with the minimum fields required to make a request.
 --
@@ -148,7 +145,7 @@ commentThreadsList' pCtlPart_ =
     { _ctlQuotaUser = Nothing
     , _ctlPart = pCtlPart_
     , _ctlPrettyPrint = True
-    , _ctlModerationStatus = YTCTLMSModerationStatusPublished
+    , _ctlModerationStatus = MSModerationStatusPublished
     , _ctlUserIP = Nothing
     , _ctlSearchTerms = Nothing
     , _ctlChannelId = Nothing
@@ -185,7 +182,7 @@ ctlPrettyPrint
 -- | Set this parameter to limit the returned comment threads to a particular
 -- moderation state. Note: This parameter is not supported for use in
 -- conjunction with the id parameter.
-ctlModerationStatus :: Lens' CommentThreadsList' YouTubeCommentThreadsListModerationStatus
+ctlModerationStatus :: Lens' CommentThreadsList' ModerationStatus
 ctlModerationStatus
   = lens _ctlModerationStatus
       (\ s a -> s{_ctlModerationStatus = a})
@@ -256,12 +253,12 @@ ctlOAuthToken
 -- ordered by time. This is the default behavior. - relevance - Comment
 -- threads are ordered by relevance.Note: This parameter is not supported
 -- for use in conjunction with the id parameter.
-ctlOrder :: Lens' CommentThreadsList' YouTubeCommentThreadsListOrder
+ctlOrder :: Lens' CommentThreadsList' Order
 ctlOrder = lens _ctlOrder (\ s a -> s{_ctlOrder = a})
 
 -- | Set this parameter\'s value to html or plainText to instruct the API to
 -- return the comments left by users in html formatted or in plain text.
-ctlTextFormat :: Lens' CommentThreadsList' YouTubeCommentThreadsListTextFormat
+ctlTextFormat :: Lens' CommentThreadsList' TextFormat
 ctlTextFormat
   = lens _ctlTextFormat
       (\ s a -> s{_ctlTextFormat = a})
@@ -288,16 +285,16 @@ instance GoogleRequest CommentThreadsList' where
              CommentThreadListResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CommentThreadsList'{..}
-          = go _ctlAllThreadsRelatedToChannelId _ctlChannelId
-              _ctlId
-              (Just _ctlMaxResults)
-              (Just _ctlModerationStatus)
-              (Just _ctlOrder)
-              _ctlPageToken
+          = go (Just _ctlPart) (Just _ctlModerationStatus)
               _ctlSearchTerms
-              (Just _ctlTextFormat)
+              _ctlChannelId
+              _ctlAllThreadsRelatedToChannelId
               _ctlVideoId
-              (Just _ctlPart)
+              _ctlId
+              _ctlPageToken
+              (Just _ctlOrder)
+              (Just _ctlTextFormat)
+              (Just _ctlMaxResults)
               _ctlQuotaUser
               (Just _ctlPrettyPrint)
               _ctlUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.FusionTables.Style.Update
     , suQuotaUser
     , suPrettyPrint
     , suUserIP
-    , suStyleSetting
+    , suPayload
     , suKey
     , suStyleId
     , suOAuthToken
@@ -65,16 +66,16 @@ type StyleUpdateResource =
 --
 -- /See:/ 'styleUpdate'' smart constructor.
 data StyleUpdate' = StyleUpdate'
-    { _suQuotaUser    :: !(Maybe Text)
-    , _suPrettyPrint  :: !Bool
-    , _suUserIP       :: !(Maybe Text)
-    , _suStyleSetting :: !StyleSetting
-    , _suKey          :: !(Maybe Key)
-    , _suStyleId      :: !Int32
-    , _suOAuthToken   :: !(Maybe OAuthToken)
-    , _suTableId      :: !Text
-    , _suFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _suQuotaUser   :: !(Maybe Text)
+    , _suPrettyPrint :: !Bool
+    , _suUserIP      :: !(Maybe Text)
+    , _suPayload     :: !StyleSetting
+    , _suKey         :: !(Maybe Key)
+    , _suStyleId     :: !Int32
+    , _suOAuthToken  :: !(Maybe OAuthToken)
+    , _suTableId     :: !Text
+    , _suFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleUpdate'' with the minimum fields required to make a request.
 --
@@ -86,7 +87,7 @@ data StyleUpdate' = StyleUpdate'
 --
 -- * 'suUserIP'
 --
--- * 'suStyleSetting'
+-- * 'suPayload'
 --
 -- * 'suKey'
 --
@@ -98,16 +99,16 @@ data StyleUpdate' = StyleUpdate'
 --
 -- * 'suFields'
 styleUpdate'
-    :: StyleSetting -- ^ 'StyleSetting'
+    :: StyleSetting -- ^ 'payload'
     -> Int32 -- ^ 'styleId'
     -> Text -- ^ 'tableId'
     -> StyleUpdate'
-styleUpdate' pSuStyleSetting_ pSuStyleId_ pSuTableId_ =
+styleUpdate' pSuPayload_ pSuStyleId_ pSuTableId_ =
     StyleUpdate'
     { _suQuotaUser = Nothing
     , _suPrettyPrint = True
     , _suUserIP = Nothing
-    , _suStyleSetting = pSuStyleSetting_
+    , _suPayload = pSuPayload_
     , _suKey = Nothing
     , _suStyleId = pSuStyleId_
     , _suOAuthToken = Nothing
@@ -134,10 +135,9 @@ suUserIP :: Lens' StyleUpdate' (Maybe Text)
 suUserIP = lens _suUserIP (\ s a -> s{_suUserIP = a})
 
 -- | Multipart request metadata.
-suStyleSetting :: Lens' StyleUpdate' StyleSetting
-suStyleSetting
-  = lens _suStyleSetting
-      (\ s a -> s{_suStyleSetting = a})
+suPayload :: Lens' StyleUpdate' StyleSetting
+suPayload
+  = lens _suPayload (\ s a -> s{_suPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -179,7 +179,7 @@ instance GoogleRequest StyleUpdate' where
               _suKey
               _suOAuthToken
               (Just AltJSON)
-              _suStyleSetting
+              _suPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy StyleUpdateResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,10 +34,10 @@ module Network.Google.Resource.Games.Scores.SubmitMultiple
     , ssmQuotaUser
     , ssmPrettyPrint
     , ssmUserIP
+    , ssmPayload
     , ssmKey
     , ssmLanguage
     , ssmOAuthToken
-    , ssmPlayerScoreSubmissionList
     , ssmFields
     ) where
 
@@ -63,15 +64,15 @@ type ScoresSubmitMultipleResource =
 --
 -- /See:/ 'scoresSubmitMultiple'' smart constructor.
 data ScoresSubmitMultiple' = ScoresSubmitMultiple'
-    { _ssmQuotaUser                 :: !(Maybe Text)
-    , _ssmPrettyPrint               :: !Bool
-    , _ssmUserIP                    :: !(Maybe Text)
-    , _ssmKey                       :: !(Maybe Key)
-    , _ssmLanguage                  :: !(Maybe Text)
-    , _ssmOAuthToken                :: !(Maybe OAuthToken)
-    , _ssmPlayerScoreSubmissionList :: !PlayerScoreSubmissionList
-    , _ssmFields                    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ssmQuotaUser   :: !(Maybe Text)
+    , _ssmPrettyPrint :: !Bool
+    , _ssmUserIP      :: !(Maybe Text)
+    , _ssmPayload     :: !PlayerScoreSubmissionList
+    , _ssmKey         :: !(Maybe Key)
+    , _ssmLanguage    :: !(Maybe Text)
+    , _ssmOAuthToken  :: !(Maybe OAuthToken)
+    , _ssmFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresSubmitMultiple'' with the minimum fields required to make a request.
 --
@@ -83,27 +84,27 @@ data ScoresSubmitMultiple' = ScoresSubmitMultiple'
 --
 -- * 'ssmUserIP'
 --
+-- * 'ssmPayload'
+--
 -- * 'ssmKey'
 --
 -- * 'ssmLanguage'
 --
 -- * 'ssmOAuthToken'
 --
--- * 'ssmPlayerScoreSubmissionList'
---
 -- * 'ssmFields'
 scoresSubmitMultiple'
-    :: PlayerScoreSubmissionList -- ^ 'PlayerScoreSubmissionList'
+    :: PlayerScoreSubmissionList -- ^ 'payload'
     -> ScoresSubmitMultiple'
-scoresSubmitMultiple' pSsmPlayerScoreSubmissionList_ =
+scoresSubmitMultiple' pSsmPayload_ =
     ScoresSubmitMultiple'
     { _ssmQuotaUser = Nothing
     , _ssmPrettyPrint = True
     , _ssmUserIP = Nothing
+    , _ssmPayload = pSsmPayload_
     , _ssmKey = Nothing
     , _ssmLanguage = Nothing
     , _ssmOAuthToken = Nothing
-    , _ssmPlayerScoreSubmissionList = pSsmPlayerScoreSubmissionList_
     , _ssmFields = Nothing
     }
 
@@ -126,6 +127,11 @@ ssmUserIP :: Lens' ScoresSubmitMultiple' (Maybe Text)
 ssmUserIP
   = lens _ssmUserIP (\ s a -> s{_ssmUserIP = a})
 
+-- | Multipart request metadata.
+ssmPayload :: Lens' ScoresSubmitMultiple' PlayerScoreSubmissionList
+ssmPayload
+  = lens _ssmPayload (\ s a -> s{_ssmPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -142,12 +148,6 @@ ssmOAuthToken :: Lens' ScoresSubmitMultiple' (Maybe OAuthToken)
 ssmOAuthToken
   = lens _ssmOAuthToken
       (\ s a -> s{_ssmOAuthToken = a})
-
--- | Multipart request metadata.
-ssmPlayerScoreSubmissionList :: Lens' ScoresSubmitMultiple' PlayerScoreSubmissionList
-ssmPlayerScoreSubmissionList
-  = lens _ssmPlayerScoreSubmissionList
-      (\ s a -> s{_ssmPlayerScoreSubmissionList = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ssmFields :: Lens' ScoresSubmitMultiple' (Maybe Text)
@@ -170,7 +170,7 @@ instance GoogleRequest ScoresSubmitMultiple' where
               _ssmKey
               _ssmOAuthToken
               (Just AltJSON)
-              _ssmPlayerScoreSubmissionList
+              _ssmPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ScoresSubmitMultipleResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -66,22 +67,22 @@ type AccountsExperienceLocalesListResource =
        "accounts" :>
          Capture "accountId" Text :>
            "experienceLocales" :>
-             QueryParam "$.xgafv" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "altCutId" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "customId" Text :>
-                         QueryParam "editLevelEidr" Text :>
-                           QueryParam "pageSize" Int32 :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "pp" Bool :>
-                                 QueryParams "pphNames" Text :>
-                                   QueryParams "status" Text :>
-                                     QueryParams "studioNames" Text :>
-                                       QueryParam "titleLevelEidr" Text :>
-                                         QueryParam "uploadType" Text :>
-                                           QueryParam "upload_protocol" Text :>
+             QueryParam "titleLevelEidr" Text :>
+               QueryParams "status" Text :>
+                 QueryParams "pphNames" Text :>
+                   QueryParam "$.xgafv" Text :>
+                     QueryParams "studioNames" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "altCutId" Text :>
+                                 QueryParam "customId" Text :>
+                                   QueryParam "bearer_token" Text :>
+                                     QueryParam "editLevelEidr" Text :>
+                                       QueryParam "pageToken" Text :>
+                                         QueryParam "pageSize" Int32 :>
+                                           QueryParam "callback" Text :>
                                              QueryParam "quotaUser" Text :>
                                                QueryParam "prettyPrint" Bool :>
                                                  QueryParam "fields" Text :>
@@ -101,10 +102,10 @@ type AccountsExperienceLocalesListResource =
 -- /See:/ 'accountsExperienceLocalesList'' smart constructor.
 data AccountsExperienceLocalesList' = AccountsExperienceLocalesList'
     { _aellTitleLevelEidr :: !(Maybe Text)
-    , _aellStatus         :: !(Maybe Text)
-    , _aellPphNames       :: !(Maybe Text)
+    , _aellStatus         :: !(Maybe [Text])
+    , _aellPphNames       :: !(Maybe [Text])
     , _aellXgafv          :: !(Maybe Text)
-    , _aellStudioNames    :: !(Maybe Text)
+    , _aellStudioNames    :: !(Maybe [Text])
     , _aellQuotaUser      :: !(Maybe Text)
     , _aellPrettyPrint    :: !Bool
     , _aellUploadProtocol :: !(Maybe Text)
@@ -122,7 +123,7 @@ data AccountsExperienceLocalesList' = AccountsExperienceLocalesList'
     , _aellPageSize       :: !(Maybe Int32)
     , _aellFields         :: !(Maybe Text)
     , _aellCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsExperienceLocalesList'' with the minimum fields required to make a request.
 --
@@ -207,14 +208,18 @@ aellTitleLevelEidr
       (\ s a -> s{_aellTitleLevelEidr = a})
 
 -- | Filter ExperienceLocales that match one of the given status.
-aellStatus :: Lens' AccountsExperienceLocalesList' (Maybe Text)
+aellStatus :: Lens' AccountsExperienceLocalesList' [Text]
 aellStatus
-  = lens _aellStatus (\ s a -> s{_aellStatus = a})
+  = lens _aellStatus (\ s a -> s{_aellStatus = a}) .
+      _Default
+      . _Coerce
 
 -- | See _List methods rules_ for info about this field.
-aellPphNames :: Lens' AccountsExperienceLocalesList' (Maybe Text)
+aellPphNames :: Lens' AccountsExperienceLocalesList' [Text]
 aellPphNames
   = lens _aellPphNames (\ s a -> s{_aellPphNames = a})
+      . _Default
+      . _Coerce
 
 -- | V1 error format.
 aellXgafv :: Lens' AccountsExperienceLocalesList' (Maybe Text)
@@ -222,10 +227,12 @@ aellXgafv
   = lens _aellXgafv (\ s a -> s{_aellXgafv = a})
 
 -- | See _List methods rules_ for info about this field.
-aellStudioNames :: Lens' AccountsExperienceLocalesList' (Maybe Text)
+aellStudioNames :: Lens' AccountsExperienceLocalesList' [Text]
 aellStudioNames
   = lens _aellStudioNames
       (\ s a -> s{_aellStudioNames = a})
+      . _Default
+      . _Coerce
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -339,21 +346,22 @@ instance GoogleRequest AccountsExperienceLocalesList'
           = requestWithRoute defReq playMoviesPartnerURL
         requestWithRoute r u
           AccountsExperienceLocalesList'{..}
-          = go _aellXgafv _aellAccessToken _aellAltCutId
-              _aellBearerToken
-              _aellCallback
-              _aellCustomId
-              _aellEditLevelEidr
-              _aellPageSize
-              _aellPageToken
-              (Just _aellPp)
-              _aellPphNames
-              _aellStatus
-              _aellStudioNames
-              _aellTitleLevelEidr
-              _aellUploadType
+          = go _aellAccountId _aellTitleLevelEidr
+              (_aellStatus ^. _Default)
+              (_aellPphNames ^. _Default)
+              _aellXgafv
+              (_aellStudioNames ^. _Default)
               _aellUploadProtocol
-              _aellAccountId
+              (Just _aellPp)
+              _aellAccessToken
+              _aellUploadType
+              _aellAltCutId
+              _aellCustomId
+              _aellBearerToken
+              _aellEditLevelEidr
+              _aellPageToken
+              _aellPageSize
+              _aellCallback
               _aellQuotaUser
               (Just _aellPrettyPrint)
               _aellFields

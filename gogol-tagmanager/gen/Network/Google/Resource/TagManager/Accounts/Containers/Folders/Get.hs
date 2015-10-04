@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -74,7 +75,7 @@ data AccountsContainersFoldersGet' = AccountsContainersFoldersGet'
     , _acfgKey         :: !(Maybe Key)
     , _acfgOAuthToken  :: !(Maybe OAuthToken)
     , _acfgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersFoldersGet'' with the minimum fields required to make a request.
 --

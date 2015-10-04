@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,10 +36,10 @@ module Network.Google.Resource.AndroidEnterprise.Products.Approve
     , paPrettyPrint
     , paEnterpriseId
     , paUserIP
+    , paPayload
     , paKey
     , paOAuthToken
     , paProductId
-    , paProductsApproveRequest
     , paFields
     ) where
 
@@ -68,16 +69,16 @@ type ProductsApproveResource =
 --
 -- /See:/ 'productsApprove'' smart constructor.
 data ProductsApprove' = ProductsApprove'
-    { _paQuotaUser              :: !(Maybe Text)
-    , _paPrettyPrint            :: !Bool
-    , _paEnterpriseId           :: !Text
-    , _paUserIP                 :: !(Maybe Text)
-    , _paKey                    :: !(Maybe Key)
-    , _paOAuthToken             :: !(Maybe OAuthToken)
-    , _paProductId              :: !Text
-    , _paProductsApproveRequest :: !ProductsApproveRequest
-    , _paFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _paQuotaUser    :: !(Maybe Text)
+    , _paPrettyPrint  :: !Bool
+    , _paEnterpriseId :: !Text
+    , _paUserIP       :: !(Maybe Text)
+    , _paPayload      :: !ProductsApproveRequest
+    , _paKey          :: !(Maybe Key)
+    , _paOAuthToken   :: !(Maybe OAuthToken)
+    , _paProductId    :: !Text
+    , _paFields       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsApprove'' with the minimum fields required to make a request.
 --
@@ -91,30 +92,30 @@ data ProductsApprove' = ProductsApprove'
 --
 -- * 'paUserIP'
 --
+-- * 'paPayload'
+--
 -- * 'paKey'
 --
 -- * 'paOAuthToken'
 --
 -- * 'paProductId'
 --
--- * 'paProductsApproveRequest'
---
 -- * 'paFields'
 productsApprove'
     :: Text -- ^ 'enterpriseId'
+    -> ProductsApproveRequest -- ^ 'payload'
     -> Text -- ^ 'productId'
-    -> ProductsApproveRequest -- ^ 'ProductsApproveRequest'
     -> ProductsApprove'
-productsApprove' pPaEnterpriseId_ pPaProductId_ pPaProductsApproveRequest_ =
+productsApprove' pPaEnterpriseId_ pPaPayload_ pPaProductId_ =
     ProductsApprove'
     { _paQuotaUser = Nothing
     , _paPrettyPrint = True
     , _paEnterpriseId = pPaEnterpriseId_
     , _paUserIP = Nothing
+    , _paPayload = pPaPayload_
     , _paKey = Nothing
     , _paOAuthToken = Nothing
     , _paProductId = pPaProductId_
-    , _paProductsApproveRequest = pPaProductsApproveRequest_
     , _paFields = Nothing
     }
 
@@ -142,6 +143,11 @@ paEnterpriseId
 paUserIP :: Lens' ProductsApprove' (Maybe Text)
 paUserIP = lens _paUserIP (\ s a -> s{_paUserIP = a})
 
+-- | Multipart request metadata.
+paPayload :: Lens' ProductsApprove' ProductsApproveRequest
+paPayload
+  = lens _paPayload (\ s a -> s{_paPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -157,12 +163,6 @@ paOAuthToken
 paProductId :: Lens' ProductsApprove' Text
 paProductId
   = lens _paProductId (\ s a -> s{_paProductId = a})
-
--- | Multipart request metadata.
-paProductsApproveRequest :: Lens' ProductsApprove' ProductsApproveRequest
-paProductsApproveRequest
-  = lens _paProductsApproveRequest
-      (\ s a -> s{_paProductsApproveRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 paFields :: Lens' ProductsApprove' (Maybe Text)
@@ -184,7 +184,7 @@ instance GoogleRequest ProductsApprove' where
               _paKey
               _paOAuthToken
               (Just AltJSON)
-              _paProductsApproveRequest
+              _paPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProductsApproveResource)

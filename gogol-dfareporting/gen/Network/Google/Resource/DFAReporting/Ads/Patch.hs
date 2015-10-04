@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.DFAReporting.Ads.Patch
     -- * Request Lenses
     , appQuotaUser
     , appPrettyPrint
-    , appAd
     , appUserIP
     , appProfileId
+    , appPayload
     , appKey
     , appId
     , appOAuthToken
@@ -66,14 +67,14 @@ type AdsPatchResource =
 data AdsPatch' = AdsPatch'
     { _appQuotaUser   :: !(Maybe Text)
     , _appPrettyPrint :: !Bool
-    , _appAd          :: !Ad
     , _appUserIP      :: !(Maybe Text)
     , _appProfileId   :: !Int64
+    , _appPayload     :: !Ad
     , _appKey         :: !(Maybe Key)
     , _appId          :: !Int64
     , _appOAuthToken  :: !(Maybe OAuthToken)
     , _appFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdsPatch'' with the minimum fields required to make a request.
 --
@@ -83,11 +84,11 @@ data AdsPatch' = AdsPatch'
 --
 -- * 'appPrettyPrint'
 --
--- * 'appAd'
---
 -- * 'appUserIP'
 --
 -- * 'appProfileId'
+--
+-- * 'appPayload'
 --
 -- * 'appKey'
 --
@@ -97,17 +98,17 @@ data AdsPatch' = AdsPatch'
 --
 -- * 'appFields'
 adsPatch'
-    :: Ad -- ^ 'Ad'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> Ad -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> AdsPatch'
-adsPatch' pAppAd_ pAppProfileId_ pAppId_ =
+adsPatch' pAppProfileId_ pAppPayload_ pAppId_ =
     AdsPatch'
     { _appQuotaUser = Nothing
     , _appPrettyPrint = True
-    , _appAd = pAppAd_
     , _appUserIP = Nothing
     , _appProfileId = pAppProfileId_
+    , _appPayload = pAppPayload_
     , _appKey = Nothing
     , _appId = pAppId_
     , _appOAuthToken = Nothing
@@ -127,10 +128,6 @@ appPrettyPrint
   = lens _appPrettyPrint
       (\ s a -> s{_appPrettyPrint = a})
 
--- | Multipart request metadata.
-appAd :: Lens' AdsPatch' Ad
-appAd = lens _appAd (\ s a -> s{_appAd = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 appUserIP :: Lens' AdsPatch' (Maybe Text)
@@ -141,6 +138,11 @@ appUserIP
 appProfileId :: Lens' AdsPatch' Int64
 appProfileId
   = lens _appProfileId (\ s a -> s{_appProfileId = a})
+
+-- | Multipart request metadata.
+appPayload :: Lens' AdsPatch' Ad
+appPayload
+  = lens _appPayload (\ s a -> s{_appPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -178,7 +180,7 @@ instance GoogleRequest AdsPatch' where
               _appKey
               _appOAuthToken
               (Just AltJSON)
-              _appAd
+              _appPayload
           where go
                   = clientWithRoute (Proxy :: Proxy AdsPatchResource) r
                       u

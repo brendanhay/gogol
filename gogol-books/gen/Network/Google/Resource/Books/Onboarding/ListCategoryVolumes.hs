@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,13 +52,13 @@ import           Network.Google.Prelude
 type OnboardingListCategoryVolumesResource =
      "onboarding" :>
        "listCategoryVolumes" :>
-         QueryParams "categoryId" Text :>
-           QueryParam "locale" Text :>
-             QueryParam "maxAllowedMaturityRating"
-               BooksOnboardingListCategoryVolumesMaxAllowedMaturityRating
-               :>
-               QueryParam "pageSize" Word32 :>
-                 QueryParam "pageToken" Text :>
+         QueryParam "locale" Text :>
+           QueryParam "maxAllowedMaturityRating"
+             MaxAllowedMaturityRating
+             :>
+             QueryParams "categoryId" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "pageSize" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -74,14 +75,14 @@ data OnboardingListCategoryVolumes' = OnboardingListCategoryVolumes'
     , _olcvPrettyPrint              :: !Bool
     , _olcvUserIP                   :: !(Maybe Text)
     , _olcvLocale                   :: !(Maybe Text)
-    , _olcvMaxAllowedMaturityRating :: !(Maybe BooksOnboardingListCategoryVolumesMaxAllowedMaturityRating)
+    , _olcvMaxAllowedMaturityRating :: !(Maybe MaxAllowedMaturityRating)
     , _olcvKey                      :: !(Maybe Key)
-    , _olcvCategoryId               :: !(Maybe Text)
+    , _olcvCategoryId               :: !(Maybe [Text])
     , _olcvPageToken                :: !(Maybe Text)
     , _olcvOAuthToken               :: !(Maybe OAuthToken)
     , _olcvPageSize                 :: !(Maybe Word32)
     , _olcvFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OnboardingListCategoryVolumes'' with the minimum fields required to make a request.
 --
@@ -153,7 +154,7 @@ olcvLocale
 
 -- | The maximum allowed maturity rating of returned volumes. Books with a
 -- higher maturity rating are filtered out.
-olcvMaxAllowedMaturityRating :: Lens' OnboardingListCategoryVolumes' (Maybe BooksOnboardingListCategoryVolumesMaxAllowedMaturityRating)
+olcvMaxAllowedMaturityRating :: Lens' OnboardingListCategoryVolumes' (Maybe MaxAllowedMaturityRating)
 olcvMaxAllowedMaturityRating
   = lens _olcvMaxAllowedMaturityRating
       (\ s a -> s{_olcvMaxAllowedMaturityRating = a})
@@ -165,10 +166,12 @@ olcvKey :: Lens' OnboardingListCategoryVolumes' (Maybe Key)
 olcvKey = lens _olcvKey (\ s a -> s{_olcvKey = a})
 
 -- | List of category ids requested.
-olcvCategoryId :: Lens' OnboardingListCategoryVolumes' (Maybe Text)
+olcvCategoryId :: Lens' OnboardingListCategoryVolumes' [Text]
 olcvCategoryId
   = lens _olcvCategoryId
       (\ s a -> s{_olcvCategoryId = a})
+      . _Default
+      . _Coerce
 
 -- | The value of the nextToken from the previous page.
 olcvPageToken :: Lens' OnboardingListCategoryVolumes' (Maybe Text)
@@ -203,10 +206,10 @@ instance GoogleRequest OnboardingListCategoryVolumes'
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
           OnboardingListCategoryVolumes'{..}
-          = go _olcvCategoryId _olcvLocale
-              _olcvMaxAllowedMaturityRating
-              _olcvPageSize
+          = go _olcvLocale _olcvMaxAllowedMaturityRating
+              (_olcvCategoryId ^. _Default)
               _olcvPageToken
+              _olcvPageSize
               _olcvQuotaUser
               (Just _olcvPrettyPrint)
               _olcvUserIP

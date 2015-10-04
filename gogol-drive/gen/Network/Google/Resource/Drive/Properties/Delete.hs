@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -73,7 +74,7 @@ data PropertiesDelete' = PropertiesDelete'
     , _pdFileId      :: !Text
     , _pdOAuthToken  :: !(Maybe OAuthToken)
     , _pdFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertiesDelete'' with the minimum fields required to make a request.
 --
@@ -169,7 +170,7 @@ instance GoogleRequest PropertiesDelete' where
         type Rs PropertiesDelete' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PropertiesDelete'{..}
-          = go (Just _pdVisibility) _pdFileId _pdPropertyKey
+          = go _pdFileId _pdPropertyKey (Just _pdVisibility)
               _pdQuotaUser
               (Just _pdPrettyPrint)
               _pdUserIP

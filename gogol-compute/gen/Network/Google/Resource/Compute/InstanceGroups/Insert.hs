@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,9 +37,9 @@ module Network.Google.Resource.Compute.InstanceGroups.Insert
     , igiProject
     , igiUserIP
     , igiZone
+    , igiPayload
     , igiKey
     , igiOAuthToken
-    , igiInstanceGroup
     , igiFields
     ) where
 
@@ -67,16 +68,16 @@ type InstanceGroupsInsertResource =
 --
 -- /See:/ 'instanceGroupsInsert'' smart constructor.
 data InstanceGroupsInsert' = InstanceGroupsInsert'
-    { _igiQuotaUser     :: !(Maybe Text)
-    , _igiPrettyPrint   :: !Bool
-    , _igiProject       :: !Text
-    , _igiUserIP        :: !(Maybe Text)
-    , _igiZone          :: !Text
-    , _igiKey           :: !(Maybe Key)
-    , _igiOAuthToken    :: !(Maybe OAuthToken)
-    , _igiInstanceGroup :: !InstanceGroup
-    , _igiFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _igiQuotaUser   :: !(Maybe Text)
+    , _igiPrettyPrint :: !Bool
+    , _igiProject     :: !Text
+    , _igiUserIP      :: !(Maybe Text)
+    , _igiZone        :: !Text
+    , _igiPayload     :: !InstanceGroup
+    , _igiKey         :: !(Maybe Key)
+    , _igiOAuthToken  :: !(Maybe OAuthToken)
+    , _igiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsInsert'' with the minimum fields required to make a request.
 --
@@ -92,28 +93,28 @@ data InstanceGroupsInsert' = InstanceGroupsInsert'
 --
 -- * 'igiZone'
 --
+-- * 'igiPayload'
+--
 -- * 'igiKey'
 --
 -- * 'igiOAuthToken'
---
--- * 'igiInstanceGroup'
 --
 -- * 'igiFields'
 instanceGroupsInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> InstanceGroup -- ^ 'InstanceGroup'
+    -> InstanceGroup -- ^ 'payload'
     -> InstanceGroupsInsert'
-instanceGroupsInsert' pIgiProject_ pIgiZone_ pIgiInstanceGroup_ =
+instanceGroupsInsert' pIgiProject_ pIgiZone_ pIgiPayload_ =
     InstanceGroupsInsert'
     { _igiQuotaUser = Nothing
     , _igiPrettyPrint = True
     , _igiProject = pIgiProject_
     , _igiUserIP = Nothing
     , _igiZone = pIgiZone_
+    , _igiPayload = pIgiPayload_
     , _igiKey = Nothing
     , _igiOAuthToken = Nothing
-    , _igiInstanceGroup = pIgiInstanceGroup_
     , _igiFields = Nothing
     }
 
@@ -145,6 +146,11 @@ igiUserIP
 igiZone :: Lens' InstanceGroupsInsert' Text
 igiZone = lens _igiZone (\ s a -> s{_igiZone = a})
 
+-- | Multipart request metadata.
+igiPayload :: Lens' InstanceGroupsInsert' InstanceGroup
+igiPayload
+  = lens _igiPayload (\ s a -> s{_igiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -156,12 +162,6 @@ igiOAuthToken :: Lens' InstanceGroupsInsert' (Maybe OAuthToken)
 igiOAuthToken
   = lens _igiOAuthToken
       (\ s a -> s{_igiOAuthToken = a})
-
--- | Multipart request metadata.
-igiInstanceGroup :: Lens' InstanceGroupsInsert' InstanceGroup
-igiInstanceGroup
-  = lens _igiInstanceGroup
-      (\ s a -> s{_igiInstanceGroup = a})
 
 -- | Selector specifying which fields to include in a partial response.
 igiFields :: Lens' InstanceGroupsInsert' (Maybe Text)
@@ -183,7 +183,7 @@ instance GoogleRequest InstanceGroupsInsert' where
               _igiKey
               _igiOAuthToken
               (Just AltJSON)
-              _igiInstanceGroup
+              _igiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceGroupsInsertResource)

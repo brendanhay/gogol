@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,7 +37,7 @@ module Network.Google.Resource.Genomics.Readgroupsets.Export
     , reQuotaUser
     , rePrettyPrint
     , reUserIP
-    , reExportReadGroupSetsRequest
+    , rePayload
     , reKey
     , reOAuthToken
     , reFields
@@ -67,14 +68,14 @@ type ReadgroupsetsExportResource =
 --
 -- /See:/ 'readgroupsetsExport'' smart constructor.
 data ReadgroupsetsExport' = ReadgroupsetsExport'
-    { _reQuotaUser                  :: !(Maybe Text)
-    , _rePrettyPrint                :: !Bool
-    , _reUserIP                     :: !(Maybe Text)
-    , _reExportReadGroupSetsRequest :: !ExportReadGroupSetsRequest
-    , _reKey                        :: !(Maybe Key)
-    , _reOAuthToken                 :: !(Maybe OAuthToken)
-    , _reFields                     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _reQuotaUser   :: !(Maybe Text)
+    , _rePrettyPrint :: !Bool
+    , _reUserIP      :: !(Maybe Text)
+    , _rePayload     :: !ExportReadGroupSetsRequest
+    , _reKey         :: !(Maybe Key)
+    , _reOAuthToken  :: !(Maybe OAuthToken)
+    , _reFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsExport'' with the minimum fields required to make a request.
 --
@@ -86,7 +87,7 @@ data ReadgroupsetsExport' = ReadgroupsetsExport'
 --
 -- * 'reUserIP'
 --
--- * 'reExportReadGroupSetsRequest'
+-- * 'rePayload'
 --
 -- * 'reKey'
 --
@@ -94,14 +95,14 @@ data ReadgroupsetsExport' = ReadgroupsetsExport'
 --
 -- * 'reFields'
 readgroupsetsExport'
-    :: ExportReadGroupSetsRequest -- ^ 'ExportReadGroupSetsRequest'
+    :: ExportReadGroupSetsRequest -- ^ 'payload'
     -> ReadgroupsetsExport'
-readgroupsetsExport' pReExportReadGroupSetsRequest_ =
+readgroupsetsExport' pRePayload_ =
     ReadgroupsetsExport'
     { _reQuotaUser = Nothing
     , _rePrettyPrint = True
     , _reUserIP = Nothing
-    , _reExportReadGroupSetsRequest = pReExportReadGroupSetsRequest_
+    , _rePayload = pRePayload_
     , _reKey = Nothing
     , _reOAuthToken = Nothing
     , _reFields = Nothing
@@ -126,10 +127,9 @@ reUserIP :: Lens' ReadgroupsetsExport' (Maybe Text)
 reUserIP = lens _reUserIP (\ s a -> s{_reUserIP = a})
 
 -- | Multipart request metadata.
-reExportReadGroupSetsRequest :: Lens' ReadgroupsetsExport' ExportReadGroupSetsRequest
-reExportReadGroupSetsRequest
-  = lens _reExportReadGroupSetsRequest
-      (\ s a -> s{_reExportReadGroupSetsRequest = a})
+rePayload :: Lens' ReadgroupsetsExport' ExportReadGroupSetsRequest
+rePayload
+  = lens _rePayload (\ s a -> s{_rePayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -160,7 +160,7 @@ instance GoogleRequest ReadgroupsetsExport' where
               _reKey
               _reOAuthToken
               (Just AltJSON)
-              _reExportReadGroupSetsRequest
+              _rePayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReadgroupsetsExportResource)

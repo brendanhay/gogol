@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,8 +55,8 @@ type TablesListResource =
          "datasets" :>
            Capture "datasetId" Text :>
              "tables" :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data TablesList' = TablesList'
     , _tlOAuthToken  :: !(Maybe OAuthToken)
     , _tlMaxResults  :: !(Maybe Word32)
     , _tlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesList'' with the minimum fields required to make a request.
 --
@@ -184,8 +185,8 @@ instance GoogleRequest TablesList' where
         type Rs TablesList' = TableList
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u TablesList'{..}
-          = go _tlMaxResults _tlPageToken _tlProjectId
-              _tlDatasetId
+          = go _tlProjectId _tlDatasetId _tlPageToken
+              _tlMaxResults
               _tlQuotaUser
               (Just _tlPrettyPrint)
               _tlUserIP

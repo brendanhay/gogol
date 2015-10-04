@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -30,13 +31,13 @@ module Network.Google.Resource.Compute.Disks.CreateSnapshot
     , DisksCreateSnapshot'
 
     -- * Request Lenses
-    , dcsSnapshot
     , dcsQuotaUser
     , dcsPrettyPrint
     , dcsProject
     , dcsDisk
     , dcsUserIP
     , dcsZone
+    , dcsPayload
     , dcsKey
     , dcsOAuthToken
     , dcsFields
@@ -68,23 +69,21 @@ type DisksCreateSnapshotResource =
 --
 -- /See:/ 'disksCreateSnapshot'' smart constructor.
 data DisksCreateSnapshot' = DisksCreateSnapshot'
-    { _dcsSnapshot    :: !Snapshot
-    , _dcsQuotaUser   :: !(Maybe Text)
+    { _dcsQuotaUser   :: !(Maybe Text)
     , _dcsPrettyPrint :: !Bool
     , _dcsProject     :: !Text
     , _dcsDisk        :: !Text
     , _dcsUserIP      :: !(Maybe Text)
     , _dcsZone        :: !Text
+    , _dcsPayload     :: !Snapshot
     , _dcsKey         :: !(Maybe Key)
     , _dcsOAuthToken  :: !(Maybe OAuthToken)
     , _dcsFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksCreateSnapshot'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'dcsSnapshot'
 --
 -- * 'dcsQuotaUser'
 --
@@ -98,35 +97,32 @@ data DisksCreateSnapshot' = DisksCreateSnapshot'
 --
 -- * 'dcsZone'
 --
+-- * 'dcsPayload'
+--
 -- * 'dcsKey'
 --
 -- * 'dcsOAuthToken'
 --
 -- * 'dcsFields'
 disksCreateSnapshot'
-    :: Snapshot -- ^ 'Snapshot'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'project'
     -> Text -- ^ 'disk'
     -> Text -- ^ 'zone'
+    -> Snapshot -- ^ 'payload'
     -> DisksCreateSnapshot'
-disksCreateSnapshot' pDcsSnapshot_ pDcsProject_ pDcsDisk_ pDcsZone_ =
+disksCreateSnapshot' pDcsProject_ pDcsDisk_ pDcsZone_ pDcsPayload_ =
     DisksCreateSnapshot'
-    { _dcsSnapshot = pDcsSnapshot_
-    , _dcsQuotaUser = Nothing
+    { _dcsQuotaUser = Nothing
     , _dcsPrettyPrint = True
     , _dcsProject = pDcsProject_
     , _dcsDisk = pDcsDisk_
     , _dcsUserIP = Nothing
     , _dcsZone = pDcsZone_
+    , _dcsPayload = pDcsPayload_
     , _dcsKey = Nothing
     , _dcsOAuthToken = Nothing
     , _dcsFields = Nothing
     }
-
--- | Multipart request metadata.
-dcsSnapshot :: Lens' DisksCreateSnapshot' Snapshot
-dcsSnapshot
-  = lens _dcsSnapshot (\ s a -> s{_dcsSnapshot = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -160,6 +156,11 @@ dcsUserIP
 dcsZone :: Lens' DisksCreateSnapshot' Text
 dcsZone = lens _dcsZone (\ s a -> s{_dcsZone = a})
 
+-- | Multipart request metadata.
+dcsPayload :: Lens' DisksCreateSnapshot' Snapshot
+dcsPayload
+  = lens _dcsPayload (\ s a -> s{_dcsPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -192,7 +193,7 @@ instance GoogleRequest DisksCreateSnapshot' where
               _dcsKey
               _dcsOAuthToken
               (Just AltJSON)
-              _dcsSnapshot
+              _dcsPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DisksCreateSnapshotResource)

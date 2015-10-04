@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,8 +38,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKs.Addexternallyhosted
     , eapkaPrettyPrint
     , eapkaPackageName
     , eapkaUserIP
+    , eapkaPayload
     , eapkaKey
-    , eapkaAPKsAddExternallyHostedRequest
     , eapkaOAuthToken
     , eapkaEditId
     , eapkaFields
@@ -72,16 +73,16 @@ type EditsAPKsAddexternallyhostedResource =
 --
 -- /See:/ 'editsAPKsAddexternallyhosted'' smart constructor.
 data EditsAPKsAddexternallyhosted' = EditsAPKsAddexternallyhosted'
-    { _eapkaQuotaUser                      :: !(Maybe Text)
-    , _eapkaPrettyPrint                    :: !Bool
-    , _eapkaPackageName                    :: !Text
-    , _eapkaUserIP                         :: !(Maybe Text)
-    , _eapkaKey                            :: !(Maybe Key)
-    , _eapkaAPKsAddExternallyHostedRequest :: !APKsAddExternallyHostedRequest
-    , _eapkaOAuthToken                     :: !(Maybe OAuthToken)
-    , _eapkaEditId                         :: !Text
-    , _eapkaFields                         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _eapkaQuotaUser   :: !(Maybe Text)
+    , _eapkaPrettyPrint :: !Bool
+    , _eapkaPackageName :: !Text
+    , _eapkaUserIP      :: !(Maybe Text)
+    , _eapkaPayload     :: !APKsAddExternallyHostedRequest
+    , _eapkaKey         :: !(Maybe Key)
+    , _eapkaOAuthToken  :: !(Maybe OAuthToken)
+    , _eapkaEditId      :: !Text
+    , _eapkaFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsAPKsAddexternallyhosted'' with the minimum fields required to make a request.
 --
@@ -95,9 +96,9 @@ data EditsAPKsAddexternallyhosted' = EditsAPKsAddexternallyhosted'
 --
 -- * 'eapkaUserIP'
 --
--- * 'eapkaKey'
+-- * 'eapkaPayload'
 --
--- * 'eapkaAPKsAddExternallyHostedRequest'
+-- * 'eapkaKey'
 --
 -- * 'eapkaOAuthToken'
 --
@@ -106,17 +107,17 @@ data EditsAPKsAddexternallyhosted' = EditsAPKsAddexternallyhosted'
 -- * 'eapkaFields'
 editsAPKsAddexternallyhosted'
     :: Text -- ^ 'packageName'
-    -> APKsAddExternallyHostedRequest -- ^ 'APKsAddExternallyHostedRequest'
+    -> APKsAddExternallyHostedRequest -- ^ 'payload'
     -> Text -- ^ 'editId'
     -> EditsAPKsAddexternallyhosted'
-editsAPKsAddexternallyhosted' pEapkaPackageName_ pEapkaAPKsAddExternallyHostedRequest_ pEapkaEditId_ =
+editsAPKsAddexternallyhosted' pEapkaPackageName_ pEapkaPayload_ pEapkaEditId_ =
     EditsAPKsAddexternallyhosted'
     { _eapkaQuotaUser = Nothing
     , _eapkaPrettyPrint = True
     , _eapkaPackageName = pEapkaPackageName_
     , _eapkaUserIP = Nothing
+    , _eapkaPayload = pEapkaPayload_
     , _eapkaKey = Nothing
-    , _eapkaAPKsAddExternallyHostedRequest = pEapkaAPKsAddExternallyHostedRequest_
     , _eapkaOAuthToken = Nothing
     , _eapkaEditId = pEapkaEditId_
     , _eapkaFields = Nothing
@@ -149,18 +150,16 @@ eapkaUserIP :: Lens' EditsAPKsAddexternallyhosted' (Maybe Text)
 eapkaUserIP
   = lens _eapkaUserIP (\ s a -> s{_eapkaUserIP = a})
 
+-- | Multipart request metadata.
+eapkaPayload :: Lens' EditsAPKsAddexternallyhosted' APKsAddExternallyHostedRequest
+eapkaPayload
+  = lens _eapkaPayload (\ s a -> s{_eapkaPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 eapkaKey :: Lens' EditsAPKsAddexternallyhosted' (Maybe Key)
 eapkaKey = lens _eapkaKey (\ s a -> s{_eapkaKey = a})
-
--- | Multipart request metadata.
-eapkaAPKsAddExternallyHostedRequest :: Lens' EditsAPKsAddexternallyhosted' APKsAddExternallyHostedRequest
-eapkaAPKsAddExternallyHostedRequest
-  = lens _eapkaAPKsAddExternallyHostedRequest
-      (\ s a ->
-         s{_eapkaAPKsAddExternallyHostedRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 eapkaOAuthToken :: Lens' EditsAPKsAddexternallyhosted' (Maybe OAuthToken)
@@ -197,7 +196,7 @@ instance GoogleRequest EditsAPKsAddexternallyhosted'
               _eapkaKey
               _eapkaOAuthToken
               (Just AltJSON)
-              _eapkaAPKsAddExternallyHostedRequest
+              _eapkaPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EditsAPKsAddexternallyhostedResource)

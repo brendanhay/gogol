@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,6 +38,7 @@ module Network.Google.Resource.Drive.Files.Patch
     , fpUserIP
     , fpPinned
     , fpTimedTextLanguage
+    , fpPayload
     , fpUpdateViewedDate
     , fpRemoveParents
     , fpModifiedDateBehavior
@@ -50,7 +52,6 @@ module Network.Google.Resource.Drive.Files.Patch
     , fpOAuthToken
     , fpAddParents
     , fpOCR
-    , fpFile
     , fpFields
     ) where
 
@@ -62,21 +63,21 @@ import           Network.Google.Prelude
 type FilesPatchResource =
      "files" :>
        Capture "fileId" Text :>
-         QueryParam "addParents" Text :>
-           QueryParam "convert" Bool :>
-             QueryParam "modifiedDateBehavior"
-               DriveFilesPatchModifiedDateBehavior
-               :>
-               QueryParam "newRevision" Bool :>
-                 QueryParam "ocr" Bool :>
-                   QueryParam "ocrLanguage" Text :>
-                     QueryParam "pinned" Bool :>
-                       QueryParam "removeParents" Text :>
-                         QueryParam "setModifiedDate" Bool :>
-                           QueryParam "timedTextLanguage" Text :>
-                             QueryParam "timedTextTrackName" Text :>
-                               QueryParam "updateViewedDate" Bool :>
-                                 QueryParam "useContentAsIndexableText" Bool :>
+         QueryParam "newRevision" Bool :>
+           QueryParam "pinned" Bool :>
+             QueryParam "timedTextLanguage" Text :>
+               QueryParam "updateViewedDate" Bool :>
+                 QueryParam "removeParents" Text :>
+                   QueryParam "modifiedDateBehavior"
+                     ModifiedDateBehavior
+                     :>
+                     QueryParam "useContentAsIndexableText" Bool :>
+                       QueryParam "timedTextTrackName" Text :>
+                         QueryParam "ocrLanguage" Text :>
+                           QueryParam "convert" Bool :>
+                             QueryParam "setModifiedDate" Bool :>
+                               QueryParam "addParents" Text :>
+                                 QueryParam "ocr" Bool :>
                                    QueryParam "quotaUser" Text :>
                                      QueryParam "prettyPrint" Bool :>
                                        QueryParam "userIp" Text :>
@@ -99,9 +100,10 @@ data FilesPatch' = FilesPatch'
     , _fpUserIP                    :: !(Maybe Text)
     , _fpPinned                    :: !Bool
     , _fpTimedTextLanguage         :: !(Maybe Text)
+    , _fpPayload                   :: !File
     , _fpUpdateViewedDate          :: !Bool
     , _fpRemoveParents             :: !(Maybe Text)
-    , _fpModifiedDateBehavior      :: !(Maybe DriveFilesPatchModifiedDateBehavior)
+    , _fpModifiedDateBehavior      :: !(Maybe ModifiedDateBehavior)
     , _fpUseContentAsIndexableText :: !Bool
     , _fpTimedTextTrackName        :: !(Maybe Text)
     , _fpOCRLanguage               :: !(Maybe Text)
@@ -112,9 +114,8 @@ data FilesPatch' = FilesPatch'
     , _fpOAuthToken                :: !(Maybe OAuthToken)
     , _fpAddParents                :: !(Maybe Text)
     , _fpOCR                       :: !Bool
-    , _fpFile                      :: !File
     , _fpFields                    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesPatch'' with the minimum fields required to make a request.
 --
@@ -131,6 +132,8 @@ data FilesPatch' = FilesPatch'
 -- * 'fpPinned'
 --
 -- * 'fpTimedTextLanguage'
+--
+-- * 'fpPayload'
 --
 -- * 'fpUpdateViewedDate'
 --
@@ -158,14 +161,12 @@ data FilesPatch' = FilesPatch'
 --
 -- * 'fpOCR'
 --
--- * 'fpFile'
---
 -- * 'fpFields'
 filesPatch'
-    :: Text -- ^ 'fileId'
-    -> File -- ^ 'File'
+    :: File -- ^ 'payload'
+    -> Text -- ^ 'fileId'
     -> FilesPatch'
-filesPatch' pFpFileId_ pFpFile_ =
+filesPatch' pFpPayload_ pFpFileId_ =
     FilesPatch'
     { _fpQuotaUser = Nothing
     , _fpNewRevision = True
@@ -173,6 +174,7 @@ filesPatch' pFpFileId_ pFpFile_ =
     , _fpUserIP = Nothing
     , _fpPinned = False
     , _fpTimedTextLanguage = Nothing
+    , _fpPayload = pFpPayload_
     , _fpUpdateViewedDate = True
     , _fpRemoveParents = Nothing
     , _fpModifiedDateBehavior = Nothing
@@ -186,7 +188,6 @@ filesPatch' pFpFileId_ pFpFile_ =
     , _fpOAuthToken = Nothing
     , _fpAddParents = Nothing
     , _fpOCR = False
-    , _fpFile = pFpFile_
     , _fpFields = Nothing
     }
 
@@ -231,6 +232,11 @@ fpTimedTextLanguage
   = lens _fpTimedTextLanguage
       (\ s a -> s{_fpTimedTextLanguage = a})
 
+-- | Multipart request metadata.
+fpPayload :: Lens' FilesPatch' File
+fpPayload
+  = lens _fpPayload (\ s a -> s{_fpPayload = a})
+
 -- | Whether to update the view date after successfully updating the file.
 fpUpdateViewedDate :: Lens' FilesPatch' Bool
 fpUpdateViewedDate
@@ -245,7 +251,7 @@ fpRemoveParents
 
 -- | Determines the behavior in which modifiedDate is updated. This overrides
 -- setModifiedDate.
-fpModifiedDateBehavior :: Lens' FilesPatch' (Maybe DriveFilesPatchModifiedDateBehavior)
+fpModifiedDateBehavior :: Lens' FilesPatch' (Maybe ModifiedDateBehavior)
 fpModifiedDateBehavior
   = lens _fpModifiedDateBehavior
       (\ s a -> s{_fpModifiedDateBehavior = a})
@@ -304,10 +310,6 @@ fpAddParents
 fpOCR :: Lens' FilesPatch' Bool
 fpOCR = lens _fpOCR (\ s a -> s{_fpOCR = a})
 
--- | Multipart request metadata.
-fpFile :: Lens' FilesPatch' File
-fpFile = lens _fpFile (\ s a -> s{_fpFile = a})
-
 -- | Selector specifying which fields to include in a partial response.
 fpFields :: Lens' FilesPatch' (Maybe Text)
 fpFields = lens _fpFields (\ s a -> s{_fpFields = a})
@@ -320,19 +322,18 @@ instance GoogleRequest FilesPatch' where
         type Rs FilesPatch' = File
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesPatch'{..}
-          = go _fpAddParents (Just _fpConvert)
-              _fpModifiedDateBehavior
-              (Just _fpNewRevision)
-              (Just _fpOCR)
-              _fpOCRLanguage
-              (Just _fpPinned)
-              _fpRemoveParents
-              (Just _fpSetModifiedDate)
+          = go _fpFileId (Just _fpNewRevision) (Just _fpPinned)
               _fpTimedTextLanguage
-              _fpTimedTextTrackName
               (Just _fpUpdateViewedDate)
+              _fpRemoveParents
+              _fpModifiedDateBehavior
               (Just _fpUseContentAsIndexableText)
-              _fpFileId
+              _fpTimedTextTrackName
+              _fpOCRLanguage
+              (Just _fpConvert)
+              (Just _fpSetModifiedDate)
+              _fpAddParents
+              (Just _fpOCR)
               _fpQuotaUser
               (Just _fpPrettyPrint)
               _fpUserIP
@@ -340,7 +341,7 @@ instance GoogleRequest FilesPatch' where
               _fpKey
               _fpOAuthToken
               (Just AltJSON)
-              _fpFile
+              _fpPayload
           where go
                   = clientWithRoute (Proxy :: Proxy FilesPatchResource)
                       r

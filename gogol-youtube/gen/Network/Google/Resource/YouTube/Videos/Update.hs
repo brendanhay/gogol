@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.YouTube.Videos.Update
     , vuPart
     , vuPrettyPrint
     , vuUserIP
-    , vuVideo
+    , vuPayload
     , vuOnBehalfOfContentOwner
     , vuKey
     , vuOAuthToken
@@ -48,8 +49,8 @@ import           Network.Google.YouTube.Types
 -- 'VideosUpdate'' request conforms to.
 type VideosUpdateResource =
      "videos" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -67,12 +68,12 @@ data VideosUpdate' = VideosUpdate'
     , _vuPart                   :: !Text
     , _vuPrettyPrint            :: !Bool
     , _vuUserIP                 :: !(Maybe Text)
-    , _vuVideo                  :: !Video
+    , _vuPayload                :: !Video
     , _vuOnBehalfOfContentOwner :: !(Maybe Text)
     , _vuKey                    :: !(Maybe Key)
     , _vuOAuthToken             :: !(Maybe OAuthToken)
     , _vuFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosUpdate'' with the minimum fields required to make a request.
 --
@@ -86,7 +87,7 @@ data VideosUpdate' = VideosUpdate'
 --
 -- * 'vuUserIP'
 --
--- * 'vuVideo'
+-- * 'vuPayload'
 --
 -- * 'vuOnBehalfOfContentOwner'
 --
@@ -97,15 +98,15 @@ data VideosUpdate' = VideosUpdate'
 -- * 'vuFields'
 videosUpdate'
     :: Text -- ^ 'part'
-    -> Video -- ^ 'Video'
+    -> Video -- ^ 'payload'
     -> VideosUpdate'
-videosUpdate' pVuPart_ pVuVideo_ =
+videosUpdate' pVuPart_ pVuPayload_ =
     VideosUpdate'
     { _vuQuotaUser = Nothing
     , _vuPart = pVuPart_
     , _vuPrettyPrint = True
     , _vuUserIP = Nothing
-    , _vuVideo = pVuVideo_
+    , _vuPayload = pVuPayload_
     , _vuOnBehalfOfContentOwner = Nothing
     , _vuKey = Nothing
     , _vuOAuthToken = Nothing
@@ -151,8 +152,9 @@ vuUserIP :: Lens' VideosUpdate' (Maybe Text)
 vuUserIP = lens _vuUserIP (\ s a -> s{_vuUserIP = a})
 
 -- | Multipart request metadata.
-vuVideo :: Lens' VideosUpdate' Video
-vuVideo = lens _vuVideo (\ s a -> s{_vuVideo = a})
+vuPayload :: Lens' VideosUpdate' Video
+vuPayload
+  = lens _vuPayload (\ s a -> s{_vuPayload = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -192,7 +194,7 @@ instance GoogleRequest VideosUpdate' where
         type Rs VideosUpdate' = Video
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u VideosUpdate'{..}
-          = go _vuOnBehalfOfContentOwner (Just _vuPart)
+          = go (Just _vuPart) _vuOnBehalfOfContentOwner
               _vuQuotaUser
               (Just _vuPrettyPrint)
               _vuUserIP
@@ -200,7 +202,7 @@ instance GoogleRequest VideosUpdate' where
               _vuKey
               _vuOAuthToken
               (Just AltJSON)
-              _vuVideo
+              _vuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VideosUpdateResource)

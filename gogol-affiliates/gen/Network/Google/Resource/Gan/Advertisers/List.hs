@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,15 +58,13 @@ type AdvertisersListResource =
      Capture "role" GanAdvertisersListRole :>
        Capture "roleId" Text :>
          "advertisers" :>
-           QueryParam "advertiserCategory" Text :>
-             QueryParam "maxResults" Word32 :>
+           QueryParam "relationshipStatus" RelationshipStatus :>
+             QueryParam "minSevenDayEpc" Double :>
                QueryParam "minNinetyDayEpc" Double :>
                  QueryParam "minPayoutRank" Int32 :>
-                   QueryParam "minSevenDayEpc" Double :>
+                   QueryParam "advertiserCategory" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "relationshipStatus"
-                         GanAdvertisersListRelationshipStatus
-                         :>
+                       QueryParam "maxResults" Word32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -83,7 +82,7 @@ data AdvertisersList' = AdvertisersList'
     { _alQuotaUser          :: !(Maybe Text)
     , _alPrettyPrint        :: !Bool
     , _alUserIP             :: !(Maybe Text)
-    , _alRelationshipStatus :: !(Maybe GanAdvertisersListRelationshipStatus)
+    , _alRelationshipStatus :: !(Maybe RelationshipStatus)
     , _alMinSevenDayEpc     :: !(Maybe Double)
     , _alRoleId             :: !Text
     , _alMinNinetyDayEpc    :: !(Maybe Double)
@@ -95,7 +94,7 @@ data AdvertisersList' = AdvertisersList'
     , _alOAuthToken         :: !(Maybe OAuthToken)
     , _alMaxResults         :: !(Maybe Word32)
     , _alFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersList'' with the minimum fields required to make a request.
 --
@@ -173,7 +172,7 @@ alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | Filters out all advertisers for which do not have the given relationship
 -- status with the requesting publisher.
-alRelationshipStatus :: Lens' AdvertisersList' (Maybe GanAdvertisersListRelationshipStatus)
+alRelationshipStatus :: Lens' AdvertisersList' (Maybe RelationshipStatus)
 alRelationshipStatus
   = lens _alRelationshipStatus
       (\ s a -> s{_alRelationshipStatus = a})
@@ -254,14 +253,13 @@ instance GoogleRequest AdvertisersList' where
         type Rs AdvertisersList' = Advertisers
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u AdvertisersList'{..}
-          = go _alAdvertiserCategory _alMaxResults
+          = go _alRole _alRoleId _alRelationshipStatus
+              _alMinSevenDayEpc
               _alMinNinetyDayEpc
               _alMinPayoutRank
-              _alMinSevenDayEpc
+              _alAdvertiserCategory
               _alPageToken
-              _alRelationshipStatus
-              _alRole
-              _alRoleId
+              _alMaxResults
               _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP

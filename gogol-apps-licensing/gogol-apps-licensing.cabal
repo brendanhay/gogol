@@ -36,7 +36,7 @@ library
         , Network.Google.Resource.Licensing.LicenseAssignments.Get
         , Network.Google.Resource.Licensing.LicenseAssignments.Insert
         , Network.Google.Resource.Licensing.LicenseAssignments.ListForProduct
-        , Network.Google.Resource.Licensing.LicenseAssignments.ListForProductAndSku
+        , Network.Google.Resource.Licensing.LicenseAssignments.ListForProductAndSKU
         , Network.Google.Resource.Licensing.LicenseAssignments.Patch
         , Network.Google.Resource.Licensing.LicenseAssignments.Update
 

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -74,7 +75,7 @@ data RealtimeUpdate' = RealtimeUpdate'
     , _rFileId       :: !Text
     , _rOAuthToken   :: !(Maybe OAuthToken)
     , _rFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RealtimeUpdate'' with the minimum fields required to make a request.
 --
@@ -171,13 +172,14 @@ instance GoogleRequest RealtimeUpdate' where
         type Rs RealtimeUpdate' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RealtimeUpdate'{..}
-          = go _rBaseRevision _rMedia _rFileId _rQuotaUser
+          = go _rFileId _rBaseRevision _rQuotaUser
               (Just _rPrettyPrint)
               _rUserIP
               _rFields
               _rKey
               _rOAuthToken
               (Just AltJSON)
+              _rMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RealtimeUpdateResource)

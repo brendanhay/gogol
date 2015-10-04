@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,7 +37,7 @@ module Network.Google.Resource.AndroidEnterprise.Installs.Update
     , iuPrettyPrint
     , iuEnterpriseId
     , iuUserIP
-    , iuInstall
+    , iuPayload
     , iuUserId
     , iuInstallId
     , iuKey
@@ -79,14 +80,14 @@ data InstallsUpdate' = InstallsUpdate'
     , _iuPrettyPrint  :: !Bool
     , _iuEnterpriseId :: !Text
     , _iuUserIP       :: !(Maybe Text)
-    , _iuInstall      :: !Install
+    , _iuPayload      :: !Install
     , _iuUserId       :: !Text
     , _iuInstallId    :: !Text
     , _iuKey          :: !(Maybe Key)
     , _iuDeviceId     :: !Text
     , _iuOAuthToken   :: !(Maybe OAuthToken)
     , _iuFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstallsUpdate'' with the minimum fields required to make a request.
 --
@@ -100,7 +101,7 @@ data InstallsUpdate' = InstallsUpdate'
 --
 -- * 'iuUserIP'
 --
--- * 'iuInstall'
+-- * 'iuPayload'
 --
 -- * 'iuUserId'
 --
@@ -115,18 +116,18 @@ data InstallsUpdate' = InstallsUpdate'
 -- * 'iuFields'
 installsUpdate'
     :: Text -- ^ 'enterpriseId'
-    -> Install -- ^ 'Install'
+    -> Install -- ^ 'payload'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'installId'
     -> Text -- ^ 'deviceId'
     -> InstallsUpdate'
-installsUpdate' pIuEnterpriseId_ pIuInstall_ pIuUserId_ pIuInstallId_ pIuDeviceId_ =
+installsUpdate' pIuEnterpriseId_ pIuPayload_ pIuUserId_ pIuInstallId_ pIuDeviceId_ =
     InstallsUpdate'
     { _iuQuotaUser = Nothing
     , _iuPrettyPrint = True
     , _iuEnterpriseId = pIuEnterpriseId_
     , _iuUserIP = Nothing
-    , _iuInstall = pIuInstall_
+    , _iuPayload = pIuPayload_
     , _iuUserId = pIuUserId_
     , _iuInstallId = pIuInstallId_
     , _iuKey = Nothing
@@ -160,9 +161,9 @@ iuUserIP :: Lens' InstallsUpdate' (Maybe Text)
 iuUserIP = lens _iuUserIP (\ s a -> s{_iuUserIP = a})
 
 -- | Multipart request metadata.
-iuInstall :: Lens' InstallsUpdate' Install
-iuInstall
-  = lens _iuInstall (\ s a -> s{_iuInstall = a})
+iuPayload :: Lens' InstallsUpdate' Install
+iuPayload
+  = lens _iuPayload (\ s a -> s{_iuPayload = a})
 
 -- | The ID of the user.
 iuUserId :: Lens' InstallsUpdate' Text
@@ -212,7 +213,7 @@ instance GoogleRequest InstallsUpdate' where
               _iuKey
               _iuOAuthToken
               (Just AltJSON)
-              _iuInstall
+              _iuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstallsUpdateResource)

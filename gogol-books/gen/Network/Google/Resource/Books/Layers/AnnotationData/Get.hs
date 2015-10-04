@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -60,13 +61,13 @@ type LayersAnnotationDataGetResource =
            Capture "layerId" Text :>
              "data" :>
                Capture "annotationDataId" Text :>
-                 QueryParam "allowWebDefinitions" Bool :>
-                   QueryParam "h" Int32 :>
-                     QueryParam "locale" Text :>
-                       QueryParam "scale" Int32 :>
-                         QueryParam "source" Text :>
-                           QueryParam "w" Int32 :>
-                             QueryParam "contentVersion" Text :>
+                 QueryParam "contentVersion" Text :>
+                   QueryParam "w" Int32 :>
+                     QueryParam "scale" Int32 :>
+                       QueryParam "locale" Text :>
+                         QueryParam "allowWebDefinitions" Bool :>
+                           QueryParam "source" Text :>
+                             QueryParam "h" Int32 :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "userIp" Text :>
@@ -96,7 +97,7 @@ data LayersAnnotationDataGet' = LayersAnnotationDataGet'
     , _ladgOAuthToken          :: !(Maybe OAuthToken)
     , _ladgLayerId             :: !Text
     , _ladgFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersAnnotationDataGet'' with the minimum fields required to make a request.
 --
@@ -258,14 +259,14 @@ instance GoogleRequest LayersAnnotationDataGet' where
         type Rs LayersAnnotationDataGet' = Annotationdata
         request = requestWithRoute defReq booksURL
         requestWithRoute r u LayersAnnotationDataGet'{..}
-          = go _ladgAllowWebDefinitions _ladgH _ladgLocale
-              _ladgScale
-              _ladgSource
-              _ladgW
-              _ladgVolumeId
-              _ladgLayerId
-              _ladgAnnotationDataId
+          = go _ladgVolumeId _ladgLayerId _ladgAnnotationDataId
               (Just _ladgContentVersion)
+              _ladgW
+              _ladgScale
+              _ladgLocale
+              _ladgAllowWebDefinitions
+              _ladgSource
+              _ladgH
               _ladgQuotaUser
               (Just _ladgPrettyPrint)
               _ladgUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,19 +59,19 @@ import           Network.Google.Prelude
 -- 'AssetsList'' request conforms to.
 type AssetsListResource =
      "assets" :>
-       QueryParam "bbox" Text :>
-         QueryParam "createdAfter" DateTime' :>
-           QueryParam "createdBefore" DateTime' :>
-             QueryParam "creatorEmail" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "modifiedAfter" DateTime' :>
-                   QueryParam "modifiedBefore" DateTime' :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "projectId" Text :>
-                         QueryParam "role" MapsEngineAssetsListRole :>
-                           QueryParam "search" Text :>
+       QueryParam "createdAfter" DateTime' :>
+         QueryParam "creatorEmail" Text :>
+           QueryParam "role" MapsEngineAssetsListRole :>
+             QueryParam "bbox" Text :>
+               QueryParam "modifiedAfter" DateTime' :>
+                 QueryParam "modifiedBefore" DateTime' :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "projectId" Text :>
+                       QueryParam "type" Text :>
+                         QueryParam "search" Text :>
+                           QueryParam "maxResults" Word32 :>
                              QueryParam "tags" Text :>
-                               QueryParam "type" Text :>
+                               QueryParam "createdBefore" DateTime' :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
@@ -104,7 +105,7 @@ data AssetsList' = AssetsList'
     , _alTags           :: !(Maybe Text)
     , _alFields         :: !(Maybe Text)
     , _alCreatedBefore  :: !(Maybe DateTime')
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AssetsList'' with the minimum fields required to make a request.
 --
@@ -299,17 +300,16 @@ instance GoogleRequest AssetsList' where
         type Rs AssetsList' = AssetsListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u AssetsList'{..}
-          = go _alBbox _alCreatedAfter _alCreatedBefore
-              _alCreatorEmail
-              _alMaxResults
+          = go _alCreatedAfter _alCreatorEmail _alRole _alBbox
               _alModifiedAfter
               _alModifiedBefore
               _alPageToken
               _alProjectId
-              _alRole
-              _alSearch
-              _alTags
               _alType
+              _alSearch
+              _alMaxResults
+              _alTags
+              _alCreatedBefore
               _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP

@@ -18,7 +18,7 @@ module Network.Google.PageSpeed.Types.Sum where
 import           Network.Google.Prelude
 
 -- | The analysis strategy to use
-data PagespeedonlinePagespeedapiRunpagespeedStrategy
+data Strategy
     = Desktop
       -- ^ @desktop@
       -- Fetch and analyze the URL for desktop browsers
@@ -27,21 +27,21 @@ data PagespeedonlinePagespeedapiRunpagespeedStrategy
       -- Fetch and analyze the URL for mobile devices
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable PagespeedonlinePagespeedapiRunpagespeedStrategy
+instance Hashable Strategy
 
-instance FromText PagespeedonlinePagespeedapiRunpagespeedStrategy where
+instance FromText Strategy where
     fromText = \case
         "desktop" -> Just Desktop
         "mobile" -> Just Mobile
         _ -> Nothing
 
-instance ToText PagespeedonlinePagespeedapiRunpagespeedStrategy where
+instance ToText Strategy where
     toText = \case
         Desktop -> "desktop"
         Mobile -> "mobile"
 
-instance FromJSON PagespeedonlinePagespeedapiRunpagespeedStrategy where
-    parseJSON = parseJSONText "PagespeedonlinePagespeedapiRunpagespeedStrategy"
+instance FromJSON Strategy where
+    parseJSON = parseJSONText "Strategy"
 
-instance ToJSON PagespeedonlinePagespeedapiRunpagespeedStrategy where
+instance ToJSON Strategy where
     toJSON = toJSONText

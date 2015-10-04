@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.AdExchangeBuyer.Budget.Patch
     -- * Request Lenses
     , bpQuotaUser
     , bpPrettyPrint
-    , bpBudget
     , bpUserIP
+    , bpPayload
     , bpAccountId
     , bpKey
     , bpOAuthToken
@@ -69,14 +70,14 @@ type BudgetPatchResource =
 data BudgetPatch' = BudgetPatch'
     { _bpQuotaUser   :: !(Maybe Text)
     , _bpPrettyPrint :: !Bool
-    , _bpBudget      :: !Budget
     , _bpUserIP      :: !(Maybe Text)
+    , _bpPayload     :: !Budget
     , _bpAccountId   :: !Int64
     , _bpKey         :: !(Maybe Key)
     , _bpOAuthToken  :: !(Maybe OAuthToken)
     , _bpBillingId   :: !Int64
     , _bpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BudgetPatch'' with the minimum fields required to make a request.
 --
@@ -86,9 +87,9 @@ data BudgetPatch' = BudgetPatch'
 --
 -- * 'bpPrettyPrint'
 --
--- * 'bpBudget'
---
 -- * 'bpUserIP'
+--
+-- * 'bpPayload'
 --
 -- * 'bpAccountId'
 --
@@ -100,16 +101,16 @@ data BudgetPatch' = BudgetPatch'
 --
 -- * 'bpFields'
 budgetPatch'
-    :: Budget -- ^ 'Budget'
+    :: Budget -- ^ 'payload'
     -> Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'billingId'
     -> BudgetPatch'
-budgetPatch' pBpBudget_ pBpAccountId_ pBpBillingId_ =
+budgetPatch' pBpPayload_ pBpAccountId_ pBpBillingId_ =
     BudgetPatch'
     { _bpQuotaUser = Nothing
     , _bpPrettyPrint = True
-    , _bpBudget = pBpBudget_
     , _bpUserIP = Nothing
+    , _bpPayload = pBpPayload_
     , _bpAccountId = pBpAccountId_
     , _bpKey = Nothing
     , _bpOAuthToken = Nothing
@@ -130,14 +131,15 @@ bpPrettyPrint
   = lens _bpPrettyPrint
       (\ s a -> s{_bpPrettyPrint = a})
 
--- | Multipart request metadata.
-bpBudget :: Lens' BudgetPatch' Budget
-bpBudget = lens _bpBudget (\ s a -> s{_bpBudget = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 bpUserIP :: Lens' BudgetPatch' (Maybe Text)
 bpUserIP = lens _bpUserIP (\ s a -> s{_bpUserIP = a})
+
+-- | Multipart request metadata.
+bpPayload :: Lens' BudgetPatch' Budget
+bpPayload
+  = lens _bpPayload (\ s a -> s{_bpPayload = a})
 
 -- | The account id associated with the budget being updated.
 bpAccountId :: Lens' BudgetPatch' Int64
@@ -179,7 +181,7 @@ instance GoogleRequest BudgetPatch' where
               _bpKey
               _bpOAuthToken
               (Just AltJSON)
-              _bpBudget
+              _bpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BudgetPatchResource)

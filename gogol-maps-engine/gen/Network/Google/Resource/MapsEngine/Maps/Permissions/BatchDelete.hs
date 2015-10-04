@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -30,10 +31,10 @@ module Network.Google.Resource.MapsEngine.Maps.Permissions.BatchDelete
     , MapsPermissionsBatchDelete'
 
     -- * Request Lenses
-    , mpbdPermissionsBatchDeleteRequest
     , mpbdQuotaUser
     , mpbdPrettyPrint
     , mpbdUserIP
+    , mpbdPayload
     , mpbdKey
     , mpbdId
     , mpbdOAuthToken
@@ -64,27 +65,27 @@ type MapsPermissionsBatchDeleteResource =
 --
 -- /See:/ 'mapsPermissionsBatchDelete'' smart constructor.
 data MapsPermissionsBatchDelete' = MapsPermissionsBatchDelete'
-    { _mpbdPermissionsBatchDeleteRequest :: !PermissionsBatchDeleteRequest
-    , _mpbdQuotaUser                     :: !(Maybe Text)
-    , _mpbdPrettyPrint                   :: !Bool
-    , _mpbdUserIP                        :: !(Maybe Text)
-    , _mpbdKey                           :: !(Maybe Key)
-    , _mpbdId                            :: !Text
-    , _mpbdOAuthToken                    :: !(Maybe OAuthToken)
-    , _mpbdFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mpbdQuotaUser   :: !(Maybe Text)
+    , _mpbdPrettyPrint :: !Bool
+    , _mpbdUserIP      :: !(Maybe Text)
+    , _mpbdPayload     :: !PermissionsBatchDeleteRequest
+    , _mpbdKey         :: !(Maybe Key)
+    , _mpbdId          :: !Text
+    , _mpbdOAuthToken  :: !(Maybe OAuthToken)
+    , _mpbdFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsPermissionsBatchDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'mpbdPermissionsBatchDeleteRequest'
 --
 -- * 'mpbdQuotaUser'
 --
 -- * 'mpbdPrettyPrint'
 --
 -- * 'mpbdUserIP'
+--
+-- * 'mpbdPayload'
 --
 -- * 'mpbdKey'
 --
@@ -94,26 +95,20 @@ data MapsPermissionsBatchDelete' = MapsPermissionsBatchDelete'
 --
 -- * 'mpbdFields'
 mapsPermissionsBatchDelete'
-    :: PermissionsBatchDeleteRequest -- ^ 'PermissionsBatchDeleteRequest'
+    :: PermissionsBatchDeleteRequest -- ^ 'payload'
     -> Text -- ^ 'id'
     -> MapsPermissionsBatchDelete'
-mapsPermissionsBatchDelete' pMpbdPermissionsBatchDeleteRequest_ pMpbdId_ =
+mapsPermissionsBatchDelete' pMpbdPayload_ pMpbdId_ =
     MapsPermissionsBatchDelete'
-    { _mpbdPermissionsBatchDeleteRequest = pMpbdPermissionsBatchDeleteRequest_
-    , _mpbdQuotaUser = Nothing
+    { _mpbdQuotaUser = Nothing
     , _mpbdPrettyPrint = True
     , _mpbdUserIP = Nothing
+    , _mpbdPayload = pMpbdPayload_
     , _mpbdKey = Nothing
     , _mpbdId = pMpbdId_
     , _mpbdOAuthToken = Nothing
     , _mpbdFields = Nothing
     }
-
--- | Multipart request metadata.
-mpbdPermissionsBatchDeleteRequest :: Lens' MapsPermissionsBatchDelete' PermissionsBatchDeleteRequest
-mpbdPermissionsBatchDeleteRequest
-  = lens _mpbdPermissionsBatchDeleteRequest
-      (\ s a -> s{_mpbdPermissionsBatchDeleteRequest = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -134,6 +129,11 @@ mpbdPrettyPrint
 mpbdUserIP :: Lens' MapsPermissionsBatchDelete' (Maybe Text)
 mpbdUserIP
   = lens _mpbdUserIP (\ s a -> s{_mpbdUserIP = a})
+
+-- | Multipart request metadata.
+mpbdPayload :: Lens' MapsPermissionsBatchDelete' PermissionsBatchDeleteRequest
+mpbdPayload
+  = lens _mpbdPayload (\ s a -> s{_mpbdPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -172,7 +172,7 @@ instance GoogleRequest MapsPermissionsBatchDelete'
               _mpbdKey
               _mpbdOAuthToken
               (Just AltJSON)
-              _mpbdPermissionsBatchDeleteRequest
+              _mpbdPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MapsPermissionsBatchDeleteResource)

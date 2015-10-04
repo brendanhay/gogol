@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.MapsEngine.Projects.Icons.Create
     , picQuotaUser
     , picPrettyPrint
     , picUserIP
-    , picIcon
+    , picPayload
     , picMedia
     , picKey
     , picProjectId
@@ -67,13 +68,13 @@ data ProjectsIconsCreate' = ProjectsIconsCreate'
     { _picQuotaUser   :: !(Maybe Text)
     , _picPrettyPrint :: !Bool
     , _picUserIP      :: !(Maybe Text)
-    , _picIcon        :: !Icon
+    , _picPayload     :: !Icon
     , _picMedia       :: !Body
     , _picKey         :: !(Maybe Key)
     , _picProjectId   :: !Text
     , _picOAuthToken  :: !(Maybe OAuthToken)
     , _picFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsIconsCreate'' with the minimum fields required to make a request.
 --
@@ -85,7 +86,7 @@ data ProjectsIconsCreate' = ProjectsIconsCreate'
 --
 -- * 'picUserIP'
 --
--- * 'picIcon'
+-- * 'picPayload'
 --
 -- * 'picMedia'
 --
@@ -97,16 +98,16 @@ data ProjectsIconsCreate' = ProjectsIconsCreate'
 --
 -- * 'picFields'
 projectsIconsCreate'
-    :: Icon -- ^ 'Icon'
+    :: Icon -- ^ 'payload'
     -> Body -- ^ 'media'
     -> Text -- ^ 'projectId'
     -> ProjectsIconsCreate'
-projectsIconsCreate' pPicIcon_ pPicMedia_ pPicProjectId_ =
+projectsIconsCreate' pPicPayload_ pPicMedia_ pPicProjectId_ =
     ProjectsIconsCreate'
     { _picQuotaUser = Nothing
     , _picPrettyPrint = True
     , _picUserIP = Nothing
-    , _picIcon = pPicIcon_
+    , _picPayload = pPicPayload_
     , _picMedia = pPicMedia_
     , _picKey = Nothing
     , _picProjectId = pPicProjectId_
@@ -134,8 +135,9 @@ picUserIP
   = lens _picUserIP (\ s a -> s{_picUserIP = a})
 
 -- | Multipart request metadata.
-picIcon :: Lens' ProjectsIconsCreate' Icon
-picIcon = lens _picIcon (\ s a -> s{_picIcon = a})
+picPayload :: Lens' ProjectsIconsCreate' Icon
+picPayload
+  = lens _picPayload (\ s a -> s{_picPayload = a})
 
 picMedia :: Lens' ProjectsIconsCreate' Body
 picMedia = lens _picMedia (\ s a -> s{_picMedia = a})
@@ -170,14 +172,15 @@ instance GoogleRequest ProjectsIconsCreate' where
         type Rs ProjectsIconsCreate' = Icon
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u ProjectsIconsCreate'{..}
-          = go _picMedia _picProjectId _picQuotaUser
+          = go _picProjectId _picQuotaUser
               (Just _picPrettyPrint)
               _picUserIP
               _picFields
               _picKey
               _picOAuthToken
               (Just AltJSON)
-              _picIcon
+              _picPayload
+              _picMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsIconsCreateResource)

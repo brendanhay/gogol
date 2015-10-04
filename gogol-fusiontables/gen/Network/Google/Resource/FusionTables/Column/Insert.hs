@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,10 +34,10 @@ module Network.Google.Resource.FusionTables.Column.Insert
     , ciQuotaUser
     , ciPrettyPrint
     , ciUserIP
+    , ciPayload
     , ciKey
     , ciOAuthToken
     , ciTableId
-    , ciColumn
     , ciFields
     ) where
 
@@ -65,12 +66,12 @@ data ColumnInsert' = ColumnInsert'
     { _ciQuotaUser   :: !(Maybe Text)
     , _ciPrettyPrint :: !Bool
     , _ciUserIP      :: !(Maybe Text)
+    , _ciPayload     :: !Column
     , _ciKey         :: !(Maybe Key)
     , _ciOAuthToken  :: !(Maybe OAuthToken)
     , _ciTableId     :: !Text
-    , _ciColumn      :: !Column
     , _ciFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnInsert'' with the minimum fields required to make a request.
 --
@@ -82,28 +83,28 @@ data ColumnInsert' = ColumnInsert'
 --
 -- * 'ciUserIP'
 --
+-- * 'ciPayload'
+--
 -- * 'ciKey'
 --
 -- * 'ciOAuthToken'
 --
 -- * 'ciTableId'
 --
--- * 'ciColumn'
---
 -- * 'ciFields'
 columnInsert'
-    :: Text -- ^ 'tableId'
-    -> Column -- ^ 'Column'
+    :: Column -- ^ 'payload'
+    -> Text -- ^ 'tableId'
     -> ColumnInsert'
-columnInsert' pCiTableId_ pCiColumn_ =
+columnInsert' pCiPayload_ pCiTableId_ =
     ColumnInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
     , _ciUserIP = Nothing
+    , _ciPayload = pCiPayload_
     , _ciKey = Nothing
     , _ciOAuthToken = Nothing
     , _ciTableId = pCiTableId_
-    , _ciColumn = pCiColumn_
     , _ciFields = Nothing
     }
 
@@ -125,6 +126,11 @@ ciPrettyPrint
 ciUserIP :: Lens' ColumnInsert' (Maybe Text)
 ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
 
+-- | Multipart request metadata.
+ciPayload :: Lens' ColumnInsert' Column
+ciPayload
+  = lens _ciPayload (\ s a -> s{_ciPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -140,10 +146,6 @@ ciOAuthToken
 ciTableId :: Lens' ColumnInsert' Text
 ciTableId
   = lens _ciTableId (\ s a -> s{_ciTableId = a})
-
--- | Multipart request metadata.
-ciColumn :: Lens' ColumnInsert' Column
-ciColumn = lens _ciColumn (\ s a -> s{_ciColumn = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ciFields :: Lens' ColumnInsert' (Maybe Text)
@@ -163,7 +165,7 @@ instance GoogleRequest ColumnInsert' where
               _ciKey
               _ciOAuthToken
               (Just AltJSON)
-              _ciColumn
+              _ciPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ColumnInsertResource)

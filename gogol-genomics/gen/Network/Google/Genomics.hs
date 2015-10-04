@@ -270,8 +270,8 @@ module Network.Google.Genomics
     , bareStatus
     , bareAnnotation
 
-    -- ** VariantAnnotationEffect
-    , VariantAnnotationEffect (..)
+    -- ** Effect
+    , Effect (..)
 
     -- ** Variant
     , Variant
@@ -290,9 +290,6 @@ module Network.Google.Genomics
     , vInfo
     , vCalls
 
-    -- ** SearchJobsRequestStatus
-    , SearchJobsRequestStatus (..)
-
     -- ** CallReadGroupSetsRequest
     , CallReadGroupSetsRequest
     , callReadGroupSetsRequest
@@ -300,9 +297,9 @@ module Network.Google.Genomics
     , crgsrDatasetId
     , crgsrSourceURIs
 
-    -- ** Read
-    , Read
-    , read
+    -- ** Read'
+    , Read'
+    , read'
     , rFragmentLength
     , rDuplicateFragment
     , rReadGroupSetId
@@ -375,6 +372,9 @@ module Network.Google.Genomics
     , srrNextPageToken
     , srrReferences
 
+    -- ** Operation
+    , Operation (..)
+
     -- ** AnnotationSetType
     , AnnotationSetType (..)
 
@@ -427,8 +427,8 @@ module Network.Google.Genomics
     , vaType
     , vaTranscriptIds
 
-    -- ** VariantAnnotationClinicalSignificance
-    , VariantAnnotationClinicalSignificance (..)
+    -- ** ClinicalSignificance
+    , ClinicalSignificance (..)
 
     -- ** BatchAnnotationsResponseEntryStatus
     , BatchAnnotationsResponseEntryStatus
@@ -440,6 +440,9 @@ module Network.Google.Genomics
     , BatchAnnotationsResponse
     , batchAnnotationsResponse
     , barEntries
+
+    -- ** Format
+    , Format (..)
 
     -- ** ReadGroupInfo
     , ReadGroupInfo
@@ -473,6 +476,9 @@ module Network.Google.Genomics
     , sjrPageToken
     , sjrPageSize
     , sjrCreatedBefore
+
+    -- ** TypesItem
+    , TypesItem (..)
 
     -- ** SearchReadsRequest
     , SearchReadsRequest
@@ -517,10 +523,6 @@ module Network.Google.Genomics
     , rgpId
     , rgpCommandLine
 
-    -- ** AnnotationInfo
-    , AnnotationInfo
-    , annotationInfo
-
     -- ** SearchAnnotationsResponse
     , SearchAnnotationsResponse
     , searchAnnotationsResponse
@@ -537,9 +539,6 @@ module Network.Google.Genomics
     -- ** VariantInfo
     , VariantInfo
     , variantInfo
-
-    -- ** ImportReadGroupSetsRequestPartitionStrategy
-    , ImportReadGroupSetsRequestPartitionStrategy (..)
 
     -- ** SearchAnnotationSetsRequest
     , SearchAnnotationSetsRequest
@@ -609,9 +608,6 @@ module Network.Google.Genomics
     , jErrors
     , jRequest
 
-    -- ** AnnotationType
-    , AnnotationType (..)
-
     -- ** SearchReferenceSetsResponse
     , SearchReferenceSetsResponse
     , searchReferenceSetsResponse
@@ -672,8 +668,8 @@ module Network.Google.Genomics
     , alignReadGroupSetsResponse
     , argsrJobId
 
-    -- ** SearchAnnotationSetsRequestTypes
-    , SearchAnnotationSetsRequestTypes (..)
+    -- ** SearchJobsRequestStatusItem
+    , SearchJobsRequestStatusItem (..)
 
     -- ** ListCoverageBucketsResponse
     , ListCoverageBucketsResponse
@@ -681,9 +677,6 @@ module Network.Google.Genomics
     , lcbrNextPageToken
     , lcbrBucketWidth
     , lcbrCoverageBuckets
-
-    -- ** CigarUnitOperation
-    , CigarUnitOperation (..)
 
     -- ** CallReadGroupSetsResponse
     , CallReadGroupSetsResponse
@@ -758,6 +751,9 @@ module Network.Google.Genomics
     , eiSourceName
     , eiId
 
+    -- ** Type
+    , Type (..)
+
     -- ** ImportReadGroupSetsRequest
     , ImportReadGroupSetsRequest
     , importReadGroupSetsRequest
@@ -789,9 +785,6 @@ module Network.Google.Genomics
     -- ** AnnotationSetInfo
     , AnnotationSetInfo
     , annotationSetInfo
-
-    -- ** ExportVariantSetRequestFormat
-    , ExportVariantSetRequestFormat (..)
 
     -- ** SearchVariantSetsResponse
     , SearchVariantSetsResponse
@@ -861,6 +854,10 @@ module Network.Google.Genomics
     , tCodingSequence
     , tExons
 
+    -- ** Info
+    , Info
+    , info
+
     -- ** SearchReadGroupSetsResponse
     , SearchReadGroupSetsResponse
     , searchReadGroupSetsResponse
@@ -895,6 +892,9 @@ module Network.Google.Genomics
     -- ** ReadGroupSetInfo
     , ReadGroupSetInfo
     , readGroupSetInfo
+
+    -- ** PartitionStrategy
+    , PartitionStrategy (..)
 
     -- ** ReferenceSet
     , ReferenceSet

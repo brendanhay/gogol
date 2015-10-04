@@ -26,7 +26,7 @@ data ColumnList = ColumnList
     , _clNextPageToken :: !(Maybe Text)
     , _clKind          :: !Text
     , _clItems         :: !(Maybe [Column])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnList' with the minimum fields required to make a request.
 --
@@ -96,7 +96,7 @@ data TableList = TableList
     { _tlNextPageToken :: !(Maybe Text)
     , _tlKind          :: !Text
     , _tlItems         :: !(Maybe [Table])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableList' with the minimum fields required to make a request.
 --
@@ -156,9 +156,9 @@ instance ToJSON TableList where
 data StyleFunction = StyleFunction
     { _sfBuckets    :: !(Maybe [Bucket])
     , _sfKind       :: !(Maybe Text)
-    , _sfGradient   :: !(Maybe StyleFunctionGradient)
+    , _sfGradient   :: !(Maybe Gradient)
     , _sfColumnName :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleFunction' with the minimum fields required to make a request.
 --
@@ -201,7 +201,7 @@ sfKind = lens _sfKind (\ s a -> s{_sfKind = a})
 
 -- | Gradient function that interpolates a range of colors based on column
 -- value.
-sfGradient :: Lens' StyleFunction (Maybe StyleFunctionGradient)
+sfGradient :: Lens' StyleFunction (Maybe Gradient)
 sfGradient
   = lens _sfGradient (\ s a -> s{_sfGradient = a})
 
@@ -228,56 +228,6 @@ instance ToJSON StyleFunction where
                   ("gradient" .=) <$> _sfGradient,
                   ("columnName" .=) <$> _sfColumnName])
 
--- | Identifier of the base column. If present, this column is derived from
--- the specified base column.
---
--- /See:/ 'columnBaseColumn' smart constructor.
-data ColumnBaseColumn = ColumnBaseColumn
-    { _cbcTableIndex :: !(Maybe Int32)
-    , _cbcColumnId   :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ColumnBaseColumn' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cbcTableIndex'
---
--- * 'cbcColumnId'
-columnBaseColumn
-    :: ColumnBaseColumn
-columnBaseColumn =
-    ColumnBaseColumn
-    { _cbcTableIndex = Nothing
-    , _cbcColumnId = Nothing
-    }
-
--- | Offset to the entry in the list of base tables in the table definition.
-cbcTableIndex :: Lens' ColumnBaseColumn (Maybe Int32)
-cbcTableIndex
-  = lens _cbcTableIndex
-      (\ s a -> s{_cbcTableIndex = a})
-
--- | The id of the column in the base table from which this column is
--- derived.
-cbcColumnId :: Lens' ColumnBaseColumn (Maybe Int32)
-cbcColumnId
-  = lens _cbcColumnId (\ s a -> s{_cbcColumnId = a})
-
-instance FromJSON ColumnBaseColumn where
-        parseJSON
-          = withObject "ColumnBaseColumn"
-              (\ o ->
-                 ColumnBaseColumn <$>
-                   (o .:? "tableIndex") <*> (o .:? "columnId"))
-
-instance ToJSON ColumnBaseColumn where
-        toJSON ColumnBaseColumn{..}
-          = object
-              (catMaybes
-                 [("tableIndex" .=) <$> _cbcTableIndex,
-                  ("columnId" .=) <$> _cbcColumnId])
-
 -- | Represents a response to a SQL statement.
 --
 -- /See:/ 'sQLresponse' smart constructor.
@@ -285,7 +235,7 @@ data SQLresponse = SQLresponse
     { _sqlKind    :: !Text
     , _sqlRows    :: !(Maybe [[JSONValue]])
     , _sqlColumns :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SQLresponse' with the minimum fields required to make a request.
 --
@@ -341,6 +291,55 @@ instance ToJSON SQLresponse where
                  [Just ("kind" .= _sqlKind), ("rows" .=) <$> _sqlRows,
                   ("columns" .=) <$> _sqlColumns])
 
+-- | Identifier of the base column. If present, this column is derived from
+-- the specified base column.
+--
+-- /See:/ 'baseColumn' smart constructor.
+data BaseColumn = BaseColumn
+    { _bcTableIndex :: !(Maybe Int32)
+    , _bcColumnId   :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BaseColumn' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bcTableIndex'
+--
+-- * 'bcColumnId'
+baseColumn
+    :: BaseColumn
+baseColumn =
+    BaseColumn
+    { _bcTableIndex = Nothing
+    , _bcColumnId = Nothing
+    }
+
+-- | Offset to the entry in the list of base tables in the table definition.
+bcTableIndex :: Lens' BaseColumn (Maybe Int32)
+bcTableIndex
+  = lens _bcTableIndex (\ s a -> s{_bcTableIndex = a})
+
+-- | The id of the column in the base table from which this column is
+-- derived.
+bcColumnId :: Lens' BaseColumn (Maybe Int32)
+bcColumnId
+  = lens _bcColumnId (\ s a -> s{_bcColumnId = a})
+
+instance FromJSON BaseColumn where
+        parseJSON
+          = withObject "BaseColumn"
+              (\ o ->
+                 BaseColumn <$>
+                   (o .:? "tableIndex") <*> (o .:? "columnId"))
+
+instance ToJSON BaseColumn where
+        toJSON BaseColumn{..}
+          = object
+              (catMaybes
+                 [("tableIndex" .=) <$> _bcTableIndex,
+                  ("columnId" .=) <$> _bcColumnId])
+
 -- | Represents a list of styles for a given table.
 --
 -- /See:/ 'styleSettingList' smart constructor.
@@ -349,7 +348,7 @@ data StyleSettingList = StyleSettingList
     , _sslNextPageToken :: !(Maybe Text)
     , _sslKind          :: !Text
     , _sslItems         :: !(Maybe [StyleSetting])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleSettingList' with the minimum fields required to make a request.
 --
@@ -426,7 +425,7 @@ data Bucket = Bucket
     , _bIcon    :: !(Maybe Text)
     , _bOpacity :: !(Maybe Double)
     , _bMin     :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Bucket' with the minimum fields required to make a request.
 --
@@ -506,7 +505,7 @@ instance ToJSON Bucket where
 data Line = Line
     { _lCoordinates :: !(Maybe [[Double]])
     , _lType        :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Line' with the minimum fields required to make a request.
 --
@@ -549,6 +548,65 @@ instance ToJSON Line where
                  [("coordinates" .=) <$> _lCoordinates,
                   Just ("type" .= _lType)])
 
+-- | Gradient function that interpolates a range of colors based on column
+-- value.
+--
+-- /See:/ 'gradient' smart constructor.
+data Gradient = Gradient
+    { _gMax    :: !(Maybe Double)
+    , _gMin    :: !(Maybe Double)
+    , _gColors :: !(Maybe [ColorsItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Gradient' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gMax'
+--
+-- * 'gMin'
+--
+-- * 'gColors'
+gradient
+    :: Gradient
+gradient =
+    Gradient
+    { _gMax = Nothing
+    , _gMin = Nothing
+    , _gColors = Nothing
+    }
+
+-- | Higher-end of the interpolation range: rows with this value will be
+-- assigned to colors[n-1].
+gMax :: Lens' Gradient (Maybe Double)
+gMax = lens _gMax (\ s a -> s{_gMax = a})
+
+-- | Lower-end of the interpolation range: rows with this value will be
+-- assigned to colors[0].
+gMin :: Lens' Gradient (Maybe Double)
+gMin = lens _gMin (\ s a -> s{_gMin = a})
+
+-- | Array with two or more colors.
+gColors :: Lens' Gradient [ColorsItem]
+gColors
+  = lens _gColors (\ s a -> s{_gColors = a}) . _Default
+      . _Coerce
+
+instance FromJSON Gradient where
+        parseJSON
+          = withObject "Gradient"
+              (\ o ->
+                 Gradient <$>
+                   (o .:? "max") <*> (o .:? "min") <*>
+                     (o .:? "colors" .!= mempty))
+
+instance ToJSON Gradient where
+        toJSON Gradient{..}
+          = object
+              (catMaybes
+                 [("max" .=) <$> _gMax, ("min" .=) <$> _gMin,
+                  ("colors" .=) <$> _gColors])
+
 -- | Represents a complete StyleSettings object. The primary key is a
 -- combination of the tableId and a styleId.
 --
@@ -561,7 +619,7 @@ data StyleSetting = StyleSetting
     , _ssName            :: !(Maybe Text)
     , _ssStyleId         :: !(Maybe Int32)
     , _ssTableId         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleSetting' with the minimum fields required to make a request.
 --
@@ -662,7 +720,7 @@ instance ToJSON StyleSetting where
 data Polygon = Polygon
     { _pCoordinates :: !(Maybe [[[Double]]])
     , _pType        :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Polygon' with the minimum fields required to make a request.
 --
@@ -711,7 +769,7 @@ instance ToJSON Polygon where
 data Point = Point
     { _poiCoordinates :: !(Maybe [Double])
     , _poiType        :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Point' with the minimum fields required to make a request.
 --
@@ -763,7 +821,7 @@ data TaskList = TaskList
     , _tNextPageToken :: !(Maybe Text)
     , _tKind          :: !Text
     , _tItems         :: !(Maybe [Task])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskList' with the minimum fields required to make a request.
 --
@@ -833,7 +891,7 @@ data TemplateList = TemplateList
     , _temNextPageToken :: !(Maybe Text)
     , _temKind          :: !Text
     , _temItems         :: !(Maybe [Template])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateList' with the minimum fields required to make a request.
 --
@@ -906,7 +964,7 @@ data Geometry = Geometry
     { _gGeometries :: !(Maybe [JSONValue])
     , _gGeometry   :: !(Maybe JSONValue)
     , _gType       :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Geometry' with the minimum fields required to make a request.
 --
@@ -958,52 +1016,6 @@ instance ToJSON Geometry where
                   ("geometry" .=) <$> _gGeometry,
                   Just ("type" .= _gType)])
 
---
--- /See:/ 'styleFunctionGradientColors' smart constructor.
-data StyleFunctionGradientColors = StyleFunctionGradientColors
-    { _sfgcColor   :: !(Maybe Text)
-    , _sfgcOpacity :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'StyleFunctionGradientColors' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sfgcColor'
---
--- * 'sfgcOpacity'
-styleFunctionGradientColors
-    :: StyleFunctionGradientColors
-styleFunctionGradientColors =
-    StyleFunctionGradientColors
-    { _sfgcColor = Nothing
-    , _sfgcOpacity = Nothing
-    }
-
--- | Color in #RRGGBB format.
-sfgcColor :: Lens' StyleFunctionGradientColors (Maybe Text)
-sfgcColor
-  = lens _sfgcColor (\ s a -> s{_sfgcColor = a})
-
--- | Opacity of the color: 0.0 (transparent) to 1.0 (opaque).
-sfgcOpacity :: Lens' StyleFunctionGradientColors (Maybe Double)
-sfgcOpacity
-  = lens _sfgcOpacity (\ s a -> s{_sfgcOpacity = a})
-
-instance FromJSON StyleFunctionGradientColors where
-        parseJSON
-          = withObject "StyleFunctionGradientColors"
-              (\ o ->
-                 StyleFunctionGradientColors <$>
-                   (o .:? "color") <*> (o .:? "opacity"))
-
-instance ToJSON StyleFunctionGradientColors where
-        toJSON StyleFunctionGradientColors{..}
-          = object
-              (catMaybes
-                 [("color" .=) <$> _sfgcColor,
-                  ("opacity" .=) <$> _sfgcOpacity])
-
 -- | A background task on a table, initiated for time- or resource-consuming
 -- operations such as changing column types or deleting all rows.
 --
@@ -1014,7 +1026,7 @@ data Task = Task
     , _tasKind     :: !Text
     , _tasType     :: !(Maybe Text)
     , _tasStarted  :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Task' with the minimum fields required to make a request.
 --
@@ -1089,7 +1101,7 @@ instance ToJSON Task where
 data Import = Import
     { _iKind            :: !Text
     , _iNumRowsReceived :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Import' with the minimum fields required to make a request.
 --
@@ -1142,7 +1154,7 @@ data Template = Template
     , _temeBody                 :: !(Maybe Text)
     , _temeName                 :: !(Maybe Text)
     , _temeTableId              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Template' with the minimum fields required to make a request.
 --
@@ -1237,7 +1249,7 @@ instance ToJSON Template where
 data PointStyle = PointStyle
     { _psIconName   :: !(Maybe Text)
     , _psIconStyler :: !(Maybe StyleFunction)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PointStyle' with the minimum fields required to make a request.
 --
@@ -1291,7 +1303,7 @@ data PolygonStyle = PolygonStyle
     , _psFillOpacity        :: !(Maybe Double)
     , _psStrokeWeightStyler :: !(Maybe StyleFunction)
     , _psStrokeColor        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PolygonStyle' with the minimum fields required to make a request.
 --
@@ -1403,65 +1415,49 @@ instance ToJSON PolygonStyle where
                   ("strokeWeightStyler" .=) <$> _psStrokeWeightStyler,
                   ("strokeColor" .=) <$> _psStrokeColor])
 
--- | Gradient function that interpolates a range of colors based on column
--- value.
 --
--- /See:/ 'styleFunctionGradient' smart constructor.
-data StyleFunctionGradient = StyleFunctionGradient
-    { _sfgMax    :: !(Maybe Double)
-    , _sfgMin    :: !(Maybe Double)
-    , _sfgColors :: !(Maybe [StyleFunctionGradientColors])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'colorsItem' smart constructor.
+data ColorsItem = ColorsItem
+    { _ciColor   :: !(Maybe Text)
+    , _ciOpacity :: !(Maybe Double)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'StyleFunctionGradient' with the minimum fields required to make a request.
+-- | Creates a value of 'ColorsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sfgMax'
+-- * 'ciColor'
 --
--- * 'sfgMin'
---
--- * 'sfgColors'
-styleFunctionGradient
-    :: StyleFunctionGradient
-styleFunctionGradient =
-    StyleFunctionGradient
-    { _sfgMax = Nothing
-    , _sfgMin = Nothing
-    , _sfgColors = Nothing
+-- * 'ciOpacity'
+colorsItem
+    :: ColorsItem
+colorsItem =
+    ColorsItem
+    { _ciColor = Nothing
+    , _ciOpacity = Nothing
     }
 
--- | Higher-end of the interpolation range: rows with this value will be
--- assigned to colors[n-1].
-sfgMax :: Lens' StyleFunctionGradient (Maybe Double)
-sfgMax = lens _sfgMax (\ s a -> s{_sfgMax = a})
+-- | Color in #RRGGBB format.
+ciColor :: Lens' ColorsItem (Maybe Text)
+ciColor = lens _ciColor (\ s a -> s{_ciColor = a})
 
--- | Lower-end of the interpolation range: rows with this value will be
--- assigned to colors[0].
-sfgMin :: Lens' StyleFunctionGradient (Maybe Double)
-sfgMin = lens _sfgMin (\ s a -> s{_sfgMin = a})
+-- | Opacity of the color: 0.0 (transparent) to 1.0 (opaque).
+ciOpacity :: Lens' ColorsItem (Maybe Double)
+ciOpacity
+  = lens _ciOpacity (\ s a -> s{_ciOpacity = a})
 
--- | Array with two or more colors.
-sfgColors :: Lens' StyleFunctionGradient [StyleFunctionGradientColors]
-sfgColors
-  = lens _sfgColors (\ s a -> s{_sfgColors = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON StyleFunctionGradient where
+instance FromJSON ColorsItem where
         parseJSON
-          = withObject "StyleFunctionGradient"
+          = withObject "ColorsItem"
               (\ o ->
-                 StyleFunctionGradient <$>
-                   (o .:? "max") <*> (o .:? "min") <*>
-                     (o .:? "colors" .!= mempty))
+                 ColorsItem <$> (o .:? "color") <*> (o .:? "opacity"))
 
-instance ToJSON StyleFunctionGradient where
-        toJSON StyleFunctionGradient{..}
+instance ToJSON ColorsItem where
+        toJSON ColorsItem{..}
           = object
               (catMaybes
-                 [("max" .=) <$> _sfgMax, ("min" .=) <$> _sfgMin,
-                  ("colors" .=) <$> _sfgColors])
+                 [("color" .=) <$> _ciColor,
+                  ("opacity" .=) <$> _ciOpacity])
 
 -- | Represents a table.
 --
@@ -1480,7 +1476,7 @@ data Table = Table
     , _tabDescription                :: !(Maybe Text)
     , _tabAttribution                :: !(Maybe Text)
     , _tabAttributionLink            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Table' with the minimum fields required to make a request.
 --
@@ -1652,7 +1648,7 @@ data Column = Column
     { _cColumnJSONSchema     :: !(Maybe Text)
     , _cGraphPredicate       :: !(Maybe Text)
     , _cKind                 :: !Text
-    , _cBaseColumn           :: !(Maybe ColumnBaseColumn)
+    , _cBaseColumn           :: !(Maybe BaseColumn)
     , _cColumnPropertiesJSON :: !(Maybe Text)
     , _cName                 :: !(Maybe Text)
     , _cType                 :: !(Maybe Text)
@@ -1661,7 +1657,7 @@ data Column = Column
     , _cValidValues          :: !(Maybe [Text])
     , _cValidateData         :: !(Maybe Bool)
     , _cDescription          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Column' with the minimum fields required to make a request.
 --
@@ -1728,7 +1724,7 @@ cKind = lens _cKind (\ s a -> s{_cKind = a})
 
 -- | Identifier of the base column. If present, this column is derived from
 -- the specified base column.
-cBaseColumn :: Lens' Column (Maybe ColumnBaseColumn)
+cBaseColumn :: Lens' Column (Maybe BaseColumn)
 cBaseColumn
   = lens _cBaseColumn (\ s a -> s{_cBaseColumn = a})
 
@@ -1844,7 +1840,7 @@ data LineStyle = LineStyle
     , _lsStrokeOpacity      :: !(Maybe Double)
     , _lsStrokeWeightStyler :: !(Maybe StyleFunction)
     , _lsStrokeColor        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LineStyle' with the minimum fields required to make a request.
 --

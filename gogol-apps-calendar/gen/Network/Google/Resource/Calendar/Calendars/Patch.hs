@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Calendar.Calendars.Patch
     , cpCalendarId
     , cpPrettyPrint
     , cpUserIP
+    , cpPayload
     , cpKey
-    , cpCalendar
     , cpOAuthToken
     , cpFields
     ) where
@@ -65,11 +66,11 @@ data CalendarsPatch' = CalendarsPatch'
     , _cpCalendarId  :: !Text
     , _cpPrettyPrint :: !Bool
     , _cpUserIP      :: !(Maybe Text)
+    , _cpPayload     :: !Calendar
     , _cpKey         :: !(Maybe Key)
-    , _cpCalendar    :: !Calendar
     , _cpOAuthToken  :: !(Maybe OAuthToken)
     , _cpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarsPatch'' with the minimum fields required to make a request.
 --
@@ -83,25 +84,25 @@ data CalendarsPatch' = CalendarsPatch'
 --
 -- * 'cpUserIP'
 --
--- * 'cpKey'
+-- * 'cpPayload'
 --
--- * 'cpCalendar'
+-- * 'cpKey'
 --
 -- * 'cpOAuthToken'
 --
 -- * 'cpFields'
 calendarsPatch'
     :: Text -- ^ 'calendarId'
-    -> Calendar -- ^ 'Calendar'
+    -> Calendar -- ^ 'payload'
     -> CalendarsPatch'
-calendarsPatch' pCpCalendarId_ pCpCalendar_ =
+calendarsPatch' pCpCalendarId_ pCpPayload_ =
     CalendarsPatch'
     { _cpQuotaUser = Nothing
     , _cpCalendarId = pCpCalendarId_
     , _cpPrettyPrint = True
     , _cpUserIP = Nothing
+    , _cpPayload = pCpPayload_
     , _cpKey = Nothing
-    , _cpCalendar = pCpCalendar_
     , _cpOAuthToken = Nothing
     , _cpFields = Nothing
     }
@@ -131,16 +132,16 @@ cpPrettyPrint
 cpUserIP :: Lens' CalendarsPatch' (Maybe Text)
 cpUserIP = lens _cpUserIP (\ s a -> s{_cpUserIP = a})
 
+-- | Multipart request metadata.
+cpPayload :: Lens' CalendarsPatch' Calendar
+cpPayload
+  = lens _cpPayload (\ s a -> s{_cpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 cpKey :: Lens' CalendarsPatch' (Maybe Key)
 cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
-
--- | Multipart request metadata.
-cpCalendar :: Lens' CalendarsPatch' Calendar
-cpCalendar
-  = lens _cpCalendar (\ s a -> s{_cpCalendar = a})
 
 -- | OAuth 2.0 token for the current user.
 cpOAuthToken :: Lens' CalendarsPatch' (Maybe OAuthToken)
@@ -165,7 +166,7 @@ instance GoogleRequest CalendarsPatch' where
               _cpKey
               _cpOAuthToken
               (Just AltJSON)
-              _cpCalendar
+              _cpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CalendarsPatchResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.YouTube.Captions.Insert
     , ciPart
     , ciPrettyPrint
     , ciUserIP
-    , ciCaption
+    , ciPayload
     , ciMedia
     , ciOnBehalfOfContentOwner
     , ciKey
@@ -51,10 +52,10 @@ import           Network.Google.YouTube.Types
 -- 'CaptionsInsert'' request conforms to.
 type CaptionsInsertResource =
      "captions" :>
-       QueryParam "onBehalfOf" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "sync" Bool :>
-             QueryParam "part" Text :>
+       QueryParam "part" Text :>
+         QueryParam "onBehalfOf" Text :>
+           QueryParam "onBehalfOfContentOwner" Text :>
+             QueryParam "sync" Bool :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -74,14 +75,14 @@ data CaptionsInsert' = CaptionsInsert'
     , _ciPart                   :: !Text
     , _ciPrettyPrint            :: !Bool
     , _ciUserIP                 :: !(Maybe Text)
-    , _ciCaption                :: !Caption
+    , _ciPayload                :: !Caption
     , _ciMedia                  :: !Body
     , _ciOnBehalfOfContentOwner :: !(Maybe Text)
     , _ciKey                    :: !(Maybe Key)
     , _ciSync                   :: !(Maybe Bool)
     , _ciOAuthToken             :: !(Maybe OAuthToken)
     , _ciFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CaptionsInsert'' with the minimum fields required to make a request.
 --
@@ -97,7 +98,7 @@ data CaptionsInsert' = CaptionsInsert'
 --
 -- * 'ciUserIP'
 --
--- * 'ciCaption'
+-- * 'ciPayload'
 --
 -- * 'ciMedia'
 --
@@ -112,17 +113,17 @@ data CaptionsInsert' = CaptionsInsert'
 -- * 'ciFields'
 captionsInsert'
     :: Text -- ^ 'part'
-    -> Caption -- ^ 'Caption'
+    -> Caption -- ^ 'payload'
     -> Body -- ^ 'media'
     -> CaptionsInsert'
-captionsInsert' pCiPart_ pCiCaption_ pCiMedia_ =
+captionsInsert' pCiPart_ pCiPayload_ pCiMedia_ =
     CaptionsInsert'
     { _ciOnBehalfOf = Nothing
     , _ciQuotaUser = Nothing
     , _ciPart = pCiPart_
     , _ciPrettyPrint = True
     , _ciUserIP = Nothing
-    , _ciCaption = pCiCaption_
+    , _ciPayload = pCiPayload_
     , _ciMedia = pCiMedia_
     , _ciOnBehalfOfContentOwner = Nothing
     , _ciKey = Nothing
@@ -161,9 +162,9 @@ ciUserIP :: Lens' CaptionsInsert' (Maybe Text)
 ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
 
 -- | Multipart request metadata.
-ciCaption :: Lens' CaptionsInsert' Caption
-ciCaption
-  = lens _ciCaption (\ s a -> s{_ciCaption = a})
+ciPayload :: Lens' CaptionsInsert' Caption
+ciPayload
+  = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
 ciMedia :: Lens' CaptionsInsert' Body
 ciMedia = lens _ciMedia (\ s a -> s{_ciMedia = a})
@@ -216,9 +217,9 @@ instance GoogleRequest CaptionsInsert' where
         type Rs CaptionsInsert' = Caption
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CaptionsInsert'{..}
-          = go _ciMedia _ciOnBehalfOf _ciOnBehalfOfContentOwner
+          = go (Just _ciPart) _ciOnBehalfOf
+              _ciOnBehalfOfContentOwner
               _ciSync
-              (Just _ciPart)
               _ciQuotaUser
               (Just _ciPrettyPrint)
               _ciUserIP
@@ -226,7 +227,8 @@ instance GoogleRequest CaptionsInsert' where
               _ciKey
               _ciOAuthToken
               (Just AltJSON)
-              _ciCaption
+              _ciPayload
+              _ciMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CaptionsInsertResource)

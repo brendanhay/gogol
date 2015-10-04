@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -60,31 +61,30 @@ type UserStatesListResource =
      "v2" :>
        "userStates" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParams "requestMetadata.experimentIds" Text :>
-                     QueryParam "requestMetadata.locale" Text :>
-                       QueryParam "requestMetadata.partnersSessionId" Text
-                         :>
-                         QueryParam
-                           "requestMetadata.trafficSource.trafficSourceId"
-                           Text
-                           :>
-                           QueryParam
-                             "requestMetadata.trafficSource.trafficSubId"
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "requestMetadata.partnersSessionId" Text
+                     :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "requestMetadata.locale" Text :>
+                         QueryParams "requestMetadata.experimentIds" Text :>
+                           QueryParam "requestMetadata.userOverrides.ipAddress"
                              Text
                              :>
                              QueryParam
-                               "requestMetadata.userOverrides.ipAddress"
+                               "requestMetadata.trafficSource.trafficSubId"
                                Text
                                :>
                                QueryParam "requestMetadata.userOverrides.userId"
                                  Text
                                  :>
-                                 QueryParam "uploadType" Text :>
-                                   QueryParam "upload_protocol" Text :>
+                                 QueryParam
+                                   "requestMetadata.trafficSource.trafficSourceId"
+                                   Text
+                                   :>
+                                   QueryParam "callback" Text :>
                                      QueryParam "quotaUser" Text :>
                                        QueryParam "prettyPrint" Bool :>
                                          QueryParam "fields" Text :>
@@ -110,7 +110,7 @@ data UserStatesList' = UserStatesList'
     , _uslBearerToken                                 :: !(Maybe Text)
     , _uslKey                                         :: !(Maybe Key)
     , _uslRequestMetadataLocale                       :: !(Maybe Text)
-    , _uslRequestMetadataExperimentIds                :: !(Maybe Text)
+    , _uslRequestMetadataExperimentIds                :: !(Maybe [Text])
     , _uslRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
     , _uslRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
     , _uslOAuthToken                                  :: !(Maybe OAuthToken)
@@ -118,7 +118,7 @@ data UserStatesList' = UserStatesList'
     , _uslRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _uslFields                                      :: !(Maybe Text)
     , _uslCallback                                    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserStatesList'' with the minimum fields required to make a request.
 --
@@ -251,10 +251,12 @@ uslRequestMetadataLocale
       (\ s a -> s{_uslRequestMetadataLocale = a})
 
 -- | Experiment IDs the current request belongs to.
-uslRequestMetadataExperimentIds :: Lens' UserStatesList' (Maybe Text)
+uslRequestMetadataExperimentIds :: Lens' UserStatesList' [Text]
 uslRequestMetadataExperimentIds
   = lens _uslRequestMetadataExperimentIds
       (\ s a -> s{_uslRequestMetadataExperimentIds = a})
+      . _Default
+      . _Coerce
 
 -- | IP address to use instead of the user\'s geo-located IP address.
 uslRequestMetadataUserOverridesIPAddress :: Lens' UserStatesList' (Maybe Text)
@@ -313,18 +315,18 @@ instance GoogleRequest UserStatesList' where
         type Rs UserStatesList' = ListUserStatesResponse
         request = requestWithRoute defReq partnersURL
         requestWithRoute r u UserStatesList'{..}
-          = go _uslXgafv _uslAccessToken _uslBearerToken
-              _uslCallback
-              (Just _uslPp)
-              _uslRequestMetadataExperimentIds
-              _uslRequestMetadataLocale
-              _uslRequestMetadataPartnersSessionId
-              _uslRequestMetadataTrafficSourceTrafficSourceId
-              _uslRequestMetadataTrafficSourceTrafficSubId
-              _uslRequestMetadataUserOverridesIPAddress
-              _uslRequestMetadataUserOverridesUserId
+          = go _uslXgafv _uslUploadProtocol (Just _uslPp)
+              _uslAccessToken
               _uslUploadType
-              _uslUploadProtocol
+              _uslRequestMetadataPartnersSessionId
+              _uslBearerToken
+              _uslRequestMetadataLocale
+              (_uslRequestMetadataExperimentIds ^. _Default)
+              _uslRequestMetadataUserOverridesIPAddress
+              _uslRequestMetadataTrafficSourceTrafficSubId
+              _uslRequestMetadataUserOverridesUserId
+              _uslRequestMetadataTrafficSourceTrafficSourceId
+              _uslCallback
               _uslQuotaUser
               (Just _uslPrettyPrint)
               _uslFields

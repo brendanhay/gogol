@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,8 +53,8 @@ type InstancesAggregatedListResource =
        "aggregated" :>
          "instances" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -76,7 +77,7 @@ data InstancesAggregatedList' = InstancesAggregatedList'
     , _ialOAuthToken  :: !(Maybe OAuthToken)
     , _ialMaxResults  :: !Word32
     , _ialFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesAggregatedList'' with the minimum fields required to make a request.
 --
@@ -196,8 +197,8 @@ instance GoogleRequest InstancesAggregatedList' where
              InstanceAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesAggregatedList'{..}
-          = go _ialFilter (Just _ialMaxResults) _ialPageToken
-              _ialProject
+          = go _ialProject _ialFilter _ialPageToken
+              (Just _ialMaxResults)
               _ialQuotaUser
               (Just _ialPrettyPrint)
               _ialUserIP

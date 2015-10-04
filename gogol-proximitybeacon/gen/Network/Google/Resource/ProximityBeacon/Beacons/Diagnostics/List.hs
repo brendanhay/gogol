@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,18 +58,18 @@ import           Network.Google.ProximityBeacon.Types
 -- 'BeaconsDiagnosticsList'' request conforms to.
 type BeaconsDiagnosticsListResource =
      "v1beta1" :>
-       "{+beaconName}" :>
+       Capture "beaconName" Text :>
          "diagnostics" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "alertFilter" Text :>
-                 QueryParam "bearer_token" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParam "pageSize" Int32 :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "upload_protocol" Text :>
+                         QueryParam "pageSize" Int32 :>
+                           QueryParam "alertFilter" Text :>
+                             QueryParam "callback" Text :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
@@ -99,7 +100,7 @@ data BeaconsDiagnosticsList' = BeaconsDiagnosticsList'
     , _bdlAlertFilter    :: !(Maybe Text)
     , _bdlFields         :: !(Maybe Text)
     , _bdlCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsDiagnosticsList'' with the minimum fields required to make a request.
 --
@@ -260,15 +261,15 @@ instance GoogleRequest BeaconsDiagnosticsList' where
              ListDiagnosticsResponse
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u BeaconsDiagnosticsList'{..}
-          = go _bdlXgafv _bdlAccessToken _bdlAlertFilter
-              _bdlBearerToken
-              _bdlCallback
-              _bdlPageSize
-              _bdlPageToken
+          = go _bdlBeaconName _bdlXgafv _bdlUploadProtocol
               (Just _bdlPp)
+              _bdlAccessToken
               _bdlUploadType
-              _bdlUploadProtocol
-              _bdlBeaconName
+              _bdlBearerToken
+              _bdlPageToken
+              _bdlPageSize
+              _bdlAlertFilter
+              _bdlCallback
               _bdlQuotaUser
               (Just _bdlPrettyPrint)
               _bdlFields

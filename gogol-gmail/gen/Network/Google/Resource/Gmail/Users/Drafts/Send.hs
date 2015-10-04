@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,10 +35,10 @@ module Network.Google.Resource.Gmail.Users.Drafts.Send
     , udsQuotaUser
     , udsPrettyPrint
     , udsUserIP
+    , udsPayload
     , udsUserId
     , udsMedia
     , udsKey
-    , udsDraft
     , udsOAuthToken
     , udsFields
     ) where
@@ -69,13 +70,13 @@ data UsersDraftsSend' = UsersDraftsSend'
     { _udsQuotaUser   :: !(Maybe Text)
     , _udsPrettyPrint :: !Bool
     , _udsUserIP      :: !(Maybe Text)
+    , _udsPayload     :: !Draft
     , _udsUserId      :: !Text
     , _udsMedia       :: !Body
     , _udsKey         :: !(Maybe Key)
-    , _udsDraft       :: !Draft
     , _udsOAuthToken  :: !(Maybe OAuthToken)
     , _udsFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsSend'' with the minimum fields required to make a request.
 --
@@ -87,31 +88,31 @@ data UsersDraftsSend' = UsersDraftsSend'
 --
 -- * 'udsUserIP'
 --
+-- * 'udsPayload'
+--
 -- * 'udsUserId'
 --
 -- * 'udsMedia'
 --
 -- * 'udsKey'
 --
--- * 'udsDraft'
---
 -- * 'udsOAuthToken'
 --
 -- * 'udsFields'
 usersDraftsSend'
-    :: Text -- ^ 'media'
-    -> Body -- ^ 'Draft'
-    -> Draft
+    :: Draft -- ^ 'payload'
+    -> Text -- ^ 'media'
+    -> Body
     -> UsersDraftsSend'
-usersDraftsSend' pUdsUserId_ pUdsMedia_ pUdsDraft_ =
+usersDraftsSend' pUdsPayload_ pUdsUserId_ pUdsMedia_ =
     UsersDraftsSend'
     { _udsQuotaUser = Nothing
     , _udsPrettyPrint = True
     , _udsUserIP = Nothing
+    , _udsPayload = pUdsPayload_
     , _udsUserId = pUdsUserId_
     , _udsMedia = pUdsMedia_
     , _udsKey = Nothing
-    , _udsDraft = pUdsDraft_
     , _udsOAuthToken = Nothing
     , _udsFields = Nothing
     }
@@ -135,6 +136,11 @@ udsUserIP :: Lens' UsersDraftsSend' (Maybe Text)
 udsUserIP
   = lens _udsUserIP (\ s a -> s{_udsUserIP = a})
 
+-- | Multipart request metadata.
+udsPayload :: Lens' UsersDraftsSend' Draft
+udsPayload
+  = lens _udsPayload (\ s a -> s{_udsPayload = a})
+
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
 udsUserId :: Lens' UsersDraftsSend' Text
@@ -149,10 +155,6 @@ udsMedia = lens _udsMedia (\ s a -> s{_udsMedia = a})
 -- token.
 udsKey :: Lens' UsersDraftsSend' (Maybe Key)
 udsKey = lens _udsKey (\ s a -> s{_udsKey = a})
-
--- | Multipart request metadata.
-udsDraft :: Lens' UsersDraftsSend' Draft
-udsDraft = lens _udsDraft (\ s a -> s{_udsDraft = a})
 
 -- | OAuth 2.0 token for the current user.
 udsOAuthToken :: Lens' UsersDraftsSend' (Maybe OAuthToken)
@@ -173,14 +175,14 @@ instance GoogleRequest UsersDraftsSend' where
         type Rs UsersDraftsSend' = Message
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersDraftsSend'{..}
-          = go _udsMedia _udsUserId _udsQuotaUser
-              (Just _udsPrettyPrint)
+          = go _udsUserId _udsQuotaUser (Just _udsPrettyPrint)
               _udsUserIP
               _udsFields
               _udsKey
               _udsOAuthToken
               (Just AltJSON)
-              _udsDraft
+              _udsPayload
+              _udsMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDraftsSendResource)

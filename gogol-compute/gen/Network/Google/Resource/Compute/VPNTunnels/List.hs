@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type VPNTunnelsListResource =
          Capture "region" Text :>
            "vpnTunnels" :>
              QueryParam "filter" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "pageToken" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,7 +83,7 @@ data VPNTunnelsList' = VPNTunnelsList'
     , _vtlOAuthToken  :: !(Maybe OAuthToken)
     , _vtlMaxResults  :: !Word32
     , _vtlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VPNTunnelsList'' with the minimum fields required to make a request.
 --
@@ -210,9 +211,8 @@ instance GoogleRequest VPNTunnelsList' where
         type Rs VPNTunnelsList' = VPNTunnelList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u VPNTunnelsList'{..}
-          = go _vtlFilter (Just _vtlMaxResults) _vtlPageToken
-              _vtlProject
-              _vtlRegion
+          = go _vtlProject _vtlRegion _vtlFilter _vtlPageToken
+              (Just _vtlMaxResults)
               _vtlQuotaUser
               (Just _vtlPrettyPrint)
               _vtlUserIP

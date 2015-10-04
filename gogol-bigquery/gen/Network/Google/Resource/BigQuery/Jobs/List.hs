@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,12 +58,11 @@ type JobsListResource =
      "projects" :>
        Capture "projectId" Text :>
          "jobs" :>
-           QueryParam "allUsers" Bool :>
-             QueryParam "maxResults" Word32 :>
+           QueryParams "stateFilter" StateFilter :>
+             QueryParam "projection" Projection :>
                QueryParam "pageToken" Text :>
-                 QueryParam "projection" BigqueryJobsListProjection :>
-                   QueryParams "stateFilter" BigqueryJobsListStateFilter
-                     :>
+                 QueryParam "allUsers" Bool :>
+                   QueryParam "maxResults" Word32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -83,15 +83,15 @@ data JobsList' = JobsList'
     , _jlPrettyPrint :: !Bool
     , _jlUserIP      :: !(Maybe Text)
     , _jlKey         :: !(Maybe Key)
-    , _jlStateFilter :: !(Maybe BigqueryJobsListStateFilter)
-    , _jlProjection  :: !(Maybe BigqueryJobsListProjection)
+    , _jlStateFilter :: !(Maybe StateFilter)
+    , _jlProjection  :: !(Maybe Projection)
     , _jlPageToken   :: !(Maybe Text)
     , _jlProjectId   :: !Text
     , _jlAllUsers    :: !(Maybe Bool)
     , _jlOAuthToken  :: !(Maybe OAuthToken)
     , _jlMaxResults  :: !(Maybe Word32)
     , _jlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsList'' with the minimum fields required to make a request.
 --
@@ -164,13 +164,13 @@ jlKey :: Lens' JobsList' (Maybe Key)
 jlKey = lens _jlKey (\ s a -> s{_jlKey = a})
 
 -- | Filter for job state
-jlStateFilter :: Lens' JobsList' (Maybe BigqueryJobsListStateFilter)
+jlStateFilter :: Lens' JobsList' (Maybe StateFilter)
 jlStateFilter
   = lens _jlStateFilter
       (\ s a -> s{_jlStateFilter = a})
 
 -- | Restrict information returned to a set of selected fields
-jlProjection :: Lens' JobsList' (Maybe BigqueryJobsListProjection)
+jlProjection :: Lens' JobsList' (Maybe Projection)
 jlProjection
   = lens _jlProjection (\ s a -> s{_jlProjection = a})
 
@@ -212,10 +212,11 @@ instance GoogleRequest JobsList' where
         type Rs JobsList' = JobList
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u JobsList'{..}
-          = go _jlAllUsers _jlMaxResults _jlPageToken
+          = go _jlProjectId (_jlStateFilter ^. _Default)
               _jlProjection
-              _jlStateFilter
-              _jlProjectId
+              _jlPageToken
+              _jlAllUsers
+              _jlMaxResults
               _jlQuotaUser
               (Just _jlPrettyPrint)
               _jlUserIP

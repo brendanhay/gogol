@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,21 +59,21 @@ import           Network.Google.Prelude
 -- 'TablesList'' request conforms to.
 type TablesListResource =
      "tables" :>
-       QueryParam "bbox" Text :>
-         QueryParam "createdAfter" DateTime' :>
-           QueryParam "createdBefore" DateTime' :>
-             QueryParam "creatorEmail" Text :>
-               QueryParam "maxResults" Word32 :>
+       QueryParam "createdAfter" DateTime' :>
+         QueryParam "creatorEmail" Text :>
+           QueryParam "role" MapsEngineTablesListRole :>
+             QueryParam "bbox" Text :>
+               QueryParam "processingStatus"
+                 MapsEngineTablesListProcessingStatus
+                 :>
                  QueryParam "modifiedAfter" DateTime' :>
                    QueryParam "modifiedBefore" DateTime' :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "processingStatus"
-                         MapsEngineTablesListProcessingStatus
-                         :>
-                         QueryParam "projectId" Text :>
-                           QueryParam "role" MapsEngineTablesListRole :>
-                             QueryParam "search" Text :>
-                               QueryParam "tags" Text :>
+                       QueryParam "projectId" Text :>
+                         QueryParam "search" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "tags" Text :>
+                               QueryParam "createdBefore" DateTime' :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
@@ -106,7 +107,7 @@ data TablesList' = TablesList'
     , _tlTags             :: !(Maybe Text)
     , _tlFields           :: !(Maybe Text)
     , _tlCreatedBefore    :: !(Maybe DateTime')
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesList'' with the minimum fields required to make a request.
 --
@@ -300,17 +301,16 @@ instance GoogleRequest TablesList' where
         type Rs TablesList' = TablesListResponse
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesList'{..}
-          = go _tlBbox _tlCreatedAfter _tlCreatedBefore
-              _tlCreatorEmail
-              _tlMaxResults
+          = go _tlCreatedAfter _tlCreatorEmail _tlRole _tlBbox
+              _tlProcessingStatus
               _tlModifiedAfter
               _tlModifiedBefore
               _tlPageToken
-              _tlProcessingStatus
               _tlProjectId
-              _tlRole
               _tlSearch
+              _tlMaxResults
               _tlTags
+              _tlCreatedBefore
               _tlQuotaUser
               (Just _tlPrettyPrint)
               _tlUserIP

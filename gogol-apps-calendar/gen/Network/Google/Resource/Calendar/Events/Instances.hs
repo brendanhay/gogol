@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -60,15 +61,15 @@ type EventsInstancesResource =
          "events" :>
            Capture "eventId" Text :>
              "instances" :>
-               QueryParam "alwaysIncludeEmail" Bool :>
-                 QueryParam "maxAttendees" Int32 :>
-                   QueryParam "maxResults" Int32 :>
-                     QueryParam "originalStart" Text :>
+               QueryParam "timeMin" DateTime' :>
+                 QueryParam "showDeleted" Bool :>
+                   QueryParam "originalStart" Text :>
+                     QueryParam "maxAttendees" Int32 :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "showDeleted" Bool :>
-                           QueryParam "timeMax" DateTime' :>
-                             QueryParam "timeMin" DateTime' :>
-                               QueryParam "timeZone" Text :>
+                         QueryParam "timeZone" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "alwaysIncludeEmail" Bool :>
+                               QueryParam "timeMax" DateTime' :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
@@ -100,7 +101,7 @@ data EventsInstances' = EventsInstances'
     , _eiTimeMax            :: !(Maybe DateTime')
     , _eiEventId            :: !Text
     , _eiFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsInstances'' with the minimum fields required to make a request.
 --
@@ -284,16 +285,15 @@ instance GoogleRequest EventsInstances' where
         type Rs EventsInstances' = Events
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsInstances'{..}
-          = go _eiAlwaysIncludeEmail _eiMaxAttendees
-              _eiMaxResults
-              _eiOriginalStart
-              _eiPageToken
+          = go _eiCalendarId _eiEventId _eiTimeMin
               _eiShowDeleted
-              _eiTimeMax
-              _eiTimeMin
+              _eiOriginalStart
+              _eiMaxAttendees
+              _eiPageToken
               _eiTimeZone
-              _eiCalendarId
-              _eiEventId
+              _eiMaxResults
+              _eiAlwaysIncludeEmail
+              _eiTimeMax
               _eiQuotaUser
               (Just _eiPrettyPrint)
               _eiUserIP

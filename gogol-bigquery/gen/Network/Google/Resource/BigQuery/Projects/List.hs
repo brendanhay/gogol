@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -47,8 +48,8 @@ import           Network.Google.Prelude
 -- 'ProjectsList'' request conforms to.
 type ProjectsListResource =
      "projects" :>
-       QueryParam "maxResults" Word32 :>
-         QueryParam "pageToken" Text :>
+       QueryParam "pageToken" Text :>
+         QueryParam "maxResults" Word32 :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -69,7 +70,7 @@ data ProjectsList' = ProjectsList'
     , _plOAuthToken  :: !(Maybe OAuthToken)
     , _plMaxResults  :: !(Maybe Word32)
     , _plFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsList'' with the minimum fields required to make a request.
 --
@@ -156,7 +157,7 @@ instance GoogleRequest ProjectsList' where
         type Rs ProjectsList' = ProjectList
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u ProjectsList'{..}
-          = go _plMaxResults _plPageToken _plQuotaUser
+          = go _plPageToken _plMaxResults _plQuotaUser
               (Just _plPrettyPrint)
               _plUserIP
               _plFields

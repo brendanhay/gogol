@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -62,17 +63,17 @@ type LayersAnnotationDataListResource =
          "layers" :>
            Capture "layerId" Text :>
              "data" :>
-               QueryParams "annotationDataId" Text :>
-                 QueryParam "h" Int32 :>
-                   QueryParam "locale" Text :>
-                     QueryParam "maxResults" Word32 :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "scale" Int32 :>
-                           QueryParam "source" Text :>
-                             QueryParam "updatedMax" Text :>
-                               QueryParam "updatedMin" Text :>
-                                 QueryParam "w" Int32 :>
-                                   QueryParam "contentVersion" Text :>
+               QueryParam "contentVersion" Text :>
+                 QueryParam "w" Int32 :>
+                   QueryParam "scale" Int32 :>
+                     QueryParam "locale" Text :>
+                       QueryParam "updatedMax" Text :>
+                         QueryParam "updatedMin" Text :>
+                           QueryParams "annotationDataId" Text :>
+                             QueryParam "source" Text :>
+                               QueryParam "h" Int32 :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "maxResults" Word32 :>
                                      QueryParam "quotaUser" Text :>
                                        QueryParam "prettyPrint" Bool :>
                                          QueryParam "userIp" Text :>
@@ -98,7 +99,7 @@ data LayersAnnotationDataList' = LayersAnnotationDataList'
     , _ladlUpdatedMax       :: !(Maybe Text)
     , _ladlKey              :: !(Maybe Key)
     , _ladlUpdatedMin       :: !(Maybe Text)
-    , _ladlAnnotationDataId :: !(Maybe Text)
+    , _ladlAnnotationDataId :: !(Maybe [Text])
     , _ladlVolumeId         :: !Text
     , _ladlSource           :: !(Maybe Text)
     , _ladlH                :: !(Maybe Int32)
@@ -107,7 +108,7 @@ data LayersAnnotationDataList' = LayersAnnotationDataList'
     , _ladlLayerId          :: !Text
     , _ladlMaxResults       :: !(Maybe Word32)
     , _ladlFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersAnnotationDataList'' with the minimum fields required to make a request.
 --
@@ -242,10 +243,12 @@ ladlUpdatedMin
 
 -- | The list of Annotation Data Ids to retrieve. Pagination is ignored if
 -- this is set.
-ladlAnnotationDataId :: Lens' LayersAnnotationDataList' (Maybe Text)
+ladlAnnotationDataId :: Lens' LayersAnnotationDataList' [Text]
 ladlAnnotationDataId
   = lens _ladlAnnotationDataId
       (\ s a -> s{_ladlAnnotationDataId = a})
+      . _Default
+      . _Coerce
 
 -- | The volume to retrieve annotation data for.
 ladlVolumeId :: Lens' LayersAnnotationDataList' Text
@@ -299,17 +302,18 @@ instance GoogleRequest LayersAnnotationDataList'
         type Rs LayersAnnotationDataList' = Annotationsdata
         request = requestWithRoute defReq booksURL
         requestWithRoute r u LayersAnnotationDataList'{..}
-          = go _ladlAnnotationDataId _ladlH _ladlLocale
-              _ladlMaxResults
-              _ladlPageToken
+          = go _ladlVolumeId _ladlLayerId
+              (Just _ladlContentVersion)
+              _ladlW
               _ladlScale
-              _ladlSource
+              _ladlLocale
               _ladlUpdatedMax
               _ladlUpdatedMin
-              _ladlW
-              _ladlVolumeId
-              _ladlLayerId
-              (Just _ladlContentVersion)
+              (_ladlAnnotationDataId ^. _Default)
+              _ladlSource
+              _ladlH
+              _ladlPageToken
+              _ladlMaxResults
               _ladlQuotaUser
               (Just _ladlPrettyPrint)
               _ladlUserIP

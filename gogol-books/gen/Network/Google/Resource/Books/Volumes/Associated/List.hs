@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,14 +53,12 @@ type VolumesAssociatedListResource =
      "volumes" :>
        Capture "volumeId" Text :>
          "associated" :>
-           QueryParam "association"
-             BooksVolumesAssociatedListAssociation
-             :>
-             QueryParam "locale" Text :>
-               QueryParam "maxAllowedMaturityRating"
-                 BooksVolumesAssociatedListMaxAllowedMaturityRating
-                 :>
-                 QueryParam "source" Text :>
+           QueryParam "locale" Text :>
+             QueryParam "maxAllowedMaturityRating"
+               BooksVolumesAssociatedListMaxAllowedMaturityRating
+               :>
+               QueryParam "source" Text :>
+                 QueryParam "association" Association :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,8 +81,8 @@ data VolumesAssociatedList' = VolumesAssociatedList'
     , _valSource                   :: !(Maybe Text)
     , _valOAuthToken               :: !(Maybe OAuthToken)
     , _valFields                   :: !(Maybe Text)
-    , _valAssociation              :: !(Maybe BooksVolumesAssociatedListAssociation)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _valAssociation              :: !(Maybe Association)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesAssociatedList'' with the minimum fields required to make a request.
 --
@@ -188,7 +187,7 @@ valFields
   = lens _valFields (\ s a -> s{_valFields = a})
 
 -- | Association type.
-valAssociation :: Lens' VolumesAssociatedList' (Maybe BooksVolumesAssociatedListAssociation)
+valAssociation :: Lens' VolumesAssociatedList' (Maybe Association)
 valAssociation
   = lens _valAssociation
       (\ s a -> s{_valAssociation = a})
@@ -201,10 +200,10 @@ instance GoogleRequest VolumesAssociatedList' where
         type Rs VolumesAssociatedList' = Volumes
         request = requestWithRoute defReq booksURL
         requestWithRoute r u VolumesAssociatedList'{..}
-          = go _valAssociation _valLocale
+          = go _valVolumeId _valLocale
               _valMaxAllowedMaturityRating
               _valSource
-              _valVolumeId
+              _valAssociation
               _valQuotaUser
               (Just _valPrettyPrint)
               _valUserIP

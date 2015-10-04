@@ -17,29 +17,11 @@ module Network.Google.Storage.Types
     -- * Service URL
       storageURL
 
-    -- * BucketVersioning
-    , BucketVersioning
-    , bucketVersioning
-    , bvEnabled
-
     -- * ObjectOwner
     , ObjectOwner
     , objectOwner
     , ooEntity
     , ooEntityId
-
-    -- * ComposeRequestSourceObjects
-    , ComposeRequestSourceObjects
-    , composeRequestSourceObjects
-    , crsoName
-    , crsoObjectPreconditions
-    , crsoGeneration
-
-    -- * BucketLogging
-    , BucketLogging
-    , bucketLogging
-    , blLogBucket
-    , blLogObjectPrefix
 
     -- * Buckets
     , Buckets
@@ -48,41 +30,31 @@ module Network.Google.Storage.Types
     , bKind
     , bItems
 
-    -- * BucketLifecycleRuleCondition
-    , BucketLifecycleRuleCondition
-    , bucketLifecycleRuleCondition
-    , blrcAge
-    , blrcIsLive
-    , blrcNumNewerVersions
-    , blrcCreatedBefore
-
-    -- * BucketLifecycle
-    , BucketLifecycle
-    , bucketLifecycle
-    , blRule
-
-    -- * BucketLifecycleRuleAction
-    , BucketLifecycleRuleAction
-    , bucketLifecycleRuleAction
-    , blraType
-
-    -- * ObjectMetadata
-    , ObjectMetadata
-    , objectMetadata
+    -- * CORSItem
+    , CORSItem
+    , corsItem
+    , ciMaxAgeSeconds
+    , ciOrigin
+    , ciResponseHeader
+    , ciMethod
 
     -- * StorageBucketsListProjection
     , StorageBucketsListProjection (..)
 
-    -- * BucketCORS
-    , BucketCORS
-    , bucketCORS
-    , bcMaxAgeSeconds
-    , bcOrigin
-    , bcResponseHeader
-    , bcMethod
-
     -- * StorageObjectsUpdateProjection
     , StorageObjectsUpdateProjection (..)
+
+    -- * Website
+    , Website
+    , website
+    , wMainPageSuffix
+    , wNotFoundPage
+
+    -- * RuleItem
+    , RuleItem
+    , ruleItem
+    , riAction
+    , riCondition
 
     -- * Channel
     , Channel
@@ -93,7 +65,7 @@ module Network.Google.Storage.Types
     , cExpiration
     , cToken
     , cAddress
-    , cPayLoad
+    , cPayload
     , cParams
     , cId
     , cType
@@ -125,11 +97,10 @@ module Network.Google.Storage.Types
     , bacKind
     , bacItems
 
-    -- * BucketLifecycleRule
-    , BucketLifecycleRule
-    , bucketLifecycleRule
-    , blrAction
-    , blrCondition
+    -- * Action
+    , Action
+    , action
+    , aType
 
     -- * Objects
     , Objects
@@ -139,12 +110,27 @@ module Network.Google.Storage.Types
     , oItems
     , oPrefixes
 
+    -- * Lifecycle
+    , Lifecycle
+    , lifecycle
+    , lRule
+
+    -- * Owner
+    , Owner
+    , owner
+    , oEntity
+    , oEntityId
+
     -- * ComposeRequest
     , ComposeRequest
     , composeRequest
     , crDestination
     , crKind
     , crSourceObjects
+
+    -- * Params
+    , Params
+    , params
 
     -- * StorageObjectsPatchProjection
     , StorageObjectsPatchProjection (..)
@@ -155,30 +141,28 @@ module Network.Google.Storage.Types
     -- * StorageBucketsGetProjection
     , StorageBucketsGetProjection (..)
 
-    -- * ChannelParams
-    , ChannelParams
-    , channelParams
-
     -- * StorageObjectsCopyProjection
     , StorageObjectsCopyProjection (..)
 
     -- * StorageBucketsPatchProjection
     , StorageBucketsPatchProjection (..)
 
-    -- * BucketOwner
-    , BucketOwner
-    , bucketOwner
-    , boEntity
-    , boEntityId
+    -- * Versioning
+    , Versioning
+    , versioning
+    , vEnabled
 
     -- * StorageObjectsWatchAllProjection
     , StorageObjectsWatchAllProjection (..)
 
-    -- * BucketWebsite
-    , BucketWebsite
-    , bucketWebsite
-    , bwMainPageSuffix
-    , bwNotFoundPage
+    -- * ObjectPreconditions
+    , ObjectPreconditions
+    , objectPreconditions
+    , opsIfGenerationMatch
+
+    -- * Metadata
+    , Metadata
+    , metadata
 
     -- * BucketAccessControl
     , BucketAccessControl
@@ -231,16 +215,28 @@ module Network.Google.Storage.Types
     , objMD5Hash
     , objContentType
 
-    -- * ComposeRequestSourceObjectsObjectPreconditions
-    , ComposeRequestSourceObjectsObjectPreconditions
-    , composeRequestSourceObjectsObjectPreconditions
-    , crsoopIfGenerationMatch
+    -- * Projection
+    , Projection (..)
 
     -- * StorageBucketsUpdateProjection
     , StorageBucketsUpdateProjection (..)
 
     -- * StorageObjectsListProjection
     , StorageObjectsListProjection (..)
+
+    -- * Condition
+    , Condition
+    , condition
+    , cAge
+    , cIsLive
+    , cNumNewerVersions
+    , cCreatedBefore
+
+    -- * Logging
+    , Logging
+    , logging
+    , lLogBucket
+    , lLogObjectPrefix
 
     -- * ObjectAccessControl
     , ObjectAccessControl
@@ -258,8 +254,12 @@ module Network.Google.Storage.Types
     , oacaGeneration
     , oacaEntityId
 
-    -- * StorageBucketsInsertProjection
-    , StorageBucketsInsertProjection (..)
+    -- * SourceObjectsItem
+    , SourceObjectsItem
+    , sourceObjectsItem
+    , soiName
+    , soiObjectPreconditions
+    , soiGeneration
     ) where
 
 import           Network.Google.Prelude

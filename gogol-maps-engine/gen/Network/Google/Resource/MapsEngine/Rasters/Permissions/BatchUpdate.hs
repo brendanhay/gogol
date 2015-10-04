@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,10 +33,10 @@ module Network.Google.Resource.MapsEngine.Rasters.Permissions.BatchUpdate
     , RastersPermissionsBatchUpdate'
 
     -- * Request Lenses
-    , rpbuPermissionsBatchUpdateRequest
     , rpbuQuotaUser
     , rpbuPrettyPrint
     , rpbuUserIP
+    , rpbuPayload
     , rpbuKey
     , rpbuId
     , rpbuOAuthToken
@@ -68,27 +69,27 @@ type RastersPermissionsBatchUpdateResource =
 --
 -- /See:/ 'rastersPermissionsBatchUpdate'' smart constructor.
 data RastersPermissionsBatchUpdate' = RastersPermissionsBatchUpdate'
-    { _rpbuPermissionsBatchUpdateRequest :: !PermissionsBatchUpdateRequest
-    , _rpbuQuotaUser                     :: !(Maybe Text)
-    , _rpbuPrettyPrint                   :: !Bool
-    , _rpbuUserIP                        :: !(Maybe Text)
-    , _rpbuKey                           :: !(Maybe Key)
-    , _rpbuId                            :: !Text
-    , _rpbuOAuthToken                    :: !(Maybe OAuthToken)
-    , _rpbuFields                        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rpbuQuotaUser   :: !(Maybe Text)
+    , _rpbuPrettyPrint :: !Bool
+    , _rpbuUserIP      :: !(Maybe Text)
+    , _rpbuPayload     :: !PermissionsBatchUpdateRequest
+    , _rpbuKey         :: !(Maybe Key)
+    , _rpbuId          :: !Text
+    , _rpbuOAuthToken  :: !(Maybe OAuthToken)
+    , _rpbuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersPermissionsBatchUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'rpbuPermissionsBatchUpdateRequest'
 --
 -- * 'rpbuQuotaUser'
 --
 -- * 'rpbuPrettyPrint'
 --
 -- * 'rpbuUserIP'
+--
+-- * 'rpbuPayload'
 --
 -- * 'rpbuKey'
 --
@@ -98,26 +99,20 @@ data RastersPermissionsBatchUpdate' = RastersPermissionsBatchUpdate'
 --
 -- * 'rpbuFields'
 rastersPermissionsBatchUpdate'
-    :: PermissionsBatchUpdateRequest -- ^ 'PermissionsBatchUpdateRequest'
+    :: PermissionsBatchUpdateRequest -- ^ 'payload'
     -> Text -- ^ 'id'
     -> RastersPermissionsBatchUpdate'
-rastersPermissionsBatchUpdate' pRpbuPermissionsBatchUpdateRequest_ pRpbuId_ =
+rastersPermissionsBatchUpdate' pRpbuPayload_ pRpbuId_ =
     RastersPermissionsBatchUpdate'
-    { _rpbuPermissionsBatchUpdateRequest = pRpbuPermissionsBatchUpdateRequest_
-    , _rpbuQuotaUser = Nothing
+    { _rpbuQuotaUser = Nothing
     , _rpbuPrettyPrint = True
     , _rpbuUserIP = Nothing
+    , _rpbuPayload = pRpbuPayload_
     , _rpbuKey = Nothing
     , _rpbuId = pRpbuId_
     , _rpbuOAuthToken = Nothing
     , _rpbuFields = Nothing
     }
-
--- | Multipart request metadata.
-rpbuPermissionsBatchUpdateRequest :: Lens' RastersPermissionsBatchUpdate' PermissionsBatchUpdateRequest
-rpbuPermissionsBatchUpdateRequest
-  = lens _rpbuPermissionsBatchUpdateRequest
-      (\ s a -> s{_rpbuPermissionsBatchUpdateRequest = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -138,6 +133,11 @@ rpbuPrettyPrint
 rpbuUserIP :: Lens' RastersPermissionsBatchUpdate' (Maybe Text)
 rpbuUserIP
   = lens _rpbuUserIP (\ s a -> s{_rpbuUserIP = a})
+
+-- | Multipart request metadata.
+rpbuPayload :: Lens' RastersPermissionsBatchUpdate' PermissionsBatchUpdateRequest
+rpbuPayload
+  = lens _rpbuPayload (\ s a -> s{_rpbuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -178,7 +178,7 @@ instance GoogleRequest RastersPermissionsBatchUpdate'
               _rpbuKey
               _rpbuOAuthToken
               (Just AltJSON)
-              _rpbuPermissionsBatchUpdateRequest
+              _rpbuPayload
           where go
                   = clientWithRoute
                       (Proxy ::

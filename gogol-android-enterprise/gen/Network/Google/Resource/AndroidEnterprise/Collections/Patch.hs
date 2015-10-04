@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.AndroidEnterprise.Collections.Patch
     , colEnterpriseId
     , colUserIP
     , colCollectionId
-    , colCollection
+    , colPayload
     , colKey
     , colOAuthToken
     , colFields
@@ -70,11 +71,11 @@ data CollectionsPatch' = CollectionsPatch'
     , _colEnterpriseId :: !Text
     , _colUserIP       :: !(Maybe Text)
     , _colCollectionId :: !Text
-    , _colCollection   :: !Collection
+    , _colPayload      :: !Collection
     , _colKey          :: !(Maybe Key)
     , _colOAuthToken   :: !(Maybe OAuthToken)
     , _colFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CollectionsPatch'' with the minimum fields required to make a request.
 --
@@ -90,7 +91,7 @@ data CollectionsPatch' = CollectionsPatch'
 --
 -- * 'colCollectionId'
 --
--- * 'colCollection'
+-- * 'colPayload'
 --
 -- * 'colKey'
 --
@@ -100,16 +101,16 @@ data CollectionsPatch' = CollectionsPatch'
 collectionsPatch'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'collectionId'
-    -> Collection -- ^ 'Collection'
+    -> Collection -- ^ 'payload'
     -> CollectionsPatch'
-collectionsPatch' pColEnterpriseId_ pColCollectionId_ pColCollection_ =
+collectionsPatch' pColEnterpriseId_ pColCollectionId_ pColPayload_ =
     CollectionsPatch'
     { _colQuotaUser = Nothing
     , _colPrettyPrint = True
     , _colEnterpriseId = pColEnterpriseId_
     , _colUserIP = Nothing
     , _colCollectionId = pColCollectionId_
-    , _colCollection = pColCollection_
+    , _colPayload = pColPayload_
     , _colKey = Nothing
     , _colOAuthToken = Nothing
     , _colFields = Nothing
@@ -147,10 +148,9 @@ colCollectionId
       (\ s a -> s{_colCollectionId = a})
 
 -- | Multipart request metadata.
-colCollection :: Lens' CollectionsPatch' Collection
-colCollection
-  = lens _colCollection
-      (\ s a -> s{_colCollection = a})
+colPayload :: Lens' CollectionsPatch' Collection
+colPayload
+  = lens _colPayload (\ s a -> s{_colPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -185,7 +185,7 @@ instance GoogleRequest CollectionsPatch' where
               _colKey
               _colOAuthToken
               (Just AltJSON)
-              _colCollection
+              _colPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CollectionsPatchResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,11 +38,11 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Resume
     , torPp
     , torAccessToken
     , torUploadType
+    , torPayload
     , torBearerToken
     , torKey
     , torName
     , torOAuthToken
-    , torResumeTransferOperationRequest
     , torFields
     , torCallback
     ) where
@@ -53,14 +54,14 @@ import           Network.Google.StorageTransfer.Types
 -- 'TransferOperationsResume'' request conforms to.
 type TransferOperationsResumeResource =
      "v1" :>
-       "{+name}:resume" :>
+       CaptureMode "name" "resume" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -75,21 +76,21 @@ type TransferOperationsResumeResource =
 --
 -- /See:/ 'transferOperationsResume'' smart constructor.
 data TransferOperationsResume' = TransferOperationsResume'
-    { _torXgafv                          :: !(Maybe Text)
-    , _torQuotaUser                      :: !(Maybe Text)
-    , _torPrettyPrint                    :: !Bool
-    , _torUploadProtocol                 :: !(Maybe Text)
-    , _torPp                             :: !Bool
-    , _torAccessToken                    :: !(Maybe Text)
-    , _torUploadType                     :: !(Maybe Text)
-    , _torBearerToken                    :: !(Maybe Text)
-    , _torKey                            :: !(Maybe Key)
-    , _torName                           :: !Text
-    , _torOAuthToken                     :: !(Maybe OAuthToken)
-    , _torResumeTransferOperationRequest :: !ResumeTransferOperationRequest
-    , _torFields                         :: !(Maybe Text)
-    , _torCallback                       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _torXgafv          :: !(Maybe Text)
+    , _torQuotaUser      :: !(Maybe Text)
+    , _torPrettyPrint    :: !Bool
+    , _torUploadProtocol :: !(Maybe Text)
+    , _torPp             :: !Bool
+    , _torAccessToken    :: !(Maybe Text)
+    , _torUploadType     :: !(Maybe Text)
+    , _torPayload        :: !ResumeTransferOperationRequest
+    , _torBearerToken    :: !(Maybe Text)
+    , _torKey            :: !(Maybe Key)
+    , _torName           :: !Text
+    , _torOAuthToken     :: !(Maybe OAuthToken)
+    , _torFields         :: !(Maybe Text)
+    , _torCallback       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferOperationsResume'' with the minimum fields required to make a request.
 --
@@ -109,6 +110,8 @@ data TransferOperationsResume' = TransferOperationsResume'
 --
 -- * 'torUploadType'
 --
+-- * 'torPayload'
+--
 -- * 'torBearerToken'
 --
 -- * 'torKey'
@@ -117,16 +120,14 @@ data TransferOperationsResume' = TransferOperationsResume'
 --
 -- * 'torOAuthToken'
 --
--- * 'torResumeTransferOperationRequest'
---
 -- * 'torFields'
 --
 -- * 'torCallback'
 transferOperationsResume'
-    :: Text -- ^ 'name'
-    -> ResumeTransferOperationRequest -- ^ 'ResumeTransferOperationRequest'
+    :: ResumeTransferOperationRequest -- ^ 'payload'
+    -> Text -- ^ 'name'
     -> TransferOperationsResume'
-transferOperationsResume' pTorName_ pTorResumeTransferOperationRequest_ =
+transferOperationsResume' pTorPayload_ pTorName_ =
     TransferOperationsResume'
     { _torXgafv = Nothing
     , _torQuotaUser = Nothing
@@ -135,11 +136,11 @@ transferOperationsResume' pTorName_ pTorResumeTransferOperationRequest_ =
     , _torPp = True
     , _torAccessToken = Nothing
     , _torUploadType = Nothing
+    , _torPayload = pTorPayload_
     , _torBearerToken = Nothing
     , _torKey = Nothing
     , _torName = pTorName_
     , _torOAuthToken = Nothing
-    , _torResumeTransferOperationRequest = pTorResumeTransferOperationRequest_
     , _torFields = Nothing
     , _torCallback = Nothing
     }
@@ -183,6 +184,11 @@ torUploadType
   = lens _torUploadType
       (\ s a -> s{_torUploadType = a})
 
+-- | Multipart request metadata.
+torPayload :: Lens' TransferOperationsResume' ResumeTransferOperationRequest
+torPayload
+  = lens _torPayload (\ s a -> s{_torPayload = a})
+
 -- | OAuth bearer token.
 torBearerToken :: Lens' TransferOperationsResume' (Maybe Text)
 torBearerToken
@@ -205,12 +211,6 @@ torOAuthToken
   = lens _torOAuthToken
       (\ s a -> s{_torOAuthToken = a})
 
--- | Multipart request metadata.
-torResumeTransferOperationRequest :: Lens' TransferOperationsResume' ResumeTransferOperationRequest
-torResumeTransferOperationRequest
-  = lens _torResumeTransferOperationRequest
-      (\ s a -> s{_torResumeTransferOperationRequest = a})
-
 -- | Selector specifying which fields to include in a partial response.
 torFields :: Lens' TransferOperationsResume' (Maybe Text)
 torFields
@@ -230,19 +230,19 @@ instance GoogleRequest TransferOperationsResume'
         type Rs TransferOperationsResume' = Empty
         request = requestWithRoute defReq storageTransferURL
         requestWithRoute r u TransferOperationsResume'{..}
-          = go _torXgafv _torAccessToken _torBearerToken
-              _torCallback
+          = go _torName _torXgafv _torUploadProtocol
               (Just _torPp)
+              _torAccessToken
               _torUploadType
-              _torUploadProtocol
-              _torName
+              _torBearerToken
+              _torCallback
               _torQuotaUser
               (Just _torPrettyPrint)
               _torFields
               _torKey
               _torOAuthToken
               (Just AltJSON)
-              _torResumeTransferOperationRequest
+              _torPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TransferOperationsResumeResource)

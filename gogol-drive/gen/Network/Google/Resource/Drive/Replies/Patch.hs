@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.Drive.Replies.Patch
     , rpQuotaUser
     , rpPrettyPrint
     , rpUserIP
-    , rpCommentReply
+    , rpPayload
     , rpKey
     , rpReplyId
     , rpFileId
@@ -68,17 +69,17 @@ type RepliesPatchResource =
 --
 -- /See:/ 'repliesPatch'' smart constructor.
 data RepliesPatch' = RepliesPatch'
-    { _rpQuotaUser    :: !(Maybe Text)
-    , _rpPrettyPrint  :: !Bool
-    , _rpUserIP       :: !(Maybe Text)
-    , _rpCommentReply :: !CommentReply
-    , _rpKey          :: !(Maybe Key)
-    , _rpReplyId      :: !Text
-    , _rpFileId       :: !Text
-    , _rpOAuthToken   :: !(Maybe OAuthToken)
-    , _rpCommentId    :: !Text
-    , _rpFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rpQuotaUser   :: !(Maybe Text)
+    , _rpPrettyPrint :: !Bool
+    , _rpUserIP      :: !(Maybe Text)
+    , _rpPayload     :: !CommentReply
+    , _rpKey         :: !(Maybe Key)
+    , _rpReplyId     :: !Text
+    , _rpFileId      :: !Text
+    , _rpOAuthToken  :: !(Maybe OAuthToken)
+    , _rpCommentId   :: !Text
+    , _rpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepliesPatch'' with the minimum fields required to make a request.
 --
@@ -90,7 +91,7 @@ data RepliesPatch' = RepliesPatch'
 --
 -- * 'rpUserIP'
 --
--- * 'rpCommentReply'
+-- * 'rpPayload'
 --
 -- * 'rpKey'
 --
@@ -104,17 +105,17 @@ data RepliesPatch' = RepliesPatch'
 --
 -- * 'rpFields'
 repliesPatch'
-    :: CommentReply -- ^ 'CommentReply'
+    :: CommentReply -- ^ 'payload'
     -> Text -- ^ 'replyId'
     -> Text -- ^ 'fileId'
     -> Text -- ^ 'commentId'
     -> RepliesPatch'
-repliesPatch' pRpCommentReply_ pRpReplyId_ pRpFileId_ pRpCommentId_ =
+repliesPatch' pRpPayload_ pRpReplyId_ pRpFileId_ pRpCommentId_ =
     RepliesPatch'
     { _rpQuotaUser = Nothing
     , _rpPrettyPrint = True
     , _rpUserIP = Nothing
-    , _rpCommentReply = pRpCommentReply_
+    , _rpPayload = pRpPayload_
     , _rpKey = Nothing
     , _rpReplyId = pRpReplyId_
     , _rpFileId = pRpFileId_
@@ -142,10 +143,9 @@ rpUserIP :: Lens' RepliesPatch' (Maybe Text)
 rpUserIP = lens _rpUserIP (\ s a -> s{_rpUserIP = a})
 
 -- | Multipart request metadata.
-rpCommentReply :: Lens' RepliesPatch' CommentReply
-rpCommentReply
-  = lens _rpCommentReply
-      (\ s a -> s{_rpCommentReply = a})
+rpPayload :: Lens' RepliesPatch' CommentReply
+rpPayload
+  = lens _rpPayload (\ s a -> s{_rpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -191,7 +191,7 @@ instance GoogleRequest RepliesPatch' where
               _rpKey
               _rpOAuthToken
               (Just AltJSON)
-              _rpCommentReply
+              _rpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RepliesPatchResource)

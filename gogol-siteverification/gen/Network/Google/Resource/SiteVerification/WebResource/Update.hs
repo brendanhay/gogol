@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.SiteVerification.WebResource.Update
     , wruQuotaUser
     , wruPrettyPrint
     , wruUserIP
+    , wruPayload
     , wruKey
-    , wruSiteVerificationWebResourceResource
     , wruId
     , wruOAuthToken
     , wruFields
@@ -62,15 +63,15 @@ type WebResourceUpdateResource =
 --
 -- /See:/ 'webResourceUpdate'' smart constructor.
 data WebResourceUpdate' = WebResourceUpdate'
-    { _wruQuotaUser                           :: !(Maybe Text)
-    , _wruPrettyPrint                         :: !Bool
-    , _wruUserIP                              :: !(Maybe Text)
-    , _wruKey                                 :: !(Maybe Key)
-    , _wruSiteVerificationWebResourceResource :: !SiteVerificationWebResourceResource
-    , _wruId                                  :: !Text
-    , _wruOAuthToken                          :: !(Maybe OAuthToken)
-    , _wruFields                              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _wruQuotaUser   :: !(Maybe Text)
+    , _wruPrettyPrint :: !Bool
+    , _wruUserIP      :: !(Maybe Text)
+    , _wruPayload     :: !SiteVerificationWebResourceResource
+    , _wruKey         :: !(Maybe Key)
+    , _wruId          :: !Text
+    , _wruOAuthToken  :: !(Maybe OAuthToken)
+    , _wruFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebResourceUpdate'' with the minimum fields required to make a request.
 --
@@ -82,9 +83,9 @@ data WebResourceUpdate' = WebResourceUpdate'
 --
 -- * 'wruUserIP'
 --
--- * 'wruKey'
+-- * 'wruPayload'
 --
--- * 'wruSiteVerificationWebResourceResource'
+-- * 'wruKey'
 --
 -- * 'wruId'
 --
@@ -92,16 +93,16 @@ data WebResourceUpdate' = WebResourceUpdate'
 --
 -- * 'wruFields'
 webResourceUpdate'
-    :: SiteVerificationWebResourceResource -- ^ 'SiteVerificationWebResourceResource'
+    :: SiteVerificationWebResourceResource -- ^ 'payload'
     -> Text -- ^ 'id'
     -> WebResourceUpdate'
-webResourceUpdate' pWruSiteVerificationWebResourceResource_ pWruId_ =
+webResourceUpdate' pWruPayload_ pWruId_ =
     WebResourceUpdate'
     { _wruQuotaUser = Nothing
     , _wruPrettyPrint = False
     , _wruUserIP = Nothing
+    , _wruPayload = pWruPayload_
     , _wruKey = Nothing
-    , _wruSiteVerificationWebResourceResource = pWruSiteVerificationWebResourceResource_
     , _wruId = pWruId_
     , _wruOAuthToken = Nothing
     , _wruFields = Nothing
@@ -126,18 +127,16 @@ wruUserIP :: Lens' WebResourceUpdate' (Maybe Text)
 wruUserIP
   = lens _wruUserIP (\ s a -> s{_wruUserIP = a})
 
+-- | Multipart request metadata.
+wruPayload :: Lens' WebResourceUpdate' SiteVerificationWebResourceResource
+wruPayload
+  = lens _wruPayload (\ s a -> s{_wruPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 wruKey :: Lens' WebResourceUpdate' (Maybe Key)
 wruKey = lens _wruKey (\ s a -> s{_wruKey = a})
-
--- | Multipart request metadata.
-wruSiteVerificationWebResourceResource :: Lens' WebResourceUpdate' SiteVerificationWebResourceResource
-wruSiteVerificationWebResourceResource
-  = lens _wruSiteVerificationWebResourceResource
-      (\ s a ->
-         s{_wruSiteVerificationWebResourceResource = a})
 
 -- | The id of a verified site or domain.
 wruId :: Lens' WebResourceUpdate' Text
@@ -169,7 +168,7 @@ instance GoogleRequest WebResourceUpdate' where
               _wruKey
               _wruOAuthToken
               (Just AltJSON)
-              _wruSiteVerificationWebResourceResource
+              _wruPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy WebResourceUpdateResource)

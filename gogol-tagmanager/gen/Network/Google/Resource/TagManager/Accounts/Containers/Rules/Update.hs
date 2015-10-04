@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,7 +37,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Update
     , acruUserIP
     , acruFingerprint
     , acruRuleId
-    , acruRule
+    , acruPayload
     , acruAccountId
     , acruKey
     , acruOAuthToken
@@ -75,12 +76,12 @@ data AccountsContainersRulesUpdate' = AccountsContainersRulesUpdate'
     , _acruUserIP      :: !(Maybe Text)
     , _acruFingerprint :: !(Maybe Text)
     , _acruRuleId      :: !Text
-    , _acruRule        :: !Rule
+    , _acruPayload     :: !Rule
     , _acruAccountId   :: !Text
     , _acruKey         :: !(Maybe Key)
     , _acruOAuthToken  :: !(Maybe OAuthToken)
     , _acruFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersRulesUpdate'' with the minimum fields required to make a request.
 --
@@ -98,7 +99,7 @@ data AccountsContainersRulesUpdate' = AccountsContainersRulesUpdate'
 --
 -- * 'acruRuleId'
 --
--- * 'acruRule'
+-- * 'acruPayload'
 --
 -- * 'acruAccountId'
 --
@@ -110,10 +111,10 @@ data AccountsContainersRulesUpdate' = AccountsContainersRulesUpdate'
 accountsContainersRulesUpdate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'ruleId'
-    -> Rule -- ^ 'Rule'
+    -> Rule -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> AccountsContainersRulesUpdate'
-accountsContainersRulesUpdate' pAcruContainerId_ pAcruRuleId_ pAcruRule_ pAcruAccountId_ =
+accountsContainersRulesUpdate' pAcruContainerId_ pAcruRuleId_ pAcruPayload_ pAcruAccountId_ =
     AccountsContainersRulesUpdate'
     { _acruQuotaUser = Nothing
     , _acruPrettyPrint = True
@@ -121,7 +122,7 @@ accountsContainersRulesUpdate' pAcruContainerId_ pAcruRuleId_ pAcruRule_ pAcruAc
     , _acruUserIP = Nothing
     , _acruFingerprint = Nothing
     , _acruRuleId = pAcruRuleId_
-    , _acruRule = pAcruRule_
+    , _acruPayload = pAcruPayload_
     , _acruAccountId = pAcruAccountId_
     , _acruKey = Nothing
     , _acruOAuthToken = Nothing
@@ -167,8 +168,9 @@ acruRuleId
   = lens _acruRuleId (\ s a -> s{_acruRuleId = a})
 
 -- | Multipart request metadata.
-acruRule :: Lens' AccountsContainersRulesUpdate' Rule
-acruRule = lens _acruRule (\ s a -> s{_acruRule = a})
+acruPayload :: Lens' AccountsContainersRulesUpdate' Rule
+acruPayload
+  = lens _acruPayload (\ s a -> s{_acruPayload = a})
 
 -- | The GTM Account ID.
 acruAccountId :: Lens' AccountsContainersRulesUpdate' Text
@@ -204,8 +206,8 @@ instance GoogleRequest AccountsContainersRulesUpdate'
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
           AccountsContainersRulesUpdate'{..}
-          = go _acruFingerprint _acruAccountId _acruContainerId
-              _acruRuleId
+          = go _acruAccountId _acruContainerId _acruRuleId
+              _acruFingerprint
               _acruQuotaUser
               (Just _acruPrettyPrint)
               _acruUserIP
@@ -213,7 +215,7 @@ instance GoogleRequest AccountsContainersRulesUpdate'
               _acruKey
               _acruOAuthToken
               (Just AltJSON)
-              _acruRule
+              _acruPayload
           where go
                   = clientWithRoute
                       (Proxy ::

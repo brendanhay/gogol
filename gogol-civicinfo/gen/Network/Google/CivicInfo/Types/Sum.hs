@@ -17,61 +17,69 @@ module Network.Google.CivicInfo.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | A list of office levels to filter by. Only offices that serve at least
--- one of these levels will be returned. Divisions that don\'t contain a
--- matching office will not be returned.
-data CivicInfoRepresentativesRepresentativeInfoByDivisionLevels
-    = ADMINISTRATIVEAREA1
-      -- ^ @administrativeArea1@
-    | ADMINISTRATIVEAREA2
-      -- ^ @administrativeArea2@
-    | Country
-      -- ^ @country@
-    | International
-      -- ^ @international@
-    | Locality
-      -- ^ @locality@
-    | Regional
-      -- ^ @regional@
-    | Special
-      -- ^ @special@
-    | SUBLOCALITY1
-      -- ^ @subLocality1@
-    | SUBLOCALITY2
-      -- ^ @subLocality2@
+-- | A list of office roles to filter by. Only offices fulfilling one of
+-- these roles will be returned. Divisions that don\'t contain a matching
+-- office will not be returned.
+data Roles
+    = DeputyHeadOfGovernment
+      -- ^ @deputyHeadOfGovernment@
+    | ExecutiveCouncil
+      -- ^ @executiveCouncil@
+    | GovernmentOfficer
+      -- ^ @governmentOfficer@
+    | HeadOfGovernment
+      -- ^ @headOfGovernment@
+    | HeadOfState
+      -- ^ @headOfState@
+    | HighestCourtJudge
+      -- ^ @highestCourtJudge@
+    | Judge
+      -- ^ @judge@
+    | LegislatorLowerBody
+      -- ^ @legislatorLowerBody@
+    | LegislatorUpperBody
+      -- ^ @legislatorUpperBody@
+    | SchoolBoard
+      -- ^ @schoolBoard@
+    | SpecialPurposeOfficer
+      -- ^ @specialPurposeOfficer@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CivicInfoRepresentativesRepresentativeInfoByDivisionLevels
+instance Hashable Roles
 
-instance FromText CivicInfoRepresentativesRepresentativeInfoByDivisionLevels where
+instance FromText Roles where
     fromText = \case
-        "administrativeArea1" -> Just ADMINISTRATIVEAREA1
-        "administrativeArea2" -> Just ADMINISTRATIVEAREA2
-        "country" -> Just Country
-        "international" -> Just International
-        "locality" -> Just Locality
-        "regional" -> Just Regional
-        "special" -> Just Special
-        "subLocality1" -> Just SUBLOCALITY1
-        "subLocality2" -> Just SUBLOCALITY2
+        "deputyHeadOfGovernment" -> Just DeputyHeadOfGovernment
+        "executiveCouncil" -> Just ExecutiveCouncil
+        "governmentOfficer" -> Just GovernmentOfficer
+        "headOfGovernment" -> Just HeadOfGovernment
+        "headOfState" -> Just HeadOfState
+        "highestCourtJudge" -> Just HighestCourtJudge
+        "judge" -> Just Judge
+        "legislatorLowerBody" -> Just LegislatorLowerBody
+        "legislatorUpperBody" -> Just LegislatorUpperBody
+        "schoolBoard" -> Just SchoolBoard
+        "specialPurposeOfficer" -> Just SpecialPurposeOfficer
         _ -> Nothing
 
-instance ToText CivicInfoRepresentativesRepresentativeInfoByDivisionLevels where
+instance ToText Roles where
     toText = \case
-        ADMINISTRATIVEAREA1 -> "administrativeArea1"
-        ADMINISTRATIVEAREA2 -> "administrativeArea2"
-        Country -> "country"
-        International -> "international"
-        Locality -> "locality"
-        Regional -> "regional"
-        Special -> "special"
-        SUBLOCALITY1 -> "subLocality1"
-        SUBLOCALITY2 -> "subLocality2"
+        DeputyHeadOfGovernment -> "deputyHeadOfGovernment"
+        ExecutiveCouncil -> "executiveCouncil"
+        GovernmentOfficer -> "governmentOfficer"
+        HeadOfGovernment -> "headOfGovernment"
+        HeadOfState -> "headOfState"
+        HighestCourtJudge -> "highestCourtJudge"
+        Judge -> "judge"
+        LegislatorLowerBody -> "legislatorLowerBody"
+        LegislatorUpperBody -> "legislatorUpperBody"
+        SchoolBoard -> "schoolBoard"
+        SpecialPurposeOfficer -> "specialPurposeOfficer"
 
-instance FromJSON CivicInfoRepresentativesRepresentativeInfoByDivisionLevels where
-    parseJSON = parseJSONText "CivicInfoRepresentativesRepresentativeInfoByDivisionLevels"
+instance FromJSON Roles where
+    parseJSON = parseJSONText "Roles"
 
-instance ToJSON CivicInfoRepresentativesRepresentativeInfoByDivisionLevels where
+instance ToJSON Roles where
     toJSON = toJSONText
 
 -- | A list of office levels to filter by. Only offices that serve at least
@@ -129,71 +137,6 @@ instance FromJSON CivicInfoRepresentativesRepresentativeInfoByAddressLevels wher
     parseJSON = parseJSONText "CivicInfoRepresentativesRepresentativeInfoByAddressLevels"
 
 instance ToJSON CivicInfoRepresentativesRepresentativeInfoByAddressLevels where
-    toJSON = toJSONText
-
--- | A list of office roles to filter by. Only offices fulfilling one of
--- these roles will be returned. Divisions that don\'t contain a matching
--- office will not be returned.
-data CivicInfoRepresentativesRepresentativeInfoByDivisionRoles
-    = DeputyHeadOfGovernment
-      -- ^ @deputyHeadOfGovernment@
-    | ExecutiveCouncil
-      -- ^ @executiveCouncil@
-    | GovernmentOfficer
-      -- ^ @governmentOfficer@
-    | HeadOfGovernment
-      -- ^ @headOfGovernment@
-    | HeadOfState
-      -- ^ @headOfState@
-    | HighestCourtJudge
-      -- ^ @highestCourtJudge@
-    | Judge
-      -- ^ @judge@
-    | LegislatorLowerBody
-      -- ^ @legislatorLowerBody@
-    | LegislatorUpperBody
-      -- ^ @legislatorUpperBody@
-    | SchoolBoard
-      -- ^ @schoolBoard@
-    | SpecialPurposeOfficer
-      -- ^ @specialPurposeOfficer@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CivicInfoRepresentativesRepresentativeInfoByDivisionRoles
-
-instance FromText CivicInfoRepresentativesRepresentativeInfoByDivisionRoles where
-    fromText = \case
-        "deputyHeadOfGovernment" -> Just DeputyHeadOfGovernment
-        "executiveCouncil" -> Just ExecutiveCouncil
-        "governmentOfficer" -> Just GovernmentOfficer
-        "headOfGovernment" -> Just HeadOfGovernment
-        "headOfState" -> Just HeadOfState
-        "highestCourtJudge" -> Just HighestCourtJudge
-        "judge" -> Just Judge
-        "legislatorLowerBody" -> Just LegislatorLowerBody
-        "legislatorUpperBody" -> Just LegislatorUpperBody
-        "schoolBoard" -> Just SchoolBoard
-        "specialPurposeOfficer" -> Just SpecialPurposeOfficer
-        _ -> Nothing
-
-instance ToText CivicInfoRepresentativesRepresentativeInfoByDivisionRoles where
-    toText = \case
-        DeputyHeadOfGovernment -> "deputyHeadOfGovernment"
-        ExecutiveCouncil -> "executiveCouncil"
-        GovernmentOfficer -> "governmentOfficer"
-        HeadOfGovernment -> "headOfGovernment"
-        HeadOfState -> "headOfState"
-        HighestCourtJudge -> "highestCourtJudge"
-        Judge -> "judge"
-        LegislatorLowerBody -> "legislatorLowerBody"
-        LegislatorUpperBody -> "legislatorUpperBody"
-        SchoolBoard -> "schoolBoard"
-        SpecialPurposeOfficer -> "specialPurposeOfficer"
-
-instance FromJSON CivicInfoRepresentativesRepresentativeInfoByDivisionRoles where
-    parseJSON = parseJSONText "CivicInfoRepresentativesRepresentativeInfoByDivisionRoles"
-
-instance ToJSON CivicInfoRepresentativesRepresentativeInfoByDivisionRoles where
     toJSON = toJSONText
 
 -- | A list of office roles to filter by. Only offices fulfilling one of
@@ -259,4 +202,61 @@ instance FromJSON CivicInfoRepresentativesRepresentativeInfoByAddressRoles where
     parseJSON = parseJSONText "CivicInfoRepresentativesRepresentativeInfoByAddressRoles"
 
 instance ToJSON CivicInfoRepresentativesRepresentativeInfoByAddressRoles where
+    toJSON = toJSONText
+
+-- | A list of office levels to filter by. Only offices that serve at least
+-- one of these levels will be returned. Divisions that don\'t contain a
+-- matching office will not be returned.
+data Levels
+    = LADMINISTRATIVEAREA1
+      -- ^ @administrativeArea1@
+    | LADMINISTRATIVEAREA2
+      -- ^ @administrativeArea2@
+    | LCountry
+      -- ^ @country@
+    | LInternational
+      -- ^ @international@
+    | LLocality
+      -- ^ @locality@
+    | LRegional
+      -- ^ @regional@
+    | LSpecial
+      -- ^ @special@
+    | LSUBLOCALITY1
+      -- ^ @subLocality1@
+    | LSUBLOCALITY2
+      -- ^ @subLocality2@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Levels
+
+instance FromText Levels where
+    fromText = \case
+        "administrativeArea1" -> Just LADMINISTRATIVEAREA1
+        "administrativeArea2" -> Just LADMINISTRATIVEAREA2
+        "country" -> Just LCountry
+        "international" -> Just LInternational
+        "locality" -> Just LLocality
+        "regional" -> Just LRegional
+        "special" -> Just LSpecial
+        "subLocality1" -> Just LSUBLOCALITY1
+        "subLocality2" -> Just LSUBLOCALITY2
+        _ -> Nothing
+
+instance ToText Levels where
+    toText = \case
+        LADMINISTRATIVEAREA1 -> "administrativeArea1"
+        LADMINISTRATIVEAREA2 -> "administrativeArea2"
+        LCountry -> "country"
+        LInternational -> "international"
+        LLocality -> "locality"
+        LRegional -> "regional"
+        LSpecial -> "special"
+        LSUBLOCALITY1 -> "subLocality1"
+        LSUBLOCALITY2 -> "subLocality2"
+
+instance FromJSON Levels where
+    parseJSON = parseJSONText "Levels"
+
+instance ToJSON Levels where
     toJSON = toJSONText

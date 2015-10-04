@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,10 +36,10 @@ module Network.Google.Resource.DFAReporting.CreativeFields.Patch
     , cfpPrettyPrint
     , cfpUserIP
     , cfpProfileId
+    , cfpPayload
     , cfpKey
     , cfpId
     , cfpOAuthToken
-    , cfpCreativeField
     , cfpFields
     ) where
 
@@ -67,16 +68,16 @@ type CreativeFieldsPatchResource =
 --
 -- /See:/ 'creativeFieldsPatch'' smart constructor.
 data CreativeFieldsPatch' = CreativeFieldsPatch'
-    { _cfpQuotaUser     :: !(Maybe Text)
-    , _cfpPrettyPrint   :: !Bool
-    , _cfpUserIP        :: !(Maybe Text)
-    , _cfpProfileId     :: !Int64
-    , _cfpKey           :: !(Maybe Key)
-    , _cfpId            :: !Int64
-    , _cfpOAuthToken    :: !(Maybe OAuthToken)
-    , _cfpCreativeField :: !CreativeField
-    , _cfpFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cfpQuotaUser   :: !(Maybe Text)
+    , _cfpPrettyPrint :: !Bool
+    , _cfpUserIP      :: !(Maybe Text)
+    , _cfpProfileId   :: !Int64
+    , _cfpPayload     :: !CreativeField
+    , _cfpKey         :: !(Maybe Key)
+    , _cfpId          :: !Int64
+    , _cfpOAuthToken  :: !(Maybe OAuthToken)
+    , _cfpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsPatch'' with the minimum fields required to make a request.
 --
@@ -90,30 +91,30 @@ data CreativeFieldsPatch' = CreativeFieldsPatch'
 --
 -- * 'cfpProfileId'
 --
+-- * 'cfpPayload'
+--
 -- * 'cfpKey'
 --
 -- * 'cfpId'
 --
 -- * 'cfpOAuthToken'
 --
--- * 'cfpCreativeField'
---
 -- * 'cfpFields'
 creativeFieldsPatch'
     :: Int64 -- ^ 'profileId'
+    -> CreativeField -- ^ 'payload'
     -> Int64 -- ^ 'id'
-    -> CreativeField -- ^ 'CreativeField'
     -> CreativeFieldsPatch'
-creativeFieldsPatch' pCfpProfileId_ pCfpId_ pCfpCreativeField_ =
+creativeFieldsPatch' pCfpProfileId_ pCfpPayload_ pCfpId_ =
     CreativeFieldsPatch'
     { _cfpQuotaUser = Nothing
     , _cfpPrettyPrint = True
     , _cfpUserIP = Nothing
     , _cfpProfileId = pCfpProfileId_
+    , _cfpPayload = pCfpPayload_
     , _cfpKey = Nothing
     , _cfpId = pCfpId_
     , _cfpOAuthToken = Nothing
-    , _cfpCreativeField = pCfpCreativeField_
     , _cfpFields = Nothing
     }
 
@@ -141,6 +142,11 @@ cfpProfileId :: Lens' CreativeFieldsPatch' Int64
 cfpProfileId
   = lens _cfpProfileId (\ s a -> s{_cfpProfileId = a})
 
+-- | Multipart request metadata.
+cfpPayload :: Lens' CreativeFieldsPatch' CreativeField
+cfpPayload
+  = lens _cfpPayload (\ s a -> s{_cfpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -156,12 +162,6 @@ cfpOAuthToken :: Lens' CreativeFieldsPatch' (Maybe OAuthToken)
 cfpOAuthToken
   = lens _cfpOAuthToken
       (\ s a -> s{_cfpOAuthToken = a})
-
--- | Multipart request metadata.
-cfpCreativeField :: Lens' CreativeFieldsPatch' CreativeField
-cfpCreativeField
-  = lens _cfpCreativeField
-      (\ s a -> s{_cfpCreativeField = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cfpFields :: Lens' CreativeFieldsPatch' (Maybe Text)
@@ -183,7 +183,7 @@ instance GoogleRequest CreativeFieldsPatch' where
               _cfpKey
               _cfpOAuthToken
               (Just AltJSON)
-              _cfpCreativeField
+              _cfpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeFieldsPatchResource)

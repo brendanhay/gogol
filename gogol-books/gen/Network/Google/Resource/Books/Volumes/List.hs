@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,21 +59,19 @@ import           Network.Google.Prelude
 -- 'VolumesList'' request conforms to.
 type VolumesListResource =
      "volumes" :>
-       QueryParam "download" BooksVolumesListDownload :>
-         QueryParam "filter" BooksVolumesListFilter :>
-           QueryParam "langRestrict" Text :>
-             QueryParam "libraryRestrict"
-               BooksVolumesListLibraryRestrict
-               :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "orderBy" BooksVolumesListOrderBy :>
-                   QueryParam "partner" Text :>
-                     QueryParam "printType" BooksVolumesListPrintType :>
-                       QueryParam "projection" BooksVolumesListProjection :>
-                         QueryParam "showPreorders" Bool :>
-                           QueryParam "source" Text :>
-                             QueryParam "startIndex" Word32 :>
-                               QueryParam "q" Text :>
+       QueryParam "q" Text :>
+         QueryParam "orderBy" OrderBy :>
+           QueryParam "libraryRestrict" LibraryRestrict :>
+             QueryParam "partner" Text :>
+               QueryParam "download" Download :>
+                 QueryParam "source" Text :>
+                   QueryParam "projection" BooksVolumesListProjection :>
+                     QueryParam "filter" Filter :>
+                       QueryParam "langRestrict" Text :>
+                         QueryParam "startIndex" Word32 :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "showPreorders" Bool :>
+                               QueryParam "printType" PrintType :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
@@ -89,24 +88,24 @@ type VolumesListResource =
 data VolumesList' = VolumesList'
     { _vlQuotaUser       :: !(Maybe Text)
     , _vlPrettyPrint     :: !Bool
-    , _vlOrderBy         :: !(Maybe BooksVolumesListOrderBy)
+    , _vlOrderBy         :: !(Maybe OrderBy)
     , _vlUserIP          :: !(Maybe Text)
-    , _vlLibraryRestrict :: !(Maybe BooksVolumesListLibraryRestrict)
+    , _vlLibraryRestrict :: !(Maybe LibraryRestrict)
     , _vlPartner         :: !(Maybe Text)
     , _vlQ               :: !Text
-    , _vlDownload        :: !(Maybe BooksVolumesListDownload)
+    , _vlDownload        :: !(Maybe Download)
     , _vlKey             :: !(Maybe Key)
     , _vlSource          :: !(Maybe Text)
     , _vlProjection      :: !(Maybe BooksVolumesListProjection)
-    , _vlFilter          :: !(Maybe BooksVolumesListFilter)
+    , _vlFilter          :: !(Maybe Filter)
     , _vlLangRestrict    :: !(Maybe Text)
     , _vlOAuthToken      :: !(Maybe OAuthToken)
     , _vlStartIndex      :: !(Maybe Word32)
     , _vlMaxResults      :: !(Maybe Word32)
     , _vlShowPreOrders   :: !(Maybe Bool)
-    , _vlPrintType       :: !(Maybe BooksVolumesListPrintType)
+    , _vlPrintType       :: !(Maybe PrintType)
     , _vlFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesList'' with the minimum fields required to make a request.
 --
@@ -189,7 +188,7 @@ vlPrettyPrint
       (\ s a -> s{_vlPrettyPrint = a})
 
 -- | Sort search results.
-vlOrderBy :: Lens' VolumesList' (Maybe BooksVolumesListOrderBy)
+vlOrderBy :: Lens' VolumesList' (Maybe OrderBy)
 vlOrderBy
   = lens _vlOrderBy (\ s a -> s{_vlOrderBy = a})
 
@@ -199,7 +198,7 @@ vlUserIP :: Lens' VolumesList' (Maybe Text)
 vlUserIP = lens _vlUserIP (\ s a -> s{_vlUserIP = a})
 
 -- | Restrict search to this user\'s library.
-vlLibraryRestrict :: Lens' VolumesList' (Maybe BooksVolumesListLibraryRestrict)
+vlLibraryRestrict :: Lens' VolumesList' (Maybe LibraryRestrict)
 vlLibraryRestrict
   = lens _vlLibraryRestrict
       (\ s a -> s{_vlLibraryRestrict = a})
@@ -214,7 +213,7 @@ vlQ :: Lens' VolumesList' Text
 vlQ = lens _vlQ (\ s a -> s{_vlQ = a})
 
 -- | Restrict to volumes by download availability.
-vlDownload :: Lens' VolumesList' (Maybe BooksVolumesListDownload)
+vlDownload :: Lens' VolumesList' (Maybe Download)
 vlDownload
   = lens _vlDownload (\ s a -> s{_vlDownload = a})
 
@@ -234,7 +233,7 @@ vlProjection
   = lens _vlProjection (\ s a -> s{_vlProjection = a})
 
 -- | Filter search results.
-vlFilter :: Lens' VolumesList' (Maybe BooksVolumesListFilter)
+vlFilter :: Lens' VolumesList' (Maybe Filter)
 vlFilter = lens _vlFilter (\ s a -> s{_vlFilter = a})
 
 -- | Restrict results to books with this language code.
@@ -265,7 +264,7 @@ vlShowPreOrders
       (\ s a -> s{_vlShowPreOrders = a})
 
 -- | Restrict to books or magazines.
-vlPrintType :: Lens' VolumesList' (Maybe BooksVolumesListPrintType)
+vlPrintType :: Lens' VolumesList' (Maybe PrintType)
 vlPrintType
   = lens _vlPrintType (\ s a -> s{_vlPrintType = a})
 
@@ -281,17 +280,17 @@ instance GoogleRequest VolumesList' where
         type Rs VolumesList' = Volumes
         request = requestWithRoute defReq booksURL
         requestWithRoute r u VolumesList'{..}
-          = go _vlDownload _vlFilter _vlLangRestrict
-              _vlLibraryRestrict
-              _vlMaxResults
-              _vlOrderBy
+          = go (Just _vlQ) _vlOrderBy _vlLibraryRestrict
               _vlPartner
-              _vlPrintType
-              _vlProjection
-              _vlShowPreOrders
+              _vlDownload
               _vlSource
+              _vlProjection
+              _vlFilter
+              _vlLangRestrict
               _vlStartIndex
-              (Just _vlQ)
+              _vlMaxResults
+              _vlShowPreOrders
+              _vlPrintType
               _vlQuotaUser
               (Just _vlPrettyPrint)
               _vlUserIP

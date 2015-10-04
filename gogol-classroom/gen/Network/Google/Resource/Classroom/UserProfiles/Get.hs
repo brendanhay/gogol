@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,12 +59,12 @@ type UserProfilesGetResource =
        "userProfiles" :>
          Capture "userId" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
@@ -92,7 +93,7 @@ data UserProfilesGet' = UserProfilesGet'
     , _upgOAuthToken     :: !(Maybe OAuthToken)
     , _upgFields         :: !(Maybe Text)
     , _upgCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserProfilesGet'' with the minimum fields required to make a request.
 --
@@ -225,12 +226,12 @@ instance GoogleRequest UserProfilesGet' where
         type Rs UserProfilesGet' = UserProfile
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u UserProfilesGet'{..}
-          = go _upgXgafv _upgAccessToken _upgBearerToken
-              _upgCallback
+          = go _upgUserId _upgXgafv _upgUploadProtocol
               (Just _upgPp)
+              _upgAccessToken
               _upgUploadType
-              _upgUploadProtocol
-              _upgUserId
+              _upgBearerToken
+              _upgCallback
               _upgQuotaUser
               (Just _upgPrettyPrint)
               _upgFields

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,7 +38,7 @@ module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Update
     , cuuEnterpriseId
     , cuuUserIP
     , cuuCollectionId
-    , cuuUser
+    , cuuPayload
     , cuuUserId
     , cuuKey
     , cuuOAuthToken
@@ -76,12 +77,12 @@ data CollectionviewersUpdate' = CollectionviewersUpdate'
     , _cuuEnterpriseId :: !Text
     , _cuuUserIP       :: !(Maybe Text)
     , _cuuCollectionId :: !Text
-    , _cuuUser         :: !User
+    , _cuuPayload      :: !User
     , _cuuUserId       :: !Text
     , _cuuKey          :: !(Maybe Key)
     , _cuuOAuthToken   :: !(Maybe OAuthToken)
     , _cuuFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CollectionviewersUpdate'' with the minimum fields required to make a request.
 --
@@ -97,7 +98,7 @@ data CollectionviewersUpdate' = CollectionviewersUpdate'
 --
 -- * 'cuuCollectionId'
 --
--- * 'cuuUser'
+-- * 'cuuPayload'
 --
 -- * 'cuuUserId'
 --
@@ -109,17 +110,17 @@ data CollectionviewersUpdate' = CollectionviewersUpdate'
 collectionviewersUpdate'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'collectionId'
-    -> User -- ^ 'User'
+    -> User -- ^ 'payload'
     -> Text -- ^ 'userId'
     -> CollectionviewersUpdate'
-collectionviewersUpdate' pCuuEnterpriseId_ pCuuCollectionId_ pCuuUser_ pCuuUserId_ =
+collectionviewersUpdate' pCuuEnterpriseId_ pCuuCollectionId_ pCuuPayload_ pCuuUserId_ =
     CollectionviewersUpdate'
     { _cuuQuotaUser = Nothing
     , _cuuPrettyPrint = True
     , _cuuEnterpriseId = pCuuEnterpriseId_
     , _cuuUserIP = Nothing
     , _cuuCollectionId = pCuuCollectionId_
-    , _cuuUser = pCuuUser_
+    , _cuuPayload = pCuuPayload_
     , _cuuUserId = pCuuUserId_
     , _cuuKey = Nothing
     , _cuuOAuthToken = Nothing
@@ -158,8 +159,9 @@ cuuCollectionId
       (\ s a -> s{_cuuCollectionId = a})
 
 -- | Multipart request metadata.
-cuuUser :: Lens' CollectionviewersUpdate' User
-cuuUser = lens _cuuUser (\ s a -> s{_cuuUser = a})
+cuuPayload :: Lens' CollectionviewersUpdate' User
+cuuPayload
+  = lens _cuuPayload (\ s a -> s{_cuuPayload = a})
 
 -- | The ID of the user.
 cuuUserId :: Lens' CollectionviewersUpdate' Text
@@ -200,7 +202,7 @@ instance GoogleRequest CollectionviewersUpdate' where
               _cuuKey
               _cuuOAuthToken
               (Just AltJSON)
-              _cuuUser
+              _cuuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CollectionviewersUpdateResource)

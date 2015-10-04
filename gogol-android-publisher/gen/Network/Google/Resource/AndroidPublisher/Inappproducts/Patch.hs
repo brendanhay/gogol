@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,9 +37,9 @@ module Network.Google.Resource.AndroidPublisher.Inappproducts.Patch
     , ipAutoConvertMissingPrices
     , ipPackageName
     , ipUserIP
+    , ipPayload
     , ipKey
-    , ipInAppProduct
-    , ipSku
+    , ipSKU
     , ipOAuthToken
     , ipFields
     ) where
@@ -73,12 +74,12 @@ data InappproductsPatch' = InappproductsPatch'
     , _ipAutoConvertMissingPrices :: !(Maybe Bool)
     , _ipPackageName              :: !Text
     , _ipUserIP                   :: !(Maybe Text)
+    , _ipPayload                  :: !InAppProduct
     , _ipKey                      :: !(Maybe Key)
-    , _ipInAppProduct             :: !InAppProduct
-    , _ipSku                      :: !Text
+    , _ipSKU                      :: !Text
     , _ipOAuthToken               :: !(Maybe OAuthToken)
     , _ipFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsPatch'' with the minimum fields required to make a request.
 --
@@ -94,30 +95,30 @@ data InappproductsPatch' = InappproductsPatch'
 --
 -- * 'ipUserIP'
 --
+-- * 'ipPayload'
+--
 -- * 'ipKey'
 --
--- * 'ipInAppProduct'
---
--- * 'ipSku'
+-- * 'ipSKU'
 --
 -- * 'ipOAuthToken'
 --
 -- * 'ipFields'
 inappproductsPatch'
     :: Text -- ^ 'packageName'
-    -> InAppProduct -- ^ 'InAppProduct'
+    -> InAppProduct -- ^ 'payload'
     -> Text -- ^ 'sku'
     -> InappproductsPatch'
-inappproductsPatch' pIpPackageName_ pIpInAppProduct_ pIpSku_ =
+inappproductsPatch' pIpPackageName_ pIpPayload_ pIpSKU_ =
     InappproductsPatch'
     { _ipQuotaUser = Nothing
     , _ipPrettyPrint = True
     , _ipAutoConvertMissingPrices = Nothing
     , _ipPackageName = pIpPackageName_
     , _ipUserIP = Nothing
+    , _ipPayload = pIpPayload_
     , _ipKey = Nothing
-    , _ipInAppProduct = pIpInAppProduct_
-    , _ipSku = pIpSku_
+    , _ipSKU = pIpSKU_
     , _ipOAuthToken = Nothing
     , _ipFields = Nothing
     }
@@ -156,21 +157,20 @@ ipPackageName
 ipUserIP :: Lens' InappproductsPatch' (Maybe Text)
 ipUserIP = lens _ipUserIP (\ s a -> s{_ipUserIP = a})
 
+-- | Multipart request metadata.
+ipPayload :: Lens' InappproductsPatch' InAppProduct
+ipPayload
+  = lens _ipPayload (\ s a -> s{_ipPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 ipKey :: Lens' InappproductsPatch' (Maybe Key)
 ipKey = lens _ipKey (\ s a -> s{_ipKey = a})
 
--- | Multipart request metadata.
-ipInAppProduct :: Lens' InappproductsPatch' InAppProduct
-ipInAppProduct
-  = lens _ipInAppProduct
-      (\ s a -> s{_ipInAppProduct = a})
-
 -- | Unique identifier for the in-app product.
-ipSku :: Lens' InappproductsPatch' Text
-ipSku = lens _ipSku (\ s a -> s{_ipSku = a})
+ipSKU :: Lens' InappproductsPatch' Text
+ipSKU = lens _ipSKU (\ s a -> s{_ipSKU = a})
 
 -- | OAuth 2.0 token for the current user.
 ipOAuthToken :: Lens' InappproductsPatch' (Maybe OAuthToken)
@@ -189,8 +189,8 @@ instance GoogleRequest InappproductsPatch' where
         type Rs InappproductsPatch' = InAppProduct
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u InappproductsPatch'{..}
-          = go _ipAutoConvertMissingPrices _ipPackageName
-              _ipSku
+          = go _ipPackageName _ipSKU
+              _ipAutoConvertMissingPrices
               _ipQuotaUser
               (Just _ipPrettyPrint)
               _ipUserIP
@@ -198,7 +198,7 @@ instance GoogleRequest InappproductsPatch' where
               _ipKey
               _ipOAuthToken
               (Just AltJSON)
-              _ipInAppProduct
+              _ipPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InappproductsPatchResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,11 +37,11 @@ module Network.Google.Resource.DeploymentManager.Deployments.Patch
     , dpPrettyPrint
     , dpProject
     , dpUserIP
+    , dpPayload
     , dpUpdatePolicy
     , dpDeletePolicy
     , dpKey
     , dpOAuthToken
-    , dpDeployment
     , dpFields
     , dpDeployment
     ) where
@@ -55,15 +56,9 @@ type DeploymentsPatchResource =
        "global" :>
          "deployments" :>
            Capture "deployment" Text :>
-             QueryParam "createPolicy"
-               DeploymentManagerDeploymentsPatchCreatePolicy
-               :>
-               QueryParam "deletePolicy"
-                 DeploymentManagerDeploymentsPatchDeletePolicy
-                 :>
-                 QueryParam "updatePolicy"
-                   DeploymentManagerDeploymentsPatchUpdatePolicy
-                   :>
+             QueryParam "createPolicy" CreatePolicy :>
+               QueryParam "updatePolicy" UpdatePolicy :>
+                 QueryParam "deletePolicy" DeletePolicy :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -79,19 +74,19 @@ type DeploymentsPatchResource =
 --
 -- /See:/ 'deploymentsPatch'' smart constructor.
 data DeploymentsPatch' = DeploymentsPatch'
-    { _dpCreatePolicy :: !DeploymentManagerDeploymentsPatchCreatePolicy
+    { _dpCreatePolicy :: !CreatePolicy
     , _dpQuotaUser    :: !(Maybe Text)
     , _dpPrettyPrint  :: !Bool
     , _dpProject      :: !Text
     , _dpUserIP       :: !(Maybe Text)
-    , _dpUpdatePolicy :: !DeploymentManagerDeploymentsPatchUpdatePolicy
-    , _dpDeletePolicy :: !DeploymentManagerDeploymentsPatchDeletePolicy
+    , _dpPayload      :: !Deployment
+    , _dpUpdatePolicy :: !UpdatePolicy
+    , _dpDeletePolicy :: !DeletePolicy
     , _dpKey          :: !(Maybe Key)
     , _dpOAuthToken   :: !(Maybe OAuthToken)
-    , _dpDeployment   :: !Deployment
     , _dpFields       :: !(Maybe Text)
     , _dpDeployment   :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsPatch'' with the minimum fields required to make a request.
 --
@@ -107,6 +102,8 @@ data DeploymentsPatch' = DeploymentsPatch'
 --
 -- * 'dpUserIP'
 --
+-- * 'dpPayload'
+--
 -- * 'dpUpdatePolicy'
 --
 -- * 'dpDeletePolicy'
@@ -115,34 +112,32 @@ data DeploymentsPatch' = DeploymentsPatch'
 --
 -- * 'dpOAuthToken'
 --
--- * 'dpDeployment'
---
 -- * 'dpFields'
 --
 -- * 'dpDeployment'
 deploymentsPatch'
     :: Text -- ^ 'project'
-    -> Deployment -- ^ 'Deployment'
+    -> Deployment -- ^ 'payload'
     -> Text -- ^ 'deployment'
     -> DeploymentsPatch'
-deploymentsPatch' pDpProject_ pDpDeployment_ pDpDeployment_ =
+deploymentsPatch' pDpProject_ pDpPayload_ pDpDeployment_ =
     DeploymentsPatch'
     { _dpCreatePolicy = CreateOrAcquire
     , _dpQuotaUser = Nothing
     , _dpPrettyPrint = True
     , _dpProject = pDpProject_
     , _dpUserIP = Nothing
-    , _dpUpdatePolicy = Patch
-    , _dpDeletePolicy = Delete
+    , _dpPayload = pDpPayload_
+    , _dpUpdatePolicy = UPPatch
+    , _dpDeletePolicy = DPDelete
     , _dpKey = Nothing
     , _dpOAuthToken = Nothing
-    , _dpDeployment = pDpDeployment_
     , _dpFields = Nothing
     , _dpDeployment = pDpDeployment_
     }
 
 -- | Sets the policy to use for creating new resources.
-dpCreatePolicy :: Lens' DeploymentsPatch' DeploymentManagerDeploymentsPatchCreatePolicy
+dpCreatePolicy :: Lens' DeploymentsPatch' CreatePolicy
 dpCreatePolicy
   = lens _dpCreatePolicy
       (\ s a -> s{_dpCreatePolicy = a})
@@ -170,14 +165,19 @@ dpProject
 dpUserIP :: Lens' DeploymentsPatch' (Maybe Text)
 dpUserIP = lens _dpUserIP (\ s a -> s{_dpUserIP = a})
 
+-- | Multipart request metadata.
+dpPayload :: Lens' DeploymentsPatch' Deployment
+dpPayload
+  = lens _dpPayload (\ s a -> s{_dpPayload = a})
+
 -- | Sets the policy to use for updating resources.
-dpUpdatePolicy :: Lens' DeploymentsPatch' DeploymentManagerDeploymentsPatchUpdatePolicy
+dpUpdatePolicy :: Lens' DeploymentsPatch' UpdatePolicy
 dpUpdatePolicy
   = lens _dpUpdatePolicy
       (\ s a -> s{_dpUpdatePolicy = a})
 
 -- | Sets the policy to use for deleting resources.
-dpDeletePolicy :: Lens' DeploymentsPatch' DeploymentManagerDeploymentsPatchDeletePolicy
+dpDeletePolicy :: Lens' DeploymentsPatch' DeletePolicy
 dpDeletePolicy
   = lens _dpDeletePolicy
       (\ s a -> s{_dpDeletePolicy = a})
@@ -192,11 +192,6 @@ dpKey = lens _dpKey (\ s a -> s{_dpKey = a})
 dpOAuthToken :: Lens' DeploymentsPatch' (Maybe OAuthToken)
 dpOAuthToken
   = lens _dpOAuthToken (\ s a -> s{_dpOAuthToken = a})
-
--- | Multipart request metadata.
-dpDeployment :: Lens' DeploymentsPatch' Deployment
-dpDeployment
-  = lens _dpDeployment (\ s a -> s{_dpDeployment = a})
 
 -- | Selector specifying which fields to include in a partial response.
 dpFields :: Lens' DeploymentsPatch' (Maybe Text)
@@ -216,10 +211,9 @@ instance GoogleRequest DeploymentsPatch' where
         request
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u DeploymentsPatch'{..}
-          = go (Just _dpCreatePolicy) (Just _dpDeletePolicy)
+          = go _dpProject _dpDeployment (Just _dpCreatePolicy)
               (Just _dpUpdatePolicy)
-              _dpProject
-              _dpDeployment
+              (Just _dpDeletePolicy)
               _dpQuotaUser
               (Just _dpPrettyPrint)
               _dpUserIP
@@ -227,7 +221,7 @@ instance GoogleRequest DeploymentsPatch' where
               _dpKey
               _dpOAuthToken
               (Just AltJSON)
-              _dpDeployment
+              _dpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DeploymentsPatchResource)

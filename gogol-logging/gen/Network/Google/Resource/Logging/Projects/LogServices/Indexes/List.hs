@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -63,18 +64,18 @@ type ProjectsLogServicesIndexesListResource =
            "logServices" :>
              Capture "logServicesId" Text :>
                "indexes" :>
-                 QueryParam "$.xgafv" Text :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "depth" Int32 :>
-                           QueryParam "indexPrefix" Text :>
-                             QueryParam "log" Text :>
-                               QueryParam "pageSize" Int32 :>
+                 QueryParam "log" Text :>
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "depth" Int32 :>
                                  QueryParam "pageToken" Text :>
-                                   QueryParam "pp" Bool :>
-                                     QueryParam "uploadType" Text :>
-                                       QueryParam "upload_protocol" Text :>
+                                   QueryParam "pageSize" Int32 :>
+                                     QueryParam "indexPrefix" Text :>
+                                       QueryParam "callback" Text :>
                                          QueryParam "quotaUser" Text :>
                                            QueryParam "prettyPrint" Bool :>
                                              QueryParam "fields" Text :>
@@ -109,7 +110,7 @@ data ProjectsLogServicesIndexesList' = ProjectsLogServicesIndexesList'
     , _plsilIndexPrefix    :: !(Maybe Text)
     , _plsilFields         :: !(Maybe Text)
     , _plsilCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogServicesIndexesList'' with the minimum fields required to make a request.
 --
@@ -328,18 +329,18 @@ instance GoogleRequest
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u
           ProjectsLogServicesIndexesList'{..}
-          = go _plsilXgafv _plsilAccessToken _plsilBearerToken
-              _plsilCallback
-              _plsilDepth
-              _plsilIndexPrefix
-              _plsilLog
-              _plsilPageSize
-              _plsilPageToken
-              (Just _plsilPp)
-              _plsilUploadType
+          = go _plsilProjectsId _plsilLogServicesId _plsilLog
+              _plsilXgafv
               _plsilUploadProtocol
-              _plsilProjectsId
-              _plsilLogServicesId
+              (Just _plsilPp)
+              _plsilAccessToken
+              _plsilUploadType
+              _plsilBearerToken
+              _plsilDepth
+              _plsilPageToken
+              _plsilPageSize
+              _plsilIndexPrefix
+              _plsilCallback
               _plsilQuotaUser
               (Just _plsilPrettyPrint)
               _plsilFields

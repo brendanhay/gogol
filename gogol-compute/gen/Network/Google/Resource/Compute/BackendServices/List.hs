@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type BackendServicesListResource =
        "global" :>
          "backendServices" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data BackendServicesList' = BackendServicesList'
     , _bslOAuthToken  :: !(Maybe OAuthToken)
     , _bslMaxResults  :: !Word32
     , _bslFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BackendServicesList'' with the minimum fields required to make a request.
 --
@@ -198,8 +199,8 @@ instance GoogleRequest BackendServicesList' where
         type Rs BackendServicesList' = BackendServiceList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u BackendServicesList'{..}
-          = go _bslFilter (Just _bslMaxResults) _bslPageToken
-              _bslProject
+          = go _bslProject _bslFilter _bslPageToken
+              (Just _bslMaxResults)
               _bslQuotaUser
               (Just _bslPrettyPrint)
               _bslUserIP

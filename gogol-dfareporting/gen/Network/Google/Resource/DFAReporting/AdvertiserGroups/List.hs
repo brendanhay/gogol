@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,16 +55,16 @@ type AdvertiserGroupsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "advertiserGroups" :>
-           QueryParams "ids" Int64 :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "searchString" Text :>
+           QueryParam "searchString" Text :>
+             QueryParams "ids" Int64 :>
+               QueryParam "sortOrder"
+                 DfareportingAdvertiserGroupsListSortOrder
+                 :>
+                 QueryParam "pageToken" Text :>
                    QueryParam "sortField"
                      DfareportingAdvertiserGroupsListSortField
                      :>
-                     QueryParam "sortOrder"
-                       DfareportingAdvertiserGroupsListSortOrder
-                       :>
+                     QueryParam "maxResults" Int32 :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
@@ -81,7 +82,7 @@ data AdvertiserGroupsList' = AdvertiserGroupsList'
     , _aglPrettyPrint  :: !Bool
     , _aglUserIP       :: !(Maybe Text)
     , _aglSearchString :: !(Maybe Text)
-    , _aglIds          :: !(Maybe Int64)
+    , _aglIds          :: !(Maybe [Int64])
     , _aglProfileId    :: !Int64
     , _aglSortOrder    :: !(Maybe DfareportingAdvertiserGroupsListSortOrder)
     , _aglKey          :: !(Maybe Key)
@@ -90,7 +91,7 @@ data AdvertiserGroupsList' = AdvertiserGroupsList'
     , _aglOAuthToken   :: !(Maybe OAuthToken)
     , _aglMaxResults   :: !(Maybe Int32)
     , _aglFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsList'' with the minimum fields required to make a request.
 --
@@ -174,8 +175,10 @@ aglSearchString
       (\ s a -> s{_aglSearchString = a})
 
 -- | Select only advertiser groups with these IDs.
-aglIds :: Lens' AdvertiserGroupsList' (Maybe Int64)
-aglIds = lens _aglIds (\ s a -> s{_aglIds = a})
+aglIds :: Lens' AdvertiserGroupsList' [Int64]
+aglIds
+  = lens _aglIds (\ s a -> s{_aglIds = a}) . _Default .
+      _Coerce
 
 -- | User profile ID associated with this request.
 aglProfileId :: Lens' AdvertiserGroupsList' Int64
@@ -229,11 +232,12 @@ instance GoogleRequest AdvertiserGroupsList' where
              AdvertiserGroupsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertiserGroupsList'{..}
-          = go _aglIds _aglMaxResults _aglPageToken
-              _aglSearchString
-              _aglSortField
+          = go _aglProfileId _aglSearchString
+              (_aglIds ^. _Default)
               _aglSortOrder
-              _aglProfileId
+              _aglPageToken
+              _aglSortField
+              _aglMaxResults
               _aglQuotaUser
               (Just _aglPrettyPrint)
               _aglUserIP

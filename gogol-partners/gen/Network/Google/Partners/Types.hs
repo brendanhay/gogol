@@ -144,10 +144,6 @@ module Network.Google.Partners.Types
     , uoIPAddress
     , uoUserId
 
-    -- * LogMessageRequestClientInfo
-    , LogMessageRequestClientInfo
-    , logMessageRequestClientInfo
-
     -- * LogMessageResponse
     , LogMessageResponse
     , logMessageResponse
@@ -166,6 +162,10 @@ module Network.Google.Partners.Types
     , lWebsiteURL
     , lType
     , lGpsMotivations
+
+    -- * ClientInfo
+    , ClientInfo
+    , clientInfo
 
     -- * Company
     , Company

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.Compute.TargetPools.Insert
     -- * Request Lenses
     , tpiQuotaUser
     , tpiPrettyPrint
-    , tpiTargetPool
     , tpiProject
     , tpiUserIP
+    , tpiPayload
     , tpiKey
     , tpiRegion
     , tpiOAuthToken
@@ -68,14 +69,14 @@ type TargetPoolsInsertResource =
 data TargetPoolsInsert' = TargetPoolsInsert'
     { _tpiQuotaUser   :: !(Maybe Text)
     , _tpiPrettyPrint :: !Bool
-    , _tpiTargetPool  :: !TargetPool
     , _tpiProject     :: !Text
     , _tpiUserIP      :: !(Maybe Text)
+    , _tpiPayload     :: !TargetPool
     , _tpiKey         :: !(Maybe Key)
     , _tpiRegion      :: !Text
     , _tpiOAuthToken  :: !(Maybe OAuthToken)
     , _tpiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsInsert'' with the minimum fields required to make a request.
 --
@@ -85,11 +86,11 @@ data TargetPoolsInsert' = TargetPoolsInsert'
 --
 -- * 'tpiPrettyPrint'
 --
--- * 'tpiTargetPool'
---
 -- * 'tpiProject'
 --
 -- * 'tpiUserIP'
+--
+-- * 'tpiPayload'
 --
 -- * 'tpiKey'
 --
@@ -99,17 +100,17 @@ data TargetPoolsInsert' = TargetPoolsInsert'
 --
 -- * 'tpiFields'
 targetPoolsInsert'
-    :: TargetPool -- ^ 'TargetPool'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'project'
+    -> TargetPool -- ^ 'payload'
     -> Text -- ^ 'region'
     -> TargetPoolsInsert'
-targetPoolsInsert' pTpiTargetPool_ pTpiProject_ pTpiRegion_ =
+targetPoolsInsert' pTpiProject_ pTpiPayload_ pTpiRegion_ =
     TargetPoolsInsert'
     { _tpiQuotaUser = Nothing
     , _tpiPrettyPrint = True
-    , _tpiTargetPool = pTpiTargetPool_
     , _tpiProject = pTpiProject_
     , _tpiUserIP = Nothing
+    , _tpiPayload = pTpiPayload_
     , _tpiKey = Nothing
     , _tpiRegion = pTpiRegion_
     , _tpiOAuthToken = Nothing
@@ -129,12 +130,6 @@ tpiPrettyPrint
   = lens _tpiPrettyPrint
       (\ s a -> s{_tpiPrettyPrint = a})
 
--- | Multipart request metadata.
-tpiTargetPool :: Lens' TargetPoolsInsert' TargetPool
-tpiTargetPool
-  = lens _tpiTargetPool
-      (\ s a -> s{_tpiTargetPool = a})
-
 -- | Name of the project scoping this request.
 tpiProject :: Lens' TargetPoolsInsert' Text
 tpiProject
@@ -145,6 +140,11 @@ tpiProject
 tpiUserIP :: Lens' TargetPoolsInsert' (Maybe Text)
 tpiUserIP
   = lens _tpiUserIP (\ s a -> s{_tpiUserIP = a})
+
+-- | Multipart request metadata.
+tpiPayload :: Lens' TargetPoolsInsert' TargetPool
+tpiPayload
+  = lens _tpiPayload (\ s a -> s{_tpiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -183,7 +183,7 @@ instance GoogleRequest TargetPoolsInsert' where
               _tpiKey
               _tpiOAuthToken
               (Just AltJSON)
-              _tpiTargetPool
+              _tpiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetPoolsInsertResource)

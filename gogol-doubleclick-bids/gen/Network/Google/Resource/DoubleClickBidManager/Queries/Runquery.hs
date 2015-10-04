@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.DoubleClickBidManager.Queries.Runquery
     , qrQuotaUser
     , qrQueryId
     , qrPrettyPrint
-    , qrRunQueryRequest
     , qrUserIP
+    , qrPayload
     , qrKey
     , qrOAuthToken
     , qrFields
@@ -61,15 +62,15 @@ type QueriesRunqueryResource =
 --
 -- /See:/ 'queriesRunquery'' smart constructor.
 data QueriesRunquery' = QueriesRunquery'
-    { _qrQuotaUser       :: !(Maybe Text)
-    , _qrQueryId         :: !Int64
-    , _qrPrettyPrint     :: !Bool
-    , _qrRunQueryRequest :: !RunQueryRequest
-    , _qrUserIP          :: !(Maybe Text)
-    , _qrKey             :: !(Maybe Key)
-    , _qrOAuthToken      :: !(Maybe OAuthToken)
-    , _qrFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _qrQuotaUser   :: !(Maybe Text)
+    , _qrQueryId     :: !Int64
+    , _qrPrettyPrint :: !Bool
+    , _qrUserIP      :: !(Maybe Text)
+    , _qrPayload     :: !RunQueryRequest
+    , _qrKey         :: !(Maybe Key)
+    , _qrOAuthToken  :: !(Maybe OAuthToken)
+    , _qrFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueriesRunquery'' with the minimum fields required to make a request.
 --
@@ -81,9 +82,9 @@ data QueriesRunquery' = QueriesRunquery'
 --
 -- * 'qrPrettyPrint'
 --
--- * 'qrRunQueryRequest'
---
 -- * 'qrUserIP'
+--
+-- * 'qrPayload'
 --
 -- * 'qrKey'
 --
@@ -92,15 +93,15 @@ data QueriesRunquery' = QueriesRunquery'
 -- * 'qrFields'
 queriesRunquery'
     :: Int64 -- ^ 'queryId'
-    -> RunQueryRequest -- ^ 'RunQueryRequest'
+    -> RunQueryRequest -- ^ 'payload'
     -> QueriesRunquery'
-queriesRunquery' pQrQueryId_ pQrRunQueryRequest_ =
+queriesRunquery' pQrQueryId_ pQrPayload_ =
     QueriesRunquery'
     { _qrQuotaUser = Nothing
     , _qrQueryId = pQrQueryId_
     , _qrPrettyPrint = True
-    , _qrRunQueryRequest = pQrRunQueryRequest_
     , _qrUserIP = Nothing
+    , _qrPayload = pQrPayload_
     , _qrKey = Nothing
     , _qrOAuthToken = Nothing
     , _qrFields = Nothing
@@ -124,16 +125,15 @@ qrPrettyPrint
   = lens _qrPrettyPrint
       (\ s a -> s{_qrPrettyPrint = a})
 
--- | Multipart request metadata.
-qrRunQueryRequest :: Lens' QueriesRunquery' RunQueryRequest
-qrRunQueryRequest
-  = lens _qrRunQueryRequest
-      (\ s a -> s{_qrRunQueryRequest = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 qrUserIP :: Lens' QueriesRunquery' (Maybe Text)
 qrUserIP = lens _qrUserIP (\ s a -> s{_qrUserIP = a})
+
+-- | Multipart request metadata.
+qrPayload :: Lens' QueriesRunquery' RunQueryRequest
+qrPayload
+  = lens _qrPayload (\ s a -> s{_qrPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -164,7 +164,7 @@ instance GoogleRequest QueriesRunquery' where
               _qrKey
               _qrOAuthToken
               (Just AltJSON)
-              _qrRunQueryRequest
+              _qrPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy QueriesRunqueryResource)

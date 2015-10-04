@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.Patch
     , rlpPrettyPrint
     , rlpUserIP
     , rlpProfileId
-    , rlpRemarketingList
+    , rlpPayload
     , rlpKey
     , rlpId
     , rlpOAuthToken
@@ -67,16 +68,16 @@ type RemarketingListsPatchResource =
 --
 -- /See:/ 'remarketingListsPatch'' smart constructor.
 data RemarketingListsPatch' = RemarketingListsPatch'
-    { _rlpQuotaUser       :: !(Maybe Text)
-    , _rlpPrettyPrint     :: !Bool
-    , _rlpUserIP          :: !(Maybe Text)
-    , _rlpProfileId       :: !Int64
-    , _rlpRemarketingList :: !RemarketingList
-    , _rlpKey             :: !(Maybe Key)
-    , _rlpId              :: !Int64
-    , _rlpOAuthToken      :: !(Maybe OAuthToken)
-    , _rlpFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rlpQuotaUser   :: !(Maybe Text)
+    , _rlpPrettyPrint :: !Bool
+    , _rlpUserIP      :: !(Maybe Text)
+    , _rlpProfileId   :: !Int64
+    , _rlpPayload     :: !RemarketingList
+    , _rlpKey         :: !(Maybe Key)
+    , _rlpId          :: !Int64
+    , _rlpOAuthToken  :: !(Maybe OAuthToken)
+    , _rlpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListsPatch'' with the minimum fields required to make a request.
 --
@@ -90,7 +91,7 @@ data RemarketingListsPatch' = RemarketingListsPatch'
 --
 -- * 'rlpProfileId'
 --
--- * 'rlpRemarketingList'
+-- * 'rlpPayload'
 --
 -- * 'rlpKey'
 --
@@ -101,16 +102,16 @@ data RemarketingListsPatch' = RemarketingListsPatch'
 -- * 'rlpFields'
 remarketingListsPatch'
     :: Int64 -- ^ 'profileId'
-    -> RemarketingList -- ^ 'RemarketingList'
+    -> RemarketingList -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> RemarketingListsPatch'
-remarketingListsPatch' pRlpProfileId_ pRlpRemarketingList_ pRlpId_ =
+remarketingListsPatch' pRlpProfileId_ pRlpPayload_ pRlpId_ =
     RemarketingListsPatch'
     { _rlpQuotaUser = Nothing
     , _rlpPrettyPrint = True
     , _rlpUserIP = Nothing
     , _rlpProfileId = pRlpProfileId_
-    , _rlpRemarketingList = pRlpRemarketingList_
+    , _rlpPayload = pRlpPayload_
     , _rlpKey = Nothing
     , _rlpId = pRlpId_
     , _rlpOAuthToken = Nothing
@@ -142,10 +143,9 @@ rlpProfileId
   = lens _rlpProfileId (\ s a -> s{_rlpProfileId = a})
 
 -- | Multipart request metadata.
-rlpRemarketingList :: Lens' RemarketingListsPatch' RemarketingList
-rlpRemarketingList
-  = lens _rlpRemarketingList
-      (\ s a -> s{_rlpRemarketingList = a})
+rlpPayload :: Lens' RemarketingListsPatch' RemarketingList
+rlpPayload
+  = lens _rlpPayload (\ s a -> s{_rlpPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -183,7 +183,7 @@ instance GoogleRequest RemarketingListsPatch' where
               _rlpKey
               _rlpOAuthToken
               (Just AltJSON)
-              _rlpRemarketingList
+              _rlpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RemarketingListsPatchResource)

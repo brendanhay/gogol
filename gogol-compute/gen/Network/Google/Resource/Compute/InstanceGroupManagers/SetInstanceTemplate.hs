@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,13 +33,13 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.SetInstanceTemplate
     , InstanceGroupManagersSetInstanceTemplate'
 
     -- * Request Lenses
-    , igmsitInstanceGroupManagersSetInstanceTemplateRequest
     , igmsitQuotaUser
     , igmsitPrettyPrint
     , igmsitProject
     , igmsitInstanceGroupManager
     , igmsitUserIP
     , igmsitZone
+    , igmsitPayload
     , igmsitKey
     , igmsitOAuthToken
     , igmsitFields
@@ -74,23 +75,21 @@ type InstanceGroupManagersSetInstanceTemplateResource
 --
 -- /See:/ 'instanceGroupManagersSetInstanceTemplate'' smart constructor.
 data InstanceGroupManagersSetInstanceTemplate' = InstanceGroupManagersSetInstanceTemplate'
-    { _igmsitInstanceGroupManagersSetInstanceTemplateRequest :: !InstanceGroupManagersSetInstanceTemplateRequest
-    , _igmsitQuotaUser                                       :: !(Maybe Text)
-    , _igmsitPrettyPrint                                     :: !Bool
-    , _igmsitProject                                         :: !Text
-    , _igmsitInstanceGroupManager                            :: !Text
-    , _igmsitUserIP                                          :: !(Maybe Text)
-    , _igmsitZone                                            :: !Text
-    , _igmsitKey                                             :: !(Maybe Key)
-    , _igmsitOAuthToken                                      :: !(Maybe OAuthToken)
-    , _igmsitFields                                          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _igmsitQuotaUser            :: !(Maybe Text)
+    , _igmsitPrettyPrint          :: !Bool
+    , _igmsitProject              :: !Text
+    , _igmsitInstanceGroupManager :: !Text
+    , _igmsitUserIP               :: !(Maybe Text)
+    , _igmsitZone                 :: !Text
+    , _igmsitPayload              :: !InstanceGroupManagersSetInstanceTemplateRequest
+    , _igmsitKey                  :: !(Maybe Key)
+    , _igmsitOAuthToken           :: !(Maybe OAuthToken)
+    , _igmsitFields               :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersSetInstanceTemplate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'igmsitInstanceGroupManagersSetInstanceTemplateRequest'
 --
 -- * 'igmsitQuotaUser'
 --
@@ -104,39 +103,32 @@ data InstanceGroupManagersSetInstanceTemplate' = InstanceGroupManagersSetInstanc
 --
 -- * 'igmsitZone'
 --
+-- * 'igmsitPayload'
+--
 -- * 'igmsitKey'
 --
 -- * 'igmsitOAuthToken'
 --
 -- * 'igmsitFields'
 instanceGroupManagersSetInstanceTemplate'
-    :: InstanceGroupManagersSetInstanceTemplateRequest -- ^ 'InstanceGroupManagersSetInstanceTemplateRequest'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'project'
     -> Text -- ^ 'instanceGroupManager'
     -> Text -- ^ 'zone'
+    -> InstanceGroupManagersSetInstanceTemplateRequest -- ^ 'payload'
     -> InstanceGroupManagersSetInstanceTemplate'
-instanceGroupManagersSetInstanceTemplate' pIgmsitInstanceGroupManagersSetInstanceTemplateRequest_ pIgmsitProject_ pIgmsitInstanceGroupManager_ pIgmsitZone_ =
+instanceGroupManagersSetInstanceTemplate' pIgmsitProject_ pIgmsitInstanceGroupManager_ pIgmsitZone_ pIgmsitPayload_ =
     InstanceGroupManagersSetInstanceTemplate'
-    { _igmsitInstanceGroupManagersSetInstanceTemplateRequest = pIgmsitInstanceGroupManagersSetInstanceTemplateRequest_
-    , _igmsitQuotaUser = Nothing
+    { _igmsitQuotaUser = Nothing
     , _igmsitPrettyPrint = True
     , _igmsitProject = pIgmsitProject_
     , _igmsitInstanceGroupManager = pIgmsitInstanceGroupManager_
     , _igmsitUserIP = Nothing
     , _igmsitZone = pIgmsitZone_
+    , _igmsitPayload = pIgmsitPayload_
     , _igmsitKey = Nothing
     , _igmsitOAuthToken = Nothing
     , _igmsitFields = Nothing
     }
-
--- | Multipart request metadata.
-igmsitInstanceGroupManagersSetInstanceTemplateRequest :: Lens' InstanceGroupManagersSetInstanceTemplate' InstanceGroupManagersSetInstanceTemplateRequest
-igmsitInstanceGroupManagersSetInstanceTemplateRequest
-  = lens
-      _igmsitInstanceGroupManagersSetInstanceTemplateRequest
-      (\ s a ->
-         s{_igmsitInstanceGroupManagersSetInstanceTemplateRequest
-             = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -174,6 +166,12 @@ igmsitUserIP
 igmsitZone :: Lens' InstanceGroupManagersSetInstanceTemplate' Text
 igmsitZone
   = lens _igmsitZone (\ s a -> s{_igmsitZone = a})
+
+-- | Multipart request metadata.
+igmsitPayload :: Lens' InstanceGroupManagersSetInstanceTemplate' InstanceGroupManagersSetInstanceTemplateRequest
+igmsitPayload
+  = lens _igmsitPayload
+      (\ s a -> s{_igmsitPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -214,7 +212,7 @@ instance GoogleRequest
               _igmsitKey
               _igmsitOAuthToken
               (Just AltJSON)
-              _igmsitInstanceGroupManagersSetInstanceTemplateRequest
+              _igmsitPayload
           where go
                   = clientWithRoute
                       (Proxy ::

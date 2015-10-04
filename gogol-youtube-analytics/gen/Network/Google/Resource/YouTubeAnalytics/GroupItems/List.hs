@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,8 +49,8 @@ import           Network.Google.YouTubeAnalytics.Types
 -- 'GroupItemsList'' request conforms to.
 type GroupItemsListResource =
      "groupItems" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "groupId" Text :>
+       QueryParam "groupId" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -72,7 +73,7 @@ data GroupItemsList' = GroupItemsList'
     , _gilGroupId                :: !Text
     , _gilOAuthToken             :: !(Maybe OAuthToken)
     , _gilFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupItemsList'' with the minimum fields required to make a request.
 --
@@ -173,7 +174,7 @@ instance GoogleRequest GroupItemsList' where
         type Rs GroupItemsList' = GroupItemListResponse
         request = requestWithRoute defReq youTubeAnalyticsURL
         requestWithRoute r u GroupItemsList'{..}
-          = go _gilOnBehalfOfContentOwner (Just _gilGroupId)
+          = go (Just _gilGroupId) _gilOnBehalfOfContentOwner
               _gilQuotaUser
               (Just _gilPrettyPrint)
               _gilUserIP

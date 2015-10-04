@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,15 +58,13 @@ import           Network.Google.Prelude
 -- 'ActivitiesList'' request conforms to.
 type ActivitiesListResource =
      "activities" :>
-       QueryParam "drive.ancestorId" Text :>
-         QueryParam "drive.fileId" Text :>
-           QueryParam "groupingStrategy"
-             AppsactivityActivitiesListGroupingStrategy
-             :>
-             QueryParam "pageSize" Int32 :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "source" Text :>
-                   QueryParam "userId" Text :>
+       QueryParam "drive.fileId" Text :>
+         QueryParam "drive.ancestorId" Text :>
+           QueryParam "groupingStrategy" GroupingStrategy :>
+             QueryParam "userId" Text :>
+               QueryParam "source" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "pageSize" Int32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -89,7 +88,7 @@ data ActivitiesList' = ActivitiesList'
     , _alUserIP           :: !(Maybe Text)
     , _alDriveFileId      :: !(Maybe Text)
     , _alDriveAncestorId  :: !(Maybe Text)
-    , _alGroupingStrategy :: !AppsactivityActivitiesListGroupingStrategy
+    , _alGroupingStrategy :: !GroupingStrategy
     , _alUserId           :: !Text
     , _alKey              :: !(Maybe Key)
     , _alSource           :: !(Maybe Text)
@@ -97,7 +96,7 @@ data ActivitiesList' = ActivitiesList'
     , _alOAuthToken       :: !(Maybe OAuthToken)
     , _alPageSize         :: !Int32
     , _alFields           :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
 --
@@ -180,7 +179,7 @@ alDriveAncestorId
 
 -- | Indicates the strategy to use when grouping singleEvents items in the
 -- associated combinedEvent object.
-alGroupingStrategy :: Lens' ActivitiesList' AppsactivityActivitiesListGroupingStrategy
+alGroupingStrategy :: Lens' ActivitiesList' GroupingStrategy
 alGroupingStrategy
   = lens _alGroupingStrategy
       (\ s a -> s{_alGroupingStrategy = a})
@@ -229,12 +228,12 @@ instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = ListActivitiesResponse
         request = requestWithRoute defReq appsActivityURL
         requestWithRoute r u ActivitiesList'{..}
-          = go _alDriveAncestorId _alDriveFileId
+          = go _alDriveFileId _alDriveAncestorId
               (Just _alGroupingStrategy)
-              (Just _alPageSize)
-              _alPageToken
-              _alSource
               (Just _alUserId)
+              _alSource
+              _alPageToken
+              (Just _alPageSize)
               _alQuotaUser
               (Just _alPrettyPrint)
               _alUserIP

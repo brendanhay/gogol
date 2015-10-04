@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.QPXExpress.Trips.Search
     , tsQuotaUser
     , tsPrettyPrint
     , tsUserIP
+    , tsPayload
     , tsKey
     , tsOAuthToken
-    , tsTripsSearchRequest
     , tsFields
     ) where
 
@@ -60,14 +61,14 @@ type TripsSearchResource =
 --
 -- /See:/ 'tripsSearch'' smart constructor.
 data TripsSearch' = TripsSearch'
-    { _tsQuotaUser          :: !(Maybe Text)
-    , _tsPrettyPrint        :: !Bool
-    , _tsUserIP             :: !(Maybe Text)
-    , _tsKey                :: !(Maybe Key)
-    , _tsOAuthToken         :: !(Maybe OAuthToken)
-    , _tsTripsSearchRequest :: !TripsSearchRequest
-    , _tsFields             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _tsQuotaUser   :: !(Maybe Text)
+    , _tsPrettyPrint :: !Bool
+    , _tsUserIP      :: !(Maybe Text)
+    , _tsPayload     :: !TripsSearchRequest
+    , _tsKey         :: !(Maybe Key)
+    , _tsOAuthToken  :: !(Maybe OAuthToken)
+    , _tsFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TripsSearch'' with the minimum fields required to make a request.
 --
@@ -79,24 +80,24 @@ data TripsSearch' = TripsSearch'
 --
 -- * 'tsUserIP'
 --
+-- * 'tsPayload'
+--
 -- * 'tsKey'
 --
 -- * 'tsOAuthToken'
 --
--- * 'tsTripsSearchRequest'
---
 -- * 'tsFields'
 tripsSearch'
-    :: TripsSearchRequest -- ^ 'TripsSearchRequest'
+    :: TripsSearchRequest -- ^ 'payload'
     -> TripsSearch'
-tripsSearch' pTsTripsSearchRequest_ =
+tripsSearch' pTsPayload_ =
     TripsSearch'
     { _tsQuotaUser = Nothing
     , _tsPrettyPrint = True
     , _tsUserIP = Nothing
+    , _tsPayload = pTsPayload_
     , _tsKey = Nothing
     , _tsOAuthToken = Nothing
-    , _tsTripsSearchRequest = pTsTripsSearchRequest_
     , _tsFields = Nothing
     }
 
@@ -118,6 +119,11 @@ tsPrettyPrint
 tsUserIP :: Lens' TripsSearch' (Maybe Text)
 tsUserIP = lens _tsUserIP (\ s a -> s{_tsUserIP = a})
 
+-- | Multipart request metadata.
+tsPayload :: Lens' TripsSearch' TripsSearchRequest
+tsPayload
+  = lens _tsPayload (\ s a -> s{_tsPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -128,12 +134,6 @@ tsKey = lens _tsKey (\ s a -> s{_tsKey = a})
 tsOAuthToken :: Lens' TripsSearch' (Maybe OAuthToken)
 tsOAuthToken
   = lens _tsOAuthToken (\ s a -> s{_tsOAuthToken = a})
-
--- | Multipart request metadata.
-tsTripsSearchRequest :: Lens' TripsSearch' TripsSearchRequest
-tsTripsSearchRequest
-  = lens _tsTripsSearchRequest
-      (\ s a -> s{_tsTripsSearchRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tsFields :: Lens' TripsSearch' (Maybe Text)
@@ -152,7 +152,7 @@ instance GoogleRequest TripsSearch' where
               _tsKey
               _tsOAuthToken
               (Just AltJSON)
-              _tsTripsSearchRequest
+              _tsPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TripsSearchResource)

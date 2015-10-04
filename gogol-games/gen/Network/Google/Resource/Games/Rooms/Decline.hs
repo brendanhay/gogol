@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -72,7 +73,7 @@ data RoomsDecline' = RoomsDecline'
     , _rdLanguage    :: !(Maybe Text)
     , _rdOAuthToken  :: !(Maybe OAuthToken)
     , _rdFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsDecline'' with the minimum fields required to make a request.
 --
@@ -158,7 +159,7 @@ instance GoogleRequest RoomsDecline' where
         type Rs RoomsDecline' = Room
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RoomsDecline'{..}
-          = go _rdLanguage _rdRoomId _rdQuotaUser
+          = go _rdRoomId _rdLanguage _rdQuotaUser
               (Just _rdPrettyPrint)
               _rdUserIP
               _rdFields

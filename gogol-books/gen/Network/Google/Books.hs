@@ -177,17 +177,21 @@ module Network.Google.Books
     , aKind
     , aItems
 
+    -- ** ImageLinks
+    , ImageLinks
+    , imageLinks
+    , ilThumbnail
+    , ilSmall
+    , ilExtraLarge
+    , ilLarge
+    , ilMedium
+    , ilSmallThumbnail
+
     -- ** Usersettings
     , Usersettings
     , usersettings
     , uKind
     , uNotesExport
-
-    -- ** VolumeVolumeInfoIndustryIdentifiers
-    , VolumeVolumeInfoIndustryIdentifiers
-    , volumeVolumeInfoIndustryIdentifiers
-    , vviiiIdentifier
-    , vviiiType
 
     -- ** Annotationsdata
     , Annotationsdata
@@ -197,14 +201,29 @@ module Network.Google.Books
     , annKind
     , annItems
 
-    -- ** BooksMyLibraryReadingPositionsSetPositionAction
-    , BooksMyLibraryReadingPositionsSetPositionAction (..)
+    -- ** ProcessingState
+    , ProcessingState (..)
 
-    -- ** GeolayerdataGeoViewport
-    , GeolayerdataGeoViewport
-    , geolayerdataGeoViewport
-    , ggvHi
-    , ggvLo
+    -- ** Viewport
+    , Viewport
+    , viewport
+    , vHi
+    , vLo
+
+    -- ** UserInfo
+    , UserInfo
+    , userInfo
+    , uiCopy
+    , uiUserUploadedVolumeInfo
+    , uiIsPurchased
+    , uiRentalState
+    , uiIsPreOrdered
+    , uiReview
+    , uiRentalPeriod
+    , uiUpdated
+    , uiIsUploaded
+    , uiIsInMyBooks
+    , uiReadingPosition
 
     -- ** Annotation
     , Annotation
@@ -232,14 +251,24 @@ module Network.Google.Books
     , reviewAuthor
     , raDisplayName
 
-    -- ** BooksVolumesListDownload
-    , BooksVolumesListDownload (..)
+    -- ** AcquireMethod
+    , AcquireMethod (..)
 
-    -- ** DictlayerdataDictWordsSensesConjugations
-    , DictlayerdataDictWordsSensesConjugations
-    , dictlayerdataDictWordsSensesConjugations
-    , ddwscValue
-    , ddwscType
+    -- ** Rating
+    , Rating (..)
+
+    -- ** DictSource
+    , DictSource
+    , dictSource
+    , dsURL
+    , dsAttribution
+
+    -- ** LayerSummary
+    , LayerSummary
+    , layerSummary
+    , lsLimitType
+    , lsAllowedCharacterCount
+    , lsRemainingCharacterCount
 
     -- ** BooksCloudLoadingResource
     , BooksCloudLoadingResource
@@ -266,27 +295,27 @@ module Network.Google.Books
     , lUpdated
     , lLayerId
 
-    -- ** VolumeUserInfo
-    , VolumeUserInfo
-    , volumeUserInfo
-    , vuiCopy
-    , vuiUserUploadedVolumeInfo
-    , vuiIsPurchased
-    , vuiRentalState
-    , vuiIsPreOrdered
-    , vuiReview
-    , vuiRentalPeriod
-    , vuiUpdated
-    , vuiIsUploaded
-    , vuiIsInMyBooks
-    , vuiReadingPosition
-
     -- ** ReviewSource
     , ReviewSource
     , reviewSource
     , rsExtraDescription
     , rsURL
     , rsDescription
+
+    -- ** SynonymsItem
+    , SynonymsItem
+    , synonymsItem
+    , siText
+    , siSource
+
+    -- ** ClientVersionRanges
+    , ClientVersionRanges
+    , clientVersionRanges
+    , cvrGbImageRange
+    , cvrContentVersion
+    , cvrImageCfiRange
+    , cvrGbTextRange
+    , cvrCfiRange
 
     -- ** Annotationdata
     , Annotationdata
@@ -319,77 +348,56 @@ module Network.Google.Books
     , volUpdated
     , volLayerId
 
-    -- ** VolumeUserInfoUserUploadedVolumeInfo
-    , VolumeUserInfoUserUploadedVolumeInfo
-    , volumeUserInfoUserUploadedVolumeInfo
-    , vuiuuviProcessingState
-
-    -- ** BooksVolumesAssociatedListAssociation
-    , BooksVolumesAssociatedListAssociation (..)
-
-    -- ** VolumeannotationContentRanges
-    , VolumeannotationContentRanges
-    , volumeannotationContentRanges
-    , vcrGbImageRange
-    , vcrContentVersion
-    , vcrGbTextRange
-    , vcrCfiRange
-
-    -- ** VolumeVolumeInfoImageLinks
-    , VolumeVolumeInfoImageLinks
-    , volumeVolumeInfoImageLinks
-    , vviilThumbnail
-    , vviilSmall
-    , vviilExtraLarge
-    , vviilLarge
-    , vviilMedium
-    , vviilSmallThumbnail
+    -- ** AccessInfo
+    , AccessInfo
+    , accessInfo
+    , aiWebReaderLink
+    , aiCountry
+    , aiDriveImportedContentLink
+    , aiExplicitOfflineLicenseManagement
+    , aiViewability
+    , aiQuoteSharingAllowed
+    , aiEpub
+    , aiPdf
+    , aiTextToSpeechPermission
+    , aiEmbeddable
+    , aiAccessViewStatus
+    , aiDownloadAccess
+    , aiViewOrderURL
+    , aiPublicDomain
 
     -- ** BooksVolumesGetProjection
     , BooksVolumesGetProjection (..)
 
-    -- ** VolumeAccessInfo
-    , VolumeAccessInfo
-    , volumeAccessInfo
-    , vaiWebReaderLink
-    , vaiCountry
-    , vaiDriveImportedContentLink
-    , vaiExplicitOfflineLicenseManagement
-    , vaiViewability
-    , vaiQuoteSharingAllowed
-    , vaiEpub
-    , vaiPdf
-    , vaiTextToSpeechPermission
-    , vaiEmbeddable
-    , vaiAccessViewStatus
-    , vaiDownloadAccess
-    , vaiViewOrderURL
-    , vaiPublicDomain
+    -- ** Copy
+    , Copy
+    , copy
+    , cLimitType
+    , cAllowedCharacterCount
+    , cUpdated
+    , cRemainingCharacterCount
 
-    -- ** VolumeUserInfoCopy
-    , VolumeUserInfoCopy
-    , volumeUserInfoCopy
-    , vuicLimitType
-    , vuicAllowedCharacterCount
-    , vuicUpdated
-    , vuicRemainingCharacterCount
+    -- ** LayersItem
+    , LayersItem
+    , layersItem
+    , liLimitType
+    , liAllowedCharacterCount
+    , liUpdated
+    , liLayerId
+    , liRemainingCharacterCount
+
+    -- ** OrderBy
+    , OrderBy (..)
 
     -- ** BooksVolumesRecommendedRateResponse
     , BooksVolumesRecommendedRateResponse
     , booksVolumesRecommendedRateResponse
     , bvrrrConsistencyToken
 
-    -- ** VolumeLayerInfoLayers
-    , VolumeLayerInfoLayers
-    , volumeLayerInfoLayers
-    , vlilVolumeAnnotationsVersion
-    , vlilLayerId
-
-    -- ** DictlayerdataDictWordsExamples
-    , DictlayerdataDictWordsExamples
-    , dictlayerdataDictWordsExamples
-    , ddweText
-    , ddweSource
+    -- ** UserUploadedVolumeInfo
+    , UserUploadedVolumeInfo
+    , userUploadedVolumeInfo
+    , uuviProcessingState
 
     -- ** Bookshelf
     , Bookshelf
@@ -405,18 +413,23 @@ module Network.Google.Books
     , bTitle
     , bDescription
 
-    -- ** DictlayerdataDictWordsSensesDefinitions
-    , DictlayerdataDictWordsSensesDefinitions
-    , dictlayerdataDictWordsSensesDefinitions
-    , ddwsdDefinition
-    , ddwsdExamples
+    -- ** DerivativesItem
+    , DerivativesItem
+    , derivativesItem
+    , diText
+    , diSource
 
-    -- ** AnnotationLayerSummary
-    , AnnotationLayerSummary
-    , annotationLayerSummary
-    , alsLimitType
-    , alsAllowedCharacterCount
-    , alsRemainingCharacterCount
+    -- ** SensesItemSource
+    , SensesItemSource
+    , sensesItemSource
+    , sisURL
+    , sisAttribution
+
+    -- ** BoundaryItemItem
+    , BoundaryItemItem
+    , boundaryItemItem
+    , biiLatitude
+    , biiLongitude
 
     -- ** Category
     , Category
@@ -424,16 +437,24 @@ module Network.Google.Books
     , cKind
     , cItems
 
-    -- ** VolumeSearchInfo
-    , VolumeSearchInfo
-    , volumeSearchInfo
-    , vsiTextSnippet
+    -- ** OffersItemsItem
+    , OffersItemsItem
+    , offersItemsItem
+    , oiiItems
+    , oiiArtURL
+    , oiiId
+    , oiiGServicesKey
 
     -- ** AnnotationsSummary
     , AnnotationsSummary
     , annotationsSummary
     , asKind
     , asLayers
+
+    -- ** SearchInfo
+    , SearchInfo
+    , searchInfo
+    , siTextSnippet
 
     -- ** Volume
     , Volume
@@ -450,83 +471,54 @@ module Network.Google.Books
     , vvRecommendedInfo
     , vvVolumeInfo
 
-    -- ** BooksMyLibraryBookshelvesRemoveVolumeReason
-    , BooksMyLibraryBookshelvesRemoveVolumeReason (..)
+    -- ** LicenseTypes
+    , LicenseTypes (..)
 
-    -- ** BooksOnboardingListCategoryVolumesMaxAllowedMaturityRating
-    , BooksOnboardingListCategoryVolumesMaxAllowedMaturityRating (..)
+    -- ** MaxAllowedMaturityRating
+    , MaxAllowedMaturityRating (..)
 
-    -- ** BooksVolumesListLibraryRestrict
-    , BooksVolumesListLibraryRestrict (..)
+    -- ** WordsItem
+    , WordsItem
+    , wordsItem
+    , wiSenses
+    , wiSource
+    , wiDerivatives
+    , wiExamples
 
-    -- ** GeolayerdataCommon
-    , GeolayerdataCommon
-    , geolayerdataCommon
-    , gcSnippet
-    , gcSnippetURL
-    , gcLang
-    , gcTitle
-    , gcPreviewImageURL
+    -- ** CategoryItemsItem
+    , CategoryItemsItem
+    , categoryItemsItem
+    , ciiName
+    , ciiCategoryId
+    , ciiBadgeURL
 
-    -- ** DictlayerdataDictWordsSource
-    , DictlayerdataDictWordsSource
-    , dictlayerdataDictWordsSource
-    , ddwsURL
-    , ddwsAttribution
-
-    -- ** DictlayerdataDictWordsSensesDefinitionsExamplesSource
-    , DictlayerdataDictWordsSensesDefinitionsExamplesSource
-    , dictlayerdataDictWordsSensesDefinitionsExamplesSource
-    , ddwsdesURL
-    , ddwsdesAttribution
-
-    -- ** BooksVolumesListFilter
-    , BooksVolumesListFilter (..)
-
-    -- ** GeolayerdataGeoBoundary
-    , GeolayerdataGeoBoundary
-    , geolayerdataGeoBoundary
-    , ggbLatitude
-    , ggbLongitude
+    -- ** LibraryRestrict
+    , LibraryRestrict (..)
 
     -- ** BooksVolumesAssociatedListMaxAllowedMaturityRating
     , BooksVolumesAssociatedListMaxAllowedMaturityRating (..)
 
-    -- ** GeolayerdataGeo
-    , GeolayerdataGeo
-    , geolayerdataGeo
-    , ggMapType
-    , ggCachePolicy
-    , ggViewport
-    , ggBoundary
-    , ggLatitude
-    , ggZoom
-    , ggCountryCode
-    , ggLongitude
+    -- ** OffersItemsItemItemsItem
+    , OffersItemsItemItemsItem
+    , offersItemsItemItemsItem
+    , oiiiiCanonicalVolumeLink
+    , oiiiiCoverURL
+    , oiiiiVolumeId
+    , oiiiiAuthor
+    , oiiiiTitle
+    , oiiiiDescription
 
     -- ** BooksVolumesRecommendedListMaxAllowedMaturityRating
     , BooksVolumesRecommendedListMaxAllowedMaturityRating (..)
 
-    -- ** CategoryItems
-    , CategoryItems
-    , categoryItems
-    , ciName
-    , ciCategoryId
-    , ciBadgeURL
+    -- ** RentalDuration
+    , RentalDuration
+    , rentalDuration
+    , rdCount
+    , rdUnit
 
-    -- ** DictlayerdataDictWordsSensesDefinitionsExamples
-    , DictlayerdataDictWordsSensesDefinitionsExamples
-    , dictlayerdataDictWordsSensesDefinitionsExamples
-    , ddwsdeText
-    , ddwsdeSource
-
-    -- ** DictlayerdataDictWords
-    , DictlayerdataDictWords
-    , dictlayerdataDictWords
-    , ddwSenses
-    , ddwSource
-    , ddwDerivatives
-    , ddwExamples
+    -- ** Action
+    , Action (..)
 
     -- ** Geolayerdata
     , Geolayerdata
@@ -535,12 +527,6 @@ module Network.Google.Books
     , gGeo
     , gCommon
 
-    -- ** DictlayerdataDictWordsSensesSynonyms
-    , DictlayerdataDictWordsSensesSynonyms
-    , dictlayerdataDictWordsSensesSynonyms
-    , ddwssText
-    , ddwssSource
-
     -- ** Dictlayerdata
     , Dictlayerdata
     , dictlayerdata
@@ -548,37 +534,34 @@ module Network.Google.Books
     , dDict
     , dCommon
 
-    -- ** BooksVolumesRecommendedRateRating
-    , BooksVolumesRecommendedRateRating (..)
+    -- ** ConjugationsItem
+    , ConjugationsItem
+    , conjugationsItem
+    , ciValue
+    , ciType
 
-    -- ** DictlayerdataDictWordsSensesSynonymsSource
-    , DictlayerdataDictWordsSensesSynonymsSource
-    , dictlayerdataDictWordsSensesSynonymsSource
-    , ddwsssURL
-    , ddwsssAttribution
-
-    -- ** VolumeSaleInfoOffersRetailPrice
-    , VolumeSaleInfoOffersRetailPrice
-    , volumeSaleInfoOffersRetailPrice
-    , vsiorpCurrencyCode
-    , vsiorpAmountInMicros
+    -- ** Hi
+    , Hi
+    , hi
+    , hLatitude
+    , hLongitude
 
     -- ** DictlayerdataCommon
     , DictlayerdataCommon
     , dictlayerdataCommon
     , dcTitle
 
-    -- ** BooksMyConfigSyncVolumeLicensesFeatures
-    , BooksMyConfigSyncVolumeLicensesFeatures (..)
+    -- ** Download
+    , Download (..)
 
-    -- ** GeolayerdataGeoViewportLo
-    , GeolayerdataGeoViewportLo
-    , geolayerdataGeoViewportLo
-    , ggvlLatitude
-    , ggvlLongitude
+    -- ** OffersItemRetailPrice
+    , OffersItemRetailPrice
+    , offersItemRetailPrice
+    , oirpCurrencyCode
+    , oirpAmountInMicros
 
-    -- ** BooksVolumesUserUploadedListProcessingState
-    , BooksVolumesUserUploadedListProcessingState (..)
+    -- ** Reason
+    , Reason (..)
 
     -- ** DownloadAccessRestriction
     , DownloadAccessRestriction
@@ -596,14 +579,38 @@ module Network.Google.Books
     , darMessage
     , darNonce
 
+    -- ** ListPrice
+    , ListPrice
+    , listPrice
+    , lpAmount
+    , lpCurrencyCode
+
+    -- ** IndustryIdentifiersItem
+    , IndustryIdentifiersItem
+    , industryIdentifiersItem
+    , iiiIdentifier
+    , iiiType
+
     -- ** BooksMyLibraryBookshelvesAddVolumeReason
     , BooksMyLibraryBookshelvesAddVolumeReason (..)
 
-    -- ** VolumeSaleInfoRetailPrice
-    , VolumeSaleInfoRetailPrice
-    , volumeSaleInfoRetailPrice
-    , vsirpAmount
-    , vsirpCurrencyCode
+    -- ** NotesExport
+    , NotesExport
+    , notesExport
+    , neFolderName
+    , neIsEnabled
+
+    -- ** Features
+    , Features (..)
+
+    -- ** CurrentVersionRanges
+    , CurrentVersionRanges
+    , currentVersionRanges
+    , cGbImageRange
+    , cContentVersion
+    , cImageCfiRange
+    , cGbTextRange
+    , cCfiRange
 
     -- ** Review
     , Review
@@ -619,9 +626,6 @@ module Network.Google.Books
     , rTitle
     , rType
 
-    -- ** BooksVolumesListPrintType
-    , BooksVolumesListPrintType (..)
-
     -- ** Volume2
     , Volume2
     , volume2
@@ -629,37 +633,50 @@ module Network.Google.Books
     , voloKind
     , voloItems
 
-    -- ** VolumeSaleInfoListPrice
-    , VolumeSaleInfoListPrice
-    , volumeSaleInfoListPrice
-    , vsilpAmount
-    , vsilpCurrencyCode
+    -- ** RetailPrice
+    , RetailPrice
+    , retailPrice
+    , rpAmount
+    , rpCurrencyCode
 
-    -- ** BooksVolumesMybooksListAcquireMethod
-    , BooksVolumesMybooksListAcquireMethod (..)
+    -- ** Epub
+    , Epub
+    , epub
+    , eAcsTokenLink
+    , eIsAvailable
+    , eDownloadLink
 
-    -- ** VolumeUserInfoRentalPeriod
-    , VolumeUserInfoRentalPeriod
-    , volumeUserInfoRentalPeriod
-    , vuirpEndUtcSec
-    , vuirpStartUtcSec
+    -- ** Dict
+    , Dict
+    , dict
+    , dSource
+    , dWords
 
-    -- ** VolumeLayerInfo
-    , VolumeLayerInfo
-    , volumeLayerInfo
-    , vliLayers
+    -- ** Pdf
+    , Pdf
+    , pdf
+    , pAcsTokenLink
+    , pIsAvailable
+    , pDownloadLink
 
-    -- ** VolumeSaleInfo
-    , VolumeSaleInfo
-    , volumeSaleInfo
-    , vsiCountry
-    , vsiOnSaleDate
-    , vsiListPrice
-    , vsiRetailPrice
-    , vsiOffers
-    , vsiBuyLink
-    , vsiIsEbook
-    , vsiSaleability
+    -- ** SynonymsItemSource
+    , SynonymsItemSource
+    , synonymsItemSource
+    , sURL
+    , sAttribution
+
+    -- ** ContentRanges
+    , ContentRanges
+    , contentRanges
+    , crGbImageRange
+    , crContentVersion
+    , crGbTextRange
+    , crCfiRange
+
+    -- ** LayerInfo
+    , LayerInfo
+    , layerInfo
+    , liLayers
 
     -- ** RequestAccess
     , RequestAccess
@@ -668,13 +685,44 @@ module Network.Google.Books
     , raKind
     , raDownloadAccess
 
-    -- ** OffersItems
-    , OffersItems
-    , offersItems
-    , oiItems
-    , oiArtURL
-    , oiId
-    , oiGServicesKey
+    -- ** SaleInfo
+    , SaleInfo
+    , saleInfo
+    , siCountry
+    , siOnSaleDate
+    , siListPrice
+    , siRetailPrice
+    , siOffers
+    , siBuyLink
+    , siIsEbook
+    , siSaleability
+
+    -- ** Geo
+    , Geo
+    , geo
+    , gMapType
+    , gCachePolicy
+    , gViewport
+    , gBoundary
+    , gLatitude
+    , gZoom
+    , gCountryCode
+    , gLongitude
+
+    -- ** Common
+    , Common
+    , common
+    , cSnippet
+    , cSnippetURL
+    , cLang
+    , cTitle
+    , cPreviewImageURL
+
+    -- ** WordsItemSource
+    , WordsItemSource
+    , wordsItemSource
+    , wisURL
+    , wisAttribution
 
     -- ** Metadata
     , Metadata
@@ -682,65 +730,41 @@ module Network.Google.Books
     , mKind
     , mItems
 
-    -- ** VolumeVolumeInfoDimensions
-    , VolumeVolumeInfoDimensions
-    , volumeVolumeInfoDimensions
-    , vvidHeight
-    , vvidWidth
-    , vvidThickness
+    -- ** RentalPeriod
+    , RentalPeriod
+    , rentalPeriod
+    , rpEndUtcSec
+    , rpStartUtcSec
 
-    -- ** AnnotationCurrentVersionRanges
-    , AnnotationCurrentVersionRanges
-    , annotationCurrentVersionRanges
-    , acvrGbImageRange
-    , acvrContentVersion
-    , acvrImageCfiRange
-    , acvrGbTextRange
-    , acvrCfiRange
+    -- ** Projection
+    , Projection (..)
 
-    -- ** VolumeAccessInfoEpub
-    , VolumeAccessInfoEpub
-    , volumeAccessInfoEpub
-    , vaieAcsTokenLink
-    , vaieIsAvailable
-    , vaieDownloadLink
+    -- ** Filter
+    , Filter (..)
 
-    -- ** VolumeAccessInfoPdf
-    , VolumeAccessInfoPdf
-    , volumeAccessInfoPdf
-    , vaipAcsTokenLink
-    , vaipIsAvailable
-    , vaipDownloadLink
+    -- ** LayerInfoLayersItem
+    , LayerInfoLayersItem
+    , layerInfoLayersItem
+    , liliVolumeAnnotationsVersion
+    , liliLayerId
 
-    -- ** AnnotationClientVersionRanges
-    , AnnotationClientVersionRanges
-    , annotationClientVersionRanges
-    , aGbImageRange
-    , aContentVersion
-    , aImageCfiRange
-    , aGbTextRange
-    , aCfiRange
+    -- ** DerivativesItemSource
+    , DerivativesItemSource
+    , derivativesItemSource
+    , disURL
+    , disAttribution
 
-    -- ** AnnotationsSummaryLayers
-    , AnnotationsSummaryLayers
-    , annotationsSummaryLayers
-    , aslLimitType
-    , aslAllowedCharacterCount
-    , aslUpdated
-    , aslLayerId
-    , aslRemainingCharacterCount
-
-    -- ** DictlayerdataDictWordsExamplesSource
-    , DictlayerdataDictWordsExamplesSource
-    , dictlayerdataDictWordsExamplesSource
-    , ddwesURL
-    , ddwesAttribution
-
-    -- ** VolumeSaleInfoOffersRentalDuration
-    , VolumeSaleInfoOffersRentalDuration
-    , volumeSaleInfoOffersRentalDuration
-    , vsiordCount
-    , vsiordUnit
+    -- ** SensesItem
+    , SensesItem
+    , sensesItem
+    , sPronunciationURL
+    , sConjugations
+    , sPronunciation
+    , sSynonyms
+    , sSource
+    , sPartOfSpeech
+    , sDefinitions
+    , sSyllabification
 
     -- ** ReadingPosition
     , ReadingPosition
@@ -766,10 +790,17 @@ module Network.Google.Books
     , v1Kind
     , v1Items
 
-    -- ** VolumeRecommendedInfo
-    , VolumeRecommendedInfo
-    , volumeRecommendedInfo
-    , vriExplanation
+    -- ** Dimensions
+    , Dimensions
+    , dimensions
+    , dHeight
+    , dWidth
+    , dThickness
+
+    -- ** RecommendedInfo
+    , RecommendedInfo
+    , recommendedInfo
+    , riExplanation
 
     -- ** Bookshelves
     , Bookshelves
@@ -777,54 +808,17 @@ module Network.Google.Books
     , booKind
     , booItems
 
-    -- ** DictlayerdataDictWordsSenses
-    , DictlayerdataDictWordsSenses
-    , dictlayerdataDictWordsSenses
-    , ddwsPronunciationURL
-    , ddwsConjugations
-    , ddwsPronunciation
-    , ddwsSynonyms
-    , ddwsSource
-    , ddwsPartOfSpeech
-    , ddwsDefinitions
-    , ddwsSyllabification
+    -- ** WordsItemExamplesItemSource
+    , WordsItemExamplesItemSource
+    , wordsItemExamplesItemSource
+    , wieisURL
+    , wieisAttribution
 
-    -- ** DictlayerdataDictWordsDerivativesSource
-    , DictlayerdataDictWordsDerivativesSource
-    , dictlayerdataDictWordsDerivativesSource
-    , ddwdsURL
-    , ddwdsAttribution
-
-    -- ** MetadataItems
-    , MetadataItems
-    , metadataItems
-    , miSize
-    , miVersion
-    , miLanguage
-    , miDownloadURL
-    , miEncryptedKey
-
-    -- ** DictlayerdataDict
-    , DictlayerdataDict
-    , dictlayerdataDict
-    , ddSource
-    , ddWords
-
-    -- ** UsersettingsNotesExport
-    , UsersettingsNotesExport
-    , usersettingsNotesExport
-    , uneFolderName
-    , uneIsEnabled
-
-    -- ** OffersItemsItems
-    , OffersItemsItems
-    , offersItemsItems
-    , oiiCanonicalVolumeLink
-    , oiiCoverURL
-    , oiiVolumeId
-    , oiiAuthor
-    , oiiTitle
-    , oiiDescription
+    -- ** DefinitionsItem
+    , DefinitionsItem
+    , definitionsItem
+    , diDefinition
+    , diExamples
 
     -- ** ConcurrentAccessRestriction
     , ConcurrentAccessRestriction
@@ -841,8 +835,67 @@ module Network.Google.Books
     , carMessage
     , carNonce
 
-    -- ** BooksMyLibraryBookshelvesVolumesListProjection
-    , BooksMyLibraryBookshelvesVolumesListProjection (..)
+    -- ** ExamplesItemSource
+    , ExamplesItemSource
+    , examplesItemSource
+    , eisURL
+    , eisAttribution
+
+    -- ** Lo
+    , Lo
+    , lo
+    , lLatitude
+    , lLongitude
+
+    -- ** ExamplesItem
+    , ExamplesItem
+    , examplesItem
+    , eiText
+    , eiSource
+
+    -- ** MetadataItemsItem
+    , MetadataItemsItem
+    , metadataItemsItem
+    , miiSize
+    , miiVersion
+    , miiLanguage
+    , miiDownloadURL
+    , miiEncryptedKey
+
+    -- ** WordsItemExamplesItem
+    , WordsItemExamplesItem
+    , wordsItemExamplesItem
+    , wieiText
+    , wieiSource
+
+    -- ** VolumeInfo
+    , VolumeInfo
+    , volumeInfo
+    , viImageLinks
+    , viAverageRating
+    , viRatingsCount
+    , viCanonicalVolumeLink
+    , viReadingModes
+    , viIndustryIdentifiers
+    , viPrintedPageCount
+    , viMainCategory
+    , viContentVersion
+    , viSamplePageCount
+    , viCategories
+    , viAuthors
+    , viAllowAnonLogging
+    , viSubtitle
+    , viPublishedDate
+    , viMaturityRating
+    , viPreviewLink
+    , viLanguage
+    , viTitle
+    , viPageCount
+    , viDimensions
+    , viInfoLink
+    , viPublisher
+    , viDescription
+    , viPrintType
 
     -- ** DownloadAccesses
     , DownloadAccesses
@@ -853,72 +906,25 @@ module Network.Google.Books
     -- ** BooksVolumesListProjection
     , BooksVolumesListProjection (..)
 
-    -- ** DictlayerdataDictWordsDerivatives
-    , DictlayerdataDictWordsDerivatives
-    , dictlayerdataDictWordsDerivatives
-    , ddwdText
-    , ddwdSource
-
-    -- ** DictlayerdataDictSource
-    , DictlayerdataDictSource
-    , dictlayerdataDictSource
-    , ddsURL
-    , ddsAttribution
-
-    -- ** GeolayerdataGeoViewportHi
-    , GeolayerdataGeoViewportHi
-    , geolayerdataGeoViewportHi
-    , ggvhLatitude
-    , ggvhLongitude
-
-    -- ** BooksVolumesListOrderBy
-    , BooksVolumesListOrderBy (..)
-
-    -- ** VolumeVolumeInfo
-    , VolumeVolumeInfo
-    , volumeVolumeInfo
-    , vviImageLinks
-    , vviAverageRating
-    , vviRatingsCount
-    , vviCanonicalVolumeLink
-    , vviReadingModes
-    , vviIndustryIdentifiers
-    , vviPrintedPageCount
-    , vviMainCategory
-    , vviContentVersion
-    , vviSamplePageCount
-    , vviCategories
-    , vviAuthors
-    , vviAllowAnonLogging
-    , vviSubtitle
-    , vviPublishedDate
-    , vviMaturityRating
-    , vviPreviewLink
-    , vviLanguage
-    , vviTitle
-    , vviPageCount
-    , vviDimensions
-    , vviInfoLink
-    , vviPublisher
-    , vviDescription
-    , vviPrintType
-
-    -- ** VolumeSaleInfoOffers
-    , VolumeSaleInfoOffers
-    , volumeSaleInfoOffers
-    , vsioFinskyOfferType
-    , vsioRentalDuration
-    , vsioListPrice
-    , vsioRetailPrice
-
-    -- ** DictlayerdataDictWordsSensesSource
-    , DictlayerdataDictWordsSensesSource
-    , dictlayerdataDictWordsSensesSource
-    , ddwssURL
-    , ddwssAttribution
+    -- ** OffersItem
+    , OffersItem
+    , offersItem
+    , oiFinskyOfferType
+    , oiRentalDuration
+    , oiListPrice
+    , oiRetailPrice
 
     -- ** BooksVolumesMybooksListProcessingState
     , BooksVolumesMybooksListProcessingState (..)
+
+    -- ** PrintType
+    , PrintType (..)
+
+    -- ** OffersItemListPrice
+    , OffersItemListPrice
+    , offersItemListPrice
+    , oilpCurrencyCode
+    , oilpAmountInMicros
 
     -- ** Layersummaries
     , Layersummaries
@@ -927,15 +933,6 @@ module Network.Google.Books
     , layKind
     , layItems
 
-    -- ** BooksMyConfigRequestAccessLicenseTypes
-    , BooksMyConfigRequestAccessLicenseTypes (..)
-
-    -- ** VolumeSaleInfoOffersListPrice
-    , VolumeSaleInfoOffersListPrice
-    , volumeSaleInfoOffersListPrice
-    , vsiolpCurrencyCode
-    , vsiolpAmountInMicros
-
     -- ** BooksAnnotationsRange
     , BooksAnnotationsRange
     , booksAnnotationsRange
@@ -943,6 +940,9 @@ module Network.Google.Books
     , barEndOffset
     , barEndPosition
     , barStartPosition
+
+    -- ** Association
+    , Association (..)
     ) where
 
 import           Network.Google.Books.Types

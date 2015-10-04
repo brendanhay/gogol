@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,10 +35,10 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Patch
     , capPrettyPrint
     , capUserIP
     , capSponsorAccountId
+    , capPayload
     , capKey
     , capClientAccountId
     , capOAuthToken
-    , capClientAccessCapabilities
     , capFields
     ) where
 
@@ -63,16 +64,16 @@ type ClientAccessPatchResource =
 --
 -- /See:/ 'clientAccessPatch'' smart constructor.
 data ClientAccessPatch' = ClientAccessPatch'
-    { _capQuotaUser                :: !(Maybe Text)
-    , _capPrettyPrint              :: !Bool
-    , _capUserIP                   :: !(Maybe Text)
-    , _capSponsorAccountId         :: !Int32
-    , _capKey                      :: !(Maybe Key)
-    , _capClientAccountId          :: !Int64
-    , _capOAuthToken               :: !(Maybe OAuthToken)
-    , _capClientAccessCapabilities :: !ClientAccessCapabilities
-    , _capFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _capQuotaUser        :: !(Maybe Text)
+    , _capPrettyPrint      :: !Bool
+    , _capUserIP           :: !(Maybe Text)
+    , _capSponsorAccountId :: !Int32
+    , _capPayload          :: !ClientAccessCapabilities
+    , _capKey              :: !(Maybe Key)
+    , _capClientAccountId  :: !Int64
+    , _capOAuthToken       :: !(Maybe OAuthToken)
+    , _capFields           :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessPatch'' with the minimum fields required to make a request.
 --
@@ -86,30 +87,30 @@ data ClientAccessPatch' = ClientAccessPatch'
 --
 -- * 'capSponsorAccountId'
 --
+-- * 'capPayload'
+--
 -- * 'capKey'
 --
 -- * 'capClientAccountId'
 --
 -- * 'capOAuthToken'
 --
--- * 'capClientAccessCapabilities'
---
 -- * 'capFields'
 clientAccessPatch'
     :: Int32 -- ^ 'sponsorAccountId'
+    -> ClientAccessCapabilities -- ^ 'payload'
     -> Int64 -- ^ 'clientAccountId'
-    -> ClientAccessCapabilities -- ^ 'ClientAccessCapabilities'
     -> ClientAccessPatch'
-clientAccessPatch' pCapSponsorAccountId_ pCapClientAccountId_ pCapClientAccessCapabilities_ =
+clientAccessPatch' pCapSponsorAccountId_ pCapPayload_ pCapClientAccountId_ =
     ClientAccessPatch'
     { _capQuotaUser = Nothing
     , _capPrettyPrint = True
     , _capUserIP = Nothing
     , _capSponsorAccountId = pCapSponsorAccountId_
+    , _capPayload = pCapPayload_
     , _capKey = Nothing
     , _capClientAccountId = pCapClientAccountId_
     , _capOAuthToken = Nothing
-    , _capClientAccessCapabilities = pCapClientAccessCapabilities_
     , _capFields = Nothing
     }
 
@@ -137,6 +138,11 @@ capSponsorAccountId
   = lens _capSponsorAccountId
       (\ s a -> s{_capSponsorAccountId = a})
 
+-- | Multipart request metadata.
+capPayload :: Lens' ClientAccessPatch' ClientAccessCapabilities
+capPayload
+  = lens _capPayload (\ s a -> s{_capPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -153,12 +159,6 @@ capOAuthToken :: Lens' ClientAccessPatch' (Maybe OAuthToken)
 capOAuthToken
   = lens _capOAuthToken
       (\ s a -> s{_capOAuthToken = a})
-
--- | Multipart request metadata.
-capClientAccessCapabilities :: Lens' ClientAccessPatch' ClientAccessCapabilities
-capClientAccessCapabilities
-  = lens _capClientAccessCapabilities
-      (\ s a -> s{_capClientAccessCapabilities = a})
 
 -- | Selector specifying which fields to include in a partial response.
 capFields :: Lens' ClientAccessPatch' (Maybe Text)
@@ -181,7 +181,7 @@ instance GoogleRequest ClientAccessPatch' where
               _capKey
               _capOAuthToken
               (Just AltJSON)
-              _capClientAccessCapabilities
+              _capPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ClientAccessPatchResource)

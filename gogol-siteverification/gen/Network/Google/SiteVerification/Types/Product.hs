@@ -18,67 +18,12 @@ module Network.Google.SiteVerification.Types.Product where
 import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types.Sum
 
--- | The site for which a verification token will be generated.
---
--- /See:/ 'siteVerificationWebResourceGettokenRequestSite' smart constructor.
-data SiteVerificationWebResourceGettokenRequestSite = SiteVerificationWebResourceGettokenRequestSite
-    { _svwrgrsIdentifier :: !(Maybe Text)
-    , _svwrgrsType       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SiteVerificationWebResourceGettokenRequestSite' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'svwrgrsIdentifier'
---
--- * 'svwrgrsType'
-siteVerificationWebResourceGettokenRequestSite
-    :: SiteVerificationWebResourceGettokenRequestSite
-siteVerificationWebResourceGettokenRequestSite =
-    SiteVerificationWebResourceGettokenRequestSite
-    { _svwrgrsIdentifier = Nothing
-    , _svwrgrsType = Nothing
-    }
-
--- | The site identifier. If the type is set to SITE, the identifier is a
--- URL. If the type is set to INET_DOMAIN, the site identifier is a domain
--- name.
-svwrgrsIdentifier :: Lens' SiteVerificationWebResourceGettokenRequestSite (Maybe Text)
-svwrgrsIdentifier
-  = lens _svwrgrsIdentifier
-      (\ s a -> s{_svwrgrsIdentifier = a})
-
--- | The type of resource to be verified. Can be SITE or INET_DOMAIN (domain
--- name).
-svwrgrsType :: Lens' SiteVerificationWebResourceGettokenRequestSite (Maybe Text)
-svwrgrsType
-  = lens _svwrgrsType (\ s a -> s{_svwrgrsType = a})
-
-instance FromJSON
-         SiteVerificationWebResourceGettokenRequestSite where
-        parseJSON
-          = withObject
-              "SiteVerificationWebResourceGettokenRequestSite"
-              (\ o ->
-                 SiteVerificationWebResourceGettokenRequestSite <$>
-                   (o .:? "identifier") <*> (o .:? "type"))
-
-instance ToJSON
-         SiteVerificationWebResourceGettokenRequestSite where
-        toJSON
-          SiteVerificationWebResourceGettokenRequestSite{..}
-          = object
-              (catMaybes
-                 [("identifier" .=) <$> _svwrgrsIdentifier,
-                  ("type" .=) <$> _svwrgrsType])
-
 --
 -- /See:/ 'siteVerificationWebResourceGettokenResponse' smart constructor.
 data SiteVerificationWebResourceGettokenResponse = SiteVerificationWebResourceGettokenResponse
     { _svwrgrToken  :: !(Maybe Text)
     , _svwrgrMethod :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SiteVerificationWebResourceGettokenResponse' with the minimum fields required to make a request.
 --
@@ -132,7 +77,7 @@ instance ToJSON
 -- /See:/ 'siteVerificationWebResourceListResponse' smart constructor.
 newtype SiteVerificationWebResourceListResponse = SiteVerificationWebResourceListResponse
     { _svwrlrItems :: Maybe [SiteVerificationWebResourceResource]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SiteVerificationWebResourceListResponse' with the minimum fields required to make a request.
 --
@@ -173,7 +118,7 @@ instance ToJSON
 data SiteVerificationWebResourceResourceSite = SiteVerificationWebResourceResourceSite
     { _svwrrsIdentifier :: !(Maybe Text)
     , _svwrrsType       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SiteVerificationWebResourceResourceSite' with the minimum fields required to make a request.
 --
@@ -223,9 +168,9 @@ instance ToJSON
 --
 -- /See:/ 'siteVerificationWebResourceGettokenRequest' smart constructor.
 data SiteVerificationWebResourceGettokenRequest = SiteVerificationWebResourceGettokenRequest
-    { _svwrgrSite               :: !(Maybe SiteVerificationWebResourceGettokenRequestSite)
+    { _svwrgrSite               :: !(Maybe Site)
     , _svwrgrVerificationMethod :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SiteVerificationWebResourceGettokenRequest' with the minimum fields required to make a request.
 --
@@ -243,7 +188,7 @@ siteVerificationWebResourceGettokenRequest =
     }
 
 -- | The site for which a verification token will be generated.
-svwrgrSite :: Lens' SiteVerificationWebResourceGettokenRequest (Maybe SiteVerificationWebResourceGettokenRequestSite)
+svwrgrSite :: Lens' SiteVerificationWebResourceGettokenRequest (Maybe Site)
 svwrgrSite
   = lens _svwrgrSite (\ s a -> s{_svwrgrSite = a})
 
@@ -279,7 +224,7 @@ data SiteVerificationWebResourceResource = SiteVerificationWebResourceResource
     { _svwrrOwners :: !(Maybe [Text])
     , _svwrrId     :: !(Maybe Text)
     , _svwrrSite   :: !(Maybe SiteVerificationWebResourceResourceSite)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SiteVerificationWebResourceResource' with the minimum fields required to make a request.
 --
@@ -333,3 +278,51 @@ instance ToJSON SiteVerificationWebResourceResource
               (catMaybes
                  [("owners" .=) <$> _svwrrOwners,
                   ("id" .=) <$> _svwrrId, ("site" .=) <$> _svwrrSite])
+
+-- | The site for which a verification token will be generated.
+--
+-- /See:/ 'site' smart constructor.
+data Site = Site
+    { _sIdentifier :: !(Maybe Text)
+    , _sType       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Site' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sIdentifier'
+--
+-- * 'sType'
+site
+    :: Site
+site =
+    Site
+    { _sIdentifier = Nothing
+    , _sType = Nothing
+    }
+
+-- | The site identifier. If the type is set to SITE, the identifier is a
+-- URL. If the type is set to INET_DOMAIN, the site identifier is a domain
+-- name.
+sIdentifier :: Lens' Site (Maybe Text)
+sIdentifier
+  = lens _sIdentifier (\ s a -> s{_sIdentifier = a})
+
+-- | The type of resource to be verified. Can be SITE or INET_DOMAIN (domain
+-- name).
+sType :: Lens' Site (Maybe Text)
+sType = lens _sType (\ s a -> s{_sType = a})
+
+instance FromJSON Site where
+        parseJSON
+          = withObject "Site"
+              (\ o ->
+                 Site <$> (o .:? "identifier") <*> (o .:? "type"))
+
+instance ToJSON Site where
+        toJSON Site{..}
+          = object
+              (catMaybes
+                 [("identifier" .=) <$> _sIdentifier,
+                  ("type" .=) <$> _sType])

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Games.Pushtokens.Remove
     , prQuotaUser
     , prPrettyPrint
     , prUserIP
+    , prPayload
     , prKey
-    , prPushTokenId
     , prOAuthToken
     , prFields
     ) where
@@ -65,11 +66,11 @@ data PushtokensRemove' = PushtokensRemove'
     { _prQuotaUser   :: !(Maybe Text)
     , _prPrettyPrint :: !Bool
     , _prUserIP      :: !(Maybe Text)
+    , _prPayload     :: !PushTokenId
     , _prKey         :: !(Maybe Key)
-    , _prPushTokenId :: !PushTokenId
     , _prOAuthToken  :: !(Maybe OAuthToken)
     , _prFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PushtokensRemove'' with the minimum fields required to make a request.
 --
@@ -81,23 +82,23 @@ data PushtokensRemove' = PushtokensRemove'
 --
 -- * 'prUserIP'
 --
--- * 'prKey'
+-- * 'prPayload'
 --
--- * 'prPushTokenId'
+-- * 'prKey'
 --
 -- * 'prOAuthToken'
 --
 -- * 'prFields'
 pushtokensRemove'
-    :: PushTokenId -- ^ 'PushTokenId'
+    :: PushTokenId -- ^ 'payload'
     -> PushtokensRemove'
-pushtokensRemove' pPrPushTokenId_ =
+pushtokensRemove' pPrPayload_ =
     PushtokensRemove'
     { _prQuotaUser = Nothing
     , _prPrettyPrint = True
     , _prUserIP = Nothing
+    , _prPayload = pPrPayload_
     , _prKey = Nothing
-    , _prPushTokenId = pPrPushTokenId_
     , _prOAuthToken = Nothing
     , _prFields = Nothing
     }
@@ -120,17 +121,16 @@ prPrettyPrint
 prUserIP :: Lens' PushtokensRemove' (Maybe Text)
 prUserIP = lens _prUserIP (\ s a -> s{_prUserIP = a})
 
+-- | Multipart request metadata.
+prPayload :: Lens' PushtokensRemove' PushTokenId
+prPayload
+  = lens _prPayload (\ s a -> s{_prPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 prKey :: Lens' PushtokensRemove' (Maybe Key)
 prKey = lens _prKey (\ s a -> s{_prKey = a})
-
--- | Multipart request metadata.
-prPushTokenId :: Lens' PushtokensRemove' PushTokenId
-prPushTokenId
-  = lens _prPushTokenId
-      (\ s a -> s{_prPushTokenId = a})
 
 -- | OAuth 2.0 token for the current user.
 prOAuthToken :: Lens' PushtokensRemove' (Maybe OAuthToken)
@@ -154,7 +154,7 @@ instance GoogleRequest PushtokensRemove' where
               _prKey
               _prOAuthToken
               (Just AltJSON)
-              _prPushTokenId
+              _prPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PushtokensRemoveResource)

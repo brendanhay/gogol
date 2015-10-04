@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,19 +58,19 @@ type AccountUserProfilesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "accountUserProfiles" :>
-           QueryParam "active" Bool :>
-             QueryParams "ids" Int64 :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "searchString" Text :>
-                     QueryParam "sortField"
-                       DfareportingAccountUserProfilesListSortField
-                       :>
-                       QueryParam "sortOrder"
-                         DfareportingAccountUserProfilesListSortOrder
+           QueryParam "userRoleId" Int64 :>
+             QueryParam "searchString" Text :>
+               QueryParams "ids" Int64 :>
+                 QueryParam "sortOrder"
+                   DfareportingAccountUserProfilesListSortOrder
+                   :>
+                   QueryParam "active" Bool :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "sortField"
+                         DfareportingAccountUserProfilesListSortField
                          :>
                          QueryParam "subaccountId" Int64 :>
-                           QueryParam "userRoleId" Int64 :>
+                           QueryParam "maxResults" Int32 :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
@@ -89,7 +90,7 @@ data AccountUserProfilesList' = AccountUserProfilesList'
     , _auplUserRoleId   :: !(Maybe Int64)
     , _auplUserIP       :: !(Maybe Text)
     , _auplSearchString :: !(Maybe Text)
-    , _auplIds          :: !(Maybe Int64)
+    , _auplIds          :: !(Maybe [Int64])
     , _auplProfileId    :: !Int64
     , _auplSortOrder    :: !(Maybe DfareportingAccountUserProfilesListSortOrder)
     , _auplActive       :: !(Maybe Bool)
@@ -100,7 +101,7 @@ data AccountUserProfilesList' = AccountUserProfilesList'
     , _auplOAuthToken   :: !(Maybe OAuthToken)
     , _auplMaxResults   :: !(Maybe Int32)
     , _auplFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProfilesList'' with the minimum fields required to make a request.
 --
@@ -199,8 +200,10 @@ auplSearchString
       (\ s a -> s{_auplSearchString = a})
 
 -- | Select only user profiles with these IDs.
-auplIds :: Lens' AccountUserProfilesList' (Maybe Int64)
-auplIds = lens _auplIds (\ s a -> s{_auplIds = a})
+auplIds :: Lens' AccountUserProfilesList' [Int64]
+auplIds
+  = lens _auplIds (\ s a -> s{_auplIds = a}) . _Default
+      . _Coerce
 
 -- | User profile ID associated with this request.
 auplProfileId :: Lens' AccountUserProfilesList' Int64
@@ -269,14 +272,14 @@ instance GoogleRequest AccountUserProfilesList' where
              AccountUserProfilesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountUserProfilesList'{..}
-          = go _auplActive _auplIds _auplMaxResults
-              _auplPageToken
-              _auplSearchString
-              _auplSortField
+          = go _auplProfileId _auplUserRoleId _auplSearchString
+              (_auplIds ^. _Default)
               _auplSortOrder
+              _auplActive
+              _auplPageToken
+              _auplSortField
               _auplSubAccountId
-              _auplUserRoleId
-              _auplProfileId
+              _auplMaxResults
               _auplQuotaUser
               (Just _auplPrettyPrint)
               _auplUserIP

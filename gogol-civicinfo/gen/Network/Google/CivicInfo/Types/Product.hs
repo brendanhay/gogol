@@ -18,29 +18,6 @@ module Network.Google.CivicInfo.Types.Product where
 import           Network.Google.CivicInfo.Types.Sum
 import           Network.Google.Prelude
 
--- | Political geographic divisions that contain the requested address.
---
--- /See:/ 'representativeInfoResponseDivisions' smart constructor.
-data RepresentativeInfoResponseDivisions =
-    RepresentativeInfoResponseDivisions
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RepresentativeInfoResponseDivisions' with the minimum fields required to make a request.
---
-representativeInfoResponseDivisions
-    :: RepresentativeInfoResponseDivisions
-representativeInfoResponseDivisions = RepresentativeInfoResponseDivisions
-
-instance FromJSON RepresentativeInfoResponseDivisions
-         where
-        parseJSON
-          = withObject "RepresentativeInfoResponseDivisions"
-              (\ o -> pure RepresentativeInfoResponseDivisions)
-
-instance ToJSON RepresentativeInfoResponseDivisions
-         where
-        toJSON = const (Object mempty)
-
 -- | The result of a voter info lookup query.
 --
 -- /See:/ 'voterInfoResponse' smart constructor.
@@ -56,7 +33,7 @@ data VoterInfoResponse = VoterInfoResponse
     , _virEarlyVoteSites   :: !(Maybe [PollingLocation])
     , _virPollingLocations :: !(Maybe [PollingLocation])
     , _virPrecinctId       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VoterInfoResponse' with the minimum fields required to make a request.
 --
@@ -230,7 +207,7 @@ data PollingLocation = PollingLocation
     , _plName          :: !(Maybe Text)
     , _plId            :: !(Maybe Text)
     , _plNotes         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PollingLocation' with the minimum fields required to make a request.
 --
@@ -355,7 +332,7 @@ data GeographicDivision = GeographicDivision
     { _gdName          :: !(Maybe Text)
     , _gdOfficeIndices :: !(Maybe [Word32])
     , _gdAlsoKnownAs   :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeographicDivision' with the minimum fields required to make a request.
 --
@@ -433,7 +410,7 @@ data Candidate = Candidate
     , _cOrderOnBallot :: !(Maybe Int64)
     , _cName          :: !(Maybe Text)
     , _cParty         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Candidate' with the minimum fields required to make a request.
 --
@@ -542,7 +519,7 @@ data Office = Office
     , _oSources         :: !(Maybe [Source])
     , _oName            :: !(Maybe Text)
     , _oLevels          :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Office' with the minimum fields required to make a request.
 --
@@ -645,7 +622,7 @@ data Election = Election
     , _eElectionDay   :: !(Maybe Text)
     , _eName          :: !(Maybe Text)
     , _eId            :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Election' with the minimum fields required to make a request.
 --
@@ -714,7 +691,7 @@ instance ToJSON Election where
 data Channel = Channel
     { _cId   :: !(Maybe Text)
     , _cType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Channel' with the minimum fields required to make a request.
 --
@@ -759,9 +736,9 @@ data RepresentativeInfoResponse = RepresentativeInfoResponse
     { _rirKind            :: !Text
     , _rirNormalizedInput :: !(Maybe SimpleAddressType)
     , _rirOfficials       :: !(Maybe [Official])
-    , _rirDivisions       :: !(Maybe RepresentativeInfoResponseDivisions)
+    , _rirDivisions       :: !(Maybe Divisions)
     , _rirOffices         :: !(Maybe [Office])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepresentativeInfoResponse' with the minimum fields required to make a request.
 --
@@ -807,7 +784,7 @@ rirOfficials
       . _Coerce
 
 -- | Political geographic divisions that contain the requested address.
-rirDivisions :: Lens' RepresentativeInfoResponse (Maybe RepresentativeInfoResponseDivisions)
+rirDivisions :: Lens' RepresentativeInfoResponse (Maybe Divisions)
 rirDivisions
   = lens _rirDivisions (\ s a -> s{_rirDivisions = a})
 
@@ -849,7 +826,7 @@ data DivisionSearchResult = DivisionSearchResult
     { _dsrAliases :: !(Maybe [Text])
     , _dsrName    :: !(Maybe Text)
     , _dsrOcdId   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DivisionSearchResult' with the minimum fields required to make a request.
 --
@@ -923,7 +900,7 @@ data AdministrativeBody = AdministrativeBody
     , _abElectionRulesURL                    :: !(Maybe Text)
     , _abVoterServices                       :: !(Maybe [Text])
     , _abElectionRegistrationURL             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdministrativeBody' with the minimum fields required to make a request.
 --
@@ -1130,7 +1107,7 @@ data Contest = Contest
     , _conCandidates                 :: !(Maybe [Candidate])
     , _conReferendumTitle            :: !(Maybe Text)
     , _conBallotPlacement            :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Contest' with the minimum fields required to make a request.
 --
@@ -1455,7 +1432,7 @@ instance ToJSON Contest where
 data DivisionSearchResponse = DivisionSearchResponse
     { _dsrResults :: !(Maybe [DivisionSearchResult])
     , _dsrKind    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DivisionSearchResponse' with the minimum fields required to make a request.
 --
@@ -1504,7 +1481,7 @@ instance ToJSON DivisionSearchResponse where
 -- /See:/ 'representativeInfoDataDivisions' smart constructor.
 data RepresentativeInfoDataDivisions =
     RepresentativeInfoDataDivisions
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepresentativeInfoDataDivisions' with the minimum fields required to make a request.
 --
@@ -1521,6 +1498,26 @@ instance FromJSON RepresentativeInfoDataDivisions
 instance ToJSON RepresentativeInfoDataDivisions where
         toJSON = const (Object mempty)
 
+-- | Political geographic divisions that contain the requested address.
+--
+-- /See:/ 'divisions' smart constructor.
+data Divisions =
+    Divisions
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Divisions' with the minimum fields required to make a request.
+--
+divisions
+    :: Divisions
+divisions = Divisions
+
+instance FromJSON Divisions where
+        parseJSON
+          = withObject "Divisions" (\ o -> pure Divisions)
+
+instance ToJSON Divisions where
+        toJSON = const (Object mempty)
+
 -- | Information about individual election officials.
 --
 -- /See:/ 'electionOfficial' smart constructor.
@@ -1530,7 +1527,7 @@ data ElectionOfficial = ElectionOfficial
     , _eoOfficePhoneNumber :: !(Maybe Text)
     , _eoEmailAddress      :: !(Maybe Text)
     , _eoTitle             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ElectionOfficial' with the minimum fields required to make a request.
 --
@@ -1607,7 +1604,7 @@ data RepresentativeInfoData = RepresentativeInfoData
     { _ridOfficials :: !(Maybe [Official])
     , _ridDivisions :: !(Maybe RepresentativeInfoDataDivisions)
     , _ridOffices   :: !(Maybe [Office])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepresentativeInfoData' with the minimum fields required to make a request.
 --
@@ -1672,7 +1669,7 @@ instance ToJSON RepresentativeInfoData where
 data Source = Source
     { _sName     :: !(Maybe Text)
     , _sOfficial :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Source' with the minimum fields required to make a request.
 --
@@ -1718,7 +1715,7 @@ data ElectoralDistrict = ElectoralDistrict
     { _edName  :: !(Maybe Text)
     , _edScope :: !(Maybe Text)
     , _edId    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ElectoralDistrict' with the minimum fields required to make a request.
 --
@@ -1780,7 +1777,7 @@ data SimpleAddressType = SimpleAddressType
     , _satCity         :: !(Maybe Text)
     , _satLine1        :: !(Maybe Text)
     , _satLocationName :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SimpleAddressType' with the minimum fields required to make a request.
 --
@@ -1873,7 +1870,7 @@ data AdministrationRegion = AdministrationRegion
     , _arName                       :: !(Maybe Text)
     , _arElectionAdministrationBody :: !(Maybe AdministrativeBody)
     , _arId                         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdministrationRegion' with the minimum fields required to make a request.
 --
@@ -1958,7 +1955,7 @@ instance ToJSON AdministrationRegion where
 data ElectionsQueryResponse = ElectionsQueryResponse
     { _eqrKind      :: !Text
     , _eqrElections :: !(Maybe [Election])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ElectionsQueryResponse' with the minimum fields required to make a request.
 --
@@ -2014,7 +2011,7 @@ data Official = Official
     , _offName     :: !(Maybe Text)
     , _offEmails   :: !(Maybe [Text])
     , _offParty    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Official' with the minimum fields required to make a request.
 --

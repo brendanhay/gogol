@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,13 +54,13 @@ type FilesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "files" :>
-           QueryParam "maxResults" Int32 :>
-             QueryParam "pageToken" Text :>
-               QueryParam "scope" DfareportingFilesListScope :>
+           QueryParam "sortOrder" DfareportingFilesListSortOrder
+             :>
+             QueryParam "scope" DfareportingFilesListScope :>
+               QueryParam "pageToken" Text :>
                  QueryParam "sortField" DfareportingFilesListSortField
                    :>
-                   QueryParam "sortOrder" DfareportingFilesListSortOrder
-                     :>
+                   QueryParam "maxResults" Int32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -85,7 +86,7 @@ data FilesList' = FilesList'
     , _flOAuthToken  :: !(Maybe OAuthToken)
     , _flMaxResults  :: !(Maybe Int32)
     , _flFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesList'' with the minimum fields required to make a request.
 --
@@ -203,10 +204,10 @@ instance GoogleRequest FilesList' where
         type Rs FilesList' = FileList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FilesList'{..}
-          = go _flMaxResults _flPageToken (Just _flScope)
+          = go _flProfileId (Just _flSortOrder) (Just _flScope)
+              _flPageToken
               (Just _flSortField)
-              (Just _flSortOrder)
-              _flProfileId
+              _flMaxResults
               _flQuotaUser
               (Just _flPrettyPrint)
               _flUserIP

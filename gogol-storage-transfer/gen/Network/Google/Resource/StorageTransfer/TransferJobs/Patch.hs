@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -40,7 +41,7 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.Patch
     , tjpAccessToken
     , tjpJobName
     , tjpUploadType
-    , tjpUpdateTransferJobRequest
+    , tjpPayload
     , tjpBearerToken
     , tjpKey
     , tjpOAuthToken
@@ -55,14 +56,14 @@ import           Network.Google.StorageTransfer.Types
 -- 'TransferJobsPatch'' request conforms to.
 type TransferJobsPatchResource =
      "v1" :>
-       "{+jobName}" :>
+       Capture "jobName" Text :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "upload_protocol" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "bearer_token" Text :>
+                     QueryParam "callback" Text :>
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
@@ -78,21 +79,21 @@ type TransferJobsPatchResource =
 --
 -- /See:/ 'transferJobsPatch'' smart constructor.
 data TransferJobsPatch' = TransferJobsPatch'
-    { _tjpXgafv                    :: !(Maybe Text)
-    , _tjpQuotaUser                :: !(Maybe Text)
-    , _tjpPrettyPrint              :: !Bool
-    , _tjpUploadProtocol           :: !(Maybe Text)
-    , _tjpPp                       :: !Bool
-    , _tjpAccessToken              :: !(Maybe Text)
-    , _tjpJobName                  :: !Text
-    , _tjpUploadType               :: !(Maybe Text)
-    , _tjpUpdateTransferJobRequest :: !UpdateTransferJobRequest
-    , _tjpBearerToken              :: !(Maybe Text)
-    , _tjpKey                      :: !(Maybe Key)
-    , _tjpOAuthToken               :: !(Maybe OAuthToken)
-    , _tjpFields                   :: !(Maybe Text)
-    , _tjpCallback                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _tjpXgafv          :: !(Maybe Text)
+    , _tjpQuotaUser      :: !(Maybe Text)
+    , _tjpPrettyPrint    :: !Bool
+    , _tjpUploadProtocol :: !(Maybe Text)
+    , _tjpPp             :: !Bool
+    , _tjpAccessToken    :: !(Maybe Text)
+    , _tjpJobName        :: !Text
+    , _tjpUploadType     :: !(Maybe Text)
+    , _tjpPayload        :: !UpdateTransferJobRequest
+    , _tjpBearerToken    :: !(Maybe Text)
+    , _tjpKey            :: !(Maybe Key)
+    , _tjpOAuthToken     :: !(Maybe OAuthToken)
+    , _tjpFields         :: !(Maybe Text)
+    , _tjpCallback       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferJobsPatch'' with the minimum fields required to make a request.
 --
@@ -114,7 +115,7 @@ data TransferJobsPatch' = TransferJobsPatch'
 --
 -- * 'tjpUploadType'
 --
--- * 'tjpUpdateTransferJobRequest'
+-- * 'tjpPayload'
 --
 -- * 'tjpBearerToken'
 --
@@ -127,9 +128,9 @@ data TransferJobsPatch' = TransferJobsPatch'
 -- * 'tjpCallback'
 transferJobsPatch'
     :: Text -- ^ 'jobName'
-    -> UpdateTransferJobRequest -- ^ 'UpdateTransferJobRequest'
+    -> UpdateTransferJobRequest -- ^ 'payload'
     -> TransferJobsPatch'
-transferJobsPatch' pTjpJobName_ pTjpUpdateTransferJobRequest_ =
+transferJobsPatch' pTjpJobName_ pTjpPayload_ =
     TransferJobsPatch'
     { _tjpXgafv = Nothing
     , _tjpQuotaUser = Nothing
@@ -139,7 +140,7 @@ transferJobsPatch' pTjpJobName_ pTjpUpdateTransferJobRequest_ =
     , _tjpAccessToken = Nothing
     , _tjpJobName = pTjpJobName_
     , _tjpUploadType = Nothing
-    , _tjpUpdateTransferJobRequest = pTjpUpdateTransferJobRequest_
+    , _tjpPayload = pTjpPayload_
     , _tjpBearerToken = Nothing
     , _tjpKey = Nothing
     , _tjpOAuthToken = Nothing
@@ -192,10 +193,9 @@ tjpUploadType
       (\ s a -> s{_tjpUploadType = a})
 
 -- | Multipart request metadata.
-tjpUpdateTransferJobRequest :: Lens' TransferJobsPatch' UpdateTransferJobRequest
-tjpUpdateTransferJobRequest
-  = lens _tjpUpdateTransferJobRequest
-      (\ s a -> s{_tjpUpdateTransferJobRequest = a})
+tjpPayload :: Lens' TransferJobsPatch' UpdateTransferJobRequest
+tjpPayload
+  = lens _tjpPayload (\ s a -> s{_tjpPayload = a})
 
 -- | OAuth bearer token.
 tjpBearerToken :: Lens' TransferJobsPatch' (Maybe Text)
@@ -233,19 +233,19 @@ instance GoogleRequest TransferJobsPatch' where
         type Rs TransferJobsPatch' = TransferJob
         request = requestWithRoute defReq storageTransferURL
         requestWithRoute r u TransferJobsPatch'{..}
-          = go _tjpXgafv _tjpAccessToken _tjpBearerToken
-              _tjpCallback
+          = go _tjpJobName _tjpXgafv _tjpUploadProtocol
               (Just _tjpPp)
+              _tjpAccessToken
               _tjpUploadType
-              _tjpUploadProtocol
-              _tjpJobName
+              _tjpBearerToken
+              _tjpCallback
               _tjpQuotaUser
               (Just _tjpPrettyPrint)
               _tjpFields
               _tjpKey
               _tjpOAuthToken
               (Just AltJSON)
-              _tjpUpdateTransferJobRequest
+              _tjpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TransferJobsPatchResource)

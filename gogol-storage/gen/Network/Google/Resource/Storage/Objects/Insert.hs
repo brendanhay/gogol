@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,11 +38,11 @@ module Network.Google.Resource.Storage.Objects.Insert
     , oiIfGenerationMatch
     , oiUserIP
     , oiBucket
+    , oiPayload
     , oiMedia
     , oiKey
     , oiName
     , oiIfMetagenerationNotMatch
-    , oiObject
     , oiProjection
     , oiOAuthToken
     , oiFields
@@ -56,11 +57,11 @@ type ObjectsInsertResource =
      "b" :>
        Capture "bucket" Text :>
          "o" :>
-           QueryParam "ifGenerationMatch" Word64 :>
+           QueryParam "ifMetagenerationMatch" Word64 :>
              QueryParam "ifGenerationNotMatch" Word64 :>
-               QueryParam "ifMetagenerationMatch" Word64 :>
-                 QueryParam "ifMetagenerationNotMatch" Word64 :>
-                   QueryParam "name" Text :>
+               QueryParam "ifGenerationMatch" Word64 :>
+                 QueryParam "name" Text :>
+                   QueryParam "ifMetagenerationNotMatch" Word64 :>
                      QueryParam "projection"
                        StorageObjectsInsertProjection
                        :>
@@ -77,11 +78,11 @@ type ObjectsInsertResource =
        "b" :>
          Capture "bucket" Text :>
            "o" :>
-             QueryParam "ifGenerationMatch" Word64 :>
+             QueryParam "ifMetagenerationMatch" Word64 :>
                QueryParam "ifGenerationNotMatch" Word64 :>
-                 QueryParam "ifMetagenerationMatch" Word64 :>
-                   QueryParam "ifMetagenerationNotMatch" Word64 :>
-                     QueryParam "name" Text :>
+                 QueryParam "ifGenerationMatch" Word64 :>
+                   QueryParam "name" Text :>
+                     QueryParam "ifMetagenerationNotMatch" Word64 :>
                        QueryParam "projection"
                          StorageObjectsInsertProjection
                          :>
@@ -91,9 +92,9 @@ type ObjectsInsertResource =
                                QueryParam "fields" Text :>
                                  QueryParam "key" Key :>
                                    QueryParam "oauth_token" OAuthToken :>
-                                     QueryParam "alt" Media :>
+                                     QueryParam "alt" AltMedia :>
                                        MultipartRelated '[JSON] Object Body :>
-                                         Post '[OctetStream] Stream
+                                         Post '[OctetStream] Body
 
 -- | Stores new data blobs and associated metadata.
 --
@@ -106,15 +107,15 @@ data ObjectsInsert' = ObjectsInsert'
     , _oiIfGenerationMatch        :: !(Maybe Word64)
     , _oiUserIP                   :: !(Maybe Text)
     , _oiBucket                   :: !Text
+    , _oiPayload                  :: !Object
     , _oiMedia                    :: !Body
     , _oiKey                      :: !(Maybe Key)
     , _oiName                     :: !(Maybe Text)
     , _oiIfMetagenerationNotMatch :: !(Maybe Word64)
-    , _oiObject                   :: !Object
     , _oiProjection               :: !(Maybe StorageObjectsInsertProjection)
     , _oiOAuthToken               :: !(Maybe OAuthToken)
     , _oiFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsInsert'' with the minimum fields required to make a request.
 --
@@ -134,6 +135,8 @@ data ObjectsInsert' = ObjectsInsert'
 --
 -- * 'oiBucket'
 --
+-- * 'oiPayload'
+--
 -- * 'oiMedia'
 --
 -- * 'oiKey'
@@ -142,8 +145,6 @@ data ObjectsInsert' = ObjectsInsert'
 --
 -- * 'oiIfMetagenerationNotMatch'
 --
--- * 'oiObject'
---
 -- * 'oiProjection'
 --
 -- * 'oiOAuthToken'
@@ -151,10 +152,10 @@ data ObjectsInsert' = ObjectsInsert'
 -- * 'oiFields'
 objectsInsert'
     :: Text -- ^ 'bucket'
+    -> Object -- ^ 'payload'
     -> Body -- ^ 'media'
-    -> Object -- ^ 'Object'
     -> ObjectsInsert'
-objectsInsert' pOiBucket_ pOiMedia_ pOiObject_ =
+objectsInsert' pOiBucket_ pOiPayload_ pOiMedia_ =
     ObjectsInsert'
     { _oiQuotaUser = Nothing
     , _oiIfMetagenerationMatch = Nothing
@@ -163,11 +164,11 @@ objectsInsert' pOiBucket_ pOiMedia_ pOiObject_ =
     , _oiIfGenerationMatch = Nothing
     , _oiUserIP = Nothing
     , _oiBucket = pOiBucket_
+    , _oiPayload = pOiPayload_
     , _oiMedia = pOiMedia_
     , _oiKey = Nothing
     , _oiName = Nothing
     , _oiIfMetagenerationNotMatch = Nothing
-    , _oiObject = pOiObject_
     , _oiProjection = Nothing
     , _oiOAuthToken = Nothing
     , _oiFields = Nothing
@@ -217,6 +218,11 @@ oiUserIP = lens _oiUserIP (\ s a -> s{_oiUserIP = a})
 oiBucket :: Lens' ObjectsInsert' Text
 oiBucket = lens _oiBucket (\ s a -> s{_oiBucket = a})
 
+-- | Multipart request metadata.
+oiPayload :: Lens' ObjectsInsert' Object
+oiPayload
+  = lens _oiPayload (\ s a -> s{_oiPayload = a})
+
 oiMedia :: Lens' ObjectsInsert' Body
 oiMedia = lens _oiMedia (\ s a -> s{_oiMedia = a})
 
@@ -237,10 +243,6 @@ oiIfMetagenerationNotMatch :: Lens' ObjectsInsert' (Maybe Word64)
 oiIfMetagenerationNotMatch
   = lens _oiIfMetagenerationNotMatch
       (\ s a -> s{_oiIfMetagenerationNotMatch = a})
-
--- | Multipart request metadata.
-oiObject :: Lens' ObjectsInsert' Object
-oiObject = lens _oiObject (\ s a -> s{_oiObject = a})
 
 -- | Set of properties to return. Defaults to noAcl, unless the object
 -- resource specifies the acl property, when it defaults to full.
@@ -265,13 +267,12 @@ instance GoogleRequest ObjectsInsert' where
         type Rs ObjectsInsert' = Object
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsInsert'{..}
-          = go _oiIfGenerationMatch _oiIfGenerationNotMatch
-              _oiIfMetagenerationMatch
-              _oiIfMetagenerationNotMatch
-              _oiMedia
+          = go _oiBucket _oiIfMetagenerationMatch
+              _oiIfGenerationNotMatch
+              _oiIfGenerationMatch
               _oiName
+              _oiIfMetagenerationNotMatch
               _oiProjection
-              _oiBucket
               _oiQuotaUser
               (Just _oiPrettyPrint)
               _oiUserIP
@@ -279,33 +280,35 @@ instance GoogleRequest ObjectsInsert' where
               _oiKey
               _oiOAuthToken
               (Just AltJSON)
-              _oiObject
+              _oiPayload
+              _oiMedia
           where go :<|> _
                   = clientWithRoute
                       (Proxy :: Proxy ObjectsInsertResource)
                       r
                       u
 
-instance GoogleRequest ObjectsInsert' where
-        type Rs (Download ObjectsInsert') = Stream
+instance GoogleRequest (Download ObjectsInsert')
+         where
+        type Rs (Download ObjectsInsert') = Body
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsInsert'{..}
-          = go _oiIfGenerationMatch _oiIfGenerationNotMatch
-              _oiIfMetagenerationMatch
-              _oiIfMetagenerationNotMatch
-              _oiMedia
+        requestWithRoute r u (Download ObjectsInsert'{..})
+          = go _oiBucket _oiIfMetagenerationMatch
+              _oiIfGenerationNotMatch
+              _oiIfGenerationMatch
               _oiName
+              _oiIfMetagenerationNotMatch
               _oiProjection
-              _oiBucket
               _oiQuotaUser
               (Just _oiPrettyPrint)
               _oiUserIP
               _oiFields
               _oiKey
               _oiOAuthToken
-              (Just Media)
-              _oiObject
-          where go :<|> _
+              (Just AltMedia)
+              _oiPayload
+              _oiMedia
+          where _ :<|> go
                   = clientWithRoute
                       (Proxy :: Proxy ObjectsInsertResource)
                       r

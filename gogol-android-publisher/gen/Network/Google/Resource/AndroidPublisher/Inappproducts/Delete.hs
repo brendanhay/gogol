@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.AndroidPublisher.Inappproducts.Delete
     , idPackageName
     , idUserIP
     , idKey
-    , idSku
+    , idSKU
     , idOAuthToken
     , idFields
     ) where
@@ -66,10 +67,10 @@ data InappproductsDelete' = InappproductsDelete'
     , _idPackageName :: !Text
     , _idUserIP      :: !(Maybe Text)
     , _idKey         :: !(Maybe Key)
-    , _idSku         :: !Text
+    , _idSKU         :: !Text
     , _idOAuthToken  :: !(Maybe OAuthToken)
     , _idFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsDelete'' with the minimum fields required to make a request.
 --
@@ -85,7 +86,7 @@ data InappproductsDelete' = InappproductsDelete'
 --
 -- * 'idKey'
 --
--- * 'idSku'
+-- * 'idSKU'
 --
 -- * 'idOAuthToken'
 --
@@ -94,14 +95,14 @@ inappproductsDelete'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'sku'
     -> InappproductsDelete'
-inappproductsDelete' pIdPackageName_ pIdSku_ =
+inappproductsDelete' pIdPackageName_ pIdSKU_ =
     InappproductsDelete'
     { _idQuotaUser = Nothing
     , _idPrettyPrint = True
     , _idPackageName = pIdPackageName_
     , _idUserIP = Nothing
     , _idKey = Nothing
-    , _idSku = pIdSku_
+    , _idSKU = pIdSKU_
     , _idOAuthToken = Nothing
     , _idFields = Nothing
     }
@@ -138,8 +139,8 @@ idKey :: Lens' InappproductsDelete' (Maybe Key)
 idKey = lens _idKey (\ s a -> s{_idKey = a})
 
 -- | Unique identifier for the in-app product.
-idSku :: Lens' InappproductsDelete' Text
-idSku = lens _idSku (\ s a -> s{_idSku = a})
+idSKU :: Lens' InappproductsDelete' Text
+idSKU = lens _idSKU (\ s a -> s{_idSKU = a})
 
 -- | OAuth 2.0 token for the current user.
 idOAuthToken :: Lens' InappproductsDelete' (Maybe OAuthToken)
@@ -158,7 +159,7 @@ instance GoogleRequest InappproductsDelete' where
         type Rs InappproductsDelete' = ()
         request = requestWithRoute defReq androidPublisherURL
         requestWithRoute r u InappproductsDelete'{..}
-          = go _idPackageName _idSku _idQuotaUser
+          = go _idPackageName _idSKU _idQuotaUser
               (Just _idPrettyPrint)
               _idUserIP
               _idFields

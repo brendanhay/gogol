@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -54,17 +55,17 @@ import           Network.Google.PubSub.Types
 -- 'ProjectsTopicsSubscriptionsList'' request conforms to.
 type ProjectsTopicsSubscriptionsListResource =
      "v1beta2" :>
-       "{+topic}" :>
+       Capture "topic" Text :>
          "subscriptions" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pageSize" Int32 :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "pageSize" Int32 :>
+                           QueryParam "callback" Text :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
@@ -93,7 +94,7 @@ data ProjectsTopicsSubscriptionsList' = ProjectsTopicsSubscriptionsList'
     , _ptslPageSize       :: !(Maybe Int32)
     , _ptslFields         :: !(Maybe Text)
     , _ptslCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsTopicsSubscriptionsList'' with the minimum fields required to make a request.
 --
@@ -249,14 +250,14 @@ instance GoogleRequest
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u
           ProjectsTopicsSubscriptionsList'{..}
-          = go _ptslXgafv _ptslAccessToken _ptslBearerToken
-              _ptslCallback
-              _ptslPageSize
-              _ptslPageToken
+          = go _ptslTopic _ptslXgafv _ptslUploadProtocol
               (Just _ptslPp)
+              _ptslAccessToken
               _ptslUploadType
-              _ptslUploadProtocol
-              _ptslTopic
+              _ptslBearerToken
+              _ptslPageToken
+              _ptslPageSize
+              _ptslCallback
               _ptslQuotaUser
               (Just _ptslPrettyPrint)
               _ptslFields

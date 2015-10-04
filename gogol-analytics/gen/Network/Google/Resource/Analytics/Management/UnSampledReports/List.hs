@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -57,8 +58,8 @@ type ManagementUnSampledReportsListResource =
                "profiles" :>
                  Capture "profileId" Text :>
                    "unsampledReports" :>
-                     QueryParam "max-results" Int32 :>
-                       QueryParam "start-index" Int32 :>
+                     QueryParam "start-index" Int32 :>
+                       QueryParam "max-results" Int32 :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
@@ -83,7 +84,7 @@ data ManagementUnSampledReportsList' = ManagementUnSampledReportsList'
     , _musrlStartIndex    :: !(Maybe Int32)
     , _musrlMaxResults    :: !(Maybe Int32)
     , _musrlFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUnSampledReportsList'' with the minimum fields required to make a request.
 --
@@ -213,10 +214,10 @@ instance GoogleRequest
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
           ManagementUnSampledReportsList'{..}
-          = go _musrlMaxResults _musrlStartIndex
-              _musrlAccountId
-              _musrlWebPropertyId
+          = go _musrlAccountId _musrlWebPropertyId
               _musrlProfileId
+              _musrlStartIndex
+              _musrlMaxResults
               _musrlQuotaUser
               (Just _musrlPrettyPrint)
               _musrlUserIP

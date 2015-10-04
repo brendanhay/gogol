@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -48,8 +49,8 @@ import           Network.Google.Prelude
 type ManagementAccountsListResource =
      "management" :>
        "accounts" :>
-         QueryParam "max-results" Int32 :>
-           QueryParam "start-index" Int32 :>
+         QueryParam "start-index" Int32 :>
+           QueryParam "max-results" Int32 :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -70,7 +71,7 @@ data ManagementAccountsList' = ManagementAccountsList'
     , _malStartIndex  :: !(Maybe Int32)
     , _malMaxResults  :: !(Maybe Int32)
     , _malFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountsList'' with the minimum fields required to make a request.
 --
@@ -162,7 +163,7 @@ instance GoogleRequest ManagementAccountsList' where
         type Rs ManagementAccountsList' = Accounts
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementAccountsList'{..}
-          = go _malMaxResults _malStartIndex _malQuotaUser
+          = go _malStartIndex _malMaxResults _malQuotaUser
               (Just _malPrettyPrint)
               _malUserIP
               _malFields

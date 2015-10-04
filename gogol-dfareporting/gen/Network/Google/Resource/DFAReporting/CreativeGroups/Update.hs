@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Update
     , cguPrettyPrint
     , cguUserIP
     , cguProfileId
-    , cguCreativeGroup
+    , cguPayload
     , cguKey
     , cguOAuthToken
     , cguFields
@@ -63,15 +64,15 @@ type CreativeGroupsUpdateResource =
 --
 -- /See:/ 'creativeGroupsUpdate'' smart constructor.
 data CreativeGroupsUpdate' = CreativeGroupsUpdate'
-    { _cguQuotaUser     :: !(Maybe Text)
-    , _cguPrettyPrint   :: !Bool
-    , _cguUserIP        :: !(Maybe Text)
-    , _cguProfileId     :: !Int64
-    , _cguCreativeGroup :: !CreativeGroup
-    , _cguKey           :: !(Maybe Key)
-    , _cguOAuthToken    :: !(Maybe OAuthToken)
-    , _cguFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cguQuotaUser   :: !(Maybe Text)
+    , _cguPrettyPrint :: !Bool
+    , _cguUserIP      :: !(Maybe Text)
+    , _cguProfileId   :: !Int64
+    , _cguPayload     :: !CreativeGroup
+    , _cguKey         :: !(Maybe Key)
+    , _cguOAuthToken  :: !(Maybe OAuthToken)
+    , _cguFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsUpdate'' with the minimum fields required to make a request.
 --
@@ -85,7 +86,7 @@ data CreativeGroupsUpdate' = CreativeGroupsUpdate'
 --
 -- * 'cguProfileId'
 --
--- * 'cguCreativeGroup'
+-- * 'cguPayload'
 --
 -- * 'cguKey'
 --
@@ -94,15 +95,15 @@ data CreativeGroupsUpdate' = CreativeGroupsUpdate'
 -- * 'cguFields'
 creativeGroupsUpdate'
     :: Int64 -- ^ 'profileId'
-    -> CreativeGroup -- ^ 'CreativeGroup'
+    -> CreativeGroup -- ^ 'payload'
     -> CreativeGroupsUpdate'
-creativeGroupsUpdate' pCguProfileId_ pCguCreativeGroup_ =
+creativeGroupsUpdate' pCguProfileId_ pCguPayload_ =
     CreativeGroupsUpdate'
     { _cguQuotaUser = Nothing
     , _cguPrettyPrint = True
     , _cguUserIP = Nothing
     , _cguProfileId = pCguProfileId_
-    , _cguCreativeGroup = pCguCreativeGroup_
+    , _cguPayload = pCguPayload_
     , _cguKey = Nothing
     , _cguOAuthToken = Nothing
     , _cguFields = Nothing
@@ -133,10 +134,9 @@ cguProfileId
   = lens _cguProfileId (\ s a -> s{_cguProfileId = a})
 
 -- | Multipart request metadata.
-cguCreativeGroup :: Lens' CreativeGroupsUpdate' CreativeGroup
-cguCreativeGroup
-  = lens _cguCreativeGroup
-      (\ s a -> s{_cguCreativeGroup = a})
+cguPayload :: Lens' CreativeGroupsUpdate' CreativeGroup
+cguPayload
+  = lens _cguPayload (\ s a -> s{_cguPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -170,7 +170,7 @@ instance GoogleRequest CreativeGroupsUpdate' where
               _cguKey
               _cguOAuthToken
               (Just AltJSON)
-              _cguCreativeGroup
+              _cguPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeGroupsUpdateResource)

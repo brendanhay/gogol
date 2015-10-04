@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.PlusDomains.Comments.Insert
     , ciPrettyPrint
     , ciUserIP
     , ciActivityId
+    , ciPayload
     , ciKey
     , ciOAuthToken
-    , ciComment
     , ciFields
     ) where
 
@@ -66,11 +67,11 @@ data CommentsInsert' = CommentsInsert'
     , _ciPrettyPrint :: !Bool
     , _ciUserIP      :: !(Maybe Text)
     , _ciActivityId  :: !Text
+    , _ciPayload     :: !Comment
     , _ciKey         :: !(Maybe Key)
     , _ciOAuthToken  :: !(Maybe OAuthToken)
-    , _ciComment     :: !Comment
     , _ciFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsInsert'' with the minimum fields required to make a request.
 --
@@ -84,26 +85,26 @@ data CommentsInsert' = CommentsInsert'
 --
 -- * 'ciActivityId'
 --
+-- * 'ciPayload'
+--
 -- * 'ciKey'
 --
 -- * 'ciOAuthToken'
 --
--- * 'ciComment'
---
 -- * 'ciFields'
 commentsInsert'
     :: Text -- ^ 'activityId'
-    -> Comment -- ^ 'Comment'
+    -> Comment -- ^ 'payload'
     -> CommentsInsert'
-commentsInsert' pCiActivityId_ pCiComment_ =
+commentsInsert' pCiActivityId_ pCiPayload_ =
     CommentsInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
     , _ciUserIP = Nothing
     , _ciActivityId = pCiActivityId_
+    , _ciPayload = pCiPayload_
     , _ciKey = Nothing
     , _ciOAuthToken = Nothing
-    , _ciComment = pCiComment_
     , _ciFields = Nothing
     }
 
@@ -130,6 +131,11 @@ ciActivityId :: Lens' CommentsInsert' Text
 ciActivityId
   = lens _ciActivityId (\ s a -> s{_ciActivityId = a})
 
+-- | Multipart request metadata.
+ciPayload :: Lens' CommentsInsert' Comment
+ciPayload
+  = lens _ciPayload (\ s a -> s{_ciPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -140,11 +146,6 @@ ciKey = lens _ciKey (\ s a -> s{_ciKey = a})
 ciOAuthToken :: Lens' CommentsInsert' (Maybe OAuthToken)
 ciOAuthToken
   = lens _ciOAuthToken (\ s a -> s{_ciOAuthToken = a})
-
--- | Multipart request metadata.
-ciComment :: Lens' CommentsInsert' Comment
-ciComment
-  = lens _ciComment (\ s a -> s{_ciComment = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ciFields :: Lens' CommentsInsert' (Maybe Text)
@@ -164,7 +165,7 @@ instance GoogleRequest CommentsInsert' where
               _ciKey
               _ciOAuthToken
               (Just AltJSON)
-              _ciComment
+              _ciPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentsInsertResource)

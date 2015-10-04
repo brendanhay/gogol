@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,10 +34,10 @@ module Network.Google.Resource.Compute.TargetPools.GetHealth
     -- * Request Lenses
     , tpghQuotaUser
     , tpghPrettyPrint
-    , tpghInstanceReference
     , tpghProject
     , tpghTargetPool
     , tpghUserIP
+    , tpghPayload
     , tpghKey
     , tpghRegion
     , tpghOAuthToken
@@ -70,17 +71,17 @@ type TargetPoolsGetHealthResource =
 --
 -- /See:/ 'targetPoolsGetHealth'' smart constructor.
 data TargetPoolsGetHealth' = TargetPoolsGetHealth'
-    { _tpghQuotaUser         :: !(Maybe Text)
-    , _tpghPrettyPrint       :: !Bool
-    , _tpghInstanceReference :: !InstanceReference
-    , _tpghProject           :: !Text
-    , _tpghTargetPool        :: !Text
-    , _tpghUserIP            :: !(Maybe Text)
-    , _tpghKey               :: !(Maybe Key)
-    , _tpghRegion            :: !Text
-    , _tpghOAuthToken        :: !(Maybe OAuthToken)
-    , _tpghFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _tpghQuotaUser   :: !(Maybe Text)
+    , _tpghPrettyPrint :: !Bool
+    , _tpghProject     :: !Text
+    , _tpghTargetPool  :: !Text
+    , _tpghUserIP      :: !(Maybe Text)
+    , _tpghPayload     :: !InstanceReference
+    , _tpghKey         :: !(Maybe Key)
+    , _tpghRegion      :: !Text
+    , _tpghOAuthToken  :: !(Maybe OAuthToken)
+    , _tpghFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsGetHealth'' with the minimum fields required to make a request.
 --
@@ -90,13 +91,13 @@ data TargetPoolsGetHealth' = TargetPoolsGetHealth'
 --
 -- * 'tpghPrettyPrint'
 --
--- * 'tpghInstanceReference'
---
 -- * 'tpghProject'
 --
 -- * 'tpghTargetPool'
 --
 -- * 'tpghUserIP'
+--
+-- * 'tpghPayload'
 --
 -- * 'tpghKey'
 --
@@ -106,19 +107,19 @@ data TargetPoolsGetHealth' = TargetPoolsGetHealth'
 --
 -- * 'tpghFields'
 targetPoolsGetHealth'
-    :: InstanceReference -- ^ 'InstanceReference'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'project'
     -> Text -- ^ 'targetPool'
+    -> InstanceReference -- ^ 'payload'
     -> Text -- ^ 'region'
     -> TargetPoolsGetHealth'
-targetPoolsGetHealth' pTpghInstanceReference_ pTpghProject_ pTpghTargetPool_ pTpghRegion_ =
+targetPoolsGetHealth' pTpghProject_ pTpghTargetPool_ pTpghPayload_ pTpghRegion_ =
     TargetPoolsGetHealth'
     { _tpghQuotaUser = Nothing
     , _tpghPrettyPrint = True
-    , _tpghInstanceReference = pTpghInstanceReference_
     , _tpghProject = pTpghProject_
     , _tpghTargetPool = pTpghTargetPool_
     , _tpghUserIP = Nothing
+    , _tpghPayload = pTpghPayload_
     , _tpghKey = Nothing
     , _tpghRegion = pTpghRegion_
     , _tpghOAuthToken = Nothing
@@ -139,12 +140,6 @@ tpghPrettyPrint
   = lens _tpghPrettyPrint
       (\ s a -> s{_tpghPrettyPrint = a})
 
--- | Multipart request metadata.
-tpghInstanceReference :: Lens' TargetPoolsGetHealth' InstanceReference
-tpghInstanceReference
-  = lens _tpghInstanceReference
-      (\ s a -> s{_tpghInstanceReference = a})
-
 tpghProject :: Lens' TargetPoolsGetHealth' Text
 tpghProject
   = lens _tpghProject (\ s a -> s{_tpghProject = a})
@@ -160,6 +155,11 @@ tpghTargetPool
 tpghUserIP :: Lens' TargetPoolsGetHealth' (Maybe Text)
 tpghUserIP
   = lens _tpghUserIP (\ s a -> s{_tpghUserIP = a})
+
+-- | Multipart request metadata.
+tpghPayload :: Lens' TargetPoolsGetHealth' InstanceReference
+tpghPayload
+  = lens _tpghPayload (\ s a -> s{_tpghPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -200,7 +200,7 @@ instance GoogleRequest TargetPoolsGetHealth' where
               _tpghKey
               _tpghOAuthToken
               (Just AltJSON)
-              _tpghInstanceReference
+              _tpghPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetPoolsGetHealthResource)

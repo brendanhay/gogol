@@ -18,7 +18,7 @@ module Network.Google.Analytics.Types.Sum where
 import           Network.Google.Prelude
 
 -- | The desired sampling level.
-data AnalyticsDataMcfGetSamplingLevel
+data SamplingLevel
     = Default
       -- ^ @DEFAULT@
       -- Returns response with a sample size that balances speed and accuracy.
@@ -31,55 +31,55 @@ data AnalyticsDataMcfGetSamplingLevel
       -- result in the response being slower.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AnalyticsDataMcfGetSamplingLevel
+instance Hashable SamplingLevel
 
-instance FromText AnalyticsDataMcfGetSamplingLevel where
+instance FromText SamplingLevel where
     fromText = \case
         "DEFAULT" -> Just Default
         "FASTER" -> Just Faster
         "HIGHER_PRECISION" -> Just HigherPrecision
         _ -> Nothing
 
-instance ToText AnalyticsDataMcfGetSamplingLevel where
+instance ToText SamplingLevel where
     toText = \case
         Default -> "DEFAULT"
         Faster -> "FASTER"
         HigherPrecision -> "HIGHER_PRECISION"
 
-instance FromJSON AnalyticsDataMcfGetSamplingLevel where
-    parseJSON = parseJSONText "AnalyticsDataMcfGetSamplingLevel"
+instance FromJSON SamplingLevel where
+    parseJSON = parseJSONText "SamplingLevel"
 
-instance ToJSON AnalyticsDataMcfGetSamplingLevel where
+instance ToJSON SamplingLevel where
     toJSON = toJSONText
 
 -- | The selected format for the response. Default format is JSON.
-data AnalyticsDataGaGetOutput
-    = DataTable
+data Output
+    = ODataTable
       -- ^ @dataTable@
       -- Returns the response in Google Charts Data Table format. This is useful
       -- in creating visualization using Google Charts.
-    | JSON
+    | OJSON
       -- ^ @json@
       -- Returns the response in standard JSON format.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AnalyticsDataGaGetOutput
+instance Hashable Output
 
-instance FromText AnalyticsDataGaGetOutput where
+instance FromText Output where
     fromText = \case
-        "dataTable" -> Just DataTable
-        "json" -> Just JSON
+        "dataTable" -> Just ODataTable
+        "json" -> Just OJSON
         _ -> Nothing
 
-instance ToText AnalyticsDataGaGetOutput where
+instance ToText Output where
     toText = \case
-        DataTable -> "dataTable"
-        JSON -> "json"
+        ODataTable -> "dataTable"
+        OJSON -> "json"
 
-instance FromJSON AnalyticsDataGaGetOutput where
-    parseJSON = parseJSONText "AnalyticsDataGaGetOutput"
+instance FromJSON Output where
+    parseJSON = parseJSONText "Output"
 
-instance ToJSON AnalyticsDataGaGetOutput where
+instance ToJSON Output where
     toJSON = toJSONText
 
 -- | The desired sampling level.

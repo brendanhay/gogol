@@ -34,17 +34,18 @@ module Network.Google.FreebaseSearch
 
     -- * Types
 
-    -- ** FreebaseSearchFormat
-    , FreebaseSearchFormat (..)
+    -- ** WarningItem
+    , WarningItem
+    , warningItem
+    , wiLocation
+    , wiReason
+    , wiMessage
 
-    -- ** FreebaseSearchScoring
-    , FreebaseSearchScoring (..)
-
-    -- ** ReconcileGetCosts
-    , ReconcileGetCosts
-    , reconcileGetCosts
-    , rgcHits
-    , rgcMs
+    -- ** Costs
+    , Costs
+    , costs
+    , cHits
+    , cMs
 
     -- ** ReconcileGet
     , ReconcileGet
@@ -54,21 +55,20 @@ module Network.Google.FreebaseSearch
     , rgWarning
     , rgMatch
 
-    -- ** FreebaseSearchEncode
-    , FreebaseSearchEncode (..)
+    -- ** Format
+    , Format (..)
 
-    -- ** ReconcileCandidateNotable
-    , ReconcileCandidateNotable
-    , reconcileCandidateNotable
-    , rcnName
-    , rcnId
+    -- ** Help
+    , Help (..)
 
-    -- ** ReconcileGetWarning
-    , ReconcileGetWarning
-    , reconcileGetWarning
-    , rgwLocation
-    , rgwReason
-    , rgwMessage
+    -- ** Notable
+    , Notable
+    , notable
+    , nName
+    , nId
+
+    -- ** Scoring
+    , Scoring (..)
 
     -- ** ReconcileCandidate
     , ReconcileCandidate
@@ -79,11 +79,11 @@ module Network.Google.FreebaseSearch
     , rcNotable
     , rcMid
 
-    -- ** FreebaseSearchHelp
-    , FreebaseSearchHelp (..)
+    -- ** Spell
+    , Spell (..)
 
-    -- ** FreebaseSearchSpell
-    , FreebaseSearchSpell (..)
+    -- ** Encode
+    , Encode (..)
     ) where
 
 import           Network.Google.FreebaseSearch.Types

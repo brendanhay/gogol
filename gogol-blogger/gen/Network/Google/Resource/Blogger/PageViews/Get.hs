@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -49,7 +50,7 @@ type PageViewsGetResource =
      "blogs" :>
        Capture "blogId" Text :>
          "pageviews" :>
-           QueryParams "range" BloggerPageViewsGetRange :>
+           QueryParams "range" Range :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -67,10 +68,10 @@ data PageViewsGet' = PageViewsGet'
     , _pvgUserIP      :: !(Maybe Text)
     , _pvgBlogId      :: !Text
     , _pvgKey         :: !(Maybe Key)
-    , _pvgRange       :: !(Maybe BloggerPageViewsGetRange)
+    , _pvgRange       :: !(Maybe Range)
     , _pvgOAuthToken  :: !(Maybe OAuthToken)
     , _pvgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PageViewsGet'' with the minimum fields required to make a request.
 --
@@ -136,7 +137,7 @@ pvgBlogId
 pvgKey :: Lens' PageViewsGet' (Maybe Key)
 pvgKey = lens _pvgKey (\ s a -> s{_pvgKey = a})
 
-pvgRange :: Lens' PageViewsGet' (Maybe BloggerPageViewsGetRange)
+pvgRange :: Lens' PageViewsGet' (Maybe Range)
 pvgRange = lens _pvgRange (\ s a -> s{_pvgRange = a})
 
 -- | OAuth 2.0 token for the current user.
@@ -158,7 +159,7 @@ instance GoogleRequest PageViewsGet' where
         type Rs PageViewsGet' = Pageviews
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PageViewsGet'{..}
-          = go _pvgRange _pvgBlogId _pvgQuotaUser
+          = go _pvgBlogId (_pvgRange ^. _Default) _pvgQuotaUser
               (Just _pvgPrettyPrint)
               _pvgUserIP
               _pvgFields

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,10 +54,10 @@ type ReferencesBasesListResource =
      "references" :>
        Capture "referenceId" Text :>
          "bases" :>
-           QueryParam "end" Int64 :>
-             QueryParam "pageSize" Int32 :>
+           QueryParam "start" Int64 :>
+             QueryParam "end" Int64 :>
                QueryParam "pageToken" Text :>
-                 QueryParam "start" Int64 :>
+                 QueryParam "pageSize" Int32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,7 +83,7 @@ data ReferencesBasesList' = ReferencesBasesList'
     , _rblOAuthToken  :: !(Maybe OAuthToken)
     , _rblPageSize    :: !(Maybe Int32)
     , _rblFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesBasesList'' with the minimum fields required to make a request.
 --
@@ -198,8 +199,8 @@ instance GoogleRequest ReferencesBasesList' where
         type Rs ReferencesBasesList' = ListBasesResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReferencesBasesList'{..}
-          = go _rblEnd _rblPageSize _rblPageToken _rblStart
-              _rblReferenceId
+          = go _rblReferenceId _rblStart _rblEnd _rblPageToken
+              _rblPageSize
               _rblQuotaUser
               (Just _rblPrettyPrint)
               _rblUserIP

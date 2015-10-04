@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,10 +34,10 @@ module Network.Google.Resource.Drive.Comments.Update
     , cuQuotaUser
     , cuPrettyPrint
     , cuUserIP
+    , cuPayload
     , cuKey
     , cuFileId
     , cuOAuthToken
-    , cuComment
     , cuCommentId
     , cuFields
     ) where
@@ -67,13 +68,13 @@ data CommentsUpdate' = CommentsUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
     , _cuUserIP      :: !(Maybe Text)
+    , _cuPayload     :: !Comment
     , _cuKey         :: !(Maybe Key)
     , _cuFileId      :: !Text
     , _cuOAuthToken  :: !(Maybe OAuthToken)
-    , _cuComment     :: !Comment
     , _cuCommentId   :: !Text
     , _cuFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsUpdate'' with the minimum fields required to make a request.
 --
@@ -85,31 +86,31 @@ data CommentsUpdate' = CommentsUpdate'
 --
 -- * 'cuUserIP'
 --
+-- * 'cuPayload'
+--
 -- * 'cuKey'
 --
 -- * 'cuFileId'
 --
 -- * 'cuOAuthToken'
 --
--- * 'cuComment'
---
 -- * 'cuCommentId'
 --
 -- * 'cuFields'
 commentsUpdate'
-    :: Text -- ^ 'fileId'
-    -> Comment -- ^ 'Comment'
+    :: Comment -- ^ 'payload'
+    -> Text -- ^ 'fileId'
     -> Text -- ^ 'commentId'
     -> CommentsUpdate'
-commentsUpdate' pCuFileId_ pCuComment_ pCuCommentId_ =
+commentsUpdate' pCuPayload_ pCuFileId_ pCuCommentId_ =
     CommentsUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
     , _cuUserIP = Nothing
+    , _cuPayload = pCuPayload_
     , _cuKey = Nothing
     , _cuFileId = pCuFileId_
     , _cuOAuthToken = Nothing
-    , _cuComment = pCuComment_
     , _cuCommentId = pCuCommentId_
     , _cuFields = Nothing
     }
@@ -132,6 +133,11 @@ cuPrettyPrint
 cuUserIP :: Lens' CommentsUpdate' (Maybe Text)
 cuUserIP = lens _cuUserIP (\ s a -> s{_cuUserIP = a})
 
+-- | Multipart request metadata.
+cuPayload :: Lens' CommentsUpdate' Comment
+cuPayload
+  = lens _cuPayload (\ s a -> s{_cuPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -146,11 +152,6 @@ cuFileId = lens _cuFileId (\ s a -> s{_cuFileId = a})
 cuOAuthToken :: Lens' CommentsUpdate' (Maybe OAuthToken)
 cuOAuthToken
   = lens _cuOAuthToken (\ s a -> s{_cuOAuthToken = a})
-
--- | Multipart request metadata.
-cuComment :: Lens' CommentsUpdate' Comment
-cuComment
-  = lens _cuComment (\ s a -> s{_cuComment = a})
 
 -- | The ID of the comment.
 cuCommentId :: Lens' CommentsUpdate' Text
@@ -176,7 +177,7 @@ instance GoogleRequest CommentsUpdate' where
               _cuKey
               _cuOAuthToken
               (Just AltJSON)
-              _cuComment
+              _cuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentsUpdateResource)

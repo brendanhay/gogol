@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,7 +34,7 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Delete
     , ladQuotaUser
     , ladPrettyPrint
     , ladUserIP
-    , ladSkuId
+    , ladSKUId
     , ladUserId
     , ladKey
     , ladOAuthToken
@@ -67,13 +68,13 @@ data LicenseAssignmentsDelete' = LicenseAssignmentsDelete'
     { _ladQuotaUser   :: !(Maybe Text)
     , _ladPrettyPrint :: !Bool
     , _ladUserIP      :: !(Maybe Text)
-    , _ladSkuId       :: !Text
+    , _ladSKUId       :: !Text
     , _ladUserId      :: !Text
     , _ladKey         :: !(Maybe Key)
     , _ladOAuthToken  :: !(Maybe OAuthToken)
     , _ladProductId   :: !Text
     , _ladFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentsDelete'' with the minimum fields required to make a request.
 --
@@ -85,7 +86,7 @@ data LicenseAssignmentsDelete' = LicenseAssignmentsDelete'
 --
 -- * 'ladUserIP'
 --
--- * 'ladSkuId'
+-- * 'ladSKUId'
 --
 -- * 'ladUserId'
 --
@@ -101,12 +102,12 @@ licenseAssignmentsDelete'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'productId'
     -> LicenseAssignmentsDelete'
-licenseAssignmentsDelete' pLadSkuId_ pLadUserId_ pLadProductId_ =
+licenseAssignmentsDelete' pLadSKUId_ pLadUserId_ pLadProductId_ =
     LicenseAssignmentsDelete'
     { _ladQuotaUser = Nothing
     , _ladPrettyPrint = True
     , _ladUserIP = Nothing
-    , _ladSkuId = pLadSkuId_
+    , _ladSKUId = pLadSKUId_
     , _ladUserId = pLadUserId_
     , _ladKey = Nothing
     , _ladOAuthToken = Nothing
@@ -134,8 +135,8 @@ ladUserIP
   = lens _ladUserIP (\ s a -> s{_ladUserIP = a})
 
 -- | Name for sku
-ladSkuId :: Lens' LicenseAssignmentsDelete' Text
-ladSkuId = lens _ladSkuId (\ s a -> s{_ladSkuId = a})
+ladSKUId :: Lens' LicenseAssignmentsDelete' Text
+ladSKUId = lens _ladSKUId (\ s a -> s{_ladSKUId = a})
 
 -- | email id or unique Id of the user
 ladUserId :: Lens' LicenseAssignmentsDelete' Text
@@ -173,7 +174,7 @@ instance GoogleRequest LicenseAssignmentsDelete'
         type Rs LicenseAssignmentsDelete' = ()
         request = requestWithRoute defReq appsLicensingURL
         requestWithRoute r u LicenseAssignmentsDelete'{..}
-          = go _ladProductId _ladSkuId _ladUserId _ladQuotaUser
+          = go _ladProductId _ladSKUId _ladUserId _ladQuotaUser
               (Just _ladPrettyPrint)
               _ladUserIP
               _ladFields

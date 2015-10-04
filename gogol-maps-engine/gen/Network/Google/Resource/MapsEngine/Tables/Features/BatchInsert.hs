@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -39,9 +40,9 @@ module Network.Google.Resource.MapsEngine.Tables.Features.BatchInsert
     , tfbiQuotaUser
     , tfbiPrettyPrint
     , tfbiUserIP
+    , tfbiPayload
     , tfbiKey
     , tfbiId
-    , tfbiFeaturesBatchInsertRequest
     , tfbiOAuthToken
     , tfbiFields
     ) where
@@ -76,15 +77,15 @@ type TablesFeaturesBatchInsertResource =
 --
 -- /See:/ 'tablesFeaturesBatchInsert'' smart constructor.
 data TablesFeaturesBatchInsert' = TablesFeaturesBatchInsert'
-    { _tfbiQuotaUser                  :: !(Maybe Text)
-    , _tfbiPrettyPrint                :: !Bool
-    , _tfbiUserIP                     :: !(Maybe Text)
-    , _tfbiKey                        :: !(Maybe Key)
-    , _tfbiId                         :: !Text
-    , _tfbiFeaturesBatchInsertRequest :: !FeaturesBatchInsertRequest
-    , _tfbiOAuthToken                 :: !(Maybe OAuthToken)
-    , _tfbiFields                     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _tfbiQuotaUser   :: !(Maybe Text)
+    , _tfbiPrettyPrint :: !Bool
+    , _tfbiUserIP      :: !(Maybe Text)
+    , _tfbiPayload     :: !FeaturesBatchInsertRequest
+    , _tfbiKey         :: !(Maybe Key)
+    , _tfbiId          :: !Text
+    , _tfbiOAuthToken  :: !(Maybe OAuthToken)
+    , _tfbiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesFeaturesBatchInsert'' with the minimum fields required to make a request.
 --
@@ -96,27 +97,27 @@ data TablesFeaturesBatchInsert' = TablesFeaturesBatchInsert'
 --
 -- * 'tfbiUserIP'
 --
+-- * 'tfbiPayload'
+--
 -- * 'tfbiKey'
 --
 -- * 'tfbiId'
---
--- * 'tfbiFeaturesBatchInsertRequest'
 --
 -- * 'tfbiOAuthToken'
 --
 -- * 'tfbiFields'
 tablesFeaturesBatchInsert'
-    :: Text -- ^ 'id'
-    -> FeaturesBatchInsertRequest -- ^ 'FeaturesBatchInsertRequest'
+    :: FeaturesBatchInsertRequest -- ^ 'payload'
+    -> Text -- ^ 'id'
     -> TablesFeaturesBatchInsert'
-tablesFeaturesBatchInsert' pTfbiId_ pTfbiFeaturesBatchInsertRequest_ =
+tablesFeaturesBatchInsert' pTfbiPayload_ pTfbiId_ =
     TablesFeaturesBatchInsert'
     { _tfbiQuotaUser = Nothing
     , _tfbiPrettyPrint = True
     , _tfbiUserIP = Nothing
+    , _tfbiPayload = pTfbiPayload_
     , _tfbiKey = Nothing
     , _tfbiId = pTfbiId_
-    , _tfbiFeaturesBatchInsertRequest = pTfbiFeaturesBatchInsertRequest_
     , _tfbiOAuthToken = Nothing
     , _tfbiFields = Nothing
     }
@@ -141,6 +142,11 @@ tfbiUserIP :: Lens' TablesFeaturesBatchInsert' (Maybe Text)
 tfbiUserIP
   = lens _tfbiUserIP (\ s a -> s{_tfbiUserIP = a})
 
+-- | Multipart request metadata.
+tfbiPayload :: Lens' TablesFeaturesBatchInsert' FeaturesBatchInsertRequest
+tfbiPayload
+  = lens _tfbiPayload (\ s a -> s{_tfbiPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -150,12 +156,6 @@ tfbiKey = lens _tfbiKey (\ s a -> s{_tfbiKey = a})
 -- | The ID of the table to append the features to.
 tfbiId :: Lens' TablesFeaturesBatchInsert' Text
 tfbiId = lens _tfbiId (\ s a -> s{_tfbiId = a})
-
--- | Multipart request metadata.
-tfbiFeaturesBatchInsertRequest :: Lens' TablesFeaturesBatchInsert' FeaturesBatchInsertRequest
-tfbiFeaturesBatchInsertRequest
-  = lens _tfbiFeaturesBatchInsertRequest
-      (\ s a -> s{_tfbiFeaturesBatchInsertRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 tfbiOAuthToken :: Lens' TablesFeaturesBatchInsert' (Maybe OAuthToken)
@@ -183,7 +183,7 @@ instance GoogleRequest TablesFeaturesBatchInsert'
               _tfbiKey
               _tfbiOAuthToken
               (Just AltJSON)
-              _tfbiFeaturesBatchInsertRequest
+              _tfbiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TablesFeaturesBatchInsertResource)

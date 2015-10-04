@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.Insert
     , mcmiPrettyPrint
     , mcmiWebPropertyId
     , mcmiUserIP
+    , mcmiPayload
     , mcmiAccountId
     , mcmiKey
-    , mcmiCustomMetric
     , mcmiOAuthToken
     , mcmiFields
     ) where
@@ -71,12 +72,12 @@ data ManagementCustomMetricsInsert' = ManagementCustomMetricsInsert'
     , _mcmiPrettyPrint   :: !Bool
     , _mcmiWebPropertyId :: !Text
     , _mcmiUserIP        :: !(Maybe Text)
+    , _mcmiPayload       :: !CustomMetric
     , _mcmiAccountId     :: !Text
     , _mcmiKey           :: !(Maybe Key)
-    , _mcmiCustomMetric  :: !CustomMetric
     , _mcmiOAuthToken    :: !(Maybe OAuthToken)
     , _mcmiFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsInsert'' with the minimum fields required to make a request.
 --
@@ -90,29 +91,29 @@ data ManagementCustomMetricsInsert' = ManagementCustomMetricsInsert'
 --
 -- * 'mcmiUserIP'
 --
+-- * 'mcmiPayload'
+--
 -- * 'mcmiAccountId'
 --
 -- * 'mcmiKey'
---
--- * 'mcmiCustomMetric'
 --
 -- * 'mcmiOAuthToken'
 --
 -- * 'mcmiFields'
 managementCustomMetricsInsert'
     :: Text -- ^ 'webPropertyId'
+    -> CustomMetric -- ^ 'payload'
     -> Text -- ^ 'accountId'
-    -> CustomMetric -- ^ 'CustomMetric'
     -> ManagementCustomMetricsInsert'
-managementCustomMetricsInsert' pMcmiWebPropertyId_ pMcmiAccountId_ pMcmiCustomMetric_ =
+managementCustomMetricsInsert' pMcmiWebPropertyId_ pMcmiPayload_ pMcmiAccountId_ =
     ManagementCustomMetricsInsert'
     { _mcmiQuotaUser = Nothing
     , _mcmiPrettyPrint = False
     , _mcmiWebPropertyId = pMcmiWebPropertyId_
     , _mcmiUserIP = Nothing
+    , _mcmiPayload = pMcmiPayload_
     , _mcmiAccountId = pMcmiAccountId_
     , _mcmiKey = Nothing
-    , _mcmiCustomMetric = pMcmiCustomMetric_
     , _mcmiOAuthToken = Nothing
     , _mcmiFields = Nothing
     }
@@ -143,6 +144,11 @@ mcmiUserIP :: Lens' ManagementCustomMetricsInsert' (Maybe Text)
 mcmiUserIP
   = lens _mcmiUserIP (\ s a -> s{_mcmiUserIP = a})
 
+-- | Multipart request metadata.
+mcmiPayload :: Lens' ManagementCustomMetricsInsert' CustomMetric
+mcmiPayload
+  = lens _mcmiPayload (\ s a -> s{_mcmiPayload = a})
+
 -- | Account ID for the custom metric to create.
 mcmiAccountId :: Lens' ManagementCustomMetricsInsert' Text
 mcmiAccountId
@@ -154,12 +160,6 @@ mcmiAccountId
 -- token.
 mcmiKey :: Lens' ManagementCustomMetricsInsert' (Maybe Key)
 mcmiKey = lens _mcmiKey (\ s a -> s{_mcmiKey = a})
-
--- | Multipart request metadata.
-mcmiCustomMetric :: Lens' ManagementCustomMetricsInsert' CustomMetric
-mcmiCustomMetric
-  = lens _mcmiCustomMetric
-      (\ s a -> s{_mcmiCustomMetric = a})
 
 -- | OAuth 2.0 token for the current user.
 mcmiOAuthToken :: Lens' ManagementCustomMetricsInsert' (Maybe OAuthToken)
@@ -190,7 +190,7 @@ instance GoogleRequest ManagementCustomMetricsInsert'
               _mcmiKey
               _mcmiOAuthToken
               (Just AltJSON)
-              _mcmiCustomMetric
+              _mcmiPayload
           where go
                   = clientWithRoute
                       (Proxy ::

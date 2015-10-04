@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.Compute.HTTPHealthChecks.Patch
     , httphcpPrettyPrint
     , httphcpProject
     , httphcpUserIP
+    , httphcpPayload
     , httphcpKey
-    , httphcpHTTPHealthCheck
     , httphcpHTTPHealthCheck
     , httphcpOAuthToken
     , httphcpFields
@@ -71,12 +72,12 @@ data HTTPHealthChecksPatch' = HTTPHealthChecksPatch'
     , _httphcpPrettyPrint     :: !Bool
     , _httphcpProject         :: !Text
     , _httphcpUserIP          :: !(Maybe Text)
+    , _httphcpPayload         :: !HTTPHealthCheck
     , _httphcpKey             :: !(Maybe Key)
-    , _httphcpHTTPHealthCheck :: !HTTPHealthCheck
     , _httphcpHTTPHealthCheck :: !Text
     , _httphcpOAuthToken      :: !(Maybe OAuthToken)
     , _httphcpFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthChecksPatch'' with the minimum fields required to make a request.
 --
@@ -90,9 +91,9 @@ data HTTPHealthChecksPatch' = HTTPHealthChecksPatch'
 --
 -- * 'httphcpUserIP'
 --
--- * 'httphcpKey'
+-- * 'httphcpPayload'
 --
--- * 'httphcpHTTPHealthCheck'
+-- * 'httphcpKey'
 --
 -- * 'httphcpHTTPHealthCheck'
 --
@@ -101,17 +102,17 @@ data HTTPHealthChecksPatch' = HTTPHealthChecksPatch'
 -- * 'httphcpFields'
 hTTPHealthChecksPatch'
     :: Text -- ^ 'project'
-    -> HTTPHealthCheck -- ^ 'HTTPHealthCheck'
+    -> HTTPHealthCheck -- ^ 'payload'
     -> Text -- ^ 'httpHealthCheck'
     -> HTTPHealthChecksPatch'
-hTTPHealthChecksPatch' pHttphcpProject_ pHttphcpHTTPHealthCheck_ pHttphcpHTTPHealthCheck_ =
+hTTPHealthChecksPatch' pHttphcpProject_ pHttphcpPayload_ pHttphcpHTTPHealthCheck_ =
     HTTPHealthChecksPatch'
     { _httphcpQuotaUser = Nothing
     , _httphcpPrettyPrint = True
     , _httphcpProject = pHttphcpProject_
     , _httphcpUserIP = Nothing
+    , _httphcpPayload = pHttphcpPayload_
     , _httphcpKey = Nothing
-    , _httphcpHTTPHealthCheck = pHttphcpHTTPHealthCheck_
     , _httphcpHTTPHealthCheck = pHttphcpHTTPHealthCheck_
     , _httphcpOAuthToken = Nothing
     , _httphcpFields = Nothing
@@ -144,18 +145,18 @@ httphcpUserIP
   = lens _httphcpUserIP
       (\ s a -> s{_httphcpUserIP = a})
 
+-- | Multipart request metadata.
+httphcpPayload :: Lens' HTTPHealthChecksPatch' HTTPHealthCheck
+httphcpPayload
+  = lens _httphcpPayload
+      (\ s a -> s{_httphcpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 httphcpKey :: Lens' HTTPHealthChecksPatch' (Maybe Key)
 httphcpKey
   = lens _httphcpKey (\ s a -> s{_httphcpKey = a})
-
--- | Multipart request metadata.
-httphcpHTTPHealthCheck :: Lens' HTTPHealthChecksPatch' HTTPHealthCheck
-httphcpHTTPHealthCheck
-  = lens _httphcpHTTPHealthCheck
-      (\ s a -> s{_httphcpHTTPHealthCheck = a})
 
 -- | Name of the HttpHealthCheck resource to update.
 httphcpHTTPHealthCheck :: Lens' HTTPHealthChecksPatch' Text
@@ -191,7 +192,7 @@ instance GoogleRequest HTTPHealthChecksPatch' where
               _httphcpKey
               _httphcpOAuthToken
               (Just AltJSON)
-              _httphcpHTTPHealthCheck
+              _httphcpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy HTTPHealthChecksPatchResource)

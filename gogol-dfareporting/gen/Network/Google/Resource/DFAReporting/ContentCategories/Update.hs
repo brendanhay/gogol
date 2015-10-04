@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,7 +35,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Update
     , ccuPrettyPrint
     , ccuUserIP
     , ccuProfileId
-    , ccuContentCategory
+    , ccuPayload
     , ccuKey
     , ccuOAuthToken
     , ccuFields
@@ -63,15 +64,15 @@ type ContentCategoriesUpdateResource =
 --
 -- /See:/ 'contentCategoriesUpdate'' smart constructor.
 data ContentCategoriesUpdate' = ContentCategoriesUpdate'
-    { _ccuQuotaUser       :: !(Maybe Text)
-    , _ccuPrettyPrint     :: !Bool
-    , _ccuUserIP          :: !(Maybe Text)
-    , _ccuProfileId       :: !Int64
-    , _ccuContentCategory :: !ContentCategory
-    , _ccuKey             :: !(Maybe Key)
-    , _ccuOAuthToken      :: !(Maybe OAuthToken)
-    , _ccuFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ccuQuotaUser   :: !(Maybe Text)
+    , _ccuPrettyPrint :: !Bool
+    , _ccuUserIP      :: !(Maybe Text)
+    , _ccuProfileId   :: !Int64
+    , _ccuPayload     :: !ContentCategory
+    , _ccuKey         :: !(Maybe Key)
+    , _ccuOAuthToken  :: !(Maybe OAuthToken)
+    , _ccuFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesUpdate'' with the minimum fields required to make a request.
 --
@@ -85,7 +86,7 @@ data ContentCategoriesUpdate' = ContentCategoriesUpdate'
 --
 -- * 'ccuProfileId'
 --
--- * 'ccuContentCategory'
+-- * 'ccuPayload'
 --
 -- * 'ccuKey'
 --
@@ -94,15 +95,15 @@ data ContentCategoriesUpdate' = ContentCategoriesUpdate'
 -- * 'ccuFields'
 contentCategoriesUpdate'
     :: Int64 -- ^ 'profileId'
-    -> ContentCategory -- ^ 'ContentCategory'
+    -> ContentCategory -- ^ 'payload'
     -> ContentCategoriesUpdate'
-contentCategoriesUpdate' pCcuProfileId_ pCcuContentCategory_ =
+contentCategoriesUpdate' pCcuProfileId_ pCcuPayload_ =
     ContentCategoriesUpdate'
     { _ccuQuotaUser = Nothing
     , _ccuPrettyPrint = True
     , _ccuUserIP = Nothing
     , _ccuProfileId = pCcuProfileId_
-    , _ccuContentCategory = pCcuContentCategory_
+    , _ccuPayload = pCcuPayload_
     , _ccuKey = Nothing
     , _ccuOAuthToken = Nothing
     , _ccuFields = Nothing
@@ -133,10 +134,9 @@ ccuProfileId
   = lens _ccuProfileId (\ s a -> s{_ccuProfileId = a})
 
 -- | Multipart request metadata.
-ccuContentCategory :: Lens' ContentCategoriesUpdate' ContentCategory
-ccuContentCategory
-  = lens _ccuContentCategory
-      (\ s a -> s{_ccuContentCategory = a})
+ccuPayload :: Lens' ContentCategoriesUpdate' ContentCategory
+ccuPayload
+  = lens _ccuPayload (\ s a -> s{_ccuPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -170,7 +170,7 @@ instance GoogleRequest ContentCategoriesUpdate' where
               _ccuKey
               _ccuOAuthToken
               (Just AltJSON)
-              _ccuContentCategory
+              _ccuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ContentCategoriesUpdateResource)

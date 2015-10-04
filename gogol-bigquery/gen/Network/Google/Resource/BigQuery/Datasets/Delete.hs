@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -79,7 +80,7 @@ data DatasetsDelete' = DatasetsDelete'
     , _ddOAuthToken     :: !(Maybe OAuthToken)
     , _ddDeleteContents :: !(Maybe Bool)
     , _ddFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsDelete'' with the minimum fields required to make a request.
 --
@@ -177,7 +178,7 @@ instance GoogleRequest DatasetsDelete' where
         type Rs DatasetsDelete' = ()
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u DatasetsDelete'{..}
-          = go _ddDeleteContents _ddProjectId _ddDatasetId
+          = go _ddProjectId _ddDatasetId _ddDeleteContents
               _ddQuotaUser
               (Just _ddPrettyPrint)
               _ddUserIP

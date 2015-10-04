@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,8 +53,8 @@ type VPNTunnelsAggregatedListResource =
        "aggregated" :>
          "vpnTunnels" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -77,7 +78,7 @@ data VPNTunnelsAggregatedList' = VPNTunnelsAggregatedList'
     , _vtalOAuthToken  :: !(Maybe OAuthToken)
     , _vtalMaxResults  :: !Word32
     , _vtalFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VPNTunnelsAggregatedList'' with the minimum fields required to make a request.
 --
@@ -200,9 +201,8 @@ instance GoogleRequest VPNTunnelsAggregatedList'
              VPNTunnelAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u VPNTunnelsAggregatedList'{..}
-          = go _vtalFilter (Just _vtalMaxResults)
-              _vtalPageToken
-              _vtalProject
+          = go _vtalProject _vtalFilter _vtalPageToken
+              (Just _vtalMaxResults)
               _vtalQuotaUser
               (Just _vtalPrettyPrint)
               _vtalUserIP

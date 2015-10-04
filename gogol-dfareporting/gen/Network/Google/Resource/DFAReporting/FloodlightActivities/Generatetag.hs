@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -73,7 +74,7 @@ data FloodlightActivitiesGeneratetag' = FloodlightActivitiesGeneratetag'
     , _fagKey                  :: !(Maybe Key)
     , _fagOAuthToken           :: !(Maybe OAuthToken)
     , _fagFields               :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesGeneratetag'' with the minimum fields required to make a request.
 --
@@ -168,7 +169,7 @@ instance GoogleRequest
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightActivitiesGeneratetag'{..}
-          = go _fagFloodlightActivityId _fagProfileId
+          = go _fagProfileId _fagFloodlightActivityId
               _fagQuotaUser
               (Just _fagPrettyPrint)
               _fagUserIP

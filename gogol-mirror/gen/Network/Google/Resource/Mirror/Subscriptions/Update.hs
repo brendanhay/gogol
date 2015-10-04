@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,10 +34,10 @@ module Network.Google.Resource.Mirror.Subscriptions.Update
     , suQuotaUser
     , suPrettyPrint
     , suUserIP
+    , suPayload
     , suKey
     , suId
     , suOAuthToken
-    , suSubscription
     , suFields
     ) where
 
@@ -62,15 +63,15 @@ type SubscriptionsUpdateResource =
 --
 -- /See:/ 'subscriptionsUpdate'' smart constructor.
 data SubscriptionsUpdate' = SubscriptionsUpdate'
-    { _suQuotaUser    :: !(Maybe Text)
-    , _suPrettyPrint  :: !Bool
-    , _suUserIP       :: !(Maybe Text)
-    , _suKey          :: !(Maybe Key)
-    , _suId           :: !Text
-    , _suOAuthToken   :: !(Maybe OAuthToken)
-    , _suSubscription :: !Subscription
-    , _suFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _suQuotaUser   :: !(Maybe Text)
+    , _suPrettyPrint :: !Bool
+    , _suUserIP      :: !(Maybe Text)
+    , _suPayload     :: !Subscription
+    , _suKey         :: !(Maybe Key)
+    , _suId          :: !Text
+    , _suOAuthToken  :: !(Maybe OAuthToken)
+    , _suFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsUpdate'' with the minimum fields required to make a request.
 --
@@ -82,28 +83,28 @@ data SubscriptionsUpdate' = SubscriptionsUpdate'
 --
 -- * 'suUserIP'
 --
+-- * 'suPayload'
+--
 -- * 'suKey'
 --
 -- * 'suId'
 --
 -- * 'suOAuthToken'
 --
--- * 'suSubscription'
---
 -- * 'suFields'
 subscriptionsUpdate'
-    :: Text -- ^ 'id'
-    -> Subscription -- ^ 'Subscription'
+    :: Subscription -- ^ 'payload'
+    -> Text -- ^ 'id'
     -> SubscriptionsUpdate'
-subscriptionsUpdate' pSuId_ pSuSubscription_ =
+subscriptionsUpdate' pSuPayload_ pSuId_ =
     SubscriptionsUpdate'
     { _suQuotaUser = Nothing
     , _suPrettyPrint = True
     , _suUserIP = Nothing
+    , _suPayload = pSuPayload_
     , _suKey = Nothing
     , _suId = pSuId_
     , _suOAuthToken = Nothing
-    , _suSubscription = pSuSubscription_
     , _suFields = Nothing
     }
 
@@ -125,6 +126,11 @@ suPrettyPrint
 suUserIP :: Lens' SubscriptionsUpdate' (Maybe Text)
 suUserIP = lens _suUserIP (\ s a -> s{_suUserIP = a})
 
+-- | Multipart request metadata.
+suPayload :: Lens' SubscriptionsUpdate' Subscription
+suPayload
+  = lens _suPayload (\ s a -> s{_suPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -139,12 +145,6 @@ suId = lens _suId (\ s a -> s{_suId = a})
 suOAuthToken :: Lens' SubscriptionsUpdate' (Maybe OAuthToken)
 suOAuthToken
   = lens _suOAuthToken (\ s a -> s{_suOAuthToken = a})
-
--- | Multipart request metadata.
-suSubscription :: Lens' SubscriptionsUpdate' Subscription
-suSubscription
-  = lens _suSubscription
-      (\ s a -> s{_suSubscription = a})
 
 -- | Selector specifying which fields to include in a partial response.
 suFields :: Lens' SubscriptionsUpdate' (Maybe Text)
@@ -164,7 +164,7 @@ instance GoogleRequest SubscriptionsUpdate' where
               _suKey
               _suOAuthToken
               (Just AltJSON)
-              _suSubscription
+              _suPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SubscriptionsUpdateResource)

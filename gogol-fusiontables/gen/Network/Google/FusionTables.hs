@@ -150,18 +150,18 @@ module Network.Google.FusionTables
     , sfGradient
     , sfColumnName
 
-    -- ** ColumnBaseColumn
-    , ColumnBaseColumn
-    , columnBaseColumn
-    , cbcTableIndex
-    , cbcColumnId
-
     -- ** SQLresponse
     , SQLresponse
     , sQLresponse
     , sqlKind
     , sqlRows
     , sqlColumns
+
+    -- ** BaseColumn
+    , BaseColumn
+    , baseColumn
+    , bcTableIndex
+    , bcColumnId
 
     -- ** StyleSettingList
     , StyleSettingList
@@ -186,6 +186,13 @@ module Network.Google.FusionTables
     , line
     , lCoordinates
     , lType
+
+    -- ** Gradient
+    , Gradient
+    , gradient
+    , gMax
+    , gMin
+    , gColors
 
     -- ** StyleSetting
     , StyleSetting
@@ -233,12 +240,6 @@ module Network.Google.FusionTables
     , gGeometry
     , gType
 
-    -- ** StyleFunctionGradientColors
-    , StyleFunctionGradientColors
-    , styleFunctionGradientColors
-    , sfgcColor
-    , sfgcOpacity
-
     -- ** Task
     , Task
     , task
@@ -282,12 +283,11 @@ module Network.Google.FusionTables
     , psStrokeWeightStyler
     , psStrokeColor
 
-    -- ** StyleFunctionGradient
-    , StyleFunctionGradient
-    , styleFunctionGradient
-    , sfgMax
-    , sfgMin
-    , sfgColors
+    -- ** ColorsItem
+    , ColorsItem
+    , colorsItem
+    , ciColor
+    , ciOpacity
 
     -- ** Table
     , Table

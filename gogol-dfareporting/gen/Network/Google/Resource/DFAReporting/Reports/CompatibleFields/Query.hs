@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,7 +37,7 @@ module Network.Google.Resource.DFAReporting.Reports.CompatibleFields.Query
     , rcfqPrettyPrint
     , rcfqUserIP
     , rcfqProfileId
-    , rcfqReport
+    , rcfqPayload
     , rcfqKey
     , rcfqOAuthToken
     , rcfqFields
@@ -73,11 +74,11 @@ data ReportsCompatibleFieldsQuery' = ReportsCompatibleFieldsQuery'
     , _rcfqPrettyPrint :: !Bool
     , _rcfqUserIP      :: !(Maybe Text)
     , _rcfqProfileId   :: !Int64
-    , _rcfqReport      :: !Report
+    , _rcfqPayload     :: !Report
     , _rcfqKey         :: !(Maybe Key)
     , _rcfqOAuthToken  :: !(Maybe OAuthToken)
     , _rcfqFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsCompatibleFieldsQuery'' with the minimum fields required to make a request.
 --
@@ -91,7 +92,7 @@ data ReportsCompatibleFieldsQuery' = ReportsCompatibleFieldsQuery'
 --
 -- * 'rcfqProfileId'
 --
--- * 'rcfqReport'
+-- * 'rcfqPayload'
 --
 -- * 'rcfqKey'
 --
@@ -100,15 +101,15 @@ data ReportsCompatibleFieldsQuery' = ReportsCompatibleFieldsQuery'
 -- * 'rcfqFields'
 reportsCompatibleFieldsQuery'
     :: Int64 -- ^ 'profileId'
-    -> Report -- ^ 'Report'
+    -> Report -- ^ 'payload'
     -> ReportsCompatibleFieldsQuery'
-reportsCompatibleFieldsQuery' pRcfqProfileId_ pRcfqReport_ =
+reportsCompatibleFieldsQuery' pRcfqProfileId_ pRcfqPayload_ =
     ReportsCompatibleFieldsQuery'
     { _rcfqQuotaUser = Nothing
     , _rcfqPrettyPrint = True
     , _rcfqUserIP = Nothing
     , _rcfqProfileId = pRcfqProfileId_
-    , _rcfqReport = pRcfqReport_
+    , _rcfqPayload = pRcfqPayload_
     , _rcfqKey = Nothing
     , _rcfqOAuthToken = Nothing
     , _rcfqFields = Nothing
@@ -141,9 +142,9 @@ rcfqProfileId
       (\ s a -> s{_rcfqProfileId = a})
 
 -- | Multipart request metadata.
-rcfqReport :: Lens' ReportsCompatibleFieldsQuery' Report
-rcfqReport
-  = lens _rcfqReport (\ s a -> s{_rcfqReport = a})
+rcfqPayload :: Lens' ReportsCompatibleFieldsQuery' Report
+rcfqPayload
+  = lens _rcfqPayload (\ s a -> s{_rcfqPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -181,7 +182,7 @@ instance GoogleRequest ReportsCompatibleFieldsQuery'
               _rcfqKey
               _rcfqOAuthToken
               (Just AltJSON)
-              _rcfqReport
+              _rcfqPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReportsCompatibleFieldsQueryResource)

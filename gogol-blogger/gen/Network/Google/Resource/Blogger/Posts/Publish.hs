@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -76,7 +77,7 @@ data PostsPublish' = PostsPublish'
     , _posPostId      :: !Text
     , _posOAuthToken  :: !(Maybe OAuthToken)
     , _posFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsPublish'' with the minimum fields required to make a request.
 --
@@ -180,7 +181,7 @@ instance GoogleRequest PostsPublish' where
         type Rs PostsPublish' = Post
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsPublish'{..}
-          = go _posPublishDate _posBlogId _posPostId
+          = go _posBlogId _posPostId _posPublishDate
               _posQuotaUser
               (Just _posPrettyPrint)
               _posUserIP

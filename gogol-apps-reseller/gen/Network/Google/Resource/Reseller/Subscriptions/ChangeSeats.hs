@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.Reseller.Subscriptions.ChangeSeats
     , scsQuotaUser
     , scsPrettyPrint
     , scsUserIP
+    , scsPayload
     , scsCustomerId
     , scsKey
-    , scsSeats
     , scsOAuthToken
     , scsSubscriptionId
     , scsFields
@@ -68,13 +69,13 @@ data SubscriptionsChangeSeats' = SubscriptionsChangeSeats'
     { _scsQuotaUser      :: !(Maybe Text)
     , _scsPrettyPrint    :: !Bool
     , _scsUserIP         :: !(Maybe Text)
+    , _scsPayload        :: !Seats
     , _scsCustomerId     :: !Text
     , _scsKey            :: !(Maybe Key)
-    , _scsSeats          :: !Seats
     , _scsOAuthToken     :: !(Maybe OAuthToken)
     , _scsSubscriptionId :: !Text
     , _scsFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsChangeSeats'' with the minimum fields required to make a request.
 --
@@ -86,11 +87,11 @@ data SubscriptionsChangeSeats' = SubscriptionsChangeSeats'
 --
 -- * 'scsUserIP'
 --
+-- * 'scsPayload'
+--
 -- * 'scsCustomerId'
 --
 -- * 'scsKey'
---
--- * 'scsSeats'
 --
 -- * 'scsOAuthToken'
 --
@@ -98,18 +99,18 @@ data SubscriptionsChangeSeats' = SubscriptionsChangeSeats'
 --
 -- * 'scsFields'
 subscriptionsChangeSeats'
-    :: Text -- ^ 'customerId'
-    -> Seats -- ^ 'Seats'
+    :: Seats -- ^ 'payload'
+    -> Text -- ^ 'customerId'
     -> Text -- ^ 'subscriptionId'
     -> SubscriptionsChangeSeats'
-subscriptionsChangeSeats' pScsCustomerId_ pScsSeats_ pScsSubscriptionId_ =
+subscriptionsChangeSeats' pScsPayload_ pScsCustomerId_ pScsSubscriptionId_ =
     SubscriptionsChangeSeats'
     { _scsQuotaUser = Nothing
     , _scsPrettyPrint = True
     , _scsUserIP = Nothing
+    , _scsPayload = pScsPayload_
     , _scsCustomerId = pScsCustomerId_
     , _scsKey = Nothing
-    , _scsSeats = pScsSeats_
     , _scsOAuthToken = Nothing
     , _scsSubscriptionId = pScsSubscriptionId_
     , _scsFields = Nothing
@@ -134,6 +135,11 @@ scsUserIP :: Lens' SubscriptionsChangeSeats' (Maybe Text)
 scsUserIP
   = lens _scsUserIP (\ s a -> s{_scsUserIP = a})
 
+-- | Multipart request metadata.
+scsPayload :: Lens' SubscriptionsChangeSeats' Seats
+scsPayload
+  = lens _scsPayload (\ s a -> s{_scsPayload = a})
+
 -- | Id of the Customer
 scsCustomerId :: Lens' SubscriptionsChangeSeats' Text
 scsCustomerId
@@ -145,10 +151,6 @@ scsCustomerId
 -- token.
 scsKey :: Lens' SubscriptionsChangeSeats' (Maybe Key)
 scsKey = lens _scsKey (\ s a -> s{_scsKey = a})
-
--- | Multipart request metadata.
-scsSeats :: Lens' SubscriptionsChangeSeats' Seats
-scsSeats = lens _scsSeats (\ s a -> s{_scsSeats = a})
 
 -- | OAuth 2.0 token for the current user.
 scsOAuthToken :: Lens' SubscriptionsChangeSeats' (Maybe OAuthToken)
@@ -183,7 +185,7 @@ instance GoogleRequest SubscriptionsChangeSeats'
               _scsKey
               _scsOAuthToken
               (Just AltJSON)
-              _scsSeats
+              _scsPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SubscriptionsChangeSeatsResource)

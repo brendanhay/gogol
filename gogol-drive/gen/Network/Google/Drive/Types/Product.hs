@@ -18,6 +18,54 @@ module Network.Google.Drive.Types.Product where
 import           Network.Google.Drive.Types.Sum
 import           Network.Google.Prelude
 
+--
+-- /See:/ 'quotaBytesByServiceItem' smart constructor.
+data QuotaBytesByServiceItem = QuotaBytesByServiceItem
+    { _qbbsiBytesUsed   :: !(Maybe Int64)
+    , _qbbsiServiceName :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'QuotaBytesByServiceItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'qbbsiBytesUsed'
+--
+-- * 'qbbsiServiceName'
+quotaBytesByServiceItem
+    :: QuotaBytesByServiceItem
+quotaBytesByServiceItem =
+    QuotaBytesByServiceItem
+    { _qbbsiBytesUsed = Nothing
+    , _qbbsiServiceName = Nothing
+    }
+
+-- | The storage quota bytes used by the service.
+qbbsiBytesUsed :: Lens' QuotaBytesByServiceItem (Maybe Int64)
+qbbsiBytesUsed
+  = lens _qbbsiBytesUsed
+      (\ s a -> s{_qbbsiBytesUsed = a})
+
+-- | The service\'s name, e.g. DRIVE, GMAIL, or PHOTOS.
+qbbsiServiceName :: Lens' QuotaBytesByServiceItem (Maybe Text)
+qbbsiServiceName
+  = lens _qbbsiServiceName
+      (\ s a -> s{_qbbsiServiceName = a})
+
+instance FromJSON QuotaBytesByServiceItem where
+        parseJSON
+          = withObject "QuotaBytesByServiceItem"
+              (\ o ->
+                 QuotaBytesByServiceItem <$>
+                   (o .:? "bytesUsed") <*> (o .:? "serviceName"))
+
+instance ToJSON QuotaBytesByServiceItem where
+        toJSON QuotaBytesByServiceItem{..}
+          = object
+              (catMaybes
+                 [("bytesUsed" .=) <$> _qbbsiBytesUsed,
+                  ("serviceName" .=) <$> _qbbsiServiceName])
+
 -- | A list of files.
 --
 -- /See:/ 'fileList' smart constructor.
@@ -28,7 +76,7 @@ data FileList = FileList
     , _flKind          :: !Text
     , _flItems         :: !(Maybe [File])
     , _flSelfLink      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FileList' with the minimum fields required to make a request.
 --
@@ -108,51 +156,52 @@ instance ToJSON FileList where
                   Just ("kind" .= _flKind), ("items" .=) <$> _flItems,
                   ("selfLink" .=) <$> _flSelfLink])
 
--- | The context of the file which is being commented on.
+-- | Thumbnail for the file. Only accepted on upload and for files that are
+-- not already thumbnailed by Google.
 --
--- /See:/ 'commentContext' smart constructor.
-data CommentContext = CommentContext
-    { _ccValue :: !(Maybe Text)
-    , _ccType  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'thumbnail' smart constructor.
+data Thumbnail = Thumbnail
+    { _tImage    :: !(Maybe Word8)
+    , _tMimeType :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentContext' with the minimum fields required to make a request.
+-- | Creates a value of 'Thumbnail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ccValue'
+-- * 'tImage'
 --
--- * 'ccType'
-commentContext
-    :: CommentContext
-commentContext =
-    CommentContext
-    { _ccValue = Nothing
-    , _ccType = Nothing
+-- * 'tMimeType'
+thumbnail
+    :: Thumbnail
+thumbnail =
+    Thumbnail
+    { _tImage = Nothing
+    , _tMimeType = Nothing
     }
 
--- | Data representation of the segment of the file being commented on. In
--- the case of a text file for example, this would be the actual text that
--- the comment is about.
-ccValue :: Lens' CommentContext (Maybe Text)
-ccValue = lens _ccValue (\ s a -> s{_ccValue = a})
+-- | The URL-safe Base64 encoded bytes of the thumbnail image. It should
+-- conform to RFC 4648 section 5.
+tImage :: Lens' Thumbnail (Maybe Word8)
+tImage = lens _tImage (\ s a -> s{_tImage = a})
 
--- | The MIME type of the context snippet.
-ccType :: Lens' CommentContext (Maybe Text)
-ccType = lens _ccType (\ s a -> s{_ccType = a})
+-- | The MIME type of the thumbnail.
+tMimeType :: Lens' Thumbnail (Maybe Text)
+tMimeType
+  = lens _tMimeType (\ s a -> s{_tMimeType = a})
 
-instance FromJSON CommentContext where
+instance FromJSON Thumbnail where
         parseJSON
-          = withObject "CommentContext"
+          = withObject "Thumbnail"
               (\ o ->
-                 CommentContext <$>
-                   (o .:? "value") <*> (o .:? "type"))
+                 Thumbnail <$> (o .:? "image") <*> (o .:? "mimeType"))
 
-instance ToJSON CommentContext where
-        toJSON CommentContext{..}
+instance ToJSON Thumbnail where
+        toJSON Thumbnail{..}
           = object
               (catMaybes
-                 [("value" .=) <$> _ccValue, ("type" .=) <$> _ccType])
+                 [("image" .=) <$> _tImage,
+                  ("mimeType" .=) <$> _tMimeType])
 
 -- | A reference to a file\'s parent.
 --
@@ -163,7 +212,7 @@ data ParentReference = ParentReference
     , _prKind       :: !Text
     , _prSelfLink   :: !(Maybe Text)
     , _prId         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ParentReference' with the minimum fields required to make a request.
 --
@@ -231,6 +280,51 @@ instance ToJSON ParentReference where
                   ("selfLink" .=) <$> _prSelfLink,
                   ("id" .=) <$> _prId])
 
+-- | The context of the file which is being commented on.
+--
+-- /See:/ 'context' smart constructor.
+data Context = Context
+    { _cValue :: !(Maybe Text)
+    , _cType  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Context' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cValue'
+--
+-- * 'cType'
+context
+    :: Context
+context =
+    Context
+    { _cValue = Nothing
+    , _cType = Nothing
+    }
+
+-- | Data representation of the segment of the file being commented on. In
+-- the case of a text file for example, this would be the actual text that
+-- the comment is about.
+cValue :: Lens' Context (Maybe Text)
+cValue = lens _cValue (\ s a -> s{_cValue = a})
+
+-- | The MIME type of the context snippet.
+cType :: Lens' Context (Maybe Text)
+cType = lens _cType (\ s a -> s{_cType = a})
+
+instance FromJSON Context where
+        parseJSON
+          = withObject "Context"
+              (\ o ->
+                 Context <$> (o .:? "value") <*> (o .:? "type"))
+
+instance ToJSON Context where
+        toJSON Context{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _cValue, ("type" .=) <$> _cType])
+
 -- | A key-value pair attached to a file that is either public or private to
 -- an application. The following limits apply to file properties: - Maximum
 -- of 100 properties total per file - Maximum of 30 private properties per
@@ -245,7 +339,7 @@ data Property = Property
     , _pVisibility :: !(Maybe Text)
     , _pSelfLink   :: !(Maybe Text)
     , _pKey        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Property' with the minimum fields required to make a request.
 --
@@ -323,132 +417,110 @@ instance ToJSON Property where
                   ("key" .=) <$> _pKey])
 
 --
--- /See:/ 'aboutFeatures' smart constructor.
-data AboutFeatures = AboutFeatures
-    { _afFeatureRate :: !(Maybe Double)
-    , _afFeatureName :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'featuresItem' smart constructor.
+data FeaturesItem = FeaturesItem
+    { _fiFeatureRate :: !(Maybe Double)
+    , _fiFeatureName :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AboutFeatures' with the minimum fields required to make a request.
+-- | Creates a value of 'FeaturesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'afFeatureRate'
+-- * 'fiFeatureRate'
 --
--- * 'afFeatureName'
-aboutFeatures
-    :: AboutFeatures
-aboutFeatures =
-    AboutFeatures
-    { _afFeatureRate = Nothing
-    , _afFeatureName = Nothing
+-- * 'fiFeatureName'
+featuresItem
+    :: FeaturesItem
+featuresItem =
+    FeaturesItem
+    { _fiFeatureRate = Nothing
+    , _fiFeatureName = Nothing
     }
 
 -- | The request limit rate for this feature, in queries per second.
-afFeatureRate :: Lens' AboutFeatures (Maybe Double)
-afFeatureRate
-  = lens _afFeatureRate
-      (\ s a -> s{_afFeatureRate = a})
+fiFeatureRate :: Lens' FeaturesItem (Maybe Double)
+fiFeatureRate
+  = lens _fiFeatureRate
+      (\ s a -> s{_fiFeatureRate = a})
 
 -- | The name of the feature.
-afFeatureName :: Lens' AboutFeatures (Maybe Text)
-afFeatureName
-  = lens _afFeatureName
-      (\ s a -> s{_afFeatureName = a})
+fiFeatureName :: Lens' FeaturesItem (Maybe Text)
+fiFeatureName
+  = lens _fiFeatureName
+      (\ s a -> s{_fiFeatureName = a})
 
-instance FromJSON AboutFeatures where
+instance FromJSON FeaturesItem where
         parseJSON
-          = withObject "AboutFeatures"
+          = withObject "FeaturesItem"
               (\ o ->
-                 AboutFeatures <$>
+                 FeaturesItem <$>
                    (o .:? "featureRate") <*> (o .:? "featureName"))
 
-instance ToJSON AboutFeatures where
-        toJSON AboutFeatures{..}
+instance ToJSON FeaturesItem where
+        toJSON FeaturesItem{..}
           = object
               (catMaybes
-                 [("featureRate" .=) <$> _afFeatureRate,
-                  ("featureName" .=) <$> _afFeatureName])
+                 [("featureRate" .=) <$> _fiFeatureRate,
+                  ("featureName" .=) <$> _fiFeatureName])
 
--- | Thumbnail for the file. Only accepted on upload and for files that are
--- not already thumbnailed by Google.
+-- | Geographic location information stored in the image.
 --
--- /See:/ 'fileThumbnail' smart constructor.
-data FileThumbnail = FileThumbnail
-    { _ftImage    :: !(Maybe Word8)
-    , _ftMimeType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'location' smart constructor.
+data Location = Location
+    { _lLatitude  :: !(Maybe Double)
+    , _lAltitude  :: !(Maybe Double)
+    , _lLongitude :: !(Maybe Double)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FileThumbnail' with the minimum fields required to make a request.
+-- | Creates a value of 'Location' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ftImage'
+-- * 'lLatitude'
 --
--- * 'ftMimeType'
-fileThumbnail
-    :: FileThumbnail
-fileThumbnail =
-    FileThumbnail
-    { _ftImage = Nothing
-    , _ftMimeType = Nothing
+-- * 'lAltitude'
+--
+-- * 'lLongitude'
+location
+    :: Location
+location =
+    Location
+    { _lLatitude = Nothing
+    , _lAltitude = Nothing
+    , _lLongitude = Nothing
     }
 
--- | The URL-safe Base64 encoded bytes of the thumbnail image. It should
--- conform to RFC 4648 section 5.
-ftImage :: Lens' FileThumbnail (Maybe Word8)
-ftImage = lens _ftImage (\ s a -> s{_ftImage = a})
+-- | The latitude stored in the image.
+lLatitude :: Lens' Location (Maybe Double)
+lLatitude
+  = lens _lLatitude (\ s a -> s{_lLatitude = a})
 
--- | The MIME type of the thumbnail.
-ftMimeType :: Lens' FileThumbnail (Maybe Text)
-ftMimeType
-  = lens _ftMimeType (\ s a -> s{_ftMimeType = a})
+-- | The altitude stored in the image.
+lAltitude :: Lens' Location (Maybe Double)
+lAltitude
+  = lens _lAltitude (\ s a -> s{_lAltitude = a})
 
-instance FromJSON FileThumbnail where
+-- | The longitude stored in the image.
+lLongitude :: Lens' Location (Maybe Double)
+lLongitude
+  = lens _lLongitude (\ s a -> s{_lLongitude = a})
+
+instance FromJSON Location where
         parseJSON
-          = withObject "FileThumbnail"
+          = withObject "Location"
               (\ o ->
-                 FileThumbnail <$>
-                   (o .:? "image") <*> (o .:? "mimeType"))
+                 Location <$>
+                   (o .:? "latitude") <*> (o .:? "altitude") <*>
+                     (o .:? "longitude"))
 
-instance ToJSON FileThumbnail where
-        toJSON FileThumbnail{..}
+instance ToJSON Location where
+        toJSON Location{..}
           = object
               (catMaybes
-                 [("image" .=) <$> _ftImage,
-                  ("mimeType" .=) <$> _ftMimeType])
-
--- | The user\'s profile picture.
---
--- /See:/ 'userPicture' smart constructor.
-newtype UserPicture = UserPicture
-    { _upURL :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'UserPicture' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'upURL'
-userPicture
-    :: UserPicture
-userPicture =
-    UserPicture
-    { _upURL = Nothing
-    }
-
--- | A URL that points to a profile picture of this user.
-upURL :: Lens' UserPicture (Maybe Text)
-upURL = lens _upURL (\ s a -> s{_upURL = a})
-
-instance FromJSON UserPicture where
-        parseJSON
-          = withObject "UserPicture"
-              (\ o -> UserPicture <$> (o .:? "url"))
-
-instance ToJSON UserPicture where
-        toJSON UserPicture{..}
-          = object (catMaybes [("url" .=) <$> _upURL])
+                 [("latitude" .=) <$> _lLatitude,
+                  ("altitude" .=) <$> _lAltitude,
+                  ("longitude" .=) <$> _lLongitude])
 
 -- | A collection of properties, key-value pairs that are either public or
 -- private to an application.
@@ -459,7 +531,7 @@ data PropertyList = PropertyList
     , _plKind     :: !Text
     , _plItems    :: !(Maybe [Property])
     , _plSelfLink :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertyList' with the minimum fields required to make a request.
 --
@@ -519,53 +591,28 @@ instance ToJSON PropertyList where
                   ("items" .=) <$> _plItems,
                   ("selfLink" .=) <$> _plSelfLink])
 
+-- | A map of the id of each of the user\'s apps to a link to open this file
+-- with that app. Only populated when the drive.apps.readonly scope is
+-- used.
 --
--- /See:/ 'aboutImportFormats' smart constructor.
-data AboutImportFormats = AboutImportFormats
-    { _aifTargets :: !(Maybe [Text])
-    , _aifSource  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'openWithLinks' smart constructor.
+data OpenWithLinks =
+    OpenWithLinks
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AboutImportFormats' with the minimum fields required to make a request.
+-- | Creates a value of 'OpenWithLinks' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aifTargets'
---
--- * 'aifSource'
-aboutImportFormats
-    :: AboutImportFormats
-aboutImportFormats =
-    AboutImportFormats
-    { _aifTargets = Nothing
-    , _aifSource = Nothing
-    }
+openWithLinks
+    :: OpenWithLinks
+openWithLinks = OpenWithLinks
 
--- | The possible content types to convert to.
-aifTargets :: Lens' AboutImportFormats [Text]
-aifTargets
-  = lens _aifTargets (\ s a -> s{_aifTargets = a}) .
-      _Default
-      . _Coerce
-
--- | The imported file\'s content type to convert from.
-aifSource :: Lens' AboutImportFormats (Maybe Text)
-aifSource
-  = lens _aifSource (\ s a -> s{_aifSource = a})
-
-instance FromJSON AboutImportFormats where
+instance FromJSON OpenWithLinks where
         parseJSON
-          = withObject "AboutImportFormats"
-              (\ o ->
-                 AboutImportFormats <$>
-                   (o .:? "targets" .!= mempty) <*> (o .:? "source"))
+          = withObject "OpenWithLinks"
+              (\ o -> pure OpenWithLinks)
 
-instance ToJSON AboutImportFormats where
-        toJSON AboutImportFormats{..}
-          = object
-              (catMaybes
-                 [("targets" .=) <$> _aifTargets,
-                  ("source" .=) <$> _aifSource])
+instance ToJSON OpenWithLinks where
+        toJSON = const (Object mempty)
 
 -- | A list of children of a file.
 --
@@ -577,7 +624,7 @@ data ChildList = ChildList
     , _clKind          :: !Text
     , _clItems         :: !(Maybe [ChildReference])
     , _clSelfLink      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChildList' with the minimum fields required to make a request.
 --
@@ -657,58 +704,6 @@ instance ToJSON ChildList where
                   Just ("kind" .= _clKind), ("items" .=) <$> _clItems,
                   ("selfLink" .=) <$> _clSelfLink])
 
---
--- /See:/ 'aboutAdditionalRoleInfoRoleSets' smart constructor.
-data AboutAdditionalRoleInfoRoleSets = AboutAdditionalRoleInfoRoleSets
-    { _aarirsPrimaryRole     :: !(Maybe Text)
-    , _aarirsAdditionalRoles :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AboutAdditionalRoleInfoRoleSets' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aarirsPrimaryRole'
---
--- * 'aarirsAdditionalRoles'
-aboutAdditionalRoleInfoRoleSets
-    :: AboutAdditionalRoleInfoRoleSets
-aboutAdditionalRoleInfoRoleSets =
-    AboutAdditionalRoleInfoRoleSets
-    { _aarirsPrimaryRole = Nothing
-    , _aarirsAdditionalRoles = Nothing
-    }
-
--- | A primary permission role.
-aarirsPrimaryRole :: Lens' AboutAdditionalRoleInfoRoleSets (Maybe Text)
-aarirsPrimaryRole
-  = lens _aarirsPrimaryRole
-      (\ s a -> s{_aarirsPrimaryRole = a})
-
--- | The supported additional roles with the primary role.
-aarirsAdditionalRoles :: Lens' AboutAdditionalRoleInfoRoleSets [Text]
-aarirsAdditionalRoles
-  = lens _aarirsAdditionalRoles
-      (\ s a -> s{_aarirsAdditionalRoles = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON AboutAdditionalRoleInfoRoleSets
-         where
-        parseJSON
-          = withObject "AboutAdditionalRoleInfoRoleSets"
-              (\ o ->
-                 AboutAdditionalRoleInfoRoleSets <$>
-                   (o .:? "primaryRole") <*>
-                     (o .:? "additionalRoles" .!= mempty))
-
-instance ToJSON AboutAdditionalRoleInfoRoleSets where
-        toJSON AboutAdditionalRoleInfoRoleSets{..}
-          = object
-              (catMaybes
-                 [("primaryRole" .=) <$> _aarirsPrimaryRole,
-                  ("additionalRoles" .=) <$> _aarirsAdditionalRoles])
-
 -- | A JSON representation of a list of replies to a comment on a file in
 -- Google Drive.
 --
@@ -719,7 +714,7 @@ data CommentReplyList = CommentReplyList
     , _crlKind          :: !Text
     , _crlItems         :: !(Maybe [CommentReply])
     , _crlSelfLink      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentReplyList' with the minimum fields required to make a request.
 --
@@ -792,130 +787,113 @@ instance ToJSON CommentReplyList where
                   ("items" .=) <$> _crlItems,
                   ("selfLink" .=) <$> _crlSelfLink])
 
--- | A map of the id of each of the user\'s apps to a link to open this file
--- with that app. Only populated when the drive.apps.readonly scope is
--- used.
---
--- /See:/ 'fileOpenWithLinks' smart constructor.
-data FileOpenWithLinks =
-    FileOpenWithLinks
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'FileOpenWithLinks' with the minimum fields required to make a request.
---
-fileOpenWithLinks
-    :: FileOpenWithLinks
-fileOpenWithLinks = FileOpenWithLinks
-
-instance FromJSON FileOpenWithLinks where
-        parseJSON
-          = withObject "FileOpenWithLinks"
-              (\ o -> pure FileOpenWithLinks)
-
-instance ToJSON FileOpenWithLinks where
-        toJSON = const (Object mempty)
-
 -- | An notification channel used to watch for resource changes.
 --
 -- /See:/ 'channel' smart constructor.
 data Channel = Channel
-    { _cResourceURI :: !(Maybe Text)
-    , _cResourceId  :: !(Maybe Text)
-    , _cKind        :: !Text
-    , _cExpiration  :: !(Maybe Int64)
-    , _cToken       :: !(Maybe Text)
-    , _cAddress     :: !(Maybe Text)
-    , _cPayLoad     :: !(Maybe Bool)
-    , _cParams      :: !(Maybe ChannelParams)
-    , _cId          :: !(Maybe Text)
-    , _cType        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _chaResourceURI :: !(Maybe Text)
+    , _chaResourceId  :: !(Maybe Text)
+    , _chaKind        :: !Text
+    , _chaExpiration  :: !(Maybe Int64)
+    , _chaToken       :: !(Maybe Text)
+    , _chaAddress     :: !(Maybe Text)
+    , _chaPayload     :: !(Maybe Bool)
+    , _chaParams      :: !(Maybe Params)
+    , _chaId          :: !(Maybe Text)
+    , _chaType        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Channel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cResourceURI'
+-- * 'chaResourceURI'
 --
--- * 'cResourceId'
+-- * 'chaResourceId'
 --
--- * 'cKind'
+-- * 'chaKind'
 --
--- * 'cExpiration'
+-- * 'chaExpiration'
 --
--- * 'cToken'
+-- * 'chaToken'
 --
--- * 'cAddress'
+-- * 'chaAddress'
 --
--- * 'cPayLoad'
+-- * 'chaPayload'
 --
--- * 'cParams'
+-- * 'chaParams'
 --
--- * 'cId'
+-- * 'chaId'
 --
--- * 'cType'
+-- * 'chaType'
 channel
     :: Channel
 channel =
     Channel
-    { _cResourceURI = Nothing
-    , _cResourceId = Nothing
-    , _cKind = "api#channel"
-    , _cExpiration = Nothing
-    , _cToken = Nothing
-    , _cAddress = Nothing
-    , _cPayLoad = Nothing
-    , _cParams = Nothing
-    , _cId = Nothing
-    , _cType = Nothing
+    { _chaResourceURI = Nothing
+    , _chaResourceId = Nothing
+    , _chaKind = "api#channel"
+    , _chaExpiration = Nothing
+    , _chaToken = Nothing
+    , _chaAddress = Nothing
+    , _chaPayload = Nothing
+    , _chaParams = Nothing
+    , _chaId = Nothing
+    , _chaType = Nothing
     }
 
 -- | A version-specific identifier for the watched resource.
-cResourceURI :: Lens' Channel (Maybe Text)
-cResourceURI
-  = lens _cResourceURI (\ s a -> s{_cResourceURI = a})
+chaResourceURI :: Lens' Channel (Maybe Text)
+chaResourceURI
+  = lens _chaResourceURI
+      (\ s a -> s{_chaResourceURI = a})
 
 -- | An opaque ID that identifies the resource being watched on this channel.
 -- Stable across different API versions.
-cResourceId :: Lens' Channel (Maybe Text)
-cResourceId
-  = lens _cResourceId (\ s a -> s{_cResourceId = a})
+chaResourceId :: Lens' Channel (Maybe Text)
+chaResourceId
+  = lens _chaResourceId
+      (\ s a -> s{_chaResourceId = a})
 
 -- | Identifies this as a notification channel used to watch for changes to a
 -- resource. Value: the fixed string \"api#channel\".
-cKind :: Lens' Channel Text
-cKind = lens _cKind (\ s a -> s{_cKind = a})
+chaKind :: Lens' Channel Text
+chaKind = lens _chaKind (\ s a -> s{_chaKind = a})
 
 -- | Date and time of notification channel expiration, expressed as a Unix
 -- timestamp, in milliseconds. Optional.
-cExpiration :: Lens' Channel (Maybe Int64)
-cExpiration
-  = lens _cExpiration (\ s a -> s{_cExpiration = a})
+chaExpiration :: Lens' Channel (Maybe Int64)
+chaExpiration
+  = lens _chaExpiration
+      (\ s a -> s{_chaExpiration = a})
 
 -- | An arbitrary string delivered to the target address with each
 -- notification delivered over this channel. Optional.
-cToken :: Lens' Channel (Maybe Text)
-cToken = lens _cToken (\ s a -> s{_cToken = a})
+chaToken :: Lens' Channel (Maybe Text)
+chaToken = lens _chaToken (\ s a -> s{_chaToken = a})
 
 -- | The address where notifications are delivered for this channel.
-cAddress :: Lens' Channel (Maybe Text)
-cAddress = lens _cAddress (\ s a -> s{_cAddress = a})
+chaAddress :: Lens' Channel (Maybe Text)
+chaAddress
+  = lens _chaAddress (\ s a -> s{_chaAddress = a})
 
 -- | A Boolean value to indicate whether payload is wanted. Optional.
-cPayLoad :: Lens' Channel (Maybe Bool)
-cPayLoad = lens _cPayLoad (\ s a -> s{_cPayLoad = a})
+chaPayload :: Lens' Channel (Maybe Bool)
+chaPayload
+  = lens _chaPayload (\ s a -> s{_chaPayload = a})
 
 -- | Additional parameters controlling delivery channel behavior. Optional.
-cParams :: Lens' Channel (Maybe ChannelParams)
-cParams = lens _cParams (\ s a -> s{_cParams = a})
+chaParams :: Lens' Channel (Maybe Params)
+chaParams
+  = lens _chaParams (\ s a -> s{_chaParams = a})
 
 -- | A UUID or similar unique string that identifies this channel.
-cId :: Lens' Channel (Maybe Text)
-cId = lens _cId (\ s a -> s{_cId = a})
+chaId :: Lens' Channel (Maybe Text)
+chaId = lens _chaId (\ s a -> s{_chaId = a})
 
 -- | The type of delivery mechanism used for this channel.
-cType :: Lens' Channel (Maybe Text)
-cType = lens _cType (\ s a -> s{_cType = a})
+chaType :: Lens' Channel (Maybe Text)
+chaType = lens _chaType (\ s a -> s{_chaType = a})
 
 instance FromJSON Channel where
         parseJSON
@@ -936,15 +914,15 @@ instance ToJSON Channel where
         toJSON Channel{..}
           = object
               (catMaybes
-                 [("resourceUri" .=) <$> _cResourceURI,
-                  ("resourceId" .=) <$> _cResourceId,
-                  Just ("kind" .= _cKind),
-                  ("expiration" .=) <$> _cExpiration,
-                  ("token" .=) <$> _cToken,
-                  ("address" .=) <$> _cAddress,
-                  ("payload" .=) <$> _cPayLoad,
-                  ("params" .=) <$> _cParams, ("id" .=) <$> _cId,
-                  ("type" .=) <$> _cType])
+                 [("resourceUri" .=) <$> _chaResourceURI,
+                  ("resourceId" .=) <$> _chaResourceId,
+                  Just ("kind" .= _chaKind),
+                  ("expiration" .=) <$> _chaExpiration,
+                  ("token" .=) <$> _chaToken,
+                  ("address" .=) <$> _chaAddress,
+                  ("payload" .=) <$> _chaPayload,
+                  ("params" .=) <$> _chaParams, ("id" .=) <$> _chaId,
+                  ("type" .=) <$> _chaType])
 
 -- | A list of third-party applications which the user has installed or given
 -- access to Google Drive.
@@ -956,7 +934,7 @@ data AppList = AppList
     , _alKind          :: !Text
     , _alItems         :: !(Maybe [App])
     , _alSelfLink      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppList' with the minimum fields required to make a request.
 --
@@ -1029,141 +1007,80 @@ instance ToJSON AppList where
                   ("items" .=) <$> _alItems,
                   ("selfLink" .=) <$> _alSelfLink])
 
--- | Metadata about video media. This will only be present for video types.
---
--- /See:/ 'fileVideoMediaMetadata' smart constructor.
-data FileVideoMediaMetadata = FileVideoMediaMetadata
-    { _fvmmHeight         :: !(Maybe Int32)
-    , _fvmmWidth          :: !(Maybe Int32)
-    , _fvmmDurationMillis :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'FileVideoMediaMetadata' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'fvmmHeight'
---
--- * 'fvmmWidth'
---
--- * 'fvmmDurationMillis'
-fileVideoMediaMetadata
-    :: FileVideoMediaMetadata
-fileVideoMediaMetadata =
-    FileVideoMediaMetadata
-    { _fvmmHeight = Nothing
-    , _fvmmWidth = Nothing
-    , _fvmmDurationMillis = Nothing
-    }
-
--- | The height of the video in pixels.
-fvmmHeight :: Lens' FileVideoMediaMetadata (Maybe Int32)
-fvmmHeight
-  = lens _fvmmHeight (\ s a -> s{_fvmmHeight = a})
-
--- | The width of the video in pixels.
-fvmmWidth :: Lens' FileVideoMediaMetadata (Maybe Int32)
-fvmmWidth
-  = lens _fvmmWidth (\ s a -> s{_fvmmWidth = a})
-
--- | The duration of the video in milliseconds.
-fvmmDurationMillis :: Lens' FileVideoMediaMetadata (Maybe Int64)
-fvmmDurationMillis
-  = lens _fvmmDurationMillis
-      (\ s a -> s{_fvmmDurationMillis = a})
-
-instance FromJSON FileVideoMediaMetadata where
-        parseJSON
-          = withObject "FileVideoMediaMetadata"
-              (\ o ->
-                 FileVideoMediaMetadata <$>
-                   (o .:? "height") <*> (o .:? "width") <*>
-                     (o .:? "durationMillis"))
-
-instance ToJSON FileVideoMediaMetadata where
-        toJSON FileVideoMediaMetadata{..}
-          = object
-              (catMaybes
-                 [("height" .=) <$> _fvmmHeight,
-                  ("width" .=) <$> _fvmmWidth,
-                  ("durationMillis" .=) <$> _fvmmDurationMillis])
-
 -- | Representation of a change to a file.
 --
 -- /See:/ 'change' smart constructor.
 data Change = Change
-    { _chaKind             :: !Text
-    , _chaSelfLink         :: !(Maybe Text)
-    , _chaModificationDate :: !(Maybe DateTime')
-    , _chaId               :: !(Maybe Int64)
-    , _chaDeleted          :: !(Maybe Bool)
-    , _chaFileId           :: !(Maybe Text)
-    , _chaFile             :: !(Maybe File)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _cKind             :: !Text
+    , _cSelfLink         :: !(Maybe Text)
+    , _cModificationDate :: !(Maybe DateTime')
+    , _cId               :: !(Maybe Int64)
+    , _cDeleted          :: !(Maybe Bool)
+    , _cFileId           :: !(Maybe Text)
+    , _cFile             :: !(Maybe File)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Change' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'chaKind'
+-- * 'cKind'
 --
--- * 'chaSelfLink'
+-- * 'cSelfLink'
 --
--- * 'chaModificationDate'
+-- * 'cModificationDate'
 --
--- * 'chaId'
+-- * 'cId'
 --
--- * 'chaDeleted'
+-- * 'cDeleted'
 --
--- * 'chaFileId'
+-- * 'cFileId'
 --
--- * 'chaFile'
+-- * 'cFile'
 change
     :: Change
 change =
     Change
-    { _chaKind = "drive#change"
-    , _chaSelfLink = Nothing
-    , _chaModificationDate = Nothing
-    , _chaId = Nothing
-    , _chaDeleted = Nothing
-    , _chaFileId = Nothing
-    , _chaFile = Nothing
+    { _cKind = "drive#change"
+    , _cSelfLink = Nothing
+    , _cModificationDate = Nothing
+    , _cId = Nothing
+    , _cDeleted = Nothing
+    , _cFileId = Nothing
+    , _cFile = Nothing
     }
 
 -- | This is always drive#change.
-chaKind :: Lens' Change Text
-chaKind = lens _chaKind (\ s a -> s{_chaKind = a})
+cKind :: Lens' Change Text
+cKind = lens _cKind (\ s a -> s{_cKind = a})
 
 -- | A link back to this change.
-chaSelfLink :: Lens' Change (Maybe Text)
-chaSelfLink
-  = lens _chaSelfLink (\ s a -> s{_chaSelfLink = a})
+cSelfLink :: Lens' Change (Maybe Text)
+cSelfLink
+  = lens _cSelfLink (\ s a -> s{_cSelfLink = a})
 
 -- | The time of this modification.
-chaModificationDate :: Lens' Change (Maybe UTCTime)
-chaModificationDate
-  = lens _chaModificationDate
-      (\ s a -> s{_chaModificationDate = a})
+cModificationDate :: Lens' Change (Maybe UTCTime)
+cModificationDate
+  = lens _cModificationDate
+      (\ s a -> s{_cModificationDate = a})
       . mapping _DateTime
 
 -- | The ID of the change.
-chaId :: Lens' Change (Maybe Int64)
-chaId = lens _chaId (\ s a -> s{_chaId = a})
+cId :: Lens' Change (Maybe Int64)
+cId = lens _cId (\ s a -> s{_cId = a})
 
 -- | Whether the file has been deleted.
-chaDeleted :: Lens' Change (Maybe Bool)
-chaDeleted
-  = lens _chaDeleted (\ s a -> s{_chaDeleted = a})
+cDeleted :: Lens' Change (Maybe Bool)
+cDeleted = lens _cDeleted (\ s a -> s{_cDeleted = a})
 
 -- | The ID of the file associated with this change.
-chaFileId :: Lens' Change (Maybe Text)
-chaFileId
-  = lens _chaFileId (\ s a -> s{_chaFileId = a})
+cFileId :: Lens' Change (Maybe Text)
+cFileId = lens _cFileId (\ s a -> s{_cFileId = a})
 
 -- | The updated state of the file. Present if the file has not been deleted.
-chaFile :: Lens' Change (Maybe File)
-chaFile = lens _chaFile (\ s a -> s{_chaFile = a})
+cFile :: Lens' Change (Maybe File)
+cFile = lens _cFile (\ s a -> s{_cFile = a})
 
 instance FromJSON Change where
         parseJSON
@@ -1182,12 +1099,278 @@ instance ToJSON Change where
         toJSON Change{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _chaKind),
-                  ("selfLink" .=) <$> _chaSelfLink,
-                  ("modificationDate" .=) <$> _chaModificationDate,
-                  ("id" .=) <$> _chaId, ("deleted" .=) <$> _chaDeleted,
-                  ("fileId" .=) <$> _chaFileId,
-                  ("file" .=) <$> _chaFile])
+                 [Just ("kind" .= _cKind),
+                  ("selfLink" .=) <$> _cSelfLink,
+                  ("modificationDate" .=) <$> _cModificationDate,
+                  ("id" .=) <$> _cId, ("deleted" .=) <$> _cDeleted,
+                  ("fileId" .=) <$> _cFileId, ("file" .=) <$> _cFile])
+
+-- | Metadata about image media. This will only be present for image types,
+-- and its contents will depend on what can be parsed from the image
+-- content.
+--
+-- /See:/ 'imageMediaMetadata' smart constructor.
+data ImageMediaMetadata = ImageMediaMetadata
+    { _immRotation         :: !(Maybe Int32)
+    , _immHeight           :: !(Maybe Int32)
+    , _immSubjectDistance  :: !(Maybe Int32)
+    , _immMaxApertureValue :: !(Maybe Float)
+    , _immIsoSpeed         :: !(Maybe Int32)
+    , _immLocation         :: !(Maybe Location)
+    , _immAperture         :: !(Maybe Float)
+    , _immFocalLength      :: !(Maybe Float)
+    , _immCameraMake       :: !(Maybe Text)
+    , _immWidth            :: !(Maybe Int32)
+    , _immExposureTime     :: !(Maybe Float)
+    , _immCameraModel      :: !(Maybe Text)
+    , _immWhiteBalance     :: !(Maybe Text)
+    , _immDate             :: !(Maybe Text)
+    , _immLens             :: !(Maybe Text)
+    , _immFlashUsed        :: !(Maybe Bool)
+    , _immExposureBias     :: !(Maybe Float)
+    , _immMeteringMode     :: !(Maybe Text)
+    , _immExposureMode     :: !(Maybe Text)
+    , _immSensor           :: !(Maybe Text)
+    , _immColorSpace       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ImageMediaMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'immRotation'
+--
+-- * 'immHeight'
+--
+-- * 'immSubjectDistance'
+--
+-- * 'immMaxApertureValue'
+--
+-- * 'immIsoSpeed'
+--
+-- * 'immLocation'
+--
+-- * 'immAperture'
+--
+-- * 'immFocalLength'
+--
+-- * 'immCameraMake'
+--
+-- * 'immWidth'
+--
+-- * 'immExposureTime'
+--
+-- * 'immCameraModel'
+--
+-- * 'immWhiteBalance'
+--
+-- * 'immDate'
+--
+-- * 'immLens'
+--
+-- * 'immFlashUsed'
+--
+-- * 'immExposureBias'
+--
+-- * 'immMeteringMode'
+--
+-- * 'immExposureMode'
+--
+-- * 'immSensor'
+--
+-- * 'immColorSpace'
+imageMediaMetadata
+    :: ImageMediaMetadata
+imageMediaMetadata =
+    ImageMediaMetadata
+    { _immRotation = Nothing
+    , _immHeight = Nothing
+    , _immSubjectDistance = Nothing
+    , _immMaxApertureValue = Nothing
+    , _immIsoSpeed = Nothing
+    , _immLocation = Nothing
+    , _immAperture = Nothing
+    , _immFocalLength = Nothing
+    , _immCameraMake = Nothing
+    , _immWidth = Nothing
+    , _immExposureTime = Nothing
+    , _immCameraModel = Nothing
+    , _immWhiteBalance = Nothing
+    , _immDate = Nothing
+    , _immLens = Nothing
+    , _immFlashUsed = Nothing
+    , _immExposureBias = Nothing
+    , _immMeteringMode = Nothing
+    , _immExposureMode = Nothing
+    , _immSensor = Nothing
+    , _immColorSpace = Nothing
+    }
+
+-- | The rotation in clockwise degrees from the image\'s original
+-- orientation.
+immRotation :: Lens' ImageMediaMetadata (Maybe Int32)
+immRotation
+  = lens _immRotation (\ s a -> s{_immRotation = a})
+
+-- | The height of the image in pixels.
+immHeight :: Lens' ImageMediaMetadata (Maybe Int32)
+immHeight
+  = lens _immHeight (\ s a -> s{_immHeight = a})
+
+-- | The distance to the subject of the photo, in meters.
+immSubjectDistance :: Lens' ImageMediaMetadata (Maybe Int32)
+immSubjectDistance
+  = lens _immSubjectDistance
+      (\ s a -> s{_immSubjectDistance = a})
+
+-- | The smallest f-number of the lens at the focal length used to create the
+-- photo (APEX value).
+immMaxApertureValue :: Lens' ImageMediaMetadata (Maybe Float)
+immMaxApertureValue
+  = lens _immMaxApertureValue
+      (\ s a -> s{_immMaxApertureValue = a})
+
+-- | The ISO speed used to create the photo.
+immIsoSpeed :: Lens' ImageMediaMetadata (Maybe Int32)
+immIsoSpeed
+  = lens _immIsoSpeed (\ s a -> s{_immIsoSpeed = a})
+
+-- | Geographic location information stored in the image.
+immLocation :: Lens' ImageMediaMetadata (Maybe Location)
+immLocation
+  = lens _immLocation (\ s a -> s{_immLocation = a})
+
+-- | The aperture used to create the photo (f-number).
+immAperture :: Lens' ImageMediaMetadata (Maybe Float)
+immAperture
+  = lens _immAperture (\ s a -> s{_immAperture = a})
+
+-- | The focal length used to create the photo, in millimeters.
+immFocalLength :: Lens' ImageMediaMetadata (Maybe Float)
+immFocalLength
+  = lens _immFocalLength
+      (\ s a -> s{_immFocalLength = a})
+
+-- | The make of the camera used to create the photo.
+immCameraMake :: Lens' ImageMediaMetadata (Maybe Text)
+immCameraMake
+  = lens _immCameraMake
+      (\ s a -> s{_immCameraMake = a})
+
+-- | The width of the image in pixels.
+immWidth :: Lens' ImageMediaMetadata (Maybe Int32)
+immWidth = lens _immWidth (\ s a -> s{_immWidth = a})
+
+-- | The length of the exposure, in seconds.
+immExposureTime :: Lens' ImageMediaMetadata (Maybe Float)
+immExposureTime
+  = lens _immExposureTime
+      (\ s a -> s{_immExposureTime = a})
+
+-- | The model of the camera used to create the photo.
+immCameraModel :: Lens' ImageMediaMetadata (Maybe Text)
+immCameraModel
+  = lens _immCameraModel
+      (\ s a -> s{_immCameraModel = a})
+
+-- | The white balance mode used to create the photo.
+immWhiteBalance :: Lens' ImageMediaMetadata (Maybe Text)
+immWhiteBalance
+  = lens _immWhiteBalance
+      (\ s a -> s{_immWhiteBalance = a})
+
+-- | The date and time the photo was taken (EXIF format timestamp).
+immDate :: Lens' ImageMediaMetadata (Maybe Text)
+immDate = lens _immDate (\ s a -> s{_immDate = a})
+
+-- | The lens used to create the photo.
+immLens :: Lens' ImageMediaMetadata (Maybe Text)
+immLens = lens _immLens (\ s a -> s{_immLens = a})
+
+-- | Whether a flash was used to create the photo.
+immFlashUsed :: Lens' ImageMediaMetadata (Maybe Bool)
+immFlashUsed
+  = lens _immFlashUsed (\ s a -> s{_immFlashUsed = a})
+
+-- | The exposure bias of the photo (APEX value).
+immExposureBias :: Lens' ImageMediaMetadata (Maybe Float)
+immExposureBias
+  = lens _immExposureBias
+      (\ s a -> s{_immExposureBias = a})
+
+-- | The metering mode used to create the photo.
+immMeteringMode :: Lens' ImageMediaMetadata (Maybe Text)
+immMeteringMode
+  = lens _immMeteringMode
+      (\ s a -> s{_immMeteringMode = a})
+
+-- | The exposure mode used to create the photo.
+immExposureMode :: Lens' ImageMediaMetadata (Maybe Text)
+immExposureMode
+  = lens _immExposureMode
+      (\ s a -> s{_immExposureMode = a})
+
+-- | The type of sensor used to create the photo.
+immSensor :: Lens' ImageMediaMetadata (Maybe Text)
+immSensor
+  = lens _immSensor (\ s a -> s{_immSensor = a})
+
+-- | The color space of the photo.
+immColorSpace :: Lens' ImageMediaMetadata (Maybe Text)
+immColorSpace
+  = lens _immColorSpace
+      (\ s a -> s{_immColorSpace = a})
+
+instance FromJSON ImageMediaMetadata where
+        parseJSON
+          = withObject "ImageMediaMetadata"
+              (\ o ->
+                 ImageMediaMetadata <$>
+                   (o .:? "rotation") <*> (o .:? "height") <*>
+                     (o .:? "subjectDistance")
+                     <*> (o .:? "maxApertureValue")
+                     <*> (o .:? "isoSpeed")
+                     <*> (o .:? "location")
+                     <*> (o .:? "aperture")
+                     <*> (o .:? "focalLength")
+                     <*> (o .:? "cameraMake")
+                     <*> (o .:? "width")
+                     <*> (o .:? "exposureTime")
+                     <*> (o .:? "cameraModel")
+                     <*> (o .:? "whiteBalance")
+                     <*> (o .:? "date")
+                     <*> (o .:? "lens")
+                     <*> (o .:? "flashUsed")
+                     <*> (o .:? "exposureBias")
+                     <*> (o .:? "meteringMode")
+                     <*> (o .:? "exposureMode")
+                     <*> (o .:? "sensor")
+                     <*> (o .:? "colorSpace"))
+
+instance ToJSON ImageMediaMetadata where
+        toJSON ImageMediaMetadata{..}
+          = object
+              (catMaybes
+                 [("rotation" .=) <$> _immRotation,
+                  ("height" .=) <$> _immHeight,
+                  ("subjectDistance" .=) <$> _immSubjectDistance,
+                  ("maxApertureValue" .=) <$> _immMaxApertureValue,
+                  ("isoSpeed" .=) <$> _immIsoSpeed,
+                  ("location" .=) <$> _immLocation,
+                  ("aperture" .=) <$> _immAperture,
+                  ("focalLength" .=) <$> _immFocalLength,
+                  ("cameraMake" .=) <$> _immCameraMake,
+                  ("width" .=) <$> _immWidth,
+                  ("exposureTime" .=) <$> _immExposureTime,
+                  ("cameraModel" .=) <$> _immCameraModel,
+                  ("whiteBalance" .=) <$> _immWhiteBalance,
+                  ("date" .=) <$> _immDate, ("lens" .=) <$> _immLens,
+                  ("flashUsed" .=) <$> _immFlashUsed,
+                  ("exposureBias" .=) <$> _immExposureBias,
+                  ("meteringMode" .=) <$> _immMeteringMode,
+                  ("exposureMode" .=) <$> _immExposureMode,
+                  ("sensor" .=) <$> _immSensor,
+                  ("colorSpace" .=) <$> _immColorSpace])
 
 -- | A reference to a folder\'s child.
 --
@@ -1197,7 +1380,7 @@ data ChildReference = ChildReference
     , _crKind      :: !Text
     , _crSelfLink  :: !(Maybe Text)
     , _crId        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChildReference' with the minimum fields required to make a request.
 --
@@ -1270,7 +1453,7 @@ data App = App
     , _aSecondaryMimeTypes      :: !(Maybe [Text])
     , _aCreateInFolderTemplate  :: !(Maybe Text)
     , _aKind                    :: !Text
-    , _aIcons                   :: !(Maybe [AppIcons])
+    , _aIcons                   :: !(Maybe [IconsItem])
     , _aProductURL              :: !(Maybe Text)
     , _aUseByDefault            :: !(Maybe Bool)
     , _aShortDescription        :: !(Maybe Text)
@@ -1287,7 +1470,7 @@ data App = App
     , _aSupportsMultiOpen       :: !(Maybe Bool)
     , _aSupportsImport          :: !(Maybe Bool)
     , _aSupportsOfflineCreate   :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'App' with the minimum fields required to make a request.
 --
@@ -1416,7 +1599,7 @@ aKind :: Lens' App Text
 aKind = lens _aKind (\ s a -> s{_aKind = a})
 
 -- | The various icons for the app.
-aIcons :: Lens' App [AppIcons]
+aIcons :: Lens' App [IconsItem]
 aIcons
   = lens _aIcons (\ s a -> s{_aIcons = a}) . _Default .
       _Coerce
@@ -1584,11 +1767,11 @@ instance ToJSON App where
 data User = User
     { _uIsAuthenticatedUser :: !(Maybe Bool)
     , _uKind                :: !Text
-    , _uPicture             :: !(Maybe UserPicture)
+    , _uPicture             :: !(Maybe Picture)
     , _uEmailAddress        :: !(Maybe Text)
     , _uDisplayName         :: !(Maybe Text)
     , _uPermissionId        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 --
@@ -1629,7 +1812,7 @@ uKind :: Lens' User Text
 uKind = lens _uKind (\ s a -> s{_uKind = a})
 
 -- | The user\'s profile picture.
-uPicture :: Lens' User (Maybe UserPicture)
+uPicture :: Lens' User (Maybe Picture)
 uPicture = lens _uPicture (\ s a -> s{_uPicture = a})
 
 -- | The email address of the user.
@@ -1673,54 +1856,6 @@ instance ToJSON User where
                   ("displayName" .=) <$> _uDisplayName,
                   ("permissionId" .=) <$> _uPermissionId])
 
---
--- /See:/ 'aboutExportFormats' smart constructor.
-data AboutExportFormats = AboutExportFormats
-    { _aefTargets :: !(Maybe [Text])
-    , _aefSource  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AboutExportFormats' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aefTargets'
---
--- * 'aefSource'
-aboutExportFormats
-    :: AboutExportFormats
-aboutExportFormats =
-    AboutExportFormats
-    { _aefTargets = Nothing
-    , _aefSource = Nothing
-    }
-
--- | The possible content types to convert to.
-aefTargets :: Lens' AboutExportFormats [Text]
-aefTargets
-  = lens _aefTargets (\ s a -> s{_aefTargets = a}) .
-      _Default
-      . _Coerce
-
--- | The content type to convert from.
-aefSource :: Lens' AboutExportFormats (Maybe Text)
-aefSource
-  = lens _aefSource (\ s a -> s{_aefSource = a})
-
-instance FromJSON AboutExportFormats where
-        parseJSON
-          = withObject "AboutExportFormats"
-              (\ o ->
-                 AboutExportFormats <$>
-                   (o .:? "targets" .!= mempty) <*> (o .:? "source"))
-
-instance ToJSON AboutExportFormats where
-        toJSON AboutExportFormats{..}
-          = object
-              (catMaybes
-                 [("targets" .=) <$> _aefTargets,
-                  ("source" .=) <$> _aefSource])
-
 -- | A JSON representation of a reply to a comment on a file in Google Drive.
 --
 -- /See:/ 'commentReply' smart constructor.
@@ -1734,7 +1869,7 @@ data CommentReply = CommentReply
     , _comModifiedDate :: !(Maybe DateTime')
     , _comDeleted      :: !(Maybe Bool)
     , _comVerb         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentReply' with the minimum fields required to make a request.
 --
@@ -1857,97 +1992,68 @@ instance ToJSON CommentReply where
                   ("deleted" .=) <$> _comDeleted,
                   ("verb" .=) <$> _comVerb])
 
+-- | Additional parameters controlling delivery channel behavior. Optional.
 --
--- /See:/ 'aboutMaxUploadSizes' smart constructor.
-data AboutMaxUploadSizes = AboutMaxUploadSizes
-    { _amusSize :: !(Maybe Int64)
-    , _amusType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'params' smart constructor.
+data Params =
+    Params
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AboutMaxUploadSizes' with the minimum fields required to make a request.
+-- | Creates a value of 'Params' with the minimum fields required to make a request.
+--
+params
+    :: Params
+params = Params
+
+instance FromJSON Params where
+        parseJSON = withObject "Params" (\ o -> pure Params)
+
+instance ToJSON Params where
+        toJSON = const (Object mempty)
+
+--
+-- /See:/ 'maxUploadSizesItem' smart constructor.
+data MaxUploadSizesItem = MaxUploadSizesItem
+    { _musiSize :: !(Maybe Int64)
+    , _musiType :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MaxUploadSizesItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'amusSize'
+-- * 'musiSize'
 --
--- * 'amusType'
-aboutMaxUploadSizes
-    :: AboutMaxUploadSizes
-aboutMaxUploadSizes =
-    AboutMaxUploadSizes
-    { _amusSize = Nothing
-    , _amusType = Nothing
+-- * 'musiType'
+maxUploadSizesItem
+    :: MaxUploadSizesItem
+maxUploadSizesItem =
+    MaxUploadSizesItem
+    { _musiSize = Nothing
+    , _musiType = Nothing
     }
 
 -- | The max upload size for this type.
-amusSize :: Lens' AboutMaxUploadSizes (Maybe Int64)
-amusSize = lens _amusSize (\ s a -> s{_amusSize = a})
+musiSize :: Lens' MaxUploadSizesItem (Maybe Int64)
+musiSize = lens _musiSize (\ s a -> s{_musiSize = a})
 
 -- | The file type.
-amusType :: Lens' AboutMaxUploadSizes (Maybe Text)
-amusType = lens _amusType (\ s a -> s{_amusType = a})
+musiType :: Lens' MaxUploadSizesItem (Maybe Text)
+musiType = lens _musiType (\ s a -> s{_musiType = a})
 
-instance FromJSON AboutMaxUploadSizes where
+instance FromJSON MaxUploadSizesItem where
         parseJSON
-          = withObject "AboutMaxUploadSizes"
+          = withObject "MaxUploadSizesItem"
               (\ o ->
-                 AboutMaxUploadSizes <$>
+                 MaxUploadSizesItem <$>
                    (o .:? "size") <*> (o .:? "type"))
 
-instance ToJSON AboutMaxUploadSizes where
-        toJSON AboutMaxUploadSizes{..}
+instance ToJSON MaxUploadSizesItem where
+        toJSON MaxUploadSizesItem{..}
           = object
               (catMaybes
-                 [("size" .=) <$> _amusSize,
-                  ("type" .=) <$> _amusType])
-
---
--- /See:/ 'aboutQuotaBytesByService' smart constructor.
-data AboutQuotaBytesByService = AboutQuotaBytesByService
-    { _aqbbsBytesUsed   :: !(Maybe Int64)
-    , _aqbbsServiceName :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AboutQuotaBytesByService' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aqbbsBytesUsed'
---
--- * 'aqbbsServiceName'
-aboutQuotaBytesByService
-    :: AboutQuotaBytesByService
-aboutQuotaBytesByService =
-    AboutQuotaBytesByService
-    { _aqbbsBytesUsed = Nothing
-    , _aqbbsServiceName = Nothing
-    }
-
--- | The storage quota bytes used by the service.
-aqbbsBytesUsed :: Lens' AboutQuotaBytesByService (Maybe Int64)
-aqbbsBytesUsed
-  = lens _aqbbsBytesUsed
-      (\ s a -> s{_aqbbsBytesUsed = a})
-
--- | The service\'s name, e.g. DRIVE, GMAIL, or PHOTOS.
-aqbbsServiceName :: Lens' AboutQuotaBytesByService (Maybe Text)
-aqbbsServiceName
-  = lens _aqbbsServiceName
-      (\ s a -> s{_aqbbsServiceName = a})
-
-instance FromJSON AboutQuotaBytesByService where
-        parseJSON
-          = withObject "AboutQuotaBytesByService"
-              (\ o ->
-                 AboutQuotaBytesByService <$>
-                   (o .:? "bytesUsed") <*> (o .:? "serviceName"))
-
-instance ToJSON AboutQuotaBytesByService where
-        toJSON AboutQuotaBytesByService{..}
-          = object
-              (catMaybes
-                 [("bytesUsed" .=) <$> _aqbbsBytesUsed,
-                  ("serviceName" .=) <$> _aqbbsServiceName])
+                 [("size" .=) <$> _musiSize,
+                  ("type" .=) <$> _musiType])
 
 -- | A list of changes for a user.
 --
@@ -1960,7 +2066,7 @@ data ChangeList = ChangeList
     , _cllItems           :: !(Maybe [Change])
     , _cllSelfLink        :: !(Maybe Text)
     , _cllLargestChangeId :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangeList' with the minimum fields required to make a request.
 --
@@ -2053,109 +2159,87 @@ instance ToJSON ChangeList where
                   ("selfLink" .=) <$> _cllSelfLink,
                   ("largestChangeId" .=) <$> _cllLargestChangeId])
 
--- | Links for exporting Google Docs to specific formats.
+-- | The user\'s profile picture.
 --
--- /See:/ 'revisionExportLinks' smart constructor.
-data RevisionExportLinks =
-    RevisionExportLinks
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'picture' smart constructor.
+newtype Picture = Picture
+    { _pURL :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RevisionExportLinks' with the minimum fields required to make a request.
---
-revisionExportLinks
-    :: RevisionExportLinks
-revisionExportLinks = RevisionExportLinks
-
-instance FromJSON RevisionExportLinks where
-        parseJSON
-          = withObject "RevisionExportLinks"
-              (\ o -> pure RevisionExportLinks)
-
-instance ToJSON RevisionExportLinks where
-        toJSON = const (Object mempty)
-
--- | Additional parameters controlling delivery channel behavior. Optional.
---
--- /See:/ 'channelParams' smart constructor.
-data ChannelParams =
-    ChannelParams
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
---
-channelParams
-    :: ChannelParams
-channelParams = ChannelParams
-
-instance FromJSON ChannelParams where
-        parseJSON
-          = withObject "ChannelParams"
-              (\ o -> pure ChannelParams)
-
-instance ToJSON ChannelParams where
-        toJSON = const (Object mempty)
-
--- | Indexable text attributes for the file (can only be written)
---
--- /See:/ 'fileIndexableText' smart constructor.
-newtype FileIndexableText = FileIndexableText
-    { _fitText :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'FileIndexableText' with the minimum fields required to make a request.
+-- | Creates a value of 'Picture' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'fitText'
-fileIndexableText
-    :: FileIndexableText
-fileIndexableText =
-    FileIndexableText
-    { _fitText = Nothing
+-- * 'pURL'
+picture
+    :: Picture
+picture =
+    Picture
+    { _pURL = Nothing
     }
 
--- | The text to be indexed for this file.
-fitText :: Lens' FileIndexableText (Maybe Text)
-fitText = lens _fitText (\ s a -> s{_fitText = a})
+-- | A URL that points to a profile picture of this user.
+pURL :: Lens' Picture (Maybe Text)
+pURL = lens _pURL (\ s a -> s{_pURL = a})
 
-instance FromJSON FileIndexableText where
+instance FromJSON Picture where
         parseJSON
-          = withObject "FileIndexableText"
-              (\ o -> FileIndexableText <$> (o .:? "text"))
+          = withObject "Picture"
+              (\ o -> Picture <$> (o .:? "url"))
 
-instance ToJSON FileIndexableText where
-        toJSON FileIndexableText{..}
-          = object (catMaybes [("text" .=) <$> _fitText])
+instance ToJSON Picture where
+        toJSON Picture{..}
+          = object (catMaybes [("url" .=) <$> _pURL])
+
+-- | Links for exporting Google Docs to specific formats.
+--
+-- /See:/ 'exportLinks' smart constructor.
+data ExportLinks =
+    ExportLinks
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ExportLinks' with the minimum fields required to make a request.
+--
+exportLinks
+    :: ExportLinks
+exportLinks = ExportLinks
+
+instance FromJSON ExportLinks where
+        parseJSON
+          = withObject "ExportLinks" (\ o -> pure ExportLinks)
+
+instance ToJSON ExportLinks where
+        toJSON = const (Object mempty)
 
 -- | An item with user information and settings.
 --
 -- /See:/ 'about' smart constructor.
 data About = About
-    { _aboExportFormats           :: !(Maybe [AboutExportFormats])
+    { _aboExportFormats           :: !(Maybe [ExportFormatsItem])
     , _aboRemainingChangeIds      :: !(Maybe Int64)
     , _aboLanguageCode            :: !(Maybe Text)
     , _aboEtag                    :: !(Maybe Text)
-    , _aboImportFormats           :: !(Maybe [AboutImportFormats])
+    , _aboImportFormats           :: !(Maybe [ImportFormatsItem])
     , _aboKind                    :: !Text
     , _aboDomainSharingPolicy     :: !(Maybe Text)
     , _aboQuotaBytesUsedInTrash   :: !(Maybe Int64)
     , _aboQuotaType               :: !(Maybe Text)
-    , _aboMaxUploadSizes          :: !(Maybe [AboutMaxUploadSizes])
+    , _aboMaxUploadSizes          :: !(Maybe [MaxUploadSizesItem])
     , _aboUser                    :: !(Maybe User)
     , _aboSelfLink                :: !(Maybe Text)
     , _aboName                    :: !(Maybe Text)
-    , _aboFeatures                :: !(Maybe [AboutFeatures])
+    , _aboFeatures                :: !(Maybe [FeaturesItem])
     , _aboIsCurrentAppInstalled   :: !(Maybe Bool)
     , _aboQuotaBytesTotal         :: !(Maybe Int64)
     , _aboRootFolderId            :: !(Maybe Text)
     , _aboQuotaBytesUsed          :: !(Maybe Int64)
-    , _aboAdditionalRoleInfo      :: !(Maybe [AboutAdditionalRoleInfo])
+    , _aboAdditionalRoleInfo      :: !(Maybe [AdditionalRoleInfoItem])
     , _aboFolderColorPalette      :: !(Maybe [Text])
     , _aboPermissionId            :: !(Maybe Text)
     , _aboQuotaBytesUsedAggregate :: !(Maybe Int64)
-    , _aboQuotaBytesByService     :: !(Maybe [AboutQuotaBytesByService])
+    , _aboQuotaBytesByService     :: !(Maybe [QuotaBytesByServiceItem])
     , _aboLargestChangeId         :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'About' with the minimum fields required to make a request.
 --
@@ -2239,7 +2323,7 @@ about =
     }
 
 -- | The allowable export formats.
-aboExportFormats :: Lens' About [AboutExportFormats]
+aboExportFormats :: Lens' About [ExportFormatsItem]
 aboExportFormats
   = lens _aboExportFormats
       (\ s a -> s{_aboExportFormats = a})
@@ -2265,7 +2349,7 @@ aboEtag :: Lens' About (Maybe Text)
 aboEtag = lens _aboEtag (\ s a -> s{_aboEtag = a})
 
 -- | The allowable import formats.
-aboImportFormats :: Lens' About [AboutImportFormats]
+aboImportFormats :: Lens' About [ImportFormatsItem]
 aboImportFormats
   = lens _aboImportFormats
       (\ s a -> s{_aboImportFormats = a})
@@ -2297,7 +2381,7 @@ aboQuotaType
 
 -- | List of max upload sizes for each file type. The most specific type
 -- takes precedence.
-aboMaxUploadSizes :: Lens' About [AboutMaxUploadSizes]
+aboMaxUploadSizes :: Lens' About [MaxUploadSizesItem]
 aboMaxUploadSizes
   = lens _aboMaxUploadSizes
       (\ s a -> s{_aboMaxUploadSizes = a})
@@ -2318,7 +2402,7 @@ aboName :: Lens' About (Maybe Text)
 aboName = lens _aboName (\ s a -> s{_aboName = a})
 
 -- | List of additional features enabled on this account.
-aboFeatures :: Lens' About [AboutFeatures]
+aboFeatures :: Lens' About [FeaturesItem]
 aboFeatures
   = lens _aboFeatures (\ s a -> s{_aboFeatures = a}) .
       _Default
@@ -2351,7 +2435,7 @@ aboQuotaBytesUsed
 
 -- | Information about supported additional roles per file type. The most
 -- specific type takes precedence.
-aboAdditionalRoleInfo :: Lens' About [AboutAdditionalRoleInfo]
+aboAdditionalRoleInfo :: Lens' About [AdditionalRoleInfoItem]
 aboAdditionalRoleInfo
   = lens _aboAdditionalRoleInfo
       (\ s a -> s{_aboAdditionalRoleInfo = a})
@@ -2379,7 +2463,7 @@ aboQuotaBytesUsedAggregate
       (\ s a -> s{_aboQuotaBytesUsedAggregate = a})
 
 -- | The amount of storage quota used by different Google services.
-aboQuotaBytesByService :: Lens' About [AboutQuotaBytesByService]
+aboQuotaBytesByService :: Lens' About [QuotaBytesByServiceItem]
 aboQuotaBytesByService
   = lens _aboQuotaBytesByService
       (\ s a -> s{_aboQuotaBytesByService = a})
@@ -2456,417 +2540,299 @@ instance ToJSON About where
                     _aboQuotaBytesByService,
                   ("largestChangeId" .=) <$> _aboLargestChangeId])
 
--- | Geographic location information stored in the image.
---
--- /See:/ 'fileImageMediaMetadataLocation' smart constructor.
-data FileImageMediaMetadataLocation = FileImageMediaMetadataLocation
-    { _fimmlLatitude  :: !(Maybe Double)
-    , _fimmlAltitude  :: !(Maybe Double)
-    , _fimmlLongitude :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'FileImageMediaMetadataLocation' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'fimmlLatitude'
---
--- * 'fimmlAltitude'
---
--- * 'fimmlLongitude'
-fileImageMediaMetadataLocation
-    :: FileImageMediaMetadataLocation
-fileImageMediaMetadataLocation =
-    FileImageMediaMetadataLocation
-    { _fimmlLatitude = Nothing
-    , _fimmlAltitude = Nothing
-    , _fimmlLongitude = Nothing
-    }
-
--- | The latitude stored in the image.
-fimmlLatitude :: Lens' FileImageMediaMetadataLocation (Maybe Double)
-fimmlLatitude
-  = lens _fimmlLatitude
-      (\ s a -> s{_fimmlLatitude = a})
-
--- | The altitude stored in the image.
-fimmlAltitude :: Lens' FileImageMediaMetadataLocation (Maybe Double)
-fimmlAltitude
-  = lens _fimmlAltitude
-      (\ s a -> s{_fimmlAltitude = a})
-
--- | The longitude stored in the image.
-fimmlLongitude :: Lens' FileImageMediaMetadataLocation (Maybe Double)
-fimmlLongitude
-  = lens _fimmlLongitude
-      (\ s a -> s{_fimmlLongitude = a})
-
-instance FromJSON FileImageMediaMetadataLocation
-         where
-        parseJSON
-          = withObject "FileImageMediaMetadataLocation"
-              (\ o ->
-                 FileImageMediaMetadataLocation <$>
-                   (o .:? "latitude") <*> (o .:? "altitude") <*>
-                     (o .:? "longitude"))
-
-instance ToJSON FileImageMediaMetadataLocation where
-        toJSON FileImageMediaMetadataLocation{..}
-          = object
-              (catMaybes
-                 [("latitude" .=) <$> _fimmlLatitude,
-                  ("altitude" .=) <$> _fimmlAltitude,
-                  ("longitude" .=) <$> _fimmlLongitude])
-
--- | Metadata about image media. This will only be present for image types,
--- and its contents will depend on what can be parsed from the image
--- content.
---
--- /See:/ 'fileImageMediaMetadata' smart constructor.
-data FileImageMediaMetadata = FileImageMediaMetadata
-    { _fimmRotation         :: !(Maybe Int32)
-    , _fimmHeight           :: !(Maybe Int32)
-    , _fimmSubjectDistance  :: !(Maybe Int32)
-    , _fimmMaxApertureValue :: !(Maybe Float)
-    , _fimmIsoSpeed         :: !(Maybe Int32)
-    , _fimmLocation         :: !(Maybe FileImageMediaMetadataLocation)
-    , _fimmAperture         :: !(Maybe Float)
-    , _fimmFocalLength      :: !(Maybe Float)
-    , _fimmCameraMake       :: !(Maybe Text)
-    , _fimmWidth            :: !(Maybe Int32)
-    , _fimmExposureTime     :: !(Maybe Float)
-    , _fimmCameraModel      :: !(Maybe Text)
-    , _fimmWhiteBalance     :: !(Maybe Text)
-    , _fimmDate             :: !(Maybe Text)
-    , _fimmLens             :: !(Maybe Text)
-    , _fimmFlashUsed        :: !(Maybe Bool)
-    , _fimmExposureBias     :: !(Maybe Float)
-    , _fimmMeteringMode     :: !(Maybe Text)
-    , _fimmExposureMode     :: !(Maybe Text)
-    , _fimmSensor           :: !(Maybe Text)
-    , _fimmColorSpace       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'FileImageMediaMetadata' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'fimmRotation'
---
--- * 'fimmHeight'
---
--- * 'fimmSubjectDistance'
---
--- * 'fimmMaxApertureValue'
---
--- * 'fimmIsoSpeed'
---
--- * 'fimmLocation'
---
--- * 'fimmAperture'
---
--- * 'fimmFocalLength'
---
--- * 'fimmCameraMake'
---
--- * 'fimmWidth'
---
--- * 'fimmExposureTime'
---
--- * 'fimmCameraModel'
---
--- * 'fimmWhiteBalance'
---
--- * 'fimmDate'
---
--- * 'fimmLens'
---
--- * 'fimmFlashUsed'
---
--- * 'fimmExposureBias'
---
--- * 'fimmMeteringMode'
---
--- * 'fimmExposureMode'
---
--- * 'fimmSensor'
---
--- * 'fimmColorSpace'
-fileImageMediaMetadata
-    :: FileImageMediaMetadata
-fileImageMediaMetadata =
-    FileImageMediaMetadata
-    { _fimmRotation = Nothing
-    , _fimmHeight = Nothing
-    , _fimmSubjectDistance = Nothing
-    , _fimmMaxApertureValue = Nothing
-    , _fimmIsoSpeed = Nothing
-    , _fimmLocation = Nothing
-    , _fimmAperture = Nothing
-    , _fimmFocalLength = Nothing
-    , _fimmCameraMake = Nothing
-    , _fimmWidth = Nothing
-    , _fimmExposureTime = Nothing
-    , _fimmCameraModel = Nothing
-    , _fimmWhiteBalance = Nothing
-    , _fimmDate = Nothing
-    , _fimmLens = Nothing
-    , _fimmFlashUsed = Nothing
-    , _fimmExposureBias = Nothing
-    , _fimmMeteringMode = Nothing
-    , _fimmExposureMode = Nothing
-    , _fimmSensor = Nothing
-    , _fimmColorSpace = Nothing
-    }
-
--- | The rotation in clockwise degrees from the image\'s original
--- orientation.
-fimmRotation :: Lens' FileImageMediaMetadata (Maybe Int32)
-fimmRotation
-  = lens _fimmRotation (\ s a -> s{_fimmRotation = a})
-
--- | The height of the image in pixels.
-fimmHeight :: Lens' FileImageMediaMetadata (Maybe Int32)
-fimmHeight
-  = lens _fimmHeight (\ s a -> s{_fimmHeight = a})
-
--- | The distance to the subject of the photo, in meters.
-fimmSubjectDistance :: Lens' FileImageMediaMetadata (Maybe Int32)
-fimmSubjectDistance
-  = lens _fimmSubjectDistance
-      (\ s a -> s{_fimmSubjectDistance = a})
-
--- | The smallest f-number of the lens at the focal length used to create the
--- photo (APEX value).
-fimmMaxApertureValue :: Lens' FileImageMediaMetadata (Maybe Float)
-fimmMaxApertureValue
-  = lens _fimmMaxApertureValue
-      (\ s a -> s{_fimmMaxApertureValue = a})
-
--- | The ISO speed used to create the photo.
-fimmIsoSpeed :: Lens' FileImageMediaMetadata (Maybe Int32)
-fimmIsoSpeed
-  = lens _fimmIsoSpeed (\ s a -> s{_fimmIsoSpeed = a})
-
--- | Geographic location information stored in the image.
-fimmLocation :: Lens' FileImageMediaMetadata (Maybe FileImageMediaMetadataLocation)
-fimmLocation
-  = lens _fimmLocation (\ s a -> s{_fimmLocation = a})
-
--- | The aperture used to create the photo (f-number).
-fimmAperture :: Lens' FileImageMediaMetadata (Maybe Float)
-fimmAperture
-  = lens _fimmAperture (\ s a -> s{_fimmAperture = a})
-
--- | The focal length used to create the photo, in millimeters.
-fimmFocalLength :: Lens' FileImageMediaMetadata (Maybe Float)
-fimmFocalLength
-  = lens _fimmFocalLength
-      (\ s a -> s{_fimmFocalLength = a})
-
--- | The make of the camera used to create the photo.
-fimmCameraMake :: Lens' FileImageMediaMetadata (Maybe Text)
-fimmCameraMake
-  = lens _fimmCameraMake
-      (\ s a -> s{_fimmCameraMake = a})
-
--- | The width of the image in pixels.
-fimmWidth :: Lens' FileImageMediaMetadata (Maybe Int32)
-fimmWidth
-  = lens _fimmWidth (\ s a -> s{_fimmWidth = a})
-
--- | The length of the exposure, in seconds.
-fimmExposureTime :: Lens' FileImageMediaMetadata (Maybe Float)
-fimmExposureTime
-  = lens _fimmExposureTime
-      (\ s a -> s{_fimmExposureTime = a})
-
--- | The model of the camera used to create the photo.
-fimmCameraModel :: Lens' FileImageMediaMetadata (Maybe Text)
-fimmCameraModel
-  = lens _fimmCameraModel
-      (\ s a -> s{_fimmCameraModel = a})
-
--- | The white balance mode used to create the photo.
-fimmWhiteBalance :: Lens' FileImageMediaMetadata (Maybe Text)
-fimmWhiteBalance
-  = lens _fimmWhiteBalance
-      (\ s a -> s{_fimmWhiteBalance = a})
-
--- | The date and time the photo was taken (EXIF format timestamp).
-fimmDate :: Lens' FileImageMediaMetadata (Maybe Text)
-fimmDate = lens _fimmDate (\ s a -> s{_fimmDate = a})
-
--- | The lens used to create the photo.
-fimmLens :: Lens' FileImageMediaMetadata (Maybe Text)
-fimmLens = lens _fimmLens (\ s a -> s{_fimmLens = a})
-
--- | Whether a flash was used to create the photo.
-fimmFlashUsed :: Lens' FileImageMediaMetadata (Maybe Bool)
-fimmFlashUsed
-  = lens _fimmFlashUsed
-      (\ s a -> s{_fimmFlashUsed = a})
-
--- | The exposure bias of the photo (APEX value).
-fimmExposureBias :: Lens' FileImageMediaMetadata (Maybe Float)
-fimmExposureBias
-  = lens _fimmExposureBias
-      (\ s a -> s{_fimmExposureBias = a})
-
--- | The metering mode used to create the photo.
-fimmMeteringMode :: Lens' FileImageMediaMetadata (Maybe Text)
-fimmMeteringMode
-  = lens _fimmMeteringMode
-      (\ s a -> s{_fimmMeteringMode = a})
-
--- | The exposure mode used to create the photo.
-fimmExposureMode :: Lens' FileImageMediaMetadata (Maybe Text)
-fimmExposureMode
-  = lens _fimmExposureMode
-      (\ s a -> s{_fimmExposureMode = a})
-
--- | The type of sensor used to create the photo.
-fimmSensor :: Lens' FileImageMediaMetadata (Maybe Text)
-fimmSensor
-  = lens _fimmSensor (\ s a -> s{_fimmSensor = a})
-
--- | The color space of the photo.
-fimmColorSpace :: Lens' FileImageMediaMetadata (Maybe Text)
-fimmColorSpace
-  = lens _fimmColorSpace
-      (\ s a -> s{_fimmColorSpace = a})
-
-instance FromJSON FileImageMediaMetadata where
-        parseJSON
-          = withObject "FileImageMediaMetadata"
-              (\ o ->
-                 FileImageMediaMetadata <$>
-                   (o .:? "rotation") <*> (o .:? "height") <*>
-                     (o .:? "subjectDistance")
-                     <*> (o .:? "maxApertureValue")
-                     <*> (o .:? "isoSpeed")
-                     <*> (o .:? "location")
-                     <*> (o .:? "aperture")
-                     <*> (o .:? "focalLength")
-                     <*> (o .:? "cameraMake")
-                     <*> (o .:? "width")
-                     <*> (o .:? "exposureTime")
-                     <*> (o .:? "cameraModel")
-                     <*> (o .:? "whiteBalance")
-                     <*> (o .:? "date")
-                     <*> (o .:? "lens")
-                     <*> (o .:? "flashUsed")
-                     <*> (o .:? "exposureBias")
-                     <*> (o .:? "meteringMode")
-                     <*> (o .:? "exposureMode")
-                     <*> (o .:? "sensor")
-                     <*> (o .:? "colorSpace"))
-
-instance ToJSON FileImageMediaMetadata where
-        toJSON FileImageMediaMetadata{..}
-          = object
-              (catMaybes
-                 [("rotation" .=) <$> _fimmRotation,
-                  ("height" .=) <$> _fimmHeight,
-                  ("subjectDistance" .=) <$> _fimmSubjectDistance,
-                  ("maxApertureValue" .=) <$> _fimmMaxApertureValue,
-                  ("isoSpeed" .=) <$> _fimmIsoSpeed,
-                  ("location" .=) <$> _fimmLocation,
-                  ("aperture" .=) <$> _fimmAperture,
-                  ("focalLength" .=) <$> _fimmFocalLength,
-                  ("cameraMake" .=) <$> _fimmCameraMake,
-                  ("width" .=) <$> _fimmWidth,
-                  ("exposureTime" .=) <$> _fimmExposureTime,
-                  ("cameraModel" .=) <$> _fimmCameraModel,
-                  ("whiteBalance" .=) <$> _fimmWhiteBalance,
-                  ("date" .=) <$> _fimmDate, ("lens" .=) <$> _fimmLens,
-                  ("flashUsed" .=) <$> _fimmFlashUsed,
-                  ("exposureBias" .=) <$> _fimmExposureBias,
-                  ("meteringMode" .=) <$> _fimmMeteringMode,
-                  ("exposureMode" .=) <$> _fimmExposureMode,
-                  ("sensor" .=) <$> _fimmSensor,
-                  ("colorSpace" .=) <$> _fimmColorSpace])
-
 -- | A group of labels for the file.
 --
--- /See:/ 'fileLabels' smart constructor.
-data FileLabels = FileLabels
-    { _flViewed     :: !(Maybe Bool)
-    , _flTrashed    :: !(Maybe Bool)
-    , _flStarred    :: !(Maybe Bool)
-    , _flHidden     :: !(Maybe Bool)
-    , _flRestricted :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'labels' smart constructor.
+data Labels = Labels
+    { _lViewed     :: !(Maybe Bool)
+    , _lTrashed    :: !(Maybe Bool)
+    , _lStarred    :: !(Maybe Bool)
+    , _lHidden     :: !(Maybe Bool)
+    , _lRestricted :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FileLabels' with the minimum fields required to make a request.
+-- | Creates a value of 'Labels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'flViewed'
+-- * 'lViewed'
 --
--- * 'flTrashed'
+-- * 'lTrashed'
 --
--- * 'flStarred'
+-- * 'lStarred'
 --
--- * 'flHidden'
+-- * 'lHidden'
 --
--- * 'flRestricted'
-fileLabels
-    :: FileLabels
-fileLabels =
-    FileLabels
-    { _flViewed = Nothing
-    , _flTrashed = Nothing
-    , _flStarred = Nothing
-    , _flHidden = Nothing
-    , _flRestricted = Nothing
+-- * 'lRestricted'
+labels
+    :: Labels
+labels =
+    Labels
+    { _lViewed = Nothing
+    , _lTrashed = Nothing
+    , _lStarred = Nothing
+    , _lHidden = Nothing
+    , _lRestricted = Nothing
     }
 
 -- | Whether this file has been viewed by this user.
-flViewed :: Lens' FileLabels (Maybe Bool)
-flViewed = lens _flViewed (\ s a -> s{_flViewed = a})
+lViewed :: Lens' Labels (Maybe Bool)
+lViewed = lens _lViewed (\ s a -> s{_lViewed = a})
 
 -- | Whether this file has been trashed. This label applies to all users
 -- accessing the file; however, only owners are allowed to see and untrash
 -- files.
-flTrashed :: Lens' FileLabels (Maybe Bool)
-flTrashed
-  = lens _flTrashed (\ s a -> s{_flTrashed = a})
+lTrashed :: Lens' Labels (Maybe Bool)
+lTrashed = lens _lTrashed (\ s a -> s{_lTrashed = a})
 
 -- | Whether this file is starred by the user.
-flStarred :: Lens' FileLabels (Maybe Bool)
-flStarred
-  = lens _flStarred (\ s a -> s{_flStarred = a})
+lStarred :: Lens' Labels (Maybe Bool)
+lStarred = lens _lStarred (\ s a -> s{_lStarred = a})
 
 -- | Deprecated.
-flHidden :: Lens' FileLabels (Maybe Bool)
-flHidden = lens _flHidden (\ s a -> s{_flHidden = a})
+lHidden :: Lens' Labels (Maybe Bool)
+lHidden = lens _lHidden (\ s a -> s{_lHidden = a})
 
 -- | Whether viewers and commenters are prevented from downloading, printing,
 -- and copying this file.
-flRestricted :: Lens' FileLabels (Maybe Bool)
-flRestricted
-  = lens _flRestricted (\ s a -> s{_flRestricted = a})
+lRestricted :: Lens' Labels (Maybe Bool)
+lRestricted
+  = lens _lRestricted (\ s a -> s{_lRestricted = a})
 
-instance FromJSON FileLabels where
+instance FromJSON Labels where
         parseJSON
-          = withObject "FileLabels"
+          = withObject "Labels"
               (\ o ->
-                 FileLabels <$>
+                 Labels <$>
                    (o .:? "viewed") <*> (o .:? "trashed") <*>
                      (o .:? "starred")
                      <*> (o .:? "hidden")
                      <*> (o .:? "restricted"))
 
-instance ToJSON FileLabels where
-        toJSON FileLabels{..}
+instance ToJSON Labels where
+        toJSON Labels{..}
           = object
               (catMaybes
-                 [("viewed" .=) <$> _flViewed,
-                  ("trashed" .=) <$> _flTrashed,
-                  ("starred" .=) <$> _flStarred,
-                  ("hidden" .=) <$> _flHidden,
-                  ("restricted" .=) <$> _flRestricted])
+                 [("viewed" .=) <$> _lViewed,
+                  ("trashed" .=) <$> _lTrashed,
+                  ("starred" .=) <$> _lStarred,
+                  ("hidden" .=) <$> _lHidden,
+                  ("restricted" .=) <$> _lRestricted])
+
+--
+-- /See:/ 'iconsItem' smart constructor.
+data IconsItem = IconsItem
+    { _iiSize     :: !(Maybe Int32)
+    , _iiCategory :: !(Maybe Text)
+    , _iiIconURL  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'IconsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iiSize'
+--
+-- * 'iiCategory'
+--
+-- * 'iiIconURL'
+iconsItem
+    :: IconsItem
+iconsItem =
+    IconsItem
+    { _iiSize = Nothing
+    , _iiCategory = Nothing
+    , _iiIconURL = Nothing
+    }
+
+-- | Size of the icon. Represented as the maximum of the width and height.
+iiSize :: Lens' IconsItem (Maybe Int32)
+iiSize = lens _iiSize (\ s a -> s{_iiSize = a})
+
+-- | Category of the icon. Allowed values are: - application - icon for the
+-- application - document - icon for a file associated with the app -
+-- documentShared - icon for a shared file associated with the app
+iiCategory :: Lens' IconsItem (Maybe Text)
+iiCategory
+  = lens _iiCategory (\ s a -> s{_iiCategory = a})
+
+-- | URL for the icon.
+iiIconURL :: Lens' IconsItem (Maybe Text)
+iiIconURL
+  = lens _iiIconURL (\ s a -> s{_iiIconURL = a})
+
+instance FromJSON IconsItem where
+        parseJSON
+          = withObject "IconsItem"
+              (\ o ->
+                 IconsItem <$>
+                   (o .:? "size") <*> (o .:? "category") <*>
+                     (o .:? "iconUrl"))
+
+instance ToJSON IconsItem where
+        toJSON IconsItem{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _iiSize,
+                  ("category" .=) <$> _iiCategory,
+                  ("iconUrl" .=) <$> _iiIconURL])
+
+--
+-- /See:/ 'importFormatsItem' smart constructor.
+data ImportFormatsItem = ImportFormatsItem
+    { _ifiTargets :: !(Maybe [Text])
+    , _ifiSource  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ImportFormatsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ifiTargets'
+--
+-- * 'ifiSource'
+importFormatsItem
+    :: ImportFormatsItem
+importFormatsItem =
+    ImportFormatsItem
+    { _ifiTargets = Nothing
+    , _ifiSource = Nothing
+    }
+
+-- | The possible content types to convert to.
+ifiTargets :: Lens' ImportFormatsItem [Text]
+ifiTargets
+  = lens _ifiTargets (\ s a -> s{_ifiTargets = a}) .
+      _Default
+      . _Coerce
+
+-- | The imported file\'s content type to convert from.
+ifiSource :: Lens' ImportFormatsItem (Maybe Text)
+ifiSource
+  = lens _ifiSource (\ s a -> s{_ifiSource = a})
+
+instance FromJSON ImportFormatsItem where
+        parseJSON
+          = withObject "ImportFormatsItem"
+              (\ o ->
+                 ImportFormatsItem <$>
+                   (o .:? "targets" .!= mempty) <*> (o .:? "source"))
+
+instance ToJSON ImportFormatsItem where
+        toJSON ImportFormatsItem{..}
+          = object
+              (catMaybes
+                 [("targets" .=) <$> _ifiTargets,
+                  ("source" .=) <$> _ifiSource])
+
+-- | Metadata about video media. This will only be present for video types.
+--
+-- /See:/ 'videoMediaMetadata' smart constructor.
+data VideoMediaMetadata = VideoMediaMetadata
+    { _vmmHeight         :: !(Maybe Int32)
+    , _vmmWidth          :: !(Maybe Int32)
+    , _vmmDurationMillis :: !(Maybe Int64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoMediaMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vmmHeight'
+--
+-- * 'vmmWidth'
+--
+-- * 'vmmDurationMillis'
+videoMediaMetadata
+    :: VideoMediaMetadata
+videoMediaMetadata =
+    VideoMediaMetadata
+    { _vmmHeight = Nothing
+    , _vmmWidth = Nothing
+    , _vmmDurationMillis = Nothing
+    }
+
+-- | The height of the video in pixels.
+vmmHeight :: Lens' VideoMediaMetadata (Maybe Int32)
+vmmHeight
+  = lens _vmmHeight (\ s a -> s{_vmmHeight = a})
+
+-- | The width of the video in pixels.
+vmmWidth :: Lens' VideoMediaMetadata (Maybe Int32)
+vmmWidth = lens _vmmWidth (\ s a -> s{_vmmWidth = a})
+
+-- | The duration of the video in milliseconds.
+vmmDurationMillis :: Lens' VideoMediaMetadata (Maybe Int64)
+vmmDurationMillis
+  = lens _vmmDurationMillis
+      (\ s a -> s{_vmmDurationMillis = a})
+
+instance FromJSON VideoMediaMetadata where
+        parseJSON
+          = withObject "VideoMediaMetadata"
+              (\ o ->
+                 VideoMediaMetadata <$>
+                   (o .:? "height") <*> (o .:? "width") <*>
+                     (o .:? "durationMillis"))
+
+instance ToJSON VideoMediaMetadata where
+        toJSON VideoMediaMetadata{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _vmmHeight,
+                  ("width" .=) <$> _vmmWidth,
+                  ("durationMillis" .=) <$> _vmmDurationMillis])
+
+--
+-- /See:/ 'roleSetsItem' smart constructor.
+data RoleSetsItem = RoleSetsItem
+    { _rsiPrimaryRole     :: !(Maybe Text)
+    , _rsiAdditionalRoles :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RoleSetsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rsiPrimaryRole'
+--
+-- * 'rsiAdditionalRoles'
+roleSetsItem
+    :: RoleSetsItem
+roleSetsItem =
+    RoleSetsItem
+    { _rsiPrimaryRole = Nothing
+    , _rsiAdditionalRoles = Nothing
+    }
+
+-- | A primary permission role.
+rsiPrimaryRole :: Lens' RoleSetsItem (Maybe Text)
+rsiPrimaryRole
+  = lens _rsiPrimaryRole
+      (\ s a -> s{_rsiPrimaryRole = a})
+
+-- | The supported additional roles with the primary role.
+rsiAdditionalRoles :: Lens' RoleSetsItem [Text]
+rsiAdditionalRoles
+  = lens _rsiAdditionalRoles
+      (\ s a -> s{_rsiAdditionalRoles = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON RoleSetsItem where
+        parseJSON
+          = withObject "RoleSetsItem"
+              (\ o ->
+                 RoleSetsItem <$>
+                   (o .:? "primaryRole") <*>
+                     (o .:? "additionalRoles" .!= mempty))
+
+instance ToJSON RoleSetsItem where
+        toJSON RoleSetsItem{..}
+          = object
+              (catMaybes
+                 [("primaryRole" .=) <$> _rsiPrimaryRole,
+                  ("additionalRoles" .=) <$> _rsiAdditionalRoles])
 
 -- | A revision of a file.
 --
@@ -2886,11 +2852,11 @@ data Revision = Revision
     , _rSelfLink               :: !(Maybe Text)
     , _rLastModifyingUserName  :: !(Maybe Text)
     , _rDownloadURL            :: !(Maybe Text)
-    , _rExportLinks            :: !(Maybe RevisionExportLinks)
+    , _rExportLinks            :: !(Maybe ExportLinks)
     , _rPublishedOutsideDomain :: !(Maybe Bool)
     , _rId                     :: !(Maybe Text)
     , _rModifiedDate           :: !(Maybe DateTime')
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Revision' with the minimum fields required to make a request.
 --
@@ -3037,7 +3003,7 @@ rDownloadURL
   = lens _rDownloadURL (\ s a -> s{_rDownloadURL = a})
 
 -- | Links for exporting Google Docs to specific formats.
-rExportLinks :: Lens' Revision (Maybe RevisionExportLinks)
+rExportLinks :: Lens' Revision (Maybe ExportLinks)
 rExportLinks
   = lens _rExportLinks (\ s a -> s{_rExportLinks = a})
 
@@ -3125,7 +3091,7 @@ data Permission = Permission
     , _perEmailAddress    :: !(Maybe Text)
     , _perId              :: !(Maybe Text)
     , _perType            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Permission' with the minimum fields required to make a request.
 --
@@ -3299,7 +3265,7 @@ instance ToJSON Permission where
 data Comment = Comment
     { _ccStatus       :: !(Maybe Text)
     , _ccHTMLContent  :: !(Maybe Text)
-    , _ccContext      :: !(Maybe CommentContext)
+    , _ccContext      :: !(Maybe Context)
     , _ccKind         :: !Text
     , _ccFileTitle    :: !(Maybe Text)
     , _ccAnchor       :: !(Maybe Text)
@@ -3312,7 +3278,7 @@ data Comment = Comment
     , _ccDeleted      :: !(Maybe Bool)
     , _ccFileId       :: !(Maybe Text)
     , _ccCommentId    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Comment' with the minimum fields required to make a request.
 --
@@ -3382,7 +3348,7 @@ ccHTMLContent
       (\ s a -> s{_ccHTMLContent = a})
 
 -- | The context of the file which is being commented on.
-ccContext :: Lens' Comment (Maybe CommentContext)
+ccContext :: Lens' Comment (Maybe Context)
 ccContext
   = lens _ccContext (\ s a -> s{_ccContext = a})
 
@@ -3494,13 +3460,60 @@ instance ToJSON Comment where
                   ("fileId" .=) <$> _ccFileId,
                   ("commentId" .=) <$> _ccCommentId])
 
+--
+-- /See:/ 'additionalRoleInfoItem' smart constructor.
+data AdditionalRoleInfoItem = AdditionalRoleInfoItem
+    { _ariiRoleSets :: !(Maybe [RoleSetsItem])
+    , _ariiType     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AdditionalRoleInfoItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ariiRoleSets'
+--
+-- * 'ariiType'
+additionalRoleInfoItem
+    :: AdditionalRoleInfoItem
+additionalRoleInfoItem =
+    AdditionalRoleInfoItem
+    { _ariiRoleSets = Nothing
+    , _ariiType = Nothing
+    }
+
+-- | The supported additional roles per primary role.
+ariiRoleSets :: Lens' AdditionalRoleInfoItem [RoleSetsItem]
+ariiRoleSets
+  = lens _ariiRoleSets (\ s a -> s{_ariiRoleSets = a})
+      . _Default
+      . _Coerce
+
+-- | The content type that this additional role info applies to.
+ariiType :: Lens' AdditionalRoleInfoItem (Maybe Text)
+ariiType = lens _ariiType (\ s a -> s{_ariiType = a})
+
+instance FromJSON AdditionalRoleInfoItem where
+        parseJSON
+          = withObject "AdditionalRoleInfoItem"
+              (\ o ->
+                 AdditionalRoleInfoItem <$>
+                   (o .:? "roleSets" .!= mempty) <*> (o .:? "type"))
+
+instance ToJSON AdditionalRoleInfoItem where
+        toJSON AdditionalRoleInfoItem{..}
+          = object
+              (catMaybes
+                 [("roleSets" .=) <$> _ariiRoleSets,
+                  ("type" .=) <$> _ariiType])
+
 -- | An ID for a user or group as seen in Permission items.
 --
 -- /See:/ 'permissionId' smart constructor.
 data PermissionId = PermissionId
     { _piKind :: !Text
     , _piId   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionId' with the minimum fields required to make a request.
 --
@@ -3546,14 +3559,14 @@ data File = File
     { _fOwnedByMe             :: !(Maybe Bool)
     , _fThumbnailLink         :: !(Maybe Text)
     , _fFullFileExtension     :: !(Maybe Text)
-    , _fThumbnail             :: !(Maybe FileThumbnail)
+    , _fThumbnail             :: !(Maybe Thumbnail)
     , _fMarkedViewedByMeDate  :: !(Maybe DateTime')
     , _fEtag                  :: !(Maybe Text)
     , _fFileExtension         :: !(Maybe Text)
     , _fCanComment            :: !(Maybe Bool)
     , _fOwners                :: !(Maybe [User])
     , _fOwnerNames            :: !(Maybe [Text])
-    , _fOpenWithLinks         :: !(Maybe FileOpenWithLinks)
+    , _fOpenWithLinks         :: !(Maybe OpenWithLinks)
     , _fWebViewLink           :: !(Maybe Text)
     , _fOriginalFilename      :: !(Maybe Text)
     , _fKind                  :: !Text
@@ -3562,7 +3575,7 @@ data File = File
     , _fEmbedLink             :: !(Maybe Text)
     , _fFileSize              :: !(Maybe Int64)
     , _fAppDataContents       :: !(Maybe Bool)
-    , _fImageMediaMetadata    :: !(Maybe FileImageMediaMetadata)
+    , _fImageMediaMetadata    :: !(Maybe ImageMediaMetadata)
     , _fExplicitlyTrashed     :: !(Maybe Bool)
     , _fEditable              :: !(Maybe Bool)
     , _fModifiedByMeDate      :: !(Maybe DateTime')
@@ -3586,20 +3599,20 @@ data File = File
     , _fWritersCanShare       :: !(Maybe Bool)
     , _fDefaultOpenWithLink   :: !(Maybe Text)
     , _fId                    :: !(Maybe Text)
-    , _fLabels                :: !(Maybe FileLabels)
+    , _fLabels                :: !(Maybe Labels)
     , _fModifiedDate          :: !(Maybe DateTime')
     , _fPermissions           :: !(Maybe [Permission])
     , _fQuotaBytesUsed        :: !(Maybe Int64)
     , _fTitle                 :: !(Maybe Text)
     , _fAlternateLink         :: !(Maybe Text)
-    , _fVideoMediaMetadata    :: !(Maybe FileVideoMediaMetadata)
+    , _fVideoMediaMetadata    :: !(Maybe VideoMediaMetadata)
     , _fHeadRevisionId        :: !(Maybe Text)
     , _fDescription           :: !(Maybe Text)
     , _fSharingUser           :: !(Maybe User)
     , _fWebContentLink        :: !(Maybe Text)
     , _fProperties            :: !(Maybe [Property])
-    , _fIndexableText         :: !(Maybe FileIndexableText)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    , _fIndexableText         :: !(Maybe IndexableText)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'File' with the minimum fields required to make a request.
 --
@@ -3803,7 +3816,7 @@ fFullFileExtension
 
 -- | Thumbnail for the file. Only accepted on upload and for files that are
 -- not already thumbnailed by Google.
-fThumbnail :: Lens' File (Maybe FileThumbnail)
+fThumbnail :: Lens' File (Maybe Thumbnail)
 fThumbnail
   = lens _fThumbnail (\ s a -> s{_fThumbnail = a})
 
@@ -3849,7 +3862,7 @@ fOwnerNames
 -- | A map of the id of each of the user\'s apps to a link to open this file
 -- with that app. Only populated when the drive.apps.readonly scope is
 -- used.
-fOpenWithLinks :: Lens' File (Maybe FileOpenWithLinks)
+fOpenWithLinks :: Lens' File (Maybe OpenWithLinks)
 fOpenWithLinks
   = lens _fOpenWithLinks
       (\ s a -> s{_fOpenWithLinks = a})
@@ -3906,7 +3919,7 @@ fAppDataContents
 -- | Metadata about image media. This will only be present for image types,
 -- and its contents will depend on what can be parsed from the image
 -- content.
-fImageMediaMetadata :: Lens' File (Maybe FileImageMediaMetadata)
+fImageMediaMetadata :: Lens' File (Maybe ImageMediaMetadata)
 fImageMediaMetadata
   = lens _fImageMediaMetadata
       (\ s a -> s{_fImageMediaMetadata = a})
@@ -4059,7 +4072,7 @@ fId :: Lens' File (Maybe Text)
 fId = lens _fId (\ s a -> s{_fId = a})
 
 -- | A group of labels for the file.
-fLabels :: Lens' File (Maybe FileLabels)
+fLabels :: Lens' File (Maybe Labels)
 fLabels = lens _fLabels (\ s a -> s{_fLabels = a})
 
 -- | Last time this file was modified by anyone (formatted RFC 3339
@@ -4095,7 +4108,7 @@ fAlternateLink
       (\ s a -> s{_fAlternateLink = a})
 
 -- | Metadata about video media. This will only be present for video types.
-fVideoMediaMetadata :: Lens' File (Maybe FileVideoMediaMetadata)
+fVideoMediaMetadata :: Lens' File (Maybe VideoMediaMetadata)
 fVideoMediaMetadata
   = lens _fVideoMediaMetadata
       (\ s a -> s{_fVideoMediaMetadata = a})
@@ -4134,7 +4147,7 @@ fProperties
       . _Coerce
 
 -- | Indexable text attributes for the file (can only be written)
-fIndexableText :: Lens' File (Maybe FileIndexableText)
+fIndexableText :: Lens' File (Maybe IndexableText)
 fIndexableText
   = lens _fIndexableText
       (\ s a -> s{_fIndexableText = a})
@@ -4270,7 +4283,7 @@ data ParentList = ParentList
     , _parKind     :: !Text
     , _parItems    :: !(Maybe [ParentReference])
     , _parSelfLink :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ParentList' with the minimum fields required to make a request.
 --
@@ -4332,51 +4345,52 @@ instance ToJSON ParentList where
                   ("selfLink" .=) <$> _parSelfLink])
 
 --
--- /See:/ 'aboutAdditionalRoleInfo' smart constructor.
-data AboutAdditionalRoleInfo = AboutAdditionalRoleInfo
-    { _aariRoleSets :: !(Maybe [AboutAdditionalRoleInfoRoleSets])
-    , _aariType     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'exportFormatsItem' smart constructor.
+data ExportFormatsItem = ExportFormatsItem
+    { _efiTargets :: !(Maybe [Text])
+    , _efiSource  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AboutAdditionalRoleInfo' with the minimum fields required to make a request.
+-- | Creates a value of 'ExportFormatsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aariRoleSets'
+-- * 'efiTargets'
 --
--- * 'aariType'
-aboutAdditionalRoleInfo
-    :: AboutAdditionalRoleInfo
-aboutAdditionalRoleInfo =
-    AboutAdditionalRoleInfo
-    { _aariRoleSets = Nothing
-    , _aariType = Nothing
+-- * 'efiSource'
+exportFormatsItem
+    :: ExportFormatsItem
+exportFormatsItem =
+    ExportFormatsItem
+    { _efiTargets = Nothing
+    , _efiSource = Nothing
     }
 
--- | The supported additional roles per primary role.
-aariRoleSets :: Lens' AboutAdditionalRoleInfo [AboutAdditionalRoleInfoRoleSets]
-aariRoleSets
-  = lens _aariRoleSets (\ s a -> s{_aariRoleSets = a})
-      . _Default
+-- | The possible content types to convert to.
+efiTargets :: Lens' ExportFormatsItem [Text]
+efiTargets
+  = lens _efiTargets (\ s a -> s{_efiTargets = a}) .
+      _Default
       . _Coerce
 
--- | The content type that this additional role info applies to.
-aariType :: Lens' AboutAdditionalRoleInfo (Maybe Text)
-aariType = lens _aariType (\ s a -> s{_aariType = a})
+-- | The content type to convert from.
+efiSource :: Lens' ExportFormatsItem (Maybe Text)
+efiSource
+  = lens _efiSource (\ s a -> s{_efiSource = a})
 
-instance FromJSON AboutAdditionalRoleInfo where
+instance FromJSON ExportFormatsItem where
         parseJSON
-          = withObject "AboutAdditionalRoleInfo"
+          = withObject "ExportFormatsItem"
               (\ o ->
-                 AboutAdditionalRoleInfo <$>
-                   (o .:? "roleSets" .!= mempty) <*> (o .:? "type"))
+                 ExportFormatsItem <$>
+                   (o .:? "targets" .!= mempty) <*> (o .:? "source"))
 
-instance ToJSON AboutAdditionalRoleInfo where
-        toJSON AboutAdditionalRoleInfo{..}
+instance ToJSON ExportFormatsItem where
+        toJSON ExportFormatsItem{..}
           = object
               (catMaybes
-                 [("roleSets" .=) <$> _aariRoleSets,
-                  ("type" .=) <$> _aariType])
+                 [("targets" .=) <$> _efiTargets,
+                  ("source" .=) <$> _efiSource])
 
 -- | A list of revisions of a file.
 --
@@ -4386,7 +4400,7 @@ data RevisionList = RevisionList
     , _rlKind     :: !Text
     , _rlItems    :: !(Maybe [Revision])
     , _rlSelfLink :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RevisionList' with the minimum fields required to make a request.
 --
@@ -4454,7 +4468,7 @@ data PermissionList = PermissionList
     , _pllKind     :: !Text
     , _pllItems    :: !(Maybe [Permission])
     , _pllSelfLink :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionList' with the minimum fields required to make a request.
 --
@@ -4520,7 +4534,7 @@ instance ToJSON PermissionList where
 -- /See:/ 'fileExportLinks' smart constructor.
 data FileExportLinks =
     FileExportLinks
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FileExportLinks' with the minimum fields required to make a request.
 --
@@ -4543,7 +4557,7 @@ data GeneratedIds = GeneratedIds
     { _giSpace :: !(Maybe Text)
     , _giKind  :: !Text
     , _giIds   :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeneratedIds' with the minimum fields required to make a request.
 --
@@ -4593,64 +4607,6 @@ instance ToJSON GeneratedIds where
                  [("space" .=) <$> _giSpace, Just ("kind" .= _giKind),
                   ("ids" .=) <$> _giIds])
 
---
--- /See:/ 'appIcons' smart constructor.
-data AppIcons = AppIcons
-    { _aiSize     :: !(Maybe Int32)
-    , _aiCategory :: !(Maybe Text)
-    , _aiIconURL  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AppIcons' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aiSize'
---
--- * 'aiCategory'
---
--- * 'aiIconURL'
-appIcons
-    :: AppIcons
-appIcons =
-    AppIcons
-    { _aiSize = Nothing
-    , _aiCategory = Nothing
-    , _aiIconURL = Nothing
-    }
-
--- | Size of the icon. Represented as the maximum of the width and height.
-aiSize :: Lens' AppIcons (Maybe Int32)
-aiSize = lens _aiSize (\ s a -> s{_aiSize = a})
-
--- | Category of the icon. Allowed values are: - application - icon for the
--- application - document - icon for a file associated with the app -
--- documentShared - icon for a shared file associated with the app
-aiCategory :: Lens' AppIcons (Maybe Text)
-aiCategory
-  = lens _aiCategory (\ s a -> s{_aiCategory = a})
-
--- | URL for the icon.
-aiIconURL :: Lens' AppIcons (Maybe Text)
-aiIconURL
-  = lens _aiIconURL (\ s a -> s{_aiIconURL = a})
-
-instance FromJSON AppIcons where
-        parseJSON
-          = withObject "AppIcons"
-              (\ o ->
-                 AppIcons <$>
-                   (o .:? "size") <*> (o .:? "category") <*>
-                     (o .:? "iconUrl"))
-
-instance ToJSON AppIcons where
-        toJSON AppIcons{..}
-          = object
-              (catMaybes
-                 [("size" .=) <$> _aiSize,
-                  ("category" .=) <$> _aiCategory,
-                  ("iconUrl" .=) <$> _aiIconURL])
-
 -- | A JSON representation of a list of comments on a file in Google Drive.
 --
 -- /See:/ 'commentList' smart constructor.
@@ -4660,7 +4616,7 @@ data CommentList = CommentList
     , _comoKind          :: !Text
     , _comoItems         :: !(Maybe [Comment])
     , _comoSelfLink      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentList' with the minimum fields required to make a request.
 --
@@ -4732,3 +4688,35 @@ instance ToJSON CommentList where
                   Just ("kind" .= _comoKind),
                   ("items" .=) <$> _comoItems,
                   ("selfLink" .=) <$> _comoSelfLink])
+
+-- | Indexable text attributes for the file (can only be written)
+--
+-- /See:/ 'indexableText' smart constructor.
+newtype IndexableText = IndexableText
+    { _itText :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'IndexableText' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'itText'
+indexableText
+    :: IndexableText
+indexableText =
+    IndexableText
+    { _itText = Nothing
+    }
+
+-- | The text to be indexed for this file.
+itText :: Lens' IndexableText (Maybe Text)
+itText = lens _itText (\ s a -> s{_itText = a})
+
+instance FromJSON IndexableText where
+        parseJSON
+          = withObject "IndexableText"
+              (\ o -> IndexableText <$> (o .:? "text"))
+
+instance ToJSON IndexableText where
+        toJSON IndexableText{..}
+          = object (catMaybes [("text" .=) <$> _itText])

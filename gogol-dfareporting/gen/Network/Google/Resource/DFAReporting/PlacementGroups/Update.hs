@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.Update
     , pguPrettyPrint
     , pguUserIP
     , pguProfileId
+    , pguPayload
     , pguKey
     , pguOAuthToken
-    , pguPlacementGroup
     , pguFields
     ) where
 
@@ -63,15 +64,15 @@ type PlacementGroupsUpdateResource =
 --
 -- /See:/ 'placementGroupsUpdate'' smart constructor.
 data PlacementGroupsUpdate' = PlacementGroupsUpdate'
-    { _pguQuotaUser      :: !(Maybe Text)
-    , _pguPrettyPrint    :: !Bool
-    , _pguUserIP         :: !(Maybe Text)
-    , _pguProfileId      :: !Int64
-    , _pguKey            :: !(Maybe Key)
-    , _pguOAuthToken     :: !(Maybe OAuthToken)
-    , _pguPlacementGroup :: !PlacementGroup
-    , _pguFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _pguQuotaUser   :: !(Maybe Text)
+    , _pguPrettyPrint :: !Bool
+    , _pguUserIP      :: !(Maybe Text)
+    , _pguProfileId   :: !Int64
+    , _pguPayload     :: !PlacementGroup
+    , _pguKey         :: !(Maybe Key)
+    , _pguOAuthToken  :: !(Maybe OAuthToken)
+    , _pguFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementGroupsUpdate'' with the minimum fields required to make a request.
 --
@@ -85,26 +86,26 @@ data PlacementGroupsUpdate' = PlacementGroupsUpdate'
 --
 -- * 'pguProfileId'
 --
+-- * 'pguPayload'
+--
 -- * 'pguKey'
 --
 -- * 'pguOAuthToken'
 --
--- * 'pguPlacementGroup'
---
 -- * 'pguFields'
 placementGroupsUpdate'
     :: Int64 -- ^ 'profileId'
-    -> PlacementGroup -- ^ 'PlacementGroup'
+    -> PlacementGroup -- ^ 'payload'
     -> PlacementGroupsUpdate'
-placementGroupsUpdate' pPguProfileId_ pPguPlacementGroup_ =
+placementGroupsUpdate' pPguProfileId_ pPguPayload_ =
     PlacementGroupsUpdate'
     { _pguQuotaUser = Nothing
     , _pguPrettyPrint = True
     , _pguUserIP = Nothing
     , _pguProfileId = pPguProfileId_
+    , _pguPayload = pPguPayload_
     , _pguKey = Nothing
     , _pguOAuthToken = Nothing
-    , _pguPlacementGroup = pPguPlacementGroup_
     , _pguFields = Nothing
     }
 
@@ -132,6 +133,11 @@ pguProfileId :: Lens' PlacementGroupsUpdate' Int64
 pguProfileId
   = lens _pguProfileId (\ s a -> s{_pguProfileId = a})
 
+-- | Multipart request metadata.
+pguPayload :: Lens' PlacementGroupsUpdate' PlacementGroup
+pguPayload
+  = lens _pguPayload (\ s a -> s{_pguPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -143,12 +149,6 @@ pguOAuthToken :: Lens' PlacementGroupsUpdate' (Maybe OAuthToken)
 pguOAuthToken
   = lens _pguOAuthToken
       (\ s a -> s{_pguOAuthToken = a})
-
--- | Multipart request metadata.
-pguPlacementGroup :: Lens' PlacementGroupsUpdate' PlacementGroup
-pguPlacementGroup
-  = lens _pguPlacementGroup
-      (\ s a -> s{_pguPlacementGroup = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pguFields :: Lens' PlacementGroupsUpdate' (Maybe Text)
@@ -170,7 +170,7 @@ instance GoogleRequest PlacementGroupsUpdate' where
               _pguKey
               _pguOAuthToken
               (Just AltJSON)
-              _pguPlacementGroup
+              _pguPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementGroupsUpdateResource)

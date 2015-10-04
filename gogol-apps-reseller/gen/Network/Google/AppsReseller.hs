@@ -70,11 +70,24 @@ module Network.Google.AppsReseller
 
     -- * Types
 
-    -- ** SubscriptionTrialSettings
-    , SubscriptionTrialSettings
-    , subscriptionTrialSettings
-    , stsIsInTrial
-    , stsTrialEndTime
+    -- ** CommitmentInterval
+    , CommitmentInterval
+    , commitmentInterval
+    , ciStartTime
+    , ciEndTime
+
+    -- ** TrialSettings
+    , TrialSettings
+    , trialSettings
+    , tsIsInTrial
+    , tsTrialEndTime
+
+    -- ** Plan
+    , Plan
+    , plan
+    , pCommitmentInterval
+    , pIsCommitmentPlan
+    , pPlanName
 
     -- ** Address
     , Address
@@ -90,6 +103,9 @@ module Network.Google.AppsReseller
     , aRegion
     , aAddressLine3
 
+    -- ** DeletionType
+    , DeletionType (..)
+
     -- ** Customer
     , Customer
     , customer
@@ -101,12 +117,6 @@ module Network.Google.AppsReseller
     , cPhoneNumber
     , cPostalAddress
 
-    -- ** SubscriptionPlanCommitmentInterval
-    , SubscriptionPlanCommitmentInterval
-    , subscriptionPlanCommitmentInterval
-    , spciStartTime
-    , spciEndTime
-
     -- ** ChangePlanRequest
     , ChangePlanRequest
     , changePlanRequest
@@ -114,6 +124,12 @@ module Network.Google.AppsReseller
     , cprPlanName
     , cprPurchaseOrderId
     , cprSeats
+
+    -- ** TransferInfo
+    , TransferInfo
+    , transferInfo
+    , tiTransferabilityExpirationTime
+    , tiMinimumTransferableSeats
 
     -- ** Seats
     , Seats
@@ -130,16 +146,6 @@ module Network.Google.AppsReseller
     , subKind
     , subSubscriptions
 
-    -- ** SubscriptionPlan
-    , SubscriptionPlan
-    , subscriptionPlan
-    , spCommitmentInterval
-    , spIsCommitmentPlan
-    , spPlanName
-
-    -- ** ResellerSubscriptionsDeleteDeletionType
-    , ResellerSubscriptionsDeleteDeletionType (..)
-
     -- ** Subscription
     , Subscription
     , subscription
@@ -149,7 +155,7 @@ module Network.Google.AppsReseller
     , subuTrialSettings
     , subuResourceUiURL
     , subuKind
-    , subuSkuId
+    , subuSKUId
     , subuPlan
     , subuCustomerId
     , subuSuspensionReasons
@@ -164,12 +170,6 @@ module Network.Google.AppsReseller
     , renewalSettings
     , rsKind
     , rsRenewalType
-
-    -- ** SubscriptionTransferInfo
-    , SubscriptionTransferInfo
-    , subscriptionTransferInfo
-    , stiTransferabilityExpirationTime
-    , stiMinimumTransferableSeats
     ) where
 
 import           Network.Google.AppsReseller.Types

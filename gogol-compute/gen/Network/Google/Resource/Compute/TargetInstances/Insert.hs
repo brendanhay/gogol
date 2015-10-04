@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.Compute.TargetInstances.Insert
     , tiiPrettyPrint
     , tiiProject
     , tiiUserIP
-    , tiiTargetInstance
     , tiiZone
+    , tiiPayload
     , tiiKey
     , tiiOAuthToken
     , tiiFields
@@ -67,16 +68,16 @@ type TargetInstancesInsertResource =
 --
 -- /See:/ 'targetInstancesInsert'' smart constructor.
 data TargetInstancesInsert' = TargetInstancesInsert'
-    { _tiiQuotaUser      :: !(Maybe Text)
-    , _tiiPrettyPrint    :: !Bool
-    , _tiiProject        :: !Text
-    , _tiiUserIP         :: !(Maybe Text)
-    , _tiiTargetInstance :: !TargetInstance
-    , _tiiZone           :: !Text
-    , _tiiKey            :: !(Maybe Key)
-    , _tiiOAuthToken     :: !(Maybe OAuthToken)
-    , _tiiFields         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _tiiQuotaUser   :: !(Maybe Text)
+    , _tiiPrettyPrint :: !Bool
+    , _tiiProject     :: !Text
+    , _tiiUserIP      :: !(Maybe Text)
+    , _tiiZone        :: !Text
+    , _tiiPayload     :: !TargetInstance
+    , _tiiKey         :: !(Maybe Key)
+    , _tiiOAuthToken  :: !(Maybe OAuthToken)
+    , _tiiFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetInstancesInsert'' with the minimum fields required to make a request.
 --
@@ -90,9 +91,9 @@ data TargetInstancesInsert' = TargetInstancesInsert'
 --
 -- * 'tiiUserIP'
 --
--- * 'tiiTargetInstance'
---
 -- * 'tiiZone'
+--
+-- * 'tiiPayload'
 --
 -- * 'tiiKey'
 --
@@ -101,17 +102,17 @@ data TargetInstancesInsert' = TargetInstancesInsert'
 -- * 'tiiFields'
 targetInstancesInsert'
     :: Text -- ^ 'project'
-    -> TargetInstance -- ^ 'TargetInstance'
     -> Text -- ^ 'zone'
+    -> TargetInstance -- ^ 'payload'
     -> TargetInstancesInsert'
-targetInstancesInsert' pTiiProject_ pTiiTargetInstance_ pTiiZone_ =
+targetInstancesInsert' pTiiProject_ pTiiZone_ pTiiPayload_ =
     TargetInstancesInsert'
     { _tiiQuotaUser = Nothing
     , _tiiPrettyPrint = True
     , _tiiProject = pTiiProject_
     , _tiiUserIP = Nothing
-    , _tiiTargetInstance = pTiiTargetInstance_
     , _tiiZone = pTiiZone_
+    , _tiiPayload = pTiiPayload_
     , _tiiKey = Nothing
     , _tiiOAuthToken = Nothing
     , _tiiFields = Nothing
@@ -141,15 +142,14 @@ tiiUserIP :: Lens' TargetInstancesInsert' (Maybe Text)
 tiiUserIP
   = lens _tiiUserIP (\ s a -> s{_tiiUserIP = a})
 
--- | Multipart request metadata.
-tiiTargetInstance :: Lens' TargetInstancesInsert' TargetInstance
-tiiTargetInstance
-  = lens _tiiTargetInstance
-      (\ s a -> s{_tiiTargetInstance = a})
-
 -- | Name of the zone scoping this request.
 tiiZone :: Lens' TargetInstancesInsert' Text
 tiiZone = lens _tiiZone (\ s a -> s{_tiiZone = a})
+
+-- | Multipart request metadata.
+tiiPayload :: Lens' TargetInstancesInsert' TargetInstance
+tiiPayload
+  = lens _tiiPayload (\ s a -> s{_tiiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -183,7 +183,7 @@ instance GoogleRequest TargetInstancesInsert' where
               _tiiKey
               _tiiOAuthToken
               (Just AltJSON)
-              _tiiTargetInstance
+              _tiiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetInstancesInsertResource)

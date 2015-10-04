@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,13 +53,13 @@ import           Network.Google.Prelude
 -- 'FilesList'' request conforms to.
 type FilesListResource =
      "files" :>
-       QueryParam "corpus" DriveFilesListCorpus :>
-         QueryParam "maxResults" Int32 :>
-           QueryParam "orderBy" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "projection" DriveFilesListProjection :>
-                 QueryParam "q" Text :>
-                   QueryParam "spaces" Text :>
+       QueryParam "orderBy" Text :>
+         QueryParam "q" Text :>
+           QueryParam "spaces" Text :>
+             QueryParam "projection" Projection :>
+               QueryParam "corpus" Corpus :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Int32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -79,13 +80,13 @@ data FilesList' = FilesList'
     , _flQ           :: !(Maybe Text)
     , _flKey         :: !(Maybe Key)
     , _flSpaces      :: !(Maybe Text)
-    , _flProjection  :: !(Maybe DriveFilesListProjection)
-    , _flCorpus      :: !(Maybe DriveFilesListCorpus)
+    , _flProjection  :: !(Maybe Projection)
+    , _flCorpus      :: !(Maybe Corpus)
     , _flPageToken   :: !(Maybe Text)
     , _flOAuthToken  :: !(Maybe OAuthToken)
     , _flMaxResults  :: !Int32
     , _flFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesList'' with the minimum fields required to make a request.
 --
@@ -181,12 +182,12 @@ flSpaces :: Lens' FilesList' (Maybe Text)
 flSpaces = lens _flSpaces (\ s a -> s{_flSpaces = a})
 
 -- | This parameter is deprecated and has no function.
-flProjection :: Lens' FilesList' (Maybe DriveFilesListProjection)
+flProjection :: Lens' FilesList' (Maybe Projection)
 flProjection
   = lens _flProjection (\ s a -> s{_flProjection = a})
 
 -- | The body of items (files\/documents) to which the query applies.
-flCorpus :: Lens' FilesList' (Maybe DriveFilesListCorpus)
+flCorpus :: Lens' FilesList' (Maybe Corpus)
 flCorpus = lens _flCorpus (\ s a -> s{_flCorpus = a})
 
 -- | Page token for files.
@@ -216,11 +217,10 @@ instance GoogleRequest FilesList' where
         type Rs FilesList' = FileList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesList'{..}
-          = go _flCorpus (Just _flMaxResults) _flOrderBy
+          = go _flOrderBy _flQ _flSpaces _flProjection
+              _flCorpus
               _flPageToken
-              _flProjection
-              _flQ
-              _flSpaces
+              (Just _flMaxResults)
               _flQuotaUser
               (Just _flPrettyPrint)
               _flUserIP

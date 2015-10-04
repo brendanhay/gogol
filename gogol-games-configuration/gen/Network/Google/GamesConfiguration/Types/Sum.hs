@@ -18,7 +18,7 @@ module Network.Google.GamesConfiguration.Types.Sum where
 import           Network.Google.Prelude
 
 -- | Selects which image in a resource for this method.
-data GamesConfigurationImageConfigurationsUploadImageType
+data ImageType
     = AchievementIcon
       -- ^ @ACHIEVEMENT_ICON@
       -- The icon image for an achievement resource.
@@ -27,21 +27,21 @@ data GamesConfigurationImageConfigurationsUploadImageType
       -- The icon image for a leaderboard resource.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable GamesConfigurationImageConfigurationsUploadImageType
+instance Hashable ImageType
 
-instance FromText GamesConfigurationImageConfigurationsUploadImageType where
+instance FromText ImageType where
     fromText = \case
         "ACHIEVEMENT_ICON" -> Just AchievementIcon
         "LEADERBOARD_ICON" -> Just LeaderboardIcon
         _ -> Nothing
 
-instance ToText GamesConfigurationImageConfigurationsUploadImageType where
+instance ToText ImageType where
     toText = \case
         AchievementIcon -> "ACHIEVEMENT_ICON"
         LeaderboardIcon -> "LEADERBOARD_ICON"
 
-instance FromJSON GamesConfigurationImageConfigurationsUploadImageType where
-    parseJSON = parseJSONText "GamesConfigurationImageConfigurationsUploadImageType"
+instance FromJSON ImageType where
+    parseJSON = parseJSONText "ImageType"
 
-instance ToJSON GamesConfigurationImageConfigurationsUploadImageType where
+instance ToJSON ImageType where
     toJSON = toJSONText

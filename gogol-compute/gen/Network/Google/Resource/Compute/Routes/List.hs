@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,8 +54,8 @@ type RoutesListResource =
        "global" :>
          "routes" :>
            QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -78,7 +79,7 @@ data RoutesList' = RoutesList'
     , _rlOAuthToken  :: !(Maybe OAuthToken)
     , _rlMaxResults  :: !Word32
     , _rlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoutesList'' with the minimum fields required to make a request.
 --
@@ -192,8 +193,8 @@ instance GoogleRequest RoutesList' where
         type Rs RoutesList' = RouteList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u RoutesList'{..}
-          = go _rlFilter (Just _rlMaxResults) _rlPageToken
-              _rlProject
+          = go _rlProject _rlFilter _rlPageToken
+              (Just _rlMaxResults)
               _rlQuotaUser
               (Just _rlPrettyPrint)
               _rlUserIP

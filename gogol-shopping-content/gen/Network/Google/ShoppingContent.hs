@@ -97,9 +97,6 @@ module Network.Google.ShoppingContent
     , ordersAcknowledgeRequest
     , oarOperationId
 
-    -- ** ContentOrdersListStatuses
-    , ContentOrdersListStatuses (..)
-
     -- ** OrderReturn
     , OrderReturn
     , orderReturn
@@ -124,6 +121,9 @@ module Network.Google.ShoppingContent
     , ocbreOrderId
     , ocbreCancel
     , ocbreBatchId
+
+    -- ** TemplateName
+    , TemplateName (..)
 
     -- ** OrderLineItemShippingDetailsMethod
     , OrderLineItemShippingDetailsMethod
@@ -182,6 +182,9 @@ module Network.Google.ShoppingContent
     , orlirOperationId
     , orlirReasonText
 
+    -- ** OrderBy
+    , OrderBy (..)
+
     -- ** OrdersCustomBatchRequestEntryShipLineItems
     , OrdersCustomBatchRequestEntryShipLineItems
     , ordersCustomBatchRequestEntryShipLineItems
@@ -214,9 +217,6 @@ module Network.Google.ShoppingContent
     , oslisQuantity
     , oslisLineItemId
 
-    -- ** ContentOrdersGettestOrdertemplateTemplateName
-    , ContentOrdersGettestOrdertemplateTemplateName (..)
-
     -- ** OrdersRefundResponse
     , OrdersRefundResponse
     , ordersRefundResponse
@@ -235,8 +235,8 @@ module Network.Google.ShoppingContent
     , ogtotrKind
     , ogtotrTemplate
 
-    -- ** Error
-    , Error
+    -- ** Error'
+    , Error'
     , error'
     , eDomain
     , eReason
@@ -333,6 +333,9 @@ module Network.Google.ShoppingContent
     , ordersGetByMerchantOrderIdResponse
     , ogbmoirKind
     , ogbmoirOrder
+
+    -- ** Statuses
+    , Statuses (..)
 
     -- ** OrderLineItemShippingDetails
     , OrderLineItemShippingDetails
@@ -442,9 +445,6 @@ module Network.Google.ShoppingContent
     , opmBillingAddress
     , opmLastFourDigits
     , opmType
-
-    -- ** ContentOrdersListOrderBy
-    , ContentOrdersListOrderBy (..)
 
     -- ** Errors
     , Errors

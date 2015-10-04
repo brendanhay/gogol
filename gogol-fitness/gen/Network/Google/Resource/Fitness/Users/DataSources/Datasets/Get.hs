@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -87,7 +88,7 @@ data UsersDataSourcesDatasetsGet' = UsersDataSourcesDatasetsGet'
     , _udsdgPageToken    :: !(Maybe Text)
     , _udsdgOAuthToken   :: !(Maybe OAuthToken)
     , _udsdgFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesDatasetsGet'' with the minimum fields required to make a request.
 --
@@ -219,9 +220,9 @@ instance GoogleRequest UsersDataSourcesDatasetsGet'
         type Rs UsersDataSourcesDatasetsGet' = Dataset
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersDataSourcesDatasetsGet'{..}
-          = go _udsdgLimit _udsdgPageToken _udsdgUserId
-              _udsdgDataSourceId
-              _udsdgDatasetId
+          = go _udsdgUserId _udsdgDataSourceId _udsdgDatasetId
+              _udsdgLimit
+              _udsdgPageToken
               _udsdgQuotaUser
               (Just _udsdgPrettyPrint)
               _udsdgUserIP

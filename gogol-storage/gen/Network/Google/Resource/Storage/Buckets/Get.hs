@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -76,7 +77,7 @@ data BucketsGet' = BucketsGet'
     , _bgProjection               :: !(Maybe StorageBucketsGetProjection)
     , _bgOAuthToken               :: !(Maybe OAuthToken)
     , _bgFields                   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsGet'' with the minimum fields required to make a request.
 --
@@ -182,10 +183,9 @@ instance GoogleRequest BucketsGet' where
         type Rs BucketsGet' = Bucket
         request = requestWithRoute defReq storageURL
         requestWithRoute r u BucketsGet'{..}
-          = go _bgIfMetagenerationMatch
+          = go _bgBucket _bgIfMetagenerationMatch
               _bgIfMetagenerationNotMatch
               _bgProjection
-              _bgBucket
               _bgQuotaUser
               (Just _bgPrettyPrint)
               _bgUserIP

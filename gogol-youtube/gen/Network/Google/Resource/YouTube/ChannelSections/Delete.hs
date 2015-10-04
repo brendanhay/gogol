@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -47,8 +48,8 @@ import           Network.Google.YouTube.Types
 -- 'ChannelSectionsDelete'' request conforms to.
 type ChannelSectionsDeleteResource =
      "channelSections" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "id" Text :>
+       QueryParam "id" Text :>
+         QueryParam "onBehalfOfContentOwner" Text :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -69,7 +70,7 @@ data ChannelSectionsDelete' = ChannelSectionsDelete'
     , _csdId                     :: !Text
     , _csdOAuthToken             :: !(Maybe OAuthToken)
     , _csdFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelSectionsDelete'' with the minimum fields required to make a request.
 --
@@ -170,7 +171,7 @@ instance GoogleRequest ChannelSectionsDelete' where
         type Rs ChannelSectionsDelete' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u ChannelSectionsDelete'{..}
-          = go _csdOnBehalfOfContentOwner (Just _csdId)
+          = go (Just _csdId) _csdOnBehalfOfContentOwner
               _csdQuotaUser
               (Just _csdPrettyPrint)
               _csdUserIP

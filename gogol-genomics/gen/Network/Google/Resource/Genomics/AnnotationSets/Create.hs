@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Genomics.AnnotationSets.Create
     , ascQuotaUser
     , ascPrettyPrint
     , ascUserIP
+    , ascPayload
     , ascKey
-    , ascAnnotationSet
     , ascOAuthToken
     , ascFields
     ) where
@@ -62,14 +63,14 @@ type AnnotationSetsCreateResource =
 --
 -- /See:/ 'annotationSetsCreate'' smart constructor.
 data AnnotationSetsCreate' = AnnotationSetsCreate'
-    { _ascQuotaUser     :: !(Maybe Text)
-    , _ascPrettyPrint   :: !Bool
-    , _ascUserIP        :: !(Maybe Text)
-    , _ascKey           :: !(Maybe Key)
-    , _ascAnnotationSet :: !AnnotationSet
-    , _ascOAuthToken    :: !(Maybe OAuthToken)
-    , _ascFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ascQuotaUser   :: !(Maybe Text)
+    , _ascPrettyPrint :: !Bool
+    , _ascUserIP      :: !(Maybe Text)
+    , _ascPayload     :: !AnnotationSet
+    , _ascKey         :: !(Maybe Key)
+    , _ascOAuthToken  :: !(Maybe OAuthToken)
+    , _ascFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSetsCreate'' with the minimum fields required to make a request.
 --
@@ -81,23 +82,23 @@ data AnnotationSetsCreate' = AnnotationSetsCreate'
 --
 -- * 'ascUserIP'
 --
--- * 'ascKey'
+-- * 'ascPayload'
 --
--- * 'ascAnnotationSet'
+-- * 'ascKey'
 --
 -- * 'ascOAuthToken'
 --
 -- * 'ascFields'
 annotationSetsCreate'
-    :: AnnotationSet -- ^ 'AnnotationSet'
+    :: AnnotationSet -- ^ 'payload'
     -> AnnotationSetsCreate'
-annotationSetsCreate' pAscAnnotationSet_ =
+annotationSetsCreate' pAscPayload_ =
     AnnotationSetsCreate'
     { _ascQuotaUser = Nothing
     , _ascPrettyPrint = True
     , _ascUserIP = Nothing
+    , _ascPayload = pAscPayload_
     , _ascKey = Nothing
-    , _ascAnnotationSet = pAscAnnotationSet_
     , _ascOAuthToken = Nothing
     , _ascFields = Nothing
     }
@@ -121,17 +122,16 @@ ascUserIP :: Lens' AnnotationSetsCreate' (Maybe Text)
 ascUserIP
   = lens _ascUserIP (\ s a -> s{_ascUserIP = a})
 
+-- | Multipart request metadata.
+ascPayload :: Lens' AnnotationSetsCreate' AnnotationSet
+ascPayload
+  = lens _ascPayload (\ s a -> s{_ascPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 ascKey :: Lens' AnnotationSetsCreate' (Maybe Key)
 ascKey = lens _ascKey (\ s a -> s{_ascKey = a})
-
--- | Multipart request metadata.
-ascAnnotationSet :: Lens' AnnotationSetsCreate' AnnotationSet
-ascAnnotationSet
-  = lens _ascAnnotationSet
-      (\ s a -> s{_ascAnnotationSet = a})
 
 -- | OAuth 2.0 token for the current user.
 ascOAuthToken :: Lens' AnnotationSetsCreate' (Maybe OAuthToken)
@@ -157,7 +157,7 @@ instance GoogleRequest AnnotationSetsCreate' where
               _ascKey
               _ascOAuthToken
               (Just AltJSON)
-              _ascAnnotationSet
+              _ascPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationSetsCreateResource)

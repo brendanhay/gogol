@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -49,11 +50,11 @@ import           Network.Google.Storage.Types
 -- 'BucketsList'' request conforms to.
 type BucketsListResource =
      "b" :>
-       QueryParam "maxResults" Word32 :>
-         QueryParam "pageToken" Text :>
-           QueryParam "projection" StorageBucketsListProjection
-             :>
-             QueryParam "project" Text :>
+       QueryParam "project" Text :>
+         QueryParam "projection" StorageBucketsListProjection
+           :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -76,7 +77,7 @@ data BucketsList' = BucketsList'
     , _blOAuthToken  :: !(Maybe OAuthToken)
     , _blMaxResults  :: !(Maybe Word32)
     , _blFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsList'' with the minimum fields required to make a request.
 --
@@ -180,8 +181,8 @@ instance GoogleRequest BucketsList' where
         type Rs BucketsList' = Buckets
         request = requestWithRoute defReq storageURL
         requestWithRoute r u BucketsList'{..}
-          = go _blMaxResults _blPageToken _blProjection
-              (Just _blProject)
+          = go (Just _blProject) _blProjection _blPageToken
+              _blMaxResults
               _blQuotaUser
               (Just _blPrettyPrint)
               _blUserIP

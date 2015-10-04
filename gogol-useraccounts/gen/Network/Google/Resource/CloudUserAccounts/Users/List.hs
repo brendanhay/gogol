@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,10 +53,10 @@ type UsersListResource =
      Capture "project" Text :>
        "global" :>
          "users" :>
-           QueryParam "filter" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "orderBy" Text :>
-                 QueryParam "pageToken" Text :>
+           QueryParam "orderBy" Text :>
+             QueryParam "filter" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data UsersList' = UsersList'
     , _ulOAuthToken  :: !(Maybe OAuthToken)
     , _ulMaxResults  :: !Word32
     , _ulFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersList'' with the minimum fields required to make a request.
 --
@@ -208,9 +209,8 @@ instance GoogleRequest UsersList' where
         type Rs UsersList' = UserList
         request = requestWithRoute defReq userAccountsURL
         requestWithRoute r u UsersList'{..}
-          = go _ulFilter (Just _ulMaxResults) _ulOrderBy
-              _ulPageToken
-              _ulProject
+          = go _ulProject _ulOrderBy _ulFilter _ulPageToken
+              (Just _ulMaxResults)
               _ulQuotaUser
               (Just _ulPrettyPrint)
               _ulUserIP

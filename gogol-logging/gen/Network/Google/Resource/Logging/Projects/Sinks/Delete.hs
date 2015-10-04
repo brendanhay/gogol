@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -59,12 +60,12 @@ type ProjectsSinksDeleteResource =
            "sinks" :>
              Capture "sinksId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "callback" Text :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
@@ -92,7 +93,7 @@ data ProjectsSinksDelete' = ProjectsSinksDelete'
     , _psdSinksId        :: !Text
     , _psdFields         :: !(Maybe Text)
     , _psdCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSinksDelete'' with the minimum fields required to make a request.
 --
@@ -233,13 +234,13 @@ instance GoogleRequest ProjectsSinksDelete' where
         type Rs ProjectsSinksDelete' = Empty
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u ProjectsSinksDelete'{..}
-          = go _psdXgafv _psdAccessToken _psdBearerToken
-              _psdCallback
-              (Just _psdPp)
-              _psdUploadType
+          = go _psdProjectsId _psdSinksId _psdXgafv
               _psdUploadProtocol
-              _psdProjectsId
-              _psdSinksId
+              (Just _psdPp)
+              _psdAccessToken
+              _psdUploadType
+              _psdBearerToken
+              _psdCallback
               _psdQuotaUser
               (Just _psdPrettyPrint)
               _psdFields

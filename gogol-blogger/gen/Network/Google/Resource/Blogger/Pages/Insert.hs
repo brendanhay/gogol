@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,8 +35,8 @@ module Network.Google.Resource.Blogger.Pages.Insert
     , piPrettyPrint
     , piIsDraft
     , piUserIP
-    , piPage
     , piBlogId
+    , piPayload
     , piKey
     , piOAuthToken
     , piFields
@@ -68,12 +69,12 @@ data PagesInsert' = PagesInsert'
     , _piPrettyPrint :: !Bool
     , _piIsDraft     :: !(Maybe Bool)
     , _piUserIP      :: !(Maybe Text)
-    , _piPage        :: !Page
     , _piBlogId      :: !Text
+    , _piPayload     :: !Page
     , _piKey         :: !(Maybe Key)
     , _piOAuthToken  :: !(Maybe OAuthToken)
     , _piFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesInsert'' with the minimum fields required to make a request.
 --
@@ -87,9 +88,9 @@ data PagesInsert' = PagesInsert'
 --
 -- * 'piUserIP'
 --
--- * 'piPage'
---
 -- * 'piBlogId'
+--
+-- * 'piPayload'
 --
 -- * 'piKey'
 --
@@ -97,17 +98,17 @@ data PagesInsert' = PagesInsert'
 --
 -- * 'piFields'
 pagesInsert'
-    :: Page -- ^ 'Page'
-    -> Text -- ^ 'blogId'
+    :: Text -- ^ 'blogId'
+    -> Page -- ^ 'payload'
     -> PagesInsert'
-pagesInsert' pPiPage_ pPiBlogId_ =
+pagesInsert' pPiBlogId_ pPiPayload_ =
     PagesInsert'
     { _piQuotaUser = Nothing
     , _piPrettyPrint = True
     , _piIsDraft = Nothing
     , _piUserIP = Nothing
-    , _piPage = pPiPage_
     , _piBlogId = pPiBlogId_
+    , _piPayload = pPiPayload_
     , _piKey = Nothing
     , _piOAuthToken = Nothing
     , _piFields = Nothing
@@ -136,13 +137,14 @@ piIsDraft
 piUserIP :: Lens' PagesInsert' (Maybe Text)
 piUserIP = lens _piUserIP (\ s a -> s{_piUserIP = a})
 
--- | Multipart request metadata.
-piPage :: Lens' PagesInsert' Page
-piPage = lens _piPage (\ s a -> s{_piPage = a})
-
 -- | ID of the blog to add the page to.
 piBlogId :: Lens' PagesInsert' Text
 piBlogId = lens _piBlogId (\ s a -> s{_piBlogId = a})
+
+-- | Multipart request metadata.
+piPayload :: Lens' PagesInsert' Page
+piPayload
+  = lens _piPayload (\ s a -> s{_piPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -167,14 +169,14 @@ instance GoogleRequest PagesInsert' where
         type Rs PagesInsert' = Page
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesInsert'{..}
-          = go _piIsDraft _piBlogId _piQuotaUser
+          = go _piBlogId _piIsDraft _piQuotaUser
               (Just _piPrettyPrint)
               _piUserIP
               _piFields
               _piKey
               _piOAuthToken
               (Just AltJSON)
-              _piPage
+              _piPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PagesInsertResource)

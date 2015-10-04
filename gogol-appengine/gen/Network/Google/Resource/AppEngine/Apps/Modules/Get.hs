@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,12 +59,12 @@ type AppsModulesGetResource =
            "modules" :>
              Capture "modulesId" Text :>
                QueryParam "$.xgafv" Text :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "callback" Text :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
@@ -90,7 +91,7 @@ data AppsModulesGet' = AppsModulesGet'
     , _amgOAuthToken     :: !(Maybe OAuthToken)
     , _amgFields         :: !(Maybe Text)
     , _amgCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsModulesGet'' with the minimum fields required to make a request.
 --
@@ -231,13 +232,13 @@ instance GoogleRequest AppsModulesGet' where
         type Rs AppsModulesGet' = Module
         request = requestWithRoute defReq appEngineURL
         requestWithRoute r u AppsModulesGet'{..}
-          = go _amgXgafv _amgAccessToken _amgBearerToken
-              _amgCallback
-              (Just _amgPp)
-              _amgUploadType
+          = go _amgAppsId _amgModulesId _amgXgafv
               _amgUploadProtocol
-              _amgAppsId
-              _amgModulesId
+              (Just _amgPp)
+              _amgAccessToken
+              _amgUploadType
+              _amgBearerToken
+              _amgCallback
               _amgQuotaUser
               (Just _amgPrettyPrint)
               _amgFields

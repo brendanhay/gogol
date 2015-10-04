@@ -82,6 +82,9 @@ module Network.Google.Fitness.Types
     , bucketBySession
     , bbsMinDurationMillis
 
+    -- * Format
+    , Format (..)
+
     -- * Value
     , Value
     , value
@@ -159,8 +162,8 @@ module Network.Google.Fitness.Types
     , dtField
     , dtName
 
-    -- * DeviceType
-    , DeviceType (..)
+    -- * Type
+    , Type (..)
 
     -- * BucketByTime
     , BucketByTime
@@ -179,9 +182,6 @@ module Network.Google.Fitness.Types
     , sId
     , sStartTimeMillis
     , sDescription
-
-    -- * DataTypeFieldFormat
-    , DataTypeFieldFormat (..)
     ) where
 
 import           Network.Google.Fitness.Types.Product

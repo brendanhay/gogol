@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,7 +36,7 @@ module Network.Google.Resource.Spectrum.Paws.GetSpectrum
     , pgsQuotaUser
     , pgsPrettyPrint
     , pgsUserIP
-    , pgsPawsGetSpectrumRequest
+    , pgsPayload
     , pgsKey
     , pgsOAuthToken
     , pgsFields
@@ -64,14 +65,14 @@ type PawsGetSpectrumResource =
 --
 -- /See:/ 'pawsGetSpectrum'' smart constructor.
 data PawsGetSpectrum' = PawsGetSpectrum'
-    { _pgsQuotaUser              :: !(Maybe Text)
-    , _pgsPrettyPrint            :: !Bool
-    , _pgsUserIP                 :: !(Maybe Text)
-    , _pgsPawsGetSpectrumRequest :: !PawsGetSpectrumRequest
-    , _pgsKey                    :: !(Maybe Key)
-    , _pgsOAuthToken             :: !(Maybe OAuthToken)
-    , _pgsFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _pgsQuotaUser   :: !(Maybe Text)
+    , _pgsPrettyPrint :: !Bool
+    , _pgsUserIP      :: !(Maybe Text)
+    , _pgsPayload     :: !PawsGetSpectrumRequest
+    , _pgsKey         :: !(Maybe Key)
+    , _pgsOAuthToken  :: !(Maybe OAuthToken)
+    , _pgsFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsGetSpectrum'' with the minimum fields required to make a request.
 --
@@ -83,7 +84,7 @@ data PawsGetSpectrum' = PawsGetSpectrum'
 --
 -- * 'pgsUserIP'
 --
--- * 'pgsPawsGetSpectrumRequest'
+-- * 'pgsPayload'
 --
 -- * 'pgsKey'
 --
@@ -91,14 +92,14 @@ data PawsGetSpectrum' = PawsGetSpectrum'
 --
 -- * 'pgsFields'
 pawsGetSpectrum'
-    :: PawsGetSpectrumRequest -- ^ 'PawsGetSpectrumRequest'
+    :: PawsGetSpectrumRequest -- ^ 'payload'
     -> PawsGetSpectrum'
-pawsGetSpectrum' pPgsPawsGetSpectrumRequest_ =
+pawsGetSpectrum' pPgsPayload_ =
     PawsGetSpectrum'
     { _pgsQuotaUser = Nothing
     , _pgsPrettyPrint = True
     , _pgsUserIP = Nothing
-    , _pgsPawsGetSpectrumRequest = pPgsPawsGetSpectrumRequest_
+    , _pgsPayload = pPgsPayload_
     , _pgsKey = Nothing
     , _pgsOAuthToken = Nothing
     , _pgsFields = Nothing
@@ -124,10 +125,9 @@ pgsUserIP
   = lens _pgsUserIP (\ s a -> s{_pgsUserIP = a})
 
 -- | Multipart request metadata.
-pgsPawsGetSpectrumRequest :: Lens' PawsGetSpectrum' PawsGetSpectrumRequest
-pgsPawsGetSpectrumRequest
-  = lens _pgsPawsGetSpectrumRequest
-      (\ s a -> s{_pgsPawsGetSpectrumRequest = a})
+pgsPayload :: Lens' PawsGetSpectrum' PawsGetSpectrumRequest
+pgsPayload
+  = lens _pgsPayload (\ s a -> s{_pgsPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -159,7 +159,7 @@ instance GoogleRequest PawsGetSpectrum' where
               _pgsKey
               _pgsOAuthToken
               (Just AltJSON)
-              _pgsPawsGetSpectrumRequest
+              _pgsPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PawsGetSpectrumResource)

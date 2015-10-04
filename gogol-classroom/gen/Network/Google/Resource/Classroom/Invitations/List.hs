@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -62,16 +63,16 @@ type InvitationsListResource =
      "v1" :>
        "invitations" :>
          QueryParam "$.xgafv" Text :>
-           QueryParam "access_token" Text :>
-             QueryParam "bearer_token" Text :>
-               QueryParam "callback" Text :>
-                 QueryParam "courseId" Text :>
-                   QueryParam "pageSize" Int32 :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
-                             QueryParam "userId" Text :>
+           QueryParam "upload_protocol" Text :>
+             QueryParam "pp" Bool :>
+               QueryParam "courseId" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "userId" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "pageSize" Int32 :>
+                             QueryParam "callback" Text :>
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
@@ -105,7 +106,7 @@ data InvitationsList' = InvitationsList'
     , _ilPageSize       :: !(Maybe Int32)
     , _ilFields         :: !(Maybe Text)
     , _ilCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InvitationsList'' with the minimum fields required to make a request.
 --
@@ -265,15 +266,15 @@ instance GoogleRequest InvitationsList' where
         type Rs InvitationsList' = ListInvitationsResponse
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u InvitationsList'{..}
-          = go _ilXgafv _ilAccessToken _ilBearerToken
-              _ilCallback
+          = go _ilXgafv _ilUploadProtocol (Just _ilPp)
               _ilCourseId
-              _ilPageSize
-              _ilPageToken
-              (Just _ilPp)
+              _ilAccessToken
               _ilUploadType
-              _ilUploadProtocol
               _ilUserId
+              _ilBearerToken
+              _ilPageToken
+              _ilPageSize
+              _ilCallback
               _ilQuotaUser
               (Just _ilPrettyPrint)
               _ilFields

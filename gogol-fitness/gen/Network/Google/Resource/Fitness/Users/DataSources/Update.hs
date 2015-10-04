@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -38,9 +39,9 @@ module Network.Google.Resource.Fitness.Users.DataSources.Update
     , udsuPrettyPrint
     , udsuUserIP
     , udsuDataSourceId
+    , udsuPayload
     , udsuUserId
     , udsuKey
-    , udsuDataSource
     , udsuOAuthToken
     , udsuFields
     ) where
@@ -75,12 +76,12 @@ data UsersDataSourcesUpdate' = UsersDataSourcesUpdate'
     , _udsuPrettyPrint  :: !Bool
     , _udsuUserIP       :: !(Maybe Text)
     , _udsuDataSourceId :: !Text
+    , _udsuPayload      :: !DataSource
     , _udsuUserId       :: !Text
     , _udsuKey          :: !(Maybe Key)
-    , _udsuDataSource   :: !DataSource
     , _udsuOAuthToken   :: !(Maybe OAuthToken)
     , _udsuFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesUpdate'' with the minimum fields required to make a request.
 --
@@ -94,29 +95,29 @@ data UsersDataSourcesUpdate' = UsersDataSourcesUpdate'
 --
 -- * 'udsuDataSourceId'
 --
+-- * 'udsuPayload'
+--
 -- * 'udsuUserId'
 --
 -- * 'udsuKey'
---
--- * 'udsuDataSource'
 --
 -- * 'udsuOAuthToken'
 --
 -- * 'udsuFields'
 usersDataSourcesUpdate'
     :: Text -- ^ 'dataSourceId'
+    -> DataSource -- ^ 'payload'
     -> Text -- ^ 'userId'
-    -> DataSource -- ^ 'DataSource'
     -> UsersDataSourcesUpdate'
-usersDataSourcesUpdate' pUdsuDataSourceId_ pUdsuUserId_ pUdsuDataSource_ =
+usersDataSourcesUpdate' pUdsuDataSourceId_ pUdsuPayload_ pUdsuUserId_ =
     UsersDataSourcesUpdate'
     { _udsuQuotaUser = Nothing
     , _udsuPrettyPrint = True
     , _udsuUserIP = Nothing
     , _udsuDataSourceId = pUdsuDataSourceId_
+    , _udsuPayload = pUdsuPayload_
     , _udsuUserId = pUdsuUserId_
     , _udsuKey = Nothing
-    , _udsuDataSource = pUdsuDataSource_
     , _udsuOAuthToken = Nothing
     , _udsuFields = Nothing
     }
@@ -147,6 +148,11 @@ udsuDataSourceId
   = lens _udsuDataSourceId
       (\ s a -> s{_udsuDataSourceId = a})
 
+-- | Multipart request metadata.
+udsuPayload :: Lens' UsersDataSourcesUpdate' DataSource
+udsuPayload
+  = lens _udsuPayload (\ s a -> s{_udsuPayload = a})
+
 -- | Update the data source for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
 udsuUserId :: Lens' UsersDataSourcesUpdate' Text
@@ -158,12 +164,6 @@ udsuUserId
 -- token.
 udsuKey :: Lens' UsersDataSourcesUpdate' (Maybe Key)
 udsuKey = lens _udsuKey (\ s a -> s{_udsuKey = a})
-
--- | Multipart request metadata.
-udsuDataSource :: Lens' UsersDataSourcesUpdate' DataSource
-udsuDataSource
-  = lens _udsuDataSource
-      (\ s a -> s{_udsuDataSource = a})
 
 -- | OAuth 2.0 token for the current user.
 udsuOAuthToken :: Lens' UsersDataSourcesUpdate' (Maybe OAuthToken)
@@ -191,7 +191,7 @@ instance GoogleRequest UsersDataSourcesUpdate' where
               _udsuKey
               _udsuOAuthToken
               (Just AltJSON)
-              _udsuDataSource
+              _udsuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDataSourcesUpdateResource)

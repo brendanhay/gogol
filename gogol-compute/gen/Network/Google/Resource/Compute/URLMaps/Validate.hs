@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -37,8 +38,8 @@ module Network.Google.Resource.Compute.URLMaps.Validate
     , umvPrettyPrint
     , umvProject
     , umvUserIP
+    , umvPayload
     , umvKey
-    , umvURLMapsValidateRequest
     , umvOAuthToken
     , umvFields
     ) where
@@ -70,16 +71,16 @@ type URLMapsValidateResource =
 --
 -- /See:/ 'urlMapsValidate'' smart constructor.
 data URLMapsValidate' = URLMapsValidate'
-    { _umvQuotaUser              :: !(Maybe Text)
-    , _umvURLMap                 :: !Text
-    , _umvPrettyPrint            :: !Bool
-    , _umvProject                :: !Text
-    , _umvUserIP                 :: !(Maybe Text)
-    , _umvKey                    :: !(Maybe Key)
-    , _umvURLMapsValidateRequest :: !URLMapsValidateRequest
-    , _umvOAuthToken             :: !(Maybe OAuthToken)
-    , _umvFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _umvQuotaUser   :: !(Maybe Text)
+    , _umvURLMap      :: !Text
+    , _umvPrettyPrint :: !Bool
+    , _umvProject     :: !Text
+    , _umvUserIP      :: !(Maybe Text)
+    , _umvPayload     :: !URLMapsValidateRequest
+    , _umvKey         :: !(Maybe Key)
+    , _umvOAuthToken  :: !(Maybe OAuthToken)
+    , _umvFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsValidate'' with the minimum fields required to make a request.
 --
@@ -95,9 +96,9 @@ data URLMapsValidate' = URLMapsValidate'
 --
 -- * 'umvUserIP'
 --
--- * 'umvKey'
+-- * 'umvPayload'
 --
--- * 'umvURLMapsValidateRequest'
+-- * 'umvKey'
 --
 -- * 'umvOAuthToken'
 --
@@ -105,17 +106,17 @@ data URLMapsValidate' = URLMapsValidate'
 urlMapsValidate'
     :: Text -- ^ 'urlMap'
     -> Text -- ^ 'project'
-    -> URLMapsValidateRequest -- ^ 'URLMapsValidateRequest'
+    -> URLMapsValidateRequest -- ^ 'payload'
     -> URLMapsValidate'
-urlMapsValidate' pUmvURLMap_ pUmvProject_ pUmvURLMapsValidateRequest_ =
+urlMapsValidate' pUmvURLMap_ pUmvProject_ pUmvPayload_ =
     URLMapsValidate'
     { _umvQuotaUser = Nothing
     , _umvURLMap = pUmvURLMap_
     , _umvPrettyPrint = True
     , _umvProject = pUmvProject_
     , _umvUserIP = Nothing
+    , _umvPayload = pUmvPayload_
     , _umvKey = Nothing
-    , _umvURLMapsValidateRequest = pUmvURLMapsValidateRequest_
     , _umvOAuthToken = Nothing
     , _umvFields = Nothing
     }
@@ -149,17 +150,16 @@ umvUserIP :: Lens' URLMapsValidate' (Maybe Text)
 umvUserIP
   = lens _umvUserIP (\ s a -> s{_umvUserIP = a})
 
+-- | Multipart request metadata.
+umvPayload :: Lens' URLMapsValidate' URLMapsValidateRequest
+umvPayload
+  = lens _umvPayload (\ s a -> s{_umvPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 umvKey :: Lens' URLMapsValidate' (Maybe Key)
 umvKey = lens _umvKey (\ s a -> s{_umvKey = a})
-
--- | Multipart request metadata.
-umvURLMapsValidateRequest :: Lens' URLMapsValidate' URLMapsValidateRequest
-umvURLMapsValidateRequest
-  = lens _umvURLMapsValidateRequest
-      (\ s a -> s{_umvURLMapsValidateRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 umvOAuthToken :: Lens' URLMapsValidate' (Maybe OAuthToken)
@@ -187,7 +187,7 @@ instance GoogleRequest URLMapsValidate' where
               _umvKey
               _umvOAuthToken
               (Just AltJSON)
-              _umvURLMapsValidateRequest
+              _umvPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy URLMapsValidateResource)

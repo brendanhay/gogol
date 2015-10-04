@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.Compute.URLMaps.Insert
     -- * Request Lenses
     , umiQuotaUser
     , umiPrettyPrint
-    , umiURLMap
     , umiProject
     , umiUserIP
+    , umiPayload
     , umiKey
     , umiOAuthToken
     , umiFields
@@ -66,13 +67,13 @@ type URLMapsInsertResource =
 data URLMapsInsert' = URLMapsInsert'
     { _umiQuotaUser   :: !(Maybe Text)
     , _umiPrettyPrint :: !Bool
-    , _umiURLMap      :: !URLMap
     , _umiProject     :: !Text
     , _umiUserIP      :: !(Maybe Text)
+    , _umiPayload     :: !URLMap
     , _umiKey         :: !(Maybe Key)
     , _umiOAuthToken  :: !(Maybe OAuthToken)
     , _umiFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsInsert'' with the minimum fields required to make a request.
 --
@@ -82,11 +83,11 @@ data URLMapsInsert' = URLMapsInsert'
 --
 -- * 'umiPrettyPrint'
 --
--- * 'umiURLMap'
---
 -- * 'umiProject'
 --
 -- * 'umiUserIP'
+--
+-- * 'umiPayload'
 --
 -- * 'umiKey'
 --
@@ -94,16 +95,16 @@ data URLMapsInsert' = URLMapsInsert'
 --
 -- * 'umiFields'
 urlMapsInsert'
-    :: URLMap -- ^ 'URLMap'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'project'
+    -> URLMap -- ^ 'payload'
     -> URLMapsInsert'
-urlMapsInsert' pUmiURLMap_ pUmiProject_ =
+urlMapsInsert' pUmiProject_ pUmiPayload_ =
     URLMapsInsert'
     { _umiQuotaUser = Nothing
     , _umiPrettyPrint = True
-    , _umiURLMap = pUmiURLMap_
     , _umiProject = pUmiProject_
     , _umiUserIP = Nothing
+    , _umiPayload = pUmiPayload_
     , _umiKey = Nothing
     , _umiOAuthToken = Nothing
     , _umiFields = Nothing
@@ -122,11 +123,6 @@ umiPrettyPrint
   = lens _umiPrettyPrint
       (\ s a -> s{_umiPrettyPrint = a})
 
--- | Multipart request metadata.
-umiURLMap :: Lens' URLMapsInsert' URLMap
-umiURLMap
-  = lens _umiURLMap (\ s a -> s{_umiURLMap = a})
-
 -- | Name of the project scoping this request.
 umiProject :: Lens' URLMapsInsert' Text
 umiProject
@@ -137,6 +133,11 @@ umiProject
 umiUserIP :: Lens' URLMapsInsert' (Maybe Text)
 umiUserIP
   = lens _umiUserIP (\ s a -> s{_umiUserIP = a})
+
+-- | Multipart request metadata.
+umiPayload :: Lens' URLMapsInsert' URLMap
+umiPayload
+  = lens _umiPayload (\ s a -> s{_umiPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -169,7 +170,7 @@ instance GoogleRequest URLMapsInsert' where
               _umiKey
               _umiOAuthToken
               (Just AltJSON)
-              _umiURLMap
+              _umiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy URLMapsInsertResource)

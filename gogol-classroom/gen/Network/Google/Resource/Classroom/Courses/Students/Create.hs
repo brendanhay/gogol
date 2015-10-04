@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -44,13 +45,13 @@ module Network.Google.Resource.Classroom.Courses.Students.Create
     , cscCourseId
     , cscAccessToken
     , cscUploadType
+    , cscPayload
     , cscEnrollmentCode
     , cscBearerToken
     , cscKey
     , cscOAuthToken
     , cscFields
     , cscCallback
-    , cscStudent
     ) where
 
 import           Network.Google.Classroom.Types
@@ -64,13 +65,13 @@ type CoursesStudentsCreateResource =
          Capture "courseId" Text :>
            "students" :>
              QueryParam "$.xgafv" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "bearer_token" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParam "enrollmentCode" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "upload_protocol" Text :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "enrollmentCode" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "callback" Text :>
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
@@ -98,14 +99,14 @@ data CoursesStudentsCreate' = CoursesStudentsCreate'
     , _cscCourseId       :: !Text
     , _cscAccessToken    :: !(Maybe Text)
     , _cscUploadType     :: !(Maybe Text)
+    , _cscPayload        :: !Student
     , _cscEnrollmentCode :: !(Maybe Text)
     , _cscBearerToken    :: !(Maybe Text)
     , _cscKey            :: !(Maybe Key)
     , _cscOAuthToken     :: !(Maybe OAuthToken)
     , _cscFields         :: !(Maybe Text)
     , _cscCallback       :: !(Maybe Text)
-    , _cscStudent        :: !Student
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesStudentsCreate'' with the minimum fields required to make a request.
 --
@@ -127,6 +128,8 @@ data CoursesStudentsCreate' = CoursesStudentsCreate'
 --
 -- * 'cscUploadType'
 --
+-- * 'cscPayload'
+--
 -- * 'cscEnrollmentCode'
 --
 -- * 'cscBearerToken'
@@ -138,13 +141,11 @@ data CoursesStudentsCreate' = CoursesStudentsCreate'
 -- * 'cscFields'
 --
 -- * 'cscCallback'
---
--- * 'cscStudent'
 coursesStudentsCreate'
     :: Text -- ^ 'courseId'
-    -> Student -- ^ 'Student'
+    -> Student -- ^ 'payload'
     -> CoursesStudentsCreate'
-coursesStudentsCreate' pCscCourseId_ pCscStudent_ =
+coursesStudentsCreate' pCscCourseId_ pCscPayload_ =
     CoursesStudentsCreate'
     { _cscXgafv = Nothing
     , _cscQuotaUser = Nothing
@@ -154,13 +155,13 @@ coursesStudentsCreate' pCscCourseId_ pCscStudent_ =
     , _cscCourseId = pCscCourseId_
     , _cscAccessToken = Nothing
     , _cscUploadType = Nothing
+    , _cscPayload = pCscPayload_
     , _cscEnrollmentCode = Nothing
     , _cscBearerToken = Nothing
     , _cscKey = Nothing
     , _cscOAuthToken = Nothing
     , _cscFields = Nothing
     , _cscCallback = Nothing
-    , _cscStudent = pCscStudent_
     }
 
 -- | V1 error format.
@@ -209,6 +210,11 @@ cscUploadType
   = lens _cscUploadType
       (\ s a -> s{_cscUploadType = a})
 
+-- | Multipart request metadata.
+cscPayload :: Lens' CoursesStudentsCreate' Student
+cscPayload
+  = lens _cscPayload (\ s a -> s{_cscPayload = a})
+
 -- | Enrollment code of the course to create the student in. This code is
 -- required if [userId][google.classroom.v1.Student.user_id] corresponds to
 -- the requesting user; it may be omitted if the requesting user has
@@ -246,11 +252,6 @@ cscCallback :: Lens' CoursesStudentsCreate' (Maybe Text)
 cscCallback
   = lens _cscCallback (\ s a -> s{_cscCallback = a})
 
--- | Multipart request metadata.
-cscStudent :: Lens' CoursesStudentsCreate' Student
-cscStudent
-  = lens _cscStudent (\ s a -> s{_cscStudent = a})
-
 instance GoogleAuth CoursesStudentsCreate' where
         authKey = cscKey . _Just
         authToken = cscOAuthToken . _Just
@@ -259,20 +260,20 @@ instance GoogleRequest CoursesStudentsCreate' where
         type Rs CoursesStudentsCreate' = Student
         request = requestWithRoute defReq classroomURL
         requestWithRoute r u CoursesStudentsCreate'{..}
-          = go _cscXgafv _cscAccessToken _cscBearerToken
-              _cscCallback
-              _cscEnrollmentCode
+          = go _cscCourseId _cscXgafv _cscUploadProtocol
               (Just _cscPp)
+              _cscAccessToken
               _cscUploadType
-              _cscUploadProtocol
-              _cscCourseId
+              _cscEnrollmentCode
+              _cscBearerToken
+              _cscCallback
               _cscQuotaUser
               (Just _cscPrettyPrint)
               _cscFields
               _cscKey
               _cscOAuthToken
               (Just AltJSON)
-              _cscStudent
+              _cscPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesStudentsCreateResource)

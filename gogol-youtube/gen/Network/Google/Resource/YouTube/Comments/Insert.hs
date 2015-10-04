@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.YouTube.Comments.Insert
     , cPart
     , cPrettyPrint
     , cUserIP
+    , cPayload
     , cKey
     , cOAuthToken
-    , cComment
     , cFields
     ) where
 
@@ -67,11 +68,11 @@ data CommentsInsert' = CommentsInsert'
     , _cPart        :: !Text
     , _cPrettyPrint :: !Bool
     , _cUserIP      :: !(Maybe Text)
+    , _cPayload     :: !Comment
     , _cKey         :: !(Maybe Key)
     , _cOAuthToken  :: !(Maybe OAuthToken)
-    , _cComment     :: !Comment
     , _cFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsInsert'' with the minimum fields required to make a request.
 --
@@ -85,26 +86,26 @@ data CommentsInsert' = CommentsInsert'
 --
 -- * 'cUserIP'
 --
+-- * 'cPayload'
+--
 -- * 'cKey'
 --
 -- * 'cOAuthToken'
 --
--- * 'cComment'
---
 -- * 'cFields'
 commentsInsert'
     :: Text -- ^ 'part'
-    -> Comment -- ^ 'Comment'
+    -> Comment -- ^ 'payload'
     -> CommentsInsert'
-commentsInsert' pCPart_ pCComment_ =
+commentsInsert' pCPart_ pCPayload_ =
     CommentsInsert'
     { _cQuotaUser = Nothing
     , _cPart = pCPart_
     , _cPrettyPrint = True
     , _cUserIP = Nothing
+    , _cPayload = pCPayload_
     , _cKey = Nothing
     , _cOAuthToken = Nothing
-    , _cComment = pCComment_
     , _cFields = Nothing
     }
 
@@ -131,6 +132,10 @@ cPrettyPrint
 cUserIP :: Lens' CommentsInsert' (Maybe Text)
 cUserIP = lens _cUserIP (\ s a -> s{_cUserIP = a})
 
+-- | Multipart request metadata.
+cPayload :: Lens' CommentsInsert' Comment
+cPayload = lens _cPayload (\ s a -> s{_cPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -141,10 +146,6 @@ cKey = lens _cKey (\ s a -> s{_cKey = a})
 cOAuthToken :: Lens' CommentsInsert' (Maybe OAuthToken)
 cOAuthToken
   = lens _cOAuthToken (\ s a -> s{_cOAuthToken = a})
-
--- | Multipart request metadata.
-cComment :: Lens' CommentsInsert' Comment
-cComment = lens _cComment (\ s a -> s{_cComment = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cFields :: Lens' CommentsInsert' (Maybe Text)
@@ -164,7 +165,7 @@ instance GoogleRequest CommentsInsert' where
               _cKey
               _cOAuthToken
               (Just AltJSON)
-              _cComment
+              _cPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentsInsertResource)

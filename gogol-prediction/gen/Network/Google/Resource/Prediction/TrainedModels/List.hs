@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -50,8 +51,8 @@ type TrainedModelsListResource =
      Capture "project" Text :>
        "trainedmodels" :>
          "list" :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "pageToken" Text :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -73,7 +74,7 @@ data TrainedModelsList' = TrainedModelsList'
     , _tmlOAuthToken  :: !(Maybe OAuthToken)
     , _tmlMaxResults  :: !(Maybe Word32)
     , _tmlFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrainedModelsList'' with the minimum fields required to make a request.
 --
@@ -172,7 +173,7 @@ instance GoogleRequest TrainedModelsList' where
         type Rs TrainedModelsList' = List
         request = requestWithRoute defReq predictionURL
         requestWithRoute r u TrainedModelsList'{..}
-          = go _tmlMaxResults _tmlPageToken _tmlProject
+          = go _tmlProject _tmlPageToken _tmlMaxResults
               _tmlQuotaUser
               (Just _tmlPrettyPrint)
               _tmlUserIP

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,8 +56,8 @@ type ManifestsListResource =
            Capture "deployment" Text :>
              "manifests" :>
                QueryParam "filter" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "pageToken" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Word32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -81,7 +82,7 @@ data ManifestsList' = ManifestsList'
     , _mlMaxResults  :: !Word32
     , _mlFields      :: !(Maybe Text)
     , _mlDeployment  :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManifestsList'' with the minimum fields required to make a request.
 --
@@ -205,9 +206,8 @@ instance GoogleRequest ManifestsList' where
         request
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u ManifestsList'{..}
-          = go _mlFilter (Just _mlMaxResults) _mlPageToken
-              _mlProject
-              _mlDeployment
+          = go _mlProject _mlDeployment _mlFilter _mlPageToken
+              (Just _mlMaxResults)
               _mlQuotaUser
               (Just _mlPrettyPrint)
               _mlUserIP

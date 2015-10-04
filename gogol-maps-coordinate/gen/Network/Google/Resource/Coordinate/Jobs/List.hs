@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,10 +53,10 @@ type JobsListResource =
      "teams" :>
        Capture "teamId" Text :>
          "jobs" :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "minModifiedTimestampMs" Word64 :>
-               QueryParam "omitJobChanges" Bool :>
-                 QueryParam "pageToken" Text :>
+           QueryParam "minModifiedTimestampMs" Word64 :>
+             QueryParam "omitJobChanges" Bool :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -80,7 +81,7 @@ data JobsList' = JobsList'
     , _jlOAuthToken             :: !(Maybe OAuthToken)
     , _jlMaxResults             :: !(Maybe Word32)
     , _jlFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsList'' with the minimum fields required to make a request.
 --
@@ -192,10 +193,10 @@ instance GoogleRequest JobsList' where
         type Rs JobsList' = JobListResponse
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u JobsList'{..}
-          = go _jlMaxResults _jlMinModifiedTimestampMs
+          = go _jlTeamId _jlMinModifiedTimestampMs
               _jlOmitJobChanges
               _jlPageToken
-              _jlTeamId
+              _jlMaxResults
               _jlQuotaUser
               (Just _jlPrettyPrint)
               _jlUserIP

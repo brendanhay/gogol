@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,8 +52,8 @@ type ManagementFiltersListResource =
        "accounts" :>
          Capture "accountId" Text :>
            "filters" :>
-             QueryParam "max-results" Int32 :>
-               QueryParam "start-index" Int32 :>
+             QueryParam "start-index" Int32 :>
+               QueryParam "max-results" Int32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -74,7 +75,7 @@ data ManagementFiltersList' = ManagementFiltersList'
     , _mflStartIndex  :: !(Maybe Int32)
     , _mflMaxResults  :: !(Maybe Int32)
     , _mflFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersList'' with the minimum fields required to make a request.
 --
@@ -175,7 +176,7 @@ instance GoogleRequest ManagementFiltersList' where
         type Rs ManagementFiltersList' = Filters
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementFiltersList'{..}
-          = go _mflMaxResults _mflStartIndex _mflAccountId
+          = go _mflAccountId _mflStartIndex _mflMaxResults
               _mflQuotaUser
               (Just _mflPrettyPrint)
               _mflUserIP

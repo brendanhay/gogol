@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,11 +53,11 @@ type MyLibraryBookshelvesAddVolumeResource =
        "bookshelves" :>
          Capture "shelf" Text :>
            "addVolume" :>
-             QueryParam "reason"
-               BooksMyLibraryBookshelvesAddVolumeReason
-               :>
-               QueryParam "source" Text :>
-                 QueryParam "volumeId" Text :>
+             QueryParam "volumeId" Text :>
+               QueryParam "reason"
+                 BooksMyLibraryBookshelvesAddVolumeReason
+                 :>
+                 QueryParam "source" Text :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -79,7 +80,7 @@ data MyLibraryBookshelvesAddVolume' = MyLibraryBookshelvesAddVolume'
     , _mlbavSource      :: !(Maybe Text)
     , _mlbavOAuthToken  :: !(Maybe OAuthToken)
     , _mlbavFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyLibraryBookshelvesAddVolume'' with the minimum fields required to make a request.
 --
@@ -191,8 +192,8 @@ instance GoogleRequest MyLibraryBookshelvesAddVolume'
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
           MyLibraryBookshelvesAddVolume'{..}
-          = go _mlbavReason _mlbavSource _mlbavShelf
-              (Just _mlbavVolumeId)
+          = go _mlbavShelf (Just _mlbavVolumeId) _mlbavReason
+              _mlbavSource
               _mlbavQuotaUser
               (Just _mlbavPrettyPrint)
               _mlbavUserIP

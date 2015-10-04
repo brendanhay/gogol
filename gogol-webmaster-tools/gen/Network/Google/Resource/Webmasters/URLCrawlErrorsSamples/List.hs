@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -51,12 +52,8 @@ type URLCrawlErrorsSamplesListResource =
      "sites" :>
        Capture "siteUrl" Text :>
          "urlCrawlErrorsSamples" :>
-           QueryParam "category"
-             WebmastersURLCrawlErrorsSamplesListCategory
-             :>
-             QueryParam "platform"
-               WebmastersURLCrawlErrorsSamplesListPlatform
-               :>
+           QueryParam "category" Category :>
+             QueryParam "platform" Platform :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
@@ -73,14 +70,14 @@ type URLCrawlErrorsSamplesListResource =
 data URLCrawlErrorsSamplesList' = URLCrawlErrorsSamplesList'
     { _uceslQuotaUser   :: !(Maybe Text)
     , _uceslPrettyPrint :: !Bool
-    , _uceslPlatform    :: !WebmastersURLCrawlErrorsSamplesListPlatform
+    , _uceslPlatform    :: !Platform
     , _uceslUserIP      :: !(Maybe Text)
-    , _uceslCategory    :: !WebmastersURLCrawlErrorsSamplesListCategory
+    , _uceslCategory    :: !Category
     , _uceslSiteURL     :: !Text
     , _uceslKey         :: !(Maybe Key)
     , _uceslOAuthToken  :: !(Maybe OAuthToken)
     , _uceslFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLCrawlErrorsSamplesList'' with the minimum fields required to make a request.
 --
@@ -104,8 +101,8 @@ data URLCrawlErrorsSamplesList' = URLCrawlErrorsSamplesList'
 --
 -- * 'uceslFields'
 urlCrawlErrorsSamplesList'
-    :: WebmastersURLCrawlErrorsSamplesListPlatform -- ^ 'platform'
-    -> WebmastersURLCrawlErrorsSamplesListCategory -- ^ 'category'
+    :: Platform -- ^ 'platform'
+    -> Category -- ^ 'category'
     -> Text -- ^ 'siteUrl'
     -> URLCrawlErrorsSamplesList'
 urlCrawlErrorsSamplesList' pUceslPlatform_ pUceslCategory_ pUceslSiteURL_ =
@@ -136,7 +133,7 @@ uceslPrettyPrint
       (\ s a -> s{_uceslPrettyPrint = a})
 
 -- | The user agent type (platform) that made the request. For example: web
-uceslPlatform :: Lens' URLCrawlErrorsSamplesList' WebmastersURLCrawlErrorsSamplesListPlatform
+uceslPlatform :: Lens' URLCrawlErrorsSamplesList' Platform
 uceslPlatform
   = lens _uceslPlatform
       (\ s a -> s{_uceslPlatform = a})
@@ -148,7 +145,7 @@ uceslUserIP
   = lens _uceslUserIP (\ s a -> s{_uceslUserIP = a})
 
 -- | The crawl error category. For example: authPermissions
-uceslCategory :: Lens' URLCrawlErrorsSamplesList' WebmastersURLCrawlErrorsSamplesListCategory
+uceslCategory :: Lens' URLCrawlErrorsSamplesList' Category
 uceslCategory
   = lens _uceslCategory
       (\ s a -> s{_uceslCategory = a})

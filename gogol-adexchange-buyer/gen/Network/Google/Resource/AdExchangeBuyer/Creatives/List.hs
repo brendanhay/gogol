@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -52,16 +53,14 @@ import           Network.Google.Prelude
 -- 'CreativesList'' request conforms to.
 type CreativesListResource =
      "creatives" :>
-       QueryParams "accountId" Int32 :>
-         QueryParams "buyerCreativeId" Text :>
-           QueryParam "dealsStatusFilter"
-             AdexchangebuyerCreativesListDealsStatusFilter
-             :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "openAuctionStatusFilter"
-                 AdexchangebuyerCreativesListOpenAuctionStatusFilter
-                 :>
-                 QueryParam "pageToken" Text :>
+       QueryParams "buyerCreativeId" Text :>
+         QueryParam "openAuctionStatusFilter"
+           OpenAuctionStatusFilter
+           :>
+           QueryParams "accountId" Int32 :>
+             QueryParam "pageToken" Text :>
+               QueryParam "dealsStatusFilter" DealsStatusFilter :>
+                 QueryParam "maxResults" Word32 :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -78,17 +77,17 @@ type CreativesListResource =
 data CreativesList' = CreativesList'
     { _clQuotaUser               :: !(Maybe Text)
     , _clPrettyPrint             :: !Bool
-    , _clBuyerCreativeId         :: !(Maybe Text)
+    , _clBuyerCreativeId         :: !(Maybe [Text])
     , _clUserIP                  :: !(Maybe Text)
-    , _clOpenAuctionStatusFilter :: !(Maybe AdexchangebuyerCreativesListOpenAuctionStatusFilter)
-    , _clAccountId               :: !(Maybe Int32)
+    , _clOpenAuctionStatusFilter :: !(Maybe OpenAuctionStatusFilter)
+    , _clAccountId               :: !(Maybe [Int32])
     , _clKey                     :: !(Maybe Key)
     , _clPageToken               :: !(Maybe Text)
-    , _clDealsStatusFilter       :: !(Maybe AdexchangebuyerCreativesListDealsStatusFilter)
+    , _clDealsStatusFilter       :: !(Maybe DealsStatusFilter)
     , _clOAuthToken              :: !(Maybe OAuthToken)
     , _clMaxResults              :: !(Maybe Word32)
     , _clFields                  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesList'' with the minimum fields required to make a request.
 --
@@ -150,10 +149,12 @@ clPrettyPrint
 
 -- | When specified, only creatives for the given buyer creative ids are
 -- returned.
-clBuyerCreativeId :: Lens' CreativesList' (Maybe Text)
+clBuyerCreativeId :: Lens' CreativesList' [Text]
 clBuyerCreativeId
   = lens _clBuyerCreativeId
       (\ s a -> s{_clBuyerCreativeId = a})
+      . _Default
+      . _Coerce
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
@@ -162,15 +163,17 @@ clUserIP = lens _clUserIP (\ s a -> s{_clUserIP = a})
 
 -- | When specified, only creatives having the given open auction status are
 -- returned.
-clOpenAuctionStatusFilter :: Lens' CreativesList' (Maybe AdexchangebuyerCreativesListOpenAuctionStatusFilter)
+clOpenAuctionStatusFilter :: Lens' CreativesList' (Maybe OpenAuctionStatusFilter)
 clOpenAuctionStatusFilter
   = lens _clOpenAuctionStatusFilter
       (\ s a -> s{_clOpenAuctionStatusFilter = a})
 
 -- | When specified, only creatives for the given account ids are returned.
-clAccountId :: Lens' CreativesList' (Maybe Int32)
+clAccountId :: Lens' CreativesList' [Int32]
 clAccountId
-  = lens _clAccountId (\ s a -> s{_clAccountId = a})
+  = lens _clAccountId (\ s a -> s{_clAccountId = a}) .
+      _Default
+      . _Coerce
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -187,7 +190,7 @@ clPageToken
 
 -- | When specified, only creatives having the given direct deals status are
 -- returned.
-clDealsStatusFilter :: Lens' CreativesList' (Maybe AdexchangebuyerCreativesListDealsStatusFilter)
+clDealsStatusFilter :: Lens' CreativesList' (Maybe DealsStatusFilter)
 clDealsStatusFilter
   = lens _clDealsStatusFilter
       (\ s a -> s{_clDealsStatusFilter = a})
@@ -215,11 +218,12 @@ instance GoogleRequest CreativesList' where
         type Rs CreativesList' = CreativesList
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u CreativesList'{..}
-          = go _clAccountId _clBuyerCreativeId
+          = go (_clBuyerCreativeId ^. _Default)
+              _clOpenAuctionStatusFilter
+              (_clAccountId ^. _Default)
+              _clPageToken
               _clDealsStatusFilter
               _clMaxResults
-              _clOpenAuctionStatusFilter
-              _clPageToken
               _clQuotaUser
               (Just _clPrettyPrint)
               _clUserIP

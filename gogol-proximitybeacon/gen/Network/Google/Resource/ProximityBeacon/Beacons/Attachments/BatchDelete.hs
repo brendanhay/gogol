@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,16 +59,16 @@ import           Network.Google.ProximityBeacon.Types
 -- 'BeaconsAttachmentsBatchDelete'' request conforms to.
 type BeaconsAttachmentsBatchDeleteResource =
      "v1beta1" :>
-       "{+beaconName}" :>
+       Capture "beaconName" Text :>
          "attachments:batchDelete" :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "namespacedType" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "namespacedType" Text :>
+                         QueryParam "callback" Text :>
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "fields" Text :>
@@ -99,7 +100,7 @@ data BeaconsAttachmentsBatchDelete' = BeaconsAttachmentsBatchDelete'
     , _babdOAuthToken     :: !(Maybe OAuthToken)
     , _babdFields         :: !(Maybe Text)
     , _babdCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsAttachmentsBatchDelete'' with the minimum fields required to make a request.
 --
@@ -248,13 +249,13 @@ instance GoogleRequest BeaconsAttachmentsBatchDelete'
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u
           BeaconsAttachmentsBatchDelete'{..}
-          = go _babdXgafv _babdAccessToken _babdBearerToken
-              _babdCallback
-              _babdNamespacedType
+          = go _babdBeaconName _babdXgafv _babdUploadProtocol
               (Just _babdPp)
+              _babdAccessToken
               _babdUploadType
-              _babdUploadProtocol
-              _babdBeaconName
+              _babdBearerToken
+              _babdNamespacedType
+              _babdCallback
               _babdQuotaUser
               (Just _babdPrettyPrint)
               _babdFields

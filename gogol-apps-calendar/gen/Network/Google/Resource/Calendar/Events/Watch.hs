@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -39,8 +40,8 @@ module Network.Google.Resource.Calendar.Events.Watch
     , ewSingleEvents
     , ewPrivateExtendedProperty
     , ewUserIP
-    , ewChannel
     , ewShowDeleted
+    , ewPayload
     , ewQ
     , ewSharedExtendedProperty
     , ewMaxAttendees
@@ -67,24 +68,25 @@ type EventsWatchResource =
        Capture "calendarId" Text :>
          "events" :>
            "watch" :>
-             QueryParam "alwaysIncludeEmail" Bool :>
-               QueryParam "iCalUID" Text :>
-                 QueryParam "maxAttendees" Int32 :>
-                   QueryParam "maxResults" Int32 :>
-                     QueryParam "orderBy" CalendarEventsWatchOrderBy :>
-                       QueryParam "pageToken" Text :>
-                         QueryParams "privateExtendedProperty" Text :>
-                           QueryParam "q" Text :>
-                             QueryParams "sharedExtendedProperty" Text :>
-                               QueryParam "showDeleted" Bool :>
-                                 QueryParam "showHiddenInvitations" Bool :>
-                                   QueryParam "singleEvents" Bool :>
-                                     QueryParam "syncToken" Text :>
-                                       QueryParam "timeMax" DateTime' :>
-                                         QueryParam "timeMin" DateTime' :>
-                                           QueryParam "timeZone" Text :>
-                                             QueryParam "updatedMin" DateTime'
-                                               :>
+             QueryParam "syncToken" Text :>
+               QueryParam "timeMin" DateTime' :>
+                 QueryParam "orderBy" CalendarEventsWatchOrderBy :>
+                   QueryParam "singleEvents" Bool :>
+                     QueryParams "privateExtendedProperty" Text :>
+                       QueryParam "showDeleted" Bool :>
+                         QueryParam "q" Text :>
+                           QueryParams "sharedExtendedProperty" Text :>
+                             QueryParam "maxAttendees" Int32 :>
+                               QueryParam "iCalUID" Text :>
+                                 QueryParam "updatedMin" DateTime' :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "timeZone" Text :>
+                                       QueryParam "showHiddenInvitations" Bool
+                                         :>
+                                         QueryParam "maxResults" Int32 :>
+                                           QueryParam "alwaysIncludeEmail" Bool
+                                             :>
+                                             QueryParam "timeMax" DateTime' :>
                                                QueryParam "quotaUser" Text :>
                                                  QueryParam "prettyPrint" Bool
                                                    :>
@@ -115,12 +117,12 @@ data EventsWatch' = EventsWatch'
     , _ewTimeMin                 :: !(Maybe DateTime')
     , _ewOrderBy                 :: !(Maybe CalendarEventsWatchOrderBy)
     , _ewSingleEvents            :: !(Maybe Bool)
-    , _ewPrivateExtendedProperty :: !(Maybe Text)
+    , _ewPrivateExtendedProperty :: !(Maybe [Text])
     , _ewUserIP                  :: !(Maybe Text)
-    , _ewChannel                 :: !Channel
     , _ewShowDeleted             :: !(Maybe Bool)
+    , _ewPayload                 :: !Channel
     , _ewQ                       :: !(Maybe Text)
-    , _ewSharedExtendedProperty  :: !(Maybe Text)
+    , _ewSharedExtendedProperty  :: !(Maybe [Text])
     , _ewMaxAttendees            :: !(Maybe Int32)
     , _ewKey                     :: !(Maybe Key)
     , _ewICalUId                 :: !(Maybe Text)
@@ -133,7 +135,7 @@ data EventsWatch' = EventsWatch'
     , _ewAlwaysIncludeEmail      :: !(Maybe Bool)
     , _ewTimeMax                 :: !(Maybe DateTime')
     , _ewFields                  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsWatch'' with the minimum fields required to make a request.
 --
@@ -157,9 +159,9 @@ data EventsWatch' = EventsWatch'
 --
 -- * 'ewUserIP'
 --
--- * 'ewChannel'
---
 -- * 'ewShowDeleted'
+--
+-- * 'ewPayload'
 --
 -- * 'ewQ'
 --
@@ -190,9 +192,9 @@ data EventsWatch' = EventsWatch'
 -- * 'ewFields'
 eventsWatch'
     :: Text -- ^ 'calendarId'
-    -> Channel -- ^ 'Channel'
+    -> Channel -- ^ 'payload'
     -> EventsWatch'
-eventsWatch' pEwCalendarId_ pEwChannel_ =
+eventsWatch' pEwCalendarId_ pEwPayload_ =
     EventsWatch'
     { _ewSyncToken = Nothing
     , _ewQuotaUser = Nothing
@@ -203,8 +205,8 @@ eventsWatch' pEwCalendarId_ pEwChannel_ =
     , _ewSingleEvents = Nothing
     , _ewPrivateExtendedProperty = Nothing
     , _ewUserIP = Nothing
-    , _ewChannel = pEwChannel_
     , _ewShowDeleted = Nothing
+    , _ewPayload = pEwPayload_
     , _ewQ = Nothing
     , _ewSharedExtendedProperty = Nothing
     , _ewMaxAttendees = Nothing
@@ -284,20 +286,17 @@ ewSingleEvents
 -- | Extended properties constraint specified as propertyName=value. Matches
 -- only private properties. This parameter might be repeated multiple times
 -- to return events that match all given constraints.
-ewPrivateExtendedProperty :: Lens' EventsWatch' (Maybe Text)
+ewPrivateExtendedProperty :: Lens' EventsWatch' [Text]
 ewPrivateExtendedProperty
   = lens _ewPrivateExtendedProperty
       (\ s a -> s{_ewPrivateExtendedProperty = a})
+      . _Default
+      . _Coerce
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 ewUserIP :: Lens' EventsWatch' (Maybe Text)
 ewUserIP = lens _ewUserIP (\ s a -> s{_ewUserIP = a})
-
--- | Multipart request metadata.
-ewChannel :: Lens' EventsWatch' Channel
-ewChannel
-  = lens _ewChannel (\ s a -> s{_ewChannel = a})
 
 -- | Whether to include deleted events (with status equals \"cancelled\") in
 -- the result. Cancelled instances of recurring events (but not the
@@ -310,6 +309,11 @@ ewShowDeleted
   = lens _ewShowDeleted
       (\ s a -> s{_ewShowDeleted = a})
 
+-- | Multipart request metadata.
+ewPayload :: Lens' EventsWatch' Channel
+ewPayload
+  = lens _ewPayload (\ s a -> s{_ewPayload = a})
+
 -- | Free text search terms to find events that match these terms in any
 -- field, except for extended properties. Optional.
 ewQ :: Lens' EventsWatch' (Maybe Text)
@@ -318,10 +322,12 @@ ewQ = lens _ewQ (\ s a -> s{_ewQ = a})
 -- | Extended properties constraint specified as propertyName=value. Matches
 -- only shared properties. This parameter might be repeated multiple times
 -- to return events that match all given constraints.
-ewSharedExtendedProperty :: Lens' EventsWatch' (Maybe Text)
+ewSharedExtendedProperty :: Lens' EventsWatch' [Text]
 ewSharedExtendedProperty
   = lens _ewSharedExtendedProperty
       (\ s a -> s{_ewSharedExtendedProperty = a})
+      . _Default
+      . _Coerce
 
 -- | The maximum number of attendees to include in the response. If there are
 -- more than the specified number of attendees, only the participant is
@@ -415,22 +421,21 @@ instance GoogleRequest EventsWatch' where
         type Rs EventsWatch' = Channel
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsWatch'{..}
-          = go _ewAlwaysIncludeEmail _ewICalUId _ewMaxAttendees
-              _ewMaxResults
-              _ewOrderBy
-              _ewPageToken
-              _ewPrivateExtendedProperty
-              _ewQ
-              _ewSharedExtendedProperty
-              _ewShowDeleted
-              _ewShowHiddenInvitations
+          = go _ewCalendarId _ewSyncToken _ewTimeMin _ewOrderBy
               _ewSingleEvents
-              _ewSyncToken
-              _ewTimeMax
-              _ewTimeMin
-              _ewTimeZone
+              (_ewPrivateExtendedProperty ^. _Default)
+              _ewShowDeleted
+              _ewQ
+              (_ewSharedExtendedProperty ^. _Default)
+              _ewMaxAttendees
+              _ewICalUId
               _ewUpdatedMin
-              _ewCalendarId
+              _ewPageToken
+              _ewTimeZone
+              _ewShowHiddenInvitations
+              _ewMaxResults
+              _ewAlwaysIncludeEmail
+              _ewTimeMax
               _ewQuotaUser
               (Just _ewPrettyPrint)
               _ewUserIP
@@ -438,7 +443,7 @@ instance GoogleRequest EventsWatch' where
               _ewKey
               _ewOAuthToken
               (Just AltJSON)
-              _ewChannel
+              _ewPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsWatchResource)

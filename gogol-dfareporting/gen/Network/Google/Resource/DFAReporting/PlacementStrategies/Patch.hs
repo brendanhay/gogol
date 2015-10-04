@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,8 +36,8 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Patch
     , pspPrettyPrint
     , pspUserIP
     , pspProfileId
+    , pspPayload
     , pspKey
-    , pspPlacementStrategy
     , pspId
     , pspOAuthToken
     , pspFields
@@ -67,16 +68,16 @@ type PlacementStrategiesPatchResource =
 --
 -- /See:/ 'placementStrategiesPatch'' smart constructor.
 data PlacementStrategiesPatch' = PlacementStrategiesPatch'
-    { _pspQuotaUser         :: !(Maybe Text)
-    , _pspPrettyPrint       :: !Bool
-    , _pspUserIP            :: !(Maybe Text)
-    , _pspProfileId         :: !Int64
-    , _pspKey               :: !(Maybe Key)
-    , _pspPlacementStrategy :: !PlacementStrategy
-    , _pspId                :: !Int64
-    , _pspOAuthToken        :: !(Maybe OAuthToken)
-    , _pspFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _pspQuotaUser   :: !(Maybe Text)
+    , _pspPrettyPrint :: !Bool
+    , _pspUserIP      :: !(Maybe Text)
+    , _pspProfileId   :: !Int64
+    , _pspPayload     :: !PlacementStrategy
+    , _pspKey         :: !(Maybe Key)
+    , _pspId          :: !Int64
+    , _pspOAuthToken  :: !(Maybe OAuthToken)
+    , _pspFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesPatch'' with the minimum fields required to make a request.
 --
@@ -90,9 +91,9 @@ data PlacementStrategiesPatch' = PlacementStrategiesPatch'
 --
 -- * 'pspProfileId'
 --
--- * 'pspKey'
+-- * 'pspPayload'
 --
--- * 'pspPlacementStrategy'
+-- * 'pspKey'
 --
 -- * 'pspId'
 --
@@ -101,17 +102,17 @@ data PlacementStrategiesPatch' = PlacementStrategiesPatch'
 -- * 'pspFields'
 placementStrategiesPatch'
     :: Int64 -- ^ 'profileId'
-    -> PlacementStrategy -- ^ 'PlacementStrategy'
+    -> PlacementStrategy -- ^ 'payload'
     -> Int64 -- ^ 'id'
     -> PlacementStrategiesPatch'
-placementStrategiesPatch' pPspProfileId_ pPspPlacementStrategy_ pPspId_ =
+placementStrategiesPatch' pPspProfileId_ pPspPayload_ pPspId_ =
     PlacementStrategiesPatch'
     { _pspQuotaUser = Nothing
     , _pspPrettyPrint = True
     , _pspUserIP = Nothing
     , _pspProfileId = pPspProfileId_
+    , _pspPayload = pPspPayload_
     , _pspKey = Nothing
-    , _pspPlacementStrategy = pPspPlacementStrategy_
     , _pspId = pPspId_
     , _pspOAuthToken = Nothing
     , _pspFields = Nothing
@@ -141,17 +142,16 @@ pspProfileId :: Lens' PlacementStrategiesPatch' Int64
 pspProfileId
   = lens _pspProfileId (\ s a -> s{_pspProfileId = a})
 
+-- | Multipart request metadata.
+pspPayload :: Lens' PlacementStrategiesPatch' PlacementStrategy
+pspPayload
+  = lens _pspPayload (\ s a -> s{_pspPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 pspKey :: Lens' PlacementStrategiesPatch' (Maybe Key)
 pspKey = lens _pspKey (\ s a -> s{_pspKey = a})
-
--- | Multipart request metadata.
-pspPlacementStrategy :: Lens' PlacementStrategiesPatch' PlacementStrategy
-pspPlacementStrategy
-  = lens _pspPlacementStrategy
-      (\ s a -> s{_pspPlacementStrategy = a})
 
 -- | Placement strategy ID.
 pspId :: Lens' PlacementStrategiesPatch' Int64
@@ -184,7 +184,7 @@ instance GoogleRequest PlacementStrategiesPatch'
               _pspKey
               _pspOAuthToken
               (Just AltJSON)
-              _pspPlacementStrategy
+              _pspPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementStrategiesPatchResource)

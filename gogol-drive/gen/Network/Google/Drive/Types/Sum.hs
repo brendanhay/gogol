@@ -108,67 +108,38 @@ instance ToJSON DriveFilesWatchProjection where
 
 -- | The visibility of the new file. This parameter is only relevant when
 -- convert=false.
-data DriveFilesInsertVisibility
-    = DFIVDefault
+data Visibility
+    = VDefault
       -- ^ @DEFAULT@
       -- The visibility of the new file is determined by the user\'s default
       -- visibility\/sharing policies.
-    | DFIVPrivate
+    | VPrivate
       -- ^ @PRIVATE@
       -- The new file will be visible to only the owner.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DriveFilesInsertVisibility
+instance Hashable Visibility
 
-instance FromText DriveFilesInsertVisibility where
+instance FromText Visibility where
     fromText = \case
-        "DEFAULT" -> Just DFIVDefault
-        "PRIVATE" -> Just DFIVPrivate
+        "DEFAULT" -> Just VDefault
+        "PRIVATE" -> Just VPrivate
         _ -> Nothing
 
-instance ToText DriveFilesInsertVisibility where
+instance ToText Visibility where
     toText = \case
-        DFIVDefault -> "DEFAULT"
-        DFIVPrivate -> "PRIVATE"
+        VDefault -> "DEFAULT"
+        VPrivate -> "PRIVATE"
 
-instance FromJSON DriveFilesInsertVisibility where
-    parseJSON = parseJSONText "DriveFilesInsertVisibility"
+instance FromJSON Visibility where
+    parseJSON = parseJSONText "Visibility"
 
-instance ToJSON DriveFilesInsertVisibility where
-    toJSON = toJSONText
-
--- | The body of items (files\/documents) to which the query applies.
-data DriveFilesListCorpus
-    = DFLCDefault
-      -- ^ @DEFAULT@
-      -- The items that the user has accessed.
-    | DFLCDomain
-      -- ^ @DOMAIN@
-      -- Items shared to the user\'s domain.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DriveFilesListCorpus
-
-instance FromText DriveFilesListCorpus where
-    fromText = \case
-        "DEFAULT" -> Just DFLCDefault
-        "DOMAIN" -> Just DFLCDomain
-        _ -> Nothing
-
-instance ToText DriveFilesListCorpus where
-    toText = \case
-        DFLCDefault -> "DEFAULT"
-        DFLCDomain -> "DOMAIN"
-
-instance FromJSON DriveFilesListCorpus where
-    parseJSON = parseJSONText "DriveFilesListCorpus"
-
-instance ToJSON DriveFilesListCorpus where
+instance ToJSON Visibility where
     toJSON = toJSONText
 
 -- | Determines the behavior in which modifiedDate is updated. This overrides
 -- setModifiedDate.
-data DriveFilesPatchModifiedDateBehavior
+data DriveFilesUpdateModifiedDateBehavior
     = FromBody
       -- ^ @fromBody@
       -- Set modifiedDate to the value provided in the body of the request. No
@@ -193,9 +164,9 @@ data DriveFilesPatchModifiedDateBehavior
       -- update.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DriveFilesPatchModifiedDateBehavior
+instance Hashable DriveFilesUpdateModifiedDateBehavior
 
-instance FromText DriveFilesPatchModifiedDateBehavior where
+instance FromText DriveFilesUpdateModifiedDateBehavior where
     fromText = \case
         "fromBody" -> Just FromBody
         "fromBodyIfNeeded" -> Just FromBodyIfNeeded
@@ -205,7 +176,7 @@ instance FromText DriveFilesPatchModifiedDateBehavior where
         "nowIfNeeded" -> Just NowIfNeeded
         _ -> Nothing
 
-instance ToText DriveFilesPatchModifiedDateBehavior where
+instance ToText DriveFilesUpdateModifiedDateBehavior where
     toText = \case
         FromBody -> "fromBody"
         FromBodyIfNeeded -> "fromBodyIfNeeded"
@@ -214,91 +185,120 @@ instance ToText DriveFilesPatchModifiedDateBehavior where
         Now -> "now"
         NowIfNeeded -> "nowIfNeeded"
 
-instance FromJSON DriveFilesPatchModifiedDateBehavior where
-    parseJSON = parseJSONText "DriveFilesPatchModifiedDateBehavior"
-
-instance ToJSON DriveFilesPatchModifiedDateBehavior where
-    toJSON = toJSONText
-
--- | Determines the behavior in which modifiedDate is updated. This overrides
--- setModifiedDate.
-data DriveFilesUpdateModifiedDateBehavior
-    = DFUMDBFromBody
-      -- ^ @fromBody@
-      -- Set modifiedDate to the value provided in the body of the request. No
-      -- change if no value was provided.
-    | DFUMDBFromBodyIfNeeded
-      -- ^ @fromBodyIfNeeded@
-      -- Set modifiedDate to the value provided in the body of the request
-      -- depending on other contents of the update.
-    | DFUMDBFromBodyOrNow
-      -- ^ @fromBodyOrNow@
-      -- Set modifiedDate to the value provided in the body of the request, or to
-      -- the current time if no value was provided.
-    | DFUMDBNoChange
-      -- ^ @noChange@
-      -- Maintain the previous value of modifiedDate.
-    | DFUMDBNow
-      -- ^ @now@
-      -- Set modifiedDate to the current time.
-    | DFUMDBNowIfNeeded
-      -- ^ @nowIfNeeded@
-      -- Set modifiedDate to the current time depending on contents of the
-      -- update.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DriveFilesUpdateModifiedDateBehavior
-
-instance FromText DriveFilesUpdateModifiedDateBehavior where
-    fromText = \case
-        "fromBody" -> Just DFUMDBFromBody
-        "fromBodyIfNeeded" -> Just DFUMDBFromBodyIfNeeded
-        "fromBodyOrNow" -> Just DFUMDBFromBodyOrNow
-        "noChange" -> Just DFUMDBNoChange
-        "now" -> Just DFUMDBNow
-        "nowIfNeeded" -> Just DFUMDBNowIfNeeded
-        _ -> Nothing
-
-instance ToText DriveFilesUpdateModifiedDateBehavior where
-    toText = \case
-        DFUMDBFromBody -> "fromBody"
-        DFUMDBFromBodyIfNeeded -> "fromBodyIfNeeded"
-        DFUMDBFromBodyOrNow -> "fromBodyOrNow"
-        DFUMDBNoChange -> "noChange"
-        DFUMDBNow -> "now"
-        DFUMDBNowIfNeeded -> "nowIfNeeded"
-
 instance FromJSON DriveFilesUpdateModifiedDateBehavior where
     parseJSON = parseJSONText "DriveFilesUpdateModifiedDateBehavior"
 
 instance ToJSON DriveFilesUpdateModifiedDateBehavior where
     toJSON = toJSONText
 
+-- | Determines the behavior in which modifiedDate is updated. This overrides
+-- setModifiedDate.
+data ModifiedDateBehavior
+    = MDBFromBody
+      -- ^ @fromBody@
+      -- Set modifiedDate to the value provided in the body of the request. No
+      -- change if no value was provided.
+    | MDBFromBodyIfNeeded
+      -- ^ @fromBodyIfNeeded@
+      -- Set modifiedDate to the value provided in the body of the request
+      -- depending on other contents of the update.
+    | MDBFromBodyOrNow
+      -- ^ @fromBodyOrNow@
+      -- Set modifiedDate to the value provided in the body of the request, or to
+      -- the current time if no value was provided.
+    | MDBNoChange
+      -- ^ @noChange@
+      -- Maintain the previous value of modifiedDate.
+    | MDBNow
+      -- ^ @now@
+      -- Set modifiedDate to the current time.
+    | MDBNowIfNeeded
+      -- ^ @nowIfNeeded@
+      -- Set modifiedDate to the current time depending on contents of the
+      -- update.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ModifiedDateBehavior
+
+instance FromText ModifiedDateBehavior where
+    fromText = \case
+        "fromBody" -> Just MDBFromBody
+        "fromBodyIfNeeded" -> Just MDBFromBodyIfNeeded
+        "fromBodyOrNow" -> Just MDBFromBodyOrNow
+        "noChange" -> Just MDBNoChange
+        "now" -> Just MDBNow
+        "nowIfNeeded" -> Just MDBNowIfNeeded
+        _ -> Nothing
+
+instance ToText ModifiedDateBehavior where
+    toText = \case
+        MDBFromBody -> "fromBody"
+        MDBFromBodyIfNeeded -> "fromBodyIfNeeded"
+        MDBFromBodyOrNow -> "fromBodyOrNow"
+        MDBNoChange -> "noChange"
+        MDBNow -> "now"
+        MDBNowIfNeeded -> "nowIfNeeded"
+
+instance FromJSON ModifiedDateBehavior where
+    parseJSON = parseJSONText "ModifiedDateBehavior"
+
+instance ToJSON ModifiedDateBehavior where
+    toJSON = toJSONText
+
 -- | This parameter is deprecated and has no function.
-data DriveFilesListProjection
-    = DFLPBasic
+data Projection
+    = PBasic
       -- ^ @BASIC@
       -- Deprecated
-    | DFLPFull
+    | PFull
       -- ^ @FULL@
       -- Deprecated
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DriveFilesListProjection
+instance Hashable Projection
 
-instance FromText DriveFilesListProjection where
+instance FromText Projection where
     fromText = \case
-        "BASIC" -> Just DFLPBasic
-        "FULL" -> Just DFLPFull
+        "BASIC" -> Just PBasic
+        "FULL" -> Just PFull
         _ -> Nothing
 
-instance ToText DriveFilesListProjection where
+instance ToText Projection where
     toText = \case
-        DFLPBasic -> "BASIC"
-        DFLPFull -> "FULL"
+        PBasic -> "BASIC"
+        PFull -> "FULL"
 
-instance FromJSON DriveFilesListProjection where
-    parseJSON = parseJSONText "DriveFilesListProjection"
+instance FromJSON Projection where
+    parseJSON = parseJSONText "Projection"
 
-instance ToJSON DriveFilesListProjection where
+instance ToJSON Projection where
+    toJSON = toJSONText
+
+-- | The body of items (files\/documents) to which the query applies.
+data Corpus
+    = CDefault
+      -- ^ @DEFAULT@
+      -- The items that the user has accessed.
+    | CDomain
+      -- ^ @DOMAIN@
+      -- Items shared to the user\'s domain.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Corpus
+
+instance FromText Corpus where
+    fromText = \case
+        "DEFAULT" -> Just CDefault
+        "DOMAIN" -> Just CDomain
+        _ -> Nothing
+
+instance ToText Corpus where
+    toText = \case
+        CDefault -> "DEFAULT"
+        CDomain -> "DOMAIN"
+
+instance FromJSON Corpus where
+    parseJSON = parseJSONText "Corpus"
+
+instance ToJSON Corpus where
     toJSON = toJSONText

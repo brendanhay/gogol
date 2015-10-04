@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,7 +37,7 @@ module Network.Google.Resource.ResourceViews.ZoneViews.RemoveResources
     , zvrrProject
     , zvrrUserIP
     , zvrrZone
-    , zvrrZoneViewsRemoveResourcesRequest
+    , zvrrPayload
     , zvrrKey
     , zvrrOAuthToken
     , zvrrFields
@@ -68,17 +69,17 @@ type ZoneViewsRemoveResourcesResource =
 --
 -- /See:/ 'zoneViewsRemoveResources'' smart constructor.
 data ZoneViewsRemoveResources' = ZoneViewsRemoveResources'
-    { _zvrrQuotaUser                       :: !(Maybe Text)
-    , _zvrrPrettyPrint                     :: !Bool
-    , _zvrrResourceView                    :: !Text
-    , _zvrrProject                         :: !Text
-    , _zvrrUserIP                          :: !(Maybe Text)
-    , _zvrrZone                            :: !Text
-    , _zvrrZoneViewsRemoveResourcesRequest :: !ZoneViewsRemoveResourcesRequest
-    , _zvrrKey                             :: !(Maybe Key)
-    , _zvrrOAuthToken                      :: !(Maybe OAuthToken)
-    , _zvrrFields                          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _zvrrQuotaUser    :: !(Maybe Text)
+    , _zvrrPrettyPrint  :: !Bool
+    , _zvrrResourceView :: !Text
+    , _zvrrProject      :: !Text
+    , _zvrrUserIP       :: !(Maybe Text)
+    , _zvrrZone         :: !Text
+    , _zvrrPayload      :: !ZoneViewsRemoveResourcesRequest
+    , _zvrrKey          :: !(Maybe Key)
+    , _zvrrOAuthToken   :: !(Maybe OAuthToken)
+    , _zvrrFields       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsRemoveResources'' with the minimum fields required to make a request.
 --
@@ -96,7 +97,7 @@ data ZoneViewsRemoveResources' = ZoneViewsRemoveResources'
 --
 -- * 'zvrrZone'
 --
--- * 'zvrrZoneViewsRemoveResourcesRequest'
+-- * 'zvrrPayload'
 --
 -- * 'zvrrKey'
 --
@@ -107,9 +108,9 @@ zoneViewsRemoveResources'
     :: Text -- ^ 'resourceView'
     -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> ZoneViewsRemoveResourcesRequest -- ^ 'ZoneViewsRemoveResourcesRequest'
+    -> ZoneViewsRemoveResourcesRequest -- ^ 'payload'
     -> ZoneViewsRemoveResources'
-zoneViewsRemoveResources' pZvrrResourceView_ pZvrrProject_ pZvrrZone_ pZvrrZoneViewsRemoveResourcesRequest_ =
+zoneViewsRemoveResources' pZvrrResourceView_ pZvrrProject_ pZvrrZone_ pZvrrPayload_ =
     ZoneViewsRemoveResources'
     { _zvrrQuotaUser = Nothing
     , _zvrrPrettyPrint = True
@@ -117,7 +118,7 @@ zoneViewsRemoveResources' pZvrrResourceView_ pZvrrProject_ pZvrrZone_ pZvrrZoneV
     , _zvrrProject = pZvrrProject_
     , _zvrrUserIP = Nothing
     , _zvrrZone = pZvrrZone_
-    , _zvrrZoneViewsRemoveResourcesRequest = pZvrrZoneViewsRemoveResourcesRequest_
+    , _zvrrPayload = pZvrrPayload_
     , _zvrrKey = Nothing
     , _zvrrOAuthToken = Nothing
     , _zvrrFields = Nothing
@@ -159,11 +160,9 @@ zvrrZone :: Lens' ZoneViewsRemoveResources' Text
 zvrrZone = lens _zvrrZone (\ s a -> s{_zvrrZone = a})
 
 -- | Multipart request metadata.
-zvrrZoneViewsRemoveResourcesRequest :: Lens' ZoneViewsRemoveResources' ZoneViewsRemoveResourcesRequest
-zvrrZoneViewsRemoveResourcesRequest
-  = lens _zvrrZoneViewsRemoveResourcesRequest
-      (\ s a ->
-         s{_zvrrZoneViewsRemoveResourcesRequest = a})
+zvrrPayload :: Lens' ZoneViewsRemoveResources' ZoneViewsRemoveResourcesRequest
+zvrrPayload
+  = lens _zvrrPayload (\ s a -> s{_zvrrPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -199,7 +198,7 @@ instance GoogleRequest ZoneViewsRemoveResources'
               _zvrrKey
               _zvrrOAuthToken
               (Just AltJSON)
-              _zvrrZoneViewsRemoveResourcesRequest
+              _zvrrPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ZoneViewsRemoveResourcesResource)

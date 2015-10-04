@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,8 +33,8 @@ module Network.Google.Resource.TagManager.Accounts.Permissions.Create
     -- * Request Lenses
     , apcQuotaUser
     , apcPrettyPrint
-    , apcUserAccess
     , apcUserIP
+    , apcPayload
     , apcAccountId
     , apcKey
     , apcOAuthToken
@@ -64,13 +65,13 @@ type AccountsPermissionsCreateResource =
 data AccountsPermissionsCreate' = AccountsPermissionsCreate'
     { _apcQuotaUser   :: !(Maybe Text)
     , _apcPrettyPrint :: !Bool
-    , _apcUserAccess  :: !UserAccess
     , _apcUserIP      :: !(Maybe Text)
+    , _apcPayload     :: !UserAccess
     , _apcAccountId   :: !Text
     , _apcKey         :: !(Maybe Key)
     , _apcOAuthToken  :: !(Maybe OAuthToken)
     , _apcFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPermissionsCreate'' with the minimum fields required to make a request.
 --
@@ -80,9 +81,9 @@ data AccountsPermissionsCreate' = AccountsPermissionsCreate'
 --
 -- * 'apcPrettyPrint'
 --
--- * 'apcUserAccess'
---
 -- * 'apcUserIP'
+--
+-- * 'apcPayload'
 --
 -- * 'apcAccountId'
 --
@@ -92,15 +93,15 @@ data AccountsPermissionsCreate' = AccountsPermissionsCreate'
 --
 -- * 'apcFields'
 accountsPermissionsCreate'
-    :: UserAccess -- ^ 'UserAccess'
+    :: UserAccess -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> AccountsPermissionsCreate'
-accountsPermissionsCreate' pApcUserAccess_ pApcAccountId_ =
+accountsPermissionsCreate' pApcPayload_ pApcAccountId_ =
     AccountsPermissionsCreate'
     { _apcQuotaUser = Nothing
     , _apcPrettyPrint = True
-    , _apcUserAccess = pApcUserAccess_
     , _apcUserIP = Nothing
+    , _apcPayload = pApcPayload_
     , _apcAccountId = pApcAccountId_
     , _apcKey = Nothing
     , _apcOAuthToken = Nothing
@@ -120,17 +121,16 @@ apcPrettyPrint
   = lens _apcPrettyPrint
       (\ s a -> s{_apcPrettyPrint = a})
 
--- | Multipart request metadata.
-apcUserAccess :: Lens' AccountsPermissionsCreate' UserAccess
-apcUserAccess
-  = lens _apcUserAccess
-      (\ s a -> s{_apcUserAccess = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 apcUserIP :: Lens' AccountsPermissionsCreate' (Maybe Text)
 apcUserIP
   = lens _apcUserIP (\ s a -> s{_apcUserIP = a})
+
+-- | Multipart request metadata.
+apcPayload :: Lens' AccountsPermissionsCreate' UserAccess
+apcPayload
+  = lens _apcPayload (\ s a -> s{_apcPayload = a})
 
 -- | The GTM Account ID.
 apcAccountId :: Lens' AccountsPermissionsCreate' Text
@@ -170,7 +170,7 @@ instance GoogleRequest AccountsPermissionsCreate'
               _apcKey
               _apcOAuthToken
               (Just AltJSON)
-              _apcUserAccess
+              _apcPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsPermissionsCreateResource)

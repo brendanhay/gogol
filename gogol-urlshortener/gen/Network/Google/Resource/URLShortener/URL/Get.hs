@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -47,9 +48,9 @@ import           Network.Google.URLShortener.Types
 -- 'URLGet'' request conforms to.
 type URLGetResource =
      "url" :>
-       QueryParam "projection" URLshortenerURLGetProjection
-         :>
-         QueryParam "shortUrl" Text :>
+       QueryParam "shortUrl" Text :>
+         QueryParam "projection" URLshortenerURLGetProjection
+           :>
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
@@ -70,7 +71,7 @@ data URLGet' = URLGet'
     , _ugOAuthToken  :: !(Maybe OAuthToken)
     , _ugShortURL    :: !Text
     , _ugFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLGet'' with the minimum fields required to make a request.
 --
@@ -157,7 +158,7 @@ instance GoogleRequest URLGet' where
         type Rs URLGet' = URL
         request = requestWithRoute defReq uRLShortenerURL
         requestWithRoute r u URLGet'{..}
-          = go _ugProjection (Just _ugShortURL) _ugQuotaUser
+          = go (Just _ugShortURL) _ugProjection _ugQuotaUser
               (Just _ugPrettyPrint)
               _ugUserIP
               _ugFields

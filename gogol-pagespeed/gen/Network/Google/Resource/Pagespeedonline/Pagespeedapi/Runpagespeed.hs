@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -53,14 +54,12 @@ import           Network.Google.Prelude
 -- 'PagespeedapiRunpagespeed'' request conforms to.
 type PagespeedapiRunpagespeedResource =
      "runPagespeed" :>
-       QueryParam "filter_third_party_resources" Bool :>
-         QueryParam "locale" Text :>
-           QueryParams "rule" Text :>
-             QueryParam "screenshot" Bool :>
-               QueryParam "strategy"
-                 PagespeedonlinePagespeedapiRunpagespeedStrategy
-                 :>
-                 QueryParam "url" Text :>
+       QueryParam "url" Text :>
+         QueryParam "screenshot" Bool :>
+           QueryParam "locale" Text :>
+             QueryParam "filter_third_party_resources" Bool :>
+               QueryParam "strategy" Strategy :>
+                 QueryParams "rule" Text :>
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
@@ -82,12 +81,12 @@ data PagespeedapiRunpagespeed' = PagespeedapiRunpagespeed'
     , _prLocale                    :: !(Maybe Text)
     , _prURL                       :: !Text
     , _prFilterThirdPartyResources :: !Bool
-    , _prStrategy                  :: !(Maybe PagespeedonlinePagespeedapiRunpagespeedStrategy)
-    , _prRule                      :: !(Maybe Text)
+    , _prStrategy                  :: !(Maybe Strategy)
+    , _prRule                      :: !(Maybe [Text])
     , _prKey                       :: !(Maybe Key)
     , _prOAuthToken                :: !(Maybe OAuthToken)
     , _prFields                    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagespeedapiRunpagespeed'' with the minimum fields required to make a request.
 --
@@ -174,13 +173,15 @@ prFilterThirdPartyResources
       (\ s a -> s{_prFilterThirdPartyResources = a})
 
 -- | The analysis strategy to use
-prStrategy :: Lens' PagespeedapiRunpagespeed' (Maybe PagespeedonlinePagespeedapiRunpagespeedStrategy)
+prStrategy :: Lens' PagespeedapiRunpagespeed' (Maybe Strategy)
 prStrategy
   = lens _prStrategy (\ s a -> s{_prStrategy = a})
 
 -- | A PageSpeed rule to run; if none are given, all rules are run
-prRule :: Lens' PagespeedapiRunpagespeed' (Maybe Text)
-prRule = lens _prRule (\ s a -> s{_prRule = a})
+prRule :: Lens' PagespeedapiRunpagespeed' [Text]
+prRule
+  = lens _prRule (\ s a -> s{_prRule = a}) . _Default .
+      _Coerce
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -206,11 +207,10 @@ instance GoogleRequest PagespeedapiRunpagespeed'
         type Rs PagespeedapiRunpagespeed' = Result
         request = requestWithRoute defReq pageSpeedURL
         requestWithRoute r u PagespeedapiRunpagespeed'{..}
-          = go (Just _prFilterThirdPartyResources) _prLocale
-              _prRule
-              (Just _prScreenshot)
+          = go (Just _prURL) (Just _prScreenshot) _prLocale
+              (Just _prFilterThirdPartyResources)
               _prStrategy
-              (Just _prURL)
+              (_prRule ^. _Default)
               _prQuotaUser
               (Just _prPrettyPrint)
               _prUserIP

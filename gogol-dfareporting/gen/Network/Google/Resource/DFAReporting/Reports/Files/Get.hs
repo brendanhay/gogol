@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -73,8 +74,8 @@ type ReportsFilesGetResource =
                          QueryParam "fields" Text :>
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "alt" Media :>
-                                 Get '[OctetStream] Stream
+                               QueryParam "alt" AltMedia :>
+                                 Get '[OctetStream] Body
 
 -- | Retrieves a report file.
 --
@@ -89,7 +90,7 @@ data ReportsFilesGet' = ReportsFilesGet'
     , _rfgFileId      :: !Int64
     , _rfgOAuthToken  :: !(Maybe OAuthToken)
     , _rfgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsFilesGet'' with the minimum fields required to make a request.
 --
@@ -203,10 +204,11 @@ instance GoogleRequest ReportsFilesGet' where
                       r
                       u
 
-instance GoogleRequest ReportsFilesGet' where
-        type Rs (Download ReportsFilesGet') = Stream
+instance GoogleRequest (Download ReportsFilesGet')
+         where
+        type Rs (Download ReportsFilesGet') = Body
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ReportsFilesGet'{..}
+        requestWithRoute r u (Download ReportsFilesGet'{..})
           = go _rfgProfileId _rfgReportId _rfgFileId
               _rfgQuotaUser
               (Just _rfgPrettyPrint)
@@ -214,8 +216,8 @@ instance GoogleRequest ReportsFilesGet' where
               _rfgFields
               _rfgKey
               _rfgOAuthToken
-              (Just Media)
-          where go :<|> _
+              (Just AltMedia)
+          where _ :<|> go
                   = clientWithRoute
                       (Proxy :: Proxy ReportsFilesGetResource)
                       r

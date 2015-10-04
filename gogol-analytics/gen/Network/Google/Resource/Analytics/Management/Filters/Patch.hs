@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.Analytics.Management.Filters.Patch
     , mfpPrettyPrint
     , mfpFilterId
     , mfpUserIP
+    , mfpPayload
     , mfpAccountId
     , mfpKey
-    , mfpFilter
     , mfpOAuthToken
     , mfpFields
     ) where
@@ -69,12 +70,12 @@ data ManagementFiltersPatch' = ManagementFiltersPatch'
     , _mfpPrettyPrint :: !Bool
     , _mfpFilterId    :: !Text
     , _mfpUserIP      :: !(Maybe Text)
+    , _mfpPayload     :: !Filter
     , _mfpAccountId   :: !Text
     , _mfpKey         :: !(Maybe Key)
-    , _mfpFilter      :: !Filter
     , _mfpOAuthToken  :: !(Maybe OAuthToken)
     , _mfpFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersPatch'' with the minimum fields required to make a request.
 --
@@ -88,29 +89,29 @@ data ManagementFiltersPatch' = ManagementFiltersPatch'
 --
 -- * 'mfpUserIP'
 --
+-- * 'mfpPayload'
+--
 -- * 'mfpAccountId'
 --
 -- * 'mfpKey'
---
--- * 'mfpFilter'
 --
 -- * 'mfpOAuthToken'
 --
 -- * 'mfpFields'
 managementFiltersPatch'
     :: Text -- ^ 'filterId'
+    -> Filter -- ^ 'payload'
     -> Text -- ^ 'accountId'
-    -> Filter -- ^ 'Filter'
     -> ManagementFiltersPatch'
-managementFiltersPatch' pMfpFilterId_ pMfpAccountId_ pMfpFilter_ =
+managementFiltersPatch' pMfpFilterId_ pMfpPayload_ pMfpAccountId_ =
     ManagementFiltersPatch'
     { _mfpQuotaUser = Nothing
     , _mfpPrettyPrint = False
     , _mfpFilterId = pMfpFilterId_
     , _mfpUserIP = Nothing
+    , _mfpPayload = pMfpPayload_
     , _mfpAccountId = pMfpAccountId_
     , _mfpKey = Nothing
-    , _mfpFilter = pMfpFilter_
     , _mfpOAuthToken = Nothing
     , _mfpFields = Nothing
     }
@@ -139,6 +140,11 @@ mfpUserIP :: Lens' ManagementFiltersPatch' (Maybe Text)
 mfpUserIP
   = lens _mfpUserIP (\ s a -> s{_mfpUserIP = a})
 
+-- | Multipart request metadata.
+mfpPayload :: Lens' ManagementFiltersPatch' Filter
+mfpPayload
+  = lens _mfpPayload (\ s a -> s{_mfpPayload = a})
+
 -- | Account ID to which the filter belongs.
 mfpAccountId :: Lens' ManagementFiltersPatch' Text
 mfpAccountId
@@ -149,11 +155,6 @@ mfpAccountId
 -- token.
 mfpKey :: Lens' ManagementFiltersPatch' (Maybe Key)
 mfpKey = lens _mfpKey (\ s a -> s{_mfpKey = a})
-
--- | Multipart request metadata.
-mfpFilter :: Lens' ManagementFiltersPatch' Filter
-mfpFilter
-  = lens _mfpFilter (\ s a -> s{_mfpFilter = a})
 
 -- | OAuth 2.0 token for the current user.
 mfpOAuthToken :: Lens' ManagementFiltersPatch' (Maybe OAuthToken)
@@ -181,7 +182,7 @@ instance GoogleRequest ManagementFiltersPatch' where
               _mfpKey
               _mfpOAuthToken
               (Just AltJSON)
-              _mfpFilter
+              _mfpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementFiltersPatchResource)

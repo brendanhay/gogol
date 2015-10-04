@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -69,7 +70,7 @@ data TablesGet' = TablesGet'
     , _tgId          :: !Text
     , _tgOAuthToken  :: !(Maybe OAuthToken)
     , _tgFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesGet'' with the minimum fields required to make a request.
 --
@@ -154,7 +155,7 @@ instance GoogleRequest TablesGet' where
         type Rs TablesGet' = Table
         request = requestWithRoute defReq mapsEngineURL
         requestWithRoute r u TablesGet'{..}
-          = go _tgVersion _tgId _tgQuotaUser
+          = go _tgId _tgVersion _tgQuotaUser
               (Just _tgPrettyPrint)
               _tgUserIP
               _tgFields

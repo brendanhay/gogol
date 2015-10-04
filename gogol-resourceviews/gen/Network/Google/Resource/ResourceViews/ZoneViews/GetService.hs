@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -78,7 +79,7 @@ data ZoneViewsGetService' = ZoneViewsGetService'
     , _zvgsKey          :: !(Maybe Key)
     , _zvgsOAuthToken   :: !(Maybe OAuthToken)
     , _zvgsFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsGetService'' with the minimum fields required to make a request.
 --
@@ -190,8 +191,8 @@ instance GoogleRequest ZoneViewsGetService' where
              ZoneViewsGetServiceResponse
         request = requestWithRoute defReq resourceViewsURL
         requestWithRoute r u ZoneViewsGetService'{..}
-          = go _zvgsResourceName _zvgsProject _zvgsZone
-              _zvgsResourceView
+          = go _zvgsProject _zvgsZone _zvgsResourceView
+              _zvgsResourceName
               _zvgsQuotaUser
               (Just _zvgsPrettyPrint)
               _zvgsUserIP

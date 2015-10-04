@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -62,12 +63,12 @@ type ProjectsLogServicesSinksDeleteResource =
                "sinks" :>
                  Capture "sinksId" Text :>
                    QueryParam "$.xgafv" Text :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "upload_protocol" Text :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "callback" Text :>
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "fields" Text :>
@@ -96,7 +97,7 @@ data ProjectsLogServicesSinksDelete' = ProjectsLogServicesSinksDelete'
     , _plssdSinksId        :: !Text
     , _plssdFields         :: !(Maybe Text)
     , _plssdCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogServicesSinksDelete'' with the minimum fields required to make a request.
 --
@@ -254,14 +255,15 @@ instance GoogleRequest
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u
           ProjectsLogServicesSinksDelete'{..}
-          = go _plssdXgafv _plssdAccessToken _plssdBearerToken
-              _plssdCallback
-              (Just _plssdPp)
-              _plssdUploadType
-              _plssdUploadProtocol
-              _plssdProjectsId
-              _plssdLogServicesId
+          = go _plssdProjectsId _plssdLogServicesId
               _plssdSinksId
+              _plssdXgafv
+              _plssdUploadProtocol
+              (Just _plssdPp)
+              _plssdAccessToken
+              _plssdUploadType
+              _plssdBearerToken
+              _plssdCallback
               _plssdQuotaUser
               (Just _plssdPrettyPrint)
               _plssdFields

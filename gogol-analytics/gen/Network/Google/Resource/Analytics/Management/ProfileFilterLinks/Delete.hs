@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -79,7 +80,7 @@ data ManagementProfileFilterLinksDelete' = ManagementProfileFilterLinksDelete'
     , _mpfldLinkId        :: !Text
     , _mpfldOAuthToken    :: !(Maybe OAuthToken)
     , _mpfldFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileFilterLinksDelete'' with the minimum fields required to make a request.
 --

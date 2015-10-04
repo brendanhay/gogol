@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.ResetPassword
     , rprpQuotaUser
     , rprpPrettyPrint
     , rprpUserIP
+    , rprpPayload
     , rprpKey
-    , rprpIdentitytoolkitRelyingPartyResetPasswordRequest
     , rprpOAuthToken
     , rprpFields
     ) where
@@ -61,14 +62,14 @@ type RelyingPartyResetPasswordResource =
 --
 -- /See:/ 'relyingPartyResetPassword'' smart constructor.
 data RelyingPartyResetPassword' = RelyingPartyResetPassword'
-    { _rprpQuotaUser                                       :: !(Maybe Text)
-    , _rprpPrettyPrint                                     :: !Bool
-    , _rprpUserIP                                          :: !(Maybe Text)
-    , _rprpKey                                             :: !(Maybe Key)
-    , _rprpIdentitytoolkitRelyingPartyResetPasswordRequest :: !IdentitytoolkitRelyingPartyResetPasswordRequest
-    , _rprpOAuthToken                                      :: !(Maybe OAuthToken)
-    , _rprpFields                                          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rprpQuotaUser   :: !(Maybe Text)
+    , _rprpPrettyPrint :: !Bool
+    , _rprpUserIP      :: !(Maybe Text)
+    , _rprpPayload     :: !IdentitytoolkitRelyingPartyResetPasswordRequest
+    , _rprpKey         :: !(Maybe Key)
+    , _rprpOAuthToken  :: !(Maybe OAuthToken)
+    , _rprpFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingPartyResetPassword'' with the minimum fields required to make a request.
 --
@@ -80,23 +81,23 @@ data RelyingPartyResetPassword' = RelyingPartyResetPassword'
 --
 -- * 'rprpUserIP'
 --
--- * 'rprpKey'
+-- * 'rprpPayload'
 --
--- * 'rprpIdentitytoolkitRelyingPartyResetPasswordRequest'
+-- * 'rprpKey'
 --
 -- * 'rprpOAuthToken'
 --
 -- * 'rprpFields'
 relyingPartyResetPassword'
-    :: IdentitytoolkitRelyingPartyResetPasswordRequest -- ^ 'IdentitytoolkitRelyingPartyResetPasswordRequest'
+    :: IdentitytoolkitRelyingPartyResetPasswordRequest -- ^ 'payload'
     -> RelyingPartyResetPassword'
-relyingPartyResetPassword' pRprpIdentitytoolkitRelyingPartyResetPasswordRequest_ =
+relyingPartyResetPassword' pRprpPayload_ =
     RelyingPartyResetPassword'
     { _rprpQuotaUser = Nothing
     , _rprpPrettyPrint = True
     , _rprpUserIP = Nothing
+    , _rprpPayload = pRprpPayload_
     , _rprpKey = Nothing
-    , _rprpIdentitytoolkitRelyingPartyResetPasswordRequest = pRprpIdentitytoolkitRelyingPartyResetPasswordRequest_
     , _rprpOAuthToken = Nothing
     , _rprpFields = Nothing
     }
@@ -121,20 +122,16 @@ rprpUserIP :: Lens' RelyingPartyResetPassword' (Maybe Text)
 rprpUserIP
   = lens _rprpUserIP (\ s a -> s{_rprpUserIP = a})
 
+-- | Multipart request metadata.
+rprpPayload :: Lens' RelyingPartyResetPassword' IdentitytoolkitRelyingPartyResetPasswordRequest
+rprpPayload
+  = lens _rprpPayload (\ s a -> s{_rprpPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 rprpKey :: Lens' RelyingPartyResetPassword' (Maybe Key)
 rprpKey = lens _rprpKey (\ s a -> s{_rprpKey = a})
-
--- | Multipart request metadata.
-rprpIdentitytoolkitRelyingPartyResetPasswordRequest :: Lens' RelyingPartyResetPassword' IdentitytoolkitRelyingPartyResetPasswordRequest
-rprpIdentitytoolkitRelyingPartyResetPasswordRequest
-  = lens
-      _rprpIdentitytoolkitRelyingPartyResetPasswordRequest
-      (\ s a ->
-         s{_rprpIdentitytoolkitRelyingPartyResetPasswordRequest
-             = a})
 
 -- | OAuth 2.0 token for the current user.
 rprpOAuthToken :: Lens' RelyingPartyResetPassword' (Maybe OAuthToken)
@@ -163,7 +160,7 @@ instance GoogleRequest RelyingPartyResetPassword'
               _rprpKey
               _rprpOAuthToken
               (Just AltJSON)
-              _rprpIdentitytoolkitRelyingPartyResetPasswordRequest
+              _rprpPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RelyingPartyResetPasswordResource)

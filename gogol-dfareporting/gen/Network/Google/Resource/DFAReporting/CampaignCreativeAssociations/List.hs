@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -55,11 +56,11 @@ type CampaignCreativeAssociationsListResource =
          "campaigns" :>
            Capture "campaignId" Int64 :>
              "campaignCreativeAssociations" :>
-               QueryParam "maxResults" Int32 :>
+               QueryParam "sortOrder"
+                 DfareportingCampaignCreativeAssociationsListSortOrder
+                 :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "sortOrder"
-                     DfareportingCampaignCreativeAssociationsListSortOrder
-                     :>
+                   QueryParam "maxResults" Int32 :>
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
@@ -86,7 +87,7 @@ data CampaignCreativeAssociationsList' = CampaignCreativeAssociationsList'
     , _ccalOAuthToken  :: !(Maybe OAuthToken)
     , _ccalMaxResults  :: !(Maybe Int32)
     , _ccalFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignCreativeAssociationsList'' with the minimum fields required to make a request.
 --
@@ -211,9 +212,9 @@ instance GoogleRequest
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           CampaignCreativeAssociationsList'{..}
-          = go _ccalMaxResults _ccalPageToken _ccalSortOrder
-              _ccalProfileId
-              _ccalCampaignId
+          = go _ccalProfileId _ccalCampaignId _ccalSortOrder
+              _ccalPageToken
+              _ccalMaxResults
               _ccalQuotaUser
               (Just _ccalPrettyPrint)
               _ccalUserIP

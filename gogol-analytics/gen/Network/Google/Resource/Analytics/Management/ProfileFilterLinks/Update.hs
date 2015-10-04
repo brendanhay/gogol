@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,11 +36,11 @@ module Network.Google.Resource.Analytics.Management.ProfileFilterLinks.Update
     , mpfluWebPropertyId
     , mpfluUserIP
     , mpfluProfileId
+    , mpfluPayload
     , mpfluAccountId
     , mpfluKey
     , mpfluLinkId
     , mpfluOAuthToken
-    , mpfluProfileFilterLink
     , mpfluFields
     ) where
 
@@ -72,18 +73,18 @@ type ManagementProfileFilterLinksUpdateResource =
 --
 -- /See:/ 'managementProfileFilterLinksUpdate'' smart constructor.
 data ManagementProfileFilterLinksUpdate' = ManagementProfileFilterLinksUpdate'
-    { _mpfluQuotaUser         :: !(Maybe Text)
-    , _mpfluPrettyPrint       :: !Bool
-    , _mpfluWebPropertyId     :: !Text
-    , _mpfluUserIP            :: !(Maybe Text)
-    , _mpfluProfileId         :: !Text
-    , _mpfluAccountId         :: !Text
-    , _mpfluKey               :: !(Maybe Key)
-    , _mpfluLinkId            :: !Text
-    , _mpfluOAuthToken        :: !(Maybe OAuthToken)
-    , _mpfluProfileFilterLink :: !ProfileFilterLink
-    , _mpfluFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _mpfluQuotaUser     :: !(Maybe Text)
+    , _mpfluPrettyPrint   :: !Bool
+    , _mpfluWebPropertyId :: !Text
+    , _mpfluUserIP        :: !(Maybe Text)
+    , _mpfluProfileId     :: !Text
+    , _mpfluPayload       :: !ProfileFilterLink
+    , _mpfluAccountId     :: !Text
+    , _mpfluKey           :: !(Maybe Key)
+    , _mpfluLinkId        :: !Text
+    , _mpfluOAuthToken    :: !(Maybe OAuthToken)
+    , _mpfluFields        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileFilterLinksUpdate'' with the minimum fields required to make a request.
 --
@@ -99,6 +100,8 @@ data ManagementProfileFilterLinksUpdate' = ManagementProfileFilterLinksUpdate'
 --
 -- * 'mpfluProfileId'
 --
+-- * 'mpfluPayload'
+--
 -- * 'mpfluAccountId'
 --
 -- * 'mpfluKey'
@@ -107,28 +110,26 @@ data ManagementProfileFilterLinksUpdate' = ManagementProfileFilterLinksUpdate'
 --
 -- * 'mpfluOAuthToken'
 --
--- * 'mpfluProfileFilterLink'
---
 -- * 'mpfluFields'
 managementProfileFilterLinksUpdate'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
+    -> ProfileFilterLink -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
-    -> ProfileFilterLink -- ^ 'ProfileFilterLink'
     -> ManagementProfileFilterLinksUpdate'
-managementProfileFilterLinksUpdate' pMpfluWebPropertyId_ pMpfluProfileId_ pMpfluAccountId_ pMpfluLinkId_ pMpfluProfileFilterLink_ =
+managementProfileFilterLinksUpdate' pMpfluWebPropertyId_ pMpfluProfileId_ pMpfluPayload_ pMpfluAccountId_ pMpfluLinkId_ =
     ManagementProfileFilterLinksUpdate'
     { _mpfluQuotaUser = Nothing
     , _mpfluPrettyPrint = False
     , _mpfluWebPropertyId = pMpfluWebPropertyId_
     , _mpfluUserIP = Nothing
     , _mpfluProfileId = pMpfluProfileId_
+    , _mpfluPayload = pMpfluPayload_
     , _mpfluAccountId = pMpfluAccountId_
     , _mpfluKey = Nothing
     , _mpfluLinkId = pMpfluLinkId_
     , _mpfluOAuthToken = Nothing
-    , _mpfluProfileFilterLink = pMpfluProfileFilterLink_
     , _mpfluFields = Nothing
     }
 
@@ -164,6 +165,11 @@ mpfluProfileId
   = lens _mpfluProfileId
       (\ s a -> s{_mpfluProfileId = a})
 
+-- | Multipart request metadata.
+mpfluPayload :: Lens' ManagementProfileFilterLinksUpdate' ProfileFilterLink
+mpfluPayload
+  = lens _mpfluPayload (\ s a -> s{_mpfluPayload = a})
+
 -- | Account ID to which profile filter link belongs.
 mpfluAccountId :: Lens' ManagementProfileFilterLinksUpdate' Text
 mpfluAccountId
@@ -186,12 +192,6 @@ mpfluOAuthToken :: Lens' ManagementProfileFilterLinksUpdate' (Maybe OAuthToken)
 mpfluOAuthToken
   = lens _mpfluOAuthToken
       (\ s a -> s{_mpfluOAuthToken = a})
-
--- | Multipart request metadata.
-mpfluProfileFilterLink :: Lens' ManagementProfileFilterLinksUpdate' ProfileFilterLink
-mpfluProfileFilterLink
-  = lens _mpfluProfileFilterLink
-      (\ s a -> s{_mpfluProfileFilterLink = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mpfluFields :: Lens' ManagementProfileFilterLinksUpdate' (Maybe Text)
@@ -220,7 +220,7 @@ instance GoogleRequest
               _mpfluKey
               _mpfluOAuthToken
               (Just AltJSON)
-              _mpfluProfileFilterLink
+              _mpfluPayload
           where go
                   = clientWithRoute
                       (Proxy ::

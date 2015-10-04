@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.DownloadAccount
     , rpdaQuotaUser
     , rpdaPrettyPrint
     , rpdaUserIP
+    , rpdaPayload
     , rpdaKey
-    , rpdaIdentitytoolkitRelyingPartyDownloadAccountRequest
     , rpdaOAuthToken
     , rpdaFields
     ) where
@@ -61,14 +62,14 @@ type RelyingPartyDownloadAccountResource =
 --
 -- /See:/ 'relyingPartyDownloadAccount'' smart constructor.
 data RelyingPartyDownloadAccount' = RelyingPartyDownloadAccount'
-    { _rpdaQuotaUser                                         :: !(Maybe Text)
-    , _rpdaPrettyPrint                                       :: !Bool
-    , _rpdaUserIP                                            :: !(Maybe Text)
-    , _rpdaKey                                               :: !(Maybe Key)
-    , _rpdaIdentitytoolkitRelyingPartyDownloadAccountRequest :: !IdentitytoolkitRelyingPartyDownloadAccountRequest
-    , _rpdaOAuthToken                                        :: !(Maybe OAuthToken)
-    , _rpdaFields                                            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _rpdaQuotaUser   :: !(Maybe Text)
+    , _rpdaPrettyPrint :: !Bool
+    , _rpdaUserIP      :: !(Maybe Text)
+    , _rpdaPayload     :: !IdentitytoolkitRelyingPartyDownloadAccountRequest
+    , _rpdaKey         :: !(Maybe Key)
+    , _rpdaOAuthToken  :: !(Maybe OAuthToken)
+    , _rpdaFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingPartyDownloadAccount'' with the minimum fields required to make a request.
 --
@@ -80,23 +81,23 @@ data RelyingPartyDownloadAccount' = RelyingPartyDownloadAccount'
 --
 -- * 'rpdaUserIP'
 --
--- * 'rpdaKey'
+-- * 'rpdaPayload'
 --
--- * 'rpdaIdentitytoolkitRelyingPartyDownloadAccountRequest'
+-- * 'rpdaKey'
 --
 -- * 'rpdaOAuthToken'
 --
 -- * 'rpdaFields'
 relyingPartyDownloadAccount'
-    :: IdentitytoolkitRelyingPartyDownloadAccountRequest -- ^ 'IdentitytoolkitRelyingPartyDownloadAccountRequest'
+    :: IdentitytoolkitRelyingPartyDownloadAccountRequest -- ^ 'payload'
     -> RelyingPartyDownloadAccount'
-relyingPartyDownloadAccount' pRpdaIdentitytoolkitRelyingPartyDownloadAccountRequest_ =
+relyingPartyDownloadAccount' pRpdaPayload_ =
     RelyingPartyDownloadAccount'
     { _rpdaQuotaUser = Nothing
     , _rpdaPrettyPrint = True
     , _rpdaUserIP = Nothing
+    , _rpdaPayload = pRpdaPayload_
     , _rpdaKey = Nothing
-    , _rpdaIdentitytoolkitRelyingPartyDownloadAccountRequest = pRpdaIdentitytoolkitRelyingPartyDownloadAccountRequest_
     , _rpdaOAuthToken = Nothing
     , _rpdaFields = Nothing
     }
@@ -121,20 +122,16 @@ rpdaUserIP :: Lens' RelyingPartyDownloadAccount' (Maybe Text)
 rpdaUserIP
   = lens _rpdaUserIP (\ s a -> s{_rpdaUserIP = a})
 
+-- | Multipart request metadata.
+rpdaPayload :: Lens' RelyingPartyDownloadAccount' IdentitytoolkitRelyingPartyDownloadAccountRequest
+rpdaPayload
+  = lens _rpdaPayload (\ s a -> s{_rpdaPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 rpdaKey :: Lens' RelyingPartyDownloadAccount' (Maybe Key)
 rpdaKey = lens _rpdaKey (\ s a -> s{_rpdaKey = a})
-
--- | Multipart request metadata.
-rpdaIdentitytoolkitRelyingPartyDownloadAccountRequest :: Lens' RelyingPartyDownloadAccount' IdentitytoolkitRelyingPartyDownloadAccountRequest
-rpdaIdentitytoolkitRelyingPartyDownloadAccountRequest
-  = lens
-      _rpdaIdentitytoolkitRelyingPartyDownloadAccountRequest
-      (\ s a ->
-         s{_rpdaIdentitytoolkitRelyingPartyDownloadAccountRequest
-             = a})
 
 -- | OAuth 2.0 token for the current user.
 rpdaOAuthToken :: Lens' RelyingPartyDownloadAccount' (Maybe OAuthToken)
@@ -164,7 +161,7 @@ instance GoogleRequest RelyingPartyDownloadAccount'
               _rpdaKey
               _rpdaOAuthToken
               (Just AltJSON)
-              _rpdaIdentitytoolkitRelyingPartyDownloadAccountRequest
+              _rpdaPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RelyingPartyDownloadAccountResource)

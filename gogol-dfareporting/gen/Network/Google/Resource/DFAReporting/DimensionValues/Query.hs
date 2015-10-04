@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,9 +33,9 @@ module Network.Google.Resource.DFAReporting.DimensionValues.Query
     -- * Request Lenses
     , dvqQuotaUser
     , dvqPrettyPrint
-    , dvqDimensionValueRequest
     , dvqUserIP
     , dvqProfileId
+    , dvqPayload
     , dvqKey
     , dvqPageToken
     , dvqOAuthToken
@@ -52,8 +53,8 @@ type DimensionValuesQueryResource =
        Capture "profileId" Int64 :>
          "dimensionvalues" :>
            "query" :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "pageToken" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Int32 :>
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
@@ -68,17 +69,17 @@ type DimensionValuesQueryResource =
 --
 -- /See:/ 'dimensionValuesQuery'' smart constructor.
 data DimensionValuesQuery' = DimensionValuesQuery'
-    { _dvqQuotaUser             :: !(Maybe Text)
-    , _dvqPrettyPrint           :: !Bool
-    , _dvqDimensionValueRequest :: !DimensionValueRequest
-    , _dvqUserIP                :: !(Maybe Text)
-    , _dvqProfileId             :: !Int64
-    , _dvqKey                   :: !(Maybe Key)
-    , _dvqPageToken             :: !(Maybe Text)
-    , _dvqOAuthToken            :: !(Maybe OAuthToken)
-    , _dvqMaxResults            :: !(Maybe Int32)
-    , _dvqFields                :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _dvqQuotaUser   :: !(Maybe Text)
+    , _dvqPrettyPrint :: !Bool
+    , _dvqUserIP      :: !(Maybe Text)
+    , _dvqProfileId   :: !Int64
+    , _dvqPayload     :: !DimensionValueRequest
+    , _dvqKey         :: !(Maybe Key)
+    , _dvqPageToken   :: !(Maybe Text)
+    , _dvqOAuthToken  :: !(Maybe OAuthToken)
+    , _dvqMaxResults  :: !(Maybe Int32)
+    , _dvqFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DimensionValuesQuery'' with the minimum fields required to make a request.
 --
@@ -88,11 +89,11 @@ data DimensionValuesQuery' = DimensionValuesQuery'
 --
 -- * 'dvqPrettyPrint'
 --
--- * 'dvqDimensionValueRequest'
---
 -- * 'dvqUserIP'
 --
 -- * 'dvqProfileId'
+--
+-- * 'dvqPayload'
 --
 -- * 'dvqKey'
 --
@@ -104,16 +105,16 @@ data DimensionValuesQuery' = DimensionValuesQuery'
 --
 -- * 'dvqFields'
 dimensionValuesQuery'
-    :: DimensionValueRequest -- ^ 'DimensionValueRequest'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'profileId'
+    -> DimensionValueRequest -- ^ 'payload'
     -> DimensionValuesQuery'
-dimensionValuesQuery' pDvqDimensionValueRequest_ pDvqProfileId_ =
+dimensionValuesQuery' pDvqProfileId_ pDvqPayload_ =
     DimensionValuesQuery'
     { _dvqQuotaUser = Nothing
     , _dvqPrettyPrint = True
-    , _dvqDimensionValueRequest = pDvqDimensionValueRequest_
     , _dvqUserIP = Nothing
     , _dvqProfileId = pDvqProfileId_
+    , _dvqPayload = pDvqPayload_
     , _dvqKey = Nothing
     , _dvqPageToken = Nothing
     , _dvqOAuthToken = Nothing
@@ -134,12 +135,6 @@ dvqPrettyPrint
   = lens _dvqPrettyPrint
       (\ s a -> s{_dvqPrettyPrint = a})
 
--- | Multipart request metadata.
-dvqDimensionValueRequest :: Lens' DimensionValuesQuery' DimensionValueRequest
-dvqDimensionValueRequest
-  = lens _dvqDimensionValueRequest
-      (\ s a -> s{_dvqDimensionValueRequest = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 dvqUserIP :: Lens' DimensionValuesQuery' (Maybe Text)
@@ -150,6 +145,11 @@ dvqUserIP
 dvqProfileId :: Lens' DimensionValuesQuery' Int64
 dvqProfileId
   = lens _dvqProfileId (\ s a -> s{_dvqProfileId = a})
+
+-- | Multipart request metadata.
+dvqPayload :: Lens' DimensionValuesQuery' DimensionValueRequest
+dvqPayload
+  = lens _dvqPayload (\ s a -> s{_dvqPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -187,7 +187,7 @@ instance GoogleRequest DimensionValuesQuery' where
         type Rs DimensionValuesQuery' = DimensionValueList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u DimensionValuesQuery'{..}
-          = go _dvqMaxResults _dvqPageToken _dvqProfileId
+          = go _dvqProfileId _dvqPageToken _dvqMaxResults
               _dvqQuotaUser
               (Just _dvqPrettyPrint)
               _dvqUserIP
@@ -195,7 +195,7 @@ instance GoogleRequest DimensionValuesQuery' where
               _dvqKey
               _dvqOAuthToken
               (Just AltJSON)
-              _dvqDimensionValueRequest
+              _dvqPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DimensionValuesQueryResource)

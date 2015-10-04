@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -38,10 +39,10 @@ module Network.Google.Resource.CloudResourceManager.Projects.TestIAMPermissions
     , ptipPp
     , ptipAccessToken
     , ptipUploadType
+    , ptipPayload
     , ptipBearerToken
     , ptipKey
     , ptipResource
-    , ptipTestIAMPermissionsRequest
     , ptipOAuthToken
     , ptipFields
     , ptipCallback
@@ -55,14 +56,14 @@ import           Network.Google.ResourceManager.Types
 type ProjectsTestIAMPermissionsResource =
      "v1beta1" :>
        "projects" :>
-         "{resource}:testIamPermissions" :>
+         CaptureMode "resource" "testIamPermissions" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
@@ -78,21 +79,21 @@ type ProjectsTestIAMPermissionsResource =
 --
 -- /See:/ 'projectsTestIAMPermissions'' smart constructor.
 data ProjectsTestIAMPermissions' = ProjectsTestIAMPermissions'
-    { _ptipXgafv                     :: !(Maybe Text)
-    , _ptipQuotaUser                 :: !(Maybe Text)
-    , _ptipPrettyPrint               :: !Bool
-    , _ptipUploadProtocol            :: !(Maybe Text)
-    , _ptipPp                        :: !Bool
-    , _ptipAccessToken               :: !(Maybe Text)
-    , _ptipUploadType                :: !(Maybe Text)
-    , _ptipBearerToken               :: !(Maybe Text)
-    , _ptipKey                       :: !(Maybe Key)
-    , _ptipResource                  :: !Text
-    , _ptipTestIAMPermissionsRequest :: !TestIAMPermissionsRequest
-    , _ptipOAuthToken                :: !(Maybe OAuthToken)
-    , _ptipFields                    :: !(Maybe Text)
-    , _ptipCallback                  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _ptipXgafv          :: !(Maybe Text)
+    , _ptipQuotaUser      :: !(Maybe Text)
+    , _ptipPrettyPrint    :: !Bool
+    , _ptipUploadProtocol :: !(Maybe Text)
+    , _ptipPp             :: !Bool
+    , _ptipAccessToken    :: !(Maybe Text)
+    , _ptipUploadType     :: !(Maybe Text)
+    , _ptipPayload        :: !TestIAMPermissionsRequest
+    , _ptipBearerToken    :: !(Maybe Text)
+    , _ptipKey            :: !(Maybe Key)
+    , _ptipResource       :: !Text
+    , _ptipOAuthToken     :: !(Maybe OAuthToken)
+    , _ptipFields         :: !(Maybe Text)
+    , _ptipCallback       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsTestIAMPermissions'' with the minimum fields required to make a request.
 --
@@ -112,13 +113,13 @@ data ProjectsTestIAMPermissions' = ProjectsTestIAMPermissions'
 --
 -- * 'ptipUploadType'
 --
+-- * 'ptipPayload'
+--
 -- * 'ptipBearerToken'
 --
 -- * 'ptipKey'
 --
 -- * 'ptipResource'
---
--- * 'ptipTestIAMPermissionsRequest'
 --
 -- * 'ptipOAuthToken'
 --
@@ -126,10 +127,10 @@ data ProjectsTestIAMPermissions' = ProjectsTestIAMPermissions'
 --
 -- * 'ptipCallback'
 projectsTestIAMPermissions'
-    :: Text -- ^ 'resource'
-    -> TestIAMPermissionsRequest -- ^ 'TestIAMPermissionsRequest'
+    :: TestIAMPermissionsRequest -- ^ 'payload'
+    -> Text -- ^ 'resource'
     -> ProjectsTestIAMPermissions'
-projectsTestIAMPermissions' pPtipResource_ pPtipTestIAMPermissionsRequest_ =
+projectsTestIAMPermissions' pPtipPayload_ pPtipResource_ =
     ProjectsTestIAMPermissions'
     { _ptipXgafv = Nothing
     , _ptipQuotaUser = Nothing
@@ -138,10 +139,10 @@ projectsTestIAMPermissions' pPtipResource_ pPtipTestIAMPermissionsRequest_ =
     , _ptipPp = True
     , _ptipAccessToken = Nothing
     , _ptipUploadType = Nothing
+    , _ptipPayload = pPtipPayload_
     , _ptipBearerToken = Nothing
     , _ptipKey = Nothing
     , _ptipResource = pPtipResource_
-    , _ptipTestIAMPermissionsRequest = pPtipTestIAMPermissionsRequest_
     , _ptipOAuthToken = Nothing
     , _ptipFields = Nothing
     , _ptipCallback = Nothing
@@ -188,6 +189,11 @@ ptipUploadType
   = lens _ptipUploadType
       (\ s a -> s{_ptipUploadType = a})
 
+-- | Multipart request metadata.
+ptipPayload :: Lens' ProjectsTestIAMPermissions' TestIAMPermissionsRequest
+ptipPayload
+  = lens _ptipPayload (\ s a -> s{_ptipPayload = a})
+
 -- | OAuth bearer token.
 ptipBearerToken :: Lens' ProjectsTestIAMPermissions' (Maybe Text)
 ptipBearerToken
@@ -206,12 +212,6 @@ ptipKey = lens _ptipKey (\ s a -> s{_ptipKey = a})
 ptipResource :: Lens' ProjectsTestIAMPermissions' Text
 ptipResource
   = lens _ptipResource (\ s a -> s{_ptipResource = a})
-
--- | Multipart request metadata.
-ptipTestIAMPermissionsRequest :: Lens' ProjectsTestIAMPermissions' TestIAMPermissionsRequest
-ptipTestIAMPermissionsRequest
-  = lens _ptipTestIAMPermissionsRequest
-      (\ s a -> s{_ptipTestIAMPermissionsRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 ptipOAuthToken :: Lens' ProjectsTestIAMPermissions' (Maybe OAuthToken)
@@ -239,19 +239,19 @@ instance GoogleRequest ProjectsTestIAMPermissions'
              TestIAMPermissionsResponse
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u ProjectsTestIAMPermissions'{..}
-          = go _ptipXgafv _ptipAccessToken _ptipBearerToken
-              _ptipCallback
+          = go _ptipResource _ptipXgafv _ptipUploadProtocol
               (Just _ptipPp)
+              _ptipAccessToken
               _ptipUploadType
-              _ptipUploadProtocol
-              _ptipResource
+              _ptipBearerToken
+              _ptipCallback
               _ptipQuotaUser
               (Just _ptipPrettyPrint)
               _ptipFields
               _ptipKey
               _ptipOAuthToken
               (Just AltJSON)
-              _ptipTestIAMPermissionsRequest
+              _ptipPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsTestIAMPermissionsResource)

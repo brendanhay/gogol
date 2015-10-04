@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,9 +34,9 @@ module Network.Google.Resource.Plus.Moments.Insert
     -- * Request Lenses
     , miQuotaUser
     , miPrettyPrint
-    , miMoment
     , miUserIP
     , miCollection
+    , miPayload
     , miDebug
     , miUserId
     , miKey
@@ -70,15 +71,15 @@ type MomentsInsertResource =
 data MomentsInsert' = MomentsInsert'
     { _miQuotaUser   :: !(Maybe Text)
     , _miPrettyPrint :: !Bool
-    , _miMoment      :: !Moment
     , _miUserIP      :: !(Maybe Text)
     , _miCollection  :: !PlusMomentsInsertCollection
+    , _miPayload     :: !Moment
     , _miDebug       :: !(Maybe Bool)
     , _miUserId      :: !Text
     , _miKey         :: !(Maybe Key)
     , _miOAuthToken  :: !(Maybe OAuthToken)
     , _miFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MomentsInsert'' with the minimum fields required to make a request.
 --
@@ -88,11 +89,11 @@ data MomentsInsert' = MomentsInsert'
 --
 -- * 'miPrettyPrint'
 --
--- * 'miMoment'
---
 -- * 'miUserIP'
 --
 -- * 'miCollection'
+--
+-- * 'miPayload'
 --
 -- * 'miDebug'
 --
@@ -104,17 +105,17 @@ data MomentsInsert' = MomentsInsert'
 --
 -- * 'miFields'
 momentsInsert'
-    :: Moment -- ^ 'Moment'
-    -> PlusMomentsInsertCollection -- ^ 'collection'
+    :: PlusMomentsInsertCollection -- ^ 'collection'
+    -> Moment -- ^ 'payload'
     -> Text -- ^ 'userId'
     -> MomentsInsert'
-momentsInsert' pMiMoment_ pMiCollection_ pMiUserId_ =
+momentsInsert' pMiCollection_ pMiPayload_ pMiUserId_ =
     MomentsInsert'
     { _miQuotaUser = Nothing
     , _miPrettyPrint = True
-    , _miMoment = pMiMoment_
     , _miUserIP = Nothing
     , _miCollection = pMiCollection_
+    , _miPayload = pMiPayload_
     , _miDebug = Nothing
     , _miUserId = pMiUserId_
     , _miKey = Nothing
@@ -135,10 +136,6 @@ miPrettyPrint
   = lens _miPrettyPrint
       (\ s a -> s{_miPrettyPrint = a})
 
--- | Multipart request metadata.
-miMoment :: Lens' MomentsInsert' Moment
-miMoment = lens _miMoment (\ s a -> s{_miMoment = a})
-
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
 miUserIP :: Lens' MomentsInsert' (Maybe Text)
@@ -148,6 +145,11 @@ miUserIP = lens _miUserIP (\ s a -> s{_miUserIP = a})
 miCollection :: Lens' MomentsInsert' PlusMomentsInsertCollection
 miCollection
   = lens _miCollection (\ s a -> s{_miCollection = a})
+
+-- | Multipart request metadata.
+miPayload :: Lens' MomentsInsert' Moment
+miPayload
+  = lens _miPayload (\ s a -> s{_miPayload = a})
 
 -- | Return the moment as written. Should be used only for debugging.
 miDebug :: Lens' MomentsInsert' (Maybe Bool)
@@ -181,14 +183,14 @@ instance GoogleRequest MomentsInsert' where
         type Rs MomentsInsert' = Moment
         request = requestWithRoute defReq plusURL
         requestWithRoute r u MomentsInsert'{..}
-          = go _miDebug _miUserId _miCollection _miQuotaUser
+          = go _miUserId _miCollection _miDebug _miQuotaUser
               (Just _miPrettyPrint)
               _miUserIP
               _miFields
               _miKey
               _miOAuthToken
               (Just AltJSON)
-              _miMoment
+              _miPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MomentsInsertResource)

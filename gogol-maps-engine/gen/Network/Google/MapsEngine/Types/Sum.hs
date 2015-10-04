@@ -56,29 +56,6 @@ instance FromJSON LayerProcessingStatus where
 instance ToJSON LayerProcessingStatus where
     toJSON = toJSONText
 
--- | Name of the shape.
-data ScaledShapeShape
-    = Circle
-      -- ^ @circle@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ScaledShapeShape
-
-instance FromText ScaledShapeShape where
-    fromText = \case
-        "circle" -> Just Circle
-        _ -> Nothing
-
-instance ToText ScaledShapeShape where
-    toText = \case
-        Circle -> "circle"
-
-instance FromJSON ScaledShapeShape where
-    parseJSON = parseJSONText "ScaledShapeShape"
-
-instance ToJSON ScaledShapeShape where
-    toJSON = toJSONText
-
 data MapsEngineRastersListProcessingStatus
     = MERLPSComplete
       -- ^ @complete@
@@ -159,6 +136,33 @@ instance FromJSON RasterProcessingStatus where
     parseJSON = parseJSONText "RasterProcessingStatus"
 
 instance ToJSON RasterProcessingStatus where
+    toJSON = toJSONText
+
+-- | Font style of the label, defaults to \'normal\'.
+data FontStyle
+    = Italic
+      -- ^ @italic@
+    | Normal
+      -- ^ @normal@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable FontStyle
+
+instance FromText FontStyle where
+    fromText = \case
+        "italic" -> Just Italic
+        "normal" -> Just Normal
+        _ -> Nothing
+
+instance ToText FontStyle where
+    toText = \case
+        Italic -> "italic"
+        Normal -> "normal"
+
+instance FromJSON FontStyle where
+    parseJSON = parseJSONText "FontStyle"
+
+instance ToJSON FontStyle where
     toJSON = toJSONText
 
 -- | The type of access granted to this user or group.
@@ -254,75 +258,88 @@ instance FromJSON MapsEngineRastersListRole where
 instance ToJSON MapsEngineRastersListRole where
     toJSON = toJSONText
 
+-- | Deprecated: The type of the datasources used to build this Layer. Note:
+-- This has been replaced by layerType, but is still available for now to
+-- maintain backward compatibility.
+data DatasourceType
+    = DTImage
+      -- ^ @image@
+    | DTTable
+      -- ^ @table@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable DatasourceType
+
+instance FromText DatasourceType where
+    fromText = \case
+        "image" -> Just DTImage
+        "table" -> Just DTTable
+        _ -> Nothing
+
+instance ToText DatasourceType where
+    toText = \case
+        DTImage -> "image"
+        DTTable -> "table"
+
+instance FromJSON DatasourceType where
+    parseJSON = parseJSONText "DatasourceType"
+
+instance ToJSON DatasourceType where
+    toJSON = toJSONText
+
+-- | The publishing status of this map.
+data PublishingStatus
+    = NotPublished
+      -- ^ @notPublished@
+    | Published
+      -- ^ @published@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable PublishingStatus
+
+instance FromText PublishingStatus where
+    fromText = \case
+        "notPublished" -> Just NotPublished
+        "published" -> Just Published
+        _ -> Nothing
+
+instance ToText PublishingStatus where
+    toText = \case
+        NotPublished -> "notPublished"
+        Published -> "published"
+
+instance FromJSON PublishingStatus where
+    parseJSON = parseJSONText "PublishingStatus"
+
+instance ToJSON PublishingStatus where
+    toJSON = toJSONText
+
 -- | The type of scaling function to use. Defaults to SQRT. Currently only
 -- linear and square root scaling are supported.
-data ScalingFunctionScalingType
+data ScalingType
     = Linear
       -- ^ @linear@
     | Sqrt
       -- ^ @sqrt@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ScalingFunctionScalingType
+instance Hashable ScalingType
 
-instance FromText ScalingFunctionScalingType where
+instance FromText ScalingType where
     fromText = \case
         "linear" -> Just Linear
         "sqrt" -> Just Sqrt
         _ -> Nothing
 
-instance ToText ScalingFunctionScalingType where
+instance ToText ScalingType where
     toText = \case
         Linear -> "linear"
         Sqrt -> "sqrt"
 
-instance FromJSON ScalingFunctionScalingType where
-    parseJSON = parseJSONText "ScalingFunctionScalingType"
+instance FromJSON ScalingType where
+    parseJSON = parseJSONText "ScalingType"
 
-instance ToJSON ScalingFunctionScalingType where
-    toJSON = toJSONText
-
--- | The precision of acquisition time.
-data AcquisitionTimePrecision
-    = Day
-      -- ^ @day@
-    | Hour
-      -- ^ @hour@
-    | Minute
-      -- ^ @minute@
-    | Month
-      -- ^ @month@
-    | Second
-      -- ^ @second@
-    | Year
-      -- ^ @year@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable AcquisitionTimePrecision
-
-instance FromText AcquisitionTimePrecision where
-    fromText = \case
-        "day" -> Just Day
-        "hour" -> Just Hour
-        "minute" -> Just Minute
-        "month" -> Just Month
-        "second" -> Just Second
-        "year" -> Just Year
-        _ -> Nothing
-
-instance ToText AcquisitionTimePrecision where
-    toText = \case
-        Day -> "day"
-        Hour -> "hour"
-        Minute -> "minute"
-        Month -> "month"
-        Second -> "second"
-        Year -> "year"
-
-instance FromJSON AcquisitionTimePrecision where
-    parseJSON = parseJSONText "AcquisitionTimePrecision"
-
-instance ToJSON AcquisitionTimePrecision where
+instance ToJSON ScalingType where
     toJSON = toJSONText
 
 -- | Deprecated: The version parameter indicates which version of the layer
@@ -330,10 +347,10 @@ instance ToJSON AcquisitionTimePrecision where
 -- version of the layer will be returned. Please use the
 -- layers.getPublished endpoint instead.
 data MapsEngineLayersGetVersion
-    = Draft
+    = MELGVDraft
       -- ^ @draft@
       -- The draft version.
-    | Published
+    | MELGVPublished
       -- ^ @published@
       -- The published version.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -342,19 +359,74 @@ instance Hashable MapsEngineLayersGetVersion
 
 instance FromText MapsEngineLayersGetVersion where
     fromText = \case
-        "draft" -> Just Draft
-        "published" -> Just Published
+        "draft" -> Just MELGVDraft
+        "published" -> Just MELGVPublished
         _ -> Nothing
 
 instance ToText MapsEngineLayersGetVersion where
     toText = \case
-        Draft -> "draft"
-        Published -> "published"
+        MELGVDraft -> "draft"
+        MELGVPublished -> "published"
 
 instance FromJSON MapsEngineLayersGetVersion where
     parseJSON = parseJSONText "MapsEngineLayersGetVersion"
 
 instance ToJSON MapsEngineLayersGetVersion where
+    toJSON = toJSONText
+
+-- | Operation used to evaluate the filter.
+data Operator
+    = NotEqual
+      -- ^ @!=@
+    | Less
+      -- ^ @<@
+    | LessOrEqual
+      -- ^ @<=@
+    | Equal
+      -- ^ @==@
+    | Greater
+      -- ^ @>@
+    | GreaterEqual
+      -- ^ @>=@
+    | Contains
+      -- ^ @contains@
+    | EndsWith
+      -- ^ @endsWith@
+    | StartsWith
+      -- ^ @startsWith@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Operator
+
+instance FromText Operator where
+    fromText = \case
+        "!=" -> Just NotEqual
+        "<" -> Just Less
+        "<=" -> Just LessOrEqual
+        "==" -> Just Equal
+        ">" -> Just Greater
+        ">=" -> Just GreaterEqual
+        "contains" -> Just Contains
+        "endsWith" -> Just EndsWith
+        "startsWith" -> Just StartsWith
+        _ -> Nothing
+
+instance ToText Operator where
+    toText = \case
+        NotEqual -> "!="
+        Less -> "<"
+        LessOrEqual -> "<="
+        Equal -> "=="
+        Greater -> ">"
+        GreaterEqual -> ">="
+        Contains -> "contains"
+        EndsWith -> "endsWith"
+        StartsWith -> "startsWith"
+
+instance FromJSON Operator where
+    parseJSON = parseJSONText "Operator"
+
+instance ToJSON Operator where
     toJSON = toJSONText
 
 data MapsEngineTablesGetVersion
@@ -383,41 +455,6 @@ instance FromJSON MapsEngineTablesGetVersion where
     parseJSON = parseJSONText "MapsEngineTablesGetVersion"
 
 instance ToJSON MapsEngineTablesGetVersion where
-    toJSON = toJSONText
-
--- | The role parameter indicates that the response should only contain
--- assets where the current user has the specified level of access.
-data MapsEngineMapsListRole
-    = MEMLROwner
-      -- ^ @owner@
-      -- The user can read, write and administer the asset.
-    | MEMLRReader
-      -- ^ @reader@
-      -- The user can read the asset.
-    | MEMLRWriter
-      -- ^ @writer@
-      -- The user can read and write the asset.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable MapsEngineMapsListRole
-
-instance FromText MapsEngineMapsListRole where
-    fromText = \case
-        "owner" -> Just MEMLROwner
-        "reader" -> Just MEMLRReader
-        "writer" -> Just MEMLRWriter
-        _ -> Nothing
-
-instance ToText MapsEngineMapsListRole where
-    toText = \case
-        MEMLROwner -> "owner"
-        MEMLRReader -> "reader"
-        MEMLRWriter -> "writer"
-
-instance FromJSON MapsEngineMapsListRole where
-    parseJSON = parseJSONText "MapsEngineMapsListRole"
-
-instance ToJSON MapsEngineMapsListRole where
     toJSON = toJSONText
 
 -- | The type of the datasources used to build this Layer. This should be
@@ -472,35 +509,6 @@ instance FromJSON GeoJSONMultiPolygonType where
 instance ToJSON GeoJSONMultiPolygonType where
     toJSON = toJSONText
 
--- | The type of the datasources used to build this Layer. This should be
--- used instead of datasourceType. At least one of layerType and
--- datasourceType and must be specified, but layerType takes precedence.
-data PublishedLayerLayerType
-    = PLLTImage
-      -- ^ @image@
-    | PLLTVector
-      -- ^ @vector@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable PublishedLayerLayerType
-
-instance FromText PublishedLayerLayerType where
-    fromText = \case
-        "image" -> Just PLLTImage
-        "vector" -> Just PLLTVector
-        _ -> Nothing
-
-instance ToText PublishedLayerLayerType where
-    toText = \case
-        PLLTImage -> "image"
-        PLLTVector -> "vector"
-
-instance FromJSON PublishedLayerLayerType where
-    parseJSON = parseJSONText "PublishedLayerLayerType"
-
-instance ToJSON PublishedLayerLayerType where
-    toJSON = toJSONText
-
 -- | Identifies this object as a GeoJsonMultiPoint.
 data GeoJSONMultiPointType
     = MultiPoint
@@ -522,6 +530,35 @@ instance FromJSON GeoJSONMultiPointType where
     parseJSON = parseJSONText "GeoJSONMultiPointType"
 
 instance ToJSON GeoJSONMultiPointType where
+    toJSON = toJSONText
+
+-- | The type of the datasources used to build this Layer. This should be
+-- used instead of datasourceType. At least one of layerType and
+-- datasourceType and must be specified, but layerType takes precedence.
+data LayerType
+    = LTImage
+      -- ^ @image@
+    | LTVector
+      -- ^ @vector@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable LayerType
+
+instance FromText LayerType where
+    fromText = \case
+        "image" -> Just LTImage
+        "vector" -> Just LTVector
+        _ -> Nothing
+
+instance ToText LayerType where
+    toText = \case
+        LTImage -> "image"
+        LTVector -> "vector"
+
+instance FromJSON LayerType where
+    parseJSON = parseJSONText "LayerType"
+
+instance ToJSON LayerType where
     toJSON = toJSONText
 
 -- | The processing status of this map. Map processing is automatically
@@ -564,42 +601,27 @@ instance FromJSON MapProcessingStatus where
 instance ToJSON MapProcessingStatus where
     toJSON = toJSONText
 
-data MapsEngineMapsListProcessingStatus
-    = MEMLPSComplete
-      -- ^ @complete@
-      -- The map has completed processing.
-    | MEMLPSFailed
-      -- ^ @failed@
-      -- The map has failed processing.
-    | MEMLPSNotReady
-      -- ^ @notReady@
-      -- The map is not ready for processing.
-    | MEMLPSProcessing
-      -- ^ @processing@
-      -- The map is processing.
+-- | The type of rasters contained within this RasterCollection.
+data RasterType
+    = RTImage
+      -- ^ @image@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable MapsEngineMapsListProcessingStatus
+instance Hashable RasterType
 
-instance FromText MapsEngineMapsListProcessingStatus where
+instance FromText RasterType where
     fromText = \case
-        "complete" -> Just MEMLPSComplete
-        "failed" -> Just MEMLPSFailed
-        "notReady" -> Just MEMLPSNotReady
-        "processing" -> Just MEMLPSProcessing
+        "image" -> Just RTImage
         _ -> Nothing
 
-instance ToText MapsEngineMapsListProcessingStatus where
+instance ToText RasterType where
     toText = \case
-        MEMLPSComplete -> "complete"
-        MEMLPSFailed -> "failed"
-        MEMLPSNotReady -> "notReady"
-        MEMLPSProcessing -> "processing"
+        RTImage -> "image"
 
-instance FromJSON MapsEngineMapsListProcessingStatus where
-    parseJSON = parseJSONText "MapsEngineMapsListProcessingStatus"
+instance FromJSON RasterType where
+    parseJSON = parseJSONText "RasterType"
 
-instance ToJSON MapsEngineMapsListProcessingStatus where
+instance ToJSON RasterType where
     toJSON = toJSONText
 
 -- | The account type.
@@ -679,6 +701,49 @@ instance FromJSON VectorStyleType where
 instance ToJSON VectorStyleType where
     toJSON = toJSONText
 
+-- | The precision of acquisition time.
+data Precision
+    = Day
+      -- ^ @day@
+    | Hour
+      -- ^ @hour@
+    | Minute
+      -- ^ @minute@
+    | Month
+      -- ^ @month@
+    | Second
+      -- ^ @second@
+    | Year
+      -- ^ @year@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Precision
+
+instance FromText Precision where
+    fromText = \case
+        "day" -> Just Day
+        "hour" -> Just Hour
+        "minute" -> Just Minute
+        "month" -> Just Month
+        "second" -> Just Second
+        "year" -> Just Year
+        _ -> Nothing
+
+instance ToText Precision where
+    toText = \case
+        Day -> "day"
+        Hour -> "hour"
+        Minute -> "minute"
+        Month -> "month"
+        Second -> "second"
+        Year -> "year"
+
+instance FromJSON Precision where
+    parseJSON = parseJSONText "Precision"
+
+instance ToJSON Precision where
+    toJSON = toJSONText
+
 -- | Identifies this object as a MapKmlLink.
 data MapKmlLinkType
     = KmlLink
@@ -727,35 +792,6 @@ instance FromJSON LayerPublishingStatus where
     parseJSON = parseJSONText "LayerPublishingStatus"
 
 instance ToJSON LayerPublishingStatus where
-    toJSON = toJSONText
-
--- | Deprecated: The type of the datasources used to build this Layer. Note:
--- This has been replaced by layerType, but is still available for now to
--- maintain backward compatibility.
-data LayerDatasourceType
-    = LDTImage
-      -- ^ @image@
-    | LDTTable
-      -- ^ @table@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable LayerDatasourceType
-
-instance FromText LayerDatasourceType where
-    fromText = \case
-        "image" -> Just LDTImage
-        "table" -> Just LDTTable
-        _ -> Nothing
-
-instance ToText LayerDatasourceType where
-    toText = \case
-        LDTImage -> "image"
-        LDTTable -> "table"
-
-instance FromJSON LayerDatasourceType where
-    parseJSON = parseJSONText "LayerDatasourceType"
-
-instance ToJSON LayerDatasourceType where
     toJSON = toJSONText
 
 -- | Identifies this object as a GeoJsonGeometryCollection.
@@ -868,6 +904,41 @@ instance FromJSON MapsEngineLayersListProcessingStatus where
     parseJSON = parseJSONText "MapsEngineLayersListProcessingStatus"
 
 instance ToJSON MapsEngineLayersListProcessingStatus where
+    toJSON = toJSONText
+
+-- | The role parameter indicates that the response should only contain
+-- assets where the current user has the specified level of access.
+data Role
+    = ROwner
+      -- ^ @owner@
+      -- The user can read, write and administer the asset.
+    | RReader
+      -- ^ @reader@
+      -- The user can read the asset.
+    | RWriter
+      -- ^ @writer@
+      -- The user can read and write the asset.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Role
+
+instance FromText Role where
+    fromText = \case
+        "owner" -> Just ROwner
+        "reader" -> Just RReader
+        "writer" -> Just RWriter
+        _ -> Nothing
+
+instance ToText Role where
+    toText = \case
+        ROwner -> "owner"
+        RReader -> "reader"
+        RWriter -> "writer"
+
+instance FromJSON Role where
+    parseJSON = parseJSONText "Role"
+
+instance ToJSON Role where
     toJSON = toJSONText
 
 -- | The role parameter indicates that the response should only contain
@@ -992,6 +1063,134 @@ instance FromJSON MapsEngineLayersListRole where
 instance ToJSON MapsEngineLayersListRole where
     toJSON = toJSONText
 
+data ProcessingStatus
+    = PSComplete
+      -- ^ @complete@
+      -- The map has completed processing.
+    | PSFailed
+      -- ^ @failed@
+      -- The map has failed processing.
+    | PSNotReady
+      -- ^ @notReady@
+      -- The map is not ready for processing.
+    | PSProcessing
+      -- ^ @processing@
+      -- The map is processing.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ProcessingStatus
+
+instance FromText ProcessingStatus where
+    fromText = \case
+        "complete" -> Just PSComplete
+        "failed" -> Just PSFailed
+        "notReady" -> Just PSNotReady
+        "processing" -> Just PSProcessing
+        _ -> Nothing
+
+instance ToText ProcessingStatus where
+    toText = \case
+        PSComplete -> "complete"
+        PSFailed -> "failed"
+        PSNotReady -> "notReady"
+        PSProcessing -> "processing"
+
+instance FromJSON ProcessingStatus where
+    parseJSON = parseJSONText "ProcessingStatus"
+
+instance ToJSON ProcessingStatus where
+    toJSON = toJSONText
+
+-- | Name of the shape.
+data Shape
+    = Circle
+      -- ^ @circle@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Shape
+
+instance FromText Shape where
+    fromText = \case
+        "circle" -> Just Circle
+        _ -> Nothing
+
+instance ToText Shape where
+    toText = \case
+        Circle -> "circle"
+
+instance FromJSON Shape where
+    parseJSON = parseJSONText "Shape"
+
+instance ToJSON Shape where
+    toJSON = toJSONText
+
+-- | The upload status of the file.
+data UploadStatus
+    = USCanceled
+      -- ^ @canceled@
+    | USComplete
+      -- ^ @complete@
+    | USFailed
+      -- ^ @failed@
+    | USInProgress
+      -- ^ @inProgress@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable UploadStatus
+
+instance FromText UploadStatus where
+    fromText = \case
+        "canceled" -> Just USCanceled
+        "complete" -> Just USComplete
+        "failed" -> Just USFailed
+        "inProgress" -> Just USInProgress
+        _ -> Nothing
+
+instance ToText UploadStatus where
+    toText = \case
+        USCanceled -> "canceled"
+        USComplete -> "complete"
+        USFailed -> "failed"
+        USInProgress -> "inProgress"
+
+instance FromJSON UploadStatus where
+    parseJSON = parseJSONText "UploadStatus"
+
+instance ToJSON UploadStatus where
+    toJSON = toJSONText
+
+-- | Deprecated: The version parameter indicates which version of the map
+-- should be returned. When version is set to published, the published
+-- version of the map will be returned. Please use the maps.getPublished
+-- endpoint instead.
+data Version
+    = VDraft
+      -- ^ @draft@
+      -- The draft version.
+    | VPublished
+      -- ^ @published@
+      -- The published version.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Version
+
+instance FromText Version where
+    fromText = \case
+        "draft" -> Just VDraft
+        "published" -> Just VPublished
+        _ -> Nothing
+
+instance ToText Version where
+    toText = \case
+        VDraft -> "draft"
+        VPublished -> "published"
+
+instance FromJSON Version where
+    parseJSON = parseJSONText "Version"
+
+instance ToJSON Version where
+    toJSON = toJSONText
+
 -- | Identifies this object as a MapFolder.
 data MapFolderType
     = Folder
@@ -1013,33 +1212,6 @@ instance FromJSON MapFolderType where
     parseJSON = parseJSONText "MapFolderType"
 
 instance ToJSON MapFolderType where
-    toJSON = toJSONText
-
--- | Font weight of the label, defaults to \'normal\'.
-data LabelStyleFontWeight
-    = Bold
-      -- ^ @bold@
-    | Normal
-      -- ^ @normal@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable LabelStyleFontWeight
-
-instance FromText LabelStyleFontWeight where
-    fromText = \case
-        "bold" -> Just Bold
-        "normal" -> Just Normal
-        _ -> Nothing
-
-instance ToText LabelStyleFontWeight where
-    toText = \case
-        Bold -> "bold"
-        Normal -> "normal"
-
-instance FromJSON LabelStyleFontWeight where
-    parseJSON = parseJSONText "LabelStyleFontWeight"
-
-instance ToJSON LabelStyleFontWeight where
     toJSON = toJSONText
 
 -- | The processing status of this RasterCollection.
@@ -1079,38 +1251,6 @@ instance FromJSON RasterCollectionProcessingStatus where
     parseJSON = parseJSONText "RasterCollectionProcessingStatus"
 
 instance ToJSON RasterCollectionProcessingStatus where
-    toJSON = toJSONText
-
--- | Deprecated: The version parameter indicates which version of the map
--- should be returned. When version is set to published, the published
--- version of the map will be returned. Please use the maps.getPublished
--- endpoint instead.
-data MapsEngineMapsGetVersion
-    = MEMGVDraft
-      -- ^ @draft@
-      -- The draft version.
-    | MEMGVPublished
-      -- ^ @published@
-      -- The published version.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable MapsEngineMapsGetVersion
-
-instance FromText MapsEngineMapsGetVersion where
-    fromText = \case
-        "draft" -> Just MEMGVDraft
-        "published" -> Just MEMGVPublished
-        _ -> Nothing
-
-instance ToText MapsEngineMapsGetVersion where
-    toText = \case
-        MEMGVDraft -> "draft"
-        MEMGVPublished -> "published"
-
-instance FromJSON MapsEngineMapsGetVersion where
-    parseJSON = parseJSONText "MapsEngineMapsGetVersion"
-
-instance ToJSON MapsEngineMapsGetVersion where
     toJSON = toJSONText
 
 data MapsEngineRasterCollectionsListProcessingStatus
@@ -1189,88 +1329,6 @@ instance FromJSON MapsEngineTablesListRole where
     parseJSON = parseJSONText "MapsEngineTablesListRole"
 
 instance ToJSON MapsEngineTablesListRole where
-    toJSON = toJSONText
-
--- | Font style of the label, defaults to \'normal\'.
-data LabelStyleFontStyle
-    = LSFSItalic
-      -- ^ @italic@
-    | LSFSNormal
-      -- ^ @normal@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable LabelStyleFontStyle
-
-instance FromText LabelStyleFontStyle where
-    fromText = \case
-        "italic" -> Just LSFSItalic
-        "normal" -> Just LSFSNormal
-        _ -> Nothing
-
-instance ToText LabelStyleFontStyle where
-    toText = \case
-        LSFSItalic -> "italic"
-        LSFSNormal -> "normal"
-
-instance FromJSON LabelStyleFontStyle where
-    parseJSON = parseJSONText "LabelStyleFontStyle"
-
-instance ToJSON LabelStyleFontStyle where
-    toJSON = toJSONText
-
--- | Operation used to evaluate the filter.
-data FilterOperator
-    = NotEqual
-      -- ^ @!=@
-    | Less
-      -- ^ @<@
-    | LessOrEqual
-      -- ^ @<=@
-    | Equal
-      -- ^ @==@
-    | Greater
-      -- ^ @>@
-    | GreaterEqual
-      -- ^ @>=@
-    | Contains
-      -- ^ @contains@
-    | EndsWith
-      -- ^ @endsWith@
-    | StartsWith
-      -- ^ @startsWith@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable FilterOperator
-
-instance FromText FilterOperator where
-    fromText = \case
-        "!=" -> Just NotEqual
-        "<" -> Just Less
-        "<=" -> Just LessOrEqual
-        "==" -> Just Equal
-        ">" -> Just Greater
-        ">=" -> Just GreaterEqual
-        "contains" -> Just Contains
-        "endsWith" -> Just EndsWith
-        "startsWith" -> Just StartsWith
-        _ -> Nothing
-
-instance ToText FilterOperator where
-    toText = \case
-        NotEqual -> "!="
-        Less -> "<"
-        LessOrEqual -> "<="
-        Equal -> "=="
-        Greater -> ">"
-        GreaterEqual -> ">="
-        Contains -> "contains"
-        EndsWith -> "endsWith"
-        StartsWith -> "startsWith"
-
-instance FromJSON FilterOperator where
-    parseJSON = parseJSONText "FilterOperator"
-
-instance ToJSON FilterOperator where
     toJSON = toJSONText
 
 -- | The type of asset. One of raster, rasterCollection, table, map, or
@@ -1387,6 +1445,33 @@ instance FromJSON TableColumnType where
 instance ToJSON TableColumnType where
     toJSON = toJSONText
 
+-- | Font weight of the label, defaults to \'normal\'.
+data FontWeight
+    = FWBold
+      -- ^ @bold@
+    | FWNormal
+      -- ^ @normal@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable FontWeight
+
+instance FromText FontWeight where
+    fromText = \case
+        "bold" -> Just FWBold
+        "normal" -> Just FWNormal
+        _ -> Nothing
+
+instance ToText FontWeight where
+    toText = \case
+        FWBold -> "bold"
+        FWNormal -> "normal"
+
+instance FromJSON FontWeight where
+    parseJSON = parseJSONText "FontWeight"
+
+instance ToJSON FontWeight where
+    toJSON = toJSONText
+
 -- | The table version to access. See Accessing Public Data for information.
 data MapsEngineTablesFeaturesListVersion
     = METFLVDraft
@@ -1414,29 +1499,6 @@ instance FromJSON MapsEngineTablesFeaturesListVersion where
     parseJSON = parseJSONText "MapsEngineTablesFeaturesListVersion"
 
 instance ToJSON MapsEngineTablesFeaturesListVersion where
-    toJSON = toJSONText
-
--- | The type of rasters contained within this RasterCollection.
-data RasterCollectionRasterType
-    = RCRTImage
-      -- ^ @image@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable RasterCollectionRasterType
-
-instance FromText RasterCollectionRasterType where
-    fromText = \case
-        "image" -> Just RCRTImage
-        _ -> Nothing
-
-instance ToText RasterCollectionRasterType where
-    toText = \case
-        RCRTImage -> "image"
-
-instance FromJSON RasterCollectionRasterType where
-    parseJSON = parseJSONText "RasterCollectionRasterType"
-
-instance ToJSON RasterCollectionRasterType where
     toJSON = toJSONText
 
 -- | The role parameter indicates that the response should only contain
@@ -1550,68 +1612,6 @@ instance FromJSON MapsEngineRasterCollectionsRastersListRole where
     parseJSON = parseJSONText "MapsEngineRasterCollectionsRastersListRole"
 
 instance ToJSON MapsEngineRasterCollectionsRastersListRole where
-    toJSON = toJSONText
-
--- | The upload status of the file.
-data FileUploadStatus
-    = FUSCanceled
-      -- ^ @canceled@
-    | FUSComplete
-      -- ^ @complete@
-    | FUSFailed
-      -- ^ @failed@
-    | FUSInProgress
-      -- ^ @inProgress@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable FileUploadStatus
-
-instance FromText FileUploadStatus where
-    fromText = \case
-        "canceled" -> Just FUSCanceled
-        "complete" -> Just FUSComplete
-        "failed" -> Just FUSFailed
-        "inProgress" -> Just FUSInProgress
-        _ -> Nothing
-
-instance ToText FileUploadStatus where
-    toText = \case
-        FUSCanceled -> "canceled"
-        FUSComplete -> "complete"
-        FUSFailed -> "failed"
-        FUSInProgress -> "inProgress"
-
-instance FromJSON FileUploadStatus where
-    parseJSON = parseJSONText "FileUploadStatus"
-
-instance ToJSON FileUploadStatus where
-    toJSON = toJSONText
-
--- | The publishing status of this map.
-data MapPublishingStatus
-    = MPSNotPublished
-      -- ^ @notPublished@
-    | MPSPublished
-      -- ^ @published@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable MapPublishingStatus
-
-instance FromText MapPublishingStatus where
-    fromText = \case
-        "notPublished" -> Just MPSNotPublished
-        "published" -> Just MPSPublished
-        _ -> Nothing
-
-instance ToText MapPublishingStatus where
-    toText = \case
-        MPSNotPublished -> "notPublished"
-        MPSPublished -> "published"
-
-instance FromJSON MapPublishingStatus where
-    parseJSON = parseJSONText "MapPublishingStatus"
-
-instance ToJSON MapPublishingStatus where
     toJSON = toJSONText
 
 -- | The processing status of this table.

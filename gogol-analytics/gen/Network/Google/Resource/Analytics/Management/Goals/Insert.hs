@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -35,9 +36,9 @@ module Network.Google.Resource.Analytics.Management.Goals.Insert
     , mgiWebPropertyId
     , mgiUserIP
     , mgiProfileId
+    , mgiPayload
     , mgiAccountId
     , mgiKey
-    , mgiGoal
     , mgiOAuthToken
     , mgiFields
     ) where
@@ -74,12 +75,12 @@ data ManagementGoalsInsert' = ManagementGoalsInsert'
     , _mgiWebPropertyId :: !Text
     , _mgiUserIP        :: !(Maybe Text)
     , _mgiProfileId     :: !Text
+    , _mgiPayload       :: !Goal
     , _mgiAccountId     :: !Text
     , _mgiKey           :: !(Maybe Key)
-    , _mgiGoal          :: !Goal
     , _mgiOAuthToken    :: !(Maybe OAuthToken)
     , _mgiFields        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementGoalsInsert'' with the minimum fields required to make a request.
 --
@@ -95,11 +96,11 @@ data ManagementGoalsInsert' = ManagementGoalsInsert'
 --
 -- * 'mgiProfileId'
 --
+-- * 'mgiPayload'
+--
 -- * 'mgiAccountId'
 --
 -- * 'mgiKey'
---
--- * 'mgiGoal'
 --
 -- * 'mgiOAuthToken'
 --
@@ -107,19 +108,19 @@ data ManagementGoalsInsert' = ManagementGoalsInsert'
 managementGoalsInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
+    -> Goal -- ^ 'payload'
     -> Text -- ^ 'accountId'
-    -> Goal -- ^ 'Goal'
     -> ManagementGoalsInsert'
-managementGoalsInsert' pMgiWebPropertyId_ pMgiProfileId_ pMgiAccountId_ pMgiGoal_ =
+managementGoalsInsert' pMgiWebPropertyId_ pMgiProfileId_ pMgiPayload_ pMgiAccountId_ =
     ManagementGoalsInsert'
     { _mgiQuotaUser = Nothing
     , _mgiPrettyPrint = False
     , _mgiWebPropertyId = pMgiWebPropertyId_
     , _mgiUserIP = Nothing
     , _mgiProfileId = pMgiProfileId_
+    , _mgiPayload = pMgiPayload_
     , _mgiAccountId = pMgiAccountId_
     , _mgiKey = Nothing
-    , _mgiGoal = pMgiGoal_
     , _mgiOAuthToken = Nothing
     , _mgiFields = Nothing
     }
@@ -154,6 +155,11 @@ mgiProfileId :: Lens' ManagementGoalsInsert' Text
 mgiProfileId
   = lens _mgiProfileId (\ s a -> s{_mgiProfileId = a})
 
+-- | Multipart request metadata.
+mgiPayload :: Lens' ManagementGoalsInsert' Goal
+mgiPayload
+  = lens _mgiPayload (\ s a -> s{_mgiPayload = a})
+
 -- | Account ID to create the goal for.
 mgiAccountId :: Lens' ManagementGoalsInsert' Text
 mgiAccountId
@@ -164,10 +170,6 @@ mgiAccountId
 -- token.
 mgiKey :: Lens' ManagementGoalsInsert' (Maybe Key)
 mgiKey = lens _mgiKey (\ s a -> s{_mgiKey = a})
-
--- | Multipart request metadata.
-mgiGoal :: Lens' ManagementGoalsInsert' Goal
-mgiGoal = lens _mgiGoal (\ s a -> s{_mgiGoal = a})
 
 -- | OAuth 2.0 token for the current user.
 mgiOAuthToken :: Lens' ManagementGoalsInsert' (Maybe OAuthToken)
@@ -196,7 +198,7 @@ instance GoogleRequest ManagementGoalsInsert' where
               _mgiKey
               _mgiOAuthToken
               (Just AltJSON)
-              _mgiGoal
+              _mgiPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementGoalsInsertResource)

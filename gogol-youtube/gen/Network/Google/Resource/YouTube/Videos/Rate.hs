@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -49,7 +50,7 @@ type VideosRateResource =
      "videos" :>
        "rate" :>
          QueryParam "id" Text :>
-           QueryParam "rating" YouTubeVideosRateRating :>
+           QueryParam "rating" Rating :>
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
@@ -63,14 +64,14 @@ type VideosRateResource =
 -- /See:/ 'videosRate'' smart constructor.
 data VideosRate' = VideosRate'
     { _vrQuotaUser   :: !(Maybe Text)
-    , _vrRating      :: !YouTubeVideosRateRating
+    , _vrRating      :: !Rating
     , _vrPrettyPrint :: !Bool
     , _vrUserIP      :: !(Maybe Text)
     , _vrKey         :: !(Maybe Key)
     , _vrId          :: !Text
     , _vrOAuthToken  :: !(Maybe OAuthToken)
     , _vrFields      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosRate'' with the minimum fields required to make a request.
 --
@@ -92,7 +93,7 @@ data VideosRate' = VideosRate'
 --
 -- * 'vrFields'
 videosRate'
-    :: YouTubeVideosRateRating -- ^ 'rating'
+    :: Rating -- ^ 'rating'
     -> Text -- ^ 'id'
     -> VideosRate'
 videosRate' pVrRating_ pVrId_ =
@@ -115,7 +116,7 @@ vrQuotaUser
   = lens _vrQuotaUser (\ s a -> s{_vrQuotaUser = a})
 
 -- | Specifies the rating to record.
-vrRating :: Lens' VideosRate' YouTubeVideosRateRating
+vrRating :: Lens' VideosRate' Rating
 vrRating = lens _vrRating (\ s a -> s{_vrRating = a})
 
 -- | Returns response with indentations and line breaks.

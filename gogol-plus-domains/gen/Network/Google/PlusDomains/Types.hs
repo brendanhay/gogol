@@ -31,26 +31,30 @@ module Network.Google.PlusDomains.Types
     , aItem
     , aMemberCount
 
-    -- * ActivityProvider
-    , ActivityProvider
-    , activityProvider
-    , apTitle
-
-    -- * ActivityObjectAttachmentsPreviewThumbnails
-    , ActivityObjectAttachmentsPreviewThumbnails
-    , activityObjectAttachmentsPreviewThumbnails
-    , aoaptURL
+    -- * FullImage
+    , FullImage
+    , fullImage
+    , fiHeight
+    , fiURL
+    , fiWidth
+    , fiType
 
     -- * CommentActorImage
     , CommentActorImage
     , commentActorImage
     , caiURL
 
-    -- * ActivityObjectPlusoners
-    , ActivityObjectPlusoners
-    , activityObjectPlusoners
-    , aopTotalItems
-    , aopSelfLink
+    -- * Plusoners
+    , Plusoners
+    , plusoners
+    , pTotalItems
+    , pSelfLink
+
+    -- * Image
+    , Image
+    , image
+    , iURL
+    , iIsDefault
 
     -- * Circle
     , Circle
@@ -63,40 +67,23 @@ module Network.Google.PlusDomains.Types
     , cId
     , cDescription
 
-    -- * ActivityObjectAttachments
-    , ActivityObjectAttachments
-    , activityObjectAttachments
-    , aoaFullImage
-    , aoaImage
-    , aoaObjectType
-    , aoaPreviewThumbnails
-    , aoaURL
-    , aoaEmbed
-    , aoaContent
-    , aoaThumbnails
-    , aoaDisplayName
-    , aoaId
+    -- * AuthorImage
+    , AuthorImage
+    , authorImage
+    , aiURL
 
-    -- * ActivityObjectAttachmentsThumbnailsImage
-    , ActivityObjectAttachmentsThumbnailsImage
-    , activityObjectAttachmentsThumbnailsImage
-    , aoatiHeight
-    , aoatiURL
-    , aoatiWidth
-    , aoatiType
+    -- * ThumbnailsItem
+    , ThumbnailsItem
+    , thumbnailsItem
+    , tiImage
+    , tiURL
+    , tiDescription
 
-    -- * PlacePosition
-    , PlacePosition
-    , placePosition
-    , ppLatitude
-    , ppLongitude
-
-    -- * PersonURLs
-    , PersonURLs
-    , personURLs
-    , puValue
-    , puType
-    , puLabel
+    -- * EmailsItem
+    , EmailsItem
+    , emailsItem
+    , eiValue
+    , eiType
 
     -- * Person
     , Person
@@ -138,35 +125,44 @@ module Network.Google.PlusDomains.Types
     , vWidth
     , vType
 
-    -- * PlusDomainsPeopleListOrderBy
-    , PlusDomainsPeopleListOrderBy (..)
+    -- * OrderBy
+    , OrderBy (..)
 
-    -- * CommentInReplyTo
-    , CommentInReplyTo
-    , commentInReplyTo
-    , cirtURL
-    , cirtId
+    -- * Cover
+    , Cover
+    , cover
+    , cLayout
+    , cCoverInfo
+    , cCoverPhoto
 
-    -- * PersonOrganizations
-    , PersonOrganizations
-    , personOrganizations
-    , poDePartment
-    , poLocation
-    , poEndDate
-    , poPrimary
-    , poStartDate
-    , poName
-    , poTitle
-    , poType
-    , poDescription
+    -- * OrganizationsItem
+    , OrganizationsItem
+    , organizationsItem
+    , oiDePartment
+    , oiLocation
+    , oiEndDate
+    , oiPrimary
+    , oiStartDate
+    , oiName
+    , oiTitle
+    , oiType
+    , oiDescription
 
-    -- * ActivityObjectAttachmentsImage
-    , ActivityObjectAttachmentsImage
-    , activityObjectAttachmentsImage
-    , aoaiHeight
-    , aoaiURL
-    , aoaiWidth
-    , aoaiType
+    -- * ThumbnailsItemImage
+    , ThumbnailsItemImage
+    , thumbnailsItemImage
+    , tiiHeight
+    , tiiURL
+    , tiiWidth
+    , tiiType
+
+    -- * AttachmentsItemImage
+    , AttachmentsItemImage
+    , attachmentsItemImage
+    , aiiHeight
+    , aiiURL
+    , aiiWidth
+    , aiiType
 
     -- * CommentActor
     , CommentActor
@@ -189,48 +185,41 @@ module Network.Google.PlusDomains.Types
     , cfSelfLink
     , cfTitle
 
-    -- * ActivityObject
-    , ActivityObject
-    , activityObject
-    , aoPlusoners
-    , aoAttachments
-    , aoObjectType
-    , aoOriginalContent
-    , aoURL
-    , aoActor
-    , aoContent
-    , aoReplies
-    , aoId
-    , aoStatusForViewer
-    , aoResharers
-
     -- * PlusDomainsPeopleListByActivityCollection
     , PlusDomainsPeopleListByActivityCollection (..)
 
-    -- * ActivityObjectActor
-    , ActivityObjectActor
-    , activityObjectActor
+    -- * CoverInfo
+    , CoverInfo
+    , coverInfo
+    , ciTopImageOffset
+    , ciLeftImageOffset
+
+    -- * Embed
+    , Embed
+    , embed
+    , eURL
+    , eType
+
+    -- * People
+    , People
+    , people
+    , peoTotalItems
+
+    -- * Actor
+    , Actor
+    , actor
     , aImage
     , aURL
+    , aName
     , aDisplayName
     , aId
     , aVerification
 
-    -- * PlusDomainsActivitiesListCollection
-    , PlusDomainsActivitiesListCollection (..)
-
     -- * PlusDomainsPeopleListCollection
     , PlusDomainsPeopleListCollection (..)
 
-    -- * MediaAuthorImage
-    , MediaAuthorImage
-    , mediaAuthorImage
-    , maiURL
-
-    -- * ActivityActorImage
-    , ActivityActorImage
-    , activityActorImage
-    , aaiURL
+    -- * Collection
+    , Collection (..)
 
     -- * PlusDomainsACLentryResource
     , PlusDomainsACLentryResource
@@ -238,14 +227,6 @@ module Network.Google.PlusDomains.Types
     , pdarDisplayName
     , pdarId
     , pdarType
-
-    -- * MediaAuthor
-    , MediaAuthor
-    , mediaAuthor
-    , maImage
-    , maURL
-    , maDisplayName
-    , maId
 
     -- * PeopleFeed
     , PeopleFeed
@@ -258,29 +239,30 @@ module Network.Google.PlusDomains.Types
     , pfSelfLink
     , pfTitle
 
-    -- * ActivityObjectAttachmentsEmbed
-    , ActivityObjectAttachmentsEmbed
-    , activityObjectAttachmentsEmbed
-    , aoaeURL
-    , aoaeType
+    -- * ObjectActorImage
+    , ObjectActorImage
+    , objectActorImage
+    , oaiURL
 
-    -- * PersonCoverCoverPhoto
-    , PersonCoverCoverPhoto
-    , personCoverCoverPhoto
-    , pccpHeight
-    , pccpURL
-    , pccpWidth
+    -- * ActorName
+    , ActorName
+    , actorName
+    , anGivenName
+    , anFamilyName
 
-    -- * CirclePeople
-    , CirclePeople
-    , circlePeople
-    , cTotalItems
+    -- * ActorImage
+    , ActorImage
+    , actorImage
+    , actURL
 
-    -- * ActivityObjectReplies
-    , ActivityObjectReplies
-    , activityObjectReplies
-    , aorTotalItems
-    , aorSelfLink
+    -- * SortOrder
+    , SortOrder (..)
+
+    -- * Replies
+    , Replies
+    , replies
+    , rTotalItems
+    , rSelfLink
 
     -- * PlusDomainsMediaInsertCollection
     , PlusDomainsMediaInsertCollection (..)
@@ -307,18 +289,26 @@ module Network.Google.PlusDomains.Types
     , mUpdated
     , mMediaCreatedTime
 
-    -- * ActivityObjectActorImage
-    , ActivityObjectActorImage
-    , activityObjectActorImage
-    , actURL
+    -- * Name
+    , Name
+    , name
+    , nGivenName
+    , nMiddleName
+    , nFormatted
+    , nHonorificPrefix
+    , nFamilyName
+    , nHonorificSuffix
 
-    -- * ActivityActorVerification
-    , ActivityActorVerification
-    , activityActorVerification
-    , aavAdHocVerified
+    -- * ObjectActorVerification
+    , ObjectActorVerification
+    , objectActorVerification
+    , oavAdHocVerified
 
-    -- * PlusDomainsCommentsListSortOrder
-    , PlusDomainsCommentsListSortOrder (..)
+    -- * PlacesLivedItem
+    , PlacesLivedItem
+    , placesLivedItem
+    , pliValue
+    , pliPrimary
 
     -- * ActivityFeed
     , ActivityFeed
@@ -333,59 +323,59 @@ module Network.Google.PlusDomains.Types
     , afUpdated
     , afTitle
 
-    -- * PersonPlacesLived
-    , PersonPlacesLived
-    , personPlacesLived
-    , pplValue
-    , pplPrimary
+    -- * AttachmentsItem
+    , AttachmentsItem
+    , attachmentsItem
+    , attFullImage
+    , attImage
+    , attObjectType
+    , attPreviewThumbnails
+    , attURL
+    , attEmbed
+    , attContent
+    , attThumbnails
+    , attDisplayName
+    , attId
 
-    -- * ActivityObjectActorVerification
-    , ActivityObjectActorVerification
-    , activityObjectActorVerification
-    , aoavAdHocVerified
+    -- * Exif
+    , Exif
+    , exif
+    , eTime
 
-    -- * PersonEmails
-    , PersonEmails
-    , personEmails
-    , peValue
-    , peType
-
-    -- * PersonImage
-    , PersonImage
-    , personImage
-    , piURL
-    , piIsDefault
-
-    -- * PersonName
-    , PersonName
-    , personName
-    , pnGivenName
-    , pnMiddleName
-    , pnFormatted
-    , pnHonorificPrefix
-    , pnFamilyName
-    , pnHonorificSuffix
+    -- * Object
+    , Object
+    , object'
+    , oPlusoners
+    , oAttachments
+    , oObjectType
+    , oOriginalContent
+    , oURL
+    , oActor
+    , oContent
+    , oReplies
+    , oId
+    , oStatusForViewer
+    , oResharers
 
     -- * PlaceAddress
     , PlaceAddress
     , placeAddress
     , paFormatted
 
-    -- * ActivityObjectAttachmentsThumbnails
-    , ActivityObjectAttachmentsThumbnails
-    , activityObjectAttachmentsThumbnails
-    , aoatImage
-    , aoatURL
-    , aoatDescription
+    -- * URLsItem
+    , URLsItem
+    , urlsItem
+    , uiValue
+    , uiType
+    , uiLabel
 
-    -- * ActivityObjectStatusForViewer
-    , ActivityObjectStatusForViewer
-    , activityObjectStatusForViewer
-    , aosfvCanComment
-    , aosfvResharingDisabled
-    , aosfvCanUpdate
-    , aosfvIsPlusOned
-    , aosfvCanPlusone
+    -- * Author
+    , Author
+    , author
+    , autImage
+    , autURL
+    , autDisplayName
+    , autId
 
     -- * AudiencesFeed
     , AudiencesFeed
@@ -395,6 +385,15 @@ module Network.Google.PlusDomains.Types
     , audNextPageToken
     , audKind
     , audItems
+
+    -- * StatusForViewer
+    , StatusForViewer
+    , statusForViewer
+    , sfvCanComment
+    , sfvResharingDisabled
+    , sfvCanUpdate
+    , sfvIsPlusOned
+    , sfvCanPlusone
 
     -- * Activity
     , Activity
@@ -420,12 +419,10 @@ module Network.Google.PlusDomains.Types
     , aaPlaceId
     , aaProvider
 
-    -- * PersonCover
-    , PersonCover
-    , personCover
-    , pcLayout
-    , pcCoverInfo
-    , pcCoverPhoto
+    -- * PreviewThumbnailsItem
+    , PreviewThumbnailsItem
+    , previewThumbnailsItem
+    , ptiURL
 
     -- * Place
     , Place
@@ -436,17 +433,17 @@ module Network.Google.PlusDomains.Types
     , plaId
     , plaPosition
 
-    -- * PersonCoverCoverInfo
-    , PersonCoverCoverInfo
-    , personCoverCoverInfo
-    , pcciTopImageOffset
-    , pcciLeftImageOffset
+    -- * InReplyToItem
+    , InReplyToItem
+    , inReplyToItem
+    , irtiURL
+    , irtiId
 
-    -- * ActivityObjectResharers
-    , ActivityObjectResharers
-    , activityObjectResharers
-    , aTotalItems
-    , aSelfLink
+    -- * Resharers
+    , Resharers
+    , resharers
+    , resTotalItems
+    , resSelfLink
 
     -- * Comment
     , Comment
@@ -463,30 +460,12 @@ module Network.Google.PlusDomains.Types
     , comVerb
     , comInReplyTo
 
-    -- * ActivityActor
-    , ActivityActor
-    , activityActor
-    , aaaImage
-    , aaaURL
-    , aaaName
-    , aaaDisplayName
-    , aaaId
-    , aaaVerification
-
     -- * CommentObject
     , CommentObject
     , commentObject
     , coObjectType
     , coOriginalContent
     , coContent
-
-    -- * ActivityObjectAttachmentsFullImage
-    , ActivityObjectAttachmentsFullImage
-    , activityObjectAttachmentsFullImage
-    , aoafiHeight
-    , aoafiURL
-    , aoafiWidth
-    , aoafiType
 
     -- * ACL
     , ACL
@@ -496,10 +475,26 @@ module Network.Google.PlusDomains.Types
     , aclcDomainRestricted
     , aclcDescription
 
-    -- * MediaExif
-    , MediaExif
-    , mediaExif
-    , meTime
+    -- * ObjectActor
+    , ObjectActor
+    , objectActor
+    , oaImage
+    , oaURL
+    , oaDisplayName
+    , oaId
+    , oaVerification
+
+    -- * CoverPhoto
+    , CoverPhoto
+    , coverPhoto
+    , cpHeight
+    , cpURL
+    , cpWidth
+
+    -- * Provider
+    , Provider
+    , provider
+    , pTitle
 
     -- * CommentFeed
     , CommentFeed
@@ -513,16 +508,21 @@ module Network.Google.PlusDomains.Types
     , cffUpdated
     , cffTitle
 
+    -- * Position
+    , Position
+    , position
+    , pLatitude
+    , pLongitude
+
     -- * CommentActorVerification
     , CommentActorVerification
     , commentActorVerification
     , cavAdHocVerified
 
-    -- * ActivityActorName
-    , ActivityActorName
-    , activityActorName
-    , aanGivenName
-    , aanFamilyName
+    -- * Verification
+    , Verification
+    , verification
+    , vAdHocVerified
     ) where
 
 import           Network.Google.PlusDomains.Types.Product

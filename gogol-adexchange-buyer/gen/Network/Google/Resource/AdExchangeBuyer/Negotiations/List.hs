@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -33,8 +34,8 @@ module Network.Google.Resource.AdExchangeBuyer.Negotiations.List
     , nlQuotaUser
     , nlPrettyPrint
     , nlUserIP
+    , nlPayload
     , nlKey
-    , nlGetNegotiationsRequest
     , nlOAuthToken
     , nlFields
     ) where
@@ -60,14 +61,14 @@ type NegotiationsListResource =
 --
 -- /See:/ 'negotiationsList'' smart constructor.
 data NegotiationsList' = NegotiationsList'
-    { _nlQuotaUser              :: !(Maybe Text)
-    , _nlPrettyPrint            :: !Bool
-    , _nlUserIP                 :: !(Maybe Text)
-    , _nlKey                    :: !(Maybe Key)
-    , _nlGetNegotiationsRequest :: !GetNegotiationsRequest
-    , _nlOAuthToken             :: !(Maybe OAuthToken)
-    , _nlFields                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _nlQuotaUser   :: !(Maybe Text)
+    , _nlPrettyPrint :: !Bool
+    , _nlUserIP      :: !(Maybe Text)
+    , _nlPayload     :: !GetNegotiationsRequest
+    , _nlKey         :: !(Maybe Key)
+    , _nlOAuthToken  :: !(Maybe OAuthToken)
+    , _nlFields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationsList'' with the minimum fields required to make a request.
 --
@@ -79,23 +80,23 @@ data NegotiationsList' = NegotiationsList'
 --
 -- * 'nlUserIP'
 --
--- * 'nlKey'
+-- * 'nlPayload'
 --
--- * 'nlGetNegotiationsRequest'
+-- * 'nlKey'
 --
 -- * 'nlOAuthToken'
 --
 -- * 'nlFields'
 negotiationsList'
-    :: GetNegotiationsRequest -- ^ 'GetNegotiationsRequest'
+    :: GetNegotiationsRequest -- ^ 'payload'
     -> NegotiationsList'
-negotiationsList' pNlGetNegotiationsRequest_ =
+negotiationsList' pNlPayload_ =
     NegotiationsList'
     { _nlQuotaUser = Nothing
     , _nlPrettyPrint = True
     , _nlUserIP = Nothing
+    , _nlPayload = pNlPayload_
     , _nlKey = Nothing
-    , _nlGetNegotiationsRequest = pNlGetNegotiationsRequest_
     , _nlOAuthToken = Nothing
     , _nlFields = Nothing
     }
@@ -118,17 +119,16 @@ nlPrettyPrint
 nlUserIP :: Lens' NegotiationsList' (Maybe Text)
 nlUserIP = lens _nlUserIP (\ s a -> s{_nlUserIP = a})
 
+-- | Multipart request metadata.
+nlPayload :: Lens' NegotiationsList' GetNegotiationsRequest
+nlPayload
+  = lens _nlPayload (\ s a -> s{_nlPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
 nlKey :: Lens' NegotiationsList' (Maybe Key)
 nlKey = lens _nlKey (\ s a -> s{_nlKey = a})
-
--- | Multipart request metadata.
-nlGetNegotiationsRequest :: Lens' NegotiationsList' GetNegotiationsRequest
-nlGetNegotiationsRequest
-  = lens _nlGetNegotiationsRequest
-      (\ s a -> s{_nlGetNegotiationsRequest = a})
 
 -- | OAuth 2.0 token for the current user.
 nlOAuthToken :: Lens' NegotiationsList' (Maybe OAuthToken)
@@ -152,7 +152,7 @@ instance GoogleRequest NegotiationsList' where
               _nlKey
               _nlOAuthToken
               (Just AltJSON)
-              _nlGetNegotiationsRequest
+              _nlPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy NegotiationsListResource)

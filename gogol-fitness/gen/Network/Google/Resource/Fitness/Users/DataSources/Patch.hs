@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -39,9 +40,9 @@ module Network.Google.Resource.Fitness.Users.DataSources.Patch
     , udspPrettyPrint
     , udspUserIP
     , udspDataSourceId
+    , udspPayload
     , udspUserId
     , udspKey
-    , udspDataSource
     , udspOAuthToken
     , udspFields
     ) where
@@ -78,12 +79,12 @@ data UsersDataSourcesPatch' = UsersDataSourcesPatch'
     , _udspPrettyPrint  :: !Bool
     , _udspUserIP       :: !(Maybe Text)
     , _udspDataSourceId :: !Text
+    , _udspPayload      :: !DataSource
     , _udspUserId       :: !Text
     , _udspKey          :: !(Maybe Key)
-    , _udspDataSource   :: !DataSource
     , _udspOAuthToken   :: !(Maybe OAuthToken)
     , _udspFields       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesPatch'' with the minimum fields required to make a request.
 --
@@ -97,29 +98,29 @@ data UsersDataSourcesPatch' = UsersDataSourcesPatch'
 --
 -- * 'udspDataSourceId'
 --
+-- * 'udspPayload'
+--
 -- * 'udspUserId'
 --
 -- * 'udspKey'
---
--- * 'udspDataSource'
 --
 -- * 'udspOAuthToken'
 --
 -- * 'udspFields'
 usersDataSourcesPatch'
     :: Text -- ^ 'dataSourceId'
+    -> DataSource -- ^ 'payload'
     -> Text -- ^ 'userId'
-    -> DataSource -- ^ 'DataSource'
     -> UsersDataSourcesPatch'
-usersDataSourcesPatch' pUdspDataSourceId_ pUdspUserId_ pUdspDataSource_ =
+usersDataSourcesPatch' pUdspDataSourceId_ pUdspPayload_ pUdspUserId_ =
     UsersDataSourcesPatch'
     { _udspQuotaUser = Nothing
     , _udspPrettyPrint = True
     , _udspUserIP = Nothing
     , _udspDataSourceId = pUdspDataSourceId_
+    , _udspPayload = pUdspPayload_
     , _udspUserId = pUdspUserId_
     , _udspKey = Nothing
-    , _udspDataSource = pUdspDataSource_
     , _udspOAuthToken = Nothing
     , _udspFields = Nothing
     }
@@ -150,6 +151,11 @@ udspDataSourceId
   = lens _udspDataSourceId
       (\ s a -> s{_udspDataSourceId = a})
 
+-- | Multipart request metadata.
+udspPayload :: Lens' UsersDataSourcesPatch' DataSource
+udspPayload
+  = lens _udspPayload (\ s a -> s{_udspPayload = a})
+
 -- | Update the data source for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
 udspUserId :: Lens' UsersDataSourcesPatch' Text
@@ -161,12 +167,6 @@ udspUserId
 -- token.
 udspKey :: Lens' UsersDataSourcesPatch' (Maybe Key)
 udspKey = lens _udspKey (\ s a -> s{_udspKey = a})
-
--- | Multipart request metadata.
-udspDataSource :: Lens' UsersDataSourcesPatch' DataSource
-udspDataSource
-  = lens _udspDataSource
-      (\ s a -> s{_udspDataSource = a})
 
 -- | OAuth 2.0 token for the current user.
 udspOAuthToken :: Lens' UsersDataSourcesPatch' (Maybe OAuthToken)
@@ -194,7 +194,7 @@ instance GoogleRequest UsersDataSourcesPatch' where
               _udspKey
               _udspOAuthToken
               (Just AltJSON)
-              _udspDataSource
+              _udspPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDataSourcesPatchResource)

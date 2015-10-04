@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -31,12 +32,12 @@ module Network.Google.Resource.Compute.Images.Deprecate
     , ImagesDeprecate'
 
     -- * Request Lenses
-    , id1DeprecationStatus
     , id1QuotaUser
     , id1Image
     , id1PrettyPrint
     , id1Project
     , id1UserIP
+    , id1Payload
     , id1Key
     , id1OAuthToken
     , id1Fields
@@ -68,22 +69,20 @@ type ImagesDeprecateResource =
 --
 -- /See:/ 'imagesDeprecate'' smart constructor.
 data ImagesDeprecate' = ImagesDeprecate'
-    { _id1DeprecationStatus :: !DeprecationStatus
-    , _id1QuotaUser         :: !(Maybe Text)
-    , _id1Image             :: !Text
-    , _id1PrettyPrint       :: !Bool
-    , _id1Project           :: !Text
-    , _id1UserIP            :: !(Maybe Text)
-    , _id1Key               :: !(Maybe Key)
-    , _id1OAuthToken        :: !(Maybe OAuthToken)
-    , _id1Fields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _id1QuotaUser   :: !(Maybe Text)
+    , _id1Image       :: !Text
+    , _id1PrettyPrint :: !Bool
+    , _id1Project     :: !Text
+    , _id1UserIP      :: !(Maybe Text)
+    , _id1Payload     :: !DeprecationStatus
+    , _id1Key         :: !(Maybe Key)
+    , _id1OAuthToken  :: !(Maybe OAuthToken)
+    , _id1Fields      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImagesDeprecate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'id1DeprecationStatus'
 --
 -- * 'id1QuotaUser'
 --
@@ -95,34 +94,30 @@ data ImagesDeprecate' = ImagesDeprecate'
 --
 -- * 'id1UserIP'
 --
+-- * 'id1Payload'
+--
 -- * 'id1Key'
 --
 -- * 'id1OAuthToken'
 --
 -- * 'id1Fields'
 imagesDeprecate'
-    :: DeprecationStatus -- ^ 'DeprecationStatus'
-    -> Text -- ^ 'image'
+    :: Text -- ^ 'image'
     -> Text -- ^ 'project'
+    -> DeprecationStatus -- ^ 'payload'
     -> ImagesDeprecate'
-imagesDeprecate' pId1DeprecationStatus_ pId1Image_ pId1Project_ =
+imagesDeprecate' pId1Image_ pId1Project_ pId1Payload_ =
     ImagesDeprecate'
-    { _id1DeprecationStatus = pId1DeprecationStatus_
-    , _id1QuotaUser = Nothing
+    { _id1QuotaUser = Nothing
     , _id1Image = pId1Image_
     , _id1PrettyPrint = True
     , _id1Project = pId1Project_
     , _id1UserIP = Nothing
+    , _id1Payload = pId1Payload_
     , _id1Key = Nothing
     , _id1OAuthToken = Nothing
     , _id1Fields = Nothing
     }
-
--- | Multipart request metadata.
-id1DeprecationStatus :: Lens' ImagesDeprecate' DeprecationStatus
-id1DeprecationStatus
-  = lens _id1DeprecationStatus
-      (\ s a -> s{_id1DeprecationStatus = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -151,6 +146,11 @@ id1Project
 id1UserIP :: Lens' ImagesDeprecate' (Maybe Text)
 id1UserIP
   = lens _id1UserIP (\ s a -> s{_id1UserIP = a})
+
+-- | Multipart request metadata.
+id1Payload :: Lens' ImagesDeprecate' DeprecationStatus
+id1Payload
+  = lens _id1Payload (\ s a -> s{_id1Payload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -184,7 +184,7 @@ instance GoogleRequest ImagesDeprecate' where
               _id1Key
               _id1OAuthToken
               (Just AltJSON)
-              _id1DeprecationStatus
+              _id1Payload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ImagesDeprecateResource)

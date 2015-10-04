@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -34,9 +35,9 @@ module Network.Google.Resource.Compute.BackendServices.Update
     , bsuPrettyPrint
     , bsuProject
     , bsuUserIP
+    , bsuPayload
     , bsuKey
     , bsuOAuthToken
-    , bsuBackendService
     , bsuFields
     , bsuBackendService
     ) where
@@ -69,12 +70,12 @@ data BackendServicesUpdate' = BackendServicesUpdate'
     , _bsuPrettyPrint    :: !Bool
     , _bsuProject        :: !Text
     , _bsuUserIP         :: !(Maybe Text)
+    , _bsuPayload        :: !BackendService
     , _bsuKey            :: !(Maybe Key)
     , _bsuOAuthToken     :: !(Maybe OAuthToken)
-    , _bsuBackendService :: !BackendService
     , _bsuFields         :: !(Maybe Text)
     , _bsuBackendService :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BackendServicesUpdate'' with the minimum fields required to make a request.
 --
@@ -88,29 +89,29 @@ data BackendServicesUpdate' = BackendServicesUpdate'
 --
 -- * 'bsuUserIP'
 --
+-- * 'bsuPayload'
+--
 -- * 'bsuKey'
 --
 -- * 'bsuOAuthToken'
---
--- * 'bsuBackendService'
 --
 -- * 'bsuFields'
 --
 -- * 'bsuBackendService'
 backendServicesUpdate'
     :: Text -- ^ 'project'
-    -> BackendService -- ^ 'BackendService'
+    -> BackendService -- ^ 'payload'
     -> Text -- ^ 'backendService'
     -> BackendServicesUpdate'
-backendServicesUpdate' pBsuProject_ pBsuBackendService_ pBsuBackendService_ =
+backendServicesUpdate' pBsuProject_ pBsuPayload_ pBsuBackendService_ =
     BackendServicesUpdate'
     { _bsuQuotaUser = Nothing
     , _bsuPrettyPrint = True
     , _bsuProject = pBsuProject_
     , _bsuUserIP = Nothing
+    , _bsuPayload = pBsuPayload_
     , _bsuKey = Nothing
     , _bsuOAuthToken = Nothing
-    , _bsuBackendService = pBsuBackendService_
     , _bsuFields = Nothing
     , _bsuBackendService = pBsuBackendService_
     }
@@ -139,6 +140,11 @@ bsuUserIP :: Lens' BackendServicesUpdate' (Maybe Text)
 bsuUserIP
   = lens _bsuUserIP (\ s a -> s{_bsuUserIP = a})
 
+-- | Multipart request metadata.
+bsuPayload :: Lens' BackendServicesUpdate' BackendService
+bsuPayload
+  = lens _bsuPayload (\ s a -> s{_bsuPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -150,12 +156,6 @@ bsuOAuthToken :: Lens' BackendServicesUpdate' (Maybe OAuthToken)
 bsuOAuthToken
   = lens _bsuOAuthToken
       (\ s a -> s{_bsuOAuthToken = a})
-
--- | Multipart request metadata.
-bsuBackendService :: Lens' BackendServicesUpdate' BackendService
-bsuBackendService
-  = lens _bsuBackendService
-      (\ s a -> s{_bsuBackendService = a})
 
 -- | Selector specifying which fields to include in a partial response.
 bsuFields :: Lens' BackendServicesUpdate' (Maybe Text)
@@ -183,7 +183,7 @@ instance GoogleRequest BackendServicesUpdate' where
               _bsuKey
               _bsuOAuthToken
               (Just AltJSON)
-              _bsuBackendService
+              _bsuPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BackendServicesUpdateResource)

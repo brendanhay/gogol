@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,10 +37,10 @@ module Network.Google.Resource.CloudResourceManager.Projects.Update
     , puQuotaUser
     , puPrettyPrint
     , puUploadProtocol
-    , puProject
     , puPp
     , puAccessToken
     , puUploadType
+    , puPayload
     , puBearerToken
     , puKey
     , puProjectId
@@ -58,12 +59,12 @@ type ProjectsUpdateResource =
        "projects" :>
          Capture "projectId" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "bearer_token" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "upload_protocol" Text :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
@@ -83,17 +84,17 @@ data ProjectsUpdate' = ProjectsUpdate'
     , _puQuotaUser      :: !(Maybe Text)
     , _puPrettyPrint    :: !Bool
     , _puUploadProtocol :: !(Maybe Text)
-    , _puProject        :: !Project
     , _puPp             :: !Bool
     , _puAccessToken    :: !(Maybe Text)
     , _puUploadType     :: !(Maybe Text)
+    , _puPayload        :: !Project
     , _puBearerToken    :: !(Maybe Text)
     , _puKey            :: !(Maybe Key)
     , _puProjectId      :: !Text
     , _puOAuthToken     :: !(Maybe OAuthToken)
     , _puFields         :: !(Maybe Text)
     , _puCallback       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsUpdate'' with the minimum fields required to make a request.
 --
@@ -107,13 +108,13 @@ data ProjectsUpdate' = ProjectsUpdate'
 --
 -- * 'puUploadProtocol'
 --
--- * 'puProject'
---
 -- * 'puPp'
 --
 -- * 'puAccessToken'
 --
 -- * 'puUploadType'
+--
+-- * 'puPayload'
 --
 -- * 'puBearerToken'
 --
@@ -127,19 +128,19 @@ data ProjectsUpdate' = ProjectsUpdate'
 --
 -- * 'puCallback'
 projectsUpdate'
-    :: Project -- ^ 'Project'
+    :: Project -- ^ 'payload'
     -> Text -- ^ 'projectId'
     -> ProjectsUpdate'
-projectsUpdate' pPuProject_ pPuProjectId_ =
+projectsUpdate' pPuPayload_ pPuProjectId_ =
     ProjectsUpdate'
     { _puXgafv = Nothing
     , _puQuotaUser = Nothing
     , _puPrettyPrint = True
     , _puUploadProtocol = Nothing
-    , _puProject = pPuProject_
     , _puPp = True
     , _puAccessToken = Nothing
     , _puUploadType = Nothing
+    , _puPayload = pPuPayload_
     , _puBearerToken = Nothing
     , _puKey = Nothing
     , _puProjectId = pPuProjectId_
@@ -171,11 +172,6 @@ puUploadProtocol
   = lens _puUploadProtocol
       (\ s a -> s{_puUploadProtocol = a})
 
--- | Multipart request metadata.
-puProject :: Lens' ProjectsUpdate' Project
-puProject
-  = lens _puProject (\ s a -> s{_puProject = a})
-
 -- | Pretty-print response.
 puPp :: Lens' ProjectsUpdate' Bool
 puPp = lens _puPp (\ s a -> s{_puPp = a})
@@ -190,6 +186,11 @@ puAccessToken
 puUploadType :: Lens' ProjectsUpdate' (Maybe Text)
 puUploadType
   = lens _puUploadType (\ s a -> s{_puUploadType = a})
+
+-- | Multipart request metadata.
+puPayload :: Lens' ProjectsUpdate' Project
+puPayload
+  = lens _puPayload (\ s a -> s{_puPayload = a})
 
 -- | OAuth bearer token.
 puBearerToken :: Lens' ProjectsUpdate' (Maybe Text)
@@ -230,19 +231,19 @@ instance GoogleRequest ProjectsUpdate' where
         type Rs ProjectsUpdate' = Project
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u ProjectsUpdate'{..}
-          = go _puXgafv _puAccessToken _puBearerToken
-              _puCallback
+          = go _puProjectId _puXgafv _puUploadProtocol
               (Just _puPp)
+              _puAccessToken
               _puUploadType
-              _puUploadProtocol
-              _puProjectId
+              _puBearerToken
+              _puCallback
               _puQuotaUser
               (Just _puPrettyPrint)
               _puFields
               _puKey
               _puOAuthToken
               (Just AltJSON)
-              _puProject
+              _puPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsUpdateResource)

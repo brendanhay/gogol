@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -31,11 +32,11 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.SetAccount
     , EnterprisesSetAccount'
 
     -- * Request Lenses
-    , esaEnterpriseAccount
     , esaQuotaUser
     , esaPrettyPrint
     , esaEnterpriseId
     , esaUserIP
+    , esaPayload
     , esaKey
     , esaOAuthToken
     , esaFields
@@ -65,21 +66,19 @@ type EnterprisesSetAccountResource =
 --
 -- /See:/ 'enterprisesSetAccount'' smart constructor.
 data EnterprisesSetAccount' = EnterprisesSetAccount'
-    { _esaEnterpriseAccount :: !EnterpriseAccount
-    , _esaQuotaUser         :: !(Maybe Text)
-    , _esaPrettyPrint       :: !Bool
-    , _esaEnterpriseId      :: !Text
-    , _esaUserIP            :: !(Maybe Text)
-    , _esaKey               :: !(Maybe Key)
-    , _esaOAuthToken        :: !(Maybe OAuthToken)
-    , _esaFields            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _esaQuotaUser    :: !(Maybe Text)
+    , _esaPrettyPrint  :: !Bool
+    , _esaEnterpriseId :: !Text
+    , _esaUserIP       :: !(Maybe Text)
+    , _esaPayload      :: !EnterpriseAccount
+    , _esaKey          :: !(Maybe Key)
+    , _esaOAuthToken   :: !(Maybe OAuthToken)
+    , _esaFields       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EnterprisesSetAccount'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'esaEnterpriseAccount'
 --
 -- * 'esaQuotaUser'
 --
@@ -89,32 +88,28 @@ data EnterprisesSetAccount' = EnterprisesSetAccount'
 --
 -- * 'esaUserIP'
 --
+-- * 'esaPayload'
+--
 -- * 'esaKey'
 --
 -- * 'esaOAuthToken'
 --
 -- * 'esaFields'
 enterprisesSetAccount'
-    :: EnterpriseAccount -- ^ 'EnterpriseAccount'
-    -> Text -- ^ 'enterpriseId'
+    :: Text -- ^ 'enterpriseId'
+    -> EnterpriseAccount -- ^ 'payload'
     -> EnterprisesSetAccount'
-enterprisesSetAccount' pEsaEnterpriseAccount_ pEsaEnterpriseId_ =
+enterprisesSetAccount' pEsaEnterpriseId_ pEsaPayload_ =
     EnterprisesSetAccount'
-    { _esaEnterpriseAccount = pEsaEnterpriseAccount_
-    , _esaQuotaUser = Nothing
+    { _esaQuotaUser = Nothing
     , _esaPrettyPrint = True
     , _esaEnterpriseId = pEsaEnterpriseId_
     , _esaUserIP = Nothing
+    , _esaPayload = pEsaPayload_
     , _esaKey = Nothing
     , _esaOAuthToken = Nothing
     , _esaFields = Nothing
     }
-
--- | Multipart request metadata.
-esaEnterpriseAccount :: Lens' EnterprisesSetAccount' EnterpriseAccount
-esaEnterpriseAccount
-  = lens _esaEnterpriseAccount
-      (\ s a -> s{_esaEnterpriseAccount = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -140,6 +135,11 @@ esaEnterpriseId
 esaUserIP :: Lens' EnterprisesSetAccount' (Maybe Text)
 esaUserIP
   = lens _esaUserIP (\ s a -> s{_esaUserIP = a})
+
+-- | Multipart request metadata.
+esaPayload :: Lens' EnterprisesSetAccount' EnterpriseAccount
+esaPayload
+  = lens _esaPayload (\ s a -> s{_esaPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -174,7 +174,7 @@ instance GoogleRequest EnterprisesSetAccount' where
               _esaKey
               _esaOAuthToken
               (Just AltJSON)
-              _esaEnterpriseAccount
+              _esaPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EnterprisesSetAccountResource)

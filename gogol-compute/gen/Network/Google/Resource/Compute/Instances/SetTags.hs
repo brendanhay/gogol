@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -36,9 +37,9 @@ module Network.Google.Resource.Compute.Instances.SetTags
     , istProject
     , istUserIP
     , istZone
+    , istPayload
     , istKey
     , istOAuthToken
-    , istTags
     , istFields
     , istInstance
     ) where
@@ -74,12 +75,12 @@ data InstancesSetTags' = InstancesSetTags'
     , _istProject     :: !Text
     , _istUserIP      :: !(Maybe Text)
     , _istZone        :: !Text
+    , _istPayload     :: !Tags
     , _istKey         :: !(Maybe Key)
     , _istOAuthToken  :: !(Maybe OAuthToken)
-    , _istTags        :: !Tags
     , _istFields      :: !(Maybe Text)
     , _istInstance    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesSetTags'' with the minimum fields required to make a request.
 --
@@ -95,11 +96,11 @@ data InstancesSetTags' = InstancesSetTags'
 --
 -- * 'istZone'
 --
+-- * 'istPayload'
+--
 -- * 'istKey'
 --
 -- * 'istOAuthToken'
---
--- * 'istTags'
 --
 -- * 'istFields'
 --
@@ -107,19 +108,19 @@ data InstancesSetTags' = InstancesSetTags'
 instancesSetTags'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> Tags -- ^ 'Tags'
+    -> Tags -- ^ 'payload'
     -> Text -- ^ 'instance'
     -> InstancesSetTags'
-instancesSetTags' pIstProject_ pIstZone_ pIstTags_ pIstInstance_ =
+instancesSetTags' pIstProject_ pIstZone_ pIstPayload_ pIstInstance_ =
     InstancesSetTags'
     { _istQuotaUser = Nothing
     , _istPrettyPrint = True
     , _istProject = pIstProject_
     , _istUserIP = Nothing
     , _istZone = pIstZone_
+    , _istPayload = pIstPayload_
     , _istKey = Nothing
     , _istOAuthToken = Nothing
-    , _istTags = pIstTags_
     , _istFields = Nothing
     , _istInstance = pIstInstance_
     }
@@ -152,6 +153,11 @@ istUserIP
 istZone :: Lens' InstancesSetTags' Text
 istZone = lens _istZone (\ s a -> s{_istZone = a})
 
+-- | Multipart request metadata.
+istPayload :: Lens' InstancesSetTags' Tags
+istPayload
+  = lens _istPayload (\ s a -> s{_istPayload = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
@@ -163,10 +169,6 @@ istOAuthToken :: Lens' InstancesSetTags' (Maybe OAuthToken)
 istOAuthToken
   = lens _istOAuthToken
       (\ s a -> s{_istOAuthToken = a})
-
--- | Multipart request metadata.
-istTags :: Lens' InstancesSetTags' Tags
-istTags = lens _istTags (\ s a -> s{_istTags = a})
 
 -- | Selector specifying which fields to include in a partial response.
 istFields :: Lens' InstancesSetTags' (Maybe Text)
@@ -193,7 +195,7 @@ instance GoogleRequest InstancesSetTags' where
               _istKey
               _istOAuthToken
               (Just AltJSON)
-              _istTags
+              _istPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesSetTagsResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -30,11 +31,11 @@ module Network.Google.Resource.Calendar.Events.Insert
     , EventsInsert'
 
     -- * Request Lenses
-    , eveEvent
     , eveQuotaUser
     , eveCalendarId
     , evePrettyPrint
     , eveUserIP
+    , evePayload
     , eveMaxAttendees
     , eveKey
     , eveSendNotifications
@@ -68,24 +69,22 @@ type EventsInsertResource =
 --
 -- /See:/ 'eventsInsert'' smart constructor.
 data EventsInsert' = EventsInsert'
-    { _eveEvent               :: !Event
-    , _eveQuotaUser           :: !(Maybe Text)
+    { _eveQuotaUser           :: !(Maybe Text)
     , _eveCalendarId          :: !Text
     , _evePrettyPrint         :: !Bool
     , _eveUserIP              :: !(Maybe Text)
+    , _evePayload             :: !Event
     , _eveMaxAttendees        :: !(Maybe Int32)
     , _eveKey                 :: !(Maybe Key)
     , _eveSendNotifications   :: !(Maybe Bool)
     , _eveOAuthToken          :: !(Maybe OAuthToken)
     , _eveSupportsAttachments :: !(Maybe Bool)
     , _eveFields              :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'eveEvent'
 --
 -- * 'eveQuotaUser'
 --
@@ -94,6 +93,8 @@ data EventsInsert' = EventsInsert'
 -- * 'evePrettyPrint'
 --
 -- * 'eveUserIP'
+--
+-- * 'evePayload'
 --
 -- * 'eveMaxAttendees'
 --
@@ -107,16 +108,16 @@ data EventsInsert' = EventsInsert'
 --
 -- * 'eveFields'
 eventsInsert'
-    :: Event -- ^ 'Event'
-    -> Text -- ^ 'calendarId'
+    :: Text -- ^ 'calendarId'
+    -> Event -- ^ 'payload'
     -> EventsInsert'
-eventsInsert' pEveEvent_ pEveCalendarId_ =
+eventsInsert' pEveCalendarId_ pEvePayload_ =
     EventsInsert'
-    { _eveEvent = pEveEvent_
-    , _eveQuotaUser = Nothing
+    { _eveQuotaUser = Nothing
     , _eveCalendarId = pEveCalendarId_
     , _evePrettyPrint = True
     , _eveUserIP = Nothing
+    , _evePayload = pEvePayload_
     , _eveMaxAttendees = Nothing
     , _eveKey = Nothing
     , _eveSendNotifications = Nothing
@@ -124,10 +125,6 @@ eventsInsert' pEveEvent_ pEveCalendarId_ =
     , _eveSupportsAttachments = Nothing
     , _eveFields = Nothing
     }
-
--- | Multipart request metadata.
-eveEvent :: Lens' EventsInsert' Event
-eveEvent = lens _eveEvent (\ s a -> s{_eveEvent = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -155,6 +152,11 @@ evePrettyPrint
 eveUserIP :: Lens' EventsInsert' (Maybe Text)
 eveUserIP
   = lens _eveUserIP (\ s a -> s{_eveUserIP = a})
+
+-- | Multipart request metadata.
+evePayload :: Lens' EventsInsert' Event
+evePayload
+  = lens _evePayload (\ s a -> s{_evePayload = a})
 
 -- | The maximum number of attendees to include in the response. If there are
 -- more than the specified number of attendees, only the participant is
@@ -203,9 +205,9 @@ instance GoogleRequest EventsInsert' where
         type Rs EventsInsert' = Event
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsInsert'{..}
-          = go _eveMaxAttendees _eveSendNotifications
+          = go _eveCalendarId _eveMaxAttendees
+              _eveSendNotifications
               _eveSupportsAttachments
-              _eveCalendarId
               _eveQuotaUser
               (Just _evePrettyPrint)
               _eveUserIP
@@ -213,7 +215,7 @@ instance GoogleRequest EventsInsert' where
               _eveKey
               _eveOAuthToken
               (Just AltJSON)
-              _eveEvent
+              _evePayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsInsertResource)

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -32,10 +33,10 @@ module Network.Google.Resource.Compute.ForwardingRules.SetTarget
     -- * Request Lenses
     , frstQuotaUser
     , frstPrettyPrint
-    , frstTargetReference
     , frstProject
     , frstForwardingRule
     , frstUserIP
+    , frstPayload
     , frstKey
     , frstRegion
     , frstOAuthToken
@@ -68,17 +69,17 @@ type ForwardingRulesSetTargetResource =
 --
 -- /See:/ 'forwardingRulesSetTarget'' smart constructor.
 data ForwardingRulesSetTarget' = ForwardingRulesSetTarget'
-    { _frstQuotaUser       :: !(Maybe Text)
-    , _frstPrettyPrint     :: !Bool
-    , _frstTargetReference :: !TargetReference
-    , _frstProject         :: !Text
-    , _frstForwardingRule  :: !Text
-    , _frstUserIP          :: !(Maybe Text)
-    , _frstKey             :: !(Maybe Key)
-    , _frstRegion          :: !Text
-    , _frstOAuthToken      :: !(Maybe OAuthToken)
-    , _frstFields          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+    { _frstQuotaUser      :: !(Maybe Text)
+    , _frstPrettyPrint    :: !Bool
+    , _frstProject        :: !Text
+    , _frstForwardingRule :: !Text
+    , _frstUserIP         :: !(Maybe Text)
+    , _frstPayload        :: !TargetReference
+    , _frstKey            :: !(Maybe Key)
+    , _frstRegion         :: !Text
+    , _frstOAuthToken     :: !(Maybe OAuthToken)
+    , _frstFields         :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRulesSetTarget'' with the minimum fields required to make a request.
 --
@@ -88,13 +89,13 @@ data ForwardingRulesSetTarget' = ForwardingRulesSetTarget'
 --
 -- * 'frstPrettyPrint'
 --
--- * 'frstTargetReference'
---
 -- * 'frstProject'
 --
 -- * 'frstForwardingRule'
 --
 -- * 'frstUserIP'
+--
+-- * 'frstPayload'
 --
 -- * 'frstKey'
 --
@@ -104,19 +105,19 @@ data ForwardingRulesSetTarget' = ForwardingRulesSetTarget'
 --
 -- * 'frstFields'
 forwardingRulesSetTarget'
-    :: TargetReference -- ^ 'TargetReference'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'project'
     -> Text -- ^ 'forwardingRule'
+    -> TargetReference -- ^ 'payload'
     -> Text -- ^ 'region'
     -> ForwardingRulesSetTarget'
-forwardingRulesSetTarget' pFrstTargetReference_ pFrstProject_ pFrstForwardingRule_ pFrstRegion_ =
+forwardingRulesSetTarget' pFrstProject_ pFrstForwardingRule_ pFrstPayload_ pFrstRegion_ =
     ForwardingRulesSetTarget'
     { _frstQuotaUser = Nothing
     , _frstPrettyPrint = True
-    , _frstTargetReference = pFrstTargetReference_
     , _frstProject = pFrstProject_
     , _frstForwardingRule = pFrstForwardingRule_
     , _frstUserIP = Nothing
+    , _frstPayload = pFrstPayload_
     , _frstKey = Nothing
     , _frstRegion = pFrstRegion_
     , _frstOAuthToken = Nothing
@@ -137,12 +138,6 @@ frstPrettyPrint
   = lens _frstPrettyPrint
       (\ s a -> s{_frstPrettyPrint = a})
 
--- | Multipart request metadata.
-frstTargetReference :: Lens' ForwardingRulesSetTarget' TargetReference
-frstTargetReference
-  = lens _frstTargetReference
-      (\ s a -> s{_frstTargetReference = a})
-
 -- | Name of the project scoping this request.
 frstProject :: Lens' ForwardingRulesSetTarget' Text
 frstProject
@@ -159,6 +154,11 @@ frstForwardingRule
 frstUserIP :: Lens' ForwardingRulesSetTarget' (Maybe Text)
 frstUserIP
   = lens _frstUserIP (\ s a -> s{_frstUserIP = a})
+
+-- | Multipart request metadata.
+frstPayload :: Lens' ForwardingRulesSetTarget' TargetReference
+frstPayload
+  = lens _frstPayload (\ s a -> s{_frstPayload = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
@@ -199,7 +199,7 @@ instance GoogleRequest ForwardingRulesSetTarget'
               _frstKey
               _frstOAuthToken
               (Just AltJSON)
-              _frstTargetReference
+              _frstPayload
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ForwardingRulesSetTargetResource)
