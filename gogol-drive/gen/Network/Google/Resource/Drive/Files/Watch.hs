@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Drive.Files.Watch
@@ -242,10 +243,11 @@ instance GoogleRequest FilesWatch' where
                       r
                       u
 
-instance GoogleRequest (Download FilesWatch') where
-        type Rs (Download FilesWatch') = Body
+instance GoogleRequest (MediaDownload FilesWatch')
+         where
+        type Rs (MediaDownload FilesWatch') = Body
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u (Download FilesWatch'{..})
+        requestWithRoute r u (MediaDownload FilesWatch'{..})
           = go _fwFileId (Just _fwUpdateViewedDate)
               _fwProjection
               (Just _fwAcknowledgeAbuse)

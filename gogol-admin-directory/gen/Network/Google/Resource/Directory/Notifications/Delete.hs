@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Notifications.Delete
@@ -42,7 +43,7 @@ module Network.Google.Resource.Directory.Notifications.Delete
     , ndFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryNotificationsDelete@ which the
@@ -160,7 +161,7 @@ instance GoogleAuth NotificationsDelete' where
 
 instance GoogleRequest NotificationsDelete' where
         type Rs NotificationsDelete' = ()
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u NotificationsDelete'{..}
           = go _ndCustomer _ndNotificationId _ndQuotaUser
               (Just _ndPrettyPrint)

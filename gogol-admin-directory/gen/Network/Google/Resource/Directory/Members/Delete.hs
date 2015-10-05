@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Members.Delete
@@ -42,7 +43,7 @@ module Network.Google.Resource.Directory.Members.Delete
     , mdFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryMembersDelete@ which the
@@ -158,7 +159,7 @@ instance GoogleAuth MembersDelete' where
 
 instance GoogleRequest MembersDelete' where
         type Rs MembersDelete' = ()
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u MembersDelete'{..}
           = go _mdGroupKey _mdMemberKey _mdQuotaUser
               (Just _mdPrettyPrint)

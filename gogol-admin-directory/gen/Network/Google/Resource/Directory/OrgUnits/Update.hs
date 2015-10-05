@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.OrgUnits.Update
@@ -43,7 +44,7 @@ module Network.Google.Resource.Directory.OrgUnits.Update
     , ouuFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryOrgUnitsUpdate@ which the
@@ -176,7 +177,7 @@ instance GoogleAuth OrgUnitsUpdate' where
 
 instance GoogleRequest OrgUnitsUpdate' where
         type Rs OrgUnitsUpdate' = OrgUnit
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u OrgUnitsUpdate'{..}
           = go _ouuCustomerId _ouuOrgUnitPath _ouuQuotaUser
               (Just _ouuPrettyPrint)

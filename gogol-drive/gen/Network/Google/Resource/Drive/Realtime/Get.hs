@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Drive.Realtime.Get
@@ -192,10 +193,11 @@ instance GoogleRequest RealtimeGet' where
                       r
                       u
 
-instance GoogleRequest (Download RealtimeGet') where
-        type Rs (Download RealtimeGet') = Body
+instance GoogleRequest (MediaDownload RealtimeGet')
+         where
+        type Rs (MediaDownload RealtimeGet') = Body
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u (Download RealtimeGet'{..})
+        requestWithRoute r u (MediaDownload RealtimeGet'{..})
           = go _reaFileId _reaRevision _reaQuotaUser
               (Just _reaPrettyPrint)
               _reaUserIP

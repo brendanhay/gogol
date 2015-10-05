@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Groups.Patch
@@ -42,7 +43,7 @@ module Network.Google.Resource.Directory.Groups.Patch
     , gpFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryGroupsPatch@ which the
@@ -158,7 +159,7 @@ instance GoogleAuth GroupsPatch' where
 
 instance GoogleRequest GroupsPatch' where
         type Rs GroupsPatch' = Group
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u GroupsPatch'{..}
           = go _gpGroupKey _gpQuotaUser (Just _gpPrettyPrint)
               _gpUserIP

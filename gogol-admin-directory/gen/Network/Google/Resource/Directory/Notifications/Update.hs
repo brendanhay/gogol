@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Notifications.Update
@@ -43,7 +44,7 @@ module Network.Google.Resource.Directory.Notifications.Update
     , nuFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryNotificationsUpdate@ which the
@@ -172,7 +173,7 @@ instance GoogleAuth NotificationsUpdate' where
 
 instance GoogleRequest NotificationsUpdate' where
         type Rs NotificationsUpdate' = Notification
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u NotificationsUpdate'{..}
           = go _nuCustomer _nuNotificationId _nuQuotaUser
               (Just _nuPrettyPrint)

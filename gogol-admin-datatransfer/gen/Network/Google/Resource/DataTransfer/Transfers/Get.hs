@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.DataTransfer.Transfers.Get
@@ -41,7 +42,7 @@ module Network.Google.Resource.DataTransfer.Transfers.Get
     , tgFields
     ) where
 
-import           Network.Google.AdminDataTransfer.Types
+import           Network.Google.DataTransfer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DataTransferTransfersGet@ which the
@@ -147,8 +148,7 @@ instance GoogleAuth TransfersGet' where
 
 instance GoogleRequest TransfersGet' where
         type Rs TransfersGet' = DataTransfer
-        request
-          = requestWithRoute defReq adminDataTransferURL
+        request = requestWithRoute defReq dataTransferURL
         requestWithRoute r u TransfersGet'{..}
           = go _tgDataTransferId _tgQuotaUser
               (Just _tgPrettyPrint)

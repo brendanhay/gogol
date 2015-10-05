@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Members.Get
@@ -42,7 +43,7 @@ module Network.Google.Resource.Directory.Members.Get
     , mgFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryMembersGet@ which the
@@ -158,7 +159,7 @@ instance GoogleAuth MembersGet' where
 
 instance GoogleRequest MembersGet' where
         type Rs MembersGet' = Member
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u MembersGet'{..}
           = go _mgGroupKey _mgMemberKey _mgQuotaUser
               (Just _mgPrettyPrint)

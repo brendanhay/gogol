@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Get
@@ -44,7 +45,7 @@ module Network.Google.Resource.Directory.Users.Get
     , ugFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersGet@ which the
@@ -180,7 +181,7 @@ instance GoogleAuth UsersGet' where
 
 instance GoogleRequest UsersGet' where
         type Rs UsersGet' = User
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u UsersGet'{..}
           = go _ugUserKey (Just _ugViewType) _ugCustomFieldMask
               (Just _ugProjection)

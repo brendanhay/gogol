@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Groups.Get
@@ -41,7 +42,7 @@ module Network.Google.Resource.Directory.Groups.Get
     , ggFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryGroupsGet@ which the
@@ -145,7 +146,7 @@ instance GoogleAuth GroupsGet' where
 
 instance GoogleRequest GroupsGet' where
         type Rs GroupsGet' = Group
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u GroupsGet'{..}
           = go _ggGroupKey _ggQuotaUser (Just _ggPrettyPrint)
               _ggUserIP

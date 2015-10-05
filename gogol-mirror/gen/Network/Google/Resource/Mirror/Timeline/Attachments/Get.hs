@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Timeline.Attachments.Get
@@ -190,11 +191,12 @@ instance GoogleRequest TimelineAttachmentsGet' where
                       u
 
 instance GoogleRequest
-         (Download TimelineAttachmentsGet') where
-        type Rs (Download TimelineAttachmentsGet') = Body
+         (MediaDownload TimelineAttachmentsGet') where
+        type Rs (MediaDownload TimelineAttachmentsGet') =
+             Body
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u
-          (Download TimelineAttachmentsGet'{..})
+          (MediaDownload TimelineAttachmentsGet'{..})
           = go _tagItemId _tagAttachmentId _tagQuotaUser
               (Just _tagPrettyPrint)
               _tagUserIP

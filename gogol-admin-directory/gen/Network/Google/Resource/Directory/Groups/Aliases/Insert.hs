@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Groups.Aliases.Insert
@@ -42,7 +43,7 @@ module Network.Google.Resource.Directory.Groups.Aliases.Insert
     , gaiFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryGroupsAliasesInsert@ which the
@@ -161,7 +162,7 @@ instance GoogleAuth GroupsAliasesInsert' where
 
 instance GoogleRequest GroupsAliasesInsert' where
         type Rs GroupsAliasesInsert' = Alias
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u GroupsAliasesInsert'{..}
           = go _gaiGroupKey _gaiQuotaUser
               (Just _gaiPrettyPrint)

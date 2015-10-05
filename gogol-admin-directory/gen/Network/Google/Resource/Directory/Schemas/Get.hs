@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Schemas.Get
@@ -42,7 +43,7 @@ module Network.Google.Resource.Directory.Schemas.Get
     , sgFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectorySchemasGet@ which the
@@ -158,7 +159,7 @@ instance GoogleAuth SchemasGet' where
 
 instance GoogleRequest SchemasGet' where
         type Rs SchemasGet' = Schema
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u SchemasGet'{..}
           = go _sgCustomerId _sgSchemaKey _sgQuotaUser
               (Just _sgPrettyPrint)

@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Undelete
@@ -42,7 +43,7 @@ module Network.Google.Resource.Directory.Users.Undelete
     , uFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersUndelete@ which the
@@ -155,7 +156,7 @@ instance GoogleAuth UsersUndelete' where
 
 instance GoogleRequest UsersUndelete' where
         type Rs UsersUndelete' = ()
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u UsersUndelete'{..}
           = go _uUserKey _uQuotaUser (Just _uPrettyPrint)
               _uUserIP

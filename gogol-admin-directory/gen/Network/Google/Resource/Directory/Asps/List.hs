@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Asps.List
@@ -41,7 +42,7 @@ module Network.Google.Resource.Directory.Asps.List
     , alFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryAspsList@ which the
@@ -147,7 +148,7 @@ instance GoogleAuth AspsList' where
 
 instance GoogleRequest AspsList' where
         type Rs AspsList' = Asps
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u AspsList'{..}
           = go _alUserKey _alQuotaUser (Just _alPrettyPrint)
               _alUserIP

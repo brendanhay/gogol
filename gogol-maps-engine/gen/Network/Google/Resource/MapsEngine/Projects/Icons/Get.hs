@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Projects.Icons.Get
@@ -187,11 +188,12 @@ instance GoogleRequest ProjectsIconsGet' where
                       r
                       u
 
-instance GoogleRequest (Download ProjectsIconsGet')
-         where
-        type Rs (Download ProjectsIconsGet') = Body
+instance GoogleRequest
+         (MediaDownload ProjectsIconsGet') where
+        type Rs (MediaDownload ProjectsIconsGet') = Body
         request = requestWithRoute defReq mapsEngineURL
-        requestWithRoute r u (Download ProjectsIconsGet'{..})
+        requestWithRoute r u
+          (MediaDownload ProjectsIconsGet'{..})
           = go _pigProjectId _pigId _pigQuotaUser
               (Just _pigPrettyPrint)
               _pigUserIP

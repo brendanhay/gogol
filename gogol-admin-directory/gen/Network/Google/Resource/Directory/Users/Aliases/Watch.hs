@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Aliases.Watch
@@ -43,7 +44,7 @@ module Network.Google.Resource.Directory.Users.Aliases.Watch
     , uawFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersAliasesWatch@ which the
@@ -172,7 +173,7 @@ instance GoogleAuth UsersAliasesWatch' where
 
 instance GoogleRequest UsersAliasesWatch' where
         type Rs UsersAliasesWatch' = Channel
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u UsersAliasesWatch'{..}
           = go _uawUserKey _uawEvent _uawQuotaUser
               (Just _uawPrettyPrint)

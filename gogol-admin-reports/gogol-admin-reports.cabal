@@ -31,8 +31,8 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.AdminReports
-        , Network.Google.AdminReports.Types
+          Network.Google.Reports
+        , Network.Google.Reports.Types
         , Network.Google.Resource.Admin.Channels.Stop
         , Network.Google.Resource.Reports.Activities.List
         , Network.Google.Resource.Reports.Activities.Watch
@@ -40,8 +40,8 @@ library
         , Network.Google.Resource.Reports.UserUsageReport.Get
 
     other-modules:
-          Network.Google.AdminReports.Types.Product
-        , Network.Google.AdminReports.Types.Sum
+          Network.Google.Reports.Types.Product
+        , Network.Google.Reports.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

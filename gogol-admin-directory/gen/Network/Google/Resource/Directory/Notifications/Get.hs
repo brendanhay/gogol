@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Notifications.Get
@@ -42,7 +43,7 @@ module Network.Google.Resource.Directory.Notifications.Get
     , ngFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryNotificationsGet@ which the
@@ -160,7 +161,7 @@ instance GoogleAuth NotificationsGet' where
 
 instance GoogleRequest NotificationsGet' where
         type Rs NotificationsGet' = Notification
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u NotificationsGet'{..}
           = go _ngCustomer _ngNotificationId _ngQuotaUser
               (Just _ngPrettyPrint)

@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Reports.UserUsageReport.Get
@@ -48,8 +49,8 @@ module Network.Google.Resource.Reports.UserUsageReport.Get
     , uurgFields
     ) where
 
-import           Network.Google.AdminReports.Types
 import           Network.Google.Prelude
+import           Network.Google.Reports.Types
 
 -- | A resource alias for @ReportsUserUsageReportGet@ which the
 -- 'UserUsageReportGet'' request conforms to.
@@ -227,7 +228,7 @@ instance GoogleAuth UserUsageReportGet' where
 
 instance GoogleRequest UserUsageReportGet' where
         type Rs UserUsageReportGet' = UsageReports
-        request = requestWithRoute defReq adminReportsURL
+        request = requestWithRoute defReq reportsURL
         requestWithRoute r u UserUsageReportGet'{..}
           = go _uurgUserKey _uurgDate _uurgFilters
               _uurgCustomerId

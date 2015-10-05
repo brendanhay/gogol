@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Reports.Files.Get
@@ -205,11 +206,12 @@ instance GoogleRequest ReportsFilesGet' where
                       r
                       u
 
-instance GoogleRequest (Download ReportsFilesGet')
-         where
-        type Rs (Download ReportsFilesGet') = Body
+instance GoogleRequest
+         (MediaDownload ReportsFilesGet') where
+        type Rs (MediaDownload ReportsFilesGet') = Body
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u (Download ReportsFilesGet'{..})
+        requestWithRoute r u
+          (MediaDownload ReportsFilesGet'{..})
           = go _rfgProFileId _rfgReportId _rfgFileId
               _rfgQuotaUser
               (Just _rfgPrettyPrint)

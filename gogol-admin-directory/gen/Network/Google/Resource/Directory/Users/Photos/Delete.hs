@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Photos.Delete
@@ -41,7 +42,7 @@ module Network.Google.Resource.Directory.Users.Photos.Delete
     , updFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersPhotosDelete@ which the
@@ -150,7 +151,7 @@ instance GoogleAuth UsersPhotosDelete' where
 
 instance GoogleRequest UsersPhotosDelete' where
         type Rs UsersPhotosDelete' = ()
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u UsersPhotosDelete'{..}
           = go _updUserKey _updQuotaUser (Just _updPrettyPrint)
               _updUserIP

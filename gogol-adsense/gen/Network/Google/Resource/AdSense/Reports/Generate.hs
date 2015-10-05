@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Reports.Generate
@@ -338,11 +339,12 @@ instance GoogleRequest ReportsGenerate' where
                       r
                       u
 
-instance GoogleRequest (Download ReportsGenerate')
-         where
-        type Rs (Download ReportsGenerate') = Body
+instance GoogleRequest
+         (MediaDownload ReportsGenerate') where
+        type Rs (MediaDownload ReportsGenerate') = Body
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u (Download ReportsGenerate'{..})
+        requestWithRoute r u
+          (MediaDownload ReportsGenerate'{..})
           = go (Just _rgStartDate) (Just _rgEndDate)
               (_rgDimension ^. _Default)
               _rgLocale

@@ -32,8 +32,8 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.AdminDirectory
-        , Network.Google.AdminDirectory.Types
+          Network.Google.Directory
+        , Network.Google.Directory.Types
         , Network.Google.Resource.Admin.Channels.Stop
         , Network.Google.Resource.Directory.Asps.Delete
         , Network.Google.Resource.Directory.Asps.Get
@@ -103,8 +103,8 @@ library
         , Network.Google.Resource.Directory.VerificationCodes.List
 
     other-modules:
-          Network.Google.AdminDirectory.Types.Product
-        , Network.Google.AdminDirectory.Types.Sum
+          Network.Google.Directory.Types.Product
+        , Network.Google.Directory.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

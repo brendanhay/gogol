@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Groups.Insert
@@ -41,7 +42,7 @@ module Network.Google.Resource.Directory.Groups.Insert
     , giFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryGroupsInsert@ which the
@@ -145,7 +146,7 @@ instance GoogleAuth GroupsInsert' where
 
 instance GoogleRequest GroupsInsert' where
         type Rs GroupsInsert' = Group
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u GroupsInsert'{..}
           = go _giQuotaUser (Just _giPrettyPrint) _giUserIP
               _giFields

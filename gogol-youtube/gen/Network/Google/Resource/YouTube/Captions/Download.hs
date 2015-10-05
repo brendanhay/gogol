@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Captions.Download
@@ -250,11 +251,12 @@ instance GoogleRequest CaptionsDownload' where
                       r
                       u
 
-instance GoogleRequest (Download CaptionsDownload')
-         where
-        type Rs (Download CaptionsDownload') = Body
+instance GoogleRequest
+         (MediaDownload CaptionsDownload') where
+        type Rs (MediaDownload CaptionsDownload') = Body
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u (Download CaptionsDownload'{..})
+        requestWithRoute r u
+          (MediaDownload CaptionsDownload'{..})
           = go _capaId _capaOnBehalfOf _capaTlang
               _capaOnBehalfOfContentOwner
               _capaTfmt

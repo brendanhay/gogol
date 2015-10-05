@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Reports.Activities.Watch
@@ -51,8 +52,8 @@ module Network.Google.Resource.Reports.Activities.Watch
     , awFields
     ) where
 
-import           Network.Google.AdminReports.Types
 import           Network.Google.Prelude
+import           Network.Google.Reports.Types
 
 -- | A resource alias for @ReportsActivitiesWatch@ which the
 -- 'ActivitiesWatch'' request conforms to.
@@ -268,7 +269,7 @@ instance GoogleAuth ActivitiesWatch' where
 
 instance GoogleRequest ActivitiesWatch' where
         type Rs ActivitiesWatch' = Channel
-        request = requestWithRoute defReq adminReportsURL
+        request = requestWithRoute defReq reportsURL
         requestWithRoute r u ActivitiesWatch'{..}
           = go _awUserKey _awApplicationName _awStartTime
               _awFilters

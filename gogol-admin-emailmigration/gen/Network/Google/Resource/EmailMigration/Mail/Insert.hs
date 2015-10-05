@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.EmailMigration.Mail.Insert
@@ -43,7 +44,7 @@ module Network.Google.Resource.EmailMigration.Mail.Insert
     , miFields
     ) where
 
-import           Network.Google.AdminEmailMigration.Types
+import           Network.Google.EmailMigration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @EmailMigrationMailInsert@ which the
@@ -167,8 +168,7 @@ instance GoogleAuth MailInsert' where
 
 instance GoogleRequest MailInsert' where
         type Rs MailInsert' = ()
-        request
-          = requestWithRoute defReq adminEmailMigrationURL
+        request = requestWithRoute defReq emailMigrationURL
         requestWithRoute r u MailInsert'{..}
           = go _miUserKey _miQuotaUser (Just _miPrettyPrint)
               _miUserIP

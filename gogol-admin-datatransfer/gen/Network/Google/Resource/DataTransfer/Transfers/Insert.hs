@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.DataTransfer.Transfers.Insert
@@ -41,7 +42,7 @@ module Network.Google.Resource.DataTransfer.Transfers.Insert
     , tiFields
     ) where
 
-import           Network.Google.AdminDataTransfer.Types
+import           Network.Google.DataTransfer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DataTransferTransfersInsert@ which the
@@ -146,8 +147,7 @@ instance GoogleAuth TransfersInsert' where
 
 instance GoogleRequest TransfersInsert' where
         type Rs TransfersInsert' = DataTransfer
-        request
-          = requestWithRoute defReq adminDataTransferURL
+        request = requestWithRoute defReq dataTransferURL
         requestWithRoute r u TransfersInsert'{..}
           = go _tiQuotaUser (Just _tiPrettyPrint) _tiUserIP
               _tiFields

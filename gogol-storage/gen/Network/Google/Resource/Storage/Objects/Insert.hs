@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Storage.Objects.Insert
@@ -285,11 +286,12 @@ instance GoogleRequest ObjectsInsert' where
                       r
                       u
 
-instance GoogleRequest (Download ObjectsInsert')
+instance GoogleRequest (MediaDownload ObjectsInsert')
          where
-        type Rs (Download ObjectsInsert') = Body
+        type Rs (MediaDownload ObjectsInsert') = Body
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u (Download ObjectsInsert'{..})
+        requestWithRoute r u
+          (MediaDownload ObjectsInsert'{..})
           = go _oiBucket _oiIfMetagenerationMatch
               _oiIfGenerationNotMatch
               _oiIfGenerationMatch

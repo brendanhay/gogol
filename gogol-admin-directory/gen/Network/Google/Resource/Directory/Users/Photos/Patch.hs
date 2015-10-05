@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Photos.Patch
@@ -42,7 +43,7 @@ module Network.Google.Resource.Directory.Users.Photos.Patch
     , uppFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersPhotosPatch@ which the
@@ -162,7 +163,7 @@ instance GoogleAuth UsersPhotosPatch' where
 
 instance GoogleRequest UsersPhotosPatch' where
         type Rs UsersPhotosPatch' = UserPhoto
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u UsersPhotosPatch'{..}
           = go _uppUserKey _uppQuotaUser (Just _uppPrettyPrint)
               _uppUserIP

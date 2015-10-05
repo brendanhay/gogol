@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.ChromeosDevices.Update
@@ -44,7 +45,7 @@ module Network.Google.Resource.Directory.ChromeosDevices.Update
     , cduFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryChromeosDevicesUpdate@ which the
@@ -190,7 +191,7 @@ instance GoogleAuth ChromeosDevicesUpdate' where
 
 instance GoogleRequest ChromeosDevicesUpdate' where
         type Rs ChromeosDevicesUpdate' = ChromeOSDevice
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u ChromeosDevicesUpdate'{..}
           = go _cduCustomerId _cduDeviceId _cduProjection
               _cduQuotaUser

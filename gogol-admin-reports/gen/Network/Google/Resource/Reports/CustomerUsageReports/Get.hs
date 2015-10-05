@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Reports.CustomerUsageReports.Get
@@ -45,8 +46,8 @@ module Network.Google.Resource.Reports.CustomerUsageReports.Get
     , curgFields
     ) where
 
-import           Network.Google.AdminReports.Types
 import           Network.Google.Prelude
+import           Network.Google.Reports.Types
 
 -- | A resource alias for @ReportsCustomerUsageReportsGet@ which the
 -- 'CustomerUsageReportsGet'' request conforms to.
@@ -190,7 +191,7 @@ instance GoogleAuth CustomerUsageReportsGet' where
 
 instance GoogleRequest CustomerUsageReportsGet' where
         type Rs CustomerUsageReportsGet' = UsageReports
-        request = requestWithRoute defReq adminReportsURL
+        request = requestWithRoute defReq reportsURL
         requestWithRoute r u CustomerUsageReportsGet'{..}
           = go _curgDate _curgCustomerId _curgParameters
               _curgPageToken

@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.OrgUnits.Delete
@@ -42,7 +43,7 @@ module Network.Google.Resource.Directory.OrgUnits.Delete
     , oudFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryOrgUnitsDelete@ which the
@@ -164,7 +165,7 @@ instance GoogleAuth OrgUnitsDelete' where
 
 instance GoogleRequest OrgUnitsDelete' where
         type Rs OrgUnitsDelete' = ()
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u OrgUnitsDelete'{..}
           = go _oudCustomerId _oudOrgUnitPath _oudQuotaUser
               (Just _oudPrettyPrint)

@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.ChromeosDevices.List
@@ -47,7 +48,7 @@ module Network.Google.Resource.Directory.ChromeosDevices.List
     , cdlFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryChromeosDevicesList@ which the
@@ -223,7 +224,7 @@ instance GoogleAuth ChromeosDevicesList' where
 
 instance GoogleRequest ChromeosDevicesList' where
         type Rs ChromeosDevicesList' = ChromeOSDevices
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u ChromeosDevicesList'{..}
           = go _cdlCustomerId _cdlOrderBy _cdlSortOrder
               _cdlQuery

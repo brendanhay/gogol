@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.DoubleClickSearch.Reports.GetFile
@@ -190,12 +191,13 @@ instance GoogleRequest ReportsGetFile' where
                       r
                       u
 
-instance GoogleRequest (Download ReportsGetFile')
-         where
-        type Rs (Download ReportsGetFile') = Body
+instance GoogleRequest
+         (MediaDownload ReportsGetFile') where
+        type Rs (MediaDownload ReportsGetFile') = Body
         request
           = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u (Download ReportsGetFile'{..})
+        requestWithRoute r u
+          (MediaDownload ReportsGetFile'{..})
           = go _rgfReportId _rgfReportFragment _rgfQuotaUser
               (Just _rgfPrettyPrint)
               _rgfUserIP

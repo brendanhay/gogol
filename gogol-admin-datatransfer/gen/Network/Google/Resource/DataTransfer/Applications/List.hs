@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.DataTransfer.Applications.List
@@ -43,7 +44,7 @@ module Network.Google.Resource.DataTransfer.Applications.List
     , alFields
     ) where
 
-import           Network.Google.AdminDataTransfer.Types
+import           Network.Google.DataTransfer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DataTransferApplicationsList@ which the
@@ -167,8 +168,7 @@ instance GoogleAuth ApplicationsList' where
 
 instance GoogleRequest ApplicationsList' where
         type Rs ApplicationsList' = ApplicationsListResponse
-        request
-          = requestWithRoute defReq adminDataTransferURL
+        request = requestWithRoute defReq dataTransferURL
         requestWithRoute r u ApplicationsList'{..}
           = go _alCustomerId _alPageToken _alMaxResults
               _alQuotaUser

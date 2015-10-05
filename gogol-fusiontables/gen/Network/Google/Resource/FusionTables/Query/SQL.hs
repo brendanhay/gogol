@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Query.SQL
@@ -199,10 +200,11 @@ instance GoogleRequest QuerySQL' where
                   = clientWithRoute (Proxy :: Proxy QuerySQLResource) r
                       u
 
-instance GoogleRequest (Download QuerySQL') where
-        type Rs (Download QuerySQL') = Body
+instance GoogleRequest (MediaDownload QuerySQL')
+         where
+        type Rs (MediaDownload QuerySQL') = Body
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u (Download QuerySQL'{..})
+        requestWithRoute r u (MediaDownload QuerySQL'{..})
           = go (Just _qsqlSQL) _qsqlTyped _qsqlHdrs
               _qsqlQuotaUser
               (Just _qsqlPrettyPrint)

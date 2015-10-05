@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.OrgUnits.Insert
@@ -42,7 +43,7 @@ module Network.Google.Resource.Directory.OrgUnits.Insert
     , ouiFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryOrgUnitsInsert@ which the
@@ -162,7 +163,7 @@ instance GoogleAuth OrgUnitsInsert' where
 
 instance GoogleRequest OrgUnitsInsert' where
         type Rs OrgUnitsInsert' = OrgUnit
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u OrgUnitsInsert'{..}
           = go _ouiCustomerId _ouiQuotaUser
               (Just _ouiPrettyPrint)

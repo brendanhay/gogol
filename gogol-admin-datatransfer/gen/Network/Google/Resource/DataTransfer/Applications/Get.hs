@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.DataTransfer.Applications.Get
@@ -41,7 +42,7 @@ module Network.Google.Resource.DataTransfer.Applications.Get
     , agFields
     ) where
 
-import           Network.Google.AdminDataTransfer.Types
+import           Network.Google.DataTransfer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DataTransferApplicationsGet@ which the
@@ -146,8 +147,7 @@ instance GoogleAuth ApplicationsGet' where
 
 instance GoogleRequest ApplicationsGet' where
         type Rs ApplicationsGet' = Application
-        request
-          = requestWithRoute defReq adminDataTransferURL
+        request = requestWithRoute defReq dataTransferURL
         requestWithRoute r u ApplicationsGet'{..}
           = go _agApplicationId _agQuotaUser
               (Just _agPrettyPrint)

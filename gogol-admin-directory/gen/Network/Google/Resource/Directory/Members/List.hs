@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Members.List
@@ -44,7 +45,7 @@ module Network.Google.Resource.Directory.Members.List
     , mlFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryMembersList@ which the
@@ -178,7 +179,7 @@ instance GoogleAuth MembersList' where
 
 instance GoogleRequest MembersList' where
         type Rs MembersList' = Members
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u MembersList'{..}
           = go _mlGroupKey _mlRoles _mlPageToken _mlMaxResults
               _mlQuotaUser

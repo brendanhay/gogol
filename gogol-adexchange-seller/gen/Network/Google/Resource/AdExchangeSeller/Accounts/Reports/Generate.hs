@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Generate
@@ -314,11 +315,12 @@ instance GoogleRequest AccountsReportsGenerate' where
                       u
 
 instance GoogleRequest
-         (Download AccountsReportsGenerate') where
-        type Rs (Download AccountsReportsGenerate') = Body
+         (MediaDownload AccountsReportsGenerate') where
+        type Rs (MediaDownload AccountsReportsGenerate') =
+             Body
         request = requestWithRoute defReq adExchangeSellerURL
         requestWithRoute r u
-          (Download AccountsReportsGenerate'{..})
+          (MediaDownload AccountsReportsGenerate'{..})
           = go _argAccountId (Just _argStartDate)
               (Just _argEndDate)
               (_argDimension ^. _Default)

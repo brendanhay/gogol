@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Notifications.List
@@ -44,7 +45,7 @@ module Network.Google.Resource.Directory.Notifications.List
     , nlFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryNotificationsList@ which the
@@ -181,7 +182,7 @@ instance GoogleAuth NotificationsList' where
 
 instance GoogleRequest NotificationsList' where
         type Rs NotificationsList' = Notifications
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u NotificationsList'{..}
           = go _nlCustomer _nlLanguage _nlPageToken
               _nlMaxResults

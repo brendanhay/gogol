@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.OrgUnits.List
@@ -43,7 +44,7 @@ module Network.Google.Resource.Directory.OrgUnits.List
     , oulFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryOrgUnitsList@ which the
@@ -172,7 +173,7 @@ instance GoogleAuth OrgUnitsList' where
 
 instance GoogleRequest OrgUnitsList' where
         type Rs OrgUnitsList' = OrgUnits
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u OrgUnitsList'{..}
           = go _oulCustomerId (Just _oulOrgUnitPath) _oulType
               _oulQuotaUser

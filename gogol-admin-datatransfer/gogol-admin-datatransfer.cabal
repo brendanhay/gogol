@@ -31,8 +31,8 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.AdminDataTransfer
-        , Network.Google.AdminDataTransfer.Types
+          Network.Google.DataTransfer
+        , Network.Google.DataTransfer.Types
         , Network.Google.Resource.DataTransfer.Applications.Get
         , Network.Google.Resource.DataTransfer.Applications.List
         , Network.Google.Resource.DataTransfer.Transfers.Get
@@ -40,8 +40,8 @@ library
         , Network.Google.Resource.DataTransfer.Transfers.List
 
     other-modules:
-          Network.Google.AdminDataTransfer.Types.Product
-        , Network.Google.AdminDataTransfer.Types.Sum
+          Network.Google.DataTransfer.Types.Product
+        , Network.Google.DataTransfer.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

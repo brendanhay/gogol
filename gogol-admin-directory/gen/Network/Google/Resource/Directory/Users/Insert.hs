@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Insert
@@ -41,7 +42,7 @@ module Network.Google.Resource.Directory.Users.Insert
     , uiFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersInsert@ which the
@@ -145,7 +146,7 @@ instance GoogleAuth UsersInsert' where
 
 instance GoogleRequest UsersInsert' where
         type Rs UsersInsert' = User
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u UsersInsert'{..}
           = go _uiQuotaUser (Just _uiPrettyPrint) _uiUserIP
               _uiFields

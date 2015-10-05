@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Update
@@ -42,7 +43,7 @@ module Network.Google.Resource.Directory.Users.Update
     , uuFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersUpdate@ which the
@@ -158,7 +159,7 @@ instance GoogleAuth UsersUpdate' where
 
 instance GoogleRequest UsersUpdate' where
         type Rs UsersUpdate' = User
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u UsersUpdate'{..}
           = go _uuUserKey _uuQuotaUser (Just _uuPrettyPrint)
               _uuUserIP

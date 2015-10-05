@@ -30,13 +30,13 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.AdminEmailMigration
-        , Network.Google.AdminEmailMigration.Types
+          Network.Google.EmailMigration
+        , Network.Google.EmailMigration.Types
         , Network.Google.Resource.EmailMigration.Mail.Insert
 
     other-modules:
-          Network.Google.AdminEmailMigration.Types.Product
-        , Network.Google.AdminEmailMigration.Types.Sum
+          Network.Google.EmailMigration.Types.Product
+        , Network.Google.EmailMigration.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

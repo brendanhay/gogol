@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Schemas.Insert
@@ -42,7 +43,7 @@ module Network.Google.Resource.Directory.Schemas.Insert
     , siFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectorySchemasInsert@ which the
@@ -158,7 +159,7 @@ instance GoogleAuth SchemasInsert' where
 
 instance GoogleRequest SchemasInsert' where
         type Rs SchemasInsert' = Schema
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u SchemasInsert'{..}
           = go _siCustomerId _siQuotaUser (Just _siPrettyPrint)
               _siUserIP

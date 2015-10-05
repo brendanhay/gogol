@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Members.Update
@@ -43,7 +44,7 @@ module Network.Google.Resource.Directory.Members.Update
     , muFields
     ) where
 
-import           Network.Google.AdminDirectory.Types
+import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryMembersUpdate@ which the
@@ -172,7 +173,7 @@ instance GoogleAuth MembersUpdate' where
 
 instance GoogleRequest MembersUpdate' where
         type Rs MembersUpdate' = Member
-        request = requestWithRoute defReq adminDirectoryURL
+        request = requestWithRoute defReq directoryURL
         requestWithRoute r u MembersUpdate'{..}
           = go _muGroupKey _muMemberKey _muQuotaUser
               (Just _muPrettyPrint)

@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Method.Freebase.Search
@@ -494,10 +495,10 @@ instance GoogleRequest Search' where
           where go :<|> _
                   = clientWithRoute (Proxy :: Proxy SearchMethod) r u
 
-instance GoogleRequest (Download Search') where
-        type Rs (Download Search') = Body
+instance GoogleRequest (MediaDownload Search') where
+        type Rs (MediaDownload Search') = Body
         request = requestWithRoute defReq freebaseSearchURL
-        requestWithRoute r u (Download Search'{..})
+        requestWithRoute r u (MediaDownload Search'{..})
           = go (_sWithout ^. _Default) _sCursor
               (_sWith ^. _Default)
               (_sDomain ^. _Default)

@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Drive.Files.Get
@@ -225,10 +226,11 @@ instance GoogleRequest FilesGet' where
                   = clientWithRoute (Proxy :: Proxy FilesGetResource) r
                       u
 
-instance GoogleRequest (Download FilesGet') where
-        type Rs (Download FilesGet') = Body
+instance GoogleRequest (MediaDownload FilesGet')
+         where
+        type Rs (MediaDownload FilesGet') = Body
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u (Download FilesGet'{..})
+        requestWithRoute r u (MediaDownload FilesGet'{..})
           = go _fgFileId (Just _fgUpdateViewedDate)
               _fgProjection
               (Just _fgAcknowledgeAbuse)

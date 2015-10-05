@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Storage.Objects.Copy
@@ -421,10 +422,11 @@ instance GoogleRequest ObjectsCopy' where
                       r
                       u
 
-instance GoogleRequest (Download ObjectsCopy') where
-        type Rs (Download ObjectsCopy') = Body
+instance GoogleRequest (MediaDownload ObjectsCopy')
+         where
+        type Rs (MediaDownload ObjectsCopy') = Body
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u (Download ObjectsCopy'{..})
+        requestWithRoute r u (MediaDownload ObjectsCopy'{..})
           = go _ocSourceBucket _ocSourceObject
               _ocDestinationBucket
               _ocDestinationObject

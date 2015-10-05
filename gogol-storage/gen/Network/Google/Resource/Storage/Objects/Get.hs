@@ -8,8 +8,9 @@
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
 -- Module      : Network.Google.Resource.Storage.Objects.Get
@@ -271,10 +272,11 @@ instance GoogleRequest ObjectsGet' where
                       r
                       u
 
-instance GoogleRequest (Download ObjectsGet') where
-        type Rs (Download ObjectsGet') = Body
+instance GoogleRequest (MediaDownload ObjectsGet')
+         where
+        type Rs (MediaDownload ObjectsGet') = Body
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u (Download ObjectsGet'{..})
+        requestWithRoute r u (MediaDownload ObjectsGet'{..})
           = go _ogBucket _ogObject _ogIfMetagenerationMatch
               _ogIfGenerationNotMatch
               _ogIfGenerationMatch
