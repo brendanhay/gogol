@@ -77,6 +77,6 @@ test-suite tests
     other-modules:
 
     build-depends:
-          amazonka
+          gogol-core
         , base
         , tasty
