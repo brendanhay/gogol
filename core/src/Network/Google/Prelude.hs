@@ -105,14 +105,14 @@ class GoogleAuth a where
     authToken :: Traversal' a OAuthToken
     -- ^ only set if unset semantics?
 
-newtype Download a = Download a
+newtype MediaDownload a = MediaDownload a
 
-_Download :: Iso' (Download a) a
-_Download = iso (\(Download x) -> x) Download
+_Download :: Iso' (MediaDownload a) a
+_Download = iso (\(MediaDownload x) -> x) MediaDownload
 
-instance GoogleAuth a => GoogleAuth (Download a) where
-    authKey   = _Download . authKey
-    authToken = _Download . authToken
+instance GoogleAuth a => GoogleAuth (MediaDownload a) where
+    authKey   = _MediaDownload . authKey
+    authToken = _MediaDownload . authToken
 
 data Body = Body -- MediaType
     deriving (Eq, Show, Generic, Data, Typeable)

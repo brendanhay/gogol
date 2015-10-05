@@ -136,7 +136,7 @@ downloadDecl :: Global
 downloadDecl n p api url fs m =
     googleRequestDecl n ty rs alt p api url fs m pat prec
   where
-    ty = TyApp (TyCon "Download") (tycon n)
+    ty = TyApp (TyCon "MediaDownload") (tycon n)
     rs = InsType noLoc (TyApp (TyCon "Rs") ty) (TyCon "Body")
 
     alt = Just (var "AltMedia")
@@ -144,7 +144,7 @@ downloadDecl n p api url fs m =
     pat | _mSupportsMediaDownload m = PInfixApp PWildCard (UnQual (sym ":<|>")) (pvar "go")
         | otherwise                 = pvar "go"
 
-    prec = PApp (UnQual "Download") [PRec (UnQual (dname n)) [PFieldWildcard]]
+    prec = PApp (UnQual "MediaDownload") [PRec (UnQual (dname n)) [PFieldWildcard]]
 
 requestDecl :: Global
             -> Prefix
