@@ -130,6 +130,7 @@ renameReserved x
         , "Head"
         , "Patch"
         , "Put"
+        , "log"
         ] ++ map Text.pack (reservedNames haskellDef)
 
 camelAcronym :: Text -> Text

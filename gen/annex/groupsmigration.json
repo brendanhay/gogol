@@ -1,5 +1,10 @@
 {
     "library": "groups-migration",
-    "canonicalName": "GroupsMigration"
-}
+    "canonicalName": "GroupsMigration",
+    "parameters": {
+        "alt": {
+            "default": "json"
 
+        }
+    }
+}
