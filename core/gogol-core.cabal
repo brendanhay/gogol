@@ -36,24 +36,25 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Prelude
-
-    other-modules:
-          Network.Google.Data.JSON
+          Network.Google.Client
+        , Network.Google.Data.JSON
         , Network.Google.Data.Numeric
         , Network.Google.Data.Time
+        , Network.Google.Prelude
+        , Network.Google.Types
 
     build-depends:
           aeson      >= 0.8
         , base       >= 4.7 && < 5
-        , either
+        , bytestring
         , hashable   >= 1.2
         , http-media
+        , http-types
         , lens       >= 4.4
         , scientific >= 0.3
         , servant    >= 0.4.4
-        , servant-client
         , text       >= 1.1
+        , dlist      >= 0.7
 
     if !impl(ghc>=7.9)
         build-depends:
