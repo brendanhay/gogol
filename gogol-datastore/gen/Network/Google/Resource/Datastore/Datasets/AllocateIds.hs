@@ -58,7 +58,7 @@ type DatasetsAllocateIdsResource =
                QueryParam "fields" Text :>
                  QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "alt" AltPROTO :>
+                     QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] AllocateIdsRequest :>
                          Post '[JSON] AllocateIdsResponse
 
@@ -172,7 +172,7 @@ instance GoogleRequest DatasetsAllocateIds' where
               _daiFields
               _daiKey
               _daiOAuthToken
-              (Just AltPROTO)
+              (Just AltJSON)
               _daiPayload
           where go
                   = clientWithRoute

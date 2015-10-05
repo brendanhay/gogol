@@ -58,7 +58,7 @@ type DatasetsCommitResource =
                QueryParam "fields" Text :>
                  QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "alt" AltPROTO :>
+                     QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] CommitRequest :>
                          Post '[JSON] CommitResponse
 
@@ -168,7 +168,7 @@ instance GoogleRequest DatasetsCommit' where
               _dcFields
               _dcKey
               _dcOAuthToken
-              (Just AltPROTO)
+              (Just AltJSON)
               _dcPayload
           where go
                   = clientWithRoute

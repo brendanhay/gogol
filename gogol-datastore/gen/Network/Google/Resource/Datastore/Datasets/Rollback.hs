@@ -57,7 +57,7 @@ type DatasetsRollbackResource =
                QueryParam "fields" Text :>
                  QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "alt" AltPROTO :>
+                     QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] RollbackRequest :>
                          Post '[JSON] RollbackResponse
 
@@ -166,7 +166,7 @@ instance GoogleRequest DatasetsRollback' where
               _drFields
               _drKey
               _drOAuthToken
-              (Just AltPROTO)
+              (Just AltJSON)
               _drPayload
           where go
                   = clientWithRoute

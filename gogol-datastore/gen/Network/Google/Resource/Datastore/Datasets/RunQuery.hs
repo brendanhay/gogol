@@ -57,7 +57,7 @@ type DatasetsRunQueryResource =
                QueryParam "fields" Text :>
                  QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "alt" AltPROTO :>
+                     QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] RunQueryRequest :>
                          Post '[JSON] RunQueryResponse
 
@@ -170,7 +170,7 @@ instance GoogleRequest DatasetsRunQuery' where
               _drqFields
               _drqKey
               _drqOAuthToken
-              (Just AltPROTO)
+              (Just AltJSON)
               _drqPayload
           where go
                   = clientWithRoute

@@ -57,7 +57,7 @@ type DatasetsBeginTransactionResource =
                QueryParam "fields" Text :>
                  QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "alt" AltPROTO :>
+                     QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] BeginTransactionRequest :>
                          Post '[JSON] BeginTransactionResponse
 
@@ -172,7 +172,7 @@ instance GoogleRequest DatasetsBeginTransaction'
               _dbtFields
               _dbtKey
               _dbtOAuthToken
-              (Just AltPROTO)
+              (Just AltJSON)
               _dbtPayload
           where go
                   = clientWithRoute

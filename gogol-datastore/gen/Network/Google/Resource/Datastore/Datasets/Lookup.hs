@@ -57,7 +57,7 @@ type DatasetsLookupResource =
                QueryParam "fields" Text :>
                  QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
-                     QueryParam "alt" AltPROTO :>
+                     QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] LookupRequest :>
                          Post '[JSON] LookupResponse
 
@@ -166,7 +166,7 @@ instance GoogleRequest DatasetsLookup' where
               _dlFields
               _dlKey
               _dlOAuthToken
-              (Just AltPROTO)
+              (Just AltJSON)
               _dlPayload
           where go
                   = clientWithRoute
