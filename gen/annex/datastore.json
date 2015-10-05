@@ -1,5 +1,10 @@
 {
     "library": "datastore",
-    "canonicalName": "Datastore"
-}
+    "canonicalName": "Datastore",
+    "parameters": {
+        "alt": {
+            "default": "json"
 
+        }
+    }
+}
