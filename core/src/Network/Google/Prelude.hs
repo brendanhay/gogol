@@ -43,6 +43,7 @@ import           GHC.Generics                as Export (Generic)
 import           GHC.TypeLits
 import           Network.Google.Data.JSON    as Export
 import           Network.Google.Data.Numeric as Export
+import           Network.Google.Data.Time    as Export
 -- import           Network.HTTP.Media
 import           Numeric.Natural             as Export (Natural)
 import           Prelude                     as Export hiding (product)
@@ -62,19 +63,6 @@ _Default = iso f Just
   where
     f (Just x) = x
     f Nothing  = mempty
-
-_Time     = undefined
-_Date     = undefined
-_DateTime = undefined
-
-newtype Time' = Time' Text -- TimeOfDay
-    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, FromText, ToText, FromJSON, ToJSON)
-
-newtype Date' = Date' Text -- LocalTime
-    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, FromText, ToText, FromJSON, ToJSON)
-
-newtype DateTime' = DateTime' Text -- UTCTime
-    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, FromText, ToText, FromJSON, ToJSON)
 
 data AltJSON = AltJSON
     deriving (Eq, Ord, Show, Read, Generic, Data, Typeable)

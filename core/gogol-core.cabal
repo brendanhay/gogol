@@ -41,6 +41,7 @@ library
     other-modules:
           Network.Google.Data.JSON
         , Network.Google.Data.Numeric
+        , Network.Google.Data.Time
 
     build-depends:
           aeson      >= 0.8
