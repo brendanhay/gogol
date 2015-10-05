@@ -17,7 +17,7 @@ packages:
   - gogol-android-enterprise
   - gogol-android-publisher
   - gogol-appengine
-  - gogol-appengine-taskqueue
+  - gogol-taskqueue
   - gogol-apps-activity
   - gogol-apps-calendar
   - gogol-apps-licensing
