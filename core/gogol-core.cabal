@@ -46,15 +46,22 @@ library
     build-depends:
           aeson      >= 0.8
         , base       >= 4.7 && < 5
+        , conduit
+        , bifunctors
         , bytestring
+        , dlist      >= 0.7
         , hashable   >= 1.2
+        , http-client
+        , data-default-class
+        , resourcet
+        , http-conduit
         , http-media
         , http-types
         , lens       >= 4.4
         , scientific >= 0.3
         , servant    >= 0.4.4
         , text       >= 1.1
-        , dlist      >= 0.7
+        , transformers
 
     if !impl(ghc>=7.9)
         build-depends:
