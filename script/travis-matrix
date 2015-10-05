@@ -5,7 +5,7 @@ set -e
 docs=( documentation )
 core=( gogol-core gogol )
 
-priority_=( compute drive )
+priority_=( compute drive appengine storage oauth2 gmail )
 priority=${priority_[@]/#/gogol-}
 
 library_=( $(ls -d gogol-*) )
