@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE LambdaCase         #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -22,7 +23,7 @@ data UsersListEvent
     = Add
       -- ^ @add@
       -- User Created Event
-    | Delete
+    | Delete'
       -- ^ @delete@
       -- User Deleted Event
     | MakeAdmin
@@ -41,7 +42,7 @@ instance Hashable UsersListEvent
 instance FromText UsersListEvent where
     fromText = \case
         "add" -> Just Add
-        "delete" -> Just Delete
+        "delete" -> Just Delete'
         "makeAdmin" -> Just MakeAdmin
         "undelete" -> Just Undelete
         "update" -> Just Update
@@ -50,7 +51,7 @@ instance FromText UsersListEvent where
 instance ToText UsersListEvent where
     toText = \case
         Add -> "add"
-        Delete -> "delete"
+        Delete' -> "delete"
         MakeAdmin -> "makeAdmin"
         Undelete -> "undelete"
         Update -> "update"
@@ -66,7 +67,7 @@ data UsersAliasesListEvent
     = UALEAdd
       -- ^ @add@
       -- Alias Created Event
-    | UALEDelete
+    | UALEDelete'
       -- ^ @delete@
       -- Alias Deleted Event
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -76,13 +77,13 @@ instance Hashable UsersAliasesListEvent
 instance FromText UsersAliasesListEvent where
     fromText = \case
         "add" -> Just UALEAdd
-        "delete" -> Just UALEDelete
+        "delete" -> Just UALEDelete'
         _ -> Nothing
 
 instance ToText UsersAliasesListEvent where
     toText = \case
         UALEAdd -> "add"
-        UALEDelete -> "delete"
+        UALEDelete' -> "delete"
 
 instance FromJSON UsersAliasesListEvent where
     parseJSON = parseJSONText "UsersAliasesListEvent"
@@ -95,7 +96,7 @@ data UsersAliasesWatchEvent
     = UAWEAdd
       -- ^ @add@
       -- Alias Created Event
-    | UAWEDelete
+    | UAWEDelete'
       -- ^ @delete@
       -- Alias Deleted Event
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -105,13 +106,13 @@ instance Hashable UsersAliasesWatchEvent
 instance FromText UsersAliasesWatchEvent where
     fromText = \case
         "add" -> Just UAWEAdd
-        "delete" -> Just UAWEDelete
+        "delete" -> Just UAWEDelete'
         _ -> Nothing
 
 instance ToText UsersAliasesWatchEvent where
     toText = \case
         UAWEAdd -> "add"
-        UAWEDelete -> "delete"
+        UAWEDelete' -> "delete"
 
 instance FromJSON UsersAliasesWatchEvent where
     parseJSON = parseJSONText "UsersAliasesWatchEvent"
@@ -124,7 +125,7 @@ data UsersWatchEvent
     = UWEAdd
       -- ^ @add@
       -- User Created Event
-    | UWEDelete
+    | UWEDelete'
       -- ^ @delete@
       -- User Deleted Event
     | UWEMakeAdmin
@@ -143,7 +144,7 @@ instance Hashable UsersWatchEvent
 instance FromText UsersWatchEvent where
     fromText = \case
         "add" -> Just UWEAdd
-        "delete" -> Just UWEDelete
+        "delete" -> Just UWEDelete'
         "makeAdmin" -> Just UWEMakeAdmin
         "undelete" -> Just UWEUndelete
         "update" -> Just UWEUpdate
@@ -152,7 +153,7 @@ instance FromText UsersWatchEvent where
 instance ToText UsersWatchEvent where
     toText = \case
         UWEAdd -> "add"
-        UWEDelete -> "delete"
+        UWEDelete' -> "delete"
         UWEMakeAdmin -> "makeAdmin"
         UWEUndelete -> "undelete"
         UWEUpdate -> "update"

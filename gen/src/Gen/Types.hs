@@ -40,11 +40,11 @@ import           Control.Monad.State.Strict
 import           Data.Aeson                 hiding (Array, Bool, String)
 import           Data.CaseInsensitive       (CI)
 import qualified Data.CaseInsensitive       as CI
-import           Data.Char
 import           Data.Function              (on)
 import qualified Data.HashMap.Strict        as Map
 import qualified Data.HashSet               as Set
 import           Data.List                  (sort)
+import           Data.Maybe
 import           Data.Ord
 import           Data.Semigroup             ((<>))
 import           Data.Text                  (Text)
@@ -52,7 +52,6 @@ import qualified Data.Text                  as Text
 import qualified Data.Text.Lazy             as LText
 import qualified Data.Text.Lazy.Builder     as Build
 import           Data.Text.Manipulate
-import           Debug.Trace
 import qualified Filesystem.Path.CurrentOS  as Path
 import           Formatting
 import           Gen.Orphans                ()
@@ -263,6 +262,7 @@ data Memo = Memo
     { _context  :: Service (Fix Schema)
     , _typed    :: Map Global TType
     , _derived  :: Map Global [Derive]
+    , _reserve  :: Set Global
     , _schemas  :: Map Global (Schema Global)
     , _prefixed :: Map Global Prefix
     , _branches :: Seen
@@ -270,8 +270,11 @@ data Memo = Memo
     }
 
 initial :: Service (Fix Schema) -> Memo
-initial s = Memo s mempty mempty core mempty mempty mempty
+initial s = Memo s mempty mempty res core mempty mempty mempty
   where
+    -- Top-level schema definitions with ids.
+    res = Set.fromList . mapMaybe (view iId) $ Map.elems (s ^. dSchemas)
+
     -- Types available in Network.Google.Prelude.
     core = Map.fromList
         [ ("Body", SLit requiredInfo Body)

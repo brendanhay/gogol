@@ -124,6 +124,12 @@ renameReserved x
         , "read"
         , "Read"
         , "request"
+        , "Get"
+        , "Post"
+        , "Delete"
+        , "Head"
+        , "Patch"
+        , "Put"
         ] ++ map Text.pack (reservedNames haskellDef)
 
 camelAcronym :: Text -> Text

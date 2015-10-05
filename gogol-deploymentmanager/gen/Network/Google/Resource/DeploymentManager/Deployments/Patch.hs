@@ -2,6 +2,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE FlexibleInstances  #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -134,8 +135,8 @@ deploymentsPatch' pDpProject_ pDpPayload_ pDpDeployment_ =
     , _dpProject = pDpProject_
     , _dpUserIP = Nothing
     , _dpPayload = pDpPayload_
-    , _dpUpdatePolicy = DPUPPatch
-    , _dpDeletePolicy = DPDPDelete
+    , _dpUpdatePolicy = DPUPPatch'
+    , _dpDeletePolicy = DPDPDelete'
     , _dpKey = Nothing
     , _dpOAuthToken = Nothing
     , _dpFields = Nothing

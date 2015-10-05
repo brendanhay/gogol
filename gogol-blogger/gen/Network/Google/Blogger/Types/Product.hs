@@ -1,5 +1,6 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 
@@ -22,7 +23,7 @@ import           Network.Google.Prelude
 -- /See:/ 'postUserInfo' smart constructor.
 data PostUserInfo = PostUserInfo
     { _puiPostUserInfo :: !(Maybe PostPerUserInfo)
-    , _puiPost         :: !(Maybe Post)
+    , _puiPost         :: !(Maybe Post')
     , _puiKind         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -51,7 +52,7 @@ puiPostUserInfo
       (\ s a -> s{_puiPostUserInfo = a})
 
 -- | The Post resource.
-puiPost :: Lens' PostUserInfo (Maybe Post)
+puiPost :: Lens' PostUserInfo (Maybe Post')
 puiPost = lens _puiPost (\ s a -> s{_puiPost = a})
 
 -- | The kind of this entity. Always blogger#postUserInfo
@@ -111,7 +112,7 @@ data PostList = PostList
     { _plEtag          :: !(Maybe Text)
     , _plNextPageToken :: !(Maybe Text)
     , _plKind          :: !Text
-    , _plItems         :: !(Maybe [Post])
+    , _plItems         :: !(Maybe [Post'])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostList' with the minimum fields required to make a request.
@@ -150,7 +151,7 @@ plKind :: Lens' PostList Text
 plKind = lens _plKind (\ s a -> s{_plKind = a})
 
 -- | The list of Posts for this Blog.
-plItems :: Lens' PostList [Post]
+plItems :: Lens' PostList [Post']
 plItems
   = lens _plItems (\ s a -> s{_plItems = a}) . _Default
       . _Coerce
@@ -359,7 +360,7 @@ instance ToJSON PostLocation where
 -- /See:/ 'blogPosts' smart constructor.
 data BlogPosts = BlogPosts
     { _bpTotalItems :: !(Maybe Int32)
-    , _bpItems      :: !(Maybe [Post])
+    , _bpItems      :: !(Maybe [Post'])
     , _bpSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -387,7 +388,7 @@ bpTotalItems
   = lens _bpTotalItems (\ s a -> s{_bpTotalItems = a})
 
 -- | The List of Posts for this Blog.
-bpItems :: Lens' BlogPosts [Post]
+bpItems :: Lens' BlogPosts [Post']
 bpItems
   = lens _bpItems (\ s a -> s{_bpItems = a}) . _Default
       . _Coerce
@@ -415,7 +416,7 @@ instance ToJSON BlogPosts where
 
 --
 -- /See:/ 'post' smart constructor.
-data Post = Post
+data Post' = Post'
     { _posImages         :: !(Maybe [PostImagesItem])
     , _posStatus         :: !(Maybe Text)
     , _posEtag           :: !(Maybe Text)
@@ -479,9 +480,9 @@ data Post = Post
 --
 -- * 'posTitle'
 post
-    :: Post
+    :: Post'
 post =
-    Post
+    Post'
     { _posImages = Nothing
     , _posStatus = Nothing
     , _posEtag = Nothing
@@ -504,107 +505,107 @@ post =
     }
 
 -- | Display image for the Post.
-posImages :: Lens' Post [PostImagesItem]
+posImages :: Lens' Post' [PostImagesItem]
 posImages
   = lens _posImages (\ s a -> s{_posImages = a}) .
       _Default
       . _Coerce
 
 -- | Status of the post. Only set for admin-level requests
-posStatus :: Lens' Post (Maybe Text)
+posStatus :: Lens' Post' (Maybe Text)
 posStatus
   = lens _posStatus (\ s a -> s{_posStatus = a})
 
 -- | Etag of the resource.
-posEtag :: Lens' Post (Maybe Text)
+posEtag :: Lens' Post' (Maybe Text)
 posEtag = lens _posEtag (\ s a -> s{_posEtag = a})
 
 -- | Comment control and display setting for readers of this post.
-posReaderComments :: Lens' Post (Maybe Text)
+posReaderComments :: Lens' Post' (Maybe Text)
 posReaderComments
   = lens _posReaderComments
       (\ s a -> s{_posReaderComments = a})
 
 -- | The location for geotagged posts.
-posLocation :: Lens' Post (Maybe PostLocation)
+posLocation :: Lens' Post' (Maybe PostLocation)
 posLocation
   = lens _posLocation (\ s a -> s{_posLocation = a})
 
 -- | The kind of this entity. Always blogger#post
-posKind :: Lens' Post Text
+posKind :: Lens' Post' Text
 posKind = lens _posKind (\ s a -> s{_posKind = a})
 
 -- | RFC 3339 date-time when this Post was published.
-posPublished :: Lens' Post (Maybe UTCTime)
+posPublished :: Lens' Post' (Maybe UTCTime)
 posPublished
   = lens _posPublished (\ s a -> s{_posPublished = a})
       . mapping _DateTime
 
 -- | The URL where this Post is displayed.
-posURL :: Lens' Post (Maybe Text)
+posURL :: Lens' Post' (Maybe Text)
 posURL = lens _posURL (\ s a -> s{_posURL = a})
 
 -- | Data about the blog containing this Post.
-posBlog :: Lens' Post (Maybe PostBlog)
+posBlog :: Lens' Post' (Maybe PostBlog)
 posBlog = lens _posBlog (\ s a -> s{_posBlog = a})
 
 -- | The JSON meta-data for the Post.
-posCustomMetaData :: Lens' Post (Maybe Text)
+posCustomMetaData :: Lens' Post' (Maybe Text)
 posCustomMetaData
   = lens _posCustomMetaData
       (\ s a -> s{_posCustomMetaData = a})
 
 -- | The content of the Post. May contain HTML markup.
-posContent :: Lens' Post (Maybe Text)
+posContent :: Lens' Post' (Maybe Text)
 posContent
   = lens _posContent (\ s a -> s{_posContent = a})
 
 -- | The container of comments on this Post.
-posReplies :: Lens' Post (Maybe PostReplies)
+posReplies :: Lens' Post' (Maybe PostReplies)
 posReplies
   = lens _posReplies (\ s a -> s{_posReplies = a})
 
 -- | The API REST URL to fetch this resource from.
-posSelfLink :: Lens' Post (Maybe Text)
+posSelfLink :: Lens' Post' (Maybe Text)
 posSelfLink
   = lens _posSelfLink (\ s a -> s{_posSelfLink = a})
 
 -- | The author of this Post.
-posAuthor :: Lens' Post (Maybe PostAuthor)
+posAuthor :: Lens' Post' (Maybe PostAuthor)
 posAuthor
   = lens _posAuthor (\ s a -> s{_posAuthor = a})
 
 -- | The identifier of this Post.
-posId :: Lens' Post (Maybe Text)
+posId :: Lens' Post' (Maybe Text)
 posId = lens _posId (\ s a -> s{_posId = a})
 
 -- | The list of labels this Post was tagged with.
-posLabels :: Lens' Post [Text]
+posLabels :: Lens' Post' [Text]
 posLabels
   = lens _posLabels (\ s a -> s{_posLabels = a}) .
       _Default
       . _Coerce
 
 -- | RFC 3339 date-time when this Post was last updated.
-posUpdated :: Lens' Post (Maybe UTCTime)
+posUpdated :: Lens' Post' (Maybe UTCTime)
 posUpdated
   = lens _posUpdated (\ s a -> s{_posUpdated = a}) .
       mapping _DateTime
 
 -- | The title link URL, similar to atom\'s related link.
-posTitleLink :: Lens' Post (Maybe Text)
+posTitleLink :: Lens' Post' (Maybe Text)
 posTitleLink
   = lens _posTitleLink (\ s a -> s{_posTitleLink = a})
 
 -- | The title of the Post.
-posTitle :: Lens' Post (Maybe Text)
+posTitle :: Lens' Post' (Maybe Text)
 posTitle = lens _posTitle (\ s a -> s{_posTitle = a})
 
-instance FromJSON Post where
+instance FromJSON Post' where
         parseJSON
           = withObject "Post"
               (\ o ->
-                 Post <$>
+                 Post' <$>
                    (o .:? "images" .!= mempty) <*> (o .:? "status") <*>
                      (o .:? "etag")
                      <*> (o .:? "readerComments")
@@ -624,8 +625,8 @@ instance FromJSON Post where
                      <*> (o .:? "titleLink")
                      <*> (o .:? "title"))
 
-instance ToJSON Post where
-        toJSON Post{..}
+instance ToJSON Post' where
+        toJSON Post'{..}
           = object
               (catMaybes
                  [("images" .=) <$> _posImages,

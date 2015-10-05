@@ -1,5 +1,6 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 
@@ -115,6 +116,30 @@ instance ToJSON Status where
                  [("details" .=) <$> _sDetails,
                   ("code" .=) <$> _sCode,
                   ("message" .=) <$> _sMessage])
+
+-- | Service-specific metadata associated with the operation. It typically
+-- contains progress information and common metadata such as create time.
+-- Some services might not provide such metadata. Any method that returns a
+-- long-running operation should document the metadata type, if any.
+--
+-- /See:/ 'operationSchema' smart constructor.
+data OperationSchema =
+    OperationSchema
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
+--
+operationSchema
+    :: OperationSchema
+operationSchema = OperationSchema
+
+instance FromJSON OperationSchema where
+        parseJSON
+          = withObject "OperationSchema"
+              (\ o -> pure OperationSchema)
+
+instance ToJSON OperationSchema where
+        toJSON = const (Object mempty)
 
 -- | Configuration for traffic splitting for versions within a single module.
 -- Traffic splitting allows traffic directed to the module to be assigned
@@ -784,7 +809,7 @@ data Operation = Operation
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
-    , _oMetadata :: !(Maybe OperationMetadata)
+    , _oMetadata :: !(Maybe OperationSchema)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
@@ -844,7 +869,7 @@ oName = lens _oName (\ s a -> s{_oName = a})
 -- contains progress information and common metadata such as create time.
 -- Some services might not provide such metadata. Any method that returns a
 -- long-running operation should document the metadata type, if any.
-oMetadata :: Lens' Operation (Maybe OperationMetadata)
+oMetadata :: Lens' Operation (Maybe OperationSchema)
 oMetadata
   = lens _oMetadata (\ s a -> s{_oMetadata = a})
 
@@ -2255,30 +2280,6 @@ instance ToJSON ErrorHandler where
                  [("mimeType" .=) <$> _ehMimeType,
                   ("errorCode" .=) <$> _ehErrorCode,
                   ("staticFile" .=) <$> _ehStaticFile])
-
--- | Service-specific metadata associated with the operation. It typically
--- contains progress information and common metadata such as create time.
--- Some services might not provide such metadata. Any method that returns a
--- long-running operation should document the metadata type, if any.
---
--- /See:/ 'operationMetadata' smart constructor.
-data OperationMetadata =
-    OperationMetadata
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
---
-operationMetadata
-    :: OperationMetadata
-operationMetadata = OperationMetadata
-
-instance FromJSON OperationMetadata where
-        parseJSON
-          = withObject "OperationMetadata"
-              (\ o -> pure OperationMetadata)
-
-instance ToJSON OperationMetadata where
-        toJSON = const (Object mempty)
 
 -- | Metadata for the given
 -- [google.longrunning.Operation][google.longrunning.Operation].

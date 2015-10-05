@@ -1,5 +1,6 @@
-{-# LANGUAGE DataKinds     #-}
-{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE TypeOperators     #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
@@ -778,9 +779,9 @@ module Network.Google.AdminDirectory
     -- ** Asps
     , Asps
     , asps
-    , a1Etag
-    , a1Kind
-    , a1Items
+    , aspEtag
+    , aspKind
+    , aspItems
 
     -- ** UsersGetViewType
     , UsersGetViewType (..)

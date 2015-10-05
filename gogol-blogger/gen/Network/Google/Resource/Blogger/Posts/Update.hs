@@ -2,6 +2,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE FlexibleInstances  #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -69,7 +70,7 @@ type PostsUpdateResource =
                                QueryParam "key" Key :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] Post :> Put '[JSON] Post
+                                     ReqBody '[JSON] Post' :> Put '[JSON] Post'
 
 -- | Update a post.
 --
@@ -81,7 +82,7 @@ data PostsUpdate' = PostsUpdate'
     , _puUserIP      :: !(Maybe Text)
     , _puFetchImages :: !(Maybe Bool)
     , _puBlogId      :: !Text
-    , _puPayload     :: !Post
+    , _puPayload     :: !Post'
     , _puMaxComments :: !(Maybe Word32)
     , _puKey         :: !(Maybe Key)
     , _puRevert      :: !(Maybe Bool)
@@ -124,7 +125,7 @@ data PostsUpdate' = PostsUpdate'
 -- * 'puFields'
 postsUpdate'
     :: Text -- ^ 'blogId'
-    -> Post -- ^ 'payload'
+    -> Post' -- ^ 'payload'
     -> Text -- ^ 'postId'
     -> PostsUpdate'
 postsUpdate' pPuBlogId_ pPuPayload_ pPuPostId_ =
@@ -181,7 +182,7 @@ puBlogId :: Lens' PostsUpdate' Text
 puBlogId = lens _puBlogId (\ s a -> s{_puBlogId = a})
 
 -- | Multipart request metadata.
-puPayload :: Lens' PostsUpdate' Post
+puPayload :: Lens' PostsUpdate' Post'
 puPayload
   = lens _puPayload (\ s a -> s{_puPayload = a})
 
@@ -226,7 +227,7 @@ instance GoogleAuth PostsUpdate' where
         authToken = puOAuthToken . _Just
 
 instance GoogleRequest PostsUpdate' where
-        type Rs PostsUpdate' = Post
+        type Rs PostsUpdate' = Post'
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsUpdate'{..}
           = go _puBlogId _puPostId (Just _puFetchBody)

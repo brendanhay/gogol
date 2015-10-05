@@ -1,5 +1,6 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -87,8 +88,8 @@ module Network.Google.Blogger.Types
     -- * PostsGetView
     , PostsGetView (..)
 
-    -- * Post
-    , Post
+    -- * Post'
+    , Post'
     , post
     , posImages
     , posStatus

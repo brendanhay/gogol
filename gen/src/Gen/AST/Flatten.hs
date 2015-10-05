@@ -27,6 +27,7 @@ import           Control.Error
 import           Control.Lens         hiding (lens)
 import           Control.Monad.Except
 import qualified Data.HashMap.Strict  as Map
+import qualified Data.HashSet         as Set
 import           Data.Maybe
 import           Data.Semigroup       ((<>))
 import qualified Data.Text            as Text
@@ -93,17 +94,22 @@ schema g ml (Fix f) = go (maybe g (reference g) ml) f >>= uncurry insert
     object p (Obj aps ps) =
         Obj Nothing <$> Map.traverseWithKey (localSchema p) ps
 
-    -- | Just x <- i ^. iId = pure x
-    -- | otherwise          = do
+    name i p xs
+        | Just x <- i ^. iId = pure x
+        | otherwise          = do
+            r <- uses reserve (Set.member p)
+            e <- uses schemas (Map.lookup p)
+            case (r, e, xs) of
+                (False, Nothing, _)    -> pure p
+                (_,     _,       z:zs) -> name i (reference g z) zs
 
-    name i p xs = do
-        e <- uses schemas (Map.lookup p)
-        case (e, xs) of
-            (Nothing, _)    -> pure p
-            (Just _,  z:zs) -> name i (reference g z) zs
-            (Just x,  [])   -> throwError $
-                format ("Unable to generate name for: " % gid % ", " % shown % ", " % gid % "\n" % shown)
-                       g ml p x
+                (_,     Just x,  [])   -> throwError $
+                    format ("Unable to generate name for: " % gid % ", " % shown % ", " % gid % "\n" % shown)
+                           g ml p x
+
+                (True,  _,       [])   -> throwError $
+                    format ("Unable to generate name for reserved schema: " % gid % ", " % shown % ", " % gid)
+                           g ml p
 
 globalParam :: Local -> Param (Fix Schema) -> AST (Param Global)
 globalParam l p = ($ p) $ case l of

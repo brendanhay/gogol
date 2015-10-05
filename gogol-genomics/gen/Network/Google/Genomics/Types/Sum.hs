@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE LambdaCase         #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -379,7 +380,7 @@ data CigarUnitOperation
       -- ^ @CLIP_HARD@
     | ClipSoft
       -- ^ @CLIP_SOFT@
-    | Delete
+    | Delete'
       -- ^ @DELETE@
     | Insert
       -- ^ @INSERT@
@@ -402,7 +403,7 @@ instance FromText CigarUnitOperation where
         "ALIGNMENT_MATCH" -> Just AlignmentMatch
         "CLIP_HARD" -> Just ClipHard
         "CLIP_SOFT" -> Just ClipSoft
-        "DELETE" -> Just Delete
+        "DELETE" -> Just Delete'
         "INSERT" -> Just Insert
         "OPERATION_UNSPECIFIED" -> Just OperationUnspecified
         "PAD" -> Just Pad
@@ -416,7 +417,7 @@ instance ToText CigarUnitOperation where
         AlignmentMatch -> "ALIGNMENT_MATCH"
         ClipHard -> "CLIP_HARD"
         ClipSoft -> "CLIP_SOFT"
-        Delete -> "DELETE"
+        Delete' -> "DELETE"
         Insert -> "INSERT"
         OperationUnspecified -> "OPERATION_UNSPECIFIED"
         Pad -> "PAD"

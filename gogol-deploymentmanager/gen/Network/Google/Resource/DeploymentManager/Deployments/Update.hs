@@ -2,6 +2,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE FlexibleInstances  #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -134,8 +135,8 @@ deploymentsUpdate' pDuProject_ pDuPayload_ pDuDeployment_ =
     , _duProject = pDuProject_
     , _duUserIP = Nothing
     , _duPayload = pDuPayload_
-    , _duUpdatePolicy = Patch
-    , _duDeletePolicy = Delete
+    , _duUpdatePolicy = Patch'
+    , _duDeletePolicy = Delete'
     , _duKey = Nothing
     , _duOAuthToken = Nothing
     , _duFields = Nothing

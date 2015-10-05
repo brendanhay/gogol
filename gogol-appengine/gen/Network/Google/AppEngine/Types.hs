@@ -1,5 +1,6 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -23,6 +24,10 @@ module Network.Google.AppEngine.Types
     , sDetails
     , sCode
     , sMessage
+
+    -- * OperationSchema
+    , OperationSchema
+    , operationSchema
 
     -- * TrafficSplit
     , TrafficSplit
@@ -255,10 +260,6 @@ module Network.Google.AppEngine.Types
     , ehMimeType
     , ehErrorCode
     , ehStaticFile
-
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
 
     -- * OperationMetadata
     , OperationMetadata

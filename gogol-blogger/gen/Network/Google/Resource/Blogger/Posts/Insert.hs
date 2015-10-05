@@ -2,6 +2,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE FlexibleInstances  #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -63,7 +64,7 @@ type PostsInsertResource =
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] Post :> Post '[JSON] Post
+                               ReqBody '[JSON] Post' :> Post '[JSON] Post'
 
 -- | Add a post.
 --
@@ -76,7 +77,7 @@ data PostsInsert' = PostsInsert'
     , _piiUserIP      :: !(Maybe Text)
     , _piiFetchImages :: !(Maybe Bool)
     , _piiBlogId      :: !Text
-    , _piiPayload     :: !Post
+    , _piiPayload     :: !Post'
     , _piiKey         :: !(Maybe Key)
     , _piiOAuthToken  :: !(Maybe OAuthToken)
     , _piiFields      :: !(Maybe Text)
@@ -109,7 +110,7 @@ data PostsInsert' = PostsInsert'
 -- * 'piiFields'
 postsInsert'
     :: Text -- ^ 'blogId'
-    -> Post -- ^ 'payload'
+    -> Post' -- ^ 'payload'
     -> PostsInsert'
 postsInsert' pPiiBlogId_ pPiiPayload_ =
     PostsInsert'
@@ -169,7 +170,7 @@ piiBlogId
   = lens _piiBlogId (\ s a -> s{_piiBlogId = a})
 
 -- | Multipart request metadata.
-piiPayload :: Lens' PostsInsert' Post
+piiPayload :: Lens' PostsInsert' Post'
 piiPayload
   = lens _piiPayload (\ s a -> s{_piiPayload = a})
 
@@ -195,7 +196,7 @@ instance GoogleAuth PostsInsert' where
         authToken = piiOAuthToken . _Just
 
 instance GoogleRequest PostsInsert' where
-        type Rs PostsInsert' = Post
+        type Rs PostsInsert' = Post'
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsInsert'{..}
           = go _piiBlogId (Just _piiFetchBody) _piiIsDraft

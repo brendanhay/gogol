@@ -1,5 +1,6 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 
@@ -1381,31 +1382,31 @@ instance ToJSON ListLogSinksResponse where
 --
 -- /See:/ 'logService' smart constructor.
 data LogService = LogService
-    { _lssName      :: !(Maybe Text)
-    , _lssIndexKeys :: !(Maybe [Text])
+    { _logName      :: !(Maybe Text)
+    , _logIndexKeys :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogService' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lssName'
+-- * 'logName'
 --
--- * 'lssIndexKeys'
+-- * 'logIndexKeys'
 logService
     :: LogService
 logService =
     LogService
-    { _lssName = Nothing
-    , _lssIndexKeys = Nothing
+    { _logName = Nothing
+    , _logIndexKeys = Nothing
     }
 
 -- | The service\'s name. Example: \`\"appengine.googleapis.com\"\`. Log
 -- names beginning with this string are reserved for this service. This
 -- value can appear in the \`LogEntry.metadata.serviceName\` field of log
 -- entries associated with this log service.
-lssName :: Lens' LogService (Maybe Text)
-lssName = lens _lssName (\ s a -> s{_lssName = a})
+logName :: Lens' LogService (Maybe Text)
+logName = lens _logName (\ s a -> s{_logName = a})
 
 -- | A list of the names of the keys used to index and label individual log
 -- entries from this service. The first two keys are used as the primary
@@ -1414,9 +1415,9 @@ lssName = lens _lssName (\ s a -> s{_lssName = a})
 -- by version, so its \`indexKeys\` field is the following: [
 -- \"appengine.googleapis.com\/module_id\",
 -- \"appengine.googleapis.com\/version_id\" ]
-lssIndexKeys :: Lens' LogService [Text]
-lssIndexKeys
-  = lens _lssIndexKeys (\ s a -> s{_lssIndexKeys = a})
+logIndexKeys :: Lens' LogService [Text]
+logIndexKeys
+  = lens _logIndexKeys (\ s a -> s{_logIndexKeys = a})
       . _Default
       . _Coerce
 
@@ -1431,8 +1432,8 @@ instance ToJSON LogService where
         toJSON LogService{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _lssName,
-                  ("indexKeys" .=) <$> _lssIndexKeys])
+                 [("name" .=) <$> _logName,
+                  ("indexKeys" .=) <$> _logIndexKeys])
 
 -- | Result returned from \`ListLogServiceSinks\`.
 --

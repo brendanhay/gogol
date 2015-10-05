@@ -2,6 +2,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE FlexibleInstances  #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -112,7 +113,7 @@ blogsListByUser'
     -> BlogsListByUser'
 blogsListByUser' pBlbuUserId_ =
     BlogsListByUser'
-    { _blbuStatus = BLBUSLive
+    { _blbuStatus = [BLBUSLive]
     , _blbuQuotaUser = Nothing
     , _blbuPrettyPrint = True
     , _blbuUserIP = Nothing
@@ -204,8 +205,7 @@ instance GoogleRequest BlogsListByUser' where
         type Rs BlogsListByUser' = BlogList
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u BlogsListByUser'{..}
-          = go _blbuUserId (_blbuStatus ^. _Default)
-              _blbuFetchUserInfo
+          = go _blbuUserId _blbuStatus _blbuFetchUserInfo
               (_blbuRole ^. _Default)
               _blbuView
               _blbuQuotaUser

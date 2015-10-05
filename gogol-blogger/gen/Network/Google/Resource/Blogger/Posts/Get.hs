@@ -2,6 +2,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE FlexibleInstances  #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -65,7 +66,7 @@ type PostsGetResource =
                            QueryParam "fields" Text :>
                              QueryParam "key" Key :>
                                QueryParam "oauth_token" OAuthToken :>
-                                 QueryParam "alt" AltJSON :> Get '[JSON] Post
+                                 QueryParam "alt" AltJSON :> Get '[JSON] Post'
 
 -- | Get a post by ID.
 --
@@ -202,7 +203,7 @@ instance GoogleAuth PostsGet' where
         authToken = pgOAuthToken . _Just
 
 instance GoogleRequest PostsGet' where
-        type Rs PostsGet' = Post
+        type Rs PostsGet' = Post'
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsGet'{..}
           = go _pgBlogId _pgPostId (Just _pgFetchBody)

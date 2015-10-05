@@ -2,6 +2,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE FlexibleInstances  #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -58,7 +59,7 @@ type PostsRevertResource =
                      QueryParam "fields" Text :>
                        QueryParam "key" Key :>
                          QueryParam "oauth_token" OAuthToken :>
-                           QueryParam "alt" AltJSON :> Post '[JSON] Post
+                           QueryParam "alt" AltJSON :> Post '[JSON] Post'
 
 -- | Revert a published or scheduled post to draft state.
 --
@@ -155,7 +156,7 @@ instance GoogleAuth PostsRevert' where
         authToken = prOAuthToken . _Just
 
 instance GoogleRequest PostsRevert' where
-        type Rs PostsRevert' = Post
+        type Rs PostsRevert' = Post'
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsRevert'{..}
           = go _prBlogId _prPostId _prQuotaUser

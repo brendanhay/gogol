@@ -1,5 +1,6 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 
@@ -4327,7 +4328,8 @@ varrSnippet
 varrKind :: Lens' VideoAbuseReportReason Text
 varrKind = lens _varrKind (\ s a -> s{_varrKind = a})
 
--- | The ID of this abuse report reason.
+-- | The high-level, or primary, reason that the content is abusive. The
+-- value is an abuse report reason ID.
 varrId :: Lens' VideoAbuseReportReason (Maybe Text)
 varrId = lens _varrId (\ s a -> s{_varrId = a})
 
@@ -7735,9 +7737,7 @@ videoAbuseReport =
     , _varComments = Nothing
     }
 
--- | The specific, or secondary, reason that this content is abusive (if
--- available). The value is an abuse report reason ID that is a valid
--- secondary reason for the primary reason.
+-- | The ID of this abuse report secondary reason.
 varSecondaryReasonId :: Lens' VideoAbuseReport (Maybe Text)
 varSecondaryReasonId
   = lens _varSecondaryReasonId

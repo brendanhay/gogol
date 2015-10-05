@@ -210,6 +210,10 @@ googleRequestDecl g n assoc alt p api url fields m pat prec =
           where
             go l = case Map.lookup l ps of
                 Just p | _pLocation p == Query
+                       , defaulted p
+                       , p ^. iRepeated -> v l
+
+                Just p | _pLocation p == Query
                        , not (required p)
                        , p ^. iRepeated -> infixApp (v l) "^." (var "_Default")
 
@@ -358,10 +362,11 @@ ctorDecl n p rs = sfun noLoc c ps (UnGuardedRhs rhs) noBinds
 fieldUpdate :: Prefix -> Local -> Solved -> FieldUpdate
 fieldUpdate p l s = FieldUpdate (UnQual (fname p l)) rhs
   where
-    rhs | required s              = v
-        | Just x <- def s         = x
-        | Just x <- iso (_type s) = infixApp x "#" v
-        | otherwise               = var (name "Nothing")
+    rhs | required s                      = v
+        | Just x <- def s, s ^. iRepeated = listE [x]
+        | Just x <- def s                 = x
+        | Just x <- iso (_type s)         = infixApp x "#" v
+        | otherwise                       = var (name "Nothing")
 
     v = var (pname p l)
 

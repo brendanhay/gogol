@@ -1,5 +1,6 @@
-{-# LANGUAGE DataKinds     #-}
-{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE TypeOperators     #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
@@ -68,6 +69,10 @@ module Network.Google.AppEngine
     , sDetails
     , sCode
     , sMessage
+
+    -- ** OperationSchema
+    , OperationSchema
+    , operationSchema
 
     -- ** TrafficSplit
     , TrafficSplit
@@ -300,10 +305,6 @@ module Network.Google.AppEngine
     , ehMimeType
     , ehErrorCode
     , ehStaticFile
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
 
     -- ** OperationMetadata
     , OperationMetadata

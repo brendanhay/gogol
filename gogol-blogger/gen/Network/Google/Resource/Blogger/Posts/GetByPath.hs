@@ -2,6 +2,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE FlexibleInstances  #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -62,7 +63,7 @@ type PostsGetByPathResource =
                          QueryParam "fields" Text :>
                            QueryParam "key" Key :>
                              QueryParam "oauth_token" OAuthToken :>
-                               QueryParam "alt" AltJSON :> Get '[JSON] Post
+                               QueryParam "alt" AltJSON :> Get '[JSON] Post'
 
 -- | Retrieve a Post by Path.
 --
@@ -183,7 +184,7 @@ instance GoogleAuth PostsGetByPath' where
         authToken = pgbpOAuthToken . _Just
 
 instance GoogleRequest PostsGetByPath' where
-        type Rs PostsGetByPath' = Post
+        type Rs PostsGetByPath' = Post'
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsGetByPath'{..}
           = go _pgbpBlogId (Just _pgbpPath) _pgbpMaxComments

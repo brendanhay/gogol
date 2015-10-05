@@ -1,5 +1,6 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -162,8 +163,8 @@ module Network.Google.Logging.Types
     -- * LogService
     , LogService
     , logService
-    , lssName
-    , lssIndexKeys
+    , logName
+    , logIndexKeys
 
     -- * ListLogServiceSinksResponse
     , ListLogServiceSinksResponse

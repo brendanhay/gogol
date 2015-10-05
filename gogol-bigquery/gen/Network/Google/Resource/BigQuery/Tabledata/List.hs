@@ -2,6 +2,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE FlexibleInstances  #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -166,7 +167,9 @@ tDatasetId :: Lens' TabledataList' Text
 tDatasetId
   = lens _tDatasetId (\ s a -> s{_tDatasetId = a})
 
--- | Page token, returned by a previous call, identifying the result set
+-- | A token used for paging results. Providing this token instead of the
+-- startIndex parameter can help you retrieve stable results when an
+-- underlying table is changing.
 tPageToken :: Lens' TabledataList' (Maybe Text)
 tPageToken
   = lens _tPageToken (\ s a -> s{_tPageToken = a})

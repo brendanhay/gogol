@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE LambdaCase         #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -355,7 +356,7 @@ instance ToJSON EditsImagesUploadImageType where
 data EditsExpansionFilesUploadExpansionFileType
     = Main
       -- ^ @main@
-    | Patch
+    | Patch'
       -- ^ @patch@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -364,13 +365,13 @@ instance Hashable EditsExpansionFilesUploadExpansionFileType
 instance FromText EditsExpansionFilesUploadExpansionFileType where
     fromText = \case
         "main" -> Just Main
-        "patch" -> Just Patch
+        "patch" -> Just Patch'
         _ -> Nothing
 
 instance ToText EditsExpansionFilesUploadExpansionFileType where
     toText = \case
         Main -> "main"
-        Patch -> "patch"
+        Patch' -> "patch"
 
 instance FromJSON EditsExpansionFilesUploadExpansionFileType where
     parseJSON = parseJSONText "EditsExpansionFilesUploadExpansionFileType"
@@ -381,7 +382,7 @@ instance ToJSON EditsExpansionFilesUploadExpansionFileType where
 data EditsExpansionFilesGetExpansionFileType
     = EEFGEFTMain
       -- ^ @main@
-    | EEFGEFTPatch
+    | EEFGEFTPatch'
       -- ^ @patch@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -390,13 +391,13 @@ instance Hashable EditsExpansionFilesGetExpansionFileType
 instance FromText EditsExpansionFilesGetExpansionFileType where
     fromText = \case
         "main" -> Just EEFGEFTMain
-        "patch" -> Just EEFGEFTPatch
+        "patch" -> Just EEFGEFTPatch'
         _ -> Nothing
 
 instance ToText EditsExpansionFilesGetExpansionFileType where
     toText = \case
         EEFGEFTMain -> "main"
-        EEFGEFTPatch -> "patch"
+        EEFGEFTPatch' -> "patch"
 
 instance FromJSON EditsExpansionFilesGetExpansionFileType where
     parseJSON = parseJSONText "EditsExpansionFilesGetExpansionFileType"
@@ -407,7 +408,7 @@ instance ToJSON EditsExpansionFilesGetExpansionFileType where
 data EditsExpansionFilesPatchExpansionFileType
     = EEFPEFTMain
       -- ^ @main@
-    | EEFPEFTPatch
+    | EEFPEFTPatch'
       -- ^ @patch@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -416,13 +417,13 @@ instance Hashable EditsExpansionFilesPatchExpansionFileType
 instance FromText EditsExpansionFilesPatchExpansionFileType where
     fromText = \case
         "main" -> Just EEFPEFTMain
-        "patch" -> Just EEFPEFTPatch
+        "patch" -> Just EEFPEFTPatch'
         _ -> Nothing
 
 instance ToText EditsExpansionFilesPatchExpansionFileType where
     toText = \case
         EEFPEFTMain -> "main"
-        EEFPEFTPatch -> "patch"
+        EEFPEFTPatch' -> "patch"
 
 instance FromJSON EditsExpansionFilesPatchExpansionFileType where
     parseJSON = parseJSONText "EditsExpansionFilesPatchExpansionFileType"
@@ -433,7 +434,7 @@ instance ToJSON EditsExpansionFilesPatchExpansionFileType where
 data EditsExpansionFilesUpdateExpansionFileType
     = EEFUEFTMain
       -- ^ @main@
-    | EEFUEFTPatch
+    | EEFUEFTPatch'
       -- ^ @patch@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -442,13 +443,13 @@ instance Hashable EditsExpansionFilesUpdateExpansionFileType
 instance FromText EditsExpansionFilesUpdateExpansionFileType where
     fromText = \case
         "main" -> Just EEFUEFTMain
-        "patch" -> Just EEFUEFTPatch
+        "patch" -> Just EEFUEFTPatch'
         _ -> Nothing
 
 instance ToText EditsExpansionFilesUpdateExpansionFileType where
     toText = \case
         EEFUEFTMain -> "main"
-        EEFUEFTPatch -> "patch"
+        EEFUEFTPatch' -> "patch"
 
 instance FromJSON EditsExpansionFilesUpdateExpansionFileType where
     parseJSON = parseJSONText "EditsExpansionFilesUpdateExpansionFileType"

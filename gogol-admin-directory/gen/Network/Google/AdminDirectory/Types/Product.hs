@@ -1,5 +1,6 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 
@@ -4411,41 +4412,42 @@ instance ToJSON UserExternalId where
 --
 -- /See:/ 'asps' smart constructor.
 data Asps = Asps
-    { _a1Etag  :: !(Maybe Text)
-    , _a1Kind  :: !Text
-    , _a1Items :: !(Maybe [Asp])
+    { _aspEtag  :: !(Maybe Text)
+    , _aspKind  :: !Text
+    , _aspItems :: !(Maybe [Asp])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Asps' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'a1Etag'
+-- * 'aspEtag'
 --
--- * 'a1Kind'
+-- * 'aspKind'
 --
--- * 'a1Items'
+-- * 'aspItems'
 asps
     :: Asps
 asps =
     Asps
-    { _a1Etag = Nothing
-    , _a1Kind = "admin#directory#aspList"
-    , _a1Items = Nothing
+    { _aspEtag = Nothing
+    , _aspKind = "admin#directory#aspList"
+    , _aspItems = Nothing
     }
 
 -- | ETag of the resource.
-a1Etag :: Lens' Asps (Maybe Text)
-a1Etag = lens _a1Etag (\ s a -> s{_a1Etag = a})
+aspEtag :: Lens' Asps (Maybe Text)
+aspEtag = lens _aspEtag (\ s a -> s{_aspEtag = a})
 
 -- | The type of the API resource. This is always admin#directory#aspList.
-a1Kind :: Lens' Asps Text
-a1Kind = lens _a1Kind (\ s a -> s{_a1Kind = a})
+aspKind :: Lens' Asps Text
+aspKind = lens _aspKind (\ s a -> s{_aspKind = a})
 
 -- | A list of ASP resources.
-a1Items :: Lens' Asps [Asp]
-a1Items
-  = lens _a1Items (\ s a -> s{_a1Items = a}) . _Default
+aspItems :: Lens' Asps [Asp]
+aspItems
+  = lens _aspItems (\ s a -> s{_aspItems = a}) .
+      _Default
       . _Coerce
 
 instance FromJSON Asps where
@@ -4461,5 +4463,5 @@ instance ToJSON Asps where
         toJSON Asps{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _a1Etag, Just ("kind" .= _a1Kind),
-                  ("items" .=) <$> _a1Items])
+                 [("etag" .=) <$> _aspEtag, Just ("kind" .= _aspKind),
+                  ("items" .=) <$> _aspItems])

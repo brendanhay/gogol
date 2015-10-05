@@ -1,5 +1,6 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -564,9 +565,9 @@ module Network.Google.AdminDirectory.Types
     -- * Asps
     , Asps
     , asps
-    , a1Etag
-    , a1Kind
-    , a1Items
+    , aspEtag
+    , aspKind
+    , aspItems
 
     -- * UsersGetViewType
     , UsersGetViewType (..)

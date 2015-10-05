@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE LambdaCase         #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -368,7 +369,7 @@ instance ToJSON ConditionType where
     toJSON = toJSONText
 
 data AccountAccessPermissionItem
-    = Delete
+    = Delete'
       -- ^ @delete@
     | Edit
       -- ^ @edit@
@@ -384,7 +385,7 @@ instance Hashable AccountAccessPermissionItem
 
 instance FromText AccountAccessPermissionItem where
     fromText = \case
-        "delete" -> Just Delete
+        "delete" -> Just Delete'
         "edit" -> Just Edit
         "manage" -> Just Manage
         "publish" -> Just Publish
@@ -393,7 +394,7 @@ instance FromText AccountAccessPermissionItem where
 
 instance ToText AccountAccessPermissionItem where
     toText = \case
-        Delete -> "delete"
+        Delete' -> "delete"
         Edit -> "edit"
         Manage -> "manage"
         Publish -> "publish"
@@ -482,7 +483,7 @@ instance ToJSON ParameterType where
     toJSON = toJSONText
 
 data ContainerAccessPermissionItem
-    = CAPIDelete
+    = CAPIDelete'
       -- ^ @delete@
     | CAPIEdit
       -- ^ @edit@
@@ -498,7 +499,7 @@ instance Hashable ContainerAccessPermissionItem
 
 instance FromText ContainerAccessPermissionItem where
     fromText = \case
-        "delete" -> Just CAPIDelete
+        "delete" -> Just CAPIDelete'
         "edit" -> Just CAPIEdit
         "manage" -> Just CAPIManage
         "publish" -> Just CAPIPublish
@@ -507,7 +508,7 @@ instance FromText ContainerAccessPermissionItem where
 
 instance ToText ContainerAccessPermissionItem where
     toText = \case
-        CAPIDelete -> "delete"
+        CAPIDelete' -> "delete"
         CAPIEdit -> "edit"
         CAPIManage -> "manage"
         CAPIPublish -> "publish"

@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE LambdaCase         #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -46,7 +47,7 @@ instance ToJSON DeploymentsUpdateCreatePolicy where
 
 -- | Sets the policy to use for updating resources.
 data DeploymentsUpdateUpdatePolicy
-    = Patch
+    = Patch'
       -- ^ @PATCH@
     | Update
       -- ^ @UPDATE@
@@ -56,13 +57,13 @@ instance Hashable DeploymentsUpdateUpdatePolicy
 
 instance FromText DeploymentsUpdateUpdatePolicy where
     fromText = \case
-        "PATCH" -> Just Patch
+        "PATCH" -> Just Patch'
         "UPDATE" -> Just Update
         _ -> Nothing
 
 instance ToText DeploymentsUpdateUpdatePolicy where
     toText = \case
-        Patch -> "PATCH"
+        Patch' -> "PATCH"
         Update -> "UPDATE"
 
 instance FromJSON DeploymentsUpdateUpdatePolicy where
@@ -75,7 +76,7 @@ instance ToJSON DeploymentsUpdateUpdatePolicy where
 data DeploymentsUpdateDeletePolicy
     = Abandon
       -- ^ @ABANDON@
-    | Delete
+    | Delete'
       -- ^ @DELETE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -84,13 +85,13 @@ instance Hashable DeploymentsUpdateDeletePolicy
 instance FromText DeploymentsUpdateDeletePolicy where
     fromText = \case
         "ABANDON" -> Just Abandon
-        "DELETE" -> Just Delete
+        "DELETE" -> Just Delete'
         _ -> Nothing
 
 instance ToText DeploymentsUpdateDeletePolicy where
     toText = \case
         Abandon -> "ABANDON"
-        Delete -> "DELETE"
+        Delete' -> "DELETE"
 
 instance FromJSON DeploymentsUpdateDeletePolicy where
     parseJSON = parseJSONText "DeploymentsUpdateDeletePolicy"
@@ -102,7 +103,7 @@ instance ToJSON DeploymentsUpdateDeletePolicy where
 data DeploymentsPatchDeletePolicy
     = DPDPAbandon
       -- ^ @ABANDON@
-    | DPDPDelete
+    | DPDPDelete'
       -- ^ @DELETE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -111,13 +112,13 @@ instance Hashable DeploymentsPatchDeletePolicy
 instance FromText DeploymentsPatchDeletePolicy where
     fromText = \case
         "ABANDON" -> Just DPDPAbandon
-        "DELETE" -> Just DPDPDelete
+        "DELETE" -> Just DPDPDelete'
         _ -> Nothing
 
 instance ToText DeploymentsPatchDeletePolicy where
     toText = \case
         DPDPAbandon -> "ABANDON"
-        DPDPDelete -> "DELETE"
+        DPDPDelete' -> "DELETE"
 
 instance FromJSON DeploymentsPatchDeletePolicy where
     parseJSON = parseJSONText "DeploymentsPatchDeletePolicy"
@@ -127,7 +128,7 @@ instance ToJSON DeploymentsPatchDeletePolicy where
 
 -- | Sets the policy to use for updating resources.
 data DeploymentsPatchUpdatePolicy
-    = DPUPPatch
+    = DPUPPatch'
       -- ^ @PATCH@
     | DPUPUpdate
       -- ^ @UPDATE@
@@ -137,13 +138,13 @@ instance Hashable DeploymentsPatchUpdatePolicy
 
 instance FromText DeploymentsPatchUpdatePolicy where
     fromText = \case
-        "PATCH" -> Just DPUPPatch
+        "PATCH" -> Just DPUPPatch'
         "UPDATE" -> Just DPUPUpdate
         _ -> Nothing
 
 instance ToText DeploymentsPatchUpdatePolicy where
     toText = \case
-        DPUPPatch -> "PATCH"
+        DPUPPatch' -> "PATCH"
         DPUPUpdate -> "UPDATE"
 
 instance FromJSON DeploymentsPatchUpdatePolicy where

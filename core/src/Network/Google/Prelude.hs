@@ -23,6 +23,7 @@ module Network.Google.Prelude
     , module Network.Google.Prelude
     ) where
 
+import           Control.Applicative         as Export (pure, (<$>), (<*>))
 import           Control.Lens                as Export (Lens', lens, mapping,
                                                         (^.), _Just)
 import           Control.Lens                hiding (coerce)
@@ -32,7 +33,7 @@ import           Data.Data                   as Export (Data, Typeable)
 import           Data.Hashable               as Export
 import           Data.Int                    as Export (Int32, Int64)
 import           Data.Maybe                  as Export
-import           Data.Monoid
+import           Data.Monoid                 as Export (mempty, (<>))
 import           Data.Proxy                  as Export
 import           Data.Text                   as Export (Text)
 import qualified Data.Text                   as Text
@@ -44,6 +45,7 @@ import           Network.Google.Data.JSON    as Export
 import           Network.Google.Data.Numeric as Export
 -- import           Network.HTTP.Media
 import           Numeric.Natural             as Export (Natural)
+import           Prelude                     as Export hiding (product)
 import           Servant.API                 as Export
 import           Servant.Client              as Export
 import           Servant.Common.Req          as Export (Req, defReq)

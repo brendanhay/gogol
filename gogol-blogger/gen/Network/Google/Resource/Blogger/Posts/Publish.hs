@@ -2,6 +2,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE FlexibleInstances  #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
@@ -61,7 +62,7 @@ type PostsPublishResource =
                        QueryParam "fields" Text :>
                          QueryParam "key" Key :>
                            QueryParam "oauth_token" OAuthToken :>
-                             QueryParam "alt" AltJSON :> Post '[JSON] Post
+                             QueryParam "alt" AltJSON :> Post '[JSON] Post'
 
 -- | Publishes a draft post, optionally at the specific time of the given
 -- publishDate parameter.
@@ -178,7 +179,7 @@ instance GoogleAuth PostsPublish' where
         authToken = posOAuthToken . _Just
 
 instance GoogleRequest PostsPublish' where
-        type Rs PostsPublish' = Post
+        type Rs PostsPublish' = Post'
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostsPublish'{..}
           = go _posBlogId _posPostId _posPublishDate
