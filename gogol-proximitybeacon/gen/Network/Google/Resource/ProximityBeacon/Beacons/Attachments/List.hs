@@ -54,8 +54,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
     , balCallback
     ) where
 
-import Network.Google.Prelude
-import Network.Google.ProximityBeacon.Types
+import           Network.Google.Prelude
+import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsAttachmentsList@ which the
 -- 'BeaconsAttachmentsList'' request conforms to.
@@ -88,20 +88,20 @@ type BeaconsAttachmentsListResource =
 --
 -- /See:/ 'beaconsAttachmentsList'' smart constructor.
 data BeaconsAttachmentsList' = BeaconsAttachmentsList'
-    { _balXgafv :: !(Maybe Text)
-    , _balQuotaUser :: !(Maybe Text)
-    , _balPrettyPrint :: !Bool
+    { _balXgafv          :: !(Maybe Text)
+    , _balQuotaUser      :: !(Maybe Text)
+    , _balPrettyPrint    :: !Bool
     , _balUploadProtocol :: !(Maybe Text)
-    , _balPp :: !Bool
-    , _balAccessToken :: !(Maybe Text)
-    , _balBeaconName :: !Text
-    , _balUploadType :: !(Maybe Text)
-    , _balBearerToken :: !(Maybe Text)
+    , _balPp             :: !Bool
+    , _balAccessToken    :: !(Maybe Text)
+    , _balBeaconName     :: !Text
+    , _balUploadType     :: !(Maybe Text)
+    , _balBearerToken    :: !(Maybe Text)
     , _balNamespacedType :: !(Maybe Text)
-    , _balKey :: !(Maybe Key)
-    , _balOAuthToken :: !(Maybe OAuthToken)
-    , _balFields :: !(Maybe Text)
-    , _balCallback :: !(Maybe Text)
+    , _balKey            :: !(Maybe Key)
+    , _balOAuthToken     :: !(Maybe OAuthToken)
+    , _balFields         :: !(Maybe Text)
+    , _balCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsAttachmentsList'' with the minimum fields required to make a request.
@@ -138,7 +138,7 @@ data BeaconsAttachmentsList' = BeaconsAttachmentsList'
 beaconsAttachmentsList'
     :: Text -- ^ 'beaconName'
     -> BeaconsAttachmentsList'
-beaconsAttachmentsList' pBalBeaconName_ = 
+beaconsAttachmentsList' pBalBeaconName_ =
     BeaconsAttachmentsList'
     { _balXgafv = Nothing
     , _balQuotaUser = Nothing

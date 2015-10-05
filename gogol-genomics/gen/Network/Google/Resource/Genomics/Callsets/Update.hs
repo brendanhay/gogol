@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.Callsets.Update
     , cuFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsCallsetsUpdate@ which the
 -- 'CallsetsUpdate'' request conforms to.
@@ -64,14 +64,14 @@ type CallsetsUpdateResource =
 --
 -- /See:/ 'callsetsUpdate'' smart constructor.
 data CallsetsUpdate' = CallsetsUpdate'
-    { _cuQuotaUser :: !(Maybe Text)
+    { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
-    , _cuUserIP :: !(Maybe Text)
-    , _cuPayload :: !CallSet
-    , _cuKey :: !(Maybe Key)
-    , _cuCallSetId :: !Text
-    , _cuOAuthToken :: !(Maybe OAuthToken)
-    , _cuFields :: !(Maybe Text)
+    , _cuUserIP      :: !(Maybe Text)
+    , _cuPayload     :: !CallSet
+    , _cuKey         :: !(Maybe Key)
+    , _cuCallSetId   :: !Text
+    , _cuOAuthToken  :: !(Maybe OAuthToken)
+    , _cuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsUpdate'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ callsetsUpdate'
     :: CallSet -- ^ 'payload'
     -> Text -- ^ 'callSetId'
     -> CallsetsUpdate'
-callsetsUpdate' pCuPayload_ pCuCallSetId_ = 
+callsetsUpdate' pCuPayload_ pCuCallSetId_ =
     CallsetsUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True

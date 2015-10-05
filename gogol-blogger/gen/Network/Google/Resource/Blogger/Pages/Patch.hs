@@ -46,8 +46,8 @@ module Network.Google.Resource.Blogger.Pages.Patch
     , pagaFields
     ) where
 
-import Network.Google.Blogger.Types
-import Network.Google.Prelude
+import           Network.Google.Blogger.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPagesPatch@ which the
 -- 'PagesPatch'' request conforms to.
@@ -71,17 +71,17 @@ type PagesPatchResource =
 --
 -- /See:/ 'pagesPatch'' smart constructor.
 data PagesPatch' = PagesPatch'
-    { _pagaQuotaUser :: !(Maybe Text)
+    { _pagaQuotaUser   :: !(Maybe Text)
     , _pagaPrettyPrint :: !Bool
-    , _pagaUserIP :: !(Maybe Text)
-    , _pagaBlogId :: !Text
-    , _pagaPageId :: !Text
-    , _pagaPayload :: !Page
-    , _pagaKey :: !(Maybe Key)
-    , _pagaRevert :: !(Maybe Bool)
-    , _pagaOAuthToken :: !(Maybe OAuthToken)
-    , _pagaPublish :: !(Maybe Bool)
-    , _pagaFields :: !(Maybe Text)
+    , _pagaUserIP      :: !(Maybe Text)
+    , _pagaBlogId      :: !Text
+    , _pagaPageId      :: !Text
+    , _pagaPayload     :: !Page
+    , _pagaKey         :: !(Maybe Key)
+    , _pagaRevert      :: !(Maybe Bool)
+    , _pagaOAuthToken  :: !(Maybe OAuthToken)
+    , _pagaPublish     :: !(Maybe Bool)
+    , _pagaFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesPatch'' with the minimum fields required to make a request.
@@ -114,7 +114,7 @@ pagesPatch'
     -> Text -- ^ 'pageId'
     -> Page -- ^ 'payload'
     -> PagesPatch'
-pagesPatch' pPagaBlogId_ pPagaPageId_ pPagaPayload_ = 
+pagesPatch' pPagaBlogId_ pPagaPageId_ pPagaPayload_ =
     PagesPatch'
     { _pagaQuotaUser = Nothing
     , _pagaPrettyPrint = True

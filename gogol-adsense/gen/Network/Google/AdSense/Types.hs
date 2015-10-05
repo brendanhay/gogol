@@ -275,9 +275,9 @@ module Network.Google.AdSense.Types
     , payItems
     ) where
 
-import Network.Google.AdSense.Types.Product
-import Network.Google.AdSense.Types.Sum
-import Network.Google.Prelude
+import           Network.Google.AdSense.Types.Product
+import           Network.Google.AdSense.Types.Sum
+import           Network.Google.Prelude
 
 -- | URL referring to version 'v1.4' of the AdSense Management API.
 adSenseURL :: BaseUrl

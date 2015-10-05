@@ -45,8 +45,8 @@ module Network.Google.Resource.AdSense.AdUnits.CustomChannels.List
     , aucclFields
     ) where
 
-import Network.Google.AdSense.Types
-import Network.Google.Prelude
+import           Network.Google.AdSense.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAdUnitsCustomChannelsList@ which the
 -- 'AdUnitsCustomChannelsList'' request conforms to.
@@ -71,16 +71,16 @@ type AdUnitsCustomChannelsListResource =
 --
 -- /See:/ 'adUnitsCustomChannelsList'' smart constructor.
 data AdUnitsCustomChannelsList' = AdUnitsCustomChannelsList'
-    { _aucclQuotaUser :: !(Maybe Text)
+    { _aucclQuotaUser   :: !(Maybe Text)
     , _aucclPrettyPrint :: !Bool
-    , _aucclUserIP :: !(Maybe Text)
-    , _aucclAdUnitId :: !Text
-    , _aucclAdClientId :: !Text
-    , _aucclKey :: !(Maybe Key)
-    , _aucclPageToken :: !(Maybe Text)
-    , _aucclOAuthToken :: !(Maybe OAuthToken)
-    , _aucclMaxResults :: !(Maybe Int32)
-    , _aucclFields :: !(Maybe Text)
+    , _aucclUserIP      :: !(Maybe Text)
+    , _aucclAdUnitId    :: !Text
+    , _aucclAdClientId  :: !Text
+    , _aucclKey         :: !(Maybe Key)
+    , _aucclPageToken   :: !(Maybe Text)
+    , _aucclOAuthToken  :: !(Maybe OAuthToken)
+    , _aucclMaxResults  :: !(Maybe Int32)
+    , _aucclFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdUnitsCustomChannelsList'' with the minimum fields required to make a request.
@@ -110,7 +110,7 @@ adUnitsCustomChannelsList'
     :: Text -- ^ 'adUnitId'
     -> Text -- ^ 'adClientId'
     -> AdUnitsCustomChannelsList'
-adUnitsCustomChannelsList' pAucclAdUnitId_ pAucclAdClientId_ = 
+adUnitsCustomChannelsList' pAucclAdUnitId_ pAucclAdClientId_ =
     AdUnitsCustomChannelsList'
     { _aucclQuotaUser = Nothing
     , _aucclPrettyPrint = True

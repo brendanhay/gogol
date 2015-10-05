@@ -44,8 +44,8 @@ module Network.Google.Resource.AdExchangeBuyer.Budget.Get
     , bgFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerBudgetGet@ which the
 -- 'BudgetGet'' request conforms to.
@@ -66,14 +66,14 @@ type BudgetGetResource =
 --
 -- /See:/ 'budgetGet'' smart constructor.
 data BudgetGet' = BudgetGet'
-    { _bgQuotaUser :: !(Maybe Text)
+    { _bgQuotaUser   :: !(Maybe Text)
     , _bgPrettyPrint :: !Bool
-    , _bgUserIP :: !(Maybe Text)
-    , _bgAccountId :: !Int64
-    , _bgKey :: !(Maybe Key)
-    , _bgOAuthToken :: !(Maybe OAuthToken)
-    , _bgBillingId :: !Int64
-    , _bgFields :: !(Maybe Text)
+    , _bgUserIP      :: !(Maybe Text)
+    , _bgAccountId   :: !Int64
+    , _bgKey         :: !(Maybe Key)
+    , _bgOAuthToken  :: !(Maybe OAuthToken)
+    , _bgBillingId   :: !Int64
+    , _bgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BudgetGet'' with the minimum fields required to make a request.
@@ -99,7 +99,7 @@ budgetGet'
     :: Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'billingId'
     -> BudgetGet'
-budgetGet' pBgAccountId_ pBgBillingId_ = 
+budgetGet' pBgAccountId_ pBgBillingId_ =
     BudgetGet'
     { _bgQuotaUser = Nothing
     , _bgPrettyPrint = True

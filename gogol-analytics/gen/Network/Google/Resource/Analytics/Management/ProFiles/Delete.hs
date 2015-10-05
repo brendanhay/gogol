@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Delete
     , mpfdFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProFilesDelete@ which the
 -- 'ManagementProFilesDelete'' request conforms to.
@@ -69,15 +69,15 @@ type ManagementProFilesDeleteResource =
 --
 -- /See:/ 'managementProFilesDelete'' smart constructor.
 data ManagementProFilesDelete' = ManagementProFilesDelete'
-    { _mpfdQuotaUser :: !(Maybe Text)
-    , _mpfdPrettyPrint :: !Bool
+    { _mpfdQuotaUser     :: !(Maybe Text)
+    , _mpfdPrettyPrint   :: !Bool
     , _mpfdWebPropertyId :: !Text
-    , _mpfdUserIP :: !(Maybe Text)
-    , _mpfdProFileId :: !Text
-    , _mpfdAccountId :: !Text
-    , _mpfdKey :: !(Maybe Key)
-    , _mpfdOAuthToken :: !(Maybe OAuthToken)
-    , _mpfdFields :: !(Maybe Text)
+    , _mpfdUserIP        :: !(Maybe Text)
+    , _mpfdProFileId     :: !Text
+    , _mpfdAccountId     :: !Text
+    , _mpfdKey           :: !(Maybe Key)
+    , _mpfdOAuthToken    :: !(Maybe OAuthToken)
+    , _mpfdFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFilesDelete'' with the minimum fields required to make a request.
@@ -106,7 +106,7 @@ managementProFilesDelete'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> ManagementProFilesDelete'
-managementProFilesDelete' pMpfdWebPropertyId_ pMpfdProFileId_ pMpfdAccountId_ = 
+managementProFilesDelete' pMpfdWebPropertyId_ pMpfdProFileId_ pMpfdAccountId_ =
     ManagementProFilesDelete'
     { _mpfdQuotaUser = Nothing
     , _mpfdPrettyPrint = False

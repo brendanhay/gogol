@@ -46,8 +46,8 @@ module Network.Google.Resource.Blogger.Blogs.ListByUser
     , blbuFields
     ) where
 
-import Network.Google.Blogger.Types
-import Network.Google.Prelude
+import           Network.Google.Blogger.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerBlogsListByUser@ which the
 -- 'BlogsListByUser'' request conforms to.
@@ -71,17 +71,17 @@ type BlogsListByUserResource =
 --
 -- /See:/ 'blogsListByUser'' smart constructor.
 data BlogsListByUser' = BlogsListByUser'
-    { _blbuStatus :: ![BlogsListByUserStatus]
-    , _blbuQuotaUser :: !(Maybe Text)
-    , _blbuPrettyPrint :: !Bool
-    , _blbuUserIP :: !(Maybe Text)
+    { _blbuStatus        :: ![BlogsListByUserStatus]
+    , _blbuQuotaUser     :: !(Maybe Text)
+    , _blbuPrettyPrint   :: !Bool
+    , _blbuUserIP        :: !(Maybe Text)
     , _blbuFetchUserInfo :: !(Maybe Bool)
-    , _blbuUserId :: !Text
-    , _blbuRole :: !(Maybe [BlogsListByUserRole])
-    , _blbuKey :: !(Maybe Key)
-    , _blbuView :: !(Maybe BlogsListByUserView)
-    , _blbuOAuthToken :: !(Maybe OAuthToken)
-    , _blbuFields :: !(Maybe Text)
+    , _blbuUserId        :: !Text
+    , _blbuRole          :: !(Maybe [BlogsListByUserRole])
+    , _blbuKey           :: !(Maybe Key)
+    , _blbuView          :: !(Maybe BlogsListByUserView)
+    , _blbuOAuthToken    :: !(Maybe OAuthToken)
+    , _blbuFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BlogsListByUser'' with the minimum fields required to make a request.
@@ -112,7 +112,7 @@ data BlogsListByUser' = BlogsListByUser'
 blogsListByUser'
     :: Text -- ^ 'userId'
     -> BlogsListByUser'
-blogsListByUser' pBlbuUserId_ = 
+blogsListByUser' pBlbuUserId_ =
     BlogsListByUser'
     { _blbuStatus = [BLBUSLive]
     , _blbuQuotaUser = Nothing

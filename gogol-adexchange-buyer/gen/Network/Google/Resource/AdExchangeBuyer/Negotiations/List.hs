@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer.Negotiations.List
     , nlFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerNegotiationsList@ which the
 -- 'NegotiationsList'' request conforms to.
@@ -63,13 +63,13 @@ type NegotiationsListResource =
 --
 -- /See:/ 'negotiationsList'' smart constructor.
 data NegotiationsList' = NegotiationsList'
-    { _nlQuotaUser :: !(Maybe Text)
+    { _nlQuotaUser   :: !(Maybe Text)
     , _nlPrettyPrint :: !Bool
-    , _nlUserIP :: !(Maybe Text)
-    , _nlPayload :: !GetNegotiationsRequest
-    , _nlKey :: !(Maybe Key)
-    , _nlOAuthToken :: !(Maybe OAuthToken)
-    , _nlFields :: !(Maybe Text)
+    , _nlUserIP      :: !(Maybe Text)
+    , _nlPayload     :: !GetNegotiationsRequest
+    , _nlKey         :: !(Maybe Key)
+    , _nlOAuthToken  :: !(Maybe OAuthToken)
+    , _nlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationsList'' with the minimum fields required to make a request.
@@ -92,7 +92,7 @@ data NegotiationsList' = NegotiationsList'
 negotiationsList'
     :: GetNegotiationsRequest -- ^ 'payload'
     -> NegotiationsList'
-negotiationsList' pNlPayload_ = 
+negotiationsList' pNlPayload_ =
     NegotiationsList'
     { _nlQuotaUser = Nothing
     , _nlPrettyPrint = True

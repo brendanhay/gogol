@@ -44,8 +44,8 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Patch
     , capFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerClientAccessPatch@ which the
 -- 'ClientAccessPatch'' request conforms to.
@@ -66,15 +66,15 @@ type ClientAccessPatchResource =
 --
 -- /See:/ 'clientAccessPatch'' smart constructor.
 data ClientAccessPatch' = ClientAccessPatch'
-    { _capQuotaUser :: !(Maybe Text)
-    , _capPrettyPrint :: !Bool
-    , _capUserIP :: !(Maybe Text)
+    { _capQuotaUser        :: !(Maybe Text)
+    , _capPrettyPrint      :: !Bool
+    , _capUserIP           :: !(Maybe Text)
     , _capSponsorAccountId :: !Int32
-    , _capPayload :: !ClientAccessCapabilities
-    , _capKey :: !(Maybe Key)
-    , _capClientAccountId :: !Int64
-    , _capOAuthToken :: !(Maybe OAuthToken)
-    , _capFields :: !(Maybe Text)
+    , _capPayload          :: !ClientAccessCapabilities
+    , _capKey              :: !(Maybe Key)
+    , _capClientAccountId  :: !Int64
+    , _capOAuthToken       :: !(Maybe OAuthToken)
+    , _capFields           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessPatch'' with the minimum fields required to make a request.
@@ -103,7 +103,7 @@ clientAccessPatch'
     -> ClientAccessCapabilities -- ^ 'payload'
     -> Int64 -- ^ 'clientAccountId'
     -> ClientAccessPatch'
-clientAccessPatch' pCapSponsorAccountId_ pCapPayload_ pCapClientAccountId_ = 
+clientAccessPatch' pCapSponsorAccountId_ pCapPayload_ pCapClientAccountId_ =
     ClientAccessPatch'
     { _capQuotaUser = Nothing
     , _capPrettyPrint = True

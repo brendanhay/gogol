@@ -43,8 +43,8 @@ module Network.Google.Resource.Prediction.TrainedModels.Get
     , tmgFields
     ) where
 
-import Network.Google.Prediction.Types
-import Network.Google.Prelude
+import           Network.Google.Prediction.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @PredictionTrainedModelsGet@ which the
 -- 'TrainedModelsGet'' request conforms to.
@@ -64,14 +64,14 @@ type TrainedModelsGetResource =
 --
 -- /See:/ 'trainedModelsGet'' smart constructor.
 data TrainedModelsGet' = TrainedModelsGet'
-    { _tmgQuotaUser :: !(Maybe Text)
+    { _tmgQuotaUser   :: !(Maybe Text)
     , _tmgPrettyPrint :: !Bool
-    , _tmgProject :: !Text
-    , _tmgUserIP :: !(Maybe Text)
-    , _tmgKey :: !(Maybe Key)
-    , _tmgId :: !Text
-    , _tmgOAuthToken :: !(Maybe OAuthToken)
-    , _tmgFields :: !(Maybe Text)
+    , _tmgProject     :: !Text
+    , _tmgUserIP      :: !(Maybe Text)
+    , _tmgKey         :: !(Maybe Key)
+    , _tmgId          :: !Text
+    , _tmgOAuthToken  :: !(Maybe OAuthToken)
+    , _tmgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrainedModelsGet'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ trainedModelsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'id'
     -> TrainedModelsGet'
-trainedModelsGet' pTmgProject_ pTmgId_ = 
+trainedModelsGet' pTmgProject_ pTmgId_ =
     TrainedModelsGet'
     { _tmgQuotaUser = Nothing
     , _tmgPrettyPrint = True

@@ -43,8 +43,8 @@ module Network.Google.Resource.Container.Projects.Zones.Operations.List
     , pzolFields
     ) where
 
-import Network.Google.Container.Types
-import Network.Google.Prelude
+import           Network.Google.Container.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @ContainerProjectsZonesOperationsList@ which the
 -- 'ProjectsZonesOperationsList'' request conforms to.
@@ -66,14 +66,14 @@ type ProjectsZonesOperationsListResource =
 --
 -- /See:/ 'projectsZonesOperationsList'' smart constructor.
 data ProjectsZonesOperationsList' = ProjectsZonesOperationsList'
-    { _pzolQuotaUser :: !(Maybe Text)
+    { _pzolQuotaUser   :: !(Maybe Text)
     , _pzolPrettyPrint :: !Bool
-    , _pzolUserIP :: !(Maybe Text)
-    , _pzolZoneId :: !Text
-    , _pzolKey :: !(Maybe Key)
-    , _pzolProjectId :: !Text
-    , _pzolOAuthToken :: !(Maybe OAuthToken)
-    , _pzolFields :: !(Maybe Text)
+    , _pzolUserIP      :: !(Maybe Text)
+    , _pzolZoneId      :: !Text
+    , _pzolKey         :: !(Maybe Key)
+    , _pzolProjectId   :: !Text
+    , _pzolOAuthToken  :: !(Maybe OAuthToken)
+    , _pzolFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsZonesOperationsList'' with the minimum fields required to make a request.
@@ -99,7 +99,7 @@ projectsZonesOperationsList'
     :: Text -- ^ 'zoneId'
     -> Text -- ^ 'projectId'
     -> ProjectsZonesOperationsList'
-projectsZonesOperationsList' pPzolZoneId_ pPzolProjectId_ = 
+projectsZonesOperationsList' pPzolZoneId_ pPzolProjectId_ =
     ProjectsZonesOperationsList'
     { _pzolQuotaUser = Nothing
     , _pzolPrettyPrint = True

@@ -44,8 +44,8 @@ module Network.Google.Resource.PlusDomains.Circles.RemovePeople
     , crpFields
     ) where
 
-import Network.Google.PlusDomains.Types
-import Network.Google.Prelude
+import           Network.Google.PlusDomains.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsCirclesRemovePeople@ which the
 -- 'CirclesRemovePeople'' request conforms to.
@@ -67,15 +67,15 @@ type CirclesRemovePeopleResource =
 --
 -- /See:/ 'circlesRemovePeople'' smart constructor.
 data CirclesRemovePeople' = CirclesRemovePeople'
-    { _crpEmail :: !(Maybe [Text])
-    , _crpQuotaUser :: !(Maybe Text)
+    { _crpEmail       :: !(Maybe [Text])
+    , _crpQuotaUser   :: !(Maybe Text)
     , _crpPrettyPrint :: !Bool
-    , _crpUserIP :: !(Maybe Text)
-    , _crpUserId :: !(Maybe [Text])
-    , _crpKey :: !(Maybe Key)
-    , _crpCircleId :: !Text
-    , _crpOAuthToken :: !(Maybe OAuthToken)
-    , _crpFields :: !(Maybe Text)
+    , _crpUserIP      :: !(Maybe Text)
+    , _crpUserId      :: !(Maybe [Text])
+    , _crpKey         :: !(Maybe Key)
+    , _crpCircleId    :: !Text
+    , _crpOAuthToken  :: !(Maybe OAuthToken)
+    , _crpFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesRemovePeople'' with the minimum fields required to make a request.
@@ -102,7 +102,7 @@ data CirclesRemovePeople' = CirclesRemovePeople'
 circlesRemovePeople'
     :: Text -- ^ 'circleId'
     -> CirclesRemovePeople'
-circlesRemovePeople' pCrpCircleId_ = 
+circlesRemovePeople' pCrpCircleId_ =
     CirclesRemovePeople'
     { _crpEmail = Nothing
     , _crpQuotaUser = Nothing

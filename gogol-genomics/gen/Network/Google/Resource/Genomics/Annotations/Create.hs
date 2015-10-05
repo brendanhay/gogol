@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.Annotations.Create
     , acFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsAnnotationsCreate@ which the
 -- 'AnnotationsCreate'' request conforms to.
@@ -64,13 +64,13 @@ type AnnotationsCreateResource =
 --
 -- /See:/ 'annotationsCreate'' smart constructor.
 data AnnotationsCreate' = AnnotationsCreate'
-    { _acQuotaUser :: !(Maybe Text)
+    { _acQuotaUser   :: !(Maybe Text)
     , _acPrettyPrint :: !Bool
-    , _acUserIP :: !(Maybe Text)
-    , _acPayload :: !Annotation
-    , _acKey :: !(Maybe Key)
-    , _acOAuthToken :: !(Maybe OAuthToken)
-    , _acFields :: !(Maybe Text)
+    , _acUserIP      :: !(Maybe Text)
+    , _acPayload     :: !Annotation
+    , _acKey         :: !(Maybe Key)
+    , _acOAuthToken  :: !(Maybe OAuthToken)
+    , _acFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsCreate'' with the minimum fields required to make a request.
@@ -93,7 +93,7 @@ data AnnotationsCreate' = AnnotationsCreate'
 annotationsCreate'
     :: Annotation -- ^ 'payload'
     -> AnnotationsCreate'
-annotationsCreate' pAcPayload_ = 
+annotationsCreate' pAcPayload_ =
     AnnotationsCreate'
     { _acQuotaUser = Nothing
     , _acPrettyPrint = True

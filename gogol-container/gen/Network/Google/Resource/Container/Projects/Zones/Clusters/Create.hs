@@ -51,8 +51,8 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Create
     , pzccFields
     ) where
 
-import Network.Google.Container.Types
-import Network.Google.Prelude
+import           Network.Google.Container.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @ContainerProjectsZonesClustersCreate@ which the
 -- 'ProjectsZonesClustersCreate'' request conforms to.
@@ -82,15 +82,15 @@ type ProjectsZonesClustersCreateResource =
 --
 -- /See:/ 'projectsZonesClustersCreate'' smart constructor.
 data ProjectsZonesClustersCreate' = ProjectsZonesClustersCreate'
-    { _pzccQuotaUser :: !(Maybe Text)
+    { _pzccQuotaUser   :: !(Maybe Text)
     , _pzccPrettyPrint :: !Bool
-    , _pzccUserIP :: !(Maybe Text)
-    , _pzccZoneId :: !Text
-    , _pzccPayload :: !CreateClusterRequest
-    , _pzccKey :: !(Maybe Key)
-    , _pzccProjectId :: !Text
-    , _pzccOAuthToken :: !(Maybe OAuthToken)
-    , _pzccFields :: !(Maybe Text)
+    , _pzccUserIP      :: !(Maybe Text)
+    , _pzccZoneId      :: !Text
+    , _pzccPayload     :: !CreateClusterRequest
+    , _pzccKey         :: !(Maybe Key)
+    , _pzccProjectId   :: !Text
+    , _pzccOAuthToken  :: !(Maybe OAuthToken)
+    , _pzccFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersCreate'' with the minimum fields required to make a request.
@@ -119,7 +119,7 @@ projectsZonesClustersCreate'
     -> CreateClusterRequest -- ^ 'payload'
     -> Text -- ^ 'projectId'
     -> ProjectsZonesClustersCreate'
-projectsZonesClustersCreate' pPzccZoneId_ pPzccPayload_ pPzccProjectId_ = 
+projectsZonesClustersCreate' pPzccZoneId_ pPzccPayload_ pPzccProjectId_ =
     ProjectsZonesClustersCreate'
     { _pzccQuotaUser = Nothing
     , _pzccPrettyPrint = True

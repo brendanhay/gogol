@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer.Accounts.Patch
     , apFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerAccountsPatch@ which the
 -- 'AccountsPatch'' request conforms to.
@@ -64,14 +64,14 @@ type AccountsPatchResource =
 --
 -- /See:/ 'accountsPatch'' smart constructor.
 data AccountsPatch' = AccountsPatch'
-    { _apQuotaUser :: !(Maybe Text)
+    { _apQuotaUser   :: !(Maybe Text)
     , _apPrettyPrint :: !Bool
-    , _apUserIP :: !(Maybe Text)
-    , _apPayload :: !Account
-    , _apKey :: !(Maybe Key)
-    , _apId :: !Int32
-    , _apOAuthToken :: !(Maybe OAuthToken)
-    , _apFields :: !(Maybe Text)
+    , _apUserIP      :: !(Maybe Text)
+    , _apPayload     :: !Account
+    , _apKey         :: !(Maybe Key)
+    , _apId          :: !Int32
+    , _apOAuthToken  :: !(Maybe OAuthToken)
+    , _apFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPatch'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ accountsPatch'
     :: Account -- ^ 'payload'
     -> Int32 -- ^ 'id'
     -> AccountsPatch'
-accountsPatch' pApPayload_ pApId_ = 
+accountsPatch' pApPayload_ pApId_ =
     AccountsPatch'
     { _apQuotaUser = Nothing
     , _apPrettyPrint = True

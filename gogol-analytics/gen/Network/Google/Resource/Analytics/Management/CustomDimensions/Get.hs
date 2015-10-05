@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.Get
     , mcdgFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomDimensionsGet@ which the
 -- 'ManagementCustomDimensionsGet'' request conforms to.
@@ -70,15 +70,15 @@ type ManagementCustomDimensionsGetResource =
 --
 -- /See:/ 'managementCustomDimensionsGet'' smart constructor.
 data ManagementCustomDimensionsGet' = ManagementCustomDimensionsGet'
-    { _mcdgQuotaUser :: !(Maybe Text)
-    , _mcdgPrettyPrint :: !Bool
-    , _mcdgWebPropertyId :: !Text
-    , _mcdgUserIP :: !(Maybe Text)
-    , _mcdgAccountId :: !Text
-    , _mcdgKey :: !(Maybe Key)
-    , _mcdgOAuthToken :: !(Maybe OAuthToken)
+    { _mcdgQuotaUser         :: !(Maybe Text)
+    , _mcdgPrettyPrint       :: !Bool
+    , _mcdgWebPropertyId     :: !Text
+    , _mcdgUserIP            :: !(Maybe Text)
+    , _mcdgAccountId         :: !Text
+    , _mcdgKey               :: !(Maybe Key)
+    , _mcdgOAuthToken        :: !(Maybe OAuthToken)
     , _mcdgCustomDimensionId :: !Text
-    , _mcdgFields :: !(Maybe Text)
+    , _mcdgFields            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDimensionsGet'' with the minimum fields required to make a request.
@@ -107,7 +107,7 @@ managementCustomDimensionsGet'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'customDimensionId'
     -> ManagementCustomDimensionsGet'
-managementCustomDimensionsGet' pMcdgWebPropertyId_ pMcdgAccountId_ pMcdgCustomDimensionId_ = 
+managementCustomDimensionsGet' pMcdgWebPropertyId_ pMcdgAccountId_ pMcdgCustomDimensionId_ =
     ManagementCustomDimensionsGet'
     { _mcdgQuotaUser = Nothing
     , _mcdgPrettyPrint = False

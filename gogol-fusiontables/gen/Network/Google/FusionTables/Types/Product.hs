@@ -17,17 +17,17 @@
 --
 module Network.Google.FusionTables.Types.Product where
 
-import Network.Google.FusionTables.Types.Sum
-import Network.Google.Prelude
+import           Network.Google.FusionTables.Types.Sum
+import           Network.Google.Prelude
 
 -- | Represents a list of columns in a table.
 --
 -- /See:/ 'columnList' smart constructor.
 data ColumnList = ColumnList
-    { _clTotalItems :: !(Maybe Int32)
+    { _clTotalItems    :: !(Maybe Int32)
     , _clNextPageToken :: !(Maybe Text)
-    , _clKind :: !Text
-    , _clItems :: !(Maybe [Column])
+    , _clKind          :: !Text
+    , _clItems         :: !(Maybe [Column])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnList' with the minimum fields required to make a request.
@@ -43,7 +43,7 @@ data ColumnList = ColumnList
 -- * 'clItems'
 columnList
     :: ColumnList
-columnList = 
+columnList =
     ColumnList
     { _clTotalItems = Nothing
     , _clNextPageToken = Nothing
@@ -96,8 +96,8 @@ instance ToJSON ColumnList where
 -- /See:/ 'tableList' smart constructor.
 data TableList = TableList
     { _tlNextPageToken :: !(Maybe Text)
-    , _tlKind :: !Text
-    , _tlItems :: !(Maybe [Table])
+    , _tlKind          :: !Text
+    , _tlItems         :: !(Maybe [Table])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableList' with the minimum fields required to make a request.
@@ -111,7 +111,7 @@ data TableList = TableList
 -- * 'tlItems'
 tableList
     :: TableList
-tableList = 
+tableList =
     TableList
     { _tlNextPageToken = Nothing
     , _tlKind = "fusiontables#tableList"
@@ -156,9 +156,9 @@ instance ToJSON TableList where
 --
 -- /See:/ 'styleFunction' smart constructor.
 data StyleFunction = StyleFunction
-    { _sfBuckets :: !(Maybe [Bucket])
-    , _sfKind :: !(Maybe Text)
-    , _sfGradient :: !(Maybe StyleFunctionGradient)
+    { _sfBuckets    :: !(Maybe [Bucket])
+    , _sfKind       :: !(Maybe Text)
+    , _sfGradient   :: !(Maybe StyleFunctionGradient)
     , _sfColumnName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -175,7 +175,7 @@ data StyleFunction = StyleFunction
 -- * 'sfColumnName'
 styleFunction
     :: StyleFunction
-styleFunction = 
+styleFunction =
     StyleFunction
     { _sfBuckets = Nothing
     , _sfKind = Nothing
@@ -236,7 +236,7 @@ instance ToJSON StyleFunction where
 -- /See:/ 'columnBaseColumn' smart constructor.
 data ColumnBaseColumn = ColumnBaseColumn
     { _cbcTableIndex :: !(Maybe Int32)
-    , _cbcColumnId :: !(Maybe Int32)
+    , _cbcColumnId   :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnBaseColumn' with the minimum fields required to make a request.
@@ -248,7 +248,7 @@ data ColumnBaseColumn = ColumnBaseColumn
 -- * 'cbcColumnId'
 columnBaseColumn
     :: ColumnBaseColumn
-columnBaseColumn = 
+columnBaseColumn =
     ColumnBaseColumn
     { _cbcTableIndex = Nothing
     , _cbcColumnId = Nothing
@@ -284,8 +284,8 @@ instance ToJSON ColumnBaseColumn where
 --
 -- /See:/ 'sQLresponse' smart constructor.
 data SQLresponse = SQLresponse
-    { _sqlKind :: !Text
-    , _sqlRows :: !(Maybe [[JSONValue]])
+    { _sqlKind    :: !Text
+    , _sqlRows    :: !(Maybe [[JSONValue]])
     , _sqlColumns :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -300,7 +300,7 @@ data SQLresponse = SQLresponse
 -- * 'sqlColumns'
 sQLresponse
     :: SQLresponse
-sQLresponse = 
+sQLresponse =
     SQLresponse
     { _sqlKind = "fusiontables#sqlresponse"
     , _sqlRows = Nothing
@@ -346,7 +346,7 @@ instance ToJSON SQLresponse where
 --
 -- /See:/ 'styleFunctionGradientColorsItem' smart constructor.
 data StyleFunctionGradientColorsItem = StyleFunctionGradientColorsItem
-    { _sfgciColor :: !(Maybe Text)
+    { _sfgciColor   :: !(Maybe Text)
     , _sfgciOpacity :: !(Maybe Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -359,7 +359,7 @@ data StyleFunctionGradientColorsItem = StyleFunctionGradientColorsItem
 -- * 'sfgciOpacity'
 styleFunctionGradientColorsItem
     :: StyleFunctionGradientColorsItem
-styleFunctionGradientColorsItem = 
+styleFunctionGradientColorsItem =
     StyleFunctionGradientColorsItem
     { _sfgciColor = Nothing
     , _sfgciOpacity = Nothing
@@ -394,10 +394,10 @@ instance ToJSON StyleFunctionGradientColorsItem where
 --
 -- /See:/ 'styleSettingList' smart constructor.
 data StyleSettingList = StyleSettingList
-    { _sslTotalItems :: !(Maybe Int32)
+    { _sslTotalItems    :: !(Maybe Int32)
     , _sslNextPageToken :: !(Maybe Text)
-    , _sslKind :: !Text
-    , _sslItems :: !(Maybe [StyleSetting])
+    , _sslKind          :: !Text
+    , _sslItems         :: !(Maybe [StyleSetting])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleSettingList' with the minimum fields required to make a request.
@@ -413,7 +413,7 @@ data StyleSettingList = StyleSettingList
 -- * 'sslItems'
 styleSettingList
     :: StyleSettingList
-styleSettingList = 
+styleSettingList =
     StyleSettingList
     { _sslTotalItems = Nothing
     , _sslNextPageToken = Nothing
@@ -469,12 +469,12 @@ instance ToJSON StyleSettingList where
 --
 -- /See:/ 'bucket' smart constructor.
 data Bucket = Bucket
-    { _bMax :: !(Maybe Double)
-    , _bColor :: !(Maybe Text)
-    , _bWeight :: !(Maybe Int32)
-    , _bIcon :: !(Maybe Text)
+    { _bMax     :: !(Maybe Double)
+    , _bColor   :: !(Maybe Text)
+    , _bWeight  :: !(Maybe Int32)
+    , _bIcon    :: !(Maybe Text)
     , _bOpacity :: !(Maybe Double)
-    , _bMin :: !(Maybe Double)
+    , _bMin     :: !(Maybe Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Bucket' with the minimum fields required to make a request.
@@ -494,7 +494,7 @@ data Bucket = Bucket
 -- * 'bMin'
 bucket
     :: Bucket
-bucket = 
+bucket =
     Bucket
     { _bMax = Nothing
     , _bColor = Nothing
@@ -554,7 +554,7 @@ instance ToJSON Bucket where
 -- /See:/ 'line' smart constructor.
 data Line = Line
     { _lCoordinates :: !(Maybe [[Double]])
-    , _lType :: !Text
+    , _lType        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Line' with the minimum fields required to make a request.
@@ -566,7 +566,7 @@ data Line = Line
 -- * 'lType'
 line
     :: Line
-line = 
+line =
     Line
     { _lCoordinates = Nothing
     , _lType = "LineString"
@@ -604,12 +604,12 @@ instance ToJSON Line where
 -- /See:/ 'styleSetting' smart constructor.
 data StyleSetting = StyleSetting
     { _ssPolylineOptions :: !(Maybe LineStyle)
-    , _ssPolygonOptions :: !(Maybe PolygonStyle)
-    , _ssMarkerOptions :: !(Maybe PointStyle)
-    , _ssKind :: !Text
-    , _ssName :: !(Maybe Text)
-    , _ssStyleId :: !(Maybe Int32)
-    , _ssTableId :: !(Maybe Text)
+    , _ssPolygonOptions  :: !(Maybe PolygonStyle)
+    , _ssMarkerOptions   :: !(Maybe PointStyle)
+    , _ssKind            :: !Text
+    , _ssName            :: !(Maybe Text)
+    , _ssStyleId         :: !(Maybe Int32)
+    , _ssTableId         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleSetting' with the minimum fields required to make a request.
@@ -631,7 +631,7 @@ data StyleSetting = StyleSetting
 -- * 'ssTableId'
 styleSetting
     :: StyleSetting
-styleSetting = 
+styleSetting =
     StyleSetting
     { _ssPolylineOptions = Nothing
     , _ssPolygonOptions = Nothing
@@ -710,7 +710,7 @@ instance ToJSON StyleSetting where
 -- /See:/ 'point' smart constructor.
 data Point = Point
     { _pCoordinates :: !(Maybe [Double])
-    , _pType :: !Text
+    , _pType        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Point' with the minimum fields required to make a request.
@@ -722,7 +722,7 @@ data Point = Point
 -- * 'pType'
 point
     :: Point
-point = 
+point =
     Point
     { _pCoordinates = Nothing
     , _pType = "Point"
@@ -759,7 +759,7 @@ instance ToJSON Point where
 -- /See:/ 'polygon' smart constructor.
 data Polygon = Polygon
     { _polCoordinates :: !(Maybe [[[Double]]])
-    , _polType :: !Text
+    , _polType        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Polygon' with the minimum fields required to make a request.
@@ -771,7 +771,7 @@ data Polygon = Polygon
 -- * 'polType'
 polygon
     :: Polygon
-polygon = 
+polygon =
     Polygon
     { _polCoordinates = Nothing
     , _polType = "Polygon"
@@ -808,10 +808,10 @@ instance ToJSON Polygon where
 --
 -- /See:/ 'taskList' smart constructor.
 data TaskList = TaskList
-    { _tTotalItems :: !(Maybe Int32)
+    { _tTotalItems    :: !(Maybe Int32)
     , _tNextPageToken :: !(Maybe Text)
-    , _tKind :: !Text
-    , _tItems :: !(Maybe [Task])
+    , _tKind          :: !Text
+    , _tItems         :: !(Maybe [Task])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskList' with the minimum fields required to make a request.
@@ -827,7 +827,7 @@ data TaskList = TaskList
 -- * 'tItems'
 taskList
     :: TaskList
-taskList = 
+taskList =
     TaskList
     { _tTotalItems = Nothing
     , _tNextPageToken = Nothing
@@ -879,8 +879,8 @@ instance ToJSON TaskList where
 -- /See:/ 'geometry' smart constructor.
 data Geometry = Geometry
     { _gGeometries :: !(Maybe [JSONValue])
-    , _gGeometry :: !(Maybe JSONValue)
-    , _gType :: !Text
+    , _gGeometry   :: !(Maybe JSONValue)
+    , _gType       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Geometry' with the minimum fields required to make a request.
@@ -894,7 +894,7 @@ data Geometry = Geometry
 -- * 'gType'
 geometry
     :: Geometry
-geometry = 
+geometry =
     Geometry
     { _gGeometries = Nothing
     , _gGeometry = Nothing
@@ -937,10 +937,10 @@ instance ToJSON Geometry where
 --
 -- /See:/ 'templateList' smart constructor.
 data TemplateList = TemplateList
-    { _temTotalItems :: !(Maybe Int32)
+    { _temTotalItems    :: !(Maybe Int32)
     , _temNextPageToken :: !(Maybe Text)
-    , _temKind :: !Text
-    , _temItems :: !(Maybe [Template])
+    , _temKind          :: !Text
+    , _temItems         :: !(Maybe [Template])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateList' with the minimum fields required to make a request.
@@ -956,7 +956,7 @@ data TemplateList = TemplateList
 -- * 'temItems'
 templateList
     :: TemplateList
-templateList = 
+templateList =
     TemplateList
     { _temTotalItems = Nothing
     , _temNextPageToken = Nothing
@@ -1011,7 +1011,7 @@ instance ToJSON TemplateList where
 --
 -- /See:/ 'import'' smart constructor.
 data Import = Import
-    { _iKind :: !Text
+    { _iKind            :: !Text
     , _iNumRowsReceived :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1024,7 +1024,7 @@ data Import = Import
 -- * 'iNumRowsReceived'
 import'
     :: Import
-import' = 
+import' =
     Import
     { _iKind = "fusiontables#import"
     , _iNumRowsReceived = Nothing
@@ -1062,10 +1062,10 @@ instance ToJSON Import where
 -- /See:/ 'task' smart constructor.
 data Task = Task
     { _tasProgress :: !(Maybe Text)
-    , _tasTaskId :: !(Maybe Int64)
-    , _tasKind :: !Text
-    , _tasType :: !(Maybe Text)
-    , _tasStarted :: !(Maybe Bool)
+    , _tasTaskId   :: !(Maybe Int64)
+    , _tasKind     :: !Text
+    , _tasType     :: !(Maybe Text)
+    , _tasStarted  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Task' with the minimum fields required to make a request.
@@ -1083,7 +1083,7 @@ data Task = Task
 -- * 'tasStarted'
 task
     :: Task
-task = 
+task =
     Task
     { _tasProgress = Nothing
     , _tasTaskId = Nothing
@@ -1140,11 +1140,11 @@ instance ToJSON Task where
 -- /See:/ 'template' smart constructor.
 data Template = Template
     { _temeAutomaticColumnNames :: !(Maybe [Text])
-    , _temeTemplateId :: !(Maybe Int32)
-    , _temeKind :: !Text
-    , _temeBody :: !(Maybe Text)
-    , _temeName :: !(Maybe Text)
-    , _temeTableId :: !(Maybe Text)
+    , _temeTemplateId           :: !(Maybe Int32)
+    , _temeKind                 :: !Text
+    , _temeBody                 :: !(Maybe Text)
+    , _temeName                 :: !(Maybe Text)
+    , _temeTableId              :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Template' with the minimum fields required to make a request.
@@ -1164,7 +1164,7 @@ data Template = Template
 -- * 'temeTableId'
 template
     :: Template
-template = 
+template =
     Template
     { _temeAutomaticColumnNames = Nothing
     , _temeTemplateId = Nothing
@@ -1238,7 +1238,7 @@ instance ToJSON Template where
 --
 -- /See:/ 'pointStyle' smart constructor.
 data PointStyle = PointStyle
-    { _psIconName :: !(Maybe Text)
+    { _psIconName   :: !(Maybe Text)
     , _psIconStyler :: !(Maybe StyleFunction)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1251,7 +1251,7 @@ data PointStyle = PointStyle
 -- * 'psIconStyler'
 pointStyle
     :: PointStyle
-pointStyle = 
+pointStyle =
     PointStyle
     { _psIconName = Nothing
     , _psIconStyler = Nothing
@@ -1286,14 +1286,14 @@ instance ToJSON PointStyle where
 --
 -- /See:/ 'polygonStyle' smart constructor.
 data PolygonStyle = PolygonStyle
-    { _psFillColorStyler :: !(Maybe StyleFunction)
-    , _psFillColor :: !(Maybe Text)
-    , _psStrokeColorStyler :: !(Maybe StyleFunction)
-    , _psStrokeWeight :: !(Maybe Int32)
-    , _psStrokeOpacity :: !(Maybe Double)
-    , _psFillOpacity :: !(Maybe Double)
+    { _psFillColorStyler    :: !(Maybe StyleFunction)
+    , _psFillColor          :: !(Maybe Text)
+    , _psStrokeColorStyler  :: !(Maybe StyleFunction)
+    , _psStrokeWeight       :: !(Maybe Int32)
+    , _psStrokeOpacity      :: !(Maybe Double)
+    , _psFillOpacity        :: !(Maybe Double)
     , _psStrokeWeightStyler :: !(Maybe StyleFunction)
-    , _psStrokeColor :: !(Maybe Text)
+    , _psStrokeColor        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PolygonStyle' with the minimum fields required to make a request.
@@ -1317,7 +1317,7 @@ data PolygonStyle = PolygonStyle
 -- * 'psStrokeColor'
 polygonStyle
     :: PolygonStyle
-polygonStyle = 
+polygonStyle =
     PolygonStyle
     { _psFillColorStyler = Nothing
     , _psFillColor = Nothing
@@ -1411,8 +1411,8 @@ instance ToJSON PolygonStyle where
 --
 -- /See:/ 'styleFunctionGradient' smart constructor.
 data StyleFunctionGradient = StyleFunctionGradient
-    { _sfgMax :: !(Maybe Double)
-    , _sfgMin :: !(Maybe Double)
+    { _sfgMax    :: !(Maybe Double)
+    , _sfgMin    :: !(Maybe Double)
     , _sfgColors :: !(Maybe [StyleFunctionGradientColorsItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1427,7 +1427,7 @@ data StyleFunctionGradient = StyleFunctionGradient
 -- * 'sfgColors'
 styleFunctionGradient
     :: StyleFunctionGradient
-styleFunctionGradient = 
+styleFunctionGradient =
     StyleFunctionGradient
     { _sfgMax = Nothing
     , _sfgMin = Nothing
@@ -1470,18 +1470,18 @@ instance ToJSON StyleFunctionGradient where
 --
 -- /See:/ 'column' smart constructor.
 data Column = Column
-    { _cColumnJSONSchema :: !(Maybe Text)
-    , _cGraphPredicate :: !(Maybe Text)
-    , _cKind :: !Text
-    , _cBaseColumn :: !(Maybe ColumnBaseColumn)
+    { _cColumnJSONSchema     :: !(Maybe Text)
+    , _cGraphPredicate       :: !(Maybe Text)
+    , _cKind                 :: !Text
+    , _cBaseColumn           :: !(Maybe ColumnBaseColumn)
     , _cColumnPropertiesJSON :: !(Maybe Text)
-    , _cName :: !(Maybe Text)
-    , _cType :: !(Maybe Text)
-    , _cFormatPattern :: !(Maybe Text)
-    , _cColumnId :: !(Maybe Int32)
-    , _cValidValues :: !(Maybe [Text])
-    , _cValidateData :: !(Maybe Bool)
-    , _cDescription :: !(Maybe Text)
+    , _cName                 :: !(Maybe Text)
+    , _cType                 :: !(Maybe Text)
+    , _cFormatPattern        :: !(Maybe Text)
+    , _cColumnId             :: !(Maybe Int32)
+    , _cValidValues          :: !(Maybe [Text])
+    , _cValidateData         :: !(Maybe Bool)
+    , _cDescription          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Column' with the minimum fields required to make a request.
@@ -1513,7 +1513,7 @@ data Column = Column
 -- * 'cDescription'
 column
     :: Column
-column = 
+column =
     Column
     { _cColumnJSONSchema = Nothing
     , _cGraphPredicate = Nothing
@@ -1660,19 +1660,19 @@ instance ToJSON Column where
 --
 -- /See:/ 'table' smart constructor.
 data Table = Table
-    { _tabIsExportable :: !(Maybe Bool)
-    , _tabKind :: !Text
+    { _tabIsExportable               :: !(Maybe Bool)
+    , _tabKind                       :: !Text
     , _tabColumnPropertiesJSONSchema :: !(Maybe Text)
-    , _tabTablePropertiesJSONSchema :: !(Maybe Text)
-    , _tabName :: !(Maybe Text)
-    , _tabTablePropertiesJSON :: !(Maybe Text)
-    , _tabColumns :: !(Maybe [Column])
-    , _tabBaseTableIds :: !(Maybe [Text])
-    , _tabTableId :: !(Maybe Text)
-    , _tabSQL :: !(Maybe Text)
-    , _tabDescription :: !(Maybe Text)
-    , _tabAttribution :: !(Maybe Text)
-    , _tabAttributionLink :: !(Maybe Text)
+    , _tabTablePropertiesJSONSchema  :: !(Maybe Text)
+    , _tabName                       :: !(Maybe Text)
+    , _tabTablePropertiesJSON        :: !(Maybe Text)
+    , _tabColumns                    :: !(Maybe [Column])
+    , _tabBaseTableIds               :: !(Maybe [Text])
+    , _tabTableId                    :: !(Maybe Text)
+    , _tabSQL                        :: !(Maybe Text)
+    , _tabDescription                :: !(Maybe Text)
+    , _tabAttribution                :: !(Maybe Text)
+    , _tabAttributionLink            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Table' with the minimum fields required to make a request.
@@ -1706,7 +1706,7 @@ data Table = Table
 -- * 'tabAttributionLink'
 table
     :: Table
-table = 
+table =
     Table
     { _tabIsExportable = Nothing
     , _tabKind = "fusiontables#table"
@@ -1842,11 +1842,11 @@ instance ToJSON Table where
 --
 -- /See:/ 'lineStyle' smart constructor.
 data LineStyle = LineStyle
-    { _lsStrokeColorStyler :: !(Maybe StyleFunction)
-    , _lsStrokeWeight :: !(Maybe Int32)
-    , _lsStrokeOpacity :: !(Maybe Double)
+    { _lsStrokeColorStyler  :: !(Maybe StyleFunction)
+    , _lsStrokeWeight       :: !(Maybe Int32)
+    , _lsStrokeOpacity      :: !(Maybe Double)
     , _lsStrokeWeightStyler :: !(Maybe StyleFunction)
-    , _lsStrokeColor :: !(Maybe Text)
+    , _lsStrokeColor        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LineStyle' with the minimum fields required to make a request.
@@ -1864,7 +1864,7 @@ data LineStyle = LineStyle
 -- * 'lsStrokeColor'
 lineStyle
     :: LineStyle
-lineStyle = 
+lineStyle =
     LineStyle
     { _lsStrokeColorStyler = Nothing
     , _lsStrokeWeight = Nothing

@@ -43,8 +43,8 @@ module Network.Google.Resource.FusionTables.Column.Delete
     , cdFields
     ) where
 
-import Network.Google.FusionTables.Types
-import Network.Google.Prelude
+import           Network.Google.FusionTables.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesColumnDelete@ which the
 -- 'ColumnDelete'' request conforms to.
@@ -65,14 +65,14 @@ type ColumnDeleteResource =
 --
 -- /See:/ 'columnDelete'' smart constructor.
 data ColumnDelete' = ColumnDelete'
-    { _cdQuotaUser :: !(Maybe Text)
+    { _cdQuotaUser   :: !(Maybe Text)
     , _cdPrettyPrint :: !Bool
-    , _cdUserIP :: !(Maybe Text)
-    , _cdKey :: !(Maybe Key)
-    , _cdOAuthToken :: !(Maybe OAuthToken)
-    , _cdTableId :: !Text
-    , _cdColumnId :: !Text
-    , _cdFields :: !(Maybe Text)
+    , _cdUserIP      :: !(Maybe Text)
+    , _cdKey         :: !(Maybe Key)
+    , _cdOAuthToken  :: !(Maybe OAuthToken)
+    , _cdTableId     :: !Text
+    , _cdColumnId    :: !Text
+    , _cdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnDelete'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ columnDelete'
     :: Text -- ^ 'tableId'
     -> Text -- ^ 'columnId'
     -> ColumnDelete'
-columnDelete' pCdTableId_ pCdColumnId_ = 
+columnDelete' pCdTableId_ pCdColumnId_ =
     ColumnDelete'
     { _cdQuotaUser = Nothing
     , _cdPrettyPrint = True

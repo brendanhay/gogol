@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer.Deals.Get
     , dgFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerDealsGet@ which the
 -- 'DealsGet'' request conforms to.
@@ -66,14 +66,14 @@ type DealsGetResource =
 --
 -- /See:/ 'dealsGet'' smart constructor.
 data DealsGet' = DealsGet'
-    { _dgQuotaUser :: !(Maybe Text)
+    { _dgQuotaUser   :: !(Maybe Text)
     , _dgPrettyPrint :: !Bool
-    , _dgUserIP :: !(Maybe Text)
-    , _dgPayload :: !GetFinalizedNegotiationByExternalDealIdRequest
-    , _dgDealId :: !Int64
-    , _dgKey :: !(Maybe Key)
-    , _dgOAuthToken :: !(Maybe OAuthToken)
-    , _dgFields :: !(Maybe Text)
+    , _dgUserIP      :: !(Maybe Text)
+    , _dgPayload     :: !GetFinalizedNegotiationByExternalDealIdRequest
+    , _dgDealId      :: !Int64
+    , _dgKey         :: !(Maybe Key)
+    , _dgOAuthToken  :: !(Maybe OAuthToken)
+    , _dgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DealsGet'' with the minimum fields required to make a request.
@@ -99,7 +99,7 @@ dealsGet'
     :: GetFinalizedNegotiationByExternalDealIdRequest -- ^ 'payload'
     -> Int64 -- ^ 'dealId'
     -> DealsGet'
-dealsGet' pDgPayload_ pDgDealId_ = 
+dealsGet' pDgPayload_ pDgDealId_ =
     DealsGet'
     { _dgQuotaUser = Nothing
     , _dgPrettyPrint = True

@@ -42,8 +42,8 @@ module Network.Google.Resource.GroupsSettings.Groups.Get
     , ggFields
     ) where
 
-import Network.Google.GroupsSettings.Types
-import Network.Google.Prelude
+import           Network.Google.GroupsSettings.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GroupsSettingsGroupsGet@ which the
 -- 'GroupsGet'' request conforms to.
@@ -61,13 +61,13 @@ type GroupsGetResource =
 --
 -- /See:/ 'groupsGet'' smart constructor.
 data GroupsGet' = GroupsGet'
-    { _ggQuotaUser :: !(Maybe Text)
-    , _ggPrettyPrint :: !Bool
-    , _ggUserIP :: !(Maybe Text)
-    , _ggKey :: !(Maybe Key)
-    , _ggOAuthToken :: !(Maybe OAuthToken)
+    { _ggQuotaUser     :: !(Maybe Text)
+    , _ggPrettyPrint   :: !Bool
+    , _ggUserIP        :: !(Maybe Text)
+    , _ggKey           :: !(Maybe Key)
+    , _ggOAuthToken    :: !(Maybe OAuthToken)
     , _ggGroupUniqueId :: !Text
-    , _ggFields :: !(Maybe Text)
+    , _ggFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsGet'' with the minimum fields required to make a request.
@@ -90,7 +90,7 @@ data GroupsGet' = GroupsGet'
 groupsGet'
     :: Text -- ^ 'groupUniqueId'
     -> GroupsGet'
-groupsGet' pGgGroupUniqueId_ = 
+groupsGet' pGgGroupUniqueId_ =
     GroupsGet'
     { _ggQuotaUser = Nothing
     , _ggPrettyPrint = True

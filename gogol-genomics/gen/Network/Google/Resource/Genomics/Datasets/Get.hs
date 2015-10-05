@@ -42,8 +42,8 @@ module Network.Google.Resource.Genomics.Datasets.Get
     , dgFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsDatasetsGet@ which the
 -- 'DatasetsGet'' request conforms to.
@@ -62,13 +62,13 @@ type DatasetsGetResource =
 --
 -- /See:/ 'datasetsGet'' smart constructor.
 data DatasetsGet' = DatasetsGet'
-    { _dgQuotaUser :: !(Maybe Text)
+    { _dgQuotaUser   :: !(Maybe Text)
     , _dgPrettyPrint :: !Bool
-    , _dgUserIP :: !(Maybe Text)
-    , _dgKey :: !(Maybe Key)
-    , _dgDatasetId :: !Text
-    , _dgOAuthToken :: !(Maybe OAuthToken)
-    , _dgFields :: !(Maybe Text)
+    , _dgUserIP      :: !(Maybe Text)
+    , _dgKey         :: !(Maybe Key)
+    , _dgDatasetId   :: !Text
+    , _dgOAuthToken  :: !(Maybe OAuthToken)
+    , _dgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsGet'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data DatasetsGet' = DatasetsGet'
 datasetsGet'
     :: Text -- ^ 'datasetId'
     -> DatasetsGet'
-datasetsGet' pDgDatasetId_ = 
+datasetsGet' pDgDatasetId_ =
     DatasetsGet'
     { _dgQuotaUser = Nothing
     , _dgPrettyPrint = True

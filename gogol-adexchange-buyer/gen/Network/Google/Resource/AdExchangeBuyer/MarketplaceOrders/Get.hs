@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Get
     , mFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplaceOrdersGet@ which the
 -- 'MarketplaceOrdersGet'' request conforms to.
@@ -63,13 +63,13 @@ type MarketplaceOrdersGetResource =
 --
 -- /See:/ 'marketplaceOrdersGet'' smart constructor.
 data MarketplaceOrdersGet' = MarketplaceOrdersGet'
-    { _mQuotaUser :: !(Maybe Text)
+    { _mQuotaUser   :: !(Maybe Text)
     , _mPrettyPrint :: !Bool
-    , _mUserIP :: !(Maybe Text)
-    , _mKey :: !(Maybe Key)
-    , _mOAuthToken :: !(Maybe OAuthToken)
-    , _mOrderId :: !Text
-    , _mFields :: !(Maybe Text)
+    , _mUserIP      :: !(Maybe Text)
+    , _mKey         :: !(Maybe Key)
+    , _mOAuthToken  :: !(Maybe OAuthToken)
+    , _mOrderId     :: !Text
+    , _mFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceOrdersGet'' with the minimum fields required to make a request.
@@ -92,7 +92,7 @@ data MarketplaceOrdersGet' = MarketplaceOrdersGet'
 marketplaceOrdersGet'
     :: Text -- ^ 'orderId'
     -> MarketplaceOrdersGet'
-marketplaceOrdersGet' pMOrderId_ = 
+marketplaceOrdersGet' pMOrderId_ =
     MarketplaceOrdersGet'
     { _mQuotaUser = Nothing
     , _mPrettyPrint = True

@@ -49,8 +49,8 @@ module Network.Google.Resource.Logging.Projects.LogServices.Sinks.List
     , plsslCallback
     ) where
 
-import Network.Google.Logging.Types
-import Network.Google.Prelude
+import           Network.Google.Logging.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogServicesSinksList@ which the
 -- 'ProjectsLogServicesSinksList'' request conforms to.
@@ -81,20 +81,20 @@ type ProjectsLogServicesSinksListResource =
 --
 -- /See:/ 'projectsLogServicesSinksList'' smart constructor.
 data ProjectsLogServicesSinksList' = ProjectsLogServicesSinksList'
-    { _plsslXgafv :: !(Maybe Text)
-    , _plsslQuotaUser :: !(Maybe Text)
-    , _plsslPrettyPrint :: !Bool
+    { _plsslXgafv          :: !(Maybe Text)
+    , _plsslQuotaUser      :: !(Maybe Text)
+    , _plsslPrettyPrint    :: !Bool
     , _plsslUploadProtocol :: !(Maybe Text)
-    , _plsslPp :: !Bool
-    , _plsslAccessToken :: !(Maybe Text)
-    , _plsslUploadType :: !(Maybe Text)
-    , _plsslBearerToken :: !(Maybe Text)
-    , _plsslKey :: !(Maybe Key)
-    , _plsslLogServicesId :: !Text
-    , _plsslOAuthToken :: !(Maybe OAuthToken)
-    , _plsslProjectsId :: !Text
-    , _plsslFields :: !(Maybe Text)
-    , _plsslCallback :: !(Maybe Text)
+    , _plsslPp             :: !Bool
+    , _plsslAccessToken    :: !(Maybe Text)
+    , _plsslUploadType     :: !(Maybe Text)
+    , _plsslBearerToken    :: !(Maybe Text)
+    , _plsslKey            :: !(Maybe Key)
+    , _plsslLogServicesId  :: !Text
+    , _plsslOAuthToken     :: !(Maybe OAuthToken)
+    , _plsslProjectsId     :: !Text
+    , _plsslFields         :: !(Maybe Text)
+    , _plsslCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogServicesSinksList'' with the minimum fields required to make a request.
@@ -132,7 +132,7 @@ projectsLogServicesSinksList'
     :: Text -- ^ 'logServicesId'
     -> Text -- ^ 'projectsId'
     -> ProjectsLogServicesSinksList'
-projectsLogServicesSinksList' pPlsslLogServicesId_ pPlsslProjectsId_ = 
+projectsLogServicesSinksList' pPlsslLogServicesId_ pPlsslProjectsId_ =
     ProjectsLogServicesSinksList'
     { _plsslXgafv = Nothing
     , _plsslQuotaUser = Nothing

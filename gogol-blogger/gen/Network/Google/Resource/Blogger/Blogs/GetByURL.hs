@@ -43,8 +43,8 @@ module Network.Google.Resource.Blogger.Blogs.GetByURL
     , bgbuFields
     ) where
 
-import Network.Google.Blogger.Types
-import Network.Google.Prelude
+import           Network.Google.Blogger.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerBlogsGetByURL@ which the
 -- 'BlogsGetByURL'' request conforms to.
@@ -65,14 +65,14 @@ type BlogsGetByURLResource =
 --
 -- /See:/ 'blogsGetByURL'' smart constructor.
 data BlogsGetByURL' = BlogsGetByURL'
-    { _bgbuQuotaUser :: !(Maybe Text)
+    { _bgbuQuotaUser   :: !(Maybe Text)
     , _bgbuPrettyPrint :: !Bool
-    , _bgbuUserIP :: !(Maybe Text)
-    , _bgbuURL :: !Text
-    , _bgbuKey :: !(Maybe Key)
-    , _bgbuView :: !(Maybe BlogsGetByURLView)
-    , _bgbuOAuthToken :: !(Maybe OAuthToken)
-    , _bgbuFields :: !(Maybe Text)
+    , _bgbuUserIP      :: !(Maybe Text)
+    , _bgbuURL         :: !Text
+    , _bgbuKey         :: !(Maybe Key)
+    , _bgbuView        :: !(Maybe BlogsGetByURLView)
+    , _bgbuOAuthToken  :: !(Maybe OAuthToken)
+    , _bgbuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BlogsGetByURL'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ data BlogsGetByURL' = BlogsGetByURL'
 blogsGetByURL'
     :: Text -- ^ 'url'
     -> BlogsGetByURL'
-blogsGetByURL' pBgbuURL_ = 
+blogsGetByURL' pBgbuURL_ =
     BlogsGetByURL'
     { _bgbuQuotaUser = Nothing
     , _bgbuPrettyPrint = True

@@ -46,8 +46,8 @@ module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByAdd
     , rribaFields
     ) where
 
-import Network.Google.CivicInfo.Types
-import Network.Google.Prelude
+import           Network.Google.CivicInfo.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @CivicInfoRepresentativesRepresentativeInfoByAddress@ which the
 -- 'RepresentativesRepresentativeInfoByAddress'' request conforms to.
@@ -76,16 +76,16 @@ type RepresentativesRepresentativeInfoByAddressResource
 --
 -- /See:/ 'representativesRepresentativeInfoByAddress'' smart constructor.
 data RepresentativesRepresentativeInfoByAddress' = RepresentativesRepresentativeInfoByAddress'
-    { _rribaQuotaUser :: !(Maybe Text)
-    , _rribaRoles :: !(Maybe [RepresentativesRepresentativeInfoByAddressRoles])
-    , _rribaPrettyPrint :: !Bool
-    , _rribaUserIP :: !(Maybe Text)
-    , _rribaAddress :: !(Maybe Text)
-    , _rribaKey :: !(Maybe Key)
+    { _rribaQuotaUser      :: !(Maybe Text)
+    , _rribaRoles          :: !(Maybe [RepresentativesRepresentativeInfoByAddressRoles])
+    , _rribaPrettyPrint    :: !Bool
+    , _rribaUserIP         :: !(Maybe Text)
+    , _rribaAddress        :: !(Maybe Text)
+    , _rribaKey            :: !(Maybe Key)
     , _rribaIncludeOffices :: !Bool
-    , _rribaLevels :: !(Maybe [RepresentativesRepresentativeInfoByAddressLevels])
-    , _rribaOAuthToken :: !(Maybe OAuthToken)
-    , _rribaFields :: !(Maybe Text)
+    , _rribaLevels         :: !(Maybe [RepresentativesRepresentativeInfoByAddressLevels])
+    , _rribaOAuthToken     :: !(Maybe OAuthToken)
+    , _rribaFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepresentativesRepresentativeInfoByAddress'' with the minimum fields required to make a request.
@@ -113,7 +113,7 @@ data RepresentativesRepresentativeInfoByAddress' = RepresentativesRepresentative
 -- * 'rribaFields'
 representativesRepresentativeInfoByAddress'
     :: RepresentativesRepresentativeInfoByAddress'
-representativesRepresentativeInfoByAddress' = 
+representativesRepresentativeInfoByAddress' =
     RepresentativesRepresentativeInfoByAddress'
     { _rribaQuotaUser = Nothing
     , _rribaRoles = Nothing

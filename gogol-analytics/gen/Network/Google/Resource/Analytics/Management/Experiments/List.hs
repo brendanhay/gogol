@@ -46,8 +46,8 @@ module Network.Google.Resource.Analytics.Management.Experiments.List
     , melFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementExperimentsList@ which the
 -- 'ManagementExperimentsList'' request conforms to.
@@ -75,17 +75,17 @@ type ManagementExperimentsListResource =
 --
 -- /See:/ 'managementExperimentsList'' smart constructor.
 data ManagementExperimentsList' = ManagementExperimentsList'
-    { _melQuotaUser :: !(Maybe Text)
-    , _melPrettyPrint :: !Bool
+    { _melQuotaUser     :: !(Maybe Text)
+    , _melPrettyPrint   :: !Bool
     , _melWebPropertyId :: !Text
-    , _melUserIP :: !(Maybe Text)
-    , _melProFileId :: !Text
-    , _melAccountId :: !Text
-    , _melKey :: !(Maybe Key)
-    , _melOAuthToken :: !(Maybe OAuthToken)
-    , _melStartIndex :: !(Maybe Int32)
-    , _melMaxResults :: !(Maybe Int32)
-    , _melFields :: !(Maybe Text)
+    , _melUserIP        :: !(Maybe Text)
+    , _melProFileId     :: !Text
+    , _melAccountId     :: !Text
+    , _melKey           :: !(Maybe Key)
+    , _melOAuthToken    :: !(Maybe OAuthToken)
+    , _melStartIndex    :: !(Maybe Int32)
+    , _melMaxResults    :: !(Maybe Int32)
+    , _melFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsList'' with the minimum fields required to make a request.
@@ -118,7 +118,7 @@ managementExperimentsList'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> ManagementExperimentsList'
-managementExperimentsList' pMelWebPropertyId_ pMelProFileId_ pMelAccountId_ = 
+managementExperimentsList' pMelWebPropertyId_ pMelProFileId_ pMelAccountId_ =
     ManagementExperimentsList'
     { _melQuotaUser = Nothing
     , _melPrettyPrint = False

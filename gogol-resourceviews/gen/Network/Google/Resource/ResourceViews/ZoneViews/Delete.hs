@@ -44,8 +44,8 @@ module Network.Google.Resource.ResourceViews.ZoneViews.Delete
     , zvdFields
     ) where
 
-import Network.Google.Prelude
-import Network.Google.ResourceViews.Types
+import           Network.Google.Prelude
+import           Network.Google.ResourceViews.Types
 
 -- | A resource alias for @ResourceviewsZoneViewsDelete@ which the
 -- 'ZoneViewsDelete'' request conforms to.
@@ -67,15 +67,15 @@ type ZoneViewsDeleteResource =
 --
 -- /See:/ 'zoneViewsDelete'' smart constructor.
 data ZoneViewsDelete' = ZoneViewsDelete'
-    { _zvdQuotaUser :: !(Maybe Text)
-    , _zvdPrettyPrint :: !Bool
+    { _zvdQuotaUser    :: !(Maybe Text)
+    , _zvdPrettyPrint  :: !Bool
     , _zvdResourceView :: !Text
-    , _zvdProject :: !Text
-    , _zvdUserIP :: !(Maybe Text)
-    , _zvdZone :: !Text
-    , _zvdKey :: !(Maybe Key)
-    , _zvdOAuthToken :: !(Maybe OAuthToken)
-    , _zvdFields :: !(Maybe Text)
+    , _zvdProject      :: !Text
+    , _zvdUserIP       :: !(Maybe Text)
+    , _zvdZone         :: !Text
+    , _zvdKey          :: !(Maybe Key)
+    , _zvdOAuthToken   :: !(Maybe OAuthToken)
+    , _zvdFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsDelete'' with the minimum fields required to make a request.
@@ -104,7 +104,7 @@ zoneViewsDelete'
     -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> ZoneViewsDelete'
-zoneViewsDelete' pZvdResourceView_ pZvdProject_ pZvdZone_ = 
+zoneViewsDelete' pZvdResourceView_ pZvdProject_ pZvdZone_ =
     ZoneViewsDelete'
     { _zvdQuotaUser = Nothing
     , _zvdPrettyPrint = True

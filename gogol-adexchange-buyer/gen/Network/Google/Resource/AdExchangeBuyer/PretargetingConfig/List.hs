@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.List
     , pclFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerPretargetingConfigList@ which the
 -- 'PretargetingConfigList'' request conforms to.
@@ -65,13 +65,13 @@ type PretargetingConfigListResource =
 --
 -- /See:/ 'pretargetingConfigList'' smart constructor.
 data PretargetingConfigList' = PretargetingConfigList'
-    { _pclQuotaUser :: !(Maybe Text)
+    { _pclQuotaUser   :: !(Maybe Text)
     , _pclPrettyPrint :: !Bool
-    , _pclUserIP :: !(Maybe Text)
-    , _pclAccountId :: !Int64
-    , _pclKey :: !(Maybe Key)
-    , _pclOAuthToken :: !(Maybe OAuthToken)
-    , _pclFields :: !(Maybe Text)
+    , _pclUserIP      :: !(Maybe Text)
+    , _pclAccountId   :: !Int64
+    , _pclKey         :: !(Maybe Key)
+    , _pclOAuthToken  :: !(Maybe OAuthToken)
+    , _pclFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigList'' with the minimum fields required to make a request.
@@ -94,7 +94,7 @@ data PretargetingConfigList' = PretargetingConfigList'
 pretargetingConfigList'
     :: Int64 -- ^ 'accountId'
     -> PretargetingConfigList'
-pretargetingConfigList' pPclAccountId_ = 
+pretargetingConfigList' pPclAccountId_ =
     PretargetingConfigList'
     { _pclQuotaUser = Nothing
     , _pclPrettyPrint = True

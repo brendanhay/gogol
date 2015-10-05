@@ -43,8 +43,8 @@ module Network.Google.Resource.PlusDomains.Circles.Update
     , cuFields
     ) where
 
-import Network.Google.PlusDomains.Types
-import Network.Google.Prelude
+import           Network.Google.PlusDomains.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsCirclesUpdate@ which the
 -- 'CirclesUpdate'' request conforms to.
@@ -64,14 +64,14 @@ type CirclesUpdateResource =
 --
 -- /See:/ 'circlesUpdate'' smart constructor.
 data CirclesUpdate' = CirclesUpdate'
-    { _cuQuotaUser :: !(Maybe Text)
+    { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
-    , _cuUserIP :: !(Maybe Text)
-    , _cuPayload :: !Circle
-    , _cuKey :: !(Maybe Key)
-    , _cuCircleId :: !Text
-    , _cuOAuthToken :: !(Maybe OAuthToken)
-    , _cuFields :: !(Maybe Text)
+    , _cuUserIP      :: !(Maybe Text)
+    , _cuPayload     :: !Circle
+    , _cuKey         :: !(Maybe Key)
+    , _cuCircleId    :: !Text
+    , _cuOAuthToken  :: !(Maybe OAuthToken)
+    , _cuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesUpdate'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ circlesUpdate'
     :: Circle -- ^ 'payload'
     -> Text -- ^ 'circleId'
     -> CirclesUpdate'
-circlesUpdate' pCuPayload_ pCuCircleId_ = 
+circlesUpdate' pCuPayload_ pCuCircleId_ =
     CirclesUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True

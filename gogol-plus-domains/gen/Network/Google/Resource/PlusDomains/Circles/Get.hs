@@ -42,8 +42,8 @@ module Network.Google.Resource.PlusDomains.Circles.Get
     , cgFields
     ) where
 
-import Network.Google.PlusDomains.Types
-import Network.Google.Prelude
+import           Network.Google.PlusDomains.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsCirclesGet@ which the
 -- 'CirclesGet'' request conforms to.
@@ -62,13 +62,13 @@ type CirclesGetResource =
 --
 -- /See:/ 'circlesGet'' smart constructor.
 data CirclesGet' = CirclesGet'
-    { _cgQuotaUser :: !(Maybe Text)
+    { _cgQuotaUser   :: !(Maybe Text)
     , _cgPrettyPrint :: !Bool
-    , _cgUserIP :: !(Maybe Text)
-    , _cgKey :: !(Maybe Key)
-    , _cgCircleId :: !Text
-    , _cgOAuthToken :: !(Maybe OAuthToken)
-    , _cgFields :: !(Maybe Text)
+    , _cgUserIP      :: !(Maybe Text)
+    , _cgKey         :: !(Maybe Key)
+    , _cgCircleId    :: !Text
+    , _cgOAuthToken  :: !(Maybe OAuthToken)
+    , _cgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesGet'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data CirclesGet' = CirclesGet'
 circlesGet'
     :: Text -- ^ 'circleId'
     -> CirclesGet'
-circlesGet' pCgCircleId_ = 
+circlesGet' pCgCircleId_ =
     CirclesGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True

@@ -50,8 +50,8 @@ module Network.Google.Resource.Logging.Projects.Sinks.Delete
     , psdCallback
     ) where
 
-import Network.Google.Logging.Types
-import Network.Google.Prelude
+import           Network.Google.Logging.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsSinksDelete@ which the
 -- 'ProjectsSinksDelete'' request conforms to.
@@ -81,20 +81,20 @@ type ProjectsSinksDeleteResource =
 --
 -- /See:/ 'projectsSinksDelete'' smart constructor.
 data ProjectsSinksDelete' = ProjectsSinksDelete'
-    { _psdXgafv :: !(Maybe Text)
-    , _psdQuotaUser :: !(Maybe Text)
-    , _psdPrettyPrint :: !Bool
+    { _psdXgafv          :: !(Maybe Text)
+    , _psdQuotaUser      :: !(Maybe Text)
+    , _psdPrettyPrint    :: !Bool
     , _psdUploadProtocol :: !(Maybe Text)
-    , _psdPp :: !Bool
-    , _psdAccessToken :: !(Maybe Text)
-    , _psdUploadType :: !(Maybe Text)
-    , _psdBearerToken :: !(Maybe Text)
-    , _psdKey :: !(Maybe Key)
-    , _psdOAuthToken :: !(Maybe OAuthToken)
-    , _psdProjectsId :: !Text
-    , _psdSinksId :: !Text
-    , _psdFields :: !(Maybe Text)
-    , _psdCallback :: !(Maybe Text)
+    , _psdPp             :: !Bool
+    , _psdAccessToken    :: !(Maybe Text)
+    , _psdUploadType     :: !(Maybe Text)
+    , _psdBearerToken    :: !(Maybe Text)
+    , _psdKey            :: !(Maybe Key)
+    , _psdOAuthToken     :: !(Maybe OAuthToken)
+    , _psdProjectsId     :: !Text
+    , _psdSinksId        :: !Text
+    , _psdFields         :: !(Maybe Text)
+    , _psdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSinksDelete'' with the minimum fields required to make a request.
@@ -132,7 +132,7 @@ projectsSinksDelete'
     :: Text -- ^ 'projectsId'
     -> Text -- ^ 'sinksId'
     -> ProjectsSinksDelete'
-projectsSinksDelete' pPsdProjectsId_ pPsdSinksId_ = 
+projectsSinksDelete' pPsdProjectsId_ pPsdSinksId_ =
     ProjectsSinksDelete'
     { _psdXgafv = Nothing
     , _psdQuotaUser = Nothing

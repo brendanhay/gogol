@@ -45,8 +45,8 @@ module Network.Google.Resource.Genomics.AnnotationSets.Update
     , asuFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsAnnotationSetsUpdate@ which the
 -- 'AnnotationSetsUpdate'' request conforms to.
@@ -69,14 +69,14 @@ type AnnotationSetsUpdateResource =
 --
 -- /See:/ 'annotationSetsUpdate'' smart constructor.
 data AnnotationSetsUpdate' = AnnotationSetsUpdate'
-    { _asuQuotaUser :: !(Maybe Text)
-    , _asuPrettyPrint :: !Bool
+    { _asuQuotaUser       :: !(Maybe Text)
+    , _asuPrettyPrint     :: !Bool
     , _asuAnnotationSetId :: !Text
-    , _asuUserIP :: !(Maybe Text)
-    , _asuPayload :: !AnnotationSet
-    , _asuKey :: !(Maybe Key)
-    , _asuOAuthToken :: !(Maybe OAuthToken)
-    , _asuFields :: !(Maybe Text)
+    , _asuUserIP          :: !(Maybe Text)
+    , _asuPayload         :: !AnnotationSet
+    , _asuKey             :: !(Maybe Key)
+    , _asuOAuthToken      :: !(Maybe OAuthToken)
+    , _asuFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSetsUpdate'' with the minimum fields required to make a request.
@@ -102,7 +102,7 @@ annotationSetsUpdate'
     :: Text -- ^ 'annotationSetId'
     -> AnnotationSet -- ^ 'payload'
     -> AnnotationSetsUpdate'
-annotationSetsUpdate' pAsuAnnotationSetId_ pAsuPayload_ = 
+annotationSetsUpdate' pAsuAnnotationSetId_ pAsuPayload_ =
     AnnotationSetsUpdate'
     { _asuQuotaUser = Nothing
     , _asuPrettyPrint = True

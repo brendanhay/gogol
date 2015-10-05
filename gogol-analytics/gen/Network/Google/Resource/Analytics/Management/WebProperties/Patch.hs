@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.WebProperties.Patch
     , mwppFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebPropertiesPatch@ which the
 -- 'ManagementWebPropertiesPatch'' request conforms to.
@@ -69,15 +69,15 @@ type ManagementWebPropertiesPatchResource =
 --
 -- /See:/ 'managementWebPropertiesPatch'' smart constructor.
 data ManagementWebPropertiesPatch' = ManagementWebPropertiesPatch'
-    { _mwppQuotaUser :: !(Maybe Text)
-    , _mwppPrettyPrint :: !Bool
+    { _mwppQuotaUser     :: !(Maybe Text)
+    , _mwppPrettyPrint   :: !Bool
     , _mwppWebPropertyId :: !Text
-    , _mwppUserIP :: !(Maybe Text)
-    , _mwppPayload :: !WebProperty
-    , _mwppAccountId :: !Text
-    , _mwppKey :: !(Maybe Key)
-    , _mwppOAuthToken :: !(Maybe OAuthToken)
-    , _mwppFields :: !(Maybe Text)
+    , _mwppUserIP        :: !(Maybe Text)
+    , _mwppPayload       :: !WebProperty
+    , _mwppAccountId     :: !Text
+    , _mwppKey           :: !(Maybe Key)
+    , _mwppOAuthToken    :: !(Maybe OAuthToken)
+    , _mwppFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertiesPatch'' with the minimum fields required to make a request.
@@ -106,7 +106,7 @@ managementWebPropertiesPatch'
     -> WebProperty -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementWebPropertiesPatch'
-managementWebPropertiesPatch' pMwppWebPropertyId_ pMwppPayload_ pMwppAccountId_ = 
+managementWebPropertiesPatch' pMwppWebPropertyId_ pMwppPayload_ pMwppAccountId_ =
     ManagementWebPropertiesPatch'
     { _mwppQuotaUser = Nothing
     , _mwppPrettyPrint = False

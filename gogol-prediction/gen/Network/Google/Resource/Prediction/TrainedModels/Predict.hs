@@ -44,8 +44,8 @@ module Network.Google.Resource.Prediction.TrainedModels.Predict
     , tmpFields
     ) where
 
-import Network.Google.Prediction.Types
-import Network.Google.Prelude
+import           Network.Google.Prediction.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @PredictionTrainedModelsPredict@ which the
 -- 'TrainedModelsPredict'' request conforms to.
@@ -67,15 +67,15 @@ type TrainedModelsPredictResource =
 --
 -- /See:/ 'trainedModelsPredict'' smart constructor.
 data TrainedModelsPredict' = TrainedModelsPredict'
-    { _tmpQuotaUser :: !(Maybe Text)
+    { _tmpQuotaUser   :: !(Maybe Text)
     , _tmpPrettyPrint :: !Bool
-    , _tmpProject :: !Text
-    , _tmpUserIP :: !(Maybe Text)
-    , _tmpPayload :: !Input
-    , _tmpKey :: !(Maybe Key)
-    , _tmpId :: !Text
-    , _tmpOAuthToken :: !(Maybe OAuthToken)
-    , _tmpFields :: !(Maybe Text)
+    , _tmpProject     :: !Text
+    , _tmpUserIP      :: !(Maybe Text)
+    , _tmpPayload     :: !Input
+    , _tmpKey         :: !(Maybe Key)
+    , _tmpId          :: !Text
+    , _tmpOAuthToken  :: !(Maybe OAuthToken)
+    , _tmpFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrainedModelsPredict'' with the minimum fields required to make a request.
@@ -104,7 +104,7 @@ trainedModelsPredict'
     -> Input -- ^ 'payload'
     -> Text -- ^ 'id'
     -> TrainedModelsPredict'
-trainedModelsPredict' pTmpProject_ pTmpPayload_ pTmpId_ = 
+trainedModelsPredict' pTmpProject_ pTmpPayload_ pTmpId_ =
     TrainedModelsPredict'
     { _tmpQuotaUser = Nothing
     , _tmpPrettyPrint = True

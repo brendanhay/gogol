@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer.Offers.Insert
     , oiFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerOffersInsert@ which the
 -- 'OffersInsert'' request conforms to.
@@ -62,13 +62,13 @@ type OffersInsertResource =
 --
 -- /See:/ 'offersInsert'' smart constructor.
 data OffersInsert' = OffersInsert'
-    { _oiQuotaUser :: !(Maybe Text)
+    { _oiQuotaUser   :: !(Maybe Text)
     , _oiPrettyPrint :: !Bool
-    , _oiUserIP :: !(Maybe Text)
-    , _oiPayload :: !OfferDTO
-    , _oiKey :: !(Maybe Key)
-    , _oiOAuthToken :: !(Maybe OAuthToken)
-    , _oiFields :: !(Maybe Text)
+    , _oiUserIP      :: !(Maybe Text)
+    , _oiPayload     :: !OfferDTO
+    , _oiKey         :: !(Maybe Key)
+    , _oiOAuthToken  :: !(Maybe OAuthToken)
+    , _oiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OffersInsert'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data OffersInsert' = OffersInsert'
 offersInsert'
     :: OfferDTO -- ^ 'payload'
     -> OffersInsert'
-offersInsert' pOiPayload_ = 
+offersInsert' pOiPayload_ =
     OffersInsert'
     { _oiQuotaUser = Nothing
     , _oiPrettyPrint = True

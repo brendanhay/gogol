@@ -17,14 +17,14 @@
 --
 module Network.Google.Logging.Types.Product where
 
-import Network.Google.Logging.Types.Sum
-import Network.Google.Prelude
+import           Network.Google.Logging.Types.Sum
+import           Network.Google.Prelude
 
 -- | _Output only._ Describes a log, which is a named stream of log entries.
 --
 -- /See:/ 'log' smart constructor.
 data Log = Log
-    { _lName :: !(Maybe Text)
+    { _lName        :: !(Maybe Text)
     , _lDisplayName :: !(Maybe Text)
     , _lPayloadType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -40,7 +40,7 @@ data Log = Log
 -- * 'lPayloadType'
 log
     :: Log
-log = 
+log =
     Log
     { _lName = Nothing
     , _lDisplayName = Nothing
@@ -89,8 +89,8 @@ instance ToJSON Log where
 --
 -- /See:/ 'logError' smart constructor.
 data LogError = LogError
-    { _leStatus :: !(Maybe Status)
-    , _leResource :: !(Maybe Text)
+    { _leStatus    :: !(Maybe Status)
+    , _leResource  :: !(Maybe Text)
     , _leTimeNanos :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -105,7 +105,7 @@ data LogError = LogError
 -- * 'leTimeNanos'
 logError
     :: LogError
-logError = 
+logError =
     LogError
     { _leStatus = Nothing
     , _leResource = Nothing
@@ -184,7 +184,7 @@ instance ToJSON LogError where
 -- /See:/ 'status' smart constructor.
 data Status = Status
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode :: !(Maybe Int32)
+    , _sCode    :: !(Maybe Int32)
     , _sMessage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -199,7 +199,7 @@ data Status = Status
 -- * 'sMessage'
 status
     :: Status
-status = 
+status =
     Status
     { _sDetails = Nothing
     , _sCode = Nothing
@@ -245,7 +245,7 @@ instance ToJSON Status where
 --
 -- /See:/ 'writeLogEntriesRequest' smart constructor.
 data WriteLogEntriesRequest = WriteLogEntriesRequest
-    { _wlerEntries :: !(Maybe [LogEntry])
+    { _wlerEntries      :: !(Maybe [LogEntry])
     , _wlerCommonLabels :: !(Maybe WriteLogEntriesRequestCommonLabels)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -258,7 +258,7 @@ data WriteLogEntriesRequest = WriteLogEntriesRequest
 -- * 'wlerCommonLabels'
 writeLogEntriesRequest
     :: WriteLogEntriesRequest
-writeLogEntriesRequest = 
+writeLogEntriesRequest =
     WriteLogEntriesRequest
     { _wlerEntries = Nothing
     , _wlerCommonLabels = Nothing
@@ -304,7 +304,7 @@ instance ToJSON WriteLogEntriesRequest where
 --
 -- /See:/ 'writeLogEntriesRequestCommonLabels' smart constructor.
 data WriteLogEntriesRequestCommonLabels =
-    WriteLogEntriesRequestCommonLabels 
+    WriteLogEntriesRequestCommonLabels
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WriteLogEntriesRequestCommonLabels' with the minimum fields required to make a request.
@@ -331,7 +331,7 @@ instance ToJSON WriteLogEntriesRequestCommonLabels
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty 
+    Empty
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
@@ -360,7 +360,7 @@ newtype ListSinksResponse = ListSinksResponse
 -- * 'lsrSinks'
 listSinksResponse
     :: ListSinksResponse
-listSinksResponse = 
+listSinksResponse =
     ListSinksResponse
     { _lsrSinks = Nothing
     }
@@ -388,37 +388,37 @@ instance ToJSON ListSinksResponse where
 --
 -- /See:/ 'requestLog' smart constructor.
 data RequestLog = RequestLog
-    { _rlTraceId :: !(Maybe Text)
-    , _rlInstanceId :: !(Maybe Word8)
-    , _rlStatus :: !(Maybe Int32)
-    , _rlRequestId :: !(Maybe Word8)
-    , _rlInstanceIndex :: !(Maybe Int32)
-    , _rlModuleId :: !(Maybe Text)
-    , _rlVersionId :: !(Maybe Text)
-    , _rlHTTPVersion :: !(Maybe Text)
-    , _rlTaskName :: !(Maybe Text)
-    , _rlPendingTime :: !(Maybe Text)
+    { _rlTraceId           :: !(Maybe Text)
+    , _rlInstanceId        :: !(Maybe Word8)
+    , _rlStatus            :: !(Maybe Int32)
+    , _rlRequestId         :: !(Maybe Word8)
+    , _rlInstanceIndex     :: !(Maybe Int32)
+    , _rlModuleId          :: !(Maybe Text)
+    , _rlVersionId         :: !(Maybe Text)
+    , _rlHTTPVersion       :: !(Maybe Text)
+    , _rlTaskName          :: !(Maybe Text)
+    , _rlPendingTime       :: !(Maybe Text)
     , _rlWasLoadingRequest :: !(Maybe Bool)
-    , _rlStartTime :: !(Maybe Text)
-    , _rlLatency :: !(Maybe Text)
-    , _rlURLMapEntry :: !(Maybe Text)
-    , _rlCost :: !(Maybe Double)
-    , _rlReferrer :: !(Maybe Text)
-    , _rlLine :: !(Maybe [LogLine])
-    , _rlIP :: !(Maybe Text)
-    , _rlAppId :: !(Maybe Text)
-    , _rlMethod :: !(Maybe Text)
-    , _rlResource :: !(Maybe Text)
-    , _rlEndTime :: !(Maybe Text)
-    , _rlFinished :: !(Maybe Bool)
-    , _rlMegaCycles :: !(Maybe Int64)
-    , _rlUserAgent :: !(Maybe Text)
-    , _rlNickname :: !(Maybe Text)
-    , _rlHost :: !(Maybe Text)
-    , _rlTaskQueueName :: !(Maybe Text)
-    , _rlResponseSize :: !(Maybe Int64)
-    , _rlSourceReference :: !(Maybe [SourceReference])
-    , _rlAppEngineRelease :: !(Maybe Text)
+    , _rlStartTime         :: !(Maybe Text)
+    , _rlLatency           :: !(Maybe Text)
+    , _rlURLMapEntry       :: !(Maybe Text)
+    , _rlCost              :: !(Maybe Double)
+    , _rlReferrer          :: !(Maybe Text)
+    , _rlLine              :: !(Maybe [LogLine])
+    , _rlIP                :: !(Maybe Text)
+    , _rlAppId             :: !(Maybe Text)
+    , _rlMethod            :: !(Maybe Text)
+    , _rlResource          :: !(Maybe Text)
+    , _rlEndTime           :: !(Maybe Text)
+    , _rlFinished          :: !(Maybe Bool)
+    , _rlMegaCycles        :: !(Maybe Int64)
+    , _rlUserAgent         :: !(Maybe Text)
+    , _rlNickname          :: !(Maybe Text)
+    , _rlHost              :: !(Maybe Text)
+    , _rlTaskQueueName     :: !(Maybe Text)
+    , _rlResponseSize      :: !(Maybe Int64)
+    , _rlSourceReference   :: !(Maybe [SourceReference])
+    , _rlAppEngineRelease  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RequestLog' with the minimum fields required to make a request.
@@ -488,7 +488,7 @@ data RequestLog = RequestLog
 -- * 'rlAppEngineRelease'
 requestLog
     :: RequestLog
-requestLog = 
+requestLog =
     RequestLog
     { _rlTraceId = Nothing
     , _rlInstanceId = Nothing
@@ -780,14 +780,14 @@ instance ToJSON RequestLog where
 --
 -- /See:/ 'logEntryMetadata' smart constructor.
 data LogEntryMetadata = LogEntryMetadata
-    { _lemSeverity :: !(Maybe Text)
-    , _lemZone :: !(Maybe Text)
-    , _lemUserId :: !(Maybe Text)
+    { _lemSeverity    :: !(Maybe Text)
+    , _lemZone        :: !(Maybe Text)
+    , _lemUserId      :: !(Maybe Text)
     , _lemServiceName :: !(Maybe Text)
-    , _lemLabels :: !(Maybe LogEntryMetadataLabels)
-    , _lemRegion :: !(Maybe Text)
-    , _lemProjectId :: !(Maybe Text)
-    , _lemTimestamp :: !(Maybe Text)
+    , _lemLabels      :: !(Maybe LogEntryMetadataLabels)
+    , _lemRegion      :: !(Maybe Text)
+    , _lemProjectId   :: !(Maybe Text)
+    , _lemTimestamp   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogEntryMetadata' with the minimum fields required to make a request.
@@ -811,7 +811,7 @@ data LogEntryMetadata = LogEntryMetadata
 -- * 'lemTimestamp'
 logEntryMetadata
     :: LogEntryMetadata
-logEntryMetadata = 
+logEntryMetadata =
     LogEntryMetadata
     { _lemSeverity = Nothing
     , _lemZone = Nothing
@@ -913,7 +913,7 @@ instance ToJSON LogEntryMetadata where
 --
 -- /See:/ 'logEntryProtoPayload' smart constructor.
 data LogEntryProtoPayload =
-    LogEntryProtoPayload 
+    LogEntryProtoPayload
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogEntryProtoPayload' with the minimum fields required to make a request.
@@ -934,7 +934,7 @@ instance ToJSON LogEntryProtoPayload where
 --
 -- /See:/ 'listLogServiceIndexesResponse' smart constructor.
 data ListLogServiceIndexesResponse = ListLogServiceIndexesResponse
-    { _llsirNextPageToken :: !(Maybe Text)
+    { _llsirNextPageToken        :: !(Maybe Text)
     , _llsirServiceIndexPrefixes :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -947,7 +947,7 @@ data ListLogServiceIndexesResponse = ListLogServiceIndexesResponse
 -- * 'llsirServiceIndexPrefixes'
 listLogServiceIndexesResponse
     :: ListLogServiceIndexesResponse
-listLogServiceIndexesResponse = 
+listLogServiceIndexesResponse =
     ListLogServiceIndexesResponse
     { _llsirNextPageToken = Nothing
     , _llsirServiceIndexPrefixes = Nothing
@@ -994,7 +994,7 @@ instance ToJSON ListLogServiceIndexesResponse where
 --
 -- /See:/ 'writeLogEntriesResponse' smart constructor.
 data WriteLogEntriesResponse =
-    WriteLogEntriesResponse 
+    WriteLogEntriesResponse
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WriteLogEntriesResponse' with the minimum fields required to make a request.
@@ -1016,9 +1016,9 @@ instance ToJSON WriteLogEntriesResponse where
 -- /See:/ 'logSink' smart constructor.
 data LogSink = LogSink
     { _lsDestination :: !(Maybe Text)
-    , _lsName :: !(Maybe Text)
-    , _lsFilter :: !(Maybe Text)
-    , _lsErrors :: !(Maybe [LogError])
+    , _lsName        :: !(Maybe Text)
+    , _lsFilter      :: !(Maybe Text)
+    , _lsErrors      :: !(Maybe [LogError])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogSink' with the minimum fields required to make a request.
@@ -1034,7 +1034,7 @@ data LogSink = LogSink
 -- * 'lsErrors'
 logSink
     :: LogSink
-logSink = 
+logSink =
     LogSink
     { _lsDestination = Nothing
     , _lsName = Nothing
@@ -1092,7 +1092,7 @@ instance ToJSON LogSink where
 -- /See:/ 'listLogServicesResponse' smart constructor.
 data ListLogServicesResponse = ListLogServicesResponse
     { _llsrNextPageToken :: !(Maybe Text)
-    , _llsrLogServices :: !(Maybe [LogService])
+    , _llsrLogServices   :: !(Maybe [LogService])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListLogServicesResponse' with the minimum fields required to make a request.
@@ -1104,7 +1104,7 @@ data ListLogServicesResponse = ListLogServicesResponse
 -- * 'llsrLogServices'
 listLogServicesResponse
     :: ListLogServicesResponse
-listLogServicesResponse = 
+listLogServicesResponse =
     ListLogServicesResponse
     { _llsrNextPageToken = Nothing
     , _llsrLogServices = Nothing
@@ -1146,7 +1146,7 @@ instance ToJSON ListLogServicesResponse where
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
 data StatusDetailsItem =
-    StatusDetailsItem 
+    StatusDetailsItem
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
@@ -1168,7 +1168,7 @@ instance ToJSON StatusDetailsItem where
 -- /See:/ 'listLogsResponse' smart constructor.
 data ListLogsResponse = ListLogsResponse
     { _llrNextPageToken :: !(Maybe Text)
-    , _llrLogs :: !(Maybe [Log])
+    , _llrLogs          :: !(Maybe [Log])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListLogsResponse' with the minimum fields required to make a request.
@@ -1180,7 +1180,7 @@ data ListLogsResponse = ListLogsResponse
 -- * 'llrLogs'
 listLogsResponse
     :: ListLogsResponse
-listLogsResponse = 
+listLogsResponse =
     ListLogsResponse
     { _llrNextPageToken = Nothing
     , _llrLogs = Nothing
@@ -1220,14 +1220,14 @@ instance ToJSON ListLogsResponse where
 --
 -- /See:/ 'hTTPRequest' smart constructor.
 data HTTPRequest = HTTPRequest
-    { _httprStatus :: !(Maybe Int32)
-    , _httprRequestURL :: !(Maybe Text)
-    , _httprRemoteIP :: !(Maybe Text)
-    , _httprRequestSize :: !(Maybe Int64)
-    , _httprUserAgent :: !(Maybe Text)
-    , _httprResponseSize :: !(Maybe Int64)
+    { _httprStatus        :: !(Maybe Int32)
+    , _httprRequestURL    :: !(Maybe Text)
+    , _httprRemoteIP      :: !(Maybe Text)
+    , _httprRequestSize   :: !(Maybe Int64)
+    , _httprUserAgent     :: !(Maybe Text)
+    , _httprResponseSize  :: !(Maybe Int64)
     , _httprRequestMethod :: !(Maybe Text)
-    , _httprReferer :: !(Maybe Text)
+    , _httprReferer       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPRequest' with the minimum fields required to make a request.
@@ -1251,7 +1251,7 @@ data HTTPRequest = HTTPRequest
 -- * 'httprReferer'
 hTTPRequest
     :: HTTPRequest
-hTTPRequest = 
+hTTPRequest =
     HTTPRequest
     { _httprStatus = Nothing
     , _httprRequestURL = Nothing
@@ -1355,7 +1355,7 @@ newtype ListLogSinksResponse = ListLogSinksResponse
 -- * 'llsrSinks'
 listLogSinksResponse
     :: ListLogSinksResponse
-listLogSinksResponse = 
+listLogSinksResponse =
     ListLogSinksResponse
     { _llsrSinks = Nothing
     }
@@ -1383,7 +1383,7 @@ instance ToJSON ListLogSinksResponse where
 --
 -- /See:/ 'logService' smart constructor.
 data LogService = LogService
-    { _logName :: !(Maybe Text)
+    { _logName      :: !(Maybe Text)
     , _logIndexKeys :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1396,7 +1396,7 @@ data LogService = LogService
 -- * 'logIndexKeys'
 logService
     :: LogService
-logService = 
+logService =
     LogService
     { _logName = Nothing
     , _logIndexKeys = Nothing
@@ -1450,7 +1450,7 @@ newtype ListLogServiceSinksResponse = ListLogServiceSinksResponse
 -- * 'llssrSinks'
 listLogServiceSinksResponse
     :: ListLogServiceSinksResponse
-listLogServiceSinksResponse = 
+listLogServiceSinksResponse =
     ListLogServiceSinksResponse
     { _llssrSinks = Nothing
     }
@@ -1479,9 +1479,9 @@ instance ToJSON ListLogServiceSinksResponse where
 --
 -- /See:/ 'logLine' smart constructor.
 data LogLine = LogLine
-    { _llTime :: !(Maybe Text)
-    , _llSeverity :: !(Maybe Text)
-    , _llLogMessage :: !(Maybe Text)
+    { _llTime           :: !(Maybe Text)
+    , _llSeverity       :: !(Maybe Text)
+    , _llLogMessage     :: !(Maybe Text)
     , _llSourceLocation :: !(Maybe SourceLocation)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1498,7 +1498,7 @@ data LogLine = LogLine
 -- * 'llSourceLocation'
 logLine
     :: LogLine
-logLine = 
+logLine =
     LogLine
     { _llTime = Nothing
     , _llSeverity = Nothing
@@ -1548,13 +1548,13 @@ instance ToJSON LogLine where
 --
 -- /See:/ 'logEntry' smart constructor.
 data LogEntry = LogEntry
-    { _leLog :: !(Maybe Text)
-    , _leTextPayload :: !(Maybe Text)
-    , _leHTTPRequest :: !(Maybe HTTPRequest)
+    { _leLog           :: !(Maybe Text)
+    , _leTextPayload   :: !(Maybe Text)
+    , _leHTTPRequest   :: !(Maybe HTTPRequest)
     , _leStructPayload :: !(Maybe LogEntryStructPayload)
-    , _leInsertId :: !(Maybe Text)
-    , _leMetadata :: !(Maybe LogEntryMetadata)
-    , _leProtoPayload :: !(Maybe LogEntryProtoPayload)
+    , _leInsertId      :: !(Maybe Text)
+    , _leMetadata      :: !(Maybe LogEntryMetadata)
+    , _leProtoPayload  :: !(Maybe LogEntryProtoPayload)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogEntry' with the minimum fields required to make a request.
@@ -1576,7 +1576,7 @@ data LogEntry = LogEntry
 -- * 'leProtoPayload'
 logEntry
     :: LogEntry
-logEntry = 
+logEntry =
     LogEntry
     { _leLog = Nothing
     , _leTextPayload = Nothing
@@ -1670,7 +1670,7 @@ instance ToJSON LogEntry where
 --
 -- /See:/ 'logEntryMetadataLabels' smart constructor.
 data LogEntryMetadataLabels =
-    LogEntryMetadataLabels 
+    LogEntryMetadataLabels
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogEntryMetadataLabels' with the minimum fields required to make a request.
@@ -1691,9 +1691,9 @@ instance ToJSON LogEntryMetadataLabels where
 --
 -- /See:/ 'sourceLocation' smart constructor.
 data SourceLocation = SourceLocation
-    { _slLine :: !(Maybe Int64)
+    { _slLine         :: !(Maybe Int64)
     , _slFunctionName :: !(Maybe Text)
-    , _slFile :: !(Maybe Text)
+    , _slFile         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceLocation' with the minimum fields required to make a request.
@@ -1707,7 +1707,7 @@ data SourceLocation = SourceLocation
 -- * 'slFile'
 sourceLocation
     :: SourceLocation
-sourceLocation = 
+sourceLocation =
     SourceLocation
     { _slLine = Nothing
     , _slFunctionName = Nothing
@@ -1767,7 +1767,7 @@ data SourceReference = SourceReference
 -- * 'srRevisionId'
 sourceReference
     :: SourceReference
-sourceReference = 
+sourceReference =
     SourceReference
     { _srRepository = Nothing
     , _srRevisionId = Nothing
@@ -1804,7 +1804,7 @@ instance ToJSON SourceReference where
 --
 -- /See:/ 'logEntryStructPayload' smart constructor.
 data LogEntryStructPayload =
-    LogEntryStructPayload 
+    LogEntryStructPayload
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogEntryStructPayload' with the minimum fields required to make a request.

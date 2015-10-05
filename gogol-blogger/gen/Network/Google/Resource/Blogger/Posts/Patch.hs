@@ -49,8 +49,8 @@ module Network.Google.Resource.Blogger.Posts.Patch
     , ppFields
     ) where
 
-import Network.Google.Blogger.Types
-import Network.Google.Prelude
+import           Network.Google.Blogger.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPostsPatch@ which the
 -- 'PostsPatch'' request conforms to.
@@ -78,20 +78,20 @@ type PostsPatchResource =
 --
 -- /See:/ 'postsPatch'' smart constructor.
 data PostsPatch' = PostsPatch'
-    { _ppFetchBody :: !Bool
-    , _ppQuotaUser :: !(Maybe Text)
+    { _ppFetchBody   :: !Bool
+    , _ppQuotaUser   :: !(Maybe Text)
     , _ppPrettyPrint :: !Bool
-    , _ppUserIP :: !(Maybe Text)
+    , _ppUserIP      :: !(Maybe Text)
     , _ppFetchImages :: !(Maybe Bool)
-    , _ppBlogId :: !Text
-    , _ppPayload :: !Post'
+    , _ppBlogId      :: !Text
+    , _ppPayload     :: !Post'
     , _ppMaxComments :: !(Maybe Word32)
-    , _ppKey :: !(Maybe Key)
-    , _ppRevert :: !(Maybe Bool)
-    , _ppPostId :: !Text
-    , _ppOAuthToken :: !(Maybe OAuthToken)
-    , _ppPublish :: !(Maybe Bool)
-    , _ppFields :: !(Maybe Text)
+    , _ppKey         :: !(Maybe Key)
+    , _ppRevert      :: !(Maybe Bool)
+    , _ppPostId      :: !Text
+    , _ppOAuthToken  :: !(Maybe OAuthToken)
+    , _ppPublish     :: !(Maybe Bool)
+    , _ppFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsPatch'' with the minimum fields required to make a request.
@@ -130,7 +130,7 @@ postsPatch'
     -> Post' -- ^ 'payload'
     -> Text -- ^ 'postId'
     -> PostsPatch'
-postsPatch' pPpBlogId_ pPpPayload_ pPpPostId_ = 
+postsPatch' pPpBlogId_ pPpPayload_ pPpPostId_ =
     PostsPatch'
     { _ppFetchBody = True
     , _ppQuotaUser = Nothing

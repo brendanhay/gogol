@@ -46,8 +46,8 @@ module Network.Google.Resource.Analytics.Management.Uploads.List
     , mulFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementUploadsList@ which the
 -- 'ManagementUploadsList'' request conforms to.
@@ -75,17 +75,17 @@ type ManagementUploadsListResource =
 --
 -- /See:/ 'managementUploadsList'' smart constructor.
 data ManagementUploadsList' = ManagementUploadsList'
-    { _mulQuotaUser :: !(Maybe Text)
-    , _mulPrettyPrint :: !Bool
-    , _mulWebPropertyId :: !Text
-    , _mulUserIP :: !(Maybe Text)
+    { _mulQuotaUser          :: !(Maybe Text)
+    , _mulPrettyPrint        :: !Bool
+    , _mulWebPropertyId      :: !Text
+    , _mulUserIP             :: !(Maybe Text)
     , _mulCustomDataSourceId :: !Text
-    , _mulAccountId :: !Text
-    , _mulKey :: !(Maybe Key)
-    , _mulOAuthToken :: !(Maybe OAuthToken)
-    , _mulStartIndex :: !(Maybe Int32)
-    , _mulMaxResults :: !(Maybe Int32)
-    , _mulFields :: !(Maybe Text)
+    , _mulAccountId          :: !Text
+    , _mulKey                :: !(Maybe Key)
+    , _mulOAuthToken         :: !(Maybe OAuthToken)
+    , _mulStartIndex         :: !(Maybe Int32)
+    , _mulMaxResults         :: !(Maybe Int32)
+    , _mulFields             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUploadsList'' with the minimum fields required to make a request.
@@ -118,7 +118,7 @@ managementUploadsList'
     -> Text -- ^ 'customDataSourceId'
     -> Text -- ^ 'accountId'
     -> ManagementUploadsList'
-managementUploadsList' pMulWebPropertyId_ pMulCustomDataSourceId_ pMulAccountId_ = 
+managementUploadsList' pMulWebPropertyId_ pMulCustomDataSourceId_ pMulAccountId_ =
     ManagementUploadsList'
     { _mulQuotaUser = Nothing
     , _mulPrettyPrint = False

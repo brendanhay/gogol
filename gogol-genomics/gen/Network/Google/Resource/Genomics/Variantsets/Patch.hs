@@ -44,8 +44,8 @@ module Network.Google.Resource.Genomics.Variantsets.Patch
     , vpFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsetsPatch@ which the
 -- 'VariantsetsPatch'' request conforms to.
@@ -67,14 +67,14 @@ type VariantsetsPatchResource =
 --
 -- /See:/ 'variantsetsPatch'' smart constructor.
 data VariantsetsPatch' = VariantsetsPatch'
-    { _vpQuotaUser :: !(Maybe Text)
-    , _vpPrettyPrint :: !Bool
+    { _vpQuotaUser    :: !(Maybe Text)
+    , _vpPrettyPrint  :: !Bool
     , _vpVariantSetId :: !Text
-    , _vpUserIP :: !(Maybe Text)
-    , _vpPayload :: !VariantSet
-    , _vpKey :: !(Maybe Key)
-    , _vpOAuthToken :: !(Maybe OAuthToken)
-    , _vpFields :: !(Maybe Text)
+    , _vpUserIP       :: !(Maybe Text)
+    , _vpPayload      :: !VariantSet
+    , _vpKey          :: !(Maybe Key)
+    , _vpOAuthToken   :: !(Maybe OAuthToken)
+    , _vpFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsPatch'' with the minimum fields required to make a request.
@@ -100,7 +100,7 @@ variantsetsPatch'
     :: Text -- ^ 'variantSetId'
     -> VariantSet -- ^ 'payload'
     -> VariantsetsPatch'
-variantsetsPatch' pVpVariantSetId_ pVpPayload_ = 
+variantsetsPatch' pVpVariantSetId_ pVpPayload_ =
     VariantsetsPatch'
     { _vpQuotaUser = Nothing
     , _vpPrettyPrint = True

@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.Readgroupsets.Update
     , ruFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReadgroupsetsUpdate@ which the
 -- 'ReadgroupsetsUpdate'' request conforms to.
@@ -65,14 +65,14 @@ type ReadgroupsetsUpdateResource =
 --
 -- /See:/ 'readgroupsetsUpdate'' smart constructor.
 data ReadgroupsetsUpdate' = ReadgroupsetsUpdate'
-    { _ruQuotaUser :: !(Maybe Text)
-    , _ruPrettyPrint :: !Bool
+    { _ruQuotaUser      :: !(Maybe Text)
+    , _ruPrettyPrint    :: !Bool
     , _ruReadGroupSetId :: !Text
-    , _ruUserIP :: !(Maybe Text)
-    , _ruPayload :: !ReadGroupSet
-    , _ruKey :: !(Maybe Key)
-    , _ruOAuthToken :: !(Maybe OAuthToken)
-    , _ruFields :: !(Maybe Text)
+    , _ruUserIP         :: !(Maybe Text)
+    , _ruPayload        :: !ReadGroupSet
+    , _ruKey            :: !(Maybe Key)
+    , _ruOAuthToken     :: !(Maybe OAuthToken)
+    , _ruFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsUpdate'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ readgroupsetsUpdate'
     :: Text -- ^ 'readGroupSetId'
     -> ReadGroupSet -- ^ 'payload'
     -> ReadgroupsetsUpdate'
-readgroupsetsUpdate' pRuReadGroupSetId_ pRuPayload_ = 
+readgroupsetsUpdate' pRuReadGroupSetId_ pRuPayload_ =
     ReadgroupsetsUpdate'
     { _ruQuotaUser = Nothing
     , _ruPrettyPrint = True

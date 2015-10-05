@@ -144,9 +144,9 @@ module Network.Google.ProximityBeacon.Types
     , gifobrBeacons
     ) where
 
-import Network.Google.Prelude
-import Network.Google.ProximityBeacon.Types.Product
-import Network.Google.ProximityBeacon.Types.Sum
+import           Network.Google.Prelude
+import           Network.Google.ProximityBeacon.Types.Product
+import           Network.Google.ProximityBeacon.Types.Sum
 
 -- | URL referring to version 'v1beta1' of the Google Proximity Beacon API.
 proximityBeaconURL :: BaseUrl

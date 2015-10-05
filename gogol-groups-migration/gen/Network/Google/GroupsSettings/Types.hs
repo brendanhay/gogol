@@ -51,9 +51,9 @@ module Network.Google.GroupsSettings.Types
     , gAllowWebPosting
     ) where
 
-import Network.Google.GroupsSettings.Types.Product
-import Network.Google.GroupsSettings.Types.Sum
-import Network.Google.Prelude
+import           Network.Google.GroupsSettings.Types.Product
+import           Network.Google.GroupsSettings.Types.Sum
+import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Groups Settings API.
 groupsSettingsURL :: BaseUrl

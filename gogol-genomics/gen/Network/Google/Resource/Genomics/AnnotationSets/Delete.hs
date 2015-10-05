@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.AnnotationSets.Delete
     , asdFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsAnnotationSetsDelete@ which the
 -- 'AnnotationSetsDelete'' request conforms to.
@@ -64,13 +64,13 @@ type AnnotationSetsDeleteResource =
 --
 -- /See:/ 'annotationSetsDelete'' smart constructor.
 data AnnotationSetsDelete' = AnnotationSetsDelete'
-    { _asdQuotaUser :: !(Maybe Text)
-    , _asdPrettyPrint :: !Bool
+    { _asdQuotaUser       :: !(Maybe Text)
+    , _asdPrettyPrint     :: !Bool
     , _asdAnnotationSetId :: !Text
-    , _asdUserIP :: !(Maybe Text)
-    , _asdKey :: !(Maybe Key)
-    , _asdOAuthToken :: !(Maybe OAuthToken)
-    , _asdFields :: !(Maybe Text)
+    , _asdUserIP          :: !(Maybe Text)
+    , _asdKey             :: !(Maybe Key)
+    , _asdOAuthToken      :: !(Maybe OAuthToken)
+    , _asdFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSetsDelete'' with the minimum fields required to make a request.
@@ -93,7 +93,7 @@ data AnnotationSetsDelete' = AnnotationSetsDelete'
 annotationSetsDelete'
     :: Text -- ^ 'annotationSetId'
     -> AnnotationSetsDelete'
-annotationSetsDelete' pAsdAnnotationSetId_ = 
+annotationSetsDelete' pAsdAnnotationSetId_ =
     AnnotationSetsDelete'
     { _asdQuotaUser = Nothing
     , _asdPrettyPrint = True

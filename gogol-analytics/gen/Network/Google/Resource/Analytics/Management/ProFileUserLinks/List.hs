@@ -46,8 +46,8 @@ module Network.Google.Resource.Analytics.Management.ProFileUserLinks.List
     , mpfullFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProFileUserLinksList@ which the
 -- 'ManagementProFileUserLinksList'' request conforms to.
@@ -75,17 +75,17 @@ type ManagementProFileUserLinksListResource =
 --
 -- /See:/ 'managementProFileUserLinksList'' smart constructor.
 data ManagementProFileUserLinksList' = ManagementProFileUserLinksList'
-    { _mpfullQuotaUser :: !(Maybe Text)
-    , _mpfullPrettyPrint :: !Bool
+    { _mpfullQuotaUser     :: !(Maybe Text)
+    , _mpfullPrettyPrint   :: !Bool
     , _mpfullWebPropertyId :: !Text
-    , _mpfullUserIP :: !(Maybe Text)
-    , _mpfullProFileId :: !Text
-    , _mpfullAccountId :: !Text
-    , _mpfullKey :: !(Maybe Key)
-    , _mpfullOAuthToken :: !(Maybe OAuthToken)
-    , _mpfullStartIndex :: !(Maybe Int32)
-    , _mpfullMaxResults :: !(Maybe Int32)
-    , _mpfullFields :: !(Maybe Text)
+    , _mpfullUserIP        :: !(Maybe Text)
+    , _mpfullProFileId     :: !Text
+    , _mpfullAccountId     :: !Text
+    , _mpfullKey           :: !(Maybe Key)
+    , _mpfullOAuthToken    :: !(Maybe OAuthToken)
+    , _mpfullStartIndex    :: !(Maybe Int32)
+    , _mpfullMaxResults    :: !(Maybe Int32)
+    , _mpfullFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFileUserLinksList'' with the minimum fields required to make a request.
@@ -118,7 +118,7 @@ managementProFileUserLinksList'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> ManagementProFileUserLinksList'
-managementProFileUserLinksList' pMpfullWebPropertyId_ pMpfullProFileId_ pMpfullAccountId_ = 
+managementProFileUserLinksList' pMpfullWebPropertyId_ pMpfullProFileId_ pMpfullAccountId_ =
     ManagementProFileUserLinksList'
     { _mpfullQuotaUser = Nothing
     , _mpfullPrettyPrint = False

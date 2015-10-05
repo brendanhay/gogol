@@ -43,8 +43,8 @@ module Network.Google.Resource.AdSense.AdClients.List
     , aclFields
     ) where
 
-import Network.Google.AdSense.Types
-import Network.Google.Prelude
+import           Network.Google.AdSense.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAdClientsList@ which the
 -- 'AdClientsList'' request conforms to.
@@ -64,14 +64,14 @@ type AdClientsListResource =
 --
 -- /See:/ 'adClientsList'' smart constructor.
 data AdClientsList' = AdClientsList'
-    { _aclQuotaUser :: !(Maybe Text)
+    { _aclQuotaUser   :: !(Maybe Text)
     , _aclPrettyPrint :: !Bool
-    , _aclUserIP :: !(Maybe Text)
-    , _aclKey :: !(Maybe Key)
-    , _aclPageToken :: !(Maybe Text)
-    , _aclOAuthToken :: !(Maybe OAuthToken)
-    , _aclMaxResults :: !(Maybe Int32)
-    , _aclFields :: !(Maybe Text)
+    , _aclUserIP      :: !(Maybe Text)
+    , _aclKey         :: !(Maybe Key)
+    , _aclPageToken   :: !(Maybe Text)
+    , _aclOAuthToken  :: !(Maybe OAuthToken)
+    , _aclMaxResults  :: !(Maybe Int32)
+    , _aclFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdClientsList'' with the minimum fields required to make a request.
@@ -95,7 +95,7 @@ data AdClientsList' = AdClientsList'
 -- * 'aclFields'
 adClientsList'
     :: AdClientsList'
-adClientsList' = 
+adClientsList' =
     AdClientsList'
     { _aclQuotaUser = Nothing
     , _aclPrettyPrint = True

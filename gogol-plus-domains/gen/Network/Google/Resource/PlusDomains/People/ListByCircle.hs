@@ -44,8 +44,8 @@ module Network.Google.Resource.PlusDomains.People.ListByCircle
     , plbcFields
     ) where
 
-import Network.Google.PlusDomains.Types
-import Network.Google.Prelude
+import           Network.Google.PlusDomains.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsPeopleListByCircle@ which the
 -- 'PeopleListByCircle'' request conforms to.
@@ -67,15 +67,15 @@ type PeopleListByCircleResource =
 --
 -- /See:/ 'peopleListByCircle'' smart constructor.
 data PeopleListByCircle' = PeopleListByCircle'
-    { _plbcQuotaUser :: !(Maybe Text)
+    { _plbcQuotaUser   :: !(Maybe Text)
     , _plbcPrettyPrint :: !Bool
-    , _plbcUserIP :: !(Maybe Text)
-    , _plbcKey :: !(Maybe Key)
-    , _plbcCircleId :: !Text
-    , _plbcPageToken :: !(Maybe Text)
-    , _plbcOAuthToken :: !(Maybe OAuthToken)
-    , _plbcMaxResults :: !Word32
-    , _plbcFields :: !(Maybe Text)
+    , _plbcUserIP      :: !(Maybe Text)
+    , _plbcKey         :: !(Maybe Key)
+    , _plbcCircleId    :: !Text
+    , _plbcPageToken   :: !(Maybe Text)
+    , _plbcOAuthToken  :: !(Maybe OAuthToken)
+    , _plbcMaxResults  :: !Word32
+    , _plbcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleListByCircle'' with the minimum fields required to make a request.
@@ -102,7 +102,7 @@ data PeopleListByCircle' = PeopleListByCircle'
 peopleListByCircle'
     :: Text -- ^ 'circleId'
     -> PeopleListByCircle'
-peopleListByCircle' pPlbcCircleId_ = 
+peopleListByCircle' pPlbcCircleId_ =
     PeopleListByCircle'
     { _plbcQuotaUser = Nothing
     , _plbcPrettyPrint = True

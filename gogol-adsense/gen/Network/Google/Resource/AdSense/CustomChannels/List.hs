@@ -45,8 +45,8 @@ module Network.Google.Resource.AdSense.CustomChannels.List
     , cclFields
     ) where
 
-import Network.Google.AdSense.Types
-import Network.Google.Prelude
+import           Network.Google.AdSense.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseCustomChannelsList@ which the
 -- 'CustomChannelsList'' request conforms to.
@@ -70,15 +70,15 @@ type CustomChannelsListResource =
 --
 -- /See:/ 'customChannelsList'' smart constructor.
 data CustomChannelsList' = CustomChannelsList'
-    { _cclQuotaUser :: !(Maybe Text)
+    { _cclQuotaUser   :: !(Maybe Text)
     , _cclPrettyPrint :: !Bool
-    , _cclUserIP :: !(Maybe Text)
-    , _cclAdClientId :: !Text
-    , _cclKey :: !(Maybe Key)
-    , _cclPageToken :: !(Maybe Text)
-    , _cclOAuthToken :: !(Maybe OAuthToken)
-    , _cclMaxResults :: !(Maybe Int32)
-    , _cclFields :: !(Maybe Text)
+    , _cclUserIP      :: !(Maybe Text)
+    , _cclAdClientId  :: !Text
+    , _cclKey         :: !(Maybe Key)
+    , _cclPageToken   :: !(Maybe Text)
+    , _cclOAuthToken  :: !(Maybe OAuthToken)
+    , _cclMaxResults  :: !(Maybe Int32)
+    , _cclFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomChannelsList'' with the minimum fields required to make a request.
@@ -105,7 +105,7 @@ data CustomChannelsList' = CustomChannelsList'
 customChannelsList'
     :: Text -- ^ 'adClientId'
     -> CustomChannelsList'
-customChannelsList' pCclAdClientId_ = 
+customChannelsList' pCclAdClientId_ =
     CustomChannelsList'
     { _cclQuotaUser = Nothing
     , _cclPrettyPrint = True

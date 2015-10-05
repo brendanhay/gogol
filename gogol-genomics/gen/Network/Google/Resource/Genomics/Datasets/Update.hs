@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.Datasets.Update
     , dFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsDatasetsUpdate@ which the
 -- 'DatasetsUpdate'' request conforms to.
@@ -64,14 +64,14 @@ type DatasetsUpdateResource =
 --
 -- /See:/ 'datasetsUpdate'' smart constructor.
 data DatasetsUpdate' = DatasetsUpdate'
-    { _dQuotaUser :: !(Maybe Text)
+    { _dQuotaUser   :: !(Maybe Text)
     , _dPrettyPrint :: !Bool
-    , _dUserIP :: !(Maybe Text)
-    , _dPayload :: !Dataset
-    , _dKey :: !(Maybe Key)
-    , _dDatasetId :: !Text
-    , _dOAuthToken :: !(Maybe OAuthToken)
-    , _dFields :: !(Maybe Text)
+    , _dUserIP      :: !(Maybe Text)
+    , _dPayload     :: !Dataset
+    , _dKey         :: !(Maybe Key)
+    , _dDatasetId   :: !Text
+    , _dOAuthToken  :: !(Maybe OAuthToken)
+    , _dFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsUpdate'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ datasetsUpdate'
     :: Dataset -- ^ 'payload'
     -> Text -- ^ 'datasetId'
     -> DatasetsUpdate'
-datasetsUpdate' pDPayload_ pDDatasetId_ = 
+datasetsUpdate' pDPayload_ pDDatasetId_ =
     DatasetsUpdate'
     { _dQuotaUser = Nothing
     , _dPrettyPrint = True

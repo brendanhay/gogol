@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.Annotations.Delete
     , adFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsAnnotationsDelete@ which the
 -- 'AnnotationsDelete'' request conforms to.
@@ -64,13 +64,13 @@ type AnnotationsDeleteResource =
 --
 -- /See:/ 'annotationsDelete'' smart constructor.
 data AnnotationsDelete' = AnnotationsDelete'
-    { _adQuotaUser :: !(Maybe Text)
-    , _adPrettyPrint :: !Bool
-    , _adUserIP :: !(Maybe Text)
-    , _adKey :: !(Maybe Key)
+    { _adQuotaUser    :: !(Maybe Text)
+    , _adPrettyPrint  :: !Bool
+    , _adUserIP       :: !(Maybe Text)
+    , _adKey          :: !(Maybe Key)
     , _adAnnotationId :: !Text
-    , _adOAuthToken :: !(Maybe OAuthToken)
-    , _adFields :: !(Maybe Text)
+    , _adOAuthToken   :: !(Maybe OAuthToken)
+    , _adFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsDelete'' with the minimum fields required to make a request.
@@ -93,7 +93,7 @@ data AnnotationsDelete' = AnnotationsDelete'
 annotationsDelete'
     :: Text -- ^ 'annotationId'
     -> AnnotationsDelete'
-annotationsDelete' pAdAnnotationId_ = 
+annotationsDelete' pAdAnnotationId_ =
     AnnotationsDelete'
     { _adQuotaUser = Nothing
     , _adPrettyPrint = True

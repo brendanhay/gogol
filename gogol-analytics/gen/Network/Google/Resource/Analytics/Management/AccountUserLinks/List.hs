@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.List
     , maullFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementAccountUserLinksList@ which the
 -- 'ManagementAccountUserLinksList'' request conforms to.
@@ -69,15 +69,15 @@ type ManagementAccountUserLinksListResource =
 --
 -- /See:/ 'managementAccountUserLinksList'' smart constructor.
 data ManagementAccountUserLinksList' = ManagementAccountUserLinksList'
-    { _maullQuotaUser :: !(Maybe Text)
+    { _maullQuotaUser   :: !(Maybe Text)
     , _maullPrettyPrint :: !Bool
-    , _maullUserIP :: !(Maybe Text)
-    , _maullAccountId :: !Text
-    , _maullKey :: !(Maybe Key)
-    , _maullOAuthToken :: !(Maybe OAuthToken)
-    , _maullStartIndex :: !(Maybe Int32)
-    , _maullMaxResults :: !(Maybe Int32)
-    , _maullFields :: !(Maybe Text)
+    , _maullUserIP      :: !(Maybe Text)
+    , _maullAccountId   :: !Text
+    , _maullKey         :: !(Maybe Key)
+    , _maullOAuthToken  :: !(Maybe OAuthToken)
+    , _maullStartIndex  :: !(Maybe Int32)
+    , _maullMaxResults  :: !(Maybe Int32)
+    , _maullFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksList'' with the minimum fields required to make a request.
@@ -104,7 +104,7 @@ data ManagementAccountUserLinksList' = ManagementAccountUserLinksList'
 managementAccountUserLinksList'
     :: Text -- ^ 'accountId'
     -> ManagementAccountUserLinksList'
-managementAccountUserLinksList' pMaullAccountId_ = 
+managementAccountUserLinksList' pMaullAccountId_ =
     ManagementAccountUserLinksList'
     { _maullQuotaUser = Nothing
     , _maullPrettyPrint = False

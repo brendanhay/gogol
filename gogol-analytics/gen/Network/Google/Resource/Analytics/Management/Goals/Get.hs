@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.Goals.Get
     , mggFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementGoalsGet@ which the
 -- 'ManagementGoalsGet'' request conforms to.
@@ -72,16 +72,16 @@ type ManagementGoalsGetResource =
 --
 -- /See:/ 'managementGoalsGet'' smart constructor.
 data ManagementGoalsGet' = ManagementGoalsGet'
-    { _mggQuotaUser :: !(Maybe Text)
-    , _mggPrettyPrint :: !Bool
+    { _mggQuotaUser     :: !(Maybe Text)
+    , _mggPrettyPrint   :: !Bool
     , _mggWebPropertyId :: !Text
-    , _mggGoalId :: !Text
-    , _mggUserIP :: !(Maybe Text)
-    , _mggProFileId :: !Text
-    , _mggAccountId :: !Text
-    , _mggKey :: !(Maybe Key)
-    , _mggOAuthToken :: !(Maybe OAuthToken)
-    , _mggFields :: !(Maybe Text)
+    , _mggGoalId        :: !Text
+    , _mggUserIP        :: !(Maybe Text)
+    , _mggProFileId     :: !Text
+    , _mggAccountId     :: !Text
+    , _mggKey           :: !(Maybe Key)
+    , _mggOAuthToken    :: !(Maybe OAuthToken)
+    , _mggFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementGoalsGet'' with the minimum fields required to make a request.
@@ -113,7 +113,7 @@ managementGoalsGet'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> ManagementGoalsGet'
-managementGoalsGet' pMggWebPropertyId_ pMggGoalId_ pMggProFileId_ pMggAccountId_ = 
+managementGoalsGet' pMggWebPropertyId_ pMggGoalId_ pMggProFileId_ pMggAccountId_ =
     ManagementGoalsGet'
     { _mggQuotaUser = Nothing
     , _mggPrettyPrint = False

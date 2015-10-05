@@ -43,8 +43,8 @@ module Network.Google.Resource.Calendar.Calendars.Patch
     , cpFields
     ) where
 
-import Network.Google.AppsCalendar.Types
-import Network.Google.Prelude
+import           Network.Google.AppsCalendar.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarCalendarsPatch@ which the
 -- 'CalendarsPatch'' request conforms to.
@@ -64,14 +64,14 @@ type CalendarsPatchResource =
 --
 -- /See:/ 'calendarsPatch'' smart constructor.
 data CalendarsPatch' = CalendarsPatch'
-    { _cpQuotaUser :: !(Maybe Text)
-    , _cpCalendarId :: !Text
+    { _cpQuotaUser   :: !(Maybe Text)
+    , _cpCalendarId  :: !Text
     , _cpPrettyPrint :: !Bool
-    , _cpUserIP :: !(Maybe Text)
-    , _cpPayload :: !Calendar
-    , _cpKey :: !(Maybe Key)
-    , _cpOAuthToken :: !(Maybe OAuthToken)
-    , _cpFields :: !(Maybe Text)
+    , _cpUserIP      :: !(Maybe Text)
+    , _cpPayload     :: !Calendar
+    , _cpKey         :: !(Maybe Key)
+    , _cpOAuthToken  :: !(Maybe OAuthToken)
+    , _cpFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarsPatch'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ calendarsPatch'
     :: Text -- ^ 'calendarId'
     -> Calendar -- ^ 'payload'
     -> CalendarsPatch'
-calendarsPatch' pCpCalendarId_ pCpPayload_ = 
+calendarsPatch' pCpCalendarId_ pCpPayload_ =
     CalendarsPatch'
     { _cpQuotaUser = Nothing
     , _cpCalendarId = pCpCalendarId_

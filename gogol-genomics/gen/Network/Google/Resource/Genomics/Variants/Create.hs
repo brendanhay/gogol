@@ -42,8 +42,8 @@ module Network.Google.Resource.Genomics.Variants.Create
     , varFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsCreate@ which the
 -- 'VariantsCreate'' request conforms to.
@@ -62,13 +62,13 @@ type VariantsCreateResource =
 --
 -- /See:/ 'variantsCreate'' smart constructor.
 data VariantsCreate' = VariantsCreate'
-    { _varQuotaUser :: !(Maybe Text)
+    { _varQuotaUser   :: !(Maybe Text)
     , _varPrettyPrint :: !Bool
-    , _varUserIP :: !(Maybe Text)
-    , _varPayload :: !Variant
-    , _varKey :: !(Maybe Key)
-    , _varOAuthToken :: !(Maybe OAuthToken)
-    , _varFields :: !(Maybe Text)
+    , _varUserIP      :: !(Maybe Text)
+    , _varPayload     :: !Variant
+    , _varKey         :: !(Maybe Key)
+    , _varOAuthToken  :: !(Maybe OAuthToken)
+    , _varFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsCreate'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data VariantsCreate' = VariantsCreate'
 variantsCreate'
     :: Variant -- ^ 'payload'
     -> VariantsCreate'
-variantsCreate' pVarPayload_ = 
+variantsCreate' pVarPayload_ =
     VariantsCreate'
     { _varQuotaUser = Nothing
     , _varPrettyPrint = True

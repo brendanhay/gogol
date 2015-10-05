@@ -719,9 +719,9 @@ module Network.Google.Genomics.Types
     , rsDescription
     ) where
 
-import Network.Google.Genomics.Types.Product
-import Network.Google.Genomics.Types.Sum
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types.Product
+import           Network.Google.Genomics.Types.Sum
+import           Network.Google.Prelude
 
 -- | URL referring to version 'v1beta2' of the Genomics API.
 genomicsURL :: BaseUrl

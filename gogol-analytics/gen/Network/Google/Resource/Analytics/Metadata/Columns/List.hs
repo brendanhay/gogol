@@ -42,8 +42,8 @@ module Network.Google.Resource.Analytics.Metadata.Columns.List
     , mclFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsMetadataColumnsList@ which the
 -- 'MetadataColumnsList'' request conforms to.
@@ -63,13 +63,13 @@ type MetadataColumnsListResource =
 --
 -- /See:/ 'metadataColumnsList'' smart constructor.
 data MetadataColumnsList' = MetadataColumnsList'
-    { _mclQuotaUser :: !(Maybe Text)
+    { _mclQuotaUser   :: !(Maybe Text)
     , _mclPrettyPrint :: !Bool
-    , _mclUserIP :: !(Maybe Text)
-    , _mclKey :: !(Maybe Key)
-    , _mclOAuthToken :: !(Maybe OAuthToken)
-    , _mclReportType :: !Text
-    , _mclFields :: !(Maybe Text)
+    , _mclUserIP      :: !(Maybe Text)
+    , _mclKey         :: !(Maybe Key)
+    , _mclOAuthToken  :: !(Maybe OAuthToken)
+    , _mclReportType  :: !Text
+    , _mclFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetadataColumnsList'' with the minimum fields required to make a request.
@@ -92,7 +92,7 @@ data MetadataColumnsList' = MetadataColumnsList'
 metadataColumnsList'
     :: Text -- ^ 'reportType'
     -> MetadataColumnsList'
-metadataColumnsList' pMclReportType_ = 
+metadataColumnsList' pMclReportType_ =
     MetadataColumnsList'
     { _mclQuotaUser = Nothing
     , _mclPrettyPrint = False

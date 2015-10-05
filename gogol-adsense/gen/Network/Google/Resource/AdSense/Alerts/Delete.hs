@@ -43,8 +43,8 @@ module Network.Google.Resource.AdSense.Alerts.Delete
     , adFields
     ) where
 
-import Network.Google.AdSense.Types
-import Network.Google.Prelude
+import           Network.Google.AdSense.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAlertsDelete@ which the
 -- 'AlertsDelete'' request conforms to.
@@ -64,13 +64,13 @@ type AlertsDeleteResource =
 --
 -- /See:/ 'alertsDelete'' smart constructor.
 data AlertsDelete' = AlertsDelete'
-    { _adQuotaUser :: !(Maybe Text)
+    { _adQuotaUser   :: !(Maybe Text)
     , _adPrettyPrint :: !Bool
-    , _adUserIP :: !(Maybe Text)
-    , _adAlertId :: !Text
-    , _adKey :: !(Maybe Key)
-    , _adOAuthToken :: !(Maybe OAuthToken)
-    , _adFields :: !(Maybe Text)
+    , _adUserIP      :: !(Maybe Text)
+    , _adAlertId     :: !Text
+    , _adKey         :: !(Maybe Key)
+    , _adOAuthToken  :: !(Maybe OAuthToken)
+    , _adFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AlertsDelete'' with the minimum fields required to make a request.
@@ -93,7 +93,7 @@ data AlertsDelete' = AlertsDelete'
 alertsDelete'
     :: Text -- ^ 'alertId'
     -> AlertsDelete'
-alertsDelete' pAdAlertId_ = 
+alertsDelete' pAdAlertId_ =
     AlertsDelete'
     { _adQuotaUser = Nothing
     , _adPrettyPrint = True

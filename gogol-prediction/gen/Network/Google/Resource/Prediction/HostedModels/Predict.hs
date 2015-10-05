@@ -44,8 +44,8 @@ module Network.Google.Resource.Prediction.HostedModels.Predict
     , hmpHostedModelName
     ) where
 
-import Network.Google.Prediction.Types
-import Network.Google.Prelude
+import           Network.Google.Prediction.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @PredictionHostedModelsPredict@ which the
 -- 'HostedModelsPredict'' request conforms to.
@@ -67,14 +67,14 @@ type HostedModelsPredictResource =
 --
 -- /See:/ 'hostedModelsPredict'' smart constructor.
 data HostedModelsPredict' = HostedModelsPredict'
-    { _hmpQuotaUser :: !(Maybe Text)
-    , _hmpPrettyPrint :: !Bool
-    , _hmpProject :: !Text
-    , _hmpUserIP :: !(Maybe Text)
-    , _hmpPayload :: !Input
-    , _hmpKey :: !(Maybe Key)
-    , _hmpOAuthToken :: !(Maybe OAuthToken)
-    , _hmpFields :: !(Maybe Text)
+    { _hmpQuotaUser       :: !(Maybe Text)
+    , _hmpPrettyPrint     :: !Bool
+    , _hmpProject         :: !Text
+    , _hmpUserIP          :: !(Maybe Text)
+    , _hmpPayload         :: !Input
+    , _hmpKey             :: !(Maybe Key)
+    , _hmpOAuthToken      :: !(Maybe OAuthToken)
+    , _hmpFields          :: !(Maybe Text)
     , _hmpHostedModelName :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -104,7 +104,7 @@ hostedModelsPredict'
     -> Input -- ^ 'payload'
     -> Text -- ^ 'hostedModelName'
     -> HostedModelsPredict'
-hostedModelsPredict' pHmpProject_ pHmpPayload_ pHmpHostedModelName_ = 
+hostedModelsPredict' pHmpProject_ pHmpPayload_ pHmpHostedModelName_ =
     HostedModelsPredict'
     { _hmpQuotaUser = Nothing
     , _hmpPrettyPrint = True

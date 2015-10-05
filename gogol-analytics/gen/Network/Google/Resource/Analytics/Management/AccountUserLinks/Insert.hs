@@ -43,8 +43,8 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.Insert
     , mauliFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementAccountUserLinksInsert@ which the
 -- 'ManagementAccountUserLinksInsert'' request conforms to.
@@ -67,14 +67,14 @@ type ManagementAccountUserLinksInsertResource =
 --
 -- /See:/ 'managementAccountUserLinksInsert'' smart constructor.
 data ManagementAccountUserLinksInsert' = ManagementAccountUserLinksInsert'
-    { _mauliQuotaUser :: !(Maybe Text)
+    { _mauliQuotaUser   :: !(Maybe Text)
     , _mauliPrettyPrint :: !Bool
-    , _mauliUserIP :: !(Maybe Text)
-    , _mauliPayload :: !EntityUserLink
-    , _mauliAccountId :: !Text
-    , _mauliKey :: !(Maybe Key)
-    , _mauliOAuthToken :: !(Maybe OAuthToken)
-    , _mauliFields :: !(Maybe Text)
+    , _mauliUserIP      :: !(Maybe Text)
+    , _mauliPayload     :: !EntityUserLink
+    , _mauliAccountId   :: !Text
+    , _mauliKey         :: !(Maybe Key)
+    , _mauliOAuthToken  :: !(Maybe OAuthToken)
+    , _mauliFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksInsert'' with the minimum fields required to make a request.
@@ -100,7 +100,7 @@ managementAccountUserLinksInsert'
     :: EntityUserLink -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementAccountUserLinksInsert'
-managementAccountUserLinksInsert' pMauliPayload_ pMauliAccountId_ = 
+managementAccountUserLinksInsert' pMauliPayload_ pMauliAccountId_ =
     ManagementAccountUserLinksInsert'
     { _mauliQuotaUser = Nothing
     , _mauliPrettyPrint = False

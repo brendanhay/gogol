@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer.Negotiations.Get
     , ngFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerNegotiationsGet@ which the
 -- 'NegotiationsGet'' request conforms to.
@@ -65,14 +65,14 @@ type NegotiationsGetResource =
 --
 -- /See:/ 'negotiationsGet'' smart constructor.
 data NegotiationsGet' = NegotiationsGet'
-    { _ngQuotaUser :: !(Maybe Text)
-    , _ngPrettyPrint :: !Bool
-    , _ngUserIP :: !(Maybe Text)
-    , _ngPayload :: !GetNegotiationByIdRequest
-    , _ngKey :: !(Maybe Key)
-    , _ngOAuthToken :: !(Maybe OAuthToken)
+    { _ngQuotaUser     :: !(Maybe Text)
+    , _ngPrettyPrint   :: !Bool
+    , _ngUserIP        :: !(Maybe Text)
+    , _ngPayload       :: !GetNegotiationByIdRequest
+    , _ngKey           :: !(Maybe Key)
+    , _ngOAuthToken    :: !(Maybe OAuthToken)
     , _ngNegotiationId :: !Int64
-    , _ngFields :: !(Maybe Text)
+    , _ngFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationsGet'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ negotiationsGet'
     :: GetNegotiationByIdRequest -- ^ 'payload'
     -> Int64 -- ^ 'negotiationId'
     -> NegotiationsGet'
-negotiationsGet' pNgPayload_ pNgNegotiationId_ = 
+negotiationsGet' pNgPayload_ pNgNegotiationId_ =
     NegotiationsGet'
     { _ngQuotaUser = Nothing
     , _ngPrettyPrint = True

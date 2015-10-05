@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Insert
     , mdiFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplaceDealsInsert@ which the
 -- 'MarketplaceDealsInsert'' request conforms to.
@@ -67,14 +67,14 @@ type MarketplaceDealsInsertResource =
 --
 -- /See:/ 'marketplaceDealsInsert'' smart constructor.
 data MarketplaceDealsInsert' = MarketplaceDealsInsert'
-    { _mdiQuotaUser :: !(Maybe Text)
+    { _mdiQuotaUser   :: !(Maybe Text)
     , _mdiPrettyPrint :: !Bool
-    , _mdiUserIP :: !(Maybe Text)
-    , _mdiPayload :: !AddOrderDealsRequest
-    , _mdiKey :: !(Maybe Key)
-    , _mdiOAuthToken :: !(Maybe OAuthToken)
-    , _mdiOrderId :: !Text
-    , _mdiFields :: !(Maybe Text)
+    , _mdiUserIP      :: !(Maybe Text)
+    , _mdiPayload     :: !AddOrderDealsRequest
+    , _mdiKey         :: !(Maybe Key)
+    , _mdiOAuthToken  :: !(Maybe OAuthToken)
+    , _mdiOrderId     :: !Text
+    , _mdiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceDealsInsert'' with the minimum fields required to make a request.
@@ -100,7 +100,7 @@ marketplaceDealsInsert'
     :: AddOrderDealsRequest -- ^ 'payload'
     -> Text -- ^ 'orderId'
     -> MarketplaceDealsInsert'
-marketplaceDealsInsert' pMdiPayload_ pMdiOrderId_ = 
+marketplaceDealsInsert' pMdiPayload_ pMdiOrderId_ =
     MarketplaceDealsInsert'
     { _mdiQuotaUser = Nothing
     , _mdiPrettyPrint = True

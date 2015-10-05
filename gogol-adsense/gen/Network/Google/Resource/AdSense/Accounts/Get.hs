@@ -43,8 +43,8 @@ module Network.Google.Resource.AdSense.Accounts.Get
     , agFields
     ) where
 
-import Network.Google.AdSense.Types
-import Network.Google.Prelude
+import           Network.Google.AdSense.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsGet@ which the
 -- 'AccountsGet'' request conforms to.
@@ -64,14 +64,14 @@ type AccountsGetResource =
 --
 -- /See:/ 'accountsGet'' smart constructor.
 data AccountsGet' = AccountsGet'
-    { _agQuotaUser :: !(Maybe Text)
+    { _agQuotaUser   :: !(Maybe Text)
     , _agPrettyPrint :: !Bool
-    , _agUserIP :: !(Maybe Text)
-    , _agTree :: !(Maybe Bool)
-    , _agAccountId :: !Text
-    , _agKey :: !(Maybe Key)
-    , _agOAuthToken :: !(Maybe OAuthToken)
-    , _agFields :: !(Maybe Text)
+    , _agUserIP      :: !(Maybe Text)
+    , _agTree        :: !(Maybe Bool)
+    , _agAccountId   :: !Text
+    , _agKey         :: !(Maybe Key)
+    , _agOAuthToken  :: !(Maybe OAuthToken)
+    , _agFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsGet'' with the minimum fields required to make a request.
@@ -96,7 +96,7 @@ data AccountsGet' = AccountsGet'
 accountsGet'
     :: Text -- ^ 'accountId'
     -> AccountsGet'
-accountsGet' pAgAccountId_ = 
+accountsGet' pAgAccountId_ =
     AccountsGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True

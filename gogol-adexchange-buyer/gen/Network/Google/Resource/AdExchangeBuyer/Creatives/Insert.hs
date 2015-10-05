@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer.Creatives.Insert
     , ciFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerCreativesInsert@ which the
 -- 'CreativesInsert'' request conforms to.
@@ -62,13 +62,13 @@ type CreativesInsertResource =
 --
 -- /See:/ 'creativesInsert'' smart constructor.
 data CreativesInsert' = CreativesInsert'
-    { _ciQuotaUser :: !(Maybe Text)
+    { _ciQuotaUser   :: !(Maybe Text)
     , _ciPrettyPrint :: !Bool
-    , _ciUserIP :: !(Maybe Text)
-    , _ciPayload :: !Creative
-    , _ciKey :: !(Maybe Key)
-    , _ciOAuthToken :: !(Maybe OAuthToken)
-    , _ciFields :: !(Maybe Text)
+    , _ciUserIP      :: !(Maybe Text)
+    , _ciPayload     :: !Creative
+    , _ciKey         :: !(Maybe Key)
+    , _ciOAuthToken  :: !(Maybe OAuthToken)
+    , _ciFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesInsert'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data CreativesInsert' = CreativesInsert'
 creativesInsert'
     :: Creative -- ^ 'payload'
     -> CreativesInsert'
-creativesInsert' pCiPayload_ = 
+creativesInsert' pCiPayload_ =
     CreativesInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True

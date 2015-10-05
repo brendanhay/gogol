@@ -16,7 +16,7 @@
 --
 module Network.Google.PageSpeed.Types.Sum where
 
-import Network.Google.Prelude
+import           Network.Google.Prelude
 
 -- | The analysis strategy to use
 data PagespeedapiRunpagespeedStrategy

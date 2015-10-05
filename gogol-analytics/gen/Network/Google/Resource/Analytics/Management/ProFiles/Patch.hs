@@ -46,8 +46,8 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Patch
     , mpfpFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProFilesPatch@ which the
 -- 'ManagementProFilesPatch'' request conforms to.
@@ -74,16 +74,16 @@ type ManagementProFilesPatchResource =
 --
 -- /See:/ 'managementProFilesPatch'' smart constructor.
 data ManagementProFilesPatch' = ManagementProFilesPatch'
-    { _mpfpQuotaUser :: !(Maybe Text)
-    , _mpfpPrettyPrint :: !Bool
+    { _mpfpQuotaUser     :: !(Maybe Text)
+    , _mpfpPrettyPrint   :: !Bool
     , _mpfpWebPropertyId :: !Text
-    , _mpfpUserIP :: !(Maybe Text)
-    , _mpfpProFileId :: !Text
-    , _mpfpPayload :: !ProFile
-    , _mpfpAccountId :: !Text
-    , _mpfpKey :: !(Maybe Key)
-    , _mpfpOAuthToken :: !(Maybe OAuthToken)
-    , _mpfpFields :: !(Maybe Text)
+    , _mpfpUserIP        :: !(Maybe Text)
+    , _mpfpProFileId     :: !Text
+    , _mpfpPayload       :: !ProFile
+    , _mpfpAccountId     :: !Text
+    , _mpfpKey           :: !(Maybe Key)
+    , _mpfpOAuthToken    :: !(Maybe OAuthToken)
+    , _mpfpFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFilesPatch'' with the minimum fields required to make a request.
@@ -115,7 +115,7 @@ managementProFilesPatch'
     -> ProFile -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementProFilesPatch'
-managementProFilesPatch' pMpfpWebPropertyId_ pMpfpProFileId_ pMpfpPayload_ pMpfpAccountId_ = 
+managementProFilesPatch' pMpfpWebPropertyId_ pMpfpProFileId_ pMpfpPayload_ pMpfpAccountId_ =
     ManagementProFilesPatch'
     { _mpfpQuotaUser = Nothing
     , _mpfpPrettyPrint = False

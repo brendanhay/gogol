@@ -42,8 +42,8 @@ module Network.Google.Resource.Genomics.Variants.Delete
     , vdFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsDelete@ which the
 -- 'VariantsDelete'' request conforms to.
@@ -62,13 +62,13 @@ type VariantsDeleteResource =
 --
 -- /See:/ 'variantsDelete'' smart constructor.
 data VariantsDelete' = VariantsDelete'
-    { _vdQuotaUser :: !(Maybe Text)
+    { _vdQuotaUser   :: !(Maybe Text)
     , _vdPrettyPrint :: !Bool
-    , _vdUserIP :: !(Maybe Text)
-    , _vdKey :: !(Maybe Key)
-    , _vdVariantId :: !Text
-    , _vdOAuthToken :: !(Maybe OAuthToken)
-    , _vdFields :: !(Maybe Text)
+    , _vdUserIP      :: !(Maybe Text)
+    , _vdKey         :: !(Maybe Key)
+    , _vdVariantId   :: !Text
+    , _vdOAuthToken  :: !(Maybe OAuthToken)
+    , _vdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsDelete'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data VariantsDelete' = VariantsDelete'
 variantsDelete'
     :: Text -- ^ 'variantId'
     -> VariantsDelete'
-variantsDelete' pVdVariantId_ = 
+variantsDelete' pVdVariantId_ =
     VariantsDelete'
     { _vdQuotaUser = Nothing
     , _vdPrettyPrint = True

@@ -44,8 +44,8 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Update
     , pcuFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerPretargetingConfigUpdate@ which the
 -- 'PretargetingConfigUpdate'' request conforms to.
@@ -67,15 +67,15 @@ type PretargetingConfigUpdateResource =
 --
 -- /See:/ 'pretargetingConfigUpdate'' smart constructor.
 data PretargetingConfigUpdate' = PretargetingConfigUpdate'
-    { _pcuQuotaUser :: !(Maybe Text)
+    { _pcuQuotaUser   :: !(Maybe Text)
     , _pcuPrettyPrint :: !Bool
-    , _pcuUserIP :: !(Maybe Text)
-    , _pcuPayload :: !PretargetingConfig
-    , _pcuAccountId :: !Int64
-    , _pcuKey :: !(Maybe Key)
-    , _pcuConfigId :: !Int64
-    , _pcuOAuthToken :: !(Maybe OAuthToken)
-    , _pcuFields :: !(Maybe Text)
+    , _pcuUserIP      :: !(Maybe Text)
+    , _pcuPayload     :: !PretargetingConfig
+    , _pcuAccountId   :: !Int64
+    , _pcuKey         :: !(Maybe Key)
+    , _pcuConfigId    :: !Int64
+    , _pcuOAuthToken  :: !(Maybe OAuthToken)
+    , _pcuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigUpdate'' with the minimum fields required to make a request.
@@ -104,7 +104,7 @@ pretargetingConfigUpdate'
     -> Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'configId'
     -> PretargetingConfigUpdate'
-pretargetingConfigUpdate' pPcuPayload_ pPcuAccountId_ pPcuConfigId_ = 
+pretargetingConfigUpdate' pPcuPayload_ pPcuAccountId_ pPcuConfigId_ =
     PretargetingConfigUpdate'
     { _pcuQuotaUser = Nothing
     , _pcuPrettyPrint = True

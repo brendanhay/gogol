@@ -44,8 +44,8 @@ module Network.Google.Resource.Prediction.TrainedModels.Update
     , tmuFields
     ) where
 
-import Network.Google.Prediction.Types
-import Network.Google.Prelude
+import           Network.Google.Prediction.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @PredictionTrainedModelsUpdate@ which the
 -- 'TrainedModelsUpdate'' request conforms to.
@@ -66,15 +66,15 @@ type TrainedModelsUpdateResource =
 --
 -- /See:/ 'trainedModelsUpdate'' smart constructor.
 data TrainedModelsUpdate' = TrainedModelsUpdate'
-    { _tmuQuotaUser :: !(Maybe Text)
+    { _tmuQuotaUser   :: !(Maybe Text)
     , _tmuPrettyPrint :: !Bool
-    , _tmuProject :: !Text
-    , _tmuUserIP :: !(Maybe Text)
-    , _tmuPayload :: !Update
-    , _tmuKey :: !(Maybe Key)
-    , _tmuId :: !Text
-    , _tmuOAuthToken :: !(Maybe OAuthToken)
-    , _tmuFields :: !(Maybe Text)
+    , _tmuProject     :: !Text
+    , _tmuUserIP      :: !(Maybe Text)
+    , _tmuPayload     :: !Update
+    , _tmuKey         :: !(Maybe Key)
+    , _tmuId          :: !Text
+    , _tmuOAuthToken  :: !(Maybe OAuthToken)
+    , _tmuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrainedModelsUpdate'' with the minimum fields required to make a request.
@@ -103,7 +103,7 @@ trainedModelsUpdate'
     -> Update -- ^ 'payload'
     -> Text -- ^ 'id'
     -> TrainedModelsUpdate'
-trainedModelsUpdate' pTmuProject_ pTmuPayload_ pTmuId_ = 
+trainedModelsUpdate' pTmuProject_ pTmuPayload_ pTmuId_ =
     TrainedModelsUpdate'
     { _tmuQuotaUser = Nothing
     , _tmuPrettyPrint = True

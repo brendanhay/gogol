@@ -43,8 +43,8 @@ module Network.Google.Resource.PlusDomains.Circles.Patch
     , cpFields
     ) where
 
-import Network.Google.PlusDomains.Types
-import Network.Google.Prelude
+import           Network.Google.PlusDomains.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsCirclesPatch@ which the
 -- 'CirclesPatch'' request conforms to.
@@ -64,14 +64,14 @@ type CirclesPatchResource =
 --
 -- /See:/ 'circlesPatch'' smart constructor.
 data CirclesPatch' = CirclesPatch'
-    { _cpQuotaUser :: !(Maybe Text)
+    { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
-    , _cpUserIP :: !(Maybe Text)
-    , _cpPayload :: !Circle
-    , _cpKey :: !(Maybe Key)
-    , _cpCircleId :: !Text
-    , _cpOAuthToken :: !(Maybe OAuthToken)
-    , _cpFields :: !(Maybe Text)
+    , _cpUserIP      :: !(Maybe Text)
+    , _cpPayload     :: !Circle
+    , _cpKey         :: !(Maybe Key)
+    , _cpCircleId    :: !Text
+    , _cpOAuthToken  :: !(Maybe OAuthToken)
+    , _cpFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesPatch'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ circlesPatch'
     :: Circle -- ^ 'payload'
     -> Text -- ^ 'circleId'
     -> CirclesPatch'
-circlesPatch' pCpPayload_ pCpCircleId_ = 
+circlesPatch' pCpPayload_ pCpCircleId_ =
     CirclesPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True

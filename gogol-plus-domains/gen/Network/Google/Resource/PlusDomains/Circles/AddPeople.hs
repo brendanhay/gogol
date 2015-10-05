@@ -45,8 +45,8 @@ module Network.Google.Resource.PlusDomains.Circles.AddPeople
     , capFields
     ) where
 
-import Network.Google.PlusDomains.Types
-import Network.Google.Prelude
+import           Network.Google.PlusDomains.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsCirclesAddPeople@ which the
 -- 'CirclesAddPeople'' request conforms to.
@@ -69,15 +69,15 @@ type CirclesAddPeopleResource =
 --
 -- /See:/ 'circlesAddPeople'' smart constructor.
 data CirclesAddPeople' = CirclesAddPeople'
-    { _capEmail :: !(Maybe [Text])
-    , _capQuotaUser :: !(Maybe Text)
+    { _capEmail       :: !(Maybe [Text])
+    , _capQuotaUser   :: !(Maybe Text)
     , _capPrettyPrint :: !Bool
-    , _capUserIP :: !(Maybe Text)
-    , _capUserId :: !(Maybe [Text])
-    , _capKey :: !(Maybe Key)
-    , _capCircleId :: !Text
-    , _capOAuthToken :: !(Maybe OAuthToken)
-    , _capFields :: !(Maybe Text)
+    , _capUserIP      :: !(Maybe Text)
+    , _capUserId      :: !(Maybe [Text])
+    , _capKey         :: !(Maybe Key)
+    , _capCircleId    :: !Text
+    , _capOAuthToken  :: !(Maybe OAuthToken)
+    , _capFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesAddPeople'' with the minimum fields required to make a request.
@@ -104,7 +104,7 @@ data CirclesAddPeople' = CirclesAddPeople'
 circlesAddPeople'
     :: Text -- ^ 'circleId'
     -> CirclesAddPeople'
-circlesAddPeople' pCapCircleId_ = 
+circlesAddPeople' pCapCircleId_ =
     CirclesAddPeople'
     { _capEmail = Nothing
     , _capQuotaUser = Nothing

@@ -45,8 +45,8 @@ module Network.Google.Resource.AdSense.URLChannels.List
     , uclFields
     ) where
 
-import Network.Google.AdSense.Types
-import Network.Google.Prelude
+import           Network.Google.AdSense.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseURLChannelsList@ which the
 -- 'URLChannelsList'' request conforms to.
@@ -69,15 +69,15 @@ type URLChannelsListResource =
 --
 -- /See:/ 'urlChannelsList'' smart constructor.
 data URLChannelsList' = URLChannelsList'
-    { _uclQuotaUser :: !(Maybe Text)
+    { _uclQuotaUser   :: !(Maybe Text)
     , _uclPrettyPrint :: !Bool
-    , _uclUserIP :: !(Maybe Text)
-    , _uclAdClientId :: !Text
-    , _uclKey :: !(Maybe Key)
-    , _uclPageToken :: !(Maybe Text)
-    , _uclOAuthToken :: !(Maybe OAuthToken)
-    , _uclMaxResults :: !(Maybe Int32)
-    , _uclFields :: !(Maybe Text)
+    , _uclUserIP      :: !(Maybe Text)
+    , _uclAdClientId  :: !Text
+    , _uclKey         :: !(Maybe Key)
+    , _uclPageToken   :: !(Maybe Text)
+    , _uclOAuthToken  :: !(Maybe OAuthToken)
+    , _uclMaxResults  :: !(Maybe Int32)
+    , _uclFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLChannelsList'' with the minimum fields required to make a request.
@@ -104,7 +104,7 @@ data URLChannelsList' = URLChannelsList'
 urlChannelsList'
     :: Text -- ^ 'adClientId'
     -> URLChannelsList'
-urlChannelsList' pUclAdClientId_ = 
+urlChannelsList' pUclAdClientId_ =
     URLChannelsList'
     { _uclQuotaUser = Nothing
     , _uclPrettyPrint = True

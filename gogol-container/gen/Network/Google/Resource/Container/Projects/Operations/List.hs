@@ -42,8 +42,8 @@ module Network.Google.Resource.Container.Projects.Operations.List
     , polFields
     ) where
 
-import Network.Google.Container.Types
-import Network.Google.Prelude
+import           Network.Google.Container.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @ContainerProjectsOperationsList@ which the
 -- 'ProjectsOperationsList'' request conforms to.
@@ -63,13 +63,13 @@ type ProjectsOperationsListResource =
 --
 -- /See:/ 'projectsOperationsList'' smart constructor.
 data ProjectsOperationsList' = ProjectsOperationsList'
-    { _polQuotaUser :: !(Maybe Text)
+    { _polQuotaUser   :: !(Maybe Text)
     , _polPrettyPrint :: !Bool
-    , _polUserIP :: !(Maybe Text)
-    , _polKey :: !(Maybe Key)
-    , _polProjectId :: !Text
-    , _polOAuthToken :: !(Maybe OAuthToken)
-    , _polFields :: !(Maybe Text)
+    , _polUserIP      :: !(Maybe Text)
+    , _polKey         :: !(Maybe Key)
+    , _polProjectId   :: !Text
+    , _polOAuthToken  :: !(Maybe OAuthToken)
+    , _polFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsOperationsList'' with the minimum fields required to make a request.
@@ -92,7 +92,7 @@ data ProjectsOperationsList' = ProjectsOperationsList'
 projectsOperationsList'
     :: Text -- ^ 'projectId'
     -> ProjectsOperationsList'
-projectsOperationsList' pPolProjectId_ = 
+projectsOperationsList' pPolProjectId_ =
     ProjectsOperationsList'
     { _polQuotaUser = Nothing
     , _polPrettyPrint = True

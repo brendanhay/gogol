@@ -41,8 +41,8 @@ module Network.Google.Resource.AdSense.Metadata.Metrics.List
     , mmlFields
     ) where
 
-import Network.Google.AdSense.Types
-import Network.Google.Prelude
+import           Network.Google.AdSense.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseMetadataMetricsList@ which the
 -- 'MetadataMetricsList'' request conforms to.
@@ -61,12 +61,12 @@ type MetadataMetricsListResource =
 --
 -- /See:/ 'metadataMetricsList'' smart constructor.
 data MetadataMetricsList' = MetadataMetricsList'
-    { _mmlQuotaUser :: !(Maybe Text)
+    { _mmlQuotaUser   :: !(Maybe Text)
     , _mmlPrettyPrint :: !Bool
-    , _mmlUserIP :: !(Maybe Text)
-    , _mmlKey :: !(Maybe Key)
-    , _mmlOAuthToken :: !(Maybe OAuthToken)
-    , _mmlFields :: !(Maybe Text)
+    , _mmlUserIP      :: !(Maybe Text)
+    , _mmlKey         :: !(Maybe Key)
+    , _mmlOAuthToken  :: !(Maybe OAuthToken)
+    , _mmlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetadataMetricsList'' with the minimum fields required to make a request.
@@ -86,7 +86,7 @@ data MetadataMetricsList' = MetadataMetricsList'
 -- * 'mmlFields'
 metadataMetricsList'
     :: MetadataMetricsList'
-metadataMetricsList' = 
+metadataMetricsList' =
     MetadataMetricsList'
     { _mmlQuotaUser = Nothing
     , _mmlPrettyPrint = True

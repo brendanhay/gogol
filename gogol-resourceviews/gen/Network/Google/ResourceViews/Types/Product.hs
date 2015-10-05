@@ -17,14 +17,14 @@
 --
 module Network.Google.ResourceViews.Types.Product where
 
-import Network.Google.Prelude
-import Network.Google.ResourceViews.Types.Sum
+import           Network.Google.Prelude
+import           Network.Google.ResourceViews.Types.Sum
 
 --
 -- /See:/ 'operationWarningsItemDataItem' smart constructor.
 data OperationWarningsItemDataItem = OperationWarningsItemDataItem
     { _owidiValue :: !(Maybe Text)
-    , _owidiKey :: !(Maybe Text)
+    , _owidiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationWarningsItemDataItem' with the minimum fields required to make a request.
@@ -36,7 +36,7 @@ data OperationWarningsItemDataItem = OperationWarningsItemDataItem
 -- * 'owidiKey'
 operationWarningsItemDataItem
     :: OperationWarningsItemDataItem
-operationWarningsItemDataItem = 
+operationWarningsItemDataItem =
     OperationWarningsItemDataItem
     { _owidiValue = Nothing
     , _owidiKey = Nothing
@@ -69,10 +69,10 @@ instance ToJSON OperationWarningsItemDataItem where
 -- /See:/ 'operationList' smart constructor.
 data OperationList = OperationList
     { _olNextPageToken :: !(Maybe Text)
-    , _olKind :: !Text
-    , _olItems :: !(Maybe [Operation])
-    , _olSelfLink :: !(Maybe Text)
-    , _olId :: !(Maybe Text)
+    , _olKind          :: !Text
+    , _olItems         :: !(Maybe [Operation])
+    , _olSelfLink      :: !(Maybe Text)
+    , _olId            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationList' with the minimum fields required to make a request.
@@ -90,7 +90,7 @@ data OperationList = OperationList
 -- * 'olId'
 operationList
     :: OperationList
-operationList = 
+operationList =
     OperationList
     { _olNextPageToken = Nothing
     , _olKind = "resourceviews#operationList"
@@ -148,18 +148,18 @@ instance ToJSON OperationList where
 --
 -- /See:/ 'resourceView' smart constructor.
 data ResourceView = ResourceView
-    { _rvSize :: !(Maybe Word32)
-    , _rvKind :: !Text
-    , _rvFingerprint :: !(Maybe Text)
-    , _rvNetwork :: !(Maybe Text)
-    , _rvResources :: !(Maybe [Text])
-    , _rvSelfLink :: !(Maybe Text)
-    , _rvName :: !(Maybe Text)
+    { _rvSize              :: !(Maybe Word32)
+    , _rvKind              :: !Text
+    , _rvFingerprint       :: !(Maybe Text)
+    , _rvNetwork           :: !(Maybe Text)
+    , _rvResources         :: !(Maybe [Text])
+    , _rvSelfLink          :: !(Maybe Text)
+    , _rvName              :: !(Maybe Text)
     , _rvCreationTimestamp :: !(Maybe Text)
-    , _rvId :: !(Maybe Text)
-    , _rvLabels :: !(Maybe [Label])
-    , _rvEndpoints :: !(Maybe [ServiceEndpoint])
-    , _rvDescription :: !(Maybe Text)
+    , _rvId                :: !(Maybe Text)
+    , _rvLabels            :: !(Maybe [Label])
+    , _rvEndpoints         :: !(Maybe [ServiceEndpoint])
+    , _rvDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResourceView' with the minimum fields required to make a request.
@@ -191,7 +191,7 @@ data ResourceView = ResourceView
 -- * 'rvDescription'
 resourceView
     :: ResourceView
-resourceView = 
+resourceView =
     ResourceView
     { _rvSize = Nothing
     , _rvKind = "resourceviews#resourceView"
@@ -311,9 +311,9 @@ instance ToJSON ResourceView where
 -- /See:/ 'zoneViewsList' smart constructor.
 data ZoneViewsList = ZoneViewsList
     { _zvlNextPageToken :: !(Maybe Text)
-    , _zvlKind :: !Text
-    , _zvlItems :: !(Maybe [ResourceView])
-    , _zvlSelfLink :: !(Maybe Text)
+    , _zvlKind          :: !Text
+    , _zvlItems         :: !(Maybe [ResourceView])
+    , _zvlSelfLink      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsList' with the minimum fields required to make a request.
@@ -329,7 +329,7 @@ data ZoneViewsList = ZoneViewsList
 -- * 'zvlSelfLink'
 zoneViewsList
     :: ZoneViewsList
-zoneViewsList = 
+zoneViewsList =
     ZoneViewsList
     { _zvlNextPageToken = Nothing
     , _zvlKind = "resourceviews#zoneViewsList"
@@ -382,28 +382,28 @@ instance ToJSON ZoneViewsList where
 --
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
-    { _oTargetId :: !(Maybe Word64)
-    , _oStatus :: !(Maybe Text)
-    , _oInsertTime :: !(Maybe Text)
-    , _oProgress :: !(Maybe Int32)
-    , _oStartTime :: !(Maybe Text)
-    , _oKind :: !Text
-    , _oError :: !(Maybe OperationError)
-    , _oHTTPErrorMessage :: !(Maybe Text)
-    , _oZone :: !(Maybe Text)
-    , _oWarnings :: !(Maybe [OperationWarningsItem])
+    { _oTargetId            :: !(Maybe Word64)
+    , _oStatus              :: !(Maybe Text)
+    , _oInsertTime          :: !(Maybe Text)
+    , _oProgress            :: !(Maybe Int32)
+    , _oStartTime           :: !(Maybe Text)
+    , _oKind                :: !Text
+    , _oError               :: !(Maybe OperationError)
+    , _oHTTPErrorMessage    :: !(Maybe Text)
+    , _oZone                :: !(Maybe Text)
+    , _oWarnings            :: !(Maybe [OperationWarningsItem])
     , _oHTTPErrorStatusCode :: !(Maybe Int32)
-    , _oUser :: !(Maybe Text)
-    , _oSelfLink :: !(Maybe Text)
-    , _oName :: !(Maybe Text)
-    , _oStatusMessage :: !(Maybe Text)
-    , _oCreationTimestamp :: !(Maybe Text)
-    , _oEndTime :: !(Maybe Text)
-    , _oId :: !(Maybe Word64)
-    , _oOperationType :: !(Maybe Text)
-    , _oRegion :: !(Maybe Text)
-    , _oTargetLink :: !(Maybe Text)
-    , _oClientOperationId :: !(Maybe Text)
+    , _oUser                :: !(Maybe Text)
+    , _oSelfLink            :: !(Maybe Text)
+    , _oName                :: !(Maybe Text)
+    , _oStatusMessage       :: !(Maybe Text)
+    , _oCreationTimestamp   :: !(Maybe Text)
+    , _oEndTime             :: !(Maybe Text)
+    , _oId                  :: !(Maybe Word64)
+    , _oOperationType       :: !(Maybe Text)
+    , _oRegion              :: !(Maybe Text)
+    , _oTargetLink          :: !(Maybe Text)
+    , _oClientOperationId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
@@ -455,7 +455,7 @@ data Operation = Operation
 -- * 'oClientOperationId'
 operation
     :: Operation
-operation = 
+operation =
     Operation
     { _oTargetId = Nothing
     , _oStatus = Nothing
@@ -666,8 +666,8 @@ instance ToJSON Operation where
 -- /See:/ 'zoneViewsListResourcesResponse' smart constructor.
 data ZoneViewsListResourcesResponse = ZoneViewsListResourcesResponse
     { _zvlrrNextPageToken :: !(Maybe Text)
-    , _zvlrrItems :: !(Maybe [ListResourceResponseItem])
-    , _zvlrrNetwork :: !(Maybe Text)
+    , _zvlrrItems         :: !(Maybe [ListResourceResponseItem])
+    , _zvlrrNetwork       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsListResourcesResponse' with the minimum fields required to make a request.
@@ -681,7 +681,7 @@ data ZoneViewsListResourcesResponse = ZoneViewsListResourcesResponse
 -- * 'zvlrrNetwork'
 zoneViewsListResourcesResponse
     :: ZoneViewsListResourcesResponse
-zoneViewsListResourcesResponse = 
+zoneViewsListResourcesResponse =
     ZoneViewsListResourcesResponse
     { _zvlrrNextPageToken = Nothing
     , _zvlrrItems = Nothing
@@ -742,7 +742,7 @@ data ServiceEndpoint = ServiceEndpoint
 -- * 'sePort'
 serviceEndpoint
     :: ServiceEndpoint
-serviceEndpoint = 
+serviceEndpoint =
     ServiceEndpoint
     { _seName = Nothing
     , _sePort = Nothing
@@ -783,7 +783,7 @@ newtype ZoneViewsRemoveResourcesRequest = ZoneViewsRemoveResourcesRequest
 -- * 'zvrrrResources'
 zoneViewsRemoveResourcesRequest
     :: ZoneViewsRemoveResourcesRequest
-zoneViewsRemoveResourcesRequest = 
+zoneViewsRemoveResourcesRequest =
     ZoneViewsRemoveResourcesRequest
     { _zvrrrResources = Nothing
     }
@@ -813,7 +813,7 @@ instance ToJSON ZoneViewsRemoveResourcesRequest where
 --
 -- /See:/ 'listResourceResponseItemEndpoints' smart constructor.
 data ListResourceResponseItemEndpoints =
-    ListResourceResponseItemEndpoints 
+    ListResourceResponseItemEndpoints
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListResourceResponseItemEndpoints' with the minimum fields required to make a request.
@@ -846,7 +846,7 @@ newtype ZoneViewsAddResourcesRequest = ZoneViewsAddResourcesRequest
 -- * 'zvarrResources'
 zoneViewsAddResourcesRequest
     :: ZoneViewsAddResourcesRequest
-zoneViewsAddResourcesRequest = 
+zoneViewsAddResourcesRequest =
     ZoneViewsAddResourcesRequest
     { _zvarrResources = Nothing
     }
@@ -886,7 +886,7 @@ newtype OperationError = OperationError
 -- * 'oeErrors'
 operationError
     :: OperationError
-operationError = 
+operationError =
     OperationError
     { _oeErrors = Nothing
     }
@@ -913,7 +913,7 @@ instance ToJSON OperationError where
 -- /See:/ 'zoneViewsGetServiceResponse' smart constructor.
 data ZoneViewsGetServiceResponse = ZoneViewsGetServiceResponse
     { _zvgsrFingerprint :: !(Maybe Text)
-    , _zvgsrEndpoints :: !(Maybe [ServiceEndpoint])
+    , _zvgsrEndpoints   :: !(Maybe [ServiceEndpoint])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsGetServiceResponse' with the minimum fields required to make a request.
@@ -925,7 +925,7 @@ data ZoneViewsGetServiceResponse = ZoneViewsGetServiceResponse
 -- * 'zvgsrEndpoints'
 zoneViewsGetServiceResponse
     :: ZoneViewsGetServiceResponse
-zoneViewsGetServiceResponse = 
+zoneViewsGetServiceResponse =
     ZoneViewsGetServiceResponse
     { _zvgsrFingerprint = Nothing
     , _zvgsrEndpoints = Nothing
@@ -964,8 +964,8 @@ instance ToJSON ZoneViewsGetServiceResponse where
 -- /See:/ 'operationErrorErrorsItem' smart constructor.
 data OperationErrorErrorsItem = OperationErrorErrorsItem
     { _oeeiLocation :: !(Maybe Text)
-    , _oeeiCode :: !(Maybe Text)
-    , _oeeiMessage :: !(Maybe Text)
+    , _oeeiCode     :: !(Maybe Text)
+    , _oeeiMessage  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationErrorErrorsItem' with the minimum fields required to make a request.
@@ -979,7 +979,7 @@ data OperationErrorErrorsItem = OperationErrorErrorsItem
 -- * 'oeeiMessage'
 operationErrorErrorsItem
     :: OperationErrorErrorsItem
-operationErrorErrorsItem = 
+operationErrorErrorsItem =
     OperationErrorErrorsItem
     { _oeeiLocation = Nothing
     , _oeeiCode = Nothing
@@ -1021,8 +1021,8 @@ instance ToJSON OperationErrorErrorsItem where
 -- /See:/ 'zoneViewsSetServiceRequest' smart constructor.
 data ZoneViewsSetServiceRequest = ZoneViewsSetServiceRequest
     { _zvssrResourceName :: !(Maybe Text)
-    , _zvssrFingerprint :: !(Maybe Text)
-    , _zvssrEndpoints :: !(Maybe [ServiceEndpoint])
+    , _zvssrFingerprint  :: !(Maybe Text)
+    , _zvssrEndpoints    :: !(Maybe [ServiceEndpoint])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsSetServiceRequest' with the minimum fields required to make a request.
@@ -1036,7 +1036,7 @@ data ZoneViewsSetServiceRequest = ZoneViewsSetServiceRequest
 -- * 'zvssrEndpoints'
 zoneViewsSetServiceRequest
     :: ZoneViewsSetServiceRequest
-zoneViewsSetServiceRequest = 
+zoneViewsSetServiceRequest =
     ZoneViewsSetServiceRequest
     { _zvssrResourceName = Nothing
     , _zvssrFingerprint = Nothing
@@ -1086,7 +1086,7 @@ instance ToJSON ZoneViewsSetServiceRequest where
 --
 -- /See:/ 'listResourceResponseItem' smart constructor.
 data ListResourceResponseItem = ListResourceResponseItem
-    { _lrriResource :: !(Maybe Text)
+    { _lrriResource  :: !(Maybe Text)
     , _lrriEndpoints :: !(Maybe ListResourceResponseItemEndpoints)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1099,7 +1099,7 @@ data ListResourceResponseItem = ListResourceResponseItem
 -- * 'lrriEndpoints'
 listResourceResponseItem
     :: ListResourceResponseItem
-listResourceResponseItem = 
+listResourceResponseItem =
     ListResourceResponseItem
     { _lrriResource = Nothing
     , _lrriEndpoints = Nothing
@@ -1135,7 +1135,7 @@ instance ToJSON ListResourceResponseItem where
 -- /See:/ 'label' smart constructor.
 data Label = Label
     { _lValue :: !(Maybe Text)
-    , _lKey :: !(Maybe Text)
+    , _lKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Label' with the minimum fields required to make a request.
@@ -1147,7 +1147,7 @@ data Label = Label
 -- * 'lKey'
 label
     :: Label
-label = 
+label =
     Label
     { _lValue = Nothing
     , _lKey = Nothing
@@ -1175,8 +1175,8 @@ instance ToJSON Label where
 --
 -- /See:/ 'operationWarningsItem' smart constructor.
 data OperationWarningsItem = OperationWarningsItem
-    { _owiData :: !(Maybe [OperationWarningsItemDataItem])
-    , _owiCode :: !(Maybe Text)
+    { _owiData    :: !(Maybe [OperationWarningsItemDataItem])
+    , _owiCode    :: !(Maybe Text)
     , _owiMessage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1191,7 +1191,7 @@ data OperationWarningsItem = OperationWarningsItem
 -- * 'owiMessage'
 operationWarningsItem
     :: OperationWarningsItem
-operationWarningsItem = 
+operationWarningsItem =
     OperationWarningsItem
     { _owiData = Nothing
     , _owiCode = Nothing

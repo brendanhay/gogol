@@ -43,8 +43,8 @@ module Network.Google.Resource.FusionTables.Table.Copy
     , tcFields
     ) where
 
-import Network.Google.FusionTables.Types
-import Network.Google.Prelude
+import           Network.Google.FusionTables.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTableCopy@ which the
 -- 'TableCopy'' request conforms to.
@@ -65,14 +65,14 @@ type TableCopyResource =
 --
 -- /See:/ 'tableCopy'' smart constructor.
 data TableCopy' = TableCopy'
-    { _tcQuotaUser :: !(Maybe Text)
-    , _tcPrettyPrint :: !Bool
-    , _tcUserIP :: !(Maybe Text)
-    , _tcKey :: !(Maybe Key)
-    , _tcOAuthToken :: !(Maybe OAuthToken)
-    , _tcTableId :: !Text
+    { _tcQuotaUser        :: !(Maybe Text)
+    , _tcPrettyPrint      :: !Bool
+    , _tcUserIP           :: !(Maybe Text)
+    , _tcKey              :: !(Maybe Key)
+    , _tcOAuthToken       :: !(Maybe OAuthToken)
+    , _tcTableId          :: !Text
     , _tcCopyPresentation :: !(Maybe Bool)
-    , _tcFields :: !(Maybe Text)
+    , _tcFields           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableCopy'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ data TableCopy' = TableCopy'
 tableCopy'
     :: Text -- ^ 'tableId'
     -> TableCopy'
-tableCopy' pTcTableId_ = 
+tableCopy' pTcTableId_ =
     TableCopy'
     { _tcQuotaUser = Nothing
     , _tcPrettyPrint = True

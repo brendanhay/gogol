@@ -44,8 +44,8 @@ module Network.Google.Resource.ResourceViews.ZoneOperations.Get
     , zogFields
     ) where
 
-import Network.Google.Prelude
-import Network.Google.ResourceViews.Types
+import           Network.Google.Prelude
+import           Network.Google.ResourceViews.Types
 
 -- | A resource alias for @ResourceviewsZoneOperationsGet@ which the
 -- 'ZoneOperationsGet'' request conforms to.
@@ -67,15 +67,15 @@ type ZoneOperationsGetResource =
 --
 -- /See:/ 'zoneOperationsGet'' smart constructor.
 data ZoneOperationsGet' = ZoneOperationsGet'
-    { _zogQuotaUser :: !(Maybe Text)
+    { _zogQuotaUser   :: !(Maybe Text)
     , _zogPrettyPrint :: !Bool
-    , _zogProject :: !Text
-    , _zogOperation :: !Text
-    , _zogUserIP :: !(Maybe Text)
-    , _zogZone :: !Text
-    , _zogKey :: !(Maybe Key)
-    , _zogOAuthToken :: !(Maybe OAuthToken)
-    , _zogFields :: !(Maybe Text)
+    , _zogProject     :: !Text
+    , _zogOperation   :: !Text
+    , _zogUserIP      :: !(Maybe Text)
+    , _zogZone        :: !Text
+    , _zogKey         :: !(Maybe Key)
+    , _zogOAuthToken  :: !(Maybe OAuthToken)
+    , _zogFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneOperationsGet'' with the minimum fields required to make a request.
@@ -104,7 +104,7 @@ zoneOperationsGet'
     -> Text -- ^ 'operation'
     -> Text -- ^ 'zone'
     -> ZoneOperationsGet'
-zoneOperationsGet' pZogProject_ pZogOperation_ pZogZone_ = 
+zoneOperationsGet' pZogProject_ pZogOperation_ pZogZone_ =
     ZoneOperationsGet'
     { _zogQuotaUser = Nothing
     , _zogPrettyPrint = True

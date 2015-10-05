@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.Experimental.Jobs.Create
     , ejcFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsExperimentalJobsCreate@ which the
 -- 'ExperimentalJobsCreate'' request conforms to.
@@ -67,13 +67,13 @@ type ExperimentalJobsCreateResource =
 --
 -- /See:/ 'experimentalJobsCreate'' smart constructor.
 data ExperimentalJobsCreate' = ExperimentalJobsCreate'
-    { _ejcQuotaUser :: !(Maybe Text)
+    { _ejcQuotaUser   :: !(Maybe Text)
     , _ejcPrettyPrint :: !Bool
-    , _ejcUserIP :: !(Maybe Text)
-    , _ejcPayload :: !ExperimentalCreateJobRequest
-    , _ejcKey :: !(Maybe Key)
-    , _ejcOAuthToken :: !(Maybe OAuthToken)
-    , _ejcFields :: !(Maybe Text)
+    , _ejcUserIP      :: !(Maybe Text)
+    , _ejcPayload     :: !ExperimentalCreateJobRequest
+    , _ejcKey         :: !(Maybe Key)
+    , _ejcOAuthToken  :: !(Maybe OAuthToken)
+    , _ejcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ExperimentalJobsCreate'' with the minimum fields required to make a request.
@@ -96,7 +96,7 @@ data ExperimentalJobsCreate' = ExperimentalJobsCreate'
 experimentalJobsCreate'
     :: ExperimentalCreateJobRequest -- ^ 'payload'
     -> ExperimentalJobsCreate'
-experimentalJobsCreate' pEjcPayload_ = 
+experimentalJobsCreate' pEjcPayload_ =
     ExperimentalJobsCreate'
     { _ejcQuotaUser = Nothing
     , _ejcPrettyPrint = True

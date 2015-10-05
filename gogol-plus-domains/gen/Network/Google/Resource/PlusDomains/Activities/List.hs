@@ -46,8 +46,8 @@ module Network.Google.Resource.PlusDomains.Activities.List
     , aFields
     ) where
 
-import Network.Google.PlusDomains.Types
-import Network.Google.Prelude
+import           Network.Google.PlusDomains.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsActivitiesList@ which the
 -- 'ActivitiesList'' request conforms to.
@@ -72,16 +72,16 @@ type ActivitiesListResource =
 --
 -- /See:/ 'activitiesList'' smart constructor.
 data ActivitiesList' = ActivitiesList'
-    { _aQuotaUser :: !(Maybe Text)
+    { _aQuotaUser   :: !(Maybe Text)
     , _aPrettyPrint :: !Bool
-    , _aUserIP :: !(Maybe Text)
-    , _aCollection :: !ActivitiesListCollection
-    , _aUserId :: !Text
-    , _aKey :: !(Maybe Key)
-    , _aPageToken :: !(Maybe Text)
-    , _aOAuthToken :: !(Maybe OAuthToken)
-    , _aMaxResults :: !Word32
-    , _aFields :: !(Maybe Text)
+    , _aUserIP      :: !(Maybe Text)
+    , _aCollection  :: !ActivitiesListCollection
+    , _aUserId      :: !Text
+    , _aKey         :: !(Maybe Key)
+    , _aPageToken   :: !(Maybe Text)
+    , _aOAuthToken  :: !(Maybe OAuthToken)
+    , _aMaxResults  :: !Word32
+    , _aFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
@@ -111,7 +111,7 @@ activitiesList'
     :: ActivitiesListCollection -- ^ 'collection'
     -> Text -- ^ 'userId'
     -> ActivitiesList'
-activitiesList' pACollection_ pAUserId_ = 
+activitiesList' pACollection_ pAUserId_ =
     ActivitiesList'
     { _aQuotaUser = Nothing
     , _aPrettyPrint = True

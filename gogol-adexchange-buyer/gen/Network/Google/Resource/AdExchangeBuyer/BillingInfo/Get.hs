@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer.BillingInfo.Get
     , bigFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerBillingInfoGet@ which the
 -- 'BillingInfoGet'' request conforms to.
@@ -62,13 +62,13 @@ type BillingInfoGetResource =
 --
 -- /See:/ 'billingInfoGet'' smart constructor.
 data BillingInfoGet' = BillingInfoGet'
-    { _bigQuotaUser :: !(Maybe Text)
+    { _bigQuotaUser   :: !(Maybe Text)
     , _bigPrettyPrint :: !Bool
-    , _bigUserIP :: !(Maybe Text)
-    , _bigAccountId :: !Int32
-    , _bigKey :: !(Maybe Key)
-    , _bigOAuthToken :: !(Maybe OAuthToken)
-    , _bigFields :: !(Maybe Text)
+    , _bigUserIP      :: !(Maybe Text)
+    , _bigAccountId   :: !Int32
+    , _bigKey         :: !(Maybe Key)
+    , _bigOAuthToken  :: !(Maybe OAuthToken)
+    , _bigFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BillingInfoGet'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data BillingInfoGet' = BillingInfoGet'
 billingInfoGet'
     :: Int32 -- ^ 'accountId'
     -> BillingInfoGet'
-billingInfoGet' pBigAccountId_ = 
+billingInfoGet' pBigAccountId_ =
     BillingInfoGet'
     { _bigQuotaUser = Nothing
     , _bigPrettyPrint = True

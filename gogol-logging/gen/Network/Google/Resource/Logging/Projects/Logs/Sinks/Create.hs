@@ -51,8 +51,8 @@ module Network.Google.Resource.Logging.Projects.Logs.Sinks.Create
     , plscCallback
     ) where
 
-import Network.Google.Logging.Types
-import Network.Google.Prelude
+import           Network.Google.Logging.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogsSinksCreate@ which the
 -- 'ProjectsLogsSinksCreate'' request conforms to.
@@ -84,21 +84,21 @@ type ProjectsLogsSinksCreateResource =
 --
 -- /See:/ 'projectsLogsSinksCreate'' smart constructor.
 data ProjectsLogsSinksCreate' = ProjectsLogsSinksCreate'
-    { _plscXgafv :: !(Maybe Text)
-    , _plscQuotaUser :: !(Maybe Text)
-    , _plscPrettyPrint :: !Bool
+    { _plscXgafv          :: !(Maybe Text)
+    , _plscQuotaUser      :: !(Maybe Text)
+    , _plscPrettyPrint    :: !Bool
     , _plscUploadProtocol :: !(Maybe Text)
-    , _plscLogsId :: !Text
-    , _plscPp :: !Bool
-    , _plscAccessToken :: !(Maybe Text)
-    , _plscUploadType :: !(Maybe Text)
-    , _plscPayload :: !LogSink
-    , _plscBearerToken :: !(Maybe Text)
-    , _plscKey :: !(Maybe Key)
-    , _plscOAuthToken :: !(Maybe OAuthToken)
-    , _plscProjectsId :: !Text
-    , _plscFields :: !(Maybe Text)
-    , _plscCallback :: !(Maybe Text)
+    , _plscLogsId         :: !Text
+    , _plscPp             :: !Bool
+    , _plscAccessToken    :: !(Maybe Text)
+    , _plscUploadType     :: !(Maybe Text)
+    , _plscPayload        :: !LogSink
+    , _plscBearerToken    :: !(Maybe Text)
+    , _plscKey            :: !(Maybe Key)
+    , _plscOAuthToken     :: !(Maybe OAuthToken)
+    , _plscProjectsId     :: !Text
+    , _plscFields         :: !(Maybe Text)
+    , _plscCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogsSinksCreate'' with the minimum fields required to make a request.
@@ -139,7 +139,7 @@ projectsLogsSinksCreate'
     -> LogSink -- ^ 'payload'
     -> Text -- ^ 'projectsId'
     -> ProjectsLogsSinksCreate'
-projectsLogsSinksCreate' pPlscLogsId_ pPlscPayload_ pPlscProjectsId_ = 
+projectsLogsSinksCreate' pPlscLogsId_ pPlscPayload_ pPlscProjectsId_ =
     ProjectsLogsSinksCreate'
     { _plscXgafv = Nothing
     , _plscQuotaUser = Nothing

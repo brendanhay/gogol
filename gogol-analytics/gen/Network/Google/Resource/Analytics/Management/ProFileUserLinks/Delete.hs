@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Delete
     , mpfuldFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProFileUserLinksDelete@ which the
 -- 'ManagementProFileUserLinksDelete'' request conforms to.
@@ -72,16 +72,16 @@ type ManagementProFileUserLinksDeleteResource =
 --
 -- /See:/ 'managementProFileUserLinksDelete'' smart constructor.
 data ManagementProFileUserLinksDelete' = ManagementProFileUserLinksDelete'
-    { _mpfuldQuotaUser :: !(Maybe Text)
-    , _mpfuldPrettyPrint :: !Bool
+    { _mpfuldQuotaUser     :: !(Maybe Text)
+    , _mpfuldPrettyPrint   :: !Bool
     , _mpfuldWebPropertyId :: !Text
-    , _mpfuldUserIP :: !(Maybe Text)
-    , _mpfuldProFileId :: !Text
-    , _mpfuldAccountId :: !Text
-    , _mpfuldKey :: !(Maybe Key)
-    , _mpfuldLinkId :: !Text
-    , _mpfuldOAuthToken :: !(Maybe OAuthToken)
-    , _mpfuldFields :: !(Maybe Text)
+    , _mpfuldUserIP        :: !(Maybe Text)
+    , _mpfuldProFileId     :: !Text
+    , _mpfuldAccountId     :: !Text
+    , _mpfuldKey           :: !(Maybe Key)
+    , _mpfuldLinkId        :: !Text
+    , _mpfuldOAuthToken    :: !(Maybe OAuthToken)
+    , _mpfuldFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFileUserLinksDelete'' with the minimum fields required to make a request.
@@ -113,7 +113,7 @@ managementProFileUserLinksDelete'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
     -> ManagementProFileUserLinksDelete'
-managementProFileUserLinksDelete' pMpfuldWebPropertyId_ pMpfuldProFileId_ pMpfuldAccountId_ pMpfuldLinkId_ = 
+managementProFileUserLinksDelete' pMpfuldWebPropertyId_ pMpfuldProFileId_ pMpfuldAccountId_ pMpfuldLinkId_ =
     ManagementProFileUserLinksDelete'
     { _mpfuldQuotaUser = Nothing
     , _mpfuldPrettyPrint = False

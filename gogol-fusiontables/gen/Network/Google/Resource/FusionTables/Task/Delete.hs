@@ -44,8 +44,8 @@ module Network.Google.Resource.FusionTables.Task.Delete
     , tFields
     ) where
 
-import Network.Google.FusionTables.Types
-import Network.Google.Prelude
+import           Network.Google.FusionTables.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTaskDelete@ which the
 -- 'TaskDelete'' request conforms to.
@@ -67,14 +67,14 @@ type TaskDeleteResource =
 --
 -- /See:/ 'taskDelete'' smart constructor.
 data TaskDelete' = TaskDelete'
-    { _tQuotaUser :: !(Maybe Text)
+    { _tQuotaUser   :: !(Maybe Text)
     , _tPrettyPrint :: !Bool
-    , _tTaskId :: !Text
-    , _tUserIP :: !(Maybe Text)
-    , _tKey :: !(Maybe Key)
-    , _tOAuthToken :: !(Maybe OAuthToken)
-    , _tTableId :: !Text
-    , _tFields :: !(Maybe Text)
+    , _tTaskId      :: !Text
+    , _tUserIP      :: !(Maybe Text)
+    , _tKey         :: !(Maybe Key)
+    , _tOAuthToken  :: !(Maybe OAuthToken)
+    , _tTableId     :: !Text
+    , _tFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskDelete'' with the minimum fields required to make a request.
@@ -100,7 +100,7 @@ taskDelete'
     :: Text -- ^ 'taskId'
     -> Text -- ^ 'tableId'
     -> TaskDelete'
-taskDelete' pTTaskId_ pTTableId_ = 
+taskDelete' pTTaskId_ pTTableId_ =
     TaskDelete'
     { _tQuotaUser = Nothing
     , _tPrettyPrint = True

@@ -42,8 +42,8 @@ module Network.Google.Resource.AdSense.Alerts.List
     , aFields
     ) where
 
-import Network.Google.AdSense.Types
-import Network.Google.Prelude
+import           Network.Google.AdSense.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAlertsList@ which the
 -- 'AlertsList'' request conforms to.
@@ -62,13 +62,13 @@ type AlertsListResource =
 --
 -- /See:/ 'alertsList'' smart constructor.
 data AlertsList' = AlertsList'
-    { _aQuotaUser :: !(Maybe Text)
+    { _aQuotaUser   :: !(Maybe Text)
     , _aPrettyPrint :: !Bool
-    , _aUserIP :: !(Maybe Text)
-    , _aLocale :: !(Maybe Text)
-    , _aKey :: !(Maybe Key)
-    , _aOAuthToken :: !(Maybe OAuthToken)
-    , _aFields :: !(Maybe Text)
+    , _aUserIP      :: !(Maybe Text)
+    , _aLocale      :: !(Maybe Text)
+    , _aKey         :: !(Maybe Key)
+    , _aOAuthToken  :: !(Maybe OAuthToken)
+    , _aFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AlertsList'' with the minimum fields required to make a request.
@@ -90,7 +90,7 @@ data AlertsList' = AlertsList'
 -- * 'aFields'
 alertsList'
     :: AlertsList'
-alertsList' = 
+alertsList' =
     AlertsList'
     { _aQuotaUser = Nothing
     , _aPrettyPrint = True

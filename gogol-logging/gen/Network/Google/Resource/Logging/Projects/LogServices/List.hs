@@ -51,8 +51,8 @@ module Network.Google.Resource.Logging.Projects.LogServices.List
     , plslCallback
     ) where
 
-import Network.Google.Logging.Types
-import Network.Google.Prelude
+import           Network.Google.Logging.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogServicesList@ which the
 -- 'ProjectsLogServicesList'' request conforms to.
@@ -83,22 +83,22 @@ type ProjectsLogServicesListResource =
 --
 -- /See:/ 'projectsLogServicesList'' smart constructor.
 data ProjectsLogServicesList' = ProjectsLogServicesList'
-    { _plslLog :: !(Maybe Text)
-    , _plslXgafv :: !(Maybe Text)
-    , _plslQuotaUser :: !(Maybe Text)
-    , _plslPrettyPrint :: !Bool
+    { _plslLog            :: !(Maybe Text)
+    , _plslXgafv          :: !(Maybe Text)
+    , _plslQuotaUser      :: !(Maybe Text)
+    , _plslPrettyPrint    :: !Bool
     , _plslUploadProtocol :: !(Maybe Text)
-    , _plslPp :: !Bool
-    , _plslAccessToken :: !(Maybe Text)
-    , _plslUploadType :: !(Maybe Text)
-    , _plslBearerToken :: !(Maybe Text)
-    , _plslKey :: !(Maybe Key)
-    , _plslPageToken :: !(Maybe Text)
-    , _plslOAuthToken :: !(Maybe OAuthToken)
-    , _plslProjectsId :: !Text
-    , _plslPageSize :: !(Maybe Int32)
-    , _plslFields :: !(Maybe Text)
-    , _plslCallback :: !(Maybe Text)
+    , _plslPp             :: !Bool
+    , _plslAccessToken    :: !(Maybe Text)
+    , _plslUploadType     :: !(Maybe Text)
+    , _plslBearerToken    :: !(Maybe Text)
+    , _plslKey            :: !(Maybe Key)
+    , _plslPageToken      :: !(Maybe Text)
+    , _plslOAuthToken     :: !(Maybe OAuthToken)
+    , _plslProjectsId     :: !Text
+    , _plslPageSize       :: !(Maybe Int32)
+    , _plslFields         :: !(Maybe Text)
+    , _plslCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogServicesList'' with the minimum fields required to make a request.
@@ -139,7 +139,7 @@ data ProjectsLogServicesList' = ProjectsLogServicesList'
 projectsLogServicesList'
     :: Text -- ^ 'projectsId'
     -> ProjectsLogServicesList'
-projectsLogServicesList' pPlslProjectsId_ = 
+projectsLogServicesList' pPlslProjectsId_ =
     ProjectsLogServicesList'
     { _plslLog = Nothing
     , _plslXgafv = Nothing

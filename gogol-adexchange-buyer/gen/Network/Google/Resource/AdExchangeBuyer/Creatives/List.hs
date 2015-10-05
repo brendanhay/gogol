@@ -48,8 +48,8 @@ module Network.Google.Resource.AdExchangeBuyer.Creatives.List
     , clFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerCreativesList@ which the
 -- 'CreativesList'' request conforms to.
@@ -79,18 +79,18 @@ type CreativesListResource =
 --
 -- /See:/ 'creativesList'' smart constructor.
 data CreativesList' = CreativesList'
-    { _clQuotaUser :: !(Maybe Text)
-    , _clPrettyPrint :: !Bool
-    , _clBuyerCreativeId :: !(Maybe [Text])
-    , _clUserIP :: !(Maybe Text)
+    { _clQuotaUser               :: !(Maybe Text)
+    , _clPrettyPrint             :: !Bool
+    , _clBuyerCreativeId         :: !(Maybe [Text])
+    , _clUserIP                  :: !(Maybe Text)
     , _clOpenAuctionStatusFilter :: !(Maybe CreativesListOpenAuctionStatusFilter)
-    , _clAccountId :: !(Maybe [Int32])
-    , _clKey :: !(Maybe Key)
-    , _clPageToken :: !(Maybe Text)
-    , _clDealsStatusFilter :: !(Maybe CreativesListDealsStatusFilter)
-    , _clOAuthToken :: !(Maybe OAuthToken)
-    , _clMaxResults :: !(Maybe Word32)
-    , _clFields :: !(Maybe Text)
+    , _clAccountId               :: !(Maybe [Int32])
+    , _clKey                     :: !(Maybe Key)
+    , _clPageToken               :: !(Maybe Text)
+    , _clDealsStatusFilter       :: !(Maybe CreativesListDealsStatusFilter)
+    , _clOAuthToken              :: !(Maybe OAuthToken)
+    , _clMaxResults              :: !(Maybe Word32)
+    , _clFields                  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesList'' with the minimum fields required to make a request.
@@ -122,7 +122,7 @@ data CreativesList' = CreativesList'
 -- * 'clFields'
 creativesList'
     :: CreativesList'
-creativesList' = 
+creativesList' =
     CreativesList'
     { _clQuotaUser = Nothing
     , _clPrettyPrint = True

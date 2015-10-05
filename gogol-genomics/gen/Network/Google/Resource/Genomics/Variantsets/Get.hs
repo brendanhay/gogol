@@ -42,8 +42,8 @@ module Network.Google.Resource.Genomics.Variantsets.Get
     , vgFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsetsGet@ which the
 -- 'VariantsetsGet'' request conforms to.
@@ -62,13 +62,13 @@ type VariantsetsGetResource =
 --
 -- /See:/ 'variantsetsGet'' smart constructor.
 data VariantsetsGet' = VariantsetsGet'
-    { _vgQuotaUser :: !(Maybe Text)
-    , _vgPrettyPrint :: !Bool
+    { _vgQuotaUser    :: !(Maybe Text)
+    , _vgPrettyPrint  :: !Bool
     , _vgVariantSetId :: !Text
-    , _vgUserIP :: !(Maybe Text)
-    , _vgKey :: !(Maybe Key)
-    , _vgOAuthToken :: !(Maybe OAuthToken)
-    , _vgFields :: !(Maybe Text)
+    , _vgUserIP       :: !(Maybe Text)
+    , _vgKey          :: !(Maybe Key)
+    , _vgOAuthToken   :: !(Maybe OAuthToken)
+    , _vgFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsGet'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data VariantsetsGet' = VariantsetsGet'
 variantsetsGet'
     :: Text -- ^ 'variantSetId'
     -> VariantsetsGet'
-variantsetsGet' pVgVariantSetId_ = 
+variantsetsGet' pVgVariantSetId_ =
     VariantsetsGet'
     { _vgQuotaUser = Nothing
     , _vgPrettyPrint = True

@@ -46,8 +46,8 @@ module Network.Google.Resource.PlusDomains.People.List
     , plFields
     ) where
 
-import Network.Google.PlusDomains.Types
-import Network.Google.Prelude
+import           Network.Google.PlusDomains.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsPeopleList@ which the
 -- 'PeopleList'' request conforms to.
@@ -72,17 +72,17 @@ type PeopleListResource =
 --
 -- /See:/ 'peopleList'' smart constructor.
 data PeopleList' = PeopleList'
-    { _plQuotaUser :: !(Maybe Text)
+    { _plQuotaUser   :: !(Maybe Text)
     , _plPrettyPrint :: !Bool
-    , _plOrderBy :: !(Maybe PeopleListOrderBy)
-    , _plUserIP :: !(Maybe Text)
-    , _plCollection :: !PeopleListCollection
-    , _plUserId :: !Text
-    , _plKey :: !(Maybe Key)
-    , _plPageToken :: !(Maybe Text)
-    , _plOAuthToken :: !(Maybe OAuthToken)
-    , _plMaxResults :: !Word32
-    , _plFields :: !(Maybe Text)
+    , _plOrderBy     :: !(Maybe PeopleListOrderBy)
+    , _plUserIP      :: !(Maybe Text)
+    , _plCollection  :: !PeopleListCollection
+    , _plUserId      :: !Text
+    , _plKey         :: !(Maybe Key)
+    , _plPageToken   :: !(Maybe Text)
+    , _plOAuthToken  :: !(Maybe OAuthToken)
+    , _plMaxResults  :: !Word32
+    , _plFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleList'' with the minimum fields required to make a request.
@@ -114,7 +114,7 @@ peopleList'
     :: PeopleListCollection -- ^ 'collection'
     -> Text -- ^ 'userId'
     -> PeopleList'
-peopleList' pPlCollection_ pPlUserId_ = 
+peopleList' pPlCollection_ pPlUserId_ =
     PeopleList'
     { _plQuotaUser = Nothing
     , _plPrettyPrint = True

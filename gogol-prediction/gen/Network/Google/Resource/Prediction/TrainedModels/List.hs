@@ -44,8 +44,8 @@ module Network.Google.Resource.Prediction.TrainedModels.List
     , tmlFields
     ) where
 
-import Network.Google.Prediction.Types
-import Network.Google.Prelude
+import           Network.Google.Prediction.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @PredictionTrainedModelsList@ which the
 -- 'TrainedModelsList'' request conforms to.
@@ -67,15 +67,15 @@ type TrainedModelsListResource =
 --
 -- /See:/ 'trainedModelsList'' smart constructor.
 data TrainedModelsList' = TrainedModelsList'
-    { _tmlQuotaUser :: !(Maybe Text)
+    { _tmlQuotaUser   :: !(Maybe Text)
     , _tmlPrettyPrint :: !Bool
-    , _tmlProject :: !Text
-    , _tmlUserIP :: !(Maybe Text)
-    , _tmlKey :: !(Maybe Key)
-    , _tmlPageToken :: !(Maybe Text)
-    , _tmlOAuthToken :: !(Maybe OAuthToken)
-    , _tmlMaxResults :: !(Maybe Word32)
-    , _tmlFields :: !(Maybe Text)
+    , _tmlProject     :: !Text
+    , _tmlUserIP      :: !(Maybe Text)
+    , _tmlKey         :: !(Maybe Key)
+    , _tmlPageToken   :: !(Maybe Text)
+    , _tmlOAuthToken  :: !(Maybe OAuthToken)
+    , _tmlMaxResults  :: !(Maybe Word32)
+    , _tmlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrainedModelsList'' with the minimum fields required to make a request.
@@ -102,7 +102,7 @@ data TrainedModelsList' = TrainedModelsList'
 trainedModelsList'
     :: Text -- ^ 'project'
     -> TrainedModelsList'
-trainedModelsList' pTmlProject_ = 
+trainedModelsList' pTmlProject_ =
     TrainedModelsList'
     { _tmlQuotaUser = Nothing
     , _tmlPrettyPrint = True

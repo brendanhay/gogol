@@ -55,8 +55,8 @@ module Network.Google.Resource.AdSense.Reports.Generate
     , rgFields
     ) where
 
-import Network.Google.AdSense.Types
-import Network.Google.Prelude
+import           Network.Google.AdSense.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseReportsGenerate@ which the
 -- 'ReportsGenerate'' request conforms to.
@@ -113,24 +113,24 @@ type ReportsGenerateResource =
 --
 -- /See:/ 'reportsGenerate'' smart constructor.
 data ReportsGenerate' = ReportsGenerate'
-    { _rgQuotaUser :: !(Maybe Text)
-    , _rgPrettyPrint :: !Bool
-    , _rgUserIP :: !(Maybe Text)
-    , _rgDimension :: !(Maybe [Text])
-    , _rgLocale :: !(Maybe Text)
-    , _rgEndDate :: !Text
-    , _rgStartDate :: !Text
-    , _rgAccountId :: !(Maybe [Text])
-    , _rgMetric :: !(Maybe [Text])
-    , _rgKey :: !(Maybe Key)
-    , _rgCurrency :: !(Maybe Text)
-    , _rgSort :: !(Maybe [Text])
-    , _rgFilter :: !(Maybe [Text])
-    , _rgOAuthToken :: !(Maybe OAuthToken)
-    , _rgStartIndex :: !(Maybe Int32)
+    { _rgQuotaUser            :: !(Maybe Text)
+    , _rgPrettyPrint          :: !Bool
+    , _rgUserIP               :: !(Maybe Text)
+    , _rgDimension            :: !(Maybe [Text])
+    , _rgLocale               :: !(Maybe Text)
+    , _rgEndDate              :: !Text
+    , _rgStartDate            :: !Text
+    , _rgAccountId            :: !(Maybe [Text])
+    , _rgMetric               :: !(Maybe [Text])
+    , _rgKey                  :: !(Maybe Key)
+    , _rgCurrency             :: !(Maybe Text)
+    , _rgSort                 :: !(Maybe [Text])
+    , _rgFilter               :: !(Maybe [Text])
+    , _rgOAuthToken           :: !(Maybe OAuthToken)
+    , _rgStartIndex           :: !(Maybe Int32)
     , _rgUseTimezoneReporting :: !(Maybe Bool)
-    , _rgMaxResults :: !(Maybe Int32)
-    , _rgFields :: !(Maybe Text)
+    , _rgMaxResults           :: !(Maybe Int32)
+    , _rgFields               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGenerate'' with the minimum fields required to make a request.
@@ -176,7 +176,7 @@ reportsGenerate'
     :: Text -- ^ 'endDate'
     -> Text -- ^ 'startDate'
     -> ReportsGenerate'
-reportsGenerate' pRgEndDate_ pRgStartDate_ = 
+reportsGenerate' pRgEndDate_ pRgStartDate_ =
     ReportsGenerate'
     { _rgQuotaUser = Nothing
     , _rgPrettyPrint = True

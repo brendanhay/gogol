@@ -46,8 +46,8 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.Patch
     , mcmpFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomMetricsPatch@ which the
 -- 'ManagementCustomMetricsPatch'' request conforms to.
@@ -74,17 +74,17 @@ type ManagementCustomMetricsPatchResource =
 --
 -- /See:/ 'managementCustomMetricsPatch'' smart constructor.
 data ManagementCustomMetricsPatch' = ManagementCustomMetricsPatch'
-    { _mcmpQuotaUser :: !(Maybe Text)
-    , _mcmpPrettyPrint :: !Bool
-    , _mcmpCustomMetricId :: !Text
-    , _mcmpWebPropertyId :: !Text
+    { _mcmpQuotaUser                   :: !(Maybe Text)
+    , _mcmpPrettyPrint                 :: !Bool
+    , _mcmpCustomMetricId              :: !Text
+    , _mcmpWebPropertyId               :: !Text
     , _mcmpIgnoreCustomDataSourceLinks :: !Bool
-    , _mcmpUserIP :: !(Maybe Text)
-    , _mcmpPayload :: !CustomMetric
-    , _mcmpAccountId :: !Text
-    , _mcmpKey :: !(Maybe Key)
-    , _mcmpOAuthToken :: !(Maybe OAuthToken)
-    , _mcmpFields :: !(Maybe Text)
+    , _mcmpUserIP                      :: !(Maybe Text)
+    , _mcmpPayload                     :: !CustomMetric
+    , _mcmpAccountId                   :: !Text
+    , _mcmpKey                         :: !(Maybe Key)
+    , _mcmpOAuthToken                  :: !(Maybe OAuthToken)
+    , _mcmpFields                      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsPatch'' with the minimum fields required to make a request.
@@ -118,7 +118,7 @@ managementCustomMetricsPatch'
     -> CustomMetric -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementCustomMetricsPatch'
-managementCustomMetricsPatch' pMcmpCustomMetricId_ pMcmpWebPropertyId_ pMcmpPayload_ pMcmpAccountId_ = 
+managementCustomMetricsPatch' pMcmpCustomMetricId_ pMcmpWebPropertyId_ pMcmpPayload_ pMcmpAccountId_ =
     ManagementCustomMetricsPatch'
     { _mcmpQuotaUser = Nothing
     , _mcmpPrettyPrint = False

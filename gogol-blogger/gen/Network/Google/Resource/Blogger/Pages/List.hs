@@ -47,8 +47,8 @@ module Network.Google.Resource.Blogger.Pages.List
     , plFields
     ) where
 
-import Network.Google.Blogger.Types
-import Network.Google.Prelude
+import           Network.Google.Blogger.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPagesList@ which the
 -- 'PagesList'' request conforms to.
@@ -74,18 +74,18 @@ type PagesListResource =
 --
 -- /See:/ 'pagesList'' smart constructor.
 data PagesList' = PagesList'
-    { _plStatus :: !(Maybe [PagesListStatus])
-    , _plQuotaUser :: !(Maybe Text)
+    { _plStatus      :: !(Maybe [PagesListStatus])
+    , _plQuotaUser   :: !(Maybe Text)
     , _plPrettyPrint :: !Bool
-    , _plUserIP :: !(Maybe Text)
-    , _plBlogId :: !Text
-    , _plKey :: !(Maybe Key)
+    , _plUserIP      :: !(Maybe Text)
+    , _plBlogId      :: !Text
+    , _plKey         :: !(Maybe Key)
     , _plFetchBodies :: !(Maybe Bool)
-    , _plView :: !(Maybe PagesListView)
-    , _plPageToken :: !(Maybe Text)
-    , _plOAuthToken :: !(Maybe OAuthToken)
-    , _plMaxResults :: !(Maybe Word32)
-    , _plFields :: !(Maybe Text)
+    , _plView        :: !(Maybe PagesListView)
+    , _plPageToken   :: !(Maybe Text)
+    , _plOAuthToken  :: !(Maybe OAuthToken)
+    , _plMaxResults  :: !(Maybe Word32)
+    , _plFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesList'' with the minimum fields required to make a request.
@@ -118,7 +118,7 @@ data PagesList' = PagesList'
 pagesList'
     :: Text -- ^ 'blogId'
     -> PagesList'
-pagesList' pPlBlogId_ = 
+pagesList' pPlBlogId_ =
     PagesList'
     { _plStatus = Nothing
     , _plQuotaUser = Nothing

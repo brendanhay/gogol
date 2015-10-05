@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Update
     , mwpuluFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebPropertyUserLinksUpdate@ which the
 -- 'ManagementWebPropertyUserLinksUpdate'' request conforms to.
@@ -72,16 +72,16 @@ type ManagementWebPropertyUserLinksUpdateResource =
 --
 -- /See:/ 'managementWebPropertyUserLinksUpdate'' smart constructor.
 data ManagementWebPropertyUserLinksUpdate' = ManagementWebPropertyUserLinksUpdate'
-    { _mwpuluQuotaUser :: !(Maybe Text)
-    , _mwpuluPrettyPrint :: !Bool
+    { _mwpuluQuotaUser     :: !(Maybe Text)
+    , _mwpuluPrettyPrint   :: !Bool
     , _mwpuluWebPropertyId :: !Text
-    , _mwpuluUserIP :: !(Maybe Text)
-    , _mwpuluPayload :: !EntityUserLink
-    , _mwpuluAccountId :: !Text
-    , _mwpuluKey :: !(Maybe Key)
-    , _mwpuluLinkId :: !Text
-    , _mwpuluOAuthToken :: !(Maybe OAuthToken)
-    , _mwpuluFields :: !(Maybe Text)
+    , _mwpuluUserIP        :: !(Maybe Text)
+    , _mwpuluPayload       :: !EntityUserLink
+    , _mwpuluAccountId     :: !Text
+    , _mwpuluKey           :: !(Maybe Key)
+    , _mwpuluLinkId        :: !Text
+    , _mwpuluOAuthToken    :: !(Maybe OAuthToken)
+    , _mwpuluFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyUserLinksUpdate'' with the minimum fields required to make a request.
@@ -113,7 +113,7 @@ managementWebPropertyUserLinksUpdate'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
     -> ManagementWebPropertyUserLinksUpdate'
-managementWebPropertyUserLinksUpdate' pMwpuluWebPropertyId_ pMwpuluPayload_ pMwpuluAccountId_ pMwpuluLinkId_ = 
+managementWebPropertyUserLinksUpdate' pMwpuluWebPropertyId_ pMwpuluPayload_ pMwpuluAccountId_ pMwpuluLinkId_ =
     ManagementWebPropertyUserLinksUpdate'
     { _mwpuluQuotaUser = Nothing
     , _mwpuluPrettyPrint = False

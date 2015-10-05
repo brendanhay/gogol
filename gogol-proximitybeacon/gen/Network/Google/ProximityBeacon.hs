@@ -198,22 +198,22 @@ module Network.Google.ProximityBeacon
     , gifobrBeacons
     ) where
 
-import Network.Google.Prelude
-import Network.Google.ProximityBeacon.Types
-import Network.Google.Resource.ProximityBeacon.BeaconInfo.GetforObserved
-import Network.Google.Resource.ProximityBeacon.Beacons.Activate
-import Network.Google.Resource.ProximityBeacon.Beacons.Attachments.BatchDelete
-import Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Create
-import Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Delete
-import Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
-import Network.Google.Resource.ProximityBeacon.Beacons.Deactivate
-import Network.Google.Resource.ProximityBeacon.Beacons.Decommission
-import Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
-import Network.Google.Resource.ProximityBeacon.Beacons.Get
-import Network.Google.Resource.ProximityBeacon.Beacons.List
-import Network.Google.Resource.ProximityBeacon.Beacons.Register
-import Network.Google.Resource.ProximityBeacon.Beacons.Update
-import Network.Google.Resource.ProximityBeacon.Namespaces.List
+import           Network.Google.Prelude
+import           Network.Google.ProximityBeacon.Types
+import           Network.Google.Resource.ProximityBeacon.BeaconInfo.GetforObserved
+import           Network.Google.Resource.ProximityBeacon.Beacons.Activate
+import           Network.Google.Resource.ProximityBeacon.Beacons.Attachments.BatchDelete
+import           Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Create
+import           Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Delete
+import           Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
+import           Network.Google.Resource.ProximityBeacon.Beacons.Deactivate
+import           Network.Google.Resource.ProximityBeacon.Beacons.Decommission
+import           Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
+import           Network.Google.Resource.ProximityBeacon.Beacons.Get
+import           Network.Google.Resource.ProximityBeacon.Beacons.List
+import           Network.Google.Resource.ProximityBeacon.Beacons.Register
+import           Network.Google.Resource.ProximityBeacon.Beacons.Update
+import           Network.Google.Resource.ProximityBeacon.Namespaces.List
 
 {- $resources
 TODO

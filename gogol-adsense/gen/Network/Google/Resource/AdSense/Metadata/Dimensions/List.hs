@@ -41,8 +41,8 @@ module Network.Google.Resource.AdSense.Metadata.Dimensions.List
     , mdlFields
     ) where
 
-import Network.Google.AdSense.Types
-import Network.Google.Prelude
+import           Network.Google.AdSense.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseMetadataDimensionsList@ which the
 -- 'MetadataDimensionsList'' request conforms to.
@@ -61,12 +61,12 @@ type MetadataDimensionsListResource =
 --
 -- /See:/ 'metadataDimensionsList'' smart constructor.
 data MetadataDimensionsList' = MetadataDimensionsList'
-    { _mdlQuotaUser :: !(Maybe Text)
+    { _mdlQuotaUser   :: !(Maybe Text)
     , _mdlPrettyPrint :: !Bool
-    , _mdlUserIP :: !(Maybe Text)
-    , _mdlKey :: !(Maybe Key)
-    , _mdlOAuthToken :: !(Maybe OAuthToken)
-    , _mdlFields :: !(Maybe Text)
+    , _mdlUserIP      :: !(Maybe Text)
+    , _mdlKey         :: !(Maybe Key)
+    , _mdlOAuthToken  :: !(Maybe OAuthToken)
+    , _mdlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetadataDimensionsList'' with the minimum fields required to make a request.
@@ -86,7 +86,7 @@ data MetadataDimensionsList' = MetadataDimensionsList'
 -- * 'mdlFields'
 metadataDimensionsList'
     :: MetadataDimensionsList'
-metadataDimensionsList' = 
+metadataDimensionsList' =
     MetadataDimensionsList'
     { _mdlQuotaUser = Nothing
     , _mdlPrettyPrint = True

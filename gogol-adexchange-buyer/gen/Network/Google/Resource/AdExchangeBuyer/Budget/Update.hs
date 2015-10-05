@@ -45,8 +45,8 @@ module Network.Google.Resource.AdExchangeBuyer.Budget.Update
     , buFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerBudgetUpdate@ which the
 -- 'BudgetUpdate'' request conforms to.
@@ -68,15 +68,15 @@ type BudgetUpdateResource =
 --
 -- /See:/ 'budgetUpdate'' smart constructor.
 data BudgetUpdate' = BudgetUpdate'
-    { _buQuotaUser :: !(Maybe Text)
+    { _buQuotaUser   :: !(Maybe Text)
     , _buPrettyPrint :: !Bool
-    , _buUserIP :: !(Maybe Text)
-    , _buPayload :: !Budget
-    , _buAccountId :: !Int64
-    , _buKey :: !(Maybe Key)
-    , _buOAuthToken :: !(Maybe OAuthToken)
-    , _buBillingId :: !Int64
-    , _buFields :: !(Maybe Text)
+    , _buUserIP      :: !(Maybe Text)
+    , _buPayload     :: !Budget
+    , _buAccountId   :: !Int64
+    , _buKey         :: !(Maybe Key)
+    , _buOAuthToken  :: !(Maybe OAuthToken)
+    , _buBillingId   :: !Int64
+    , _buFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BudgetUpdate'' with the minimum fields required to make a request.
@@ -105,7 +105,7 @@ budgetUpdate'
     -> Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'billingId'
     -> BudgetUpdate'
-budgetUpdate' pBuPayload_ pBuAccountId_ pBuBillingId_ = 
+budgetUpdate' pBuPayload_ pBuAccountId_ pBuBillingId_ =
     BudgetUpdate'
     { _buQuotaUser = Nothing
     , _buPrettyPrint = True

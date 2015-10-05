@@ -47,8 +47,8 @@ module Network.Google.Resource.AdSense.Accounts.CustomChannels.AdUnits.List
     , accaulFields
     ) where
 
-import Network.Google.AdSense.Types
-import Network.Google.Prelude
+import           Network.Google.AdSense.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsCustomChannelsAdUnitsList@ which the
 -- 'AccountsCustomChannelsAdUnitsList'' request conforms to.
@@ -76,18 +76,18 @@ type AccountsCustomChannelsAdUnitsListResource =
 --
 -- /See:/ 'accountsCustomChannelsAdUnitsList'' smart constructor.
 data AccountsCustomChannelsAdUnitsList' = AccountsCustomChannelsAdUnitsList'
-    { _accaulQuotaUser :: !(Maybe Text)
-    , _accaulPrettyPrint :: !Bool
+    { _accaulQuotaUser       :: !(Maybe Text)
+    , _accaulPrettyPrint     :: !Bool
     , _accaulIncludeInactive :: !(Maybe Bool)
     , _accaulCustomChannelId :: !Text
-    , _accaulUserIP :: !(Maybe Text)
-    , _accaulAdClientId :: !Text
-    , _accaulAccountId :: !Text
-    , _accaulKey :: !(Maybe Key)
-    , _accaulPageToken :: !(Maybe Text)
-    , _accaulOAuthToken :: !(Maybe OAuthToken)
-    , _accaulMaxResults :: !(Maybe Int32)
-    , _accaulFields :: !(Maybe Text)
+    , _accaulUserIP          :: !(Maybe Text)
+    , _accaulAdClientId      :: !Text
+    , _accaulAccountId       :: !Text
+    , _accaulKey             :: !(Maybe Key)
+    , _accaulPageToken       :: !(Maybe Text)
+    , _accaulOAuthToken      :: !(Maybe OAuthToken)
+    , _accaulMaxResults      :: !(Maybe Int32)
+    , _accaulFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsCustomChannelsAdUnitsList'' with the minimum fields required to make a request.
@@ -122,7 +122,7 @@ accountsCustomChannelsAdUnitsList'
     -> Text -- ^ 'adClientId'
     -> Text -- ^ 'accountId'
     -> AccountsCustomChannelsAdUnitsList'
-accountsCustomChannelsAdUnitsList' pAccaulCustomChannelId_ pAccaulAdClientId_ pAccaulAccountId_ = 
+accountsCustomChannelsAdUnitsList' pAccaulCustomChannelId_ pAccaulAdClientId_ pAccaulAccountId_ =
     AccountsCustomChannelsAdUnitsList'
     { _accaulQuotaUser = Nothing
     , _accaulPrettyPrint = True

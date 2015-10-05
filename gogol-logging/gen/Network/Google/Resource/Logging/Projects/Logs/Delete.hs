@@ -50,8 +50,8 @@ module Network.Google.Resource.Logging.Projects.Logs.Delete
     , pldCallback
     ) where
 
-import Network.Google.Logging.Types
-import Network.Google.Prelude
+import           Network.Google.Logging.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogsDelete@ which the
 -- 'ProjectsLogsDelete'' request conforms to.
@@ -81,20 +81,20 @@ type ProjectsLogsDeleteResource =
 --
 -- /See:/ 'projectsLogsDelete'' smart constructor.
 data ProjectsLogsDelete' = ProjectsLogsDelete'
-    { _pldXgafv :: !(Maybe Text)
-    , _pldQuotaUser :: !(Maybe Text)
-    , _pldPrettyPrint :: !Bool
+    { _pldXgafv          :: !(Maybe Text)
+    , _pldQuotaUser      :: !(Maybe Text)
+    , _pldPrettyPrint    :: !Bool
     , _pldUploadProtocol :: !(Maybe Text)
-    , _pldLogsId :: !Text
-    , _pldPp :: !Bool
-    , _pldAccessToken :: !(Maybe Text)
-    , _pldUploadType :: !(Maybe Text)
-    , _pldBearerToken :: !(Maybe Text)
-    , _pldKey :: !(Maybe Key)
-    , _pldOAuthToken :: !(Maybe OAuthToken)
-    , _pldProjectsId :: !Text
-    , _pldFields :: !(Maybe Text)
-    , _pldCallback :: !(Maybe Text)
+    , _pldLogsId         :: !Text
+    , _pldPp             :: !Bool
+    , _pldAccessToken    :: !(Maybe Text)
+    , _pldUploadType     :: !(Maybe Text)
+    , _pldBearerToken    :: !(Maybe Text)
+    , _pldKey            :: !(Maybe Key)
+    , _pldOAuthToken     :: !(Maybe OAuthToken)
+    , _pldProjectsId     :: !Text
+    , _pldFields         :: !(Maybe Text)
+    , _pldCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogsDelete'' with the minimum fields required to make a request.
@@ -132,7 +132,7 @@ projectsLogsDelete'
     :: Text -- ^ 'logsId'
     -> Text -- ^ 'projectsId'
     -> ProjectsLogsDelete'
-projectsLogsDelete' pPldLogsId_ pPldProjectsId_ = 
+projectsLogsDelete' pPldLogsId_ pPldProjectsId_ =
     ProjectsLogsDelete'
     { _pldXgafv = Nothing
     , _pldQuotaUser = Nothing

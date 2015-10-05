@@ -45,8 +45,8 @@ module Network.Google.Resource.FusionTables.Query.SQL
     , qsqlFields
     ) where
 
-import Network.Google.FusionTables.Types
-import Network.Google.Prelude
+import           Network.Google.FusionTables.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesQuerySQL@ which the
 -- 'QuerySQL'' request conforms to.
@@ -80,15 +80,15 @@ type QuerySQLResource =
 --
 -- /See:/ 'querySQL'' smart constructor.
 data QuerySQL' = QuerySQL'
-    { _qsqlTyped :: !(Maybe Bool)
-    , _qsqlQuotaUser :: !(Maybe Text)
+    { _qsqlTyped       :: !(Maybe Bool)
+    , _qsqlQuotaUser   :: !(Maybe Text)
     , _qsqlPrettyPrint :: !Bool
-    , _qsqlHdrs :: !(Maybe Bool)
-    , _qsqlUserIP :: !(Maybe Text)
-    , _qsqlKey :: !(Maybe Key)
-    , _qsqlOAuthToken :: !(Maybe OAuthToken)
-    , _qsqlSQL :: !Text
-    , _qsqlFields :: !(Maybe Text)
+    , _qsqlHdrs        :: !(Maybe Bool)
+    , _qsqlUserIP      :: !(Maybe Text)
+    , _qsqlKey         :: !(Maybe Key)
+    , _qsqlOAuthToken  :: !(Maybe OAuthToken)
+    , _qsqlSQL         :: !Text
+    , _qsqlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuerySQL'' with the minimum fields required to make a request.
@@ -115,7 +115,7 @@ data QuerySQL' = QuerySQL'
 querySQL'
     :: Text -- ^ 'sql'
     -> QuerySQL'
-querySQL' pQsqlSQL_ = 
+querySQL' pQsqlSQL_ =
     QuerySQL'
     { _qsqlTyped = Nothing
     , _qsqlQuotaUser = Nothing

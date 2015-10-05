@@ -45,8 +45,8 @@ module Network.Google.Resource.CivicInfo.Elections.VoterInfoQuery
     , eviqFields
     ) where
 
-import Network.Google.CivicInfo.Types
-import Network.Google.Prelude
+import           Network.Google.CivicInfo.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @CivicInfoElectionsVoterInfoQuery@ which the
 -- 'ElectionsVoterInfoQuery'' request conforms to.
@@ -69,15 +69,15 @@ type ElectionsVoterInfoQueryResource =
 --
 -- /See:/ 'electionsVoterInfoQuery'' smart constructor.
 data ElectionsVoterInfoQuery' = ElectionsVoterInfoQuery'
-    { _eviqQuotaUser :: !(Maybe Text)
-    , _eviqPrettyPrint :: !Bool
-    , _eviqUserIP :: !(Maybe Text)
-    , _eviqElectionId :: !Int64
-    , _eviqAddress :: !Text
-    , _eviqKey :: !(Maybe Key)
+    { _eviqQuotaUser    :: !(Maybe Text)
+    , _eviqPrettyPrint  :: !Bool
+    , _eviqUserIP       :: !(Maybe Text)
+    , _eviqElectionId   :: !Int64
+    , _eviqAddress      :: !Text
+    , _eviqKey          :: !(Maybe Key)
     , _eviqOfficialOnly :: !Bool
-    , _eviqOAuthToken :: !(Maybe OAuthToken)
-    , _eviqFields :: !(Maybe Text)
+    , _eviqOAuthToken   :: !(Maybe OAuthToken)
+    , _eviqFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ElectionsVoterInfoQuery'' with the minimum fields required to make a request.
@@ -104,7 +104,7 @@ data ElectionsVoterInfoQuery' = ElectionsVoterInfoQuery'
 electionsVoterInfoQuery'
     :: Text -- ^ 'address'
     -> ElectionsVoterInfoQuery'
-electionsVoterInfoQuery' pEviqAddress_ = 
+electionsVoterInfoQuery' pEviqAddress_ =
     ElectionsVoterInfoQuery'
     { _eviqQuotaUser = Nothing
     , _eviqPrettyPrint = True

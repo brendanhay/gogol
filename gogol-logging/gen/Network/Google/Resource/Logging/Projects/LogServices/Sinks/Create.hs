@@ -51,8 +51,8 @@ module Network.Google.Resource.Logging.Projects.LogServices.Sinks.Create
     , plsscCallback
     ) where
 
-import Network.Google.Logging.Types
-import Network.Google.Prelude
+import           Network.Google.Logging.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogServicesSinksCreate@ which the
 -- 'ProjectsLogServicesSinksCreate'' request conforms to.
@@ -84,21 +84,21 @@ type ProjectsLogServicesSinksCreateResource =
 --
 -- /See:/ 'projectsLogServicesSinksCreate'' smart constructor.
 data ProjectsLogServicesSinksCreate' = ProjectsLogServicesSinksCreate'
-    { _plsscXgafv :: !(Maybe Text)
-    , _plsscQuotaUser :: !(Maybe Text)
-    , _plsscPrettyPrint :: !Bool
+    { _plsscXgafv          :: !(Maybe Text)
+    , _plsscQuotaUser      :: !(Maybe Text)
+    , _plsscPrettyPrint    :: !Bool
     , _plsscUploadProtocol :: !(Maybe Text)
-    , _plsscPp :: !Bool
-    , _plsscAccessToken :: !(Maybe Text)
-    , _plsscUploadType :: !(Maybe Text)
-    , _plsscPayload :: !LogSink
-    , _plsscBearerToken :: !(Maybe Text)
-    , _plsscKey :: !(Maybe Key)
-    , _plsscLogServicesId :: !Text
-    , _plsscOAuthToken :: !(Maybe OAuthToken)
-    , _plsscProjectsId :: !Text
-    , _plsscFields :: !(Maybe Text)
-    , _plsscCallback :: !(Maybe Text)
+    , _plsscPp             :: !Bool
+    , _plsscAccessToken    :: !(Maybe Text)
+    , _plsscUploadType     :: !(Maybe Text)
+    , _plsscPayload        :: !LogSink
+    , _plsscBearerToken    :: !(Maybe Text)
+    , _plsscKey            :: !(Maybe Key)
+    , _plsscLogServicesId  :: !Text
+    , _plsscOAuthToken     :: !(Maybe OAuthToken)
+    , _plsscProjectsId     :: !Text
+    , _plsscFields         :: !(Maybe Text)
+    , _plsscCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogServicesSinksCreate'' with the minimum fields required to make a request.
@@ -139,7 +139,7 @@ projectsLogServicesSinksCreate'
     -> Text -- ^ 'logServicesId'
     -> Text -- ^ 'projectsId'
     -> ProjectsLogServicesSinksCreate'
-projectsLogServicesSinksCreate' pPlsscPayload_ pPlsscLogServicesId_ pPlsscProjectsId_ = 
+projectsLogServicesSinksCreate' pPlsscPayload_ pPlsscLogServicesId_ pPlsscProjectsId_ =
     ProjectsLogServicesSinksCreate'
     { _plsscXgafv = Nothing
     , _plsscQuotaUser = Nothing

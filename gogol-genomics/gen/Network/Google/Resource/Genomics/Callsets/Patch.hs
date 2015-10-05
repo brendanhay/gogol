@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.Callsets.Patch
     , cpFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsCallsetsPatch@ which the
 -- 'CallsetsPatch'' request conforms to.
@@ -64,14 +64,14 @@ type CallsetsPatchResource =
 --
 -- /See:/ 'callsetsPatch'' smart constructor.
 data CallsetsPatch' = CallsetsPatch'
-    { _cpQuotaUser :: !(Maybe Text)
+    { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
-    , _cpUserIP :: !(Maybe Text)
-    , _cpPayload :: !CallSet
-    , _cpKey :: !(Maybe Key)
-    , _cpCallSetId :: !Text
-    , _cpOAuthToken :: !(Maybe OAuthToken)
-    , _cpFields :: !(Maybe Text)
+    , _cpUserIP      :: !(Maybe Text)
+    , _cpPayload     :: !CallSet
+    , _cpKey         :: !(Maybe Key)
+    , _cpCallSetId   :: !Text
+    , _cpOAuthToken  :: !(Maybe OAuthToken)
+    , _cpFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsPatch'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ callsetsPatch'
     :: CallSet -- ^ 'payload'
     -> Text -- ^ 'callSetId'
     -> CallsetsPatch'
-callsetsPatch' pCpPayload_ pCpCallSetId_ = 
+callsetsPatch' pCpPayload_ pCpCallSetId_ =
     CallsetsPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True

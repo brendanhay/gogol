@@ -42,8 +42,8 @@ module Network.Google.Resource.Genomics.References.Get
     , rggFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReferencesGet@ which the
 -- 'ReferencesGet'' request conforms to.
@@ -62,13 +62,13 @@ type ReferencesGetResource =
 --
 -- /See:/ 'referencesGet'' smart constructor.
 data ReferencesGet' = ReferencesGet'
-    { _rggQuotaUser :: !(Maybe Text)
+    { _rggQuotaUser   :: !(Maybe Text)
     , _rggPrettyPrint :: !Bool
-    , _rggUserIP :: !(Maybe Text)
+    , _rggUserIP      :: !(Maybe Text)
     , _rggReferenceId :: !Text
-    , _rggKey :: !(Maybe Key)
-    , _rggOAuthToken :: !(Maybe OAuthToken)
-    , _rggFields :: !(Maybe Text)
+    , _rggKey         :: !(Maybe Key)
+    , _rggOAuthToken  :: !(Maybe OAuthToken)
+    , _rggFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesGet'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data ReferencesGet' = ReferencesGet'
 referencesGet'
     :: Text -- ^ 'referenceId'
     -> ReferencesGet'
-referencesGet' pRggReferenceId_ = 
+referencesGet' pRggReferenceId_ =
     ReferencesGet'
     { _rggQuotaUser = Nothing
     , _rggPrettyPrint = True

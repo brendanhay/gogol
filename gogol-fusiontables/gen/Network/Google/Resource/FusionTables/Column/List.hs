@@ -44,8 +44,8 @@ module Network.Google.Resource.FusionTables.Column.List
     , clFields
     ) where
 
-import Network.Google.FusionTables.Types
-import Network.Google.Prelude
+import           Network.Google.FusionTables.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesColumnList@ which the
 -- 'ColumnList'' request conforms to.
@@ -67,15 +67,15 @@ type ColumnListResource =
 --
 -- /See:/ 'columnList'' smart constructor.
 data ColumnList' = ColumnList'
-    { _clQuotaUser :: !(Maybe Text)
+    { _clQuotaUser   :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
-    , _clUserIP :: !(Maybe Text)
-    , _clKey :: !(Maybe Key)
-    , _clPageToken :: !(Maybe Text)
-    , _clOAuthToken :: !(Maybe OAuthToken)
-    , _clTableId :: !Text
-    , _clMaxResults :: !(Maybe Word32)
-    , _clFields :: !(Maybe Text)
+    , _clUserIP      :: !(Maybe Text)
+    , _clKey         :: !(Maybe Key)
+    , _clPageToken   :: !(Maybe Text)
+    , _clOAuthToken  :: !(Maybe OAuthToken)
+    , _clTableId     :: !Text
+    , _clMaxResults  :: !(Maybe Word32)
+    , _clFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnList'' with the minimum fields required to make a request.
@@ -102,7 +102,7 @@ data ColumnList' = ColumnList'
 columnList'
     :: Text -- ^ 'tableId'
     -> ColumnList'
-columnList' pClTableId_ = 
+columnList' pClTableId_ =
     ColumnList'
     { _clQuotaUser = Nothing
     , _clPrettyPrint = True

@@ -46,8 +46,8 @@ module Network.Google.Resource.FusionTables.Table.Patch
     , tppFields
     ) where
 
-import Network.Google.FusionTables.Types
-import Network.Google.Prelude
+import           Network.Google.FusionTables.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTablePatch@ which the
 -- 'TablePatch'' request conforms to.
@@ -70,15 +70,15 @@ type TablePatchResource =
 --
 -- /See:/ 'tablePatch'' smart constructor.
 data TablePatch' = TablePatch'
-    { _tppQuotaUser :: !(Maybe Text)
-    , _tppPrettyPrint :: !Bool
-    , _tppUserIP :: !(Maybe Text)
-    , _tppPayload :: !Table
+    { _tppQuotaUser             :: !(Maybe Text)
+    , _tppPrettyPrint           :: !Bool
+    , _tppUserIP                :: !(Maybe Text)
+    , _tppPayload               :: !Table
     , _tppReplaceViewDefinition :: !(Maybe Bool)
-    , _tppKey :: !(Maybe Key)
-    , _tppOAuthToken :: !(Maybe OAuthToken)
-    , _tppTableId :: !Text
-    , _tppFields :: !(Maybe Text)
+    , _tppKey                   :: !(Maybe Key)
+    , _tppOAuthToken            :: !(Maybe OAuthToken)
+    , _tppTableId               :: !Text
+    , _tppFields                :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablePatch'' with the minimum fields required to make a request.
@@ -106,7 +106,7 @@ tablePatch'
     :: Table -- ^ 'payload'
     -> Text -- ^ 'tableId'
     -> TablePatch'
-tablePatch' pTppPayload_ pTppTableId_ = 
+tablePatch' pTppPayload_ pTppTableId_ =
     TablePatch'
     { _tppQuotaUser = Nothing
     , _tppPrettyPrint = True

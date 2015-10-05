@@ -42,8 +42,8 @@ module Network.Google.Resource.FusionTables.Table.Insert
     , tiiFields
     ) where
 
-import Network.Google.FusionTables.Types
-import Network.Google.Prelude
+import           Network.Google.FusionTables.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTableInsert@ which the
 -- 'TableInsert'' request conforms to.
@@ -62,13 +62,13 @@ type TableInsertResource =
 --
 -- /See:/ 'tableInsert'' smart constructor.
 data TableInsert' = TableInsert'
-    { _tiiQuotaUser :: !(Maybe Text)
+    { _tiiQuotaUser   :: !(Maybe Text)
     , _tiiPrettyPrint :: !Bool
-    , _tiiUserIP :: !(Maybe Text)
-    , _tiiPayload :: !Table
-    , _tiiKey :: !(Maybe Key)
-    , _tiiOAuthToken :: !(Maybe OAuthToken)
-    , _tiiFields :: !(Maybe Text)
+    , _tiiUserIP      :: !(Maybe Text)
+    , _tiiPayload     :: !Table
+    , _tiiKey         :: !(Maybe Key)
+    , _tiiOAuthToken  :: !(Maybe OAuthToken)
+    , _tiiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableInsert'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data TableInsert' = TableInsert'
 tableInsert'
     :: Table -- ^ 'payload'
     -> TableInsert'
-tableInsert' pTiiPayload_ = 
+tableInsert' pTiiPayload_ =
     TableInsert'
     { _tiiQuotaUser = Nothing
     , _tiiPrettyPrint = True

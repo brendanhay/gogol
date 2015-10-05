@@ -42,8 +42,8 @@ module Network.Google.Resource.Genomics.Jobs.Get
     , jgFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsJobsGet@ which the
 -- 'JobsGet'' request conforms to.
@@ -62,13 +62,13 @@ type JobsGetResource =
 --
 -- /See:/ 'jobsGet'' smart constructor.
 data JobsGet' = JobsGet'
-    { _jgQuotaUser :: !(Maybe Text)
+    { _jgQuotaUser   :: !(Maybe Text)
     , _jgPrettyPrint :: !Bool
-    , _jgJobId :: !Text
-    , _jgUserIP :: !(Maybe Text)
-    , _jgKey :: !(Maybe Key)
-    , _jgOAuthToken :: !(Maybe OAuthToken)
-    , _jgFields :: !(Maybe Text)
+    , _jgJobId       :: !Text
+    , _jgUserIP      :: !(Maybe Text)
+    , _jgKey         :: !(Maybe Key)
+    , _jgOAuthToken  :: !(Maybe OAuthToken)
+    , _jgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsGet'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data JobsGet' = JobsGet'
 jobsGet'
     :: Text -- ^ 'jobId'
     -> JobsGet'
-jobsGet' pJgJobId_ = 
+jobsGet' pJgJobId_ =
     JobsGet'
     { _jgQuotaUser = Nothing
     , _jgPrettyPrint = True

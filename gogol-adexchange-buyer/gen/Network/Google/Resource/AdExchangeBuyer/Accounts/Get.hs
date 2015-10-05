@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer.Accounts.Get
     , agFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerAccountsGet@ which the
 -- 'AccountsGet'' request conforms to.
@@ -62,13 +62,13 @@ type AccountsGetResource =
 --
 -- /See:/ 'accountsGet'' smart constructor.
 data AccountsGet' = AccountsGet'
-    { _agQuotaUser :: !(Maybe Text)
+    { _agQuotaUser   :: !(Maybe Text)
     , _agPrettyPrint :: !Bool
-    , _agUserIP :: !(Maybe Text)
-    , _agKey :: !(Maybe Key)
-    , _agId :: !Int32
-    , _agOAuthToken :: !(Maybe OAuthToken)
-    , _agFields :: !(Maybe Text)
+    , _agUserIP      :: !(Maybe Text)
+    , _agKey         :: !(Maybe Key)
+    , _agId          :: !Int32
+    , _agOAuthToken  :: !(Maybe OAuthToken)
+    , _agFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsGet'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data AccountsGet' = AccountsGet'
 accountsGet'
     :: Int32 -- ^ 'id'
     -> AccountsGet'
-accountsGet' pAgId_ = 
+accountsGet' pAgId_ =
     AccountsGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True

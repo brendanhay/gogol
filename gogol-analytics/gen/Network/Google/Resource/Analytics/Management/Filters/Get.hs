@@ -43,8 +43,8 @@ module Network.Google.Resource.Analytics.Management.Filters.Get
     , mfgFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementFiltersGet@ which the
 -- 'ManagementFiltersGet'' request conforms to.
@@ -66,14 +66,14 @@ type ManagementFiltersGetResource =
 --
 -- /See:/ 'managementFiltersGet'' smart constructor.
 data ManagementFiltersGet' = ManagementFiltersGet'
-    { _mfgQuotaUser :: !(Maybe Text)
+    { _mfgQuotaUser   :: !(Maybe Text)
     , _mfgPrettyPrint :: !Bool
-    , _mfgFilterId :: !Text
-    , _mfgUserIP :: !(Maybe Text)
-    , _mfgAccountId :: !Text
-    , _mfgKey :: !(Maybe Key)
-    , _mfgOAuthToken :: !(Maybe OAuthToken)
-    , _mfgFields :: !(Maybe Text)
+    , _mfgFilterId    :: !Text
+    , _mfgUserIP      :: !(Maybe Text)
+    , _mfgAccountId   :: !Text
+    , _mfgKey         :: !(Maybe Key)
+    , _mfgOAuthToken  :: !(Maybe OAuthToken)
+    , _mfgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersGet'' with the minimum fields required to make a request.
@@ -99,7 +99,7 @@ managementFiltersGet'
     :: Text -- ^ 'filterId'
     -> Text -- ^ 'accountId'
     -> ManagementFiltersGet'
-managementFiltersGet' pMfgFilterId_ pMfgAccountId_ = 
+managementFiltersGet' pMfgFilterId_ pMfgAccountId_ =
     ManagementFiltersGet'
     { _mfgQuotaUser = Nothing
     , _mfgPrettyPrint = False

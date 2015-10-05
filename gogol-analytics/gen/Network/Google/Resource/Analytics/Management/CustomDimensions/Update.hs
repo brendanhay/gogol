@@ -46,8 +46,8 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.Update
     , mcduFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomDimensionsUpdate@ which the
 -- 'ManagementCustomDimensionsUpdate'' request conforms to.
@@ -74,17 +74,17 @@ type ManagementCustomDimensionsUpdateResource =
 --
 -- /See:/ 'managementCustomDimensionsUpdate'' smart constructor.
 data ManagementCustomDimensionsUpdate' = ManagementCustomDimensionsUpdate'
-    { _mcduQuotaUser :: !(Maybe Text)
-    , _mcduPrettyPrint :: !Bool
-    , _mcduWebPropertyId :: !Text
+    { _mcduQuotaUser                   :: !(Maybe Text)
+    , _mcduPrettyPrint                 :: !Bool
+    , _mcduWebPropertyId               :: !Text
     , _mcduIgnoreCustomDataSourceLinks :: !Bool
-    , _mcduUserIP :: !(Maybe Text)
-    , _mcduPayload :: !CustomDimension
-    , _mcduAccountId :: !Text
-    , _mcduKey :: !(Maybe Key)
-    , _mcduOAuthToken :: !(Maybe OAuthToken)
-    , _mcduCustomDimensionId :: !Text
-    , _mcduFields :: !(Maybe Text)
+    , _mcduUserIP                      :: !(Maybe Text)
+    , _mcduPayload                     :: !CustomDimension
+    , _mcduAccountId                   :: !Text
+    , _mcduKey                         :: !(Maybe Key)
+    , _mcduOAuthToken                  :: !(Maybe OAuthToken)
+    , _mcduCustomDimensionId           :: !Text
+    , _mcduFields                      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDimensionsUpdate'' with the minimum fields required to make a request.
@@ -118,7 +118,7 @@ managementCustomDimensionsUpdate'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'customDimensionId'
     -> ManagementCustomDimensionsUpdate'
-managementCustomDimensionsUpdate' pMcduWebPropertyId_ pMcduPayload_ pMcduAccountId_ pMcduCustomDimensionId_ = 
+managementCustomDimensionsUpdate' pMcduWebPropertyId_ pMcduPayload_ pMcduAccountId_ pMcduCustomDimensionId_ =
     ManagementCustomDimensionsUpdate'
     { _mcduQuotaUser = Nothing
     , _mcduPrettyPrint = False

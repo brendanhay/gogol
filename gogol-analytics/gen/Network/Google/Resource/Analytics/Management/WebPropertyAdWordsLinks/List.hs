@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.List
     , mwpawllFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksList@ which the
 -- 'ManagementWebPropertyAdWordsLinksList'' request conforms to.
@@ -72,16 +72,16 @@ type ManagementWebPropertyAdWordsLinksListResource =
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksList'' smart constructor.
 data ManagementWebPropertyAdWordsLinksList' = ManagementWebPropertyAdWordsLinksList'
-    { _mwpawllQuotaUser :: !(Maybe Text)
-    , _mwpawllPrettyPrint :: !Bool
+    { _mwpawllQuotaUser     :: !(Maybe Text)
+    , _mwpawllPrettyPrint   :: !Bool
     , _mwpawllWebPropertyId :: !Text
-    , _mwpawllUserIP :: !(Maybe Text)
-    , _mwpawllAccountId :: !Text
-    , _mwpawllKey :: !(Maybe Key)
-    , _mwpawllOAuthToken :: !(Maybe OAuthToken)
-    , _mwpawllStartIndex :: !(Maybe Int32)
-    , _mwpawllMaxResults :: !(Maybe Int32)
-    , _mwpawllFields :: !(Maybe Text)
+    , _mwpawllUserIP        :: !(Maybe Text)
+    , _mwpawllAccountId     :: !Text
+    , _mwpawllKey           :: !(Maybe Key)
+    , _mwpawllOAuthToken    :: !(Maybe OAuthToken)
+    , _mwpawllStartIndex    :: !(Maybe Int32)
+    , _mwpawllMaxResults    :: !(Maybe Int32)
+    , _mwpawllFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksList'' with the minimum fields required to make a request.
@@ -111,7 +111,7 @@ managementWebPropertyAdWordsLinksList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
     -> ManagementWebPropertyAdWordsLinksList'
-managementWebPropertyAdWordsLinksList' pMwpawllWebPropertyId_ pMwpawllAccountId_ = 
+managementWebPropertyAdWordsLinksList' pMwpawllWebPropertyId_ pMwpawllAccountId_ =
     ManagementWebPropertyAdWordsLinksList'
     { _mwpawllQuotaUser = Nothing
     , _mwpawllPrettyPrint = False

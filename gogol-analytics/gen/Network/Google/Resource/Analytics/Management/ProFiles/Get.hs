@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Get
     , mpfgFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProFilesGet@ which the
 -- 'ManagementProFilesGet'' request conforms to.
@@ -69,15 +69,15 @@ type ManagementProFilesGetResource =
 --
 -- /See:/ 'managementProFilesGet'' smart constructor.
 data ManagementProFilesGet' = ManagementProFilesGet'
-    { _mpfgQuotaUser :: !(Maybe Text)
-    , _mpfgPrettyPrint :: !Bool
+    { _mpfgQuotaUser     :: !(Maybe Text)
+    , _mpfgPrettyPrint   :: !Bool
     , _mpfgWebPropertyId :: !Text
-    , _mpfgUserIP :: !(Maybe Text)
-    , _mpfgProFileId :: !Text
-    , _mpfgAccountId :: !Text
-    , _mpfgKey :: !(Maybe Key)
-    , _mpfgOAuthToken :: !(Maybe OAuthToken)
-    , _mpfgFields :: !(Maybe Text)
+    , _mpfgUserIP        :: !(Maybe Text)
+    , _mpfgProFileId     :: !Text
+    , _mpfgAccountId     :: !Text
+    , _mpfgKey           :: !(Maybe Key)
+    , _mpfgOAuthToken    :: !(Maybe OAuthToken)
+    , _mpfgFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFilesGet'' with the minimum fields required to make a request.
@@ -106,7 +106,7 @@ managementProFilesGet'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> ManagementProFilesGet'
-managementProFilesGet' pMpfgWebPropertyId_ pMpfgProFileId_ pMpfgAccountId_ = 
+managementProFilesGet' pMpfgWebPropertyId_ pMpfgProFileId_ pMpfgAccountId_ =
     ManagementProFilesGet'
     { _mpfgQuotaUser = Nothing
     , _mpfgPrettyPrint = False

@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.Experiments.Get
     , megFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementExperimentsGet@ which the
 -- 'ManagementExperimentsGet'' request conforms to.
@@ -73,16 +73,16 @@ type ManagementExperimentsGetResource =
 --
 -- /See:/ 'managementExperimentsGet'' smart constructor.
 data ManagementExperimentsGet' = ManagementExperimentsGet'
-    { _megQuotaUser :: !(Maybe Text)
-    , _megPrettyPrint :: !Bool
+    { _megQuotaUser     :: !(Maybe Text)
+    , _megPrettyPrint   :: !Bool
     , _megWebPropertyId :: !Text
-    , _megUserIP :: !(Maybe Text)
-    , _megProFileId :: !Text
-    , _megAccountId :: !Text
-    , _megExperimentId :: !Text
-    , _megKey :: !(Maybe Key)
-    , _megOAuthToken :: !(Maybe OAuthToken)
-    , _megFields :: !(Maybe Text)
+    , _megUserIP        :: !(Maybe Text)
+    , _megProFileId     :: !Text
+    , _megAccountId     :: !Text
+    , _megExperimentId  :: !Text
+    , _megKey           :: !(Maybe Key)
+    , _megOAuthToken    :: !(Maybe OAuthToken)
+    , _megFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsGet'' with the minimum fields required to make a request.
@@ -114,7 +114,7 @@ managementExperimentsGet'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'experimentId'
     -> ManagementExperimentsGet'
-managementExperimentsGet' pMegWebPropertyId_ pMegProFileId_ pMegAccountId_ pMegExperimentId_ = 
+managementExperimentsGet' pMegWebPropertyId_ pMegProFileId_ pMegAccountId_ pMegExperimentId_ =
     ManagementExperimentsGet'
     { _megQuotaUser = Nothing
     , _megPrettyPrint = False

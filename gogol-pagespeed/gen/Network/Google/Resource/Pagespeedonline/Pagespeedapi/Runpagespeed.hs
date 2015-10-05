@@ -49,8 +49,8 @@ module Network.Google.Resource.Pagespeedonline.Pagespeedapi.Runpagespeed
     , prFields
     ) where
 
-import Network.Google.PageSpeed.Types
-import Network.Google.Prelude
+import           Network.Google.PageSpeed.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @PagespeedonlinePagespeedapiRunpagespeed@ which the
 -- 'PagespeedapiRunpagespeed'' request conforms to.
@@ -78,18 +78,18 @@ type PagespeedapiRunpagespeedResource =
 --
 -- /See:/ 'pagespeedapiRunpagespeed'' smart constructor.
 data PagespeedapiRunpagespeed' = PagespeedapiRunpagespeed'
-    { _prScreenshot :: !Bool
-    , _prQuotaUser :: !(Maybe Text)
-    , _prPrettyPrint :: !Bool
-    , _prUserIP :: !(Maybe Text)
-    , _prLocale :: !(Maybe Text)
-    , _prURL :: !Text
+    { _prScreenshot                :: !Bool
+    , _prQuotaUser                 :: !(Maybe Text)
+    , _prPrettyPrint               :: !Bool
+    , _prUserIP                    :: !(Maybe Text)
+    , _prLocale                    :: !(Maybe Text)
+    , _prURL                       :: !Text
     , _prFilterThirdPartyResources :: !Bool
-    , _prStrategy :: !(Maybe PagespeedapiRunpagespeedStrategy)
-    , _prRule :: !(Maybe [Text])
-    , _prKey :: !(Maybe Key)
-    , _prOAuthToken :: !(Maybe OAuthToken)
-    , _prFields :: !(Maybe Text)
+    , _prStrategy                  :: !(Maybe PagespeedapiRunpagespeedStrategy)
+    , _prRule                      :: !(Maybe [Text])
+    , _prKey                       :: !(Maybe Key)
+    , _prOAuthToken                :: !(Maybe OAuthToken)
+    , _prFields                    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagespeedapiRunpagespeed'' with the minimum fields required to make a request.
@@ -122,7 +122,7 @@ data PagespeedapiRunpagespeed' = PagespeedapiRunpagespeed'
 pagespeedapiRunpagespeed'
     :: Text -- ^ 'url'
     -> PagespeedapiRunpagespeed'
-pagespeedapiRunpagespeed' pPrURL_ = 
+pagespeedapiRunpagespeed' pPrURL_ =
     PagespeedapiRunpagespeed'
     { _prScreenshot = False
     , _prQuotaUser = Nothing

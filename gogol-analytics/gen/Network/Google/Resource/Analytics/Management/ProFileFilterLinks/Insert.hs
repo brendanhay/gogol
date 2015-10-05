@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Insert
     , mpffliFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProFileFilterLinksInsert@ which the
 -- 'ManagementProFileFilterLinksInsert'' request conforms to.
@@ -73,16 +73,16 @@ type ManagementProFileFilterLinksInsertResource =
 --
 -- /See:/ 'managementProFileFilterLinksInsert'' smart constructor.
 data ManagementProFileFilterLinksInsert' = ManagementProFileFilterLinksInsert'
-    { _mpffliQuotaUser :: !(Maybe Text)
-    , _mpffliPrettyPrint :: !Bool
+    { _mpffliQuotaUser     :: !(Maybe Text)
+    , _mpffliPrettyPrint   :: !Bool
     , _mpffliWebPropertyId :: !Text
-    , _mpffliUserIP :: !(Maybe Text)
-    , _mpffliProFileId :: !Text
-    , _mpffliPayload :: !ProFileFilterLink
-    , _mpffliAccountId :: !Text
-    , _mpffliKey :: !(Maybe Key)
-    , _mpffliOAuthToken :: !(Maybe OAuthToken)
-    , _mpffliFields :: !(Maybe Text)
+    , _mpffliUserIP        :: !(Maybe Text)
+    , _mpffliProFileId     :: !Text
+    , _mpffliPayload       :: !ProFileFilterLink
+    , _mpffliAccountId     :: !Text
+    , _mpffliKey           :: !(Maybe Key)
+    , _mpffliOAuthToken    :: !(Maybe OAuthToken)
+    , _mpffliFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFileFilterLinksInsert'' with the minimum fields required to make a request.
@@ -114,7 +114,7 @@ managementProFileFilterLinksInsert'
     -> ProFileFilterLink -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementProFileFilterLinksInsert'
-managementProFileFilterLinksInsert' pMpffliWebPropertyId_ pMpffliProFileId_ pMpffliPayload_ pMpffliAccountId_ = 
+managementProFileFilterLinksInsert' pMpffliWebPropertyId_ pMpffliProFileId_ pMpffliPayload_ pMpffliAccountId_ =
     ManagementProFileFilterLinksInsert'
     { _mpffliQuotaUser = Nothing
     , _mpffliPrettyPrint = False

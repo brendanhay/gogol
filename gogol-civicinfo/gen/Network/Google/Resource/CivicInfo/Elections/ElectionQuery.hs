@@ -41,8 +41,8 @@ module Network.Google.Resource.CivicInfo.Elections.ElectionQuery
     , eeqFields
     ) where
 
-import Network.Google.CivicInfo.Types
-import Network.Google.Prelude
+import           Network.Google.CivicInfo.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @CivicInfoElectionsElectionQuery@ which the
 -- 'ElectionsElectionQuery'' request conforms to.
@@ -61,12 +61,12 @@ type ElectionsElectionQueryResource =
 --
 -- /See:/ 'electionsElectionQuery'' smart constructor.
 data ElectionsElectionQuery' = ElectionsElectionQuery'
-    { _eeqQuotaUser :: !(Maybe Text)
+    { _eeqQuotaUser   :: !(Maybe Text)
     , _eeqPrettyPrint :: !Bool
-    , _eeqUserIP :: !(Maybe Text)
-    , _eeqKey :: !(Maybe Key)
-    , _eeqOAuthToken :: !(Maybe OAuthToken)
-    , _eeqFields :: !(Maybe Text)
+    , _eeqUserIP      :: !(Maybe Text)
+    , _eeqKey         :: !(Maybe Key)
+    , _eeqOAuthToken  :: !(Maybe OAuthToken)
+    , _eeqFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ElectionsElectionQuery'' with the minimum fields required to make a request.
@@ -86,7 +86,7 @@ data ElectionsElectionQuery' = ElectionsElectionQuery'
 -- * 'eeqFields'
 electionsElectionQuery'
     :: ElectionsElectionQuery'
-electionsElectionQuery' = 
+electionsElectionQuery' =
     ElectionsElectionQuery'
     { _eeqQuotaUser = Nothing
     , _eeqPrettyPrint = True

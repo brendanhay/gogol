@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.Uploads.Get
     , mugFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementUploadsGet@ which the
 -- 'ManagementUploadsGet'' request conforms to.
@@ -73,16 +73,16 @@ type ManagementUploadsGetResource =
 --
 -- /See:/ 'managementUploadsGet'' smart constructor.
 data ManagementUploadsGet' = ManagementUploadsGet'
-    { _mugQuotaUser :: !(Maybe Text)
-    , _mugPrettyPrint :: !Bool
-    , _mugWebPropertyId :: !Text
-    , _mugUserIP :: !(Maybe Text)
+    { _mugQuotaUser          :: !(Maybe Text)
+    , _mugPrettyPrint        :: !Bool
+    , _mugWebPropertyId      :: !Text
+    , _mugUserIP             :: !(Maybe Text)
     , _mugCustomDataSourceId :: !Text
-    , _mugAccountId :: !Text
-    , _mugKey :: !(Maybe Key)
-    , _mugOAuthToken :: !(Maybe OAuthToken)
-    , _mugUploadId :: !Text
-    , _mugFields :: !(Maybe Text)
+    , _mugAccountId          :: !Text
+    , _mugKey                :: !(Maybe Key)
+    , _mugOAuthToken         :: !(Maybe OAuthToken)
+    , _mugUploadId           :: !Text
+    , _mugFields             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUploadsGet'' with the minimum fields required to make a request.
@@ -114,7 +114,7 @@ managementUploadsGet'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'uploadId'
     -> ManagementUploadsGet'
-managementUploadsGet' pMugWebPropertyId_ pMugCustomDataSourceId_ pMugAccountId_ pMugUploadId_ = 
+managementUploadsGet' pMugWebPropertyId_ pMugCustomDataSourceId_ pMugAccountId_ pMugUploadId_ =
     ManagementUploadsGet'
     { _mugQuotaUser = Nothing
     , _mugPrettyPrint = False

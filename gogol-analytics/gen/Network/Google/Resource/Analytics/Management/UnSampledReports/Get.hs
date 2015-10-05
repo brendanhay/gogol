@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.UnSampledReports.Get
     , musrgFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementUnSampledReportsGet@ which the
 -- 'ManagementUnSampledReportsGet'' request conforms to.
@@ -73,16 +73,16 @@ type ManagementUnSampledReportsGetResource =
 --
 -- /See:/ 'managementUnSampledReportsGet'' smart constructor.
 data ManagementUnSampledReportsGet' = ManagementUnSampledReportsGet'
-    { _musrgQuotaUser :: !(Maybe Text)
-    , _musrgPrettyPrint :: !Bool
-    , _musrgWebPropertyId :: !Text
-    , _musrgUserIP :: !(Maybe Text)
-    , _musrgProFileId :: !Text
-    , _musrgAccountId :: !Text
-    , _musrgKey :: !(Maybe Key)
+    { _musrgQuotaUser         :: !(Maybe Text)
+    , _musrgPrettyPrint       :: !Bool
+    , _musrgWebPropertyId     :: !Text
+    , _musrgUserIP            :: !(Maybe Text)
+    , _musrgProFileId         :: !Text
+    , _musrgAccountId         :: !Text
+    , _musrgKey               :: !(Maybe Key)
     , _musrgUnSampledReportId :: !Text
-    , _musrgOAuthToken :: !(Maybe OAuthToken)
-    , _musrgFields :: !(Maybe Text)
+    , _musrgOAuthToken        :: !(Maybe OAuthToken)
+    , _musrgFields            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUnSampledReportsGet'' with the minimum fields required to make a request.
@@ -114,7 +114,7 @@ managementUnSampledReportsGet'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'unsampledReportId'
     -> ManagementUnSampledReportsGet'
-managementUnSampledReportsGet' pMusrgWebPropertyId_ pMusrgProFileId_ pMusrgAccountId_ pMusrgUnSampledReportId_ = 
+managementUnSampledReportsGet' pMusrgWebPropertyId_ pMusrgProFileId_ pMusrgAccountId_ pMusrgUnSampledReportId_ =
     ManagementUnSampledReportsGet'
     { _musrgQuotaUser = Nothing
     , _musrgPrettyPrint = False

@@ -42,8 +42,8 @@ module Network.Google.Resource.FusionTables.Table.Get
     , ttFields
     ) where
 
-import Network.Google.FusionTables.Types
-import Network.Google.Prelude
+import           Network.Google.FusionTables.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTableGet@ which the
 -- 'TableGet'' request conforms to.
@@ -62,13 +62,13 @@ type TableGetResource =
 --
 -- /See:/ 'tableGet'' smart constructor.
 data TableGet' = TableGet'
-    { _ttQuotaUser :: !(Maybe Text)
+    { _ttQuotaUser   :: !(Maybe Text)
     , _ttPrettyPrint :: !Bool
-    , _ttUserIP :: !(Maybe Text)
-    , _ttKey :: !(Maybe Key)
-    , _ttOAuthToken :: !(Maybe OAuthToken)
-    , _ttTableId :: !Text
-    , _ttFields :: !(Maybe Text)
+    , _ttUserIP      :: !(Maybe Text)
+    , _ttKey         :: !(Maybe Key)
+    , _ttOAuthToken  :: !(Maybe OAuthToken)
+    , _ttTableId     :: !Text
+    , _ttFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableGet'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data TableGet' = TableGet'
 tableGet'
     :: Text -- ^ 'tableId'
     -> TableGet'
-tableGet' pTtTableId_ = 
+tableGet' pTtTableId_ =
     TableGet'
     { _ttQuotaUser = Nothing
     , _ttPrettyPrint = True

@@ -42,8 +42,8 @@ module Network.Google.Resource.CivicInfo.Divisions.Search
     , dsFields
     ) where
 
-import Network.Google.CivicInfo.Types
-import Network.Google.Prelude
+import           Network.Google.CivicInfo.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @CivicInfoDivisionsSearch@ which the
 -- 'DivisionsSearch'' request conforms to.
@@ -63,13 +63,13 @@ type DivisionsSearchResource =
 --
 -- /See:/ 'divisionsSearch'' smart constructor.
 data DivisionsSearch' = DivisionsSearch'
-    { _dsQuotaUser :: !(Maybe Text)
+    { _dsQuotaUser   :: !(Maybe Text)
     , _dsPrettyPrint :: !Bool
-    , _dsUserIP :: !(Maybe Text)
-    , _dsKey :: !(Maybe Key)
-    , _dsQuery :: !(Maybe Text)
-    , _dsOAuthToken :: !(Maybe OAuthToken)
-    , _dsFields :: !(Maybe Text)
+    , _dsUserIP      :: !(Maybe Text)
+    , _dsKey         :: !(Maybe Key)
+    , _dsQuery       :: !(Maybe Text)
+    , _dsOAuthToken  :: !(Maybe OAuthToken)
+    , _dsFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DivisionsSearch'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data DivisionsSearch' = DivisionsSearch'
 -- * 'dsFields'
 divisionsSearch'
     :: DivisionsSearch'
-divisionsSearch' = 
+divisionsSearch' =
     DivisionsSearch'
     { _dsQuotaUser = Nothing
     , _dsPrettyPrint = True

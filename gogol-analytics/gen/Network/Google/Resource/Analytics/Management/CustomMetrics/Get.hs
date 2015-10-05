@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.Get
     , mcmgFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomMetricsGet@ which the
 -- 'ManagementCustomMetricsGet'' request conforms to.
@@ -70,15 +70,15 @@ type ManagementCustomMetricsGetResource =
 --
 -- /See:/ 'managementCustomMetricsGet'' smart constructor.
 data ManagementCustomMetricsGet' = ManagementCustomMetricsGet'
-    { _mcmgQuotaUser :: !(Maybe Text)
-    , _mcmgPrettyPrint :: !Bool
+    { _mcmgQuotaUser      :: !(Maybe Text)
+    , _mcmgPrettyPrint    :: !Bool
     , _mcmgCustomMetricId :: !Text
-    , _mcmgWebPropertyId :: !Text
-    , _mcmgUserIP :: !(Maybe Text)
-    , _mcmgAccountId :: !Text
-    , _mcmgKey :: !(Maybe Key)
-    , _mcmgOAuthToken :: !(Maybe OAuthToken)
-    , _mcmgFields :: !(Maybe Text)
+    , _mcmgWebPropertyId  :: !Text
+    , _mcmgUserIP         :: !(Maybe Text)
+    , _mcmgAccountId      :: !Text
+    , _mcmgKey            :: !(Maybe Key)
+    , _mcmgOAuthToken     :: !(Maybe OAuthToken)
+    , _mcmgFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsGet'' with the minimum fields required to make a request.
@@ -107,7 +107,7 @@ managementCustomMetricsGet'
     -> Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
     -> ManagementCustomMetricsGet'
-managementCustomMetricsGet' pMcmgCustomMetricId_ pMcmgWebPropertyId_ pMcmgAccountId_ = 
+managementCustomMetricsGet' pMcmgCustomMetricId_ pMcmgWebPropertyId_ pMcmgAccountId_ =
     ManagementCustomMetricsGet'
     { _mcmgQuotaUser = Nothing
     , _mcmgPrettyPrint = False

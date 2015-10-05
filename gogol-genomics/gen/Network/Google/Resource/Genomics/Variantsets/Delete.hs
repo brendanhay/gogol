@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.Variantsets.Delete
     , vddFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsetsDelete@ which the
 -- 'VariantsetsDelete'' request conforms to.
@@ -64,13 +64,13 @@ type VariantsetsDeleteResource =
 --
 -- /See:/ 'variantsetsDelete'' smart constructor.
 data VariantsetsDelete' = VariantsetsDelete'
-    { _vddQuotaUser :: !(Maybe Text)
-    , _vddPrettyPrint :: !Bool
+    { _vddQuotaUser    :: !(Maybe Text)
+    , _vddPrettyPrint  :: !Bool
     , _vddVariantSetId :: !Text
-    , _vddUserIP :: !(Maybe Text)
-    , _vddKey :: !(Maybe Key)
-    , _vddOAuthToken :: !(Maybe OAuthToken)
-    , _vddFields :: !(Maybe Text)
+    , _vddUserIP       :: !(Maybe Text)
+    , _vddKey          :: !(Maybe Key)
+    , _vddOAuthToken   :: !(Maybe OAuthToken)
+    , _vddFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsDelete'' with the minimum fields required to make a request.
@@ -93,7 +93,7 @@ data VariantsetsDelete' = VariantsetsDelete'
 variantsetsDelete'
     :: Text -- ^ 'variantSetId'
     -> VariantsetsDelete'
-variantsetsDelete' pVddVariantSetId_ = 
+variantsetsDelete' pVddVariantSetId_ =
     VariantsetsDelete'
     { _vddQuotaUser = Nothing
     , _vddPrettyPrint = True

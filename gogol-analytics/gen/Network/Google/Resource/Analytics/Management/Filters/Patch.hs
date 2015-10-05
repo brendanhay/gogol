@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.Filters.Patch
     , mfpFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementFiltersPatch@ which the
 -- 'ManagementFiltersPatch'' request conforms to.
@@ -68,15 +68,15 @@ type ManagementFiltersPatchResource =
 --
 -- /See:/ 'managementFiltersPatch'' smart constructor.
 data ManagementFiltersPatch' = ManagementFiltersPatch'
-    { _mfpQuotaUser :: !(Maybe Text)
+    { _mfpQuotaUser   :: !(Maybe Text)
     , _mfpPrettyPrint :: !Bool
-    , _mfpFilterId :: !Text
-    , _mfpUserIP :: !(Maybe Text)
-    , _mfpPayload :: !Filter
-    , _mfpAccountId :: !Text
-    , _mfpKey :: !(Maybe Key)
-    , _mfpOAuthToken :: !(Maybe OAuthToken)
-    , _mfpFields :: !(Maybe Text)
+    , _mfpFilterId    :: !Text
+    , _mfpUserIP      :: !(Maybe Text)
+    , _mfpPayload     :: !Filter
+    , _mfpAccountId   :: !Text
+    , _mfpKey         :: !(Maybe Key)
+    , _mfpOAuthToken  :: !(Maybe OAuthToken)
+    , _mfpFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersPatch'' with the minimum fields required to make a request.
@@ -105,7 +105,7 @@ managementFiltersPatch'
     -> Filter -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementFiltersPatch'
-managementFiltersPatch' pMfpFilterId_ pMfpPayload_ pMfpAccountId_ = 
+managementFiltersPatch' pMfpFilterId_ pMfpPayload_ pMfpAccountId_ =
     ManagementFiltersPatch'
     { _mfpQuotaUser = Nothing
     , _mfpPrettyPrint = False

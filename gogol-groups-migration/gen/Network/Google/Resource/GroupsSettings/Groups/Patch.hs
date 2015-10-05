@@ -43,8 +43,8 @@ module Network.Google.Resource.GroupsSettings.Groups.Patch
     , gpFields
     ) where
 
-import Network.Google.GroupsSettings.Types
-import Network.Google.Prelude
+import           Network.Google.GroupsSettings.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GroupsSettingsGroupsPatch@ which the
 -- 'GroupsPatch'' request conforms to.
@@ -63,14 +63,14 @@ type GroupsPatchResource =
 --
 -- /See:/ 'groupsPatch'' smart constructor.
 data GroupsPatch' = GroupsPatch'
-    { _gpQuotaUser :: !(Maybe Text)
-    , _gpPrettyPrint :: !Bool
-    , _gpUserIP :: !(Maybe Text)
-    , _gpPayload :: !Groups
-    , _gpKey :: !(Maybe Key)
-    , _gpOAuthToken :: !(Maybe OAuthToken)
+    { _gpQuotaUser     :: !(Maybe Text)
+    , _gpPrettyPrint   :: !Bool
+    , _gpUserIP        :: !(Maybe Text)
+    , _gpPayload       :: !Groups
+    , _gpKey           :: !(Maybe Key)
+    , _gpOAuthToken    :: !(Maybe OAuthToken)
     , _gpGroupUniqueId :: !Text
-    , _gpFields :: !(Maybe Text)
+    , _gpFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsPatch'' with the minimum fields required to make a request.
@@ -96,7 +96,7 @@ groupsPatch'
     :: Groups -- ^ 'payload'
     -> Text -- ^ 'groupUniqueId'
     -> GroupsPatch'
-groupsPatch' pGpPayload_ pGpGroupUniqueId_ = 
+groupsPatch' pGpPayload_ pGpGroupUniqueId_ =
     GroupsPatch'
     { _gpQuotaUser = Nothing
     , _gpPrettyPrint = True

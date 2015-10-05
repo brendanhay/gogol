@@ -41,8 +41,8 @@ module Network.Google.Resource.AdExchangeBuyer.Accounts.List
     , alFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerAccountsList@ which the
 -- 'AccountsList'' request conforms to.
@@ -60,12 +60,12 @@ type AccountsListResource =
 --
 -- /See:/ 'accountsList'' smart constructor.
 data AccountsList' = AccountsList'
-    { _alQuotaUser :: !(Maybe Text)
+    { _alQuotaUser   :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
-    , _alUserIP :: !(Maybe Text)
-    , _alKey :: !(Maybe Key)
-    , _alOAuthToken :: !(Maybe OAuthToken)
-    , _alFields :: !(Maybe Text)
+    , _alUserIP      :: !(Maybe Text)
+    , _alKey         :: !(Maybe Key)
+    , _alOAuthToken  :: !(Maybe OAuthToken)
+    , _alFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsList'' with the minimum fields required to make a request.
@@ -85,7 +85,7 @@ data AccountsList' = AccountsList'
 -- * 'alFields'
 accountsList'
     :: AccountsList'
-accountsList' = 
+accountsList' =
     AccountsList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True

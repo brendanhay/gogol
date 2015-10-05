@@ -42,8 +42,8 @@ module Network.Google.Resource.Blogger.Users.Get
     , ugFields
     ) where
 
-import Network.Google.Blogger.Types
-import Network.Google.Prelude
+import           Network.Google.Blogger.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerUsersGet@ which the
 -- 'UsersGet'' request conforms to.
@@ -62,13 +62,13 @@ type UsersGetResource =
 --
 -- /See:/ 'usersGet'' smart constructor.
 data UsersGet' = UsersGet'
-    { _ugQuotaUser :: !(Maybe Text)
+    { _ugQuotaUser   :: !(Maybe Text)
     , _ugPrettyPrint :: !Bool
-    , _ugUserIP :: !(Maybe Text)
-    , _ugUserId :: !Text
-    , _ugKey :: !(Maybe Key)
-    , _ugOAuthToken :: !(Maybe OAuthToken)
-    , _ugFields :: !(Maybe Text)
+    , _ugUserIP      :: !(Maybe Text)
+    , _ugUserId      :: !Text
+    , _ugKey         :: !(Maybe Key)
+    , _ugOAuthToken  :: !(Maybe OAuthToken)
+    , _ugFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersGet'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data UsersGet' = UsersGet'
 usersGet'
     :: Text -- ^ 'userId'
     -> UsersGet'
-usersGet' pUgUserId_ = 
+usersGet' pUgUserId_ =
     UsersGet'
     { _ugQuotaUser = Nothing
     , _ugPrettyPrint = True

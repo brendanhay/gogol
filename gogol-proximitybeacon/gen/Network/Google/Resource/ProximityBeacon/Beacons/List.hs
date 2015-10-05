@@ -52,8 +52,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.List
     , blCallback
     ) where
 
-import Network.Google.Prelude
-import Network.Google.ProximityBeacon.Types
+import           Network.Google.Prelude
+import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsList@ which the
 -- 'BeaconsList'' request conforms to.
@@ -84,21 +84,21 @@ type BeaconsListResource =
 --
 -- /See:/ 'beaconsList'' smart constructor.
 data BeaconsList' = BeaconsList'
-    { _blXgafv :: !(Maybe Text)
-    , _blQuotaUser :: !(Maybe Text)
-    , _blPrettyPrint :: !Bool
+    { _blXgafv          :: !(Maybe Text)
+    , _blQuotaUser      :: !(Maybe Text)
+    , _blPrettyPrint    :: !Bool
     , _blUploadProtocol :: !(Maybe Text)
-    , _blPp :: !Bool
-    , _blAccessToken :: !(Maybe Text)
-    , _blUploadType :: !(Maybe Text)
-    , _blQ :: !(Maybe Text)
-    , _blBearerToken :: !(Maybe Text)
-    , _blKey :: !(Maybe Key)
-    , _blPageToken :: !(Maybe Text)
-    , _blOAuthToken :: !(Maybe OAuthToken)
-    , _blPageSize :: !(Maybe Int32)
-    , _blFields :: !(Maybe Text)
-    , _blCallback :: !(Maybe Text)
+    , _blPp             :: !Bool
+    , _blAccessToken    :: !(Maybe Text)
+    , _blUploadType     :: !(Maybe Text)
+    , _blQ              :: !(Maybe Text)
+    , _blBearerToken    :: !(Maybe Text)
+    , _blKey            :: !(Maybe Key)
+    , _blPageToken      :: !(Maybe Text)
+    , _blOAuthToken     :: !(Maybe OAuthToken)
+    , _blPageSize       :: !(Maybe Int32)
+    , _blFields         :: !(Maybe Text)
+    , _blCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsList'' with the minimum fields required to make a request.
@@ -136,7 +136,7 @@ data BeaconsList' = BeaconsList'
 -- * 'blCallback'
 beaconsList'
     :: BeaconsList'
-beaconsList' = 
+beaconsList' =
     BeaconsList'
     { _blXgafv = Nothing
     , _blQuotaUser = Nothing

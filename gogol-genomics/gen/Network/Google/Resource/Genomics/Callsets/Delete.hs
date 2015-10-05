@@ -42,8 +42,8 @@ module Network.Google.Resource.Genomics.Callsets.Delete
     , cdFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsCallsetsDelete@ which the
 -- 'CallsetsDelete'' request conforms to.
@@ -62,13 +62,13 @@ type CallsetsDeleteResource =
 --
 -- /See:/ 'callsetsDelete'' smart constructor.
 data CallsetsDelete' = CallsetsDelete'
-    { _cdQuotaUser :: !(Maybe Text)
+    { _cdQuotaUser   :: !(Maybe Text)
     , _cdPrettyPrint :: !Bool
-    , _cdUserIP :: !(Maybe Text)
-    , _cdKey :: !(Maybe Key)
-    , _cdCallSetId :: !Text
-    , _cdOAuthToken :: !(Maybe OAuthToken)
-    , _cdFields :: !(Maybe Text)
+    , _cdUserIP      :: !(Maybe Text)
+    , _cdKey         :: !(Maybe Key)
+    , _cdCallSetId   :: !Text
+    , _cdOAuthToken  :: !(Maybe OAuthToken)
+    , _cdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsDelete'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data CallsetsDelete' = CallsetsDelete'
 callsetsDelete'
     :: Text -- ^ 'callSetId'
     -> CallsetsDelete'
-callsetsDelete' pCdCallSetId_ = 
+callsetsDelete' pCdCallSetId_ =
     CallsetsDelete'
     { _cdQuotaUser = Nothing
     , _cdPrettyPrint = True

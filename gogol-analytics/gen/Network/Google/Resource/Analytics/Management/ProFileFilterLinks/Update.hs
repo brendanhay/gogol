@@ -46,8 +46,8 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Update
     , mpffluFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProFileFilterLinksUpdate@ which the
 -- 'ManagementProFileFilterLinksUpdate'' request conforms to.
@@ -75,17 +75,17 @@ type ManagementProFileFilterLinksUpdateResource =
 --
 -- /See:/ 'managementProFileFilterLinksUpdate'' smart constructor.
 data ManagementProFileFilterLinksUpdate' = ManagementProFileFilterLinksUpdate'
-    { _mpffluQuotaUser :: !(Maybe Text)
-    , _mpffluPrettyPrint :: !Bool
+    { _mpffluQuotaUser     :: !(Maybe Text)
+    , _mpffluPrettyPrint   :: !Bool
     , _mpffluWebPropertyId :: !Text
-    , _mpffluUserIP :: !(Maybe Text)
-    , _mpffluProFileId :: !Text
-    , _mpffluPayload :: !ProFileFilterLink
-    , _mpffluAccountId :: !Text
-    , _mpffluKey :: !(Maybe Key)
-    , _mpffluLinkId :: !Text
-    , _mpffluOAuthToken :: !(Maybe OAuthToken)
-    , _mpffluFields :: !(Maybe Text)
+    , _mpffluUserIP        :: !(Maybe Text)
+    , _mpffluProFileId     :: !Text
+    , _mpffluPayload       :: !ProFileFilterLink
+    , _mpffluAccountId     :: !Text
+    , _mpffluKey           :: !(Maybe Key)
+    , _mpffluLinkId        :: !Text
+    , _mpffluOAuthToken    :: !(Maybe OAuthToken)
+    , _mpffluFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFileFilterLinksUpdate'' with the minimum fields required to make a request.
@@ -120,7 +120,7 @@ managementProFileFilterLinksUpdate'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
     -> ManagementProFileFilterLinksUpdate'
-managementProFileFilterLinksUpdate' pMpffluWebPropertyId_ pMpffluProFileId_ pMpffluPayload_ pMpffluAccountId_ pMpffluLinkId_ = 
+managementProFileFilterLinksUpdate' pMpffluWebPropertyId_ pMpffluProFileId_ pMpffluPayload_ pMpffluAccountId_ pMpffluLinkId_ =
     ManagementProFileFilterLinksUpdate'
     { _mpffluQuotaUser = Nothing
     , _mpffluPrettyPrint = False

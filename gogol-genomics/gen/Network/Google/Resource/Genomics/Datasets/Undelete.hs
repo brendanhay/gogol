@@ -44,8 +44,8 @@ module Network.Google.Resource.Genomics.Datasets.Undelete
     , duFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsDatasetsUndelete@ which the
 -- 'DatasetsUndelete'' request conforms to.
@@ -67,13 +67,13 @@ type DatasetsUndeleteResource =
 --
 -- /See:/ 'datasetsUndelete'' smart constructor.
 data DatasetsUndelete' = DatasetsUndelete'
-    { _duQuotaUser :: !(Maybe Text)
+    { _duQuotaUser   :: !(Maybe Text)
     , _duPrettyPrint :: !Bool
-    , _duUserIP :: !(Maybe Text)
-    , _duKey :: !(Maybe Key)
-    , _duDatasetId :: !Text
-    , _duOAuthToken :: !(Maybe OAuthToken)
-    , _duFields :: !(Maybe Text)
+    , _duUserIP      :: !(Maybe Text)
+    , _duKey         :: !(Maybe Key)
+    , _duDatasetId   :: !Text
+    , _duOAuthToken  :: !(Maybe OAuthToken)
+    , _duFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsUndelete'' with the minimum fields required to make a request.
@@ -96,7 +96,7 @@ data DatasetsUndelete' = DatasetsUndelete'
 datasetsUndelete'
     :: Text -- ^ 'datasetId'
     -> DatasetsUndelete'
-datasetsUndelete' pDuDatasetId_ = 
+datasetsUndelete' pDuDatasetId_ =
     DatasetsUndelete'
     { _duQuotaUser = Nothing
     , _duPrettyPrint = True

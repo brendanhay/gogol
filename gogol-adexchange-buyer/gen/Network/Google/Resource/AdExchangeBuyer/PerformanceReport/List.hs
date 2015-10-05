@@ -46,8 +46,8 @@ module Network.Google.Resource.AdExchangeBuyer.PerformanceReport.List
     , prlFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerPerformanceReportList@ which the
 -- 'PerformanceReportList'' request conforms to.
@@ -71,17 +71,17 @@ type PerformanceReportListResource =
 --
 -- /See:/ 'performanceReportList'' smart constructor.
 data PerformanceReportList' = PerformanceReportList'
-    { _prlQuotaUser :: !(Maybe Text)
-    , _prlPrettyPrint :: !Bool
-    , _prlUserIP :: !(Maybe Text)
-    , _prlAccountId :: !Int64
-    , _prlKey :: !(Maybe Key)
-    , _prlPageToken :: !(Maybe Text)
-    , _prlOAuthToken :: !(Maybe OAuthToken)
-    , _prlEndDateTime :: !Text
-    , _prlMaxResults :: !(Maybe Word32)
+    { _prlQuotaUser     :: !(Maybe Text)
+    , _prlPrettyPrint   :: !Bool
+    , _prlUserIP        :: !(Maybe Text)
+    , _prlAccountId     :: !Int64
+    , _prlKey           :: !(Maybe Key)
+    , _prlPageToken     :: !(Maybe Text)
+    , _prlOAuthToken    :: !(Maybe OAuthToken)
+    , _prlEndDateTime   :: !Text
+    , _prlMaxResults    :: !(Maybe Word32)
     , _prlStartDateTime :: !Text
-    , _prlFields :: !(Maybe Text)
+    , _prlFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PerformanceReportList'' with the minimum fields required to make a request.
@@ -114,7 +114,7 @@ performanceReportList'
     -> Text -- ^ 'endDateTime'
     -> Text -- ^ 'startDateTime'
     -> PerformanceReportList'
-performanceReportList' pPrlAccountId_ pPrlEndDateTime_ pPrlStartDateTime_ = 
+performanceReportList' pPrlAccountId_ pPrlEndDateTime_ pPrlStartDateTime_ =
     PerformanceReportList'
     { _prlQuotaUser = Nothing
     , _prlPrettyPrint = True

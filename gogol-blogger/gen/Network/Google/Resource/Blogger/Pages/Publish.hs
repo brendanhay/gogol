@@ -43,8 +43,8 @@ module Network.Google.Resource.Blogger.Pages.Publish
     , pppFields
     ) where
 
-import Network.Google.Blogger.Types
-import Network.Google.Prelude
+import           Network.Google.Blogger.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPagesPublish@ which the
 -- 'PagesPublish'' request conforms to.
@@ -66,14 +66,14 @@ type PagesPublishResource =
 --
 -- /See:/ 'pagesPublish'' smart constructor.
 data PagesPublish' = PagesPublish'
-    { _pppQuotaUser :: !(Maybe Text)
+    { _pppQuotaUser   :: !(Maybe Text)
     , _pppPrettyPrint :: !Bool
-    , _pppUserIP :: !(Maybe Text)
-    , _pppBlogId :: !Text
-    , _pppPageId :: !Text
-    , _pppKey :: !(Maybe Key)
-    , _pppOAuthToken :: !(Maybe OAuthToken)
-    , _pppFields :: !(Maybe Text)
+    , _pppUserIP      :: !(Maybe Text)
+    , _pppBlogId      :: !Text
+    , _pppPageId      :: !Text
+    , _pppKey         :: !(Maybe Key)
+    , _pppOAuthToken  :: !(Maybe OAuthToken)
+    , _pppFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesPublish'' with the minimum fields required to make a request.
@@ -99,7 +99,7 @@ pagesPublish'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'pageId'
     -> PagesPublish'
-pagesPublish' pPppBlogId_ pPppPageId_ = 
+pagesPublish' pPppBlogId_ pPppPageId_ =
     PagesPublish'
     { _pppQuotaUser = Nothing
     , _pppPrettyPrint = True

@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Insert
     , mpfiFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProFilesInsert@ which the
 -- 'ManagementProFilesInsert'' request conforms to.
@@ -69,15 +69,15 @@ type ManagementProFilesInsertResource =
 --
 -- /See:/ 'managementProFilesInsert'' smart constructor.
 data ManagementProFilesInsert' = ManagementProFilesInsert'
-    { _mpfiQuotaUser :: !(Maybe Text)
-    , _mpfiPrettyPrint :: !Bool
+    { _mpfiQuotaUser     :: !(Maybe Text)
+    , _mpfiPrettyPrint   :: !Bool
     , _mpfiWebPropertyId :: !Text
-    , _mpfiUserIP :: !(Maybe Text)
-    , _mpfiPayload :: !ProFile
-    , _mpfiAccountId :: !Text
-    , _mpfiKey :: !(Maybe Key)
-    , _mpfiOAuthToken :: !(Maybe OAuthToken)
-    , _mpfiFields :: !(Maybe Text)
+    , _mpfiUserIP        :: !(Maybe Text)
+    , _mpfiPayload       :: !ProFile
+    , _mpfiAccountId     :: !Text
+    , _mpfiKey           :: !(Maybe Key)
+    , _mpfiOAuthToken    :: !(Maybe OAuthToken)
+    , _mpfiFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFilesInsert'' with the minimum fields required to make a request.
@@ -106,7 +106,7 @@ managementProFilesInsert'
     -> ProFile -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementProFilesInsert'
-managementProFilesInsert' pMpfiWebPropertyId_ pMpfiPayload_ pMpfiAccountId_ = 
+managementProFilesInsert' pMpfiWebPropertyId_ pMpfiPayload_ pMpfiAccountId_ =
     ManagementProFilesInsert'
     { _mpfiQuotaUser = Nothing
     , _mpfiPrettyPrint = False

@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.Readgroupsets.Search
     , reaFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReadgroupsetsSearch@ which the
 -- 'ReadgroupsetsSearch'' request conforms to.
@@ -66,13 +66,13 @@ type ReadgroupsetsSearchResource =
 --
 -- /See:/ 'readgroupsetsSearch'' smart constructor.
 data ReadgroupsetsSearch' = ReadgroupsetsSearch'
-    { _reaQuotaUser :: !(Maybe Text)
+    { _reaQuotaUser   :: !(Maybe Text)
     , _reaPrettyPrint :: !Bool
-    , _reaUserIP :: !(Maybe Text)
-    , _reaPayload :: !SearchReadGroupSetsRequest
-    , _reaKey :: !(Maybe Key)
-    , _reaOAuthToken :: !(Maybe OAuthToken)
-    , _reaFields :: !(Maybe Text)
+    , _reaUserIP      :: !(Maybe Text)
+    , _reaPayload     :: !SearchReadGroupSetsRequest
+    , _reaKey         :: !(Maybe Key)
+    , _reaOAuthToken  :: !(Maybe OAuthToken)
+    , _reaFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsSearch'' with the minimum fields required to make a request.
@@ -95,7 +95,7 @@ data ReadgroupsetsSearch' = ReadgroupsetsSearch'
 readgroupsetsSearch'
     :: SearchReadGroupSetsRequest -- ^ 'payload'
     -> ReadgroupsetsSearch'
-readgroupsetsSearch' pReaPayload_ = 
+readgroupsetsSearch' pReaPayload_ =
     ReadgroupsetsSearch'
     { _reaQuotaUser = Nothing
     , _reaPrettyPrint = True

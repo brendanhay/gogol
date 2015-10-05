@@ -244,9 +244,9 @@ module Network.Google.CivicInfo.Types
     , offParty
     ) where
 
-import Network.Google.CivicInfo.Types.Product
-import Network.Google.CivicInfo.Types.Sum
-import Network.Google.Prelude
+import           Network.Google.CivicInfo.Types.Product
+import           Network.Google.CivicInfo.Types.Sum
+import           Network.Google.Prelude
 
 -- | URL referring to version 'v2' of the Google Civic Information API.
 civicInfoURL :: BaseUrl

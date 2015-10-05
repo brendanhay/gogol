@@ -42,8 +42,8 @@ module Network.Google.Resource.Container.Projects.Clusters.List
     , pclFields
     ) where
 
-import Network.Google.Container.Types
-import Network.Google.Prelude
+import           Network.Google.Container.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @ContainerProjectsClustersList@ which the
 -- 'ProjectsClustersList'' request conforms to.
@@ -63,13 +63,13 @@ type ProjectsClustersListResource =
 --
 -- /See:/ 'projectsClustersList'' smart constructor.
 data ProjectsClustersList' = ProjectsClustersList'
-    { _pclQuotaUser :: !(Maybe Text)
+    { _pclQuotaUser   :: !(Maybe Text)
     , _pclPrettyPrint :: !Bool
-    , _pclUserIP :: !(Maybe Text)
-    , _pclKey :: !(Maybe Key)
-    , _pclProjectId :: !Text
-    , _pclOAuthToken :: !(Maybe OAuthToken)
-    , _pclFields :: !(Maybe Text)
+    , _pclUserIP      :: !(Maybe Text)
+    , _pclKey         :: !(Maybe Key)
+    , _pclProjectId   :: !Text
+    , _pclOAuthToken  :: !(Maybe OAuthToken)
+    , _pclFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsClustersList'' with the minimum fields required to make a request.
@@ -92,7 +92,7 @@ data ProjectsClustersList' = ProjectsClustersList'
 projectsClustersList'
     :: Text -- ^ 'projectId'
     -> ProjectsClustersList'
-projectsClustersList' pPclProjectId_ = 
+projectsClustersList' pPclProjectId_ =
     ProjectsClustersList'
     { _pclQuotaUser = Nothing
     , _pclPrettyPrint = True

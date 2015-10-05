@@ -50,8 +50,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Register
     , brCallback
     ) where
 
-import Network.Google.Prelude
-import Network.Google.ProximityBeacon.Types
+import           Network.Google.Prelude
+import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsRegister@ which the
 -- 'BeaconsRegister'' request conforms to.
@@ -79,19 +79,19 @@ type BeaconsRegisterResource =
 --
 -- /See:/ 'beaconsRegister'' smart constructor.
 data BeaconsRegister' = BeaconsRegister'
-    { _brXgafv :: !(Maybe Text)
-    , _brQuotaUser :: !(Maybe Text)
-    , _brPrettyPrint :: !Bool
+    { _brXgafv          :: !(Maybe Text)
+    , _brQuotaUser      :: !(Maybe Text)
+    , _brPrettyPrint    :: !Bool
     , _brUploadProtocol :: !(Maybe Text)
-    , _brPp :: !Bool
-    , _brAccessToken :: !(Maybe Text)
-    , _brUploadType :: !(Maybe Text)
-    , _brPayload :: !Beacon
-    , _brBearerToken :: !(Maybe Text)
-    , _brKey :: !(Maybe Key)
-    , _brOAuthToken :: !(Maybe OAuthToken)
-    , _brFields :: !(Maybe Text)
-    , _brCallback :: !(Maybe Text)
+    , _brPp             :: !Bool
+    , _brAccessToken    :: !(Maybe Text)
+    , _brUploadType     :: !(Maybe Text)
+    , _brPayload        :: !Beacon
+    , _brBearerToken    :: !(Maybe Text)
+    , _brKey            :: !(Maybe Key)
+    , _brOAuthToken     :: !(Maybe OAuthToken)
+    , _brFields         :: !(Maybe Text)
+    , _brCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsRegister'' with the minimum fields required to make a request.
@@ -126,7 +126,7 @@ data BeaconsRegister' = BeaconsRegister'
 beaconsRegister'
     :: Beacon -- ^ 'payload'
     -> BeaconsRegister'
-beaconsRegister' pBrPayload_ = 
+beaconsRegister' pBrPayload_ =
     BeaconsRegister'
     { _brXgafv = Nothing
     , _brQuotaUser = Nothing

@@ -50,8 +50,8 @@ module Network.Google.Resource.Logging.Projects.Sinks.Create
     , pscCallback
     ) where
 
-import Network.Google.Logging.Types
-import Network.Google.Prelude
+import           Network.Google.Logging.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsSinksCreate@ which the
 -- 'ProjectsSinksCreate'' request conforms to.
@@ -81,20 +81,20 @@ type ProjectsSinksCreateResource =
 --
 -- /See:/ 'projectsSinksCreate'' smart constructor.
 data ProjectsSinksCreate' = ProjectsSinksCreate'
-    { _pscXgafv :: !(Maybe Text)
-    , _pscQuotaUser :: !(Maybe Text)
-    , _pscPrettyPrint :: !Bool
+    { _pscXgafv          :: !(Maybe Text)
+    , _pscQuotaUser      :: !(Maybe Text)
+    , _pscPrettyPrint    :: !Bool
     , _pscUploadProtocol :: !(Maybe Text)
-    , _pscPp :: !Bool
-    , _pscAccessToken :: !(Maybe Text)
-    , _pscUploadType :: !(Maybe Text)
-    , _pscPayload :: !LogSink
-    , _pscBearerToken :: !(Maybe Text)
-    , _pscKey :: !(Maybe Key)
-    , _pscOAuthToken :: !(Maybe OAuthToken)
-    , _pscProjectsId :: !Text
-    , _pscFields :: !(Maybe Text)
-    , _pscCallback :: !(Maybe Text)
+    , _pscPp             :: !Bool
+    , _pscAccessToken    :: !(Maybe Text)
+    , _pscUploadType     :: !(Maybe Text)
+    , _pscPayload        :: !LogSink
+    , _pscBearerToken    :: !(Maybe Text)
+    , _pscKey            :: !(Maybe Key)
+    , _pscOAuthToken     :: !(Maybe OAuthToken)
+    , _pscProjectsId     :: !Text
+    , _pscFields         :: !(Maybe Text)
+    , _pscCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSinksCreate'' with the minimum fields required to make a request.
@@ -132,7 +132,7 @@ projectsSinksCreate'
     :: LogSink -- ^ 'payload'
     -> Text -- ^ 'projectsId'
     -> ProjectsSinksCreate'
-projectsSinksCreate' pPscPayload_ pPscProjectsId_ = 
+projectsSinksCreate' pPscPayload_ pPscProjectsId_ =
     ProjectsSinksCreate'
     { _pscXgafv = Nothing
     , _pscQuotaUser = Nothing

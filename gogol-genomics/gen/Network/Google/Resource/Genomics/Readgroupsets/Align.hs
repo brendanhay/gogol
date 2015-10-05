@@ -44,8 +44,8 @@ module Network.Google.Resource.Genomics.Readgroupsets.Align
     , raFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReadgroupsetsAlign@ which the
 -- 'ReadgroupsetsAlign'' request conforms to.
@@ -68,13 +68,13 @@ type ReadgroupsetsAlignResource =
 --
 -- /See:/ 'readgroupsetsAlign'' smart constructor.
 data ReadgroupsetsAlign' = ReadgroupsetsAlign'
-    { _raQuotaUser :: !(Maybe Text)
+    { _raQuotaUser   :: !(Maybe Text)
     , _raPrettyPrint :: !Bool
-    , _raUserIP :: !(Maybe Text)
-    , _raPayload :: !AlignReadGroupSetsRequest
-    , _raKey :: !(Maybe Key)
-    , _raOAuthToken :: !(Maybe OAuthToken)
-    , _raFields :: !(Maybe Text)
+    , _raUserIP      :: !(Maybe Text)
+    , _raPayload     :: !AlignReadGroupSetsRequest
+    , _raKey         :: !(Maybe Key)
+    , _raOAuthToken  :: !(Maybe OAuthToken)
+    , _raFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsAlign'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ data ReadgroupsetsAlign' = ReadgroupsetsAlign'
 readgroupsetsAlign'
     :: AlignReadGroupSetsRequest -- ^ 'payload'
     -> ReadgroupsetsAlign'
-readgroupsetsAlign' pRaPayload_ = 
+readgroupsetsAlign' pRaPayload_ =
     ReadgroupsetsAlign'
     { _raQuotaUser = Nothing
     , _raPrettyPrint = True

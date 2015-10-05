@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.AnnotationSets.Get
     , asgFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsAnnotationSetsGet@ which the
 -- 'AnnotationSetsGet'' request conforms to.
@@ -64,13 +64,13 @@ type AnnotationSetsGetResource =
 --
 -- /See:/ 'annotationSetsGet'' smart constructor.
 data AnnotationSetsGet' = AnnotationSetsGet'
-    { _asgQuotaUser :: !(Maybe Text)
-    , _asgPrettyPrint :: !Bool
+    { _asgQuotaUser       :: !(Maybe Text)
+    , _asgPrettyPrint     :: !Bool
     , _asgAnnotationSetId :: !Text
-    , _asgUserIP :: !(Maybe Text)
-    , _asgKey :: !(Maybe Key)
-    , _asgOAuthToken :: !(Maybe OAuthToken)
-    , _asgFields :: !(Maybe Text)
+    , _asgUserIP          :: !(Maybe Text)
+    , _asgKey             :: !(Maybe Key)
+    , _asgOAuthToken      :: !(Maybe OAuthToken)
+    , _asgFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSetsGet'' with the minimum fields required to make a request.
@@ -93,7 +93,7 @@ data AnnotationSetsGet' = AnnotationSetsGet'
 annotationSetsGet'
     :: Text -- ^ 'annotationSetId'
     -> AnnotationSetsGet'
-annotationSetsGet' pAsgAnnotationSetId_ = 
+annotationSetsGet' pAsgAnnotationSetId_ =
     AnnotationSetsGet'
     { _asgQuotaUser = Nothing
     , _asgPrettyPrint = True

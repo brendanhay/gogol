@@ -44,8 +44,8 @@ module Network.Google.Resource.Genomics.Datasets.List
     , dlFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsDatasetsList@ which the
 -- 'DatasetsList'' request conforms to.
@@ -67,15 +67,15 @@ type DatasetsListResource =
 --
 -- /See:/ 'datasetsList'' smart constructor.
 data DatasetsList' = DatasetsList'
-    { _dlQuotaUser :: !(Maybe Text)
-    , _dlPrettyPrint :: !Bool
-    , _dlUserIP :: !(Maybe Text)
+    { _dlQuotaUser     :: !(Maybe Text)
+    , _dlPrettyPrint   :: !Bool
+    , _dlUserIP        :: !(Maybe Text)
     , _dlProjectNumber :: !(Maybe Int64)
-    , _dlKey :: !(Maybe Key)
-    , _dlPageToken :: !(Maybe Text)
-    , _dlOAuthToken :: !(Maybe OAuthToken)
-    , _dlPageSize :: !(Maybe Int32)
-    , _dlFields :: !(Maybe Text)
+    , _dlKey           :: !(Maybe Key)
+    , _dlPageToken     :: !(Maybe Text)
+    , _dlOAuthToken    :: !(Maybe OAuthToken)
+    , _dlPageSize      :: !(Maybe Int32)
+    , _dlFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsList'' with the minimum fields required to make a request.
@@ -101,7 +101,7 @@ data DatasetsList' = DatasetsList'
 -- * 'dlFields'
 datasetsList'
     :: DatasetsList'
-datasetsList' = 
+datasetsList' =
     DatasetsList'
     { _dlQuotaUser = Nothing
     , _dlPrettyPrint = True

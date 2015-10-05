@@ -44,8 +44,8 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Update
     , cauFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerClientAccessUpdate@ which the
 -- 'ClientAccessUpdate'' request conforms to.
@@ -66,15 +66,15 @@ type ClientAccessUpdateResource =
 --
 -- /See:/ 'clientAccessUpdate'' smart constructor.
 data ClientAccessUpdate' = ClientAccessUpdate'
-    { _cauQuotaUser :: !(Maybe Text)
-    , _cauPrettyPrint :: !Bool
-    , _cauUserIP :: !(Maybe Text)
+    { _cauQuotaUser        :: !(Maybe Text)
+    , _cauPrettyPrint      :: !Bool
+    , _cauUserIP           :: !(Maybe Text)
     , _cauSponsorAccountId :: !Int32
-    , _cauPayload :: !ClientAccessCapabilities
-    , _cauKey :: !(Maybe Key)
-    , _cauClientAccountId :: !Int64
-    , _cauOAuthToken :: !(Maybe OAuthToken)
-    , _cauFields :: !(Maybe Text)
+    , _cauPayload          :: !ClientAccessCapabilities
+    , _cauKey              :: !(Maybe Key)
+    , _cauClientAccountId  :: !Int64
+    , _cauOAuthToken       :: !(Maybe OAuthToken)
+    , _cauFields           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessUpdate'' with the minimum fields required to make a request.
@@ -103,7 +103,7 @@ clientAccessUpdate'
     -> ClientAccessCapabilities -- ^ 'payload'
     -> Int64 -- ^ 'clientAccountId'
     -> ClientAccessUpdate'
-clientAccessUpdate' pCauSponsorAccountId_ pCauPayload_ pCauClientAccountId_ = 
+clientAccessUpdate' pCauSponsorAccountId_ pCauPayload_ pCauClientAccountId_ =
     ClientAccessUpdate'
     { _cauQuotaUser = Nothing
     , _cauPrettyPrint = True

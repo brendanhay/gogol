@@ -43,8 +43,8 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.Delete
     , mauldFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementAccountUserLinksDelete@ which the
 -- 'ManagementAccountUserLinksDelete'' request conforms to.
@@ -66,14 +66,14 @@ type ManagementAccountUserLinksDeleteResource =
 --
 -- /See:/ 'managementAccountUserLinksDelete'' smart constructor.
 data ManagementAccountUserLinksDelete' = ManagementAccountUserLinksDelete'
-    { _mauldQuotaUser :: !(Maybe Text)
+    { _mauldQuotaUser   :: !(Maybe Text)
     , _mauldPrettyPrint :: !Bool
-    , _mauldUserIP :: !(Maybe Text)
-    , _mauldAccountId :: !Text
-    , _mauldKey :: !(Maybe Key)
-    , _mauldLinkId :: !Text
-    , _mauldOAuthToken :: !(Maybe OAuthToken)
-    , _mauldFields :: !(Maybe Text)
+    , _mauldUserIP      :: !(Maybe Text)
+    , _mauldAccountId   :: !Text
+    , _mauldKey         :: !(Maybe Key)
+    , _mauldLinkId      :: !Text
+    , _mauldOAuthToken  :: !(Maybe OAuthToken)
+    , _mauldFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksDelete'' with the minimum fields required to make a request.
@@ -99,7 +99,7 @@ managementAccountUserLinksDelete'
     :: Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
     -> ManagementAccountUserLinksDelete'
-managementAccountUserLinksDelete' pMauldAccountId_ pMauldLinkId_ = 
+managementAccountUserLinksDelete' pMauldAccountId_ pMauldLinkId_ =
     ManagementAccountUserLinksDelete'
     { _mauldQuotaUser = Nothing
     , _mauldPrettyPrint = False

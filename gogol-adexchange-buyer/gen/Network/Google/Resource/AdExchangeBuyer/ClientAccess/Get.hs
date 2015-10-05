@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Get
     , cagFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerClientAccessGet@ which the
 -- 'ClientAccessGet'' request conforms to.
@@ -64,14 +64,14 @@ type ClientAccessGetResource =
 --
 -- /See:/ 'clientAccessGet'' smart constructor.
 data ClientAccessGet' = ClientAccessGet'
-    { _cagQuotaUser :: !(Maybe Text)
-    , _cagPrettyPrint :: !Bool
-    , _cagUserIP :: !(Maybe Text)
+    { _cagQuotaUser        :: !(Maybe Text)
+    , _cagPrettyPrint      :: !Bool
+    , _cagUserIP           :: !(Maybe Text)
     , _cagSponsorAccountId :: !Int32
-    , _cagKey :: !(Maybe Key)
-    , _cagClientAccountId :: !Int64
-    , _cagOAuthToken :: !(Maybe OAuthToken)
-    , _cagFields :: !(Maybe Text)
+    , _cagKey              :: !(Maybe Key)
+    , _cagClientAccountId  :: !Int64
+    , _cagOAuthToken       :: !(Maybe OAuthToken)
+    , _cagFields           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessGet'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ clientAccessGet'
     :: Int32 -- ^ 'sponsorAccountId'
     -> Int64 -- ^ 'clientAccountId'
     -> ClientAccessGet'
-clientAccessGet' pCagSponsorAccountId_ pCagClientAccountId_ = 
+clientAccessGet' pCagSponsorAccountId_ pCagClientAccountId_ =
     ClientAccessGet'
     { _cagQuotaUser = Nothing
     , _cagPrettyPrint = True

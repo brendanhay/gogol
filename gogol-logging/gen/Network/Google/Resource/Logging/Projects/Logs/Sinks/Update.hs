@@ -51,8 +51,8 @@ module Network.Google.Resource.Logging.Projects.Logs.Sinks.Update
     , plsuCallback
     ) where
 
-import Network.Google.Logging.Types
-import Network.Google.Prelude
+import           Network.Google.Logging.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogsSinksUpdate@ which the
 -- 'ProjectsLogsSinksUpdate'' request conforms to.
@@ -84,22 +84,22 @@ type ProjectsLogsSinksUpdateResource =
 --
 -- /See:/ 'projectsLogsSinksUpdate'' smart constructor.
 data ProjectsLogsSinksUpdate' = ProjectsLogsSinksUpdate'
-    { _plsuXgafv :: !(Maybe Text)
-    , _plsuQuotaUser :: !(Maybe Text)
-    , _plsuPrettyPrint :: !Bool
+    { _plsuXgafv          :: !(Maybe Text)
+    , _plsuQuotaUser      :: !(Maybe Text)
+    , _plsuPrettyPrint    :: !Bool
     , _plsuUploadProtocol :: !(Maybe Text)
-    , _plsuLogsId :: !Text
-    , _plsuPp :: !Bool
-    , _plsuAccessToken :: !(Maybe Text)
-    , _plsuUploadType :: !(Maybe Text)
-    , _plsuPayload :: !LogSink
-    , _plsuBearerToken :: !(Maybe Text)
-    , _plsuKey :: !(Maybe Key)
-    , _plsuOAuthToken :: !(Maybe OAuthToken)
-    , _plsuProjectsId :: !Text
-    , _plsuSinksId :: !Text
-    , _plsuFields :: !(Maybe Text)
-    , _plsuCallback :: !(Maybe Text)
+    , _plsuLogsId         :: !Text
+    , _plsuPp             :: !Bool
+    , _plsuAccessToken    :: !(Maybe Text)
+    , _plsuUploadType     :: !(Maybe Text)
+    , _plsuPayload        :: !LogSink
+    , _plsuBearerToken    :: !(Maybe Text)
+    , _plsuKey            :: !(Maybe Key)
+    , _plsuOAuthToken     :: !(Maybe OAuthToken)
+    , _plsuProjectsId     :: !Text
+    , _plsuSinksId        :: !Text
+    , _plsuFields         :: !(Maybe Text)
+    , _plsuCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogsSinksUpdate'' with the minimum fields required to make a request.
@@ -143,7 +143,7 @@ projectsLogsSinksUpdate'
     -> Text -- ^ 'projectsId'
     -> Text -- ^ 'sinksId'
     -> ProjectsLogsSinksUpdate'
-projectsLogsSinksUpdate' pPlsuLogsId_ pPlsuPayload_ pPlsuProjectsId_ pPlsuSinksId_ = 
+projectsLogsSinksUpdate' pPlsuLogsId_ pPlsuPayload_ pPlsuProjectsId_ pPlsuSinksId_ =
     ProjectsLogsSinksUpdate'
     { _plsuXgafv = Nothing
     , _plsuQuotaUser = Nothing

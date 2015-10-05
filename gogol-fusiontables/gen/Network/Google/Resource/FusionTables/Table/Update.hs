@@ -45,8 +45,8 @@ module Network.Google.Resource.FusionTables.Table.Update
     , tuFields
     ) where
 
-import Network.Google.FusionTables.Types
-import Network.Google.Prelude
+import           Network.Google.FusionTables.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTableUpdate@ which the
 -- 'TableUpdate'' request conforms to.
@@ -68,15 +68,15 @@ type TableUpdateResource =
 --
 -- /See:/ 'tableUpdate'' smart constructor.
 data TableUpdate' = TableUpdate'
-    { _tuQuotaUser :: !(Maybe Text)
-    , _tuPrettyPrint :: !Bool
-    , _tuUserIP :: !(Maybe Text)
-    , _tuPayload :: !Table
+    { _tuQuotaUser             :: !(Maybe Text)
+    , _tuPrettyPrint           :: !Bool
+    , _tuUserIP                :: !(Maybe Text)
+    , _tuPayload               :: !Table
     , _tuReplaceViewDefinition :: !(Maybe Bool)
-    , _tuKey :: !(Maybe Key)
-    , _tuOAuthToken :: !(Maybe OAuthToken)
-    , _tuTableId :: !Text
-    , _tuFields :: !(Maybe Text)
+    , _tuKey                   :: !(Maybe Key)
+    , _tuOAuthToken            :: !(Maybe OAuthToken)
+    , _tuTableId               :: !Text
+    , _tuFields                :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableUpdate'' with the minimum fields required to make a request.
@@ -104,7 +104,7 @@ tableUpdate'
     :: Table -- ^ 'payload'
     -> Text -- ^ 'tableId'
     -> TableUpdate'
-tableUpdate' pTuPayload_ pTuTableId_ = 
+tableUpdate' pTuPayload_ pTuTableId_ =
     TableUpdate'
     { _tuQuotaUser = Nothing
     , _tuPrettyPrint = True

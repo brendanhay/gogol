@@ -45,8 +45,8 @@ module Network.Google.Resource.PlusDomains.Comments.List
     , comFields
     ) where
 
-import Network.Google.PlusDomains.Types
-import Network.Google.Prelude
+import           Network.Google.PlusDomains.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsCommentsList@ which the
 -- 'CommentsList'' request conforms to.
@@ -69,16 +69,16 @@ type CommentsListResource =
 --
 -- /See:/ 'commentsList'' smart constructor.
 data CommentsList' = CommentsList'
-    { _comQuotaUser :: !(Maybe Text)
+    { _comQuotaUser   :: !(Maybe Text)
     , _comPrettyPrint :: !Bool
-    , _comUserIP :: !(Maybe Text)
-    , _comActivityId :: !Text
-    , _comSortOrder :: !CommentsListSortOrder
-    , _comKey :: !(Maybe Key)
-    , _comPageToken :: !(Maybe Text)
-    , _comOAuthToken :: !(Maybe OAuthToken)
-    , _comMaxResults :: !Word32
-    , _comFields :: !(Maybe Text)
+    , _comUserIP      :: !(Maybe Text)
+    , _comActivityId  :: !Text
+    , _comSortOrder   :: !CommentsListSortOrder
+    , _comKey         :: !(Maybe Key)
+    , _comPageToken   :: !(Maybe Text)
+    , _comOAuthToken  :: !(Maybe OAuthToken)
+    , _comMaxResults  :: !Word32
+    , _comFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsList'' with the minimum fields required to make a request.
@@ -107,7 +107,7 @@ data CommentsList' = CommentsList'
 commentsList'
     :: Text -- ^ 'activityId'
     -> CommentsList'
-commentsList' pComActivityId_ = 
+commentsList' pComActivityId_ =
     CommentsList'
     { _comQuotaUser = Nothing
     , _comPrettyPrint = True

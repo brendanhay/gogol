@@ -43,8 +43,8 @@ module Network.Google.Resource.Analytics.Management.Filters.Delete
     , mfdFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementFiltersDelete@ which the
 -- 'ManagementFiltersDelete'' request conforms to.
@@ -66,14 +66,14 @@ type ManagementFiltersDeleteResource =
 --
 -- /See:/ 'managementFiltersDelete'' smart constructor.
 data ManagementFiltersDelete' = ManagementFiltersDelete'
-    { _mfdQuotaUser :: !(Maybe Text)
+    { _mfdQuotaUser   :: !(Maybe Text)
     , _mfdPrettyPrint :: !Bool
-    , _mfdFilterId :: !Text
-    , _mfdUserIP :: !(Maybe Text)
-    , _mfdAccountId :: !Text
-    , _mfdKey :: !(Maybe Key)
-    , _mfdOAuthToken :: !(Maybe OAuthToken)
-    , _mfdFields :: !(Maybe Text)
+    , _mfdFilterId    :: !Text
+    , _mfdUserIP      :: !(Maybe Text)
+    , _mfdAccountId   :: !Text
+    , _mfdKey         :: !(Maybe Key)
+    , _mfdOAuthToken  :: !(Maybe OAuthToken)
+    , _mfdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersDelete'' with the minimum fields required to make a request.
@@ -99,7 +99,7 @@ managementFiltersDelete'
     :: Text -- ^ 'filterId'
     -> Text -- ^ 'accountId'
     -> ManagementFiltersDelete'
-managementFiltersDelete' pMfdFilterId_ pMfdAccountId_ = 
+managementFiltersDelete' pMfdFilterId_ pMfdAccountId_ =
     ManagementFiltersDelete'
     { _mfdQuotaUser = Nothing
     , _mfdPrettyPrint = False

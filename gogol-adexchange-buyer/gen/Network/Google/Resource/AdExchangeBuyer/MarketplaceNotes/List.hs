@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.List
     , mnlFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplaceNotesList@ which the
 -- 'MarketplaceNotesList'' request conforms to.
@@ -64,13 +64,13 @@ type MarketplaceNotesListResource =
 --
 -- /See:/ 'marketplaceNotesList'' smart constructor.
 data MarketplaceNotesList' = MarketplaceNotesList'
-    { _mnlQuotaUser :: !(Maybe Text)
+    { _mnlQuotaUser   :: !(Maybe Text)
     , _mnlPrettyPrint :: !Bool
-    , _mnlUserIP :: !(Maybe Text)
-    , _mnlKey :: !(Maybe Key)
-    , _mnlOAuthToken :: !(Maybe OAuthToken)
-    , _mnlOrderId :: !Text
-    , _mnlFields :: !(Maybe Text)
+    , _mnlUserIP      :: !(Maybe Text)
+    , _mnlKey         :: !(Maybe Key)
+    , _mnlOAuthToken  :: !(Maybe OAuthToken)
+    , _mnlOrderId     :: !Text
+    , _mnlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceNotesList'' with the minimum fields required to make a request.
@@ -93,7 +93,7 @@ data MarketplaceNotesList' = MarketplaceNotesList'
 marketplaceNotesList'
     :: Text -- ^ 'orderId'
     -> MarketplaceNotesList'
-marketplaceNotesList' pMnlOrderId_ = 
+marketplaceNotesList' pMnlOrderId_ =
     MarketplaceNotesList'
     { _mnlQuotaUser = Nothing
     , _mnlPrettyPrint = True

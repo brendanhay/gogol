@@ -16,4 +16,4 @@
 --
 module Network.Google.EmailMigration.Types.Sum where
 
-import Network.Google.Prelude
+import           Network.Google.Prelude

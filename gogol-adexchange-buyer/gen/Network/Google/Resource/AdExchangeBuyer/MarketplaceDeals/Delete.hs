@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Delete
     , mddFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplaceDealsDelete@ which the
 -- 'MarketplaceDealsDelete'' request conforms to.
@@ -67,14 +67,14 @@ type MarketplaceDealsDeleteResource =
 --
 -- /See:/ 'marketplaceDealsDelete'' smart constructor.
 data MarketplaceDealsDelete' = MarketplaceDealsDelete'
-    { _mddQuotaUser :: !(Maybe Text)
+    { _mddQuotaUser   :: !(Maybe Text)
     , _mddPrettyPrint :: !Bool
-    , _mddUserIP :: !(Maybe Text)
-    , _mddPayload :: !DeleteOrderDealsRequest
-    , _mddKey :: !(Maybe Key)
-    , _mddOAuthToken :: !(Maybe OAuthToken)
-    , _mddOrderId :: !Text
-    , _mddFields :: !(Maybe Text)
+    , _mddUserIP      :: !(Maybe Text)
+    , _mddPayload     :: !DeleteOrderDealsRequest
+    , _mddKey         :: !(Maybe Key)
+    , _mddOAuthToken  :: !(Maybe OAuthToken)
+    , _mddOrderId     :: !Text
+    , _mddFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceDealsDelete'' with the minimum fields required to make a request.
@@ -100,7 +100,7 @@ marketplaceDealsDelete'
     :: DeleteOrderDealsRequest -- ^ 'payload'
     -> Text -- ^ 'orderId'
     -> MarketplaceDealsDelete'
-marketplaceDealsDelete' pMddPayload_ pMddOrderId_ = 
+marketplaceDealsDelete' pMddPayload_ pMddOrderId_ =
     MarketplaceDealsDelete'
     { _mddQuotaUser = Nothing
     , _mddPrettyPrint = True

@@ -48,8 +48,8 @@ module Network.Google.Resource.Genomics.Variantsets.MergeVariants
     , vmvFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsetsMergeVariants@ which the
 -- 'VariantsetsMergeVariants'' request conforms to.
@@ -76,14 +76,14 @@ type VariantsetsMergeVariantsResource =
 --
 -- /See:/ 'variantsetsMergeVariants'' smart constructor.
 data VariantsetsMergeVariants' = VariantsetsMergeVariants'
-    { _vmvQuotaUser :: !(Maybe Text)
-    , _vmvPrettyPrint :: !Bool
+    { _vmvQuotaUser    :: !(Maybe Text)
+    , _vmvPrettyPrint  :: !Bool
     , _vmvVariantSetId :: !Text
-    , _vmvUserIP :: !(Maybe Text)
-    , _vmvPayload :: !MergeVariantsRequest
-    , _vmvKey :: !(Maybe Key)
-    , _vmvOAuthToken :: !(Maybe OAuthToken)
-    , _vmvFields :: !(Maybe Text)
+    , _vmvUserIP       :: !(Maybe Text)
+    , _vmvPayload      :: !MergeVariantsRequest
+    , _vmvKey          :: !(Maybe Key)
+    , _vmvOAuthToken   :: !(Maybe OAuthToken)
+    , _vmvFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsMergeVariants'' with the minimum fields required to make a request.
@@ -109,7 +109,7 @@ variantsetsMergeVariants'
     :: Text -- ^ 'variantSetId'
     -> MergeVariantsRequest -- ^ 'payload'
     -> VariantsetsMergeVariants'
-variantsetsMergeVariants' pVmvVariantSetId_ pVmvPayload_ = 
+variantsetsMergeVariants' pVmvVariantSetId_ pVmvPayload_ =
     VariantsetsMergeVariants'
     { _vmvQuotaUser = Nothing
     , _vmvPrettyPrint = True

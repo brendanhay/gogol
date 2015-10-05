@@ -42,8 +42,8 @@ module Network.Google.Resource.FusionTables.Table.Delete
     , tdFields
     ) where
 
-import Network.Google.FusionTables.Types
-import Network.Google.Prelude
+import           Network.Google.FusionTables.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTableDelete@ which the
 -- 'TableDelete'' request conforms to.
@@ -62,13 +62,13 @@ type TableDeleteResource =
 --
 -- /See:/ 'tableDelete'' smart constructor.
 data TableDelete' = TableDelete'
-    { _tdQuotaUser :: !(Maybe Text)
+    { _tdQuotaUser   :: !(Maybe Text)
     , _tdPrettyPrint :: !Bool
-    , _tdUserIP :: !(Maybe Text)
-    , _tdKey :: !(Maybe Key)
-    , _tdOAuthToken :: !(Maybe OAuthToken)
-    , _tdTableId :: !Text
-    , _tdFields :: !(Maybe Text)
+    , _tdUserIP      :: !(Maybe Text)
+    , _tdKey         :: !(Maybe Key)
+    , _tdOAuthToken  :: !(Maybe OAuthToken)
+    , _tdTableId     :: !Text
+    , _tdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableDelete'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data TableDelete' = TableDelete'
 tableDelete'
     :: Text -- ^ 'tableId'
     -> TableDelete'
-tableDelete' pTdTableId_ = 
+tableDelete' pTdTableId_ =
     TableDelete'
     { _tdQuotaUser = Nothing
     , _tdPrettyPrint = True

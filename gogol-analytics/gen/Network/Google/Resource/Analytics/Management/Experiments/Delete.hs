@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.Experiments.Delete
     , medFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementExperimentsDelete@ which the
 -- 'ManagementExperimentsDelete'' request conforms to.
@@ -72,16 +72,16 @@ type ManagementExperimentsDeleteResource =
 --
 -- /See:/ 'managementExperimentsDelete'' smart constructor.
 data ManagementExperimentsDelete' = ManagementExperimentsDelete'
-    { _medQuotaUser :: !(Maybe Text)
-    , _medPrettyPrint :: !Bool
+    { _medQuotaUser     :: !(Maybe Text)
+    , _medPrettyPrint   :: !Bool
     , _medWebPropertyId :: !Text
-    , _medUserIP :: !(Maybe Text)
-    , _medProFileId :: !Text
-    , _medAccountId :: !Text
-    , _medExperimentId :: !Text
-    , _medKey :: !(Maybe Key)
-    , _medOAuthToken :: !(Maybe OAuthToken)
-    , _medFields :: !(Maybe Text)
+    , _medUserIP        :: !(Maybe Text)
+    , _medProFileId     :: !Text
+    , _medAccountId     :: !Text
+    , _medExperimentId  :: !Text
+    , _medKey           :: !(Maybe Key)
+    , _medOAuthToken    :: !(Maybe OAuthToken)
+    , _medFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsDelete'' with the minimum fields required to make a request.
@@ -113,7 +113,7 @@ managementExperimentsDelete'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'experimentId'
     -> ManagementExperimentsDelete'
-managementExperimentsDelete' pMedWebPropertyId_ pMedProFileId_ pMedAccountId_ pMedExperimentId_ = 
+managementExperimentsDelete' pMedWebPropertyId_ pMedProFileId_ pMedAccountId_ pMedExperimentId_ =
     ManagementExperimentsDelete'
     { _medQuotaUser = Nothing
     , _medPrettyPrint = False

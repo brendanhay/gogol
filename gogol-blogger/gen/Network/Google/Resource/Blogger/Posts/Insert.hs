@@ -46,8 +46,8 @@ module Network.Google.Resource.Blogger.Posts.Insert
     , piiFields
     ) where
 
-import Network.Google.Blogger.Types
-import Network.Google.Prelude
+import           Network.Google.Blogger.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPostsInsert@ which the
 -- 'PostsInsert'' request conforms to.
@@ -71,17 +71,17 @@ type PostsInsertResource =
 --
 -- /See:/ 'postsInsert'' smart constructor.
 data PostsInsert' = PostsInsert'
-    { _piiFetchBody :: !Bool
-    , _piiQuotaUser :: !(Maybe Text)
+    { _piiFetchBody   :: !Bool
+    , _piiQuotaUser   :: !(Maybe Text)
     , _piiPrettyPrint :: !Bool
-    , _piiIsDraft :: !(Maybe Bool)
-    , _piiUserIP :: !(Maybe Text)
+    , _piiIsDraft     :: !(Maybe Bool)
+    , _piiUserIP      :: !(Maybe Text)
     , _piiFetchImages :: !(Maybe Bool)
-    , _piiBlogId :: !Text
-    , _piiPayload :: !Post'
-    , _piiKey :: !(Maybe Key)
-    , _piiOAuthToken :: !(Maybe OAuthToken)
-    , _piiFields :: !(Maybe Text)
+    , _piiBlogId      :: !Text
+    , _piiPayload     :: !Post'
+    , _piiKey         :: !(Maybe Key)
+    , _piiOAuthToken  :: !(Maybe OAuthToken)
+    , _piiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsInsert'' with the minimum fields required to make a request.
@@ -113,7 +113,7 @@ postsInsert'
     :: Text -- ^ 'blogId'
     -> Post' -- ^ 'payload'
     -> PostsInsert'
-postsInsert' pPiiBlogId_ pPiiPayload_ = 
+postsInsert' pPiiBlogId_ pPiiPayload_ =
     PostsInsert'
     { _piiFetchBody = True
     , _piiQuotaUser = Nothing

@@ -47,8 +47,8 @@ module Network.Google.Resource.Analytics.Management.Goals.Patch
     , mgpFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementGoalsPatch@ which the
 -- 'ManagementGoalsPatch'' request conforms to.
@@ -76,17 +76,17 @@ type ManagementGoalsPatchResource =
 --
 -- /See:/ 'managementGoalsPatch'' smart constructor.
 data ManagementGoalsPatch' = ManagementGoalsPatch'
-    { _mgpQuotaUser :: !(Maybe Text)
-    , _mgpPrettyPrint :: !Bool
+    { _mgpQuotaUser     :: !(Maybe Text)
+    , _mgpPrettyPrint   :: !Bool
     , _mgpWebPropertyId :: !Text
-    , _mgpGoalId :: !Text
-    , _mgpUserIP :: !(Maybe Text)
-    , _mgpProFileId :: !Text
-    , _mgpPayload :: !Goal
-    , _mgpAccountId :: !Text
-    , _mgpKey :: !(Maybe Key)
-    , _mgpOAuthToken :: !(Maybe OAuthToken)
-    , _mgpFields :: !(Maybe Text)
+    , _mgpGoalId        :: !Text
+    , _mgpUserIP        :: !(Maybe Text)
+    , _mgpProFileId     :: !Text
+    , _mgpPayload       :: !Goal
+    , _mgpAccountId     :: !Text
+    , _mgpKey           :: !(Maybe Key)
+    , _mgpOAuthToken    :: !(Maybe OAuthToken)
+    , _mgpFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementGoalsPatch'' with the minimum fields required to make a request.
@@ -121,7 +121,7 @@ managementGoalsPatch'
     -> Goal -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementGoalsPatch'
-managementGoalsPatch' pMgpWebPropertyId_ pMgpGoalId_ pMgpProFileId_ pMgpPayload_ pMgpAccountId_ = 
+managementGoalsPatch' pMgpWebPropertyId_ pMgpGoalId_ pMgpProFileId_ pMgpPayload_ pMgpAccountId_ =
     ManagementGoalsPatch'
     { _mgpQuotaUser = Nothing
     , _mgpPrettyPrint = False

@@ -43,8 +43,8 @@ module Network.Google.Resource.FusionTables.Template.Get
     , tggFields
     ) where
 
-import Network.Google.FusionTables.Types
-import Network.Google.Prelude
+import           Network.Google.FusionTables.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTemplateGet@ which the
 -- 'TemplateGet'' request conforms to.
@@ -65,14 +65,14 @@ type TemplateGetResource =
 --
 -- /See:/ 'templateGet'' smart constructor.
 data TemplateGet' = TemplateGet'
-    { _tggQuotaUser :: !(Maybe Text)
+    { _tggQuotaUser   :: !(Maybe Text)
     , _tggPrettyPrint :: !Bool
-    , _tggTemplateId :: !Int32
-    , _tggUserIP :: !(Maybe Text)
-    , _tggKey :: !(Maybe Key)
-    , _tggOAuthToken :: !(Maybe OAuthToken)
-    , _tggTableId :: !Text
-    , _tggFields :: !(Maybe Text)
+    , _tggTemplateId  :: !Int32
+    , _tggUserIP      :: !(Maybe Text)
+    , _tggKey         :: !(Maybe Key)
+    , _tggOAuthToken  :: !(Maybe OAuthToken)
+    , _tggTableId     :: !Text
+    , _tggFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateGet'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ templateGet'
     :: Int32 -- ^ 'templateId'
     -> Text -- ^ 'tableId'
     -> TemplateGet'
-templateGet' pTggTemplateId_ pTggTableId_ = 
+templateGet' pTggTemplateId_ pTggTableId_ =
     TemplateGet'
     { _tggQuotaUser = Nothing
     , _tggPrettyPrint = True

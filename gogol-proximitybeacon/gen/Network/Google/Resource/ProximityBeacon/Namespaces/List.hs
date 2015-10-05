@@ -49,8 +49,8 @@ module Network.Google.Resource.ProximityBeacon.Namespaces.List
     , nlCallback
     ) where
 
-import Network.Google.Prelude
-import Network.Google.ProximityBeacon.Types
+import           Network.Google.Prelude
+import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconNamespacesList@ which the
 -- 'NamespacesList'' request conforms to.
@@ -78,18 +78,18 @@ type NamespacesListResource =
 --
 -- /See:/ 'namespacesList'' smart constructor.
 data NamespacesList' = NamespacesList'
-    { _nlXgafv :: !(Maybe Text)
-    , _nlQuotaUser :: !(Maybe Text)
-    , _nlPrettyPrint :: !Bool
+    { _nlXgafv          :: !(Maybe Text)
+    , _nlQuotaUser      :: !(Maybe Text)
+    , _nlPrettyPrint    :: !Bool
     , _nlUploadProtocol :: !(Maybe Text)
-    , _nlPp :: !Bool
-    , _nlAccessToken :: !(Maybe Text)
-    , _nlUploadType :: !(Maybe Text)
-    , _nlBearerToken :: !(Maybe Text)
-    , _nlKey :: !(Maybe Key)
-    , _nlOAuthToken :: !(Maybe OAuthToken)
-    , _nlFields :: !(Maybe Text)
-    , _nlCallback :: !(Maybe Text)
+    , _nlPp             :: !Bool
+    , _nlAccessToken    :: !(Maybe Text)
+    , _nlUploadType     :: !(Maybe Text)
+    , _nlBearerToken    :: !(Maybe Text)
+    , _nlKey            :: !(Maybe Key)
+    , _nlOAuthToken     :: !(Maybe OAuthToken)
+    , _nlFields         :: !(Maybe Text)
+    , _nlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NamespacesList'' with the minimum fields required to make a request.
@@ -121,7 +121,7 @@ data NamespacesList' = NamespacesList'
 -- * 'nlCallback'
 namespacesList'
     :: NamespacesList'
-namespacesList' = 
+namespacesList' =
     NamespacesList'
     { _nlXgafv = Nothing
     , _nlQuotaUser = Nothing

@@ -48,8 +48,8 @@ module Network.Google.Resource.Blogger.Comments.ListByBlog
     , clbbFields
     ) where
 
-import Network.Google.Blogger.Types
-import Network.Google.Prelude
+import           Network.Google.Blogger.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerCommentsListByBlog@ which the
 -- 'CommentsListByBlog'' request conforms to.
@@ -76,19 +76,19 @@ type CommentsListByBlogResource =
 --
 -- /See:/ 'commentsListByBlog'' smart constructor.
 data CommentsListByBlog' = CommentsListByBlog'
-    { _clbbStatus :: !(Maybe [CommentsListByBlogStatus])
-    , _clbbQuotaUser :: !(Maybe Text)
+    { _clbbStatus      :: !(Maybe [CommentsListByBlogStatus])
+    , _clbbQuotaUser   :: !(Maybe Text)
     , _clbbPrettyPrint :: !Bool
-    , _clbbUserIP :: !(Maybe Text)
-    , _clbbEndDate :: !(Maybe DateTime')
-    , _clbbBlogId :: !Text
-    , _clbbStartDate :: !(Maybe DateTime')
-    , _clbbKey :: !(Maybe Key)
+    , _clbbUserIP      :: !(Maybe Text)
+    , _clbbEndDate     :: !(Maybe DateTime')
+    , _clbbBlogId      :: !Text
+    , _clbbStartDate   :: !(Maybe DateTime')
+    , _clbbKey         :: !(Maybe Key)
     , _clbbFetchBodies :: !(Maybe Bool)
-    , _clbbPageToken :: !(Maybe Text)
-    , _clbbOAuthToken :: !(Maybe OAuthToken)
-    , _clbbMaxResults :: !(Maybe Word32)
-    , _clbbFields :: !(Maybe Text)
+    , _clbbPageToken   :: !(Maybe Text)
+    , _clbbOAuthToken  :: !(Maybe OAuthToken)
+    , _clbbMaxResults  :: !(Maybe Word32)
+    , _clbbFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsListByBlog'' with the minimum fields required to make a request.
@@ -123,7 +123,7 @@ data CommentsListByBlog' = CommentsListByBlog'
 commentsListByBlog'
     :: Text -- ^ 'blogId'
     -> CommentsListByBlog'
-commentsListByBlog' pClbbBlogId_ = 
+commentsListByBlog' pClbbBlogId_ =
     CommentsListByBlog'
     { _clbbStatus = Nothing
     , _clbbQuotaUser = Nothing

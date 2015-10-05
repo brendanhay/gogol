@@ -44,8 +44,8 @@ module Network.Google.Resource.FusionTables.Template.Update
     , temFields
     ) where
 
-import Network.Google.FusionTables.Types
-import Network.Google.Prelude
+import           Network.Google.FusionTables.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTemplateUpdate@ which the
 -- 'TemplateUpdate'' request conforms to.
@@ -67,15 +67,15 @@ type TemplateUpdateResource =
 --
 -- /See:/ 'templateUpdate'' smart constructor.
 data TemplateUpdate' = TemplateUpdate'
-    { _temQuotaUser :: !(Maybe Text)
+    { _temQuotaUser   :: !(Maybe Text)
     , _temPrettyPrint :: !Bool
-    , _temTemplateId :: !Int32
-    , _temUserIP :: !(Maybe Text)
-    , _temPayload :: !Template
-    , _temKey :: !(Maybe Key)
-    , _temOAuthToken :: !(Maybe OAuthToken)
-    , _temTableId :: !Text
-    , _temFields :: !(Maybe Text)
+    , _temTemplateId  :: !Int32
+    , _temUserIP      :: !(Maybe Text)
+    , _temPayload     :: !Template
+    , _temKey         :: !(Maybe Key)
+    , _temOAuthToken  :: !(Maybe OAuthToken)
+    , _temTableId     :: !Text
+    , _temFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateUpdate'' with the minimum fields required to make a request.
@@ -104,7 +104,7 @@ templateUpdate'
     -> Template -- ^ 'payload'
     -> Text -- ^ 'tableId'
     -> TemplateUpdate'
-templateUpdate' pTemTemplateId_ pTemPayload_ pTemTableId_ = 
+templateUpdate' pTemTemplateId_ pTemPayload_ pTemTableId_ =
     TemplateUpdate'
     { _temQuotaUser = Nothing
     , _temPrettyPrint = True

@@ -52,8 +52,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Deactivate
     , beaCallback
     ) where
 
-import Network.Google.Prelude
-import Network.Google.ProximityBeacon.Types
+import           Network.Google.Prelude
+import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsDeactivate@ which the
 -- 'BeaconsDeactivate'' request conforms to.
@@ -82,19 +82,19 @@ type BeaconsDeactivateResource =
 --
 -- /See:/ 'beaconsDeactivate'' smart constructor.
 data BeaconsDeactivate' = BeaconsDeactivate'
-    { _beaXgafv :: !(Maybe Text)
-    , _beaQuotaUser :: !(Maybe Text)
-    , _beaPrettyPrint :: !Bool
+    { _beaXgafv          :: !(Maybe Text)
+    , _beaQuotaUser      :: !(Maybe Text)
+    , _beaPrettyPrint    :: !Bool
     , _beaUploadProtocol :: !(Maybe Text)
-    , _beaPp :: !Bool
-    , _beaAccessToken :: !(Maybe Text)
-    , _beaBeaconName :: !Text
-    , _beaUploadType :: !(Maybe Text)
-    , _beaBearerToken :: !(Maybe Text)
-    , _beaKey :: !(Maybe Key)
-    , _beaOAuthToken :: !(Maybe OAuthToken)
-    , _beaFields :: !(Maybe Text)
-    , _beaCallback :: !(Maybe Text)
+    , _beaPp             :: !Bool
+    , _beaAccessToken    :: !(Maybe Text)
+    , _beaBeaconName     :: !Text
+    , _beaUploadType     :: !(Maybe Text)
+    , _beaBearerToken    :: !(Maybe Text)
+    , _beaKey            :: !(Maybe Key)
+    , _beaOAuthToken     :: !(Maybe OAuthToken)
+    , _beaFields         :: !(Maybe Text)
+    , _beaCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsDeactivate'' with the minimum fields required to make a request.
@@ -129,7 +129,7 @@ data BeaconsDeactivate' = BeaconsDeactivate'
 beaconsDeactivate'
     :: Text -- ^ 'beaconName'
     -> BeaconsDeactivate'
-beaconsDeactivate' pBeaBeaconName_ = 
+beaconsDeactivate' pBeaBeaconName_ =
     BeaconsDeactivate'
     { _beaXgafv = Nothing
     , _beaQuotaUser = Nothing

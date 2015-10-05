@@ -43,8 +43,8 @@ module Network.Google.Resource.Blogger.PageViews.Get
     , pvgFields
     ) where
 
-import Network.Google.Blogger.Types
-import Network.Google.Prelude
+import           Network.Google.Blogger.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPageViewsGet@ which the
 -- 'PageViewsGet'' request conforms to.
@@ -65,14 +65,14 @@ type PageViewsGetResource =
 --
 -- /See:/ 'pageViewsGet'' smart constructor.
 data PageViewsGet' = PageViewsGet'
-    { _pvgQuotaUser :: !(Maybe Text)
+    { _pvgQuotaUser   :: !(Maybe Text)
     , _pvgPrettyPrint :: !Bool
-    , _pvgUserIP :: !(Maybe Text)
-    , _pvgBlogId :: !Text
-    , _pvgKey :: !(Maybe Key)
-    , _pvgRange :: !(Maybe [PageViewsGetRange])
-    , _pvgOAuthToken :: !(Maybe OAuthToken)
-    , _pvgFields :: !(Maybe Text)
+    , _pvgUserIP      :: !(Maybe Text)
+    , _pvgBlogId      :: !Text
+    , _pvgKey         :: !(Maybe Key)
+    , _pvgRange       :: !(Maybe [PageViewsGetRange])
+    , _pvgOAuthToken  :: !(Maybe OAuthToken)
+    , _pvgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PageViewsGet'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ data PageViewsGet' = PageViewsGet'
 pageViewsGet'
     :: Text -- ^ 'blogId'
     -> PageViewsGet'
-pageViewsGet' pPvgBlogId_ = 
+pageViewsGet' pPvgBlogId_ =
     PageViewsGet'
     { _pvgQuotaUser = Nothing
     , _pvgPrettyPrint = True

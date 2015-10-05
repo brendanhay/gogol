@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Delete
     , cadFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerClientAccessDelete@ which the
 -- 'ClientAccessDelete'' request conforms to.
@@ -63,14 +63,14 @@ type ClientAccessDeleteResource =
 --
 -- /See:/ 'clientAccessDelete'' smart constructor.
 data ClientAccessDelete' = ClientAccessDelete'
-    { _cadQuotaUser :: !(Maybe Text)
-    , _cadPrettyPrint :: !Bool
-    , _cadUserIP :: !(Maybe Text)
+    { _cadQuotaUser        :: !(Maybe Text)
+    , _cadPrettyPrint      :: !Bool
+    , _cadUserIP           :: !(Maybe Text)
     , _cadSponsorAccountId :: !Int32
-    , _cadKey :: !(Maybe Key)
-    , _cadClientAccountId :: !Int64
-    , _cadOAuthToken :: !(Maybe OAuthToken)
-    , _cadFields :: !(Maybe Text)
+    , _cadKey              :: !(Maybe Key)
+    , _cadClientAccountId  :: !Int64
+    , _cadOAuthToken       :: !(Maybe OAuthToken)
+    , _cadFields           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessDelete'' with the minimum fields required to make a request.
@@ -96,7 +96,7 @@ clientAccessDelete'
     :: Int32 -- ^ 'sponsorAccountId'
     -> Int64 -- ^ 'clientAccountId'
     -> ClientAccessDelete'
-clientAccessDelete' pCadSponsorAccountId_ pCadClientAccountId_ = 
+clientAccessDelete' pCadSponsorAccountId_ pCadClientAccountId_ =
     ClientAccessDelete'
     { _cadQuotaUser = Nothing
     , _cadPrettyPrint = True

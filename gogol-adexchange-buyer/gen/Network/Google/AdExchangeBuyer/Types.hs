@@ -848,9 +848,9 @@ module Network.Google.AdExchangeBuyer.Types
     , dtgfptFixedPrices
     ) where
 
-import Network.Google.AdExchangeBuyer.Types.Product
-import Network.Google.AdExchangeBuyer.Types.Sum
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types.Product
+import           Network.Google.AdExchangeBuyer.Types.Sum
+import           Network.Google.Prelude
 
 -- | URL referring to version 'v1.4' of the Ad Exchange Buyer API.
 adExchangeBuyerURL :: BaseUrl

@@ -44,8 +44,8 @@ module Network.Google.Resource.AdSense.Accounts.Reports.Saved.List
     , arslFields
     ) where
 
-import Network.Google.AdSense.Types
-import Network.Google.Prelude
+import           Network.Google.AdSense.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsReportsSavedList@ which the
 -- 'AccountsReportsSavedList'' request conforms to.
@@ -69,15 +69,15 @@ type AccountsReportsSavedListResource =
 --
 -- /See:/ 'accountsReportsSavedList'' smart constructor.
 data AccountsReportsSavedList' = AccountsReportsSavedList'
-    { _arslQuotaUser :: !(Maybe Text)
+    { _arslQuotaUser   :: !(Maybe Text)
     , _arslPrettyPrint :: !Bool
-    , _arslUserIP :: !(Maybe Text)
-    , _arslAccountId :: !Text
-    , _arslKey :: !(Maybe Key)
-    , _arslPageToken :: !(Maybe Text)
-    , _arslOAuthToken :: !(Maybe OAuthToken)
-    , _arslMaxResults :: !(Maybe Int32)
-    , _arslFields :: !(Maybe Text)
+    , _arslUserIP      :: !(Maybe Text)
+    , _arslAccountId   :: !Text
+    , _arslKey         :: !(Maybe Key)
+    , _arslPageToken   :: !(Maybe Text)
+    , _arslOAuthToken  :: !(Maybe OAuthToken)
+    , _arslMaxResults  :: !(Maybe Int32)
+    , _arslFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsReportsSavedList'' with the minimum fields required to make a request.
@@ -104,7 +104,7 @@ data AccountsReportsSavedList' = AccountsReportsSavedList'
 accountsReportsSavedList'
     :: Text -- ^ 'accountId'
     -> AccountsReportsSavedList'
-accountsReportsSavedList' pArslAccountId_ = 
+accountsReportsSavedList' pArslAccountId_ =
     AccountsReportsSavedList'
     { _arslQuotaUser = Nothing
     , _arslPrettyPrint = True

@@ -48,8 +48,8 @@ module Network.Google.Resource.FusionTables.Table.ImportRows
     , tirFields
     ) where
 
-import Network.Google.FusionTables.Types
-import Network.Google.Prelude
+import           Network.Google.FusionTables.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTableImportRows@ which the
 -- 'TableImportRows'' request conforms to.
@@ -76,19 +76,19 @@ type TableImportRowsResource =
 --
 -- /See:/ 'tableImportRows'' smart constructor.
 data TableImportRows' = TableImportRows'
-    { _tirQuotaUser :: !(Maybe Text)
+    { _tirQuotaUser   :: !(Maybe Text)
     , _tirPrettyPrint :: !Bool
-    , _tirUserIP :: !(Maybe Text)
-    , _tirStartLine :: !(Maybe Int32)
-    , _tirEndLine :: !(Maybe Int32)
-    , _tirMedia :: !Body
-    , _tirKey :: !(Maybe Key)
-    , _tirOAuthToken :: !(Maybe OAuthToken)
-    , _tirTableId :: !Text
-    , _tirDelimiter :: !(Maybe Text)
-    , _tirEncoding :: !(Maybe Text)
-    , _tirIsStrict :: !(Maybe Bool)
-    , _tirFields :: !(Maybe Text)
+    , _tirUserIP      :: !(Maybe Text)
+    , _tirStartLine   :: !(Maybe Int32)
+    , _tirEndLine     :: !(Maybe Int32)
+    , _tirMedia       :: !Body
+    , _tirKey         :: !(Maybe Key)
+    , _tirOAuthToken  :: !(Maybe OAuthToken)
+    , _tirTableId     :: !Text
+    , _tirDelimiter   :: !(Maybe Text)
+    , _tirEncoding    :: !(Maybe Text)
+    , _tirIsStrict    :: !(Maybe Bool)
+    , _tirFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableImportRows'' with the minimum fields required to make a request.
@@ -124,7 +124,7 @@ tableImportRows'
     :: Body -- ^ 'media'
     -> Text -- ^ 'tableId'
     -> TableImportRows'
-tableImportRows' pTirMedia_ pTirTableId_ = 
+tableImportRows' pTirMedia_ pTirTableId_ =
     TableImportRows'
     { _tirQuotaUser = Nothing
     , _tirPrettyPrint = True

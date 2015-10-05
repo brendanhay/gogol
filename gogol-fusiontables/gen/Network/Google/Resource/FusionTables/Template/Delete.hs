@@ -43,8 +43,8 @@ module Network.Google.Resource.FusionTables.Template.Delete
     , tddFields
     ) where
 
-import Network.Google.FusionTables.Types
-import Network.Google.Prelude
+import           Network.Google.FusionTables.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTemplateDelete@ which the
 -- 'TemplateDelete'' request conforms to.
@@ -65,14 +65,14 @@ type TemplateDeleteResource =
 --
 -- /See:/ 'templateDelete'' smart constructor.
 data TemplateDelete' = TemplateDelete'
-    { _tddQuotaUser :: !(Maybe Text)
+    { _tddQuotaUser   :: !(Maybe Text)
     , _tddPrettyPrint :: !Bool
-    , _tddTemplateId :: !Int32
-    , _tddUserIP :: !(Maybe Text)
-    , _tddKey :: !(Maybe Key)
-    , _tddOAuthToken :: !(Maybe OAuthToken)
-    , _tddTableId :: !Text
-    , _tddFields :: !(Maybe Text)
+    , _tddTemplateId  :: !Int32
+    , _tddUserIP      :: !(Maybe Text)
+    , _tddKey         :: !(Maybe Key)
+    , _tddOAuthToken  :: !(Maybe OAuthToken)
+    , _tddTableId     :: !Text
+    , _tddFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateDelete'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ templateDelete'
     :: Int32 -- ^ 'templateId'
     -> Text -- ^ 'tableId'
     -> TemplateDelete'
-templateDelete' pTddTemplateId_ pTddTableId_ = 
+templateDelete' pTddTemplateId_ pTddTableId_ =
     TemplateDelete'
     { _tddQuotaUser = Nothing
     , _tddPrettyPrint = True

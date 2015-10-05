@@ -39,9 +39,9 @@ module Network.Google.GroupsMigration
     , gResponseCode
     ) where
 
-import Network.Google.Prelude
-import Network.Google.GroupsMigration.Types
-import Network.Google.Resource.GroupsMigration.Archive.Insert
+import           Network.Google.GroupsMigration.Types
+import           Network.Google.Prelude
+import           Network.Google.Resource.GroupsMigration.Archive.Insert
 
 {- $resources
 TODO

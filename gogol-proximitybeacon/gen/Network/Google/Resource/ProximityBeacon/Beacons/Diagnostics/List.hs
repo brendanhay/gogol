@@ -53,8 +53,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
     , bdlCallback
     ) where
 
-import Network.Google.Prelude
-import Network.Google.ProximityBeacon.Types
+import           Network.Google.Prelude
+import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsDiagnosticsList@ which the
 -- 'BeaconsDiagnosticsList'' request conforms to.
@@ -86,22 +86,22 @@ type BeaconsDiagnosticsListResource =
 --
 -- /See:/ 'beaconsDiagnosticsList'' smart constructor.
 data BeaconsDiagnosticsList' = BeaconsDiagnosticsList'
-    { _bdlXgafv :: !(Maybe Text)
-    , _bdlQuotaUser :: !(Maybe Text)
-    , _bdlPrettyPrint :: !Bool
+    { _bdlXgafv          :: !(Maybe Text)
+    , _bdlQuotaUser      :: !(Maybe Text)
+    , _bdlPrettyPrint    :: !Bool
     , _bdlUploadProtocol :: !(Maybe Text)
-    , _bdlPp :: !Bool
-    , _bdlAccessToken :: !(Maybe Text)
-    , _bdlBeaconName :: !Text
-    , _bdlUploadType :: !(Maybe Text)
-    , _bdlBearerToken :: !(Maybe Text)
-    , _bdlKey :: !(Maybe Key)
-    , _bdlPageToken :: !(Maybe Text)
-    , _bdlOAuthToken :: !(Maybe OAuthToken)
-    , _bdlPageSize :: !(Maybe Int32)
-    , _bdlAlertFilter :: !(Maybe Text)
-    , _bdlFields :: !(Maybe Text)
-    , _bdlCallback :: !(Maybe Text)
+    , _bdlPp             :: !Bool
+    , _bdlAccessToken    :: !(Maybe Text)
+    , _bdlBeaconName     :: !Text
+    , _bdlUploadType     :: !(Maybe Text)
+    , _bdlBearerToken    :: !(Maybe Text)
+    , _bdlKey            :: !(Maybe Key)
+    , _bdlPageToken      :: !(Maybe Text)
+    , _bdlOAuthToken     :: !(Maybe OAuthToken)
+    , _bdlPageSize       :: !(Maybe Int32)
+    , _bdlAlertFilter    :: !(Maybe Text)
+    , _bdlFields         :: !(Maybe Text)
+    , _bdlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsDiagnosticsList'' with the minimum fields required to make a request.
@@ -142,7 +142,7 @@ data BeaconsDiagnosticsList' = BeaconsDiagnosticsList'
 beaconsDiagnosticsList'
     :: Text -- ^ 'beaconName'
     -> BeaconsDiagnosticsList'
-beaconsDiagnosticsList' pBdlBeaconName_ = 
+beaconsDiagnosticsList' pBdlBeaconName_ =
     BeaconsDiagnosticsList'
     { _bdlXgafv = Nothing
     , _bdlQuotaUser = Nothing

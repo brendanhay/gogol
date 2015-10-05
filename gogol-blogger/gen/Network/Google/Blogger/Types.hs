@@ -370,9 +370,9 @@ module Network.Google.Blogger.Types
     , piiURL
     ) where
 
-import Network.Google.Blogger.Types.Product
-import Network.Google.Blogger.Types.Sum
-import Network.Google.Prelude
+import           Network.Google.Blogger.Types.Product
+import           Network.Google.Blogger.Types.Sum
+import           Network.Google.Prelude
 
 -- | URL referring to version 'v3' of the Blogger API.
 bloggerURL :: BaseUrl

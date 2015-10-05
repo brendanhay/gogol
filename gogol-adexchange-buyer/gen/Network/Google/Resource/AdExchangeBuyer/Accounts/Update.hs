@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer.Accounts.Update
     , auFields
     ) where
 
-import Network.Google.AdExchangeBuyer.Types
-import Network.Google.Prelude
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerAccountsUpdate@ which the
 -- 'AccountsUpdate'' request conforms to.
@@ -64,14 +64,14 @@ type AccountsUpdateResource =
 --
 -- /See:/ 'accountsUpdate'' smart constructor.
 data AccountsUpdate' = AccountsUpdate'
-    { _auQuotaUser :: !(Maybe Text)
+    { _auQuotaUser   :: !(Maybe Text)
     , _auPrettyPrint :: !Bool
-    , _auUserIP :: !(Maybe Text)
-    , _auPayload :: !Account
-    , _auKey :: !(Maybe Key)
-    , _auId :: !Int32
-    , _auOAuthToken :: !(Maybe OAuthToken)
-    , _auFields :: !(Maybe Text)
+    , _auUserIP      :: !(Maybe Text)
+    , _auPayload     :: !Account
+    , _auKey         :: !(Maybe Key)
+    , _auId          :: !Int32
+    , _auOAuthToken  :: !(Maybe OAuthToken)
+    , _auFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsUpdate'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ accountsUpdate'
     :: Account -- ^ 'payload'
     -> Int32 -- ^ 'id'
     -> AccountsUpdate'
-accountsUpdate' pAuPayload_ pAuId_ = 
+accountsUpdate' pAuPayload_ pAuId_ =
     AccountsUpdate'
     { _auQuotaUser = Nothing
     , _auPrettyPrint = True

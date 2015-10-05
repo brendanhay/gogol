@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Insert
     , mpfuliFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProFileUserLinksInsert@ which the
 -- 'ManagementProFileUserLinksInsert'' request conforms to.
@@ -73,16 +73,16 @@ type ManagementProFileUserLinksInsertResource =
 --
 -- /See:/ 'managementProFileUserLinksInsert'' smart constructor.
 data ManagementProFileUserLinksInsert' = ManagementProFileUserLinksInsert'
-    { _mpfuliQuotaUser :: !(Maybe Text)
-    , _mpfuliPrettyPrint :: !Bool
+    { _mpfuliQuotaUser     :: !(Maybe Text)
+    , _mpfuliPrettyPrint   :: !Bool
     , _mpfuliWebPropertyId :: !Text
-    , _mpfuliUserIP :: !(Maybe Text)
-    , _mpfuliProFileId :: !Text
-    , _mpfuliPayload :: !EntityUserLink
-    , _mpfuliAccountId :: !Text
-    , _mpfuliKey :: !(Maybe Key)
-    , _mpfuliOAuthToken :: !(Maybe OAuthToken)
-    , _mpfuliFields :: !(Maybe Text)
+    , _mpfuliUserIP        :: !(Maybe Text)
+    , _mpfuliProFileId     :: !Text
+    , _mpfuliPayload       :: !EntityUserLink
+    , _mpfuliAccountId     :: !Text
+    , _mpfuliKey           :: !(Maybe Key)
+    , _mpfuliOAuthToken    :: !(Maybe OAuthToken)
+    , _mpfuliFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFileUserLinksInsert'' with the minimum fields required to make a request.
@@ -114,7 +114,7 @@ managementProFileUserLinksInsert'
     -> EntityUserLink -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementProFileUserLinksInsert'
-managementProFileUserLinksInsert' pMpfuliWebPropertyId_ pMpfuliProFileId_ pMpfuliPayload_ pMpfuliAccountId_ = 
+managementProFileUserLinksInsert' pMpfuliWebPropertyId_ pMpfuliProFileId_ pMpfuliPayload_ pMpfuliAccountId_ =
     ManagementProFileUserLinksInsert'
     { _mpfuliQuotaUser = Nothing
     , _mpfuliPrettyPrint = False

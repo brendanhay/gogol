@@ -46,8 +46,8 @@ module Network.Google.Resource.Analytics.Management.Experiments.Update
     , meuFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementExperimentsUpdate@ which the
 -- 'ManagementExperimentsUpdate'' request conforms to.
@@ -75,17 +75,17 @@ type ManagementExperimentsUpdateResource =
 --
 -- /See:/ 'managementExperimentsUpdate'' smart constructor.
 data ManagementExperimentsUpdate' = ManagementExperimentsUpdate'
-    { _meuQuotaUser :: !(Maybe Text)
-    , _meuPrettyPrint :: !Bool
+    { _meuQuotaUser     :: !(Maybe Text)
+    , _meuPrettyPrint   :: !Bool
     , _meuWebPropertyId :: !Text
-    , _meuUserIP :: !(Maybe Text)
-    , _meuProFileId :: !Text
-    , _meuPayload :: !Experiment
-    , _meuAccountId :: !Text
-    , _meuExperimentId :: !Text
-    , _meuKey :: !(Maybe Key)
-    , _meuOAuthToken :: !(Maybe OAuthToken)
-    , _meuFields :: !(Maybe Text)
+    , _meuUserIP        :: !(Maybe Text)
+    , _meuProFileId     :: !Text
+    , _meuPayload       :: !Experiment
+    , _meuAccountId     :: !Text
+    , _meuExperimentId  :: !Text
+    , _meuKey           :: !(Maybe Key)
+    , _meuOAuthToken    :: !(Maybe OAuthToken)
+    , _meuFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsUpdate'' with the minimum fields required to make a request.
@@ -120,7 +120,7 @@ managementExperimentsUpdate'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'experimentId'
     -> ManagementExperimentsUpdate'
-managementExperimentsUpdate' pMeuWebPropertyId_ pMeuProFileId_ pMeuPayload_ pMeuAccountId_ pMeuExperimentId_ = 
+managementExperimentsUpdate' pMeuWebPropertyId_ pMeuProFileId_ pMeuPayload_ pMeuAccountId_ pMeuExperimentId_ =
     ManagementExperimentsUpdate'
     { _meuQuotaUser = Nothing
     , _meuPrettyPrint = False

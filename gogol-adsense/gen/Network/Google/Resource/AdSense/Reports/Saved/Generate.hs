@@ -46,8 +46,8 @@ module Network.Google.Resource.AdSense.Reports.Saved.Generate
     , rsgFields
     ) where
 
-import Network.Google.AdSense.Types
-import Network.Google.Prelude
+import           Network.Google.AdSense.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseReportsSavedGenerate@ which the
 -- 'ReportsSavedGenerate'' request conforms to.
@@ -71,16 +71,16 @@ type ReportsSavedGenerateResource =
 --
 -- /See:/ 'reportsSavedGenerate'' smart constructor.
 data ReportsSavedGenerate' = ReportsSavedGenerate'
-    { _rsgQuotaUser :: !(Maybe Text)
-    , _rsgPrettyPrint :: !Bool
-    , _rsgUserIP :: !(Maybe Text)
-    , _rsgLocale :: !(Maybe Text)
+    { _rsgQuotaUser     :: !(Maybe Text)
+    , _rsgPrettyPrint   :: !Bool
+    , _rsgUserIP        :: !(Maybe Text)
+    , _rsgLocale        :: !(Maybe Text)
     , _rsgSavedReportId :: !Text
-    , _rsgKey :: !(Maybe Key)
-    , _rsgOAuthToken :: !(Maybe OAuthToken)
-    , _rsgStartIndex :: !(Maybe Int32)
-    , _rsgMaxResults :: !(Maybe Int32)
-    , _rsgFields :: !(Maybe Text)
+    , _rsgKey           :: !(Maybe Key)
+    , _rsgOAuthToken    :: !(Maybe OAuthToken)
+    , _rsgStartIndex    :: !(Maybe Int32)
+    , _rsgMaxResults    :: !(Maybe Int32)
+    , _rsgFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsSavedGenerate'' with the minimum fields required to make a request.
@@ -109,7 +109,7 @@ data ReportsSavedGenerate' = ReportsSavedGenerate'
 reportsSavedGenerate'
     :: Text -- ^ 'savedReportId'
     -> ReportsSavedGenerate'
-reportsSavedGenerate' pRsgSavedReportId_ = 
+reportsSavedGenerate' pRsgSavedReportId_ =
     ReportsSavedGenerate'
     { _rsgQuotaUser = Nothing
     , _rsgPrettyPrint = True

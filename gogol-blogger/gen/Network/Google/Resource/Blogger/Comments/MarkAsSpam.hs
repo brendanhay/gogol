@@ -44,8 +44,8 @@ module Network.Google.Resource.Blogger.Comments.MarkAsSpam
     , cmasFields
     ) where
 
-import Network.Google.Blogger.Types
-import Network.Google.Prelude
+import           Network.Google.Blogger.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerCommentsMarkAsSpam@ which the
 -- 'CommentsMarkAsSpam'' request conforms to.
@@ -69,15 +69,15 @@ type CommentsMarkAsSpamResource =
 --
 -- /See:/ 'commentsMarkAsSpam'' smart constructor.
 data CommentsMarkAsSpam' = CommentsMarkAsSpam'
-    { _cmasQuotaUser :: !(Maybe Text)
+    { _cmasQuotaUser   :: !(Maybe Text)
     , _cmasPrettyPrint :: !Bool
-    , _cmasUserIP :: !(Maybe Text)
-    , _cmasBlogId :: !Text
-    , _cmasKey :: !(Maybe Key)
-    , _cmasPostId :: !Text
-    , _cmasOAuthToken :: !(Maybe OAuthToken)
-    , _cmasCommentId :: !Text
-    , _cmasFields :: !(Maybe Text)
+    , _cmasUserIP      :: !(Maybe Text)
+    , _cmasBlogId      :: !Text
+    , _cmasKey         :: !(Maybe Key)
+    , _cmasPostId      :: !Text
+    , _cmasOAuthToken  :: !(Maybe OAuthToken)
+    , _cmasCommentId   :: !Text
+    , _cmasFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsMarkAsSpam'' with the minimum fields required to make a request.
@@ -106,7 +106,7 @@ commentsMarkAsSpam'
     -> Text -- ^ 'postId'
     -> Text -- ^ 'commentId'
     -> CommentsMarkAsSpam'
-commentsMarkAsSpam' pCmasBlogId_ pCmasPostId_ pCmasCommentId_ = 
+commentsMarkAsSpam' pCmasBlogId_ pCmasPostId_ pCmasCommentId_ =
     CommentsMarkAsSpam'
     { _cmasQuotaUser = Nothing
     , _cmasPrettyPrint = True

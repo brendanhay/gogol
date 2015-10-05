@@ -43,8 +43,8 @@ module Network.Google.Resource.Blogger.Pages.Revert
     , pagFields
     ) where
 
-import Network.Google.Blogger.Types
-import Network.Google.Prelude
+import           Network.Google.Blogger.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPagesRevert@ which the
 -- 'PagesRevert'' request conforms to.
@@ -66,14 +66,14 @@ type PagesRevertResource =
 --
 -- /See:/ 'pagesRevert'' smart constructor.
 data PagesRevert' = PagesRevert'
-    { _pagQuotaUser :: !(Maybe Text)
+    { _pagQuotaUser   :: !(Maybe Text)
     , _pagPrettyPrint :: !Bool
-    , _pagUserIP :: !(Maybe Text)
-    , _pagBlogId :: !Text
-    , _pagPageId :: !Text
-    , _pagKey :: !(Maybe Key)
-    , _pagOAuthToken :: !(Maybe OAuthToken)
-    , _pagFields :: !(Maybe Text)
+    , _pagUserIP      :: !(Maybe Text)
+    , _pagBlogId      :: !Text
+    , _pagPageId      :: !Text
+    , _pagKey         :: !(Maybe Key)
+    , _pagOAuthToken  :: !(Maybe OAuthToken)
+    , _pagFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesRevert'' with the minimum fields required to make a request.
@@ -99,7 +99,7 @@ pagesRevert'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'pageId'
     -> PagesRevert'
-pagesRevert' pPagBlogId_ pPagPageId_ = 
+pagesRevert' pPagBlogId_ pPagPageId_ =
     PagesRevert'
     { _pagQuotaUser = Nothing
     , _pagPrettyPrint = True

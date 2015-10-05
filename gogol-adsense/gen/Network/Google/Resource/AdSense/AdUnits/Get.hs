@@ -43,8 +43,8 @@ module Network.Google.Resource.AdSense.AdUnits.Get
     , augFields
     ) where
 
-import Network.Google.AdSense.Types
-import Network.Google.Prelude
+import           Network.Google.AdSense.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAdUnitsGet@ which the
 -- 'AdUnitsGet'' request conforms to.
@@ -65,14 +65,14 @@ type AdUnitsGetResource =
 --
 -- /See:/ 'adUnitsGet'' smart constructor.
 data AdUnitsGet' = AdUnitsGet'
-    { _augQuotaUser :: !(Maybe Text)
+    { _augQuotaUser   :: !(Maybe Text)
     , _augPrettyPrint :: !Bool
-    , _augUserIP :: !(Maybe Text)
-    , _augAdUnitId :: !Text
-    , _augAdClientId :: !Text
-    , _augKey :: !(Maybe Key)
-    , _augOAuthToken :: !(Maybe OAuthToken)
-    , _augFields :: !(Maybe Text)
+    , _augUserIP      :: !(Maybe Text)
+    , _augAdUnitId    :: !Text
+    , _augAdClientId  :: !Text
+    , _augKey         :: !(Maybe Key)
+    , _augOAuthToken  :: !(Maybe OAuthToken)
+    , _augFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdUnitsGet'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ adUnitsGet'
     :: Text -- ^ 'adUnitId'
     -> Text -- ^ 'adClientId'
     -> AdUnitsGet'
-adUnitsGet' pAugAdUnitId_ pAugAdClientId_ = 
+adUnitsGet' pAugAdUnitId_ pAugAdClientId_ =
     AdUnitsGet'
     { _augQuotaUser = Nothing
     , _augPrettyPrint = True

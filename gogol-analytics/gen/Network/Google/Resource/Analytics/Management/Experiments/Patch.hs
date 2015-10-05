@@ -46,8 +46,8 @@ module Network.Google.Resource.Analytics.Management.Experiments.Patch
     , mepFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementExperimentsPatch@ which the
 -- 'ManagementExperimentsPatch'' request conforms to.
@@ -75,17 +75,17 @@ type ManagementExperimentsPatchResource =
 --
 -- /See:/ 'managementExperimentsPatch'' smart constructor.
 data ManagementExperimentsPatch' = ManagementExperimentsPatch'
-    { _mepQuotaUser :: !(Maybe Text)
-    , _mepPrettyPrint :: !Bool
+    { _mepQuotaUser     :: !(Maybe Text)
+    , _mepPrettyPrint   :: !Bool
     , _mepWebPropertyId :: !Text
-    , _mepUserIP :: !(Maybe Text)
-    , _mepProFileId :: !Text
-    , _mepPayload :: !Experiment
-    , _mepAccountId :: !Text
-    , _mepExperimentId :: !Text
-    , _mepKey :: !(Maybe Key)
-    , _mepOAuthToken :: !(Maybe OAuthToken)
-    , _mepFields :: !(Maybe Text)
+    , _mepUserIP        :: !(Maybe Text)
+    , _mepProFileId     :: !Text
+    , _mepPayload       :: !Experiment
+    , _mepAccountId     :: !Text
+    , _mepExperimentId  :: !Text
+    , _mepKey           :: !(Maybe Key)
+    , _mepOAuthToken    :: !(Maybe OAuthToken)
+    , _mepFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsPatch'' with the minimum fields required to make a request.
@@ -120,7 +120,7 @@ managementExperimentsPatch'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'experimentId'
     -> ManagementExperimentsPatch'
-managementExperimentsPatch' pMepWebPropertyId_ pMepProFileId_ pMepPayload_ pMepAccountId_ pMepExperimentId_ = 
+managementExperimentsPatch' pMepWebPropertyId_ pMepProFileId_ pMepPayload_ pMepAccountId_ pMepExperimentId_ =
     ManagementExperimentsPatch'
     { _mepQuotaUser = Nothing
     , _mepPrettyPrint = False

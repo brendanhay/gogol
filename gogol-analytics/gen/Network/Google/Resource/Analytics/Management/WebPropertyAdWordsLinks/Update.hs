@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Upda
     , mwpawluFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksUpdate@ which the
 -- 'ManagementWebPropertyAdWordsLinksUpdate'' request conforms to.
@@ -73,16 +73,16 @@ type ManagementWebPropertyAdWordsLinksUpdateResource
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksUpdate'' smart constructor.
 data ManagementWebPropertyAdWordsLinksUpdate' = ManagementWebPropertyAdWordsLinksUpdate'
-    { _mwpawluQuotaUser :: !(Maybe Text)
-    , _mwpawluPrettyPrint :: !Bool
-    , _mwpawluWebPropertyId :: !Text
-    , _mwpawluUserIP :: !(Maybe Text)
-    , _mwpawluPayload :: !EntityAdWordsLink
-    , _mwpawluAccountId :: !Text
-    , _mwpawluKey :: !(Maybe Key)
+    { _mwpawluQuotaUser                :: !(Maybe Text)
+    , _mwpawluPrettyPrint              :: !Bool
+    , _mwpawluWebPropertyId            :: !Text
+    , _mwpawluUserIP                   :: !(Maybe Text)
+    , _mwpawluPayload                  :: !EntityAdWordsLink
+    , _mwpawluAccountId                :: !Text
+    , _mwpawluKey                      :: !(Maybe Key)
     , _mwpawluWebPropertyAdWordsLinkId :: !Text
-    , _mwpawluOAuthToken :: !(Maybe OAuthToken)
-    , _mwpawluFields :: !(Maybe Text)
+    , _mwpawluOAuthToken               :: !(Maybe OAuthToken)
+    , _mwpawluFields                   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksUpdate'' with the minimum fields required to make a request.
@@ -114,7 +114,7 @@ managementWebPropertyAdWordsLinksUpdate'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'webPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksUpdate'
-managementWebPropertyAdWordsLinksUpdate' pMwpawluWebPropertyId_ pMwpawluPayload_ pMwpawluAccountId_ pMwpawluWebPropertyAdWordsLinkId_ = 
+managementWebPropertyAdWordsLinksUpdate' pMwpawluWebPropertyId_ pMwpawluPayload_ pMwpawluAccountId_ pMwpawluWebPropertyAdWordsLinkId_ =
     ManagementWebPropertyAdWordsLinksUpdate'
     { _mwpawluQuotaUser = Nothing
     , _mwpawluPrettyPrint = False

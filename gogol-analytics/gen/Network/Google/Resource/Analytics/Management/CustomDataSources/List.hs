@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.CustomDataSources.List
     , mcdslFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomDataSourcesList@ which the
 -- 'ManagementCustomDataSourcesList'' request conforms to.
@@ -72,16 +72,16 @@ type ManagementCustomDataSourcesListResource =
 --
 -- /See:/ 'managementCustomDataSourcesList'' smart constructor.
 data ManagementCustomDataSourcesList' = ManagementCustomDataSourcesList'
-    { _mcdslQuotaUser :: !(Maybe Text)
-    , _mcdslPrettyPrint :: !Bool
+    { _mcdslQuotaUser     :: !(Maybe Text)
+    , _mcdslPrettyPrint   :: !Bool
     , _mcdslWebPropertyId :: !Text
-    , _mcdslUserIP :: !(Maybe Text)
-    , _mcdslAccountId :: !Text
-    , _mcdslKey :: !(Maybe Key)
-    , _mcdslOAuthToken :: !(Maybe OAuthToken)
-    , _mcdslStartIndex :: !(Maybe Int32)
-    , _mcdslMaxResults :: !(Maybe Int32)
-    , _mcdslFields :: !(Maybe Text)
+    , _mcdslUserIP        :: !(Maybe Text)
+    , _mcdslAccountId     :: !Text
+    , _mcdslKey           :: !(Maybe Key)
+    , _mcdslOAuthToken    :: !(Maybe OAuthToken)
+    , _mcdslStartIndex    :: !(Maybe Int32)
+    , _mcdslMaxResults    :: !(Maybe Int32)
+    , _mcdslFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDataSourcesList'' with the minimum fields required to make a request.
@@ -111,7 +111,7 @@ managementCustomDataSourcesList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
     -> ManagementCustomDataSourcesList'
-managementCustomDataSourcesList' pMcdslWebPropertyId_ pMcdslAccountId_ = 
+managementCustomDataSourcesList' pMcdslWebPropertyId_ pMcdslAccountId_ =
     ManagementCustomDataSourcesList'
     { _mcdslQuotaUser = Nothing
     , _mcdslPrettyPrint = False

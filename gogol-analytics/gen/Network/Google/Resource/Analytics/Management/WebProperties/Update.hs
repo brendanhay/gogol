@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.WebProperties.Update
     , mwpuFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebPropertiesUpdate@ which the
 -- 'ManagementWebPropertiesUpdate'' request conforms to.
@@ -69,15 +69,15 @@ type ManagementWebPropertiesUpdateResource =
 --
 -- /See:/ 'managementWebPropertiesUpdate'' smart constructor.
 data ManagementWebPropertiesUpdate' = ManagementWebPropertiesUpdate'
-    { _mwpuQuotaUser :: !(Maybe Text)
-    , _mwpuPrettyPrint :: !Bool
+    { _mwpuQuotaUser     :: !(Maybe Text)
+    , _mwpuPrettyPrint   :: !Bool
     , _mwpuWebPropertyId :: !Text
-    , _mwpuUserIP :: !(Maybe Text)
-    , _mwpuPayload :: !WebProperty
-    , _mwpuAccountId :: !Text
-    , _mwpuKey :: !(Maybe Key)
-    , _mwpuOAuthToken :: !(Maybe OAuthToken)
-    , _mwpuFields :: !(Maybe Text)
+    , _mwpuUserIP        :: !(Maybe Text)
+    , _mwpuPayload       :: !WebProperty
+    , _mwpuAccountId     :: !Text
+    , _mwpuKey           :: !(Maybe Key)
+    , _mwpuOAuthToken    :: !(Maybe OAuthToken)
+    , _mwpuFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertiesUpdate'' with the minimum fields required to make a request.
@@ -106,7 +106,7 @@ managementWebPropertiesUpdate'
     -> WebProperty -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementWebPropertiesUpdate'
-managementWebPropertiesUpdate' pMwpuWebPropertyId_ pMwpuPayload_ pMwpuAccountId_ = 
+managementWebPropertiesUpdate' pMwpuWebPropertyId_ pMwpuPayload_ pMwpuAccountId_ =
     ManagementWebPropertiesUpdate'
     { _mwpuQuotaUser = Nothing
     , _mwpuPrettyPrint = False

@@ -43,8 +43,8 @@ module Network.Google.Resource.AdSense.Accounts.Savedadstyles.Get
     , asgFields
     ) where
 
-import Network.Google.AdSense.Types
-import Network.Google.Prelude
+import           Network.Google.AdSense.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsSavedadstylesGet@ which the
 -- 'AccountsSavedadstylesGet'' request conforms to.
@@ -65,14 +65,14 @@ type AccountsSavedadstylesGetResource =
 --
 -- /See:/ 'accountsSavedadstylesGet'' smart constructor.
 data AccountsSavedadstylesGet' = AccountsSavedadstylesGet'
-    { _asgQuotaUser :: !(Maybe Text)
-    , _asgPrettyPrint :: !Bool
+    { _asgQuotaUser      :: !(Maybe Text)
+    , _asgPrettyPrint    :: !Bool
     , _asgSavedAdStyleId :: !Text
-    , _asgUserIP :: !(Maybe Text)
-    , _asgAccountId :: !Text
-    , _asgKey :: !(Maybe Key)
-    , _asgOAuthToken :: !(Maybe OAuthToken)
-    , _asgFields :: !(Maybe Text)
+    , _asgUserIP         :: !(Maybe Text)
+    , _asgAccountId      :: !Text
+    , _asgKey            :: !(Maybe Key)
+    , _asgOAuthToken     :: !(Maybe OAuthToken)
+    , _asgFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsSavedadstylesGet'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ accountsSavedadstylesGet'
     :: Text -- ^ 'savedAdStyleId'
     -> Text -- ^ 'accountId'
     -> AccountsSavedadstylesGet'
-accountsSavedadstylesGet' pAsgSavedAdStyleId_ pAsgAccountId_ = 
+accountsSavedadstylesGet' pAsgSavedAdStyleId_ pAsgAccountId_ =
     AccountsSavedadstylesGet'
     { _asgQuotaUser = Nothing
     , _asgPrettyPrint = True

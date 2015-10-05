@@ -55,8 +55,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Create
     , bacCallback
     ) where
 
-import Network.Google.Prelude
-import Network.Google.ProximityBeacon.Types
+import           Network.Google.Prelude
+import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsAttachmentsCreate@ which the
 -- 'BeaconsAttachmentsCreate'' request conforms to.
@@ -90,20 +90,20 @@ type BeaconsAttachmentsCreateResource =
 --
 -- /See:/ 'beaconsAttachmentsCreate'' smart constructor.
 data BeaconsAttachmentsCreate' = BeaconsAttachmentsCreate'
-    { _bacXgafv :: !(Maybe Text)
-    , _bacQuotaUser :: !(Maybe Text)
-    , _bacPrettyPrint :: !Bool
+    { _bacXgafv          :: !(Maybe Text)
+    , _bacQuotaUser      :: !(Maybe Text)
+    , _bacPrettyPrint    :: !Bool
     , _bacUploadProtocol :: !(Maybe Text)
-    , _bacPp :: !Bool
-    , _bacAccessToken :: !(Maybe Text)
-    , _bacBeaconName :: !Text
-    , _bacUploadType :: !(Maybe Text)
-    , _bacPayload :: !BeaconAttachment
-    , _bacBearerToken :: !(Maybe Text)
-    , _bacKey :: !(Maybe Key)
-    , _bacOAuthToken :: !(Maybe OAuthToken)
-    , _bacFields :: !(Maybe Text)
-    , _bacCallback :: !(Maybe Text)
+    , _bacPp             :: !Bool
+    , _bacAccessToken    :: !(Maybe Text)
+    , _bacBeaconName     :: !Text
+    , _bacUploadType     :: !(Maybe Text)
+    , _bacPayload        :: !BeaconAttachment
+    , _bacBearerToken    :: !(Maybe Text)
+    , _bacKey            :: !(Maybe Key)
+    , _bacOAuthToken     :: !(Maybe OAuthToken)
+    , _bacFields         :: !(Maybe Text)
+    , _bacCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsAttachmentsCreate'' with the minimum fields required to make a request.
@@ -141,7 +141,7 @@ beaconsAttachmentsCreate'
     :: Text -- ^ 'beaconName'
     -> BeaconAttachment -- ^ 'payload'
     -> BeaconsAttachmentsCreate'
-beaconsAttachmentsCreate' pBacBeaconName_ pBacPayload_ = 
+beaconsAttachmentsCreate' pBacBeaconName_ pBacPayload_ =
     BeaconsAttachmentsCreate'
     { _bacXgafv = Nothing
     , _bacQuotaUser = Nothing

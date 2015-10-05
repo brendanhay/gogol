@@ -55,8 +55,8 @@ module Network.Google.Resource.Genomics.Readgroupsets.Coveragebuckets.List
     , rclFields
     ) where
 
-import Network.Google.Genomics.Types
-import Network.Google.Prelude
+import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReadgroupsetsCoveragebucketsList@ which the
 -- 'ReadgroupsetsCoveragebucketsList'' request conforms to.
@@ -90,19 +90,19 @@ type ReadgroupsetsCoveragebucketsListResource =
 --
 -- /See:/ 'readgroupsetsCoveragebucketsList'' smart constructor.
 data ReadgroupsetsCoveragebucketsList' = ReadgroupsetsCoveragebucketsList'
-    { _rclQuotaUser :: !(Maybe Text)
-    , _rclPrettyPrint :: !Bool
-    , _rclReadGroupSetId :: !Text
-    , _rclUserIP :: !(Maybe Text)
-    , _rclRangeEnd :: !(Maybe Int64)
-    , _rclRangeStart :: !(Maybe Int64)
-    , _rclTargetBucketWidth :: !(Maybe Int64)
-    , _rclKey :: !(Maybe Key)
+    { _rclQuotaUser          :: !(Maybe Text)
+    , _rclPrettyPrint        :: !Bool
+    , _rclReadGroupSetId     :: !Text
+    , _rclUserIP             :: !(Maybe Text)
+    , _rclRangeEnd           :: !(Maybe Int64)
+    , _rclRangeStart         :: !(Maybe Int64)
+    , _rclTargetBucketWidth  :: !(Maybe Int64)
+    , _rclKey                :: !(Maybe Key)
     , _rclRangeReferenceName :: !(Maybe Text)
-    , _rclPageToken :: !(Maybe Text)
-    , _rclOAuthToken :: !(Maybe OAuthToken)
-    , _rclPageSize :: !(Maybe Int32)
-    , _rclFields :: !(Maybe Text)
+    , _rclPageToken          :: !(Maybe Text)
+    , _rclOAuthToken         :: !(Maybe OAuthToken)
+    , _rclPageSize           :: !(Maybe Int32)
+    , _rclFields             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsCoveragebucketsList'' with the minimum fields required to make a request.
@@ -137,7 +137,7 @@ data ReadgroupsetsCoveragebucketsList' = ReadgroupsetsCoveragebucketsList'
 readgroupsetsCoveragebucketsList'
     :: Text -- ^ 'readGroupSetId'
     -> ReadgroupsetsCoveragebucketsList'
-readgroupsetsCoveragebucketsList' pRclReadGroupSetId_ = 
+readgroupsetsCoveragebucketsList' pRclReadGroupSetId_ =
     ReadgroupsetsCoveragebucketsList'
     { _rclQuotaUser = Nothing
     , _rclPrettyPrint = True

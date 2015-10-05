@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.WebProperties.Insert
     , mwpiFields
     ) where
 
-import Network.Google.Analytics.Types
-import Network.Google.Prelude
+import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebPropertiesInsert@ which the
 -- 'ManagementWebPropertiesInsert'' request conforms to.
@@ -71,14 +71,14 @@ type ManagementWebPropertiesInsertResource =
 --
 -- /See:/ 'managementWebPropertiesInsert'' smart constructor.
 data ManagementWebPropertiesInsert' = ManagementWebPropertiesInsert'
-    { _mwpiQuotaUser :: !(Maybe Text)
+    { _mwpiQuotaUser   :: !(Maybe Text)
     , _mwpiPrettyPrint :: !Bool
-    , _mwpiUserIP :: !(Maybe Text)
-    , _mwpiPayload :: !WebProperty
-    , _mwpiAccountId :: !Text
-    , _mwpiKey :: !(Maybe Key)
-    , _mwpiOAuthToken :: !(Maybe OAuthToken)
-    , _mwpiFields :: !(Maybe Text)
+    , _mwpiUserIP      :: !(Maybe Text)
+    , _mwpiPayload     :: !WebProperty
+    , _mwpiAccountId   :: !Text
+    , _mwpiKey         :: !(Maybe Key)
+    , _mwpiOAuthToken  :: !(Maybe OAuthToken)
+    , _mwpiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertiesInsert'' with the minimum fields required to make a request.
@@ -104,7 +104,7 @@ managementWebPropertiesInsert'
     :: WebProperty -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementWebPropertiesInsert'
-managementWebPropertiesInsert' pMwpiPayload_ pMwpiAccountId_ = 
+managementWebPropertiesInsert' pMwpiPayload_ pMwpiAccountId_ =
     ManagementWebPropertiesInsert'
     { _mwpiQuotaUser = Nothing
     , _mwpiPrettyPrint = False

@@ -49,8 +49,8 @@ module Network.Google.Resource.Blogger.Posts.Update
     , puFields
     ) where
 
-import Network.Google.Blogger.Types
-import Network.Google.Prelude
+import           Network.Google.Blogger.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPostsUpdate@ which the
 -- 'PostsUpdate'' request conforms to.
@@ -77,20 +77,20 @@ type PostsUpdateResource =
 --
 -- /See:/ 'postsUpdate'' smart constructor.
 data PostsUpdate' = PostsUpdate'
-    { _puFetchBody :: !Bool
-    , _puQuotaUser :: !(Maybe Text)
+    { _puFetchBody   :: !Bool
+    , _puQuotaUser   :: !(Maybe Text)
     , _puPrettyPrint :: !Bool
-    , _puUserIP :: !(Maybe Text)
+    , _puUserIP      :: !(Maybe Text)
     , _puFetchImages :: !(Maybe Bool)
-    , _puBlogId :: !Text
-    , _puPayload :: !Post'
+    , _puBlogId      :: !Text
+    , _puPayload     :: !Post'
     , _puMaxComments :: !(Maybe Word32)
-    , _puKey :: !(Maybe Key)
-    , _puRevert :: !(Maybe Bool)
-    , _puPostId :: !Text
-    , _puOAuthToken :: !(Maybe OAuthToken)
-    , _puPublish :: !(Maybe Bool)
-    , _puFields :: !(Maybe Text)
+    , _puKey         :: !(Maybe Key)
+    , _puRevert      :: !(Maybe Bool)
+    , _puPostId      :: !Text
+    , _puOAuthToken  :: !(Maybe OAuthToken)
+    , _puPublish     :: !(Maybe Bool)
+    , _puFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsUpdate'' with the minimum fields required to make a request.
@@ -129,7 +129,7 @@ postsUpdate'
     -> Post' -- ^ 'payload'
     -> Text -- ^ 'postId'
     -> PostsUpdate'
-postsUpdate' pPuBlogId_ pPuPayload_ pPuPostId_ = 
+postsUpdate' pPuBlogId_ pPuPayload_ pPuPostId_ =
     PostsUpdate'
     { _puFetchBody = True
     , _puQuotaUser = Nothing

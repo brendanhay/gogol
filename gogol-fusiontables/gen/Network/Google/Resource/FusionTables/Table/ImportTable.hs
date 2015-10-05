@@ -45,8 +45,8 @@ module Network.Google.Resource.FusionTables.Table.ImportTable
     , titFields
     ) where
 
-import Network.Google.FusionTables.Types
-import Network.Google.Prelude
+import           Network.Google.FusionTables.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTableImportTable@ which the
 -- 'TableImportTable'' request conforms to.
@@ -69,16 +69,16 @@ type TableImportTableResource =
 --
 -- /See:/ 'tableImportTable'' smart constructor.
 data TableImportTable' = TableImportTable'
-    { _titQuotaUser :: !(Maybe Text)
+    { _titQuotaUser   :: !(Maybe Text)
     , _titPrettyPrint :: !Bool
-    , _titUserIP :: !(Maybe Text)
-    , _titMedia :: !Body
-    , _titKey :: !(Maybe Key)
-    , _titName :: !Text
-    , _titOAuthToken :: !(Maybe OAuthToken)
-    , _titDelimiter :: !(Maybe Text)
-    , _titEncoding :: !(Maybe Text)
-    , _titFields :: !(Maybe Text)
+    , _titUserIP      :: !(Maybe Text)
+    , _titMedia       :: !Body
+    , _titKey         :: !(Maybe Key)
+    , _titName        :: !Text
+    , _titOAuthToken  :: !(Maybe OAuthToken)
+    , _titDelimiter   :: !(Maybe Text)
+    , _titEncoding    :: !(Maybe Text)
+    , _titFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableImportTable'' with the minimum fields required to make a request.
@@ -108,7 +108,7 @@ tableImportTable'
     :: Body -- ^ 'media'
     -> Text -- ^ 'name'
     -> TableImportTable'
-tableImportTable' pTitMedia_ pTitName_ = 
+tableImportTable' pTitMedia_ pTitName_ =
     TableImportTable'
     { _titQuotaUser = Nothing
     , _titPrettyPrint = True

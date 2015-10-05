@@ -46,9 +46,9 @@ module Network.Google.EmailMigration
     , miIsSent
     ) where
 
-import Network.Google.Prelude
-import Network.Google.EmailMigration.Types
-import Network.Google.Resource.EmailMigration.Mail.Insert
+import           Network.Google.EmailMigration.Types
+import           Network.Google.Prelude
+import           Network.Google.Resource.EmailMigration.Mail.Insert
 
 {- $resources
 TODO

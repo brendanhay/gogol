@@ -47,8 +47,8 @@ module Network.Google.Resource.Blogger.Posts.Get
     , pgFields
     ) where
 
-import Network.Google.Blogger.Types
-import Network.Google.Prelude
+import           Network.Google.Blogger.Types
+import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPostsGet@ which the
 -- 'PostsGet'' request conforms to.
@@ -73,18 +73,18 @@ type PostsGetResource =
 --
 -- /See:/ 'postsGet'' smart constructor.
 data PostsGet' = PostsGet'
-    { _pgFetchBody :: !Bool
-    , _pgQuotaUser :: !(Maybe Text)
+    { _pgFetchBody   :: !Bool
+    , _pgQuotaUser   :: !(Maybe Text)
     , _pgPrettyPrint :: !Bool
-    , _pgUserIP :: !(Maybe Text)
+    , _pgUserIP      :: !(Maybe Text)
     , _pgFetchImages :: !(Maybe Bool)
-    , _pgBlogId :: !Text
+    , _pgBlogId      :: !Text
     , _pgMaxComments :: !(Maybe Word32)
-    , _pgKey :: !(Maybe Key)
-    , _pgView :: !(Maybe PostsGetView)
-    , _pgPostId :: !Text
-    , _pgOAuthToken :: !(Maybe OAuthToken)
-    , _pgFields :: !(Maybe Text)
+    , _pgKey         :: !(Maybe Key)
+    , _pgView        :: !(Maybe PostsGetView)
+    , _pgPostId      :: !Text
+    , _pgOAuthToken  :: !(Maybe OAuthToken)
+    , _pgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsGet'' with the minimum fields required to make a request.
@@ -118,7 +118,7 @@ postsGet'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
     -> PostsGet'
-postsGet' pPgBlogId_ pPgPostId_ = 
+postsGet' pPgBlogId_ pPgPostId_ =
     PostsGet'
     { _pgFetchBody = True
     , _pgQuotaUser = Nothing
