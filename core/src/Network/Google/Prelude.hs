@@ -107,8 +107,8 @@ class GoogleAuth a where
 
 newtype MediaDownload a = MediaDownload a
 
-_Download :: Iso' (MediaDownload a) a
-_Download = iso (\(MediaDownload x) -> x) MediaDownload
+_MediaDownload :: Iso' (MediaDownload a) a
+_MediaDownload = iso (\(MediaDownload x) -> x) MediaDownload
 
 instance GoogleAuth a => GoogleAuth (MediaDownload a) where
     authKey   = _MediaDownload . authKey
