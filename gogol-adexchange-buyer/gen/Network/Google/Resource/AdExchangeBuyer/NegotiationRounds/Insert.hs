@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer.NegotiationRounds.Insert
     , nriFields
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerNegotiationRoundsInsert@ which the
 -- 'NegotiationRoundsInsert'' request conforms to.
@@ -66,14 +66,14 @@ type NegotiationRoundsInsertResource =
 --
 -- /See:/ 'negotiationRoundsInsert'' smart constructor.
 data NegotiationRoundsInsert' = NegotiationRoundsInsert'
-    { _nriQuotaUser     :: !(Maybe Text)
-    , _nriPrettyPrint   :: !Bool
-    , _nriUserIP        :: !(Maybe Text)
-    , _nriPayload       :: !NegotiationRoundDTO
-    , _nriKey           :: !(Maybe Key)
-    , _nriOAuthToken    :: !(Maybe OAuthToken)
+    { _nriQuotaUser :: !(Maybe Text)
+    , _nriPrettyPrint :: !Bool
+    , _nriUserIP :: !(Maybe Text)
+    , _nriPayload :: !NegotiationRoundDTO
+    , _nriKey :: !(Maybe Key)
+    , _nriOAuthToken :: !(Maybe OAuthToken)
     , _nriNegotiationId :: !Int64
-    , _nriFields        :: !(Maybe Text)
+    , _nriFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationRoundsInsert'' with the minimum fields required to make a request.
@@ -99,7 +99,7 @@ negotiationRoundsInsert'
     :: NegotiationRoundDTO -- ^ 'payload'
     -> Int64 -- ^ 'negotiationId'
     -> NegotiationRoundsInsert'
-negotiationRoundsInsert' pNriPayload_ pNriNegotiationId_ =
+negotiationRoundsInsert' pNriPayload_ pNriNegotiationId_ = 
     NegotiationRoundsInsert'
     { _nriQuotaUser = Nothing
     , _nriPrettyPrint = True

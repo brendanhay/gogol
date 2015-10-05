@@ -55,8 +55,8 @@ module Network.Google.Resource.AdSense.Accounts.Reports.Generate
     , argFields
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsReportsGenerate@ which the
 -- 'AccountsReportsGenerate'' request conforms to.
@@ -116,24 +116,24 @@ type AccountsReportsGenerateResource =
 --
 -- /See:/ 'accountsReportsGenerate'' smart constructor.
 data AccountsReportsGenerate' = AccountsReportsGenerate'
-    { _argQuotaUser            :: !(Maybe Text)
-    , _argPrettyPrint          :: !Bool
-    , _argUserIP               :: !(Maybe Text)
-    , _argDimension            :: !(Maybe [Text])
-    , _argLocale               :: !(Maybe Text)
-    , _argEndDate              :: !Text
-    , _argStartDate            :: !Text
-    , _argAccountId            :: !Text
-    , _argMetric               :: !(Maybe [Text])
-    , _argKey                  :: !(Maybe Key)
-    , _argCurrency             :: !(Maybe Text)
-    , _argSort                 :: !(Maybe [Text])
-    , _argFilter               :: !(Maybe [Text])
-    , _argOAuthToken           :: !(Maybe OAuthToken)
-    , _argStartIndex           :: !(Maybe Int32)
+    { _argQuotaUser :: !(Maybe Text)
+    , _argPrettyPrint :: !Bool
+    , _argUserIP :: !(Maybe Text)
+    , _argDimension :: !(Maybe [Text])
+    , _argLocale :: !(Maybe Text)
+    , _argEndDate :: !Text
+    , _argStartDate :: !Text
+    , _argAccountId :: !Text
+    , _argMetric :: !(Maybe [Text])
+    , _argKey :: !(Maybe Key)
+    , _argCurrency :: !(Maybe Text)
+    , _argSort :: !(Maybe [Text])
+    , _argFilter :: !(Maybe [Text])
+    , _argOAuthToken :: !(Maybe OAuthToken)
+    , _argStartIndex :: !(Maybe Int32)
     , _argUseTimezoneReporting :: !(Maybe Bool)
-    , _argMaxResults           :: !(Maybe Int32)
-    , _argFields               :: !(Maybe Text)
+    , _argMaxResults :: !(Maybe Int32)
+    , _argFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsReportsGenerate'' with the minimum fields required to make a request.
@@ -180,7 +180,7 @@ accountsReportsGenerate'
     -> Text -- ^ 'startDate'
     -> Text -- ^ 'accountId'
     -> AccountsReportsGenerate'
-accountsReportsGenerate' pArgEndDate_ pArgStartDate_ pArgAccountId_ =
+accountsReportsGenerate' pArgEndDate_ pArgStartDate_ pArgAccountId_ = 
     AccountsReportsGenerate'
     { _argQuotaUser = Nothing
     , _argPrettyPrint = True

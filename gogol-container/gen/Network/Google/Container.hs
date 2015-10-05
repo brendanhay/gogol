@@ -148,16 +148,16 @@ module Network.Google.Container
     , ClusterStatus (..)
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Container.Projects.Clusters.List
-import           Network.Google.Resource.Container.Projects.Operations.List
-import           Network.Google.Resource.Container.Projects.Zones.Clusters.Create
-import           Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
-import           Network.Google.Resource.Container.Projects.Zones.Clusters.Get
-import           Network.Google.Resource.Container.Projects.Zones.Clusters.List
-import           Network.Google.Resource.Container.Projects.Zones.Operations.Get
-import           Network.Google.Resource.Container.Projects.Zones.Operations.List
+import Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Resource.Container.Projects.Clusters.List
+import Network.Google.Resource.Container.Projects.Operations.List
+import Network.Google.Resource.Container.Projects.Zones.Clusters.Create
+import Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
+import Network.Google.Resource.Container.Projects.Zones.Clusters.Get
+import Network.Google.Resource.Container.Projects.Zones.Clusters.List
+import Network.Google.Resource.Container.Projects.Zones.Operations.Get
+import Network.Google.Resource.Container.Projects.Zones.Operations.List
 
 {- $resources
 TODO

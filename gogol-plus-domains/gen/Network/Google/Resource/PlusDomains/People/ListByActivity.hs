@@ -46,8 +46,8 @@ module Network.Google.Resource.PlusDomains.People.ListByActivity
     , plbaFields
     ) where
 
-import           Network.Google.PlusDomains.Types
-import           Network.Google.Prelude
+import Network.Google.PlusDomains.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsPeopleListByActivity@ which the
 -- 'PeopleListByActivity'' request conforms to.
@@ -72,16 +72,16 @@ type PeopleListByActivityResource =
 --
 -- /See:/ 'peopleListByActivity'' smart constructor.
 data PeopleListByActivity' = PeopleListByActivity'
-    { _plbaQuotaUser   :: !(Maybe Text)
+    { _plbaQuotaUser :: !(Maybe Text)
     , _plbaPrettyPrint :: !Bool
-    , _plbaUserIP      :: !(Maybe Text)
-    , _plbaActivityId  :: !Text
-    , _plbaCollection  :: !PeopleListByActivityCollection
-    , _plbaKey         :: !(Maybe Key)
-    , _plbaPageToken   :: !(Maybe Text)
-    , _plbaOAuthToken  :: !(Maybe OAuthToken)
-    , _plbaMaxResults  :: !Word32
-    , _plbaFields      :: !(Maybe Text)
+    , _plbaUserIP :: !(Maybe Text)
+    , _plbaActivityId :: !Text
+    , _plbaCollection :: !PeopleListByActivityCollection
+    , _plbaKey :: !(Maybe Key)
+    , _plbaPageToken :: !(Maybe Text)
+    , _plbaOAuthToken :: !(Maybe OAuthToken)
+    , _plbaMaxResults :: !Word32
+    , _plbaFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleListByActivity'' with the minimum fields required to make a request.
@@ -111,7 +111,7 @@ peopleListByActivity'
     :: Text -- ^ 'activityId'
     -> PeopleListByActivityCollection -- ^ 'collection'
     -> PeopleListByActivity'
-peopleListByActivity' pPlbaActivityId_ pPlbaCollection_ =
+peopleListByActivity' pPlbaActivityId_ pPlbaCollection_ = 
     PeopleListByActivity'
     { _plbaQuotaUser = Nothing
     , _plbaPrettyPrint = True

@@ -43,8 +43,8 @@ module Network.Google.Resource.FusionTables.Table.List
     , tabFields
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTableList@ which the
 -- 'TableList'' request conforms to.
@@ -64,14 +64,14 @@ type TableListResource =
 --
 -- /See:/ 'tableList'' smart constructor.
 data TableList' = TableList'
-    { _tabQuotaUser   :: !(Maybe Text)
+    { _tabQuotaUser :: !(Maybe Text)
     , _tabPrettyPrint :: !Bool
-    , _tabUserIP      :: !(Maybe Text)
-    , _tabKey         :: !(Maybe Key)
-    , _tabPageToken   :: !(Maybe Text)
-    , _tabOAuthToken  :: !(Maybe OAuthToken)
-    , _tabMaxResults  :: !(Maybe Word32)
-    , _tabFields      :: !(Maybe Text)
+    , _tabUserIP :: !(Maybe Text)
+    , _tabKey :: !(Maybe Key)
+    , _tabPageToken :: !(Maybe Text)
+    , _tabOAuthToken :: !(Maybe OAuthToken)
+    , _tabMaxResults :: !(Maybe Word32)
+    , _tabFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableList'' with the minimum fields required to make a request.
@@ -95,7 +95,7 @@ data TableList' = TableList'
 -- * 'tabFields'
 tableList'
     :: TableList'
-tableList' =
+tableList' = 
     TableList'
     { _tabQuotaUser = Nothing
     , _tabPrettyPrint = True

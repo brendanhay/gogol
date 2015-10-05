@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.Referencesets.Search
     , rssFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReferencesetsSearch@ which the
 -- 'ReferencesetsSearch'' request conforms to.
@@ -66,13 +66,13 @@ type ReferencesetsSearchResource =
 --
 -- /See:/ 'referencesetsSearch'' smart constructor.
 data ReferencesetsSearch' = ReferencesetsSearch'
-    { _rssQuotaUser   :: !(Maybe Text)
+    { _rssQuotaUser :: !(Maybe Text)
     , _rssPrettyPrint :: !Bool
-    , _rssUserIP      :: !(Maybe Text)
-    , _rssPayload     :: !SearchReferenceSetsRequest
-    , _rssKey         :: !(Maybe Key)
-    , _rssOAuthToken  :: !(Maybe OAuthToken)
-    , _rssFields      :: !(Maybe Text)
+    , _rssUserIP :: !(Maybe Text)
+    , _rssPayload :: !SearchReferenceSetsRequest
+    , _rssKey :: !(Maybe Key)
+    , _rssOAuthToken :: !(Maybe OAuthToken)
+    , _rssFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesetsSearch'' with the minimum fields required to make a request.
@@ -95,7 +95,7 @@ data ReferencesetsSearch' = ReferencesetsSearch'
 referencesetsSearch'
     :: SearchReferenceSetsRequest -- ^ 'payload'
     -> ReferencesetsSearch'
-referencesetsSearch' pRssPayload_ =
+referencesetsSearch' pRssPayload_ = 
     ReferencesetsSearch'
     { _rssQuotaUser = Nothing
     , _rssPrettyPrint = True

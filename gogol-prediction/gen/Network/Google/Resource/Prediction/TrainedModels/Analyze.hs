@@ -43,8 +43,8 @@ module Network.Google.Resource.Prediction.TrainedModels.Analyze
     , tmaFields
     ) where
 
-import           Network.Google.Prediction.Types
-import           Network.Google.Prelude
+import Network.Google.Prediction.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @PredictionTrainedModelsAnalyze@ which the
 -- 'TrainedModelsAnalyze'' request conforms to.
@@ -65,14 +65,14 @@ type TrainedModelsAnalyzeResource =
 --
 -- /See:/ 'trainedModelsAnalyze'' smart constructor.
 data TrainedModelsAnalyze' = TrainedModelsAnalyze'
-    { _tmaQuotaUser   :: !(Maybe Text)
+    { _tmaQuotaUser :: !(Maybe Text)
     , _tmaPrettyPrint :: !Bool
-    , _tmaProject     :: !Text
-    , _tmaUserIP      :: !(Maybe Text)
-    , _tmaKey         :: !(Maybe Key)
-    , _tmaId          :: !Text
-    , _tmaOAuthToken  :: !(Maybe OAuthToken)
-    , _tmaFields      :: !(Maybe Text)
+    , _tmaProject :: !Text
+    , _tmaUserIP :: !(Maybe Text)
+    , _tmaKey :: !(Maybe Key)
+    , _tmaId :: !Text
+    , _tmaOAuthToken :: !(Maybe OAuthToken)
+    , _tmaFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrainedModelsAnalyze'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ trainedModelsAnalyze'
     :: Text -- ^ 'project'
     -> Text -- ^ 'id'
     -> TrainedModelsAnalyze'
-trainedModelsAnalyze' pTmaProject_ pTmaId_ =
+trainedModelsAnalyze' pTmaProject_ pTmaId_ = 
     TrainedModelsAnalyze'
     { _tmaQuotaUser = Nothing
     , _tmaPrettyPrint = True

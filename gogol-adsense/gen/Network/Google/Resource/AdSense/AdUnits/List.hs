@@ -45,8 +45,8 @@ module Network.Google.Resource.AdSense.AdUnits.List
     , aulFields
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAdUnitsList@ which the
 -- 'AdUnitsList'' request conforms to.
@@ -69,16 +69,16 @@ type AdUnitsListResource =
 --
 -- /See:/ 'adUnitsList'' smart constructor.
 data AdUnitsList' = AdUnitsList'
-    { _aulQuotaUser       :: !(Maybe Text)
-    , _aulPrettyPrint     :: !Bool
+    { _aulQuotaUser :: !(Maybe Text)
+    , _aulPrettyPrint :: !Bool
     , _aulIncludeInactive :: !(Maybe Bool)
-    , _aulUserIP          :: !(Maybe Text)
-    , _aulAdClientId      :: !Text
-    , _aulKey             :: !(Maybe Key)
-    , _aulPageToken       :: !(Maybe Text)
-    , _aulOAuthToken      :: !(Maybe OAuthToken)
-    , _aulMaxResults      :: !(Maybe Int32)
-    , _aulFields          :: !(Maybe Text)
+    , _aulUserIP :: !(Maybe Text)
+    , _aulAdClientId :: !Text
+    , _aulKey :: !(Maybe Key)
+    , _aulPageToken :: !(Maybe Text)
+    , _aulOAuthToken :: !(Maybe OAuthToken)
+    , _aulMaxResults :: !(Maybe Int32)
+    , _aulFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdUnitsList'' with the minimum fields required to make a request.
@@ -107,7 +107,7 @@ data AdUnitsList' = AdUnitsList'
 adUnitsList'
     :: Text -- ^ 'adClientId'
     -> AdUnitsList'
-adUnitsList' pAulAdClientId_ =
+adUnitsList' pAulAdClientId_ = 
     AdUnitsList'
     { _aulQuotaUser = Nothing
     , _aulPrettyPrint = True

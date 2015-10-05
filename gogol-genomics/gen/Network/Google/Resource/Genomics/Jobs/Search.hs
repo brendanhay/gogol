@@ -42,8 +42,8 @@ module Network.Google.Resource.Genomics.Jobs.Search
     , jsFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsJobsSearch@ which the
 -- 'JobsSearch'' request conforms to.
@@ -64,13 +64,13 @@ type JobsSearchResource =
 --
 -- /See:/ 'jobsSearch'' smart constructor.
 data JobsSearch' = JobsSearch'
-    { _jsQuotaUser   :: !(Maybe Text)
+    { _jsQuotaUser :: !(Maybe Text)
     , _jsPrettyPrint :: !Bool
-    , _jsUserIP      :: !(Maybe Text)
-    , _jsPayload     :: !SearchJobsRequest
-    , _jsKey         :: !(Maybe Key)
-    , _jsOAuthToken  :: !(Maybe OAuthToken)
-    , _jsFields      :: !(Maybe Text)
+    , _jsUserIP :: !(Maybe Text)
+    , _jsPayload :: !SearchJobsRequest
+    , _jsKey :: !(Maybe Key)
+    , _jsOAuthToken :: !(Maybe OAuthToken)
+    , _jsFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsSearch'' with the minimum fields required to make a request.
@@ -93,7 +93,7 @@ data JobsSearch' = JobsSearch'
 jobsSearch'
     :: SearchJobsRequest -- ^ 'payload'
     -> JobsSearch'
-jobsSearch' pJsPayload_ =
+jobsSearch' pJsPayload_ = 
     JobsSearch'
     { _jsQuotaUser = Nothing
     , _jsPrettyPrint = True

@@ -45,8 +45,8 @@ module Network.Google.Resource.Genomics.Variantsets.Create
     , vcFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsetsCreate@ which the
 -- 'VariantsetsCreate'' request conforms to.
@@ -68,13 +68,13 @@ type VariantsetsCreateResource =
 --
 -- /See:/ 'variantsetsCreate'' smart constructor.
 data VariantsetsCreate' = VariantsetsCreate'
-    { _vcQuotaUser   :: !(Maybe Text)
+    { _vcQuotaUser :: !(Maybe Text)
     , _vcPrettyPrint :: !Bool
-    , _vcUserIP      :: !(Maybe Text)
-    , _vcPayload     :: !VariantSet
-    , _vcKey         :: !(Maybe Key)
-    , _vcOAuthToken  :: !(Maybe OAuthToken)
-    , _vcFields      :: !(Maybe Text)
+    , _vcUserIP :: !(Maybe Text)
+    , _vcPayload :: !VariantSet
+    , _vcKey :: !(Maybe Key)
+    , _vcOAuthToken :: !(Maybe OAuthToken)
+    , _vcFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsCreate'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ data VariantsetsCreate' = VariantsetsCreate'
 variantsetsCreate'
     :: VariantSet -- ^ 'payload'
     -> VariantsetsCreate'
-variantsetsCreate' pVcPayload_ =
+variantsetsCreate' pVcPayload_ = 
     VariantsetsCreate'
     { _vcQuotaUser = Nothing
     , _vcPrettyPrint = True

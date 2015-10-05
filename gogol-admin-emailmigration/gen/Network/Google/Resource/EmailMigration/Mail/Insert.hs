@@ -44,8 +44,8 @@ module Network.Google.Resource.EmailMigration.Mail.Insert
     , miFields
     ) where
 
-import           Network.Google.EmailMigration.Types
-import           Network.Google.Prelude
+import Network.Google.EmailMigration.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @EmailMigrationMailInsert@ which the
 -- 'MailInsert'' request conforms to.
@@ -66,15 +66,15 @@ type MailInsertResource =
 --
 -- /See:/ 'mailInsert'' smart constructor.
 data MailInsert' = MailInsert'
-    { _miQuotaUser   :: !(Maybe Text)
+    { _miQuotaUser :: !(Maybe Text)
     , _miPrettyPrint :: !Bool
-    , _miUserIP      :: !(Maybe Text)
-    , _miPayload     :: !MailItem
-    , _miMedia       :: !Body
-    , _miKey         :: !(Maybe Key)
-    , _miOAuthToken  :: !(Maybe OAuthToken)
-    , _miUserKey     :: !Text
-    , _miFields      :: !(Maybe Text)
+    , _miUserIP :: !(Maybe Text)
+    , _miPayload :: !MailItem
+    , _miMedia :: !Body
+    , _miKey :: !(Maybe Key)
+    , _miOAuthToken :: !(Maybe OAuthToken)
+    , _miUserKey :: !Text
+    , _miFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MailInsert'' with the minimum fields required to make a request.
@@ -103,7 +103,7 @@ mailInsert'
     -> Body -- ^ 'media'
     -> Text -- ^ 'userKey'
     -> MailInsert'
-mailInsert' pMiPayload_ pMiMedia_ pMiUserKey_ =
+mailInsert' pMiPayload_ pMiMedia_ pMiUserKey_ = 
     MailInsert'
     { _miQuotaUser = Nothing
     , _miPrettyPrint = True

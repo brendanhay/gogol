@@ -43,8 +43,8 @@ module Network.Google.Resource.Blogger.Posts.Revert
     , prFields
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @BloggerPostsRevert@ which the
 -- 'PostsRevert'' request conforms to.
@@ -66,14 +66,14 @@ type PostsRevertResource =
 --
 -- /See:/ 'postsRevert'' smart constructor.
 data PostsRevert' = PostsRevert'
-    { _prQuotaUser   :: !(Maybe Text)
+    { _prQuotaUser :: !(Maybe Text)
     , _prPrettyPrint :: !Bool
-    , _prUserIP      :: !(Maybe Text)
-    , _prBlogId      :: !Text
-    , _prKey         :: !(Maybe Key)
-    , _prPostId      :: !Text
-    , _prOAuthToken  :: !(Maybe OAuthToken)
-    , _prFields      :: !(Maybe Text)
+    , _prUserIP :: !(Maybe Text)
+    , _prBlogId :: !Text
+    , _prKey :: !(Maybe Key)
+    , _prPostId :: !Text
+    , _prOAuthToken :: !(Maybe OAuthToken)
+    , _prFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsRevert'' with the minimum fields required to make a request.
@@ -99,7 +99,7 @@ postsRevert'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
     -> PostsRevert'
-postsRevert' pPrBlogId_ pPrPostId_ =
+postsRevert' pPrBlogId_ pPrPostId_ = 
     PostsRevert'
     { _prQuotaUser = Nothing
     , _prPrettyPrint = True

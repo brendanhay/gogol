@@ -324,7 +324,7 @@ instance FromJSON WriteTimeseriesRequestCommonLabels
 
 instance ToJSON WriteTimeseriesRequestCommonLabels
          where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | A label in a metric is a description of this metric, including the key
 -- of this description (what the description is), and the value for this
@@ -552,7 +552,7 @@ instance FromJSON TimeseriesDescriptorLabels where
               (\ o -> pure TimeseriesDescriptorLabels)
 
 instance ToJSON TimeseriesDescriptorLabels where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | The histogram\'s bucket. Buckets that form the histogram of a
 -- distribution value. If the upper bound of a bucket, say U1, does not

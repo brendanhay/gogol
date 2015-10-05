@@ -183,7 +183,7 @@ instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty)
 
 instance ToJSON Empty where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | The response of updating an active breakpoint. The message is defined to
 -- allow future extensions.
@@ -206,7 +206,7 @@ instance FromJSON UpdateActiveBreakpointResponse
               (\ o -> pure UpdateActiveBreakpointResponse)
 
 instance ToJSON UpdateActiveBreakpointResponse where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | A SourceContext referring to a Gerrit project.
 --
@@ -1316,7 +1316,7 @@ instance FromJSON DebuggeeLabels where
               (\ o -> pure DebuggeeLabels)
 
 instance ToJSON DebuggeeLabels where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Represents the application to debug. The application may include one or
 -- more replicated processes executing the same code. Each of these

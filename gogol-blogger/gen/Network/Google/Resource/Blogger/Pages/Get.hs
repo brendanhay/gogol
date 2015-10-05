@@ -44,8 +44,8 @@ module Network.Google.Resource.Blogger.Pages.Get
     , pggFields
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @BloggerPagesGet@ which the
 -- 'PagesGet'' request conforms to.
@@ -67,15 +67,15 @@ type PagesGetResource =
 --
 -- /See:/ 'pagesGet'' smart constructor.
 data PagesGet' = PagesGet'
-    { _pggQuotaUser   :: !(Maybe Text)
+    { _pggQuotaUser :: !(Maybe Text)
     , _pggPrettyPrint :: !Bool
-    , _pggUserIP      :: !(Maybe Text)
-    , _pggBlogId      :: !Text
-    , _pggPageId      :: !Text
-    , _pggKey         :: !(Maybe Key)
-    , _pggView        :: !(Maybe PagesGetView)
-    , _pggOAuthToken  :: !(Maybe OAuthToken)
-    , _pggFields      :: !(Maybe Text)
+    , _pggUserIP :: !(Maybe Text)
+    , _pggBlogId :: !Text
+    , _pggPageId :: !Text
+    , _pggKey :: !(Maybe Key)
+    , _pggView :: !(Maybe PagesGetView)
+    , _pggOAuthToken :: !(Maybe OAuthToken)
+    , _pggFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesGet'' with the minimum fields required to make a request.
@@ -103,7 +103,7 @@ pagesGet'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'pageId'
     -> PagesGet'
-pagesGet' pPggBlogId_ pPggPageId_ =
+pagesGet' pPggBlogId_ pPggPageId_ = 
     PagesGet'
     { _pggQuotaUser = Nothing
     , _pggPrettyPrint = True

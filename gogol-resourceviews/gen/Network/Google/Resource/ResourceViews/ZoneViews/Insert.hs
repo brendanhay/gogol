@@ -44,8 +44,8 @@ module Network.Google.Resource.ResourceViews.ZoneViews.Insert
     , zviFields
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ResourceViews.Types
+import Network.Google.Prelude
+import Network.Google.ResourceViews.Types
 
 -- | A resource alias for @ResourceviewsZoneViewsInsert@ which the
 -- 'ZoneViewsInsert'' request conforms to.
@@ -68,15 +68,15 @@ type ZoneViewsInsertResource =
 --
 -- /See:/ 'zoneViewsInsert'' smart constructor.
 data ZoneViewsInsert' = ZoneViewsInsert'
-    { _zviQuotaUser   :: !(Maybe Text)
+    { _zviQuotaUser :: !(Maybe Text)
     , _zviPrettyPrint :: !Bool
-    , _zviProject     :: !Text
-    , _zviUserIP      :: !(Maybe Text)
-    , _zviZone        :: !Text
-    , _zviPayload     :: !ResourceView
-    , _zviKey         :: !(Maybe Key)
-    , _zviOAuthToken  :: !(Maybe OAuthToken)
-    , _zviFields      :: !(Maybe Text)
+    , _zviProject :: !Text
+    , _zviUserIP :: !(Maybe Text)
+    , _zviZone :: !Text
+    , _zviPayload :: !ResourceView
+    , _zviKey :: !(Maybe Key)
+    , _zviOAuthToken :: !(Maybe OAuthToken)
+    , _zviFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsInsert'' with the minimum fields required to make a request.
@@ -105,7 +105,7 @@ zoneViewsInsert'
     -> Text -- ^ 'zone'
     -> ResourceView -- ^ 'payload'
     -> ZoneViewsInsert'
-zoneViewsInsert' pZviProject_ pZviZone_ pZviPayload_ =
+zoneViewsInsert' pZviProject_ pZviZone_ pZviPayload_ = 
     ZoneViewsInsert'
     { _zviQuotaUser = Nothing
     , _zviPrettyPrint = True

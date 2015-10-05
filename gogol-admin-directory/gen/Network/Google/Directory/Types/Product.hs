@@ -1517,7 +1517,7 @@ instance FromJSON UserCustomSchemas where
               (\ o -> pure UserCustomSchemas)
 
 instance ToJSON UserCustomSchemas where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | JSON response template to list aliases in Directory API.
 --
@@ -2964,7 +2964,7 @@ instance FromJSON ChannelParams where
               (\ o -> pure ChannelParams)
 
 instance ToJSON ChannelParams where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | JSON template for an organization entry.
 --
@@ -3976,7 +3976,7 @@ instance FromJSON UserCustomProperties where
               (\ o -> pure UserCustomProperties)
 
 instance ToJSON UserCustomProperties where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Template for notifications list response.
 --

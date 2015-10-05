@@ -45,8 +45,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Update
     , mouFields
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplaceOrdersUpdate@ which the
 -- 'MarketplaceOrdersUpdate'' request conforms to.
@@ -71,16 +71,16 @@ type MarketplaceOrdersUpdateResource =
 --
 -- /See:/ 'marketplaceOrdersUpdate'' smart constructor.
 data MarketplaceOrdersUpdate' = MarketplaceOrdersUpdate'
-    { _mouQuotaUser      :: !(Maybe Text)
-    , _mouUpdateAction   :: !MarketplaceOrdersUpdateUpdateAction
-    , _mouPrettyPrint    :: !Bool
-    , _mouUserIP         :: !(Maybe Text)
+    { _mouQuotaUser :: !(Maybe Text)
+    , _mouUpdateAction :: !MarketplaceOrdersUpdateUpdateAction
+    , _mouPrettyPrint :: !Bool
+    , _mouUserIP :: !(Maybe Text)
     , _mouRevisionNumber :: !Int64
-    , _mouPayload        :: !MarketplaceOrder
-    , _mouKey            :: !(Maybe Key)
-    , _mouOAuthToken     :: !(Maybe OAuthToken)
-    , _mouOrderId        :: !Text
-    , _mouFields         :: !(Maybe Text)
+    , _mouPayload :: !MarketplaceOrder
+    , _mouKey :: !(Maybe Key)
+    , _mouOAuthToken :: !(Maybe OAuthToken)
+    , _mouOrderId :: !Text
+    , _mouFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceOrdersUpdate'' with the minimum fields required to make a request.
@@ -112,7 +112,7 @@ marketplaceOrdersUpdate'
     -> MarketplaceOrder -- ^ 'payload'
     -> Text -- ^ 'orderId'
     -> MarketplaceOrdersUpdate'
-marketplaceOrdersUpdate' pMouUpdateAction_ pMouRevisionNumber_ pMouPayload_ pMouOrderId_ =
+marketplaceOrdersUpdate' pMouUpdateAction_ pMouRevisionNumber_ pMouPayload_ pMouOrderId_ = 
     MarketplaceOrdersUpdate'
     { _mouQuotaUser = Nothing
     , _mouUpdateAction = pMouUpdateAction_

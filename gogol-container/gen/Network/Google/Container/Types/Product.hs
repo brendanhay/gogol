@@ -17,8 +17,8 @@
 --
 module Network.Google.Container.Types.Product where
 
-import           Network.Google.Container.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Container.Types.Sum
+import Network.Google.Prelude
 
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
@@ -33,7 +33,7 @@ newtype ListOperationsResponse = ListOperationsResponse
 -- * 'lorOperations'
 listOperationsResponse
     :: ListOperationsResponse
-listOperationsResponse =
+listOperationsResponse = 
     ListOperationsResponse
     { _lorOperations = Nothing
     }
@@ -71,7 +71,7 @@ newtype CreateClusterRequest = CreateClusterRequest
 -- * 'ccrCluster'
 createClusterRequest
     :: CreateClusterRequest
-createClusterRequest =
+createClusterRequest = 
     CreateClusterRequest
     { _ccrCluster = Nothing
     }
@@ -93,24 +93,24 @@ instance ToJSON CreateClusterRequest where
 --
 -- /See:/ 'cluster' smart constructor.
 data Cluster = Cluster
-    { _cStatus                :: !(Maybe ClusterStatus)
-    , _cNodeConfig            :: !(Maybe NodeConfig)
-    , _cNumNodes              :: !(Maybe Int32)
-    , _cClusterAPIVersion     :: !(Maybe Text)
-    , _cNetwork               :: !(Maybe Text)
-    , _cZone                  :: !(Maybe Text)
-    , _cServicesIPv4CIdR      :: !(Maybe Text)
-    , _cMasterAuth            :: !(Maybe MasterAuth)
-    , _cSelfLink              :: !(Maybe Text)
+    { _cStatus :: !(Maybe ClusterStatus)
+    , _cNodeConfig :: !(Maybe NodeConfig)
+    , _cNumNodes :: !(Maybe Int32)
+    , _cClusterAPIVersion :: !(Maybe Text)
+    , _cNetwork :: !(Maybe Text)
+    , _cZone :: !(Maybe Text)
+    , _cServicesIPv4CIdR :: !(Maybe Text)
+    , _cMasterAuth :: !(Maybe MasterAuth)
+    , _cSelfLink :: !(Maybe Text)
     , _cEnableCloudMonitoring :: !(Maybe Bool)
-    , _cName                  :: !(Maybe Text)
-    , _cStatusMessage         :: !(Maybe Text)
-    , _cCreationTimestamp     :: !(Maybe Text)
-    , _cContainerIPv4CIdR     :: !(Maybe Text)
-    , _cEndpoint              :: !(Maybe Text)
-    , _cEnableCloudLogging    :: !(Maybe Bool)
-    , _cDescription           :: !(Maybe Text)
-    , _cInstanceGroupURLs     :: !(Maybe [Text])
+    , _cName :: !(Maybe Text)
+    , _cStatusMessage :: !(Maybe Text)
+    , _cCreationTimestamp :: !(Maybe Text)
+    , _cContainerIPv4CIdR :: !(Maybe Text)
+    , _cEndpoint :: !(Maybe Text)
+    , _cEnableCloudLogging :: !(Maybe Bool)
+    , _cDescription :: !(Maybe Text)
+    , _cInstanceGroupURLs :: !(Maybe [Text])
     , _cNodeRoutingPrefixSize :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -157,7 +157,7 @@ data Cluster = Cluster
 -- * 'cNodeRoutingPrefixSize'
 cluster
     :: Cluster
-cluster =
+cluster = 
     Cluster
     { _cStatus = Nothing
     , _cNodeConfig = Nothing
@@ -373,7 +373,7 @@ newtype ListAggregatedOperationsResponse = ListAggregatedOperationsResponse
 -- * 'laorOperations'
 listAggregatedOperationsResponse
     :: ListAggregatedOperationsResponse
-listAggregatedOperationsResponse =
+listAggregatedOperationsResponse = 
     ListAggregatedOperationsResponse
     { _laorOperations = Nothing
     }
@@ -404,8 +404,8 @@ instance ToJSON ListAggregatedOperationsResponse
 -- /See:/ 'nodeConfig' smart constructor.
 data NodeConfig = NodeConfig
     { _ncServiceAccounts :: !(Maybe [ServiceAccount])
-    , _ncSourceImage     :: !(Maybe Text)
-    , _ncMachineType     :: !(Maybe Text)
+    , _ncSourceImage :: !(Maybe Text)
+    , _ncMachineType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NodeConfig' with the minimum fields required to make a request.
@@ -419,7 +419,7 @@ data NodeConfig = NodeConfig
 -- * 'ncMachineType'
 nodeConfig
     :: NodeConfig
-nodeConfig =
+nodeConfig = 
     NodeConfig
     { _ncServiceAccounts = Nothing
     , _ncSourceImage = Nothing
@@ -478,14 +478,14 @@ instance ToJSON NodeConfig where
 --
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
-    { _oStatus        :: !(Maybe OperationStatus)
-    , _oZone          :: !(Maybe Text)
-    , _oSelfLink      :: !(Maybe Text)
-    , _oName          :: !(Maybe Text)
+    { _oStatus :: !(Maybe OperationStatus)
+    , _oZone :: !(Maybe Text)
+    , _oSelfLink :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
     , _oOperationType :: !(Maybe OperationOperationType)
-    , _oErrorMessage  :: !(Maybe Text)
-    , _oTargetLink    :: !(Maybe Text)
-    , _oTarget        :: !(Maybe Text)
+    , _oErrorMessage :: !(Maybe Text)
+    , _oTargetLink :: !(Maybe Text)
+    , _oTarget :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
@@ -509,7 +509,7 @@ data Operation = Operation
 -- * 'oTarget'
 operation
     :: Operation
-operation =
+operation = 
     Operation
     { _oStatus = Nothing
     , _oZone = Nothing
@@ -590,7 +590,7 @@ instance ToJSON Operation where
 --
 -- /See:/ 'serviceAccount' smart constructor.
 data ServiceAccount = ServiceAccount
-    { _saEmail  :: !(Maybe Text)
+    { _saEmail :: !(Maybe Text)
     , _saScopes :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -603,7 +603,7 @@ data ServiceAccount = ServiceAccount
 -- * 'saScopes'
 serviceAccount
     :: ServiceAccount
-serviceAccount =
+serviceAccount = 
     ServiceAccount
     { _saEmail = Nothing
     , _saScopes = Nothing
@@ -639,11 +639,11 @@ instance ToJSON ServiceAccount where
 --
 -- /See:/ 'masterAuth' smart constructor.
 data MasterAuth = MasterAuth
-    { _maBearerToken          :: !(Maybe Text)
-    , _maClientKey            :: !(Maybe Text)
-    , _maUser                 :: !(Maybe Text)
-    , _maClientCertificate    :: !(Maybe Text)
-    , _maPassword             :: !(Maybe Text)
+    { _maBearerToken :: !(Maybe Text)
+    , _maClientKey :: !(Maybe Text)
+    , _maUser :: !(Maybe Text)
+    , _maClientCertificate :: !(Maybe Text)
+    , _maPassword :: !(Maybe Text)
     , _maClusterCaCertificate :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -664,7 +664,7 @@ data MasterAuth = MasterAuth
 -- * 'maClusterCaCertificate'
 masterAuth
     :: MasterAuth
-masterAuth =
+masterAuth = 
     MasterAuth
     { _maBearerToken = Nothing
     , _maClientKey = Nothing
@@ -751,7 +751,7 @@ newtype ListAggregatedClustersResponse = ListAggregatedClustersResponse
 -- * 'lacrClusters'
 listAggregatedClustersResponse
     :: ListAggregatedClustersResponse
-listAggregatedClustersResponse =
+listAggregatedClustersResponse = 
     ListAggregatedClustersResponse
     { _lacrClusters = Nothing
     }
@@ -789,7 +789,7 @@ newtype ListClustersResponse = ListClustersResponse
 -- * 'lcrClusters'
 listClustersResponse
     :: ListClustersResponse
-listClustersResponse =
+listClustersResponse = 
     ListClustersResponse
     { _lcrClusters = Nothing
     }

@@ -46,8 +46,8 @@ module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Update
     , mpfuluFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProFileUserLinksUpdate@ which the
 -- 'ManagementProFileUserLinksUpdate'' request conforms to.
@@ -75,17 +75,17 @@ type ManagementProFileUserLinksUpdateResource =
 --
 -- /See:/ 'managementProFileUserLinksUpdate'' smart constructor.
 data ManagementProFileUserLinksUpdate' = ManagementProFileUserLinksUpdate'
-    { _mpfuluQuotaUser     :: !(Maybe Text)
-    , _mpfuluPrettyPrint   :: !Bool
+    { _mpfuluQuotaUser :: !(Maybe Text)
+    , _mpfuluPrettyPrint :: !Bool
     , _mpfuluWebPropertyId :: !Text
-    , _mpfuluUserIP        :: !(Maybe Text)
-    , _mpfuluProFileId     :: !Text
-    , _mpfuluPayload       :: !EntityUserLink
-    , _mpfuluAccountId     :: !Text
-    , _mpfuluKey           :: !(Maybe Key)
-    , _mpfuluLinkId        :: !Text
-    , _mpfuluOAuthToken    :: !(Maybe OAuthToken)
-    , _mpfuluFields        :: !(Maybe Text)
+    , _mpfuluUserIP :: !(Maybe Text)
+    , _mpfuluProFileId :: !Text
+    , _mpfuluPayload :: !EntityUserLink
+    , _mpfuluAccountId :: !Text
+    , _mpfuluKey :: !(Maybe Key)
+    , _mpfuluLinkId :: !Text
+    , _mpfuluOAuthToken :: !(Maybe OAuthToken)
+    , _mpfuluFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFileUserLinksUpdate'' with the minimum fields required to make a request.
@@ -120,7 +120,7 @@ managementProFileUserLinksUpdate'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
     -> ManagementProFileUserLinksUpdate'
-managementProFileUserLinksUpdate' pMpfuluWebPropertyId_ pMpfuluProFileId_ pMpfuluPayload_ pMpfuluAccountId_ pMpfuluLinkId_ =
+managementProFileUserLinksUpdate' pMpfuluWebPropertyId_ pMpfuluProFileId_ pMpfuluPayload_ pMpfuluAccountId_ pMpfuluLinkId_ = 
     ManagementProFileUserLinksUpdate'
     { _mpfuluQuotaUser = Nothing
     , _mpfuluPrettyPrint = False

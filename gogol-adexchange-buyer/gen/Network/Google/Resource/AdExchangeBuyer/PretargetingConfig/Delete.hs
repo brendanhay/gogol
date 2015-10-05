@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Delete
     , pcdFields
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerPretargetingConfigDelete@ which the
 -- 'PretargetingConfigDelete'' request conforms to.
@@ -64,14 +64,14 @@ type PretargetingConfigDeleteResource =
 --
 -- /See:/ 'pretargetingConfigDelete'' smart constructor.
 data PretargetingConfigDelete' = PretargetingConfigDelete'
-    { _pcdQuotaUser   :: !(Maybe Text)
+    { _pcdQuotaUser :: !(Maybe Text)
     , _pcdPrettyPrint :: !Bool
-    , _pcdUserIP      :: !(Maybe Text)
-    , _pcdAccountId   :: !Int64
-    , _pcdKey         :: !(Maybe Key)
-    , _pcdConfigId    :: !Int64
-    , _pcdOAuthToken  :: !(Maybe OAuthToken)
-    , _pcdFields      :: !(Maybe Text)
+    , _pcdUserIP :: !(Maybe Text)
+    , _pcdAccountId :: !Int64
+    , _pcdKey :: !(Maybe Key)
+    , _pcdConfigId :: !Int64
+    , _pcdOAuthToken :: !(Maybe OAuthToken)
+    , _pcdFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigDelete'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ pretargetingConfigDelete'
     :: Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'configId'
     -> PretargetingConfigDelete'
-pretargetingConfigDelete' pPcdAccountId_ pPcdConfigId_ =
+pretargetingConfigDelete' pPcdAccountId_ pPcdConfigId_ = 
     PretargetingConfigDelete'
     { _pcdQuotaUser = Nothing
     , _pcdPrettyPrint = True

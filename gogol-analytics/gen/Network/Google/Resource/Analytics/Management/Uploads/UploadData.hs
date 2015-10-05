@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.Uploads.UploadData
     , muudFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementUploadsUploadData@ which the
 -- 'ManagementUploadsUploadData'' request conforms to.
@@ -73,16 +73,16 @@ type ManagementUploadsUploadDataResource =
 --
 -- /See:/ 'managementUploadsUploadData'' smart constructor.
 data ManagementUploadsUploadData' = ManagementUploadsUploadData'
-    { _muudQuotaUser          :: !(Maybe Text)
-    , _muudPrettyPrint        :: !Bool
-    , _muudWebPropertyId      :: !Text
-    , _muudUserIP             :: !(Maybe Text)
+    { _muudQuotaUser :: !(Maybe Text)
+    , _muudPrettyPrint :: !Bool
+    , _muudWebPropertyId :: !Text
+    , _muudUserIP :: !(Maybe Text)
     , _muudCustomDataSourceId :: !Text
-    , _muudMedia              :: !Body
-    , _muudAccountId          :: !Text
-    , _muudKey                :: !(Maybe Key)
-    , _muudOAuthToken         :: !(Maybe OAuthToken)
-    , _muudFields             :: !(Maybe Text)
+    , _muudMedia :: !Body
+    , _muudAccountId :: !Text
+    , _muudKey :: !(Maybe Key)
+    , _muudOAuthToken :: !(Maybe OAuthToken)
+    , _muudFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUploadsUploadData'' with the minimum fields required to make a request.
@@ -114,7 +114,7 @@ managementUploadsUploadData'
     -> Body -- ^ 'media'
     -> Text -- ^ 'accountId'
     -> ManagementUploadsUploadData'
-managementUploadsUploadData' pMuudWebPropertyId_ pMuudCustomDataSourceId_ pMuudMedia_ pMuudAccountId_ =
+managementUploadsUploadData' pMuudWebPropertyId_ pMuudCustomDataSourceId_ pMuudMedia_ pMuudAccountId_ = 
     ManagementUploadsUploadData'
     { _muudQuotaUser = Nothing
     , _muudPrettyPrint = False

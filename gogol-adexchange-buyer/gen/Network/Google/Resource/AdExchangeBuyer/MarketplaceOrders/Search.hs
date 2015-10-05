@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Search
     , marFields
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplaceOrdersSearch@ which the
 -- 'MarketplaceOrdersSearch'' request conforms to.
@@ -64,13 +64,13 @@ type MarketplaceOrdersSearchResource =
 --
 -- /See:/ 'marketplaceOrdersSearch'' smart constructor.
 data MarketplaceOrdersSearch' = MarketplaceOrdersSearch'
-    { _marQuotaUser   :: !(Maybe Text)
+    { _marQuotaUser :: !(Maybe Text)
     , _marPrettyPrint :: !Bool
-    , _marUserIP      :: !(Maybe Text)
-    , _marKey         :: !(Maybe Key)
-    , _marPqlQuery    :: !(Maybe Text)
-    , _marOAuthToken  :: !(Maybe OAuthToken)
-    , _marFields      :: !(Maybe Text)
+    , _marUserIP :: !(Maybe Text)
+    , _marKey :: !(Maybe Key)
+    , _marPqlQuery :: !(Maybe Text)
+    , _marOAuthToken :: !(Maybe OAuthToken)
+    , _marFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceOrdersSearch'' with the minimum fields required to make a request.
@@ -92,7 +92,7 @@ data MarketplaceOrdersSearch' = MarketplaceOrdersSearch'
 -- * 'marFields'
 marketplaceOrdersSearch'
     :: MarketplaceOrdersSearch'
-marketplaceOrdersSearch' =
+marketplaceOrdersSearch' = 
     MarketplaceOrdersSearch'
     { _marQuotaUser = Nothing
     , _marPrettyPrint = True

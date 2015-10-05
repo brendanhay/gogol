@@ -43,8 +43,8 @@ module Network.Google.Resource.FusionTables.Style.Insert
     , siFields
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesStyleInsert@ which the
 -- 'StyleInsert'' request conforms to.
@@ -66,14 +66,14 @@ type StyleInsertResource =
 --
 -- /See:/ 'styleInsert'' smart constructor.
 data StyleInsert' = StyleInsert'
-    { _siQuotaUser   :: !(Maybe Text)
+    { _siQuotaUser :: !(Maybe Text)
     , _siPrettyPrint :: !Bool
-    , _siUserIP      :: !(Maybe Text)
-    , _siPayload     :: !StyleSetting
-    , _siKey         :: !(Maybe Key)
-    , _siOAuthToken  :: !(Maybe OAuthToken)
-    , _siTableId     :: !Text
-    , _siFields      :: !(Maybe Text)
+    , _siUserIP :: !(Maybe Text)
+    , _siPayload :: !StyleSetting
+    , _siKey :: !(Maybe Key)
+    , _siOAuthToken :: !(Maybe OAuthToken)
+    , _siTableId :: !Text
+    , _siFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleInsert'' with the minimum fields required to make a request.
@@ -99,7 +99,7 @@ styleInsert'
     :: StyleSetting -- ^ 'payload'
     -> Text -- ^ 'tableId'
     -> StyleInsert'
-styleInsert' pSiPayload_ pSiTableId_ =
+styleInsert' pSiPayload_ pSiTableId_ = 
     StyleInsert'
     { _siQuotaUser = Nothing
     , _siPrettyPrint = True

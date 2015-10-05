@@ -44,8 +44,8 @@ module Network.Google.Resource.AdSense.Accounts.Alerts.Delete
     , aadFields
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsAlertsDelete@ which the
 -- 'AccountsAlertsDelete'' request conforms to.
@@ -67,14 +67,14 @@ type AccountsAlertsDeleteResource =
 --
 -- /See:/ 'accountsAlertsDelete'' smart constructor.
 data AccountsAlertsDelete' = AccountsAlertsDelete'
-    { _aadQuotaUser   :: !(Maybe Text)
+    { _aadQuotaUser :: !(Maybe Text)
     , _aadPrettyPrint :: !Bool
-    , _aadUserIP      :: !(Maybe Text)
-    , _aadAlertId     :: !Text
-    , _aadAccountId   :: !Text
-    , _aadKey         :: !(Maybe Key)
-    , _aadOAuthToken  :: !(Maybe OAuthToken)
-    , _aadFields      :: !(Maybe Text)
+    , _aadUserIP :: !(Maybe Text)
+    , _aadAlertId :: !Text
+    , _aadAccountId :: !Text
+    , _aadKey :: !(Maybe Key)
+    , _aadOAuthToken :: !(Maybe OAuthToken)
+    , _aadFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAlertsDelete'' with the minimum fields required to make a request.
@@ -100,7 +100,7 @@ accountsAlertsDelete'
     :: Text -- ^ 'alertId'
     -> Text -- ^ 'accountId'
     -> AccountsAlertsDelete'
-accountsAlertsDelete' pAadAlertId_ pAadAccountId_ =
+accountsAlertsDelete' pAadAlertId_ pAadAccountId_ = 
     AccountsAlertsDelete'
     { _aadQuotaUser = Nothing
     , _aadPrettyPrint = True

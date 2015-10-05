@@ -44,8 +44,8 @@ module Network.Google.Resource.ResourceViews.ZoneViews.Get
     , zvgFields
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ResourceViews.Types
+import Network.Google.Prelude
+import Network.Google.ResourceViews.Types
 
 -- | A resource alias for @ResourceviewsZoneViewsGet@ which the
 -- 'ZoneViewsGet'' request conforms to.
@@ -67,15 +67,15 @@ type ZoneViewsGetResource =
 --
 -- /See:/ 'zoneViewsGet'' smart constructor.
 data ZoneViewsGet' = ZoneViewsGet'
-    { _zvgQuotaUser    :: !(Maybe Text)
-    , _zvgPrettyPrint  :: !Bool
+    { _zvgQuotaUser :: !(Maybe Text)
+    , _zvgPrettyPrint :: !Bool
     , _zvgResourceView :: !Text
-    , _zvgProject      :: !Text
-    , _zvgUserIP       :: !(Maybe Text)
-    , _zvgZone         :: !Text
-    , _zvgKey          :: !(Maybe Key)
-    , _zvgOAuthToken   :: !(Maybe OAuthToken)
-    , _zvgFields       :: !(Maybe Text)
+    , _zvgProject :: !Text
+    , _zvgUserIP :: !(Maybe Text)
+    , _zvgZone :: !Text
+    , _zvgKey :: !(Maybe Key)
+    , _zvgOAuthToken :: !(Maybe OAuthToken)
+    , _zvgFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsGet'' with the minimum fields required to make a request.
@@ -104,7 +104,7 @@ zoneViewsGet'
     -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> ZoneViewsGet'
-zoneViewsGet' pZvgResourceView_ pZvgProject_ pZvgZone_ =
+zoneViewsGet' pZvgResourceView_ pZvgProject_ pZvgZone_ = 
     ZoneViewsGet'
     { _zvgQuotaUser = Nothing
     , _zvgPrettyPrint = True

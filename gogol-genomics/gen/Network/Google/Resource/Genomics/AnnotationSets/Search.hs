@@ -44,8 +44,8 @@ module Network.Google.Resource.Genomics.AnnotationSets.Search
     , assFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsAnnotationSetsSearch@ which the
 -- 'AnnotationSetsSearch'' request conforms to.
@@ -68,13 +68,13 @@ type AnnotationSetsSearchResource =
 --
 -- /See:/ 'annotationSetsSearch'' smart constructor.
 data AnnotationSetsSearch' = AnnotationSetsSearch'
-    { _assQuotaUser   :: !(Maybe Text)
+    { _assQuotaUser :: !(Maybe Text)
     , _assPrettyPrint :: !Bool
-    , _assUserIP      :: !(Maybe Text)
-    , _assPayload     :: !SearchAnnotationSetsRequest
-    , _assKey         :: !(Maybe Key)
-    , _assOAuthToken  :: !(Maybe OAuthToken)
-    , _assFields      :: !(Maybe Text)
+    , _assUserIP :: !(Maybe Text)
+    , _assPayload :: !SearchAnnotationSetsRequest
+    , _assKey :: !(Maybe Key)
+    , _assOAuthToken :: !(Maybe OAuthToken)
+    , _assFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSetsSearch'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ data AnnotationSetsSearch' = AnnotationSetsSearch'
 annotationSetsSearch'
     :: SearchAnnotationSetsRequest -- ^ 'payload'
     -> AnnotationSetsSearch'
-annotationSetsSearch' pAssPayload_ =
+annotationSetsSearch' pAssPayload_ = 
     AnnotationSetsSearch'
     { _assQuotaUser = Nothing
     , _assPrettyPrint = True

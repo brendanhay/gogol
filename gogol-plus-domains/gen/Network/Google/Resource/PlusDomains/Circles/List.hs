@@ -44,8 +44,8 @@ module Network.Google.Resource.PlusDomains.Circles.List
     , clFields
     ) where
 
-import           Network.Google.PlusDomains.Types
-import           Network.Google.Prelude
+import Network.Google.PlusDomains.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsCirclesList@ which the
 -- 'CirclesList'' request conforms to.
@@ -67,15 +67,15 @@ type CirclesListResource =
 --
 -- /See:/ 'circlesList'' smart constructor.
 data CirclesList' = CirclesList'
-    { _clQuotaUser   :: !(Maybe Text)
+    { _clQuotaUser :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
-    , _clUserIP      :: !(Maybe Text)
-    , _clUserId      :: !Text
-    , _clKey         :: !(Maybe Key)
-    , _clPageToken   :: !(Maybe Text)
-    , _clOAuthToken  :: !(Maybe OAuthToken)
-    , _clMaxResults  :: !Word32
-    , _clFields      :: !(Maybe Text)
+    , _clUserIP :: !(Maybe Text)
+    , _clUserId :: !Text
+    , _clKey :: !(Maybe Key)
+    , _clPageToken :: !(Maybe Text)
+    , _clOAuthToken :: !(Maybe OAuthToken)
+    , _clMaxResults :: !Word32
+    , _clFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesList'' with the minimum fields required to make a request.
@@ -102,7 +102,7 @@ data CirclesList' = CirclesList'
 circlesList'
     :: Text -- ^ 'userId'
     -> CirclesList'
-circlesList' pClUserId_ =
+circlesList' pClUserId_ = 
     CirclesList'
     { _clQuotaUser = Nothing
     , _clPrettyPrint = True

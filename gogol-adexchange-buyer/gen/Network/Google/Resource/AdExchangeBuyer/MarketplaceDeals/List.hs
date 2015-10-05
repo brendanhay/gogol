@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.List
     , mdlFields
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplaceDealsList@ which the
 -- 'MarketplaceDealsList'' request conforms to.
@@ -64,13 +64,13 @@ type MarketplaceDealsListResource =
 --
 -- /See:/ 'marketplaceDealsList'' smart constructor.
 data MarketplaceDealsList' = MarketplaceDealsList'
-    { _mdlQuotaUser   :: !(Maybe Text)
+    { _mdlQuotaUser :: !(Maybe Text)
     , _mdlPrettyPrint :: !Bool
-    , _mdlUserIP      :: !(Maybe Text)
-    , _mdlKey         :: !(Maybe Key)
-    , _mdlOAuthToken  :: !(Maybe OAuthToken)
-    , _mdlOrderId     :: !Text
-    , _mdlFields      :: !(Maybe Text)
+    , _mdlUserIP :: !(Maybe Text)
+    , _mdlKey :: !(Maybe Key)
+    , _mdlOAuthToken :: !(Maybe OAuthToken)
+    , _mdlOrderId :: !Text
+    , _mdlFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceDealsList'' with the minimum fields required to make a request.
@@ -93,7 +93,7 @@ data MarketplaceDealsList' = MarketplaceDealsList'
 marketplaceDealsList'
     :: Text -- ^ 'orderId'
     -> MarketplaceDealsList'
-marketplaceDealsList' pMdlOrderId_ =
+marketplaceDealsList' pMdlOrderId_ = 
     MarketplaceDealsList'
     { _mdlQuotaUser = Nothing
     , _mdlPrettyPrint = True

@@ -16,7 +16,7 @@
 --
 module Network.Google.Genomics.Types.Sum where
 
-import           Network.Google.Prelude
+import Network.Google.Prelude
 
 data SearchAnnotationSetsRequestTypesItem
     = SASRTIGene

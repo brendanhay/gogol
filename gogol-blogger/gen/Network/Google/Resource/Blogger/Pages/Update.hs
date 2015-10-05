@@ -46,8 +46,8 @@ module Network.Google.Resource.Blogger.Pages.Update
     , puuFields
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @BloggerPagesUpdate@ which the
 -- 'PagesUpdate'' request conforms to.
@@ -71,17 +71,17 @@ type PagesUpdateResource =
 --
 -- /See:/ 'pagesUpdate'' smart constructor.
 data PagesUpdate' = PagesUpdate'
-    { _puuQuotaUser   :: !(Maybe Text)
+    { _puuQuotaUser :: !(Maybe Text)
     , _puuPrettyPrint :: !Bool
-    , _puuUserIP      :: !(Maybe Text)
-    , _puuBlogId      :: !Text
-    , _puuPageId      :: !Text
-    , _puuPayload     :: !Page
-    , _puuKey         :: !(Maybe Key)
-    , _puuRevert      :: !(Maybe Bool)
-    , _puuOAuthToken  :: !(Maybe OAuthToken)
-    , _puuPublish     :: !(Maybe Bool)
-    , _puuFields      :: !(Maybe Text)
+    , _puuUserIP :: !(Maybe Text)
+    , _puuBlogId :: !Text
+    , _puuPageId :: !Text
+    , _puuPayload :: !Page
+    , _puuKey :: !(Maybe Key)
+    , _puuRevert :: !(Maybe Bool)
+    , _puuOAuthToken :: !(Maybe OAuthToken)
+    , _puuPublish :: !(Maybe Bool)
+    , _puuFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesUpdate'' with the minimum fields required to make a request.
@@ -114,7 +114,7 @@ pagesUpdate'
     -> Text -- ^ 'pageId'
     -> Page -- ^ 'payload'
     -> PagesUpdate'
-pagesUpdate' pPuuBlogId_ pPuuPageId_ pPuuPayload_ =
+pagesUpdate' pPuuBlogId_ pPuuPageId_ pPuuPayload_ = 
     PagesUpdate'
     { _puuQuotaUser = Nothing
     , _puuPrettyPrint = True

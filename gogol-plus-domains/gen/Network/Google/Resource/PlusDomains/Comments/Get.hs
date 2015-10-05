@@ -42,8 +42,8 @@ module Network.Google.Resource.PlusDomains.Comments.Get
     , cFields
     ) where
 
-import           Network.Google.PlusDomains.Types
-import           Network.Google.Prelude
+import Network.Google.PlusDomains.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsCommentsGet@ which the
 -- 'CommentsGet'' request conforms to.
@@ -62,13 +62,13 @@ type CommentsGetResource =
 --
 -- /See:/ 'commentsGet'' smart constructor.
 data CommentsGet' = CommentsGet'
-    { _cQuotaUser   :: !(Maybe Text)
+    { _cQuotaUser :: !(Maybe Text)
     , _cPrettyPrint :: !Bool
-    , _cUserIP      :: !(Maybe Text)
-    , _cKey         :: !(Maybe Key)
-    , _cOAuthToken  :: !(Maybe OAuthToken)
-    , _cCommentId   :: !Text
-    , _cFields      :: !(Maybe Text)
+    , _cUserIP :: !(Maybe Text)
+    , _cKey :: !(Maybe Key)
+    , _cOAuthToken :: !(Maybe OAuthToken)
+    , _cCommentId :: !Text
+    , _cFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsGet'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data CommentsGet' = CommentsGet'
 commentsGet'
     :: Text -- ^ 'commentId'
     -> CommentsGet'
-commentsGet' pCCommentId_ =
+commentsGet' pCCommentId_ = 
     CommentsGet'
     { _cQuotaUser = Nothing
     , _cPrettyPrint = True

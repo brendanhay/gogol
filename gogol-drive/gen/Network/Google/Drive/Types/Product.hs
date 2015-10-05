@@ -725,7 +725,7 @@ instance FromJSON FileOpenWithLinks where
               (\ o -> pure FileOpenWithLinks)
 
 instance ToJSON FileOpenWithLinks where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'aboutAdditionalRoleInfoItemRoleSetsItem' smart constructor.
@@ -2040,7 +2040,7 @@ instance FromJSON RevisionExportLinks where
               (\ o -> pure RevisionExportLinks)
 
 instance ToJSON RevisionExportLinks where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Indexable text attributes for the file (can only be written)
 --
@@ -2141,7 +2141,7 @@ instance FromJSON ChannelParams where
               (\ o -> pure ChannelParams)
 
 instance ToJSON ChannelParams where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | An item with user information and settings.
 --
@@ -4520,7 +4520,7 @@ instance FromJSON FileExportLinks where
               (\ o -> pure FileExportLinks)
 
 instance ToJSON FileExportLinks where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | A JSON representation of a list of comments on a file in Google Drive.
 --

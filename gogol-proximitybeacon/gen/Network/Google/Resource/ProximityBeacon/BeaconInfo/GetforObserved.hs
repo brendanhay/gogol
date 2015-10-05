@@ -49,8 +49,8 @@ module Network.Google.Resource.ProximityBeacon.BeaconInfo.GetforObserved
     , bigoCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconInfoGetforObserved@ which the
 -- 'BeaconInfoGetforObserved'' request conforms to.
@@ -81,19 +81,19 @@ type BeaconInfoGetforObservedResource =
 --
 -- /See:/ 'beaconInfoGetforObserved'' smart constructor.
 data BeaconInfoGetforObserved' = BeaconInfoGetforObserved'
-    { _bigoXgafv          :: !(Maybe Text)
-    , _bigoQuotaUser      :: !(Maybe Text)
-    , _bigoPrettyPrint    :: !Bool
+    { _bigoXgafv :: !(Maybe Text)
+    , _bigoQuotaUser :: !(Maybe Text)
+    , _bigoPrettyPrint :: !Bool
     , _bigoUploadProtocol :: !(Maybe Text)
-    , _bigoPp             :: !Bool
-    , _bigoAccessToken    :: !(Maybe Text)
-    , _bigoUploadType     :: !(Maybe Text)
-    , _bigoPayload        :: !GetInfoForObservedBeaconsRequest
-    , _bigoBearerToken    :: !(Maybe Text)
-    , _bigoKey            :: !(Maybe Key)
-    , _bigoOAuthToken     :: !(Maybe OAuthToken)
-    , _bigoFields         :: !(Maybe Text)
-    , _bigoCallback       :: !(Maybe Text)
+    , _bigoPp :: !Bool
+    , _bigoAccessToken :: !(Maybe Text)
+    , _bigoUploadType :: !(Maybe Text)
+    , _bigoPayload :: !GetInfoForObservedBeaconsRequest
+    , _bigoBearerToken :: !(Maybe Text)
+    , _bigoKey :: !(Maybe Key)
+    , _bigoOAuthToken :: !(Maybe OAuthToken)
+    , _bigoFields :: !(Maybe Text)
+    , _bigoCallback :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconInfoGetforObserved'' with the minimum fields required to make a request.
@@ -128,7 +128,7 @@ data BeaconInfoGetforObserved' = BeaconInfoGetforObserved'
 beaconInfoGetforObserved'
     :: GetInfoForObservedBeaconsRequest -- ^ 'payload'
     -> BeaconInfoGetforObserved'
-beaconInfoGetforObserved' pBigoPayload_ =
+beaconInfoGetforObserved' pBigoPayload_ = 
     BeaconInfoGetforObserved'
     { _bigoXgafv = Nothing
     , _bigoQuotaUser = Nothing

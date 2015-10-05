@@ -42,8 +42,8 @@ module Network.Google.Resource.Genomics.Callsets.Create
     , ccFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsCallsetsCreate@ which the
 -- 'CallsetsCreate'' request conforms to.
@@ -62,13 +62,13 @@ type CallsetsCreateResource =
 --
 -- /See:/ 'callsetsCreate'' smart constructor.
 data CallsetsCreate' = CallsetsCreate'
-    { _ccQuotaUser   :: !(Maybe Text)
+    { _ccQuotaUser :: !(Maybe Text)
     , _ccPrettyPrint :: !Bool
-    , _ccUserIP      :: !(Maybe Text)
-    , _ccPayload     :: !CallSet
-    , _ccKey         :: !(Maybe Key)
-    , _ccOAuthToken  :: !(Maybe OAuthToken)
-    , _ccFields      :: !(Maybe Text)
+    , _ccUserIP :: !(Maybe Text)
+    , _ccPayload :: !CallSet
+    , _ccKey :: !(Maybe Key)
+    , _ccOAuthToken :: !(Maybe OAuthToken)
+    , _ccFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsCreate'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data CallsetsCreate' = CallsetsCreate'
 callsetsCreate'
     :: CallSet -- ^ 'payload'
     -> CallsetsCreate'
-callsetsCreate' pCcPayload_ =
+callsetsCreate' pCcPayload_ = 
     CallsetsCreate'
     { _ccQuotaUser = Nothing
     , _ccPrettyPrint = True

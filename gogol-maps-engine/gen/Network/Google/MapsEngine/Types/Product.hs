@@ -83,7 +83,7 @@ instance FromJSON GeoJSONProperties where
               (\ o -> pure GeoJSONProperties)
 
 instance ToJSON GeoJSONProperties where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | A feature within a table.
 --
@@ -418,7 +418,7 @@ instance FromJSON GeoJSONGeometry where
               (\ o -> pure GeoJSONGeometry)
 
 instance ToJSON GeoJSONGeometry where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'mapLayer' smart constructor.
@@ -1149,7 +1149,7 @@ instance FromJSON
 
 instance ToJSON
          RasterCollectionsRastersBatchDeleteResponse where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | The response returned by a call to any asset\'s Process method.
 --
@@ -1170,7 +1170,7 @@ instance FromJSON ProcessResponse where
               (\ o -> pure ProcessResponse)
 
 instance ToJSON ProcessResponse where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'tableColumn' smart constructor.
@@ -1736,7 +1736,7 @@ instance FromJSON
 
 instance ToJSON
          RasterCollectionsRastersBatchInsertResponse where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | The response returned by a call to icons.List.
 --
@@ -2012,7 +2012,7 @@ instance FromJSON MapItem where
           = withObject "MapItem" (\ o -> pure MapItem)
 
 instance ToJSON MapItem where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | The request sent to rasterCollections.Rasters.BatchInsert.
 --
@@ -3020,7 +3020,7 @@ instance FromJSON PublishResponse where
               (\ o -> pure PublishResponse)
 
 instance ToJSON PublishResponse where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | The request sent to features.Insert.
 --
@@ -4609,7 +4609,7 @@ instance FromJSON PermissionsBatchDeleteResponse
               (\ o -> pure PermissionsBatchDeleteResponse)
 
 instance ToJSON PermissionsBatchDeleteResponse where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'mapKmlLink' smart constructor.
@@ -4715,7 +4715,7 @@ instance FromJSON PermissionsBatchUpdateResponse
               (\ o -> pure PermissionsBatchUpdateResponse)
 
 instance ToJSON PermissionsBatchUpdateResponse where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'geoJSONLineString' smart constructor.

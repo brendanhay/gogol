@@ -47,8 +47,8 @@ module Network.Google.Resource.Genomics.References.Bases.List
     , rblFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReferencesBasesList@ which the
 -- 'ReferencesBasesList'' request conforms to.
@@ -74,17 +74,17 @@ type ReferencesBasesListResource =
 --
 -- /See:/ 'referencesBasesList'' smart constructor.
 data ReferencesBasesList' = ReferencesBasesList'
-    { _rblQuotaUser   :: !(Maybe Text)
+    { _rblQuotaUser :: !(Maybe Text)
     , _rblPrettyPrint :: !Bool
-    , _rblUserIP      :: !(Maybe Text)
-    , _rblStart       :: !(Maybe Int64)
+    , _rblUserIP :: !(Maybe Text)
+    , _rblStart :: !(Maybe Int64)
     , _rblReferenceId :: !Text
-    , _rblKey         :: !(Maybe Key)
-    , _rblEnd         :: !(Maybe Int64)
-    , _rblPageToken   :: !(Maybe Text)
-    , _rblOAuthToken  :: !(Maybe OAuthToken)
-    , _rblPageSize    :: !(Maybe Int32)
-    , _rblFields      :: !(Maybe Text)
+    , _rblKey :: !(Maybe Key)
+    , _rblEnd :: !(Maybe Int64)
+    , _rblPageToken :: !(Maybe Text)
+    , _rblOAuthToken :: !(Maybe OAuthToken)
+    , _rblPageSize :: !(Maybe Int32)
+    , _rblFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesBasesList'' with the minimum fields required to make a request.
@@ -115,7 +115,7 @@ data ReferencesBasesList' = ReferencesBasesList'
 referencesBasesList'
     :: Text -- ^ 'referenceId'
     -> ReferencesBasesList'
-referencesBasesList' pRblReferenceId_ =
+referencesBasesList' pRblReferenceId_ = 
     ReferencesBasesList'
     { _rblQuotaUser = Nothing
     , _rblPrettyPrint = True

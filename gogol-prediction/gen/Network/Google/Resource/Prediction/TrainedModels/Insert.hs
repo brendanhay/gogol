@@ -43,8 +43,8 @@ module Network.Google.Resource.Prediction.TrainedModels.Insert
     , tmiFields
     ) where
 
-import           Network.Google.Prediction.Types
-import           Network.Google.Prelude
+import Network.Google.Prediction.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @PredictionTrainedModelsInsert@ which the
 -- 'TrainedModelsInsert'' request conforms to.
@@ -64,14 +64,14 @@ type TrainedModelsInsertResource =
 --
 -- /See:/ 'trainedModelsInsert'' smart constructor.
 data TrainedModelsInsert' = TrainedModelsInsert'
-    { _tmiQuotaUser   :: !(Maybe Text)
+    { _tmiQuotaUser :: !(Maybe Text)
     , _tmiPrettyPrint :: !Bool
-    , _tmiProject     :: !Text
-    , _tmiUserIP      :: !(Maybe Text)
-    , _tmiPayload     :: !Insert
-    , _tmiKey         :: !(Maybe Key)
-    , _tmiOAuthToken  :: !(Maybe OAuthToken)
-    , _tmiFields      :: !(Maybe Text)
+    , _tmiProject :: !Text
+    , _tmiUserIP :: !(Maybe Text)
+    , _tmiPayload :: !Insert
+    , _tmiKey :: !(Maybe Key)
+    , _tmiOAuthToken :: !(Maybe OAuthToken)
+    , _tmiFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrainedModelsInsert'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ trainedModelsInsert'
     :: Text -- ^ 'project'
     -> Insert -- ^ 'payload'
     -> TrainedModelsInsert'
-trainedModelsInsert' pTmiProject_ pTmiPayload_ =
+trainedModelsInsert' pTmiProject_ pTmiPayload_ = 
     TrainedModelsInsert'
     { _tmiQuotaUser = Nothing
     , _tmiPrettyPrint = True

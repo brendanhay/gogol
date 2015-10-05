@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.List
     , mcdlFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomDimensionsList@ which the
 -- 'ManagementCustomDimensionsList'' request conforms to.
@@ -72,16 +72,16 @@ type ManagementCustomDimensionsListResource =
 --
 -- /See:/ 'managementCustomDimensionsList'' smart constructor.
 data ManagementCustomDimensionsList' = ManagementCustomDimensionsList'
-    { _mcdlQuotaUser     :: !(Maybe Text)
-    , _mcdlPrettyPrint   :: !Bool
+    { _mcdlQuotaUser :: !(Maybe Text)
+    , _mcdlPrettyPrint :: !Bool
     , _mcdlWebPropertyId :: !Text
-    , _mcdlUserIP        :: !(Maybe Text)
-    , _mcdlAccountId     :: !Text
-    , _mcdlKey           :: !(Maybe Key)
-    , _mcdlOAuthToken    :: !(Maybe OAuthToken)
-    , _mcdlStartIndex    :: !(Maybe Int32)
-    , _mcdlMaxResults    :: !(Maybe Int32)
-    , _mcdlFields        :: !(Maybe Text)
+    , _mcdlUserIP :: !(Maybe Text)
+    , _mcdlAccountId :: !Text
+    , _mcdlKey :: !(Maybe Key)
+    , _mcdlOAuthToken :: !(Maybe OAuthToken)
+    , _mcdlStartIndex :: !(Maybe Int32)
+    , _mcdlMaxResults :: !(Maybe Int32)
+    , _mcdlFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDimensionsList'' with the minimum fields required to make a request.
@@ -111,7 +111,7 @@ managementCustomDimensionsList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
     -> ManagementCustomDimensionsList'
-managementCustomDimensionsList' pMcdlWebPropertyId_ pMcdlAccountId_ =
+managementCustomDimensionsList' pMcdlWebPropertyId_ pMcdlAccountId_ = 
     ManagementCustomDimensionsList'
     { _mcdlQuotaUser = Nothing
     , _mcdlPrettyPrint = False

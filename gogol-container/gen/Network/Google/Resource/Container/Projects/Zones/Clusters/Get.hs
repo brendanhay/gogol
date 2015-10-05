@@ -44,8 +44,8 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Get
     , pzcgFields
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ContainerProjectsZonesClustersGet@ which the
 -- 'ProjectsZonesClustersGet'' request conforms to.
@@ -67,15 +67,15 @@ type ProjectsZonesClustersGetResource =
 --
 -- /See:/ 'projectsZonesClustersGet'' smart constructor.
 data ProjectsZonesClustersGet' = ProjectsZonesClustersGet'
-    { _pzcgQuotaUser   :: !(Maybe Text)
+    { _pzcgQuotaUser :: !(Maybe Text)
     , _pzcgPrettyPrint :: !Bool
-    , _pzcgUserIP      :: !(Maybe Text)
-    , _pzcgZoneId      :: !Text
-    , _pzcgKey         :: !(Maybe Key)
-    , _pzcgClusterId   :: !Text
-    , _pzcgProjectId   :: !Text
-    , _pzcgOAuthToken  :: !(Maybe OAuthToken)
-    , _pzcgFields      :: !(Maybe Text)
+    , _pzcgUserIP :: !(Maybe Text)
+    , _pzcgZoneId :: !Text
+    , _pzcgKey :: !(Maybe Key)
+    , _pzcgClusterId :: !Text
+    , _pzcgProjectId :: !Text
+    , _pzcgOAuthToken :: !(Maybe OAuthToken)
+    , _pzcgFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersGet'' with the minimum fields required to make a request.
@@ -104,7 +104,7 @@ projectsZonesClustersGet'
     -> Text -- ^ 'clusterId'
     -> Text -- ^ 'projectId'
     -> ProjectsZonesClustersGet'
-projectsZonesClustersGet' pPzcgZoneId_ pPzcgClusterId_ pPzcgProjectId_ =
+projectsZonesClustersGet' pPzcgZoneId_ pPzcgClusterId_ pPzcgProjectId_ = 
     ProjectsZonesClustersGet'
     { _pzcgQuotaUser = Nothing
     , _pzcgPrettyPrint = True

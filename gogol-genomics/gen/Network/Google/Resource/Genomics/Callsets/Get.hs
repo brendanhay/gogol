@@ -42,8 +42,8 @@ module Network.Google.Resource.Genomics.Callsets.Get
     , cgFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsCallsetsGet@ which the
 -- 'CallsetsGet'' request conforms to.
@@ -62,13 +62,13 @@ type CallsetsGetResource =
 --
 -- /See:/ 'callsetsGet'' smart constructor.
 data CallsetsGet' = CallsetsGet'
-    { _cgQuotaUser   :: !(Maybe Text)
+    { _cgQuotaUser :: !(Maybe Text)
     , _cgPrettyPrint :: !Bool
-    , _cgUserIP      :: !(Maybe Text)
-    , _cgKey         :: !(Maybe Key)
-    , _cgCallSetId   :: !Text
-    , _cgOAuthToken  :: !(Maybe OAuthToken)
-    , _cgFields      :: !(Maybe Text)
+    , _cgUserIP :: !(Maybe Text)
+    , _cgKey :: !(Maybe Key)
+    , _cgCallSetId :: !Text
+    , _cgOAuthToken :: !(Maybe OAuthToken)
+    , _cgFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsGet'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data CallsetsGet' = CallsetsGet'
 callsetsGet'
     :: Text -- ^ 'callSetId'
     -> CallsetsGet'
-callsetsGet' pCgCallSetId_ =
+callsetsGet' pCgCallSetId_ = 
     CallsetsGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True

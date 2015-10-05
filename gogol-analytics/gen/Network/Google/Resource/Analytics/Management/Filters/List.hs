@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.Filters.List
     , mflFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementFiltersList@ which the
 -- 'ManagementFiltersList'' request conforms to.
@@ -68,15 +68,15 @@ type ManagementFiltersListResource =
 --
 -- /See:/ 'managementFiltersList'' smart constructor.
 data ManagementFiltersList' = ManagementFiltersList'
-    { _mflQuotaUser   :: !(Maybe Text)
+    { _mflQuotaUser :: !(Maybe Text)
     , _mflPrettyPrint :: !Bool
-    , _mflUserIP      :: !(Maybe Text)
-    , _mflAccountId   :: !Text
-    , _mflKey         :: !(Maybe Key)
-    , _mflOAuthToken  :: !(Maybe OAuthToken)
-    , _mflStartIndex  :: !(Maybe Int32)
-    , _mflMaxResults  :: !(Maybe Int32)
-    , _mflFields      :: !(Maybe Text)
+    , _mflUserIP :: !(Maybe Text)
+    , _mflAccountId :: !Text
+    , _mflKey :: !(Maybe Key)
+    , _mflOAuthToken :: !(Maybe OAuthToken)
+    , _mflStartIndex :: !(Maybe Int32)
+    , _mflMaxResults :: !(Maybe Int32)
+    , _mflFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersList'' with the minimum fields required to make a request.
@@ -103,7 +103,7 @@ data ManagementFiltersList' = ManagementFiltersList'
 managementFiltersList'
     :: Text -- ^ 'accountId'
     -> ManagementFiltersList'
-managementFiltersList' pMflAccountId_ =
+managementFiltersList' pMflAccountId_ = 
     ManagementFiltersList'
     { _mflQuotaUser = Nothing
     , _mflPrettyPrint = False

@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.WebProperties.List
     , mwplFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebPropertiesList@ which the
 -- 'ManagementWebPropertiesList'' request conforms to.
@@ -69,15 +69,15 @@ type ManagementWebPropertiesListResource =
 --
 -- /See:/ 'managementWebPropertiesList'' smart constructor.
 data ManagementWebPropertiesList' = ManagementWebPropertiesList'
-    { _mwplQuotaUser   :: !(Maybe Text)
+    { _mwplQuotaUser :: !(Maybe Text)
     , _mwplPrettyPrint :: !Bool
-    , _mwplUserIP      :: !(Maybe Text)
-    , _mwplAccountId   :: !Text
-    , _mwplKey         :: !(Maybe Key)
-    , _mwplOAuthToken  :: !(Maybe OAuthToken)
-    , _mwplStartIndex  :: !(Maybe Int32)
-    , _mwplMaxResults  :: !(Maybe Int32)
-    , _mwplFields      :: !(Maybe Text)
+    , _mwplUserIP :: !(Maybe Text)
+    , _mwplAccountId :: !Text
+    , _mwplKey :: !(Maybe Key)
+    , _mwplOAuthToken :: !(Maybe OAuthToken)
+    , _mwplStartIndex :: !(Maybe Int32)
+    , _mwplMaxResults :: !(Maybe Int32)
+    , _mwplFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertiesList'' with the minimum fields required to make a request.
@@ -104,7 +104,7 @@ data ManagementWebPropertiesList' = ManagementWebPropertiesList'
 managementWebPropertiesList'
     :: Text -- ^ 'accountId'
     -> ManagementWebPropertiesList'
-managementWebPropertiesList' pMwplAccountId_ =
+managementWebPropertiesList' pMwplAccountId_ = 
     ManagementWebPropertiesList'
     { _mwplQuotaUser = Nothing
     , _mwplPrettyPrint = False

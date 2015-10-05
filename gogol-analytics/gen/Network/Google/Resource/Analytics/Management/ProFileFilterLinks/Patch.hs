@@ -47,8 +47,8 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Patch
     , mpfflpFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProFileFilterLinksPatch@ which the
 -- 'ManagementProFileFilterLinksPatch'' request conforms to.
@@ -77,17 +77,17 @@ type ManagementProFileFilterLinksPatchResource =
 --
 -- /See:/ 'managementProFileFilterLinksPatch'' smart constructor.
 data ManagementProFileFilterLinksPatch' = ManagementProFileFilterLinksPatch'
-    { _mpfflpQuotaUser     :: !(Maybe Text)
-    , _mpfflpPrettyPrint   :: !Bool
+    { _mpfflpQuotaUser :: !(Maybe Text)
+    , _mpfflpPrettyPrint :: !Bool
     , _mpfflpWebPropertyId :: !Text
-    , _mpfflpUserIP        :: !(Maybe Text)
-    , _mpfflpProFileId     :: !Text
-    , _mpfflpPayload       :: !ProFileFilterLink
-    , _mpfflpAccountId     :: !Text
-    , _mpfflpKey           :: !(Maybe Key)
-    , _mpfflpLinkId        :: !Text
-    , _mpfflpOAuthToken    :: !(Maybe OAuthToken)
-    , _mpfflpFields        :: !(Maybe Text)
+    , _mpfflpUserIP :: !(Maybe Text)
+    , _mpfflpProFileId :: !Text
+    , _mpfflpPayload :: !ProFileFilterLink
+    , _mpfflpAccountId :: !Text
+    , _mpfflpKey :: !(Maybe Key)
+    , _mpfflpLinkId :: !Text
+    , _mpfflpOAuthToken :: !(Maybe OAuthToken)
+    , _mpfflpFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFileFilterLinksPatch'' with the minimum fields required to make a request.
@@ -122,7 +122,7 @@ managementProFileFilterLinksPatch'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
     -> ManagementProFileFilterLinksPatch'
-managementProFileFilterLinksPatch' pMpfflpWebPropertyId_ pMpfflpProFileId_ pMpfflpPayload_ pMpfflpAccountId_ pMpfflpLinkId_ =
+managementProFileFilterLinksPatch' pMpfflpWebPropertyId_ pMpfflpProFileId_ pMpfflpPayload_ pMpfflpAccountId_ pMpfflpLinkId_ = 
     ManagementProFileFilterLinksPatch'
     { _mpfflpQuotaUser = Nothing
     , _mpfflpPrettyPrint = False

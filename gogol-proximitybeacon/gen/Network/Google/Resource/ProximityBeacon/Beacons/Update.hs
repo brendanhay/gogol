@@ -54,8 +54,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Update
     , buCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsUpdate@ which the
 -- 'BeaconsUpdate'' request conforms to.
@@ -86,20 +86,20 @@ type BeaconsUpdateResource =
 --
 -- /See:/ 'beaconsUpdate'' smart constructor.
 data BeaconsUpdate' = BeaconsUpdate'
-    { _buXgafv          :: !(Maybe Text)
-    , _buQuotaUser      :: !(Maybe Text)
-    , _buPrettyPrint    :: !Bool
+    { _buXgafv :: !(Maybe Text)
+    , _buQuotaUser :: !(Maybe Text)
+    , _buPrettyPrint :: !Bool
     , _buUploadProtocol :: !(Maybe Text)
-    , _buPp             :: !Bool
-    , _buAccessToken    :: !(Maybe Text)
-    , _buBeaconName     :: !Text
-    , _buUploadType     :: !(Maybe Text)
-    , _buPayload        :: !Beacon
-    , _buBearerToken    :: !(Maybe Text)
-    , _buKey            :: !(Maybe Key)
-    , _buOAuthToken     :: !(Maybe OAuthToken)
-    , _buFields         :: !(Maybe Text)
-    , _buCallback       :: !(Maybe Text)
+    , _buPp :: !Bool
+    , _buAccessToken :: !(Maybe Text)
+    , _buBeaconName :: !Text
+    , _buUploadType :: !(Maybe Text)
+    , _buPayload :: !Beacon
+    , _buBearerToken :: !(Maybe Text)
+    , _buKey :: !(Maybe Key)
+    , _buOAuthToken :: !(Maybe OAuthToken)
+    , _buFields :: !(Maybe Text)
+    , _buCallback :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsUpdate'' with the minimum fields required to make a request.
@@ -137,7 +137,7 @@ beaconsUpdate'
     :: Text -- ^ 'beaconName'
     -> Beacon -- ^ 'payload'
     -> BeaconsUpdate'
-beaconsUpdate' pBuBeaconName_ pBuPayload_ =
+beaconsUpdate' pBuBeaconName_ pBuPayload_ = 
     BeaconsUpdate'
     { _buXgafv = Nothing
     , _buQuotaUser = Nothing

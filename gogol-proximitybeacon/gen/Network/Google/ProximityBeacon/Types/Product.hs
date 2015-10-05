@@ -17,8 +17,8 @@
 --
 module Network.Google.ProximityBeacon.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types.Sum
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types.Sum
 
 -- | An object representing a latitude\/longitude pair. This is expressed as
 -- a pair of doubles representing degrees latitude and degrees longitude.
@@ -46,7 +46,7 @@ import           Network.Google.ProximityBeacon.Types.Sum
 --
 -- /See:/ 'latLng' smart constructor.
 data LatLng = LatLng
-    { _llLatitude  :: !(Maybe Double)
+    { _llLatitude :: !(Maybe Double)
     , _llLongitude :: !(Maybe Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -59,7 +59,7 @@ data LatLng = LatLng
 -- * 'llLongitude'
 latLng
     :: LatLng
-latLng =
+latLng = 
     LatLng
     { _llLatitude = Nothing
     , _llLongitude = Nothing
@@ -95,7 +95,7 @@ instance ToJSON LatLng where
 --
 -- /See:/ 'attachmentInfo' smart constructor.
 data AttachmentInfo = AttachmentInfo
-    { _aiData           :: !(Maybe Word8)
+    { _aiData :: !(Maybe Word8)
     , _aiNamespacedType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -108,7 +108,7 @@ data AttachmentInfo = AttachmentInfo
 -- * 'aiNamespacedType'
 attachmentInfo
     :: AttachmentInfo
-attachmentInfo =
+attachmentInfo = 
     AttachmentInfo
     { _aiData = Nothing
     , _aiNamespacedType = Nothing
@@ -145,7 +145,7 @@ instance ToJSON AttachmentInfo where
 --
 -- /See:/ 'beaconProperties' smart constructor.
 data BeaconProperties =
-    BeaconProperties
+    BeaconProperties 
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconProperties' with the minimum fields required to make a request.
@@ -160,7 +160,7 @@ instance FromJSON BeaconProperties where
               (\ o -> pure BeaconProperties)
 
 instance ToJSON BeaconProperties where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the
@@ -170,7 +170,7 @@ instance ToJSON BeaconProperties where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty
+    Empty 
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
@@ -183,7 +183,7 @@ instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty)
 
 instance ToJSON Empty where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Response for a request to delete attachments.
 --
@@ -199,7 +199,7 @@ newtype DeleteAttachmentsResponse = DeleteAttachmentsResponse
 -- * 'darNumDeleted'
 deleteAttachmentsResponse
     :: DeleteAttachmentsResponse
-deleteAttachmentsResponse =
+deleteAttachmentsResponse = 
     DeleteAttachmentsResponse
     { _darNumDeleted = Nothing
     }
@@ -226,7 +226,7 @@ instance ToJSON DeleteAttachmentsResponse where
 --
 -- /See:/ 'getInfoForObservedBeaconsRequest' smart constructor.
 data GetInfoForObservedBeaconsRequest = GetInfoForObservedBeaconsRequest
-    { _gifobrObservations    :: !(Maybe [Observation])
+    { _gifobrObservations :: !(Maybe [Observation])
     , _gifobrNamespacedTypes :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -239,7 +239,7 @@ data GetInfoForObservedBeaconsRequest = GetInfoForObservedBeaconsRequest
 -- * 'gifobrNamespacedTypes'
 getInfoForObservedBeaconsRequest
     :: GetInfoForObservedBeaconsRequest
-getInfoForObservedBeaconsRequest =
+getInfoForObservedBeaconsRequest = 
     GetInfoForObservedBeaconsRequest
     { _gifobrObservations = Nothing
     , _gifobrNamespacedTypes = Nothing
@@ -290,7 +290,7 @@ instance ToJSON GetInfoForObservedBeaconsRequest
 -- /See:/ 'namespace' smart constructor.
 data Namespace = Namespace
     { _nServingVisibility :: !(Maybe Text)
-    , _nNamespaceName     :: !(Maybe Text)
+    , _nNamespaceName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Namespace' with the minimum fields required to make a request.
@@ -302,7 +302,7 @@ data Namespace = Namespace
 -- * 'nNamespaceName'
 namespace
     :: Namespace
-namespace =
+namespace = 
     Namespace
     { _nServingVisibility = Nothing
     , _nNamespaceName = Nothing
@@ -352,7 +352,7 @@ newtype ListNamespacesResponse = ListNamespacesResponse
 -- * 'lnrNamespaces'
 listNamespacesResponse
     :: ListNamespacesResponse
-listNamespacesResponse =
+listNamespacesResponse = 
     ListNamespacesResponse
     { _lnrNamespaces = Nothing
     }
@@ -387,8 +387,8 @@ instance ToJSON ListNamespacesResponse where
 --
 -- /See:/ 'date' smart constructor.
 data Date = Date
-    { _dDay   :: !(Maybe Int32)
-    , _dYear  :: !(Maybe Int32)
+    { _dDay :: !(Maybe Int32)
+    , _dYear :: !(Maybe Int32)
     , _dMonth :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -403,7 +403,7 @@ data Date = Date
 -- * 'dMonth'
 date
     :: Date
-date =
+date = 
     Date
     { _dDay = Nothing
     , _dYear = Nothing
@@ -442,15 +442,15 @@ instance ToJSON Date where
 --
 -- /See:/ 'beacon' smart constructor.
 data Beacon = Beacon
-    { _bLatLng            :: !(Maybe LatLng)
-    , _bStatus            :: !(Maybe Text)
-    , _bBeaconName        :: !(Maybe Text)
-    , _bIndoorLevel       :: !(Maybe IndoorLevel)
+    { _bLatLng :: !(Maybe LatLng)
+    , _bStatus :: !(Maybe Text)
+    , _bBeaconName :: !(Maybe Text)
+    , _bIndoorLevel :: !(Maybe IndoorLevel)
     , _bExpectedStability :: !(Maybe Text)
-    , _bDescription       :: !(Maybe Text)
-    , _bPlaceId           :: !(Maybe Text)
-    , _bAdvertisedId      :: !(Maybe AdvertisedId)
-    , _bProperties        :: !(Maybe BeaconProperties)
+    , _bDescription :: !(Maybe Text)
+    , _bPlaceId :: !(Maybe Text)
+    , _bAdvertisedId :: !(Maybe AdvertisedId)
+    , _bProperties :: !(Maybe BeaconProperties)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Beacon' with the minimum fields required to make a request.
@@ -476,7 +476,7 @@ data Beacon = Beacon
 -- * 'bProperties'
 beacon
     :: Beacon
-beacon =
+beacon = 
     Beacon
     { _bLatLng = Nothing
     , _bStatus = Nothing
@@ -581,8 +581,8 @@ instance ToJSON Beacon where
 --
 -- /See:/ 'diagnostics' smart constructor.
 data Diagnostics = Diagnostics
-    { _dAlerts                  :: !(Maybe [Text])
-    , _dBeaconName              :: !(Maybe Text)
+    { _dAlerts :: !(Maybe [Text])
+    , _dBeaconName :: !(Maybe Text)
     , _dEstimatedLowBatteryDate :: !(Maybe Date)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -597,7 +597,7 @@ data Diagnostics = Diagnostics
 -- * 'dEstimatedLowBatteryDate'
 diagnostics
     :: Diagnostics
-diagnostics =
+diagnostics = 
     Diagnostics
     { _dAlerts = Nothing
     , _dBeaconName = Nothing
@@ -655,7 +655,7 @@ newtype ListBeaconAttachmentsResponse = ListBeaconAttachmentsResponse
 -- * 'lbarAttachments'
 listBeaconAttachmentsResponse
     :: ListBeaconAttachmentsResponse
-listBeaconAttachmentsResponse =
+listBeaconAttachmentsResponse = 
     ListBeaconAttachmentsResponse
     { _lbarAttachments = Nothing
     }
@@ -695,7 +695,7 @@ newtype IndoorLevel = IndoorLevel
 -- * 'ilName'
 indoorLevel
     :: IndoorLevel
-indoorLevel =
+indoorLevel = 
     IndoorLevel
     { _ilName = Nothing
     }
@@ -719,9 +719,9 @@ instance ToJSON IndoorLevel where
 --
 -- /See:/ 'beaconInfo' smart constructor.
 data BeaconInfo = BeaconInfo
-    { _biAttachments  :: !(Maybe [AttachmentInfo])
-    , _biBeaconName   :: !(Maybe Text)
-    , _biDescription  :: !(Maybe Text)
+    { _biAttachments :: !(Maybe [AttachmentInfo])
+    , _biBeaconName :: !(Maybe Text)
+    , _biDescription :: !(Maybe Text)
     , _biAdvertisedId :: !(Maybe AdvertisedId)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -738,7 +738,7 @@ data BeaconInfo = BeaconInfo
 -- * 'biAdvertisedId'
 beaconInfo
     :: BeaconInfo
-beaconInfo =
+beaconInfo = 
     BeaconInfo
     { _biAttachments = Nothing
     , _biBeaconName = Nothing
@@ -797,8 +797,8 @@ instance ToJSON BeaconInfo where
 --
 -- /See:/ 'observation' smart constructor.
 data Observation = Observation
-    { _oTelemetry    :: !(Maybe Word8)
-    , _oTimestampMs  :: !(Maybe Text)
+    { _oTelemetry :: !(Maybe Word8)
+    , _oTimestampMs :: !(Maybe Text)
     , _oAdvertisedId :: !(Maybe AdvertisedId)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -813,7 +813,7 @@ data Observation = Observation
 -- * 'oAdvertisedId'
 observation
     :: Observation
-observation =
+observation = 
     Observation
     { _oTelemetry = Nothing
     , _oTimestampMs = Nothing
@@ -859,7 +859,7 @@ instance ToJSON Observation where
 --
 -- /See:/ 'beaconAttachment' smart constructor.
 data BeaconAttachment = BeaconAttachment
-    { _baData           :: !(Maybe Word8)
+    { _baData :: !(Maybe Word8)
     , _baAttachmentName :: !(Maybe Text)
     , _baNamespacedType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -875,7 +875,7 @@ data BeaconAttachment = BeaconAttachment
 -- * 'baNamespacedType'
 beaconAttachment
     :: BeaconAttachment
-beaconAttachment =
+beaconAttachment = 
     BeaconAttachment
     { _baData = Nothing
     , _baAttachmentName = Nothing
@@ -928,7 +928,7 @@ instance ToJSON BeaconAttachment where
 -- /See:/ 'listDiagnosticsResponse' smart constructor.
 data ListDiagnosticsResponse = ListDiagnosticsResponse
     { _ldrNextPageToken :: !(Maybe Text)
-    , _ldrDiagnostics   :: !(Maybe [Diagnostics])
+    , _ldrDiagnostics :: !(Maybe [Diagnostics])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListDiagnosticsResponse' with the minimum fields required to make a request.
@@ -940,7 +940,7 @@ data ListDiagnosticsResponse = ListDiagnosticsResponse
 -- * 'ldrDiagnostics'
 listDiagnosticsResponse
     :: ListDiagnosticsResponse
-listDiagnosticsResponse =
+listDiagnosticsResponse = 
     ListDiagnosticsResponse
     { _ldrNextPageToken = Nothing
     , _ldrDiagnostics = Nothing
@@ -980,7 +980,7 @@ instance ToJSON ListDiagnosticsResponse where
 --
 -- /See:/ 'advertisedId' smart constructor.
 data AdvertisedId = AdvertisedId
-    { _aiId   :: !(Maybe Word8)
+    { _aiId :: !(Maybe Word8)
     , _aiType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -993,7 +993,7 @@ data AdvertisedId = AdvertisedId
 -- * 'aiType'
 advertisedId
     :: AdvertisedId
-advertisedId =
+advertisedId = 
     AdvertisedId
     { _aiId = Nothing
     , _aiType = Nothing
@@ -1028,8 +1028,8 @@ instance ToJSON AdvertisedId where
 -- /See:/ 'listBeaconsResponse' smart constructor.
 data ListBeaconsResponse = ListBeaconsResponse
     { _lbrNextPageToken :: !(Maybe Text)
-    , _lbrBeacons       :: !(Maybe [Beacon])
-    , _lbrTotalCount    :: !(Maybe Int64)
+    , _lbrBeacons :: !(Maybe [Beacon])
+    , _lbrTotalCount :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListBeaconsResponse' with the minimum fields required to make a request.
@@ -1043,7 +1043,7 @@ data ListBeaconsResponse = ListBeaconsResponse
 -- * 'lbrTotalCount'
 listBeaconsResponse
     :: ListBeaconsResponse
-listBeaconsResponse =
+listBeaconsResponse = 
     ListBeaconsResponse
     { _lbrNextPageToken = Nothing
     , _lbrBeacons = Nothing
@@ -1103,7 +1103,7 @@ newtype GetInfoForObservedBeaconsResponse = GetInfoForObservedBeaconsResponse
 -- * 'gifobrBeacons'
 getInfoForObservedBeaconsResponse
     :: GetInfoForObservedBeaconsResponse
-getInfoForObservedBeaconsResponse =
+getInfoForObservedBeaconsResponse = 
     GetInfoForObservedBeaconsResponse
     { _gifobrBeacons = Nothing
     }

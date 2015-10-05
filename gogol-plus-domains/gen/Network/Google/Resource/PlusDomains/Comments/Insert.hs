@@ -43,8 +43,8 @@ module Network.Google.Resource.PlusDomains.Comments.Insert
     , ciFields
     ) where
 
-import           Network.Google.PlusDomains.Types
-import           Network.Google.Prelude
+import Network.Google.PlusDomains.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsCommentsInsert@ which the
 -- 'CommentsInsert'' request conforms to.
@@ -65,14 +65,14 @@ type CommentsInsertResource =
 --
 -- /See:/ 'commentsInsert'' smart constructor.
 data CommentsInsert' = CommentsInsert'
-    { _ciQuotaUser   :: !(Maybe Text)
+    { _ciQuotaUser :: !(Maybe Text)
     , _ciPrettyPrint :: !Bool
-    , _ciUserIP      :: !(Maybe Text)
-    , _ciActivityId  :: !Text
-    , _ciPayload     :: !Comment
-    , _ciKey         :: !(Maybe Key)
-    , _ciOAuthToken  :: !(Maybe OAuthToken)
-    , _ciFields      :: !(Maybe Text)
+    , _ciUserIP :: !(Maybe Text)
+    , _ciActivityId :: !Text
+    , _ciPayload :: !Comment
+    , _ciKey :: !(Maybe Key)
+    , _ciOAuthToken :: !(Maybe OAuthToken)
+    , _ciFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsInsert'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ commentsInsert'
     :: Text -- ^ 'activityId'
     -> Comment -- ^ 'payload'
     -> CommentsInsert'
-commentsInsert' pCiActivityId_ pCiPayload_ =
+commentsInsert' pCiActivityId_ pCiPayload_ = 
     CommentsInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True

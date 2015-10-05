@@ -44,8 +44,8 @@ module Network.Google.Resource.FusionTables.Style.List
     , slFields
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesStyleList@ which the
 -- 'StyleList'' request conforms to.
@@ -68,15 +68,15 @@ type StyleListResource =
 --
 -- /See:/ 'styleList'' smart constructor.
 data StyleList' = StyleList'
-    { _slQuotaUser   :: !(Maybe Text)
+    { _slQuotaUser :: !(Maybe Text)
     , _slPrettyPrint :: !Bool
-    , _slUserIP      :: !(Maybe Text)
-    , _slKey         :: !(Maybe Key)
-    , _slPageToken   :: !(Maybe Text)
-    , _slOAuthToken  :: !(Maybe OAuthToken)
-    , _slTableId     :: !Text
-    , _slMaxResults  :: !(Maybe Word32)
-    , _slFields      :: !(Maybe Text)
+    , _slUserIP :: !(Maybe Text)
+    , _slKey :: !(Maybe Key)
+    , _slPageToken :: !(Maybe Text)
+    , _slOAuthToken :: !(Maybe OAuthToken)
+    , _slTableId :: !Text
+    , _slMaxResults :: !(Maybe Word32)
+    , _slFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleList'' with the minimum fields required to make a request.
@@ -103,7 +103,7 @@ data StyleList' = StyleList'
 styleList'
     :: Text -- ^ 'tableId'
     -> StyleList'
-styleList' pSlTableId_ =
+styleList' pSlTableId_ = 
     StyleList'
     { _slQuotaUser = Nothing
     , _slPrettyPrint = True

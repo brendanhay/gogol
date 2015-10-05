@@ -54,8 +54,8 @@ module Network.Google.Resource.Blogger.PostUserInfos.List
     , puilFields
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @BloggerPostUserInfosList@ which the
 -- 'PostUserInfosList'' request conforms to.
@@ -90,23 +90,23 @@ type PostUserInfosListResource =
 --
 -- /See:/ 'postUserInfosList'' smart constructor.
 data PostUserInfosList' = PostUserInfosList'
-    { _puilStatus      :: !(Maybe [PostUserInfosListStatus])
-    , _puilQuotaUser   :: !(Maybe Text)
+    { _puilStatus :: !(Maybe [PostUserInfosListStatus])
+    , _puilQuotaUser :: !(Maybe Text)
     , _puilPrettyPrint :: !Bool
-    , _puilOrderBy     :: !PostUserInfosListOrderBy
-    , _puilUserIP      :: !(Maybe Text)
-    , _puilEndDate     :: !(Maybe DateTime')
-    , _puilBlogId      :: !Text
-    , _puilUserId      :: !Text
-    , _puilStartDate   :: !(Maybe DateTime')
-    , _puilKey         :: !(Maybe Key)
+    , _puilOrderBy :: !PostUserInfosListOrderBy
+    , _puilUserIP :: !(Maybe Text)
+    , _puilEndDate :: !(Maybe DateTime')
+    , _puilBlogId :: !Text
+    , _puilUserId :: !Text
+    , _puilStartDate :: !(Maybe DateTime')
+    , _puilKey :: !(Maybe Key)
     , _puilFetchBodies :: !Bool
-    , _puilView        :: !(Maybe PostUserInfosListView)
-    , _puilLabels      :: !(Maybe Text)
-    , _puilPageToken   :: !(Maybe Text)
-    , _puilOAuthToken  :: !(Maybe OAuthToken)
-    , _puilMaxResults  :: !(Maybe Word32)
-    , _puilFields      :: !(Maybe Text)
+    , _puilView :: !(Maybe PostUserInfosListView)
+    , _puilLabels :: !(Maybe Text)
+    , _puilPageToken :: !(Maybe Text)
+    , _puilOAuthToken :: !(Maybe OAuthToken)
+    , _puilMaxResults :: !(Maybe Word32)
+    , _puilFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostUserInfosList'' with the minimum fields required to make a request.
@@ -150,7 +150,7 @@ postUserInfosList'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'userId'
     -> PostUserInfosList'
-postUserInfosList' pPuilBlogId_ pPuilUserId_ =
+postUserInfosList' pPuilBlogId_ pPuilUserId_ = 
     PostUserInfosList'
     { _puilStatus = Nothing
     , _puilQuotaUser = Nothing

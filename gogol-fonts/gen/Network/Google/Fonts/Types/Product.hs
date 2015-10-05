@@ -204,4 +204,4 @@ instance FromJSON WebfontFiles where
               (\ o -> pure WebfontFiles)
 
 instance ToJSON WebfontFiles where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject

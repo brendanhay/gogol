@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOffers.Get
     , mogFields
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplaceOffersGet@ which the
 -- 'MarketplaceOffersGet'' request conforms to.
@@ -63,13 +63,13 @@ type MarketplaceOffersGetResource =
 --
 -- /See:/ 'marketplaceOffersGet'' smart constructor.
 data MarketplaceOffersGet' = MarketplaceOffersGet'
-    { _mogQuotaUser   :: !(Maybe Text)
+    { _mogQuotaUser :: !(Maybe Text)
     , _mogPrettyPrint :: !Bool
-    , _mogUserIP      :: !(Maybe Text)
-    , _mogKey         :: !(Maybe Key)
-    , _mogOfferId     :: !Text
-    , _mogOAuthToken  :: !(Maybe OAuthToken)
-    , _mogFields      :: !(Maybe Text)
+    , _mogUserIP :: !(Maybe Text)
+    , _mogKey :: !(Maybe Key)
+    , _mogOfferId :: !Text
+    , _mogOAuthToken :: !(Maybe OAuthToken)
+    , _mogFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceOffersGet'' with the minimum fields required to make a request.
@@ -92,7 +92,7 @@ data MarketplaceOffersGet' = MarketplaceOffersGet'
 marketplaceOffersGet'
     :: Text -- ^ 'offerId'
     -> MarketplaceOffersGet'
-marketplaceOffersGet' pMogOfferId_ =
+marketplaceOffersGet' pMogOfferId_ = 
     MarketplaceOffersGet'
     { _mogQuotaUser = Nothing
     , _mogPrettyPrint = True

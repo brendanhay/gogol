@@ -43,8 +43,8 @@ module Network.Google.Resource.Analytics.Management.Accounts.List
     , malFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementAccountsList@ which the
 -- 'ManagementAccountsList'' request conforms to.
@@ -65,14 +65,14 @@ type ManagementAccountsListResource =
 --
 -- /See:/ 'managementAccountsList'' smart constructor.
 data ManagementAccountsList' = ManagementAccountsList'
-    { _malQuotaUser   :: !(Maybe Text)
+    { _malQuotaUser :: !(Maybe Text)
     , _malPrettyPrint :: !Bool
-    , _malUserIP      :: !(Maybe Text)
-    , _malKey         :: !(Maybe Key)
-    , _malOAuthToken  :: !(Maybe OAuthToken)
-    , _malStartIndex  :: !(Maybe Int32)
-    , _malMaxResults  :: !(Maybe Int32)
-    , _malFields      :: !(Maybe Text)
+    , _malUserIP :: !(Maybe Text)
+    , _malKey :: !(Maybe Key)
+    , _malOAuthToken :: !(Maybe OAuthToken)
+    , _malStartIndex :: !(Maybe Int32)
+    , _malMaxResults :: !(Maybe Int32)
+    , _malFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountsList'' with the minimum fields required to make a request.
@@ -96,7 +96,7 @@ data ManagementAccountsList' = ManagementAccountsList'
 -- * 'malFields'
 managementAccountsList'
     :: ManagementAccountsList'
-managementAccountsList' =
+managementAccountsList' = 
     ManagementAccountsList'
     { _malQuotaUser = Nothing
     , _malPrettyPrint = False

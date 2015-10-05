@@ -887,7 +887,7 @@ instance FromJSON ColorsEvent where
           = withObject "ColorsEvent" (\ o -> pure ColorsEvent)
 
 instance ToJSON ColorsEvent where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'settings' smart constructor.
@@ -1558,7 +1558,7 @@ instance FromJSON FreeBusyResponseGroups where
               (\ o -> pure FreeBusyResponseGroups)
 
 instance ToJSON FreeBusyResponseGroups where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Information about the event\'s reminders for the authenticated user.
 --
@@ -1634,7 +1634,7 @@ instance FromJSON ColorsCalendar where
               (\ o -> pure ColorsCalendar)
 
 instance ToJSON ColorsCalendar where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'calendarNotification' smart constructor.
@@ -1711,7 +1711,7 @@ instance FromJSON EventExtendedPropertiesPrivate
               (\ o -> pure EventExtendedPropertiesPrivate)
 
 instance ToJSON EventExtendedPropertiesPrivate where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Additional parameters controlling delivery channel behavior. Optional.
 --
@@ -1732,7 +1732,7 @@ instance FromJSON ChannelParams where
               (\ o -> pure ChannelParams)
 
 instance ToJSON ChannelParams where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'events' smart constructor.
@@ -2673,7 +2673,7 @@ instance FromJSON EventGadgetPreferences where
               (\ o -> pure EventGadgetPreferences)
 
 instance ToJSON EventGadgetPreferences where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'freeBusyRequest' smart constructor.
@@ -2875,7 +2875,7 @@ instance FromJSON EventExtendedPropertiesShared where
               (\ o -> pure EventExtendedPropertiesShared)
 
 instance ToJSON EventExtendedPropertiesShared where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | List of free\/busy information for calendars.
 --
@@ -2896,7 +2896,7 @@ instance FromJSON FreeBusyResponseCalendars where
               (\ o -> pure FreeBusyResponseCalendars)
 
 instance ToJSON FreeBusyResponseCalendars where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'acl' smart constructor.

@@ -51,8 +51,8 @@ module Network.Google.Resource.Analytics.Data.Mcf.Get
     , dmgFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsDataMcfGet@ which the
 -- 'DataMcfGet'' request conforms to.
@@ -82,22 +82,22 @@ type DataMcfGetResource =
 --
 -- /See:/ 'dataMcfGet'' smart constructor.
 data DataMcfGet' = DataMcfGet'
-    { _dmgQuotaUser     :: !(Maybe Text)
-    , _dmgMetrics       :: !Text
-    , _dmgPrettyPrint   :: !Bool
+    { _dmgQuotaUser :: !(Maybe Text)
+    , _dmgMetrics :: !Text
+    , _dmgPrettyPrint :: !Bool
     , _dmgSamplingLevel :: !(Maybe DataMcfGetSamplingLevel)
-    , _dmgUserIP        :: !(Maybe Text)
-    , _dmgFilters       :: !(Maybe Text)
-    , _dmgIds           :: !Text
-    , _dmgEndDate       :: !Text
-    , _dmgKey           :: !(Maybe Key)
-    , _dmgSort          :: !(Maybe Text)
-    , _dmgDimensions    :: !(Maybe Text)
-    , _dmgOAuthToken    :: !(Maybe OAuthToken)
-    , _dmgStartIndex    :: !(Maybe Int32)
-    , _dmgMaxResults    :: !(Maybe Int32)
-    , _dmgStartDate     :: !Text
-    , _dmgFields        :: !(Maybe Text)
+    , _dmgUserIP :: !(Maybe Text)
+    , _dmgFilters :: !(Maybe Text)
+    , _dmgIds :: !Text
+    , _dmgEndDate :: !Text
+    , _dmgKey :: !(Maybe Key)
+    , _dmgSort :: !(Maybe Text)
+    , _dmgDimensions :: !(Maybe Text)
+    , _dmgOAuthToken :: !(Maybe OAuthToken)
+    , _dmgStartIndex :: !(Maybe Int32)
+    , _dmgMaxResults :: !(Maybe Int32)
+    , _dmgStartDate :: !Text
+    , _dmgFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataMcfGet'' with the minimum fields required to make a request.
@@ -141,7 +141,7 @@ dataMcfGet'
     -> Text -- ^ 'end-date'
     -> Text -- ^ 'start-date'
     -> DataMcfGet'
-dataMcfGet' pDmgMetrics_ pDmgIds_ pDmgEndDate_ pDmgStartDate_ =
+dataMcfGet' pDmgMetrics_ pDmgIds_ pDmgEndDate_ pDmgStartDate_ = 
     DataMcfGet'
     { _dmgQuotaUser = Nothing
     , _dmgMetrics = pDmgMetrics_

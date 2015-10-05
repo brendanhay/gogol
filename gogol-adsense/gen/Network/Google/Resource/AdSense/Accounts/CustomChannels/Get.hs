@@ -45,8 +45,8 @@ module Network.Google.Resource.AdSense.Accounts.CustomChannels.Get
     , accgFields
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsCustomChannelsGet@ which the
 -- 'AccountsCustomChannelsGet'' request conforms to.
@@ -71,15 +71,15 @@ type AccountsCustomChannelsGetResource =
 --
 -- /See:/ 'accountsCustomChannelsGet'' smart constructor.
 data AccountsCustomChannelsGet' = AccountsCustomChannelsGet'
-    { _accgQuotaUser       :: !(Maybe Text)
-    , _accgPrettyPrint     :: !Bool
+    { _accgQuotaUser :: !(Maybe Text)
+    , _accgPrettyPrint :: !Bool
     , _accgCustomChannelId :: !Text
-    , _accgUserIP          :: !(Maybe Text)
-    , _accgAdClientId      :: !Text
-    , _accgAccountId       :: !Text
-    , _accgKey             :: !(Maybe Key)
-    , _accgOAuthToken      :: !(Maybe OAuthToken)
-    , _accgFields          :: !(Maybe Text)
+    , _accgUserIP :: !(Maybe Text)
+    , _accgAdClientId :: !Text
+    , _accgAccountId :: !Text
+    , _accgKey :: !(Maybe Key)
+    , _accgOAuthToken :: !(Maybe OAuthToken)
+    , _accgFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsCustomChannelsGet'' with the minimum fields required to make a request.
@@ -108,7 +108,7 @@ accountsCustomChannelsGet'
     -> Text -- ^ 'adClientId'
     -> Text -- ^ 'accountId'
     -> AccountsCustomChannelsGet'
-accountsCustomChannelsGet' pAccgCustomChannelId_ pAccgAdClientId_ pAccgAccountId_ =
+accountsCustomChannelsGet' pAccgCustomChannelId_ pAccgAdClientId_ pAccgAccountId_ = 
     AccountsCustomChannelsGet'
     { _accgQuotaUser = Nothing
     , _accgPrettyPrint = True

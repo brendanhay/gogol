@@ -51,8 +51,8 @@ module Network.Google.Resource.Logging.Projects.Sinks.Update
     , psuCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsSinksUpdate@ which the
 -- 'ProjectsSinksUpdate'' request conforms to.
@@ -83,21 +83,21 @@ type ProjectsSinksUpdateResource =
 --
 -- /See:/ 'projectsSinksUpdate'' smart constructor.
 data ProjectsSinksUpdate' = ProjectsSinksUpdate'
-    { _psuXgafv          :: !(Maybe Text)
-    , _psuQuotaUser      :: !(Maybe Text)
-    , _psuPrettyPrint    :: !Bool
+    { _psuXgafv :: !(Maybe Text)
+    , _psuQuotaUser :: !(Maybe Text)
+    , _psuPrettyPrint :: !Bool
     , _psuUploadProtocol :: !(Maybe Text)
-    , _psuPp             :: !Bool
-    , _psuAccessToken    :: !(Maybe Text)
-    , _psuUploadType     :: !(Maybe Text)
-    , _psuPayload        :: !LogSink
-    , _psuBearerToken    :: !(Maybe Text)
-    , _psuKey            :: !(Maybe Key)
-    , _psuOAuthToken     :: !(Maybe OAuthToken)
-    , _psuProjectsId     :: !Text
-    , _psuSinksId        :: !Text
-    , _psuFields         :: !(Maybe Text)
-    , _psuCallback       :: !(Maybe Text)
+    , _psuPp :: !Bool
+    , _psuAccessToken :: !(Maybe Text)
+    , _psuUploadType :: !(Maybe Text)
+    , _psuPayload :: !LogSink
+    , _psuBearerToken :: !(Maybe Text)
+    , _psuKey :: !(Maybe Key)
+    , _psuOAuthToken :: !(Maybe OAuthToken)
+    , _psuProjectsId :: !Text
+    , _psuSinksId :: !Text
+    , _psuFields :: !(Maybe Text)
+    , _psuCallback :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSinksUpdate'' with the minimum fields required to make a request.
@@ -138,7 +138,7 @@ projectsSinksUpdate'
     -> Text -- ^ 'projectsId'
     -> Text -- ^ 'sinksId'
     -> ProjectsSinksUpdate'
-projectsSinksUpdate' pPsuPayload_ pPsuProjectsId_ pPsuSinksId_ =
+projectsSinksUpdate' pPsuPayload_ pPsuProjectsId_ pPsuSinksId_ = 
     ProjectsSinksUpdate'
     { _psuXgafv = Nothing
     , _psuQuotaUser = Nothing

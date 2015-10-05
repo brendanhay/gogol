@@ -45,8 +45,8 @@ module Network.Google.Resource.Blogger.Posts.GetByPath
     , pgbpFields
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @BloggerPostsGetByPath@ which the
 -- 'PostsGetByPath'' request conforms to.
@@ -70,16 +70,16 @@ type PostsGetByPathResource =
 --
 -- /See:/ 'postsGetByPath'' smart constructor.
 data PostsGetByPath' = PostsGetByPath'
-    { _pgbpQuotaUser   :: !(Maybe Text)
+    { _pgbpQuotaUser :: !(Maybe Text)
     , _pgbpPrettyPrint :: !Bool
-    , _pgbpPath        :: !Text
-    , _pgbpUserIP      :: !(Maybe Text)
-    , _pgbpBlogId      :: !Text
+    , _pgbpPath :: !Text
+    , _pgbpUserIP :: !(Maybe Text)
+    , _pgbpBlogId :: !Text
     , _pgbpMaxComments :: !(Maybe Word32)
-    , _pgbpKey         :: !(Maybe Key)
-    , _pgbpView        :: !(Maybe PostsGetByPathView)
-    , _pgbpOAuthToken  :: !(Maybe OAuthToken)
-    , _pgbpFields      :: !(Maybe Text)
+    , _pgbpKey :: !(Maybe Key)
+    , _pgbpView :: !(Maybe PostsGetByPathView)
+    , _pgbpOAuthToken :: !(Maybe OAuthToken)
+    , _pgbpFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsGetByPath'' with the minimum fields required to make a request.
@@ -109,7 +109,7 @@ postsGetByPath'
     :: Text -- ^ 'path'
     -> Text -- ^ 'blogId'
     -> PostsGetByPath'
-postsGetByPath' pPgbpPath_ pPgbpBlogId_ =
+postsGetByPath' pPgbpPath_ pPgbpBlogId_ = 
     PostsGetByPath'
     { _pgbpQuotaUser = Nothing
     , _pgbpPrettyPrint = True

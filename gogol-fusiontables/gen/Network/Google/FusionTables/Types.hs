@@ -223,9 +223,9 @@ module Network.Google.FusionTables.Types
     , lsStrokeColor
     ) where
 
-import           Network.Google.FusionTables.Types.Product
-import           Network.Google.FusionTables.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types.Product
+import Network.Google.FusionTables.Types.Sum
+import Network.Google.Prelude
 
 -- | URL referring to version 'v2' of the Fusion Tables API.
 fusionTablesURL :: BaseUrl

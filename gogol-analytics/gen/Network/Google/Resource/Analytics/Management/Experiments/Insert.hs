@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.Experiments.Insert
     , meiFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementExperimentsInsert@ which the
 -- 'ManagementExperimentsInsert'' request conforms to.
@@ -73,16 +73,16 @@ type ManagementExperimentsInsertResource =
 --
 -- /See:/ 'managementExperimentsInsert'' smart constructor.
 data ManagementExperimentsInsert' = ManagementExperimentsInsert'
-    { _meiQuotaUser     :: !(Maybe Text)
-    , _meiPrettyPrint   :: !Bool
+    { _meiQuotaUser :: !(Maybe Text)
+    , _meiPrettyPrint :: !Bool
     , _meiWebPropertyId :: !Text
-    , _meiUserIP        :: !(Maybe Text)
-    , _meiProFileId     :: !Text
-    , _meiPayload       :: !Experiment
-    , _meiAccountId     :: !Text
-    , _meiKey           :: !(Maybe Key)
-    , _meiOAuthToken    :: !(Maybe OAuthToken)
-    , _meiFields        :: !(Maybe Text)
+    , _meiUserIP :: !(Maybe Text)
+    , _meiProFileId :: !Text
+    , _meiPayload :: !Experiment
+    , _meiAccountId :: !Text
+    , _meiKey :: !(Maybe Key)
+    , _meiOAuthToken :: !(Maybe OAuthToken)
+    , _meiFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsInsert'' with the minimum fields required to make a request.
@@ -114,7 +114,7 @@ managementExperimentsInsert'
     -> Experiment -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementExperimentsInsert'
-managementExperimentsInsert' pMeiWebPropertyId_ pMeiProFileId_ pMeiPayload_ pMeiAccountId_ =
+managementExperimentsInsert' pMeiWebPropertyId_ pMeiProFileId_ pMeiPayload_ pMeiAccountId_ = 
     ManagementExperimentsInsert'
     { _meiQuotaUser = Nothing
     , _meiPrettyPrint = False

@@ -44,8 +44,8 @@ module Network.Google.Resource.Blogger.Pages.Insert
     , piFields
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @BloggerPagesInsert@ which the
 -- 'PagesInsert'' request conforms to.
@@ -67,15 +67,15 @@ type PagesInsertResource =
 --
 -- /See:/ 'pagesInsert'' smart constructor.
 data PagesInsert' = PagesInsert'
-    { _piQuotaUser   :: !(Maybe Text)
+    { _piQuotaUser :: !(Maybe Text)
     , _piPrettyPrint :: !Bool
-    , _piIsDraft     :: !(Maybe Bool)
-    , _piUserIP      :: !(Maybe Text)
-    , _piBlogId      :: !Text
-    , _piPayload     :: !Page
-    , _piKey         :: !(Maybe Key)
-    , _piOAuthToken  :: !(Maybe OAuthToken)
-    , _piFields      :: !(Maybe Text)
+    , _piIsDraft :: !(Maybe Bool)
+    , _piUserIP :: !(Maybe Text)
+    , _piBlogId :: !Text
+    , _piPayload :: !Page
+    , _piKey :: !(Maybe Key)
+    , _piOAuthToken :: !(Maybe OAuthToken)
+    , _piFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesInsert'' with the minimum fields required to make a request.
@@ -103,7 +103,7 @@ pagesInsert'
     :: Text -- ^ 'blogId'
     -> Page -- ^ 'payload'
     -> PagesInsert'
-pagesInsert' pPiBlogId_ pPiPayload_ =
+pagesInsert' pPiBlogId_ pPiPayload_ = 
     PagesInsert'
     { _piQuotaUser = Nothing
     , _piPrettyPrint = True

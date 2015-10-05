@@ -44,8 +44,8 @@ module Network.Google.Resource.FusionTables.Template.List
     , tllFields
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTemplateList@ which the
 -- 'TemplateList'' request conforms to.
@@ -67,15 +67,15 @@ type TemplateListResource =
 --
 -- /See:/ 'templateList'' smart constructor.
 data TemplateList' = TemplateList'
-    { _tllQuotaUser   :: !(Maybe Text)
+    { _tllQuotaUser :: !(Maybe Text)
     , _tllPrettyPrint :: !Bool
-    , _tllUserIP      :: !(Maybe Text)
-    , _tllKey         :: !(Maybe Key)
-    , _tllPageToken   :: !(Maybe Text)
-    , _tllOAuthToken  :: !(Maybe OAuthToken)
-    , _tllTableId     :: !Text
-    , _tllMaxResults  :: !(Maybe Word32)
-    , _tllFields      :: !(Maybe Text)
+    , _tllUserIP :: !(Maybe Text)
+    , _tllKey :: !(Maybe Key)
+    , _tllPageToken :: !(Maybe Text)
+    , _tllOAuthToken :: !(Maybe OAuthToken)
+    , _tllTableId :: !Text
+    , _tllMaxResults :: !(Maybe Word32)
+    , _tllFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateList'' with the minimum fields required to make a request.
@@ -102,7 +102,7 @@ data TemplateList' = TemplateList'
 templateList'
     :: Text -- ^ 'tableId'
     -> TemplateList'
-templateList' pTllTableId_ =
+templateList' pTllTableId_ = 
     TemplateList'
     { _tllQuotaUser = Nothing
     , _tllPrettyPrint = True

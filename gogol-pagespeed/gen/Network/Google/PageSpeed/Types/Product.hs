@@ -17,16 +17,16 @@
 --
 module Network.Google.PageSpeed.Types.Product where
 
-import           Network.Google.PageSpeed.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.PageSpeed.Types.Sum
+import Network.Google.Prelude
 
 --
 -- /See:/ 'pagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem' smart constructor.
 data PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem = PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
     { _pafsvaisiHeight :: !(Maybe Int32)
-    , _pafsvaisiLeft   :: !(Maybe Int32)
-    , _pafsvaisiWidth  :: !(Maybe Int32)
-    , _pafsvaisiTop    :: !(Maybe Int32)
+    , _pafsvaisiLeft :: !(Maybe Int32)
+    , _pafsvaisiWidth :: !(Maybe Int32)
+    , _pafsvaisiTop :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem' with the minimum fields required to make a request.
@@ -42,7 +42,7 @@ data PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem = PagespeedAPIFormatS
 -- * 'pafsvaisiTop'
 pagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
     :: PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
-pagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem =
+pagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem = 
     PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
     { _pafsvaisiHeight = Nothing
     , _pafsvaisiLeft = Nothing
@@ -101,12 +101,12 @@ instance ToJSON
 --
 -- /See:/ 'pagespeedAPIImageV2' smart constructor.
 data PagespeedAPIImageV2 = PagespeedAPIImageV2
-    { _paivHeight   :: !(Maybe Int32)
-    , _paivData     :: !(Maybe Word8)
+    { _paivHeight :: !(Maybe Int32)
+    , _paivData :: !(Maybe Word8)
     , _paivMimeType :: !(Maybe Text)
-    , _paivWidth    :: !(Maybe Int32)
+    , _paivWidth :: !(Maybe Int32)
     , _paivPageRect :: !(Maybe PagespeedAPIImageV2Page_rect)
-    , _paivKey      :: !(Maybe Text)
+    , _paivKey :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagespeedAPIImageV2' with the minimum fields required to make a request.
@@ -126,7 +126,7 @@ data PagespeedAPIImageV2 = PagespeedAPIImageV2
 -- * 'paivKey'
 pagespeedAPIImageV2
     :: PagespeedAPIImageV2
-pagespeedAPIImageV2 =
+pagespeedAPIImageV2 = 
     PagespeedAPIImageV2
     { _paivHeight = Nothing
     , _paivData = Nothing
@@ -191,9 +191,9 @@ instance ToJSON PagespeedAPIImageV2 where
 -- /See:/ 'pagespeedAPIFormatStringV2ArgsItemRectsItem' smart constructor.
 data PagespeedAPIFormatStringV2ArgsItemRectsItem = PagespeedAPIFormatStringV2ArgsItemRectsItem
     { _pafsvairiHeight :: !(Maybe Int32)
-    , _pafsvairiLeft   :: !(Maybe Int32)
-    , _pafsvairiWidth  :: !(Maybe Int32)
-    , _pafsvairiTop    :: !(Maybe Int32)
+    , _pafsvairiLeft :: !(Maybe Int32)
+    , _pafsvairiWidth :: !(Maybe Int32)
+    , _pafsvairiTop :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagespeedAPIFormatStringV2ArgsItemRectsItem' with the minimum fields required to make a request.
@@ -209,7 +209,7 @@ data PagespeedAPIFormatStringV2ArgsItemRectsItem = PagespeedAPIFormatStringV2Arg
 -- * 'pafsvairiTop'
 pagespeedAPIFormatStringV2ArgsItemRectsItem
     :: PagespeedAPIFormatStringV2ArgsItemRectsItem
-pagespeedAPIFormatStringV2ArgsItemRectsItem =
+pagespeedAPIFormatStringV2ArgsItemRectsItem = 
     PagespeedAPIFormatStringV2ArgsItemRectsItem
     { _pafsvairiHeight = Nothing
     , _pafsvairiLeft = Nothing
@@ -279,7 +279,7 @@ data ResultVersion = ResultVersion
 -- * 'rvMajor'
 resultVersion
     :: ResultVersion
-resultVersion =
+resultVersion = 
     ResultVersion
     { _rvMinor = Nothing
     , _rvMajor = Nothing
@@ -312,19 +312,19 @@ instance ToJSON ResultVersion where
 --
 -- /See:/ 'resultPageStats' smart constructor.
 data ResultPageStats = ResultPageStats
-    { _rpsHTMLResponseBytes       :: !(Maybe Int64)
-    , _rpsTotalRequestBytes       :: !(Maybe Int64)
-    , _rpsNumberResources         :: !(Maybe Int32)
-    , _rpsNumberStaticResources   :: !(Maybe Int32)
-    , _rpsNumberHosts             :: !(Maybe Int32)
-    , _rpsNumberJsResources       :: !(Maybe Int32)
-    , _rpsNumberCssResources      :: !(Maybe Int32)
-    , _rpsTextResponseBytes       :: !(Maybe Int64)
-    , _rpsFlashResponseBytes      :: !(Maybe Int64)
-    , _rpsImageResponseBytes      :: !(Maybe Int64)
-    , _rpsOtherResponseBytes      :: !(Maybe Int64)
+    { _rpsHTMLResponseBytes :: !(Maybe Int64)
+    , _rpsTotalRequestBytes :: !(Maybe Int64)
+    , _rpsNumberResources :: !(Maybe Int32)
+    , _rpsNumberStaticResources :: !(Maybe Int32)
+    , _rpsNumberHosts :: !(Maybe Int32)
+    , _rpsNumberJsResources :: !(Maybe Int32)
+    , _rpsNumberCssResources :: !(Maybe Int32)
+    , _rpsTextResponseBytes :: !(Maybe Int64)
+    , _rpsFlashResponseBytes :: !(Maybe Int64)
+    , _rpsImageResponseBytes :: !(Maybe Int64)
+    , _rpsOtherResponseBytes :: !(Maybe Int64)
     , _rpsJavascriptResponseBytes :: !(Maybe Int64)
-    , _rpsCssResponseBytes        :: !(Maybe Int64)
+    , _rpsCssResponseBytes :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResultPageStats' with the minimum fields required to make a request.
@@ -358,7 +358,7 @@ data ResultPageStats = ResultPageStats
 -- * 'rpsCssResponseBytes'
 resultPageStats
     :: ResultPageStats
-resultPageStats =
+resultPageStats = 
     ResultPageStats
     { _rpsHTMLResponseBytes = Nothing
     , _rpsTotalRequestBytes = Nothing
@@ -501,9 +501,9 @@ instance ToJSON ResultPageStats where
 -- /See:/ 'pagespeedAPIImageV2Page_rect' smart constructor.
 data PagespeedAPIImageV2Page_rect = PagespeedAPIImageV2Page_rect
     { _paivpHeight :: !(Maybe Int32)
-    , _paivpLeft   :: !(Maybe Int32)
-    , _paivpWidth  :: !(Maybe Int32)
-    , _paivpTop    :: !(Maybe Int32)
+    , _paivpLeft :: !(Maybe Int32)
+    , _paivpWidth :: !(Maybe Int32)
+    , _paivpTop :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagespeedAPIImageV2Page_rect' with the minimum fields required to make a request.
@@ -519,7 +519,7 @@ data PagespeedAPIImageV2Page_rect = PagespeedAPIImageV2Page_rect
 -- * 'paivpTop'
 pagespeedAPIImageV2Page_rect
     :: PagespeedAPIImageV2Page_rect
-pagespeedAPIImageV2Page_rect =
+pagespeedAPIImageV2Page_rect = 
     PagespeedAPIImageV2Page_rect
     { _paivpHeight = Nothing
     , _paivpLeft = Nothing
@@ -567,16 +567,16 @@ instance ToJSON PagespeedAPIImageV2Page_rect where
 --
 -- /See:/ 'result' smart constructor.
 data Result = Result
-    { _rScreenshot       :: !(Maybe PagespeedAPIImageV2)
-    , _rKind             :: !Text
-    , _rResponseCode     :: !(Maybe Int32)
-    , _rInvalidRules     :: !(Maybe [Text])
+    { _rScreenshot :: !(Maybe PagespeedAPIImageV2)
+    , _rKind :: !Text
+    , _rResponseCode :: !(Maybe Int32)
+    , _rInvalidRules :: !(Maybe [Text])
     , _rFormattedResults :: !(Maybe ResultFormattedResults)
-    , _rVersion          :: !(Maybe ResultVersion)
-    , _rRuleGroups       :: !(Maybe ResultRuleGroups)
-    , _rPageStats        :: !(Maybe ResultPageStats)
-    , _rId               :: !(Maybe Text)
-    , _rTitle            :: !(Maybe Text)
+    , _rVersion :: !(Maybe ResultVersion)
+    , _rRuleGroups :: !(Maybe ResultRuleGroups)
+    , _rPageStats :: !(Maybe ResultPageStats)
+    , _rId :: !(Maybe Text)
+    , _rTitle :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Result' with the minimum fields required to make a request.
@@ -604,7 +604,7 @@ data Result = Result
 -- * 'rTitle'
 result
     :: Result
-result =
+result = 
     Result
     { _rScreenshot = Nothing
     , _rKind = "pagespeedonline#result"
@@ -707,10 +707,10 @@ instance ToJSON Result where
 --
 -- /See:/ 'pagespeedAPIFormatStringV2ArgsItem' smart constructor.
 data PagespeedAPIFormatStringV2ArgsItem = PagespeedAPIFormatStringV2ArgsItem
-    { _pafsvaiValue          :: !(Maybe Text)
-    , _pafsvaiRects          :: !(Maybe [PagespeedAPIFormatStringV2ArgsItemRectsItem])
-    , _pafsvaiKey            :: !(Maybe Text)
-    , _pafsvaiType           :: !(Maybe Text)
+    { _pafsvaiValue :: !(Maybe Text)
+    , _pafsvaiRects :: !(Maybe [PagespeedAPIFormatStringV2ArgsItemRectsItem])
+    , _pafsvaiKey :: !(Maybe Text)
+    , _pafsvaiType :: !(Maybe Text)
     , _pafsvaiSecondaryRects :: !(Maybe [PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -729,7 +729,7 @@ data PagespeedAPIFormatStringV2ArgsItem = PagespeedAPIFormatStringV2ArgsItem
 -- * 'pafsvaiSecondaryRects'
 pagespeedAPIFormatStringV2ArgsItem
     :: PagespeedAPIFormatStringV2ArgsItem
-pagespeedAPIFormatStringV2ArgsItem =
+pagespeedAPIFormatStringV2ArgsItem = 
     PagespeedAPIFormatStringV2ArgsItem
     { _pafsvaiValue = Nothing
     , _pafsvaiRects = Nothing
@@ -800,7 +800,7 @@ instance ToJSON PagespeedAPIFormatStringV2ArgsItem
 --
 -- /See:/ 'resultFormattedResults' smart constructor.
 data ResultFormattedResults = ResultFormattedResults
-    { _rfrLocale      :: !(Maybe Text)
+    { _rfrLocale :: !(Maybe Text)
     , _rfrRuleResults :: !(Maybe ResultFormattedResultsRuleResults)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -813,7 +813,7 @@ data ResultFormattedResults = ResultFormattedResults
 -- * 'rfrRuleResults'
 resultFormattedResults
     :: ResultFormattedResults
-resultFormattedResults =
+resultFormattedResults = 
     ResultFormattedResults
     { _rfrLocale = Nothing
     , _rfrRuleResults = Nothing
@@ -849,7 +849,7 @@ instance ToJSON ResultFormattedResults where
 --
 -- /See:/ 'resultRuleGroups' smart constructor.
 data ResultRuleGroups =
-    ResultRuleGroups
+    ResultRuleGroups 
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResultRuleGroups' with the minimum fields required to make a request.
@@ -864,12 +864,12 @@ instance FromJSON ResultRuleGroups where
               (\ o -> pure ResultRuleGroups)
 
 instance ToJSON ResultRuleGroups where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'pagespeedAPIFormatStringV2' smart constructor.
 data PagespeedAPIFormatStringV2 = PagespeedAPIFormatStringV2
-    { _pafsvArgs   :: !(Maybe [PagespeedAPIFormatStringV2ArgsItem])
+    { _pafsvArgs :: !(Maybe [PagespeedAPIFormatStringV2ArgsItem])
     , _pafsvFormat :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -882,7 +882,7 @@ data PagespeedAPIFormatStringV2 = PagespeedAPIFormatStringV2
 -- * 'pafsvFormat'
 pagespeedAPIFormatStringV2
     :: PagespeedAPIFormatStringV2
-pagespeedAPIFormatStringV2 =
+pagespeedAPIFormatStringV2 = 
     PagespeedAPIFormatStringV2
     { _pafsvArgs = Nothing
     , _pafsvFormat = Nothing
@@ -922,7 +922,7 @@ instance ToJSON PagespeedAPIFormatStringV2 where
 --
 -- /See:/ 'resultFormattedResultsRuleResults' smart constructor.
 data ResultFormattedResultsRuleResults =
-    ResultFormattedResultsRuleResults
+    ResultFormattedResultsRuleResults 
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResultFormattedResultsRuleResults' with the minimum fields required to make a request.
@@ -939,4 +939,4 @@ instance FromJSON ResultFormattedResultsRuleResults
 
 instance ToJSON ResultFormattedResultsRuleResults
          where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject

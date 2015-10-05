@@ -44,8 +44,8 @@ module Network.Google.Resource.Blogger.Comments.Delete
     , cdFields
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @BloggerCommentsDelete@ which the
 -- 'CommentsDelete'' request conforms to.
@@ -68,15 +68,15 @@ type CommentsDeleteResource =
 --
 -- /See:/ 'commentsDelete'' smart constructor.
 data CommentsDelete' = CommentsDelete'
-    { _cdQuotaUser   :: !(Maybe Text)
+    { _cdQuotaUser :: !(Maybe Text)
     , _cdPrettyPrint :: !Bool
-    , _cdUserIP      :: !(Maybe Text)
-    , _cdBlogId      :: !Text
-    , _cdKey         :: !(Maybe Key)
-    , _cdPostId      :: !Text
-    , _cdOAuthToken  :: !(Maybe OAuthToken)
-    , _cdCommentId   :: !Text
-    , _cdFields      :: !(Maybe Text)
+    , _cdUserIP :: !(Maybe Text)
+    , _cdBlogId :: !Text
+    , _cdKey :: !(Maybe Key)
+    , _cdPostId :: !Text
+    , _cdOAuthToken :: !(Maybe OAuthToken)
+    , _cdCommentId :: !Text
+    , _cdFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsDelete'' with the minimum fields required to make a request.
@@ -105,7 +105,7 @@ commentsDelete'
     -> Text -- ^ 'postId'
     -> Text -- ^ 'commentId'
     -> CommentsDelete'
-commentsDelete' pCdBlogId_ pCdPostId_ pCdCommentId_ =
+commentsDelete' pCdBlogId_ pCdPostId_ pCdCommentId_ = 
     CommentsDelete'
     { _cdQuotaUser = Nothing
     , _cdPrettyPrint = True

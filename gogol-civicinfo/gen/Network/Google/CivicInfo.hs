@@ -270,13 +270,13 @@ module Network.Google.CivicInfo
     , offParty
     ) where
 
-import           Network.Google.CivicInfo.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.CivicInfo.Divisions.Search
-import           Network.Google.Resource.CivicInfo.Elections.ElectionQuery
-import           Network.Google.Resource.CivicInfo.Elections.VoterInfoQuery
-import           Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByAddress
-import           Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByDivision
+import Network.Google.Prelude
+import Network.Google.CivicInfo.Types
+import Network.Google.Resource.CivicInfo.Divisions.Search
+import Network.Google.Resource.CivicInfo.Elections.ElectionQuery
+import Network.Google.Resource.CivicInfo.Elections.VoterInfoQuery
+import Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByAddress
+import Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByDivision
 
 {- $resources
 TODO

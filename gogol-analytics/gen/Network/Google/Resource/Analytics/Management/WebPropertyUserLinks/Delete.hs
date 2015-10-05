@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Delete
     , mwpuldFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebPropertyUserLinksDelete@ which the
 -- 'ManagementWebPropertyUserLinksDelete'' request conforms to.
@@ -69,15 +69,15 @@ type ManagementWebPropertyUserLinksDeleteResource =
 --
 -- /See:/ 'managementWebPropertyUserLinksDelete'' smart constructor.
 data ManagementWebPropertyUserLinksDelete' = ManagementWebPropertyUserLinksDelete'
-    { _mwpuldQuotaUser     :: !(Maybe Text)
-    , _mwpuldPrettyPrint   :: !Bool
+    { _mwpuldQuotaUser :: !(Maybe Text)
+    , _mwpuldPrettyPrint :: !Bool
     , _mwpuldWebPropertyId :: !Text
-    , _mwpuldUserIP        :: !(Maybe Text)
-    , _mwpuldAccountId     :: !Text
-    , _mwpuldKey           :: !(Maybe Key)
-    , _mwpuldLinkId        :: !Text
-    , _mwpuldOAuthToken    :: !(Maybe OAuthToken)
-    , _mwpuldFields        :: !(Maybe Text)
+    , _mwpuldUserIP :: !(Maybe Text)
+    , _mwpuldAccountId :: !Text
+    , _mwpuldKey :: !(Maybe Key)
+    , _mwpuldLinkId :: !Text
+    , _mwpuldOAuthToken :: !(Maybe OAuthToken)
+    , _mwpuldFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyUserLinksDelete'' with the minimum fields required to make a request.
@@ -106,7 +106,7 @@ managementWebPropertyUserLinksDelete'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
     -> ManagementWebPropertyUserLinksDelete'
-managementWebPropertyUserLinksDelete' pMwpuldWebPropertyId_ pMwpuldAccountId_ pMwpuldLinkId_ =
+managementWebPropertyUserLinksDelete' pMwpuldWebPropertyId_ pMwpuldAccountId_ pMwpuldLinkId_ = 
     ManagementWebPropertyUserLinksDelete'
     { _mwpuldQuotaUser = Nothing
     , _mwpuldPrettyPrint = False

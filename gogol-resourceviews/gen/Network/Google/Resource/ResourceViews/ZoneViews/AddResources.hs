@@ -45,8 +45,8 @@ module Network.Google.Resource.ResourceViews.ZoneViews.AddResources
     , zvarFields
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ResourceViews.Types
+import Network.Google.Prelude
+import Network.Google.ResourceViews.Types
 
 -- | A resource alias for @ResourceviewsZoneViewsAddResources@ which the
 -- 'ZoneViewsAddResources'' request conforms to.
@@ -71,16 +71,16 @@ type ZoneViewsAddResourcesResource =
 --
 -- /See:/ 'zoneViewsAddResources'' smart constructor.
 data ZoneViewsAddResources' = ZoneViewsAddResources'
-    { _zvarQuotaUser    :: !(Maybe Text)
-    , _zvarPrettyPrint  :: !Bool
+    { _zvarQuotaUser :: !(Maybe Text)
+    , _zvarPrettyPrint :: !Bool
     , _zvarResourceView :: !Text
-    , _zvarProject      :: !Text
-    , _zvarUserIP       :: !(Maybe Text)
-    , _zvarZone         :: !Text
-    , _zvarPayload      :: !ZoneViewsAddResourcesRequest
-    , _zvarKey          :: !(Maybe Key)
-    , _zvarOAuthToken   :: !(Maybe OAuthToken)
-    , _zvarFields       :: !(Maybe Text)
+    , _zvarProject :: !Text
+    , _zvarUserIP :: !(Maybe Text)
+    , _zvarZone :: !Text
+    , _zvarPayload :: !ZoneViewsAddResourcesRequest
+    , _zvarKey :: !(Maybe Key)
+    , _zvarOAuthToken :: !(Maybe OAuthToken)
+    , _zvarFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsAddResources'' with the minimum fields required to make a request.
@@ -112,7 +112,7 @@ zoneViewsAddResources'
     -> Text -- ^ 'zone'
     -> ZoneViewsAddResourcesRequest -- ^ 'payload'
     -> ZoneViewsAddResources'
-zoneViewsAddResources' pZvarResourceView_ pZvarProject_ pZvarZone_ pZvarPayload_ =
+zoneViewsAddResources' pZvarResourceView_ pZvarProject_ pZvarZone_ pZvarPayload_ = 
     ZoneViewsAddResources'
     { _zvarQuotaUser = Nothing
     , _zvarPrettyPrint = True

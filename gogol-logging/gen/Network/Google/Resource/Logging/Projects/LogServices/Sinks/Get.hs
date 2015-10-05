@@ -50,8 +50,8 @@ module Network.Google.Resource.Logging.Projects.LogServices.Sinks.Get
     , plssgCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogServicesSinksGet@ which the
 -- 'ProjectsLogServicesSinksGet'' request conforms to.
@@ -82,21 +82,21 @@ type ProjectsLogServicesSinksGetResource =
 --
 -- /See:/ 'projectsLogServicesSinksGet'' smart constructor.
 data ProjectsLogServicesSinksGet' = ProjectsLogServicesSinksGet'
-    { _plssgXgafv          :: !(Maybe Text)
-    , _plssgQuotaUser      :: !(Maybe Text)
-    , _plssgPrettyPrint    :: !Bool
+    { _plssgXgafv :: !(Maybe Text)
+    , _plssgQuotaUser :: !(Maybe Text)
+    , _plssgPrettyPrint :: !Bool
     , _plssgUploadProtocol :: !(Maybe Text)
-    , _plssgPp             :: !Bool
-    , _plssgAccessToken    :: !(Maybe Text)
-    , _plssgUploadType     :: !(Maybe Text)
-    , _plssgBearerToken    :: !(Maybe Text)
-    , _plssgKey            :: !(Maybe Key)
-    , _plssgLogServicesId  :: !Text
-    , _plssgOAuthToken     :: !(Maybe OAuthToken)
-    , _plssgProjectsId     :: !Text
-    , _plssgSinksId        :: !Text
-    , _plssgFields         :: !(Maybe Text)
-    , _plssgCallback       :: !(Maybe Text)
+    , _plssgPp :: !Bool
+    , _plssgAccessToken :: !(Maybe Text)
+    , _plssgUploadType :: !(Maybe Text)
+    , _plssgBearerToken :: !(Maybe Text)
+    , _plssgKey :: !(Maybe Key)
+    , _plssgLogServicesId :: !Text
+    , _plssgOAuthToken :: !(Maybe OAuthToken)
+    , _plssgProjectsId :: !Text
+    , _plssgSinksId :: !Text
+    , _plssgFields :: !(Maybe Text)
+    , _plssgCallback :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogServicesSinksGet'' with the minimum fields required to make a request.
@@ -137,7 +137,7 @@ projectsLogServicesSinksGet'
     -> Text -- ^ 'projectsId'
     -> Text -- ^ 'sinksId'
     -> ProjectsLogServicesSinksGet'
-projectsLogServicesSinksGet' pPlssgLogServicesId_ pPlssgProjectsId_ pPlssgSinksId_ =
+projectsLogServicesSinksGet' pPlssgLogServicesId_ pPlssgProjectsId_ pPlssgSinksId_ = 
     ProjectsLogServicesSinksGet'
     { _plssgXgafv = Nothing
     , _plssgQuotaUser = Nothing

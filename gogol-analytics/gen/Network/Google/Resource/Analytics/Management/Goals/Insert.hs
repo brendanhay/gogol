@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.Goals.Insert
     , mgiFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementGoalsInsert@ which the
 -- 'ManagementGoalsInsert'' request conforms to.
@@ -72,16 +72,16 @@ type ManagementGoalsInsertResource =
 --
 -- /See:/ 'managementGoalsInsert'' smart constructor.
 data ManagementGoalsInsert' = ManagementGoalsInsert'
-    { _mgiQuotaUser     :: !(Maybe Text)
-    , _mgiPrettyPrint   :: !Bool
+    { _mgiQuotaUser :: !(Maybe Text)
+    , _mgiPrettyPrint :: !Bool
     , _mgiWebPropertyId :: !Text
-    , _mgiUserIP        :: !(Maybe Text)
-    , _mgiProFileId     :: !Text
-    , _mgiPayload       :: !Goal
-    , _mgiAccountId     :: !Text
-    , _mgiKey           :: !(Maybe Key)
-    , _mgiOAuthToken    :: !(Maybe OAuthToken)
-    , _mgiFields        :: !(Maybe Text)
+    , _mgiUserIP :: !(Maybe Text)
+    , _mgiProFileId :: !Text
+    , _mgiPayload :: !Goal
+    , _mgiAccountId :: !Text
+    , _mgiKey :: !(Maybe Key)
+    , _mgiOAuthToken :: !(Maybe OAuthToken)
+    , _mgiFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementGoalsInsert'' with the minimum fields required to make a request.
@@ -113,7 +113,7 @@ managementGoalsInsert'
     -> Goal -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementGoalsInsert'
-managementGoalsInsert' pMgiWebPropertyId_ pMgiProFileId_ pMgiPayload_ pMgiAccountId_ =
+managementGoalsInsert' pMgiWebPropertyId_ pMgiProFileId_ pMgiPayload_ pMgiAccountId_ = 
     ManagementGoalsInsert'
     { _mgiQuotaUser = Nothing
     , _mgiPrettyPrint = False

@@ -43,8 +43,8 @@ module Network.Google.Resource.Analytics.Management.Segments.List
     , mslFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementSegmentsList@ which the
 -- 'ManagementSegmentsList'' request conforms to.
@@ -65,14 +65,14 @@ type ManagementSegmentsListResource =
 --
 -- /See:/ 'managementSegmentsList'' smart constructor.
 data ManagementSegmentsList' = ManagementSegmentsList'
-    { _mslQuotaUser   :: !(Maybe Text)
+    { _mslQuotaUser :: !(Maybe Text)
     , _mslPrettyPrint :: !Bool
-    , _mslUserIP      :: !(Maybe Text)
-    , _mslKey         :: !(Maybe Key)
-    , _mslOAuthToken  :: !(Maybe OAuthToken)
-    , _mslStartIndex  :: !(Maybe Int32)
-    , _mslMaxResults  :: !(Maybe Int32)
-    , _mslFields      :: !(Maybe Text)
+    , _mslUserIP :: !(Maybe Text)
+    , _mslKey :: !(Maybe Key)
+    , _mslOAuthToken :: !(Maybe OAuthToken)
+    , _mslStartIndex :: !(Maybe Int32)
+    , _mslMaxResults :: !(Maybe Int32)
+    , _mslFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementSegmentsList'' with the minimum fields required to make a request.
@@ -96,7 +96,7 @@ data ManagementSegmentsList' = ManagementSegmentsList'
 -- * 'mslFields'
 managementSegmentsList'
     :: ManagementSegmentsList'
-managementSegmentsList' =
+managementSegmentsList' = 
     ManagementSegmentsList'
     { _mslQuotaUser = Nothing
     , _mslPrettyPrint = False

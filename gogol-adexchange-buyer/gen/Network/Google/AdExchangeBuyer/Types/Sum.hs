@@ -16,7 +16,7 @@
 --
 module Network.Google.AdExchangeBuyer.Types.Sum where
 
-import           Network.Google.Prelude
+import Network.Google.Prelude
 
 -- | The proposed action to take on the order.
 data MarketplaceOrdersUpdateUpdateAction

@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.Jobs.Cancel
     , jcFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsJobsCancel@ which the
 -- 'JobsCancel'' request conforms to.
@@ -65,13 +65,13 @@ type JobsCancelResource =
 --
 -- /See:/ 'jobsCancel'' smart constructor.
 data JobsCancel' = JobsCancel'
-    { _jcQuotaUser   :: !(Maybe Text)
+    { _jcQuotaUser :: !(Maybe Text)
     , _jcPrettyPrint :: !Bool
-    , _jcJobId       :: !Text
-    , _jcUserIP      :: !(Maybe Text)
-    , _jcKey         :: !(Maybe Key)
-    , _jcOAuthToken  :: !(Maybe OAuthToken)
-    , _jcFields      :: !(Maybe Text)
+    , _jcJobId :: !Text
+    , _jcUserIP :: !(Maybe Text)
+    , _jcKey :: !(Maybe Key)
+    , _jcOAuthToken :: !(Maybe OAuthToken)
+    , _jcFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsCancel'' with the minimum fields required to make a request.
@@ -94,7 +94,7 @@ data JobsCancel' = JobsCancel'
 jobsCancel'
     :: Text -- ^ 'jobId'
     -> JobsCancel'
-jobsCancel' pJcJobId_ =
+jobsCancel' pJcJobId_ = 
     JobsCancel'
     { _jcQuotaUser = Nothing
     , _jcPrettyPrint = True

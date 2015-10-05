@@ -45,8 +45,8 @@ module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByDiv
     , rribdFields
     ) where
 
-import           Network.Google.CivicInfo.Types
-import           Network.Google.Prelude
+import Network.Google.CivicInfo.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @CivicInfoRepresentativesRepresentativeInfoByDivision@ which the
 -- 'RepresentativesRepresentativeInfoByDivision'' request conforms to.
@@ -74,16 +74,16 @@ type RepresentativesRepresentativeInfoByDivisionResource
 --
 -- /See:/ 'representativesRepresentativeInfoByDivision'' smart constructor.
 data RepresentativesRepresentativeInfoByDivision' = RepresentativesRepresentativeInfoByDivision'
-    { _rribdQuotaUser   :: !(Maybe Text)
-    , _rribdRoles       :: !(Maybe [RepresentativesRepresentativeInfoByDivisionRoles])
+    { _rribdQuotaUser :: !(Maybe Text)
+    , _rribdRoles :: !(Maybe [RepresentativesRepresentativeInfoByDivisionRoles])
     , _rribdPrettyPrint :: !Bool
-    , _rribdUserIP      :: !(Maybe Text)
-    , _rribdKey         :: !(Maybe Key)
-    , _rribdRecursive   :: !(Maybe Bool)
-    , _rribdOcdId       :: !Text
-    , _rribdLevels      :: !(Maybe [RepresentativesRepresentativeInfoByDivisionLevels])
-    , _rribdOAuthToken  :: !(Maybe OAuthToken)
-    , _rribdFields      :: !(Maybe Text)
+    , _rribdUserIP :: !(Maybe Text)
+    , _rribdKey :: !(Maybe Key)
+    , _rribdRecursive :: !(Maybe Bool)
+    , _rribdOcdId :: !Text
+    , _rribdLevels :: !(Maybe [RepresentativesRepresentativeInfoByDivisionLevels])
+    , _rribdOAuthToken :: !(Maybe OAuthToken)
+    , _rribdFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepresentativesRepresentativeInfoByDivision'' with the minimum fields required to make a request.
@@ -112,7 +112,7 @@ data RepresentativesRepresentativeInfoByDivision' = RepresentativesRepresentativ
 representativesRepresentativeInfoByDivision'
     :: Text -- ^ 'ocdId'
     -> RepresentativesRepresentativeInfoByDivision'
-representativesRepresentativeInfoByDivision' pRribdOcdId_ =
+representativesRepresentativeInfoByDivision' pRribdOcdId_ = 
     RepresentativesRepresentativeInfoByDivision'
     { _rribdQuotaUser = Nothing
     , _rribdRoles = Nothing

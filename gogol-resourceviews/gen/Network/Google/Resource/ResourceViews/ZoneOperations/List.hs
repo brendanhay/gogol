@@ -47,8 +47,8 @@ module Network.Google.Resource.ResourceViews.ZoneOperations.List
     , zolFields
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ResourceViews.Types
+import Network.Google.Prelude
+import Network.Google.ResourceViews.Types
 
 -- | A resource alias for @ResourceviewsZoneOperationsList@ which the
 -- 'ZoneOperationsList'' request conforms to.
@@ -74,17 +74,17 @@ type ZoneOperationsListResource =
 --
 -- /See:/ 'zoneOperationsList'' smart constructor.
 data ZoneOperationsList' = ZoneOperationsList'
-    { _zolQuotaUser   :: !(Maybe Text)
+    { _zolQuotaUser :: !(Maybe Text)
     , _zolPrettyPrint :: !Bool
-    , _zolProject     :: !Text
-    , _zolUserIP      :: !(Maybe Text)
-    , _zolZone        :: !Text
-    , _zolKey         :: !(Maybe Key)
-    , _zolFilter      :: !(Maybe Text)
-    , _zolPageToken   :: !(Maybe Text)
-    , _zolOAuthToken  :: !(Maybe OAuthToken)
-    , _zolMaxResults  :: !Word32
-    , _zolFields      :: !(Maybe Text)
+    , _zolProject :: !Text
+    , _zolUserIP :: !(Maybe Text)
+    , _zolZone :: !Text
+    , _zolKey :: !(Maybe Key)
+    , _zolFilter :: !(Maybe Text)
+    , _zolPageToken :: !(Maybe Text)
+    , _zolOAuthToken :: !(Maybe OAuthToken)
+    , _zolMaxResults :: !Word32
+    , _zolFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneOperationsList'' with the minimum fields required to make a request.
@@ -116,7 +116,7 @@ zoneOperationsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> ZoneOperationsList'
-zoneOperationsList' pZolProject_ pZolZone_ =
+zoneOperationsList' pZolProject_ pZolZone_ = 
     ZoneOperationsList'
     { _zolQuotaUser = Nothing
     , _zolPrettyPrint = True

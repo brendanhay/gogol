@@ -176,7 +176,7 @@ instance FromJSON MachineTypeAggregatedListItems
               (\ o -> pure MachineTypeAggregatedListItems)
 
 instance ToJSON MachineTypeAggregatedListItems where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | [Output Only] A map of scoped disk type lists.
 --
@@ -197,7 +197,7 @@ instance FromJSON DiskTypeAggregatedListItems where
               (\ o -> pure DiskTypeAggregatedListItems)
 
 instance ToJSON DiskTypeAggregatedListItems where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Contains a list of Firewall resources.
 --
@@ -444,7 +444,7 @@ instance FromJSON AutoscalerAggregatedListItems where
               (\ o -> pure AutoscalerAggregatedListItems)
 
 instance ToJSON AutoscalerAggregatedListItems where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'instanceGroupManagersSetInstanceTemplateRequest' smart constructor.
@@ -1741,7 +1741,7 @@ instance FromJSON InstanceGroupAggregatedListItems
 
 instance ToJSON InstanceGroupAggregatedListItems
          where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Contains a list of TargetPool resources.
 --
@@ -4752,7 +4752,7 @@ instance FromJSON InstanceAggregatedListItems where
               (\ o -> pure InstanceAggregatedListItems)
 
 instance ToJSON InstanceAggregatedListItems where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Informational warning which replaces the list of autoscalers when the
 -- list is empty.
@@ -6762,7 +6762,7 @@ instance FromJSON TargetInstanceAggregatedListItems
 
 instance ToJSON TargetInstanceAggregatedListItems
          where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'instanceGroupAggregatedList' smart constructor.
@@ -7593,7 +7593,7 @@ instance FromJSON DiskAggregatedListItems where
               (\ o -> pure DiskAggregatedListItems)
 
 instance ToJSON DiskAggregatedListItems where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | The location in Cloud Storage and naming method of the daily usage
 -- report. Contains bucket_name and report_name prefix.
@@ -7838,7 +7838,7 @@ instance FromJSON
 
 instance ToJSON
          InstanceGroupManagerAggregatedListItems where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'instanceGroupManagersDeleteInstancesRequest' smart constructor.
@@ -8170,7 +8170,7 @@ instance FromJSON ForwardingRuleAggregatedListItems
 
 instance ToJSON ForwardingRuleAggregatedListItems
          where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | [Output Only] A map of scoped operation lists.
 --
@@ -8191,7 +8191,7 @@ instance FromJSON OperationAggregatedListItems where
               (\ o -> pure OperationAggregatedListItems)
 
 instance ToJSON OperationAggregatedListItems where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'instanceGroupManagerActionsSummary' smart constructor.
@@ -8504,7 +8504,7 @@ instance FromJSON TargetPoolAggregatedListItems where
               (\ o -> pure TargetPoolAggregatedListItems)
 
 instance ToJSON TargetPoolAggregatedListItems where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'targetInstancesScopedList' smart constructor.
@@ -8576,7 +8576,7 @@ instance FromJSON AddressAggregatedListItems where
               (\ o -> pure AddressAggregatedListItems)
 
 instance ToJSON AddressAggregatedListItems where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Contains a list of persistent autoscaler resources.
 --
@@ -11275,7 +11275,7 @@ instance FromJSON TargetVPNGatewayAggregatedListItems
 
 instance ToJSON TargetVPNGatewayAggregatedListItems
          where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Informational warning which replaces the list of addresses when the list
 -- is empty.
@@ -14123,7 +14123,7 @@ instance FromJSON VPNTunnelAggregatedListItems where
               (\ o -> pure VPNTunnelAggregatedListItems)
 
 instance ToJSON VPNTunnelAggregatedListItems where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | A set of instance tags.
 --

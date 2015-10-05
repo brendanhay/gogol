@@ -45,8 +45,8 @@ module Network.Google.Resource.Blogger.Comments.Get
     , cgFields
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @BloggerCommentsGet@ which the
 -- 'CommentsGet'' request conforms to.
@@ -70,16 +70,16 @@ type CommentsGetResource =
 --
 -- /See:/ 'commentsGet'' smart constructor.
 data CommentsGet' = CommentsGet'
-    { _cgQuotaUser   :: !(Maybe Text)
+    { _cgQuotaUser :: !(Maybe Text)
     , _cgPrettyPrint :: !Bool
-    , _cgUserIP      :: !(Maybe Text)
-    , _cgBlogId      :: !Text
-    , _cgKey         :: !(Maybe Key)
-    , _cgView        :: !(Maybe CommentsGetView)
-    , _cgPostId      :: !Text
-    , _cgOAuthToken  :: !(Maybe OAuthToken)
-    , _cgCommentId   :: !Text
-    , _cgFields      :: !(Maybe Text)
+    , _cgUserIP :: !(Maybe Text)
+    , _cgBlogId :: !Text
+    , _cgKey :: !(Maybe Key)
+    , _cgView :: !(Maybe CommentsGetView)
+    , _cgPostId :: !Text
+    , _cgOAuthToken :: !(Maybe OAuthToken)
+    , _cgCommentId :: !Text
+    , _cgFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsGet'' with the minimum fields required to make a request.
@@ -110,7 +110,7 @@ commentsGet'
     -> Text -- ^ 'postId'
     -> Text -- ^ 'commentId'
     -> CommentsGet'
-commentsGet' pCgBlogId_ pCgPostId_ pCgCommentId_ =
+commentsGet' pCgBlogId_ pCgPostId_ pCgCommentId_ = 
     CommentsGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True

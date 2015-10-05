@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Insert
     , pciFields
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerPretargetingConfigInsert@ which the
 -- 'PretargetingConfigInsert'' request conforms to.
@@ -65,14 +65,14 @@ type PretargetingConfigInsertResource =
 --
 -- /See:/ 'pretargetingConfigInsert'' smart constructor.
 data PretargetingConfigInsert' = PretargetingConfigInsert'
-    { _pciQuotaUser   :: !(Maybe Text)
+    { _pciQuotaUser :: !(Maybe Text)
     , _pciPrettyPrint :: !Bool
-    , _pciUserIP      :: !(Maybe Text)
-    , _pciPayload     :: !PretargetingConfig
-    , _pciAccountId   :: !Int64
-    , _pciKey         :: !(Maybe Key)
-    , _pciOAuthToken  :: !(Maybe OAuthToken)
-    , _pciFields      :: !(Maybe Text)
+    , _pciUserIP :: !(Maybe Text)
+    , _pciPayload :: !PretargetingConfig
+    , _pciAccountId :: !Int64
+    , _pciKey :: !(Maybe Key)
+    , _pciOAuthToken :: !(Maybe OAuthToken)
+    , _pciFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigInsert'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ pretargetingConfigInsert'
     :: PretargetingConfig -- ^ 'payload'
     -> Int64 -- ^ 'accountId'
     -> PretargetingConfigInsert'
-pretargetingConfigInsert' pPciPayload_ pPciAccountId_ =
+pretargetingConfigInsert' pPciPayload_ pPciAccountId_ = 
     PretargetingConfigInsert'
     { _pciQuotaUser = Nothing
     , _pciPrettyPrint = True

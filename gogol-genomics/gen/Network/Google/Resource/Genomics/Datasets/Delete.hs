@@ -42,8 +42,8 @@ module Network.Google.Resource.Genomics.Datasets.Delete
     , ddFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsDatasetsDelete@ which the
 -- 'DatasetsDelete'' request conforms to.
@@ -62,13 +62,13 @@ type DatasetsDeleteResource =
 --
 -- /See:/ 'datasetsDelete'' smart constructor.
 data DatasetsDelete' = DatasetsDelete'
-    { _ddQuotaUser   :: !(Maybe Text)
+    { _ddQuotaUser :: !(Maybe Text)
     , _ddPrettyPrint :: !Bool
-    , _ddUserIP      :: !(Maybe Text)
-    , _ddKey         :: !(Maybe Key)
-    , _ddDatasetId   :: !Text
-    , _ddOAuthToken  :: !(Maybe OAuthToken)
-    , _ddFields      :: !(Maybe Text)
+    , _ddUserIP :: !(Maybe Text)
+    , _ddKey :: !(Maybe Key)
+    , _ddDatasetId :: !Text
+    , _ddOAuthToken :: !(Maybe OAuthToken)
+    , _ddFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsDelete'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data DatasetsDelete' = DatasetsDelete'
 datasetsDelete'
     :: Text -- ^ 'datasetId'
     -> DatasetsDelete'
-datasetsDelete' pDdDatasetId_ =
+datasetsDelete' pDdDatasetId_ = 
     DatasetsDelete'
     { _ddQuotaUser = Nothing
     , _ddPrettyPrint = True

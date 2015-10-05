@@ -44,8 +44,8 @@ module Network.Google.Resource.Genomics.Variants.Update
     , vuFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsUpdate@ which the
 -- 'VariantsUpdate'' request conforms to.
@@ -66,14 +66,14 @@ type VariantsUpdateResource =
 --
 -- /See:/ 'variantsUpdate'' smart constructor.
 data VariantsUpdate' = VariantsUpdate'
-    { _vuQuotaUser   :: !(Maybe Text)
+    { _vuQuotaUser :: !(Maybe Text)
     , _vuPrettyPrint :: !Bool
-    , _vuUserIP      :: !(Maybe Text)
-    , _vuPayload     :: !Variant
-    , _vuKey         :: !(Maybe Key)
-    , _vuVariantId   :: !Text
-    , _vuOAuthToken  :: !(Maybe OAuthToken)
-    , _vuFields      :: !(Maybe Text)
+    , _vuUserIP :: !(Maybe Text)
+    , _vuPayload :: !Variant
+    , _vuKey :: !(Maybe Key)
+    , _vuVariantId :: !Text
+    , _vuOAuthToken :: !(Maybe OAuthToken)
+    , _vuFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsUpdate'' with the minimum fields required to make a request.
@@ -99,7 +99,7 @@ variantsUpdate'
     :: Variant -- ^ 'payload'
     -> Text -- ^ 'variantId'
     -> VariantsUpdate'
-variantsUpdate' pVuPayload_ pVuVariantId_ =
+variantsUpdate' pVuPayload_ pVuVariantId_ = 
     VariantsUpdate'
     { _vuQuotaUser = Nothing
     , _vuPrettyPrint = True

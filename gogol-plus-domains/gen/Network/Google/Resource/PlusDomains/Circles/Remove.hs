@@ -42,8 +42,8 @@ module Network.Google.Resource.PlusDomains.Circles.Remove
     , crFields
     ) where
 
-import           Network.Google.PlusDomains.Types
-import           Network.Google.Prelude
+import Network.Google.PlusDomains.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsCirclesRemove@ which the
 -- 'CirclesRemove'' request conforms to.
@@ -62,13 +62,13 @@ type CirclesRemoveResource =
 --
 -- /See:/ 'circlesRemove'' smart constructor.
 data CirclesRemove' = CirclesRemove'
-    { _crQuotaUser   :: !(Maybe Text)
+    { _crQuotaUser :: !(Maybe Text)
     , _crPrettyPrint :: !Bool
-    , _crUserIP      :: !(Maybe Text)
-    , _crKey         :: !(Maybe Key)
-    , _crCircleId    :: !Text
-    , _crOAuthToken  :: !(Maybe OAuthToken)
-    , _crFields      :: !(Maybe Text)
+    , _crUserIP :: !(Maybe Text)
+    , _crKey :: !(Maybe Key)
+    , _crCircleId :: !Text
+    , _crOAuthToken :: !(Maybe OAuthToken)
+    , _crFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesRemove'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data CirclesRemove' = CirclesRemove'
 circlesRemove'
     :: Text -- ^ 'circleId'
     -> CirclesRemove'
-circlesRemove' pCrCircleId_ =
+circlesRemove' pCrCircleId_ = 
     CirclesRemove'
     { _crQuotaUser = Nothing
     , _crPrettyPrint = True

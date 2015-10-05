@@ -43,8 +43,8 @@ module Network.Google.Resource.GroupsMigration.Archive.Insert
     , aiFields
     ) where
 
-import           Network.Google.GroupsMigration.Types
-import           Network.Google.Prelude
+import Network.Google.GroupsMigration.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GroupsmigrationArchiveInsert@ which the
 -- 'ArchiveInsert'' request conforms to.
@@ -64,14 +64,14 @@ type ArchiveInsertResource =
 --
 -- /See:/ 'archiveInsert'' smart constructor.
 data ArchiveInsert' = ArchiveInsert'
-    { _aiQuotaUser   :: !(Maybe Text)
+    { _aiQuotaUser :: !(Maybe Text)
     , _aiPrettyPrint :: !Bool
-    , _aiUserIP      :: !(Maybe Text)
-    , _aiMedia       :: !Body
-    , _aiKey         :: !(Maybe Key)
-    , _aiGroupId     :: !Text
-    , _aiOAuthToken  :: !(Maybe OAuthToken)
-    , _aiFields      :: !(Maybe Text)
+    , _aiUserIP :: !(Maybe Text)
+    , _aiMedia :: !Body
+    , _aiKey :: !(Maybe Key)
+    , _aiGroupId :: !Text
+    , _aiOAuthToken :: !(Maybe OAuthToken)
+    , _aiFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ArchiveInsert'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ archiveInsert'
     :: Body -- ^ 'media'
     -> Text -- ^ 'groupId'
     -> ArchiveInsert'
-archiveInsert' pAiMedia_ pAiGroupId_ =
+archiveInsert' pAiMedia_ pAiGroupId_ = 
     ArchiveInsert'
     { _aiQuotaUser = Nothing
     , _aiPrettyPrint = True

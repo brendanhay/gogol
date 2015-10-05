@@ -38,7 +38,7 @@ instance FromJSON ReportRow where
           = withObject "ReportRow" (\ o -> pure ReportRow)
 
 instance ToJSON ReportRow where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | A request object used to create a DoubleClick Search report.
 --

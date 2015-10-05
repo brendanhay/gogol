@@ -47,8 +47,8 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.Patch
     , mcdpFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomDimensionsPatch@ which the
 -- 'ManagementCustomDimensionsPatch'' request conforms to.
@@ -76,17 +76,17 @@ type ManagementCustomDimensionsPatchResource =
 --
 -- /See:/ 'managementCustomDimensionsPatch'' smart constructor.
 data ManagementCustomDimensionsPatch' = ManagementCustomDimensionsPatch'
-    { _mcdpQuotaUser                   :: !(Maybe Text)
-    , _mcdpPrettyPrint                 :: !Bool
-    , _mcdpWebPropertyId               :: !Text
+    { _mcdpQuotaUser :: !(Maybe Text)
+    , _mcdpPrettyPrint :: !Bool
+    , _mcdpWebPropertyId :: !Text
     , _mcdpIgnoreCustomDataSourceLinks :: !Bool
-    , _mcdpUserIP                      :: !(Maybe Text)
-    , _mcdpPayload                     :: !CustomDimension
-    , _mcdpAccountId                   :: !Text
-    , _mcdpKey                         :: !(Maybe Key)
-    , _mcdpOAuthToken                  :: !(Maybe OAuthToken)
-    , _mcdpCustomDimensionId           :: !Text
-    , _mcdpFields                      :: !(Maybe Text)
+    , _mcdpUserIP :: !(Maybe Text)
+    , _mcdpPayload :: !CustomDimension
+    , _mcdpAccountId :: !Text
+    , _mcdpKey :: !(Maybe Key)
+    , _mcdpOAuthToken :: !(Maybe OAuthToken)
+    , _mcdpCustomDimensionId :: !Text
+    , _mcdpFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDimensionsPatch'' with the minimum fields required to make a request.
@@ -120,7 +120,7 @@ managementCustomDimensionsPatch'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'customDimensionId'
     -> ManagementCustomDimensionsPatch'
-managementCustomDimensionsPatch' pMcdpWebPropertyId_ pMcdpPayload_ pMcdpAccountId_ pMcdpCustomDimensionId_ =
+managementCustomDimensionsPatch' pMcdpWebPropertyId_ pMcdpPayload_ pMcdpAccountId_ pMcdpCustomDimensionId_ = 
     ManagementCustomDimensionsPatch'
     { _mcdpQuotaUser = Nothing
     , _mcdpPrettyPrint = False

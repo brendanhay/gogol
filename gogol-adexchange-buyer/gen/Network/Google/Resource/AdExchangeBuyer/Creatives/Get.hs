@@ -44,8 +44,8 @@ module Network.Google.Resource.AdExchangeBuyer.Creatives.Get
     , cgFields
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerCreativesGet@ which the
 -- 'CreativesGet'' request conforms to.
@@ -66,14 +66,14 @@ type CreativesGetResource =
 --
 -- /See:/ 'creativesGet'' smart constructor.
 data CreativesGet' = CreativesGet'
-    { _cgQuotaUser       :: !(Maybe Text)
-    , _cgPrettyPrint     :: !Bool
+    { _cgQuotaUser :: !(Maybe Text)
+    , _cgPrettyPrint :: !Bool
     , _cgBuyerCreativeId :: !Text
-    , _cgUserIP          :: !(Maybe Text)
-    , _cgAccountId       :: !Int32
-    , _cgKey             :: !(Maybe Key)
-    , _cgOAuthToken      :: !(Maybe OAuthToken)
-    , _cgFields          :: !(Maybe Text)
+    , _cgUserIP :: !(Maybe Text)
+    , _cgAccountId :: !Int32
+    , _cgKey :: !(Maybe Key)
+    , _cgOAuthToken :: !(Maybe OAuthToken)
+    , _cgFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesGet'' with the minimum fields required to make a request.
@@ -99,7 +99,7 @@ creativesGet'
     :: Text -- ^ 'buyerCreativeId'
     -> Int32 -- ^ 'accountId'
     -> CreativesGet'
-creativesGet' pCgBuyerCreativeId_ pCgAccountId_ =
+creativesGet' pCgBuyerCreativeId_ pCgAccountId_ = 
     CreativesGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True

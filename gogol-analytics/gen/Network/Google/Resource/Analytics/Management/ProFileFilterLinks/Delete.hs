@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Delete
     , mpffldFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProFileFilterLinksDelete@ which the
 -- 'ManagementProFileFilterLinksDelete'' request conforms to.
@@ -72,16 +72,16 @@ type ManagementProFileFilterLinksDeleteResource =
 --
 -- /See:/ 'managementProFileFilterLinksDelete'' smart constructor.
 data ManagementProFileFilterLinksDelete' = ManagementProFileFilterLinksDelete'
-    { _mpffldQuotaUser     :: !(Maybe Text)
-    , _mpffldPrettyPrint   :: !Bool
+    { _mpffldQuotaUser :: !(Maybe Text)
+    , _mpffldPrettyPrint :: !Bool
     , _mpffldWebPropertyId :: !Text
-    , _mpffldUserIP        :: !(Maybe Text)
-    , _mpffldProFileId     :: !Text
-    , _mpffldAccountId     :: !Text
-    , _mpffldKey           :: !(Maybe Key)
-    , _mpffldLinkId        :: !Text
-    , _mpffldOAuthToken    :: !(Maybe OAuthToken)
-    , _mpffldFields        :: !(Maybe Text)
+    , _mpffldUserIP :: !(Maybe Text)
+    , _mpffldProFileId :: !Text
+    , _mpffldAccountId :: !Text
+    , _mpffldKey :: !(Maybe Key)
+    , _mpffldLinkId :: !Text
+    , _mpffldOAuthToken :: !(Maybe OAuthToken)
+    , _mpffldFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFileFilterLinksDelete'' with the minimum fields required to make a request.
@@ -113,7 +113,7 @@ managementProFileFilterLinksDelete'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
     -> ManagementProFileFilterLinksDelete'
-managementProFileFilterLinksDelete' pMpffldWebPropertyId_ pMpffldProFileId_ pMpffldAccountId_ pMpffldLinkId_ =
+managementProFileFilterLinksDelete' pMpffldWebPropertyId_ pMpffldProFileId_ pMpffldAccountId_ pMpffldLinkId_ = 
     ManagementProFileFilterLinksDelete'
     { _mpffldQuotaUser = Nothing
     , _mpffldPrettyPrint = False

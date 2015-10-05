@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.Insert
     , mcdiFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomDimensionsInsert@ which the
 -- 'ManagementCustomDimensionsInsert'' request conforms to.
@@ -70,15 +70,15 @@ type ManagementCustomDimensionsInsertResource =
 --
 -- /See:/ 'managementCustomDimensionsInsert'' smart constructor.
 data ManagementCustomDimensionsInsert' = ManagementCustomDimensionsInsert'
-    { _mcdiQuotaUser     :: !(Maybe Text)
-    , _mcdiPrettyPrint   :: !Bool
+    { _mcdiQuotaUser :: !(Maybe Text)
+    , _mcdiPrettyPrint :: !Bool
     , _mcdiWebPropertyId :: !Text
-    , _mcdiUserIP        :: !(Maybe Text)
-    , _mcdiPayload       :: !CustomDimension
-    , _mcdiAccountId     :: !Text
-    , _mcdiKey           :: !(Maybe Key)
-    , _mcdiOAuthToken    :: !(Maybe OAuthToken)
-    , _mcdiFields        :: !(Maybe Text)
+    , _mcdiUserIP :: !(Maybe Text)
+    , _mcdiPayload :: !CustomDimension
+    , _mcdiAccountId :: !Text
+    , _mcdiKey :: !(Maybe Key)
+    , _mcdiOAuthToken :: !(Maybe OAuthToken)
+    , _mcdiFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDimensionsInsert'' with the minimum fields required to make a request.
@@ -107,7 +107,7 @@ managementCustomDimensionsInsert'
     -> CustomDimension -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementCustomDimensionsInsert'
-managementCustomDimensionsInsert' pMcdiWebPropertyId_ pMcdiPayload_ pMcdiAccountId_ =
+managementCustomDimensionsInsert' pMcdiWebPropertyId_ pMcdiPayload_ pMcdiAccountId_ = 
     ManagementCustomDimensionsInsert'
     { _mcdiQuotaUser = Nothing
     , _mcdiPrettyPrint = False

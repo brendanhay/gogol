@@ -16,7 +16,7 @@
 --
 module Network.Google.Analytics.Types.Sum where
 
-import           Network.Google.Prelude
+import Network.Google.Prelude
 
 -- | The desired sampling level.
 data DataGaGetSamplingLevel

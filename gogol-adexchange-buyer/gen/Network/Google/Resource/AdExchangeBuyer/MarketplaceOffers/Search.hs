@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOffers.Search
     , mosFields
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplaceOffersSearch@ which the
 -- 'MarketplaceOffersSearch'' request conforms to.
@@ -64,13 +64,13 @@ type MarketplaceOffersSearchResource =
 --
 -- /See:/ 'marketplaceOffersSearch'' smart constructor.
 data MarketplaceOffersSearch' = MarketplaceOffersSearch'
-    { _mosQuotaUser   :: !(Maybe Text)
+    { _mosQuotaUser :: !(Maybe Text)
     , _mosPrettyPrint :: !Bool
-    , _mosUserIP      :: !(Maybe Text)
-    , _mosKey         :: !(Maybe Key)
-    , _mosPqlQuery    :: !(Maybe Text)
-    , _mosOAuthToken  :: !(Maybe OAuthToken)
-    , _mosFields      :: !(Maybe Text)
+    , _mosUserIP :: !(Maybe Text)
+    , _mosKey :: !(Maybe Key)
+    , _mosPqlQuery :: !(Maybe Text)
+    , _mosOAuthToken :: !(Maybe OAuthToken)
+    , _mosFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceOffersSearch'' with the minimum fields required to make a request.
@@ -92,7 +92,7 @@ data MarketplaceOffersSearch' = MarketplaceOffersSearch'
 -- * 'mosFields'
 marketplaceOffersSearch'
     :: MarketplaceOffersSearch'
-marketplaceOffersSearch' =
+marketplaceOffersSearch' = 
     MarketplaceOffersSearch'
     { _mosQuotaUser = Nothing
     , _mosPrettyPrint = True

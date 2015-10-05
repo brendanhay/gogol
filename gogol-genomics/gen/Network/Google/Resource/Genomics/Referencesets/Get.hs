@@ -42,8 +42,8 @@ module Network.Google.Resource.Genomics.Referencesets.Get
     , rFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReferencesetsGet@ which the
 -- 'ReferencesetsGet'' request conforms to.
@@ -63,12 +63,12 @@ type ReferencesetsGetResource =
 -- /See:/ 'referencesetsGet'' smart constructor.
 data ReferencesetsGet' = ReferencesetsGet'
     { _rReferenceSetId :: !Text
-    , _rQuotaUser      :: !(Maybe Text)
-    , _rPrettyPrint    :: !Bool
-    , _rUserIP         :: !(Maybe Text)
-    , _rKey            :: !(Maybe Key)
-    , _rOAuthToken     :: !(Maybe OAuthToken)
-    , _rFields         :: !(Maybe Text)
+    , _rQuotaUser :: !(Maybe Text)
+    , _rPrettyPrint :: !Bool
+    , _rUserIP :: !(Maybe Text)
+    , _rKey :: !(Maybe Key)
+    , _rOAuthToken :: !(Maybe OAuthToken)
+    , _rFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesetsGet'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data ReferencesetsGet' = ReferencesetsGet'
 referencesetsGet'
     :: Text -- ^ 'referenceSetId'
     -> ReferencesetsGet'
-referencesetsGet' pRReferenceSetId_ =
+referencesetsGet' pRReferenceSetId_ = 
     ReferencesetsGet'
     { _rReferenceSetId = pRReferenceSetId_
     , _rQuotaUser = Nothing

@@ -17,41 +17,41 @@
 --
 module Network.Google.GroupsSettings.Types.Product where
 
-import           Network.Google.GroupsSettings.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.GroupsSettings.Types.Sum
+import Network.Google.Prelude
 
 -- | JSON template for Group resource
 --
 -- /See:/ 'groups' smart constructor.
 data Groups = Groups
-    { _gEmail                              :: !(Maybe Text)
-    , _gSendMessageDenyNotification        :: !(Maybe Text)
-    , _gWhoCanPostMessage                  :: !(Maybe Text)
-    , _gAllowExternalMembers               :: !(Maybe Text)
-    , _gShowInGroupDirectory               :: !(Maybe Text)
-    , _gSpamModerationLevel                :: !(Maybe Text)
-    , _gKind                               :: !Text
-    , _gWhoCanViewMembership               :: !(Maybe Text)
-    , _gMembersCanPostAsTheGroup           :: !(Maybe Text)
-    , _gWhoCanViewGroup                    :: !(Maybe Text)
-    , _gWhoCanJoin                         :: !(Maybe Text)
-    , _gArchiveOnly                        :: !(Maybe Text)
-    , _gMaxMessageBytes                    :: !(Maybe Int32)
-    , _gReplyTo                            :: !(Maybe Text)
-    , _gMessageModerationLevel             :: !(Maybe Text)
-    , _gIncludeInGlobalAddressList         :: !(Maybe Text)
-    , _gIsArchived                         :: !(Maybe Text)
-    , _gName                               :: !(Maybe Text)
-    , _gMessageDisplayFont                 :: !(Maybe Text)
-    , _gCustomReplyTo                      :: !(Maybe Text)
-    , _gWhoCanContactOwner                 :: !(Maybe Text)
-    , _gWhoCanInvite                       :: !(Maybe Text)
-    , _gWhoCanLeaveGroup                   :: !(Maybe Text)
-    , _gAllowGoogleCommunication           :: !(Maybe Text)
-    , _gPrimaryLanguage                    :: !(Maybe Text)
-    , _gDescription                        :: !(Maybe Text)
+    { _gEmail :: !(Maybe Text)
+    , _gSendMessageDenyNotification :: !(Maybe Text)
+    , _gWhoCanPostMessage :: !(Maybe Text)
+    , _gAllowExternalMembers :: !(Maybe Text)
+    , _gShowInGroupDirectory :: !(Maybe Text)
+    , _gSpamModerationLevel :: !(Maybe Text)
+    , _gKind :: !Text
+    , _gWhoCanViewMembership :: !(Maybe Text)
+    , _gMembersCanPostAsTheGroup :: !(Maybe Text)
+    , _gWhoCanViewGroup :: !(Maybe Text)
+    , _gWhoCanJoin :: !(Maybe Text)
+    , _gArchiveOnly :: !(Maybe Text)
+    , _gMaxMessageBytes :: !(Maybe Int32)
+    , _gReplyTo :: !(Maybe Text)
+    , _gMessageModerationLevel :: !(Maybe Text)
+    , _gIncludeInGlobalAddressList :: !(Maybe Text)
+    , _gIsArchived :: !(Maybe Text)
+    , _gName :: !(Maybe Text)
+    , _gMessageDisplayFont :: !(Maybe Text)
+    , _gCustomReplyTo :: !(Maybe Text)
+    , _gWhoCanContactOwner :: !(Maybe Text)
+    , _gWhoCanInvite :: !(Maybe Text)
+    , _gWhoCanLeaveGroup :: !(Maybe Text)
+    , _gAllowGoogleCommunication :: !(Maybe Text)
+    , _gPrimaryLanguage :: !(Maybe Text)
+    , _gDescription :: !(Maybe Text)
     , _gDefaultMessageDenyNotificationText :: !(Maybe Text)
-    , _gAllowWebPosting                    :: !(Maybe Text)
+    , _gAllowWebPosting :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Groups' with the minimum fields required to make a request.
@@ -115,7 +115,7 @@ data Groups = Groups
 -- * 'gAllowWebPosting'
 groups
     :: Groups
-groups =
+groups = 
     Groups
     { _gEmail = Nothing
     , _gSendMessageDenyNotification = Nothing

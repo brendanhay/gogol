@@ -52,8 +52,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Delete
     , badCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsAttachmentsDelete@ which the
 -- 'BeaconsAttachmentsDelete'' request conforms to.
@@ -83,19 +83,19 @@ type BeaconsAttachmentsDeleteResource =
 --
 -- /See:/ 'beaconsAttachmentsDelete'' smart constructor.
 data BeaconsAttachmentsDelete' = BeaconsAttachmentsDelete'
-    { _badXgafv          :: !(Maybe Text)
-    , _badQuotaUser      :: !(Maybe Text)
-    , _badPrettyPrint    :: !Bool
+    { _badXgafv :: !(Maybe Text)
+    , _badQuotaUser :: !(Maybe Text)
+    , _badPrettyPrint :: !Bool
     , _badUploadProtocol :: !(Maybe Text)
-    , _badPp             :: !Bool
-    , _badAccessToken    :: !(Maybe Text)
-    , _badUploadType     :: !(Maybe Text)
+    , _badPp :: !Bool
+    , _badAccessToken :: !(Maybe Text)
+    , _badUploadType :: !(Maybe Text)
     , _badAttachmentName :: !Text
-    , _badBearerToken    :: !(Maybe Text)
-    , _badKey            :: !(Maybe Key)
-    , _badOAuthToken     :: !(Maybe OAuthToken)
-    , _badFields         :: !(Maybe Text)
-    , _badCallback       :: !(Maybe Text)
+    , _badBearerToken :: !(Maybe Text)
+    , _badKey :: !(Maybe Key)
+    , _badOAuthToken :: !(Maybe OAuthToken)
+    , _badFields :: !(Maybe Text)
+    , _badCallback :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsAttachmentsDelete'' with the minimum fields required to make a request.
@@ -130,7 +130,7 @@ data BeaconsAttachmentsDelete' = BeaconsAttachmentsDelete'
 beaconsAttachmentsDelete'
     :: Text -- ^ 'attachmentName'
     -> BeaconsAttachmentsDelete'
-beaconsAttachmentsDelete' pBadAttachmentName_ =
+beaconsAttachmentsDelete' pBadAttachmentName_ = 
     BeaconsAttachmentsDelete'
     { _badXgafv = Nothing
     , _badQuotaUser = Nothing

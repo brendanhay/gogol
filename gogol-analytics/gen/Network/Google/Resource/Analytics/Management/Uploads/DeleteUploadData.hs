@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.Uploads.DeleteUploadData
     , mududFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementUploadsDeleteUploadData@ which the
 -- 'ManagementUploadsDeleteUploadData'' request conforms to.
@@ -74,16 +74,16 @@ type ManagementUploadsDeleteUploadDataResource =
 --
 -- /See:/ 'managementUploadsDeleteUploadData'' smart constructor.
 data ManagementUploadsDeleteUploadData' = ManagementUploadsDeleteUploadData'
-    { _mududQuotaUser          :: !(Maybe Text)
-    , _mududPrettyPrint        :: !Bool
-    , _mududWebPropertyId      :: !Text
-    , _mududUserIP             :: !(Maybe Text)
+    { _mududQuotaUser :: !(Maybe Text)
+    , _mududPrettyPrint :: !Bool
+    , _mududWebPropertyId :: !Text
+    , _mududUserIP :: !(Maybe Text)
     , _mududCustomDataSourceId :: !Text
-    , _mududPayload            :: !AnalyticsDataimportDeleteUploadDataRequest
-    , _mududAccountId          :: !Text
-    , _mududKey                :: !(Maybe Key)
-    , _mududOAuthToken         :: !(Maybe OAuthToken)
-    , _mududFields             :: !(Maybe Text)
+    , _mududPayload :: !AnalyticsDataimportDeleteUploadDataRequest
+    , _mududAccountId :: !Text
+    , _mududKey :: !(Maybe Key)
+    , _mududOAuthToken :: !(Maybe OAuthToken)
+    , _mududFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUploadsDeleteUploadData'' with the minimum fields required to make a request.
@@ -115,7 +115,7 @@ managementUploadsDeleteUploadData'
     -> AnalyticsDataimportDeleteUploadDataRequest -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementUploadsDeleteUploadData'
-managementUploadsDeleteUploadData' pMududWebPropertyId_ pMududCustomDataSourceId_ pMududPayload_ pMududAccountId_ =
+managementUploadsDeleteUploadData' pMududWebPropertyId_ pMududCustomDataSourceId_ pMududPayload_ pMududAccountId_ = 
     ManagementUploadsDeleteUploadData'
     { _mududQuotaUser = Nothing
     , _mududPrettyPrint = False

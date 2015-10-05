@@ -42,8 +42,8 @@ module Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
     , pcatFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsProvisioningCreateAccountTicket@ which the
 -- 'ProvisioningCreateAccountTicket'' request conforms to.
@@ -64,13 +64,13 @@ type ProvisioningCreateAccountTicketResource =
 --
 -- /See:/ 'provisioningCreateAccountTicket'' smart constructor.
 data ProvisioningCreateAccountTicket' = ProvisioningCreateAccountTicket'
-    { _pcatQuotaUser   :: !(Maybe Text)
+    { _pcatQuotaUser :: !(Maybe Text)
     , _pcatPrettyPrint :: !Bool
-    , _pcatUserIP      :: !(Maybe Text)
-    , _pcatPayload     :: !AccountTicket
-    , _pcatKey         :: !(Maybe Key)
-    , _pcatOAuthToken  :: !(Maybe OAuthToken)
-    , _pcatFields      :: !(Maybe Text)
+    , _pcatUserIP :: !(Maybe Text)
+    , _pcatPayload :: !AccountTicket
+    , _pcatKey :: !(Maybe Key)
+    , _pcatOAuthToken :: !(Maybe OAuthToken)
+    , _pcatFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProvisioningCreateAccountTicket'' with the minimum fields required to make a request.
@@ -93,7 +93,7 @@ data ProvisioningCreateAccountTicket' = ProvisioningCreateAccountTicket'
 provisioningCreateAccountTicket'
     :: AccountTicket -- ^ 'payload'
     -> ProvisioningCreateAccountTicket'
-provisioningCreateAccountTicket' pPcatPayload_ =
+provisioningCreateAccountTicket' pPcatPayload_ = 
     ProvisioningCreateAccountTicket'
     { _pcatQuotaUser = Nothing
     , _pcatPrettyPrint = False

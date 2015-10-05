@@ -49,8 +49,8 @@ module Network.Google.Resource.ResourceViews.ZoneViews.ListResources
     , zvlrFields
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ResourceViews.Types
+import Network.Google.Prelude
+import Network.Google.ResourceViews.Types
 
 -- | A resource alias for @ResourceviewsZoneViewsListResources@ which the
 -- 'ZoneViewsListResources'' request conforms to.
@@ -82,20 +82,20 @@ type ZoneViewsListResourcesResource =
 --
 -- /See:/ 'zoneViewsListResources'' smart constructor.
 data ZoneViewsListResources' = ZoneViewsListResources'
-    { _zvlrQuotaUser    :: !(Maybe Text)
-    , _zvlrPrettyPrint  :: !Bool
+    { _zvlrQuotaUser :: !(Maybe Text)
+    , _zvlrPrettyPrint :: !Bool
     , _zvlrResourceView :: !Text
-    , _zvlrListState    :: !ZoneViewsListResourcesListState
-    , _zvlrProject      :: !Text
-    , _zvlrUserIP       :: !(Maybe Text)
-    , _zvlrFormat       :: !(Maybe ZoneViewsListResourcesFormat)
-    , _zvlrZone         :: !Text
-    , _zvlrKey          :: !(Maybe Key)
-    , _zvlrServiceName  :: !(Maybe Text)
-    , _zvlrPageToken    :: !(Maybe Text)
-    , _zvlrOAuthToken   :: !(Maybe OAuthToken)
-    , _zvlrMaxResults   :: !Int32
-    , _zvlrFields       :: !(Maybe Text)
+    , _zvlrListState :: !ZoneViewsListResourcesListState
+    , _zvlrProject :: !Text
+    , _zvlrUserIP :: !(Maybe Text)
+    , _zvlrFormat :: !(Maybe ZoneViewsListResourcesFormat)
+    , _zvlrZone :: !Text
+    , _zvlrKey :: !(Maybe Key)
+    , _zvlrServiceName :: !(Maybe Text)
+    , _zvlrPageToken :: !(Maybe Text)
+    , _zvlrOAuthToken :: !(Maybe OAuthToken)
+    , _zvlrMaxResults :: !Int32
+    , _zvlrFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsListResources'' with the minimum fields required to make a request.
@@ -134,7 +134,7 @@ zoneViewsListResources'
     -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> ZoneViewsListResources'
-zoneViewsListResources' pZvlrResourceView_ pZvlrProject_ pZvlrZone_ =
+zoneViewsListResources' pZvlrResourceView_ pZvlrProject_ pZvlrZone_ = 
     ZoneViewsListResources'
     { _zvlrQuotaUser = Nothing
     , _zvlrPrettyPrint = True

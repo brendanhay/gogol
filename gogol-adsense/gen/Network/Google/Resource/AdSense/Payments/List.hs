@@ -41,8 +41,8 @@ module Network.Google.Resource.AdSense.Payments.List
     , plFields
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdsensePaymentsList@ which the
 -- 'PaymentsList'' request conforms to.
@@ -60,12 +60,12 @@ type PaymentsListResource =
 --
 -- /See:/ 'paymentsList'' smart constructor.
 data PaymentsList' = PaymentsList'
-    { _plQuotaUser   :: !(Maybe Text)
+    { _plQuotaUser :: !(Maybe Text)
     , _plPrettyPrint :: !Bool
-    , _plUserIP      :: !(Maybe Text)
-    , _plKey         :: !(Maybe Key)
-    , _plOAuthToken  :: !(Maybe OAuthToken)
-    , _plFields      :: !(Maybe Text)
+    , _plUserIP :: !(Maybe Text)
+    , _plKey :: !(Maybe Key)
+    , _plOAuthToken :: !(Maybe OAuthToken)
+    , _plFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PaymentsList'' with the minimum fields required to make a request.
@@ -85,7 +85,7 @@ data PaymentsList' = PaymentsList'
 -- * 'plFields'
 paymentsList'
     :: PaymentsList'
-paymentsList' =
+paymentsList' = 
     PaymentsList'
     { _plQuotaUser = Nothing
     , _plPrettyPrint = True

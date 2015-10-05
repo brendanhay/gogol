@@ -16,4 +16,4 @@
 --
 module Network.Google.FusionTables.Types.Sum where
 
-import           Network.Google.Prelude
+import Network.Google.Prelude

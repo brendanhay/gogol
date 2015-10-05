@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.Filters.Update
     , mfuFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementFiltersUpdate@ which the
 -- 'ManagementFiltersUpdate'' request conforms to.
@@ -68,15 +68,15 @@ type ManagementFiltersUpdateResource =
 --
 -- /See:/ 'managementFiltersUpdate'' smart constructor.
 data ManagementFiltersUpdate' = ManagementFiltersUpdate'
-    { _mfuQuotaUser   :: !(Maybe Text)
+    { _mfuQuotaUser :: !(Maybe Text)
     , _mfuPrettyPrint :: !Bool
-    , _mfuFilterId    :: !Text
-    , _mfuUserIP      :: !(Maybe Text)
-    , _mfuPayload     :: !Filter
-    , _mfuAccountId   :: !Text
-    , _mfuKey         :: !(Maybe Key)
-    , _mfuOAuthToken  :: !(Maybe OAuthToken)
-    , _mfuFields      :: !(Maybe Text)
+    , _mfuFilterId :: !Text
+    , _mfuUserIP :: !(Maybe Text)
+    , _mfuPayload :: !Filter
+    , _mfuAccountId :: !Text
+    , _mfuKey :: !(Maybe Key)
+    , _mfuOAuthToken :: !(Maybe OAuthToken)
+    , _mfuFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersUpdate'' with the minimum fields required to make a request.
@@ -105,7 +105,7 @@ managementFiltersUpdate'
     -> Filter -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementFiltersUpdate'
-managementFiltersUpdate' pMfuFilterId_ pMfuPayload_ pMfuAccountId_ =
+managementFiltersUpdate' pMfuFilterId_ pMfuPayload_ pMfuAccountId_ = 
     ManagementFiltersUpdate'
     { _mfuQuotaUser = Nothing
     , _mfuPrettyPrint = False

@@ -45,8 +45,8 @@ module Network.Google.Resource.Genomics.Readgroupsets.Export
     , reFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReadgroupsetsExport@ which the
 -- 'ReadgroupsetsExport'' request conforms to.
@@ -70,13 +70,13 @@ type ReadgroupsetsExportResource =
 --
 -- /See:/ 'readgroupsetsExport'' smart constructor.
 data ReadgroupsetsExport' = ReadgroupsetsExport'
-    { _reQuotaUser   :: !(Maybe Text)
+    { _reQuotaUser :: !(Maybe Text)
     , _rePrettyPrint :: !Bool
-    , _reUserIP      :: !(Maybe Text)
-    , _rePayload     :: !ExportReadGroupSetsRequest
-    , _reKey         :: !(Maybe Key)
-    , _reOAuthToken  :: !(Maybe OAuthToken)
-    , _reFields      :: !(Maybe Text)
+    , _reUserIP :: !(Maybe Text)
+    , _rePayload :: !ExportReadGroupSetsRequest
+    , _reKey :: !(Maybe Key)
+    , _reOAuthToken :: !(Maybe OAuthToken)
+    , _reFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsExport'' with the minimum fields required to make a request.
@@ -99,7 +99,7 @@ data ReadgroupsetsExport' = ReadgroupsetsExport'
 readgroupsetsExport'
     :: ExportReadGroupSetsRequest -- ^ 'payload'
     -> ReadgroupsetsExport'
-readgroupsetsExport' pRePayload_ =
+readgroupsetsExport' pRePayload_ = 
     ReadgroupsetsExport'
     { _reQuotaUser = Nothing
     , _rePrettyPrint = True

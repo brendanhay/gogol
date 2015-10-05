@@ -43,8 +43,8 @@ module Network.Google.Resource.AdSense.Accounts.Alerts.List
     , aalFields
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsAlertsList@ which the
 -- 'AccountsAlertsList'' request conforms to.
@@ -65,14 +65,14 @@ type AccountsAlertsListResource =
 --
 -- /See:/ 'accountsAlertsList'' smart constructor.
 data AccountsAlertsList' = AccountsAlertsList'
-    { _aalQuotaUser   :: !(Maybe Text)
+    { _aalQuotaUser :: !(Maybe Text)
     , _aalPrettyPrint :: !Bool
-    , _aalUserIP      :: !(Maybe Text)
-    , _aalLocale      :: !(Maybe Text)
-    , _aalAccountId   :: !Text
-    , _aalKey         :: !(Maybe Key)
-    , _aalOAuthToken  :: !(Maybe OAuthToken)
-    , _aalFields      :: !(Maybe Text)
+    , _aalUserIP :: !(Maybe Text)
+    , _aalLocale :: !(Maybe Text)
+    , _aalAccountId :: !Text
+    , _aalKey :: !(Maybe Key)
+    , _aalOAuthToken :: !(Maybe OAuthToken)
+    , _aalFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAlertsList'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ data AccountsAlertsList' = AccountsAlertsList'
 accountsAlertsList'
     :: Text -- ^ 'accountId'
     -> AccountsAlertsList'
-accountsAlertsList' pAalAccountId_ =
+accountsAlertsList' pAalAccountId_ = 
     AccountsAlertsList'
     { _aalQuotaUser = Nothing
     , _aalPrettyPrint = True

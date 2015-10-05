@@ -2845,7 +2845,7 @@ instance FromJSON JSONObject where
           = withObject "JSONObject" (\ o -> pure JSONObject)
 
 instance ToJSON JSONObject where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'jobConfigurationQuery' smart constructor.
@@ -3185,7 +3185,7 @@ instance FromJSON
 
 instance ToJSON JobConfigurationQueryTableDefinitions
          where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'tableCell' smart constructor.

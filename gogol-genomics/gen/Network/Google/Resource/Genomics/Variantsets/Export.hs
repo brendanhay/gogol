@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.Variantsets.Export
     , veFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsetsExport@ which the
 -- 'VariantsetsExport'' request conforms to.
@@ -66,14 +66,14 @@ type VariantsetsExportResource =
 --
 -- /See:/ 'variantsetsExport'' smart constructor.
 data VariantsetsExport' = VariantsetsExport'
-    { _veQuotaUser    :: !(Maybe Text)
-    , _vePrettyPrint  :: !Bool
+    { _veQuotaUser :: !(Maybe Text)
+    , _vePrettyPrint :: !Bool
     , _veVariantSetId :: !Text
-    , _veUserIP       :: !(Maybe Text)
-    , _vePayload      :: !ExportVariantSetRequest
-    , _veKey          :: !(Maybe Key)
-    , _veOAuthToken   :: !(Maybe OAuthToken)
-    , _veFields       :: !(Maybe Text)
+    , _veUserIP :: !(Maybe Text)
+    , _vePayload :: !ExportVariantSetRequest
+    , _veKey :: !(Maybe Key)
+    , _veOAuthToken :: !(Maybe OAuthToken)
+    , _veFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsExport'' with the minimum fields required to make a request.
@@ -99,7 +99,7 @@ variantsetsExport'
     :: Text -- ^ 'variantSetId'
     -> ExportVariantSetRequest -- ^ 'payload'
     -> VariantsetsExport'
-variantsetsExport' pVeVariantSetId_ pVePayload_ =
+variantsetsExport' pVeVariantSetId_ pVePayload_ = 
     VariantsetsExport'
     { _veQuotaUser = Nothing
     , _vePrettyPrint = True

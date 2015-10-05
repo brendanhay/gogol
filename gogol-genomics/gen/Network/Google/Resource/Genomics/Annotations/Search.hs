@@ -45,8 +45,8 @@ module Network.Google.Resource.Genomics.Annotations.Search
     , asFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsAnnotationsSearch@ which the
 -- 'AnnotationsSearch'' request conforms to.
@@ -70,13 +70,13 @@ type AnnotationsSearchResource =
 --
 -- /See:/ 'annotationsSearch'' smart constructor.
 data AnnotationsSearch' = AnnotationsSearch'
-    { _asQuotaUser   :: !(Maybe Text)
+    { _asQuotaUser :: !(Maybe Text)
     , _asPrettyPrint :: !Bool
-    , _asUserIP      :: !(Maybe Text)
-    , _asPayload     :: !SearchAnnotationsRequest
-    , _asKey         :: !(Maybe Key)
-    , _asOAuthToken  :: !(Maybe OAuthToken)
-    , _asFields      :: !(Maybe Text)
+    , _asUserIP :: !(Maybe Text)
+    , _asPayload :: !SearchAnnotationsRequest
+    , _asKey :: !(Maybe Key)
+    , _asOAuthToken :: !(Maybe OAuthToken)
+    , _asFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsSearch'' with the minimum fields required to make a request.
@@ -99,7 +99,7 @@ data AnnotationsSearch' = AnnotationsSearch'
 annotationsSearch'
     :: SearchAnnotationsRequest -- ^ 'payload'
     -> AnnotationsSearch'
-annotationsSearch' pAsPayload_ =
+annotationsSearch' pAsPayload_ = 
     AnnotationsSearch'
     { _asQuotaUser = Nothing
     , _asPrettyPrint = True

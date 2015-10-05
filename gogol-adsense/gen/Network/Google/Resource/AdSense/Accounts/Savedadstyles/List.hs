@@ -44,8 +44,8 @@ module Network.Google.Resource.AdSense.Accounts.Savedadstyles.List
     , aslFields
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsSavedadstylesList@ which the
 -- 'AccountsSavedadstylesList'' request conforms to.
@@ -67,15 +67,15 @@ type AccountsSavedadstylesListResource =
 --
 -- /See:/ 'accountsSavedadstylesList'' smart constructor.
 data AccountsSavedadstylesList' = AccountsSavedadstylesList'
-    { _aslQuotaUser   :: !(Maybe Text)
+    { _aslQuotaUser :: !(Maybe Text)
     , _aslPrettyPrint :: !Bool
-    , _aslUserIP      :: !(Maybe Text)
-    , _aslAccountId   :: !Text
-    , _aslKey         :: !(Maybe Key)
-    , _aslPageToken   :: !(Maybe Text)
-    , _aslOAuthToken  :: !(Maybe OAuthToken)
-    , _aslMaxResults  :: !(Maybe Int32)
-    , _aslFields      :: !(Maybe Text)
+    , _aslUserIP :: !(Maybe Text)
+    , _aslAccountId :: !Text
+    , _aslKey :: !(Maybe Key)
+    , _aslPageToken :: !(Maybe Text)
+    , _aslOAuthToken :: !(Maybe OAuthToken)
+    , _aslMaxResults :: !(Maybe Int32)
+    , _aslFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsSavedadstylesList'' with the minimum fields required to make a request.
@@ -102,7 +102,7 @@ data AccountsSavedadstylesList' = AccountsSavedadstylesList'
 accountsSavedadstylesList'
     :: Text -- ^ 'accountId'
     -> AccountsSavedadstylesList'
-accountsSavedadstylesList' pAslAccountId_ =
+accountsSavedadstylesList' pAslAccountId_ = 
     AccountsSavedadstylesList'
     { _aslQuotaUser = Nothing
     , _aslPrettyPrint = True

@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.AccountSummaries.List
     , maslFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementAccountSummariesList@ which the
 -- 'ManagementAccountSummariesList'' request conforms to.
@@ -68,14 +68,14 @@ type ManagementAccountSummariesListResource =
 --
 -- /See:/ 'managementAccountSummariesList'' smart constructor.
 data ManagementAccountSummariesList' = ManagementAccountSummariesList'
-    { _maslQuotaUser   :: !(Maybe Text)
+    { _maslQuotaUser :: !(Maybe Text)
     , _maslPrettyPrint :: !Bool
-    , _maslUserIP      :: !(Maybe Text)
-    , _maslKey         :: !(Maybe Key)
-    , _maslOAuthToken  :: !(Maybe OAuthToken)
-    , _maslStartIndex  :: !(Maybe Int32)
-    , _maslMaxResults  :: !(Maybe Int32)
-    , _maslFields      :: !(Maybe Text)
+    , _maslUserIP :: !(Maybe Text)
+    , _maslKey :: !(Maybe Key)
+    , _maslOAuthToken :: !(Maybe OAuthToken)
+    , _maslStartIndex :: !(Maybe Int32)
+    , _maslMaxResults :: !(Maybe Int32)
+    , _maslFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountSummariesList'' with the minimum fields required to make a request.
@@ -99,7 +99,7 @@ data ManagementAccountSummariesList' = ManagementAccountSummariesList'
 -- * 'maslFields'
 managementAccountSummariesList'
     :: ManagementAccountSummariesList'
-managementAccountSummariesList' =
+managementAccountSummariesList' = 
     ManagementAccountSummariesList'
     { _maslQuotaUser = Nothing
     , _maslPrettyPrint = False

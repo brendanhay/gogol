@@ -44,8 +44,8 @@ module Network.Google.Resource.PlusDomains.Activities.Insert
     , aiFields
     ) where
 
-import           Network.Google.PlusDomains.Types
-import           Network.Google.Prelude
+import Network.Google.PlusDomains.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsActivitiesInsert@ which the
 -- 'ActivitiesInsert'' request conforms to.
@@ -67,15 +67,15 @@ type ActivitiesInsertResource =
 --
 -- /See:/ 'activitiesInsert'' smart constructor.
 data ActivitiesInsert' = ActivitiesInsert'
-    { _aiQuotaUser   :: !(Maybe Text)
+    { _aiQuotaUser :: !(Maybe Text)
     , _aiPrettyPrint :: !Bool
-    , _aiUserIP      :: !(Maybe Text)
-    , _aiPayload     :: !Activity
-    , _aiUserId      :: !Text
-    , _aiKey         :: !(Maybe Key)
-    , _aiPreview     :: !(Maybe Bool)
-    , _aiOAuthToken  :: !(Maybe OAuthToken)
-    , _aiFields      :: !(Maybe Text)
+    , _aiUserIP :: !(Maybe Text)
+    , _aiPayload :: !Activity
+    , _aiUserId :: !Text
+    , _aiKey :: !(Maybe Key)
+    , _aiPreview :: !(Maybe Bool)
+    , _aiOAuthToken :: !(Maybe OAuthToken)
+    , _aiFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesInsert'' with the minimum fields required to make a request.
@@ -103,7 +103,7 @@ activitiesInsert'
     :: Activity -- ^ 'payload'
     -> Text -- ^ 'userId'
     -> ActivitiesInsert'
-activitiesInsert' pAiPayload_ pAiUserId_ =
+activitiesInsert' pAiPayload_ pAiUserId_ = 
     ActivitiesInsert'
     { _aiQuotaUser = Nothing
     , _aiPrettyPrint = True

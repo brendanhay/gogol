@@ -39,7 +39,7 @@ instance FromJSON InAppProductListings where
               (\ o -> pure InAppProductListings)
 
 instance ToJSON InAppProductListings where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'inAppProductsUpdateResponse' smart constructor.
@@ -1271,7 +1271,7 @@ instance FromJSON InAppProductPrices where
               (\ o -> pure InAppProductPrices)
 
 instance ToJSON InAppProductPrices where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'inAppProductsBatchRequest' smart constructor.

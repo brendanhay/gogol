@@ -49,8 +49,8 @@ module Network.Google.Resource.FusionTables.Table.ReplaceRows
     , trrFields
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTableReplaceRows@ which the
 -- 'TableReplaceRows'' request conforms to.
@@ -78,19 +78,19 @@ type TableReplaceRowsResource =
 --
 -- /See:/ 'tableReplaceRows'' smart constructor.
 data TableReplaceRows' = TableReplaceRows'
-    { _trrQuotaUser   :: !(Maybe Text)
+    { _trrQuotaUser :: !(Maybe Text)
     , _trrPrettyPrint :: !Bool
-    , _trrUserIP      :: !(Maybe Text)
-    , _trrStartLine   :: !(Maybe Int32)
-    , _trrEndLine     :: !(Maybe Int32)
-    , _trrMedia       :: !Body
-    , _trrKey         :: !(Maybe Key)
-    , _trrOAuthToken  :: !(Maybe OAuthToken)
-    , _trrTableId     :: !Text
-    , _trrDelimiter   :: !(Maybe Text)
-    , _trrEncoding    :: !(Maybe Text)
-    , _trrIsStrict    :: !(Maybe Bool)
-    , _trrFields      :: !(Maybe Text)
+    , _trrUserIP :: !(Maybe Text)
+    , _trrStartLine :: !(Maybe Int32)
+    , _trrEndLine :: !(Maybe Int32)
+    , _trrMedia :: !Body
+    , _trrKey :: !(Maybe Key)
+    , _trrOAuthToken :: !(Maybe OAuthToken)
+    , _trrTableId :: !Text
+    , _trrDelimiter :: !(Maybe Text)
+    , _trrEncoding :: !(Maybe Text)
+    , _trrIsStrict :: !(Maybe Bool)
+    , _trrFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableReplaceRows'' with the minimum fields required to make a request.
@@ -126,7 +126,7 @@ tableReplaceRows'
     :: Body -- ^ 'media'
     -> Text -- ^ 'tableId'
     -> TableReplaceRows'
-tableReplaceRows' pTrrMedia_ pTrrTableId_ =
+tableReplaceRows' pTrrMedia_ pTrrTableId_ = 
     TableReplaceRows'
     { _trrQuotaUser = Nothing
     , _trrPrettyPrint = True

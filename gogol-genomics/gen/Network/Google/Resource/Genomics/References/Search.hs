@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.References.Search
     , refFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReferencesSearch@ which the
 -- 'ReferencesSearch'' request conforms to.
@@ -66,13 +66,13 @@ type ReferencesSearchResource =
 --
 -- /See:/ 'referencesSearch'' smart constructor.
 data ReferencesSearch' = ReferencesSearch'
-    { _refQuotaUser   :: !(Maybe Text)
+    { _refQuotaUser :: !(Maybe Text)
     , _refPrettyPrint :: !Bool
-    , _refUserIP      :: !(Maybe Text)
-    , _refPayload     :: !SearchReferencesRequest
-    , _refKey         :: !(Maybe Key)
-    , _refOAuthToken  :: !(Maybe OAuthToken)
-    , _refFields      :: !(Maybe Text)
+    , _refUserIP :: !(Maybe Text)
+    , _refPayload :: !SearchReferencesRequest
+    , _refKey :: !(Maybe Key)
+    , _refOAuthToken :: !(Maybe OAuthToken)
+    , _refFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesSearch'' with the minimum fields required to make a request.
@@ -95,7 +95,7 @@ data ReferencesSearch' = ReferencesSearch'
 referencesSearch'
     :: SearchReferencesRequest -- ^ 'payload'
     -> ReferencesSearch'
-referencesSearch' pRefPayload_ =
+referencesSearch' pRefPayload_ = 
     ReferencesSearch'
     { _refQuotaUser = Nothing
     , _refPrettyPrint = True

@@ -137,9 +137,9 @@ module Network.Google.PageSpeed
     , resultFormattedResultsRuleResults
     ) where
 
-import           Network.Google.PageSpeed.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Pagespeedonline.Pagespeedapi.Runpagespeed
+import Network.Google.Prelude
+import Network.Google.PageSpeed.Types
+import Network.Google.Resource.Pagespeedonline.Pagespeedapi.Runpagespeed
 
 {- $resources
 TODO

@@ -150,7 +150,7 @@ instance FromJSON GetIAMPolicyRequest where
               (\ o -> pure GetIAMPolicyRequest)
 
 instance ToJSON GetIAMPolicyRequest where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | The entity that owns an Organization. The lifetime of the Organization
 -- and all of its descendants are bound to the OrganizationOwner. If the
@@ -333,7 +333,7 @@ instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty)
 
 instance ToJSON Empty where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Request message for \`SetIamPolicy\` method.
 --
@@ -551,7 +551,7 @@ instance FromJSON ProjectLabels where
               (\ o -> pure ProjectLabels)
 
 instance ToJSON ProjectLabels where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | The root node in the resource hierarchy to which a particular entity\'s
 -- (e.g., company) resources belong.

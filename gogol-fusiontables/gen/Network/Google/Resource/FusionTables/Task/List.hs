@@ -45,8 +45,8 @@ module Network.Google.Resource.FusionTables.Task.List
     , tlFields
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTaskList@ which the
 -- 'TaskList'' request conforms to.
@@ -69,16 +69,16 @@ type TaskListResource =
 --
 -- /See:/ 'taskList'' smart constructor.
 data TaskList' = TaskList'
-    { _tlQuotaUser   :: !(Maybe Text)
+    { _tlQuotaUser :: !(Maybe Text)
     , _tlPrettyPrint :: !Bool
-    , _tlUserIP      :: !(Maybe Text)
-    , _tlKey         :: !(Maybe Key)
-    , _tlPageToken   :: !(Maybe Text)
-    , _tlOAuthToken  :: !(Maybe OAuthToken)
-    , _tlTableId     :: !Text
-    , _tlStartIndex  :: !(Maybe Word32)
-    , _tlMaxResults  :: !(Maybe Word32)
-    , _tlFields      :: !(Maybe Text)
+    , _tlUserIP :: !(Maybe Text)
+    , _tlKey :: !(Maybe Key)
+    , _tlPageToken :: !(Maybe Text)
+    , _tlOAuthToken :: !(Maybe OAuthToken)
+    , _tlTableId :: !Text
+    , _tlStartIndex :: !(Maybe Word32)
+    , _tlMaxResults :: !(Maybe Word32)
+    , _tlFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskList'' with the minimum fields required to make a request.
@@ -107,7 +107,7 @@ data TaskList' = TaskList'
 taskList'
     :: Text -- ^ 'tableId'
     -> TaskList'
-taskList' pTlTableId_ =
+taskList' pTlTableId_ = 
     TaskList'
     { _tlQuotaUser = Nothing
     , _tlPrettyPrint = True

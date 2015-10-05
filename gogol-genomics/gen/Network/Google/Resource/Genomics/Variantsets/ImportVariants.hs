@@ -51,8 +51,8 @@ module Network.Google.Resource.Genomics.Variantsets.ImportVariants
     , vivFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsetsImportVariants@ which the
 -- 'VariantsetsImportVariants'' request conforms to.
@@ -82,14 +82,14 @@ type VariantsetsImportVariantsResource =
 --
 -- /See:/ 'variantsetsImportVariants'' smart constructor.
 data VariantsetsImportVariants' = VariantsetsImportVariants'
-    { _vivQuotaUser    :: !(Maybe Text)
-    , _vivPrettyPrint  :: !Bool
+    { _vivQuotaUser :: !(Maybe Text)
+    , _vivPrettyPrint :: !Bool
     , _vivVariantSetId :: !Text
-    , _vivUserIP       :: !(Maybe Text)
-    , _vivPayload      :: !ImportVariantsRequest
-    , _vivKey          :: !(Maybe Key)
-    , _vivOAuthToken   :: !(Maybe OAuthToken)
-    , _vivFields       :: !(Maybe Text)
+    , _vivUserIP :: !(Maybe Text)
+    , _vivPayload :: !ImportVariantsRequest
+    , _vivKey :: !(Maybe Key)
+    , _vivOAuthToken :: !(Maybe OAuthToken)
+    , _vivFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsImportVariants'' with the minimum fields required to make a request.
@@ -115,7 +115,7 @@ variantsetsImportVariants'
     :: Text -- ^ 'variantSetId'
     -> ImportVariantsRequest -- ^ 'payload'
     -> VariantsetsImportVariants'
-variantsetsImportVariants' pVivVariantSetId_ pVivPayload_ =
+variantsetsImportVariants' pVivVariantSetId_ pVivPayload_ = 
     VariantsetsImportVariants'
     { _vivQuotaUser = Nothing
     , _vivPrettyPrint = True

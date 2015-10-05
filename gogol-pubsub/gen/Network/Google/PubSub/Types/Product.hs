@@ -256,7 +256,7 @@ instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty)
 
 instance ToJSON Empty where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | A message data and its attributes. The message payload must not be
 -- empty; it must contain either a non-empty data field, or at least one
@@ -619,7 +619,7 @@ instance FromJSON PubsubMessageAttributes where
               (\ o -> pure PubsubMessageAttributes)
 
 instance ToJSON PubsubMessageAttributes where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Request message for \`TestIamPermissions\` method.
 --
@@ -886,7 +886,7 @@ instance FromJSON PushConfigAttributes where
               (\ o -> pure PushConfigAttributes)
 
 instance ToJSON PushConfigAttributes where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | A subscription resource.
 --

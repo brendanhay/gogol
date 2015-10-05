@@ -46,8 +46,8 @@ module Network.Google.Resource.Genomics.Annotations.Patch
     , apFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsAnnotationsPatch@ which the
 -- 'AnnotationsPatch'' request conforms to.
@@ -71,14 +71,14 @@ type AnnotationsPatchResource =
 --
 -- /See:/ 'annotationsPatch'' smart constructor.
 data AnnotationsPatch' = AnnotationsPatch'
-    { _apQuotaUser    :: !(Maybe Text)
-    , _apPrettyPrint  :: !Bool
-    , _apUserIP       :: !(Maybe Text)
-    , _apPayload      :: !Annotation
-    , _apKey          :: !(Maybe Key)
+    { _apQuotaUser :: !(Maybe Text)
+    , _apPrettyPrint :: !Bool
+    , _apUserIP :: !(Maybe Text)
+    , _apPayload :: !Annotation
+    , _apKey :: !(Maybe Key)
     , _apAnnotationId :: !Text
-    , _apOAuthToken   :: !(Maybe OAuthToken)
-    , _apFields       :: !(Maybe Text)
+    , _apOAuthToken :: !(Maybe OAuthToken)
+    , _apFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsPatch'' with the minimum fields required to make a request.
@@ -104,7 +104,7 @@ annotationsPatch'
     :: Annotation -- ^ 'payload'
     -> Text -- ^ 'annotationId'
     -> AnnotationsPatch'
-annotationsPatch' pApPayload_ pApAnnotationId_ =
+annotationsPatch' pApPayload_ pApAnnotationId_ = 
     AnnotationsPatch'
     { _apQuotaUser = Nothing
     , _apPrettyPrint = True

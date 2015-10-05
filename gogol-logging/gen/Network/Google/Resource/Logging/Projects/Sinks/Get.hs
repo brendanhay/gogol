@@ -49,8 +49,8 @@ module Network.Google.Resource.Logging.Projects.Sinks.Get
     , psgCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsSinksGet@ which the
 -- 'ProjectsSinksGet'' request conforms to.
@@ -79,20 +79,20 @@ type ProjectsSinksGetResource =
 --
 -- /See:/ 'projectsSinksGet'' smart constructor.
 data ProjectsSinksGet' = ProjectsSinksGet'
-    { _psgXgafv          :: !(Maybe Text)
-    , _psgQuotaUser      :: !(Maybe Text)
-    , _psgPrettyPrint    :: !Bool
+    { _psgXgafv :: !(Maybe Text)
+    , _psgQuotaUser :: !(Maybe Text)
+    , _psgPrettyPrint :: !Bool
     , _psgUploadProtocol :: !(Maybe Text)
-    , _psgPp             :: !Bool
-    , _psgAccessToken    :: !(Maybe Text)
-    , _psgUploadType     :: !(Maybe Text)
-    , _psgBearerToken    :: !(Maybe Text)
-    , _psgKey            :: !(Maybe Key)
-    , _psgOAuthToken     :: !(Maybe OAuthToken)
-    , _psgProjectsId     :: !Text
-    , _psgSinksId        :: !Text
-    , _psgFields         :: !(Maybe Text)
-    , _psgCallback       :: !(Maybe Text)
+    , _psgPp :: !Bool
+    , _psgAccessToken :: !(Maybe Text)
+    , _psgUploadType :: !(Maybe Text)
+    , _psgBearerToken :: !(Maybe Text)
+    , _psgKey :: !(Maybe Key)
+    , _psgOAuthToken :: !(Maybe OAuthToken)
+    , _psgProjectsId :: !Text
+    , _psgSinksId :: !Text
+    , _psgFields :: !(Maybe Text)
+    , _psgCallback :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSinksGet'' with the minimum fields required to make a request.
@@ -130,7 +130,7 @@ projectsSinksGet'
     :: Text -- ^ 'projectsId'
     -> Text -- ^ 'sinksId'
     -> ProjectsSinksGet'
-projectsSinksGet' pPsgProjectsId_ pPsgSinksId_ =
+projectsSinksGet' pPsgProjectsId_ pPsgSinksId_ = 
     ProjectsSinksGet'
     { _psgXgafv = Nothing
     , _psgQuotaUser = Nothing

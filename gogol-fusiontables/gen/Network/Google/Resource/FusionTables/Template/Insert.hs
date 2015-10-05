@@ -43,8 +43,8 @@ module Network.Google.Resource.FusionTables.Template.Insert
     , tiFields
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTemplateInsert@ which the
 -- 'TemplateInsert'' request conforms to.
@@ -65,14 +65,14 @@ type TemplateInsertResource =
 --
 -- /See:/ 'templateInsert'' smart constructor.
 data TemplateInsert' = TemplateInsert'
-    { _tiQuotaUser   :: !(Maybe Text)
+    { _tiQuotaUser :: !(Maybe Text)
     , _tiPrettyPrint :: !Bool
-    , _tiUserIP      :: !(Maybe Text)
-    , _tiPayload     :: !Template
-    , _tiKey         :: !(Maybe Key)
-    , _tiOAuthToken  :: !(Maybe OAuthToken)
-    , _tiTableId     :: !Text
-    , _tiFields      :: !(Maybe Text)
+    , _tiUserIP :: !(Maybe Text)
+    , _tiPayload :: !Template
+    , _tiKey :: !(Maybe Key)
+    , _tiOAuthToken :: !(Maybe OAuthToken)
+    , _tiTableId :: !Text
+    , _tiFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateInsert'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ templateInsert'
     :: Template -- ^ 'payload'
     -> Text -- ^ 'tableId'
     -> TemplateInsert'
-templateInsert' pTiPayload_ pTiTableId_ =
+templateInsert' pTiPayload_ pTiTableId_ = 
     TemplateInsert'
     { _tiQuotaUser = Nothing
     , _tiPrettyPrint = True

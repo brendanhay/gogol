@@ -206,19 +206,19 @@ module Network.Google.ResourceViews
     , owiMessage
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.ResourceViews.ZoneOperations.Get
-import           Network.Google.Resource.ResourceViews.ZoneOperations.List
-import           Network.Google.Resource.ResourceViews.ZoneViews.AddResources
-import           Network.Google.Resource.ResourceViews.ZoneViews.Delete
-import           Network.Google.Resource.ResourceViews.ZoneViews.Get
-import           Network.Google.Resource.ResourceViews.ZoneViews.GetService
-import           Network.Google.Resource.ResourceViews.ZoneViews.Insert
-import           Network.Google.Resource.ResourceViews.ZoneViews.List
-import           Network.Google.Resource.ResourceViews.ZoneViews.ListResources
-import           Network.Google.Resource.ResourceViews.ZoneViews.RemoveResources
-import           Network.Google.Resource.ResourceViews.ZoneViews.SetService
-import           Network.Google.ResourceViews.Types
+import Network.Google.Prelude
+import Network.Google.Resource.ResourceViews.ZoneOperations.Get
+import Network.Google.Resource.ResourceViews.ZoneOperations.List
+import Network.Google.Resource.ResourceViews.ZoneViews.AddResources
+import Network.Google.Resource.ResourceViews.ZoneViews.Delete
+import Network.Google.Resource.ResourceViews.ZoneViews.Get
+import Network.Google.Resource.ResourceViews.ZoneViews.GetService
+import Network.Google.Resource.ResourceViews.ZoneViews.Insert
+import Network.Google.Resource.ResourceViews.ZoneViews.List
+import Network.Google.Resource.ResourceViews.ZoneViews.ListResources
+import Network.Google.Resource.ResourceViews.ZoneViews.RemoveResources
+import Network.Google.Resource.ResourceViews.ZoneViews.SetService
+import Network.Google.ResourceViews.Types
 
 {- $resources
 TODO

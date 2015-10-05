@@ -140,7 +140,7 @@ instance FromJSON OperationSchema where
               (\ o -> pure OperationSchema)
 
 instance ToJSON OperationSchema where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Configuration for traffic splitting for versions within a single module.
 -- Traffic splitting allows traffic directed to the module to be assigned
@@ -686,7 +686,7 @@ instance FromJSON VersionEnvVariables where
               (\ o -> pure VersionEnvVariables)
 
 instance ToJSON VersionEnvVariables where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | An Application contains the top-level configuration of an App Engine
 -- application.
@@ -799,7 +799,7 @@ instance FromJSON VersionBetaSettings where
               (\ o -> pure VersionBetaSettings)
 
 instance ToJSON VersionBetaSettings where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
@@ -976,7 +976,7 @@ instance FromJSON StaticDirectoryHandlerHTTPHeaders
 
 instance ToJSON StaticDirectoryHandlerHTTPHeaders
          where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Response message for \`Versions.ListVersions\`.
 --
@@ -1340,7 +1340,7 @@ instance FromJSON StatusDetailsItem where
               (\ o -> pure StatusDetailsItem)
 
 instance ToJSON StatusDetailsItem where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Used to specify extra network settings (for VM runtimes only).
 --
@@ -1425,7 +1425,7 @@ instance FromJSON StaticFilesHandlerHTTPHeaders where
               (\ o -> pure StaticFilesHandlerHTTPHeaders)
 
 instance ToJSON StaticFilesHandlerHTTPHeaders where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Used to specify how many machine resources an app version needs.
 --
@@ -1503,7 +1503,7 @@ instance FromJSON DeploymentFiles where
               (\ o -> pure DeploymentFiles)
 
 instance ToJSON DeploymentFiles where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Target scaling by CPU usage.
 --
@@ -1582,7 +1582,7 @@ instance FromJSON TrafficSplitAllocations where
               (\ o -> pure TrafficSplitAllocations)
 
 instance ToJSON TrafficSplitAllocations where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | A module with manual scaling runs continuously, allowing you to perform
 -- complex initialization and rely on the state of its memory over time.
@@ -2452,7 +2452,7 @@ instance FromJSON OperationResponse where
               (\ o -> pure OperationResponse)
 
 instance ToJSON OperationResponse where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | A Docker (container) image which should be used to start the
 -- application.

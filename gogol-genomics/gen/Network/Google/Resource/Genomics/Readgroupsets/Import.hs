@@ -49,8 +49,8 @@ module Network.Google.Resource.Genomics.Readgroupsets.Import
     , riFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReadgroupsetsImport@ which the
 -- 'ReadgroupsetsImport'' request conforms to.
@@ -78,13 +78,13 @@ type ReadgroupsetsImportResource =
 --
 -- /See:/ 'readgroupsetsImport'' smart constructor.
 data ReadgroupsetsImport' = ReadgroupsetsImport'
-    { _riQuotaUser   :: !(Maybe Text)
+    { _riQuotaUser :: !(Maybe Text)
     , _riPrettyPrint :: !Bool
-    , _riUserIP      :: !(Maybe Text)
-    , _riPayload     :: !ImportReadGroupSetsRequest
-    , _riKey         :: !(Maybe Key)
-    , _riOAuthToken  :: !(Maybe OAuthToken)
-    , _riFields      :: !(Maybe Text)
+    , _riUserIP :: !(Maybe Text)
+    , _riPayload :: !ImportReadGroupSetsRequest
+    , _riKey :: !(Maybe Key)
+    , _riOAuthToken :: !(Maybe OAuthToken)
+    , _riFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsImport'' with the minimum fields required to make a request.
@@ -107,7 +107,7 @@ data ReadgroupsetsImport' = ReadgroupsetsImport'
 readgroupsetsImport'
     :: ImportReadGroupSetsRequest -- ^ 'payload'
     -> ReadgroupsetsImport'
-readgroupsetsImport' pRiPayload_ =
+readgroupsetsImport' pRiPayload_ = 
     ReadgroupsetsImport'
     { _riQuotaUser = Nothing
     , _riPrettyPrint = True

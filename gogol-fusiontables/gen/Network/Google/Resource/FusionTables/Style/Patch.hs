@@ -44,8 +44,8 @@ module Network.Google.Resource.FusionTables.Style.Patch
     , spFields
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesStylePatch@ which the
 -- 'StylePatch'' request conforms to.
@@ -68,15 +68,15 @@ type StylePatchResource =
 --
 -- /See:/ 'stylePatch'' smart constructor.
 data StylePatch' = StylePatch'
-    { _spQuotaUser   :: !(Maybe Text)
+    { _spQuotaUser :: !(Maybe Text)
     , _spPrettyPrint :: !Bool
-    , _spUserIP      :: !(Maybe Text)
-    , _spPayload     :: !StyleSetting
-    , _spKey         :: !(Maybe Key)
-    , _spStyleId     :: !Int32
-    , _spOAuthToken  :: !(Maybe OAuthToken)
-    , _spTableId     :: !Text
-    , _spFields      :: !(Maybe Text)
+    , _spUserIP :: !(Maybe Text)
+    , _spPayload :: !StyleSetting
+    , _spKey :: !(Maybe Key)
+    , _spStyleId :: !Int32
+    , _spOAuthToken :: !(Maybe OAuthToken)
+    , _spTableId :: !Text
+    , _spFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StylePatch'' with the minimum fields required to make a request.
@@ -105,7 +105,7 @@ stylePatch'
     -> Int32 -- ^ 'styleId'
     -> Text -- ^ 'tableId'
     -> StylePatch'
-stylePatch' pSpPayload_ pSpStyleId_ pSpTableId_ =
+stylePatch' pSpPayload_ pSpStyleId_ pSpTableId_ = 
     StylePatch'
     { _spQuotaUser = Nothing
     , _spPrettyPrint = True

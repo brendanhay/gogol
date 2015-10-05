@@ -43,8 +43,8 @@ module Network.Google.Resource.GroupsSettings.Groups.Update
     , guFields
     ) where
 
-import           Network.Google.GroupsSettings.Types
-import           Network.Google.Prelude
+import Network.Google.GroupsSettings.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GroupsSettingsGroupsUpdate@ which the
 -- 'GroupsUpdate'' request conforms to.
@@ -63,14 +63,14 @@ type GroupsUpdateResource =
 --
 -- /See:/ 'groupsUpdate'' smart constructor.
 data GroupsUpdate' = GroupsUpdate'
-    { _guQuotaUser     :: !(Maybe Text)
-    , _guPrettyPrint   :: !Bool
-    , _guUserIP        :: !(Maybe Text)
-    , _guPayload       :: !Groups
-    , _guKey           :: !(Maybe Key)
-    , _guOAuthToken    :: !(Maybe OAuthToken)
+    { _guQuotaUser :: !(Maybe Text)
+    , _guPrettyPrint :: !Bool
+    , _guUserIP :: !(Maybe Text)
+    , _guPayload :: !Groups
+    , _guKey :: !(Maybe Key)
+    , _guOAuthToken :: !(Maybe OAuthToken)
     , _guGroupUniqueId :: !Text
-    , _guFields        :: !(Maybe Text)
+    , _guFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsUpdate'' with the minimum fields required to make a request.
@@ -96,7 +96,7 @@ groupsUpdate'
     :: Groups -- ^ 'payload'
     -> Text -- ^ 'groupUniqueId'
     -> GroupsUpdate'
-groupsUpdate' pGuPayload_ pGuGroupUniqueId_ =
+groupsUpdate' pGuPayload_ pGuGroupUniqueId_ = 
     GroupsUpdate'
     { _guQuotaUser = Nothing
     , _guPrettyPrint = True

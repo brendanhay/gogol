@@ -43,8 +43,8 @@ module Network.Google.Resource.FusionTables.Style.Get
     , sgFields
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesStyleGet@ which the
 -- 'StyleGet'' request conforms to.
@@ -65,14 +65,14 @@ type StyleGetResource =
 --
 -- /See:/ 'styleGet'' smart constructor.
 data StyleGet' = StyleGet'
-    { _sgQuotaUser   :: !(Maybe Text)
+    { _sgQuotaUser :: !(Maybe Text)
     , _sgPrettyPrint :: !Bool
-    , _sgUserIP      :: !(Maybe Text)
-    , _sgKey         :: !(Maybe Key)
-    , _sgStyleId     :: !Int32
-    , _sgOAuthToken  :: !(Maybe OAuthToken)
-    , _sgTableId     :: !Text
-    , _sgFields      :: !(Maybe Text)
+    , _sgUserIP :: !(Maybe Text)
+    , _sgKey :: !(Maybe Key)
+    , _sgStyleId :: !Int32
+    , _sgOAuthToken :: !(Maybe OAuthToken)
+    , _sgTableId :: !Text
+    , _sgFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleGet'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ styleGet'
     :: Int32 -- ^ 'styleId'
     -> Text -- ^ 'tableId'
     -> StyleGet'
-styleGet' pSgStyleId_ pSgTableId_ =
+styleGet' pSgStyleId_ pSgTableId_ = 
     StyleGet'
     { _sgQuotaUser = Nothing
     , _sgPrettyPrint = True

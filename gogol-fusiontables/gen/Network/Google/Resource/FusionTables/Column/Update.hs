@@ -44,8 +44,8 @@ module Network.Google.Resource.FusionTables.Column.Update
     , cuFields
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesColumnUpdate@ which the
 -- 'ColumnUpdate'' request conforms to.
@@ -67,15 +67,15 @@ type ColumnUpdateResource =
 --
 -- /See:/ 'columnUpdate'' smart constructor.
 data ColumnUpdate' = ColumnUpdate'
-    { _cuQuotaUser   :: !(Maybe Text)
+    { _cuQuotaUser :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
-    , _cuUserIP      :: !(Maybe Text)
-    , _cuPayload     :: !Column
-    , _cuKey         :: !(Maybe Key)
-    , _cuOAuthToken  :: !(Maybe OAuthToken)
-    , _cuTableId     :: !Text
-    , _cuColumnId    :: !Text
-    , _cuFields      :: !(Maybe Text)
+    , _cuUserIP :: !(Maybe Text)
+    , _cuPayload :: !Column
+    , _cuKey :: !(Maybe Key)
+    , _cuOAuthToken :: !(Maybe OAuthToken)
+    , _cuTableId :: !Text
+    , _cuColumnId :: !Text
+    , _cuFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnUpdate'' with the minimum fields required to make a request.
@@ -104,7 +104,7 @@ columnUpdate'
     -> Text -- ^ 'tableId'
     -> Text -- ^ 'columnId'
     -> ColumnUpdate'
-columnUpdate' pCuPayload_ pCuTableId_ pCuColumnId_ =
+columnUpdate' pCuPayload_ pCuTableId_ pCuColumnId_ = 
     ColumnUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True

@@ -17,22 +17,22 @@
 --
 module Network.Google.EmailMigration.Types.Product where
 
-import           Network.Google.EmailMigration.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.EmailMigration.Types.Sum
+import Network.Google.Prelude
 
 -- | JSON template for MailItem object in Email Migration API.
 --
 -- /See:/ 'mailItem' smart constructor.
 data MailItem = MailItem
     { _miIsDeleted :: !(Maybe Bool)
-    , _miIsDraft   :: !(Maybe Bool)
+    , _miIsDraft :: !(Maybe Bool)
     , _miIsStarred :: !(Maybe Bool)
-    , _miKind      :: !Text
-    , _miIsUnread  :: !(Maybe Bool)
-    , _miLabels    :: !(Maybe [Text])
-    , _miIsInbox   :: !(Maybe Bool)
-    , _miIsTrash   :: !(Maybe Bool)
-    , _miIsSent    :: !(Maybe Bool)
+    , _miKind :: !Text
+    , _miIsUnread :: !(Maybe Bool)
+    , _miLabels :: !(Maybe [Text])
+    , _miIsInbox :: !(Maybe Bool)
+    , _miIsTrash :: !(Maybe Bool)
+    , _miIsSent :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MailItem' with the minimum fields required to make a request.
@@ -58,7 +58,7 @@ data MailItem = MailItem
 -- * 'miIsSent'
 mailItem
     :: MailItem
-mailItem =
+mailItem = 
     MailItem
     { _miIsDeleted = Nothing
     , _miIsDraft = Nothing

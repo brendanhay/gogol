@@ -1137,7 +1137,7 @@ instance FromJSON LogMessageRequestClientInfo where
               (\ o -> pure LogMessageRequestClientInfo)
 
 instance ToJSON LogMessageRequestClientInfo where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | A lead resource that represents an advertiser contact for a \`Company\`.
 -- These are usually generated via Google Partner Search (the advertiser

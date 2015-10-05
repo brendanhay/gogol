@@ -43,8 +43,8 @@ module Network.Google.Resource.FusionTables.Task.Get
     , tgFields
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTaskGet@ which the
 -- 'TaskGet'' request conforms to.
@@ -65,14 +65,14 @@ type TaskGetResource =
 --
 -- /See:/ 'taskGet'' smart constructor.
 data TaskGet' = TaskGet'
-    { _tgQuotaUser   :: !(Maybe Text)
+    { _tgQuotaUser :: !(Maybe Text)
     , _tgPrettyPrint :: !Bool
-    , _tgTaskId      :: !Text
-    , _tgUserIP      :: !(Maybe Text)
-    , _tgKey         :: !(Maybe Key)
-    , _tgOAuthToken  :: !(Maybe OAuthToken)
-    , _tgTableId     :: !Text
-    , _tgFields      :: !(Maybe Text)
+    , _tgTaskId :: !Text
+    , _tgUserIP :: !(Maybe Text)
+    , _tgKey :: !(Maybe Key)
+    , _tgOAuthToken :: !(Maybe OAuthToken)
+    , _tgTableId :: !Text
+    , _tgFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskGet'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ taskGet'
     :: Text -- ^ 'taskId'
     -> Text -- ^ 'tableId'
     -> TaskGet'
-taskGet' pTgTaskId_ pTgTableId_ =
+taskGet' pTgTaskId_ pTgTableId_ = 
     TaskGet'
     { _tgQuotaUser = Nothing
     , _tgPrettyPrint = True

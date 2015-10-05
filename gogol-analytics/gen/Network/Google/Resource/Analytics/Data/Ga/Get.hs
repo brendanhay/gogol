@@ -53,8 +53,8 @@ module Network.Google.Resource.Analytics.Data.Ga.Get
     , dggFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsDataGaGet@ which the
 -- 'DataGaGet'' request conforms to.
@@ -87,24 +87,24 @@ type DataGaGetResource =
 --
 -- /See:/ 'dataGaGet'' smart constructor.
 data DataGaGet' = DataGaGet'
-    { _dggQuotaUser     :: !(Maybe Text)
-    , _dggMetrics       :: !Text
-    , _dggPrettyPrint   :: !Bool
+    { _dggQuotaUser :: !(Maybe Text)
+    , _dggMetrics :: !Text
+    , _dggPrettyPrint :: !Bool
     , _dggSamplingLevel :: !(Maybe DataGaGetSamplingLevel)
-    , _dggUserIP        :: !(Maybe Text)
-    , _dggFilters       :: !(Maybe Text)
-    , _dggIds           :: !Text
-    , _dggEndDate       :: !Text
-    , _dggKey           :: !(Maybe Key)
-    , _dggOutput        :: !(Maybe DataGaGetOutput)
-    , _dggSort          :: !(Maybe Text)
-    , _dggDimensions    :: !(Maybe Text)
-    , _dggOAuthToken    :: !(Maybe OAuthToken)
-    , _dggStartIndex    :: !(Maybe Int32)
-    , _dggMaxResults    :: !(Maybe Int32)
-    , _dggSegment       :: !(Maybe Text)
-    , _dggStartDate     :: !Text
-    , _dggFields        :: !(Maybe Text)
+    , _dggUserIP :: !(Maybe Text)
+    , _dggFilters :: !(Maybe Text)
+    , _dggIds :: !Text
+    , _dggEndDate :: !Text
+    , _dggKey :: !(Maybe Key)
+    , _dggOutput :: !(Maybe DataGaGetOutput)
+    , _dggSort :: !(Maybe Text)
+    , _dggDimensions :: !(Maybe Text)
+    , _dggOAuthToken :: !(Maybe OAuthToken)
+    , _dggStartIndex :: !(Maybe Int32)
+    , _dggMaxResults :: !(Maybe Int32)
+    , _dggSegment :: !(Maybe Text)
+    , _dggStartDate :: !Text
+    , _dggFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataGaGet'' with the minimum fields required to make a request.
@@ -152,7 +152,7 @@ dataGaGet'
     -> Text -- ^ 'end-date'
     -> Text -- ^ 'start-date'
     -> DataGaGet'
-dataGaGet' pDggMetrics_ pDggIds_ pDggEndDate_ pDggStartDate_ =
+dataGaGet' pDggMetrics_ pDggIds_ pDggEndDate_ pDggStartDate_ = 
     DataGaGet'
     { _dggQuotaUser = Nothing
     , _dggMetrics = pDggMetrics_

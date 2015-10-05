@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Inse
     , mwpawliFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksInsert@ which the
 -- 'ManagementWebPropertyAdWordsLinksInsert'' request conforms to.
@@ -71,15 +71,15 @@ type ManagementWebPropertyAdWordsLinksInsertResource
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksInsert'' smart constructor.
 data ManagementWebPropertyAdWordsLinksInsert' = ManagementWebPropertyAdWordsLinksInsert'
-    { _mwpawliQuotaUser     :: !(Maybe Text)
-    , _mwpawliPrettyPrint   :: !Bool
+    { _mwpawliQuotaUser :: !(Maybe Text)
+    , _mwpawliPrettyPrint :: !Bool
     , _mwpawliWebPropertyId :: !Text
-    , _mwpawliUserIP        :: !(Maybe Text)
-    , _mwpawliPayload       :: !EntityAdWordsLink
-    , _mwpawliAccountId     :: !Text
-    , _mwpawliKey           :: !(Maybe Key)
-    , _mwpawliOAuthToken    :: !(Maybe OAuthToken)
-    , _mwpawliFields        :: !(Maybe Text)
+    , _mwpawliUserIP :: !(Maybe Text)
+    , _mwpawliPayload :: !EntityAdWordsLink
+    , _mwpawliAccountId :: !Text
+    , _mwpawliKey :: !(Maybe Key)
+    , _mwpawliOAuthToken :: !(Maybe OAuthToken)
+    , _mwpawliFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksInsert'' with the minimum fields required to make a request.
@@ -108,7 +108,7 @@ managementWebPropertyAdWordsLinksInsert'
     -> EntityAdWordsLink -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementWebPropertyAdWordsLinksInsert'
-managementWebPropertyAdWordsLinksInsert' pMwpawliWebPropertyId_ pMwpawliPayload_ pMwpawliAccountId_ =
+managementWebPropertyAdWordsLinksInsert' pMwpawliWebPropertyId_ pMwpawliPayload_ pMwpawliAccountId_ = 
     ManagementWebPropertyAdWordsLinksInsert'
     { _mwpawliQuotaUser = Nothing
     , _mwpawliPrettyPrint = False

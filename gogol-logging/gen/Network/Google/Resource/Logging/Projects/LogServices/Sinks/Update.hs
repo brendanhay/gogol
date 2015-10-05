@@ -51,8 +51,8 @@ module Network.Google.Resource.Logging.Projects.LogServices.Sinks.Update
     , plssuCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogServicesSinksUpdate@ which the
 -- 'ProjectsLogServicesSinksUpdate'' request conforms to.
@@ -84,22 +84,22 @@ type ProjectsLogServicesSinksUpdateResource =
 --
 -- /See:/ 'projectsLogServicesSinksUpdate'' smart constructor.
 data ProjectsLogServicesSinksUpdate' = ProjectsLogServicesSinksUpdate'
-    { _plssuXgafv          :: !(Maybe Text)
-    , _plssuQuotaUser      :: !(Maybe Text)
-    , _plssuPrettyPrint    :: !Bool
+    { _plssuXgafv :: !(Maybe Text)
+    , _plssuQuotaUser :: !(Maybe Text)
+    , _plssuPrettyPrint :: !Bool
     , _plssuUploadProtocol :: !(Maybe Text)
-    , _plssuPp             :: !Bool
-    , _plssuAccessToken    :: !(Maybe Text)
-    , _plssuUploadType     :: !(Maybe Text)
-    , _plssuPayload        :: !LogSink
-    , _plssuBearerToken    :: !(Maybe Text)
-    , _plssuKey            :: !(Maybe Key)
-    , _plssuLogServicesId  :: !Text
-    , _plssuOAuthToken     :: !(Maybe OAuthToken)
-    , _plssuProjectsId     :: !Text
-    , _plssuSinksId        :: !Text
-    , _plssuFields         :: !(Maybe Text)
-    , _plssuCallback       :: !(Maybe Text)
+    , _plssuPp :: !Bool
+    , _plssuAccessToken :: !(Maybe Text)
+    , _plssuUploadType :: !(Maybe Text)
+    , _plssuPayload :: !LogSink
+    , _plssuBearerToken :: !(Maybe Text)
+    , _plssuKey :: !(Maybe Key)
+    , _plssuLogServicesId :: !Text
+    , _plssuOAuthToken :: !(Maybe OAuthToken)
+    , _plssuProjectsId :: !Text
+    , _plssuSinksId :: !Text
+    , _plssuFields :: !(Maybe Text)
+    , _plssuCallback :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogServicesSinksUpdate'' with the minimum fields required to make a request.
@@ -143,7 +143,7 @@ projectsLogServicesSinksUpdate'
     -> Text -- ^ 'projectsId'
     -> Text -- ^ 'sinksId'
     -> ProjectsLogServicesSinksUpdate'
-projectsLogServicesSinksUpdate' pPlssuPayload_ pPlssuLogServicesId_ pPlssuProjectsId_ pPlssuSinksId_ =
+projectsLogServicesSinksUpdate' pPlssuPayload_ pPlssuLogServicesId_ pPlssuProjectsId_ pPlssuSinksId_ = 
     ProjectsLogServicesSinksUpdate'
     { _plssuXgafv = Nothing
     , _plssuQuotaUser = Nothing

@@ -44,8 +44,8 @@ module Network.Google.Resource.FusionTables.Query.SQLGet
     , qsqlgFields
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesQuerySQLGet@ which the
 -- 'QuerySQLGet'' request conforms to.
@@ -78,15 +78,15 @@ type QuerySQLGetResource =
 --
 -- /See:/ 'querySQLGet'' smart constructor.
 data QuerySQLGet' = QuerySQLGet'
-    { _qsqlgTyped       :: !(Maybe Bool)
-    , _qsqlgQuotaUser   :: !(Maybe Text)
+    { _qsqlgTyped :: !(Maybe Bool)
+    , _qsqlgQuotaUser :: !(Maybe Text)
     , _qsqlgPrettyPrint :: !Bool
-    , _qsqlgHdrs        :: !(Maybe Bool)
-    , _qsqlgUserIP      :: !(Maybe Text)
-    , _qsqlgKey         :: !(Maybe Key)
-    , _qsqlgOAuthToken  :: !(Maybe OAuthToken)
-    , _qsqlgSQL         :: !Text
-    , _qsqlgFields      :: !(Maybe Text)
+    , _qsqlgHdrs :: !(Maybe Bool)
+    , _qsqlgUserIP :: !(Maybe Text)
+    , _qsqlgKey :: !(Maybe Key)
+    , _qsqlgOAuthToken :: !(Maybe OAuthToken)
+    , _qsqlgSQL :: !Text
+    , _qsqlgFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuerySQLGet'' with the minimum fields required to make a request.
@@ -113,7 +113,7 @@ data QuerySQLGet' = QuerySQLGet'
 querySQLGet'
     :: Text -- ^ 'sql'
     -> QuerySQLGet'
-querySQLGet' pQsqlgSQL_ =
+querySQLGet' pQsqlgSQL_ = 
     QuerySQLGet'
     { _qsqlgTyped = Nothing
     , _qsqlgQuotaUser = Nothing

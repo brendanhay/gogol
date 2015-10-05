@@ -43,8 +43,8 @@ module Network.Google.Resource.AdSense.Savedadstyles.List
     , slFields
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdsenseSavedadstylesList@ which the
 -- 'SavedadstylesList'' request conforms to.
@@ -64,14 +64,14 @@ type SavedadstylesListResource =
 --
 -- /See:/ 'savedadstylesList'' smart constructor.
 data SavedadstylesList' = SavedadstylesList'
-    { _slQuotaUser   :: !(Maybe Text)
+    { _slQuotaUser :: !(Maybe Text)
     , _slPrettyPrint :: !Bool
-    , _slUserIP      :: !(Maybe Text)
-    , _slKey         :: !(Maybe Key)
-    , _slPageToken   :: !(Maybe Text)
-    , _slOAuthToken  :: !(Maybe OAuthToken)
-    , _slMaxResults  :: !(Maybe Int32)
-    , _slFields      :: !(Maybe Text)
+    , _slUserIP :: !(Maybe Text)
+    , _slKey :: !(Maybe Key)
+    , _slPageToken :: !(Maybe Text)
+    , _slOAuthToken :: !(Maybe OAuthToken)
+    , _slMaxResults :: !(Maybe Int32)
+    , _slFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SavedadstylesList'' with the minimum fields required to make a request.
@@ -95,7 +95,7 @@ data SavedadstylesList' = SavedadstylesList'
 -- * 'slFields'
 savedadstylesList'
     :: SavedadstylesList'
-savedadstylesList' =
+savedadstylesList' = 
     SavedadstylesList'
     { _slQuotaUser = Nothing
     , _slPrettyPrint = True

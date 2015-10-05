@@ -17,19 +17,19 @@
 --
 module Network.Google.Prediction.Types.Product where
 
-import           Network.Google.Prediction.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Prediction.Types.Sum
+import Network.Google.Prelude
 
 -- | Model metadata.
 --
 -- /See:/ 'insert2ModelInfo' smart constructor.
 data Insert2ModelInfo = Insert2ModelInfo
-    { _imiModelType              :: !(Maybe Text)
-    , _imiClassWeightedAccuracy  :: !(Maybe Text)
+    { _imiModelType :: !(Maybe Text)
+    , _imiClassWeightedAccuracy :: !(Maybe Text)
     , _imiClassificationAccuracy :: !(Maybe Text)
-    , _imiMeanSquaredError       :: !(Maybe Text)
-    , _imiNumberLabels           :: !(Maybe Int64)
-    , _imiNumberInstances        :: !(Maybe Int64)
+    , _imiMeanSquaredError :: !(Maybe Text)
+    , _imiNumberLabels :: !(Maybe Int64)
+    , _imiNumberInstances :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Insert2ModelInfo' with the minimum fields required to make a request.
@@ -49,7 +49,7 @@ data Insert2ModelInfo = Insert2ModelInfo
 -- * 'imiNumberInstances'
 insert2ModelInfo
     :: Insert2ModelInfo
-insert2ModelInfo =
+insert2ModelInfo = 
     Insert2ModelInfo
     { _imiModelType = Nothing
     , _imiClassWeightedAccuracy = Nothing
@@ -130,14 +130,14 @@ instance ToJSON Insert2ModelInfo where
 --
 -- /See:/ 'analyzeModelDescriptionConfusionMatrixRowTotals' smart constructor.
 data AnalyzeModelDescriptionConfusionMatrixRowTotals =
-    AnalyzeModelDescriptionConfusionMatrixRowTotals
+    AnalyzeModelDescriptionConfusionMatrixRowTotals 
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyzeModelDescriptionConfusionMatrixRowTotals' with the minimum fields required to make a request.
 --
 analyzeModelDescriptionConfusionMatrixRowTotals
     :: AnalyzeModelDescriptionConfusionMatrixRowTotals
-analyzeModelDescriptionConfusionMatrixRowTotals =
+analyzeModelDescriptionConfusionMatrixRowTotals = 
     AnalyzeModelDescriptionConfusionMatrixRowTotals
 
 instance FromJSON
@@ -150,19 +150,19 @@ instance FromJSON
 
 instance ToJSON
          AnalyzeModelDescriptionConfusionMatrixRowTotals where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'insert' smart constructor.
 data Insert = Insert
-    { _iStorageDataLocation      :: !(Maybe Text)
-    , _iModelType                :: !(Maybe Text)
-    , _iTrainingInstances        :: !(Maybe [InsertTrainingInstancesItem])
-    , _iUtility                  :: !(Maybe [InsertUtilityItem])
+    { _iStorageDataLocation :: !(Maybe Text)
+    , _iModelType :: !(Maybe Text)
+    , _iTrainingInstances :: !(Maybe [InsertTrainingInstancesItem])
+    , _iUtility :: !(Maybe [InsertUtilityItem])
     , _iStoragePMMLModelLocation :: !(Maybe Text)
-    , _iSourceModel              :: !(Maybe Text)
-    , _iId                       :: !(Maybe Text)
-    , _iStoragePMMLLocation      :: !(Maybe Text)
+    , _iSourceModel :: !(Maybe Text)
+    , _iId :: !(Maybe Text)
+    , _iStoragePMMLLocation :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Insert' with the minimum fields required to make a request.
@@ -186,7 +186,7 @@ data Insert = Insert
 -- * 'iStoragePMMLLocation'
 insert
     :: Insert
-insert =
+insert = 
     Insert
     { _iStorageDataLocation = Nothing
     , _iModelType = Nothing
@@ -279,9 +279,9 @@ instance ToJSON Insert where
 -- /See:/ 'list' smart constructor.
 data List = List
     { _lNextPageToken :: !(Maybe Text)
-    , _lKind          :: !Text
-    , _lItems         :: !(Maybe [Insert2])
-    , _lSelfLink      :: !(Maybe Text)
+    , _lKind :: !Text
+    , _lItems :: !(Maybe [Insert2])
+    , _lSelfLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'List' with the minimum fields required to make a request.
@@ -297,7 +297,7 @@ data List = List
 -- * 'lSelfLink'
 list
     :: List
-list =
+list = 
     List
     { _lNextPageToken = Nothing
     , _lKind = "prediction#list"
@@ -348,7 +348,7 @@ instance ToJSON List where
 --
 -- /See:/ 'insertUtilityItem' smart constructor.
 data InsertUtilityItem =
-    InsertUtilityItem
+    InsertUtilityItem 
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InsertUtilityItem' with the minimum fields required to make a request.
@@ -363,22 +363,22 @@ instance FromJSON InsertUtilityItem where
               (\ o -> pure InsertUtilityItem)
 
 instance ToJSON InsertUtilityItem where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'insert2' smart constructor.
 data Insert2 = Insert2
-    { _insStorageDataLocation      :: !(Maybe Text)
-    , _insModelType                :: !(Maybe Text)
-    , _insKind                     :: !Text
-    , _insCreated                  :: !(Maybe DateTime')
-    , _insTrainingComplete         :: !(Maybe DateTime')
-    , _insSelfLink                 :: !(Maybe Text)
-    , _insTrainingStatus           :: !(Maybe Text)
+    { _insStorageDataLocation :: !(Maybe Text)
+    , _insModelType :: !(Maybe Text)
+    , _insKind :: !Text
+    , _insCreated :: !(Maybe DateTime')
+    , _insTrainingComplete :: !(Maybe DateTime')
+    , _insSelfLink :: !(Maybe Text)
+    , _insTrainingStatus :: !(Maybe Text)
     , _insStoragePMMLModelLocation :: !(Maybe Text)
-    , _insId                       :: !(Maybe Text)
-    , _insStoragePMMLLocation      :: !(Maybe Text)
-    , _insModelInfo                :: !(Maybe Insert2ModelInfo)
+    , _insId :: !(Maybe Text)
+    , _insStoragePMMLLocation :: !(Maybe Text)
+    , _insModelInfo :: !(Maybe Insert2ModelInfo)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Insert2' with the minimum fields required to make a request.
@@ -408,7 +408,7 @@ data Insert2 = Insert2
 -- * 'insModelInfo'
 insert2
     :: Insert2
-insert2 =
+insert2 = 
     Insert2
     { _insStorageDataLocation = Nothing
     , _insModelType = Nothing
@@ -523,7 +523,7 @@ instance ToJSON Insert2 where
 -- /See:/ 'insertTrainingInstancesItem' smart constructor.
 data InsertTrainingInstancesItem = InsertTrainingInstancesItem
     { _itiiCSVInstance :: !(Maybe [JSONValue])
-    , _itiiOutput      :: !(Maybe Text)
+    , _itiiOutput :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InsertTrainingInstancesItem' with the minimum fields required to make a request.
@@ -535,7 +535,7 @@ data InsertTrainingInstancesItem = InsertTrainingInstancesItem
 -- * 'itiiOutput'
 insertTrainingInstancesItem
     :: InsertTrainingInstancesItem
-insertTrainingInstancesItem =
+insertTrainingInstancesItem = 
     InsertTrainingInstancesItem
     { _itiiCSVInstance = Nothing
     , _itiiOutput = Nothing
@@ -583,7 +583,7 @@ newtype InputInput = InputInput
 -- * 'iiCSVInstance'
 inputInput
     :: InputInput
-inputInput =
+inputInput = 
     InputInput
     { _iiCSVInstance = Nothing
     }
@@ -623,7 +623,7 @@ data AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem = AnalyzeDataDescri
 -- * 'addficviCount'
 analyzeDataDescriptionFeaturesItemCategoricalValuesItem
     :: AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem
-analyzeDataDescriptionFeaturesItemCategoricalValuesItem =
+analyzeDataDescriptionFeaturesItemCategoricalValuesItem = 
     AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem
     { _addficviValue = Nothing
     , _addficviCount = Nothing
@@ -665,8 +665,8 @@ instance ToJSON
 --
 -- /See:/ 'analyzeDataDescriptionFeaturesItemNumeric' smart constructor.
 data AnalyzeDataDescriptionFeaturesItemNumeric = AnalyzeDataDescriptionFeaturesItemNumeric
-    { _addfinMean     :: !(Maybe Text)
-    , _addfinCount    :: !(Maybe Int64)
+    { _addfinMean :: !(Maybe Text)
+    , _addfinCount :: !(Maybe Int64)
     , _addfinVariance :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -681,7 +681,7 @@ data AnalyzeDataDescriptionFeaturesItemNumeric = AnalyzeDataDescriptionFeaturesI
 -- * 'addfinVariance'
 analyzeDataDescriptionFeaturesItemNumeric
     :: AnalyzeDataDescriptionFeaturesItemNumeric
-analyzeDataDescriptionFeaturesItemNumeric =
+analyzeDataDescriptionFeaturesItemNumeric = 
     AnalyzeDataDescriptionFeaturesItemNumeric
     { _addfinMean = Nothing
     , _addfinCount = Nothing
@@ -736,7 +736,7 @@ newtype Input = Input
 -- * 'iInput'
 input
     :: Input
-input =
+input = 
     Input
     { _iInput = Nothing
     }
@@ -759,7 +759,7 @@ instance ToJSON Input where
 -- /See:/ 'analyzeDataDescriptionFeaturesItemCategorical' smart constructor.
 data AnalyzeDataDescriptionFeaturesItemCategorical = AnalyzeDataDescriptionFeaturesItemCategorical
     { _addficValues :: !(Maybe [AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem])
-    , _addficCount  :: !(Maybe Int64)
+    , _addficCount :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyzeDataDescriptionFeaturesItemCategorical' with the minimum fields required to make a request.
@@ -771,7 +771,7 @@ data AnalyzeDataDescriptionFeaturesItemCategorical = AnalyzeDataDescriptionFeatu
 -- * 'addficCount'
 analyzeDataDescriptionFeaturesItemCategorical
     :: AnalyzeDataDescriptionFeaturesItemCategorical
-analyzeDataDescriptionFeaturesItemCategorical =
+analyzeDataDescriptionFeaturesItemCategorical = 
     AnalyzeDataDescriptionFeaturesItemCategorical
     { _addficValues = Nothing
     , _addficCount = Nothing
@@ -823,7 +823,7 @@ data AnalyzeDataDescriptionOutputFeatureTextItem = AnalyzeDataDescriptionOutputF
 -- * 'addoftiCount'
 analyzeDataDescriptionOutputFeatureTextItem
     :: AnalyzeDataDescriptionOutputFeatureTextItem
-analyzeDataDescriptionOutputFeatureTextItem =
+analyzeDataDescriptionOutputFeatureTextItem = 
     AnalyzeDataDescriptionOutputFeatureTextItem
     { _addoftiValue = Nothing
     , _addoftiCount = Nothing
@@ -873,7 +873,7 @@ data OutputOutputMultiItem = OutputOutputMultiItem
 -- * 'oomiLabel'
 outputOutputMultiItem
     :: OutputOutputMultiItem
-outputOutputMultiItem =
+outputOutputMultiItem = 
     OutputOutputMultiItem
     { _oomiScore = Nothing
     , _oomiLabel = Nothing
@@ -906,12 +906,12 @@ instance ToJSON OutputOutputMultiItem where
 --
 -- /See:/ 'analyze' smart constructor.
 data Analyze = Analyze
-    { _aKind             :: !Text
+    { _aKind :: !Text
     , _aModelDescription :: !(Maybe AnalyzeModelDescription)
-    , _aSelfLink         :: !(Maybe Text)
-    , _aId               :: !(Maybe Text)
-    , _aErrors           :: !(Maybe [AnalyzeErrorsItem])
-    , _aDataDescription  :: !(Maybe AnalyzeDataDescription)
+    , _aSelfLink :: !(Maybe Text)
+    , _aId :: !(Maybe Text)
+    , _aErrors :: !(Maybe [AnalyzeErrorsItem])
+    , _aDataDescription :: !(Maybe AnalyzeDataDescription)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Analyze' with the minimum fields required to make a request.
@@ -931,7 +931,7 @@ data Analyze = Analyze
 -- * 'aDataDescription'
 analyze
     :: Analyze
-analyze =
+analyze = 
     Analyze
     { _aKind = "prediction#analyze"
     , _aModelDescription = Nothing
@@ -1003,7 +1003,7 @@ instance ToJSON Analyze where
 --
 -- /See:/ 'analyzeModelDescriptionConfusionMatrix' smart constructor.
 data AnalyzeModelDescriptionConfusionMatrix =
-    AnalyzeModelDescriptionConfusionMatrix
+    AnalyzeModelDescriptionConfusionMatrix 
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyzeModelDescriptionConfusionMatrix' with the minimum fields required to make a request.
@@ -1020,16 +1020,16 @@ instance FromJSON
 
 instance ToJSON
          AnalyzeModelDescriptionConfusionMatrix where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'output' smart constructor.
 data Output = Output
     { _oOutputValue :: !(Maybe Text)
-    , _oKind        :: !Text
+    , _oKind :: !Text
     , _oOutputLabel :: !(Maybe Text)
-    , _oSelfLink    :: !(Maybe Text)
-    , _oId          :: !(Maybe Text)
+    , _oSelfLink :: !(Maybe Text)
+    , _oId :: !(Maybe Text)
     , _oOutputMulti :: !(Maybe [OutputOutputMultiItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1050,7 +1050,7 @@ data Output = Output
 -- * 'oOutputMulti'
 output
     :: Output
-output =
+output = 
     Output
     { _oOutputValue = Nothing
     , _oKind = "prediction#output"
@@ -1117,8 +1117,8 @@ instance ToJSON Output where
 --
 -- /See:/ 'analyzeDataDescriptionOutputFeatureNumeric' smart constructor.
 data AnalyzeDataDescriptionOutputFeatureNumeric = AnalyzeDataDescriptionOutputFeatureNumeric
-    { _addofnMean     :: !(Maybe Text)
-    , _addofnCount    :: !(Maybe Int64)
+    { _addofnMean :: !(Maybe Text)
+    , _addofnCount :: !(Maybe Int64)
     , _addofnVariance :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1133,7 +1133,7 @@ data AnalyzeDataDescriptionOutputFeatureNumeric = AnalyzeDataDescriptionOutputFe
 -- * 'addofnVariance'
 analyzeDataDescriptionOutputFeatureNumeric
     :: AnalyzeDataDescriptionOutputFeatureNumeric
-analyzeDataDescriptionOutputFeatureNumeric =
+analyzeDataDescriptionOutputFeatureNumeric = 
     AnalyzeDataDescriptionOutputFeatureNumeric
     { _addofnMean = Nothing
     , _addofnCount = Nothing
@@ -1178,7 +1178,7 @@ instance ToJSON
 --
 -- /See:/ 'analyzeErrorsItem' smart constructor.
 data AnalyzeErrorsItem =
-    AnalyzeErrorsItem
+    AnalyzeErrorsItem 
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyzeErrorsItem' with the minimum fields required to make a request.
@@ -1193,14 +1193,14 @@ instance FromJSON AnalyzeErrorsItem where
               (\ o -> pure AnalyzeErrorsItem)
 
 instance ToJSON AnalyzeErrorsItem where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Description of the data the model was trained on.
 --
 -- /See:/ 'analyzeDataDescription' smart constructor.
 data AnalyzeDataDescription = AnalyzeDataDescription
     { _addOutputFeature :: !(Maybe AnalyzeDataDescriptionOutputFeature)
-    , _addFeatures      :: !(Maybe [AnalyzeDataDescriptionFeaturesItem])
+    , _addFeatures :: !(Maybe [AnalyzeDataDescriptionFeaturesItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyzeDataDescription' with the minimum fields required to make a request.
@@ -1212,7 +1212,7 @@ data AnalyzeDataDescription = AnalyzeDataDescription
 -- * 'addFeatures'
 analyzeDataDescription
     :: AnalyzeDataDescription
-analyzeDataDescription =
+analyzeDataDescription = 
     AnalyzeDataDescription
     { _addOutputFeature = Nothing
     , _addFeatures = Nothing
@@ -1251,8 +1251,8 @@ instance ToJSON AnalyzeDataDescription where
 -- /See:/ 'analyzeModelDescription' smart constructor.
 data AnalyzeModelDescription = AnalyzeModelDescription
     { _amdConfusionMatrixRowTotals :: !(Maybe AnalyzeModelDescriptionConfusionMatrixRowTotals)
-    , _amdConfusionMatrix          :: !(Maybe AnalyzeModelDescriptionConfusionMatrix)
-    , _amdModelInfo                :: !(Maybe Insert2)
+    , _amdConfusionMatrix :: !(Maybe AnalyzeModelDescriptionConfusionMatrix)
+    , _amdModelInfo :: !(Maybe Insert2)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyzeModelDescription' with the minimum fields required to make a request.
@@ -1266,7 +1266,7 @@ data AnalyzeModelDescription = AnalyzeModelDescription
 -- * 'amdModelInfo'
 analyzeModelDescription
     :: AnalyzeModelDescription
-analyzeModelDescription =
+analyzeModelDescription = 
     AnalyzeModelDescription
     { _amdConfusionMatrixRowTotals = Nothing
     , _amdConfusionMatrix = Nothing
@@ -1327,7 +1327,7 @@ newtype AnalyzeDataDescriptionFeaturesItemText = AnalyzeDataDescriptionFeaturesI
 -- * 'addfitCount'
 analyzeDataDescriptionFeaturesItemText
     :: AnalyzeDataDescriptionFeaturesItemText
-analyzeDataDescriptionFeaturesItemText =
+analyzeDataDescriptionFeaturesItemText = 
     AnalyzeDataDescriptionFeaturesItemText
     { _addfitCount = Nothing
     }
@@ -1353,9 +1353,9 @@ instance ToJSON
 --
 -- /See:/ 'analyzeDataDescriptionFeaturesItem' smart constructor.
 data AnalyzeDataDescriptionFeaturesItem = AnalyzeDataDescriptionFeaturesItem
-    { _addfiText        :: !(Maybe AnalyzeDataDescriptionFeaturesItemText)
-    , _addfiNumeric     :: !(Maybe AnalyzeDataDescriptionFeaturesItemNumeric)
-    , _addfiIndex       :: !(Maybe Int64)
+    { _addfiText :: !(Maybe AnalyzeDataDescriptionFeaturesItemText)
+    , _addfiNumeric :: !(Maybe AnalyzeDataDescriptionFeaturesItemNumeric)
+    , _addfiIndex :: !(Maybe Int64)
     , _addfiCategorical :: !(Maybe AnalyzeDataDescriptionFeaturesItemCategorical)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1372,7 +1372,7 @@ data AnalyzeDataDescriptionFeaturesItem = AnalyzeDataDescriptionFeaturesItem
 -- * 'addfiCategorical'
 analyzeDataDescriptionFeaturesItem
     :: AnalyzeDataDescriptionFeaturesItem
-analyzeDataDescriptionFeaturesItem =
+analyzeDataDescriptionFeaturesItem = 
     AnalyzeDataDescriptionFeaturesItem
     { _addfiText = Nothing
     , _addfiNumeric = Nothing
@@ -1425,7 +1425,7 @@ instance ToJSON AnalyzeDataDescriptionFeaturesItem
 -- /See:/ 'update' smart constructor.
 data Update = Update
     { _uCSVInstance :: !(Maybe [JSONValue])
-    , _uOutput      :: !(Maybe Text)
+    , _uOutput :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Update' with the minimum fields required to make a request.
@@ -1437,7 +1437,7 @@ data Update = Update
 -- * 'uOutput'
 update
     :: Update
-update =
+update = 
     Update
     { _uCSVInstance = Nothing
     , _uOutput = Nothing
@@ -1473,7 +1473,7 @@ instance ToJSON Update where
 --
 -- /See:/ 'analyzeDataDescriptionOutputFeature' smart constructor.
 data AnalyzeDataDescriptionOutputFeature = AnalyzeDataDescriptionOutputFeature
-    { _addofText    :: !(Maybe [AnalyzeDataDescriptionOutputFeatureTextItem])
+    { _addofText :: !(Maybe [AnalyzeDataDescriptionOutputFeatureTextItem])
     , _addofNumeric :: !(Maybe AnalyzeDataDescriptionOutputFeatureNumeric)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1486,7 +1486,7 @@ data AnalyzeDataDescriptionOutputFeature = AnalyzeDataDescriptionOutputFeature
 -- * 'addofNumeric'
 analyzeDataDescriptionOutputFeature
     :: AnalyzeDataDescriptionOutputFeature
-analyzeDataDescriptionOutputFeature =
+analyzeDataDescriptionOutputFeature = 
     AnalyzeDataDescriptionOutputFeature
     { _addofText = Nothing
     , _addofNumeric = Nothing

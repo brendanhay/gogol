@@ -45,8 +45,8 @@ module Network.Google.Resource.FusionTables.Column.Patch
     , cpFields
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesColumnPatch@ which the
 -- 'ColumnPatch'' request conforms to.
@@ -69,15 +69,15 @@ type ColumnPatchResource =
 --
 -- /See:/ 'columnPatch'' smart constructor.
 data ColumnPatch' = ColumnPatch'
-    { _cpQuotaUser   :: !(Maybe Text)
+    { _cpQuotaUser :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
-    , _cpUserIP      :: !(Maybe Text)
-    , _cpPayload     :: !Column
-    , _cpKey         :: !(Maybe Key)
-    , _cpOAuthToken  :: !(Maybe OAuthToken)
-    , _cpTableId     :: !Text
-    , _cpColumnId    :: !Text
-    , _cpFields      :: !(Maybe Text)
+    , _cpUserIP :: !(Maybe Text)
+    , _cpPayload :: !Column
+    , _cpKey :: !(Maybe Key)
+    , _cpOAuthToken :: !(Maybe OAuthToken)
+    , _cpTableId :: !Text
+    , _cpColumnId :: !Text
+    , _cpFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnPatch'' with the minimum fields required to make a request.
@@ -106,7 +106,7 @@ columnPatch'
     -> Text -- ^ 'tableId'
     -> Text -- ^ 'columnId'
     -> ColumnPatch'
-columnPatch' pCpPayload_ pCpTableId_ pCpColumnId_ =
+columnPatch' pCpPayload_ pCpTableId_ pCpColumnId_ = 
     ColumnPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True

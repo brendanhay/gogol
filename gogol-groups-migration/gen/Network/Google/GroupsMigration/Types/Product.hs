@@ -17,14 +17,14 @@
 --
 module Network.Google.GroupsMigration.Types.Product where
 
-import           Network.Google.GroupsMigration.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.GroupsMigration.Types.Sum
+import Network.Google.Prelude
 
 -- | JSON response template for groups migration API.
 --
 -- /See:/ 'groups' smart constructor.
 data Groups = Groups
-    { _gKind         :: !Text
+    { _gKind :: !Text
     , _gResponseCode :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -37,7 +37,7 @@ data Groups = Groups
 -- * 'gResponseCode'
 groups
     :: Groups
-groups =
+groups = 
     Groups
     { _gKind = "groupsmigration#groups"
     , _gResponseCode = Nothing

@@ -43,8 +43,8 @@ module Network.Google.Resource.FusionTables.Style.Delete
     , sdFields
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesStyleDelete@ which the
 -- 'StyleDelete'' request conforms to.
@@ -65,14 +65,14 @@ type StyleDeleteResource =
 --
 -- /See:/ 'styleDelete'' smart constructor.
 data StyleDelete' = StyleDelete'
-    { _sdQuotaUser   :: !(Maybe Text)
+    { _sdQuotaUser :: !(Maybe Text)
     , _sdPrettyPrint :: !Bool
-    , _sdUserIP      :: !(Maybe Text)
-    , _sdKey         :: !(Maybe Key)
-    , _sdStyleId     :: !Int32
-    , _sdOAuthToken  :: !(Maybe OAuthToken)
-    , _sdTableId     :: !Text
-    , _sdFields      :: !(Maybe Text)
+    , _sdUserIP :: !(Maybe Text)
+    , _sdKey :: !(Maybe Key)
+    , _sdStyleId :: !Int32
+    , _sdOAuthToken :: !(Maybe OAuthToken)
+    , _sdTableId :: !Text
+    , _sdFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleDelete'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ styleDelete'
     :: Int32 -- ^ 'styleId'
     -> Text -- ^ 'tableId'
     -> StyleDelete'
-styleDelete' pSdStyleId_ pSdTableId_ =
+styleDelete' pSdStyleId_ pSdTableId_ = 
     StyleDelete'
     { _sdQuotaUser = Nothing
     , _sdPrettyPrint = True

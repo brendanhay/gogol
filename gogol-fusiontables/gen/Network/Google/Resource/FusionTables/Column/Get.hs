@@ -43,8 +43,8 @@ module Network.Google.Resource.FusionTables.Column.Get
     , cgFields
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesColumnGet@ which the
 -- 'ColumnGet'' request conforms to.
@@ -65,14 +65,14 @@ type ColumnGetResource =
 --
 -- /See:/ 'columnGet'' smart constructor.
 data ColumnGet' = ColumnGet'
-    { _cgQuotaUser   :: !(Maybe Text)
+    { _cgQuotaUser :: !(Maybe Text)
     , _cgPrettyPrint :: !Bool
-    , _cgUserIP      :: !(Maybe Text)
-    , _cgKey         :: !(Maybe Key)
-    , _cgOAuthToken  :: !(Maybe OAuthToken)
-    , _cgTableId     :: !Text
-    , _cgColumnId    :: !Text
-    , _cgFields      :: !(Maybe Text)
+    , _cgUserIP :: !(Maybe Text)
+    , _cgKey :: !(Maybe Key)
+    , _cgOAuthToken :: !(Maybe OAuthToken)
+    , _cgTableId :: !Text
+    , _cgColumnId :: !Text
+    , _cgFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnGet'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ columnGet'
     :: Text -- ^ 'tableId'
     -> Text -- ^ 'columnId'
     -> ColumnGet'
-columnGet' pCgTableId_ pCgColumnId_ =
+columnGet' pCgTableId_ pCgColumnId_ = 
     ColumnGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True

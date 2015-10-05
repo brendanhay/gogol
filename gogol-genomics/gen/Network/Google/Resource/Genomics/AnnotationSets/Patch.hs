@@ -46,8 +46,8 @@ module Network.Google.Resource.Genomics.AnnotationSets.Patch
     , aspFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsAnnotationSetsPatch@ which the
 -- 'AnnotationSetsPatch'' request conforms to.
@@ -71,14 +71,14 @@ type AnnotationSetsPatchResource =
 --
 -- /See:/ 'annotationSetsPatch'' smart constructor.
 data AnnotationSetsPatch' = AnnotationSetsPatch'
-    { _aspQuotaUser       :: !(Maybe Text)
-    , _aspPrettyPrint     :: !Bool
+    { _aspQuotaUser :: !(Maybe Text)
+    , _aspPrettyPrint :: !Bool
     , _aspAnnotationSetId :: !Text
-    , _aspUserIP          :: !(Maybe Text)
-    , _aspPayload         :: !AnnotationSet
-    , _aspKey             :: !(Maybe Key)
-    , _aspOAuthToken      :: !(Maybe OAuthToken)
-    , _aspFields          :: !(Maybe Text)
+    , _aspUserIP :: !(Maybe Text)
+    , _aspPayload :: !AnnotationSet
+    , _aspKey :: !(Maybe Key)
+    , _aspOAuthToken :: !(Maybe OAuthToken)
+    , _aspFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSetsPatch'' with the minimum fields required to make a request.
@@ -104,7 +104,7 @@ annotationSetsPatch'
     :: Text -- ^ 'annotationSetId'
     -> AnnotationSet -- ^ 'payload'
     -> AnnotationSetsPatch'
-annotationSetsPatch' pAspAnnotationSetId_ pAspPayload_ =
+annotationSetsPatch' pAspAnnotationSetId_ pAspPayload_ = 
     AnnotationSetsPatch'
     { _aspQuotaUser = Nothing
     , _aspPrettyPrint = True

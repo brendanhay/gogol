@@ -47,8 +47,8 @@ module Network.Google.Resource.Blogger.PostUserInfos.Get
     , puigFields
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @BloggerPostUserInfosGet@ which the
 -- 'PostUserInfosGet'' request conforms to.
@@ -75,16 +75,16 @@ type PostUserInfosGetResource =
 --
 -- /See:/ 'postUserInfosGet'' smart constructor.
 data PostUserInfosGet' = PostUserInfosGet'
-    { _puigQuotaUser   :: !(Maybe Text)
+    { _puigQuotaUser :: !(Maybe Text)
     , _puigPrettyPrint :: !Bool
-    , _puigUserIP      :: !(Maybe Text)
-    , _puigBlogId      :: !Text
+    , _puigUserIP :: !(Maybe Text)
+    , _puigBlogId :: !Text
     , _puigMaxComments :: !(Maybe Word32)
-    , _puigUserId      :: !Text
-    , _puigKey         :: !(Maybe Key)
-    , _puigPostId      :: !Text
-    , _puigOAuthToken  :: !(Maybe OAuthToken)
-    , _puigFields      :: !(Maybe Text)
+    , _puigUserId :: !Text
+    , _puigKey :: !(Maybe Key)
+    , _puigPostId :: !Text
+    , _puigOAuthToken :: !(Maybe OAuthToken)
+    , _puigFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostUserInfosGet'' with the minimum fields required to make a request.
@@ -115,7 +115,7 @@ postUserInfosGet'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'postId'
     -> PostUserInfosGet'
-postUserInfosGet' pPuigBlogId_ pPuigUserId_ pPuigPostId_ =
+postUserInfosGet' pPuigBlogId_ pPuigUserId_ pPuigPostId_ = 
     PostUserInfosGet'
     { _puigQuotaUser = Nothing
     , _puigPrettyPrint = True

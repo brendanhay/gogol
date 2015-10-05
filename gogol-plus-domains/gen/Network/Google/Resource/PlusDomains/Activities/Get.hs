@@ -42,8 +42,8 @@ module Network.Google.Resource.PlusDomains.Activities.Get
     , agFields
     ) where
 
-import           Network.Google.PlusDomains.Types
-import           Network.Google.Prelude
+import Network.Google.PlusDomains.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsActivitiesGet@ which the
 -- 'ActivitiesGet'' request conforms to.
@@ -62,13 +62,13 @@ type ActivitiesGetResource =
 --
 -- /See:/ 'activitiesGet'' smart constructor.
 data ActivitiesGet' = ActivitiesGet'
-    { _agQuotaUser   :: !(Maybe Text)
+    { _agQuotaUser :: !(Maybe Text)
     , _agPrettyPrint :: !Bool
-    , _agUserIP      :: !(Maybe Text)
-    , _agActivityId  :: !Text
-    , _agKey         :: !(Maybe Key)
-    , _agOAuthToken  :: !(Maybe OAuthToken)
-    , _agFields      :: !(Maybe Text)
+    , _agUserIP :: !(Maybe Text)
+    , _agActivityId :: !Text
+    , _agKey :: !(Maybe Key)
+    , _agOAuthToken :: !(Maybe OAuthToken)
+    , _agFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesGet'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data ActivitiesGet' = ActivitiesGet'
 activitiesGet'
     :: Text -- ^ 'activityId'
     -> ActivitiesGet'
-activitiesGet' pAgActivityId_ =
+activitiesGet' pAgActivityId_ = 
     ActivitiesGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True

@@ -515,7 +515,7 @@ instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty)
 
 instance ToJSON Empty where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Request passed to PauseTransferOperation.
 --
@@ -536,7 +536,7 @@ instance FromJSON PauseTransferOperationRequest where
               (\ o -> pure PauseTransferOperationRequest)
 
 instance ToJSON PauseTransferOperationRequest where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Google service account
 --
@@ -593,7 +593,7 @@ instance FromJSON StatusDetailsItem where
               (\ o -> pure StatusDetailsItem)
 
 instance ToJSON StatusDetailsItem where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Represents a whole calendar date, e.g. date of birth. The time of day
 -- and time zone are either specified elsewhere or are not significant. The
@@ -1394,7 +1394,7 @@ instance FromJSON OperationMetadata where
               (\ o -> pure OperationMetadata)
 
 instance ToJSON OperationMetadata where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | TransferOptions uses three boolean parameters to define the actions to
 -- be performed on objects in a transfer.
@@ -1774,7 +1774,7 @@ instance FromJSON OperationResponse where
               (\ o -> pure OperationResponse)
 
 instance ToJSON OperationResponse where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Request passed to ResumeTransferOperation.
 --
@@ -1796,7 +1796,7 @@ instance FromJSON ResumeTransferOperationRequest
               (\ o -> pure ResumeTransferOperationRequest)
 
 instance ToJSON ResumeTransferOperationRequest where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | AWS access key (see [AWS Security
 -- Credentials](http:\/\/docs.aws.amazon.com\/general\/latest\/gr\/aws-security-credentials.html)).

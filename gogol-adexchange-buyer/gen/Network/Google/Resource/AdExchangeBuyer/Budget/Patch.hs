@@ -46,8 +46,8 @@ module Network.Google.Resource.AdExchangeBuyer.Budget.Patch
     , bpFields
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerBudgetPatch@ which the
 -- 'BudgetPatch'' request conforms to.
@@ -70,15 +70,15 @@ type BudgetPatchResource =
 --
 -- /See:/ 'budgetPatch'' smart constructor.
 data BudgetPatch' = BudgetPatch'
-    { _bpQuotaUser   :: !(Maybe Text)
+    { _bpQuotaUser :: !(Maybe Text)
     , _bpPrettyPrint :: !Bool
-    , _bpUserIP      :: !(Maybe Text)
-    , _bpPayload     :: !Budget
-    , _bpAccountId   :: !Int64
-    , _bpKey         :: !(Maybe Key)
-    , _bpOAuthToken  :: !(Maybe OAuthToken)
-    , _bpBillingId   :: !Int64
-    , _bpFields      :: !(Maybe Text)
+    , _bpUserIP :: !(Maybe Text)
+    , _bpPayload :: !Budget
+    , _bpAccountId :: !Int64
+    , _bpKey :: !(Maybe Key)
+    , _bpOAuthToken :: !(Maybe OAuthToken)
+    , _bpBillingId :: !Int64
+    , _bpFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BudgetPatch'' with the minimum fields required to make a request.
@@ -107,7 +107,7 @@ budgetPatch'
     -> Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'billingId'
     -> BudgetPatch'
-budgetPatch' pBpPayload_ pBpAccountId_ pBpBillingId_ =
+budgetPatch' pBpPayload_ pBpAccountId_ pBpBillingId_ = 
     BudgetPatch'
     { _bpQuotaUser = Nothing
     , _bpPrettyPrint = True

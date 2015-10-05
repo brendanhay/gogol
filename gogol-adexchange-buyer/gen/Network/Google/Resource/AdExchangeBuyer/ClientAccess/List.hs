@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.List
     , calFields
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerClientAccessList@ which the
 -- 'ClientAccessList'' request conforms to.
@@ -62,13 +62,13 @@ type ClientAccessListResource =
 --
 -- /See:/ 'clientAccessList'' smart constructor.
 data ClientAccessList' = ClientAccessList'
-    { _calQuotaUser   :: !(Maybe Text)
+    { _calQuotaUser :: !(Maybe Text)
     , _calPrettyPrint :: !Bool
-    , _calUserIP      :: !(Maybe Text)
-    , _calPayload     :: !ListClientAccessCapabilitiesRequest
-    , _calKey         :: !(Maybe Key)
-    , _calOAuthToken  :: !(Maybe OAuthToken)
-    , _calFields      :: !(Maybe Text)
+    , _calUserIP :: !(Maybe Text)
+    , _calPayload :: !ListClientAccessCapabilitiesRequest
+    , _calKey :: !(Maybe Key)
+    , _calOAuthToken :: !(Maybe OAuthToken)
+    , _calFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessList'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data ClientAccessList' = ClientAccessList'
 clientAccessList'
     :: ListClientAccessCapabilitiesRequest -- ^ 'payload'
     -> ClientAccessList'
-clientAccessList' pCalPayload_ =
+clientAccessList' pCalPayload_ = 
     ClientAccessList'
     { _calQuotaUser = Nothing
     , _calPrettyPrint = True

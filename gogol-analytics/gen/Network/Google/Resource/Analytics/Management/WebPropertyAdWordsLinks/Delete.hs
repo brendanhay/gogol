@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Dele
     , mwpawldFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksDelete@ which the
 -- 'ManagementWebPropertyAdWordsLinksDelete'' request conforms to.
@@ -70,15 +70,15 @@ type ManagementWebPropertyAdWordsLinksDeleteResource
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksDelete'' smart constructor.
 data ManagementWebPropertyAdWordsLinksDelete' = ManagementWebPropertyAdWordsLinksDelete'
-    { _mwpawldQuotaUser                :: !(Maybe Text)
-    , _mwpawldPrettyPrint              :: !Bool
-    , _mwpawldWebPropertyId            :: !Text
-    , _mwpawldUserIP                   :: !(Maybe Text)
-    , _mwpawldAccountId                :: !Text
-    , _mwpawldKey                      :: !(Maybe Key)
+    { _mwpawldQuotaUser :: !(Maybe Text)
+    , _mwpawldPrettyPrint :: !Bool
+    , _mwpawldWebPropertyId :: !Text
+    , _mwpawldUserIP :: !(Maybe Text)
+    , _mwpawldAccountId :: !Text
+    , _mwpawldKey :: !(Maybe Key)
     , _mwpawldWebPropertyAdWordsLinkId :: !Text
-    , _mwpawldOAuthToken               :: !(Maybe OAuthToken)
-    , _mwpawldFields                   :: !(Maybe Text)
+    , _mwpawldOAuthToken :: !(Maybe OAuthToken)
+    , _mwpawldFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksDelete'' with the minimum fields required to make a request.
@@ -107,7 +107,7 @@ managementWebPropertyAdWordsLinksDelete'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'webPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksDelete'
-managementWebPropertyAdWordsLinksDelete' pMwpawldWebPropertyId_ pMwpawldAccountId_ pMwpawldWebPropertyAdWordsLinkId_ =
+managementWebPropertyAdWordsLinksDelete' pMwpawldWebPropertyId_ pMwpawldAccountId_ pMwpawldWebPropertyAdWordsLinkId_ = 
     ManagementWebPropertyAdWordsLinksDelete'
     { _mwpawldQuotaUser = Nothing
     , _mwpawldPrettyPrint = False

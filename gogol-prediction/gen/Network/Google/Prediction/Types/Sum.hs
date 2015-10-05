@@ -16,4 +16,4 @@
 --
 module Network.Google.Prediction.Types.Sum where
 
-import           Network.Google.Prelude
+import Network.Google.Prelude

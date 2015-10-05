@@ -39,7 +39,7 @@ instance FromJSON JobExecutionInfoStages where
               (\ o -> pure JobExecutionInfoStages)
 
 instance ToJSON JobExecutionInfoStages where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | All configuration data for a particular Computation.
 --
@@ -585,7 +585,7 @@ instance FromJSON WorkerPoolMetadata where
               (\ o -> pure WorkerPoolMetadata)
 
 instance ToJSON WorkerPoolMetadata where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Settings for WorkerPool autoscaling.
 --
@@ -822,7 +822,7 @@ instance FromJSON EnvironmentVersion where
               (\ o -> pure EnvironmentVersion)
 
 instance ToJSON EnvironmentVersion where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | A sink that records can be encoded and written to.
 --
@@ -993,7 +993,7 @@ instance FromJSON EnvironmentUserAgent where
               (\ o -> pure EnvironmentUserAgent)
 
 instance ToJSON EnvironmentUserAgent where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Describes the data disk used by a workflow job.
 --
@@ -1460,7 +1460,7 @@ instance FromJSON MetricStructuredNameContext where
               (\ o -> pure MetricStructuredNameContext)
 
 instance ToJSON MetricStructuredNameContext where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Identifies the location of a streaming computation stage, for
 -- stage-to-stage communication.
@@ -1855,7 +1855,7 @@ instance FromJSON JobTransformNameMApping where
               (\ o -> pure JobTransformNameMApping)
 
 instance ToJSON JobTransformNameMApping where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | The source to read from, plus its parameters.
 --
@@ -1875,7 +1875,7 @@ instance FromJSON SourceSpec where
           = withObject "SourceSpec" (\ o -> pure SourceSpec)
 
 instance ToJSON SourceSpec where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Metadata about a Source useful for automatically optimizing and tuning
 -- the pipeline, etc.
@@ -1963,7 +1963,7 @@ instance FromJSON EnvironmentInternalExperiments
               (\ o -> pure EnvironmentInternalExperiments)
 
 instance ToJSON EnvironmentInternalExperiments where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Taskrunner configuration settings.
 --
@@ -2255,7 +2255,7 @@ instance FromJSON EnvironmentSdkPipelineOptions where
               (\ o -> pure EnvironmentSdkPipelineOptions)
 
 instance ToJSON EnvironmentSdkPipelineOptions where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Request to lease WorkItems.
 --
@@ -2423,7 +2423,7 @@ instance FromJSON
 
 instance ToJSON
          TopologyConfigUserStageToComputationNameMap where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | A task which consists of a shell command for the worker to execute.
 --
@@ -2490,7 +2490,7 @@ instance FromJSON StatusDetailsItem where
               (\ o -> pure StatusDetailsItem)
 
 instance ToJSON StatusDetailsItem where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Named properties associated with the step. Each kind of predefined step
 -- has its own required set of properties.
@@ -2512,7 +2512,7 @@ instance FromJSON StepProperties where
               (\ o -> pure StepProperties)
 
 instance ToJSON StepProperties where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Global topology of the streaming Dataflow job, including all
 -- computations and their sharded locations.
@@ -2709,7 +2709,7 @@ instance FromJSON WorkItemServiceStateHarnessData
               (\ o -> pure WorkItemServiceStateHarnessData)
 
 instance ToJSON WorkItemServiceStateHarnessData where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Data disk assignment for a given VM instance.
 --
@@ -2961,7 +2961,7 @@ instance FromJSON
 
 instance ToJSON
          PartialGroupByKeyInstructionInputElementCodec where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | MapTask consists of an ordered set of instructions, each of which
 -- describes one particular low-level operation for the worker to perform
@@ -3083,7 +3083,7 @@ instance FromJSON SinkCodec where
           = withObject "SinkCodec" (\ o -> pure SinkCodec)
 
 instance ToJSON SinkCodec where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | The user function to invoke.
 --
@@ -3104,7 +3104,7 @@ instance FromJSON ParDoInstructionUserFn where
               (\ o -> pure ParDoInstructionUserFn)
 
 instance ToJSON ParDoInstructionUserFn where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | The codec to use to encode data being written via this output.
 --
@@ -3125,7 +3125,7 @@ instance FromJSON InstructionOutputCodec where
               (\ o -> pure InstructionOutputCodec)
 
 instance ToJSON InstructionOutputCodec where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Describes a stream of data, either as input to be processed or as output
 -- of a streaming Dataflow job.
@@ -3224,7 +3224,7 @@ instance FromJSON WorkerPoolPoolArgs where
               (\ o -> pure WorkerPoolPoolArgs)
 
 instance ToJSON WorkerPoolPoolArgs where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Identifies the location of a streaming side input.
 --
@@ -3506,7 +3506,7 @@ instance FromJSON SeqMapTaskUserFn where
               (\ o -> pure SeqMapTaskUserFn)
 
 instance ToJSON SeqMapTaskUserFn where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | The value combining function to invoke.
 --
@@ -3532,7 +3532,7 @@ instance FromJSON
 
 instance ToJSON
          PartialGroupByKeyInstructionValueCombiningFn where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Defines a job to be run by the Dataflow service.
 --
@@ -3805,7 +3805,7 @@ instance FromJSON SinkSpec where
           = withObject "SinkSpec" (\ o -> pure SinkSpec)
 
 instance ToJSON SinkSpec where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Describes one particular pool of Dataflow workers to be instantiated by
 -- the Dataflow service in order to perform the computations required by a
@@ -4934,7 +4934,7 @@ instance FromJSON SourceBaseSpecsItem where
               (\ o -> pure SourceBaseSpecsItem)
 
 instance ToJSON SourceBaseSpecsItem where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Describes a particular operation comprising a MapTask.
 --
@@ -5066,7 +5066,7 @@ instance FromJSON SideInputInfoKind where
               (\ o -> pure SideInputInfoKind)
 
 instance ToJSON SideInputInfoKind where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | DEPRECATED in favor of DerivedSource.
 --
@@ -5229,7 +5229,7 @@ instance FromJSON SourceCodec where
           = withObject "SourceCodec" (\ o -> pure SourceCodec)
 
 instance ToJSON SourceCodec where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | State family configuration.
 --

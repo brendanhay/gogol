@@ -44,8 +44,8 @@ module Network.Google.Resource.FusionTables.Style.Update
     , suFields
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesStyleUpdate@ which the
 -- 'StyleUpdate'' request conforms to.
@@ -68,15 +68,15 @@ type StyleUpdateResource =
 --
 -- /See:/ 'styleUpdate'' smart constructor.
 data StyleUpdate' = StyleUpdate'
-    { _suQuotaUser   :: !(Maybe Text)
+    { _suQuotaUser :: !(Maybe Text)
     , _suPrettyPrint :: !Bool
-    , _suUserIP      :: !(Maybe Text)
-    , _suPayload     :: !StyleSetting
-    , _suKey         :: !(Maybe Key)
-    , _suStyleId     :: !Int32
-    , _suOAuthToken  :: !(Maybe OAuthToken)
-    , _suTableId     :: !Text
-    , _suFields      :: !(Maybe Text)
+    , _suUserIP :: !(Maybe Text)
+    , _suPayload :: !StyleSetting
+    , _suKey :: !(Maybe Key)
+    , _suStyleId :: !Int32
+    , _suOAuthToken :: !(Maybe OAuthToken)
+    , _suTableId :: !Text
+    , _suFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleUpdate'' with the minimum fields required to make a request.
@@ -105,7 +105,7 @@ styleUpdate'
     -> Int32 -- ^ 'styleId'
     -> Text -- ^ 'tableId'
     -> StyleUpdate'
-styleUpdate' pSuPayload_ pSuStyleId_ pSuTableId_ =
+styleUpdate' pSuPayload_ pSuStyleId_ pSuTableId_ = 
     StyleUpdate'
     { _suQuotaUser = Nothing
     , _suPrettyPrint = True

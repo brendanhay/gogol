@@ -71,7 +71,7 @@ instance FromJSON RestDescriptionParameters where
               (\ o -> pure RestDescriptionParameters)
 
 instance ToJSON RestDescriptionParameters where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'restMethod' smart constructor.
@@ -350,7 +350,7 @@ instance FromJSON RestDescriptionAuthOAuth2Scopes
               (\ o -> pure RestDescriptionAuthOAuth2Scopes)
 
 instance ToJSON RestDescriptionAuthOAuth2Scopes where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | API-level methods for this API.
 --
@@ -371,7 +371,7 @@ instance FromJSON RestDescriptionMethods where
               (\ o -> pure RestDescriptionMethods)
 
 instance ToJSON RestDescriptionMethods where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'directoryListItemsItem' smart constructor.
@@ -595,7 +595,7 @@ instance FromJSON RestResourceResources where
               (\ o -> pure RestResourceResources)
 
 instance ToJSON RestResourceResources where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | OAuth 2.0 authentication information.
 --
@@ -796,7 +796,7 @@ instance FromJSON RestResourceMethods where
               (\ o -> pure RestResourceMethods)
 
 instance ToJSON RestResourceMethods where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Authentication information.
 --
@@ -1460,7 +1460,7 @@ instance FromJSON RestDescriptionSchemas where
               (\ o -> pure RestDescriptionSchemas)
 
 instance ToJSON RestDescriptionSchemas where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'jsonSchemaVariantMapItem' smart constructor.
@@ -1525,7 +1525,7 @@ instance FromJSON RestDescriptionResources where
               (\ o -> pure RestDescriptionResources)
 
 instance ToJSON RestDescriptionResources where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Supported upload protocols.
 --
@@ -1633,7 +1633,7 @@ instance FromJSON RestMethodParameters where
               (\ o -> pure RestMethodParameters)
 
 instance ToJSON RestMethodParameters where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Media upload parameters.
 --
@@ -1716,7 +1716,7 @@ instance FromJSON JSONSchemaProperties where
               (\ o -> pure JSONSchemaProperties)
 
 instance ToJSON JSONSchemaProperties where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Supports the Resumable Media Upload protocol.
 --

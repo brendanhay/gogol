@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.Datasets.Patch
     , dpFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsDatasetsPatch@ which the
 -- 'DatasetsPatch'' request conforms to.
@@ -64,14 +64,14 @@ type DatasetsPatchResource =
 --
 -- /See:/ 'datasetsPatch'' smart constructor.
 data DatasetsPatch' = DatasetsPatch'
-    { _dpQuotaUser   :: !(Maybe Text)
+    { _dpQuotaUser :: !(Maybe Text)
     , _dpPrettyPrint :: !Bool
-    , _dpUserIP      :: !(Maybe Text)
-    , _dpPayload     :: !Dataset
-    , _dpKey         :: !(Maybe Key)
-    , _dpDatasetId   :: !Text
-    , _dpOAuthToken  :: !(Maybe OAuthToken)
-    , _dpFields      :: !(Maybe Text)
+    , _dpUserIP :: !(Maybe Text)
+    , _dpPayload :: !Dataset
+    , _dpKey :: !(Maybe Key)
+    , _dpDatasetId :: !Text
+    , _dpOAuthToken :: !(Maybe OAuthToken)
+    , _dpFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsPatch'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ datasetsPatch'
     :: Dataset -- ^ 'payload'
     -> Text -- ^ 'datasetId'
     -> DatasetsPatch'
-datasetsPatch' pDpPayload_ pDpDatasetId_ =
+datasetsPatch' pDpPayload_ pDpDatasetId_ = 
     DatasetsPatch'
     { _dpQuotaUser = Nothing
     , _dpPrettyPrint = True

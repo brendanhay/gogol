@@ -44,8 +44,8 @@ module Network.Google.Resource.Genomics.Readgroupsets.Call
     , rcFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReadgroupsetsCall@ which the
 -- 'ReadgroupsetsCall'' request conforms to.
@@ -68,13 +68,13 @@ type ReadgroupsetsCallResource =
 --
 -- /See:/ 'readgroupsetsCall'' smart constructor.
 data ReadgroupsetsCall' = ReadgroupsetsCall'
-    { _rcQuotaUser   :: !(Maybe Text)
+    { _rcQuotaUser :: !(Maybe Text)
     , _rcPrettyPrint :: !Bool
-    , _rcUserIP      :: !(Maybe Text)
-    , _rcPayload     :: !CallReadGroupSetsRequest
-    , _rcKey         :: !(Maybe Key)
-    , _rcOAuthToken  :: !(Maybe OAuthToken)
-    , _rcFields      :: !(Maybe Text)
+    , _rcUserIP :: !(Maybe Text)
+    , _rcPayload :: !CallReadGroupSetsRequest
+    , _rcKey :: !(Maybe Key)
+    , _rcOAuthToken :: !(Maybe OAuthToken)
+    , _rcFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsCall'' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ data ReadgroupsetsCall' = ReadgroupsetsCall'
 readgroupsetsCall'
     :: CallReadGroupSetsRequest -- ^ 'payload'
     -> ReadgroupsetsCall'
-readgroupsetsCall' pRcPayload_ =
+readgroupsetsCall' pRcPayload_ = 
     ReadgroupsetsCall'
     { _rcQuotaUser = Nothing
     , _rcPrettyPrint = True

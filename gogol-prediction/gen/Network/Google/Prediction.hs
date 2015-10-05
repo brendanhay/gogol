@@ -228,16 +228,16 @@ module Network.Google.Prediction
     , addofNumeric
     ) where
 
-import           Network.Google.Prediction.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Prediction.HostedModels.Predict
-import           Network.Google.Resource.Prediction.TrainedModels.Analyze
-import           Network.Google.Resource.Prediction.TrainedModels.Delete
-import           Network.Google.Resource.Prediction.TrainedModels.Get
-import           Network.Google.Resource.Prediction.TrainedModels.Insert
-import           Network.Google.Resource.Prediction.TrainedModels.List
-import           Network.Google.Resource.Prediction.TrainedModels.Predict
-import           Network.Google.Resource.Prediction.TrainedModels.Update
+import Network.Google.Prelude
+import Network.Google.Prediction.Types
+import Network.Google.Resource.Prediction.HostedModels.Predict
+import Network.Google.Resource.Prediction.TrainedModels.Analyze
+import Network.Google.Resource.Prediction.TrainedModels.Delete
+import Network.Google.Resource.Prediction.TrainedModels.Get
+import Network.Google.Resource.Prediction.TrainedModels.Insert
+import Network.Google.Resource.Prediction.TrainedModels.List
+import Network.Google.Resource.Prediction.TrainedModels.Predict
+import Network.Google.Resource.Prediction.TrainedModels.Update
 
 {- $resources
 TODO

@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.Readgroupsets.Patch
     , rpFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReadgroupsetsPatch@ which the
 -- 'ReadgroupsetsPatch'' request conforms to.
@@ -65,14 +65,14 @@ type ReadgroupsetsPatchResource =
 --
 -- /See:/ 'readgroupsetsPatch'' smart constructor.
 data ReadgroupsetsPatch' = ReadgroupsetsPatch'
-    { _rpQuotaUser      :: !(Maybe Text)
-    , _rpPrettyPrint    :: !Bool
+    { _rpQuotaUser :: !(Maybe Text)
+    , _rpPrettyPrint :: !Bool
     , _rpReadGroupSetId :: !Text
-    , _rpUserIP         :: !(Maybe Text)
-    , _rpPayload        :: !ReadGroupSet
-    , _rpKey            :: !(Maybe Key)
-    , _rpOAuthToken     :: !(Maybe OAuthToken)
-    , _rpFields         :: !(Maybe Text)
+    , _rpUserIP :: !(Maybe Text)
+    , _rpPayload :: !ReadGroupSet
+    , _rpKey :: !(Maybe Key)
+    , _rpOAuthToken :: !(Maybe OAuthToken)
+    , _rpFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsPatch'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ readgroupsetsPatch'
     :: Text -- ^ 'readGroupSetId'
     -> ReadGroupSet -- ^ 'payload'
     -> ReadgroupsetsPatch'
-readgroupsetsPatch' pRpReadGroupSetId_ pRpPayload_ =
+readgroupsetsPatch' pRpReadGroupSetId_ pRpPayload_ = 
     ReadgroupsetsPatch'
     { _rpQuotaUser = Nothing
     , _rpPrettyPrint = True

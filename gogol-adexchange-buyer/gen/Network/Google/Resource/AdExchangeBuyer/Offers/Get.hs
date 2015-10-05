@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer.Offers.Get
     , ogFields
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerOffersGet@ which the
 -- 'OffersGet'' request conforms to.
@@ -62,13 +62,13 @@ type OffersGetResource =
 --
 -- /See:/ 'offersGet'' smart constructor.
 data OffersGet' = OffersGet'
-    { _ogQuotaUser   :: !(Maybe Text)
+    { _ogQuotaUser :: !(Maybe Text)
     , _ogPrettyPrint :: !Bool
-    , _ogUserIP      :: !(Maybe Text)
-    , _ogKey         :: !(Maybe Key)
-    , _ogOfferId     :: !Int64
-    , _ogOAuthToken  :: !(Maybe OAuthToken)
-    , _ogFields      :: !(Maybe Text)
+    , _ogUserIP :: !(Maybe Text)
+    , _ogKey :: !(Maybe Key)
+    , _ogOfferId :: !Int64
+    , _ogOAuthToken :: !(Maybe OAuthToken)
+    , _ogFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OffersGet'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data OffersGet' = OffersGet'
 offersGet'
     :: Int64 -- ^ 'offerId'
     -> OffersGet'
-offersGet' pOgOfferId_ =
+offersGet' pOgOfferId_ = 
     OffersGet'
     { _ogQuotaUser = Nothing
     , _ogPrettyPrint = True

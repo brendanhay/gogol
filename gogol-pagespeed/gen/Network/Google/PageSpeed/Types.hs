@@ -122,9 +122,9 @@ module Network.Google.PageSpeed.Types
     , resultFormattedResultsRuleResults
     ) where
 
-import           Network.Google.PageSpeed.Types.Product
-import           Network.Google.PageSpeed.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.PageSpeed.Types.Product
+import Network.Google.PageSpeed.Types.Sum
+import Network.Google.Prelude
 
 -- | URL referring to version 'v2' of the PageSpeed Insights API.
 pageSpeedURL :: BaseUrl

@@ -44,8 +44,8 @@ module Network.Google.Resource.PlusDomains.Audiences.List
     , alFields
     ) where
 
-import           Network.Google.PlusDomains.Types
-import           Network.Google.Prelude
+import Network.Google.PlusDomains.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsAudiencesList@ which the
 -- 'AudiencesList'' request conforms to.
@@ -67,15 +67,15 @@ type AudiencesListResource =
 --
 -- /See:/ 'audiencesList'' smart constructor.
 data AudiencesList' = AudiencesList'
-    { _alQuotaUser   :: !(Maybe Text)
+    { _alQuotaUser :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
-    , _alUserIP      :: !(Maybe Text)
-    , _alUserId      :: !Text
-    , _alKey         :: !(Maybe Key)
-    , _alPageToken   :: !(Maybe Text)
-    , _alOAuthToken  :: !(Maybe OAuthToken)
-    , _alMaxResults  :: !Word32
-    , _alFields      :: !(Maybe Text)
+    , _alUserIP :: !(Maybe Text)
+    , _alUserId :: !Text
+    , _alKey :: !(Maybe Key)
+    , _alPageToken :: !(Maybe Text)
+    , _alOAuthToken :: !(Maybe OAuthToken)
+    , _alMaxResults :: !Word32
+    , _alFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AudiencesList'' with the minimum fields required to make a request.
@@ -102,7 +102,7 @@ data AudiencesList' = AudiencesList'
 audiencesList'
     :: Text -- ^ 'userId'
     -> AudiencesList'
-audiencesList' pAlUserId_ =
+audiencesList' pAlUserId_ = 
     AudiencesList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True

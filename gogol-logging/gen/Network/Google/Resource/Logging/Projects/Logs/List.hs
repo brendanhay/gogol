@@ -52,8 +52,8 @@ module Network.Google.Resource.Logging.Projects.Logs.List
     , pllCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogsList@ which the
 -- 'ProjectsLogsList'' request conforms to.
@@ -86,23 +86,23 @@ type ProjectsLogsListResource =
 --
 -- /See:/ 'projectsLogsList'' smart constructor.
 data ProjectsLogsList' = ProjectsLogsList'
-    { _pllXgafv              :: !(Maybe Text)
-    , _pllQuotaUser          :: !(Maybe Text)
-    , _pllPrettyPrint        :: !Bool
-    , _pllUploadProtocol     :: !(Maybe Text)
-    , _pllPp                 :: !Bool
-    , _pllAccessToken        :: !(Maybe Text)
-    , _pllUploadType         :: !(Maybe Text)
-    , _pllBearerToken        :: !(Maybe Text)
-    , _pllKey                :: !(Maybe Key)
-    , _pllServiceName        :: !(Maybe Text)
-    , _pllPageToken          :: !(Maybe Text)
-    , _pllOAuthToken         :: !(Maybe OAuthToken)
+    { _pllXgafv :: !(Maybe Text)
+    , _pllQuotaUser :: !(Maybe Text)
+    , _pllPrettyPrint :: !Bool
+    , _pllUploadProtocol :: !(Maybe Text)
+    , _pllPp :: !Bool
+    , _pllAccessToken :: !(Maybe Text)
+    , _pllUploadType :: !(Maybe Text)
+    , _pllBearerToken :: !(Maybe Text)
+    , _pllKey :: !(Maybe Key)
+    , _pllServiceName :: !(Maybe Text)
+    , _pllPageToken :: !(Maybe Text)
+    , _pllOAuthToken :: !(Maybe OAuthToken)
     , _pllServiceIndexPrefix :: !(Maybe Text)
-    , _pllProjectsId         :: !Text
-    , _pllPageSize           :: !(Maybe Int32)
-    , _pllFields             :: !(Maybe Text)
-    , _pllCallback           :: !(Maybe Text)
+    , _pllProjectsId :: !Text
+    , _pllPageSize :: !(Maybe Int32)
+    , _pllFields :: !(Maybe Text)
+    , _pllCallback :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogsList'' with the minimum fields required to make a request.
@@ -145,7 +145,7 @@ data ProjectsLogsList' = ProjectsLogsList'
 projectsLogsList'
     :: Text -- ^ 'projectsId'
     -> ProjectsLogsList'
-projectsLogsList' pPllProjectsId_ =
+projectsLogsList' pPllProjectsId_ = 
     ProjectsLogsList'
     { _pllXgafv = Nothing
     , _pllQuotaUser = Nothing

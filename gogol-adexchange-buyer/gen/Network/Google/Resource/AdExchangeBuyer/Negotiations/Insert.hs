@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer.Negotiations.Insert
     , niFields
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerNegotiationsInsert@ which the
 -- 'NegotiationsInsert'' request conforms to.
@@ -63,13 +63,13 @@ type NegotiationsInsertResource =
 --
 -- /See:/ 'negotiationsInsert'' smart constructor.
 data NegotiationsInsert' = NegotiationsInsert'
-    { _niQuotaUser   :: !(Maybe Text)
+    { _niQuotaUser :: !(Maybe Text)
     , _niPrettyPrint :: !Bool
-    , _niUserIP      :: !(Maybe Text)
-    , _niPayload     :: !NegotiationDTO
-    , _niKey         :: !(Maybe Key)
-    , _niOAuthToken  :: !(Maybe OAuthToken)
-    , _niFields      :: !(Maybe Text)
+    , _niUserIP :: !(Maybe Text)
+    , _niPayload :: !NegotiationDTO
+    , _niKey :: !(Maybe Key)
+    , _niOAuthToken :: !(Maybe OAuthToken)
+    , _niFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationsInsert'' with the minimum fields required to make a request.
@@ -92,7 +92,7 @@ data NegotiationsInsert' = NegotiationsInsert'
 negotiationsInsert'
     :: NegotiationDTO -- ^ 'payload'
     -> NegotiationsInsert'
-negotiationsInsert' pNiPayload_ =
+negotiationsInsert' pNiPayload_ = 
     NegotiationsInsert'
     { _niQuotaUser = Nothing
     , _niPrettyPrint = True

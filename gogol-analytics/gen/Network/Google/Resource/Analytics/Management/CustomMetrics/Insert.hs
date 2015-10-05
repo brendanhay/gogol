@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.Insert
     , mcmiFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomMetricsInsert@ which the
 -- 'ManagementCustomMetricsInsert'' request conforms to.
@@ -70,15 +70,15 @@ type ManagementCustomMetricsInsertResource =
 --
 -- /See:/ 'managementCustomMetricsInsert'' smart constructor.
 data ManagementCustomMetricsInsert' = ManagementCustomMetricsInsert'
-    { _mcmiQuotaUser     :: !(Maybe Text)
-    , _mcmiPrettyPrint   :: !Bool
+    { _mcmiQuotaUser :: !(Maybe Text)
+    , _mcmiPrettyPrint :: !Bool
     , _mcmiWebPropertyId :: !Text
-    , _mcmiUserIP        :: !(Maybe Text)
-    , _mcmiPayload       :: !CustomMetric
-    , _mcmiAccountId     :: !Text
-    , _mcmiKey           :: !(Maybe Key)
-    , _mcmiOAuthToken    :: !(Maybe OAuthToken)
-    , _mcmiFields        :: !(Maybe Text)
+    , _mcmiUserIP :: !(Maybe Text)
+    , _mcmiPayload :: !CustomMetric
+    , _mcmiAccountId :: !Text
+    , _mcmiKey :: !(Maybe Key)
+    , _mcmiOAuthToken :: !(Maybe OAuthToken)
+    , _mcmiFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsInsert'' with the minimum fields required to make a request.
@@ -107,7 +107,7 @@ managementCustomMetricsInsert'
     -> CustomMetric -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementCustomMetricsInsert'
-managementCustomMetricsInsert' pMcmiWebPropertyId_ pMcmiPayload_ pMcmiAccountId_ =
+managementCustomMetricsInsert' pMcmiWebPropertyId_ pMcmiPayload_ pMcmiAccountId_ = 
     ManagementCustomMetricsInsert'
     { _mcmiQuotaUser = Nothing
     , _mcmiPrettyPrint = False

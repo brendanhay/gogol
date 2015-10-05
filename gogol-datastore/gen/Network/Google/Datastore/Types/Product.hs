@@ -386,7 +386,7 @@ instance FromJSON EntityProperties where
               (\ o -> pure EntityProperties)
 
 instance ToJSON EntityProperties where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'beginTransactionRequest' smart constructor.

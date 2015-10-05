@@ -50,8 +50,8 @@ module Network.Google.Resource.Blogger.Comments.List
     , clFields
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @BloggerCommentsList@ which the
 -- 'CommentsList'' request conforms to.
@@ -81,21 +81,21 @@ type CommentsListResource =
 --
 -- /See:/ 'commentsList'' smart constructor.
 data CommentsList' = CommentsList'
-    { _clStatus      :: !(Maybe [CommentsListStatus])
-    , _clQuotaUser   :: !(Maybe Text)
+    { _clStatus :: !(Maybe [CommentsListStatus])
+    , _clQuotaUser :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
-    , _clUserIP      :: !(Maybe Text)
-    , _clEndDate     :: !(Maybe DateTime')
-    , _clBlogId      :: !Text
-    , _clStartDate   :: !(Maybe DateTime')
-    , _clKey         :: !(Maybe Key)
+    , _clUserIP :: !(Maybe Text)
+    , _clEndDate :: !(Maybe DateTime')
+    , _clBlogId :: !Text
+    , _clStartDate :: !(Maybe DateTime')
+    , _clKey :: !(Maybe Key)
     , _clFetchBodies :: !(Maybe Bool)
-    , _clView        :: !(Maybe CommentsListView)
-    , _clPostId      :: !Text
-    , _clPageToken   :: !(Maybe Text)
-    , _clOAuthToken  :: !(Maybe OAuthToken)
-    , _clMaxResults  :: !(Maybe Word32)
-    , _clFields      :: !(Maybe Text)
+    , _clView :: !(Maybe CommentsListView)
+    , _clPostId :: !Text
+    , _clPageToken :: !(Maybe Text)
+    , _clOAuthToken :: !(Maybe OAuthToken)
+    , _clMaxResults :: !(Maybe Word32)
+    , _clFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsList'' with the minimum fields required to make a request.
@@ -135,7 +135,7 @@ commentsList'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
     -> CommentsList'
-commentsList' pClBlogId_ pClPostId_ =
+commentsList' pClBlogId_ pClPostId_ = 
     CommentsList'
     { _clStatus = Nothing
     , _clQuotaUser = Nothing

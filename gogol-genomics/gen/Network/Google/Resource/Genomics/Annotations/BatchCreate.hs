@@ -49,8 +49,8 @@ module Network.Google.Resource.Genomics.Annotations.BatchCreate
     , abcFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsAnnotationsBatchCreate@ which the
 -- 'AnnotationsBatchCreate'' request conforms to.
@@ -77,13 +77,13 @@ type AnnotationsBatchCreateResource =
 --
 -- /See:/ 'annotationsBatchCreate'' smart constructor.
 data AnnotationsBatchCreate' = AnnotationsBatchCreate'
-    { _abcQuotaUser   :: !(Maybe Text)
+    { _abcQuotaUser :: !(Maybe Text)
     , _abcPrettyPrint :: !Bool
-    , _abcUserIP      :: !(Maybe Text)
-    , _abcPayload     :: !BatchCreateAnnotationsRequest
-    , _abcKey         :: !(Maybe Key)
-    , _abcOAuthToken  :: !(Maybe OAuthToken)
-    , _abcFields      :: !(Maybe Text)
+    , _abcUserIP :: !(Maybe Text)
+    , _abcPayload :: !BatchCreateAnnotationsRequest
+    , _abcKey :: !(Maybe Key)
+    , _abcOAuthToken :: !(Maybe OAuthToken)
+    , _abcFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsBatchCreate'' with the minimum fields required to make a request.
@@ -106,7 +106,7 @@ data AnnotationsBatchCreate' = AnnotationsBatchCreate'
 annotationsBatchCreate'
     :: BatchCreateAnnotationsRequest -- ^ 'payload'
     -> AnnotationsBatchCreate'
-annotationsBatchCreate' pAbcPayload_ =
+annotationsBatchCreate' pAbcPayload_ = 
     AnnotationsBatchCreate'
     { _abcQuotaUser = Nothing
     , _abcPrettyPrint = True

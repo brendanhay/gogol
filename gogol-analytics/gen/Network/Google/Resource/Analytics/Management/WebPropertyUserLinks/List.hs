@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.List
     , mwpullFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebPropertyUserLinksList@ which the
 -- 'ManagementWebPropertyUserLinksList'' request conforms to.
@@ -72,16 +72,16 @@ type ManagementWebPropertyUserLinksListResource =
 --
 -- /See:/ 'managementWebPropertyUserLinksList'' smart constructor.
 data ManagementWebPropertyUserLinksList' = ManagementWebPropertyUserLinksList'
-    { _mwpullQuotaUser     :: !(Maybe Text)
-    , _mwpullPrettyPrint   :: !Bool
+    { _mwpullQuotaUser :: !(Maybe Text)
+    , _mwpullPrettyPrint :: !Bool
     , _mwpullWebPropertyId :: !Text
-    , _mwpullUserIP        :: !(Maybe Text)
-    , _mwpullAccountId     :: !Text
-    , _mwpullKey           :: !(Maybe Key)
-    , _mwpullOAuthToken    :: !(Maybe OAuthToken)
-    , _mwpullStartIndex    :: !(Maybe Int32)
-    , _mwpullMaxResults    :: !(Maybe Int32)
-    , _mwpullFields        :: !(Maybe Text)
+    , _mwpullUserIP :: !(Maybe Text)
+    , _mwpullAccountId :: !Text
+    , _mwpullKey :: !(Maybe Key)
+    , _mwpullOAuthToken :: !(Maybe OAuthToken)
+    , _mwpullStartIndex :: !(Maybe Int32)
+    , _mwpullMaxResults :: !(Maybe Int32)
+    , _mwpullFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyUserLinksList'' with the minimum fields required to make a request.
@@ -111,7 +111,7 @@ managementWebPropertyUserLinksList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
     -> ManagementWebPropertyUserLinksList'
-managementWebPropertyUserLinksList' pMwpullWebPropertyId_ pMwpullAccountId_ =
+managementWebPropertyUserLinksList' pMwpullWebPropertyId_ pMwpullAccountId_ = 
     ManagementWebPropertyUserLinksList'
     { _mwpullQuotaUser = Nothing
     , _mwpullPrettyPrint = False

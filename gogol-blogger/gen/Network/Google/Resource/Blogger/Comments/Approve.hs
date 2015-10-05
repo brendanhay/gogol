@@ -44,8 +44,8 @@ module Network.Google.Resource.Blogger.Comments.Approve
     , caFields
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @BloggerCommentsApprove@ which the
 -- 'CommentsApprove'' request conforms to.
@@ -69,15 +69,15 @@ type CommentsApproveResource =
 --
 -- /See:/ 'commentsApprove'' smart constructor.
 data CommentsApprove' = CommentsApprove'
-    { _caQuotaUser   :: !(Maybe Text)
+    { _caQuotaUser :: !(Maybe Text)
     , _caPrettyPrint :: !Bool
-    , _caUserIP      :: !(Maybe Text)
-    , _caBlogId      :: !Text
-    , _caKey         :: !(Maybe Key)
-    , _caPostId      :: !Text
-    , _caOAuthToken  :: !(Maybe OAuthToken)
-    , _caCommentId   :: !Text
-    , _caFields      :: !(Maybe Text)
+    , _caUserIP :: !(Maybe Text)
+    , _caBlogId :: !Text
+    , _caKey :: !(Maybe Key)
+    , _caPostId :: !Text
+    , _caOAuthToken :: !(Maybe OAuthToken)
+    , _caCommentId :: !Text
+    , _caFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsApprove'' with the minimum fields required to make a request.
@@ -106,7 +106,7 @@ commentsApprove'
     -> Text -- ^ 'postId'
     -> Text -- ^ 'commentId'
     -> CommentsApprove'
-commentsApprove' pCaBlogId_ pCaPostId_ pCaCommentId_ =
+commentsApprove' pCaBlogId_ pCaPostId_ pCaCommentId_ = 
     CommentsApprove'
     { _caQuotaUser = Nothing
     , _caPrettyPrint = True

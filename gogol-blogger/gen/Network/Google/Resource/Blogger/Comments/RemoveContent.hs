@@ -44,8 +44,8 @@ module Network.Google.Resource.Blogger.Comments.RemoveContent
     , crcFields
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @BloggerCommentsRemoveContent@ which the
 -- 'CommentsRemoveContent'' request conforms to.
@@ -69,15 +69,15 @@ type CommentsRemoveContentResource =
 --
 -- /See:/ 'commentsRemoveContent'' smart constructor.
 data CommentsRemoveContent' = CommentsRemoveContent'
-    { _crcQuotaUser   :: !(Maybe Text)
+    { _crcQuotaUser :: !(Maybe Text)
     , _crcPrettyPrint :: !Bool
-    , _crcUserIP      :: !(Maybe Text)
-    , _crcBlogId      :: !Text
-    , _crcKey         :: !(Maybe Key)
-    , _crcPostId      :: !Text
-    , _crcOAuthToken  :: !(Maybe OAuthToken)
-    , _crcCommentId   :: !Text
-    , _crcFields      :: !(Maybe Text)
+    , _crcUserIP :: !(Maybe Text)
+    , _crcBlogId :: !Text
+    , _crcKey :: !(Maybe Key)
+    , _crcPostId :: !Text
+    , _crcOAuthToken :: !(Maybe OAuthToken)
+    , _crcCommentId :: !Text
+    , _crcFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsRemoveContent'' with the minimum fields required to make a request.
@@ -106,7 +106,7 @@ commentsRemoveContent'
     -> Text -- ^ 'postId'
     -> Text -- ^ 'commentId'
     -> CommentsRemoveContent'
-commentsRemoveContent' pCrcBlogId_ pCrcPostId_ pCrcCommentId_ =
+commentsRemoveContent' pCrcBlogId_ pCrcPostId_ pCrcCommentId_ = 
     CommentsRemoveContent'
     { _crcQuotaUser = Nothing
     , _crcPrettyPrint = True

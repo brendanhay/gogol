@@ -45,8 +45,8 @@ module Network.Google.Resource.ResourceViews.ZoneViews.RemoveResources
     , zvrrFields
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ResourceViews.Types
+import Network.Google.Prelude
+import Network.Google.ResourceViews.Types
 
 -- | A resource alias for @ResourceviewsZoneViewsRemoveResources@ which the
 -- 'ZoneViewsRemoveResources'' request conforms to.
@@ -71,16 +71,16 @@ type ZoneViewsRemoveResourcesResource =
 --
 -- /See:/ 'zoneViewsRemoveResources'' smart constructor.
 data ZoneViewsRemoveResources' = ZoneViewsRemoveResources'
-    { _zvrrQuotaUser    :: !(Maybe Text)
-    , _zvrrPrettyPrint  :: !Bool
+    { _zvrrQuotaUser :: !(Maybe Text)
+    , _zvrrPrettyPrint :: !Bool
     , _zvrrResourceView :: !Text
-    , _zvrrProject      :: !Text
-    , _zvrrUserIP       :: !(Maybe Text)
-    , _zvrrZone         :: !Text
-    , _zvrrPayload      :: !ZoneViewsRemoveResourcesRequest
-    , _zvrrKey          :: !(Maybe Key)
-    , _zvrrOAuthToken   :: !(Maybe OAuthToken)
-    , _zvrrFields       :: !(Maybe Text)
+    , _zvrrProject :: !Text
+    , _zvrrUserIP :: !(Maybe Text)
+    , _zvrrZone :: !Text
+    , _zvrrPayload :: !ZoneViewsRemoveResourcesRequest
+    , _zvrrKey :: !(Maybe Key)
+    , _zvrrOAuthToken :: !(Maybe OAuthToken)
+    , _zvrrFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsRemoveResources'' with the minimum fields required to make a request.
@@ -112,7 +112,7 @@ zoneViewsRemoveResources'
     -> Text -- ^ 'zone'
     -> ZoneViewsRemoveResourcesRequest -- ^ 'payload'
     -> ZoneViewsRemoveResources'
-zoneViewsRemoveResources' pZvrrResourceView_ pZvrrProject_ pZvrrZone_ pZvrrPayload_ =
+zoneViewsRemoveResources' pZvrrResourceView_ pZvrrProject_ pZvrrZone_ pZvrrPayload_ = 
     ZoneViewsRemoveResources'
     { _zvrrQuotaUser = Nothing
     , _zvrrPrettyPrint = True

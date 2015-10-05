@@ -43,8 +43,8 @@ module Network.Google.Resource.AdSense.Reports.Saved.List
     , rslFields
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdsenseReportsSavedList@ which the
 -- 'ReportsSavedList'' request conforms to.
@@ -65,14 +65,14 @@ type ReportsSavedListResource =
 --
 -- /See:/ 'reportsSavedList'' smart constructor.
 data ReportsSavedList' = ReportsSavedList'
-    { _rslQuotaUser   :: !(Maybe Text)
+    { _rslQuotaUser :: !(Maybe Text)
     , _rslPrettyPrint :: !Bool
-    , _rslUserIP      :: !(Maybe Text)
-    , _rslKey         :: !(Maybe Key)
-    , _rslPageToken   :: !(Maybe Text)
-    , _rslOAuthToken  :: !(Maybe OAuthToken)
-    , _rslMaxResults  :: !(Maybe Int32)
-    , _rslFields      :: !(Maybe Text)
+    , _rslUserIP :: !(Maybe Text)
+    , _rslKey :: !(Maybe Key)
+    , _rslPageToken :: !(Maybe Text)
+    , _rslOAuthToken :: !(Maybe OAuthToken)
+    , _rslMaxResults :: !(Maybe Int32)
+    , _rslFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsSavedList'' with the minimum fields required to make a request.
@@ -96,7 +96,7 @@ data ReportsSavedList' = ReportsSavedList'
 -- * 'rslFields'
 reportsSavedList'
     :: ReportsSavedList'
-reportsSavedList' =
+reportsSavedList' = 
     ReportsSavedList'
     { _rslQuotaUser = Nothing
     , _rslPrettyPrint = True

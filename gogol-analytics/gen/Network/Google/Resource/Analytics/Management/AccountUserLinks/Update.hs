@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.Update
     , mauluFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementAccountUserLinksUpdate@ which the
 -- 'ManagementAccountUserLinksUpdate'' request conforms to.
@@ -69,15 +69,15 @@ type ManagementAccountUserLinksUpdateResource =
 --
 -- /See:/ 'managementAccountUserLinksUpdate'' smart constructor.
 data ManagementAccountUserLinksUpdate' = ManagementAccountUserLinksUpdate'
-    { _mauluQuotaUser   :: !(Maybe Text)
+    { _mauluQuotaUser :: !(Maybe Text)
     , _mauluPrettyPrint :: !Bool
-    , _mauluUserIP      :: !(Maybe Text)
-    , _mauluPayload     :: !EntityUserLink
-    , _mauluAccountId   :: !Text
-    , _mauluKey         :: !(Maybe Key)
-    , _mauluLinkId      :: !Text
-    , _mauluOAuthToken  :: !(Maybe OAuthToken)
-    , _mauluFields      :: !(Maybe Text)
+    , _mauluUserIP :: !(Maybe Text)
+    , _mauluPayload :: !EntityUserLink
+    , _mauluAccountId :: !Text
+    , _mauluKey :: !(Maybe Key)
+    , _mauluLinkId :: !Text
+    , _mauluOAuthToken :: !(Maybe OAuthToken)
+    , _mauluFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksUpdate'' with the minimum fields required to make a request.
@@ -106,7 +106,7 @@ managementAccountUserLinksUpdate'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
     -> ManagementAccountUserLinksUpdate'
-managementAccountUserLinksUpdate' pMauluPayload_ pMauluAccountId_ pMauluLinkId_ =
+managementAccountUserLinksUpdate' pMauluPayload_ pMauluAccountId_ pMauluLinkId_ = 
     ManagementAccountUserLinksUpdate'
     { _mauluQuotaUser = Nothing
     , _mauluPrettyPrint = False

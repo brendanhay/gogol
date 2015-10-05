@@ -46,8 +46,8 @@ module Network.Google.Resource.AdSense.Accounts.URLChannels.List
     , auclFields
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsURLChannelsList@ which the
 -- 'AccountsURLChannelsList'' request conforms to.
@@ -73,16 +73,16 @@ type AccountsURLChannelsListResource =
 --
 -- /See:/ 'accountsURLChannelsList'' smart constructor.
 data AccountsURLChannelsList' = AccountsURLChannelsList'
-    { _auclQuotaUser   :: !(Maybe Text)
+    { _auclQuotaUser :: !(Maybe Text)
     , _auclPrettyPrint :: !Bool
-    , _auclUserIP      :: !(Maybe Text)
-    , _auclAdClientId  :: !Text
-    , _auclAccountId   :: !Text
-    , _auclKey         :: !(Maybe Key)
-    , _auclPageToken   :: !(Maybe Text)
-    , _auclOAuthToken  :: !(Maybe OAuthToken)
-    , _auclMaxResults  :: !(Maybe Int32)
-    , _auclFields      :: !(Maybe Text)
+    , _auclUserIP :: !(Maybe Text)
+    , _auclAdClientId :: !Text
+    , _auclAccountId :: !Text
+    , _auclKey :: !(Maybe Key)
+    , _auclPageToken :: !(Maybe Text)
+    , _auclOAuthToken :: !(Maybe OAuthToken)
+    , _auclMaxResults :: !(Maybe Int32)
+    , _auclFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsURLChannelsList'' with the minimum fields required to make a request.
@@ -112,7 +112,7 @@ accountsURLChannelsList'
     :: Text -- ^ 'adClientId'
     -> Text -- ^ 'accountId'
     -> AccountsURLChannelsList'
-accountsURLChannelsList' pAuclAdClientId_ pAuclAccountId_ =
+accountsURLChannelsList' pAuclAdClientId_ pAuclAccountId_ = 
     AccountsURLChannelsList'
     { _auclQuotaUser = Nothing
     , _auclPrettyPrint = True

@@ -46,8 +46,8 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.Update
     , mcmuFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomMetricsUpdate@ which the
 -- 'ManagementCustomMetricsUpdate'' request conforms to.
@@ -74,17 +74,17 @@ type ManagementCustomMetricsUpdateResource =
 --
 -- /See:/ 'managementCustomMetricsUpdate'' smart constructor.
 data ManagementCustomMetricsUpdate' = ManagementCustomMetricsUpdate'
-    { _mcmuQuotaUser                   :: !(Maybe Text)
-    , _mcmuPrettyPrint                 :: !Bool
-    , _mcmuCustomMetricId              :: !Text
-    , _mcmuWebPropertyId               :: !Text
+    { _mcmuQuotaUser :: !(Maybe Text)
+    , _mcmuPrettyPrint :: !Bool
+    , _mcmuCustomMetricId :: !Text
+    , _mcmuWebPropertyId :: !Text
     , _mcmuIgnoreCustomDataSourceLinks :: !Bool
-    , _mcmuUserIP                      :: !(Maybe Text)
-    , _mcmuPayload                     :: !CustomMetric
-    , _mcmuAccountId                   :: !Text
-    , _mcmuKey                         :: !(Maybe Key)
-    , _mcmuOAuthToken                  :: !(Maybe OAuthToken)
-    , _mcmuFields                      :: !(Maybe Text)
+    , _mcmuUserIP :: !(Maybe Text)
+    , _mcmuPayload :: !CustomMetric
+    , _mcmuAccountId :: !Text
+    , _mcmuKey :: !(Maybe Key)
+    , _mcmuOAuthToken :: !(Maybe OAuthToken)
+    , _mcmuFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsUpdate'' with the minimum fields required to make a request.
@@ -118,7 +118,7 @@ managementCustomMetricsUpdate'
     -> CustomMetric -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementCustomMetricsUpdate'
-managementCustomMetricsUpdate' pMcmuCustomMetricId_ pMcmuWebPropertyId_ pMcmuPayload_ pMcmuAccountId_ =
+managementCustomMetricsUpdate' pMcmuCustomMetricId_ pMcmuWebPropertyId_ pMcmuPayload_ pMcmuAccountId_ = 
     ManagementCustomMetricsUpdate'
     { _mcmuQuotaUser = Nothing
     , _mcmuPrettyPrint = False

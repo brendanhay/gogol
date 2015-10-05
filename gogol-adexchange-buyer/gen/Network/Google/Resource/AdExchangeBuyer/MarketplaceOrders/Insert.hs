@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Insert
     , moiFields
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplaceOrdersInsert@ which the
 -- 'MarketplaceOrdersInsert'' request conforms to.
@@ -64,13 +64,13 @@ type MarketplaceOrdersInsertResource =
 --
 -- /See:/ 'marketplaceOrdersInsert'' smart constructor.
 data MarketplaceOrdersInsert' = MarketplaceOrdersInsert'
-    { _moiQuotaUser   :: !(Maybe Text)
+    { _moiQuotaUser :: !(Maybe Text)
     , _moiPrettyPrint :: !Bool
-    , _moiUserIP      :: !(Maybe Text)
-    , _moiPayload     :: !CreateOrdersRequest
-    , _moiKey         :: !(Maybe Key)
-    , _moiOAuthToken  :: !(Maybe OAuthToken)
-    , _moiFields      :: !(Maybe Text)
+    , _moiUserIP :: !(Maybe Text)
+    , _moiPayload :: !CreateOrdersRequest
+    , _moiKey :: !(Maybe Key)
+    , _moiOAuthToken :: !(Maybe OAuthToken)
+    , _moiFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceOrdersInsert'' with the minimum fields required to make a request.
@@ -93,7 +93,7 @@ data MarketplaceOrdersInsert' = MarketplaceOrdersInsert'
 marketplaceOrdersInsert'
     :: CreateOrdersRequest -- ^ 'payload'
     -> MarketplaceOrdersInsert'
-marketplaceOrdersInsert' pMoiPayload_ =
+marketplaceOrdersInsert' pMoiPayload_ = 
     MarketplaceOrdersInsert'
     { _moiQuotaUser = Nothing
     , _moiPrettyPrint = True

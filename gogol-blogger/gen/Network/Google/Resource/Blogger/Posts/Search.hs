@@ -45,8 +45,8 @@ module Network.Google.Resource.Blogger.Posts.Search
     , psFields
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @BloggerPostsSearch@ which the
 -- 'PostsSearch'' request conforms to.
@@ -70,16 +70,16 @@ type PostsSearchResource =
 --
 -- /See:/ 'postsSearch'' smart constructor.
 data PostsSearch' = PostsSearch'
-    { _psQuotaUser   :: !(Maybe Text)
+    { _psQuotaUser :: !(Maybe Text)
     , _psPrettyPrint :: !Bool
-    , _psOrderBy     :: !PostsSearchOrderBy
-    , _psUserIP      :: !(Maybe Text)
-    , _psBlogId      :: !Text
-    , _psQ           :: !Text
-    , _psKey         :: !(Maybe Key)
+    , _psOrderBy :: !PostsSearchOrderBy
+    , _psUserIP :: !(Maybe Text)
+    , _psBlogId :: !Text
+    , _psQ :: !Text
+    , _psKey :: !(Maybe Key)
     , _psFetchBodies :: !Bool
-    , _psOAuthToken  :: !(Maybe OAuthToken)
-    , _psFields      :: !(Maybe Text)
+    , _psOAuthToken :: !(Maybe OAuthToken)
+    , _psFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsSearch'' with the minimum fields required to make a request.
@@ -109,7 +109,7 @@ postsSearch'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'q'
     -> PostsSearch'
-postsSearch' pPsBlogId_ pPsQ_ =
+postsSearch' pPsBlogId_ pPsQ_ = 
     PostsSearch'
     { _psQuotaUser = Nothing
     , _psPrettyPrint = True

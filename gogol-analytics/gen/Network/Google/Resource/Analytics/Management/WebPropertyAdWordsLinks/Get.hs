@@ -44,8 +44,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Get
     , mwpawlgFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksGet@ which the
 -- 'ManagementWebPropertyAdWordsLinksGet'' request conforms to.
@@ -70,15 +70,15 @@ type ManagementWebPropertyAdWordsLinksGetResource =
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksGet'' smart constructor.
 data ManagementWebPropertyAdWordsLinksGet' = ManagementWebPropertyAdWordsLinksGet'
-    { _mwpawlgQuotaUser                :: !(Maybe Text)
-    , _mwpawlgPrettyPrint              :: !Bool
-    , _mwpawlgWebPropertyId            :: !Text
-    , _mwpawlgUserIP                   :: !(Maybe Text)
-    , _mwpawlgAccountId                :: !Text
-    , _mwpawlgKey                      :: !(Maybe Key)
+    { _mwpawlgQuotaUser :: !(Maybe Text)
+    , _mwpawlgPrettyPrint :: !Bool
+    , _mwpawlgWebPropertyId :: !Text
+    , _mwpawlgUserIP :: !(Maybe Text)
+    , _mwpawlgAccountId :: !Text
+    , _mwpawlgKey :: !(Maybe Key)
     , _mwpawlgWebPropertyAdWordsLinkId :: !Text
-    , _mwpawlgOAuthToken               :: !(Maybe OAuthToken)
-    , _mwpawlgFields                   :: !(Maybe Text)
+    , _mwpawlgOAuthToken :: !(Maybe OAuthToken)
+    , _mwpawlgFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksGet'' with the minimum fields required to make a request.
@@ -107,7 +107,7 @@ managementWebPropertyAdWordsLinksGet'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'webPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksGet'
-managementWebPropertyAdWordsLinksGet' pMwpawlgWebPropertyId_ pMwpawlgAccountId_ pMwpawlgWebPropertyAdWordsLinkId_ =
+managementWebPropertyAdWordsLinksGet' pMwpawlgWebPropertyId_ pMwpawlgAccountId_ pMwpawlgWebPropertyAdWordsLinkId_ = 
     ManagementWebPropertyAdWordsLinksGet'
     { _mwpawlgQuotaUser = Nothing
     , _mwpawlgPrettyPrint = False

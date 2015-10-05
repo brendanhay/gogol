@@ -54,8 +54,8 @@ module Network.Google.Resource.Logging.Projects.LogServices.Indexes.List
     , plsilCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogServicesIndexesList@ which the
 -- 'ProjectsLogServicesIndexesList'' request conforms to.
@@ -93,25 +93,25 @@ type ProjectsLogServicesIndexesListResource =
 --
 -- /See:/ 'projectsLogServicesIndexesList'' smart constructor.
 data ProjectsLogServicesIndexesList' = ProjectsLogServicesIndexesList'
-    { _plsilLog            :: !(Maybe Text)
-    , _plsilXgafv          :: !(Maybe Text)
-    , _plsilQuotaUser      :: !(Maybe Text)
-    , _plsilPrettyPrint    :: !Bool
+    { _plsilLog :: !(Maybe Text)
+    , _plsilXgafv :: !(Maybe Text)
+    , _plsilQuotaUser :: !(Maybe Text)
+    , _plsilPrettyPrint :: !Bool
     , _plsilUploadProtocol :: !(Maybe Text)
-    , _plsilPp             :: !Bool
-    , _plsilAccessToken    :: !(Maybe Text)
-    , _plsilUploadType     :: !(Maybe Text)
-    , _plsilBearerToken    :: !(Maybe Text)
-    , _plsilKey            :: !(Maybe Key)
-    , _plsilLogServicesId  :: !Text
-    , _plsilDepth          :: !(Maybe Int32)
-    , _plsilPageToken      :: !(Maybe Text)
-    , _plsilOAuthToken     :: !(Maybe OAuthToken)
-    , _plsilProjectsId     :: !Text
-    , _plsilPageSize       :: !(Maybe Int32)
-    , _plsilIndexPrefix    :: !(Maybe Text)
-    , _plsilFields         :: !(Maybe Text)
-    , _plsilCallback       :: !(Maybe Text)
+    , _plsilPp :: !Bool
+    , _plsilAccessToken :: !(Maybe Text)
+    , _plsilUploadType :: !(Maybe Text)
+    , _plsilBearerToken :: !(Maybe Text)
+    , _plsilKey :: !(Maybe Key)
+    , _plsilLogServicesId :: !Text
+    , _plsilDepth :: !(Maybe Int32)
+    , _plsilPageToken :: !(Maybe Text)
+    , _plsilOAuthToken :: !(Maybe OAuthToken)
+    , _plsilProjectsId :: !Text
+    , _plsilPageSize :: !(Maybe Int32)
+    , _plsilIndexPrefix :: !(Maybe Text)
+    , _plsilFields :: !(Maybe Text)
+    , _plsilCallback :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogServicesIndexesList'' with the minimum fields required to make a request.
@@ -159,7 +159,7 @@ projectsLogServicesIndexesList'
     :: Text -- ^ 'logServicesId'
     -> Text -- ^ 'projectsId'
     -> ProjectsLogServicesIndexesList'
-projectsLogServicesIndexesList' pPlsilLogServicesId_ pPlsilProjectsId_ =
+projectsLogServicesIndexesList' pPlsilLogServicesId_ pPlsilProjectsId_ = 
     ProjectsLogServicesIndexesList'
     { _plsilLog = Nothing
     , _plsilXgafv = Nothing

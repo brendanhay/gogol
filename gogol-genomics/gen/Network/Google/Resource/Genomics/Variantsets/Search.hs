@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.Variantsets.Search
     , vFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsetsSearch@ which the
 -- 'VariantsetsSearch'' request conforms to.
@@ -66,13 +66,13 @@ type VariantsetsSearchResource =
 --
 -- /See:/ 'variantsetsSearch'' smart constructor.
 data VariantsetsSearch' = VariantsetsSearch'
-    { _vQuotaUser   :: !(Maybe Text)
+    { _vQuotaUser :: !(Maybe Text)
     , _vPrettyPrint :: !Bool
-    , _vUserIP      :: !(Maybe Text)
-    , _vPayload     :: !SearchVariantSetsRequest
-    , _vKey         :: !(Maybe Key)
-    , _vOAuthToken  :: !(Maybe OAuthToken)
-    , _vFields      :: !(Maybe Text)
+    , _vUserIP :: !(Maybe Text)
+    , _vPayload :: !SearchVariantSetsRequest
+    , _vKey :: !(Maybe Key)
+    , _vOAuthToken :: !(Maybe OAuthToken)
+    , _vFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsSearch'' with the minimum fields required to make a request.
@@ -95,7 +95,7 @@ data VariantsetsSearch' = VariantsetsSearch'
 variantsetsSearch'
     :: SearchVariantSetsRequest -- ^ 'payload'
     -> VariantsetsSearch'
-variantsetsSearch' pVPayload_ =
+variantsetsSearch' pVPayload_ = 
     VariantsetsSearch'
     { _vQuotaUser = Nothing
     , _vPrettyPrint = True

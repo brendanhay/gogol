@@ -54,8 +54,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.BatchDelete
     , babdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsAttachmentsBatchDelete@ which the
 -- 'BeaconsAttachmentsBatchDelete'' request conforms to.
@@ -88,20 +88,20 @@ type BeaconsAttachmentsBatchDeleteResource =
 --
 -- /See:/ 'beaconsAttachmentsBatchDelete'' smart constructor.
 data BeaconsAttachmentsBatchDelete' = BeaconsAttachmentsBatchDelete'
-    { _babdXgafv          :: !(Maybe Text)
-    , _babdQuotaUser      :: !(Maybe Text)
-    , _babdPrettyPrint    :: !Bool
+    { _babdXgafv :: !(Maybe Text)
+    , _babdQuotaUser :: !(Maybe Text)
+    , _babdPrettyPrint :: !Bool
     , _babdUploadProtocol :: !(Maybe Text)
-    , _babdPp             :: !Bool
-    , _babdAccessToken    :: !(Maybe Text)
-    , _babdBeaconName     :: !Text
-    , _babdUploadType     :: !(Maybe Text)
-    , _babdBearerToken    :: !(Maybe Text)
+    , _babdPp :: !Bool
+    , _babdAccessToken :: !(Maybe Text)
+    , _babdBeaconName :: !Text
+    , _babdUploadType :: !(Maybe Text)
+    , _babdBearerToken :: !(Maybe Text)
     , _babdNamespacedType :: !(Maybe Text)
-    , _babdKey            :: !(Maybe Key)
-    , _babdOAuthToken     :: !(Maybe OAuthToken)
-    , _babdFields         :: !(Maybe Text)
-    , _babdCallback       :: !(Maybe Text)
+    , _babdKey :: !(Maybe Key)
+    , _babdOAuthToken :: !(Maybe OAuthToken)
+    , _babdFields :: !(Maybe Text)
+    , _babdCallback :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsAttachmentsBatchDelete'' with the minimum fields required to make a request.
@@ -138,7 +138,7 @@ data BeaconsAttachmentsBatchDelete' = BeaconsAttachmentsBatchDelete'
 beaconsAttachmentsBatchDelete'
     :: Text -- ^ 'beaconName'
     -> BeaconsAttachmentsBatchDelete'
-beaconsAttachmentsBatchDelete' pBabdBeaconName_ =
+beaconsAttachmentsBatchDelete' pBabdBeaconName_ = 
     BeaconsAttachmentsBatchDelete'
     { _babdXgafv = Nothing
     , _babdQuotaUser = Nothing

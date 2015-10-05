@@ -42,8 +42,8 @@ module Network.Google.Resource.AdSense.Savedadstyles.Get
     , sgFields
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdsenseSavedadstylesGet@ which the
 -- 'SavedadstylesGet'' request conforms to.
@@ -62,13 +62,13 @@ type SavedadstylesGetResource =
 --
 -- /See:/ 'savedadstylesGet'' smart constructor.
 data SavedadstylesGet' = SavedadstylesGet'
-    { _sgQuotaUser      :: !(Maybe Text)
-    , _sgPrettyPrint    :: !Bool
+    { _sgQuotaUser :: !(Maybe Text)
+    , _sgPrettyPrint :: !Bool
     , _sgSavedAdStyleId :: !Text
-    , _sgUserIP         :: !(Maybe Text)
-    , _sgKey            :: !(Maybe Key)
-    , _sgOAuthToken     :: !(Maybe OAuthToken)
-    , _sgFields         :: !(Maybe Text)
+    , _sgUserIP :: !(Maybe Text)
+    , _sgKey :: !(Maybe Key)
+    , _sgOAuthToken :: !(Maybe OAuthToken)
+    , _sgFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SavedadstylesGet'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data SavedadstylesGet' = SavedadstylesGet'
 savedadstylesGet'
     :: Text -- ^ 'savedAdStyleId'
     -> SavedadstylesGet'
-savedadstylesGet' pSgSavedAdStyleId_ =
+savedadstylesGet' pSgSavedAdStyleId_ = 
     SavedadstylesGet'
     { _sgQuotaUser = Nothing
     , _sgPrettyPrint = True

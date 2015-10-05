@@ -44,8 +44,8 @@ module Network.Google.Resource.Blogger.Blogs.Get
     , bgFields
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @BloggerBlogsGet@ which the
 -- 'BlogsGet'' request conforms to.
@@ -66,15 +66,15 @@ type BlogsGetResource =
 --
 -- /See:/ 'blogsGet'' smart constructor.
 data BlogsGet' = BlogsGet'
-    { _bgQuotaUser   :: !(Maybe Text)
+    { _bgQuotaUser :: !(Maybe Text)
     , _bgPrettyPrint :: !Bool
-    , _bgUserIP      :: !(Maybe Text)
-    , _bgBlogId      :: !Text
-    , _bgKey         :: !(Maybe Key)
-    , _bgMaxPosts    :: !(Maybe Word32)
-    , _bgView        :: !(Maybe BlogsGetView)
-    , _bgOAuthToken  :: !(Maybe OAuthToken)
-    , _bgFields      :: !(Maybe Text)
+    , _bgUserIP :: !(Maybe Text)
+    , _bgBlogId :: !Text
+    , _bgKey :: !(Maybe Key)
+    , _bgMaxPosts :: !(Maybe Word32)
+    , _bgView :: !(Maybe BlogsGetView)
+    , _bgOAuthToken :: !(Maybe OAuthToken)
+    , _bgFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BlogsGet'' with the minimum fields required to make a request.
@@ -101,7 +101,7 @@ data BlogsGet' = BlogsGet'
 blogsGet'
     :: Text -- ^ 'blogId'
     -> BlogsGet'
-blogsGet' pBgBlogId_ =
+blogsGet' pBgBlogId_ = 
     BlogsGet'
     { _bgQuotaUser = Nothing
     , _bgPrettyPrint = True

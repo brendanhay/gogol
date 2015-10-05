@@ -51,8 +51,8 @@ module Network.Google.Resource.Logging.Projects.LogServices.Sinks.Delete
     , plssdCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogServicesSinksDelete@ which the
 -- 'ProjectsLogServicesSinksDelete'' request conforms to.
@@ -84,21 +84,21 @@ type ProjectsLogServicesSinksDeleteResource =
 --
 -- /See:/ 'projectsLogServicesSinksDelete'' smart constructor.
 data ProjectsLogServicesSinksDelete' = ProjectsLogServicesSinksDelete'
-    { _plssdXgafv          :: !(Maybe Text)
-    , _plssdQuotaUser      :: !(Maybe Text)
-    , _plssdPrettyPrint    :: !Bool
+    { _plssdXgafv :: !(Maybe Text)
+    , _plssdQuotaUser :: !(Maybe Text)
+    , _plssdPrettyPrint :: !Bool
     , _plssdUploadProtocol :: !(Maybe Text)
-    , _plssdPp             :: !Bool
-    , _plssdAccessToken    :: !(Maybe Text)
-    , _plssdUploadType     :: !(Maybe Text)
-    , _plssdBearerToken    :: !(Maybe Text)
-    , _plssdKey            :: !(Maybe Key)
-    , _plssdLogServicesId  :: !Text
-    , _plssdOAuthToken     :: !(Maybe OAuthToken)
-    , _plssdProjectsId     :: !Text
-    , _plssdSinksId        :: !Text
-    , _plssdFields         :: !(Maybe Text)
-    , _plssdCallback       :: !(Maybe Text)
+    , _plssdPp :: !Bool
+    , _plssdAccessToken :: !(Maybe Text)
+    , _plssdUploadType :: !(Maybe Text)
+    , _plssdBearerToken :: !(Maybe Text)
+    , _plssdKey :: !(Maybe Key)
+    , _plssdLogServicesId :: !Text
+    , _plssdOAuthToken :: !(Maybe OAuthToken)
+    , _plssdProjectsId :: !Text
+    , _plssdSinksId :: !Text
+    , _plssdFields :: !(Maybe Text)
+    , _plssdCallback :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogServicesSinksDelete'' with the minimum fields required to make a request.
@@ -139,7 +139,7 @@ projectsLogServicesSinksDelete'
     -> Text -- ^ 'projectsId'
     -> Text -- ^ 'sinksId'
     -> ProjectsLogServicesSinksDelete'
-projectsLogServicesSinksDelete' pPlssdLogServicesId_ pPlssdProjectsId_ pPlssdSinksId_ =
+projectsLogServicesSinksDelete' pPlssdLogServicesId_ pPlssdProjectsId_ pPlssdSinksId_ = 
     ProjectsLogServicesSinksDelete'
     { _plssdXgafv = Nothing
     , _plssdQuotaUser = Nothing

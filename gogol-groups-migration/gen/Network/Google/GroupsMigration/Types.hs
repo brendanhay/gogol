@@ -25,9 +25,9 @@ module Network.Google.GroupsMigration.Types
     , gResponseCode
     ) where
 
-import           Network.Google.GroupsMigration.Types.Product
-import           Network.Google.GroupsMigration.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.GroupsMigration.Types.Product
+import Network.Google.GroupsMigration.Types.Sum
+import Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Groups Migration API.
 groupsMigrationURL :: BaseUrl

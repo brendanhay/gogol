@@ -46,8 +46,8 @@ module Network.Google.Resource.Analytics.Management.UnSampledReports.List
     , musrlFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementUnSampledReportsList@ which the
 -- 'ManagementUnSampledReportsList'' request conforms to.
@@ -75,17 +75,17 @@ type ManagementUnSampledReportsListResource =
 --
 -- /See:/ 'managementUnSampledReportsList'' smart constructor.
 data ManagementUnSampledReportsList' = ManagementUnSampledReportsList'
-    { _musrlQuotaUser     :: !(Maybe Text)
-    , _musrlPrettyPrint   :: !Bool
+    { _musrlQuotaUser :: !(Maybe Text)
+    , _musrlPrettyPrint :: !Bool
     , _musrlWebPropertyId :: !Text
-    , _musrlUserIP        :: !(Maybe Text)
-    , _musrlProFileId     :: !Text
-    , _musrlAccountId     :: !Text
-    , _musrlKey           :: !(Maybe Key)
-    , _musrlOAuthToken    :: !(Maybe OAuthToken)
-    , _musrlStartIndex    :: !(Maybe Int32)
-    , _musrlMaxResults    :: !(Maybe Int32)
-    , _musrlFields        :: !(Maybe Text)
+    , _musrlUserIP :: !(Maybe Text)
+    , _musrlProFileId :: !Text
+    , _musrlAccountId :: !Text
+    , _musrlKey :: !(Maybe Key)
+    , _musrlOAuthToken :: !(Maybe OAuthToken)
+    , _musrlStartIndex :: !(Maybe Int32)
+    , _musrlMaxResults :: !(Maybe Int32)
+    , _musrlFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUnSampledReportsList'' with the minimum fields required to make a request.
@@ -118,7 +118,7 @@ managementUnSampledReportsList'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> ManagementUnSampledReportsList'
-managementUnSampledReportsList' pMusrlWebPropertyId_ pMusrlProFileId_ pMusrlAccountId_ =
+managementUnSampledReportsList' pMusrlWebPropertyId_ pMusrlProFileId_ pMusrlAccountId_ = 
     ManagementUnSampledReportsList'
     { _musrlQuotaUser = Nothing
     , _musrlPrettyPrint = False

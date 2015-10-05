@@ -42,8 +42,8 @@ module Network.Google.Resource.Genomics.Readgroupsets.Delete
     , rdFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReadgroupsetsDelete@ which the
 -- 'ReadgroupsetsDelete'' request conforms to.
@@ -62,13 +62,13 @@ type ReadgroupsetsDeleteResource =
 --
 -- /See:/ 'readgroupsetsDelete'' smart constructor.
 data ReadgroupsetsDelete' = ReadgroupsetsDelete'
-    { _rdQuotaUser      :: !(Maybe Text)
-    , _rdPrettyPrint    :: !Bool
+    { _rdQuotaUser :: !(Maybe Text)
+    , _rdPrettyPrint :: !Bool
     , _rdReadGroupSetId :: !Text
-    , _rdUserIP         :: !(Maybe Text)
-    , _rdKey            :: !(Maybe Key)
-    , _rdOAuthToken     :: !(Maybe OAuthToken)
-    , _rdFields         :: !(Maybe Text)
+    , _rdUserIP :: !(Maybe Text)
+    , _rdKey :: !(Maybe Key)
+    , _rdOAuthToken :: !(Maybe OAuthToken)
+    , _rdFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsDelete'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data ReadgroupsetsDelete' = ReadgroupsetsDelete'
 readgroupsetsDelete'
     :: Text -- ^ 'readGroupSetId'
     -> ReadgroupsetsDelete'
-readgroupsetsDelete' pRdReadGroupSetId_ =
+readgroupsetsDelete' pRdReadGroupSetId_ = 
     ReadgroupsetsDelete'
     { _rdQuotaUser = Nothing
     , _rdPrettyPrint = True

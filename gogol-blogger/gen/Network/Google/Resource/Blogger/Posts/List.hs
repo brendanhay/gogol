@@ -52,8 +52,8 @@ module Network.Google.Resource.Blogger.Posts.List
     , pllFields
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @BloggerPostsList@ which the
 -- 'PostsList'' request conforms to.
@@ -84,23 +84,23 @@ type PostsListResource =
 --
 -- /See:/ 'postsList'' smart constructor.
 data PostsList' = PostsList'
-    { _pllStatus      :: !(Maybe [PostsListStatus])
-    , _pllQuotaUser   :: !(Maybe Text)
+    { _pllStatus :: !(Maybe [PostsListStatus])
+    , _pllQuotaUser :: !(Maybe Text)
     , _pllPrettyPrint :: !Bool
-    , _pllOrderBy     :: !PostsListOrderBy
-    , _pllUserIP      :: !(Maybe Text)
+    , _pllOrderBy :: !PostsListOrderBy
+    , _pllUserIP :: !(Maybe Text)
     , _pllFetchImages :: !(Maybe Bool)
-    , _pllEndDate     :: !(Maybe DateTime')
-    , _pllBlogId      :: !Text
-    , _pllStartDate   :: !(Maybe DateTime')
-    , _pllKey         :: !(Maybe Key)
+    , _pllEndDate :: !(Maybe DateTime')
+    , _pllBlogId :: !Text
+    , _pllStartDate :: !(Maybe DateTime')
+    , _pllKey :: !(Maybe Key)
     , _pllFetchBodies :: !Bool
-    , _pllView        :: !(Maybe PostsListView)
-    , _pllLabels      :: !(Maybe Text)
-    , _pllPageToken   :: !(Maybe Text)
-    , _pllOAuthToken  :: !(Maybe OAuthToken)
-    , _pllMaxResults  :: !(Maybe Word32)
-    , _pllFields      :: !(Maybe Text)
+    , _pllView :: !(Maybe PostsListView)
+    , _pllLabels :: !(Maybe Text)
+    , _pllPageToken :: !(Maybe Text)
+    , _pllOAuthToken :: !(Maybe OAuthToken)
+    , _pllMaxResults :: !(Maybe Word32)
+    , _pllFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsList'' with the minimum fields required to make a request.
@@ -143,7 +143,7 @@ data PostsList' = PostsList'
 postsList'
     :: Text -- ^ 'blogId'
     -> PostsList'
-postsList' pPllBlogId_ =
+postsList' pPllBlogId_ = 
     PostsList'
     { _pllStatus = Nothing
     , _pllQuotaUser = Nothing

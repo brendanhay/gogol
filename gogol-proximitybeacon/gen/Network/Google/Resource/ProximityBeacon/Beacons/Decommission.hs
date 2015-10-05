@@ -51,8 +51,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Decommission
     , bdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsDecommission@ which the
 -- 'BeaconsDecommission'' request conforms to.
@@ -80,19 +80,19 @@ type BeaconsDecommissionResource =
 --
 -- /See:/ 'beaconsDecommission'' smart constructor.
 data BeaconsDecommission' = BeaconsDecommission'
-    { _bdXgafv          :: !(Maybe Text)
-    , _bdQuotaUser      :: !(Maybe Text)
-    , _bdPrettyPrint    :: !Bool
+    { _bdXgafv :: !(Maybe Text)
+    , _bdQuotaUser :: !(Maybe Text)
+    , _bdPrettyPrint :: !Bool
     , _bdUploadProtocol :: !(Maybe Text)
-    , _bdPp             :: !Bool
-    , _bdAccessToken    :: !(Maybe Text)
-    , _bdBeaconName     :: !Text
-    , _bdUploadType     :: !(Maybe Text)
-    , _bdBearerToken    :: !(Maybe Text)
-    , _bdKey            :: !(Maybe Key)
-    , _bdOAuthToken     :: !(Maybe OAuthToken)
-    , _bdFields         :: !(Maybe Text)
-    , _bdCallback       :: !(Maybe Text)
+    , _bdPp :: !Bool
+    , _bdAccessToken :: !(Maybe Text)
+    , _bdBeaconName :: !Text
+    , _bdUploadType :: !(Maybe Text)
+    , _bdBearerToken :: !(Maybe Text)
+    , _bdKey :: !(Maybe Key)
+    , _bdOAuthToken :: !(Maybe OAuthToken)
+    , _bdFields :: !(Maybe Text)
+    , _bdCallback :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsDecommission'' with the minimum fields required to make a request.
@@ -127,7 +127,7 @@ data BeaconsDecommission' = BeaconsDecommission'
 beaconsDecommission'
     :: Text -- ^ 'beaconName'
     -> BeaconsDecommission'
-beaconsDecommission' pBdBeaconName_ =
+beaconsDecommission' pBdBeaconName_ = 
     BeaconsDecommission'
     { _bdXgafv = Nothing
     , _bdQuotaUser = Nothing

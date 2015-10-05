@@ -46,8 +46,8 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.List
     , mpffllFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProFileFilterLinksList@ which the
 -- 'ManagementProFileFilterLinksList'' request conforms to.
@@ -75,17 +75,17 @@ type ManagementProFileFilterLinksListResource =
 --
 -- /See:/ 'managementProFileFilterLinksList'' smart constructor.
 data ManagementProFileFilterLinksList' = ManagementProFileFilterLinksList'
-    { _mpffllQuotaUser     :: !(Maybe Text)
-    , _mpffllPrettyPrint   :: !Bool
+    { _mpffllQuotaUser :: !(Maybe Text)
+    , _mpffllPrettyPrint :: !Bool
     , _mpffllWebPropertyId :: !Text
-    , _mpffllUserIP        :: !(Maybe Text)
-    , _mpffllProFileId     :: !Text
-    , _mpffllAccountId     :: !Text
-    , _mpffllKey           :: !(Maybe Key)
-    , _mpffllOAuthToken    :: !(Maybe OAuthToken)
-    , _mpffllStartIndex    :: !(Maybe Int32)
-    , _mpffllMaxResults    :: !(Maybe Int32)
-    , _mpffllFields        :: !(Maybe Text)
+    , _mpffllUserIP :: !(Maybe Text)
+    , _mpffllProFileId :: !Text
+    , _mpffllAccountId :: !Text
+    , _mpffllKey :: !(Maybe Key)
+    , _mpffllOAuthToken :: !(Maybe OAuthToken)
+    , _mpffllStartIndex :: !(Maybe Int32)
+    , _mpffllMaxResults :: !(Maybe Int32)
+    , _mpffllFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFileFilterLinksList'' with the minimum fields required to make a request.
@@ -118,7 +118,7 @@ managementProFileFilterLinksList'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> ManagementProFileFilterLinksList'
-managementProFileFilterLinksList' pMpffllWebPropertyId_ pMpffllProFileId_ pMpffllAccountId_ =
+managementProFileFilterLinksList' pMpffllWebPropertyId_ pMpffllProFileId_ pMpffllAccountId_ = 
     ManagementProFileFilterLinksList'
     { _mpffllQuotaUser = Nothing
     , _mpffllPrettyPrint = False

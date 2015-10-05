@@ -16,7 +16,7 @@
 --
 module Network.Google.CivicInfo.Types.Sum where
 
-import           Network.Google.Prelude
+import Network.Google.Prelude
 
 -- | A list of office levels to filter by. Only offices that serve at least
 -- one of these levels will be returned. Divisions that don\'t contain a

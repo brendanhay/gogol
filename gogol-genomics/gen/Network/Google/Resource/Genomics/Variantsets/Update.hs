@@ -44,8 +44,8 @@ module Network.Google.Resource.Genomics.Variantsets.Update
     , vuuFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsetsUpdate@ which the
 -- 'VariantsetsUpdate'' request conforms to.
@@ -66,14 +66,14 @@ type VariantsetsUpdateResource =
 --
 -- /See:/ 'variantsetsUpdate'' smart constructor.
 data VariantsetsUpdate' = VariantsetsUpdate'
-    { _vuuQuotaUser    :: !(Maybe Text)
-    , _vuuPrettyPrint  :: !Bool
+    { _vuuQuotaUser :: !(Maybe Text)
+    , _vuuPrettyPrint :: !Bool
     , _vuuVariantSetId :: !Text
-    , _vuuUserIP       :: !(Maybe Text)
-    , _vuuPayload      :: !VariantSet
-    , _vuuKey          :: !(Maybe Key)
-    , _vuuOAuthToken   :: !(Maybe OAuthToken)
-    , _vuuFields       :: !(Maybe Text)
+    , _vuuUserIP :: !(Maybe Text)
+    , _vuuPayload :: !VariantSet
+    , _vuuKey :: !(Maybe Key)
+    , _vuuOAuthToken :: !(Maybe OAuthToken)
+    , _vuuFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsUpdate'' with the minimum fields required to make a request.
@@ -99,7 +99,7 @@ variantsetsUpdate'
     :: Text -- ^ 'variantSetId'
     -> VariantSet -- ^ 'payload'
     -> VariantsetsUpdate'
-variantsetsUpdate' pVuuVariantSetId_ pVuuPayload_ =
+variantsetsUpdate' pVuuVariantSetId_ pVuuPayload_ = 
     VariantsetsUpdate'
     { _vuuQuotaUser = Nothing
     , _vuuPrettyPrint = True

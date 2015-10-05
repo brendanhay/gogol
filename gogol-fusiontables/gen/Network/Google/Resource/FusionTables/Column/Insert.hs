@@ -43,8 +43,8 @@ module Network.Google.Resource.FusionTables.Column.Insert
     , ciFields
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesColumnInsert@ which the
 -- 'ColumnInsert'' request conforms to.
@@ -65,14 +65,14 @@ type ColumnInsertResource =
 --
 -- /See:/ 'columnInsert'' smart constructor.
 data ColumnInsert' = ColumnInsert'
-    { _ciQuotaUser   :: !(Maybe Text)
+    { _ciQuotaUser :: !(Maybe Text)
     , _ciPrettyPrint :: !Bool
-    , _ciUserIP      :: !(Maybe Text)
-    , _ciPayload     :: !Column
-    , _ciKey         :: !(Maybe Key)
-    , _ciOAuthToken  :: !(Maybe OAuthToken)
-    , _ciTableId     :: !Text
-    , _ciFields      :: !(Maybe Text)
+    , _ciUserIP :: !(Maybe Text)
+    , _ciPayload :: !Column
+    , _ciKey :: !(Maybe Key)
+    , _ciOAuthToken :: !(Maybe OAuthToken)
+    , _ciTableId :: !Text
+    , _ciFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnInsert'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ columnInsert'
     :: Column -- ^ 'payload'
     -> Text -- ^ 'tableId'
     -> ColumnInsert'
-columnInsert' pCiPayload_ pCiTableId_ =
+columnInsert' pCiPayload_ pCiTableId_ = 
     ColumnInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True

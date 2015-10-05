@@ -46,8 +46,8 @@ module Network.Google.Resource.AdSense.Accounts.AdUnits.CustomChannels.List
     , aaucclFields
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsAdUnitsCustomChannelsList@ which the
 -- 'AccountsAdUnitsCustomChannelsList'' request conforms to.
@@ -74,17 +74,17 @@ type AccountsAdUnitsCustomChannelsListResource =
 --
 -- /See:/ 'accountsAdUnitsCustomChannelsList'' smart constructor.
 data AccountsAdUnitsCustomChannelsList' = AccountsAdUnitsCustomChannelsList'
-    { _aaucclQuotaUser   :: !(Maybe Text)
+    { _aaucclQuotaUser :: !(Maybe Text)
     , _aaucclPrettyPrint :: !Bool
-    , _aaucclUserIP      :: !(Maybe Text)
-    , _aaucclAdUnitId    :: !Text
-    , _aaucclAdClientId  :: !Text
-    , _aaucclAccountId   :: !Text
-    , _aaucclKey         :: !(Maybe Key)
-    , _aaucclPageToken   :: !(Maybe Text)
-    , _aaucclOAuthToken  :: !(Maybe OAuthToken)
-    , _aaucclMaxResults  :: !(Maybe Int32)
-    , _aaucclFields      :: !(Maybe Text)
+    , _aaucclUserIP :: !(Maybe Text)
+    , _aaucclAdUnitId :: !Text
+    , _aaucclAdClientId :: !Text
+    , _aaucclAccountId :: !Text
+    , _aaucclKey :: !(Maybe Key)
+    , _aaucclPageToken :: !(Maybe Text)
+    , _aaucclOAuthToken :: !(Maybe OAuthToken)
+    , _aaucclMaxResults :: !(Maybe Int32)
+    , _aaucclFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdUnitsCustomChannelsList'' with the minimum fields required to make a request.
@@ -117,7 +117,7 @@ accountsAdUnitsCustomChannelsList'
     -> Text -- ^ 'adClientId'
     -> Text -- ^ 'accountId'
     -> AccountsAdUnitsCustomChannelsList'
-accountsAdUnitsCustomChannelsList' pAaucclAdUnitId_ pAaucclAdClientId_ pAaucclAccountId_ =
+accountsAdUnitsCustomChannelsList' pAaucclAdUnitId_ pAaucclAdClientId_ pAaucclAccountId_ = 
     AccountsAdUnitsCustomChannelsList'
     { _aaucclQuotaUser = Nothing
     , _aaucclPrettyPrint = True

@@ -46,8 +46,8 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
     , pzcdFields
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ContainerProjectsZonesClustersDelete@ which the
 -- 'ProjectsZonesClustersDelete'' request conforms to.
@@ -71,15 +71,15 @@ type ProjectsZonesClustersDeleteResource =
 --
 -- /See:/ 'projectsZonesClustersDelete'' smart constructor.
 data ProjectsZonesClustersDelete' = ProjectsZonesClustersDelete'
-    { _pzcdQuotaUser   :: !(Maybe Text)
+    { _pzcdQuotaUser :: !(Maybe Text)
     , _pzcdPrettyPrint :: !Bool
-    , _pzcdUserIP      :: !(Maybe Text)
-    , _pzcdZoneId      :: !Text
-    , _pzcdKey         :: !(Maybe Key)
-    , _pzcdClusterId   :: !Text
-    , _pzcdProjectId   :: !Text
-    , _pzcdOAuthToken  :: !(Maybe OAuthToken)
-    , _pzcdFields      :: !(Maybe Text)
+    , _pzcdUserIP :: !(Maybe Text)
+    , _pzcdZoneId :: !Text
+    , _pzcdKey :: !(Maybe Key)
+    , _pzcdClusterId :: !Text
+    , _pzcdProjectId :: !Text
+    , _pzcdOAuthToken :: !(Maybe OAuthToken)
+    , _pzcdFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersDelete'' with the minimum fields required to make a request.
@@ -108,7 +108,7 @@ projectsZonesClustersDelete'
     -> Text -- ^ 'clusterId'
     -> Text -- ^ 'projectId'
     -> ProjectsZonesClustersDelete'
-projectsZonesClustersDelete' pPzcdZoneId_ pPzcdClusterId_ pPzcdProjectId_ =
+projectsZonesClustersDelete' pPzcdZoneId_ pPzcdClusterId_ pPzcdProjectId_ = 
     ProjectsZonesClustersDelete'
     { _pzcdQuotaUser = Nothing
     , _pzcdPrettyPrint = True

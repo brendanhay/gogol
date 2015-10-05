@@ -32,9 +32,9 @@ module Network.Google.EmailMigration.Types
     , miIsSent
     ) where
 
-import           Network.Google.EmailMigration.Types.Product
-import           Network.Google.EmailMigration.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.EmailMigration.Types.Product
+import Network.Google.EmailMigration.Types.Sum
+import Network.Google.Prelude
 
 -- | URL referring to version 'email_migration_v2' of the Email Migration API v2.
 emailMigrationURL :: BaseUrl

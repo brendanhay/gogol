@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer.Offers.List
     , olFields
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerOffersList@ which the
 -- 'OffersList'' request conforms to.
@@ -63,13 +63,13 @@ type OffersListResource =
 --
 -- /See:/ 'offersList'' smart constructor.
 data OffersList' = OffersList'
-    { _olQuotaUser   :: !(Maybe Text)
+    { _olQuotaUser :: !(Maybe Text)
     , _olPrettyPrint :: !Bool
-    , _olUserIP      :: !(Maybe Text)
-    , _olPayload     :: !ListOffersRequest
-    , _olKey         :: !(Maybe Key)
-    , _olOAuthToken  :: !(Maybe OAuthToken)
-    , _olFields      :: !(Maybe Text)
+    , _olUserIP :: !(Maybe Text)
+    , _olPayload :: !ListOffersRequest
+    , _olKey :: !(Maybe Key)
+    , _olOAuthToken :: !(Maybe OAuthToken)
+    , _olFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OffersList'' with the minimum fields required to make a request.
@@ -92,7 +92,7 @@ data OffersList' = OffersList'
 offersList'
     :: ListOffersRequest -- ^ 'payload'
     -> OffersList'
-offersList' pOlPayload_ =
+offersList' pOlPayload_ = 
     OffersList'
     { _olQuotaUser = Nothing
     , _olPrettyPrint = True

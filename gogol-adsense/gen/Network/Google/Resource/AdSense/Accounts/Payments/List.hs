@@ -42,8 +42,8 @@ module Network.Google.Resource.AdSense.Accounts.Payments.List
     , aplFields
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsPaymentsList@ which the
 -- 'AccountsPaymentsList'' request conforms to.
@@ -63,13 +63,13 @@ type AccountsPaymentsListResource =
 --
 -- /See:/ 'accountsPaymentsList'' smart constructor.
 data AccountsPaymentsList' = AccountsPaymentsList'
-    { _aplQuotaUser   :: !(Maybe Text)
+    { _aplQuotaUser :: !(Maybe Text)
     , _aplPrettyPrint :: !Bool
-    , _aplUserIP      :: !(Maybe Text)
-    , _aplAccountId   :: !Text
-    , _aplKey         :: !(Maybe Key)
-    , _aplOAuthToken  :: !(Maybe OAuthToken)
-    , _aplFields      :: !(Maybe Text)
+    , _aplUserIP :: !(Maybe Text)
+    , _aplAccountId :: !Text
+    , _aplKey :: !(Maybe Key)
+    , _aplOAuthToken :: !(Maybe OAuthToken)
+    , _aplFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPaymentsList'' with the minimum fields required to make a request.
@@ -92,7 +92,7 @@ data AccountsPaymentsList' = AccountsPaymentsList'
 accountsPaymentsList'
     :: Text -- ^ 'accountId'
     -> AccountsPaymentsList'
-accountsPaymentsList' pAplAccountId_ =
+accountsPaymentsList' pAplAccountId_ = 
     AccountsPaymentsList'
     { _aplQuotaUser = Nothing
     , _aplPrettyPrint = True

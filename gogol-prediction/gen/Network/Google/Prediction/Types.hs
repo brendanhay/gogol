@@ -192,9 +192,9 @@ module Network.Google.Prediction.Types
     , addofNumeric
     ) where
 
-import           Network.Google.Prediction.Types.Product
-import           Network.Google.Prediction.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Prediction.Types.Product
+import Network.Google.Prediction.Types.Sum
+import Network.Google.Prelude
 
 -- | URL referring to version 'v1.6' of the Prediction API.
 predictionURL :: BaseUrl

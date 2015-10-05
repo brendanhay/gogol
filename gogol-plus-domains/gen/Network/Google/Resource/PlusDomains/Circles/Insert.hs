@@ -43,8 +43,8 @@ module Network.Google.Resource.PlusDomains.Circles.Insert
     , cirFields
     ) where
 
-import           Network.Google.PlusDomains.Types
-import           Network.Google.Prelude
+import Network.Google.PlusDomains.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsCirclesInsert@ which the
 -- 'CirclesInsert'' request conforms to.
@@ -65,14 +65,14 @@ type CirclesInsertResource =
 --
 -- /See:/ 'circlesInsert'' smart constructor.
 data CirclesInsert' = CirclesInsert'
-    { _cirQuotaUser   :: !(Maybe Text)
+    { _cirQuotaUser :: !(Maybe Text)
     , _cirPrettyPrint :: !Bool
-    , _cirUserIP      :: !(Maybe Text)
-    , _cirPayload     :: !Circle
-    , _cirUserId      :: !Text
-    , _cirKey         :: !(Maybe Key)
-    , _cirOAuthToken  :: !(Maybe OAuthToken)
-    , _cirFields      :: !(Maybe Text)
+    , _cirUserIP :: !(Maybe Text)
+    , _cirPayload :: !Circle
+    , _cirUserId :: !Text
+    , _cirKey :: !(Maybe Key)
+    , _cirOAuthToken :: !(Maybe OAuthToken)
+    , _cirFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesInsert'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ circlesInsert'
     :: Circle -- ^ 'payload'
     -> Text -- ^ 'userId'
     -> CirclesInsert'
-circlesInsert' pCirPayload_ pCirUserId_ =
+circlesInsert' pCirPayload_ pCirUserId_ = 
     CirclesInsert'
     { _cirQuotaUser = Nothing
     , _cirPrettyPrint = True

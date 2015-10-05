@@ -42,8 +42,8 @@ module Network.Google.Resource.PlusDomains.People.Get
     , pgFields
     ) where
 
-import           Network.Google.PlusDomains.Types
-import           Network.Google.Prelude
+import Network.Google.PlusDomains.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsPeopleGet@ which the
 -- 'PeopleGet'' request conforms to.
@@ -62,13 +62,13 @@ type PeopleGetResource =
 --
 -- /See:/ 'peopleGet'' smart constructor.
 data PeopleGet' = PeopleGet'
-    { _pgQuotaUser   :: !(Maybe Text)
+    { _pgQuotaUser :: !(Maybe Text)
     , _pgPrettyPrint :: !Bool
-    , _pgUserIP      :: !(Maybe Text)
-    , _pgUserId      :: !Text
-    , _pgKey         :: !(Maybe Key)
-    , _pgOAuthToken  :: !(Maybe OAuthToken)
-    , _pgFields      :: !(Maybe Text)
+    , _pgUserIP :: !(Maybe Text)
+    , _pgUserId :: !Text
+    , _pgKey :: !(Maybe Key)
+    , _pgOAuthToken :: !(Maybe OAuthToken)
+    , _pgFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleGet'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data PeopleGet' = PeopleGet'
 peopleGet'
     :: Text -- ^ 'userId'
     -> PeopleGet'
-peopleGet' pPgUserId_ =
+peopleGet' pPgUserId_ = 
     PeopleGet'
     { _pgQuotaUser = Nothing
     , _pgPrettyPrint = True

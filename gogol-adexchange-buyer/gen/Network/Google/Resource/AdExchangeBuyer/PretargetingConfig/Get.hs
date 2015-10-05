@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Get
     , pcgFields
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerPretargetingConfigGet@ which the
 -- 'PretargetingConfigGet'' request conforms to.
@@ -65,14 +65,14 @@ type PretargetingConfigGetResource =
 --
 -- /See:/ 'pretargetingConfigGet'' smart constructor.
 data PretargetingConfigGet' = PretargetingConfigGet'
-    { _pcgQuotaUser   :: !(Maybe Text)
+    { _pcgQuotaUser :: !(Maybe Text)
     , _pcgPrettyPrint :: !Bool
-    , _pcgUserIP      :: !(Maybe Text)
-    , _pcgAccountId   :: !Int64
-    , _pcgKey         :: !(Maybe Key)
-    , _pcgConfigId    :: !Int64
-    , _pcgOAuthToken  :: !(Maybe OAuthToken)
-    , _pcgFields      :: !(Maybe Text)
+    , _pcgUserIP :: !(Maybe Text)
+    , _pcgAccountId :: !Int64
+    , _pcgKey :: !(Maybe Key)
+    , _pcgConfigId :: !Int64
+    , _pcgOAuthToken :: !(Maybe OAuthToken)
+    , _pcgFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigGet'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ pretargetingConfigGet'
     :: Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'configId'
     -> PretargetingConfigGet'
-pretargetingConfigGet' pPcgAccountId_ pPcgConfigId_ =
+pretargetingConfigGet' pPcgAccountId_ pPcgConfigId_ = 
     PretargetingConfigGet'
     { _pcgQuotaUser = Nothing
     , _pcgPrettyPrint = True

@@ -526,9 +526,9 @@ module Network.Google.PlusDomains.Types
     , aanFamilyName
     ) where
 
-import           Network.Google.PlusDomains.Types.Product
-import           Network.Google.PlusDomains.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.PlusDomains.Types.Product
+import Network.Google.PlusDomains.Types.Sum
+import Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Google+ Domains API.
 plusDomainsURL :: BaseUrl

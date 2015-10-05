@@ -16,7 +16,7 @@
 --
 module Network.Google.Blogger.Types.Sum where
 
-import           Network.Google.Prelude
+import Network.Google.Prelude
 
 -- | Sort search results
 data PostsListOrderBy

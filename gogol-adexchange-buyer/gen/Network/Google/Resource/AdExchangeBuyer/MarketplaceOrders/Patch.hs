@@ -45,8 +45,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Patch
     , mopFields
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplaceOrdersPatch@ which the
 -- 'MarketplaceOrdersPatch'' request conforms to.
@@ -71,16 +71,16 @@ type MarketplaceOrdersPatchResource =
 --
 -- /See:/ 'marketplaceOrdersPatch'' smart constructor.
 data MarketplaceOrdersPatch' = MarketplaceOrdersPatch'
-    { _mopQuotaUser      :: !(Maybe Text)
-    , _mopUpdateAction   :: !MarketplaceOrdersPatchUpdateAction
-    , _mopPrettyPrint    :: !Bool
-    , _mopUserIP         :: !(Maybe Text)
+    { _mopQuotaUser :: !(Maybe Text)
+    , _mopUpdateAction :: !MarketplaceOrdersPatchUpdateAction
+    , _mopPrettyPrint :: !Bool
+    , _mopUserIP :: !(Maybe Text)
     , _mopRevisionNumber :: !Int64
-    , _mopPayload        :: !MarketplaceOrder
-    , _mopKey            :: !(Maybe Key)
-    , _mopOAuthToken     :: !(Maybe OAuthToken)
-    , _mopOrderId        :: !Text
-    , _mopFields         :: !(Maybe Text)
+    , _mopPayload :: !MarketplaceOrder
+    , _mopKey :: !(Maybe Key)
+    , _mopOAuthToken :: !(Maybe OAuthToken)
+    , _mopOrderId :: !Text
+    , _mopFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceOrdersPatch'' with the minimum fields required to make a request.
@@ -112,7 +112,7 @@ marketplaceOrdersPatch'
     -> MarketplaceOrder -- ^ 'payload'
     -> Text -- ^ 'orderId'
     -> MarketplaceOrdersPatch'
-marketplaceOrdersPatch' pMopUpdateAction_ pMopRevisionNumber_ pMopPayload_ pMopOrderId_ =
+marketplaceOrdersPatch' pMopUpdateAction_ pMopRevisionNumber_ pMopPayload_ pMopOrderId_ = 
     MarketplaceOrdersPatch'
     { _mopQuotaUser = Nothing
     , _mopUpdateAction = pMopUpdateAction_

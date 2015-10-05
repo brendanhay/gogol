@@ -1048,7 +1048,7 @@ instance FromJSON
 instance ToJSON
          IdentitytoolkitRelyingPartyGetPublicKeysResponse
          where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Request of getting a code for user confirmation (reset password, change
 -- email etc.)

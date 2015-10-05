@@ -133,7 +133,7 @@ instance FromJSON SearchQueries where
               (\ o -> pure SearchQueries)
 
 instance ToJSON SearchQueries where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'searchURL' smart constructor.
@@ -341,7 +341,7 @@ instance FromJSON ResultPagemap where
               (\ o -> pure ResultPagemap)
 
 instance ToJSON ResultPagemap where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'result' smart constructor.

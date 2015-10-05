@@ -48,8 +48,8 @@ module Network.Google.Resource.PlusDomains.Media.Insert
     , miFields
     ) where
 
-import           Network.Google.PlusDomains.Types
-import           Network.Google.Prelude
+import Network.Google.PlusDomains.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsMediaInsert@ which the
 -- 'MediaInsert'' request conforms to.
@@ -75,16 +75,16 @@ type MediaInsertResource =
 --
 -- /See:/ 'mediaInsert'' smart constructor.
 data MediaInsert' = MediaInsert'
-    { _miQuotaUser   :: !(Maybe Text)
+    { _miQuotaUser :: !(Maybe Text)
     , _miPrettyPrint :: !Bool
-    , _miUserIP      :: !(Maybe Text)
-    , _miCollection  :: !MediaInsertCollection
-    , _miPayload     :: !Media
-    , _miUserId      :: !Text
-    , _miMedia       :: !Body
-    , _miKey         :: !(Maybe Key)
-    , _miOAuthToken  :: !(Maybe OAuthToken)
-    , _miFields      :: !(Maybe Text)
+    , _miUserIP :: !(Maybe Text)
+    , _miCollection :: !MediaInsertCollection
+    , _miPayload :: !Media
+    , _miUserId :: !Text
+    , _miMedia :: !Body
+    , _miKey :: !(Maybe Key)
+    , _miOAuthToken :: !(Maybe OAuthToken)
+    , _miFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MediaInsert'' with the minimum fields required to make a request.
@@ -116,7 +116,7 @@ mediaInsert'
     -> Text -- ^ 'userId'
     -> Body -- ^ 'media'
     -> MediaInsert'
-mediaInsert' pMiCollection_ pMiPayload_ pMiUserId_ pMiMedia_ =
+mediaInsert' pMiCollection_ pMiPayload_ pMiUserId_ pMiMedia_ = 
     MediaInsert'
     { _miQuotaUser = Nothing
     , _miPrettyPrint = True

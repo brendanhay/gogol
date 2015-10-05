@@ -51,8 +51,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Activate
     , baCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsActivate@ which the
 -- 'BeaconsActivate'' request conforms to.
@@ -80,19 +80,19 @@ type BeaconsActivateResource =
 --
 -- /See:/ 'beaconsActivate'' smart constructor.
 data BeaconsActivate' = BeaconsActivate'
-    { _baXgafv          :: !(Maybe Text)
-    , _baQuotaUser      :: !(Maybe Text)
-    , _baPrettyPrint    :: !Bool
+    { _baXgafv :: !(Maybe Text)
+    , _baQuotaUser :: !(Maybe Text)
+    , _baPrettyPrint :: !Bool
     , _baUploadProtocol :: !(Maybe Text)
-    , _baPp             :: !Bool
-    , _baAccessToken    :: !(Maybe Text)
-    , _baBeaconName     :: !Text
-    , _baUploadType     :: !(Maybe Text)
-    , _baBearerToken    :: !(Maybe Text)
-    , _baKey            :: !(Maybe Key)
-    , _baOAuthToken     :: !(Maybe OAuthToken)
-    , _baFields         :: !(Maybe Text)
-    , _baCallback       :: !(Maybe Text)
+    , _baPp :: !Bool
+    , _baAccessToken :: !(Maybe Text)
+    , _baBeaconName :: !Text
+    , _baUploadType :: !(Maybe Text)
+    , _baBearerToken :: !(Maybe Text)
+    , _baKey :: !(Maybe Key)
+    , _baOAuthToken :: !(Maybe OAuthToken)
+    , _baFields :: !(Maybe Text)
+    , _baCallback :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsActivate'' with the minimum fields required to make a request.
@@ -127,7 +127,7 @@ data BeaconsActivate' = BeaconsActivate'
 beaconsActivate'
     :: Text -- ^ 'beaconName'
     -> BeaconsActivate'
-beaconsActivate' pBaBeaconName_ =
+beaconsActivate' pBaBeaconName_ = 
     BeaconsActivate'
     { _baXgafv = Nothing
     , _baQuotaUser = Nothing

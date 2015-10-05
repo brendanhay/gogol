@@ -16,7 +16,7 @@
 --
 module Network.Google.Container.Types.Sum where
 
-import           Network.Google.Prelude
+import Network.Google.Prelude
 
 -- | The operation type.
 data OperationOperationType

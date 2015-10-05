@@ -43,8 +43,8 @@ module Network.Google.Resource.Analytics.Management.Filters.Insert
     , mfiFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementFiltersInsert@ which the
 -- 'ManagementFiltersInsert'' request conforms to.
@@ -66,14 +66,14 @@ type ManagementFiltersInsertResource =
 --
 -- /See:/ 'managementFiltersInsert'' smart constructor.
 data ManagementFiltersInsert' = ManagementFiltersInsert'
-    { _mfiQuotaUser   :: !(Maybe Text)
+    { _mfiQuotaUser :: !(Maybe Text)
     , _mfiPrettyPrint :: !Bool
-    , _mfiUserIP      :: !(Maybe Text)
-    , _mfiPayload     :: !Filter
-    , _mfiAccountId   :: !Text
-    , _mfiKey         :: !(Maybe Key)
-    , _mfiOAuthToken  :: !(Maybe OAuthToken)
-    , _mfiFields      :: !(Maybe Text)
+    , _mfiUserIP :: !(Maybe Text)
+    , _mfiPayload :: !Filter
+    , _mfiAccountId :: !Text
+    , _mfiKey :: !(Maybe Key)
+    , _mfiOAuthToken :: !(Maybe OAuthToken)
+    , _mfiFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersInsert'' with the minimum fields required to make a request.
@@ -99,7 +99,7 @@ managementFiltersInsert'
     :: Filter -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementFiltersInsert'
-managementFiltersInsert' pMfiPayload_ pMfiAccountId_ =
+managementFiltersInsert' pMfiPayload_ pMfiAccountId_ = 
     ManagementFiltersInsert'
     { _mfiQuotaUser = Nothing
     , _mfiPrettyPrint = False

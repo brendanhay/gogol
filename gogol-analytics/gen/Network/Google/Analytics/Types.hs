@@ -1001,9 +1001,9 @@ module Network.Google.Analytics.Types
     , columnAttributes
     ) where
 
-import           Network.Google.Analytics.Types.Product
-import           Network.Google.Analytics.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types.Product
+import Network.Google.Analytics.Types.Sum
+import Network.Google.Prelude
 
 -- | URL referring to version 'v3' of the Google Analytics API.
 analyticsURL :: BaseUrl

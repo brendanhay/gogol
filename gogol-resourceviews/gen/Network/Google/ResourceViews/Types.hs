@@ -161,9 +161,9 @@ module Network.Google.ResourceViews.Types
     , owiMessage
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ResourceViews.Types.Product
-import           Network.Google.ResourceViews.Types.Sum
+import Network.Google.Prelude
+import Network.Google.ResourceViews.Types.Product
+import Network.Google.ResourceViews.Types.Sum
 
 -- | URL referring to version 'v1beta2' of the Google Compute Engine Instance Groups API.
 resourceViewsURL :: BaseUrl

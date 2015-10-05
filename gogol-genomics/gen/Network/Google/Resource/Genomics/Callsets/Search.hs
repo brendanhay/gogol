@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.Callsets.Search
     , csFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsCallsetsSearch@ which the
 -- 'CallsetsSearch'' request conforms to.
@@ -66,13 +66,13 @@ type CallsetsSearchResource =
 --
 -- /See:/ 'callsetsSearch'' smart constructor.
 data CallsetsSearch' = CallsetsSearch'
-    { _csQuotaUser   :: !(Maybe Text)
+    { _csQuotaUser :: !(Maybe Text)
     , _csPrettyPrint :: !Bool
-    , _csUserIP      :: !(Maybe Text)
-    , _csPayload     :: !SearchCallSetsRequest
-    , _csKey         :: !(Maybe Key)
-    , _csOAuthToken  :: !(Maybe OAuthToken)
-    , _csFields      :: !(Maybe Text)
+    , _csUserIP :: !(Maybe Text)
+    , _csPayload :: !SearchCallSetsRequest
+    , _csKey :: !(Maybe Key)
+    , _csOAuthToken :: !(Maybe OAuthToken)
+    , _csFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsSearch'' with the minimum fields required to make a request.
@@ -95,7 +95,7 @@ data CallsetsSearch' = CallsetsSearch'
 callsetsSearch'
     :: SearchCallSetsRequest -- ^ 'payload'
     -> CallsetsSearch'
-callsetsSearch' pCsPayload_ =
+callsetsSearch' pCsPayload_ = 
     CallsetsSearch'
     { _csQuotaUser = Nothing
     , _csPrettyPrint = True

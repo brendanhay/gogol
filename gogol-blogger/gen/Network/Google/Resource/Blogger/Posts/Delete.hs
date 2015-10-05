@@ -43,8 +43,8 @@ module Network.Google.Resource.Blogger.Posts.Delete
     , pdFields
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @BloggerPostsDelete@ which the
 -- 'PostsDelete'' request conforms to.
@@ -65,14 +65,14 @@ type PostsDeleteResource =
 --
 -- /See:/ 'postsDelete'' smart constructor.
 data PostsDelete' = PostsDelete'
-    { _pdQuotaUser   :: !(Maybe Text)
+    { _pdQuotaUser :: !(Maybe Text)
     , _pdPrettyPrint :: !Bool
-    , _pdUserIP      :: !(Maybe Text)
-    , _pdBlogId      :: !Text
-    , _pdKey         :: !(Maybe Key)
-    , _pdPostId      :: !Text
-    , _pdOAuthToken  :: !(Maybe OAuthToken)
-    , _pdFields      :: !(Maybe Text)
+    , _pdUserIP :: !(Maybe Text)
+    , _pdBlogId :: !Text
+    , _pdKey :: !(Maybe Key)
+    , _pdPostId :: !Text
+    , _pdOAuthToken :: !(Maybe OAuthToken)
+    , _pdFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsDelete'' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ postsDelete'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
     -> PostsDelete'
-postsDelete' pPdBlogId_ pPdPostId_ =
+postsDelete' pPdBlogId_ pPdPostId_ = 
     PostsDelete'
     { _pdQuotaUser = Nothing
     , _pdPrettyPrint = True

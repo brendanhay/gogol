@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.Insert
     , mniFields
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplaceNotesInsert@ which the
 -- 'MarketplaceNotesInsert'' request conforms to.
@@ -67,14 +67,14 @@ type MarketplaceNotesInsertResource =
 --
 -- /See:/ 'marketplaceNotesInsert'' smart constructor.
 data MarketplaceNotesInsert' = MarketplaceNotesInsert'
-    { _mniQuotaUser   :: !(Maybe Text)
+    { _mniQuotaUser :: !(Maybe Text)
     , _mniPrettyPrint :: !Bool
-    , _mniUserIP      :: !(Maybe Text)
-    , _mniPayload     :: !AddOrderNotesRequest
-    , _mniKey         :: !(Maybe Key)
-    , _mniOAuthToken  :: !(Maybe OAuthToken)
-    , _mniOrderId     :: !Text
-    , _mniFields      :: !(Maybe Text)
+    , _mniUserIP :: !(Maybe Text)
+    , _mniPayload :: !AddOrderNotesRequest
+    , _mniKey :: !(Maybe Key)
+    , _mniOAuthToken :: !(Maybe OAuthToken)
+    , _mniOrderId :: !Text
+    , _mniFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceNotesInsert'' with the minimum fields required to make a request.
@@ -100,7 +100,7 @@ marketplaceNotesInsert'
     :: AddOrderNotesRequest -- ^ 'payload'
     -> Text -- ^ 'orderId'
     -> MarketplaceNotesInsert'
-marketplaceNotesInsert' pMniPayload_ pMniOrderId_ =
+marketplaceNotesInsert' pMniPayload_ pMniOrderId_ = 
     MarketplaceNotesInsert'
     { _mniQuotaUser = Nothing
     , _mniPrettyPrint = True

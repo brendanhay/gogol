@@ -229,7 +229,7 @@ instance FromJSON ObjectMetadata where
               (\ o -> pure ObjectMetadata)
 
 instance ToJSON ObjectMetadata where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | The condition(s) under which the action will be taken.
 --
@@ -1148,7 +1148,7 @@ instance FromJSON ChannelParams where
               (\ o -> pure ChannelParams)
 
 instance ToJSON ChannelParams where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | An object.
 --

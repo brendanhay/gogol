@@ -51,8 +51,8 @@ module Network.Google.Resource.Logging.Projects.Logs.Sinks.Delete
     , plsdCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogsSinksDelete@ which the
 -- 'ProjectsLogsSinksDelete'' request conforms to.
@@ -84,21 +84,21 @@ type ProjectsLogsSinksDeleteResource =
 --
 -- /See:/ 'projectsLogsSinksDelete'' smart constructor.
 data ProjectsLogsSinksDelete' = ProjectsLogsSinksDelete'
-    { _plsdXgafv          :: !(Maybe Text)
-    , _plsdQuotaUser      :: !(Maybe Text)
-    , _plsdPrettyPrint    :: !Bool
+    { _plsdXgafv :: !(Maybe Text)
+    , _plsdQuotaUser :: !(Maybe Text)
+    , _plsdPrettyPrint :: !Bool
     , _plsdUploadProtocol :: !(Maybe Text)
-    , _plsdLogsId         :: !Text
-    , _plsdPp             :: !Bool
-    , _plsdAccessToken    :: !(Maybe Text)
-    , _plsdUploadType     :: !(Maybe Text)
-    , _plsdBearerToken    :: !(Maybe Text)
-    , _plsdKey            :: !(Maybe Key)
-    , _plsdOAuthToken     :: !(Maybe OAuthToken)
-    , _plsdProjectsId     :: !Text
-    , _plsdSinksId        :: !Text
-    , _plsdFields         :: !(Maybe Text)
-    , _plsdCallback       :: !(Maybe Text)
+    , _plsdLogsId :: !Text
+    , _plsdPp :: !Bool
+    , _plsdAccessToken :: !(Maybe Text)
+    , _plsdUploadType :: !(Maybe Text)
+    , _plsdBearerToken :: !(Maybe Text)
+    , _plsdKey :: !(Maybe Key)
+    , _plsdOAuthToken :: !(Maybe OAuthToken)
+    , _plsdProjectsId :: !Text
+    , _plsdSinksId :: !Text
+    , _plsdFields :: !(Maybe Text)
+    , _plsdCallback :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogsSinksDelete'' with the minimum fields required to make a request.
@@ -139,7 +139,7 @@ projectsLogsSinksDelete'
     -> Text -- ^ 'projectsId'
     -> Text -- ^ 'sinksId'
     -> ProjectsLogsSinksDelete'
-projectsLogsSinksDelete' pPlsdLogsId_ pPlsdProjectsId_ pPlsdSinksId_ =
+projectsLogsSinksDelete' pPlsdLogsId_ pPlsdProjectsId_ pPlsdSinksId_ = 
     ProjectsLogsSinksDelete'
     { _plsdXgafv = Nothing
     , _plsdQuotaUser = Nothing

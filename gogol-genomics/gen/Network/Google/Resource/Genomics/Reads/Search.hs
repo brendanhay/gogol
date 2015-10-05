@@ -52,8 +52,8 @@ module Network.Google.Resource.Genomics.Reads.Search
     , rsFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReadsSearch@ which the
 -- 'ReadsSearch'' request conforms to.
@@ -84,13 +84,13 @@ type ReadsSearchResource =
 --
 -- /See:/ 'readsSearch'' smart constructor.
 data ReadsSearch' = ReadsSearch'
-    { _rsQuotaUser   :: !(Maybe Text)
+    { _rsQuotaUser :: !(Maybe Text)
     , _rsPrettyPrint :: !Bool
-    , _rsUserIP      :: !(Maybe Text)
-    , _rsPayload     :: !SearchReadsRequest
-    , _rsKey         :: !(Maybe Key)
-    , _rsOAuthToken  :: !(Maybe OAuthToken)
-    , _rsFields      :: !(Maybe Text)
+    , _rsUserIP :: !(Maybe Text)
+    , _rsPayload :: !SearchReadsRequest
+    , _rsKey :: !(Maybe Key)
+    , _rsOAuthToken :: !(Maybe OAuthToken)
+    , _rsFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadsSearch'' with the minimum fields required to make a request.
@@ -113,7 +113,7 @@ data ReadsSearch' = ReadsSearch'
 readsSearch'
     :: SearchReadsRequest -- ^ 'payload'
     -> ReadsSearch'
-readsSearch' pRsPayload_ =
+readsSearch' pRsPayload_ = 
     ReadsSearch'
     { _rsQuotaUser = Nothing
     , _rsPrettyPrint = True

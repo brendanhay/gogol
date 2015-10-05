@@ -42,8 +42,8 @@ module Network.Google.Resource.Genomics.Datasets.Create
     , dcFields
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @GenomicsDatasetsCreate@ which the
 -- 'DatasetsCreate'' request conforms to.
@@ -62,13 +62,13 @@ type DatasetsCreateResource =
 --
 -- /See:/ 'datasetsCreate'' smart constructor.
 data DatasetsCreate' = DatasetsCreate'
-    { _dcQuotaUser   :: !(Maybe Text)
+    { _dcQuotaUser :: !(Maybe Text)
     , _dcPrettyPrint :: !Bool
-    , _dcUserIP      :: !(Maybe Text)
-    , _dcPayload     :: !Dataset
-    , _dcKey         :: !(Maybe Key)
-    , _dcOAuthToken  :: !(Maybe OAuthToken)
-    , _dcFields      :: !(Maybe Text)
+    , _dcUserIP :: !(Maybe Text)
+    , _dcPayload :: !Dataset
+    , _dcKey :: !(Maybe Key)
+    , _dcOAuthToken :: !(Maybe OAuthToken)
+    , _dcFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsCreate'' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data DatasetsCreate' = DatasetsCreate'
 datasetsCreate'
     :: Dataset -- ^ 'payload'
     -> DatasetsCreate'
-datasetsCreate' pDcPayload_ =
+datasetsCreate' pDcPayload_ = 
     DatasetsCreate'
     { _dcQuotaUser = Nothing
     , _dcPrettyPrint = True

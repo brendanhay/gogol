@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Update
     , mpfuFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProFilesUpdate@ which the
 -- 'ManagementProFilesUpdate'' request conforms to.
@@ -71,16 +71,16 @@ type ManagementProFilesUpdateResource =
 --
 -- /See:/ 'managementProFilesUpdate'' smart constructor.
 data ManagementProFilesUpdate' = ManagementProFilesUpdate'
-    { _mpfuQuotaUser     :: !(Maybe Text)
-    , _mpfuPrettyPrint   :: !Bool
+    { _mpfuQuotaUser :: !(Maybe Text)
+    , _mpfuPrettyPrint :: !Bool
     , _mpfuWebPropertyId :: !Text
-    , _mpfuUserIP        :: !(Maybe Text)
-    , _mpfuProFileId     :: !Text
-    , _mpfuPayload       :: !ProFile
-    , _mpfuAccountId     :: !Text
-    , _mpfuKey           :: !(Maybe Key)
-    , _mpfuOAuthToken    :: !(Maybe OAuthToken)
-    , _mpfuFields        :: !(Maybe Text)
+    , _mpfuUserIP :: !(Maybe Text)
+    , _mpfuProFileId :: !Text
+    , _mpfuPayload :: !ProFile
+    , _mpfuAccountId :: !Text
+    , _mpfuKey :: !(Maybe Key)
+    , _mpfuOAuthToken :: !(Maybe OAuthToken)
+    , _mpfuFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFilesUpdate'' with the minimum fields required to make a request.
@@ -112,7 +112,7 @@ managementProFilesUpdate'
     -> ProFile -- ^ 'payload'
     -> Text -- ^ 'accountId'
     -> ManagementProFilesUpdate'
-managementProFilesUpdate' pMpfuWebPropertyId_ pMpfuProFileId_ pMpfuPayload_ pMpfuAccountId_ =
+managementProFilesUpdate' pMpfuWebPropertyId_ pMpfuProFileId_ pMpfuPayload_ pMpfuAccountId_ = 
     ManagementProFilesUpdate'
     { _mpfuQuotaUser = Nothing
     , _mpfuPrettyPrint = False

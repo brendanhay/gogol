@@ -55,8 +55,8 @@ module Network.Google.Resource.Logging.Projects.Logs.Entries.Write
     , plewCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogsEntriesWrite@ which the
 -- 'ProjectsLogsEntriesWrite'' request conforms to.
@@ -95,21 +95,21 @@ type ProjectsLogsEntriesWriteResource =
 --
 -- /See:/ 'projectsLogsEntriesWrite'' smart constructor.
 data ProjectsLogsEntriesWrite' = ProjectsLogsEntriesWrite'
-    { _plewXgafv          :: !(Maybe Text)
-    , _plewQuotaUser      :: !(Maybe Text)
-    , _plewPrettyPrint    :: !Bool
+    { _plewXgafv :: !(Maybe Text)
+    , _plewQuotaUser :: !(Maybe Text)
+    , _plewPrettyPrint :: !Bool
     , _plewUploadProtocol :: !(Maybe Text)
-    , _plewLogsId         :: !Text
-    , _plewPp             :: !Bool
-    , _plewAccessToken    :: !(Maybe Text)
-    , _plewUploadType     :: !(Maybe Text)
-    , _plewPayload        :: !WriteLogEntriesRequest
-    , _plewBearerToken    :: !(Maybe Text)
-    , _plewKey            :: !(Maybe Key)
-    , _plewOAuthToken     :: !(Maybe OAuthToken)
-    , _plewProjectsId     :: !Text
-    , _plewFields         :: !(Maybe Text)
-    , _plewCallback       :: !(Maybe Text)
+    , _plewLogsId :: !Text
+    , _plewPp :: !Bool
+    , _plewAccessToken :: !(Maybe Text)
+    , _plewUploadType :: !(Maybe Text)
+    , _plewPayload :: !WriteLogEntriesRequest
+    , _plewBearerToken :: !(Maybe Text)
+    , _plewKey :: !(Maybe Key)
+    , _plewOAuthToken :: !(Maybe OAuthToken)
+    , _plewProjectsId :: !Text
+    , _plewFields :: !(Maybe Text)
+    , _plewCallback :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogsEntriesWrite'' with the minimum fields required to make a request.
@@ -150,7 +150,7 @@ projectsLogsEntriesWrite'
     -> WriteLogEntriesRequest -- ^ 'payload'
     -> Text -- ^ 'projectsId'
     -> ProjectsLogsEntriesWrite'
-projectsLogsEntriesWrite' pPlewLogsId_ pPlewPayload_ pPlewProjectsId_ =
+projectsLogsEntriesWrite' pPlewLogsId_ pPlewPayload_ pPlewProjectsId_ = 
     ProjectsLogsEntriesWrite'
     { _plewXgafv = Nothing
     , _plewQuotaUser = Nothing

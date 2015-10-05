@@ -45,8 +45,8 @@ module Network.Google.Resource.Analytics.Management.ProFiles.List
     , mpflFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProFilesList@ which the
 -- 'ManagementProFilesList'' request conforms to.
@@ -72,16 +72,16 @@ type ManagementProFilesListResource =
 --
 -- /See:/ 'managementProFilesList'' smart constructor.
 data ManagementProFilesList' = ManagementProFilesList'
-    { _mpflQuotaUser     :: !(Maybe Text)
-    , _mpflPrettyPrint   :: !Bool
+    { _mpflQuotaUser :: !(Maybe Text)
+    , _mpflPrettyPrint :: !Bool
     , _mpflWebPropertyId :: !Text
-    , _mpflUserIP        :: !(Maybe Text)
-    , _mpflAccountId     :: !Text
-    , _mpflKey           :: !(Maybe Key)
-    , _mpflOAuthToken    :: !(Maybe OAuthToken)
-    , _mpflStartIndex    :: !(Maybe Int32)
-    , _mpflMaxResults    :: !(Maybe Int32)
-    , _mpflFields        :: !(Maybe Text)
+    , _mpflUserIP :: !(Maybe Text)
+    , _mpflAccountId :: !Text
+    , _mpflKey :: !(Maybe Key)
+    , _mpflOAuthToken :: !(Maybe OAuthToken)
+    , _mpflStartIndex :: !(Maybe Int32)
+    , _mpflMaxResults :: !(Maybe Int32)
+    , _mpflFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFilesList'' with the minimum fields required to make a request.
@@ -111,7 +111,7 @@ managementProFilesList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
     -> ManagementProFilesList'
-managementProFilesList' pMpflWebPropertyId_ pMpflAccountId_ =
+managementProFilesList' pMpflWebPropertyId_ pMpflAccountId_ = 
     ManagementProFilesList'
     { _mpflQuotaUser = Nothing
     , _mpflPrettyPrint = False

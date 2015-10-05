@@ -47,8 +47,8 @@ module Network.Google.Resource.Analytics.Data.Realtime.Get
     , drgFields
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsDataRealtimeGet@ which the
 -- 'DataRealtimeGet'' request conforms to.
@@ -74,18 +74,18 @@ type DataRealtimeGetResource =
 --
 -- /See:/ 'dataRealtimeGet'' smart constructor.
 data DataRealtimeGet' = DataRealtimeGet'
-    { _drgQuotaUser   :: !(Maybe Text)
-    , _drgMetrics     :: !Text
+    { _drgQuotaUser :: !(Maybe Text)
+    , _drgMetrics :: !Text
     , _drgPrettyPrint :: !Bool
-    , _drgUserIP      :: !(Maybe Text)
-    , _drgFilters     :: !(Maybe Text)
-    , _drgIds         :: !Text
-    , _drgKey         :: !(Maybe Key)
-    , _drgSort        :: !(Maybe Text)
-    , _drgDimensions  :: !(Maybe Text)
-    , _drgOAuthToken  :: !(Maybe OAuthToken)
-    , _drgMaxResults  :: !(Maybe Int32)
-    , _drgFields      :: !(Maybe Text)
+    , _drgUserIP :: !(Maybe Text)
+    , _drgFilters :: !(Maybe Text)
+    , _drgIds :: !Text
+    , _drgKey :: !(Maybe Key)
+    , _drgSort :: !(Maybe Text)
+    , _drgDimensions :: !(Maybe Text)
+    , _drgOAuthToken :: !(Maybe OAuthToken)
+    , _drgMaxResults :: !(Maybe Int32)
+    , _drgFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataRealtimeGet'' with the minimum fields required to make a request.
@@ -119,7 +119,7 @@ dataRealtimeGet'
     :: Text -- ^ 'metrics'
     -> Text -- ^ 'ids'
     -> DataRealtimeGet'
-dataRealtimeGet' pDrgMetrics_ pDrgIds_ =
+dataRealtimeGet' pDrgMetrics_ pDrgIds_ = 
     DataRealtimeGet'
     { _drgQuotaUser = Nothing
     , _drgMetrics = pDrgMetrics_

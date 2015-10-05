@@ -903,7 +903,7 @@ instance FromJSON TokenPagination where
               (\ o -> pure TokenPagination)
 
 instance ToJSON TokenPagination where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | A resource id is a generic reference that points to another YouTube
 -- resource.
@@ -4823,7 +4823,7 @@ instance FromJSON ChannelLocalizations where
               (\ o -> pure ChannelLocalizations)
 
 instance ToJSON ChannelLocalizations where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Basic details about a playlist, including title, description and
 -- thumbnails.
@@ -5306,7 +5306,7 @@ instance FromJSON PlayListLocalizations where
               (\ o -> pure PlayListLocalizations)
 
 instance ToJSON PlayListLocalizations where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Video processing progress and completion time estimate.
 --
@@ -6075,7 +6075,7 @@ instance FromJSON VideoLocalizations where
               (\ o -> pure VideoLocalizations)
 
 instance ToJSON VideoLocalizations where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | Details about a channelsection, including playlists and channels.
 --
@@ -8237,7 +8237,7 @@ instance FromJSON ChannelSectionLocalizations where
               (\ o -> pure ChannelSectionLocalizations)
 
 instance ToJSON ChannelSectionLocalizations where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'subscriptionListResponse' smart constructor.

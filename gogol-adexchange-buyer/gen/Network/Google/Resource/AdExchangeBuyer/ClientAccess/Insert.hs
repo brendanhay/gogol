@@ -44,8 +44,8 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Insert
     , caiFields
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerClientAccessInsert@ which the
 -- 'ClientAccessInsert'' request conforms to.
@@ -66,15 +66,15 @@ type ClientAccessInsertResource =
 --
 -- /See:/ 'clientAccessInsert'' smart constructor.
 data ClientAccessInsert' = ClientAccessInsert'
-    { _caiQuotaUser        :: !(Maybe Text)
-    , _caiPrettyPrint      :: !Bool
-    , _caiUserIP           :: !(Maybe Text)
+    { _caiQuotaUser :: !(Maybe Text)
+    , _caiPrettyPrint :: !Bool
+    , _caiUserIP :: !(Maybe Text)
     , _caiSponsorAccountId :: !(Maybe Int32)
-    , _caiPayload          :: !ClientAccessCapabilities
-    , _caiKey              :: !(Maybe Key)
-    , _caiClientAccountId  :: !(Maybe Int64)
-    , _caiOAuthToken       :: !(Maybe OAuthToken)
-    , _caiFields           :: !(Maybe Text)
+    , _caiPayload :: !ClientAccessCapabilities
+    , _caiKey :: !(Maybe Key)
+    , _caiClientAccountId :: !(Maybe Int64)
+    , _caiOAuthToken :: !(Maybe OAuthToken)
+    , _caiFields :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessInsert'' with the minimum fields required to make a request.
@@ -101,7 +101,7 @@ data ClientAccessInsert' = ClientAccessInsert'
 clientAccessInsert'
     :: ClientAccessCapabilities -- ^ 'payload'
     -> ClientAccessInsert'
-clientAccessInsert' pCaiPayload_ =
+clientAccessInsert' pCaiPayload_ = 
     ClientAccessInsert'
     { _caiQuotaUser = Nothing
     , _caiPrettyPrint = True

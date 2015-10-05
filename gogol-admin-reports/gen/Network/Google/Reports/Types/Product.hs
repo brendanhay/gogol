@@ -291,7 +291,7 @@ instance FromJSON
 
 instance ToJSON UsageReportParametersItemMsgValueItem
          where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | JSON template for a collection of activites.
 --
@@ -755,7 +755,7 @@ instance FromJSON ChannelParams where
               (\ o -> pure ChannelParams)
 
 instance ToJSON ChannelParams where
-        toJSON = const (Object mempty)
+        toJSON = const emptyObject
 
 -- | JSON template for the activity resource.
 --
