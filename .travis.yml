@@ -38,22 +38,14 @@ matrix:
     # Core
     - env: GHCVER=7.10.2 LIBRARY=gogol-core
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
-    - env: GHCVER=7.8.4 LIBRARY=gogol-core
-      addons: { apt: { packages: [ghc-7.8.4], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
-    - env: GHCVER=7.8.4 LIBRARY=gogol
-      addons: { apt: { packages: [ghc-7.8.4], sources: [hvr-ghc] } }
 
     # Priority
     - env: GHCVER=7.10.2 LIBRARY=gogol-compute
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
-    - env: GHCVER=7.8.4 LIBRARY=gogol-compute
-      addons: { apt: { packages: [ghc-7.8.4], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-drive
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
-    - env: GHCVER=7.8.4 LIBRARY=gogol-drive
-      addons: { apt: { packages: [ghc-7.8.4], sources: [hvr-ghc] } }
 
     # Remainder
     - env: GHCVER=7.10.2 LIBRARY=gogol-adexchange-buyer
@@ -76,6 +68,10 @@ matrix:
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-analytics
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
+    - env: GHCVER=7.10.2 LIBRARY=gogol-android-enterprise
+      addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
+    - env: GHCVER=7.10.2 LIBRARY=gogol-android-publisher
+      addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-appengine
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-appengine-taskqueue
@@ -90,6 +86,8 @@ matrix:
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-apps-tasks
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
+    - env: GHCVER=7.10.2 LIBRARY=gogol-autoscaler
+      addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-bigquery
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-billing
@@ -101,10 +99,6 @@ matrix:
     - env: GHCVER=7.10.2 LIBRARY=gogol-civicinfo
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-classroom
-      addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
-    - env: GHCVER=7.10.2 LIBRARY=gogol-compute-autoscaler
-      addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
-    - env: GHCVER=7.10.2 LIBRARY=gogol-compute-useraccounts
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-container
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
@@ -152,12 +146,6 @@ matrix:
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-identity-toolkit
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
-    - env: GHCVER=7.10.2 LIBRARY=gogol-instancegroups
-      addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
-    - env: GHCVER=7.10.2 LIBRARY=gogol-instancegroups-manager
-      addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
-    - env: GHCVER=7.10.2 LIBRARY=gogol-instancegroups-updater
-      addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-latencytest
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-logging
@@ -176,10 +164,6 @@ matrix:
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-partners
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
-    - env: GHCVER=7.10.2 LIBRARY=gogol-play-developer
-      addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
-    - env: GHCVER=7.10.2 LIBRARY=gogol-play-enterprise
-      addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-play-moviespartner
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-plus
@@ -194,7 +178,13 @@ matrix:
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-qpxexpress
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
+    - env: GHCVER=7.10.2 LIBRARY=gogol-replicapool
+      addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
+    - env: GHCVER=7.10.2 LIBRARY=gogol-replicapool-updater
+      addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-resourcemanager
+      addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
+    - env: GHCVER=7.10.2 LIBRARY=gogol-resourceviews
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-shopping-content
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
@@ -213,6 +203,8 @@ matrix:
     - env: GHCVER=7.10.2 LIBRARY=gogol-translate
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-urlshortener
+      addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
+    - env: GHCVER=7.10.2 LIBRARY=gogol-useraccounts
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-webmaster-tools
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }

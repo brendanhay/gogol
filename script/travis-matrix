@@ -39,9 +39,9 @@ TITLE
 }
 
 ghc_710=( 7.10.2 )
-ghc_all=( 7.10.2 7.8.4 )
+# ghc_all=( 7.10.2 7.8.4 )
 
 matrix "Documentation" ghc_710[@] docs[@]
-matrix "Core" ghc_all[@] core[@]
-matrix "Priority" ghc_all[@] priority[@]
+matrix "Core" ghc_710[@] core[@]
+matrix "Priority" ghc_710[@] priority[@]
 matrix "Remainder" ghc_710[@] library[@]
