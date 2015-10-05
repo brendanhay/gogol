@@ -63,7 +63,7 @@ type ChromeosDevicesPatchResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] ChromeOSDevice :>
@@ -78,7 +78,7 @@ data ChromeosDevicesPatch' = ChromeosDevicesPatch'
     , _cdpUserIP      :: !(Maybe Text)
     , _cdpPayload     :: !ChromeOSDevice
     , _cdpCustomerId  :: !Text
-    , _cdpKey         :: !(Maybe Key)
+    , _cdpKey         :: !(Maybe AuthKey)
     , _cdpDeviceId    :: !Text
     , _cdpProjection  :: !(Maybe ChromeosDevicesPatchProjection)
     , _cdpOAuthToken  :: !(Maybe OAuthToken)
@@ -160,7 +160,7 @@ cdpCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cdpKey :: Lens' ChromeosDevicesPatch' (Maybe Key)
+cdpKey :: Lens' ChromeosDevicesPatch' (Maybe AuthKey)
 cdpKey = lens _cdpKey (\ s a -> s{_cdpKey = a})
 
 -- | Immutable id of Chrome OS Device

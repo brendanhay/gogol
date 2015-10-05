@@ -64,7 +64,7 @@ type RepliesListResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] CommentReplyList
@@ -76,7 +76,7 @@ data RepliesList' = RepliesList'
     { _rllQuotaUser      :: !(Maybe Text)
     , _rllPrettyPrint    :: !Bool
     , _rllUserIP         :: !(Maybe Text)
-    , _rllKey            :: !(Maybe Key)
+    , _rllKey            :: !(Maybe AuthKey)
     , _rllPageToken      :: !(Maybe Text)
     , _rllFileId         :: !Text
     , _rllOAuthToken     :: !(Maybe OAuthToken)
@@ -152,7 +152,7 @@ rllUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rllKey :: Lens' RepliesList' (Maybe Key)
+rllKey :: Lens' RepliesList' (Maybe AuthKey)
 rllKey = lens _rllKey (\ s a -> s{_rllKey = a})
 
 -- | The continuation token, used to page through large result sets. To get

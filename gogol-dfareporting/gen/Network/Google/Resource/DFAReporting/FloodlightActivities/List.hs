@@ -87,7 +87,7 @@ type FloodlightActivitiesListResource =
                                        QueryParam "prettyPrint" Bool :>
                                          QueryParam "userIp" Text :>
                                            QueryParam "fields" Text :>
-                                             QueryParam "key" Key :>
+                                             QueryParam "key" AuthKey :>
                                                QueryParam "oauth_token"
                                                  OAuthToken
                                                  :>
@@ -111,7 +111,7 @@ data FloodlightActivitiesList' = FloodlightActivitiesList'
     , _falProFileId                        :: !Int64
     , _falFloodlightActivityGroupIds       :: !(Maybe [Int64])
     , _falSortOrder                        :: !(Maybe FloodlightActivitiesListSortOrder)
-    , _falKey                              :: !(Maybe Key)
+    , _falKey                              :: !(Maybe AuthKey)
     , _falFloodlightActivityGroupType      :: !(Maybe FloodlightActivitiesListFloodlightActivityGroupType)
     , _falFloodlightActivityGroupName      :: !(Maybe Text)
     , _falPageToken                        :: !(Maybe Text)
@@ -282,7 +282,7 @@ falSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-falKey :: Lens' FloodlightActivitiesList' (Maybe Key)
+falKey :: Lens' FloodlightActivitiesList' (Maybe AuthKey)
 falKey = lens _falKey (\ s a -> s{_falKey = a})
 
 -- | Select only floodlight activities with the specified floodlight activity

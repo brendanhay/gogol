@@ -54,7 +54,7 @@ type LeaderboardConfigurationsDeleteResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -66,7 +66,7 @@ data LeaderboardConfigurationsDelete' = LeaderboardConfigurationsDelete'
     , _lcdPrettyPrint   :: !Bool
     , _lcdUserIP        :: !(Maybe Text)
     , _lcdLeaderboardId :: !Text
-    , _lcdKey           :: !(Maybe Key)
+    , _lcdKey           :: !(Maybe AuthKey)
     , _lcdOAuthToken    :: !(Maybe OAuthToken)
     , _lcdFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -130,7 +130,7 @@ lcdLeaderboardId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lcdKey :: Lens' LeaderboardConfigurationsDelete' (Maybe Key)
+lcdKey :: Lens' LeaderboardConfigurationsDelete' (Maybe AuthKey)
 lcdKey = lens _lcdKey (\ s a -> s{_lcdKey = a})
 
 -- | OAuth 2.0 token for the current user.

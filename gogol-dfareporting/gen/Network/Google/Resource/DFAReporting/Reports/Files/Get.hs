@@ -60,7 +60,7 @@ type ReportsFilesGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] File
        :<|>
@@ -74,7 +74,7 @@ type ReportsFilesGetResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltMedia :>
                                  Get '[OctetStream] Body
@@ -88,7 +88,7 @@ data ReportsFilesGet' = ReportsFilesGet'
     , _rfgUserIP      :: !(Maybe Text)
     , _rfgReportId    :: !Int64
     , _rfgProFileId   :: !Int64
-    , _rfgKey         :: !(Maybe Key)
+    , _rfgKey         :: !(Maybe AuthKey)
     , _rfgFileId      :: !Int64
     , _rfgOAuthToken  :: !(Maybe OAuthToken)
     , _rfgFields      :: !(Maybe Text)
@@ -165,7 +165,7 @@ rfgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rfgKey :: Lens' ReportsFilesGet' (Maybe Key)
+rfgKey :: Lens' ReportsFilesGet' (Maybe AuthKey)
 rfgKey = lens _rfgKey (\ s a -> s{_rfgKey = a})
 
 -- | The ID of the report file.

@@ -56,7 +56,7 @@ type TokensListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Tokens
 
@@ -68,7 +68,7 @@ data TokensList' = TokensList'
     { _tlQuotaUser   :: !(Maybe Text)
     , _tlPrettyPrint :: !Bool
     , _tlUserIP      :: !(Maybe Text)
-    , _tlKey         :: !(Maybe Key)
+    , _tlKey         :: !(Maybe AuthKey)
     , _tlOAuthToken  :: !(Maybe OAuthToken)
     , _tlUserKey     :: !Text
     , _tlFields      :: !(Maybe Text)
@@ -126,7 +126,7 @@ tlUserIP = lens _tlUserIP (\ s a -> s{_tlUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tlKey :: Lens' TokensList' (Maybe Key)
+tlKey :: Lens' TokensList' (Maybe AuthKey)
 tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | OAuth 2.0 token for the current user.

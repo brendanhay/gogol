@@ -72,7 +72,7 @@ type CoursesUpdateResource =
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Course :>
@@ -95,7 +95,7 @@ data CoursesUpdate' = CoursesUpdate'
     , _cuUploadType     :: !(Maybe Text)
     , _cuPayload        :: !Course
     , _cuBearerToken    :: !(Maybe Text)
-    , _cuKey            :: !(Maybe Key)
+    , _cuKey            :: !(Maybe AuthKey)
     , _cuId             :: !Text
     , _cuOAuthToken     :: !(Maybe OAuthToken)
     , _cuFields         :: !(Maybe Text)
@@ -207,7 +207,7 @@ cuBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuKey :: Lens' CoursesUpdate' (Maybe Key)
+cuKey :: Lens' CoursesUpdate' (Maybe AuthKey)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
 
 -- | Identifier of the course to update. This identifier can be either the

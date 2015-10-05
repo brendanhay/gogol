@@ -58,7 +58,7 @@ type UsersMessagesSendResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          MultipartRelated '[JSON] Message Body :>
@@ -75,7 +75,7 @@ data UsersMessagesSend' = UsersMessagesSend'
     , _umsPayload     :: !Message
     , _umsUserId      :: !Text
     , _umsMedia       :: !Body
-    , _umsKey         :: !(Maybe Key)
+    , _umsKey         :: !(Maybe AuthKey)
     , _umsOAuthToken  :: !(Maybe OAuthToken)
     , _umsFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -155,7 +155,7 @@ umsMedia = lens _umsMedia (\ s a -> s{_umsMedia = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umsKey :: Lens' UsersMessagesSend' (Maybe Key)
+umsKey :: Lens' UsersMessagesSend' (Maybe AuthKey)
 umsKey = lens _umsKey (\ s a -> s{_umsKey = a})
 
 -- | OAuth 2.0 token for the current user.

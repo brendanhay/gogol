@@ -57,7 +57,7 @@ type MarketplaceNotesInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] AddOrderNotesRequest :>
@@ -71,7 +71,7 @@ data MarketplaceNotesInsert' = MarketplaceNotesInsert'
     , _mniPrettyPrint :: !Bool
     , _mniUserIP      :: !(Maybe Text)
     , _mniPayload     :: !AddOrderNotesRequest
-    , _mniKey         :: !(Maybe Key)
+    , _mniKey         :: !(Maybe AuthKey)
     , _mniOAuthToken  :: !(Maybe OAuthToken)
     , _mniOrderId     :: !Text
     , _mniFields      :: !(Maybe Text)
@@ -139,7 +139,7 @@ mniPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mniKey :: Lens' MarketplaceNotesInsert' (Maybe Key)
+mniKey :: Lens' MarketplaceNotesInsert' (Maybe AuthKey)
 mniKey = lens _mniKey (\ s a -> s{_mniKey = a})
 
 -- | OAuth 2.0 token for the current user.

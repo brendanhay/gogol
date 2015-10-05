@@ -71,7 +71,7 @@ type CreativeGroupsListResource =
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "userIp" Text :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] CreativeGroupsListResponse
@@ -88,7 +88,7 @@ data CreativeGroupsList' = CreativeGroupsList'
     , _cglProFileId     :: !Int64
     , _cglSortOrder     :: !(Maybe CreativeGroupsListSortOrder)
     , _cglGroupNumber   :: !(Maybe Int32)
-    , _cglKey           :: !(Maybe Key)
+    , _cglKey           :: !(Maybe AuthKey)
     , _cglPageToken     :: !(Maybe Text)
     , _cglSortField     :: !(Maybe CreativeGroupsListSortField)
     , _cglOAuthToken    :: !(Maybe OAuthToken)
@@ -209,7 +209,7 @@ cglGroupNumber
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cglKey :: Lens' CreativeGroupsList' (Maybe Key)
+cglKey :: Lens' CreativeGroupsList' (Maybe AuthKey)
 cglKey = lens _cglKey (\ s a -> s{_cglKey = a})
 
 -- | Value of the nextPageToken from the previous result page.

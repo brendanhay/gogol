@@ -55,7 +55,7 @@ type TrainedModelsInsertResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Insert :> Post '[JSON] Insert2
@@ -69,7 +69,7 @@ data TrainedModelsInsert' = TrainedModelsInsert'
     , _tmiProject     :: !Text
     , _tmiUserIP      :: !(Maybe Text)
     , _tmiPayload     :: !Insert
-    , _tmiKey         :: !(Maybe Key)
+    , _tmiKey         :: !(Maybe AuthKey)
     , _tmiOAuthToken  :: !(Maybe OAuthToken)
     , _tmiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -141,7 +141,7 @@ tmiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tmiKey :: Lens' TrainedModelsInsert' (Maybe Key)
+tmiKey :: Lens' TrainedModelsInsert' (Maybe AuthKey)
 tmiKey = lens _tmiKey (\ s a -> s{_tmiKey = a})
 
 -- | OAuth 2.0 token for the current user.

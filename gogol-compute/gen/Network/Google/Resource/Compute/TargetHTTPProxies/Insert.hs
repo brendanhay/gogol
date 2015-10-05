@@ -57,7 +57,7 @@ type TargetHTTPProxiesInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] TargetHTTPProxy :>
@@ -73,7 +73,7 @@ data TargetHTTPProxiesInsert' = TargetHTTPProxiesInsert'
     , _thttppiProject     :: !Text
     , _thttppiUserIP      :: !(Maybe Text)
     , _thttppiPayload     :: !TargetHTTPProxy
-    , _thttppiKey         :: !(Maybe Key)
+    , _thttppiKey         :: !(Maybe AuthKey)
     , _thttppiOAuthToken  :: !(Maybe OAuthToken)
     , _thttppiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -149,7 +149,7 @@ thttppiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-thttppiKey :: Lens' TargetHTTPProxiesInsert' (Maybe Key)
+thttppiKey :: Lens' TargetHTTPProxiesInsert' (Maybe AuthKey)
 thttppiKey
   = lens _thttppiKey (\ s a -> s{_thttppiKey = a})
 

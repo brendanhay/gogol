@@ -60,7 +60,7 @@ type MobileDevicesActionResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] MobileDeviceAction :>
@@ -76,7 +76,7 @@ data MobileDevicesAction' = MobileDevicesAction'
     , _mdaUserIP      :: !(Maybe Text)
     , _mdaPayload     :: !MobileDeviceAction
     , _mdaCustomerId  :: !Text
-    , _mdaKey         :: !(Maybe Key)
+    , _mdaKey         :: !(Maybe AuthKey)
     , _mdaOAuthToken  :: !(Maybe OAuthToken)
     , _mdaFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -159,7 +159,7 @@ mdaCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mdaKey :: Lens' MobileDevicesAction' (Maybe Key)
+mdaKey :: Lens' MobileDevicesAction' (Maybe AuthKey)
 mdaKey = lens _mdaKey (\ s a -> s{_mdaKey = a})
 
 -- | OAuth 2.0 token for the current user.

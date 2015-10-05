@@ -58,7 +58,7 @@ type OrgUnitsUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] OrgUnit :> Put '[JSON] OrgUnit
@@ -73,7 +73,7 @@ data OrgUnitsUpdate' = OrgUnitsUpdate'
     , _ouuPayload     :: !OrgUnit
     , _ouuOrgUnitPath :: ![Text]
     , _ouuCustomerId  :: !Text
-    , _ouuKey         :: !(Maybe Key)
+    , _ouuKey         :: !(Maybe AuthKey)
     , _ouuOAuthToken  :: !(Maybe OAuthToken)
     , _ouuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -157,7 +157,7 @@ ouuCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ouuKey :: Lens' OrgUnitsUpdate' (Maybe Key)
+ouuKey :: Lens' OrgUnitsUpdate' (Maybe AuthKey)
 ouuKey = lens _ouuKey (\ s a -> s{_ouuKey = a})
 
 -- | OAuth 2.0 token for the current user.

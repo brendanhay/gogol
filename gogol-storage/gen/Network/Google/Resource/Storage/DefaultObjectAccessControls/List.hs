@@ -59,7 +59,7 @@ type DefaultObjectAccessControlsListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ObjectAccessControls
@@ -73,7 +73,7 @@ data DefaultObjectAccessControlsList' = DefaultObjectAccessControlsList'
     , _doaclPrettyPrint              :: !Bool
     , _doaclUserIP                   :: !(Maybe Text)
     , _doaclBucket                   :: !Text
-    , _doaclKey                      :: !(Maybe Key)
+    , _doaclKey                      :: !(Maybe AuthKey)
     , _doaclIfMetagenerationNotMatch :: !(Maybe Int64)
     , _doaclOAuthToken               :: !(Maybe OAuthToken)
     , _doaclFields                   :: !(Maybe Text)
@@ -151,7 +151,7 @@ doaclBucket
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-doaclKey :: Lens' DefaultObjectAccessControlsList' (Maybe Key)
+doaclKey :: Lens' DefaultObjectAccessControlsList' (Maybe AuthKey)
 doaclKey = lens _doaclKey (\ s a -> s{_doaclKey = a})
 
 -- | If present, only return default ACL listing if the bucket\'s current

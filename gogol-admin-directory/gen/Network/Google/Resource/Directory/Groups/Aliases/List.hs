@@ -55,7 +55,7 @@ type GroupsAliasesListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Aliases
 
@@ -67,7 +67,7 @@ data GroupsAliasesList' = GroupsAliasesList'
     , _galPrettyPrint :: !Bool
     , _galUserIP      :: !(Maybe Text)
     , _galGroupKey    :: !Text
-    , _galKey         :: !(Maybe Key)
+    , _galKey         :: !(Maybe AuthKey)
     , _galOAuthToken  :: !(Maybe OAuthToken)
     , _galFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -130,7 +130,7 @@ galGroupKey
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-galKey :: Lens' GroupsAliasesList' (Maybe Key)
+galKey :: Lens' GroupsAliasesList' (Maybe AuthKey)
 galKey = lens _galKey (\ s a -> s{_galKey = a})
 
 -- | OAuth 2.0 token for the current user.

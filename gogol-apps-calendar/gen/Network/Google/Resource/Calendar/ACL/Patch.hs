@@ -58,7 +58,7 @@ type ACLPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ACLRule :> Patch '[JSON] ACLRule
@@ -73,7 +73,7 @@ data ACLPatch' = ACLPatch'
     , _apUserIP      :: !(Maybe Text)
     , _apRuleId      :: !Text
     , _apPayload     :: !ACLRule
-    , _apKey         :: !(Maybe Key)
+    , _apKey         :: !(Maybe AuthKey)
     , _apOAuthToken  :: !(Maybe OAuthToken)
     , _apFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -154,7 +154,7 @@ apPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apKey :: Lens' ACLPatch' (Maybe Key)
+apKey :: Lens' ACLPatch' (Maybe AuthKey)
 apKey = lens _apKey (\ s a -> s{_apKey = a})
 
 -- | OAuth 2.0 token for the current user.

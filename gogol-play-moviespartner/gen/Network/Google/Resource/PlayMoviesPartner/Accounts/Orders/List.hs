@@ -84,7 +84,7 @@ type AccountsOrdersListResource =
                                          QueryParam "quotaUser" Text :>
                                            QueryParam "prettyPrint" Bool :>
                                              QueryParam "fields" Text :>
-                                               QueryParam "key" Key :>
+                                               QueryParam "key" AuthKey :>
                                                  QueryParam "oauth_token"
                                                    OAuthToken
                                                    :>
@@ -111,7 +111,7 @@ data AccountsOrdersList' = AccountsOrdersList'
     , _aolCustomId       :: !(Maybe Text)
     , _aolAccountId      :: !Text
     , _aolBearerToken    :: !(Maybe Text)
-    , _aolKey            :: !(Maybe Key)
+    , _aolKey            :: !(Maybe AuthKey)
     , _aolName           :: !(Maybe Text)
     , _aolPageToken      :: !(Maybe Text)
     , _aolOAuthToken     :: !(Maybe OAuthToken)
@@ -270,7 +270,7 @@ aolBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aolKey :: Lens' AccountsOrdersList' (Maybe Key)
+aolKey :: Lens' AccountsOrdersList' (Maybe AuthKey)
 aolKey = lens _aolKey (\ s a -> s{_aolKey = a})
 
 -- | Filter Orders that match a title name (case-insensitive, sub-string

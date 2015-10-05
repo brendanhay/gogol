@@ -58,7 +58,7 @@ type TaskListsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] TaskList :> Patch '[JSON] TaskList
@@ -72,7 +72,7 @@ data TaskListsPatch' = TaskListsPatch'
     , _tlpPrettyPrint :: !Bool
     , _tlpUserIP      :: !(Maybe Text)
     , _tlpPayload     :: !TaskList
-    , _tlpKey         :: !(Maybe Key)
+    , _tlpKey         :: !(Maybe AuthKey)
     , _tlpTaskList    :: !Text
     , _tlpOAuthToken  :: !(Maybe OAuthToken)
     , _tlpFields      :: !(Maybe Text)
@@ -140,7 +140,7 @@ tlpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tlpKey :: Lens' TaskListsPatch' (Maybe Key)
+tlpKey :: Lens' TaskListsPatch' (Maybe AuthKey)
 tlpKey = lens _tlpKey (\ s a -> s{_tlpKey = a})
 
 -- | Task list identifier.

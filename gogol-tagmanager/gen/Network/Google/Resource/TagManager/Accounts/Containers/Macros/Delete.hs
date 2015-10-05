@@ -60,7 +60,7 @@ type AccountsContainersMacrosDeleteResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -73,7 +73,7 @@ data AccountsContainersMacrosDelete' = AccountsContainersMacrosDelete'
     , _acmdContainerId :: !Text
     , _acmdUserIP      :: !(Maybe Text)
     , _acmdAccountId   :: !Text
-    , _acmdKey         :: !(Maybe Key)
+    , _acmdKey         :: !(Maybe AuthKey)
     , _acmdMacroId     :: !Text
     , _acmdOAuthToken  :: !(Maybe OAuthToken)
     , _acmdFields      :: !(Maybe Text)
@@ -153,7 +153,7 @@ acmdAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acmdKey :: Lens' AccountsContainersMacrosDelete' (Maybe Key)
+acmdKey :: Lens' AccountsContainersMacrosDelete' (Maybe AuthKey)
 acmdKey = lens _acmdKey (\ s a -> s{_acmdKey = a})
 
 -- | The GTM Macro ID.

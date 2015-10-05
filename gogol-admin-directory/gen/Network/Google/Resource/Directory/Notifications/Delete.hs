@@ -57,7 +57,7 @@ type NotificationsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -69,7 +69,7 @@ data NotificationsDelete' = NotificationsDelete'
     , _ndPrettyPrint    :: !Bool
     , _ndUserIP         :: !(Maybe Text)
     , _ndCustomer       :: !Text
-    , _ndKey            :: !(Maybe Key)
+    , _ndKey            :: !(Maybe AuthKey)
     , _ndNotificationId :: !Text
     , _ndOAuthToken     :: !(Maybe OAuthToken)
     , _ndFields         :: !(Maybe Text)
@@ -137,7 +137,7 @@ ndCustomer
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ndKey :: Lens' NotificationsDelete' (Maybe Key)
+ndKey :: Lens' NotificationsDelete' (Maybe AuthKey)
 ndKey = lens _ndKey (\ s a -> s{_ndKey = a})
 
 -- | The unique ID of the notification.

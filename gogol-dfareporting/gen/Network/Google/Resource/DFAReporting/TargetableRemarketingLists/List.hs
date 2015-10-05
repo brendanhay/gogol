@@ -73,7 +73,7 @@ type TargetableRemarketingListsListResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON]
@@ -90,7 +90,7 @@ data TargetableRemarketingListsList' = TargetableRemarketingListsList'
     , _trllProFileId    :: !Int64
     , _trllSortOrder    :: !(Maybe TargetableRemarketingListsListSortOrder)
     , _trllActive       :: !(Maybe Bool)
-    , _trllKey          :: !(Maybe Key)
+    , _trllKey          :: !(Maybe AuthKey)
     , _trllName         :: !(Maybe Text)
     , _trllPageToken    :: !(Maybe Text)
     , _trllSortField    :: !(Maybe TargetableRemarketingListsListSortField)
@@ -199,7 +199,7 @@ trllActive
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-trllKey :: Lens' TargetableRemarketingListsList' (Maybe Key)
+trllKey :: Lens' TargetableRemarketingListsList' (Maybe AuthKey)
 trllKey = lens _trllKey (\ s a -> s{_trllKey = a})
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.

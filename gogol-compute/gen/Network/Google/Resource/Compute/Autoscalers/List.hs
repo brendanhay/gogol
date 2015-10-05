@@ -64,7 +64,7 @@ type AutoscalersListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] AutoscalerList
@@ -79,7 +79,7 @@ data AutoscalersList' = AutoscalersList'
     , _autProject     :: !Text
     , _autUserIP      :: !(Maybe Text)
     , _autZone        :: !Text
-    , _autKey         :: !(Maybe Key)
+    , _autKey         :: !(Maybe AuthKey)
     , _autFilter      :: !(Maybe Text)
     , _autPageToken   :: !(Maybe Text)
     , _autOAuthToken  :: !(Maybe OAuthToken)
@@ -162,7 +162,7 @@ autZone = lens _autZone (\ s a -> s{_autZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-autKey :: Lens' AutoscalersList' (Maybe Key)
+autKey :: Lens' AutoscalersList' (Maybe AuthKey)
 autKey = lens _autKey (\ s a -> s{_autKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

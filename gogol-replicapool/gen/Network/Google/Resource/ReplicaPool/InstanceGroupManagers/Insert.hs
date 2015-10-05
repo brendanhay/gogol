@@ -61,7 +61,7 @@ type InstanceGroupManagersInsertResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] InstanceGroupManager :>
@@ -79,7 +79,7 @@ data InstanceGroupManagersInsert' = InstanceGroupManagersInsert'
     , _igmiUserIP      :: !(Maybe Text)
     , _igmiZone        :: !Text
     , _igmiPayload     :: !InstanceGroupManager
-    , _igmiKey         :: !(Maybe Key)
+    , _igmiKey         :: !(Maybe AuthKey)
     , _igmiOAuthToken  :: !(Maybe OAuthToken)
     , _igmiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -168,7 +168,7 @@ igmiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmiKey :: Lens' InstanceGroupManagersInsert' (Maybe Key)
+igmiKey :: Lens' InstanceGroupManagersInsert' (Maybe AuthKey)
 igmiKey = lens _igmiKey (\ s a -> s{_igmiKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -57,7 +57,7 @@ type TimelineAttachmentsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Attachment
        :<|>
@@ -69,7 +69,7 @@ type TimelineAttachmentsGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltMedia :> Get '[OctetStream] Body
 
@@ -82,7 +82,7 @@ data TimelineAttachmentsGet' = TimelineAttachmentsGet'
     , _tagUserIP       :: !(Maybe Text)
     , _tagItemId       :: !Text
     , _tagAttachmentId :: !Text
-    , _tagKey          :: !(Maybe Key)
+    , _tagKey          :: !(Maybe AuthKey)
     , _tagOAuthToken   :: !(Maybe OAuthToken)
     , _tagFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -155,7 +155,7 @@ tagAttachmentId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tagKey :: Lens' TimelineAttachmentsGet' (Maybe Key)
+tagKey :: Lens' TimelineAttachmentsGet' (Maybe AuthKey)
 tagKey = lens _tagKey (\ s a -> s{_tagKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -60,7 +60,7 @@ type ManifestsGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Manifest
 
@@ -72,7 +72,7 @@ data ManifestsGet' = ManifestsGet'
     , _mgPrettyPrint :: !Bool
     , _mgProject     :: !Text
     , _mgUserIP      :: !(Maybe Text)
-    , _mgKey         :: !(Maybe Key)
+    , _mgKey         :: !(Maybe AuthKey)
     , _mgManifest    :: !Text
     , _mgOAuthToken  :: !(Maybe OAuthToken)
     , _mgFields      :: !(Maybe Text)
@@ -144,7 +144,7 @@ mgUserIP = lens _mgUserIP (\ s a -> s{_mgUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mgKey :: Lens' ManifestsGet' (Maybe Key)
+mgKey :: Lens' ManifestsGet' (Maybe AuthKey)
 mgKey = lens _mgKey (\ s a -> s{_mgKey = a})
 
 -- | The name of the manifest for this request.

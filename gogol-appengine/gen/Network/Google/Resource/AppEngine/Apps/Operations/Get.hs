@@ -72,7 +72,7 @@ type AppsOperationsGetResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] Operation
@@ -91,7 +91,7 @@ data AppsOperationsGet' = AppsOperationsGet'
     , _aogAccessToken    :: !(Maybe Text)
     , _aogUploadType     :: !(Maybe Text)
     , _aogBearerToken    :: !(Maybe Text)
-    , _aogKey            :: !(Maybe Key)
+    , _aogKey            :: !(Maybe AuthKey)
     , _aogAppsId         :: !Text
     , _aogOAuthToken     :: !(Maybe OAuthToken)
     , _aogOperationsId   :: !Text
@@ -200,7 +200,7 @@ aogBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aogKey :: Lens' AppsOperationsGet' (Maybe Key)
+aogKey :: Lens' AppsOperationsGet' (Maybe AuthKey)
 aogKey = lens _aogKey (\ s a -> s{_aogKey = a})
 
 -- | Part of \`name\`. The name of the operation resource.

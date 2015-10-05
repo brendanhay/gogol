@@ -58,7 +58,7 @@ type VideosGetRatingResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] VideoGetRatingResponse
@@ -72,7 +72,7 @@ data VideosGetRating' = VideosGetRating'
     , _vgrPrettyPrint            :: !Bool
     , _vgrUserIP                 :: !(Maybe Text)
     , _vgrOnBehalfOfContentOwner :: !(Maybe Text)
-    , _vgrKey                    :: !(Maybe Key)
+    , _vgrKey                    :: !(Maybe AuthKey)
     , _vgrId                     :: !Text
     , _vgrOAuthToken             :: !(Maybe OAuthToken)
     , _vgrFields                 :: !(Maybe Text)
@@ -149,7 +149,7 @@ vgrOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vgrKey :: Lens' VideosGetRating' (Maybe Key)
+vgrKey :: Lens' VideosGetRating' (Maybe AuthKey)
 vgrKey = lens _vgrKey (\ s a -> s{_vgrKey = a})
 
 -- | The id parameter specifies a comma-separated list of the YouTube video

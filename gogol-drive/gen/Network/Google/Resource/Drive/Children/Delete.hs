@@ -57,7 +57,7 @@ type ChildrenDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -69,7 +69,7 @@ data ChildrenDelete' = ChildrenDelete'
     , _cddPrettyPrint :: !Bool
     , _cddUserIP      :: !(Maybe Text)
     , _cddFolderId    :: !Text
-    , _cddKey         :: !(Maybe Key)
+    , _cddKey         :: !(Maybe AuthKey)
     , _cddChildId     :: !Text
     , _cddOAuthToken  :: !(Maybe OAuthToken)
     , _cddFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ cddFolderId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cddKey :: Lens' ChildrenDelete' (Maybe Key)
+cddKey :: Lens' ChildrenDelete' (Maybe AuthKey)
 cddKey = lens _cddKey (\ s a -> s{_cddKey = a})
 
 -- | The ID of the child.

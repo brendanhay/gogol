@@ -57,7 +57,7 @@ type TemplateDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -69,7 +69,7 @@ data TemplateDelete' = TemplateDelete'
     , _tddPrettyPrint :: !Bool
     , _tddTemplateId  :: !Int32
     , _tddUserIP      :: !(Maybe Text)
-    , _tddKey         :: !(Maybe Key)
+    , _tddKey         :: !(Maybe AuthKey)
     , _tddOAuthToken  :: !(Maybe OAuthToken)
     , _tddTableId     :: !Text
     , _tddFields      :: !(Maybe Text)
@@ -138,7 +138,7 @@ tddUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tddKey :: Lens' TemplateDelete' (Maybe Key)
+tddKey :: Lens' TemplateDelete' (Maybe AuthKey)
 tddKey = lens _tddKey (\ s a -> s{_tddKey = a})
 
 -- | OAuth 2.0 token for the current user.

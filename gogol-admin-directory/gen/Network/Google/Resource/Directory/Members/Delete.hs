@@ -57,7 +57,7 @@ type MembersDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -70,7 +70,7 @@ data MembersDelete' = MembersDelete'
     , _mdPrettyPrint :: !Bool
     , _mdUserIP      :: !(Maybe Text)
     , _mdGroupKey    :: !Text
-    , _mdKey         :: !(Maybe Key)
+    , _mdKey         :: !(Maybe AuthKey)
     , _mdOAuthToken  :: !(Maybe OAuthToken)
     , _mdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -141,7 +141,7 @@ mdGroupKey
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mdKey :: Lens' MembersDelete' (Maybe Key)
+mdKey :: Lens' MembersDelete' (Maybe AuthKey)
 mdKey = lens _mdKey (\ s a -> s{_mdKey = a})
 
 -- | OAuth 2.0 token for the current user.

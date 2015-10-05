@@ -56,7 +56,7 @@ type CalendarListDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -68,7 +68,7 @@ data CalendarListDelete' = CalendarListDelete'
     , _cldCalendarId  :: !Text
     , _cldPrettyPrint :: !Bool
     , _cldUserIP      :: !(Maybe Text)
-    , _cldKey         :: !(Maybe Key)
+    , _cldKey         :: !(Maybe AuthKey)
     , _cldOAuthToken  :: !(Maybe OAuthToken)
     , _cldFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -134,7 +134,7 @@ cldUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cldKey :: Lens' CalendarListDelete' (Maybe Key)
+cldKey :: Lens' CalendarListDelete' (Maybe AuthKey)
 cldKey = lens _cldKey (\ s a -> s{_cldKey = a})
 
 -- | OAuth 2.0 token for the current user.

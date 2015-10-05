@@ -66,7 +66,7 @@ type EventsPatchResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Event :> Patch '[JSON] Event
@@ -81,7 +81,7 @@ data EventsPatch' = EventsPatch'
     , _epUserIP              :: !(Maybe Text)
     , _epPayload             :: !Event
     , _epMaxAttendees        :: !(Maybe Int32)
-    , _epKey                 :: !(Maybe Key)
+    , _epKey                 :: !(Maybe AuthKey)
     , _epSendNotifications   :: !(Maybe Bool)
     , _epOAuthToken          :: !(Maybe OAuthToken)
     , _epSupportsAttachments :: !(Maybe Bool)
@@ -182,7 +182,7 @@ epMaxAttendees
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-epKey :: Lens' EventsPatch' (Maybe Key)
+epKey :: Lens' EventsPatch' (Maybe AuthKey)
 epKey = lens _epKey (\ s a -> s{_epKey = a})
 
 -- | Whether to send notifications about the event update (e.g. attendee\'s

@@ -67,7 +67,7 @@ type TransferOperationsResumeResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON]
@@ -87,7 +87,7 @@ data TransferOperationsResume' = TransferOperationsResume'
     , _torUploadType     :: !(Maybe Text)
     , _torPayload        :: !ResumeTransferOperationRequest
     , _torBearerToken    :: !(Maybe Text)
-    , _torKey            :: !(Maybe Key)
+    , _torKey            :: !(Maybe AuthKey)
     , _torName           :: !Text
     , _torOAuthToken     :: !(Maybe OAuthToken)
     , _torFields         :: !(Maybe Text)
@@ -200,7 +200,7 @@ torBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-torKey :: Lens' TransferOperationsResume' (Maybe Key)
+torKey :: Lens' TransferOperationsResume' (Maybe AuthKey)
 torKey = lens _torKey (\ s a -> s{_torKey = a})
 
 -- | The name of the transfer operation. Required.

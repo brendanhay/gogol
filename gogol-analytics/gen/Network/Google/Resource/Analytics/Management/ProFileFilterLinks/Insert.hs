@@ -63,7 +63,7 @@ type ManagementProFileFilterLinksInsertResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] ProFileFilterLink :>
@@ -80,7 +80,7 @@ data ManagementProFileFilterLinksInsert' = ManagementProFileFilterLinksInsert'
     , _mpffliProFileId     :: !Text
     , _mpffliPayload       :: !ProFileFilterLink
     , _mpffliAccountId     :: !Text
-    , _mpffliKey           :: !(Maybe Key)
+    , _mpffliKey           :: !(Maybe AuthKey)
     , _mpffliOAuthToken    :: !(Maybe OAuthToken)
     , _mpffliFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -175,7 +175,7 @@ mpffliAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpffliKey :: Lens' ManagementProFileFilterLinksInsert' (Maybe Key)
+mpffliKey :: Lens' ManagementProFileFilterLinksInsert' (Maybe AuthKey)
 mpffliKey
   = lens _mpffliKey (\ s a -> s{_mpffliKey = a})
 

@@ -59,7 +59,7 @@ type MyLibraryReadingPositionsGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ReadingPosition
@@ -72,7 +72,7 @@ data MyLibraryReadingPositionsGet' = MyLibraryReadingPositionsGet'
     , _mlrpgPrettyPrint    :: !Bool
     , _mlrpgUserIP         :: !(Maybe Text)
     , _mlrpgContentVersion :: !(Maybe Text)
-    , _mlrpgKey            :: !(Maybe Key)
+    , _mlrpgKey            :: !(Maybe AuthKey)
     , _mlrpgVolumeId       :: !Text
     , _mlrpgSource         :: !(Maybe Text)
     , _mlrpgOAuthToken     :: !(Maybe OAuthToken)
@@ -145,7 +145,7 @@ mlrpgContentVersion
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlrpgKey :: Lens' MyLibraryReadingPositionsGet' (Maybe Key)
+mlrpgKey :: Lens' MyLibraryReadingPositionsGet' (Maybe AuthKey)
 mlrpgKey = lens _mlrpgKey (\ s a -> s{_mlrpgKey = a})
 
 -- | ID of volume for which to retrieve a reading position.

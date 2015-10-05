@@ -64,7 +64,7 @@ type VariantsetsImportVariantsResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ImportVariantsRequest :>
@@ -87,7 +87,7 @@ data VariantsetsImportVariants' = VariantsetsImportVariants'
     , _vivVariantSetId :: !Text
     , _vivUserIP       :: !(Maybe Text)
     , _vivPayload      :: !ImportVariantsRequest
-    , _vivKey          :: !(Maybe Key)
+    , _vivKey          :: !(Maybe AuthKey)
     , _vivOAuthToken   :: !(Maybe OAuthToken)
     , _vivFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -160,7 +160,7 @@ vivPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vivKey :: Lens' VariantsetsImportVariants' (Maybe Key)
+vivKey :: Lens' VariantsetsImportVariants' (Maybe AuthKey)
 vivKey = lens _vivKey (\ s a -> s{_vivKey = a})
 
 -- | OAuth 2.0 token for the current user.

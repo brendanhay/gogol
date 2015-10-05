@@ -52,7 +52,7 @@ type RelyingPartyGetPublicKeysResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON]
@@ -65,7 +65,7 @@ data RelyingPartyGetPublicKeys' = RelyingPartyGetPublicKeys'
     { _rpgpkQuotaUser   :: !(Maybe Text)
     , _rpgpkPrettyPrint :: !Bool
     , _rpgpkUserIP      :: !(Maybe Text)
-    , _rpgpkKey         :: !(Maybe Key)
+    , _rpgpkKey         :: !(Maybe AuthKey)
     , _rpgpkOAuthToken  :: !(Maybe OAuthToken)
     , _rpgpkFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -120,7 +120,7 @@ rpgpkUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rpgpkKey :: Lens' RelyingPartyGetPublicKeys' (Maybe Key)
+rpgpkKey :: Lens' RelyingPartyGetPublicKeys' (Maybe AuthKey)
 rpgpkKey = lens _rpgpkKey (\ s a -> s{_rpgpkKey = a})
 
 -- | OAuth 2.0 token for the current user.

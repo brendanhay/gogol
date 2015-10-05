@@ -73,7 +73,7 @@ type AdvertisersListResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] Advertisers
@@ -91,7 +91,7 @@ data AdvertisersList' = AdvertisersList'
     , _alRoleId             :: !Text
     , _alMinNinetyDayEpc    :: !(Maybe Double)
     , _alRole               :: !AdvertisersListRole
-    , _alKey                :: !(Maybe Key)
+    , _alKey                :: !(Maybe AuthKey)
     , _alMinPayoutRank      :: !(Maybe Int32)
     , _alAdvertiserCategory :: !(Maybe Text)
     , _alPageToken          :: !(Maybe Text)
@@ -207,7 +207,7 @@ alRole = lens _alRole (\ s a -> s{_alRole = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alKey :: Lens' AdvertisersList' (Maybe Key)
+alKey :: Lens' AdvertisersList' (Maybe AuthKey)
 alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | A value between 1 and 4, where 1 represents the quartile of advertisers

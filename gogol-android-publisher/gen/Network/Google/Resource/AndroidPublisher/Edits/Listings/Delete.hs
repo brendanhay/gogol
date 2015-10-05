@@ -59,7 +59,7 @@ type EditsListingsDeleteResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -71,7 +71,7 @@ data EditsListingsDelete' = EditsListingsDelete'
     , _eldPrettyPrint :: !Bool
     , _eldPackageName :: !Text
     , _eldUserIP      :: !(Maybe Text)
-    , _eldKey         :: !(Maybe Key)
+    , _eldKey         :: !(Maybe AuthKey)
     , _eldLanguage    :: !Text
     , _eldOAuthToken  :: !(Maybe OAuthToken)
     , _eldEditId      :: !Text
@@ -146,7 +146,7 @@ eldUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eldKey :: Lens' EditsListingsDelete' (Maybe Key)
+eldKey :: Lens' EditsListingsDelete' (Maybe AuthKey)
 eldKey = lens _eldKey (\ s a -> s{_eldKey = a})
 
 -- | The language code (a BCP-47 language tag) of the localized listing to

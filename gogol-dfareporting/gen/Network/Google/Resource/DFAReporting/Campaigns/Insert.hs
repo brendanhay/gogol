@@ -60,7 +60,7 @@ type CampaignsInsertResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Campaign :> Post '[JSON] Campaign
@@ -75,7 +75,7 @@ data CampaignsInsert' = CampaignsInsert'
     , _ciProFileId              :: !Int64
     , _ciPayload                :: !Campaign
     , _ciDefaultLandingPageURL  :: !Text
-    , _ciKey                    :: !(Maybe Key)
+    , _ciKey                    :: !(Maybe AuthKey)
     , _ciDefaultLandingPageName :: !Text
     , _ciOAuthToken             :: !(Maybe OAuthToken)
     , _ciFields                 :: !(Maybe Text)
@@ -161,7 +161,7 @@ ciDefaultLandingPageURL
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ciKey :: Lens' CampaignsInsert' (Maybe Key)
+ciKey :: Lens' CampaignsInsert' (Maybe AuthKey)
 ciKey = lens _ciKey (\ s a -> s{_ciKey = a})
 
 -- | Default landing page name for this new campaign. Must be less than 256

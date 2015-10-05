@@ -59,7 +59,7 @@ type UsersThreadsModifyResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ModifyThreadRequest :>
@@ -75,7 +75,7 @@ data UsersThreadsModify' = UsersThreadsModify'
     , _utmUserIP      :: !(Maybe Text)
     , _utmPayload     :: !ModifyThreadRequest
     , _utmUserId      :: !Text
-    , _utmKey         :: !(Maybe Key)
+    , _utmKey         :: !(Maybe AuthKey)
     , _utmId          :: !Text
     , _utmOAuthToken  :: !(Maybe OAuthToken)
     , _utmFields      :: !(Maybe Text)
@@ -153,7 +153,7 @@ utmUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-utmKey :: Lens' UsersThreadsModify' (Maybe Key)
+utmKey :: Lens' UsersThreadsModify' (Maybe AuthKey)
 utmKey = lens _utmKey (\ s a -> s{_utmKey = a})
 
 -- | The ID of the thread to modify.

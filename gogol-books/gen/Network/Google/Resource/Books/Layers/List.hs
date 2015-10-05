@@ -63,7 +63,7 @@ type LayersListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] Layersummaries
@@ -76,7 +76,7 @@ data LayersList' = LayersList'
     , _llPrettyPrint    :: !Bool
     , _llUserIP         :: !(Maybe Text)
     , _llContentVersion :: !(Maybe Text)
-    , _llKey            :: !(Maybe Key)
+    , _llKey            :: !(Maybe AuthKey)
     , _llVolumeId       :: !Text
     , _llSource         :: !(Maybe Text)
     , _llPageToken      :: !(Maybe Text)
@@ -155,7 +155,7 @@ llContentVersion
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-llKey :: Lens' LayersList' (Maybe Key)
+llKey :: Lens' LayersList' (Maybe AuthKey)
 llKey = lens _llKey (\ s a -> s{_llKey = a})
 
 -- | The volume to retrieve layers for.

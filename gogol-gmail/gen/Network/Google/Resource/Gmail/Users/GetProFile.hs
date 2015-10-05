@@ -54,7 +54,7 @@ type UsersGetProFileResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] ProFile
 
@@ -66,7 +66,7 @@ data UsersGetProFile' = UsersGetProFile'
     , _ugpfPrettyPrint :: !Bool
     , _ugpfUserIP      :: !(Maybe Text)
     , _ugpfUserId      :: !Text
-    , _ugpfKey         :: !(Maybe Key)
+    , _ugpfKey         :: !(Maybe AuthKey)
     , _ugpfOAuthToken  :: !(Maybe OAuthToken)
     , _ugpfFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -131,7 +131,7 @@ ugpfUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ugpfKey :: Lens' UsersGetProFile' (Maybe Key)
+ugpfKey :: Lens' UsersGetProFile' (Maybe AuthKey)
 ugpfKey = lens _ugpfKey (\ s a -> s{_ugpfKey = a})
 
 -- | OAuth 2.0 token for the current user.

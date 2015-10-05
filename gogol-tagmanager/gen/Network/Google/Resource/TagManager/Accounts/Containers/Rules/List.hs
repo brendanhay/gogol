@@ -58,7 +58,7 @@ type AccountsContainersRulesListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListRulesResponse
@@ -72,7 +72,7 @@ data AccountsContainersRulesList' = AccountsContainersRulesList'
     , _acrlContainerId :: !Text
     , _acrlUserIP      :: !(Maybe Text)
     , _acrlAccountId   :: !Text
-    , _acrlKey         :: !(Maybe Key)
+    , _acrlKey         :: !(Maybe AuthKey)
     , _acrlOAuthToken  :: !(Maybe OAuthToken)
     , _acrlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -147,7 +147,7 @@ acrlAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acrlKey :: Lens' AccountsContainersRulesList' (Maybe Key)
+acrlKey :: Lens' AccountsContainersRulesList' (Maybe AuthKey)
 acrlKey = lens _acrlKey (\ s a -> s{_acrlKey = a})
 
 -- | OAuth 2.0 token for the current user.

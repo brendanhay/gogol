@@ -66,7 +66,7 @@ type ReportsFilesListResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] FileList
@@ -81,7 +81,7 @@ data ReportsFilesList' = ReportsFilesList'
     , _rflReportId    :: !Int64
     , _rflProFileId   :: !Int64
     , _rflSortOrder   :: !ReportsFilesListSortOrder
-    , _rflKey         :: !(Maybe Key)
+    , _rflKey         :: !(Maybe AuthKey)
     , _rflPageToken   :: !(Maybe Text)
     , _rflSortField   :: !ReportsFilesListSortField
     , _rflOAuthToken  :: !(Maybe OAuthToken)
@@ -173,7 +173,7 @@ rflSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rflKey :: Lens' ReportsFilesList' (Maybe Key)
+rflKey :: Lens' ReportsFilesList' (Maybe AuthKey)
 rflKey = lens _rflKey (\ s a -> s{_rflKey = a})
 
 -- | The value of the nextToken from the previous result page.

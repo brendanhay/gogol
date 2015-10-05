@@ -62,7 +62,7 @@ type TargetPoolsGetHealthResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] InstanceReference :>
@@ -79,7 +79,7 @@ data TargetPoolsGetHealth' = TargetPoolsGetHealth'
     , _tpghTargetPool  :: !Text
     , _tpghUserIP      :: !(Maybe Text)
     , _tpghPayload     :: !InstanceReference
-    , _tpghKey         :: !(Maybe Key)
+    , _tpghKey         :: !(Maybe AuthKey)
     , _tpghRegion      :: !Text
     , _tpghOAuthToken  :: !(Maybe OAuthToken)
     , _tpghFields      :: !(Maybe Text)
@@ -166,7 +166,7 @@ tpghPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tpghKey :: Lens' TargetPoolsGetHealth' (Maybe Key)
+tpghKey :: Lens' TargetPoolsGetHealth' (Maybe AuthKey)
 tpghKey = lens _tpghKey (\ s a -> s{_tpghKey = a})
 
 -- | Name of the region scoping this request.

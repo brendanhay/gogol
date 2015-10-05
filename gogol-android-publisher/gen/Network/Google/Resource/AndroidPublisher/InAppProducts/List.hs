@@ -61,7 +61,7 @@ type InAppProductsListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] InAppProductsListResponse
@@ -76,7 +76,7 @@ data InAppProductsList' = InAppProductsList'
     , _iaplPackageName :: !Text
     , _iaplUserIP      :: !(Maybe Text)
     , _iaplToken       :: !(Maybe Text)
-    , _iaplKey         :: !(Maybe Key)
+    , _iaplKey         :: !(Maybe AuthKey)
     , _iaplOAuthToken  :: !(Maybe OAuthToken)
     , _iaplStartIndex  :: !(Maybe Word32)
     , _iaplMaxResults  :: !(Maybe Word32)
@@ -157,7 +157,7 @@ iaplToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iaplKey :: Lens' InAppProductsList' (Maybe Key)
+iaplKey :: Lens' InAppProductsList' (Maybe AuthKey)
 iaplKey = lens _iaplKey (\ s a -> s{_iaplKey = a})
 
 -- | OAuth 2.0 token for the current user.

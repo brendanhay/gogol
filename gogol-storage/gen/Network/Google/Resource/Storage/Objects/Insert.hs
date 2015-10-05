@@ -69,7 +69,7 @@ type ObjectsInsertResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      MultipartRelated '[JSON] Object Body :>
@@ -88,7 +88,7 @@ type ObjectsInsertResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltMedia :>
                                        MultipartRelated '[JSON] Object Body :>
@@ -107,7 +107,7 @@ data ObjectsInsert' = ObjectsInsert'
     , _oiBucket                   :: !Text
     , _oiPayload                  :: !Object
     , _oiMedia                    :: !Body
-    , _oiKey                      :: !(Maybe Key)
+    , _oiKey                      :: !(Maybe AuthKey)
     , _oiName                     :: !(Maybe Text)
     , _oiIfMetagenerationNotMatch :: !(Maybe Word64)
     , _oiProjection               :: !(Maybe ObjectsInsertProjection)
@@ -227,7 +227,7 @@ oiMedia = lens _oiMedia (\ s a -> s{_oiMedia = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oiKey :: Lens' ObjectsInsert' (Maybe Key)
+oiKey :: Lens' ObjectsInsert' (Maybe AuthKey)
 oiKey = lens _oiKey (\ s a -> s{_oiKey = a})
 
 -- | Name of the object. Required when the object metadata is not otherwise

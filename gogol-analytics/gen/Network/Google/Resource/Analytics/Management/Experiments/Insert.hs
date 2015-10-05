@@ -63,7 +63,7 @@ type ManagementExperimentsInsertResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Experiment :>
@@ -80,7 +80,7 @@ data ManagementExperimentsInsert' = ManagementExperimentsInsert'
     , _meiProFileId     :: !Text
     , _meiPayload       :: !Experiment
     , _meiAccountId     :: !Text
-    , _meiKey           :: !(Maybe Key)
+    , _meiKey           :: !(Maybe AuthKey)
     , _meiOAuthToken    :: !(Maybe OAuthToken)
     , _meiFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -171,7 +171,7 @@ meiAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-meiKey :: Lens' ManagementExperimentsInsert' (Maybe Key)
+meiKey :: Lens' ManagementExperimentsInsert' (Maybe AuthKey)
 meiKey = lens _meiKey (\ s a -> s{_meiKey = a})
 
 -- | OAuth 2.0 token for the current user.

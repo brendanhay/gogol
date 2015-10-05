@@ -66,7 +66,7 @@ type VideosInsertResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  MultipartRelated '[JSON] Video Body :>
@@ -84,7 +84,7 @@ data VideosInsert' = VideosInsert'
     , _viPayload                       :: !Video
     , _viMedia                         :: !Body
     , _viOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _viKey                           :: !(Maybe Key)
+    , _viKey                           :: !(Maybe AuthKey)
     , _viOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _viNotifySubscribers             :: !Bool
     , _viAutoLevels                    :: !(Maybe Bool)
@@ -207,7 +207,7 @@ viOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-viKey :: Lens' VideosInsert' (Maybe Key)
+viKey :: Lens' VideosInsert' (Maybe AuthKey)
 viKey = lens _viKey (\ s a -> s{_viKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:

@@ -59,7 +59,7 @@ type GlobalForwardingRulesSetTargetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] TargetReference :>
@@ -75,7 +75,7 @@ data GlobalForwardingRulesSetTarget' = GlobalForwardingRulesSetTarget'
     , _gfrstForwardingRule :: !Text
     , _gfrstUserIP         :: !(Maybe Text)
     , _gfrstPayload        :: !TargetReference
-    , _gfrstKey            :: !(Maybe Key)
+    , _gfrstKey            :: !(Maybe AuthKey)
     , _gfrstOAuthToken     :: !(Maybe OAuthToken)
     , _gfrstFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -158,7 +158,7 @@ gfrstPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gfrstKey :: Lens' GlobalForwardingRulesSetTarget' (Maybe Key)
+gfrstKey :: Lens' GlobalForwardingRulesSetTarget' (Maybe AuthKey)
 gfrstKey = lens _gfrstKey (\ s a -> s{_gfrstKey = a})
 
 -- | OAuth 2.0 token for the current user.

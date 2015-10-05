@@ -60,7 +60,7 @@ type DatasetsUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Dataset :> Put '[JSON] Dataset
@@ -75,7 +75,7 @@ data DatasetsUpdate' = DatasetsUpdate'
     , _duPrettyPrint :: !Bool
     , _duUserIP      :: !(Maybe Text)
     , _duPayload     :: !Dataset
-    , _duKey         :: !(Maybe Key)
+    , _duKey         :: !(Maybe AuthKey)
     , _duDatasetId   :: !Text
     , _duProjectId   :: !Text
     , _duOAuthToken  :: !(Maybe OAuthToken)
@@ -147,7 +147,7 @@ duPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-duKey :: Lens' DatasetsUpdate' (Maybe Key)
+duKey :: Lens' DatasetsUpdate' (Maybe AuthKey)
 duKey = lens _duKey (\ s a -> s{_duKey = a})
 
 -- | Dataset ID of the dataset being updated

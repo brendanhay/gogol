@@ -81,7 +81,7 @@ type CampaignsListResource =
                                        QueryParam "prettyPrint" Bool :>
                                          QueryParam "userIp" Text :>
                                            QueryParam "fields" Text :>
-                                             QueryParam "key" Key :>
+                                             QueryParam "key" AuthKey :>
                                                QueryParam "oauth_token"
                                                  OAuthToken
                                                  :>
@@ -102,7 +102,7 @@ data CampaignsList' = CampaignsList'
     , _ccProFileId                      :: !Int64
     , _ccSortOrder                      :: !(Maybe CampaignsListSortOrder)
     , _ccAdvertiserGroupIds             :: !(Maybe [Int64])
-    , _ccKey                            :: !(Maybe Key)
+    , _ccKey                            :: !(Maybe AuthKey)
     , _ccAtLeastOneOptimizationActivity :: !(Maybe Bool)
     , _ccOverriddenEventTagId           :: !(Maybe Int64)
     , _ccPageToken                      :: !(Maybe Text)
@@ -251,7 +251,7 @@ ccAdvertiserGroupIds
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccKey :: Lens' CampaignsList' (Maybe Key)
+ccKey :: Lens' CampaignsList' (Maybe AuthKey)
 ccKey = lens _ccKey (\ s a -> s{_ccKey = a})
 
 -- | Select only campaigns that have at least one optimization activity.

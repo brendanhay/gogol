@@ -57,7 +57,7 @@ type EditsTracksListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] TracksListResponse
@@ -70,7 +70,7 @@ data EditsTracksList' = EditsTracksList'
     , _etlPrettyPrint :: !Bool
     , _etlPackageName :: !Text
     , _etlUserIP      :: !(Maybe Text)
-    , _etlKey         :: !(Maybe Key)
+    , _etlKey         :: !(Maybe AuthKey)
     , _etlOAuthToken  :: !(Maybe OAuthToken)
     , _etlEditId      :: !Text
     , _etlFields      :: !(Maybe Text)
@@ -140,7 +140,7 @@ etlUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-etlKey :: Lens' EditsTracksList' (Maybe Key)
+etlKey :: Lens' EditsTracksList' (Maybe AuthKey)
 etlKey = lens _etlKey (\ s a -> s{_etlKey = a})
 
 -- | OAuth 2.0 token for the current user.

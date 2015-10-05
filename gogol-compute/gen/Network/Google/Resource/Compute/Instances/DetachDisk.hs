@@ -62,7 +62,7 @@ type InstancesDetachDiskResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Post '[JSON] Operation
@@ -77,7 +77,7 @@ data InstancesDetachDisk' = InstancesDetachDisk'
     , _iddUserIP      :: !(Maybe Text)
     , _iddZone        :: !Text
     , _iddDeviceName  :: !Text
-    , _iddKey         :: !(Maybe Key)
+    , _iddKey         :: !(Maybe AuthKey)
     , _iddOAuthToken  :: !(Maybe OAuthToken)
     , _iddFields      :: !(Maybe Text)
     , _iddInstance    :: !Text
@@ -163,7 +163,7 @@ iddDeviceName
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iddKey :: Lens' InstancesDetachDisk' (Maybe Key)
+iddKey :: Lens' InstancesDetachDisk' (Maybe AuthKey)
 iddKey = lens _iddKey (\ s a -> s{_iddKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -59,7 +59,7 @@ type CcOffersListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] CcOffers
 
@@ -70,7 +70,7 @@ data CcOffersList' = CcOffersList'
     { _colQuotaUser   :: !(Maybe Text)
     , _colPrettyPrint :: !Bool
     , _colUserIP      :: !(Maybe Text)
-    , _colKey         :: !(Maybe Key)
+    , _colKey         :: !(Maybe AuthKey)
     , _colAdvertiser  :: !(Maybe [Text])
     , _colProjection  :: !(Maybe CcOffersListProjection)
     , _colOAuthToken  :: !(Maybe OAuthToken)
@@ -137,7 +137,7 @@ colUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-colKey :: Lens' CcOffersList' (Maybe Key)
+colKey :: Lens' CcOffersList' (Maybe AuthKey)
 colKey = lens _colKey (\ s a -> s{_colKey = a})
 
 -- | The advertiser ID of a card issuer whose offers to include. Optional,

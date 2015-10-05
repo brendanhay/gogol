@@ -66,7 +66,7 @@ type UserEventsLogResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] LogUserEventRequest :>
@@ -85,7 +85,7 @@ data UserEventsLog' = UserEventsLog'
     , _uelUploadType     :: !(Maybe Text)
     , _uelPayload        :: !LogUserEventRequest
     , _uelBearerToken    :: !(Maybe Text)
-    , _uelKey            :: !(Maybe Key)
+    , _uelKey            :: !(Maybe AuthKey)
     , _uelOAuthToken     :: !(Maybe OAuthToken)
     , _uelFields         :: !(Maybe Text)
     , _uelCallback       :: !(Maybe Text)
@@ -193,7 +193,7 @@ uelBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uelKey :: Lens' UserEventsLog' (Maybe Key)
+uelKey :: Lens' UserEventsLog' (Maybe AuthKey)
 uelKey = lens _uelKey (\ s a -> s{_uelKey = a})
 
 -- | OAuth 2.0 token for the current user.

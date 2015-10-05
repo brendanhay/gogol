@@ -61,7 +61,7 @@ type DimensionValuesQueryResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] DimensionValueRequest :>
@@ -76,7 +76,7 @@ data DimensionValuesQuery' = DimensionValuesQuery'
     , _dvqUserIP      :: !(Maybe Text)
     , _dvqProFileId   :: !Int64
     , _dvqPayload     :: !DimensionValueRequest
-    , _dvqKey         :: !(Maybe Key)
+    , _dvqKey         :: !(Maybe AuthKey)
     , _dvqPageToken   :: !(Maybe Text)
     , _dvqOAuthToken  :: !(Maybe OAuthToken)
     , _dvqMaxResults  :: !(Maybe Int32)
@@ -156,7 +156,7 @@ dvqPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dvqKey :: Lens' DimensionValuesQuery' (Maybe Key)
+dvqKey :: Lens' DimensionValuesQuery' (Maybe AuthKey)
 dvqKey = lens _dvqKey (\ s a -> s{_dvqKey = a})
 
 -- | The value of the nextToken from the previous result page.

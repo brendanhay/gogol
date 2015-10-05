@@ -58,7 +58,7 @@ type EventsListDefinitionsResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] EventDefinitionListResponse
@@ -70,7 +70,7 @@ data EventsListDefinitions' = EventsListDefinitions'
     { _eldQuotaUser   :: !(Maybe Text)
     , _eldPrettyPrint :: !Bool
     , _eldUserIP      :: !(Maybe Text)
-    , _eldKey         :: !(Maybe Key)
+    , _eldKey         :: !(Maybe AuthKey)
     , _eldLanguage    :: !(Maybe Text)
     , _eldPageToken   :: !(Maybe Text)
     , _eldOAuthToken  :: !(Maybe OAuthToken)
@@ -136,7 +136,7 @@ eldUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eldKey :: Lens' EventsListDefinitions' (Maybe Key)
+eldKey :: Lens' EventsListDefinitions' (Maybe AuthKey)
 eldKey = lens _eldKey (\ s a -> s{_eldKey = a})
 
 -- | The preferred language to use for strings returned by this method.

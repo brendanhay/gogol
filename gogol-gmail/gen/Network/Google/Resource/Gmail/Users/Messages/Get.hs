@@ -60,7 +60,7 @@ type UsersMessagesGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Message
 
@@ -73,7 +73,7 @@ data UsersMessagesGet' = UsersMessagesGet'
     , _umgUserIP          :: !(Maybe Text)
     , _umgFormat          :: !UsersMessagesGetFormat
     , _umgUserId          :: !Text
-    , _umgKey             :: !(Maybe Key)
+    , _umgKey             :: !(Maybe AuthKey)
     , _umgId              :: !Text
     , _umgOAuthToken      :: !(Maybe OAuthToken)
     , _umgMetadataHeaders :: !(Maybe [Text])
@@ -154,7 +154,7 @@ umgUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umgKey :: Lens' UsersMessagesGet' (Maybe Key)
+umgKey :: Lens' UsersMessagesGet' (Maybe AuthKey)
 umgKey = lens _umgKey (\ s a -> s{_umgKey = a})
 
 -- | The ID of the message to retrieve.

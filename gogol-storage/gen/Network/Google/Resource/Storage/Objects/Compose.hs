@@ -64,7 +64,7 @@ type ObjectsComposeResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] ComposeRequest :>
@@ -81,7 +81,7 @@ type ObjectsComposeResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltMedia :>
                                    ReqBody '[JSON] ComposeRequest :>
@@ -98,7 +98,7 @@ data ObjectsCompose' = ObjectsCompose'
     , _oIfGenerationMatch     :: !(Maybe Word64)
     , _oUserIP                :: !(Maybe Text)
     , _oPayload               :: !ComposeRequest
-    , _oKey                   :: !(Maybe Key)
+    , _oKey                   :: !(Maybe AuthKey)
     , _oDestinationBucket     :: !Text
     , _oOAuthToken            :: !(Maybe OAuthToken)
     , _oFields                :: !(Maybe Text)
@@ -188,7 +188,7 @@ oPayload = lens _oPayload (\ s a -> s{_oPayload = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oKey :: Lens' ObjectsCompose' (Maybe Key)
+oKey :: Lens' ObjectsCompose' (Maybe AuthKey)
 oKey = lens _oKey (\ s a -> s{_oKey = a})
 
 -- | Name of the bucket in which to store the new object.

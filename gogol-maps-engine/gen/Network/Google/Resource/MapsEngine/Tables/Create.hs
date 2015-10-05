@@ -53,7 +53,7 @@ type TablesCreateResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Table :> Post '[JSON] Table
@@ -66,7 +66,7 @@ data TablesCreate' = TablesCreate'
     , _tcPrettyPrint :: !Bool
     , _tcUserIP      :: !(Maybe Text)
     , _tcPayload     :: !Table
-    , _tcKey         :: !(Maybe Key)
+    , _tcKey         :: !(Maybe AuthKey)
     , _tcOAuthToken  :: !(Maybe OAuthToken)
     , _tcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -128,7 +128,7 @@ tcPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tcKey :: Lens' TablesCreate' (Maybe Key)
+tcKey :: Lens' TablesCreate' (Maybe AuthKey)
 tcKey = lens _tcKey (\ s a -> s{_tcKey = a})
 
 -- | OAuth 2.0 token for the current user.

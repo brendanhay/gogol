@@ -58,7 +58,7 @@ type RastersFilesInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[OctetStream] Body :> Post '[JSON] ()
@@ -71,7 +71,7 @@ data RastersFilesInsert' = RastersFilesInsert'
     , _rfiPrettyPrint :: !Bool
     , _rfiUserIP      :: !(Maybe Text)
     , _rfiMedia       :: !Body
-    , _rfiKey         :: !(Maybe Key)
+    , _rfiKey         :: !(Maybe AuthKey)
     , _rfiId          :: !Text
     , _rfiOAuthToken  :: !(Maybe OAuthToken)
     , _rfiFilename    :: !Text
@@ -142,7 +142,7 @@ rfiMedia = lens _rfiMedia (\ s a -> s{_rfiMedia = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rfiKey :: Lens' RastersFilesInsert' (Maybe Key)
+rfiKey :: Lens' RastersFilesInsert' (Maybe AuthKey)
 rfiKey = lens _rfiKey (\ s a -> s{_rfiKey = a})
 
 -- | The ID of the raster asset.

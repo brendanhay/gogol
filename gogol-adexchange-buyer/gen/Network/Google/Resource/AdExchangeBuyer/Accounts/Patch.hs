@@ -55,7 +55,7 @@ type AccountsPatchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Account :> Patch '[JSON] Account
@@ -68,7 +68,7 @@ data AccountsPatch' = AccountsPatch'
     , _apPrettyPrint :: !Bool
     , _apUserIP      :: !(Maybe Text)
     , _apPayload     :: !Account
-    , _apKey         :: !(Maybe Key)
+    , _apKey         :: !(Maybe AuthKey)
     , _apId          :: !Int32
     , _apOAuthToken  :: !(Maybe OAuthToken)
     , _apFields      :: !(Maybe Text)
@@ -135,7 +135,7 @@ apPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apKey :: Lens' AccountsPatch' (Maybe Key)
+apKey :: Lens' AccountsPatch' (Maybe AuthKey)
 apKey = lens _apKey (\ s a -> s{_apKey = a})
 
 -- | The account id

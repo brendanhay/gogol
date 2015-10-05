@@ -57,7 +57,7 @@ type ClientAccessUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ClientAccessCapabilities :>
@@ -71,7 +71,7 @@ data ClientAccessUpdate' = ClientAccessUpdate'
     , _cauUserIP           :: !(Maybe Text)
     , _cauSponsorAccountId :: !Int32
     , _cauPayload          :: !ClientAccessCapabilities
-    , _cauKey              :: !(Maybe Key)
+    , _cauKey              :: !(Maybe AuthKey)
     , _cauClientAccountId  :: !Int64
     , _cauOAuthToken       :: !(Maybe OAuthToken)
     , _cauFields           :: !(Maybe Text)
@@ -148,7 +148,7 @@ cauPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cauKey :: Lens' ClientAccessUpdate' (Maybe Key)
+cauKey :: Lens' ClientAccessUpdate' (Maybe AuthKey)
 cauKey = lens _cauKey (\ s a -> s{_cauKey = a})
 
 cauClientAccountId :: Lens' ClientAccessUpdate' Int64

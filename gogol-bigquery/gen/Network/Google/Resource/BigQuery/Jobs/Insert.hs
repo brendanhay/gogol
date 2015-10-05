@@ -57,7 +57,7 @@ type JobsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          MultipartRelated '[JSON] Job Body :> Post '[JSON] Job
@@ -71,7 +71,7 @@ data JobsInsert' = JobsInsert'
     , _jiUserIP      :: !(Maybe Text)
     , _jiPayload     :: !Job
     , _jiMedia       :: !Body
-    , _jiKey         :: !(Maybe Key)
+    , _jiKey         :: !(Maybe AuthKey)
     , _jiProjectId   :: !Text
     , _jiOAuthToken  :: !(Maybe OAuthToken)
     , _jiFields      :: !(Maybe Text)
@@ -145,7 +145,7 @@ jiMedia = lens _jiMedia (\ s a -> s{_jiMedia = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-jiKey :: Lens' JobsInsert' (Maybe Key)
+jiKey :: Lens' JobsInsert' (Maybe AuthKey)
 jiKey = lens _jiKey (\ s a -> s{_jiKey = a})
 
 -- | Project ID of the project that will be billed for the job

@@ -65,7 +65,7 @@ type AccountsAdUnitsCustomChannelsListResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] CustomChannels
@@ -80,7 +80,7 @@ data AccountsAdUnitsCustomChannelsList' = AccountsAdUnitsCustomChannelsList'
     , _aaucclAdUnitId    :: !Text
     , _aaucclAdClientId  :: !Text
     , _aaucclAccountId   :: !Text
-    , _aaucclKey         :: !(Maybe Key)
+    , _aaucclKey         :: !(Maybe AuthKey)
     , _aaucclPageToken   :: !(Maybe Text)
     , _aaucclOAuthToken  :: !(Maybe OAuthToken)
     , _aaucclMaxResults  :: !(Maybe Int32)
@@ -173,7 +173,7 @@ aaucclAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aaucclKey :: Lens' AccountsAdUnitsCustomChannelsList' (Maybe Key)
+aaucclKey :: Lens' AccountsAdUnitsCustomChannelsList' (Maybe AuthKey)
 aaucclKey
   = lens _aaucclKey (\ s a -> s{_aaucclKey = a})
 

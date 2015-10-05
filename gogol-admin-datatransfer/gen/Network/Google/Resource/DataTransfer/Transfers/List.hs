@@ -65,7 +65,7 @@ type TransfersListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] DataTransfersListResponse
@@ -82,7 +82,7 @@ data TransfersList' = TransfersList'
     , _tlUserIP         :: !(Maybe Text)
     , _tlNewOwnerUserId :: !(Maybe Text)
     , _tlCustomerId     :: !(Maybe Text)
-    , _tlKey            :: !(Maybe Key)
+    , _tlKey            :: !(Maybe AuthKey)
     , _tlPageToken      :: !(Maybe Text)
     , _tlOAuthToken     :: !(Maybe OAuthToken)
     , _tlMaxResults     :: !(Maybe Int32)
@@ -176,7 +176,7 @@ tlCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tlKey :: Lens' TransfersList' (Maybe Key)
+tlKey :: Lens' TransfersList' (Maybe AuthKey)
 tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | Token to specify the next page in the list.

@@ -75,7 +75,7 @@ type CoursesPatchResource =
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] Course :>
@@ -100,7 +100,7 @@ data CoursesPatch' = CoursesPatch'
     , _cpUploadType     :: !(Maybe Text)
     , _cpPayload        :: !Course
     , _cpBearerToken    :: !(Maybe Text)
-    , _cpKey            :: !(Maybe Key)
+    , _cpKey            :: !(Maybe AuthKey)
     , _cpId             :: !Text
     , _cpOAuthToken     :: !(Maybe OAuthToken)
     , _cpFields         :: !(Maybe Text)
@@ -225,7 +225,7 @@ cpBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cpKey :: Lens' CoursesPatch' (Maybe Key)
+cpKey :: Lens' CoursesPatch' (Maybe AuthKey)
 cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
 
 -- | Identifier of the course to update. This identifier can be either the

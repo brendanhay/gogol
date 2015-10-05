@@ -54,7 +54,7 @@ type VariantsetsGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] VariantSet
 
@@ -66,7 +66,7 @@ data VariantsetsGet' = VariantsetsGet'
     , _vgPrettyPrint  :: !Bool
     , _vgVariantSetId :: !Text
     , _vgUserIP       :: !(Maybe Text)
-    , _vgKey          :: !(Maybe Key)
+    , _vgKey          :: !(Maybe AuthKey)
     , _vgOAuthToken   :: !(Maybe OAuthToken)
     , _vgFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -129,7 +129,7 @@ vgUserIP = lens _vgUserIP (\ s a -> s{_vgUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vgKey :: Lens' VariantsetsGet' (Maybe Key)
+vgKey :: Lens' VariantsetsGet' (Maybe AuthKey)
 vgKey = lens _vgKey (\ s a -> s{_vgKey = a})
 
 -- | OAuth 2.0 token for the current user.

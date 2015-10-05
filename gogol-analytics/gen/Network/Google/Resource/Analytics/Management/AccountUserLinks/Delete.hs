@@ -58,7 +58,7 @@ type ManagementAccountUserLinksDeleteResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -70,7 +70,7 @@ data ManagementAccountUserLinksDelete' = ManagementAccountUserLinksDelete'
     , _mauldPrettyPrint :: !Bool
     , _mauldUserIP      :: !(Maybe Text)
     , _mauldAccountId   :: !Text
-    , _mauldKey         :: !(Maybe Key)
+    , _mauldKey         :: !(Maybe AuthKey)
     , _mauldLinkId      :: !Text
     , _mauldOAuthToken  :: !(Maybe OAuthToken)
     , _mauldFields      :: !(Maybe Text)
@@ -140,7 +140,7 @@ mauldAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mauldKey :: Lens' ManagementAccountUserLinksDelete' (Maybe Key)
+mauldKey :: Lens' ManagementAccountUserLinksDelete' (Maybe AuthKey)
 mauldKey = lens _mauldKey (\ s a -> s{_mauldKey = a})
 
 -- | Link ID to delete the user link for.

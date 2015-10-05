@@ -57,7 +57,7 @@ type UsersMessagesDeleteResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -70,7 +70,7 @@ data UsersMessagesDelete' = UsersMessagesDelete'
     , _umdPrettyPrint :: !Bool
     , _umdUserIP      :: !(Maybe Text)
     , _umdUserId      :: !Text
-    , _umdKey         :: !(Maybe Key)
+    , _umdKey         :: !(Maybe AuthKey)
     , _umdId          :: !Text
     , _umdOAuthToken  :: !(Maybe OAuthToken)
     , _umdFields      :: !(Maybe Text)
@@ -139,7 +139,7 @@ umdUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umdKey :: Lens' UsersMessagesDelete' (Maybe Key)
+umdKey :: Lens' UsersMessagesDelete' (Maybe AuthKey)
 umdKey = lens _umdKey (\ s a -> s{_umdKey = a})
 
 -- | The ID of the message to delete.

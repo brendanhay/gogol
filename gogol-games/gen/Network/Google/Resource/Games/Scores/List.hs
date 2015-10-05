@@ -65,7 +65,7 @@ type ScoresListResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] LeaderboardScores
@@ -80,7 +80,7 @@ data ScoresList' = ScoresList'
     , _sllCollection    :: !ScoresListCollection
     , _sllTimeSpan      :: !ScoresListTimeSpan
     , _sllLeaderboardId :: !Text
-    , _sllKey           :: !(Maybe Key)
+    , _sllKey           :: !(Maybe AuthKey)
     , _sllLanguage      :: !(Maybe Text)
     , _sllPageToken     :: !(Maybe Text)
     , _sllOAuthToken    :: !(Maybe OAuthToken)
@@ -175,7 +175,7 @@ sllLeaderboardId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sllKey :: Lens' ScoresList' (Maybe Key)
+sllKey :: Lens' ScoresList' (Maybe AuthKey)
 sllKey = lens _sllKey (\ s a -> s{_sllKey = a})
 
 -- | The preferred language to use for strings returned by this method.

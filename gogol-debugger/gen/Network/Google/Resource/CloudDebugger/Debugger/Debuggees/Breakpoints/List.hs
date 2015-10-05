@@ -79,7 +79,7 @@ type DebuggerDebuggeesBreakpointsListResource =
                                        QueryParam "quotaUser" Text :>
                                          QueryParam "prettyPrint" Bool :>
                                            QueryParam "fields" Text :>
-                                             QueryParam "key" Key :>
+                                             QueryParam "key" AuthKey :>
                                                QueryParam "oauth_token"
                                                  OAuthToken
                                                  :>
@@ -102,7 +102,7 @@ data DebuggerDebuggeesBreakpointsList' = DebuggerDebuggeesBreakpointsList'
     , _ddblUploadType      :: !(Maybe Text)
     , _ddblStripResults    :: !(Maybe Bool)
     , _ddblBearerToken     :: !(Maybe Text)
-    , _ddblKey             :: !(Maybe Key)
+    , _ddblKey             :: !(Maybe AuthKey)
     , _ddblIncludeAllUsers :: !(Maybe Bool)
     , _ddblWaitToken       :: !(Maybe Text)
     , _ddblDebuggeeId      :: !Text
@@ -245,7 +245,7 @@ ddblBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ddblKey :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe Key)
+ddblKey :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe AuthKey)
 ddblKey = lens _ddblKey (\ s a -> s{_ddblKey = a})
 
 -- | When set to true the response includes the list of breakpoints set by

@@ -68,7 +68,7 @@ type PlayListItemsListResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] PlayListItemListResponse
@@ -85,7 +85,7 @@ data PlayListItemsList' = PlayListItemsList'
     , _plilUserIP                 :: !(Maybe Text)
     , _plilOnBehalfOfContentOwner :: !(Maybe Text)
     , _plilVideoId                :: !(Maybe Text)
-    , _plilKey                    :: !(Maybe Key)
+    , _plilKey                    :: !(Maybe AuthKey)
     , _plilId                     :: !(Maybe Text)
     , _plilPageToken              :: !(Maybe Text)
     , _plilOAuthToken             :: !(Maybe OAuthToken)
@@ -198,7 +198,7 @@ plilVideoId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plilKey :: Lens' PlayListItemsList' (Maybe Key)
+plilKey :: Lens' PlayListItemsList' (Maybe AuthKey)
 plilKey = lens _plilKey (\ s a -> s{_plilKey = a})
 
 -- | The id parameter specifies a comma-separated list of one or more unique

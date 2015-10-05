@@ -64,7 +64,7 @@ type InstanceGroupManagersListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] InstanceGroupManagerList
@@ -79,7 +79,7 @@ data InstanceGroupManagersList' = InstanceGroupManagersList'
     , _igmlProject     :: !Text
     , _igmlUserIP      :: !(Maybe Text)
     , _igmlZone        :: !Text
-    , _igmlKey         :: !(Maybe Key)
+    , _igmlKey         :: !(Maybe AuthKey)
     , _igmlFilter      :: !(Maybe Text)
     , _igmlPageToken   :: !(Maybe Text)
     , _igmlOAuthToken  :: !(Maybe OAuthToken)
@@ -163,7 +163,7 @@ igmlZone = lens _igmlZone (\ s a -> s{_igmlZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmlKey :: Lens' InstanceGroupManagersList' (Maybe Key)
+igmlKey :: Lens' InstanceGroupManagersList' (Maybe AuthKey)
 igmlKey = lens _igmlKey (\ s a -> s{_igmlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

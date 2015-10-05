@@ -60,7 +60,7 @@ type AccountsContainersFoldersDeleteResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -74,7 +74,7 @@ data AccountsContainersFoldersDelete' = AccountsContainersFoldersDelete'
     , _acfdUserIP      :: !(Maybe Text)
     , _acfdFolderId    :: !Text
     , _acfdAccountId   :: !Text
-    , _acfdKey         :: !(Maybe Key)
+    , _acfdKey         :: !(Maybe AuthKey)
     , _acfdOAuthToken  :: !(Maybe OAuthToken)
     , _acfdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -158,7 +158,7 @@ acfdAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acfdKey :: Lens' AccountsContainersFoldersDelete' (Maybe Key)
+acfdKey :: Lens' AccountsContainersFoldersDelete' (Maybe AuthKey)
 acfdKey = lens _acfdKey (\ s a -> s{_acfdKey = a})
 
 -- | OAuth 2.0 token for the current user.

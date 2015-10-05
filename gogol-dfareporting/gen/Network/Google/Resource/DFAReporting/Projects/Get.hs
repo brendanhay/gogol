@@ -57,7 +57,7 @@ type ProjectsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Project
 
@@ -69,7 +69,7 @@ data ProjectsGet' = ProjectsGet'
     , _proPrettyPrint :: !Bool
     , _proUserIP      :: !(Maybe Text)
     , _proProFileId   :: !Int64
-    , _proKey         :: !(Maybe Key)
+    , _proKey         :: !(Maybe AuthKey)
     , _proId          :: !Int64
     , _proOAuthToken  :: !(Maybe OAuthToken)
     , _proFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ proProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-proKey :: Lens' ProjectsGet' (Maybe Key)
+proKey :: Lens' ProjectsGet' (Maybe AuthKey)
 proKey = lens _proKey (\ s a -> s{_proKey = a})
 
 -- | Project ID.

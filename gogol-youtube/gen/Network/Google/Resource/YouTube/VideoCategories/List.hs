@@ -60,7 +60,7 @@ type VideoCategoriesListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] VideoCategoryListResponse
@@ -75,7 +75,7 @@ data VideoCategoriesList' = VideoCategoriesList'
     , _vclRegionCode  :: !(Maybe Text)
     , _vclUserIP      :: !(Maybe Text)
     , _vclHl          :: !Text
-    , _vclKey         :: !(Maybe Key)
+    , _vclKey         :: !(Maybe AuthKey)
     , _vclId          :: !(Maybe Text)
     , _vclOAuthToken  :: !(Maybe OAuthToken)
     , _vclFields      :: !(Maybe Text)
@@ -161,7 +161,7 @@ vclHl = lens _vclHl (\ s a -> s{_vclHl = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vclKey :: Lens' VideoCategoriesList' (Maybe Key)
+vclKey :: Lens' VideoCategoriesList' (Maybe AuthKey)
 vclKey = lens _vclKey (\ s a -> s{_vclKey = a})
 
 -- | The id parameter specifies a comma-separated list of video category IDs

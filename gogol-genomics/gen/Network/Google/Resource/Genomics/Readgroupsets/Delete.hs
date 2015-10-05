@@ -54,7 +54,7 @@ type ReadgroupsetsDeleteResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -66,7 +66,7 @@ data ReadgroupsetsDelete' = ReadgroupsetsDelete'
     , _rdPrettyPrint    :: !Bool
     , _rdReadGroupSetId :: !Text
     , _rdUserIP         :: !(Maybe Text)
-    , _rdKey            :: !(Maybe Key)
+    , _rdKey            :: !(Maybe AuthKey)
     , _rdOAuthToken     :: !(Maybe OAuthToken)
     , _rdFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -130,7 +130,7 @@ rdUserIP = lens _rdUserIP (\ s a -> s{_rdUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rdKey :: Lens' ReadgroupsetsDelete' (Maybe Key)
+rdKey :: Lens' ReadgroupsetsDelete' (Maybe AuthKey)
 rdKey = lens _rdKey (\ s a -> s{_rdKey = a})
 
 -- | OAuth 2.0 token for the current user.

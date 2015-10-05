@@ -55,7 +55,7 @@ type MetricDescriptorsCreateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] MetricDescriptor :>
@@ -70,7 +70,7 @@ data MetricDescriptorsCreate' = MetricDescriptorsCreate'
     , _mdcProject     :: !Text
     , _mdcUserIP      :: !(Maybe Text)
     , _mdcPayload     :: !MetricDescriptor
-    , _mdcKey         :: !(Maybe Key)
+    , _mdcKey         :: !(Maybe AuthKey)
     , _mdcOAuthToken  :: !(Maybe OAuthToken)
     , _mdcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ mdcPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mdcKey :: Lens' MetricDescriptorsCreate' (Maybe Key)
+mdcKey :: Lens' MetricDescriptorsCreate' (Maybe AuthKey)
 mdcKey = lens _mdcKey (\ s a -> s{_mdcKey = a})
 
 -- | OAuth 2.0 token for the current user.

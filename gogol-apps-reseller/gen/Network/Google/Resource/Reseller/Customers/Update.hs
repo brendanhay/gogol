@@ -56,7 +56,7 @@ type CustomersUpdateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Customer :> Put '[JSON] Customer
@@ -71,7 +71,7 @@ data CustomersUpdate' = CustomersUpdate'
     , _cuUserIP      :: !(Maybe Text)
     , _cuPayload     :: !Customer
     , _cuCustomerId  :: !Text
-    , _cuKey         :: !(Maybe Key)
+    , _cuKey         :: !(Maybe AuthKey)
     , _cuOAuthToken  :: !(Maybe OAuthToken)
     , _cuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,7 +142,7 @@ cuCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuKey :: Lens' CustomersUpdate' (Maybe Key)
+cuKey :: Lens' CustomersUpdate' (Maybe AuthKey)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
 
 -- | OAuth 2.0 token for the current user.

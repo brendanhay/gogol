@@ -78,7 +78,7 @@ type AssetsListResource =
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "key" Key :>
+                                         QueryParam "key" AuthKey :>
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
@@ -94,7 +94,7 @@ data AssetsList' = AssetsList'
     , _alUserIP         :: !(Maybe Text)
     , _alCreatorEmail   :: !(Maybe Text)
     , _alRole           :: !(Maybe AssetsListRole)
-    , _alKey            :: !(Maybe Key)
+    , _alKey            :: !(Maybe AuthKey)
     , _alBbox           :: !(Maybe Text)
     , _alModifiedAfter  :: !(Maybe DateTime')
     , _alModifiedBefore :: !(Maybe DateTime')
@@ -216,7 +216,7 @@ alRole = lens _alRole (\ s a -> s{_alRole = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alKey :: Lens' AssetsList' (Maybe Key)
+alKey :: Lens' AssetsList' (Maybe AuthKey)
 alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | A bounding box, expressed as \"west,south,east,north\". If set, only

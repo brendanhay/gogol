@@ -72,7 +72,7 @@ type AppsModulesListResource =
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListModulesResponse
@@ -89,7 +89,7 @@ data AppsModulesList' = AppsModulesList'
     , _amlAccessToken    :: !(Maybe Text)
     , _amlUploadType     :: !(Maybe Text)
     , _amlBearerToken    :: !(Maybe Text)
-    , _amlKey            :: !(Maybe Key)
+    , _amlKey            :: !(Maybe AuthKey)
     , _amlAppsId         :: !Text
     , _amlPageToken      :: !(Maybe Text)
     , _amlOAuthToken     :: !(Maybe OAuthToken)
@@ -201,7 +201,7 @@ amlBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-amlKey :: Lens' AppsModulesList' (Maybe Key)
+amlKey :: Lens' AppsModulesList' (Maybe AuthKey)
 amlKey = lens _amlKey (\ s a -> s{_amlKey = a})
 
 -- | Part of \`name\`. Name of the resource requested. For example:

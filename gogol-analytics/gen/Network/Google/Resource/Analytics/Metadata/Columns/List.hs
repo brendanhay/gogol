@@ -55,7 +55,7 @@ type MetadataColumnsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Columns
 
@@ -66,7 +66,7 @@ data MetadataColumnsList' = MetadataColumnsList'
     { _mclQuotaUser   :: !(Maybe Text)
     , _mclPrettyPrint :: !Bool
     , _mclUserIP      :: !(Maybe Text)
-    , _mclKey         :: !(Maybe Key)
+    , _mclKey         :: !(Maybe AuthKey)
     , _mclOAuthToken  :: !(Maybe OAuthToken)
     , _mclReportType  :: !Text
     , _mclFields      :: !(Maybe Text)
@@ -125,7 +125,7 @@ mclUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mclKey :: Lens' MetadataColumnsList' (Maybe Key)
+mclKey :: Lens' MetadataColumnsList' (Maybe AuthKey)
 mclKey = lens _mclKey (\ s a -> s{_mclKey = a})
 
 -- | OAuth 2.0 token for the current user.

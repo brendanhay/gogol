@@ -56,7 +56,7 @@ type RoomsDismissResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -68,7 +68,7 @@ data RoomsDismiss' = RoomsDismiss'
     { _rddQuotaUser   :: !(Maybe Text)
     , _rddPrettyPrint :: !Bool
     , _rddUserIP      :: !(Maybe Text)
-    , _rddKey         :: !(Maybe Key)
+    , _rddKey         :: !(Maybe AuthKey)
     , _rddRoomId      :: !Text
     , _rddOAuthToken  :: !(Maybe OAuthToken)
     , _rddFields      :: !(Maybe Text)
@@ -127,7 +127,7 @@ rddUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rddKey :: Lens' RoomsDismiss' (Maybe Key)
+rddKey :: Lens' RoomsDismiss' (Maybe AuthKey)
 rddKey = lens _rddKey (\ s a -> s{_rddKey = a})
 
 -- | The ID of the room.

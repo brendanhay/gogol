@@ -77,7 +77,7 @@ type AppsModulesVersionsListResource =
                                      QueryParam "quotaUser" Text :>
                                        QueryParam "prettyPrint" Bool :>
                                          QueryParam "fields" Text :>
-                                           QueryParam "key" Key :>
+                                           QueryParam "key" AuthKey :>
                                              QueryParam "oauth_token" OAuthToken
                                                :>
                                                QueryParam "alt" AltJSON :>
@@ -97,7 +97,7 @@ data AppsModulesVersionsList' = AppsModulesVersionsList'
     , _amvlUploadType     :: !(Maybe Text)
     , _amvlModulesId      :: !Text
     , _amvlBearerToken    :: !(Maybe Text)
-    , _amvlKey            :: !(Maybe Key)
+    , _amvlKey            :: !(Maybe AuthKey)
     , _amvlAppsId         :: !Text
     , _amvlView           :: !(Maybe Text)
     , _amvlPageToken      :: !(Maybe Text)
@@ -225,7 +225,7 @@ amvlBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-amvlKey :: Lens' AppsModulesVersionsList' (Maybe Key)
+amvlKey :: Lens' AppsModulesVersionsList' (Maybe AuthKey)
 amvlKey = lens _amvlKey (\ s a -> s{_amvlKey = a})
 
 -- | Part of \`name\`. Name of the resource requested. For example:

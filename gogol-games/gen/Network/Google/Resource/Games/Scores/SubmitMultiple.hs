@@ -56,7 +56,7 @@ type ScoresSubmitMultipleResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] PlayerScoreSubmissionList :>
@@ -70,7 +70,7 @@ data ScoresSubmitMultiple' = ScoresSubmitMultiple'
     , _ssmPrettyPrint :: !Bool
     , _ssmUserIP      :: !(Maybe Text)
     , _ssmPayload     :: !PlayerScoreSubmissionList
-    , _ssmKey         :: !(Maybe Key)
+    , _ssmKey         :: !(Maybe AuthKey)
     , _ssmLanguage    :: !(Maybe Text)
     , _ssmOAuthToken  :: !(Maybe OAuthToken)
     , _ssmFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ ssmPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ssmKey :: Lens' ScoresSubmitMultiple' (Maybe Key)
+ssmKey :: Lens' ScoresSubmitMultiple' (Maybe AuthKey)
 ssmKey = lens _ssmKey (\ s a -> s{_ssmKey = a})
 
 -- | The preferred language to use for strings returned by this method.

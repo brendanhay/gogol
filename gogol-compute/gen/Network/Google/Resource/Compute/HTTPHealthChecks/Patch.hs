@@ -59,7 +59,7 @@ type HTTPHealthChecksPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] HTTPHealthCheck :>
@@ -75,7 +75,7 @@ data HTTPHealthChecksPatch' = HTTPHealthChecksPatch'
     , _httphcpProject         :: !Text
     , _httphcpUserIP          :: !(Maybe Text)
     , _httphcpPayload         :: !HTTPHealthCheck
-    , _httphcpKey             :: !(Maybe Key)
+    , _httphcpKey             :: !(Maybe AuthKey)
     , _httphcpHTTPHealthCheck :: !Text
     , _httphcpOAuthToken      :: !(Maybe OAuthToken)
     , _httphcpFields          :: !(Maybe Text)
@@ -156,7 +156,7 @@ httphcpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-httphcpKey :: Lens' HTTPHealthChecksPatch' (Maybe Key)
+httphcpKey :: Lens' HTTPHealthChecksPatch' (Maybe AuthKey)
 httphcpKey
   = lens _httphcpKey (\ s a -> s{_httphcpKey = a})
 

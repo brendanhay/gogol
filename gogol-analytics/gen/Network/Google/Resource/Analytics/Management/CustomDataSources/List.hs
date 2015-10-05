@@ -63,7 +63,7 @@ type ManagementCustomDataSourcesListResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] CustomDataSources
@@ -77,7 +77,7 @@ data ManagementCustomDataSourcesList' = ManagementCustomDataSourcesList'
     , _mcdslWebPropertyId :: !Text
     , _mcdslUserIP        :: !(Maybe Text)
     , _mcdslAccountId     :: !Text
-    , _mcdslKey           :: !(Maybe Key)
+    , _mcdslKey           :: !(Maybe AuthKey)
     , _mcdslOAuthToken    :: !(Maybe OAuthToken)
     , _mcdslStartIndex    :: !(Maybe Int32)
     , _mcdslMaxResults    :: !(Maybe Int32)
@@ -160,7 +160,7 @@ mcdslAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcdslKey :: Lens' ManagementCustomDataSourcesList' (Maybe Key)
+mcdslKey :: Lens' ManagementCustomDataSourcesList' (Maybe AuthKey)
 mcdslKey = lens _mcdslKey (\ s a -> s{_mcdslKey = a})
 
 -- | OAuth 2.0 token for the current user.

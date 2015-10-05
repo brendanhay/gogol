@@ -56,7 +56,7 @@ type UsersLabelsGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Label
 
@@ -68,7 +68,7 @@ data UsersLabelsGet' = UsersLabelsGet'
     , _ulgPrettyPrint :: !Bool
     , _ulgUserIP      :: !(Maybe Text)
     , _ulgUserId      :: !Text
-    , _ulgKey         :: !(Maybe Key)
+    , _ulgKey         :: !(Maybe AuthKey)
     , _ulgId          :: !Text
     , _ulgOAuthToken  :: !(Maybe OAuthToken)
     , _ulgFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ ulgUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ulgKey :: Lens' UsersLabelsGet' (Maybe Key)
+ulgKey :: Lens' UsersLabelsGet' (Maybe AuthKey)
 ulgKey = lens _ulgKey (\ s a -> s{_ulgKey = a})
 
 -- | The ID of the label to retrieve.

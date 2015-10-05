@@ -61,7 +61,7 @@ type ManagementProFilesGetResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] ProFile
 
@@ -75,7 +75,7 @@ data ManagementProFilesGet' = ManagementProFilesGet'
     , _mpfgUserIP        :: !(Maybe Text)
     , _mpfgProFileId     :: !Text
     , _mpfgAccountId     :: !Text
-    , _mpfgKey           :: !(Maybe Key)
+    , _mpfgKey           :: !(Maybe AuthKey)
     , _mpfgOAuthToken    :: !(Maybe OAuthToken)
     , _mpfgFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -160,7 +160,7 @@ mpfgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpfgKey :: Lens' ManagementProFilesGet' (Maybe Key)
+mpfgKey :: Lens' ManagementProFilesGet' (Maybe AuthKey)
 mpfgKey = lens _mpfgKey (\ s a -> s{_mpfgKey = a})
 
 -- | OAuth 2.0 token for the current user.

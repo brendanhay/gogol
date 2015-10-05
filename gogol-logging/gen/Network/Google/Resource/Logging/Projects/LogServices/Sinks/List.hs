@@ -71,7 +71,7 @@ type ProjectsLogServicesSinksListResource =
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON]
@@ -89,7 +89,7 @@ data ProjectsLogServicesSinksList' = ProjectsLogServicesSinksList'
     , _plsslAccessToken    :: !(Maybe Text)
     , _plsslUploadType     :: !(Maybe Text)
     , _plsslBearerToken    :: !(Maybe Text)
-    , _plsslKey            :: !(Maybe Key)
+    , _plsslKey            :: !(Maybe AuthKey)
     , _plsslLogServicesId  :: !Text
     , _plsslOAuthToken     :: !(Maybe OAuthToken)
     , _plsslProjectsId     :: !Text
@@ -200,7 +200,7 @@ plsslBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plsslKey :: Lens' ProjectsLogServicesSinksList' (Maybe Key)
+plsslKey :: Lens' ProjectsLogServicesSinksList' (Maybe AuthKey)
 plsslKey = lens _plsslKey (\ s a -> s{_plsslKey = a})
 
 -- | Part of \`serviceName\`. See documentation of \`projectsId\`.

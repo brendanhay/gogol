@@ -55,7 +55,7 @@ type ConversionUpdateAvailabilityResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] UpdateAvailabilityRequest :>
@@ -70,7 +70,7 @@ data ConversionUpdateAvailability' = ConversionUpdateAvailability'
     , _cuaPrettyPrint :: !Bool
     , _cuaUserIP      :: !(Maybe Text)
     , _cuaPayload     :: !UpdateAvailabilityRequest
-    , _cuaKey         :: !(Maybe Key)
+    , _cuaKey         :: !(Maybe AuthKey)
     , _cuaOAuthToken  :: !(Maybe OAuthToken)
     , _cuaFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -133,7 +133,7 @@ cuaPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuaKey :: Lens' ConversionUpdateAvailability' (Maybe Key)
+cuaKey :: Lens' ConversionUpdateAvailability' (Maybe AuthKey)
 cuaKey = lens _cuaKey (\ s a -> s{_cuaKey = a})
 
 -- | OAuth 2.0 token for the current user.

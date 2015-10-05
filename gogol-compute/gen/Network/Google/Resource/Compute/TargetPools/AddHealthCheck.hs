@@ -61,7 +61,7 @@ type TargetPoolsAddHealthCheckResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] TargetPoolsAddHealthCheckRequest
@@ -77,7 +77,7 @@ data TargetPoolsAddHealthCheck' = TargetPoolsAddHealthCheck'
     , _tpahcTargetPool  :: !Text
     , _tpahcUserIP      :: !(Maybe Text)
     , _tpahcPayload     :: !TargetPoolsAddHealthCheckRequest
-    , _tpahcKey         :: !(Maybe Key)
+    , _tpahcKey         :: !(Maybe AuthKey)
     , _tpahcRegion      :: !Text
     , _tpahcOAuthToken  :: !(Maybe OAuthToken)
     , _tpahcFields      :: !(Maybe Text)
@@ -165,7 +165,7 @@ tpahcPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tpahcKey :: Lens' TargetPoolsAddHealthCheck' (Maybe Key)
+tpahcKey :: Lens' TargetPoolsAddHealthCheck' (Maybe AuthKey)
 tpahcKey = lens _tpahcKey (\ s a -> s{_tpahcKey = a})
 
 -- | Name of the region scoping this request.

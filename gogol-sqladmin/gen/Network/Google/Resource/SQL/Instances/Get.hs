@@ -57,7 +57,7 @@ type InstancesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] DatabaseInstance
@@ -70,7 +70,7 @@ data InstancesGet' = InstancesGet'
     , _igPrettyPrint :: !Bool
     , _igProject     :: !Text
     , _igUserIP      :: !(Maybe Text)
-    , _igKey         :: !(Maybe Key)
+    , _igKey         :: !(Maybe AuthKey)
     , _igOAuthToken  :: !(Maybe OAuthToken)
     , _igFields      :: !(Maybe Text)
     , _igInstance    :: !Text
@@ -137,7 +137,7 @@ igUserIP = lens _igUserIP (\ s a -> s{_igUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igKey :: Lens' InstancesGet' (Maybe Key)
+igKey :: Lens' InstancesGet' (Maybe AuthKey)
 igKey = lens _igKey (\ s a -> s{_igKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -63,7 +63,7 @@ type TablesFeaturesBatchInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] FeaturesBatchInsertRequest :>
@@ -83,7 +83,7 @@ data TablesFeaturesBatchInsert' = TablesFeaturesBatchInsert'
     , _tfbiPrettyPrint :: !Bool
     , _tfbiUserIP      :: !(Maybe Text)
     , _tfbiPayload     :: !FeaturesBatchInsertRequest
-    , _tfbiKey         :: !(Maybe Key)
+    , _tfbiKey         :: !(Maybe AuthKey)
     , _tfbiId          :: !Text
     , _tfbiOAuthToken  :: !(Maybe OAuthToken)
     , _tfbiFields      :: !(Maybe Text)
@@ -152,7 +152,7 @@ tfbiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tfbiKey :: Lens' TablesFeaturesBatchInsert' (Maybe Key)
+tfbiKey :: Lens' TablesFeaturesBatchInsert' (Maybe AuthKey)
 tfbiKey = lens _tfbiKey (\ s a -> s{_tfbiKey = a})
 
 -- | The ID of the table to append the features to.

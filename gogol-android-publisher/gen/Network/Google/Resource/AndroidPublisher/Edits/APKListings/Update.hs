@@ -64,7 +64,7 @@ type EditsAPKListingsUpdateResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] APKListing :>
@@ -81,7 +81,7 @@ data EditsAPKListingsUpdate' = EditsAPKListingsUpdate'
     , _eapkluAPKVersionCode :: !Int32
     , _eapkluUserIP         :: !(Maybe Text)
     , _eapkluPayload        :: !APKListing
-    , _eapkluKey            :: !(Maybe Key)
+    , _eapkluKey            :: !(Maybe AuthKey)
     , _eapkluLanguage       :: !Text
     , _eapkluOAuthToken     :: !(Maybe OAuthToken)
     , _eapkluEditId         :: !Text
@@ -178,7 +178,7 @@ eapkluPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eapkluKey :: Lens' EditsAPKListingsUpdate' (Maybe Key)
+eapkluKey :: Lens' EditsAPKListingsUpdate' (Maybe AuthKey)
 eapkluKey
   = lens _eapkluKey (\ s a -> s{_eapkluKey = a})
 

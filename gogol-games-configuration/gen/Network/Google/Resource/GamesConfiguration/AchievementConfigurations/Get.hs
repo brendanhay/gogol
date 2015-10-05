@@ -55,7 +55,7 @@ type AchievementConfigurationsGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] AchievementConfiguration
@@ -69,7 +69,7 @@ data AchievementConfigurationsGet' = AchievementConfigurationsGet'
     , _acgPrettyPrint   :: !Bool
     , _acgAchievementId :: !Text
     , _acgUserIP        :: !(Maybe Text)
-    , _acgKey           :: !(Maybe Key)
+    , _acgKey           :: !(Maybe AuthKey)
     , _acgOAuthToken    :: !(Maybe OAuthToken)
     , _acgFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -133,7 +133,7 @@ acgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acgKey :: Lens' AchievementConfigurationsGet' (Maybe Key)
+acgKey :: Lens' AchievementConfigurationsGet' (Maybe AuthKey)
 acgKey = lens _acgKey (\ s a -> s{_acgKey = a})
 
 -- | OAuth 2.0 token for the current user.

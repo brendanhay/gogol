@@ -57,7 +57,7 @@ type GlobalAddressesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Address
 
@@ -70,7 +70,7 @@ data GlobalAddressesGet' = GlobalAddressesGet'
     , _gagProject     :: !Text
     , _gagUserIP      :: !(Maybe Text)
     , _gagAddress     :: !Text
-    , _gagKey         :: !(Maybe Key)
+    , _gagKey         :: !(Maybe AuthKey)
     , _gagOAuthToken  :: !(Maybe OAuthToken)
     , _gagFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,7 +142,7 @@ gagAddress
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gagKey :: Lens' GlobalAddressesGet' (Maybe Key)
+gagKey :: Lens' GlobalAddressesGet' (Maybe AuthKey)
 gagKey = lens _gagKey (\ s a -> s{_gagKey = a})
 
 -- | OAuth 2.0 token for the current user.

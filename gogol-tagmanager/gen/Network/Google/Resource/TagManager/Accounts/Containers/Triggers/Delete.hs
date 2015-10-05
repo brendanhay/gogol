@@ -60,7 +60,7 @@ type AccountsContainersTriggersDeleteResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -74,7 +74,7 @@ data AccountsContainersTriggersDelete' = AccountsContainersTriggersDelete'
     , _actdTriggerId   :: !Text
     , _actdUserIP      :: !(Maybe Text)
     , _actdAccountId   :: !Text
-    , _actdKey         :: !(Maybe Key)
+    , _actdKey         :: !(Maybe AuthKey)
     , _actdOAuthToken  :: !(Maybe OAuthToken)
     , _actdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -159,7 +159,7 @@ actdAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-actdKey :: Lens' AccountsContainersTriggersDelete' (Maybe Key)
+actdKey :: Lens' AccountsContainersTriggersDelete' (Maybe AuthKey)
 actdKey = lens _actdKey (\ s a -> s{_actdKey = a})
 
 -- | OAuth 2.0 token for the current user.

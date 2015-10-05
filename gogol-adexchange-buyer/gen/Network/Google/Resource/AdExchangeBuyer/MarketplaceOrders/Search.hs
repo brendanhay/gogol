@@ -55,7 +55,7 @@ type MarketplaceOrdersSearchResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] GetOrdersResponse
@@ -67,7 +67,7 @@ data MarketplaceOrdersSearch' = MarketplaceOrdersSearch'
     { _marQuotaUser   :: !(Maybe Text)
     , _marPrettyPrint :: !Bool
     , _marUserIP      :: !(Maybe Text)
-    , _marKey         :: !(Maybe Key)
+    , _marKey         :: !(Maybe AuthKey)
     , _marPqlQuery    :: !(Maybe Text)
     , _marOAuthToken  :: !(Maybe OAuthToken)
     , _marFields      :: !(Maybe Text)
@@ -125,7 +125,7 @@ marUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-marKey :: Lens' MarketplaceOrdersSearch' (Maybe Key)
+marKey :: Lens' MarketplaceOrdersSearch' (Maybe AuthKey)
 marKey = lens _marKey (\ s a -> s{_marKey = a})
 
 -- | Query string to retrieve specific orders.

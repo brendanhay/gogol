@@ -59,7 +59,7 @@ type ProjectsZonesClustersGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Cluster
 
@@ -71,7 +71,7 @@ data ProjectsZonesClustersGet' = ProjectsZonesClustersGet'
     , _pzcgPrettyPrint :: !Bool
     , _pzcgUserIP      :: !(Maybe Text)
     , _pzcgZoneId      :: !Text
-    , _pzcgKey         :: !(Maybe Key)
+    , _pzcgKey         :: !(Maybe AuthKey)
     , _pzcgClusterId   :: !Text
     , _pzcgProjectId   :: !Text
     , _pzcgOAuthToken  :: !(Maybe OAuthToken)
@@ -145,7 +145,7 @@ pzcgZoneId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pzcgKey :: Lens' ProjectsZonesClustersGet' (Maybe Key)
+pzcgKey :: Lens' ProjectsZonesClustersGet' (Maybe AuthKey)
 pzcgKey = lens _pzcgKey (\ s a -> s{_pzcgKey = a})
 
 -- | The name of the cluster to retrieve.

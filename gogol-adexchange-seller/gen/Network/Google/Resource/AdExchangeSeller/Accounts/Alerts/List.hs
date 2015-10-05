@@ -57,7 +57,7 @@ type AccountsAlertsListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Alerts
 
@@ -70,7 +70,7 @@ data AccountsAlertsList' = AccountsAlertsList'
     , _aalUserIP      :: !(Maybe Text)
     , _aalLocale      :: !(Maybe Text)
     , _aalAccountId   :: !Text
-    , _aalKey         :: !(Maybe Key)
+    , _aalKey         :: !(Maybe AuthKey)
     , _aalOAuthToken  :: !(Maybe OAuthToken)
     , _aalFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ aalAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aalKey :: Lens' AccountsAlertsList' (Maybe Key)
+aalKey :: Lens' AccountsAlertsList' (Maybe AuthKey)
 aalKey = lens _aalKey (\ s a -> s{_aalKey = a})
 
 -- | OAuth 2.0 token for the current user.

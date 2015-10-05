@@ -65,7 +65,7 @@ type CaptionsListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] CaptionListResponse
@@ -84,7 +84,7 @@ data CaptionsList' = CaptionsList'
     , _cllUserIP                 :: !(Maybe Text)
     , _cllOnBehalfOfContentOwner :: !(Maybe Text)
     , _cllVideoId                :: !Text
-    , _cllKey                    :: !(Maybe Key)
+    , _cllKey                    :: !(Maybe AuthKey)
     , _cllId                     :: !(Maybe Text)
     , _cllOAuthToken             :: !(Maybe OAuthToken)
     , _cllFields                 :: !(Maybe Text)
@@ -189,7 +189,7 @@ cllVideoId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cllKey :: Lens' CaptionsList' (Maybe Key)
+cllKey :: Lens' CaptionsList' (Maybe AuthKey)
 cllKey = lens _cllKey (\ s a -> s{_cllKey = a})
 
 -- | The id parameter specifies a comma-separated list of IDs that identify

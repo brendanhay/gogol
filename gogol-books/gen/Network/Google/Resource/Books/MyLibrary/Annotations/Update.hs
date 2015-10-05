@@ -58,7 +58,7 @@ type MyLibraryAnnotationsUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Annotation :> Put '[JSON] Annotation
@@ -71,7 +71,7 @@ data MyLibraryAnnotationsUpdate' = MyLibraryAnnotationsUpdate'
     , _mlauPrettyPrint  :: !Bool
     , _mlauUserIP       :: !(Maybe Text)
     , _mlauPayload      :: !Annotation
-    , _mlauKey          :: !(Maybe Key)
+    , _mlauKey          :: !(Maybe AuthKey)
     , _mlauAnnotationId :: !Text
     , _mlauSource       :: !(Maybe Text)
     , _mlauOAuthToken   :: !(Maybe OAuthToken)
@@ -144,7 +144,7 @@ mlauPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlauKey :: Lens' MyLibraryAnnotationsUpdate' (Maybe Key)
+mlauKey :: Lens' MyLibraryAnnotationsUpdate' (Maybe AuthKey)
 mlauKey = lens _mlauKey (\ s a -> s{_mlauKey = a})
 
 -- | The ID for the annotation to update.

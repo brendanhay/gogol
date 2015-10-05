@@ -61,7 +61,7 @@ type ManagementProFilesDeleteResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -75,7 +75,7 @@ data ManagementProFilesDelete' = ManagementProFilesDelete'
     , _mpfdUserIP        :: !(Maybe Text)
     , _mpfdProFileId     :: !Text
     , _mpfdAccountId     :: !Text
-    , _mpfdKey           :: !(Maybe Key)
+    , _mpfdKey           :: !(Maybe AuthKey)
     , _mpfdOAuthToken    :: !(Maybe OAuthToken)
     , _mpfdFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -160,7 +160,7 @@ mpfdAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpfdKey :: Lens' ManagementProFilesDelete' (Maybe Key)
+mpfdKey :: Lens' ManagementProFilesDelete' (Maybe AuthKey)
 mpfdKey = lens _mpfdKey (\ s a -> s{_mpfdKey = a})
 
 -- | OAuth 2.0 token for the current user.

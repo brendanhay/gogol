@@ -57,7 +57,7 @@ type UsersInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] User :> Post '[JSON] Operation
@@ -72,7 +72,7 @@ data UsersInsert' = UsersInsert'
     , _uiProject     :: !Text
     , _uiUserIP      :: !(Maybe Text)
     , _uiPayload     :: !User
-    , _uiKey         :: !(Maybe Key)
+    , _uiKey         :: !(Maybe AuthKey)
     , _uiOAuthToken  :: !(Maybe OAuthToken)
     , _uiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ uiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uiKey :: Lens' UsersInsert' (Maybe Key)
+uiKey :: Lens' UsersInsert' (Maybe AuthKey)
 uiKey = lens _uiKey (\ s a -> s{_uiKey = a})
 
 -- | OAuth 2.0 token for the current user.

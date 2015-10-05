@@ -61,7 +61,7 @@ type RegionsListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] RegionList
 
@@ -74,7 +74,7 @@ data RegionsList' = RegionsList'
     , _rPrettyPrint :: !Bool
     , _rProject     :: !Text
     , _rUserIP      :: !(Maybe Text)
-    , _rKey         :: !(Maybe Key)
+    , _rKey         :: !(Maybe AuthKey)
     , _rFilter      :: !(Maybe Text)
     , _rPageToken   :: !(Maybe Text)
     , _rOAuthToken  :: !(Maybe OAuthToken)
@@ -146,7 +146,7 @@ rUserIP = lens _rUserIP (\ s a -> s{_rUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rKey :: Lens' RegionsList' (Maybe Key)
+rKey :: Lens' RegionsList' (Maybe AuthKey)
 rKey = lens _rKey (\ s a -> s{_rKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

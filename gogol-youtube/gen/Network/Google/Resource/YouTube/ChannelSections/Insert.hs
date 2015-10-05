@@ -59,7 +59,7 @@ type ChannelSectionsInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ChannelSection :>
@@ -75,7 +75,7 @@ data ChannelSectionsInsert' = ChannelSectionsInsert'
     , _csiUserIP                        :: !(Maybe Text)
     , _csiPayload                       :: !ChannelSection
     , _csiOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _csiKey                           :: !(Maybe Key)
+    , _csiKey                           :: !(Maybe AuthKey)
     , _csiOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _csiOAuthToken                    :: !(Maybe OAuthToken)
     , _csiFields                        :: !(Maybe Text)
@@ -171,7 +171,7 @@ csiOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-csiKey :: Lens' ChannelSectionsInsert' (Maybe Key)
+csiKey :: Lens' ChannelSectionsInsert' (Maybe AuthKey)
 csiKey = lens _csiKey (\ s a -> s{_csiKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:

@@ -57,7 +57,7 @@ type DirectorySitesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] DirectorySite
 
@@ -69,7 +69,7 @@ data DirectorySitesGet' = DirectorySitesGet'
     , _dsgPrettyPrint :: !Bool
     , _dsgUserIP      :: !(Maybe Text)
     , _dsgProFileId   :: !Int64
-    , _dsgKey         :: !(Maybe Key)
+    , _dsgKey         :: !(Maybe AuthKey)
     , _dsgId          :: !Int64
     , _dsgOAuthToken  :: !(Maybe OAuthToken)
     , _dsgFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ dsgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dsgKey :: Lens' DirectorySitesGet' (Maybe Key)
+dsgKey :: Lens' DirectorySitesGet' (Maybe AuthKey)
 dsgKey = lens _dsgKey (\ s a -> s{_dsgKey = a})
 
 -- | Directory site ID.

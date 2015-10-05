@@ -86,7 +86,7 @@ type AccountsAvailsListResource =
                                            QueryParam "quotaUser" Text :>
                                              QueryParam "prettyPrint" Bool :>
                                                QueryParam "fields" Text :>
-                                                 QueryParam "key" Key :>
+                                                 QueryParam "key" AuthKey :>
                                                    QueryParam "oauth_token"
                                                      OAuthToken
                                                      :>
@@ -114,7 +114,7 @@ data AccountsAvailsList' = AccountsAvailsList'
     , _aalTerritories    :: !(Maybe [Text])
     , _aalAccountId      :: !Text
     , _aalBearerToken    :: !(Maybe Text)
-    , _aalKey            :: !(Maybe Key)
+    , _aalKey            :: !(Maybe AuthKey)
     , _aalPageToken      :: !(Maybe Text)
     , _aalTitle          :: !(Maybe Text)
     , _aalOAuthToken     :: !(Maybe OAuthToken)
@@ -285,7 +285,7 @@ aalBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aalKey :: Lens' AccountsAvailsList' (Maybe Key)
+aalKey :: Lens' AccountsAvailsList' (Maybe AuthKey)
 aalKey = lens _aalKey (\ s a -> s{_aalKey = a})
 
 -- | See _List methods rules_ for info about this field.

@@ -53,7 +53,7 @@ type CalendarsInsertResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Calendar :> Post '[JSON] Calendar
@@ -66,7 +66,7 @@ data CalendarsInsert' = CalendarsInsert'
     , _ciPrettyPrint :: !Bool
     , _ciUserIP      :: !(Maybe Text)
     , _ciPayload     :: !Calendar
-    , _ciKey         :: !(Maybe Key)
+    , _ciKey         :: !(Maybe AuthKey)
     , _ciOAuthToken  :: !(Maybe OAuthToken)
     , _ciFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -128,7 +128,7 @@ ciPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ciKey :: Lens' CalendarsInsert' (Maybe Key)
+ciKey :: Lens' CalendarsInsert' (Maybe AuthKey)
 ciKey = lens _ciKey (\ s a -> s{_ciKey = a})
 
 -- | OAuth 2.0 token for the current user.

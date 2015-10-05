@@ -55,7 +55,7 @@ type LeaderboardConfigurationsGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] LeaderboardConfiguration
@@ -69,7 +69,7 @@ data LeaderboardConfigurationsGet' = LeaderboardConfigurationsGet'
     , _lcgPrettyPrint   :: !Bool
     , _lcgUserIP        :: !(Maybe Text)
     , _lcgLeaderboardId :: !Text
-    , _lcgKey           :: !(Maybe Key)
+    , _lcgKey           :: !(Maybe AuthKey)
     , _lcgOAuthToken    :: !(Maybe OAuthToken)
     , _lcgFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -133,7 +133,7 @@ lcgLeaderboardId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lcgKey :: Lens' LeaderboardConfigurationsGet' (Maybe Key)
+lcgKey :: Lens' LeaderboardConfigurationsGet' (Maybe AuthKey)
 lcgKey = lens _lcgKey (\ s a -> s{_lcgKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -57,7 +57,7 @@ type AdsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Ad
 
@@ -69,7 +69,7 @@ data AdsGet' = AdsGet'
     , _adsdPrettyPrint :: !Bool
     , _adsdUserIP      :: !(Maybe Text)
     , _adsdProFileId   :: !Int64
-    , _adsdKey         :: !(Maybe Key)
+    , _adsdKey         :: !(Maybe AuthKey)
     , _adsdId          :: !Int64
     , _adsdOAuthToken  :: !(Maybe OAuthToken)
     , _adsdFields      :: !(Maybe Text)
@@ -139,7 +139,7 @@ adsdProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-adsdKey :: Lens' AdsGet' (Maybe Key)
+adsdKey :: Lens' AdsGet' (Maybe AuthKey)
 adsdKey = lens _adsdKey (\ s a -> s{_adsdKey = a})
 
 -- | Ad ID.

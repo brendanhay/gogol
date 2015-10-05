@@ -59,7 +59,7 @@ type ContentCategoriesPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ContentCategory :>
@@ -75,7 +75,7 @@ data ContentCategoriesPatch' = ContentCategoriesPatch'
     , _ccpUserIP      :: !(Maybe Text)
     , _ccpProFileId   :: !Int64
     , _ccpPayload     :: !ContentCategory
-    , _ccpKey         :: !(Maybe Key)
+    , _ccpKey         :: !(Maybe AuthKey)
     , _ccpId          :: !Int64
     , _ccpOAuthToken  :: !(Maybe OAuthToken)
     , _ccpFields      :: !(Maybe Text)
@@ -152,7 +152,7 @@ ccpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccpKey :: Lens' ContentCategoriesPatch' (Maybe Key)
+ccpKey :: Lens' ContentCategoriesPatch' (Maybe AuthKey)
 ccpKey = lens _ccpKey (\ s a -> s{_ccpKey = a})
 
 -- | Content category ID.

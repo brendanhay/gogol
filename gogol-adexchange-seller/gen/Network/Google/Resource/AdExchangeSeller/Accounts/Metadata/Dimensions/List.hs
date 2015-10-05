@@ -57,7 +57,7 @@ type AccountsMetadataDimensionsListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Metadata
 
@@ -70,7 +70,7 @@ data AccountsMetadataDimensionsList' = AccountsMetadataDimensionsList'
     , _amdlPrettyPrint :: !Bool
     , _amdlUserIP      :: !(Maybe Text)
     , _amdlAccountId   :: !Text
-    , _amdlKey         :: !(Maybe Key)
+    , _amdlKey         :: !(Maybe AuthKey)
     , _amdlOAuthToken  :: !(Maybe OAuthToken)
     , _amdlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -135,7 +135,7 @@ amdlAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-amdlKey :: Lens' AccountsMetadataDimensionsList' (Maybe Key)
+amdlKey :: Lens' AccountsMetadataDimensionsList' (Maybe AuthKey)
 amdlKey = lens _amdlKey (\ s a -> s{_amdlKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -61,7 +61,7 @@ type DisksCreateSnapshotResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Snapshot :>
@@ -78,7 +78,7 @@ data DisksCreateSnapshot' = DisksCreateSnapshot'
     , _dcsUserIP      :: !(Maybe Text)
     , _dcsZone        :: !Text
     , _dcsPayload     :: !Snapshot
-    , _dcsKey         :: !(Maybe Key)
+    , _dcsKey         :: !(Maybe AuthKey)
     , _dcsOAuthToken  :: !(Maybe OAuthToken)
     , _dcsFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -166,7 +166,7 @@ dcsPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dcsKey :: Lens' DisksCreateSnapshot' (Maybe Key)
+dcsKey :: Lens' DisksCreateSnapshot' (Maybe AuthKey)
 dcsKey = lens _dcsKey (\ s a -> s{_dcsKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -62,7 +62,7 @@ type ZoneViewsGetServiceResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Post '[JSON] ZoneViewsGetServiceResponse
@@ -78,7 +78,7 @@ data ZoneViewsGetService' = ZoneViewsGetService'
     , _zvgsProject      :: !Text
     , _zvgsUserIP       :: !(Maybe Text)
     , _zvgsZone         :: !Text
-    , _zvgsKey          :: !(Maybe Key)
+    , _zvgsKey          :: !(Maybe AuthKey)
     , _zvgsOAuthToken   :: !(Maybe OAuthToken)
     , _zvgsFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -170,7 +170,7 @@ zvgsZone = lens _zvgsZone (\ s a -> s{_zvgsZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-zvgsKey :: Lens' ZoneViewsGetService' (Maybe Key)
+zvgsKey :: Lens' ZoneViewsGetService' (Maybe AuthKey)
 zvgsKey = lens _zvgsKey (\ s a -> s{_zvgsKey = a})
 
 -- | OAuth 2.0 token for the current user.

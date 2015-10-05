@@ -55,7 +55,7 @@ type LayersCancelProcessingResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Post '[JSON] ProcessResponse
@@ -67,7 +67,7 @@ data LayersCancelProcessing' = LayersCancelProcessing'
     { _lcpQuotaUser   :: !(Maybe Text)
     , _lcpPrettyPrint :: !Bool
     , _lcpUserIP      :: !(Maybe Text)
-    , _lcpKey         :: !(Maybe Key)
+    , _lcpKey         :: !(Maybe AuthKey)
     , _lcpId          :: !Text
     , _lcpOAuthToken  :: !(Maybe OAuthToken)
     , _lcpFields      :: !(Maybe Text)
@@ -126,7 +126,7 @@ lcpUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lcpKey :: Lens' LayersCancelProcessing' (Maybe Key)
+lcpKey :: Lens' LayersCancelProcessing' (Maybe AuthKey)
 lcpKey = lens _lcpKey (\ s a -> s{_lcpKey = a})
 
 -- | The ID of the layer.

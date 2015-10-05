@@ -55,7 +55,7 @@ type TimelineAttachmentsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] AttachmentsListResponse
@@ -68,7 +68,7 @@ data TimelineAttachmentsList' = TimelineAttachmentsList'
     , _talPrettyPrint :: !Bool
     , _talUserIP      :: !(Maybe Text)
     , _talItemId      :: !Text
-    , _talKey         :: !(Maybe Key)
+    , _talKey         :: !(Maybe AuthKey)
     , _talOAuthToken  :: !(Maybe OAuthToken)
     , _talFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -131,7 +131,7 @@ talItemId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-talKey :: Lens' TimelineAttachmentsList' (Maybe Key)
+talKey :: Lens' TimelineAttachmentsList' (Maybe AuthKey)
 talKey = lens _talKey (\ s a -> s{_talKey = a})
 
 -- | OAuth 2.0 token for the current user.

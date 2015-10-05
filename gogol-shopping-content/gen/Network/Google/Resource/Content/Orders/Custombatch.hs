@@ -54,7 +54,7 @@ type OrdersCustombatchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] OrdersCustomBatchRequest :>
@@ -68,7 +68,7 @@ data OrdersCustombatch' = OrdersCustombatch'
     , _ordPrettyPrint :: !Bool
     , _ordUserIP      :: !(Maybe Text)
     , _ordPayload     :: !OrdersCustomBatchRequest
-    , _ordKey         :: !(Maybe Key)
+    , _ordKey         :: !(Maybe AuthKey)
     , _ordOAuthToken  :: !(Maybe OAuthToken)
     , _ordFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -131,7 +131,7 @@ ordPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ordKey :: Lens' OrdersCustombatch' (Maybe Key)
+ordKey :: Lens' OrdersCustombatch' (Maybe AuthKey)
 ordKey = lens _ordKey (\ s a -> s{_ordKey = a})
 
 -- | OAuth 2.0 token for the current user.

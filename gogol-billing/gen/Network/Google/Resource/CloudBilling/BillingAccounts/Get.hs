@@ -68,7 +68,7 @@ type BillingAccountsGetResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] BillingAccount
@@ -87,7 +87,7 @@ data BillingAccountsGet' = BillingAccountsGet'
     , _bagAccessToken    :: !(Maybe Text)
     , _bagUploadType     :: !(Maybe Text)
     , _bagBearerToken    :: !(Maybe Text)
-    , _bagKey            :: !(Maybe Key)
+    , _bagKey            :: !(Maybe AuthKey)
     , _bagName           :: !Text
     , _bagOAuthToken     :: !(Maybe OAuthToken)
     , _bagFields         :: !(Maybe Text)
@@ -191,7 +191,7 @@ bagBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bagKey :: Lens' BillingAccountsGet' (Maybe Key)
+bagKey :: Lens' BillingAccountsGet' (Maybe AuthKey)
 bagKey = lens _bagKey (\ s a -> s{_bagKey = a})
 
 -- | The resource name of the billing account to retrieve. For example,

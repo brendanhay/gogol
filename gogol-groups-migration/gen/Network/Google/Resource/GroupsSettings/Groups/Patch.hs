@@ -54,7 +54,7 @@ type GroupsPatchResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltATOM :>
                      ReqBody '[JSON] Groups :> Patch '[JSON] Groups
@@ -67,7 +67,7 @@ data GroupsPatch' = GroupsPatch'
     , _gpPrettyPrint   :: !Bool
     , _gpUserIP        :: !(Maybe Text)
     , _gpPayload       :: !Groups
-    , _gpKey           :: !(Maybe Key)
+    , _gpKey           :: !(Maybe AuthKey)
     , _gpOAuthToken    :: !(Maybe OAuthToken)
     , _gpGroupUniqueId :: !Text
     , _gpFields        :: !(Maybe Text)
@@ -134,7 +134,7 @@ gpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gpKey :: Lens' GroupsPatch' (Maybe Key)
+gpKey :: Lens' GroupsPatch' (Maybe AuthKey)
 gpKey = lens _gpKey (\ s a -> s{_gpKey = a})
 
 -- | OAuth 2.0 token for the current user.

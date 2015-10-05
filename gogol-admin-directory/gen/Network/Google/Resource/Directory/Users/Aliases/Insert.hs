@@ -56,7 +56,7 @@ type UsersAliasesInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Alias :> Post '[JSON] Alias
@@ -69,7 +69,7 @@ data UsersAliasesInsert' = UsersAliasesInsert'
     , _uaiPrettyPrint :: !Bool
     , _uaiUserIP      :: !(Maybe Text)
     , _uaiPayload     :: !Alias
-    , _uaiKey         :: !(Maybe Key)
+    , _uaiKey         :: !(Maybe AuthKey)
     , _uaiOAuthToken  :: !(Maybe OAuthToken)
     , _uaiUserKey     :: !Text
     , _uaiFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ uaiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uaiKey :: Lens' UsersAliasesInsert' (Maybe Key)
+uaiKey :: Lens' UsersAliasesInsert' (Maybe AuthKey)
 uaiKey = lens _uaiKey (\ s a -> s{_uaiKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -58,7 +58,7 @@ type AdUnitsGetAdCodeResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] AdCode
 
@@ -71,7 +71,7 @@ data AdUnitsGetAdCode' = AdUnitsGetAdCode'
     , _augacUserIP      :: !(Maybe Text)
     , _augacAdUnitId    :: !Text
     , _augacAdClientId  :: !Text
-    , _augacKey         :: !(Maybe Key)
+    , _augacKey         :: !(Maybe AuthKey)
     , _augacOAuthToken  :: !(Maybe OAuthToken)
     , _augacFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -146,7 +146,7 @@ augacAdClientId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-augacKey :: Lens' AdUnitsGetAdCode' (Maybe Key)
+augacKey :: Lens' AdUnitsGetAdCode' (Maybe AuthKey)
 augacKey = lens _augacKey (\ s a -> s{_augacKey = a})
 
 -- | OAuth 2.0 token for the current user.

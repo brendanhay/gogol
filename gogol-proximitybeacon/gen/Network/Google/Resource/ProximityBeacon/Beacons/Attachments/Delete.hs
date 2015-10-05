@@ -70,7 +70,7 @@ type BeaconsAttachmentsDeleteResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Delete '[JSON] Empty
@@ -92,7 +92,7 @@ data BeaconsAttachmentsDelete' = BeaconsAttachmentsDelete'
     , _badUploadType     :: !(Maybe Text)
     , _badAttachmentName :: !Text
     , _badBearerToken    :: !(Maybe Text)
-    , _badKey            :: !(Maybe Key)
+    , _badKey            :: !(Maybe AuthKey)
     , _badOAuthToken     :: !(Maybe OAuthToken)
     , _badFields         :: !(Maybe Text)
     , _badCallback       :: !(Maybe Text)
@@ -204,7 +204,7 @@ badBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-badKey :: Lens' BeaconsAttachmentsDelete' (Maybe Key)
+badKey :: Lens' BeaconsAttachmentsDelete' (Maybe AuthKey)
 badKey = lens _badKey (\ s a -> s{_badKey = a})
 
 -- | OAuth 2.0 token for the current user.

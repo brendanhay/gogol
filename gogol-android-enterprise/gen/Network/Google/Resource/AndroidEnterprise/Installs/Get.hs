@@ -63,7 +63,7 @@ type InstallsGetResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] Install
 
@@ -77,7 +77,7 @@ data InstallsGet' = InstallsGet'
     , _igUserIP       :: !(Maybe Text)
     , _igUserId       :: !Text
     , _igInstallId    :: !Text
-    , _igKey          :: !(Maybe Key)
+    , _igKey          :: !(Maybe AuthKey)
     , _igDeviceId     :: !Text
     , _igOAuthToken   :: !(Maybe OAuthToken)
     , _igFields       :: !(Maybe Text)
@@ -163,7 +163,7 @@ igInstallId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igKey :: Lens' InstallsGet' (Maybe Key)
+igKey :: Lens' InstallsGet' (Maybe AuthKey)
 igKey = lens _igKey (\ s a -> s{_igKey = a})
 
 -- | The Android ID of the device.

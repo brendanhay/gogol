@@ -58,7 +58,7 @@ type SubscriptionsActivateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] Subscription
 
@@ -70,7 +70,7 @@ data SubscriptionsActivate' = SubscriptionsActivate'
     , _saPrettyPrint    :: !Bool
     , _saUserIP         :: !(Maybe Text)
     , _saCustomerId     :: !Text
-    , _saKey            :: !(Maybe Key)
+    , _saKey            :: !(Maybe AuthKey)
     , _saOAuthToken     :: !(Maybe OAuthToken)
     , _saSubscriptionId :: !Text
     , _saFields         :: !(Maybe Text)
@@ -137,7 +137,7 @@ saCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-saKey :: Lens' SubscriptionsActivate' (Maybe Key)
+saKey :: Lens' SubscriptionsActivate' (Maybe AuthKey)
 saKey = lens _saKey (\ s a -> s{_saKey = a})
 
 -- | OAuth 2.0 token for the current user.

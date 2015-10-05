@@ -56,7 +56,7 @@ type SitesUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Site :> Put '[JSON] Site
@@ -70,7 +70,7 @@ data SitesUpdate' = SitesUpdate'
     , _suUserIP      :: !(Maybe Text)
     , _suProFileId   :: !Int64
     , _suPayload     :: !Site
-    , _suKey         :: !(Maybe Key)
+    , _suKey         :: !(Maybe AuthKey)
     , _suOAuthToken  :: !(Maybe OAuthToken)
     , _suFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -141,7 +141,7 @@ suPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-suKey :: Lens' SitesUpdate' (Maybe Key)
+suKey :: Lens' SitesUpdate' (Maybe AuthKey)
 suKey = lens _suKey (\ s a -> s{_suKey = a})
 
 -- | OAuth 2.0 token for the current user.

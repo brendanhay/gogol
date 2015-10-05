@@ -60,7 +60,7 @@ type ImageConfigurationsUploadResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[OctetStream] Body :>
@@ -76,7 +76,7 @@ data ImageConfigurationsUpload' = ImageConfigurationsUpload'
     , _icuUserIP      :: !(Maybe Text)
     , _icuMedia       :: !Body
     , _icuImageType   :: !ImageConfigurationsUploadImageType
-    , _icuKey         :: !(Maybe Key)
+    , _icuKey         :: !(Maybe AuthKey)
     , _icuOAuthToken  :: !(Maybe OAuthToken)
     , _icuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -156,7 +156,7 @@ icuImageType
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-icuKey :: Lens' ImageConfigurationsUpload' (Maybe Key)
+icuKey :: Lens' ImageConfigurationsUpload' (Maybe AuthKey)
 icuKey = lens _icuKey (\ s a -> s{_icuKey = a})
 
 -- | OAuth 2.0 token for the current user.

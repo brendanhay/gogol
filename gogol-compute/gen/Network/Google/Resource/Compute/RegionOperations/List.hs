@@ -64,7 +64,7 @@ type RegionOperationsListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] OperationList
@@ -78,7 +78,7 @@ data RegionOperationsList' = RegionOperationsList'
     , _rolPrettyPrint :: !Bool
     , _rolProject     :: !Text
     , _rolUserIP      :: !(Maybe Text)
-    , _rolKey         :: !(Maybe Key)
+    , _rolKey         :: !(Maybe AuthKey)
     , _rolFilter      :: !(Maybe Text)
     , _rolRegion      :: !Text
     , _rolPageToken   :: !(Maybe Text)
@@ -158,7 +158,7 @@ rolUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rolKey :: Lens' RegionOperationsList' (Maybe Key)
+rolKey :: Lens' RegionOperationsList' (Maybe AuthKey)
 rolKey = lens _rolKey (\ s a -> s{_rolKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

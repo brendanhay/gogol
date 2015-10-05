@@ -64,7 +64,7 @@ type CaptionsUpdateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              MultipartRelated '[JSON] Caption Body :>
@@ -84,7 +84,7 @@ data CaptionsUpdate' = CaptionsUpdate'
     , _capPayload                :: !Caption
     , _capMedia                  :: !Body
     , _capOnBehalfOfContentOwner :: !(Maybe Text)
-    , _capKey                    :: !(Maybe Key)
+    , _capKey                    :: !(Maybe AuthKey)
     , _capSync                   :: !(Maybe Bool)
     , _capOAuthToken             :: !(Maybe OAuthToken)
     , _capFields                 :: !(Maybe Text)
@@ -198,7 +198,7 @@ capOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-capKey :: Lens' CaptionsUpdate' (Maybe Key)
+capKey :: Lens' CaptionsUpdate' (Maybe AuthKey)
 capKey = lens _capKey (\ s a -> s{_capKey = a})
 
 -- | Note: The API server only processes the parameter value if the request

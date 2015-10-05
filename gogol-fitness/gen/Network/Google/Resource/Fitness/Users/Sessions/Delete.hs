@@ -58,7 +58,7 @@ type UsersSessionsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -70,7 +70,7 @@ data UsersSessionsDelete' = UsersSessionsDelete'
     , _usdPrettyPrint       :: !Bool
     , _usdUserIP            :: !(Maybe Text)
     , _usdUserId            :: !Text
-    , _usdKey               :: !(Maybe Key)
+    , _usdKey               :: !(Maybe AuthKey)
     , _usdCurrentTimeMillis :: !(Maybe Int64)
     , _usdOAuthToken        :: !(Maybe OAuthToken)
     , _usdSessionId         :: !Text
@@ -143,7 +143,7 @@ usdUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-usdKey :: Lens' UsersSessionsDelete' (Maybe Key)
+usdKey :: Lens' UsersSessionsDelete' (Maybe AuthKey)
 usdKey = lens _usdKey (\ s a -> s{_usdKey = a})
 
 -- | The client\'s current time in milliseconds since epoch.

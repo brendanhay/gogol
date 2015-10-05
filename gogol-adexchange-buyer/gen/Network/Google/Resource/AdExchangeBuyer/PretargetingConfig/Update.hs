@@ -57,7 +57,7 @@ type PretargetingConfigUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] PretargetingConfig :>
@@ -72,7 +72,7 @@ data PretargetingConfigUpdate' = PretargetingConfigUpdate'
     , _pcuUserIP      :: !(Maybe Text)
     , _pcuPayload     :: !PretargetingConfig
     , _pcuAccountId   :: !Int64
-    , _pcuKey         :: !(Maybe Key)
+    , _pcuKey         :: !(Maybe AuthKey)
     , _pcuConfigId    :: !Int64
     , _pcuOAuthToken  :: !(Maybe OAuthToken)
     , _pcuFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ pcuAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pcuKey :: Lens' PretargetingConfigUpdate' (Maybe Key)
+pcuKey :: Lens' PretargetingConfigUpdate' (Maybe AuthKey)
 pcuKey = lens _pcuKey (\ s a -> s{_pcuKey = a})
 
 -- | The specific id of the configuration to update.

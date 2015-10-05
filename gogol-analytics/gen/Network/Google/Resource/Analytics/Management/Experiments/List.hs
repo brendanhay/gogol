@@ -66,7 +66,7 @@ type ManagementExperimentsListResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] Experiments
@@ -81,7 +81,7 @@ data ManagementExperimentsList' = ManagementExperimentsList'
     , _melUserIP        :: !(Maybe Text)
     , _melProFileId     :: !Text
     , _melAccountId     :: !Text
-    , _melKey           :: !(Maybe Key)
+    , _melKey           :: !(Maybe AuthKey)
     , _melOAuthToken    :: !(Maybe OAuthToken)
     , _melStartIndex    :: !(Maybe Int32)
     , _melMaxResults    :: !(Maybe Int32)
@@ -171,7 +171,7 @@ melAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-melKey :: Lens' ManagementExperimentsList' (Maybe Key)
+melKey :: Lens' ManagementExperimentsList' (Maybe AuthKey)
 melKey = lens _melKey (\ s a -> s{_melKey = a})
 
 -- | OAuth 2.0 token for the current user.

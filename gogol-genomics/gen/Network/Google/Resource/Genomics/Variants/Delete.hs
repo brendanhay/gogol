@@ -54,7 +54,7 @@ type VariantsDeleteResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -65,7 +65,7 @@ data VariantsDelete' = VariantsDelete'
     { _vdQuotaUser   :: !(Maybe Text)
     , _vdPrettyPrint :: !Bool
     , _vdUserIP      :: !(Maybe Text)
-    , _vdKey         :: !(Maybe Key)
+    , _vdKey         :: !(Maybe AuthKey)
     , _vdVariantId   :: !Text
     , _vdOAuthToken  :: !(Maybe OAuthToken)
     , _vdFields      :: !(Maybe Text)
@@ -123,7 +123,7 @@ vdUserIP = lens _vdUserIP (\ s a -> s{_vdUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vdKey :: Lens' VariantsDelete' (Maybe Key)
+vdKey :: Lens' VariantsDelete' (Maybe AuthKey)
 vdKey = lens _vdKey (\ s a -> s{_vdKey = a})
 
 -- | The ID of the variant to be deleted.

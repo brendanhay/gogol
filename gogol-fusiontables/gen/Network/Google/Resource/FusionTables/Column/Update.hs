@@ -58,7 +58,7 @@ type ColumnUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Column :> Put '[JSON] Column
@@ -71,7 +71,7 @@ data ColumnUpdate' = ColumnUpdate'
     , _cuPrettyPrint :: !Bool
     , _cuUserIP      :: !(Maybe Text)
     , _cuPayload     :: !Column
-    , _cuKey         :: !(Maybe Key)
+    , _cuKey         :: !(Maybe AuthKey)
     , _cuOAuthToken  :: !(Maybe OAuthToken)
     , _cuTableId     :: !Text
     , _cuColumnId    :: !Text
@@ -143,7 +143,7 @@ cuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuKey :: Lens' ColumnUpdate' (Maybe Key)
+cuKey :: Lens' ColumnUpdate' (Maybe AuthKey)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
 
 -- | OAuth 2.0 token for the current user.

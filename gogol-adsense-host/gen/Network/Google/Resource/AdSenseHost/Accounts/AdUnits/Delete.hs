@@ -61,7 +61,7 @@ type AccountsAdUnitsDeleteResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] AdUnit
 
@@ -76,7 +76,7 @@ data AccountsAdUnitsDelete' = AccountsAdUnitsDelete'
     , _aaudAdUnitId    :: !Text
     , _aaudAdClientId  :: !Text
     , _aaudAccountId   :: !Text
-    , _aaudKey         :: !(Maybe Key)
+    , _aaudKey         :: !(Maybe AuthKey)
     , _aaudOAuthToken  :: !(Maybe OAuthToken)
     , _aaudFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -160,7 +160,7 @@ aaudAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aaudKey :: Lens' AccountsAdUnitsDelete' (Maybe Key)
+aaudKey :: Lens' AccountsAdUnitsDelete' (Maybe AuthKey)
 aaudKey = lens _aaudKey (\ s a -> s{_aaudKey = a})
 
 -- | OAuth 2.0 token for the current user.

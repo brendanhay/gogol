@@ -56,7 +56,7 @@ type DatasetsAllocateIdsResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltPROTO :>
                        ReqBody '[JSON] AllocateIdsRequest :>
@@ -71,7 +71,7 @@ data DatasetsAllocateIds' = DatasetsAllocateIds'
     , _daiPrettyPrint :: !Bool
     , _daiUserIP      :: !(Maybe Text)
     , _daiPayload     :: !AllocateIdsRequest
-    , _daiKey         :: !(Maybe Key)
+    , _daiKey         :: !(Maybe AuthKey)
     , _daiDatasetId   :: !Text
     , _daiOAuthToken  :: !(Maybe OAuthToken)
     , _daiFields      :: !(Maybe Text)
@@ -139,7 +139,7 @@ daiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-daiKey :: Lens' DatasetsAllocateIds' (Maybe Key)
+daiKey :: Lens' DatasetsAllocateIds' (Maybe AuthKey)
 daiKey = lens _daiKey (\ s a -> s{_daiKey = a})
 
 -- | Identifies the dataset.

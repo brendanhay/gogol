@@ -80,7 +80,7 @@ type ReportsGetResource =
                                      QueryParam "prettyPrint" Bool :>
                                        QueryParam "userIp" Text :>
                                          QueryParam "fields" Text :>
-                                           QueryParam "key" Key :>
+                                           QueryParam "key" AuthKey :>
                                              QueryParam "oauth_token" OAuthToken
                                                :>
                                                QueryParam "alt" AltJSON :>
@@ -100,7 +100,7 @@ data ReportsGet' = ReportsGet'
     , _rgRole            :: !ReportsGetRole
     , _rgEventType       :: !(Maybe ReportsGetEventType)
     , _rgStartDate       :: !(Maybe Text)
-    , _rgKey             :: !(Maybe Key)
+    , _rgKey             :: !(Maybe AuthKey)
     , _rgCalculateTotals :: !(Maybe Bool)
     , _rgLinkId          :: !(Maybe [Text])
     , _rgOAuthToken      :: !(Maybe OAuthToken)
@@ -247,7 +247,7 @@ rgStartDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rgKey :: Lens' ReportsGet' (Maybe Key)
+rgKey :: Lens' ReportsGet' (Maybe AuthKey)
 rgKey = lens _rgKey (\ s a -> s{_rgKey = a})
 
 -- | Whether or not to calculate totals rows. Optional.

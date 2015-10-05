@@ -53,7 +53,7 @@ type DatasetsCreateResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Dataset :> Post '[JSON] Dataset
@@ -66,7 +66,7 @@ data DatasetsCreate' = DatasetsCreate'
     , _dcPrettyPrint :: !Bool
     , _dcUserIP      :: !(Maybe Text)
     , _dcPayload     :: !Dataset
-    , _dcKey         :: !(Maybe Key)
+    , _dcKey         :: !(Maybe AuthKey)
     , _dcOAuthToken  :: !(Maybe OAuthToken)
     , _dcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -128,7 +128,7 @@ dcPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dcKey :: Lens' DatasetsCreate' (Maybe Key)
+dcKey :: Lens' DatasetsCreate' (Maybe AuthKey)
 dcKey = lens _dcKey (\ s a -> s{_dcKey = a})
 
 -- | OAuth 2.0 token for the current user.

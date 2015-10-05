@@ -55,7 +55,7 @@ type RasterCollectionsCancelProcessingResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Post '[JSON] ProcessResponse
@@ -67,7 +67,7 @@ data RasterCollectionsCancelProcessing' = RasterCollectionsCancelProcessing'
     { _rccpQuotaUser   :: !(Maybe Text)
     , _rccpPrettyPrint :: !Bool
     , _rccpUserIP      :: !(Maybe Text)
-    , _rccpKey         :: !(Maybe Key)
+    , _rccpKey         :: !(Maybe AuthKey)
     , _rccpId          :: !Text
     , _rccpOAuthToken  :: !(Maybe OAuthToken)
     , _rccpFields      :: !(Maybe Text)
@@ -127,7 +127,7 @@ rccpUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rccpKey :: Lens' RasterCollectionsCancelProcessing' (Maybe Key)
+rccpKey :: Lens' RasterCollectionsCancelProcessing' (Maybe AuthKey)
 rccpKey = lens _rccpKey (\ s a -> s{_rccpKey = a})
 
 -- | The ID of the raster collection.

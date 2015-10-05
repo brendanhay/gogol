@@ -58,7 +58,7 @@ type EventTagsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] EventTag :> Patch '[JSON] EventTag
@@ -72,7 +72,7 @@ data EventTagsPatch' = EventTagsPatch'
     , _etpUserIP      :: !(Maybe Text)
     , _etpProFileId   :: !Int64
     , _etpPayload     :: !EventTag
-    , _etpKey         :: !(Maybe Key)
+    , _etpKey         :: !(Maybe AuthKey)
     , _etpId          :: !Int64
     , _etpOAuthToken  :: !(Maybe OAuthToken)
     , _etpFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ etpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-etpKey :: Lens' EventTagsPatch' (Maybe Key)
+etpKey :: Lens' EventTagsPatch' (Maybe AuthKey)
 etpKey = lens _etpKey (\ s a -> s{_etpKey = a})
 
 -- | Event tag ID.

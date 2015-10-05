@@ -66,7 +66,7 @@ type BookshelvesVolumesListResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] Volumes
@@ -80,7 +80,7 @@ data BookshelvesVolumesList' = BookshelvesVolumesList'
     , _bvlUserIP        :: !(Maybe Text)
     , _bvlUserId        :: !Text
     , _bvlShelf         :: !Text
-    , _bvlKey           :: !(Maybe Key)
+    , _bvlKey           :: !(Maybe AuthKey)
     , _bvlSource        :: !(Maybe Text)
     , _bvlOAuthToken    :: !(Maybe OAuthToken)
     , _bvlStartIndex    :: !(Maybe Word32)
@@ -167,7 +167,7 @@ bvlShelf = lens _bvlShelf (\ s a -> s{_bvlShelf = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bvlKey :: Lens' BookshelvesVolumesList' (Maybe Key)
+bvlKey :: Lens' BookshelvesVolumesList' (Maybe AuthKey)
 bvlKey = lens _bvlKey (\ s a -> s{_bvlKey = a})
 
 -- | String to identify the originator of this request.

@@ -57,7 +57,7 @@ type AccountPermissionsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] AccountPermission
@@ -70,7 +70,7 @@ data AccountPermissionsGet' = AccountPermissionsGet'
     , _accPrettyPrint :: !Bool
     , _accUserIP      :: !(Maybe Text)
     , _accProFileId   :: !Int64
-    , _accKey         :: !(Maybe Key)
+    , _accKey         :: !(Maybe AuthKey)
     , _accId          :: !Int64
     , _accOAuthToken  :: !(Maybe OAuthToken)
     , _accFields      :: !(Maybe Text)
@@ -138,7 +138,7 @@ accProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-accKey :: Lens' AccountPermissionsGet' (Maybe Key)
+accKey :: Lens' AccountPermissionsGet' (Maybe AuthKey)
 accKey = lens _accKey (\ s a -> s{_accKey = a})
 
 -- | Account permission ID.

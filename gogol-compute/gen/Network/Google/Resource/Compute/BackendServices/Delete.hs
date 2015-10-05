@@ -57,7 +57,7 @@ type BackendServicesDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
@@ -69,7 +69,7 @@ data BackendServicesDelete' = BackendServicesDelete'
     , _bsdPrettyPrint    :: !Bool
     , _bsdProject        :: !Text
     , _bsdUserIP         :: !(Maybe Text)
-    , _bsdKey            :: !(Maybe Key)
+    , _bsdKey            :: !(Maybe AuthKey)
     , _bsdOAuthToken     :: !(Maybe OAuthToken)
     , _bsdFields         :: !(Maybe Text)
     , _bsdBackendService :: !Text
@@ -137,7 +137,7 @@ bsdUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bsdKey :: Lens' BackendServicesDelete' (Maybe Key)
+bsdKey :: Lens' BackendServicesDelete' (Maybe AuthKey)
 bsdKey = lens _bsdKey (\ s a -> s{_bsdKey = a})
 
 -- | OAuth 2.0 token for the current user.

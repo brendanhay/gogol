@@ -57,7 +57,7 @@ type PageViewsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Pageviews
 
@@ -69,7 +69,7 @@ data PageViewsGet' = PageViewsGet'
     , _pvgPrettyPrint :: !Bool
     , _pvgUserIP      :: !(Maybe Text)
     , _pvgBlogId      :: !Text
-    , _pvgKey         :: !(Maybe Key)
+    , _pvgKey         :: !(Maybe AuthKey)
     , _pvgRange       :: !(Maybe [PageViewsGetRange])
     , _pvgOAuthToken  :: !(Maybe OAuthToken)
     , _pvgFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ pvgBlogId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pvgKey :: Lens' PageViewsGet' (Maybe Key)
+pvgKey :: Lens' PageViewsGet' (Maybe AuthKey)
 pvgKey = lens _pvgKey (\ s a -> s{_pvgKey = a})
 
 pvgRange :: Lens' PageViewsGet' [PageViewsGetRange]

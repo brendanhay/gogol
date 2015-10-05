@@ -55,7 +55,7 @@ type UserRolePermissionGroupsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] UserRolePermissionGroupsListResponse
@@ -68,7 +68,7 @@ data UserRolePermissionGroupsList' = UserRolePermissionGroupsList'
     , _urpglPrettyPrint :: !Bool
     , _urpglUserIP      :: !(Maybe Text)
     , _urpglProFileId   :: !Int64
-    , _urpglKey         :: !(Maybe Key)
+    , _urpglKey         :: !(Maybe AuthKey)
     , _urpglOAuthToken  :: !(Maybe OAuthToken)
     , _urpglFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -133,7 +133,7 @@ urpglProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-urpglKey :: Lens' UserRolePermissionGroupsList' (Maybe Key)
+urpglKey :: Lens' UserRolePermissionGroupsList' (Maybe AuthKey)
 urpglKey = lens _urpglKey (\ s a -> s{_urpglKey = a})
 
 -- | OAuth 2.0 token for the current user.

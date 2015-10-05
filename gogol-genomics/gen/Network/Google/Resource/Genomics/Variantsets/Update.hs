@@ -56,7 +56,7 @@ type VariantsetsUpdateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] VariantSet :> Put '[JSON] VariantSet
@@ -71,7 +71,7 @@ data VariantsetsUpdate' = VariantsetsUpdate'
     , _vuuVariantSetId :: !Text
     , _vuuUserIP       :: !(Maybe Text)
     , _vuuPayload      :: !VariantSet
-    , _vuuKey          :: !(Maybe Key)
+    , _vuuKey          :: !(Maybe AuthKey)
     , _vuuOAuthToken   :: !(Maybe OAuthToken)
     , _vuuFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ vuuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vuuKey :: Lens' VariantsetsUpdate' (Maybe Key)
+vuuKey :: Lens' VariantsetsUpdate' (Maybe AuthKey)
 vuuKey = lens _vuuKey (\ s a -> s{_vuuKey = a})
 
 -- | OAuth 2.0 token for the current user.

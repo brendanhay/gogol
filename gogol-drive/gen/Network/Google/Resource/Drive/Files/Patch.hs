@@ -84,7 +84,7 @@ type FilesPatchResource =
                                      QueryParam "prettyPrint" Bool :>
                                        QueryParam "userIp" Text :>
                                          QueryParam "fields" Text :>
-                                           QueryParam "key" Key :>
+                                           QueryParam "key" AuthKey :>
                                              QueryParam "oauth_token" OAuthToken
                                                :>
                                                QueryParam "alt" AltJSON :>
@@ -109,7 +109,7 @@ data FilesPatch' = FilesPatch'
     , _fpUseContentAsIndexableText :: !Bool
     , _fpTimedTextTrackName        :: !(Maybe Text)
     , _fpOCRLanguage               :: !(Maybe Text)
-    , _fpKey                       :: !(Maybe Key)
+    , _fpKey                       :: !(Maybe AuthKey)
     , _fpConvert                   :: !Bool
     , _fpSetModifiedDate           :: !Bool
     , _fpFileId                    :: !Text
@@ -280,7 +280,7 @@ fpOCRLanguage
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fpKey :: Lens' FilesPatch' (Maybe Key)
+fpKey :: Lens' FilesPatch' (Maybe AuthKey)
 fpKey = lens _fpKey (\ s a -> s{_fpKey = a})
 
 -- | This parameter is deprecated and has no function.

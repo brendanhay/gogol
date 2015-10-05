@@ -59,7 +59,7 @@ type VPNTunnelsGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] VPNTunnel
 
@@ -71,7 +71,7 @@ data VPNTunnelsGet' = VPNTunnelsGet'
     , _vtgPrettyPrint :: !Bool
     , _vtgProject     :: !Text
     , _vtgUserIP      :: !(Maybe Text)
-    , _vtgKey         :: !(Maybe Key)
+    , _vtgKey         :: !(Maybe AuthKey)
     , _vtgVPNTunnel   :: !Text
     , _vtgRegion      :: !Text
     , _vtgOAuthToken  :: !(Maybe OAuthToken)
@@ -144,7 +144,7 @@ vtgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vtgKey :: Lens' VPNTunnelsGet' (Maybe Key)
+vtgKey :: Lens' VPNTunnelsGet' (Maybe AuthKey)
 vtgKey = lens _vtgKey (\ s a -> s{_vtgKey = a})
 
 -- | Name of the VpnTunnel resource to return.

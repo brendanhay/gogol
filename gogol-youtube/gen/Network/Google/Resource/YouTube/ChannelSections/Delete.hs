@@ -56,7 +56,7 @@ type ChannelSectionsDeleteResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -68,7 +68,7 @@ data ChannelSectionsDelete' = ChannelSectionsDelete'
     , _csdPrettyPrint            :: !Bool
     , _csdUserIP                 :: !(Maybe Text)
     , _csdOnBehalfOfContentOwner :: !(Maybe Text)
-    , _csdKey                    :: !(Maybe Key)
+    , _csdKey                    :: !(Maybe AuthKey)
     , _csdId                     :: !Text
     , _csdOAuthToken             :: !(Maybe OAuthToken)
     , _csdFields                 :: !(Maybe Text)
@@ -145,7 +145,7 @@ csdOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-csdKey :: Lens' ChannelSectionsDelete' (Maybe Key)
+csdKey :: Lens' ChannelSectionsDelete' (Maybe AuthKey)
 csdKey = lens _csdKey (\ s a -> s{_csdKey = a})
 
 -- | The id parameter specifies the YouTube channelSection ID for the

@@ -54,7 +54,7 @@ type WebResourceGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] SiteVerificationWebResourceResource
@@ -66,7 +66,7 @@ data WebResourceGet' = WebResourceGet'
     { _wrgQuotaUser   :: !(Maybe Text)
     , _wrgPrettyPrint :: !Bool
     , _wrgUserIP      :: !(Maybe Text)
-    , _wrgKey         :: !(Maybe Key)
+    , _wrgKey         :: !(Maybe AuthKey)
     , _wrgId          :: !Text
     , _wrgOAuthToken  :: !(Maybe OAuthToken)
     , _wrgFields      :: !(Maybe Text)
@@ -125,7 +125,7 @@ wrgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-wrgKey :: Lens' WebResourceGet' (Maybe Key)
+wrgKey :: Lens' WebResourceGet' (Maybe AuthKey)
 wrgKey = lens _wrgKey (\ s a -> s{_wrgKey = a})
 
 -- | The id of a verified site or domain.

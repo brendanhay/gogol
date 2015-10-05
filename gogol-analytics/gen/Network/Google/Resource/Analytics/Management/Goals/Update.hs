@@ -65,7 +65,7 @@ type ManagementGoalsUpdateResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Goal :> Put '[JSON] Goal
@@ -82,7 +82,7 @@ data ManagementGoalsUpdate' = ManagementGoalsUpdate'
     , _mguProFileId     :: !Text
     , _mguPayload       :: !Goal
     , _mguAccountId     :: !Text
-    , _mguKey           :: !(Maybe Key)
+    , _mguKey           :: !(Maybe AuthKey)
     , _mguOAuthToken    :: !(Maybe OAuthToken)
     , _mguFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -182,7 +182,7 @@ mguAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mguKey :: Lens' ManagementGoalsUpdate' (Maybe Key)
+mguKey :: Lens' ManagementGoalsUpdate' (Maybe AuthKey)
 mguKey = lens _mguKey (\ s a -> s{_mguKey = a})
 
 -- | OAuth 2.0 token for the current user.

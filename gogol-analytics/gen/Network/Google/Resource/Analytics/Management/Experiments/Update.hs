@@ -65,7 +65,7 @@ type ManagementExperimentsUpdateResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Experiment :>
@@ -83,7 +83,7 @@ data ManagementExperimentsUpdate' = ManagementExperimentsUpdate'
     , _meuPayload       :: !Experiment
     , _meuAccountId     :: !Text
     , _meuExperimentId  :: !Text
-    , _meuKey           :: !(Maybe Key)
+    , _meuKey           :: !(Maybe AuthKey)
     , _meuOAuthToken    :: !(Maybe OAuthToken)
     , _meuFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -184,7 +184,7 @@ meuExperimentId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-meuKey :: Lens' ManagementExperimentsUpdate' (Maybe Key)
+meuKey :: Lens' ManagementExperimentsUpdate' (Maybe AuthKey)
 meuKey = lens _meuKey (\ s a -> s{_meuKey = a})
 
 -- | OAuth 2.0 token for the current user.

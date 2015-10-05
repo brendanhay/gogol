@@ -57,7 +57,7 @@ type HTTPHealthChecksInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] HTTPHealthCheck :>
@@ -73,7 +73,7 @@ data HTTPHealthChecksInsert' = HTTPHealthChecksInsert'
     , _httphciProject     :: !Text
     , _httphciUserIP      :: !(Maybe Text)
     , _httphciPayload     :: !HTTPHealthCheck
-    , _httphciKey         :: !(Maybe Key)
+    , _httphciKey         :: !(Maybe AuthKey)
     , _httphciOAuthToken  :: !(Maybe OAuthToken)
     , _httphciFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -149,7 +149,7 @@ httphciPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-httphciKey :: Lens' HTTPHealthChecksInsert' (Maybe Key)
+httphciKey :: Lens' HTTPHealthChecksInsert' (Maybe AuthKey)
 httphciKey
   = lens _httphciKey (\ s a -> s{_httphciKey = a})
 

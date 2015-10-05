@@ -62,7 +62,7 @@ type SSLCertsCreateEphemeralResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] SSLCertsCreateEphemeralRequest :>
@@ -80,7 +80,7 @@ data SSLCertsCreateEphemeral' = SSLCertsCreateEphemeral'
     , _scceProject     :: !Text
     , _scceUserIP      :: !(Maybe Text)
     , _sccePayload     :: !SSLCertsCreateEphemeralRequest
-    , _scceKey         :: !(Maybe Key)
+    , _scceKey         :: !(Maybe AuthKey)
     , _scceOAuthToken  :: !(Maybe OAuthToken)
     , _scceFields      :: !(Maybe Text)
     , _scceInstance    :: !Text
@@ -158,7 +158,7 @@ sccePayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-scceKey :: Lens' SSLCertsCreateEphemeral' (Maybe Key)
+scceKey :: Lens' SSLCertsCreateEphemeral' (Maybe AuthKey)
 scceKey = lens _scceKey (\ s a -> s{_scceKey = a})
 
 -- | OAuth 2.0 token for the current user.

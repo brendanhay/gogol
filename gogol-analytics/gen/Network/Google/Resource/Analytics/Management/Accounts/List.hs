@@ -57,7 +57,7 @@ type ManagementAccountsListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Accounts
 
@@ -68,7 +68,7 @@ data ManagementAccountsList' = ManagementAccountsList'
     { _malQuotaUser   :: !(Maybe Text)
     , _malPrettyPrint :: !Bool
     , _malUserIP      :: !(Maybe Text)
-    , _malKey         :: !(Maybe Key)
+    , _malKey         :: !(Maybe AuthKey)
     , _malOAuthToken  :: !(Maybe OAuthToken)
     , _malStartIndex  :: !(Maybe Int32)
     , _malMaxResults  :: !(Maybe Int32)
@@ -130,7 +130,7 @@ malUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-malKey :: Lens' ManagementAccountsList' (Maybe Key)
+malKey :: Lens' ManagementAccountsList' (Maybe AuthKey)
 malKey = lens _malKey (\ s a -> s{_malKey = a})
 
 -- | OAuth 2.0 token for the current user.

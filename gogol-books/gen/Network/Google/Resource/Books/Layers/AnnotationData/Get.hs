@@ -74,7 +74,7 @@ type LayersAnnotationDataGetResource =
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "userIp" Text :>
                                      QueryParam "fields" Text :>
-                                       QueryParam "key" Key :>
+                                       QueryParam "key" AuthKey :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] Annotationdata
@@ -90,7 +90,7 @@ data LayersAnnotationDataGet' = LayersAnnotationDataGet'
     , _ladgUserIP              :: !(Maybe Text)
     , _ladgLocale              :: !(Maybe Text)
     , _ladgContentVersion      :: !Text
-    , _ladgKey                 :: !(Maybe Key)
+    , _ladgKey                 :: !(Maybe AuthKey)
     , _ladgAllowWebDefinitions :: !(Maybe Bool)
     , _ladgAnnotationDataId    :: !Text
     , _ladgVolumeId            :: !Text
@@ -207,7 +207,7 @@ ladgContentVersion
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ladgKey :: Lens' LayersAnnotationDataGet' (Maybe Key)
+ladgKey :: Lens' LayersAnnotationDataGet' (Maybe AuthKey)
 ladgKey = lens _ladgKey (\ s a -> s{_ladgKey = a})
 
 -- | For the dictionary layer. Whether or not to allow web definitions.

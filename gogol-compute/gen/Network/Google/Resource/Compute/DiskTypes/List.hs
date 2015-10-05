@@ -64,7 +64,7 @@ type DiskTypesListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] DiskTypeList
@@ -79,7 +79,7 @@ data DiskTypesList' = DiskTypesList'
     , _dtlProject     :: !Text
     , _dtlUserIP      :: !(Maybe Text)
     , _dtlZone        :: !Text
-    , _dtlKey         :: !(Maybe Key)
+    , _dtlKey         :: !(Maybe AuthKey)
     , _dtlFilter      :: !(Maybe Text)
     , _dtlPageToken   :: !(Maybe Text)
     , _dtlOAuthToken  :: !(Maybe OAuthToken)
@@ -162,7 +162,7 @@ dtlZone = lens _dtlZone (\ s a -> s{_dtlZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dtlKey :: Lens' DiskTypesList' (Maybe Key)
+dtlKey :: Lens' DiskTypesList' (Maybe AuthKey)
 dtlKey = lens _dtlKey (\ s a -> s{_dtlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

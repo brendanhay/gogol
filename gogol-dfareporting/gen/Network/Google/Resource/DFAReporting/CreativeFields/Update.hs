@@ -56,7 +56,7 @@ type CreativeFieldsUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] CreativeField :>
@@ -71,7 +71,7 @@ data CreativeFieldsUpdate' = CreativeFieldsUpdate'
     , _cfuUserIP      :: !(Maybe Text)
     , _cfuProFileId   :: !Int64
     , _cfuPayload     :: !CreativeField
-    , _cfuKey         :: !(Maybe Key)
+    , _cfuKey         :: !(Maybe AuthKey)
     , _cfuOAuthToken  :: !(Maybe OAuthToken)
     , _cfuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ cfuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cfuKey :: Lens' CreativeFieldsUpdate' (Maybe Key)
+cfuKey :: Lens' CreativeFieldsUpdate' (Maybe AuthKey)
 cfuKey = lens _cfuKey (\ s a -> s{_cfuKey = a})
 
 -- | OAuth 2.0 token for the current user.

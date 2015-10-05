@@ -71,7 +71,7 @@ type TransferJobsListResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListTransferJobsResponse
@@ -88,7 +88,7 @@ data TransferJobsList' = TransferJobsList'
     , _tjlAccessToken    :: !(Maybe Text)
     , _tjlUploadType     :: !(Maybe Text)
     , _tjlBearerToken    :: !(Maybe Text)
-    , _tjlKey            :: !(Maybe Key)
+    , _tjlKey            :: !(Maybe AuthKey)
     , _tjlFilter         :: !(Maybe Text)
     , _tjlPageToken      :: !(Maybe Text)
     , _tjlOAuthToken     :: !(Maybe OAuthToken)
@@ -199,7 +199,7 @@ tjlBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tjlKey :: Lens' TransferJobsList' (Maybe Key)
+tjlKey :: Lens' TransferJobsList' (Maybe AuthKey)
 tjlKey = lens _tjlKey (\ s a -> s{_tjlKey = a})
 
 -- | A list of query parameters specified as JSON text in the form of

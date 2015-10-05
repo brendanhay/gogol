@@ -64,7 +64,7 @@ type ManagementCustomMetricsUpdateResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] CustomMetric :>
@@ -82,7 +82,7 @@ data ManagementCustomMetricsUpdate' = ManagementCustomMetricsUpdate'
     , _mcmuUserIP                      :: !(Maybe Text)
     , _mcmuPayload                     :: !CustomMetric
     , _mcmuAccountId                   :: !Text
-    , _mcmuKey                         :: !(Maybe Key)
+    , _mcmuKey                         :: !(Maybe AuthKey)
     , _mcmuOAuthToken                  :: !(Maybe OAuthToken)
     , _mcmuFields                      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -186,7 +186,7 @@ mcmuAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcmuKey :: Lens' ManagementCustomMetricsUpdate' (Maybe Key)
+mcmuKey :: Lens' ManagementCustomMetricsUpdate' (Maybe AuthKey)
 mcmuKey = lens _mcmuKey (\ s a -> s{_mcmuKey = a})
 
 -- | OAuth 2.0 token for the current user.

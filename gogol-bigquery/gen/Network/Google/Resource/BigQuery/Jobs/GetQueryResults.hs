@@ -65,7 +65,7 @@ type JobsGetQueryResultsResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] GetQueryResultsResponse
@@ -78,7 +78,7 @@ data JobsGetQueryResults' = JobsGetQueryResults'
     , _jgqrPrettyPrint :: !Bool
     , _jgqrJobId       :: !Text
     , _jgqrUserIP      :: !(Maybe Text)
-    , _jgqrKey         :: !(Maybe Key)
+    , _jgqrKey         :: !(Maybe AuthKey)
     , _jgqrTimeoutMs   :: !(Maybe Word32)
     , _jgqrPageToken   :: !(Maybe Text)
     , _jgqrProjectId   :: !Text
@@ -163,7 +163,7 @@ jgqrUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-jgqrKey :: Lens' JobsGetQueryResults' (Maybe Key)
+jgqrKey :: Lens' JobsGetQueryResults' (Maybe AuthKey)
 jgqrKey = lens _jgqrKey (\ s a -> s{_jgqrKey = a})
 
 -- | How long to wait for the query to complete, in milliseconds, before

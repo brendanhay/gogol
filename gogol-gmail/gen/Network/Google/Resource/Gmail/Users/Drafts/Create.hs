@@ -56,7 +56,7 @@ type UsersDraftsCreateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        MultipartRelated '[JSON] Draft Body :>
@@ -72,7 +72,7 @@ data UsersDraftsCreate' = UsersDraftsCreate'
     , _udcPayload     :: !Draft
     , _udcUserId      :: !Text
     , _udcMedia       :: !Body
-    , _udcKey         :: !(Maybe Key)
+    , _udcKey         :: !(Maybe AuthKey)
     , _udcOAuthToken  :: !(Maybe OAuthToken)
     , _udcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -152,7 +152,7 @@ udcMedia = lens _udcMedia (\ s a -> s{_udcMedia = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udcKey :: Lens' UsersDraftsCreate' (Maybe Key)
+udcKey :: Lens' UsersDraftsCreate' (Maybe AuthKey)
 udcKey = lens _udcKey (\ s a -> s{_udcKey = a})
 
 -- | OAuth 2.0 token for the current user.

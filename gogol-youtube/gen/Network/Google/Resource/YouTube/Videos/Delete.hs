@@ -56,7 +56,7 @@ type VideosDeleteResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -68,7 +68,7 @@ data VideosDelete' = VideosDelete'
     , _vdPrettyPrint            :: !Bool
     , _vdUserIP                 :: !(Maybe Text)
     , _vdOnBehalfOfContentOwner :: !(Maybe Text)
-    , _vdKey                    :: !(Maybe Key)
+    , _vdKey                    :: !(Maybe AuthKey)
     , _vdId                     :: !Text
     , _vdOAuthToken             :: !(Maybe OAuthToken)
     , _vdFields                 :: !(Maybe Text)
@@ -144,7 +144,7 @@ vdOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vdKey :: Lens' VideosDelete' (Maybe Key)
+vdKey :: Lens' VideosDelete' (Maybe AuthKey)
 vdKey = lens _vdKey (\ s a -> s{_vdKey = a})
 
 -- | The id parameter specifies the YouTube video ID for the resource that is

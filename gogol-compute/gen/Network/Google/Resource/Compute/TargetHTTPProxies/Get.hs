@@ -57,7 +57,7 @@ type TargetHTTPProxiesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] TargetHTTPProxy
@@ -70,7 +70,7 @@ data TargetHTTPProxiesGet' = TargetHTTPProxiesGet'
     , _thttppgPrettyPrint     :: !Bool
     , _thttppgProject         :: !Text
     , _thttppgUserIP          :: !(Maybe Text)
-    , _thttppgKey             :: !(Maybe Key)
+    , _thttppgKey             :: !(Maybe AuthKey)
     , _thttppgTargetHTTPProxy :: !Text
     , _thttppgOAuthToken      :: !(Maybe OAuthToken)
     , _thttppgFields          :: !(Maybe Text)
@@ -141,7 +141,7 @@ thttppgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-thttppgKey :: Lens' TargetHTTPProxiesGet' (Maybe Key)
+thttppgKey :: Lens' TargetHTTPProxiesGet' (Maybe AuthKey)
 thttppgKey
   = lens _thttppgKey (\ s a -> s{_thttppgKey = a})
 

@@ -57,7 +57,7 @@ type TablesFeaturesBatchDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] FeaturesBatchDeleteRequest :>
@@ -71,7 +71,7 @@ data TablesFeaturesBatchDelete' = TablesFeaturesBatchDelete'
     , _tfbdPrettyPrint :: !Bool
     , _tfbdUserIP      :: !(Maybe Text)
     , _tfbdPayload     :: !FeaturesBatchDeleteRequest
-    , _tfbdKey         :: !(Maybe Key)
+    , _tfbdKey         :: !(Maybe AuthKey)
     , _tfbdId          :: !Text
     , _tfbdOAuthToken  :: !(Maybe OAuthToken)
     , _tfbdFields      :: !(Maybe Text)
@@ -140,7 +140,7 @@ tfbdPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tfbdKey :: Lens' TablesFeaturesBatchDelete' (Maybe Key)
+tfbdKey :: Lens' TablesFeaturesBatchDelete' (Maybe AuthKey)
 tfbdKey = lens _tfbdKey (\ s a -> s{_tfbdKey = a})
 
 -- | The ID of the table that contains the features to be deleted.

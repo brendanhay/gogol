@@ -59,7 +59,7 @@ type PropertiesDeleteResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -72,7 +72,7 @@ data PropertiesDelete' = PropertiesDelete'
     , _pdPropertyKey :: !Text
     , _pdUserIP      :: !(Maybe Text)
     , _pdVisibility  :: !Text
-    , _pdKey         :: !(Maybe Key)
+    , _pdKey         :: !(Maybe AuthKey)
     , _pdFileId      :: !Text
     , _pdOAuthToken  :: !(Maybe OAuthToken)
     , _pdFields      :: !(Maybe Text)
@@ -148,7 +148,7 @@ pdVisibility
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pdKey :: Lens' PropertiesDelete' (Maybe Key)
+pdKey :: Lens' PropertiesDelete' (Maybe AuthKey)
 pdKey = lens _pdKey (\ s a -> s{_pdKey = a})
 
 -- | The ID of the file.

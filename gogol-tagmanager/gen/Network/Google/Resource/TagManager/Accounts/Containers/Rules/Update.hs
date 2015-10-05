@@ -63,7 +63,7 @@ type AccountsContainersRulesUpdateResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Rule :> Put '[JSON] Rule
@@ -80,7 +80,7 @@ data AccountsContainersRulesUpdate' = AccountsContainersRulesUpdate'
     , _acruRuleId      :: !Text
     , _acruPayload     :: !Rule
     , _acruAccountId   :: !Text
-    , _acruKey         :: !(Maybe Key)
+    , _acruKey         :: !(Maybe AuthKey)
     , _acruOAuthToken  :: !(Maybe OAuthToken)
     , _acruFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -183,7 +183,7 @@ acruAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acruKey :: Lens' AccountsContainersRulesUpdate' (Maybe Key)
+acruKey :: Lens' AccountsContainersRulesUpdate' (Maybe AuthKey)
 acruKey = lens _acruKey (\ s a -> s{_acruKey = a})
 
 -- | OAuth 2.0 token for the current user.

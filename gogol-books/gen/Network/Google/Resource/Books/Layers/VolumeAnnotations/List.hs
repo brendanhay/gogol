@@ -83,7 +83,7 @@ type LayersVolumeAnnotationsListResource =
                                          QueryParam "prettyPrint" Bool :>
                                            QueryParam "userIp" Text :>
                                              QueryParam "fields" Text :>
-                                               QueryParam "key" Key :>
+                                               QueryParam "key" AuthKey :>
                                                  QueryParam "oauth_token"
                                                    OAuthToken
                                                    :>
@@ -104,7 +104,7 @@ data LayersVolumeAnnotationsList' = LayersVolumeAnnotationsList'
     , _lvalShowDeleted              :: !(Maybe Bool)
     , _lvalVolumeAnnotationsVersion :: !(Maybe Text)
     , _lvalUpdatedMax               :: !(Maybe Text)
-    , _lvalKey                      :: !(Maybe Key)
+    , _lvalKey                      :: !(Maybe AuthKey)
     , _lvalUpdatedMin               :: !(Maybe Text)
     , _lvalEndOffset                :: !(Maybe Text)
     , _lvalVolumeId                 :: !Text
@@ -254,7 +254,7 @@ lvalUpdatedMax
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lvalKey :: Lens' LayersVolumeAnnotationsList' (Maybe Key)
+lvalKey :: Lens' LayersVolumeAnnotationsList' (Maybe AuthKey)
 lvalKey = lens _lvalKey (\ s a -> s{_lvalKey = a})
 
 -- | RFC 3339 timestamp to restrict to items updated since this timestamp

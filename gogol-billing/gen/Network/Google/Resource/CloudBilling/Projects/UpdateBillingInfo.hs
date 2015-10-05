@@ -94,7 +94,7 @@ type ProjectsUpdateBillingInfoResource =
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] ProjectBillingInfo :>
@@ -139,7 +139,7 @@ data ProjectsUpdateBillingInfo' = ProjectsUpdateBillingInfo'
     , _pubiUploadType     :: !(Maybe Text)
     , _pubiPayload        :: !ProjectBillingInfo
     , _pubiBearerToken    :: !(Maybe Text)
-    , _pubiKey            :: !(Maybe Key)
+    , _pubiKey            :: !(Maybe AuthKey)
     , _pubiName           :: !Text
     , _pubiOAuthToken     :: !(Maybe OAuthToken)
     , _pubiFields         :: !(Maybe Text)
@@ -254,7 +254,7 @@ pubiBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pubiKey :: Lens' ProjectsUpdateBillingInfo' (Maybe Key)
+pubiKey :: Lens' ProjectsUpdateBillingInfo' (Maybe AuthKey)
 pubiKey = lens _pubiKey (\ s a -> s{_pubiKey = a})
 
 -- | The resource name of the project associated with the billing information

@@ -73,7 +73,7 @@ type TablesFeaturesListResource =
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] FeaturesListResponse
@@ -88,7 +88,7 @@ data TablesFeaturesList' = TablesFeaturesList'
     , _tflWhere       :: !(Maybe Text)
     , _tflOrderBy     :: !(Maybe Text)
     , _tflUserIP      :: !(Maybe Text)
-    , _tflKey         :: !(Maybe Key)
+    , _tflKey         :: !(Maybe AuthKey)
     , _tflVersion     :: !(Maybe TablesFeaturesListVersion)
     , _tflId          :: !Text
     , _tflLimit       :: !(Maybe Word32)
@@ -196,7 +196,7 @@ tflUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tflKey :: Lens' TablesFeaturesList' (Maybe Key)
+tflKey :: Lens' TablesFeaturesList' (Maybe AuthKey)
 tflKey = lens _tflKey (\ s a -> s{_tflKey = a})
 
 -- | The table version to access. See Accessing Public Data for information.

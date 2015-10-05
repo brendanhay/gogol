@@ -56,7 +56,7 @@ type TiersListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] TiersListResponse
@@ -70,7 +70,7 @@ data TiersList' = TiersList'
     , _tlPrettyPrint :: !Bool
     , _tlProject     :: !Text
     , _tlUserIP      :: !(Maybe Text)
-    , _tlKey         :: !(Maybe Key)
+    , _tlKey         :: !(Maybe AuthKey)
     , _tlOAuthToken  :: !(Maybe OAuthToken)
     , _tlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -132,7 +132,7 @@ tlUserIP = lens _tlUserIP (\ s a -> s{_tlUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tlKey :: Lens' TiersList' (Maybe Key)
+tlKey :: Lens' TiersList' (Maybe AuthKey)
 tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | OAuth 2.0 token for the current user.

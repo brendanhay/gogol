@@ -94,14 +94,14 @@ class GoogleRequest a where
     requestWithRoute :: Req -> BaseUrl -> a -> EitherT ServantError IO (Rs a)
     request          ::                   a -> EitherT ServantError IO (Rs a)
 
-newtype Key        = Key Text
+newtype AuthKey = AuthKey Text
     deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToText, FromText)
 
 newtype OAuthToken = OAuthToken Text
     deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToText, FromText)
 
 class GoogleAuth a where
-    authKey   :: Traversal' a Key
+    authKey   :: Traversal' a AuthKey
     authToken :: Traversal' a OAuthToken
     -- ^ only set if unset semantics?
 

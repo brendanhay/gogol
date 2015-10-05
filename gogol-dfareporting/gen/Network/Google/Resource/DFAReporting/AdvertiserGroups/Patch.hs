@@ -59,7 +59,7 @@ type AdvertiserGroupsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] AdvertiserGroup :>
@@ -75,7 +75,7 @@ data AdvertiserGroupsPatch' = AdvertiserGroupsPatch'
     , _agpUserIP      :: !(Maybe Text)
     , _agpProFileId   :: !Int64
     , _agpPayload     :: !AdvertiserGroup
-    , _agpKey         :: !(Maybe Key)
+    , _agpKey         :: !(Maybe AuthKey)
     , _agpId          :: !Int64
     , _agpOAuthToken  :: !(Maybe OAuthToken)
     , _agpFields      :: !(Maybe Text)
@@ -152,7 +152,7 @@ agpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agpKey :: Lens' AdvertiserGroupsPatch' (Maybe Key)
+agpKey :: Lens' AdvertiserGroupsPatch' (Maybe AuthKey)
 agpKey = lens _agpKey (\ s a -> s{_agpKey = a})
 
 -- | Advertiser group ID.

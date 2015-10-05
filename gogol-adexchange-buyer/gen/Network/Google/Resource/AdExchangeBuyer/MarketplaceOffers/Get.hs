@@ -54,7 +54,7 @@ type MarketplaceOffersGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] MarketplaceOffer
@@ -66,7 +66,7 @@ data MarketplaceOffersGet' = MarketplaceOffersGet'
     { _mogQuotaUser   :: !(Maybe Text)
     , _mogPrettyPrint :: !Bool
     , _mogUserIP      :: !(Maybe Text)
-    , _mogKey         :: !(Maybe Key)
+    , _mogKey         :: !(Maybe AuthKey)
     , _mogOfferId     :: !Text
     , _mogOAuthToken  :: !(Maybe OAuthToken)
     , _mogFields      :: !(Maybe Text)
@@ -125,7 +125,7 @@ mogUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mogKey :: Lens' MarketplaceOffersGet' (Maybe Key)
+mogKey :: Lens' MarketplaceOffersGet' (Maybe AuthKey)
 mogKey = lens _mogKey (\ s a -> s{_mogKey = a})
 
 -- | The offerId for the offer to get the head revision for.

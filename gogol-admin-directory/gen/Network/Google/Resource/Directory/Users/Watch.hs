@@ -78,7 +78,7 @@ type UsersWatchResource =
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "key" Key :>
+                                         QueryParam "key" AuthKey :>
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
@@ -101,7 +101,7 @@ data UsersWatch' = UsersWatch'
     , _uwPayload         :: !Channel
     , _uwSortOrder       :: !(Maybe UsersWatchSortOrder)
     , _uwCustomer        :: !(Maybe Text)
-    , _uwKey             :: !(Maybe Key)
+    , _uwKey             :: !(Maybe AuthKey)
     , _uwQuery           :: !(Maybe Text)
     , _uwProjection      :: !UsersWatchProjection
     , _uwPageToken       :: !(Maybe Text)
@@ -246,7 +246,7 @@ uwCustomer
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uwKey :: Lens' UsersWatch' (Maybe Key)
+uwKey :: Lens' UsersWatch' (Maybe AuthKey)
 uwKey = lens _uwKey (\ s a -> s{_uwKey = a})
 
 -- | Query string search. Should be of the form \"\". Complete documentation

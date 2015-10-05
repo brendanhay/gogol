@@ -57,7 +57,7 @@ type CreativeFieldsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] CreativeField
 
@@ -69,7 +69,7 @@ data CreativeFieldsGet' = CreativeFieldsGet'
     , _cfgPrettyPrint :: !Bool
     , _cfgUserIP      :: !(Maybe Text)
     , _cfgProFileId   :: !Int64
-    , _cfgKey         :: !(Maybe Key)
+    , _cfgKey         :: !(Maybe AuthKey)
     , _cfgId          :: !Int64
     , _cfgOAuthToken  :: !(Maybe OAuthToken)
     , _cfgFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ cfgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cfgKey :: Lens' CreativeFieldsGet' (Maybe Key)
+cfgKey :: Lens' CreativeFieldsGet' (Maybe AuthKey)
 cfgKey = lens _cfgKey (\ s a -> s{_cfgKey = a})
 
 -- | Creative Field ID

@@ -56,7 +56,7 @@ type AccountsMetadataMetricsListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Metadata
 
@@ -68,7 +68,7 @@ data AccountsMetadataMetricsList' = AccountsMetadataMetricsList'
     , _ammlPrettyPrint :: !Bool
     , _ammlUserIP      :: !(Maybe Text)
     , _ammlAccountId   :: !Text
-    , _ammlKey         :: !(Maybe Key)
+    , _ammlKey         :: !(Maybe AuthKey)
     , _ammlOAuthToken  :: !(Maybe OAuthToken)
     , _ammlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -133,7 +133,7 @@ ammlAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ammlKey :: Lens' AccountsMetadataMetricsList' (Maybe Key)
+ammlKey :: Lens' AccountsMetadataMetricsList' (Maybe AuthKey)
 ammlKey = lens _ammlKey (\ s a -> s{_ammlKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -61,7 +61,7 @@ type CommentsMarkAsSpamResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Post '[JSON] Comment
 
@@ -73,7 +73,7 @@ data CommentsMarkAsSpam' = CommentsMarkAsSpam'
     , _cmasPrettyPrint :: !Bool
     , _cmasUserIP      :: !(Maybe Text)
     , _cmasBlogId      :: !Text
-    , _cmasKey         :: !(Maybe Key)
+    , _cmasKey         :: !(Maybe AuthKey)
     , _cmasPostId      :: !Text
     , _cmasOAuthToken  :: !(Maybe OAuthToken)
     , _cmasCommentId   :: !Text
@@ -147,7 +147,7 @@ cmasBlogId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cmasKey :: Lens' CommentsMarkAsSpam' (Maybe Key)
+cmasKey :: Lens' CommentsMarkAsSpam' (Maybe AuthKey)
 cmasKey = lens _cmasKey (\ s a -> s{_cmasKey = a})
 
 -- | The ID of the Post.

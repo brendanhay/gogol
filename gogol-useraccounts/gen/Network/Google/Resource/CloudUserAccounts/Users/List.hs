@@ -63,7 +63,7 @@ type UsersListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] UserList
 
@@ -76,7 +76,7 @@ data UsersList' = UsersList'
     , _ulOrderBy     :: !(Maybe Text)
     , _ulProject     :: !Text
     , _ulUserIP      :: !(Maybe Text)
-    , _ulKey         :: !(Maybe Key)
+    , _ulKey         :: !(Maybe AuthKey)
     , _ulFilter      :: !(Maybe Text)
     , _ulPageToken   :: !(Maybe Text)
     , _ulOAuthToken  :: !(Maybe OAuthToken)
@@ -165,7 +165,7 @@ ulUserIP = lens _ulUserIP (\ s a -> s{_ulUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ulKey :: Lens' UsersList' (Maybe Key)
+ulKey :: Lens' UsersList' (Maybe AuthKey)
 ulKey = lens _ulKey (\ s a -> s{_ulKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

@@ -54,7 +54,7 @@ type RastersUploadResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Raster :> Post '[JSON] Raster
@@ -67,7 +67,7 @@ data RastersUpload' = RastersUpload'
     , _ruPrettyPrint :: !Bool
     , _ruUserIP      :: !(Maybe Text)
     , _ruPayload     :: !Raster
-    , _ruKey         :: !(Maybe Key)
+    , _ruKey         :: !(Maybe AuthKey)
     , _ruOAuthToken  :: !(Maybe OAuthToken)
     , _ruFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -129,7 +129,7 @@ ruPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ruKey :: Lens' RastersUpload' (Maybe Key)
+ruKey :: Lens' RastersUpload' (Maybe AuthKey)
 ruKey = lens _ruKey (\ s a -> s{_ruKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -164,7 +164,7 @@ type CompaniesListResource =
                                                                              :>
                                                                              QueryParam
                                                                                "key"
-                                                                               Key
+                                                                               AuthKey
                                                                                :>
                                                                                QueryParam
                                                                                  "oauth_token"
@@ -198,7 +198,7 @@ data CompaniesList' = CompaniesList'
     , _clIndustries                                  :: !(Maybe [Text])
     , _clRequestMetadataPartnersSessionId            :: !(Maybe Text)
     , _clBearerToken                                 :: !(Maybe Text)
-    , _clKey                                         :: !(Maybe Key)
+    , _clKey                                         :: !(Maybe AuthKey)
     , _clMaxMonthlyBudgetNanos                       :: !(Maybe Int32)
     , _clRequestMetadataLocale                       :: !(Maybe Text)
     , _clView                                        :: !(Maybe Text)
@@ -445,7 +445,7 @@ clBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' CompaniesList' (Maybe Key)
+clKey :: Lens' CompaniesList' (Maybe AuthKey)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | Number of nano (10^-9) units of the amount. The value must be between

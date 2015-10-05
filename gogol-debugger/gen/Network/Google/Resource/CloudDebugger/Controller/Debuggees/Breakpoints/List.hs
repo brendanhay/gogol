@@ -80,7 +80,7 @@ type ControllerDebuggeesBreakpointsListResource =
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON]
@@ -107,7 +107,7 @@ data ControllerDebuggeesBreakpointsList' = ControllerDebuggeesBreakpointsList'
     , _cdblAccessToken    :: !(Maybe Text)
     , _cdblUploadType     :: !(Maybe Text)
     , _cdblBearerToken    :: !(Maybe Text)
-    , _cdblKey            :: !(Maybe Key)
+    , _cdblKey            :: !(Maybe AuthKey)
     , _cdblWaitToken      :: !(Maybe Text)
     , _cdblDebuggeeId     :: !Text
     , _cdblOAuthToken     :: !(Maybe OAuthToken)
@@ -217,7 +217,7 @@ cdblBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cdblKey :: Lens' ControllerDebuggeesBreakpointsList' (Maybe Key)
+cdblKey :: Lens' ControllerDebuggeesBreakpointsList' (Maybe AuthKey)
 cdblKey = lens _cdblKey (\ s a -> s{_cdblKey = a})
 
 -- | A wait token that, if specified, blocks the method call until the list

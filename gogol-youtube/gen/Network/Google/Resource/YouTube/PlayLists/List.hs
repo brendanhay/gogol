@@ -72,7 +72,7 @@ type PlayListsListResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] PlayListListResponse
@@ -91,7 +91,7 @@ data PlayListsList' = PlayListsList'
     , _pllChannelId                     :: !(Maybe Text)
     , _pllHl                            :: !(Maybe Text)
     , _pllOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _pllKey                           :: !(Maybe Key)
+    , _pllKey                           :: !(Maybe AuthKey)
     , _pllOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _pllId                            :: !(Maybe Text)
     , _pllPageToken                     :: !(Maybe Text)
@@ -218,7 +218,7 @@ pllOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pllKey :: Lens' PlayListsList' (Maybe Key)
+pllKey :: Lens' PlayListsList' (Maybe AuthKey)
 pllKey = lens _pllKey (\ s a -> s{_pllKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:

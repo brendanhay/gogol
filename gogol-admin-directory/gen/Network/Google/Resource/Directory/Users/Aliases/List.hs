@@ -57,7 +57,7 @@ type UsersAliasesListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Aliases
 
@@ -69,7 +69,7 @@ data UsersAliasesList' = UsersAliasesList'
     , _ualQuotaUser   :: !(Maybe Text)
     , _ualPrettyPrint :: !Bool
     , _ualUserIP      :: !(Maybe Text)
-    , _ualKey         :: !(Maybe Key)
+    , _ualKey         :: !(Maybe AuthKey)
     , _ualOAuthToken  :: !(Maybe OAuthToken)
     , _ualUserKey     :: !Text
     , _ualFields      :: !(Maybe Text)
@@ -135,7 +135,7 @@ ualUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ualKey :: Lens' UsersAliasesList' (Maybe Key)
+ualKey :: Lens' UsersAliasesList' (Maybe AuthKey)
 ualKey = lens _ualKey (\ s a -> s{_ualKey = a})
 
 -- | OAuth 2.0 token for the current user.

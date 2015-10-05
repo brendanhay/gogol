@@ -59,7 +59,7 @@ type LiveBroadcastsInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] LiveBroadcast :>
@@ -75,7 +75,7 @@ data LiveBroadcastsInsert' = LiveBroadcastsInsert'
     , _lbiUserIP                        :: !(Maybe Text)
     , _lbiPayload                       :: !LiveBroadcast
     , _lbiOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lbiKey                           :: !(Maybe Key)
+    , _lbiKey                           :: !(Maybe AuthKey)
     , _lbiOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbiOAuthToken                    :: !(Maybe OAuthToken)
     , _lbiFields                        :: !(Maybe Text)
@@ -172,7 +172,7 @@ lbiOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lbiKey :: Lens' LiveBroadcastsInsert' (Maybe Key)
+lbiKey :: Lens' LiveBroadcastsInsert' (Maybe AuthKey)
 lbiKey = lens _lbiKey (\ s a -> s{_lbiKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:

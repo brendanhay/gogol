@@ -56,7 +56,7 @@ type DatasetsCommitResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltPROTO :>
                        ReqBody '[JSON] CommitRequest :>
@@ -71,7 +71,7 @@ data DatasetsCommit' = DatasetsCommit'
     , _dcPrettyPrint :: !Bool
     , _dcUserIP      :: !(Maybe Text)
     , _dcPayload     :: !CommitRequest
-    , _dcKey         :: !(Maybe Key)
+    , _dcKey         :: !(Maybe AuthKey)
     , _dcDatasetId   :: !Text
     , _dcOAuthToken  :: !(Maybe OAuthToken)
     , _dcFields      :: !(Maybe Text)
@@ -138,7 +138,7 @@ dcPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dcKey :: Lens' DatasetsCommit' (Maybe Key)
+dcKey :: Lens' DatasetsCommit' (Maybe AuthKey)
 dcKey = lens _dcKey (\ s a -> s{_dcKey = a})
 
 -- | Identifies the dataset.

@@ -58,7 +58,7 @@ type DefaultObjectAccessControlsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ObjectAccessControl
@@ -72,7 +72,7 @@ data DefaultObjectAccessControlsGet' = DefaultObjectAccessControlsGet'
     , _doacgPrettyPrint :: !Bool
     , _doacgUserIP      :: !(Maybe Text)
     , _doacgBucket      :: !Text
-    , _doacgKey         :: !(Maybe Key)
+    , _doacgKey         :: !(Maybe AuthKey)
     , _doacgOAuthToken  :: !(Maybe OAuthToken)
     , _doacgEntity      :: !Text
     , _doacgFields      :: !(Maybe Text)
@@ -141,7 +141,7 @@ doacgBucket
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-doacgKey :: Lens' DefaultObjectAccessControlsGet' (Maybe Key)
+doacgKey :: Lens' DefaultObjectAccessControlsGet' (Maybe AuthKey)
 doacgKey = lens _doacgKey (\ s a -> s{_doacgKey = a})
 
 -- | OAuth 2.0 token for the current user.

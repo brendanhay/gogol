@@ -63,7 +63,7 @@ type LinuxGetAuthorizedKeysViewResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Post '[JSON] LinuxGetAuthorizedKeysViewResponse
@@ -78,7 +78,7 @@ data LinuxGetAuthorizedKeysView' = LinuxGetAuthorizedKeysView'
     , _lgakvUserIP      :: !(Maybe Text)
     , _lgakvZone        :: !Text
     , _lgakvUser        :: !Text
-    , _lgakvKey         :: !(Maybe Key)
+    , _lgakvKey         :: !(Maybe AuthKey)
     , _lgakvOAuthToken  :: !(Maybe OAuthToken)
     , _lgakvLogin       :: !(Maybe Bool)
     , _lgakvFields      :: !(Maybe Text)
@@ -170,7 +170,7 @@ lgakvUser
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lgakvKey :: Lens' LinuxGetAuthorizedKeysView' (Maybe Key)
+lgakvKey :: Lens' LinuxGetAuthorizedKeysView' (Maybe AuthKey)
 lgakvKey = lens _lgakvKey (\ s a -> s{_lgakvKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -80,7 +80,7 @@ type LayersAnnotationDataListResource =
                                        QueryParam "prettyPrint" Bool :>
                                          QueryParam "userIp" Text :>
                                            QueryParam "fields" Text :>
-                                             QueryParam "key" Key :>
+                                             QueryParam "key" AuthKey :>
                                                QueryParam "oauth_token"
                                                  OAuthToken
                                                  :>
@@ -99,7 +99,7 @@ data LayersAnnotationDataList' = LayersAnnotationDataList'
     , _ladlLocale           :: !(Maybe Text)
     , _ladlContentVersion   :: !Text
     , _ladlUpdatedMax       :: !(Maybe Text)
-    , _ladlKey              :: !(Maybe Key)
+    , _ladlKey              :: !(Maybe AuthKey)
     , _ladlUpdatedMin       :: !(Maybe Text)
     , _ladlAnnotationDataId :: !(Maybe [Text])
     , _ladlVolumeId         :: !Text
@@ -233,7 +233,7 @@ ladlUpdatedMax
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ladlKey :: Lens' LayersAnnotationDataList' (Maybe Key)
+ladlKey :: Lens' LayersAnnotationDataList' (Maybe AuthKey)
 ladlKey = lens _ladlKey (\ s a -> s{_ladlKey = a})
 
 -- | RFC 3339 timestamp to restrict to items updated since this timestamp

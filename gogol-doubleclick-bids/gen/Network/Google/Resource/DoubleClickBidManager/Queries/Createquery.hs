@@ -53,7 +53,7 @@ type QueriesCreatequeryResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Query :> Post '[JSON] Query
@@ -66,7 +66,7 @@ data QueriesCreatequery' = QueriesCreatequery'
     , _qcPrettyPrint :: !Bool
     , _qcUserIP      :: !(Maybe Text)
     , _qcPayload     :: !Query
-    , _qcKey         :: !(Maybe Key)
+    , _qcKey         :: !(Maybe AuthKey)
     , _qcOAuthToken  :: !(Maybe OAuthToken)
     , _qcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -128,7 +128,7 @@ qcPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-qcKey :: Lens' QueriesCreatequery' (Maybe Key)
+qcKey :: Lens' QueriesCreatequery' (Maybe AuthKey)
 qcKey = lens _qcKey (\ s a -> s{_qcKey = a})
 
 -- | OAuth 2.0 token for the current user.

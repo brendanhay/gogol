@@ -60,7 +60,7 @@ type PermissionsInsertResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Permission :>
@@ -74,7 +74,7 @@ data PermissionsInsert' = PermissionsInsert'
     , _piPrettyPrint            :: !Bool
     , _piUserIP                 :: !(Maybe Text)
     , _piPayload                :: !Permission
-    , _piKey                    :: !(Maybe Key)
+    , _piKey                    :: !(Maybe AuthKey)
     , _piEmailMessage           :: !(Maybe Text)
     , _piFileId                 :: !Text
     , _piOAuthToken             :: !(Maybe OAuthToken)
@@ -149,7 +149,7 @@ piPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-piKey :: Lens' PermissionsInsert' (Maybe Key)
+piKey :: Lens' PermissionsInsert' (Maybe AuthKey)
 piKey = lens _piKey (\ s a -> s{_piKey = a})
 
 -- | A custom message to include in notification emails.

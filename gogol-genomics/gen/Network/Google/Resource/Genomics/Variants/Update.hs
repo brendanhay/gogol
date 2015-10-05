@@ -56,7 +56,7 @@ type VariantsUpdateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Variant :> Put '[JSON] Variant
@@ -70,7 +70,7 @@ data VariantsUpdate' = VariantsUpdate'
     , _vuPrettyPrint :: !Bool
     , _vuUserIP      :: !(Maybe Text)
     , _vuPayload     :: !Variant
-    , _vuKey         :: !(Maybe Key)
+    , _vuKey         :: !(Maybe AuthKey)
     , _vuVariantId   :: !Text
     , _vuOAuthToken  :: !(Maybe OAuthToken)
     , _vuFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ vuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vuKey :: Lens' VariantsUpdate' (Maybe Key)
+vuKey :: Lens' VariantsUpdate' (Maybe AuthKey)
 vuKey = lens _vuKey (\ s a -> s{_vuKey = a})
 
 -- | The ID of the variant to be updated.

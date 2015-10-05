@@ -57,7 +57,7 @@ type DeploymentsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Deployment :> Post '[JSON] Operation
@@ -72,7 +72,7 @@ data DeploymentsInsert' = DeploymentsInsert'
     , _diProject     :: !Text
     , _diUserIP      :: !(Maybe Text)
     , _diPayload     :: !Deployment
-    , _diKey         :: !(Maybe Key)
+    , _diKey         :: !(Maybe AuthKey)
     , _diOAuthToken  :: !(Maybe OAuthToken)
     , _diFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ diPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-diKey :: Lens' DeploymentsInsert' (Maybe Key)
+diKey :: Lens' DeploymentsInsert' (Maybe AuthKey)
 diKey = lens _diKey (\ s a -> s{_diKey = a})
 
 -- | OAuth 2.0 token for the current user.

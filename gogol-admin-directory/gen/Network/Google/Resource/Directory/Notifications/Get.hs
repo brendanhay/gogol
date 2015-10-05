@@ -57,7 +57,7 @@ type NotificationsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Notification
 
@@ -69,7 +69,7 @@ data NotificationsGet' = NotificationsGet'
     , _ngPrettyPrint    :: !Bool
     , _ngUserIP         :: !(Maybe Text)
     , _ngCustomer       :: !Text
-    , _ngKey            :: !(Maybe Key)
+    , _ngKey            :: !(Maybe AuthKey)
     , _ngNotificationId :: !Text
     , _ngOAuthToken     :: !(Maybe OAuthToken)
     , _ngFields         :: !(Maybe Text)
@@ -137,7 +137,7 @@ ngCustomer
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ngKey :: Lens' NotificationsGet' (Maybe Key)
+ngKey :: Lens' NotificationsGet' (Maybe AuthKey)
 ngKey = lens _ngKey (\ s a -> s{_ngKey = a})
 
 -- | The unique ID of the notification.

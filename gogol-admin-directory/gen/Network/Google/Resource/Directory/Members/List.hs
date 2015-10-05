@@ -61,7 +61,7 @@ type MembersListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Members
 
@@ -74,7 +74,7 @@ data MembersList' = MembersList'
     , _mlPrettyPrint :: !Bool
     , _mlUserIP      :: !(Maybe Text)
     , _mlGroupKey    :: !Text
-    , _mlKey         :: !(Maybe Key)
+    , _mlKey         :: !(Maybe AuthKey)
     , _mlPageToken   :: !(Maybe Text)
     , _mlOAuthToken  :: !(Maybe OAuthToken)
     , _mlMaxResults  :: !(Maybe Int32)
@@ -151,7 +151,7 @@ mlGroupKey
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlKey :: Lens' MembersList' (Maybe Key)
+mlKey :: Lens' MembersList' (Maybe AuthKey)
 mlKey = lens _mlKey (\ s a -> s{_mlKey = a})
 
 -- | Token to specify next page in the list

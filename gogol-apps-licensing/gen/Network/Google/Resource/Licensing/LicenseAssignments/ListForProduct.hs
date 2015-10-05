@@ -60,7 +60,7 @@ type LicenseAssignmentsListForProductResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] LicenseAssignmentList
@@ -73,7 +73,7 @@ data LicenseAssignmentsListForProduct' = LicenseAssignmentsListForProduct'
     , _lalfpPrettyPrint :: !Bool
     , _lalfpUserIP      :: !(Maybe Text)
     , _lalfpCustomerId  :: !Text
-    , _lalfpKey         :: !(Maybe Key)
+    , _lalfpKey         :: !(Maybe AuthKey)
     , _lalfpPageToken   :: !Text
     , _lalfpOAuthToken  :: !(Maybe OAuthToken)
     , _lalfpProductId   :: !Text
@@ -152,7 +152,7 @@ lalfpCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lalfpKey :: Lens' LicenseAssignmentsListForProduct' (Maybe Key)
+lalfpKey :: Lens' LicenseAssignmentsListForProduct' (Maybe AuthKey)
 lalfpKey = lens _lalfpKey (\ s a -> s{_lalfpKey = a})
 
 -- | Token to fetch the next page.Optional. By default server will return

@@ -54,7 +54,7 @@ type MarketplaceOrdersGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] MarketplaceOrder
@@ -66,7 +66,7 @@ data MarketplaceOrdersGet' = MarketplaceOrdersGet'
     { _mQuotaUser   :: !(Maybe Text)
     , _mPrettyPrint :: !Bool
     , _mUserIP      :: !(Maybe Text)
-    , _mKey         :: !(Maybe Key)
+    , _mKey         :: !(Maybe AuthKey)
     , _mOAuthToken  :: !(Maybe OAuthToken)
     , _mOrderId     :: !Text
     , _mFields      :: !(Maybe Text)
@@ -123,7 +123,7 @@ mUserIP = lens _mUserIP (\ s a -> s{_mUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mKey :: Lens' MarketplaceOrdersGet' (Maybe Key)
+mKey :: Lens' MarketplaceOrdersGet' (Maybe AuthKey)
 mKey = lens _mKey (\ s a -> s{_mKey = a})
 
 -- | OAuth 2.0 token for the current user.

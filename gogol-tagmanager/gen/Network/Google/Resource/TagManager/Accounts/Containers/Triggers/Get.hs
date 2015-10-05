@@ -60,7 +60,7 @@ type AccountsContainersTriggersGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Trigger
 
@@ -74,7 +74,7 @@ data AccountsContainersTriggersGet' = AccountsContainersTriggersGet'
     , _actgTriggerId   :: !Text
     , _actgUserIP      :: !(Maybe Text)
     , _actgAccountId   :: !Text
-    , _actgKey         :: !(Maybe Key)
+    , _actgKey         :: !(Maybe AuthKey)
     , _actgOAuthToken  :: !(Maybe OAuthToken)
     , _actgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -159,7 +159,7 @@ actgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-actgKey :: Lens' AccountsContainersTriggersGet' (Maybe Key)
+actgKey :: Lens' AccountsContainersTriggersGet' (Maybe AuthKey)
 actgKey = lens _actgKey (\ s a -> s{_actgKey = a})
 
 -- | OAuth 2.0 token for the current user.

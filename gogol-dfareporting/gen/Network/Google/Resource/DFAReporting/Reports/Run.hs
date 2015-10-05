@@ -60,7 +60,7 @@ type ReportsRunResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] File
 
@@ -74,7 +74,7 @@ data ReportsRun' = ReportsRun'
     , _rrUserIP      :: !(Maybe Text)
     , _rrReportId    :: !Int64
     , _rrProFileId   :: !Int64
-    , _rrKey         :: !(Maybe Key)
+    , _rrKey         :: !(Maybe AuthKey)
     , _rrOAuthToken  :: !(Maybe OAuthToken)
     , _rrFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -154,7 +154,7 @@ rrProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rrKey :: Lens' ReportsRun' (Maybe Key)
+rrKey :: Lens' ReportsRun' (Maybe AuthKey)
 rrKey = lens _rrKey (\ s a -> s{_rrKey = a})
 
 -- | OAuth 2.0 token for the current user.

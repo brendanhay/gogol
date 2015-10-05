@@ -58,7 +58,7 @@ type ChangesCreateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Change :> Post '[JSON] Change
@@ -72,7 +72,7 @@ data ChangesCreate' = ChangesCreate'
     , _ccProject     :: !Text
     , _ccUserIP      :: !(Maybe Text)
     , _ccPayload     :: !Change
-    , _ccKey         :: !(Maybe Key)
+    , _ccKey         :: !(Maybe AuthKey)
     , _ccOAuthToken  :: !(Maybe OAuthToken)
     , _ccManagedZone :: !Text
     , _ccFields      :: !(Maybe Text)
@@ -148,7 +148,7 @@ ccPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccKey :: Lens' ChangesCreate' (Maybe Key)
+ccKey :: Lens' ChangesCreate' (Maybe AuthKey)
 ccKey = lens _ccKey (\ s a -> s{_ccKey = a})
 
 -- | OAuth 2.0 token for the current user.

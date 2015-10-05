@@ -64,7 +64,7 @@ type ZoneOperationsListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] OperationList
@@ -79,7 +79,7 @@ data ZoneOperationsList' = ZoneOperationsList'
     , _zolProject     :: !Text
     , _zolUserIP      :: !(Maybe Text)
     , _zolZone        :: !Text
-    , _zolKey         :: !(Maybe Key)
+    , _zolKey         :: !(Maybe AuthKey)
     , _zolFilter      :: !(Maybe Text)
     , _zolPageToken   :: !(Maybe Text)
     , _zolOAuthToken  :: !(Maybe OAuthToken)
@@ -162,7 +162,7 @@ zolZone = lens _zolZone (\ s a -> s{_zolZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-zolKey :: Lens' ZoneOperationsList' (Maybe Key)
+zolKey :: Lens' ZoneOperationsList' (Maybe AuthKey)
 zolKey = lens _zolKey (\ s a -> s{_zolKey = a})
 
 -- | Optional. Filter expression for filtering listed resources.

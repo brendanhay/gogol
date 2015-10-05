@@ -59,7 +59,7 @@ type TablePatchResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Table :> Patch '[JSON] Table
@@ -75,7 +75,7 @@ data TablePatch' = TablePatch'
     , _tppUserIP                :: !(Maybe Text)
     , _tppPayload               :: !Table
     , _tppReplaceViewDefinition :: !(Maybe Bool)
-    , _tppKey                   :: !(Maybe Key)
+    , _tppKey                   :: !(Maybe AuthKey)
     , _tppOAuthToken            :: !(Maybe OAuthToken)
     , _tppTableId               :: !Text
     , _tppFields                :: !(Maybe Text)
@@ -154,7 +154,7 @@ tppReplaceViewDefinition
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tppKey :: Lens' TablePatch' (Maybe Key)
+tppKey :: Lens' TablePatch' (Maybe AuthKey)
 tppKey = lens _tppKey (\ s a -> s{_tppKey = a})
 
 -- | OAuth 2.0 token for the current user.

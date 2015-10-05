@@ -56,7 +56,7 @@ type EventTagsUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] EventTag :> Put '[JSON] EventTag
@@ -70,7 +70,7 @@ data EventTagsUpdate' = EventTagsUpdate'
     , _etuUserIP      :: !(Maybe Text)
     , _etuProFileId   :: !Int64
     , _etuPayload     :: !EventTag
-    , _etuKey         :: !(Maybe Key)
+    , _etuKey         :: !(Maybe AuthKey)
     , _etuOAuthToken  :: !(Maybe OAuthToken)
     , _etuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,7 +142,7 @@ etuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-etuKey :: Lens' EventTagsUpdate' (Maybe Key)
+etuKey :: Lens' EventTagsUpdate' (Maybe AuthKey)
 etuKey = lens _etuKey (\ s a -> s{_etuKey = a})
 
 -- | OAuth 2.0 token for the current user.

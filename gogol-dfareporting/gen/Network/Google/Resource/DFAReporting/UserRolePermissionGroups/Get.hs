@@ -57,7 +57,7 @@ type UserRolePermissionGroupsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] UserRolePermissionGroup
@@ -70,7 +70,7 @@ data UserRolePermissionGroupsGet' = UserRolePermissionGroupsGet'
     , _urpggPrettyPrint :: !Bool
     , _urpggUserIP      :: !(Maybe Text)
     , _urpggProFileId   :: !Int64
-    , _urpggKey         :: !(Maybe Key)
+    , _urpggKey         :: !(Maybe AuthKey)
     , _urpggId          :: !Int64
     , _urpggOAuthToken  :: !(Maybe OAuthToken)
     , _urpggFields      :: !(Maybe Text)
@@ -140,7 +140,7 @@ urpggProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-urpggKey :: Lens' UserRolePermissionGroupsGet' (Maybe Key)
+urpggKey :: Lens' UserRolePermissionGroupsGet' (Maybe AuthKey)
 urpggKey = lens _urpggKey (\ s a -> s{_urpggKey = a})
 
 -- | User role permission group ID.

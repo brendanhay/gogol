@@ -59,7 +59,7 @@ type TargetInstancesInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] TargetInstance :>
@@ -76,7 +76,7 @@ data TargetInstancesInsert' = TargetInstancesInsert'
     , _tiiUserIP      :: !(Maybe Text)
     , _tiiZone        :: !Text
     , _tiiPayload     :: !TargetInstance
-    , _tiiKey         :: !(Maybe Key)
+    , _tiiKey         :: !(Maybe AuthKey)
     , _tiiOAuthToken  :: !(Maybe OAuthToken)
     , _tiiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -156,7 +156,7 @@ tiiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tiiKey :: Lens' TargetInstancesInsert' (Maybe Key)
+tiiKey :: Lens' TargetInstancesInsert' (Maybe AuthKey)
 tiiKey = lens _tiiKey (\ s a -> s{_tiiKey = a})
 
 -- | OAuth 2.0 token for the current user.

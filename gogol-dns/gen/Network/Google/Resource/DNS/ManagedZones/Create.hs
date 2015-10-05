@@ -55,7 +55,7 @@ type ManagedZonesCreateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] ManagedZone :>
@@ -70,7 +70,7 @@ data ManagedZonesCreate' = ManagedZonesCreate'
     , _mzcProject     :: !Text
     , _mzcUserIP      :: !(Maybe Text)
     , _mzcPayload     :: !ManagedZone
-    , _mzcKey         :: !(Maybe Key)
+    , _mzcKey         :: !(Maybe AuthKey)
     , _mzcOAuthToken  :: !(Maybe OAuthToken)
     , _mzcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,7 +142,7 @@ mzcPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mzcKey :: Lens' ManagedZonesCreate' (Maybe Key)
+mzcKey :: Lens' ManagedZonesCreate' (Maybe AuthKey)
 mzcKey = lens _mzcKey (\ s a -> s{_mzcKey = a})
 
 -- | OAuth 2.0 token for the current user.

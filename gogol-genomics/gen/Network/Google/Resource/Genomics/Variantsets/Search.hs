@@ -55,7 +55,7 @@ type VariantsetsSearchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] SearchVariantSetsRequest :>
@@ -70,7 +70,7 @@ data VariantsetsSearch' = VariantsetsSearch'
     , _vPrettyPrint :: !Bool
     , _vUserIP      :: !(Maybe Text)
     , _vPayload     :: !SearchVariantSetsRequest
-    , _vKey         :: !(Maybe Key)
+    , _vKey         :: !(Maybe AuthKey)
     , _vOAuthToken  :: !(Maybe OAuthToken)
     , _vFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -130,7 +130,7 @@ vPayload = lens _vPayload (\ s a -> s{_vPayload = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vKey :: Lens' VariantsetsSearch' (Maybe Key)
+vKey :: Lens' VariantsetsSearch' (Maybe AuthKey)
 vKey = lens _vKey (\ s a -> s{_vKey = a})
 
 -- | OAuth 2.0 token for the current user.

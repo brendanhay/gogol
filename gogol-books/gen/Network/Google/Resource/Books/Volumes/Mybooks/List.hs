@@ -69,7 +69,7 @@ type VolumesMybooksListResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
@@ -83,7 +83,7 @@ data VolumesMybooksList' = VolumesMybooksList'
     , _vmlPrettyPrint     :: !Bool
     , _vmlUserIP          :: !(Maybe Text)
     , _vmlLocale          :: !(Maybe Text)
-    , _vmlKey             :: !(Maybe Key)
+    , _vmlKey             :: !(Maybe AuthKey)
     , _vmlSource          :: !(Maybe Text)
     , _vmlOAuthToken      :: !(Maybe OAuthToken)
     , _vmlStartIndex      :: !(Maybe Word32)
@@ -181,7 +181,7 @@ vmlLocale
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vmlKey :: Lens' VolumesMybooksList' (Maybe Key)
+vmlKey :: Lens' VolumesMybooksList' (Maybe AuthKey)
 vmlKey = lens _vmlKey (\ s a -> s{_vmlKey = a})
 
 -- | String to identify the originator of this request.

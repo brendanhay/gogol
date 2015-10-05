@@ -72,7 +72,7 @@ type AccountsExperienceLocalesGetResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ExperienceLocale
@@ -93,7 +93,7 @@ data AccountsExperienceLocalesGet' = AccountsExperienceLocalesGet'
     , _aelgElId           :: !Text
     , _aelgAccountId      :: !Text
     , _aelgBearerToken    :: !(Maybe Text)
-    , _aelgKey            :: !(Maybe Key)
+    , _aelgKey            :: !(Maybe AuthKey)
     , _aelgOAuthToken     :: !(Maybe OAuthToken)
     , _aelgFields         :: !(Maybe Text)
     , _aelgCallback       :: !(Maybe Text)
@@ -212,7 +212,7 @@ aelgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aelgKey :: Lens' AccountsExperienceLocalesGet' (Maybe Key)
+aelgKey :: Lens' AccountsExperienceLocalesGet' (Maybe AuthKey)
 aelgKey = lens _aelgKey (\ s a -> s{_aelgKey = a})
 
 -- | OAuth 2.0 token for the current user.

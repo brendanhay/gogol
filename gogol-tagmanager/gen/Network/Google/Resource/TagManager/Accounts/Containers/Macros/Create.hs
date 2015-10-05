@@ -59,7 +59,7 @@ type AccountsContainersMacrosCreateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Macro :> Post '[JSON] Macro
@@ -74,7 +74,7 @@ data AccountsContainersMacrosCreate' = AccountsContainersMacrosCreate'
     , _acmcUserIP      :: !(Maybe Text)
     , _acmcPayload     :: !Macro
     , _acmcAccountId   :: !Text
-    , _acmcKey         :: !(Maybe Key)
+    , _acmcKey         :: !(Maybe AuthKey)
     , _acmcOAuthToken  :: !(Maybe OAuthToken)
     , _acmcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -158,7 +158,7 @@ acmcAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acmcKey :: Lens' AccountsContainersMacrosCreate' (Maybe Key)
+acmcKey :: Lens' AccountsContainersMacrosCreate' (Maybe AuthKey)
 acmcKey = lens _acmcKey (\ s a -> s{_acmcKey = a})
 
 -- | OAuth 2.0 token for the current user.

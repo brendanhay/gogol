@@ -61,7 +61,7 @@ type ForwardingRulesSetTargetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] TargetReference :>
@@ -77,7 +77,7 @@ data ForwardingRulesSetTarget' = ForwardingRulesSetTarget'
     , _frstForwardingRule :: !Text
     , _frstUserIP         :: !(Maybe Text)
     , _frstPayload        :: !TargetReference
-    , _frstKey            :: !(Maybe Key)
+    , _frstKey            :: !(Maybe AuthKey)
     , _frstRegion         :: !Text
     , _frstOAuthToken     :: !(Maybe OAuthToken)
     , _frstFields         :: !(Maybe Text)
@@ -165,7 +165,7 @@ frstPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-frstKey :: Lens' ForwardingRulesSetTarget' (Maybe Key)
+frstKey :: Lens' ForwardingRulesSetTarget' (Maybe AuthKey)
 frstKey = lens _frstKey (\ s a -> s{_frstKey = a})
 
 -- | Name of the region scoping this request.

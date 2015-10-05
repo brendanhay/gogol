@@ -81,7 +81,7 @@ type ProjectsJobsMessagesListResource =
                                          QueryParam "quotaUser" Text :>
                                            QueryParam "prettyPrint" Bool :>
                                              QueryParam "fields" Text :>
-                                               QueryParam "key" Key :>
+                                               QueryParam "key" AuthKey :>
                                                  QueryParam "oauth_token"
                                                    OAuthToken
                                                    :>
@@ -103,7 +103,7 @@ data ProjectsJobsMessagesList' = ProjectsJobsMessagesList'
     , _pjmlAccessToken       :: !(Maybe Text)
     , _pjmlUploadType        :: !(Maybe Text)
     , _pjmlBearerToken       :: !(Maybe Text)
-    , _pjmlKey               :: !(Maybe Key)
+    , _pjmlKey               :: !(Maybe AuthKey)
     , _pjmlEndTime           :: !(Maybe Text)
     , _pjmlMinimumImportance :: !(Maybe Text)
     , _pjmlPageToken         :: !(Maybe Text)
@@ -244,7 +244,7 @@ pjmlBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pjmlKey :: Lens' ProjectsJobsMessagesList' (Maybe Key)
+pjmlKey :: Lens' ProjectsJobsMessagesList' (Maybe AuthKey)
 pjmlKey = lens _pjmlKey (\ s a -> s{_pjmlKey = a})
 
 -- | Return only messages with timestamps \< end_time. The default is now

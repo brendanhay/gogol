@@ -64,7 +64,7 @@ type UsersThreadsListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ListThreadsResponse
@@ -78,7 +78,7 @@ data UsersThreadsList' = UsersThreadsList'
     , _utlUserIP           :: !(Maybe Text)
     , _utlQ                :: !(Maybe Text)
     , _utlUserId           :: !Text
-    , _utlKey              :: !(Maybe Key)
+    , _utlKey              :: !(Maybe AuthKey)
     , _utlIncludeSpamTrash :: !Bool
     , _utlLabelIds         :: !(Maybe [Text])
     , _utlPageToken        :: !(Maybe Text)
@@ -167,7 +167,7 @@ utlUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-utlKey :: Lens' UsersThreadsList' (Maybe Key)
+utlKey :: Lens' UsersThreadsList' (Maybe AuthKey)
 utlKey = lens _utlKey (\ s a -> s{_utlKey = a})
 
 -- | Include threads from SPAM and TRASH in the results.

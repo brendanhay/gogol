@@ -57,7 +57,7 @@ type CampaignsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Campaign
 
@@ -69,7 +69,7 @@ data CampaignsGet' = CampaignsGet'
     , _camaPrettyPrint :: !Bool
     , _camaUserIP      :: !(Maybe Text)
     , _camaProFileId   :: !Int64
-    , _camaKey         :: !(Maybe Key)
+    , _camaKey         :: !(Maybe AuthKey)
     , _camaId          :: !Int64
     , _camaOAuthToken  :: !(Maybe OAuthToken)
     , _camaFields      :: !(Maybe Text)
@@ -139,7 +139,7 @@ camaProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-camaKey :: Lens' CampaignsGet' (Maybe Key)
+camaKey :: Lens' CampaignsGet' (Maybe AuthKey)
 camaKey = lens _camaKey (\ s a -> s{_camaKey = a})
 
 -- | Campaign ID.

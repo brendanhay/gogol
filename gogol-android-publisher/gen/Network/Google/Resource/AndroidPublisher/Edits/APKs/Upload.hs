@@ -58,7 +58,7 @@ type EditsAPKsUploadResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[OctetStream] Body :> Post '[JSON] APK
@@ -71,7 +71,7 @@ data EditsAPKsUpload' = EditsAPKsUpload'
     , _eapkuPackageName :: !Text
     , _eapkuUserIP      :: !(Maybe Text)
     , _eapkuMedia       :: !Body
-    , _eapkuKey         :: !(Maybe Key)
+    , _eapkuKey         :: !(Maybe AuthKey)
     , _eapkuOAuthToken  :: !(Maybe OAuthToken)
     , _eapkuEditId      :: !Text
     , _eapkuFields      :: !(Maybe Text)
@@ -150,7 +150,7 @@ eapkuMedia
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eapkuKey :: Lens' EditsAPKsUpload' (Maybe Key)
+eapkuKey :: Lens' EditsAPKsUpload' (Maybe AuthKey)
 eapkuKey = lens _eapkuKey (\ s a -> s{_eapkuKey = a})
 
 -- | OAuth 2.0 token for the current user.

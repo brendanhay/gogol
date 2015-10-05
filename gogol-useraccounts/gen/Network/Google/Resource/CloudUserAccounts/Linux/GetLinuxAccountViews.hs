@@ -68,7 +68,7 @@ type LinuxGetLinuxAccountViewsResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Post '[JSON]
@@ -85,7 +85,7 @@ data LinuxGetLinuxAccountViews' = LinuxGetLinuxAccountViews'
     , _lglavProject     :: !Text
     , _lglavUserIP      :: !(Maybe Text)
     , _lglavZone        :: !Text
-    , _lglavKey         :: !(Maybe Key)
+    , _lglavKey         :: !(Maybe AuthKey)
     , _lglavFilter      :: !(Maybe Text)
     , _lglavPageToken   :: !(Maybe Text)
     , _lglavOAuthToken  :: !(Maybe OAuthToken)
@@ -190,7 +190,7 @@ lglavZone
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lglavKey :: Lens' LinuxGetLinuxAccountViews' (Maybe Key)
+lglavKey :: Lens' LinuxGetLinuxAccountViews' (Maybe AuthKey)
 lglavKey = lens _lglavKey (\ s a -> s{_lglavKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

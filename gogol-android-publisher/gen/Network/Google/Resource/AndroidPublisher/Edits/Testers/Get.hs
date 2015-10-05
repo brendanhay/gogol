@@ -59,7 +59,7 @@ type EditsTestersGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Testers
 
@@ -71,7 +71,7 @@ data EditsTestersGet' = EditsTestersGet'
     , _etgtPrettyPrint :: !Bool
     , _etgtPackageName :: !Text
     , _etgtUserIP      :: !(Maybe Text)
-    , _etgtKey         :: !(Maybe Key)
+    , _etgtKey         :: !(Maybe AuthKey)
     , _etgtOAuthToken  :: !(Maybe OAuthToken)
     , _etgtEditId      :: !Text
     , _etgtFields      :: !(Maybe Text)
@@ -150,7 +150,7 @@ etgtUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-etgtKey :: Lens' EditsTestersGet' (Maybe Key)
+etgtKey :: Lens' EditsTestersGet' (Maybe AuthKey)
 etgtKey = lens _etgtKey (\ s a -> s{_etgtKey = a})
 
 -- | OAuth 2.0 token for the current user.

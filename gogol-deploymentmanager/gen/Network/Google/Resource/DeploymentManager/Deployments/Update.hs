@@ -71,7 +71,7 @@ type DeploymentsUpdateResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Deployment :>
@@ -90,7 +90,7 @@ data DeploymentsUpdate' = DeploymentsUpdate'
     , _duPayload      :: !Deployment
     , _duUpdatePolicy :: !DeploymentsUpdateUpdatePolicy
     , _duDeletePolicy :: !DeploymentsUpdateDeletePolicy
-    , _duKey          :: !(Maybe Key)
+    , _duKey          :: !(Maybe AuthKey)
     , _duOAuthToken   :: !(Maybe OAuthToken)
     , _duFields       :: !(Maybe Text)
     , _duDeployment   :: !Text
@@ -193,7 +193,7 @@ duDeletePolicy
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-duKey :: Lens' DeploymentsUpdate' (Maybe Key)
+duKey :: Lens' DeploymentsUpdate' (Maybe AuthKey)
 duKey = lens _duKey (\ s a -> s{_duKey = a})
 
 -- | OAuth 2.0 token for the current user.

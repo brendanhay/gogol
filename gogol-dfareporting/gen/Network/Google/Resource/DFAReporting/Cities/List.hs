@@ -63,7 +63,7 @@ type CitiesListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CitiesListResponse
@@ -78,7 +78,7 @@ data CitiesList' = CitiesList'
     , _cUserIP         :: !(Maybe Text)
     , _cProFileId      :: !Int64
     , _cNamePrefix     :: !(Maybe Text)
-    , _cKey            :: !(Maybe Key)
+    , _cKey            :: !(Maybe AuthKey)
     , _cCountryDartIds :: !(Maybe [Int64])
     , _cDartIds        :: !(Maybe [Int64])
     , _cOAuthToken     :: !(Maybe OAuthToken)
@@ -166,7 +166,7 @@ cNamePrefix
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cKey :: Lens' CitiesList' (Maybe Key)
+cKey :: Lens' CitiesList' (Maybe AuthKey)
 cKey = lens _cKey (\ s a -> s{_cKey = a})
 
 -- | Select only cities from these countries.

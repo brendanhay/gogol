@@ -56,7 +56,7 @@ type ScoresResetMultipleForAllPlayersResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] ScoresResetMultipleForAllRequest :>
@@ -72,7 +72,7 @@ data ScoresResetMultipleForAllPlayers' = ScoresResetMultipleForAllPlayers'
     , _srmfapPrettyPrint :: !Bool
     , _srmfapUserIP      :: !(Maybe Text)
     , _srmfapPayload     :: !ScoresResetMultipleForAllRequest
-    , _srmfapKey         :: !(Maybe Key)
+    , _srmfapKey         :: !(Maybe AuthKey)
     , _srmfapOAuthToken  :: !(Maybe OAuthToken)
     , _srmfapFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -137,7 +137,7 @@ srmfapPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-srmfapKey :: Lens' ScoresResetMultipleForAllPlayers' (Maybe Key)
+srmfapKey :: Lens' ScoresResetMultipleForAllPlayers' (Maybe AuthKey)
 srmfapKey
   = lens _srmfapKey (\ s a -> s{_srmfapKey = a})
 

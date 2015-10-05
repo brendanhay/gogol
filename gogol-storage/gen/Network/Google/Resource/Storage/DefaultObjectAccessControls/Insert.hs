@@ -56,7 +56,7 @@ type DefaultObjectAccessControlsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ObjectAccessControl :>
@@ -71,7 +71,7 @@ data DefaultObjectAccessControlsInsert' = DefaultObjectAccessControlsInsert'
     , _doaciUserIP      :: !(Maybe Text)
     , _doaciBucket      :: !Text
     , _doaciPayload     :: !ObjectAccessControl
-    , _doaciKey         :: !(Maybe Key)
+    , _doaciKey         :: !(Maybe AuthKey)
     , _doaciOAuthToken  :: !(Maybe OAuthToken)
     , _doaciFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ doaciPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-doaciKey :: Lens' DefaultObjectAccessControlsInsert' (Maybe Key)
+doaciKey :: Lens' DefaultObjectAccessControlsInsert' (Maybe AuthKey)
 doaciKey = lens _doaciKey (\ s a -> s{_doaciKey = a})
 
 -- | OAuth 2.0 token for the current user.

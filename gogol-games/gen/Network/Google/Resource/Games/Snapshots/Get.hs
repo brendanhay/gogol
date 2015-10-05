@@ -56,7 +56,7 @@ type SnapshotsGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Snapshot
 
@@ -67,7 +67,7 @@ data SnapshotsGet' = SnapshotsGet'
     { _sQuotaUser   :: !(Maybe Text)
     , _sPrettyPrint :: !Bool
     , _sUserIP      :: !(Maybe Text)
-    , _sKey         :: !(Maybe Key)
+    , _sKey         :: !(Maybe AuthKey)
     , _sLanguage    :: !(Maybe Text)
     , _sOAuthToken  :: !(Maybe OAuthToken)
     , _sFields      :: !(Maybe Text)
@@ -128,7 +128,7 @@ sUserIP = lens _sUserIP (\ s a -> s{_sUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sKey :: Lens' SnapshotsGet' (Maybe Key)
+sKey :: Lens' SnapshotsGet' (Maybe AuthKey)
 sKey = lens _sKey (\ s a -> s{_sKey = a})
 
 -- | The preferred language to use for strings returned by this method.

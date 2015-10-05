@@ -54,7 +54,7 @@ type ReferencesGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Reference
 
@@ -66,7 +66,7 @@ data ReferencesGet' = ReferencesGet'
     , _rggPrettyPrint :: !Bool
     , _rggUserIP      :: !(Maybe Text)
     , _rggReferenceId :: !Text
-    , _rggKey         :: !(Maybe Key)
+    , _rggKey         :: !(Maybe AuthKey)
     , _rggOAuthToken  :: !(Maybe OAuthToken)
     , _rggFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -130,7 +130,7 @@ rggReferenceId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rggKey :: Lens' ReferencesGet' (Maybe Key)
+rggKey :: Lens' ReferencesGet' (Maybe AuthKey)
 rggKey = lens _rggKey (\ s a -> s{_rggKey = a})
 
 -- | OAuth 2.0 token for the current user.

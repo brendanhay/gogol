@@ -55,7 +55,7 @@ type TurnBasedMatchesCancelResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Put '[JSON] ()
 
@@ -66,7 +66,7 @@ data TurnBasedMatchesCancel' = TurnBasedMatchesCancel'
     { _tbmcQuotaUser   :: !(Maybe Text)
     , _tbmcPrettyPrint :: !Bool
     , _tbmcUserIP      :: !(Maybe Text)
-    , _tbmcKey         :: !(Maybe Key)
+    , _tbmcKey         :: !(Maybe AuthKey)
     , _tbmcOAuthToken  :: !(Maybe OAuthToken)
     , _tbmcMatchId     :: !Text
     , _tbmcFields      :: !(Maybe Text)
@@ -126,7 +126,7 @@ tbmcUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tbmcKey :: Lens' TurnBasedMatchesCancel' (Maybe Key)
+tbmcKey :: Lens' TurnBasedMatchesCancel' (Maybe AuthKey)
 tbmcKey = lens _tbmcKey (\ s a -> s{_tbmcKey = a})
 
 -- | OAuth 2.0 token for the current user.

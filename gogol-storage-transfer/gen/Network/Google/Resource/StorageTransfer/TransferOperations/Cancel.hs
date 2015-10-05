@@ -67,7 +67,7 @@ type TransferOperationsCancelResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
@@ -84,7 +84,7 @@ data TransferOperationsCancel' = TransferOperationsCancel'
     , _tocAccessToken    :: !(Maybe Text)
     , _tocUploadType     :: !(Maybe Text)
     , _tocBearerToken    :: !(Maybe Text)
-    , _tocKey            :: !(Maybe Key)
+    , _tocKey            :: !(Maybe AuthKey)
     , _tocName           :: !Text
     , _tocOAuthToken     :: !(Maybe OAuthToken)
     , _tocFields         :: !(Maybe Text)
@@ -188,7 +188,7 @@ tocBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tocKey :: Lens' TransferOperationsCancel' (Maybe Key)
+tocKey :: Lens' TransferOperationsCancel' (Maybe AuthKey)
 tocKey = lens _tocKey (\ s a -> s{_tocKey = a})
 
 -- | The name of the operation resource to be cancelled.

@@ -57,7 +57,7 @@ type PlacementStrategiesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] PlacementStrategy
@@ -70,7 +70,7 @@ data PlacementStrategiesGet' = PlacementStrategiesGet'
     , _psgPrettyPrint :: !Bool
     , _psgUserIP      :: !(Maybe Text)
     , _psgProFileId   :: !Int64
-    , _psgKey         :: !(Maybe Key)
+    , _psgKey         :: !(Maybe AuthKey)
     , _psgId          :: !Int64
     , _psgOAuthToken  :: !(Maybe OAuthToken)
     , _psgFields      :: !(Maybe Text)
@@ -138,7 +138,7 @@ psgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psgKey :: Lens' PlacementStrategiesGet' (Maybe Key)
+psgKey :: Lens' PlacementStrategiesGet' (Maybe AuthKey)
 psgKey = lens _psgKey (\ s a -> s{_psgKey = a})
 
 -- | Placement strategy ID.

@@ -56,7 +56,7 @@ type TurnBasedMatchesCreateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] TurnBasedMatchCreateRequest :>
@@ -70,7 +70,7 @@ data TurnBasedMatchesCreate' = TurnBasedMatchesCreate'
     , _turPrettyPrint :: !Bool
     , _turUserIP      :: !(Maybe Text)
     , _turPayload     :: !TurnBasedMatchCreateRequest
-    , _turKey         :: !(Maybe Key)
+    , _turKey         :: !(Maybe AuthKey)
     , _turLanguage    :: !(Maybe Text)
     , _turOAuthToken  :: !(Maybe OAuthToken)
     , _turFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ turPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-turKey :: Lens' TurnBasedMatchesCreate' (Maybe Key)
+turKey :: Lens' TurnBasedMatchesCreate' (Maybe AuthKey)
 turKey = lens _turKey (\ s a -> s{_turKey = a})
 
 -- | The preferred language to use for strings returned by this method.

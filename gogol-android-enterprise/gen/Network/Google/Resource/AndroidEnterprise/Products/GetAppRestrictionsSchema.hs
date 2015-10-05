@@ -62,7 +62,7 @@ type ProductsGetAppRestrictionsSchemaResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] AppRestrictionsSchema
@@ -77,7 +77,7 @@ data ProductsGetAppRestrictionsSchema' = ProductsGetAppRestrictionsSchema'
     , _pgarsPrettyPrint  :: !Bool
     , _pgarsEnterpriseId :: !Text
     , _pgarsUserIP       :: !(Maybe Text)
-    , _pgarsKey          :: !(Maybe Key)
+    , _pgarsKey          :: !(Maybe AuthKey)
     , _pgarsLanguage     :: !(Maybe Text)
     , _pgarsOAuthToken   :: !(Maybe OAuthToken)
     , _pgarsProductId    :: !Text
@@ -151,7 +151,7 @@ pgarsUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgarsKey :: Lens' ProductsGetAppRestrictionsSchema' (Maybe Key)
+pgarsKey :: Lens' ProductsGetAppRestrictionsSchema' (Maybe AuthKey)
 pgarsKey = lens _pgarsKey (\ s a -> s{_pgarsKey = a})
 
 -- | The BCP47 tag for the user\'s preferred language (e.g. \"en-US\",

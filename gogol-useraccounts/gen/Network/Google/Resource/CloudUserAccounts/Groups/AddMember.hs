@@ -59,7 +59,7 @@ type GroupsAddMemberResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] GroupsAddMemberRequest :>
@@ -74,7 +74,7 @@ data GroupsAddMember' = GroupsAddMember'
     , _gamProject     :: !Text
     , _gamUserIP      :: !(Maybe Text)
     , _gamPayload     :: !GroupsAddMemberRequest
-    , _gamKey         :: !(Maybe Key)
+    , _gamKey         :: !(Maybe AuthKey)
     , _gamGroupName   :: !Text
     , _gamOAuthToken  :: !(Maybe OAuthToken)
     , _gamFields      :: !(Maybe Text)
@@ -151,7 +151,7 @@ gamPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gamKey :: Lens' GroupsAddMember' (Maybe Key)
+gamKey :: Lens' GroupsAddMember' (Maybe AuthKey)
 gamKey = lens _gamKey (\ s a -> s{_gamKey = a})
 
 -- | Name of the group for this request.

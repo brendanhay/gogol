@@ -56,7 +56,7 @@ type MapsGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Map
 
@@ -67,7 +67,7 @@ data MapsGet' = MapsGet'
     { _mgQuotaUser   :: !(Maybe Text)
     , _mgPrettyPrint :: !Bool
     , _mgUserIP      :: !(Maybe Text)
-    , _mgKey         :: !(Maybe Key)
+    , _mgKey         :: !(Maybe AuthKey)
     , _mgVersion     :: !(Maybe MapsGetVersion)
     , _mgId          :: !Text
     , _mgOAuthToken  :: !(Maybe OAuthToken)
@@ -129,7 +129,7 @@ mgUserIP = lens _mgUserIP (\ s a -> s{_mgUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mgKey :: Lens' MapsGet' (Maybe Key)
+mgKey :: Lens' MapsGet' (Maybe AuthKey)
 mgKey = lens _mgKey (\ s a -> s{_mgKey = a})
 
 -- | Deprecated: The version parameter indicates which version of the map

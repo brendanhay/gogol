@@ -56,7 +56,7 @@ type ContentCategoriesUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ContentCategory :>
@@ -71,7 +71,7 @@ data ContentCategoriesUpdate' = ContentCategoriesUpdate'
     , _ccuUserIP      :: !(Maybe Text)
     , _ccuProFileId   :: !Int64
     , _ccuPayload     :: !ContentCategory
-    , _ccuKey         :: !(Maybe Key)
+    , _ccuKey         :: !(Maybe AuthKey)
     , _ccuOAuthToken  :: !(Maybe OAuthToken)
     , _ccuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ ccuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccuKey :: Lens' ContentCategoriesUpdate' (Maybe Key)
+ccuKey :: Lens' ContentCategoriesUpdate' (Maybe AuthKey)
 ccuKey = lens _ccuKey (\ s a -> s{_ccuKey = a})
 
 -- | OAuth 2.0 token for the current user.

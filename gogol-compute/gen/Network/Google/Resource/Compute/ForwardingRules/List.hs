@@ -64,7 +64,7 @@ type ForwardingRulesListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ForwardingRuleList
@@ -78,7 +78,7 @@ data ForwardingRulesList' = ForwardingRulesList'
     , _frlPrettyPrint :: !Bool
     , _frlProject     :: !Text
     , _frlUserIP      :: !(Maybe Text)
-    , _frlKey         :: !(Maybe Key)
+    , _frlKey         :: !(Maybe AuthKey)
     , _frlFilter      :: !(Maybe Text)
     , _frlRegion      :: !Text
     , _frlPageToken   :: !(Maybe Text)
@@ -158,7 +158,7 @@ frlUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-frlKey :: Lens' ForwardingRulesList' (Maybe Key)
+frlKey :: Lens' ForwardingRulesList' (Maybe AuthKey)
 frlKey = lens _frlKey (\ s a -> s{_frlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

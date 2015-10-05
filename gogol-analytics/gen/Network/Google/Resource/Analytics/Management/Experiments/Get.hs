@@ -64,7 +64,7 @@ type ManagementExperimentsGetResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] Experiment
@@ -80,7 +80,7 @@ data ManagementExperimentsGet' = ManagementExperimentsGet'
     , _megProFileId     :: !Text
     , _megAccountId     :: !Text
     , _megExperimentId  :: !Text
-    , _megKey           :: !(Maybe Key)
+    , _megKey           :: !(Maybe AuthKey)
     , _megOAuthToken    :: !(Maybe OAuthToken)
     , _megFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -172,7 +172,7 @@ megExperimentId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-megKey :: Lens' ManagementExperimentsGet' (Maybe Key)
+megKey :: Lens' ManagementExperimentsGet' (Maybe AuthKey)
 megKey = lens _megKey (\ s a -> s{_megKey = a})
 
 -- | OAuth 2.0 token for the current user.

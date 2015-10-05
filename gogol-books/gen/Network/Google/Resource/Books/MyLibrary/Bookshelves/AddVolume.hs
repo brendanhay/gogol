@@ -64,7 +64,7 @@ type MyLibraryBookshelvesAddVolumeResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -77,7 +77,7 @@ data MyLibraryBookshelvesAddVolume' = MyLibraryBookshelvesAddVolume'
     , _mlbavUserIP      :: !(Maybe Text)
     , _mlbavReason      :: !(Maybe MyLibraryBookshelvesAddVolumeReason)
     , _mlbavShelf       :: !Text
-    , _mlbavKey         :: !(Maybe Key)
+    , _mlbavKey         :: !(Maybe AuthKey)
     , _mlbavVolumeId    :: !Text
     , _mlbavSource      :: !(Maybe Text)
     , _mlbavOAuthToken  :: !(Maybe OAuthToken)
@@ -158,7 +158,7 @@ mlbavShelf
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlbavKey :: Lens' MyLibraryBookshelvesAddVolume' (Maybe Key)
+mlbavKey :: Lens' MyLibraryBookshelvesAddVolume' (Maybe AuthKey)
 mlbavKey = lens _mlbavKey (\ s a -> s{_mlbavKey = a})
 
 -- | ID of volume to add.

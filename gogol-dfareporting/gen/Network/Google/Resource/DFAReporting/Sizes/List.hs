@@ -63,7 +63,7 @@ type SizesListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] SizesListResponse
@@ -79,7 +79,7 @@ data SizesList' = SizesList'
     , _slIds         :: !(Maybe [Int64])
     , _slWidth       :: !(Maybe Int32)
     , _slProFileId   :: !Int64
-    , _slKey         :: !(Maybe Key)
+    , _slKey         :: !(Maybe AuthKey)
     , _slOAuthToken  :: !(Maybe OAuthToken)
     , _slIabStandard :: !(Maybe Bool)
     , _slFields      :: !(Maybe Text)
@@ -168,7 +168,7 @@ slProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-slKey :: Lens' SizesList' (Maybe Key)
+slKey :: Lens' SizesList' (Maybe AuthKey)
 slKey = lens _slKey (\ s a -> s{_slKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -60,7 +60,7 @@ type ManagementCustomDimensionsInsertResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] CustomDimension :>
@@ -76,7 +76,7 @@ data ManagementCustomDimensionsInsert' = ManagementCustomDimensionsInsert'
     , _mcdiUserIP        :: !(Maybe Text)
     , _mcdiPayload       :: !CustomDimension
     , _mcdiAccountId     :: !Text
-    , _mcdiKey           :: !(Maybe Key)
+    , _mcdiKey           :: !(Maybe AuthKey)
     , _mcdiOAuthToken    :: !(Maybe OAuthToken)
     , _mcdiFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -160,7 +160,7 @@ mcdiAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcdiKey :: Lens' ManagementCustomDimensionsInsert' (Maybe Key)
+mcdiKey :: Lens' ManagementCustomDimensionsInsert' (Maybe AuthKey)
 mcdiKey = lens _mcdiKey (\ s a -> s{_mcdiKey = a})
 
 -- | OAuth 2.0 token for the current user.

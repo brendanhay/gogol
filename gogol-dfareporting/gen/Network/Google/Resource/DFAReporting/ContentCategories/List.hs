@@ -69,7 +69,7 @@ type ContentCategoriesListResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] ContentCategoriesListResponse
@@ -85,7 +85,7 @@ data ContentCategoriesList' = ContentCategoriesList'
     , _cclIds          :: !(Maybe [Int64])
     , _cclProFileId    :: !Int64
     , _cclSortOrder    :: !(Maybe ContentCategoriesListSortOrder)
-    , _cclKey          :: !(Maybe Key)
+    , _cclKey          :: !(Maybe AuthKey)
     , _cclPageToken    :: !(Maybe Text)
     , _cclSortField    :: !(Maybe ContentCategoriesListSortField)
     , _cclOAuthToken   :: !(Maybe OAuthToken)
@@ -193,7 +193,7 @@ cclSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cclKey :: Lens' ContentCategoriesList' (Maybe Key)
+cclKey :: Lens' ContentCategoriesList' (Maybe AuthKey)
 cclKey = lens _cclKey (\ s a -> s{_cclKey = a})
 
 -- | Value of the nextPageToken from the previous result page.

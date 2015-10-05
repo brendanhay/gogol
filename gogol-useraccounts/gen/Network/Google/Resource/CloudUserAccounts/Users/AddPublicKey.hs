@@ -60,7 +60,7 @@ type UsersAddPublicKeyResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] PublicKey :> Post '[JSON] Operation
@@ -76,7 +76,7 @@ data UsersAddPublicKey' = UsersAddPublicKey'
     , _uapkUserIP      :: !(Maybe Text)
     , _uapkPayload     :: !PublicKey
     , _uapkUser        :: !Text
-    , _uapkKey         :: !(Maybe Key)
+    , _uapkKey         :: !(Maybe AuthKey)
     , _uapkOAuthToken  :: !(Maybe OAuthToken)
     , _uapkFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -157,7 +157,7 @@ uapkUser = lens _uapkUser (\ s a -> s{_uapkUser = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uapkKey :: Lens' UsersAddPublicKey' (Maybe Key)
+uapkKey :: Lens' UsersAddPublicKey' (Maybe AuthKey)
 uapkKey = lens _uapkKey (\ s a -> s{_uapkKey = a})
 
 -- | OAuth 2.0 token for the current user.

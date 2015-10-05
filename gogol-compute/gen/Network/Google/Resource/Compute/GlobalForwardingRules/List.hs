@@ -62,7 +62,7 @@ type GlobalForwardingRulesListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ForwardingRuleList
@@ -76,7 +76,7 @@ data GlobalForwardingRulesList' = GlobalForwardingRulesList'
     , _gfrlPrettyPrint :: !Bool
     , _gfrlProject     :: !Text
     , _gfrlUserIP      :: !(Maybe Text)
-    , _gfrlKey         :: !(Maybe Key)
+    , _gfrlKey         :: !(Maybe AuthKey)
     , _gfrlFilter      :: !(Maybe Text)
     , _gfrlPageToken   :: !(Maybe Text)
     , _gfrlOAuthToken  :: !(Maybe OAuthToken)
@@ -152,7 +152,7 @@ gfrlUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gfrlKey :: Lens' GlobalForwardingRulesList' (Maybe Key)
+gfrlKey :: Lens' GlobalForwardingRulesList' (Maybe AuthKey)
 gfrlKey = lens _gfrlKey (\ s a -> s{_gfrlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

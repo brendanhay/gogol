@@ -59,7 +59,7 @@ type StatesClearResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] WriteResult
 
@@ -74,7 +74,7 @@ data StatesClear' = StatesClear'
     , _scUserIP             :: !(Maybe Text)
     , _scStateKey           :: !Int32
     , _scCurrentDataVersion :: !(Maybe Text)
-    , _scKey                :: !(Maybe Key)
+    , _scKey                :: !(Maybe AuthKey)
     , _scOAuthToken         :: !(Maybe OAuthToken)
     , _scFields             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -146,7 +146,7 @@ scCurrentDataVersion
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-scKey :: Lens' StatesClear' (Maybe Key)
+scKey :: Lens' StatesClear' (Maybe AuthKey)
 scKey = lens _scKey (\ s a -> s{_scKey = a})
 
 -- | OAuth 2.0 token for the current user.

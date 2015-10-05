@@ -75,7 +75,7 @@ type BeaconsDiagnosticsListResource =
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListDiagnosticsResponse
@@ -95,7 +95,7 @@ data BeaconsDiagnosticsList' = BeaconsDiagnosticsList'
     , _bdlBeaconName     :: !Text
     , _bdlUploadType     :: !(Maybe Text)
     , _bdlBearerToken    :: !(Maybe Text)
-    , _bdlKey            :: !(Maybe Key)
+    , _bdlKey            :: !(Maybe AuthKey)
     , _bdlPageToken      :: !(Maybe Text)
     , _bdlOAuthToken     :: !(Maybe OAuthToken)
     , _bdlPageSize       :: !(Maybe Int32)
@@ -216,7 +216,7 @@ bdlBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bdlKey :: Lens' BeaconsDiagnosticsList' (Maybe Key)
+bdlKey :: Lens' BeaconsDiagnosticsList' (Maybe AuthKey)
 bdlKey = lens _bdlKey (\ s a -> s{_bdlKey = a})
 
 -- | Requests results that occur after the \`page_token\`, obtained from the

@@ -59,7 +59,7 @@ type LayersListPublishedResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] PublishedLayersListResponse
@@ -71,7 +71,7 @@ data LayersListPublished' = LayersListPublished'
     { _llpQuotaUser   :: !(Maybe Text)
     , _llpPrettyPrint :: !Bool
     , _llpUserIP      :: !(Maybe Text)
-    , _llpKey         :: !(Maybe Key)
+    , _llpKey         :: !(Maybe AuthKey)
     , _llpPageToken   :: !(Maybe Text)
     , _llpProjectId   :: !(Maybe Text)
     , _llpOAuthToken  :: !(Maybe OAuthToken)
@@ -137,7 +137,7 @@ llpUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-llpKey :: Lens' LayersListPublished' (Maybe Key)
+llpKey :: Lens' LayersListPublished' (Maybe AuthKey)
 llpKey = lens _llpKey (\ s a -> s{_llpKey = a})
 
 -- | The continuation token, used to page through large result sets. To get

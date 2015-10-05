@@ -63,7 +63,7 @@ type AccountsContainersVersionsPublishResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Post '[JSON] PublishContainerVersionResponse
@@ -79,7 +79,7 @@ data AccountsContainersVersionsPublish' = AccountsContainersVersionsPublish'
     , _acvpFingerprint        :: !(Maybe Text)
     , _acvpContainerVersionId :: !Text
     , _acvpAccountId          :: !Text
-    , _acvpKey                :: !(Maybe Key)
+    , _acvpKey                :: !(Maybe AuthKey)
     , _acvpOAuthToken         :: !(Maybe OAuthToken)
     , _acvpFields             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -174,7 +174,7 @@ acvpAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acvpKey :: Lens' AccountsContainersVersionsPublish' (Maybe Key)
+acvpKey :: Lens' AccountsContainersVersionsPublish' (Maybe AuthKey)
 acvpKey = lens _acvpKey (\ s a -> s{_acvpKey = a})
 
 -- | OAuth 2.0 token for the current user.

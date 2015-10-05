@@ -59,7 +59,7 @@ type MembersPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Member :> Patch '[JSON] Member
@@ -75,7 +75,7 @@ data MembersPatch' = MembersPatch'
     , _mpUserIP      :: !(Maybe Text)
     , _mpGroupKey    :: !Text
     , _mpPayload     :: !Member
-    , _mpKey         :: !(Maybe Key)
+    , _mpKey         :: !(Maybe AuthKey)
     , _mpOAuthToken  :: !(Maybe OAuthToken)
     , _mpFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -157,7 +157,7 @@ mpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpKey :: Lens' MembersPatch' (Maybe Key)
+mpKey :: Lens' MembersPatch' (Maybe AuthKey)
 mpKey = lens _mpKey (\ s a -> s{_mpKey = a})
 
 -- | OAuth 2.0 token for the current user.

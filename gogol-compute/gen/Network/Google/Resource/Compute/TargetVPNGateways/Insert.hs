@@ -59,7 +59,7 @@ type TargetVPNGatewaysInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] TargetVPNGateway :>
@@ -75,7 +75,7 @@ data TargetVPNGatewaysInsert' = TargetVPNGatewaysInsert'
     , _tvgiProject     :: !Text
     , _tvgiUserIP      :: !(Maybe Text)
     , _tvgiPayload     :: !TargetVPNGateway
-    , _tvgiKey         :: !(Maybe Key)
+    , _tvgiKey         :: !(Maybe AuthKey)
     , _tvgiRegion      :: !Text
     , _tvgiOAuthToken  :: !(Maybe OAuthToken)
     , _tvgiFields      :: !(Maybe Text)
@@ -153,7 +153,7 @@ tvgiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tvgiKey :: Lens' TargetVPNGatewaysInsert' (Maybe Key)
+tvgiKey :: Lens' TargetVPNGatewaysInsert' (Maybe AuthKey)
 tvgiKey = lens _tvgiKey (\ s a -> s{_tvgiKey = a})
 
 -- | The name of the region for this request.

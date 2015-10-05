@@ -62,7 +62,7 @@ type PurchasesSubscriptionsDeferResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] SubscriptionPurchasesDeferRequest
@@ -80,7 +80,7 @@ data PurchasesSubscriptionsDefer' = PurchasesSubscriptionsDefer'
     , _psdUserIP         :: !(Maybe Text)
     , _psdToken          :: !Text
     , _psdPayload        :: !SubscriptionPurchasesDeferRequest
-    , _psdKey            :: !(Maybe Key)
+    , _psdKey            :: !(Maybe AuthKey)
     , _psdOAuthToken     :: !(Maybe OAuthToken)
     , _psdSubscriptionId :: !Text
     , _psdFields         :: !(Maybe Text)
@@ -168,7 +168,7 @@ psdPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psdKey :: Lens' PurchasesSubscriptionsDefer' (Maybe Key)
+psdKey :: Lens' PurchasesSubscriptionsDefer' (Maybe AuthKey)
 psdKey = lens _psdKey (\ s a -> s{_psdKey = a})
 
 -- | OAuth 2.0 token for the current user.

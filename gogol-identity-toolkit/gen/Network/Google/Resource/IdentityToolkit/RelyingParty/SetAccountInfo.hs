@@ -53,7 +53,7 @@ type RelyingPartySetAccountInfoResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON]
@@ -68,7 +68,7 @@ data RelyingPartySetAccountInfo' = RelyingPartySetAccountInfo'
     , _rpsaiPrettyPrint :: !Bool
     , _rpsaiUserIP      :: !(Maybe Text)
     , _rpsaiPayload     :: !IdentitytoolkitRelyingPartySetAccountInfoRequest
-    , _rpsaiKey         :: !(Maybe Key)
+    , _rpsaiKey         :: !(Maybe AuthKey)
     , _rpsaiOAuthToken  :: !(Maybe OAuthToken)
     , _rpsaiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -132,7 +132,7 @@ rpsaiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rpsaiKey :: Lens' RelyingPartySetAccountInfo' (Maybe Key)
+rpsaiKey :: Lens' RelyingPartySetAccountInfo' (Maybe AuthKey)
 rpsaiKey = lens _rpsaiKey (\ s a -> s{_rpsaiKey = a})
 
 -- | OAuth 2.0 token for the current user.

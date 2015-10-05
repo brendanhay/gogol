@@ -58,7 +58,7 @@ type LicenseAssignmentsInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] LicenseAssignmentInsert :>
@@ -73,7 +73,7 @@ data LicenseAssignmentsInsert' = LicenseAssignmentsInsert'
     , _laiUserIP      :: !(Maybe Text)
     , _laiSKUId       :: !Text
     , _laiPayload     :: !LicenseAssignmentInsert
-    , _laiKey         :: !(Maybe Key)
+    , _laiKey         :: !(Maybe AuthKey)
     , _laiOAuthToken  :: !(Maybe OAuthToken)
     , _laiProductId   :: !Text
     , _laiFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ laiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-laiKey :: Lens' LicenseAssignmentsInsert' (Maybe Key)
+laiKey :: Lens' LicenseAssignmentsInsert' (Maybe AuthKey)
 laiKey = lens _laiKey (\ s a -> s{_laiKey = a})
 
 -- | OAuth 2.0 token for the current user.

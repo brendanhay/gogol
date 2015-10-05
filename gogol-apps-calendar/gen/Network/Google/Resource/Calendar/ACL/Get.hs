@@ -57,7 +57,7 @@ type ACLGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] ACLRule
 
@@ -70,7 +70,7 @@ data ACLGet' = ACLGet'
     , _agPrettyPrint :: !Bool
     , _agUserIP      :: !(Maybe Text)
     , _agRuleId      :: !Text
-    , _agKey         :: !(Maybe Key)
+    , _agKey         :: !(Maybe AuthKey)
     , _agOAuthToken  :: !(Maybe OAuthToken)
     , _agFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,7 +142,7 @@ agRuleId = lens _agRuleId (\ s a -> s{_agRuleId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agKey :: Lens' ACLGet' (Maybe Key)
+agKey :: Lens' ACLGet' (Maybe AuthKey)
 agKey = lens _agKey (\ s a -> s{_agKey = a})
 
 -- | OAuth 2.0 token for the current user.

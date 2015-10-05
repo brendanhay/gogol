@@ -74,7 +74,7 @@ type ControllerDebuggeesRegisterResource =
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] RegisterDebuggeeRequest
@@ -100,7 +100,7 @@ data ControllerDebuggeesRegister' = ControllerDebuggeesRegister'
     , _cdrUploadType     :: !(Maybe Text)
     , _cdrPayload        :: !RegisterDebuggeeRequest
     , _cdrBearerToken    :: !(Maybe Text)
-    , _cdrKey            :: !(Maybe Key)
+    , _cdrKey            :: !(Maybe AuthKey)
     , _cdrOAuthToken     :: !(Maybe OAuthToken)
     , _cdrFields         :: !(Maybe Text)
     , _cdrCallback       :: !(Maybe Text)
@@ -208,7 +208,7 @@ cdrBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cdrKey :: Lens' ControllerDebuggeesRegister' (Maybe Key)
+cdrKey :: Lens' ControllerDebuggeesRegister' (Maybe AuthKey)
 cdrKey = lens _cdrKey (\ s a -> s{_cdrKey = a})
 
 -- | OAuth 2.0 token for the current user.

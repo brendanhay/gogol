@@ -60,7 +60,7 @@ type AccountsContainersTagsGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Tag
 
@@ -74,7 +74,7 @@ data AccountsContainersTagsGet' = AccountsContainersTagsGet'
     , _actgcUserIP      :: !(Maybe Text)
     , _actgcAccountId   :: !Text
     , _actgcTagId       :: !Text
-    , _actgcKey         :: !(Maybe Key)
+    , _actgcKey         :: !(Maybe AuthKey)
     , _actgcOAuthToken  :: !(Maybe OAuthToken)
     , _actgcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -158,7 +158,7 @@ actgcTagId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-actgcKey :: Lens' AccountsContainersTagsGet' (Maybe Key)
+actgcKey :: Lens' AccountsContainersTagsGet' (Maybe AuthKey)
 actgcKey = lens _actgcKey (\ s a -> s{_actgcKey = a})
 
 -- | OAuth 2.0 token for the current user.

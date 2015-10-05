@@ -57,7 +57,7 @@ type SitemapsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -70,7 +70,7 @@ data SitemapsDelete' = SitemapsDelete'
     , _sitFeedpath    :: !Text
     , _sitUserIP      :: !(Maybe Text)
     , _sitSiteURL     :: !Text
-    , _sitKey         :: !(Maybe Key)
+    , _sitKey         :: !(Maybe AuthKey)
     , _sitOAuthToken  :: !(Maybe OAuthToken)
     , _sitFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ sitSiteURL
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sitKey :: Lens' SitemapsDelete' (Maybe Key)
+sitKey :: Lens' SitemapsDelete' (Maybe AuthKey)
 sitKey = lens _sitKey (\ s a -> s{_sitKey = a})
 
 -- | OAuth 2.0 token for the current user.

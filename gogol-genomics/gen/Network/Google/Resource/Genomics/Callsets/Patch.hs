@@ -55,7 +55,7 @@ type CallsetsPatchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] CallSet :> Patch '[JSON] CallSet
@@ -68,7 +68,7 @@ data CallsetsPatch' = CallsetsPatch'
     , _cpPrettyPrint :: !Bool
     , _cpUserIP      :: !(Maybe Text)
     , _cpPayload     :: !CallSet
-    , _cpKey         :: !(Maybe Key)
+    , _cpKey         :: !(Maybe AuthKey)
     , _cpCallSetId   :: !Text
     , _cpOAuthToken  :: !(Maybe OAuthToken)
     , _cpFields      :: !(Maybe Text)
@@ -135,7 +135,7 @@ cpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cpKey :: Lens' CallsetsPatch' (Maybe Key)
+cpKey :: Lens' CallsetsPatch' (Maybe AuthKey)
 cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
 
 -- | The ID of the call set to be updated.

@@ -67,7 +67,7 @@ type VolumesUserUploadedListResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
@@ -80,7 +80,7 @@ data VolumesUserUploadedList' = VolumesUserUploadedList'
     , _vuulPrettyPrint     :: !Bool
     , _vuulUserIP          :: !(Maybe Text)
     , _vuulLocale          :: !(Maybe Text)
-    , _vuulKey             :: !(Maybe Key)
+    , _vuulKey             :: !(Maybe AuthKey)
     , _vuulVolumeId        :: !(Maybe [Text])
     , _vuulSource          :: !(Maybe Text)
     , _vuulOAuthToken      :: !(Maybe OAuthToken)
@@ -171,7 +171,7 @@ vuulLocale
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vuulKey :: Lens' VolumesUserUploadedList' (Maybe Key)
+vuulKey :: Lens' VolumesUserUploadedList' (Maybe AuthKey)
 vuulKey = lens _vuulKey (\ s a -> s{_vuulKey = a})
 
 -- | The ids of the volumes to be returned. If not specified all that match

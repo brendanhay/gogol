@@ -57,7 +57,7 @@ type ReportsSavedListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] SavedReports
 
@@ -68,7 +68,7 @@ data ReportsSavedList' = ReportsSavedList'
     { _rslQuotaUser   :: !(Maybe Text)
     , _rslPrettyPrint :: !Bool
     , _rslUserIP      :: !(Maybe Text)
-    , _rslKey         :: !(Maybe Key)
+    , _rslKey         :: !(Maybe AuthKey)
     , _rslPageToken   :: !(Maybe Text)
     , _rslOAuthToken  :: !(Maybe OAuthToken)
     , _rslMaxResults  :: !(Maybe Int32)
@@ -130,7 +130,7 @@ rslUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rslKey :: Lens' ReportsSavedList' (Maybe Key)
+rslKey :: Lens' ReportsSavedList' (Maybe AuthKey)
 rslKey = lens _rslKey (\ s a -> s{_rslKey = a})
 
 -- | A continuation token, used to page through saved reports. To retrieve

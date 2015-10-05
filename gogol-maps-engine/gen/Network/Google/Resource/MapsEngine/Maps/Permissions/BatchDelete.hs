@@ -57,7 +57,7 @@ type MapsPermissionsBatchDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] PermissionsBatchDeleteRequest :>
@@ -71,7 +71,7 @@ data MapsPermissionsBatchDelete' = MapsPermissionsBatchDelete'
     , _mpbdPrettyPrint :: !Bool
     , _mpbdUserIP      :: !(Maybe Text)
     , _mpbdPayload     :: !PermissionsBatchDeleteRequest
-    , _mpbdKey         :: !(Maybe Key)
+    , _mpbdKey         :: !(Maybe AuthKey)
     , _mpbdId          :: !Text
     , _mpbdOAuthToken  :: !(Maybe OAuthToken)
     , _mpbdFields      :: !(Maybe Text)
@@ -140,7 +140,7 @@ mpbdPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpbdKey :: Lens' MapsPermissionsBatchDelete' (Maybe Key)
+mpbdKey :: Lens' MapsPermissionsBatchDelete' (Maybe AuthKey)
 mpbdKey = lens _mpbdKey (\ s a -> s{_mpbdKey = a})
 
 -- | The ID of the asset from which permissions will be removed.

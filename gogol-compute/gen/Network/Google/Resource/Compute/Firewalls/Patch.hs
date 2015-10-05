@@ -59,7 +59,7 @@ type FirewallsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Firewall :> Patch '[JSON] Operation
@@ -74,7 +74,7 @@ data FirewallsPatch' = FirewallsPatch'
     , _fpProject     :: !Text
     , _fpUserIP      :: !(Maybe Text)
     , _fpPayload     :: !Firewall
-    , _fpKey         :: !(Maybe Key)
+    , _fpKey         :: !(Maybe AuthKey)
     , _fpOAuthToken  :: !(Maybe OAuthToken)
     , _fpFirewall    :: !Text
     , _fpFields      :: !(Maybe Text)
@@ -150,7 +150,7 @@ fpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fpKey :: Lens' FirewallsPatch' (Maybe Key)
+fpKey :: Lens' FirewallsPatch' (Maybe AuthKey)
 fpKey = lens _fpKey (\ s a -> s{_fpKey = a})
 
 -- | OAuth 2.0 token for the current user.

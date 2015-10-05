@@ -58,7 +58,7 @@ type MyLibraryBookshelvesClearVolumesResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -70,7 +70,7 @@ data MyLibraryBookshelvesClearVolumes' = MyLibraryBookshelvesClearVolumes'
     , _mlbcvPrettyPrint :: !Bool
     , _mlbcvUserIP      :: !(Maybe Text)
     , _mlbcvShelf       :: !Text
-    , _mlbcvKey         :: !(Maybe Key)
+    , _mlbcvKey         :: !(Maybe AuthKey)
     , _mlbcvSource      :: !(Maybe Text)
     , _mlbcvOAuthToken  :: !(Maybe OAuthToken)
     , _mlbcvFields      :: !(Maybe Text)
@@ -138,7 +138,7 @@ mlbcvShelf
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlbcvKey :: Lens' MyLibraryBookshelvesClearVolumes' (Maybe Key)
+mlbcvKey :: Lens' MyLibraryBookshelvesClearVolumes' (Maybe AuthKey)
 mlbcvKey = lens _mlbcvKey (\ s a -> s{_mlbcvKey = a})
 
 -- | String to identify the originator of this request.

@@ -57,7 +57,7 @@ type PostalCodesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] PostalCode
 
@@ -69,7 +69,7 @@ data PostalCodesGet' = PostalCodesGet'
     , _pcgPrettyPrint :: !Bool
     , _pcgUserIP      :: !(Maybe Text)
     , _pcgProFileId   :: !Int64
-    , _pcgKey         :: !(Maybe Key)
+    , _pcgKey         :: !(Maybe AuthKey)
     , _pcgCode        :: !Text
     , _pcgOAuthToken  :: !(Maybe OAuthToken)
     , _pcgFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ pcgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pcgKey :: Lens' PostalCodesGet' (Maybe Key)
+pcgKey :: Lens' PostalCodesGet' (Maybe AuthKey)
 pcgKey = lens _pcgKey (\ s a -> s{_pcgKey = a})
 
 -- | Postal code ID.

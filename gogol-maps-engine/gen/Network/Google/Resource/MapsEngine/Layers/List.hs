@@ -80,7 +80,7 @@ type LayersListResource =
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "key" Key :>
+                                         QueryParam "key" AuthKey :>
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
@@ -96,7 +96,7 @@ data LayersList' = LayersList'
     , _llUserIP           :: !(Maybe Text)
     , _llCreatorEmail     :: !(Maybe Text)
     , _llRole             :: !(Maybe LayersListRole)
-    , _llKey              :: !(Maybe Key)
+    , _llKey              :: !(Maybe AuthKey)
     , _llBbox             :: !(Maybe Text)
     , _llProcessingStatus :: !(Maybe LayersListProcessingStatus)
     , _llModifiedAfter    :: !(Maybe DateTime')
@@ -218,7 +218,7 @@ llRole = lens _llRole (\ s a -> s{_llRole = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-llKey :: Lens' LayersList' (Maybe Key)
+llKey :: Lens' LayersList' (Maybe AuthKey)
 llKey = lens _llKey (\ s a -> s{_llKey = a})
 
 -- | A bounding box, expressed as \"west,south,east,north\". If set, only

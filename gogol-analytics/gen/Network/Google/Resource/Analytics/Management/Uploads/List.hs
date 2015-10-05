@@ -66,7 +66,7 @@ type ManagementUploadsListResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] Uploads
@@ -81,7 +81,7 @@ data ManagementUploadsList' = ManagementUploadsList'
     , _mulUserIP             :: !(Maybe Text)
     , _mulCustomDataSourceId :: !Text
     , _mulAccountId          :: !Text
-    , _mulKey                :: !(Maybe Key)
+    , _mulKey                :: !(Maybe AuthKey)
     , _mulOAuthToken         :: !(Maybe OAuthToken)
     , _mulStartIndex         :: !(Maybe Int32)
     , _mulMaxResults         :: !(Maybe Int32)
@@ -172,7 +172,7 @@ mulAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mulKey :: Lens' ManagementUploadsList' (Maybe Key)
+mulKey :: Lens' ManagementUploadsList' (Maybe AuthKey)
 mulKey = lens _mulKey (\ s a -> s{_mulKey = a})
 
 -- | OAuth 2.0 token for the current user.

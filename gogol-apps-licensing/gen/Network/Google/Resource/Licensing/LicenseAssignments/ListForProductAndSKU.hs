@@ -63,7 +63,7 @@ type LicenseAssignmentsListForProductAndSKUResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] LicenseAssignmentList
@@ -77,7 +77,7 @@ data LicenseAssignmentsListForProductAndSKU' = LicenseAssignmentsListForProductA
     , _lalfpaskuUserIP      :: !(Maybe Text)
     , _lalfpaskuSKUId       :: !Text
     , _lalfpaskuCustomerId  :: !Text
-    , _lalfpaskuKey         :: !(Maybe Key)
+    , _lalfpaskuKey         :: !(Maybe AuthKey)
     , _lalfpaskuPageToken   :: !Text
     , _lalfpaskuOAuthToken  :: !(Maybe OAuthToken)
     , _lalfpaskuProductId   :: !Text
@@ -167,7 +167,7 @@ lalfpaskuCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lalfpaskuKey :: Lens' LicenseAssignmentsListForProductAndSKU' (Maybe Key)
+lalfpaskuKey :: Lens' LicenseAssignmentsListForProductAndSKU' (Maybe AuthKey)
 lalfpaskuKey
   = lens _lalfpaskuKey (\ s a -> s{_lalfpaskuKey = a})
 

@@ -61,7 +61,7 @@ type AddressesAggregatedListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] AddressAggregatedList
@@ -74,7 +74,7 @@ data AddressesAggregatedList' = AddressesAggregatedList'
     , _aalPrettyPrint :: !Bool
     , _aalProject     :: !Text
     , _aalUserIP      :: !(Maybe Text)
-    , _aalKey         :: !(Maybe Key)
+    , _aalKey         :: !(Maybe AuthKey)
     , _aalFilter      :: !(Maybe Text)
     , _aalPageToken   :: !(Maybe Text)
     , _aalOAuthToken  :: !(Maybe OAuthToken)
@@ -149,7 +149,7 @@ aalUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aalKey :: Lens' AddressesAggregatedList' (Maybe Key)
+aalKey :: Lens' AddressesAggregatedList' (Maybe AuthKey)
 aalKey = lens _aalKey (\ s a -> s{_aalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

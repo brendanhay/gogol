@@ -71,7 +71,7 @@ type InvitationsDeleteResource =
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Delete '[JSON] Empty
@@ -92,7 +92,7 @@ data InvitationsDelete' = InvitationsDelete'
     , _idAccessToken    :: !(Maybe Text)
     , _idUploadType     :: !(Maybe Text)
     , _idBearerToken    :: !(Maybe Text)
-    , _idKey            :: !(Maybe Key)
+    , _idKey            :: !(Maybe AuthKey)
     , _idId             :: !Text
     , _idOAuthToken     :: !(Maybe OAuthToken)
     , _idFields         :: !(Maybe Text)
@@ -195,7 +195,7 @@ idBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-idKey :: Lens' InvitationsDelete' (Maybe Key)
+idKey :: Lens' InvitationsDelete' (Maybe AuthKey)
 idKey = lens _idKey (\ s a -> s{_idKey = a})
 
 -- | Identifier of the invitation to delete.

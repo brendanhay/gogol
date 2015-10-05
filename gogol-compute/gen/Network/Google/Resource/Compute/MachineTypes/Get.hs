@@ -59,7 +59,7 @@ type MachineTypesGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] MachineType
 
@@ -72,7 +72,7 @@ data MachineTypesGet' = MachineTypesGet'
     , _mtgProject     :: !Text
     , _mtgUserIP      :: !(Maybe Text)
     , _mtgZone        :: !Text
-    , _mtgKey         :: !(Maybe Key)
+    , _mtgKey         :: !(Maybe AuthKey)
     , _mtgMachineType :: !Text
     , _mtgOAuthToken  :: !(Maybe OAuthToken)
     , _mtgFields      :: !(Maybe Text)
@@ -148,7 +148,7 @@ mtgZone = lens _mtgZone (\ s a -> s{_mtgZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mtgKey :: Lens' MachineTypesGet' (Maybe Key)
+mtgKey :: Lens' MachineTypesGet' (Maybe AuthKey)
 mtgKey = lens _mtgKey (\ s a -> s{_mtgKey = a})
 
 -- | Name of the machine type resource to return.

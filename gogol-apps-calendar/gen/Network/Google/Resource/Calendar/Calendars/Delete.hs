@@ -55,7 +55,7 @@ type CalendarsDeleteResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -68,7 +68,7 @@ data CalendarsDelete' = CalendarsDelete'
     , _cdCalendarId  :: !Text
     , _cdPrettyPrint :: !Bool
     , _cdUserIP      :: !(Maybe Text)
-    , _cdKey         :: !(Maybe Key)
+    , _cdKey         :: !(Maybe AuthKey)
     , _cdOAuthToken  :: !(Maybe OAuthToken)
     , _cdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -132,7 +132,7 @@ cdUserIP = lens _cdUserIP (\ s a -> s{_cdUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cdKey :: Lens' CalendarsDelete' (Maybe Key)
+cdKey :: Lens' CalendarsDelete' (Maybe AuthKey)
 cdKey = lens _cdKey (\ s a -> s{_cdKey = a})
 
 -- | OAuth 2.0 token for the current user.

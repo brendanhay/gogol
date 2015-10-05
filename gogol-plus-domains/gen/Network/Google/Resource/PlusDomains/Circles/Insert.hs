@@ -56,7 +56,7 @@ type CirclesInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Circle :> Post '[JSON] Circle
@@ -70,7 +70,7 @@ data CirclesInsert' = CirclesInsert'
     , _cirUserIP      :: !(Maybe Text)
     , _cirPayload     :: !Circle
     , _cirUserId      :: !Text
-    , _cirKey         :: !(Maybe Key)
+    , _cirKey         :: !(Maybe AuthKey)
     , _cirOAuthToken  :: !(Maybe OAuthToken)
     , _cirFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ cirUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cirKey :: Lens' CirclesInsert' (Maybe Key)
+cirKey :: Lens' CirclesInsert' (Maybe AuthKey)
 cirKey = lens _cirKey (\ s a -> s{_cirKey = a})
 
 -- | OAuth 2.0 token for the current user.

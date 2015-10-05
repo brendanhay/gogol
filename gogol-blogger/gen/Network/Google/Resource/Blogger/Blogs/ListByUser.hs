@@ -63,7 +63,7 @@ type BlogsListByUserResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] BlogList
 
@@ -78,7 +78,7 @@ data BlogsListByUser' = BlogsListByUser'
     , _blbuFetchUserInfo :: !(Maybe Bool)
     , _blbuUserId        :: !Text
     , _blbuRole          :: !(Maybe [BlogsListByUserRole])
-    , _blbuKey           :: !(Maybe Key)
+    , _blbuKey           :: !(Maybe AuthKey)
     , _blbuView          :: !(Maybe BlogsListByUserView)
     , _blbuOAuthToken    :: !(Maybe OAuthToken)
     , _blbuFields        :: !(Maybe Text)
@@ -179,7 +179,7 @@ blbuRole
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-blbuKey :: Lens' BlogsListByUser' (Maybe Key)
+blbuKey :: Lens' BlogsListByUser' (Maybe AuthKey)
 blbuKey = lens _blbuKey (\ s a -> s{_blbuKey = a})
 
 -- | Access level with which to view the blogs. Note that some fields require

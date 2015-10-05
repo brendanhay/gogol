@@ -61,7 +61,7 @@ type URLMapsValidateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] URLMapsValidateRequest :>
@@ -79,7 +79,7 @@ data URLMapsValidate' = URLMapsValidate'
     , _umvProject     :: !Text
     , _umvUserIP      :: !(Maybe Text)
     , _umvPayload     :: !URLMapsValidateRequest
-    , _umvKey         :: !(Maybe Key)
+    , _umvKey         :: !(Maybe AuthKey)
     , _umvOAuthToken  :: !(Maybe OAuthToken)
     , _umvFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -160,7 +160,7 @@ umvPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umvKey :: Lens' URLMapsValidate' (Maybe Key)
+umvKey :: Lens' URLMapsValidate' (Maybe AuthKey)
 umvKey = lens _umvKey (\ s a -> s{_umvKey = a})
 
 -- | OAuth 2.0 token for the current user.

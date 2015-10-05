@@ -58,7 +58,7 @@ type OrdersReturnlineitemResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] OrdersReturnLineItemRequest :>
@@ -73,7 +73,7 @@ data OrdersReturnlineitem' = OrdersReturnlineitem'
     , _orrPrettyPrint :: !Bool
     , _orrUserIP      :: !(Maybe Text)
     , _orrPayload     :: !OrdersReturnLineItemRequest
-    , _orrKey         :: !(Maybe Key)
+    , _orrKey         :: !(Maybe AuthKey)
     , _orrOAuthToken  :: !(Maybe OAuthToken)
     , _orrOrderId     :: !Text
     , _orrFields      :: !(Maybe Text)
@@ -151,7 +151,7 @@ orrPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-orrKey :: Lens' OrdersReturnlineitem' (Maybe Key)
+orrKey :: Lens' OrdersReturnlineitem' (Maybe AuthKey)
 orrKey = lens _orrKey (\ s a -> s{_orrKey = a})
 
 -- | OAuth 2.0 token for the current user.

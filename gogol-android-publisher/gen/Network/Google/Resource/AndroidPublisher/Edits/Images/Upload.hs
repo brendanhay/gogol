@@ -63,7 +63,7 @@ type EditsImagesUploadResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[OctetStream] Body :>
@@ -80,7 +80,7 @@ data EditsImagesUpload' = EditsImagesUpload'
     , _eiuUserIP      :: !(Maybe Text)
     , _eiuMedia       :: !Body
     , _eiuImageType   :: !EditsImagesUploadImageType
-    , _eiuKey         :: !(Maybe Key)
+    , _eiuKey         :: !(Maybe AuthKey)
     , _eiuLanguage    :: !Text
     , _eiuOAuthToken  :: !(Maybe OAuthToken)
     , _eiuEditId      :: !Text
@@ -170,7 +170,7 @@ eiuImageType
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eiuKey :: Lens' EditsImagesUpload' (Maybe Key)
+eiuKey :: Lens' EditsImagesUpload' (Maybe AuthKey)
 eiuKey = lens _eiuKey (\ s a -> s{_eiuKey = a})
 
 -- | The language code (a BCP-47 language tag) of the localized listing whose

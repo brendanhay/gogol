@@ -61,7 +61,7 @@ type MarketplaceOrdersUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] MarketplaceOrder :>
@@ -77,7 +77,7 @@ data MarketplaceOrdersUpdate' = MarketplaceOrdersUpdate'
     , _mouUserIP         :: !(Maybe Text)
     , _mouRevisionNumber :: !Int64
     , _mouPayload        :: !MarketplaceOrder
-    , _mouKey            :: !(Maybe Key)
+    , _mouKey            :: !(Maybe AuthKey)
     , _mouOAuthToken     :: !(Maybe OAuthToken)
     , _mouOrderId        :: !Text
     , _mouFields         :: !(Maybe Text)
@@ -168,7 +168,7 @@ mouPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mouKey :: Lens' MarketplaceOrdersUpdate' (Maybe Key)
+mouKey :: Lens' MarketplaceOrdersUpdate' (Maybe AuthKey)
 mouKey = lens _mouKey (\ s a -> s{_mouKey = a})
 
 -- | OAuth 2.0 token for the current user.

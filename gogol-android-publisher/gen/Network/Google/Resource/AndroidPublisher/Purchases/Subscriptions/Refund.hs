@@ -61,7 +61,7 @@ type PurchasesSubscriptionsRefundResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -75,7 +75,7 @@ data PurchasesSubscriptionsRefund' = PurchasesSubscriptionsRefund'
     , _pPackageName    :: !Text
     , _pUserIP         :: !(Maybe Text)
     , _pToken          :: !Text
-    , _pKey            :: !(Maybe Key)
+    , _pKey            :: !(Maybe AuthKey)
     , _pOAuthToken     :: !(Maybe OAuthToken)
     , _pSubscriptionId :: !Text
     , _pFields         :: !(Maybe Text)
@@ -151,7 +151,7 @@ pToken = lens _pToken (\ s a -> s{_pToken = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pKey :: Lens' PurchasesSubscriptionsRefund' (Maybe Key)
+pKey :: Lens' PurchasesSubscriptionsRefund' (Maybe AuthKey)
 pKey = lens _pKey (\ s a -> s{_pKey = a})
 
 -- | OAuth 2.0 token for the current user.

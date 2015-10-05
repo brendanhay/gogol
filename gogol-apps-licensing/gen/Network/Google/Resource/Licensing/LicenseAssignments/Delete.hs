@@ -59,7 +59,7 @@ type LicenseAssignmentsDeleteResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -72,7 +72,7 @@ data LicenseAssignmentsDelete' = LicenseAssignmentsDelete'
     , _ladUserIP      :: !(Maybe Text)
     , _ladSKUId       :: !Text
     , _ladUserId      :: !Text
-    , _ladKey         :: !(Maybe Key)
+    , _ladKey         :: !(Maybe AuthKey)
     , _ladOAuthToken  :: !(Maybe OAuthToken)
     , _ladProductId   :: !Text
     , _ladFields      :: !(Maybe Text)
@@ -148,7 +148,7 @@ ladUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ladKey :: Lens' LicenseAssignmentsDelete' (Maybe Key)
+ladKey :: Lens' LicenseAssignmentsDelete' (Maybe AuthKey)
 ladKey = lens _ladKey (\ s a -> s{_ladKey = a})
 
 -- | OAuth 2.0 token for the current user.

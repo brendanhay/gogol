@@ -61,7 +61,7 @@ type DisksAggregatedListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] DiskAggregatedList
@@ -74,7 +74,7 @@ data DisksAggregatedList' = DisksAggregatedList'
     , _dalPrettyPrint :: !Bool
     , _dalProject     :: !Text
     , _dalUserIP      :: !(Maybe Text)
-    , _dalKey         :: !(Maybe Key)
+    , _dalKey         :: !(Maybe AuthKey)
     , _dalFilter      :: !(Maybe Text)
     , _dalPageToken   :: !(Maybe Text)
     , _dalOAuthToken  :: !(Maybe OAuthToken)
@@ -149,7 +149,7 @@ dalUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dalKey :: Lens' DisksAggregatedList' (Maybe Key)
+dalKey :: Lens' DisksAggregatedList' (Maybe AuthKey)
 dalKey = lens _dalKey (\ s a -> s{_dalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

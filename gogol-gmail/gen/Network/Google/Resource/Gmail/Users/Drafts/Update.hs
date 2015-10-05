@@ -58,7 +58,7 @@ type UsersDraftsUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          MultipartRelated '[JSON] Draft Body :>
@@ -74,7 +74,7 @@ data UsersDraftsUpdate' = UsersDraftsUpdate'
     , _uduPayload     :: !Draft
     , _uduUserId      :: !Text
     , _uduMedia       :: !Body
-    , _uduKey         :: !(Maybe Key)
+    , _uduKey         :: !(Maybe AuthKey)
     , _uduId          :: !Text
     , _uduOAuthToken  :: !(Maybe OAuthToken)
     , _uduFields      :: !(Maybe Text)
@@ -159,7 +159,7 @@ uduMedia = lens _uduMedia (\ s a -> s{_uduMedia = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uduKey :: Lens' UsersDraftsUpdate' (Maybe Key)
+uduKey :: Lens' UsersDraftsUpdate' (Maybe AuthKey)
 uduKey = lens _uduKey (\ s a -> s{_uduKey = a})
 
 -- | The ID of the draft to update.

@@ -63,7 +63,7 @@ type PeopleListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] PeopleFeed
@@ -78,7 +78,7 @@ data PeopleList' = PeopleList'
     , _plUserIP      :: !(Maybe Text)
     , _plCollection  :: !PeopleListCollection
     , _plUserId      :: !Text
-    , _plKey         :: !(Maybe Key)
+    , _plKey         :: !(Maybe AuthKey)
     , _plPageToken   :: !(Maybe Text)
     , _plOAuthToken  :: !(Maybe OAuthToken)
     , _plMaxResults  :: !Word32
@@ -165,7 +165,7 @@ plUserId = lens _plUserId (\ s a -> s{_plUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plKey :: Lens' PeopleList' (Maybe Key)
+plKey :: Lens' PeopleList' (Maybe AuthKey)
 plKey = lens _plKey (\ s a -> s{_plKey = a})
 
 -- | The continuation token, which is used to page through large result sets.

@@ -61,7 +61,7 @@ type EditsImagesDeleteallResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Delete '[JSON] ImagesDeleteAllResponse
@@ -75,7 +75,7 @@ data EditsImagesDeleteall' = EditsImagesDeleteall'
     , _eidiPackageName :: !Text
     , _eidiUserIP      :: !(Maybe Text)
     , _eidiImageType   :: !EditsImagesDeleteallImageType
-    , _eidiKey         :: !(Maybe Key)
+    , _eidiKey         :: !(Maybe AuthKey)
     , _eidiLanguage    :: !Text
     , _eidiOAuthToken  :: !(Maybe OAuthToken)
     , _eidiEditId      :: !Text
@@ -160,7 +160,7 @@ eidiImageType
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eidiKey :: Lens' EditsImagesDeleteall' (Maybe Key)
+eidiKey :: Lens' EditsImagesDeleteall' (Maybe AuthKey)
 eidiKey = lens _eidiKey (\ s a -> s{_eidiKey = a})
 
 -- | The language code (a BCP-47 language tag) of the localized listing whose

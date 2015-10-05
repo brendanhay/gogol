@@ -62,7 +62,7 @@ type PagesPatchResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Page :> Patch '[JSON] Page
@@ -77,7 +77,7 @@ data PagesPatch' = PagesPatch'
     , _pagaBlogId      :: !Text
     , _pagaPageId      :: !Text
     , _pagaPayload     :: !Page
-    , _pagaKey         :: !(Maybe Key)
+    , _pagaKey         :: !(Maybe AuthKey)
     , _pagaRevert      :: !(Maybe Bool)
     , _pagaOAuthToken  :: !(Maybe OAuthToken)
     , _pagaPublish     :: !(Maybe Bool)
@@ -167,7 +167,7 @@ pagaPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pagaKey :: Lens' PagesPatch' (Maybe Key)
+pagaKey :: Lens' PagesPatch' (Maybe AuthKey)
 pagaKey = lens _pagaKey (\ s a -> s{_pagaKey = a})
 
 -- | Whether a revert action should be performed when the page is updated

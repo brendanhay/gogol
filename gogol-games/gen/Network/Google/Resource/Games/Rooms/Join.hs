@@ -59,7 +59,7 @@ type RoomsJoinResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] RoomJoinRequest :> Post '[JSON] Room
@@ -73,7 +73,7 @@ data RoomsJoin' = RoomsJoin'
     , _rjPrettyPrint :: !Bool
     , _rjUserIP      :: !(Maybe Text)
     , _rjPayload     :: !RoomJoinRequest
-    , _rjKey         :: !(Maybe Key)
+    , _rjKey         :: !(Maybe AuthKey)
     , _rjRoomId      :: !Text
     , _rjLanguage    :: !(Maybe Text)
     , _rjOAuthToken  :: !(Maybe OAuthToken)
@@ -144,7 +144,7 @@ rjPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rjKey :: Lens' RoomsJoin' (Maybe Key)
+rjKey :: Lens' RoomsJoin' (Maybe AuthKey)
 rjKey = lens _rjKey (\ s a -> s{_rjKey = a})
 
 -- | The ID of the room.

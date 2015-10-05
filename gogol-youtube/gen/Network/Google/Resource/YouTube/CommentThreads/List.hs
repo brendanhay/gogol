@@ -77,7 +77,7 @@ type CommentThreadsListResource =
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] CommentThreadListResponse
@@ -95,7 +95,7 @@ data CommentThreadsList' = CommentThreadsList'
     , _ctlChannelId                    :: !(Maybe Text)
     , _ctlAllThreadsRelatedToChannelId :: !(Maybe Text)
     , _ctlVideoId                      :: !(Maybe Text)
-    , _ctlKey                          :: !(Maybe Key)
+    , _ctlKey                          :: !(Maybe AuthKey)
     , _ctlId                           :: !(Maybe Text)
     , _ctlPageToken                    :: !(Maybe Text)
     , _ctlOAuthToken                   :: !(Maybe OAuthToken)
@@ -231,7 +231,7 @@ ctlVideoId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ctlKey :: Lens' CommentThreadsList' (Maybe Key)
+ctlKey :: Lens' CommentThreadsList' (Maybe AuthKey)
 ctlKey = lens _ctlKey (\ s a -> s{_ctlKey = a})
 
 -- | The id parameter specifies a comma-separated list of comment thread IDs

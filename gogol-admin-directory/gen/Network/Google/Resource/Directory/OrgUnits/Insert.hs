@@ -56,7 +56,7 @@ type OrgUnitsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] OrgUnit :> Post '[JSON] OrgUnit
@@ -70,7 +70,7 @@ data OrgUnitsInsert' = OrgUnitsInsert'
     , _ouiUserIP      :: !(Maybe Text)
     , _ouiPayload     :: !OrgUnit
     , _ouiCustomerId  :: !Text
-    , _ouiKey         :: !(Maybe Key)
+    , _ouiKey         :: !(Maybe AuthKey)
     , _ouiOAuthToken  :: !(Maybe OAuthToken)
     , _ouiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ ouiCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ouiKey :: Lens' OrgUnitsInsert' (Maybe Key)
+ouiKey :: Lens' OrgUnitsInsert' (Maybe AuthKey)
 ouiKey = lens _ouiKey (\ s a -> s{_ouiKey = a})
 
 -- | OAuth 2.0 token for the current user.

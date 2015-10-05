@@ -62,7 +62,7 @@ type ActivitiesSearchResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ActivityFeed
@@ -75,7 +75,7 @@ data ActivitiesSearch' = ActivitiesSearch'
     , _asPrettyPrint :: !Bool
     , _asOrderBy     :: !ActivitiesSearchOrderBy
     , _asUserIP      :: !(Maybe Text)
-    , _asKey         :: !(Maybe Key)
+    , _asKey         :: !(Maybe AuthKey)
     , _asQuery       :: !Text
     , _asLanguage    :: !Text
     , _asPageToken   :: !(Maybe Text)
@@ -153,7 +153,7 @@ asUserIP = lens _asUserIP (\ s a -> s{_asUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-asKey :: Lens' ActivitiesSearch' (Maybe Key)
+asKey :: Lens' ActivitiesSearch' (Maybe AuthKey)
 asKey = lens _asKey (\ s a -> s{_asKey = a})
 
 -- | Full-text search query string.

@@ -58,7 +58,7 @@ type TrainedModelsPredictResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Input :> Post '[JSON] Output
@@ -72,7 +72,7 @@ data TrainedModelsPredict' = TrainedModelsPredict'
     , _tmpProject     :: !Text
     , _tmpUserIP      :: !(Maybe Text)
     , _tmpPayload     :: !Input
-    , _tmpKey         :: !(Maybe Key)
+    , _tmpKey         :: !(Maybe AuthKey)
     , _tmpId          :: !Text
     , _tmpOAuthToken  :: !(Maybe OAuthToken)
     , _tmpFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ tmpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tmpKey :: Lens' TrainedModelsPredict' (Maybe Key)
+tmpKey :: Lens' TrainedModelsPredict' (Maybe AuthKey)
 tmpKey = lens _tmpKey (\ s a -> s{_tmpKey = a})
 
 -- | The unique name for the predictive model.

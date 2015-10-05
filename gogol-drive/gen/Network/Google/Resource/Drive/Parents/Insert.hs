@@ -56,7 +56,7 @@ type ParentsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ParentReference :>
@@ -70,7 +70,7 @@ data ParentsInsert' = ParentsInsert'
     , _piiPrettyPrint :: !Bool
     , _piiUserIP      :: !(Maybe Text)
     , _piiPayload     :: !ParentReference
-    , _piiKey         :: !(Maybe Key)
+    , _piiKey         :: !(Maybe AuthKey)
     , _piiFileId      :: !Text
     , _piiOAuthToken  :: !(Maybe OAuthToken)
     , _piiFields      :: !(Maybe Text)
@@ -138,7 +138,7 @@ piiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-piiKey :: Lens' ParentsInsert' (Maybe Key)
+piiKey :: Lens' ParentsInsert' (Maybe AuthKey)
 piiKey = lens _piiKey (\ s a -> s{_piiKey = a})
 
 -- | The ID of the file.

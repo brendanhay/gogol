@@ -54,7 +54,7 @@ type VariantsGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Variant
 
@@ -65,7 +65,7 @@ data VariantsGet' = VariantsGet'
     { _vggQuotaUser   :: !(Maybe Text)
     , _vggPrettyPrint :: !Bool
     , _vggUserIP      :: !(Maybe Text)
-    , _vggKey         :: !(Maybe Key)
+    , _vggKey         :: !(Maybe AuthKey)
     , _vggVariantId   :: !Text
     , _vggOAuthToken  :: !(Maybe OAuthToken)
     , _vggFields      :: !(Maybe Text)
@@ -124,7 +124,7 @@ vggUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vggKey :: Lens' VariantsGet' (Maybe Key)
+vggKey :: Lens' VariantsGet' (Maybe AuthKey)
 vggKey = lens _vggKey (\ s a -> s{_vggKey = a})
 
 -- | The ID of the variant.

@@ -59,7 +59,7 @@ type UsersMessagesAttachmentsGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] MessagePartBody
@@ -72,7 +72,7 @@ data UsersMessagesAttachmentsGet' = UsersMessagesAttachmentsGet'
     , _umagPrettyPrint :: !Bool
     , _umagUserIP      :: !(Maybe Text)
     , _umagUserId      :: !Text
-    , _umagKey         :: !(Maybe Key)
+    , _umagKey         :: !(Maybe AuthKey)
     , _umagId          :: !Text
     , _umagOAuthToken  :: !(Maybe OAuthToken)
     , _umagMessageId   :: !Text
@@ -147,7 +147,7 @@ umagUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umagKey :: Lens' UsersMessagesAttachmentsGet' (Maybe Key)
+umagKey :: Lens' UsersMessagesAttachmentsGet' (Maybe AuthKey)
 umagKey = lens _umagKey (\ s a -> s{_umagKey = a})
 
 -- | The ID of the attachment.

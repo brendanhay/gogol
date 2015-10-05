@@ -64,7 +64,7 @@ type URLCrawlErrorsSamplesListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] URLCrawlErrorsSamplesListResponse
@@ -80,7 +80,7 @@ data URLCrawlErrorsSamplesList' = URLCrawlErrorsSamplesList'
     , _uceslUserIP      :: !(Maybe Text)
     , _uceslCategory    :: !URLCrawlErrorsSamplesListCategory
     , _uceslSiteURL     :: !Text
-    , _uceslKey         :: !(Maybe Key)
+    , _uceslKey         :: !(Maybe AuthKey)
     , _uceslOAuthToken  :: !(Maybe OAuthToken)
     , _uceslFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -165,7 +165,7 @@ uceslSiteURL
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uceslKey :: Lens' URLCrawlErrorsSamplesList' (Maybe Key)
+uceslKey :: Lens' URLCrawlErrorsSamplesList' (Maybe AuthKey)
 uceslKey = lens _uceslKey (\ s a -> s{_uceslKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -66,7 +66,7 @@ type InstallsPatchResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Install :>
@@ -85,7 +85,7 @@ data InstallsPatch' = InstallsPatch'
     , _ipPayload      :: !Install
     , _ipUserId       :: !Text
     , _ipInstallId    :: !Text
-    , _ipKey          :: !(Maybe Key)
+    , _ipKey          :: !(Maybe AuthKey)
     , _ipDeviceId     :: !Text
     , _ipOAuthToken   :: !(Maybe OAuthToken)
     , _ipFields       :: !(Maybe Text)
@@ -180,7 +180,7 @@ ipInstallId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ipKey :: Lens' InstallsPatch' (Maybe Key)
+ipKey :: Lens' InstallsPatch' (Maybe AuthKey)
 ipKey = lens _ipKey (\ s a -> s{_ipKey = a})
 
 -- | The Android ID of the device.

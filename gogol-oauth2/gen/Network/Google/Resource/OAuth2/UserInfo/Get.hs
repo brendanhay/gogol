@@ -54,7 +54,7 @@ type UserInfoGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] UserInfoplus
 
@@ -64,7 +64,7 @@ data UserInfoGet' = UserInfoGet'
     { _uigQuotaUser   :: !(Maybe Text)
     , _uigPrettyPrint :: !Bool
     , _uigUserIP      :: !(Maybe Text)
-    , _uigKey         :: !(Maybe Key)
+    , _uigKey         :: !(Maybe AuthKey)
     , _uigOAuthToken  :: !(Maybe OAuthToken)
     , _uigFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -118,7 +118,7 @@ uigUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uigKey :: Lens' UserInfoGet' (Maybe Key)
+uigKey :: Lens' UserInfoGet' (Maybe AuthKey)
 uigKey = lens _uigKey (\ s a -> s{_uigKey = a})
 
 -- | OAuth 2.0 token for the current user.

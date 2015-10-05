@@ -56,7 +56,7 @@ type AccountUserProFilesUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] AccountUserProFile :>
@@ -71,7 +71,7 @@ data AccountUserProFilesUpdate' = AccountUserProFilesUpdate'
     , _aupfuUserIP      :: !(Maybe Text)
     , _aupfuProFileId   :: !Int64
     , _aupfuPayload     :: !AccountUserProFile
-    , _aupfuKey         :: !(Maybe Key)
+    , _aupfuKey         :: !(Maybe AuthKey)
     , _aupfuOAuthToken  :: !(Maybe OAuthToken)
     , _aupfuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ aupfuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aupfuKey :: Lens' AccountUserProFilesUpdate' (Maybe Key)
+aupfuKey :: Lens' AccountUserProFilesUpdate' (Maybe AuthKey)
 aupfuKey = lens _aupfuKey (\ s a -> s{_aupfuKey = a})
 
 -- | OAuth 2.0 token for the current user.

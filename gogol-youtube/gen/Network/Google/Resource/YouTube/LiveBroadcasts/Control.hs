@@ -68,7 +68,7 @@ type LiveBroadcastsControlResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Post '[JSON] LiveBroadcast
@@ -83,7 +83,7 @@ data LiveBroadcastsControl' = LiveBroadcastsControl'
     , _lbcPrettyPrint                   :: !Bool
     , _lbcUserIP                        :: !(Maybe Text)
     , _lbcOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lbcKey                           :: !(Maybe Key)
+    , _lbcKey                           :: !(Maybe AuthKey)
     , _lbcOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbcId                            :: !Text
     , _lbcDisplaySlate                  :: !(Maybe Bool)
@@ -187,7 +187,7 @@ lbcOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lbcKey :: Lens' LiveBroadcastsControl' (Maybe Key)
+lbcKey :: Lens' LiveBroadcastsControl' (Maybe AuthKey)
 lbcKey = lens _lbcKey (\ s a -> s{_lbcKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:

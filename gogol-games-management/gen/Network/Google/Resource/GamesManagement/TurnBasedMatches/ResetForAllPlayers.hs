@@ -55,7 +55,7 @@ type TurnBasedMatchesResetForAllPlayersResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -68,7 +68,7 @@ data TurnBasedMatchesResetForAllPlayers' = TurnBasedMatchesResetForAllPlayers'
     { _tbmrfapQuotaUser   :: !(Maybe Text)
     , _tbmrfapPrettyPrint :: !Bool
     , _tbmrfapUserIP      :: !(Maybe Text)
-    , _tbmrfapKey         :: !(Maybe Key)
+    , _tbmrfapKey         :: !(Maybe AuthKey)
     , _tbmrfapOAuthToken  :: !(Maybe OAuthToken)
     , _tbmrfapFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -124,7 +124,7 @@ tbmrfapUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tbmrfapKey :: Lens' TurnBasedMatchesResetForAllPlayers' (Maybe Key)
+tbmrfapKey :: Lens' TurnBasedMatchesResetForAllPlayers' (Maybe AuthKey)
 tbmrfapKey
   = lens _tbmrfapKey (\ s a -> s{_tbmrfapKey = a})
 

@@ -57,7 +57,7 @@ type CustomChannelsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Delete '[JSON] CustomChannel
@@ -71,7 +71,7 @@ data CustomChannelsDelete' = CustomChannelsDelete'
     , _ccdCustomChannelId :: !Text
     , _ccdUserIP          :: !(Maybe Text)
     , _ccdAdClientId      :: !Text
-    , _ccdKey             :: !(Maybe Key)
+    , _ccdKey             :: !(Maybe AuthKey)
     , _ccdOAuthToken      :: !(Maybe OAuthToken)
     , _ccdFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ ccdAdClientId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccdKey :: Lens' CustomChannelsDelete' (Maybe Key)
+ccdKey :: Lens' CustomChannelsDelete' (Maybe AuthKey)
 ccdKey = lens _ccdKey (\ s a -> s{_ccdKey = a})
 
 -- | OAuth 2.0 token for the current user.

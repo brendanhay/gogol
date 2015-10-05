@@ -57,7 +57,7 @@ type AnnotationSetsUpdateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] AnnotationSet :>
@@ -74,7 +74,7 @@ data AnnotationSetsUpdate' = AnnotationSetsUpdate'
     , _asuAnnotationSetId :: !Text
     , _asuUserIP          :: !(Maybe Text)
     , _asuPayload         :: !AnnotationSet
-    , _asuKey             :: !(Maybe Key)
+    , _asuKey             :: !(Maybe AuthKey)
     , _asuOAuthToken      :: !(Maybe OAuthToken)
     , _asuFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -147,7 +147,7 @@ asuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-asuKey :: Lens' AnnotationSetsUpdate' (Maybe Key)
+asuKey :: Lens' AnnotationSetsUpdate' (Maybe AuthKey)
 asuKey = lens _asuKey (\ s a -> s{_asuKey = a})
 
 -- | OAuth 2.0 token for the current user.

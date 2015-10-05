@@ -59,7 +59,7 @@ type TargetPoolsGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] TargetPool
 
@@ -72,7 +72,7 @@ data TargetPoolsGet' = TargetPoolsGet'
     , _tpgProject     :: !Text
     , _tpgTargetPool  :: !Text
     , _tpgUserIP      :: !(Maybe Text)
-    , _tpgKey         :: !(Maybe Key)
+    , _tpgKey         :: !(Maybe AuthKey)
     , _tpgRegion      :: !Text
     , _tpgOAuthToken  :: !(Maybe OAuthToken)
     , _tpgFields      :: !(Maybe Text)
@@ -150,7 +150,7 @@ tpgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tpgKey :: Lens' TargetPoolsGet' (Maybe Key)
+tpgKey :: Lens' TargetPoolsGet' (Maybe AuthKey)
 tpgKey = lens _tpgKey (\ s a -> s{_tpgKey = a})
 
 -- | Name of the region scoping this request.

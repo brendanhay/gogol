@@ -71,7 +71,7 @@ type OrganizationsListResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListOrganizationsResponse
@@ -88,7 +88,7 @@ data OrganizationsList' = OrganizationsList'
     , _olAccessToken    :: !(Maybe Text)
     , _olUploadType     :: !(Maybe Text)
     , _olBearerToken    :: !(Maybe Text)
-    , _olKey            :: !(Maybe Key)
+    , _olKey            :: !(Maybe AuthKey)
     , _olFilter         :: !(Maybe Text)
     , _olPageToken      :: !(Maybe Text)
     , _olOAuthToken     :: !(Maybe OAuthToken)
@@ -198,7 +198,7 @@ olBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-olKey :: Lens' OrganizationsList' (Maybe Key)
+olKey :: Lens' OrganizationsList' (Maybe AuthKey)
 olKey = lens _olKey (\ s a -> s{_olKey = a})
 
 -- | An optional query string used to filter the Organizations to be return

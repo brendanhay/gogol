@@ -58,7 +58,7 @@ type RevisionsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Revision :> Patch '[JSON] Revision
@@ -71,7 +71,7 @@ data RevisionsPatch' = RevisionsPatch'
     , _rppPrettyPrint :: !Bool
     , _rppUserIP      :: !(Maybe Text)
     , _rppPayload     :: !Revision
-    , _rppKey         :: !(Maybe Key)
+    , _rppKey         :: !(Maybe AuthKey)
     , _rppFileId      :: !Text
     , _rppOAuthToken  :: !(Maybe OAuthToken)
     , _rppRevisionId  :: !Text
@@ -144,7 +144,7 @@ rppPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rppKey :: Lens' RevisionsPatch' (Maybe Key)
+rppKey :: Lens' RevisionsPatch' (Maybe AuthKey)
 rppKey = lens _rppKey (\ s a -> s{_rppKey = a})
 
 -- | The ID for the file.

@@ -58,7 +58,7 @@ type TaskDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -71,7 +71,7 @@ data TaskDelete' = TaskDelete'
     , _tPrettyPrint :: !Bool
     , _tTaskId      :: !Text
     , _tUserIP      :: !(Maybe Text)
-    , _tKey         :: !(Maybe Key)
+    , _tKey         :: !(Maybe AuthKey)
     , _tOAuthToken  :: !(Maybe OAuthToken)
     , _tTableId     :: !Text
     , _tFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ tUserIP = lens _tUserIP (\ s a -> s{_tUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tKey :: Lens' TaskDelete' (Maybe Key)
+tKey :: Lens' TaskDelete' (Maybe AuthKey)
 tKey = lens _tKey (\ s a -> s{_tKey = a})
 
 -- | OAuth 2.0 token for the current user.

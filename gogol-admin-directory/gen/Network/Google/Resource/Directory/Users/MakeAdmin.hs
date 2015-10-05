@@ -56,7 +56,7 @@ type UsersMakeAdminResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] UserMakeAdmin :> Post '[JSON] ()
@@ -69,7 +69,7 @@ data UsersMakeAdmin' = UsersMakeAdmin'
     , _umaPrettyPrint :: !Bool
     , _umaUserIP      :: !(Maybe Text)
     , _umaPayload     :: !UserMakeAdmin
-    , _umaKey         :: !(Maybe Key)
+    , _umaKey         :: !(Maybe AuthKey)
     , _umaOAuthToken  :: !(Maybe OAuthToken)
     , _umaUserKey     :: !Text
     , _umaFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ umaPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umaKey :: Lens' UsersMakeAdmin' (Maybe Key)
+umaKey :: Lens' UsersMakeAdmin' (Maybe AuthKey)
 umaKey = lens _umaKey (\ s a -> s{_umaKey = a})
 
 -- | OAuth 2.0 token for the current user.

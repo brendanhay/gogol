@@ -56,7 +56,7 @@ type ProjectsMoveInstanceResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] InstanceMoveRequest :>
@@ -72,7 +72,7 @@ data ProjectsMoveInstance' = ProjectsMoveInstance'
     , _pmiProject     :: !Text
     , _pmiUserIP      :: !(Maybe Text)
     , _pmiPayload     :: !InstanceMoveRequest
-    , _pmiKey         :: !(Maybe Key)
+    , _pmiKey         :: !(Maybe AuthKey)
     , _pmiOAuthToken  :: !(Maybe OAuthToken)
     , _pmiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ pmiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pmiKey :: Lens' ProjectsMoveInstance' (Maybe Key)
+pmiKey :: Lens' ProjectsMoveInstance' (Maybe AuthKey)
 pmiKey = lens _pmiKey (\ s a -> s{_pmiKey = a})
 
 -- | OAuth 2.0 token for the current user.

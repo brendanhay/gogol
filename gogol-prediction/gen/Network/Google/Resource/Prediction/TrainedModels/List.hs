@@ -59,7 +59,7 @@ type TrainedModelsListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] List
 
@@ -71,7 +71,7 @@ data TrainedModelsList' = TrainedModelsList'
     , _tmlPrettyPrint :: !Bool
     , _tmlProject     :: !Text
     , _tmlUserIP      :: !(Maybe Text)
-    , _tmlKey         :: !(Maybe Key)
+    , _tmlKey         :: !(Maybe AuthKey)
     , _tmlPageToken   :: !(Maybe Text)
     , _tmlOAuthToken  :: !(Maybe OAuthToken)
     , _tmlMaxResults  :: !(Maybe Word32)
@@ -142,7 +142,7 @@ tmlUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tmlKey :: Lens' TrainedModelsList' (Maybe Key)
+tmlKey :: Lens' TrainedModelsList' (Maybe AuthKey)
 tmlKey = lens _tmlKey (\ s a -> s{_tmlKey = a})
 
 -- | Pagination token.

@@ -54,7 +54,7 @@ type InAppProductsBatchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] InAppProductsBatchRequest :>
@@ -67,7 +67,7 @@ data InAppProductsBatch' = InAppProductsBatch'
     , _iapbPrettyPrint :: !Bool
     , _iapbUserIP      :: !(Maybe Text)
     , _iapbPayload     :: !InAppProductsBatchRequest
-    , _iapbKey         :: !(Maybe Key)
+    , _iapbKey         :: !(Maybe AuthKey)
     , _iapbOAuthToken  :: !(Maybe OAuthToken)
     , _iapbFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -131,7 +131,7 @@ iapbPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iapbKey :: Lens' InAppProductsBatch' (Maybe Key)
+iapbKey :: Lens' InAppProductsBatch' (Maybe AuthKey)
 iapbKey = lens _iapbKey (\ s a -> s{_iapbKey = a})
 
 -- | OAuth 2.0 token for the current user.

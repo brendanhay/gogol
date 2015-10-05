@@ -60,7 +60,7 @@ type ResourcesGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Resource
 
@@ -72,7 +72,7 @@ data ResourcesGet' = ResourcesGet'
     , _rgPrettyPrint :: !Bool
     , _rgProject     :: !Text
     , _rgUserIP      :: !(Maybe Text)
-    , _rgKey         :: !(Maybe Key)
+    , _rgKey         :: !(Maybe AuthKey)
     , _rgResource    :: !Text
     , _rgOAuthToken  :: !(Maybe OAuthToken)
     , _rgFields      :: !(Maybe Text)
@@ -144,7 +144,7 @@ rgUserIP = lens _rgUserIP (\ s a -> s{_rgUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rgKey :: Lens' ResourcesGet' (Maybe Key)
+rgKey :: Lens' ResourcesGet' (Maybe AuthKey)
 rgKey = lens _rgKey (\ s a -> s{_rgKey = a})
 
 -- | The name of the resource for this request.

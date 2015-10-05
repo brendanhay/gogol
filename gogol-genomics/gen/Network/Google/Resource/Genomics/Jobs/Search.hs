@@ -54,7 +54,7 @@ type JobsSearchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] SearchJobsRequest :>
@@ -68,7 +68,7 @@ data JobsSearch' = JobsSearch'
     , _jsPrettyPrint :: !Bool
     , _jsUserIP      :: !(Maybe Text)
     , _jsPayload     :: !SearchJobsRequest
-    , _jsKey         :: !(Maybe Key)
+    , _jsKey         :: !(Maybe AuthKey)
     , _jsOAuthToken  :: !(Maybe OAuthToken)
     , _jsFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -130,7 +130,7 @@ jsPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-jsKey :: Lens' JobsSearch' (Maybe Key)
+jsKey :: Lens' JobsSearch' (Maybe AuthKey)
 jsKey = lens _jsKey (\ s a -> s{_jsKey = a})
 
 -- | OAuth 2.0 token for the current user.

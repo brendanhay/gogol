@@ -69,7 +69,7 @@ type AdvertiserGroupsListResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] AdvertiserGroupsListResponse
@@ -85,7 +85,7 @@ data AdvertiserGroupsList' = AdvertiserGroupsList'
     , _aglIds          :: !(Maybe [Int64])
     , _aglProFileId    :: !Int64
     , _aglSortOrder    :: !(Maybe AdvertiserGroupsListSortOrder)
-    , _aglKey          :: !(Maybe Key)
+    , _aglKey          :: !(Maybe AuthKey)
     , _aglPageToken    :: !(Maybe Text)
     , _aglSortField    :: !(Maybe AdvertiserGroupsListSortField)
     , _aglOAuthToken   :: !(Maybe OAuthToken)
@@ -193,7 +193,7 @@ aglSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aglKey :: Lens' AdvertiserGroupsList' (Maybe Key)
+aglKey :: Lens' AdvertiserGroupsList' (Maybe AuthKey)
 aglKey = lens _aglKey (\ s a -> s{_aglKey = a})
 
 -- | Value of the nextPageToken from the previous result page.

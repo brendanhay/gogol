@@ -57,7 +57,7 @@ type ReportsGetFileResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] ()
        :<|>
@@ -69,7 +69,7 @@ type ReportsGetFileResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltMedia :> Get '[OctetStream] Body
 
@@ -82,7 +82,7 @@ data ReportsGetFile' = ReportsGetFile'
     , _rgfUserIP         :: !(Maybe Text)
     , _rgfReportId       :: !Text
     , _rgfReportFragment :: !Int32
-    , _rgfKey            :: !(Maybe Key)
+    , _rgfKey            :: !(Maybe AuthKey)
     , _rgfOAuthToken     :: !(Maybe OAuthToken)
     , _rgfFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -155,7 +155,7 @@ rgfReportFragment
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rgfKey :: Lens' ReportsGetFile' (Maybe Key)
+rgfKey :: Lens' ReportsGetFile' (Maybe AuthKey)
 rgfKey = lens _rgfKey (\ s a -> s{_rgfKey = a})
 
 -- | OAuth 2.0 token for the current user.

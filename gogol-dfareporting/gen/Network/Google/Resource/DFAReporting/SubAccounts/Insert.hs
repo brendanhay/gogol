@@ -56,7 +56,7 @@ type SubAccountsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] SubAccount :> Post '[JSON] SubAccount
@@ -70,7 +70,7 @@ data SubAccountsInsert' = SubAccountsInsert'
     , _saiUserIP      :: !(Maybe Text)
     , _saiProFileId   :: !Int64
     , _saiPayload     :: !SubAccount
-    , _saiKey         :: !(Maybe Key)
+    , _saiKey         :: !(Maybe AuthKey)
     , _saiOAuthToken  :: !(Maybe OAuthToken)
     , _saiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,7 +142,7 @@ saiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-saiKey :: Lens' SubAccountsInsert' (Maybe Key)
+saiKey :: Lens' SubAccountsInsert' (Maybe AuthKey)
 saiKey = lens _saiKey (\ s a -> s{_saiKey = a})
 
 -- | OAuth 2.0 token for the current user.

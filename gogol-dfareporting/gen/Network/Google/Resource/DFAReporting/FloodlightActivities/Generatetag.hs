@@ -58,7 +58,7 @@ type FloodlightActivitiesGeneratetagResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Post '[JSON]
@@ -73,7 +73,7 @@ data FloodlightActivitiesGeneratetag' = FloodlightActivitiesGeneratetag'
     , _fagUserIP               :: !(Maybe Text)
     , _fagFloodlightActivityId :: !(Maybe Int64)
     , _fagProFileId            :: !Int64
-    , _fagKey                  :: !(Maybe Key)
+    , _fagKey                  :: !(Maybe AuthKey)
     , _fagOAuthToken           :: !(Maybe OAuthToken)
     , _fagFields               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ fagProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fagKey :: Lens' FloodlightActivitiesGeneratetag' (Maybe Key)
+fagKey :: Lens' FloodlightActivitiesGeneratetag' (Maybe AuthKey)
 fagKey = lens _fagKey (\ s a -> s{_fagKey = a})
 
 -- | OAuth 2.0 token for the current user.

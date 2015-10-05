@@ -66,7 +66,7 @@ type ManagementGoalsListResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] Goals
@@ -81,7 +81,7 @@ data ManagementGoalsList' = ManagementGoalsList'
     , _mglUserIP        :: !(Maybe Text)
     , _mglProFileId     :: !Text
     , _mglAccountId     :: !Text
-    , _mglKey           :: !(Maybe Key)
+    , _mglKey           :: !(Maybe AuthKey)
     , _mglOAuthToken    :: !(Maybe OAuthToken)
     , _mglStartIndex    :: !(Maybe Int32)
     , _mglMaxResults    :: !(Maybe Int32)
@@ -176,7 +176,7 @@ mglAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mglKey :: Lens' ManagementGoalsList' (Maybe Key)
+mglKey :: Lens' ManagementGoalsList' (Maybe AuthKey)
 mglKey = lens _mglKey (\ s a -> s{_mglKey = a})
 
 -- | OAuth 2.0 token for the current user.

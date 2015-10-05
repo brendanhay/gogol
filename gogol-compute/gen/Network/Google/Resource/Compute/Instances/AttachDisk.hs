@@ -61,7 +61,7 @@ type InstancesAttachDiskResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] AttachedDisk :>
@@ -77,7 +77,7 @@ data InstancesAttachDisk' = InstancesAttachDisk'
     , _iadUserIP      :: !(Maybe Text)
     , _iadZone        :: !Text
     , _iadPayload     :: !AttachedDisk
-    , _iadKey         :: !(Maybe Key)
+    , _iadKey         :: !(Maybe AuthKey)
     , _iadOAuthToken  :: !(Maybe OAuthToken)
     , _iadFields      :: !(Maybe Text)
     , _iadInstance    :: !Text
@@ -162,7 +162,7 @@ iadPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iadKey :: Lens' InstancesAttachDisk' (Maybe Key)
+iadKey :: Lens' InstancesAttachDisk' (Maybe AuthKey)
 iadKey = lens _iadKey (\ s a -> s{_iadKey = a})
 
 -- | OAuth 2.0 token for the current user.

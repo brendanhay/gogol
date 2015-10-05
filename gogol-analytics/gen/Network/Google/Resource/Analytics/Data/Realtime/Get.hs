@@ -65,7 +65,7 @@ type DataRealtimeGetResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] RealtimeData
@@ -80,7 +80,7 @@ data DataRealtimeGet' = DataRealtimeGet'
     , _drgUserIP      :: !(Maybe Text)
     , _drgFilters     :: !(Maybe Text)
     , _drgIds         :: !Text
-    , _drgKey         :: !(Maybe Key)
+    , _drgKey         :: !(Maybe AuthKey)
     , _drgSort        :: !(Maybe Text)
     , _drgDimensions  :: !(Maybe Text)
     , _drgOAuthToken  :: !(Maybe OAuthToken)
@@ -174,7 +174,7 @@ drgIds = lens _drgIds (\ s a -> s{_drgIds = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-drgKey :: Lens' DataRealtimeGet' (Maybe Key)
+drgKey :: Lens' DataRealtimeGet' (Maybe AuthKey)
 drgKey = lens _drgKey (\ s a -> s{_drgKey = a})
 
 -- | A comma-separated list of dimensions or metrics that determine the sort

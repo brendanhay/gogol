@@ -60,7 +60,7 @@ type LiveStreamsInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] LiveStream :> Post '[JSON] LiveStream
@@ -76,7 +76,7 @@ data LiveStreamsInsert' = LiveStreamsInsert'
     , _lsiUserIP                        :: !(Maybe Text)
     , _lsiPayload                       :: !LiveStream
     , _lsiOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lsiKey                           :: !(Maybe Key)
+    , _lsiKey                           :: !(Maybe AuthKey)
     , _lsiOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lsiOAuthToken                    :: !(Maybe OAuthToken)
     , _lsiFields                        :: !(Maybe Text)
@@ -172,7 +172,7 @@ lsiOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lsiKey :: Lens' LiveStreamsInsert' (Maybe Key)
+lsiKey :: Lens' LiveStreamsInsert' (Maybe AuthKey)
 lsiKey = lens _lsiKey (\ s a -> s{_lsiKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:

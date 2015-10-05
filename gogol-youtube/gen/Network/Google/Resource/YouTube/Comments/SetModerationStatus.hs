@@ -63,7 +63,7 @@ type CommentsSetModerationStatusResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -78,7 +78,7 @@ data CommentsSetModerationStatus' = CommentsSetModerationStatus'
     , _csmsBanAuthor        :: !Bool
     , _csmsModerationStatus :: !CommentsSetModerationStatusModerationStatus
     , _csmsUserIP           :: !(Maybe Text)
-    , _csmsKey              :: !(Maybe Key)
+    , _csmsKey              :: !(Maybe AuthKey)
     , _csmsId               :: !Text
     , _csmsOAuthToken       :: !(Maybe OAuthToken)
     , _csmsFields           :: !(Maybe Text)
@@ -160,7 +160,7 @@ csmsUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-csmsKey :: Lens' CommentsSetModerationStatus' (Maybe Key)
+csmsKey :: Lens' CommentsSetModerationStatus' (Maybe AuthKey)
 csmsKey = lens _csmsKey (\ s a -> s{_csmsKey = a})
 
 -- | The id parameter specifies a comma-separated list of IDs that identify

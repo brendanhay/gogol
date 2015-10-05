@@ -57,7 +57,7 @@ type GlobalAccountsOperationsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -70,7 +70,7 @@ data GlobalAccountsOperationsDelete' = GlobalAccountsOperationsDelete'
     , _gaodProject     :: !Text
     , _gaodOperation   :: !Text
     , _gaodUserIP      :: !(Maybe Text)
-    , _gaodKey         :: !(Maybe Key)
+    , _gaodKey         :: !(Maybe AuthKey)
     , _gaodOAuthToken  :: !(Maybe OAuthToken)
     , _gaodFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ gaodUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gaodKey :: Lens' GlobalAccountsOperationsDelete' (Maybe Key)
+gaodKey :: Lens' GlobalAccountsOperationsDelete' (Maybe AuthKey)
 gaodKey = lens _gaodKey (\ s a -> s{_gaodKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -57,7 +57,7 @@ type ReportsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Report
 
@@ -70,7 +70,7 @@ data ReportsGet' = ReportsGet'
     , _rgUserIP      :: !(Maybe Text)
     , _rgReportId    :: !Int64
     , _rgProFileId   :: !Int64
-    , _rgKey         :: !(Maybe Key)
+    , _rgKey         :: !(Maybe AuthKey)
     , _rgOAuthToken  :: !(Maybe OAuthToken)
     , _rgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -141,7 +141,7 @@ rgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rgKey :: Lens' ReportsGet' (Maybe Key)
+rgKey :: Lens' ReportsGet' (Maybe AuthKey)
 rgKey = lens _rgKey (\ s a -> s{_rgKey = a})
 
 -- | OAuth 2.0 token for the current user.

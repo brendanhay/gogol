@@ -61,7 +61,7 @@ type InstancesResetSSLConfigResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
@@ -76,7 +76,7 @@ data InstancesResetSSLConfig' = InstancesResetSSLConfig'
     , _irscPrettyPrint :: !Bool
     , _irscProject     :: !Text
     , _irscUserIP      :: !(Maybe Text)
-    , _irscKey         :: !(Maybe Key)
+    , _irscKey         :: !(Maybe AuthKey)
     , _irscOAuthToken  :: !(Maybe OAuthToken)
     , _irscFields      :: !(Maybe Text)
     , _irscInstance    :: !Text
@@ -145,7 +145,7 @@ irscUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-irscKey :: Lens' InstancesResetSSLConfig' (Maybe Key)
+irscKey :: Lens' InstancesResetSSLConfig' (Maybe AuthKey)
 irscKey = lens _irscKey (\ s a -> s{_irscKey = a})
 
 -- | OAuth 2.0 token for the current user.

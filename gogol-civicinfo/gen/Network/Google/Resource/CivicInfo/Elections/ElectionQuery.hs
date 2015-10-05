@@ -52,7 +52,7 @@ type ElectionsElectionQueryResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ElectionsQueryResponse
@@ -64,7 +64,7 @@ data ElectionsElectionQuery' = ElectionsElectionQuery'
     { _eeqQuotaUser   :: !(Maybe Text)
     , _eeqPrettyPrint :: !Bool
     , _eeqUserIP      :: !(Maybe Text)
-    , _eeqKey         :: !(Maybe Key)
+    , _eeqKey         :: !(Maybe AuthKey)
     , _eeqOAuthToken  :: !(Maybe OAuthToken)
     , _eeqFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -118,7 +118,7 @@ eeqUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eeqKey :: Lens' ElectionsElectionQuery' (Maybe Key)
+eeqKey :: Lens' ElectionsElectionQuery' (Maybe AuthKey)
 eeqKey = lens _eeqKey (\ s a -> s{_eeqKey = a})
 
 -- | OAuth 2.0 token for the current user.

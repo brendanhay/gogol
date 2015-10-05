@@ -70,7 +70,7 @@ type BillingAccountsListResource =
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] ListBillingAccountsResponse
@@ -88,7 +88,7 @@ data BillingAccountsList' = BillingAccountsList'
     , _balAccessToken    :: !(Maybe Text)
     , _balUploadType     :: !(Maybe Text)
     , _balBearerToken    :: !(Maybe Text)
-    , _balKey            :: !(Maybe Key)
+    , _balKey            :: !(Maybe AuthKey)
     , _balPageToken      :: !(Maybe Text)
     , _balOAuthToken     :: !(Maybe OAuthToken)
     , _balPageSize       :: !(Maybe Int32)
@@ -195,7 +195,7 @@ balBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-balKey :: Lens' BillingAccountsList' (Maybe Key)
+balKey :: Lens' BillingAccountsList' (Maybe AuthKey)
 balKey = lens _balKey (\ s a -> s{_balKey = a})
 
 -- | A token identifying a page of results to return. This should be a

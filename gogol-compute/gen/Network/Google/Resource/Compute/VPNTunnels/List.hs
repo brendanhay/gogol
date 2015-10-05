@@ -64,7 +64,7 @@ type VPNTunnelsListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] VPNTunnelList
@@ -78,7 +78,7 @@ data VPNTunnelsList' = VPNTunnelsList'
     , _vtlPrettyPrint :: !Bool
     , _vtlProject     :: !Text
     , _vtlUserIP      :: !(Maybe Text)
-    , _vtlKey         :: !(Maybe Key)
+    , _vtlKey         :: !(Maybe AuthKey)
     , _vtlFilter      :: !(Maybe Text)
     , _vtlRegion      :: !Text
     , _vtlPageToken   :: !(Maybe Text)
@@ -158,7 +158,7 @@ vtlUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vtlKey :: Lens' VPNTunnelsList' (Maybe Key)
+vtlKey :: Lens' VPNTunnelsList' (Maybe AuthKey)
 vtlKey = lens _vtlKey (\ s a -> s{_vtlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

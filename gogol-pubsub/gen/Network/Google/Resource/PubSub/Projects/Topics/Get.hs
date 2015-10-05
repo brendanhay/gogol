@@ -66,7 +66,7 @@ type ProjectsTopicsGetResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] Topic
 
@@ -83,7 +83,7 @@ data ProjectsTopicsGet' = ProjectsTopicsGet'
     , _ptgUploadType     :: !(Maybe Text)
     , _ptgTopic          :: !Text
     , _ptgBearerToken    :: !(Maybe Text)
-    , _ptgKey            :: !(Maybe Key)
+    , _ptgKey            :: !(Maybe AuthKey)
     , _ptgOAuthToken     :: !(Maybe OAuthToken)
     , _ptgFields         :: !(Maybe Text)
     , _ptgCallback       :: !(Maybe Text)
@@ -190,7 +190,7 @@ ptgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ptgKey :: Lens' ProjectsTopicsGet' (Maybe Key)
+ptgKey :: Lens' ProjectsTopicsGet' (Maybe AuthKey)
 ptgKey = lens _ptgKey (\ s a -> s{_ptgKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -71,7 +71,7 @@ type ProjectsSubscriptionsListResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListSubscriptionsResponse
@@ -89,7 +89,7 @@ data ProjectsSubscriptionsList' = ProjectsSubscriptionsList'
     , _pslAccessToken    :: !(Maybe Text)
     , _pslUploadType     :: !(Maybe Text)
     , _pslBearerToken    :: !(Maybe Text)
-    , _pslKey            :: !(Maybe Key)
+    , _pslKey            :: !(Maybe AuthKey)
     , _pslPageToken      :: !(Maybe Text)
     , _pslOAuthToken     :: !(Maybe OAuthToken)
     , _pslPageSize       :: !(Maybe Int32)
@@ -205,7 +205,7 @@ pslBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pslKey :: Lens' ProjectsSubscriptionsList' (Maybe Key)
+pslKey :: Lens' ProjectsSubscriptionsList' (Maybe AuthKey)
 pslKey = lens _pslKey (\ s a -> s{_pslKey = a})
 
 -- | The value returned by the last ListSubscriptionsResponse; indicates that

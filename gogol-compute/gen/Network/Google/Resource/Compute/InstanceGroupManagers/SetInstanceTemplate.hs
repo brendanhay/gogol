@@ -64,7 +64,7 @@ type InstanceGroupManagersSetInstanceTemplateResource
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON]
@@ -84,7 +84,7 @@ data InstanceGroupManagersSetInstanceTemplate' = InstanceGroupManagersSetInstanc
     , _igmsitUserIP               :: !(Maybe Text)
     , _igmsitZone                 :: !Text
     , _igmsitPayload              :: !InstanceGroupManagersSetInstanceTemplateRequest
-    , _igmsitKey                  :: !(Maybe Key)
+    , _igmsitKey                  :: !(Maybe AuthKey)
     , _igmsitOAuthToken           :: !(Maybe OAuthToken)
     , _igmsitFields               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -178,7 +178,7 @@ igmsitPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmsitKey :: Lens' InstanceGroupManagersSetInstanceTemplate' (Maybe Key)
+igmsitKey :: Lens' InstanceGroupManagersSetInstanceTemplate' (Maybe AuthKey)
 igmsitKey
   = lens _igmsitKey (\ s a -> s{_igmsitKey = a})
 

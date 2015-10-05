@@ -62,7 +62,7 @@ type TurnBasedMatchesRematchResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Post '[JSON] TurnBasedMatchRematch
@@ -78,7 +78,7 @@ data TurnBasedMatchesRematch' = TurnBasedMatchesRematch'
     , _tbmrQuotaUser   :: !(Maybe Text)
     , _tbmrPrettyPrint :: !Bool
     , _tbmrUserIP      :: !(Maybe Text)
-    , _tbmrKey         :: !(Maybe Key)
+    , _tbmrKey         :: !(Maybe AuthKey)
     , _tbmrLanguage    :: !(Maybe Text)
     , _tbmrOAuthToken  :: !(Maybe OAuthToken)
     , _tbmrMatchId     :: !Text
@@ -153,7 +153,7 @@ tbmrUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tbmrKey :: Lens' TurnBasedMatchesRematch' (Maybe Key)
+tbmrKey :: Lens' TurnBasedMatchesRematch' (Maybe AuthKey)
 tbmrKey = lens _tbmrKey (\ s a -> s{_tbmrKey = a})
 
 -- | The preferred language to use for strings returned by this method.

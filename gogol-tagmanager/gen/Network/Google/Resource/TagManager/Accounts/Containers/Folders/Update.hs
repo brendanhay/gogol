@@ -63,7 +63,7 @@ type AccountsContainersFoldersUpdateResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Folder :> Put '[JSON] Folder
@@ -80,7 +80,7 @@ data AccountsContainersFoldersUpdate' = AccountsContainersFoldersUpdate'
     , _acfuFolderId    :: !Text
     , _acfuPayload     :: !Folder
     , _acfuAccountId   :: !Text
-    , _acfuKey         :: !(Maybe Key)
+    , _acfuKey         :: !(Maybe AuthKey)
     , _acfuOAuthToken  :: !(Maybe OAuthToken)
     , _acfuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -183,7 +183,7 @@ acfuAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acfuKey :: Lens' AccountsContainersFoldersUpdate' (Maybe Key)
+acfuKey :: Lens' AccountsContainersFoldersUpdate' (Maybe AuthKey)
 acfuKey = lens _acfuKey (\ s a -> s{_acfuKey = a})
 
 -- | OAuth 2.0 token for the current user.

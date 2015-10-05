@@ -61,7 +61,7 @@ type TablesFeaturesGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Feature
 
@@ -72,7 +72,7 @@ data TablesFeaturesGet' = TablesFeaturesGet'
     { _tfgQuotaUser   :: !(Maybe Text)
     , _tfgPrettyPrint :: !Bool
     , _tfgUserIP      :: !(Maybe Text)
-    , _tfgKey         :: !(Maybe Key)
+    , _tfgKey         :: !(Maybe AuthKey)
     , _tfgVersion     :: !(Maybe TablesFeaturesGetVersion)
     , _tfgId          :: !Text
     , _tfgSelect      :: !(Maybe Text)
@@ -144,7 +144,7 @@ tfgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tfgKey :: Lens' TablesFeaturesGet' (Maybe Key)
+tfgKey :: Lens' TablesFeaturesGet' (Maybe AuthKey)
 tfgKey = lens _tfgKey (\ s a -> s{_tfgKey = a})
 
 -- | The table version to access. See Accessing Public Data for information.

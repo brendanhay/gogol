@@ -62,7 +62,7 @@ type EditsTracksUpdateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Track :> Put '[JSON] Track
@@ -79,7 +79,7 @@ data EditsTracksUpdate' = EditsTracksUpdate'
     , _etuPackageName :: !Text
     , _etuUserIP      :: !(Maybe Text)
     , _etuPayload     :: !Track
-    , _etuKey         :: !(Maybe Key)
+    , _etuKey         :: !(Maybe AuthKey)
     , _etuOAuthToken  :: !(Maybe OAuthToken)
     , _etuEditId      :: !Text
     , _etuFields      :: !(Maybe Text)
@@ -166,7 +166,7 @@ etuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-etuKey :: Lens' EditsTracksUpdate' (Maybe Key)
+etuKey :: Lens' EditsTracksUpdate' (Maybe AuthKey)
 etuKey = lens _etuKey (\ s a -> s{_etuKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -58,7 +58,7 @@ type AnnotationSetsPatchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] AnnotationSet :>
@@ -76,7 +76,7 @@ data AnnotationSetsPatch' = AnnotationSetsPatch'
     , _aspAnnotationSetId :: !Text
     , _aspUserIP          :: !(Maybe Text)
     , _aspPayload         :: !AnnotationSet
-    , _aspKey             :: !(Maybe Key)
+    , _aspKey             :: !(Maybe AuthKey)
     , _aspOAuthToken      :: !(Maybe OAuthToken)
     , _aspFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -149,7 +149,7 @@ aspPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aspKey :: Lens' AnnotationSetsPatch' (Maybe Key)
+aspKey :: Lens' AnnotationSetsPatch' (Maybe AuthKey)
 aspKey = lens _aspKey (\ s a -> s{_aspKey = a})
 
 -- | OAuth 2.0 token for the current user.

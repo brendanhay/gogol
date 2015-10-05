@@ -57,7 +57,7 @@ type TrainedModelsUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Update :> Put '[JSON] Insert2
@@ -71,7 +71,7 @@ data TrainedModelsUpdate' = TrainedModelsUpdate'
     , _tmuProject     :: !Text
     , _tmuUserIP      :: !(Maybe Text)
     , _tmuPayload     :: !Update
-    , _tmuKey         :: !(Maybe Key)
+    , _tmuKey         :: !(Maybe AuthKey)
     , _tmuId          :: !Text
     , _tmuOAuthToken  :: !(Maybe OAuthToken)
     , _tmuFields      :: !(Maybe Text)
@@ -148,7 +148,7 @@ tmuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tmuKey :: Lens' TrainedModelsUpdate' (Maybe Key)
+tmuKey :: Lens' TrainedModelsUpdate' (Maybe AuthKey)
 tmuKey = lens _tmuKey (\ s a -> s{_tmuKey = a})
 
 -- | The unique name for the predictive model.

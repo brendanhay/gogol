@@ -136,7 +136,7 @@ type AdsListResource =
                                                                    :>
                                                                    QueryParam
                                                                      "key"
-                                                                     Key
+                                                                     AuthKey
                                                                      :>
                                                                      QueryParam
                                                                        "oauth_token"
@@ -170,7 +170,7 @@ data AdsList' = AdsList'
     , _adsSortOrder                            :: !(Maybe AdsListSortOrder)
     , _adsActive                               :: !(Maybe Bool)
     , _adsCreativeOptimizationConfigurationIds :: !(Maybe [Int64])
-    , _adsKey                                  :: !(Maybe Key)
+    , _adsKey                                  :: !(Maybe AuthKey)
     , _adsPlacementIds                         :: !(Maybe [Int64])
     , _adsSSLRequired                          :: !(Maybe Bool)
     , _adsOverriddenEventTagId                 :: !(Maybe Int64)
@@ -405,7 +405,7 @@ adsCreativeOptimizationConfigurationIds
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-adsKey :: Lens' AdsList' (Maybe Key)
+adsKey :: Lens' AdsList' (Maybe AuthKey)
 adsKey = lens _adsKey (\ s a -> s{_adsKey = a})
 
 -- | Select only ads with these placement IDs assigned.

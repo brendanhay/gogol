@@ -63,7 +63,7 @@ type AccountsContainersTagsUpdateResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Tag :> Put '[JSON] Tag
@@ -80,7 +80,7 @@ data AccountsContainersTagsUpdate' = AccountsContainersTagsUpdate'
     , _actucPayload     :: !Tag
     , _actucAccountId   :: !Text
     , _actucTagId       :: !Text
-    , _actucKey         :: !(Maybe Key)
+    , _actucKey         :: !(Maybe AuthKey)
     , _actucOAuthToken  :: !(Maybe OAuthToken)
     , _actucFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -183,7 +183,7 @@ actucTagId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-actucKey :: Lens' AccountsContainersTagsUpdate' (Maybe Key)
+actucKey :: Lens' AccountsContainersTagsUpdate' (Maybe AuthKey)
 actucKey = lens _actucKey (\ s a -> s{_actucKey = a})
 
 -- | OAuth 2.0 token for the current user.

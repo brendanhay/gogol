@@ -64,7 +64,7 @@ type ReferencesBasesListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ListBasesResponse
@@ -79,7 +79,7 @@ data ReferencesBasesList' = ReferencesBasesList'
     , _rblUserIP      :: !(Maybe Text)
     , _rblStart       :: !(Maybe Int64)
     , _rblReferenceId :: !Text
-    , _rblKey         :: !(Maybe Key)
+    , _rblKey         :: !(Maybe AuthKey)
     , _rblEnd         :: !(Maybe Int64)
     , _rblPageToken   :: !(Maybe Text)
     , _rblOAuthToken  :: !(Maybe OAuthToken)
@@ -162,7 +162,7 @@ rblReferenceId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rblKey :: Lens' ReferencesBasesList' (Maybe Key)
+rblKey :: Lens' ReferencesBasesList' (Maybe AuthKey)
 rblKey = lens _rblKey (\ s a -> s{_rblKey = a})
 
 -- | The end position (0-based, exclusive) of this query. Defaults to the

@@ -63,7 +63,7 @@ type TablesUpdateResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Table :> Put '[JSON] Table
@@ -78,7 +78,7 @@ data TablesUpdate' = TablesUpdate'
     , _tuPrettyPrint :: !Bool
     , _tuUserIP      :: !(Maybe Text)
     , _tuPayload     :: !Table
-    , _tuKey         :: !(Maybe Key)
+    , _tuKey         :: !(Maybe AuthKey)
     , _tuDatasetId   :: !Text
     , _tuProjectId   :: !Text
     , _tuOAuthToken  :: !(Maybe OAuthToken)
@@ -155,7 +155,7 @@ tuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tuKey :: Lens' TablesUpdate' (Maybe Key)
+tuKey :: Lens' TablesUpdate' (Maybe AuthKey)
 tuKey = lens _tuKey (\ s a -> s{_tuKey = a})
 
 -- | Dataset ID of the table to update

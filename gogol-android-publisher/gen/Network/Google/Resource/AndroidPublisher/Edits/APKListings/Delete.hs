@@ -63,7 +63,7 @@ type EditsAPKListingsDeleteResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -77,7 +77,7 @@ data EditsAPKListingsDelete' = EditsAPKListingsDelete'
     , _eapkldPackageName    :: !Text
     , _eapkldAPKVersionCode :: !Int32
     , _eapkldUserIP         :: !(Maybe Text)
-    , _eapkldKey            :: !(Maybe Key)
+    , _eapkldKey            :: !(Maybe AuthKey)
     , _eapkldLanguage       :: !Text
     , _eapkldOAuthToken     :: !(Maybe OAuthToken)
     , _eapkldEditId         :: !Text
@@ -164,7 +164,7 @@ eapkldUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eapkldKey :: Lens' EditsAPKListingsDelete' (Maybe Key)
+eapkldKey :: Lens' EditsAPKListingsDelete' (Maybe AuthKey)
 eapkldKey
   = lens _eapkldKey (\ s a -> s{_eapkldKey = a})
 

@@ -67,7 +67,7 @@ type TransferOperationsPauseResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] PauseTransferOperationRequest
@@ -86,7 +86,7 @@ data TransferOperationsPause' = TransferOperationsPause'
     , _topUploadType     :: !(Maybe Text)
     , _topPayload        :: !PauseTransferOperationRequest
     , _topBearerToken    :: !(Maybe Text)
-    , _topKey            :: !(Maybe Key)
+    , _topKey            :: !(Maybe AuthKey)
     , _topName           :: !Text
     , _topOAuthToken     :: !(Maybe OAuthToken)
     , _topFields         :: !(Maybe Text)
@@ -199,7 +199,7 @@ topBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-topKey :: Lens' TransferOperationsPause' (Maybe Key)
+topKey :: Lens' TransferOperationsPause' (Maybe AuthKey)
 topKey = lens _topKey (\ s a -> s{_topKey = a})
 
 -- | The name of the transfer operation. Required.

@@ -63,7 +63,7 @@ type TabledataInsertAllResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] TableDataInsertAllRequest :>
@@ -78,7 +78,7 @@ data TabledataInsertAll' = TabledataInsertAll'
     , _tiaPrettyPrint :: !Bool
     , _tiaUserIP      :: !(Maybe Text)
     , _tiaPayload     :: !TableDataInsertAllRequest
-    , _tiaKey         :: !(Maybe Key)
+    , _tiaKey         :: !(Maybe AuthKey)
     , _tiaDatasetId   :: !Text
     , _tiaProjectId   :: !Text
     , _tiaOAuthToken  :: !(Maybe OAuthToken)
@@ -156,7 +156,7 @@ tiaPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tiaKey :: Lens' TabledataInsertAll' (Maybe Key)
+tiaKey :: Lens' TabledataInsertAll' (Maybe AuthKey)
 tiaKey = lens _tiaKey (\ s a -> s{_tiaKey = a})
 
 -- | Dataset ID of the destination table.

@@ -57,7 +57,7 @@ type ConnectionTypesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ConnectionType
@@ -70,7 +70,7 @@ data ConnectionTypesGet' = ConnectionTypesGet'
     , _ctgPrettyPrint :: !Bool
     , _ctgUserIP      :: !(Maybe Text)
     , _ctgProFileId   :: !Int64
-    , _ctgKey         :: !(Maybe Key)
+    , _ctgKey         :: !(Maybe AuthKey)
     , _ctgId          :: !Int64
     , _ctgOAuthToken  :: !(Maybe OAuthToken)
     , _ctgFields      :: !(Maybe Text)
@@ -138,7 +138,7 @@ ctgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ctgKey :: Lens' ConnectionTypesGet' (Maybe Key)
+ctgKey :: Lens' ConnectionTypesGet' (Maybe AuthKey)
 ctgKey = lens _ctgKey (\ s a -> s{_ctgKey = a})
 
 -- | Connection type ID.

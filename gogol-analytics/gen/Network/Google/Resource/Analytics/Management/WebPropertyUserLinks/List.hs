@@ -63,7 +63,7 @@ type ManagementWebPropertyUserLinksListResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] EntityUserLinks
@@ -77,7 +77,7 @@ data ManagementWebPropertyUserLinksList' = ManagementWebPropertyUserLinksList'
     , _mwpullWebPropertyId :: !Text
     , _mwpullUserIP        :: !(Maybe Text)
     , _mwpullAccountId     :: !Text
-    , _mwpullKey           :: !(Maybe Key)
+    , _mwpullKey           :: !(Maybe AuthKey)
     , _mwpullOAuthToken    :: !(Maybe OAuthToken)
     , _mwpullStartIndex    :: !(Maybe Int32)
     , _mwpullMaxResults    :: !(Maybe Int32)
@@ -162,7 +162,7 @@ mwpullAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mwpullKey :: Lens' ManagementWebPropertyUserLinksList' (Maybe Key)
+mwpullKey :: Lens' ManagementWebPropertyUserLinksList' (Maybe AuthKey)
 mwpullKey
   = lens _mwpullKey (\ s a -> s{_mwpullKey = a})
 

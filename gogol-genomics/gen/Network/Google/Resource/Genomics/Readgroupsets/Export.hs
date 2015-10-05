@@ -57,7 +57,7 @@ type ReadgroupsetsExportResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] ExportReadGroupSetsRequest :>
@@ -74,7 +74,7 @@ data ReadgroupsetsExport' = ReadgroupsetsExport'
     , _rePrettyPrint :: !Bool
     , _reUserIP      :: !(Maybe Text)
     , _rePayload     :: !ExportReadGroupSetsRequest
-    , _reKey         :: !(Maybe Key)
+    , _reKey         :: !(Maybe AuthKey)
     , _reOAuthToken  :: !(Maybe OAuthToken)
     , _reFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -136,7 +136,7 @@ rePayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-reKey :: Lens' ReadgroupsetsExport' (Maybe Key)
+reKey :: Lens' ReadgroupsetsExport' (Maybe AuthKey)
 reKey = lens _reKey (\ s a -> s{_reKey = a})
 
 -- | OAuth 2.0 token for the current user.

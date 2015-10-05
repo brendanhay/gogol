@@ -55,7 +55,7 @@ type TablesProcessResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Post '[JSON] ProcessResponse
@@ -67,7 +67,7 @@ data TablesProcess' = TablesProcess'
     { _tQuotaUser   :: !(Maybe Text)
     , _tPrettyPrint :: !Bool
     , _tUserIP      :: !(Maybe Text)
-    , _tKey         :: !(Maybe Key)
+    , _tKey         :: !(Maybe AuthKey)
     , _tId          :: !Text
     , _tOAuthToken  :: !(Maybe OAuthToken)
     , _tFields      :: !(Maybe Text)
@@ -124,7 +124,7 @@ tUserIP = lens _tUserIP (\ s a -> s{_tUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tKey :: Lens' TablesProcess' (Maybe Key)
+tKey :: Lens' TablesProcess' (Maybe AuthKey)
 tKey = lens _tKey (\ s a -> s{_tKey = a})
 
 -- | The ID of the table.

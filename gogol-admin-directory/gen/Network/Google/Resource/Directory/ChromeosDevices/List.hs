@@ -70,7 +70,7 @@ type ChromeosDevicesListResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] ChromeOSDevices
@@ -85,7 +85,7 @@ data ChromeosDevicesList' = ChromeosDevicesList'
     , _cdlUserIP      :: !(Maybe Text)
     , _cdlCustomerId  :: !Text
     , _cdlSortOrder   :: !(Maybe ChromeosDevicesListSortOrder)
-    , _cdlKey         :: !(Maybe Key)
+    , _cdlKey         :: !(Maybe AuthKey)
     , _cdlQuery       :: !(Maybe Text)
     , _cdlProjection  :: !(Maybe ChromeosDevicesListProjection)
     , _cdlPageToken   :: !(Maybe Text)
@@ -182,7 +182,7 @@ cdlSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cdlKey :: Lens' ChromeosDevicesList' (Maybe Key)
+cdlKey :: Lens' ChromeosDevicesList' (Maybe AuthKey)
 cdlKey = lens _cdlKey (\ s a -> s{_cdlKey = a})
 
 -- | Search string in the format given at

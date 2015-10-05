@@ -61,7 +61,7 @@ type TypesListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] TypesListResponse
@@ -74,7 +74,7 @@ data TypesList' = TypesList'
     , _tlPrettyPrint :: !Bool
     , _tlProject     :: !Text
     , _tlUserIP      :: !(Maybe Text)
-    , _tlKey         :: !(Maybe Key)
+    , _tlKey         :: !(Maybe AuthKey)
     , _tlFilter      :: !(Maybe Text)
     , _tlPageToken   :: !(Maybe Text)
     , _tlOAuthToken  :: !(Maybe OAuthToken)
@@ -148,7 +148,7 @@ tlUserIP = lens _tlUserIP (\ s a -> s{_tlUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tlKey :: Lens' TypesList' (Maybe Key)
+tlKey :: Lens' TypesList' (Maybe AuthKey)
 tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

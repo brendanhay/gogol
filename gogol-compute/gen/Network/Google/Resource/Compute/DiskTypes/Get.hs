@@ -59,7 +59,7 @@ type DiskTypesGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] DiskType
 
@@ -72,7 +72,7 @@ data DiskTypesGet' = DiskTypesGet'
     , _dtgProject     :: !Text
     , _dtgUserIP      :: !(Maybe Text)
     , _dtgZone        :: !Text
-    , _dtgKey         :: !(Maybe Key)
+    , _dtgKey         :: !(Maybe AuthKey)
     , _dtgDiskType    :: !Text
     , _dtgOAuthToken  :: !(Maybe OAuthToken)
     , _dtgFields      :: !(Maybe Text)
@@ -148,7 +148,7 @@ dtgZone = lens _dtgZone (\ s a -> s{_dtgZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dtgKey :: Lens' DiskTypesGet' (Maybe Key)
+dtgKey :: Lens' DiskTypesGet' (Maybe AuthKey)
 dtgKey = lens _dtgKey (\ s a -> s{_dtgKey = a})
 
 -- | Name of the disk type resource to return.

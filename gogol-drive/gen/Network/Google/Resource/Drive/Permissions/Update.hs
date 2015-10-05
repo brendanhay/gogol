@@ -60,7 +60,7 @@ type PermissionsUpdateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Permission :>
@@ -74,7 +74,7 @@ data PermissionsUpdate' = PermissionsUpdate'
     , _puuPrettyPrint       :: !Bool
     , _puuUserIP            :: !(Maybe Text)
     , _puuPayload           :: !Permission
-    , _puuKey               :: !(Maybe Key)
+    , _puuKey               :: !(Maybe AuthKey)
     , _puuTransferOwnership :: !Bool
     , _puuFileId            :: !Text
     , _puuOAuthToken        :: !(Maybe OAuthToken)
@@ -151,7 +151,7 @@ puuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puuKey :: Lens' PermissionsUpdate' (Maybe Key)
+puuKey :: Lens' PermissionsUpdate' (Maybe AuthKey)
 puuKey = lens _puuKey (\ s a -> s{_puuKey = a})
 
 -- | Whether changing a role to \'owner\' downgrades the current owners to

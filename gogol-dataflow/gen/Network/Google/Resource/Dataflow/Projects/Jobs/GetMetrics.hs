@@ -73,7 +73,7 @@ type ProjectsJobsGetMetricsResource =
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "fields" Text :>
-                                       QueryParam "key" Key :>
+                                       QueryParam "key" AuthKey :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] JobMetrics
@@ -92,7 +92,7 @@ data ProjectsJobsGetMetrics' = ProjectsJobsGetMetrics'
     , _pjgmAccessToken    :: !(Maybe Text)
     , _pjgmUploadType     :: !(Maybe Text)
     , _pjgmBearerToken    :: !(Maybe Text)
-    , _pjgmKey            :: !(Maybe Key)
+    , _pjgmKey            :: !(Maybe AuthKey)
     , _pjgmProjectId      :: !Text
     , _pjgmOAuthToken     :: !(Maybe OAuthToken)
     , _pjgmFields         :: !(Maybe Text)
@@ -217,7 +217,7 @@ pjgmBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pjgmKey :: Lens' ProjectsJobsGetMetrics' (Maybe Key)
+pjgmKey :: Lens' ProjectsJobsGetMetrics' (Maybe AuthKey)
 pjgmKey = lens _pjgmKey (\ s a -> s{_pjgmKey = a})
 
 -- | A project id.

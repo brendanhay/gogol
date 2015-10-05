@@ -63,7 +63,7 @@ type ManagementWebPropertyAdWordsLinksPatchResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] EntityAdWordsLink :>
@@ -80,7 +80,7 @@ data ManagementWebPropertyAdWordsLinksPatch' = ManagementWebPropertyAdWordsLinks
     , _mwpawlpUserIP                   :: !(Maybe Text)
     , _mwpawlpPayload                  :: !EntityAdWordsLink
     , _mwpawlpAccountId                :: !Text
-    , _mwpawlpKey                      :: !(Maybe Key)
+    , _mwpawlpKey                      :: !(Maybe AuthKey)
     , _mwpawlpWebPropertyAdWordsLinkId :: !Text
     , _mwpawlpOAuthToken               :: !(Maybe OAuthToken)
     , _mwpawlpFields                   :: !(Maybe Text)
@@ -171,7 +171,7 @@ mwpawlpAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mwpawlpKey :: Lens' ManagementWebPropertyAdWordsLinksPatch' (Maybe Key)
+mwpawlpKey :: Lens' ManagementWebPropertyAdWordsLinksPatch' (Maybe AuthKey)
 mwpawlpKey
   = lens _mwpawlpKey (\ s a -> s{_mwpawlpKey = a})
 

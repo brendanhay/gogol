@@ -62,7 +62,7 @@ type PagesUpdateResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Page :> Put '[JSON] Page
@@ -77,7 +77,7 @@ data PagesUpdate' = PagesUpdate'
     , _puuBlogId      :: !Text
     , _puuPageId      :: !Text
     , _puuPayload     :: !Page
-    , _puuKey         :: !(Maybe Key)
+    , _puuKey         :: !(Maybe AuthKey)
     , _puuRevert      :: !(Maybe Bool)
     , _puuOAuthToken  :: !(Maybe OAuthToken)
     , _puuPublish     :: !(Maybe Bool)
@@ -166,7 +166,7 @@ puuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puuKey :: Lens' PagesUpdate' (Maybe Key)
+puuKey :: Lens' PagesUpdate' (Maybe AuthKey)
 puuKey = lens _puuKey (\ s a -> s{_puuKey = a})
 
 -- | Whether a revert action should be performed when the page is updated

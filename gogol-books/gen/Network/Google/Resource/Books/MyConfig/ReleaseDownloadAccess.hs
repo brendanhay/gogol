@@ -61,7 +61,7 @@ type MyConfigReleaseDownloadAccessResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Post '[JSON] DownloadAccesses
@@ -76,7 +76,7 @@ data MyConfigReleaseDownloadAccess' = MyConfigReleaseDownloadAccess'
     , _mcrdaUserIP      :: !(Maybe Text)
     , _mcrdaLocale      :: !(Maybe Text)
     , _mcrdaVolumeIds   :: ![Text]
-    , _mcrdaKey         :: !(Maybe Key)
+    , _mcrdaKey         :: !(Maybe AuthKey)
     , _mcrdaSource      :: !(Maybe Text)
     , _mcrdaOAuthToken  :: !(Maybe OAuthToken)
     , _mcrdaFields      :: !(Maybe Text)
@@ -163,7 +163,7 @@ mcrdaVolumeIds
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcrdaKey :: Lens' MyConfigReleaseDownloadAccess' (Maybe Key)
+mcrdaKey :: Lens' MyConfigReleaseDownloadAccess' (Maybe AuthKey)
 mcrdaKey = lens _mcrdaKey (\ s a -> s{_mcrdaKey = a})
 
 -- | String to identify the originator of this request.

@@ -58,7 +58,7 @@ type OrdersAdvancetestOrderResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Post '[JSON] OrdersAdvanceTestOrderResponse
@@ -72,7 +72,7 @@ data OrdersAdvancetestOrder' = OrdersAdvancetestOrder'
     , _oaoMerchantId  :: !Word64
     , _oaoPrettyPrint :: !Bool
     , _oaoUserIP      :: !(Maybe Text)
-    , _oaoKey         :: !(Maybe Key)
+    , _oaoKey         :: !(Maybe AuthKey)
     , _oaoOAuthToken  :: !(Maybe OAuthToken)
     , _oaoOrderId     :: !Text
     , _oaoFields      :: !(Maybe Text)
@@ -141,7 +141,7 @@ oaoUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oaoKey :: Lens' OrdersAdvancetestOrder' (Maybe Key)
+oaoKey :: Lens' OrdersAdvancetestOrder' (Maybe AuthKey)
 oaoKey = lens _oaoKey (\ s a -> s{_oaoKey = a})
 
 -- | OAuth 2.0 token for the current user.

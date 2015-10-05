@@ -62,7 +62,7 @@ type InstanceTemplatesListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] InstanceTemplateList
@@ -76,7 +76,7 @@ data InstanceTemplatesList' = InstanceTemplatesList'
     , _itlPrettyPrint :: !Bool
     , _itlProject     :: !Text
     , _itlUserIP      :: !(Maybe Text)
-    , _itlKey         :: !(Maybe Key)
+    , _itlKey         :: !(Maybe AuthKey)
     , _itlFilter      :: !(Maybe Text)
     , _itlPageToken   :: !(Maybe Text)
     , _itlOAuthToken  :: !(Maybe OAuthToken)
@@ -151,7 +151,7 @@ itlUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-itlKey :: Lens' InstanceTemplatesList' (Maybe Key)
+itlKey :: Lens' InstanceTemplatesList' (Maybe AuthKey)
 itlKey = lens _itlKey (\ s a -> s{_itlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

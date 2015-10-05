@@ -53,7 +53,7 @@ type RelyingPartyResetPasswordResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON]
@@ -68,7 +68,7 @@ data RelyingPartyResetPassword' = RelyingPartyResetPassword'
     , _rprpPrettyPrint :: !Bool
     , _rprpUserIP      :: !(Maybe Text)
     , _rprpPayload     :: !IdentitytoolkitRelyingPartyResetPasswordRequest
-    , _rprpKey         :: !(Maybe Key)
+    , _rprpKey         :: !(Maybe AuthKey)
     , _rprpOAuthToken  :: !(Maybe OAuthToken)
     , _rprpFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -132,7 +132,7 @@ rprpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rprpKey :: Lens' RelyingPartyResetPassword' (Maybe Key)
+rprpKey :: Lens' RelyingPartyResetPassword' (Maybe AuthKey)
 rprpKey = lens _rprpKey (\ s a -> s{_rprpKey = a})
 
 -- | OAuth 2.0 token for the current user.

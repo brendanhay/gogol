@@ -58,7 +58,7 @@ type OrdersCancelResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] OrdersCancelRequest :>
@@ -73,7 +73,7 @@ data OrdersCancel' = OrdersCancel'
     , _ocPrettyPrint :: !Bool
     , _ocUserIP      :: !(Maybe Text)
     , _ocPayload     :: !OrdersCancelRequest
-    , _ocKey         :: !(Maybe Key)
+    , _ocKey         :: !(Maybe AuthKey)
     , _ocOAuthToken  :: !(Maybe OAuthToken)
     , _ocOrderId     :: !Text
     , _ocFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ ocPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ocKey :: Lens' OrdersCancel' (Maybe Key)
+ocKey :: Lens' OrdersCancel' (Maybe AuthKey)
 ocKey = lens _ocKey (\ s a -> s{_ocKey = a})
 
 -- | OAuth 2.0 token for the current user.

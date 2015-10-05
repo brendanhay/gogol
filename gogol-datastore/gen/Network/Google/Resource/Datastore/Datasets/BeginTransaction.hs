@@ -55,7 +55,7 @@ type DatasetsBeginTransactionResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltPROTO :>
                        ReqBody '[JSON] BeginTransactionRequest :>
@@ -69,7 +69,7 @@ data DatasetsBeginTransaction' = DatasetsBeginTransaction'
     , _dbtPrettyPrint :: !Bool
     , _dbtUserIP      :: !(Maybe Text)
     , _dbtPayload     :: !BeginTransactionRequest
-    , _dbtKey         :: !(Maybe Key)
+    , _dbtKey         :: !(Maybe AuthKey)
     , _dbtDatasetId   :: !Text
     , _dbtOAuthToken  :: !(Maybe OAuthToken)
     , _dbtFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ dbtPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dbtKey :: Lens' DatasetsBeginTransaction' (Maybe Key)
+dbtKey :: Lens' DatasetsBeginTransaction' (Maybe AuthKey)
 dbtKey = lens _dbtKey (\ s a -> s{_dbtKey = a})
 
 -- | Identifies the dataset.

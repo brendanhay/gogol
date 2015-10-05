@@ -60,7 +60,7 @@ type AccountsContainersVersionsListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListContainerVersionsResponse
@@ -75,7 +75,7 @@ data AccountsContainersVersionsList' = AccountsContainersVersionsList'
     , _acvlUserIP      :: !(Maybe Text)
     , _acvlHeaders     :: !Bool
     , _acvlAccountId   :: !Text
-    , _acvlKey         :: !(Maybe Key)
+    , _acvlKey         :: !(Maybe AuthKey)
     , _acvlOAuthToken  :: !(Maybe OAuthToken)
     , _acvlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -158,7 +158,7 @@ acvlAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acvlKey :: Lens' AccountsContainersVersionsList' (Maybe Key)
+acvlKey :: Lens' AccountsContainersVersionsList' (Maybe AuthKey)
 acvlKey = lens _acvlKey (\ s a -> s{_acvlKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -57,7 +57,7 @@ type UsersDraftsDeleteResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -70,7 +70,7 @@ data UsersDraftsDelete' = UsersDraftsDelete'
     , _uddPrettyPrint :: !Bool
     , _uddUserIP      :: !(Maybe Text)
     , _uddUserId      :: !Text
-    , _uddKey         :: !(Maybe Key)
+    , _uddKey         :: !(Maybe AuthKey)
     , _uddId          :: !Text
     , _uddOAuthToken  :: !(Maybe OAuthToken)
     , _uddFields      :: !(Maybe Text)
@@ -139,7 +139,7 @@ uddUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uddKey :: Lens' UsersDraftsDelete' (Maybe Key)
+uddKey :: Lens' UsersDraftsDelete' (Maybe AuthKey)
 uddKey = lens _uddKey (\ s a -> s{_uddKey = a})
 
 -- | The ID of the draft to delete.

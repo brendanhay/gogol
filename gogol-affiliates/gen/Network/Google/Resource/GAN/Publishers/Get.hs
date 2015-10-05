@@ -61,7 +61,7 @@ type PublishersGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Publisher
 
@@ -77,7 +77,7 @@ data PublishersGet' = PublishersGet'
     , _pgUserIP      :: !(Maybe Text)
     , _pgRoleId      :: !Text
     , _pgRole        :: !PublishersGetRole
-    , _pgKey         :: !(Maybe Key)
+    , _pgKey         :: !(Maybe AuthKey)
     , _pgOAuthToken  :: !(Maybe OAuthToken)
     , _pgPublisherId :: !(Maybe Text)
     , _pgFields      :: !(Maybe Text)
@@ -151,7 +151,7 @@ pgRole = lens _pgRole (\ s a -> s{_pgRole = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgKey :: Lens' PublishersGet' (Maybe Key)
+pgKey :: Lens' PublishersGet' (Maybe AuthKey)
 pgKey = lens _pgKey (\ s a -> s{_pgKey = a})
 
 -- | OAuth 2.0 token for the current user.

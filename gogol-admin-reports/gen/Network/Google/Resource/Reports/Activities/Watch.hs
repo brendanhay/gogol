@@ -76,7 +76,7 @@ type ActivitiesWatchResource =
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "key" Key :>
+                                         QueryParam "key" AuthKey :>
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
@@ -95,7 +95,7 @@ data ActivitiesWatch' = ActivitiesWatch'
     , _awPayload         :: !Channel
     , _awCustomerId      :: !(Maybe Text)
     , _awActorIPAddress  :: !(Maybe Text)
-    , _awKey             :: !(Maybe Key)
+    , _awKey             :: !(Maybe AuthKey)
     , _awEndTime         :: !(Maybe Text)
     , _awApplicationName :: !Text
     , _awPageToken       :: !(Maybe Text)
@@ -218,7 +218,7 @@ awActorIPAddress
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-awKey :: Lens' ActivitiesWatch' (Maybe Key)
+awKey :: Lens' ActivitiesWatch' (Maybe AuthKey)
 awKey = lens _awKey (\ s a -> s{_awKey = a})
 
 -- | Return events which occured at or before this time.

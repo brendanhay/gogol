@@ -62,7 +62,7 @@ type SSLCertsGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] SSLCert
 
@@ -76,7 +76,7 @@ data SSLCertsGet' = SSLCertsGet'
     , _scgPrettyPrint     :: !Bool
     , _scgProject         :: !Text
     , _scgUserIP          :: !(Maybe Text)
-    , _scgKey             :: !(Maybe Key)
+    , _scgKey             :: !(Maybe AuthKey)
     , _scgOAuthToken      :: !(Maybe OAuthToken)
     , _scgSha1Fingerprint :: !Text
     , _scgFields          :: !(Maybe Text)
@@ -149,7 +149,7 @@ scgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-scgKey :: Lens' SSLCertsGet' (Maybe Key)
+scgKey :: Lens' SSLCertsGet' (Maybe AuthKey)
 scgKey = lens _scgKey (\ s a -> s{_scgKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -57,7 +57,7 @@ type ProjectsIconsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Icon
        :<|>
@@ -69,7 +69,7 @@ type ProjectsIconsGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltMedia :> Get '[OctetStream] Body
 
@@ -80,7 +80,7 @@ data ProjectsIconsGet' = ProjectsIconsGet'
     { _pigQuotaUser   :: !(Maybe Text)
     , _pigPrettyPrint :: !Bool
     , _pigUserIP      :: !(Maybe Text)
-    , _pigKey         :: !(Maybe Key)
+    , _pigKey         :: !(Maybe AuthKey)
     , _pigId          :: !Text
     , _pigProjectId   :: !Text
     , _pigOAuthToken  :: !(Maybe OAuthToken)
@@ -144,7 +144,7 @@ pigUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pigKey :: Lens' ProjectsIconsGet' (Maybe Key)
+pigKey :: Lens' ProjectsIconsGet' (Maybe AuthKey)
 pigKey = lens _pigKey (\ s a -> s{_pigKey = a})
 
 -- | The ID of the icon.

@@ -56,7 +56,7 @@ type UsersDataSourcesGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] DataSource
 
@@ -69,7 +69,7 @@ data UsersDataSourcesGet' = UsersDataSourcesGet'
     , _udsgUserIP       :: !(Maybe Text)
     , _udsgDataSourceId :: !Text
     , _udsgUserId       :: !Text
-    , _udsgKey          :: !(Maybe Key)
+    , _udsgKey          :: !(Maybe AuthKey)
     , _udsgOAuthToken   :: !(Maybe OAuthToken)
     , _udsgFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ udsgUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udsgKey :: Lens' UsersDataSourcesGet' (Maybe Key)
+udsgKey :: Lens' UsersDataSourcesGet' (Maybe AuthKey)
 udsgKey = lens _udsgKey (\ s a -> s{_udsgKey = a})
 
 -- | OAuth 2.0 token for the current user.

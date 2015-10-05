@@ -65,7 +65,7 @@ type ResourceRecordSetsListResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ResourceRecordSetsListResponse
@@ -78,7 +78,7 @@ data ResourceRecordSetsList' = ResourceRecordSetsList'
     , _rrslPrettyPrint :: !Bool
     , _rrslProject     :: !Text
     , _rrslUserIP      :: !(Maybe Text)
-    , _rrslKey         :: !(Maybe Key)
+    , _rrslKey         :: !(Maybe AuthKey)
     , _rrslName        :: !(Maybe Text)
     , _rrslPageToken   :: !(Maybe Text)
     , _rrslType        :: !(Maybe Text)
@@ -163,7 +163,7 @@ rrslUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rrslKey :: Lens' ResourceRecordSetsList' (Maybe Key)
+rrslKey :: Lens' ResourceRecordSetsList' (Maybe AuthKey)
 rrslKey = lens _rrslKey (\ s a -> s{_rrslKey = a})
 
 -- | Restricts the list to return only records with this fully qualified

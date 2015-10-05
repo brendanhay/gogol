@@ -57,7 +57,7 @@ type InstanceTemplatesDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
@@ -70,7 +70,7 @@ data InstanceTemplatesDelete' = InstanceTemplatesDelete'
     , _itdProject          :: !Text
     , _itdUserIP           :: !(Maybe Text)
     , _itdInstanceTemplate :: !Text
-    , _itdKey              :: !(Maybe Key)
+    , _itdKey              :: !(Maybe AuthKey)
     , _itdOAuthToken       :: !(Maybe OAuthToken)
     , _itdFields           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ itdInstanceTemplate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-itdKey :: Lens' InstanceTemplatesDelete' (Maybe Key)
+itdKey :: Lens' InstanceTemplatesDelete' (Maybe AuthKey)
 itdKey = lens _itdKey (\ s a -> s{_itdKey = a})
 
 -- | OAuth 2.0 token for the current user.

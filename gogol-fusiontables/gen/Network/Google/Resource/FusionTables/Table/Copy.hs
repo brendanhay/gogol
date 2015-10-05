@@ -57,7 +57,7 @@ type TableCopyResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] Table
 
@@ -68,7 +68,7 @@ data TableCopy' = TableCopy'
     { _tcQuotaUser        :: !(Maybe Text)
     , _tcPrettyPrint      :: !Bool
     , _tcUserIP           :: !(Maybe Text)
-    , _tcKey              :: !(Maybe Key)
+    , _tcKey              :: !(Maybe AuthKey)
     , _tcOAuthToken       :: !(Maybe OAuthToken)
     , _tcTableId          :: !Text
     , _tcCopyPresentation :: !(Maybe Bool)
@@ -130,7 +130,7 @@ tcUserIP = lens _tcUserIP (\ s a -> s{_tcUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tcKey :: Lens' TableCopy' (Maybe Key)
+tcKey :: Lens' TableCopy' (Maybe AuthKey)
 tcKey = lens _tcKey (\ s a -> s{_tcKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -55,7 +55,7 @@ type QuestsResetAllResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -68,7 +68,7 @@ data QuestsResetAll' = QuestsResetAll'
     { _qraQuotaUser   :: !(Maybe Text)
     , _qraPrettyPrint :: !Bool
     , _qraUserIP      :: !(Maybe Text)
-    , _qraKey         :: !(Maybe Key)
+    , _qraKey         :: !(Maybe AuthKey)
     , _qraOAuthToken  :: !(Maybe OAuthToken)
     , _qraFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -122,7 +122,7 @@ qraUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-qraKey :: Lens' QuestsResetAll' (Maybe Key)
+qraKey :: Lens' QuestsResetAll' (Maybe AuthKey)
 qraKey = lens _qraKey (\ s a -> s{_qraKey = a})
 
 -- | OAuth 2.0 token for the current user.

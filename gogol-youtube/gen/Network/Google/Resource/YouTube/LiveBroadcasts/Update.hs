@@ -60,7 +60,7 @@ type LiveBroadcastsUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] LiveBroadcast :>
@@ -77,7 +77,7 @@ data LiveBroadcastsUpdate' = LiveBroadcastsUpdate'
     , _lbuUserIP                        :: !(Maybe Text)
     , _lbuPayload                       :: !LiveBroadcast
     , _lbuOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lbuKey                           :: !(Maybe Key)
+    , _lbuKey                           :: !(Maybe AuthKey)
     , _lbuOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbuOAuthToken                    :: !(Maybe OAuthToken)
     , _lbuFields                        :: !(Maybe Text)
@@ -182,7 +182,7 @@ lbuOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lbuKey :: Lens' LiveBroadcastsUpdate' (Maybe Key)
+lbuKey :: Lens' LiveBroadcastsUpdate' (Maybe AuthKey)
 lbuKey = lens _lbuKey (\ s a -> s{_lbuKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:

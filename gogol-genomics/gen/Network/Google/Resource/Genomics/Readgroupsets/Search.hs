@@ -55,7 +55,7 @@ type ReadgroupsetsSearchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] SearchReadGroupSetsRequest :>
@@ -70,7 +70,7 @@ data ReadgroupsetsSearch' = ReadgroupsetsSearch'
     , _reaPrettyPrint :: !Bool
     , _reaUserIP      :: !(Maybe Text)
     , _reaPayload     :: !SearchReadGroupSetsRequest
-    , _reaKey         :: !(Maybe Key)
+    , _reaKey         :: !(Maybe AuthKey)
     , _reaOAuthToken  :: !(Maybe OAuthToken)
     , _reaFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -133,7 +133,7 @@ reaPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-reaKey :: Lens' ReadgroupsetsSearch' (Maybe Key)
+reaKey :: Lens' ReadgroupsetsSearch' (Maybe AuthKey)
 reaKey = lens _reaKey (\ s a -> s{_reaKey = a})
 
 -- | OAuth 2.0 token for the current user.

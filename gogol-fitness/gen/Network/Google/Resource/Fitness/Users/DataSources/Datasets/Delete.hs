@@ -69,7 +69,7 @@ type UsersDataSourcesDatasetsDeleteResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -88,7 +88,7 @@ data UsersDataSourcesDatasetsDelete' = UsersDataSourcesDatasetsDelete'
     , _udsddUserIP             :: !(Maybe Text)
     , _udsddDataSourceId       :: !Text
     , _udsddUserId             :: !Text
-    , _udsddKey                :: !(Maybe Key)
+    , _udsddKey                :: !(Maybe AuthKey)
     , _udsddDatasetId          :: !Text
     , _udsddModifiedTimeMillis :: !(Maybe Int64)
     , _udsddCurrentTimeMillis  :: !(Maybe Int64)
@@ -176,7 +176,7 @@ udsddUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udsddKey :: Lens' UsersDataSourcesDatasetsDelete' (Maybe Key)
+udsddKey :: Lens' UsersDataSourcesDatasetsDelete' (Maybe AuthKey)
 udsddKey = lens _udsddKey (\ s a -> s{_udsddKey = a})
 
 -- | Dataset identifier that is a composite of the minimum data point start

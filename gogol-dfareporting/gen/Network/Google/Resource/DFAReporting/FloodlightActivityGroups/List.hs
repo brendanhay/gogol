@@ -77,7 +77,7 @@ type FloodlightActivityGroupsListResource =
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON]
@@ -96,7 +96,7 @@ data FloodlightActivityGroupsList' = FloodlightActivityGroupsList'
     , _faglIds                       :: !(Maybe [Int64])
     , _faglProFileId                 :: !Int64
     , _faglSortOrder                 :: !(Maybe FloodlightActivityGroupsListSortOrder)
-    , _faglKey                       :: !(Maybe Key)
+    , _faglKey                       :: !(Maybe AuthKey)
     , _faglPageToken                 :: !(Maybe Text)
     , _faglSortField                 :: !(Maybe FloodlightActivityGroupsListSortField)
     , _faglType                      :: !(Maybe FloodlightActivityGroupsListType)
@@ -236,7 +236,7 @@ faglSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-faglKey :: Lens' FloodlightActivityGroupsList' (Maybe Key)
+faglKey :: Lens' FloodlightActivityGroupsList' (Maybe AuthKey)
 faglKey = lens _faglKey (\ s a -> s{_faglKey = a})
 
 -- | Value of the nextPageToken from the previous result page.

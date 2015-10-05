@@ -56,7 +56,7 @@ type FloodlightConfigurationsUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] FloodlightConfiguration :>
@@ -71,7 +71,7 @@ data FloodlightConfigurationsUpdate' = FloodlightConfigurationsUpdate'
     , _fcuUserIP      :: !(Maybe Text)
     , _fcuProFileId   :: !Int64
     , _fcuPayload     :: !FloodlightConfiguration
-    , _fcuKey         :: !(Maybe Key)
+    , _fcuKey         :: !(Maybe AuthKey)
     , _fcuOAuthToken  :: !(Maybe OAuthToken)
     , _fcuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ fcuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fcuKey :: Lens' FloodlightConfigurationsUpdate' (Maybe Key)
+fcuKey :: Lens' FloodlightConfigurationsUpdate' (Maybe AuthKey)
 fcuKey = lens _fcuKey (\ s a -> s{_fcuKey = a})
 
 -- | OAuth 2.0 token for the current user.

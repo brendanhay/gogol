@@ -62,7 +62,7 @@ type FilesGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] File
        :<|>
@@ -76,7 +76,7 @@ type FilesGetResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltMedia :>
                                  Get '[OctetStream] Body
@@ -89,7 +89,7 @@ data FilesGet' = FilesGet'
     , _fgPrettyPrint      :: !Bool
     , _fgUserIP           :: !(Maybe Text)
     , _fgUpdateViewedDate :: !Bool
-    , _fgKey              :: !(Maybe Key)
+    , _fgKey              :: !(Maybe AuthKey)
     , _fgProjection       :: !(Maybe FilesGetProjection)
     , _fgAcknowledgeAbuse :: !Bool
     , _fgFileId           :: !Text
@@ -169,7 +169,7 @@ fgUpdateViewedDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fgKey :: Lens' FilesGet' (Maybe Key)
+fgKey :: Lens' FilesGet' (Maybe AuthKey)
 fgKey = lens _fgKey (\ s a -> s{_fgKey = a})
 
 -- | This parameter is deprecated and has no function.

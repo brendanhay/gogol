@@ -58,7 +58,7 @@ type TargetHTTPProxiesSetURLMapResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] URLMapReference :>
@@ -73,7 +73,7 @@ data TargetHTTPProxiesSetURLMap' = TargetHTTPProxiesSetURLMap'
     , _thttppsumProject         :: !Text
     , _thttppsumUserIP          :: !(Maybe Text)
     , _thttppsumPayload         :: !URLMapReference
-    , _thttppsumKey             :: !(Maybe Key)
+    , _thttppsumKey             :: !(Maybe AuthKey)
     , _thttppsumTargetHTTPProxy :: !Text
     , _thttppsumOAuthToken      :: !(Maybe OAuthToken)
     , _thttppsumFields          :: !(Maybe Text)
@@ -154,7 +154,7 @@ thttppsumPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-thttppsumKey :: Lens' TargetHTTPProxiesSetURLMap' (Maybe Key)
+thttppsumKey :: Lens' TargetHTTPProxiesSetURLMap' (Maybe AuthKey)
 thttppsumKey
   = lens _thttppsumKey (\ s a -> s{_thttppsumKey = a})
 

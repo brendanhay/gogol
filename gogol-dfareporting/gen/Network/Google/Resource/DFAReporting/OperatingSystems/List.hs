@@ -55,7 +55,7 @@ type OperatingSystemsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] OperatingSystemsListResponse
@@ -68,7 +68,7 @@ data OperatingSystemsList' = OperatingSystemsList'
     , _oslPrettyPrint :: !Bool
     , _oslUserIP      :: !(Maybe Text)
     , _oslProFileId   :: !Int64
-    , _oslKey         :: !(Maybe Key)
+    , _oslKey         :: !(Maybe AuthKey)
     , _oslOAuthToken  :: !(Maybe OAuthToken)
     , _oslFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -131,7 +131,7 @@ oslProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oslKey :: Lens' OperatingSystemsList' (Maybe Key)
+oslKey :: Lens' OperatingSystemsList' (Maybe AuthKey)
 oslKey = lens _oslKey (\ s a -> s{_oslKey = a})
 
 -- | OAuth 2.0 token for the current user.

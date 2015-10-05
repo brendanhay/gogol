@@ -56,7 +56,7 @@ type VariantsetsCreateResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] VariantSet :> Post '[JSON] VariantSet
@@ -72,7 +72,7 @@ data VariantsetsCreate' = VariantsetsCreate'
     , _vcPrettyPrint :: !Bool
     , _vcUserIP      :: !(Maybe Text)
     , _vcPayload     :: !VariantSet
-    , _vcKey         :: !(Maybe Key)
+    , _vcKey         :: !(Maybe AuthKey)
     , _vcOAuthToken  :: !(Maybe OAuthToken)
     , _vcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -134,7 +134,7 @@ vcPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vcKey :: Lens' VariantsetsCreate' (Maybe Key)
+vcKey :: Lens' VariantsetsCreate' (Maybe AuthKey)
 vcKey = lens _vcKey (\ s a -> s{_vcKey = a})
 
 -- | OAuth 2.0 token for the current user.

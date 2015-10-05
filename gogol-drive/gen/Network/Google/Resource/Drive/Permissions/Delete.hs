@@ -57,7 +57,7 @@ type PermissionsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -68,7 +68,7 @@ data PermissionsDelete' = PermissionsDelete'
     { _perQuotaUser    :: !(Maybe Text)
     , _perPrettyPrint  :: !Bool
     , _perUserIP       :: !(Maybe Text)
-    , _perKey          :: !(Maybe Key)
+    , _perKey          :: !(Maybe AuthKey)
     , _perFileId       :: !Text
     , _perOAuthToken   :: !(Maybe OAuthToken)
     , _perPermissionId :: !Text
@@ -132,7 +132,7 @@ perUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-perKey :: Lens' PermissionsDelete' (Maybe Key)
+perKey :: Lens' PermissionsDelete' (Maybe AuthKey)
 perKey = lens _perKey (\ s a -> s{_perKey = a})
 
 -- | The ID for the file.

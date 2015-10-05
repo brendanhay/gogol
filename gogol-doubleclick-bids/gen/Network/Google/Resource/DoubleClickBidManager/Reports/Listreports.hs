@@ -55,7 +55,7 @@ type ReportsListreportsResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] ListReportsResponse
@@ -68,7 +68,7 @@ data ReportsListreports' = ReportsListreports'
     , _rlQueryId     :: !Int64
     , _rlPrettyPrint :: !Bool
     , _rlUserIP      :: !(Maybe Text)
-    , _rlKey         :: !(Maybe Key)
+    , _rlKey         :: !(Maybe AuthKey)
     , _rlOAuthToken  :: !(Maybe OAuthToken)
     , _rlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -130,7 +130,7 @@ rlUserIP = lens _rlUserIP (\ s a -> s{_rlUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rlKey :: Lens' ReportsListreports' (Maybe Key)
+rlKey :: Lens' ReportsListreports' (Maybe AuthKey)
 rlKey = lens _rlKey (\ s a -> s{_rlKey = a})
 
 -- | OAuth 2.0 token for the current user.

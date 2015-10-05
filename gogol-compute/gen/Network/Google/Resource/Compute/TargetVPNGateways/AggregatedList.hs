@@ -61,7 +61,7 @@ type TargetVPNGatewaysAggregatedListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] TargetVPNGatewayAggregatedList
@@ -74,7 +74,7 @@ data TargetVPNGatewaysAggregatedList' = TargetVPNGatewaysAggregatedList'
     , _tvgalPrettyPrint :: !Bool
     , _tvgalProject     :: !Text
     , _tvgalUserIP      :: !(Maybe Text)
-    , _tvgalKey         :: !(Maybe Key)
+    , _tvgalKey         :: !(Maybe AuthKey)
     , _tvgalFilter      :: !(Maybe Text)
     , _tvgalPageToken   :: !(Maybe Text)
     , _tvgalOAuthToken  :: !(Maybe OAuthToken)
@@ -150,7 +150,7 @@ tvgalUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tvgalKey :: Lens' TargetVPNGatewaysAggregatedList' (Maybe Key)
+tvgalKey :: Lens' TargetVPNGatewaysAggregatedList' (Maybe AuthKey)
 tvgalKey = lens _tvgalKey (\ s a -> s{_tvgalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

@@ -56,7 +56,7 @@ type ZonesGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Zone
 
@@ -69,7 +69,7 @@ data ZonesGet' = ZonesGet'
     , _zgProject     :: !Text
     , _zgUserIP      :: !(Maybe Text)
     , _zgZone        :: !Text
-    , _zgKey         :: !(Maybe Key)
+    , _zgKey         :: !(Maybe AuthKey)
     , _zgOAuthToken  :: !(Maybe OAuthToken)
     , _zgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -139,7 +139,7 @@ zgZone = lens _zgZone (\ s a -> s{_zgZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-zgKey :: Lens' ZonesGet' (Maybe Key)
+zgKey :: Lens' ZonesGet' (Maybe AuthKey)
 zgKey = lens _zgKey (\ s a -> s{_zgKey = a})
 
 -- | OAuth 2.0 token for the current user.

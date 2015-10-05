@@ -55,7 +55,7 @@ type DatasetsRunQueryResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltPROTO :>
                        ReqBody '[JSON] RunQueryRequest :>
@@ -69,7 +69,7 @@ data DatasetsRunQuery' = DatasetsRunQuery'
     , _drqPrettyPrint :: !Bool
     , _drqUserIP      :: !(Maybe Text)
     , _drqPayload     :: !RunQueryRequest
-    , _drqKey         :: !(Maybe Key)
+    , _drqKey         :: !(Maybe AuthKey)
     , _drqDatasetId   :: !Text
     , _drqOAuthToken  :: !(Maybe OAuthToken)
     , _drqFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ drqPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-drqKey :: Lens' DatasetsRunQuery' (Maybe Key)
+drqKey :: Lens' DatasetsRunQuery' (Maybe AuthKey)
 drqKey = lens _drqKey (\ s a -> s{_drqKey = a})
 
 -- | Identifies the dataset.

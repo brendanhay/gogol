@@ -59,7 +59,7 @@ type TargetVPNGatewaysDeleteResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
@@ -72,7 +72,7 @@ data TargetVPNGatewaysDelete' = TargetVPNGatewaysDelete'
     , _tvgdProject          :: !Text
     , _tvgdUserIP           :: !(Maybe Text)
     , _tvgdTargetVPNGateway :: !Text
-    , _tvgdKey              :: !(Maybe Key)
+    , _tvgdKey              :: !(Maybe AuthKey)
     , _tvgdRegion           :: !Text
     , _tvgdOAuthToken       :: !(Maybe OAuthToken)
     , _tvgdFields           :: !(Maybe Text)
@@ -151,7 +151,7 @@ tvgdTargetVPNGateway
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tvgdKey :: Lens' TargetVPNGatewaysDelete' (Maybe Key)
+tvgdKey :: Lens' TargetVPNGatewaysDelete' (Maybe AuthKey)
 tvgdKey = lens _tvgdKey (\ s a -> s{_tvgdKey = a})
 
 -- | The name of the region for this request.

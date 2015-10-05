@@ -59,7 +59,7 @@ type RastersParentsListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ParentsListResponse
@@ -71,7 +71,7 @@ data RastersParentsList' = RastersParentsList'
     { _rasQuotaUser   :: !(Maybe Text)
     , _rasPrettyPrint :: !Bool
     , _rasUserIP      :: !(Maybe Text)
-    , _rasKey         :: !(Maybe Key)
+    , _rasKey         :: !(Maybe AuthKey)
     , _rasId          :: !Text
     , _rasPageToken   :: !(Maybe Text)
     , _rasOAuthToken  :: !(Maybe OAuthToken)
@@ -138,7 +138,7 @@ rasUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rasKey :: Lens' RastersParentsList' (Maybe Key)
+rasKey :: Lens' RastersParentsList' (Maybe AuthKey)
 rasKey = lens _rasKey (\ s a -> s{_rasKey = a})
 
 -- | The ID of the rasters whose parents will be listed.

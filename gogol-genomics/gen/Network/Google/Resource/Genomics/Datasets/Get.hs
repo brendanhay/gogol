@@ -54,7 +54,7 @@ type DatasetsGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Dataset
 
@@ -65,7 +65,7 @@ data DatasetsGet' = DatasetsGet'
     { _dgQuotaUser   :: !(Maybe Text)
     , _dgPrettyPrint :: !Bool
     , _dgUserIP      :: !(Maybe Text)
-    , _dgKey         :: !(Maybe Key)
+    , _dgKey         :: !(Maybe AuthKey)
     , _dgDatasetId   :: !Text
     , _dgOAuthToken  :: !(Maybe OAuthToken)
     , _dgFields      :: !(Maybe Text)
@@ -123,7 +123,7 @@ dgUserIP = lens _dgUserIP (\ s a -> s{_dgUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dgKey :: Lens' DatasetsGet' (Maybe Key)
+dgKey :: Lens' DatasetsGet' (Maybe AuthKey)
 dgKey = lens _dgKey (\ s a -> s{_dgKey = a})
 
 -- | The ID of the dataset.

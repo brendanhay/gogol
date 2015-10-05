@@ -60,7 +60,7 @@ type CollectionviewersListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] CollectionViewersListResponse
@@ -76,7 +76,7 @@ data CollectionviewersList' = CollectionviewersList'
     , _clEnterpriseId :: !Text
     , _clUserIP       :: !(Maybe Text)
     , _clCollectionId :: !Text
-    , _clKey          :: !(Maybe Key)
+    , _clKey          :: !(Maybe AuthKey)
     , _clOAuthToken   :: !(Maybe OAuthToken)
     , _clFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -149,7 +149,7 @@ clCollectionId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' CollectionviewersList' (Maybe Key)
+clKey :: Lens' CollectionviewersList' (Maybe AuthKey)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | OAuth 2.0 token for the current user.

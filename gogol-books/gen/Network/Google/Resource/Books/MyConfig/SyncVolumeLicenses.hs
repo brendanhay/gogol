@@ -70,7 +70,7 @@ type MyConfigSyncVolumeLicensesResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Post '[JSON] Volumes
@@ -86,7 +86,7 @@ data MyConfigSyncVolumeLicenses' = MyConfigSyncVolumeLicenses'
     , _mcsvlUserIP        :: !(Maybe Text)
     , _mcsvlLocale        :: !(Maybe Text)
     , _mcsvlVolumeIds     :: !(Maybe [Text])
-    , _mcsvlKey           :: !(Maybe Key)
+    , _mcsvlKey           :: !(Maybe AuthKey)
     , _mcsvlFeatures      :: !(Maybe [MyConfigSyncVolumeLicensesFeatures])
     , _mcsvlSource        :: !Text
     , _mcsvlOAuthToken    :: !(Maybe OAuthToken)
@@ -187,7 +187,7 @@ mcsvlVolumeIds
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcsvlKey :: Lens' MyConfigSyncVolumeLicenses' (Maybe Key)
+mcsvlKey :: Lens' MyConfigSyncVolumeLicenses' (Maybe AuthKey)
 mcsvlKey = lens _mcsvlKey (\ s a -> s{_mcsvlKey = a})
 
 -- | List of features supported by the client, i.e., \'RENTALS\'

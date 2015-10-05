@@ -69,7 +69,7 @@ type OrganizationsGetIAMPolicyResource =
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] GetIAMPolicyRequest :>
@@ -89,7 +89,7 @@ data OrganizationsGetIAMPolicy' = OrganizationsGetIAMPolicy'
     , _ogipUploadType     :: !(Maybe Text)
     , _ogipPayload        :: !GetIAMPolicyRequest
     , _ogipBearerToken    :: !(Maybe Text)
-    , _ogipKey            :: !(Maybe Key)
+    , _ogipKey            :: !(Maybe AuthKey)
     , _ogipResource       :: !Text
     , _ogipOAuthToken     :: !(Maybe OAuthToken)
     , _ogipFields         :: !(Maybe Text)
@@ -204,7 +204,7 @@ ogipBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ogipKey :: Lens' OrganizationsGetIAMPolicy' (Maybe Key)
+ogipKey :: Lens' OrganizationsGetIAMPolicy' (Maybe AuthKey)
 ogipKey = lens _ogipKey (\ s a -> s{_ogipKey = a})
 
 -- | REQUIRED: The resource for which policy is being requested. Resource is

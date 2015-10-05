@@ -57,7 +57,7 @@ type EventsResetForAllPlayersResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -70,7 +70,7 @@ data EventsResetForAllPlayers' = EventsResetForAllPlayers'
     { _erfapQuotaUser   :: !(Maybe Text)
     , _erfapPrettyPrint :: !Bool
     , _erfapUserIP      :: !(Maybe Text)
-    , _erfapKey         :: !(Maybe Key)
+    , _erfapKey         :: !(Maybe AuthKey)
     , _erfapOAuthToken  :: !(Maybe OAuthToken)
     , _erfapEventId     :: !Text
     , _erfapFields      :: !(Maybe Text)
@@ -130,7 +130,7 @@ erfapUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-erfapKey :: Lens' EventsResetForAllPlayers' (Maybe Key)
+erfapKey :: Lens' EventsResetForAllPlayers' (Maybe AuthKey)
 erfapKey = lens _erfapKey (\ s a -> s{_erfapKey = a})
 
 -- | OAuth 2.0 token for the current user.

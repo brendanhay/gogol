@@ -61,7 +61,7 @@ type ScoresSubmitResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Post '[JSON] PlayerScoreResponse
@@ -76,7 +76,7 @@ data ScoresSubmit' = ScoresSubmit'
     , _ssScore         :: !Int64
     , _ssUserIP        :: !(Maybe Text)
     , _ssLeaderboardId :: !Text
-    , _ssKey           :: !(Maybe Key)
+    , _ssKey           :: !(Maybe AuthKey)
     , _ssLanguage      :: !(Maybe Text)
     , _ssOAuthToken    :: !(Maybe OAuthToken)
     , _ssFields        :: !(Maybe Text)
@@ -166,7 +166,7 @@ ssLeaderboardId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ssKey :: Lens' ScoresSubmit' (Maybe Key)
+ssKey :: Lens' ScoresSubmit' (Maybe AuthKey)
 ssKey = lens _ssKey (\ s a -> s{_ssKey = a})
 
 -- | The preferred language to use for strings returned by this method.

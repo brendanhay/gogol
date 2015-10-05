@@ -62,7 +62,7 @@ type CollectionviewersDeleteResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -78,7 +78,7 @@ data CollectionviewersDelete' = CollectionviewersDelete'
     , _cddUserIP       :: !(Maybe Text)
     , _cddCollectionId :: !Text
     , _cddUserId       :: !Text
-    , _cddKey          :: !(Maybe Key)
+    , _cddKey          :: !(Maybe AuthKey)
     , _cddOAuthToken   :: !(Maybe OAuthToken)
     , _cddFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -161,7 +161,7 @@ cddUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cddKey :: Lens' CollectionviewersDelete' (Maybe Key)
+cddKey :: Lens' CollectionviewersDelete' (Maybe AuthKey)
 cddKey = lens _cddKey (\ s a -> s{_cddKey = a})
 
 -- | OAuth 2.0 token for the current user.

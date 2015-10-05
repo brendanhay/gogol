@@ -55,7 +55,7 @@ type MobileCarriersListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] MobileCarriersListResponse
@@ -68,7 +68,7 @@ data MobileCarriersList' = MobileCarriersList'
     , _mclPrettyPrint :: !Bool
     , _mclUserIP      :: !(Maybe Text)
     , _mclProFileId   :: !Int64
-    , _mclKey         :: !(Maybe Key)
+    , _mclKey         :: !(Maybe AuthKey)
     , _mclOAuthToken  :: !(Maybe OAuthToken)
     , _mclFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -131,7 +131,7 @@ mclProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mclKey :: Lens' MobileCarriersList' (Maybe Key)
+mclKey :: Lens' MobileCarriersList' (Maybe AuthKey)
 mclKey = lens _mclKey (\ s a -> s{_mclKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -154,7 +154,7 @@ type CSEListResource =
                                                                                :>
                                                                                QueryParam
                                                                                  "key"
-                                                                                 Key
+                                                                                 AuthKey
                                                                                  :>
                                                                                  QueryParam
                                                                                    "oauth_token"
@@ -191,7 +191,7 @@ data CSEList' = CSEList'
     , _cselGooglehost       :: !(Maybe Text)
     , _cselRelatedSite      :: !(Maybe Text)
     , _cselHl               :: !(Maybe Text)
-    , _cselKey              :: !(Maybe Key)
+    , _cselKey              :: !(Maybe AuthKey)
     , _cselCref             :: !(Maybe Text)
     , _cselSort             :: !(Maybe Text)
     , _cselSiteSearch       :: !(Maybe Text)
@@ -446,7 +446,7 @@ cselHl = lens _cselHl (\ s a -> s{_cselHl = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cselKey :: Lens' CSEList' (Maybe Key)
+cselKey :: Lens' CSEList' (Maybe AuthKey)
 cselKey = lens _cselKey (\ s a -> s{_cselKey = a})
 
 -- | The URL of a linked custom search engine

@@ -64,7 +64,7 @@ type ReconcileMethod =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ReconcileGet
@@ -79,7 +79,7 @@ data Reconcile' = Reconcile'
     , _rUserIP      :: !(Maybe Text)
     , _rLang        :: !(Maybe [Text])
     , _rConfidence  :: !Float
-    , _rKey         :: !(Maybe Key)
+    , _rKey         :: !(Maybe AuthKey)
     , _rName        :: !(Maybe Text)
     , _rLimit       :: !Int32
     , _rProp        :: !(Maybe [Text])
@@ -170,7 +170,7 @@ rConfidence
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rKey :: Lens' Reconcile' (Maybe Key)
+rKey :: Lens' Reconcile' (Maybe AuthKey)
 rKey = lens _rKey (\ s a -> s{_rKey = a})
 
 -- | Name of entity.

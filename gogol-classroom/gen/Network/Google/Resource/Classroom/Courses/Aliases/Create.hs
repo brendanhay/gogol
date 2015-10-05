@@ -73,7 +73,7 @@ type CoursesAliasesCreateResource =
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] CourseAlias :>
@@ -97,7 +97,7 @@ data CoursesAliasesCreate' = CoursesAliasesCreate'
     , _cacUploadType     :: !(Maybe Text)
     , _cacPayload        :: !CourseAlias
     , _cacBearerToken    :: !(Maybe Text)
-    , _cacKey            :: !(Maybe Key)
+    , _cacKey            :: !(Maybe AuthKey)
     , _cacOAuthToken     :: !(Maybe OAuthToken)
     , _cacFields         :: !(Maybe Text)
     , _cacCallback       :: !(Maybe Text)
@@ -216,7 +216,7 @@ cacBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cacKey :: Lens' CoursesAliasesCreate' (Maybe Key)
+cacKey :: Lens' CoursesAliasesCreate' (Maybe AuthKey)
 cacKey = lens _cacKey (\ s a -> s{_cacKey = a})
 
 -- | OAuth 2.0 token for the current user.

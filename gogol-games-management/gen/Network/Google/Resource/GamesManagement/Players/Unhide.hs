@@ -60,7 +60,7 @@ type PlayersUnhideResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -74,7 +74,7 @@ data PlayersUnhide' = PlayersUnhide'
     , _puPrettyPrint   :: !Bool
     , _puUserIP        :: !(Maybe Text)
     , _puApplicationId :: !Text
-    , _puKey           :: !(Maybe Key)
+    , _puKey           :: !(Maybe AuthKey)
     , _puOAuthToken    :: !(Maybe OAuthToken)
     , _puPlayerId      :: !Text
     , _puFields        :: !(Maybe Text)
@@ -142,7 +142,7 @@ puApplicationId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puKey :: Lens' PlayersUnhide' (Maybe Key)
+puKey :: Lens' PlayersUnhide' (Maybe AuthKey)
 puKey = lens _puKey (\ s a -> s{_puKey = a})
 
 -- | OAuth 2.0 token for the current user.

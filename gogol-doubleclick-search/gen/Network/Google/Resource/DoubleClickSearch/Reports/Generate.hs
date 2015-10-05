@@ -54,7 +54,7 @@ type ReportsGenerateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] ReportRequest :> Post '[JSON] Report
@@ -67,7 +67,7 @@ data ReportsGenerate' = ReportsGenerate'
     , _rPrettyPrint :: !Bool
     , _rUserIP      :: !(Maybe Text)
     , _rPayload     :: !ReportRequest
-    , _rKey         :: !(Maybe Key)
+    , _rKey         :: !(Maybe AuthKey)
     , _rOAuthToken  :: !(Maybe OAuthToken)
     , _rFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -127,7 +127,7 @@ rPayload = lens _rPayload (\ s a -> s{_rPayload = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rKey :: Lens' ReportsGenerate' (Maybe Key)
+rKey :: Lens' ReportsGenerate' (Maybe AuthKey)
 rKey = lens _rKey (\ s a -> s{_rKey = a})
 
 -- | OAuth 2.0 token for the current user.

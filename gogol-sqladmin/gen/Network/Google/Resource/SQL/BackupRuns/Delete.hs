@@ -60,7 +60,7 @@ type BackupRunsDeleteResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Delete '[JSON] Operation
@@ -73,7 +73,7 @@ data BackupRunsDelete' = BackupRunsDelete'
     , _brdPrettyPrint :: !Bool
     , _brdProject     :: !Text
     , _brdUserIP      :: !(Maybe Text)
-    , _brdKey         :: !(Maybe Key)
+    , _brdKey         :: !(Maybe AuthKey)
     , _brdId          :: !Int64
     , _brdOAuthToken  :: !(Maybe OAuthToken)
     , _brdFields      :: !(Maybe Text)
@@ -146,7 +146,7 @@ brdUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-brdKey :: Lens' BackupRunsDelete' (Maybe Key)
+brdKey :: Lens' BackupRunsDelete' (Maybe AuthKey)
 brdKey = lens _brdKey (\ s a -> s{_brdKey = a})
 
 -- | The ID of the Backup Run to delete.

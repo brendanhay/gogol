@@ -62,7 +62,7 @@ type SearchanalyticsQueryResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] SearchAnalyticsQueryRequest :>
@@ -82,7 +82,7 @@ data SearchanalyticsQuery' = SearchanalyticsQuery'
     , _sqUserIP      :: !(Maybe Text)
     , _sqSiteURL     :: !Text
     , _sqPayload     :: !SearchAnalyticsQueryRequest
-    , _sqKey         :: !(Maybe Key)
+    , _sqKey         :: !(Maybe AuthKey)
     , _sqOAuthToken  :: !(Maybe OAuthToken)
     , _sqFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -154,7 +154,7 @@ sqPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sqKey :: Lens' SearchanalyticsQuery' (Maybe Key)
+sqKey :: Lens' SearchanalyticsQuery' (Maybe AuthKey)
 sqKey = lens _sqKey (\ s a -> s{_sqKey = a})
 
 -- | OAuth 2.0 token for the current user.

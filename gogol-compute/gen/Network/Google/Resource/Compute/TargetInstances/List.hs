@@ -64,7 +64,7 @@ type TargetInstancesListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] TargetInstanceList
@@ -79,7 +79,7 @@ data TargetInstancesList' = TargetInstancesList'
     , _tilProject     :: !Text
     , _tilUserIP      :: !(Maybe Text)
     , _tilZone        :: !Text
-    , _tilKey         :: !(Maybe Key)
+    , _tilKey         :: !(Maybe AuthKey)
     , _tilFilter      :: !(Maybe Text)
     , _tilPageToken   :: !(Maybe Text)
     , _tilOAuthToken  :: !(Maybe OAuthToken)
@@ -162,7 +162,7 @@ tilZone = lens _tilZone (\ s a -> s{_tilZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tilKey :: Lens' TargetInstancesList' (Maybe Key)
+tilKey :: Lens' TargetInstancesList' (Maybe AuthKey)
 tilKey = lens _tilKey (\ s a -> s{_tilKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

@@ -58,7 +58,7 @@ type AccountsPermissionsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -71,7 +71,7 @@ data AccountsPermissionsDelete' = AccountsPermissionsDelete'
     , _apdPrettyPrint  :: !Bool
     , _apdUserIP       :: !(Maybe Text)
     , _apdAccountId    :: !Text
-    , _apdKey          :: !(Maybe Key)
+    , _apdKey          :: !(Maybe AuthKey)
     , _apdOAuthToken   :: !(Maybe OAuthToken)
     , _apdPermissionId :: !Text
     , _apdFields       :: !(Maybe Text)
@@ -139,7 +139,7 @@ apdAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apdKey :: Lens' AccountsPermissionsDelete' (Maybe Key)
+apdKey :: Lens' AccountsPermissionsDelete' (Maybe AuthKey)
 apdKey = lens _apdKey (\ s a -> s{_apdKey = a})
 
 -- | OAuth 2.0 token for the current user.

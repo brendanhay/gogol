@@ -78,7 +78,7 @@ type InvitationsListResource =
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListInvitationsResponse
@@ -102,7 +102,7 @@ data InvitationsList' = InvitationsList'
     , _ilUploadType     :: !(Maybe Text)
     , _ilUserId         :: !(Maybe Text)
     , _ilBearerToken    :: !(Maybe Text)
-    , _ilKey            :: !(Maybe Key)
+    , _ilKey            :: !(Maybe AuthKey)
     , _ilPageToken      :: !(Maybe Text)
     , _ilOAuthToken     :: !(Maybe OAuthToken)
     , _ilPageSize       :: !(Maybe Int32)
@@ -227,7 +227,7 @@ ilBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ilKey :: Lens' InvitationsList' (Maybe Key)
+ilKey :: Lens' InvitationsList' (Maybe AuthKey)
 ilKey = lens _ilKey (\ s a -> s{_ilKey = a})
 
 -- | [nextPageToken][google.classroom.v1.ListInvitationsResponse.next_page_token]

@@ -60,7 +60,7 @@ type ProductsApproveResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] ProductsApproveRequest :>
@@ -76,7 +76,7 @@ data ProductsApprove' = ProductsApprove'
     , _paEnterpriseId :: !Text
     , _paUserIP       :: !(Maybe Text)
     , _paPayload      :: !ProductsApproveRequest
-    , _paKey          :: !(Maybe Key)
+    , _paKey          :: !(Maybe AuthKey)
     , _paOAuthToken   :: !(Maybe OAuthToken)
     , _paProductId    :: !Text
     , _paFields       :: !(Maybe Text)
@@ -153,7 +153,7 @@ paPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-paKey :: Lens' ProductsApprove' (Maybe Key)
+paKey :: Lens' ProductsApprove' (Maybe AuthKey)
 paKey = lens _paKey (\ s a -> s{_paKey = a})
 
 -- | OAuth 2.0 token for the current user.

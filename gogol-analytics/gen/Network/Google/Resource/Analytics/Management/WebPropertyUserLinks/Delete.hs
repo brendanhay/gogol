@@ -61,7 +61,7 @@ type ManagementWebPropertyUserLinksDeleteResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -74,7 +74,7 @@ data ManagementWebPropertyUserLinksDelete' = ManagementWebPropertyUserLinksDelet
     , _mwpuldWebPropertyId :: !Text
     , _mwpuldUserIP        :: !(Maybe Text)
     , _mwpuldAccountId     :: !Text
-    , _mwpuldKey           :: !(Maybe Key)
+    , _mwpuldKey           :: !(Maybe AuthKey)
     , _mwpuldLinkId        :: !Text
     , _mwpuldOAuthToken    :: !(Maybe OAuthToken)
     , _mwpuldFields        :: !(Maybe Text)
@@ -154,7 +154,7 @@ mwpuldAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mwpuldKey :: Lens' ManagementWebPropertyUserLinksDelete' (Maybe Key)
+mwpuldKey :: Lens' ManagementWebPropertyUserLinksDelete' (Maybe AuthKey)
 mwpuldKey
   = lens _mwpuldKey (\ s a -> s{_mwpuldKey = a})
 

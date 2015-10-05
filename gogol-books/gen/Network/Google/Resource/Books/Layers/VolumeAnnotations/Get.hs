@@ -64,7 +64,7 @@ type LayersVolumeAnnotationsGetResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] Volumeannotation
@@ -77,7 +77,7 @@ data LayersVolumeAnnotationsGet' = LayersVolumeAnnotationsGet'
     , _lvagPrettyPrint  :: !Bool
     , _lvagUserIP       :: !(Maybe Text)
     , _lvagLocale       :: !(Maybe Text)
-    , _lvagKey          :: !(Maybe Key)
+    , _lvagKey          :: !(Maybe AuthKey)
     , _lvagAnnotationId :: !Text
     , _lvagVolumeId     :: !Text
     , _lvagSource       :: !(Maybe Text)
@@ -160,7 +160,7 @@ lvagLocale
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lvagKey :: Lens' LayersVolumeAnnotationsGet' (Maybe Key)
+lvagKey :: Lens' LayersVolumeAnnotationsGet' (Maybe AuthKey)
 lvagKey = lens _lvagKey (\ s a -> s{_lvagKey = a})
 
 -- | The ID of the volume annotation to retrieve.

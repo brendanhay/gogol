@@ -58,7 +58,7 @@ type ScoresResetForAllPlayersResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -72,7 +72,7 @@ data ScoresResetForAllPlayers' = ScoresResetForAllPlayers'
     , _srfapPrettyPrint   :: !Bool
     , _srfapUserIP        :: !(Maybe Text)
     , _srfapLeaderboardId :: !Text
-    , _srfapKey           :: !(Maybe Key)
+    , _srfapKey           :: !(Maybe AuthKey)
     , _srfapOAuthToken    :: !(Maybe OAuthToken)
     , _srfapFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -137,7 +137,7 @@ srfapLeaderboardId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-srfapKey :: Lens' ScoresResetForAllPlayers' (Maybe Key)
+srfapKey :: Lens' ScoresResetForAllPlayers' (Maybe AuthKey)
 srfapKey = lens _srfapKey (\ s a -> s{_srfapKey = a})
 
 -- | OAuth 2.0 token for the current user.

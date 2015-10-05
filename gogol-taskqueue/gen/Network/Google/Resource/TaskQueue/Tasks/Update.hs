@@ -62,7 +62,7 @@ type TasksUpdateResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Task :> Post '[JSON] Task
@@ -77,7 +77,7 @@ data TasksUpdate' = TasksUpdate'
     , _tuProject         :: !Text
     , _tuUserIP          :: !(Maybe Text)
     , _tuPayload         :: !Task
-    , _tuKey             :: !(Maybe Key)
+    , _tuKey             :: !(Maybe AuthKey)
     , _tuTask            :: !Text
     , _tuOAuthToken      :: !(Maybe OAuthToken)
     , _tuNewLeaseSeconds :: !Int32
@@ -166,7 +166,7 @@ tuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tuKey :: Lens' TasksUpdate' (Maybe Key)
+tuKey :: Lens' TasksUpdate' (Maybe AuthKey)
 tuKey = lens _tuKey (\ s a -> s{_tuKey = a})
 
 tuTask :: Lens' TasksUpdate' Text

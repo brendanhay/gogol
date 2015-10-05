@@ -58,7 +58,7 @@ type AccountsPermissionsUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] UserAccess :> Put '[JSON] UserAccess
@@ -72,7 +72,7 @@ data AccountsPermissionsUpdate' = AccountsPermissionsUpdate'
     , _apuUserIP       :: !(Maybe Text)
     , _apuPayload      :: !UserAccess
     , _apuAccountId    :: !Text
-    , _apuKey          :: !(Maybe Key)
+    , _apuKey          :: !(Maybe AuthKey)
     , _apuOAuthToken   :: !(Maybe OAuthToken)
     , _apuPermissionId :: !Text
     , _apuFields       :: !(Maybe Text)
@@ -149,7 +149,7 @@ apuAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apuKey :: Lens' AccountsPermissionsUpdate' (Maybe Key)
+apuKey :: Lens' AccountsPermissionsUpdate' (Maybe AuthKey)
 apuKey = lens _apuKey (\ s a -> s{_apuKey = a})
 
 -- | OAuth 2.0 token for the current user.

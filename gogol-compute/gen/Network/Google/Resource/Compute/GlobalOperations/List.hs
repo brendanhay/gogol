@@ -62,7 +62,7 @@ type GlobalOperationsListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] OperationList
@@ -76,7 +76,7 @@ data GlobalOperationsList' = GlobalOperationsList'
     , _golPrettyPrint :: !Bool
     , _golProject     :: !Text
     , _golUserIP      :: !(Maybe Text)
-    , _golKey         :: !(Maybe Key)
+    , _golKey         :: !(Maybe AuthKey)
     , _golFilter      :: !(Maybe Text)
     , _golPageToken   :: !(Maybe Text)
     , _golOAuthToken  :: !(Maybe OAuthToken)
@@ -151,7 +151,7 @@ golUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-golKey :: Lens' GlobalOperationsList' (Maybe Key)
+golKey :: Lens' GlobalOperationsList' (Maybe AuthKey)
 golKey = lens _golKey (\ s a -> s{_golKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

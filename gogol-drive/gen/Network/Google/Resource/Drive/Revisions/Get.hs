@@ -57,7 +57,7 @@ type RevisionsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Revision
 
@@ -68,7 +68,7 @@ data RevisionsGet' = RevisionsGet'
     { _revQuotaUser   :: !(Maybe Text)
     , _revPrettyPrint :: !Bool
     , _revUserIP      :: !(Maybe Text)
-    , _revKey         :: !(Maybe Key)
+    , _revKey         :: !(Maybe AuthKey)
     , _revFileId      :: !Text
     , _revOAuthToken  :: !(Maybe OAuthToken)
     , _revRevisionId  :: !Text
@@ -132,7 +132,7 @@ revUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-revKey :: Lens' RevisionsGet' (Maybe Key)
+revKey :: Lens' RevisionsGet' (Maybe AuthKey)
 revKey = lens _revKey (\ s a -> s{_revKey = a})
 
 -- | The ID of the file.

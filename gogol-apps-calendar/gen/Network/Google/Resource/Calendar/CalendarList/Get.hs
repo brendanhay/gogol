@@ -56,7 +56,7 @@ type CalendarListGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] CalendarListEntry
@@ -69,7 +69,7 @@ data CalendarListGet' = CalendarListGet'
     , _clgCalendarId  :: !Text
     , _clgPrettyPrint :: !Bool
     , _clgUserIP      :: !(Maybe Text)
-    , _clgKey         :: !(Maybe Key)
+    , _clgKey         :: !(Maybe AuthKey)
     , _clgOAuthToken  :: !(Maybe OAuthToken)
     , _clgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -135,7 +135,7 @@ clgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clgKey :: Lens' CalendarListGet' (Maybe Key)
+clgKey :: Lens' CalendarListGet' (Maybe AuthKey)
 clgKey = lens _clgKey (\ s a -> s{_clgKey = a})
 
 -- | OAuth 2.0 token for the current user.

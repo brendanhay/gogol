@@ -55,7 +55,7 @@ type VariantsetsDeleteResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -68,7 +68,7 @@ data VariantsetsDelete' = VariantsetsDelete'
     , _vddPrettyPrint  :: !Bool
     , _vddVariantSetId :: !Text
     , _vddUserIP       :: !(Maybe Text)
-    , _vddKey          :: !(Maybe Key)
+    , _vddKey          :: !(Maybe AuthKey)
     , _vddOAuthToken   :: !(Maybe OAuthToken)
     , _vddFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -132,7 +132,7 @@ vddUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vddKey :: Lens' VariantsetsDelete' (Maybe Key)
+vddKey :: Lens' VariantsetsDelete' (Maybe AuthKey)
 vddKey = lens _vddKey (\ s a -> s{_vddKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -55,7 +55,7 @@ type CommentThreadsUpdateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] CommentThread :>
@@ -70,7 +70,7 @@ data CommentThreadsUpdate' = CommentThreadsUpdate'
     , _ctuPrettyPrint :: !Bool
     , _ctuUserIP      :: !(Maybe Text)
     , _ctuPayload     :: !CommentThread
-    , _ctuKey         :: !(Maybe Key)
+    , _ctuKey         :: !(Maybe AuthKey)
     , _ctuOAuthToken  :: !(Maybe OAuthToken)
     , _ctuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ ctuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ctuKey :: Lens' CommentThreadsUpdate' (Maybe Key)
+ctuKey :: Lens' CommentThreadsUpdate' (Maybe AuthKey)
 ctuKey = lens _ctuKey (\ s a -> s{_ctuKey = a})
 
 -- | OAuth 2.0 token for the current user.

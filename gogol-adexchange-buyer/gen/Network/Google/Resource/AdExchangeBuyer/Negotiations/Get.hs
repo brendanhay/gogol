@@ -55,7 +55,7 @@ type NegotiationsGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] GetNegotiationByIdRequest :>
@@ -69,7 +69,7 @@ data NegotiationsGet' = NegotiationsGet'
     , _ngPrettyPrint   :: !Bool
     , _ngUserIP        :: !(Maybe Text)
     , _ngPayload       :: !GetNegotiationByIdRequest
-    , _ngKey           :: !(Maybe Key)
+    , _ngKey           :: !(Maybe AuthKey)
     , _ngOAuthToken    :: !(Maybe OAuthToken)
     , _ngNegotiationId :: !Int64
     , _ngFields        :: !(Maybe Text)
@@ -136,7 +136,7 @@ ngPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ngKey :: Lens' NegotiationsGet' (Maybe Key)
+ngKey :: Lens' NegotiationsGet' (Maybe AuthKey)
 ngKey = lens _ngKey (\ s a -> s{_ngKey = a})
 
 -- | OAuth 2.0 token for the current user.

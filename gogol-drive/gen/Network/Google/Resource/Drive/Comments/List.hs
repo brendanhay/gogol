@@ -63,7 +63,7 @@ type CommentsListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CommentList
@@ -75,7 +75,7 @@ data CommentsList' = CommentsList'
     { _comQuotaUser      :: !(Maybe Text)
     , _comPrettyPrint    :: !Bool
     , _comUserIP         :: !(Maybe Text)
-    , _comKey            :: !(Maybe Key)
+    , _comKey            :: !(Maybe AuthKey)
     , _comUpdatedMin     :: !(Maybe Text)
     , _comPageToken      :: !(Maybe Text)
     , _comFileId         :: !Text
@@ -150,7 +150,7 @@ comUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-comKey :: Lens' CommentsList' (Maybe Key)
+comKey :: Lens' CommentsList' (Maybe AuthKey)
 comKey = lens _comKey (\ s a -> s{_comKey = a})
 
 -- | Only discussions that were updated after this timestamp will be

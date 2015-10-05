@@ -58,7 +58,7 @@ type ScheduleGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Schedule
 
@@ -71,7 +71,7 @@ data ScheduleGet' = ScheduleGet'
     , _sgJobId       :: !Word64
     , _sgUserIP      :: !(Maybe Text)
     , _sgTeamId      :: !Text
-    , _sgKey         :: !(Maybe Key)
+    , _sgKey         :: !(Maybe AuthKey)
     , _sgOAuthToken  :: !(Maybe OAuthToken)
     , _sgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -140,7 +140,7 @@ sgTeamId = lens _sgTeamId (\ s a -> s{_sgTeamId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sgKey :: Lens' ScheduleGet' (Maybe Key)
+sgKey :: Lens' ScheduleGet' (Maybe AuthKey)
 sgKey = lens _sgKey (\ s a -> s{_sgKey = a})
 
 -- | OAuth 2.0 token for the current user.

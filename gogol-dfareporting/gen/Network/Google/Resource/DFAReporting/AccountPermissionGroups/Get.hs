@@ -57,7 +57,7 @@ type AccountPermissionGroupsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] AccountPermissionGroup
@@ -70,7 +70,7 @@ data AccountPermissionGroupsGet' = AccountPermissionGroupsGet'
     , _apggPrettyPrint :: !Bool
     , _apggUserIP      :: !(Maybe Text)
     , _apggProFileId   :: !Int64
-    , _apggKey         :: !(Maybe Key)
+    , _apggKey         :: !(Maybe AuthKey)
     , _apggId          :: !Int64
     , _apggOAuthToken  :: !(Maybe OAuthToken)
     , _apggFields      :: !(Maybe Text)
@@ -140,7 +140,7 @@ apggProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apggKey :: Lens' AccountPermissionGroupsGet' (Maybe Key)
+apggKey :: Lens' AccountPermissionGroupsGet' (Maybe AuthKey)
 apggKey = lens _apggKey (\ s a -> s{_apggKey = a})
 
 -- | Account permission group ID.

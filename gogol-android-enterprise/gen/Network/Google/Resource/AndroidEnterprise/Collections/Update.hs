@@ -58,7 +58,7 @@ type CollectionsUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Collection :> Put '[JSON] Collection
@@ -73,7 +73,7 @@ data CollectionsUpdate' = CollectionsUpdate'
     , _cuUserIP       :: !(Maybe Text)
     , _cuCollectionId :: !Text
     , _cuPayload      :: !Collection
-    , _cuKey          :: !(Maybe Key)
+    , _cuKey          :: !(Maybe AuthKey)
     , _cuOAuthToken   :: !(Maybe OAuthToken)
     , _cuFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -155,7 +155,7 @@ cuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuKey :: Lens' CollectionsUpdate' (Maybe Key)
+cuKey :: Lens' CollectionsUpdate' (Maybe AuthKey)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
 
 -- | OAuth 2.0 token for the current user.

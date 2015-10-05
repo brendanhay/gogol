@@ -53,7 +53,7 @@ type RelyingPartyVerifyPasswordResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON]
@@ -68,7 +68,7 @@ data RelyingPartyVerifyPassword' = RelyingPartyVerifyPassword'
     , _rpvpPrettyPrint :: !Bool
     , _rpvpUserIP      :: !(Maybe Text)
     , _rpvpPayload     :: !IdentitytoolkitRelyingPartyVerifyPasswordRequest
-    , _rpvpKey         :: !(Maybe Key)
+    , _rpvpKey         :: !(Maybe AuthKey)
     , _rpvpOAuthToken  :: !(Maybe OAuthToken)
     , _rpvpFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -132,7 +132,7 @@ rpvpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rpvpKey :: Lens' RelyingPartyVerifyPassword' (Maybe Key)
+rpvpKey :: Lens' RelyingPartyVerifyPassword' (Maybe AuthKey)
 rpvpKey = lens _rpvpKey (\ s a -> s{_rpvpKey = a})
 
 -- | OAuth 2.0 token for the current user.

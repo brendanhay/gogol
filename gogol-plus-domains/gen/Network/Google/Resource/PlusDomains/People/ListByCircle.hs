@@ -59,7 +59,7 @@ type PeopleListByCircleResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
 
@@ -70,7 +70,7 @@ data PeopleListByCircle' = PeopleListByCircle'
     { _plbcQuotaUser   :: !(Maybe Text)
     , _plbcPrettyPrint :: !Bool
     , _plbcUserIP      :: !(Maybe Text)
-    , _plbcKey         :: !(Maybe Key)
+    , _plbcKey         :: !(Maybe AuthKey)
     , _plbcCircleId    :: !Text
     , _plbcPageToken   :: !(Maybe Text)
     , _plbcOAuthToken  :: !(Maybe OAuthToken)
@@ -138,7 +138,7 @@ plbcUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plbcKey :: Lens' PeopleListByCircle' (Maybe Key)
+plbcKey :: Lens' PeopleListByCircle' (Maybe AuthKey)
 plbcKey = lens _plbcKey (\ s a -> s{_plbcKey = a})
 
 -- | The ID of the circle to get the members of.

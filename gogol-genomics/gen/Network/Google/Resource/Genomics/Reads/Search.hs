@@ -64,7 +64,7 @@ type ReadsSearchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] SearchReadsRequest :>
@@ -88,7 +88,7 @@ data ReadsSearch' = ReadsSearch'
     , _rsPrettyPrint :: !Bool
     , _rsUserIP      :: !(Maybe Text)
     , _rsPayload     :: !SearchReadsRequest
-    , _rsKey         :: !(Maybe Key)
+    , _rsKey         :: !(Maybe AuthKey)
     , _rsOAuthToken  :: !(Maybe OAuthToken)
     , _rsFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -150,7 +150,7 @@ rsPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rsKey :: Lens' ReadsSearch' (Maybe Key)
+rsKey :: Lens' ReadsSearch' (Maybe AuthKey)
 rsKey = lens _rsKey (\ s a -> s{_rsKey = a})
 
 -- | OAuth 2.0 token for the current user.

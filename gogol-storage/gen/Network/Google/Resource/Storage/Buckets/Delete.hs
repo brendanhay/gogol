@@ -58,7 +58,7 @@ type BucketsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -71,7 +71,7 @@ data BucketsDelete' = BucketsDelete'
     , _bdPrettyPrint              :: !Bool
     , _bdUserIP                   :: !(Maybe Text)
     , _bdBucket                   :: !Text
-    , _bdKey                      :: !(Maybe Key)
+    , _bdKey                      :: !(Maybe AuthKey)
     , _bdIfMetagenerationNotMatch :: !(Maybe Word64)
     , _bdOAuthToken               :: !(Maybe OAuthToken)
     , _bdFields                   :: !(Maybe Text)
@@ -146,7 +146,7 @@ bdBucket = lens _bdBucket (\ s a -> s{_bdBucket = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bdKey :: Lens' BucketsDelete' (Maybe Key)
+bdKey :: Lens' BucketsDelete' (Maybe AuthKey)
 bdKey = lens _bdKey (\ s a -> s{_bdKey = a})
 
 -- | Makes the return of the bucket metadata conditional on whether the

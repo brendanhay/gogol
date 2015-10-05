@@ -55,7 +55,7 @@ type LanguagesListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] LanguagesListResponse
@@ -67,7 +67,7 @@ data LanguagesList' = LanguagesList'
     { _llQuotaUser   :: !(Maybe Text)
     , _llPrettyPrint :: !Bool
     , _llUserIP      :: !(Maybe Text)
-    , _llKey         :: !(Maybe Key)
+    , _llKey         :: !(Maybe AuthKey)
     , _llOAuthToken  :: !(Maybe OAuthToken)
     , _llTarget      :: !(Maybe Text)
     , _llFields      :: !(Maybe Text)
@@ -124,7 +124,7 @@ llUserIP = lens _llUserIP (\ s a -> s{_llUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-llKey :: Lens' LanguagesList' (Maybe Key)
+llKey :: Lens' LanguagesList' (Maybe AuthKey)
 llKey = lens _llKey (\ s a -> s{_llKey = a})
 
 -- | OAuth 2.0 token for the current user.

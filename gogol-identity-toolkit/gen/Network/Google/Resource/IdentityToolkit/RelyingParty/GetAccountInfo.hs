@@ -53,7 +53,7 @@ type RelyingPartyGetAccountInfoResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON]
@@ -68,7 +68,7 @@ data RelyingPartyGetAccountInfo' = RelyingPartyGetAccountInfo'
     , _rpgaiPrettyPrint :: !Bool
     , _rpgaiUserIP      :: !(Maybe Text)
     , _rpgaiPayload     :: !IdentitytoolkitRelyingPartyGetAccountInfoRequest
-    , _rpgaiKey         :: !(Maybe Key)
+    , _rpgaiKey         :: !(Maybe AuthKey)
     , _rpgaiOAuthToken  :: !(Maybe OAuthToken)
     , _rpgaiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -132,7 +132,7 @@ rpgaiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rpgaiKey :: Lens' RelyingPartyGetAccountInfo' (Maybe Key)
+rpgaiKey :: Lens' RelyingPartyGetAccountInfo' (Maybe AuthKey)
 rpgaiKey = lens _rpgaiKey (\ s a -> s{_rpgaiKey = a})
 
 -- | OAuth 2.0 token for the current user.

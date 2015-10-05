@@ -64,7 +64,7 @@ type InstancesSetDiskAutoDeleteResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Post '[JSON] Operation
@@ -80,7 +80,7 @@ data InstancesSetDiskAutoDelete' = InstancesSetDiskAutoDelete'
     , _isdadAutoDelete  :: !Bool
     , _isdadZone        :: !Text
     , _isdadDeviceName  :: !Text
-    , _isdadKey         :: !(Maybe Key)
+    , _isdadKey         :: !(Maybe AuthKey)
     , _isdadOAuthToken  :: !(Maybe OAuthToken)
     , _isdadFields      :: !(Maybe Text)
     , _isdadInstance    :: !Text
@@ -178,7 +178,7 @@ isdadDeviceName
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-isdadKey :: Lens' InstancesSetDiskAutoDelete' (Maybe Key)
+isdadKey :: Lens' InstancesSetDiskAutoDelete' (Maybe AuthKey)
 isdadKey = lens _isdadKey (\ s a -> s{_isdadKey = a})
 
 -- | OAuth 2.0 token for the current user.

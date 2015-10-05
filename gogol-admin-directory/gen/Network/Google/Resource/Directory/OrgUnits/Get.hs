@@ -57,7 +57,7 @@ type OrgUnitsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] OrgUnit
 
@@ -70,7 +70,7 @@ data OrgUnitsGet' = OrgUnitsGet'
     , _ougUserIP      :: !(Maybe Text)
     , _ougOrgUnitPath :: ![Text]
     , _ougCustomerId  :: !Text
-    , _ougKey         :: !(Maybe Key)
+    , _ougKey         :: !(Maybe AuthKey)
     , _ougOAuthToken  :: !(Maybe OAuthToken)
     , _ougFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ ougCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ougKey :: Lens' OrgUnitsGet' (Maybe Key)
+ougKey :: Lens' OrgUnitsGet' (Maybe AuthKey)
 ougKey = lens _ougKey (\ s a -> s{_ougKey = a})
 
 -- | OAuth 2.0 token for the current user.

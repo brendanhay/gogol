@@ -57,7 +57,7 @@ type APIsGetRestResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] RestDescription
@@ -69,7 +69,7 @@ data APIsGetRest' = APIsGetRest'
     { _agrQuotaUser   :: !(Maybe Text)
     , _agrPrettyPrint :: !Bool
     , _agrUserIP      :: !(Maybe Text)
-    , _agrKey         :: !(Maybe Key)
+    , _agrKey         :: !(Maybe AuthKey)
     , _agrVersion     :: !Text
     , _agrAPI         :: !Text
     , _agrOAuthToken  :: !(Maybe OAuthToken)
@@ -133,7 +133,7 @@ agrUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agrKey :: Lens' APIsGetRest' (Maybe Key)
+agrKey :: Lens' APIsGetRest' (Maybe AuthKey)
 agrKey = lens _agrKey (\ s a -> s{_agrKey = a})
 
 -- | The version of the API.

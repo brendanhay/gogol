@@ -70,7 +70,7 @@ type ProjectsSinksGetResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] LogSink
@@ -87,7 +87,7 @@ data ProjectsSinksGet' = ProjectsSinksGet'
     , _psgAccessToken    :: !(Maybe Text)
     , _psgUploadType     :: !(Maybe Text)
     , _psgBearerToken    :: !(Maybe Text)
-    , _psgKey            :: !(Maybe Key)
+    , _psgKey            :: !(Maybe AuthKey)
     , _psgOAuthToken     :: !(Maybe OAuthToken)
     , _psgProjectsId     :: !Text
     , _psgSinksId        :: !Text
@@ -196,7 +196,7 @@ psgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psgKey :: Lens' ProjectsSinksGet' (Maybe Key)
+psgKey :: Lens' ProjectsSinksGet' (Maybe AuthKey)
 psgKey = lens _psgKey (\ s a -> s{_psgKey = a})
 
 -- | OAuth 2.0 token for the current user.

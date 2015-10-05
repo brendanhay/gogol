@@ -62,7 +62,7 @@ type DatabasesPatchResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Database :>
@@ -79,7 +79,7 @@ data DatabasesPatch' = DatabasesPatch'
     , _dpDatabase    :: !Text
     , _dpUserIP      :: !(Maybe Text)
     , _dpPayload     :: !Database
-    , _dpKey         :: !(Maybe Key)
+    , _dpKey         :: !(Maybe AuthKey)
     , _dpOAuthToken  :: !(Maybe OAuthToken)
     , _dpFields      :: !(Maybe Text)
     , _dpInstance    :: !Text
@@ -164,7 +164,7 @@ dpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dpKey :: Lens' DatabasesPatch' (Maybe Key)
+dpKey :: Lens' DatabasesPatch' (Maybe AuthKey)
 dpKey = lens _dpKey (\ s a -> s{_dpKey = a})
 
 -- | OAuth 2.0 token for the current user.

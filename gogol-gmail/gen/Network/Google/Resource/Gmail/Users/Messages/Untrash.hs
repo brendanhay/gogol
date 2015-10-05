@@ -57,7 +57,7 @@ type UsersMessagesUntrashResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] Message
 
@@ -69,7 +69,7 @@ data UsersMessagesUntrash' = UsersMessagesUntrash'
     , _umuPrettyPrint :: !Bool
     , _umuUserIP      :: !(Maybe Text)
     , _umuUserId      :: !Text
-    , _umuKey         :: !(Maybe Key)
+    , _umuKey         :: !(Maybe AuthKey)
     , _umuId          :: !Text
     , _umuOAuthToken  :: !(Maybe OAuthToken)
     , _umuFields      :: !(Maybe Text)
@@ -138,7 +138,7 @@ umuUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umuKey :: Lens' UsersMessagesUntrash' (Maybe Key)
+umuKey :: Lens' UsersMessagesUntrash' (Maybe AuthKey)
 umuKey = lens _umuKey (\ s a -> s{_umuKey = a})
 
 -- | The ID of the message to remove from Trash.

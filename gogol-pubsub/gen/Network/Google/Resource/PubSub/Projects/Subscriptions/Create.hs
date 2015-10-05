@@ -71,7 +71,7 @@ type ProjectsSubscriptionsCreateResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Subscription :>
@@ -94,7 +94,7 @@ data ProjectsSubscriptionsCreate' = ProjectsSubscriptionsCreate'
     , _pscUploadType     :: !(Maybe Text)
     , _pscPayload        :: !Subscription
     , _pscBearerToken    :: !(Maybe Text)
-    , _pscKey            :: !(Maybe Key)
+    , _pscKey            :: !(Maybe AuthKey)
     , _pscName           :: !Text
     , _pscOAuthToken     :: !(Maybe OAuthToken)
     , _pscFields         :: !(Maybe Text)
@@ -207,7 +207,7 @@ pscBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pscKey :: Lens' ProjectsSubscriptionsCreate' (Maybe Key)
+pscKey :: Lens' ProjectsSubscriptionsCreate' (Maybe AuthKey)
 pscKey = lens _pscKey (\ s a -> s{_pscKey = a})
 
 -- | The name of the subscription. It must have the format

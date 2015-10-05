@@ -69,7 +69,7 @@ type UsersMessagesImportResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  MultipartRelated '[JSON] Message Body :>
@@ -87,7 +87,7 @@ data UsersMessagesImport' = UsersMessagesImport'
     , _uPayload            :: !Message
     , _uUserId             :: !Text
     , _uMedia              :: !Body
-    , _uKey                :: !(Maybe Key)
+    , _uKey                :: !(Maybe AuthKey)
     , _uProcessForCalendar :: !Bool
     , _uDeleted            :: !Bool
     , _uNeverMarkSpam      :: !Bool
@@ -179,7 +179,7 @@ uMedia = lens _uMedia (\ s a -> s{_uMedia = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uKey :: Lens' UsersMessagesImport' (Maybe Key)
+uKey :: Lens' UsersMessagesImport' (Maybe AuthKey)
 uKey = lens _uKey (\ s a -> s{_uKey = a})
 
 -- | Process calendar invites in the email and add any extracted meetings to

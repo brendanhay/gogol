@@ -57,7 +57,7 @@ type BucketsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Bucket :> Post '[JSON] Bucket
@@ -71,7 +71,7 @@ data BucketsInsert' = BucketsInsert'
     , _biProject     :: !Text
     , _biUserIP      :: !(Maybe Text)
     , _biPayload     :: !Bucket
-    , _biKey         :: !(Maybe Key)
+    , _biKey         :: !(Maybe AuthKey)
     , _biProjection  :: !(Maybe BucketsInsertProjection)
     , _biOAuthToken  :: !(Maybe OAuthToken)
     , _biFields      :: !(Maybe Text)
@@ -146,7 +146,7 @@ biPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-biKey :: Lens' BucketsInsert' (Maybe Key)
+biKey :: Lens' BucketsInsert' (Maybe AuthKey)
 biKey = lens _biKey (\ s a -> s{_biKey = a})
 
 -- | Set of properties to return. Defaults to noAcl, unless the bucket

@@ -80,7 +80,7 @@ type VolumesListResource =
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "key" Key :>
+                                         QueryParam "key" AuthKey :>
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
@@ -98,7 +98,7 @@ data VolumesList' = VolumesList'
     , _vlPartner         :: !(Maybe Text)
     , _vlQ               :: !Text
     , _vlDownload        :: !(Maybe VolumesListDownload)
-    , _vlKey             :: !(Maybe Key)
+    , _vlKey             :: !(Maybe AuthKey)
     , _vlSource          :: !(Maybe Text)
     , _vlProjection      :: !(Maybe VolumesListProjection)
     , _vlFilter          :: !(Maybe VolumesListFilter)
@@ -224,7 +224,7 @@ vlDownload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vlKey :: Lens' VolumesList' (Maybe Key)
+vlKey :: Lens' VolumesList' (Maybe AuthKey)
 vlKey = lens _vlKey (\ s a -> s{_vlKey = a})
 
 -- | String to identify the originator of this request.

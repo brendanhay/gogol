@@ -61,7 +61,7 @@ type ZoneViewsListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ZoneViewsList
@@ -75,7 +75,7 @@ data ZoneViewsList' = ZoneViewsList'
     , _zvlProject     :: !Text
     , _zvlUserIP      :: !(Maybe Text)
     , _zvlZone        :: !Text
-    , _zvlKey         :: !(Maybe Key)
+    , _zvlKey         :: !(Maybe AuthKey)
     , _zvlPageToken   :: !(Maybe Text)
     , _zvlOAuthToken  :: !(Maybe OAuthToken)
     , _zvlMaxResults  :: !Int32
@@ -154,7 +154,7 @@ zvlZone = lens _zvlZone (\ s a -> s{_zvlZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-zvlKey :: Lens' ZoneViewsList' (Maybe Key)
+zvlKey :: Lens' ZoneViewsList' (Maybe AuthKey)
 zvlKey = lens _zvlKey (\ s a -> s{_zvlKey = a})
 
 -- | Specifies a nextPageToken returned by a previous list request. This

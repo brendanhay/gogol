@@ -60,7 +60,7 @@ type AchievementsSetStepsAtLeastResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Post '[JSON] AchievementSetStepsAtLeastResponse
@@ -77,7 +77,7 @@ data AchievementsSetStepsAtLeast' = AchievementsSetStepsAtLeast'
     , _assalAchievementId :: !Text
     , _assalUserIP        :: !(Maybe Text)
     , _assalSteps         :: !Int32
-    , _assalKey           :: !(Maybe Key)
+    , _assalKey           :: !(Maybe AuthKey)
     , _assalOAuthToken    :: !(Maybe OAuthToken)
     , _assalFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -151,7 +151,7 @@ assalSteps
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-assalKey :: Lens' AchievementsSetStepsAtLeast' (Maybe Key)
+assalKey :: Lens' AchievementsSetStepsAtLeast' (Maybe AuthKey)
 assalKey = lens _assalKey (\ s a -> s{_assalKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -57,7 +57,7 @@ type AccountActiveAdSummariesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] AccountActiveAdSummary
@@ -70,7 +70,7 @@ data AccountActiveAdSummariesGet' = AccountActiveAdSummariesGet'
     , _aaasgPrettyPrint      :: !Bool
     , _aaasgUserIP           :: !(Maybe Text)
     , _aaasgProFileId        :: !Int64
-    , _aaasgKey              :: !(Maybe Key)
+    , _aaasgKey              :: !(Maybe AuthKey)
     , _aaasgSummaryAccountId :: !Int64
     , _aaasgOAuthToken       :: !(Maybe OAuthToken)
     , _aaasgFields           :: !(Maybe Text)
@@ -140,7 +140,7 @@ aaasgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aaasgKey :: Lens' AccountActiveAdSummariesGet' (Maybe Key)
+aaasgKey :: Lens' AccountActiveAdSummariesGet' (Maybe AuthKey)
 aaasgKey = lens _aaasgKey (\ s a -> s{_aaasgKey = a})
 
 -- | Account ID.

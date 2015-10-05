@@ -61,7 +61,7 @@ type ForwardingRulesAggregatedListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ForwardingRuleAggregatedList
@@ -74,7 +74,7 @@ data ForwardingRulesAggregatedList' = ForwardingRulesAggregatedList'
     , _fralPrettyPrint :: !Bool
     , _fralProject     :: !Text
     , _fralUserIP      :: !(Maybe Text)
-    , _fralKey         :: !(Maybe Key)
+    , _fralKey         :: !(Maybe AuthKey)
     , _fralFilter      :: !(Maybe Text)
     , _fralPageToken   :: !(Maybe Text)
     , _fralOAuthToken  :: !(Maybe OAuthToken)
@@ -150,7 +150,7 @@ fralUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fralKey :: Lens' ForwardingRulesAggregatedList' (Maybe Key)
+fralKey :: Lens' ForwardingRulesAggregatedList' (Maybe AuthKey)
 fralKey = lens _fralKey (\ s a -> s{_fralKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

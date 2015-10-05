@@ -78,7 +78,7 @@ type PostUserInfosListResource =
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "key" Key :>
+                                         QueryParam "key" AuthKey :>
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
@@ -99,7 +99,7 @@ data PostUserInfosList' = PostUserInfosList'
     , _puilBlogId      :: !Text
     , _puilUserId      :: !Text
     , _puilStartDate   :: !(Maybe DateTime')
-    , _puilKey         :: !(Maybe Key)
+    , _puilKey         :: !(Maybe AuthKey)
     , _puilFetchBodies :: !Bool
     , _puilView        :: !(Maybe PostUserInfosListView)
     , _puilLabels      :: !(Maybe Text)
@@ -229,7 +229,7 @@ puilStartDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puilKey :: Lens' PostUserInfosList' (Maybe Key)
+puilKey :: Lens' PostUserInfosList' (Maybe AuthKey)
 puilKey = lens _puilKey (\ s a -> s{_puilKey = a})
 
 -- | Whether the body content of posts is included. Default is false.

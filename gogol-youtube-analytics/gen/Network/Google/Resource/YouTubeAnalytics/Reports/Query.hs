@@ -72,7 +72,7 @@ type ReportsQueryResource =
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "userIp" Text :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ResultTable
@@ -88,7 +88,7 @@ data ReportsQuery' = ReportsQuery'
     , _rqFilters     :: !(Maybe Text)
     , _rqIds         :: !Text
     , _rqEndDate     :: !Text
-    , _rqKey         :: !(Maybe Key)
+    , _rqKey         :: !(Maybe AuthKey)
     , _rqCurrency    :: !(Maybe Text)
     , _rqSort        :: !(Maybe Text)
     , _rqDimensions  :: !(Maybe Text)
@@ -217,7 +217,7 @@ rqEndDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rqKey :: Lens' ReportsQuery' (Maybe Key)
+rqKey :: Lens' ReportsQuery' (Maybe AuthKey)
 rqKey = lens _rqKey (\ s a -> s{_rqKey = a})
 
 -- | The currency to which financial metrics should be converted. The default

@@ -72,7 +72,7 @@ type MyLibraryBookshelvesVolumesListResource =
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "userIp" Text :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] Volumes
@@ -87,7 +87,7 @@ data MyLibraryBookshelvesVolumesList' = MyLibraryBookshelvesVolumesList'
     , _mlbvlUserIP        :: !(Maybe Text)
     , _mlbvlQ             :: !(Maybe Text)
     , _mlbvlShelf         :: !Text
-    , _mlbvlKey           :: !(Maybe Key)
+    , _mlbvlKey           :: !(Maybe AuthKey)
     , _mlbvlSource        :: !(Maybe Text)
     , _mlbvlProjection    :: !(Maybe MyLibraryBookshelvesVolumesListProjection)
     , _mlbvlOAuthToken    :: !(Maybe OAuthToken)
@@ -186,7 +186,7 @@ mlbvlShelf
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlbvlKey :: Lens' MyLibraryBookshelvesVolumesList' (Maybe Key)
+mlbvlKey :: Lens' MyLibraryBookshelvesVolumesList' (Maybe AuthKey)
 mlbvlKey = lens _mlbvlKey (\ s a -> s{_mlbvlKey = a})
 
 -- | String to identify the originator of this request.

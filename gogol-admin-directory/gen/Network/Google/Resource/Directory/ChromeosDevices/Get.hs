@@ -61,7 +61,7 @@ type ChromeosDevicesGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ChromeOSDevice
@@ -74,7 +74,7 @@ data ChromeosDevicesGet' = ChromeosDevicesGet'
     , _cdgPrettyPrint :: !Bool
     , _cdgUserIP      :: !(Maybe Text)
     , _cdgCustomerId  :: !Text
-    , _cdgKey         :: !(Maybe Key)
+    , _cdgKey         :: !(Maybe AuthKey)
     , _cdgDeviceId    :: !Text
     , _cdgProjection  :: !(Maybe ChromeosDevicesGetProjection)
     , _cdgOAuthToken  :: !(Maybe OAuthToken)
@@ -147,7 +147,7 @@ cdgCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cdgKey :: Lens' ChromeosDevicesGet' (Maybe Key)
+cdgKey :: Lens' ChromeosDevicesGet' (Maybe AuthKey)
 cdgKey = lens _cdgKey (\ s a -> s{_cdgKey = a})
 
 -- | Immutable id of Chrome OS Device

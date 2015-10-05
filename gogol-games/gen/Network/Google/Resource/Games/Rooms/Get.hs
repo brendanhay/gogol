@@ -56,7 +56,7 @@ type RoomsGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Room
 
@@ -67,7 +67,7 @@ data RoomsGet' = RoomsGet'
     { _rgQuotaUser   :: !(Maybe Text)
     , _rgPrettyPrint :: !Bool
     , _rgUserIP      :: !(Maybe Text)
-    , _rgKey         :: !(Maybe Key)
+    , _rgKey         :: !(Maybe AuthKey)
     , _rgRoomId      :: !Text
     , _rgLanguage    :: !(Maybe Text)
     , _rgOAuthToken  :: !(Maybe OAuthToken)
@@ -129,7 +129,7 @@ rgUserIP = lens _rgUserIP (\ s a -> s{_rgUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rgKey :: Lens' RoomsGet' (Maybe Key)
+rgKey :: Lens' RoomsGet' (Maybe AuthKey)
 rgKey = lens _rgKey (\ s a -> s{_rgKey = a})
 
 -- | The ID of the room.

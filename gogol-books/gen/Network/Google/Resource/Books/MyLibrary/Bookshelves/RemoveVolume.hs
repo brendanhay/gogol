@@ -64,7 +64,7 @@ type MyLibraryBookshelvesRemoveVolumeResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -77,7 +77,7 @@ data MyLibraryBookshelvesRemoveVolume' = MyLibraryBookshelvesRemoveVolume'
     , _mlbrvUserIP      :: !(Maybe Text)
     , _mlbrvReason      :: !(Maybe MyLibraryBookshelvesRemoveVolumeReason)
     , _mlbrvShelf       :: !Text
-    , _mlbrvKey         :: !(Maybe Key)
+    , _mlbrvKey         :: !(Maybe AuthKey)
     , _mlbrvVolumeId    :: !Text
     , _mlbrvSource      :: !(Maybe Text)
     , _mlbrvOAuthToken  :: !(Maybe OAuthToken)
@@ -158,7 +158,7 @@ mlbrvShelf
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlbrvKey :: Lens' MyLibraryBookshelvesRemoveVolume' (Maybe Key)
+mlbrvKey :: Lens' MyLibraryBookshelvesRemoveVolume' (Maybe AuthKey)
 mlbrvKey = lens _mlbrvKey (\ s a -> s{_mlbrvKey = a})
 
 -- | ID of volume to remove.

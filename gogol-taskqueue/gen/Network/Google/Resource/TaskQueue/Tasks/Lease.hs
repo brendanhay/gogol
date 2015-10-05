@@ -66,7 +66,7 @@ type TasksLeaseResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Post '[JSON] Tasks
@@ -82,7 +82,7 @@ data TasksLease' = TasksLease'
     , _tlProject     :: !Text
     , _tlUserIP      :: !(Maybe Text)
     , _tlNumTasks    :: !Int32
-    , _tlKey         :: !(Maybe Key)
+    , _tlKey         :: !(Maybe AuthKey)
     , _tlLeaseSecs   :: !Int32
     , _tlOAuthToken  :: !(Maybe OAuthToken)
     , _tlGroupByTag  :: !(Maybe Bool)
@@ -181,7 +181,7 @@ tlNumTasks
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tlKey :: Lens' TasksLease' (Maybe Key)
+tlKey :: Lens' TasksLease' (Maybe AuthKey)
 tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | The lease in seconds.

@@ -59,7 +59,7 @@ type AccountsContainersFoldersCreateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Folder :> Post '[JSON] Folder
@@ -74,7 +74,7 @@ data AccountsContainersFoldersCreate' = AccountsContainersFoldersCreate'
     , _acfcUserIP      :: !(Maybe Text)
     , _acfcPayload     :: !Folder
     , _acfcAccountId   :: !Text
-    , _acfcKey         :: !(Maybe Key)
+    , _acfcKey         :: !(Maybe AuthKey)
     , _acfcOAuthToken  :: !(Maybe OAuthToken)
     , _acfcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -158,7 +158,7 @@ acfcAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acfcKey :: Lens' AccountsContainersFoldersCreate' (Maybe Key)
+acfcKey :: Lens' AccountsContainersFoldersCreate' (Maybe AuthKey)
 acfcKey = lens _acfcKey (\ s a -> s{_acfcKey = a})
 
 -- | OAuth 2.0 token for the current user.

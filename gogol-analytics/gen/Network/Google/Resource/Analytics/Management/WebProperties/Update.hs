@@ -59,7 +59,7 @@ type ManagementWebPropertiesUpdateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] WebProperty :>
@@ -75,7 +75,7 @@ data ManagementWebPropertiesUpdate' = ManagementWebPropertiesUpdate'
     , _mwpuUserIP        :: !(Maybe Text)
     , _mwpuPayload       :: !WebProperty
     , _mwpuAccountId     :: !Text
-    , _mwpuKey           :: !(Maybe Key)
+    , _mwpuKey           :: !(Maybe AuthKey)
     , _mwpuOAuthToken    :: !(Maybe OAuthToken)
     , _mwpuFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -159,7 +159,7 @@ mwpuAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mwpuKey :: Lens' ManagementWebPropertiesUpdate' (Maybe Key)
+mwpuKey :: Lens' ManagementWebPropertiesUpdate' (Maybe AuthKey)
 mwpuKey = lens _mwpuKey (\ s a -> s{_mwpuKey = a})
 
 -- | OAuth 2.0 token for the current user.

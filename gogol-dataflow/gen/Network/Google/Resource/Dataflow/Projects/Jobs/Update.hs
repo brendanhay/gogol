@@ -71,7 +71,7 @@ type ProjectsJobsUpdateResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          ReqBody '[JSON] Job :> Put '[JSON] Job
@@ -90,7 +90,7 @@ data ProjectsJobsUpdate' = ProjectsJobsUpdate'
     , _pjuUploadType     :: !(Maybe Text)
     , _pjuPayload        :: !Job
     , _pjuBearerToken    :: !(Maybe Text)
-    , _pjuKey            :: !(Maybe Key)
+    , _pjuKey            :: !(Maybe AuthKey)
     , _pjuProjectId      :: !Text
     , _pjuOAuthToken     :: !(Maybe OAuthToken)
     , _pjuFields         :: !(Maybe Text)
@@ -211,7 +211,7 @@ pjuBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pjuKey :: Lens' ProjectsJobsUpdate' (Maybe Key)
+pjuKey :: Lens' ProjectsJobsUpdate' (Maybe AuthKey)
 pjuKey = lens _pjuKey (\ s a -> s{_pjuKey = a})
 
 -- | The project which owns the job.

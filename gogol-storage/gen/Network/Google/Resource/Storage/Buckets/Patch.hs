@@ -61,7 +61,7 @@ type BucketsPatchResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Bucket :> Patch '[JSON] Bucket
@@ -76,7 +76,7 @@ data BucketsPatch' = BucketsPatch'
     , _bpUserIP                   :: !(Maybe Text)
     , _bpBucket                   :: !Text
     , _bpPayload                  :: !Bucket
-    , _bpKey                      :: !(Maybe Key)
+    , _bpKey                      :: !(Maybe AuthKey)
     , _bpIfMetagenerationNotMatch :: !(Maybe Word64)
     , _bpProjection               :: !(Maybe BucketsPatchProjection)
     , _bpOAuthToken               :: !(Maybe OAuthToken)
@@ -164,7 +164,7 @@ bpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bpKey :: Lens' BucketsPatch' (Maybe Key)
+bpKey :: Lens' BucketsPatch' (Maybe AuthKey)
 bpKey = lens _bpKey (\ s a -> s{_bpKey = a})
 
 -- | Makes the return of the bucket metadata conditional on whether the

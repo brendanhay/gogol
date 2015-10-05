@@ -68,7 +68,7 @@ type ConversionPatchResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] ConversionList :>
@@ -88,7 +88,7 @@ data ConversionPatch' = ConversionPatch'
     , _cpEndDate         :: !Int32
     , _cpPayload         :: !ConversionList
     , _cpStartDate       :: !Int32
-    , _cpKey             :: !(Maybe Key)
+    , _cpKey             :: !(Maybe AuthKey)
     , _cpStartRow        :: !Word32
     , _cpOAuthToken      :: !(Maybe OAuthToken)
     , _cpRowCount        :: !Int32
@@ -209,7 +209,7 @@ cpStartDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cpKey :: Lens' ConversionPatch' (Maybe Key)
+cpKey :: Lens' ConversionPatch' (Maybe AuthKey)
 cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
 
 -- | The 0-based starting index for retrieving conversions results.

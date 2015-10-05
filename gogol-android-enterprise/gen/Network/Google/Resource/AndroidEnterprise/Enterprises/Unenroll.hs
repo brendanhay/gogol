@@ -55,7 +55,7 @@ type EnterprisesUnenrollResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -67,7 +67,7 @@ data EnterprisesUnenroll' = EnterprisesUnenroll'
     , _euPrettyPrint  :: !Bool
     , _euEnterpriseId :: !Text
     , _euUserIP       :: !(Maybe Text)
-    , _euKey          :: !(Maybe Key)
+    , _euKey          :: !(Maybe AuthKey)
     , _euOAuthToken   :: !(Maybe OAuthToken)
     , _euFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -130,7 +130,7 @@ euUserIP = lens _euUserIP (\ s a -> s{_euUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-euKey :: Lens' EnterprisesUnenroll' (Maybe Key)
+euKey :: Lens' EnterprisesUnenroll' (Maybe AuthKey)
 euKey = lens _euKey (\ s a -> s{_euKey = a})
 
 -- | OAuth 2.0 token for the current user.

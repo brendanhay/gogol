@@ -69,7 +69,7 @@ type PromoOfferAcceptResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -83,7 +83,7 @@ data PromoOfferAccept' = PromoOfferAccept'
     , _poaUserIP       :: !(Maybe Text)
     , _poaSerial       :: !(Maybe Text)
     , _poaDevice       :: !(Maybe Text)
-    , _poaKey          :: !(Maybe Key)
+    , _poaKey          :: !(Maybe AuthKey)
     , _poaModel        :: !(Maybe Text)
     , _poaVolumeId     :: !(Maybe Text)
     , _poaOfferId      :: !(Maybe Text)
@@ -182,7 +182,7 @@ poaDevice
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-poaKey :: Lens' PromoOfferAccept' (Maybe Key)
+poaKey :: Lens' PromoOfferAccept' (Maybe AuthKey)
 poaKey = lens _poaKey (\ s a -> s{_poaKey = a})
 
 -- | device model

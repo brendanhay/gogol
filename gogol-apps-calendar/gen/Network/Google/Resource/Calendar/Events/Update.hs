@@ -66,7 +66,7 @@ type EventsUpdateResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Event :> Put '[JSON] Event
@@ -81,7 +81,7 @@ data EventsUpdate' = EventsUpdate'
     , _euUserIP              :: !(Maybe Text)
     , _euPayload             :: !Event
     , _euMaxAttendees        :: !(Maybe Int32)
-    , _euKey                 :: !(Maybe Key)
+    , _euKey                 :: !(Maybe AuthKey)
     , _euSendNotifications   :: !(Maybe Bool)
     , _euOAuthToken          :: !(Maybe OAuthToken)
     , _euSupportsAttachments :: !(Maybe Bool)
@@ -182,7 +182,7 @@ euMaxAttendees
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-euKey :: Lens' EventsUpdate' (Maybe Key)
+euKey :: Lens' EventsUpdate' (Maybe AuthKey)
 euKey = lens _euKey (\ s a -> s{_euKey = a})
 
 -- | Whether to send notifications about the event update (e.g. attendee\'s

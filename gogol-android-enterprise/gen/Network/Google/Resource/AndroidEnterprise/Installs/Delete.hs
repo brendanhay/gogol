@@ -65,7 +65,7 @@ type InstallsDeleteResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -81,7 +81,7 @@ data InstallsDelete' = InstallsDelete'
     , _idUserIP       :: !(Maybe Text)
     , _idUserId       :: !Text
     , _idInstallId    :: !Text
-    , _idKey          :: !(Maybe Key)
+    , _idKey          :: !(Maybe AuthKey)
     , _idDeviceId     :: !Text
     , _idOAuthToken   :: !(Maybe OAuthToken)
     , _idFields       :: !(Maybe Text)
@@ -167,7 +167,7 @@ idInstallId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-idKey :: Lens' InstallsDelete' (Maybe Key)
+idKey :: Lens' InstallsDelete' (Maybe AuthKey)
 idKey = lens _idKey (\ s a -> s{_idKey = a})
 
 -- | The Android ID of the device.

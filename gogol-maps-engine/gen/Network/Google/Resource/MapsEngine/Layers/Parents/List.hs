@@ -59,7 +59,7 @@ type LayersParentsListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ParentsListResponse
@@ -71,7 +71,7 @@ data LayersParentsList' = LayersParentsList'
     { _lplpQuotaUser   :: !(Maybe Text)
     , _lplpPrettyPrint :: !Bool
     , _lplpUserIP      :: !(Maybe Text)
-    , _lplpKey         :: !(Maybe Key)
+    , _lplpKey         :: !(Maybe AuthKey)
     , _lplpId          :: !Text
     , _lplpPageToken   :: !(Maybe Text)
     , _lplpOAuthToken  :: !(Maybe OAuthToken)
@@ -139,7 +139,7 @@ lplpUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lplpKey :: Lens' LayersParentsList' (Maybe Key)
+lplpKey :: Lens' LayersParentsList' (Maybe AuthKey)
 lplpKey = lens _lplpKey (\ s a -> s{_lplpKey = a})
 
 -- | The ID of the layer whose parents will be listed.

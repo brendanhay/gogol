@@ -57,7 +57,7 @@ type RevisionsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -68,7 +68,7 @@ data RevisionsDelete' = RevisionsDelete'
     { _rdQuotaUser   :: !(Maybe Text)
     , _rdPrettyPrint :: !Bool
     , _rdUserIP      :: !(Maybe Text)
-    , _rdKey         :: !(Maybe Key)
+    , _rdKey         :: !(Maybe AuthKey)
     , _rdFileId      :: !Text
     , _rdOAuthToken  :: !(Maybe OAuthToken)
     , _rdRevisionId  :: !Text
@@ -131,7 +131,7 @@ rdUserIP = lens _rdUserIP (\ s a -> s{_rdUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rdKey :: Lens' RevisionsDelete' (Maybe Key)
+rdKey :: Lens' RevisionsDelete' (Maybe AuthKey)
 rdKey = lens _rdKey (\ s a -> s{_rdKey = a})
 
 -- | The ID of the file.

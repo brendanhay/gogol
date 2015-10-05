@@ -55,7 +55,7 @@ type CustomFieldDefListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] CustomFieldDefListResponse
@@ -68,7 +68,7 @@ data CustomFieldDefList' = CustomFieldDefList'
     , _cfdlPrettyPrint :: !Bool
     , _cfdlUserIP      :: !(Maybe Text)
     , _cfdlTeamId      :: !Text
-    , _cfdlKey         :: !(Maybe Key)
+    , _cfdlKey         :: !(Maybe AuthKey)
     , _cfdlOAuthToken  :: !(Maybe OAuthToken)
     , _cfdlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -132,7 +132,7 @@ cfdlTeamId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cfdlKey :: Lens' CustomFieldDefList' (Maybe Key)
+cfdlKey :: Lens' CustomFieldDefList' (Maybe AuthKey)
 cfdlKey = lens _cfdlKey (\ s a -> s{_cfdlKey = a})
 
 -- | OAuth 2.0 token for the current user.

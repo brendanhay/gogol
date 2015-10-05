@@ -65,7 +65,7 @@ type RepresentativesRepresentativeInfoByDivisionResource
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] RepresentativeInfoData
@@ -78,7 +78,7 @@ data RepresentativesRepresentativeInfoByDivision' = RepresentativesRepresentativ
     , _rribdRoles       :: !(Maybe [RepresentativesRepresentativeInfoByDivisionRoles])
     , _rribdPrettyPrint :: !Bool
     , _rribdUserIP      :: !(Maybe Text)
-    , _rribdKey         :: !(Maybe Key)
+    , _rribdKey         :: !(Maybe AuthKey)
     , _rribdRecursive   :: !(Maybe Bool)
     , _rribdOcdId       :: !Text
     , _rribdLevels      :: !(Maybe [RepresentativesRepresentativeInfoByDivisionLevels])
@@ -158,7 +158,7 @@ rribdUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rribdKey :: Lens' RepresentativesRepresentativeInfoByDivision' (Maybe Key)
+rribdKey :: Lens' RepresentativesRepresentativeInfoByDivision' (Maybe AuthKey)
 rribdKey = lens _rribdKey (\ s a -> s{_rribdKey = a})
 
 -- | If true, information about all divisions contained in the division

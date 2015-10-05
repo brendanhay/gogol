@@ -57,7 +57,7 @@ type RoutesDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
@@ -70,7 +70,7 @@ data RoutesDelete' = RoutesDelete'
     , _rdProject     :: !Text
     , _rdUserIP      :: !(Maybe Text)
     , _rdRoute       :: !Text
-    , _rdKey         :: !(Maybe Key)
+    , _rdKey         :: !(Maybe AuthKey)
     , _rdOAuthToken  :: !(Maybe OAuthToken)
     , _rdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -140,7 +140,7 @@ rdRoute = lens _rdRoute (\ s a -> s{_rdRoute = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rdKey :: Lens' RoutesDelete' (Maybe Key)
+rdKey :: Lens' RoutesDelete' (Maybe AuthKey)
 rdKey = lens _rdKey (\ s a -> s{_rdKey = a})
 
 -- | OAuth 2.0 token for the current user.

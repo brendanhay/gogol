@@ -75,7 +75,7 @@ type CoursesTeachersCreateResource =
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] Teacher :>
@@ -101,7 +101,7 @@ data CoursesTeachersCreate' = CoursesTeachersCreate'
     , _ctcUploadType     :: !(Maybe Text)
     , _ctcPayload        :: !Teacher
     , _ctcBearerToken    :: !(Maybe Text)
-    , _ctcKey            :: !(Maybe Key)
+    , _ctcKey            :: !(Maybe AuthKey)
     , _ctcOAuthToken     :: !(Maybe OAuthToken)
     , _ctcFields         :: !(Maybe Text)
     , _ctcCallback       :: !(Maybe Text)
@@ -220,7 +220,7 @@ ctcBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ctcKey :: Lens' CoursesTeachersCreate' (Maybe Key)
+ctcKey :: Lens' CoursesTeachersCreate' (Maybe AuthKey)
 ctcKey = lens _ctcKey (\ s a -> s{_ctcKey = a})
 
 -- | OAuth 2.0 token for the current user.

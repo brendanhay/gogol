@@ -69,7 +69,7 @@ type BeaconsDecommissionResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
@@ -89,7 +89,7 @@ data BeaconsDecommission' = BeaconsDecommission'
     , _bdBeaconName     :: !Text
     , _bdUploadType     :: !(Maybe Text)
     , _bdBearerToken    :: !(Maybe Text)
-    , _bdKey            :: !(Maybe Key)
+    , _bdKey            :: !(Maybe AuthKey)
     , _bdOAuthToken     :: !(Maybe OAuthToken)
     , _bdFields         :: !(Maybe Text)
     , _bdCallback       :: !(Maybe Text)
@@ -196,7 +196,7 @@ bdBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bdKey :: Lens' BeaconsDecommission' (Maybe Key)
+bdKey :: Lens' BeaconsDecommission' (Maybe AuthKey)
 bdKey = lens _bdKey (\ s a -> s{_bdKey = a})
 
 -- | OAuth 2.0 token for the current user.

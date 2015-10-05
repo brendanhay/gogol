@@ -56,7 +56,7 @@ type CommentThreadsInsertResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] CommentThread :>
@@ -72,7 +72,7 @@ data CommentThreadsInsert' = CommentThreadsInsert'
     , _ctiPrettyPrint :: !Bool
     , _ctiUserIP      :: !(Maybe Text)
     , _ctiPayload     :: !CommentThread
-    , _ctiKey         :: !(Maybe Key)
+    , _ctiKey         :: !(Maybe AuthKey)
     , _ctiOAuthToken  :: !(Maybe OAuthToken)
     , _ctiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ ctiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ctiKey :: Lens' CommentThreadsInsert' (Maybe Key)
+ctiKey :: Lens' CommentThreadsInsert' (Maybe AuthKey)
 ctiKey = lens _ctiKey (\ s a -> s{_ctiKey = a})
 
 -- | OAuth 2.0 token for the current user.

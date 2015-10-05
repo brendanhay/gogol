@@ -57,7 +57,7 @@ type RoomsCreateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] RoomCreateRequest :>
@@ -72,7 +72,7 @@ data RoomsCreate' = RoomsCreate'
     , _rooPrettyPrint :: !Bool
     , _rooUserIP      :: !(Maybe Text)
     , _rooPayload     :: !RoomCreateRequest
-    , _rooKey         :: !(Maybe Key)
+    , _rooKey         :: !(Maybe AuthKey)
     , _rooLanguage    :: !(Maybe Text)
     , _rooOAuthToken  :: !(Maybe OAuthToken)
     , _rooFields      :: !(Maybe Text)
@@ -139,7 +139,7 @@ rooPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rooKey :: Lens' RoomsCreate' (Maybe Key)
+rooKey :: Lens' RoomsCreate' (Maybe AuthKey)
 rooKey = lens _rooKey (\ s a -> s{_rooKey = a})
 
 -- | The preferred language to use for strings returned by this method.

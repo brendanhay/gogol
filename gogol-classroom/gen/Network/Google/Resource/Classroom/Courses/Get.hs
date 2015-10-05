@@ -71,7 +71,7 @@ type CoursesGetResource =
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] Course
@@ -92,7 +92,7 @@ data CoursesGet' = CoursesGet'
     , _cgAccessToken    :: !(Maybe Text)
     , _cgUploadType     :: !(Maybe Text)
     , _cgBearerToken    :: !(Maybe Text)
-    , _cgKey            :: !(Maybe Key)
+    , _cgKey            :: !(Maybe AuthKey)
     , _cgId             :: !Text
     , _cgOAuthToken     :: !(Maybe OAuthToken)
     , _cgFields         :: !(Maybe Text)
@@ -195,7 +195,7 @@ cgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgKey :: Lens' CoursesGet' (Maybe Key)
+cgKey :: Lens' CoursesGet' (Maybe AuthKey)
 cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 
 -- | Identifier of the course to return. This identifier can be either the

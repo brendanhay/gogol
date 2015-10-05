@@ -57,7 +57,7 @@ type OperatingSystemVersionsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] OperatingSystemVersion
@@ -70,7 +70,7 @@ data OperatingSystemVersionsGet' = OperatingSystemVersionsGet'
     , _osvgPrettyPrint :: !Bool
     , _osvgUserIP      :: !(Maybe Text)
     , _osvgProFileId   :: !Int64
-    , _osvgKey         :: !(Maybe Key)
+    , _osvgKey         :: !(Maybe AuthKey)
     , _osvgId          :: !Int64
     , _osvgOAuthToken  :: !(Maybe OAuthToken)
     , _osvgFields      :: !(Maybe Text)
@@ -140,7 +140,7 @@ osvgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-osvgKey :: Lens' OperatingSystemVersionsGet' (Maybe Key)
+osvgKey :: Lens' OperatingSystemVersionsGet' (Maybe AuthKey)
 osvgKey = lens _osvgKey (\ s a -> s{_osvgKey = a})
 
 -- | Operating system version ID.

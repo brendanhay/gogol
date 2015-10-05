@@ -120,7 +120,7 @@ type PlacementsListResource =
                                                                Text
                                                                :>
                                                                QueryParam "key"
-                                                                 Key
+                                                                 AuthKey
                                                                  :>
                                                                  QueryParam
                                                                    "oauth_token"
@@ -153,7 +153,7 @@ data PlacementsList' = PlacementsList'
     , _plaDirectorySiteIds     :: !(Maybe [Int64])
     , _plaSortOrder            :: !(Maybe PlacementsListSortOrder)
     , _plaPaymentSource        :: !(Maybe PlacementsListPaymentSource)
-    , _plaKey                  :: !(Maybe Key)
+    , _plaKey                  :: !(Maybe AuthKey)
     , _plaSiteIds              :: !(Maybe [Int64])
     , _plaPageToken            :: !(Maybe Text)
     , _plaSortField            :: !(Maybe PlacementsListSortField)
@@ -385,7 +385,7 @@ plaPaymentSource
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plaKey :: Lens' PlacementsList' (Maybe Key)
+plaKey :: Lens' PlacementsList' (Maybe AuthKey)
 plaKey = lens _plaKey (\ s a -> s{_plaKey = a})
 
 -- | Select only placements that are associated with these sites.

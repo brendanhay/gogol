@@ -65,7 +65,7 @@ type MetricDescriptorsListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] ListMetricDescriptorsRequest :>
@@ -85,7 +85,7 @@ data MetricDescriptorsList' = MetricDescriptorsList'
     , _mdlUserIP      :: !(Maybe Text)
     , _mdlCount       :: !Int32
     , _mdlPayload     :: !ListMetricDescriptorsRequest
-    , _mdlKey         :: !(Maybe Key)
+    , _mdlKey         :: !(Maybe AuthKey)
     , _mdlQuery       :: !(Maybe Text)
     , _mdlPageToken   :: !(Maybe Text)
     , _mdlOAuthToken  :: !(Maybe OAuthToken)
@@ -174,7 +174,7 @@ mdlPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mdlKey :: Lens' MetricDescriptorsList' (Maybe Key)
+mdlKey :: Lens' MetricDescriptorsList' (Maybe AuthKey)
 mdlKey = lens _mdlKey (\ s a -> s{_mdlKey = a})
 
 -- | The query used to search against existing metrics. Separate keywords

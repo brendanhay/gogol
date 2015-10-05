@@ -64,7 +64,7 @@ type UsersMessagesInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            MultipartRelated '[JSON] Message Body :>
@@ -82,7 +82,7 @@ data UsersMessagesInsert' = UsersMessagesInsert'
     , _umiPayload            :: !Message
     , _umiUserId             :: !Text
     , _umiMedia              :: !Body
-    , _umiKey                :: !(Maybe Key)
+    , _umiKey                :: !(Maybe AuthKey)
     , _umiDeleted            :: !Bool
     , _umiOAuthToken         :: !(Maybe OAuthToken)
     , _umiInternalDateSource :: !UsersMessagesInsertInternalDateSource
@@ -170,7 +170,7 @@ umiMedia = lens _umiMedia (\ s a -> s{_umiMedia = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umiKey :: Lens' UsersMessagesInsert' (Maybe Key)
+umiKey :: Lens' UsersMessagesInsert' (Maybe AuthKey)
 umiKey = lens _umiKey (\ s a -> s{_umiKey = a})
 
 -- | Mark the email as permanently deleted (not TRASH) and only visible in

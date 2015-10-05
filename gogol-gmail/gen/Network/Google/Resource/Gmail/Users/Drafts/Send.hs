@@ -58,7 +58,7 @@ type UsersDraftsSendResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          MultipartRelated '[JSON] Draft Body :>
@@ -75,7 +75,7 @@ data UsersDraftsSend' = UsersDraftsSend'
     , _udsPayload     :: !Draft
     , _udsUserId      :: !Text
     , _udsMedia       :: !Body
-    , _udsKey         :: !(Maybe Key)
+    , _udsKey         :: !(Maybe AuthKey)
     , _udsOAuthToken  :: !(Maybe OAuthToken)
     , _udsFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -155,7 +155,7 @@ udsMedia = lens _udsMedia (\ s a -> s{_udsMedia = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udsKey :: Lens' UsersDraftsSend' (Maybe Key)
+udsKey :: Lens' UsersDraftsSend' (Maybe AuthKey)
 udsKey = lens _udsKey (\ s a -> s{_udsKey = a})
 
 -- | OAuth 2.0 token for the current user.

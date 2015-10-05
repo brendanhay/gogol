@@ -62,7 +62,7 @@ type AutoscalersPatchResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Autoscaler :>
@@ -79,7 +79,7 @@ data AutoscalersPatch' = AutoscalersPatch'
     , _apUserIP      :: !(Maybe Text)
     , _apZone        :: !Text
     , _apPayload     :: !Autoscaler
-    , _apKey         :: !(Maybe Key)
+    , _apKey         :: !(Maybe AuthKey)
     , _apAutoscaler  :: !Text
     , _apOAuthToken  :: !(Maybe OAuthToken)
     , _apFields      :: !(Maybe Text)
@@ -163,7 +163,7 @@ apPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apKey :: Lens' AutoscalersPatch' (Maybe Key)
+apKey :: Lens' AutoscalersPatch' (Maybe AuthKey)
 apKey = lens _apKey (\ s a -> s{_apKey = a})
 
 -- | Name of the Autoscaler resource.

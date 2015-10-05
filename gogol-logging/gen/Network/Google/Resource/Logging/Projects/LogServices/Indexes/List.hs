@@ -81,7 +81,7 @@ type ProjectsLogServicesIndexesListResource =
                                          QueryParam "quotaUser" Text :>
                                            QueryParam "prettyPrint" Bool :>
                                              QueryParam "fields" Text :>
-                                               QueryParam "key" Key :>
+                                               QueryParam "key" AuthKey :>
                                                  QueryParam "oauth_token"
                                                    OAuthToken
                                                    :>
@@ -102,7 +102,7 @@ data ProjectsLogServicesIndexesList' = ProjectsLogServicesIndexesList'
     , _plsilAccessToken    :: !(Maybe Text)
     , _plsilUploadType     :: !(Maybe Text)
     , _plsilBearerToken    :: !(Maybe Text)
-    , _plsilKey            :: !(Maybe Key)
+    , _plsilKey            :: !(Maybe AuthKey)
     , _plsilLogServicesId  :: !Text
     , _plsilDepth          :: !(Maybe Int32)
     , _plsilPageToken      :: !(Maybe Text)
@@ -238,7 +238,7 @@ plsilBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plsilKey :: Lens' ProjectsLogServicesIndexesList' (Maybe Key)
+plsilKey :: Lens' ProjectsLogServicesIndexesList' (Maybe AuthKey)
 plsilKey = lens _plsilKey (\ s a -> s{_plsilKey = a})
 
 -- | Part of \`serviceName\`. See documentation of \`projectsId\`.

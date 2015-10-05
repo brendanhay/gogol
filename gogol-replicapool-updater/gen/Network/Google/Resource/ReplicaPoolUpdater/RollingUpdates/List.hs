@@ -64,7 +64,7 @@ type RollingUpdatesListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] RollingUpdateList
@@ -79,7 +79,7 @@ data RollingUpdatesList' = RollingUpdatesList'
     , _rulProject     :: !Text
     , _rulUserIP      :: !(Maybe Text)
     , _rulZone        :: !Text
-    , _rulKey         :: !(Maybe Key)
+    , _rulKey         :: !(Maybe AuthKey)
     , _rulFilter      :: !(Maybe Text)
     , _rulPageToken   :: !(Maybe Text)
     , _rulOAuthToken  :: !(Maybe OAuthToken)
@@ -162,7 +162,7 @@ rulZone = lens _rulZone (\ s a -> s{_rulZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rulKey :: Lens' RollingUpdatesList' (Maybe Key)
+rulKey :: Lens' RollingUpdatesList' (Maybe AuthKey)
 rulKey = lens _rulKey (\ s a -> s{_rulKey = a})
 
 -- | Optional. Filter expression for filtering listed resources.

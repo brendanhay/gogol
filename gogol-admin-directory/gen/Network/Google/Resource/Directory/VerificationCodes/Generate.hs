@@ -56,7 +56,7 @@ type VerificationCodesGenerateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -67,7 +67,7 @@ data VerificationCodesGenerate' = VerificationCodesGenerate'
     { _vcgQuotaUser   :: !(Maybe Text)
     , _vcgPrettyPrint :: !Bool
     , _vcgUserIP      :: !(Maybe Text)
-    , _vcgKey         :: !(Maybe Key)
+    , _vcgKey         :: !(Maybe AuthKey)
     , _vcgOAuthToken  :: !(Maybe OAuthToken)
     , _vcgUserKey     :: !Text
     , _vcgFields      :: !(Maybe Text)
@@ -126,7 +126,7 @@ vcgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vcgKey :: Lens' VerificationCodesGenerate' (Maybe Key)
+vcgKey :: Lens' VerificationCodesGenerate' (Maybe AuthKey)
 vcgKey = lens _vcgKey (\ s a -> s{_vcgKey = a})
 
 -- | OAuth 2.0 token for the current user.

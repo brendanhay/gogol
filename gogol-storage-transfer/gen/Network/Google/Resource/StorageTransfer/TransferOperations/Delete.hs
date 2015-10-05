@@ -66,7 +66,7 @@ type TransferOperationsDeleteResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Delete '[JSON] Empty
@@ -83,7 +83,7 @@ data TransferOperationsDelete' = TransferOperationsDelete'
     , _todAccessToken    :: !(Maybe Text)
     , _todUploadType     :: !(Maybe Text)
     , _todBearerToken    :: !(Maybe Text)
-    , _todKey            :: !(Maybe Key)
+    , _todKey            :: !(Maybe AuthKey)
     , _todName           :: !Text
     , _todOAuthToken     :: !(Maybe OAuthToken)
     , _todFields         :: !(Maybe Text)
@@ -187,7 +187,7 @@ todBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-todKey :: Lens' TransferOperationsDelete' (Maybe Key)
+todKey :: Lens' TransferOperationsDelete' (Maybe AuthKey)
 todKey = lens _todKey (\ s a -> s{_todKey = a})
 
 -- | The name of the operation resource to be deleted.

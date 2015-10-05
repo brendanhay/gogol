@@ -53,7 +53,7 @@ type OffersInsertResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] OfferDTO :> Post '[JSON] OfferDTO
@@ -66,7 +66,7 @@ data OffersInsert' = OffersInsert'
     , _oiPrettyPrint :: !Bool
     , _oiUserIP      :: !(Maybe Text)
     , _oiPayload     :: !OfferDTO
-    , _oiKey         :: !(Maybe Key)
+    , _oiKey         :: !(Maybe AuthKey)
     , _oiOAuthToken  :: !(Maybe OAuthToken)
     , _oiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -128,7 +128,7 @@ oiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oiKey :: Lens' OffersInsert' (Maybe Key)
+oiKey :: Lens' OffersInsert' (Maybe AuthKey)
 oiKey = lens _oiKey (\ s a -> s{_oiKey = a})
 
 -- | OAuth 2.0 token for the current user.

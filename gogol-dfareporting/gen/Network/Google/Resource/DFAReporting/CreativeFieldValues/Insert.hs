@@ -59,7 +59,7 @@ type CreativeFieldValuesInsertResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] CreativeFieldValue :>
@@ -75,7 +75,7 @@ data CreativeFieldValuesInsert' = CreativeFieldValuesInsert'
     , _cfviUserIP          :: !(Maybe Text)
     , _cfviProFileId       :: !Int64
     , _cfviPayload         :: !CreativeFieldValue
-    , _cfviKey             :: !(Maybe Key)
+    , _cfviKey             :: !(Maybe AuthKey)
     , _cfviOAuthToken      :: !(Maybe OAuthToken)
     , _cfviFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -159,7 +159,7 @@ cfviPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cfviKey :: Lens' CreativeFieldValuesInsert' (Maybe Key)
+cfviKey :: Lens' CreativeFieldValuesInsert' (Maybe AuthKey)
 cfviKey = lens _cfviKey (\ s a -> s{_cfviKey = a})
 
 -- | OAuth 2.0 token for the current user.

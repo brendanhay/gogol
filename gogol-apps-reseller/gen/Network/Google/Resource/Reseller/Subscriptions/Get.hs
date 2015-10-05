@@ -57,7 +57,7 @@ type SubscriptionsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Subscription
 
@@ -69,7 +69,7 @@ data SubscriptionsGet' = SubscriptionsGet'
     , _sgPrettyPrint    :: !Bool
     , _sgUserIP         :: !(Maybe Text)
     , _sgCustomerId     :: !Text
-    , _sgKey            :: !(Maybe Key)
+    , _sgKey            :: !(Maybe AuthKey)
     , _sgOAuthToken     :: !(Maybe OAuthToken)
     , _sgSubscriptionId :: !Text
     , _sgFields         :: !(Maybe Text)
@@ -136,7 +136,7 @@ sgCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sgKey :: Lens' SubscriptionsGet' (Maybe Key)
+sgKey :: Lens' SubscriptionsGet' (Maybe AuthKey)
 sgKey = lens _sgKey (\ s a -> s{_sgKey = a})
 
 -- | OAuth 2.0 token for the current user.

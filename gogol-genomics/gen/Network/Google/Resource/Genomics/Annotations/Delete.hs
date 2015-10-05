@@ -55,7 +55,7 @@ type AnnotationsDeleteResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -67,7 +67,7 @@ data AnnotationsDelete' = AnnotationsDelete'
     { _adQuotaUser    :: !(Maybe Text)
     , _adPrettyPrint  :: !Bool
     , _adUserIP       :: !(Maybe Text)
-    , _adKey          :: !(Maybe Key)
+    , _adKey          :: !(Maybe AuthKey)
     , _adAnnotationId :: !Text
     , _adOAuthToken   :: !(Maybe OAuthToken)
     , _adFields       :: !(Maybe Text)
@@ -125,7 +125,7 @@ adUserIP = lens _adUserIP (\ s a -> s{_adUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-adKey :: Lens' AnnotationsDelete' (Maybe Key)
+adKey :: Lens' AnnotationsDelete' (Maybe AuthKey)
 adKey = lens _adKey (\ s a -> s{_adKey = a})
 
 -- | The ID of the annotation set to be deleted.

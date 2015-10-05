@@ -71,7 +71,7 @@ type ProjectsLogsDeleteResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Delete '[JSON] Empty
@@ -90,7 +90,7 @@ data ProjectsLogsDelete' = ProjectsLogsDelete'
     , _pldAccessToken    :: !(Maybe Text)
     , _pldUploadType     :: !(Maybe Text)
     , _pldBearerToken    :: !(Maybe Text)
-    , _pldKey            :: !(Maybe Key)
+    , _pldKey            :: !(Maybe AuthKey)
     , _pldOAuthToken     :: !(Maybe OAuthToken)
     , _pldProjectsId     :: !Text
     , _pldFields         :: !(Maybe Text)
@@ -203,7 +203,7 @@ pldBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pldKey :: Lens' ProjectsLogsDelete' (Maybe Key)
+pldKey :: Lens' ProjectsLogsDelete' (Maybe AuthKey)
 pldKey = lens _pldKey (\ s a -> s{_pldKey = a})
 
 -- | OAuth 2.0 token for the current user.

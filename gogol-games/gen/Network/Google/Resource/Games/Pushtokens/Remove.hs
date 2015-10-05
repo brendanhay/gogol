@@ -55,7 +55,7 @@ type PushtokensRemoveResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] PushTokenId :> Post '[JSON] ()
@@ -69,7 +69,7 @@ data PushtokensRemove' = PushtokensRemove'
     , _prPrettyPrint :: !Bool
     , _prUserIP      :: !(Maybe Text)
     , _prPayload     :: !PushTokenId
-    , _prKey         :: !(Maybe Key)
+    , _prKey         :: !(Maybe AuthKey)
     , _prOAuthToken  :: !(Maybe OAuthToken)
     , _prFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -131,7 +131,7 @@ prPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-prKey :: Lens' PushtokensRemove' (Maybe Key)
+prKey :: Lens' PushtokensRemove' (Maybe AuthKey)
 prKey = lens _prKey (\ s a -> s{_prKey = a})
 
 -- | OAuth 2.0 token for the current user.

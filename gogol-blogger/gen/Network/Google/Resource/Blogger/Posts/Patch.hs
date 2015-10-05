@@ -68,7 +68,7 @@ type PostsPatchResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Post' :>
@@ -86,7 +86,7 @@ data PostsPatch' = PostsPatch'
     , _ppBlogId      :: !Text
     , _ppPayload     :: !Post'
     , _ppMaxComments :: !(Maybe Word32)
-    , _ppKey         :: !(Maybe Key)
+    , _ppKey         :: !(Maybe AuthKey)
     , _ppRevert      :: !(Maybe Bool)
     , _ppPostId      :: !Text
     , _ppOAuthToken  :: !(Maybe OAuthToken)
@@ -197,7 +197,7 @@ ppMaxComments
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ppKey :: Lens' PostsPatch' (Maybe Key)
+ppKey :: Lens' PostsPatch' (Maybe AuthKey)
 ppKey = lens _ppKey (\ s a -> s{_ppKey = a})
 
 -- | Whether a revert action should be performed when the post is updated

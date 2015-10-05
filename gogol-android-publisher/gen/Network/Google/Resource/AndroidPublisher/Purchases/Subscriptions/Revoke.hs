@@ -62,7 +62,7 @@ type PurchasesSubscriptionsRevokeResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -77,7 +77,7 @@ data PurchasesSubscriptionsRevoke' = PurchasesSubscriptionsRevoke'
     , _psrPackageName    :: !Text
     , _psrUserIP         :: !(Maybe Text)
     , _psrToken          :: !Text
-    , _psrKey            :: !(Maybe Key)
+    , _psrKey            :: !(Maybe AuthKey)
     , _psrOAuthToken     :: !(Maybe OAuthToken)
     , _psrSubscriptionId :: !Text
     , _psrFields         :: !(Maybe Text)
@@ -156,7 +156,7 @@ psrToken = lens _psrToken (\ s a -> s{_psrToken = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psrKey :: Lens' PurchasesSubscriptionsRevoke' (Maybe Key)
+psrKey :: Lens' PurchasesSubscriptionsRevoke' (Maybe AuthKey)
 psrKey = lens _psrKey (\ s a -> s{_psrKey = a})
 
 -- | OAuth 2.0 token for the current user.

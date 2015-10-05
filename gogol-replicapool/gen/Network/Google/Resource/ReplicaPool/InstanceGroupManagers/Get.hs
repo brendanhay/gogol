@@ -59,7 +59,7 @@ type InstanceGroupManagersGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] InstanceGroupManager
@@ -74,7 +74,7 @@ data InstanceGroupManagersGet' = InstanceGroupManagersGet'
     , _igmgInstanceGroupManager :: !Text
     , _igmgUserIP               :: !(Maybe Text)
     , _igmgZone                 :: !Text
-    , _igmgKey                  :: !(Maybe Key)
+    , _igmgKey                  :: !(Maybe AuthKey)
     , _igmgOAuthToken           :: !(Maybe OAuthToken)
     , _igmgFields               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -156,7 +156,7 @@ igmgZone = lens _igmgZone (\ s a -> s{_igmgZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmgKey :: Lens' InstanceGroupManagersGet' (Maybe Key)
+igmgKey :: Lens' InstanceGroupManagersGet' (Maybe AuthKey)
 igmgKey = lens _igmgKey (\ s a -> s{_igmgKey = a})
 
 -- | OAuth 2.0 token for the current user.

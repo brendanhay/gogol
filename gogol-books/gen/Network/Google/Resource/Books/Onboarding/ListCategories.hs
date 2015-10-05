@@ -55,7 +55,7 @@ type OnboardingListCategoriesResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Category
 
@@ -67,7 +67,7 @@ data OnboardingListCategories' = OnboardingListCategories'
     , _olcPrettyPrint :: !Bool
     , _olcUserIP      :: !(Maybe Text)
     , _olcLocale      :: !(Maybe Text)
-    , _olcKey         :: !(Maybe Key)
+    , _olcKey         :: !(Maybe AuthKey)
     , _olcOAuthToken  :: !(Maybe OAuthToken)
     , _olcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -130,7 +130,7 @@ olcLocale
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-olcKey :: Lens' OnboardingListCategories' (Maybe Key)
+olcKey :: Lens' OnboardingListCategories' (Maybe AuthKey)
 olcKey = lens _olcKey (\ s a -> s{_olcKey = a})
 
 -- | OAuth 2.0 token for the current user.

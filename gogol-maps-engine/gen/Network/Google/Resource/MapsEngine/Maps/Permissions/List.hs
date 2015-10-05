@@ -55,7 +55,7 @@ type MapsPermissionsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] PermissionsListResponse
@@ -67,7 +67,7 @@ data MapsPermissionsList' = MapsPermissionsList'
     { _mplQuotaUser   :: !(Maybe Text)
     , _mplPrettyPrint :: !Bool
     , _mplUserIP      :: !(Maybe Text)
-    , _mplKey         :: !(Maybe Key)
+    , _mplKey         :: !(Maybe AuthKey)
     , _mplId          :: !Text
     , _mplOAuthToken  :: !(Maybe OAuthToken)
     , _mplFields      :: !(Maybe Text)
@@ -126,7 +126,7 @@ mplUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mplKey :: Lens' MapsPermissionsList' (Maybe Key)
+mplKey :: Lens' MapsPermissionsList' (Maybe AuthKey)
 mplKey = lens _mplKey (\ s a -> s{_mplKey = a})
 
 -- | The ID of the asset whose permissions will be listed.

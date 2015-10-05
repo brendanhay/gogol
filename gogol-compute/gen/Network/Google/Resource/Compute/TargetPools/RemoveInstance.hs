@@ -61,7 +61,7 @@ type TargetPoolsRemoveInstanceResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] TargetPoolsRemoveInstanceRequest
@@ -77,7 +77,7 @@ data TargetPoolsRemoveInstance' = TargetPoolsRemoveInstance'
     , _tpriTargetPool  :: !Text
     , _tpriUserIP      :: !(Maybe Text)
     , _tpriPayload     :: !TargetPoolsRemoveInstanceRequest
-    , _tpriKey         :: !(Maybe Key)
+    , _tpriKey         :: !(Maybe AuthKey)
     , _tpriRegion      :: !Text
     , _tpriOAuthToken  :: !(Maybe OAuthToken)
     , _tpriFields      :: !(Maybe Text)
@@ -164,7 +164,7 @@ tpriPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tpriKey :: Lens' TargetPoolsRemoveInstance' (Maybe Key)
+tpriKey :: Lens' TargetPoolsRemoveInstance' (Maybe AuthKey)
 tpriKey = lens _tpriKey (\ s a -> s{_tpriKey = a})
 
 -- | Name of the region scoping this request.

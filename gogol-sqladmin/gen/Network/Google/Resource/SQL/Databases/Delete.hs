@@ -61,7 +61,7 @@ type DatabasesDeleteResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Delete '[JSON] Operation
@@ -76,7 +76,7 @@ data DatabasesDelete' = DatabasesDelete'
     , _ddProject     :: !Text
     , _ddDatabase    :: !Text
     , _ddUserIP      :: !(Maybe Text)
-    , _ddKey         :: !(Maybe Key)
+    , _ddKey         :: !(Maybe AuthKey)
     , _ddOAuthToken  :: !(Maybe OAuthToken)
     , _ddFields      :: !(Maybe Text)
     , _ddInstance    :: !Text
@@ -152,7 +152,7 @@ ddUserIP = lens _ddUserIP (\ s a -> s{_ddUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ddKey :: Lens' DatabasesDelete' (Maybe Key)
+ddKey :: Lens' DatabasesDelete' (Maybe AuthKey)
 ddKey = lens _ddKey (\ s a -> s{_ddKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -58,7 +58,7 @@ type AdsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Ad :> Patch '[JSON] Ad
@@ -72,7 +72,7 @@ data AdsPatch' = AdsPatch'
     , _appUserIP      :: !(Maybe Text)
     , _appProFileId   :: !Int64
     , _appPayload     :: !Ad
-    , _appKey         :: !(Maybe Key)
+    , _appKey         :: !(Maybe AuthKey)
     , _appId          :: !Int64
     , _appOAuthToken  :: !(Maybe OAuthToken)
     , _appFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ appPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-appKey :: Lens' AdsPatch' (Maybe Key)
+appKey :: Lens' AdsPatch' (Maybe AuthKey)
 appKey = lens _appKey (\ s a -> s{_appKey = a})
 
 -- | Ad ID.

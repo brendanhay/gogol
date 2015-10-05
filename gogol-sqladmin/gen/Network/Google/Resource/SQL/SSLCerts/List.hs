@@ -58,7 +58,7 @@ type SSLCertsListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] SSLCertsListResponse
@@ -71,7 +71,7 @@ data SSLCertsList' = SSLCertsList'
     , _sclPrettyPrint :: !Bool
     , _sclProject     :: !Text
     , _sclUserIP      :: !(Maybe Text)
-    , _sclKey         :: !(Maybe Key)
+    , _sclKey         :: !(Maybe AuthKey)
     , _sclOAuthToken  :: !(Maybe OAuthToken)
     , _sclFields      :: !(Maybe Text)
     , _sclInstance    :: !Text
@@ -139,7 +139,7 @@ sclUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sclKey :: Lens' SSLCertsList' (Maybe Key)
+sclKey :: Lens' SSLCertsList' (Maybe AuthKey)
 sclKey = lens _sclKey (\ s a -> s{_sclKey = a})
 
 -- | OAuth 2.0 token for the current user.

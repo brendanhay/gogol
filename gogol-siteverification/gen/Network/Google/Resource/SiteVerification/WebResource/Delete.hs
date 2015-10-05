@@ -54,7 +54,7 @@ type WebResourceDeleteResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -65,7 +65,7 @@ data WebResourceDelete' = WebResourceDelete'
     { _wrdQuotaUser   :: !(Maybe Text)
     , _wrdPrettyPrint :: !Bool
     , _wrdUserIP      :: !(Maybe Text)
-    , _wrdKey         :: !(Maybe Key)
+    , _wrdKey         :: !(Maybe AuthKey)
     , _wrdId          :: !Text
     , _wrdOAuthToken  :: !(Maybe OAuthToken)
     , _wrdFields      :: !(Maybe Text)
@@ -124,7 +124,7 @@ wrdUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-wrdKey :: Lens' WebResourceDelete' (Maybe Key)
+wrdKey :: Lens' WebResourceDelete' (Maybe AuthKey)
 wrdKey = lens _wrdKey (\ s a -> s{_wrdKey = a})
 
 -- | The id of a verified site or domain.

@@ -58,7 +58,7 @@ type ACLUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ACLRule :> Put '[JSON] ACLRule
@@ -73,7 +73,7 @@ data ACLUpdate' = ACLUpdate'
     , _auUserIP      :: !(Maybe Text)
     , _auRuleId      :: !Text
     , _auPayload     :: !ACLRule
-    , _auKey         :: !(Maybe Key)
+    , _auKey         :: !(Maybe AuthKey)
     , _auOAuthToken  :: !(Maybe OAuthToken)
     , _auFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -154,7 +154,7 @@ auPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-auKey :: Lens' ACLUpdate' (Maybe Key)
+auKey :: Lens' ACLUpdate' (Maybe AuthKey)
 auKey = lens _auKey (\ s a -> s{_auKey = a})
 
 -- | OAuth 2.0 token for the current user.

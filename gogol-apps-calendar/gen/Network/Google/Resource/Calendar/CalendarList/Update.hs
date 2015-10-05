@@ -59,7 +59,7 @@ type CalendarListUpdateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] CalendarListEntry :>
@@ -75,7 +75,7 @@ data CalendarListUpdate' = CalendarListUpdate'
     , _cluUserIP         :: !(Maybe Text)
     , _cluPayload        :: !CalendarListEntry
     , _cluColorRgbFormat :: !(Maybe Bool)
-    , _cluKey            :: !(Maybe Key)
+    , _cluKey            :: !(Maybe AuthKey)
     , _cluOAuthToken     :: !(Maybe OAuthToken)
     , _cluFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -162,7 +162,7 @@ cluColorRgbFormat
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cluKey :: Lens' CalendarListUpdate' (Maybe Key)
+cluKey :: Lens' CalendarListUpdate' (Maybe AuthKey)
 cluKey = lens _cluKey (\ s a -> s{_cluKey = a})
 
 -- | OAuth 2.0 token for the current user.

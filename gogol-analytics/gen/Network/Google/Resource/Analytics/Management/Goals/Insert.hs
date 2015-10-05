@@ -63,7 +63,7 @@ type ManagementGoalsInsertResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Goal :> Post '[JSON] Goal
@@ -79,7 +79,7 @@ data ManagementGoalsInsert' = ManagementGoalsInsert'
     , _mgiProFileId     :: !Text
     , _mgiPayload       :: !Goal
     , _mgiAccountId     :: !Text
-    , _mgiKey           :: !(Maybe Key)
+    , _mgiKey           :: !(Maybe AuthKey)
     , _mgiOAuthToken    :: !(Maybe OAuthToken)
     , _mgiFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -170,7 +170,7 @@ mgiAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mgiKey :: Lens' ManagementGoalsInsert' (Maybe Key)
+mgiKey :: Lens' ManagementGoalsInsert' (Maybe AuthKey)
 mgiKey = lens _mgiKey (\ s a -> s{_mgiKey = a})
 
 -- | OAuth 2.0 token for the current user.

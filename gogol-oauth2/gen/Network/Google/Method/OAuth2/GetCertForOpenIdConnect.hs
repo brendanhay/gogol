@@ -54,7 +54,7 @@ type GetCertForOpenIdConnectMethod =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] JWK
 
@@ -64,7 +64,7 @@ data GetCertForOpenIdConnect' = GetCertForOpenIdConnect'
     { _gcfoicQuotaUser   :: !(Maybe Text)
     , _gcfoicPrettyPrint :: !Bool
     , _gcfoicUserIP      :: !(Maybe Text)
-    , _gcfoicKey         :: !(Maybe Key)
+    , _gcfoicKey         :: !(Maybe AuthKey)
     , _gcfoicOAuthToken  :: !(Maybe OAuthToken)
     , _gcfoicFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -119,7 +119,7 @@ gcfoicUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gcfoicKey :: Lens' GetCertForOpenIdConnect' (Maybe Key)
+gcfoicKey :: Lens' GetCertForOpenIdConnect' (Maybe AuthKey)
 gcfoicKey
   = lens _gcfoicKey (\ s a -> s{_gcfoicKey = a})
 

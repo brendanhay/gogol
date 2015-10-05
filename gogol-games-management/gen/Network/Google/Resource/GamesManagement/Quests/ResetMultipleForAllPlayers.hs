@@ -56,7 +56,7 @@ type QuestsResetMultipleForAllPlayersResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] QuestsResetMultipleForAllRequest :>
@@ -72,7 +72,7 @@ data QuestsResetMultipleForAllPlayers' = QuestsResetMultipleForAllPlayers'
     , _qrmfapPrettyPrint :: !Bool
     , _qrmfapUserIP      :: !(Maybe Text)
     , _qrmfapPayload     :: !QuestsResetMultipleForAllRequest
-    , _qrmfapKey         :: !(Maybe Key)
+    , _qrmfapKey         :: !(Maybe AuthKey)
     , _qrmfapOAuthToken  :: !(Maybe OAuthToken)
     , _qrmfapFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -137,7 +137,7 @@ qrmfapPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-qrmfapKey :: Lens' QuestsResetMultipleForAllPlayers' (Maybe Key)
+qrmfapKey :: Lens' QuestsResetMultipleForAllPlayers' (Maybe AuthKey)
 qrmfapKey
   = lens _qrmfapKey (\ s a -> s{_qrmfapKey = a})
 

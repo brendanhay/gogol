@@ -55,7 +55,7 @@ type ProjectsMoveDiskResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] DiskMoveRequest :>
@@ -70,7 +70,7 @@ data ProjectsMoveDisk' = ProjectsMoveDisk'
     , _pmdProject     :: !Text
     , _pmdUserIP      :: !(Maybe Text)
     , _pmdPayload     :: !DiskMoveRequest
-    , _pmdKey         :: !(Maybe Key)
+    , _pmdKey         :: !(Maybe AuthKey)
     , _pmdOAuthToken  :: !(Maybe OAuthToken)
     , _pmdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,7 +142,7 @@ pmdPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pmdKey :: Lens' ProjectsMoveDisk' (Maybe Key)
+pmdKey :: Lens' ProjectsMoveDisk' (Maybe AuthKey)
 pmdKey = lens _pmdKey (\ s a -> s{_pmdKey = a})
 
 -- | OAuth 2.0 token for the current user.

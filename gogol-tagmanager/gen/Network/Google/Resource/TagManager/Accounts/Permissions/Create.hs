@@ -56,7 +56,7 @@ type AccountsPermissionsCreateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] UserAccess :> Post '[JSON] UserAccess
@@ -70,7 +70,7 @@ data AccountsPermissionsCreate' = AccountsPermissionsCreate'
     , _apcUserIP      :: !(Maybe Text)
     , _apcPayload     :: !UserAccess
     , _apcAccountId   :: !Text
-    , _apcKey         :: !(Maybe Key)
+    , _apcKey         :: !(Maybe AuthKey)
     , _apcOAuthToken  :: !(Maybe OAuthToken)
     , _apcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,7 +142,7 @@ apcAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apcKey :: Lens' AccountsPermissionsCreate' (Maybe Key)
+apcKey :: Lens' AccountsPermissionsCreate' (Maybe AuthKey)
 apcKey = lens _apcKey (\ s a -> s{_apcKey = a})
 
 -- | OAuth 2.0 token for the current user.

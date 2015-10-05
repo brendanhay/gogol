@@ -69,7 +69,7 @@ type TransferJobsPatchResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] UpdateTransferJobRequest :>
@@ -91,7 +91,7 @@ data TransferJobsPatch' = TransferJobsPatch'
     , _tjpUploadType     :: !(Maybe Text)
     , _tjpPayload        :: !UpdateTransferJobRequest
     , _tjpBearerToken    :: !(Maybe Text)
-    , _tjpKey            :: !(Maybe Key)
+    , _tjpKey            :: !(Maybe AuthKey)
     , _tjpOAuthToken     :: !(Maybe OAuthToken)
     , _tjpFields         :: !(Maybe Text)
     , _tjpCallback       :: !(Maybe Text)
@@ -208,7 +208,7 @@ tjpBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tjpKey :: Lens' TransferJobsPatch' (Maybe Key)
+tjpKey :: Lens' TransferJobsPatch' (Maybe AuthKey)
 tjpKey = lens _tjpKey (\ s a -> s{_tjpKey = a})
 
 -- | OAuth 2.0 token for the current user.

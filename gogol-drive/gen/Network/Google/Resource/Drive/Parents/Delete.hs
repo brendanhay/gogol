@@ -57,7 +57,7 @@ type ParentsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -68,7 +68,7 @@ data ParentsDelete' = ParentsDelete'
     { _pddQuotaUser   :: !(Maybe Text)
     , _pddPrettyPrint :: !Bool
     , _pddUserIP      :: !(Maybe Text)
-    , _pddKey         :: !(Maybe Key)
+    , _pddKey         :: !(Maybe AuthKey)
     , _pddFileId      :: !Text
     , _pddOAuthToken  :: !(Maybe OAuthToken)
     , _pddParentId    :: !Text
@@ -132,7 +132,7 @@ pddUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pddKey :: Lens' ParentsDelete' (Maybe Key)
+pddKey :: Lens' ParentsDelete' (Maybe AuthKey)
 pddKey = lens _pddKey (\ s a -> s{_pddKey = a})
 
 -- | The ID of the file.

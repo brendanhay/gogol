@@ -61,7 +61,7 @@ type VariantsetsMergeVariantsResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] MergeVariantsRequest :>
@@ -81,7 +81,7 @@ data VariantsetsMergeVariants' = VariantsetsMergeVariants'
     , _vmvVariantSetId :: !Text
     , _vmvUserIP       :: !(Maybe Text)
     , _vmvPayload      :: !MergeVariantsRequest
-    , _vmvKey          :: !(Maybe Key)
+    , _vmvKey          :: !(Maybe AuthKey)
     , _vmvOAuthToken   :: !(Maybe OAuthToken)
     , _vmvFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -154,7 +154,7 @@ vmvPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vmvKey :: Lens' VariantsetsMergeVariants' (Maybe Key)
+vmvKey :: Lens' VariantsetsMergeVariants' (Maybe AuthKey)
 vmvKey = lens _vmvKey (\ s a -> s{_vmvKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -57,7 +57,7 @@ type VideosRateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -69,7 +69,7 @@ data VideosRate' = VideosRate'
     , _vrRating      :: !VideosRateRating
     , _vrPrettyPrint :: !Bool
     , _vrUserIP      :: !(Maybe Text)
-    , _vrKey         :: !(Maybe Key)
+    , _vrKey         :: !(Maybe AuthKey)
     , _vrId          :: !Text
     , _vrOAuthToken  :: !(Maybe OAuthToken)
     , _vrFields      :: !(Maybe Text)
@@ -135,7 +135,7 @@ vrUserIP = lens _vrUserIP (\ s a -> s{_vrUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vrKey :: Lens' VideosRate' (Maybe Key)
+vrKey :: Lens' VideosRate' (Maybe AuthKey)
 vrKey = lens _vrKey (\ s a -> s{_vrKey = a})
 
 -- | The id parameter specifies the YouTube video ID of the video that is

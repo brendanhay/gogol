@@ -57,7 +57,7 @@ type ProjectsSetUsageExportBucketResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] UsageExportLocation :>
@@ -74,7 +74,7 @@ data ProjectsSetUsageExportBucket' = ProjectsSetUsageExportBucket'
     , _psuebProject     :: !Text
     , _psuebUserIP      :: !(Maybe Text)
     , _psuebPayload     :: !UsageExportLocation
-    , _psuebKey         :: !(Maybe Key)
+    , _psuebKey         :: !(Maybe AuthKey)
     , _psuebOAuthToken  :: !(Maybe OAuthToken)
     , _psuebFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -147,7 +147,7 @@ psuebPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psuebKey :: Lens' ProjectsSetUsageExportBucket' (Maybe Key)
+psuebKey :: Lens' ProjectsSetUsageExportBucket' (Maybe AuthKey)
 psuebKey = lens _psuebKey (\ s a -> s{_psuebKey = a})
 
 -- | OAuth 2.0 token for the current user.

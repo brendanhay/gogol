@@ -55,7 +55,7 @@ type ContactsUpdateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Contact :> Put '[JSON] Contact
@@ -68,7 +68,7 @@ data ContactsUpdate' = ContactsUpdate'
     , _cuPrettyPrint :: !Bool
     , _cuUserIP      :: !(Maybe Text)
     , _cuPayload     :: !Contact
-    , _cuKey         :: !(Maybe Key)
+    , _cuKey         :: !(Maybe AuthKey)
     , _cuId          :: !Text
     , _cuOAuthToken  :: !(Maybe OAuthToken)
     , _cuFields      :: !(Maybe Text)
@@ -135,7 +135,7 @@ cuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuKey :: Lens' ContactsUpdate' (Maybe Key)
+cuKey :: Lens' ContactsUpdate' (Maybe AuthKey)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
 
 -- | The ID of the contact.

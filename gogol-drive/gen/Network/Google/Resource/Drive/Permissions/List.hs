@@ -55,7 +55,7 @@ type PermissionsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] PermissionList
@@ -67,7 +67,7 @@ data PermissionsList' = PermissionsList'
     { _pllQuotaUser   :: !(Maybe Text)
     , _pllPrettyPrint :: !Bool
     , _pllUserIP      :: !(Maybe Text)
-    , _pllKey         :: !(Maybe Key)
+    , _pllKey         :: !(Maybe AuthKey)
     , _pllFileId      :: !Text
     , _pllOAuthToken  :: !(Maybe OAuthToken)
     , _pllFields      :: !(Maybe Text)
@@ -126,7 +126,7 @@ pllUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pllKey :: Lens' PermissionsList' (Maybe Key)
+pllKey :: Lens' PermissionsList' (Maybe AuthKey)
 pllKey = lens _pllKey (\ s a -> s{_pllKey = a})
 
 -- | The ID for the file.

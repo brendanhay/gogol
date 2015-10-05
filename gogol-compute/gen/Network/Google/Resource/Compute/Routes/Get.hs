@@ -57,7 +57,7 @@ type RoutesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Route
 
@@ -70,7 +70,7 @@ data RoutesGet' = RoutesGet'
     , _rouProject     :: !Text
     , _rouUserIP      :: !(Maybe Text)
     , _rouRoute       :: !Text
-    , _rouKey         :: !(Maybe Key)
+    , _rouKey         :: !(Maybe AuthKey)
     , _rouOAuthToken  :: !(Maybe OAuthToken)
     , _rouFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -141,7 +141,7 @@ rouRoute = lens _rouRoute (\ s a -> s{_rouRoute = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rouKey :: Lens' RoutesGet' (Maybe Key)
+rouKey :: Lens' RoutesGet' (Maybe AuthKey)
 rouKey = lens _rouKey (\ s a -> s{_rouKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -65,7 +65,7 @@ type MomentsListResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] MomentsFeed
@@ -80,7 +80,7 @@ data MomentsList' = MomentsList'
     , _mlUserIP      :: !(Maybe Text)
     , _mlCollection  :: !MomentsListCollection
     , _mlUserId      :: !Text
-    , _mlKey         :: !(Maybe Key)
+    , _mlKey         :: !(Maybe AuthKey)
     , _mlPageToken   :: !(Maybe Text)
     , _mlType        :: !(Maybe Text)
     , _mlOAuthToken  :: !(Maybe OAuthToken)
@@ -171,7 +171,7 @@ mlUserId = lens _mlUserId (\ s a -> s{_mlUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlKey :: Lens' MomentsList' (Maybe Key)
+mlKey :: Lens' MomentsList' (Maybe AuthKey)
 mlKey = lens _mlKey (\ s a -> s{_mlKey = a})
 
 -- | The continuation token, which is used to page through large result sets.

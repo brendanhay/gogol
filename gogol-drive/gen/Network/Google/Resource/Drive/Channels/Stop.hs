@@ -54,7 +54,7 @@ type ChannelsStopResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Channel :> Post '[JSON] ()
@@ -67,7 +67,7 @@ data ChannelsStop' = ChannelsStop'
     , _csPrettyPrint :: !Bool
     , _csUserIP      :: !(Maybe Text)
     , _csPayload     :: !Channel
-    , _csKey         :: !(Maybe Key)
+    , _csKey         :: !(Maybe AuthKey)
     , _csOAuthToken  :: !(Maybe OAuthToken)
     , _csFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -129,7 +129,7 @@ csPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-csKey :: Lens' ChannelsStop' (Maybe Key)
+csKey :: Lens' ChannelsStop' (Maybe AuthKey)
 csKey = lens _csKey (\ s a -> s{_csKey = a})
 
 -- | OAuth 2.0 token for the current user.

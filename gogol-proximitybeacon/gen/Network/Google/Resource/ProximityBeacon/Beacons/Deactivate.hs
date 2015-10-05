@@ -70,7 +70,7 @@ type BeaconsDeactivateResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
@@ -91,7 +91,7 @@ data BeaconsDeactivate' = BeaconsDeactivate'
     , _beaBeaconName     :: !Text
     , _beaUploadType     :: !(Maybe Text)
     , _beaBearerToken    :: !(Maybe Text)
-    , _beaKey            :: !(Maybe Key)
+    , _beaKey            :: !(Maybe AuthKey)
     , _beaOAuthToken     :: !(Maybe OAuthToken)
     , _beaFields         :: !(Maybe Text)
     , _beaCallback       :: !(Maybe Text)
@@ -200,7 +200,7 @@ beaBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-beaKey :: Lens' BeaconsDeactivate' (Maybe Key)
+beaKey :: Lens' BeaconsDeactivate' (Maybe AuthKey)
 beaKey = lens _beaKey (\ s a -> s{_beaKey = a})
 
 -- | OAuth 2.0 token for the current user.

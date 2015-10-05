@@ -57,7 +57,7 @@ type TimelineAttachmentsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -70,7 +70,7 @@ data TimelineAttachmentsDelete' = TimelineAttachmentsDelete'
     , _tadUserIP       :: !(Maybe Text)
     , _tadItemId       :: !Text
     , _tadAttachmentId :: !Text
-    , _tadKey          :: !(Maybe Key)
+    , _tadKey          :: !(Maybe AuthKey)
     , _tadOAuthToken   :: !(Maybe OAuthToken)
     , _tadFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ tadAttachmentId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tadKey :: Lens' TimelineAttachmentsDelete' (Maybe Key)
+tadKey :: Lens' TimelineAttachmentsDelete' (Maybe AuthKey)
 tadKey = lens _tadKey (\ s a -> s{_tadKey = a})
 
 -- | OAuth 2.0 token for the current user.

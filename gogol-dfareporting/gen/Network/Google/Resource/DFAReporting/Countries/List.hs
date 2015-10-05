@@ -55,7 +55,7 @@ type CountriesListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] CountriesListResponse
@@ -68,7 +68,7 @@ data CountriesList' = CountriesList'
     , _couPrettyPrint :: !Bool
     , _couUserIP      :: !(Maybe Text)
     , _couProFileId   :: !Int64
-    , _couKey         :: !(Maybe Key)
+    , _couKey         :: !(Maybe AuthKey)
     , _couOAuthToken  :: !(Maybe OAuthToken)
     , _couFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -131,7 +131,7 @@ couProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-couKey :: Lens' CountriesList' (Maybe Key)
+couKey :: Lens' CountriesList' (Maybe AuthKey)
 couKey = lens _couKey (\ s a -> s{_couKey = a})
 
 -- | OAuth 2.0 token for the current user.

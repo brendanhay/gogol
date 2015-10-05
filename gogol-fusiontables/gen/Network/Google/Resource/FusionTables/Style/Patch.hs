@@ -58,7 +58,7 @@ type StylePatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] StyleSetting :>
@@ -72,7 +72,7 @@ data StylePatch' = StylePatch'
     , _spPrettyPrint :: !Bool
     , _spUserIP      :: !(Maybe Text)
     , _spPayload     :: !StyleSetting
-    , _spKey         :: !(Maybe Key)
+    , _spKey         :: !(Maybe AuthKey)
     , _spStyleId     :: !Int32
     , _spOAuthToken  :: !(Maybe OAuthToken)
     , _spTableId     :: !Text
@@ -144,7 +144,7 @@ spPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-spKey :: Lens' StylePatch' (Maybe Key)
+spKey :: Lens' StylePatch' (Maybe AuthKey)
 spKey = lens _spKey (\ s a -> s{_spKey = a})
 
 -- | Identifier (within a table) for the style being updated.

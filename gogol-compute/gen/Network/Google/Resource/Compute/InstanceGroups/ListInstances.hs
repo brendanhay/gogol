@@ -69,7 +69,7 @@ type InstanceGroupsListInstancesResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON]
@@ -89,7 +89,7 @@ data InstanceGroupsListInstances' = InstanceGroupsListInstances'
     , _igliUserIP        :: !(Maybe Text)
     , _igliZone          :: !Text
     , _igliPayload       :: !InstanceGroupsListInstancesRequest
-    , _igliKey           :: !(Maybe Key)
+    , _igliKey           :: !(Maybe AuthKey)
     , _igliFilter        :: !(Maybe Text)
     , _igliPageToken     :: !(Maybe Text)
     , _igliOAuthToken    :: !(Maybe OAuthToken)
@@ -187,7 +187,7 @@ igliPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igliKey :: Lens' InstanceGroupsListInstances' (Maybe Key)
+igliKey :: Lens' InstanceGroupsListInstances' (Maybe AuthKey)
 igliKey = lens _igliKey (\ s a -> s{_igliKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

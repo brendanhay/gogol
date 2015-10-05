@@ -61,7 +61,7 @@ type OperationsListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] OperationsListResponse
@@ -74,7 +74,7 @@ data OperationsList' = OperationsList'
     , _olPrettyPrint :: !Bool
     , _olProject     :: !Text
     , _olUserIP      :: !(Maybe Text)
-    , _olKey         :: !(Maybe Key)
+    , _olKey         :: !(Maybe AuthKey)
     , _olFilter      :: !(Maybe Text)
     , _olPageToken   :: !(Maybe Text)
     , _olOAuthToken  :: !(Maybe OAuthToken)
@@ -148,7 +148,7 @@ olUserIP = lens _olUserIP (\ s a -> s{_olUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-olKey :: Lens' OperationsList' (Maybe Key)
+olKey :: Lens' OperationsList' (Maybe AuthKey)
 olKey = lens _olKey (\ s a -> s{_olKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

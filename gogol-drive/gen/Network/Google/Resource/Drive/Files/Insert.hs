@@ -70,7 +70,7 @@ type FilesInsertResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      MultipartRelated '[JSON] File Body :>
@@ -91,7 +91,7 @@ data FilesInsert' = FilesInsert'
     , _fiMedia                     :: !Body
     , _fiTimedTextTrackName        :: !(Maybe Text)
     , _fiOCRLanguage               :: !(Maybe Text)
-    , _fiKey                       :: !(Maybe Key)
+    , _fiKey                       :: !(Maybe AuthKey)
     , _fiConvert                   :: !Bool
     , _fiOAuthToken                :: !(Maybe OAuthToken)
     , _fiOCR                       :: !Bool
@@ -222,7 +222,7 @@ fiOCRLanguage
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fiKey :: Lens' FilesInsert' (Maybe Key)
+fiKey :: Lens' FilesInsert' (Maybe AuthKey)
 fiKey = lens _fiKey (\ s a -> s{_fiKey = a})
 
 -- | Whether to convert this file to the corresponding Google Docs format.

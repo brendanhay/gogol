@@ -59,7 +59,7 @@ type BudgetPatchResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Budget :> Patch '[JSON] Budget
@@ -75,7 +75,7 @@ data BudgetPatch' = BudgetPatch'
     , _bpUserIP      :: !(Maybe Text)
     , _bpPayload     :: !Budget
     , _bpAccountId   :: !Int64
-    , _bpKey         :: !(Maybe Key)
+    , _bpKey         :: !(Maybe AuthKey)
     , _bpOAuthToken  :: !(Maybe OAuthToken)
     , _bpBillingId   :: !Int64
     , _bpFields      :: !(Maybe Text)
@@ -151,7 +151,7 @@ bpAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bpKey :: Lens' BudgetPatch' (Maybe Key)
+bpKey :: Lens' BudgetPatch' (Maybe AuthKey)
 bpKey = lens _bpKey (\ s a -> s{_bpKey = a})
 
 -- | OAuth 2.0 token for the current user.

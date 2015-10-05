@@ -57,7 +57,7 @@ type MapsPublishResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Post '[JSON] PublishResponse
@@ -70,7 +70,7 @@ data MapsPublish' = MapsPublish'
     , _mPrettyPrint :: !Bool
     , _mForce       :: !(Maybe Bool)
     , _mUserIP      :: !(Maybe Text)
-    , _mKey         :: !(Maybe Key)
+    , _mKey         :: !(Maybe AuthKey)
     , _mId          :: !Text
     , _mOAuthToken  :: !(Maybe OAuthToken)
     , _mFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ mUserIP = lens _mUserIP (\ s a -> s{_mUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mKey :: Lens' MapsPublish' (Maybe Key)
+mKey :: Lens' MapsPublish' (Maybe AuthKey)
 mKey = lens _mKey (\ s a -> s{_mKey = a})
 
 -- | The ID of the map.

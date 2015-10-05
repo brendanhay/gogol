@@ -58,7 +58,7 @@ type DefaultObjectAccessControlsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -71,7 +71,7 @@ data DefaultObjectAccessControlsDelete' = DefaultObjectAccessControlsDelete'
     , _doacdPrettyPrint :: !Bool
     , _doacdUserIP      :: !(Maybe Text)
     , _doacdBucket      :: !Text
-    , _doacdKey         :: !(Maybe Key)
+    , _doacdKey         :: !(Maybe AuthKey)
     , _doacdOAuthToken  :: !(Maybe OAuthToken)
     , _doacdEntity      :: !Text
     , _doacdFields      :: !(Maybe Text)
@@ -140,7 +140,7 @@ doacdBucket
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-doacdKey :: Lens' DefaultObjectAccessControlsDelete' (Maybe Key)
+doacdKey :: Lens' DefaultObjectAccessControlsDelete' (Maybe AuthKey)
 doacdKey = lens _doacdKey (\ s a -> s{_doacdKey = a})
 
 -- | OAuth 2.0 token for the current user.

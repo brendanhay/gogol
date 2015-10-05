@@ -59,7 +59,7 @@ type ProjectsZonesOperationsGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
@@ -71,7 +71,7 @@ data ProjectsZonesOperationsGet' = ProjectsZonesOperationsGet'
     , _pzogPrettyPrint :: !Bool
     , _pzogUserIP      :: !(Maybe Text)
     , _pzogZoneId      :: !Text
-    , _pzogKey         :: !(Maybe Key)
+    , _pzogKey         :: !(Maybe AuthKey)
     , _pzogProjectId   :: !Text
     , _pzogOperationId :: !Text
     , _pzogOAuthToken  :: !(Maybe OAuthToken)
@@ -147,7 +147,7 @@ pzogZoneId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pzogKey :: Lens' ProjectsZonesOperationsGet' (Maybe Key)
+pzogKey :: Lens' ProjectsZonesOperationsGet' (Maybe AuthKey)
 pzogKey = lens _pzogKey (\ s a -> s{_pzogKey = a})
 
 -- | The Google Developers Console project ID or project number.

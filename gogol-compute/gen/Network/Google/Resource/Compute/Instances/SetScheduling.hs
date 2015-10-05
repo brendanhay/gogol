@@ -61,7 +61,7 @@ type InstancesSetSchedulingResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Scheduling :>
@@ -77,7 +77,7 @@ data InstancesSetScheduling' = InstancesSetScheduling'
     , _issUserIP      :: !(Maybe Text)
     , _issZone        :: !Text
     , _issPayload     :: !Scheduling
-    , _issKey         :: !(Maybe Key)
+    , _issKey         :: !(Maybe AuthKey)
     , _issOAuthToken  :: !(Maybe OAuthToken)
     , _issFields      :: !(Maybe Text)
     , _issInstance    :: !Text
@@ -162,7 +162,7 @@ issPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-issKey :: Lens' InstancesSetScheduling' (Maybe Key)
+issKey :: Lens' InstancesSetScheduling' (Maybe AuthKey)
 issKey = lens _issKey (\ s a -> s{_issKey = a})
 
 -- | OAuth 2.0 token for the current user.

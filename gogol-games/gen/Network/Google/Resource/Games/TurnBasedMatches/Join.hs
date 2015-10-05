@@ -57,7 +57,7 @@ type TurnBasedMatchesJoinResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Put '[JSON] TurnBasedMatch
@@ -69,7 +69,7 @@ data TurnBasedMatchesJoin' = TurnBasedMatchesJoin'
     { _tbmjQuotaUser   :: !(Maybe Text)
     , _tbmjPrettyPrint :: !Bool
     , _tbmjUserIP      :: !(Maybe Text)
-    , _tbmjKey         :: !(Maybe Key)
+    , _tbmjKey         :: !(Maybe AuthKey)
     , _tbmjLanguage    :: !(Maybe Text)
     , _tbmjOAuthToken  :: !(Maybe OAuthToken)
     , _tbmjMatchId     :: !Text
@@ -133,7 +133,7 @@ tbmjUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tbmjKey :: Lens' TurnBasedMatchesJoin' (Maybe Key)
+tbmjKey :: Lens' TurnBasedMatchesJoin' (Maybe AuthKey)
 tbmjKey = lens _tbmjKey (\ s a -> s{_tbmjKey = a})
 
 -- | The preferred language to use for strings returned by this method.

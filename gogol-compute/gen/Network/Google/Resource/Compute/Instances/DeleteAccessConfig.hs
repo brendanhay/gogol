@@ -64,7 +64,7 @@ type InstancesDeleteAccessConfigResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Post '[JSON] Operation
@@ -79,7 +79,7 @@ data InstancesDeleteAccessConfig' = InstancesDeleteAccessConfig'
     , _idacUserIP           :: !(Maybe Text)
     , _idacNetworkInterface :: !Text
     , _idacZone             :: !Text
-    , _idacKey              :: !(Maybe Key)
+    , _idacKey              :: !(Maybe AuthKey)
     , _idacOAuthToken       :: !(Maybe OAuthToken)
     , _idacAccessConfig     :: !Text
     , _idacFields           :: !(Maybe Text)
@@ -171,7 +171,7 @@ idacZone = lens _idacZone (\ s a -> s{_idacZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-idacKey :: Lens' InstancesDeleteAccessConfig' (Maybe Key)
+idacKey :: Lens' InstancesDeleteAccessConfig' (Maybe AuthKey)
 idacKey = lens _idacKey (\ s a -> s{_idacKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -57,7 +57,7 @@ type InstanceTemplatesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] InstanceTemplate
@@ -71,7 +71,7 @@ data InstanceTemplatesGet' = InstanceTemplatesGet'
     , _itgProject          :: !Text
     , _itgUserIP           :: !(Maybe Text)
     , _itgInstanceTemplate :: !Text
-    , _itgKey              :: !(Maybe Key)
+    , _itgKey              :: !(Maybe AuthKey)
     , _itgOAuthToken       :: !(Maybe OAuthToken)
     , _itgFields           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ itgInstanceTemplate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-itgKey :: Lens' InstanceTemplatesGet' (Maybe Key)
+itgKey :: Lens' InstanceTemplatesGet' (Maybe AuthKey)
 itgKey = lens _itgKey (\ s a -> s{_itgKey = a})
 
 -- | OAuth 2.0 token for the current user.

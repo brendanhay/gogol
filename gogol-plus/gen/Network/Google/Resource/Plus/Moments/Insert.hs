@@ -61,7 +61,7 @@ type MomentsInsertResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Moment :> Post '[JSON] Moment
@@ -78,7 +78,7 @@ data MomentsInsert' = MomentsInsert'
     , _miPayload     :: !Moment
     , _miDebug       :: !(Maybe Bool)
     , _miUserId      :: !Text
-    , _miKey         :: !(Maybe Key)
+    , _miKey         :: !(Maybe AuthKey)
     , _miOAuthToken  :: !(Maybe OAuthToken)
     , _miFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -165,7 +165,7 @@ miUserId = lens _miUserId (\ s a -> s{_miUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-miKey :: Lens' MomentsInsert' (Maybe Key)
+miKey :: Lens' MomentsInsert' (Maybe AuthKey)
 miKey = lens _miKey (\ s a -> s{_miKey = a})
 
 -- | OAuth 2.0 token for the current user.

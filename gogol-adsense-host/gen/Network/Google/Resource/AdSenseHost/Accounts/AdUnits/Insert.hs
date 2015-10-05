@@ -60,7 +60,7 @@ type AccountsAdUnitsInsertResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] AdUnit :> Post '[JSON] AdUnit
@@ -76,7 +76,7 @@ data AccountsAdUnitsInsert' = AccountsAdUnitsInsert'
     , _aauiPayload     :: !AdUnit
     , _aauiAdClientId  :: !Text
     , _aauiAccountId   :: !Text
-    , _aauiKey         :: !(Maybe Key)
+    , _aauiKey         :: !(Maybe AuthKey)
     , _aauiOAuthToken  :: !(Maybe OAuthToken)
     , _aauiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -160,7 +160,7 @@ aauiAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aauiKey :: Lens' AccountsAdUnitsInsert' (Maybe Key)
+aauiKey :: Lens' AccountsAdUnitsInsert' (Maybe AuthKey)
 aauiKey = lens _aauiKey (\ s a -> s{_aauiKey = a})
 
 -- | OAuth 2.0 token for the current user.

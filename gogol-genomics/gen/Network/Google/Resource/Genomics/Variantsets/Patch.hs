@@ -56,7 +56,7 @@ type VariantsetsPatchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] VariantSet :>
@@ -72,7 +72,7 @@ data VariantsetsPatch' = VariantsetsPatch'
     , _vpVariantSetId :: !Text
     , _vpUserIP       :: !(Maybe Text)
     , _vpPayload      :: !VariantSet
-    , _vpKey          :: !(Maybe Key)
+    , _vpKey          :: !(Maybe AuthKey)
     , _vpOAuthToken   :: !(Maybe OAuthToken)
     , _vpFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ vpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vpKey :: Lens' VariantsetsPatch' (Maybe Key)
+vpKey :: Lens' VariantsetsPatch' (Maybe AuthKey)
 vpKey = lens _vpKey (\ s a -> s{_vpKey = a})
 
 -- | OAuth 2.0 token for the current user.

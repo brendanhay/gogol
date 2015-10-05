@@ -55,7 +55,7 @@ type WebResourceUpdateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] SiteVerificationWebResourceResource
@@ -69,7 +69,7 @@ data WebResourceUpdate' = WebResourceUpdate'
     , _wruPrettyPrint :: !Bool
     , _wruUserIP      :: !(Maybe Text)
     , _wruPayload     :: !SiteVerificationWebResourceResource
-    , _wruKey         :: !(Maybe Key)
+    , _wruKey         :: !(Maybe AuthKey)
     , _wruId          :: !Text
     , _wruOAuthToken  :: !(Maybe OAuthToken)
     , _wruFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ wruPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-wruKey :: Lens' WebResourceUpdate' (Maybe Key)
+wruKey :: Lens' WebResourceUpdate' (Maybe AuthKey)
 wruKey = lens _wruKey (\ s a -> s{_wruKey = a})
 
 -- | The id of a verified site or domain.

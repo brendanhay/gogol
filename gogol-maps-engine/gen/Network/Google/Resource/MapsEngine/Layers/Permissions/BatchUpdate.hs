@@ -59,7 +59,7 @@ type LayersPermissionsBatchUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] PermissionsBatchUpdateRequest :>
@@ -75,7 +75,7 @@ data LayersPermissionsBatchUpdate' = LayersPermissionsBatchUpdate'
     , _lpbuPrettyPrint :: !Bool
     , _lpbuUserIP      :: !(Maybe Text)
     , _lpbuPayload     :: !PermissionsBatchUpdateRequest
-    , _lpbuKey         :: !(Maybe Key)
+    , _lpbuKey         :: !(Maybe AuthKey)
     , _lpbuId          :: !Text
     , _lpbuOAuthToken  :: !(Maybe OAuthToken)
     , _lpbuFields      :: !(Maybe Text)
@@ -144,7 +144,7 @@ lpbuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lpbuKey :: Lens' LayersPermissionsBatchUpdate' (Maybe Key)
+lpbuKey :: Lens' LayersPermissionsBatchUpdate' (Maybe AuthKey)
 lpbuKey = lens _lpbuKey (\ s a -> s{_lpbuKey = a})
 
 -- | The ID of the asset to which permissions will be added.

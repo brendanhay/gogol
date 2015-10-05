@@ -61,7 +61,7 @@ type InstancesPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] DatabaseInstance :>
@@ -79,7 +79,7 @@ data InstancesPatch' = InstancesPatch'
     , _ipProject     :: !Text
     , _ipUserIP      :: !(Maybe Text)
     , _ipPayload     :: !DatabaseInstance
-    , _ipKey         :: !(Maybe Key)
+    , _ipKey         :: !(Maybe AuthKey)
     , _ipOAuthToken  :: !(Maybe OAuthToken)
     , _ipFields      :: !(Maybe Text)
     , _ipInstance    :: !Text
@@ -155,7 +155,7 @@ ipPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ipKey :: Lens' InstancesPatch' (Maybe Key)
+ipKey :: Lens' InstancesPatch' (Maybe AuthKey)
 ipKey = lens _ipKey (\ s a -> s{_ipKey = a})
 
 -- | OAuth 2.0 token for the current user.

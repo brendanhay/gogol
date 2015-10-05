@@ -58,7 +58,7 @@ type OrdersShiplineitemsResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] OrdersShipLineItemsRequest :>
@@ -73,7 +73,7 @@ data OrdersShiplineitems' = OrdersShiplineitems'
     , _osPrettyPrint :: !Bool
     , _osUserIP      :: !(Maybe Text)
     , _osPayload     :: !OrdersShipLineItemsRequest
-    , _osKey         :: !(Maybe Key)
+    , _osKey         :: !(Maybe AuthKey)
     , _osOAuthToken  :: !(Maybe OAuthToken)
     , _osOrderId     :: !Text
     , _osFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ osPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-osKey :: Lens' OrdersShiplineitems' (Maybe Key)
+osKey :: Lens' OrdersShiplineitems' (Maybe AuthKey)
 osKey = lens _osKey (\ s a -> s{_osKey = a})
 
 -- | OAuth 2.0 token for the current user.

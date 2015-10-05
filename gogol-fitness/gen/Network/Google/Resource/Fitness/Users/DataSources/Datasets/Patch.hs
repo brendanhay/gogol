@@ -65,7 +65,7 @@ type UsersDataSourcesDatasetsPatchResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Dataset :> Patch '[JSON] Dataset
@@ -83,7 +83,7 @@ data UsersDataSourcesDatasetsPatch' = UsersDataSourcesDatasetsPatch'
     , _udsdpDataSourceId      :: !Text
     , _udsdpPayload           :: !Dataset
     , _udsdpUserId            :: !Text
-    , _udsdpKey               :: !(Maybe Key)
+    , _udsdpKey               :: !(Maybe AuthKey)
     , _udsdpDatasetId         :: !Text
     , _udsdpCurrentTimeMillis :: !(Maybe Int64)
     , _udsdpOAuthToken        :: !(Maybe OAuthToken)
@@ -176,7 +176,7 @@ udsdpUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udsdpKey :: Lens' UsersDataSourcesDatasetsPatch' (Maybe Key)
+udsdpKey :: Lens' UsersDataSourcesDatasetsPatch' (Maybe AuthKey)
 udsdpKey = lens _udsdpKey (\ s a -> s{_udsdpKey = a})
 
 -- | Dataset identifier that is a composite of the minimum data point start

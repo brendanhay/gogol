@@ -65,7 +65,7 @@ type ManagementProFileUserLinksUpdateResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] EntityUserLink :>
@@ -82,7 +82,7 @@ data ManagementProFileUserLinksUpdate' = ManagementProFileUserLinksUpdate'
     , _mpfuluProFileId     :: !Text
     , _mpfuluPayload       :: !EntityUserLink
     , _mpfuluAccountId     :: !Text
-    , _mpfuluKey           :: !(Maybe Key)
+    , _mpfuluKey           :: !(Maybe AuthKey)
     , _mpfuluLinkId        :: !Text
     , _mpfuluOAuthToken    :: !(Maybe OAuthToken)
     , _mpfuluFields        :: !(Maybe Text)
@@ -182,7 +182,7 @@ mpfuluAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpfuluKey :: Lens' ManagementProFileUserLinksUpdate' (Maybe Key)
+mpfuluKey :: Lens' ManagementProFileUserLinksUpdate' (Maybe AuthKey)
 mpfuluKey
   = lens _mpfuluKey (\ s a -> s{_mpfuluKey = a})
 

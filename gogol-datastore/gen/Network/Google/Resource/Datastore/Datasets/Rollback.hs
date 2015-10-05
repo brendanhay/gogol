@@ -55,7 +55,7 @@ type DatasetsRollbackResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltPROTO :>
                        ReqBody '[JSON] RollbackRequest :>
@@ -69,7 +69,7 @@ data DatasetsRollback' = DatasetsRollback'
     , _drPrettyPrint :: !Bool
     , _drUserIP      :: !(Maybe Text)
     , _drPayload     :: !RollbackRequest
-    , _drKey         :: !(Maybe Key)
+    , _drKey         :: !(Maybe AuthKey)
     , _drDatasetId   :: !Text
     , _drOAuthToken  :: !(Maybe OAuthToken)
     , _drFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ drPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-drKey :: Lens' DatasetsRollback' (Maybe Key)
+drKey :: Lens' DatasetsRollback' (Maybe AuthKey)
 drKey = lens _drKey (\ s a -> s{_drKey = a})
 
 -- | Identifies the dataset.

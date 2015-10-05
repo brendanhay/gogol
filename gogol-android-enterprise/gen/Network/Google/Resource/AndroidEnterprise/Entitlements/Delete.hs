@@ -60,7 +60,7 @@ type EntitlementsDeleteResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -74,7 +74,7 @@ data EntitlementsDelete' = EntitlementsDelete'
     , _edEnterpriseId  :: !Text
     , _edUserIP        :: !(Maybe Text)
     , _edUserId        :: !Text
-    , _edKey           :: !(Maybe Key)
+    , _edKey           :: !(Maybe AuthKey)
     , _edOAuthToken    :: !(Maybe OAuthToken)
     , _edFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -155,7 +155,7 @@ edUserId = lens _edUserId (\ s a -> s{_edUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-edKey :: Lens' EntitlementsDelete' (Maybe Key)
+edKey :: Lens' EntitlementsDelete' (Maybe AuthKey)
 edKey = lens _edKey (\ s a -> s{_edKey = a})
 
 -- | OAuth 2.0 token for the current user.

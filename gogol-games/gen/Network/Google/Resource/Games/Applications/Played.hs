@@ -54,7 +54,7 @@ type ApplicationsPlayedResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -66,7 +66,7 @@ data ApplicationsPlayed' = ApplicationsPlayed'
     { _apQuotaUser   :: !(Maybe Text)
     , _apPrettyPrint :: !Bool
     , _apUserIP      :: !(Maybe Text)
-    , _apKey         :: !(Maybe Key)
+    , _apKey         :: !(Maybe AuthKey)
     , _apOAuthToken  :: !(Maybe OAuthToken)
     , _apFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -119,7 +119,7 @@ apUserIP = lens _apUserIP (\ s a -> s{_apUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apKey :: Lens' ApplicationsPlayed' (Maybe Key)
+apKey :: Lens' ApplicationsPlayed' (Maybe AuthKey)
 apKey = lens _apKey (\ s a -> s{_apKey = a})
 
 -- | OAuth 2.0 token for the current user.

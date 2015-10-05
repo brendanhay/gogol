@@ -55,7 +55,7 @@ type ParentsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] ParentList
 
@@ -66,7 +66,7 @@ data ParentsList' = ParentsList'
     { _parQuotaUser   :: !(Maybe Text)
     , _parPrettyPrint :: !Bool
     , _parUserIP      :: !(Maybe Text)
-    , _parKey         :: !(Maybe Key)
+    , _parKey         :: !(Maybe AuthKey)
     , _parFileId      :: !Text
     , _parOAuthToken  :: !(Maybe OAuthToken)
     , _parFields      :: !(Maybe Text)
@@ -125,7 +125,7 @@ parUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-parKey :: Lens' ParentsList' (Maybe Key)
+parKey :: Lens' ParentsList' (Maybe AuthKey)
 parKey = lens _parKey (\ s a -> s{_parKey = a})
 
 -- | The ID of the file.

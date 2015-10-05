@@ -57,7 +57,7 @@ type DirectorySiteContactsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] DirectorySiteContact
@@ -70,7 +70,7 @@ data DirectorySiteContactsGet' = DirectorySiteContactsGet'
     , _dscgPrettyPrint :: !Bool
     , _dscgUserIP      :: !(Maybe Text)
     , _dscgProFileId   :: !Int64
-    , _dscgKey         :: !(Maybe Key)
+    , _dscgKey         :: !(Maybe AuthKey)
     , _dscgId          :: !Int64
     , _dscgOAuthToken  :: !(Maybe OAuthToken)
     , _dscgFields      :: !(Maybe Text)
@@ -140,7 +140,7 @@ dscgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dscgKey :: Lens' DirectorySiteContactsGet' (Maybe Key)
+dscgKey :: Lens' DirectorySiteContactsGet' (Maybe AuthKey)
 dscgKey = lens _dscgKey (\ s a -> s{_dscgKey = a})
 
 -- | Directory site contact ID.

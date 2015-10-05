@@ -56,7 +56,7 @@ type CustomChannelsUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] CustomChannel :>
@@ -71,7 +71,7 @@ data CustomChannelsUpdate' = CustomChannelsUpdate'
     , _ccuUserIP      :: !(Maybe Text)
     , _ccuPayload     :: !CustomChannel
     , _ccuAdClientId  :: !Text
-    , _ccuKey         :: !(Maybe Key)
+    , _ccuKey         :: !(Maybe AuthKey)
     , _ccuOAuthToken  :: !(Maybe OAuthToken)
     , _ccuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ ccuAdClientId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccuKey :: Lens' CustomChannelsUpdate' (Maybe Key)
+ccuKey :: Lens' CustomChannelsUpdate' (Maybe AuthKey)
 ccuKey = lens _ccuKey (\ s a -> s{_ccuKey = a})
 
 -- | OAuth 2.0 token for the current user.

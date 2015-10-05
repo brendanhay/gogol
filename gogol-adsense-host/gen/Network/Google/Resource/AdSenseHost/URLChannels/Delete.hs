@@ -57,7 +57,7 @@ type URLChannelsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] URLChannel
 
@@ -70,7 +70,7 @@ data URLChannelsDelete' = URLChannelsDelete'
     , _ucdURLChannelId :: !Text
     , _ucdUserIP       :: !(Maybe Text)
     , _ucdAdClientId   :: !Text
-    , _ucdKey          :: !(Maybe Key)
+    , _ucdKey          :: !(Maybe AuthKey)
     , _ucdOAuthToken   :: !(Maybe OAuthToken)
     , _ucdFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ ucdAdClientId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ucdKey :: Lens' URLChannelsDelete' (Maybe Key)
+ucdKey :: Lens' URLChannelsDelete' (Maybe AuthKey)
 ucdKey = lens _ucdKey (\ s a -> s{_ucdKey = a})
 
 -- | OAuth 2.0 token for the current user.

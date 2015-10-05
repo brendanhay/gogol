@@ -65,7 +65,7 @@ type EditsExpansionFilesUploadResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[OctetStream] Body :>
@@ -81,7 +81,7 @@ data EditsExpansionFilesUpload' = EditsExpansionFilesUpload'
     , _eefuAPKVersionCode    :: !Int32
     , _eefuUserIP            :: !(Maybe Text)
     , _eefuMedia             :: !Body
-    , _eefuKey               :: !(Maybe Key)
+    , _eefuKey               :: !(Maybe AuthKey)
     , _eefuExpansionFileType :: !EditsExpansionFilesUploadExpansionFileType
     , _eefuOAuthToken        :: !(Maybe OAuthToken)
     , _eefuEditId            :: !Text
@@ -176,7 +176,7 @@ eefuMedia
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eefuKey :: Lens' EditsExpansionFilesUpload' (Maybe Key)
+eefuKey :: Lens' EditsExpansionFilesUpload' (Maybe AuthKey)
 eefuKey = lens _eefuKey (\ s a -> s{_eefuKey = a})
 
 eefuExpansionFileType :: Lens' EditsExpansionFilesUpload' EditsExpansionFilesUploadExpansionFileType

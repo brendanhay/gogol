@@ -57,7 +57,7 @@ type TrainedModelsAnalyzeResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Analyze
 
@@ -69,7 +69,7 @@ data TrainedModelsAnalyze' = TrainedModelsAnalyze'
     , _tmaPrettyPrint :: !Bool
     , _tmaProject     :: !Text
     , _tmaUserIP      :: !(Maybe Text)
-    , _tmaKey         :: !(Maybe Key)
+    , _tmaKey         :: !(Maybe AuthKey)
     , _tmaId          :: !Text
     , _tmaOAuthToken  :: !(Maybe OAuthToken)
     , _tmaFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ tmaUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tmaKey :: Lens' TrainedModelsAnalyze' (Maybe Key)
+tmaKey :: Lens' TrainedModelsAnalyze' (Maybe AuthKey)
 tmaKey = lens _tmaKey (\ s a -> s{_tmaKey = a})
 
 -- | The unique name for the predictive model.

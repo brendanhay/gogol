@@ -53,7 +53,7 @@ type MapsCreateResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Map :> Post '[JSON] Map
@@ -66,7 +66,7 @@ data MapsCreate' = MapsCreate'
     , _mcPrettyPrint :: !Bool
     , _mcUserIP      :: !(Maybe Text)
     , _mcPayload     :: !Map
-    , _mcKey         :: !(Maybe Key)
+    , _mcKey         :: !(Maybe AuthKey)
     , _mcOAuthToken  :: !(Maybe OAuthToken)
     , _mcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -128,7 +128,7 @@ mcPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcKey :: Lens' MapsCreate' (Maybe Key)
+mcKey :: Lens' MapsCreate' (Maybe AuthKey)
 mcKey = lens _mcKey (\ s a -> s{_mcKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -71,7 +71,7 @@ type DebuggerDebuggeesBreakpointsGetResource =
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] GetBreakpointResponse
@@ -89,7 +89,7 @@ data DebuggerDebuggeesBreakpointsGet' = DebuggerDebuggeesBreakpointsGet'
     , _ddbgUploadType     :: !(Maybe Text)
     , _ddbgBreakpointId   :: !Text
     , _ddbgBearerToken    :: !(Maybe Text)
-    , _ddbgKey            :: !(Maybe Key)
+    , _ddbgKey            :: !(Maybe AuthKey)
     , _ddbgDebuggeeId     :: !Text
     , _ddbgOAuthToken     :: !(Maybe OAuthToken)
     , _ddbgFields         :: !(Maybe Text)
@@ -205,7 +205,7 @@ ddbgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ddbgKey :: Lens' DebuggerDebuggeesBreakpointsGet' (Maybe Key)
+ddbgKey :: Lens' DebuggerDebuggeesBreakpointsGet' (Maybe AuthKey)
 ddbgKey = lens _ddbgKey (\ s a -> s{_ddbgKey = a})
 
 -- | The debuggee id to get the breakpoint from.

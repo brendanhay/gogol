@@ -102,7 +102,9 @@ type PlacementGroupsListResource =
                                                      QueryParam "userIp" Text :>
                                                        QueryParam "fields" Text
                                                          :>
-                                                         QueryParam "key" Key :>
+                                                         QueryParam "key"
+                                                           AuthKey
+                                                           :>
                                                            QueryParam
                                                              "oauth_token"
                                                              OAuthToken
@@ -131,7 +133,7 @@ data PlacementGroupsList' = PlacementGroupsList'
     , _pglPlacementGroupType   :: !(Maybe PlacementGroupsListPlacementGroupType)
     , _pglDirectorySiteIds     :: !(Maybe [Int64])
     , _pglSortOrder            :: !(Maybe PlacementGroupsListSortOrder)
-    , _pglKey                  :: !(Maybe Key)
+    , _pglKey                  :: !(Maybe AuthKey)
     , _pglSiteIds              :: !(Maybe [Int64])
     , _pglPageToken            :: !(Maybe Text)
     , _pglSortField            :: !(Maybe PlacementGroupsListSortField)
@@ -346,7 +348,7 @@ pglSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pglKey :: Lens' PlacementGroupsList' (Maybe Key)
+pglKey :: Lens' PlacementGroupsList' (Maybe AuthKey)
 pglKey = lens _pglKey (\ s a -> s{_pglKey = a})
 
 -- | Select only placement groups that are associated with these sites.

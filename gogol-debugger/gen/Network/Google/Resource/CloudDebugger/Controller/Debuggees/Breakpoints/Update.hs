@@ -78,7 +78,7 @@ type ControllerDebuggeesBreakpointsUpdateResource =
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            ReqBody '[JSON]
@@ -106,7 +106,7 @@ data ControllerDebuggeesBreakpointsUpdate' = ControllerDebuggeesBreakpointsUpdat
     , _cdbuUploadType     :: !(Maybe Text)
     , _cdbuPayload        :: !UpdateActiveBreakpointRequest
     , _cdbuBearerToken    :: !(Maybe Text)
-    , _cdbuKey            :: !(Maybe Key)
+    , _cdbuKey            :: !(Maybe AuthKey)
     , _cdbuId             :: !Text
     , _cdbuDebuggeeId     :: !Text
     , _cdbuOAuthToken     :: !(Maybe OAuthToken)
@@ -226,7 +226,7 @@ cdbuBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cdbuKey :: Lens' ControllerDebuggeesBreakpointsUpdate' (Maybe Key)
+cdbuKey :: Lens' ControllerDebuggeesBreakpointsUpdate' (Maybe AuthKey)
 cdbuKey = lens _cdbuKey (\ s a -> s{_cdbuKey = a})
 
 -- | Breakpoint identifier, unique in the scope of the debuggee.

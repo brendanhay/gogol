@@ -64,7 +64,7 @@ type ManifestsListResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ManifestsListResponse
@@ -77,7 +77,7 @@ data ManifestsList' = ManifestsList'
     , _mlPrettyPrint :: !Bool
     , _mlProject     :: !Text
     , _mlUserIP      :: !(Maybe Text)
-    , _mlKey         :: !(Maybe Key)
+    , _mlKey         :: !(Maybe AuthKey)
     , _mlFilter      :: !(Maybe Text)
     , _mlPageToken   :: !(Maybe Text)
     , _mlOAuthToken  :: !(Maybe OAuthToken)
@@ -156,7 +156,7 @@ mlUserIP = lens _mlUserIP (\ s a -> s{_mlUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlKey :: Lens' ManifestsList' (Maybe Key)
+mlKey :: Lens' ManifestsList' (Maybe AuthKey)
 mlKey = lens _mlKey (\ s a -> s{_mlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

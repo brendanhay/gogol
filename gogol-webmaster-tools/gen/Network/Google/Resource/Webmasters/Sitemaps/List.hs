@@ -58,7 +58,7 @@ type SitemapsListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] SitemapsListResponse
@@ -73,7 +73,7 @@ data SitemapsList' = SitemapsList'
     , _sllUserIP       :: !(Maybe Text)
     , _sllSiteURL      :: !Text
     , _sllSitemapIndex :: !(Maybe Text)
-    , _sllKey          :: !(Maybe Key)
+    , _sllKey          :: !(Maybe AuthKey)
     , _sllOAuthToken   :: !(Maybe OAuthToken)
     , _sllFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -147,7 +147,7 @@ sllSitemapIndex
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sllKey :: Lens' SitemapsList' (Maybe Key)
+sllKey :: Lens' SitemapsList' (Maybe AuthKey)
 sllKey = lens _sllKey (\ s a -> s{_sllKey = a})
 
 -- | OAuth 2.0 token for the current user.

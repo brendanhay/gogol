@@ -57,7 +57,7 @@ type FilesGenerateIdsResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] GeneratedIds
 
@@ -69,7 +69,7 @@ data FilesGenerateIds' = FilesGenerateIds'
     , _fgiQuotaUser   :: !(Maybe Text)
     , _fgiPrettyPrint :: !Bool
     , _fgiUserIP      :: !(Maybe Text)
-    , _fgiKey         :: !(Maybe Key)
+    , _fgiKey         :: !(Maybe AuthKey)
     , _fgiOAuthToken  :: !(Maybe OAuthToken)
     , _fgiMaxResults  :: !Int32
     , _fgiFields      :: !(Maybe Text)
@@ -135,7 +135,7 @@ fgiUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fgiKey :: Lens' FilesGenerateIds' (Maybe Key)
+fgiKey :: Lens' FilesGenerateIds' (Maybe AuthKey)
 fgiKey = lens _fgiKey (\ s a -> s{_fgiKey = a})
 
 -- | OAuth 2.0 token for the current user.

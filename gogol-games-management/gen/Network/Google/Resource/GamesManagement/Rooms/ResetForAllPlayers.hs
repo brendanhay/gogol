@@ -55,7 +55,7 @@ type RoomsResetForAllPlayersResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -68,7 +68,7 @@ data RoomsResetForAllPlayers' = RoomsResetForAllPlayers'
     { _rrfapQuotaUser   :: !(Maybe Text)
     , _rrfapPrettyPrint :: !Bool
     , _rrfapUserIP      :: !(Maybe Text)
-    , _rrfapKey         :: !(Maybe Key)
+    , _rrfapKey         :: !(Maybe AuthKey)
     , _rrfapOAuthToken  :: !(Maybe OAuthToken)
     , _rrfapFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -123,7 +123,7 @@ rrfapUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rrfapKey :: Lens' RoomsResetForAllPlayers' (Maybe Key)
+rrfapKey :: Lens' RoomsResetForAllPlayers' (Maybe AuthKey)
 rrfapKey = lens _rrfapKey (\ s a -> s{_rrfapKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -59,7 +59,7 @@ type AccountsInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Account :> Post '[JSON] Account
@@ -73,7 +73,7 @@ data AccountsInsert' = AccountsInsert'
     , _aiUserIP      :: !(Maybe Text)
     , _aiAccountName :: !Text
     , _aiPayload     :: !Account
-    , _aiKey         :: !(Maybe Key)
+    , _aiKey         :: !(Maybe AuthKey)
     , _aiUserToken   :: !Text
     , _aiOAuthToken  :: !(Maybe OAuthToken)
     , _aiAccountType :: !Text
@@ -155,7 +155,7 @@ aiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aiKey :: Lens' AccountsInsert' (Maybe Key)
+aiKey :: Lens' AccountsInsert' (Maybe AuthKey)
 aiKey = lens _aiKey (\ s a -> s{_aiKey = a})
 
 -- | The ID for the user.

@@ -57,7 +57,7 @@ type RemarketingListSharesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] RemarketingListShare
@@ -71,7 +71,7 @@ data RemarketingListSharesGet' = RemarketingListSharesGet'
     , _rlsgUserIP            :: !(Maybe Text)
     , _rlsgProFileId         :: !Int64
     , _rlsgRemarketingListId :: !Int64
-    , _rlsgKey               :: !(Maybe Key)
+    , _rlsgKey               :: !(Maybe AuthKey)
     , _rlsgOAuthToken        :: !(Maybe OAuthToken)
     , _rlsgFields            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -146,7 +146,7 @@ rlsgRemarketingListId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rlsgKey :: Lens' RemarketingListSharesGet' (Maybe Key)
+rlsgKey :: Lens' RemarketingListSharesGet' (Maybe AuthKey)
 rlsgKey = lens _rlsgKey (\ s a -> s{_rlsgKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -59,7 +59,7 @@ type CustomChannelsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] CustomChannel :>
@@ -76,7 +76,7 @@ data CustomChannelsPatch' = CustomChannelsPatch'
     , _ccpUserIP          :: !(Maybe Text)
     , _ccpPayload         :: !CustomChannel
     , _ccpAdClientId      :: !Text
-    , _ccpKey             :: !(Maybe Key)
+    , _ccpKey             :: !(Maybe AuthKey)
     , _ccpOAuthToken      :: !(Maybe OAuthToken)
     , _ccpFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -159,7 +159,7 @@ ccpAdClientId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccpKey :: Lens' CustomChannelsPatch' (Maybe Key)
+ccpKey :: Lens' CustomChannelsPatch' (Maybe AuthKey)
 ccpKey = lens _ccpKey (\ s a -> s{_ccpKey = a})
 
 -- | OAuth 2.0 token for the current user.

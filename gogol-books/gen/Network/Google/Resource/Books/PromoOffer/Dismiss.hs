@@ -67,7 +67,7 @@ type PromoOfferDismissResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -81,7 +81,7 @@ data PromoOfferDismiss' = PromoOfferDismiss'
     , _podUserIP       :: !(Maybe Text)
     , _podSerial       :: !(Maybe Text)
     , _podDevice       :: !(Maybe Text)
-    , _podKey          :: !(Maybe Key)
+    , _podKey          :: !(Maybe AuthKey)
     , _podModel        :: !(Maybe Text)
     , _podOfferId      :: !(Maybe Text)
     , _podProduct      :: !(Maybe Text)
@@ -176,7 +176,7 @@ podDevice
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-podKey :: Lens' PromoOfferDismiss' (Maybe Key)
+podKey :: Lens' PromoOfferDismiss' (Maybe AuthKey)
 podKey = lens _podKey (\ s a -> s{_podKey = a})
 
 -- | device model

@@ -59,7 +59,7 @@ type AccountsSavedadstylesListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] SavedAdStyles
 
@@ -71,7 +71,7 @@ data AccountsSavedadstylesList' = AccountsSavedadstylesList'
     , _aslPrettyPrint :: !Bool
     , _aslUserIP      :: !(Maybe Text)
     , _aslAccountId   :: !Text
-    , _aslKey         :: !(Maybe Key)
+    , _aslKey         :: !(Maybe AuthKey)
     , _aslPageToken   :: !(Maybe Text)
     , _aslOAuthToken  :: !(Maybe OAuthToken)
     , _aslMaxResults  :: !(Maybe Int32)
@@ -142,7 +142,7 @@ aslAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aslKey :: Lens' AccountsSavedadstylesList' (Maybe Key)
+aslKey :: Lens' AccountsSavedadstylesList' (Maybe AuthKey)
 aslKey = lens _aslKey (\ s a -> s{_aslKey = a})
 
 -- | A continuation token, used to page through saved ad styles. To retrieve

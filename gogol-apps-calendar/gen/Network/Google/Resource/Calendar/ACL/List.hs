@@ -63,7 +63,7 @@ type ACLListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] ACL
 
@@ -77,7 +77,7 @@ data ACLList' = ACLList'
     , _alPrettyPrint :: !Bool
     , _alUserIP      :: !(Maybe Text)
     , _alShowDeleted :: !(Maybe Bool)
-    , _alKey         :: !(Maybe Key)
+    , _alKey         :: !(Maybe AuthKey)
     , _alPageToken   :: !(Maybe Text)
     , _alOAuthToken  :: !(Maybe OAuthToken)
     , _alMaxResults  :: !(Maybe Int32)
@@ -176,7 +176,7 @@ alShowDeleted
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alKey :: Lens' ACLList' (Maybe Key)
+alKey :: Lens' ACLList' (Maybe AuthKey)
 alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | Token specifying which result page to return. Optional.

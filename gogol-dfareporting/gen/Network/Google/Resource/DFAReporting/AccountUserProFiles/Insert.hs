@@ -56,7 +56,7 @@ type AccountUserProFilesInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] AccountUserProFile :>
@@ -71,7 +71,7 @@ data AccountUserProFilesInsert' = AccountUserProFilesInsert'
     , _aupfiUserIP      :: !(Maybe Text)
     , _aupfiProFileId   :: !Int64
     , _aupfiPayload     :: !AccountUserProFile
-    , _aupfiKey         :: !(Maybe Key)
+    , _aupfiKey         :: !(Maybe AuthKey)
     , _aupfiOAuthToken  :: !(Maybe OAuthToken)
     , _aupfiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ aupfiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aupfiKey :: Lens' AccountUserProFilesInsert' (Maybe Key)
+aupfiKey :: Lens' AccountUserProFilesInsert' (Maybe AuthKey)
 aupfiKey = lens _aupfiKey (\ s a -> s{_aupfiKey = a})
 
 -- | OAuth 2.0 token for the current user.

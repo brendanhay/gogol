@@ -63,7 +63,7 @@ type AccountsURLChannelsListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] URLChannels
@@ -78,7 +78,7 @@ data AccountsURLChannelsList' = AccountsURLChannelsList'
     , _auclUserIP      :: !(Maybe Text)
     , _auclAdClientId  :: !Text
     , _auclAccountId   :: !Text
-    , _auclKey         :: !(Maybe Key)
+    , _auclKey         :: !(Maybe AuthKey)
     , _auclPageToken   :: !(Maybe Text)
     , _auclOAuthToken  :: !(Maybe OAuthToken)
     , _auclMaxResults  :: !(Maybe Int32)
@@ -161,7 +161,7 @@ auclAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-auclKey :: Lens' AccountsURLChannelsList' (Maybe Key)
+auclKey :: Lens' AccountsURLChannelsList' (Maybe AuthKey)
 auclKey = lens _auclKey (\ s a -> s{_auclKey = a})
 
 -- | A continuation token, used to page through URL channels. To retrieve the

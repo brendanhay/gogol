@@ -63,7 +63,7 @@ type ManagementProFilesPatchResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] ProFile :>
@@ -81,7 +81,7 @@ data ManagementProFilesPatch' = ManagementProFilesPatch'
     , _mpfpProFileId     :: !Text
     , _mpfpPayload       :: !ProFile
     , _mpfpAccountId     :: !Text
-    , _mpfpKey           :: !(Maybe Key)
+    , _mpfpKey           :: !(Maybe AuthKey)
     , _mpfpOAuthToken    :: !(Maybe OAuthToken)
     , _mpfpFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -175,7 +175,7 @@ mpfpAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpfpKey :: Lens' ManagementProFilesPatch' (Maybe Key)
+mpfpKey :: Lens' ManagementProFilesPatch' (Maybe AuthKey)
 mpfpKey = lens _mpfpKey (\ s a -> s{_mpfpKey = a})
 
 -- | OAuth 2.0 token for the current user.

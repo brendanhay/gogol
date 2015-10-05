@@ -69,7 +69,7 @@ type AppsGetResource =
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] Application
@@ -86,7 +86,7 @@ data AppsGet' = AppsGet'
     , _agAccessToken          :: !(Maybe Text)
     , _agUploadType           :: !(Maybe Text)
     , _agBearerToken          :: !(Maybe Text)
-    , _agKey                  :: !(Maybe Key)
+    , _agKey                  :: !(Maybe AuthKey)
     , _agAppsId               :: !Text
     , _agEnsureResourcesExist :: !(Maybe Bool)
     , _agOAuthToken           :: !(Maybe OAuthToken)
@@ -193,7 +193,7 @@ agBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agKey :: Lens' AppsGet' (Maybe Key)
+agKey :: Lens' AppsGet' (Maybe AuthKey)
 agKey = lens _agKey (\ s a -> s{_agKey = a})
 
 -- | Part of \`name\`. Name of the application to get. For example:

@@ -73,7 +73,7 @@ type DirectorySiteContactsListResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON]
@@ -91,7 +91,7 @@ data DirectorySiteContactsList' = DirectorySiteContactsList'
     , _dsclProFileId        :: !Int64
     , _dsclDirectorySiteIds :: !(Maybe [Int64])
     , _dsclSortOrder        :: !(Maybe DirectorySiteContactsListSortOrder)
-    , _dsclKey              :: !(Maybe Key)
+    , _dsclKey              :: !(Maybe AuthKey)
     , _dsclPageToken        :: !(Maybe Text)
     , _dsclSortField        :: !(Maybe DirectorySiteContactsListSortField)
     , _dsclOAuthToken       :: !(Maybe OAuthToken)
@@ -215,7 +215,7 @@ dsclSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dsclKey :: Lens' DirectorySiteContactsList' (Maybe Key)
+dsclKey :: Lens' DirectorySiteContactsList' (Maybe AuthKey)
 dsclKey = lens _dsclKey (\ s a -> s{_dsclKey = a})
 
 -- | Value of the nextPageToken from the previous result page.

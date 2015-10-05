@@ -61,7 +61,7 @@ type ReadgroupsetsImportResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] ImportReadGroupSetsRequest :>
@@ -82,7 +82,7 @@ data ReadgroupsetsImport' = ReadgroupsetsImport'
     , _riPrettyPrint :: !Bool
     , _riUserIP      :: !(Maybe Text)
     , _riPayload     :: !ImportReadGroupSetsRequest
-    , _riKey         :: !(Maybe Key)
+    , _riKey         :: !(Maybe AuthKey)
     , _riOAuthToken  :: !(Maybe OAuthToken)
     , _riFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ riPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-riKey :: Lens' ReadgroupsetsImport' (Maybe Key)
+riKey :: Lens' ReadgroupsetsImport' (Maybe AuthKey)
 riKey = lens _riKey (\ s a -> s{_riKey = a})
 
 -- | OAuth 2.0 token for the current user.

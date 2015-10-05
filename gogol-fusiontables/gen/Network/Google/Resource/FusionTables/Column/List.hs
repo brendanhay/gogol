@@ -59,7 +59,7 @@ type ColumnListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] ColumnList
 
@@ -70,7 +70,7 @@ data ColumnList' = ColumnList'
     { _clQuotaUser   :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
     , _clUserIP      :: !(Maybe Text)
-    , _clKey         :: !(Maybe Key)
+    , _clKey         :: !(Maybe AuthKey)
     , _clPageToken   :: !(Maybe Text)
     , _clOAuthToken  :: !(Maybe OAuthToken)
     , _clTableId     :: !Text
@@ -136,7 +136,7 @@ clUserIP = lens _clUserIP (\ s a -> s{_clUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' ColumnList' (Maybe Key)
+clKey :: Lens' ColumnList' (Maybe AuthKey)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | Continuation token specifying which result page to return.

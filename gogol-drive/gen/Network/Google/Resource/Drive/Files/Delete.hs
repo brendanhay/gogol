@@ -55,7 +55,7 @@ type FilesDeleteResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -67,7 +67,7 @@ data FilesDelete' = FilesDelete'
     { _fdQuotaUser   :: !(Maybe Text)
     , _fdPrettyPrint :: !Bool
     , _fdUserIP      :: !(Maybe Text)
-    , _fdKey         :: !(Maybe Key)
+    , _fdKey         :: !(Maybe AuthKey)
     , _fdFileId      :: !Text
     , _fdOAuthToken  :: !(Maybe OAuthToken)
     , _fdFields      :: !(Maybe Text)
@@ -125,7 +125,7 @@ fdUserIP = lens _fdUserIP (\ s a -> s{_fdUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fdKey :: Lens' FilesDelete' (Maybe Key)
+fdKey :: Lens' FilesDelete' (Maybe AuthKey)
 fdKey = lens _fdKey (\ s a -> s{_fdKey = a})
 
 -- | The ID of the file to delete.

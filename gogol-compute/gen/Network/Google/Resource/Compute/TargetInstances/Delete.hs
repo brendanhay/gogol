@@ -59,7 +59,7 @@ type TargetInstancesDeleteResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
@@ -73,7 +73,7 @@ data TargetInstancesDelete' = TargetInstancesDelete'
     , _tidTargetInstance :: !Text
     , _tidUserIP         :: !(Maybe Text)
     , _tidZone           :: !Text
-    , _tidKey            :: !(Maybe Key)
+    , _tidKey            :: !(Maybe AuthKey)
     , _tidOAuthToken     :: !(Maybe OAuthToken)
     , _tidFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -154,7 +154,7 @@ tidZone = lens _tidZone (\ s a -> s{_tidZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tidKey :: Lens' TargetInstancesDelete' (Maybe Key)
+tidKey :: Lens' TargetInstancesDelete' (Maybe AuthKey)
 tidKey = lens _tidKey (\ s a -> s{_tidKey = a})
 
 -- | OAuth 2.0 token for the current user.

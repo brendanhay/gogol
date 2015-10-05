@@ -65,7 +65,7 @@ type InstanceGroupManagersResizeResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Post '[JSON] Operation
@@ -84,7 +84,7 @@ data InstanceGroupManagersResize' = InstanceGroupManagersResize'
     , _igmrInstanceGroupManager :: !Text
     , _igmrUserIP               :: !(Maybe Text)
     , _igmrZone                 :: !Text
-    , _igmrKey                  :: !(Maybe Key)
+    , _igmrKey                  :: !(Maybe AuthKey)
     , _igmrOAuthToken           :: !(Maybe OAuthToken)
     , _igmrFields               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -174,7 +174,7 @@ igmrZone = lens _igmrZone (\ s a -> s{_igmrZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmrKey :: Lens' InstanceGroupManagersResize' (Maybe Key)
+igmrKey :: Lens' InstanceGroupManagersResize' (Maybe AuthKey)
 igmrKey = lens _igmrKey (\ s a -> s{_igmrKey = a})
 
 -- | OAuth 2.0 token for the current user.

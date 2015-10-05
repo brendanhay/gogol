@@ -54,7 +54,7 @@ type QueriesGetqueryResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Query
 
@@ -66,7 +66,7 @@ data QueriesGetquery' = QueriesGetquery'
     , _qgQueryId     :: !Int64
     , _qgPrettyPrint :: !Bool
     , _qgUserIP      :: !(Maybe Text)
-    , _qgKey         :: !(Maybe Key)
+    , _qgKey         :: !(Maybe AuthKey)
     , _qgOAuthToken  :: !(Maybe OAuthToken)
     , _qgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -128,7 +128,7 @@ qgUserIP = lens _qgUserIP (\ s a -> s{_qgUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-qgKey :: Lens' QueriesGetquery' (Maybe Key)
+qgKey :: Lens' QueriesGetquery' (Maybe AuthKey)
 qgKey = lens _qgKey (\ s a -> s{_qgKey = a})
 
 -- | OAuth 2.0 token for the current user.

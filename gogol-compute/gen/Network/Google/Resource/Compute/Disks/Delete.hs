@@ -62,7 +62,7 @@ type DisksDeleteResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
@@ -79,7 +79,7 @@ data DisksDelete' = DisksDelete'
     , _ddDisk        :: !Text
     , _ddUserIP      :: !(Maybe Text)
     , _ddZone        :: !Text
-    , _ddKey         :: !(Maybe Key)
+    , _ddKey         :: !(Maybe AuthKey)
     , _ddOAuthToken  :: !(Maybe OAuthToken)
     , _ddFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -157,7 +157,7 @@ ddZone = lens _ddZone (\ s a -> s{_ddZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ddKey :: Lens' DisksDelete' (Maybe Key)
+ddKey :: Lens' DisksDelete' (Maybe AuthKey)
 ddKey = lens _ddKey (\ s a -> s{_ddKey = a})
 
 -- | OAuth 2.0 token for the current user.

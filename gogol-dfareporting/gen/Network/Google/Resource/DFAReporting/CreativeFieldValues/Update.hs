@@ -59,7 +59,7 @@ type CreativeFieldValuesUpdateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] CreativeFieldValue :>
@@ -75,7 +75,7 @@ data CreativeFieldValuesUpdate' = CreativeFieldValuesUpdate'
     , _cfvuUserIP          :: !(Maybe Text)
     , _cfvuProFileId       :: !Int64
     , _cfvuPayload         :: !CreativeFieldValue
-    , _cfvuKey             :: !(Maybe Key)
+    , _cfvuKey             :: !(Maybe AuthKey)
     , _cfvuOAuthToken      :: !(Maybe OAuthToken)
     , _cfvuFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -159,7 +159,7 @@ cfvuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cfvuKey :: Lens' CreativeFieldValuesUpdate' (Maybe Key)
+cfvuKey :: Lens' CreativeFieldValuesUpdate' (Maybe AuthKey)
 cfvuKey = lens _cfvuKey (\ s a -> s{_cfvuKey = a})
 
 -- | OAuth 2.0 token for the current user.

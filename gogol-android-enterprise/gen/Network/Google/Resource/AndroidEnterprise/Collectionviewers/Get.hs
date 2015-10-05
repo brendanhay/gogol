@@ -62,7 +62,7 @@ type CollectionviewersGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] User
 
@@ -78,7 +78,7 @@ data CollectionviewersGet' = CollectionviewersGet'
     , _cgUserIP       :: !(Maybe Text)
     , _cgCollectionId :: !Text
     , _cgUserId       :: !Text
-    , _cgKey          :: !(Maybe Key)
+    , _cgKey          :: !(Maybe AuthKey)
     , _cgOAuthToken   :: !(Maybe OAuthToken)
     , _cgFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -159,7 +159,7 @@ cgUserId = lens _cgUserId (\ s a -> s{_cgUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgKey :: Lens' CollectionviewersGet' (Maybe Key)
+cgKey :: Lens' CollectionviewersGet' (Maybe AuthKey)
 cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 
 -- | OAuth 2.0 token for the current user.

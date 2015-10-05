@@ -58,7 +58,7 @@ type MobileDevicesDeleteResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -71,7 +71,7 @@ data MobileDevicesDelete' = MobileDevicesDelete'
     , _mddPrettyPrint :: !Bool
     , _mddUserIP      :: !(Maybe Text)
     , _mddCustomerId  :: !Text
-    , _mddKey         :: !(Maybe Key)
+    , _mddKey         :: !(Maybe AuthKey)
     , _mddOAuthToken  :: !(Maybe OAuthToken)
     , _mddFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ mddCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mddKey :: Lens' MobileDevicesDelete' (Maybe Key)
+mddKey :: Lens' MobileDevicesDelete' (Maybe AuthKey)
 mddKey = lens _mddKey (\ s a -> s{_mddKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -56,7 +56,7 @@ type UserRolesUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] UserRole :> Put '[JSON] UserRole
@@ -70,7 +70,7 @@ data UserRolesUpdate' = UserRolesUpdate'
     , _uruUserIP      :: !(Maybe Text)
     , _uruProFileId   :: !Int64
     , _uruPayload     :: !UserRole
-    , _uruKey         :: !(Maybe Key)
+    , _uruKey         :: !(Maybe AuthKey)
     , _uruOAuthToken  :: !(Maybe OAuthToken)
     , _uruFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,7 +142,7 @@ uruPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uruKey :: Lens' UserRolesUpdate' (Maybe Key)
+uruKey :: Lens' UserRolesUpdate' (Maybe AuthKey)
 uruKey = lens _uruKey (\ s a -> s{_uruKey = a})
 
 -- | OAuth 2.0 token for the current user.

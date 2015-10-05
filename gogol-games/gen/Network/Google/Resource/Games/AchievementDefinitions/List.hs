@@ -58,7 +58,7 @@ type AchievementDefinitionsListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] AchievementDefinitionsListResponse
@@ -70,7 +70,7 @@ data AchievementDefinitionsList' = AchievementDefinitionsList'
     { _adlQuotaUser   :: !(Maybe Text)
     , _adlPrettyPrint :: !Bool
     , _adlUserIP      :: !(Maybe Text)
-    , _adlKey         :: !(Maybe Key)
+    , _adlKey         :: !(Maybe AuthKey)
     , _adlLanguage    :: !(Maybe Text)
     , _adlPageToken   :: !(Maybe Text)
     , _adlOAuthToken  :: !(Maybe OAuthToken)
@@ -136,7 +136,7 @@ adlUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-adlKey :: Lens' AchievementDefinitionsList' (Maybe Key)
+adlKey :: Lens' AchievementDefinitionsList' (Maybe AuthKey)
 adlKey = lens _adlKey (\ s a -> s{_adlKey = a})
 
 -- | The preferred language to use for strings returned by this method.

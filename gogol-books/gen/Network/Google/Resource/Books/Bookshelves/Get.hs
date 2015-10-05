@@ -59,7 +59,7 @@ type BookshelvesGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Bookshelf
 
@@ -72,7 +72,7 @@ data BookshelvesGet' = BookshelvesGet'
     , _bgUserIP      :: !(Maybe Text)
     , _bgUserId      :: !Text
     , _bgShelf       :: !Text
-    , _bgKey         :: !(Maybe Key)
+    , _bgKey         :: !(Maybe AuthKey)
     , _bgSource      :: !(Maybe Text)
     , _bgOAuthToken  :: !(Maybe OAuthToken)
     , _bgFields      :: !(Maybe Text)
@@ -145,7 +145,7 @@ bgShelf = lens _bgShelf (\ s a -> s{_bgShelf = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bgKey :: Lens' BookshelvesGet' (Maybe Key)
+bgKey :: Lens' BookshelvesGet' (Maybe AuthKey)
 bgKey = lens _bgKey (\ s a -> s{_bgKey = a})
 
 -- | String to identify the originator of this request.

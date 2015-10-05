@@ -53,7 +53,7 @@ type NegotiationsInsertResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] NegotiationDTO :>
@@ -67,7 +67,7 @@ data NegotiationsInsert' = NegotiationsInsert'
     , _niPrettyPrint :: !Bool
     , _niUserIP      :: !(Maybe Text)
     , _niPayload     :: !NegotiationDTO
-    , _niKey         :: !(Maybe Key)
+    , _niKey         :: !(Maybe AuthKey)
     , _niOAuthToken  :: !(Maybe OAuthToken)
     , _niFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -129,7 +129,7 @@ niPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-niKey :: Lens' NegotiationsInsert' (Maybe Key)
+niKey :: Lens' NegotiationsInsert' (Maybe AuthKey)
 niKey = lens _niKey (\ s a -> s{_niKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -54,7 +54,7 @@ type TableDeleteResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -65,7 +65,7 @@ data TableDelete' = TableDelete'
     { _tdQuotaUser   :: !(Maybe Text)
     , _tdPrettyPrint :: !Bool
     , _tdUserIP      :: !(Maybe Text)
-    , _tdKey         :: !(Maybe Key)
+    , _tdKey         :: !(Maybe AuthKey)
     , _tdOAuthToken  :: !(Maybe OAuthToken)
     , _tdTableId     :: !Text
     , _tdFields      :: !(Maybe Text)
@@ -123,7 +123,7 @@ tdUserIP = lens _tdUserIP (\ s a -> s{_tdUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tdKey :: Lens' TableDelete' (Maybe Key)
+tdKey :: Lens' TableDelete' (Maybe AuthKey)
 tdKey = lens _tdKey (\ s a -> s{_tdKey = a})
 
 -- | OAuth 2.0 token for the current user.

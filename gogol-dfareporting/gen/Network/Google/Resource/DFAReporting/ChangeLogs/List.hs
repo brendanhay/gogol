@@ -75,7 +75,7 @@ type ChangeLogsListResource =
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "userIp" Text :>
                                      QueryParam "fields" Text :>
-                                       QueryParam "key" Key :>
+                                       QueryParam "key" AuthKey :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] ChangeLogsListResponse
@@ -94,7 +94,7 @@ data ChangeLogsList' = ChangeLogsList'
     , _cllProFileId      :: !Int64
     , _cllAction         :: !(Maybe ChangeLogsListAction)
     , _cllMinChangeTime  :: !(Maybe Text)
-    , _cllKey            :: !(Maybe Key)
+    , _cllKey            :: !(Maybe AuthKey)
     , _cllMaxChangeTime  :: !(Maybe Text)
     , _cllPageToken      :: !(Maybe Text)
     , _cllOAuthToken     :: !(Maybe OAuthToken)
@@ -235,7 +235,7 @@ cllMinChangeTime
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cllKey :: Lens' ChangeLogsList' (Maybe Key)
+cllKey :: Lens' ChangeLogsList' (Maybe AuthKey)
 cllKey = lens _cllKey (\ s a -> s{_cllKey = a})
 
 -- | Select only change logs whose change time is before the specified

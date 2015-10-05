@@ -58,7 +58,7 @@ type ManagementAccountSummariesListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] AccountSummaries
@@ -71,7 +71,7 @@ data ManagementAccountSummariesList' = ManagementAccountSummariesList'
     { _maslQuotaUser   :: !(Maybe Text)
     , _maslPrettyPrint :: !Bool
     , _maslUserIP      :: !(Maybe Text)
-    , _maslKey         :: !(Maybe Key)
+    , _maslKey         :: !(Maybe AuthKey)
     , _maslOAuthToken  :: !(Maybe OAuthToken)
     , _maslStartIndex  :: !(Maybe Int32)
     , _maslMaxResults  :: !(Maybe Int32)
@@ -134,7 +134,7 @@ maslUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-maslKey :: Lens' ManagementAccountSummariesList' (Maybe Key)
+maslKey :: Lens' ManagementAccountSummariesList' (Maybe AuthKey)
 maslKey = lens _maslKey (\ s a -> s{_maslKey = a})
 
 -- | OAuth 2.0 token for the current user.

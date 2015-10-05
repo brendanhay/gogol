@@ -58,7 +58,7 @@ type LandingPagesListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] LandingPagesListResponse
@@ -72,7 +72,7 @@ data LandingPagesList' = LandingPagesList'
     , _lplUserIP      :: !(Maybe Text)
     , _lplCampaignId  :: !Int64
     , _lplProFileId   :: !Int64
-    , _lplKey         :: !(Maybe Key)
+    , _lplKey         :: !(Maybe AuthKey)
     , _lplOAuthToken  :: !(Maybe OAuthToken)
     , _lplFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ lplProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lplKey :: Lens' LandingPagesList' (Maybe Key)
+lplKey :: Lens' LandingPagesList' (Maybe AuthKey)
 lplKey = lens _lplKey (\ s a -> s{_lplKey = a})
 
 -- | OAuth 2.0 token for the current user.

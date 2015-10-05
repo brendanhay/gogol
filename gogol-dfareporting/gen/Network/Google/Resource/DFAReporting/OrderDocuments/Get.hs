@@ -60,7 +60,7 @@ type OrderDocumentsGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] OrderDocument
@@ -73,7 +73,7 @@ data OrderDocumentsGet' = OrderDocumentsGet'
     , _odgPrettyPrint :: !Bool
     , _odgUserIP      :: !(Maybe Text)
     , _odgProFileId   :: !Int64
-    , _odgKey         :: !(Maybe Key)
+    , _odgKey         :: !(Maybe AuthKey)
     , _odgId          :: !Int64
     , _odgProjectId   :: !Int64
     , _odgOAuthToken  :: !(Maybe OAuthToken)
@@ -146,7 +146,7 @@ odgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-odgKey :: Lens' OrderDocumentsGet' (Maybe Key)
+odgKey :: Lens' OrderDocumentsGet' (Maybe AuthKey)
 odgKey = lens _odgKey (\ s a -> s{_odgKey = a})
 
 -- | Order document ID.

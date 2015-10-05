@@ -59,7 +59,7 @@ type ManagementFiltersUpdateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Filter :> Put '[JSON] Filter
@@ -74,7 +74,7 @@ data ManagementFiltersUpdate' = ManagementFiltersUpdate'
     , _mfuUserIP      :: !(Maybe Text)
     , _mfuPayload     :: !Filter
     , _mfuAccountId   :: !Text
-    , _mfuKey         :: !(Maybe Key)
+    , _mfuKey         :: !(Maybe AuthKey)
     , _mfuOAuthToken  :: !(Maybe OAuthToken)
     , _mfuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -155,7 +155,7 @@ mfuAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mfuKey :: Lens' ManagementFiltersUpdate' (Maybe Key)
+mfuKey :: Lens' ManagementFiltersUpdate' (Maybe AuthKey)
 mfuKey = lens _mfuKey (\ s a -> s{_mfuKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -60,7 +60,7 @@ type BucketsGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Bucket
 
@@ -73,7 +73,7 @@ data BucketsGet' = BucketsGet'
     , _bgPrettyPrint              :: !Bool
     , _bgUserIP                   :: !(Maybe Text)
     , _bgBucket                   :: !Text
-    , _bgKey                      :: !(Maybe Key)
+    , _bgKey                      :: !(Maybe AuthKey)
     , _bgIfMetagenerationNotMatch :: !(Maybe Word64)
     , _bgProjection               :: !(Maybe BucketsGetProjection)
     , _bgOAuthToken               :: !(Maybe OAuthToken)
@@ -152,7 +152,7 @@ bgBucket = lens _bgBucket (\ s a -> s{_bgBucket = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bgKey :: Lens' BucketsGet' (Maybe Key)
+bgKey :: Lens' BucketsGet' (Maybe AuthKey)
 bgKey = lens _bgKey (\ s a -> s{_bgKey = a})
 
 -- | Makes the return of the bucket metadata conditional on whether the

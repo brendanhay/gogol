@@ -55,7 +55,7 @@ type WebfontsListResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] WebfontList
 
@@ -67,7 +67,7 @@ data WebfontsList' = WebfontsList'
     { _wlQuotaUser   :: !(Maybe Text)
     , _wlPrettyPrint :: !Bool
     , _wlUserIP      :: !(Maybe Text)
-    , _wlKey         :: !(Maybe Key)
+    , _wlKey         :: !(Maybe AuthKey)
     , _wlSort        :: !(Maybe WebfontsListSort)
     , _wlOAuthToken  :: !(Maybe OAuthToken)
     , _wlFields      :: !(Maybe Text)
@@ -124,7 +124,7 @@ wlUserIP = lens _wlUserIP (\ s a -> s{_wlUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-wlKey :: Lens' WebfontsList' (Maybe Key)
+wlKey :: Lens' WebfontsList' (Maybe AuthKey)
 wlKey = lens _wlKey (\ s a -> s{_wlKey = a})
 
 -- | Enables sorting of the list

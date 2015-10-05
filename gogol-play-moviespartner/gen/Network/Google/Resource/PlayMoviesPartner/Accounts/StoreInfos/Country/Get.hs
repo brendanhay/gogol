@@ -75,7 +75,7 @@ type AccountsStoreInfosCountryGetResource =
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "fields" Text :>
-                                       QueryParam "key" Key :>
+                                       QueryParam "key" AuthKey :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] StoreInfo
@@ -97,7 +97,7 @@ data AccountsStoreInfosCountryGet' = AccountsStoreInfosCountryGet'
     , _asicgVideoId        :: !Text
     , _asicgAccountId      :: !Text
     , _asicgBearerToken    :: !(Maybe Text)
-    , _asicgKey            :: !(Maybe Key)
+    , _asicgKey            :: !(Maybe AuthKey)
     , _asicgOAuthToken     :: !(Maybe OAuthToken)
     , _asicgFields         :: !(Maybe Text)
     , _asicgCallback       :: !(Maybe Text)
@@ -226,7 +226,7 @@ asicgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-asicgKey :: Lens' AccountsStoreInfosCountryGet' (Maybe Key)
+asicgKey :: Lens' AccountsStoreInfosCountryGet' (Maybe AuthKey)
 asicgKey = lens _asicgKey (\ s a -> s{_asicgKey = a})
 
 -- | OAuth 2.0 token for the current user.

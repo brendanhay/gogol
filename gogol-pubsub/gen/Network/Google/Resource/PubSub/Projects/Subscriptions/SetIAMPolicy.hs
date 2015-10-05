@@ -68,7 +68,7 @@ type ProjectsSubscriptionsSetIAMPolicyResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] SetIAMPolicyRequest :>
@@ -88,7 +88,7 @@ data ProjectsSubscriptionsSetIAMPolicy' = ProjectsSubscriptionsSetIAMPolicy'
     , _pssipUploadType     :: !(Maybe Text)
     , _pssipPayload        :: !SetIAMPolicyRequest
     , _pssipBearerToken    :: !(Maybe Text)
-    , _pssipKey            :: !(Maybe Key)
+    , _pssipKey            :: !(Maybe AuthKey)
     , _pssipResource       :: !Text
     , _pssipOAuthToken     :: !(Maybe OAuthToken)
     , _pssipFields         :: !(Maybe Text)
@@ -203,7 +203,7 @@ pssipBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pssipKey :: Lens' ProjectsSubscriptionsSetIAMPolicy' (Maybe Key)
+pssipKey :: Lens' ProjectsSubscriptionsSetIAMPolicy' (Maybe AuthKey)
 pssipKey = lens _pssipKey (\ s a -> s{_pssipKey = a})
 
 -- | REQUIRED: The resource for which policy is being specified. Resource is

@@ -60,7 +60,7 @@ type CalendarListPatchResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] CalendarListEntry :>
@@ -77,7 +77,7 @@ data CalendarListPatch' = CalendarListPatch'
     , _clpUserIP         :: !(Maybe Text)
     , _clpPayload        :: !CalendarListEntry
     , _clpColorRgbFormat :: !(Maybe Bool)
-    , _clpKey            :: !(Maybe Key)
+    , _clpKey            :: !(Maybe AuthKey)
     , _clpOAuthToken     :: !(Maybe OAuthToken)
     , _clpFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -164,7 +164,7 @@ clpColorRgbFormat
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clpKey :: Lens' CalendarListPatch' (Maybe Key)
+clpKey :: Lens' CalendarListPatch' (Maybe AuthKey)
 clpKey = lens _clpKey (\ s a -> s{_clpKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -56,7 +56,7 @@ type URLChannelsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] URLChannel :> Post '[JSON] URLChannel
@@ -70,7 +70,7 @@ data URLChannelsInsert' = URLChannelsInsert'
     , _uciUserIP      :: !(Maybe Text)
     , _uciPayload     :: !URLChannel
     , _uciAdClientId  :: !Text
-    , _uciKey         :: !(Maybe Key)
+    , _uciKey         :: !(Maybe AuthKey)
     , _uciOAuthToken  :: !(Maybe OAuthToken)
     , _uciFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ uciAdClientId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uciKey :: Lens' URLChannelsInsert' (Maybe Key)
+uciKey :: Lens' URLChannelsInsert' (Maybe AuthKey)
 uciKey = lens _uciKey (\ s a -> s{_uciKey = a})
 
 -- | OAuth 2.0 token for the current user.

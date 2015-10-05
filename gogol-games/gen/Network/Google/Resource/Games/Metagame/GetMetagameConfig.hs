@@ -52,7 +52,7 @@ type MetagameGetMetagameConfigResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] MetagameConfig
@@ -64,7 +64,7 @@ data MetagameGetMetagameConfig' = MetagameGetMetagameConfig'
     { _mgmcQuotaUser   :: !(Maybe Text)
     , _mgmcPrettyPrint :: !Bool
     , _mgmcUserIP      :: !(Maybe Text)
-    , _mgmcKey         :: !(Maybe Key)
+    , _mgmcKey         :: !(Maybe AuthKey)
     , _mgmcOAuthToken  :: !(Maybe OAuthToken)
     , _mgmcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -119,7 +119,7 @@ mgmcUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mgmcKey :: Lens' MetagameGetMetagameConfig' (Maybe Key)
+mgmcKey :: Lens' MetagameGetMetagameConfig' (Maybe AuthKey)
 mgmcKey = lens _mgmcKey (\ s a -> s{_mgmcKey = a})
 
 -- | OAuth 2.0 token for the current user.

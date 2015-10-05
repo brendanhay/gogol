@@ -62,7 +62,7 @@ type TurnBasedMatchesListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] TurnBasedMatchList
@@ -75,7 +75,7 @@ data TurnBasedMatchesList' = TurnBasedMatchesList'
     , _tbmlQuotaUser           :: !(Maybe Text)
     , _tbmlPrettyPrint         :: !Bool
     , _tbmlUserIP              :: !(Maybe Text)
-    , _tbmlKey                 :: !(Maybe Key)
+    , _tbmlKey                 :: !(Maybe AuthKey)
     , _tbmlIncludeMatchData    :: !(Maybe Bool)
     , _tbmlLanguage            :: !(Maybe Text)
     , _tbmlPageToken           :: !(Maybe Text)
@@ -157,7 +157,7 @@ tbmlUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tbmlKey :: Lens' TurnBasedMatchesList' (Maybe Key)
+tbmlKey :: Lens' TurnBasedMatchesList' (Maybe AuthKey)
 tbmlKey = lens _tbmlKey (\ s a -> s{_tbmlKey = a})
 
 -- | True if match data should be returned in the response. Note that not all

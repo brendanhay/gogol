@@ -54,7 +54,7 @@ type ScoresResetAllForAllPlayersResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -66,7 +66,7 @@ data ScoresResetAllForAllPlayers' = ScoresResetAllForAllPlayers'
     { _srafapQuotaUser   :: !(Maybe Text)
     , _srafapPrettyPrint :: !Bool
     , _srafapUserIP      :: !(Maybe Text)
-    , _srafapKey         :: !(Maybe Key)
+    , _srafapKey         :: !(Maybe AuthKey)
     , _srafapOAuthToken  :: !(Maybe OAuthToken)
     , _srafapFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -121,7 +121,7 @@ srafapUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-srafapKey :: Lens' ScoresResetAllForAllPlayers' (Maybe Key)
+srafapKey :: Lens' ScoresResetAllForAllPlayers' (Maybe AuthKey)
 srafapKey
   = lens _srafapKey (\ s a -> s{_srafapKey = a})
 

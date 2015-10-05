@@ -56,7 +56,7 @@ type GroupsAliasesInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Alias :> Post '[JSON] Alias
@@ -70,7 +70,7 @@ data GroupsAliasesInsert' = GroupsAliasesInsert'
     , _gaiUserIP      :: !(Maybe Text)
     , _gaiGroupKey    :: !Text
     , _gaiPayload     :: !Alias
-    , _gaiKey         :: !(Maybe Key)
+    , _gaiKey         :: !(Maybe AuthKey)
     , _gaiOAuthToken  :: !(Maybe OAuthToken)
     , _gaiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,7 +142,7 @@ gaiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gaiKey :: Lens' GroupsAliasesInsert' (Maybe Key)
+gaiKey :: Lens' GroupsAliasesInsert' (Maybe AuthKey)
 gaiKey = lens _gaiKey (\ s a -> s{_gaiKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -58,7 +58,7 @@ type OrdersUpdatemerchantOrderidResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] OrdersUpdateMerchantOrderIdRequest :>
@@ -73,7 +73,7 @@ data OrdersUpdatemerchantOrderid' = OrdersUpdatemerchantOrderid'
     , _ouoPrettyPrint :: !Bool
     , _ouoUserIP      :: !(Maybe Text)
     , _ouoPayload     :: !OrdersUpdateMerchantOrderIdRequest
-    , _ouoKey         :: !(Maybe Key)
+    , _ouoKey         :: !(Maybe AuthKey)
     , _ouoOAuthToken  :: !(Maybe OAuthToken)
     , _ouoOrderId     :: !Text
     , _ouoFields      :: !(Maybe Text)
@@ -151,7 +151,7 @@ ouoPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ouoKey :: Lens' OrdersUpdatemerchantOrderid' (Maybe Key)
+ouoKey :: Lens' OrdersUpdatemerchantOrderid' (Maybe AuthKey)
 ouoKey = lens _ouoKey (\ s a -> s{_ouoKey = a})
 
 -- | OAuth 2.0 token for the current user.

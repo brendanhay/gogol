@@ -61,7 +61,7 @@ type LiveStreamsUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] LiveStream :> Put '[JSON] LiveStream
@@ -78,7 +78,7 @@ data LiveStreamsUpdate' = LiveStreamsUpdate'
     , _lsuUserIP                        :: !(Maybe Text)
     , _lsuPayload                       :: !LiveStream
     , _lsuOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lsuKey                           :: !(Maybe Key)
+    , _lsuKey                           :: !(Maybe AuthKey)
     , _lsuOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lsuOAuthToken                    :: !(Maybe OAuthToken)
     , _lsuFields                        :: !(Maybe Text)
@@ -178,7 +178,7 @@ lsuOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lsuKey :: Lens' LiveStreamsUpdate' (Maybe Key)
+lsuKey :: Lens' LiveStreamsUpdate' (Maybe AuthKey)
 lsuKey = lens _lsuKey (\ s a -> s{_lsuKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:

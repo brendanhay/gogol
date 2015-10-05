@@ -55,7 +55,7 @@ type AccountsPaymentsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Payments
 
@@ -67,7 +67,7 @@ data AccountsPaymentsList' = AccountsPaymentsList'
     , _aplPrettyPrint :: !Bool
     , _aplUserIP      :: !(Maybe Text)
     , _aplAccountId   :: !Text
-    , _aplKey         :: !(Maybe Key)
+    , _aplKey         :: !(Maybe AuthKey)
     , _aplOAuthToken  :: !(Maybe OAuthToken)
     , _aplFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -130,7 +130,7 @@ aplAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aplKey :: Lens' AccountsPaymentsList' (Maybe Key)
+aplKey :: Lens' AccountsPaymentsList' (Maybe AuthKey)
 aplKey = lens _aplKey (\ s a -> s{_aplKey = a})
 
 -- | OAuth 2.0 token for the current user.

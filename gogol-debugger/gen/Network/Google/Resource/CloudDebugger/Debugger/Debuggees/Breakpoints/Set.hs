@@ -71,7 +71,7 @@ type DebuggerDebuggeesBreakpointsSetResource =
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            ReqBody '[JSON] Breakpoint :>
@@ -90,7 +90,7 @@ data DebuggerDebuggeesBreakpointsSet' = DebuggerDebuggeesBreakpointsSet'
     , _ddbsUploadType     :: !(Maybe Text)
     , _ddbsPayload        :: !Breakpoint
     , _ddbsBearerToken    :: !(Maybe Text)
-    , _ddbsKey            :: !(Maybe Key)
+    , _ddbsKey            :: !(Maybe AuthKey)
     , _ddbsDebuggeeId     :: !Text
     , _ddbsOAuthToken     :: !(Maybe OAuthToken)
     , _ddbsFields         :: !(Maybe Text)
@@ -205,7 +205,7 @@ ddbsBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ddbsKey :: Lens' DebuggerDebuggeesBreakpointsSet' (Maybe Key)
+ddbsKey :: Lens' DebuggerDebuggeesBreakpointsSet' (Maybe AuthKey)
 ddbsKey = lens _ddbsKey (\ s a -> s{_ddbsKey = a})
 
 -- | The debuggee id to set the breakpoint to.

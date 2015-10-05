@@ -64,7 +64,7 @@ type TargetPoolsListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] TargetPoolList
@@ -78,7 +78,7 @@ data TargetPoolsList' = TargetPoolsList'
     , _tplPrettyPrint :: !Bool
     , _tplProject     :: !Text
     , _tplUserIP      :: !(Maybe Text)
-    , _tplKey         :: !(Maybe Key)
+    , _tplKey         :: !(Maybe AuthKey)
     , _tplFilter      :: !(Maybe Text)
     , _tplRegion      :: !Text
     , _tplPageToken   :: !(Maybe Text)
@@ -158,7 +158,7 @@ tplUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tplKey :: Lens' TargetPoolsList' (Maybe Key)
+tplKey :: Lens' TargetPoolsList' (Maybe AuthKey)
 tplKey = lens _tplKey (\ s a -> s{_tplKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

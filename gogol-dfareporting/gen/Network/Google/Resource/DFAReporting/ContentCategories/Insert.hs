@@ -56,7 +56,7 @@ type ContentCategoriesInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ContentCategory :>
@@ -71,7 +71,7 @@ data ContentCategoriesInsert' = ContentCategoriesInsert'
     , _cciUserIP      :: !(Maybe Text)
     , _cciProFileId   :: !Int64
     , _cciPayload     :: !ContentCategory
-    , _cciKey         :: !(Maybe Key)
+    , _cciKey         :: !(Maybe AuthKey)
     , _cciOAuthToken  :: !(Maybe OAuthToken)
     , _cciFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ cciPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cciKey :: Lens' ContentCategoriesInsert' (Maybe Key)
+cciKey :: Lens' ContentCategoriesInsert' (Maybe AuthKey)
 cciKey = lens _cciKey (\ s a -> s{_cciKey = a})
 
 -- | OAuth 2.0 token for the current user.

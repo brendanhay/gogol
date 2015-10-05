@@ -70,7 +70,7 @@ type CalendarListWatchResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] Channel :>
@@ -88,7 +88,7 @@ data CalendarListWatch' = CalendarListWatch'
     , _clwShowDeleted   :: !(Maybe Bool)
     , _clwPayload       :: !Channel
     , _clwShowHidden    :: !(Maybe Bool)
-    , _clwKey           :: !(Maybe Key)
+    , _clwKey           :: !(Maybe AuthKey)
     , _clwPageToken     :: !(Maybe Text)
     , _clwOAuthToken    :: !(Maybe OAuthToken)
     , _clwMaxResults    :: !(Maybe Int32)
@@ -208,7 +208,7 @@ clwShowHidden
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clwKey :: Lens' CalendarListWatch' (Maybe Key)
+clwKey :: Lens' CalendarListWatch' (Maybe AuthKey)
 clwKey = lens _clwKey (\ s a -> s{_clwKey = a})
 
 -- | Token specifying which result page to return. Optional.

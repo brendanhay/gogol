@@ -59,7 +59,7 @@ type FloodlightActivitiesPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] FloodlightActivity :>
@@ -75,7 +75,7 @@ data FloodlightActivitiesPatch' = FloodlightActivitiesPatch'
     , _fapUserIP      :: !(Maybe Text)
     , _fapProFileId   :: !Int64
     , _fapPayload     :: !FloodlightActivity
-    , _fapKey         :: !(Maybe Key)
+    , _fapKey         :: !(Maybe AuthKey)
     , _fapId          :: !Int64
     , _fapOAuthToken  :: !(Maybe OAuthToken)
     , _fapFields      :: !(Maybe Text)
@@ -152,7 +152,7 @@ fapPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fapKey :: Lens' FloodlightActivitiesPatch' (Maybe Key)
+fapKey :: Lens' FloodlightActivitiesPatch' (Maybe AuthKey)
 fapKey = lens _fapKey (\ s a -> s{_fapKey = a})
 
 -- | Floodlight activity ID.

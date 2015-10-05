@@ -54,7 +54,7 @@ type CustomersGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Customer
 
@@ -66,7 +66,7 @@ data CustomersGet' = CustomersGet'
     , _cgPrettyPrint :: !Bool
     , _cgUserIP      :: !(Maybe Text)
     , _cgCustomerId  :: !Text
-    , _cgKey         :: !(Maybe Key)
+    , _cgKey         :: !(Maybe AuthKey)
     , _cgOAuthToken  :: !(Maybe OAuthToken)
     , _cgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -128,7 +128,7 @@ cgCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgKey :: Lens' CustomersGet' (Maybe Key)
+cgKey :: Lens' CustomersGet' (Maybe AuthKey)
 cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -60,7 +60,7 @@ type PeopleSearchResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
 
@@ -71,7 +71,7 @@ data PeopleSearch' = PeopleSearch'
     { _psQuotaUser   :: !(Maybe Text)
     , _psPrettyPrint :: !Bool
     , _psUserIP      :: !(Maybe Text)
-    , _psKey         :: !(Maybe Key)
+    , _psKey         :: !(Maybe AuthKey)
     , _psQuery       :: !Text
     , _psLanguage    :: !Text
     , _psPageToken   :: !(Maybe Text)
@@ -141,7 +141,7 @@ psUserIP = lens _psUserIP (\ s a -> s{_psUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psKey :: Lens' PeopleSearch' (Maybe Key)
+psKey :: Lens' PeopleSearch' (Maybe AuthKey)
 psKey = lens _psKey (\ s a -> s{_psKey = a})
 
 -- | Specify a query string for full text search of public text in all

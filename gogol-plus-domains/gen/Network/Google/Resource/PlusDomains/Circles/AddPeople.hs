@@ -60,7 +60,7 @@ type CirclesAddPeopleResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Put '[JSON] Circle
 
@@ -74,7 +74,7 @@ data CirclesAddPeople' = CirclesAddPeople'
     , _capPrettyPrint :: !Bool
     , _capUserIP      :: !(Maybe Text)
     , _capUserId      :: !(Maybe [Text])
-    , _capKey         :: !(Maybe Key)
+    , _capKey         :: !(Maybe AuthKey)
     , _capCircleId    :: !Text
     , _capOAuthToken  :: !(Maybe OAuthToken)
     , _capFields      :: !(Maybe Text)
@@ -153,7 +153,7 @@ capUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-capKey :: Lens' CirclesAddPeople' (Maybe Key)
+capKey :: Lens' CirclesAddPeople' (Maybe AuthKey)
 capKey = lens _capKey (\ s a -> s{_capKey = a})
 
 -- | The ID of the circle to add the person to.

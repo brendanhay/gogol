@@ -55,7 +55,7 @@ type UsersLabelsCreateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Label :> Post '[JSON] Label
@@ -69,7 +69,7 @@ data UsersLabelsCreate' = UsersLabelsCreate'
     , _ulcUserIP      :: !(Maybe Text)
     , _ulcPayload     :: !Label
     , _ulcUserId      :: !Text
-    , _ulcKey         :: !(Maybe Key)
+    , _ulcKey         :: !(Maybe AuthKey)
     , _ulcOAuthToken  :: !(Maybe OAuthToken)
     , _ulcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,7 +142,7 @@ ulcUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ulcKey :: Lens' UsersLabelsCreate' (Maybe Key)
+ulcKey :: Lens' UsersLabelsCreate' (Maybe AuthKey)
 ulcKey = lens _ulcKey (\ s a -> s{_ulcKey = a})
 
 -- | OAuth 2.0 token for the current user.

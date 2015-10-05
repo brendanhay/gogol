@@ -60,7 +60,7 @@ type MyLibraryAnnotationsInsertResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Annotation :>
@@ -75,7 +75,7 @@ data MyLibraryAnnotationsInsert' = MyLibraryAnnotationsInsert'
     , _mlaiCountry                   :: !(Maybe Text)
     , _mlaiUserIP                    :: !(Maybe Text)
     , _mlaiPayload                   :: !Annotation
-    , _mlaiKey                       :: !(Maybe Key)
+    , _mlaiKey                       :: !(Maybe AuthKey)
     , _mlaiShowOnlySummaryInResponse :: !(Maybe Bool)
     , _mlaiSource                    :: !(Maybe Text)
     , _mlaiOAuthToken                :: !(Maybe OAuthToken)
@@ -155,7 +155,7 @@ mlaiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlaiKey :: Lens' MyLibraryAnnotationsInsert' (Maybe Key)
+mlaiKey :: Lens' MyLibraryAnnotationsInsert' (Maybe AuthKey)
 mlaiKey = lens _mlaiKey (\ s a -> s{_mlaiKey = a})
 
 -- | Requests that only the summary of the specified layer be provided in the

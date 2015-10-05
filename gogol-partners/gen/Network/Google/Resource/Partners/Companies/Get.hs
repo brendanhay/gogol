@@ -105,7 +105,7 @@ type CompaniesGetResource =
                                                  QueryParam "prettyPrint" Bool
                                                    :>
                                                    QueryParam "fields" Text :>
-                                                     QueryParam "key" Key :>
+                                                     QueryParam "key" AuthKey :>
                                                        QueryParam "oauth_token"
                                                          OAuthToken
                                                          :>
@@ -132,7 +132,7 @@ data CompaniesGet' = CompaniesGet'
     , _cgAddress                                     :: !(Maybe Text)
     , _cgRequestMetadataPartnersSessionId            :: !(Maybe Text)
     , _cgBearerToken                                 :: !(Maybe Text)
-    , _cgKey                                         :: !(Maybe Key)
+    , _cgKey                                         :: !(Maybe AuthKey)
     , _cgRequestMetadataLocale                       :: !(Maybe Text)
     , _cgView                                        :: !(Maybe Text)
     , _cgRequestMetadataExperimentIds                :: !(Maybe [Text])
@@ -307,7 +307,7 @@ cgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgKey :: Lens' CompaniesGet' (Maybe Key)
+cgKey :: Lens' CompaniesGet' (Maybe AuthKey)
 cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 
 -- | Locale to use for the current request.

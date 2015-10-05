@@ -56,7 +56,7 @@ type TaskListsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -67,7 +67,7 @@ data TaskListsDelete' = TaskListsDelete'
     { _tldQuotaUser   :: !(Maybe Text)
     , _tldPrettyPrint :: !Bool
     , _tldUserIP      :: !(Maybe Text)
-    , _tldKey         :: !(Maybe Key)
+    , _tldKey         :: !(Maybe AuthKey)
     , _tldTaskList    :: !Text
     , _tldOAuthToken  :: !(Maybe OAuthToken)
     , _tldFields      :: !(Maybe Text)
@@ -126,7 +126,7 @@ tldUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tldKey :: Lens' TaskListsDelete' (Maybe Key)
+tldKey :: Lens' TaskListsDelete' (Maybe AuthKey)
 tldKey = lens _tldKey (\ s a -> s{_tldKey = a})
 
 -- | Task list identifier.

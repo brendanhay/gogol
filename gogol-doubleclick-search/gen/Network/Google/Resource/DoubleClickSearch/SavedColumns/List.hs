@@ -58,7 +58,7 @@ type SavedColumnsListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] SavedColumnList
@@ -72,7 +72,7 @@ data SavedColumnsList' = SavedColumnsList'
     , _sclAgencyId     :: !Int64
     , _sclUserIP       :: !(Maybe Text)
     , _sclAdvertiserId :: !Int64
-    , _sclKey          :: !(Maybe Key)
+    , _sclKey          :: !(Maybe AuthKey)
     , _sclOAuthToken   :: !(Maybe OAuthToken)
     , _sclFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ sclAdvertiserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sclKey :: Lens' SavedColumnsList' (Maybe Key)
+sclKey :: Lens' SavedColumnsList' (Maybe AuthKey)
 sclKey = lens _sclKey (\ s a -> s{_sclKey = a})
 
 -- | OAuth 2.0 token for the current user.

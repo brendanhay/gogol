@@ -57,7 +57,7 @@ type BudgetGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Budget
 
@@ -70,7 +70,7 @@ data BudgetGet' = BudgetGet'
     , _bgPrettyPrint :: !Bool
     , _bgUserIP      :: !(Maybe Text)
     , _bgAccountId   :: !Int64
-    , _bgKey         :: !(Maybe Key)
+    , _bgKey         :: !(Maybe AuthKey)
     , _bgOAuthToken  :: !(Maybe OAuthToken)
     , _bgBillingId   :: !Int64
     , _bgFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ bgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bgKey :: Lens' BudgetGet' (Maybe Key)
+bgKey :: Lens' BudgetGet' (Maybe AuthKey)
 bgKey = lens _bgKey (\ s a -> s{_bgKey = a})
 
 -- | OAuth 2.0 token for the current user.

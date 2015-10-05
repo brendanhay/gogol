@@ -56,7 +56,7 @@ type ChildrenInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ChildReference :>
@@ -71,7 +71,7 @@ data ChildrenInsert' = ChildrenInsert'
     , _chiUserIP      :: !(Maybe Text)
     , _chiFolderId    :: !Text
     , _chiPayload     :: !ChildReference
-    , _chiKey         :: !(Maybe Key)
+    , _chiKey         :: !(Maybe AuthKey)
     , _chiOAuthToken  :: !(Maybe OAuthToken)
     , _chiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ chiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-chiKey :: Lens' ChildrenInsert' (Maybe Key)
+chiKey :: Lens' ChildrenInsert' (Maybe AuthKey)
 chiKey = lens _chiKey (\ s a -> s{_chiKey = a})
 
 -- | OAuth 2.0 token for the current user.

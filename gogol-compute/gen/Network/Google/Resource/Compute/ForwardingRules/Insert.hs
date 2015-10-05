@@ -59,7 +59,7 @@ type ForwardingRulesInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ForwardingRule :>
@@ -75,7 +75,7 @@ data ForwardingRulesInsert' = ForwardingRulesInsert'
     , _friProject     :: !Text
     , _friUserIP      :: !(Maybe Text)
     , _friPayload     :: !ForwardingRule
-    , _friKey         :: !(Maybe Key)
+    , _friKey         :: !(Maybe AuthKey)
     , _friRegion      :: !Text
     , _friOAuthToken  :: !(Maybe OAuthToken)
     , _friFields      :: !(Maybe Text)
@@ -152,7 +152,7 @@ friPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-friKey :: Lens' ForwardingRulesInsert' (Maybe Key)
+friKey :: Lens' ForwardingRulesInsert' (Maybe AuthKey)
 friKey = lens _friKey (\ s a -> s{_friKey = a})
 
 -- | Name of the region scoping this request.

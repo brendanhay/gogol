@@ -68,7 +68,7 @@ type OrganizationsUpdateResource =
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Organization :>
@@ -87,7 +87,7 @@ data OrganizationsUpdate' = OrganizationsUpdate'
     , _ouUploadType     :: !(Maybe Text)
     , _ouPayload        :: !Organization
     , _ouBearerToken    :: !(Maybe Text)
-    , _ouKey            :: !(Maybe Key)
+    , _ouKey            :: !(Maybe AuthKey)
     , _ouOAuthToken     :: !(Maybe OAuthToken)
     , _ouOrganizationId :: !Text
     , _ouFields         :: !(Maybe Text)
@@ -199,7 +199,7 @@ ouBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ouKey :: Lens' OrganizationsUpdate' (Maybe Key)
+ouKey :: Lens' OrganizationsUpdate' (Maybe AuthKey)
 ouKey = lens _ouKey (\ s a -> s{_ouKey = a})
 
 -- | OAuth 2.0 token for the current user.

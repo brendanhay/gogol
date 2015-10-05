@@ -55,7 +55,7 @@ type PretargetingConfigInsertResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] PretargetingConfig :>
@@ -70,7 +70,7 @@ data PretargetingConfigInsert' = PretargetingConfigInsert'
     , _pciUserIP      :: !(Maybe Text)
     , _pciPayload     :: !PretargetingConfig
     , _pciAccountId   :: !Int64
-    , _pciKey         :: !(Maybe Key)
+    , _pciKey         :: !(Maybe AuthKey)
     , _pciOAuthToken  :: !(Maybe OAuthToken)
     , _pciFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,7 +142,7 @@ pciAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pciKey :: Lens' PretargetingConfigInsert' (Maybe Key)
+pciKey :: Lens' PretargetingConfigInsert' (Maybe AuthKey)
 pciKey = lens _pciKey (\ s a -> s{_pciKey = a})
 
 -- | OAuth 2.0 token for the current user.

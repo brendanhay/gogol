@@ -61,7 +61,7 @@ type BucketsUpdateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Bucket :> Put '[JSON] Bucket
@@ -76,7 +76,7 @@ data BucketsUpdate' = BucketsUpdate'
     , _buUserIP                   :: !(Maybe Text)
     , _buBucket                   :: !Text
     , _buPayload                  :: !Bucket
-    , _buKey                      :: !(Maybe Key)
+    , _buKey                      :: !(Maybe AuthKey)
     , _buIfMetagenerationNotMatch :: !(Maybe Word64)
     , _buProjection               :: !(Maybe BucketsUpdateProjection)
     , _buOAuthToken               :: !(Maybe OAuthToken)
@@ -164,7 +164,7 @@ buPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-buKey :: Lens' BucketsUpdate' (Maybe Key)
+buKey :: Lens' BucketsUpdate' (Maybe AuthKey)
 buKey = lens _buKey (\ s a -> s{_buKey = a})
 
 -- | Makes the return of the bucket metadata conditional on whether the

@@ -64,7 +64,7 @@ type ManagementExperimentsDeleteResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -79,7 +79,7 @@ data ManagementExperimentsDelete' = ManagementExperimentsDelete'
     , _medProFileId     :: !Text
     , _medAccountId     :: !Text
     , _medExperimentId  :: !Text
-    , _medKey           :: !(Maybe Key)
+    , _medKey           :: !(Maybe AuthKey)
     , _medOAuthToken    :: !(Maybe OAuthToken)
     , _medFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -171,7 +171,7 @@ medExperimentId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-medKey :: Lens' ManagementExperimentsDelete' (Maybe Key)
+medKey :: Lens' ManagementExperimentsDelete' (Maybe AuthKey)
 medKey = lens _medKey (\ s a -> s{_medKey = a})
 
 -- | OAuth 2.0 token for the current user.

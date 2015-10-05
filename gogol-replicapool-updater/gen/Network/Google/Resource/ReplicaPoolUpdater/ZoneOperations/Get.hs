@@ -59,7 +59,7 @@ type ZoneOperationsGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
@@ -73,7 +73,7 @@ data ZoneOperationsGet' = ZoneOperationsGet'
     , _zogOperation   :: !Text
     , _zogUserIP      :: !(Maybe Text)
     , _zogZone        :: !Text
-    , _zogKey         :: !(Maybe Key)
+    , _zogKey         :: !(Maybe AuthKey)
     , _zogOAuthToken  :: !(Maybe OAuthToken)
     , _zogFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -153,7 +153,7 @@ zogZone = lens _zogZone (\ s a -> s{_zogZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-zogKey :: Lens' ZoneOperationsGet' (Maybe Key)
+zogKey :: Lens' ZoneOperationsGet' (Maybe AuthKey)
 zogKey = lens _zogKey (\ s a -> s{_zogKey = a})
 
 -- | OAuth 2.0 token for the current user.

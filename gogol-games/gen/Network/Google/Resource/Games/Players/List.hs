@@ -62,7 +62,7 @@ type PlayersListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] PlayerListResponse
@@ -75,7 +75,7 @@ data PlayersList' = PlayersList'
     , _plPrettyPrint :: !Bool
     , _plUserIP      :: !(Maybe Text)
     , _plCollection  :: !PlayersListCollection
-    , _plKey         :: !(Maybe Key)
+    , _plKey         :: !(Maybe AuthKey)
     , _plLanguage    :: !(Maybe Text)
     , _plPageToken   :: !(Maybe Text)
     , _plOAuthToken  :: !(Maybe OAuthToken)
@@ -149,7 +149,7 @@ plCollection
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plKey :: Lens' PlayersList' (Maybe Key)
+plKey :: Lens' PlayersList' (Maybe AuthKey)
 plKey = lens _plKey (\ s a -> s{_plKey = a})
 
 -- | The preferred language to use for strings returned by this method.

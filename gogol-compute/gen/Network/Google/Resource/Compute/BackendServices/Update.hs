@@ -58,7 +58,7 @@ type BackendServicesUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] BackendService :>
@@ -73,7 +73,7 @@ data BackendServicesUpdate' = BackendServicesUpdate'
     , _bsuProject        :: !Text
     , _bsuUserIP         :: !(Maybe Text)
     , _bsuPayload        :: !BackendService
-    , _bsuKey            :: !(Maybe Key)
+    , _bsuKey            :: !(Maybe AuthKey)
     , _bsuOAuthToken     :: !(Maybe OAuthToken)
     , _bsuFields         :: !(Maybe Text)
     , _bsuBackendService :: !Text
@@ -150,7 +150,7 @@ bsuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bsuKey :: Lens' BackendServicesUpdate' (Maybe Key)
+bsuKey :: Lens' BackendServicesUpdate' (Maybe AuthKey)
 bsuKey = lens _bsuKey (\ s a -> s{_bsuKey = a})
 
 -- | OAuth 2.0 token for the current user.

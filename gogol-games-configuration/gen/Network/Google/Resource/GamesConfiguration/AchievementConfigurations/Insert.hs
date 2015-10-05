@@ -56,7 +56,7 @@ type AchievementConfigurationsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] AchievementConfiguration :>
@@ -71,7 +71,7 @@ data AchievementConfigurationsInsert' = AchievementConfigurationsInsert'
     , _aciUserIP        :: !(Maybe Text)
     , _aciPayload       :: !AchievementConfiguration
     , _aciApplicationId :: !Text
-    , _aciKey           :: !(Maybe Key)
+    , _aciKey           :: !(Maybe AuthKey)
     , _aciOAuthToken    :: !(Maybe OAuthToken)
     , _aciFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ aciApplicationId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aciKey :: Lens' AchievementConfigurationsInsert' (Maybe Key)
+aciKey :: Lens' AchievementConfigurationsInsert' (Maybe AuthKey)
 aciKey = lens _aciKey (\ s a -> s{_aciKey = a})
 
 -- | OAuth 2.0 token for the current user.

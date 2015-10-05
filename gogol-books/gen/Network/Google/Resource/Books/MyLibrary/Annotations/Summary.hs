@@ -58,7 +58,7 @@ type MyLibraryAnnotationsSummaryResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Post '[JSON] AnnotationsSummary
@@ -70,7 +70,7 @@ data MyLibraryAnnotationsSummary' = MyLibraryAnnotationsSummary'
     { _mlasQuotaUser   :: !(Maybe Text)
     , _mlasPrettyPrint :: !Bool
     , _mlasUserIP      :: !(Maybe Text)
-    , _mlasKey         :: !(Maybe Key)
+    , _mlasKey         :: !(Maybe AuthKey)
     , _mlasLayerIds    :: ![Text]
     , _mlasVolumeId    :: !Text
     , _mlasOAuthToken  :: !(Maybe OAuthToken)
@@ -135,7 +135,7 @@ mlasUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlasKey :: Lens' MyLibraryAnnotationsSummary' (Maybe Key)
+mlasKey :: Lens' MyLibraryAnnotationsSummary' (Maybe AuthKey)
 mlasKey = lens _mlasKey (\ s a -> s{_mlasKey = a})
 
 -- | Array of layer IDs to get the summary for.

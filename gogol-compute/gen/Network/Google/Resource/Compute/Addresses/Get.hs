@@ -59,7 +59,7 @@ type AddressesGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Address
 
@@ -72,7 +72,7 @@ data AddressesGet' = AddressesGet'
     , _aggProject     :: !Text
     , _aggUserIP      :: !(Maybe Text)
     , _aggAddress     :: !Text
-    , _aggKey         :: !(Maybe Key)
+    , _aggKey         :: !(Maybe AuthKey)
     , _aggRegion      :: !Text
     , _aggOAuthToken  :: !(Maybe OAuthToken)
     , _aggFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ aggAddress
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aggKey :: Lens' AddressesGet' (Maybe Key)
+aggKey :: Lens' AddressesGet' (Maybe AuthKey)
 aggKey = lens _aggKey (\ s a -> s{_aggKey = a})
 
 -- | The name of the region for this request.

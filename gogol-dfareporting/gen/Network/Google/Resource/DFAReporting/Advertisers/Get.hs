@@ -57,7 +57,7 @@ type AdvertisersGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Advertiser
 
@@ -69,7 +69,7 @@ data AdvertisersGet' = AdvertisersGet'
     , _agPrettyPrint :: !Bool
     , _agUserIP      :: !(Maybe Text)
     , _agProFileId   :: !Int64
-    , _agKey         :: !(Maybe Key)
+    , _agKey         :: !(Maybe AuthKey)
     , _agId          :: !Int64
     , _agOAuthToken  :: !(Maybe OAuthToken)
     , _agFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ agProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agKey :: Lens' AdvertisersGet' (Maybe Key)
+agKey :: Lens' AdvertisersGet' (Maybe AuthKey)
 agKey = lens _agKey (\ s a -> s{_agKey = a})
 
 -- | Advertiser ID.

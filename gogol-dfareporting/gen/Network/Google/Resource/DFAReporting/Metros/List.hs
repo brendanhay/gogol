@@ -55,7 +55,7 @@ type MetrosListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] MetrosListResponse
@@ -68,7 +68,7 @@ data MetrosList' = MetrosList'
     , _mlPrettyPrint :: !Bool
     , _mlUserIP      :: !(Maybe Text)
     , _mlProFileId   :: !Int64
-    , _mlKey         :: !(Maybe Key)
+    , _mlKey         :: !(Maybe AuthKey)
     , _mlOAuthToken  :: !(Maybe OAuthToken)
     , _mlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -130,7 +130,7 @@ mlProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlKey :: Lens' MetrosList' (Maybe Key)
+mlKey :: Lens' MetrosList' (Maybe AuthKey)
 mlKey = lens _mlKey (\ s a -> s{_mlKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -59,7 +59,7 @@ type AutoscalersInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Autoscaler :> Post '[JSON] Operation
@@ -75,7 +75,7 @@ data AutoscalersInsert' = AutoscalersInsert'
     , _aiiUserIP      :: !(Maybe Text)
     , _aiiZone        :: !Text
     , _aiiPayload     :: !Autoscaler
-    , _aiiKey         :: !(Maybe Key)
+    , _aiiKey         :: !(Maybe AuthKey)
     , _aiiOAuthToken  :: !(Maybe OAuthToken)
     , _aiiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -155,7 +155,7 @@ aiiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aiiKey :: Lens' AutoscalersInsert' (Maybe Key)
+aiiKey :: Lens' AutoscalersInsert' (Maybe AuthKey)
 aiiKey = lens _aiiKey (\ s a -> s{_aiiKey = a})
 
 -- | OAuth 2.0 token for the current user.

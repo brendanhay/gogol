@@ -57,7 +57,7 @@ type ChangeLogsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] ChangeLog
 
@@ -69,7 +69,7 @@ data ChangeLogsGet' = ChangeLogsGet'
     , _clgPrettyPrint :: !Bool
     , _clgUserIP      :: !(Maybe Text)
     , _clgProFileId   :: !Int64
-    , _clgKey         :: !(Maybe Key)
+    , _clgKey         :: !(Maybe AuthKey)
     , _clgId          :: !Int64
     , _clgOAuthToken  :: !(Maybe OAuthToken)
     , _clgFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ clgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clgKey :: Lens' ChangeLogsGet' (Maybe Key)
+clgKey :: Lens' ChangeLogsGet' (Maybe AuthKey)
 clgKey = lens _clgKey (\ s a -> s{_clgKey = a})
 
 -- | Change log ID.

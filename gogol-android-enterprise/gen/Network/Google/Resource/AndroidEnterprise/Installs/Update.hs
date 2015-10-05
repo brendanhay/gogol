@@ -66,7 +66,7 @@ type InstallsUpdateResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Install :>
@@ -85,7 +85,7 @@ data InstallsUpdate' = InstallsUpdate'
     , _iuPayload      :: !Install
     , _iuUserId       :: !Text
     , _iuInstallId    :: !Text
-    , _iuKey          :: !(Maybe Key)
+    , _iuKey          :: !(Maybe AuthKey)
     , _iuDeviceId     :: !Text
     , _iuOAuthToken   :: !(Maybe OAuthToken)
     , _iuFields       :: !(Maybe Text)
@@ -180,7 +180,7 @@ iuInstallId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iuKey :: Lens' InstallsUpdate' (Maybe Key)
+iuKey :: Lens' InstallsUpdate' (Maybe AuthKey)
 iuKey = lens _iuKey (\ s a -> s{_iuKey = a})
 
 -- | The Android ID of the device.

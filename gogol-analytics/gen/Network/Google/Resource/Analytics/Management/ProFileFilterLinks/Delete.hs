@@ -64,7 +64,7 @@ type ManagementProFileFilterLinksDeleteResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -78,7 +78,7 @@ data ManagementProFileFilterLinksDelete' = ManagementProFileFilterLinksDelete'
     , _mpffldUserIP        :: !(Maybe Text)
     , _mpffldProFileId     :: !Text
     , _mpffldAccountId     :: !Text
-    , _mpffldKey           :: !(Maybe Key)
+    , _mpffldKey           :: !(Maybe AuthKey)
     , _mpffldLinkId        :: !Text
     , _mpffldOAuthToken    :: !(Maybe OAuthToken)
     , _mpffldFields        :: !(Maybe Text)
@@ -168,7 +168,7 @@ mpffldAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpffldKey :: Lens' ManagementProFileFilterLinksDelete' (Maybe Key)
+mpffldKey :: Lens' ManagementProFileFilterLinksDelete' (Maybe AuthKey)
 mpffldKey
   = lens _mpffldKey (\ s a -> s{_mpffldKey = a})
 

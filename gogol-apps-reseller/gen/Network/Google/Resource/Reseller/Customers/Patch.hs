@@ -56,7 +56,7 @@ type CustomersPatchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Customer :> Patch '[JSON] Customer
@@ -71,7 +71,7 @@ data CustomersPatch' = CustomersPatch'
     , _cpUserIP      :: !(Maybe Text)
     , _cpPayload     :: !Customer
     , _cpCustomerId  :: !Text
-    , _cpKey         :: !(Maybe Key)
+    , _cpKey         :: !(Maybe AuthKey)
     , _cpOAuthToken  :: !(Maybe OAuthToken)
     , _cpFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,7 +142,7 @@ cpCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cpKey :: Lens' CustomersPatch' (Maybe Key)
+cpKey :: Lens' CustomersPatch' (Maybe AuthKey)
 cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
 
 -- | OAuth 2.0 token for the current user.

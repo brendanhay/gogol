@@ -61,7 +61,7 @@ type LinksGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Link
 
@@ -77,7 +77,7 @@ data LinksGet' = LinksGet'
     , _lgUserIP      :: !(Maybe Text)
     , _lgRoleId      :: !Text
     , _lgRole        :: !LinksGetRole
-    , _lgKey         :: !(Maybe Key)
+    , _lgKey         :: !(Maybe AuthKey)
     , _lgLinkId      :: !Int64
     , _lgOAuthToken  :: !(Maybe OAuthToken)
     , _lgFields      :: !(Maybe Text)
@@ -152,7 +152,7 @@ lgRole = lens _lgRole (\ s a -> s{_lgRole = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lgKey :: Lens' LinksGet' (Maybe Key)
+lgKey :: Lens' LinksGet' (Maybe AuthKey)
 lgKey = lens _lgKey (\ s a -> s{_lgKey = a})
 
 -- | The ID of the link to look up.

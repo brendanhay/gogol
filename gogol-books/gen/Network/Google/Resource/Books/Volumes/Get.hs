@@ -64,7 +64,7 @@ type VolumesGetResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Volume
 
@@ -77,7 +77,7 @@ data VolumesGet' = VolumesGet'
     , _vgCountry                   :: !(Maybe Text)
     , _vgUserIP                    :: !(Maybe Text)
     , _vgPartner                   :: !(Maybe Text)
-    , _vgKey                       :: !(Maybe Key)
+    , _vgKey                       :: !(Maybe AuthKey)
     , _vgVolumeId                  :: !Text
     , _vgSource                    :: !(Maybe Text)
     , _vgProjection                :: !(Maybe VolumesGetProjection)
@@ -163,7 +163,7 @@ vgPartner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vgKey :: Lens' VolumesGet' (Maybe Key)
+vgKey :: Lens' VolumesGet' (Maybe AuthKey)
 vgKey = lens _vgKey (\ s a -> s{_vgKey = a})
 
 -- | ID of volume to retrieve.

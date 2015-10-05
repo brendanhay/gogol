@@ -60,7 +60,7 @@ type ManagedZonesListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ManagedZonesListResponse
@@ -73,7 +73,7 @@ data ManagedZonesList' = ManagedZonesList'
     , _mzlPrettyPrint :: !Bool
     , _mzlProject     :: !Text
     , _mzlUserIP      :: !(Maybe Text)
-    , _mzlKey         :: !(Maybe Key)
+    , _mzlKey         :: !(Maybe AuthKey)
     , _mzlPageToken   :: !(Maybe Text)
     , _mzlOAuthToken  :: !(Maybe OAuthToken)
     , _mzlDNSName     :: !(Maybe Text)
@@ -148,7 +148,7 @@ mzlUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mzlKey :: Lens' ManagedZonesList' (Maybe Key)
+mzlKey :: Lens' ManagedZonesList' (Maybe AuthKey)
 mzlKey = lens _mzlKey (\ s a -> s{_mzlKey = a})
 
 -- | Optional. A tag returned by a previous list request that was truncated.

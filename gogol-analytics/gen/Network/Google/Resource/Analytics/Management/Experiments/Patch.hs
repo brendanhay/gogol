@@ -65,7 +65,7 @@ type ManagementExperimentsPatchResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Experiment :>
@@ -83,7 +83,7 @@ data ManagementExperimentsPatch' = ManagementExperimentsPatch'
     , _mepPayload       :: !Experiment
     , _mepAccountId     :: !Text
     , _mepExperimentId  :: !Text
-    , _mepKey           :: !(Maybe Key)
+    , _mepKey           :: !(Maybe AuthKey)
     , _mepOAuthToken    :: !(Maybe OAuthToken)
     , _mepFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -184,7 +184,7 @@ mepExperimentId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mepKey :: Lens' ManagementExperimentsPatch' (Maybe Key)
+mepKey :: Lens' ManagementExperimentsPatch' (Maybe AuthKey)
 mepKey = lens _mepKey (\ s a -> s{_mepKey = a})
 
 -- | OAuth 2.0 token for the current user.

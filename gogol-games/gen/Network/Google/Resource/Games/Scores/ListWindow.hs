@@ -70,7 +70,7 @@ type ScoresListWindowResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] LeaderboardScores
@@ -87,7 +87,7 @@ data ScoresListWindow' = ScoresListWindow'
     , _slwTimeSpan          :: !ScoresListWindowTimeSpan
     , _slwReturnTopIfAbsent :: !(Maybe Bool)
     , _slwLeaderboardId     :: !Text
-    , _slwKey               :: !(Maybe Key)
+    , _slwKey               :: !(Maybe AuthKey)
     , _slwLanguage          :: !(Maybe Text)
     , _slwResultsAbove      :: !(Maybe Int32)
     , _slwPageToken         :: !(Maybe Text)
@@ -196,7 +196,7 @@ slwLeaderboardId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-slwKey :: Lens' ScoresListWindow' (Maybe Key)
+slwKey :: Lens' ScoresListWindow' (Maybe AuthKey)
 slwKey = lens _slwKey (\ s a -> s{_slwKey = a})
 
 -- | The preferred language to use for strings returned by this method.

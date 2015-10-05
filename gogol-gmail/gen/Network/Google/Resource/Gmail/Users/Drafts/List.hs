@@ -58,7 +58,7 @@ type UsersDraftsListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ListDraftsResponse
@@ -71,7 +71,7 @@ data UsersDraftsList' = UsersDraftsList'
     , _udlPrettyPrint :: !Bool
     , _udlUserIP      :: !(Maybe Text)
     , _udlUserId      :: !Text
-    , _udlKey         :: !(Maybe Key)
+    , _udlKey         :: !(Maybe AuthKey)
     , _udlPageToken   :: !(Maybe Text)
     , _udlOAuthToken  :: !(Maybe OAuthToken)
     , _udlMaxResults  :: !Word32
@@ -143,7 +143,7 @@ udlUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udlKey :: Lens' UsersDraftsList' (Maybe Key)
+udlKey :: Lens' UsersDraftsList' (Maybe AuthKey)
 udlKey = lens _udlKey (\ s a -> s{_udlKey = a})
 
 -- | Page token to retrieve a specific page of results in the list.

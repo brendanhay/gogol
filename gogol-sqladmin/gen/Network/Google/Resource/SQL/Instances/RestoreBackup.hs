@@ -59,7 +59,7 @@ type InstancesRestoreBackupResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] InstancesRestoreBackupRequest :>
@@ -74,7 +74,7 @@ data InstancesRestoreBackup' = InstancesRestoreBackup'
     , _irbProject     :: !Text
     , _irbUserIP      :: !(Maybe Text)
     , _irbPayload     :: !InstancesRestoreBackupRequest
-    , _irbKey         :: !(Maybe Key)
+    , _irbKey         :: !(Maybe AuthKey)
     , _irbOAuthToken  :: !(Maybe OAuthToken)
     , _irbFields      :: !(Maybe Text)
     , _irbInstance    :: !Text
@@ -151,7 +151,7 @@ irbPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-irbKey :: Lens' InstancesRestoreBackup' (Maybe Key)
+irbKey :: Lens' InstancesRestoreBackup' (Maybe AuthKey)
 irbKey = lens _irbKey (\ s a -> s{_irbKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -58,7 +58,7 @@ type PagesPublishResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] Page
 
@@ -71,7 +71,7 @@ data PagesPublish' = PagesPublish'
     , _pppUserIP      :: !(Maybe Text)
     , _pppBlogId      :: !Text
     , _pppPageId      :: !Text
-    , _pppKey         :: !(Maybe Key)
+    , _pppKey         :: !(Maybe AuthKey)
     , _pppOAuthToken  :: !(Maybe OAuthToken)
     , _pppFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ pppPageId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pppKey :: Lens' PagesPublish' (Maybe Key)
+pppKey :: Lens' PagesPublish' (Maybe AuthKey)
 pppKey = lens _pppKey (\ s a -> s{_pppKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -59,7 +59,7 @@ type BlogUserInfosGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] BlogUserInfo
 
@@ -72,7 +72,7 @@ data BlogUserInfosGet' = BlogUserInfosGet'
     , _buigUserIP      :: !(Maybe Text)
     , _buigBlogId      :: !Text
     , _buigUserId      :: !Text
-    , _buigKey         :: !(Maybe Key)
+    , _buigKey         :: !(Maybe AuthKey)
     , _buigMaxPosts    :: !(Maybe Word32)
     , _buigOAuthToken  :: !(Maybe OAuthToken)
     , _buigFields      :: !(Maybe Text)
@@ -150,7 +150,7 @@ buigUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-buigKey :: Lens' BlogUserInfosGet' (Maybe Key)
+buigKey :: Lens' BlogUserInfosGet' (Maybe AuthKey)
 buigKey = lens _buigKey (\ s a -> s{_buigKey = a})
 
 -- | Maximum number of posts to pull back with the blog.

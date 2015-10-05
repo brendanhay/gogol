@@ -59,7 +59,7 @@ type InstanceGroupManagersDeleteResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
@@ -73,7 +73,7 @@ data InstanceGroupManagersDelete' = InstanceGroupManagersDelete'
     , _igmdInstanceGroupManager :: !Text
     , _igmdUserIP               :: !(Maybe Text)
     , _igmdZone                 :: !Text
-    , _igmdKey                  :: !(Maybe Key)
+    , _igmdKey                  :: !(Maybe AuthKey)
     , _igmdOAuthToken           :: !(Maybe OAuthToken)
     , _igmdFields               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -155,7 +155,7 @@ igmdZone = lens _igmdZone (\ s a -> s{_igmdZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmdKey :: Lens' InstanceGroupManagersDelete' (Maybe Key)
+igmdKey :: Lens' InstanceGroupManagersDelete' (Maybe AuthKey)
 igmdKey = lens _igmdKey (\ s a -> s{_igmdKey = a})
 
 -- | OAuth 2.0 token for the current user.

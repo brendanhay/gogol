@@ -62,7 +62,7 @@ type NetworksListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] NetworkList
 
@@ -75,7 +75,7 @@ data NetworksList' = NetworksList'
     , _nlPrettyPrint :: !Bool
     , _nlProject     :: !Text
     , _nlUserIP      :: !(Maybe Text)
-    , _nlKey         :: !(Maybe Key)
+    , _nlKey         :: !(Maybe AuthKey)
     , _nlFilter      :: !(Maybe Text)
     , _nlPageToken   :: !(Maybe Text)
     , _nlOAuthToken  :: !(Maybe OAuthToken)
@@ -149,7 +149,7 @@ nlUserIP = lens _nlUserIP (\ s a -> s{_nlUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-nlKey :: Lens' NetworksList' (Maybe Key)
+nlKey :: Lens' NetworksList' (Maybe AuthKey)
 nlKey = lens _nlKey (\ s a -> s{_nlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

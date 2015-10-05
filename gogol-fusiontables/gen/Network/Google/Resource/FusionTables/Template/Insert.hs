@@ -56,7 +56,7 @@ type TemplateInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Template :> Post '[JSON] Template
@@ -69,7 +69,7 @@ data TemplateInsert' = TemplateInsert'
     , _tiPrettyPrint :: !Bool
     , _tiUserIP      :: !(Maybe Text)
     , _tiPayload     :: !Template
-    , _tiKey         :: !(Maybe Key)
+    , _tiKey         :: !(Maybe AuthKey)
     , _tiOAuthToken  :: !(Maybe OAuthToken)
     , _tiTableId     :: !Text
     , _tiFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ tiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tiKey :: Lens' TemplateInsert' (Maybe Key)
+tiKey :: Lens' TemplateInsert' (Maybe AuthKey)
 tiKey = lens _tiKey (\ s a -> s{_tiKey = a})
 
 -- | OAuth 2.0 token for the current user.

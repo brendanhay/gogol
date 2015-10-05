@@ -52,7 +52,7 @@ type AccountsListResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ListAccountsResponse
@@ -64,7 +64,7 @@ data AccountsList' = AccountsList'
     { _alQuotaUser   :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
     , _alUserIP      :: !(Maybe Text)
-    , _alKey         :: !(Maybe Key)
+    , _alKey         :: !(Maybe AuthKey)
     , _alOAuthToken  :: !(Maybe OAuthToken)
     , _alFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -117,7 +117,7 @@ alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alKey :: Lens' AccountsList' (Maybe Key)
+alKey :: Lens' AccountsList' (Maybe AuthKey)
 alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | OAuth 2.0 token for the current user.

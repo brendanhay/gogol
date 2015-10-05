@@ -56,7 +56,7 @@ type PretargetingConfigDeleteResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -68,7 +68,7 @@ data PretargetingConfigDelete' = PretargetingConfigDelete'
     , _pcdPrettyPrint :: !Bool
     , _pcdUserIP      :: !(Maybe Text)
     , _pcdAccountId   :: !Int64
-    , _pcdKey         :: !(Maybe Key)
+    , _pcdKey         :: !(Maybe AuthKey)
     , _pcdConfigId    :: !Int64
     , _pcdOAuthToken  :: !(Maybe OAuthToken)
     , _pcdFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ pcdAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pcdKey :: Lens' PretargetingConfigDelete' (Maybe Key)
+pcdKey :: Lens' PretargetingConfigDelete' (Maybe AuthKey)
 pcdKey = lens _pcdKey (\ s a -> s{_pcdKey = a})
 
 -- | The specific id of the configuration to delete.

@@ -84,7 +84,7 @@ type FilesUpdateResource =
                                      QueryParam "prettyPrint" Bool :>
                                        QueryParam "userIp" Text :>
                                          QueryParam "fields" Text :>
-                                           QueryParam "key" Key :>
+                                           QueryParam "key" AuthKey :>
                                              QueryParam "oauth_token" OAuthToken
                                                :>
                                                QueryParam "alt" AltJSON :>
@@ -110,7 +110,7 @@ data FilesUpdate' = FilesUpdate'
     , _fuMedia                     :: !Body
     , _fuTimedTextTrackName        :: !(Maybe Text)
     , _fuOCRLanguage               :: !(Maybe Text)
-    , _fuKey                       :: !(Maybe Key)
+    , _fuKey                       :: !(Maybe AuthKey)
     , _fuConvert                   :: !Bool
     , _fuSetModifiedDate           :: !Bool
     , _fuFileId                    :: !Text
@@ -288,7 +288,7 @@ fuOCRLanguage
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fuKey :: Lens' FilesUpdate' (Maybe Key)
+fuKey :: Lens' FilesUpdate' (Maybe AuthKey)
 fuKey = lens _fuKey (\ s a -> s{_fuKey = a})
 
 -- | This parameter is deprecated and has no function.

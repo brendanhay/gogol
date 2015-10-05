@@ -57,7 +57,7 @@ type AdvertiserGroupsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -69,7 +69,7 @@ data AdvertiserGroupsDelete' = AdvertiserGroupsDelete'
     , _agdPrettyPrint :: !Bool
     , _agdUserIP      :: !(Maybe Text)
     , _agdProFileId   :: !Int64
-    , _agdKey         :: !(Maybe Key)
+    , _agdKey         :: !(Maybe AuthKey)
     , _agdId          :: !Int64
     , _agdOAuthToken  :: !(Maybe OAuthToken)
     , _agdFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ agdProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agdKey :: Lens' AdvertiserGroupsDelete' (Maybe Key)
+agdKey :: Lens' AdvertiserGroupsDelete' (Maybe AuthKey)
 agdKey = lens _agdKey (\ s a -> s{_agdKey = a})
 
 -- | Advertiser group ID.

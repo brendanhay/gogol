@@ -59,7 +59,7 @@ type QuerySQLResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] SQLresponse
        :<|>
@@ -71,7 +71,7 @@ type QuerySQLResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltMedia :> Post '[OctetStream] Body
 
@@ -85,7 +85,7 @@ data QuerySQL' = QuerySQL'
     , _qsqlPrettyPrint :: !Bool
     , _qsqlHdrs        :: !(Maybe Bool)
     , _qsqlUserIP      :: !(Maybe Text)
-    , _qsqlKey         :: !(Maybe Key)
+    , _qsqlKey         :: !(Maybe AuthKey)
     , _qsqlOAuthToken  :: !(Maybe OAuthToken)
     , _qsqlSQL         :: !Text
     , _qsqlFields      :: !(Maybe Text)
@@ -161,7 +161,7 @@ qsqlUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-qsqlKey :: Lens' QuerySQL' (Maybe Key)
+qsqlKey :: Lens' QuerySQL' (Maybe AuthKey)
 qsqlKey = lens _qsqlKey (\ s a -> s{_qsqlKey = a})
 
 -- | OAuth 2.0 token for the current user.

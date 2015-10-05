@@ -66,7 +66,7 @@ type AccountsContainersMoveFoldersUpdateResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :> Put '[JSON] ()
 
@@ -83,7 +83,7 @@ data AccountsContainersMoveFoldersUpdate' = AccountsContainersMoveFoldersUpdate'
     , _acmfuFolderId    :: !Text
     , _acmfuAccountId   :: !Text
     , _acmfuTagId       :: !(Maybe [Text])
-    , _acmfuKey         :: !(Maybe Key)
+    , _acmfuKey         :: !(Maybe AuthKey)
     , _acmfuOAuthToken  :: !(Maybe OAuthToken)
     , _acmfuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -200,7 +200,7 @@ acmfuTagId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acmfuKey :: Lens' AccountsContainersMoveFoldersUpdate' (Maybe Key)
+acmfuKey :: Lens' AccountsContainersMoveFoldersUpdate' (Maybe AuthKey)
 acmfuKey = lens _acmfuKey (\ s a -> s{_acmfuKey = a})
 
 -- | OAuth 2.0 token for the current user.

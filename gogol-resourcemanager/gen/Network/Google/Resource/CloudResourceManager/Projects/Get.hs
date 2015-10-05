@@ -69,7 +69,7 @@ type ProjectsGetResource =
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] Project
@@ -88,7 +88,7 @@ data ProjectsGet' = ProjectsGet'
     , _pgAccessToken    :: !(Maybe Text)
     , _pgUploadType     :: !(Maybe Text)
     , _pgBearerToken    :: !(Maybe Text)
-    , _pgKey            :: !(Maybe Key)
+    , _pgKey            :: !(Maybe AuthKey)
     , _pgProjectId      :: !Text
     , _pgOAuthToken     :: !(Maybe OAuthToken)
     , _pgFields         :: !(Maybe Text)
@@ -191,7 +191,7 @@ pgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgKey :: Lens' ProjectsGet' (Maybe Key)
+pgKey :: Lens' ProjectsGet' (Maybe AuthKey)
 pgKey = lens _pgKey (\ s a -> s{_pgKey = a})
 
 -- | The project ID (for example, \`my-project-123\`). Required.

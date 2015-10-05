@@ -59,7 +59,7 @@ type PlayListsInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] PlayList :> Post '[JSON] PlayList
@@ -74,7 +74,7 @@ data PlayListsInsert' = PlayListsInsert'
     , _pliUserIP                        :: !(Maybe Text)
     , _pliPayload                       :: !PlayList
     , _pliOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _pliKey                           :: !(Maybe Key)
+    , _pliKey                           :: !(Maybe AuthKey)
     , _pliOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _pliOAuthToken                    :: !(Maybe OAuthToken)
     , _pliFields                        :: !(Maybe Text)
@@ -169,7 +169,7 @@ pliOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pliKey :: Lens' PlayListsInsert' (Maybe Key)
+pliKey :: Lens' PlayListsInsert' (Maybe AuthKey)
 pliKey = lens _pliKey (\ s a -> s{_pliKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:

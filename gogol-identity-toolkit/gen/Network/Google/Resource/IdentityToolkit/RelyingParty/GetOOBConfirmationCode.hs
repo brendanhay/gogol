@@ -53,7 +53,7 @@ type RelyingPartyGetOOBConfirmationCodeResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] RelyingParty :>
@@ -67,7 +67,7 @@ data RelyingPartyGetOOBConfirmationCode' = RelyingPartyGetOOBConfirmationCode'
     , _rpgoobccPrettyPrint :: !Bool
     , _rpgoobccUserIP      :: !(Maybe Text)
     , _rpgoobccPayload     :: !RelyingParty
-    , _rpgoobccKey         :: !(Maybe Key)
+    , _rpgoobccKey         :: !(Maybe AuthKey)
     , _rpgoobccOAuthToken  :: !(Maybe OAuthToken)
     , _rpgoobccFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -133,7 +133,7 @@ rpgoobccPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rpgoobccKey :: Lens' RelyingPartyGetOOBConfirmationCode' (Maybe Key)
+rpgoobccKey :: Lens' RelyingPartyGetOOBConfirmationCode' (Maybe AuthKey)
 rpgoobccKey
   = lens _rpgoobccKey (\ s a -> s{_rpgoobccKey = a})
 

@@ -57,7 +57,7 @@ type NetworksInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Network :> Post '[JSON] Operation
@@ -72,7 +72,7 @@ data NetworksInsert' = NetworksInsert'
     , _niProject     :: !Text
     , _niUserIP      :: !(Maybe Text)
     , _niPayload     :: !Network
-    , _niKey         :: !(Maybe Key)
+    , _niKey         :: !(Maybe AuthKey)
     , _niOAuthToken  :: !(Maybe OAuthToken)
     , _niFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ niPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-niKey :: Lens' NetworksInsert' (Maybe Key)
+niKey :: Lens' NetworksInsert' (Maybe AuthKey)
 niKey = lens _niKey (\ s a -> s{_niKey = a})
 
 -- | OAuth 2.0 token for the current user.

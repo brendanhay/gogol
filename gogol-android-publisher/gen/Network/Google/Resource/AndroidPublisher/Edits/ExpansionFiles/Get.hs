@@ -64,7 +64,7 @@ type EditsExpansionFilesGetResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ExpansionFile
@@ -78,7 +78,7 @@ data EditsExpansionFilesGet' = EditsExpansionFilesGet'
     , _eefgPackageName       :: !Text
     , _eefgAPKVersionCode    :: !Int32
     , _eefgUserIP            :: !(Maybe Text)
-    , _eefgKey               :: !(Maybe Key)
+    , _eefgKey               :: !(Maybe AuthKey)
     , _eefgExpansionFileType :: !EditsExpansionFilesGetExpansionFileType
     , _eefgOAuthToken        :: !(Maybe OAuthToken)
     , _eefgEditId            :: !Text
@@ -165,7 +165,7 @@ eefgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eefgKey :: Lens' EditsExpansionFilesGet' (Maybe Key)
+eefgKey :: Lens' EditsExpansionFilesGet' (Maybe AuthKey)
 eefgKey = lens _eefgKey (\ s a -> s{_eefgKey = a})
 
 eefgExpansionFileType :: Lens' EditsExpansionFilesGet' EditsExpansionFilesGetExpansionFileType

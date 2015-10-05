@@ -62,7 +62,7 @@ type DatabasesUpdateResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Database :> Put '[JSON] Operation
@@ -78,7 +78,7 @@ data DatabasesUpdate' = DatabasesUpdate'
     , _duDatabase    :: !Text
     , _duUserIP      :: !(Maybe Text)
     , _duPayload     :: !Database
-    , _duKey         :: !(Maybe Key)
+    , _duKey         :: !(Maybe AuthKey)
     , _duOAuthToken  :: !(Maybe OAuthToken)
     , _duFields      :: !(Maybe Text)
     , _duInstance    :: !Text
@@ -163,7 +163,7 @@ duPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-duKey :: Lens' DatabasesUpdate' (Maybe Key)
+duKey :: Lens' DatabasesUpdate' (Maybe AuthKey)
 duKey = lens _duKey (\ s a -> s{_duKey = a})
 
 -- | OAuth 2.0 token for the current user.

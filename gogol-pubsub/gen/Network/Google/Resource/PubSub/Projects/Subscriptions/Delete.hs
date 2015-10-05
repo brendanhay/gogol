@@ -70,7 +70,7 @@ type ProjectsSubscriptionsDeleteResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Delete '[JSON] Empty
@@ -91,7 +91,7 @@ data ProjectsSubscriptionsDelete' = ProjectsSubscriptionsDelete'
     , _psdAccessToken    :: !(Maybe Text)
     , _psdUploadType     :: !(Maybe Text)
     , _psdBearerToken    :: !(Maybe Text)
-    , _psdKey            :: !(Maybe Key)
+    , _psdKey            :: !(Maybe AuthKey)
     , _psdOAuthToken     :: !(Maybe OAuthToken)
     , _psdSubscription   :: !Text
     , _psdFields         :: !(Maybe Text)
@@ -195,7 +195,7 @@ psdBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psdKey :: Lens' ProjectsSubscriptionsDelete' (Maybe Key)
+psdKey :: Lens' ProjectsSubscriptionsDelete' (Maybe AuthKey)
 psdKey = lens _psdKey (\ s a -> s{_psdKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -60,7 +60,7 @@ type MobileDevicesGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] MobileDevice
@@ -74,7 +74,7 @@ data MobileDevicesGet' = MobileDevicesGet'
     , _mdgPrettyPrint :: !Bool
     , _mdgUserIP      :: !(Maybe Text)
     , _mdgCustomerId  :: !Text
-    , _mdgKey         :: !(Maybe Key)
+    , _mdgKey         :: !(Maybe AuthKey)
     , _mdgProjection  :: !(Maybe MobileDevicesGetProjection)
     , _mdgOAuthToken  :: !(Maybe OAuthToken)
     , _mdgFields      :: !(Maybe Text)
@@ -152,7 +152,7 @@ mdgCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mdgKey :: Lens' MobileDevicesGet' (Maybe Key)
+mdgKey :: Lens' MobileDevicesGet' (Maybe AuthKey)
 mdgKey = lens _mdgKey (\ s a -> s{_mdgKey = a})
 
 -- | Restrict information returned to a set of selected fields.

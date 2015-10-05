@@ -70,7 +70,7 @@ type FilesCopyResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] File :> Post '[JSON] File
@@ -88,7 +88,7 @@ data FilesCopy' = FilesCopy'
     , _fcPayload            :: !File
     , _fcTimedTextTrackName :: !(Maybe Text)
     , _fcOCRLanguage        :: !(Maybe Text)
-    , _fcKey                :: !(Maybe Key)
+    , _fcKey                :: !(Maybe AuthKey)
     , _fcConvert            :: !Bool
     , _fcFileId             :: !Text
     , _fcOAuthToken         :: !(Maybe OAuthToken)
@@ -208,7 +208,7 @@ fcOCRLanguage
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fcKey :: Lens' FilesCopy' (Maybe Key)
+fcKey :: Lens' FilesCopy' (Maybe AuthKey)
 fcKey = lens _fcKey (\ s a -> s{_fcKey = a})
 
 -- | Whether to convert this file to the corresponding Google Docs format.

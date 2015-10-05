@@ -57,7 +57,7 @@ type VideosUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Video :> Put '[JSON] Video
@@ -72,7 +72,7 @@ data VideosUpdate' = VideosUpdate'
     , _vuUserIP                 :: !(Maybe Text)
     , _vuPayload                :: !Video
     , _vuOnBehalfOfContentOwner :: !(Maybe Text)
-    , _vuKey                    :: !(Maybe Key)
+    , _vuKey                    :: !(Maybe AuthKey)
     , _vuOAuthToken             :: !(Maybe OAuthToken)
     , _vuFields                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -176,7 +176,7 @@ vuOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vuKey :: Lens' VideosUpdate' (Maybe Key)
+vuKey :: Lens' VideosUpdate' (Maybe AuthKey)
 vuKey = lens _vuKey (\ s a -> s{_vuKey = a})
 
 -- | OAuth 2.0 token for the current user.

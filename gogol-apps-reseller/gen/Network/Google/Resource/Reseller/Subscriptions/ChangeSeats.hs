@@ -59,7 +59,7 @@ type SubscriptionsChangeSeatsResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Seats :> Post '[JSON] Subscription
@@ -73,7 +73,7 @@ data SubscriptionsChangeSeats' = SubscriptionsChangeSeats'
     , _scsUserIP         :: !(Maybe Text)
     , _scsPayload        :: !Seats
     , _scsCustomerId     :: !Text
-    , _scsKey            :: !(Maybe Key)
+    , _scsKey            :: !(Maybe AuthKey)
     , _scsOAuthToken     :: !(Maybe OAuthToken)
     , _scsSubscriptionId :: !Text
     , _scsFields         :: !(Maybe Text)
@@ -151,7 +151,7 @@ scsCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-scsKey :: Lens' SubscriptionsChangeSeats' (Maybe Key)
+scsKey :: Lens' SubscriptionsChangeSeats' (Maybe AuthKey)
 scsKey = lens _scsKey (\ s a -> s{_scsKey = a})
 
 -- | OAuth 2.0 token for the current user.

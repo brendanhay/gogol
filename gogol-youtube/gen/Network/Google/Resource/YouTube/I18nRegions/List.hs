@@ -56,7 +56,7 @@ type I18nRegionsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] I18nRegionListResponse
@@ -70,7 +70,7 @@ data I18nRegionsList' = I18nRegionsList'
     , _irlPrettyPrint :: !Bool
     , _irlUserIP      :: !(Maybe Text)
     , _irlHl          :: !Text
-    , _irlKey         :: !(Maybe Key)
+    , _irlKey         :: !(Maybe AuthKey)
     , _irlOAuthToken  :: !(Maybe OAuthToken)
     , _irlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -141,7 +141,7 @@ irlHl = lens _irlHl (\ s a -> s{_irlHl = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-irlKey :: Lens' I18nRegionsList' (Maybe Key)
+irlKey :: Lens' I18nRegionsList' (Maybe AuthKey)
 irlKey = lens _irlKey (\ s a -> s{_irlKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -56,7 +56,7 @@ type CreativeGroupsUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] CreativeGroup :>
@@ -71,7 +71,7 @@ data CreativeGroupsUpdate' = CreativeGroupsUpdate'
     , _cguUserIP      :: !(Maybe Text)
     , _cguProFileId   :: !Int64
     , _cguPayload     :: !CreativeGroup
-    , _cguKey         :: !(Maybe Key)
+    , _cguKey         :: !(Maybe AuthKey)
     , _cguOAuthToken  :: !(Maybe OAuthToken)
     , _cguFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ cguPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cguKey :: Lens' CreativeGroupsUpdate' (Maybe Key)
+cguKey :: Lens' CreativeGroupsUpdate' (Maybe AuthKey)
 cguKey = lens _cguKey (\ s a -> s{_cguKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -56,7 +56,7 @@ type PlacementsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Placement :> Post '[JSON] Placement
@@ -70,7 +70,7 @@ data PlacementsInsert' = PlacementsInsert'
     , _piUserIP      :: !(Maybe Text)
     , _piProFileId   :: !Int64
     , _piPayload     :: !Placement
-    , _piKey         :: !(Maybe Key)
+    , _piKey         :: !(Maybe AuthKey)
     , _piOAuthToken  :: !(Maybe OAuthToken)
     , _piFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -141,7 +141,7 @@ piPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-piKey :: Lens' PlacementsInsert' (Maybe Key)
+piKey :: Lens' PlacementsInsert' (Maybe AuthKey)
 piKey = lens _piKey (\ s a -> s{_piKey = a})
 
 -- | OAuth 2.0 token for the current user.

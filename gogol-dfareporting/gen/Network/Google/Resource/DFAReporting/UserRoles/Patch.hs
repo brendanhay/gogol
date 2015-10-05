@@ -58,7 +58,7 @@ type UserRolesPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] UserRole :> Patch '[JSON] UserRole
@@ -72,7 +72,7 @@ data UserRolesPatch' = UserRolesPatch'
     , _urpUserIP      :: !(Maybe Text)
     , _urpProFileId   :: !Int64
     , _urpPayload     :: !UserRole
-    , _urpKey         :: !(Maybe Key)
+    , _urpKey         :: !(Maybe AuthKey)
     , _urpId          :: !Int64
     , _urpOAuthToken  :: !(Maybe OAuthToken)
     , _urpFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ urpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-urpKey :: Lens' UserRolesPatch' (Maybe Key)
+urpKey :: Lens' UserRolesPatch' (Maybe AuthKey)
 urpKey = lens _urpKey (\ s a -> s{_urpKey = a})
 
 -- | User role ID.

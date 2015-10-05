@@ -57,7 +57,7 @@ type ChildrenGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ChildReference
@@ -70,7 +70,7 @@ data ChildrenGet' = ChildrenGet'
     , _cggPrettyPrint :: !Bool
     , _cggUserIP      :: !(Maybe Text)
     , _cggFolderId    :: !Text
-    , _cggKey         :: !(Maybe Key)
+    , _cggKey         :: !(Maybe AuthKey)
     , _cggChildId     :: !Text
     , _cggOAuthToken  :: !(Maybe OAuthToken)
     , _cggFields      :: !(Maybe Text)
@@ -138,7 +138,7 @@ cggFolderId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cggKey :: Lens' ChildrenGet' (Maybe Key)
+cggKey :: Lens' ChildrenGet' (Maybe AuthKey)
 cggKey = lens _cggKey (\ s a -> s{_cggKey = a})
 
 -- | The ID of the child.

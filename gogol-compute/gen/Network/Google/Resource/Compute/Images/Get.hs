@@ -57,7 +57,7 @@ type ImagesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Image
 
@@ -70,7 +70,7 @@ data ImagesGet' = ImagesGet'
     , _imaPrettyPrint :: !Bool
     , _imaProject     :: !Text
     , _imaUserIP      :: !(Maybe Text)
-    , _imaKey         :: !(Maybe Key)
+    , _imaKey         :: !(Maybe AuthKey)
     , _imaOAuthToken  :: !(Maybe OAuthToken)
     , _imaFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -141,7 +141,7 @@ imaUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-imaKey :: Lens' ImagesGet' (Maybe Key)
+imaKey :: Lens' ImagesGet' (Maybe AuthKey)
 imaKey = lens _imaKey (\ s a -> s{_imaKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -58,7 +58,7 @@ type NotificationsUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Notification :>
@@ -73,7 +73,7 @@ data NotificationsUpdate' = NotificationsUpdate'
     , _nuUserIP         :: !(Maybe Text)
     , _nuPayload        :: !Notification
     , _nuCustomer       :: !Text
-    , _nuKey            :: !(Maybe Key)
+    , _nuKey            :: !(Maybe AuthKey)
     , _nuNotificationId :: !Text
     , _nuOAuthToken     :: !(Maybe OAuthToken)
     , _nuFields         :: !(Maybe Text)
@@ -149,7 +149,7 @@ nuCustomer
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-nuKey :: Lens' NotificationsUpdate' (Maybe Key)
+nuKey :: Lens' NotificationsUpdate' (Maybe AuthKey)
 nuKey = lens _nuKey (\ s a -> s{_nuKey = a})
 
 -- | The unique ID of the notification.

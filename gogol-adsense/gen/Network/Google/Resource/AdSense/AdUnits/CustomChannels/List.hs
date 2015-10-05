@@ -62,7 +62,7 @@ type AdUnitsCustomChannelsListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CustomChannels
@@ -76,7 +76,7 @@ data AdUnitsCustomChannelsList' = AdUnitsCustomChannelsList'
     , _aucclUserIP      :: !(Maybe Text)
     , _aucclAdUnitId    :: !Text
     , _aucclAdClientId  :: !Text
-    , _aucclKey         :: !(Maybe Key)
+    , _aucclKey         :: !(Maybe AuthKey)
     , _aucclPageToken   :: !(Maybe Text)
     , _aucclOAuthToken  :: !(Maybe OAuthToken)
     , _aucclMaxResults  :: !(Maybe Int32)
@@ -159,7 +159,7 @@ aucclAdClientId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aucclKey :: Lens' AdUnitsCustomChannelsList' (Maybe Key)
+aucclKey :: Lens' AdUnitsCustomChannelsList' (Maybe AuthKey)
 aucclKey = lens _aucclKey (\ s a -> s{_aucclKey = a})
 
 -- | A continuation token, used to page through custom channels. To retrieve

@@ -56,7 +56,7 @@ type TimelineUpdateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        MultipartRelated '[JSON] TimelineItem Body :>
@@ -71,7 +71,7 @@ data TimelineUpdate' = TimelineUpdate'
     , _tuUserIP      :: !(Maybe Text)
     , _tuPayload     :: !TimelineItem
     , _tuMedia       :: !Body
-    , _tuKey         :: !(Maybe Key)
+    , _tuKey         :: !(Maybe AuthKey)
     , _tuId          :: !Text
     , _tuOAuthToken  :: !(Maybe OAuthToken)
     , _tuFields      :: !(Maybe Text)
@@ -145,7 +145,7 @@ tuMedia = lens _tuMedia (\ s a -> s{_tuMedia = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tuKey :: Lens' TimelineUpdate' (Maybe Key)
+tuKey :: Lens' TimelineUpdate' (Maybe AuthKey)
 tuKey = lens _tuKey (\ s a -> s{_tuKey = a})
 
 -- | The ID of the timeline item.

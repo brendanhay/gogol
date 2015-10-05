@@ -73,7 +73,7 @@ type DataMcfGetResource =
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] McfData
@@ -90,7 +90,7 @@ data DataMcfGet' = DataMcfGet'
     , _dmgFilters       :: !(Maybe Text)
     , _dmgIds           :: !Text
     , _dmgEndDate       :: !Text
-    , _dmgKey           :: !(Maybe Key)
+    , _dmgKey           :: !(Maybe AuthKey)
     , _dmgSort          :: !(Maybe Text)
     , _dmgDimensions    :: !(Maybe Text)
     , _dmgOAuthToken    :: !(Maybe OAuthToken)
@@ -214,7 +214,7 @@ dmgEndDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dmgKey :: Lens' DataMcfGet' (Maybe Key)
+dmgKey :: Lens' DataMcfGet' (Maybe AuthKey)
 dmgKey = lens _dmgKey (\ s a -> s{_dmgKey = a})
 
 -- | A comma-separated list of dimensions or metrics that determine the sort

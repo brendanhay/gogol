@@ -56,7 +56,7 @@ type CustomChannelsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] CustomChannel :>
@@ -71,7 +71,7 @@ data CustomChannelsInsert' = CustomChannelsInsert'
     , _cciUserIP      :: !(Maybe Text)
     , _cciPayload     :: !CustomChannel
     , _cciAdClientId  :: !Text
-    , _cciKey         :: !(Maybe Key)
+    , _cciKey         :: !(Maybe AuthKey)
     , _cciOAuthToken  :: !(Maybe OAuthToken)
     , _cciFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ cciAdClientId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cciKey :: Lens' CustomChannelsInsert' (Maybe Key)
+cciKey :: Lens' CustomChannelsInsert' (Maybe AuthKey)
 cciKey = lens _cciKey (\ s a -> s{_cciKey = a})
 
 -- | OAuth 2.0 token for the current user.

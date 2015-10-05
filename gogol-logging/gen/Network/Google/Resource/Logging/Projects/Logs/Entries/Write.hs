@@ -77,7 +77,7 @@ type ProjectsLogsEntriesWriteResource =
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            ReqBody '[JSON]
@@ -105,7 +105,7 @@ data ProjectsLogsEntriesWrite' = ProjectsLogsEntriesWrite'
     , _plewUploadType     :: !(Maybe Text)
     , _plewPayload        :: !WriteLogEntriesRequest
     , _plewBearerToken    :: !(Maybe Text)
-    , _plewKey            :: !(Maybe Key)
+    , _plewKey            :: !(Maybe AuthKey)
     , _plewOAuthToken     :: !(Maybe OAuthToken)
     , _plewProjectsId     :: !Text
     , _plewFields         :: !(Maybe Text)
@@ -229,7 +229,7 @@ plewBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plewKey :: Lens' ProjectsLogsEntriesWrite' (Maybe Key)
+plewKey :: Lens' ProjectsLogsEntriesWrite' (Maybe AuthKey)
 plewKey = lens _plewKey (\ s a -> s{_plewKey = a})
 
 -- | OAuth 2.0 token for the current user.

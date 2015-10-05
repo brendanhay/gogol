@@ -56,7 +56,7 @@ type AdvertiserGroupsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] AdvertiserGroup :>
@@ -71,7 +71,7 @@ data AdvertiserGroupsInsert' = AdvertiserGroupsInsert'
     , _agiUserIP      :: !(Maybe Text)
     , _agiProFileId   :: !Int64
     , _agiPayload     :: !AdvertiserGroup
-    , _agiKey         :: !(Maybe Key)
+    , _agiKey         :: !(Maybe AuthKey)
     , _agiOAuthToken  :: !(Maybe OAuthToken)
     , _agiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ agiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agiKey :: Lens' AdvertiserGroupsInsert' (Maybe Key)
+agiKey :: Lens' AdvertiserGroupsInsert' (Maybe AuthKey)
 agiKey = lens _agiKey (\ s a -> s{_agiKey = a})
 
 -- | OAuth 2.0 token for the current user.

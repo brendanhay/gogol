@@ -61,7 +61,7 @@ type TaskListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] TaskList
 
@@ -72,7 +72,7 @@ data TaskList' = TaskList'
     { _tlQuotaUser   :: !(Maybe Text)
     , _tlPrettyPrint :: !Bool
     , _tlUserIP      :: !(Maybe Text)
-    , _tlKey         :: !(Maybe Key)
+    , _tlKey         :: !(Maybe AuthKey)
     , _tlPageToken   :: !(Maybe Text)
     , _tlOAuthToken  :: !(Maybe OAuthToken)
     , _tlTableId     :: !Text
@@ -142,7 +142,7 @@ tlUserIP = lens _tlUserIP (\ s a -> s{_tlUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tlKey :: Lens' TaskList' (Maybe Key)
+tlKey :: Lens' TaskList' (Maybe AuthKey)
 tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | Continuation token specifying which result page to return.

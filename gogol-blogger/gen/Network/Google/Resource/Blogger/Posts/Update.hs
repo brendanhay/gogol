@@ -68,7 +68,7 @@ type PostsUpdateResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Post' :> Put '[JSON] Post'
@@ -85,7 +85,7 @@ data PostsUpdate' = PostsUpdate'
     , _puBlogId      :: !Text
     , _puPayload     :: !Post'
     , _puMaxComments :: !(Maybe Word32)
-    , _puKey         :: !(Maybe Key)
+    , _puKey         :: !(Maybe AuthKey)
     , _puRevert      :: !(Maybe Bool)
     , _puPostId      :: !Text
     , _puOAuthToken  :: !(Maybe OAuthToken)
@@ -196,7 +196,7 @@ puMaxComments
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puKey :: Lens' PostsUpdate' (Maybe Key)
+puKey :: Lens' PostsUpdate' (Maybe AuthKey)
 puKey = lens _puKey (\ s a -> s{_puKey = a})
 
 -- | Whether a revert action should be performed when the post is updated

@@ -60,7 +60,7 @@ type RepliesDeleteResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -71,7 +71,7 @@ data RepliesDelete' = RepliesDelete'
     { _rddQuotaUser   :: !(Maybe Text)
     , _rddPrettyPrint :: !Bool
     , _rddUserIP      :: !(Maybe Text)
-    , _rddKey         :: !(Maybe Key)
+    , _rddKey         :: !(Maybe AuthKey)
     , _rddReplyId     :: !Text
     , _rddFileId      :: !Text
     , _rddOAuthToken  :: !(Maybe OAuthToken)
@@ -140,7 +140,7 @@ rddUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rddKey :: Lens' RepliesDelete' (Maybe Key)
+rddKey :: Lens' RepliesDelete' (Maybe AuthKey)
 rddKey = lens _rddKey (\ s a -> s{_rddKey = a})
 
 -- | The ID of the reply.

@@ -64,7 +64,7 @@ type PlacementsGeneratetagsResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Post '[JSON] PlacementsGenerateTagsResponse
@@ -79,7 +79,7 @@ data PlacementsGeneratetags' = PlacementsGeneratetags'
     , _pUserIP       :: !(Maybe Text)
     , _pCampaignId   :: !(Maybe Int64)
     , _pProFileId    :: !Int64
-    , _pKey          :: !(Maybe Key)
+    , _pKey          :: !(Maybe AuthKey)
     , _pPlacementIds :: !(Maybe [Int64])
     , _pOAuthToken   :: !(Maybe OAuthToken)
     , _pFields       :: !(Maybe Text)
@@ -163,7 +163,7 @@ pProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pKey :: Lens' PlacementsGeneratetags' (Maybe Key)
+pKey :: Lens' PlacementsGeneratetags' (Maybe AuthKey)
 pKey = lens _pKey (\ s a -> s{_pKey = a})
 
 -- | Generate tags for these placements.

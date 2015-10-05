@@ -63,7 +63,7 @@ type ManagementUploadsUploadDataResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[OctetStream] Body :>
@@ -80,7 +80,7 @@ data ManagementUploadsUploadData' = ManagementUploadsUploadData'
     , _muudCustomDataSourceId :: !Text
     , _muudMedia              :: !Body
     , _muudAccountId          :: !Text
-    , _muudKey                :: !(Maybe Key)
+    , _muudKey                :: !(Maybe AuthKey)
     , _muudOAuthToken         :: !(Maybe OAuthToken)
     , _muudFields             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -173,7 +173,7 @@ muudAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-muudKey :: Lens' ManagementUploadsUploadData' (Maybe Key)
+muudKey :: Lens' ManagementUploadsUploadData' (Maybe AuthKey)
 muudKey = lens _muudKey (\ s a -> s{_muudKey = a})
 
 -- | OAuth 2.0 token for the current user.

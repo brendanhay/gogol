@@ -74,7 +74,7 @@ type InventoryItemsListResource =
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "userIp" Text :>
                                      QueryParam "fields" Text :>
-                                       QueryParam "key" Key :>
+                                       QueryParam "key" AuthKey :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON]
@@ -91,7 +91,7 @@ data InventoryItemsList' = InventoryItemsList'
     , _iilProFileId   :: !Int64
     , _iilSortOrder   :: !(Maybe InventoryItemsListSortOrder)
     , _iilInPlan      :: !(Maybe Bool)
-    , _iilKey         :: !(Maybe Key)
+    , _iilKey         :: !(Maybe AuthKey)
     , _iilPageToken   :: !(Maybe Text)
     , _iilProjectId   :: !Int64
     , _iilSortField   :: !(Maybe InventoryItemsListSortField)
@@ -204,7 +204,7 @@ iilInPlan
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iilKey :: Lens' InventoryItemsList' (Maybe Key)
+iilKey :: Lens' InventoryItemsList' (Maybe AuthKey)
 iilKey = lens _iilKey (\ s a -> s{_iilKey = a})
 
 -- | Value of the nextPageToken from the previous result page.

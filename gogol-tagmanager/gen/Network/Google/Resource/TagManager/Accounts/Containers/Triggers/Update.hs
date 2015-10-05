@@ -63,7 +63,7 @@ type AccountsContainersTriggersUpdateResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Trigger :> Put '[JSON] Trigger
@@ -80,7 +80,7 @@ data AccountsContainersTriggersUpdate' = AccountsContainersTriggersUpdate'
     , _actuFingerprint :: !(Maybe Text)
     , _actuPayload     :: !Trigger
     , _actuAccountId   :: !Text
-    , _actuKey         :: !(Maybe Key)
+    , _actuKey         :: !(Maybe AuthKey)
     , _actuOAuthToken  :: !(Maybe OAuthToken)
     , _actuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -184,7 +184,7 @@ actuAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-actuKey :: Lens' AccountsContainersTriggersUpdate' (Maybe Key)
+actuKey :: Lens' AccountsContainersTriggersUpdate' (Maybe AuthKey)
 actuKey = lens _actuKey (\ s a -> s{_actuKey = a})
 
 -- | OAuth 2.0 token for the current user.

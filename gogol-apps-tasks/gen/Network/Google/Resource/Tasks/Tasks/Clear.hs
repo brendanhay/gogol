@@ -57,7 +57,7 @@ type TasksClearResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -70,7 +70,7 @@ data TasksClear' = TasksClear'
     { _tcQuotaUser   :: !(Maybe Text)
     , _tcPrettyPrint :: !Bool
     , _tcUserIP      :: !(Maybe Text)
-    , _tcKey         :: !(Maybe Key)
+    , _tcKey         :: !(Maybe AuthKey)
     , _tcTaskList    :: !Text
     , _tcOAuthToken  :: !(Maybe OAuthToken)
     , _tcFields      :: !(Maybe Text)
@@ -128,7 +128,7 @@ tcUserIP = lens _tcUserIP (\ s a -> s{_tcUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tcKey :: Lens' TasksClear' (Maybe Key)
+tcKey :: Lens' TasksClear' (Maybe AuthKey)
 tcKey = lens _tcKey (\ s a -> s{_tcKey = a})
 
 -- | Task list identifier.

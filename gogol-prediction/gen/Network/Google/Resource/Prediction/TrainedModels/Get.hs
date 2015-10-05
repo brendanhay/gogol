@@ -56,7 +56,7 @@ type TrainedModelsGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Insert2
 
@@ -68,7 +68,7 @@ data TrainedModelsGet' = TrainedModelsGet'
     , _tmgPrettyPrint :: !Bool
     , _tmgProject     :: !Text
     , _tmgUserIP      :: !(Maybe Text)
-    , _tmgKey         :: !(Maybe Key)
+    , _tmgKey         :: !(Maybe AuthKey)
     , _tmgId          :: !Text
     , _tmgOAuthToken  :: !(Maybe OAuthToken)
     , _tmgFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ tmgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tmgKey :: Lens' TrainedModelsGet' (Maybe Key)
+tmgKey :: Lens' TrainedModelsGet' (Maybe AuthKey)
 tmgKey = lens _tmgKey (\ s a -> s{_tmgKey = a})
 
 -- | The unique name for the predictive model.

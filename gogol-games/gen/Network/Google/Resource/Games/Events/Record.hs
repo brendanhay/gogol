@@ -56,7 +56,7 @@ type EventsRecordResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] EventRecordRequest :>
@@ -71,7 +71,7 @@ data EventsRecord' = EventsRecord'
     , _erPrettyPrint :: !Bool
     , _erUserIP      :: !(Maybe Text)
     , _erPayload     :: !EventRecordRequest
-    , _erKey         :: !(Maybe Key)
+    , _erKey         :: !(Maybe AuthKey)
     , _erLanguage    :: !(Maybe Text)
     , _erOAuthToken  :: !(Maybe OAuthToken)
     , _erFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ erPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-erKey :: Lens' EventsRecord' (Maybe Key)
+erKey :: Lens' EventsRecord' (Maybe AuthKey)
 erKey = lens _erKey (\ s a -> s{_erKey = a})
 
 -- | The preferred language to use for strings returned by this method.

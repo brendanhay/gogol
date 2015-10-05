@@ -73,7 +73,7 @@ type ProjectsListResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListProjectsResponse
@@ -92,7 +92,7 @@ data ProjectsList' = ProjectsList'
     , _plAccessToken    :: !(Maybe Text)
     , _plUploadType     :: !(Maybe Text)
     , _plBearerToken    :: !(Maybe Text)
-    , _plKey            :: !(Maybe Key)
+    , _plKey            :: !(Maybe AuthKey)
     , _plFilter         :: !(Maybe Text)
     , _plPageToken      :: !(Maybe Text)
     , _plOAuthToken     :: !(Maybe OAuthToken)
@@ -202,7 +202,7 @@ plBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plKey :: Lens' ProjectsList' (Maybe Key)
+plKey :: Lens' ProjectsList' (Maybe AuthKey)
 plKey = lens _plKey (\ s a -> s{_plKey = a})
 
 -- | An expression for filtering the results of the request. Filter rules are

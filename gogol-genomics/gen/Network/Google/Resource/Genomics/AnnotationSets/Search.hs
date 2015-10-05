@@ -56,7 +56,7 @@ type AnnotationSetsSearchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] SearchAnnotationSetsRequest :>
@@ -72,7 +72,7 @@ data AnnotationSetsSearch' = AnnotationSetsSearch'
     , _assPrettyPrint :: !Bool
     , _assUserIP      :: !(Maybe Text)
     , _assPayload     :: !SearchAnnotationSetsRequest
-    , _assKey         :: !(Maybe Key)
+    , _assKey         :: !(Maybe AuthKey)
     , _assOAuthToken  :: !(Maybe OAuthToken)
     , _assFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -135,7 +135,7 @@ assPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-assKey :: Lens' AnnotationSetsSearch' (Maybe Key)
+assKey :: Lens' AnnotationSetsSearch' (Maybe AuthKey)
 assKey = lens _assKey (\ s a -> s{_assKey = a})
 
 -- | OAuth 2.0 token for the current user.

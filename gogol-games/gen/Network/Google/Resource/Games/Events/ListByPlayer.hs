@@ -59,7 +59,7 @@ type EventsListByPlayerResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] PlayerEventListResponse
@@ -72,7 +72,7 @@ data EventsListByPlayer' = EventsListByPlayer'
     { _elbpQuotaUser   :: !(Maybe Text)
     , _elbpPrettyPrint :: !Bool
     , _elbpUserIP      :: !(Maybe Text)
-    , _elbpKey         :: !(Maybe Key)
+    , _elbpKey         :: !(Maybe AuthKey)
     , _elbpLanguage    :: !(Maybe Text)
     , _elbpPageToken   :: !(Maybe Text)
     , _elbpOAuthToken  :: !(Maybe OAuthToken)
@@ -139,7 +139,7 @@ elbpUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-elbpKey :: Lens' EventsListByPlayer' (Maybe Key)
+elbpKey :: Lens' EventsListByPlayer' (Maybe AuthKey)
 elbpKey = lens _elbpKey (\ s a -> s{_elbpKey = a})
 
 -- | The preferred language to use for strings returned by this method.

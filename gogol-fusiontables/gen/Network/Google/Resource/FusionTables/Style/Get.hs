@@ -57,7 +57,7 @@ type StyleGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] StyleSetting
 
@@ -68,7 +68,7 @@ data StyleGet' = StyleGet'
     { _sgQuotaUser   :: !(Maybe Text)
     , _sgPrettyPrint :: !Bool
     , _sgUserIP      :: !(Maybe Text)
-    , _sgKey         :: !(Maybe Key)
+    , _sgKey         :: !(Maybe AuthKey)
     , _sgStyleId     :: !Int32
     , _sgOAuthToken  :: !(Maybe OAuthToken)
     , _sgTableId     :: !Text
@@ -131,7 +131,7 @@ sgUserIP = lens _sgUserIP (\ s a -> s{_sgUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sgKey :: Lens' StyleGet' (Maybe Key)
+sgKey :: Lens' StyleGet' (Maybe AuthKey)
 sgKey = lens _sgKey (\ s a -> s{_sgKey = a})
 
 -- | Identifier (integer) for a specific style in a table

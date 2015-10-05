@@ -61,7 +61,7 @@ type GlobalOperationsAggregatedListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] OperationAggregatedList
@@ -74,7 +74,7 @@ data GlobalOperationsAggregatedList' = GlobalOperationsAggregatedList'
     , _goalPrettyPrint :: !Bool
     , _goalProject     :: !Text
     , _goalUserIP      :: !(Maybe Text)
-    , _goalKey         :: !(Maybe Key)
+    , _goalKey         :: !(Maybe AuthKey)
     , _goalFilter      :: !(Maybe Text)
     , _goalPageToken   :: !(Maybe Text)
     , _goalOAuthToken  :: !(Maybe OAuthToken)
@@ -150,7 +150,7 @@ goalUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-goalKey :: Lens' GlobalOperationsAggregatedList' (Maybe Key)
+goalKey :: Lens' GlobalOperationsAggregatedList' (Maybe AuthKey)
 goalKey = lens _goalKey (\ s a -> s{_goalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

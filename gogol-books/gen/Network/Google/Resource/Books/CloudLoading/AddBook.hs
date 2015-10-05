@@ -61,7 +61,7 @@ type CloudLoadingAddBookResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Post '[JSON] BooksCloudLoadingResource
@@ -75,7 +75,7 @@ data CloudLoadingAddBook' = CloudLoadingAddBook'
     , _clabUserIP            :: !(Maybe Text)
     , _clabMimeType          :: !(Maybe Text)
     , _clabUploadClientToken :: !(Maybe Text)
-    , _clabKey               :: !(Maybe Key)
+    , _clabKey               :: !(Maybe AuthKey)
     , _clabName              :: !(Maybe Text)
     , _clabOAuthToken        :: !(Maybe OAuthToken)
     , _clabDriveDocumentId   :: !(Maybe Text)
@@ -155,7 +155,7 @@ clabUploadClientToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clabKey :: Lens' CloudLoadingAddBook' (Maybe Key)
+clabKey :: Lens' CloudLoadingAddBook' (Maybe AuthKey)
 clabKey = lens _clabKey (\ s a -> s{_clabKey = a})
 
 -- | The document name. It can be set only if the drive_document_id is set.

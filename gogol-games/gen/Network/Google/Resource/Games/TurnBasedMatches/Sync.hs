@@ -66,7 +66,7 @@ type TurnBasedMatchesSyncResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] TurnBasedMatchSync
@@ -82,7 +82,7 @@ data TurnBasedMatchesSync' = TurnBasedMatchesSync'
     , _tbmsQuotaUser           :: !(Maybe Text)
     , _tbmsPrettyPrint         :: !Bool
     , _tbmsUserIP              :: !(Maybe Text)
-    , _tbmsKey                 :: !(Maybe Key)
+    , _tbmsKey                 :: !(Maybe AuthKey)
     , _tbmsIncludeMatchData    :: !(Maybe Bool)
     , _tbmsLanguage            :: !(Maybe Text)
     , _tbmsPageToken           :: !(Maybe Text)
@@ -164,7 +164,7 @@ tbmsUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tbmsKey :: Lens' TurnBasedMatchesSync' (Maybe Key)
+tbmsKey :: Lens' TurnBasedMatchesSync' (Maybe AuthKey)
 tbmsKey = lens _tbmsKey (\ s a -> s{_tbmsKey = a})
 
 -- | True if match data should be returned in the response. Note that not all

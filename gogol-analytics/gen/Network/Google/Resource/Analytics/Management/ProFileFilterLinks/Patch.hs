@@ -66,7 +66,7 @@ type ManagementProFileFilterLinksPatchResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] ProFileFilterLink :>
@@ -84,7 +84,7 @@ data ManagementProFileFilterLinksPatch' = ManagementProFileFilterLinksPatch'
     , _mpfflpProFileId     :: !Text
     , _mpfflpPayload       :: !ProFileFilterLink
     , _mpfflpAccountId     :: !Text
-    , _mpfflpKey           :: !(Maybe Key)
+    , _mpfflpKey           :: !(Maybe AuthKey)
     , _mpfflpLinkId        :: !Text
     , _mpfflpOAuthToken    :: !(Maybe OAuthToken)
     , _mpfflpFields        :: !(Maybe Text)
@@ -184,7 +184,7 @@ mpfflpAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpfflpKey :: Lens' ManagementProFileFilterLinksPatch' (Maybe Key)
+mpfflpKey :: Lens' ManagementProFileFilterLinksPatch' (Maybe AuthKey)
 mpfflpKey
   = lens _mpfflpKey (\ s a -> s{_mpfflpKey = a})
 

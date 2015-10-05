@@ -59,7 +59,7 @@ type ChannelsUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Channel :> Put '[JSON] Channel
@@ -76,7 +76,7 @@ data ChannelsUpdate' = ChannelsUpdate'
     , _chaUserIP                 :: !(Maybe Text)
     , _chaPayload                :: !Channel
     , _chaOnBehalfOfContentOwner :: !(Maybe Text)
-    , _chaKey                    :: !(Maybe Key)
+    , _chaKey                    :: !(Maybe AuthKey)
     , _chaOAuthToken             :: !(Maybe OAuthToken)
     , _chaFields                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -170,7 +170,7 @@ chaOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-chaKey :: Lens' ChannelsUpdate' (Maybe Key)
+chaKey :: Lens' ChannelsUpdate' (Maybe AuthKey)
 chaKey = lens _chaKey (\ s a -> s{_chaKey = a})
 
 -- | OAuth 2.0 token for the current user.

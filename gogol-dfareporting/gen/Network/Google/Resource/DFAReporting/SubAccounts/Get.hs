@@ -57,7 +57,7 @@ type SubAccountsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] SubAccount
 
@@ -69,7 +69,7 @@ data SubAccountsGet' = SubAccountsGet'
     , _sagPrettyPrint :: !Bool
     , _sagUserIP      :: !(Maybe Text)
     , _sagProFileId   :: !Int64
-    , _sagKey         :: !(Maybe Key)
+    , _sagKey         :: !(Maybe AuthKey)
     , _sagId          :: !Int64
     , _sagOAuthToken  :: !(Maybe OAuthToken)
     , _sagFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ sagProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sagKey :: Lens' SubAccountsGet' (Maybe Key)
+sagKey :: Lens' SubAccountsGet' (Maybe AuthKey)
 sagKey = lens _sagKey (\ s a -> s{_sagKey = a})
 
 -- | Subaccount ID.

@@ -74,7 +74,7 @@ type CoursesTeachersGetResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] Teacher
@@ -97,7 +97,7 @@ data CoursesTeachersGet' = CoursesTeachersGet'
     , _ctgUploadType     :: !(Maybe Text)
     , _ctgUserId         :: !Text
     , _ctgBearerToken    :: !(Maybe Text)
-    , _ctgKey            :: !(Maybe Key)
+    , _ctgKey            :: !(Maybe AuthKey)
     , _ctgOAuthToken     :: !(Maybe OAuthToken)
     , _ctgFields         :: !(Maybe Text)
     , _ctgCallback       :: !(Maybe Text)
@@ -218,7 +218,7 @@ ctgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ctgKey :: Lens' CoursesTeachersGet' (Maybe Key)
+ctgKey :: Lens' CoursesTeachersGet' (Maybe AuthKey)
 ctgKey = lens _ctgKey (\ s a -> s{_ctgKey = a})
 
 -- | OAuth 2.0 token for the current user.

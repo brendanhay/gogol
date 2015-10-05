@@ -55,7 +55,7 @@ type EventsResetAllResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -68,7 +68,7 @@ data EventsResetAll' = EventsResetAll'
     { _eraQuotaUser   :: !(Maybe Text)
     , _eraPrettyPrint :: !Bool
     , _eraUserIP      :: !(Maybe Text)
-    , _eraKey         :: !(Maybe Key)
+    , _eraKey         :: !(Maybe AuthKey)
     , _eraOAuthToken  :: !(Maybe OAuthToken)
     , _eraFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -122,7 +122,7 @@ eraUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eraKey :: Lens' EventsResetAll' (Maybe Key)
+eraKey :: Lens' EventsResetAll' (Maybe AuthKey)
 eraKey = lens _eraKey (\ s a -> s{_eraKey = a})
 
 -- | OAuth 2.0 token for the current user.

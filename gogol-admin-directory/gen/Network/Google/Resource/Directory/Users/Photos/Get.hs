@@ -56,7 +56,7 @@ type UsersPhotosGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] UserPhoto
 
@@ -67,7 +67,7 @@ data UsersPhotosGet' = UsersPhotosGet'
     { _upgQuotaUser   :: !(Maybe Text)
     , _upgPrettyPrint :: !Bool
     , _upgUserIP      :: !(Maybe Text)
-    , _upgKey         :: !(Maybe Key)
+    , _upgKey         :: !(Maybe AuthKey)
     , _upgOAuthToken  :: !(Maybe OAuthToken)
     , _upgUserKey     :: !Text
     , _upgFields      :: !(Maybe Text)
@@ -126,7 +126,7 @@ upgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-upgKey :: Lens' UsersPhotosGet' (Maybe Key)
+upgKey :: Lens' UsersPhotosGet' (Maybe AuthKey)
 upgKey = lens _upgKey (\ s a -> s{_upgKey = a})
 
 -- | OAuth 2.0 token for the current user.

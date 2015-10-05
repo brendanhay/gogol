@@ -59,7 +59,7 @@ type PagesGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Page
 
@@ -72,7 +72,7 @@ data PagesGet' = PagesGet'
     , _pggUserIP      :: !(Maybe Text)
     , _pggBlogId      :: !Text
     , _pggPageId      :: !Text
-    , _pggKey         :: !(Maybe Key)
+    , _pggKey         :: !(Maybe AuthKey)
     , _pggView        :: !(Maybe PagesGetView)
     , _pggOAuthToken  :: !(Maybe OAuthToken)
     , _pggFields      :: !(Maybe Text)
@@ -148,7 +148,7 @@ pggPageId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pggKey :: Lens' PagesGet' (Maybe Key)
+pggKey :: Lens' PagesGet' (Maybe AuthKey)
 pggKey = lens _pggKey (\ s a -> s{_pggKey = a})
 
 pggView :: Lens' PagesGet' (Maybe PagesGetView)

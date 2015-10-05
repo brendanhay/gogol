@@ -80,7 +80,7 @@ type MapsListResource =
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "key" Key :>
+                                         QueryParam "key" AuthKey :>
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
@@ -96,7 +96,7 @@ data MapsList' = MapsList'
     , _mllUserIP           :: !(Maybe Text)
     , _mllCreatorEmail     :: !(Maybe Text)
     , _mllRole             :: !(Maybe MapsListRole)
-    , _mllKey              :: !(Maybe Key)
+    , _mllKey              :: !(Maybe AuthKey)
     , _mllBbox             :: !(Maybe Text)
     , _mllProcessingStatus :: !(Maybe MapsListProcessingStatus)
     , _mllModifiedAfter    :: !(Maybe DateTime')
@@ -219,7 +219,7 @@ mllRole = lens _mllRole (\ s a -> s{_mllRole = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mllKey :: Lens' MapsList' (Maybe Key)
+mllKey :: Lens' MapsList' (Maybe AuthKey)
 mllKey = lens _mllKey (\ s a -> s{_mllKey = a})
 
 -- | A bounding box, expressed as \"west,south,east,north\". If set, only

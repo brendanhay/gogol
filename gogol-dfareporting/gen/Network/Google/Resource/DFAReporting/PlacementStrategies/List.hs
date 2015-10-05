@@ -71,7 +71,7 @@ type PlacementStrategiesListResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] PlacementStrategiesListResponse
@@ -87,7 +87,7 @@ data PlacementStrategiesList' = PlacementStrategiesList'
     , _pslIds          :: !(Maybe [Int64])
     , _pslProFileId    :: !Int64
     , _pslSortOrder    :: !(Maybe PlacementStrategiesListSortOrder)
-    , _pslKey          :: !(Maybe Key)
+    , _pslKey          :: !(Maybe AuthKey)
     , _pslPageToken    :: !(Maybe Text)
     , _pslSortField    :: !(Maybe PlacementStrategiesListSortField)
     , _pslOAuthToken   :: !(Maybe OAuthToken)
@@ -195,7 +195,7 @@ pslSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pslKey :: Lens' PlacementStrategiesList' (Maybe Key)
+pslKey :: Lens' PlacementStrategiesList' (Maybe AuthKey)
 pslKey = lens _pslKey (\ s a -> s{_pslKey = a})
 
 -- | Value of the nextPageToken from the previous result page.

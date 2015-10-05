@@ -60,7 +60,7 @@ type TableImportTableResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[OctetStream] Body :> Post '[JSON] Table
@@ -73,7 +73,7 @@ data TableImportTable' = TableImportTable'
     , _titPrettyPrint :: !Bool
     , _titUserIP      :: !(Maybe Text)
     , _titMedia       :: !Body
-    , _titKey         :: !(Maybe Key)
+    , _titKey         :: !(Maybe AuthKey)
     , _titName        :: !Text
     , _titOAuthToken  :: !(Maybe OAuthToken)
     , _titDelimiter   :: !(Maybe Text)
@@ -147,7 +147,7 @@ titMedia = lens _titMedia (\ s a -> s{_titMedia = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-titKey :: Lens' TableImportTable' (Maybe Key)
+titKey :: Lens' TableImportTable' (Maybe AuthKey)
 titKey = lens _titKey (\ s a -> s{_titKey = a})
 
 -- | The name to be assigned to the new table.

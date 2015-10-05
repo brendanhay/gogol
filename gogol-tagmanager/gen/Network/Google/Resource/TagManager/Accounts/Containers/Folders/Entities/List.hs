@@ -61,7 +61,7 @@ type AccountsContainersFoldersEntitiesListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] FolderEntities
@@ -76,7 +76,7 @@ data AccountsContainersFoldersEntitiesList' = AccountsContainersFoldersEntitiesL
     , _acfelUserIP      :: !(Maybe Text)
     , _acfelFolderId    :: !Text
     , _acfelAccountId   :: !Text
-    , _acfelKey         :: !(Maybe Key)
+    , _acfelKey         :: !(Maybe AuthKey)
     , _acfelOAuthToken  :: !(Maybe OAuthToken)
     , _acfelFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -161,7 +161,7 @@ acfelAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acfelKey :: Lens' AccountsContainersFoldersEntitiesList' (Maybe Key)
+acfelKey :: Lens' AccountsContainersFoldersEntitiesList' (Maybe AuthKey)
 acfelKey = lens _acfelKey (\ s a -> s{_acfelKey = a})
 
 -- | OAuth 2.0 token for the current user.

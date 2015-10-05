@@ -57,7 +57,7 @@ type CollectionsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Collection
 
@@ -70,7 +70,7 @@ data CollectionsGet' = CollectionsGet'
     , _cggEnterpriseId :: !Text
     , _cggUserIP       :: !(Maybe Text)
     , _cggCollectionId :: !Text
-    , _cggKey          :: !(Maybe Key)
+    , _cggKey          :: !(Maybe AuthKey)
     , _cggOAuthToken   :: !(Maybe OAuthToken)
     , _cggFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ cggCollectionId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cggKey :: Lens' CollectionsGet' (Maybe Key)
+cggKey :: Lens' CollectionsGet' (Maybe AuthKey)
 cggKey = lens _cggKey (\ s a -> s{_cggKey = a})
 
 -- | OAuth 2.0 token for the current user.

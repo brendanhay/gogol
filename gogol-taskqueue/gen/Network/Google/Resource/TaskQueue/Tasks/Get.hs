@@ -59,7 +59,7 @@ type TasksGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Task
 
@@ -72,7 +72,7 @@ data TasksGet' = TasksGet'
     , _tgPrettyPrint :: !Bool
     , _tgProject     :: !Text
     , _tgUserIP      :: !(Maybe Text)
-    , _tgKey         :: !(Maybe Key)
+    , _tgKey         :: !(Maybe AuthKey)
     , _tgTask        :: !Text
     , _tgOAuthToken  :: !(Maybe OAuthToken)
     , _tgFields      :: !(Maybe Text)
@@ -148,7 +148,7 @@ tgUserIP = lens _tgUserIP (\ s a -> s{_tgUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tgKey :: Lens' TasksGet' (Maybe Key)
+tgKey :: Lens' TasksGet' (Maybe AuthKey)
 tgKey = lens _tgKey (\ s a -> s{_tgKey = a})
 
 -- | The task to get properties of.

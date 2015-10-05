@@ -71,7 +71,7 @@ type UserRolesListResource =
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "userIp" Text :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] UserRolesListResponse
@@ -87,7 +87,7 @@ data UserRolesList' = UserRolesList'
     , _urlIds                 :: !(Maybe [Int64])
     , _urlProFileId           :: !Int64
     , _urlSortOrder           :: !(Maybe UserRolesListSortOrder)
-    , _urlKey                 :: !(Maybe Key)
+    , _urlKey                 :: !(Maybe AuthKey)
     , _urlAccountUserRoleOnly :: !(Maybe Bool)
     , _urlPageToken           :: !(Maybe Text)
     , _urlSortField           :: !(Maybe UserRolesListSortField)
@@ -202,7 +202,7 @@ urlSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-urlKey :: Lens' UserRolesList' (Maybe Key)
+urlKey :: Lens' UserRolesList' (Maybe AuthKey)
 urlKey = lens _urlKey (\ s a -> s{_urlKey = a})
 
 -- | Select only account level user roles not associated with any specific

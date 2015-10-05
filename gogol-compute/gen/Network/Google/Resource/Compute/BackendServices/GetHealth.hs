@@ -59,7 +59,7 @@ type BackendServicesGetHealthResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] ResourceGroupReference :>
@@ -74,7 +74,7 @@ data BackendServicesGetHealth' = BackendServicesGetHealth'
     , _bsghProject        :: !Text
     , _bsghUserIP         :: !(Maybe Text)
     , _bsghPayload        :: !ResourceGroupReference
-    , _bsghKey            :: !(Maybe Key)
+    , _bsghKey            :: !(Maybe AuthKey)
     , _bsghOAuthToken     :: !(Maybe OAuthToken)
     , _bsghFields         :: !(Maybe Text)
     , _bsghBackendService :: !Text
@@ -151,7 +151,7 @@ bsghPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bsghKey :: Lens' BackendServicesGetHealth' (Maybe Key)
+bsghKey :: Lens' BackendServicesGetHealth' (Maybe AuthKey)
 bsghKey = lens _bsghKey (\ s a -> s{_bsghKey = a})
 
 -- | OAuth 2.0 token for the current user.

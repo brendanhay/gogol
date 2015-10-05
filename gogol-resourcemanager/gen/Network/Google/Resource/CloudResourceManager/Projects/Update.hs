@@ -70,7 +70,7 @@ type ProjectsUpdateResource =
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Project :>
@@ -91,7 +91,7 @@ data ProjectsUpdate' = ProjectsUpdate'
     , _puUploadType     :: !(Maybe Text)
     , _puPayload        :: !Project
     , _puBearerToken    :: !(Maybe Text)
-    , _puKey            :: !(Maybe Key)
+    , _puKey            :: !(Maybe AuthKey)
     , _puProjectId      :: !Text
     , _puOAuthToken     :: !(Maybe OAuthToken)
     , _puFields         :: !(Maybe Text)
@@ -203,7 +203,7 @@ puBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puKey :: Lens' ProjectsUpdate' (Maybe Key)
+puKey :: Lens' ProjectsUpdate' (Maybe AuthKey)
 puKey = lens _puKey (\ s a -> s{_puKey = a})
 
 -- | The project ID (for example, \`my-project-123\`). Required.

@@ -59,7 +59,7 @@ type CirclesRemovePeopleResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -72,7 +72,7 @@ data CirclesRemovePeople' = CirclesRemovePeople'
     , _crpPrettyPrint :: !Bool
     , _crpUserIP      :: !(Maybe Text)
     , _crpUserId      :: !(Maybe [Text])
-    , _crpKey         :: !(Maybe Key)
+    , _crpKey         :: !(Maybe AuthKey)
     , _crpCircleId    :: !Text
     , _crpOAuthToken  :: !(Maybe OAuthToken)
     , _crpFields      :: !(Maybe Text)
@@ -151,7 +151,7 @@ crpUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-crpKey :: Lens' CirclesRemovePeople' (Maybe Key)
+crpKey :: Lens' CirclesRemovePeople' (Maybe AuthKey)
 crpKey = lens _crpKey (\ s a -> s{_crpKey = a})
 
 -- | The ID of the circle to remove the person from.

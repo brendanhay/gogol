@@ -57,7 +57,7 @@ type EditsListingsListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ListingsListResponse
@@ -70,7 +70,7 @@ data EditsListingsList' = EditsListingsList'
     , _ellPrettyPrint :: !Bool
     , _ellPackageName :: !Text
     , _ellUserIP      :: !(Maybe Text)
-    , _ellKey         :: !(Maybe Key)
+    , _ellKey         :: !(Maybe AuthKey)
     , _ellOAuthToken  :: !(Maybe OAuthToken)
     , _ellEditId      :: !Text
     , _ellFields      :: !(Maybe Text)
@@ -140,7 +140,7 @@ ellUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ellKey :: Lens' EditsListingsList' (Maybe Key)
+ellKey :: Lens' EditsListingsList' (Maybe AuthKey)
 ellKey = lens _ellKey (\ s a -> s{_ellKey = a})
 
 -- | OAuth 2.0 token for the current user.

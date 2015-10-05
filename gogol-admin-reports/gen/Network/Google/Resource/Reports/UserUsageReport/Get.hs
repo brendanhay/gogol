@@ -69,7 +69,7 @@ type UserUsageReportGetResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] UsageReports
@@ -85,7 +85,7 @@ data UserUsageReportGet' = UserUsageReportGet'
     , _uurgFilters     :: !(Maybe Text)
     , _uurgCustomerId  :: !(Maybe Text)
     , _uurgDate        :: !Text
-    , _uurgKey         :: !(Maybe Key)
+    , _uurgKey         :: !(Maybe AuthKey)
     , _uurgParameters  :: !(Maybe Text)
     , _uurgPageToken   :: !(Maybe Text)
     , _uurgOAuthToken  :: !(Maybe OAuthToken)
@@ -183,7 +183,7 @@ uurgDate = lens _uurgDate (\ s a -> s{_uurgDate = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uurgKey :: Lens' UserUsageReportGet' (Maybe Key)
+uurgKey :: Lens' UserUsageReportGet' (Maybe AuthKey)
 uurgKey = lens _uurgKey (\ s a -> s{_uurgKey = a})
 
 -- | Represents the application name, parameter name pairs to fetch in csv as

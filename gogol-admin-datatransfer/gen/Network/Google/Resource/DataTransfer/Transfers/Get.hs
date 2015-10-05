@@ -54,7 +54,7 @@ type TransfersGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] DataTransfer
 
@@ -65,7 +65,7 @@ data TransfersGet' = TransfersGet'
     { _tgQuotaUser      :: !(Maybe Text)
     , _tgPrettyPrint    :: !Bool
     , _tgUserIP         :: !(Maybe Text)
-    , _tgKey            :: !(Maybe Key)
+    , _tgKey            :: !(Maybe AuthKey)
     , _tgOAuthToken     :: !(Maybe OAuthToken)
     , _tgDataTransferId :: !Text
     , _tgFields         :: !(Maybe Text)
@@ -123,7 +123,7 @@ tgUserIP = lens _tgUserIP (\ s a -> s{_tgUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tgKey :: Lens' TransfersGet' (Maybe Key)
+tgKey :: Lens' TransfersGet' (Maybe AuthKey)
 tgKey = lens _tgKey (\ s a -> s{_tgKey = a})
 
 -- | OAuth 2.0 token for the current user.

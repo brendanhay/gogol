@@ -56,7 +56,7 @@ type LeaderboardConfigurationsPatchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] LeaderboardConfiguration :>
@@ -72,7 +72,7 @@ data LeaderboardConfigurationsPatch' = LeaderboardConfigurationsPatch'
     , _lcpUserIP        :: !(Maybe Text)
     , _lcpPayload       :: !LeaderboardConfiguration
     , _lcpLeaderboardId :: !Text
-    , _lcpKey           :: !(Maybe Key)
+    , _lcpKey           :: !(Maybe AuthKey)
     , _lcpOAuthToken    :: !(Maybe OAuthToken)
     , _lcpFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ lcpLeaderboardId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lcpKey :: Lens' LeaderboardConfigurationsPatch' (Maybe Key)
+lcpKey :: Lens' LeaderboardConfigurationsPatch' (Maybe AuthKey)
 lcpKey = lens _lcpKey (\ s a -> s{_lcpKey = a})
 
 -- | OAuth 2.0 token for the current user.

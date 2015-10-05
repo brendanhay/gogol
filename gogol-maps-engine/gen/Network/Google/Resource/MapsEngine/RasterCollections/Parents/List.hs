@@ -59,7 +59,7 @@ type RasterCollectionsParentsListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ParentsListResponse
@@ -71,7 +71,7 @@ data RasterCollectionsParentsList' = RasterCollectionsParentsList'
     { _rcplQuotaUser   :: !(Maybe Text)
     , _rcplPrettyPrint :: !Bool
     , _rcplUserIP      :: !(Maybe Text)
-    , _rcplKey         :: !(Maybe Key)
+    , _rcplKey         :: !(Maybe AuthKey)
     , _rcplId          :: !Text
     , _rcplPageToken   :: !(Maybe Text)
     , _rcplOAuthToken  :: !(Maybe OAuthToken)
@@ -139,7 +139,7 @@ rcplUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rcplKey :: Lens' RasterCollectionsParentsList' (Maybe Key)
+rcplKey :: Lens' RasterCollectionsParentsList' (Maybe AuthKey)
 rcplKey = lens _rcplKey (\ s a -> s{_rcplKey = a})
 
 -- | The ID of the raster collection whose parents will be listed.

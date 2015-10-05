@@ -55,7 +55,7 @@ type CirclesPatchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Circle :> Patch '[JSON] Circle
@@ -68,7 +68,7 @@ data CirclesPatch' = CirclesPatch'
     , _cpPrettyPrint :: !Bool
     , _cpUserIP      :: !(Maybe Text)
     , _cpPayload     :: !Circle
-    , _cpKey         :: !(Maybe Key)
+    , _cpKey         :: !(Maybe AuthKey)
     , _cpCircleId    :: !Text
     , _cpOAuthToken  :: !(Maybe OAuthToken)
     , _cpFields      :: !(Maybe Text)
@@ -135,7 +135,7 @@ cpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cpKey :: Lens' CirclesPatch' (Maybe Key)
+cpKey :: Lens' CirclesPatch' (Maybe AuthKey)
 cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
 
 -- | The ID of the circle to update.

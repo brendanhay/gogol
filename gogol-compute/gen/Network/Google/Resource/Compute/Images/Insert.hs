@@ -57,7 +57,7 @@ type ImagesInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Image :> Post '[JSON] Operation
@@ -72,7 +72,7 @@ data ImagesInsert' = ImagesInsert'
     , _iProject     :: !Text
     , _iUserIP      :: !(Maybe Text)
     , _iPayload     :: !Image
-    , _iKey         :: !(Maybe Key)
+    , _iKey         :: !(Maybe AuthKey)
     , _iOAuthToken  :: !(Maybe OAuthToken)
     , _iFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -140,7 +140,7 @@ iPayload = lens _iPayload (\ s a -> s{_iPayload = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iKey :: Lens' ImagesInsert' (Maybe Key)
+iKey :: Lens' ImagesInsert' (Maybe AuthKey)
 iKey = lens _iKey (\ s a -> s{_iKey = a})
 
 -- | OAuth 2.0 token for the current user.

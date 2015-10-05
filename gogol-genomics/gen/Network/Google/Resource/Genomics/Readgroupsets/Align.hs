@@ -56,7 +56,7 @@ type ReadgroupsetsAlignResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] AlignReadGroupSetsRequest :>
@@ -72,7 +72,7 @@ data ReadgroupsetsAlign' = ReadgroupsetsAlign'
     , _raPrettyPrint :: !Bool
     , _raUserIP      :: !(Maybe Text)
     , _raPayload     :: !AlignReadGroupSetsRequest
-    , _raKey         :: !(Maybe Key)
+    , _raKey         :: !(Maybe AuthKey)
     , _raOAuthToken  :: !(Maybe OAuthToken)
     , _raFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -134,7 +134,7 @@ raPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-raKey :: Lens' ReadgroupsetsAlign' (Maybe Key)
+raKey :: Lens' ReadgroupsetsAlign' (Maybe AuthKey)
 raKey = lens _raKey (\ s a -> s{_raKey = a})
 
 -- | OAuth 2.0 token for the current user.

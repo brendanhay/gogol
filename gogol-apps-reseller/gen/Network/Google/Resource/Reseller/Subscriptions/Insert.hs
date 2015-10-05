@@ -58,7 +58,7 @@ type SubscriptionsInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Subscription :>
@@ -73,7 +73,7 @@ data SubscriptionsInsert' = SubscriptionsInsert'
     , _siUserIP            :: !(Maybe Text)
     , _siPayload           :: !Subscription
     , _siCustomerId        :: !Text
-    , _siKey               :: !(Maybe Key)
+    , _siKey               :: !(Maybe AuthKey)
     , _siCustomerAuthToken :: !(Maybe Text)
     , _siOAuthToken        :: !(Maybe OAuthToken)
     , _siFields            :: !(Maybe Text)
@@ -148,7 +148,7 @@ siCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-siKey :: Lens' SubscriptionsInsert' (Maybe Key)
+siKey :: Lens' SubscriptionsInsert' (Maybe AuthKey)
 siKey = lens _siKey (\ s a -> s{_siKey = a})
 
 -- | An auth token needed for transferring a subscription. Can be generated

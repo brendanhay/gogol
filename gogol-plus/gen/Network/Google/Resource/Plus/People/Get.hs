@@ -56,7 +56,7 @@ type PeopleGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Person
 
@@ -70,7 +70,7 @@ data PeopleGet' = PeopleGet'
     , _pgPrettyPrint :: !Bool
     , _pgUserIP      :: !(Maybe Text)
     , _pgUserId      :: !Text
-    , _pgKey         :: !(Maybe Key)
+    , _pgKey         :: !(Maybe AuthKey)
     , _pgOAuthToken  :: !(Maybe OAuthToken)
     , _pgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -132,7 +132,7 @@ pgUserId = lens _pgUserId (\ s a -> s{_pgUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgKey :: Lens' PeopleGet' (Maybe Key)
+pgKey :: Lens' PeopleGet' (Maybe AuthKey)
 pgKey = lens _pgKey (\ s a -> s{_pgKey = a})
 
 -- | OAuth 2.0 token for the current user.

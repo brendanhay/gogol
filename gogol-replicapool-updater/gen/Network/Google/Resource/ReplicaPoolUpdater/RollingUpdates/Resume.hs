@@ -61,7 +61,7 @@ type RollingUpdatesResumeResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
@@ -76,7 +76,7 @@ data RollingUpdatesResume' = RollingUpdatesResume'
     , _rProject       :: !Text
     , _rUserIP        :: !(Maybe Text)
     , _rZone          :: !Text
-    , _rKey           :: !(Maybe Key)
+    , _rKey           :: !(Maybe AuthKey)
     , _rOAuthToken    :: !(Maybe OAuthToken)
     , _rFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -154,7 +154,7 @@ rZone = lens _rZone (\ s a -> s{_rZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rKey :: Lens' RollingUpdatesResume' (Maybe Key)
+rKey :: Lens' RollingUpdatesResume' (Maybe AuthKey)
 rKey = lens _rKey (\ s a -> s{_rKey = a})
 
 -- | OAuth 2.0 token for the current user.

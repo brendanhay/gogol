@@ -77,7 +77,7 @@ type AccountUserProFilesListResource =
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON]
@@ -96,7 +96,7 @@ data AccountUserProFilesList' = AccountUserProFilesList'
     , _aupflProFileId    :: !Int64
     , _aupflSortOrder    :: !(Maybe AccountUserProFilesListSortOrder)
     , _aupflActive       :: !(Maybe Bool)
-    , _aupflKey          :: !(Maybe Key)
+    , _aupflKey          :: !(Maybe AuthKey)
     , _aupflPageToken    :: !(Maybe Text)
     , _aupflSortField    :: !(Maybe AccountUserProFilesListSortField)
     , _aupflSubAccountId :: !(Maybe Int64)
@@ -228,7 +228,7 @@ aupflActive
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aupflKey :: Lens' AccountUserProFilesList' (Maybe Key)
+aupflKey :: Lens' AccountUserProFilesList' (Maybe AuthKey)
 aupflKey = lens _aupflKey (\ s a -> s{_aupflKey = a})
 
 -- | Value of the nextPageToken from the previous result page.

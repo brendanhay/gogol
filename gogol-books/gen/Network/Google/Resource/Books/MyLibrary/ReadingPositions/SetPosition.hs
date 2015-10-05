@@ -70,7 +70,7 @@ type MyLibraryReadingPositionsSetPositionResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -84,7 +84,7 @@ data MyLibraryReadingPositionsSetPosition' = MyLibraryReadingPositionsSetPositio
     , _mlrpspUserIP         :: !(Maybe Text)
     , _mlrpspContentVersion :: !(Maybe Text)
     , _mlrpspAction         :: !(Maybe MyLibraryReadingPositionsSetPositionAction)
-    , _mlrpspKey            :: !(Maybe Key)
+    , _mlrpspKey            :: !(Maybe AuthKey)
     , _mlrpspVolumeId       :: !Text
     , _mlrpspSource         :: !(Maybe Text)
     , _mlrpspOAuthToken     :: !(Maybe OAuthToken)
@@ -184,7 +184,7 @@ mlrpspAction
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlrpspKey :: Lens' MyLibraryReadingPositionsSetPosition' (Maybe Key)
+mlrpspKey :: Lens' MyLibraryReadingPositionsSetPosition' (Maybe AuthKey)
 mlrpspKey
   = lens _mlrpspKey (\ s a -> s{_mlrpspKey = a})
 

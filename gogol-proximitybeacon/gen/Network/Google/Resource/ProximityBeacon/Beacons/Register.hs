@@ -68,7 +68,7 @@ type BeaconsRegisterResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Beacon :> Post '[JSON] Beacon
@@ -88,7 +88,7 @@ data BeaconsRegister' = BeaconsRegister'
     , _brUploadType     :: !(Maybe Text)
     , _brPayload        :: !Beacon
     , _brBearerToken    :: !(Maybe Text)
-    , _brKey            :: !(Maybe Key)
+    , _brKey            :: !(Maybe AuthKey)
     , _brOAuthToken     :: !(Maybe OAuthToken)
     , _brFields         :: !(Maybe Text)
     , _brCallback       :: !(Maybe Text)
@@ -195,7 +195,7 @@ brBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-brKey :: Lens' BeaconsRegister' (Maybe Key)
+brKey :: Lens' BeaconsRegister' (Maybe AuthKey)
 brKey = lens _brKey (\ s a -> s{_brKey = a})
 
 -- | OAuth 2.0 token for the current user.

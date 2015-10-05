@@ -57,7 +57,7 @@ type UsersLabelsUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Label :> Put '[JSON] Label
@@ -71,7 +71,7 @@ data UsersLabelsUpdate' = UsersLabelsUpdate'
     , _uluUserIP      :: !(Maybe Text)
     , _uluPayload     :: !Label
     , _uluUserId      :: !Text
-    , _uluKey         :: !(Maybe Key)
+    , _uluKey         :: !(Maybe AuthKey)
     , _uluId          :: !Text
     , _uluOAuthToken  :: !(Maybe OAuthToken)
     , _uluFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ uluUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uluKey :: Lens' UsersLabelsUpdate' (Maybe Key)
+uluKey :: Lens' UsersLabelsUpdate' (Maybe AuthKey)
 uluKey = lens _uluKey (\ s a -> s{_uluKey = a})
 
 -- | The ID of the label to update.

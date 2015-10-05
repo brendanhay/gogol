@@ -53,7 +53,7 @@ type FreeBusyQueryResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] FreeBusyRequest :>
@@ -67,7 +67,7 @@ data FreeBusyQuery' = FreeBusyQuery'
     , _fbqPrettyPrint :: !Bool
     , _fbqUserIP      :: !(Maybe Text)
     , _fbqPayload     :: !FreeBusyRequest
-    , _fbqKey         :: !(Maybe Key)
+    , _fbqKey         :: !(Maybe AuthKey)
     , _fbqOAuthToken  :: !(Maybe OAuthToken)
     , _fbqFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -130,7 +130,7 @@ fbqPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fbqKey :: Lens' FreeBusyQuery' (Maybe Key)
+fbqKey :: Lens' FreeBusyQuery' (Maybe AuthKey)
 fbqKey = lens _fbqKey (\ s a -> s{_fbqKey = a})
 
 -- | OAuth 2.0 token for the current user.

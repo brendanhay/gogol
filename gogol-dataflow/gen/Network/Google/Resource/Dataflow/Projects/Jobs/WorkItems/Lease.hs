@@ -72,7 +72,7 @@ type ProjectsJobsWorkItemsLeaseResource =
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            ReqBody '[JSON] LeaseWorkItemRequest
@@ -93,7 +93,7 @@ data ProjectsJobsWorkItemsLease' = ProjectsJobsWorkItemsLease'
     , _pjwilUploadType     :: !(Maybe Text)
     , _pjwilPayload        :: !LeaseWorkItemRequest
     , _pjwilBearerToken    :: !(Maybe Text)
-    , _pjwilKey            :: !(Maybe Key)
+    , _pjwilKey            :: !(Maybe AuthKey)
     , _pjwilProjectId      :: !Text
     , _pjwilOAuthToken     :: !(Maybe OAuthToken)
     , _pjwilFields         :: !(Maybe Text)
@@ -217,7 +217,7 @@ pjwilBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pjwilKey :: Lens' ProjectsJobsWorkItemsLease' (Maybe Key)
+pjwilKey :: Lens' ProjectsJobsWorkItemsLease' (Maybe AuthKey)
 pjwilKey = lens _pjwilKey (\ s a -> s{_pjwilKey = a})
 
 -- | Identifies the project this worker belongs to.

@@ -57,7 +57,7 @@ type BucketAccessControlsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] BucketAccessControl
@@ -70,7 +70,7 @@ data BucketAccessControlsGet' = BucketAccessControlsGet'
     , _bacgPrettyPrint :: !Bool
     , _bacgUserIP      :: !(Maybe Text)
     , _bacgBucket      :: !Text
-    , _bacgKey         :: !(Maybe Key)
+    , _bacgKey         :: !(Maybe AuthKey)
     , _bacgOAuthToken  :: !(Maybe OAuthToken)
     , _bacgEntity      :: !Text
     , _bacgFields      :: !(Maybe Text)
@@ -139,7 +139,7 @@ bacgBucket
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bacgKey :: Lens' BucketAccessControlsGet' (Maybe Key)
+bacgKey :: Lens' BucketAccessControlsGet' (Maybe AuthKey)
 bacgKey = lens _bacgKey (\ s a -> s{_bacgKey = a})
 
 -- | OAuth 2.0 token for the current user.

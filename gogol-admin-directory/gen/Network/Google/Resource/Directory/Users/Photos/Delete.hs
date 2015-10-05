@@ -56,7 +56,7 @@ type UsersPhotosDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -67,7 +67,7 @@ data UsersPhotosDelete' = UsersPhotosDelete'
     { _updQuotaUser   :: !(Maybe Text)
     , _updPrettyPrint :: !Bool
     , _updUserIP      :: !(Maybe Text)
-    , _updKey         :: !(Maybe Key)
+    , _updKey         :: !(Maybe AuthKey)
     , _updOAuthToken  :: !(Maybe OAuthToken)
     , _updUserKey     :: !Text
     , _updFields      :: !(Maybe Text)
@@ -126,7 +126,7 @@ updUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-updKey :: Lens' UsersPhotosDelete' (Maybe Key)
+updKey :: Lens' UsersPhotosDelete' (Maybe AuthKey)
 updKey = lens _updKey (\ s a -> s{_updKey = a})
 
 -- | OAuth 2.0 token for the current user.

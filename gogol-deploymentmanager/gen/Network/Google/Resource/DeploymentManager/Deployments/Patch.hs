@@ -71,7 +71,7 @@ type DeploymentsPatchResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Deployment :>
@@ -90,7 +90,7 @@ data DeploymentsPatch' = DeploymentsPatch'
     , _dpPayload      :: !Deployment
     , _dpUpdatePolicy :: !DeploymentsPatchUpdatePolicy
     , _dpDeletePolicy :: !DeploymentsPatchDeletePolicy
-    , _dpKey          :: !(Maybe Key)
+    , _dpKey          :: !(Maybe AuthKey)
     , _dpOAuthToken   :: !(Maybe OAuthToken)
     , _dpFields       :: !(Maybe Text)
     , _dpDeployment   :: !Text
@@ -193,7 +193,7 @@ dpDeletePolicy
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dpKey :: Lens' DeploymentsPatch' (Maybe Key)
+dpKey :: Lens' DeploymentsPatch' (Maybe AuthKey)
 dpKey = lens _dpKey (\ s a -> s{_dpKey = a})
 
 -- | OAuth 2.0 token for the current user.

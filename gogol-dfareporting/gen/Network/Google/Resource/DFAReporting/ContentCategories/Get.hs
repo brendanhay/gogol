@@ -57,7 +57,7 @@ type ContentCategoriesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ContentCategory
@@ -70,7 +70,7 @@ data ContentCategoriesGet' = ContentCategoriesGet'
     , _ccgPrettyPrint :: !Bool
     , _ccgUserIP      :: !(Maybe Text)
     , _ccgProFileId   :: !Int64
-    , _ccgKey         :: !(Maybe Key)
+    , _ccgKey         :: !(Maybe AuthKey)
     , _ccgId          :: !Int64
     , _ccgOAuthToken  :: !(Maybe OAuthToken)
     , _ccgFields      :: !(Maybe Text)
@@ -138,7 +138,7 @@ ccgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccgKey :: Lens' ContentCategoriesGet' (Maybe Key)
+ccgKey :: Lens' ContentCategoriesGet' (Maybe AuthKey)
 ccgKey = lens _ccgKey (\ s a -> s{_ccgKey = a})
 
 -- | Content category ID.

@@ -67,7 +67,7 @@ type ScheduleUpdateResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Schedule :>
@@ -85,7 +85,7 @@ data ScheduleUpdate' = ScheduleUpdate'
     , _suUserIP      :: !(Maybe Text)
     , _suTeamId      :: !Text
     , _suPayload     :: !Schedule
-    , _suKey         :: !(Maybe Key)
+    , _suKey         :: !(Maybe AuthKey)
     , _suEndTime     :: !(Maybe Word64)
     , _suOAuthToken  :: !(Maybe OAuthToken)
     , _suDuration    :: !(Maybe Word64)
@@ -187,7 +187,7 @@ suPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-suKey :: Lens' ScheduleUpdate' (Maybe Key)
+suKey :: Lens' ScheduleUpdate' (Maybe AuthKey)
 suKey = lens _suKey (\ s a -> s{_suKey = a})
 
 -- | Scheduled end time in milliseconds since epoch.

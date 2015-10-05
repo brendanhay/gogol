@@ -53,7 +53,7 @@ type FilesEmptyTrashResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -64,7 +64,7 @@ data FilesEmptyTrash' = FilesEmptyTrash'
     { _fetQuotaUser   :: !(Maybe Text)
     , _fetPrettyPrint :: !Bool
     , _fetUserIP      :: !(Maybe Text)
-    , _fetKey         :: !(Maybe Key)
+    , _fetKey         :: !(Maybe AuthKey)
     , _fetOAuthToken  :: !(Maybe OAuthToken)
     , _fetFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -118,7 +118,7 @@ fetUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fetKey :: Lens' FilesEmptyTrash' (Maybe Key)
+fetKey :: Lens' FilesEmptyTrash' (Maybe AuthKey)
 fetKey = lens _fetKey (\ s a -> s{_fetKey = a})
 
 -- | OAuth 2.0 token for the current user.

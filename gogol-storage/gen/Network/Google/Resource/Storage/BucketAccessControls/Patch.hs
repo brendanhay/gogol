@@ -59,7 +59,7 @@ type BucketAccessControlsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] BucketAccessControl :>
@@ -75,7 +75,7 @@ data BucketAccessControlsPatch' = BucketAccessControlsPatch'
     , _bacpUserIP      :: !(Maybe Text)
     , _bacpBucket      :: !Text
     , _bacpPayload     :: !BucketAccessControl
-    , _bacpKey         :: !(Maybe Key)
+    , _bacpKey         :: !(Maybe AuthKey)
     , _bacpOAuthToken  :: !(Maybe OAuthToken)
     , _bacpEntity      :: !Text
     , _bacpFields      :: !(Maybe Text)
@@ -153,7 +153,7 @@ bacpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bacpKey :: Lens' BucketAccessControlsPatch' (Maybe Key)
+bacpKey :: Lens' BucketAccessControlsPatch' (Maybe AuthKey)
 bacpKey = lens _bacpKey (\ s a -> s{_bacpKey = a})
 
 -- | OAuth 2.0 token for the current user.

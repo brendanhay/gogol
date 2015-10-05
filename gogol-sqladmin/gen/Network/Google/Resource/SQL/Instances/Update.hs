@@ -60,7 +60,7 @@ type InstancesUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] DatabaseInstance :>
@@ -77,7 +77,7 @@ data InstancesUpdate' = InstancesUpdate'
     , _iuProject     :: !Text
     , _iuUserIP      :: !(Maybe Text)
     , _iuPayload     :: !DatabaseInstance
-    , _iuKey         :: !(Maybe Key)
+    , _iuKey         :: !(Maybe AuthKey)
     , _iuOAuthToken  :: !(Maybe OAuthToken)
     , _iuFields      :: !(Maybe Text)
     , _iuInstance    :: !Text
@@ -153,7 +153,7 @@ iuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iuKey :: Lens' InstancesUpdate' (Maybe Key)
+iuKey :: Lens' InstancesUpdate' (Maybe AuthKey)
 iuKey = lens _iuKey (\ s a -> s{_iuKey = a})
 
 -- | OAuth 2.0 token for the current user.

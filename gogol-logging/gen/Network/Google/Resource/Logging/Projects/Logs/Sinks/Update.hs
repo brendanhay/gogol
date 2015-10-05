@@ -74,7 +74,7 @@ type ProjectsLogsSinksUpdateResource =
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "fields" Text :>
-                                       QueryParam "key" Key :>
+                                       QueryParam "key" AuthKey :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              ReqBody '[JSON] LogSink :>
@@ -94,7 +94,7 @@ data ProjectsLogsSinksUpdate' = ProjectsLogsSinksUpdate'
     , _plsuUploadType     :: !(Maybe Text)
     , _plsuPayload        :: !LogSink
     , _plsuBearerToken    :: !(Maybe Text)
-    , _plsuKey            :: !(Maybe Key)
+    , _plsuKey            :: !(Maybe AuthKey)
     , _plsuOAuthToken     :: !(Maybe OAuthToken)
     , _plsuProjectsId     :: !Text
     , _plsuSinksId        :: !Text
@@ -223,7 +223,7 @@ plsuBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plsuKey :: Lens' ProjectsLogsSinksUpdate' (Maybe Key)
+plsuKey :: Lens' ProjectsLogsSinksUpdate' (Maybe AuthKey)
 plsuKey = lens _plsuKey (\ s a -> s{_plsuKey = a})
 
 -- | OAuth 2.0 token for the current user.

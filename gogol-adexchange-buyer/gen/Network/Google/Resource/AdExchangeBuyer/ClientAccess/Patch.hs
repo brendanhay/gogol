@@ -57,7 +57,7 @@ type ClientAccessPatchResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ClientAccessCapabilities :>
@@ -71,7 +71,7 @@ data ClientAccessPatch' = ClientAccessPatch'
     , _capUserIP           :: !(Maybe Text)
     , _capSponsorAccountId :: !Int32
     , _capPayload          :: !ClientAccessCapabilities
-    , _capKey              :: !(Maybe Key)
+    , _capKey              :: !(Maybe AuthKey)
     , _capClientAccountId  :: !Int64
     , _capOAuthToken       :: !(Maybe OAuthToken)
     , _capFields           :: !(Maybe Text)
@@ -148,7 +148,7 @@ capPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-capKey :: Lens' ClientAccessPatch' (Maybe Key)
+capKey :: Lens' ClientAccessPatch' (Maybe AuthKey)
 capKey = lens _capKey (\ s a -> s{_capKey = a})
 
 capClientAccountId :: Lens' ClientAccessPatch' Int64

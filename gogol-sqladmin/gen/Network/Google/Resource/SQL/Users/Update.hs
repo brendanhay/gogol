@@ -63,7 +63,7 @@ type UsersUpdateResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] User :> Put '[JSON] Operation
@@ -77,7 +77,7 @@ data UsersUpdate' = UsersUpdate'
     , _uuProject     :: !Text
     , _uuUserIP      :: !(Maybe Text)
     , _uuPayload     :: !User
-    , _uuKey         :: !(Maybe Key)
+    , _uuKey         :: !(Maybe AuthKey)
     , _uuName        :: !Text
     , _uuHost        :: !Text
     , _uuOAuthToken  :: !(Maybe OAuthToken)
@@ -163,7 +163,7 @@ uuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uuKey :: Lens' UsersUpdate' (Maybe Key)
+uuKey :: Lens' UsersUpdate' (Maybe AuthKey)
 uuKey = lens _uuKey (\ s a -> s{_uuKey = a})
 
 -- | Name of the user in the instance.

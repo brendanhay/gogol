@@ -55,7 +55,7 @@ type SubscriptionsUpdateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Subscription :>
@@ -69,7 +69,7 @@ data SubscriptionsUpdate' = SubscriptionsUpdate'
     , _suPrettyPrint :: !Bool
     , _suUserIP      :: !(Maybe Text)
     , _suPayload     :: !Subscription
-    , _suKey         :: !(Maybe Key)
+    , _suKey         :: !(Maybe AuthKey)
     , _suId          :: !Text
     , _suOAuthToken  :: !(Maybe OAuthToken)
     , _suFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ suPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-suKey :: Lens' SubscriptionsUpdate' (Maybe Key)
+suKey :: Lens' SubscriptionsUpdate' (Maybe AuthKey)
 suKey = lens _suKey (\ s a -> s{_suKey = a})
 
 -- | The ID of the subscription.

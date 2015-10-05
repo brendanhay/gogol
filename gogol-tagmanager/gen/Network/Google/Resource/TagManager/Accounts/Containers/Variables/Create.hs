@@ -59,7 +59,7 @@ type AccountsContainersVariablesCreateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Variable :> Post '[JSON] Variable
@@ -74,7 +74,7 @@ data AccountsContainersVariablesCreate' = AccountsContainersVariablesCreate'
     , _acvccUserIP      :: !(Maybe Text)
     , _acvccPayload     :: !Variable
     , _acvccAccountId   :: !Text
-    , _acvccKey         :: !(Maybe Key)
+    , _acvccKey         :: !(Maybe AuthKey)
     , _acvccOAuthToken  :: !(Maybe OAuthToken)
     , _acvccFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -158,7 +158,7 @@ acvccAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acvccKey :: Lens' AccountsContainersVariablesCreate' (Maybe Key)
+acvccKey :: Lens' AccountsContainersVariablesCreate' (Maybe AuthKey)
 acvccKey = lens _acvccKey (\ s a -> s{_acvccKey = a})
 
 -- | OAuth 2.0 token for the current user.

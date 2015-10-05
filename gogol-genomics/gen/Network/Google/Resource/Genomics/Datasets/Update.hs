@@ -55,7 +55,7 @@ type DatasetsUpdateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Dataset :> Put '[JSON] Dataset
@@ -68,7 +68,7 @@ data DatasetsUpdate' = DatasetsUpdate'
     , _dPrettyPrint :: !Bool
     , _dUserIP      :: !(Maybe Text)
     , _dPayload     :: !Dataset
-    , _dKey         :: !(Maybe Key)
+    , _dKey         :: !(Maybe AuthKey)
     , _dDatasetId   :: !Text
     , _dOAuthToken  :: !(Maybe OAuthToken)
     , _dFields      :: !(Maybe Text)
@@ -133,7 +133,7 @@ dPayload = lens _dPayload (\ s a -> s{_dPayload = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dKey :: Lens' DatasetsUpdate' (Maybe Key)
+dKey :: Lens' DatasetsUpdate' (Maybe AuthKey)
 dKey = lens _dKey (\ s a -> s{_dKey = a})
 
 -- | The ID of the dataset to be updated.

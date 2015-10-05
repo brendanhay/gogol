@@ -59,7 +59,7 @@ type CirclesListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] CircleFeed
 
@@ -71,7 +71,7 @@ data CirclesList' = CirclesList'
     , _clPrettyPrint :: !Bool
     , _clUserIP      :: !(Maybe Text)
     , _clUserId      :: !Text
-    , _clKey         :: !(Maybe Key)
+    , _clKey         :: !(Maybe AuthKey)
     , _clPageToken   :: !(Maybe Text)
     , _clOAuthToken  :: !(Maybe OAuthToken)
     , _clMaxResults  :: !Word32
@@ -141,7 +141,7 @@ clUserId = lens _clUserId (\ s a -> s{_clUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' CirclesList' (Maybe Key)
+clKey :: Lens' CirclesList' (Maybe AuthKey)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | The continuation token, which is used to page through large result sets.

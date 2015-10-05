@@ -64,7 +64,7 @@ type FilesWatchResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Channel :> Post '[JSON] Channel
@@ -80,7 +80,7 @@ type FilesWatchResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltMedia :>
                                    ReqBody '[JSON] Channel :>
@@ -95,7 +95,7 @@ data FilesWatch' = FilesWatch'
     , _fwUserIP           :: !(Maybe Text)
     , _fwPayload          :: !Channel
     , _fwUpdateViewedDate :: !Bool
-    , _fwKey              :: !(Maybe Key)
+    , _fwKey              :: !(Maybe AuthKey)
     , _fwProjection       :: !(Maybe FilesWatchProjection)
     , _fwAcknowledgeAbuse :: !Bool
     , _fwFileId           :: !Text
@@ -184,7 +184,7 @@ fwUpdateViewedDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fwKey :: Lens' FilesWatch' (Maybe Key)
+fwKey :: Lens' FilesWatch' (Maybe AuthKey)
 fwKey = lens _fwKey (\ s a -> s{_fwKey = a})
 
 -- | This parameter is deprecated and has no function.

@@ -63,7 +63,7 @@ type ObjectAccessControlsUpdateResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] ObjectAccessControl :>
@@ -78,7 +78,7 @@ data ObjectAccessControlsUpdate' = ObjectAccessControlsUpdate'
     , _oacuUserIP      :: !(Maybe Text)
     , _oacuBucket      :: !Text
     , _oacuPayload     :: !ObjectAccessControl
-    , _oacuKey         :: !(Maybe Key)
+    , _oacuKey         :: !(Maybe AuthKey)
     , _oacuObject      :: !Text
     , _oacuOAuthToken  :: !(Maybe OAuthToken)
     , _oacuEntity      :: !Text
@@ -165,7 +165,7 @@ oacuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oacuKey :: Lens' ObjectAccessControlsUpdate' (Maybe Key)
+oacuKey :: Lens' ObjectAccessControlsUpdate' (Maybe AuthKey)
 oacuKey = lens _oacuKey (\ s a -> s{_oacuKey = a})
 
 -- | Name of the object.

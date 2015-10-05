@@ -55,7 +55,7 @@ type DatasetsLookupResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltPROTO :>
                        ReqBody '[JSON] LookupRequest :>
@@ -69,7 +69,7 @@ data DatasetsLookup' = DatasetsLookup'
     , _dlPrettyPrint :: !Bool
     , _dlUserIP      :: !(Maybe Text)
     , _dlPayload     :: !LookupRequest
-    , _dlKey         :: !(Maybe Key)
+    , _dlKey         :: !(Maybe AuthKey)
     , _dlDatasetId   :: !Text
     , _dlOAuthToken  :: !(Maybe OAuthToken)
     , _dlFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ dlPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dlKey :: Lens' DatasetsLookup' (Maybe Key)
+dlKey :: Lens' DatasetsLookup' (Maybe AuthKey)
 dlKey = lens _dlKey (\ s a -> s{_dlKey = a})
 
 -- | Identifies the dataset.

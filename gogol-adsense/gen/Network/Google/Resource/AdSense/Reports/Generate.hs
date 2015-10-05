@@ -78,7 +78,7 @@ type ReportsGenerateResource =
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "userIp" Text :>
                                      QueryParam "fields" Text :>
-                                       QueryParam "key" Key :>
+                                       QueryParam "key" AuthKey :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON]
@@ -101,7 +101,7 @@ type ReportsGenerateResource =
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "key" Key :>
+                                         QueryParam "key" AuthKey :>
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltMedia :>
@@ -122,7 +122,7 @@ data ReportsGenerate' = ReportsGenerate'
     , _rgStartDate            :: !Text
     , _rgAccountId            :: !(Maybe [Text])
     , _rgMetric               :: !(Maybe [Text])
-    , _rgKey                  :: !(Maybe Key)
+    , _rgKey                  :: !(Maybe AuthKey)
     , _rgCurrency             :: !(Maybe Text)
     , _rgSort                 :: !(Maybe [Text])
     , _rgFilter               :: !(Maybe [Text])
@@ -256,7 +256,7 @@ rgMetric
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rgKey :: Lens' ReportsGenerate' (Maybe Key)
+rgKey :: Lens' ReportsGenerate' (Maybe AuthKey)
 rgKey = lens _rgKey (\ s a -> s{_rgKey = a})
 
 -- | Optional currency to use when reporting on monetary metrics. Defaults to

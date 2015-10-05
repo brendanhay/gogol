@@ -59,7 +59,7 @@ type SubscriptionsChangeRenewalSettingsResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] RenewalSettings :>
@@ -74,7 +74,7 @@ data SubscriptionsChangeRenewalSettings' = SubscriptionsChangeRenewalSettings'
     , _scrsUserIP         :: !(Maybe Text)
     , _scrsPayload        :: !RenewalSettings
     , _scrsCustomerId     :: !Text
-    , _scrsKey            :: !(Maybe Key)
+    , _scrsKey            :: !(Maybe AuthKey)
     , _scrsOAuthToken     :: !(Maybe OAuthToken)
     , _scrsSubscriptionId :: !Text
     , _scrsFields         :: !(Maybe Text)
@@ -153,7 +153,7 @@ scrsCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-scrsKey :: Lens' SubscriptionsChangeRenewalSettings' (Maybe Key)
+scrsKey :: Lens' SubscriptionsChangeRenewalSettings' (Maybe AuthKey)
 scrsKey = lens _scrsKey (\ s a -> s{_scrsKey = a})
 
 -- | OAuth 2.0 token for the current user.

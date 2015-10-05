@@ -61,7 +61,7 @@ type ObjectAccessControlsInsertResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] ObjectAccessControl :>
@@ -76,7 +76,7 @@ data ObjectAccessControlsInsert' = ObjectAccessControlsInsert'
     , _oaciUserIP      :: !(Maybe Text)
     , _oaciBucket      :: !Text
     , _oaciPayload     :: !ObjectAccessControl
-    , _oaciKey         :: !(Maybe Key)
+    , _oaciKey         :: !(Maybe AuthKey)
     , _oaciObject      :: !Text
     , _oaciOAuthToken  :: !(Maybe OAuthToken)
     , _oaciGeneration  :: !(Maybe Word64)
@@ -158,7 +158,7 @@ oaciPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oaciKey :: Lens' ObjectAccessControlsInsert' (Maybe Key)
+oaciKey :: Lens' ObjectAccessControlsInsert' (Maybe AuthKey)
 oaciKey = lens _oaciKey (\ s a -> s{_oaciKey = a})
 
 -- | Name of the object.

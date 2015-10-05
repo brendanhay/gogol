@@ -64,7 +64,7 @@ type TasksMoveResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Post '[JSON] Task
 
@@ -78,7 +78,7 @@ data TasksMove' = TasksMove'
     , _tmQuotaUser   :: !(Maybe Text)
     , _tmPrettyPrint :: !Bool
     , _tmUserIP      :: !(Maybe Text)
-    , _tmKey         :: !(Maybe Key)
+    , _tmKey         :: !(Maybe AuthKey)
     , _tmTaskList    :: !Text
     , _tmTask        :: !Text
     , _tmOAuthToken  :: !(Maybe OAuthToken)
@@ -153,7 +153,7 @@ tmUserIP = lens _tmUserIP (\ s a -> s{_tmUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tmKey :: Lens' TasksMove' (Maybe Key)
+tmKey :: Lens' TasksMove' (Maybe AuthKey)
 tmKey = lens _tmKey (\ s a -> s{_tmKey = a})
 
 -- | Task list identifier.

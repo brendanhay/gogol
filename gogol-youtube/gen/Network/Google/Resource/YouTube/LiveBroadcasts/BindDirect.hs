@@ -67,7 +67,7 @@ type LiveBroadcastsBindDirectResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Post '[JSON] LiveBroadcast
@@ -84,7 +84,7 @@ data LiveBroadcastsBindDirect' = LiveBroadcastsBindDirect'
     , _lbbdPrettyPrint                   :: !Bool
     , _lbbdUserIP                        :: !(Maybe Text)
     , _lbbdOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lbbdKey                           :: !(Maybe Key)
+    , _lbbdKey                           :: !(Maybe AuthKey)
     , _lbbdOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbbdId                            :: !Text
     , _lbbdOAuthToken                    :: !(Maybe OAuthToken)
@@ -181,7 +181,7 @@ lbbdOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lbbdKey :: Lens' LiveBroadcastsBindDirect' (Maybe Key)
+lbbdKey :: Lens' LiveBroadcastsBindDirect' (Maybe AuthKey)
 lbbdKey = lens _lbbdKey (\ s a -> s{_lbbdKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:

@@ -56,7 +56,7 @@ type OrdersGetbymerchantOrderidResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] OrdersGetByMerchantOrderIdResponse
@@ -70,7 +70,7 @@ data OrdersGetbymerchantOrderid' = OrdersGetbymerchantOrderid'
     , _ogogPrettyPrint     :: !Bool
     , _ogogUserIP          :: !(Maybe Text)
     , _ogogMerchantOrderId :: !Text
-    , _ogogKey             :: !(Maybe Key)
+    , _ogogKey             :: !(Maybe AuthKey)
     , _ogogOAuthToken      :: !(Maybe OAuthToken)
     , _ogogFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ ogogMerchantOrderId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ogogKey :: Lens' OrdersGetbymerchantOrderid' (Maybe Key)
+ogogKey :: Lens' OrdersGetbymerchantOrderid' (Maybe AuthKey)
 ogogKey = lens _ogogKey (\ s a -> s{_ogogKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -58,7 +58,7 @@ type OrdersRefundResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] OrdersRefundRequest :>
@@ -73,7 +73,7 @@ data OrdersRefund' = OrdersRefund'
     , _orPrettyPrint :: !Bool
     , _orUserIP      :: !(Maybe Text)
     , _orPayload     :: !OrdersRefundRequest
-    , _orKey         :: !(Maybe Key)
+    , _orKey         :: !(Maybe AuthKey)
     , _orOAuthToken  :: !(Maybe OAuthToken)
     , _orOrderId     :: !Text
     , _orFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ orPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-orKey :: Lens' OrdersRefund' (Maybe Key)
+orKey :: Lens' OrdersRefund' (Maybe AuthKey)
 orKey = lens _orKey (\ s a -> s{_orKey = a})
 
 -- | OAuth 2.0 token for the current user.

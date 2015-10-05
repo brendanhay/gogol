@@ -56,7 +56,7 @@ type MyConfigUpdateUserSettingsResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Usersettings :>
@@ -72,7 +72,7 @@ data MyConfigUpdateUserSettings' = MyConfigUpdateUserSettings'
     , _mcuusPrettyPrint :: !Bool
     , _mcuusUserIP      :: !(Maybe Text)
     , _mcuusPayload     :: !Usersettings
-    , _mcuusKey         :: !(Maybe Key)
+    , _mcuusKey         :: !(Maybe AuthKey)
     , _mcuusOAuthToken  :: !(Maybe OAuthToken)
     , _mcuusFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -136,7 +136,7 @@ mcuusPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcuusKey :: Lens' MyConfigUpdateUserSettings' (Maybe Key)
+mcuusKey :: Lens' MyConfigUpdateUserSettings' (Maybe AuthKey)
 mcuusKey = lens _mcuusKey (\ s a -> s{_mcuusKey = a})
 
 -- | OAuth 2.0 token for the current user.

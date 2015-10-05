@@ -58,7 +58,7 @@ type SchemasPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Schema :> Patch '[JSON] Schema
@@ -72,7 +72,7 @@ data SchemasPatch' = SchemasPatch'
     , _spUserIP      :: !(Maybe Text)
     , _spPayload     :: !Schema
     , _spCustomerId  :: !Text
-    , _spKey         :: !(Maybe Key)
+    , _spKey         :: !(Maybe AuthKey)
     , _spOAuthToken  :: !(Maybe OAuthToken)
     , _spSchemaKey   :: !Text
     , _spFields      :: !(Maybe Text)
@@ -148,7 +148,7 @@ spCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-spKey :: Lens' SchemasPatch' (Maybe Key)
+spKey :: Lens' SchemasPatch' (Maybe AuthKey)
 spKey = lens _spKey (\ s a -> s{_spKey = a})
 
 -- | OAuth 2.0 token for the current user.

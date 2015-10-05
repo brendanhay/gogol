@@ -55,7 +55,7 @@ type UsersPatchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] User :> Patch '[JSON] User
@@ -68,7 +68,7 @@ data UsersPatch' = UsersPatch'
     , _upPrettyPrint :: !Bool
     , _upUserIP      :: !(Maybe Text)
     , _upPayload     :: !User
-    , _upKey         :: !(Maybe Key)
+    , _upKey         :: !(Maybe AuthKey)
     , _upOAuthToken  :: !(Maybe OAuthToken)
     , _upUserKey     :: !Text
     , _upFields      :: !(Maybe Text)
@@ -135,7 +135,7 @@ upPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-upKey :: Lens' UsersPatch' (Maybe Key)
+upKey :: Lens' UsersPatch' (Maybe AuthKey)
 upKey = lens _upKey (\ s a -> s{_upKey = a})
 
 -- | OAuth 2.0 token for the current user.

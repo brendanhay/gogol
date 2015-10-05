@@ -54,7 +54,7 @@ type PawsRegisterResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] PawsRegisterRequest :>
@@ -69,7 +69,7 @@ data PawsRegister' = PawsRegister'
     , _prPrettyPrint :: !Bool
     , _prUserIP      :: !(Maybe Text)
     , _prPayload     :: !PawsRegisterRequest
-    , _prKey         :: !(Maybe Key)
+    , _prKey         :: !(Maybe AuthKey)
     , _prOAuthToken  :: !(Maybe OAuthToken)
     , _prFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -131,7 +131,7 @@ prPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-prKey :: Lens' PawsRegister' (Maybe Key)
+prKey :: Lens' PawsRegister' (Maybe AuthKey)
 prKey = lens _prKey (\ s a -> s{_prKey = a})
 
 -- | OAuth 2.0 token for the current user.

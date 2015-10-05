@@ -64,7 +64,7 @@ type GlobalAccountsOperationsListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] OperationList
@@ -79,7 +79,7 @@ data GlobalAccountsOperationsList' = GlobalAccountsOperationsList'
     , _gaolOrderBy     :: !(Maybe Text)
     , _gaolProject     :: !Text
     , _gaolUserIP      :: !(Maybe Text)
-    , _gaolKey         :: !(Maybe Key)
+    , _gaolKey         :: !(Maybe AuthKey)
     , _gaolFilter      :: !(Maybe Text)
     , _gaolPageToken   :: !(Maybe Text)
     , _gaolOAuthToken  :: !(Maybe OAuthToken)
@@ -170,7 +170,7 @@ gaolUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gaolKey :: Lens' GlobalAccountsOperationsList' (Maybe Key)
+gaolKey :: Lens' GlobalAccountsOperationsList' (Maybe AuthKey)
 gaolKey = lens _gaolKey (\ s a -> s{_gaolKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

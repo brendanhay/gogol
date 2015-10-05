@@ -442,7 +442,7 @@ externalLit = \case
     Int64    -> TyCon "Int64"
 
     Alt t      -> TyCon (unqual (Text.unpack t))
-    Key        -> TyCon "Key"
+    Key        -> TyCon "AuthKey"
     OAuthToken -> TyCon "OAuthToken"
     Body       -> TyCon "Body"
 
@@ -463,7 +463,7 @@ internalLit = \case
     Int64    -> TyCon "Int64"
 
     Alt t      -> TyCon (unqual (Text.unpack t))
-    Key        -> TyCon "Key"
+    Key        -> TyCon "AuthKey"
     OAuthToken -> TyCon "OAuthToken"
     Body       -> TyCon "Body"
 

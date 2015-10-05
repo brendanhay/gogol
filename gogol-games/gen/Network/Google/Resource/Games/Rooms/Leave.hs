@@ -59,7 +59,7 @@ type RoomsLeaveResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] RoomLeaveRequest :> Post '[JSON] Room
@@ -73,7 +73,7 @@ data RoomsLeave' = RoomsLeave'
     , _rlPrettyPrint :: !Bool
     , _rlUserIP      :: !(Maybe Text)
     , _rlPayload     :: !RoomLeaveRequest
-    , _rlKey         :: !(Maybe Key)
+    , _rlKey         :: !(Maybe AuthKey)
     , _rlRoomId      :: !Text
     , _rlLanguage    :: !(Maybe Text)
     , _rlOAuthToken  :: !(Maybe OAuthToken)
@@ -144,7 +144,7 @@ rlPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rlKey :: Lens' RoomsLeave' (Maybe Key)
+rlKey :: Lens' RoomsLeave' (Maybe AuthKey)
 rlKey = lens _rlKey (\ s a -> s{_rlKey = a})
 
 -- | The ID of the room.

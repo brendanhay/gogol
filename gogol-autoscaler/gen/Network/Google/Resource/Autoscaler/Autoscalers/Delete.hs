@@ -60,7 +60,7 @@ type AutoscalersDeleteResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Delete '[JSON] Operation
@@ -74,7 +74,7 @@ data AutoscalersDelete' = AutoscalersDelete'
     , _adProject     :: !Text
     , _adUserIP      :: !(Maybe Text)
     , _adZone        :: !Text
-    , _adKey         :: !(Maybe Key)
+    , _adKey         :: !(Maybe AuthKey)
     , _adAutoscaler  :: !Text
     , _adOAuthToken  :: !(Maybe OAuthToken)
     , _adFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ adZone = lens _adZone (\ s a -> s{_adZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-adKey :: Lens' AutoscalersDelete' (Maybe Key)
+adKey :: Lens' AutoscalersDelete' (Maybe AuthKey)
 adKey = lens _adKey (\ s a -> s{_adKey = a})
 
 -- | Name of the Autoscaler resource.

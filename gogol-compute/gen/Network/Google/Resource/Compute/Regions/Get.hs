@@ -56,7 +56,7 @@ type RegionsGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Region
 
@@ -68,7 +68,7 @@ data RegionsGet' = RegionsGet'
     , _rgPrettyPrint :: !Bool
     , _rgProject     :: !Text
     , _rgUserIP      :: !(Maybe Text)
-    , _rgKey         :: !(Maybe Key)
+    , _rgKey         :: !(Maybe AuthKey)
     , _rgRegion      :: !Text
     , _rgOAuthToken  :: !(Maybe OAuthToken)
     , _rgFields      :: !(Maybe Text)
@@ -135,7 +135,7 @@ rgUserIP = lens _rgUserIP (\ s a -> s{_rgUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rgKey :: Lens' RegionsGet' (Maybe Key)
+rgKey :: Lens' RegionsGet' (Maybe AuthKey)
 rgKey = lens _rgKey (\ s a -> s{_rgKey = a})
 
 -- | Name of the region resource to return.

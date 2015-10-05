@@ -66,7 +66,7 @@ type FilesListResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] FileList
@@ -80,7 +80,7 @@ data FilesList' = FilesList'
     , _flOrderBy     :: !(Maybe Text)
     , _flUserIP      :: !(Maybe Text)
     , _flQ           :: !(Maybe Text)
-    , _flKey         :: !(Maybe Key)
+    , _flKey         :: !(Maybe AuthKey)
     , _flSpaces      :: !(Maybe Text)
     , _flProjection  :: !(Maybe FilesListProjection)
     , _flCorpus      :: !(Maybe FilesListCorpus)
@@ -175,7 +175,7 @@ flQ = lens _flQ (\ s a -> s{_flQ = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-flKey :: Lens' FilesList' (Maybe Key)
+flKey :: Lens' FilesList' (Maybe AuthKey)
 flKey = lens _flKey (\ s a -> s{_flKey = a})
 
 -- | A comma-separated list of spaces to query. Supported values are

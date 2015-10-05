@@ -57,7 +57,7 @@ type FloodlightConfigurationsListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] FloodlightConfigurationsListResponse
@@ -71,7 +71,7 @@ data FloodlightConfigurationsList' = FloodlightConfigurationsList'
     , _fclUserIP      :: !(Maybe Text)
     , _fclIds         :: !(Maybe [Int64])
     , _fclProFileId   :: !Int64
-    , _fclKey         :: !(Maybe Key)
+    , _fclKey         :: !(Maybe AuthKey)
     , _fclOAuthToken  :: !(Maybe OAuthToken)
     , _fclFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ fclProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fclKey :: Lens' FloodlightConfigurationsList' (Maybe Key)
+fclKey :: Lens' FloodlightConfigurationsList' (Maybe AuthKey)
 fclKey = lens _fclKey (\ s a -> s{_fclKey = a})
 
 -- | OAuth 2.0 token for the current user.

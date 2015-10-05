@@ -55,7 +55,7 @@ type AnnotationsGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Annotation
 
@@ -67,7 +67,7 @@ data AnnotationsGet' = AnnotationsGet'
     { _agQuotaUser    :: !(Maybe Text)
     , _agPrettyPrint  :: !Bool
     , _agUserIP       :: !(Maybe Text)
-    , _agKey          :: !(Maybe Key)
+    , _agKey          :: !(Maybe AuthKey)
     , _agAnnotationId :: !Text
     , _agOAuthToken   :: !(Maybe OAuthToken)
     , _agFields       :: !(Maybe Text)
@@ -125,7 +125,7 @@ agUserIP = lens _agUserIP (\ s a -> s{_agUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agKey :: Lens' AnnotationsGet' (Maybe Key)
+agKey :: Lens' AnnotationsGet' (Maybe AuthKey)
 agKey = lens _agKey (\ s a -> s{_agKey = a})
 
 -- | The ID of the annotation set to be retrieved.

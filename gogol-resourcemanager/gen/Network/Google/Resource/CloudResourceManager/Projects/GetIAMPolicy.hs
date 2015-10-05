@@ -68,7 +68,7 @@ type ProjectsGetIAMPolicyResource =
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] GetIAMPolicyRequest :>
@@ -87,7 +87,7 @@ data ProjectsGetIAMPolicy' = ProjectsGetIAMPolicy'
     , _pgipUploadType     :: !(Maybe Text)
     , _pgipPayload        :: !GetIAMPolicyRequest
     , _pgipBearerToken    :: !(Maybe Text)
-    , _pgipKey            :: !(Maybe Key)
+    , _pgipKey            :: !(Maybe AuthKey)
     , _pgipResource       :: !Text
     , _pgipOAuthToken     :: !(Maybe OAuthToken)
     , _pgipFields         :: !(Maybe Text)
@@ -202,7 +202,7 @@ pgipBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgipKey :: Lens' ProjectsGetIAMPolicy' (Maybe Key)
+pgipKey :: Lens' ProjectsGetIAMPolicy' (Maybe AuthKey)
 pgipKey = lens _pgipKey (\ s a -> s{_pgipKey = a})
 
 -- | REQUIRED: The resource for which policy is being requested. Resource is

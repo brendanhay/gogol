@@ -73,7 +73,7 @@ type PublishersListResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] Publishers
@@ -91,7 +91,7 @@ data PublishersList' = PublishersList'
     , _plRoleId             :: !Text
     , _plMinNinetyDayEpc    :: !(Maybe Double)
     , _plRole               :: !PublishersListRole
-    , _plKey                :: !(Maybe Key)
+    , _plKey                :: !(Maybe AuthKey)
     , _plMinPayoutRank      :: !(Maybe Int32)
     , _plPageToken          :: !(Maybe Text)
     , _plOAuthToken         :: !(Maybe OAuthToken)
@@ -207,7 +207,7 @@ plRole = lens _plRole (\ s a -> s{_plRole = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plKey :: Lens' PublishersList' (Maybe Key)
+plKey :: Lens' PublishersList' (Maybe AuthKey)
 plKey = lens _plKey (\ s a -> s{_plKey = a})
 
 -- | A value between 1 and 4, where 1 represents the quartile of publishers

@@ -67,7 +67,7 @@ type UsersDataSourcesDatasetsGetResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Dataset
 
@@ -84,7 +84,7 @@ data UsersDataSourcesDatasetsGet' = UsersDataSourcesDatasetsGet'
     , _udsdgUserIP       :: !(Maybe Text)
     , _udsdgDataSourceId :: !Text
     , _udsdgUserId       :: !Text
-    , _udsdgKey          :: !(Maybe Key)
+    , _udsdgKey          :: !(Maybe AuthKey)
     , _udsdgDatasetId    :: !Text
     , _udsdgLimit        :: !(Maybe Int32)
     , _udsdgPageToken    :: !(Maybe Text)
@@ -172,7 +172,7 @@ udsdgUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udsdgKey :: Lens' UsersDataSourcesDatasetsGet' (Maybe Key)
+udsdgKey :: Lens' UsersDataSourcesDatasetsGet' (Maybe AuthKey)
 udsdgKey = lens _udsdgKey (\ s a -> s{_udsdgKey = a})
 
 -- | Dataset identifier that is a composite of the minimum data point start

@@ -64,7 +64,7 @@ type PostUserInfosGetResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] PostUserInfo
@@ -81,7 +81,7 @@ data PostUserInfosGet' = PostUserInfosGet'
     , _puigBlogId      :: !Text
     , _puigMaxComments :: !(Maybe Word32)
     , _puigUserId      :: !Text
-    , _puigKey         :: !(Maybe Key)
+    , _puigKey         :: !(Maybe AuthKey)
     , _puigPostId      :: !Text
     , _puigOAuthToken  :: !(Maybe OAuthToken)
     , _puigFields      :: !(Maybe Text)
@@ -169,7 +169,7 @@ puigUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puigKey :: Lens' PostUserInfosGet' (Maybe Key)
+puigKey :: Lens' PostUserInfosGet' (Maybe AuthKey)
 puigKey = lens _puigKey (\ s a -> s{_puigKey = a})
 
 -- | The ID of the post to get.

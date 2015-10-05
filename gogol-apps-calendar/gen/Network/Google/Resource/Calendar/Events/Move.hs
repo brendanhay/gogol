@@ -62,7 +62,7 @@ type EventsMoveResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Post '[JSON] Event
 
@@ -75,7 +75,7 @@ data EventsMove' = EventsMove'
     , _emCalendarId        :: !Text
     , _emPrettyPrint       :: !Bool
     , _emUserIP            :: !(Maybe Text)
-    , _emKey               :: !(Maybe Key)
+    , _emKey               :: !(Maybe AuthKey)
     , _emSendNotifications :: !(Maybe Bool)
     , _emOAuthToken        :: !(Maybe OAuthToken)
     , _emEventId           :: !Text
@@ -158,7 +158,7 @@ emUserIP = lens _emUserIP (\ s a -> s{_emUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-emKey :: Lens' EventsMove' (Maybe Key)
+emKey :: Lens' EventsMove' (Maybe AuthKey)
 emKey = lens _emKey (\ s a -> s{_emKey = a})
 
 -- | Whether to send notifications about the change of the event\'s

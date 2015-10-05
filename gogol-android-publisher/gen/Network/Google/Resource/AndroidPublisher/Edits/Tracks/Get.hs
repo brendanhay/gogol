@@ -60,7 +60,7 @@ type EditsTracksGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Track
 
@@ -74,7 +74,7 @@ data EditsTracksGet' = EditsTracksGet'
     , _etgPrettyPrint :: !Bool
     , _etgPackageName :: !Text
     , _etgUserIP      :: !(Maybe Text)
-    , _etgKey         :: !(Maybe Key)
+    , _etgKey         :: !(Maybe AuthKey)
     , _etgOAuthToken  :: !(Maybe OAuthToken)
     , _etgEditId      :: !Text
     , _etgFields      :: !(Maybe Text)
@@ -152,7 +152,7 @@ etgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-etgKey :: Lens' EditsTracksGet' (Maybe Key)
+etgKey :: Lens' EditsTracksGet' (Maybe AuthKey)
 etgKey = lens _etgKey (\ s a -> s{_etgKey = a})
 
 -- | OAuth 2.0 token for the current user.

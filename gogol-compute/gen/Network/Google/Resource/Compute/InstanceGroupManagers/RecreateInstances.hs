@@ -62,7 +62,7 @@ type InstanceGroupManagersRecreateInstancesResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON]
@@ -81,7 +81,7 @@ data InstanceGroupManagersRecreateInstances' = InstanceGroupManagersRecreateInst
     , _igmriUserIP               :: !(Maybe Text)
     , _igmriZone                 :: !Text
     , _igmriPayload              :: !InstanceGroupManagersRecreateInstancesRequest
-    , _igmriKey                  :: !(Maybe Key)
+    , _igmriKey                  :: !(Maybe AuthKey)
     , _igmriOAuthToken           :: !(Maybe OAuthToken)
     , _igmriFields               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -173,7 +173,7 @@ igmriPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmriKey :: Lens' InstanceGroupManagersRecreateInstances' (Maybe Key)
+igmriKey :: Lens' InstanceGroupManagersRecreateInstances' (Maybe AuthKey)
 igmriKey = lens _igmriKey (\ s a -> s{_igmriKey = a})
 
 -- | OAuth 2.0 token for the current user.

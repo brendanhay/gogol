@@ -62,7 +62,7 @@ type QuestMilestonesClaimResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Put '[JSON] ()
 
@@ -77,7 +77,7 @@ data QuestMilestonesClaim' = QuestMilestonesClaim'
     , _qmcPrettyPrint :: !Bool
     , _qmcUserIP      :: !(Maybe Text)
     , _qmcMilestoneId :: !Text
-    , _qmcKey         :: !(Maybe Key)
+    , _qmcKey         :: !(Maybe AuthKey)
     , _qmcOAuthToken  :: !(Maybe OAuthToken)
     , _qmcQuestId     :: !Text
     , _qmcFields      :: !(Maybe Text)
@@ -156,7 +156,7 @@ qmcMilestoneId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-qmcKey :: Lens' QuestMilestonesClaim' (Maybe Key)
+qmcKey :: Lens' QuestMilestonesClaim' (Maybe AuthKey)
 qmcKey = lens _qmcKey (\ s a -> s{_qmcKey = a})
 
 -- | OAuth 2.0 token for the current user.

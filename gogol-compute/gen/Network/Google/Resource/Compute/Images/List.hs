@@ -62,7 +62,7 @@ type ImagesListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] ImageList
 
@@ -75,7 +75,7 @@ data ImagesList' = ImagesList'
     , _ilPrettyPrint :: !Bool
     , _ilProject     :: !Text
     , _ilUserIP      :: !(Maybe Text)
-    , _ilKey         :: !(Maybe Key)
+    , _ilKey         :: !(Maybe AuthKey)
     , _ilFilter      :: !(Maybe Text)
     , _ilPageToken   :: !(Maybe Text)
     , _ilOAuthToken  :: !(Maybe OAuthToken)
@@ -149,7 +149,7 @@ ilUserIP = lens _ilUserIP (\ s a -> s{_ilUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ilKey :: Lens' ImagesList' (Maybe Key)
+ilKey :: Lens' ImagesList' (Maybe AuthKey)
 ilKey = lens _ilKey (\ s a -> s{_ilKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

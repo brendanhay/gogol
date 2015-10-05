@@ -76,7 +76,7 @@ type OrderDocumentsListResource =
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "key" Key :>
+                                         QueryParam "key" AuthKey :>
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
@@ -94,7 +94,7 @@ data OrderDocumentsList' = OrderDocumentsList'
     , _odlIds          :: !(Maybe [Int64])
     , _odlProFileId    :: !Int64
     , _odlSortOrder    :: !(Maybe OrderDocumentsListSortOrder)
-    , _odlKey          :: !(Maybe Key)
+    , _odlKey          :: !(Maybe AuthKey)
     , _odlPageToken    :: !(Maybe Text)
     , _odlProjectId    :: !Int64
     , _odlSortField    :: !(Maybe OrderDocumentsListSortField)
@@ -219,7 +219,7 @@ odlSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-odlKey :: Lens' OrderDocumentsList' (Maybe Key)
+odlKey :: Lens' OrderDocumentsList' (Maybe AuthKey)
 odlKey = lens _odlKey (\ s a -> s{_odlKey = a})
 
 -- | Value of the nextPageToken from the previous result page.

@@ -72,7 +72,7 @@ type ZoneViewsListResourcesResource =
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "userIp" Text :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON]
@@ -90,7 +90,7 @@ data ZoneViewsListResources' = ZoneViewsListResources'
     , _zvlrUserIP       :: !(Maybe Text)
     , _zvlrFormat       :: !(Maybe ZoneViewsListResourcesFormat)
     , _zvlrZone         :: !Text
-    , _zvlrKey          :: !(Maybe Key)
+    , _zvlrKey          :: !(Maybe AuthKey)
     , _zvlrServiceName  :: !(Maybe Text)
     , _zvlrPageToken    :: !(Maybe Text)
     , _zvlrOAuthToken   :: !(Maybe OAuthToken)
@@ -203,7 +203,7 @@ zvlrZone = lens _zvlrZone (\ s a -> s{_zvlrZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-zvlrKey :: Lens' ZoneViewsListResources' (Maybe Key)
+zvlrKey :: Lens' ZoneViewsListResources' (Maybe AuthKey)
 zvlrKey = lens _zvlrKey (\ s a -> s{_zvlrKey = a})
 
 -- | The service name to return in the response. It is optional and if it is

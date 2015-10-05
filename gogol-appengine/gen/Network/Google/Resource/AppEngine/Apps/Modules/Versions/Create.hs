@@ -72,7 +72,7 @@ type AppsModulesVersionsCreateResource =
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            ReqBody '[JSON] Version :>
@@ -92,7 +92,7 @@ data AppsModulesVersionsCreate' = AppsModulesVersionsCreate'
     , _amvcPayload        :: !Version
     , _amvcModulesId      :: !Text
     , _amvcBearerToken    :: !(Maybe Text)
-    , _amvcKey            :: !(Maybe Key)
+    , _amvcKey            :: !(Maybe AuthKey)
     , _amvcAppsId         :: !Text
     , _amvcOAuthToken     :: !(Maybe OAuthToken)
     , _amvcFields         :: !(Maybe Text)
@@ -217,7 +217,7 @@ amvcBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-amvcKey :: Lens' AppsModulesVersionsCreate' (Maybe Key)
+amvcKey :: Lens' AppsModulesVersionsCreate' (Maybe AuthKey)
 amvcKey = lens _amvcKey (\ s a -> s{_amvcKey = a})
 
 -- | Part of \`name\`. Name of the resource to update. For example:

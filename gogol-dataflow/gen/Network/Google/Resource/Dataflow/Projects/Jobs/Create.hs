@@ -73,7 +73,7 @@ type ProjectsJobsCreateResource =
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            ReqBody '[JSON] Job :>
@@ -92,7 +92,7 @@ data ProjectsJobsCreate' = ProjectsJobsCreate'
     , _pjcUploadType     :: !(Maybe Text)
     , _pjcPayload        :: !Job
     , _pjcBearerToken    :: !(Maybe Text)
-    , _pjcKey            :: !(Maybe Key)
+    , _pjcKey            :: !(Maybe AuthKey)
     , _pjcView           :: !(Maybe Text)
     , _pjcProjectId      :: !Text
     , _pjcOAuthToken     :: !(Maybe OAuthToken)
@@ -213,7 +213,7 @@ pjcBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pjcKey :: Lens' ProjectsJobsCreate' (Maybe Key)
+pjcKey :: Lens' ProjectsJobsCreate' (Maybe AuthKey)
 pjcKey = lens _pjcKey (\ s a -> s{_pjcKey = a})
 
 -- | Level of information requested in response.

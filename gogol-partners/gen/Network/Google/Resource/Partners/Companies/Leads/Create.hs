@@ -69,7 +69,7 @@ type CompaniesLeadsCreateResource =
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] CreateLeadRequest :>
@@ -89,7 +89,7 @@ data CompaniesLeadsCreate' = CompaniesLeadsCreate'
     , _clcUploadType     :: !(Maybe Text)
     , _clcPayload        :: !CreateLeadRequest
     , _clcBearerToken    :: !(Maybe Text)
-    , _clcKey            :: !(Maybe Key)
+    , _clcKey            :: !(Maybe AuthKey)
     , _clcOAuthToken     :: !(Maybe OAuthToken)
     , _clcFields         :: !(Maybe Text)
     , _clcCallback       :: !(Maybe Text)
@@ -206,7 +206,7 @@ clcBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clcKey :: Lens' CompaniesLeadsCreate' (Maybe Key)
+clcKey :: Lens' CompaniesLeadsCreate' (Maybe AuthKey)
 clcKey = lens _clcKey (\ s a -> s{_clcKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -63,7 +63,7 @@ type UsersHistoryListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListHistoryResponse
@@ -77,7 +77,7 @@ data UsersHistoryList' = UsersHistoryList'
     , _uhlPrettyPrint    :: !Bool
     , _uhlUserIP         :: !(Maybe Text)
     , _uhlUserId         :: !Text
-    , _uhlKey            :: !(Maybe Key)
+    , _uhlKey            :: !(Maybe AuthKey)
     , _uhlStartHistoryId :: !(Maybe Word64)
     , _uhlPageToken      :: !(Maybe Text)
     , _uhlOAuthToken     :: !(Maybe OAuthToken)
@@ -157,7 +157,7 @@ uhlUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uhlKey :: Lens' UsersHistoryList' (Maybe Key)
+uhlKey :: Lens' UsersHistoryList' (Maybe AuthKey)
 uhlKey = lens _uhlKey (\ s a -> s{_uhlKey = a})
 
 -- | Required. Returns history records after the specified startHistoryId.

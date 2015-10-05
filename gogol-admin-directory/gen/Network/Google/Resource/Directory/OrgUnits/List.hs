@@ -59,7 +59,7 @@ type OrgUnitsListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] OrgUnits
 
@@ -72,7 +72,7 @@ data OrgUnitsList' = OrgUnitsList'
     , _oulUserIP      :: !(Maybe Text)
     , _oulOrgUnitPath :: !Text
     , _oulCustomerId  :: !Text
-    , _oulKey         :: !(Maybe Key)
+    , _oulKey         :: !(Maybe AuthKey)
     , _oulType        :: !(Maybe OrgUnitsListType)
     , _oulOAuthToken  :: !(Maybe OAuthToken)
     , _oulFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ oulCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oulKey :: Lens' OrgUnitsList' (Maybe Key)
+oulKey :: Lens' OrgUnitsList' (Maybe AuthKey)
 oulKey = lens _oulKey (\ s a -> s{_oulKey = a})
 
 -- | Whether to return all sub-organizations or just immediate children

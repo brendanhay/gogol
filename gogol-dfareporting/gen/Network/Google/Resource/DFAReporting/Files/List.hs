@@ -65,7 +65,7 @@ type FilesListResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] FileList
@@ -79,7 +79,7 @@ data FilesList' = FilesList'
     , _flUserIP      :: !(Maybe Text)
     , _flProFileId   :: !Int64
     , _flSortOrder   :: !FilesListSortOrder
-    , _flKey         :: !(Maybe Key)
+    , _flKey         :: !(Maybe AuthKey)
     , _flScope       :: !FilesListScope
     , _flPageToken   :: !(Maybe Text)
     , _flSortField   :: !FilesListSortField
@@ -165,7 +165,7 @@ flSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-flKey :: Lens' FilesList' (Maybe Key)
+flKey :: Lens' FilesList' (Maybe AuthKey)
 flKey = lens _flKey (\ s a -> s{_flKey = a})
 
 -- | The scope that defines which results are returned, default is \'MINE\'.

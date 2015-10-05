@@ -55,7 +55,7 @@ type OperatingSystemVersionsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] OperatingSystemVersionsListResponse
@@ -68,7 +68,7 @@ data OperatingSystemVersionsList' = OperatingSystemVersionsList'
     , _osvlPrettyPrint :: !Bool
     , _osvlUserIP      :: !(Maybe Text)
     , _osvlProFileId   :: !Int64
-    , _osvlKey         :: !(Maybe Key)
+    , _osvlKey         :: !(Maybe AuthKey)
     , _osvlOAuthToken  :: !(Maybe OAuthToken)
     , _osvlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -133,7 +133,7 @@ osvlProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-osvlKey :: Lens' OperatingSystemVersionsList' (Maybe Key)
+osvlKey :: Lens' OperatingSystemVersionsList' (Maybe AuthKey)
 osvlKey = lens _osvlKey (\ s a -> s{_osvlKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -60,7 +60,7 @@ type RasterCollectionsRastersBatchInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON]
@@ -80,7 +80,7 @@ data RasterCollectionsRastersBatchInsert' = RasterCollectionsRastersBatchInsert'
     , _rcrbiPrettyPrint :: !Bool
     , _rcrbiUserIP      :: !(Maybe Text)
     , _rcrbiPayload     :: !RasterCollectionsRastersBatchInsertRequest
-    , _rcrbiKey         :: !(Maybe Key)
+    , _rcrbiKey         :: !(Maybe AuthKey)
     , _rcrbiId          :: !Text
     , _rcrbiOAuthToken  :: !(Maybe OAuthToken)
     , _rcrbiFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ rcrbiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rcrbiKey :: Lens' RasterCollectionsRastersBatchInsert' (Maybe Key)
+rcrbiKey :: Lens' RasterCollectionsRastersBatchInsert' (Maybe AuthKey)
 rcrbiKey = lens _rcrbiKey (\ s a -> s{_rcrbiKey = a})
 
 -- | The ID of the raster collection to which these rasters belong.

@@ -64,7 +64,7 @@ type MachineTypesListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] MachineTypeList
@@ -79,7 +79,7 @@ data MachineTypesList' = MachineTypesList'
     , _mtlProject     :: !Text
     , _mtlUserIP      :: !(Maybe Text)
     , _mtlZone        :: !Text
-    , _mtlKey         :: !(Maybe Key)
+    , _mtlKey         :: !(Maybe AuthKey)
     , _mtlFilter      :: !(Maybe Text)
     , _mtlPageToken   :: !(Maybe Text)
     , _mtlOAuthToken  :: !(Maybe OAuthToken)
@@ -162,7 +162,7 @@ mtlZone = lens _mtlZone (\ s a -> s{_mtlZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mtlKey :: Lens' MachineTypesList' (Maybe Key)
+mtlKey :: Lens' MachineTypesList' (Maybe AuthKey)
 mtlKey = lens _mtlKey (\ s a -> s{_mtlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

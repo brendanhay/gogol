@@ -56,7 +56,7 @@ type AssociationSessionsVerifyResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] AssociationSession
@@ -70,7 +70,7 @@ data AssociationSessionsVerify' = AssociationSessionsVerify'
     , _asvPrettyPrint :: !Bool
     , _asvUserIP      :: !(Maybe Text)
     , _asvToken       :: !Text
-    , _asvKey         :: !(Maybe Key)
+    , _asvKey         :: !(Maybe AuthKey)
     , _asvOAuthToken  :: !(Maybe OAuthToken)
     , _asvFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -132,7 +132,7 @@ asvToken = lens _asvToken (\ s a -> s{_asvToken = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-asvKey :: Lens' AssociationSessionsVerify' (Maybe Key)
+asvKey :: Lens' AssociationSessionsVerify' (Maybe AuthKey)
 asvKey = lens _asvKey (\ s a -> s{_asvKey = a})
 
 -- | OAuth 2.0 token for the current user.

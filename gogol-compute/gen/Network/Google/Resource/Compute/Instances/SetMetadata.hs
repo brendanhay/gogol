@@ -62,7 +62,7 @@ type InstancesSetMetadataResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Metadata :>
@@ -79,7 +79,7 @@ data InstancesSetMetadata' = InstancesSetMetadata'
     , _ismUserIP      :: !(Maybe Text)
     , _ismZone        :: !Text
     , _ismPayload     :: !Metadata
-    , _ismKey         :: !(Maybe Key)
+    , _ismKey         :: !(Maybe AuthKey)
     , _ismOAuthToken  :: !(Maybe OAuthToken)
     , _ismFields      :: !(Maybe Text)
     , _ismInstance    :: !Text
@@ -164,7 +164,7 @@ ismPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ismKey :: Lens' InstancesSetMetadata' (Maybe Key)
+ismKey :: Lens' InstancesSetMetadata' (Maybe AuthKey)
 ismKey = lens _ismKey (\ s a -> s{_ismKey = a})
 
 -- | OAuth 2.0 token for the current user.

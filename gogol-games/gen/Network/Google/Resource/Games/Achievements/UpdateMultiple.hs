@@ -54,7 +54,7 @@ type AchievementsUpdateMultipleResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] AchievementUpdateMultipleRequest :>
@@ -68,7 +68,7 @@ data AchievementsUpdateMultiple' = AchievementsUpdateMultiple'
     , _aumPrettyPrint :: !Bool
     , _aumUserIP      :: !(Maybe Text)
     , _aumPayload     :: !AchievementUpdateMultipleRequest
-    , _aumKey         :: !(Maybe Key)
+    , _aumKey         :: !(Maybe AuthKey)
     , _aumOAuthToken  :: !(Maybe OAuthToken)
     , _aumFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -131,7 +131,7 @@ aumPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aumKey :: Lens' AchievementsUpdateMultiple' (Maybe Key)
+aumKey :: Lens' AchievementsUpdateMultiple' (Maybe AuthKey)
 aumKey = lens _aumKey (\ s a -> s{_aumKey = a})
 
 -- | OAuth 2.0 token for the current user.

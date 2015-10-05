@@ -53,7 +53,7 @@ type TableInsertResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Table :> Post '[JSON] Table
@@ -66,7 +66,7 @@ data TableInsert' = TableInsert'
     , _tiiPrettyPrint :: !Bool
     , _tiiUserIP      :: !(Maybe Text)
     , _tiiPayload     :: !Table
-    , _tiiKey         :: !(Maybe Key)
+    , _tiiKey         :: !(Maybe AuthKey)
     , _tiiOAuthToken  :: !(Maybe OAuthToken)
     , _tiiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -129,7 +129,7 @@ tiiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tiiKey :: Lens' TableInsert' (Maybe Key)
+tiiKey :: Lens' TableInsert' (Maybe AuthKey)
 tiiKey = lens _tiiKey (\ s a -> s{_tiiKey = a})
 
 -- | OAuth 2.0 token for the current user.

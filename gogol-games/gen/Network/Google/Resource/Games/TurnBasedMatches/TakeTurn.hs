@@ -58,7 +58,7 @@ type TurnBasedMatchesTakeTurnResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] TurnBasedMatchTurn :>
@@ -72,7 +72,7 @@ data TurnBasedMatchesTakeTurn' = TurnBasedMatchesTakeTurn'
     , _tbmttPrettyPrint :: !Bool
     , _tbmttUserIP      :: !(Maybe Text)
     , _tbmttPayload     :: !TurnBasedMatchTurn
-    , _tbmttKey         :: !(Maybe Key)
+    , _tbmttKey         :: !(Maybe AuthKey)
     , _tbmttLanguage    :: !(Maybe Text)
     , _tbmttOAuthToken  :: !(Maybe OAuthToken)
     , _tbmttMatchId     :: !Text
@@ -145,7 +145,7 @@ tbmttPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tbmttKey :: Lens' TurnBasedMatchesTakeTurn' (Maybe Key)
+tbmttKey :: Lens' TurnBasedMatchesTakeTurn' (Maybe AuthKey)
 tbmttKey = lens _tbmttKey (\ s a -> s{_tbmttKey = a})
 
 -- | The preferred language to use for strings returned by this method.

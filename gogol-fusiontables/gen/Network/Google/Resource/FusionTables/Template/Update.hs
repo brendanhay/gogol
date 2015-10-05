@@ -58,7 +58,7 @@ type TemplateUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Template :> Put '[JSON] Template
@@ -72,7 +72,7 @@ data TemplateUpdate' = TemplateUpdate'
     , _temTemplateId  :: !Int32
     , _temUserIP      :: !(Maybe Text)
     , _temPayload     :: !Template
-    , _temKey         :: !(Maybe Key)
+    , _temKey         :: !(Maybe AuthKey)
     , _temOAuthToken  :: !(Maybe OAuthToken)
     , _temTableId     :: !Text
     , _temFields      :: !(Maybe Text)
@@ -150,7 +150,7 @@ temPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-temKey :: Lens' TemplateUpdate' (Maybe Key)
+temKey :: Lens' TemplateUpdate' (Maybe AuthKey)
 temKey = lens _temKey (\ s a -> s{_temKey = a})
 
 -- | OAuth 2.0 token for the current user.

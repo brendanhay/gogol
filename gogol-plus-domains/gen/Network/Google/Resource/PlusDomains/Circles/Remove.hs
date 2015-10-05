@@ -54,7 +54,7 @@ type CirclesRemoveResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -65,7 +65,7 @@ data CirclesRemove' = CirclesRemove'
     { _crQuotaUser   :: !(Maybe Text)
     , _crPrettyPrint :: !Bool
     , _crUserIP      :: !(Maybe Text)
-    , _crKey         :: !(Maybe Key)
+    , _crKey         :: !(Maybe AuthKey)
     , _crCircleId    :: !Text
     , _crOAuthToken  :: !(Maybe OAuthToken)
     , _crFields      :: !(Maybe Text)
@@ -123,7 +123,7 @@ crUserIP = lens _crUserIP (\ s a -> s{_crUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-crKey :: Lens' CirclesRemove' (Maybe Key)
+crKey :: Lens' CirclesRemove' (Maybe AuthKey)
 crKey = lens _crKey (\ s a -> s{_crKey = a})
 
 -- | The ID of the circle to delete.

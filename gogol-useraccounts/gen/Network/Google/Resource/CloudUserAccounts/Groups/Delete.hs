@@ -57,7 +57,7 @@ type GroupsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
@@ -69,7 +69,7 @@ data GroupsDelete' = GroupsDelete'
     , _gdPrettyPrint :: !Bool
     , _gdProject     :: !Text
     , _gdUserIP      :: !(Maybe Text)
-    , _gdKey         :: !(Maybe Key)
+    , _gdKey         :: !(Maybe AuthKey)
     , _gdGroupName   :: !Text
     , _gdOAuthToken  :: !(Maybe OAuthToken)
     , _gdFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ gdUserIP = lens _gdUserIP (\ s a -> s{_gdUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gdKey :: Lens' GroupsDelete' (Maybe Key)
+gdKey :: Lens' GroupsDelete' (Maybe AuthKey)
 gdKey = lens _gdKey (\ s a -> s{_gdKey = a})
 
 -- | Name of the Group resource to delete.

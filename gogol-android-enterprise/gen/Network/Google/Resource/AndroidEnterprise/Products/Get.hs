@@ -59,7 +59,7 @@ type ProductsGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Product
 
@@ -71,7 +71,7 @@ data ProductsGet' = ProductsGet'
     , _pPrettyPrint  :: !Bool
     , _pEnterpriseId :: !Text
     , _pUserIP       :: !(Maybe Text)
-    , _pKey          :: !(Maybe Key)
+    , _pKey          :: !(Maybe AuthKey)
     , _pLanguage     :: !(Maybe Text)
     , _pOAuthToken   :: !(Maybe OAuthToken)
     , _pProductId    :: !Text
@@ -142,7 +142,7 @@ pUserIP = lens _pUserIP (\ s a -> s{_pUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pKey :: Lens' ProductsGet' (Maybe Key)
+pKey :: Lens' ProductsGet' (Maybe AuthKey)
 pKey = lens _pKey (\ s a -> s{_pKey = a})
 
 -- | The BCP47 tag for the user\'s preferred language (e.g. \"en-US\",

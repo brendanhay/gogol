@@ -68,7 +68,7 @@ type TablesFeaturesBatchPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] FeaturesBatchPatchRequest :>
@@ -93,7 +93,7 @@ data TablesFeaturesBatchPatch' = TablesFeaturesBatchPatch'
     , _tfbpPrettyPrint :: !Bool
     , _tfbpUserIP      :: !(Maybe Text)
     , _tfbpPayload     :: !FeaturesBatchPatchRequest
-    , _tfbpKey         :: !(Maybe Key)
+    , _tfbpKey         :: !(Maybe AuthKey)
     , _tfbpId          :: !Text
     , _tfbpOAuthToken  :: !(Maybe OAuthToken)
     , _tfbpFields      :: !(Maybe Text)
@@ -162,7 +162,7 @@ tfbpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tfbpKey :: Lens' TablesFeaturesBatchPatch' (Maybe Key)
+tfbpKey :: Lens' TablesFeaturesBatchPatch' (Maybe AuthKey)
 tfbpKey = lens _tfbpKey (\ s a -> s{_tfbpKey = a})
 
 -- | The ID of the table containing the features to be patched.

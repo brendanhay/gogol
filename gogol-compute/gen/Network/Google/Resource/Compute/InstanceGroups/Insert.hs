@@ -59,7 +59,7 @@ type InstanceGroupsInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] InstanceGroup :>
@@ -76,7 +76,7 @@ data InstanceGroupsInsert' = InstanceGroupsInsert'
     , _igiUserIP      :: !(Maybe Text)
     , _igiZone        :: !Text
     , _igiPayload     :: !InstanceGroup
-    , _igiKey         :: !(Maybe Key)
+    , _igiKey         :: !(Maybe AuthKey)
     , _igiOAuthToken  :: !(Maybe OAuthToken)
     , _igiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -156,7 +156,7 @@ igiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igiKey :: Lens' InstanceGroupsInsert' (Maybe Key)
+igiKey :: Lens' InstanceGroupsInsert' (Maybe AuthKey)
 igiKey = lens _igiKey (\ s a -> s{_igiKey = a})
 
 -- | OAuth 2.0 token for the current user.

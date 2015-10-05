@@ -73,7 +73,7 @@ type MyLibraryAnnotationsListResource =
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] Annotations
@@ -88,7 +88,7 @@ data MyLibraryAnnotationsList' = MyLibraryAnnotationsList'
     , _mlalContentVersion :: !(Maybe Text)
     , _mlalShowDeleted    :: !(Maybe Bool)
     , _mlalUpdatedMax     :: !(Maybe Text)
-    , _mlalKey            :: !(Maybe Key)
+    , _mlalKey            :: !(Maybe AuthKey)
     , _mlalUpdatedMin     :: !(Maybe Text)
     , _mlalLayerIds       :: !(Maybe [Text])
     , _mlalVolumeId       :: !(Maybe Text)
@@ -200,7 +200,7 @@ mlalUpdatedMax
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlalKey :: Lens' MyLibraryAnnotationsList' (Maybe Key)
+mlalKey :: Lens' MyLibraryAnnotationsList' (Maybe AuthKey)
 mlalKey = lens _mlalKey (\ s a -> s{_mlalKey = a})
 
 -- | RFC 3339 timestamp to restrict to items updated since this timestamp

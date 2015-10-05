@@ -56,7 +56,7 @@ type RemarketingListsUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] RemarketingList :>
@@ -71,7 +71,7 @@ data RemarketingListsUpdate' = RemarketingListsUpdate'
     , _rluUserIP      :: !(Maybe Text)
     , _rluProFileId   :: !Int64
     , _rluPayload     :: !RemarketingList
-    , _rluKey         :: !(Maybe Key)
+    , _rluKey         :: !(Maybe AuthKey)
     , _rluOAuthToken  :: !(Maybe OAuthToken)
     , _rluFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ rluPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rluKey :: Lens' RemarketingListsUpdate' (Maybe Key)
+rluKey :: Lens' RemarketingListsUpdate' (Maybe AuthKey)
 rluKey = lens _rluKey (\ s a -> s{_rluKey = a})
 
 -- | OAuth 2.0 token for the current user.

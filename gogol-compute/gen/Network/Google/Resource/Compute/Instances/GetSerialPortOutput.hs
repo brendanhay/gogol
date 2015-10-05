@@ -62,7 +62,7 @@ type InstancesGetSerialPortOutputResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] SerialPortOutput
@@ -76,7 +76,7 @@ data InstancesGetSerialPortOutput' = InstancesGetSerialPortOutput'
     , _igspoProject     :: !Text
     , _igspoUserIP      :: !(Maybe Text)
     , _igspoZone        :: !Text
-    , _igspoKey         :: !(Maybe Key)
+    , _igspoKey         :: !(Maybe AuthKey)
     , _igspoOAuthToken  :: !(Maybe OAuthToken)
     , _igspoFields      :: !(Maybe Text)
     , _igspoPort        :: !Int32
@@ -158,7 +158,7 @@ igspoZone
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igspoKey :: Lens' InstancesGetSerialPortOutput' (Maybe Key)
+igspoKey :: Lens' InstancesGetSerialPortOutput' (Maybe AuthKey)
 igspoKey = lens _igspoKey (\ s a -> s{_igspoKey = a})
 
 -- | OAuth 2.0 token for the current user.

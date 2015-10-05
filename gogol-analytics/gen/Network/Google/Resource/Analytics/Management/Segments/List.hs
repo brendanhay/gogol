@@ -57,7 +57,7 @@ type ManagementSegmentsListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Segments
 
@@ -68,7 +68,7 @@ data ManagementSegmentsList' = ManagementSegmentsList'
     { _mslQuotaUser   :: !(Maybe Text)
     , _mslPrettyPrint :: !Bool
     , _mslUserIP      :: !(Maybe Text)
-    , _mslKey         :: !(Maybe Key)
+    , _mslKey         :: !(Maybe AuthKey)
     , _mslOAuthToken  :: !(Maybe OAuthToken)
     , _mslStartIndex  :: !(Maybe Int32)
     , _mslMaxResults  :: !(Maybe Int32)
@@ -130,7 +130,7 @@ mslUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mslKey :: Lens' ManagementSegmentsList' (Maybe Key)
+mslKey :: Lens' ManagementSegmentsList' (Maybe AuthKey)
 mslKey = lens _mslKey (\ s a -> s{_mslKey = a})
 
 -- | OAuth 2.0 token for the current user.

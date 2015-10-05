@@ -56,7 +56,7 @@ type UserRolesInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] UserRole :> Post '[JSON] UserRole
@@ -70,7 +70,7 @@ data UserRolesInsert' = UserRolesInsert'
     , _uriUserIP      :: !(Maybe Text)
     , _uriProFileId   :: !Int64
     , _uriPayload     :: !UserRole
-    , _uriKey         :: !(Maybe Key)
+    , _uriKey         :: !(Maybe AuthKey)
     , _uriOAuthToken  :: !(Maybe OAuthToken)
     , _uriFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,7 +142,7 @@ uriPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uriKey :: Lens' UserRolesInsert' (Maybe Key)
+uriKey :: Lens' UserRolesInsert' (Maybe AuthKey)
 uriKey = lens _uriKey (\ s a -> s{_uriKey = a})
 
 -- | OAuth 2.0 token for the current user.

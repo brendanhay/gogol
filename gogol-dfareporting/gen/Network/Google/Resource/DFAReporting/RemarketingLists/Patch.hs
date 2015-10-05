@@ -59,7 +59,7 @@ type RemarketingListsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] RemarketingList :>
@@ -75,7 +75,7 @@ data RemarketingListsPatch' = RemarketingListsPatch'
     , _rlpUserIP      :: !(Maybe Text)
     , _rlpProFileId   :: !Int64
     , _rlpPayload     :: !RemarketingList
-    , _rlpKey         :: !(Maybe Key)
+    , _rlpKey         :: !(Maybe AuthKey)
     , _rlpId          :: !Int64
     , _rlpOAuthToken  :: !(Maybe OAuthToken)
     , _rlpFields      :: !(Maybe Text)
@@ -152,7 +152,7 @@ rlpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rlpKey :: Lens' RemarketingListsPatch' (Maybe Key)
+rlpKey :: Lens' RemarketingListsPatch' (Maybe AuthKey)
 rlpKey = lens _rlpKey (\ s a -> s{_rlpKey = a})
 
 -- | Remarketing list ID.

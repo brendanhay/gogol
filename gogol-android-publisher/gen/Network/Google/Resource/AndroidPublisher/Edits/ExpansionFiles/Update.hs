@@ -67,7 +67,7 @@ type EditsExpansionFilesUpdateResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] ExpansionFile :>
@@ -85,7 +85,7 @@ data EditsExpansionFilesUpdate' = EditsExpansionFilesUpdate'
     , _eAPKVersionCode    :: !Int32
     , _eUserIP            :: !(Maybe Text)
     , _ePayload           :: !ExpansionFile
-    , _eKey               :: !(Maybe Key)
+    , _eKey               :: !(Maybe AuthKey)
     , _eExpansionFileType :: !EditsExpansionFilesUpdateExpansionFileType
     , _eOAuthToken        :: !(Maybe OAuthToken)
     , _eEditId            :: !Text
@@ -176,7 +176,7 @@ ePayload = lens _ePayload (\ s a -> s{_ePayload = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eKey :: Lens' EditsExpansionFilesUpdate' (Maybe Key)
+eKey :: Lens' EditsExpansionFilesUpdate' (Maybe AuthKey)
 eKey = lens _eKey (\ s a -> s{_eKey = a})
 
 eExpansionFileType :: Lens' EditsExpansionFilesUpdate' EditsExpansionFilesUpdateExpansionFileType

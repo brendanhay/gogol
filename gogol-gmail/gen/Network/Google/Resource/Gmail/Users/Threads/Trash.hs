@@ -57,7 +57,7 @@ type UsersThreadsTrashResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] Thread
 
@@ -69,7 +69,7 @@ data UsersThreadsTrash' = UsersThreadsTrash'
     , _uttPrettyPrint :: !Bool
     , _uttUserIP      :: !(Maybe Text)
     , _uttUserId      :: !Text
-    , _uttKey         :: !(Maybe Key)
+    , _uttKey         :: !(Maybe AuthKey)
     , _uttId          :: !Text
     , _uttOAuthToken  :: !(Maybe OAuthToken)
     , _uttFields      :: !(Maybe Text)
@@ -138,7 +138,7 @@ uttUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uttKey :: Lens' UsersThreadsTrash' (Maybe Key)
+uttKey :: Lens' UsersThreadsTrash' (Maybe AuthKey)
 uttKey = lens _uttKey (\ s a -> s{_uttKey = a})
 
 -- | The ID of the thread to Trash.

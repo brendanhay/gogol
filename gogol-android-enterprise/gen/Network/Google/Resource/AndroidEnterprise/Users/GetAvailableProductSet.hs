@@ -58,7 +58,7 @@ type UsersGetAvailableProductSetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] ProductSet
 
@@ -71,7 +71,7 @@ data UsersGetAvailableProductSet' = UsersGetAvailableProductSet'
     , _ugapsEnterpriseId :: !Text
     , _ugapsUserIP       :: !(Maybe Text)
     , _ugapsUserId       :: !Text
-    , _ugapsKey          :: !(Maybe Key)
+    , _ugapsKey          :: !(Maybe AuthKey)
     , _ugapsOAuthToken   :: !(Maybe OAuthToken)
     , _ugapsFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ ugapsUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ugapsKey :: Lens' UsersGetAvailableProductSet' (Maybe Key)
+ugapsKey :: Lens' UsersGetAvailableProductSet' (Maybe AuthKey)
 ugapsKey = lens _ugapsKey (\ s a -> s{_ugapsKey = a})
 
 -- | OAuth 2.0 token for the current user.

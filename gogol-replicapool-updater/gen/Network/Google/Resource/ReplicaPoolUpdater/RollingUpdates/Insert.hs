@@ -58,7 +58,7 @@ type RollingUpdatesInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] RollingUpdate :>
@@ -74,7 +74,7 @@ data RollingUpdatesInsert' = RollingUpdatesInsert'
     , _ruiUserIP      :: !(Maybe Text)
     , _ruiZone        :: !Text
     , _ruiPayload     :: !RollingUpdate
-    , _ruiKey         :: !(Maybe Key)
+    , _ruiKey         :: !(Maybe AuthKey)
     , _ruiOAuthToken  :: !(Maybe OAuthToken)
     , _ruiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -154,7 +154,7 @@ ruiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ruiKey :: Lens' RollingUpdatesInsert' (Maybe Key)
+ruiKey :: Lens' RollingUpdatesInsert' (Maybe AuthKey)
 ruiKey = lens _ruiKey (\ s a -> s{_ruiKey = a})
 
 -- | OAuth 2.0 token for the current user.

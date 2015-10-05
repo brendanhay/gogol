@@ -61,7 +61,7 @@ type AdUnitsListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] AdUnits
 
@@ -74,7 +74,7 @@ data AdUnitsList' = AdUnitsList'
     , _aulIncludeInactive :: !(Maybe Bool)
     , _aulUserIP          :: !(Maybe Text)
     , _aulAdClientId      :: !Text
-    , _aulKey             :: !(Maybe Key)
+    , _aulKey             :: !(Maybe AuthKey)
     , _aulPageToken       :: !(Maybe Text)
     , _aulOAuthToken      :: !(Maybe OAuthToken)
     , _aulMaxResults      :: !(Maybe Int32)
@@ -155,7 +155,7 @@ aulAdClientId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aulKey :: Lens' AdUnitsList' (Maybe Key)
+aulKey :: Lens' AdUnitsList' (Maybe AuthKey)
 aulKey = lens _aulKey (\ s a -> s{_aulKey = a})
 
 -- | A continuation token, used to page through ad units. To retrieve the

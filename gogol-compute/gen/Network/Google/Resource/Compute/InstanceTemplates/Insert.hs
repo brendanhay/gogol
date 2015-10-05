@@ -57,7 +57,7 @@ type InstanceTemplatesInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] InstanceTemplate :>
@@ -73,7 +73,7 @@ data InstanceTemplatesInsert' = InstanceTemplatesInsert'
     , _itiProject     :: !Text
     , _itiUserIP      :: !(Maybe Text)
     , _itiPayload     :: !InstanceTemplate
-    , _itiKey         :: !(Maybe Key)
+    , _itiKey         :: !(Maybe AuthKey)
     , _itiOAuthToken  :: !(Maybe OAuthToken)
     , _itiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ itiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-itiKey :: Lens' InstanceTemplatesInsert' (Maybe Key)
+itiKey :: Lens' InstanceTemplatesInsert' (Maybe AuthKey)
 itiKey = lens _itiKey (\ s a -> s{_itiKey = a})
 
 -- | OAuth 2.0 token for the current user.

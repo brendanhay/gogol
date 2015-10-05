@@ -64,7 +64,7 @@ type UsersMessagesListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ListMessagesResponse
@@ -78,7 +78,7 @@ data UsersMessagesList' = UsersMessagesList'
     , _umlUserIP           :: !(Maybe Text)
     , _umlQ                :: !(Maybe Text)
     , _umlUserId           :: !Text
-    , _umlKey              :: !(Maybe Key)
+    , _umlKey              :: !(Maybe AuthKey)
     , _umlIncludeSpamTrash :: !Bool
     , _umlLabelIds         :: !(Maybe [Text])
     , _umlPageToken        :: !(Maybe Text)
@@ -167,7 +167,7 @@ umlUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umlKey :: Lens' UsersMessagesList' (Maybe Key)
+umlKey :: Lens' UsersMessagesList' (Maybe AuthKey)
 umlKey = lens _umlKey (\ s a -> s{_umlKey = a})
 
 -- | Include messages from SPAM and TRASH in the results.

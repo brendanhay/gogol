@@ -72,7 +72,7 @@ type ProjectsJobsWorkItemsReportStatusResource =
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            ReqBody '[JSON]
@@ -95,7 +95,7 @@ data ProjectsJobsWorkItemsReportStatus' = ProjectsJobsWorkItemsReportStatus'
     , _pjwirsUploadType     :: !(Maybe Text)
     , _pjwirsPayload        :: !ReportWorkItemStatusRequest
     , _pjwirsBearerToken    :: !(Maybe Text)
-    , _pjwirsKey            :: !(Maybe Key)
+    , _pjwirsKey            :: !(Maybe AuthKey)
     , _pjwirsProjectId      :: !Text
     , _pjwirsOAuthToken     :: !(Maybe OAuthToken)
     , _pjwirsFields         :: !(Maybe Text)
@@ -220,7 +220,7 @@ pjwirsBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pjwirsKey :: Lens' ProjectsJobsWorkItemsReportStatus' (Maybe Key)
+pjwirsKey :: Lens' ProjectsJobsWorkItemsReportStatus' (Maybe AuthKey)
 pjwirsKey
   = lens _pjwirsKey (\ s a -> s{_pjwirsKey = a})
 

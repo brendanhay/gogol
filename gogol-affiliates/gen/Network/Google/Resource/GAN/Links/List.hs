@@ -84,7 +84,7 @@ type LinksListResource =
                                        QueryParam "prettyPrint" Bool :>
                                          QueryParam "userIp" Text :>
                                            QueryParam "fields" Text :>
-                                             QueryParam "key" Key :>
+                                             QueryParam "key" AuthKey :>
                                                QueryParam "oauth_token"
                                                  OAuthToken
                                                  :>
@@ -107,7 +107,7 @@ data LinksList' = LinksList'
     , _llPromotionType      :: !(Maybe [LinksListPromotionType])
     , _llRoleId             :: !Text
     , _llRole               :: !LinksListRole
-    , _llKey                :: !(Maybe Key)
+    , _llKey                :: !(Maybe AuthKey)
     , _llCreateDateMin      :: !(Maybe Text)
     , _llLinkType           :: !(Maybe LinksListLinkType)
     , _llPageToken          :: !(Maybe Text)
@@ -269,7 +269,7 @@ llRole = lens _llRole (\ s a -> s{_llRole = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-llKey :: Lens' LinksList' (Maybe Key)
+llKey :: Lens' LinksList' (Maybe AuthKey)
 llKey = lens _llKey (\ s a -> s{_llKey = a})
 
 -- | The beginning of the create date range.

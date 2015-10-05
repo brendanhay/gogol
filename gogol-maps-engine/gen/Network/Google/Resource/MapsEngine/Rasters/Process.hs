@@ -55,7 +55,7 @@ type RastersProcessResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Post '[JSON] ProcessResponse
@@ -67,7 +67,7 @@ data RastersProcess' = RastersProcess'
     { _rpQuotaUser   :: !(Maybe Text)
     , _rpPrettyPrint :: !Bool
     , _rpUserIP      :: !(Maybe Text)
-    , _rpKey         :: !(Maybe Key)
+    , _rpKey         :: !(Maybe AuthKey)
     , _rpId          :: !Text
     , _rpOAuthToken  :: !(Maybe OAuthToken)
     , _rpFields      :: !(Maybe Text)
@@ -125,7 +125,7 @@ rpUserIP = lens _rpUserIP (\ s a -> s{_rpUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rpKey :: Lens' RastersProcess' (Maybe Key)
+rpKey :: Lens' RastersProcess' (Maybe AuthKey)
 rpKey = lens _rpKey (\ s a -> s{_rpKey = a})
 
 -- | The ID of the raster.

@@ -57,7 +57,7 @@ type CalendarListInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] CalendarListEntry :>
@@ -72,7 +72,7 @@ data CalendarListInsert' = CalendarListInsert'
     , _cliUserIP         :: !(Maybe Text)
     , _cliPayload        :: !CalendarListEntry
     , _cliColorRgbFormat :: !(Maybe Bool)
-    , _cliKey            :: !(Maybe Key)
+    , _cliKey            :: !(Maybe AuthKey)
     , _cliOAuthToken     :: !(Maybe OAuthToken)
     , _cliFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -147,7 +147,7 @@ cliColorRgbFormat
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cliKey :: Lens' CalendarListInsert' (Maybe Key)
+cliKey :: Lens' CalendarListInsert' (Maybe AuthKey)
 cliKey = lens _cliKey (\ s a -> s{_cliKey = a})
 
 -- | OAuth 2.0 token for the current user.

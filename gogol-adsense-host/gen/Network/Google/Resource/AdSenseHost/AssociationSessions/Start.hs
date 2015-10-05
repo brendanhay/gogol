@@ -64,7 +64,7 @@ type AssociationSessionsStartResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] AssociationSession
@@ -79,7 +79,7 @@ data AssociationSessionsStart' = AssociationSessionsStart'
     , _assUserIP        :: !(Maybe Text)
     , _assWebsiteLocale :: !(Maybe Text)
     , _assUserLocale    :: !(Maybe Text)
-    , _assKey           :: !(Maybe Key)
+    , _assKey           :: !(Maybe AuthKey)
     , _assWebsiteURL    :: !Text
     , _assOAuthToken    :: !(Maybe OAuthToken)
     , _assProductCode   :: ![AssociationSessionsStartProductCode]
@@ -161,7 +161,7 @@ assUserLocale
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-assKey :: Lens' AssociationSessionsStart' (Maybe Key)
+assKey :: Lens' AssociationSessionsStart' (Maybe AuthKey)
 assKey = lens _assKey (\ s a -> s{_assKey = a})
 
 -- | The URL of the user\'s hosted website.

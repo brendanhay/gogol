@@ -71,7 +71,7 @@ type ObjectsPatchResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] Object :>
@@ -90,7 +90,7 @@ data ObjectsPatch' = ObjectsPatch'
     , _opUserIP                   :: !(Maybe Text)
     , _opBucket                   :: !Text
     , _opPayload                  :: !Object
-    , _opKey                      :: !(Maybe Key)
+    , _opKey                      :: !(Maybe AuthKey)
     , _opIfMetagenerationNotMatch :: !(Maybe Word64)
     , _opObject                   :: !Text
     , _opProjection               :: !(Maybe ObjectsPatchProjection)
@@ -207,7 +207,7 @@ opPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-opKey :: Lens' ObjectsPatch' (Maybe Key)
+opKey :: Lens' ObjectsPatch' (Maybe AuthKey)
 opKey = lens _opKey (\ s a -> s{_opKey = a})
 
 -- | Makes the operation conditional on whether the object\'s current

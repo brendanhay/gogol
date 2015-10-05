@@ -69,7 +69,7 @@ type ObjectsDeleteResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -86,7 +86,7 @@ data ObjectsDelete' = ObjectsDelete'
     , _odIfGenerationMatch        :: !(Maybe Word64)
     , _odUserIP                   :: !(Maybe Text)
     , _odBucket                   :: !Text
-    , _odKey                      :: !(Maybe Key)
+    , _odKey                      :: !(Maybe AuthKey)
     , _odIfMetagenerationNotMatch :: !(Maybe Word64)
     , _odObject                   :: !Text
     , _odOAuthToken               :: !(Maybe OAuthToken)
@@ -190,7 +190,7 @@ odBucket = lens _odBucket (\ s a -> s{_odBucket = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-odKey :: Lens' ObjectsDelete' (Maybe Key)
+odKey :: Lens' ObjectsDelete' (Maybe AuthKey)
 odKey = lens _odKey (\ s a -> s{_odKey = a})
 
 -- | Makes the operation conditional on whether the object\'s current

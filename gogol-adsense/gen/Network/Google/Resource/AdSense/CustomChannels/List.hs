@@ -60,7 +60,7 @@ type CustomChannelsListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] CustomChannels
@@ -74,7 +74,7 @@ data CustomChannelsList' = CustomChannelsList'
     , _cclPrettyPrint :: !Bool
     , _cclUserIP      :: !(Maybe Text)
     , _cclAdClientId  :: !Text
-    , _cclKey         :: !(Maybe Key)
+    , _cclKey         :: !(Maybe AuthKey)
     , _cclPageToken   :: !(Maybe Text)
     , _cclOAuthToken  :: !(Maybe OAuthToken)
     , _cclMaxResults  :: !(Maybe Int32)
@@ -146,7 +146,7 @@ cclAdClientId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cclKey :: Lens' CustomChannelsList' (Maybe Key)
+cclKey :: Lens' CustomChannelsList' (Maybe AuthKey)
 cclKey = lens _cclKey (\ s a -> s{_cclKey = a})
 
 -- | A continuation token, used to page through custom channels. To retrieve

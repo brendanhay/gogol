@@ -56,7 +56,7 @@ type AdvertisersInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Advertiser :> Post '[JSON] Advertiser
@@ -70,7 +70,7 @@ data AdvertisersInsert' = AdvertisersInsert'
     , _aiiUserIP      :: !(Maybe Text)
     , _aiiProFileId   :: !Int64
     , _aiiPayload     :: !Advertiser
-    , _aiiKey         :: !(Maybe Key)
+    , _aiiKey         :: !(Maybe AuthKey)
     , _aiiOAuthToken  :: !(Maybe OAuthToken)
     , _aiiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,7 +142,7 @@ aiiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aiiKey :: Lens' AdvertisersInsert' (Maybe Key)
+aiiKey :: Lens' AdvertisersInsert' (Maybe AuthKey)
 aiiKey = lens _aiiKey (\ s a -> s{_aiiKey = a})
 
 -- | OAuth 2.0 token for the current user.

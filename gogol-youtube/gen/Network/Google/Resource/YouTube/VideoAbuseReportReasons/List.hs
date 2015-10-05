@@ -57,7 +57,7 @@ type VideoAbuseReportReasonsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] VideoAbuseReportReasonListResponse
@@ -72,7 +72,7 @@ data VideoAbuseReportReasonsList' = VideoAbuseReportReasonsList'
     , _varrlPrettyPrint :: !Bool
     , _varrlUserIP      :: !(Maybe Text)
     , _varrlHl          :: !Text
-    , _varrlKey         :: !(Maybe Key)
+    , _varrlKey         :: !(Maybe AuthKey)
     , _varrlOAuthToken  :: !(Maybe OAuthToken)
     , _varrlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ varrlHl = lens _varrlHl (\ s a -> s{_varrlHl = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-varrlKey :: Lens' VideoAbuseReportReasonsList' (Maybe Key)
+varrlKey :: Lens' VideoAbuseReportReasonsList' (Maybe AuthKey)
 varrlKey = lens _varrlKey (\ s a -> s{_varrlKey = a})
 
 -- | OAuth 2.0 token for the current user.

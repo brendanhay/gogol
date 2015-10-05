@@ -59,7 +59,7 @@ type RepliesInsertResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] CommentReply :>
@@ -73,7 +73,7 @@ data RepliesInsert' = RepliesInsert'
     , _riPrettyPrint :: !Bool
     , _riUserIP      :: !(Maybe Text)
     , _riPayload     :: !CommentReply
-    , _riKey         :: !(Maybe Key)
+    , _riKey         :: !(Maybe AuthKey)
     , _riFileId      :: !Text
     , _riOAuthToken  :: !(Maybe OAuthToken)
     , _riCommentId   :: !Text
@@ -145,7 +145,7 @@ riPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-riKey :: Lens' RepliesInsert' (Maybe Key)
+riKey :: Lens' RepliesInsert' (Maybe AuthKey)
 riKey = lens _riKey (\ s a -> s{_riKey = a})
 
 -- | The ID of the file.

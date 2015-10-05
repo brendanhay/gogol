@@ -59,7 +59,7 @@ type VPNTunnelsInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] VPNTunnel :> Post '[JSON] Operation
@@ -74,7 +74,7 @@ data VPNTunnelsInsert' = VPNTunnelsInsert'
     , _vtiProject     :: !Text
     , _vtiUserIP      :: !(Maybe Text)
     , _vtiPayload     :: !VPNTunnel
-    , _vtiKey         :: !(Maybe Key)
+    , _vtiKey         :: !(Maybe AuthKey)
     , _vtiRegion      :: !Text
     , _vtiOAuthToken  :: !(Maybe OAuthToken)
     , _vtiFields      :: !(Maybe Text)
@@ -151,7 +151,7 @@ vtiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vtiKey :: Lens' VPNTunnelsInsert' (Maybe Key)
+vtiKey :: Lens' VPNTunnelsInsert' (Maybe AuthKey)
 vtiKey = lens _vtiKey (\ s a -> s{_vtiKey = a})
 
 -- | The name of the region for this request.

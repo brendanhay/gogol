@@ -60,7 +60,7 @@ type ManagementWebPropertiesListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] WebProperties
@@ -73,7 +73,7 @@ data ManagementWebPropertiesList' = ManagementWebPropertiesList'
     , _mwplPrettyPrint :: !Bool
     , _mwplUserIP      :: !(Maybe Text)
     , _mwplAccountId   :: !Text
-    , _mwplKey         :: !(Maybe Key)
+    , _mwplKey         :: !(Maybe AuthKey)
     , _mwplOAuthToken  :: !(Maybe OAuthToken)
     , _mwplStartIndex  :: !(Maybe Int32)
     , _mwplMaxResults  :: !(Maybe Int32)
@@ -148,7 +148,7 @@ mwplAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mwplKey :: Lens' ManagementWebPropertiesList' (Maybe Key)
+mwplKey :: Lens' ManagementWebPropertiesList' (Maybe AuthKey)
 mwplKey = lens _mwplKey (\ s a -> s{_mwplKey = a})
 
 -- | OAuth 2.0 token for the current user.

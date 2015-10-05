@@ -57,7 +57,7 @@ type DatasetsUndeleteResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] Dataset
 
@@ -70,7 +70,7 @@ data DatasetsUndelete' = DatasetsUndelete'
     { _duQuotaUser   :: !(Maybe Text)
     , _duPrettyPrint :: !Bool
     , _duUserIP      :: !(Maybe Text)
-    , _duKey         :: !(Maybe Key)
+    , _duKey         :: !(Maybe AuthKey)
     , _duDatasetId   :: !Text
     , _duOAuthToken  :: !(Maybe OAuthToken)
     , _duFields      :: !(Maybe Text)
@@ -128,7 +128,7 @@ duUserIP = lens _duUserIP (\ s a -> s{_duUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-duKey :: Lens' DatasetsUndelete' (Maybe Key)
+duKey :: Lens' DatasetsUndelete' (Maybe AuthKey)
 duKey = lens _duKey (\ s a -> s{_duKey = a})
 
 -- | The ID of the dataset to be undeleted.

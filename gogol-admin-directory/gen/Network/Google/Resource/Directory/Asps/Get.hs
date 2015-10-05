@@ -57,7 +57,7 @@ type AspsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Asp
 
@@ -69,7 +69,7 @@ data AspsGet' = AspsGet'
     , _agPrettyPrint :: !Bool
     , _agCodeId      :: !Int32
     , _agUserIP      :: !(Maybe Text)
-    , _agKey         :: !(Maybe Key)
+    , _agKey         :: !(Maybe AuthKey)
     , _agOAuthToken  :: !(Maybe OAuthToken)
     , _agUserKey     :: !Text
     , _agFields      :: !(Maybe Text)
@@ -135,7 +135,7 @@ agUserIP = lens _agUserIP (\ s a -> s{_agUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agKey :: Lens' AspsGet' (Maybe Key)
+agKey :: Lens' AspsGet' (Maybe AuthKey)
 agKey = lens _agKey (\ s a -> s{_agKey = a})
 
 -- | OAuth 2.0 token for the current user.

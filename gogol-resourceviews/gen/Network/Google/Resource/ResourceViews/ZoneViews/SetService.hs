@@ -61,7 +61,7 @@ type ZoneViewsSetServiceResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] ZoneViewsSetServiceRequest :>
@@ -78,7 +78,7 @@ data ZoneViewsSetService' = ZoneViewsSetService'
     , _zvssUserIP       :: !(Maybe Text)
     , _zvssZone         :: !Text
     , _zvssPayload      :: !ZoneViewsSetServiceRequest
-    , _zvssKey          :: !(Maybe Key)
+    , _zvssKey          :: !(Maybe AuthKey)
     , _zvssOAuthToken   :: !(Maybe OAuthToken)
     , _zvssFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -169,7 +169,7 @@ zvssPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-zvssKey :: Lens' ZoneViewsSetService' (Maybe Key)
+zvssKey :: Lens' ZoneViewsSetService' (Maybe AuthKey)
 zvssKey = lens _zvssKey (\ s a -> s{_zvssKey = a})
 
 -- | OAuth 2.0 token for the current user.

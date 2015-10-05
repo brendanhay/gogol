@@ -67,7 +67,7 @@ type MyConfigRequestAccessResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Post '[JSON] RequestAccess
@@ -82,7 +82,7 @@ data MyConfigRequestAccess' = MyConfigRequestAccess'
     , _mcraUserIP       :: !(Maybe Text)
     , _mcraLocale       :: !(Maybe Text)
     , _mcraLicenseTypes :: !(Maybe MyConfigRequestAccessLicenseTypes)
-    , _mcraKey          :: !(Maybe Key)
+    , _mcraKey          :: !(Maybe AuthKey)
     , _mcraVolumeId     :: !Text
     , _mcraSource       :: !Text
     , _mcraOAuthToken   :: !(Maybe OAuthToken)
@@ -179,7 +179,7 @@ mcraLicenseTypes
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcraKey :: Lens' MyConfigRequestAccess' (Maybe Key)
+mcraKey :: Lens' MyConfigRequestAccess' (Maybe AuthKey)
 mcraKey = lens _mcraKey (\ s a -> s{_mcraKey = a})
 
 -- | The volume to request concurrent\/download restrictions for.

@@ -65,7 +65,7 @@ type ManagementCustomDimensionsPatchResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] CustomDimension :>
@@ -83,7 +83,7 @@ data ManagementCustomDimensionsPatch' = ManagementCustomDimensionsPatch'
     , _mcdpUserIP                      :: !(Maybe Text)
     , _mcdpPayload                     :: !CustomDimension
     , _mcdpAccountId                   :: !Text
-    , _mcdpKey                         :: !(Maybe Key)
+    , _mcdpKey                         :: !(Maybe AuthKey)
     , _mcdpOAuthToken                  :: !(Maybe OAuthToken)
     , _mcdpCustomDimensionId           :: !Text
     , _mcdpFields                      :: !(Maybe Text)
@@ -182,7 +182,7 @@ mcdpAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcdpKey :: Lens' ManagementCustomDimensionsPatch' (Maybe Key)
+mcdpKey :: Lens' ManagementCustomDimensionsPatch' (Maybe AuthKey)
 mcdpKey = lens _mcdpKey (\ s a -> s{_mcdpKey = a})
 
 -- | OAuth 2.0 token for the current user.

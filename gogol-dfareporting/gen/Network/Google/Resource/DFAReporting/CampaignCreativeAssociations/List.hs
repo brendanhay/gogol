@@ -67,7 +67,7 @@ type CampaignCreativeAssociationsListResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON]
@@ -84,7 +84,7 @@ data CampaignCreativeAssociationsList' = CampaignCreativeAssociationsList'
     , _ccalCampaignId  :: !Int64
     , _ccalProFileId   :: !Int64
     , _ccalSortOrder   :: !(Maybe CampaignCreativeAssociationsListSortOrder)
-    , _ccalKey         :: !(Maybe Key)
+    , _ccalKey         :: !(Maybe AuthKey)
     , _ccalPageToken   :: !(Maybe Text)
     , _ccalOAuthToken  :: !(Maybe OAuthToken)
     , _ccalMaxResults  :: !(Maybe Int32)
@@ -176,7 +176,7 @@ ccalSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccalKey :: Lens' CampaignCreativeAssociationsList' (Maybe Key)
+ccalKey :: Lens' CampaignCreativeAssociationsList' (Maybe AuthKey)
 ccalKey = lens _ccalKey (\ s a -> s{_ccalKey = a})
 
 -- | Value of the nextPageToken from the previous result page.

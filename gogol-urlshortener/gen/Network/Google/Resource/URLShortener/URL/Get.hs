@@ -56,7 +56,7 @@ type URLGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] URL
 
@@ -67,7 +67,7 @@ data URLGet' = URLGet'
     { _ugQuotaUser   :: !(Maybe Text)
     , _ugPrettyPrint :: !Bool
     , _ugUserIP      :: !(Maybe Text)
-    , _ugKey         :: !(Maybe Key)
+    , _ugKey         :: !(Maybe AuthKey)
     , _ugProjection  :: !(Maybe URLGetProjection)
     , _ugOAuthToken  :: !(Maybe OAuthToken)
     , _ugShortURL    :: !Text
@@ -129,7 +129,7 @@ ugUserIP = lens _ugUserIP (\ s a -> s{_ugUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ugKey :: Lens' URLGet' (Maybe Key)
+ugKey :: Lens' URLGet' (Maybe AuthKey)
 ugKey = lens _ugKey (\ s a -> s{_ugKey = a})
 
 -- | Additional information to return.

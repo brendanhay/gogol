@@ -57,7 +57,7 @@ type GroupItemsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] GroupItemListResponse
@@ -71,7 +71,7 @@ data GroupItemsList' = GroupItemsList'
     , _gilPrettyPrint            :: !Bool
     , _gilUserIP                 :: !(Maybe Text)
     , _gilOnBehalfOfContentOwner :: !(Maybe Text)
-    , _gilKey                    :: !(Maybe Key)
+    , _gilKey                    :: !(Maybe AuthKey)
     , _gilGroupId                :: !Text
     , _gilOAuthToken             :: !(Maybe OAuthToken)
     , _gilFields                 :: !(Maybe Text)
@@ -148,7 +148,7 @@ gilOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gilKey :: Lens' GroupItemsList' (Maybe Key)
+gilKey :: Lens' GroupItemsList' (Maybe AuthKey)
 gilKey = lens _gilKey (\ s a -> s{_gilKey = a})
 
 -- | The id parameter specifies the unique ID of the group for which you want

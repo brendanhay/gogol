@@ -67,7 +67,7 @@ type OrganizationsGetResource =
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] Organization
@@ -84,7 +84,7 @@ data OrganizationsGet' = OrganizationsGet'
     , _ogAccessToken    :: !(Maybe Text)
     , _ogUploadType     :: !(Maybe Text)
     , _ogBearerToken    :: !(Maybe Text)
-    , _ogKey            :: !(Maybe Key)
+    , _ogKey            :: !(Maybe AuthKey)
     , _ogOAuthToken     :: !(Maybe OAuthToken)
     , _ogOrganizationId :: !Text
     , _ogFields         :: !(Maybe Text)
@@ -187,7 +187,7 @@ ogBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ogKey :: Lens' OrganizationsGet' (Maybe Key)
+ogKey :: Lens' OrganizationsGet' (Maybe AuthKey)
 ogKey = lens _ogKey (\ s a -> s{_ogKey = a})
 
 -- | OAuth 2.0 token for the current user.

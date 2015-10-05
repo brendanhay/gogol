@@ -56,7 +56,7 @@ type UsersDataSourcesDeleteResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] DataSource
 
@@ -69,7 +69,7 @@ data UsersDataSourcesDelete' = UsersDataSourcesDelete'
     , _udsdUserIP       :: !(Maybe Text)
     , _udsdDataSourceId :: !Text
     , _udsdUserId       :: !Text
-    , _udsdKey          :: !(Maybe Key)
+    , _udsdKey          :: !(Maybe AuthKey)
     , _udsdOAuthToken   :: !(Maybe OAuthToken)
     , _udsdFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ udsdUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udsdKey :: Lens' UsersDataSourcesDelete' (Maybe Key)
+udsdKey :: Lens' UsersDataSourcesDelete' (Maybe AuthKey)
 udsdKey = lens _udsdKey (\ s a -> s{_udsdKey = a})
 
 -- | OAuth 2.0 token for the current user.

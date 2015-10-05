@@ -56,7 +56,7 @@ type PawsNotifySpectrumUseResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] PawsNotifySpectrumUseRequest :>
@@ -73,7 +73,7 @@ data PawsNotifySpectrumUse' = PawsNotifySpectrumUse'
     , _pnsuPrettyPrint :: !Bool
     , _pnsuUserIP      :: !(Maybe Text)
     , _pnsuPayload     :: !PawsNotifySpectrumUseRequest
-    , _pnsuKey         :: !(Maybe Key)
+    , _pnsuKey         :: !(Maybe AuthKey)
     , _pnsuOAuthToken  :: !(Maybe OAuthToken)
     , _pnsuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -137,7 +137,7 @@ pnsuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pnsuKey :: Lens' PawsNotifySpectrumUse' (Maybe Key)
+pnsuKey :: Lens' PawsNotifySpectrumUse' (Maybe AuthKey)
 pnsuKey = lens _pnsuKey (\ s a -> s{_pnsuKey = a})
 
 -- | OAuth 2.0 token for the current user.

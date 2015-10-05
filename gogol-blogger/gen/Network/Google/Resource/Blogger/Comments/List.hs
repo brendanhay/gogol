@@ -72,7 +72,7 @@ type CommentsListResource =
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] CommentList
@@ -88,7 +88,7 @@ data CommentsList' = CommentsList'
     , _clEndDate     :: !(Maybe DateTime')
     , _clBlogId      :: !Text
     , _clStartDate   :: !(Maybe DateTime')
-    , _clKey         :: !(Maybe Key)
+    , _clKey         :: !(Maybe AuthKey)
     , _clFetchBodies :: !(Maybe Bool)
     , _clView        :: !(Maybe CommentsListView)
     , _clPostId      :: !Text
@@ -197,7 +197,7 @@ clStartDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' CommentsList' (Maybe Key)
+clKey :: Lens' CommentsList' (Maybe AuthKey)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | Whether the body content of the comments is included.

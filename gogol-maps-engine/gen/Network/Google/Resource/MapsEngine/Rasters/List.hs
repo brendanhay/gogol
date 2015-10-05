@@ -80,7 +80,7 @@ type RastersListResource =
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "key" Key :>
+                                         QueryParam "key" AuthKey :>
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
@@ -96,7 +96,7 @@ data RastersList' = RastersList'
     , _rlUserIP           :: !(Maybe Text)
     , _rlCreatorEmail     :: !(Maybe Text)
     , _rlRole             :: !(Maybe RastersListRole)
-    , _rlKey              :: !(Maybe Key)
+    , _rlKey              :: !(Maybe AuthKey)
     , _rlBbox             :: !(Maybe Text)
     , _rlProcessingStatus :: !(Maybe RastersListProcessingStatus)
     , _rlModifiedAfter    :: !(Maybe DateTime')
@@ -219,7 +219,7 @@ rlRole = lens _rlRole (\ s a -> s{_rlRole = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rlKey :: Lens' RastersList' (Maybe Key)
+rlKey :: Lens' RastersList' (Maybe AuthKey)
 rlKey = lens _rlKey (\ s a -> s{_rlKey = a})
 
 -- | A bounding box, expressed as \"west,south,east,north\". If set, only

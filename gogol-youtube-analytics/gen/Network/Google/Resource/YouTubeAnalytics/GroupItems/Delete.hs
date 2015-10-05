@@ -56,7 +56,7 @@ type GroupItemsDeleteResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -68,7 +68,7 @@ data GroupItemsDelete' = GroupItemsDelete'
     , _gidPrettyPrint            :: !Bool
     , _gidUserIP                 :: !(Maybe Text)
     , _gidOnBehalfOfContentOwner :: !(Maybe Text)
-    , _gidKey                    :: !(Maybe Key)
+    , _gidKey                    :: !(Maybe AuthKey)
     , _gidId                     :: !Text
     , _gidOAuthToken             :: !(Maybe OAuthToken)
     , _gidFields                 :: !(Maybe Text)
@@ -145,7 +145,7 @@ gidOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gidKey :: Lens' GroupItemsDelete' (Maybe Key)
+gidKey :: Lens' GroupItemsDelete' (Maybe AuthKey)
 gidKey = lens _gidKey (\ s a -> s{_gidKey = a})
 
 -- | The id parameter specifies the YouTube group item ID for the group that

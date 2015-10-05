@@ -59,7 +59,7 @@ type PlacementStrategiesPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] PlacementStrategy :>
@@ -75,7 +75,7 @@ data PlacementStrategiesPatch' = PlacementStrategiesPatch'
     , _pspUserIP      :: !(Maybe Text)
     , _pspProFileId   :: !Int64
     , _pspPayload     :: !PlacementStrategy
-    , _pspKey         :: !(Maybe Key)
+    , _pspKey         :: !(Maybe AuthKey)
     , _pspId          :: !Int64
     , _pspOAuthToken  :: !(Maybe OAuthToken)
     , _pspFields      :: !(Maybe Text)
@@ -152,7 +152,7 @@ pspPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pspKey :: Lens' PlacementStrategiesPatch' (Maybe Key)
+pspKey :: Lens' PlacementStrategiesPatch' (Maybe AuthKey)
 pspKey = lens _pspKey (\ s a -> s{_pspKey = a})
 
 -- | Placement strategy ID.

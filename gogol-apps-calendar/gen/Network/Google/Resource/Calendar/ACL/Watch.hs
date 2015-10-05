@@ -65,7 +65,7 @@ type ACLWatchResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Channel :>
@@ -82,7 +82,7 @@ data ACLWatch' = ACLWatch'
     , _awUserIP      :: !(Maybe Text)
     , _awShowDeleted :: !(Maybe Bool)
     , _awPayload     :: !Channel
-    , _awKey         :: !(Maybe Key)
+    , _awKey         :: !(Maybe AuthKey)
     , _awPageToken   :: !(Maybe Text)
     , _awOAuthToken  :: !(Maybe OAuthToken)
     , _awMaxResults  :: !(Maybe Int32)
@@ -190,7 +190,7 @@ awPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-awKey :: Lens' ACLWatch' (Maybe Key)
+awKey :: Lens' ACLWatch' (Maybe AuthKey)
 awKey = lens _awKey (\ s a -> s{_awKey = a})
 
 -- | Token specifying which result page to return. Optional.

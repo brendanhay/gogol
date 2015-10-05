@@ -52,7 +52,7 @@ type FlagsListResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] FlagsListResponse
@@ -64,7 +64,7 @@ data FlagsList' = FlagsList'
     { _flQuotaUser   :: !(Maybe Text)
     , _flPrettyPrint :: !Bool
     , _flUserIP      :: !(Maybe Text)
-    , _flKey         :: !(Maybe Key)
+    , _flKey         :: !(Maybe AuthKey)
     , _flOAuthToken  :: !(Maybe OAuthToken)
     , _flFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -117,7 +117,7 @@ flUserIP = lens _flUserIP (\ s a -> s{_flUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-flKey :: Lens' FlagsList' (Maybe Key)
+flKey :: Lens' FlagsList' (Maybe AuthKey)
 flKey = lens _flKey (\ s a -> s{_flKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -58,7 +58,7 @@ type CollectionsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Collection :>
@@ -74,7 +74,7 @@ data CollectionsPatch' = CollectionsPatch'
     , _colUserIP       :: !(Maybe Text)
     , _colCollectionId :: !Text
     , _colPayload      :: !Collection
-    , _colKey          :: !(Maybe Key)
+    , _colKey          :: !(Maybe AuthKey)
     , _colOAuthToken   :: !(Maybe OAuthToken)
     , _colFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -157,7 +157,7 @@ colPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-colKey :: Lens' CollectionsPatch' (Maybe Key)
+colKey :: Lens' CollectionsPatch' (Maybe AuthKey)
 colKey = lens _colKey (\ s a -> s{_colKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -55,7 +55,7 @@ type PawsVerifyDeviceResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] PawsVerifyDeviceRequest :>
@@ -71,7 +71,7 @@ data PawsVerifyDevice' = PawsVerifyDevice'
     , _pvdPrettyPrint :: !Bool
     , _pvdUserIP      :: !(Maybe Text)
     , _pvdPayload     :: !PawsVerifyDeviceRequest
-    , _pvdKey         :: !(Maybe Key)
+    , _pvdKey         :: !(Maybe AuthKey)
     , _pvdOAuthToken  :: !(Maybe OAuthToken)
     , _pvdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -134,7 +134,7 @@ pvdPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pvdKey :: Lens' PawsVerifyDevice' (Maybe Key)
+pvdKey :: Lens' PawsVerifyDevice' (Maybe AuthKey)
 pvdKey = lens _pvdKey (\ s a -> s{_pvdKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -57,7 +57,7 @@ type UsersLabelsDeleteResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -70,7 +70,7 @@ data UsersLabelsDelete' = UsersLabelsDelete'
     , _uldPrettyPrint :: !Bool
     , _uldUserIP      :: !(Maybe Text)
     , _uldUserId      :: !Text
-    , _uldKey         :: !(Maybe Key)
+    , _uldKey         :: !(Maybe AuthKey)
     , _uldId          :: !Text
     , _uldOAuthToken  :: !(Maybe OAuthToken)
     , _uldFields      :: !(Maybe Text)
@@ -139,7 +139,7 @@ uldUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uldKey :: Lens' UsersLabelsDelete' (Maybe Key)
+uldKey :: Lens' UsersLabelsDelete' (Maybe AuthKey)
 uldKey = lens _uldKey (\ s a -> s{_uldKey = a})
 
 -- | The ID of the label to delete.

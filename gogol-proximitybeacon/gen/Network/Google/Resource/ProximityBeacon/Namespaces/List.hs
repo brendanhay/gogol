@@ -67,7 +67,7 @@ type NamespacesListResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ListNamespacesResponse
@@ -86,7 +86,7 @@ data NamespacesList' = NamespacesList'
     , _nlAccessToken    :: !(Maybe Text)
     , _nlUploadType     :: !(Maybe Text)
     , _nlBearerToken    :: !(Maybe Text)
-    , _nlKey            :: !(Maybe Key)
+    , _nlKey            :: !(Maybe AuthKey)
     , _nlOAuthToken     :: !(Maybe OAuthToken)
     , _nlFields         :: !(Maybe Text)
     , _nlCallback       :: !(Maybe Text)
@@ -184,7 +184,7 @@ nlBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-nlKey :: Lens' NamespacesList' (Maybe Key)
+nlKey :: Lens' NamespacesList' (Maybe AuthKey)
 nlKey = lens _nlKey (\ s a -> s{_nlKey = a})
 
 -- | OAuth 2.0 token for the current user.

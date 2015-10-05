@@ -54,7 +54,7 @@ type QueriesDeletequeryResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -66,7 +66,7 @@ data QueriesDeletequery' = QueriesDeletequery'
     , _qdQueryId     :: !Int64
     , _qdPrettyPrint :: !Bool
     , _qdUserIP      :: !(Maybe Text)
-    , _qdKey         :: !(Maybe Key)
+    , _qdKey         :: !(Maybe AuthKey)
     , _qdOAuthToken  :: !(Maybe OAuthToken)
     , _qdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -128,7 +128,7 @@ qdUserIP = lens _qdUserIP (\ s a -> s{_qdUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-qdKey :: Lens' QueriesDeletequery' (Maybe Key)
+qdKey :: Lens' QueriesDeletequery' (Maybe AuthKey)
 qdKey = lens _qdKey (\ s a -> s{_qdKey = a})
 
 -- | OAuth 2.0 token for the current user.

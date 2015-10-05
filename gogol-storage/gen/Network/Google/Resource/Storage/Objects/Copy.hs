@@ -93,7 +93,7 @@ type ObjectsCopyResource =
                                              QueryParam "prettyPrint" Bool :>
                                                QueryParam "userIp" Text :>
                                                  QueryParam "fields" Text :>
-                                                   QueryParam "key" Key :>
+                                                   QueryParam "key" AuthKey :>
                                                      QueryParam "oauth_token"
                                                        OAuthToken
                                                        :>
@@ -136,7 +136,7 @@ type ObjectsCopyResource =
                                                QueryParam "prettyPrint" Bool :>
                                                  QueryParam "userIp" Text :>
                                                    QueryParam "fields" Text :>
-                                                     QueryParam "key" Key :>
+                                                     QueryParam "key" AuthKey :>
                                                        QueryParam "oauth_token"
                                                          OAuthToken
                                                          :>
@@ -166,7 +166,7 @@ data ObjectsCopy' = ObjectsCopy'
     , _ocSourceObject                   :: !Text
     , _ocSourceBucket                   :: !Text
     , _ocPayload                        :: !Object
-    , _ocKey                            :: !(Maybe Key)
+    , _ocKey                            :: !(Maybe AuthKey)
     , _ocDestinationBucket              :: !Text
     , _ocIfMetagenerationNotMatch       :: !(Maybe Word64)
     , _ocIfSourceGenerationNotMatch     :: !(Maybe Word64)
@@ -334,7 +334,7 @@ ocPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ocKey :: Lens' ObjectsCopy' (Maybe Key)
+ocKey :: Lens' ObjectsCopy' (Maybe AuthKey)
 ocKey = lens _ocKey (\ s a -> s{_ocKey = a})
 
 -- | Name of the bucket in which to store the new object. Overrides the

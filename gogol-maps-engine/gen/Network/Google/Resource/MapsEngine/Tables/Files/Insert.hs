@@ -61,7 +61,7 @@ type TablesFilesInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[OctetStream] Body :> Post '[JSON] ()
@@ -77,7 +77,7 @@ data TablesFilesInsert' = TablesFilesInsert'
     , _tfiPrettyPrint :: !Bool
     , _tfiUserIP      :: !(Maybe Text)
     , _tfiMedia       :: !Body
-    , _tfiKey         :: !(Maybe Key)
+    , _tfiKey         :: !(Maybe AuthKey)
     , _tfiId          :: !Text
     , _tfiOAuthToken  :: !(Maybe OAuthToken)
     , _tfiFilename    :: !Text
@@ -148,7 +148,7 @@ tfiMedia = lens _tfiMedia (\ s a -> s{_tfiMedia = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tfiKey :: Lens' TablesFilesInsert' (Maybe Key)
+tfiKey :: Lens' TablesFilesInsert' (Maybe AuthKey)
 tfiKey = lens _tfiKey (\ s a -> s{_tfiKey = a})
 
 -- | The ID of the table asset.

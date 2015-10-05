@@ -65,7 +65,7 @@ type DevicesGetStateResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] DeviceState
@@ -83,7 +83,7 @@ data DevicesGetState' = DevicesGetState'
     , _dgsEnterpriseId :: !Text
     , _dgsUserIP       :: !(Maybe Text)
     , _dgsUserId       :: !Text
-    , _dgsKey          :: !(Maybe Key)
+    , _dgsKey          :: !(Maybe AuthKey)
     , _dgsDeviceId     :: !Text
     , _dgsOAuthToken   :: !(Maybe OAuthToken)
     , _dgsFields       :: !(Maybe Text)
@@ -161,7 +161,7 @@ dgsUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dgsKey :: Lens' DevicesGetState' (Maybe Key)
+dgsKey :: Lens' DevicesGetState' (Maybe AuthKey)
 dgsKey = lens _dgsKey (\ s a -> s{_dgsKey = a})
 
 -- | The ID of the device.

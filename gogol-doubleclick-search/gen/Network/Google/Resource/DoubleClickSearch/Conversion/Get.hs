@@ -78,7 +78,7 @@ type ConversionGetResource =
                                      QueryParam "prettyPrint" Bool :>
                                        QueryParam "userIp" Text :>
                                          QueryParam "fields" Text :>
-                                           QueryParam "key" Key :>
+                                           QueryParam "key" AuthKey :>
                                              QueryParam "oauth_token" OAuthToken
                                                :>
                                                QueryParam "alt" AltJSON :>
@@ -100,7 +100,7 @@ data ConversionGet' = ConversionGet'
     , _cgCampaignId      :: !(Maybe Int64)
     , _cgCriterionId     :: !(Maybe Int64)
     , _cgStartDate       :: !Int32
-    , _cgKey             :: !(Maybe Key)
+    , _cgKey             :: !(Maybe AuthKey)
     , _cgStartRow        :: !Word32
     , _cgAdId            :: !(Maybe Int64)
     , _cgOAuthToken      :: !(Maybe OAuthToken)
@@ -241,7 +241,7 @@ cgStartDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgKey :: Lens' ConversionGet' (Maybe Key)
+cgKey :: Lens' ConversionGet' (Maybe AuthKey)
 cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 
 -- | The 0-based starting index for retrieving conversions results.

@@ -57,7 +57,7 @@ type FloodlightActivitiesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] FloodlightActivity
@@ -70,7 +70,7 @@ data FloodlightActivitiesGet' = FloodlightActivitiesGet'
     , _fPrettyPrint :: !Bool
     , _fUserIP      :: !(Maybe Text)
     , _fProFileId   :: !Int64
-    , _fKey         :: !(Maybe Key)
+    , _fKey         :: !(Maybe AuthKey)
     , _fId          :: !Int64
     , _fOAuthToken  :: !(Maybe OAuthToken)
     , _fFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ fProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fKey :: Lens' FloodlightActivitiesGet' (Maybe Key)
+fKey :: Lens' FloodlightActivitiesGet' (Maybe AuthKey)
 fKey = lens _fKey (\ s a -> s{_fKey = a})
 
 -- | Floodlight activity ID.

@@ -58,7 +58,7 @@ type CommentsUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Comment :> Put '[JSON] Comment
@@ -71,7 +71,7 @@ data CommentsUpdate' = CommentsUpdate'
     , _cuPrettyPrint :: !Bool
     , _cuUserIP      :: !(Maybe Text)
     , _cuPayload     :: !Comment
-    , _cuKey         :: !(Maybe Key)
+    , _cuKey         :: !(Maybe AuthKey)
     , _cuFileId      :: !Text
     , _cuOAuthToken  :: !(Maybe OAuthToken)
     , _cuCommentId   :: !Text
@@ -143,7 +143,7 @@ cuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuKey :: Lens' CommentsUpdate' (Maybe Key)
+cuKey :: Lens' CommentsUpdate' (Maybe AuthKey)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
 
 -- | The ID of the file.

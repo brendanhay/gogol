@@ -56,7 +56,7 @@ type StyleInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] StyleSetting :>
@@ -70,7 +70,7 @@ data StyleInsert' = StyleInsert'
     , _siPrettyPrint :: !Bool
     , _siUserIP      :: !(Maybe Text)
     , _siPayload     :: !StyleSetting
-    , _siKey         :: !(Maybe Key)
+    , _siKey         :: !(Maybe AuthKey)
     , _siOAuthToken  :: !(Maybe OAuthToken)
     , _siTableId     :: !Text
     , _siFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ siPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-siKey :: Lens' StyleInsert' (Maybe Key)
+siKey :: Lens' StyleInsert' (Maybe AuthKey)
 siKey = lens _siKey (\ s a -> s{_siKey = a})
 
 -- | OAuth 2.0 token for the current user.

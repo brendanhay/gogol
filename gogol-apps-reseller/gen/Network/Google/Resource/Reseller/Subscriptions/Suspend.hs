@@ -58,7 +58,7 @@ type SubscriptionsSuspendResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] Subscription
 
@@ -70,7 +70,7 @@ data SubscriptionsSuspend' = SubscriptionsSuspend'
     , _ssPrettyPrint    :: !Bool
     , _ssUserIP         :: !(Maybe Text)
     , _ssCustomerId     :: !Text
-    , _ssKey            :: !(Maybe Key)
+    , _ssKey            :: !(Maybe AuthKey)
     , _ssOAuthToken     :: !(Maybe OAuthToken)
     , _ssSubscriptionId :: !Text
     , _ssFields         :: !(Maybe Text)
@@ -137,7 +137,7 @@ ssCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ssKey :: Lens' SubscriptionsSuspend' (Maybe Key)
+ssKey :: Lens' SubscriptionsSuspend' (Maybe AuthKey)
 ssKey = lens _ssKey (\ s a -> s{_ssKey = a})
 
 -- | OAuth 2.0 token for the current user.

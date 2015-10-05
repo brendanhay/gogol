@@ -62,7 +62,7 @@ type URLMapsListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] URLMapList
 
@@ -75,7 +75,7 @@ data URLMapsList' = URLMapsList'
     , _umlPrettyPrint :: !Bool
     , _umlProject     :: !Text
     , _umlUserIP      :: !(Maybe Text)
-    , _umlKey         :: !(Maybe Key)
+    , _umlKey         :: !(Maybe AuthKey)
     , _umlFilter      :: !(Maybe Text)
     , _umlPageToken   :: !(Maybe Text)
     , _umlOAuthToken  :: !(Maybe OAuthToken)
@@ -150,7 +150,7 @@ umlUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umlKey :: Lens' URLMapsList' (Maybe Key)
+umlKey :: Lens' URLMapsList' (Maybe AuthKey)
 umlKey = lens _umlKey (\ s a -> s{_umlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

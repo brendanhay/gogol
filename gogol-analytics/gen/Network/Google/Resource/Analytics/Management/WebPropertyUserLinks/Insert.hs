@@ -60,7 +60,7 @@ type ManagementWebPropertyUserLinksInsertResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] EntityUserLink :>
@@ -76,7 +76,7 @@ data ManagementWebPropertyUserLinksInsert' = ManagementWebPropertyUserLinksInser
     , _mwpuliUserIP        :: !(Maybe Text)
     , _mwpuliPayload       :: !EntityUserLink
     , _mwpuliAccountId     :: !Text
-    , _mwpuliKey           :: !(Maybe Key)
+    , _mwpuliKey           :: !(Maybe AuthKey)
     , _mwpuliOAuthToken    :: !(Maybe OAuthToken)
     , _mwpuliFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -161,7 +161,7 @@ mwpuliAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mwpuliKey :: Lens' ManagementWebPropertyUserLinksInsert' (Maybe Key)
+mwpuliKey :: Lens' ManagementWebPropertyUserLinksInsert' (Maybe AuthKey)
 mwpuliKey
   = lens _mwpuliKey (\ s a -> s{_mwpuliKey = a})
 

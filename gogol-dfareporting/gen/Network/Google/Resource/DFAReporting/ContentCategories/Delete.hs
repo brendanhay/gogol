@@ -57,7 +57,7 @@ type ContentCategoriesDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -69,7 +69,7 @@ data ContentCategoriesDelete' = ContentCategoriesDelete'
     , _ccdPrettyPrint :: !Bool
     , _ccdUserIP      :: !(Maybe Text)
     , _ccdProFileId   :: !Int64
-    , _ccdKey         :: !(Maybe Key)
+    , _ccdKey         :: !(Maybe AuthKey)
     , _ccdId          :: !Int64
     , _ccdOAuthToken  :: !(Maybe OAuthToken)
     , _ccdFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ ccdProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccdKey :: Lens' ContentCategoriesDelete' (Maybe Key)
+ccdKey :: Lens' ContentCategoriesDelete' (Maybe AuthKey)
 ccdKey = lens _ccdKey (\ s a -> s{_ccdKey = a})
 
 -- | Content category ID.

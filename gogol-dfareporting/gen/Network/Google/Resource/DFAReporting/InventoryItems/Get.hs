@@ -60,7 +60,7 @@ type InventoryItemsGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] InventoryItem
@@ -73,7 +73,7 @@ data InventoryItemsGet' = InventoryItemsGet'
     , _iigPrettyPrint :: !Bool
     , _iigUserIP      :: !(Maybe Text)
     , _iigProFileId   :: !Int64
-    , _iigKey         :: !(Maybe Key)
+    , _iigKey         :: !(Maybe AuthKey)
     , _iigId          :: !Int64
     , _iigProjectId   :: !Int64
     , _iigOAuthToken  :: !(Maybe OAuthToken)
@@ -146,7 +146,7 @@ iigProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iigKey :: Lens' InventoryItemsGet' (Maybe Key)
+iigKey :: Lens' InventoryItemsGet' (Maybe AuthKey)
 iigKey = lens _iigKey (\ s a -> s{_iigKey = a})
 
 -- | Inventory item ID.

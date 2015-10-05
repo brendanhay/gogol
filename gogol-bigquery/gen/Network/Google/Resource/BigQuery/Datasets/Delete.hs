@@ -62,7 +62,7 @@ type DatasetsDeleteResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -76,7 +76,7 @@ data DatasetsDelete' = DatasetsDelete'
     { _ddQuotaUser      :: !(Maybe Text)
     , _ddPrettyPrint    :: !Bool
     , _ddUserIP         :: !(Maybe Text)
-    , _ddKey            :: !(Maybe Key)
+    , _ddKey            :: !(Maybe AuthKey)
     , _ddDatasetId      :: !Text
     , _ddProjectId      :: !Text
     , _ddOAuthToken     :: !(Maybe OAuthToken)
@@ -143,7 +143,7 @@ ddUserIP = lens _ddUserIP (\ s a -> s{_ddUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ddKey :: Lens' DatasetsDelete' (Maybe Key)
+ddKey :: Lens' DatasetsDelete' (Maybe AuthKey)
 ddKey = lens _ddKey (\ s a -> s{_ddKey = a})
 
 -- | Dataset ID of dataset being deleted

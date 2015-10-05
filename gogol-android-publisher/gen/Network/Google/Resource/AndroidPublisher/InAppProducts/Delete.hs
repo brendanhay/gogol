@@ -56,7 +56,7 @@ type InAppProductsDeleteResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -68,7 +68,7 @@ data InAppProductsDelete' = InAppProductsDelete'
     , _iapdPrettyPrint :: !Bool
     , _iapdPackageName :: !Text
     , _iapdUserIP      :: !(Maybe Text)
-    , _iapdKey         :: !(Maybe Key)
+    , _iapdKey         :: !(Maybe AuthKey)
     , _iapdSKU         :: !Text
     , _iapdOAuthToken  :: !(Maybe OAuthToken)
     , _iapdFields      :: !(Maybe Text)
@@ -139,7 +139,7 @@ iapdUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iapdKey :: Lens' InAppProductsDelete' (Maybe Key)
+iapdKey :: Lens' InAppProductsDelete' (Maybe AuthKey)
 iapdKey = lens _iapdKey (\ s a -> s{_iapdKey = a})
 
 -- | Unique identifier for the in-app product.

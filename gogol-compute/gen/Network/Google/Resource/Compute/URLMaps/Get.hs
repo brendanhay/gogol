@@ -57,7 +57,7 @@ type URLMapsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] URLMap
 
@@ -70,7 +70,7 @@ data URLMapsGet' = URLMapsGet'
     , _umgPrettyPrint :: !Bool
     , _umgProject     :: !Text
     , _umgUserIP      :: !(Maybe Text)
-    , _umgKey         :: !(Maybe Key)
+    , _umgKey         :: !(Maybe AuthKey)
     , _umgOAuthToken  :: !(Maybe OAuthToken)
     , _umgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,7 +142,7 @@ umgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umgKey :: Lens' URLMapsGet' (Maybe Key)
+umgKey :: Lens' URLMapsGet' (Maybe AuthKey)
 umgKey = lens _umgKey (\ s a -> s{_umgKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -73,7 +73,7 @@ type AppsModulesVersionsDeleteResource =
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "fields" Text :>
-                                       QueryParam "key" Key :>
+                                       QueryParam "key" AuthKey :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Delete '[JSON] Operation
@@ -92,7 +92,7 @@ data AppsModulesVersionsDelete' = AppsModulesVersionsDelete'
     , _amvdVersionsId     :: !Text
     , _amvdModulesId      :: !Text
     , _amvdBearerToken    :: !(Maybe Text)
-    , _amvdKey            :: !(Maybe Key)
+    , _amvdKey            :: !(Maybe AuthKey)
     , _amvdAppsId         :: !Text
     , _amvdOAuthToken     :: !(Maybe OAuthToken)
     , _amvdFields         :: !(Maybe Text)
@@ -218,7 +218,7 @@ amvdBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-amvdKey :: Lens' AppsModulesVersionsDelete' (Maybe Key)
+amvdKey :: Lens' AppsModulesVersionsDelete' (Maybe AuthKey)
 amvdKey = lens _amvdKey (\ s a -> s{_amvdKey = a})
 
 -- | Part of \`name\`. Name of the resource requested. For example:

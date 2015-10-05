@@ -59,7 +59,7 @@ type ZoneViewsDeleteResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
@@ -73,7 +73,7 @@ data ZoneViewsDelete' = ZoneViewsDelete'
     , _zvdProject      :: !Text
     , _zvdUserIP       :: !(Maybe Text)
     , _zvdZone         :: !Text
-    , _zvdKey          :: !(Maybe Key)
+    , _zvdKey          :: !(Maybe AuthKey)
     , _zvdOAuthToken   :: !(Maybe OAuthToken)
     , _zvdFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -154,7 +154,7 @@ zvdZone = lens _zvdZone (\ s a -> s{_zvdZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-zvdKey :: Lens' ZoneViewsDelete' (Maybe Key)
+zvdKey :: Lens' ZoneViewsDelete' (Maybe AuthKey)
 zvdKey = lens _zvdKey (\ s a -> s{_zvdKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -57,7 +57,7 @@ type BackendServicesInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] BackendService :>
@@ -73,7 +73,7 @@ data BackendServicesInsert' = BackendServicesInsert'
     , _bsiProject     :: !Text
     , _bsiUserIP      :: !(Maybe Text)
     , _bsiPayload     :: !BackendService
-    , _bsiKey         :: !(Maybe Key)
+    , _bsiKey         :: !(Maybe AuthKey)
     , _bsiOAuthToken  :: !(Maybe OAuthToken)
     , _bsiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ bsiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bsiKey :: Lens' BackendServicesInsert' (Maybe Key)
+bsiKey :: Lens' BackendServicesInsert' (Maybe AuthKey)
 bsiKey = lens _bsiKey (\ s a -> s{_bsiKey = a})
 
 -- | OAuth 2.0 token for the current user.

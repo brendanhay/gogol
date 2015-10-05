@@ -60,7 +60,7 @@ type AccountsReportsSavedListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] SavedReports
@@ -73,7 +73,7 @@ data AccountsReportsSavedList' = AccountsReportsSavedList'
     , _arslPrettyPrint :: !Bool
     , _arslUserIP      :: !(Maybe Text)
     , _arslAccountId   :: !Text
-    , _arslKey         :: !(Maybe Key)
+    , _arslKey         :: !(Maybe AuthKey)
     , _arslPageToken   :: !(Maybe Text)
     , _arslOAuthToken  :: !(Maybe OAuthToken)
     , _arslMaxResults  :: !(Maybe Int32)
@@ -146,7 +146,7 @@ arslAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-arslKey :: Lens' AccountsReportsSavedList' (Maybe Key)
+arslKey :: Lens' AccountsReportsSavedList' (Maybe AuthKey)
 arslKey = lens _arslKey (\ s a -> s{_arslKey = a})
 
 -- | A continuation token, used to page through saved reports. To retrieve

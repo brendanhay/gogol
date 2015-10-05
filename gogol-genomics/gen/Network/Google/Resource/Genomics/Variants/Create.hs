@@ -53,7 +53,7 @@ type VariantsCreateResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Variant :> Post '[JSON] Variant
@@ -66,7 +66,7 @@ data VariantsCreate' = VariantsCreate'
     , _varPrettyPrint :: !Bool
     , _varUserIP      :: !(Maybe Text)
     , _varPayload     :: !Variant
-    , _varKey         :: !(Maybe Key)
+    , _varKey         :: !(Maybe AuthKey)
     , _varOAuthToken  :: !(Maybe OAuthToken)
     , _varFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -129,7 +129,7 @@ varPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-varKey :: Lens' VariantsCreate' (Maybe Key)
+varKey :: Lens' VariantsCreate' (Maybe AuthKey)
 varKey = lens _varKey (\ s a -> s{_varKey = a})
 
 -- | OAuth 2.0 token for the current user.

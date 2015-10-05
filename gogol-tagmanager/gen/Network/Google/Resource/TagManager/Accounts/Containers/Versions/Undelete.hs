@@ -61,7 +61,7 @@ type AccountsContainersVersionsUndeleteResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Post '[JSON] ContainerVersion
@@ -76,7 +76,7 @@ data AccountsContainersVersionsUndelete' = AccountsContainersVersionsUndelete'
     , _acvuUserIP             :: !(Maybe Text)
     , _acvuContainerVersionId :: !Text
     , _acvuAccountId          :: !Text
-    , _acvuKey                :: !(Maybe Key)
+    , _acvuKey                :: !(Maybe AuthKey)
     , _acvuOAuthToken         :: !(Maybe OAuthToken)
     , _acvuFields             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -161,7 +161,7 @@ acvuAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acvuKey :: Lens' AccountsContainersVersionsUndelete' (Maybe Key)
+acvuKey :: Lens' AccountsContainersVersionsUndelete' (Maybe AuthKey)
 acvuKey = lens _acvuKey (\ s a -> s{_acvuKey = a})
 
 -- | OAuth 2.0 token for the current user.

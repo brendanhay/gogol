@@ -54,7 +54,7 @@ type ReadgroupsetsGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] ReadGroupSet
 
@@ -66,7 +66,7 @@ data ReadgroupsetsGet' = ReadgroupsetsGet'
     , _rgPrettyPrint    :: !Bool
     , _rgReadGroupSetId :: !Text
     , _rgUserIP         :: !(Maybe Text)
-    , _rgKey            :: !(Maybe Key)
+    , _rgKey            :: !(Maybe AuthKey)
     , _rgOAuthToken     :: !(Maybe OAuthToken)
     , _rgFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -129,7 +129,7 @@ rgUserIP = lens _rgUserIP (\ s a -> s{_rgUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rgKey :: Lens' ReadgroupsetsGet' (Maybe Key)
+rgKey :: Lens' ReadgroupsetsGet' (Maybe AuthKey)
 rgKey = lens _rgKey (\ s a -> s{_rgKey = a})
 
 -- | OAuth 2.0 token for the current user.

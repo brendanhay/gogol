@@ -62,7 +62,7 @@ type CommentsGetResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Comment
 
@@ -74,7 +74,7 @@ data CommentsGet' = CommentsGet'
     , _cgPrettyPrint :: !Bool
     , _cgUserIP      :: !(Maybe Text)
     , _cgBlogId      :: !Text
-    , _cgKey         :: !(Maybe Key)
+    , _cgKey         :: !(Maybe AuthKey)
     , _cgView        :: !(Maybe CommentsGetView)
     , _cgPostId      :: !Text
     , _cgOAuthToken  :: !(Maybe OAuthToken)
@@ -149,7 +149,7 @@ cgBlogId = lens _cgBlogId (\ s a -> s{_cgBlogId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgKey :: Lens' CommentsGet' (Maybe Key)
+cgKey :: Lens' CommentsGet' (Maybe AuthKey)
 cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 
 -- | Access level for the requested comment (default: READER). Note that some

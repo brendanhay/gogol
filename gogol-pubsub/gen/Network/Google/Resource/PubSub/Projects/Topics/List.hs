@@ -71,7 +71,7 @@ type ProjectsTopicsListResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListTopicsResponse
@@ -89,7 +89,7 @@ data ProjectsTopicsList' = ProjectsTopicsList'
     , _ptlAccessToken    :: !(Maybe Text)
     , _ptlUploadType     :: !(Maybe Text)
     , _ptlBearerToken    :: !(Maybe Text)
-    , _ptlKey            :: !(Maybe Key)
+    , _ptlKey            :: !(Maybe AuthKey)
     , _ptlPageToken      :: !(Maybe Text)
     , _ptlOAuthToken     :: !(Maybe OAuthToken)
     , _ptlPageSize       :: !(Maybe Int32)
@@ -205,7 +205,7 @@ ptlBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ptlKey :: Lens' ProjectsTopicsList' (Maybe Key)
+ptlKey :: Lens' ProjectsTopicsList' (Maybe AuthKey)
 ptlKey = lens _ptlKey (\ s a -> s{_ptlKey = a})
 
 -- | The value returned by the last ListTopicsResponse; indicates that this

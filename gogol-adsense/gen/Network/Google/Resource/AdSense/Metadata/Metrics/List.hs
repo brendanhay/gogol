@@ -53,7 +53,7 @@ type MetadataMetricsListResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Metadata
 
@@ -64,7 +64,7 @@ data MetadataMetricsList' = MetadataMetricsList'
     { _mmlQuotaUser   :: !(Maybe Text)
     , _mmlPrettyPrint :: !Bool
     , _mmlUserIP      :: !(Maybe Text)
-    , _mmlKey         :: !(Maybe Key)
+    , _mmlKey         :: !(Maybe AuthKey)
     , _mmlOAuthToken  :: !(Maybe OAuthToken)
     , _mmlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -118,7 +118,7 @@ mmlUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mmlKey :: Lens' MetadataMetricsList' (Maybe Key)
+mmlKey :: Lens' MetadataMetricsList' (Maybe AuthKey)
 mmlKey = lens _mmlKey (\ s a -> s{_mmlKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -66,7 +66,7 @@ type TimelineListResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] TimelineListResponse
@@ -81,7 +81,7 @@ data TimelineList' = TimelineList'
     , _tlOrderBy        :: !(Maybe TimelineListOrderBy)
     , _tlUserIP         :: !(Maybe Text)
     , _tlBundleId       :: !(Maybe Text)
-    , _tlKey            :: !(Maybe Key)
+    , _tlKey            :: !(Maybe AuthKey)
     , _tlSourceItemId   :: !(Maybe Text)
     , _tlPageToken      :: !(Maybe Text)
     , _tlOAuthToken     :: !(Maybe OAuthToken)
@@ -174,7 +174,7 @@ tlBundleId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tlKey :: Lens' TimelineList' (Maybe Key)
+tlKey :: Lens' TimelineList' (Maybe AuthKey)
 tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | If provided, only items with the given sourceItemId will be returned.

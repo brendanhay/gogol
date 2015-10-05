@@ -60,7 +60,7 @@ type EditsTestersUpdateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Testers :> Put '[JSON] Testers
@@ -74,7 +74,7 @@ data EditsTestersUpdate' = EditsTestersUpdate'
     , _etutPackageName :: !Text
     , _etutUserIP      :: !(Maybe Text)
     , _etutPayload     :: !Testers
-    , _etutKey         :: !(Maybe Key)
+    , _etutKey         :: !(Maybe AuthKey)
     , _etutOAuthToken  :: !(Maybe OAuthToken)
     , _etutEditId      :: !Text
     , _etutFields      :: !(Maybe Text)
@@ -162,7 +162,7 @@ etutPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-etutKey :: Lens' EditsTestersUpdate' (Maybe Key)
+etutKey :: Lens' EditsTestersUpdate' (Maybe AuthKey)
 etutKey = lens _etutKey (\ s a -> s{_etutKey = a})
 
 -- | OAuth 2.0 token for the current user.

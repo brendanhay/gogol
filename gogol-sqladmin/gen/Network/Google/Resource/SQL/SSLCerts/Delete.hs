@@ -61,7 +61,7 @@ type SSLCertsDeleteResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Delete '[JSON] Operation
@@ -75,7 +75,7 @@ data SSLCertsDelete' = SSLCertsDelete'
     , _scdPrettyPrint     :: !Bool
     , _scdProject         :: !Text
     , _scdUserIP          :: !(Maybe Text)
-    , _scdKey             :: !(Maybe Key)
+    , _scdKey             :: !(Maybe AuthKey)
     , _scdOAuthToken      :: !(Maybe OAuthToken)
     , _scdSha1Fingerprint :: !Text
     , _scdFields          :: !(Maybe Text)
@@ -148,7 +148,7 @@ scdUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-scdKey :: Lens' SSLCertsDelete' (Maybe Key)
+scdKey :: Lens' SSLCertsDelete' (Maybe AuthKey)
 scdKey = lens _scdKey (\ s a -> s{_scdKey = a})
 
 -- | OAuth 2.0 token for the current user.

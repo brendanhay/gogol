@@ -86,7 +86,7 @@ type AccountsStoreInfosListResource =
                                            QueryParam "quotaUser" Text :>
                                              QueryParam "prettyPrint" Bool :>
                                                QueryParam "fields" Text :>
-                                                 QueryParam "key" Key :>
+                                                 QueryParam "key" AuthKey :>
                                                    QueryParam "oauth_token"
                                                      OAuthToken
                                                      :>
@@ -114,7 +114,7 @@ data AccountsStoreInfosList' = AccountsStoreInfosList'
     , _asilVideoId        :: !(Maybe Text)
     , _asilAccountId      :: !Text
     , _asilBearerToken    :: !(Maybe Text)
-    , _asilKey            :: !(Maybe Key)
+    , _asilKey            :: !(Maybe AuthKey)
     , _asilName           :: !(Maybe Text)
     , _asilPageToken      :: !(Maybe Text)
     , _asilOAuthToken     :: !(Maybe OAuthToken)
@@ -291,7 +291,7 @@ asilBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-asilKey :: Lens' AccountsStoreInfosList' (Maybe Key)
+asilKey :: Lens' AccountsStoreInfosList' (Maybe AuthKey)
 asilKey = lens _asilKey (\ s a -> s{_asilKey = a})
 
 -- | Filter StoreInfos that match a case-insensitive substring of the default

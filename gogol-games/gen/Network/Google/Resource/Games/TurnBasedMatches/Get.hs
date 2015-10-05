@@ -58,7 +58,7 @@ type TurnBasedMatchesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] TurnBasedMatch
@@ -70,7 +70,7 @@ data TurnBasedMatchesGet' = TurnBasedMatchesGet'
     { _tbmgQuotaUser        :: !(Maybe Text)
     , _tbmgPrettyPrint      :: !Bool
     , _tbmgUserIP           :: !(Maybe Text)
-    , _tbmgKey              :: !(Maybe Key)
+    , _tbmgKey              :: !(Maybe AuthKey)
     , _tbmgIncludeMatchData :: !(Maybe Bool)
     , _tbmgLanguage         :: !(Maybe Text)
     , _tbmgOAuthToken       :: !(Maybe OAuthToken)
@@ -138,7 +138,7 @@ tbmgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tbmgKey :: Lens' TurnBasedMatchesGet' (Maybe Key)
+tbmgKey :: Lens' TurnBasedMatchesGet' (Maybe AuthKey)
 tbmgKey = lens _tbmgKey (\ s a -> s{_tbmgKey = a})
 
 -- | Get match data along with metadata.

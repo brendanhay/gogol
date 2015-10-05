@@ -58,7 +58,7 @@ type DevicesListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] DevicesListResponse
@@ -72,7 +72,7 @@ data DevicesList' = DevicesList'
     , _dlEnterpriseId :: !Text
     , _dlUserIP       :: !(Maybe Text)
     , _dlUserId       :: !Text
-    , _dlKey          :: !(Maybe Key)
+    , _dlKey          :: !(Maybe AuthKey)
     , _dlOAuthToken   :: !(Maybe OAuthToken)
     , _dlFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ dlUserId = lens _dlUserId (\ s a -> s{_dlUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dlKey :: Lens' DevicesList' (Maybe Key)
+dlKey :: Lens' DevicesList' (Maybe AuthKey)
 dlKey = lens _dlKey (\ s a -> s{_dlKey = a})
 
 -- | OAuth 2.0 token for the current user.

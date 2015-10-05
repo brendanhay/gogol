@@ -59,7 +59,7 @@ type TemplateListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] TemplateList
 
@@ -70,7 +70,7 @@ data TemplateList' = TemplateList'
     { _tllQuotaUser   :: !(Maybe Text)
     , _tllPrettyPrint :: !Bool
     , _tllUserIP      :: !(Maybe Text)
-    , _tllKey         :: !(Maybe Key)
+    , _tllKey         :: !(Maybe AuthKey)
     , _tllPageToken   :: !(Maybe Text)
     , _tllOAuthToken  :: !(Maybe OAuthToken)
     , _tllTableId     :: !Text
@@ -137,7 +137,7 @@ tllUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tllKey :: Lens' TemplateList' (Maybe Key)
+tllKey :: Lens' TemplateList' (Maybe AuthKey)
 tllKey = lens _tllKey (\ s a -> s{_tllKey = a})
 
 -- | Continuation token specifying which results page to return. Optional.

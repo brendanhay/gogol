@@ -59,7 +59,7 @@ type ManagementAccountUserLinksUpdateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] EntityUserLink :>
@@ -74,7 +74,7 @@ data ManagementAccountUserLinksUpdate' = ManagementAccountUserLinksUpdate'
     , _mauluUserIP      :: !(Maybe Text)
     , _mauluPayload     :: !EntityUserLink
     , _mauluAccountId   :: !Text
-    , _mauluKey         :: !(Maybe Key)
+    , _mauluKey         :: !(Maybe AuthKey)
     , _mauluLinkId      :: !Text
     , _mauluOAuthToken  :: !(Maybe OAuthToken)
     , _mauluFields      :: !(Maybe Text)
@@ -153,7 +153,7 @@ mauluAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mauluKey :: Lens' ManagementAccountUserLinksUpdate' (Maybe Key)
+mauluKey :: Lens' ManagementAccountUserLinksUpdate' (Maybe AuthKey)
 mauluKey = lens _mauluKey (\ s a -> s{_mauluKey = a})
 
 -- | Link ID to update the account-user link for.

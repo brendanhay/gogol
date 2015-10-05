@@ -59,7 +59,7 @@ type RastersPermissionsBatchUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] PermissionsBatchUpdateRequest :>
@@ -75,7 +75,7 @@ data RastersPermissionsBatchUpdate' = RastersPermissionsBatchUpdate'
     , _rpbuPrettyPrint :: !Bool
     , _rpbuUserIP      :: !(Maybe Text)
     , _rpbuPayload     :: !PermissionsBatchUpdateRequest
-    , _rpbuKey         :: !(Maybe Key)
+    , _rpbuKey         :: !(Maybe AuthKey)
     , _rpbuId          :: !Text
     , _rpbuOAuthToken  :: !(Maybe OAuthToken)
     , _rpbuFields      :: !(Maybe Text)
@@ -144,7 +144,7 @@ rpbuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rpbuKey :: Lens' RastersPermissionsBatchUpdate' (Maybe Key)
+rpbuKey :: Lens' RastersPermissionsBatchUpdate' (Maybe AuthKey)
 rpbuKey = lens _rpbuKey (\ s a -> s{_rpbuKey = a})
 
 -- | The ID of the asset to which permissions will be added.

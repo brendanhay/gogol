@@ -75,7 +75,7 @@ type PostsListResource =
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "userIp" Text :>
                                      QueryParam "fields" Text :>
-                                       QueryParam "key" Key :>
+                                       QueryParam "key" AuthKey :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] PostList
@@ -93,7 +93,7 @@ data PostsList' = PostsList'
     , _pllEndDate     :: !(Maybe DateTime')
     , _pllBlogId      :: !Text
     , _pllStartDate   :: !(Maybe DateTime')
-    , _pllKey         :: !(Maybe Key)
+    , _pllKey         :: !(Maybe AuthKey)
     , _pllFetchBodies :: !Bool
     , _pllView        :: !(Maybe PostsListView)
     , _pllLabels      :: !(Maybe Text)
@@ -221,7 +221,7 @@ pllStartDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pllKey :: Lens' PostsList' (Maybe Key)
+pllKey :: Lens' PostsList' (Maybe AuthKey)
 pllKey = lens _pllKey (\ s a -> s{_pllKey = a})
 
 -- | Whether the body content of posts is included (default: true). This

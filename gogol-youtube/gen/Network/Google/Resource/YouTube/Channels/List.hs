@@ -75,7 +75,7 @@ type ChannelsListResource =
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ChannelListResponse
@@ -93,7 +93,7 @@ data ChannelsList' = ChannelsList'
     , _clUserIP                 :: !(Maybe Text)
     , _clHl                     :: !(Maybe Text)
     , _clOnBehalfOfContentOwner :: !(Maybe Text)
-    , _clKey                    :: !(Maybe Key)
+    , _clKey                    :: !(Maybe AuthKey)
     , _clCategoryId             :: !(Maybe Text)
     , _clId                     :: !(Maybe Text)
     , _clMySubscribers          :: !(Maybe Bool)
@@ -228,7 +228,7 @@ clOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' ChannelsList' (Maybe Key)
+clKey :: Lens' ChannelsList' (Maybe AuthKey)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | The categoryId parameter specifies a YouTube guide category, thereby

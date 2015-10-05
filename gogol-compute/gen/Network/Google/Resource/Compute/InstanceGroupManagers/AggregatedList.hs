@@ -62,7 +62,7 @@ type InstanceGroupManagersAggregatedListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] InstanceGroupManagerAggregatedList
@@ -76,7 +76,7 @@ data InstanceGroupManagersAggregatedList' = InstanceGroupManagersAggregatedList'
     , _igmalPrettyPrint :: !Bool
     , _igmalProject     :: !Text
     , _igmalUserIP      :: !(Maybe Text)
-    , _igmalKey         :: !(Maybe Key)
+    , _igmalKey         :: !(Maybe AuthKey)
     , _igmalFilter      :: !(Maybe Text)
     , _igmalPageToken   :: !(Maybe Text)
     , _igmalOAuthToken  :: !(Maybe OAuthToken)
@@ -152,7 +152,7 @@ igmalUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmalKey :: Lens' InstanceGroupManagersAggregatedList' (Maybe Key)
+igmalKey :: Lens' InstanceGroupManagersAggregatedList' (Maybe AuthKey)
 igmalKey = lens _igmalKey (\ s a -> s{_igmalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

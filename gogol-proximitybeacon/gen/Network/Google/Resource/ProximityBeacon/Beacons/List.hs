@@ -73,7 +73,7 @@ type BeaconsListResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListBeaconsResponse
@@ -93,7 +93,7 @@ data BeaconsList' = BeaconsList'
     , _blUploadType     :: !(Maybe Text)
     , _blQ              :: !(Maybe Text)
     , _blBearerToken    :: !(Maybe Text)
-    , _blKey            :: !(Maybe Key)
+    , _blKey            :: !(Maybe AuthKey)
     , _blPageToken      :: !(Maybe Text)
     , _blOAuthToken     :: !(Maybe OAuthToken)
     , _blPageSize       :: !(Maybe Int32)
@@ -251,7 +251,7 @@ blBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-blKey :: Lens' BeaconsList' (Maybe Key)
+blKey :: Lens' BeaconsList' (Maybe AuthKey)
 blKey = lens _blKey (\ s a -> s{_blKey = a})
 
 -- | A pagination token obtained from a previous request to list beacons.

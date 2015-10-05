@@ -64,7 +64,7 @@ type AchievementsListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] PlayerAchievementListResponse
@@ -78,7 +78,7 @@ data AchievementsList' = AchievementsList'
     , _alPrettyPrint :: !Bool
     , _alState       :: !(Maybe AchievementsListState)
     , _alUserIP      :: !(Maybe Text)
-    , _alKey         :: !(Maybe Key)
+    , _alKey         :: !(Maybe AuthKey)
     , _alLanguage    :: !(Maybe Text)
     , _alPageToken   :: !(Maybe Text)
     , _alOAuthToken  :: !(Maybe OAuthToken)
@@ -156,7 +156,7 @@ alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alKey :: Lens' AchievementsList' (Maybe Key)
+alKey :: Lens' AchievementsList' (Maybe AuthKey)
 alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | The preferred language to use for strings returned by this method.

@@ -58,7 +58,7 @@ type PostsRevertResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] Post'
 
@@ -70,7 +70,7 @@ data PostsRevert' = PostsRevert'
     , _prPrettyPrint :: !Bool
     , _prUserIP      :: !(Maybe Text)
     , _prBlogId      :: !Text
-    , _prKey         :: !(Maybe Key)
+    , _prKey         :: !(Maybe AuthKey)
     , _prPostId      :: !Text
     , _prOAuthToken  :: !(Maybe OAuthToken)
     , _prFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ prBlogId = lens _prBlogId (\ s a -> s{_prBlogId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-prKey :: Lens' PostsRevert' (Maybe Key)
+prKey :: Lens' PostsRevert' (Maybe AuthKey)
 prKey = lens _prKey (\ s a -> s{_prKey = a})
 
 -- | The ID of the Post.

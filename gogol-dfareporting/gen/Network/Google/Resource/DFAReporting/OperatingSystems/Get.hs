@@ -57,7 +57,7 @@ type OperatingSystemsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] OperatingSystem
@@ -70,7 +70,7 @@ data OperatingSystemsGet' = OperatingSystemsGet'
     , _osgPrettyPrint :: !Bool
     , _osgUserIP      :: !(Maybe Text)
     , _osgProFileId   :: !Int64
-    , _osgKey         :: !(Maybe Key)
+    , _osgKey         :: !(Maybe AuthKey)
     , _osgOAuthToken  :: !(Maybe OAuthToken)
     , _osgDartId      :: !Int64
     , _osgFields      :: !(Maybe Text)
@@ -138,7 +138,7 @@ osgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-osgKey :: Lens' OperatingSystemsGet' (Maybe Key)
+osgKey :: Lens' OperatingSystemsGet' (Maybe AuthKey)
 osgKey = lens _osgKey (\ s a -> s{_osgKey = a})
 
 -- | OAuth 2.0 token for the current user.

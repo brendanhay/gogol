@@ -57,7 +57,7 @@ type GroupsAliasesDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -70,7 +70,7 @@ data GroupsAliasesDelete' = GroupsAliasesDelete'
     , _gadUserIP      :: !(Maybe Text)
     , _gadGroupKey    :: !Text
     , _gadAlias       :: !Text
-    , _gadKey         :: !(Maybe Key)
+    , _gadKey         :: !(Maybe AuthKey)
     , _gadOAuthToken  :: !(Maybe OAuthToken)
     , _gadFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -141,7 +141,7 @@ gadAlias = lens _gadAlias (\ s a -> s{_gadAlias = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gadKey :: Lens' GroupsAliasesDelete' (Maybe Key)
+gadKey :: Lens' GroupsAliasesDelete' (Maybe AuthKey)
 gadKey = lens _gadKey (\ s a -> s{_gadKey = a})
 
 -- | OAuth 2.0 token for the current user.

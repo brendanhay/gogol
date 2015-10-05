@@ -59,7 +59,7 @@ type GroupsRemoveMemberResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] GroupsRemoveMemberRequest :>
@@ -74,7 +74,7 @@ data GroupsRemoveMember' = GroupsRemoveMember'
     , _grmProject     :: !Text
     , _grmUserIP      :: !(Maybe Text)
     , _grmPayload     :: !GroupsRemoveMemberRequest
-    , _grmKey         :: !(Maybe Key)
+    , _grmKey         :: !(Maybe AuthKey)
     , _grmGroupName   :: !Text
     , _grmOAuthToken  :: !(Maybe OAuthToken)
     , _grmFields      :: !(Maybe Text)
@@ -151,7 +151,7 @@ grmPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-grmKey :: Lens' GroupsRemoveMember' (Maybe Key)
+grmKey :: Lens' GroupsRemoveMember' (Maybe AuthKey)
 grmKey = lens _grmKey (\ s a -> s{_grmKey = a})
 
 -- | Name of the group for this request.

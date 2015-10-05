@@ -60,7 +60,7 @@ type UsersThreadsGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Thread
 
@@ -73,7 +73,7 @@ data UsersThreadsGet' = UsersThreadsGet'
     , _utgUserIP          :: !(Maybe Text)
     , _utgFormat          :: !UsersThreadsGetFormat
     , _utgUserId          :: !Text
-    , _utgKey             :: !(Maybe Key)
+    , _utgKey             :: !(Maybe AuthKey)
     , _utgId              :: !Text
     , _utgOAuthToken      :: !(Maybe OAuthToken)
     , _utgMetadataHeaders :: !(Maybe [Text])
@@ -154,7 +154,7 @@ utgUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-utgKey :: Lens' UsersThreadsGet' (Maybe Key)
+utgKey :: Lens' UsersThreadsGet' (Maybe AuthKey)
 utgKey = lens _utgKey (\ s a -> s{_utgKey = a})
 
 -- | The ID of the thread to retrieve.

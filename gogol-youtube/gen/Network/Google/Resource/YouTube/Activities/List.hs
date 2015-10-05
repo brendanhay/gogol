@@ -74,7 +74,7 @@ type ActivitiesListResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] ActivityListResponse
@@ -96,7 +96,7 @@ data ActivitiesList' = ActivitiesList'
     , _alRegionCode      :: !(Maybe Text)
     , _alUserIP          :: !(Maybe Text)
     , _alChannelId       :: !(Maybe Text)
-    , _alKey             :: !(Maybe Key)
+    , _alKey             :: !(Maybe AuthKey)
     , _alPageToken       :: !(Maybe Text)
     , _alOAuthToken      :: !(Maybe OAuthToken)
     , _alMaxResults      :: !Word32
@@ -228,7 +228,7 @@ alChannelId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alKey :: Lens' ActivitiesList' (Maybe Key)
+alKey :: Lens' ActivitiesList' (Maybe AuthKey)
 alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | The pageToken parameter identifies a specific page in the result set

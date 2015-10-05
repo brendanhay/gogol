@@ -56,7 +56,7 @@ type PlacementGroupsUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] PlacementGroup :>
@@ -71,7 +71,7 @@ data PlacementGroupsUpdate' = PlacementGroupsUpdate'
     , _pguUserIP      :: !(Maybe Text)
     , _pguProFileId   :: !Int64
     , _pguPayload     :: !PlacementGroup
-    , _pguKey         :: !(Maybe Key)
+    , _pguKey         :: !(Maybe AuthKey)
     , _pguOAuthToken  :: !(Maybe OAuthToken)
     , _pguFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ pguPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pguKey :: Lens' PlacementGroupsUpdate' (Maybe Key)
+pguKey :: Lens' PlacementGroupsUpdate' (Maybe AuthKey)
 pguKey = lens _pguKey (\ s a -> s{_pguKey = a})
 
 -- | OAuth 2.0 token for the current user.

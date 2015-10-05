@@ -60,7 +60,7 @@ type EventsImportResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Event :> Post '[JSON] Event
@@ -75,7 +75,7 @@ data EventsImport' = EventsImport'
     , _ePrettyPrint         :: !Bool
     , _eUserIP              :: !(Maybe Text)
     , _ePayload             :: !Event
-    , _eKey                 :: !(Maybe Key)
+    , _eKey                 :: !(Maybe AuthKey)
     , _eOAuthToken          :: !(Maybe OAuthToken)
     , _eSupportsAttachments :: !(Maybe Bool)
     , _eFields              :: !(Maybe Text)
@@ -150,7 +150,7 @@ ePayload = lens _ePayload (\ s a -> s{_ePayload = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eKey :: Lens' EventsImport' (Maybe Key)
+eKey :: Lens' EventsImport' (Maybe AuthKey)
 eKey = lens _eKey (\ s a -> s{_eKey = a})
 
 -- | OAuth 2.0 token for the current user.

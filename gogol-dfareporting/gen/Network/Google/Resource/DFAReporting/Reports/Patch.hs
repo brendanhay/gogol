@@ -58,7 +58,7 @@ type ReportsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Report :> Patch '[JSON] Report
@@ -73,7 +73,7 @@ data ReportsPatch' = ReportsPatch'
     , _rpReportId    :: !Int64
     , _rpProFileId   :: !Int64
     , _rpPayload     :: !Report
-    , _rpKey         :: !(Maybe Key)
+    , _rpKey         :: !(Maybe AuthKey)
     , _rpOAuthToken  :: !(Maybe OAuthToken)
     , _rpFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -153,7 +153,7 @@ rpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rpKey :: Lens' ReportsPatch' (Maybe Key)
+rpKey :: Lens' ReportsPatch' (Maybe AuthKey)
 rpKey = lens _rpKey (\ s a -> s{_rpKey = a})
 
 -- | OAuth 2.0 token for the current user.

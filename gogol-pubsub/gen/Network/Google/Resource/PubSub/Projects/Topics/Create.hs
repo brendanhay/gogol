@@ -67,7 +67,7 @@ type ProjectsTopicsCreateResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Topic :> Put '[JSON] Topic
@@ -85,7 +85,7 @@ data ProjectsTopicsCreate' = ProjectsTopicsCreate'
     , _ptcUploadType     :: !(Maybe Text)
     , _ptcPayload        :: !Topic
     , _ptcBearerToken    :: !(Maybe Text)
-    , _ptcKey            :: !(Maybe Key)
+    , _ptcKey            :: !(Maybe AuthKey)
     , _ptcName           :: !Text
     , _ptcOAuthToken     :: !(Maybe OAuthToken)
     , _ptcFields         :: !(Maybe Text)
@@ -198,7 +198,7 @@ ptcBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ptcKey :: Lens' ProjectsTopicsCreate' (Maybe Key)
+ptcKey :: Lens' ProjectsTopicsCreate' (Maybe AuthKey)
 ptcKey = lens _ptcKey (\ s a -> s{_ptcKey = a})
 
 -- | The name of the topic. It must have the format

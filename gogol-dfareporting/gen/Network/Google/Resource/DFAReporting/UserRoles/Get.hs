@@ -57,7 +57,7 @@ type UserRolesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] UserRole
 
@@ -69,7 +69,7 @@ data UserRolesGet' = UserRolesGet'
     , _urgPrettyPrint :: !Bool
     , _urgUserIP      :: !(Maybe Text)
     , _urgProFileId   :: !Int64
-    , _urgKey         :: !(Maybe Key)
+    , _urgKey         :: !(Maybe AuthKey)
     , _urgId          :: !Int64
     , _urgOAuthToken  :: !(Maybe OAuthToken)
     , _urgFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ urgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-urgKey :: Lens' UserRolesGet' (Maybe Key)
+urgKey :: Lens' UserRolesGet' (Maybe AuthKey)
 urgKey = lens _urgKey (\ s a -> s{_urgKey = a})
 
 -- | User role ID.

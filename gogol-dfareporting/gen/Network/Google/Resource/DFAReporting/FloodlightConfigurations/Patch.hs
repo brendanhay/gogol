@@ -59,7 +59,7 @@ type FloodlightConfigurationsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] FloodlightConfiguration :>
@@ -75,7 +75,7 @@ data FloodlightConfigurationsPatch' = FloodlightConfigurationsPatch'
     , _fcpUserIP      :: !(Maybe Text)
     , _fcpProFileId   :: !Int64
     , _fcpPayload     :: !FloodlightConfiguration
-    , _fcpKey         :: !(Maybe Key)
+    , _fcpKey         :: !(Maybe AuthKey)
     , _fcpId          :: !Int64
     , _fcpOAuthToken  :: !(Maybe OAuthToken)
     , _fcpFields      :: !(Maybe Text)
@@ -152,7 +152,7 @@ fcpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fcpKey :: Lens' FloodlightConfigurationsPatch' (Maybe Key)
+fcpKey :: Lens' FloodlightConfigurationsPatch' (Maybe AuthKey)
 fcpKey = lens _fcpKey (\ s a -> s{_fcpKey = a})
 
 -- | Floodlight configuration ID.

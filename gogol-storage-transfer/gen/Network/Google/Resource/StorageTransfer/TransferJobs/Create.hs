@@ -66,7 +66,7 @@ type TransferJobsCreateResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] TransferJob :>
@@ -85,7 +85,7 @@ data TransferJobsCreate' = TransferJobsCreate'
     , _tjcUploadType     :: !(Maybe Text)
     , _tjcPayload        :: !TransferJob
     , _tjcBearerToken    :: !(Maybe Text)
-    , _tjcKey            :: !(Maybe Key)
+    , _tjcKey            :: !(Maybe AuthKey)
     , _tjcOAuthToken     :: !(Maybe OAuthToken)
     , _tjcFields         :: !(Maybe Text)
     , _tjcCallback       :: !(Maybe Text)
@@ -193,7 +193,7 @@ tjcBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tjcKey :: Lens' TransferJobsCreate' (Maybe Key)
+tjcKey :: Lens' TransferJobsCreate' (Maybe AuthKey)
 tjcKey = lens _tjcKey (\ s a -> s{_tjcKey = a})
 
 -- | OAuth 2.0 token for the current user.

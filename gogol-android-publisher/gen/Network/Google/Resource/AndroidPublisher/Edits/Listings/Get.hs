@@ -59,7 +59,7 @@ type EditsListingsGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Listing
 
@@ -71,7 +71,7 @@ data EditsListingsGet' = EditsListingsGet'
     , _elgPrettyPrint :: !Bool
     , _elgPackageName :: !Text
     , _elgUserIP      :: !(Maybe Text)
-    , _elgKey         :: !(Maybe Key)
+    , _elgKey         :: !(Maybe AuthKey)
     , _elgLanguage    :: !Text
     , _elgOAuthToken  :: !(Maybe OAuthToken)
     , _elgEditId      :: !Text
@@ -146,7 +146,7 @@ elgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-elgKey :: Lens' EditsListingsGet' (Maybe Key)
+elgKey :: Lens' EditsListingsGet' (Maybe AuthKey)
 elgKey = lens _elgKey (\ s a -> s{_elgKey = a})
 
 -- | The language code (a BCP-47 language tag) of the localized listing to

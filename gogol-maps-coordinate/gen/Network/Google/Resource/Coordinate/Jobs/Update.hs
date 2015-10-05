@@ -78,7 +78,7 @@ type JobsUpdateResource =
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "key" Key :>
+                                         QueryParam "key" AuthKey :>
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
@@ -102,7 +102,7 @@ data JobsUpdate' = JobsUpdate'
     , _juPayload             :: !Job
     , _juAssignee            :: !(Maybe Text)
     , _juLat                 :: !(Maybe Double)
-    , _juKey                 :: !(Maybe Key)
+    , _juKey                 :: !(Maybe AuthKey)
     , _juLng                 :: !(Maybe Double)
     , _juTitle               :: !(Maybe Text)
     , _juOAuthToken          :: !(Maybe OAuthToken)
@@ -248,7 +248,7 @@ juLat = lens _juLat (\ s a -> s{_juLat = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-juKey :: Lens' JobsUpdate' (Maybe Key)
+juKey :: Lens' JobsUpdate' (Maybe AuthKey)
 juKey = lens _juKey (\ s a -> s{_juKey = a})
 
 -- | The longitude coordinate of this job\'s location.

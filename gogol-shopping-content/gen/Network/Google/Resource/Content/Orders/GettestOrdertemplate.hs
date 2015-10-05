@@ -59,7 +59,7 @@ type OrdersGettestOrdertemplateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] OrdersGetTestOrderTemplateResponse
@@ -74,7 +74,7 @@ data OrdersGettestOrdertemplate' = OrdersGettestOrdertemplate'
     , _ogoPrettyPrint  :: !Bool
     , _ogoTemplateName :: !OrdersGettestOrdertemplateTemplateName
     , _ogoUserIP       :: !(Maybe Text)
-    , _ogoKey          :: !(Maybe Key)
+    , _ogoKey          :: !(Maybe AuthKey)
     , _ogoOAuthToken   :: !(Maybe OAuthToken)
     , _ogoFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -148,7 +148,7 @@ ogoUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ogoKey :: Lens' OrdersGettestOrdertemplate' (Maybe Key)
+ogoKey :: Lens' OrdersGettestOrdertemplate' (Maybe AuthKey)
 ogoKey = lens _ogoKey (\ s a -> s{_ogoKey = a})
 
 -- | OAuth 2.0 token for the current user.

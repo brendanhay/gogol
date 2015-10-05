@@ -69,7 +69,7 @@ type CreativeFieldsListResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] CreativeFieldsListResponse
@@ -85,7 +85,7 @@ data CreativeFieldsList' = CreativeFieldsList'
     , _cflIds           :: !(Maybe [Int64])
     , _cflProFileId     :: !Int64
     , _cflSortOrder     :: !(Maybe CreativeFieldsListSortOrder)
-    , _cflKey           :: !(Maybe Key)
+    , _cflKey           :: !(Maybe AuthKey)
     , _cflPageToken     :: !(Maybe Text)
     , _cflSortField     :: !(Maybe CreativeFieldsListSortField)
     , _cflOAuthToken    :: !(Maybe OAuthToken)
@@ -197,7 +197,7 @@ cflSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cflKey :: Lens' CreativeFieldsList' (Maybe Key)
+cflKey :: Lens' CreativeFieldsList' (Maybe AuthKey)
 cflKey = lens _cflKey (\ s a -> s{_cflKey = a})
 
 -- | Value of the nextPageToken from the previous result page.

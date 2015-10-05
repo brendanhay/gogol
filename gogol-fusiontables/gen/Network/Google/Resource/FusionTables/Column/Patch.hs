@@ -59,7 +59,7 @@ type ColumnPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Column :> Patch '[JSON] Column
@@ -73,7 +73,7 @@ data ColumnPatch' = ColumnPatch'
     , _cpPrettyPrint :: !Bool
     , _cpUserIP      :: !(Maybe Text)
     , _cpPayload     :: !Column
-    , _cpKey         :: !(Maybe Key)
+    , _cpKey         :: !(Maybe AuthKey)
     , _cpOAuthToken  :: !(Maybe OAuthToken)
     , _cpTableId     :: !Text
     , _cpColumnId    :: !Text
@@ -145,7 +145,7 @@ cpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cpKey :: Lens' ColumnPatch' (Maybe Key)
+cpKey :: Lens' ColumnPatch' (Maybe AuthKey)
 cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
 
 -- | OAuth 2.0 token for the current user.

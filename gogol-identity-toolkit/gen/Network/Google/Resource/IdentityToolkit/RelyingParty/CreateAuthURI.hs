@@ -53,7 +53,7 @@ type RelyingPartyCreateAuthURIResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON]
@@ -68,7 +68,7 @@ data RelyingPartyCreateAuthURI' = RelyingPartyCreateAuthURI'
     , _rpcauPrettyPrint :: !Bool
     , _rpcauUserIP      :: !(Maybe Text)
     , _rpcauPayload     :: !IdentitytoolkitRelyingPartyCreateAuthURIRequest
-    , _rpcauKey         :: !(Maybe Key)
+    , _rpcauKey         :: !(Maybe AuthKey)
     , _rpcauOAuthToken  :: !(Maybe OAuthToken)
     , _rpcauFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -132,7 +132,7 @@ rpcauPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rpcauKey :: Lens' RelyingPartyCreateAuthURI' (Maybe Key)
+rpcauKey :: Lens' RelyingPartyCreateAuthURI' (Maybe AuthKey)
 rpcauKey = lens _rpcauKey (\ s a -> s{_rpcauKey = a})
 
 -- | OAuth 2.0 token for the current user.

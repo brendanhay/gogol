@@ -55,7 +55,7 @@ type AccountPermissionGroupsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] AccountPermissionGroupsListResponse
@@ -68,7 +68,7 @@ data AccountPermissionGroupsList' = AccountPermissionGroupsList'
     , _apglPrettyPrint :: !Bool
     , _apglUserIP      :: !(Maybe Text)
     , _apglProFileId   :: !Int64
-    , _apglKey         :: !(Maybe Key)
+    , _apglKey         :: !(Maybe AuthKey)
     , _apglOAuthToken  :: !(Maybe OAuthToken)
     , _apglFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -133,7 +133,7 @@ apglProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apglKey :: Lens' AccountPermissionGroupsList' (Maybe Key)
+apglKey :: Lens' AccountPermissionGroupsList' (Maybe AuthKey)
 apglKey = lens _apglKey (\ s a -> s{_apglKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -59,7 +59,7 @@ type StatesUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] UpdateRequest :>
@@ -77,7 +77,7 @@ data StatesUpdate' = StatesUpdate'
     , _suUserIP              :: !(Maybe Text)
     , _suStateKey            :: !Int32
     , _suPayload             :: !UpdateRequest
-    , _suKey                 :: !(Maybe Key)
+    , _suKey                 :: !(Maybe AuthKey)
     , _suOAuthToken          :: !(Maybe OAuthToken)
     , _suFields              :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -160,7 +160,7 @@ suPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-suKey :: Lens' StatesUpdate' (Maybe Key)
+suKey :: Lens' StatesUpdate' (Maybe AuthKey)
 suKey = lens _suKey (\ s a -> s{_suKey = a})
 
 -- | OAuth 2.0 token for the current user.

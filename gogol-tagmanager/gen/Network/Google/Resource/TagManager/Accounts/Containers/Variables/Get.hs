@@ -60,7 +60,7 @@ type AccountsContainersVariablesGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Variable
 
@@ -74,7 +74,7 @@ data AccountsContainersVariablesGet' = AccountsContainersVariablesGet'
     , _acvgUserIP      :: !(Maybe Text)
     , _acvgVariableId  :: !Text
     , _acvgAccountId   :: !Text
-    , _acvgKey         :: !(Maybe Key)
+    , _acvgKey         :: !(Maybe AuthKey)
     , _acvgOAuthToken  :: !(Maybe OAuthToken)
     , _acvgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -159,7 +159,7 @@ acvgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acvgKey :: Lens' AccountsContainersVariablesGet' (Maybe Key)
+acvgKey :: Lens' AccountsContainersVariablesGet' (Maybe AuthKey)
 acvgKey = lens _acvgKey (\ s a -> s{_acvgKey = a})
 
 -- | OAuth 2.0 token for the current user.

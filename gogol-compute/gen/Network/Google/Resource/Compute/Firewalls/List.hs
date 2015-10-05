@@ -62,7 +62,7 @@ type FirewallsListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] FirewallList
@@ -76,7 +76,7 @@ data FirewallsList' = FirewallsList'
     , _flPrettyPrint :: !Bool
     , _flProject     :: !Text
     , _flUserIP      :: !(Maybe Text)
-    , _flKey         :: !(Maybe Key)
+    , _flKey         :: !(Maybe AuthKey)
     , _flFilter      :: !(Maybe Text)
     , _flPageToken   :: !(Maybe Text)
     , _flOAuthToken  :: !(Maybe OAuthToken)
@@ -150,7 +150,7 @@ flUserIP = lens _flUserIP (\ s a -> s{_flUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-flKey :: Lens' FirewallsList' (Maybe Key)
+flKey :: Lens' FirewallsList' (Maybe AuthKey)
 flKey = lens _flKey (\ s a -> s{_flKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

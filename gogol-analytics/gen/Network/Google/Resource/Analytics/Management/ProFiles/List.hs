@@ -63,7 +63,7 @@ type ManagementProFilesListResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ProFiles
@@ -77,7 +77,7 @@ data ManagementProFilesList' = ManagementProFilesList'
     , _mpflWebPropertyId :: !Text
     , _mpflUserIP        :: !(Maybe Text)
     , _mpflAccountId     :: !Text
-    , _mpflKey           :: !(Maybe Key)
+    , _mpflKey           :: !(Maybe AuthKey)
     , _mpflOAuthToken    :: !(Maybe OAuthToken)
     , _mpflStartIndex    :: !(Maybe Int32)
     , _mpflMaxResults    :: !(Maybe Int32)
@@ -164,7 +164,7 @@ mpflAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpflKey :: Lens' ManagementProFilesList' (Maybe Key)
+mpflKey :: Lens' ManagementProFilesList' (Maybe AuthKey)
 mpflKey = lens _mpflKey (\ s a -> s{_mpflKey = a})
 
 -- | OAuth 2.0 token for the current user.

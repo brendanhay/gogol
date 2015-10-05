@@ -55,7 +55,7 @@ type AssetsPermissionsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] PermissionsListResponse
@@ -67,7 +67,7 @@ data AssetsPermissionsList' = AssetsPermissionsList'
     { _aplQuotaUser   :: !(Maybe Text)
     , _aplPrettyPrint :: !Bool
     , _aplUserIP      :: !(Maybe Text)
-    , _aplKey         :: !(Maybe Key)
+    , _aplKey         :: !(Maybe AuthKey)
     , _aplId          :: !Text
     , _aplOAuthToken  :: !(Maybe OAuthToken)
     , _aplFields      :: !(Maybe Text)
@@ -126,7 +126,7 @@ aplUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aplKey :: Lens' AssetsPermissionsList' (Maybe Key)
+aplKey :: Lens' AssetsPermissionsList' (Maybe AuthKey)
 aplKey = lens _aplKey (\ s a -> s{_aplKey = a})
 
 -- | The ID of the asset whose permissions will be listed.

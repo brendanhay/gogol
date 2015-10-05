@@ -59,7 +59,7 @@ type AddressesInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Address :> Post '[JSON] Operation
@@ -74,7 +74,7 @@ data AddressesInsert' = AddressesInsert'
     , _aiProject     :: !Text
     , _aiUserIP      :: !(Maybe Text)
     , _aiPayload     :: !Address
-    , _aiKey         :: !(Maybe Key)
+    , _aiKey         :: !(Maybe AuthKey)
     , _aiRegion      :: !Text
     , _aiOAuthToken  :: !(Maybe OAuthToken)
     , _aiFields      :: !(Maybe Text)
@@ -150,7 +150,7 @@ aiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aiKey :: Lens' AddressesInsert' (Maybe Key)
+aiKey :: Lens' AddressesInsert' (Maybe AuthKey)
 aiKey = lens _aiKey (\ s a -> s{_aiKey = a})
 
 -- | The name of the region for this request.

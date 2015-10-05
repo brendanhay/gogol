@@ -57,7 +57,7 @@ type UserRolePermissionsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] UserRolePermission
@@ -70,7 +70,7 @@ data UserRolePermissionsGet' = UserRolePermissionsGet'
     , _urpgPrettyPrint :: !Bool
     , _urpgUserIP      :: !(Maybe Text)
     , _urpgProFileId   :: !Int64
-    , _urpgKey         :: !(Maybe Key)
+    , _urpgKey         :: !(Maybe AuthKey)
     , _urpgId          :: !Int64
     , _urpgOAuthToken  :: !(Maybe OAuthToken)
     , _urpgFields      :: !(Maybe Text)
@@ -140,7 +140,7 @@ urpgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-urpgKey :: Lens' UserRolePermissionsGet' (Maybe Key)
+urpgKey :: Lens' UserRolePermissionsGet' (Maybe AuthKey)
 urpgKey = lens _urpgKey (\ s a -> s{_urpgKey = a})
 
 -- | User role permission ID.

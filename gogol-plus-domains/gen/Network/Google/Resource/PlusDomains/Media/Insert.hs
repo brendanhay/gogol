@@ -62,7 +62,7 @@ type MediaInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            MultipartRelated '[JSON] Media Body :>
@@ -82,7 +82,7 @@ data MediaInsert' = MediaInsert'
     , _miPayload     :: !Media
     , _miUserId      :: !Text
     , _miMedia       :: !Body
-    , _miKey         :: !(Maybe Key)
+    , _miKey         :: !(Maybe AuthKey)
     , _miOAuthToken  :: !(Maybe OAuthToken)
     , _miFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -167,7 +167,7 @@ miMedia = lens _miMedia (\ s a -> s{_miMedia = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-miKey :: Lens' MediaInsert' (Maybe Key)
+miKey :: Lens' MediaInsert' (Maybe AuthKey)
 miKey = lens _miKey (\ s a -> s{_miKey = a})
 
 -- | OAuth 2.0 token for the current user.

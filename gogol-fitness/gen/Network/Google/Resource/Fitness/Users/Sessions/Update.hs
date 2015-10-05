@@ -59,7 +59,7 @@ type UsersSessionsUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Session :> Put '[JSON] Session
@@ -73,7 +73,7 @@ data UsersSessionsUpdate' = UsersSessionsUpdate'
     , _usuUserIP            :: !(Maybe Text)
     , _usuPayload           :: !Session
     , _usuUserId            :: !Text
-    , _usuKey               :: !(Maybe Key)
+    , _usuKey               :: !(Maybe AuthKey)
     , _usuCurrentTimeMillis :: !(Maybe Int64)
     , _usuOAuthToken        :: !(Maybe OAuthToken)
     , _usuSessionId         :: !Text
@@ -155,7 +155,7 @@ usuUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-usuKey :: Lens' UsersSessionsUpdate' (Maybe Key)
+usuKey :: Lens' UsersSessionsUpdate' (Maybe AuthKey)
 usuKey = lens _usuKey (\ s a -> s{_usuKey = a})
 
 -- | The client\'s current time in milliseconds since epoch.

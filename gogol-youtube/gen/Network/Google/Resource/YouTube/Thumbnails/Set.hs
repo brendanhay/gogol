@@ -58,7 +58,7 @@ type ThumbnailsSetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[OctetStream] Body :>
@@ -74,7 +74,7 @@ data ThumbnailsSet' = ThumbnailsSet'
     , _tsMedia                  :: !Body
     , _tsOnBehalfOfContentOwner :: !(Maybe Text)
     , _tsVideoId                :: !Text
-    , _tsKey                    :: !(Maybe Key)
+    , _tsKey                    :: !(Maybe AuthKey)
     , _tsOAuthToken             :: !(Maybe OAuthToken)
     , _tsFields                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -162,7 +162,7 @@ tsVideoId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tsKey :: Lens' ThumbnailsSet' (Maybe Key)
+tsKey :: Lens' ThumbnailsSet' (Maybe AuthKey)
 tsKey = lens _tsKey (\ s a -> s{_tsKey = a})
 
 -- | OAuth 2.0 token for the current user.

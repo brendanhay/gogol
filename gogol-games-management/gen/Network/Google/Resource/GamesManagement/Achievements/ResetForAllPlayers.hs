@@ -57,7 +57,7 @@ type AchievementsResetForAllPlayersResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -71,7 +71,7 @@ data AchievementsResetForAllPlayers' = AchievementsResetForAllPlayers'
     , _arfapPrettyPrint   :: !Bool
     , _arfapAchievementId :: !Text
     , _arfapUserIP        :: !(Maybe Text)
-    , _arfapKey           :: !(Maybe Key)
+    , _arfapKey           :: !(Maybe AuthKey)
     , _arfapOAuthToken    :: !(Maybe OAuthToken)
     , _arfapFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -136,7 +136,7 @@ arfapUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-arfapKey :: Lens' AchievementsResetForAllPlayers' (Maybe Key)
+arfapKey :: Lens' AchievementsResetForAllPlayers' (Maybe AuthKey)
 arfapKey = lens _arfapKey (\ s a -> s{_arfapKey = a})
 
 -- | OAuth 2.0 token for the current user.

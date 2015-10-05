@@ -60,7 +60,7 @@ type ReportsCompatibleFieldsQueryResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Report :>
@@ -77,7 +77,7 @@ data ReportsCompatibleFieldsQuery' = ReportsCompatibleFieldsQuery'
     , _rcfqUserIP      :: !(Maybe Text)
     , _rcfqProFileId   :: !Int64
     , _rcfqPayload     :: !Report
-    , _rcfqKey         :: !(Maybe Key)
+    , _rcfqKey         :: !(Maybe AuthKey)
     , _rcfqOAuthToken  :: !(Maybe OAuthToken)
     , _rcfqFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -151,7 +151,7 @@ rcfqPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rcfqKey :: Lens' ReportsCompatibleFieldsQuery' (Maybe Key)
+rcfqKey :: Lens' ReportsCompatibleFieldsQuery' (Maybe AuthKey)
 rcfqKey = lens _rcfqKey (\ s a -> s{_rcfqKey = a})
 
 -- | OAuth 2.0 token for the current user.

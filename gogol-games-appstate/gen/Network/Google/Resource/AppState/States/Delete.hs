@@ -58,7 +58,7 @@ type StatesDeleteResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -74,7 +74,7 @@ data StatesDelete' = StatesDelete'
     , _sdPrettyPrint :: !Bool
     , _sdUserIP      :: !(Maybe Text)
     , _sdStateKey    :: !Int32
-    , _sdKey         :: !(Maybe Key)
+    , _sdKey         :: !(Maybe AuthKey)
     , _sdOAuthToken  :: !(Maybe OAuthToken)
     , _sdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -136,7 +136,7 @@ sdStateKey
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sdKey :: Lens' StatesDelete' (Maybe Key)
+sdKey :: Lens' StatesDelete' (Maybe AuthKey)
 sdKey = lens _sdKey (\ s a -> s{_sdKey = a})
 
 -- | OAuth 2.0 token for the current user.

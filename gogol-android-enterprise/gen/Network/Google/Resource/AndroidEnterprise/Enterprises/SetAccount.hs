@@ -57,7 +57,7 @@ type EnterprisesSetAccountResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] EnterpriseAccount :>
@@ -73,7 +73,7 @@ data EnterprisesSetAccount' = EnterprisesSetAccount'
     , _esaEnterpriseId :: !Text
     , _esaUserIP       :: !(Maybe Text)
     , _esaPayload      :: !EnterpriseAccount
-    , _esaKey          :: !(Maybe Key)
+    , _esaKey          :: !(Maybe AuthKey)
     , _esaOAuthToken   :: !(Maybe OAuthToken)
     , _esaFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -146,7 +146,7 @@ esaPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-esaKey :: Lens' EnterprisesSetAccount' (Maybe Key)
+esaKey :: Lens' EnterprisesSetAccount' (Maybe AuthKey)
 esaKey = lens _esaKey (\ s a -> s{_esaKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -53,7 +53,7 @@ type SubscriptionsListResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] SubscriptionsListResponse
@@ -66,7 +66,7 @@ data SubscriptionsList' = SubscriptionsList'
     { _slQuotaUser   :: !(Maybe Text)
     , _slPrettyPrint :: !Bool
     , _slUserIP      :: !(Maybe Text)
-    , _slKey         :: !(Maybe Key)
+    , _slKey         :: !(Maybe AuthKey)
     , _slOAuthToken  :: !(Maybe OAuthToken)
     , _slFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -119,7 +119,7 @@ slUserIP = lens _slUserIP (\ s a -> s{_slUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-slKey :: Lens' SubscriptionsList' (Maybe Key)
+slKey :: Lens' SubscriptionsList' (Maybe AuthKey)
 slKey = lens _slKey (\ s a -> s{_slKey = a})
 
 -- | OAuth 2.0 token for the current user.

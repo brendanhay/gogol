@@ -55,7 +55,7 @@ type MarketplaceDealsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] GetOrderDealsResponse
@@ -67,7 +67,7 @@ data MarketplaceDealsList' = MarketplaceDealsList'
     { _mdlQuotaUser   :: !(Maybe Text)
     , _mdlPrettyPrint :: !Bool
     , _mdlUserIP      :: !(Maybe Text)
-    , _mdlKey         :: !(Maybe Key)
+    , _mdlKey         :: !(Maybe AuthKey)
     , _mdlOAuthToken  :: !(Maybe OAuthToken)
     , _mdlOrderId     :: !Text
     , _mdlFields      :: !(Maybe Text)
@@ -126,7 +126,7 @@ mdlUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mdlKey :: Lens' MarketplaceDealsList' (Maybe Key)
+mdlKey :: Lens' MarketplaceDealsList' (Maybe AuthKey)
 mdlKey = lens _mdlKey (\ s a -> s{_mdlKey = a})
 
 -- | OAuth 2.0 token for the current user.

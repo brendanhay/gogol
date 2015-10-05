@@ -55,7 +55,7 @@ type MapsGetPublishedResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] PublishedMap
 
@@ -66,7 +66,7 @@ data MapsGetPublished' = MapsGetPublished'
     { _mgpQuotaUser   :: !(Maybe Text)
     , _mgpPrettyPrint :: !Bool
     , _mgpUserIP      :: !(Maybe Text)
-    , _mgpKey         :: !(Maybe Key)
+    , _mgpKey         :: !(Maybe AuthKey)
     , _mgpId          :: !Text
     , _mgpOAuthToken  :: !(Maybe OAuthToken)
     , _mgpFields      :: !(Maybe Text)
@@ -125,7 +125,7 @@ mgpUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mgpKey :: Lens' MapsGetPublished' (Maybe Key)
+mgpKey :: Lens' MapsGetPublished' (Maybe AuthKey)
 mgpKey = lens _mgpKey (\ s a -> s{_mgpKey = a})
 
 -- | The ID of the map.

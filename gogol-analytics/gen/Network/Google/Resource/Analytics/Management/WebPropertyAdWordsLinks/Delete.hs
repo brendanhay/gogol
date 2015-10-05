@@ -62,7 +62,7 @@ type ManagementWebPropertyAdWordsLinksDeleteResource
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -75,7 +75,7 @@ data ManagementWebPropertyAdWordsLinksDelete' = ManagementWebPropertyAdWordsLink
     , _mwpawldWebPropertyId            :: !Text
     , _mwpawldUserIP                   :: !(Maybe Text)
     , _mwpawldAccountId                :: !Text
-    , _mwpawldKey                      :: !(Maybe Key)
+    , _mwpawldKey                      :: !(Maybe AuthKey)
     , _mwpawldWebPropertyAdWordsLinkId :: !Text
     , _mwpawldOAuthToken               :: !(Maybe OAuthToken)
     , _mwpawldFields                   :: !(Maybe Text)
@@ -156,7 +156,7 @@ mwpawldAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mwpawldKey :: Lens' ManagementWebPropertyAdWordsLinksDelete' (Maybe Key)
+mwpawldKey :: Lens' ManagementWebPropertyAdWordsLinksDelete' (Maybe AuthKey)
 mwpawldKey
   = lens _mwpawldKey (\ s a -> s{_mwpawldKey = a})
 

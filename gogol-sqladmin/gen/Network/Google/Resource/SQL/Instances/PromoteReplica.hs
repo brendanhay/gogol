@@ -59,7 +59,7 @@ type InstancesPromoteReplicaResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
@@ -72,7 +72,7 @@ data InstancesPromoteReplica' = InstancesPromoteReplica'
     , _iprPrettyPrint :: !Bool
     , _iprProject     :: !Text
     , _iprUserIP      :: !(Maybe Text)
-    , _iprKey         :: !(Maybe Key)
+    , _iprKey         :: !(Maybe AuthKey)
     , _iprOAuthToken  :: !(Maybe OAuthToken)
     , _iprFields      :: !(Maybe Text)
     , _iprInstance    :: !Text
@@ -140,7 +140,7 @@ iprUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iprKey :: Lens' InstancesPromoteReplica' (Maybe Key)
+iprKey :: Lens' InstancesPromoteReplica' (Maybe AuthKey)
 iprKey = lens _iprKey (\ s a -> s{_iprKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -70,7 +70,7 @@ type LiveBroadcastsTransitionResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Post '[JSON] LiveBroadcast
@@ -90,7 +90,7 @@ data LiveBroadcastsTransition' = LiveBroadcastsTransition'
     , _lbtUserIP                        :: !(Maybe Text)
     , _lbtBroadcastStatus               :: !LiveBroadcastsTransitionBroadcastStatus
     , _lbtOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lbtKey                           :: !(Maybe Key)
+    , _lbtKey                           :: !(Maybe AuthKey)
     , _lbtOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbtId                            :: !Text
     , _lbtOAuthToken                    :: !(Maybe OAuthToken)
@@ -195,7 +195,7 @@ lbtOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lbtKey :: Lens' LiveBroadcastsTransition' (Maybe Key)
+lbtKey :: Lens' LiveBroadcastsTransition' (Maybe AuthKey)
 lbtKey = lens _lbtKey (\ s a -> s{_lbtKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:

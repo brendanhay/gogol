@@ -57,7 +57,7 @@ type FloodlightActivityGroupsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -69,7 +69,7 @@ data FloodlightActivityGroupsDelete' = FloodlightActivityGroupsDelete'
     , _fagdPrettyPrint :: !Bool
     , _fagdUserIP      :: !(Maybe Text)
     , _fagdProFileId   :: !Int64
-    , _fagdKey         :: !(Maybe Key)
+    , _fagdKey         :: !(Maybe AuthKey)
     , _fagdId          :: !Int64
     , _fagdOAuthToken  :: !(Maybe OAuthToken)
     , _fagdFields      :: !(Maybe Text)
@@ -139,7 +139,7 @@ fagdProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fagdKey :: Lens' FloodlightActivityGroupsDelete' (Maybe Key)
+fagdKey :: Lens' FloodlightActivityGroupsDelete' (Maybe AuthKey)
 fagdKey = lens _fagdKey (\ s a -> s{_fagdKey = a})
 
 -- | Floodlight activity Group ID.

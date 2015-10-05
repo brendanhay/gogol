@@ -60,7 +60,7 @@ type ManagementAccountUserLinksListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] EntityUserLinks
@@ -73,7 +73,7 @@ data ManagementAccountUserLinksList' = ManagementAccountUserLinksList'
     , _maullPrettyPrint :: !Bool
     , _maullUserIP      :: !(Maybe Text)
     , _maullAccountId   :: !Text
-    , _maullKey         :: !(Maybe Key)
+    , _maullKey         :: !(Maybe AuthKey)
     , _maullOAuthToken  :: !(Maybe OAuthToken)
     , _maullStartIndex  :: !(Maybe Int32)
     , _maullMaxResults  :: !(Maybe Int32)
@@ -146,7 +146,7 @@ maullAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-maullKey :: Lens' ManagementAccountUserLinksList' (Maybe Key)
+maullKey :: Lens' ManagementAccountUserLinksList' (Maybe AuthKey)
 maullKey = lens _maullKey (\ s a -> s{_maullKey = a})
 
 -- | OAuth 2.0 token for the current user.

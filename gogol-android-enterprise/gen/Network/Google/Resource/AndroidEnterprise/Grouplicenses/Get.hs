@@ -57,7 +57,7 @@ type GrouplicensesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] GroupLicense
 
@@ -69,7 +69,7 @@ data GrouplicensesGet' = GrouplicensesGet'
     , _ggPrettyPrint    :: !Bool
     , _ggEnterpriseId   :: !Text
     , _ggUserIP         :: !(Maybe Text)
-    , _ggKey            :: !(Maybe Key)
+    , _ggKey            :: !(Maybe AuthKey)
     , _ggOAuthToken     :: !(Maybe OAuthToken)
     , _ggGroupLicenseId :: !Text
     , _ggFields         :: !(Maybe Text)
@@ -137,7 +137,7 @@ ggUserIP = lens _ggUserIP (\ s a -> s{_ggUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ggKey :: Lens' GrouplicensesGet' (Maybe Key)
+ggKey :: Lens' GrouplicensesGet' (Maybe AuthKey)
 ggKey = lens _ggKey (\ s a -> s{_ggKey = a})
 
 -- | OAuth 2.0 token for the current user.

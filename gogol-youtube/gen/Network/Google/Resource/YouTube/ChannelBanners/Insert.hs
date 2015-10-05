@@ -65,7 +65,7 @@ type ChannelBannersInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          MultipartRelated '[JSON] ChannelBannerResource Body
@@ -89,7 +89,7 @@ data ChannelBannersInsert' = ChannelBannersInsert'
     , _cbiPayload                :: !ChannelBannerResource
     , _cbiMedia                  :: !Body
     , _cbiOnBehalfOfContentOwner :: !(Maybe Text)
-    , _cbiKey                    :: !(Maybe Key)
+    , _cbiKey                    :: !(Maybe AuthKey)
     , _cbiOAuthToken             :: !(Maybe OAuthToken)
     , _cbiFields                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -177,7 +177,7 @@ cbiOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cbiKey :: Lens' ChannelBannersInsert' (Maybe Key)
+cbiKey :: Lens' ChannelBannersInsert' (Maybe AuthKey)
 cbiKey = lens _cbiKey (\ s a -> s{_cbiKey = a})
 
 -- | OAuth 2.0 token for the current user.

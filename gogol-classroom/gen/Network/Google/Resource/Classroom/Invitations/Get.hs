@@ -71,7 +71,7 @@ type InvitationsGetResource =
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] Invitation
@@ -92,7 +92,7 @@ data InvitationsGet' = InvitationsGet'
     , _igAccessToken    :: !(Maybe Text)
     , _igUploadType     :: !(Maybe Text)
     , _igBearerToken    :: !(Maybe Text)
-    , _igKey            :: !(Maybe Key)
+    , _igKey            :: !(Maybe AuthKey)
     , _igId             :: !Text
     , _igOAuthToken     :: !(Maybe OAuthToken)
     , _igFields         :: !(Maybe Text)
@@ -195,7 +195,7 @@ igBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igKey :: Lens' InvitationsGet' (Maybe Key)
+igKey :: Lens' InvitationsGet' (Maybe AuthKey)
 igKey = lens _igKey (\ s a -> s{_igKey = a})
 
 -- | Identifier of the invitation to return.

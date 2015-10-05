@@ -57,7 +57,7 @@ type EventTagsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] EventTag
 
@@ -69,7 +69,7 @@ data EventTagsGet' = EventTagsGet'
     , _etgPrettyPrint :: !Bool
     , _etgUserIP      :: !(Maybe Text)
     , _etgProFileId   :: !Int64
-    , _etgKey         :: !(Maybe Key)
+    , _etgKey         :: !(Maybe AuthKey)
     , _etgId          :: !Int64
     , _etgOAuthToken  :: !(Maybe OAuthToken)
     , _etgFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ etgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-etgKey :: Lens' EventTagsGet' (Maybe Key)
+etgKey :: Lens' EventTagsGet' (Maybe AuthKey)
 etgKey = lens _etgKey (\ s a -> s{_etgKey = a})
 
 -- | Event tag ID.

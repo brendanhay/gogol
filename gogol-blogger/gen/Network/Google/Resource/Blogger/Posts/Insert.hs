@@ -62,7 +62,7 @@ type PostsInsertResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Post' :> Post '[JSON] Post'
@@ -79,7 +79,7 @@ data PostsInsert' = PostsInsert'
     , _piiFetchImages :: !(Maybe Bool)
     , _piiBlogId      :: !Text
     , _piiPayload     :: !Post'
-    , _piiKey         :: !(Maybe Key)
+    , _piiKey         :: !(Maybe AuthKey)
     , _piiOAuthToken  :: !(Maybe OAuthToken)
     , _piiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -178,7 +178,7 @@ piiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-piiKey :: Lens' PostsInsert' (Maybe Key)
+piiKey :: Lens' PostsInsert' (Maybe AuthKey)
 piiKey = lens _piiKey (\ s a -> s{_piiKey = a})
 
 -- | OAuth 2.0 token for the current user.

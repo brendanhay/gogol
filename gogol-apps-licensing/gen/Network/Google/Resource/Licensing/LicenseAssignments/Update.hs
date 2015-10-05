@@ -60,7 +60,7 @@ type LicenseAssignmentsUpdateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] LicenseAssignment :>
@@ -76,7 +76,7 @@ data LicenseAssignmentsUpdate' = LicenseAssignmentsUpdate'
     , _lauSKUId       :: !Text
     , _lauPayload     :: !LicenseAssignment
     , _lauUserId      :: !Text
-    , _lauKey         :: !(Maybe Key)
+    , _lauKey         :: !(Maybe AuthKey)
     , _lauOAuthToken  :: !(Maybe OAuthToken)
     , _lauProductId   :: !Text
     , _lauFields      :: !(Maybe Text)
@@ -161,7 +161,7 @@ lauUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lauKey :: Lens' LicenseAssignmentsUpdate' (Maybe Key)
+lauKey :: Lens' LicenseAssignmentsUpdate' (Maybe AuthKey)
 lauKey = lens _lauKey (\ s a -> s{_lauKey = a})
 
 -- | OAuth 2.0 token for the current user.

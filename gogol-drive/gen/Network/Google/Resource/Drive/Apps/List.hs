@@ -58,7 +58,7 @@ type AppsListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] AppList
 
@@ -70,7 +70,7 @@ data AppsList' = AppsList'
     , _alLanguageCode        :: !(Maybe Text)
     , _alPrettyPrint         :: !Bool
     , _alUserIP              :: !(Maybe Text)
-    , _alKey                 :: !(Maybe Key)
+    , _alKey                 :: !(Maybe AuthKey)
     , _alOAuthToken          :: !(Maybe OAuthToken)
     , _alAppFilterExtensions :: !Text
     , _alAppFilterMimeTypes  :: !Text
@@ -141,7 +141,7 @@ alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alKey :: Lens' AppsList' (Maybe Key)
+alKey :: Lens' AppsList' (Maybe AuthKey)
 alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -62,7 +62,7 @@ type QuestsListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] QuestListResponse
@@ -75,7 +75,7 @@ data QuestsList' = QuestsList'
     { _qlQuotaUser   :: !(Maybe Text)
     , _qlPrettyPrint :: !Bool
     , _qlUserIP      :: !(Maybe Text)
-    , _qlKey         :: !(Maybe Key)
+    , _qlKey         :: !(Maybe AuthKey)
     , _qlLanguage    :: !(Maybe Text)
     , _qlPageToken   :: !(Maybe Text)
     , _qlOAuthToken  :: !(Maybe OAuthToken)
@@ -145,7 +145,7 @@ qlUserIP = lens _qlUserIP (\ s a -> s{_qlUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-qlKey :: Lens' QuestsList' (Maybe Key)
+qlKey :: Lens' QuestsList' (Maybe AuthKey)
 qlKey = lens _qlKey (\ s a -> s{_qlKey = a})
 
 -- | The preferred language to use for strings returned by this method.

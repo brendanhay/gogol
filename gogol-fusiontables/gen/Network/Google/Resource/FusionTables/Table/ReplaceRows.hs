@@ -67,7 +67,7 @@ type TableReplaceRowsResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[OctetStream] Body :>
@@ -84,7 +84,7 @@ data TableReplaceRows' = TableReplaceRows'
     , _trrStartLine   :: !(Maybe Int32)
     , _trrEndLine     :: !(Maybe Int32)
     , _trrMedia       :: !Body
-    , _trrKey         :: !(Maybe Key)
+    , _trrKey         :: !(Maybe AuthKey)
     , _trrOAuthToken  :: !(Maybe OAuthToken)
     , _trrTableId     :: !Text
     , _trrDelimiter   :: !(Maybe Text)
@@ -182,7 +182,7 @@ trrMedia = lens _trrMedia (\ s a -> s{_trrMedia = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-trrKey :: Lens' TableReplaceRows' (Maybe Key)
+trrKey :: Lens' TableReplaceRows' (Maybe AuthKey)
 trrKey = lens _trrKey (\ s a -> s{_trrKey = a})
 
 -- | OAuth 2.0 token for the current user.

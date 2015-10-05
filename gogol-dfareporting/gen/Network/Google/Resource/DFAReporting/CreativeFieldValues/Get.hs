@@ -60,7 +60,7 @@ type CreativeFieldValuesGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] CreativeFieldValue
@@ -74,7 +74,7 @@ data CreativeFieldValuesGet' = CreativeFieldValuesGet'
     , _cfvgPrettyPrint     :: !Bool
     , _cfvgUserIP          :: !(Maybe Text)
     , _cfvgProFileId       :: !Int64
-    , _cfvgKey             :: !(Maybe Key)
+    , _cfvgKey             :: !(Maybe AuthKey)
     , _cfvgId              :: !Int64
     , _cfvgOAuthToken      :: !(Maybe OAuthToken)
     , _cfvgFields          :: !(Maybe Text)
@@ -154,7 +154,7 @@ cfvgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cfvgKey :: Lens' CreativeFieldValuesGet' (Maybe Key)
+cfvgKey :: Lens' CreativeFieldValuesGet' (Maybe AuthKey)
 cfvgKey = lens _cfvgKey (\ s a -> s{_cfvgKey = a})
 
 -- | Creative Field Value ID

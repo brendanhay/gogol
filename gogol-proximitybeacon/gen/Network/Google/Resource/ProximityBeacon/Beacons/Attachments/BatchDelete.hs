@@ -74,7 +74,7 @@ type BeaconsAttachmentsBatchDeleteResource =
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Post '[JSON] DeleteAttachmentsResponse
@@ -98,7 +98,7 @@ data BeaconsAttachmentsBatchDelete' = BeaconsAttachmentsBatchDelete'
     , _babdUploadType     :: !(Maybe Text)
     , _babdBearerToken    :: !(Maybe Text)
     , _babdNamespacedType :: !(Maybe Text)
-    , _babdKey            :: !(Maybe Key)
+    , _babdKey            :: !(Maybe AuthKey)
     , _babdOAuthToken     :: !(Maybe OAuthToken)
     , _babdFields         :: !(Maybe Text)
     , _babdCallback       :: !(Maybe Text)
@@ -220,7 +220,7 @@ babdNamespacedType
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-babdKey :: Lens' BeaconsAttachmentsBatchDelete' (Maybe Key)
+babdKey :: Lens' BeaconsAttachmentsBatchDelete' (Maybe AuthKey)
 babdKey = lens _babdKey (\ s a -> s{_babdKey = a})
 
 -- | OAuth 2.0 token for the current user.

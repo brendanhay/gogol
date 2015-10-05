@@ -57,7 +57,7 @@ type ManagementFiltersInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Filter :> Post '[JSON] Filter
@@ -71,7 +71,7 @@ data ManagementFiltersInsert' = ManagementFiltersInsert'
     , _mfiUserIP      :: !(Maybe Text)
     , _mfiPayload     :: !Filter
     , _mfiAccountId   :: !Text
-    , _mfiKey         :: !(Maybe Key)
+    , _mfiKey         :: !(Maybe AuthKey)
     , _mfiOAuthToken  :: !(Maybe OAuthToken)
     , _mfiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ mfiAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mfiKey :: Lens' ManagementFiltersInsert' (Maybe Key)
+mfiKey :: Lens' ManagementFiltersInsert' (Maybe AuthKey)
 mfiKey = lens _mfiKey (\ s a -> s{_mfiKey = a})
 
 -- | OAuth 2.0 token for the current user.

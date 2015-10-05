@@ -70,7 +70,7 @@ type AppsModulesGetResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] Module
@@ -88,7 +88,7 @@ data AppsModulesGet' = AppsModulesGet'
     , _amgUploadType     :: !(Maybe Text)
     , _amgModulesId      :: !Text
     , _amgBearerToken    :: !(Maybe Text)
-    , _amgKey            :: !(Maybe Key)
+    , _amgKey            :: !(Maybe AuthKey)
     , _amgAppsId         :: !Text
     , _amgOAuthToken     :: !(Maybe OAuthToken)
     , _amgFields         :: !(Maybe Text)
@@ -201,7 +201,7 @@ amgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-amgKey :: Lens' AppsModulesGet' (Maybe Key)
+amgKey :: Lens' AppsModulesGet' (Maybe AuthKey)
 amgKey = lens _amgKey (\ s a -> s{_amgKey = a})
 
 -- | Part of \`name\`. Name of the resource requested. For example:

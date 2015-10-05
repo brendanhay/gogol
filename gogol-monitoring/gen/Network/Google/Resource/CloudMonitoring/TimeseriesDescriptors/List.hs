@@ -79,7 +79,7 @@ type TimeseriesDescriptorsListResource =
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "userIp" Text :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          ReqBody '[JSON]
@@ -106,7 +106,7 @@ data TimeseriesDescriptorsList' = TimeseriesDescriptorsList'
     , _tAggregator  :: !(Maybe TimeseriesDescriptorsListAggregator)
     , _tTimespan    :: !(Maybe Text)
     , _tMetric      :: !Text
-    , _tKey         :: !(Maybe Key)
+    , _tKey         :: !(Maybe AuthKey)
     , _tOldest      :: !(Maybe Text)
     , _tLabels      :: !(Maybe [Text])
     , _tPageToken   :: !(Maybe Text)
@@ -245,7 +245,7 @@ tMetric = lens _tMetric (\ s a -> s{_tMetric = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tKey :: Lens' TimeseriesDescriptorsList' (Maybe Key)
+tKey :: Lens' TimeseriesDescriptorsList' (Maybe AuthKey)
 tKey = lens _tKey (\ s a -> s{_tKey = a})
 
 -- | Start of the time interval (exclusive), which is expressed as an RFC

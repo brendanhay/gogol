@@ -61,7 +61,7 @@ type InstanceGroupManagersListManagedInstancesResource
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Post '[JSON]
@@ -77,7 +77,7 @@ data InstanceGroupManagersListManagedInstances' = InstanceGroupManagersListManag
     , _igmlmiInstanceGroupManager :: !Text
     , _igmlmiUserIP               :: !(Maybe Text)
     , _igmlmiZone                 :: !Text
-    , _igmlmiKey                  :: !(Maybe Key)
+    , _igmlmiKey                  :: !(Maybe AuthKey)
     , _igmlmiOAuthToken           :: !(Maybe OAuthToken)
     , _igmlmiFields               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -161,7 +161,7 @@ igmlmiZone
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmlmiKey :: Lens' InstanceGroupManagersListManagedInstances' (Maybe Key)
+igmlmiKey :: Lens' InstanceGroupManagersListManagedInstances' (Maybe AuthKey)
 igmlmiKey
   = lens _igmlmiKey (\ s a -> s{_igmlmiKey = a})
 

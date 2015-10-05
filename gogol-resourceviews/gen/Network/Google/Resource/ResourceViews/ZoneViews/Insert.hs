@@ -58,7 +58,7 @@ type ZoneViewsInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ResourceView :>
@@ -74,7 +74,7 @@ data ZoneViewsInsert' = ZoneViewsInsert'
     , _zviUserIP      :: !(Maybe Text)
     , _zviZone        :: !Text
     , _zviPayload     :: !ResourceView
-    , _zviKey         :: !(Maybe Key)
+    , _zviKey         :: !(Maybe AuthKey)
     , _zviOAuthToken  :: !(Maybe OAuthToken)
     , _zviFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -154,7 +154,7 @@ zviPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-zviKey :: Lens' ZoneViewsInsert' (Maybe Key)
+zviKey :: Lens' ZoneViewsInsert' (Maybe AuthKey)
 zviKey = lens _zviKey (\ s a -> s{_zviKey = a})
 
 -- | OAuth 2.0 token for the current user.

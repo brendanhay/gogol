@@ -56,7 +56,7 @@ type ProjectsSetCommonInstanceMetadataResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Metadata :> Post '[JSON] Operation
@@ -71,7 +71,7 @@ data ProjectsSetCommonInstanceMetadata' = ProjectsSetCommonInstanceMetadata'
     , _pscimProject     :: !Text
     , _pscimUserIP      :: !(Maybe Text)
     , _pscimPayload     :: !Metadata
-    , _pscimKey         :: !(Maybe Key)
+    , _pscimKey         :: !(Maybe AuthKey)
     , _pscimOAuthToken  :: !(Maybe OAuthToken)
     , _pscimFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ pscimPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pscimKey :: Lens' ProjectsSetCommonInstanceMetadata' (Maybe Key)
+pscimKey :: Lens' ProjectsSetCommonInstanceMetadata' (Maybe AuthKey)
 pscimKey = lens _pscimKey (\ s a -> s{_pscimKey = a})
 
 -- | OAuth 2.0 token for the current user.

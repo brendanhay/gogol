@@ -56,7 +56,7 @@ type TaskListsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] TaskList :> Post '[JSON] TaskList
@@ -70,7 +70,7 @@ data TaskListsInsert' = TaskListsInsert'
     , _tliPrettyPrint :: !Bool
     , _tliUserIP      :: !(Maybe Text)
     , _tliPayload     :: !TaskList
-    , _tliKey         :: !(Maybe Key)
+    , _tliKey         :: !(Maybe AuthKey)
     , _tliOAuthToken  :: !(Maybe OAuthToken)
     , _tliFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -133,7 +133,7 @@ tliPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tliKey :: Lens' TaskListsInsert' (Maybe Key)
+tliKey :: Lens' TaskListsInsert' (Maybe AuthKey)
 tliKey = lens _tliKey (\ s a -> s{_tliKey = a})
 
 -- | OAuth 2.0 token for the current user.

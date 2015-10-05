@@ -66,7 +66,7 @@ type RepresentativesRepresentativeInfoByAddressResource
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] RepresentativeInfoResponse
@@ -81,7 +81,7 @@ data RepresentativesRepresentativeInfoByAddress' = RepresentativesRepresentative
     , _rribaPrettyPrint    :: !Bool
     , _rribaUserIP         :: !(Maybe Text)
     , _rribaAddress        :: !(Maybe Text)
-    , _rribaKey            :: !(Maybe Key)
+    , _rribaKey            :: !(Maybe AuthKey)
     , _rribaIncludeOffices :: !Bool
     , _rribaLevels         :: !(Maybe [RepresentativesRepresentativeInfoByAddressLevels])
     , _rribaOAuthToken     :: !(Maybe OAuthToken)
@@ -165,7 +165,7 @@ rribaAddress
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rribaKey :: Lens' RepresentativesRepresentativeInfoByAddress' (Maybe Key)
+rribaKey :: Lens' RepresentativesRepresentativeInfoByAddress' (Maybe AuthKey)
 rribaKey = lens _rribaKey (\ s a -> s{_rribaKey = a})
 
 -- | Whether to return information about offices and officials. If false,

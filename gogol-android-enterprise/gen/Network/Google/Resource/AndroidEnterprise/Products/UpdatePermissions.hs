@@ -60,7 +60,7 @@ type ProductsUpdatePermissionsResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] ProductPermissions :>
@@ -76,7 +76,7 @@ data ProductsUpdatePermissions' = ProductsUpdatePermissions'
     , _pupEnterpriseId :: !Text
     , _pupUserIP       :: !(Maybe Text)
     , _pupPayload      :: !ProductPermissions
-    , _pupKey          :: !(Maybe Key)
+    , _pupKey          :: !(Maybe AuthKey)
     , _pupOAuthToken   :: !(Maybe OAuthToken)
     , _pupProductId    :: !Text
     , _pupFields       :: !(Maybe Text)
@@ -154,7 +154,7 @@ pupPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pupKey :: Lens' ProductsUpdatePermissions' (Maybe Key)
+pupKey :: Lens' ProductsUpdatePermissions' (Maybe AuthKey)
 pupKey = lens _pupKey (\ s a -> s{_pupKey = a})
 
 -- | OAuth 2.0 token for the current user.

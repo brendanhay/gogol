@@ -73,7 +73,7 @@ type ScoresGetResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON]
@@ -92,7 +92,7 @@ data ScoresGet' = ScoresGet'
     , _sgUserIP          :: !(Maybe Text)
     , _sgTimeSpan        :: !ScoresGetTimeSpan
     , _sgLeaderboardId   :: !Text
-    , _sgKey             :: !(Maybe Key)
+    , _sgKey             :: !(Maybe AuthKey)
     , _sgIncludeRankType :: !(Maybe ScoresGetIncludeRankType)
     , _sgLanguage        :: !(Maybe Text)
     , _sgPageToken       :: !(Maybe Text)
@@ -186,7 +186,7 @@ sgLeaderboardId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sgKey :: Lens' ScoresGet' (Maybe Key)
+sgKey :: Lens' ScoresGet' (Maybe AuthKey)
 sgKey = lens _sgKey (\ s a -> s{_sgKey = a})
 
 -- | The types of ranks to return. If the parameter is omitted, no ranks will

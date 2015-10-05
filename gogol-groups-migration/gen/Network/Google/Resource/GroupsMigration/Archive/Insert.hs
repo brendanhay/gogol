@@ -55,7 +55,7 @@ type ArchiveInsertResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[OctetStream] Body :> Post '[JSON] Groups
@@ -68,7 +68,7 @@ data ArchiveInsert' = ArchiveInsert'
     , _aiPrettyPrint :: !Bool
     , _aiUserIP      :: !(Maybe Text)
     , _aiMedia       :: !Body
-    , _aiKey         :: !(Maybe Key)
+    , _aiKey         :: !(Maybe AuthKey)
     , _aiGroupId     :: !Text
     , _aiOAuthToken  :: !(Maybe OAuthToken)
     , _aiFields      :: !(Maybe Text)
@@ -133,7 +133,7 @@ aiMedia = lens _aiMedia (\ s a -> s{_aiMedia = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aiKey :: Lens' ArchiveInsert' (Maybe Key)
+aiKey :: Lens' ArchiveInsert' (Maybe AuthKey)
 aiKey = lens _aiKey (\ s a -> s{_aiKey = a})
 
 -- | The group ID

@@ -55,7 +55,7 @@ type RasterCollectionsPatchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] RasterCollection :> Patch '[JSON] ()
@@ -68,7 +68,7 @@ data RasterCollectionsPatch' = RasterCollectionsPatch'
     , _rcpPrettyPrint :: !Bool
     , _rcpUserIP      :: !(Maybe Text)
     , _rcpPayload     :: !RasterCollection
-    , _rcpKey         :: !(Maybe Key)
+    , _rcpKey         :: !(Maybe AuthKey)
     , _rcpId          :: !Text
     , _rcpOAuthToken  :: !(Maybe OAuthToken)
     , _rcpFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ rcpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rcpKey :: Lens' RasterCollectionsPatch' (Maybe Key)
+rcpKey :: Lens' RasterCollectionsPatch' (Maybe AuthKey)
 rcpKey = lens _rcpKey (\ s a -> s{_rcpKey = a})
 
 -- | The ID of the raster collection.

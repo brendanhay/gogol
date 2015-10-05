@@ -79,7 +79,7 @@ type JobsPatchResource =
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "key" Key :>
+                                         QueryParam "key" AuthKey :>
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
@@ -104,7 +104,7 @@ data JobsPatch' = JobsPatch'
     , _jpPayload             :: !Job
     , _jpAssignee            :: !(Maybe Text)
     , _jpLat                 :: !(Maybe Double)
-    , _jpKey                 :: !(Maybe Key)
+    , _jpKey                 :: !(Maybe AuthKey)
     , _jpLng                 :: !(Maybe Double)
     , _jpTitle               :: !(Maybe Text)
     , _jpOAuthToken          :: !(Maybe OAuthToken)
@@ -250,7 +250,7 @@ jpLat = lens _jpLat (\ s a -> s{_jpLat = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-jpKey :: Lens' JobsPatch' (Maybe Key)
+jpKey :: Lens' JobsPatch' (Maybe AuthKey)
 jpKey = lens _jpKey (\ s a -> s{_jpKey = a})
 
 -- | The longitude coordinate of this job\'s location.

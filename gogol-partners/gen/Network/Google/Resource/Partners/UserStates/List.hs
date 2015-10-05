@@ -90,7 +90,7 @@ type UserStatesListResource =
                                      QueryParam "quotaUser" Text :>
                                        QueryParam "prettyPrint" Bool :>
                                          QueryParam "fields" Text :>
-                                           QueryParam "key" Key :>
+                                           QueryParam "key" AuthKey :>
                                              QueryParam "oauth_token" OAuthToken
                                                :>
                                                QueryParam "alt" AltJSON :>
@@ -110,7 +110,7 @@ data UserStatesList' = UserStatesList'
     , _uslUploadType                                  :: !(Maybe Text)
     , _uslRequestMetadataPartnersSessionId            :: !(Maybe Text)
     , _uslBearerToken                                 :: !(Maybe Text)
-    , _uslKey                                         :: !(Maybe Key)
+    , _uslKey                                         :: !(Maybe AuthKey)
     , _uslRequestMetadataLocale                       :: !(Maybe Text)
     , _uslRequestMetadataExperimentIds                :: !(Maybe [Text])
     , _uslRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
@@ -243,7 +243,7 @@ uslBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uslKey :: Lens' UserStatesList' (Maybe Key)
+uslKey :: Lens' UserStatesList' (Maybe AuthKey)
 uslKey = lens _uslKey (\ s a -> s{_uslKey = a})
 
 -- | Locale to use for the current request.

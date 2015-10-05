@@ -63,7 +63,7 @@ type EventsGetResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Event
 
@@ -76,7 +76,7 @@ data EventsGet' = EventsGet'
     , _egPrettyPrint        :: !Bool
     , _egUserIP             :: !(Maybe Text)
     , _egMaxAttendees       :: !(Maybe Int32)
-    , _egKey                :: !(Maybe Key)
+    , _egKey                :: !(Maybe AuthKey)
     , _egTimeZone           :: !(Maybe Text)
     , _egOAuthToken         :: !(Maybe OAuthToken)
     , _egAlwaysIncludeEmail :: !(Maybe Bool)
@@ -164,7 +164,7 @@ egMaxAttendees
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-egKey :: Lens' EventsGet' (Maybe Key)
+egKey :: Lens' EventsGet' (Maybe AuthKey)
 egKey = lens _egKey (\ s a -> s{_egKey = a})
 
 -- | Time zone used in the response. Optional. The default is the time zone

@@ -60,7 +60,7 @@ type LicenseAssignmentsPatchResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] LicenseAssignment :>
@@ -76,7 +76,7 @@ data LicenseAssignmentsPatch' = LicenseAssignmentsPatch'
     , _lapSKUId       :: !Text
     , _lapPayload     :: !LicenseAssignment
     , _lapUserId      :: !Text
-    , _lapKey         :: !(Maybe Key)
+    , _lapKey         :: !(Maybe AuthKey)
     , _lapOAuthToken  :: !(Maybe OAuthToken)
     , _lapProductId   :: !Text
     , _lapFields      :: !(Maybe Text)
@@ -161,7 +161,7 @@ lapUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lapKey :: Lens' LicenseAssignmentsPatch' (Maybe Key)
+lapKey :: Lens' LicenseAssignmentsPatch' (Maybe AuthKey)
 lapKey = lens _lapKey (\ s a -> s{_lapKey = a})
 
 -- | OAuth 2.0 token for the current user.

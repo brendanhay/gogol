@@ -58,7 +58,7 @@ type RasterCollectionsPermissionsBatchDeleteResource
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] PermissionsBatchDeleteRequest :>
@@ -72,7 +72,7 @@ data RasterCollectionsPermissionsBatchDelete' = RasterCollectionsPermissionsBatc
     , _rcpbdPrettyPrint :: !Bool
     , _rcpbdUserIP      :: !(Maybe Text)
     , _rcpbdPayload     :: !PermissionsBatchDeleteRequest
-    , _rcpbdKey         :: !(Maybe Key)
+    , _rcpbdKey         :: !(Maybe AuthKey)
     , _rcpbdId          :: !Text
     , _rcpbdOAuthToken  :: !(Maybe OAuthToken)
     , _rcpbdFields      :: !(Maybe Text)
@@ -141,7 +141,7 @@ rcpbdPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rcpbdKey :: Lens' RasterCollectionsPermissionsBatchDelete' (Maybe Key)
+rcpbdKey :: Lens' RasterCollectionsPermissionsBatchDelete' (Maybe AuthKey)
 rcpbdKey = lens _rcpbdKey (\ s a -> s{_rcpbdKey = a})
 
 -- | The ID of the asset from which permissions will be removed.

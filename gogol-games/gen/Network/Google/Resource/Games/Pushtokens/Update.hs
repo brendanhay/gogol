@@ -53,7 +53,7 @@ type PushtokensUpdateResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] PushToken :> Put '[JSON] ()
@@ -66,7 +66,7 @@ data PushtokensUpdate' = PushtokensUpdate'
     , _puPrettyPrint :: !Bool
     , _puUserIP      :: !(Maybe Text)
     , _puPayload     :: !PushToken
-    , _puKey         :: !(Maybe Key)
+    , _puKey         :: !(Maybe AuthKey)
     , _puOAuthToken  :: !(Maybe OAuthToken)
     , _puFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -128,7 +128,7 @@ puPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puKey :: Lens' PushtokensUpdate' (Maybe Key)
+puKey :: Lens' PushtokensUpdate' (Maybe AuthKey)
 puKey = lens _puKey (\ s a -> s{_puKey = a})
 
 -- | OAuth 2.0 token for the current user.

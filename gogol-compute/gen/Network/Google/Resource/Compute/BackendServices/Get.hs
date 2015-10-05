@@ -57,7 +57,7 @@ type BackendServicesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] BackendService
@@ -70,7 +70,7 @@ data BackendServicesGet' = BackendServicesGet'
     , _bsgPrettyPrint    :: !Bool
     , _bsgProject        :: !Text
     , _bsgUserIP         :: !(Maybe Text)
-    , _bsgKey            :: !(Maybe Key)
+    , _bsgKey            :: !(Maybe AuthKey)
     , _bsgOAuthToken     :: !(Maybe OAuthToken)
     , _bsgFields         :: !(Maybe Text)
     , _bsgBackendService :: !Text
@@ -138,7 +138,7 @@ bsgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bsgKey :: Lens' BackendServicesGet' (Maybe Key)
+bsgKey :: Lens' BackendServicesGet' (Maybe AuthKey)
 bsgKey = lens _bsgKey (\ s a -> s{_bsgKey = a})
 
 -- | OAuth 2.0 token for the current user.

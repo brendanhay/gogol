@@ -56,7 +56,7 @@ type FloodlightActivityGroupsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] FloodlightActivityGroup :>
@@ -71,7 +71,7 @@ data FloodlightActivityGroupsInsert' = FloodlightActivityGroupsInsert'
     , _fagiUserIP      :: !(Maybe Text)
     , _fagiProFileId   :: !Int64
     , _fagiPayload     :: !FloodlightActivityGroup
-    , _fagiKey         :: !(Maybe Key)
+    , _fagiKey         :: !(Maybe AuthKey)
     , _fagiOAuthToken  :: !(Maybe OAuthToken)
     , _fagiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ fagiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fagiKey :: Lens' FloodlightActivityGroupsInsert' (Maybe Key)
+fagiKey :: Lens' FloodlightActivityGroupsInsert' (Maybe AuthKey)
 fagiKey = lens _fagiKey (\ s a -> s{_fagiKey = a})
 
 -- | OAuth 2.0 token for the current user.

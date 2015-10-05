@@ -57,7 +57,7 @@ type AccountsUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Account :> Put '[JSON] Account
@@ -72,7 +72,7 @@ data AccountsUpdate' = AccountsUpdate'
     , _auFingerprint :: !(Maybe Text)
     , _auPayload     :: !Account
     , _auAccountId   :: !Text
-    , _auKey         :: !(Maybe Key)
+    , _auKey         :: !(Maybe AuthKey)
     , _auOAuthToken  :: !(Maybe OAuthToken)
     , _auFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -153,7 +153,7 @@ auAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-auKey :: Lens' AccountsUpdate' (Maybe Key)
+auKey :: Lens' AccountsUpdate' (Maybe AuthKey)
 auKey = lens _auKey (\ s a -> s{_auKey = a})
 
 -- | OAuth 2.0 token for the current user.

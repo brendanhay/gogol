@@ -57,7 +57,7 @@ type StyleDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -68,7 +68,7 @@ data StyleDelete' = StyleDelete'
     { _sdQuotaUser   :: !(Maybe Text)
     , _sdPrettyPrint :: !Bool
     , _sdUserIP      :: !(Maybe Text)
-    , _sdKey         :: !(Maybe Key)
+    , _sdKey         :: !(Maybe AuthKey)
     , _sdStyleId     :: !Int32
     , _sdOAuthToken  :: !(Maybe OAuthToken)
     , _sdTableId     :: !Text
@@ -131,7 +131,7 @@ sdUserIP = lens _sdUserIP (\ s a -> s{_sdUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sdKey :: Lens' StyleDelete' (Maybe Key)
+sdKey :: Lens' StyleDelete' (Maybe AuthKey)
 sdKey = lens _sdKey (\ s a -> s{_sdKey = a})
 
 -- | Identifier (within a table) for the style being deleted

@@ -58,7 +58,7 @@ type QuestsAcceptResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] Quest
 
@@ -70,7 +70,7 @@ data QuestsAccept' = QuestsAccept'
     { _qaQuotaUser   :: !(Maybe Text)
     , _qaPrettyPrint :: !Bool
     , _qaUserIP      :: !(Maybe Text)
-    , _qaKey         :: !(Maybe Key)
+    , _qaKey         :: !(Maybe AuthKey)
     , _qaLanguage    :: !(Maybe Text)
     , _qaOAuthToken  :: !(Maybe OAuthToken)
     , _qaQuestId     :: !Text
@@ -132,7 +132,7 @@ qaUserIP = lens _qaUserIP (\ s a -> s{_qaUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-qaKey :: Lens' QuestsAccept' (Maybe Key)
+qaKey :: Lens' QuestsAccept' (Maybe AuthKey)
 qaKey = lens _qaKey (\ s a -> s{_qaKey = a})
 
 -- | The preferred language to use for strings returned by this method.

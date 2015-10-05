@@ -60,7 +60,7 @@ type BackupRunsGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] BackupRun
 
@@ -72,7 +72,7 @@ data BackupRunsGet' = BackupRunsGet'
     , _brgPrettyPrint :: !Bool
     , _brgProject     :: !Text
     , _brgUserIP      :: !(Maybe Text)
-    , _brgKey         :: !(Maybe Key)
+    , _brgKey         :: !(Maybe AuthKey)
     , _brgId          :: !Int64
     , _brgOAuthToken  :: !(Maybe OAuthToken)
     , _brgFields      :: !(Maybe Text)
@@ -145,7 +145,7 @@ brgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-brgKey :: Lens' BackupRunsGet' (Maybe Key)
+brgKey :: Lens' BackupRunsGet' (Maybe AuthKey)
 brgKey = lens _brgKey (\ s a -> s{_brgKey = a})
 
 -- | The ID of this Backup Run.

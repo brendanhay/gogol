@@ -87,7 +87,7 @@ type SitesListResource =
                                            QueryParam "prettyPrint" Bool :>
                                              QueryParam "userIp" Text :>
                                                QueryParam "fields" Text :>
-                                                 QueryParam "key" Key :>
+                                                 QueryParam "key" AuthKey :>
                                                    QueryParam "oauth_token"
                                                      OAuthToken
                                                      :>
@@ -111,7 +111,7 @@ data SitesList' = SitesList'
     , _sitProFileId                      :: !Int64
     , _sitDirectorySiteIds               :: !(Maybe [Int64])
     , _sitSortOrder                      :: !(Maybe SitesListSortOrder)
-    , _sitKey                            :: !(Maybe Key)
+    , _sitKey                            :: !(Maybe AuthKey)
     , _sitPageToken                      :: !(Maybe Text)
     , _sitSortField                      :: !(Maybe SitesListSortField)
     , _sitSubAccountId                   :: !(Maybe Int64)
@@ -283,7 +283,7 @@ sitSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sitKey :: Lens' SitesList' (Maybe Key)
+sitKey :: Lens' SitesList' (Maybe AuthKey)
 sitKey = lens _sitKey (\ s a -> s{_sitKey = a})
 
 -- | Value of the nextPageToken from the previous result page.

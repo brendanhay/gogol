@@ -55,7 +55,7 @@ type RoomsResetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -68,7 +68,7 @@ data RoomsReset' = RoomsReset'
     { _rrQuotaUser   :: !(Maybe Text)
     , _rrPrettyPrint :: !Bool
     , _rrUserIP      :: !(Maybe Text)
-    , _rrKey         :: !(Maybe Key)
+    , _rrKey         :: !(Maybe AuthKey)
     , _rrOAuthToken  :: !(Maybe OAuthToken)
     , _rrFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -121,7 +121,7 @@ rrUserIP = lens _rrUserIP (\ s a -> s{_rrUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rrKey :: Lens' RoomsReset' (Maybe Key)
+rrKey :: Lens' RoomsReset' (Maybe AuthKey)
 rrKey = lens _rrKey (\ s a -> s{_rrKey = a})
 
 -- | OAuth 2.0 token for the current user.

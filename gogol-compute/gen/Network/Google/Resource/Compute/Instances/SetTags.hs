@@ -62,7 +62,7 @@ type InstancesSetTagsResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Tags :> Post '[JSON] Operation
@@ -78,7 +78,7 @@ data InstancesSetTags' = InstancesSetTags'
     , _istUserIP      :: !(Maybe Text)
     , _istZone        :: !Text
     , _istPayload     :: !Tags
-    , _istKey         :: !(Maybe Key)
+    , _istKey         :: !(Maybe AuthKey)
     , _istOAuthToken  :: !(Maybe OAuthToken)
     , _istFields      :: !(Maybe Text)
     , _istInstance    :: !Text
@@ -163,7 +163,7 @@ istPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-istKey :: Lens' InstancesSetTags' (Maybe Key)
+istKey :: Lens' InstancesSetTags' (Maybe AuthKey)
 istKey = lens _istKey (\ s a -> s{_istKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -60,7 +60,7 @@ type AccountsContainersTagsDeleteResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -74,7 +74,7 @@ data AccountsContainersTagsDelete' = AccountsContainersTagsDelete'
     , _actdcUserIP      :: !(Maybe Text)
     , _actdcAccountId   :: !Text
     , _actdcTagId       :: !Text
-    , _actdcKey         :: !(Maybe Key)
+    , _actdcKey         :: !(Maybe AuthKey)
     , _actdcOAuthToken  :: !(Maybe OAuthToken)
     , _actdcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -158,7 +158,7 @@ actdcTagId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-actdcKey :: Lens' AccountsContainersTagsDelete' (Maybe Key)
+actdcKey :: Lens' AccountsContainersTagsDelete' (Maybe AuthKey)
 actdcKey = lens _actdcKey (\ s a -> s{_actdcKey = a})
 
 -- | OAuth 2.0 token for the current user.

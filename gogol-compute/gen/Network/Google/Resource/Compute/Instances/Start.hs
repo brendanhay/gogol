@@ -61,7 +61,7 @@ type InstancesStartResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
@@ -75,7 +75,7 @@ data InstancesStart' = InstancesStart'
     , _insnProject     :: !Text
     , _insnUserIP      :: !(Maybe Text)
     , _insnZone        :: !Text
-    , _insnKey         :: !(Maybe Key)
+    , _insnKey         :: !(Maybe AuthKey)
     , _insnOAuthToken  :: !(Maybe OAuthToken)
     , _insnFields      :: !(Maybe Text)
     , _insnInstance    :: !Text
@@ -152,7 +152,7 @@ insnZone = lens _insnZone (\ s a -> s{_insnZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-insnKey :: Lens' InstancesStart' (Maybe Key)
+insnKey :: Lens' InstancesStart' (Maybe AuthKey)
 insnKey = lens _insnKey (\ s a -> s{_insnKey = a})
 
 -- | OAuth 2.0 token for the current user.

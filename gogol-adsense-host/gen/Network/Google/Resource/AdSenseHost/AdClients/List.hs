@@ -56,7 +56,7 @@ type AdClientsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] AdClients
 
@@ -67,7 +67,7 @@ data AdClientsList' = AdClientsList'
     { _aclQuotaUser   :: !(Maybe Text)
     , _aclPrettyPrint :: !Bool
     , _aclUserIP      :: !(Maybe Text)
-    , _aclKey         :: !(Maybe Key)
+    , _aclKey         :: !(Maybe AuthKey)
     , _aclPageToken   :: !(Maybe Text)
     , _aclOAuthToken  :: !(Maybe OAuthToken)
     , _aclMaxResults  :: !(Maybe Word32)
@@ -129,7 +129,7 @@ aclUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aclKey :: Lens' AdClientsList' (Maybe Key)
+aclKey :: Lens' AdClientsList' (Maybe AuthKey)
 aclKey = lens _aclKey (\ s a -> s{_aclKey = a})
 
 -- | A continuation token, used to page through ad clients. To retrieve the

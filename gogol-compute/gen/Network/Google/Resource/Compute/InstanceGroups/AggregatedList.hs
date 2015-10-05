@@ -61,7 +61,7 @@ type InstanceGroupsAggregatedListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] InstanceGroupAggregatedList
@@ -74,7 +74,7 @@ data InstanceGroupsAggregatedList' = InstanceGroupsAggregatedList'
     , _igalPrettyPrint :: !Bool
     , _igalProject     :: !Text
     , _igalUserIP      :: !(Maybe Text)
-    , _igalKey         :: !(Maybe Key)
+    , _igalKey         :: !(Maybe AuthKey)
     , _igalFilter      :: !(Maybe Text)
     , _igalPageToken   :: !(Maybe Text)
     , _igalOAuthToken  :: !(Maybe OAuthToken)
@@ -150,7 +150,7 @@ igalUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igalKey :: Lens' InstanceGroupsAggregatedList' (Maybe Key)
+igalKey :: Lens' InstanceGroupsAggregatedList' (Maybe AuthKey)
 igalKey = lens _igalKey (\ s a -> s{_igalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

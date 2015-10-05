@@ -59,7 +59,7 @@ type LandingPagesInsertResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] LandingPage :>
@@ -75,7 +75,7 @@ data LandingPagesInsert' = LandingPagesInsert'
     , _lpiCampaignId  :: !Int64
     , _lpiProFileId   :: !Int64
     , _lpiPayload     :: !LandingPage
-    , _lpiKey         :: !(Maybe Key)
+    , _lpiKey         :: !(Maybe AuthKey)
     , _lpiOAuthToken  :: !(Maybe OAuthToken)
     , _lpiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -157,7 +157,7 @@ lpiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lpiKey :: Lens' LandingPagesInsert' (Maybe Key)
+lpiKey :: Lens' LandingPagesInsert' (Maybe AuthKey)
 lpiKey = lens _lpiKey (\ s a -> s{_lpiKey = a})
 
 -- | OAuth 2.0 token for the current user.

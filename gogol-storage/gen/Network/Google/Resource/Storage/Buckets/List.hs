@@ -60,7 +60,7 @@ type BucketsListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Buckets
 
@@ -72,7 +72,7 @@ data BucketsList' = BucketsList'
     , _blPrettyPrint :: !Bool
     , _blProject     :: !Text
     , _blUserIP      :: !(Maybe Text)
-    , _blKey         :: !(Maybe Key)
+    , _blKey         :: !(Maybe AuthKey)
     , _blProjection  :: !(Maybe BucketsListProjection)
     , _blPageToken   :: !(Maybe Text)
     , _blOAuthToken  :: !(Maybe OAuthToken)
@@ -146,7 +146,7 @@ blUserIP = lens _blUserIP (\ s a -> s{_blUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-blKey :: Lens' BucketsList' (Maybe Key)
+blKey :: Lens' BucketsList' (Maybe AuthKey)
 blKey = lens _blKey (\ s a -> s{_blKey = a})
 
 -- | Set of properties to return. Defaults to noAcl.

@@ -66,7 +66,7 @@ type MetagameListCategoriesByPlayerResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CategoryListResponse
@@ -80,7 +80,7 @@ data MetagameListCategoriesByPlayer' = MetagameListCategoriesByPlayer'
     , _mlcbpPrettyPrint :: !Bool
     , _mlcbpUserIP      :: !(Maybe Text)
     , _mlcbpCollection  :: !MetagameListCategoriesByPlayerCollection
-    , _mlcbpKey         :: !(Maybe Key)
+    , _mlcbpKey         :: !(Maybe AuthKey)
     , _mlcbpLanguage    :: !(Maybe Text)
     , _mlcbpPageToken   :: !(Maybe Text)
     , _mlcbpOAuthToken  :: !(Maybe OAuthToken)
@@ -162,7 +162,7 @@ mlcbpCollection
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlcbpKey :: Lens' MetagameListCategoriesByPlayer' (Maybe Key)
+mlcbpKey :: Lens' MetagameListCategoriesByPlayer' (Maybe AuthKey)
 mlcbpKey = lens _mlcbpKey (\ s a -> s{_mlcbpKey = a})
 
 -- | The preferred language to use for strings returned by this method.

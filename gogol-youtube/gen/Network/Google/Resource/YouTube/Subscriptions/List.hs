@@ -74,7 +74,7 @@ type SubscriptionsListResource =
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] SubscriptionListResponse
@@ -90,7 +90,7 @@ data SubscriptionsList' = SubscriptionsList'
     , _sUserIP                        :: !(Maybe Text)
     , _sChannelId                     :: !(Maybe Text)
     , _sOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _sKey                           :: !(Maybe Key)
+    , _sKey                           :: !(Maybe AuthKey)
     , _sOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _sId                            :: !(Maybe Text)
     , _sMySubscribers                 :: !(Maybe Bool)
@@ -219,7 +219,7 @@ sOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sKey :: Lens' SubscriptionsList' (Maybe Key)
+sKey :: Lens' SubscriptionsList' (Maybe AuthKey)
 sKey = lens _sKey (\ s a -> s{_sKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:

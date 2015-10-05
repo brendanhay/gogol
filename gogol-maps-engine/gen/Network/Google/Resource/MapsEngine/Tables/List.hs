@@ -80,7 +80,7 @@ type TablesListResource =
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "key" Key :>
+                                         QueryParam "key" AuthKey :>
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
@@ -96,7 +96,7 @@ data TablesList' = TablesList'
     , _tlUserIP           :: !(Maybe Text)
     , _tlCreatorEmail     :: !(Maybe Text)
     , _tlRole             :: !(Maybe TablesListRole)
-    , _tlKey              :: !(Maybe Key)
+    , _tlKey              :: !(Maybe AuthKey)
     , _tlBbox             :: !(Maybe Text)
     , _tlProcessingStatus :: !(Maybe TablesListProcessingStatus)
     , _tlModifiedAfter    :: !(Maybe DateTime')
@@ -218,7 +218,7 @@ tlRole = lens _tlRole (\ s a -> s{_tlRole = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tlKey :: Lens' TablesList' (Maybe Key)
+tlKey :: Lens' TablesList' (Maybe AuthKey)
 tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | A bounding box, expressed as \"west,south,east,north\". If set, only

@@ -63,7 +63,7 @@ type ChildrenListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] ChildList
 
@@ -77,7 +77,7 @@ data ChildrenList' = ChildrenList'
     , _clUserIP      :: !(Maybe Text)
     , _clFolderId    :: !Text
     , _clQ           :: !(Maybe Text)
-    , _clKey         :: !(Maybe Key)
+    , _clKey         :: !(Maybe AuthKey)
     , _clPageToken   :: !(Maybe Text)
     , _clOAuthToken  :: !(Maybe OAuthToken)
     , _clMaxResults  :: !Int32
@@ -169,7 +169,7 @@ clQ = lens _clQ (\ s a -> s{_clQ = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' ChildrenList' (Maybe Key)
+clKey :: Lens' ChildrenList' (Maybe AuthKey)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | Page token for children.

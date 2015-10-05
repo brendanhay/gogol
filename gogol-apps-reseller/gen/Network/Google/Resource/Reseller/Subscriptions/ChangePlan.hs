@@ -59,7 +59,7 @@ type SubscriptionsChangePlanResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] ChangePlanRequest :>
@@ -74,7 +74,7 @@ data SubscriptionsChangePlan' = SubscriptionsChangePlan'
     , _scpUserIP         :: !(Maybe Text)
     , _scpPayload        :: !ChangePlanRequest
     , _scpCustomerId     :: !Text
-    , _scpKey            :: !(Maybe Key)
+    , _scpKey            :: !(Maybe AuthKey)
     , _scpOAuthToken     :: !(Maybe OAuthToken)
     , _scpSubscriptionId :: !Text
     , _scpFields         :: !(Maybe Text)
@@ -152,7 +152,7 @@ scpCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-scpKey :: Lens' SubscriptionsChangePlan' (Maybe Key)
+scpKey :: Lens' SubscriptionsChangePlan' (Maybe AuthKey)
 scpKey = lens _scpKey (\ s a -> s{_scpKey = a})
 
 -- | OAuth 2.0 token for the current user.

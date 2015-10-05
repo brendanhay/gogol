@@ -60,7 +60,7 @@ type LandingPagesDeleteResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -73,7 +73,7 @@ data LandingPagesDelete' = LandingPagesDelete'
     , _lpdUserIP      :: !(Maybe Text)
     , _lpdCampaignId  :: !Int64
     , _lpdProFileId   :: !Int64
-    , _lpdKey         :: !(Maybe Key)
+    , _lpdKey         :: !(Maybe AuthKey)
     , _lpdId          :: !Int64
     , _lpdOAuthToken  :: !(Maybe OAuthToken)
     , _lpdFields      :: !(Maybe Text)
@@ -151,7 +151,7 @@ lpdProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lpdKey :: Lens' LandingPagesDelete' (Maybe Key)
+lpdKey :: Lens' LandingPagesDelete' (Maybe AuthKey)
 lpdKey = lens _lpdKey (\ s a -> s{_lpdKey = a})
 
 -- | Landing page ID.

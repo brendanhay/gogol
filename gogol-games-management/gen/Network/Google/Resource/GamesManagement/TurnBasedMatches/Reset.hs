@@ -54,7 +54,7 @@ type TurnBasedMatchesResetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -66,7 +66,7 @@ data TurnBasedMatchesReset' = TurnBasedMatchesReset'
     { _tbmrQuotaUser   :: !(Maybe Text)
     , _tbmrPrettyPrint :: !Bool
     , _tbmrUserIP      :: !(Maybe Text)
-    , _tbmrKey         :: !(Maybe Key)
+    , _tbmrKey         :: !(Maybe AuthKey)
     , _tbmrOAuthToken  :: !(Maybe OAuthToken)
     , _tbmrFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -121,7 +121,7 @@ tbmrUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tbmrKey :: Lens' TurnBasedMatchesReset' (Maybe Key)
+tbmrKey :: Lens' TurnBasedMatchesReset' (Maybe AuthKey)
 tbmrKey = lens _tbmrKey (\ s a -> s{_tbmrKey = a})
 
 -- | OAuth 2.0 token for the current user.

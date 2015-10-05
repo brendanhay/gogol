@@ -61,7 +61,7 @@ type DiskTypesAggregatedListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] DiskTypeAggregatedList
@@ -74,7 +74,7 @@ data DiskTypesAggregatedList' = DiskTypesAggregatedList'
     , _dtalPrettyPrint :: !Bool
     , _dtalProject     :: !Text
     , _dtalUserIP      :: !(Maybe Text)
-    , _dtalKey         :: !(Maybe Key)
+    , _dtalKey         :: !(Maybe AuthKey)
     , _dtalFilter      :: !(Maybe Text)
     , _dtalPageToken   :: !(Maybe Text)
     , _dtalOAuthToken  :: !(Maybe OAuthToken)
@@ -150,7 +150,7 @@ dtalUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dtalKey :: Lens' DiskTypesAggregatedList' (Maybe Key)
+dtalKey :: Lens' DiskTypesAggregatedList' (Maybe AuthKey)
 dtalKey = lens _dtalKey (\ s a -> s{_dtalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

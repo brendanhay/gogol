@@ -75,7 +75,7 @@ type AppsModulesPatchResource =
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "fields" Text :>
-                                       QueryParam "key" Key :>
+                                       QueryParam "key" AuthKey :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              ReqBody '[JSON] Module :>
@@ -97,7 +97,7 @@ data AppsModulesPatch' = AppsModulesPatch'
     , _ampMigrateTraffic :: !(Maybe Bool)
     , _ampMask           :: !(Maybe Text)
     , _ampBearerToken    :: !(Maybe Text)
-    , _ampKey            :: !(Maybe Key)
+    , _ampKey            :: !(Maybe AuthKey)
     , _ampAppsId         :: !Text
     , _ampOAuthToken     :: !(Maybe OAuthToken)
     , _ampFields         :: !(Maybe Text)
@@ -236,7 +236,7 @@ ampBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ampKey :: Lens' AppsModulesPatch' (Maybe Key)
+ampKey :: Lens' AppsModulesPatch' (Maybe AuthKey)
 ampKey = lens _ampKey (\ s a -> s{_ampKey = a})
 
 -- | Part of \`name\`. Name of the resource to update. For example:

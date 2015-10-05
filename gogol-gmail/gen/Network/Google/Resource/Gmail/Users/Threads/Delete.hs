@@ -57,7 +57,7 @@ type UsersThreadsDeleteResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -70,7 +70,7 @@ data UsersThreadsDelete' = UsersThreadsDelete'
     , _utdPrettyPrint :: !Bool
     , _utdUserIP      :: !(Maybe Text)
     , _utdUserId      :: !Text
-    , _utdKey         :: !(Maybe Key)
+    , _utdKey         :: !(Maybe AuthKey)
     , _utdId          :: !Text
     , _utdOAuthToken  :: !(Maybe OAuthToken)
     , _utdFields      :: !(Maybe Text)
@@ -139,7 +139,7 @@ utdUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-utdKey :: Lens' UsersThreadsDelete' (Maybe Key)
+utdKey :: Lens' UsersThreadsDelete' (Maybe AuthKey)
 utdKey = lens _utdKey (\ s a -> s{_utdKey = a})
 
 -- | ID of the Thread to delete.

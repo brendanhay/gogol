@@ -56,7 +56,7 @@ type MembersInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Member :> Post '[JSON] Member
@@ -70,7 +70,7 @@ data MembersInsert' = MembersInsert'
     , _miUserIP      :: !(Maybe Text)
     , _miGroupKey    :: !Text
     , _miPayload     :: !Member
-    , _miKey         :: !(Maybe Key)
+    , _miKey         :: !(Maybe AuthKey)
     , _miOAuthToken  :: !(Maybe OAuthToken)
     , _miFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -141,7 +141,7 @@ miPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-miKey :: Lens' MembersInsert' (Maybe Key)
+miKey :: Lens' MembersInsert' (Maybe AuthKey)
 miKey = lens _miKey (\ s a -> s{_miKey = a})
 
 -- | OAuth 2.0 token for the current user.

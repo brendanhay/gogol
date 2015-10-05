@@ -61,7 +61,7 @@ type RollingUpdatesCancelResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
@@ -76,7 +76,7 @@ data RollingUpdatesCancel' = RollingUpdatesCancel'
     , _rucProject       :: !Text
     , _rucUserIP        :: !(Maybe Text)
     , _rucZone          :: !Text
-    , _rucKey           :: !(Maybe Key)
+    , _rucKey           :: !(Maybe AuthKey)
     , _rucOAuthToken    :: !(Maybe OAuthToken)
     , _rucFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -157,7 +157,7 @@ rucZone = lens _rucZone (\ s a -> s{_rucZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rucKey :: Lens' RollingUpdatesCancel' (Maybe Key)
+rucKey :: Lens' RollingUpdatesCancel' (Maybe AuthKey)
 rucKey = lens _rucKey (\ s a -> s{_rucKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -62,7 +62,7 @@ type UsersSessionsListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListSessionsResponse
@@ -76,7 +76,7 @@ data UsersSessionsList' = UsersSessionsList'
     , _uslStartTime      :: !(Maybe Text)
     , _uslUserIP         :: !(Maybe Text)
     , _uslUserId         :: !Text
-    , _uslKey            :: !(Maybe Key)
+    , _uslKey            :: !(Maybe AuthKey)
     , _uslEndTime        :: !(Maybe Text)
     , _uslPageToken      :: !(Maybe Text)
     , _uslOAuthToken     :: !(Maybe OAuthToken)
@@ -161,7 +161,7 @@ uslUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uslKey :: Lens' UsersSessionsList' (Maybe Key)
+uslKey :: Lens' UsersSessionsList' (Maybe AuthKey)
 uslKey = lens _uslKey (\ s a -> s{_uslKey = a})
 
 -- | An RFC3339 timestamp. Only sessions ending between the start and end

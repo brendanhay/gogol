@@ -55,7 +55,7 @@ type QueriesRunqueryResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] RunQueryRequest :> Post '[JSON] ()
@@ -69,7 +69,7 @@ data QueriesRunquery' = QueriesRunquery'
     , _qrPrettyPrint :: !Bool
     , _qrUserIP      :: !(Maybe Text)
     , _qrPayload     :: !RunQueryRequest
-    , _qrKey         :: !(Maybe Key)
+    , _qrKey         :: !(Maybe AuthKey)
     , _qrOAuthToken  :: !(Maybe OAuthToken)
     , _qrFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -140,7 +140,7 @@ qrPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-qrKey :: Lens' QueriesRunquery' (Maybe Key)
+qrKey :: Lens' QueriesRunquery' (Maybe AuthKey)
 qrKey = lens _qrKey (\ s a -> s{_qrKey = a})
 
 -- | OAuth 2.0 token for the current user.

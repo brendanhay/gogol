@@ -59,7 +59,7 @@ type RasterCollectionsRastersBatchDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON]
@@ -78,7 +78,7 @@ data RasterCollectionsRastersBatchDelete' = RasterCollectionsRastersBatchDelete'
     , _rcrbdPrettyPrint :: !Bool
     , _rcrbdUserIP      :: !(Maybe Text)
     , _rcrbdPayload     :: !RasterCollectionsRasterBatchDeleteRequest
-    , _rcrbdKey         :: !(Maybe Key)
+    , _rcrbdKey         :: !(Maybe AuthKey)
     , _rcrbdId          :: !Text
     , _rcrbdOAuthToken  :: !(Maybe OAuthToken)
     , _rcrbdFields      :: !(Maybe Text)
@@ -147,7 +147,7 @@ rcrbdPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rcrbdKey :: Lens' RasterCollectionsRastersBatchDelete' (Maybe Key)
+rcrbdKey :: Lens' RasterCollectionsRastersBatchDelete' (Maybe AuthKey)
 rcrbdKey = lens _rcrbdKey (\ s a -> s{_rcrbdKey = a})
 
 -- | The ID of the raster collection to which these rasters belong.

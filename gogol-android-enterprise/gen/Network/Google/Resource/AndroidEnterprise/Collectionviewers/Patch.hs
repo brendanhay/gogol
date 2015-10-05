@@ -64,7 +64,7 @@ type CollectionviewersPatchResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] User :> Patch '[JSON] User
@@ -83,7 +83,7 @@ data CollectionviewersPatch' = CollectionviewersPatch'
     , _cpCollectionId :: !Text
     , _cpPayload      :: !User
     , _cpUserId       :: !Text
-    , _cpKey          :: !(Maybe Key)
+    , _cpKey          :: !(Maybe AuthKey)
     , _cpOAuthToken   :: !(Maybe OAuthToken)
     , _cpFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -173,7 +173,7 @@ cpUserId = lens _cpUserId (\ s a -> s{_cpUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cpKey :: Lens' CollectionviewersPatch' (Maybe Key)
+cpKey :: Lens' CollectionviewersPatch' (Maybe AuthKey)
 cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -57,7 +57,7 @@ type InAppProductsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] InAppProduct :>
@@ -73,7 +73,7 @@ data InAppProductsInsert' = InAppProductsInsert'
     , _iapiPackageName              :: !Text
     , _iapiUserIP                   :: !(Maybe Text)
     , _iapiPayload                  :: !InAppProduct
-    , _iapiKey                      :: !(Maybe Key)
+    , _iapiKey                      :: !(Maybe AuthKey)
     , _iapiOAuthToken               :: !(Maybe OAuthToken)
     , _iapiFields                   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -159,7 +159,7 @@ iapiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iapiKey :: Lens' InAppProductsInsert' (Maybe Key)
+iapiKey :: Lens' InAppProductsInsert' (Maybe AuthKey)
 iapiKey = lens _iapiKey (\ s a -> s{_iapiKey = a})
 
 -- | OAuth 2.0 token for the current user.

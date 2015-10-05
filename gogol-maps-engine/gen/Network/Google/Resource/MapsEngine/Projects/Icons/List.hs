@@ -59,7 +59,7 @@ type ProjectsIconsListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] IconsListResponse
@@ -71,7 +71,7 @@ data ProjectsIconsList' = ProjectsIconsList'
     { _pilQuotaUser   :: !(Maybe Text)
     , _pilPrettyPrint :: !Bool
     , _pilUserIP      :: !(Maybe Text)
-    , _pilKey         :: !(Maybe Key)
+    , _pilKey         :: !(Maybe AuthKey)
     , _pilPageToken   :: !(Maybe Text)
     , _pilProjectId   :: !Text
     , _pilOAuthToken  :: !(Maybe OAuthToken)
@@ -138,7 +138,7 @@ pilUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pilKey :: Lens' ProjectsIconsList' (Maybe Key)
+pilKey :: Lens' ProjectsIconsList' (Maybe AuthKey)
 pilKey = lens _pilKey (\ s a -> s{_pilKey = a})
 
 -- | The continuation token, used to page through large result sets. To get

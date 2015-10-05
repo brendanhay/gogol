@@ -55,7 +55,7 @@ type MarketplaceOffersSearchResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] GetOffersResponse
@@ -67,7 +67,7 @@ data MarketplaceOffersSearch' = MarketplaceOffersSearch'
     { _mosQuotaUser   :: !(Maybe Text)
     , _mosPrettyPrint :: !Bool
     , _mosUserIP      :: !(Maybe Text)
-    , _mosKey         :: !(Maybe Key)
+    , _mosKey         :: !(Maybe AuthKey)
     , _mosPqlQuery    :: !(Maybe Text)
     , _mosOAuthToken  :: !(Maybe OAuthToken)
     , _mosFields      :: !(Maybe Text)
@@ -125,7 +125,7 @@ mosUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mosKey :: Lens' MarketplaceOffersSearch' (Maybe Key)
+mosKey :: Lens' MarketplaceOffersSearch' (Maybe AuthKey)
 mosKey = lens _mosKey (\ s a -> s{_mosKey = a})
 
 -- | The pql query used to query for offers.

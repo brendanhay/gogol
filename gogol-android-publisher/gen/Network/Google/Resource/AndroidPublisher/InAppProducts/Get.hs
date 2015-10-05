@@ -56,7 +56,7 @@ type InAppProductsGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] InAppProduct
 
@@ -68,7 +68,7 @@ data InAppProductsGet' = InAppProductsGet'
     , _iapgPrettyPrint :: !Bool
     , _iapgPackageName :: !Text
     , _iapgUserIP      :: !(Maybe Text)
-    , _iapgKey         :: !(Maybe Key)
+    , _iapgKey         :: !(Maybe AuthKey)
     , _iapgSKU         :: !Text
     , _iapgOAuthToken  :: !(Maybe OAuthToken)
     , _iapgFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ iapgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iapgKey :: Lens' InAppProductsGet' (Maybe Key)
+iapgKey :: Lens' InAppProductsGet' (Maybe AuthKey)
 iapgKey = lens _iapgKey (\ s a -> s{_iapgKey = a})
 
 -- | Unique identifier for the in-app product.

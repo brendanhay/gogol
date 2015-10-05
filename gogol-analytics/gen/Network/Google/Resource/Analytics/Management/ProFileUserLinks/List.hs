@@ -66,7 +66,7 @@ type ManagementProFileUserLinksListResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] EntityUserLinks
@@ -81,7 +81,7 @@ data ManagementProFileUserLinksList' = ManagementProFileUserLinksList'
     , _mpfullUserIP        :: !(Maybe Text)
     , _mpfullProFileId     :: !Text
     , _mpfullAccountId     :: !Text
-    , _mpfullKey           :: !(Maybe Key)
+    , _mpfullKey           :: !(Maybe AuthKey)
     , _mpfullOAuthToken    :: !(Maybe OAuthToken)
     , _mpfullStartIndex    :: !(Maybe Int32)
     , _mpfullMaxResults    :: !(Maybe Int32)
@@ -178,7 +178,7 @@ mpfullAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpfullKey :: Lens' ManagementProFileUserLinksList' (Maybe Key)
+mpfullKey :: Lens' ManagementProFileUserLinksList' (Maybe AuthKey)
 mpfullKey
   = lens _mpfullKey (\ s a -> s{_mpfullKey = a})
 

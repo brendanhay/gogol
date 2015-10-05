@@ -58,7 +58,7 @@ type OrgUnitsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] OrgUnit :> Patch '[JSON] OrgUnit
@@ -73,7 +73,7 @@ data OrgUnitsPatch' = OrgUnitsPatch'
     , _oupPayload     :: !OrgUnit
     , _oupOrgUnitPath :: ![Text]
     , _oupCustomerId  :: !Text
-    , _oupKey         :: !(Maybe Key)
+    , _oupKey         :: !(Maybe AuthKey)
     , _oupOAuthToken  :: !(Maybe OAuthToken)
     , _oupFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -157,7 +157,7 @@ oupCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oupKey :: Lens' OrgUnitsPatch' (Maybe Key)
+oupKey :: Lens' OrgUnitsPatch' (Maybe AuthKey)
 oupKey = lens _oupKey (\ s a -> s{_oupKey = a})
 
 -- | OAuth 2.0 token for the current user.

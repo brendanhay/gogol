@@ -69,7 +69,7 @@ type OrganizationsSetIAMPolicyResource =
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] SetIAMPolicyRequest :>
@@ -89,7 +89,7 @@ data OrganizationsSetIAMPolicy' = OrganizationsSetIAMPolicy'
     , _osipUploadType     :: !(Maybe Text)
     , _osipPayload        :: !SetIAMPolicyRequest
     , _osipBearerToken    :: !(Maybe Text)
-    , _osipKey            :: !(Maybe Key)
+    , _osipKey            :: !(Maybe AuthKey)
     , _osipResource       :: !Text
     , _osipOAuthToken     :: !(Maybe OAuthToken)
     , _osipFields         :: !(Maybe Text)
@@ -204,7 +204,7 @@ osipBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-osipKey :: Lens' OrganizationsSetIAMPolicy' (Maybe Key)
+osipKey :: Lens' OrganizationsSetIAMPolicy' (Maybe AuthKey)
 osipKey = lens _osipKey (\ s a -> s{_osipKey = a})
 
 -- | REQUIRED: The resource for which policy is being specified. \`resource\`

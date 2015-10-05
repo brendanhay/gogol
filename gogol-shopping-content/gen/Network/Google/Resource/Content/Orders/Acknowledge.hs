@@ -58,7 +58,7 @@ type OrdersAcknowledgeResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] OrdersAcknowledgeRequest :>
@@ -73,7 +73,7 @@ data OrdersAcknowledge' = OrdersAcknowledge'
     , _oaPrettyPrint :: !Bool
     , _oaUserIP      :: !(Maybe Text)
     , _oaPayload     :: !OrdersAcknowledgeRequest
-    , _oaKey         :: !(Maybe Key)
+    , _oaKey         :: !(Maybe AuthKey)
     , _oaOAuthToken  :: !(Maybe OAuthToken)
     , _oaOrderId     :: !Text
     , _oaFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ oaPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oaKey :: Lens' OrdersAcknowledge' (Maybe Key)
+oaKey :: Lens' OrdersAcknowledge' (Maybe AuthKey)
 oaKey = lens _oaKey (\ s a -> s{_oaKey = a})
 
 -- | OAuth 2.0 token for the current user.

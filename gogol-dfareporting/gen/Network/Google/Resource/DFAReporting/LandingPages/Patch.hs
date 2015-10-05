@@ -62,7 +62,7 @@ type LandingPagesPatchResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] LandingPage :>
@@ -79,7 +79,7 @@ data LandingPagesPatch' = LandingPagesPatch'
     , _lppCampaignId  :: !Int64
     , _lppProFileId   :: !Int64
     , _lppPayload     :: !LandingPage
-    , _lppKey         :: !(Maybe Key)
+    , _lppKey         :: !(Maybe AuthKey)
     , _lppId          :: !Int64
     , _lppOAuthToken  :: !(Maybe OAuthToken)
     , _lppFields      :: !(Maybe Text)
@@ -166,7 +166,7 @@ lppPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lppKey :: Lens' LandingPagesPatch' (Maybe Key)
+lppKey :: Lens' LandingPagesPatch' (Maybe AuthKey)
 lppKey = lens _lppKey (\ s a -> s{_lppKey = a})
 
 -- | Landing page ID.

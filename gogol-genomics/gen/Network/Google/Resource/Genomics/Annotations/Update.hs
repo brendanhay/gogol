@@ -57,7 +57,7 @@ type AnnotationsUpdateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Annotation :> Put '[JSON] Annotation
@@ -72,7 +72,7 @@ data AnnotationsUpdate' = AnnotationsUpdate'
     , _auPrettyPrint  :: !Bool
     , _auUserIP       :: !(Maybe Text)
     , _auPayload      :: !Annotation
-    , _auKey          :: !(Maybe Key)
+    , _auKey          :: !(Maybe AuthKey)
     , _auAnnotationId :: !Text
     , _auOAuthToken   :: !(Maybe OAuthToken)
     , _auFields       :: !(Maybe Text)
@@ -139,7 +139,7 @@ auPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-auKey :: Lens' AnnotationsUpdate' (Maybe Key)
+auKey :: Lens' AnnotationsUpdate' (Maybe AuthKey)
 auKey = lens _auKey (\ s a -> s{_auKey = a})
 
 -- | The ID of the annotation set to be updated.

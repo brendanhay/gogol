@@ -69,7 +69,7 @@ type CreativesListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CreativesList
@@ -85,7 +85,7 @@ data CreativesList' = CreativesList'
     , _clUserIP                  :: !(Maybe Text)
     , _clOpenAuctionStatusFilter :: !(Maybe CreativesListOpenAuctionStatusFilter)
     , _clAccountId               :: !(Maybe [Int32])
-    , _clKey                     :: !(Maybe Key)
+    , _clKey                     :: !(Maybe AuthKey)
     , _clPageToken               :: !(Maybe Text)
     , _clDealsStatusFilter       :: !(Maybe CreativesListDealsStatusFilter)
     , _clOAuthToken              :: !(Maybe OAuthToken)
@@ -182,7 +182,7 @@ clAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' CreativesList' (Maybe Key)
+clKey :: Lens' CreativesList' (Maybe AuthKey)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | A continuation token, used to page through ad clients. To retrieve the

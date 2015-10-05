@@ -58,7 +58,7 @@ type SchemasUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Schema :> Put '[JSON] Schema
@@ -72,7 +72,7 @@ data SchemasUpdate' = SchemasUpdate'
     , _suUserIP      :: !(Maybe Text)
     , _suPayload     :: !Schema
     , _suCustomerId  :: !Text
-    , _suKey         :: !(Maybe Key)
+    , _suKey         :: !(Maybe AuthKey)
     , _suOAuthToken  :: !(Maybe OAuthToken)
     , _suSchemaKey   :: !Text
     , _suFields      :: !(Maybe Text)
@@ -148,7 +148,7 @@ suCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-suKey :: Lens' SchemasUpdate' (Maybe Key)
+suKey :: Lens' SchemasUpdate' (Maybe AuthKey)
 suKey = lens _suKey (\ s a -> s{_suKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -60,7 +60,7 @@ type OrdersGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Order
 
@@ -72,7 +72,7 @@ data OrdersGet' = OrdersGet'
     , _ogPrettyPrint :: !Bool
     , _ogUserIP      :: !(Maybe Text)
     , _ogProFileId   :: !Int64
-    , _ogKey         :: !(Maybe Key)
+    , _ogKey         :: !(Maybe AuthKey)
     , _ogId          :: !Int64
     , _ogProjectId   :: !Int64
     , _ogOAuthToken  :: !(Maybe OAuthToken)
@@ -144,7 +144,7 @@ ogProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ogKey :: Lens' OrdersGet' (Maybe Key)
+ogKey :: Lens' OrdersGet' (Maybe AuthKey)
 ogKey = lens _ogKey (\ s a -> s{_ogKey = a})
 
 -- | Order ID.

@@ -59,7 +59,7 @@ type AccountsContainersTagsCreateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Tag :> Post '[JSON] Tag
@@ -74,7 +74,7 @@ data AccountsContainersTagsCreate' = AccountsContainersTagsCreate'
     , _actcUserIP      :: !(Maybe Text)
     , _actcPayload     :: !Tag
     , _actcAccountId   :: !Text
-    , _actcKey         :: !(Maybe Key)
+    , _actcKey         :: !(Maybe AuthKey)
     , _actcOAuthToken  :: !(Maybe OAuthToken)
     , _actcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -158,7 +158,7 @@ actcAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-actcKey :: Lens' AccountsContainersTagsCreate' (Maybe Key)
+actcKey :: Lens' AccountsContainersTagsCreate' (Maybe AuthKey)
 actcKey = lens _actcKey (\ s a -> s{_actcKey = a})
 
 -- | OAuth 2.0 token for the current user.

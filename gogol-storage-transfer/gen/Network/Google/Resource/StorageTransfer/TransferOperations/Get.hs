@@ -68,7 +68,7 @@ type TransferOperationsGetResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] Operation
@@ -87,7 +87,7 @@ data TransferOperationsGet' = TransferOperationsGet'
     , _togAccessToken    :: !(Maybe Text)
     , _togUploadType     :: !(Maybe Text)
     , _togBearerToken    :: !(Maybe Text)
-    , _togKey            :: !(Maybe Key)
+    , _togKey            :: !(Maybe AuthKey)
     , _togName           :: !Text
     , _togOAuthToken     :: !(Maybe OAuthToken)
     , _togFields         :: !(Maybe Text)
@@ -191,7 +191,7 @@ togBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-togKey :: Lens' TransferOperationsGet' (Maybe Key)
+togKey :: Lens' TransferOperationsGet' (Maybe AuthKey)
 togKey = lens _togKey (\ s a -> s{_togKey = a})
 
 -- | The name of the operation resource.

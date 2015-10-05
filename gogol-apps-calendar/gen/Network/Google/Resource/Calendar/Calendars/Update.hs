@@ -55,7 +55,7 @@ type CalendarsUpdateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Calendar :> Put '[JSON] Calendar
@@ -69,7 +69,7 @@ data CalendarsUpdate' = CalendarsUpdate'
     , _cuPrettyPrint :: !Bool
     , _cuUserIP      :: !(Maybe Text)
     , _cuPayload     :: !Calendar
-    , _cuKey         :: !(Maybe Key)
+    , _cuKey         :: !(Maybe AuthKey)
     , _cuOAuthToken  :: !(Maybe OAuthToken)
     , _cuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,7 +142,7 @@ cuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuKey :: Lens' CalendarsUpdate' (Maybe Key)
+cuKey :: Lens' CalendarsUpdate' (Maybe AuthKey)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
 
 -- | OAuth 2.0 token for the current user.

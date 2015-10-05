@@ -62,7 +62,7 @@ type UsersDataSourcesCreateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] DataSource :> Post '[JSON] DataSource
@@ -83,7 +83,7 @@ data UsersDataSourcesCreate' = UsersDataSourcesCreate'
     , _udscUserIP      :: !(Maybe Text)
     , _udscPayload     :: !DataSource
     , _udscUserId      :: !Text
-    , _udscKey         :: !(Maybe Key)
+    , _udscKey         :: !(Maybe AuthKey)
     , _udscOAuthToken  :: !(Maybe OAuthToken)
     , _udscFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -157,7 +157,7 @@ udscUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udscKey :: Lens' UsersDataSourcesCreate' (Maybe Key)
+udscKey :: Lens' UsersDataSourcesCreate' (Maybe AuthKey)
 udscKey = lens _udscKey (\ s a -> s{_udscKey = a})
 
 -- | OAuth 2.0 token for the current user.

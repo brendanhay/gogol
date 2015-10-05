@@ -58,7 +58,7 @@ type LiveStreamsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -70,7 +70,7 @@ data LiveStreamsDelete' = LiveStreamsDelete'
     , _lsdPrettyPrint                   :: !Bool
     , _lsdUserIP                        :: !(Maybe Text)
     , _lsdOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lsdKey                           :: !(Maybe Key)
+    , _lsdKey                           :: !(Maybe AuthKey)
     , _lsdOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lsdId                            :: !Text
     , _lsdOAuthToken                    :: !(Maybe OAuthToken)
@@ -151,7 +151,7 @@ lsdOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lsdKey :: Lens' LiveStreamsDelete' (Maybe Key)
+lsdKey :: Lens' LiveStreamsDelete' (Maybe AuthKey)
 lsdKey = lens _lsdKey (\ s a -> s{_lsdKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:

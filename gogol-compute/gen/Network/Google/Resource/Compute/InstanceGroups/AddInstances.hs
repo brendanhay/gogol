@@ -62,7 +62,7 @@ type InstanceGroupsAddInstancesResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] InstanceGroupsAddInstancesRequest
@@ -79,7 +79,7 @@ data InstanceGroupsAddInstances' = InstanceGroupsAddInstances'
     , _igaiUserIP        :: !(Maybe Text)
     , _igaiZone          :: !Text
     , _igaiPayload       :: !InstanceGroupsAddInstancesRequest
-    , _igaiKey           :: !(Maybe Key)
+    , _igaiKey           :: !(Maybe AuthKey)
     , _igaiOAuthToken    :: !(Maybe OAuthToken)
     , _igaiInstanceGroup :: !Text
     , _igaiFields        :: !(Maybe Text)
@@ -165,7 +165,7 @@ igaiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igaiKey :: Lens' InstanceGroupsAddInstances' (Maybe Key)
+igaiKey :: Lens' InstanceGroupsAddInstances' (Maybe AuthKey)
 igaiKey = lens _igaiKey (\ s a -> s{_igaiKey = a})
 
 -- | OAuth 2.0 token for the current user.

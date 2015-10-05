@@ -65,7 +65,7 @@ type OnboardingListCategoryVolumesResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Volume2
 
@@ -78,7 +78,7 @@ data OnboardingListCategoryVolumes' = OnboardingListCategoryVolumes'
     , _olcvUserIP                   :: !(Maybe Text)
     , _olcvLocale                   :: !(Maybe Text)
     , _olcvMaxAllowedMaturityRating :: !(Maybe OnboardingListCategoryVolumesMaxAllowedMaturityRating)
-    , _olcvKey                      :: !(Maybe Key)
+    , _olcvKey                      :: !(Maybe AuthKey)
     , _olcvCategoryId               :: !(Maybe [Text])
     , _olcvPageToken                :: !(Maybe Text)
     , _olcvOAuthToken               :: !(Maybe OAuthToken)
@@ -164,7 +164,7 @@ olcvMaxAllowedMaturityRating
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-olcvKey :: Lens' OnboardingListCategoryVolumes' (Maybe Key)
+olcvKey :: Lens' OnboardingListCategoryVolumes' (Maybe AuthKey)
 olcvKey = lens _olcvKey (\ s a -> s{_olcvKey = a})
 
 -- | List of category ids requested.

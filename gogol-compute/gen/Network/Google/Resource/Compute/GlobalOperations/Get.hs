@@ -57,7 +57,7 @@ type GlobalOperationsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
@@ -70,7 +70,7 @@ data GlobalOperationsGet' = GlobalOperationsGet'
     , _gogProject     :: !Text
     , _gogOperation   :: !Text
     , _gogUserIP      :: !(Maybe Text)
-    , _gogKey         :: !(Maybe Key)
+    , _gogKey         :: !(Maybe AuthKey)
     , _gogOAuthToken  :: !(Maybe OAuthToken)
     , _gogFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,7 +142,7 @@ gogUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gogKey :: Lens' GlobalOperationsGet' (Maybe Key)
+gogKey :: Lens' GlobalOperationsGet' (Maybe AuthKey)
 gogKey = lens _gogKey (\ s a -> s{_gogKey = a})
 
 -- | OAuth 2.0 token for the current user.

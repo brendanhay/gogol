@@ -63,7 +63,7 @@ type JobsListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] JobListResponse
@@ -77,7 +77,7 @@ data JobsList' = JobsList'
     , _jlUserIP                 :: !(Maybe Text)
     , _jlTeamId                 :: !Text
     , _jlMinModifiedTimestampMs :: !(Maybe Word64)
-    , _jlKey                    :: !(Maybe Key)
+    , _jlKey                    :: !(Maybe AuthKey)
     , _jlOmitJobChanges         :: !(Maybe Bool)
     , _jlPageToken              :: !(Maybe Text)
     , _jlOAuthToken             :: !(Maybe OAuthToken)
@@ -159,7 +159,7 @@ jlMinModifiedTimestampMs
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-jlKey :: Lens' JobsList' (Maybe Key)
+jlKey :: Lens' JobsList' (Maybe AuthKey)
 jlKey = lens _jlKey (\ s a -> s{_jlKey = a})
 
 -- | Whether to omit detail job history information.

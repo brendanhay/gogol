@@ -66,7 +66,7 @@ type URLCrawlErrorsSamplesMarkAsFixedResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -82,7 +82,7 @@ data URLCrawlErrorsSamplesMarkAsFixed' = URLCrawlErrorsSamplesMarkAsFixed'
     , _ucesmafCategory    :: !URLCrawlErrorsSamplesMarkAsFixedCategory
     , _ucesmafSiteURL     :: !Text
     , _ucesmafURL         :: !Text
-    , _ucesmafKey         :: !(Maybe Key)
+    , _ucesmafKey         :: !(Maybe AuthKey)
     , _ucesmafOAuthToken  :: !(Maybe OAuthToken)
     , _ucesmafFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -181,7 +181,7 @@ ucesmafURL
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ucesmafKey :: Lens' URLCrawlErrorsSamplesMarkAsFixed' (Maybe Key)
+ucesmafKey :: Lens' URLCrawlErrorsSamplesMarkAsFixed' (Maybe AuthKey)
 ucesmafKey
   = lens _ucesmafKey (\ s a -> s{_ucesmafKey = a})
 

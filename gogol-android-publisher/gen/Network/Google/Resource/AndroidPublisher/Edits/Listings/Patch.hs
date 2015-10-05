@@ -61,7 +61,7 @@ type EditsListingsPatchResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Listing :> Patch '[JSON] Listing
@@ -76,7 +76,7 @@ data EditsListingsPatch' = EditsListingsPatch'
     , _elpPackageName :: !Text
     , _elpUserIP      :: !(Maybe Text)
     , _elpPayload     :: !Listing
-    , _elpKey         :: !(Maybe Key)
+    , _elpKey         :: !(Maybe AuthKey)
     , _elpLanguage    :: !Text
     , _elpOAuthToken  :: !(Maybe OAuthToken)
     , _elpEditId      :: !Text
@@ -160,7 +160,7 @@ elpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-elpKey :: Lens' EditsListingsPatch' (Maybe Key)
+elpKey :: Lens' EditsListingsPatch' (Maybe AuthKey)
 elpKey = lens _elpKey (\ s a -> s{_elpKey = a})
 
 -- | The language code (a BCP-47 language tag) of the localized listing to

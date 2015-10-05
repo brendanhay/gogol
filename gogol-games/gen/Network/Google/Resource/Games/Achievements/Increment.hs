@@ -60,7 +60,7 @@ type AchievementsIncrementResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Post '[JSON] AchievementIncrementResponse
@@ -75,7 +75,7 @@ data AchievementsIncrement' = AchievementsIncrement'
     , _aiPrettyPrint      :: !Bool
     , _aiAchievementId    :: !Text
     , _aiUserIP           :: !(Maybe Text)
-    , _aiKey              :: !(Maybe Key)
+    , _aiKey              :: !(Maybe AuthKey)
     , _aiOAuthToken       :: !(Maybe OAuthToken)
     , _aiStepsToIncrement :: !Int32
     , _aiFields           :: !(Maybe Text)
@@ -153,7 +153,7 @@ aiUserIP = lens _aiUserIP (\ s a -> s{_aiUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aiKey :: Lens' AchievementsIncrement' (Maybe Key)
+aiKey :: Lens' AchievementsIncrement' (Maybe AuthKey)
 aiKey = lens _aiKey (\ s a -> s{_aiKey = a})
 
 -- | OAuth 2.0 token for the current user.

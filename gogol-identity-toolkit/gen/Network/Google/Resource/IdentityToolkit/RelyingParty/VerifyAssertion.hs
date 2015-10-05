@@ -53,7 +53,7 @@ type RelyingPartyVerifyAssertionResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON]
@@ -68,7 +68,7 @@ data RelyingPartyVerifyAssertion' = RelyingPartyVerifyAssertion'
     , _rpvaPrettyPrint :: !Bool
     , _rpvaUserIP      :: !(Maybe Text)
     , _rpvaPayload     :: !IdentitytoolkitRelyingPartyVerifyAssertionRequest
-    , _rpvaKey         :: !(Maybe Key)
+    , _rpvaKey         :: !(Maybe AuthKey)
     , _rpvaOAuthToken  :: !(Maybe OAuthToken)
     , _rpvaFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -132,7 +132,7 @@ rpvaPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rpvaKey :: Lens' RelyingPartyVerifyAssertion' (Maybe Key)
+rpvaKey :: Lens' RelyingPartyVerifyAssertion' (Maybe AuthKey)
 rpvaKey = lens _rpvaKey (\ s a -> s{_rpvaKey = a})
 
 -- | OAuth 2.0 token for the current user.

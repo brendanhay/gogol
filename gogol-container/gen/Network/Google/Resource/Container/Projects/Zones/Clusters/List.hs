@@ -57,7 +57,7 @@ type ProjectsZonesClustersListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ListClustersResponse
@@ -70,7 +70,7 @@ data ProjectsZonesClustersList' = ProjectsZonesClustersList'
     , _pzclPrettyPrint :: !Bool
     , _pzclUserIP      :: !(Maybe Text)
     , _pzclZoneId      :: !Text
-    , _pzclKey         :: !(Maybe Key)
+    , _pzclKey         :: !(Maybe AuthKey)
     , _pzclProjectId   :: !Text
     , _pzclOAuthToken  :: !(Maybe OAuthToken)
     , _pzclFields      :: !(Maybe Text)
@@ -139,7 +139,7 @@ pzclZoneId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pzclKey :: Lens' ProjectsZonesClustersList' (Maybe Key)
+pzclKey :: Lens' ProjectsZonesClustersList' (Maybe AuthKey)
 pzclKey = lens _pzclKey (\ s a -> s{_pzclKey = a})
 
 -- | The Google Developers Console project ID or project number.

@@ -62,7 +62,7 @@ type VolumesRecommendedRateResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Post '[JSON]
@@ -77,7 +77,7 @@ data VolumesRecommendedRate' = VolumesRecommendedRate'
     , _vrrPrettyPrint :: !Bool
     , _vrrUserIP      :: !(Maybe Text)
     , _vrrLocale      :: !(Maybe Text)
-    , _vrrKey         :: !(Maybe Key)
+    , _vrrKey         :: !(Maybe AuthKey)
     , _vrrVolumeId    :: !Text
     , _vrrSource      :: !(Maybe Text)
     , _vrrOAuthToken  :: !(Maybe OAuthToken)
@@ -158,7 +158,7 @@ vrrLocale
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vrrKey :: Lens' VolumesRecommendedRate' (Maybe Key)
+vrrKey :: Lens' VolumesRecommendedRate' (Maybe AuthKey)
 vrrKey = lens _vrrKey (\ s a -> s{_vrrKey = a})
 
 -- | ID of the source volume.

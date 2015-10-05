@@ -63,7 +63,7 @@ type EditsImagesDeleteResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -76,7 +76,7 @@ data EditsImagesDelete' = EditsImagesDelete'
     , _eidPackageName :: !Text
     , _eidUserIP      :: !(Maybe Text)
     , _eidImageType   :: !EditsImagesDeleteImageType
-    , _eidKey         :: !(Maybe Key)
+    , _eidKey         :: !(Maybe AuthKey)
     , _eidImageId     :: !Text
     , _eidLanguage    :: !Text
     , _eidOAuthToken  :: !(Maybe OAuthToken)
@@ -164,7 +164,7 @@ eidImageType
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eidKey :: Lens' EditsImagesDelete' (Maybe Key)
+eidKey :: Lens' EditsImagesDelete' (Maybe AuthKey)
 eidKey = lens _eidKey (\ s a -> s{_eidKey = a})
 
 -- | Unique identifier an image within the set of images attached to this

@@ -56,7 +56,7 @@ type VerificationCodesInvalidateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -67,7 +67,7 @@ data VerificationCodesInvalidate' = VerificationCodesInvalidate'
     { _vciQuotaUser   :: !(Maybe Text)
     , _vciPrettyPrint :: !Bool
     , _vciUserIP      :: !(Maybe Text)
-    , _vciKey         :: !(Maybe Key)
+    , _vciKey         :: !(Maybe AuthKey)
     , _vciOAuthToken  :: !(Maybe OAuthToken)
     , _vciUserKey     :: !Text
     , _vciFields      :: !(Maybe Text)
@@ -126,7 +126,7 @@ vciUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vciKey :: Lens' VerificationCodesInvalidate' (Maybe Key)
+vciKey :: Lens' VerificationCodesInvalidate' (Maybe AuthKey)
 vciKey = lens _vciKey (\ s a -> s{_vciKey = a})
 
 -- | OAuth 2.0 token for the current user.

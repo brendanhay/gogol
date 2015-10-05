@@ -57,7 +57,7 @@ type AdvertiserGroupsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] AdvertiserGroup
@@ -70,7 +70,7 @@ data AdvertiserGroupsGet' = AdvertiserGroupsGet'
     , _aggPrettyPrint :: !Bool
     , _aggUserIP      :: !(Maybe Text)
     , _aggProFileId   :: !Int64
-    , _aggKey         :: !(Maybe Key)
+    , _aggKey         :: !(Maybe AuthKey)
     , _aggId          :: !Int64
     , _aggOAuthToken  :: !(Maybe OAuthToken)
     , _aggFields      :: !(Maybe Text)
@@ -138,7 +138,7 @@ aggProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aggKey :: Lens' AdvertiserGroupsGet' (Maybe Key)
+aggKey :: Lens' AdvertiserGroupsGet' (Maybe AuthKey)
 aggKey = lens _aggKey (\ s a -> s{_aggKey = a})
 
 -- | Advertiser group ID.

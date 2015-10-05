@@ -55,7 +55,7 @@ type MyLibraryBookshelvesListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Bookshelves
 
@@ -66,7 +66,7 @@ data MyLibraryBookshelvesList' = MyLibraryBookshelvesList'
     { _mlblQuotaUser   :: !(Maybe Text)
     , _mlblPrettyPrint :: !Bool
     , _mlblUserIP      :: !(Maybe Text)
-    , _mlblKey         :: !(Maybe Key)
+    , _mlblKey         :: !(Maybe AuthKey)
     , _mlblSource      :: !(Maybe Text)
     , _mlblOAuthToken  :: !(Maybe OAuthToken)
     , _mlblFields      :: !(Maybe Text)
@@ -125,7 +125,7 @@ mlblUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlblKey :: Lens' MyLibraryBookshelvesList' (Maybe Key)
+mlblKey :: Lens' MyLibraryBookshelvesList' (Maybe AuthKey)
 mlblKey = lens _mlblKey (\ s a -> s{_mlblKey = a})
 
 -- | String to identify the originator of this request.

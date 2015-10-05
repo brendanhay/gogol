@@ -59,7 +59,7 @@ type LicenseAssignmentsGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] LicenseAssignment
@@ -73,7 +73,7 @@ data LicenseAssignmentsGet' = LicenseAssignmentsGet'
     , _lagUserIP      :: !(Maybe Text)
     , _lagSKUId       :: !Text
     , _lagUserId      :: !Text
-    , _lagKey         :: !(Maybe Key)
+    , _lagKey         :: !(Maybe AuthKey)
     , _lagOAuthToken  :: !(Maybe OAuthToken)
     , _lagProductId   :: !Text
     , _lagFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ lagUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lagKey :: Lens' LicenseAssignmentsGet' (Maybe Key)
+lagKey :: Lens' LicenseAssignmentsGet' (Maybe AuthKey)
 lagKey = lens _lagKey (\ s a -> s{_lagKey = a})
 
 -- | OAuth 2.0 token for the current user.

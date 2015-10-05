@@ -77,7 +77,7 @@ type CoursesStudentsCreateResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          ReqBody '[JSON] Student :>
@@ -104,7 +104,7 @@ data CoursesStudentsCreate' = CoursesStudentsCreate'
     , _cscPayload        :: !Student
     , _cscEnrollmentCode :: !(Maybe Text)
     , _cscBearerToken    :: !(Maybe Text)
-    , _cscKey            :: !(Maybe Key)
+    , _cscKey            :: !(Maybe AuthKey)
     , _cscOAuthToken     :: !(Maybe OAuthToken)
     , _cscFields         :: !(Maybe Text)
     , _cscCallback       :: !(Maybe Text)
@@ -235,7 +235,7 @@ cscBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cscKey :: Lens' CoursesStudentsCreate' (Maybe Key)
+cscKey :: Lens' CoursesStudentsCreate' (Maybe AuthKey)
 cscKey = lens _cscKey (\ s a -> s{_cscKey = a})
 
 -- | OAuth 2.0 token for the current user.

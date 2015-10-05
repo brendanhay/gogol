@@ -59,7 +59,7 @@ type DefaultObjectAccessControlsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ObjectAccessControl :>
@@ -75,7 +75,7 @@ data DefaultObjectAccessControlsPatch' = DefaultObjectAccessControlsPatch'
     , _doacpUserIP      :: !(Maybe Text)
     , _doacpBucket      :: !Text
     , _doacpPayload     :: !ObjectAccessControl
-    , _doacpKey         :: !(Maybe Key)
+    , _doacpKey         :: !(Maybe AuthKey)
     , _doacpOAuthToken  :: !(Maybe OAuthToken)
     , _doacpEntity      :: !Text
     , _doacpFields      :: !(Maybe Text)
@@ -153,7 +153,7 @@ doacpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-doacpKey :: Lens' DefaultObjectAccessControlsPatch' (Maybe Key)
+doacpKey :: Lens' DefaultObjectAccessControlsPatch' (Maybe AuthKey)
 doacpKey = lens _doacpKey (\ s a -> s{_doacpKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -53,7 +53,7 @@ type ProjectsGetResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Project
 
@@ -65,7 +65,7 @@ data ProjectsGet' = ProjectsGet'
     , _pgPrettyPrint :: !Bool
     , _pgProject     :: !Text
     , _pgUserIP      :: !(Maybe Text)
-    , _pgKey         :: !(Maybe Key)
+    , _pgKey         :: !(Maybe AuthKey)
     , _pgOAuthToken  :: !(Maybe OAuthToken)
     , _pgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -127,7 +127,7 @@ pgUserIP = lens _pgUserIP (\ s a -> s{_pgUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgKey :: Lens' ProjectsGet' (Maybe Key)
+pgKey :: Lens' ProjectsGet' (Maybe AuthKey)
 pgKey = lens _pgKey (\ s a -> s{_pgKey = a})
 
 -- | OAuth 2.0 token for the current user.

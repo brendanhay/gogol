@@ -55,7 +55,7 @@ type LayersPatchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Layer :> Patch '[JSON] ()
@@ -68,7 +68,7 @@ data LayersPatch' = LayersPatch'
     , _layPrettyPrint :: !Bool
     , _layUserIP      :: !(Maybe Text)
     , _layPayload     :: !Layer
-    , _layKey         :: !(Maybe Key)
+    , _layKey         :: !(Maybe AuthKey)
     , _layId          :: !Text
     , _layOAuthToken  :: !(Maybe OAuthToken)
     , _layFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ layPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-layKey :: Lens' LayersPatch' (Maybe Key)
+layKey :: Lens' LayersPatch' (Maybe AuthKey)
 layKey = lens _layKey (\ s a -> s{_layKey = a})
 
 -- | The ID of the layer.

@@ -79,7 +79,7 @@ type AccountsReportsGenerateResource =
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "key" Key :>
+                                         QueryParam "key" AuthKey :>
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
@@ -104,7 +104,7 @@ type AccountsReportsGenerateResource =
                                      QueryParam "prettyPrint" Bool :>
                                        QueryParam "userIp" Text :>
                                          QueryParam "fields" Text :>
-                                           QueryParam "key" Key :>
+                                           QueryParam "key" AuthKey :>
                                              QueryParam "oauth_token" OAuthToken
                                                :>
                                                QueryParam "alt" AltMedia :>
@@ -125,7 +125,7 @@ data AccountsReportsGenerate' = AccountsReportsGenerate'
     , _argStartDate            :: !Text
     , _argAccountId            :: !Text
     , _argMetric               :: !(Maybe [Text])
-    , _argKey                  :: !(Maybe Key)
+    , _argKey                  :: !(Maybe AuthKey)
     , _argCurrency             :: !(Maybe Text)
     , _argSort                 :: !(Maybe [Text])
     , _argFilter               :: !(Maybe [Text])
@@ -260,7 +260,7 @@ argMetric
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-argKey :: Lens' AccountsReportsGenerate' (Maybe Key)
+argKey :: Lens' AccountsReportsGenerate' (Maybe AuthKey)
 argKey = lens _argKey (\ s a -> s{_argKey = a})
 
 -- | Optional currency to use when reporting on monetary metrics. Defaults to

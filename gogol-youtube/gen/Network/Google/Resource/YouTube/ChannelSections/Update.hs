@@ -57,7 +57,7 @@ type ChannelSectionsUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ChannelSection :>
@@ -73,7 +73,7 @@ data ChannelSectionsUpdate' = ChannelSectionsUpdate'
     , _csuUserIP                 :: !(Maybe Text)
     , _csuPayload                :: !ChannelSection
     , _csuOnBehalfOfContentOwner :: !(Maybe Text)
-    , _csuKey                    :: !(Maybe Key)
+    , _csuKey                    :: !(Maybe AuthKey)
     , _csuOAuthToken             :: !(Maybe OAuthToken)
     , _csuFields                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -165,7 +165,7 @@ csuOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-csuKey :: Lens' ChannelSectionsUpdate' (Maybe Key)
+csuKey :: Lens' ChannelSectionsUpdate' (Maybe AuthKey)
 csuKey = lens _csuKey (\ s a -> s{_csuKey = a})
 
 -- | OAuth 2.0 token for the current user.

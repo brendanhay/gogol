@@ -55,7 +55,7 @@ type RasterCollectionsPermissionsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] PermissionsListResponse
@@ -67,7 +67,7 @@ data RasterCollectionsPermissionsList' = RasterCollectionsPermissionsList'
     { _rcplcQuotaUser   :: !(Maybe Text)
     , _rcplcPrettyPrint :: !Bool
     , _rcplcUserIP      :: !(Maybe Text)
-    , _rcplcKey         :: !(Maybe Key)
+    , _rcplcKey         :: !(Maybe AuthKey)
     , _rcplcId          :: !Text
     , _rcplcOAuthToken  :: !(Maybe OAuthToken)
     , _rcplcFields      :: !(Maybe Text)
@@ -127,7 +127,7 @@ rcplcUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rcplcKey :: Lens' RasterCollectionsPermissionsList' (Maybe Key)
+rcplcKey :: Lens' RasterCollectionsPermissionsList' (Maybe AuthKey)
 rcplcKey = lens _rcplcKey (\ s a -> s{_rcplcKey = a})
 
 -- | The ID of the asset whose permissions will be listed.

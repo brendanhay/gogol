@@ -57,7 +57,7 @@ type MobileCarriersGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] MobileCarrier
 
@@ -69,7 +69,7 @@ data MobileCarriersGet' = MobileCarriersGet'
     , _mcgPrettyPrint :: !Bool
     , _mcgUserIP      :: !(Maybe Text)
     , _mcgProFileId   :: !Int64
-    , _mcgKey         :: !(Maybe Key)
+    , _mcgKey         :: !(Maybe AuthKey)
     , _mcgId          :: !Int64
     , _mcgOAuthToken  :: !(Maybe OAuthToken)
     , _mcgFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ mcgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcgKey :: Lens' MobileCarriersGet' (Maybe Key)
+mcgKey :: Lens' MobileCarriersGet' (Maybe AuthKey)
 mcgKey = lens _mcgKey (\ s a -> s{_mcgKey = a})
 
 -- | Mobile carrier ID.

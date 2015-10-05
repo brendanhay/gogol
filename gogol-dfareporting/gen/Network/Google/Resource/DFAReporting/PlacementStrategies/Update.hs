@@ -56,7 +56,7 @@ type PlacementStrategiesUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] PlacementStrategy :>
@@ -71,7 +71,7 @@ data PlacementStrategiesUpdate' = PlacementStrategiesUpdate'
     , _psuUserIP      :: !(Maybe Text)
     , _psuProFileId   :: !Int64
     , _psuPayload     :: !PlacementStrategy
-    , _psuKey         :: !(Maybe Key)
+    , _psuKey         :: !(Maybe AuthKey)
     , _psuOAuthToken  :: !(Maybe OAuthToken)
     , _psuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ psuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psuKey :: Lens' PlacementStrategiesUpdate' (Maybe Key)
+psuKey :: Lens' PlacementStrategiesUpdate' (Maybe AuthKey)
 psuKey = lens _psuKey (\ s a -> s{_psuKey = a})
 
 -- | OAuth 2.0 token for the current user.

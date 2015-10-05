@@ -58,7 +58,7 @@ type EventsResetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -72,7 +72,7 @@ data EventsReset' = EventsReset'
     { _erQuotaUser   :: !(Maybe Text)
     , _erPrettyPrint :: !Bool
     , _erUserIP      :: !(Maybe Text)
-    , _erKey         :: !(Maybe Key)
+    , _erKey         :: !(Maybe AuthKey)
     , _erOAuthToken  :: !(Maybe OAuthToken)
     , _erEventId     :: !Text
     , _erFields      :: !(Maybe Text)
@@ -130,7 +130,7 @@ erUserIP = lens _erUserIP (\ s a -> s{_erUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-erKey :: Lens' EventsReset' (Maybe Key)
+erKey :: Lens' EventsReset' (Maybe AuthKey)
 erKey = lens _erKey (\ s a -> s{_erKey = a})
 
 -- | OAuth 2.0 token for the current user.

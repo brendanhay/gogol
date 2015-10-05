@@ -66,7 +66,7 @@ type ManagementGoalsPatchResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Goal :> Patch '[JSON] Goal
@@ -84,7 +84,7 @@ data ManagementGoalsPatch' = ManagementGoalsPatch'
     , _mgpProFileId     :: !Text
     , _mgpPayload       :: !Goal
     , _mgpAccountId     :: !Text
-    , _mgpKey           :: !(Maybe Key)
+    , _mgpKey           :: !(Maybe AuthKey)
     , _mgpOAuthToken    :: !(Maybe OAuthToken)
     , _mgpFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -184,7 +184,7 @@ mgpAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mgpKey :: Lens' ManagementGoalsPatch' (Maybe Key)
+mgpKey :: Lens' ManagementGoalsPatch' (Maybe AuthKey)
 mgpKey = lens _mgpKey (\ s a -> s{_mgpKey = a})
 
 -- | OAuth 2.0 token for the current user.

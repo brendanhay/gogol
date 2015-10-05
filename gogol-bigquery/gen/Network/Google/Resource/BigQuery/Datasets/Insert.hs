@@ -56,7 +56,7 @@ type DatasetsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Dataset :> Post '[JSON] Dataset
@@ -69,7 +69,7 @@ data DatasetsInsert' = DatasetsInsert'
     , _diPrettyPrint :: !Bool
     , _diUserIP      :: !(Maybe Text)
     , _diPayload     :: !Dataset
-    , _diKey         :: !(Maybe Key)
+    , _diKey         :: !(Maybe AuthKey)
     , _diProjectId   :: !Text
     , _diOAuthToken  :: !(Maybe OAuthToken)
     , _diFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ diPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-diKey :: Lens' DatasetsInsert' (Maybe Key)
+diKey :: Lens' DatasetsInsert' (Maybe AuthKey)
 diKey = lens _diKey (\ s a -> s{_diKey = a})
 
 -- | Project ID of the new dataset

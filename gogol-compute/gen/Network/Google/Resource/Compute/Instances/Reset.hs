@@ -60,7 +60,7 @@ type InstancesResetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
@@ -73,7 +73,7 @@ data InstancesReset' = InstancesReset'
     , _irrProject     :: !Text
     , _irrUserIP      :: !(Maybe Text)
     , _irrZone        :: !Text
-    , _irrKey         :: !(Maybe Key)
+    , _irrKey         :: !(Maybe AuthKey)
     , _irrOAuthToken  :: !(Maybe OAuthToken)
     , _irrFields      :: !(Maybe Text)
     , _irrInstance    :: !Text
@@ -149,7 +149,7 @@ irrZone = lens _irrZone (\ s a -> s{_irrZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-irrKey :: Lens' InstancesReset' (Maybe Key)
+irrKey :: Lens' InstancesReset' (Maybe AuthKey)
 irrKey = lens _irrKey (\ s a -> s{_irrKey = a})
 
 -- | OAuth 2.0 token for the current user.

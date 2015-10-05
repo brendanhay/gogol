@@ -56,7 +56,7 @@ type PretargetingConfigGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] PretargetingConfig
@@ -69,7 +69,7 @@ data PretargetingConfigGet' = PretargetingConfigGet'
     , _pcgPrettyPrint :: !Bool
     , _pcgUserIP      :: !(Maybe Text)
     , _pcgAccountId   :: !Int64
-    , _pcgKey         :: !(Maybe Key)
+    , _pcgKey         :: !(Maybe AuthKey)
     , _pcgConfigId    :: !Int64
     , _pcgOAuthToken  :: !(Maybe OAuthToken)
     , _pcgFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ pcgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pcgKey :: Lens' PretargetingConfigGet' (Maybe Key)
+pcgKey :: Lens' PretargetingConfigGet' (Maybe AuthKey)
 pcgKey = lens _pcgKey (\ s a -> s{_pcgKey = a})
 
 -- | The specific id of the configuration to retrieve.

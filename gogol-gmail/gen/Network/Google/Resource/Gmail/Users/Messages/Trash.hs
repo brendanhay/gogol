@@ -57,7 +57,7 @@ type UsersMessagesTrashResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Post '[JSON] Message
 
@@ -69,7 +69,7 @@ data UsersMessagesTrash' = UsersMessagesTrash'
     , _umtPrettyPrint :: !Bool
     , _umtUserIP      :: !(Maybe Text)
     , _umtUserId      :: !Text
-    , _umtKey         :: !(Maybe Key)
+    , _umtKey         :: !(Maybe AuthKey)
     , _umtId          :: !Text
     , _umtOAuthToken  :: !(Maybe OAuthToken)
     , _umtFields      :: !(Maybe Text)
@@ -138,7 +138,7 @@ umtUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umtKey :: Lens' UsersMessagesTrash' (Maybe Key)
+umtKey :: Lens' UsersMessagesTrash' (Maybe AuthKey)
 umtKey = lens _umtKey (\ s a -> s{_umtKey = a})
 
 -- | The ID of the message to Trash.

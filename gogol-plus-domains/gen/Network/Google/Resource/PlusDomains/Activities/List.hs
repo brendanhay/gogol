@@ -62,7 +62,7 @@ type ActivitiesListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ActivityFeed
@@ -77,7 +77,7 @@ data ActivitiesList' = ActivitiesList'
     , _aUserIP      :: !(Maybe Text)
     , _aCollection  :: !ActivitiesListCollection
     , _aUserId      :: !Text
-    , _aKey         :: !(Maybe Key)
+    , _aKey         :: !(Maybe AuthKey)
     , _aPageToken   :: !(Maybe Text)
     , _aOAuthToken  :: !(Maybe OAuthToken)
     , _aMaxResults  :: !Word32
@@ -155,7 +155,7 @@ aUserId = lens _aUserId (\ s a -> s{_aUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aKey :: Lens' ActivitiesList' (Maybe Key)
+aKey :: Lens' ActivitiesList' (Maybe AuthKey)
 aKey = lens _aKey (\ s a -> s{_aKey = a})
 
 -- | The continuation token, which is used to page through large result sets.

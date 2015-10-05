@@ -75,7 +75,7 @@ type AccountsReportsGenerateResource =
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] Report
@@ -96,7 +96,7 @@ type AccountsReportsGenerateResource =
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "userIp" Text :>
                                      QueryParam "fields" Text :>
-                                       QueryParam "key" Key :>
+                                       QueryParam "key" AuthKey :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltMedia :>
                                              Get '[OctetStream] Body
@@ -116,7 +116,7 @@ data AccountsReportsGenerate' = AccountsReportsGenerate'
     , _argStartDate   :: !Text
     , _argAccountId   :: !Text
     , _argMetric      :: !(Maybe [Text])
-    , _argKey         :: !(Maybe Key)
+    , _argKey         :: !(Maybe AuthKey)
     , _argSort        :: !(Maybe [Text])
     , _argFilter      :: !(Maybe [Text])
     , _argOAuthToken  :: !(Maybe OAuthToken)
@@ -243,7 +243,7 @@ argMetric
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-argKey :: Lens' AccountsReportsGenerate' (Maybe Key)
+argKey :: Lens' AccountsReportsGenerate' (Maybe AuthKey)
 argKey = lens _argKey (\ s a -> s{_argKey = a})
 
 -- | The name of a dimension or metric to sort the resulting report on,

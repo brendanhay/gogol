@@ -54,7 +54,7 @@ type AppsGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] App
 
@@ -66,7 +66,7 @@ data AppsGet' = AppsGet'
     , _aPrettyPrint :: !Bool
     , _aUserIP      :: !(Maybe Text)
     , _aAppId       :: !Text
-    , _aKey         :: !(Maybe Key)
+    , _aKey         :: !(Maybe AuthKey)
     , _aOAuthToken  :: !(Maybe OAuthToken)
     , _aFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -126,7 +126,7 @@ aAppId = lens _aAppId (\ s a -> s{_aAppId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aKey :: Lens' AppsGet' (Maybe Key)
+aKey :: Lens' AppsGet' (Maybe AuthKey)
 aKey = lens _aKey (\ s a -> s{_aKey = a})
 
 -- | OAuth 2.0 token for the current user.

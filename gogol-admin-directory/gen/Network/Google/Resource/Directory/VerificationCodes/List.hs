@@ -56,7 +56,7 @@ type VerificationCodesListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] VerificationCodes
@@ -69,7 +69,7 @@ data VerificationCodesList' = VerificationCodesList'
     { _vclQuotaUser   :: !(Maybe Text)
     , _vclPrettyPrint :: !Bool
     , _vclUserIP      :: !(Maybe Text)
-    , _vclKey         :: !(Maybe Key)
+    , _vclKey         :: !(Maybe AuthKey)
     , _vclOAuthToken  :: !(Maybe OAuthToken)
     , _vclUserKey     :: !Text
     , _vclFields      :: !(Maybe Text)
@@ -128,7 +128,7 @@ vclUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vclKey :: Lens' VerificationCodesList' (Maybe Key)
+vclKey :: Lens' VerificationCodesList' (Maybe AuthKey)
 vclKey = lens _vclKey (\ s a -> s{_vclKey = a})
 
 -- | OAuth 2.0 token for the current user.

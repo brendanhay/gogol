@@ -56,7 +56,7 @@ type ExperimentalJobsCreateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ExperimentalCreateJobRequest :>
@@ -71,7 +71,7 @@ data ExperimentalJobsCreate' = ExperimentalJobsCreate'
     , _ejcPrettyPrint :: !Bool
     , _ejcUserIP      :: !(Maybe Text)
     , _ejcPayload     :: !ExperimentalCreateJobRequest
-    , _ejcKey         :: !(Maybe Key)
+    , _ejcKey         :: !(Maybe AuthKey)
     , _ejcOAuthToken  :: !(Maybe OAuthToken)
     , _ejcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -134,7 +134,7 @@ ejcPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ejcKey :: Lens' ExperimentalJobsCreate' (Maybe Key)
+ejcKey :: Lens' ExperimentalJobsCreate' (Maybe AuthKey)
 ejcKey = lens _ejcKey (\ s a -> s{_ejcKey = a})
 
 -- | OAuth 2.0 token for the current user.

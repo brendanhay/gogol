@@ -62,7 +62,7 @@ type ManagementProFilesUpdateResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] ProFile :> Put '[JSON] ProFile
@@ -78,7 +78,7 @@ data ManagementProFilesUpdate' = ManagementProFilesUpdate'
     , _mpfuProFileId     :: !Text
     , _mpfuPayload       :: !ProFile
     , _mpfuAccountId     :: !Text
-    , _mpfuKey           :: !(Maybe Key)
+    , _mpfuKey           :: !(Maybe AuthKey)
     , _mpfuOAuthToken    :: !(Maybe OAuthToken)
     , _mpfuFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -172,7 +172,7 @@ mpfuAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpfuKey :: Lens' ManagementProFilesUpdate' (Maybe Key)
+mpfuKey :: Lens' ManagementProFilesUpdate' (Maybe AuthKey)
 mpfuKey = lens _mpfuKey (\ s a -> s{_mpfuKey = a})
 
 -- | OAuth 2.0 token for the current user.

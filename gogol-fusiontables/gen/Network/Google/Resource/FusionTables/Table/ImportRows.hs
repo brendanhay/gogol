@@ -66,7 +66,7 @@ type TableImportRowsResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[OctetStream] Body :>
@@ -82,7 +82,7 @@ data TableImportRows' = TableImportRows'
     , _tirStartLine   :: !(Maybe Int32)
     , _tirEndLine     :: !(Maybe Int32)
     , _tirMedia       :: !Body
-    , _tirKey         :: !(Maybe Key)
+    , _tirKey         :: !(Maybe AuthKey)
     , _tirOAuthToken  :: !(Maybe OAuthToken)
     , _tirTableId     :: !Text
     , _tirDelimiter   :: !(Maybe Text)
@@ -180,7 +180,7 @@ tirMedia = lens _tirMedia (\ s a -> s{_tirMedia = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tirKey :: Lens' TableImportRows' (Maybe Key)
+tirKey :: Lens' TableImportRows' (Maybe AuthKey)
 tirKey = lens _tirKey (\ s a -> s{_tirKey = a})
 
 -- | OAuth 2.0 token for the current user.

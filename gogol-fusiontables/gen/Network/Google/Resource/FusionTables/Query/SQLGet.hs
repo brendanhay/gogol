@@ -58,7 +58,7 @@ type QuerySQLGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] SQLresponse
        :<|>
@@ -70,7 +70,7 @@ type QuerySQLGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltMedia :> Get '[OctetStream] Body
 
@@ -83,7 +83,7 @@ data QuerySQLGet' = QuerySQLGet'
     , _qsqlgPrettyPrint :: !Bool
     , _qsqlgHdrs        :: !(Maybe Bool)
     , _qsqlgUserIP      :: !(Maybe Text)
-    , _qsqlgKey         :: !(Maybe Key)
+    , _qsqlgKey         :: !(Maybe AuthKey)
     , _qsqlgOAuthToken  :: !(Maybe OAuthToken)
     , _qsqlgSQL         :: !Text
     , _qsqlgFields      :: !(Maybe Text)
@@ -160,7 +160,7 @@ qsqlgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-qsqlgKey :: Lens' QuerySQLGet' (Maybe Key)
+qsqlgKey :: Lens' QuerySQLGet' (Maybe AuthKey)
 qsqlgKey = lens _qsqlgKey (\ s a -> s{_qsqlgKey = a})
 
 -- | OAuth 2.0 token for the current user.

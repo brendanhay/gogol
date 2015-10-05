@@ -57,7 +57,7 @@ type InstancesDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
@@ -69,7 +69,7 @@ data InstancesDelete' = InstancesDelete'
     , _idPrettyPrint :: !Bool
     , _idProject     :: !Text
     , _idUserIP      :: !(Maybe Text)
-    , _idKey         :: !(Maybe Key)
+    , _idKey         :: !(Maybe AuthKey)
     , _idOAuthToken  :: !(Maybe OAuthToken)
     , _idFields      :: !(Maybe Text)
     , _idInstance    :: !Text
@@ -136,7 +136,7 @@ idUserIP = lens _idUserIP (\ s a -> s{_idUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-idKey :: Lens' InstancesDelete' (Maybe Key)
+idKey :: Lens' InstancesDelete' (Maybe AuthKey)
 idKey = lens _idKey (\ s a -> s{_idKey = a})
 
 -- | OAuth 2.0 token for the current user.

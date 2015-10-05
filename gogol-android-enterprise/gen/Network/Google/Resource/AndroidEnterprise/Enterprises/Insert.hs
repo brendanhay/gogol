@@ -56,7 +56,7 @@ type EnterprisesInsertResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Enterprise :> Post '[JSON] Enterprise
@@ -71,7 +71,7 @@ data EnterprisesInsert' = EnterprisesInsert'
     , _eiUserIP      :: !(Maybe Text)
     , _eiToken       :: !Text
     , _eiPayload     :: !Enterprise
-    , _eiKey         :: !(Maybe Key)
+    , _eiKey         :: !(Maybe AuthKey)
     , _eiOAuthToken  :: !(Maybe OAuthToken)
     , _eiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -141,7 +141,7 @@ eiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eiKey :: Lens' EnterprisesInsert' (Maybe Key)
+eiKey :: Lens' EnterprisesInsert' (Maybe AuthKey)
 eiKey = lens _eiKey (\ s a -> s{_eiKey = a})
 
 -- | OAuth 2.0 token for the current user.

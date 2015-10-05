@@ -58,7 +58,7 @@ type SubscriptionsStartPaidServiceResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] Subscription
 
@@ -70,7 +70,7 @@ data SubscriptionsStartPaidService' = SubscriptionsStartPaidService'
     , _sspsPrettyPrint    :: !Bool
     , _sspsUserIP         :: !(Maybe Text)
     , _sspsCustomerId     :: !Text
-    , _sspsKey            :: !(Maybe Key)
+    , _sspsKey            :: !(Maybe AuthKey)
     , _sspsOAuthToken     :: !(Maybe OAuthToken)
     , _sspsSubscriptionId :: !Text
     , _sspsFields         :: !(Maybe Text)
@@ -140,7 +140,7 @@ sspsCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sspsKey :: Lens' SubscriptionsStartPaidService' (Maybe Key)
+sspsKey :: Lens' SubscriptionsStartPaidService' (Maybe AuthKey)
 sspsKey = lens _sspsKey (\ s a -> s{_sspsKey = a})
 
 -- | OAuth 2.0 token for the current user.

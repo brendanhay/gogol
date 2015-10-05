@@ -54,7 +54,7 @@ type PlayListItemsDeleteResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -65,7 +65,7 @@ data PlayListItemsDelete' = PlayListItemsDelete'
     { _plidQuotaUser   :: !(Maybe Text)
     , _plidPrettyPrint :: !Bool
     , _plidUserIP      :: !(Maybe Text)
-    , _plidKey         :: !(Maybe Key)
+    , _plidKey         :: !(Maybe AuthKey)
     , _plidId          :: !Text
     , _plidOAuthToken  :: !(Maybe OAuthToken)
     , _plidFields      :: !(Maybe Text)
@@ -125,7 +125,7 @@ plidUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plidKey :: Lens' PlayListItemsDelete' (Maybe Key)
+plidKey :: Lens' PlayListItemsDelete' (Maybe AuthKey)
 plidKey = lens _plidKey (\ s a -> s{_plidKey = a})
 
 -- | The id parameter specifies the YouTube playlist item ID for the playlist

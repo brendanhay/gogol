@@ -70,7 +70,7 @@ type DebuggerDebuggeesListResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListDebuggeesResponse
@@ -89,7 +89,7 @@ data DebuggerDebuggeesList' = DebuggerDebuggeesList'
     , _ddlAccessToken     :: !(Maybe Text)
     , _ddlUploadType      :: !(Maybe Text)
     , _ddlBearerToken     :: !(Maybe Text)
-    , _ddlKey             :: !(Maybe Key)
+    , _ddlKey             :: !(Maybe AuthKey)
     , _ddlOAuthToken      :: !(Maybe OAuthToken)
     , _ddlFields          :: !(Maybe Text)
     , _ddlCallback        :: !(Maybe Text)
@@ -207,7 +207,7 @@ ddlBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ddlKey :: Lens' DebuggerDebuggeesList' (Maybe Key)
+ddlKey :: Lens' DebuggerDebuggeesList' (Maybe AuthKey)
 ddlKey = lens _ddlKey (\ s a -> s{_ddlKey = a})
 
 -- | OAuth 2.0 token for the current user.

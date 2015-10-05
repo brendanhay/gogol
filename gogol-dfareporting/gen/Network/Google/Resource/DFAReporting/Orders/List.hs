@@ -72,7 +72,7 @@ type OrdersListResource =
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] OrdersListResponse
@@ -88,7 +88,7 @@ data OrdersList' = OrdersList'
     , _olIds          :: !(Maybe [Int64])
     , _olProFileId    :: !Int64
     , _olSortOrder    :: !(Maybe OrdersListSortOrder)
-    , _olKey          :: !(Maybe Key)
+    , _olKey          :: !(Maybe AuthKey)
     , _olPageToken    :: !(Maybe Text)
     , _olProjectId    :: !Int64
     , _olSortField    :: !(Maybe OrdersListSortField)
@@ -202,7 +202,7 @@ olSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-olKey :: Lens' OrdersList' (Maybe Key)
+olKey :: Lens' OrdersList' (Maybe AuthKey)
 olKey = lens _olKey (\ s a -> s{_olKey = a})
 
 -- | Value of the nextPageToken from the previous result page.

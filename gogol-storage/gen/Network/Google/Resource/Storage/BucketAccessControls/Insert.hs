@@ -56,7 +56,7 @@ type BucketAccessControlsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] BucketAccessControl :>
@@ -71,7 +71,7 @@ data BucketAccessControlsInsert' = BucketAccessControlsInsert'
     , _baciUserIP      :: !(Maybe Text)
     , _baciBucket      :: !Text
     , _baciPayload     :: !BucketAccessControl
-    , _baciKey         :: !(Maybe Key)
+    , _baciKey         :: !(Maybe AuthKey)
     , _baciOAuthToken  :: !(Maybe OAuthToken)
     , _baciFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ baciPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-baciKey :: Lens' BucketAccessControlsInsert' (Maybe Key)
+baciKey :: Lens' BucketAccessControlsInsert' (Maybe AuthKey)
 baciKey = lens _baciKey (\ s a -> s{_baciKey = a})
 
 -- | OAuth 2.0 token for the current user.

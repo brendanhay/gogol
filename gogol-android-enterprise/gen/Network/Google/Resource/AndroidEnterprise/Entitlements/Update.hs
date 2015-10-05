@@ -63,7 +63,7 @@ type EntitlementsUpdateResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Entitlement :>
@@ -81,7 +81,7 @@ data EntitlementsUpdate' = EntitlementsUpdate'
     , _entPayload       :: !Entitlement
     , _entInstall       :: !(Maybe Bool)
     , _entUserId        :: !Text
-    , _entKey           :: !(Maybe Key)
+    , _entKey           :: !(Maybe AuthKey)
     , _entOAuthToken    :: !(Maybe OAuthToken)
     , _entFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -184,7 +184,7 @@ entUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-entKey :: Lens' EntitlementsUpdate' (Maybe Key)
+entKey :: Lens' EntitlementsUpdate' (Maybe AuthKey)
 entKey = lens _entKey (\ s a -> s{_entKey = a})
 
 -- | OAuth 2.0 token for the current user.

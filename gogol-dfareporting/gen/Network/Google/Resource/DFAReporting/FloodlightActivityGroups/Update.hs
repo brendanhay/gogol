@@ -56,7 +56,7 @@ type FloodlightActivityGroupsUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] FloodlightActivityGroup :>
@@ -71,7 +71,7 @@ data FloodlightActivityGroupsUpdate' = FloodlightActivityGroupsUpdate'
     , _faguUserIP      :: !(Maybe Text)
     , _faguProFileId   :: !Int64
     , _faguPayload     :: !FloodlightActivityGroup
-    , _faguKey         :: !(Maybe Key)
+    , _faguKey         :: !(Maybe AuthKey)
     , _faguOAuthToken  :: !(Maybe OAuthToken)
     , _faguFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ faguPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-faguKey :: Lens' FloodlightActivityGroupsUpdate' (Maybe Key)
+faguKey :: Lens' FloodlightActivityGroupsUpdate' (Maybe AuthKey)
 faguKey = lens _faguKey (\ s a -> s{_faguKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -62,7 +62,7 @@ type ManagementWebPropertyUserLinksUpdateResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] EntityUserLink :>
@@ -78,7 +78,7 @@ data ManagementWebPropertyUserLinksUpdate' = ManagementWebPropertyUserLinksUpdat
     , _mwpuluUserIP        :: !(Maybe Text)
     , _mwpuluPayload       :: !EntityUserLink
     , _mwpuluAccountId     :: !Text
-    , _mwpuluKey           :: !(Maybe Key)
+    , _mwpuluKey           :: !(Maybe AuthKey)
     , _mwpuluLinkId        :: !Text
     , _mwpuluOAuthToken    :: !(Maybe OAuthToken)
     , _mwpuluFields        :: !(Maybe Text)
@@ -168,7 +168,7 @@ mwpuluAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mwpuluKey :: Lens' ManagementWebPropertyUserLinksUpdate' (Maybe Key)
+mwpuluKey :: Lens' ManagementWebPropertyUserLinksUpdate' (Maybe AuthKey)
 mwpuluKey
   = lens _mwpuluKey (\ s a -> s{_mwpuluKey = a})
 

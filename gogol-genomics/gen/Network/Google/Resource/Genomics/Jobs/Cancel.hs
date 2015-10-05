@@ -56,7 +56,7 @@ type JobsCancelResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -69,7 +69,7 @@ data JobsCancel' = JobsCancel'
     , _jcPrettyPrint :: !Bool
     , _jcJobId       :: !Text
     , _jcUserIP      :: !(Maybe Text)
-    , _jcKey         :: !(Maybe Key)
+    , _jcKey         :: !(Maybe AuthKey)
     , _jcOAuthToken  :: !(Maybe OAuthToken)
     , _jcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -130,7 +130,7 @@ jcUserIP = lens _jcUserIP (\ s a -> s{_jcUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-jcKey :: Lens' JobsCancel' (Maybe Key)
+jcKey :: Lens' JobsCancel' (Maybe AuthKey)
 jcKey = lens _jcKey (\ s a -> s{_jcKey = a})
 
 -- | OAuth 2.0 token for the current user.

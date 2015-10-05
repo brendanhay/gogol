@@ -60,7 +60,7 @@ type UsersGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] User
 
@@ -73,7 +73,7 @@ data UsersGet' = UsersGet'
     , _ugViewType        :: !UsersGetViewType
     , _ugCustomFieldMask :: !(Maybe Text)
     , _ugUserIP          :: !(Maybe Text)
-    , _ugKey             :: !(Maybe Key)
+    , _ugKey             :: !(Maybe AuthKey)
     , _ugProjection      :: !UsersGetProjection
     , _ugOAuthToken      :: !(Maybe OAuthToken)
     , _ugUserKey         :: !Text
@@ -153,7 +153,7 @@ ugUserIP = lens _ugUserIP (\ s a -> s{_ugUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ugKey :: Lens' UsersGet' (Maybe Key)
+ugKey :: Lens' UsersGet' (Maybe AuthKey)
 ugKey = lens _ugKey (\ s a -> s{_ugKey = a})
 
 -- | What subset of fields to fetch for this user.

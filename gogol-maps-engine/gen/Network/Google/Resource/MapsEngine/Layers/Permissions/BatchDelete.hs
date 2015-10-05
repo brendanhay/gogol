@@ -57,7 +57,7 @@ type LayersPermissionsBatchDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] PermissionsBatchDeleteRequest :>
@@ -71,7 +71,7 @@ data LayersPermissionsBatchDelete' = LayersPermissionsBatchDelete'
     , _lpbdPrettyPrint :: !Bool
     , _lpbdUserIP      :: !(Maybe Text)
     , _lpbdPayload     :: !PermissionsBatchDeleteRequest
-    , _lpbdKey         :: !(Maybe Key)
+    , _lpbdKey         :: !(Maybe AuthKey)
     , _lpbdId          :: !Text
     , _lpbdOAuthToken  :: !(Maybe OAuthToken)
     , _lpbdFields      :: !(Maybe Text)
@@ -140,7 +140,7 @@ lpbdPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lpbdKey :: Lens' LayersPermissionsBatchDelete' (Maybe Key)
+lpbdKey :: Lens' LayersPermissionsBatchDelete' (Maybe AuthKey)
 lpbdKey = lens _lpbdKey (\ s a -> s{_lpbdKey = a})
 
 -- | The ID of the asset from which permissions will be removed.

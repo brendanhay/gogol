@@ -63,7 +63,7 @@ type ManagementUnSampledReportsInsertResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] UnSampledReport :>
@@ -80,7 +80,7 @@ data ManagementUnSampledReportsInsert' = ManagementUnSampledReportsInsert'
     , _musriProFileId     :: !Text
     , _musriPayload       :: !UnSampledReport
     , _musriAccountId     :: !Text
-    , _musriKey           :: !(Maybe Key)
+    , _musriKey           :: !(Maybe AuthKey)
     , _musriOAuthToken    :: !(Maybe OAuthToken)
     , _musriFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -174,7 +174,7 @@ musriAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-musriKey :: Lens' ManagementUnSampledReportsInsert' (Maybe Key)
+musriKey :: Lens' ManagementUnSampledReportsInsert' (Maybe AuthKey)
 musriKey = lens _musriKey (\ s a -> s{_musriKey = a})
 
 -- | OAuth 2.0 token for the current user.

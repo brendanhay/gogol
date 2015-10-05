@@ -88,7 +88,7 @@ type AccountsExperienceLocalesListResource =
                                              QueryParam "quotaUser" Text :>
                                                QueryParam "prettyPrint" Bool :>
                                                  QueryParam "fields" Text :>
-                                                   QueryParam "key" Key :>
+                                                   QueryParam "key" AuthKey :>
                                                      QueryParam "oauth_token"
                                                        OAuthToken
                                                        :>
@@ -118,7 +118,7 @@ data AccountsExperienceLocalesList' = AccountsExperienceLocalesList'
     , _aellCustomId       :: !(Maybe Text)
     , _aellAccountId      :: !Text
     , _aellBearerToken    :: !(Maybe Text)
-    , _aellKey            :: !(Maybe Key)
+    , _aellKey            :: !(Maybe AuthKey)
     , _aellEditLevelEidr  :: !(Maybe Text)
     , _aellPageToken      :: !(Maybe Text)
     , _aellOAuthToken     :: !(Maybe OAuthToken)
@@ -299,7 +299,7 @@ aellBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aellKey :: Lens' AccountsExperienceLocalesList' (Maybe Key)
+aellKey :: Lens' AccountsExperienceLocalesList' (Maybe AuthKey)
 aellKey = lens _aellKey (\ s a -> s{_aellKey = a})
 
 -- | Filter ExperienceLocales that match a given edit-level EIDR.

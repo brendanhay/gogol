@@ -70,7 +70,7 @@ type AppsModulesDeleteResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Delete '[JSON] Operation
@@ -88,7 +88,7 @@ data AppsModulesDelete' = AppsModulesDelete'
     , _amdUploadType     :: !(Maybe Text)
     , _amdModulesId      :: !Text
     , _amdBearerToken    :: !(Maybe Text)
-    , _amdKey            :: !(Maybe Key)
+    , _amdKey            :: !(Maybe AuthKey)
     , _amdAppsId         :: !Text
     , _amdOAuthToken     :: !(Maybe OAuthToken)
     , _amdFields         :: !(Maybe Text)
@@ -201,7 +201,7 @@ amdBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-amdKey :: Lens' AppsModulesDelete' (Maybe Key)
+amdKey :: Lens' AppsModulesDelete' (Maybe AuthKey)
 amdKey = lens _amdKey (\ s a -> s{_amdKey = a})
 
 -- | Part of \`name\`. Name of the resource requested. For example:

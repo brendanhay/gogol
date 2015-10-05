@@ -61,7 +61,7 @@ type MarketplaceOrdersPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] MarketplaceOrder :>
@@ -77,7 +77,7 @@ data MarketplaceOrdersPatch' = MarketplaceOrdersPatch'
     , _mopUserIP         :: !(Maybe Text)
     , _mopRevisionNumber :: !Int64
     , _mopPayload        :: !MarketplaceOrder
-    , _mopKey            :: !(Maybe Key)
+    , _mopKey            :: !(Maybe AuthKey)
     , _mopOAuthToken     :: !(Maybe OAuthToken)
     , _mopOrderId        :: !Text
     , _mopFields         :: !(Maybe Text)
@@ -168,7 +168,7 @@ mopPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mopKey :: Lens' MarketplaceOrdersPatch' (Maybe Key)
+mopKey :: Lens' MarketplaceOrdersPatch' (Maybe AuthKey)
 mopKey = lens _mopKey (\ s a -> s{_mopKey = a})
 
 -- | OAuth 2.0 token for the current user.

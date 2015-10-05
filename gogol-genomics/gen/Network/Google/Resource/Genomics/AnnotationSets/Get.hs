@@ -55,7 +55,7 @@ type AnnotationSetsGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] AnnotationSet
 
@@ -68,7 +68,7 @@ data AnnotationSetsGet' = AnnotationSetsGet'
     , _asgPrettyPrint     :: !Bool
     , _asgAnnotationSetId :: !Text
     , _asgUserIP          :: !(Maybe Text)
-    , _asgKey             :: !(Maybe Key)
+    , _asgKey             :: !(Maybe AuthKey)
     , _asgOAuthToken      :: !(Maybe OAuthToken)
     , _asgFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -132,7 +132,7 @@ asgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-asgKey :: Lens' AnnotationSetsGet' (Maybe Key)
+asgKey :: Lens' AnnotationSetsGet' (Maybe AuthKey)
 asgKey = lens _asgKey (\ s a -> s{_asgKey = a})
 
 -- | OAuth 2.0 token for the current user.

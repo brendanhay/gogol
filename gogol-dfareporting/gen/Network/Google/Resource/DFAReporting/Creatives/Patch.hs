@@ -58,7 +58,7 @@ type CreativesPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Creative :> Patch '[JSON] Creative
@@ -72,7 +72,7 @@ data CreativesPatch' = CreativesPatch'
     , _cppUserIP      :: !(Maybe Text)
     , _cppProFileId   :: !Int64
     , _cppPayload     :: !Creative
-    , _cppKey         :: !(Maybe Key)
+    , _cppKey         :: !(Maybe AuthKey)
     , _cppId          :: !Int64
     , _cppOAuthToken  :: !(Maybe OAuthToken)
     , _cppFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ cppPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cppKey :: Lens' CreativesPatch' (Maybe Key)
+cppKey :: Lens' CreativesPatch' (Maybe AuthKey)
 cppKey = lens _cppKey (\ s a -> s{_cppKey = a})
 
 -- | Creative ID.

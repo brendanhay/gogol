@@ -58,7 +58,7 @@ type UsersRevokeTokenResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -71,7 +71,7 @@ data UsersRevokeToken' = UsersRevokeToken'
     , _urtEnterpriseId :: !Text
     , _urtUserIP       :: !(Maybe Text)
     , _urtUserId       :: !Text
-    , _urtKey          :: !(Maybe Key)
+    , _urtKey          :: !(Maybe AuthKey)
     , _urtOAuthToken   :: !(Maybe OAuthToken)
     , _urtFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ urtUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-urtKey :: Lens' UsersRevokeToken' (Maybe Key)
+urtKey :: Lens' UsersRevokeToken' (Maybe AuthKey)
 urtKey = lens _urtKey (\ s a -> s{_urtKey = a})
 
 -- | OAuth 2.0 token for the current user.

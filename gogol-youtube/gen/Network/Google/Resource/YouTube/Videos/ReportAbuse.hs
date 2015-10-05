@@ -56,7 +56,7 @@ type VideosReportAbuseResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] VideoAbuseReport :> Post '[JSON] ()
@@ -70,7 +70,7 @@ data VideosReportAbuse' = VideosReportAbuse'
     , _vraUserIP                 :: !(Maybe Text)
     , _vraPayload                :: !VideoAbuseReport
     , _vraOnBehalfOfContentOwner :: !(Maybe Text)
-    , _vraKey                    :: !(Maybe Key)
+    , _vraKey                    :: !(Maybe AuthKey)
     , _vraOAuthToken             :: !(Maybe OAuthToken)
     , _vraFields                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -151,7 +151,7 @@ vraOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vraKey :: Lens' VideosReportAbuse' (Maybe Key)
+vraKey :: Lens' VideosReportAbuse' (Maybe AuthKey)
 vraKey = lens _vraKey (\ s a -> s{_vraKey = a})
 
 -- | OAuth 2.0 token for the current user.

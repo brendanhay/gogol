@@ -69,7 +69,7 @@ type MobileDevicesListResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] MobileDevices
@@ -84,7 +84,7 @@ data MobileDevicesList' = MobileDevicesList'
     , _mdlUserIP      :: !(Maybe Text)
     , _mdlCustomerId  :: !Text
     , _mdlSortOrder   :: !(Maybe MobileDevicesListSortOrder)
-    , _mdlKey         :: !(Maybe Key)
+    , _mdlKey         :: !(Maybe AuthKey)
     , _mdlQuery       :: !(Maybe Text)
     , _mdlProjection  :: !(Maybe MobileDevicesListProjection)
     , _mdlPageToken   :: !(Maybe Text)
@@ -181,7 +181,7 @@ mdlSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mdlKey :: Lens' MobileDevicesList' (Maybe Key)
+mdlKey :: Lens' MobileDevicesList' (Maybe AuthKey)
 mdlKey = lens _mdlKey (\ s a -> s{_mdlKey = a})
 
 -- | Search string in the format given at

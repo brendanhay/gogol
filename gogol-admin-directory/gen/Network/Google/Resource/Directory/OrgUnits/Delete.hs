@@ -57,7 +57,7 @@ type OrgUnitsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -70,7 +70,7 @@ data OrgUnitsDelete' = OrgUnitsDelete'
     , _oudUserIP      :: !(Maybe Text)
     , _oudOrgUnitPath :: ![Text]
     , _oudCustomerId  :: !Text
-    , _oudKey         :: !(Maybe Key)
+    , _oudKey         :: !(Maybe AuthKey)
     , _oudOAuthToken  :: !(Maybe OAuthToken)
     , _oudFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ oudCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oudKey :: Lens' OrgUnitsDelete' (Maybe Key)
+oudKey :: Lens' OrgUnitsDelete' (Maybe AuthKey)
 oudKey = lens _oudKey (\ s a -> s{_oudKey = a})
 
 -- | OAuth 2.0 token for the current user.

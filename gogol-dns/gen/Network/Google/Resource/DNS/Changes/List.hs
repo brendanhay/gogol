@@ -65,7 +65,7 @@ type ChangesListResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ChangesListResponse
@@ -79,7 +79,7 @@ data ChangesList' = ChangesList'
     , _clProject     :: !Text
     , _clUserIP      :: !(Maybe Text)
     , _clSortOrder   :: !(Maybe Text)
-    , _clKey         :: !(Maybe Key)
+    , _clKey         :: !(Maybe AuthKey)
     , _clPageToken   :: !(Maybe Text)
     , _clOAuthToken  :: !(Maybe OAuthToken)
     , _clManagedZone :: !Text
@@ -166,7 +166,7 @@ clSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' ChangesList' (Maybe Key)
+clKey :: Lens' ChangesList' (Maybe AuthKey)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | Optional. A tag returned by a previous list request that was truncated.

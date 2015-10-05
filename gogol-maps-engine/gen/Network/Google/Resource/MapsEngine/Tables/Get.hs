@@ -56,7 +56,7 @@ type TablesGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Table
 
@@ -67,7 +67,7 @@ data TablesGet' = TablesGet'
     { _tgQuotaUser   :: !(Maybe Text)
     , _tgPrettyPrint :: !Bool
     , _tgUserIP      :: !(Maybe Text)
-    , _tgKey         :: !(Maybe Key)
+    , _tgKey         :: !(Maybe AuthKey)
     , _tgVersion     :: !(Maybe TablesGetVersion)
     , _tgId          :: !Text
     , _tgOAuthToken  :: !(Maybe OAuthToken)
@@ -129,7 +129,7 @@ tgUserIP = lens _tgUserIP (\ s a -> s{_tgUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tgKey :: Lens' TablesGet' (Maybe Key)
+tgKey :: Lens' TablesGet' (Maybe AuthKey)
 tgKey = lens _tgKey (\ s a -> s{_tgKey = a})
 
 tgVersion :: Lens' TablesGet' (Maybe TablesGetVersion)

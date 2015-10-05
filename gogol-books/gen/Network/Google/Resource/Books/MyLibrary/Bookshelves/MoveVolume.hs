@@ -62,7 +62,7 @@ type MyLibraryBookshelvesMoveVolumeResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -74,7 +74,7 @@ data MyLibraryBookshelvesMoveVolume' = MyLibraryBookshelvesMoveVolume'
     , _mlbmvPrettyPrint    :: !Bool
     , _mlbmvUserIP         :: !(Maybe Text)
     , _mlbmvShelf          :: !Text
-    , _mlbmvKey            :: !(Maybe Key)
+    , _mlbmvKey            :: !(Maybe AuthKey)
     , _mlbmvVolumeId       :: !Text
     , _mlbmvSource         :: !(Maybe Text)
     , _mlbmvOAuthToken     :: !(Maybe OAuthToken)
@@ -152,7 +152,7 @@ mlbmvShelf
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlbmvKey :: Lens' MyLibraryBookshelvesMoveVolume' (Maybe Key)
+mlbmvKey :: Lens' MyLibraryBookshelvesMoveVolume' (Maybe AuthKey)
 mlbmvKey = lens _mlbmvKey (\ s a -> s{_mlbmvKey = a})
 
 -- | ID of volume to move.

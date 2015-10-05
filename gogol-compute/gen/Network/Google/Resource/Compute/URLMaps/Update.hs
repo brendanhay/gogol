@@ -58,7 +58,7 @@ type URLMapsUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] URLMap :> Put '[JSON] Operation
@@ -73,7 +73,7 @@ data URLMapsUpdate' = URLMapsUpdate'
     , _umuProject     :: !Text
     , _umuUserIP      :: !(Maybe Text)
     , _umuPayload     :: !URLMap
-    , _umuKey         :: !(Maybe Key)
+    , _umuKey         :: !(Maybe AuthKey)
     , _umuOAuthToken  :: !(Maybe OAuthToken)
     , _umuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -154,7 +154,7 @@ umuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umuKey :: Lens' URLMapsUpdate' (Maybe Key)
+umuKey :: Lens' URLMapsUpdate' (Maybe AuthKey)
 umuKey = lens _umuKey (\ s a -> s{_umuKey = a})
 
 -- | OAuth 2.0 token for the current user.

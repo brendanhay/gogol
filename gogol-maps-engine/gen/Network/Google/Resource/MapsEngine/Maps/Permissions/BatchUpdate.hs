@@ -59,7 +59,7 @@ type MapsPermissionsBatchUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] PermissionsBatchUpdateRequest :>
@@ -75,7 +75,7 @@ data MapsPermissionsBatchUpdate' = MapsPermissionsBatchUpdate'
     , _mpbuPrettyPrint :: !Bool
     , _mpbuUserIP      :: !(Maybe Text)
     , _mpbuPayload     :: !PermissionsBatchUpdateRequest
-    , _mpbuKey         :: !(Maybe Key)
+    , _mpbuKey         :: !(Maybe AuthKey)
     , _mpbuId          :: !Text
     , _mpbuOAuthToken  :: !(Maybe OAuthToken)
     , _mpbuFields      :: !(Maybe Text)
@@ -144,7 +144,7 @@ mpbuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpbuKey :: Lens' MapsPermissionsBatchUpdate' (Maybe Key)
+mpbuKey :: Lens' MapsPermissionsBatchUpdate' (Maybe AuthKey)
 mpbuKey = lens _mpbuKey (\ s a -> s{_mpbuKey = a})
 
 -- | The ID of the asset to which permissions will be added.

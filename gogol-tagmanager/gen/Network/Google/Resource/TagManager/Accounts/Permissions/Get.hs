@@ -57,7 +57,7 @@ type AccountsPermissionsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] UserAccess
 
@@ -69,7 +69,7 @@ data AccountsPermissionsGet' = AccountsPermissionsGet'
     , _apgPrettyPrint  :: !Bool
     , _apgUserIP       :: !(Maybe Text)
     , _apgAccountId    :: !Text
-    , _apgKey          :: !(Maybe Key)
+    , _apgKey          :: !(Maybe AuthKey)
     , _apgOAuthToken   :: !(Maybe OAuthToken)
     , _apgPermissionId :: !Text
     , _apgFields       :: !(Maybe Text)
@@ -137,7 +137,7 @@ apgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apgKey :: Lens' AccountsPermissionsGet' (Maybe Key)
+apgKey :: Lens' AccountsPermissionsGet' (Maybe AuthKey)
 apgKey = lens _apgKey (\ s a -> s{_apgKey = a})
 
 -- | OAuth 2.0 token for the current user.

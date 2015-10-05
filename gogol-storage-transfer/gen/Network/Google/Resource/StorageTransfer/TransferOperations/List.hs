@@ -76,7 +76,7 @@ type TransferOperationsListResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListOperationsResponse
@@ -97,7 +97,7 @@ data TransferOperationsList' = TransferOperationsList'
     , _tolAccessToken    :: !(Maybe Text)
     , _tolUploadType     :: !(Maybe Text)
     , _tolBearerToken    :: !(Maybe Text)
-    , _tolKey            :: !(Maybe Key)
+    , _tolKey            :: !(Maybe AuthKey)
     , _tolName           :: !Text
     , _tolFilter         :: !(Maybe Text)
     , _tolPageToken      :: !(Maybe Text)
@@ -213,7 +213,7 @@ tolBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tolKey :: Lens' TransferOperationsList' (Maybe Key)
+tolKey :: Lens' TransferOperationsList' (Maybe AuthKey)
 tolKey = lens _tolKey (\ s a -> s{_tolKey = a})
 
 -- | The value \`transferOperations\`.

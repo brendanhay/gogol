@@ -61,7 +61,7 @@ type NotificationsListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] Notifications
@@ -74,7 +74,7 @@ data NotificationsList' = NotificationsList'
     , _nlPrettyPrint :: !Bool
     , _nlUserIP      :: !(Maybe Text)
     , _nlCustomer    :: !Text
-    , _nlKey         :: !(Maybe Key)
+    , _nlKey         :: !(Maybe AuthKey)
     , _nlLanguage    :: !(Maybe Text)
     , _nlPageToken   :: !(Maybe Text)
     , _nlOAuthToken  :: !(Maybe OAuthToken)
@@ -148,7 +148,7 @@ nlCustomer
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-nlKey :: Lens' NotificationsList' (Maybe Key)
+nlKey :: Lens' NotificationsList' (Maybe AuthKey)
 nlKey = lens _nlKey (\ s a -> s{_nlKey = a})
 
 -- | The ISO 639-1 code of the language notifications are returned in. The

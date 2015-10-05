@@ -61,7 +61,7 @@ type UsersDataSourcesUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] DataSource :> Put '[JSON] DataSource
@@ -80,7 +80,7 @@ data UsersDataSourcesUpdate' = UsersDataSourcesUpdate'
     , _udsuDataSourceId :: !Text
     , _udsuPayload      :: !DataSource
     , _udsuUserId       :: !Text
-    , _udsuKey          :: !(Maybe Key)
+    , _udsuKey          :: !(Maybe AuthKey)
     , _udsuOAuthToken   :: !(Maybe OAuthToken)
     , _udsuFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -164,7 +164,7 @@ udsuUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udsuKey :: Lens' UsersDataSourcesUpdate' (Maybe Key)
+udsuKey :: Lens' UsersDataSourcesUpdate' (Maybe AuthKey)
 udsuKey = lens _udsuKey (\ s a -> s{_udsuKey = a})
 
 -- | OAuth 2.0 token for the current user.

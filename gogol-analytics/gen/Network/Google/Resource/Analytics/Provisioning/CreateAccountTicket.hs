@@ -54,7 +54,7 @@ type ProvisioningCreateAccountTicketResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] AccountTicket :>
@@ -68,7 +68,7 @@ data ProvisioningCreateAccountTicket' = ProvisioningCreateAccountTicket'
     , _pcatPrettyPrint :: !Bool
     , _pcatUserIP      :: !(Maybe Text)
     , _pcatPayload     :: !AccountTicket
-    , _pcatKey         :: !(Maybe Key)
+    , _pcatKey         :: !(Maybe AuthKey)
     , _pcatOAuthToken  :: !(Maybe OAuthToken)
     , _pcatFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -132,7 +132,7 @@ pcatPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pcatKey :: Lens' ProvisioningCreateAccountTicket' (Maybe Key)
+pcatKey :: Lens' ProvisioningCreateAccountTicket' (Maybe AuthKey)
 pcatKey = lens _pcatKey (\ s a -> s{_pcatKey = a})
 
 -- | OAuth 2.0 token for the current user.

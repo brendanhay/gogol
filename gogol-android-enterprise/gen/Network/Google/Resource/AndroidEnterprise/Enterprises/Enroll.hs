@@ -56,7 +56,7 @@ type EnterprisesEnrollResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Enterprise :> Post '[JSON] Enterprise
@@ -70,7 +70,7 @@ data EnterprisesEnroll' = EnterprisesEnroll'
     , _eeUserIP      :: !(Maybe Text)
     , _eeToken       :: !Text
     , _eePayload     :: !Enterprise
-    , _eeKey         :: !(Maybe Key)
+    , _eeKey         :: !(Maybe AuthKey)
     , _eeOAuthToken  :: !(Maybe OAuthToken)
     , _eeFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -140,7 +140,7 @@ eePayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eeKey :: Lens' EnterprisesEnroll' (Maybe Key)
+eeKey :: Lens' EnterprisesEnroll' (Maybe AuthKey)
 eeKey = lens _eeKey (\ s a -> s{_eeKey = a})
 
 -- | OAuth 2.0 token for the current user.

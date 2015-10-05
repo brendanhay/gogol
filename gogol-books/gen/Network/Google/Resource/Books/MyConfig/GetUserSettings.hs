@@ -53,7 +53,7 @@ type MyConfigGetUserSettingsResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Usersettings
 
@@ -64,7 +64,7 @@ data MyConfigGetUserSettings' = MyConfigGetUserSettings'
     { _mcgusQuotaUser   :: !(Maybe Text)
     , _mcgusPrettyPrint :: !Bool
     , _mcgusUserIP      :: !(Maybe Text)
-    , _mcgusKey         :: !(Maybe Key)
+    , _mcgusKey         :: !(Maybe AuthKey)
     , _mcgusOAuthToken  :: !(Maybe OAuthToken)
     , _mcgusFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -119,7 +119,7 @@ mcgusUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcgusKey :: Lens' MyConfigGetUserSettings' (Maybe Key)
+mcgusKey :: Lens' MyConfigGetUserSettings' (Maybe AuthKey)
 mcgusKey = lens _mcgusKey (\ s a -> s{_mcgusKey = a})
 
 -- | OAuth 2.0 token for the current user.

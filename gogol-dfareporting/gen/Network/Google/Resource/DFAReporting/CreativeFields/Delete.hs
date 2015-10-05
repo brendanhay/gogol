@@ -57,7 +57,7 @@ type CreativeFieldsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -69,7 +69,7 @@ data CreativeFieldsDelete' = CreativeFieldsDelete'
     , _cfdPrettyPrint :: !Bool
     , _cfdUserIP      :: !(Maybe Text)
     , _cfdProFileId   :: !Int64
-    , _cfdKey         :: !(Maybe Key)
+    , _cfdKey         :: !(Maybe AuthKey)
     , _cfdId          :: !Int64
     , _cfdOAuthToken  :: !(Maybe OAuthToken)
     , _cfdFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ cfdProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cfdKey :: Lens' CreativeFieldsDelete' (Maybe Key)
+cfdKey :: Lens' CreativeFieldsDelete' (Maybe AuthKey)
 cfdKey = lens _cfdKey (\ s a -> s{_cfdKey = a})
 
 -- | Creative Field ID

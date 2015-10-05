@@ -77,7 +77,7 @@ type EventTagsListResource =
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "userIp" Text :>
                                      QueryParam "fields" Text :>
-                                       QueryParam "key" Key :>
+                                       QueryParam "key" AuthKey :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] EventTagsListResponse
@@ -98,7 +98,7 @@ data EventTagsList' = EventTagsList'
     , _etlIds             :: !(Maybe [Int64])
     , _etlProFileId       :: !Int64
     , _etlSortOrder       :: !(Maybe EventTagsListSortOrder)
-    , _etlKey             :: !(Maybe Key)
+    , _etlKey             :: !(Maybe AuthKey)
     , _etlAdId            :: !(Maybe Int64)
     , _etlSortField       :: !(Maybe EventTagsListSortField)
     , _etlOAuthToken      :: !(Maybe OAuthToken)
@@ -261,7 +261,7 @@ etlSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-etlKey :: Lens' EventTagsList' (Maybe Key)
+etlKey :: Lens' EventTagsList' (Maybe AuthKey)
 etlKey = lens _etlKey (\ s a -> s{_etlKey = a})
 
 -- | Select only event tags that belong to this ad.

@@ -55,7 +55,7 @@ type RastersPatchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Raster :> Patch '[JSON] ()
@@ -68,7 +68,7 @@ data RastersPatch' = RastersPatch'
     , _rPrettyPrint :: !Bool
     , _rUserIP      :: !(Maybe Text)
     , _rPayload     :: !Raster
-    , _rKey         :: !(Maybe Key)
+    , _rKey         :: !(Maybe AuthKey)
     , _rId          :: !Text
     , _rOAuthToken  :: !(Maybe OAuthToken)
     , _rFields      :: !(Maybe Text)
@@ -133,7 +133,7 @@ rPayload = lens _rPayload (\ s a -> s{_rPayload = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rKey :: Lens' RastersPatch' (Maybe Key)
+rKey :: Lens' RastersPatch' (Maybe AuthKey)
 rKey = lens _rKey (\ s a -> s{_rKey = a})
 
 -- | The ID of the raster.

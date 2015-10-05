@@ -61,7 +61,7 @@ type CommentsListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] CommentFeed
 
@@ -74,7 +74,7 @@ data CommentsList' = CommentsList'
     , _comUserIP      :: !(Maybe Text)
     , _comActivityId  :: !Text
     , _comSortOrder   :: !CommentsListSortOrder
-    , _comKey         :: !(Maybe Key)
+    , _comKey         :: !(Maybe AuthKey)
     , _comPageToken   :: !(Maybe Text)
     , _comOAuthToken  :: !(Maybe OAuthToken)
     , _comMaxResults  :: !Word32
@@ -154,7 +154,7 @@ comSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-comKey :: Lens' CommentsList' (Maybe Key)
+comKey :: Lens' CommentsList' (Maybe AuthKey)
 comKey = lens _comKey (\ s a -> s{_comKey = a})
 
 -- | The continuation token, which is used to page through large result sets.

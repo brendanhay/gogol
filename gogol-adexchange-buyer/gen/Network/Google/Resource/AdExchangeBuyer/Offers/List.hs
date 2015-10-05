@@ -53,7 +53,7 @@ type OffersListResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] ListOffersRequest :>
@@ -67,7 +67,7 @@ data OffersList' = OffersList'
     , _olPrettyPrint :: !Bool
     , _olUserIP      :: !(Maybe Text)
     , _olPayload     :: !ListOffersRequest
-    , _olKey         :: !(Maybe Key)
+    , _olKey         :: !(Maybe AuthKey)
     , _olOAuthToken  :: !(Maybe OAuthToken)
     , _olFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -129,7 +129,7 @@ olPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-olKey :: Lens' OffersList' (Maybe Key)
+olKey :: Lens' OffersList' (Maybe AuthKey)
 olKey = lens _olKey (\ s a -> s{_olKey = a})
 
 -- | OAuth 2.0 token for the current user.

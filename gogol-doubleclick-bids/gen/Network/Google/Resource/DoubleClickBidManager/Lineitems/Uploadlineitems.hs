@@ -54,7 +54,7 @@ type LineitemsUploadlineitemsResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] UploadLineItemsRequest :>
@@ -68,7 +68,7 @@ data LineitemsUploadlineitems' = LineitemsUploadlineitems'
     , _luPrettyPrint :: !Bool
     , _luUserIP      :: !(Maybe Text)
     , _luPayload     :: !UploadLineItemsRequest
-    , _luKey         :: !(Maybe Key)
+    , _luKey         :: !(Maybe AuthKey)
     , _luOAuthToken  :: !(Maybe OAuthToken)
     , _luFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -130,7 +130,7 @@ luPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-luKey :: Lens' LineitemsUploadlineitems' (Maybe Key)
+luKey :: Lens' LineitemsUploadlineitems' (Maybe AuthKey)
 luKey = lens _luKey (\ s a -> s{_luKey = a})
 
 -- | OAuth 2.0 token for the current user.

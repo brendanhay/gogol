@@ -58,7 +58,7 @@ type UsersDraftsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Draft
 
@@ -71,7 +71,7 @@ data UsersDraftsGet' = UsersDraftsGet'
     , _udgUserIP      :: !(Maybe Text)
     , _udgFormat      :: !UsersDraftsGetFormat
     , _udgUserId      :: !Text
-    , _udgKey         :: !(Maybe Key)
+    , _udgKey         :: !(Maybe AuthKey)
     , _udgId          :: !Text
     , _udgOAuthToken  :: !(Maybe OAuthToken)
     , _udgFields      :: !(Maybe Text)
@@ -148,7 +148,7 @@ udgUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udgKey :: Lens' UsersDraftsGet' (Maybe Key)
+udgKey :: Lens' UsersDraftsGet' (Maybe AuthKey)
 udgKey = lens _udgKey (\ s a -> s{_udgKey = a})
 
 -- | The ID of the draft to retrieve.

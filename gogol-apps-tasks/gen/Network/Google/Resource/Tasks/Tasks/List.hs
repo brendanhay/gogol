@@ -75,7 +75,7 @@ type TasksListResource =
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "userIp" Text :>
                                      QueryParam "fields" Text :>
-                                       QueryParam "key" Key :>
+                                       QueryParam "key" AuthKey :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] Tasks
@@ -93,7 +93,7 @@ data TasksList' = TasksList'
     , _tlDueMin        :: !(Maybe Text)
     , _tlShowHidden    :: !(Maybe Bool)
     , _tlCompletedMax  :: !(Maybe Text)
-    , _tlKey           :: !(Maybe Key)
+    , _tlKey           :: !(Maybe AuthKey)
     , _tlUpdatedMin    :: !(Maybe Text)
     , _tlTaskList      :: !Text
     , _tlCompletedMin  :: !(Maybe Text)
@@ -222,7 +222,7 @@ tlCompletedMax
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tlKey :: Lens' TasksList' (Maybe Key)
+tlKey :: Lens' TasksList' (Maybe AuthKey)
 tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | Lower bound for a task\'s last modification time (as a RFC 3339

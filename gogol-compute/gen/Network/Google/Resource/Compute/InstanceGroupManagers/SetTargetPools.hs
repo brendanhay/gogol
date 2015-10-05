@@ -63,7 +63,7 @@ type InstanceGroupManagersSetTargetPoolsResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON]
@@ -83,7 +83,7 @@ data InstanceGroupManagersSetTargetPools' = InstanceGroupManagersSetTargetPools'
     , _igmstpUserIP               :: !(Maybe Text)
     , _igmstpZone                 :: !Text
     , _igmstpPayload              :: !InstanceGroupManagersSetTargetPoolsRequest
-    , _igmstpKey                  :: !(Maybe Key)
+    , _igmstpKey                  :: !(Maybe AuthKey)
     , _igmstpOAuthToken           :: !(Maybe OAuthToken)
     , _igmstpFields               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -177,7 +177,7 @@ igmstpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmstpKey :: Lens' InstanceGroupManagersSetTargetPools' (Maybe Key)
+igmstpKey :: Lens' InstanceGroupManagersSetTargetPools' (Maybe AuthKey)
 igmstpKey
   = lens _igmstpKey (\ s a -> s{_igmstpKey = a})
 

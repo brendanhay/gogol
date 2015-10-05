@@ -54,7 +54,7 @@ type PermissionsGetIdForEmailResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] PermissionId
 
@@ -66,7 +66,7 @@ data PermissionsGetIdForEmail' = PermissionsGetIdForEmail'
     , _pgifeQuotaUser   :: !(Maybe Text)
     , _pgifePrettyPrint :: !Bool
     , _pgifeUserIP      :: !(Maybe Text)
-    , _pgifeKey         :: !(Maybe Key)
+    , _pgifeKey         :: !(Maybe AuthKey)
     , _pgifeOAuthToken  :: !(Maybe OAuthToken)
     , _pgifeFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -130,7 +130,7 @@ pgifeUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgifeKey :: Lens' PermissionsGetIdForEmail' (Maybe Key)
+pgifeKey :: Lens' PermissionsGetIdForEmail' (Maybe AuthKey)
 pgifeKey = lens _pgifeKey (\ s a -> s{_pgifeKey = a})
 
 -- | OAuth 2.0 token for the current user.

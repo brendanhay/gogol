@@ -55,7 +55,7 @@ type LayersCreateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Layer :> Post '[JSON] Layer
@@ -69,7 +69,7 @@ data LayersCreate' = LayersCreate'
     , _lcUserIP      :: !(Maybe Text)
     , _lcProcess     :: !(Maybe Bool)
     , _lcPayload     :: !Layer
-    , _lcKey         :: !(Maybe Key)
+    , _lcKey         :: !(Maybe AuthKey)
     , _lcOAuthToken  :: !(Maybe OAuthToken)
     , _lcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -139,7 +139,7 @@ lcPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lcKey :: Lens' LayersCreate' (Maybe Key)
+lcKey :: Lens' LayersCreate' (Maybe AuthKey)
 lcKey = lens _lcKey (\ s a -> s{_lcKey = a})
 
 -- | OAuth 2.0 token for the current user.

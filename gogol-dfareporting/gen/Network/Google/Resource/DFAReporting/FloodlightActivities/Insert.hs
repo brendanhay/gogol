@@ -56,7 +56,7 @@ type FloodlightActivitiesInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] FloodlightActivity :>
@@ -71,7 +71,7 @@ data FloodlightActivitiesInsert' = FloodlightActivitiesInsert'
     , _faiUserIP      :: !(Maybe Text)
     , _faiProFileId   :: !Int64
     , _faiPayload     :: !FloodlightActivity
-    , _faiKey         :: !(Maybe Key)
+    , _faiKey         :: !(Maybe AuthKey)
     , _faiOAuthToken  :: !(Maybe OAuthToken)
     , _faiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ faiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-faiKey :: Lens' FloodlightActivitiesInsert' (Maybe Key)
+faiKey :: Lens' FloodlightActivitiesInsert' (Maybe AuthKey)
 faiKey = lens _faiKey (\ s a -> s{_faiKey = a})
 
 -- | OAuth 2.0 token for the current user.

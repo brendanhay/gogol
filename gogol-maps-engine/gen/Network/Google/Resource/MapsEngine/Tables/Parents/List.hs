@@ -59,7 +59,7 @@ type TablesParentsListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ParentsListResponse
@@ -71,7 +71,7 @@ data TablesParentsList' = TablesParentsList'
     { _tabQuotaUser   :: !(Maybe Text)
     , _tabPrettyPrint :: !Bool
     , _tabUserIP      :: !(Maybe Text)
-    , _tabKey         :: !(Maybe Key)
+    , _tabKey         :: !(Maybe AuthKey)
     , _tabId          :: !Text
     , _tabPageToken   :: !(Maybe Text)
     , _tabOAuthToken  :: !(Maybe OAuthToken)
@@ -138,7 +138,7 @@ tabUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tabKey :: Lens' TablesParentsList' (Maybe Key)
+tabKey :: Lens' TablesParentsList' (Maybe AuthKey)
 tabKey = lens _tabKey (\ s a -> s{_tabKey = a})
 
 -- | The ID of the table whose parents will be listed.

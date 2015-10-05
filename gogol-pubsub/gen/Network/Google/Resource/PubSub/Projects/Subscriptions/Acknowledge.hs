@@ -71,7 +71,7 @@ type ProjectsSubscriptionsAcknowledgeResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] AcknowledgeRequest :>
@@ -94,7 +94,7 @@ data ProjectsSubscriptionsAcknowledge' = ProjectsSubscriptionsAcknowledge'
     , _psaUploadType     :: !(Maybe Text)
     , _psaPayload        :: !AcknowledgeRequest
     , _psaBearerToken    :: !(Maybe Text)
-    , _psaKey            :: !(Maybe Key)
+    , _psaKey            :: !(Maybe AuthKey)
     , _psaOAuthToken     :: !(Maybe OAuthToken)
     , _psaSubscription   :: !Text
     , _psaFields         :: !(Maybe Text)
@@ -207,7 +207,7 @@ psaBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psaKey :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe Key)
+psaKey :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe AuthKey)
 psaKey = lens _psaKey (\ s a -> s{_psaKey = a})
 
 -- | OAuth 2.0 token for the current user.

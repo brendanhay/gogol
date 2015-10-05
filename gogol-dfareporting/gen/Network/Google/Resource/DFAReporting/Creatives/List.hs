@@ -88,7 +88,7 @@ type CreativesListResource =
                                              QueryParam "prettyPrint" Bool :>
                                                QueryParam "userIp" Text :>
                                                  QueryParam "fields" Text :>
-                                                   QueryParam "key" Key :>
+                                                   QueryParam "key" AuthKey :>
                                                      QueryParam "oauth_token"
                                                        OAuthToken
                                                        :>
@@ -115,7 +115,7 @@ data CreativesList' = CreativesList'
     , _clProFileId            :: !Int64
     , _clSortOrder            :: !(Maybe CreativesListSortOrder)
     , _clActive               :: !(Maybe Bool)
-    , _clKey                  :: !(Maybe Key)
+    , _clKey                  :: !(Maybe AuthKey)
     , _clCreativeFieldIds     :: !(Maybe [Int64])
     , _clPageToken            :: !(Maybe Text)
     , _clSortField            :: !(Maybe CreativesListSortField)
@@ -299,7 +299,7 @@ clActive = lens _clActive (\ s a -> s{_clActive = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' CreativesList' (Maybe Key)
+clKey :: Lens' CreativesList' (Maybe AuthKey)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | Select only creatives with these creative field IDs.

@@ -55,7 +55,7 @@ type ReferencesetsSearchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] SearchReferenceSetsRequest :>
@@ -70,7 +70,7 @@ data ReferencesetsSearch' = ReferencesetsSearch'
     , _rssPrettyPrint :: !Bool
     , _rssUserIP      :: !(Maybe Text)
     , _rssPayload     :: !SearchReferenceSetsRequest
-    , _rssKey         :: !(Maybe Key)
+    , _rssKey         :: !(Maybe AuthKey)
     , _rssOAuthToken  :: !(Maybe OAuthToken)
     , _rssFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -133,7 +133,7 @@ rssPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rssKey :: Lens' ReferencesetsSearch' (Maybe Key)
+rssKey :: Lens' ReferencesetsSearch' (Maybe AuthKey)
 rssKey = lens _rssKey (\ s a -> s{_rssKey = a})
 
 -- | OAuth 2.0 token for the current user.

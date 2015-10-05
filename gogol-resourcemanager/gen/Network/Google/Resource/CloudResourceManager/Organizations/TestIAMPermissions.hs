@@ -68,7 +68,7 @@ type OrganizationsTestIAMPermissionsResource =
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] TestIAMPermissionsRequest
@@ -88,7 +88,7 @@ data OrganizationsTestIAMPermissions' = OrganizationsTestIAMPermissions'
     , _otipUploadType     :: !(Maybe Text)
     , _otipPayload        :: !TestIAMPermissionsRequest
     , _otipBearerToken    :: !(Maybe Text)
-    , _otipKey            :: !(Maybe Key)
+    , _otipKey            :: !(Maybe AuthKey)
     , _otipResource       :: !Text
     , _otipOAuthToken     :: !(Maybe OAuthToken)
     , _otipFields         :: !(Maybe Text)
@@ -203,7 +203,7 @@ otipBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-otipKey :: Lens' OrganizationsTestIAMPermissions' (Maybe Key)
+otipKey :: Lens' OrganizationsTestIAMPermissions' (Maybe AuthKey)
 otipKey = lens _otipKey (\ s a -> s{_otipKey = a})
 
 -- | REQUIRED: The resource for which policy detail is being requested.

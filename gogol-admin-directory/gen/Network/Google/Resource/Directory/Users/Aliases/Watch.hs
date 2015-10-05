@@ -59,7 +59,7 @@ type UsersAliasesWatchResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Channel :> Post '[JSON] Channel
@@ -73,7 +73,7 @@ data UsersAliasesWatch' = UsersAliasesWatch'
     , _uawPrettyPrint :: !Bool
     , _uawUserIP      :: !(Maybe Text)
     , _uawPayload     :: !Channel
-    , _uawKey         :: !(Maybe Key)
+    , _uawKey         :: !(Maybe AuthKey)
     , _uawOAuthToken  :: !(Maybe OAuthToken)
     , _uawUserKey     :: !Text
     , _uawFields      :: !(Maybe Text)
@@ -148,7 +148,7 @@ uawPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uawKey :: Lens' UsersAliasesWatch' (Maybe Key)
+uawKey :: Lens' UsersAliasesWatch' (Maybe AuthKey)
 uawKey = lens _uawKey (\ s a -> s{_uawKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -65,7 +65,7 @@ type InstancesStopResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
@@ -83,7 +83,7 @@ data InstancesStop' = InstancesStop'
     , _isProject     :: !Text
     , _isUserIP      :: !(Maybe Text)
     , _isZone        :: !Text
-    , _isKey         :: !(Maybe Key)
+    , _isKey         :: !(Maybe AuthKey)
     , _isOAuthToken  :: !(Maybe OAuthToken)
     , _isFields      :: !(Maybe Text)
     , _isInstance    :: !Text
@@ -158,7 +158,7 @@ isZone = lens _isZone (\ s a -> s{_isZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-isKey :: Lens' InstancesStop' (Maybe Key)
+isKey :: Lens' InstancesStop' (Maybe AuthKey)
 isKey = lens _isKey (\ s a -> s{_isKey = a})
 
 -- | OAuth 2.0 token for the current user.

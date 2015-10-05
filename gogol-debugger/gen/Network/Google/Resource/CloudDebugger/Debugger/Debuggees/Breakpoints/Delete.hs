@@ -71,7 +71,7 @@ type DebuggerDebuggeesBreakpointsDeleteResource =
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Delete '[JSON] Empty
@@ -89,7 +89,7 @@ data DebuggerDebuggeesBreakpointsDelete' = DebuggerDebuggeesBreakpointsDelete'
     , _ddbdUploadType     :: !(Maybe Text)
     , _ddbdBreakpointId   :: !Text
     , _ddbdBearerToken    :: !(Maybe Text)
-    , _ddbdKey            :: !(Maybe Key)
+    , _ddbdKey            :: !(Maybe AuthKey)
     , _ddbdDebuggeeId     :: !Text
     , _ddbdOAuthToken     :: !(Maybe OAuthToken)
     , _ddbdFields         :: !(Maybe Text)
@@ -205,7 +205,7 @@ ddbdBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ddbdKey :: Lens' DebuggerDebuggeesBreakpointsDelete' (Maybe Key)
+ddbdKey :: Lens' DebuggerDebuggeesBreakpointsDelete' (Maybe AuthKey)
 ddbdKey = lens _ddbdKey (\ s a -> s{_ddbdKey = a})
 
 -- | The debuggee id to delete the breakpoint from.

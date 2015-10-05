@@ -59,7 +59,7 @@ type AssetsParentsListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ParentsListResponse
@@ -71,7 +71,7 @@ data AssetsParentsList' = AssetsParentsList'
     { _assQuotaUser   :: !(Maybe Text)
     , _assPrettyPrint :: !Bool
     , _assUserIP      :: !(Maybe Text)
-    , _assKey         :: !(Maybe Key)
+    , _assKey         :: !(Maybe AuthKey)
     , _assId          :: !Text
     , _assPageToken   :: !(Maybe Text)
     , _assOAuthToken  :: !(Maybe OAuthToken)
@@ -138,7 +138,7 @@ assUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-assKey :: Lens' AssetsParentsList' (Maybe Key)
+assKey :: Lens' AssetsParentsList' (Maybe AuthKey)
 assKey = lens _assKey (\ s a -> s{_assKey = a})
 
 -- | The ID of the asset whose parents will be listed.

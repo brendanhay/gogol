@@ -52,7 +52,7 @@ type ContactsListResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ContactsListResponse
@@ -64,7 +64,7 @@ data ContactsList' = ContactsList'
     { _clQuotaUser   :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
     , _clUserIP      :: !(Maybe Text)
-    , _clKey         :: !(Maybe Key)
+    , _clKey         :: !(Maybe AuthKey)
     , _clOAuthToken  :: !(Maybe OAuthToken)
     , _clFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -117,7 +117,7 @@ clUserIP = lens _clUserIP (\ s a -> s{_clUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' ContactsList' (Maybe Key)
+clKey :: Lens' ContactsList' (Maybe AuthKey)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | OAuth 2.0 token for the current user.

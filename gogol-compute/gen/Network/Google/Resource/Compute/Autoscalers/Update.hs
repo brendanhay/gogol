@@ -61,7 +61,7 @@ type AutoscalersUpdateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Autoscaler :> Put '[JSON] Operation
@@ -77,7 +77,7 @@ data AutoscalersUpdate' = AutoscalersUpdate'
     , _auUserIP      :: !(Maybe Text)
     , _auZone        :: !Text
     , _auPayload     :: !Autoscaler
-    , _auKey         :: !(Maybe Key)
+    , _auKey         :: !(Maybe AuthKey)
     , _auAutoscaler  :: !(Maybe Text)
     , _auOAuthToken  :: !(Maybe OAuthToken)
     , _auFields      :: !(Maybe Text)
@@ -160,7 +160,7 @@ auPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-auKey :: Lens' AutoscalersUpdate' (Maybe Key)
+auKey :: Lens' AutoscalersUpdate' (Maybe AuthKey)
 auKey = lens _auKey (\ s a -> s{_auKey = a})
 
 -- | Name of the autoscaler resource to update.

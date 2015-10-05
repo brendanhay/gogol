@@ -62,7 +62,7 @@ type EventsInsertResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Event :> Post '[JSON] Event
@@ -77,7 +77,7 @@ data EventsInsert' = EventsInsert'
     , _eveUserIP              :: !(Maybe Text)
     , _evePayload             :: !Event
     , _eveMaxAttendees        :: !(Maybe Int32)
-    , _eveKey                 :: !(Maybe Key)
+    , _eveKey                 :: !(Maybe AuthKey)
     , _eveSendNotifications   :: !(Maybe Bool)
     , _eveOAuthToken          :: !(Maybe OAuthToken)
     , _eveSupportsAttachments :: !(Maybe Bool)
@@ -171,7 +171,7 @@ eveMaxAttendees
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eveKey :: Lens' EventsInsert' (Maybe Key)
+eveKey :: Lens' EventsInsert' (Maybe AuthKey)
 eveKey = lens _eveKey (\ s a -> s{_eveKey = a})
 
 -- | Whether to send notifications about the creation of the new event.

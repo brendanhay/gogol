@@ -65,7 +65,7 @@ type ReportsListResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ReportList
@@ -79,7 +79,7 @@ data ReportsList' = ReportsList'
     , _rUserIP      :: !(Maybe Text)
     , _rProFileId   :: !Int64
     , _rSortOrder   :: !ReportsListSortOrder
-    , _rKey         :: !(Maybe Key)
+    , _rKey         :: !(Maybe AuthKey)
     , _rScope       :: !ReportsListScope
     , _rPageToken   :: !(Maybe Text)
     , _rSortField   :: !ReportsListSortField
@@ -164,7 +164,7 @@ rSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rKey :: Lens' ReportsList' (Maybe Key)
+rKey :: Lens' ReportsList' (Maybe AuthKey)
 rKey = lens _rKey (\ s a -> s{_rKey = a})
 
 -- | The scope that defines which results are returned, default is \'MINE\'.

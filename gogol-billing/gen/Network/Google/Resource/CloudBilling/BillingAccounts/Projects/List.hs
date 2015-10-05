@@ -73,7 +73,7 @@ type BillingAccountsProjectsListResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON]
@@ -93,7 +93,7 @@ data BillingAccountsProjectsList' = BillingAccountsProjectsList'
     , _baplAccessToken    :: !(Maybe Text)
     , _baplUploadType     :: !(Maybe Text)
     , _baplBearerToken    :: !(Maybe Text)
-    , _baplKey            :: !(Maybe Key)
+    , _baplKey            :: !(Maybe AuthKey)
     , _baplName           :: !Text
     , _baplPageToken      :: !(Maybe Text)
     , _baplOAuthToken     :: !(Maybe OAuthToken)
@@ -207,7 +207,7 @@ baplBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-baplKey :: Lens' BillingAccountsProjectsList' (Maybe Key)
+baplKey :: Lens' BillingAccountsProjectsList' (Maybe AuthKey)
 baplKey = lens _baplKey (\ s a -> s{_baplKey = a})
 
 -- | The resource name of the billing account associated with the projects

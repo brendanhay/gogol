@@ -58,7 +58,7 @@ type AccountsContainersFoldersListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListFoldersResponse
@@ -72,7 +72,7 @@ data AccountsContainersFoldersList' = AccountsContainersFoldersList'
     , _acflContainerId :: !Text
     , _acflUserIP      :: !(Maybe Text)
     , _acflAccountId   :: !Text
-    , _acflKey         :: !(Maybe Key)
+    , _acflKey         :: !(Maybe AuthKey)
     , _acflOAuthToken  :: !(Maybe OAuthToken)
     , _acflFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -147,7 +147,7 @@ acflAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acflKey :: Lens' AccountsContainersFoldersList' (Maybe Key)
+acflKey :: Lens' AccountsContainersFoldersList' (Maybe AuthKey)
 acflKey = lens _acflKey (\ s a -> s{_acflKey = a})
 
 -- | OAuth 2.0 token for the current user.

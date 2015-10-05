@@ -65,7 +65,7 @@ type PromoOfferGetResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] Offers
 
@@ -79,7 +79,7 @@ data PromoOfferGet' = PromoOfferGet'
     , _pogUserIP       :: !(Maybe Text)
     , _pogSerial       :: !(Maybe Text)
     , _pogDevice       :: !(Maybe Text)
-    , _pogKey          :: !(Maybe Key)
+    , _pogKey          :: !(Maybe AuthKey)
     , _pogModel        :: !(Maybe Text)
     , _pogProduct      :: !(Maybe Text)
     , _pogOAuthToken   :: !(Maybe OAuthToken)
@@ -170,7 +170,7 @@ pogDevice
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pogKey :: Lens' PromoOfferGet' (Maybe Key)
+pogKey :: Lens' PromoOfferGet' (Maybe AuthKey)
 pogKey = lens _pogKey (\ s a -> s{_pogKey = a})
 
 -- | device model

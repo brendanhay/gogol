@@ -63,7 +63,7 @@ type InstancesAddAccessConfigResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] AccessConfig :>
@@ -80,7 +80,7 @@ data InstancesAddAccessConfig' = InstancesAddAccessConfig'
     , _iaacNetworkInterface :: !Text
     , _iaacZone             :: !Text
     , _iaacPayload          :: !AccessConfig
-    , _iaacKey              :: !(Maybe Key)
+    , _iaacKey              :: !(Maybe AuthKey)
     , _iaacOAuthToken       :: !(Maybe OAuthToken)
     , _iaacFields           :: !(Maybe Text)
     , _iaacInstance         :: !Text
@@ -176,7 +176,7 @@ iaacPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iaacKey :: Lens' InstancesAddAccessConfig' (Maybe Key)
+iaacKey :: Lens' InstancesAddAccessConfig' (Maybe AuthKey)
 iaacKey = lens _iaacKey (\ s a -> s{_iaacKey = a})
 
 -- | OAuth 2.0 token for the current user.

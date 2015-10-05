@@ -63,7 +63,7 @@ type ManagementProFileUserLinksInsertResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] EntityUserLink :>
@@ -80,7 +80,7 @@ data ManagementProFileUserLinksInsert' = ManagementProFileUserLinksInsert'
     , _mpfuliProFileId     :: !Text
     , _mpfuliPayload       :: !EntityUserLink
     , _mpfuliAccountId     :: !Text
-    , _mpfuliKey           :: !(Maybe Key)
+    , _mpfuliKey           :: !(Maybe AuthKey)
     , _mpfuliOAuthToken    :: !(Maybe OAuthToken)
     , _mpfuliFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -175,7 +175,7 @@ mpfuliAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpfuliKey :: Lens' ManagementProFileUserLinksInsert' (Maybe Key)
+mpfuliKey :: Lens' ManagementProFileUserLinksInsert' (Maybe AuthKey)
 mpfuliKey
   = lens _mpfuliKey (\ s a -> s{_mpfuliKey = a})
 

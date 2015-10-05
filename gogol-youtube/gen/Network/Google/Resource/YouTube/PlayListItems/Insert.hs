@@ -57,7 +57,7 @@ type PlayListItemsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] PlayListItem :>
@@ -73,7 +73,7 @@ data PlayListItemsInsert' = PlayListItemsInsert'
     , _pliiUserIP                 :: !(Maybe Text)
     , _pliiPayload                :: !PlayListItem
     , _pliiOnBehalfOfContentOwner :: !(Maybe Text)
-    , _pliiKey                    :: !(Maybe Key)
+    , _pliiKey                    :: !(Maybe AuthKey)
     , _pliiOAuthToken             :: !(Maybe OAuthToken)
     , _pliiFields                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -165,7 +165,7 @@ pliiOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pliiKey :: Lens' PlayListItemsInsert' (Maybe Key)
+pliiKey :: Lens' PlayListItemsInsert' (Maybe AuthKey)
 pliiKey = lens _pliiKey (\ s a -> s{_pliiKey = a})
 
 -- | OAuth 2.0 token for the current user.

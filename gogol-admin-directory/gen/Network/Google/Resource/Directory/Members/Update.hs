@@ -58,7 +58,7 @@ type MembersUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Member :> Put '[JSON] Member
@@ -73,7 +73,7 @@ data MembersUpdate' = MembersUpdate'
     , _muUserIP      :: !(Maybe Text)
     , _muGroupKey    :: !Text
     , _muPayload     :: !Member
-    , _muKey         :: !(Maybe Key)
+    , _muKey         :: !(Maybe AuthKey)
     , _muOAuthToken  :: !(Maybe OAuthToken)
     , _muFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -155,7 +155,7 @@ muPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-muKey :: Lens' MembersUpdate' (Maybe Key)
+muKey :: Lens' MembersUpdate' (Maybe AuthKey)
 muKey = lens _muKey (\ s a -> s{_muKey = a})
 
 -- | OAuth 2.0 token for the current user.

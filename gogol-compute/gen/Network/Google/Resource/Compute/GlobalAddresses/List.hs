@@ -61,7 +61,7 @@ type GlobalAddressesListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] AddressList
 
@@ -73,7 +73,7 @@ data GlobalAddressesList' = GlobalAddressesList'
     , _galPrettyPrint :: !Bool
     , _galProject     :: !Text
     , _galUserIP      :: !(Maybe Text)
-    , _galKey         :: !(Maybe Key)
+    , _galKey         :: !(Maybe AuthKey)
     , _galFilter      :: !(Maybe Text)
     , _galPageToken   :: !(Maybe Text)
     , _galOAuthToken  :: !(Maybe OAuthToken)
@@ -148,7 +148,7 @@ galUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-galKey :: Lens' GlobalAddressesList' (Maybe Key)
+galKey :: Lens' GlobalAddressesList' (Maybe AuthKey)
 galKey = lens _galKey (\ s a -> s{_galKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

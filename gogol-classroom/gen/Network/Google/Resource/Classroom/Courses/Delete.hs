@@ -71,7 +71,7 @@ type CoursesDeleteResource =
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Delete '[JSON] Empty
@@ -92,7 +92,7 @@ data CoursesDelete' = CoursesDelete'
     , _cdAccessToken    :: !(Maybe Text)
     , _cdUploadType     :: !(Maybe Text)
     , _cdBearerToken    :: !(Maybe Text)
-    , _cdKey            :: !(Maybe Key)
+    , _cdKey            :: !(Maybe AuthKey)
     , _cdId             :: !Text
     , _cdOAuthToken     :: !(Maybe OAuthToken)
     , _cdFields         :: !(Maybe Text)
@@ -195,7 +195,7 @@ cdBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cdKey :: Lens' CoursesDelete' (Maybe Key)
+cdKey :: Lens' CoursesDelete' (Maybe AuthKey)
 cdKey = lens _cdKey (\ s a -> s{_cdKey = a})
 
 -- | Identifier of the course to delete. This identifier can be either the

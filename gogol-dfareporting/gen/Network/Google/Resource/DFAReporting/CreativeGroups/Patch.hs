@@ -59,7 +59,7 @@ type CreativeGroupsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] CreativeGroup :>
@@ -75,7 +75,7 @@ data CreativeGroupsPatch' = CreativeGroupsPatch'
     , _cgpUserIP      :: !(Maybe Text)
     , _cgpProFileId   :: !Int64
     , _cgpPayload     :: !CreativeGroup
-    , _cgpKey         :: !(Maybe Key)
+    , _cgpKey         :: !(Maybe AuthKey)
     , _cgpId          :: !Int64
     , _cgpOAuthToken  :: !(Maybe OAuthToken)
     , _cgpFields      :: !(Maybe Text)
@@ -152,7 +152,7 @@ cgpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgpKey :: Lens' CreativeGroupsPatch' (Maybe Key)
+cgpKey :: Lens' CreativeGroupsPatch' (Maybe AuthKey)
 cgpKey = lens _cgpKey (\ s a -> s{_cgpKey = a})
 
 -- | Creative group ID.

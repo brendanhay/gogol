@@ -72,7 +72,7 @@ type BeaconsUpdateResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] Beacon :> Put '[JSON] Beacon
@@ -96,7 +96,7 @@ data BeaconsUpdate' = BeaconsUpdate'
     , _buUploadType     :: !(Maybe Text)
     , _buPayload        :: !Beacon
     , _buBearerToken    :: !(Maybe Text)
-    , _buKey            :: !(Maybe Key)
+    , _buKey            :: !(Maybe AuthKey)
     , _buOAuthToken     :: !(Maybe OAuthToken)
     , _buFields         :: !(Maybe Text)
     , _buCallback       :: !(Maybe Text)
@@ -217,7 +217,7 @@ buBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-buKey :: Lens' BeaconsUpdate' (Maybe Key)
+buKey :: Lens' BeaconsUpdate' (Maybe AuthKey)
 buKey = lens _buKey (\ s a -> s{_buKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -73,7 +73,7 @@ type CoursesAliasesDeleteResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Delete '[JSON] Empty
@@ -95,7 +95,7 @@ data CoursesAliasesDelete' = CoursesAliasesDelete'
     , _cadUploadType     :: !(Maybe Text)
     , _cadAlias          :: !Text
     , _cadBearerToken    :: !(Maybe Text)
-    , _cadKey            :: !(Maybe Key)
+    , _cadKey            :: !(Maybe AuthKey)
     , _cadOAuthToken     :: !(Maybe OAuthToken)
     , _cadFields         :: !(Maybe Text)
     , _cadCallback       :: !(Maybe Text)
@@ -213,7 +213,7 @@ cadBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cadKey :: Lens' CoursesAliasesDelete' (Maybe Key)
+cadKey :: Lens' CoursesAliasesDelete' (Maybe AuthKey)
 cadKey = lens _cadKey (\ s a -> s{_cadKey = a})
 
 -- | OAuth 2.0 token for the current user.

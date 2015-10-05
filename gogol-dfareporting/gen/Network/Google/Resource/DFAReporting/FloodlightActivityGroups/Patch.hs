@@ -59,7 +59,7 @@ type FloodlightActivityGroupsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] FloodlightActivityGroup :>
@@ -75,7 +75,7 @@ data FloodlightActivityGroupsPatch' = FloodlightActivityGroupsPatch'
     , _fagpUserIP      :: !(Maybe Text)
     , _fagpProFileId   :: !Int64
     , _fagpPayload     :: !FloodlightActivityGroup
-    , _fagpKey         :: !(Maybe Key)
+    , _fagpKey         :: !(Maybe AuthKey)
     , _fagpId          :: !Int64
     , _fagpOAuthToken  :: !(Maybe OAuthToken)
     , _fagpFields      :: !(Maybe Text)
@@ -154,7 +154,7 @@ fagpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fagpKey :: Lens' FloodlightActivityGroupsPatch' (Maybe Key)
+fagpKey :: Lens' FloodlightActivityGroupsPatch' (Maybe AuthKey)
 fagpKey = lens _fagpKey (\ s a -> s{_fagpKey = a})
 
 -- | Floodlight activity Group ID.

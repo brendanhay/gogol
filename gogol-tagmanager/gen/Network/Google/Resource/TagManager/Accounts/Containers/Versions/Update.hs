@@ -63,7 +63,7 @@ type AccountsContainersVersionsUpdateResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] ContainerVersion :>
@@ -81,7 +81,7 @@ data AccountsContainersVersionsUpdate' = AccountsContainersVersionsUpdate'
     , _acvucContainerVersionId :: !Text
     , _acvucPayload            :: !ContainerVersion
     , _acvucAccountId          :: !Text
-    , _acvucKey                :: !(Maybe Key)
+    , _acvucKey                :: !(Maybe AuthKey)
     , _acvucOAuthToken         :: !(Maybe OAuthToken)
     , _acvucFields             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -185,7 +185,7 @@ acvucAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acvucKey :: Lens' AccountsContainersVersionsUpdate' (Maybe Key)
+acvucKey :: Lens' AccountsContainersVersionsUpdate' (Maybe AuthKey)
 acvucKey = lens _acvucKey (\ s a -> s{_acvucKey = a})
 
 -- | OAuth 2.0 token for the current user.

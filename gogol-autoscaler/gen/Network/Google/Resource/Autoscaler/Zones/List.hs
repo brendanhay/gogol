@@ -60,7 +60,7 @@ type ZonesListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] ZoneList
 
@@ -72,7 +72,7 @@ data ZonesList' = ZonesList'
     , _zlPrettyPrint :: !Bool
     , _zlProject     :: !Text
     , _zlUserIP      :: !(Maybe Text)
-    , _zlKey         :: !(Maybe Key)
+    , _zlKey         :: !(Maybe AuthKey)
     , _zlFilter      :: !(Maybe Text)
     , _zlPageToken   :: !(Maybe Text)
     , _zlOAuthToken  :: !(Maybe OAuthToken)
@@ -145,7 +145,7 @@ zlUserIP = lens _zlUserIP (\ s a -> s{_zlUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-zlKey :: Lens' ZonesList' (Maybe Key)
+zlKey :: Lens' ZonesList' (Maybe AuthKey)
 zlKey = lens _zlKey (\ s a -> s{_zlKey = a})
 
 zlFilter :: Lens' ZonesList' (Maybe Text)

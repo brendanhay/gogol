@@ -57,7 +57,7 @@ type CreativesGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Creative
 
@@ -71,7 +71,7 @@ data CreativesGet' = CreativesGet'
     , _cgBuyerCreativeId :: !Text
     , _cgUserIP          :: !(Maybe Text)
     , _cgAccountId       :: !Int32
-    , _cgKey             :: !(Maybe Key)
+    , _cgKey             :: !(Maybe AuthKey)
     , _cgOAuthToken      :: !(Maybe OAuthToken)
     , _cgFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ cgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgKey :: Lens' CreativesGet' (Maybe Key)
+cgKey :: Lens' CreativesGet' (Maybe AuthKey)
 cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 
 -- | OAuth 2.0 token for the current user.

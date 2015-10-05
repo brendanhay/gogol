@@ -54,7 +54,7 @@ type AnnotationsCreateResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Annotation :> Post '[JSON] Annotation
@@ -68,7 +68,7 @@ data AnnotationsCreate' = AnnotationsCreate'
     , _acPrettyPrint :: !Bool
     , _acUserIP      :: !(Maybe Text)
     , _acPayload     :: !Annotation
-    , _acKey         :: !(Maybe Key)
+    , _acKey         :: !(Maybe AuthKey)
     , _acOAuthToken  :: !(Maybe OAuthToken)
     , _acFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -130,7 +130,7 @@ acPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acKey :: Lens' AnnotationsCreate' (Maybe Key)
+acKey :: Lens' AnnotationsCreate' (Maybe AuthKey)
 acKey = lens _acKey (\ s a -> s{_acKey = a})
 
 -- | OAuth 2.0 token for the current user.

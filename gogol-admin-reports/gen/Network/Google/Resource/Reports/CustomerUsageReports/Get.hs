@@ -62,7 +62,7 @@ type CustomerUsageReportsGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] UsageReports
@@ -77,7 +77,7 @@ data CustomerUsageReportsGet' = CustomerUsageReportsGet'
     , _curgUserIP      :: !(Maybe Text)
     , _curgCustomerId  :: !(Maybe Text)
     , _curgDate        :: !Text
-    , _curgKey         :: !(Maybe Key)
+    , _curgKey         :: !(Maybe AuthKey)
     , _curgParameters  :: !(Maybe Text)
     , _curgPageToken   :: !(Maybe Text)
     , _curgOAuthToken  :: !(Maybe OAuthToken)
@@ -158,7 +158,7 @@ curgDate = lens _curgDate (\ s a -> s{_curgDate = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-curgKey :: Lens' CustomerUsageReportsGet' (Maybe Key)
+curgKey :: Lens' CustomerUsageReportsGet' (Maybe AuthKey)
 curgKey = lens _curgKey (\ s a -> s{_curgKey = a})
 
 -- | Represents the application name, parameter name pairs to fetch in csv as

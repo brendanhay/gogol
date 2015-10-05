@@ -52,7 +52,7 @@ type RelyingPartyGetRecaptchaParamResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] GetRecaptchaParamResponse
@@ -64,7 +64,7 @@ data RelyingPartyGetRecaptchaParam' = RelyingPartyGetRecaptchaParam'
     { _rpgrpQuotaUser   :: !(Maybe Text)
     , _rpgrpPrettyPrint :: !Bool
     , _rpgrpUserIP      :: !(Maybe Text)
-    , _rpgrpKey         :: !(Maybe Key)
+    , _rpgrpKey         :: !(Maybe AuthKey)
     , _rpgrpOAuthToken  :: !(Maybe OAuthToken)
     , _rpgrpFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -119,7 +119,7 @@ rpgrpUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rpgrpKey :: Lens' RelyingPartyGetRecaptchaParam' (Maybe Key)
+rpgrpKey :: Lens' RelyingPartyGetRecaptchaParam' (Maybe AuthKey)
 rpgrpKey = lens _rpgrpKey (\ s a -> s{_rpgrpKey = a})
 
 -- | OAuth 2.0 token for the current user.

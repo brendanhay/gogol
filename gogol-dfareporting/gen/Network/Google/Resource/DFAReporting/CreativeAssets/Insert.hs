@@ -60,7 +60,7 @@ type CreativeAssetsInsertResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              MultipartRelated '[JSON] CreativeAssetMetadata Body
@@ -77,7 +77,7 @@ data CreativeAssetsInsert' = CreativeAssetsInsert'
     , _caiProFileId    :: !Int64
     , _caiPayload      :: !CreativeAssetMetadata
     , _caiMedia        :: !Body
-    , _caiKey          :: !(Maybe Key)
+    , _caiKey          :: !(Maybe AuthKey)
     , _caiOAuthToken   :: !(Maybe OAuthToken)
     , _caiFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -166,7 +166,7 @@ caiMedia = lens _caiMedia (\ s a -> s{_caiMedia = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-caiKey :: Lens' CreativeAssetsInsert' (Maybe Key)
+caiKey :: Lens' CreativeAssetsInsert' (Maybe AuthKey)
 caiKey = lens _caiKey (\ s a -> s{_caiKey = a})
 
 -- | OAuth 2.0 token for the current user.

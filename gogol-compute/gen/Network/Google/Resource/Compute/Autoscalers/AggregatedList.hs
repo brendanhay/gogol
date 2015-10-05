@@ -61,7 +61,7 @@ type AutoscalersAggregatedListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] AutoscalerAggregatedList
@@ -74,7 +74,7 @@ data AutoscalersAggregatedList' = AutoscalersAggregatedList'
     , _aalaPrettyPrint :: !Bool
     , _aalaProject     :: !Text
     , _aalaUserIP      :: !(Maybe Text)
-    , _aalaKey         :: !(Maybe Key)
+    , _aalaKey         :: !(Maybe AuthKey)
     , _aalaFilter      :: !(Maybe Text)
     , _aalaPageToken   :: !(Maybe Text)
     , _aalaOAuthToken  :: !(Maybe OAuthToken)
@@ -150,7 +150,7 @@ aalaUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aalaKey :: Lens' AutoscalersAggregatedList' (Maybe Key)
+aalaKey :: Lens' AutoscalersAggregatedList' (Maybe AuthKey)
 aalaKey = lens _aalaKey (\ s a -> s{_aalaKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

@@ -56,7 +56,7 @@ type CalendarsClearResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -69,7 +69,7 @@ data CalendarsClear' = CalendarsClear'
     , _ccCalendarId  :: !Text
     , _ccPrettyPrint :: !Bool
     , _ccUserIP      :: !(Maybe Text)
-    , _ccKey         :: !(Maybe Key)
+    , _ccKey         :: !(Maybe AuthKey)
     , _ccOAuthToken  :: !(Maybe OAuthToken)
     , _ccFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -133,7 +133,7 @@ ccUserIP = lens _ccUserIP (\ s a -> s{_ccUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccKey :: Lens' CalendarsClear' (Maybe Key)
+ccKey :: Lens' CalendarsClear' (Maybe AuthKey)
 ccKey = lens _ccKey (\ s a -> s{_ccKey = a})
 
 -- | OAuth 2.0 token for the current user.

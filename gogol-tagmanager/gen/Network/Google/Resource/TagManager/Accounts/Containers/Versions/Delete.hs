@@ -60,7 +60,7 @@ type AccountsContainersVersionsDeleteResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -74,7 +74,7 @@ data AccountsContainersVersionsDelete' = AccountsContainersVersionsDelete'
     , _acvdcUserIP             :: !(Maybe Text)
     , _acvdcContainerVersionId :: !Text
     , _acvdcAccountId          :: !Text
-    , _acvdcKey                :: !(Maybe Key)
+    , _acvdcKey                :: !(Maybe AuthKey)
     , _acvdcOAuthToken         :: !(Maybe OAuthToken)
     , _acvdcFields             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -159,7 +159,7 @@ acvdcAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acvdcKey :: Lens' AccountsContainersVersionsDelete' (Maybe Key)
+acvdcKey :: Lens' AccountsContainersVersionsDelete' (Maybe AuthKey)
 acvdcKey = lens _acvdcKey (\ s a -> s{_acvdcKey = a})
 
 -- | OAuth 2.0 token for the current user.

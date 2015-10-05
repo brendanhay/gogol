@@ -56,7 +56,7 @@ type EditsCommitResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] AppEdit
 
@@ -68,7 +68,7 @@ data EditsCommit' = EditsCommit'
     , _ecPrettyPrint :: !Bool
     , _ecPackageName :: !Text
     , _ecUserIP      :: !(Maybe Text)
-    , _ecKey         :: !(Maybe Key)
+    , _ecKey         :: !(Maybe AuthKey)
     , _ecOAuthToken  :: !(Maybe OAuthToken)
     , _ecEditId      :: !Text
     , _ecFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ ecUserIP = lens _ecUserIP (\ s a -> s{_ecUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ecKey :: Lens' EditsCommit' (Maybe Key)
+ecKey :: Lens' EditsCommit' (Maybe AuthKey)
 ecKey = lens _ecKey (\ s a -> s{_ecKey = a})
 
 -- | OAuth 2.0 token for the current user.

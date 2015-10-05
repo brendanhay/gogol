@@ -64,7 +64,7 @@ type TargetVPNGatewaysListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] TargetVPNGatewayList
@@ -78,7 +78,7 @@ data TargetVPNGatewaysList' = TargetVPNGatewaysList'
     , _tvglPrettyPrint :: !Bool
     , _tvglProject     :: !Text
     , _tvglUserIP      :: !(Maybe Text)
-    , _tvglKey         :: !(Maybe Key)
+    , _tvglKey         :: !(Maybe AuthKey)
     , _tvglFilter      :: !(Maybe Text)
     , _tvglRegion      :: !Text
     , _tvglPageToken   :: !(Maybe Text)
@@ -159,7 +159,7 @@ tvglUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tvglKey :: Lens' TargetVPNGatewaysList' (Maybe Key)
+tvglKey :: Lens' TargetVPNGatewaysList' (Maybe AuthKey)
 tvglKey = lens _tvglKey (\ s a -> s{_tvglKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

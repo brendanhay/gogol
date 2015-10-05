@@ -68,7 +68,7 @@ type ProjectsSubscriptionsTestIAMPermissionsResource
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] TestIAMPermissionsRequest :>
@@ -87,7 +87,7 @@ data ProjectsSubscriptionsTestIAMPermissions' = ProjectsSubscriptionsTestIAMPerm
     , _pstipUploadType     :: !(Maybe Text)
     , _pstipPayload        :: !TestIAMPermissionsRequest
     , _pstipBearerToken    :: !(Maybe Text)
-    , _pstipKey            :: !(Maybe Key)
+    , _pstipKey            :: !(Maybe AuthKey)
     , _pstipResource       :: !Text
     , _pstipOAuthToken     :: !(Maybe OAuthToken)
     , _pstipFields         :: !(Maybe Text)
@@ -202,7 +202,7 @@ pstipBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pstipKey :: Lens' ProjectsSubscriptionsTestIAMPermissions' (Maybe Key)
+pstipKey :: Lens' ProjectsSubscriptionsTestIAMPermissions' (Maybe AuthKey)
 pstipKey = lens _pstipKey (\ s a -> s{_pstipKey = a})
 
 -- | REQUIRED: The resource for which policy detail is being requested.

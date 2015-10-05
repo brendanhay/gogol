@@ -74,7 +74,7 @@ type ReadgroupsetsCoveragebucketsListResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] ListCoverageBucketsResponse
@@ -97,7 +97,7 @@ data ReadgroupsetsCoveragebucketsList' = ReadgroupsetsCoveragebucketsList'
     , _rclRangeEnd           :: !(Maybe Int64)
     , _rclRangeStart         :: !(Maybe Int64)
     , _rclTargetBucketWidth  :: !(Maybe Int64)
-    , _rclKey                :: !(Maybe Key)
+    , _rclKey                :: !(Maybe AuthKey)
     , _rclRangeReferenceName :: !(Maybe Text)
     , _rclPageToken          :: !(Maybe Text)
     , _rclOAuthToken         :: !(Maybe OAuthToken)
@@ -206,7 +206,7 @@ rclTargetBucketWidth
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rclKey :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Key)
+rclKey :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe AuthKey)
 rclKey = lens _rclKey (\ s a -> s{_rclKey = a})
 
 -- | The reference sequence name, for example chr1, 1, or chrX.

@@ -63,7 +63,7 @@ type GroupsListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] GroupList
 
@@ -76,7 +76,7 @@ data GroupsList' = GroupsList'
     , _glOrderBy     :: !(Maybe Text)
     , _glProject     :: !Text
     , _glUserIP      :: !(Maybe Text)
-    , _glKey         :: !(Maybe Key)
+    , _glKey         :: !(Maybe AuthKey)
     , _glFilter      :: !(Maybe Text)
     , _glPageToken   :: !(Maybe Text)
     , _glOAuthToken  :: !(Maybe OAuthToken)
@@ -165,7 +165,7 @@ glUserIP = lens _glUserIP (\ s a -> s{_glUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-glKey :: Lens' GroupsList' (Maybe Key)
+glKey :: Lens' GroupsList' (Maybe AuthKey)
 glKey = lens _glKey (\ s a -> s{_glKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

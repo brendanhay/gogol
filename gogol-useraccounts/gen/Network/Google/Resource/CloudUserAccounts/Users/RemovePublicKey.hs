@@ -60,7 +60,7 @@ type UsersRemovePublicKeyResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
@@ -74,7 +74,7 @@ data UsersRemovePublicKey' = UsersRemovePublicKey'
     , _urpkUserIP      :: !(Maybe Text)
     , _urpkFingerprint :: !Text
     , _urpkUser        :: !Text
-    , _urpkKey         :: !(Maybe Key)
+    , _urpkKey         :: !(Maybe AuthKey)
     , _urpkOAuthToken  :: !(Maybe OAuthToken)
     , _urpkFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -158,7 +158,7 @@ urpkUser = lens _urpkUser (\ s a -> s{_urpkUser = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-urpkKey :: Lens' UsersRemovePublicKey' (Maybe Key)
+urpkKey :: Lens' UsersRemovePublicKey' (Maybe AuthKey)
 urpkKey = lens _urpkKey (\ s a -> s{_urpkKey = a})
 
 -- | OAuth 2.0 token for the current user.

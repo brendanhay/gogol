@@ -57,7 +57,7 @@ type FirewallsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Firewall
 
@@ -69,7 +69,7 @@ data FirewallsGet' = FirewallsGet'
     , _fgPrettyPrint :: !Bool
     , _fgProject     :: !Text
     , _fgUserIP      :: !(Maybe Text)
-    , _fgKey         :: !(Maybe Key)
+    , _fgKey         :: !(Maybe AuthKey)
     , _fgOAuthToken  :: !(Maybe OAuthToken)
     , _fgFirewall    :: !Text
     , _fgFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ fgUserIP = lens _fgUserIP (\ s a -> s{_fgUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fgKey :: Lens' FirewallsGet' (Maybe Key)
+fgKey :: Lens' FirewallsGet' (Maybe AuthKey)
 fgKey = lens _fgKey (\ s a -> s{_fgKey = a})
 
 -- | OAuth 2.0 token for the current user.

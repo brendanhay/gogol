@@ -62,7 +62,7 @@ type SettingsWatchResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Channel :> Post '[JSON] Channel
@@ -76,7 +76,7 @@ data SettingsWatch' = SettingsWatch'
     , _swPrettyPrint :: !Bool
     , _swUserIP      :: !(Maybe Text)
     , _swPayload     :: !Channel
-    , _swKey         :: !(Maybe Key)
+    , _swKey         :: !(Maybe AuthKey)
     , _swPageToken   :: !(Maybe Text)
     , _swOAuthToken  :: !(Maybe OAuthToken)
     , _swMaxResults  :: !(Maybe Int32)
@@ -160,7 +160,7 @@ swPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-swKey :: Lens' SettingsWatch' (Maybe Key)
+swKey :: Lens' SettingsWatch' (Maybe AuthKey)
 swKey = lens _swKey (\ s a -> s{_swKey = a})
 
 -- | Token specifying which result page to return. Optional.

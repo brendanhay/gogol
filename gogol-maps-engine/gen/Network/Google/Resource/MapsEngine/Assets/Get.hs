@@ -54,7 +54,7 @@ type AssetsGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Asset
 
@@ -65,7 +65,7 @@ data AssetsGet' = AssetsGet'
     { _agQuotaUser   :: !(Maybe Text)
     , _agPrettyPrint :: !Bool
     , _agUserIP      :: !(Maybe Text)
-    , _agKey         :: !(Maybe Key)
+    , _agKey         :: !(Maybe AuthKey)
     , _agId          :: !Text
     , _agOAuthToken  :: !(Maybe OAuthToken)
     , _agFields      :: !(Maybe Text)
@@ -123,7 +123,7 @@ agUserIP = lens _agUserIP (\ s a -> s{_agUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agKey :: Lens' AssetsGet' (Maybe Key)
+agKey :: Lens' AssetsGet' (Maybe AuthKey)
 agKey = lens _agKey (\ s a -> s{_agKey = a})
 
 -- | The ID of the asset.

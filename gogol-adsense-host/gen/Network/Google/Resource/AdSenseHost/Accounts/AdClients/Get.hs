@@ -58,7 +58,7 @@ type AccountsAdClientsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] AdClient
 
@@ -72,7 +72,7 @@ data AccountsAdClientsGet' = AccountsAdClientsGet'
     , _aacgUserIP      :: !(Maybe Text)
     , _aacgAdClientId  :: !Text
     , _aacgAccountId   :: !Text
-    , _aacgKey         :: !(Maybe Key)
+    , _aacgKey         :: !(Maybe AuthKey)
     , _aacgOAuthToken  :: !(Maybe OAuthToken)
     , _aacgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -147,7 +147,7 @@ aacgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aacgKey :: Lens' AccountsAdClientsGet' (Maybe Key)
+aacgKey :: Lens' AccountsAdClientsGet' (Maybe AuthKey)
 aacgKey = lens _aacgKey (\ s a -> s{_aacgKey = a})
 
 -- | OAuth 2.0 token for the current user.

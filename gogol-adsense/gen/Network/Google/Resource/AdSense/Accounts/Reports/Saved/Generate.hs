@@ -64,7 +64,7 @@ type AccountsReportsSavedGenerateResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] AdsenseReportsGenerateResponse
@@ -80,7 +80,7 @@ data AccountsReportsSavedGenerate' = AccountsReportsSavedGenerate'
     , _arsgLocale        :: !(Maybe Text)
     , _arsgSavedReportId :: !Text
     , _arsgAccountId     :: !Text
-    , _arsgKey           :: !(Maybe Key)
+    , _arsgKey           :: !(Maybe AuthKey)
     , _arsgOAuthToken    :: !(Maybe OAuthToken)
     , _arsgStartIndex    :: !(Maybe Int32)
     , _arsgMaxResults    :: !(Maybe Int32)
@@ -172,7 +172,7 @@ arsgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-arsgKey :: Lens' AccountsReportsSavedGenerate' (Maybe Key)
+arsgKey :: Lens' AccountsReportsSavedGenerate' (Maybe AuthKey)
 arsgKey = lens _arsgKey (\ s a -> s{_arsgKey = a})
 
 -- | OAuth 2.0 token for the current user.

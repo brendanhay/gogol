@@ -58,7 +58,7 @@ type CommentsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Comment :> Patch '[JSON] Comment
@@ -71,7 +71,7 @@ data CommentsPatch' = CommentsPatch'
     , _cpPrettyPrint :: !Bool
     , _cpUserIP      :: !(Maybe Text)
     , _cpPayload     :: !Comment
-    , _cpKey         :: !(Maybe Key)
+    , _cpKey         :: !(Maybe AuthKey)
     , _cpFileId      :: !Text
     , _cpOAuthToken  :: !(Maybe OAuthToken)
     , _cpCommentId   :: !Text
@@ -143,7 +143,7 @@ cpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cpKey :: Lens' CommentsPatch' (Maybe Key)
+cpKey :: Lens' CommentsPatch' (Maybe AuthKey)
 cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
 
 -- | The ID of the file.

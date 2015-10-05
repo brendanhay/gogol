@@ -67,7 +67,7 @@ type ProductsGenerateApprovalURLResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Post '[JSON] ProductsGenerateApprovalURLResponse
@@ -88,7 +88,7 @@ data ProductsGenerateApprovalURL' = ProductsGenerateApprovalURL'
     , _pgauPrettyPrint  :: !Bool
     , _pgauEnterpriseId :: !Text
     , _pgauUserIP       :: !(Maybe Text)
-    , _pgauKey          :: !(Maybe Key)
+    , _pgauKey          :: !(Maybe AuthKey)
     , _pgauOAuthToken   :: !(Maybe OAuthToken)
     , _pgauProductId    :: !Text
     , _pgauFields       :: !(Maybe Text)
@@ -168,7 +168,7 @@ pgauUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgauKey :: Lens' ProductsGenerateApprovalURL' (Maybe Key)
+pgauKey :: Lens' ProductsGenerateApprovalURL' (Maybe AuthKey)
 pgauKey = lens _pgauKey (\ s a -> s{_pgauKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -59,7 +59,7 @@ type InAppProductsUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] InAppProduct :>
@@ -75,7 +75,7 @@ data InAppProductsUpdate' = InAppProductsUpdate'
     , _iapuPackageName              :: !Text
     , _iapuUserIP                   :: !(Maybe Text)
     , _iapuPayload                  :: !InAppProduct
-    , _iapuKey                      :: !(Maybe Key)
+    , _iapuKey                      :: !(Maybe AuthKey)
     , _iapuSKU                      :: !Text
     , _iapuOAuthToken               :: !(Maybe OAuthToken)
     , _iapuFields                   :: !(Maybe Text)
@@ -167,7 +167,7 @@ iapuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iapuKey :: Lens' InAppProductsUpdate' (Maybe Key)
+iapuKey :: Lens' InAppProductsUpdate' (Maybe AuthKey)
 iapuKey = lens _iapuKey (\ s a -> s{_iapuKey = a})
 
 -- | Unique identifier for the in-app product.

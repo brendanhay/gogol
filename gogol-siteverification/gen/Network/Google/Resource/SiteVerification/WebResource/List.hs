@@ -52,7 +52,7 @@ type WebResourceListResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] SiteVerificationWebResourceListResponse
@@ -64,7 +64,7 @@ data WebResourceList' = WebResourceList'
     { _wrlQuotaUser   :: !(Maybe Text)
     , _wrlPrettyPrint :: !Bool
     , _wrlUserIP      :: !(Maybe Text)
-    , _wrlKey         :: !(Maybe Key)
+    , _wrlKey         :: !(Maybe AuthKey)
     , _wrlOAuthToken  :: !(Maybe OAuthToken)
     , _wrlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -118,7 +118,7 @@ wrlUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-wrlKey :: Lens' WebResourceList' (Maybe Key)
+wrlKey :: Lens' WebResourceList' (Maybe AuthKey)
 wrlKey = lens _wrlKey (\ s a -> s{_wrlKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -54,7 +54,7 @@ type SubscriptionsDeleteResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -65,7 +65,7 @@ data SubscriptionsDelete' = SubscriptionsDelete'
     { _sdQuotaUser   :: !(Maybe Text)
     , _sdPrettyPrint :: !Bool
     , _sdUserIP      :: !(Maybe Text)
-    , _sdKey         :: !(Maybe Key)
+    , _sdKey         :: !(Maybe AuthKey)
     , _sdId          :: !Text
     , _sdOAuthToken  :: !(Maybe OAuthToken)
     , _sdFields      :: !(Maybe Text)
@@ -123,7 +123,7 @@ sdUserIP = lens _sdUserIP (\ s a -> s{_sdUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sdKey :: Lens' SubscriptionsDelete' (Maybe Key)
+sdKey :: Lens' SubscriptionsDelete' (Maybe AuthKey)
 sdKey = lens _sdKey (\ s a -> s{_sdKey = a})
 
 -- | The id parameter specifies the YouTube subscription ID for the resource

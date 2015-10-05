@@ -56,7 +56,7 @@ type FilesTrashResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] File
 
@@ -68,7 +68,7 @@ data FilesTrash' = FilesTrash'
     { _filQuotaUser   :: !(Maybe Text)
     , _filPrettyPrint :: !Bool
     , _filUserIP      :: !(Maybe Text)
-    , _filKey         :: !(Maybe Key)
+    , _filKey         :: !(Maybe AuthKey)
     , _filFileId      :: !Text
     , _filOAuthToken  :: !(Maybe OAuthToken)
     , _filFields      :: !(Maybe Text)
@@ -127,7 +127,7 @@ filUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-filKey :: Lens' FilesTrash' (Maybe Key)
+filKey :: Lens' FilesTrash' (Maybe AuthKey)
 filKey = lens _filKey (\ s a -> s{_filKey = a})
 
 -- | The ID of the file to trash.

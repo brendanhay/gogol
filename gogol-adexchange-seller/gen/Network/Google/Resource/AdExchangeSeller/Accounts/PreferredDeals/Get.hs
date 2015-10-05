@@ -57,7 +57,7 @@ type AccountsPreferredDealsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] PreferredDeal
 
@@ -70,7 +70,7 @@ data AccountsPreferredDealsGet' = AccountsPreferredDealsGet'
     , _apdgUserIP      :: !(Maybe Text)
     , _apdgDealId      :: !Text
     , _apdgAccountId   :: !Text
-    , _apdgKey         :: !(Maybe Key)
+    , _apdgKey         :: !(Maybe AuthKey)
     , _apdgOAuthToken  :: !(Maybe OAuthToken)
     , _apdgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ apdgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apdgKey :: Lens' AccountsPreferredDealsGet' (Maybe Key)
+apdgKey :: Lens' AccountsPreferredDealsGet' (Maybe AuthKey)
 apdgKey = lens _apdgKey (\ s a -> s{_apdgKey = a})
 
 -- | OAuth 2.0 token for the current user.

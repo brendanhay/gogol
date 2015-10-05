@@ -59,7 +59,7 @@ type AchievementConfigurationsListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] AchievementConfigurationListResponse
@@ -72,7 +72,7 @@ data AchievementConfigurationsList' = AchievementConfigurationsList'
     , _aclPrettyPrint   :: !Bool
     , _aclUserIP        :: !(Maybe Text)
     , _aclApplicationId :: !Text
-    , _aclKey           :: !(Maybe Key)
+    , _aclKey           :: !(Maybe AuthKey)
     , _aclPageToken     :: !(Maybe Text)
     , _aclOAuthToken    :: !(Maybe OAuthToken)
     , _aclMaxResults    :: !(Maybe Int32)
@@ -144,7 +144,7 @@ aclApplicationId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aclKey :: Lens' AchievementConfigurationsList' (Maybe Key)
+aclKey :: Lens' AchievementConfigurationsList' (Maybe AuthKey)
 aclKey = lens _aclKey (\ s a -> s{_aclKey = a})
 
 -- | The token returned by the previous request.

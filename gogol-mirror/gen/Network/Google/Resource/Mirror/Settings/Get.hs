@@ -54,7 +54,7 @@ type SettingsGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Setting
 
@@ -65,7 +65,7 @@ data SettingsGet' = SettingsGet'
     { _sgQuotaUser   :: !(Maybe Text)
     , _sgPrettyPrint :: !Bool
     , _sgUserIP      :: !(Maybe Text)
-    , _sgKey         :: !(Maybe Key)
+    , _sgKey         :: !(Maybe AuthKey)
     , _sgId          :: !Text
     , _sgOAuthToken  :: !(Maybe OAuthToken)
     , _sgFields      :: !(Maybe Text)
@@ -123,7 +123,7 @@ sgUserIP = lens _sgUserIP (\ s a -> s{_sgUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sgKey :: Lens' SettingsGet' (Maybe Key)
+sgKey :: Lens' SettingsGet' (Maybe AuthKey)
 sgKey = lens _sgKey (\ s a -> s{_sgKey = a})
 
 -- | The ID of the setting. The following IDs are valid: - locale - The key

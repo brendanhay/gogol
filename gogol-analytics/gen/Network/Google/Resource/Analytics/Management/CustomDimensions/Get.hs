@@ -61,7 +61,7 @@ type ManagementCustomDimensionsGetResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CustomDimension
@@ -75,7 +75,7 @@ data ManagementCustomDimensionsGet' = ManagementCustomDimensionsGet'
     , _mcdgWebPropertyId     :: !Text
     , _mcdgUserIP            :: !(Maybe Text)
     , _mcdgAccountId         :: !Text
-    , _mcdgKey               :: !(Maybe Key)
+    , _mcdgKey               :: !(Maybe AuthKey)
     , _mcdgOAuthToken        :: !(Maybe OAuthToken)
     , _mcdgCustomDimensionId :: !Text
     , _mcdgFields            :: !(Maybe Text)
@@ -155,7 +155,7 @@ mcdgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcdgKey :: Lens' ManagementCustomDimensionsGet' (Maybe Key)
+mcdgKey :: Lens' ManagementCustomDimensionsGet' (Maybe AuthKey)
 mcdgKey = lens _mcdgKey (\ s a -> s{_mcdgKey = a})
 
 -- | OAuth 2.0 token for the current user.

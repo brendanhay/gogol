@@ -54,7 +54,7 @@ type EnterprisesListResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] EnterprisesListResponse
@@ -67,7 +67,7 @@ data EnterprisesList' = EnterprisesList'
     , _ellPrettyPrint :: !Bool
     , _ellUserIP      :: !(Maybe Text)
     , _ellDomain      :: !Text
-    , _ellKey         :: !(Maybe Key)
+    , _ellKey         :: !(Maybe AuthKey)
     , _ellOAuthToken  :: !(Maybe OAuthToken)
     , _ellFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -130,7 +130,7 @@ ellDomain
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ellKey :: Lens' EnterprisesList' (Maybe Key)
+ellKey :: Lens' EnterprisesList' (Maybe AuthKey)
 ellKey = lens _ellKey (\ s a -> s{_ellKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -54,7 +54,7 @@ type SavedadstylesGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] SavedAdStyle
 
@@ -66,7 +66,7 @@ data SavedadstylesGet' = SavedadstylesGet'
     , _sgPrettyPrint    :: !Bool
     , _sgSavedAdStyleId :: !Text
     , _sgUserIP         :: !(Maybe Text)
-    , _sgKey            :: !(Maybe Key)
+    , _sgKey            :: !(Maybe AuthKey)
     , _sgOAuthToken     :: !(Maybe OAuthToken)
     , _sgFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -129,7 +129,7 @@ sgUserIP = lens _sgUserIP (\ s a -> s{_sgUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sgKey :: Lens' SavedadstylesGet' (Maybe Key)
+sgKey :: Lens' SavedadstylesGet' (Maybe AuthKey)
 sgKey = lens _sgKey (\ s a -> s{_sgKey = a})
 
 -- | OAuth 2.0 token for the current user.

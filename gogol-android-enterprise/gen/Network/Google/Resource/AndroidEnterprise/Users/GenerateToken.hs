@@ -60,7 +60,7 @@ type UsersGenerateTokenResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] UserToken
 
@@ -75,7 +75,7 @@ data UsersGenerateToken' = UsersGenerateToken'
     , _ugtEnterpriseId :: !Text
     , _ugtUserIP       :: !(Maybe Text)
     , _ugtUserId       :: !Text
-    , _ugtKey          :: !(Maybe Key)
+    , _ugtKey          :: !(Maybe AuthKey)
     , _ugtOAuthToken   :: !(Maybe OAuthToken)
     , _ugtFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -148,7 +148,7 @@ ugtUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ugtKey :: Lens' UsersGenerateToken' (Maybe Key)
+ugtKey :: Lens' UsersGenerateToken' (Maybe AuthKey)
 ugtKey = lens _ugtKey (\ s a -> s{_ugtKey = a})
 
 -- | OAuth 2.0 token for the current user.

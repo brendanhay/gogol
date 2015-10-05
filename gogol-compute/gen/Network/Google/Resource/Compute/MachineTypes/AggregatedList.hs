@@ -61,7 +61,7 @@ type MachineTypesAggregatedListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] MachineTypeAggregatedList
@@ -74,7 +74,7 @@ data MachineTypesAggregatedList' = MachineTypesAggregatedList'
     , _mtalPrettyPrint :: !Bool
     , _mtalProject     :: !Text
     , _mtalUserIP      :: !(Maybe Text)
-    , _mtalKey         :: !(Maybe Key)
+    , _mtalKey         :: !(Maybe AuthKey)
     , _mtalFilter      :: !(Maybe Text)
     , _mtalPageToken   :: !(Maybe Text)
     , _mtalOAuthToken  :: !(Maybe OAuthToken)
@@ -150,7 +150,7 @@ mtalUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mtalKey :: Lens' MachineTypesAggregatedList' (Maybe Key)
+mtalKey :: Lens' MachineTypesAggregatedList' (Maybe AuthKey)
 mtalKey = lens _mtalKey (\ s a -> s{_mtalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

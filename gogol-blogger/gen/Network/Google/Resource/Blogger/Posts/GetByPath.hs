@@ -62,7 +62,7 @@ type PostsGetByPathResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Post'
 
@@ -76,7 +76,7 @@ data PostsGetByPath' = PostsGetByPath'
     , _pgbpUserIP      :: !(Maybe Text)
     , _pgbpBlogId      :: !Text
     , _pgbpMaxComments :: !(Maybe Word32)
-    , _pgbpKey         :: !(Maybe Key)
+    , _pgbpKey         :: !(Maybe AuthKey)
     , _pgbpView        :: !(Maybe PostsGetByPathView)
     , _pgbpOAuthToken  :: !(Maybe OAuthToken)
     , _pgbpFields      :: !(Maybe Text)
@@ -161,7 +161,7 @@ pgbpMaxComments
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgbpKey :: Lens' PostsGetByPath' (Maybe Key)
+pgbpKey :: Lens' PostsGetByPath' (Maybe AuthKey)
 pgbpKey = lens _pgbpKey (\ s a -> s{_pgbpKey = a})
 
 -- | Access level with which to view the returned result. Note that some

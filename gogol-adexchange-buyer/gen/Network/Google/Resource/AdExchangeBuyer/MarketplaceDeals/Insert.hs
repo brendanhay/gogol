@@ -57,7 +57,7 @@ type MarketplaceDealsInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] AddOrderDealsRequest :>
@@ -71,7 +71,7 @@ data MarketplaceDealsInsert' = MarketplaceDealsInsert'
     , _mdiPrettyPrint :: !Bool
     , _mdiUserIP      :: !(Maybe Text)
     , _mdiPayload     :: !AddOrderDealsRequest
-    , _mdiKey         :: !(Maybe Key)
+    , _mdiKey         :: !(Maybe AuthKey)
     , _mdiOAuthToken  :: !(Maybe OAuthToken)
     , _mdiOrderId     :: !Text
     , _mdiFields      :: !(Maybe Text)
@@ -139,7 +139,7 @@ mdiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mdiKey :: Lens' MarketplaceDealsInsert' (Maybe Key)
+mdiKey :: Lens' MarketplaceDealsInsert' (Maybe AuthKey)
 mdiKey = lens _mdiKey (\ s a -> s{_mdiKey = a})
 
 -- | OAuth 2.0 token for the current user.

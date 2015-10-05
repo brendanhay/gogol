@@ -59,7 +59,7 @@ type PlacementGroupsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] PlacementGroup :>
@@ -75,7 +75,7 @@ data PlacementGroupsPatch' = PlacementGroupsPatch'
     , _pgpUserIP      :: !(Maybe Text)
     , _pgpProFileId   :: !Int64
     , _pgpPayload     :: !PlacementGroup
-    , _pgpKey         :: !(Maybe Key)
+    , _pgpKey         :: !(Maybe AuthKey)
     , _pgpId          :: !Int64
     , _pgpOAuthToken  :: !(Maybe OAuthToken)
     , _pgpFields      :: !(Maybe Text)
@@ -152,7 +152,7 @@ pgpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgpKey :: Lens' PlacementGroupsPatch' (Maybe Key)
+pgpKey :: Lens' PlacementGroupsPatch' (Maybe AuthKey)
 pgpKey = lens _pgpKey (\ s a -> s{_pgpKey = a})
 
 -- | Placement group ID.

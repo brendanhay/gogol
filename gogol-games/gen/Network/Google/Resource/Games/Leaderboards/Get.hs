@@ -56,7 +56,7 @@ type LeaderboardsGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Leaderboard
 
@@ -68,7 +68,7 @@ data LeaderboardsGet' = LeaderboardsGet'
     , _lgPrettyPrint   :: !Bool
     , _lgUserIP        :: !(Maybe Text)
     , _lgLeaderboardId :: !Text
-    , _lgKey           :: !(Maybe Key)
+    , _lgKey           :: !(Maybe AuthKey)
     , _lgLanguage      :: !(Maybe Text)
     , _lgOAuthToken    :: !(Maybe OAuthToken)
     , _lgFields        :: !(Maybe Text)
@@ -135,7 +135,7 @@ lgLeaderboardId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lgKey :: Lens' LeaderboardsGet' (Maybe Key)
+lgKey :: Lens' LeaderboardsGet' (Maybe AuthKey)
 lgKey = lens _lgKey (\ s a -> s{_lgKey = a})
 
 -- | The preferred language to use for strings returned by this method.

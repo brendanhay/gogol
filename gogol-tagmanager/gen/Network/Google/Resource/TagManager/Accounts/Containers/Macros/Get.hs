@@ -60,7 +60,7 @@ type AccountsContainersMacrosGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Macro
 
@@ -73,7 +73,7 @@ data AccountsContainersMacrosGet' = AccountsContainersMacrosGet'
     , _acmgContainerId :: !Text
     , _acmgUserIP      :: !(Maybe Text)
     , _acmgAccountId   :: !Text
-    , _acmgKey         :: !(Maybe Key)
+    , _acmgKey         :: !(Maybe AuthKey)
     , _acmgMacroId     :: !Text
     , _acmgOAuthToken  :: !(Maybe OAuthToken)
     , _acmgFields      :: !(Maybe Text)
@@ -153,7 +153,7 @@ acmgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acmgKey :: Lens' AccountsContainersMacrosGet' (Maybe Key)
+acmgKey :: Lens' AccountsContainersMacrosGet' (Maybe AuthKey)
 acmgKey = lens _acmgKey (\ s a -> s{_acmgKey = a})
 
 -- | The GTM Macro ID.

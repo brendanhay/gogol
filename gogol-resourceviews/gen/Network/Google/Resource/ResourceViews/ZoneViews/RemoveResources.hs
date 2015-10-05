@@ -61,7 +61,7 @@ type ZoneViewsRemoveResourcesResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] ZoneViewsRemoveResourcesRequest
@@ -78,7 +78,7 @@ data ZoneViewsRemoveResources' = ZoneViewsRemoveResources'
     , _zvrrUserIP       :: !(Maybe Text)
     , _zvrrZone         :: !Text
     , _zvrrPayload      :: !ZoneViewsRemoveResourcesRequest
-    , _zvrrKey          :: !(Maybe Key)
+    , _zvrrKey          :: !(Maybe AuthKey)
     , _zvrrOAuthToken   :: !(Maybe OAuthToken)
     , _zvrrFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -169,7 +169,7 @@ zvrrPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-zvrrKey :: Lens' ZoneViewsRemoveResources' (Maybe Key)
+zvrrKey :: Lens' ZoneViewsRemoveResources' (Maybe AuthKey)
 zvrrKey = lens _zvrrKey (\ s a -> s{_zvrrKey = a})
 
 -- | OAuth 2.0 token for the current user.

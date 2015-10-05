@@ -59,7 +59,7 @@ type ManagementWebPropertiesInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] WebProperty :>
@@ -76,7 +76,7 @@ data ManagementWebPropertiesInsert' = ManagementWebPropertiesInsert'
     , _mwpiUserIP      :: !(Maybe Text)
     , _mwpiPayload     :: !WebProperty
     , _mwpiAccountId   :: !Text
-    , _mwpiKey         :: !(Maybe Key)
+    , _mwpiKey         :: !(Maybe AuthKey)
     , _mwpiOAuthToken  :: !(Maybe OAuthToken)
     , _mwpiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -150,7 +150,7 @@ mwpiAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mwpiKey :: Lens' ManagementWebPropertiesInsert' (Maybe Key)
+mwpiKey :: Lens' ManagementWebPropertiesInsert' (Maybe AuthKey)
 mwpiKey = lens _mwpiKey (\ s a -> s{_mwpiKey = a})
 
 -- | OAuth 2.0 token for the current user.

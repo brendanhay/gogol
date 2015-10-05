@@ -55,7 +55,7 @@ type LayersGetPublishedResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] PublishedLayer
@@ -67,7 +67,7 @@ data LayersGetPublished' = LayersGetPublished'
     { _lgpQuotaUser   :: !(Maybe Text)
     , _lgpPrettyPrint :: !Bool
     , _lgpUserIP      :: !(Maybe Text)
-    , _lgpKey         :: !(Maybe Key)
+    , _lgpKey         :: !(Maybe AuthKey)
     , _lgpId          :: !Text
     , _lgpOAuthToken  :: !(Maybe OAuthToken)
     , _lgpFields      :: !(Maybe Text)
@@ -126,7 +126,7 @@ lgpUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lgpKey :: Lens' LayersGetPublished' (Maybe Key)
+lgpKey :: Lens' LayersGetPublished' (Maybe AuthKey)
 lgpKey = lens _lgpKey (\ s a -> s{_lgpKey = a})
 
 -- | The ID of the layer.

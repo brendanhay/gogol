@@ -62,7 +62,7 @@ type EditsAPKsAddexternallyhostedResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] APKsAddExternallyHostedRequest :>
@@ -80,7 +80,7 @@ data EditsAPKsAddexternallyhosted' = EditsAPKsAddexternallyhosted'
     , _eapkaPackageName :: !Text
     , _eapkaUserIP      :: !(Maybe Text)
     , _eapkaPayload     :: !APKsAddExternallyHostedRequest
-    , _eapkaKey         :: !(Maybe Key)
+    , _eapkaKey         :: !(Maybe AuthKey)
     , _eapkaOAuthToken  :: !(Maybe OAuthToken)
     , _eapkaEditId      :: !Text
     , _eapkaFields      :: !(Maybe Text)
@@ -160,7 +160,7 @@ eapkaPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eapkaKey :: Lens' EditsAPKsAddexternallyhosted' (Maybe Key)
+eapkaKey :: Lens' EditsAPKsAddexternallyhosted' (Maybe AuthKey)
 eapkaKey = lens _eapkaKey (\ s a -> s{_eapkaKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -58,7 +58,7 @@ type LeaderboardsListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] LeaderboardListResponse
@@ -70,7 +70,7 @@ data LeaderboardsList' = LeaderboardsList'
     { _llQuotaUser   :: !(Maybe Text)
     , _llPrettyPrint :: !Bool
     , _llUserIP      :: !(Maybe Text)
-    , _llKey         :: !(Maybe Key)
+    , _llKey         :: !(Maybe AuthKey)
     , _llLanguage    :: !(Maybe Text)
     , _llPageToken   :: !(Maybe Text)
     , _llOAuthToken  :: !(Maybe OAuthToken)
@@ -135,7 +135,7 @@ llUserIP = lens _llUserIP (\ s a -> s{_llUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-llKey :: Lens' LeaderboardsList' (Maybe Key)
+llKey :: Lens' LeaderboardsList' (Maybe AuthKey)
 llKey = lens _llKey (\ s a -> s{_llKey = a})
 
 -- | The preferred language to use for strings returned by this method.

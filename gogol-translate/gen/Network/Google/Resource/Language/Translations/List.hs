@@ -62,7 +62,7 @@ type TranslationsListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] TranslationsListResponse
@@ -76,7 +76,7 @@ data TranslationsList' = TranslationsList'
     , _tlUserIP      :: !(Maybe Text)
     , _tlFormat      :: !(Maybe TranslationsListFormat)
     , _tlQ           :: ![Text]
-    , _tlKey         :: !(Maybe Key)
+    , _tlKey         :: !(Maybe AuthKey)
     , _tlSource      :: !(Maybe Text)
     , _tlOAuthToken  :: !(Maybe OAuthToken)
     , _tlCid         :: !(Maybe [Text])
@@ -157,7 +157,7 @@ tlQ = lens _tlQ (\ s a -> s{_tlQ = a}) . _Coerce
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tlKey :: Lens' TranslationsList' (Maybe Key)
+tlKey :: Lens' TranslationsList' (Maybe AuthKey)
 tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | The source language of the text

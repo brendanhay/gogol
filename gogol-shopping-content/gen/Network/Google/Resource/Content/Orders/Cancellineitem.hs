@@ -58,7 +58,7 @@ type OrdersCancellineitemResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] OrdersCancelLineItemRequest :>
@@ -73,7 +73,7 @@ data OrdersCancellineitem' = OrdersCancellineitem'
     , _oPrettyPrint :: !Bool
     , _oUserIP      :: !(Maybe Text)
     , _oPayload     :: !OrdersCancelLineItemRequest
-    , _oKey         :: !(Maybe Key)
+    , _oKey         :: !(Maybe AuthKey)
     , _oOAuthToken  :: !(Maybe OAuthToken)
     , _oOrderId     :: !Text
     , _oFields      :: !(Maybe Text)
@@ -147,7 +147,7 @@ oPayload = lens _oPayload (\ s a -> s{_oPayload = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oKey :: Lens' OrdersCancellineitem' (Maybe Key)
+oKey :: Lens' OrdersCancellineitem' (Maybe AuthKey)
 oKey = lens _oKey (\ s a -> s{_oKey = a})
 
 -- | OAuth 2.0 token for the current user.

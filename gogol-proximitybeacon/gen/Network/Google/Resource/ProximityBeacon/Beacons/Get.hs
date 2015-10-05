@@ -66,7 +66,7 @@ type BeaconsGetResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] Beacon
 
@@ -83,7 +83,7 @@ data BeaconsGet' = BeaconsGet'
     , _bgBeaconName     :: !Text
     , _bgUploadType     :: !(Maybe Text)
     , _bgBearerToken    :: !(Maybe Text)
-    , _bgKey            :: !(Maybe Key)
+    , _bgKey            :: !(Maybe AuthKey)
     , _bgOAuthToken     :: !(Maybe OAuthToken)
     , _bgFields         :: !(Maybe Text)
     , _bgCallback       :: !(Maybe Text)
@@ -190,7 +190,7 @@ bgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bgKey :: Lens' BeaconsGet' (Maybe Key)
+bgKey :: Lens' BeaconsGet' (Maybe AuthKey)
 bgKey = lens _bgKey (\ s a -> s{_bgKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -74,7 +74,7 @@ type VideosListResource =
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "userIp" Text :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] VideoListResponse
@@ -94,7 +94,7 @@ data VideosList' = VideosList'
     , _vlHl                     :: !(Maybe Text)
     , _vlOnBehalfOfContentOwner :: !(Maybe Text)
     , _vlVideoCategoryId        :: !Text
-    , _vlKey                    :: !(Maybe Key)
+    , _vlKey                    :: !(Maybe AuthKey)
     , _vlId                     :: !(Maybe Text)
     , _vlPageToken              :: !(Maybe Text)
     , _vlOAuthToken             :: !(Maybe OAuthToken)
@@ -251,7 +251,7 @@ vlVideoCategoryId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vlKey :: Lens' VideosList' (Maybe Key)
+vlKey :: Lens' VideosList' (Maybe AuthKey)
 vlKey = lens _vlKey (\ s a -> s{_vlKey = a})
 
 -- | The id parameter specifies a comma-separated list of the YouTube video

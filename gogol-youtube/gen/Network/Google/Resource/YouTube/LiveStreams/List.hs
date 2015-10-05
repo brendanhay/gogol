@@ -66,7 +66,7 @@ type LiveStreamsListResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] LiveStreamListResponse
@@ -81,7 +81,7 @@ data LiveStreamsList' = LiveStreamsList'
     , _lslMine                          :: !(Maybe Bool)
     , _lslUserIP                        :: !(Maybe Text)
     , _lslOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lslKey                           :: !(Maybe Key)
+    , _lslKey                           :: !(Maybe AuthKey)
     , _lslOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lslId                            :: !(Maybe Text)
     , _lslPageToken                     :: !(Maybe Text)
@@ -189,7 +189,7 @@ lslOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lslKey :: Lens' LiveStreamsList' (Maybe Key)
+lslKey :: Lens' LiveStreamsList' (Maybe AuthKey)
 lslKey = lens _lslKey (\ s a -> s{_lslKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:

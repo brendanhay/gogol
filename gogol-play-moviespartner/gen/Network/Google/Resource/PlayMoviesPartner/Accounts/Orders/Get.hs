@@ -71,7 +71,7 @@ type AccountsOrdersGetResource =
                              QueryParam "quotaUser" Text :>
                                QueryParam "prettyPrint" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] Order
@@ -90,7 +90,7 @@ data AccountsOrdersGet' = AccountsOrdersGet'
     , _aogUploadType     :: !(Maybe Text)
     , _aogAccountId      :: !Text
     , _aogBearerToken    :: !(Maybe Text)
-    , _aogKey            :: !(Maybe Key)
+    , _aogKey            :: !(Maybe AuthKey)
     , _aogOAuthToken     :: !(Maybe OAuthToken)
     , _aogOrderId        :: !Text
     , _aogFields         :: !(Maybe Text)
@@ -203,7 +203,7 @@ aogBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aogKey :: Lens' AccountsOrdersGet' (Maybe Key)
+aogKey :: Lens' AccountsOrdersGet' (Maybe AuthKey)
 aogKey = lens _aogKey (\ s a -> s{_aogKey = a})
 
 -- | OAuth 2.0 token for the current user.

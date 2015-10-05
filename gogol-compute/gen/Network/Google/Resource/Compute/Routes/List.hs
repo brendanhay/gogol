@@ -62,7 +62,7 @@ type RoutesListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Get '[JSON] RouteList
 
@@ -75,7 +75,7 @@ data RoutesList' = RoutesList'
     , _rlPrettyPrint :: !Bool
     , _rlProject     :: !Text
     , _rlUserIP      :: !(Maybe Text)
-    , _rlKey         :: !(Maybe Key)
+    , _rlKey         :: !(Maybe AuthKey)
     , _rlFilter      :: !(Maybe Text)
     , _rlPageToken   :: !(Maybe Text)
     , _rlOAuthToken  :: !(Maybe OAuthToken)
@@ -149,7 +149,7 @@ rlUserIP = lens _rlUserIP (\ s a -> s{_rlUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rlKey :: Lens' RoutesList' (Maybe Key)
+rlKey :: Lens' RoutesList' (Maybe AuthKey)
 rlKey = lens _rlKey (\ s a -> s{_rlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

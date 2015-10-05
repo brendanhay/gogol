@@ -80,7 +80,7 @@ type AdvertisersListResource =
                                      QueryParam "prettyPrint" Bool :>
                                        QueryParam "userIp" Text :>
                                          QueryParam "fields" Text :>
-                                           QueryParam "key" Key :>
+                                           QueryParam "key" AuthKey :>
                                              QueryParam "oauth_token" OAuthToken
                                                :>
                                                QueryParam "alt" AltJSON :>
@@ -102,7 +102,7 @@ data AdvertisersList' = AdvertisersList'
     , _allProFileId                           :: !Int64
     , _allSortOrder                           :: !(Maybe AdvertisersListSortOrder)
     , _allAdvertiserGroupIds                  :: !(Maybe [Int64])
-    , _allKey                                 :: !(Maybe Key)
+    , _allKey                                 :: !(Maybe AuthKey)
     , _allPageToken                           :: !(Maybe Text)
     , _allSortField                           :: !(Maybe AdvertisersListSortField)
     , _allSubAccountId                        :: !(Maybe Int64)
@@ -256,7 +256,7 @@ allAdvertiserGroupIds
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-allKey :: Lens' AdvertisersList' (Maybe Key)
+allKey :: Lens' AdvertisersList' (Maybe AuthKey)
 allKey = lens _allKey (\ s a -> s{_allKey = a})
 
 -- | Value of the nextPageToken from the previous result page.

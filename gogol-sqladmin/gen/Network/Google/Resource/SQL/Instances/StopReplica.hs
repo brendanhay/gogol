@@ -58,7 +58,7 @@ type InstancesStopReplicaResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
@@ -70,7 +70,7 @@ data InstancesStopReplica' = InstancesStopReplica'
     , _isrPrettyPrint :: !Bool
     , _isrProject     :: !Text
     , _isrUserIP      :: !(Maybe Text)
-    , _isrKey         :: !(Maybe Key)
+    , _isrKey         :: !(Maybe AuthKey)
     , _isrOAuthToken  :: !(Maybe OAuthToken)
     , _isrFields      :: !(Maybe Text)
     , _isrInstance    :: !Text
@@ -138,7 +138,7 @@ isrUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-isrKey :: Lens' InstancesStopReplica' (Maybe Key)
+isrKey :: Lens' InstancesStopReplica' (Maybe AuthKey)
 isrKey = lens _isrKey (\ s a -> s{_isrKey = a})
 
 -- | OAuth 2.0 token for the current user.

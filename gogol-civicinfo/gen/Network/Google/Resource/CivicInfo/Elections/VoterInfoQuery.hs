@@ -59,7 +59,7 @@ type ElectionsVoterInfoQueryResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] VoterInfoResponse
@@ -74,7 +74,7 @@ data ElectionsVoterInfoQuery' = ElectionsVoterInfoQuery'
     , _eviqUserIP       :: !(Maybe Text)
     , _eviqElectionId   :: !Int64
     , _eviqAddress      :: !Text
-    , _eviqKey          :: !(Maybe Key)
+    , _eviqKey          :: !(Maybe AuthKey)
     , _eviqOfficialOnly :: !Bool
     , _eviqOAuthToken   :: !(Maybe OAuthToken)
     , _eviqFields       :: !(Maybe Text)
@@ -153,7 +153,7 @@ eviqAddress
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eviqKey :: Lens' ElectionsVoterInfoQuery' (Maybe Key)
+eviqKey :: Lens' ElectionsVoterInfoQuery' (Maybe AuthKey)
 eviqKey = lens _eviqKey (\ s a -> s{_eviqKey = a})
 
 -- | If set to true, only data from official state sources will be returned.

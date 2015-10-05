@@ -55,7 +55,7 @@ type DetectionsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] DetectionsListResponse
@@ -68,7 +68,7 @@ data DetectionsList' = DetectionsList'
     , _dlPrettyPrint :: !Bool
     , _dlUserIP      :: !(Maybe Text)
     , _dlQ           :: ![Text]
-    , _dlKey         :: !(Maybe Key)
+    , _dlKey         :: !(Maybe AuthKey)
     , _dlOAuthToken  :: !(Maybe OAuthToken)
     , _dlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -129,7 +129,7 @@ dlQ = lens _dlQ (\ s a -> s{_dlQ = a}) . _Coerce
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dlKey :: Lens' DetectionsList' (Maybe Key)
+dlKey :: Lens' DetectionsList' (Maybe AuthKey)
 dlKey = lens _dlKey (\ s a -> s{_dlKey = a})
 
 -- | OAuth 2.0 token for the current user.

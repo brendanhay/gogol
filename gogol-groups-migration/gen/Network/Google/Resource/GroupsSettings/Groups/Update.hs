@@ -54,7 +54,7 @@ type GroupsUpdateResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltATOM :>
                      ReqBody '[JSON] Groups :> Put '[JSON] Groups
@@ -67,7 +67,7 @@ data GroupsUpdate' = GroupsUpdate'
     , _guPrettyPrint   :: !Bool
     , _guUserIP        :: !(Maybe Text)
     , _guPayload       :: !Groups
-    , _guKey           :: !(Maybe Key)
+    , _guKey           :: !(Maybe AuthKey)
     , _guOAuthToken    :: !(Maybe OAuthToken)
     , _guGroupUniqueId :: !Text
     , _guFields        :: !(Maybe Text)
@@ -134,7 +134,7 @@ guPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-guKey :: Lens' GroupsUpdate' (Maybe Key)
+guKey :: Lens' GroupsUpdate' (Maybe AuthKey)
 guKey = lens _guKey (\ s a -> s{_guKey = a})
 
 -- | OAuth 2.0 token for the current user.

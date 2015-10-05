@@ -61,7 +61,7 @@ type PostsPublishResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Post'
 
@@ -75,7 +75,7 @@ data PostsPublish' = PostsPublish'
     , _posPublishDate :: !(Maybe DateTime')
     , _posUserIP      :: !(Maybe Text)
     , _posBlogId      :: !Text
-    , _posKey         :: !(Maybe Key)
+    , _posKey         :: !(Maybe AuthKey)
     , _posPostId      :: !Text
     , _posOAuthToken  :: !(Maybe OAuthToken)
     , _posFields      :: !(Maybe Text)
@@ -156,7 +156,7 @@ posBlogId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-posKey :: Lens' PostsPublish' (Maybe Key)
+posKey :: Lens' PostsPublish' (Maybe AuthKey)
 posKey = lens _posKey (\ s a -> s{_posKey = a})
 
 -- | The ID of the Post.

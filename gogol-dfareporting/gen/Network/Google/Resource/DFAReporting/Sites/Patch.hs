@@ -58,7 +58,7 @@ type SitesPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Site :> Patch '[JSON] Site
@@ -72,7 +72,7 @@ data SitesPatch' = SitesPatch'
     , _spUserIP      :: !(Maybe Text)
     , _spProFileId   :: !Int64
     , _spPayload     :: !Site
-    , _spKey         :: !(Maybe Key)
+    , _spKey         :: !(Maybe AuthKey)
     , _spId          :: !Int64
     , _spOAuthToken  :: !(Maybe OAuthToken)
     , _spFields      :: !(Maybe Text)
@@ -148,7 +148,7 @@ spPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-spKey :: Lens' SitesPatch' (Maybe Key)
+spKey :: Lens' SitesPatch' (Maybe AuthKey)
 spKey = lens _spKey (\ s a -> s{_spKey = a})
 
 -- | Site ID.

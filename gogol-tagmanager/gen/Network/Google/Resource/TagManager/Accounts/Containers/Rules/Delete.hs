@@ -60,7 +60,7 @@ type AccountsContainersRulesDeleteResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -74,7 +74,7 @@ data AccountsContainersRulesDelete' = AccountsContainersRulesDelete'
     , _acrdUserIP      :: !(Maybe Text)
     , _acrdRuleId      :: !Text
     , _acrdAccountId   :: !Text
-    , _acrdKey         :: !(Maybe Key)
+    , _acrdKey         :: !(Maybe AuthKey)
     , _acrdOAuthToken  :: !(Maybe OAuthToken)
     , _acrdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -158,7 +158,7 @@ acrdAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acrdKey :: Lens' AccountsContainersRulesDelete' (Maybe Key)
+acrdKey :: Lens' AccountsContainersRulesDelete' (Maybe AuthKey)
 acrdKey = lens _acrdKey (\ s a -> s{_acrdKey = a})
 
 -- | OAuth 2.0 token for the current user.

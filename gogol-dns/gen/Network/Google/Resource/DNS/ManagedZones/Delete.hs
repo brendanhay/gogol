@@ -56,7 +56,7 @@ type ManagedZonesDeleteResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -68,7 +68,7 @@ data ManagedZonesDelete' = ManagedZonesDelete'
     , _mzdPrettyPrint :: !Bool
     , _mzdProject     :: !Text
     , _mzdUserIP      :: !(Maybe Text)
-    , _mzdKey         :: !(Maybe Key)
+    , _mzdKey         :: !(Maybe AuthKey)
     , _mzdOAuthToken  :: !(Maybe OAuthToken)
     , _mzdManagedZone :: !Text
     , _mzdFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ mzdUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mzdKey :: Lens' ManagedZonesDelete' (Maybe Key)
+mzdKey :: Lens' ManagedZonesDelete' (Maybe AuthKey)
 mzdKey = lens _mzdKey (\ s a -> s{_mzdKey = a})
 
 -- | OAuth 2.0 token for the current user.

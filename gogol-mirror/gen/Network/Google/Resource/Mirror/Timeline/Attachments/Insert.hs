@@ -56,7 +56,7 @@ type TimelineAttachmentsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[OctetStream] Body :>
@@ -71,7 +71,7 @@ data TimelineAttachmentsInsert' = TimelineAttachmentsInsert'
     , _taiUserIP      :: !(Maybe Text)
     , _taiItemId      :: !Text
     , _taiMedia       :: !Body
-    , _taiKey         :: !(Maybe Key)
+    , _taiKey         :: !(Maybe AuthKey)
     , _taiOAuthToken  :: !(Maybe OAuthToken)
     , _taiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -141,7 +141,7 @@ taiMedia = lens _taiMedia (\ s a -> s{_taiMedia = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-taiKey :: Lens' TimelineAttachmentsInsert' (Maybe Key)
+taiKey :: Lens' TimelineAttachmentsInsert' (Maybe AuthKey)
 taiKey = lens _taiKey (\ s a -> s{_taiKey = a})
 
 -- | OAuth 2.0 token for the current user.

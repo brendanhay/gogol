@@ -59,7 +59,7 @@ type AccountsContainersRulesCreateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Rule :> Post '[JSON] Rule
@@ -74,7 +74,7 @@ data AccountsContainersRulesCreate' = AccountsContainersRulesCreate'
     , _acrcUserIP      :: !(Maybe Text)
     , _acrcPayload     :: !Rule
     , _acrcAccountId   :: !Text
-    , _acrcKey         :: !(Maybe Key)
+    , _acrcKey         :: !(Maybe AuthKey)
     , _acrcOAuthToken  :: !(Maybe OAuthToken)
     , _acrcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -158,7 +158,7 @@ acrcAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acrcKey :: Lens' AccountsContainersRulesCreate' (Maybe Key)
+acrcKey :: Lens' AccountsContainersRulesCreate' (Maybe AuthKey)
 acrcKey = lens _acrcKey (\ s a -> s{_acrcKey = a})
 
 -- | OAuth 2.0 token for the current user.

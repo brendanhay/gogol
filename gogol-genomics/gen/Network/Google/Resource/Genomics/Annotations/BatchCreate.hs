@@ -60,7 +60,7 @@ type AnnotationsBatchCreateResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] BatchCreateAnnotationsRequest :>
@@ -81,7 +81,7 @@ data AnnotationsBatchCreate' = AnnotationsBatchCreate'
     , _abcPrettyPrint :: !Bool
     , _abcUserIP      :: !(Maybe Text)
     , _abcPayload     :: !BatchCreateAnnotationsRequest
-    , _abcKey         :: !(Maybe Key)
+    , _abcKey         :: !(Maybe AuthKey)
     , _abcOAuthToken  :: !(Maybe OAuthToken)
     , _abcFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ abcPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-abcKey :: Lens' AnnotationsBatchCreate' (Maybe Key)
+abcKey :: Lens' AnnotationsBatchCreate' (Maybe AuthKey)
 abcKey = lens _abcKey (\ s a -> s{_abcKey = a})
 
 -- | OAuth 2.0 token for the current user.

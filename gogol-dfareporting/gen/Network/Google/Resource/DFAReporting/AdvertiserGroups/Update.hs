@@ -56,7 +56,7 @@ type AdvertiserGroupsUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] AdvertiserGroup :>
@@ -71,7 +71,7 @@ data AdvertiserGroupsUpdate' = AdvertiserGroupsUpdate'
     , _aguUserIP      :: !(Maybe Text)
     , _aguProFileId   :: !Int64
     , _aguPayload     :: !AdvertiserGroup
-    , _aguKey         :: !(Maybe Key)
+    , _aguKey         :: !(Maybe AuthKey)
     , _aguOAuthToken  :: !(Maybe OAuthToken)
     , _aguFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ aguPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aguKey :: Lens' AdvertiserGroupsUpdate' (Maybe Key)
+aguKey :: Lens' AdvertiserGroupsUpdate' (Maybe AuthKey)
 aguKey = lens _aguKey (\ s a -> s{_aguKey = a})
 
 -- | OAuth 2.0 token for the current user.

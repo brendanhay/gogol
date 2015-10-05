@@ -70,7 +70,7 @@ type ObjectsUpdateResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        ReqBody '[JSON] Object :>
@@ -90,7 +90,7 @@ type ObjectsUpdateResource =
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "userIp" Text :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltMedia :>
                                          ReqBody '[JSON] Object :>
@@ -108,7 +108,7 @@ data ObjectsUpdate' = ObjectsUpdate'
     , _ouUserIP                   :: !(Maybe Text)
     , _ouBucket                   :: !Text
     , _ouPayload                  :: !Object
-    , _ouKey                      :: !(Maybe Key)
+    , _ouKey                      :: !(Maybe AuthKey)
     , _ouIfMetagenerationNotMatch :: !(Maybe Word64)
     , _ouObject                   :: !Text
     , _ouProjection               :: !(Maybe ObjectsUpdateProjection)
@@ -225,7 +225,7 @@ ouPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ouKey :: Lens' ObjectsUpdate' (Maybe Key)
+ouKey :: Lens' ObjectsUpdate' (Maybe AuthKey)
 ouKey = lens _ouKey (\ s a -> s{_ouKey = a})
 
 -- | Makes the operation conditional on whether the object\'s current

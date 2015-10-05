@@ -60,7 +60,7 @@ type InstancesListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] InstancesListResponse
@@ -74,7 +74,7 @@ data InstancesList' = InstancesList'
     , _ilPrettyPrint :: !Bool
     , _ilProject     :: !Text
     , _ilUserIP      :: !(Maybe Text)
-    , _ilKey         :: !(Maybe Key)
+    , _ilKey         :: !(Maybe AuthKey)
     , _ilPageToken   :: !(Maybe Text)
     , _ilOAuthToken  :: !(Maybe OAuthToken)
     , _ilMaxResults  :: !(Maybe Word32)
@@ -144,7 +144,7 @@ ilUserIP = lens _ilUserIP (\ s a -> s{_ilUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ilKey :: Lens' InstancesList' (Maybe Key)
+ilKey :: Lens' InstancesList' (Maybe AuthKey)
 ilKey = lens _ilKey (\ s a -> s{_ilKey = a})
 
 -- | A previously-returned page token representing part of the larger set of

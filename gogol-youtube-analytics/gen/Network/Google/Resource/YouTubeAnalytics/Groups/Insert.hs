@@ -55,7 +55,7 @@ type GroupsInsertResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Group :> Post '[JSON] Group
@@ -69,7 +69,7 @@ data GroupsInsert' = GroupsInsert'
     , _giUserIP                 :: !(Maybe Text)
     , _giPayload                :: !Group
     , _giOnBehalfOfContentOwner :: !(Maybe Text)
-    , _giKey                    :: !(Maybe Key)
+    , _giKey                    :: !(Maybe AuthKey)
     , _giOAuthToken             :: !(Maybe OAuthToken)
     , _giFields                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -149,7 +149,7 @@ giOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-giKey :: Lens' GroupsInsert' (Maybe Key)
+giKey :: Lens' GroupsInsert' (Maybe AuthKey)
 giKey = lens _giKey (\ s a -> s{_giKey = a})
 
 -- | OAuth 2.0 token for the current user.

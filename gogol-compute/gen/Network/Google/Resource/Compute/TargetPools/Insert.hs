@@ -59,7 +59,7 @@ type TargetPoolsInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] TargetPool :> Post '[JSON] Operation
@@ -74,7 +74,7 @@ data TargetPoolsInsert' = TargetPoolsInsert'
     , _tpiProject     :: !Text
     , _tpiUserIP      :: !(Maybe Text)
     , _tpiPayload     :: !TargetPool
-    , _tpiKey         :: !(Maybe Key)
+    , _tpiKey         :: !(Maybe AuthKey)
     , _tpiRegion      :: !Text
     , _tpiOAuthToken  :: !(Maybe OAuthToken)
     , _tpiFields      :: !(Maybe Text)
@@ -151,7 +151,7 @@ tpiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tpiKey :: Lens' TargetPoolsInsert' (Maybe Key)
+tpiKey :: Lens' TargetPoolsInsert' (Maybe AuthKey)
 tpiKey = lens _tpiKey (\ s a -> s{_tpiKey = a})
 
 -- | Name of the region scoping this request.

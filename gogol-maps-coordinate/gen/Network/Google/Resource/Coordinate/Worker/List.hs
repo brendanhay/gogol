@@ -55,7 +55,7 @@ type WorkerListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] WorkerListResponse
@@ -68,7 +68,7 @@ data WorkerList' = WorkerList'
     , _wlPrettyPrint :: !Bool
     , _wlUserIP      :: !(Maybe Text)
     , _wlTeamId      :: !Text
-    , _wlKey         :: !(Maybe Key)
+    , _wlKey         :: !(Maybe AuthKey)
     , _wlOAuthToken  :: !(Maybe OAuthToken)
     , _wlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -129,7 +129,7 @@ wlTeamId = lens _wlTeamId (\ s a -> s{_wlTeamId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-wlKey :: Lens' WorkerList' (Maybe Key)
+wlKey :: Lens' WorkerList' (Maybe AuthKey)
 wlKey = lens _wlKey (\ s a -> s{_wlKey = a})
 
 -- | OAuth 2.0 token for the current user.

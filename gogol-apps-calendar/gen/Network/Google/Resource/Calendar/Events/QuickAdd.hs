@@ -60,7 +60,7 @@ type EventsQuickAddResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Event
 
@@ -73,7 +73,7 @@ data EventsQuickAdd' = EventsQuickAdd'
     , _eqaPrettyPrint       :: !Bool
     , _eqaText              :: !Text
     , _eqaUserIP            :: !(Maybe Text)
-    , _eqaKey               :: !(Maybe Key)
+    , _eqaKey               :: !(Maybe AuthKey)
     , _eqaSendNotifications :: !(Maybe Bool)
     , _eqaOAuthToken        :: !(Maybe OAuthToken)
     , _eqaFields            :: !(Maybe Text)
@@ -151,7 +151,7 @@ eqaUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eqaKey :: Lens' EventsQuickAdd' (Maybe Key)
+eqaKey :: Lens' EventsQuickAdd' (Maybe AuthKey)
 eqaKey = lens _eqaKey (\ s a -> s{_eqaKey = a})
 
 -- | Whether to send notifications about the creation of the event. Optional.

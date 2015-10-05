@@ -57,7 +57,7 @@ type AchievementsResetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Post '[JSON] AchievementResetResponse
@@ -72,7 +72,7 @@ data AchievementsReset' = AchievementsReset'
     , _arPrettyPrint   :: !Bool
     , _arAchievementId :: !Text
     , _arUserIP        :: !(Maybe Text)
-    , _arKey           :: !(Maybe Key)
+    , _arKey           :: !(Maybe AuthKey)
     , _arOAuthToken    :: !(Maybe OAuthToken)
     , _arFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -135,7 +135,7 @@ arUserIP = lens _arUserIP (\ s a -> s{_arUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-arKey :: Lens' AchievementsReset' (Maybe Key)
+arKey :: Lens' AchievementsReset' (Maybe AuthKey)
 arKey = lens _arKey (\ s a -> s{_arKey = a})
 
 -- | OAuth 2.0 token for the current user.

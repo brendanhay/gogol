@@ -54,7 +54,7 @@ type QuestsResetAllForAllPlayersResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -66,7 +66,7 @@ data QuestsResetAllForAllPlayers' = QuestsResetAllForAllPlayers'
     { _qrafapQuotaUser   :: !(Maybe Text)
     , _qrafapPrettyPrint :: !Bool
     , _qrafapUserIP      :: !(Maybe Text)
-    , _qrafapKey         :: !(Maybe Key)
+    , _qrafapKey         :: !(Maybe AuthKey)
     , _qrafapOAuthToken  :: !(Maybe OAuthToken)
     , _qrafapFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -121,7 +121,7 @@ qrafapUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-qrafapKey :: Lens' QuestsResetAllForAllPlayers' (Maybe Key)
+qrafapKey :: Lens' QuestsResetAllForAllPlayers' (Maybe AuthKey)
 qrafapKey
   = lens _qrafapKey (\ s a -> s{_qrafapKey = a})
 

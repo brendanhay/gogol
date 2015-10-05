@@ -64,7 +64,7 @@ type ManagementUploadsGetResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] Upload
@@ -79,7 +79,7 @@ data ManagementUploadsGet' = ManagementUploadsGet'
     , _mugUserIP             :: !(Maybe Text)
     , _mugCustomDataSourceId :: !Text
     , _mugAccountId          :: !Text
-    , _mugKey                :: !(Maybe Key)
+    , _mugKey                :: !(Maybe AuthKey)
     , _mugOAuthToken         :: !(Maybe OAuthToken)
     , _mugUploadId           :: !Text
     , _mugFields             :: !(Maybe Text)
@@ -167,7 +167,7 @@ mugAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mugKey :: Lens' ManagementUploadsGet' (Maybe Key)
+mugKey :: Lens' ManagementUploadsGet' (Maybe AuthKey)
 mugKey = lens _mugKey (\ s a -> s{_mugKey = a})
 
 -- | OAuth 2.0 token for the current user.

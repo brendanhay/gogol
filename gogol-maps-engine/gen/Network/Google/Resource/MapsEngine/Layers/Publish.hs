@@ -57,7 +57,7 @@ type LayersPublishResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Post '[JSON] PublishResponse
@@ -70,7 +70,7 @@ data LayersPublish' = LayersPublish'
     , _lPrettyPrint :: !Bool
     , _lForce       :: !(Maybe Bool)
     , _lUserIP      :: !(Maybe Text)
-    , _lKey         :: !(Maybe Key)
+    , _lKey         :: !(Maybe AuthKey)
     , _lId          :: !Text
     , _lOAuthToken  :: !(Maybe OAuthToken)
     , _lFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ lUserIP = lens _lUserIP (\ s a -> s{_lUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lKey :: Lens' LayersPublish' (Maybe Key)
+lKey :: Lens' LayersPublish' (Maybe AuthKey)
 lKey = lens _lKey (\ s a -> s{_lKey = a})
 
 -- | The ID of the layer.

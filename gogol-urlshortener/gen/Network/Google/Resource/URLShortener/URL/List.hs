@@ -57,7 +57,7 @@ type URLListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] URLHistory
 
@@ -69,7 +69,7 @@ data URLList' = URLList'
     , _ulPrettyPrint :: !Bool
     , _ulUserIP      :: !(Maybe Text)
     , _ulStartToken  :: !(Maybe Text)
-    , _ulKey         :: !(Maybe Key)
+    , _ulKey         :: !(Maybe AuthKey)
     , _ulProjection  :: !(Maybe URLListProjection)
     , _ulOAuthToken  :: !(Maybe OAuthToken)
     , _ulFields      :: !(Maybe Text)
@@ -134,7 +134,7 @@ ulStartToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ulKey :: Lens' URLList' (Maybe Key)
+ulKey :: Lens' URLList' (Maybe AuthKey)
 ulKey = lens _ulKey (\ s a -> s{_ulKey = a})
 
 -- | Additional information to return.

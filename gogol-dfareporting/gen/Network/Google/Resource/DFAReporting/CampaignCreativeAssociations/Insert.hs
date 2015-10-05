@@ -61,7 +61,7 @@ type CampaignCreativeAssociationsInsertResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] CampaignCreativeAssociation :>
@@ -79,7 +79,7 @@ data CampaignCreativeAssociationsInsert' = CampaignCreativeAssociationsInsert'
     , _ccaiCampaignId  :: !Int64
     , _ccaiProFileId   :: !Int64
     , _ccaiPayload     :: !CampaignCreativeAssociation
-    , _ccaiKey         :: !(Maybe Key)
+    , _ccaiKey         :: !(Maybe AuthKey)
     , _ccaiOAuthToken  :: !(Maybe OAuthToken)
     , _ccaiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -163,7 +163,7 @@ ccaiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccaiKey :: Lens' CampaignCreativeAssociationsInsert' (Maybe Key)
+ccaiKey :: Lens' CampaignCreativeAssociationsInsert' (Maybe AuthKey)
 ccaiKey = lens _ccaiKey (\ s a -> s{_ccaiKey = a})
 
 -- | OAuth 2.0 token for the current user.

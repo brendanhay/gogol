@@ -63,7 +63,7 @@ type ManagementCustomMetricsListResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] CustomMetrics
@@ -77,7 +77,7 @@ data ManagementCustomMetricsList' = ManagementCustomMetricsList'
     , _mcmlWebPropertyId :: !Text
     , _mcmlUserIP        :: !(Maybe Text)
     , _mcmlAccountId     :: !Text
-    , _mcmlKey           :: !(Maybe Key)
+    , _mcmlKey           :: !(Maybe AuthKey)
     , _mcmlOAuthToken    :: !(Maybe OAuthToken)
     , _mcmlStartIndex    :: !(Maybe Int32)
     , _mcmlMaxResults    :: !(Maybe Int32)
@@ -160,7 +160,7 @@ mcmlAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcmlKey :: Lens' ManagementCustomMetricsList' (Maybe Key)
+mcmlKey :: Lens' ManagementCustomMetricsList' (Maybe AuthKey)
 mcmlKey = lens _mcmlKey (\ s a -> s{_mcmlKey = a})
 
 -- | OAuth 2.0 token for the current user.

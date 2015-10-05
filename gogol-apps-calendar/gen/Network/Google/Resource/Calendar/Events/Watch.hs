@@ -94,7 +94,8 @@ type EventsWatchResource =
                                                    :>
                                                    QueryParam "userIp" Text :>
                                                      QueryParam "fields" Text :>
-                                                       QueryParam "key" Key :>
+                                                       QueryParam "key" AuthKey
+                                                         :>
                                                          QueryParam
                                                            "oauth_token"
                                                            OAuthToken
@@ -126,7 +127,7 @@ data EventsWatch' = EventsWatch'
     , _ewQ                       :: !(Maybe Text)
     , _ewSharedExtendedProperty  :: !(Maybe [Text])
     , _ewMaxAttendees            :: !(Maybe Int32)
-    , _ewKey                     :: !(Maybe Key)
+    , _ewKey                     :: !(Maybe AuthKey)
     , _ewICalUId                 :: !(Maybe Text)
     , _ewUpdatedMin              :: !(Maybe DateTime')
     , _ewPageToken               :: !(Maybe Text)
@@ -342,7 +343,7 @@ ewMaxAttendees
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ewKey :: Lens' EventsWatch' (Maybe Key)
+ewKey :: Lens' EventsWatch' (Maybe AuthKey)
 ewKey = lens _ewKey (\ s a -> s{_ewKey = a})
 
 -- | Specifies event ID in the iCalendar format to be included in the

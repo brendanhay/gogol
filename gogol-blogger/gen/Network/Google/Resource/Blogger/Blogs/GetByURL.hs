@@ -57,7 +57,7 @@ type BlogsGetByURLResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Blog
 
@@ -69,7 +69,7 @@ data BlogsGetByURL' = BlogsGetByURL'
     , _bgbuPrettyPrint :: !Bool
     , _bgbuUserIP      :: !(Maybe Text)
     , _bgbuURL         :: !Text
-    , _bgbuKey         :: !(Maybe Key)
+    , _bgbuKey         :: !(Maybe AuthKey)
     , _bgbuView        :: !(Maybe BlogsGetByURLView)
     , _bgbuOAuthToken  :: !(Maybe OAuthToken)
     , _bgbuFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ bgbuURL = lens _bgbuURL (\ s a -> s{_bgbuURL = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bgbuKey :: Lens' BlogsGetByURL' (Maybe Key)
+bgbuKey :: Lens' BlogsGetByURL' (Maybe AuthKey)
 bgbuKey = lens _bgbuKey (\ s a -> s{_bgbuKey = a})
 
 -- | Access level with which to view the blog. Note that some fields require

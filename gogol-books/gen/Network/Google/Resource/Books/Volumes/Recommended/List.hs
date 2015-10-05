@@ -61,7 +61,7 @@ type VolumesRecommendedListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
@@ -74,7 +74,7 @@ data VolumesRecommendedList' = VolumesRecommendedList'
     , _vrlUserIP                   :: !(Maybe Text)
     , _vrlLocale                   :: !(Maybe Text)
     , _vrlMaxAllowedMaturityRating :: !(Maybe VolumesRecommendedListMaxAllowedMaturityRating)
-    , _vrlKey                      :: !(Maybe Key)
+    , _vrlKey                      :: !(Maybe AuthKey)
     , _vrlSource                   :: !(Maybe Text)
     , _vrlOAuthToken               :: !(Maybe OAuthToken)
     , _vrlFields                   :: !(Maybe Text)
@@ -151,7 +151,7 @@ vrlMaxAllowedMaturityRating
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vrlKey :: Lens' VolumesRecommendedList' (Maybe Key)
+vrlKey :: Lens' VolumesRecommendedList' (Maybe AuthKey)
 vrlKey = lens _vrlKey (\ s a -> s{_vrlKey = a})
 
 -- | String to identify the originator of this request.

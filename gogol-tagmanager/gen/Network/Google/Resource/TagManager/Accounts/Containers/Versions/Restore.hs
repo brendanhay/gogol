@@ -64,7 +64,7 @@ type AccountsContainersVersionsRestoreResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Post '[JSON] ContainerVersion
@@ -82,7 +82,7 @@ data AccountsContainersVersionsRestore' = AccountsContainersVersionsRestore'
     , _acvrUserIP             :: !(Maybe Text)
     , _acvrContainerVersionId :: !Text
     , _acvrAccountId          :: !Text
-    , _acvrKey                :: !(Maybe Key)
+    , _acvrKey                :: !(Maybe AuthKey)
     , _acvrOAuthToken         :: !(Maybe OAuthToken)
     , _acvrFields             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -167,7 +167,7 @@ acvrAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acvrKey :: Lens' AccountsContainersVersionsRestore' (Maybe Key)
+acvrKey :: Lens' AccountsContainersVersionsRestore' (Maybe AuthKey)
 acvrKey = lens _acvrKey (\ s a -> s{_acvrKey = a})
 
 -- | OAuth 2.0 token for the current user.

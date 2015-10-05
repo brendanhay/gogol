@@ -56,7 +56,7 @@ type AdvertisersUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Advertiser :> Put '[JSON] Advertiser
@@ -70,7 +70,7 @@ data AdvertisersUpdate' = AdvertisersUpdate'
     , _advUserIP      :: !(Maybe Text)
     , _advProFileId   :: !Int64
     , _advPayload     :: !Advertiser
-    , _advKey         :: !(Maybe Key)
+    , _advKey         :: !(Maybe AuthKey)
     , _advOAuthToken  :: !(Maybe OAuthToken)
     , _advFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,7 +142,7 @@ advPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-advKey :: Lens' AdvertisersUpdate' (Maybe Key)
+advKey :: Lens' AdvertisersUpdate' (Maybe AuthKey)
 advKey = lens _advKey (\ s a -> s{_advKey = a})
 
 -- | OAuth 2.0 token for the current user.

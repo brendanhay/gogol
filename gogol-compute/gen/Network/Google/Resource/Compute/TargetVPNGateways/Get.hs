@@ -59,7 +59,7 @@ type TargetVPNGatewaysGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] TargetVPNGateway
@@ -73,7 +73,7 @@ data TargetVPNGatewaysGet' = TargetVPNGatewaysGet'
     , _tvggProject          :: !Text
     , _tvggUserIP           :: !(Maybe Text)
     , _tvggTargetVPNGateway :: !Text
-    , _tvggKey              :: !(Maybe Key)
+    , _tvggKey              :: !(Maybe AuthKey)
     , _tvggRegion           :: !Text
     , _tvggOAuthToken       :: !(Maybe OAuthToken)
     , _tvggFields           :: !(Maybe Text)
@@ -152,7 +152,7 @@ tvggTargetVPNGateway
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tvggKey :: Lens' TargetVPNGatewaysGet' (Maybe Key)
+tvggKey :: Lens' TargetVPNGatewaysGet' (Maybe AuthKey)
 tvggKey = lens _tvggKey (\ s a -> s{_tvggKey = a})
 
 -- | The name of the region for this request.

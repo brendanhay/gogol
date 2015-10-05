@@ -62,7 +62,7 @@ type PostsSearchResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] PostList
 
@@ -76,7 +76,7 @@ data PostsSearch' = PostsSearch'
     , _psUserIP      :: !(Maybe Text)
     , _psBlogId      :: !Text
     , _psQ           :: !Text
-    , _psKey         :: !(Maybe Key)
+    , _psKey         :: !(Maybe AuthKey)
     , _psFetchBodies :: !Bool
     , _psOAuthToken  :: !(Maybe OAuthToken)
     , _psFields      :: !(Maybe Text)
@@ -157,7 +157,7 @@ psQ = lens _psQ (\ s a -> s{_psQ = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psKey :: Lens' PostsSearch' (Maybe Key)
+psKey :: Lens' PostsSearch' (Maybe AuthKey)
 psKey = lens _psKey (\ s a -> s{_psKey = a})
 
 -- | Whether the body content of posts is included (default: true). This

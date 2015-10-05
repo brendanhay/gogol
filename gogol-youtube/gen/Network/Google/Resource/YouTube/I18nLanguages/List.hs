@@ -57,7 +57,7 @@ type I18nLanguagesListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] I18nLanguageListResponse
@@ -72,7 +72,7 @@ data I18nLanguagesList' = I18nLanguagesList'
     , _illPrettyPrint :: !Bool
     , _illUserIP      :: !(Maybe Text)
     , _illHl          :: !Text
-    , _illKey         :: !(Maybe Key)
+    , _illKey         :: !(Maybe AuthKey)
     , _illOAuthToken  :: !(Maybe OAuthToken)
     , _illFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ illHl = lens _illHl (\ s a -> s{_illHl = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-illKey :: Lens' I18nLanguagesList' (Maybe Key)
+illKey :: Lens' I18nLanguagesList' (Maybe AuthKey)
 illKey = lens _illKey (\ s a -> s{_illKey = a})
 
 -- | OAuth 2.0 token for the current user.

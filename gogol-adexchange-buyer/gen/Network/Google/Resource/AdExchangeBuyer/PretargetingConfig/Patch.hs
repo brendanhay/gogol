@@ -58,7 +58,7 @@ type PretargetingConfigPatchResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] PretargetingConfig :>
@@ -74,7 +74,7 @@ data PretargetingConfigPatch' = PretargetingConfigPatch'
     , _pcpUserIP      :: !(Maybe Text)
     , _pcpPayload     :: !PretargetingConfig
     , _pcpAccountId   :: !Int64
-    , _pcpKey         :: !(Maybe Key)
+    , _pcpKey         :: !(Maybe AuthKey)
     , _pcpConfigId    :: !Int64
     , _pcpOAuthToken  :: !(Maybe OAuthToken)
     , _pcpFields      :: !(Maybe Text)
@@ -151,7 +151,7 @@ pcpAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pcpKey :: Lens' PretargetingConfigPatch' (Maybe Key)
+pcpKey :: Lens' PretargetingConfigPatch' (Maybe AuthKey)
 pcpKey = lens _pcpKey (\ s a -> s{_pcpKey = a})
 
 -- | The specific id of the configuration to update.

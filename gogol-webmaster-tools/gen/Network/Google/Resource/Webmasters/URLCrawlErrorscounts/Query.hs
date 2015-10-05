@@ -67,7 +67,7 @@ type URLCrawlErrorscountsQueryResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] URLCrawlErrorsCountsQueryResponse
@@ -83,7 +83,7 @@ data URLCrawlErrorscountsQuery' = URLCrawlErrorscountsQuery'
     , _uceqUserIP           :: !(Maybe Text)
     , _uceqCategory         :: !(Maybe URLCrawlErrorscountsQueryCategory)
     , _uceqSiteURL          :: !Text
-    , _uceqKey              :: !(Maybe Key)
+    , _uceqKey              :: !(Maybe AuthKey)
     , _uceqLatestCountsOnly :: !Bool
     , _uceqOAuthToken       :: !(Maybe OAuthToken)
     , _uceqFields           :: !(Maybe Text)
@@ -170,7 +170,7 @@ uceqSiteURL
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uceqKey :: Lens' URLCrawlErrorscountsQuery' (Maybe Key)
+uceqKey :: Lens' URLCrawlErrorscountsQuery' (Maybe AuthKey)
 uceqKey = lens _uceqKey (\ s a -> s{_uceqKey = a})
 
 -- | If true, returns only the latest crawl error counts.

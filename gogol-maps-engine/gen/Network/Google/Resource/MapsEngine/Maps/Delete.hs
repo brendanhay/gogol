@@ -54,7 +54,7 @@ type MapsDeleteResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -65,7 +65,7 @@ data MapsDelete' = MapsDelete'
     { _mdQuotaUser   :: !(Maybe Text)
     , _mdPrettyPrint :: !Bool
     , _mdUserIP      :: !(Maybe Text)
-    , _mdKey         :: !(Maybe Key)
+    , _mdKey         :: !(Maybe AuthKey)
     , _mdId          :: !Text
     , _mdOAuthToken  :: !(Maybe OAuthToken)
     , _mdFields      :: !(Maybe Text)
@@ -123,7 +123,7 @@ mdUserIP = lens _mdUserIP (\ s a -> s{_mdUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mdKey :: Lens' MapsDelete' (Maybe Key)
+mdKey :: Lens' MapsDelete' (Maybe AuthKey)
 mdKey = lens _mdKey (\ s a -> s{_mdKey = a})
 
 -- | The ID of the map. Only the map creator or project owner are permitted

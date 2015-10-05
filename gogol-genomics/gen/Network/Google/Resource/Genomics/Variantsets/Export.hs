@@ -56,7 +56,7 @@ type VariantsetsExportResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ExportVariantSetRequest :>
@@ -71,7 +71,7 @@ data VariantsetsExport' = VariantsetsExport'
     , _veVariantSetId :: !Text
     , _veUserIP       :: !(Maybe Text)
     , _vePayload      :: !ExportVariantSetRequest
-    , _veKey          :: !(Maybe Key)
+    , _veKey          :: !(Maybe AuthKey)
     , _veOAuthToken   :: !(Maybe OAuthToken)
     , _veFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ vePayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-veKey :: Lens' VariantsetsExport' (Maybe Key)
+veKey :: Lens' VariantsetsExport' (Maybe AuthKey)
 veKey = lens _veKey (\ s a -> s{_veKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -54,7 +54,7 @@ type UsersDeleteResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -65,7 +65,7 @@ data UsersDelete' = UsersDelete'
     { _udQuotaUser   :: !(Maybe Text)
     , _udPrettyPrint :: !Bool
     , _udUserIP      :: !(Maybe Text)
-    , _udKey         :: !(Maybe Key)
+    , _udKey         :: !(Maybe AuthKey)
     , _udOAuthToken  :: !(Maybe OAuthToken)
     , _udUserKey     :: !Text
     , _udFields      :: !(Maybe Text)
@@ -123,7 +123,7 @@ udUserIP = lens _udUserIP (\ s a -> s{_udUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udKey :: Lens' UsersDelete' (Maybe Key)
+udKey :: Lens' UsersDelete' (Maybe AuthKey)
 udKey = lens _udKey (\ s a -> s{_udKey = a})
 
 -- | OAuth 2.0 token for the current user.

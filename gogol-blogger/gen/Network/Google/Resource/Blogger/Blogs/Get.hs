@@ -58,7 +58,7 @@ type BlogsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Blog
 
@@ -70,7 +70,7 @@ data BlogsGet' = BlogsGet'
     , _bgPrettyPrint :: !Bool
     , _bgUserIP      :: !(Maybe Text)
     , _bgBlogId      :: !Text
-    , _bgKey         :: !(Maybe Key)
+    , _bgKey         :: !(Maybe AuthKey)
     , _bgMaxPosts    :: !(Maybe Word32)
     , _bgView        :: !(Maybe BlogsGetView)
     , _bgOAuthToken  :: !(Maybe OAuthToken)
@@ -139,7 +139,7 @@ bgBlogId = lens _bgBlogId (\ s a -> s{_bgBlogId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bgKey :: Lens' BlogsGet' (Maybe Key)
+bgKey :: Lens' BlogsGet' (Maybe AuthKey)
 bgKey = lens _bgKey (\ s a -> s{_bgKey = a})
 
 -- | Maximum number of posts to pull back with the blog.

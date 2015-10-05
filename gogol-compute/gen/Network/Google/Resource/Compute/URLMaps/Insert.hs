@@ -57,7 +57,7 @@ type URLMapsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] URLMap :> Post '[JSON] Operation
@@ -72,7 +72,7 @@ data URLMapsInsert' = URLMapsInsert'
     , _umiProject     :: !Text
     , _umiUserIP      :: !(Maybe Text)
     , _umiPayload     :: !URLMap
-    , _umiKey         :: !(Maybe Key)
+    , _umiKey         :: !(Maybe AuthKey)
     , _umiOAuthToken  :: !(Maybe OAuthToken)
     , _umiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ umiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umiKey :: Lens' URLMapsInsert' (Maybe Key)
+umiKey :: Lens' URLMapsInsert' (Maybe AuthKey)
 umiKey = lens _umiKey (\ s a -> s{_umiKey = a})
 
 -- | OAuth 2.0 token for the current user.

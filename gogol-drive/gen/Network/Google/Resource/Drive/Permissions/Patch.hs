@@ -60,7 +60,7 @@ type PermissionsPatchResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Permission :>
@@ -74,7 +74,7 @@ data PermissionsPatch' = PermissionsPatch'
     , _pppPrettyPrint       :: !Bool
     , _pppUserIP            :: !(Maybe Text)
     , _pppPayload           :: !Permission
-    , _pppKey               :: !(Maybe Key)
+    , _pppKey               :: !(Maybe AuthKey)
     , _pppTransferOwnership :: !Bool
     , _pppFileId            :: !Text
     , _pppOAuthToken        :: !(Maybe OAuthToken)
@@ -151,7 +151,7 @@ pppPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pppKey :: Lens' PermissionsPatch' (Maybe Key)
+pppKey :: Lens' PermissionsPatch' (Maybe AuthKey)
 pppKey = lens _pppKey (\ s a -> s{_pppKey = a})
 
 -- | Whether changing a role to \'owner\' downgrades the current owners to

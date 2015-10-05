@@ -56,7 +56,7 @@ type ClientAccessDeleteResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -67,7 +67,7 @@ data ClientAccessDelete' = ClientAccessDelete'
     , _cadPrettyPrint      :: !Bool
     , _cadUserIP           :: !(Maybe Text)
     , _cadSponsorAccountId :: !Int32
-    , _cadKey              :: !(Maybe Key)
+    , _cadKey              :: !(Maybe AuthKey)
     , _cadClientAccountId  :: !Int64
     , _cadOAuthToken       :: !(Maybe OAuthToken)
     , _cadFields           :: !(Maybe Text)
@@ -135,7 +135,7 @@ cadSponsorAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cadKey :: Lens' ClientAccessDelete' (Maybe Key)
+cadKey :: Lens' ClientAccessDelete' (Maybe AuthKey)
 cadKey = lens _cadKey (\ s a -> s{_cadKey = a})
 
 cadClientAccountId :: Lens' ClientAccessDelete' Int64

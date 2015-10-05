@@ -59,7 +59,7 @@ type ForwardingRulesDeleteResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
@@ -72,7 +72,7 @@ data ForwardingRulesDelete' = ForwardingRulesDelete'
     , _frdProject        :: !Text
     , _frdForwardingRule :: !Text
     , _frdUserIP         :: !(Maybe Text)
-    , _frdKey            :: !(Maybe Key)
+    , _frdKey            :: !(Maybe AuthKey)
     , _frdRegion         :: !Text
     , _frdOAuthToken     :: !(Maybe OAuthToken)
     , _frdFields         :: !(Maybe Text)
@@ -150,7 +150,7 @@ frdUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-frdKey :: Lens' ForwardingRulesDelete' (Maybe Key)
+frdKey :: Lens' ForwardingRulesDelete' (Maybe AuthKey)
 frdKey = lens _frdKey (\ s a -> s{_frdKey = a})
 
 -- | Name of the region scoping this request.

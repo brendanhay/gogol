@@ -62,7 +62,7 @@ type AccountsAdUnitsPatchResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] AdUnit :> Patch '[JSON] AdUnit
@@ -79,7 +79,7 @@ data AccountsAdUnitsPatch' = AccountsAdUnitsPatch'
     , _aaupPayload     :: !AdUnit
     , _aaupAdClientId  :: !Text
     , _aaupAccountId   :: !Text
-    , _aaupKey         :: !(Maybe Key)
+    , _aaupKey         :: !(Maybe AuthKey)
     , _aaupOAuthToken  :: !(Maybe OAuthToken)
     , _aaupFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -172,7 +172,7 @@ aaupAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aaupKey :: Lens' AccountsAdUnitsPatch' (Maybe Key)
+aaupKey :: Lens' AccountsAdUnitsPatch' (Maybe AuthKey)
 aaupKey = lens _aaupKey (\ s a -> s{_aaupKey = a})
 
 -- | OAuth 2.0 token for the current user.

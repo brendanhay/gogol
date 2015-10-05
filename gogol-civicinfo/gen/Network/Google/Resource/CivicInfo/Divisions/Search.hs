@@ -54,7 +54,7 @@ type DivisionsSearchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] DivisionSearchResponse
@@ -66,7 +66,7 @@ data DivisionsSearch' = DivisionsSearch'
     { _dsQuotaUser   :: !(Maybe Text)
     , _dsPrettyPrint :: !Bool
     , _dsUserIP      :: !(Maybe Text)
-    , _dsKey         :: !(Maybe Key)
+    , _dsKey         :: !(Maybe AuthKey)
     , _dsQuery       :: !(Maybe Text)
     , _dsOAuthToken  :: !(Maybe OAuthToken)
     , _dsFields      :: !(Maybe Text)
@@ -123,7 +123,7 @@ dsUserIP = lens _dsUserIP (\ s a -> s{_dsUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dsKey :: Lens' DivisionsSearch' (Maybe Key)
+dsKey :: Lens' DivisionsSearch' (Maybe AuthKey)
 dsKey = lens _dsKey (\ s a -> s{_dsKey = a})
 
 -- | The search query. Queries can cover any parts of a OCD ID or a human

@@ -67,7 +67,7 @@ type VolumesAssociatedListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
@@ -80,7 +80,7 @@ data VolumesAssociatedList' = VolumesAssociatedList'
     , _valUserIP                   :: !(Maybe Text)
     , _valLocale                   :: !(Maybe Text)
     , _valMaxAllowedMaturityRating :: !(Maybe VolumesAssociatedListMaxAllowedMaturityRating)
-    , _valKey                      :: !(Maybe Key)
+    , _valKey                      :: !(Maybe AuthKey)
     , _valVolumeId                 :: !Text
     , _valSource                   :: !(Maybe Text)
     , _valOAuthToken               :: !(Maybe OAuthToken)
@@ -166,7 +166,7 @@ valMaxAllowedMaturityRating
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-valKey :: Lens' VolumesAssociatedList' (Maybe Key)
+valKey :: Lens' VolumesAssociatedList' (Maybe AuthKey)
 valKey = lens _valKey (\ s a -> s{_valKey = a})
 
 -- | ID of the source volume.

@@ -75,7 +75,7 @@ type CoursesStudentsListResource =
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListStudentsResponse
@@ -96,7 +96,7 @@ data CoursesStudentsList' = CoursesStudentsList'
     , _cslAccessToken    :: !(Maybe Text)
     , _cslUploadType     :: !(Maybe Text)
     , _cslBearerToken    :: !(Maybe Text)
-    , _cslKey            :: !(Maybe Key)
+    , _cslKey            :: !(Maybe AuthKey)
     , _cslPageToken      :: !(Maybe Text)
     , _cslOAuthToken     :: !(Maybe OAuthToken)
     , _cslPageSize       :: !(Maybe Int32)
@@ -214,7 +214,7 @@ cslBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cslKey :: Lens' CoursesStudentsList' (Maybe Key)
+cslKey :: Lens' CoursesStudentsList' (Maybe AuthKey)
 cslKey = lens _cslKey (\ s a -> s{_cslKey = a})
 
 -- | [nextPageToken][google.classroom.v1.ListStudentsResponse.next_page_token]

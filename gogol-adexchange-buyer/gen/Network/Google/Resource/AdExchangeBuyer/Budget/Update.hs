@@ -58,7 +58,7 @@ type BudgetUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Budget :> Put '[JSON] Budget
@@ -73,7 +73,7 @@ data BudgetUpdate' = BudgetUpdate'
     , _buUserIP      :: !(Maybe Text)
     , _buPayload     :: !Budget
     , _buAccountId   :: !Int64
-    , _buKey         :: !(Maybe Key)
+    , _buKey         :: !(Maybe AuthKey)
     , _buOAuthToken  :: !(Maybe OAuthToken)
     , _buBillingId   :: !Int64
     , _buFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ buAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-buKey :: Lens' BudgetUpdate' (Maybe Key)
+buKey :: Lens' BudgetUpdate' (Maybe AuthKey)
 buKey = lens _buKey (\ s a -> s{_buKey = a})
 
 -- | OAuth 2.0 token for the current user.

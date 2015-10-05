@@ -75,7 +75,7 @@ type AppsModulesVersionsGetResource =
                                    QueryParam "quotaUser" Text :>
                                      QueryParam "prettyPrint" Bool :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "key" Key :>
+                                         QueryParam "key" AuthKey :>
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
@@ -95,7 +95,7 @@ data AppsModulesVersionsGet' = AppsModulesVersionsGet'
     , _amvgVersionsId     :: !Text
     , _amvgModulesId      :: !Text
     , _amvgBearerToken    :: !(Maybe Text)
-    , _amvgKey            :: !(Maybe Key)
+    , _amvgKey            :: !(Maybe AuthKey)
     , _amvgAppsId         :: !Text
     , _amvgView           :: !(Maybe Text)
     , _amvgOAuthToken     :: !(Maybe OAuthToken)
@@ -225,7 +225,7 @@ amvgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-amvgKey :: Lens' AppsModulesVersionsGet' (Maybe Key)
+amvgKey :: Lens' AppsModulesVersionsGet' (Maybe AuthKey)
 amvgKey = lens _amvgKey (\ s a -> s{_amvgKey = a})
 
 -- | Part of \`name\`. Name of the resource requested. For example:

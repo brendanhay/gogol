@@ -63,7 +63,7 @@ type ManagementUploadsDeleteUploadDataResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON]
@@ -81,7 +81,7 @@ data ManagementUploadsDeleteUploadData' = ManagementUploadsDeleteUploadData'
     , _mududCustomDataSourceId :: !Text
     , _mududPayload            :: !AnalyticsDataimportDeleteUploadDataRequest
     , _mududAccountId          :: !Text
-    , _mududKey                :: !(Maybe Key)
+    , _mududKey                :: !(Maybe AuthKey)
     , _mududOAuthToken         :: !(Maybe OAuthToken)
     , _mududFields             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -175,7 +175,7 @@ mududAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mududKey :: Lens' ManagementUploadsDeleteUploadData' (Maybe Key)
+mududKey :: Lens' ManagementUploadsDeleteUploadData' (Maybe AuthKey)
 mududKey = lens _mududKey (\ s a -> s{_mududKey = a})
 
 -- | OAuth 2.0 token for the current user.

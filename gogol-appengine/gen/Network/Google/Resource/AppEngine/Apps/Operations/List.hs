@@ -78,7 +78,7 @@ type AppsOperationsListResource =
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "fields" Text :>
-                                       QueryParam "key" Key :>
+                                       QueryParam "key" AuthKey :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] ListOperationsResponse
@@ -99,7 +99,7 @@ data AppsOperationsList' = AppsOperationsList'
     , _aolAccessToken    :: !(Maybe Text)
     , _aolUploadType     :: !(Maybe Text)
     , _aolBearerToken    :: !(Maybe Text)
-    , _aolKey            :: !(Maybe Key)
+    , _aolKey            :: !(Maybe AuthKey)
     , _aolAppsId         :: !Text
     , _aolFilter         :: !(Maybe Text)
     , _aolPageToken      :: !(Maybe Text)
@@ -215,7 +215,7 @@ aolBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aolKey :: Lens' AppsOperationsList' (Maybe Key)
+aolKey :: Lens' AppsOperationsList' (Maybe AuthKey)
 aolKey = lens _aolKey (\ s a -> s{_aolKey = a})
 
 -- | Part of \`name\`. The name of the operation collection.

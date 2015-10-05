@@ -63,7 +63,7 @@ type BackupRunsListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] BackupRunsListResponse
@@ -77,7 +77,7 @@ data BackupRunsList' = BackupRunsList'
     , _brlPrettyPrint :: !Bool
     , _brlProject     :: !Text
     , _brlUserIP      :: !(Maybe Text)
-    , _brlKey         :: !(Maybe Key)
+    , _brlKey         :: !(Maybe AuthKey)
     , _brlPageToken   :: !(Maybe Text)
     , _brlOAuthToken  :: !(Maybe OAuthToken)
     , _brlMaxResults  :: !(Maybe Int32)
@@ -153,7 +153,7 @@ brlUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-brlKey :: Lens' BackupRunsList' (Maybe Key)
+brlKey :: Lens' BackupRunsList' (Maybe AuthKey)
 brlKey = lens _brlKey (\ s a -> s{_brlKey = a})
 
 -- | A previously-returned page token representing part of the larger set of

@@ -71,7 +71,7 @@ type ProjectsSubscriptionsModifyAckDeadlineResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] ModifyAckDeadlineRequest :>
@@ -93,7 +93,7 @@ data ProjectsSubscriptionsModifyAckDeadline' = ProjectsSubscriptionsModifyAckDea
     , _psmadUploadType     :: !(Maybe Text)
     , _psmadPayload        :: !ModifyAckDeadlineRequest
     , _psmadBearerToken    :: !(Maybe Text)
-    , _psmadKey            :: !(Maybe Key)
+    , _psmadKey            :: !(Maybe AuthKey)
     , _psmadOAuthToken     :: !(Maybe OAuthToken)
     , _psmadSubscription   :: !Text
     , _psmadFields         :: !(Maybe Text)
@@ -208,7 +208,7 @@ psmadBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psmadKey :: Lens' ProjectsSubscriptionsModifyAckDeadline' (Maybe Key)
+psmadKey :: Lens' ProjectsSubscriptionsModifyAckDeadline' (Maybe AuthKey)
 psmadKey = lens _psmadKey (\ s a -> s{_psmadKey = a})
 
 -- | OAuth 2.0 token for the current user.

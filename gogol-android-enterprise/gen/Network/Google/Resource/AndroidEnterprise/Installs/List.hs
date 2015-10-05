@@ -61,7 +61,7 @@ type InstallsListResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] InstallsListResponse
@@ -75,7 +75,7 @@ data InstallsList' = InstallsList'
     , _ilEnterpriseId :: !Text
     , _ilUserIP       :: !(Maybe Text)
     , _ilUserId       :: !Text
-    , _ilKey          :: !(Maybe Key)
+    , _ilKey          :: !(Maybe AuthKey)
     , _ilDeviceId     :: !Text
     , _ilOAuthToken   :: !(Maybe OAuthToken)
     , _ilFields       :: !(Maybe Text)
@@ -151,7 +151,7 @@ ilUserId = lens _ilUserId (\ s a -> s{_ilUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ilKey :: Lens' InstallsList' (Maybe Key)
+ilKey :: Lens' InstallsList' (Maybe AuthKey)
 ilKey = lens _ilKey (\ s a -> s{_ilKey = a})
 
 -- | The Android ID of the device.

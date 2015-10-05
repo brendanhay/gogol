@@ -60,7 +60,7 @@ type ManagementProFilesInsertResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] ProFile :> Post '[JSON] ProFile
@@ -75,7 +75,7 @@ data ManagementProFilesInsert' = ManagementProFilesInsert'
     , _mpfiUserIP        :: !(Maybe Text)
     , _mpfiPayload       :: !ProFile
     , _mpfiAccountId     :: !Text
-    , _mpfiKey           :: !(Maybe Key)
+    , _mpfiKey           :: !(Maybe AuthKey)
     , _mpfiOAuthToken    :: !(Maybe OAuthToken)
     , _mpfiFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -159,7 +159,7 @@ mpfiAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpfiKey :: Lens' ManagementProFilesInsert' (Maybe Key)
+mpfiKey :: Lens' ManagementProFilesInsert' (Maybe AuthKey)
 mpfiKey = lens _mpfiKey (\ s a -> s{_mpfiKey = a})
 
 -- | OAuth 2.0 token for the current user.

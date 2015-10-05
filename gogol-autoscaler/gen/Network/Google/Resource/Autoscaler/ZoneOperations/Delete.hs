@@ -59,7 +59,7 @@ type ZoneOperationsDeleteResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -73,7 +73,7 @@ data ZoneOperationsDelete' = ZoneOperationsDelete'
     , _zodOperation   :: !Text
     , _zodUserIP      :: !(Maybe Text)
     , _zodZone        :: !Text
-    , _zodKey         :: !(Maybe Key)
+    , _zodKey         :: !(Maybe AuthKey)
     , _zodOAuthToken  :: !(Maybe OAuthToken)
     , _zodFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -150,7 +150,7 @@ zodZone = lens _zodZone (\ s a -> s{_zodZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-zodKey :: Lens' ZoneOperationsDelete' (Maybe Key)
+zodKey :: Lens' ZoneOperationsDelete' (Maybe AuthKey)
 zodKey = lens _zodKey (\ s a -> s{_zodKey = a})
 
 -- | OAuth 2.0 token for the current user.

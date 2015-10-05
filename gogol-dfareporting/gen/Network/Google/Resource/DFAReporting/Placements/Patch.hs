@@ -58,7 +58,7 @@ type PlacementsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Placement :> Patch '[JSON] Placement
@@ -72,7 +72,7 @@ data PlacementsPatch' = PlacementsPatch'
     , _ppUserIP      :: !(Maybe Text)
     , _ppProFileId   :: !Int64
     , _ppPayload     :: !Placement
-    , _ppKey         :: !(Maybe Key)
+    , _ppKey         :: !(Maybe AuthKey)
     , _ppId          :: !Int64
     , _ppOAuthToken  :: !(Maybe OAuthToken)
     , _ppFields      :: !(Maybe Text)
@@ -148,7 +148,7 @@ ppPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ppKey :: Lens' PlacementsPatch' (Maybe Key)
+ppKey :: Lens' PlacementsPatch' (Maybe AuthKey)
 ppKey = lens _ppKey (\ s a -> s{_ppKey = a})
 
 -- | Placement ID.

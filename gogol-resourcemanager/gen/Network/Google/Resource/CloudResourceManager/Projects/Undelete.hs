@@ -75,7 +75,7 @@ type ProjectsUndeleteResource =
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Post '[JSON] Empty
@@ -100,7 +100,7 @@ data ProjectsUndelete' = ProjectsUndelete'
     , _proAccessToken    :: !(Maybe Text)
     , _proUploadType     :: !(Maybe Text)
     , _proBearerToken    :: !(Maybe Text)
-    , _proKey            :: !(Maybe Key)
+    , _proKey            :: !(Maybe AuthKey)
     , _proProjectId      :: !Text
     , _proOAuthToken     :: !(Maybe OAuthToken)
     , _proFields         :: !(Maybe Text)
@@ -204,7 +204,7 @@ proBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-proKey :: Lens' ProjectsUndelete' (Maybe Key)
+proKey :: Lens' ProjectsUndelete' (Maybe AuthKey)
 proKey = lens _proKey (\ s a -> s{_proKey = a})
 
 -- | The project ID (for example, \`foo-bar-123\`). Required.

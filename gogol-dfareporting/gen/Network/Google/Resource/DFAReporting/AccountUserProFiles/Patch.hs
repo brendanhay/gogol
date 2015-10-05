@@ -59,7 +59,7 @@ type AccountUserProFilesPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] AccountUserProFile :>
@@ -75,7 +75,7 @@ data AccountUserProFilesPatch' = AccountUserProFilesPatch'
     , _aupfpUserIP      :: !(Maybe Text)
     , _aupfpProFileId   :: !Int64
     , _aupfpPayload     :: !AccountUserProFile
-    , _aupfpKey         :: !(Maybe Key)
+    , _aupfpKey         :: !(Maybe AuthKey)
     , _aupfpId          :: !Int64
     , _aupfpOAuthToken  :: !(Maybe OAuthToken)
     , _aupfpFields      :: !(Maybe Text)
@@ -154,7 +154,7 @@ aupfpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aupfpKey :: Lens' AccountUserProFilesPatch' (Maybe Key)
+aupfpKey :: Lens' AccountUserProFilesPatch' (Maybe AuthKey)
 aupfpKey = lens _aupfpKey (\ s a -> s{_aupfpKey = a})
 
 -- | User profile ID.

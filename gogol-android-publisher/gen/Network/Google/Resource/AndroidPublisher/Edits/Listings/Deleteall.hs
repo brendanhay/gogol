@@ -57,7 +57,7 @@ type EditsListingsDeleteallResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -69,7 +69,7 @@ data EditsListingsDeleteall' = EditsListingsDeleteall'
     , _ediPrettyPrint :: !Bool
     , _ediPackageName :: !Text
     , _ediUserIP      :: !(Maybe Text)
-    , _ediKey         :: !(Maybe Key)
+    , _ediKey         :: !(Maybe AuthKey)
     , _ediOAuthToken  :: !(Maybe OAuthToken)
     , _ediEditId      :: !Text
     , _ediFields      :: !(Maybe Text)
@@ -139,7 +139,7 @@ ediUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ediKey :: Lens' EditsListingsDeleteall' (Maybe Key)
+ediKey :: Lens' EditsListingsDeleteall' (Maybe AuthKey)
 ediKey = lens _ediKey (\ s a -> s{_ediKey = a})
 
 -- | OAuth 2.0 token for the current user.

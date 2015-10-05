@@ -58,7 +58,7 @@ type AccountsContainersMacrosListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListMacrosResponse
@@ -72,7 +72,7 @@ data AccountsContainersMacrosList' = AccountsContainersMacrosList'
     , _acmlContainerId :: !Text
     , _acmlUserIP      :: !(Maybe Text)
     , _acmlAccountId   :: !Text
-    , _acmlKey         :: !(Maybe Key)
+    , _acmlKey         :: !(Maybe AuthKey)
     , _acmlOAuthToken  :: !(Maybe OAuthToken)
     , _acmlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -147,7 +147,7 @@ acmlAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acmlKey :: Lens' AccountsContainersMacrosList' (Maybe Key)
+acmlKey :: Lens' AccountsContainersMacrosList' (Maybe AuthKey)
 acmlKey = lens _acmlKey (\ s a -> s{_acmlKey = a})
 
 -- | OAuth 2.0 token for the current user.

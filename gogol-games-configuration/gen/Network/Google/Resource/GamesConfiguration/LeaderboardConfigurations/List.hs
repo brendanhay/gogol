@@ -59,7 +59,7 @@ type LeaderboardConfigurationsListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] LeaderboardConfigurationListResponse
@@ -72,7 +72,7 @@ data LeaderboardConfigurationsList' = LeaderboardConfigurationsList'
     , _lclPrettyPrint   :: !Bool
     , _lclUserIP        :: !(Maybe Text)
     , _lclApplicationId :: !Text
-    , _lclKey           :: !(Maybe Key)
+    , _lclKey           :: !(Maybe AuthKey)
     , _lclPageToken     :: !(Maybe Text)
     , _lclOAuthToken    :: !(Maybe OAuthToken)
     , _lclMaxResults    :: !(Maybe Int32)
@@ -144,7 +144,7 @@ lclApplicationId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lclKey :: Lens' LeaderboardConfigurationsList' (Maybe Key)
+lclKey :: Lens' LeaderboardConfigurationsList' (Maybe AuthKey)
 lclKey = lens _lclKey (\ s a -> s{_lclKey = a})
 
 -- | The token returned by the previous request.

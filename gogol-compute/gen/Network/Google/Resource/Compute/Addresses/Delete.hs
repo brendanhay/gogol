@@ -59,7 +59,7 @@ type AddressesDeleteResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
@@ -72,7 +72,7 @@ data AddressesDelete' = AddressesDelete'
     , _addProject     :: !Text
     , _addUserIP      :: !(Maybe Text)
     , _addAddress     :: !Text
-    , _addKey         :: !(Maybe Key)
+    , _addKey         :: !(Maybe AuthKey)
     , _addRegion      :: !Text
     , _addOAuthToken  :: !(Maybe OAuthToken)
     , _addFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ addAddress
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-addKey :: Lens' AddressesDelete' (Maybe Key)
+addKey :: Lens' AddressesDelete' (Maybe AuthKey)
 addKey = lens _addKey (\ s a -> s{_addKey = a})
 
 -- | The name of the region for this request.

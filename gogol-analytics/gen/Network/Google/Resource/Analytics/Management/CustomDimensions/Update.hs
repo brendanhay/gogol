@@ -64,7 +64,7 @@ type ManagementCustomDimensionsUpdateResource =
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] CustomDimension :>
@@ -81,7 +81,7 @@ data ManagementCustomDimensionsUpdate' = ManagementCustomDimensionsUpdate'
     , _mcduUserIP                      :: !(Maybe Text)
     , _mcduPayload                     :: !CustomDimension
     , _mcduAccountId                   :: !Text
-    , _mcduKey                         :: !(Maybe Key)
+    , _mcduKey                         :: !(Maybe AuthKey)
     , _mcduOAuthToken                  :: !(Maybe OAuthToken)
     , _mcduCustomDimensionId           :: !Text
     , _mcduFields                      :: !(Maybe Text)
@@ -180,7 +180,7 @@ mcduAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcduKey :: Lens' ManagementCustomDimensionsUpdate' (Maybe Key)
+mcduKey :: Lens' ManagementCustomDimensionsUpdate' (Maybe AuthKey)
 mcduKey = lens _mcduKey (\ s a -> s{_mcduKey = a})
 
 -- | OAuth 2.0 token for the current user.

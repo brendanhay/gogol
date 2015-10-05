@@ -57,7 +57,7 @@ type PlacementGroupsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] PlacementGroup
@@ -70,7 +70,7 @@ data PlacementGroupsGet' = PlacementGroupsGet'
     , _pggPrettyPrint :: !Bool
     , _pggUserIP      :: !(Maybe Text)
     , _pggProFileId   :: !Int64
-    , _pggKey         :: !(Maybe Key)
+    , _pggKey         :: !(Maybe AuthKey)
     , _pggId          :: !Int64
     , _pggOAuthToken  :: !(Maybe OAuthToken)
     , _pggFields      :: !(Maybe Text)
@@ -138,7 +138,7 @@ pggProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pggKey :: Lens' PlacementGroupsGet' (Maybe Key)
+pggKey :: Lens' PlacementGroupsGet' (Maybe AuthKey)
 pggKey = lens _pggKey (\ s a -> s{_pggKey = a})
 
 -- | Placement group ID.

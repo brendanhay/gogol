@@ -55,7 +55,7 @@ type EventsResetAllForAllPlayersResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -68,7 +68,7 @@ data EventsResetAllForAllPlayers' = EventsResetAllForAllPlayers'
     { _erafapQuotaUser   :: !(Maybe Text)
     , _erafapPrettyPrint :: !Bool
     , _erafapUserIP      :: !(Maybe Text)
-    , _erafapKey         :: !(Maybe Key)
+    , _erafapKey         :: !(Maybe AuthKey)
     , _erafapOAuthToken  :: !(Maybe OAuthToken)
     , _erafapFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -123,7 +123,7 @@ erafapUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-erafapKey :: Lens' EventsResetAllForAllPlayers' (Maybe Key)
+erafapKey :: Lens' EventsResetAllForAllPlayers' (Maybe AuthKey)
 erafapKey
   = lens _erafapKey (\ s a -> s{_erafapKey = a})
 

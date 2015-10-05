@@ -58,7 +58,7 @@ type AccountsAlertsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -72,7 +72,7 @@ data AccountsAlertsDelete' = AccountsAlertsDelete'
     , _aadUserIP      :: !(Maybe Text)
     , _aadAlertId     :: !Text
     , _aadAccountId   :: !Text
-    , _aadKey         :: !(Maybe Key)
+    , _aadKey         :: !(Maybe AuthKey)
     , _aadOAuthToken  :: !(Maybe OAuthToken)
     , _aadFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ aadAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aadKey :: Lens' AccountsAlertsDelete' (Maybe Key)
+aadKey :: Lens' AccountsAlertsDelete' (Maybe AuthKey)
 aadKey = lens _aadKey (\ s a -> s{_aadKey = a})
 
 -- | OAuth 2.0 token for the current user.

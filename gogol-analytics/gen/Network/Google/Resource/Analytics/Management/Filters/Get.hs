@@ -58,7 +58,7 @@ type ManagementFiltersGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Filter
 
@@ -71,7 +71,7 @@ data ManagementFiltersGet' = ManagementFiltersGet'
     , _mfgFilterId    :: !Text
     , _mfgUserIP      :: !(Maybe Text)
     , _mfgAccountId   :: !Text
-    , _mfgKey         :: !(Maybe Key)
+    , _mfgKey         :: !(Maybe AuthKey)
     , _mfgOAuthToken  :: !(Maybe OAuthToken)
     , _mfgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ mfgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mfgKey :: Lens' ManagementFiltersGet' (Maybe Key)
+mfgKey :: Lens' ManagementFiltersGet' (Maybe AuthKey)
 mfgKey = lens _mfgKey (\ s a -> s{_mfgKey = a})
 
 -- | OAuth 2.0 token for the current user.

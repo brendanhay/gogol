@@ -61,7 +61,7 @@ type DatasetsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Dataset :> Patch '[JSON] Dataset
@@ -77,7 +77,7 @@ data DatasetsPatch' = DatasetsPatch'
     , _dpPrettyPrint :: !Bool
     , _dpUserIP      :: !(Maybe Text)
     , _dpPayload     :: !Dataset
-    , _dpKey         :: !(Maybe Key)
+    , _dpKey         :: !(Maybe AuthKey)
     , _dpDatasetId   :: !Text
     , _dpProjectId   :: !Text
     , _dpOAuthToken  :: !(Maybe OAuthToken)
@@ -149,7 +149,7 @@ dpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dpKey :: Lens' DatasetsPatch' (Maybe Key)
+dpKey :: Lens' DatasetsPatch' (Maybe AuthKey)
 dpKey = lens _dpKey (\ s a -> s{_dpKey = a})
 
 -- | Dataset ID of the dataset being updated

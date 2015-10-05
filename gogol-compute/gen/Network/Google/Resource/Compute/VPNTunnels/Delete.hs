@@ -59,7 +59,7 @@ type VPNTunnelsDeleteResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
@@ -71,7 +71,7 @@ data VPNTunnelsDelete' = VPNTunnelsDelete'
     , _vtdPrettyPrint :: !Bool
     , _vtdProject     :: !Text
     , _vtdUserIP      :: !(Maybe Text)
-    , _vtdKey         :: !(Maybe Key)
+    , _vtdKey         :: !(Maybe AuthKey)
     , _vtdVPNTunnel   :: !Text
     , _vtdRegion      :: !Text
     , _vtdOAuthToken  :: !(Maybe OAuthToken)
@@ -144,7 +144,7 @@ vtdUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vtdKey :: Lens' VPNTunnelsDelete' (Maybe Key)
+vtdKey :: Lens' VPNTunnelsDelete' (Maybe AuthKey)
 vtdKey = lens _vtdKey (\ s a -> s{_vtdKey = a})
 
 -- | Name of the VpnTunnel resource to delete.

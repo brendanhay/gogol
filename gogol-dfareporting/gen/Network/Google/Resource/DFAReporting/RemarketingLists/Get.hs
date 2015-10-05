@@ -57,7 +57,7 @@ type RemarketingListsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] RemarketingList
@@ -70,7 +70,7 @@ data RemarketingListsGet' = RemarketingListsGet'
     , _rlgPrettyPrint :: !Bool
     , _rlgUserIP      :: !(Maybe Text)
     , _rlgProFileId   :: !Int64
-    , _rlgKey         :: !(Maybe Key)
+    , _rlgKey         :: !(Maybe AuthKey)
     , _rlgId          :: !Int64
     , _rlgOAuthToken  :: !(Maybe OAuthToken)
     , _rlgFields      :: !(Maybe Text)
@@ -138,7 +138,7 @@ rlgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rlgKey :: Lens' RemarketingListsGet' (Maybe Key)
+rlgKey :: Lens' RemarketingListsGet' (Maybe AuthKey)
 rlgKey = lens _rlgKey (\ s a -> s{_rlgKey = a})
 
 -- | Remarketing list ID.

@@ -56,7 +56,7 @@ type CampaignsUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Campaign :> Put '[JSON] Campaign
@@ -70,7 +70,7 @@ data CampaignsUpdate' = CampaignsUpdate'
     , _cuUserIP      :: !(Maybe Text)
     , _cuProFileId   :: !Int64
     , _cuPayload     :: !Campaign
-    , _cuKey         :: !(Maybe Key)
+    , _cuKey         :: !(Maybe AuthKey)
     , _cuOAuthToken  :: !(Maybe OAuthToken)
     , _cuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -141,7 +141,7 @@ cuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuKey :: Lens' CampaignsUpdate' (Maybe Key)
+cuKey :: Lens' CampaignsUpdate' (Maybe AuthKey)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -57,7 +57,7 @@ type SizesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Size
 
@@ -69,7 +69,7 @@ data SizesGet' = SizesGet'
     , _sizPrettyPrint :: !Bool
     , _sizUserIP      :: !(Maybe Text)
     , _sizProFileId   :: !Int64
-    , _sizKey         :: !(Maybe Key)
+    , _sizKey         :: !(Maybe AuthKey)
     , _sizId          :: !Int64
     , _sizOAuthToken  :: !(Maybe OAuthToken)
     , _sizFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ sizProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sizKey :: Lens' SizesGet' (Maybe Key)
+sizKey :: Lens' SizesGet' (Maybe AuthKey)
 sizKey = lens _sizKey (\ s a -> s{_sizKey = a})
 
 -- | Size ID.

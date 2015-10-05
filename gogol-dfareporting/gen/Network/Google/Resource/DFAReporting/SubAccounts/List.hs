@@ -67,7 +67,7 @@ type SubAccountsListResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] SubAccountsListResponse
@@ -83,7 +83,7 @@ data SubAccountsList' = SubAccountsList'
     , _salIds          :: !(Maybe [Int64])
     , _salProFileId    :: !Int64
     , _salSortOrder    :: !(Maybe SubAccountsListSortOrder)
-    , _salKey          :: !(Maybe Key)
+    , _salKey          :: !(Maybe AuthKey)
     , _salPageToken    :: !(Maybe Text)
     , _salSortField    :: !(Maybe SubAccountsListSortField)
     , _salOAuthToken   :: !(Maybe OAuthToken)
@@ -190,7 +190,7 @@ salSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-salKey :: Lens' SubAccountsList' (Maybe Key)
+salKey :: Lens' SubAccountsList' (Maybe AuthKey)
 salKey = lens _salKey (\ s a -> s{_salKey = a})
 
 -- | Value of the nextPageToken from the previous result page.

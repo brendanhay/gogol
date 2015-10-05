@@ -58,7 +58,7 @@ type RealtimeGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] ()
        :<|>
@@ -70,7 +70,7 @@ type RealtimeGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltMedia :> Get '[OctetStream] Body
 
@@ -82,7 +82,7 @@ data RealtimeGet' = RealtimeGet'
     { _reaQuotaUser   :: !(Maybe Text)
     , _reaPrettyPrint :: !Bool
     , _reaUserIP      :: !(Maybe Text)
-    , _reaKey         :: !(Maybe Key)
+    , _reaKey         :: !(Maybe AuthKey)
     , _reaFileId      :: !Text
     , _reaOAuthToken  :: !(Maybe OAuthToken)
     , _reaRevision    :: !(Maybe Int32)
@@ -145,7 +145,7 @@ reaUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-reaKey :: Lens' RealtimeGet' (Maybe Key)
+reaKey :: Lens' RealtimeGet' (Maybe AuthKey)
 reaKey = lens _reaKey (\ s a -> s{_reaKey = a})
 
 -- | The ID of the file that the Realtime API data model is associated with.

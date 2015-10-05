@@ -57,7 +57,7 @@ type PermissionsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Permission
 
@@ -68,7 +68,7 @@ data PermissionsGet' = PermissionsGet'
     { _pggQuotaUser    :: !(Maybe Text)
     , _pggPrettyPrint  :: !Bool
     , _pggUserIP       :: !(Maybe Text)
-    , _pggKey          :: !(Maybe Key)
+    , _pggKey          :: !(Maybe AuthKey)
     , _pggFileId       :: !Text
     , _pggOAuthToken   :: !(Maybe OAuthToken)
     , _pggPermissionId :: !Text
@@ -132,7 +132,7 @@ pggUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pggKey :: Lens' PermissionsGet' (Maybe Key)
+pggKey :: Lens' PermissionsGet' (Maybe AuthKey)
 pggKey = lens _pggKey (\ s a -> s{_pggKey = a})
 
 -- | The ID for the file.

@@ -67,7 +67,7 @@ type BeaconInfoGetforObservedResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON]
@@ -90,7 +90,7 @@ data BeaconInfoGetforObserved' = BeaconInfoGetforObserved'
     , _bigoUploadType     :: !(Maybe Text)
     , _bigoPayload        :: !GetInfoForObservedBeaconsRequest
     , _bigoBearerToken    :: !(Maybe Text)
-    , _bigoKey            :: !(Maybe Key)
+    , _bigoKey            :: !(Maybe AuthKey)
     , _bigoOAuthToken     :: !(Maybe OAuthToken)
     , _bigoFields         :: !(Maybe Text)
     , _bigoCallback       :: !(Maybe Text)
@@ -200,7 +200,7 @@ bigoBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bigoKey :: Lens' BeaconInfoGetforObserved' (Maybe Key)
+bigoKey :: Lens' BeaconInfoGetforObserved' (Maybe AuthKey)
 bigoKey = lens _bigoKey (\ s a -> s{_bigoKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -59,7 +59,7 @@ type PropertiesGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Property
 
@@ -72,7 +72,7 @@ data PropertiesGet' = PropertiesGet'
     , _pgPropertyKey :: !Text
     , _pgUserIP      :: !(Maybe Text)
     , _pgVisibility  :: !Text
-    , _pgKey         :: !(Maybe Key)
+    , _pgKey         :: !(Maybe AuthKey)
     , _pgFileId      :: !Text
     , _pgOAuthToken  :: !(Maybe OAuthToken)
     , _pgFields      :: !(Maybe Text)
@@ -148,7 +148,7 @@ pgVisibility
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgKey :: Lens' PropertiesGet' (Maybe Key)
+pgKey :: Lens' PropertiesGet' (Maybe AuthKey)
 pgKey = lens _pgKey (\ s a -> s{_pgKey = a})
 
 -- | The ID of the file.

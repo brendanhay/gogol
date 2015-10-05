@@ -59,7 +59,7 @@ type TargetInstancesGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] TargetInstance
@@ -74,7 +74,7 @@ data TargetInstancesGet' = TargetInstancesGet'
     , _tigTargetInstance :: !Text
     , _tigUserIP         :: !(Maybe Text)
     , _tigZone           :: !Text
-    , _tigKey            :: !(Maybe Key)
+    , _tigKey            :: !(Maybe AuthKey)
     , _tigOAuthToken     :: !(Maybe OAuthToken)
     , _tigFields         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -155,7 +155,7 @@ tigZone = lens _tigZone (\ s a -> s{_tigZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tigKey :: Lens' TargetInstancesGet' (Maybe Key)
+tigKey :: Lens' TargetInstancesGet' (Maybe AuthKey)
 tigKey = lens _tigKey (\ s a -> s{_tigKey = a})
 
 -- | OAuth 2.0 token for the current user.

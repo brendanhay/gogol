@@ -58,7 +58,7 @@ type TurnBasedMatchesLeaveResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Put '[JSON] TurnBasedMatch
@@ -71,7 +71,7 @@ data TurnBasedMatchesLeave' = TurnBasedMatchesLeave'
     { _tbmlbQuotaUser   :: !(Maybe Text)
     , _tbmlbPrettyPrint :: !Bool
     , _tbmlbUserIP      :: !(Maybe Text)
-    , _tbmlbKey         :: !(Maybe Key)
+    , _tbmlbKey         :: !(Maybe AuthKey)
     , _tbmlbLanguage    :: !(Maybe Text)
     , _tbmlbOAuthToken  :: !(Maybe OAuthToken)
     , _tbmlbMatchId     :: !Text
@@ -135,7 +135,7 @@ tbmlbUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tbmlbKey :: Lens' TurnBasedMatchesLeave' (Maybe Key)
+tbmlbKey :: Lens' TurnBasedMatchesLeave' (Maybe AuthKey)
 tbmlbKey = lens _tbmlbKey (\ s a -> s{_tbmlbKey = a})
 
 -- | The preferred language to use for strings returned by this method.

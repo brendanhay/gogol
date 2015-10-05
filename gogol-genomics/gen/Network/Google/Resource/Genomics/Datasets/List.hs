@@ -58,7 +58,7 @@ type DatasetsListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ListDatasetsResponse
@@ -71,7 +71,7 @@ data DatasetsList' = DatasetsList'
     , _dlPrettyPrint   :: !Bool
     , _dlUserIP        :: !(Maybe Text)
     , _dlProjectNumber :: !(Maybe Int64)
-    , _dlKey           :: !(Maybe Key)
+    , _dlKey           :: !(Maybe AuthKey)
     , _dlPageToken     :: !(Maybe Text)
     , _dlOAuthToken    :: !(Maybe OAuthToken)
     , _dlPageSize      :: !(Maybe Int32)
@@ -141,7 +141,7 @@ dlProjectNumber
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dlKey :: Lens' DatasetsList' (Maybe Key)
+dlKey :: Lens' DatasetsList' (Maybe AuthKey)
 dlKey = lens _dlKey (\ s a -> s{_dlKey = a})
 
 -- | The continuation token, which is used to page through large result sets.

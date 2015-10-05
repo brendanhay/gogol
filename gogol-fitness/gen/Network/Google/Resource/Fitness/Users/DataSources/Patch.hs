@@ -62,7 +62,7 @@ type UsersDataSourcesPatchResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] DataSource :>
@@ -83,7 +83,7 @@ data UsersDataSourcesPatch' = UsersDataSourcesPatch'
     , _udspDataSourceId :: !Text
     , _udspPayload      :: !DataSource
     , _udspUserId       :: !Text
-    , _udspKey          :: !(Maybe Key)
+    , _udspKey          :: !(Maybe AuthKey)
     , _udspOAuthToken   :: !(Maybe OAuthToken)
     , _udspFields       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -167,7 +167,7 @@ udspUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udspKey :: Lens' UsersDataSourcesPatch' (Maybe Key)
+udspKey :: Lens' UsersDataSourcesPatch' (Maybe AuthKey)
 udspKey = lens _udspKey (\ s a -> s{_udspKey = a})
 
 -- | OAuth 2.0 token for the current user.

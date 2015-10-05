@@ -61,7 +61,7 @@ type TargetPoolsAggregatedListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] TargetPoolAggregatedList
@@ -74,7 +74,7 @@ data TargetPoolsAggregatedList' = TargetPoolsAggregatedList'
     , _tpalPrettyPrint :: !Bool
     , _tpalProject     :: !Text
     , _tpalUserIP      :: !(Maybe Text)
-    , _tpalKey         :: !(Maybe Key)
+    , _tpalKey         :: !(Maybe AuthKey)
     , _tpalFilter      :: !(Maybe Text)
     , _tpalPageToken   :: !(Maybe Text)
     , _tpalOAuthToken  :: !(Maybe OAuthToken)
@@ -150,7 +150,7 @@ tpalUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tpalKey :: Lens' TargetPoolsAggregatedList' (Maybe Key)
+tpalKey :: Lens' TargetPoolsAggregatedList' (Maybe AuthKey)
 tpalKey = lens _tpalKey (\ s a -> s{_tpalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form

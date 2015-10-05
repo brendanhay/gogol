@@ -54,7 +54,7 @@ type BatchReportDefinitionsListResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] BatchReportDefinitionList
@@ -67,7 +67,7 @@ data BatchReportDefinitionsList' = BatchReportDefinitionsList'
     , _brdlPrettyPrint            :: !Bool
     , _brdlUserIP                 :: !(Maybe Text)
     , _brdlOnBehalfOfContentOwner :: !Text
-    , _brdlKey                    :: !(Maybe Key)
+    , _brdlKey                    :: !(Maybe AuthKey)
     , _brdlOAuthToken             :: !(Maybe OAuthToken)
     , _brdlFields                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -133,7 +133,7 @@ brdlOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-brdlKey :: Lens' BatchReportDefinitionsList' (Maybe Key)
+brdlKey :: Lens' BatchReportDefinitionsList' (Maybe AuthKey)
 brdlKey = lens _brdlKey (\ s a -> s{_brdlKey = a})
 
 -- | OAuth 2.0 token for the current user.

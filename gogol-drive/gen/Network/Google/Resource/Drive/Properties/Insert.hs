@@ -56,7 +56,7 @@ type PropertiesInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Property :> Post '[JSON] Property
@@ -69,7 +69,7 @@ data PropertiesInsert' = PropertiesInsert'
     , _proPrettyPrint :: !Bool
     , _proUserIP      :: !(Maybe Text)
     , _proPayload     :: !Property
-    , _proKey         :: !(Maybe Key)
+    , _proKey         :: !(Maybe AuthKey)
     , _proFileId      :: !Text
     , _proOAuthToken  :: !(Maybe OAuthToken)
     , _proFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ proPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-proKey :: Lens' PropertiesInsert' (Maybe Key)
+proKey :: Lens' PropertiesInsert' (Maybe AuthKey)
 proKey = lens _proKey (\ s a -> s{_proKey = a})
 
 -- | The ID of the file.

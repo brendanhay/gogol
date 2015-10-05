@@ -57,7 +57,7 @@ type NetworksGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Network
 
@@ -70,7 +70,7 @@ data NetworksGet' = NetworksGet'
     , _ngProject     :: !Text
     , _ngUserIP      :: !(Maybe Text)
     , _ngNetwork     :: !Text
-    , _ngKey         :: !(Maybe Key)
+    , _ngKey         :: !(Maybe AuthKey)
     , _ngOAuthToken  :: !(Maybe OAuthToken)
     , _ngFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -141,7 +141,7 @@ ngNetwork
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ngKey :: Lens' NetworksGet' (Maybe Key)
+ngKey :: Lens' NetworksGet' (Maybe AuthKey)
 ngKey = lens _ngKey (\ s a -> s{_ngKey = a})
 
 -- | OAuth 2.0 token for the current user.

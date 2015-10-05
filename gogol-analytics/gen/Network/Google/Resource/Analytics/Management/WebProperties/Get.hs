@@ -58,7 +58,7 @@ type ManagementWebPropertiesGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] WebProperty
 
@@ -71,7 +71,7 @@ data ManagementWebPropertiesGet' = ManagementWebPropertiesGet'
     , _mwpgWebPropertyId :: !Text
     , _mwpgUserIP        :: !(Maybe Text)
     , _mwpgAccountId     :: !Text
-    , _mwpgKey           :: !(Maybe Key)
+    , _mwpgKey           :: !(Maybe AuthKey)
     , _mwpgOAuthToken    :: !(Maybe OAuthToken)
     , _mwpgFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -146,7 +146,7 @@ mwpgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mwpgKey :: Lens' ManagementWebPropertiesGet' (Maybe Key)
+mwpgKey :: Lens' ManagementWebPropertiesGet' (Maybe AuthKey)
 mwpgKey = lens _mwpgKey (\ s a -> s{_mwpgKey = a})
 
 -- | OAuth 2.0 token for the current user.

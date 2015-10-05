@@ -62,7 +62,7 @@ type CreativeFieldValuesPatchResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] CreativeFieldValue :>
@@ -79,7 +79,7 @@ data CreativeFieldValuesPatch' = CreativeFieldValuesPatch'
     , _cfvpUserIP          :: !(Maybe Text)
     , _cfvpProFileId       :: !Int64
     , _cfvpPayload         :: !CreativeFieldValue
-    , _cfvpKey             :: !(Maybe Key)
+    , _cfvpKey             :: !(Maybe AuthKey)
     , _cfvpId              :: !Int64
     , _cfvpOAuthToken      :: !(Maybe OAuthToken)
     , _cfvpFields          :: !(Maybe Text)
@@ -168,7 +168,7 @@ cfvpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cfvpKey :: Lens' CreativeFieldValuesPatch' (Maybe Key)
+cfvpKey :: Lens' CreativeFieldValuesPatch' (Maybe AuthKey)
 cfvpKey = lens _cfvpKey (\ s a -> s{_cfvpKey = a})
 
 -- | Creative Field Value ID

@@ -53,7 +53,7 @@ type WebResourceGetTokenResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON]
@@ -70,7 +70,7 @@ data WebResourceGetToken' = WebResourceGetToken'
     , _wrgtPrettyPrint :: !Bool
     , _wrgtUserIP      :: !(Maybe Text)
     , _wrgtPayload     :: !SiteVerificationWebResourceGettokenRequest
-    , _wrgtKey         :: !(Maybe Key)
+    , _wrgtKey         :: !(Maybe AuthKey)
     , _wrgtOAuthToken  :: !(Maybe OAuthToken)
     , _wrgtFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -134,7 +134,7 @@ wrgtPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-wrgtKey :: Lens' WebResourceGetToken' (Maybe Key)
+wrgtKey :: Lens' WebResourceGetToken' (Maybe AuthKey)
 wrgtKey = lens _wrgtKey (\ s a -> s{_wrgtKey = a})
 
 -- | OAuth 2.0 token for the current user.

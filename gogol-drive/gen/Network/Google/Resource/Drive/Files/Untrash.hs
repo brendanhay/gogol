@@ -55,7 +55,7 @@ type FilesUntrashResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Post '[JSON] File
 
@@ -66,7 +66,7 @@ data FilesUntrash' = FilesUntrash'
     { _fQuotaUser   :: !(Maybe Text)
     , _fPrettyPrint :: !Bool
     , _fUserIP      :: !(Maybe Text)
-    , _fKey         :: !(Maybe Key)
+    , _fKey         :: !(Maybe AuthKey)
     , _fFileId      :: !Text
     , _fOAuthToken  :: !(Maybe OAuthToken)
     , _fFields      :: !(Maybe Text)
@@ -123,7 +123,7 @@ fUserIP = lens _fUserIP (\ s a -> s{_fUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fKey :: Lens' FilesUntrash' (Maybe Key)
+fKey :: Lens' FilesUntrash' (Maybe AuthKey)
 fKey = lens _fKey (\ s a -> s{_fKey = a})
 
 -- | The ID of the file to untrash.

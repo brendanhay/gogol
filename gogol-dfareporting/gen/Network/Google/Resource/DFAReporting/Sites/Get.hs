@@ -57,7 +57,7 @@ type SitesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Site
 
@@ -69,7 +69,7 @@ data SitesGet' = SitesGet'
     , _sgPrettyPrint :: !Bool
     , _sgUserIP      :: !(Maybe Text)
     , _sgProFileId   :: !Int64
-    , _sgKey         :: !(Maybe Key)
+    , _sgKey         :: !(Maybe AuthKey)
     , _sgId          :: !Int64
     , _sgOAuthToken  :: !(Maybe OAuthToken)
     , _sgFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ sgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sgKey :: Lens' SitesGet' (Maybe Key)
+sgKey :: Lens' SitesGet' (Maybe AuthKey)
 sgKey = lens _sgKey (\ s a -> s{_sgKey = a})
 
 -- | Site ID.

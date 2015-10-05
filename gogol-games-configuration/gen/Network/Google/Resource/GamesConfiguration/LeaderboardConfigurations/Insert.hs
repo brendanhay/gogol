@@ -56,7 +56,7 @@ type LeaderboardConfigurationsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] LeaderboardConfiguration :>
@@ -71,7 +71,7 @@ data LeaderboardConfigurationsInsert' = LeaderboardConfigurationsInsert'
     , _lciUserIP        :: !(Maybe Text)
     , _lciPayload       :: !LeaderboardConfiguration
     , _lciApplicationId :: !Text
-    , _lciKey           :: !(Maybe Key)
+    , _lciKey           :: !(Maybe AuthKey)
     , _lciOAuthToken    :: !(Maybe OAuthToken)
     , _lciFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ lciApplicationId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lciKey :: Lens' LeaderboardConfigurationsInsert' (Maybe Key)
+lciKey :: Lens' LeaderboardConfigurationsInsert' (Maybe AuthKey)
 lciKey = lens _lciKey (\ s a -> s{_lciKey = a})
 
 -- | OAuth 2.0 token for the current user.

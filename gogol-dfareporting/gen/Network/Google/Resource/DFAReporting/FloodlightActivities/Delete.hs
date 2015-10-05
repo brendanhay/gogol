@@ -57,7 +57,7 @@ type FloodlightActivitiesDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -69,7 +69,7 @@ data FloodlightActivitiesDelete' = FloodlightActivitiesDelete'
     , _fadPrettyPrint :: !Bool
     , _fadUserIP      :: !(Maybe Text)
     , _fadProFileId   :: !Int64
-    , _fadKey         :: !(Maybe Key)
+    , _fadKey         :: !(Maybe AuthKey)
     , _fadId          :: !Int64
     , _fadOAuthToken  :: !(Maybe OAuthToken)
     , _fadFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ fadProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fadKey :: Lens' FloodlightActivitiesDelete' (Maybe Key)
+fadKey :: Lens' FloodlightActivitiesDelete' (Maybe AuthKey)
 fadKey = lens _fadKey (\ s a -> s{_fadKey = a})
 
 -- | Floodlight activity ID.

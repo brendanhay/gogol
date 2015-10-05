@@ -53,7 +53,7 @@ type BillingInfoListResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] BillingInfoList
@@ -66,7 +66,7 @@ data BillingInfoList' = BillingInfoList'
     { _bilQuotaUser   :: !(Maybe Text)
     , _bilPrettyPrint :: !Bool
     , _bilUserIP      :: !(Maybe Text)
-    , _bilKey         :: !(Maybe Key)
+    , _bilKey         :: !(Maybe AuthKey)
     , _bilOAuthToken  :: !(Maybe OAuthToken)
     , _bilFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -120,7 +120,7 @@ bilUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bilKey :: Lens' BillingInfoList' (Maybe Key)
+bilKey :: Lens' BillingInfoList' (Maybe AuthKey)
 bilKey = lens _bilKey (\ s a -> s{_bilKey = a})
 
 -- | OAuth 2.0 token for the current user.

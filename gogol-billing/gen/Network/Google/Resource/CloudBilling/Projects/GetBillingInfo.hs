@@ -70,7 +70,7 @@ type ProjectsGetBillingInfoResource =
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] ProjectBillingInfo
@@ -90,7 +90,7 @@ data ProjectsGetBillingInfo' = ProjectsGetBillingInfo'
     , _pgbiAccessToken    :: !(Maybe Text)
     , _pgbiUploadType     :: !(Maybe Text)
     , _pgbiBearerToken    :: !(Maybe Text)
-    , _pgbiKey            :: !(Maybe Key)
+    , _pgbiKey            :: !(Maybe AuthKey)
     , _pgbiName           :: !Text
     , _pgbiOAuthToken     :: !(Maybe OAuthToken)
     , _pgbiFields         :: !(Maybe Text)
@@ -196,7 +196,7 @@ pgbiBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgbiKey :: Lens' ProjectsGetBillingInfo' (Maybe Key)
+pgbiKey :: Lens' ProjectsGetBillingInfo' (Maybe AuthKey)
 pgbiKey = lens _pgbiKey (\ s a -> s{_pgbiKey = a})
 
 -- | The resource name of the project for which billing information is

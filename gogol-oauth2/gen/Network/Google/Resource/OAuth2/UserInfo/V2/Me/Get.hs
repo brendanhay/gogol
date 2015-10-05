@@ -54,7 +54,7 @@ type UserInfoV2MeGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] UserInfoplus
 
@@ -64,7 +64,7 @@ data UserInfoV2MeGet' = UserInfoV2MeGet'
     { _uivmgQuotaUser   :: !(Maybe Text)
     , _uivmgPrettyPrint :: !Bool
     , _uivmgUserIP      :: !(Maybe Text)
-    , _uivmgKey         :: !(Maybe Key)
+    , _uivmgKey         :: !(Maybe AuthKey)
     , _uivmgOAuthToken  :: !(Maybe OAuthToken)
     , _uivmgFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -119,7 +119,7 @@ uivmgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uivmgKey :: Lens' UserInfoV2MeGet' (Maybe Key)
+uivmgKey :: Lens' UserInfoV2MeGet' (Maybe AuthKey)
 uivmgKey = lens _uivmgKey (\ s a -> s{_uivmgKey = a})
 
 -- | OAuth 2.0 token for the current user.

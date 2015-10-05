@@ -59,7 +59,7 @@ type RollingUpdatesGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] RollingUpdate
 
@@ -73,7 +73,7 @@ data RollingUpdatesGet' = RollingUpdatesGet'
     , _rugProject       :: !Text
     , _rugUserIP        :: !(Maybe Text)
     , _rugZone          :: !Text
-    , _rugKey           :: !(Maybe Key)
+    , _rugKey           :: !(Maybe AuthKey)
     , _rugOAuthToken    :: !(Maybe OAuthToken)
     , _rugFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -154,7 +154,7 @@ rugZone = lens _rugZone (\ s a -> s{_rugZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rugKey :: Lens' RollingUpdatesGet' (Maybe Key)
+rugKey :: Lens' RollingUpdatesGet' (Maybe AuthKey)
 rugKey = lens _rugKey (\ s a -> s{_rugKey = a})
 
 -- | OAuth 2.0 token for the current user.

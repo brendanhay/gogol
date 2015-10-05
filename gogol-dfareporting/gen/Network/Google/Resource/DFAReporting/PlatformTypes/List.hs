@@ -55,7 +55,7 @@ type PlatformTypesListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] PlatformTypesListResponse
@@ -68,7 +68,7 @@ data PlatformTypesList' = PlatformTypesList'
     , _ptlPrettyPrint :: !Bool
     , _ptlUserIP      :: !(Maybe Text)
     , _ptlProFileId   :: !Int64
-    , _ptlKey         :: !(Maybe Key)
+    , _ptlKey         :: !(Maybe AuthKey)
     , _ptlOAuthToken  :: !(Maybe OAuthToken)
     , _ptlFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -131,7 +131,7 @@ ptlProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ptlKey :: Lens' PlatformTypesList' (Maybe Key)
+ptlKey :: Lens' PlatformTypesList' (Maybe AuthKey)
 ptlKey = lens _ptlKey (\ s a -> s{_ptlKey = a})
 
 -- | OAuth 2.0 token for the current user.

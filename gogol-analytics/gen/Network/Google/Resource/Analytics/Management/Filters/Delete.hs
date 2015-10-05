@@ -58,7 +58,7 @@ type ManagementFiltersDeleteResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Filter
 
@@ -71,7 +71,7 @@ data ManagementFiltersDelete' = ManagementFiltersDelete'
     , _mfdFilterId    :: !Text
     , _mfdUserIP      :: !(Maybe Text)
     , _mfdAccountId   :: !Text
-    , _mfdKey         :: !(Maybe Key)
+    , _mfdKey         :: !(Maybe AuthKey)
     , _mfdOAuthToken  :: !(Maybe OAuthToken)
     , _mfdFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ mfdAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mfdKey :: Lens' ManagementFiltersDelete' (Maybe Key)
+mfdKey :: Lens' ManagementFiltersDelete' (Maybe AuthKey)
 mfdKey = lens _mfdKey (\ s a -> s{_mfdKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -55,7 +55,7 @@ type DictionaryListOfflineMetadataResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Metadata
 
@@ -67,7 +67,7 @@ data DictionaryListOfflineMetadata' = DictionaryListOfflineMetadata'
     , _dlomPrettyPrint :: !Bool
     , _dlomCpksver     :: !Text
     , _dlomUserIP      :: !(Maybe Text)
-    , _dlomKey         :: !(Maybe Key)
+    , _dlomKey         :: !(Maybe AuthKey)
     , _dlomOAuthToken  :: !(Maybe OAuthToken)
     , _dlomFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -131,7 +131,7 @@ dlomUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dlomKey :: Lens' DictionaryListOfflineMetadata' (Maybe Key)
+dlomKey :: Lens' DictionaryListOfflineMetadata' (Maybe AuthKey)
 dlomKey = lens _dlomKey (\ s a -> s{_dlomKey = a})
 
 -- | OAuth 2.0 token for the current user.

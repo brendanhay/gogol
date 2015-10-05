@@ -69,7 +69,7 @@ type ProjectsTopicsPublishResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    ReqBody '[JSON] PublishRequest :>
@@ -91,7 +91,7 @@ data ProjectsTopicsPublish' = ProjectsTopicsPublish'
     , _ptpPayload        :: !PublishRequest
     , _ptpTopic          :: !Text
     , _ptpBearerToken    :: !(Maybe Text)
-    , _ptpKey            :: !(Maybe Key)
+    , _ptpKey            :: !(Maybe AuthKey)
     , _ptpOAuthToken     :: !(Maybe OAuthToken)
     , _ptpFields         :: !(Maybe Text)
     , _ptpCallback       :: !(Maybe Text)
@@ -207,7 +207,7 @@ ptpBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ptpKey :: Lens' ProjectsTopicsPublish' (Maybe Key)
+ptpKey :: Lens' ProjectsTopicsPublish' (Maybe AuthKey)
 ptpKey = lens _ptpKey (\ s a -> s{_ptpKey = a})
 
 -- | OAuth 2.0 token for the current user.

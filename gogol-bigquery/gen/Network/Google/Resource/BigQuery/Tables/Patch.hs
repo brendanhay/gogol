@@ -64,7 +64,7 @@ type TablesPatchResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Table :> Patch '[JSON] Table
@@ -80,7 +80,7 @@ data TablesPatch' = TablesPatch'
     , _tpPrettyPrint :: !Bool
     , _tpUserIP      :: !(Maybe Text)
     , _tpPayload     :: !Table
-    , _tpKey         :: !(Maybe Key)
+    , _tpKey         :: !(Maybe AuthKey)
     , _tpDatasetId   :: !Text
     , _tpProjectId   :: !Text
     , _tpOAuthToken  :: !(Maybe OAuthToken)
@@ -157,7 +157,7 @@ tpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tpKey :: Lens' TablesPatch' (Maybe Key)
+tpKey :: Lens' TablesPatch' (Maybe AuthKey)
 tpKey = lens _tpKey (\ s a -> s{_tpKey = a})
 
 -- | Dataset ID of the table to update

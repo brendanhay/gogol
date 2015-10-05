@@ -66,7 +66,7 @@ type RollingUpdatesListInstanceUpdatesResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] InstanceUpdateList
@@ -81,7 +81,7 @@ data RollingUpdatesListInstanceUpdates' = RollingUpdatesListInstanceUpdates'
     , _ruliuProject       :: !Text
     , _ruliuUserIP        :: !(Maybe Text)
     , _ruliuZone          :: !Text
-    , _ruliuKey           :: !(Maybe Key)
+    , _ruliuKey           :: !(Maybe AuthKey)
     , _ruliuFilter        :: !(Maybe Text)
     , _ruliuPageToken     :: !(Maybe Text)
     , _ruliuOAuthToken    :: !(Maybe OAuthToken)
@@ -176,7 +176,7 @@ ruliuZone
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ruliuKey :: Lens' RollingUpdatesListInstanceUpdates' (Maybe Key)
+ruliuKey :: Lens' RollingUpdatesListInstanceUpdates' (Maybe AuthKey)
 ruliuKey = lens _ruliuKey (\ s a -> s{_ruliuKey = a})
 
 -- | Optional. Filter expression for filtering listed resources.

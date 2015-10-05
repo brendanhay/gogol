@@ -54,7 +54,7 @@ type PawsGetSpectrumBatchResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] PawsGetSpectrumBatchRequest :>
@@ -69,7 +69,7 @@ data PawsGetSpectrumBatch' = PawsGetSpectrumBatch'
     , _pgsbPrettyPrint :: !Bool
     , _pgsbUserIP      :: !(Maybe Text)
     , _pgsbPayload     :: !PawsGetSpectrumBatchRequest
-    , _pgsbKey         :: !(Maybe Key)
+    , _pgsbKey         :: !(Maybe AuthKey)
     , _pgsbOAuthToken  :: !(Maybe OAuthToken)
     , _pgsbFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -133,7 +133,7 @@ pgsbPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgsbKey :: Lens' PawsGetSpectrumBatch' (Maybe Key)
+pgsbKey :: Lens' PawsGetSpectrumBatch' (Maybe AuthKey)
 pgsbKey = lens _pgsbKey (\ s a -> s{_pgsbKey = a})
 
 -- | OAuth 2.0 token for the current user.

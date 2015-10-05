@@ -58,7 +58,7 @@ type UsersMessagesModifyResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ModifyMessageRequest :>
@@ -73,7 +73,7 @@ data UsersMessagesModify' = UsersMessagesModify'
     , _ummUserIP      :: !(Maybe Text)
     , _ummPayload     :: !ModifyMessageRequest
     , _ummUserId      :: !Text
-    , _ummKey         :: !(Maybe Key)
+    , _ummKey         :: !(Maybe AuthKey)
     , _ummId          :: !Text
     , _ummOAuthToken  :: !(Maybe OAuthToken)
     , _ummFields      :: !(Maybe Text)
@@ -151,7 +151,7 @@ ummUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ummKey :: Lens' UsersMessagesModify' (Maybe Key)
+ummKey :: Lens' UsersMessagesModify' (Maybe AuthKey)
 ummKey = lens _ummKey (\ s a -> s{_ummKey = a})
 
 -- | The ID of the message to modify.

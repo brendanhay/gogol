@@ -53,7 +53,7 @@ type StatscollectionUpdatestatsResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "fields" Text :>
-               QueryParam "key" Key :>
+               QueryParam "key" AuthKey :>
                  QueryParam "oauth_token" OAuthToken :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Stats :> Post '[JSON] StatsReply
@@ -66,7 +66,7 @@ data StatscollectionUpdatestats' = StatscollectionUpdatestats'
     , _sPrettyPrint :: !Bool
     , _sUserIP      :: !(Maybe Text)
     , _sPayload     :: !Stats
-    , _sKey         :: !(Maybe Key)
+    , _sKey         :: !(Maybe AuthKey)
     , _sOAuthToken  :: !(Maybe OAuthToken)
     , _sFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -126,7 +126,7 @@ sPayload = lens _sPayload (\ s a -> s{_sPayload = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sKey :: Lens' StatscollectionUpdatestats' (Maybe Key)
+sKey :: Lens' StatscollectionUpdatestats' (Maybe AuthKey)
 sKey = lens _sKey (\ s a -> s{_sKey = a})
 
 -- | OAuth 2.0 token for the current user.

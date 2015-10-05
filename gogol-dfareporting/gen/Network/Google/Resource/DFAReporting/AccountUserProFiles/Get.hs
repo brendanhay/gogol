@@ -57,7 +57,7 @@ type AccountUserProFilesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] AccountUserProFile
@@ -70,7 +70,7 @@ data AccountUserProFilesGet' = AccountUserProFilesGet'
     , _aupfgPrettyPrint :: !Bool
     , _aupfgUserIP      :: !(Maybe Text)
     , _aupfgProFileId   :: !Int64
-    , _aupfgKey         :: !(Maybe Key)
+    , _aupfgKey         :: !(Maybe AuthKey)
     , _aupfgId          :: !Int64
     , _aupfgOAuthToken  :: !(Maybe OAuthToken)
     , _aupfgFields      :: !(Maybe Text)
@@ -140,7 +140,7 @@ aupfgProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aupfgKey :: Lens' AccountUserProFilesGet' (Maybe Key)
+aupfgKey :: Lens' AccountUserProFilesGet' (Maybe AuthKey)
 aupfgKey = lens _aupfgKey (\ s a -> s{_aupfgKey = a})
 
 -- | User profile ID.

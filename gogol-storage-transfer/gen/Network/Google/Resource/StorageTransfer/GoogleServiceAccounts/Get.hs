@@ -73,7 +73,7 @@ type GoogleServiceAccountsGetResource =
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] GoogleServiceAccount
@@ -96,7 +96,7 @@ data GoogleServiceAccountsGet' = GoogleServiceAccountsGet'
     , _gsagAccessToken    :: !(Maybe Text)
     , _gsagUploadType     :: !(Maybe Text)
     , _gsagBearerToken    :: !(Maybe Text)
-    , _gsagKey            :: !(Maybe Key)
+    , _gsagKey            :: !(Maybe AuthKey)
     , _gsagProjectId      :: !Text
     , _gsagOAuthToken     :: !(Maybe OAuthToken)
     , _gsagFields         :: !(Maybe Text)
@@ -202,7 +202,7 @@ gsagBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gsagKey :: Lens' GoogleServiceAccountsGet' (Maybe Key)
+gsagKey :: Lens' GoogleServiceAccountsGet' (Maybe AuthKey)
 gsagKey = lens _gsagKey (\ s a -> s{_gsagKey = a})
 
 -- | The ID of the Google Developers Console project that the Google service

@@ -56,7 +56,7 @@ type NegotiationRoundsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] NegotiationRoundDTO :>
@@ -70,7 +70,7 @@ data NegotiationRoundsInsert' = NegotiationRoundsInsert'
     , _nriPrettyPrint   :: !Bool
     , _nriUserIP        :: !(Maybe Text)
     , _nriPayload       :: !NegotiationRoundDTO
-    , _nriKey           :: !(Maybe Key)
+    , _nriKey           :: !(Maybe AuthKey)
     , _nriOAuthToken    :: !(Maybe OAuthToken)
     , _nriNegotiationId :: !Int64
     , _nriFields        :: !(Maybe Text)
@@ -138,7 +138,7 @@ nriPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-nriKey :: Lens' NegotiationRoundsInsert' (Maybe Key)
+nriKey :: Lens' NegotiationRoundsInsert' (Maybe AuthKey)
 nriKey = lens _nriKey (\ s a -> s{_nriKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -163,7 +163,7 @@ type SearchListResource =
                                                                              :>
                                                                              QueryParam
                                                                                "key"
-                                                                               Key
+                                                                               AuthKey
                                                                                :>
                                                                                QueryParam
                                                                                  "oauth_token"
@@ -206,7 +206,7 @@ data SearchList' = SearchList'
     , _slOnBehalfOfContentOwner :: !(Maybe Text)
     , _slVideoCategoryId        :: !(Maybe Text)
     , _slTopicId                :: !(Maybe Text)
-    , _slKey                    :: !(Maybe Key)
+    , _slKey                    :: !(Maybe AuthKey)
     , _slSafeSearch             :: !(Maybe SearchListSafeSearch)
     , _slVideoSyndicated        :: !(Maybe SearchListVideoSyndicated)
     , _slRelatedToVideoId       :: !(Maybe Text)
@@ -544,7 +544,7 @@ slTopicId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-slKey :: Lens' SearchList' (Maybe Key)
+slKey :: Lens' SearchList' (Maybe AuthKey)
 slKey = lens _slKey (\ s a -> s{_slKey = a})
 
 -- | The safeSearch parameter indicates whether the search results should

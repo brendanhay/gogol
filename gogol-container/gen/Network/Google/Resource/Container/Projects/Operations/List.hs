@@ -54,7 +54,7 @@ type ProjectsOperationsListResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] ListAggregatedOperationsResponse
@@ -66,7 +66,7 @@ data ProjectsOperationsList' = ProjectsOperationsList'
     { _polQuotaUser   :: !(Maybe Text)
     , _polPrettyPrint :: !Bool
     , _polUserIP      :: !(Maybe Text)
-    , _polKey         :: !(Maybe Key)
+    , _polKey         :: !(Maybe AuthKey)
     , _polProjectId   :: !Text
     , _polOAuthToken  :: !(Maybe OAuthToken)
     , _polFields      :: !(Maybe Text)
@@ -125,7 +125,7 @@ polUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-polKey :: Lens' ProjectsOperationsList' (Maybe Key)
+polKey :: Lens' ProjectsOperationsList' (Maybe AuthKey)
 polKey = lens _polKey (\ s a -> s{_polKey = a})
 
 -- | The Google Developers Console project ID or project number.

@@ -56,7 +56,7 @@ type EventsResetMultipleForAllPlayersResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] EventsResetMultipleForAllRequest :>
@@ -72,7 +72,7 @@ data EventsResetMultipleForAllPlayers' = EventsResetMultipleForAllPlayers'
     , _ermfapPrettyPrint :: !Bool
     , _ermfapUserIP      :: !(Maybe Text)
     , _ermfapPayload     :: !EventsResetMultipleForAllRequest
-    , _ermfapKey         :: !(Maybe Key)
+    , _ermfapKey         :: !(Maybe AuthKey)
     , _ermfapOAuthToken  :: !(Maybe OAuthToken)
     , _ermfapFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -137,7 +137,7 @@ ermfapPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ermfapKey :: Lens' EventsResetMultipleForAllPlayers' (Maybe Key)
+ermfapKey :: Lens' EventsResetMultipleForAllPlayers' (Maybe AuthKey)
 ermfapKey
   = lens _ermfapKey (\ s a -> s{_ermfapKey = a})
 

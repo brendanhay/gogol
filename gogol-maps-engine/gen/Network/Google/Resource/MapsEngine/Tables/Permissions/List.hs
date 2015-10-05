@@ -55,7 +55,7 @@ type TablesPermissionsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] PermissionsListResponse
@@ -67,7 +67,7 @@ data TablesPermissionsList' = TablesPermissionsList'
     { _tplQuotaUser   :: !(Maybe Text)
     , _tplPrettyPrint :: !Bool
     , _tplUserIP      :: !(Maybe Text)
-    , _tplKey         :: !(Maybe Key)
+    , _tplKey         :: !(Maybe AuthKey)
     , _tplId          :: !Text
     , _tplOAuthToken  :: !(Maybe OAuthToken)
     , _tplFields      :: !(Maybe Text)
@@ -126,7 +126,7 @@ tplUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tplKey :: Lens' TablesPermissionsList' (Maybe Key)
+tplKey :: Lens' TablesPermissionsList' (Maybe AuthKey)
 tplKey = lens _tplKey (\ s a -> s{_tplKey = a})
 
 -- | The ID of the asset whose permissions will be listed.

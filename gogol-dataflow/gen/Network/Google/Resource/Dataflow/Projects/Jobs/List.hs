@@ -74,7 +74,7 @@ type ProjectsJobsListResource =
                                  QueryParam "quotaUser" Text :>
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "fields" Text :>
-                                       QueryParam "key" Key :>
+                                       QueryParam "key" AuthKey :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] ListJobsResponse
@@ -91,7 +91,7 @@ data ProjectsJobsList' = ProjectsJobsList'
     , _pjlAccessToken    :: !(Maybe Text)
     , _pjlUploadType     :: !(Maybe Text)
     , _pjlBearerToken    :: !(Maybe Text)
-    , _pjlKey            :: !(Maybe Key)
+    , _pjlKey            :: !(Maybe AuthKey)
     , _pjlView           :: !(Maybe Text)
     , _pjlPageToken      :: !(Maybe Text)
     , _pjlProjectId      :: !Text
@@ -207,7 +207,7 @@ pjlBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pjlKey :: Lens' ProjectsJobsList' (Maybe Key)
+pjlKey :: Lens' ProjectsJobsList' (Maybe AuthKey)
 pjlKey = lens _pjlKey (\ s a -> s{_pjlKey = a})
 
 -- | Level of information requested in response. Default is SUMMARY.

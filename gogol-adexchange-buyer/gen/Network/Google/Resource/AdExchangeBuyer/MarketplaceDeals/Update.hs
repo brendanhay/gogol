@@ -57,7 +57,7 @@ type MarketplaceDealsUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] EditAllOrderDealsRequest :>
@@ -71,7 +71,7 @@ data MarketplaceDealsUpdate' = MarketplaceDealsUpdate'
     , _mduPrettyPrint :: !Bool
     , _mduUserIP      :: !(Maybe Text)
     , _mduPayload     :: !EditAllOrderDealsRequest
-    , _mduKey         :: !(Maybe Key)
+    , _mduKey         :: !(Maybe AuthKey)
     , _mduOAuthToken  :: !(Maybe OAuthToken)
     , _mduOrderId     :: !Text
     , _mduFields      :: !(Maybe Text)
@@ -139,7 +139,7 @@ mduPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mduKey :: Lens' MarketplaceDealsUpdate' (Maybe Key)
+mduKey :: Lens' MarketplaceDealsUpdate' (Maybe AuthKey)
 mduKey = lens _mduKey (\ s a -> s{_mduKey = a})
 
 -- | OAuth 2.0 token for the current user.

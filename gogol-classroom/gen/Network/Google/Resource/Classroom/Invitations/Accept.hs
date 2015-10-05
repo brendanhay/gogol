@@ -73,7 +73,7 @@ type InvitationsAcceptResource =
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Post '[JSON] Empty
@@ -96,7 +96,7 @@ data InvitationsAccept' = InvitationsAccept'
     , _iaAccessToken    :: !(Maybe Text)
     , _iaUploadType     :: !(Maybe Text)
     , _iaBearerToken    :: !(Maybe Text)
-    , _iaKey            :: !(Maybe Key)
+    , _iaKey            :: !(Maybe AuthKey)
     , _iaId             :: !Text
     , _iaOAuthToken     :: !(Maybe OAuthToken)
     , _iaFields         :: !(Maybe Text)
@@ -199,7 +199,7 @@ iaBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iaKey :: Lens' InvitationsAccept' (Maybe Key)
+iaKey :: Lens' InvitationsAccept' (Maybe AuthKey)
 iaKey = lens _iaKey (\ s a -> s{_iaKey = a})
 
 -- | Identifier of the invitation to accept.

@@ -68,7 +68,7 @@ type TransferJobsGetResource =
                          QueryParam "quotaUser" Text :>
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] TransferJob
@@ -86,7 +86,7 @@ data TransferJobsGet' = TransferJobsGet'
     , _tjgJobName        :: !Text
     , _tjgUploadType     :: !(Maybe Text)
     , _tjgBearerToken    :: !(Maybe Text)
-    , _tjgKey            :: !(Maybe Key)
+    , _tjgKey            :: !(Maybe AuthKey)
     , _tjgProjectId      :: !(Maybe Text)
     , _tjgOAuthToken     :: !(Maybe OAuthToken)
     , _tjgFields         :: !(Maybe Text)
@@ -198,7 +198,7 @@ tjgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tjgKey :: Lens' TransferJobsGet' (Maybe Key)
+tjgKey :: Lens' TransferJobsGet' (Maybe AuthKey)
 tjgKey = lens _tjgKey (\ s a -> s{_tjgKey = a})
 
 -- | The ID of the Google Developers Console project that owns the job.

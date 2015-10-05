@@ -60,7 +60,7 @@ type PropertiesUpdateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Property :> Put '[JSON] Property
@@ -75,7 +75,7 @@ data PropertiesUpdate' = PropertiesUpdate'
     , _puUserIP      :: !(Maybe Text)
     , _puVisibility  :: !Text
     , _puPayload     :: !Property
-    , _puKey         :: !(Maybe Key)
+    , _puKey         :: !(Maybe AuthKey)
     , _puFileId      :: !Text
     , _puOAuthToken  :: !(Maybe OAuthToken)
     , _puFields      :: !(Maybe Text)
@@ -160,7 +160,7 @@ puPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puKey :: Lens' PropertiesUpdate' (Maybe Key)
+puKey :: Lens' PropertiesUpdate' (Maybe AuthKey)
 puKey = lens _puKey (\ s a -> s{_puKey = a})
 
 -- | The ID of the file.

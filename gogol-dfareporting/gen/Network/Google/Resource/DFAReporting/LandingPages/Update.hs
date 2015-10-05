@@ -59,7 +59,7 @@ type LandingPagesUpdateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] LandingPage :>
@@ -75,7 +75,7 @@ data LandingPagesUpdate' = LandingPagesUpdate'
     , _lpuCampaignId  :: !Int64
     , _lpuProFileId   :: !Int64
     , _lpuPayload     :: !LandingPage
-    , _lpuKey         :: !(Maybe Key)
+    , _lpuKey         :: !(Maybe AuthKey)
     , _lpuOAuthToken  :: !(Maybe OAuthToken)
     , _lpuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -157,7 +157,7 @@ lpuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lpuKey :: Lens' LandingPagesUpdate' (Maybe Key)
+lpuKey :: Lens' LandingPagesUpdate' (Maybe AuthKey)
 lpuKey = lens _lpuKey (\ s a -> s{_lpuKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -57,7 +57,7 @@ type AccountsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Account
 
@@ -69,7 +69,7 @@ data AccountsGet' = AccountsGet'
     , _ag1PrettyPrint :: !Bool
     , _ag1UserIP      :: !(Maybe Text)
     , _ag1ProFileId   :: !Int64
-    , _ag1Key         :: !(Maybe Key)
+    , _ag1Key         :: !(Maybe AuthKey)
     , _ag1Id          :: !Int64
     , _ag1OAuthToken  :: !(Maybe OAuthToken)
     , _ag1Fields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ ag1ProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ag1Key :: Lens' AccountsGet' (Maybe Key)
+ag1Key :: Lens' AccountsGet' (Maybe AuthKey)
 ag1Key = lens _ag1Key (\ s a -> s{_ag1Key = a})
 
 -- | Account ID.

@@ -64,7 +64,7 @@ type EntitlementsPatchResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "key" Key :>
+                           QueryParam "key" AuthKey :>
                              QueryParam "oauth_token" OAuthToken :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Entitlement :>
@@ -83,7 +83,7 @@ data EntitlementsPatch' = EntitlementsPatch'
     , _epPayload       :: !Entitlement
     , _epInstall       :: !(Maybe Bool)
     , _epUserId        :: !Text
-    , _epKey           :: !(Maybe Key)
+    , _epKey           :: !(Maybe AuthKey)
     , _epOAuthToken    :: !(Maybe OAuthToken)
     , _epFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -184,7 +184,7 @@ epUserId = lens _epUserId (\ s a -> s{_epUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-epKey :: Lens' EntitlementsPatch' (Maybe Key)
+epKey :: Lens' EntitlementsPatch' (Maybe AuthKey)
 epKey = lens _epKey (\ s a -> s{_epKey = a})
 
 -- | OAuth 2.0 token for the current user.

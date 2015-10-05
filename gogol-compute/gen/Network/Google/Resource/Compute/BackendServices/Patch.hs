@@ -59,7 +59,7 @@ type BackendServicesPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] BackendService :>
@@ -75,7 +75,7 @@ data BackendServicesPatch' = BackendServicesPatch'
     , _bspProject        :: !Text
     , _bspUserIP         :: !(Maybe Text)
     , _bspPayload        :: !BackendService
-    , _bspKey            :: !(Maybe Key)
+    , _bspKey            :: !(Maybe AuthKey)
     , _bspOAuthToken     :: !(Maybe OAuthToken)
     , _bspFields         :: !(Maybe Text)
     , _bspBackendService :: !Text
@@ -152,7 +152,7 @@ bspPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bspKey :: Lens' BackendServicesPatch' (Maybe Key)
+bspKey :: Lens' BackendServicesPatch' (Maybe AuthKey)
 bspKey = lens _bspKey (\ s a -> s{_bspKey = a})
 
 -- | OAuth 2.0 token for the current user.

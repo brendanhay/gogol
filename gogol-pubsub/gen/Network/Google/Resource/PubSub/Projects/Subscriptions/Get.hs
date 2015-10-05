@@ -66,7 +66,7 @@ type ProjectsSubscriptionsGetResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "key" Key :>
+                             QueryParam "key" AuthKey :>
                                QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] Subscription
@@ -83,7 +83,7 @@ data ProjectsSubscriptionsGet' = ProjectsSubscriptionsGet'
     , _psgAccessToken    :: !(Maybe Text)
     , _psgUploadType     :: !(Maybe Text)
     , _psgBearerToken    :: !(Maybe Text)
-    , _psgKey            :: !(Maybe Key)
+    , _psgKey            :: !(Maybe AuthKey)
     , _psgOAuthToken     :: !(Maybe OAuthToken)
     , _psgSubscription   :: !Text
     , _psgFields         :: !(Maybe Text)
@@ -187,7 +187,7 @@ psgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psgKey :: Lens' ProjectsSubscriptionsGet' (Maybe Key)
+psgKey :: Lens' ProjectsSubscriptionsGet' (Maybe AuthKey)
 psgKey = lens _psgKey (\ s a -> s{_psgKey = a})
 
 -- | OAuth 2.0 token for the current user.

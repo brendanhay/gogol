@@ -56,7 +56,7 @@ type PlacementsUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Placement :> Put '[JSON] Placement
@@ -70,7 +70,7 @@ data PlacementsUpdate' = PlacementsUpdate'
     , _puUserIP      :: !(Maybe Text)
     , _puProFileId   :: !Int64
     , _puPayload     :: !Placement
-    , _puKey         :: !(Maybe Key)
+    , _puKey         :: !(Maybe AuthKey)
     , _puOAuthToken  :: !(Maybe OAuthToken)
     , _puFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -141,7 +141,7 @@ puPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puKey :: Lens' PlacementsUpdate' (Maybe Key)
+puKey :: Lens' PlacementsUpdate' (Maybe AuthKey)
 puKey = lens _puKey (\ s a -> s{_puKey = a})
 
 -- | OAuth 2.0 token for the current user.

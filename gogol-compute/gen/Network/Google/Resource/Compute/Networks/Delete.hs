@@ -57,7 +57,7 @@ type NetworksDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
@@ -70,7 +70,7 @@ data NetworksDelete' = NetworksDelete'
     , _ndProject     :: !Text
     , _ndUserIP      :: !(Maybe Text)
     , _ndNetwork     :: !Text
-    , _ndKey         :: !(Maybe Key)
+    , _ndKey         :: !(Maybe AuthKey)
     , _ndOAuthToken  :: !(Maybe OAuthToken)
     , _ndFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -141,7 +141,7 @@ ndNetwork
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ndKey :: Lens' NetworksDelete' (Maybe Key)
+ndKey :: Lens' NetworksDelete' (Maybe AuthKey)
 ndKey = lens _ndKey (\ s a -> s{_ndKey = a})
 
 -- | OAuth 2.0 token for the current user.

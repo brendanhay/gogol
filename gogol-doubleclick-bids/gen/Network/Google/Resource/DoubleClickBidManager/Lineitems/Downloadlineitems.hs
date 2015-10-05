@@ -54,7 +54,7 @@ type LineitemsDownloadlineitemsResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] DownloadLineItemsRequest :>
@@ -68,7 +68,7 @@ data LineitemsDownloadlineitems' = LineitemsDownloadlineitems'
     , _ldPrettyPrint :: !Bool
     , _ldUserIP      :: !(Maybe Text)
     , _ldPayload     :: !DownloadLineItemsRequest
-    , _ldKey         :: !(Maybe Key)
+    , _ldKey         :: !(Maybe AuthKey)
     , _ldOAuthToken  :: !(Maybe OAuthToken)
     , _ldFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -130,7 +130,7 @@ ldPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ldKey :: Lens' LineitemsDownloadlineitems' (Maybe Key)
+ldKey :: Lens' LineitemsDownloadlineitems' (Maybe AuthKey)
 ldKey = lens _ldKey (\ s a -> s{_ldKey = a})
 
 -- | OAuth 2.0 token for the current user.

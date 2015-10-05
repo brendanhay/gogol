@@ -60,7 +60,7 @@ type RoomsReportStatusResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] RoomP2PStatuses :>
@@ -76,7 +76,7 @@ data RoomsReportStatus' = RoomsReportStatus'
     , _rrsPrettyPrint :: !Bool
     , _rrsUserIP      :: !(Maybe Text)
     , _rrsPayload     :: !RoomP2PStatuses
-    , _rrsKey         :: !(Maybe Key)
+    , _rrsKey         :: !(Maybe AuthKey)
     , _rrsRoomId      :: !Text
     , _rrsLanguage    :: !(Maybe Text)
     , _rrsOAuthToken  :: !(Maybe OAuthToken)
@@ -148,7 +148,7 @@ rrsPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rrsKey :: Lens' RoomsReportStatus' (Maybe Key)
+rrsKey :: Lens' RoomsReportStatus' (Maybe AuthKey)
 rrsKey = lens _rrsKey (\ s a -> s{_rrsKey = a})
 
 -- | The ID of the room.

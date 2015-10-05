@@ -56,7 +56,7 @@ type ClientAccessGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] ClientAccessCapabilities
@@ -68,7 +68,7 @@ data ClientAccessGet' = ClientAccessGet'
     , _cagPrettyPrint      :: !Bool
     , _cagUserIP           :: !(Maybe Text)
     , _cagSponsorAccountId :: !Int32
-    , _cagKey              :: !(Maybe Key)
+    , _cagKey              :: !(Maybe AuthKey)
     , _cagClientAccountId  :: !Int64
     , _cagOAuthToken       :: !(Maybe OAuthToken)
     , _cagFields           :: !(Maybe Text)
@@ -136,7 +136,7 @@ cagSponsorAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cagKey :: Lens' ClientAccessGet' (Maybe Key)
+cagKey :: Lens' ClientAccessGet' (Maybe AuthKey)
 cagKey = lens _cagKey (\ s a -> s{_cagKey = a})
 
 cagClientAccountId :: Lens' ClientAccessGet' Int64

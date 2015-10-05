@@ -56,7 +56,7 @@ type UsersUndeleteResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] UserUndelete :> Post '[JSON] ()
@@ -69,7 +69,7 @@ data UsersUndelete' = UsersUndelete'
     , _uPrettyPrint :: !Bool
     , _uUserIP      :: !(Maybe Text)
     , _uPayload     :: !UserUndelete
-    , _uKey         :: !(Maybe Key)
+    , _uKey         :: !(Maybe AuthKey)
     , _uOAuthToken  :: !(Maybe OAuthToken)
     , _uUserKey     :: !Text
     , _uFields      :: !(Maybe Text)
@@ -134,7 +134,7 @@ uPayload = lens _uPayload (\ s a -> s{_uPayload = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uKey :: Lens' UsersUndelete' (Maybe Key)
+uKey :: Lens' UsersUndelete' (Maybe AuthKey)
 uKey = lens _uKey (\ s a -> s{_uKey = a})
 
 -- | OAuth 2.0 token for the current user.

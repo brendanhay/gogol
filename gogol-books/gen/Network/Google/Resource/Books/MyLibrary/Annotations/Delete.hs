@@ -57,7 +57,7 @@ type MyLibraryAnnotationsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -68,7 +68,7 @@ data MyLibraryAnnotationsDelete' = MyLibraryAnnotationsDelete'
     { _mladQuotaUser    :: !(Maybe Text)
     , _mladPrettyPrint  :: !Bool
     , _mladUserIP       :: !(Maybe Text)
-    , _mladKey          :: !(Maybe Key)
+    , _mladKey          :: !(Maybe AuthKey)
     , _mladAnnotationId :: !Text
     , _mladSource       :: !(Maybe Text)
     , _mladOAuthToken   :: !(Maybe OAuthToken)
@@ -132,7 +132,7 @@ mladUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mladKey :: Lens' MyLibraryAnnotationsDelete' (Maybe Key)
+mladKey :: Lens' MyLibraryAnnotationsDelete' (Maybe AuthKey)
 mladKey = lens _mladKey (\ s a -> s{_mladKey = a})
 
 -- | The ID for the annotation to delete.

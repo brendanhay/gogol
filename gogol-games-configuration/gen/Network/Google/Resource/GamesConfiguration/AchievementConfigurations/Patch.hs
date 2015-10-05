@@ -56,7 +56,7 @@ type AchievementConfigurationsPatchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] AchievementConfiguration :>
@@ -72,7 +72,7 @@ data AchievementConfigurationsPatch' = AchievementConfigurationsPatch'
     , _acpAchievementId :: !Text
     , _acpUserIP        :: !(Maybe Text)
     , _acpPayload       :: !AchievementConfiguration
-    , _acpKey           :: !(Maybe Key)
+    , _acpKey           :: !(Maybe AuthKey)
     , _acpOAuthToken    :: !(Maybe OAuthToken)
     , _acpFields        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,7 @@ acpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acpKey :: Lens' AchievementConfigurationsPatch' (Maybe Key)
+acpKey :: Lens' AchievementConfigurationsPatch' (Maybe AuthKey)
 acpKey = lens _acpKey (\ s a -> s{_acpKey = a})
 
 -- | OAuth 2.0 token for the current user.

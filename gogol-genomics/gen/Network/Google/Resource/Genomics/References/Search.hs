@@ -55,7 +55,7 @@ type ReferencesSearchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] SearchReferencesRequest :>
@@ -70,7 +70,7 @@ data ReferencesSearch' = ReferencesSearch'
     , _refPrettyPrint :: !Bool
     , _refUserIP      :: !(Maybe Text)
     , _refPayload     :: !SearchReferencesRequest
-    , _refKey         :: !(Maybe Key)
+    , _refKey         :: !(Maybe AuthKey)
     , _refOAuthToken  :: !(Maybe OAuthToken)
     , _refFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -133,7 +133,7 @@ refPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-refKey :: Lens' ReferencesSearch' (Maybe Key)
+refKey :: Lens' ReferencesSearch' (Maybe AuthKey)
 refKey = lens _refKey (\ s a -> s{_refKey = a})
 
 -- | OAuth 2.0 token for the current user.

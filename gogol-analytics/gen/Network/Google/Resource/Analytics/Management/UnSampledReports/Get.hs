@@ -64,7 +64,7 @@ type ManagementUnSampledReportsGetResource =
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "key" Key :>
+                               QueryParam "key" AuthKey :>
                                  QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] UnSampledReport
@@ -79,7 +79,7 @@ data ManagementUnSampledReportsGet' = ManagementUnSampledReportsGet'
     , _musrgUserIP            :: !(Maybe Text)
     , _musrgProFileId         :: !Text
     , _musrgAccountId         :: !Text
-    , _musrgKey               :: !(Maybe Key)
+    , _musrgKey               :: !(Maybe AuthKey)
     , _musrgUnSampledReportId :: !Text
     , _musrgOAuthToken        :: !(Maybe OAuthToken)
     , _musrgFields            :: !(Maybe Text)
@@ -169,7 +169,7 @@ musrgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-musrgKey :: Lens' ManagementUnSampledReportsGet' (Maybe Key)
+musrgKey :: Lens' ManagementUnSampledReportsGet' (Maybe AuthKey)
 musrgKey = lens _musrgKey (\ s a -> s{_musrgKey = a})
 
 -- | ID of the unsampled report to retrieve.

@@ -61,7 +61,7 @@ type TimeseriesWriteResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] WriteTimeseriesRequest :>
@@ -82,7 +82,7 @@ data TimeseriesWrite' = TimeseriesWrite'
     , _twProject     :: !Text
     , _twUserIP      :: !(Maybe Text)
     , _twPayload     :: !WriteTimeseriesRequest
-    , _twKey         :: !(Maybe Key)
+    , _twKey         :: !(Maybe AuthKey)
     , _twOAuthToken  :: !(Maybe OAuthToken)
     , _twFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -154,7 +154,7 @@ twPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-twKey :: Lens' TimeseriesWrite' (Maybe Key)
+twKey :: Lens' TimeseriesWrite' (Maybe AuthKey)
 twKey = lens _twKey (\ s a -> s{_twKey = a})
 
 -- | OAuth 2.0 token for the current user.

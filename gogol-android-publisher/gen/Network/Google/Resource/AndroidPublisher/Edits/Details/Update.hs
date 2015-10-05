@@ -58,7 +58,7 @@ type EditsDetailsUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] AppDetails :> Put '[JSON] AppDetails
@@ -72,7 +72,7 @@ data EditsDetailsUpdate' = EditsDetailsUpdate'
     , _eduPackageName :: !Text
     , _eduUserIP      :: !(Maybe Text)
     , _eduPayload     :: !AppDetails
-    , _eduKey         :: !(Maybe Key)
+    , _eduKey         :: !(Maybe AuthKey)
     , _eduOAuthToken  :: !(Maybe OAuthToken)
     , _eduEditId      :: !Text
     , _eduFields      :: !(Maybe Text)
@@ -151,7 +151,7 @@ eduPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eduKey :: Lens' EditsDetailsUpdate' (Maybe Key)
+eduKey :: Lens' EditsDetailsUpdate' (Maybe AuthKey)
 eduKey = lens _eduKey (\ s a -> s{_eduKey = a})
 
 -- | OAuth 2.0 token for the current user.

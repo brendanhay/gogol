@@ -57,7 +57,7 @@ type FirewallsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Firewall :> Post '[JSON] Operation
@@ -72,7 +72,7 @@ data FirewallsInsert' = FirewallsInsert'
     , _fiProject     :: !Text
     , _fiUserIP      :: !(Maybe Text)
     , _fiPayload     :: !Firewall
-    , _fiKey         :: !(Maybe Key)
+    , _fiKey         :: !(Maybe AuthKey)
     , _fiOAuthToken  :: !(Maybe OAuthToken)
     , _fiFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -143,7 +143,7 @@ fiPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fiKey :: Lens' FirewallsInsert' (Maybe Key)
+fiKey :: Lens' FirewallsInsert' (Maybe AuthKey)
 fiKey = lens _fiKey (\ s a -> s{_fiKey = a})
 
 -- | OAuth 2.0 token for the current user.

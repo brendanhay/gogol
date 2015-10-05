@@ -61,7 +61,7 @@ type ApplicationsListHiddenResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] HiddenPlayerList
@@ -75,7 +75,7 @@ data ApplicationsListHidden' = ApplicationsListHidden'
     , _alhPrettyPrint   :: !Bool
     , _alhUserIP        :: !(Maybe Text)
     , _alhApplicationId :: !Text
-    , _alhKey           :: !(Maybe Key)
+    , _alhKey           :: !(Maybe AuthKey)
     , _alhPageToken     :: !(Maybe Text)
     , _alhOAuthToken    :: !(Maybe OAuthToken)
     , _alhMaxResults    :: !(Maybe Int32)
@@ -147,7 +147,7 @@ alhApplicationId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alhKey :: Lens' ApplicationsListHidden' (Maybe Key)
+alhKey :: Lens' ApplicationsListHidden' (Maybe AuthKey)
 alhKey = lens _alhKey (\ s a -> s{_alhKey = a})
 
 -- | The token returned by the previous request.

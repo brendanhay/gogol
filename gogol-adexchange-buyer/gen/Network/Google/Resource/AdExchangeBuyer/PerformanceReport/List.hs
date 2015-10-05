@@ -62,7 +62,7 @@ type PerformanceReportListResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] PerformanceReportList
@@ -75,7 +75,7 @@ data PerformanceReportList' = PerformanceReportList'
     , _prlPrettyPrint   :: !Bool
     , _prlUserIP        :: !(Maybe Text)
     , _prlAccountId     :: !Int64
-    , _prlKey           :: !(Maybe Key)
+    , _prlKey           :: !(Maybe AuthKey)
     , _prlPageToken     :: !(Maybe Text)
     , _prlOAuthToken    :: !(Maybe OAuthToken)
     , _prlEndDateTime   :: !Text
@@ -156,7 +156,7 @@ prlAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-prlKey :: Lens' PerformanceReportList' (Maybe Key)
+prlKey :: Lens' PerformanceReportList' (Maybe AuthKey)
 prlKey = lens _prlKey (\ s a -> s{_prlKey = a})
 
 -- | A continuation token, used to page through performance reports. To

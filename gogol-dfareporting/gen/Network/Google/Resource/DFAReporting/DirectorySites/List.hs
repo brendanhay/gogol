@@ -81,7 +81,7 @@ type DirectorySitesListResource =
                                        QueryParam "prettyPrint" Bool :>
                                          QueryParam "userIp" Text :>
                                            QueryParam "fields" Text :>
-                                             QueryParam "key" Key :>
+                                             QueryParam "key" AuthKey :>
                                                QueryParam "oauth_token"
                                                  OAuthToken
                                                  :>
@@ -103,7 +103,7 @@ data DirectorySitesList' = DirectorySitesList'
     , _dslProFileId                      :: !Int64
     , _dslSortOrder                      :: !(Maybe DirectorySitesListSortOrder)
     , _dslActive                         :: !(Maybe Bool)
-    , _dslKey                            :: !(Maybe Key)
+    , _dslKey                            :: !(Maybe AuthKey)
     , _dslCountryId                      :: !(Maybe Int64)
     , _dslPageToken                      :: !(Maybe Text)
     , _dslSortField                      :: !(Maybe DirectorySitesListSortField)
@@ -256,7 +256,7 @@ dslActive
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dslKey :: Lens' DirectorySitesList' (Maybe Key)
+dslKey :: Lens' DirectorySitesList' (Maybe AuthKey)
 dslKey = lens _dslKey (\ s a -> s{_dslKey = a})
 
 -- | Select only directory sites with this country ID.

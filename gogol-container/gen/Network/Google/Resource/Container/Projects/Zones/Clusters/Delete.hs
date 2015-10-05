@@ -61,7 +61,7 @@ type ProjectsZonesClustersDeleteResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
@@ -75,7 +75,7 @@ data ProjectsZonesClustersDelete' = ProjectsZonesClustersDelete'
     , _pzcdPrettyPrint :: !Bool
     , _pzcdUserIP      :: !(Maybe Text)
     , _pzcdZoneId      :: !Text
-    , _pzcdKey         :: !(Maybe Key)
+    , _pzcdKey         :: !(Maybe AuthKey)
     , _pzcdClusterId   :: !Text
     , _pzcdProjectId   :: !Text
     , _pzcdOAuthToken  :: !(Maybe OAuthToken)
@@ -149,7 +149,7 @@ pzcdZoneId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pzcdKey :: Lens' ProjectsZonesClustersDelete' (Maybe Key)
+pzcdKey :: Lens' ProjectsZonesClustersDelete' (Maybe AuthKey)
 pzcdKey = lens _pzcdKey (\ s a -> s{_pzcdKey = a})
 
 -- | The name of the cluster to delete.

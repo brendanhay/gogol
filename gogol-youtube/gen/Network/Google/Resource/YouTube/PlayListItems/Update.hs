@@ -56,7 +56,7 @@ type PlayListItemsUpdateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] PlayListItem :>
@@ -72,7 +72,7 @@ data PlayListItemsUpdate' = PlayListItemsUpdate'
     , _pliuPrettyPrint :: !Bool
     , _pliuUserIP      :: !(Maybe Text)
     , _pliuPayload     :: !PlayListItem
-    , _pliuKey         :: !(Maybe Key)
+    , _pliuKey         :: !(Maybe AuthKey)
     , _pliuOAuthToken  :: !(Maybe OAuthToken)
     , _pliuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -156,7 +156,7 @@ pliuPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pliuKey :: Lens' PlayListItemsUpdate' (Maybe Key)
+pliuKey :: Lens' PlayListItemsUpdate' (Maybe AuthKey)
 pliuKey = lens _pliuKey (\ s a -> s{_pliuKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -61,7 +61,7 @@ type InstanceGroupsSetNamedPortsResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON]
@@ -78,7 +78,7 @@ data InstanceGroupsSetNamedPorts' = InstanceGroupsSetNamedPorts'
     , _igsnpUserIP        :: !(Maybe Text)
     , _igsnpZone          :: !Text
     , _igsnpPayload       :: !InstanceGroupsSetNamedPortsRequest
-    , _igsnpKey           :: !(Maybe Key)
+    , _igsnpKey           :: !(Maybe AuthKey)
     , _igsnpOAuthToken    :: !(Maybe OAuthToken)
     , _igsnpInstanceGroup :: !Text
     , _igsnpFields        :: !(Maybe Text)
@@ -165,7 +165,7 @@ igsnpPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igsnpKey :: Lens' InstanceGroupsSetNamedPorts' (Maybe Key)
+igsnpKey :: Lens' InstanceGroupsSetNamedPorts' (Maybe AuthKey)
 igsnpKey = lens _igsnpKey (\ s a -> s{_igsnpKey = a})
 
 -- | OAuth 2.0 token for the current user.

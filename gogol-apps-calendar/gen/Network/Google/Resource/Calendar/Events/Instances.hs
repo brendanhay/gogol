@@ -76,7 +76,7 @@ type EventsInstancesResource =
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "key" Key :>
+                                         QueryParam "key" AuthKey :>
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
@@ -94,7 +94,7 @@ data EventsInstances' = EventsInstances'
     , _eiShowDeleted        :: !(Maybe Bool)
     , _eiOriginalStart      :: !(Maybe Text)
     , _eiMaxAttendees       :: !(Maybe Int32)
-    , _eiKey                :: !(Maybe Key)
+    , _eiKey                :: !(Maybe AuthKey)
     , _eiPageToken          :: !(Maybe Text)
     , _eiTimeZone           :: !(Maybe Text)
     , _eiOAuthToken         :: !(Maybe OAuthToken)
@@ -225,7 +225,7 @@ eiMaxAttendees
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eiKey :: Lens' EventsInstances' (Maybe Key)
+eiKey :: Lens' EventsInstances' (Maybe AuthKey)
 eiKey = lens _eiKey (\ s a -> s{_eiKey = a})
 
 -- | Token specifying which result page to return. Optional.

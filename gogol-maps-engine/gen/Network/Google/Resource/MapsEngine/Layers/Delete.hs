@@ -54,7 +54,7 @@ type LayersDeleteResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -65,7 +65,7 @@ data LayersDelete' = LayersDelete'
     { _ldQuotaUser   :: !(Maybe Text)
     , _ldPrettyPrint :: !Bool
     , _ldUserIP      :: !(Maybe Text)
-    , _ldKey         :: !(Maybe Key)
+    , _ldKey         :: !(Maybe AuthKey)
     , _ldId          :: !Text
     , _ldOAuthToken  :: !(Maybe OAuthToken)
     , _ldFields      :: !(Maybe Text)
@@ -123,7 +123,7 @@ ldUserIP = lens _ldUserIP (\ s a -> s{_ldUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ldKey :: Lens' LayersDelete' (Maybe Key)
+ldKey :: Lens' LayersDelete' (Maybe AuthKey)
 ldKey = lens _ldKey (\ s a -> s{_ldKey = a})
 
 -- | The ID of the layer. Only the layer creator or project owner are

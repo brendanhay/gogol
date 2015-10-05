@@ -69,7 +69,7 @@ type ObjectsGetResource =
                            QueryParam "prettyPrint" Bool :>
                              QueryParam "userIp" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] Object
@@ -88,7 +88,7 @@ type ObjectsGetResource =
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "userIp" Text :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "key" Key :>
+                                   QueryParam "key" AuthKey :>
                                      QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "alt" AltMedia :>
                                          Get '[OctetStream] Body
@@ -104,7 +104,7 @@ data ObjectsGet' = ObjectsGet'
     , _ogIfGenerationMatch        :: !(Maybe Word64)
     , _ogUserIP                   :: !(Maybe Text)
     , _ogBucket                   :: !Text
-    , _ogKey                      :: !(Maybe Key)
+    , _ogKey                      :: !(Maybe AuthKey)
     , _ogIfMetagenerationNotMatch :: !(Maybe Word64)
     , _ogObject                   :: !Text
     , _ogProjection               :: !(Maybe ObjectsGetProjection)
@@ -212,7 +212,7 @@ ogBucket = lens _ogBucket (\ s a -> s{_ogBucket = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ogKey :: Lens' ObjectsGet' (Maybe Key)
+ogKey :: Lens' ObjectsGet' (Maybe AuthKey)
 ogKey = lens _ogKey (\ s a -> s{_ogKey = a})
 
 -- | Makes the operation conditional on whether the object\'s current

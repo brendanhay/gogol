@@ -77,7 +77,7 @@ type DataGaGetResource =
                                    QueryParam "prettyPrint" Bool :>
                                      QueryParam "userIp" Text :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "key" Key :>
+                                         QueryParam "key" AuthKey :>
                                            QueryParam "oauth_token" OAuthToken
                                              :>
                                              QueryParam "alt" AltJSON :>
@@ -95,7 +95,7 @@ data DataGaGet' = DataGaGet'
     , _dggFilters       :: !(Maybe Text)
     , _dggIds           :: !Text
     , _dggEndDate       :: !Text
-    , _dggKey           :: !(Maybe Key)
+    , _dggKey           :: !(Maybe AuthKey)
     , _dggOutput        :: !(Maybe DataGaGetOutput)
     , _dggSort          :: !(Maybe Text)
     , _dggDimensions    :: !(Maybe Text)
@@ -226,7 +226,7 @@ dggEndDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dggKey :: Lens' DataGaGet' (Maybe Key)
+dggKey :: Lens' DataGaGet' (Maybe AuthKey)
 dggKey = lens _dggKey (\ s a -> s{_dggKey = a})
 
 -- | The selected format for the response. Default format is JSON.

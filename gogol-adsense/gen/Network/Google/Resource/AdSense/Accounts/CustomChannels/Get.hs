@@ -61,7 +61,7 @@ type AccountsCustomChannelsGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "key" Key :>
+                         QueryParam "key" AuthKey :>
                            QueryParam "oauth_token" OAuthToken :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] CustomChannel
@@ -77,7 +77,7 @@ data AccountsCustomChannelsGet' = AccountsCustomChannelsGet'
     , _accgUserIP          :: !(Maybe Text)
     , _accgAdClientId      :: !Text
     , _accgAccountId       :: !Text
-    , _accgKey             :: !(Maybe Key)
+    , _accgKey             :: !(Maybe AuthKey)
     , _accgOAuthToken      :: !(Maybe OAuthToken)
     , _accgFields          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -162,7 +162,7 @@ accgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-accgKey :: Lens' AccountsCustomChannelsGet' (Maybe Key)
+accgKey :: Lens' AccountsCustomChannelsGet' (Maybe AuthKey)
 accgKey = lens _accgKey (\ s a -> s{_accgKey = a})
 
 -- | OAuth 2.0 token for the current user.

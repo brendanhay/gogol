@@ -60,7 +60,7 @@ type ImagesDeprecateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] DeprecationStatus :>
@@ -77,7 +77,7 @@ data ImagesDeprecate' = ImagesDeprecate'
     , _imamProject     :: !Text
     , _imamUserIP      :: !(Maybe Text)
     , _imamPayload     :: !DeprecationStatus
-    , _imamKey         :: !(Maybe Key)
+    , _imamKey         :: !(Maybe AuthKey)
     , _imamOAuthToken  :: !(Maybe OAuthToken)
     , _imamFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -159,7 +159,7 @@ imamPayload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-imamKey :: Lens' ImagesDeprecate' (Maybe Key)
+imamKey :: Lens' ImagesDeprecate' (Maybe AuthKey)
 imamKey = lens _imamKey (\ s a -> s{_imamKey = a})
 
 -- | OAuth 2.0 token for the current user.

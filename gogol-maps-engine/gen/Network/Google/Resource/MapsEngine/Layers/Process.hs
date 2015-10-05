@@ -55,7 +55,7 @@ type LayersProcessResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Post '[JSON] ProcessResponse
@@ -67,7 +67,7 @@ data LayersProcess' = LayersProcess'
     { _lpQuotaUser   :: !(Maybe Text)
     , _lpPrettyPrint :: !Bool
     , _lpUserIP      :: !(Maybe Text)
-    , _lpKey         :: !(Maybe Key)
+    , _lpKey         :: !(Maybe AuthKey)
     , _lpId          :: !Text
     , _lpOAuthToken  :: !(Maybe OAuthToken)
     , _lpFields      :: !(Maybe Text)
@@ -125,7 +125,7 @@ lpUserIP = lens _lpUserIP (\ s a -> s{_lpUserIP = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lpKey :: Lens' LayersProcess' (Maybe Key)
+lpKey :: Lens' LayersProcess' (Maybe AuthKey)
 lpKey = lens _lpKey (\ s a -> s{_lpKey = a})
 
 -- | The ID of the layer.

@@ -54,7 +54,7 @@ type RasterCollectionsGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] RasterCollection
@@ -66,7 +66,7 @@ data RasterCollectionsGet' = RasterCollectionsGet'
     { _rcgQuotaUser   :: !(Maybe Text)
     , _rcgPrettyPrint :: !Bool
     , _rcgUserIP      :: !(Maybe Text)
-    , _rcgKey         :: !(Maybe Key)
+    , _rcgKey         :: !(Maybe AuthKey)
     , _rcgId          :: !Text
     , _rcgOAuthToken  :: !(Maybe OAuthToken)
     , _rcgFields      :: !(Maybe Text)
@@ -125,7 +125,7 @@ rcgUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rcgKey :: Lens' RasterCollectionsGet' (Maybe Key)
+rcgKey :: Lens' RasterCollectionsGet' (Maybe AuthKey)
 rcgKey = lens _rcgKey (\ s a -> s{_rcgKey = a})
 
 -- | The ID of the raster collection.

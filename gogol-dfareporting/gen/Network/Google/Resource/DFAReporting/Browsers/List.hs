@@ -55,7 +55,7 @@ type BrowsersListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] BrowsersListResponse
@@ -68,7 +68,7 @@ data BrowsersList' = BrowsersList'
     , _blPrettyPrint :: !Bool
     , _blUserIP      :: !(Maybe Text)
     , _blProFileId   :: !Int64
-    , _blKey         :: !(Maybe Key)
+    , _blKey         :: !(Maybe AuthKey)
     , _blOAuthToken  :: !(Maybe OAuthToken)
     , _blFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -130,7 +130,7 @@ blProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-blKey :: Lens' BrowsersList' (Maybe Key)
+blKey :: Lens' BrowsersList' (Maybe AuthKey)
 blKey = lens _blKey (\ s a -> s{_blKey = a})
 
 -- | OAuth 2.0 token for the current user.

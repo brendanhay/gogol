@@ -57,7 +57,7 @@ type UsersAliasesDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -69,7 +69,7 @@ data UsersAliasesDelete' = UsersAliasesDelete'
     , _uadPrettyPrint :: !Bool
     , _uadUserIP      :: !(Maybe Text)
     , _uadAlias       :: !Text
-    , _uadKey         :: !(Maybe Key)
+    , _uadKey         :: !(Maybe AuthKey)
     , _uadOAuthToken  :: !(Maybe OAuthToken)
     , _uadUserKey     :: !Text
     , _uadFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ uadAlias = lens _uadAlias (\ s a -> s{_uadAlias = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uadKey :: Lens' UsersAliasesDelete' (Maybe Key)
+uadKey :: Lens' UsersAliasesDelete' (Maybe AuthKey)
 uadKey = lens _uadKey (\ s a -> s{_uadKey = a})
 
 -- | OAuth 2.0 token for the current user.

@@ -88,7 +88,7 @@ type EventsListResource =
                                              QueryParam "prettyPrint" Bool :>
                                                QueryParam "userIp" Text :>
                                                  QueryParam "fields" Text :>
-                                                   QueryParam "key" Key :>
+                                                   QueryParam "key" AuthKey :>
                                                      QueryParam "oauth_token"
                                                        OAuthToken
                                                        :>
@@ -112,7 +112,7 @@ data EventsList' = EventsList'
     , _elRoleId          :: !Text
     , _elRole            :: !EventsListRole
     , _elEventDateMax    :: !(Maybe Text)
-    , _elKey             :: !(Maybe Key)
+    , _elKey             :: !(Maybe AuthKey)
     , _elSKU             :: !(Maybe Text)
     , _elLinkId          :: !(Maybe Text)
     , _elPageToken       :: !(Maybe Text)
@@ -294,7 +294,7 @@ elEventDateMax
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-elKey :: Lens' EventsList' (Maybe Key)
+elKey :: Lens' EventsList' (Maybe AuthKey)
 elKey = lens _elKey (\ s a -> s{_elKey = a})
 
 -- | Caret(^) delimited list of SKUs. Filters out all events that do not

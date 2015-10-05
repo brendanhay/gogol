@@ -73,7 +73,7 @@ type ProjectsLogServicesSinksCreateResource =
                                QueryParam "quotaUser" Text :>
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "key" Key :>
+                                     QueryParam "key" AuthKey :>
                                        QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "alt" AltJSON :>
                                            ReqBody '[JSON] LogSink :>
@@ -93,7 +93,7 @@ data ProjectsLogServicesSinksCreate' = ProjectsLogServicesSinksCreate'
     , _plsscUploadType     :: !(Maybe Text)
     , _plsscPayload        :: !LogSink
     , _plsscBearerToken    :: !(Maybe Text)
-    , _plsscKey            :: !(Maybe Key)
+    , _plsscKey            :: !(Maybe AuthKey)
     , _plsscLogServicesId  :: !Text
     , _plsscOAuthToken     :: !(Maybe OAuthToken)
     , _plsscProjectsId     :: !Text
@@ -213,7 +213,7 @@ plsscBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plsscKey :: Lens' ProjectsLogServicesSinksCreate' (Maybe Key)
+plsscKey :: Lens' ProjectsLogServicesSinksCreate' (Maybe AuthKey)
 plsscKey = lens _plsscKey (\ s a -> s{_plsscKey = a})
 
 -- | Part of \`serviceName\`. See documentation of \`projectsId\`.

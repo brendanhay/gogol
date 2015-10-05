@@ -56,7 +56,7 @@ type TrainedModelsDeleteResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -68,7 +68,7 @@ data TrainedModelsDelete' = TrainedModelsDelete'
     , _tmdPrettyPrint :: !Bool
     , _tmdProject     :: !Text
     , _tmdUserIP      :: !(Maybe Text)
-    , _tmdKey         :: !(Maybe Key)
+    , _tmdKey         :: !(Maybe AuthKey)
     , _tmdId          :: !Text
     , _tmdOAuthToken  :: !(Maybe OAuthToken)
     , _tmdFields      :: !(Maybe Text)
@@ -136,7 +136,7 @@ tmdUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tmdKey :: Lens' TrainedModelsDelete' (Maybe Key)
+tmdKey :: Lens' TrainedModelsDelete' (Maybe AuthKey)
 tmdKey = lens _tmdKey (\ s a -> s{_tmdKey = a})
 
 -- | The unique name for the predictive model.

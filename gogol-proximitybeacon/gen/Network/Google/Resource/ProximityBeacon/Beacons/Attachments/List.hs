@@ -74,7 +74,7 @@ type BeaconsAttachmentsListResource =
                            QueryParam "quotaUser" Text :>
                              QueryParam "prettyPrint" Bool :>
                                QueryParam "fields" Text :>
-                                 QueryParam "key" Key :>
+                                 QueryParam "key" AuthKey :>
                                    QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] ListBeaconAttachmentsResponse
@@ -98,7 +98,7 @@ data BeaconsAttachmentsList' = BeaconsAttachmentsList'
     , _balUploadType     :: !(Maybe Text)
     , _balBearerToken    :: !(Maybe Text)
     , _balNamespacedType :: !(Maybe Text)
-    , _balKey            :: !(Maybe Key)
+    , _balKey            :: !(Maybe AuthKey)
     , _balOAuthToken     :: !(Maybe OAuthToken)
     , _balFields         :: !(Maybe Text)
     , _balCallback       :: !(Maybe Text)
@@ -218,7 +218,7 @@ balNamespacedType
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-balKey :: Lens' BeaconsAttachmentsList' (Maybe Key)
+balKey :: Lens' BeaconsAttachmentsList' (Maybe AuthKey)
 balKey = lens _balKey (\ s a -> s{_balKey = a})
 
 -- | OAuth 2.0 token for the current user.

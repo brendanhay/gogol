@@ -57,7 +57,7 @@ type EventTagsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -69,7 +69,7 @@ data EventTagsDelete' = EventTagsDelete'
     , _etdPrettyPrint :: !Bool
     , _etdUserIP      :: !(Maybe Text)
     , _etdProFileId   :: !Int64
-    , _etdKey         :: !(Maybe Key)
+    , _etdKey         :: !(Maybe AuthKey)
     , _etdId          :: !Int64
     , _etdOAuthToken  :: !(Maybe OAuthToken)
     , _etdFields      :: !(Maybe Text)
@@ -137,7 +137,7 @@ etdProFileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-etdKey :: Lens' EventTagsDelete' (Maybe Key)
+etdKey :: Lens' EventTagsDelete' (Maybe AuthKey)
 etdKey = lens _etdKey (\ s a -> s{_etdKey = a})
 
 -- | Event tag ID.

@@ -58,7 +58,7 @@ type ProductsGetPermissionsResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ProductPermissions
@@ -71,7 +71,7 @@ data ProductsGetPermissions' = ProductsGetPermissions'
     , _pgpPrettyPrint  :: !Bool
     , _pgpEnterpriseId :: !Text
     , _pgpUserIP       :: !(Maybe Text)
-    , _pgpKey          :: !(Maybe Key)
+    , _pgpKey          :: !(Maybe AuthKey)
     , _pgpOAuthToken   :: !(Maybe OAuthToken)
     , _pgpProductId    :: !Text
     , _pgpFields       :: !(Maybe Text)
@@ -140,7 +140,7 @@ pgpUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgpKey :: Lens' ProductsGetPermissions' (Maybe Key)
+pgpKey :: Lens' ProductsGetPermissions' (Maybe AuthKey)
 pgpKey = lens _pgpKey (\ s a -> s{_pgpKey = a})
 
 -- | OAuth 2.0 token for the current user.

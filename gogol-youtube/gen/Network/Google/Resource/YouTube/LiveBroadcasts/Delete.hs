@@ -58,7 +58,7 @@ type LiveBroadcastsDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -70,7 +70,7 @@ data LiveBroadcastsDelete' = LiveBroadcastsDelete'
     , _lbdPrettyPrint                   :: !Bool
     , _lbdUserIP                        :: !(Maybe Text)
     , _lbdOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lbdKey                           :: !(Maybe Key)
+    , _lbdKey                           :: !(Maybe AuthKey)
     , _lbdOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbdId                            :: !Text
     , _lbdOAuthToken                    :: !(Maybe OAuthToken)
@@ -151,7 +151,7 @@ lbdOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lbdKey :: Lens' LiveBroadcastsDelete' (Maybe Key)
+lbdKey :: Lens' LiveBroadcastsDelete' (Maybe AuthKey)
 lbdKey = lens _lbdKey (\ s a -> s{_lbdKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:

@@ -57,7 +57,7 @@ type UsersLabelsPatchResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "fields" Text :>
-                   QueryParam "key" Key :>
+                   QueryParam "key" AuthKey :>
                      QueryParam "oauth_token" OAuthToken :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Label :> Patch '[JSON] Label
@@ -71,7 +71,7 @@ data UsersLabelsPatch' = UsersLabelsPatch'
     , _ulpUserIP      :: !(Maybe Text)
     , _ulpPayload     :: !Label
     , _ulpUserId      :: !Text
-    , _ulpKey         :: !(Maybe Key)
+    , _ulpKey         :: !(Maybe AuthKey)
     , _ulpId          :: !Text
     , _ulpOAuthToken  :: !(Maybe OAuthToken)
     , _ulpFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ ulpUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ulpKey :: Lens' UsersLabelsPatch' (Maybe Key)
+ulpKey :: Lens' UsersLabelsPatch' (Maybe AuthKey)
 ulpKey = lens _ulpKey (\ s a -> s{_ulpKey = a})
 
 -- | The ID of the label to update.

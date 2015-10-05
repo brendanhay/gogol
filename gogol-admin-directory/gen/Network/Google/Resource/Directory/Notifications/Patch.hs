@@ -58,7 +58,7 @@ type NotificationsPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "key" Key :>
+                     QueryParam "key" AuthKey :>
                        QueryParam "oauth_token" OAuthToken :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Notification :>
@@ -73,7 +73,7 @@ data NotificationsPatch' = NotificationsPatch'
     , _npUserIP         :: !(Maybe Text)
     , _npPayload        :: !Notification
     , _npCustomer       :: !Text
-    , _npKey            :: !(Maybe Key)
+    , _npKey            :: !(Maybe AuthKey)
     , _npNotificationId :: !Text
     , _npOAuthToken     :: !(Maybe OAuthToken)
     , _npFields         :: !(Maybe Text)
@@ -149,7 +149,7 @@ npCustomer
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-npKey :: Lens' NotificationsPatch' (Maybe Key)
+npKey :: Lens' NotificationsPatch' (Maybe AuthKey)
 npKey = lens _npKey (\ s a -> s{_npKey = a})
 
 -- | The unique ID of the notification.

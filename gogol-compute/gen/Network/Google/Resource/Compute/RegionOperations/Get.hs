@@ -59,7 +59,7 @@ type RegionOperationsGetResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
@@ -72,7 +72,7 @@ data RegionOperationsGet' = RegionOperationsGet'
     , _rogProject     :: !Text
     , _rogOperation   :: !Text
     , _rogUserIP      :: !(Maybe Text)
-    , _rogKey         :: !(Maybe Key)
+    , _rogKey         :: !(Maybe AuthKey)
     , _rogRegion      :: !Text
     , _rogOAuthToken  :: !(Maybe OAuthToken)
     , _rogFields      :: !(Maybe Text)
@@ -149,7 +149,7 @@ rogUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rogKey :: Lens' RegionOperationsGet' (Maybe Key)
+rogKey :: Lens' RegionOperationsGet' (Maybe AuthKey)
 rogKey = lens _rogKey (\ s a -> s{_rogKey = a})
 
 -- | Name of the zone scoping this request.

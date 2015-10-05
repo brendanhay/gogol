@@ -110,7 +110,7 @@ type SearchMethod =
                                                              Text
                                                              :>
                                                              QueryParam "key"
-                                                               Key
+                                                               AuthKey
                                                                :>
                                                                QueryParam
                                                                  "oauth_token"
@@ -166,7 +166,7 @@ type SearchMethod =
                                                                Text
                                                                :>
                                                                QueryParam "key"
-                                                                 Key
+                                                                 AuthKey
                                                                  :>
                                                                  QueryParam
                                                                    "oauth_token"
@@ -195,7 +195,7 @@ data Search' = Search'
     , _sHelp        :: !(Maybe FreebaseSearchHelp)
     , _sLang        :: !(Maybe [Text])
     , _sIndent      :: !(Maybe Bool)
-    , _sKey         :: !(Maybe Key)
+    , _sKey         :: !(Maybe AuthKey)
     , _sOutput      :: !(Maybe Text)
     , _sQuery       :: !(Maybe Text)
     , _sScoring     :: !FreebaseSearchScoring
@@ -372,7 +372,7 @@ sIndent = lens _sIndent (\ s a -> s{_sIndent = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sKey :: Lens' Search' (Maybe Key)
+sKey :: Lens' Search' (Maybe AuthKey)
 sKey = lens _sKey (\ s a -> s{_sKey = a})
 
 -- | An output expression to request data from matches.

@@ -54,7 +54,7 @@ type ChangesGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "fields" Text :>
-                 QueryParam "key" Key :>
+                 QueryParam "key" AuthKey :>
                    QueryParam "oauth_token" OAuthToken :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Change
 
@@ -66,7 +66,7 @@ data ChangesGet' = ChangesGet'
     , _cPrettyPrint :: !Bool
     , _cUserIP      :: !(Maybe Text)
     , _cChangeId    :: !Text
-    , _cKey         :: !(Maybe Key)
+    , _cKey         :: !(Maybe AuthKey)
     , _cOAuthToken  :: !(Maybe OAuthToken)
     , _cFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -127,7 +127,7 @@ cChangeId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cKey :: Lens' ChangesGet' (Maybe Key)
+cKey :: Lens' ChangesGet' (Maybe AuthKey)
 cKey = lens _cKey (\ s a -> s{_cKey = a})
 
 -- | OAuth 2.0 token for the current user.

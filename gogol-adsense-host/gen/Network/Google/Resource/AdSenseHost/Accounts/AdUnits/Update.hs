@@ -59,7 +59,7 @@ type AccountsAdUnitsUpdateResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] AdUnit :> Put '[JSON] AdUnit
@@ -74,7 +74,7 @@ data AccountsAdUnitsUpdate' = AccountsAdUnitsUpdate'
     , _aauuPayload     :: !AdUnit
     , _aauuAdClientId  :: !Text
     , _aauuAccountId   :: !Text
-    , _aauuKey         :: !(Maybe Key)
+    , _aauuKey         :: !(Maybe AuthKey)
     , _aauuOAuthToken  :: !(Maybe OAuthToken)
     , _aauuFields      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -158,7 +158,7 @@ aauuAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aauuKey :: Lens' AccountsAdUnitsUpdate' (Maybe Key)
+aauuKey :: Lens' AccountsAdUnitsUpdate' (Maybe AuthKey)
 aauuKey = lens _aauuKey (\ s a -> s{_aauuKey = a})
 
 -- | OAuth 2.0 token for the current user.

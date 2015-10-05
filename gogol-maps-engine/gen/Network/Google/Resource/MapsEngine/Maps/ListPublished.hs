@@ -59,7 +59,7 @@ type MapsListPublishedResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "key" Key :>
+                       QueryParam "key" AuthKey :>
                          QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] PublishedMapsListResponse
@@ -71,7 +71,7 @@ data MapsListPublished' = MapsListPublished'
     { _mlpQuotaUser   :: !(Maybe Text)
     , _mlpPrettyPrint :: !Bool
     , _mlpUserIP      :: !(Maybe Text)
-    , _mlpKey         :: !(Maybe Key)
+    , _mlpKey         :: !(Maybe AuthKey)
     , _mlpPageToken   :: !(Maybe Text)
     , _mlpProjectId   :: !(Maybe Text)
     , _mlpOAuthToken  :: !(Maybe OAuthToken)
@@ -137,7 +137,7 @@ mlpUserIP
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlpKey :: Lens' MapsListPublished' (Maybe Key)
+mlpKey :: Lens' MapsListPublished' (Maybe AuthKey)
 mlpKey = lens _mlpKey (\ s a -> s{_mlpKey = a})
 
 -- | The continuation token, used to page through large result sets. To get

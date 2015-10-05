@@ -76,7 +76,7 @@ type UsersListResource =
                                  QueryParam "prettyPrint" Bool :>
                                    QueryParam "userIp" Text :>
                                      QueryParam "fields" Text :>
-                                       QueryParam "key" Key :>
+                                       QueryParam "key" AuthKey :>
                                          QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] Users
@@ -96,7 +96,7 @@ data UsersList' = UsersList'
     , _ulShowDeleted     :: !(Maybe Text)
     , _ulSortOrder       :: !(Maybe UsersListSortOrder)
     , _ulCustomer        :: !(Maybe Text)
-    , _ulKey             :: !(Maybe Key)
+    , _ulKey             :: !(Maybe AuthKey)
     , _ulQuery           :: !(Maybe Text)
     , _ulProjection      :: !UsersListProjection
     , _ulPageToken       :: !(Maybe Text)
@@ -232,7 +232,7 @@ ulCustomer
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ulKey :: Lens' UsersList' (Maybe Key)
+ulKey :: Lens' UsersList' (Maybe AuthKey)
 ulKey = lens _ulKey (\ s a -> s{_ulKey = a})
 
 -- | Query string search. Should be of the form \"\". Complete documentation
