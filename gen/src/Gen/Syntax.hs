@@ -273,7 +273,7 @@ jsonDecls g p (Map.toList -> rs) = [from, to]
          . app (var "catMaybes")
          . listE
 
-    none = paren $ app (var "Object") (var "mempty")
+    none = var "emptyObject"
 
     encode (l, s)
         | TMaybe {} <- _type s = infixApp (paren (app n o)) "<$>" a

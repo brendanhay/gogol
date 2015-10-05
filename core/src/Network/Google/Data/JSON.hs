@@ -16,8 +16,8 @@ module Network.Google.Data.JSON
     , FromJSON (..)
     , ToJSON   (..)
 
-    , Value (Object)
     , withObject
+    , emptyObject
     , object
 
     , (.=)
@@ -32,6 +32,9 @@ import           Data.Aeson.Types
 import           Servant.API
 
 type JSONValue = Value
+
+emptyObject :: Value
+emptyObject = Object mempty
 
 parseJSONText :: FromText a => String -> Value -> Parser a
 parseJSONText n = withText n (maybe (fail n) pure . fromText)
