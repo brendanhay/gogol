@@ -335,50 +335,71 @@ instance ( MimeRender   c a
 
 -- instance GoogleClient fn => GoogleClient (ReqBody (c ': cs) Body :> fn) where
 
-instance MimeUnrender c a => GoogleClient (Get (c ': cs) a) where
+instance {-# OVERLAPPABLE #-}
+  MimeUnrender c a => GoogleClient (Get (c ': cs) a) where
     type Fn (Get (c ': cs) a) = Client a
 
     clientBuild Proxy = clientMime (Proxy :: Proxy c) methodGet [200, 203]
 
-instance Accept c => GoogleClient (Get (c ': cs) ResponseBody) where
+instance {-# OVERLAPPING #-}
+  Accept c => GoogleClient (Get (c ': cs) ResponseBody) where
     type Fn (Get (c ': cs) ResponseBody) = Client ResponseBody
 
     clientBuild Proxy = clientStream (Proxy :: Proxy c) methodGet [200, 203]
 
-instance GoogleClient (Get (c ': cs) ()) where
+instance {-# OVERLAPPING #-}
+  GoogleClient (Get (c ': cs) ()) where
     type Fn (Get (c ': cs) ()) = Client ()
 
     clientBuild Proxy = clientEmpty methodGet [204]
 
-instance MimeUnrender c a => GoogleClient (Post (c ': cs) a) where
+instance {-# OVERLAPPABLE #-}
+  MimeUnrender c a => GoogleClient (Post (c ': cs) a) where
     type Fn (Post (c ': cs) a) = Client a
 
     clientBuild Proxy = clientMime (Proxy :: Proxy c) methodPost [200, 201]
 
-instance GoogleClient (Post (c ': cs) ()) where
+instance {-# OVERLAPPING #-}
+  GoogleClient (Post (c ': cs) ()) where
     type Fn (Post (c ': cs) ()) = Client ()
 
     clientBuild Proxy = clientEmpty methodPost [204]
 
-instance MimeUnrender c a => GoogleClient (Put (c ': cs) a) where
+instance {-# OVERLAPPABLE #-}
+  MimeUnrender c a => GoogleClient (Put (c ': cs) a) where
     type Fn (Put (c ': cs) a) = Client a
 
     clientBuild Proxy = clientMime (Proxy :: Proxy c) methodPut [200, 201]
 
-instance GoogleClient (Put (c ': cs) ()) where
+instance {-# OVERLAPPING #-}
+  GoogleClient (Put (c ': cs) ()) where
     type Fn (Put (c ': cs) ()) = Client ()
 
     clientBuild Proxy = clientEmpty methodPut [204]
 
-instance MimeUnrender c a => GoogleClient (Patch (c ': cs) a) where
+instance {-# OVERLAPPABLE #-}
+  MimeUnrender c a => GoogleClient (Patch (c ': cs) a) where
     type Fn (Patch (c ': cs) a) = Client a
 
     clientBuild Proxy = clientMime (Proxy :: Proxy c) methodPatch [200, 201]
 
-instance GoogleClient (Patch (c ': cs) ()) where
+instance {-# OVERLAPPING #-}
+  GoogleClient (Patch (c ': cs) ()) where
     type Fn (Patch (c ': cs) ()) = Client ()
 
     clientBuild Proxy = clientEmpty methodPatch [204]
+
+instance {-# OVERLAPPABLE #-}
+  MimeUnrender c a => GoogleClient (Delete (c ': cs) a) where
+    type Fn (Delete (c ': cs) a) = Client a
+
+    clientBuild Proxy = clientMime (Proxy :: Proxy c) methodDelete [200, 202]
+
+instance {-# OVERLAPPING #-}
+   GoogleClient (Delete (c ': cs) ()) where
+    type Fn (Delete (c ': cs) ()) = Client ()
+
+    clientBuild Proxy = clientEmpty methodDelete [204]
 
 -- perform :: Accept
 --         -> (ResponseBody -> Client (Either SerializeError a))
