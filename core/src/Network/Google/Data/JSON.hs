@@ -29,7 +29,6 @@ module Network.Google.Data.JSON
     , (.!=)
     ) where
 
-import           Control.Lens     hiding ((.=))
 import           Data.Aeson
 import           Data.Aeson.Types
 import           Servant.API
